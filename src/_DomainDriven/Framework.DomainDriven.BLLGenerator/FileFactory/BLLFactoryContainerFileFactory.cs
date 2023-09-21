@@ -4,6 +4,7 @@ using Framework.Core;
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLLCoreGenerator;
+using Framework.DomainDriven.Generation.Domain;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
@@ -146,9 +147,10 @@ public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContaine
 
         yield return serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
 
-        var bllDecl = this.Configuration.Environment.BLLCore.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.BLLInterface);
-
-        var baseFactoryDecl = typeof(ISecurityBLLFactory<,>).ToTypeReference(bllDecl, domainType.ToTypeReference());
+        var baseFactoryDecl = typeof(ISecurityBLLFactory<,>)
+            .ToTypeReference(
+                typeof(IDefaultSecurityDomainBLLBase<,,>).MakeGenericType(this.Configuration.Environment.PersistentDomainObjectBaseType, domainType, this.Configuration.Environment.GetIdentityType()).ToTypeReference(),
+                domainType.ToTypeReference());
 
         var addScopedFromMethod = typeof(Framework.DependencyInjection.ServiceCollectionExtensions).ToTypeReferenceExpression()
             .ToMethodReferenceExpression(
@@ -157,13 +159,5 @@ public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContaine
                 factoryDecl);
 
         yield return serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addScopedFromMethod).ToExpressionStatement();
-
-        var addbaseScopedFromMethod = typeof(Framework.DependencyInjection.ServiceCollectionExtensions).ToTypeReferenceExpression()
-            .ToMethodReferenceExpression(
-                nameof(Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom),
-                typeof(ISecurityBLLFactory<>).ToTypeReference(bllDecl),
-                baseFactoryDecl);
-
-        yield return serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addbaseScopedFromMethod).ToExpressionStatement();
     }
 }

@@ -40,39 +40,18 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class DomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.DefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
+    public partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
         where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
         where TOperation :  struct, System.Enum
     {
         
-        public DomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, specificationEvaluator)
-        {
-        }
-    }
-    
-    public abstract partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
-        where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
-        where TOperation :  struct, System.Enum
-    {
-        
-        protected SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, specificationEvaluator)
         {
         }
         
-        protected SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityOperation, specificationEvaluator)
-        {
-        }
-    }
-    
-    public partial class DomainBLLBase<TDomainObject> : Framework.Configuration.BLL.DomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.BLLBaseOperation>
-        where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
-    {
-        
-        public DomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
+        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
         {
         }
     }
@@ -86,8 +65,8 @@ namespace Framework.Configuration.BLL
         {
         }
         
-        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation) : 
-                base(context, securityOperation)
+        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
+                base(context, securityProvider)
         {
         }
     }
@@ -214,7 +193,7 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface IDomainObjectEventBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>
+    public partial interface IDomainObjectEventBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>
     {
     }
     
@@ -222,7 +201,7 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface IDomainObjectModificationBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectModification, System.Guid>
+    public partial interface IDomainObjectModificationBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectModification, System.Guid>
     {
     }
     
@@ -230,7 +209,7 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface IDomainObjectNotificationBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>
+    public partial interface IDomainObjectNotificationBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>
     {
     }
     
@@ -254,7 +233,7 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface INamedLockBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.NamedLock, System.Guid>
+    public partial interface INamedLockBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.NamedLock, System.Guid>
     {
     }
     
@@ -262,7 +241,7 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface ISentMessageBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>
+    public partial interface ISentMessageBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>
     {
     }
     

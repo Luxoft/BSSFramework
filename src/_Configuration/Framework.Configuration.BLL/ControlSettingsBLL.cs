@@ -6,7 +6,7 @@ using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.BLL;
 
-public class ControlSettingsBLL : DomainBLLBase<ControlSettings>
+public class ControlSettingsBLL : SecurityDomainBLLBase<ControlSettings>
 {
     public ControlSettingsBLL(IConfigurationBLLContext context)
             : base(context)

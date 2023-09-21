@@ -4,6 +4,7 @@ using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
@@ -45,18 +46,22 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
                                 this.Configuration.Environment.GetIdentityType().ToTypeReference());
 
 
+        var parameter = typeof(ISecurityProvider<>).ToTypeReference(genericDomainObjectParameterTypeRef).ToParameterDeclarationExpression("securityProvider");
+
+
         var implMethod = new CodeMemberMethod
                          {
                                  Attributes = MemberAttributes.Public | MemberAttributes.Override,
-                                 ReturnType = typeof(IDefaultDomainBLLBase<,,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), genericDomainObjectParameterTypeRef, this.Configuration.Environment.GetIdentityType().ToTypeReference()),
+                                 ReturnType = typeof(IDefaultSecurityDomainBLLBase<,,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), genericDomainObjectParameterTypeRef, this.Configuration.Environment.GetIdentityType().ToTypeReference()),
                                  Name = "Create",
+                                 Parameters = { parameter },
                                  TypeParameters = { genericDomainObjectParameter },
                                  Statements =
                                  {
                                          this.Configuration.Environment.BLLCore
                                              .DefaultOperationSecurityDomainBLLBaseTypeReference
                                              .ToTypeReference(genericDomainObjectParameterTypeRef)
-                                             .ToObjectCreateExpression(contextFieldRefExpr)
+                                             .ToObjectCreateExpression(contextFieldRefExpr, parameter.ToVariableReferenceExpression())
                                              .ToMethodReturnStatement()
                                  }
                          };

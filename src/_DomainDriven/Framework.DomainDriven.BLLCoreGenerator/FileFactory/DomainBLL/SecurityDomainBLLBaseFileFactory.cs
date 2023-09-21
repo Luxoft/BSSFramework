@@ -68,7 +68,7 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
                                },
                                new CodeConstructor
                                {
-                                       Attributes = MemberAttributes.Family,
+                                       Attributes = MemberAttributes.Public,
                                        Parameters = { contextParameter, securityProviderParameter, specificationEvaluatorParameter },
                                        BaseConstructorArgs = { contextParameterRefExpr, securityProviderParameterRefExpr, specificationEvaluatorParameterArg }
                                }

@@ -39,5 +39,3 @@ public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainOb
         ISecurityProvider<TDomainObject> securityProvider)
         where TDomainObject : class, TPersistentDomainObjectBase;
 }
-
-public class ImplementedSecurityBLLFactory : DefaultSecurityBLLFactory<>

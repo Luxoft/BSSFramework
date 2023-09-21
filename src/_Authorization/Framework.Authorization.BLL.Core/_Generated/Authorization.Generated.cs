@@ -50,8 +50,8 @@ namespace Framework.Authorization.BLL
         {
         }
         
-        protected SecurityDomainBLLBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityOperation, specificationEvaluator)
+        public SecurityDomainBLLBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
         {
         }
     }
@@ -65,8 +65,8 @@ namespace Framework.Authorization.BLL
         {
         }
         
-        public SecurityDomainBLLBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation) : 
-                base(context, securityOperation)
+        public SecurityDomainBLLBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
+                base(context, securityProvider)
         {
         }
     }

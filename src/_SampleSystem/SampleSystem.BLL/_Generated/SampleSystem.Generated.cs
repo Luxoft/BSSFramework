@@ -2452,61 +2452,117 @@ namespace SampleSystem.BLL
         public static void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLLFactory, SampleSystem.BLL.ApprovePermissionWorkflowDomainObjectBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.Guid>, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>, SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitBLLFactory, SampleSystem.BLL.BusinessUnitBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid>, SampleSystem.Domain.BusinessUnit>, SampleSystem.BLL.IBusinessUnitBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitHrDepartmentBLLFactory, SampleSystem.BLL.BusinessUnitHrDepartmentBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid>, SampleSystem.Domain.BusinessUnitHrDepartment>, SampleSystem.BLL.IBusinessUnitHrDepartmentBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLLFactory, SampleSystem.BLL.BusinessUnitManagerCommissionLinkBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid>, SampleSystem.Domain.BusinessUnitManagerCommissionLink>, SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitTypeBLLFactory, SampleSystem.BLL.BusinessUnitTypeBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitType, System.Guid>, SampleSystem.Domain.BusinessUnitType>, SampleSystem.BLL.IBusinessUnitTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ICompanyLegalEntityBLLFactory, SampleSystem.BLL.CompanyLegalEntityBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.CompanyLegalEntity, System.Guid>, SampleSystem.Domain.CompanyLegalEntity>, SampleSystem.BLL.ICompanyLegalEntityBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ICountryBLLFactory, SampleSystem.BLL.CountryBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Country, System.Guid>, SampleSystem.Domain.Country>, SampleSystem.BLL.ICountryBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeBLLFactory, SampleSystem.BLL.EmployeeBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee, System.Guid>, SampleSystem.Domain.Employee>, SampleSystem.BLL.IEmployeeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeInformationBLLFactory, SampleSystem.BLL.EmployeeInformationBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeInformation, System.Guid>, SampleSystem.Domain.EmployeeInformation>, SampleSystem.BLL.IEmployeeInformationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeePhotoBLLFactory, SampleSystem.BLL.EmployeePhotoBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePhoto, System.Guid>, SampleSystem.Domain.EmployeePhoto>, SampleSystem.BLL.IEmployeePhotoBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeePositionBLLFactory, SampleSystem.BLL.EmployeePositionBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePosition, System.Guid>, SampleSystem.Domain.EmployeePosition>, SampleSystem.BLL.IEmployeePositionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeRegistrationTypeBLLFactory, SampleSystem.BLL.EmployeeRegistrationTypeBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRegistrationType, System.Guid>, SampleSystem.Domain.EmployeeRegistrationType>, SampleSystem.BLL.IEmployeeRegistrationTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeRoleBLLFactory, SampleSystem.BLL.EmployeeRoleBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRole, System.Guid>, SampleSystem.Domain.EmployeeRole>, SampleSystem.BLL.IEmployeeRoleBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeRoleDegreeBLLFactory, SampleSystem.BLL.EmployeeRoleDegreeBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRoleDegree, System.Guid>, SampleSystem.Domain.EmployeeRoleDegree>, SampleSystem.BLL.IEmployeeRoleDegreeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeSpecializationBLLFactory, SampleSystem.BLL.EmployeeSpecializationBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeSpecialization, System.Guid>, SampleSystem.Domain.EmployeeSpecialization>, SampleSystem.BLL.IEmployeeSpecializationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ILocation1676BLLFactory, SampleSystem.BLL.Location1676BLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.Location1676, System.Guid>, SampleSystem.Domain.EnversBug1676.Location1676>, SampleSystem.BLL.ILocation1676BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IWorkingCalendar1676BLLFactory, SampleSystem.BLL.WorkingCalendar1676BLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, System.Guid>, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>, SampleSystem.BLL.IWorkingCalendar1676BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IExample1BLLFactory, SampleSystem.BLL.Example1BLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Example1, System.Guid>, SampleSystem.Domain.Example1>, SampleSystem.BLL.IExample1BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IHRDepartmentBLLFactory, SampleSystem.BLL.HRDepartmentBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.HRDepartment, System.Guid>, SampleSystem.Domain.HRDepartment>, SampleSystem.BLL.IHRDepartmentBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IIMRequestBLLFactory, SampleSystem.BLL.IMRequestBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IMRequest, System.Guid>, SampleSystem.Domain.IMRequest>, SampleSystem.BLL.IIMRequestBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IInformationBLLFactory, SampleSystem.BLL.InformationBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Information, System.Guid>, SampleSystem.Domain.Information>, SampleSystem.BLL.IInformationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IIntegrationVersionContainer1BLLFactory, SampleSystem.BLL.IntegrationVersionContainer1BLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.Guid>, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>, SampleSystem.BLL.IIntegrationVersionContainer1BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IIntegrationVersionContainer2BLLFactory, SampleSystem.BLL.IntegrationVersionContainer2BLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.Guid>, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>, SampleSystem.BLL.IIntegrationVersionContainer2BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ILocationBLLFactory, SampleSystem.BLL.LocationBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Location, System.Guid>, SampleSystem.Domain.Location>, SampleSystem.BLL.ILocationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitBLLFactory, SampleSystem.BLL.ManagementUnitBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnit, System.Guid>, SampleSystem.Domain.ManagementUnit>, SampleSystem.BLL.IManagementUnitBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLLFactory, SampleSystem.BLL.ManagementUnitAndBusinessUnitLinkBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid>, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLLFactory, SampleSystem.BLL.ManagementUnitAndHRDepartmentLinkBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid>, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitFluentMappingBLLFactory, SampleSystem.BLL.ManagementUnitFluentMappingBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid>, SampleSystem.Domain.ManagementUnitFluentMapping>, SampleSystem.BLL.IManagementUnitFluentMappingBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestManualEmployeeProjectionBLLFactory, SampleSystem.BLL.TestManualEmployeeProjectionBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, System.Guid>, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>, SampleSystem.BLL.ITestManualEmployeeProjectionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.INamedLockBLLFactory, SampleSystem.BLL.NamedLockBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.NamedLock, System.Guid>, SampleSystem.Domain.NamedLock>, SampleSystem.BLL.INamedLockBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IPrincipalBLLFactory, SampleSystem.BLL.PrincipalBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Principal, System.Guid>, SampleSystem.Domain.Principal>, SampleSystem.BLL.IPrincipalBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitProgramClassBLLFactory, SampleSystem.BLL.BusinessUnitProgramClassBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitProgramClass, System.Guid>, SampleSystem.Domain.Projections.BusinessUnitProgramClass>, SampleSystem.BLL.IBusinessUnitProgramClassBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ICustomCompanyLegalEntityBLLFactory, SampleSystem.BLL.CustomCompanyLegalEntityBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.CustomCompanyLegalEntity, System.Guid>, SampleSystem.Domain.Projections.CustomCompanyLegalEntity>, SampleSystem.BLL.ICustomCompanyLegalEntityBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestBusinessUnitBLLFactory, SampleSystem.BLL.TestBusinessUnitBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>, SampleSystem.Domain.Projections.TestBusinessUnit>, SampleSystem.BLL.ITestBusinessUnitBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLLFactory, SampleSystem.BLL.TestCustomContextSecurityObjProjectionBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, System.Guid>, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>, SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestDepartmentBLLFactory, SampleSystem.BLL.TestDepartmentBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestDepartment, System.Guid>, SampleSystem.Domain.Projections.TestDepartment>, SampleSystem.BLL.ITestDepartmentBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestEmployeeBLLFactory, SampleSystem.BLL.TestEmployeeBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestEmployee, System.Guid>, SampleSystem.Domain.Projections.TestEmployee>, SampleSystem.BLL.ITestEmployeeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestIMRequestBLLFactory, SampleSystem.BLL.TestIMRequestBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestIMRequest, System.Guid>, SampleSystem.Domain.Projections.TestIMRequest>, SampleSystem.BLL.ITestIMRequestBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestLegacyEmployeeBLLFactory, SampleSystem.BLL.TestLegacyEmployeeBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLegacyEmployee, System.Guid>, SampleSystem.Domain.Projections.TestLegacyEmployee>, SampleSystem.BLL.ITestLegacyEmployeeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestLocationBLLFactory, SampleSystem.BLL.TestLocationBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocation, System.Guid>, SampleSystem.Domain.Projections.TestLocation>, SampleSystem.BLL.ITestLocationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestLocationCollectionPropertiesBLLFactory, SampleSystem.BLL.TestLocationCollectionPropertiesBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocationCollectionProperties, System.Guid>, SampleSystem.Domain.Projections.TestLocationCollectionProperties>, SampleSystem.BLL.ITestLocationCollectionPropertiesBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecurityObjItemProjectionBLLFactory, SampleSystem.BLL.TestSecurityObjItemProjectionBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestSecurityObjItemProjection, System.Guid>, SampleSystem.Domain.Projections.TestSecurityObjItemProjection>, SampleSystem.BLL.ITestSecurityObjItemProjectionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IRoleRoleDegreeLinkBLLFactory, SampleSystem.BLL.RoleRoleDegreeLinkBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.RoleRoleDegreeLink, System.Guid>, SampleSystem.Domain.RoleRoleDegreeLink>, SampleSystem.BLL.IRoleRoleDegreeLinkBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ISqlParserTestObjBLLFactory, SampleSystem.BLL.SqlParserTestObjBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObj, System.Guid>, SampleSystem.Domain.SqlParserTestObj>, SampleSystem.BLL.ISqlParserTestObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ISqlParserTestObjContainerBLLFactory, SampleSystem.BLL.SqlParserTestObjContainerBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObjContainer, System.Guid>, SampleSystem.Domain.SqlParserTestObjContainer>, SampleSystem.BLL.ISqlParserTestObjContainerBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestCustomContextSecurityObjBLLFactory, SampleSystem.BLL.TestCustomContextSecurityObjBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid>, SampleSystem.Domain.TestCustomContextSecurityObj>, SampleSystem.BLL.ITestCustomContextSecurityObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestImmutableObjBLLFactory, SampleSystem.BLL.TestImmutableObjBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid>, SampleSystem.Domain.TestImmutableObj>, SampleSystem.BLL.ITestImmutableObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestPerformanceObjectBLLFactory, SampleSystem.BLL.TestPerformanceObjectBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid>, SampleSystem.Domain.TestPerformanceObject>, SampleSystem.BLL.ITestPerformanceObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestPlainAuthObjectBLLFactory, SampleSystem.BLL.TestPlainAuthObjectBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid>, SampleSystem.Domain.TestPlainAuthObject>, SampleSystem.BLL.ITestPlainAuthObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestRootSecurityObjBLLFactory, SampleSystem.BLL.TestRootSecurityObjBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid>, SampleSystem.Domain.TestRootSecurityObj>, SampleSystem.BLL.ITestRootSecurityObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecurityObjItemBLLFactory, SampleSystem.BLL.TestSecurityObjItemBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecurityObjItem, System.Guid>, SampleSystem.Domain.TestSecurityObjItem>, SampleSystem.BLL.ITestSecurityObjItemBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItemBLLFactory, SampleSystem.BLL.TestSecuritySubObjItemBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem, System.Guid>, SampleSystem.Domain.TestSecuritySubObjItem>, SampleSystem.BLL.ITestSecuritySubObjItemBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItem2BLLFactory, SampleSystem.BLL.TestSecuritySubObjItem2BLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem2, System.Guid>, SampleSystem.Domain.TestSecuritySubObjItem2>, SampleSystem.BLL.ITestSecuritySubObjItem2BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItem3BLLFactory, SampleSystem.BLL.TestSecuritySubObjItem3BLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem3, System.Guid>, SampleSystem.Domain.TestSecuritySubObjItem3>, SampleSystem.BLL.ITestSecuritySubObjItem3BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IWorkflowCoreExecutionErrorBLLFactory, SampleSystem.BLL.WorkflowCoreExecutionErrorBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreExecutionError, System.Guid>, SampleSystem.Domain.WorkflowCoreExecutionError>, SampleSystem.BLL.IWorkflowCoreExecutionErrorBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IWorkflowCoreInstanceBLLFactory, SampleSystem.BLL.WorkflowCoreInstanceBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreInstance, System.Guid>, SampleSystem.Domain.WorkflowCoreInstance>, SampleSystem.BLL.IWorkflowCoreInstanceBLLFactory>(serviceCollection);
         }
     }
     
@@ -2518,13 +2574,13 @@ namespace SampleSystem.BLL
         {
         }
         
-        public override Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>()
+        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
         {
-            return new SampleSystem.BLL.DomainBLLBase<TDomainObject>(this.Context);
+            return new SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
     }
     
-    public partial class SampleSystemImplementedBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial class SampleSystemImplementedBLLFactory : Framework.DomainDriven.BLL.Security.ImplementedSecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         public SampleSystemImplementedBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
@@ -2532,932 +2588,9 @@ namespace SampleSystem.BLL
         {
         }
         
-        public override Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>()
+        protected override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
         {
-            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ApprovePermissionWorkflowDomainObject));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnit));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitHrDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitHrDepartment));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitManagerCommissionLink));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitType)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitType));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.CompanyLegalEntity)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CompanyLegalEntity));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Country)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Country));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Employee));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeInformation)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeInformation));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePhoto)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeePhoto));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePosition)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeePosition));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRegistrationType)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRegistrationType));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRole)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRole));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRoleDegree)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRoleDegree));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeSpecialization)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeSpecialization));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.Location1676)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Location1676));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkingCalendar1676));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Example1)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Example1));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.HRDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.HRDepartment));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IMRequest)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IMRequest));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Information)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Information));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IntegrationVersionContainer1));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IntegrationVersionContainer2));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Location)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Location));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnit));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitAndBusinessUnitLink));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitAndHRDepartmentLink));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitFluentMapping)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitFluentMapping));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestManualEmployeeProjection));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLock));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Principal)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Principal));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.BusinessUnitProgramClass)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitProgramClass));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CustomCompanyLegalEntity));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestBusinessUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestBusinessUnit));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestCustomContextSecurityObjProjection));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestDepartment));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestEmployee)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestEmployee));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestIMRequest)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestIMRequest));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLegacyEmployee)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLegacyEmployee));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocation)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLocation));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocationCollectionProperties)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLocationCollectionProperties));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestSecurityObjItemProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemProjection));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RoleRoleDegreeLink));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SqlParserTestObj));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObjContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SqlParserTestObjContainer));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestCustomContextSecurityObj)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestCustomContextSecurityObj));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObj));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPerformanceObject)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPerformanceObject));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPlainAuthObject)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPlainAuthObject));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestRootSecurityObj));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecurityObjItem)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItem));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem2)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem2));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem3)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreExecutionError));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreInstance));
-            }
-            else
-            {
-                return new SampleSystem.BLL.DomainBLLBase<TDomainObject>(this.Context);
-            }
-        }
-        
-        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
-        {
-            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ApprovePermissionWorkflowDomainObjectFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnit>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitHrDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitHrDepartmentFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitHrDepartment>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitManagerCommissionLink>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitType)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitTypeFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitType>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.CompanyLegalEntity)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CompanyLegalEntityFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.CompanyLegalEntity>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Country)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CountryFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Country>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Employee>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeInformation)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeInformationFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeInformation>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePhoto)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeePhotoFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeePhoto>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePosition)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeePositionFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeePosition>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRegistrationType)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRegistrationTypeFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRegistrationType>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRole)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRoleFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRole>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRoleDegree)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRoleDegreeFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRoleDegree>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeSpecialization)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeSpecializationFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeSpecialization>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.Location1676)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Location1676Factory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EnversBug1676.Location1676>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkingCalendar1676Factory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Example1)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Example1Factory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Example1>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.HRDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.HRDepartmentFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.HRDepartment>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IMRequest)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IMRequestFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IMRequest>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Information)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.InformationFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Information>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IntegrationVersionContainer1Factory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IntegrationVersionContainer2Factory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Location)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.LocationFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Location>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnit>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitAndBusinessUnitLinkFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitFluentMapping)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitFluentMappingFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitFluentMapping>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestManualEmployeeProjectionFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Principal)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.PrincipalFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Principal>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.BusinessUnitProgramClass)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitProgramClassFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.BusinessUnitProgramClass>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CustomCompanyLegalEntityFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestBusinessUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestBusinessUnitFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestBusinessUnit>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestCustomContextSecurityObjProjectionFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestDepartmentFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestDepartment>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestEmployee)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestEmployeeFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestEmployee>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestIMRequest)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestIMRequestFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestIMRequest>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLegacyEmployee)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLegacyEmployeeFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocation)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLocationFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLocation>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocationCollectionProperties)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLocationCollectionPropertiesFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLocationCollectionProperties>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestSecurityObjItemProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemProjectionFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RoleRoleDegreeLinkFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SqlParserTestObjFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SqlParserTestObj>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObjContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SqlParserTestObjContainerFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SqlParserTestObjContainer>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestCustomContextSecurityObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestCustomContextSecurityObjFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestCustomContextSecurityObj>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPerformanceObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPerformanceObjectFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPerformanceObject>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPlainAuthObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPlainAuthObjectFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPlainAuthObject>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestRootSecurityObjFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestRootSecurityObj>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecurityObjItem)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecurityObjItem>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItemFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem2)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem2Factory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem2>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem3)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3Factory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreExecutionErrorFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreInstanceFactory.Create()));
-            }
-            else
-            {
-                return new SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context);
-            }
-        }
-        
-        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.SecurityOperation securityOperation)
-        {
-            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ApprovePermissionWorkflowDomainObjectFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitHrDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitHrDepartmentFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitType)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitTypeFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.CompanyLegalEntity)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CompanyLegalEntityFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Country)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CountryFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeInformation)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeInformationFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePhoto)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeePhotoFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePosition)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeePositionFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRegistrationType)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRegistrationTypeFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRole)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRoleFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRoleDegree)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRoleDegreeFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeSpecialization)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeSpecializationFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.Location1676)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Location1676Factory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkingCalendar1676Factory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Example1)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Example1Factory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.HRDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.HRDepartmentFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IMRequest)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IMRequestFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Information)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.InformationFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IntegrationVersionContainer1Factory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IntegrationVersionContainer2Factory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Location)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.LocationFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitAndBusinessUnitLinkFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitFluentMapping)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitFluentMappingFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestManualEmployeeProjectionFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Principal)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.PrincipalFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.BusinessUnitProgramClass)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitProgramClassFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CustomCompanyLegalEntityFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestBusinessUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestBusinessUnitFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestCustomContextSecurityObjProjectionFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestDepartmentFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestEmployee)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestEmployeeFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestIMRequest)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestIMRequestFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLegacyEmployee)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLegacyEmployeeFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocation)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLocationFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocationCollectionProperties)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLocationCollectionPropertiesFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestSecurityObjItemProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemProjectionFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RoleRoleDegreeLinkFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SqlParserTestObjFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObjContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SqlParserTestObjContainerFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestCustomContextSecurityObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestCustomContextSecurityObjFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPerformanceObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPerformanceObjectFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPlainAuthObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPlainAuthObjectFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestRootSecurityObjFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecurityObjItem)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItemFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem2)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem2Factory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem3)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3Factory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreExecutionErrorFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreInstanceFactory.Create()));
-            }
-            else
-            {
-                return new SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context);
-            }
-        }
-        
-        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.BLLSecurityMode bllSecurityMode)
-        {
-            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ApprovePermissionWorkflowDomainObjectFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitHrDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitHrDepartmentFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitType)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitTypeFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.CompanyLegalEntity)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CompanyLegalEntityFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Country)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CountryFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeInformation)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeInformationFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePhoto)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeePhotoFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePosition)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeePositionFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRegistrationType)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRegistrationTypeFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRole)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRoleFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRoleDegree)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeRoleDegreeFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeSpecialization)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EmployeeSpecializationFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.Location1676)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Location1676Factory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkingCalendar1676Factory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Example1)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Example1Factory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.HRDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.HRDepartmentFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IMRequest)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IMRequestFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Information)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.InformationFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IntegrationVersionContainer1Factory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.IntegrationVersionContainer2Factory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Location)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.LocationFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitAndBusinessUnitLinkFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitFluentMapping)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ManagementUnitFluentMappingFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestManualEmployeeProjectionFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Principal)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.PrincipalFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.BusinessUnitProgramClass)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitProgramClassFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CustomCompanyLegalEntityFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestBusinessUnit)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestBusinessUnitFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestCustomContextSecurityObjProjectionFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestDepartment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestDepartmentFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestEmployee)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestEmployeeFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestIMRequest)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestIMRequestFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLegacyEmployee)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLegacyEmployeeFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocation)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLocationFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocationCollectionProperties)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestLocationCollectionPropertiesFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestSecurityObjItemProjection)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemProjectionFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RoleRoleDegreeLinkFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SqlParserTestObjFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObjContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SqlParserTestObjContainerFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestCustomContextSecurityObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestCustomContextSecurityObjFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPerformanceObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPerformanceObjectFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPlainAuthObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPlainAuthObjectFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestRootSecurityObjFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecurityObjItem)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItemFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem2)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem2Factory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem3)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3Factory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreExecutionErrorFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreInstanceFactory.Create()));
-            }
-            else
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(new SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context)));
-            }
+            return new SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
     }
 }

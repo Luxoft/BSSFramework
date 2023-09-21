@@ -40,39 +40,18 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class DomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.DefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
+    public partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
         where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
         where TOperation :  struct, System.Enum
     {
         
-        public DomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, specificationEvaluator)
-        {
-        }
-    }
-    
-    public abstract partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-        where TOperation :  struct, System.Enum
-    {
-        
-        protected SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, specificationEvaluator)
         {
         }
         
-        protected SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityOperation, specificationEvaluator)
-        {
-        }
-    }
-    
-    public partial class DomainBLLBase<TDomainObject> : SampleSystem.BLL.DomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.BLLBaseOperation>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-    {
-        
-        public DomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context) : 
-                base(context)
+        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
         {
         }
     }
@@ -86,8 +65,8 @@ namespace SampleSystem.BLL
         {
         }
         
-        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation) : 
-                base(context, securityOperation)
+        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
+                base(context, securityProvider)
         {
         }
     }
@@ -656,11 +635,11 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial interface IApprovePermissionWorkflowDomainObjectBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.Guid>
+    public partial interface IApprovePermissionWorkflowDomainObjectBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.Guid>
     {
     }
     
-    public partial interface IApprovePermissionWorkflowDomainObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>>
+    public partial interface IApprovePermissionWorkflowDomainObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>
     {
     }
     
@@ -668,7 +647,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IBusinessUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnit>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IBusinessUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, SampleSystem.Domain.BusinessUnit>
     {
     }
     
@@ -676,7 +655,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IBusinessUnitHrDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitHrDepartment>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IBusinessUnitHrDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, SampleSystem.Domain.BusinessUnitHrDepartment>
     {
     }
     
@@ -684,7 +663,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IBusinessUnitManagerCommissionLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitManagerCommissionLink>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IBusinessUnitManagerCommissionLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, SampleSystem.Domain.BusinessUnitManagerCommissionLink>
     {
     }
     
@@ -692,7 +671,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IBusinessUnitTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitType>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IBusinessUnitTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, SampleSystem.Domain.BusinessUnitType>
     {
     }
     
@@ -700,7 +679,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ICompanyLegalEntityBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.CompanyLegalEntity>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ICompanyLegalEntityBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, SampleSystem.Domain.CompanyLegalEntity>
     {
     }
     
@@ -708,7 +687,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ICountryBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Country>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ICountryBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, SampleSystem.Domain.Country>
     {
     }
     
@@ -730,7 +709,7 @@ namespace SampleSystem.BLL
         System.Collections.Generic.List<SampleSystem.Domain.Employee> MassChangeByEmail(SampleSystem.Domain.EmployeeEmailMassChangeModel changeModel);
     }
     
-    public partial interface IEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Employee>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, SampleSystem.Domain.Employee>
     {
     }
     
@@ -738,7 +717,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeeInformationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeInformation>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeInformationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, SampleSystem.Domain.EmployeeInformation>
     {
     }
     
@@ -746,7 +725,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeePhotoBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeePhoto>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeePhotoBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, SampleSystem.Domain.EmployeePhoto>
     {
     }
     
@@ -754,7 +733,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeePositionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeePosition>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeePositionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, SampleSystem.Domain.EmployeePosition>
     {
     }
     
@@ -762,7 +741,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeeRegistrationTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRegistrationType>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeRegistrationTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, SampleSystem.Domain.EmployeeRegistrationType>
     {
     }
     
@@ -770,7 +749,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeeRoleBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRole>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeRoleBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, SampleSystem.Domain.EmployeeRole>
     {
     }
     
@@ -778,7 +757,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeeRoleDegreeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRoleDegree>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeRoleDegreeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, SampleSystem.Domain.EmployeeRoleDegree>
     {
     }
     
@@ -786,7 +765,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeeSpecializationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeSpecialization>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeSpecializationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, SampleSystem.Domain.EmployeeSpecialization>
     {
     }
     
@@ -794,7 +773,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ILocation1676BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocation1676BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EnversBug1676.Location1676>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocation1676BLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocation1676BLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ILocation1676BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocation1676BLL, SampleSystem.Domain.EnversBug1676.Location1676>
     {
     }
     
@@ -802,7 +781,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IWorkingCalendar1676BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkingCalendar1676BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkingCalendar1676BLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkingCalendar1676BLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IWorkingCalendar1676BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkingCalendar1676BLL, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>
     {
     }
     
@@ -810,7 +789,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IExample1BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Example1>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IExample1BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, SampleSystem.Domain.Example1>
     {
     }
     
@@ -818,7 +797,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IHRDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.HRDepartment>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IHRDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, SampleSystem.Domain.HRDepartment>
     {
     }
     
@@ -826,7 +805,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IIMRequestBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IMRequest>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IIMRequestBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, SampleSystem.Domain.IMRequest>
     {
     }
     
@@ -834,25 +813,25 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IInformationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Information>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IInformationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, SampleSystem.Domain.Information>
     {
     }
     
-    public partial interface IIntegrationVersionContainer1BLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.Guid>
+    public partial interface IIntegrationVersionContainer1BLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.Guid>
     {
         
         SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 IntegrationSave(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel integrationSaveModel);
     }
     
-    public partial interface IIntegrationVersionContainer1BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer1BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>>
+    public partial interface IIntegrationVersionContainer1BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer1BLL, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>
     {
     }
     
-    public partial interface IIntegrationVersionContainer2BLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.Guid>
+    public partial interface IIntegrationVersionContainer2BLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.Guid>
     {
     }
     
-    public partial interface IIntegrationVersionContainer2BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer2BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>>
+    public partial interface IIntegrationVersionContainer2BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer2BLL, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>
     {
     }
     
@@ -860,7 +839,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ILocationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Location>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ILocationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, SampleSystem.Domain.Location>
     {
     }
     
@@ -868,7 +847,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IManagementUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnit>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IManagementUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, SampleSystem.Domain.ManagementUnit>
     {
     }
     
@@ -876,7 +855,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IManagementUnitAndBusinessUnitLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IManagementUnitAndBusinessUnitLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>
     {
     }
     
@@ -884,7 +863,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IManagementUnitAndHRDepartmentLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IManagementUnitAndHRDepartmentLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>
     {
     }
     
@@ -892,7 +871,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IManagementUnitFluentMappingBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitFluentMapping>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IManagementUnitFluentMappingBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, SampleSystem.Domain.ManagementUnitFluentMapping>
     {
     }
     
@@ -900,15 +879,15 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestManualEmployeeProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestManualEmployeeProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>
     {
     }
     
-    public partial interface INamedLockBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.NamedLock, System.Guid>
+    public partial interface INamedLockBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.NamedLock, System.Guid>
     {
     }
     
-    public partial interface INamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.INamedLockBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.NamedLock>>
+    public partial interface INamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.INamedLockBLL, SampleSystem.Domain.NamedLock>
     {
     }
     
@@ -916,7 +895,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IPrincipalBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Principal>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IPrincipalBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, SampleSystem.Domain.Principal>
     {
     }
     
@@ -926,7 +905,7 @@ namespace SampleSystem.BLL
         Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.BusinessUnitProgramClass> GetObjectsByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> selectOperation, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel filter, Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.BusinessUnitProgramClass> fetchs);
     }
     
-    public partial interface IBusinessUnitProgramClassBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.BusinessUnitProgramClass>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IBusinessUnitProgramClassBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, SampleSystem.Domain.Projections.BusinessUnitProgramClass>
     {
     }
     
@@ -934,7 +913,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ICustomCompanyLegalEntityBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICustomCompanyLegalEntityBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICustomCompanyLegalEntityBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICustomCompanyLegalEntityBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ICustomCompanyLegalEntityBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICustomCompanyLegalEntityBLL, SampleSystem.Domain.Projections.CustomCompanyLegalEntity>
     {
     }
     
@@ -944,7 +923,7 @@ namespace SampleSystem.BLL
         Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>> GetTreeByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> selectOperation, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel filter, Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestBusinessUnit> fetchs);
     }
     
-    public partial interface ITestBusinessUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestBusinessUnit>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestBusinessUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, SampleSystem.Domain.Projections.TestBusinessUnit>
     {
     }
     
@@ -952,7 +931,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestCustomContextSecurityObjProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestCustomContextSecurityObjProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>
     {
     }
     
@@ -960,7 +939,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestDepartmentBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestDepartment>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestDepartmentBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestDepartmentBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestDepartmentBLL, SampleSystem.Domain.Projections.TestDepartment>
     {
     }
     
@@ -976,7 +955,7 @@ namespace SampleSystem.BLL
         Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.TestEmployee> GetObjectsByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestEmployee> selectOperation, SampleSystem.Domain.TestEmployeeFilter filter, Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestEmployee> fetchs);
     }
     
-    public partial interface ITestEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestEmployee>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, SampleSystem.Domain.Projections.TestEmployee>
     {
     }
     
@@ -984,7 +963,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestIMRequestBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestIMRequestBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestIMRequest>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestIMRequestBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestIMRequestBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestIMRequestBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestIMRequestBLL, SampleSystem.Domain.Projections.TestIMRequest>
     {
     }
     
@@ -994,7 +973,7 @@ namespace SampleSystem.BLL
         System.Collections.Generic.List<SampleSystem.Domain.Projections.TestLegacyEmployee> GetListBy(SampleSystem.Domain.Models.Filters.EmployeeFilterModel filter, Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestLegacyEmployee> fetchs);
     }
     
-    public partial interface ITestLegacyEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLegacyEmployeeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLegacyEmployeeBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLegacyEmployeeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestLegacyEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLegacyEmployeeBLL, SampleSystem.Domain.Projections.TestLegacyEmployee>
     {
     }
     
@@ -1002,7 +981,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestLocationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLocation>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestLocationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationBLL, SampleSystem.Domain.Projections.TestLocation>
     {
     }
     
@@ -1010,7 +989,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestLocationCollectionPropertiesBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationCollectionPropertiesBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLocationCollectionProperties>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationCollectionPropertiesBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationCollectionPropertiesBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestLocationCollectionPropertiesBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationCollectionPropertiesBLL, SampleSystem.Domain.Projections.TestLocationCollectionProperties>
     {
     }
     
@@ -1018,15 +997,15 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestSecurityObjItemProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestSecurityObjItemProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, SampleSystem.Domain.Projections.TestSecurityObjItemProjection>
     {
     }
     
-    public partial interface IRoleRoleDegreeLinkBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.RoleRoleDegreeLink, System.Guid>
+    public partial interface IRoleRoleDegreeLinkBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.RoleRoleDegreeLink, System.Guid>
     {
     }
     
-    public partial interface IRoleRoleDegreeLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IRoleRoleDegreeLinkBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.RoleRoleDegreeLink>>
+    public partial interface IRoleRoleDegreeLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IRoleRoleDegreeLinkBLL, SampleSystem.Domain.RoleRoleDegreeLink>
     {
     }
     
@@ -1034,7 +1013,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ISqlParserTestObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SqlParserTestObj>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ISqlParserTestObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjBLL, SampleSystem.Domain.SqlParserTestObj>
     {
     }
     
@@ -1042,7 +1021,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ISqlParserTestObjContainerBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjContainerBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SqlParserTestObjContainer>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjContainerBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjContainerBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ISqlParserTestObjContainerBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjContainerBLL, SampleSystem.Domain.SqlParserTestObjContainer>
     {
     }
     
@@ -1050,15 +1029,15 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestCustomContextSecurityObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestCustomContextSecurityObj>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestCustomContextSecurityObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjBLL, SampleSystem.Domain.TestCustomContextSecurityObj>
     {
     }
     
-    public partial interface ITestImmutableObjBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid>
+    public partial interface ITestImmutableObjBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid>
     {
     }
     
-    public partial interface ITestImmutableObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestImmutableObj>>
+    public partial interface ITestImmutableObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, SampleSystem.Domain.TestImmutableObj>
     {
     }
     
@@ -1066,7 +1045,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestPerformanceObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPerformanceObject>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestPerformanceObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, SampleSystem.Domain.TestPerformanceObject>
     {
     }
     
@@ -1074,7 +1053,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestPlainAuthObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPlainAuthObject>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestPlainAuthObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, SampleSystem.Domain.TestPlainAuthObject>
     {
     }
     
@@ -1082,7 +1061,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestRootSecurityObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestRootSecurityObj>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestRootSecurityObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, SampleSystem.Domain.TestRootSecurityObj>
     {
     }
     
@@ -1090,7 +1069,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestSecurityObjItemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecurityObjItem>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestSecurityObjItemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, SampleSystem.Domain.TestSecurityObjItem>
     {
     }
     
@@ -1098,7 +1077,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestSecuritySubObjItemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestSecuritySubObjItemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, SampleSystem.Domain.TestSecuritySubObjItem>
     {
     }
     
@@ -1106,7 +1085,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestSecuritySubObjItem2BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem2>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestSecuritySubObjItem2BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, SampleSystem.Domain.TestSecuritySubObjItem2>
     {
     }
     
@@ -1114,23 +1093,23 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestSecuritySubObjItem3BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestSecuritySubObjItem3BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, SampleSystem.Domain.TestSecuritySubObjItem3>
     {
     }
     
-    public partial interface IWorkflowCoreExecutionErrorBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreExecutionError, System.Guid>
+    public partial interface IWorkflowCoreExecutionErrorBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreExecutionError, System.Guid>
     {
     }
     
-    public partial interface IWorkflowCoreExecutionErrorBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreExecutionError>>
+    public partial interface IWorkflowCoreExecutionErrorBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL, SampleSystem.Domain.WorkflowCoreExecutionError>
     {
     }
     
-    public partial interface IWorkflowCoreInstanceBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreInstance, System.Guid>
+    public partial interface IWorkflowCoreInstanceBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreInstance, System.Guid>
     {
     }
     
-    public partial interface IWorkflowCoreInstanceBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkflowCoreInstanceBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreInstance>>
+    public partial interface IWorkflowCoreInstanceBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkflowCoreInstanceBLL, SampleSystem.Domain.WorkflowCoreInstance>
     {
     }
 }

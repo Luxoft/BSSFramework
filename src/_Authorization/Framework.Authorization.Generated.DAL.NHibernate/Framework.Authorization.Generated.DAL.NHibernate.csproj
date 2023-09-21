@@ -6,7 +6,7 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mapping\Generated.Framework.Authorization.Domain.hbm.xml" />
+    <PackageReference Include="FluentNHibernate" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />

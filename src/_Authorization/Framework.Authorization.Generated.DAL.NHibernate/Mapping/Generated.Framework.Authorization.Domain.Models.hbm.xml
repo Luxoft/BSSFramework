@@ -1,2 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<hibernate-mapping assembly="Framework.Authorization.Domain.Models, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null" auto-import="false" schema="[Authorization].[dbo]" xmlns="urn:nhibernate-mapping-2.2" />

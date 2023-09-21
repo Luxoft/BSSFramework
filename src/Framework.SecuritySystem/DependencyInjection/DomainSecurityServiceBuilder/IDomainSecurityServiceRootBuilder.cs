@@ -1,9 +1,9 @@
-﻿using Framework.Persistent;
+﻿namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
-namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
-
-public interface IDomainSecurityServiceRootBuilder<in TIdent>
+public interface IDomainSecurityServiceRootBuilder
 {
-    IDomainSecurityServiceRootBuilder<TIdent> Add<TDomainObject>(Action<IDomainSecurityServiceBuilder<TDomainObject, TIdent>> setup)
-        where TDomainObject : IIdentityObject<TIdent>;
+    IDomainSecurityServiceRootBuilder Add<TDomainObject>(Action<IDomainSecurityServiceBuilder<TDomainObject>> setup);
+
+    IDomainSecurityServiceRootBuilder AddMetadata<TMetadata>()
+        where TMetadata : IDomainSecurityServiceMetadata;
 }

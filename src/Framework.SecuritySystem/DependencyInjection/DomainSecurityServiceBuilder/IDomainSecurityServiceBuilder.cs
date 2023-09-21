@@ -1,32 +1,31 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Persistent;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
-public interface IDomainSecurityServiceBuilder<TDomainObject, in TIdent>
-    where TDomainObject : IIdentityObject<TIdent>
+public interface IDomainSecurityServiceBuilder<TDomainObject>
 {
-    IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetView(SecurityOperation securityOperation);
+    IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityOperation securityOperation);
 
-    IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetEdit(SecurityOperation securityOperation);
+    IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityOperation securityOperation);
 
-    IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetPath(SecurityPath<TDomainObject> securityPath);
+    IDomainSecurityServiceBuilder<TDomainObject> SetPath(SecurityPath<TDomainObject> securityPath);
 
-    IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> securityPath);
+    IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> securityPath);
 
     /// <summary>
     /// For projection
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <returns></returns>
-    IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetUntypedDependency<TSource>()
-        where TSource : class, IIdentityObject<TIdent>;
+    IDomainSecurityServiceBuilder<TDomainObject> SetUntypedDependency<TSource>();
 
-    IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetCustomService<TDomainSecurityService>()
+    IDomainSecurityServiceBuilder<TDomainObject> SetCustomService<TDomainSecurityService>()
         where TDomainSecurityService : IDomainSecurityService<TDomainObject>;
+
+    IDomainSecurityServiceBuilder<TDomainObject> Override<TSecurityFunctor>()
+        where TSecurityFunctor : IOverrideSecurityProviderFunctor<TDomainObject>;
 }
 
 public interface IDomainSecurityServiceBuilder

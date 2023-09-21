@@ -131,7 +131,9 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
             }
             else
             {
-                return this.IsEdit ? BLLSecurityMode.Edit : BLLSecurityMode.View;
+                var mode = this.IsEdit ? "edit" : "view";
+
+                throw new Exception($"Required security for {this.DomainType} ({mode} mode)");
             }
         }
         else

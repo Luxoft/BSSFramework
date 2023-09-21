@@ -25,7 +25,7 @@ public interface IDomainSecurityServiceBuilder<TDomainObject>
         where TDomainSecurityService : IDomainSecurityService<TDomainObject>;
 
     IDomainSecurityServiceBuilder<TDomainObject> Override<TSecurityFunctor>()
-        where TSecurityFunctor : IOverrideSecurityFunctor<TDomainObject>;
+        where TSecurityFunctor : IOverrideSecurityProviderFunctor<TDomainObject>;
 }
 
 public interface IDomainSecurityServiceBuilder

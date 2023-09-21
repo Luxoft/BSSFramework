@@ -9,6 +9,8 @@ namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuil
 internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecurityServiceBuilder<TDomainObject>, IDomainSecurityServiceBuilder
     where TDomainObject : IIdentityObject<TIdent>
 {
+    private readonly List<Type> securityFunctorTypes = new ();
+
     public SecurityOperation ViewSecurityOperation { get; private set; }
 
     public SecurityOperation EditSecurityOperation { get; private set; }
@@ -26,7 +28,8 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
     {
         if (this.ViewSecurityOperation != null || this.EditSecurityOperation != null)
         {
-            services.AddSingleton(new DomainObjectSecurityOperationInfo(typeof(TDomainObject), this.ViewSecurityOperation, this.EditSecurityOperation));
+            services.AddSingleton(
+                new DomainObjectSecurityOperationInfo(typeof(TDomainObject), this.ViewSecurityOperation, this.EditSecurityOperation));
         }
 
         if (this.SecurityPath != null)
@@ -39,10 +42,30 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
             services.AddSingleton(this.DependencySourcePath.GetType(), this.DependencySourcePath);
         }
 
-        services.AddScoped(typeof(IDomainSecurityService<TDomainObject>), this.GetDomainServiceType());
+
+        var originalDomainServiceType = this.GetOriginalDomainServiceType();
+        Type registerDomainServiceType;
+
+        if (this.securityFunctorTypes.Any())
+        {
+            foreach (var securityFunctorType in this.securityFunctorTypes)
+            {
+                services.AddScoped(typeof(IOverrideSecurityProviderFunctor<TDomainObject>), securityFunctorType);
+            }
+
+            services.AddScoped(originalDomainServiceType);
+
+            registerDomainServiceType = typeof(DomainSecurityServiceWithFunctor<,>).MakeGenericType(originalDomainServiceType, typeof(TDomainObject));
+        }
+        else
+        {
+            registerDomainServiceType = originalDomainServiceType;
+        }
+
+        services.AddScoped(typeof(IDomainSecurityService<TDomainObject>), registerDomainServiceType);
     }
 
-    private Type GetDomainServiceType()
+    private Type GetOriginalDomainServiceType()
     {
         if (this.CustomServiceType != null)
         {
@@ -107,6 +130,10 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
     }
 
     public IDomainSecurityServiceBuilder<TDomainObject> Override<TSecurityFunctor>()
-        where TSecurityFunctor : IOverrideSecurityFunctor<TDomainObject> =>
-        throw new NotImplementedException();
+        where TSecurityFunctor : IOverrideSecurityProviderFunctor<TDomainObject>
+    {
+        this.securityFunctorTypes.Add(typeof(TSecurityFunctor));
+
+        return this;
+    }
 }

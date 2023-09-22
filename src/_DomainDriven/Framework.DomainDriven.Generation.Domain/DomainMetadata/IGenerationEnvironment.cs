@@ -1,4 +1,5 @@
-﻿using Framework.Projection;
+﻿using Framework.DomainDriven.Generation.Domain.ExtendedMetadata;
+using Framework.Projection;
 
 namespace Framework.DomainDriven.Generation.Domain;
 
@@ -11,4 +12,6 @@ public interface IGenerationEnvironment : IDomainMetadata
     Type OperationContextType { get; }
 
     IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
+
+    IDomainTypeRootExtendedMetadata ExtendedMetadata { get; }
 }

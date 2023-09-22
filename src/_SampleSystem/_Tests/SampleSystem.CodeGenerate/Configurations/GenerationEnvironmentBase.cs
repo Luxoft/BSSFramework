@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
 
 using Framework.DomainDriven.Generation.Domain;
+using Framework.DomainDriven.Generation.Domain.ExtendedMetadata;
 using Framework.Projection;
+using Framework.Security;
 
 using SampleSystem.Domain;
 
@@ -44,8 +46,15 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
 
         yield return this.LegacyProjectionEnvironment;
 
-        yield return this.CreateManualProjectionLambdaEnvironment(
-                                                                  typeof(SampleSystem.Domain.ManualProjections.
-                                                                          TestManualEmployeeProjection).Assembly);
+        yield return this.CreateManualProjectionLambdaEnvironment(typeof(SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection).Assembly);
     }
+
+    public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =
+
+        new DomainTypeRootExtendedMetadataBuilder()
+            .Add<Employee>(
+                b => b.AddProperty(
+                    e => e.PersonalCellPhones,
+                    pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))
+                            .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit))));
 }

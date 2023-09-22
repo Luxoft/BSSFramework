@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 
 using Framework.Core;
+using Framework.DomainDriven.Generation.Domain.ExtendedMetadata;
 using Framework.Persistent;
 using Framework.Projection;
 using Framework.Projection.Contract;
@@ -54,6 +55,8 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
     public abstract Type OperationContextType { get; }
 
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
+
+    public virtual IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } = new DomainTypeRootExtendedMetadataBuilder();
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this._domainObjectAssemblies.Value;
 

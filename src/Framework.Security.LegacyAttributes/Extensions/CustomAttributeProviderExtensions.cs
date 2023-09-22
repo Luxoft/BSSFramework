@@ -70,8 +70,7 @@ public static class CustomAttributeProviderExtensions
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        return isEdit ? (DomainObjectAccessAttribute)source.GetEditDomainObjectAttribute()
-                       : (DomainObjectAccessAttribute)source.GetViewDomainObjectAttribute();
+        return isEdit ? source.GetEditDomainObjectAttribute() : source.GetViewDomainObjectAttribute();
     }
 
     public static IEnumerable<DomainObjectAccessAttribute> GetDomainObjectAccessAttributes(this ICustomAttributeProvider source)

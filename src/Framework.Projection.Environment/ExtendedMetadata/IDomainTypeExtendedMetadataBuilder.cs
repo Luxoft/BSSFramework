@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.DomainDriven.Generation.Domain.ExtendedMetadata;
+namespace Framework.Projection.Environment;
 
 public interface IDomainTypeExtendedMetadataBuilder<TDomainType>
 {

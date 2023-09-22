@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.DomainDriven.Generation.Domain.ExtendedMetadata;
+namespace Framework.Projection.Environment;
 
 public class DomainTypeExtendedMetadataBuilder<TDomainType> : IDomainTypeExtendedMetadataBuilder<TDomainType>, IDomainTypeExtendedMetadata
 {

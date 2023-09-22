@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 
 using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Generation.Domain.ExtendedMetadata;
 using Framework.Projection;
+using Framework.Projection.Environment;
 using Framework.Security;
 
 using SampleSystem.Domain;
@@ -54,7 +54,11 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
         new DomainTypeRootExtendedMetadataBuilder()
             .Add<Employee>(
                 b => b.AddProperty(
-                    e => e.PersonalCellPhones,
-                    pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))
-                            .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit))));
+                          e => e.PersonalCellPhones,
+                          pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))
+                                  .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit)))
+                      .AddProperty(
+                          e => e.Login,
+                          pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeeView))
+                                  .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeeEdit))));
 }

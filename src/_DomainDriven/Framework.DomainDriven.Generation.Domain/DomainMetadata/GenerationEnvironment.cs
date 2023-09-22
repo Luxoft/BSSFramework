@@ -3,10 +3,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain.ExtendedMetadata;
 using Framework.Persistent;
 using Framework.Projection;
 using Framework.Projection.Contract;
+using Framework.Projection.Environment;
 using Framework.Projection.Lambda;
 
 namespace Framework.DomainDriven.Generation.Domain;
@@ -104,7 +104,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
         var fullAssemblyName = assemblyName + fullAssemblyNamePostfix;
 
-        return ProjectionContractEnvironment.Create(
+        return ProjectionContractEnvironment.Create(this.ExtendedMetadata,
                                                     new TypeSource(this.GetDomainObjectAssemblies()),
                                                     assemblyName,
                                                     fullAssemblyName,
@@ -123,8 +123,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
         if (projectionSource == null) throw new ArgumentNullException(nameof(projectionSource));
         if (createParams == null) throw new ArgumentNullException(nameof(createParams));
 
-        return ProjectionLambdaEnvironment.Create(
-
+        return ProjectionLambdaEnvironment.Create(this.ExtendedMetadata,
                                                   projectionSource,
                                                   createParams.AssemblyName,
                                                   createParams.FullAssemblyName,

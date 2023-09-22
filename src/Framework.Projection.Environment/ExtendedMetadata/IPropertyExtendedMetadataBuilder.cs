@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.Generation.Domain.ExtendedMetadata;
+﻿namespace Framework.Projection.Environment;
 
 public interface IPropertyExtendedMetadataBuilder
 {

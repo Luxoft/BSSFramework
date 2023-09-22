@@ -200,8 +200,6 @@ public partial class Employee :
 
     [MaxLength(30)]
     [UniqueElement]
-    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeView))]
-    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeEdit))]
     public virtual string Login
     {
         get { return this.login.TrimNull(); }

@@ -1,11 +1,13 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Metadata;
+using Framework.Projection.Environment;
 
 namespace Framework.Projection.Contract;
 
 public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
 {
-    protected ProjectionContractEnvironment(ITypeSource typeSource)
+    protected ProjectionContractEnvironment(IDomainTypeRootExtendedMetadata extendedMetadata, ITypeSource typeSource)
+        : base(extendedMetadata)
     {
         if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
 
@@ -25,47 +27,64 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
 
 
     public static ProjectionContractEnvironment Create(
+        IDomainTypeRootExtendedMetadata extendedMetadata,
+        ITypeSource typeSource,
+        string assemblyName,
+        string assemblyFullName,
+        Type domainObjectBaseType,
+        Type persistentDomainObjectBaseType,
+        string @namespace,
+        bool useDependencySecurity = true)
+    {
+        return new DefaultProjectionContractEnvironment(
+            extendedMetadata,
+            typeSource,
+            assemblyName,
+            assemblyFullName,
+            domainObjectBaseType,
+            persistentDomainObjectBaseType,
+            @namespace,
+            useDependencySecurity);
+    }
+
+    private class DefaultProjectionContractEnvironment : ProjectionContractEnvironment
+    {
+        public DefaultProjectionContractEnvironment(
+            IDomainTypeRootExtendedMetadata extendedMetadata,
             ITypeSource typeSource,
             string assemblyName,
             string assemblyFullName,
             Type domainObjectBaseType,
             Type persistentDomainObjectBaseType,
             string @namespace,
-            bool useDependencySecurity = true)
-    {
-        return new DefaultProjectionContractEnvironment(
-                                                        typeSource,
-                                                        assemblyName,
-                                                        assemblyFullName,
-                                                        domainObjectBaseType,
-                                                        persistentDomainObjectBaseType,
-                                                        @namespace,
-                                                        useDependencySecurity);
-    }
-
-    private class DefaultProjectionContractEnvironment : ProjectionContractEnvironment
-    {
-        public DefaultProjectionContractEnvironment(
-                ITypeSource typeSource,
-                string assemblyName,
-                string assemblyFullName,
-                Type domainObjectBaseType,
-                Type persistentDomainObjectBaseType,
-                string @namespace,
-                bool useDependencySecurity)
-                : base(typeSource)
+            bool useDependencySecurity)
+            : base(extendedMetadata, typeSource)
         {
-            if (assemblyName == null) { throw new ArgumentNullException(nameof(assemblyName)); }
-            if (assemblyFullName == null) { throw new ArgumentNullException(nameof(assemblyFullName)); }
-            if (@namespace == null) { throw new ArgumentNullException(nameof(@namespace)); }
+            if (assemblyName == null)
+            {
+                throw new ArgumentNullException(nameof(assemblyName));
+            }
 
-            if (string.IsNullOrWhiteSpace(@namespace)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(@namespace));
+            if (assemblyFullName == null)
+            {
+                throw new ArgumentNullException(nameof(assemblyFullName));
+            }
+
+            if (@namespace == null)
+            {
+                throw new ArgumentNullException(nameof(@namespace));
+            }
+
+            if (string.IsNullOrWhiteSpace(@namespace))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(@namespace));
 
 
-            this.Assembly = LazyInterfaceImplementHelper.CreateProxy<IAssemblyInfo>(() => new AssemblyInfo(assemblyName, assemblyFullName, this.ContractTypeResolver));
+            this.Assembly = LazyInterfaceImplementHelper.CreateProxy<IAssemblyInfo>(
+                () => new AssemblyInfo(assemblyName, assemblyFullName, this.ContractTypeResolver));
             this.Namespace = @namespace;
             this.DomainObjectBaseType = domainObjectBaseType ?? throw new ArgumentNullException(nameof(domainObjectBaseType));
-            this.PersistentDomainObjectBaseType = persistentDomainObjectBaseType ?? throw new ArgumentNullException(nameof(persistentDomainObjectBaseType));
+            this.PersistentDomainObjectBaseType = persistentDomainObjectBaseType
+                                                  ?? throw new ArgumentNullException(nameof(persistentDomainObjectBaseType));
             this.UseDependencySecurity = useDependencySecurity;
         }
 

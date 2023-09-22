@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.DomainDriven.Generation.Domain.ExtendedMetadata;
+namespace Framework.Projection.Environment;
 
 public class DomainTypeRootExtendedMetadataBuilder : IDomainTypeRootExtendedMetadata
 {
@@ -29,7 +29,6 @@ public class DomainTypeRootExtendedMetadataBuilder : IDomainTypeRootExtendedMeta
 
     public virtual ICustomAttributeProvider GetProperty(PropertyInfo property)
     {
-
         if (this.properties.Value.TryGetValue(property, out var propertyMetadata))
         {
             return new MixedCustomAttributeProvider(property, propertyMetadata);

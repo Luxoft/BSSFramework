@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven.Generation.Domain.ExtendedMetadata;
-using Framework.Projection;
+﻿using Framework.Projection;
+using Framework.Projection.Environment;
 
 namespace Framework.DomainDriven.Generation.Domain;
 

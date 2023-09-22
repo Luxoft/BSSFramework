@@ -145,10 +145,7 @@ internal class GeneratedType : BaseTypeImpl
 
     private IEnumerable<Attribute> GetSecurityAttributes()
     {
-        if (this.SourceType.IsSecurity())
-        {
-            yield return new DependencySecurityAttribute(this.SourceType);
-        }
+        yield return new DependencySecurityAttribute(this.SourceType);
     }
 
     private IEnumerable<TableAttribute> GetTableAttributes()

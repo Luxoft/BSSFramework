@@ -1,13 +1,10 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.BusinessUnitTypeView))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.BusinessUnitTypeEdit))]
 [UniqueGroup]
 public partial class BusinessUnitType :
         BaseDirectory,

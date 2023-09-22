@@ -11,24 +11,6 @@ namespace SampleSystem.Generated.DTO
 {
     
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemBusinessUnitSecurityOperationCode
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BusinessUnitHrDepartmentEdit,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BusinessUnitHrDepartmentView,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BusinessUnitView,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit,
-    }
-    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public enum SampleSystemHRDepartmentSecurityOperationCode
@@ -75,6 +57,24 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         ManagementUnitView,
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public enum SampleSystemBusinessUnitSecurityOperationCode
+    {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BusinessUnitHrDepartmentEdit,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BusinessUnitHrDepartmentView,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BusinessUnitView,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        EmployeeEdit,
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]

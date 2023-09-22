@@ -243,6 +243,7 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Persistent.Mapping.TableAttribute(Name="TestObjForNested")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.TestObjForNested), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.TestObjForNested))]
     public partial class CustomTestObjForNested : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -316,6 +317,7 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnitEmployeeRole")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole))]
     public partial class MiniBusinessUnitEmployeeRole : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1022,6 +1024,7 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Persistent.Mapping.TableAttribute(Name="IMRequestDetail")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.IMRequestDetail), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.IMRequestDetail))]
     public partial class TestIMRequestDetail : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1224,6 +1227,7 @@ namespace SampleSystem.Domain.Projections
     }
     
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.DomainObjectBase), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.DomainObjectBase))]
     public partial class UnpersitentContainer : SampleSystem.Domain.Projections.CustomUnpersitentContainerBase
     {
         
@@ -1272,6 +1276,7 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Persistent.Mapping.TableAttribute(Name="Project")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Project), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.Project))]
     public partial class VisualProject : SampleSystem.Domain.PersistentDomainObjectBase
     {
         

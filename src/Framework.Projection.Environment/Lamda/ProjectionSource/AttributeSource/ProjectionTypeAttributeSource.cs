@@ -69,10 +69,7 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
     {
         if (this.Environment.UseDependencySecurity)
         {
-            if (this.SourceType.IsSecurity())
-            {
-                yield return new DependencySecurityAttribute(this.SourceType);
-            }
+            yield return new DependencySecurityAttribute(this.SourceType);
         }
         else
         {

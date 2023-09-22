@@ -13,7 +13,6 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.SecurityNode)]
-    [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "BusinessUnitView", "BusinessUnitHrDepartmentView", "EmployeeEdit", "BusinessUnitHrDepartmentEdit")]
     public partial class SecurityBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext, SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>, Framework.Persistent.IDenormalizedHierarchicalPersistentSource<SampleSystem.Domain.Projections.SecurityBusinessUnitAncestorLink, SampleSystem.Domain.Projections.SecurityBusinessUnitToAncestorChildView, SampleSystem.Domain.Projections.SecurityBusinessUnit, System.Guid>, Framework.Persistent.IHierarchicalPersistentDomainObjectBase<SampleSystem.Domain.Projections.SecurityBusinessUnit, System.Guid>, Framework.Persistent.IHierarchicalSource<SampleSystem.Domain.Projections.SecurityBusinessUnit>, Framework.Persistent.IParentSource<SampleSystem.Domain.Projections.SecurityBusinessUnit>, Framework.Persistent.IChildrenSource<SampleSystem.Domain.Projections.SecurityBusinessUnit>
     {
         

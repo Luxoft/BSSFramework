@@ -79,7 +79,6 @@ public class GetAttachmentWebGetMethodGenerator<TConfiguration> : MethodGenerato
 
         yield return fileItemDecl;
 
-        if (null != this.Configuration.Environment.BLLCore.GetBLLSecurityModeType(this.DomainType))
         {
             var fileItemContainerLinkBLLDecl = this.GetCreateDefaultBLLVariableDeclaration(evaluateDataExpr, "fileItemContainerLinkBLL", this.Configuration.FileItemContainerLinkType);
 

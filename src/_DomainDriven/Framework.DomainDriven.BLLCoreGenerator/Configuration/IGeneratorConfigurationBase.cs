@@ -109,8 +109,6 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     CodeExpression GetCreateDefaultBLLExpression(CodeExpression contextExpression, CodeTypeReference genericType);
 
-    Type GetBLLSecurityModeType(Type domainType);
-
     IEnumerable<PropertyInfo> GetMappingProperties(Type domainType, MainDTOType fileType);
 
     bool HasSecurityContext(Type domainType);

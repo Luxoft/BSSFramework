@@ -407,7 +407,7 @@
         
         protected virtual SampleSystem.Generated.DTO.CustomCompanyLegalEntityProjectionDTO GetCustomCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO customCompanyLegalEntityIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICustomCompanyLegalEntityBLL bll = evaluateData.Context.Logics.CustomCompanyLegalEntityFactory.Create(SampleSystem.SampleSystemSecurityOperation.AuthorizationImpersonate);
+            SampleSystem.BLL.ICustomCompanyLegalEntityBLL bll = evaluateData.Context.Logics.CustomCompanyLegalEntityFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
             SampleSystem.Domain.Projections.CustomCompanyLegalEntity domainObject = bll.GetById(customCompanyLegalEntityIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(Framework.Transfering.ViewDTOType.ProjectionDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, evaluateData.MappingService);
         }

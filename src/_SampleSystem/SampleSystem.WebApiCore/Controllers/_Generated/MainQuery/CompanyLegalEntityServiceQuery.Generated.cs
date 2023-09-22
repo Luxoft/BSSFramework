@@ -78,7 +78,7 @@
         
         protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.CustomCompanyLegalEntityProjectionDTO> GetCustomCompanyLegalEntitiesByODataQueryStringInternal(string odataQueryString, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICustomCompanyLegalEntityBLL bll = evaluateData.Context.Logics.CustomCompanyLegalEntityFactory.Create(SampleSystem.SampleSystemSecurityOperation.AuthorizationImpersonate);
+            SampleSystem.BLL.ICustomCompanyLegalEntityBLL bll = evaluateData.Context.Logics.CustomCompanyLegalEntityFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(Framework.Transfering.ViewDTOType.ProjectionDTO));

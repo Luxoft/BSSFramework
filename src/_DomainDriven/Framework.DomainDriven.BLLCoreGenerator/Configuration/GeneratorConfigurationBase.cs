@@ -428,36 +428,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                                 .ToMethodReferenceExpression("Create", genericType).ToMethodInvokeExpression();
     }
 
-    public Type GetBLLSecurityModeType(Type domainType)
-    {
-        return typeof(BLLSecurityMode);
-
-        //if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        //var depSecAttr = domainType.GetCustomAttribute<DependencySecurityAttribute>();
-
-        //if (depSecAttr != null)
-        //{
-        //    return this.GetBLLSecurityModeType(depSecAttr.SourceType) ?? typeof(BLLSecurityMode);
-        //}
-
-        //var hasViewEditAttr = domainType.GetViewDomainObjectAttribute() != null || domainType.GetEditDomainObjectAttribute() != null;
-
-        //if (!this.SecurityMode.HasFlag(SecurityModeGenerate.Domain) && hasViewEditAttr)
-        //{
-        //    return typeof(BLLSecurityMode);
-        //}
-        //else
-        //{
-        //    if (!hasViewEditAttr && domainType.HasAttribute<CustomContextSecurityAttribute>())
-        //    {
-        //        return typeof(BLLSecurityMode);
-        //    }
-
-        //    return null;
-        //}
-    }
-
     public virtual bool HasSecurityContext(Type domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));

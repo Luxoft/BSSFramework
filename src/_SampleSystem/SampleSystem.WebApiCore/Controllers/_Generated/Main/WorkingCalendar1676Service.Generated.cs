@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check WorkingCalendar1676 access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckWorkingCalendar1676Access")]
-        public virtual void CheckWorkingCalendar1676Access(CheckWorkingCalendar1676AccessAutoRequest checkWorkingCalendar1676AccessAutoRequest)
-        {
-            string securityOperationName = checkWorkingCalendar1676AccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Ident = checkWorkingCalendar1676AccessAutoRequest.workingCalendar1676Ident;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckWorkingCalendar1676AccessInternal(workingCalendar1676Ident, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckWorkingCalendar1676AccessInternal(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Ident, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.IWorkingCalendar1676BLL bll = evaluateData.Context.Logics.WorkingCalendar1676;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject = bll.GetById(workingCalendar1676Ident.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get WorkingCalendar1676 (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -260,53 +240,5 @@
             SampleSystem.BLL.IWorkingCalendar1676BLL bll = evaluateData.Context.Logics.WorkingCalendar1676Factory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
-        
-        /// <summary>
-        /// Check access for WorkingCalendar1676
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasWorkingCalendar1676Access")]
-        public virtual bool HasWorkingCalendar1676Access(HasWorkingCalendar1676AccessAutoRequest hasWorkingCalendar1676AccessAutoRequest)
-        {
-            string securityOperationName = hasWorkingCalendar1676AccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Ident = hasWorkingCalendar1676AccessAutoRequest.workingCalendar1676Ident;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasWorkingCalendar1676AccessInternal(workingCalendar1676Ident, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasWorkingCalendar1676AccessInternal(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Ident, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.IWorkingCalendar1676BLL bll = evaluateData.Context.Logics.WorkingCalendar1676;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject = bll.GetById(workingCalendar1676Ident.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(operation).HasAccess(domainObject);
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckWorkingCalendar1676AccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Ident;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasWorkingCalendar1676AccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Ident;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

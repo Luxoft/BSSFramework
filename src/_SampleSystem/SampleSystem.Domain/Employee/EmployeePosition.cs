@@ -1,13 +1,10 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Restriction;
-using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePositionView))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePositionEdit))]
 [UniqueGroup]
 public class EmployeePosition : BaseDirectory, IExternalSynchronizable
 {

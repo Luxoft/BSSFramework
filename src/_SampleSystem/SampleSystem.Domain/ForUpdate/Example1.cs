@@ -5,9 +5,6 @@ using Framework.Security;
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole(SaveType = BLLSaveType.Both)]
-
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.LocationView))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.LocationEdit))]
 public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>
 {
     private readonly ICollection<Example2> items2 = new HashSet<Example2>();

@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check Example1 access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckExample1Access")]
-        public virtual void CheckExample1Access(CheckExample1AccessAutoRequest checkExample1AccessAutoRequest)
-        {
-            string securityOperationName = checkExample1AccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.Example1IdentityDTO example1Ident = checkExample1AccessAutoRequest.example1Ident;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckExample1AccessInternal(example1Ident, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckExample1AccessInternal(SampleSystem.Generated.DTO.Example1IdentityDTO example1Ident, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.IExample1BLL bll = evaluateData.Context.Logics.Example1;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.Example1 domainObject = bll.GetById(example1Ident.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get Example1 (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -145,26 +125,6 @@
         }
         
         /// <summary>
-        /// Check access for Example1
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasExample1Access")]
-        public virtual bool HasExample1Access(HasExample1AccessAutoRequest hasExample1AccessAutoRequest)
-        {
-            string securityOperationName = hasExample1AccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.Example1IdentityDTO example1Ident = hasExample1AccessAutoRequest.example1Ident;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasExample1AccessInternal(example1Ident, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasExample1AccessInternal(SampleSystem.Generated.DTO.Example1IdentityDTO example1Ident, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.IExample1BLL bll = evaluateData.Context.Logics.Example1;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.Example1 domainObject = bll.GetById(example1Ident.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(operation).HasAccess(domainObject);
-        }
-        
-        /// <summary>
         /// Save Example1s
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -206,33 +166,5 @@
             bll.Save(domainObject);
             return SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
         }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckExample1AccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Example1IdentityDTO example1Ident;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasExample1AccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Example1IdentityDTO example1Ident;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

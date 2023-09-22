@@ -278,7 +278,6 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Persistent.Mapping.TableAttribute(Name="HRDepartment")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.HRDepartment), Framework.Projection.ProjectionRole.SecurityNode)]
-    [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "HRDepartmentView", "EmployeeEdit")]
     public partial class SecurityHRDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IHierarchicalSource<SampleSystem.Domain.Projections.SecurityHRDepartment>, Framework.Persistent.IParentSource<SampleSystem.Domain.Projections.SecurityHRDepartment>, Framework.Persistent.IChildrenSource<SampleSystem.Domain.Projections.SecurityHRDepartment>
     {
         
@@ -587,7 +586,6 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Persistent.Mapping.TableAttribute(Name="EmployeeRole")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.EmployeeRole), Framework.Projection.ProjectionRole.AutoNode)]
-    [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeeRoleView")]
     public partial class TestLegacyEmployee_AutoProp_Role : SampleSystem.Domain.PersistentDomainObjectBase
     {
         

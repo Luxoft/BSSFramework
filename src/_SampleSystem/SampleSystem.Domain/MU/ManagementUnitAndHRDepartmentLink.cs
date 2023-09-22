@@ -3,13 +3,10 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkView))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkEdit))]
 public class ManagementUnitAndHRDepartmentLink :
         AuditPersistentDomainObjectBase,
         IDetail<ManagementUnit>,

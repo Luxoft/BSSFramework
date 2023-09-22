@@ -1,13 +1,11 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Restriction;
-using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
 [BLLEventRole]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.Disabled))]
 public class Information : BaseDirectory
 {
     private string email;

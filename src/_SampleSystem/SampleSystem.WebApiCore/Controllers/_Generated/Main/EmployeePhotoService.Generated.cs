@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check EmployeePhoto access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckEmployeePhotoAccess")]
-        public virtual void CheckEmployeePhotoAccess(CheckEmployeePhotoAccessAutoRequest checkEmployeePhotoAccessAutoRequest)
-        {
-            string securityOperationName = checkEmployeePhotoAccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdent = checkEmployeePhotoAccessAutoRequest.employeePhotoIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckEmployeePhotoAccessInternal(employeePhotoIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckEmployeePhotoAccessInternal(SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.IEmployeePhotoBLL bll = evaluateData.Context.Logics.EmployeePhoto;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.EmployeePhoto domainObject = bll.GetById(employeePhotoIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeePhoto>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get EmployeePhoto (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -143,53 +123,5 @@
             SampleSystem.BLL.IEmployeePhotoBLL bll = evaluateData.Context.Logics.EmployeePhotoFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.EmployeePhoto>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
-        
-        /// <summary>
-        /// Check access for EmployeePhoto
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasEmployeePhotoAccess")]
-        public virtual bool HasEmployeePhotoAccess(HasEmployeePhotoAccessAutoRequest hasEmployeePhotoAccessAutoRequest)
-        {
-            string securityOperationName = hasEmployeePhotoAccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdent = hasEmployeePhotoAccessAutoRequest.employeePhotoIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasEmployeePhotoAccessInternal(employeePhotoIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasEmployeePhotoAccessInternal(SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.IEmployeePhotoBLL bll = evaluateData.Context.Logics.EmployeePhoto;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.EmployeePhoto domainObject = bll.GetById(employeePhotoIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeePhoto>(operation).HasAccess(domainObject);
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckEmployeePhotoAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasEmployeePhotoAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

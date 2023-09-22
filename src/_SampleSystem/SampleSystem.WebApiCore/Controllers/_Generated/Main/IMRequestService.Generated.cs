@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check IMRequest access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckIMRequestAccess")]
-        public virtual void CheckIMRequestAccess(CheckIMRequestAccessAutoRequest checkIMRequestAccessAutoRequest)
-        {
-            string securityOperationName = checkIMRequestAccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdent = checkIMRequestAccessAutoRequest.iMRequestIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckIMRequestAccessInternal(iMRequestIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckIMRequestAccessInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequest;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.IMRequest domainObject = bll.GetById(iMRequestIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.IMRequest>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get IMRequest (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -262,26 +242,6 @@
         }
         
         /// <summary>
-        /// Check access for IMRequest
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasIMRequestAccess")]
-        public virtual bool HasIMRequestAccess(HasIMRequestAccessAutoRequest hasIMRequestAccessAutoRequest)
-        {
-            string securityOperationName = hasIMRequestAccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdent = hasIMRequestAccessAutoRequest.iMRequestIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasIMRequestAccessInternal(iMRequestIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasIMRequestAccessInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequest;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.IMRequest domainObject = bll.GetById(iMRequestIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.IMRequest>(operation).HasAccess(domainObject);
-        }
-        
-        /// <summary>
         /// Get TestIMRequest (ProjectionDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -297,33 +257,5 @@
             SampleSystem.Domain.Projections.TestIMRequest domainObject = bll.GetById(testIMRequestIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestIMRequest>(Framework.Transfering.ViewDTOType.ProjectionDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, evaluateData.MappingService);
         }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckIMRequestAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasIMRequestAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

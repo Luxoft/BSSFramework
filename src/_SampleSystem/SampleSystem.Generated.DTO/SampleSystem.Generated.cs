@@ -11,42 +11,6 @@ namespace SampleSystem.Generated.DTO
 {
     
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemHRDepartmentSecurityOperationCode
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        HRDepartmentView,
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemManagementUnitSecurityOperationCode
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ManagementUnitView,
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitFluentMapping), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemManagementUnitFluentMappingSecurityOperationCode
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ManagementUnitView,
-    }
-    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public enum SampleSystemBusinessUnitSecurityOperationCode

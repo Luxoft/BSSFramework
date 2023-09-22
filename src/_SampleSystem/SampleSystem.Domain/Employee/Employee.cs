@@ -21,8 +21,6 @@ namespace SampleSystem.Domain;
 [UniqueGroup(UseDbEvaluation = true)]
 [BLLViewRole(Max = MainDTOType.FullDTO)]
 [BLLSaveRole(SaveType = BLLSaveType.Both)]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeView))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeEdit))]
 [BLLEventRole(Mode = EventRoleMode.Save)]
 [BLLIntegrationSaveRole]
 [DomainType("{AA46DA53-9B21-4DEC-9C70-720BDA1CB198}")]

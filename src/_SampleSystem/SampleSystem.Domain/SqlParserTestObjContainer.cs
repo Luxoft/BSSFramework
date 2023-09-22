@@ -1,7 +1,6 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.Security;
 using Framework.Transfering;
 
 namespace SampleSystem.Domain;

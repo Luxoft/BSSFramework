@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check CompanyLegalEntity access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckCompanyLegalEntityAccess")]
-        public virtual void CheckCompanyLegalEntityAccess(CheckCompanyLegalEntityAccessAutoRequest checkCompanyLegalEntityAccessAutoRequest)
-        {
-            string securityOperationName = checkCompanyLegalEntityAccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent = checkCompanyLegalEntityAccessAutoRequest.companyLegalEntityIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckCompanyLegalEntityAccessInternal(companyLegalEntityIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckCompanyLegalEntityAccessInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntity;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.CompanyLegalEntity>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get full list of CompanyLegalEntities (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -330,26 +310,6 @@
         }
         
         /// <summary>
-        /// Check access for CompanyLegalEntity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasCompanyLegalEntityAccess")]
-        public virtual bool HasCompanyLegalEntityAccess(HasCompanyLegalEntityAccessAutoRequest hasCompanyLegalEntityAccessAutoRequest)
-        {
-            string securityOperationName = hasCompanyLegalEntityAccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent = hasCompanyLegalEntityAccessAutoRequest.companyLegalEntityIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasCompanyLegalEntityAccessInternal(companyLegalEntityIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasCompanyLegalEntityAccessInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntity;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.CompanyLegalEntity>(operation).HasAccess(domainObject);
-        }
-        
-        /// <summary>
         /// Remove CompanyLegalEntity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -411,33 +371,5 @@
             SampleSystem.Domain.Projections.CustomCompanyLegalEntity domainObject = bll.GetById(customCompanyLegalEntityIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(Framework.Transfering.ViewDTOType.ProjectionDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, evaluateData.MappingService);
         }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckCompanyLegalEntityAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasCompanyLegalEntityAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

@@ -23,18 +23,6 @@ namespace SampleSystem.Generated.DTO
         HRDepartmentView,
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemLocationSecurityOperationCode
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        HRDepartmentEdit,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        LocationView,
-    }
-    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public enum SampleSystemManagementUnitSecurityOperationCode

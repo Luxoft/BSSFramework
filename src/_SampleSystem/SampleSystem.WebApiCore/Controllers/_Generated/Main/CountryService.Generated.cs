@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check Country access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckCountryAccess")]
-        public virtual void CheckCountryAccess(CheckCountryAccessAutoRequest checkCountryAccessAutoRequest)
-        {
-            string securityOperationName = checkCountryAccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent = checkCountryAccessAutoRequest.countryIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckCountryAccessInternal(countryIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckCountryAccessInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.Country;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.Country domainObject = bll.GetById(countryIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Country>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get full list of Countries (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -330,26 +310,6 @@
         }
         
         /// <summary>
-        /// Check access for Country
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasCountryAccess")]
-        public virtual bool HasCountryAccess(HasCountryAccessAutoRequest hasCountryAccessAutoRequest)
-        {
-            string securityOperationName = hasCountryAccessAutoRequest.securityOperationName;
-            SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent = hasCountryAccessAutoRequest.countryIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasCountryAccessInternal(countryIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasCountryAccessInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.Country;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
-            SampleSystem.Domain.Country domainObject = bll.GetById(countryIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Country>(operation).HasAccess(domainObject);
-        }
-        
-        /// <summary>
         /// Remove Country
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -394,33 +354,5 @@
             bll.Save(domainObject);
             return SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
         }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckCountryAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasCountryAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

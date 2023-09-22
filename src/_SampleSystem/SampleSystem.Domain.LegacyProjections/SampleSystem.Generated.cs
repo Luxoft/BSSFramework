@@ -189,7 +189,6 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Persistent.Mapping.TableAttribute(Name="Employee")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.SecurityNode)]
-    [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeeView")]
     public partial class SecurityEmployee : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext, SampleSystem.Domain.IEmployeeSecurity<SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<SampleSystem.Domain.Projections.SecurityHRDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee>
     {
         
@@ -358,7 +357,6 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Persistent.Mapping.TableAttribute(Name="Location")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.SecurityNode)]
-    [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "LocationView", "HRDepartmentEdit")]
     public partial class SecurityLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext, Framework.Persistent.IDenormalizedHierarchicalPersistentSource<SampleSystem.Domain.Projections.SecurityLocationAncestorLink, SampleSystem.Domain.Projections.SecurityLocationToAncestorChildView, SampleSystem.Domain.Projections.SecurityLocation, System.Guid>, Framework.Persistent.IHierarchicalPersistentDomainObjectBase<SampleSystem.Domain.Projections.SecurityLocation, System.Guid>, Framework.Persistent.IHierarchicalSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IParentSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IChildrenSource<SampleSystem.Domain.Projections.SecurityLocation>
     {
         
@@ -529,7 +527,6 @@ namespace SampleSystem.Domain.Projections
     [Framework.Persistent.Mapping.TableAttribute(Name="Employee")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.Default)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.EmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Collection)]
-    [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeeView")]
     public partial class TestLegacyEmployee : SampleSystem.Domain.Projections.SecurityEmployee
     {
         

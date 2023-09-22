@@ -29,8 +29,6 @@ public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>
         set { this.field2 = value; }
     }
 
-    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.LocationView))]
-    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.LocationEdit))]
     public virtual Guid Field3
     {
         get { return this.field3; }

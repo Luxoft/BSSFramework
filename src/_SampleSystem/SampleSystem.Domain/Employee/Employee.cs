@@ -228,7 +228,6 @@ public partial class Employee :
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
-    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))]
     public virtual string PersonalCellPhone
     {
         get { return this.personalCellPhone.TrimNull(); }
@@ -340,8 +339,6 @@ public partial class Employee :
         set { this.lastActionDate = value; }
     }
 
-    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePositionView))]
-    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePositionEdit))]
     public virtual EmployeePosition Position
     {
         get { return this.position; }

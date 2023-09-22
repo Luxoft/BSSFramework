@@ -29,54 +29,6 @@ namespace SampleSystem.Generated.DTO
         EmployeeEdit,
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemHRDepartmentSecurityOperationCode
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        HRDepartmentView,
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemLocationSecurityOperationCode
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        HRDepartmentEdit,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        LocationView,
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemManagementUnitSecurityOperationCode
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ManagementUnitView,
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitFluentMapping), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemManagementUnitFluentMappingSecurityOperationCode
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ManagementUnitView,
-    }
-    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct AddressIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.AddressIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>

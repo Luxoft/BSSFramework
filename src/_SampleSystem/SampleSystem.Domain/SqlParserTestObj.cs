@@ -1,7 +1,6 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.Security;
 using Framework.Transfering;
 
 namespace SampleSystem.Domain;
@@ -11,8 +10,6 @@ namespace SampleSystem.Domain;
 [BLLSaveRole]
 [BLLRemoveRole]
 [UniqueGroup]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.Disabled))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.Disabled))]
 public class SqlParserTestObj : AuditPersistentDomainObjectBase
 {
     private string notNullColumn;

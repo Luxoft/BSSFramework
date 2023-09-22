@@ -1,9 +1,14 @@
-﻿using System.Reflection;
+﻿using System.Collections.ObjectModel;
+using System.Reflection;
 
+using Framework.Core;
 using Framework.DomainDriven.DTOGenerator;
 using Framework.DomainDriven.DTOGenerator.Server;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
+using Framework.SecuritySystem;
+
+using SampleSystem.Domain;
 
 using ServiceModelGenerator = Framework.DomainDriven.ServiceModelGenerator;
 
@@ -21,6 +26,24 @@ public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> FullRefDTOFileFactoryHeader { get; } = SampleSystemFileType.FullRefDTO.ToHeader();
 
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> SimpleRefFullDetailDTOFileFactoryHeader { get; } = SampleSystemFileType.SimpleRefFullDetailDTO.ToHeader();
+
+    protected override IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetMainTypesWithSecondarySecurityOperations()
+    {
+        foreach (var baseData in base.GetMainTypesWithSecondarySecurityOperations())
+        {
+            yield return baseData;
+        }
+
+        yield return typeof(BusinessUnit).ToKeyValuePair(
+            new SecurityOperation[]
+            {
+                SampleSystemSecurityOperation.BusinessUnitView,
+                SampleSystemSecurityOperation.BusinessUnitHrDepartmentView,
+                SampleSystemSecurityOperation.EmployeeEdit,
+                SampleSystemSecurityOperation.BusinessUnitHrDepartmentEdit
+            }.ToReadOnlyCollection());
+        ;
+    }
 
     public override IEnumerable<GenerateTypeMap> GetTypeMaps()
     {

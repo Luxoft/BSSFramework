@@ -1,13 +1,10 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
-using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.BusinessUnitHrDepartmentView))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.BusinessUnitHrDepartmentEdit))]
 public class BusinessUnitHrDepartment : AuditPersistentDomainObjectBase, IDetail<HRDepartment>
 {
     private BusinessUnit businessUnit;

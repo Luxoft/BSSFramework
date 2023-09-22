@@ -10,8 +10,6 @@ namespace SampleSystem.Domain;
 
 [DomainType("0BE31997-C4CD-449E-9394-A311016CB715")]
 [BLLViewRole, BLLSaveRole(AllowCreate = false), BLLRemoveRole]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.HRDepartmentView), nameof(SampleSystemSecurityOperation.EmployeeEdit))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.HRDepartmentEdit))]
 public partial class HRDepartment :
         HRDepartmentBase,
         IDefaultHierarchicalPersistentDomainObjectBase<HRDepartment>,

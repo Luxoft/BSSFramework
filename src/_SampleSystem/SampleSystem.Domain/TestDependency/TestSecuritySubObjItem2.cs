@@ -1,11 +1,9 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
-using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[DependencySecurity(typeof(TestRootSecurityObj), nameof(RootSecurityObj))]
 public class TestSecuritySubObjItem2 : BaseDirectory, IDetail<TestSecurityObjItem>
 {
     private TestSecurityObjItem innerMaster;

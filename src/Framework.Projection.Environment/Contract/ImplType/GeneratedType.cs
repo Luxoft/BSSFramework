@@ -7,8 +7,6 @@ using Framework.Persistent.Mapping;
 using Framework.Security;
 using Framework.Validation;
 
-
-
 namespace Framework.Projection.Contract;
 
 internal class GeneratedType : BaseTypeImpl
@@ -65,7 +63,6 @@ internal class GeneratedType : BaseTypeImpl
 
     public override Type UnderlyingSystemType => this.BaseType;
 
-    
     public override Type BaseType => this.isPersistent ? this.environment.PersistentDomainObjectBaseType : this.environment.DomainObjectBaseType;
 
     public override Assembly Assembly { get; } = null;
@@ -145,7 +142,7 @@ internal class GeneratedType : BaseTypeImpl
 
     private IEnumerable<Attribute> GetSecurityAttributes()
     {
-        if (this.SourceType.IsSecurity())
+        if (this.isPersistent)
         {
             yield return new DependencySecurityAttribute(this.SourceType);
         }

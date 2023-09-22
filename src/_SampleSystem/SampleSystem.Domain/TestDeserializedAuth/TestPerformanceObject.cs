@@ -1,10 +1,8 @@
 ﻿using Framework.DomainDriven.BLL;
-using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeView))]
 public class TestPerformanceObject : BaseDirectory
 {
     private Location location;

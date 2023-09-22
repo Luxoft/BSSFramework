@@ -1,7 +1,6 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.Security;
 using Framework.Transfering;
 
 namespace SampleSystem.Domain;
@@ -10,8 +9,6 @@ namespace SampleSystem.Domain;
 [BLLViewRole(Max = MainDTOType.FullDTO)]
 [BLLSaveRole]
 [UniqueGroup]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.Disabled))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.Disabled))]
 public class SqlParserTestObjContainer : AuditPersistentDomainObjectBase
 {
     private SqlParserTestObj includedObject;

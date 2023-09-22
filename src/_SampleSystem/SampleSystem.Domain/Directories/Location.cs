@@ -3,15 +3,12 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.Security;
 using Framework.SecuritySystem;
 
 namespace SampleSystem.Domain;
 
 [DomainType("CACA9DB4-9DA6-48AA-9FD3-A311016CB715")]
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.LocationView), nameof(SampleSystemSecurityOperation.HRDepartmentEdit))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.LocationEdit))]
 [UniqueGroup]
 public class Location :
         BaseDirectory,

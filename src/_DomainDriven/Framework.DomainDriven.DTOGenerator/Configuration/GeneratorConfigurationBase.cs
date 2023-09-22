@@ -115,9 +115,15 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return false;
     }
 
+
+    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetMainTypesWithSecondarySecurityOperations()
+    {
+        return this.DomainTypes.GetTypesWithSecondarySecurityOperations();
+    }
+
     protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetTypesWithSecondarySecurityOperations()
     {
-        var mainResult = this.DomainTypes.GetTypesWithSecondarySecurityOperations();
+        var mainResult = this.GetMainTypesWithSecondarySecurityOperations().ToDictionary();
 
         var dependencyRequest = from domainType in this.GetDomainTypes()
 

@@ -114,27 +114,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
     {
         if (this.RequiredSecurity)
         {
-            var securityOperationAttr = this.DomainType.GetDomainObjectAccessAttribute(this.IsEdit);
-
-            var altSecurityAttr = this.DomainType.HasAttribute<DependencySecurityAttribute>()
-                                  || this.DomainType.HasAttribute<CustomContextSecurityAttribute>();
-
-            if (securityOperationAttr != null && altSecurityAttr)
-            {
-                return securityOperationAttr.SecurityOperation;
-            }
-            else if (securityOperationAttr != null || altSecurityAttr)
-            {
-                // Тут конкретная операция атрибута securityOperationAttr игнорируется, так как она опосредованно будет применяться через BLLSecurityMode.View/Edit
-                return this.Configuration.Environment.BLLCore.GetBLLSecurityModeType(this.DomainType)
-                           .Maybe(securityModeType => securityModeType.GetField(this.IsEdit ? "Edit" : "View").GetValue(null) as Enum);
-            }
-            else
-            {
-                var mode = this.IsEdit ? "edit" : "view";
-
-                throw new Exception($"Required security for {this.DomainType} ({mode} mode)");
-            }
+            return this.IsEdit ? BLLSecurityMode.Edit : BLLSecurityMode.View;
         }
         else
         {

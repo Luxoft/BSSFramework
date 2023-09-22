@@ -2,15 +2,12 @@
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
-using Framework.Security;
 using Framework.SecuritySystem;
 
 namespace SampleSystem.Domain;
 
 [DomainType("77E78AEF-9512-46E0-A33D-AAE58DC7E18C")]
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
-[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.ManagementUnitView), nameof(SampleSystemSecurityOperation.EmployeeEdit))]
-[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.ManagementUnitEdit))]
 public class ManagementUnit :
         CommonUnitBase,
         IDenormalizedHierarchicalPersistentSource<ManagementUnitAncestorLink, ManagementUnitToAncestorChildView, ManagementUnit, Guid>,

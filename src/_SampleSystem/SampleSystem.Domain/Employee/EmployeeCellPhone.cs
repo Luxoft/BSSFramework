@@ -1,9 +1,7 @@
 ﻿using Framework.Persistent;
-using Framework.Security;
 
 namespace SampleSystem.Domain;
 
-[DependencySecurity(typeof(Employee), nameof(EmployeeCellPhone.Employee))]
 [DomainType("9D3EF98C-B857-40EF-A170-DB1285E4CE28")]
 public class EmployeeCellPhone : EmployeeCellPhoneBase
 {

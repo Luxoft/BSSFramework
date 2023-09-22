@@ -128,8 +128,6 @@ public partial class Employee :
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
-    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))]
-    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit))]
     public virtual IEnumerable<EmployeePersonalCellPhone> PersonalCellPhones
     {
         get { return this.personalCellPhones; }

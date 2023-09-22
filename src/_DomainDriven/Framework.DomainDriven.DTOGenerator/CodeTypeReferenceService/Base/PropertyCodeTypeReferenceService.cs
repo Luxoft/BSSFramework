@@ -30,7 +30,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration> : CodeTypeReferenc
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        return property.IsSecurity();
+        return this.Configuration.Environment.ExtendedMetadata.GetProperty(property).IsSecurity();
     }
 
     public virtual bool IsCollection(PropertyInfo property)

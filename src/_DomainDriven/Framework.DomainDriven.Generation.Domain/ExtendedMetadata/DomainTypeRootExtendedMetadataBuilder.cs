@@ -29,6 +29,7 @@ public class DomainTypeRootExtendedMetadataBuilder : IDomainTypeRootExtendedMeta
 
     public virtual ICustomAttributeProvider GetProperty(PropertyInfo property)
     {
+
         if (this.properties.Value.TryGetValue(property, out var propertyMetadata))
         {
             return new MixedCustomAttributeProvider(property, propertyMetadata);

@@ -24,7 +24,7 @@ public abstract class MaybePropertyAssigner<TConfiguration> : PropertyAssigner<T
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        return property.IsSecurity();
+        return this.Configuration.Environment.ExtendedMetadata.GetProperty(property).IsSecurity();
     }
 
 

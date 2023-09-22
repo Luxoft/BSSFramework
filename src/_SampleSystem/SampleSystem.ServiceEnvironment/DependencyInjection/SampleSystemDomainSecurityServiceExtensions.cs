@@ -8,6 +8,8 @@ using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
 
 using Framework.SecuritySystem.DependencyInjection;
+using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+
 using SampleSystem.Domain.EnversBug1676;
 using SampleSystem.Domain.ManualProjections;
 
@@ -163,24 +165,22 @@ public static class SampleSystemDomainSecurityServiceExtensions
 
             rb =>
 
-                rb.Add<EmployeeInformation>(b => b.SetView(SampleSystemSecurityOperation.Disabled))
-                  .Add<EmployeeRegistrationType>(b => b.SetView(SampleSystemSecurityOperation.Disabled))
-                  .Add<IMRequest>(b => b.SetView(SampleSystemSecurityOperation.Disabled))
-                  .Add<Information>(b => b.SetView(SampleSystemSecurityOperation.Disabled))
-                  .Add<Location1676>(b => b.SetView(SampleSystemSecurityOperation.Disabled))
-                  .Add<WorkingCalendar1676>(b => b.SetView(SampleSystemSecurityOperation.Disabled))
-                  .Add<Principal>(
-                      b => b.SetView(SampleSystemSecurityOperation.Disabled)
-                            .SetEdit(SampleSystemSecurityOperation.Disabled))
-                  .Add<SqlParserTestObj>(
-                      b => b.SetView(SampleSystemSecurityOperation.Disabled)
-                            .SetEdit(SampleSystemSecurityOperation.Disabled))
-                  .Add<SqlParserTestObjContainer>(
-                      b => b.SetView(SampleSystemSecurityOperation.Disabled)
-                            .SetEdit(SampleSystemSecurityOperation.Disabled))
-                  .Add<TestImmutableObj>(
-                      b => b.SetView(SampleSystemSecurityOperation.Disabled)
-                            .SetEdit(SampleSystemSecurityOperation.Disabled))
+                rb.AddDisabled<EmployeeInformation>()
+                  .AddDisabled<EmployeeRegistrationType>()
+                  .AddDisabled<IMRequest>()
+                  .AddDisabled<Information>()
+                  .AddDisabled<Location1676>()
+                  .AddDisabled<WorkingCalendar1676>()
+                  .AddDisabled<Principal>()
+                  .AddDisabled<SqlParserTestObj>()
+                  .AddDisabled<SqlParserTestObjContainer>()
+                  .AddDisabled<TestImmutableObj>()
+
+                  // LegacyDisabledForProjections
+                  .AddDisabled<TestObjForNested>()
+                  .AddDisabled<BusinessUnitEmployeeRole>()
+                  .AddDisabled<IMRequestDetail>()
+                  .AddDisabled<Project>()
             );
     }
 

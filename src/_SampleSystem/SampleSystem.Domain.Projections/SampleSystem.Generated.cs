@@ -1227,7 +1227,6 @@ namespace SampleSystem.Domain.Projections
     }
     
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.DomainObjectBase), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.DomainObjectBase))]
     public partial class UnpersitentContainer : SampleSystem.Domain.Projections.CustomUnpersitentContainerBase
     {
         

@@ -13,6 +13,8 @@ namespace Framework.Projection.Lambda;
 /// </summary>
 public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
 {
+    private readonly bool isPersistent;
+
     /// <summary>
     /// Конструктор
     /// </summary>
@@ -21,6 +23,7 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
     public ProjectionTypeAttributeSource(ProjectionLambdaEnvironment environment, IProjection projection)
             : base(environment, projection)
     {
+        this.isPersistent = environment.PersistentDomainObjectBaseType.IsAssignableFrom(this.SourceType);
     }
 
 
@@ -69,7 +72,10 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
     {
         if (this.Environment.UseDependencySecurity)
         {
-            yield return new DependencySecurityAttribute(this.SourceType);
+            if (this.isPersistent)
+            {
+                yield return new DependencySecurityAttribute(this.SourceType);
+            }
         }
         else
         {

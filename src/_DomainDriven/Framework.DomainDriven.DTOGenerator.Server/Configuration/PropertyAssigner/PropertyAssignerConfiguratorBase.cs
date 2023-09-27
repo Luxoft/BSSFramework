@@ -70,7 +70,7 @@ public abstract class PropertyAssignerConfiguratorBase<TConfiguration> : Generat
 
 
         public UpdateToDomainObjectPropertyAssigner(IPropertyAssigner<TConfiguration> innerAssigner, PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator)
-                : base(innerAssigner)
+                : base(innerAssigner, propertyAssignerConfigurator.Configuration)
         {
             this._propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
         }

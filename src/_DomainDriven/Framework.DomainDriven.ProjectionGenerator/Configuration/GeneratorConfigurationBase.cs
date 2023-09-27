@@ -86,7 +86,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         }
 
         {
-            foreach (var securityAttribute in domainType.GetSecurityAttributes(this.Environment.SecurityOperationType))
+            foreach (var securityAttribute in this.Environment.ExtendedMetadata.GetType(domainType).GetSecurityAttributes(this.Environment.SecurityOperationType))
             {
                 yield return securityAttribute;
             }
@@ -115,7 +115,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        foreach (var securityAttribute in property.GetSecurityAttributes(this.Environment.SecurityOperationType))
+        foreach (var securityAttribute in this.Environment.ExtendedMetadata.GetProperty(property).GetSecurityAttributes(this.Environment.SecurityOperationType))
         {
             yield return securityAttribute;
         }

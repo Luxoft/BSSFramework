@@ -130,7 +130,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     {
         return this.ProjectionValue
                    .Path
-                   .SelectMany(prop => prop.GetDomainObjectAccessAttributes())
+                   .SelectMany(prop => this.Environment.ExtendedMetadata.GetProperty(prop).GetDomainObjectAccessAttributes())
                    .Where(attr => !(attr is EditDomainObjectAttribute))
                    .SingleMaybe()
                    .GetValueOrDefault();

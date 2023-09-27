@@ -2,8 +2,6 @@
 using Framework.DomainDriven.ServiceModelGenerator;
 using Framework.Projection;
 
-using SampleSystem.Domain;
-
 namespace SampleSystem.CodeGenerate;
 
 /// <summary>

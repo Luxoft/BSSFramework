@@ -1,4 +1,6 @@
-﻿namespace Framework.Security;
+﻿using Framework.SecuritySystem;
+
+namespace Framework.Security;
 
 /// <summary>
 /// Атрибут для редактирования объекта (или его свойства)
@@ -11,6 +13,11 @@ public class EditDomainObjectAttribute : DomainObjectAccessAttribute
     /// </summary>
     public EditDomainObjectAttribute()
         : base(null)
+    {
+    }
+
+    public EditDomainObjectAttribute(SecurityOperation securityOperation)
+        : base(securityOperation)
     {
     }
 

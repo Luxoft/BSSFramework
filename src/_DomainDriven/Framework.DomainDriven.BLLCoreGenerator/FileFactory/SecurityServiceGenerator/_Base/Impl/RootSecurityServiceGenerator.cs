@@ -31,7 +31,7 @@ public abstract class RootSecurityServiceGenerator<TConfiguration> : GeneratorCo
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
-        return domainType.IsSecurity();
+        return this.Configuration.Environment.ExtendedMetadata.GetType(domainType).IsSecurity();
     }
 
     public IEnumerable<Type> GetSecurityServiceDomainTypes()

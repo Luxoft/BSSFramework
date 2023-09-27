@@ -13,7 +13,6 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
@@ -45,9 +44,7 @@ public static class SampleSystemFrameworkExtensions
 
                        .RegisterMainBLLContext()
                        .RegisterConfigurationTargetSystems()
-                       .RegisterContextEvaluator()
-
-                       .RegisterCustomReports();
+                       .RegisterContextEvaluator();
     }
 
     private static IServiceCollection RegisterMainBLLContext(this IServiceCollection services)
@@ -122,13 +119,6 @@ public static class SampleSystemFrameworkExtensions
     {
         services.AddSingleton<IContextEvaluator<ISampleSystemBLLContext>, ContextEvaluator<ISampleSystemBLLContext>>();
         services.AddScoped<IApiControllerBaseEvaluator<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>, ApiControllerBaseSingleCallEvaluator<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>>();
-
-        return services;
-    }
-
-    private static IServiceCollection RegisterCustomReports(this IServiceCollection services)
-    {
-        services.AddSingleton<ISystemMetadataTypeBuilder>(new SystemMetadataTypeBuilder<PersistentDomainObjectBase>(DTORole.All, typeof(PersistentDomainObjectBase).Assembly));
 
         return services;
     }

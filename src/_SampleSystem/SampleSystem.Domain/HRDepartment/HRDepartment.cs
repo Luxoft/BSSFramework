@@ -59,8 +59,6 @@ public partial class HRDepartment :
     }
 
     [Framework.Restriction.Required]
-    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.CompanyLegalEntityView))]
-    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.CompanyLegalEntityEdit))]
     public override CompanyLegalEntity CompanyLegalEntity
     {
         get { return base.CompanyLegalEntity; }

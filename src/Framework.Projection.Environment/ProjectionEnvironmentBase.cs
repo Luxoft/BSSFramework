@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using Framework.Core;
+using Framework.Projection.Environment;
 
 namespace Framework.Projection;
 
@@ -8,11 +9,14 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
 {
     private readonly Lazy<PropertyInfo> lazyIdentityProperty;
 
-    protected ProjectionEnvironmentBase()
+    protected ProjectionEnvironmentBase(IDomainTypeRootExtendedMetadata extendedMetadata)
     {
+        this.ExtendedMetadata = extendedMetadata;
+
         this.lazyIdentityProperty = LazyHelper.Create(this.GetIdentityProperty);
     }
 
+    public IDomainTypeRootExtendedMetadata ExtendedMetadata { get; }
 
     public abstract string Namespace { get; }
 

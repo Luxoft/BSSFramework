@@ -37,13 +37,14 @@ public class PropertyAssignerConfigurator<TConfiguration> : PropertyAssignerConf
 
         if (isEdit)
         {
-            return property.GetEditDomainObjectAttribute().FromMaybe(() => $"Edit operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
+            return this.Configuration.Environment.ExtendedMetadata.GetProperty(property).GetEditDomainObjectAttribute().FromMaybe(() => $"Edit operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
         }
         else
         {
-            return (property.GetViewDomainObjectAttribute() ?? propertyAssigner.DomainType.GetViewDomainObjectAttribute())
+            return (this.Configuration.Environment.ExtendedMetadata.GetProperty(property).GetViewDomainObjectAttribute()
+                 ?? this.Configuration.Environment.ExtendedMetadata.GetType(propertyAssigner.DomainType).GetViewDomainObjectAttribute())
 
-                    .FromMaybe(() => $"View operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
+                        .FromMaybe(() => $"View operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
         }
     }
 }

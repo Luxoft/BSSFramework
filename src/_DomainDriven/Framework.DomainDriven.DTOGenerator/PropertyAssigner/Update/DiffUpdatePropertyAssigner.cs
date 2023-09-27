@@ -51,6 +51,8 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
         if (currentSourcePropertyRef == null) throw new ArgumentNullException(nameof(currentSourcePropertyRef));
         if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
+        var isSecurity = this.Configuration.Environment.ExtendedMetadata.GetProperty(property).IsSecurity();
+
         if (this.Configuration.IsIdentityOrVersionProperty(property))
         {
             return this.MappingServiceRefExpr.ToMethodInvokeExpression(
@@ -81,7 +83,7 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
                 var elementTargetTypeRef = this.Configuration.GetCodeTypeReference(elementType, elementTargetFileType);
 
                 var extractMethod = this.MappingServiceRefExpr
-                                        .ToMethodReferenceExpression(property.IsSecurity() ? "ExtractSecurityUpdateDataL" : "ExtractUpdateDataL",
+                                        .ToMethodReferenceExpression(isSecurity ? "ExtractSecurityUpdateDataL" : "ExtractUpdateDataL",
                                                                      elementSourceTypeRef,
                                                                      elementIdentityTypeRef,
                                                                      elementTargetTypeRef);
@@ -127,7 +129,7 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
         }
         else
         {
-            if (property.IsSecurity())
+            if (isSecurity)
             {
                 return new CodeConditionStatement
                        {

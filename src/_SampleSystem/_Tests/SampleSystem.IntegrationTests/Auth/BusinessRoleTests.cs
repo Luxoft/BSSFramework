@@ -194,10 +194,16 @@ public class BusinessRoleTests : TestBase
     public void RemoveBusinessRoleWithOperations_CheckException()
     {
         // Arrange
-        var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
+        var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName("SecretariatNotification")).ToStrict();
+        role.BusinessRoleOperationLinks.Add(new BusinessRoleOperationLinkStrictDTO
+                                            {
+                                                Operation = new OperationIdentityDTO(SampleSystemSecurityOperation.EmployeeView.Id)
+                                            });
+
+        this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(role));
 
         // Act
-        Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemoveBusinessRole(businessRoleIdentity));
+        Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemoveBusinessRole(role.Identity));
 
         // Assert
         call.Should().Throw<Exception>().WithMessage("Removing business role \"SecretariatNotification\" must be empty");

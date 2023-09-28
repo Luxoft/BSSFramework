@@ -29,9 +29,9 @@ public class GetODataListByQueryStringWithOperationMethodGenerator<TConfiguratio
 
     protected sealed override CodeTypeReference ReturnType { get; }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.GetConvertToSecurityOperationCodeParameterExpression(1);
+        return this.GetConvertToSecurityOperationCodeParameterExpression(evaluateDataExpr, 1);
     }
 
     protected override string GetComment()

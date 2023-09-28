@@ -48,7 +48,7 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        var operationVarStatement = new CodeVariableDeclarationStatement(typeof(SecurityOperation), "operation", this.GetConvertToSecurityOperationCodeParameterExpression(1));
+        var operationVarStatement = new CodeVariableDeclarationStatement(typeof(SecurityOperation), "operation", this.GetConvertToSecurityOperationCodeParameterExpression(evaluateDataExpr, 1));
 
         yield return operationVarStatement;
 

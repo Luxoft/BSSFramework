@@ -30,6 +30,10 @@ public partial interface IAuthorizationBLLContext :
 
     IAvailablePermissionSource AvailablePermissionSource { get; }
 
+    IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
+
+    ISecurityOperationParser SecurityOperationParser { get; }
+
     IDateTimeService DateTimeService { get; }
 
     IAuthorizationExternalSource ExternalSource { get; }

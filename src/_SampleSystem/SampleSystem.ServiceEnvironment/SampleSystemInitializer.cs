@@ -1,10 +1,13 @@
 ﻿using Framework.Authorization;
 using Framework.Authorization.BLL;
+using Framework.Authorization.SecuritySystem.OperationInitializer;
 using Framework.Configuration;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.IAD;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 
@@ -50,13 +53,9 @@ public class SampleSystemInitializer
                                        DBSessionMode.Write,
                                        context =>
                                        {
-                                           context.Authorization.InitSecurityOperations(
-                                               new[]
-                                               {
-                                                   typeof(AuthorizationSecurityOperation),
-                                                   typeof(ConfigurationSecurityOperation),
-                                                   typeof(SampleSystemSecurityOperation)
-                                               });
+                                           context.ServiceProvider
+                                                  .GetRequiredService<IAuthorizationOperationInitializer>()
+                                                  .InitSecurityOperations(UnexpectedAuthOperationMode.RaiseError);
 
                                            context.Configuration.Logics.TargetSystem.RegisterBase();
                                            context.Configuration.Logics.TargetSystem.Register<SampleSystem.Domain.PersistentDomainObjectBase>(true, true);

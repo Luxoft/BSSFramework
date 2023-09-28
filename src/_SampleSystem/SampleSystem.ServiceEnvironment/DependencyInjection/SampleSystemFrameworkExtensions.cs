@@ -1,6 +1,7 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
 using Framework.Authorization.Generated.DTO;
+using Framework.Authorization.SecuritySystem;
 using Framework.Configuration;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
@@ -138,6 +139,9 @@ public static class SampleSystemFrameworkExtensions
 
         // For expand tree
         services.RegisterHierarchicalObjectExpander<PersistentDomainObjectBase>();
+
+        // For parsing auth operations
+        services.AddSingleton(new SecurityOperationTypeInfo(typeof(SampleSystemSecurityOperation)));
 
         return services;
     }

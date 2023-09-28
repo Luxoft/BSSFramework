@@ -1,4 +1,8 @@
-﻿using Framework.Authorization.SecuritySystem;
+﻿using Framework.Authorization;
+using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystem.DomainServices;
+using Framework.Authorization.SecuritySystem.OperationInitializer;
+using Framework.Configuration;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
@@ -82,6 +86,21 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Guid>>()
 
-                       .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>();
+                       .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>()
+
+
+                       .AddSingleton(new SecurityOperationTypeInfo(typeof(AuthorizationSecurityOperation)))
+                       .AddSingleton(new SecurityOperationTypeInfo(typeof(ConfigurationSecurityOperation)))
+
+                       .AddSingleton<ISecurityOperationParser<Guid>, SecurityOperationParser<Guid>>()
+                       .AddSingletonFrom<ISecurityOperationParser, ISecurityOperationParser<Guid>>()
+
+
+                       .AddScoped<IOperationDomainService, OperationDomainService>()
+                       .AddScoped<IBusinessRoleDomainService, BusinessRoleDomainService>()
+
+                       .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
+
+                       .AddScoped<IAuthorizationOperationInitializer, AuthorizationOperationInitializer>();
     }
 }

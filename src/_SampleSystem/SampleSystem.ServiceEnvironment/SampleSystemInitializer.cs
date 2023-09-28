@@ -55,7 +55,9 @@ public class SampleSystemInitializer
                                        {
                                            context.ServiceProvider
                                                   .GetRequiredService<IAuthorizationOperationInitializer>()
-                                                  .InitSecurityOperations(UnexpectedAuthOperationMode.RaiseError);
+                                                  .InitSecurityOperations(UnexpectedAuthOperationMode.RaiseError)
+                                                  .GetAwaiter()
+                                                  .GetResult();
 
                                            context.Configuration.Logics.TargetSystem.RegisterBase();
                                            context.Configuration.Logics.TargetSystem.Register<SampleSystem.Domain.PersistentDomainObjectBase>(true, true);

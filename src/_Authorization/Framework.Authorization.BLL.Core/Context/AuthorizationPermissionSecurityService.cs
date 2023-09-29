@@ -1,16 +1,18 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Rules.Builders;
 
 namespace Framework.Authorization.BLL
 {
-    public partial class AuthorizationPermissionSecurityService
+    public class AuthorizationPermissionSecurityService : ContextDomainSecurityService<Permission, Guid>
     {
         public AuthorizationPermissionSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver securityOperationResolver,
-            IAuthorizationSystem<Guid> authorizationSystem,
+            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
+            SecurityPath<Permission> securityPath,
             IAuthorizationBLLContext context)
-            : base( disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
+            : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
         }

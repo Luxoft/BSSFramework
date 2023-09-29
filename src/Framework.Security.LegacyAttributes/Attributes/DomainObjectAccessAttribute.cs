@@ -20,5 +20,5 @@ public class DomainObjectAccessAttribute : Attribute
     public SecurityOperation SecurityOperation { get; private set; }
 
 
-    public bool HasContext => this.SecurityOperation is ContextSecurityOperation;
+    public bool HasContext => this.SecurityOperation is SecurityOperation;
 }

@@ -15,7 +15,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
     public SecurityOperation EditSecurityOperation { get; private set; }
 
-    public SecurityPath<TDomainObject> SecurityPath { get; private set; }
+    public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Condition(_ => true);
 
     public object DependencySourcePath { get; private set; }
 
@@ -32,16 +32,12 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
                 new DomainObjectSecurityOperationInfo(typeof(TDomainObject), this.ViewSecurityOperation, this.EditSecurityOperation));
         }
 
-        if (this.SecurityPath != null)
-        {
-            services.AddSingleton(this.SecurityPath);
-        }
+        services.AddSingleton(this.SecurityPath);
 
         if (this.DependencySourcePath != null)
         {
             services.AddSingleton(this.DependencySourcePath.GetType(), this.DependencySourcePath);
         }
-
 
         var originalDomainServiceType = this.GetOriginalDomainServiceType();
         Type registerDomainServiceType;
@@ -75,13 +71,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
         {
             return this.DependencyServiceType;
         }
-        else if (this.SecurityPath != null)
-        {
-            return typeof(ContextDomainSecurityService<TDomainObject, TIdent>);
-        }
         else
         {
-            return typeof(NonContextDomainSecurityService<TDomainObject, TIdent>);
+            return typeof(ContextDomainSecurityService<TDomainObject, TIdent>);
         }
     }
 

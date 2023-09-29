@@ -428,17 +428,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                                 .ToMethodReferenceExpression("Create", genericType).ToMethodInvokeExpression();
     }
 
-    public virtual bool HasSecurityContext(Type domainType)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        var viewCode = domainType.GetViewSecurityOperation();
-        var editCode = domainType.GetEditSecurityOperation();
-
-        return viewCode.Maybe(v => v is ContextSecurityOperation)
-               || editCode.Maybe(v => v is ContextSecurityOperation);
-    }
-
     private IEnumerable<CodeTypeParameter> GetDomainTypeGenericSecurityParameters(Type domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));

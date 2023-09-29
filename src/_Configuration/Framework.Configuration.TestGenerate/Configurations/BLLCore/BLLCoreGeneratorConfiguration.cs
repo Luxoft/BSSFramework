@@ -10,6 +10,8 @@ public partial class BLLCoreGeneratorConfiguration : GeneratorConfigurationBase<
     {
     }
 
+    public override bool GenerateAuthServices { get; } = false;
+
     public override Type FilterModelType { get; } = typeof(DomainObjectFilterModel<>);
 
     public override Type CreateModelType { get; } = typeof(DomainObjectCreateModel<>);

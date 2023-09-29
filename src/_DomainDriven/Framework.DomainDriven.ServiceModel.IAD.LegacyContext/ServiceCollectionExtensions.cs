@@ -7,6 +7,7 @@ using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.NHibernate;
 using Framework.Exceptions;
@@ -40,6 +41,9 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IPersistentInfoService, PersistentInfoService>();
 
+        services.AddScoped(typeof(IRootSecurityService<>), typeof(RootSecurityService<,>));
+        services.AddScoped(typeof(ITrackingService<>), typeof(TrackingService<>));
+
         services.RegisterAuthorizationBLL();
         services.RegisterConfigurationBLL();
 
@@ -60,7 +64,7 @@ public static class ServiceCollectionExtensions
                .AddScoped<IAuthorizationValidator, AuthorizationValidator>()
 
                .AddSingleton(new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData))
-               .AddScoped<IAuthorizationSecurityService, AuthorizationSecurityService>()
+
                .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
                //.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>()
                .AddScoped<INotificationBasePermissionFilterSource, LegacyNotificationPrincipalExtractor>()
@@ -68,10 +72,6 @@ public static class ServiceCollectionExtensions
 
                .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()
 
-               .AddScoped<ITrackingService<Framework.Authorization.Domain.PersistentDomainObjectBase>, TrackingService<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
-
-               .Self(AuthorizationSecurityOperationHelper.RegisterDomainObjectSecurityOperations)
-               .Self(AuthorizationSecurityServiceBase.Register)
                .Self(AuthorizationBLLFactoryContainer.RegisterBLLFactory);
     }
 
@@ -84,7 +84,6 @@ public static class ServiceCollectionExtensions
                .AddScoped<IConfigurationValidator, ConfigurationValidator>()
 
                .AddSingleton(new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData))
-               .AddScoped<IConfigurationSecurityService, ConfigurationSecurityService>()
                .AddScoped<IConfigurationBLLFactoryContainer, ConfigurationBLLFactoryContainer>()
 
                .AddScopedFrom<ICurrentRevisionService, IDBSession>()
@@ -98,11 +97,6 @@ public static class ServiceCollectionExtensions
                .AddScoped<ITrackingService<Framework.Configuration.Domain.PersistentDomainObjectBase>, TrackingService<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 
                .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
-
-               .AddScopedFrom<IConfigurationSecurityPathContainer, IConfigurationSecurityService>()
-
-               .Self(ConfigurationSecurityOperationHelper.RegisterDomainObjectSecurityOperations)
-               .Self(ConfigurationSecurityServiceBase.Register)
                .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);
     }
 

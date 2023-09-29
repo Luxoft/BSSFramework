@@ -19,7 +19,7 @@ public class SecurityOperationParser<TIdent> : ISecurityOperationParser<TIdent>
 
         this.securityOperationByNameDict = this.Operations.ToDictionary(v => v.Name);
 
-        this.securityOperationByIdDict = this.Operations.ToDictionary(v => ((ISecurityOperation<TIdent>)v).Id);
+        this.securityOperationByIdDict = this.Operations.ToDictionary(v => ((SecurityOperation<TIdent>)v).Id);
     }
 
     public IReadOnlyList<SecurityOperation> Operations { get; }

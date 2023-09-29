@@ -2,13 +2,12 @@
 
 using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
-using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.Tracking;
+
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
@@ -44,7 +43,7 @@ public partial class AuthorizationBLLContext
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             IDateTimeService dateTimeService,
             IConfigurationBLLContext configuration,
-            IAuthorizationSecurityService securityService,
+            IRootSecurityService<PersistentDomainObjectBase> securityService,
             IAuthorizationBLLFactoryContainer logics,
             IAuthorizationExternalSource externalSource,
             ISecurityTypeResolverContainer securityTypeResolverContainer,
@@ -117,7 +116,7 @@ public partial class AuthorizationBLLContext
 
     public ISecurityOperationParser SecurityOperationParser { get; }
 
-    public IAuthorizationSecurityService SecurityService { get; }
+    public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
 
     public Settings Settings => this.lazySettings.Value;
 

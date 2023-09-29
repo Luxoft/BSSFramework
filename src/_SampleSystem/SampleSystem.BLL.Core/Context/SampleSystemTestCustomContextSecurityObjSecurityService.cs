@@ -16,7 +16,7 @@ public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDo
     {
     }
 
-    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(ContextSecurityOperation securityOperation)
+    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityOperation securityOperation)
     {
         return new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();
     }

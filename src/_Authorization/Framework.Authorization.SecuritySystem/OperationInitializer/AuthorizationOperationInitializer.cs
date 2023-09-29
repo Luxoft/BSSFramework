@@ -44,7 +44,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
         await this.InitAdminSecurityOperations(fullOperations, cancellationToken);
     }
 
-    private async Task<IReadOnlyDictionary<ISecurityOperation<Guid>, Operation>> InitMainSecurityOperations(UnexpectedAuthOperationMode mode, CancellationToken cancellationToken)
+    private async Task<IReadOnlyDictionary<SecurityOperation<Guid>, Operation>> InitMainSecurityOperations(UnexpectedAuthOperationMode mode, CancellationToken cancellationToken)
     {
         var operationRepository = this.operationRepositoryFactory.Create();
 
@@ -53,7 +53,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
         var mergeResult = dbOperations.GetMergeResult(
             this.securityOperationParser
                 .Operations
-                .Cast<ISecurityOperation<Guid>>(),
+                .Cast<SecurityOperation<Guid>>(),
             operation => operation.Id,
             operation => operation.Id);
 
@@ -110,7 +110,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
 
         foreach (var pair in result)
         {
-            var approveSecurityOperation = pair.Key.ApproveOperation as ISecurityOperation<Guid>;
+            var approveSecurityOperation = pair.Key.ApproveOperation as SecurityOperation<Guid>;
 
             if (pair.Value.ApproveOperation?.Id != approveSecurityOperation?.Id)
             {
@@ -118,11 +118,10 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
             }
         }
 
-
         return result;
     }
 
-    private async Task InitAdminSecurityOperations(IReadOnlyDictionary<ISecurityOperation<Guid>, Operation> fullOperations, CancellationToken cancellationToken)
+    private async Task InitAdminSecurityOperations(IReadOnlyDictionary<SecurityOperation<Guid>, Operation> fullOperations, CancellationToken cancellationToken)
     {
         var businessRoleRepository = this.businessRoleRepositoryFactory.Create();
 

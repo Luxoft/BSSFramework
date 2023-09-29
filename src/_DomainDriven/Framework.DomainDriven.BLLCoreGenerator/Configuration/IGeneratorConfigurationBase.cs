@@ -111,8 +111,6 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     IEnumerable<PropertyInfo> GetMappingProperties(Type domainType, MainDTOType fileType);
 
-    bool HasSecurityContext(Type domainType);
-
     CodeMethodReferenceExpression GetGetSecurityProviderMethodReferenceExpression(CodeExpression contextExpression, Type domainType);
 
     /// <summary>

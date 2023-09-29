@@ -39,7 +39,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
     {
         var viewOperation = this.SecurityOperationResolver.TryGetSecurityOperation<TDomainObject>(BLLSecurityMode.View);
 
-        if (viewOperation is ContextSecurityOperation contextOperation)
+        if (viewOperation is SecurityOperation contextOperation)
         {
             return contextOperation.ExpandType.HasFlag(HierarchicalExpandType.Parents);
         }

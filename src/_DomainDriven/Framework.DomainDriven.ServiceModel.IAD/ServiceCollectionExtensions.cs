@@ -3,6 +3,7 @@ using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.DomainServices;
 using Framework.Authorization.SecuritySystem.OperationInitializer;
 using Framework.Configuration;
+using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
@@ -29,6 +30,9 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
 
         services.RegisterAuthorizationSystem();
+
+        services.RegisterAuthorizationSecurity();
+        services.RegisterConfigurationSecurity();
 
         services.AddSingleton<IDateTimeService>(DateTimeService.Default);
 
@@ -88,13 +92,8 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>()
 
-
-                       .AddSingleton(new SecurityOperationTypeInfo(typeof(AuthorizationSecurityOperation)))
-                       .AddSingleton(new SecurityOperationTypeInfo(typeof(ConfigurationSecurityOperation)))
-
                        .AddSingleton<ISecurityOperationParser<Guid>, SecurityOperationParser<Guid>>()
                        .AddSingletonFrom<ISecurityOperationParser, ISecurityOperationParser<Guid>>()
-
 
                        .AddScoped<IOperationDomainService, OperationDomainService>()
                        .AddScoped<IBusinessRoleDomainService, BusinessRoleDomainService>()
@@ -102,5 +101,16 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
 
                        .AddScoped<IAuthorizationOperationInitializer, AuthorizationOperationInitializer>();
+    }
+
+
+    public static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)
+    {
+        return services.AddSingleton(new SecurityOperationTypeInfo(typeof(AuthorizationSecurityOperation)));
+    }
+
+    public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
+    {
+        return services.AddSingleton(new SecurityOperationTypeInfo(typeof(ConfigurationSecurityOperation)));
     }
 }

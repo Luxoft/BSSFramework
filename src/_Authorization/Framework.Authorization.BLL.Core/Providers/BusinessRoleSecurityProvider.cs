@@ -45,7 +45,6 @@ namespace Framework.Authorization.BLL
             get { return LambdaCompileMode.All; }
         }
 
-
         public override Expression<Func<TDomainObject, bool>> SecurityFilter
         {
             get { return this.lazySecurityFilter.Value; }

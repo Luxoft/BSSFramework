@@ -7,6 +7,7 @@ using Framework.Core.Serialization;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
+using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
@@ -39,7 +40,7 @@ public partial class ConfigurationBLLContext
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             IMessageSender<MessageTemplateNotification> subscriptionSender,
-            IConfigurationSecurityService securityService,
+            IRootSecurityService<PersistentDomainObjectBase> securityService,
             IConfigurationBLLFactoryContainer logics,
             IAuthorizationBLLContext authorization,
             IBLLSimpleQueryBase<IEmployee> employeeSource,
@@ -88,7 +89,7 @@ public partial class ConfigurationBLLContext
 
     public IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 
-    public IConfigurationSecurityService SecurityService { get; }
+    public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
 
     public ITypeResolver<string> TypeResolver { get; }
 

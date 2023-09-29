@@ -37,9 +37,9 @@ public class GetListByOperationMethodGenerator<TConfiguration> : ViewCollectionM
                      };
     }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.GetConvertToSecurityOperationCodeParameterExpression(0);
+        return this.GetConvertToSecurityOperationCodeParameterExpression(evaluateDataExpr, 0);
     }
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)

@@ -28,13 +28,13 @@ public abstract class GetByODataQueryWithFilterMethodGeneratorBase<TConfiguratio
 
     protected abstract CodeExpression GetSelectOperationExpression(CodeExpression evaluateDataExpr);
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this.FilterType.GetViewDomainObjectAttribute();
 
         if (null == modelSecurityAttribute)
         {
-            return base.GetBLLSecurityParameter();
+            return base.GetBLLSecurityParameter(evaluateDataExpr);
         }
 
         return modelSecurityAttribute.SecurityOperation;

@@ -57,13 +57,13 @@ public class GetExtendedModelMethodGenerator<TConfiguration> : ModelMethodGenera
                                .ToMethodReturnStatement();
     }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this.ModelType.GetViewDomainObjectAttribute();
 
         if (null == modelSecurityAttribute)
         {
-            return base.GetBLLSecurityParameter();
+            return base.GetBLLSecurityParameter(evaluateDataExpr);
         }
 
         return modelSecurityAttribute.SecurityOperation;

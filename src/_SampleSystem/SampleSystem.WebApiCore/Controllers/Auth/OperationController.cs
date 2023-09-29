@@ -8,6 +8,6 @@ public partial class OperationController
     [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetSecurityOperations))]
     public IEnumerable<string> GetSecurityOperations()
     {
-        return this.EvaluateC(DBSessionMode.Read, context => context.Logics.Operation.GetAvailableOperations().ToList(op => op.Name));
+        return this.EvaluateC(DBSessionMode.Read, context => context.AvailableSecurityOperationSource.GetAvailableSecurityOperation().GetAwaiter().GetResult().ToList(op => op.Name));
     }
 }

@@ -18,9 +18,9 @@ public abstract class FileStoreMethodGeneratorBase<TConfiguration> : MethodGener
     protected override bool IsEdit { get; } = false;
 
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.Configuration.TryGetSecurityAttribute(this.DomainType, this.IsEdit) ?? base.GetBLLSecurityParameter();
+        return this.Configuration.TryGetSecurityAttribute(this.DomainType, this.IsEdit) ?? base.GetBLLSecurityParameter(evaluateDataExpr);
     }
 
     protected IEnumerable<CodeStatement> GetCheckAccessMethods(

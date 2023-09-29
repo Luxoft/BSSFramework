@@ -5,6 +5,7 @@ using System.ServiceModel;
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Security;
 using Framework.SecuritySystem;
@@ -110,7 +111,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected abstract IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr);
 
-    protected virtual object GetBLLSecurityParameter()
+    protected virtual object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         if (this.RequiredSecurity)
         {
@@ -184,7 +185,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         var bllCreateExpr = this.Configuration.Environment.BLLCore.Logics.GetCreateSecurityBLLExpr(
          evaluateDataExpr.GetContext().ToPropertyReference((IBLLFactoryContainerContext<object> context) => context.Logics),
          this.DomainType,
-         this.GetBLLSecurityParameter());
+         this.GetBLLSecurityParameter(evaluateDataExpr));
 
         return bllParameterExpr.Type.ToVariableDeclarationStatement(bllParameterExpr.Name, bllCreateExpr);
     }
@@ -198,10 +199,16 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         return bllRef.ToVariableDeclarationStatement(varName, bllCreateExpr);
     }
 
-    protected CodeExpression GetConvertToSecurityOperationCodeParameterExpression(int parameterIndex)
+    protected CodeExpression GetConvertToSecurityOperationCodeParameterExpression(CodeExpression evaluateDataExpr, int parameterIndex)
     {
-        return typeof(SecurityOperationHelper).ToTypeReferenceExpression()
-                                         .ToMethodReferenceExpression(nameof(SecurityOperationHelper.Parse))
-                                         .ToMethodInvokeExpression(this.Configuration.Environment.SecurityOperationType.ToTypeOfExpression(), this.Parameters[parameterIndex].ToVariableReferenceExpression());
+        return evaluateDataExpr.GetContext()
+                               .ToPropertyReference((IAuthorizationBLLContextContainer<object> context) => context.Authorization)
+                               .ToPropertyReference("SecurityOperationParser")
+                               .ToMethodInvokeExpression(
+                                   "Parse",
+                                   this.Parameters[parameterIndex]
+                                       .Pipe(v => v.Type.BaseType == nameof(String)
+                                                      ? (CodeExpression)v.ToVariableReferenceExpression()
+                                                      : v.ToVariableReferenceExpression().ToMethodInvokeExpression("ToString")));
     }
 }

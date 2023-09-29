@@ -30,9 +30,9 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
 
     protected sealed override CodeTypeReference ReturnType { get; }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.GetConvertToSecurityOperationCodeParameterExpression(0);
+        return this.GetConvertToSecurityOperationCodeParameterExpression(evaluateDataExpr, 0);
     }
 
     protected override string GetComment()

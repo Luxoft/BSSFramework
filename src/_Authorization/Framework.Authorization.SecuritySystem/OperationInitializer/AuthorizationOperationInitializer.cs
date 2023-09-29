@@ -106,7 +106,20 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
             }
         }
 
-        return mergeResult.CombineItems.ToDictionary(pair => pair.Item2, pair => pair.Item1).Concat(addingOperations).ToDictionary();
+        var result = mergeResult.CombineItems.ToDictionary(pair => pair.Item2, pair => pair.Item1).Concat(addingOperations).ToDictionary();
+
+        foreach (var pair in result)
+        {
+            var approveSecurityOperation = pair.Key.ApproveOperation as ISecurityOperation<Guid>;
+
+            if (pair.Value.ApproveOperation?.Id != approveSecurityOperation?.Id)
+            {
+                pair.Value.ApproveOperation = approveSecurityOperation.Maybe(v => result[v]);
+            }
+        }
+
+
+        return result;
     }
 
     private async Task InitAdminSecurityOperations(IReadOnlyDictionary<ISecurityOperation<Guid>, Operation> fullOperations, CancellationToken cancellationToken)

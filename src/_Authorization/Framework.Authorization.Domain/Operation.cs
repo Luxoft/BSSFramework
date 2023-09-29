@@ -50,10 +50,11 @@ public class Operation : BaseDirectory, IParentSource<Operation>
     /// <summary>
     /// Секьюрная операция, подтверждение по которой нужно получить от уполномоченных лиц
     /// </summary>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Operation ApproveOperation
     {
         get { return this.approveOperation; }
-        internal protected set { this.approveOperation = value; }
+        set { this.approveOperation = value; }
     }
 
     /// <summary>

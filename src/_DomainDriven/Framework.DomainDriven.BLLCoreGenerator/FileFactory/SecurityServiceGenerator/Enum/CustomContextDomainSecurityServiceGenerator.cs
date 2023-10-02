@@ -45,7 +45,6 @@ namespace Framework.DomainDriven.BLLCoreGenerator
         {
             yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource", null);
             yield return (typeof(ISecurityOperationResolver).ToTypeReference(), "securityOperationResolver", null);
-            yield return (typeof(IAuthorizationSystem<>).ToTypeReference(this.Configuration.Environment.GetIdentityType()), "authorizationSystem", null);
             yield return (typeof(ISecurityExpressionBuilderFactory).ToTypeReference(), "securityExpressionBuilderFactory", null);
         }
     }

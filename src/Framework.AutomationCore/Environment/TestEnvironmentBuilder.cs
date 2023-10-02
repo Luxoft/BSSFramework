@@ -1,6 +1,9 @@
 ﻿using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
+
+using Framework.DependencyInjection;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -109,7 +112,9 @@ public class TestEnvironmentBuilder
             serviceProviderPool.Release);
 
     protected virtual IServiceProvider BuildServiceProvider(IServiceCollection serviceCollection) =>
-        serviceCollection.BuildServiceProvider(
+        serviceCollection
+            .ValidateDuplicateDeclaration()
+            .BuildServiceProvider(
             new ServiceProviderOptions
             {
                 ValidateOnBuild = true,

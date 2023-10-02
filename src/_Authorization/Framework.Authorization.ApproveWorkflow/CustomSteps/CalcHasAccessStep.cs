@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.BLL;
+using Framework.Authorization.Environment;
 using Framework.DomainDriven;
 
 using WorkflowCore.Interface;
@@ -33,7 +34,7 @@ public class CalcHasAccessStep : WaitFor
         {
             var operation = ctx.Logics.Operation.GetById(workflowObject.OperationId, true);
 
-            return ctx.GetOperationSecurityProvider().HasAccess(operation);
+            return new OperationSecurityProvider(ctx.AvailablePermissionSource).HasAccess(operation);
         });
     }
 }

@@ -14,17 +14,17 @@ public static class SampleSystemSecurityOperation
 
     #region Employee
 
-    public static SecurityOperation<Guid> EmployeeView { get; } = new(nameof(EmployeeView), HierarchicalExpandType.Children, new Guid("{C73DD1F6-74D5-4445-A265-2E96832A7F89}"));
+    public static SecurityOperation<Guid> EmployeeView { get; } = new(nameof(EmployeeView), new Guid("{C73DD1F6-74D5-4445-A265-2E96832A7F89}"));
 
-    public static SecurityOperation<Guid> EmployeeEdit { get; } = new(nameof(EmployeeEdit), HierarchicalExpandType.Children, new Guid("{45E8E5B8-620C-42C6-BAF5-20AB1CF27B8E}"));
+    public static SecurityOperation<Guid> EmployeeEdit { get; } = new(nameof(EmployeeEdit), new Guid("{45E8E5B8-620C-42C6-BAF5-20AB1CF27B8E}"));
 
     #endregion
 
     #region BusinessUnit
 
-    public static SecurityOperation<Guid> BusinessUnitView { get; } = new(nameof(BusinessUnitView), HierarchicalExpandType.All, new Guid("{B79E7132-845E-4BBF-8C3A-8FA3F6B31CF6}"));
+    public static SecurityOperation<Guid> BusinessUnitView { get; } = new(nameof(BusinessUnitView), new Guid("{B79E7132-845E-4BBF-8C3A-8FA3F6B31CF6}")) { ExpandType = HierarchicalExpandType.All };
 
-    public static SecurityOperation<Guid> BusinessUnitEdit { get; } = new(nameof(BusinessUnitEdit), HierarchicalExpandType.Children, new Guid("{10000000-71C4-47CD-8683-000000000003}"));
+    public static SecurityOperation<Guid> BusinessUnitEdit { get; } = new(nameof(BusinessUnitEdit), new Guid("{10000000-71C4-47CD-8683-000000000003}"));
 
     #endregion
 
@@ -40,47 +40,47 @@ public static class SampleSystemSecurityOperation
 
     #region BusinessUnitManagerCommissionLink
 
-    public static SecurityOperation<Guid> BusinessUnitManagerCommissionLinkView { get; } = new(nameof(BusinessUnitManagerCommissionLinkView), HierarchicalExpandType.Children, new Guid("1BD2AC62-9660-4A7D-AF5A-6DAEFB89E401"));
+    public static SecurityOperation<Guid> BusinessUnitManagerCommissionLinkView { get; } = new(nameof(BusinessUnitManagerCommissionLinkView), new Guid("1BD2AC62-9660-4A7D-AF5A-6DAEFB89E401"));
 
-    public static SecurityOperation<Guid> BusinessUnitManagerCommissionLinkEdit { get; } = new(nameof(BusinessUnitManagerCommissionLinkEdit), HierarchicalExpandType.Children, new Guid("95CBDBE6-B2DC-40BD-B7C0-F47E31B2D611"));
+    public static SecurityOperation<Guid> BusinessUnitManagerCommissionLinkEdit { get; } = new(nameof(BusinessUnitManagerCommissionLinkEdit), new Guid("95CBDBE6-B2DC-40BD-B7C0-F47E31B2D611"));
 
     #endregion
 
     #region BusinessUnitHrDepartment
 
-    public static SecurityOperation<Guid> BusinessUnitHrDepartmentView { get; } = new(nameof(BusinessUnitHrDepartmentView), HierarchicalExpandType.Children, new Guid("3DA438A1-6248-4290-BB90-97163E0106E0"));
+    public static SecurityOperation<Guid> BusinessUnitHrDepartmentView { get; } = new(nameof(BusinessUnitHrDepartmentView), new Guid("3DA438A1-6248-4290-BB90-97163E0106E0"));
 
-    public static SecurityOperation<Guid> BusinessUnitHrDepartmentEdit { get; } = new(nameof(BusinessUnitHrDepartmentEdit), HierarchicalExpandType.Children, new Guid("0A943A13-8343-4366-9E98-C5CDF743E329"));
+    public static SecurityOperation<Guid> BusinessUnitHrDepartmentEdit { get; } = new(nameof(BusinessUnitHrDepartmentEdit), new Guid("0A943A13-8343-4366-9E98-C5CDF743E329"));
 
     #endregion
 
     #region Management Unit
 
-    public static SecurityOperation<Guid> ManagementUnitView { get; } = new(nameof(ManagementUnitView), HierarchicalExpandType.All, new Guid("{7C64E656-71C4-47CD-8683-B1680A954531}"));
+    public static SecurityOperation<Guid> ManagementUnitView { get; } = new(nameof(ManagementUnitView), new Guid("{7C64E656-71C4-47CD-8683-B1680A954531}")) { ExpandType = HierarchicalExpandType.All };
 
-    public static SecurityOperation<Guid> ManagementUnitEdit { get; } = new(nameof(ManagementUnitEdit), HierarchicalExpandType.Children, new Guid("{7C64E656-71C4-47CD-8683-B1680A954532}"));
+    public static SecurityOperation<Guid> ManagementUnitEdit { get; } = new(nameof(ManagementUnitEdit), new Guid("{7C64E656-71C4-47CD-8683-B1680A954532}"));
 
-    public static SecurityOperation<Guid> ManagementUnitChangeView { get; } = new(nameof(ManagementUnitChangeView), HierarchicalExpandType.Children, new Guid("{7C64E656-71C4-47CD-8683-B1680A954534}"));
+    public static SecurityOperation<Guid> ManagementUnitChangeView { get; } = new(nameof(ManagementUnitChangeView), new Guid("{7C64E656-71C4-47CD-8683-B1680A954534}"));
 
-    public static SecurityOperation<Guid> ManagementUnitChangeEdit { get; } = new(nameof(ManagementUnitChangeEdit), HierarchicalExpandType.Children, new Guid("{7C64E656-71C4-47CD-8683-B1680A954533}"));
+    public static SecurityOperation<Guid> ManagementUnitChangeEdit { get; } = new(nameof(ManagementUnitChangeEdit), new Guid("{7C64E656-71C4-47CD-8683-B1680A954533}"));
 
-    public static SecurityOperation<Guid> CreateManagementUnitStart { get; } = new(nameof(CreateManagementUnitStart), HierarchicalExpandType.Children, new Guid("{7C64E656-71C4-47CD-8683-B1680A954535}"));
+    public static SecurityOperation<Guid> CreateManagementUnitStart { get; } = new(nameof(CreateManagementUnitStart), new Guid("{7C64E656-71C4-47CD-8683-B1680A954535}"));
 
     #endregion
 
     #region ManagementUnitAndBusinessUnitLink
 
-    public static SecurityOperation<Guid> ManagementUnitAndBusinessUnitLinkView { get; } = new(nameof(ManagementUnitAndBusinessUnitLinkView), HierarchicalExpandType.Children, new Guid("00000000-71C4-47CD-8683-000000000020"));
+    public static SecurityOperation<Guid> ManagementUnitAndBusinessUnitLinkView { get; } = new(nameof(ManagementUnitAndBusinessUnitLinkView), new Guid("00000000-71C4-47CD-8683-000000000020"));
 
-    public static SecurityOperation<Guid> ManagementUnitAndBusinessUnitLinkEdit { get; } = new(nameof(ManagementUnitAndBusinessUnitLinkEdit), HierarchicalExpandType.Children, new Guid("00000000-71C4-47CD-8683-000000000021"));
+    public static SecurityOperation<Guid> ManagementUnitAndBusinessUnitLinkEdit { get; } = new(nameof(ManagementUnitAndBusinessUnitLinkEdit), new Guid("00000000-71C4-47CD-8683-000000000021"));
 
     #endregion
 
     #region ManagementUnitAndHRDepartmentLink
 
-    public static SecurityOperation<Guid> ManagementUnitAndHRDepartmentLinkView { get; } = new(nameof(ManagementUnitAndHRDepartmentLinkView), HierarchicalExpandType.Children, new Guid("00000000-71C4-47CD-8683-000000000022"));
+    public static SecurityOperation<Guid> ManagementUnitAndHRDepartmentLinkView { get; } = new(nameof(ManagementUnitAndHRDepartmentLinkView), new Guid("00000000-71C4-47CD-8683-000000000022"));
 
-    public static SecurityOperation<Guid> ManagementUnitAndHRDepartmentLinkEdit { get; } = new(nameof(ManagementUnitAndHRDepartmentLinkEdit), HierarchicalExpandType.Children, new Guid("00000000-71C4-47CD-8683-000000000023"));
+    public static SecurityOperation<Guid> ManagementUnitAndHRDepartmentLinkEdit { get; } = new(nameof(ManagementUnitAndHRDepartmentLinkEdit), new Guid("00000000-71C4-47CD-8683-000000000023"));
 
     #endregion
 
@@ -140,9 +140,9 @@ public static class SampleSystemSecurityOperation
 
     #region EmployeePosition
 
-    public static SecurityOperation<Guid> EmployeePositionView { get; } = new(nameof(EmployeePositionView), HierarchicalExpandType.Children, new Guid("C6FC2405-403C-4885-A2FD-1E53796D5FC3"));
+    public static SecurityOperation<Guid> EmployeePositionView { get; } = new(nameof(EmployeePositionView), new Guid("C6FC2405-403C-4885-A2FD-1E53796D5FC3"));
 
-    public static SecurityOperation<Guid> EmployeePositionEdit { get; } = new(nameof(EmployeePositionEdit), HierarchicalExpandType.Children, new Guid("0AD8A590-DC02-4EE3-BC55-3B9E0655EB5C"));
+    public static SecurityOperation<Guid> EmployeePositionEdit { get; } = new(nameof(EmployeePositionEdit), new Guid("0AD8A590-DC02-4EE3-BC55-3B9E0655EB5C"));
 
     #endregion
 

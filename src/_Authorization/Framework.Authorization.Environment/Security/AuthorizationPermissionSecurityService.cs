@@ -1,34 +1,37 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.SecuritySystem;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.Environment
 {
     public class AuthorizationPermissionSecurityService : ContextDomainSecurityService<Permission, Guid>
     {
+        private readonly IRunAsManager runAsManager;
+
         public AuthorizationPermissionSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver securityOperationResolver,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<Permission> securityPath,
-            IAuthorizationBLLContext context)
+            IRunAsManager runAsManager)
             : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
         {
-            this.Context = context ?? throw new ArgumentNullException(nameof(context));
+            this.runAsManager = runAsManager;
         }
-
-        public IAuthorizationBLLContext Context { get; }
 
         protected override ISecurityProvider<Permission> CreateSecurityProvider(BLLSecurityMode securityMode)
         {
             var baseProvider = base.CreateSecurityProvider(securityMode);
 
-            var withDelegatedFrom = baseProvider.Or(this.Context.GetPrincipalSecurityProvider<Permission>(permission => permission.DelegatedFrom.Principal));
+            var withDelegatedFrom = baseProvider.Or(
+                new PrincipalSecurityProvider<Permission>(this.runAsManager, permission => permission.DelegatedFrom.Principal));
 
             switch (securityMode)
             {
                 case BLLSecurityMode.View:
-                    return withDelegatedFrom.Or(this.Context.GetPrincipalSecurityProvider<Permission>(permission => permission.Principal));
+                    return withDelegatedFrom.Or(
+                        new PrincipalSecurityProvider<Permission>(this.runAsManager, permission => permission.Principal));
 
                 case BLLSecurityMode.Edit:
                     return withDelegatedFrom;

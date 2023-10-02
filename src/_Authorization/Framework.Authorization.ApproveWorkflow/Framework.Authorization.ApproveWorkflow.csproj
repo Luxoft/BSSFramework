@@ -18,6 +18,8 @@
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
 
     <ProjectReference Include="..\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
+
+    <ProjectReference Include="..\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj" />
   </ItemGroup>
 
 </Project>

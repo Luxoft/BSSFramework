@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check SystemConstant access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckSystemConstantAccess")]
-        public virtual void CheckSystemConstantAccess(CheckSystemConstantAccessAutoRequest checkSystemConstantAccessAutoRequest)
-        {
-            string securityOperationName = checkSystemConstantAccessAutoRequest.securityOperationName;
-            Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent = checkSystemConstantAccessAutoRequest.systemConstantIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckSystemConstantAccessInternal(systemConstantIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckSystemConstantAccessInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstant;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.SystemConstant>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get SystemConstant (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -313,26 +293,6 @@
         }
         
         /// <summary>
-        /// Check access for SystemConstant
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasSystemConstantAccess")]
-        public virtual bool HasSystemConstantAccess(HasSystemConstantAccessAutoRequest hasSystemConstantAccessAutoRequest)
-        {
-            string securityOperationName = hasSystemConstantAccessAutoRequest.securityOperationName;
-            Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent = hasSystemConstantAccessAutoRequest.systemConstantIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasSystemConstantAccessInternal(systemConstantIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasSystemConstantAccessInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstant;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.SystemConstant>(operation).HasAccess(domainObject);
-        }
-        
-        /// <summary>
         /// Save SystemConstants
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -355,33 +315,5 @@
             bll.Save(domainObject);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
         }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckSystemConstantAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasSystemConstantAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

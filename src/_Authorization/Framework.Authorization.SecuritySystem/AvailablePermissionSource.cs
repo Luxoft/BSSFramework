@@ -27,11 +27,11 @@ public class AvailablePermissionSource : IAvailablePermissionSource
         this.userAuthenticationService = userAuthenticationService;
     }
 
-    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, Guid securityOperationId = default)
+    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, Guid securityOperationId = default, bool applyCurrentUser = true)
     {
         var filter = new AvailablePermissionFilter(this.dateTimeService.Today)
                      {
-                         PrincipalName = withRunAs ? this.runAsManager.ActualPrincipal.Name : this.userAuthenticationService.GetUserName(),
+                         PrincipalName = applyCurrentUser ? withRunAs ? this.runAsManager.ActualPrincipal.Name : this.userAuthenticationService.GetUserName() : null,
                          SecurityOperationId = securityOperationId
                      };
 

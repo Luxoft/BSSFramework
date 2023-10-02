@@ -12,7 +12,7 @@ public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDo
         ISecurityOperationResolver securityOperationResolver,
         IAuthorizationSystem<Guid> authorizationSystem,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
-        : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+        : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory)
     {
     }
 

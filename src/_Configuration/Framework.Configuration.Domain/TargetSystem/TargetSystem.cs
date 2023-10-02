@@ -15,8 +15,6 @@ namespace Framework.Configuration.Domain;
 /// </remarks>
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
 [UniqueGroup]
-[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.TargetSystemView))]
-[EditDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.TargetSystemEdit))]
 [NotAuditedClass]
 public class TargetSystem : BaseDirectory, IMaster<DomainType>
 {

@@ -13,8 +13,6 @@ namespace Framework.Authorization.Domain;
 ///     Идентификатор (логин) пользователя в системе
 /// </summary>
 [DomainType("{fa27cd64-c5e6-4356-9efa-a35b00ff69dd}")]
-[ViewDomainObject(typeof(AuthorizationSecurityOperation), nameof(AuthorizationSecurityOperation.PrincipalView))]
-[EditDomainObject(typeof(AuthorizationSecurityOperation), nameof(AuthorizationSecurityOperation.PrincipalEdit))]
 [BLLViewRole]
 [BLLSaveRole]
 [BLLRemoveRole]

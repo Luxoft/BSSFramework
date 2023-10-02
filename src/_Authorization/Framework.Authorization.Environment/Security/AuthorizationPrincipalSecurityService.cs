@@ -1,32 +1,33 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.SecuritySystem;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.Environment
 {
-    public class AuthorizationBusinessRoleSecurityService : ContextDomainSecurityService<BusinessRole, Guid>
+    public class AuthorizationPrincipalSecurityService : ContextDomainSecurityService<Principal, Guid>
     {
-        public AuthorizationBusinessRoleSecurityService(
+        private readonly IRunAsManager runAsManager;
+
+        public AuthorizationPrincipalSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver securityOperationResolver,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
-            SecurityPath<BusinessRole> securityPath,
-            IAuthorizationBLLContext context)
+            SecurityPath<Principal> securityPath,
+            IRunAsManager runAsManager)
             : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
         {
-            this.Context = context ?? throw new ArgumentNullException(nameof(context));
+            this.runAsManager = runAsManager;
         }
 
-        public IAuthorizationBLLContext Context { get; }
-
-        protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(BLLSecurityMode securityMode)
+        protected override ISecurityProvider<Principal> CreateSecurityProvider(BLLSecurityMode securityMode)
         {
             var baseProvider = base.CreateSecurityProvider(securityMode);
 
             switch (securityMode)
             {
                 case BLLSecurityMode.View:
-                    return this.Context.GetBusinessRoleSecurityProvider().Or(baseProvider);
+                    return baseProvider.Or(new PrincipalSecurityProvider<Principal>(this.runAsManager, v => v));
 
                 default:
                     return baseProvider;

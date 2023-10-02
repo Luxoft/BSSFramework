@@ -15,8 +15,6 @@ namespace Framework.Configuration.Domain;
 /// <seealso cref="DomainObjectBase" />
 [BLLViewRole]
 [BLLSaveRole(AllowCreate = false)]
-[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.SubscriptionView))]
-[EditDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.SubscriptionEdit))]
 [UniqueGroup]
 [NotAuditedClass]
 public class CodeFirstSubscription : AuditPersistentDomainObjectBase, ICodeObject<string>

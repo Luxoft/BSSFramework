@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.ApproveWorkflow;
+using Framework.Authorization.Environment;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core.Services;
 using Framework.DomainDriven;
@@ -93,7 +94,7 @@ public class WorkflowController : ControllerBase
             {
                 var operation = authContext.Logics.Operation.GetById(wfObj.OperationId, true);
 
-                return !authContext.GetOperationSecurityProvider().HasAccess(operation);
+                return !new OperationSecurityProvider(authContext.AvailablePermissionSource).HasAccess(operation);
             });
 
             return Task.CompletedTask;

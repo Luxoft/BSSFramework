@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check BusinessRole access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckBusinessRoleAccess")]
-        public virtual void CheckBusinessRoleAccess(CheckBusinessRoleAccessAutoRequest checkBusinessRoleAccessAutoRequest)
-        {
-            string securityOperationName = checkBusinessRoleAccessAutoRequest.securityOperationName;
-            Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent = checkBusinessRoleAccessAutoRequest.businessRoleIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckBusinessRoleAccessInternal(businessRoleIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRole;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.BusinessRole>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Create BusinessRole by model (BusinessRoleCreateModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -332,26 +312,6 @@
         }
         
         /// <summary>
-        /// Check access for BusinessRole
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasBusinessRoleAccess")]
-        public virtual bool HasBusinessRoleAccess(HasBusinessRoleAccessAutoRequest hasBusinessRoleAccessAutoRequest)
-        {
-            string securityOperationName = hasBusinessRoleAccessAutoRequest.securityOperationName;
-            Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent = hasBusinessRoleAccessAutoRequest.businessRoleIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasBusinessRoleAccessInternal(businessRoleIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRole;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.BusinessRole>(operation).HasAccess(domainObject);
-        }
-        
-        /// <summary>
         /// Remove BusinessRole
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -396,33 +356,5 @@
             bll.Save(domainObject);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
         }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckBusinessRoleAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasBusinessRoleAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

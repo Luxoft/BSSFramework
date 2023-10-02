@@ -12,7 +12,6 @@ using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 
-
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 
@@ -29,8 +28,6 @@ public partial class AuthorizationBLLContext
     private readonly IDictionaryCache<string, EntityType> entityTypeByNameCache;
 
     private readonly IDictionaryCache<Guid, EntityType> entityTypeByIdCache;
-
-    private readonly ISecurityProvider<Operation> operationSecurityProvider;
 
     public AuthorizationBLLContext(
             IServiceProvider serviceProvider,
@@ -93,8 +90,6 @@ public partial class AuthorizationBLLContext
                                                                          domainTypeId => this.Logics.EntityType.GetById(domainTypeId, true))
                 .WithLock();
 
-        this.operationSecurityProvider = new OperationSecurityProvider(this);
-
         this.TypeResolver = settings.TypeResolver;
     }
 
@@ -149,29 +144,6 @@ public partial class AuthorizationBLLContext
         if (domainTypeId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainTypeId));
 
         return this.entityTypeByIdCache[domainTypeId];
-    }
-
-    public ISecurityProvider<TDomainObject> GetPrincipalSecurityProvider<TDomainObject>(
-            Expression<Func<TDomainObject, Principal>> principalSecurityPath)
-            where TDomainObject : PersistentDomainObjectBase
-    {
-        if (principalSecurityPath == null) throw new ArgumentNullException(nameof(principalSecurityPath));
-
-        return new PrincipalSecurityProvider<TDomainObject>(this, principalSecurityPath);
-    }
-
-    public ISecurityProvider<TDomainObject> GetBusinessRoleSecurityProvider<TDomainObject>(
-            Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath)
-            where TDomainObject : PersistentDomainObjectBase
-    {
-        if (businessRoleSecurityPath == null) throw new ArgumentNullException(nameof(businessRoleSecurityPath));
-
-        return new BusinessRoleSecurityProvider<TDomainObject>(this, businessRoleSecurityPath);
-    }
-
-    public ISecurityProvider<Operation> GetOperationSecurityProvider()
-    {
-        return this.operationSecurityProvider;
     }
 
     /// <inheritdoc />

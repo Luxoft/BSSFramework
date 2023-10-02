@@ -89,6 +89,7 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IRunAsManager, RunAsManger>()
                        .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
 
+                       .AddScoped<IActualPrincipalSource, ActualPrincipalSource>()
                        .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
                        .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
 

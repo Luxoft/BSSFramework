@@ -7,17 +7,17 @@ namespace Framework.Authorization.Environment
 {
     public class AuthorizationPermissionSecurityService : ContextDomainSecurityService<Permission, Guid>
     {
-        private readonly IRunAsManager runAsManager;
+        private readonly IActualPrincipalSource actualPrincipalSource;
 
         public AuthorizationPermissionSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver securityOperationResolver,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<Permission> securityPath,
-            IRunAsManager runAsManager)
+            IActualPrincipalSource actualPrincipalSource)
             : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
         {
-            this.runAsManager = runAsManager;
+            this.actualPrincipalSource = actualPrincipalSource;
         }
 
         protected override ISecurityProvider<Permission> CreateSecurityProvider(BLLSecurityMode securityMode)
@@ -25,13 +25,13 @@ namespace Framework.Authorization.Environment
             var baseProvider = base.CreateSecurityProvider(securityMode);
 
             var withDelegatedFrom = baseProvider.Or(
-                new PrincipalSecurityProvider<Permission>(this.runAsManager, permission => permission.DelegatedFrom.Principal));
+                new PrincipalSecurityProvider<Permission>(this.actualPrincipalSource, permission => permission.DelegatedFrom.Principal));
 
             switch (securityMode)
             {
                 case BLLSecurityMode.View:
                     return withDelegatedFrom.Or(
-                        new PrincipalSecurityProvider<Permission>(this.runAsManager, permission => permission.Principal));
+                        new PrincipalSecurityProvider<Permission>(this.actualPrincipalSource, permission => permission.Principal));
 
                 case BLLSecurityMode.Edit:
                     return withDelegatedFrom;

@@ -50,7 +50,8 @@ public partial class AuthorizationBLLContext
             IRunAsManager runAsManager,
             IAvailablePermissionSource availablePermissionSource,
             ISecurityOperationParser securityOperationParser,
-            IAvailableSecurityOperationSource availableSecurityOperationSource)
+            IAvailableSecurityOperationSource availableSecurityOperationSource,
+            IActualPrincipalSource actualPrincipalSource)
             : base(
                    serviceProvider,
                    operationSenders,
@@ -67,6 +68,7 @@ public partial class AuthorizationBLLContext
         this.AvailablePermissionSource = availablePermissionSource;
         this.SecurityOperationParser = securityOperationParser;
         this.AvailableSecurityOperationSource = availableSecurityOperationSource;
+        this.ActualPrincipalSource = actualPrincipalSource;
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
         this.AuthorizationSystem = authorizationSystem;
         this.RunAsManager = runAsManager;
@@ -102,6 +104,8 @@ public partial class AuthorizationBLLContext
     public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
     public IAuthorizationSystem<Guid> AuthorizationSystem { get; }
+
+    public IActualPrincipalSource ActualPrincipalSource { get; }
 
     public IRunAsManager RunAsManager { get; }
 

@@ -7,17 +7,17 @@ namespace Framework.Authorization.Environment
 {
     public class AuthorizationPrincipalSecurityService : ContextDomainSecurityService<Principal, Guid>
     {
-        private readonly IRunAsManager runAsManager;
+        private readonly IActualPrincipalSource actualPrincipalSource;
 
         public AuthorizationPrincipalSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver securityOperationResolver,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<Principal> securityPath,
-            IRunAsManager runAsManager)
+            IActualPrincipalSource actualPrincipalSource)
             : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
         {
-            this.runAsManager = runAsManager;
+            this.actualPrincipalSource = actualPrincipalSource;
         }
 
         protected override ISecurityProvider<Principal> CreateSecurityProvider(BLLSecurityMode securityMode)
@@ -27,7 +27,7 @@ namespace Framework.Authorization.Environment
             switch (securityMode)
             {
                 case BLLSecurityMode.View:
-                    return baseProvider.Or(new PrincipalSecurityProvider<Principal>(this.runAsManager, v => v));
+                    return baseProvider.Or(new PrincipalSecurityProvider<Principal>(this.actualPrincipalSource, v => v));
 
                 default:
                     return baseProvider;

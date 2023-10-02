@@ -24,7 +24,6 @@ public class RunAsManger : IRunAsManager
     }
 
 
-    public Principal ActualPrincipal => this.currentPrincipal.RunAs ?? this.currentPrincipal;
 
     public bool IsRunningAs => this.currentPrincipal.RunAs != null;
 

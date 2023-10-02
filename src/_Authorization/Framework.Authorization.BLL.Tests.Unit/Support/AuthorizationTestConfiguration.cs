@@ -154,11 +154,11 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
         get
         {
             var result = Substitute.For<IAuthorizationBLLContext>();
-            var runAsManager = Substitute.For<IRunAsManager>();
+            var actualPrincipalSource = Substitute.For<IActualPrincipalSource>();
 
-            runAsManager.ActualPrincipal.Returns(new Principal { Name = "testUser" });
+            actualPrincipalSource.ActualPrincipal.Returns(new Principal { Name = "testUser" });
 
-            result.RunAsManager.Returns(runAsManager);
+            result.ActualPrincipalSource.Returns(actualPrincipalSource);
 
             return result;
         }

@@ -12,19 +12,19 @@ namespace Framework.Authorization.Environment
 
         where TDomainObject : PersistentDomainObjectBase, IIdentityObject<Guid>
     {
-        private readonly IRunAsManager runAsManager;
+        private readonly IActualPrincipalSource actualPrincipalSource;
 
         private readonly Lazy<Expression<Func<TDomainObject, bool>>> lazySecurityFilter;
 
 
-        public PrincipalSecurityProvider(IRunAsManager runAsManager, Expression<Func<TDomainObject, Principal>> principalSecurityPath)
+        public PrincipalSecurityProvider(IActualPrincipalSource actualPrincipalSource, Expression<Func<TDomainObject, Principal>> principalSecurityPath)
         {
-            this.runAsManager = runAsManager;
+            this.actualPrincipalSource = actualPrincipalSource;
 
             this.lazySecurityFilter = LazyHelper.Create(
                 () =>
                 {
-                    var actualPrincipalName = this.runAsManager.ActualPrincipal.Name;
+                    var actualPrincipalName = this.actualPrincipalSource.ActualPrincipal.Name;
 
                     Expression<Func<Principal, bool>> principalFilter = principal => principal.Name == actualPrincipalName;
 
@@ -32,14 +32,13 @@ namespace Framework.Authorization.Environment
                 });
         }
 
-        protected override LambdaCompileMode SecurityFilterCompileMode { get { return LambdaCompileMode.All; } }
+        public override Expression<Func<TDomainObject, bool>> SecurityFilter => this.lazySecurityFilter.Value;
 
-
-        public override Expression<Func<TDomainObject, bool>> SecurityFilter { get { return this.lazySecurityFilter.Value; } }
+        protected override LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.All;
 
         public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
         {
-            return UnboundedList.Yeild(this.runAsManager.ActualPrincipal.Name);
+            return UnboundedList.Yeild(this.actualPrincipalSource.ActualPrincipal.Name);
         }
     }
 }

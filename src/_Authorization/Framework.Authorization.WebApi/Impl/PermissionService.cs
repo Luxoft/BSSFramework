@@ -20,7 +20,7 @@ public partial class AuthSLJsonController
                                            {
                                                var changePermissionDelegatesModel = changePermissionDelegatesModelStrictDTO.ToDomainObject(evaluateData.MappingService);
 
-                                               var securityProvider = new PrincipalSecurityProvider<Permission>(evaluateData.Context.RunAsManager, permission => permission.Principal)
+                                               var securityProvider = new PrincipalSecurityProvider<Permission>(evaluateData.Context.ActualPrincipalSource, permission => permission.Principal)
                                                                                   .Or(evaluateData.Context.SecurityService.GetSecurityProvider<Permission>(AuthorizationSecurityOperation.PrincipalEdit));
 
                                                var bll = evaluateData.Context.Logics.PermissionFactory.Create(securityProvider);

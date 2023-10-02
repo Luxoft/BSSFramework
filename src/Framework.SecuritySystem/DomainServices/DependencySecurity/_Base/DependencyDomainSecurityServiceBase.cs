@@ -28,7 +28,7 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
         }
         else
         {
-            return this.CreateSecurityProvider(customSecurityOperation);
+            return this.GetSecurityProvider(customSecurityOperation);
         }
     }
 

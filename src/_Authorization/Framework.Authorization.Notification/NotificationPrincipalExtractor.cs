@@ -22,29 +22,29 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 
     private readonly INotificationBasePermissionFilterSource notificationBasePermissionFilterSource;
 
-    private readonly IRepositoryFactory<Permission> permissionRepositoryFactory;
+    private readonly IRepository<Permission> permissionRepository;
 
-    private readonly IRepositoryFactory<BusinessRole> businessRoleRepositoryFactory;
+    private readonly IRepository<BusinessRole> businessRoleRepository;
 
     public NotificationPrincipalExtractor(
         IServiceProvider serviceProvider,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         INotificationBasePermissionFilterSource notificationBasePermissionFilterSource,
-        IRepositoryFactory<Permission> permissionRepositoryFactory,
-        IRepositoryFactory<BusinessRole> businessRoleRepositoryFactory)
+        IRepository<Permission> permissionRepository,
+        IRepository<BusinessRole> businessRoleRepository)
     {
         this.serviceProvider = serviceProvider;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.notificationBasePermissionFilterSource = notificationBasePermissionFilterSource;
-        this.permissionRepositoryFactory = permissionRepositoryFactory;
-        this.businessRoleRepositoryFactory = businessRoleRepositoryFactory;
+        this.permissionRepository = permissionRepository;
+        this.businessRoleRepository = businessRoleRepository;
     }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByOperations(
         Guid[] operationsIds,
         IEnumerable<NotificationFilterGroup> notificationFilterGroups)
     {
-        var roleIdents = this.businessRoleRepositoryFactory.Create().GetQueryable()
+        var roleIdents = this.businessRoleRepository.GetQueryable()
                              .Where(role => role.BusinessRoleOperationLinks.Any(link => operationsIds.Contains(link.Operation.Id)))
                              .ToArray(role => role.Id);
 
@@ -57,7 +57,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
     {
         var notificationFilterGroups = preNotificationFilterGroups.ToArray();
 
-        var startPermissionQ = this.permissionRepositoryFactory.Create().GetQueryable()
+        var startPermissionQ = this.permissionRepository.GetQueryable()
                                    .Where(this.notificationBasePermissionFilterSource.GetBasePermissionFilter(roleIdents))
                                    .Select(p => new PermissionLevelInfo { Permission = p, LevelInfo = "" });
 
@@ -140,7 +140,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 
         var grandAccess = notificationFilterGroup.ExpandType.AllowEmpty();
 
-        var securityContextQ = this.serviceProvider.GetRequiredService<IRepositoryFactory<TSecurityContext>>().Create().GetQueryable();
+        var securityContextQ = this.serviceProvider.GetRequiredService<IRepository<TSecurityContext>>().GetQueryable();
 
         return from permissionInfo in source
 
@@ -182,7 +182,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 
         var grandAccess = notificationFilterGroup.ExpandType.AllowEmpty();
 
-        var securityContextQ = this.serviceProvider.GetRequiredService<IRepositoryFactory<TSecurityContext>>().Create().GetQueryable();
+        var securityContextQ = this.serviceProvider.GetRequiredService<IRepository<TSecurityContext>>().GetQueryable();
 
         return from permissionInfo in source
 

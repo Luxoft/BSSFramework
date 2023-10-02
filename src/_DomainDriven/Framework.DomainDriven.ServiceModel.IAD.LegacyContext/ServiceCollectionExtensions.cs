@@ -41,7 +41,7 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IPersistentInfoService, PersistentInfoService>();
 
-        services.AddScoped(typeof(IRootSecurityService<>), typeof(RootSecurityService<,>));
+        services.AddScoped(typeof(IRootSecurityService<>), typeof(RootSecurityService<>));
         services.AddScoped(typeof(ITrackingService<>), typeof(TrackingService<>));
 
         services.RegisterAuthorizationBLL();

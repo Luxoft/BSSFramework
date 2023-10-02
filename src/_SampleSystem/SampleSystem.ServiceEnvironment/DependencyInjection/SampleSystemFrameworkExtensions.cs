@@ -57,12 +57,9 @@ public static class SampleSystemFrameworkExtensions
                .AddScoped<ISampleSystemValidator, SampleSystemValidator>()
 
                .AddSingleton(new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData))
-               .AddScoped<IRootSecurityService<PersistentDomainObjectBase>, RootSecurityService<ISampleSystemBLLContext, PersistentDomainObjectBase>>()
                .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
                .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
                .AddScopedFromLazyInterfaceImplement<ISampleSystemBLLContext, SampleSystemBLLContext>()
-
-               .AddScoped<ITrackingService<PersistentDomainObjectBase>, TrackingService<PersistentDomainObjectBase>>()
 
                 //.AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, SampleSystemSecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
 

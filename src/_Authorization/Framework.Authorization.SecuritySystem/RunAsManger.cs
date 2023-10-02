@@ -15,13 +15,12 @@ public class RunAsManger : IRunAsManager
     public RunAsManger(
         IRepositoryFactory<Principal> principalRepositoryFactory,
         ICurrentPrincipalSource currentPrincipalSource,
-        IOperationAccessorFactory operationAccessorFactory,
-        Principal customCurrentPrincipal = null)
+        IOperationAccessorFactory operationAccessorFactory)
     {
         this.operationAccessorFactory = operationAccessorFactory;
         this.principalRepository = principalRepositoryFactory.Create();
 
-        this.currentPrincipal = customCurrentPrincipal ?? currentPrincipalSource.CurrentPrincipal;
+        this.currentPrincipal =  currentPrincipalSource.CurrentPrincipal;
     }
 
 

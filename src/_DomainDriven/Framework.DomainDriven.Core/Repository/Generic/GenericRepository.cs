@@ -11,24 +11,25 @@ namespace Framework.DomainDriven.Repository;
 public class GenericRepository<TDomainObject, TIdent> : IGenericRepository<TDomainObject, TIdent>
         where TDomainObject : class
 {
-    private readonly ISecurityProvider<TDomainObject> securityProvider;
-
     private readonly IAsyncDal<TDomainObject, TIdent> dal;
 
     private readonly ISpecificationEvaluator specificationEvaluator;
 
     private readonly IAccessDeniedExceptionService accessDeniedExceptionService;
 
+    private readonly ISecurityProvider<TDomainObject> securityProvider;
+
     public GenericRepository(
-            ISecurityProvider<TDomainObject> securityProvider,
             IAsyncDal<TDomainObject, TIdent> dal,
             ISpecificationEvaluator specificationEvaluator,
-            IAccessDeniedExceptionService accessDeniedExceptionService)
+            IAccessDeniedExceptionService accessDeniedExceptionService,
+            IDisabledSecurityProviderSource disabledSecurityProviderSource,
+            ISecurityProvider<TDomainObject>? securityProvider = null)
     {
-        this.securityProvider = securityProvider;
         this.dal = dal;
         this.specificationEvaluator = specificationEvaluator;
         this.accessDeniedExceptionService = accessDeniedExceptionService;
+        this.securityProvider = securityProvider ?? disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
     }
 
     public async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken)

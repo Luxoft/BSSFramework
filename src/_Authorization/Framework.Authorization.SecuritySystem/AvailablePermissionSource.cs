@@ -16,12 +16,12 @@ public class AvailablePermissionSource : IAvailablePermissionSource
     private readonly IUserAuthenticationService userAuthenticationService;
 
     public AvailablePermissionSource(
-        IRepositoryFactory<Permission> permissionRepositoryFactory,
+        IRepository<Permission> permissionRepository,
         IDateTimeService dateTimeService,
         IActualPrincipalSource actualPrincipalSource,
         IUserAuthenticationService userAuthenticationService)
     {
-        this.permissionRepository = permissionRepositoryFactory.Create();
+        this.permissionRepository = permissionRepository;
         this.dateTimeService = dateTimeService;
         this.actualPrincipalSource = actualPrincipalSource;
         this.userAuthenticationService = userAuthenticationService;

@@ -13,9 +13,9 @@ namespace Framework.Authorization.SecuritySystem.OperationInitializer;
 
 public class AuthorizationOperationInitializer : IAuthorizationOperationInitializer
 {
-    private readonly IRepositoryFactory<Operation> operationRepositoryFactory;
+    private readonly IRepository<Operation> operationRepository;
 
-    private readonly IRepositoryFactory<BusinessRole> businessRoleRepositoryFactory;
+    private readonly IRepository<BusinessRole> businessRoleRepository;
 
     private readonly IOperationDomainService operationDomainService;
 
@@ -24,16 +24,16 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
     private readonly ISecurityOperationParser securityOperationParser;
 
     public AuthorizationOperationInitializer(
-        IRepositoryFactory<Operation> operationRepositoryFactory,
+        IRepository<Operation> operationRepository,
         IOperationDomainService operationDomainService,
         ISecurityOperationParser securityOperationParser,
-        IRepositoryFactory<BusinessRole> businessRoleRepositoryFactory,
+        IRepository<BusinessRole> businessRoleRepository,
         IBusinessRoleDomainService businessRoleDomainService)
     {
-        this.operationRepositoryFactory = operationRepositoryFactory;
+        this.operationRepository = operationRepository;
         this.operationDomainService = operationDomainService;
         this.securityOperationParser = securityOperationParser;
-        this.businessRoleRepositoryFactory = businessRoleRepositoryFactory;
+        this.businessRoleRepository = businessRoleRepository;
         this.businessRoleDomainService = businessRoleDomainService;
     }
 
@@ -46,7 +46,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
 
     private async Task<IReadOnlyDictionary<SecurityOperation<Guid>, Operation>> InitMainSecurityOperations(UnexpectedAuthOperationMode mode, CancellationToken cancellationToken)
     {
-        var operationRepository = this.operationRepositoryFactory.Create();
+        var operationRepository = this.operationRepository;
 
         var dbOperations = await operationRepository.GetQueryable().ToListAsync(cancellationToken);
 
@@ -123,7 +123,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
 
     private async Task InitAdminSecurityOperations(IReadOnlyDictionary<SecurityOperation<Guid>, Operation> fullOperations, CancellationToken cancellationToken)
     {
-        var businessRoleRepository = this.businessRoleRepositoryFactory.Create();
+        var businessRoleRepository = this.businessRoleRepository;
 
         var adminRole = await this.businessRoleDomainService.GetOrCreateEmptyAdminRole(cancellationToken);
 

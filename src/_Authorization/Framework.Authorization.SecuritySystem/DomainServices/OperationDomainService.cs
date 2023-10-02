@@ -6,11 +6,11 @@ namespace Framework.Authorization.SecuritySystem.DomainServices;
 
 public class OperationDomainService : IOperationDomainService
 {
-    private readonly IRepositoryFactory<Operation> operationRepositoryFactory;
+    private readonly IRepository<Operation> operationRepository;
 
-    public OperationDomainService(IRepositoryFactory<Operation> operationRepositoryFactory)
+    public OperationDomainService(IRepository<Operation> operationRepository)
     {
-        this.operationRepositoryFactory = operationRepositoryFactory;
+        this.operationRepository = operationRepository;
     }
 
     public async Task RemoveAsync(Operation operation, CancellationToken cancellationToken)
@@ -20,6 +20,6 @@ public class OperationDomainService : IOperationDomainService
             link.BusinessRole.RemoveDetail(link);
         }
 
-        await this.operationRepositoryFactory.Create().RemoveAsync(operation, cancellationToken);
+        await this.operationRepository.RemoveAsync(operation, cancellationToken);
     }
 }

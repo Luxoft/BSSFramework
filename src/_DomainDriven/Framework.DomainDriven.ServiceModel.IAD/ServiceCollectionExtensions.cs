@@ -28,6 +28,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
         services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
 
@@ -75,7 +76,7 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScopedFromLazyInterfaceImplement<IAuthorizationSystem<Guid>, AuthorizationSystem>() //TODO: Temp hack
+        return services.AddScoped<IAuthorizationSystem<Guid>, AuthorizationSystem>()
                        .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
                        .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>()
 

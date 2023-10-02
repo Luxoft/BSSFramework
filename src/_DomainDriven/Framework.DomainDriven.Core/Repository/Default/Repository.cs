@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using Framework.SecuritySystem;
+
 using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Repository;
@@ -9,11 +10,12 @@ public class Repository<TDomainObject> : GenericRepository<TDomainObject, Guid>,
     where TDomainObject : class
 {
     public Repository(
-        ISecurityProvider<TDomainObject> securityProvider,
         IAsyncDal<TDomainObject, Guid> dal,
         ISpecificationEvaluator specificationEvaluator,
-        IAccessDeniedExceptionService accessDeniedExceptionService)
-        : base(securityProvider, dal, specificationEvaluator, accessDeniedExceptionService)
+        IAccessDeniedExceptionService accessDeniedExceptionService,
+        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityProvider<TDomainObject>? securityProvider = null)
+        : base(dal, specificationEvaluator, accessDeniedExceptionService, disabledSecurityProviderSource, securityProvider)
     {
     }
 }

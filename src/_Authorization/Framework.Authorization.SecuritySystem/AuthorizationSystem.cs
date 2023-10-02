@@ -24,7 +24,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     private readonly IOperationAccessorFactory operationAccessorFactory;
 
-    private readonly IRepositoryFactory<Principal> principalRepositoryFactory;
+    private readonly IRepository<Principal> principalRepository;
 
     private readonly IDateTimeService dateTimeService;
 
@@ -35,7 +35,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IRealTypeResolver realTypeResolver,
         IUserAuthenticationService userAuthenticationService,
         IOperationAccessorFactory operationAccessorFactory,
-        IRepositoryFactory<Principal> principalRepositoryFactory,
+        IRepository<Principal> principalRepository,
         IDateTimeService dateTimeService)
     {
         this.availablePermissionSource = availablePermissionSource;
@@ -43,7 +43,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.realTypeResolver = realTypeResolver;
         this.operationAccessorFactory = operationAccessorFactory;
-        this.principalRepositoryFactory = principalRepositoryFactory;
+        this.principalRepository = principalRepository;
         this.dateTimeService = dateTimeService;
 
         this.CurrentPrincipalName = userAuthenticationService.GetUserName();
@@ -61,7 +61,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
                 new OverridePropertyInfoVisitor<Principal, IEnumerable<Permission>>(
                     principal => principal.Permissions, permissionFilter.ToFilterExpression().ToCollectionFilter()));
 
-        var principals = this.principalRepositoryFactory.Create().GetQueryable().Where(extraPrincipalFilter).ToList();
+        var principals = this.principalRepository.GetQueryable().Where(extraPrincipalFilter).ToList();
 
         return principals.Select(principal => principal.Name);
     }

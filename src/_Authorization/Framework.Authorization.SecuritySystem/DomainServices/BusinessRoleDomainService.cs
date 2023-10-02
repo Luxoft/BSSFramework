@@ -7,11 +7,11 @@ namespace Framework.Authorization.SecuritySystem.DomainServices;
 
 public class BusinessRoleDomainService : IBusinessRoleDomainService
 {
-    private readonly IRepositoryFactory<BusinessRole> businessRoleRepositoryFactory;
+    private readonly IRepository<BusinessRole> businessRoleRepository;
 
-    public BusinessRoleDomainService(IRepositoryFactory<BusinessRole> businessRoleRepositoryFactory)
+    public BusinessRoleDomainService(IRepository<BusinessRole> businessRoleRepository)
     {
-        this.businessRoleRepositoryFactory = businessRoleRepositoryFactory;
+        this.businessRoleRepository = businessRoleRepository;
     }
 
     public async Task<BusinessRole> GetAdminRole(CancellationToken cancellationToken = default)
@@ -21,14 +21,14 @@ public class BusinessRoleDomainService : IBusinessRoleDomainService
 
     public async Task<BusinessRole> GetRole(string name, CancellationToken cancellationToken = default)
     {
-        return await this.businessRoleRepositoryFactory.Create().GetQueryable().Where(v => v.Name == name)
+        return await this.businessRoleRepository.GetQueryable().Where(v => v.Name == name)
                    .SingleOrDefaultAsync(cancellationToken)
                ?? throw new Exception($"BusinessRole with name '{name}' not found");
     }
 
     public async Task<BusinessRole> GetOrCreateEmptyAdminRole(CancellationToken cancellationToken = default)
     {
-        var businessRoleRepository = this.businessRoleRepositoryFactory.Create();
+        var businessRoleRepository = this.businessRoleRepository;
 
         var businessRole = await businessRoleRepository.GetQueryable().Where(v => v.Name == BusinessRole.AdminRoleName)
                                                  .SingleOrDefaultAsync(cancellationToken);

@@ -11,27 +11,27 @@ public class AvailablePermissionSource : IAvailablePermissionSource
 
     private readonly IDateTimeService dateTimeService;
 
-    private readonly IRunAsManager runAsManager;
+    private readonly IActualPrincipalSource actualPrincipalSource;
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
     public AvailablePermissionSource(
-        IRepositoryFactory<Permission> permissionRepositoryFactory,
+        IRepository<Permission> permissionRepository,
         IDateTimeService dateTimeService,
-        IRunAsManager runAsManager,
+        IActualPrincipalSource actualPrincipalSource,
         IUserAuthenticationService userAuthenticationService)
     {
-        this.permissionRepository = permissionRepositoryFactory.Create();
+        this.permissionRepository = permissionRepository;
         this.dateTimeService = dateTimeService;
-        this.runAsManager = runAsManager;
+        this.actualPrincipalSource = actualPrincipalSource;
         this.userAuthenticationService = userAuthenticationService;
     }
 
-    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, Guid securityOperationId = default)
+    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, Guid securityOperationId = default, bool applyCurrentUser = true)
     {
         var filter = new AvailablePermissionFilter(this.dateTimeService.Today)
                      {
-                         PrincipalName = withRunAs ? this.runAsManager.ActualPrincipal.Name : this.userAuthenticationService.GetUserName(),
+                         PrincipalName = applyCurrentUser ? withRunAs ? this.actualPrincipalSource.ActualPrincipal.Name : this.userAuthenticationService.GetUserName() : null,
                          SecurityOperationId = securityOperationId
                      };
 

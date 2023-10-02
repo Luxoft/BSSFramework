@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check DomainType access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckDomainTypeAccess")]
-        public virtual void CheckDomainTypeAccess(CheckDomainTypeAccessAutoRequest checkDomainTypeAccessAutoRequest)
-        {
-            string securityOperationName = checkDomainTypeAccessAutoRequest.securityOperationName;
-            Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent = checkDomainTypeAccessAutoRequest.domainTypeIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckDomainTypeAccessInternal(domainTypeIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckDomainTypeAccessInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainType;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Configuration.Domain.DomainType domainObject = bll.GetById(domainTypeIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.DomainType>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get DomainType (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -311,53 +291,5 @@
             Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
-        
-        /// <summary>
-        /// Check access for DomainType
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasDomainTypeAccess")]
-        public virtual bool HasDomainTypeAccess(HasDomainTypeAccessAutoRequest hasDomainTypeAccessAutoRequest)
-        {
-            string securityOperationName = hasDomainTypeAccessAutoRequest.securityOperationName;
-            Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent = hasDomainTypeAccessAutoRequest.domainTypeIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasDomainTypeAccessInternal(domainTypeIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasDomainTypeAccessInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainType;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Configuration.Domain.DomainType domainObject = bll.GetById(domainTypeIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.DomainType>(operation).HasAccess(domainObject);
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckDomainTypeAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasDomainTypeAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

@@ -53,8 +53,6 @@ public class EnumRootSecurityServiceGenerator<TConfiguration> : RootSecurityServ
 
                where !domainType.IsProjection()
 
-               where this.Configuration.HasSecurityContext(domainType)
-
                where !domainType.HasAttribute<CustomContextSecurityAttribute>() && !domainType.HasAttribute<DependencySecurityAttribute>()
 
                let typeParameters = this.Configuration.GetDomainTypeSecurityParameters(domainType).ToArray()

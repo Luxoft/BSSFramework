@@ -21,13 +21,13 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(ContextSecurityOperation securityOperation)
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityOperation securityOperation)
     {
         return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityOperation);
     }
 
 
-    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(ContextSecurityOperation securityOperation)
+    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(SecurityOperation securityOperation)
     {
         var filterExpression = this.GetSecurityFilterExpression(securityOperation.ExpandType).ExpandConst().InlineEval();
 

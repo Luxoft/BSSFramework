@@ -23,11 +23,7 @@ namespace Framework.SecuritySystem
 
         public abstract Expression<Func<TDomainObject, bool>> SecurityFilter { get; }
 
-        protected virtual LambdaCompileMode SecurityFilterCompileMode
-        {
-            get { return LambdaCompileMode.None; }
-        }
-
+        protected virtual LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.None;
 
         public virtual IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
         {

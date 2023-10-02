@@ -368,6 +368,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Authorization.Sec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.SecuritySystem.Bss", "Framework.SecuritySystem.Bss\Framework.SecuritySystem.Bss.csproj", "{2B0A6876-CCAC-4161-BE59-B86C255B293B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Authorization.Environment", "_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj", "{60B19281-D20D-4880-9D11-014DDD37E433}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -3412,6 +3414,26 @@ Global
 		{2B0A6876-CCAC-4161-BE59-B86C255B293B}.Release|x64.Build.0 = Release|Any CPU
 		{2B0A6876-CCAC-4161-BE59-B86C255B293B}.Release|x86.ActiveCfg = Release|Any CPU
 		{2B0A6876-CCAC-4161-BE59-B86C255B293B}.Release|x86.Build.0 = Release|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Debug|ARM.Build.0 = Debug|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Debug|x64.Build.0 = Debug|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Debug|x86.Build.0 = Debug|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Release|ARM.ActiveCfg = Release|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Release|ARM.Build.0 = Release|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Release|x64.ActiveCfg = Release|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Release|x64.Build.0 = Release|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Release|x86.ActiveCfg = Release|Any CPU
+		{60B19281-D20D-4880-9D11-014DDD37E433}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3531,6 +3553,7 @@ Global
 		{520C3CAC-EE38-4C92-8B53-848CA71AD63F} = {9FBDE8A9-8E9D-4B0E-8415-A6335F732358}
 		{69DDBA95-F939-4B07-91CE-60E4028D3D52} = {AAA62B76-6A4A-44A6-BEE0-4A27C9D1D4EB}
 		{9BF2EA96-0172-4F8C-AA58-802924C72E98} = {9FBDE8A9-8E9D-4B0E-8415-A6335F732358}
+		{60B19281-D20D-4880-9D11-014DDD37E433} = {9FBDE8A9-8E9D-4B0E-8415-A6335F732358}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {68BB011C-6BAC-4558-903A-BF29D2F8046F}

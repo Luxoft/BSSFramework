@@ -12,11 +12,11 @@ public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDo
         ISecurityOperationResolver securityOperationResolver,
         IAuthorizationSystem<Guid> authorizationSystem,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
-        : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+        : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory)
     {
     }
 
-    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(ContextSecurityOperation securityOperation)
+    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityOperation securityOperation)
     {
         return new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();
     }

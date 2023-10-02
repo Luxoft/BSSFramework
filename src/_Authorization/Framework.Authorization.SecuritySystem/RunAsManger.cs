@@ -13,19 +13,17 @@ public class RunAsManger : IRunAsManager
     private readonly Principal currentPrincipal;
 
     public RunAsManger(
-        IRepositoryFactory<Principal> principalRepositoryFactory,
+        IRepository<Principal> principalRepository,
         ICurrentPrincipalSource currentPrincipalSource,
-        IOperationAccessorFactory operationAccessorFactory,
-        Principal customCurrentPrincipal = null)
+        IOperationAccessorFactory operationAccessorFactory)
     {
         this.operationAccessorFactory = operationAccessorFactory;
-        this.principalRepository = principalRepositoryFactory.Create();
+        this.principalRepository = principalRepository;
 
-        this.currentPrincipal = customCurrentPrincipal ?? currentPrincipalSource.CurrentPrincipal;
+        this.currentPrincipal =  currentPrincipalSource.CurrentPrincipal;
     }
 
 
-    public Principal ActualPrincipal => this.currentPrincipal.RunAs ?? this.currentPrincipal;
 
     public bool IsRunningAs => this.currentPrincipal.RunAs != null;
 

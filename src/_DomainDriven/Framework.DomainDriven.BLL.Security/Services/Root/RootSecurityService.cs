@@ -6,15 +6,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>,
-                                                                             IRootSecurityService<TPersistentDomainObjectBase>
+public class RootSecurityService<TPersistentDomainObjectBase> : IRootSecurityService<TPersistentDomainObjectBase>
 
-    where TBLLContext : class, IServiceProviderContainer
     where TPersistentDomainObjectBase : class
 {
-    public RootSecurityService(TBLLContext context)
-        : base(context)
+    private readonly IServiceProvider serviceProvider;
+
+    public RootSecurityService(IServiceProvider serviceProvider)
     {
+        this.serviceProvider = serviceProvider;
     }
 
 
@@ -35,7 +35,21 @@ public class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLL
     protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>()
         where TDomainObject : TPersistentDomainObjectBase
     {
-        return this.Context.ServiceProvider.GetService<IDomainSecurityService<TDomainObject>>()
-               ?? this.Context.ServiceProvider.GetRequiredService<INotImplementedDomainSecurityService<TDomainObject>>();
+        return this.serviceProvider.GetService<IDomainSecurityService<TDomainObject>>()
+               ?? this.serviceProvider.GetRequiredService<INotImplementedDomainSecurityService<TDomainObject>>();
     }
+}
+
+public class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> : RootSecurityService<TPersistentDomainObjectBase>, IBLLContextContainer<TBLLContext>
+
+    where TBLLContext : class, IServiceProviderContainer
+    where TPersistentDomainObjectBase : class
+{
+    public RootSecurityService(TBLLContext context)
+        : base(context.ServiceProvider)
+    {
+        this.Context = context;
+    }
+
+    public TBLLContext Context { get; }
 }

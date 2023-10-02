@@ -101,7 +101,7 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
 
         if (this.HasContext)
         {
-            var nonContextOperations = secondaryOperations.Where(operation => !(operation is ContextSecurityOperation)).ToList();
+            var nonContextOperations = secondaryOperations.Where(operation => !(operation is SecurityOperation)).ToList();
 
             if (nonContextOperations.Any())
             {

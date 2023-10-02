@@ -16,6 +16,6 @@ public class RepositoryQueryableSource : IQueryableSource
 
     public IQueryable<TDomainObject> GetQueryable<TDomainObject>()
     {
-        return this.serviceProvider.GetRequiredService<IRepositoryFactory<TDomainObject>>().Create().GetQueryable();
+        return this.serviceProvider.GetRequiredService<IRepository<TDomainObject>>().GetQueryable();
     }
 }

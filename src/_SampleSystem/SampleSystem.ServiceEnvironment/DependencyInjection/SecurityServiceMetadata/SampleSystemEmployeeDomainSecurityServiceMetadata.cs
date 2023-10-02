@@ -8,15 +8,15 @@ namespace SampleSystem.ServiceEnvironment;
 
 public class SampleSystemEmployeeDomainSecurityServiceMetadata : IDomainSecurityServiceMetadata<Employee>
 {
-    private readonly IRunAsManager runAsManager;
+    private readonly IActualPrincipalSource actualPrincipalSource;
 
-    public SampleSystemEmployeeDomainSecurityServiceMetadata(IRunAsManager runAsManager) => this.runAsManager = runAsManager;
+    public SampleSystemEmployeeDomainSecurityServiceMetadata(IActualPrincipalSource actualPrincipalSource) => this.actualPrincipalSource = actualPrincipalSource;
 
     public ISecurityProvider<Employee> OverrideSecurityProvider(ISecurityProvider<Employee> baseProvider, SecurityOperation securityOperation)
     {
         if (securityOperation == SampleSystemSecurityOperation.EmployeeView)
         {
-            return baseProvider.Or(employee => employee.Login == this.runAsManager.ActualPrincipal.Name);
+            return baseProvider.Or(employee => employee.Login == this.actualPrincipalSource.ActualPrincipal.Name);
         }
         else
         {

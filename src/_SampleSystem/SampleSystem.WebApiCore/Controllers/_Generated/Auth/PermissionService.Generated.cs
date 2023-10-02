@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check Permission access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckPermissionAccess")]
-        public virtual void CheckPermissionAccess(CheckPermissionAccessAutoRequest checkPermissionAccessAutoRequest)
-        {
-            string securityOperationName = checkPermissionAccessAutoRequest.securityOperationName;
-            Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent = checkPermissionAccessAutoRequest.permissionIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckPermissionAccessInternal(permissionIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get Permission (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -279,26 +259,6 @@
         }
         
         /// <summary>
-        /// Check access for Permission
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasPermissionAccess")]
-        public virtual bool HasPermissionAccess(HasPermissionAccessAutoRequest hasPermissionAccessAutoRequest)
-        {
-            string securityOperationName = hasPermissionAccessAutoRequest.securityOperationName;
-            Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent = hasPermissionAccessAutoRequest.permissionIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasPermissionAccessInternal(permissionIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(operation).HasAccess(domainObject);
-        }
-        
-        /// <summary>
         /// Remove Permission
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -319,33 +279,5 @@
             Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
             bll.Remove(domainObject);
         }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckPermissionAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasPermissionAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

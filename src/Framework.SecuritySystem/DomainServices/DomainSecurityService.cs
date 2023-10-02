@@ -14,6 +14,6 @@ public abstract class DomainSecurityService<TDomainObject> : DomainSecurityServi
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode)
     {
-        return this.CreateSecurityProvider(this.securityOperationResolver.GetSecurityOperation<TDomainObject>(securityMode));
+        return this.GetSecurityProvider(this.securityOperationResolver.GetSecurityOperation<TDomainObject>(securityMode));
     }
 }

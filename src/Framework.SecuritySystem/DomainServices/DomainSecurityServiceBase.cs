@@ -40,12 +40,12 @@ public abstract class DomainSecurityServiceBase<TDomainObject> : IDomainSecurity
 
     protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation);
 
-
-    ISecurityProvider<TDomainObject> IDomainSecurityService<TDomainObject>.GetSecurityProvider(BLLSecurityMode securityMode)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(BLLSecurityMode securityMode)
     {
         return this.modeProvidersCache[securityMode];
     }
-    ISecurityProvider<TDomainObject> IDomainSecurityService<TDomainObject>.GetSecurityProvider(SecurityOperation securityMode)
+
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation securityMode)
     {
         return this.operationsProvidersCache[securityMode];
     }

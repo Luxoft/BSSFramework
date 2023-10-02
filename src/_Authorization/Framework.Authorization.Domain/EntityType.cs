@@ -17,7 +17,6 @@ namespace Framework.Authorization.Domain;
 /// Типы, в контексте которых выдаются права пользователю, записываются вручную на уровне SQL в базу конкретной системы
 /// </remarks>
 [BLLViewRole]
-[ViewDomainObject(typeof(AuthorizationSecurityOperation), nameof(AuthorizationSecurityOperation.Disabled))]
 public class EntityType : BaseDirectory, IEntityType<Guid>
 {
     private readonly bool isFilter;

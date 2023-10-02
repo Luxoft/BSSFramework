@@ -133,7 +133,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
 
         ((IBLLFactoryContainerContext<IAuthorizationBLLFactoryContainer>)result).Logics.Returns(bllFactoryContainer);
 
-        result.SecurityService.Returns(new AuthorizationSecurityService(result));
+        result.SecurityService.Returns(new RootSecurityService<IAuthorizationBLLContext, PersistentDomainObjectBase>(result));
         result.OperationSenders.Returns(new OperationEventSenderContainer<DomainObjectBase>(new List<IOperationEventListener<DomainObjectBase>>()));
 
         var authContext = this.AuthorizationBLLContext;
@@ -154,11 +154,11 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
         get
         {
             var result = Substitute.For<IAuthorizationBLLContext>();
-            var runAsManager = Substitute.For<IRunAsManager>();
+            var actualPrincipalSource = Substitute.For<IActualPrincipalSource>();
 
-            runAsManager.ActualPrincipal.Returns(new Principal { Name = "testUser" });
+            actualPrincipalSource.ActualPrincipal.Returns(new Principal { Name = "testUser" });
 
-            result.RunAsManager.Returns(runAsManager);
+            result.ActualPrincipalSource.Returns(actualPrincipalSource);
 
             return result;
         }

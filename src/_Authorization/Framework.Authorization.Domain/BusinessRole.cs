@@ -3,7 +3,6 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.Security;
 
 namespace Framework.Authorization.Domain;
 
@@ -12,8 +11,6 @@ namespace Framework.Authorization.Domain;
 /// </summary>
 [DomainType("{3823172C-B703-46FD-A82F-B55833EBCD38}")]
 [UniqueGroup]
-[ViewDomainObject(typeof(AuthorizationSecurityOperation), nameof(AuthorizationSecurityOperation.BusinessRoleView))]
-[EditDomainObject(typeof(AuthorizationSecurityOperation), nameof(AuthorizationSecurityOperation.BusinessRoleEdit))]
 [BLLViewRole]
 [BLLSaveRole]
 [BLLRemoveRole]

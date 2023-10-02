@@ -16,8 +16,6 @@ namespace Framework.Authorization.Domain;
 /// Неконтекстные - право доступа к объекту без учета контекста
 /// </remarks>
 [DomainType("{34ef2920-d044-4b58-9928-a2ee0131e635}")]
-[ViewDomainObject(typeof(AuthorizationSecurityOperation), nameof(AuthorizationSecurityOperation.OperationView))]
-[EditDomainObject(typeof(AuthorizationSecurityOperation), nameof(AuthorizationSecurityOperation.OperationEdit))]
 [BLLViewRole]
 [BLLSaveRole(AllowCreate = false)]
 [UniqueGroup]

@@ -12,10 +12,7 @@ namespace Framework.Configuration.Domain;
 /// Описание доменного типа целевой системы
 /// </summary>
 [BLLViewRole]
-//[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.TargetSystemView)]
-//[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.TargetSystemEdit)]
 [NotAuditedClass]
-[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.Disabled))]
 public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDetail<TargetSystem>, IMaster<DomainTypeEventOperation>, IDomainType
 {
     private readonly ICollection<DomainTypeEventOperation> eventOperations = new List<DomainTypeEventOperation>();

@@ -19,7 +19,7 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
 
     public SecurityExpressionFilter(
         SecurityExpressionBuilderBase<TDomainObject, TIdent> builder,
-        ContextSecurityOperation securityOperation)
+        SecurityOperation securityOperation)
     {
         if (builder == null) throw new ArgumentNullException(nameof(builder));
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
@@ -39,7 +39,7 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
 
                     var filter = baseFilter.OverrideInput((IPrincipal<TIdent> principal) => principal.Permissions);
 
-                    return builder.Factory.AuthorizationSystem.GetAccessors(securityOperation.ToNonContext(), filter);
+                    return builder.Factory.AuthorizationSystem.GetNonContextAccessors(securityOperation, filter);
                 }));
     }
 

@@ -3,7 +3,6 @@ using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.Security;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.Domain;
@@ -12,7 +11,6 @@ namespace Framework.Authorization.Domain;
 /// Связь между пермиссией и контекстом
 /// </summary>
 [DomainType("{48880DB2-1BC0-4130-BC87-F0E8E0D246CC}")]
-[ViewDomainObject]
 [BLLRole]
 public partial class PermissionFilterItem : AuditPersistentDomainObjectBase, IDetail<Permission>, IPermissionFilterItem<Guid>
 {

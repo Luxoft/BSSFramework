@@ -1,7 +1,6 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Restriction;
-using Framework.Security;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.Domain;
@@ -9,7 +8,6 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 /// Описание доменных объектов, в контексте которых выдаются права пользователю
 /// </summary>
-[ViewDomainObject]
 [UniqueGroup]
 [BLLRole]
 public class PermissionFilterEntity : AuditPersistentDomainObjectBase, IPermissionFilterEntity<Guid>

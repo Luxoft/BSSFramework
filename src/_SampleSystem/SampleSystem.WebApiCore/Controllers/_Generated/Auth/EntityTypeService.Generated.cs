@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check EntityType access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckEntityTypeAccess")]
-        public virtual void CheckEntityTypeAccess(CheckEntityTypeAccessAutoRequest checkEntityTypeAccessAutoRequest)
-        {
-            string securityOperationName = checkEntityTypeAccessAutoRequest.securityOperationName;
-            Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent = checkEntityTypeAccessAutoRequest.entityTypeIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckEntityTypeAccessInternal(entityTypeIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckEntityTypeAccessInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityType;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Authorization.Domain.EntityType domainObject = bll.GetById(entityTypeIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.EntityType>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get EntityType (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -311,53 +291,5 @@
             Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.EntityType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
-        
-        /// <summary>
-        /// Check access for EntityType
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasEntityTypeAccess")]
-        public virtual bool HasEntityTypeAccess(HasEntityTypeAccessAutoRequest hasEntityTypeAccessAutoRequest)
-        {
-            string securityOperationName = hasEntityTypeAccessAutoRequest.securityOperationName;
-            Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent = hasEntityTypeAccessAutoRequest.entityTypeIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasEntityTypeAccessInternal(entityTypeIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasEntityTypeAccessInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityType;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Authorization.Domain.EntityType domainObject = bll.GetById(entityTypeIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.EntityType>(operation).HasAccess(domainObject);
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckEntityTypeAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasEntityTypeAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

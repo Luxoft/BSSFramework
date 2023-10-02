@@ -10,7 +10,7 @@ namespace Framework.SecuritySystem;
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
 /// <typeparam name="TIdent"></typeparam>
-public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : NonContextDomainSecurityService<TDomainObject, TIdent>
+public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : DomainSecurityService<TDomainObject>
 
     where TDomainObject : IIdentityObject<TIdent>
 {
@@ -19,29 +19,14 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : 
     protected ContextDomainSecurityServiceBase(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
         ISecurityOperationResolver securityOperationResolver,
-        IAuthorizationSystem<TIdent> authorizationSystem,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
 
-        : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
+        : base(disabledSecurityProviderSource, securityOperationResolver)
     {
         this.securityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)
-    {
-        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-
-        switch (securityOperation)
-        {
-            case ContextSecurityOperation contextSecurityOperation:
-                return this.CreateSecurityProvider(contextSecurityOperation);
-
-            default:
-                return base.CreateSecurityProvider(securityOperation);
-        }
-    }
-
-    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, ContextSecurityOperation securityOperation)
+    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SecurityOperation securityOperation)
         where TSecurityContext : class, ISecurityContext
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
@@ -50,7 +35,7 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : 
         return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
     }
 
-    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ContextSecurityOperation securityOperation)
+    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, SecurityOperation securityOperation)
         where TSecurityContext : class, ISecurityContext
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
@@ -59,15 +44,13 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : 
         return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
     }
 
-    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, ContextSecurityOperation securityOperation)
+    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, SecurityOperation securityOperation)
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
         return securityPath.ToProvider(securityOperation, this.securityExpressionBuilderFactory);
     }
-
-    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation);
 }
 
 public class ContextDomainSecurityService<TDomainObject, TIdent> : ContextDomainSecurityServiceBase<TDomainObject, TIdent>
@@ -79,15 +62,14 @@ public class ContextDomainSecurityService<TDomainObject, TIdent> : ContextDomain
     public ContextDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
         ISecurityOperationResolver securityOperationResolver,
-        IAuthorizationSystem<TIdent> authorizationSystem,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
         SecurityPath<TDomainObject> securityPath)
-        : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+        : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory)
     {
         this.securityPath = securityPath;
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)
     {
         return this.Create(this.securityPath, securityOperation);
     }

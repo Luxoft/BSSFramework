@@ -12,8 +12,6 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [UniqueGroup]
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.SequenceView))]
-[EditDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.SequenceEdit))]
 [NotAuditedClass]
 public class Sequence : BaseDirectory, INumberObject<long>
 {

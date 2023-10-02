@@ -24,6 +24,8 @@ public partial interface IAuthorizationBLLContext :
 {
     string CurrentPrincipalName => this.AuthorizationSystem.CurrentPrincipalName;
 
+    IActualPrincipalSource ActualPrincipalSource { get; }
+
     IRunAsManager RunAsManager { get; }
 
     IAuthorizationSystem<Guid> AuthorizationSystem { get; }
@@ -43,17 +45,6 @@ public partial interface IAuthorizationBLLContext :
     Principal CurrentPrincipal { get; }
 
     Settings Settings { get; }
-
-
-    ISecurityProvider<TDomainObject> GetPrincipalSecurityProvider<TDomainObject>(
-        Expression<Func<TDomainObject, Principal>> principalSecurityPath)
-        where TDomainObject : PersistentDomainObjectBase;
-
-    ISecurityProvider<TDomainObject> GetBusinessRoleSecurityProvider<TDomainObject>(
-        Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath)
-        where TDomainObject : PersistentDomainObjectBase;
-
-    ISecurityProvider<Operation> GetOperationSecurityProvider();
 
 
     ITypeResolver<EntityType> SecurityTypeResolver { get; }

@@ -7,13 +7,13 @@ namespace Framework.Authorization.SecuritySystem;
 
 public class CurrentPrincipalSource : ICurrentPrincipalSource
 {
-    private readonly IRepositoryFactory<Principal> principalRepository;
+    private readonly IRepository<Principal> principalRepository;
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
     private readonly Lazy<Principal> currentPrincipalLazy;
 
-    public CurrentPrincipalSource(IRepositoryFactory<Principal> principalRepository,
+    public CurrentPrincipalSource(IRepository<Principal> principalRepository,
                                   IUserAuthenticationService userAuthenticationService)
     {
         this.principalRepository = principalRepository;
@@ -22,7 +22,7 @@ public class CurrentPrincipalSource : ICurrentPrincipalSource
         var userName = this.userAuthenticationService.GetUserName();
 
         this.currentPrincipalLazy = LazyHelper.Create(
-            () => this.principalRepository.Create()
+            () => this.principalRepository
                       .GetQueryable().SingleOrDefault(principal => principal.Active && principal.Name == userName) ?? new Principal { Name = userName });
     }
 

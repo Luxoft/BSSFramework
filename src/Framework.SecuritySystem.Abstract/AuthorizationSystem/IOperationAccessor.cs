@@ -4,7 +4,7 @@ public interface IOperationAccessor
 {
     bool IsAdmin();
 
-    bool HasAccess(NonContextSecurityOperation securityOperation);
+    bool HasAccess(SecurityOperation securityOperation);
 
-    void CheckAccess(NonContextSecurityOperation securityOperation);
+    void CheckAccess(SecurityOperation securityOperation);
 }

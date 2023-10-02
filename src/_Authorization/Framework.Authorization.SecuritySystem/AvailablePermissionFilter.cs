@@ -13,7 +13,7 @@ public class AvailablePermissionFilter
         this.today = today;
     }
 
-    public string PrincipalName { get; set; }
+    public string? PrincipalName { get; set; }
 
     public Guid SecurityOperationId { get; set; }
 

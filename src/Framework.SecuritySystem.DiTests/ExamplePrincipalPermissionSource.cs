@@ -14,7 +14,7 @@ public class ExamplePrincipalPermissionSource : IPrincipalPermissionSource<Guid>
         return this.permissions;
     }
 
-    public IQueryable<IPermission<Guid>> GetPermissionQuery(ContextSecurityOperation securityOperation)
+    public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityOperation securityOperation)
     {
         throw new NotImplementedException();
     }

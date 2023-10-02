@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check CodeFirstSubscription access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckCodeFirstSubscriptionAccess")]
-        public virtual void CheckCodeFirstSubscriptionAccess(CheckCodeFirstSubscriptionAccessAutoRequest checkCodeFirstSubscriptionAccessAutoRequest)
-        {
-            string securityOperationName = checkCodeFirstSubscriptionAccessAutoRequest.securityOperationName;
-            Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent = checkCodeFirstSubscriptionAccessAutoRequest.codeFirstSubscriptionIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckCodeFirstSubscriptionAccessInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscription;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Configuration.Domain.CodeFirstSubscription domainObject = bll.GetById(codeFirstSubscriptionIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get CodeFirstSubscription (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -230,26 +210,6 @@
         }
         
         /// <summary>
-        /// Check access for CodeFirstSubscription
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasCodeFirstSubscriptionAccess")]
-        public virtual bool HasCodeFirstSubscriptionAccess(HasCodeFirstSubscriptionAccessAutoRequest hasCodeFirstSubscriptionAccessAutoRequest)
-        {
-            string securityOperationName = hasCodeFirstSubscriptionAccessAutoRequest.securityOperationName;
-            Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent = hasCodeFirstSubscriptionAccessAutoRequest.codeFirstSubscriptionIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasCodeFirstSubscriptionAccessInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscription;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Configuration.Domain.CodeFirstSubscription domainObject = bll.GetById(codeFirstSubscriptionIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription>(operation).HasAccess(domainObject);
-        }
-        
-        /// <summary>
         /// Save CodeFirstSubscriptions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -272,33 +232,5 @@
             bll.Save(domainObject);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
         }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckCodeFirstSubscriptionAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasCodeFirstSubscriptionAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

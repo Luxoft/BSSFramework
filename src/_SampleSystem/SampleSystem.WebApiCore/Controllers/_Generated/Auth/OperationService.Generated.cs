@@ -10,26 +10,6 @@
     {
         
         /// <summary>
-        /// Check Operation access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckOperationAccess")]
-        public virtual void CheckOperationAccess(CheckOperationAccessAutoRequest checkOperationAccessAutoRequest)
-        {
-            string securityOperationName = checkOperationAccessAutoRequest.securityOperationName;
-            Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent = checkOperationAccessAutoRequest.operationIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckOperationAccessInternal(operationIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual void CheckOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IOperationBLL bll = evaluateData.Context.Logics.Operation;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Authorization.Domain.Operation domainObject = bll.GetById(operationIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
-        }
-        
-        /// <summary>
         /// Get Operation (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -313,26 +293,6 @@
         }
         
         /// <summary>
-        /// Check access for Operation
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasOperationAccess")]
-        public virtual bool HasOperationAccess(HasOperationAccessAutoRequest hasOperationAccessAutoRequest)
-        {
-            string securityOperationName = hasOperationAccessAutoRequest.securityOperationName;
-            Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent = hasOperationAccessAutoRequest.operationIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasOperationAccessInternal(operationIdent, securityOperationName, evaluateData));
-        }
-        
-        protected virtual bool HasOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IOperationBLL bll = evaluateData.Context.Logics.Operation;
-            Framework.SecuritySystem.SecurityOperation operation = evaluateData.Context.Authorization.SecurityOperationParser.Parse(securityOperationName.ToString());
-            Framework.Authorization.Domain.Operation domainObject = bll.GetById(operationIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(operation).HasAccess(domainObject);
-        }
-        
-        /// <summary>
         /// Save Operations
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -355,33 +315,5 @@
             bll.Save(domainObject);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
         }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class CheckOperationAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class HasOperationAccessAutoRequest
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string securityOperationName;
     }
 }

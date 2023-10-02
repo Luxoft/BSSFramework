@@ -14,10 +14,10 @@ public class SecurityContextInfoService : ISecurityContextInfoService<Guid>
 
     private readonly Lazy<IReadOnlyDictionary<string, Guid>> lazyEntityTypeDict;
 
-    public SecurityContextInfoService(IRepositoryFactory<EntityType> entityTypeRepositoryFactory, IRealTypeResolver realTypeResolver)
+    public SecurityContextInfoService(IRepository<EntityType> entityTypeRepository, IRealTypeResolver realTypeResolver)
     {
         this.realTypeResolver = realTypeResolver;
-        this.entityTypeRepository = entityTypeRepositoryFactory.Create();
+        this.entityTypeRepository = entityTypeRepository;
 
         this.lazyEntityTypeDict =
             LazyHelper.Create(() => this.entityTypeRepository.GetQueryable().ToList().ToReadOnlyDictionaryI(v => v.Name, v => v.Id));

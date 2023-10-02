@@ -22,9 +22,9 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
         var roles = this.Context.Logics.BusinessRole.GetListByIdents(roleIdents);
         var expandedRoles = this.Context.Logics.BusinessRole.GetParents(roles).ToArray();
 
-        return new AvailablePermissionFilter(this.Context.DateTimeService.Today)
-               .ToFilterExpression()
-               .BuildAnd(permission => expandedRoles.Contains(permission.Role));
+        var permissionQ = this.Context.AvailablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false);
+
+        return permission => expandedRoles.Contains(permission.Role) && permissionQ.Contains(permission);
     }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByOperations(Guid[] operationsIds, IEnumerable<NotificationFilterGroup> notificationFilterGroups)

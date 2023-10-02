@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.Environment;
 using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
 using Framework.HierarchicalExpand;
@@ -19,7 +20,7 @@ public partial class AuthSLJsonController
                                            {
                                                var changePermissionDelegatesModel = changePermissionDelegatesModelStrictDTO.ToDomainObject(evaluateData.MappingService);
 
-                                               var securityProvider = evaluateData.Context.GetPrincipalSecurityProvider<Permission>(permission => permission.Principal)
+                                               var securityProvider = new PrincipalSecurityProvider<Permission>(evaluateData.Context.ActualPrincipalSource, permission => permission.Principal)
                                                                                   .Or(evaluateData.Context.SecurityService.GetSecurityProvider<Permission>(AuthorizationSecurityOperation.PrincipalEdit));
 
                                                var bll = evaluateData.Context.Logics.PermissionFactory.Create(securityProvider);

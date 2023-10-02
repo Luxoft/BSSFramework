@@ -11,9 +11,6 @@ namespace Framework.DomainDriven.BLLCoreGenerator;
 public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurityServiceGenerator<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    private readonly bool hasContext;
-
-
     public EnumDomainSecurityServiceGenerator(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)
     {
@@ -21,10 +18,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
         this.DomainTypeReference = genericTypes.FirstOr(() => this.DomainType.ToTypeReference());
 
-
-        this.hasContext = this.Configuration.HasSecurityContext(this.DomainType);
-
-        this.BaseServiceType = (this.hasContext ? typeof(ContextDomainSecurityService<,>) : typeof(NonContextDomainSecurityService<,>)).ToTypeReference(
+        this.BaseServiceType = typeof(ContextDomainSecurityService<,>).ToTypeReference(
          this.DomainTypeReference,
          this.Configuration.Environment.GetIdentityType().ToTypeReference());
     }
@@ -52,7 +46,6 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
         yield return (typeof(ISecurityOperationResolver).ToTypeReference(), "securityOperationResolver", null);
         yield return (typeof(IAuthorizationSystem<>).ToTypeReference(this.Configuration.Environment.GetIdentityType()), "authorizationSystem", null);
 
-        if (this.hasContext)
         {
             yield return (typeof(ISecurityExpressionBuilderFactory).ToTypeReference(), "securityExpressionBuilderFactory", null);
 
@@ -62,7 +55,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
                              securityPathContainerParam.Type,
                              securityPathContainerParam.Name,
                              securityPathContainerParam.ToVariableReferenceExpression().ToMethodInvokeExpression(this.DomainType.ToGetSecurityPathMethodName())
-                             );
+                         );
         }
     }
 }

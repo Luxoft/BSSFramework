@@ -28,9 +28,11 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>)); //TODO: add unsecurity di key "DisabledSecurity" after update to NET8.0
         services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+
+
+        services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
         services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
 
         services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();

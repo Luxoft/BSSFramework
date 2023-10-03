@@ -40,6 +40,11 @@ public class ControllerEvaluator<TController>
 
     public T Evaluate<T>(Expression<Func<TController, T>> funcExpr)
     {
+        if (TaskResultHelper<T>.IsTask)
+        {
+            throw new Exception($"For Task result use {nameof(EvaluateAsync)} method");
+        }
+
         return this.InternalEvaluateAsync(funcExpr, c => Task.FromResult(funcExpr.Eval(c))).GetAwaiter().GetResult();
     }
 
@@ -157,5 +162,10 @@ public class ControllerEvaluator<TController>
         {
             await this.next(this.context);
         }
+    }
+
+    private static class TaskResultHelper<TResult>
+    {
+        public static readonly bool IsTask = typeof(Task).IsAssignableFrom(typeof(TResult));
     }
 }

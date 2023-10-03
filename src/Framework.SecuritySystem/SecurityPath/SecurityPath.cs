@@ -23,6 +23,8 @@ public abstract class SecurityPath<TDomainObject>
         return this.GetInternalUsedTypes().Distinct();
     }
 
+    public static SecurityPath<TDomainObject> Empty { get; } = SecurityPath<TDomainObject>.Condition(_ => true);
+
     protected internal abstract IEnumerable<Type> GetInternalUsedTypes();
 
     #region Create

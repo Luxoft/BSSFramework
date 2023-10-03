@@ -37,8 +37,6 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton(AvailableValuesHelper.AvailableValues.ToValidation());
 
-        services.AddSingleton<IDateTimeService>(DateTimeService.Default);
-
         services.AddSingleton<IPersistentInfoService, PersistentInfoService>();
 
         services.AddScoped(typeof(IRootSecurityService<>), typeof(RootSecurityService<>));

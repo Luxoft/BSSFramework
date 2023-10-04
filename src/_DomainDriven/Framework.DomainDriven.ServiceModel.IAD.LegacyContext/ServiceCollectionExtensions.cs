@@ -92,8 +92,6 @@ public static class ServiceCollectionExtensions
                .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
                .AddScopedFromLazyInterfaceImplement<IConfigurationBLLContext, ConfigurationBLLContext>()
 
-               .AddScoped<ITrackingService<Framework.Configuration.Domain.PersistentDomainObjectBase>, TrackingService<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
-
                .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
                .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);
     }

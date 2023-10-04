@@ -16,7 +16,11 @@ public static class ContextEvaluatorExtensions
 
     public static Task EvaluateAsync<TBLLContext>(this IContextEvaluator<TBLLContext> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, Func<TBLLContext, IDBSession, Task> action)
     {
-        return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, (ctx, session) => action(ctx, session).ContinueWith(_ => default(object)));
+        return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, async (ctx, session) =>
+                                                                                {
+                                                                                    await action(ctx, session);
+                                                                                    return default(object);
+                                                                                });
     }
 
     public static Task EvaluateAsync<TBLLContext>(this IContextEvaluator<TBLLContext> contextEvaluator, DBSessionMode sessionMode, Func<TBLLContext, IDBSession, Task> action)

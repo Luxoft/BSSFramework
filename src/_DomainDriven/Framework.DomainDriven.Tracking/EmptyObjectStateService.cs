@@ -2,15 +2,6 @@
 
 public class EmptyObjectStateService : IObjectStateService
 {
-    public static readonly EmptyObjectStateService Instance = new EmptyObjectStateService();
-
-
-    private EmptyObjectStateService()
-    {
-
-    }
-
-
     public IEnumerable<ObjectState> GetModifiedObjectStates(object value)
     {
         yield break;

@@ -107,8 +107,7 @@ public class MainTests
                .AddScoped(this.BuildQueryableSource)
                .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
 
-               .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
-               .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
+               .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
                .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
 
                .AddScoped<ISecurityExpressionBuilderFactory, V1.SecurityExpressionBuilderFactory<Guid>>()

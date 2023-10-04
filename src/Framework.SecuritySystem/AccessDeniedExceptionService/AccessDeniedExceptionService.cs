@@ -3,21 +3,14 @@ using Framework.Persistent;
 
 namespace Framework.SecuritySystem;
 
-public class AccessDeniedExceptionService : IAccessDeniedExceptionService
+public class AccessDeniedExceptionService<TIdent> : IAccessDeniedExceptionService
 {
-    private readonly IDomainObjectIdentResolver domainObjectIdentResolver;
-
-    public AccessDeniedExceptionService(IDomainObjectIdentResolver domainObjectIdentResolver)
-    {
-        this.domainObjectIdentResolver = domainObjectIdentResolver;
-    }
-
     public Exception GetAccessDeniedException(AccessResult.AccessDeniedResult accessDeniedResult)
     {
         return new AccessDeniedException(this.GetAccessDeniedExceptionMessage(accessDeniedResult));
     }
 
-    public string GetAccessDeniedExceptionMessage(AccessResult.AccessDeniedResult accessDeniedResult)
+    protected virtual string GetAccessDeniedExceptionMessage(AccessResult.AccessDeniedResult accessDeniedResult)
     {
         if (accessDeniedResult.CustomMessage != null)
         {
@@ -55,8 +48,8 @@ public class AccessDeniedExceptionService : IAccessDeniedExceptionService
 
         return elements.GetByFirst((first, other) =>
                                    {
-                                       var messagePrefix = this.domainObjectIdentResolver.HasDefaultIdent(domainObject) ? "You have no permissions to create object"
-
+                                       var messagePrefix = (domainObject as IIdentityObject<TIdent>).Maybe(v => v.Id.IsDefault())
+                                                               ? "You have no permissions to create object"
                                                                : "You have no permissions to access object";
 
                                        var messageBody = $" with {this.PrintElement(first.Key, first.Value)}";
@@ -67,12 +60,12 @@ public class AccessDeniedExceptionService : IAccessDeniedExceptionService
                                    });
     }
 
-    protected string PrintElement(string key, object value)
+    protected virtual string PrintElement(string key, object value)
     {
         return $"{key} = '{value}'";
     }
 
-    protected IEnumerable<KeyValuePair<string, object>> GetAccessDeniedExceptionMessageElements(object domainObject, Type domainObjectType, SecurityOperation securityOperation)
+    protected virtual IEnumerable<KeyValuePair<string, object>> GetAccessDeniedExceptionMessageElements(object domainObject, Type domainObjectType, SecurityOperation securityOperation)
     {
         if (domainObject is IVisualIdentityObject visualIdentityObject)
         {
@@ -83,11 +76,9 @@ public class AccessDeniedExceptionService : IAccessDeniedExceptionService
 
         yield return new KeyValuePair<string, object>("type", domainObjectType.Name);
 
-        var ident = this.domainObjectIdentResolver.TryGetIdent(domainObject);
-
-        if (ident != null)
+        if (domainObject is IIdentityObject<TIdent> identityObject && !identityObject.Id.IsDefault())
         {
-            yield return new KeyValuePair<string, object>("id", ident);
+            yield return new KeyValuePair<string, object>("id", identityObject.Id);
         }
 
         if (securityOperation != null)

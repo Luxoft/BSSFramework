@@ -71,7 +71,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
 
     public IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> Logics => this.defaultFactoryContainer;
 
-    public IAccessDeniedExceptionService AccessDeniedExceptionService => new AccessDeniedExceptionService(new DomainObjectIdentResolver<Guid>());
+    public IAccessDeniedExceptionService AccessDeniedExceptionService => new AccessDeniedExceptionService<Guid>();
 
     public IStandartExpressionBuilder StandartExpressionBuilder => new StandartExpressionBuilder();
 

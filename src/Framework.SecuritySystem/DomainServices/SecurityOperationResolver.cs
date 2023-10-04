@@ -15,7 +15,7 @@ public class SecurityOperationResolver : ISecurityOperationResolver
         var cached = infos.ToList();
 
         this.viewDict = GetDict(cached, info => info.ViewOperation);
-        this.editDict = GetDict(cached, info => info.ViewOperation);
+        this.editDict = GetDict(cached, info => info.EditOperation);
     }
 
     public SecurityOperation? TryGetSecurityOperation<TDomainObject>(BLLSecurityMode securityMode)

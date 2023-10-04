@@ -59,4 +59,34 @@ public static class GeneratorConfigurationExtensions
                        }
                };
     }
+
+    public static CodeTypeDeclaration GetServiceProviderContainerCodeTypeDeclaration(this IGeneratorConfigurationBase configuration, string typeName, bool asAbstract, CodeTypeReference baseType)
+    {
+        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+        if (typeName == null) throw new ArgumentNullException(nameof(typeName));
+
+        var parameter = typeof(IServiceProvider).ToTypeReference().ToParameterDeclarationExpression("serviceProvider");
+        var parameterRefExpr = parameter.ToVariableReferenceExpression();
+
+        return new CodeTypeDeclaration
+               {
+                   Name = typeName,
+                   TypeAttributes = asAbstract ? (TypeAttributes.Public | TypeAttributes.Abstract) : TypeAttributes.Public,
+                   IsPartial = true,
+                   Members =
+                   {
+                       new CodeConstructor
+                       {
+                           Attributes = asAbstract ? MemberAttributes.Family : MemberAttributes.Public,
+                           Parameters = { parameter },
+                           BaseConstructorArgs = { parameterRefExpr }
+                       }
+                   },
+
+                   BaseTypes =
+                   {
+                       baseType
+                   }
+               };
+    }
 }

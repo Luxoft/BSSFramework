@@ -81,7 +81,7 @@ public class AccessDeniedExceptionService : IAccessDeniedExceptionService
             yield return new KeyValuePair<string, object>("name", name);
         }
 
-        yield return new KeyValuePair<string, object>("type", domainObjectType);
+        yield return new KeyValuePair<string, object>("type", domainObjectType.Name);
 
         var ident = this.domainObjectIdentResolver.TryGetIdent(domainObject);
 

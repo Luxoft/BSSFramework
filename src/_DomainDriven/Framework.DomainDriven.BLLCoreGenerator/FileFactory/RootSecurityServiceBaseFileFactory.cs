@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.DependencyInjection;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +23,7 @@ public class RootSecurityServiceBaseFileFactory<TConfiguration> : FileFactory<TC
     {
         var containerType = this.Configuration.RootSecurityServerGenerator.GetGenericRootSecurityServiceType();
 
-        return this.Configuration.GetBLLContextContainerCodeTypeDeclaration(this.Name, true, containerType);
+        return this.Configuration.GetServiceProviderContainerCodeTypeDeclaration(this.Name, true, containerType);
     }
 
     private CodeTypeMember GetRegisterDependencyInjectionMethod()

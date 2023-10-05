@@ -34,24 +34,23 @@ public static class SampleSystemDomainSecurityServiceExtensions
 
                 rb.AddMetadata<SampleSystemEmployeeDomainSecurityServiceMetadata>()
 
-                  .Add<BusinessUnit>(
-                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView)
-                            .SetEdit(SampleSystemSecurityOperation.BusinessUnitEdit)
-                            .SetPath(SecurityPath<BusinessUnit>.Create(fbu => fbu)))
+                  .Add(SampleSystemSecurityOperation.BusinessUnitView,
+                       SampleSystemSecurityOperation.BusinessUnitEdit,
+                       SecurityPath<BusinessUnit>.Create(fbu => fbu))
 
                   .Add<BusinessUnitType>(
-                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitTypeView)
-                            .SetEdit(SampleSystemSecurityOperation.BusinessUnitTypeEdit))
+                      SampleSystemSecurityOperation.BusinessUnitTypeView,
+                      SampleSystemSecurityOperation.BusinessUnitTypeEdit)
 
-                  .Add<BusinessUnitManagerCommissionLink>(
-                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkView)
-                            .SetEdit(SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkEdit)
-                            .SetPath(SecurityPath<BusinessUnitManagerCommissionLink>.Create(v => v.BusinessUnit)))
+                  .Add(
+                      SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkView,
+                      SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkEdit,
+                      SecurityPath<BusinessUnitManagerCommissionLink>.Create(v => v.BusinessUnit))
 
-                  .Add<BusinessUnitHrDepartment>(
-                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitHrDepartmentView)
-                            .SetEdit(SampleSystemSecurityOperation.BusinessUnitHrDepartmentEdit)
-                            .SetPath(SecurityPath<BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).And(v => v.HRDepartment.Location)))
+                  .Add(
+                      SampleSystemSecurityOperation.BusinessUnitHrDepartmentView,
+                      SampleSystemSecurityOperation.BusinessUnitHrDepartmentEdit,
+                      SecurityPath<BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).And(v => v.HRDepartment.Location))
 
                   .Add<ManagementUnit>(
                       b => b.SetView(SampleSystemSecurityOperation.ManagementUnitView)
@@ -165,22 +164,22 @@ public static class SampleSystemDomainSecurityServiceExtensions
 
             rb =>
 
-                rb.AddDisabled<EmployeeInformation>()
-                  .AddDisabled<EmployeeRegistrationType>()
-                  .AddDisabled<IMRequest>()
-                  .AddDisabled<Information>()
-                  .AddDisabled<Location1676>()
-                  .AddDisabled<WorkingCalendar1676>()
-                  .AddDisabled<Principal>()
-                  .AddDisabled<SqlParserTestObj>()
-                  .AddDisabled<SqlParserTestObjContainer>()
-                  .AddDisabled<TestImmutableObj>()
+                rb.AddViewDisabled<EmployeeInformation>()
+                  .AddViewDisabled<EmployeeRegistrationType>()
+                  .AddViewDisabled<IMRequest>()
+                  .AddViewDisabled<Information>()
+                  .AddViewDisabled<Location1676>()
+                  .AddViewDisabled<WorkingCalendar1676>()
+                  .AddViewDisabled<Principal>()
+                  .AddViewDisabled<SqlParserTestObj>()
+                  .AddViewDisabled<SqlParserTestObjContainer>()
+                  .AddViewDisabled<TestImmutableObj>()
 
                   // LegacyDisabledForProjections
-                  .AddDisabled<TestObjForNested>()
-                  .AddDisabled<BusinessUnitEmployeeRole>()
-                  .AddDisabled<IMRequestDetail>()
-                  .AddDisabled<Project>()
+                  .AddViewDisabled<TestObjForNested>()
+                  .AddViewDisabled<BusinessUnitEmployeeRole>()
+                  .AddViewDisabled<IMRequestDetail>()
+                  .AddViewDisabled<Project>()
             );
     }
 

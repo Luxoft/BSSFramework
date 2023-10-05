@@ -173,7 +173,9 @@ public static class SampleSystemDomainSecurityServiceExtensions
                   .AddViewDisabled<Principal>()
                   .AddViewDisabled<SqlParserTestObj>()
                   .AddViewDisabled<SqlParserTestObjContainer>()
-                  .AddViewDisabled<TestImmutableObj>()
+
+                  .AddFullDisabled<TestImmutableObj>()
+
 
                   // LegacyDisabledForProjections
                   .AddViewDisabled<TestObjForNested>()

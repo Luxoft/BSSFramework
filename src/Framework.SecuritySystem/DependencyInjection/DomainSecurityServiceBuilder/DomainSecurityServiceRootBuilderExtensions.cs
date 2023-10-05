@@ -29,4 +29,9 @@ public static class DomainSecurityServiceRootBuilderExtensions
     {
         return rootBuilder.Add<TDomainObject>(SecurityOperation.Disabled);
     }
+
+    public static IDomainSecurityServiceRootBuilder AddFullDisabled<TDomainObject>(this IDomainSecurityServiceRootBuilder rootBuilder)
+    {
+        return rootBuilder.Add<TDomainObject>(SecurityOperation.Disabled, SecurityOperation.Disabled);
+    }
 }

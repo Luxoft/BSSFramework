@@ -43,7 +43,7 @@ public class AuthorizationExternalSource : IAuthorizationExternalSource
         var authorizationTypedExternalSourceImplType = authorizationTypedExternalSourceType.MakeGenericType(domainType);
 
         var result = (IAuthorizationTypedExternalSource)
-            ActivatorUtilities.CreateInstance(this.serviceProvider, authorizationTypedExternalSourceImplType, entityType);
+            ActivatorUtilities.CreateInstance(this.serviceProvider, authorizationTypedExternalSourceImplType);
 
         return withCache ? result.WithCache() : result;
     }

@@ -24,7 +24,6 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     private IConfigurationBLLContext context;
     private IBLLSimpleQueryBase<IEmployee> simpleQuery;
     private INotificationPrincipalExtractor notificationPrincipalExtractor;
-    private ITypeResolver<EntityType> securityTypeResolver;
     private IAuthorizationBLLContext authorizationContext;
     private ITypeResolver<DomainType> domainTypeResolver;
     private IDomainTypeBLL domainTypeBll;
@@ -36,7 +35,6 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     {
         this.simpleQuery = this.CreateStub<IBLLSimpleQueryBase<IEmployee>>();
         this.notificationPrincipalExtractor = this.CreateStub<INotificationPrincipalExtractor>();
-        this.securityTypeResolver = this.CreateStub<ITypeResolver<EntityType>>();
         this.domainTypeResolver = this.CreateStub<ITypeResolver<DomainType>>();
         this.domainTypeBll = this.CreateStub<IDomainTypeBLL>();
         this.entityTypeBll = this.CreateStub<IEntityTypeBLL>();
@@ -52,7 +50,6 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         this.authorizationContext = this.CreateStub<IAuthorizationBLLContext>();
         this.authorizationContext.Logics.Returns(authorizationLogics);
         this.authorizationContext.NotificationPrincipalExtractor.Returns(this.notificationPrincipalExtractor);
-        this.authorizationContext.SecurityTypeResolver.Returns(this.securityTypeResolver);
 
         this.context = this.Fixture.RegisterStub<IConfigurationBLLContext>();
         this.context.GetEmployeeSource().Returns(this.simpleQuery);

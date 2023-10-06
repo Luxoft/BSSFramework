@@ -7,7 +7,7 @@ public class SecurityExpressionBuilderFactory<TIdent> : SecurityExpressionBuilde
     public SecurityExpressionBuilderFactory(
         IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
         IAuthorizationSystem<TIdent> authorizationSystem,
-        ISecurityContextInfoService<TIdent> securityContextInfoService)
+        ISecurityContextInfoService securityContextInfoService)
     {
         this.HierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.AuthorizationSystem = authorizationSystem;
@@ -18,7 +18,7 @@ public class SecurityExpressionBuilderFactory<TIdent> : SecurityExpressionBuilde
 
     public IAuthorizationSystem<TIdent> AuthorizationSystem { get; }
 
-    public ISecurityContextInfoService<TIdent> SecurityContextInfoService { get; }
+    public ISecurityContextInfoService SecurityContextInfoService { get; }
 
     protected override ISecurityExpressionBuilder<TDomainObject> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.ConditionPath securityPath)
     {

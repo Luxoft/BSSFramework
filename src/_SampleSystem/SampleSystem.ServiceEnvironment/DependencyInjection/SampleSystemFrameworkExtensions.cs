@@ -2,6 +2,7 @@
 using Framework.Authorization.Events;
 using Framework.Authorization.Generated.DTO;
 using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Configuration;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
@@ -37,7 +38,6 @@ public static class SampleSystemFrameworkExtensions
                        // Legacy
 
                        .RegisterLegacyGenericServices()
-                       .RegisterLegacyHierarchicalObjectExpander()
                        .RegisterContextEvaluators()
 
                        .RegisterMainBLLContext()
@@ -120,10 +120,6 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterSupportServices(this IServiceCollection services)
     {
-        // For auth
-        services.AddScopedFrom<ISecurityTypeResolverContainer, ISampleSystemBLLContext>();
-        services.AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>();
-
         // For notification
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
         services.AddScopedFrom<IBLLSimpleQueryBase<IEmployee>, IEmployeeBLLFactory>(factory => factory.Create());

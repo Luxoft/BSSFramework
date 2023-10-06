@@ -131,14 +131,17 @@ public static class ServiceCollectionExtensions
                                        b => b.SetView(AuthorizationSecurityOperation.PrincipalView)
                                              .SetEdit(AuthorizationSecurityOperation.PrincipalEdit)
                                              .SetCustomService<AuthorizationPrincipalSecurityService>())
+
                                    .Add<Permission>(
                                        b => b.SetView(AuthorizationSecurityOperation.PrincipalView)
                                              .SetEdit(AuthorizationSecurityOperation.PrincipalEdit)
                                              .SetCustomService<AuthorizationPermissionSecurityService>())
+
                                    .Add<BusinessRole>(
                                        b => b.SetView(AuthorizationSecurityOperation.BusinessRoleView)
                                              .SetEdit(AuthorizationSecurityOperation.BusinessRoleEdit)
                                              .SetCustomService<AuthorizationBusinessRoleSecurityService>())
+
                                    .Add<Operation>(
                                        b => b.SetView(AuthorizationSecurityOperation.OperationView)
                                              .SetEdit(AuthorizationSecurityOperation.OperationEdit)

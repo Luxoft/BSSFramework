@@ -19,9 +19,7 @@ public partial interface ISampleSystemBLLContext :
 
     Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>,
 
-    IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>,
-
-    ISecurityTypeResolverContainer
+    IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>
 {
     ISecurityExpressionBuilderFactory SecurityExpressionBuilderFactory { get; }
 }

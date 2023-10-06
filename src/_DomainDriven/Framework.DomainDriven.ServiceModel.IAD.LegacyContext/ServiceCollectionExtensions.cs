@@ -45,12 +45,10 @@ public static class ServiceCollectionExtensions
         services.RegisterAuthorizationBLL();
         services.RegisterConfigurationBLL();
 
-        return services;
-    }
+        services.ReplaceSingleton<IRealTypeResolver, ProjectionRealTypeResolver>();
+        services.ReplaceSingleton<ISecurityContextInfoService, ProjectionSecurityContextInfoService>();
 
-    public static IServiceCollection RegisterLegacyHierarchicalObjectExpander(this IServiceCollection services)
-    {
-        return services.ReplaceSingleton<IRealTypeResolver, ProjectionRealTypeResolver>();
+        return services;
     }
 
     public static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)
@@ -61,9 +59,12 @@ public static class ServiceCollectionExtensions
                .AddSingleton<AuthorizationValidatorCompileCache>()
                .AddScoped<IAuthorizationValidator, AuthorizationValidator>()
 
-               .AddSingleton(new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData))
+               .AddSingleton(
+                   new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(
+                       FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData))
 
                .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
+
                //.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>()
                .AddScoped<INotificationBasePermissionFilterSource, LegacyNotificationPrincipalExtractor>()
                .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
@@ -81,7 +82,9 @@ public static class ServiceCollectionExtensions
                .AddSingleton<ConfigurationValidatorCompileCache>()
                .AddScoped<IConfigurationValidator, ConfigurationValidator>()
 
-               .AddSingleton(new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData))
+               .AddSingleton(
+                   new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(
+                       FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData))
                .AddScoped<IConfigurationBLLFactoryContainer, ConfigurationBLLFactoryContainer>()
 
                .AddScopedFrom<ICurrentRevisionService, IDBSession>()

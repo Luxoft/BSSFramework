@@ -1,3 +1,9 @@
-﻿namespace Framework.SecuritySystem;
+﻿using Framework.Persistent;
 
-public record SecurityContextInfo<TIdent>(TIdent Id, string Name);
+namespace Framework.SecuritySystem;
+
+public record SecurityContextInfo(Type Type, string Name);
+
+public record SecurityContextInfo<TSecurityContext, TIdent>(TIdent Id, string Name)
+    : SecurityContextInfo(typeof(TSecurityContext), Name)
+    where TSecurityContext : ISecurityContext, IIdentityObject<TIdent>;

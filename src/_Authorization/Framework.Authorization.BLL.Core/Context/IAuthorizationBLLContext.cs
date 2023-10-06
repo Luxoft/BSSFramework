@@ -3,6 +3,7 @@
 using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Configuration;
@@ -45,9 +46,6 @@ public partial interface IAuthorizationBLLContext :
     Principal CurrentPrincipal { get; }
 
     Settings Settings { get; }
-
-
-    ITypeResolver<EntityType> SecurityTypeResolver { get; }
 
 
     EntityType GetEntityType(Type type);

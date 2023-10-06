@@ -148,7 +148,9 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
         public override Expression<Func<TDomainObject, IPermission<TIdent>, bool>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
         {
-            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
+            var securityContextTypeId =
+                ((SecurityContextInfo<TSecurityContext, TIdent>)this.Factory.SecurityContextInfoService.GetSecurityContextInfo(
+                        typeof(TSecurityContext))).Id;
 
             var eqIdentsExpr = ExpressionHelper.GetEquality<TIdent>();
 
@@ -219,7 +221,9 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
         public override Expression<Func<TDomainObject, IPermission<TIdent>, bool>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
         {
-            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
+            var securityContextTypeId =
+                ((SecurityContextInfo<TSecurityContext, TIdent>)this.Factory.SecurityContextInfoService.GetSecurityContextInfo(
+                        typeof(TSecurityContext))).Id;
 
             var eqIdentsExpr = ExpressionHelper.GetEquality<TIdent>();
 

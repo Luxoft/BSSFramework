@@ -3,28 +3,7 @@
 using Framework.Authorization.Domain;
 using Framework.Core;
 
-namespace Framework.Authorization.BLL;
-
-public interface IAuthorizationExternalSource
-{
-    IAuthorizationTypedExternalSource GetTyped(EntityType entityType, bool withCache = true);
-}
-
-
-public interface IAuthorizationTypedExternalSourceBase
-{
-    IEnumerable<SecurityEntity> GetSecurityEntities();
-
-    IEnumerable<SecurityEntity> GetSecurityEntitiesByIdents(IEnumerable<Guid> securityEntityIdents);
-
-    IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId);
-}
-
-public interface IAuthorizationTypedExternalSource : IAuthorizationTypedExternalSourceBase
-{
-    PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false);
-}
-
+namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
 public static class AuthorizationTypedExternalSourceExtensions
 {

@@ -60,11 +60,6 @@ public static class ConfigurationSecurityOperation
     #endregion
 
     /// <summary>
-    /// Отображение внутренних серверных ошибок клиенту
-    /// </summary>
-    public static SecurityOperation<Guid> DisplayInternalError { get; } = new(nameof(DisplayInternalError), new Guid("ab8afd01-40d2-48d0-b5f3-a12177b00d0d")) { Description = "Display Internal Error", AdminHasAccess = false };
-
-    /// <summary>
     /// Операция для форсирования создания нотификаций из модификаций хранящихся в локальной бд
     /// </summary>
     public static SecurityOperation<Guid> ProcessModifications { get; } = new(nameof(ProcessModifications), new Guid("c1ef265c-d118-4fce-a251-27a542787449")) { Description = "Process Modifications", AdminHasAccess = false };

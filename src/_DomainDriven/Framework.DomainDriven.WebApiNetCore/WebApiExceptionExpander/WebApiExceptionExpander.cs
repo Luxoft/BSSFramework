@@ -1,20 +1,21 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.DALExceptions;
 using Framework.Exceptions;
+using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
 using Framework.Validation;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
 public class WebApiExceptionExpander : IWebApiExceptionExpander
 {
-    private readonly IContextEvaluator<IConfigurationBLLContext> contextEvaluator;
+    private readonly IAuthorizationSystem authorizationSystem;
 
     private readonly IExceptionExpander exceptionExpander;
 
-    public WebApiExceptionExpander(IContextEvaluator<IConfigurationBLLContext> contextEvaluator, IExceptionExpander exceptionExpander)
+    public WebApiExceptionExpander(IAuthorizationSystem authorizationSystem, IExceptionExpander exceptionExpander)
     {
-        this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
+        this.authorizationSystem = authorizationSystem ?? throw new ArgumentNullException(nameof(authorizationSystem));
         this.exceptionExpander = exceptionExpander ?? throw new ArgumentNullException(nameof(exceptionExpander));
     }
 
@@ -22,7 +23,7 @@ public class WebApiExceptionExpander : IWebApiExceptionExpander
     {
         var exception = this.exceptionExpander.Process(baseException);
 
-        return this.IsHandledException(exception) || this.contextEvaluator.Evaluate(DBSessionMode.Read, context => context.DisplayInternalError)
+        return this.IsHandledException(exception) || this.authorizationSystem.HasAccess(BssSecurityOperation.DisplayInternalError)
                        ? exception
                        : this.GetInternalServerException();
     }
@@ -48,7 +49,8 @@ public class WebApiExceptionExpander : IWebApiExceptionExpander
                                          typeof(SecurityException),
                                          typeof(ValidationException),
                                          typeof(DALException),
-                                         typeof(StaleDomainObjectStateException)
+                                         typeof(StaleDomainObjectStateException),
+                                         typeof(AccessDeniedException)
                                  };
 
         return exceptionType.IsAssignableToAny(expectedExceptions);

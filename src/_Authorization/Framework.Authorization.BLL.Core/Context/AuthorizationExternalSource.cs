@@ -1,34 +1,24 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 
-using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
+using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+using Microsoft.Extensions.DependencyInjection;
 
-public class AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IAuthorizationExternalSource
-        where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>, IBLLBaseContext<TPersistentDomainObjectBase, Guid>
+namespace Framework.Authorization.BLL;
 
-        where TPersistentDomainObjectBase : class, IDefaultIdentityObject
-        where TAuditPersistentDomainObjectBase : class, TPersistentDomainObjectBase, IDefaultAuditPersistentDomainObjectBase
+public class AuthorizationExternalSource : IAuthorizationExternalSource
 {
-    private readonly IAuthorizationBLLContext _authorizationBLLContext;
-
-    private readonly ITypeResolver<string> _securityEntityTypeResolver;
+    private readonly IAuthorizationBLLContext authorizationBllContext;
 
     private readonly IDictionaryCache<EntityType, IAuthorizationTypedExternalSource> _typedCache;
 
 
-    public AuthorizationExternalSource(TBLLContext context, IAuthorizationBLLContext authorizationBLLContext, ISecurityTypeResolverContainer securityTypeResolverContainer)
-            : base (context)
+    public AuthorizationExternalSource(IAuthorizationBLLContext authorizationBLLContext)
     {
-        if (authorizationBLLContext == null) throw new ArgumentNullException(nameof(authorizationBLLContext));
-        if (securityTypeResolverContainer == null) throw new ArgumentNullException(nameof(securityTypeResolverContainer));
-
-        this._authorizationBLLContext = authorizationBLLContext;
-        this._securityEntityTypeResolver = securityTypeResolverContainer.SecurityTypeResolver;
+        this.authorizationBllContext = authorizationBLLContext ?? throw new ArgumentNullException(nameof(authorizationBLLContext));
 
         this._typedCache = new DictionaryCache<EntityType, IAuthorizationTypedExternalSource>(entityType => this.GetTypedInternal(entityType, true));
     }
@@ -40,23 +30,20 @@ public class AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBas
         return withCache ? this._typedCache[entityType] : this.GetTypedInternal(entityType, false);
     }
 
-
     private IAuthorizationTypedExternalSource GetTypedInternal(EntityType entityType, bool withCache)
     {
         if (entityType == null) throw new ArgumentNullException(nameof(entityType));
 
-        var domainType = this._securityEntityTypeResolver.Resolve(entityType.Name, true);
+        var domainType = this.authorizationBllContext.SecurityTypeResolver.Resolve(entityType, true);
 
         var authorizationTypedExternalSourceType = entityType.Expandable
                                                            ? typeof(HierarchicalAuthorizationTypedExternalSource<>)
                                                            : typeof(PlainAuthorizationTypedExternalSource<>);
 
+        var authorizationTypedExternalSourceImplType = authorizationTypedExternalSourceType.MakeGenericType(domainType);
 
-        var authorizationTypedExternalSourceImplType = authorizationTypedExternalSourceType.MakeGenericType(typeof(TBLLContext), typeof(TPersistentDomainObjectBase), typeof(TAuditPersistentDomainObjectBase), domainType);
-
-        var authorizationTypedExternalSourceImplTypeCtor = authorizationTypedExternalSourceImplType.GetConstructors().Single();
-
-        var result = (IAuthorizationTypedExternalSource)authorizationTypedExternalSourceImplTypeCtor.Invoke(new object[] { this.Context, this._authorizationBLLContext, entityType, GetDisplayFunc(domainType) });
+        var result = (IAuthorizationTypedExternalSource)
+            ActivatorUtilities.CreateInstance(this.authorizationBllContext.ServiceProvider, authorizationTypedExternalSourceImplType, entityType, GetDisplayFunc(domainType));
 
         return withCache ? result.WithCache() : result;
     }
@@ -83,7 +70,7 @@ public class AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBas
         }
         else
         {
-            throw new Exception($"{domainType.Name} must be implement {typeof (ISecurityVisualIdentityObject).Name} or {typeof (IVisualIdentityObject).Name}");
+            throw new Exception($"{domainType.Name} must be implement {nameof(ISecurityVisualIdentityObject)} or {nameof(IVisualIdentityObject)}");
         }
     }
 
@@ -101,27 +88,24 @@ public class AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBas
 
 
 
-    private abstract class AuthorizationTypedExternalSourceBase<TDomainObject> : BLLContextContainer<TBLLContext>, IAuthorizationTypedExternalSource
-            where TDomainObject : class, TPersistentDomainObjectBase
+    private abstract class AuthorizationTypedExternalSourceBase<TDomainObject> : IAuthorizationTypedExternalSource
+            where TDomainObject : class, IIdentityObject<Guid>
     {
-        private readonly IAuthorizationBLLContext _authorizationBLLContext;
+        private readonly IRepository<TDomainObject> domainRepository;
 
-        private readonly EntityType _entityType;
-        private readonly Func<TDomainObject, string> _getSecurityNameFunc;
+        private readonly IAuthorizationBLLContext authorizationBLLContext;
 
+        private readonly EntityType entityType;
 
-        protected AuthorizationTypedExternalSourceBase(TBLLContext context, IAuthorizationBLLContext authorizationBLLContext, EntityType entityType, Func<TDomainObject, string> getSecurityNameFunc)
-                : base (context)
+        private readonly Func<TDomainObject, string> getSecurityNameFunc;
+
+        protected AuthorizationTypedExternalSourceBase(IRepository<TDomainObject> domainRepository, IAuthorizationBLLContext authorizationBLLContext, EntityType entityType, Func<TDomainObject, string> getSecurityNameFunc)
         {
-            if (authorizationBLLContext == null) throw new ArgumentNullException(nameof(authorizationBLLContext));
-            if (entityType == null) throw new ArgumentNullException(nameof(entityType));
-            if (getSecurityNameFunc == null) throw new ArgumentNullException(nameof(getSecurityNameFunc));
-
-            this._authorizationBLLContext = authorizationBLLContext;
-            this._entityType = entityType;
-            this._getSecurityNameFunc = getSecurityNameFunc;
+            this.domainRepository = domainRepository;
+            this.authorizationBLLContext = authorizationBLLContext ?? throw new ArgumentNullException(nameof(authorizationBLLContext));
+            this.entityType = entityType ?? throw new ArgumentNullException(nameof(entityType));
+            this.getSecurityNameFunc = getSecurityNameFunc ?? throw new ArgumentNullException(nameof(getSecurityNameFunc));
         }
-
 
         protected abstract Func<TDomainObject, Func<TDomainObject, string>, SecurityEntity> CreateSecurityEntityFunc { get; }
 
@@ -129,75 +113,71 @@ public class AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBas
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            return this.CreateSecurityEntityFunc(domainObject, this._getSecurityNameFunc);
+            return this.CreateSecurityEntityFunc(domainObject, this.getSecurityNameFunc);
         }
-
 
         public IEnumerable<SecurityEntity> GetSecurityEntities()
         {
-            return this.Context.Logics.Default.Create<TDomainObject>().GetFullList().Select(this.CreateSecurityEntity);
+            return this.domainRepository.GetQueryable().ToList().Select(this.CreateSecurityEntity);
         }
 
         public IEnumerable<SecurityEntity> GetSecurityEntitiesByIdents(IEnumerable<Guid> preSecurityEntityIdents)
         {
             var securityEntityIdents = preSecurityEntityIdents.ToList();
 
-            return this.Context.Logics.Default.Create<TDomainObject>().GetListByIdents(securityEntityIdents.ToArray()).Select(this.CreateSecurityEntity);
+            return this.domainRepository.GetQueryable().Where(obj => securityEntityIdents.Contains(obj.Id)).ToList()
+                       .Select(this.CreateSecurityEntity);
         }
-
-
-
 
         public IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId)
         {
-            var secutityObject = this.Context.Logics.Default.Create<TDomainObject>().GetById(startSecurityEntityId, true);
+            var securityObject = this.domainRepository.GetQueryable().Single(obj => obj.Id == startSecurityEntityId);
 
-            return this.GetSecurityEntitiesWithMasterExpand(secutityObject).Select(this.CreateSecurityEntity);
+            return this.GetSecurityEntitiesWithMasterExpand(securityObject).Select(this.CreateSecurityEntity);
         }
 
-
         protected abstract IEnumerable<TDomainObject> GetSecurityEntitiesWithMasterExpand(TDomainObject startSecurityObject);
-
 
         public PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false)
         {
             if (securityEntity == null) throw new ArgumentNullException(nameof(securityEntity));
 
-            var bll = this._authorizationBLLContext.Logics.PermissionFilterEntity;
+            var bll = this.authorizationBLLContext.Logics.PermissionFilterEntity;
 
-            var existsFilterEntity = bll.GetObjectBy(v => v.EntityType == this._entityType && v.EntityId == securityEntity.Id);
+            var existsFilterEntity = bll.GetObjectBy(v => v.EntityType == this.entityType && v.EntityId == securityEntity.Id);
 
             if (disableExistsCheck)
             {
                 return existsFilterEntity ?? new PermissionFilterEntity
                                              {
-                                                     EntityType = this._entityType,
+                                                     EntityType = this.entityType,
                                                      EntityId = securityEntity.Id
                                              }.Self(bll.Save);
             }
             else
             {
-                var entity = this.Context.Logics.Default.Create<TDomainObject>().GetById(securityEntity.Id, true);
+                var entity = this.domainRepository.GetQueryable().Single(obj => obj.Id == securityEntity.Id);
 
                 return existsFilterEntity ?? new PermissionFilterEntity
                                              {
-                                                     EntityType = this._entityType,
+                                                     EntityType = this.entityType,
                                                      EntityId = entity.Id
                                              }.Self(bll.Save);
             }
         }
     }
 
-
     private class PlainAuthorizationTypedExternalSource<TDomainObject> : AuthorizationTypedExternalSourceBase<TDomainObject>
-            where TDomainObject : class, TAuditPersistentDomainObjectBase
+            where TDomainObject : class, IIdentityObject<Guid>, IActiveObject
     {
-        public PlainAuthorizationTypedExternalSource(TBLLContext context, IAuthorizationBLLContext authorizationBLLContext, EntityType entityType, Func<TDomainObject, string> getSecurityNameFunc)
-                : base(context, authorizationBLLContext, entityType, getSecurityNameFunc)
+        public PlainAuthorizationTypedExternalSource(
+            IRepository<TDomainObject> domainRepository,
+            IAuthorizationBLLContext authorizationBLLContext,
+            EntityType entityType,
+            Func<TDomainObject, string> getSecurityNameFunc)
+            : base(domainRepository, authorizationBLLContext, entityType, getSecurityNameFunc)
         {
-
         }
-
 
         protected override Func<TDomainObject, Func<TDomainObject, string>, SecurityEntity> CreateSecurityEntityFunc => SecurityEntity.CreatePlain;
 
@@ -207,16 +187,17 @@ public class AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBas
         }
     }
 
-
     private class HierarchicalAuthorizationTypedExternalSource<TDomainObject> : AuthorizationTypedExternalSourceBase<TDomainObject>
-            where TDomainObject : class, TAuditPersistentDomainObjectBase, IDefaultHierarchicalPersistentDomainObjectBase<TDomainObject>
+            where TDomainObject : class, IIdentityObject<Guid>, IActiveObject, IParentSource<TDomainObject>
     {
-        public HierarchicalAuthorizationTypedExternalSource(TBLLContext context, IAuthorizationBLLContext authorizationBLLContext, EntityType entityType, Func<TDomainObject, string> getSecurityNameFunc)
-                : base(context, authorizationBLLContext, entityType, getSecurityNameFunc)
+        public HierarchicalAuthorizationTypedExternalSource(
+            IRepository<TDomainObject> domainRepository,
+            IAuthorizationBLLContext authorizationBLLContext,
+            EntityType entityType,
+            Func<TDomainObject, string> getSecurityNameFunc)
+            : base(domainRepository, authorizationBLLContext, entityType, getSecurityNameFunc)
         {
-
         }
-
 
         protected override Func<TDomainObject, Func<TDomainObject, string>, SecurityEntity> CreateSecurityEntityFunc => SecurityEntity.CreateHierarchical;
 

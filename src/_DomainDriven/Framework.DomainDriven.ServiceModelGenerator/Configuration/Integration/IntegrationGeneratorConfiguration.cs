@@ -1,12 +1,11 @@
 ﻿using System.CodeDom;
 
-using Framework.CodeDom;
-using Framework.Core;
 using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.Integration.Remove;
 using Framework.Projection;
-using Framework.Security;
+
+using Framework.SecuritySystem.Bss;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 

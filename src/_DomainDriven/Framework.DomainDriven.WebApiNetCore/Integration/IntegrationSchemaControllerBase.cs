@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using System.Net.Mime;
 
-using Framework.Core;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
 
 using Microsoft.AspNetCore.Mvc;
 

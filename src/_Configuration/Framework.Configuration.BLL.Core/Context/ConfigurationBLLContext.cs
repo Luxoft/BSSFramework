@@ -99,8 +99,6 @@ public partial class ConfigurationBLLContext
 
     public IAuthorizationBLLContext Authorization { get; }
 
-    public bool DisplayInternalError => this.Authorization.AuthorizationSystem.HasAccess(ConfigurationSecurityOperation.DisplayInternalError);
-
     public ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
     public bool SubscriptionEnabled => this.lazyTargetSystemServiceCache.Value.Values.Any(tss => tss.TargetSystem.SubscriptionEnabled);

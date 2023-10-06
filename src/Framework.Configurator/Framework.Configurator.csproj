@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Configurator</PackageId>
@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="configurator-ui/dist/**/*" Exclude="**/*/*.txt;" />
-    <None Remove="Templates\Permissions.xlsx" />
     <EmbeddedResource Include="Templates\Permissions.xlsx" />
   </ItemGroup>
 

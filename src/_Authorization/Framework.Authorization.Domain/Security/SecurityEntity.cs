@@ -42,7 +42,7 @@ public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, ISecurit
     /// <param name="getSecurityNameFunc">Функция (переимоновывает объект)</param>
     /// <returns>Элемент плоского списка</returns>
     public static SecurityEntity CreatePlain<TDomainObject>(TDomainObject domainObject, Func<TDomainObject, string> getSecurityNameFunc)
-            where TDomainObject : class, IDefaultAuditPersistentDomainObjectBase
+            where TDomainObject : class, IActiveObject, IIdentityObject<Guid>
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
         if (getSecurityNameFunc == null) throw new ArgumentNullException(nameof(getSecurityNameFunc));
@@ -63,7 +63,7 @@ public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, ISecurit
     /// <param name="getSecurityNameFunc">Функция (переимоновывает объект)</param>
     /// <returns>Элемент дерева</returns>
     public static SecurityEntity CreateHierarchical<TDomainObject>(TDomainObject domainObject, Func<TDomainObject, string> getSecurityNameFunc)
-            where TDomainObject : class, IDefaultAuditPersistentDomainObjectBase, IDefaultHierarchicalPersistentDomainObjectBase<TDomainObject>
+            where TDomainObject : class, IActiveObject, IIdentityObject<Guid>, IParentSource<TDomainObject>
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
         if (getSecurityNameFunc == null) throw new ArgumentNullException(nameof(getSecurityNameFunc));

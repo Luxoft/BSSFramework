@@ -1,5 +1,4 @@
 ﻿using Framework.Authorization;
-using Framework.Core;
 using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 
@@ -157,8 +156,6 @@ public static class SampleSystemSecurityOperation
     public static SecurityOperation<Guid> SearchNotificationOperation { get; } = new(nameof(SearchNotificationOperation), new Guid("{E66C1E91-6290-4192-BDE7-074634562288}"));
 
     public static SecurityOperation<Guid> AuthorizationImpersonate { get; } = AuthorizationSecurityOperation.AuthorizationImpersonate;
-
-    public static SecurityOperation<Guid> SystemIntegration { get; } = BssSecurityOperation.SystemIntegration;
 
     #region AuthWorkflow
 

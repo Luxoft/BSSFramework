@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Framework.Events\Framework.Events.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AuthorizationExternalSource\" />
+  </ItemGroup>
+
 </Project>

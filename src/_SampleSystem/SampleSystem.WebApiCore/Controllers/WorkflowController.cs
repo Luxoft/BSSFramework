@@ -1,9 +1,12 @@
 ﻿using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.Environment;
 using Framework.Authorization.Generated.DTO;
+
 using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
+
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.BLL;
@@ -48,7 +51,7 @@ public class WorkflowController : ControllerBase
                                                   ctx =>
                                                                       {
                                                                           ctx.Authorization.AuthorizationSystem.CheckAccess(
-                                                                           SampleSystemSecurityOperation.SystemIntegration);
+                                                                           BssSecurityOperation.SystemIntegration);
                                                                           return Task.CompletedTask;
                                                                       });
 

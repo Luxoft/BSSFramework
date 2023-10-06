@@ -15,6 +15,7 @@ using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -39,6 +40,7 @@ public static class ServiceCollectionExtensions
 
         services.RegisterAuthorizationSystem();
 
+        services.AddSingleton(new SecurityOperationTypeInfo(typeof(BssSecurityOperation)));
         services.RegisterAuthorizationSecurity();
         services.RegisterConfigurationSecurity();
 
@@ -146,6 +148,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
     {
         return services.AddSingleton(new SecurityOperationTypeInfo(typeof(ConfigurationSecurityOperation)))
+
                        .RegisterDomainSecurityServices<Guid>(
                            rb => rb.Add<ExceptionMessage>(
                                        b => b.SetView(ConfigurationSecurityOperation.ExceptionMessageView))

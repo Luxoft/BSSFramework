@@ -11,9 +11,6 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.Tracking;
-using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
@@ -125,7 +122,7 @@ public static class SampleSystemFrameworkExtensions
     {
         // For auth
         services.AddScopedFrom<ISecurityTypeResolverContainer, ISampleSystemBLLContext>();
-        services.AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource<ISampleSystemBLLContext, PersistentDomainObjectBase, AuditPersistentDomainObjectBase>>();
+        services.AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>();
 
         // For notification
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));

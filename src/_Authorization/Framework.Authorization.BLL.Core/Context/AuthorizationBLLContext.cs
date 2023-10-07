@@ -14,6 +14,7 @@ using Framework.SecuritySystem;
 
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystem.ExternalSource;
 
 namespace Framework.Authorization.BLL;
 
@@ -43,7 +44,6 @@ public partial class AuthorizationBLLContext
             IRootSecurityService<PersistentDomainObjectBase> securityService,
             IAuthorizationBLLFactoryContainer logics,
             IAuthorizationExternalSource externalSource,
-            ISecurityTypeResolverContainer securityTypeResolverContainer,
             INotificationPrincipalExtractor notificationPrincipalExtractor,
             IAuthorizationBLLContextSettings settings,
             IAuthorizationSystem<Guid> authorizationSystem,
@@ -78,9 +78,6 @@ public partial class AuthorizationBLLContext
 
         this.lazyCurrentPrincipal = LazyHelper.Create(() => this.Logics.Principal.GetCurrent());
 
-
-        this.SecurityTypeResolver = securityTypeResolverContainer.SecurityTypeResolver.OverrideInput((EntityType entityType) => entityType.Name);
-
         this.lazySettings = LazyHelper.Create(() => this.Logics.Default.Create<Setting>().GetFullList().ToSettings());
 
         this.entityTypeByNameCache = new DictionaryCache<string, EntityType>(
@@ -98,8 +95,6 @@ public partial class AuthorizationBLLContext
     public IConfigurationBLLContext Configuration { get; }
 
     public ITypeResolver<string> TypeResolver { get; }
-
-    public ITypeResolver<EntityType> SecurityTypeResolver { get; }
 
     public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 

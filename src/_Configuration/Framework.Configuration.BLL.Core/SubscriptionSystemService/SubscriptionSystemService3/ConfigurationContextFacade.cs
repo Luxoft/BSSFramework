@@ -5,6 +5,8 @@ using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.SecuritySystem;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.Configuration.BLL.SubscriptionSystemService3;
 
 /// <summary>
@@ -86,7 +88,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(entityType));
         }
 
-        var result = this.context.Authorization.SecurityTypeResolver.Resolve(entityType, true);
+        var result = this.context.ServiceProvider.GetRequiredService<ISecurityContextInfoService>().GetSecurityContextInfo(entityType.Name).Type;
         return result;
     }
 

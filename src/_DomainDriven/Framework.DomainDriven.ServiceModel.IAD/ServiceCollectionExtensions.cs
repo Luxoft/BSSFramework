@@ -3,6 +3,7 @@ using Framework.Authorization.Domain;
 using Framework.Authorization.Environment;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.DomainServices;
+using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Authorization.SecuritySystem.OperationInitializer;
 using Framework.Configuration;
 using Framework.Configuration.Domain;
@@ -15,6 +16,7 @@ using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -39,6 +41,7 @@ public static class ServiceCollectionExtensions
 
         services.RegisterAuthorizationSystem();
 
+        services.AddSingleton(new SecurityOperationTypeInfo(typeof(BssSecurityOperation)));
         services.RegisterAuthorizationSecurity();
         services.RegisterConfigurationSecurity();
 
@@ -85,8 +88,6 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
 
-                       .AddScoped<ISecurityContextInfoService<Guid>, SecurityContextInfoService>()
-
                        .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
 
                        .AddScoped<IRunAsManager, RunAsManger>()
@@ -113,7 +114,11 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
 
-                       .AddScoped<IAuthorizationOperationInitializer, AuthorizationOperationInitializer>();
+                       .AddScoped<IAuthorizationOperationInitializer, AuthorizationOperationInitializer>()
+
+                       .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
+
+                       .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>();
     }
 
 
@@ -126,14 +131,17 @@ public static class ServiceCollectionExtensions
                                        b => b.SetView(AuthorizationSecurityOperation.PrincipalView)
                                              .SetEdit(AuthorizationSecurityOperation.PrincipalEdit)
                                              .SetCustomService<AuthorizationPrincipalSecurityService>())
+
                                    .Add<Permission>(
                                        b => b.SetView(AuthorizationSecurityOperation.PrincipalView)
                                              .SetEdit(AuthorizationSecurityOperation.PrincipalEdit)
                                              .SetCustomService<AuthorizationPermissionSecurityService>())
+
                                    .Add<BusinessRole>(
                                        b => b.SetView(AuthorizationSecurityOperation.BusinessRoleView)
                                              .SetEdit(AuthorizationSecurityOperation.BusinessRoleEdit)
                                              .SetCustomService<AuthorizationBusinessRoleSecurityService>())
+
                                    .Add<Operation>(
                                        b => b.SetView(AuthorizationSecurityOperation.OperationView)
                                              .SetEdit(AuthorizationSecurityOperation.OperationEdit)
@@ -146,6 +154,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
     {
         return services.AddSingleton(new SecurityOperationTypeInfo(typeof(ConfigurationSecurityOperation)))
+
                        .RegisterDomainSecurityServices<Guid>(
                            rb => rb.Add<ExceptionMessage>(
                                        b => b.SetView(ConfigurationSecurityOperation.ExceptionMessageView))

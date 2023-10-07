@@ -4,8 +4,6 @@ namespace Framework.DomainDriven.BLL.Configuration;
 
 public interface IConfigurationBLLContext
 {
-    bool DisplayInternalError { get; }
-
     IBLLSimpleQueryBase<IEmployee> GetEmployeeSource();
 
     /// <summary>

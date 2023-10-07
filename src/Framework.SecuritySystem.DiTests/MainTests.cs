@@ -95,11 +95,6 @@ public class MainTests
 
     private IServiceProvider BuildRootServiceProvider()
     {
-        var securityContextInfoService = Substitute.For<ISecurityContextInfoService<Guid>>();
-
-        securityContextInfoService.GetSecurityContextInfo(Arg.Any<Type>())
-                                  .Returns(callInfo => new SecurityContextInfo<Guid>(Guid.Empty, ((Type)callInfo[0]).Name));
-
         return new ServiceCollection()
 
                .AddScoped<BusinessUnitAncestorLinkSourceExecuteCounter>()
@@ -125,7 +120,8 @@ public class MainTests
 
                .AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
 
-               .AddScoped(_ => securityContextInfoService)
+               .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
+               .RegisterSecurityContextInfoService<Guid>(b => b.Add<BusinessUnit>(Guid.NewGuid()))
 
                .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }

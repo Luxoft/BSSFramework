@@ -18,4 +18,15 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
+
+    public static IServiceCollection RegisterSecurityContextInfoService<TIdent>(this IServiceCollection services, Action<ISecurityContextInfoBuilder<TIdent>> setup)
+    {
+        var builder = new SecurityContextInfoBuilder<TIdent>();
+
+        setup(builder);
+
+        builder.Register(services);
+
+        return services;
+    }
 }

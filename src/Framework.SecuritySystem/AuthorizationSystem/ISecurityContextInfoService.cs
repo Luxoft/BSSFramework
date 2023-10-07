@@ -1,6 +1,8 @@
 ﻿namespace Framework.SecuritySystem;
 
-public interface ISecurityContextInfoService<TIdent>
+public interface ISecurityContextInfoService
 {
-    SecurityContextInfo<TIdent> GetSecurityContextInfo(Type type);
+    SecurityContextInfo GetSecurityContextInfo(Type type);
+
+    SecurityContextInfo GetSecurityContextInfo(string name);
 }

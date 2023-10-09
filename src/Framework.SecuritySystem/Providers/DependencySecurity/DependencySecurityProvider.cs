@@ -29,7 +29,7 @@ namespace Framework.SecuritySystem
 
         public AccessResult GetAccessResult(TDomainObject domainObject)
         {
-            return this.baseSecurityProvider.GetAccessResult(this.selector.Eval(domainObject));
+            return this.baseSecurityProvider.GetAccessResult(this.selector.Eval(domainObject)).TryOverrideDomainObject(domainObject);
         }
 
         public bool HasAccess(TDomainObject domainObject)

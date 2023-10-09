@@ -6,7 +6,6 @@ using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
-using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.Transfering;
 using Framework.Validation;
@@ -32,8 +31,7 @@ public partial class Employee :
         IMaster<EmployeeAndEmployeeSpecializationLink>,
         IMaster<EmployeePhoto>,
         ISecurityContext,
-        IEmployee,
-        ISecurityVisualIdentityObject
+        IEmployee
 {
     private readonly ICollection<EmployeePhoto> employeePhotos = new List<EmployeePhoto>();
 
@@ -430,8 +428,6 @@ public partial class Employee :
     {
         get { return this.employeePhotos; }
     }
-
-    string ISecurityVisualIdentityObject.Name => this.Login;
 
     public virtual int Age
     {

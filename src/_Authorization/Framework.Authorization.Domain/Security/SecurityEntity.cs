@@ -6,7 +6,7 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 /// Контексты, в разрезе которых выдаются права
 /// </summary>
-public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, ISecurityVisualIdentityObject, IVisualIdentityObject, IActiveObject, IEquatable<SecurityEntity>
+public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, IVisualIdentityObject, IActiveObject, IEquatable<SecurityEntity>
 {
     /// <summary>
     /// Конструктор

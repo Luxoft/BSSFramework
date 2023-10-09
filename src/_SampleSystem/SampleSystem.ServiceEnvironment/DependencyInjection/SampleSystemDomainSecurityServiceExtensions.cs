@@ -33,7 +33,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
             b => b.Add<BusinessUnit>(new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"))
                   .Add<Location>(new Guid("4641395B-9079-448E-9CB8-A083015235A3"))
                   .Add<ManagementUnit>(new Guid("77E78AEF-9512-46E0-A33D-AAE58DC7E18C"))
-                  .Add<Employee>(new Guid("B3F2536E-27C4-4B91-AE0B-0EE2FFD4465F")));
+                  .Add<Employee>(new Guid("B3F2536E-27C4-4B91-AE0B-0EE2FFD4465F"), displayFunc: employee => employee.Login));
     }
 
     private static IServiceCollection RegisterMainDomainSecurityServices(this IServiceCollection services)

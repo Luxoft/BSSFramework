@@ -9,13 +9,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
-import { BehaviorSubject, Observable, debounceTime, startWith, switchMap, map } from 'rxjs';
+import { BehaviorSubject, Observable, debounceTime, map, startWith, switchMap } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 import { EditPrincipalDialogComponent } from './components/edit-principal-dialog/edit-principal-dialog.component';
 import { GrantRightsDialogComponent } from './components/grant-rights-dialog/grant-rights-dialog.component';
-import { ViewPrincipalDialogComponent } from './components/view-principal-dialog/view-principal-dialog.component';
 import { IGrantedRight } from './components/grant-rights-dialog/grant-rights-dialog.models';
+import { ViewPrincipalDialogComponent } from './components/view-principal-dialog/view-principal-dialog.component';
 
 export interface IPrincipal {
   Id: string | undefined;
@@ -78,9 +78,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.http.post('api/principals', JSON.stringify(name)).subscribe(() => {
-        this.snackBar.open('Principal has been added');
-      });
+      this.http.post('api/principals', JSON.stringify(name)).subscribe(() => this.reload('Principal has been added'));
     });
   }
 
@@ -90,10 +88,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.http.post(`api/principal/${principal.Id}`, JSON.stringify(newName)).subscribe(() => {
-        this.snackBar.open('Principal has been changed');
-        this.control.setValue(this.control.value);
-      });
+      this.http.post(`api/principal/${principal.Id}`, JSON.stringify(newName)).subscribe(() => this.reload('Principal has been changed'));
     });
   }
 
@@ -110,10 +105,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.http.delete(`api/principal/${principal.Id}`).subscribe(() => {
-          this.snackBar.open('Principal has been deleted');
-          this.control.setValue(this.control.value);
-        });
+        this.http.delete(`api/principal/${principal.Id}`).subscribe(() => this.reload('Principal has been deleted'));
       });
   }
 
@@ -126,10 +118,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.http.post(`api/principal/${principal.Id}/permissions`, x).subscribe(() => {
-          this.snackBar.open('Rights has been granted');
-          this.control.setValue(this.control.value);
-        });
+        this.http.post(`api/principal/${principal.Id}/permissions`, x).subscribe(() => this.reload('Rights has been granted'));
       });
   }
 
@@ -164,5 +153,10 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
 
   private openEditDialog(principal: IPrincipal | undefined = undefined): Observable<string> {
     return this.dialog.open(EditPrincipalDialogComponent, { data: principal, height: '250px', width: '400px' }).beforeClosed();
+  }
+
+  private reload(message: string): void {
+    this.snackBar.open(message);
+    this.control.setValue(this.control.value);
   }
 }

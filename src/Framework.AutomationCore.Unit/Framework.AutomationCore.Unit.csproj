@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>Framework.AutomationCore.Unit</PackageId>
+    <PackageId>Luxoft.Framework.AutomationCore.Unit</PackageId>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

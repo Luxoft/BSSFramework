@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__SolutionItems", "__Soluti
 		.editorconfig = .editorconfig
 		__SolutionItems\CommonAssemblyInfo.cs = __SolutionItems\CommonAssemblyInfo.cs
 		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
 		Settings.StyleCop = Settings.StyleCop
 		tfs.runsettings = tfs.runsettings
 	EndProjectSection
@@ -370,7 +371,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.SecuritySystem.Bs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Authorization.Environment", "_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj", "{60B19281-D20D-4880-9D11-014DDD37E433}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.AutomationCore.Unit", "Framework.AutomationCore.Unit\Framework.AutomationCore.Unit.csproj", "{7A4F922E-A66E-4DB6-A07F-DC3780DCF492}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.AutomationCore.Unit", "Framework.AutomationCore.Unit\Framework.AutomationCore.Unit.csproj", "{7A4F922E-A66E-4DB6-A07F-DC3780DCF492}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

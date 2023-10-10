@@ -15,8 +15,8 @@ public class AssemblyInitializeAndCleanup
     private readonly Func<IServiceProvider> getServiceProviderAction;
 
     public AssemblyInitializeAndCleanup(
-            Func<IServiceProvider> getServiceProviderAction,
-            Action<IServiceProvider> releaseServiceProviderAction)
+        Func<IServiceProvider> getServiceProviderAction,
+        Action<IServiceProvider> releaseServiceProviderAction)
     {
         this.getServiceProviderAction = getServiceProviderAction;
         this.releaseServiceProviderAction = releaseServiceProviderAction;
@@ -40,6 +40,52 @@ public class AssemblyInitializeAndCleanup
     public void EnvironmentInitialize()
     {
         var serviceProvider = this.getServiceProviderAction.Invoke();
+
+        try
+        {
+            this.Initialize(serviceProvider);
+        }
+        finally
+        {
+            this.releaseServiceProviderAction(serviceProvider);
+        }
+    }
+
+    public void EnvironmentCleanup()
+    {
+        var serviceProvider = this.getServiceProviderAction.Invoke();
+        try
+        {
+            this.Cleanup(serviceProvider);
+        }
+        finally
+        {
+            this.releaseServiceProviderAction(serviceProvider);
+        }
+    }
+
+    private void Cleanup(IServiceProvider serviceProvider)
+    {
+        var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
+        var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
+
+        switch (configUtil.TestRunMode)
+        {
+            case TestRunMode.DefaultRunModeOnEmptyDatabase:
+                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
+                RunAction("Drop Databases", databaseGenerator.DatabaseContext.Drop);
+                RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
+                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
+                break;
+
+            default:
+                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
+                break;
+        }
+    }
+
+    private void Initialize(IServiceProvider serviceProvider)
+    {
         var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
         var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
 
@@ -70,30 +116,5 @@ public class AssemblyInitializeAndCleanup
                 RunAction("Drop Database", databaseGenerator.DatabaseContext.Drop);
                 break;
         }
-
-        this.releaseServiceProviderAction(serviceProvider);
-    }
-
-    public void EnvironmentCleanup()
-    {
-        var serviceProvider = this.getServiceProviderAction.Invoke();
-        var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
-        var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
-
-        switch (configUtil.TestRunMode)
-        {
-            case TestRunMode.DefaultRunModeOnEmptyDatabase:
-                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                RunAction("Drop Databases", databaseGenerator.DatabaseContext.Drop);
-                RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
-                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
-                break;
-
-            default:
-                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
-                break;
-        }
-
-        this.releaseServiceProviderAction(serviceProvider);
     }
 }

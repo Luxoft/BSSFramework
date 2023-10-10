@@ -40,60 +40,71 @@ public class AssemblyInitializeAndCleanup
     public void EnvironmentInitialize()
     {
         var serviceProvider = this.getServiceProviderAction.Invoke();
-        var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
-        var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
 
-        // if (!configUtil.UseLocalDb)
-        // {
-        //     RunAction("Check Server Name in allowed list", databaseGenerator.CheckServerAllowed);
-        // }
-
-        switch (configUtil.TestRunMode)
+        try
         {
-            case TestRunMode.RestoreDatabaseUsingAttach:
-                RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
-                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                databaseGenerator.CheckAndCreateDetachedFiles();
-                databaseGenerator.DatabaseContext.Drop();
-                break;
-            case TestRunMode.GenerateTestDataOnExistingDatabase:
-                break;
-            default:
-                RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
-                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
-                RunAction("Drop and Create Databases", databaseGenerator.DatabaseContext.ReCreate);
-                RunAction("Generate All Databases", databaseGenerator.GenerateDatabases);
-                RunAction("Insert Statements", databaseGenerator.ExecuteInsertsForDatabases);
-                RunAction("Test Data Initialize", databaseGenerator.GenerateTestData);
-                RunAction("Backup Databases", databaseGenerator.DatabaseContext.CopyDetachedFiles);
-                RunAction("Drop Database", databaseGenerator.DatabaseContext.Drop);
-                break;
-        }
+            var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
+            var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
 
-        this.releaseServiceProviderAction(serviceProvider);
+            // if (!configUtil.UseLocalDb)
+            // {
+            //     RunAction("Check Server Name in allowed list", databaseGenerator.CheckServerAllowed);
+            // }
+
+            switch (configUtil.TestRunMode)
+            {
+                case TestRunMode.RestoreDatabaseUsingAttach:
+                    RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
+                    RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
+                    databaseGenerator.CheckAndCreateDetachedFiles();
+                    databaseGenerator.DatabaseContext.Drop();
+                    break;
+                case TestRunMode.GenerateTestDataOnExistingDatabase:
+                    break;
+                default:
+                    RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
+                    RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
+                    RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
+                    RunAction("Drop and Create Databases", databaseGenerator.DatabaseContext.ReCreate);
+                    RunAction("Generate All Databases", databaseGenerator.GenerateDatabases);
+                    RunAction("Insert Statements", databaseGenerator.ExecuteInsertsForDatabases);
+                    RunAction("Test Data Initialize", databaseGenerator.GenerateTestData);
+                    RunAction("Backup Databases", databaseGenerator.DatabaseContext.CopyDetachedFiles);
+                    RunAction("Drop Database", databaseGenerator.DatabaseContext.Drop);
+                    break;
+            }
+        }
+        finally
+        {
+            this.releaseServiceProviderAction(serviceProvider);
+        }
     }
 
     public void EnvironmentCleanup()
     {
         var serviceProvider = this.getServiceProviderAction.Invoke();
-        var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
-        var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
-
-        switch (configUtil.TestRunMode)
+        try
         {
-            case TestRunMode.DefaultRunModeOnEmptyDatabase:
-                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                RunAction("Drop Databases", databaseGenerator.DatabaseContext.Drop);
-                RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
-                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
-                break;
+            var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
+            var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
 
-            default:
-                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
-                break;
+            switch (configUtil.TestRunMode)
+            {
+                case TestRunMode.DefaultRunModeOnEmptyDatabase:
+                    RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
+                    RunAction("Drop Databases", databaseGenerator.DatabaseContext.Drop);
+                    RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
+                    RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
+                    break;
+
+                default:
+                    RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
+                    break;
+            }
         }
-
-        this.releaseServiceProviderAction(serviceProvider);
+        finally
+        {
+            this.releaseServiceProviderAction(serviceProvider);
+        }
     }
 }

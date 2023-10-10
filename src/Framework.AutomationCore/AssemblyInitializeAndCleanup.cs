@@ -15,8 +15,8 @@ public class AssemblyInitializeAndCleanup
     private readonly Func<IServiceProvider> getServiceProviderAction;
 
     public AssemblyInitializeAndCleanup(
-            Func<IServiceProvider> getServiceProviderAction,
-            Action<IServiceProvider> releaseServiceProviderAction)
+        Func<IServiceProvider> getServiceProviderAction,
+        Action<IServiceProvider> releaseServiceProviderAction)
     {
         this.getServiceProviderAction = getServiceProviderAction;
         this.releaseServiceProviderAction = releaseServiceProviderAction;
@@ -43,36 +43,7 @@ public class AssemblyInitializeAndCleanup
 
         try
         {
-            var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
-            var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
-
-            // if (!configUtil.UseLocalDb)
-            // {
-            //     RunAction("Check Server Name in allowed list", databaseGenerator.CheckServerAllowed);
-            // }
-
-            switch (configUtil.TestRunMode)
-            {
-                case TestRunMode.RestoreDatabaseUsingAttach:
-                    RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
-                    RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                    databaseGenerator.CheckAndCreateDetachedFiles();
-                    databaseGenerator.DatabaseContext.Drop();
-                    break;
-                case TestRunMode.GenerateTestDataOnExistingDatabase:
-                    break;
-                default:
-                    RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
-                    RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                    RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
-                    RunAction("Drop and Create Databases", databaseGenerator.DatabaseContext.ReCreate);
-                    RunAction("Generate All Databases", databaseGenerator.GenerateDatabases);
-                    RunAction("Insert Statements", databaseGenerator.ExecuteInsertsForDatabases);
-                    RunAction("Test Data Initialize", databaseGenerator.GenerateTestData);
-                    RunAction("Backup Databases", databaseGenerator.DatabaseContext.CopyDetachedFiles);
-                    RunAction("Drop Database", databaseGenerator.DatabaseContext.Drop);
-                    break;
-            }
+            this.Initialize(serviceProvider);
         }
         finally
         {
@@ -85,26 +56,65 @@ public class AssemblyInitializeAndCleanup
         var serviceProvider = this.getServiceProviderAction.Invoke();
         try
         {
-            var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
-            var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
-
-            switch (configUtil.TestRunMode)
-            {
-                case TestRunMode.DefaultRunModeOnEmptyDatabase:
-                    RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                    RunAction("Drop Databases", databaseGenerator.DatabaseContext.Drop);
-                    RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
-                    RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
-                    break;
-
-                default:
-                    RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
-                    break;
-            }
+            this.Cleanup(serviceProvider);
         }
         finally
         {
             this.releaseServiceProviderAction(serviceProvider);
+        }
+    }
+
+    private void Cleanup(IServiceProvider serviceProvider)
+    {
+        var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
+        var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
+
+        switch (configUtil.TestRunMode)
+        {
+            case TestRunMode.DefaultRunModeOnEmptyDatabase:
+                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
+                RunAction("Drop Databases", databaseGenerator.DatabaseContext.Drop);
+                RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
+                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
+                break;
+
+            default:
+                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
+                break;
+        }
+    }
+
+    private void Initialize(IServiceProvider serviceProvider)
+    {
+        var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
+        var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
+
+        // if (!configUtil.UseLocalDb)
+        // {
+        //     RunAction("Check Server Name in allowed list", databaseGenerator.CheckServerAllowed);
+        // }
+
+        switch (configUtil.TestRunMode)
+        {
+            case TestRunMode.RestoreDatabaseUsingAttach:
+                RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
+                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
+                databaseGenerator.CheckAndCreateDetachedFiles();
+                databaseGenerator.DatabaseContext.Drop();
+                break;
+            case TestRunMode.GenerateTestDataOnExistingDatabase:
+                break;
+            default:
+                RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
+                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
+                RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
+                RunAction("Drop and Create Databases", databaseGenerator.DatabaseContext.ReCreate);
+                RunAction("Generate All Databases", databaseGenerator.GenerateDatabases);
+                RunAction("Insert Statements", databaseGenerator.ExecuteInsertsForDatabases);
+                RunAction("Test Data Initialize", databaseGenerator.GenerateTestData);
+                RunAction("Backup Databases", databaseGenerator.DatabaseContext.CopyDetachedFiles);
+                RunAction("Drop Database", databaseGenerator.DatabaseContext.Drop);
+                break;
         }
     }
 }

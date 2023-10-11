@@ -51,7 +51,7 @@ public abstract class SecurityExpressionBuilderFactoryBase<TIdent> : ISecurityEx
 
             return method.Invoke(this, new object[] { path }) as ISecurityExpressionBuilder<TDomainObject>;
         }
-        else if (pathType.BaseType.Maybe(baseType => baseType.IsGenericTypeImplementation(typeof(SecurityPath<>.FilterSecurityPath<>))))
+        else if (pathType.BaseType.Maybe(baseType => baseType.IsGenericTypeImplementation(typeof(SecurityPath<>))))
         {
             var genericMethod = typeof(SecurityExpressionBuilderFactoryBase<TIdent>).GetMethod(
                 nameof(this.CreateGenericBuilder),
@@ -70,7 +70,7 @@ public abstract class SecurityExpressionBuilderFactoryBase<TIdent> : ISecurityEx
     }
 
     private ISecurityExpressionBuilder<TDomainObject> CreateGenericBuilder<TDomainObject, TSecurityContext>(
-        SecurityPath<TDomainObject>.FilterSecurityPath<TSecurityContext> path)
+        SecurityPath<TDomainObject> path)
         where TSecurityContext : class, IIdentityObject<TIdent>, ISecurityContext
         where TDomainObject : class, IIdentityObject<TIdent>
     {

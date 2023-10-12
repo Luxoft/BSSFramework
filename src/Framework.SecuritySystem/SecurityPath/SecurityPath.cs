@@ -8,12 +8,8 @@ namespace Framework.SecuritySystem;
 /// Контекстное правило доступа (лямбды)
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
-public abstract class SecurityPath<TDomainObject>
+public abstract record SecurityPath<TDomainObject>
 {
-    protected SecurityPath()
-    {
-    }
-
     public abstract SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         where TNewDomainObject : class;
 
@@ -122,21 +118,11 @@ public abstract class SecurityPath<TDomainObject>
         return new ConditionPath(securityFilter);
     }
 
-
     #endregion
 
 
-    public class ConditionPath : SecurityPath<TDomainObject>
+    public record ConditionPath (Expression<Func<TDomainObject, bool>> SecurityFilter) : SecurityPath<TDomainObject>
     {
-        public readonly Expression<Func<TDomainObject, bool>> SecurityFilter;
-
-
-        internal ConditionPath(Expression<Func<TDomainObject, bool>> securityFilter)
-        {
-            this.SecurityFilter = securityFilter ?? throw new ArgumentNullException(nameof(securityFilter));
-        }
-
-
         protected internal override IEnumerable<Type> GetInternalUsedTypes()
         {
             yield break;
@@ -148,76 +134,37 @@ public abstract class SecurityPath<TDomainObject>
         }
     }
 
-    public abstract class BinarySecurityPath : SecurityPath<TDomainObject>
+    public abstract record BinarySecurityPath(SecurityPath<TDomainObject> Left, SecurityPath<TDomainObject> Right) : SecurityPath<TDomainObject>
     {
-        public readonly SecurityPath<TDomainObject> Left;
-
-        public readonly SecurityPath<TDomainObject> Right;
-
-
-        protected BinarySecurityPath(SecurityPath<TDomainObject> left, SecurityPath<TDomainObject> right)
-        {
-            this.Left = left ?? throw new ArgumentNullException(nameof(left));
-            this.Right = right ?? throw new ArgumentNullException(nameof(right));
-        }
-
         protected internal override IEnumerable<Type> GetInternalUsedTypes()
         {
             return this.Left.GetInternalUsedTypes().Concat(this.Right.GetInternalUsedTypes());
         }
     }
 
-    public class OrSecurityPath : BinarySecurityPath
+    public record OrSecurityPath(SecurityPath<TDomainObject> Left, SecurityPath<TDomainObject> Right) : BinarySecurityPath(Left, Right)
     {
-        internal OrSecurityPath(SecurityPath<TDomainObject> path, SecurityPath<TDomainObject> otherPath)
-                : base(path, otherPath)
-        {
-        }
-
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         {
             return new SecurityPath<TNewDomainObject>.OrSecurityPath(this.Left.OverrideInput(selector), this.Right.OverrideInput(selector));
         }
     }
 
-    public class AndSecurityPath : BinarySecurityPath
+    public record AndSecurityPath(SecurityPath<TDomainObject> Left, SecurityPath<TDomainObject> Right) : BinarySecurityPath(Left, Right)
     {
-        internal AndSecurityPath(SecurityPath<TDomainObject> path, SecurityPath<TDomainObject> otherPath)
-                : base(path, otherPath)
-        {
-        }
-
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         {
             return new SecurityPath<TNewDomainObject>.AndSecurityPath(this.Left.OverrideInput(selector), this.Right.OverrideInput(selector));
         }
     }
 
-
-    public abstract class FilterSecurityPath<TSecurityContext> : SecurityPath<TDomainObject>
+    public record SingleSecurityPath<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> SecurityPath, SingleSecurityMode Mode) : SecurityPath<TDomainObject>
+            where TSecurityContext : class, ISecurityContext
     {
         protected internal override IEnumerable<Type> GetInternalUsedTypes()
         {
             yield return typeof(TSecurityContext);
         }
-    }
-
-
-    public class SingleSecurityPath<TSecurityContext> : FilterSecurityPath<TSecurityContext>
-            where TSecurityContext : class, ISecurityContext
-    {
-        public readonly Expression<Func<TDomainObject, TSecurityContext>> SecurityPath;
-
-        public readonly SingleSecurityMode Mode;
-
-
-        internal SingleSecurityPath(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SingleSecurityMode mode)
-        {
-            this.SecurityPath = securityPath ?? throw new ArgumentNullException(nameof(securityPath));
-
-            this.Mode = mode;
-        }
-
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         {
@@ -225,7 +172,7 @@ public abstract class SecurityPath<TDomainObject>
         }
     }
 
-    public class ManySecurityPath<TSecurityContext> : FilterSecurityPath<TSecurityContext>
+    public record ManySecurityPath<TSecurityContext> : SecurityPath<TDomainObject>
             where TSecurityContext : class, ISecurityContext
     {
         public readonly Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> SecurityPath;
@@ -234,13 +181,17 @@ public abstract class SecurityPath<TDomainObject>
 
         public readonly ManySecurityPathMode Mode;
 
-
-        internal ManySecurityPath(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
+        public ManySecurityPath(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
         {
             this.SecurityPath = securityPath ?? throw new ArgumentNullException(nameof(securityPath));
             this.Mode = mode;
 
             this.SecurityPathQ = this.TryExtractSecurityPathQ();
+        }
+
+        protected internal override IEnumerable<Type> GetInternalUsedTypes()
+        {
+            yield return typeof(TSecurityContext);
         }
 
         private Expression<Func<TDomainObject, IQueryable<TSecurityContext>>> TryExtractSecurityPathQ()
@@ -253,33 +204,16 @@ public abstract class SecurityPath<TDomainObject>
             return null;
         }
 
-
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         {
             return new SecurityPath<TNewDomainObject>.ManySecurityPath<TSecurityContext>(this.SecurityPath.OverrideInput(selector), this.Mode);
         }
     }
 
-    public class NestedManySecurityPath<TNestedObject> : SecurityPath<TDomainObject>
-        where TNestedObject : class
+    public record NestedManySecurityPath<TNestedObject> (Expression<Func<TDomainObject, IEnumerable<TNestedObject>>> NestedObjectsPath,
+                                                        SecurityPath<TNestedObject> NestedSecurityPath,
+                                                        ManySecurityPathMode Mode) : SecurityPath<TDomainObject>
     {
-        public readonly Expression<Func<TDomainObject, IEnumerable<TNestedObject>>> NestedObjectsPath;
-
-        public readonly SecurityPath<TNestedObject> NestedSecurityPath;
-
-        public readonly ManySecurityPathMode Mode;
-
-
-        internal NestedManySecurityPath(
-                Expression<Func<TDomainObject, IEnumerable<TNestedObject>>> nestedObjectsPath,
-                SecurityPath<TNestedObject> nestedSecurityPath,
-                ManySecurityPathMode mode)
-        {
-            this.NestedObjectsPath = nestedObjectsPath ?? throw new ArgumentNullException(nameof(nestedObjectsPath));
-            this.NestedSecurityPath = nestedSecurityPath ?? throw new ArgumentNullException(nameof(nestedSecurityPath));
-            this.Mode = mode;
-        }
-
         protected internal override IEnumerable<Type> GetInternalUsedTypes()
         {
             return this.NestedSecurityPath.GetInternalUsedTypes();

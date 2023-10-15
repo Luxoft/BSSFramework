@@ -21,7 +21,7 @@ public class RabbitMqBackgroundService : BackgroundService
 
     private readonly RabbitMqSettings _settings;
 
-    private IModel _channel = default!;
+    private IModel? _channel;
 
     private IConnection? _connection;
 
@@ -40,7 +40,7 @@ public class RabbitMqBackgroundService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         this._connection = await this._client.TryConnectAsync();
-        if (this._connection == null) return;
+        if (this._connection is null) return;
 
         this._channel = this._client.CreateChannel(this._connection);
         await this.Listen(stoppingToken);
@@ -57,8 +57,8 @@ public class RabbitMqBackgroundService : BackgroundService
         {
             await Task.Delay(TimeSpan.FromMilliseconds(this._settings.Consumer.ReceiveMessageDelayMilliseconds), token);
 
-            var result = this._channel.BasicGet(this._settings.Consumer.Queue, false);
-            if (result == null) continue;
+            var result = this._channel!.BasicGet(this._settings.Consumer.Queue, false);
+            if (result is null) continue;
 
             await this.ProcessAsync(result, token);
         }
@@ -66,9 +66,9 @@ public class RabbitMqBackgroundService : BackgroundService
 
     public override void Dispose()
     {
-        this._logger.LogInformation("Listening RabbitMQ events has stopped");
+        if (this._channel is not null) this._logger.LogInformation("Listening RabbitMQ events has stopped");
 
-        this._channel.Close();
+        this._channel?.Close();
         this._connection?.Close();
         base.Dispose();
         GC.SuppressFinalize(this);
@@ -81,12 +81,12 @@ public class RabbitMqBackgroundService : BackgroundService
             var message = Encoding.UTF8.GetString(result.Body.Span);
             await this._messageProcessor.ProcessAsync(result.RoutingKey, message, token);
 
-            this._channel.BasicAck(result.DeliveryTag, false);
+            this._channel!.BasicAck(result.DeliveryTag, false);
         }
         catch (Exception ex)
         {
             this._logger.LogError(ex, "Can not process RabbitMQ message with routing key '{RoutingKey}'", result.RoutingKey);
-            this._channel.BasicNack(result.DeliveryTag, false, true);
+            this._channel!.BasicNack(result.DeliveryTag, false, true);
         }
     }
 }

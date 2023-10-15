@@ -1,5 +1,3 @@
-using System.Net.Sockets;
-
 using Framework.RabbitMq.Consumer.Interfaces;
 using Framework.RabbitMq.Consumer.Settings;
 
@@ -9,7 +7,6 @@ using Microsoft.Extensions.Options;
 using Polly;
 
 using RabbitMQ.Client;
-using RabbitMQ.Client.Exceptions;
 
 namespace Framework.RabbitMq.Consumer.Services;
 
@@ -31,11 +28,10 @@ public record RabbitMqClient(IOptions<RabbitMqSettings> Options, ILogger<RabbitM
                           AutomaticRecoveryEnabled = true
                       };
 
-        var policy = Policy.Handle<SocketException>()
-                           .Or<BrokerUnreachableException>()
+        var policy = Policy.Handle<Exception>()
                            .WaitAndRetryForeverAsync(
                                _ => TimeSpan.FromMilliseconds(RetryConnectDelay),
-                               (ex, _) => this.Logger.LogError(ex, "Could not connect to RabbitMQ"));
+                               (ex, _) => this.Logger.LogError(ex, "Could not connect to RabbitMQ server"));
 
         return await policy.ExecuteAsync(() => Task.FromResult(factory.CreateConnection()));
     }
@@ -45,7 +41,6 @@ public record RabbitMqClient(IOptions<RabbitMqSettings> Options, ILogger<RabbitM
         var consumerSettings = this.Options.Value.Consumer;
 
         var channel = connection.CreateModel();
-        channel.BasicQos(0, 1, false);
         channel.ExchangeDeclare(consumerSettings.Exchange, ExchangeType.Topic, true);
         channel.QueueDeclare(consumerSettings.Queue, true, false, false, null);
 

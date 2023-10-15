@@ -8,6 +8,8 @@ public class RabbitMqConsumerSettings
 
     public ulong FailedMessageRetryCount { get; set; } = 3;
 
+    public int ConnectionAttemptCount { get; set; } = 3;
+
     public string Exchange { get; set; } = default!;
 
     public string Queue { get; set; } = default!;

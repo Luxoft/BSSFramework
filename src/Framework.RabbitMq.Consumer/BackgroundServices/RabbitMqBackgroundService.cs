@@ -15,19 +15,17 @@ namespace Framework.RabbitMq.Consumer.BackgroundServices;
 
 public class RabbitMqBackgroundService : BackgroundService
 {
+    private readonly IRabbitMqAuditService? _auditService;
+
     private readonly IRabbitMqClient _client;
 
     private readonly IRabbitMqConsumerInitializer _consumerInitializer;
 
     private readonly RabbitMqConsumerSettings _consumerSettings;
 
-    private readonly IDeadLetterRabbitMqAuditService? _deadLetterAuditService;
-
     private readonly ILogger<RabbitMqBackgroundService> _logger;
 
     private readonly IRabbitMqMessageProcessor _messageProcessor;
-
-    private readonly IProcessedMessageRabbitMqAuditService? _processedAuditService;
 
     private readonly RabbitMqServerSettings _serverSettings;
 
@@ -39,8 +37,7 @@ public class RabbitMqBackgroundService : BackgroundService
         IRabbitMqClient client,
         IRabbitMqConsumerInitializer consumerInitializer,
         IRabbitMqMessageProcessor messageProcessor,
-        IProcessedMessageRabbitMqAuditService? processedAuditService,
-        IDeadLetterRabbitMqAuditService? deadLetterAuditService,
+        IRabbitMqAuditService? auditService,
         IOptions<RabbitMqServerSettings> serverOptions,
         IOptions<RabbitMqConsumerSettings> consumerOptions,
         ILogger<RabbitMqBackgroundService> logger)
@@ -48,8 +45,7 @@ public class RabbitMqBackgroundService : BackgroundService
         this._client = client;
         this._consumerInitializer = consumerInitializer;
         this._messageProcessor = messageProcessor;
-        this._processedAuditService = processedAuditService;
-        this._deadLetterAuditService = deadLetterAuditService;
+        this._auditService = auditService;
         this._logger = logger;
         this._serverSettings = serverOptions.Value;
         this._consumerSettings = consumerOptions.Value;
@@ -96,16 +92,16 @@ public class RabbitMqBackgroundService : BackgroundService
         {
             var message = Encoding.UTF8.GetString(result.Body.Span);
             if (result.Redelivered
-                && this._deadLetterAuditService is not null
+                && this._auditService is not null
                 && result.DeliveryTag > this._consumerSettings.FailedMessageRetryCount)
             {
-                await this.LogAsync(this._deadLetterAuditService, result, message, token);
+                await this.LogDeadLetterAsync(result, message, token);
                 this._channel!.BasicAck(result.DeliveryTag, false);
                 return;
             }
 
             await this._messageProcessor.ProcessAsync(result.RoutingKey, message, token);
-            await this.LogAsync(this._processedAuditService, result, message, token);
+            await this.LogProcessedAsync(result, message, token);
             this._channel!.BasicAck(result.DeliveryTag, false);
         }
         catch (Exception ex)
@@ -116,17 +112,29 @@ public class RabbitMqBackgroundService : BackgroundService
         }
     }
 
-    private async Task LogAsync(IRabbitMqAuditService? service, BasicGetResult result, string message, CancellationToken token)
+    private async Task LogDeadLetterAsync(BasicGetResult result, string message, CancellationToken token)
     {
-        if (service is null) return;
+        try
+        {
+            await this._auditService!.ProcessDeadLetterAsync(result.BasicProperties, result.RoutingKey, message, token);
+        }
+        catch
+        {
+            // ignored
+        }
+    }
+
+    private async Task LogProcessedAsync(BasicGetResult result, string message, CancellationToken token)
+    {
+        if (this._auditService is null) return;
 
         try
         {
-            await service.ProcessAsync(result.BasicProperties, result.RoutingKey, message, token);
+            await this._auditService!.ProcessAsync(result.BasicProperties, result.RoutingKey, message, token);
         }
-        catch (Exception ex)
+        catch
         {
-            this._logger.LogError(ex, "There was some problem with logging message. Routing key:'{RoutingKey}'", result.RoutingKey);
+            // ignored
         }
     }
 

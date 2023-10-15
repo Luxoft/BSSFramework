@@ -10,7 +10,7 @@ namespace Framework.RabbitMq.Consumer;
 
 public static class DependencyInjection
 {
-    public static void AddRabbitMqConsumer<TMessageProcessor>(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddRabbitMqConsumer<TMessageProcessor>(this IServiceCollection services, IConfiguration configuration)
         where TMessageProcessor : class, IRabbitMqMessageProcessor =>
         services
             .Configure<RabbitMqConsumerSettings>(configuration.GetSection("RabbitMQ:Consumer"))
@@ -18,11 +18,12 @@ public static class DependencyInjection
             .AddSingleton<IRabbitMqConsumerInitializer, RabbitMqConsumerInitializer>()
             .AddHostedService<RabbitMqBackgroundService>();
 
-    public static void AddRabbitMqProcessedMessageAuditService<TAuditService>(this IServiceCollection services)
-        where TAuditService : class, IProcessedMessageRabbitMqAuditService =>
-        services.AddSingleton<IProcessedMessageRabbitMqAuditService, TAuditService>();
-
-    public static void AddRabbitMqDeadLetterAuditService<TAuditService>(this IServiceCollection services)
-        where TAuditService : class, IDeadLetterRabbitMqAuditService =>
-        services.AddSingleton<IDeadLetterRabbitMqAuditService, TAuditService>();
+    public static IServiceCollection AddRabbitMqConsumer<TMessageProcessor, TAuditService>(
+        this IServiceCollection services,
+        IConfiguration configuration)
+        where TMessageProcessor : class, IRabbitMqMessageProcessor
+        where TAuditService : class, IRabbitMqAuditService =>
+        services
+            .AddRabbitMqConsumer<TMessageProcessor>(configuration)
+            .AddSingleton<IRabbitMqAuditService, TAuditService>();
 }

@@ -11,4 +11,6 @@ public class RabbitMqServerSettings
     public string Secret { get; set; } = default!;
 
     public string VirtualHost { get; set; } = default!;
+
+    public Uri Address => new($"{this.Host}:{this.Port}", UriKind.Absolute);
 }

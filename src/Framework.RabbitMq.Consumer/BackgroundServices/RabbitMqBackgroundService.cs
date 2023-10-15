@@ -61,9 +61,9 @@ public class RabbitMqBackgroundService : BackgroundService
     private async Task Listen(CancellationToken token)
     {
         this._logger.LogInformation(
-            "Listening RabbitMQ events has started on {Host}:{Port}",
-            this._settings.Server.Host,
-            this._settings.Server.Port);
+            "Listening RabbitMQ events has started on {Address}. Queue name is {Queue}",
+            this._settings.Server.Address,
+            this._settings.Consumer.Queue);
 
         while (!token.IsCancellationRequested)
         {
@@ -78,8 +78,6 @@ public class RabbitMqBackgroundService : BackgroundService
 
     public override void Dispose()
     {
-        if (this._channel is not null) this._logger.LogInformation("Listening RabbitMQ events has stopped");
-
         this._channel?.Close();
         this._connection?.Close();
         base.Dispose();
@@ -91,16 +89,17 @@ public class RabbitMqBackgroundService : BackgroundService
         try
         {
             var message = Encoding.UTF8.GetString(result.Body.Span);
-            if (result.Redelivered && result.DeliveryTag > this._settings.Consumer.FailedMessageRetryCount)
+            if (result.Redelivered
+                && this._deadLetterAuditService is not null
+                && result.DeliveryTag > this._settings.Consumer.FailedMessageRetryCount)
             {
                 await this.LogAsync(this._deadLetterAuditService, result, message, token);
-            }
-            else
-            {
-                await this._messageProcessor.ProcessAsync(result.RoutingKey, message, token);
-                await this.LogAsync(this._processedAuditService, result, message, token);
+                this._channel!.BasicAck(result.DeliveryTag, false);
+                return;
             }
 
+            await this._messageProcessor.ProcessAsync(result.RoutingKey, message, token);
+            await this.LogAsync(this._processedAuditService, result, message, token);
             this._channel!.BasicAck(result.DeliveryTag, false);
         }
         catch (Exception ex)

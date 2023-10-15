@@ -78,5 +78,7 @@
     <PackageVersion Include="WorkflowCore.Persistence.SqlServer" Version="3.9.0" />
     <PackageVersion Include="xunit" Version="2.5.1" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.1" />
+    <PackageVersion Include="RabbitMQ.Client" Version="6.6.0" />
+    <PackageVersion Include="Polly" Version="8.0.0" />
   </ItemGroup>
 </Project>

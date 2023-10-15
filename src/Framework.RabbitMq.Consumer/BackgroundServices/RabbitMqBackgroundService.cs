@@ -2,6 +2,8 @@ using System.Text;
 
 using Framework.RabbitMq.Consumer.Interfaces;
 using Framework.RabbitMq.Consumer.Settings;
+using Framework.RabbitMq.Interfaces;
+using Framework.RabbitMq.Settings;
 
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -17,6 +19,8 @@ public class RabbitMqBackgroundService : BackgroundService
 
     private readonly IRabbitMqConsumerInitializer _consumerInitializer;
 
+    private readonly RabbitMqConsumerSettings _consumerSettings;
+
     private readonly IDeadLetterRabbitMqAuditService? _deadLetterAuditService;
 
     private readonly ILogger<RabbitMqBackgroundService> _logger;
@@ -25,7 +29,7 @@ public class RabbitMqBackgroundService : BackgroundService
 
     private readonly IProcessedMessageRabbitMqAuditService? _processedAuditService;
 
-    private readonly RabbitMqSettings _settings;
+    private readonly RabbitMqServerSettings _serverSettings;
 
     private IModel? _channel;
 
@@ -37,7 +41,8 @@ public class RabbitMqBackgroundService : BackgroundService
         IRabbitMqMessageProcessor messageProcessor,
         IProcessedMessageRabbitMqAuditService? processedAuditService,
         IDeadLetterRabbitMqAuditService? deadLetterAuditService,
-        IOptions<RabbitMqSettings> options,
+        IOptions<RabbitMqServerSettings> serverOptions,
+        IOptions<RabbitMqConsumerSettings> consumerOptions,
         ILogger<RabbitMqBackgroundService> logger)
     {
         this._client = client;
@@ -46,7 +51,8 @@ public class RabbitMqBackgroundService : BackgroundService
         this._processedAuditService = processedAuditService;
         this._deadLetterAuditService = deadLetterAuditService;
         this._logger = logger;
-        this._settings = options.Value;
+        this._serverSettings = serverOptions.Value;
+        this._consumerSettings = consumerOptions.Value;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -62,14 +68,14 @@ public class RabbitMqBackgroundService : BackgroundService
     {
         this._logger.LogInformation(
             "Listening RabbitMQ events has started on {Address}. Queue name is {Queue}",
-            this._settings.Server.Address,
-            this._settings.Consumer.Queue);
+            this._serverSettings.Address,
+            this._consumerSettings.Queue);
 
         while (!token.IsCancellationRequested)
         {
-            await Delay(this._settings.Consumer.ReceiveMessageDelayMilliseconds, token);
+            await Delay(this._consumerSettings.ReceiveMessageDelayMilliseconds, token);
 
-            var result = this._channel!.BasicGet(this._settings.Consumer.Queue, false);
+            var result = this._channel!.BasicGet(this._consumerSettings.Queue, false);
             if (result is null) continue;
 
             await this.ProcessAsync(result, token);
@@ -91,7 +97,7 @@ public class RabbitMqBackgroundService : BackgroundService
             var message = Encoding.UTF8.GetString(result.Body.Span);
             if (result.Redelivered
                 && this._deadLetterAuditService is not null
-                && result.DeliveryTag > this._settings.Consumer.FailedMessageRetryCount)
+                && result.DeliveryTag > this._consumerSettings.FailedMessageRetryCount)
             {
                 await this.LogAsync(this._deadLetterAuditService, result, message, token);
                 this._channel!.BasicAck(result.DeliveryTag, false);
@@ -106,7 +112,7 @@ public class RabbitMqBackgroundService : BackgroundService
         {
             this._logger.LogError(ex, "There was some problem with processing message. Routing key:'{RoutingKey}'", result.RoutingKey);
             this._channel!.BasicNack(result.DeliveryTag, false, true);
-            await Delay(this._settings.Consumer.RejectMessageDelayMilliseconds, token);
+            await Delay(this._consumerSettings.RejectMessageDelayMilliseconds, token);
         }
     }
 

@@ -1,4 +1,4 @@
-namespace Framework.RabbitMq.Consumer.Settings;
+namespace Framework.RabbitMq.Settings;
 
 public class RabbitMqServerSettings
 {

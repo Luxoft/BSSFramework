@@ -7,11 +7,11 @@ using RabbitMQ.Client;
 
 namespace Framework.RabbitMq.Consumer.Services;
 
-public record RabbitMqConsumerInitializer(IOptions<RabbitMqSettings> Options) : IRabbitMqConsumerInitializer
+public record RabbitMqConsumerInitializer(IOptions<RabbitMqConsumerSettings> Options) : IRabbitMqConsumerInitializer
 {
     public void Initialize(IModel model)
     {
-        var consumerSettings = this.Options.Value.Consumer;
+        var consumerSettings = this.Options.Value;
 
         model.ExchangeDeclare(consumerSettings.Exchange, ExchangeType.Topic, true);
         model.QueueDeclare(consumerSettings.Queue, true, false, false, null);

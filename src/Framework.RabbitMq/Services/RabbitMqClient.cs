@@ -1,5 +1,5 @@
-using Framework.RabbitMq.Consumer.Interfaces;
-using Framework.RabbitMq.Consumer.Settings;
+using Framework.RabbitMq.Interfaces;
+using Framework.RabbitMq.Settings;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -9,15 +9,15 @@ using Polly.Retry;
 
 using RabbitMQ.Client;
 
-namespace Framework.RabbitMq.Consumer.Services;
+namespace Framework.RabbitMq.Services;
 
-public record RabbitMqClient(IOptions<RabbitMqSettings> Options, ILogger<RabbitMqClient> Logger) : IRabbitMqClient
+public record RabbitMqClient(IOptions<RabbitMqServerSettings> Options, ILogger<RabbitMqClient> Logger) : IRabbitMqClient
 {
     private const int RetryConnectDelay = 5000;
 
     public async Task<IConnection?> TryConnectAsync(int? attempts = null)
     {
-        var serverSettings = this.Options.Value.Server;
+        var serverSettings = this.Options.Value;
         var factory = new ConnectionFactory
                       {
                           HostName = serverSettings.Host,

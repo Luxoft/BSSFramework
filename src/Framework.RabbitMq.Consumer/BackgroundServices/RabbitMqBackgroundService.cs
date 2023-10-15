@@ -41,11 +41,11 @@ public class RabbitMqBackgroundService : BackgroundService
     {
         this._logger.LogInformation(
             "Listening RabbitMQ events has started on {Host}:{Port}",
-            this._settings.Server.HostName,
+            this._settings.Server.Host,
             this._settings.Server.Port);
 
         while (!stoppingToken.IsCancellationRequested)
-            await Task.Delay(TimeSpan.FromMilliseconds(this._settings.ReceiveMessageDelayMilliseconds), stoppingToken);
+            await Task.Delay(TimeSpan.FromMilliseconds(this._settings.Consumer.ReceiveMessageDelayMilliseconds), stoppingToken);
     }
 
     public override void Dispose()

@@ -2,7 +2,7 @@ namespace Framework.RabbitMq.Consumer.Settings;
 
 public class RabbitMqServerSettings
 {
-    public string HostName { get; set; } = default!;
+    public string Host { get; set; } = default!;
 
     public int Port { get; set; } = 5672;
 

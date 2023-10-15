@@ -22,7 +22,7 @@ public record RabbitMqClient(IOptions<RabbitMqSettings> Options, ILogger<RabbitM
         var serverSettings = this.Options.Value.Server;
         var factory = new ConnectionFactory
                       {
-                          HostName = serverSettings.HostName,
+                          HostName = serverSettings.Host,
                           Port = serverSettings.Port,
                           UserName = serverSettings.UserName,
                           Password = serverSettings.Secret,
@@ -44,8 +44,10 @@ public record RabbitMqClient(IOptions<RabbitMqSettings> Options, ILogger<RabbitM
     {
         var channel = connection.CreateModel();
         channel.BasicQos(0, 1, false);
-        channel.ExchangeDeclare(this.Options.Value.QueueName, ExchangeType.Topic, true);
-        channel.QueueDeclare(this.Options.Value.QueueName, true, false, false, null);
+        channel.ExchangeDeclare(this.Options.Value.Consumer.Exchange, ExchangeType.Topic, true);
+        channel.QueueDeclare(this.Options.Value.Consumer.Queue, true, false, false, null);
+
+        // bindings
 
         return channel;
     }

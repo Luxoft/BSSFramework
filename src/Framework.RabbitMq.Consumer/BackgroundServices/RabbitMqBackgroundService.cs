@@ -1,5 +1,6 @@
 using System.Text;
 
+using Framework.RabbitMq.Consumer.Enums;
 using Framework.RabbitMq.Consumer.Interfaces;
 using Framework.RabbitMq.Consumer.Settings;
 using Framework.RabbitMq.Interfaces;
@@ -15,8 +16,6 @@ namespace Framework.RabbitMq.Consumer.BackgroundServices;
 
 public class RabbitMqBackgroundService : BackgroundService
 {
-    private readonly IRabbitMqAuditService? _auditService;
-
     private readonly IRabbitMqClient _client;
 
     private readonly IRabbitMqConsumerInitializer _consumerInitializer;
@@ -37,7 +36,6 @@ public class RabbitMqBackgroundService : BackgroundService
         IRabbitMqClient client,
         IRabbitMqConsumerInitializer consumerInitializer,
         IRabbitMqMessageProcessor messageProcessor,
-        IRabbitMqAuditService? auditService,
         IOptions<RabbitMqServerSettings> serverOptions,
         IOptions<RabbitMqConsumerSettings> consumerOptions,
         ILogger<RabbitMqBackgroundService> logger)
@@ -45,7 +43,6 @@ public class RabbitMqBackgroundService : BackgroundService
         this._client = client;
         this._consumerInitializer = consumerInitializer;
         this._messageProcessor = messageProcessor;
-        this._auditService = auditService;
         this._logger = logger;
         this._serverSettings = serverOptions.Value;
         this._consumerSettings = consumerOptions.Value;
@@ -93,17 +90,21 @@ public class RabbitMqBackgroundService : BackgroundService
         try
         {
             var message = Encoding.UTF8.GetString(result.Body.Span);
-            if (result.Redelivered
-                && this._auditService is not null
-                && result.DeliveryTag > this._consumerSettings.FailedMessageRetryCount)
+            if (result.Redelivered && result.DeliveryTag > this._consumerSettings.FailedMessageRetryCount)
             {
-                await this.LogDeadLetterAsync(result, message, token);
-                this._channel!.BasicAck(result.DeliveryTag, false);
-                return;
+                var behaviour = await this._messageProcessor.ProcessDeadLetterAsync(
+                                    result.BasicProperties,
+                                    result.RoutingKey,
+                                    message,
+                                    token);
+                if (behaviour == DeadLetterBehaviour.Skip)
+                {
+                    this._channel!.BasicAck(result.DeliveryTag, false);
+                    return;
+                }
             }
 
-            await this._messageProcessor.ProcessAsync(result.RoutingKey, message, token);
-            await this.LogProcessedAsync(result, message, token);
+            await this._messageProcessor.ProcessAsync(result.BasicProperties, result.RoutingKey, message, token);
             this._channel!.BasicAck(result.DeliveryTag, false);
         }
         catch (Exception ex)
@@ -111,32 +112,6 @@ public class RabbitMqBackgroundService : BackgroundService
             this._logger.LogError(ex, "There was some problem with processing message. Routing key:'{RoutingKey}'", result.RoutingKey);
             this._channel!.BasicNack(result.DeliveryTag, false, true);
             await Delay(this._consumerSettings.RejectMessageDelayMilliseconds, token);
-        }
-    }
-
-    private async Task LogDeadLetterAsync(BasicGetResult result, string message, CancellationToken token)
-    {
-        try
-        {
-            await this._auditService!.ProcessDeadLetterAsync(result.BasicProperties, result.RoutingKey, message, token);
-        }
-        catch
-        {
-            // ignored
-        }
-    }
-
-    private async Task LogProcessedAsync(BasicGetResult result, string message, CancellationToken token)
-    {
-        if (this._auditService is null) return;
-
-        try
-        {
-            await this._auditService!.ProcessAsync(result.BasicProperties, result.RoutingKey, message, token);
-        }
-        catch
-        {
-            // ignored
         }
     }
 

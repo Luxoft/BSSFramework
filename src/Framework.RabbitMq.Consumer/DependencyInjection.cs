@@ -17,13 +17,4 @@ public static class DependencyInjection
             .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
             .AddSingleton<IRabbitMqConsumerInitializer, RabbitMqConsumerInitializer>()
             .AddHostedService<RabbitMqBackgroundService>();
-
-    public static IServiceCollection AddRabbitMqConsumer<TMessageProcessor, TAuditService>(
-        this IServiceCollection services,
-        IConfiguration configuration)
-        where TMessageProcessor : class, IRabbitMqMessageProcessor
-        where TAuditService : class, IRabbitMqAuditService =>
-        services
-            .AddRabbitMqConsumer<TMessageProcessor>(configuration)
-            .AddSingleton<IRabbitMqAuditService, TAuditService>();
 }

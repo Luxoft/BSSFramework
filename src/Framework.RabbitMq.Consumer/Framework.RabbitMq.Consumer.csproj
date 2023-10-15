@@ -7,5 +7,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Polly" />
+    <PackageReference Include="RabbitMQ.Client" />
   </ItemGroup>
 </Project>

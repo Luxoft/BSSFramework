@@ -42,12 +42,15 @@ public record RabbitMqClient(IOptions<RabbitMqSettings> Options, ILogger<RabbitM
 
     public IModel CreateChannel(IConnection connection)
     {
+        var consumerSettings = this.Options.Value.Consumer;
+
         var channel = connection.CreateModel();
         channel.BasicQos(0, 1, false);
-        channel.ExchangeDeclare(this.Options.Value.Consumer.Exchange, ExchangeType.Topic, true);
-        channel.QueueDeclare(this.Options.Value.Consumer.Queue, true, false, false, null);
+        channel.ExchangeDeclare(consumerSettings.Exchange, ExchangeType.Topic, true);
+        channel.QueueDeclare(consumerSettings.Queue, true, false, false, null);
 
-        // bindings
+        foreach (var routingKey in consumerSettings.RoutingKeys)
+            channel.QueueBind(consumerSettings.Queue, consumerSettings.Exchange, routingKey);
 
         return channel;
     }

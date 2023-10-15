@@ -7,4 +7,6 @@ public class RabbitMqConsumerSettings
     public string Exchange { get; set; } = default!;
 
     public string Queue { get; set; } = default!;
+
+    public string[] RoutingKeys { get; set; } = Array.Empty<string>();
 }

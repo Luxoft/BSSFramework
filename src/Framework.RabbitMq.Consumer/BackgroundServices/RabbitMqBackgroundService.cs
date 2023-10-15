@@ -53,7 +53,7 @@ public class RabbitMqBackgroundService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        this._connection = await this._client.TryConnectAsync();
+        this._connection = await this._client.TryConnectAsync(stoppingToken);
         this._channel = this._connection!.CreateModel();
         this._consumerInitializer.Initialize(this._channel);
 
@@ -69,10 +69,12 @@ public class RabbitMqBackgroundService : BackgroundService
 
         while (!token.IsCancellationRequested)
         {
-            await Delay(this._consumerSettings.ReceiveMessageDelayMilliseconds, token);
-
             var result = this._channel!.BasicGet(this._consumerSettings.Queue, false);
-            if (result is null) continue;
+            if (result is null)
+            {
+                await Delay(this._consumerSettings.ReceiveMessageDelayMilliseconds, token);
+                continue;
+            }
 
             await this.ProcessAsync(result, token);
         }

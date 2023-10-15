@@ -4,5 +4,5 @@ namespace Framework.RabbitMq.Interfaces;
 
 public interface IRabbitMqClient
 {
-    Task<IConnection?> TryConnectAsync(int? attempts = null);
+    Task<IConnection?> TryConnectAsync(CancellationToken token, int? attempts = null);
 }

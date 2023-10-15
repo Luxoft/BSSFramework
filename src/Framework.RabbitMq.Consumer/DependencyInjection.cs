@@ -20,6 +20,10 @@ public static class DependencyInjection
             .AddHostedService<RabbitMqBackgroundService>();
 
     public static void AddRabbitMqProcessedMessageAuditService<TAuditService>(this IServiceCollection services)
-        where TAuditService : class, IRabbitMqProcessedMessageAuditService =>
-        services.AddSingleton<IRabbitMqProcessedMessageAuditService, TAuditService>();
+        where TAuditService : class, IProcessedMessageRabbitMqAuditService =>
+        services.AddSingleton<IProcessedMessageRabbitMqAuditService, TAuditService>();
+
+    public static void AddRabbitMqDeadLetterAuditService<TAuditService>(this IServiceCollection services)
+        where TAuditService : class, IDeadLetterRabbitMqAuditService =>
+        services.AddSingleton<IDeadLetterRabbitMqAuditService, TAuditService>();
 }

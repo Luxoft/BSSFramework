@@ -17,11 +17,13 @@ public class RabbitMqBackgroundService : BackgroundService
 
     private readonly IRabbitMqConsumerInitializer _consumerInitializer;
 
+    private readonly IDeadLetterRabbitMqAuditService? _deadLetterAuditService;
+
     private readonly ILogger<RabbitMqBackgroundService> _logger;
 
     private readonly IRabbitMqMessageProcessor _messageProcessor;
 
-    private readonly IRabbitMqProcessedMessageAuditService? _processedAuditService;
+    private readonly IProcessedMessageRabbitMqAuditService? _processedAuditService;
 
     private readonly RabbitMqSettings _settings;
 
@@ -33,7 +35,8 @@ public class RabbitMqBackgroundService : BackgroundService
         IRabbitMqClient client,
         IRabbitMqConsumerInitializer consumerInitializer,
         IRabbitMqMessageProcessor messageProcessor,
-        IRabbitMqProcessedMessageAuditService? processedAuditService,
+        IProcessedMessageRabbitMqAuditService? processedAuditService,
+        IDeadLetterRabbitMqAuditService? deadLetterAuditService,
         IOptions<RabbitMqSettings> options,
         ILogger<RabbitMqBackgroundService> logger)
     {
@@ -41,6 +44,7 @@ public class RabbitMqBackgroundService : BackgroundService
         this._consumerInitializer = consumerInitializer;
         this._messageProcessor = messageProcessor;
         this._processedAuditService = processedAuditService;
+        this._deadLetterAuditService = deadLetterAuditService;
         this._logger = logger;
         this._settings = options.Value;
     }
@@ -63,7 +67,7 @@ public class RabbitMqBackgroundService : BackgroundService
 
         while (!token.IsCancellationRequested)
         {
-            await Task.Delay(TimeSpan.FromMilliseconds(this._settings.Consumer.ReceiveMessageDelayMilliseconds), token);
+            await Delay(this._settings.Consumer.ReceiveMessageDelayMilliseconds, token);
 
             var result = this._channel!.BasicGet(this._settings.Consumer.Queue, false);
             if (result is null) continue;
@@ -87,18 +91,39 @@ public class RabbitMqBackgroundService : BackgroundService
         try
         {
             var message = Encoding.UTF8.GetString(result.Body.Span);
-
-            await this._messageProcessor.ProcessAsync(result.RoutingKey, message, token);
-
-            if (this._processedAuditService is not null)
-                await this._processedAuditService.SaveAsync(result.BasicProperties, result.RoutingKey, message, token);
+            if (result.Redelivered && result.DeliveryTag > this._settings.Consumer.FailedMessageRetryCount)
+            {
+                await this.LogAsync(this._deadLetterAuditService, result, message, token);
+            }
+            else
+            {
+                await this._messageProcessor.ProcessAsync(result.RoutingKey, message, token);
+                await this.LogAsync(this._processedAuditService, result, message, token);
+            }
 
             this._channel!.BasicAck(result.DeliveryTag, false);
         }
         catch (Exception ex)
         {
-            this._logger.LogError(ex, "Can not process RabbitMQ message with routing key '{RoutingKey}'", result.RoutingKey);
+            this._logger.LogError(ex, "There was some problem with processing message. Routing key:'{RoutingKey}'", result.RoutingKey);
             this._channel!.BasicNack(result.DeliveryTag, false, true);
+            await Delay(this._settings.Consumer.RejectMessageDelayMilliseconds, token);
         }
     }
+
+    private async Task LogAsync(IRabbitMqAuditService? service, BasicGetResult result, string message, CancellationToken token)
+    {
+        if (service is null) return;
+
+        try
+        {
+            await service.ProcessAsync(result.BasicProperties, result.RoutingKey, message, token);
+        }
+        catch (Exception ex)
+        {
+            this._logger.LogError(ex, "There was some problem with logging message. Routing key:'{RoutingKey}'", result.RoutingKey);
+        }
+    }
+
+    private static Task Delay(int value, CancellationToken token) => Task.Delay(TimeSpan.FromMilliseconds(value), token);
 }

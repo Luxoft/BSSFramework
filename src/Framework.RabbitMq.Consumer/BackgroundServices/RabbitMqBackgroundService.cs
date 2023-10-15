@@ -39,7 +39,11 @@ public class RabbitMqBackgroundService : BackgroundService
 
     private async Task Listen(CancellationToken stoppingToken)
     {
-        this._logger.LogInformation("Listening RabbitMQ events has started on {Host}:{Port}", this._settings.HostName, this._settings.Port);
+        this._logger.LogInformation(
+            "Listening RabbitMQ events has started on {Host}:{Port}",
+            this._settings.Server.HostName,
+            this._settings.Server.Port);
+
         while (!stoppingToken.IsCancellationRequested)
             await Task.Delay(TimeSpan.FromMilliseconds(this._settings.ReceiveMessageDelayMilliseconds), stoppingToken);
     }

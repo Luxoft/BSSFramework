@@ -19,13 +19,14 @@ public record RabbitMqClient(IOptions<RabbitMqSettings> Options, ILogger<RabbitM
 
     public async Task<IConnection?> TryConnectAsync()
     {
+        var serverSettings = this.Options.Value.Server;
         var factory = new ConnectionFactory
                       {
-                          HostName = this.Options.Value.HostName,
-                          Port = this.Options.Value.Port,
-                          UserName = this.Options.Value.UserName,
-                          Password = this.Options.Value.Secret,
-                          VirtualHost = this.Options.Value.VirtualHost,
+                          HostName = serverSettings.HostName,
+                          Port = serverSettings.Port,
+                          UserName = serverSettings.UserName,
+                          Password = serverSettings.Secret,
+                          VirtualHost = serverSettings.VirtualHost,
                           DispatchConsumersAsync = true,
                           AutomaticRecoveryEnabled = true
                       };

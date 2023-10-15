@@ -21,6 +21,8 @@ public class RabbitMqBackgroundService : BackgroundService
 
     private readonly IRabbitMqMessageProcessor _messageProcessor;
 
+    private readonly IRabbitMqProcessedMessageAuditService? _processedAuditService;
+
     private readonly RabbitMqSettings _settings;
 
     private IModel? _channel;
@@ -31,12 +33,14 @@ public class RabbitMqBackgroundService : BackgroundService
         IRabbitMqClient client,
         IRabbitMqConsumerInitializer consumerInitializer,
         IRabbitMqMessageProcessor messageProcessor,
+        IRabbitMqProcessedMessageAuditService? processedAuditService,
         IOptions<RabbitMqSettings> options,
         ILogger<RabbitMqBackgroundService> logger)
     {
         this._client = client;
         this._consumerInitializer = consumerInitializer;
         this._messageProcessor = messageProcessor;
+        this._processedAuditService = processedAuditService;
         this._logger = logger;
         this._settings = options.Value;
     }
@@ -83,7 +87,11 @@ public class RabbitMqBackgroundService : BackgroundService
         try
         {
             var message = Encoding.UTF8.GetString(result.Body.Span);
+
             await this._messageProcessor.ProcessAsync(result.RoutingKey, message, token);
+
+            if (this._processedAuditService is not null)
+                await this._processedAuditService.SaveAsync(result.BasicProperties, result.RoutingKey, message, token);
 
             this._channel!.BasicAck(result.DeliveryTag, false);
         }

@@ -4,7 +4,5 @@ namespace Framework.RabbitMq.Consumer.Interfaces;
 
 public interface IRabbitMqClient
 {
-    Task<IConnection?> TryConnectAsync();
-
-    IModel CreateChannel(IConnection connection);
+    Task<IConnection?> TryConnectAsync(int? attempts = null);
 }

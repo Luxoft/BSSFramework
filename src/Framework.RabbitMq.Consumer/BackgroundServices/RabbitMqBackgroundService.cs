@@ -15,6 +15,8 @@ public class RabbitMqBackgroundService : BackgroundService
 {
     private readonly IRabbitMqClient _client;
 
+    private readonly IRabbitMqConsumerInitializer _consumerInitializer;
+
     private readonly ILogger<RabbitMqBackgroundService> _logger;
 
     private readonly IRabbitMqMessageProcessor _messageProcessor;
@@ -27,11 +29,13 @@ public class RabbitMqBackgroundService : BackgroundService
 
     public RabbitMqBackgroundService(
         IRabbitMqClient client,
+        IRabbitMqConsumerInitializer consumerInitializer,
         IRabbitMqMessageProcessor messageProcessor,
         IOptions<RabbitMqSettings> options,
         ILogger<RabbitMqBackgroundService> logger)
     {
         this._client = client;
+        this._consumerInitializer = consumerInitializer;
         this._messageProcessor = messageProcessor;
         this._logger = logger;
         this._settings = options.Value;
@@ -40,9 +44,9 @@ public class RabbitMqBackgroundService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         this._connection = await this._client.TryConnectAsync();
-        if (this._connection is null) return;
+        this._channel = this._connection!.CreateModel();
+        this._consumerInitializer.Initialize(this._channel);
 
-        this._channel = this._client.CreateChannel(this._connection);
         await this.Listen(stoppingToken);
     }
 

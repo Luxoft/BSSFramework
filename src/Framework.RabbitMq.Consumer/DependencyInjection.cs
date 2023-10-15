@@ -16,5 +16,6 @@ public static class DependencyInjection
             .Configure<RabbitMqSettings>(configuration.GetSection("RabbitMQ"))
             .AddSingleton<IRabbitMqClient, RabbitMqClient>()
             .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
+            .AddSingleton<IRabbitMqConsumerInitializer, RabbitMqConsumerInitializer>()
             .AddHostedService<RabbitMqBackgroundService>();
 }

@@ -16,6 +16,12 @@ public record RabbitMqConsumerInitializer(IOptions<RabbitMqConsumerSettings> Opt
         model.ExchangeDeclare(consumerSettings.Exchange, ExchangeType.Topic, true);
         model.QueueDeclare(consumerSettings.Queue, true, false, false, null);
 
+        if (consumerSettings.RoutingKeys.Length == 0)
+        {
+            model.QueueBind(consumerSettings.Queue, consumerSettings.Exchange, "#");
+            return;
+        }
+
         foreach (var routingKey in consumerSettings.RoutingKeys)
             model.QueueBind(consumerSettings.Queue, consumerSettings.Exchange, routingKey);
     }

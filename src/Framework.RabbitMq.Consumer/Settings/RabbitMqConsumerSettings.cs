@@ -14,5 +14,5 @@ public class RabbitMqConsumerSettings
 
     public string Queue { get; set; } = default!;
 
-    public string[] RoutingKeys { get; set; } = { "#" };
+    public string[] RoutingKeys { get; set; } = Array.Empty<string>();
 }

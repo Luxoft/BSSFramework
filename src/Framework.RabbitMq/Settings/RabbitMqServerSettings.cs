@@ -13,4 +13,7 @@ public class RabbitMqServerSettings
     public string VirtualHost { get; set; } = default!;
 
     public Uri Address => new($"{this.Host}:{this.Port}", UriKind.Absolute);
+
+    public Uri ConnectionUri =>
+        new($"amqp://{this.UserName}:{this.Secret}@{this.Host}:{this.Port}/{Uri.EscapeDataString(this.VirtualHost)}");
 }

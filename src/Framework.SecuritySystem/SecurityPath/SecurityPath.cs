@@ -113,6 +113,13 @@ public abstract record SecurityPath<TDomainObject>
         return new ManySecurityPath<TSecurityContext>(securityPath, mode);
     }
 
+    public static SecurityPath<TDomainObject> CreateNested<TNestedObject>(Expression<Func<TDomainObject, IEnumerable<TNestedObject>>> nestedObjectsPath,
+                                                                       SecurityPath<TNestedObject> nestedSecurityPath,
+                                                                       ManySecurityPathMode mode)
+    {
+        return new NestedManySecurityPath<TNestedObject>(nestedObjectsPath, nestedSecurityPath, mode);
+    }
+
     public static SecurityPath<TDomainObject> Condition(Expression<Func<TDomainObject, bool>> securityFilter)
     {
         return new ConditionPath(securityFilter);

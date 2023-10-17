@@ -10,8 +10,9 @@
     <PackageVersion Include="AutoFixture" Version="4.18.0" />
     <PackageVersion Include="AutoFixture.AutoNSubstitute" Version="4.18.0" />
     <PackageVersion Include="AutoFixture.Idioms" Version="4.18.0" />
-    <PackageVersion Include="ClosedXML" Version="0.102.1" />
-    <PackageVersion Include="ClosedXML.Report" Version="0.2.8" />
+    <PackageVersion Include="ClosedXML" Version="0.97.0" />
+    <!-- TODO Upgrade after fix https://github.com/ClosedXML/ClosedXML.Report/issues/324 -->
+    <PackageVersion Include="ClosedXML.Report" Version="0.2.6" />
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
     <PackageVersion Include="CommonServiceLocator" Version="2.0.7" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" />

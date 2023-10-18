@@ -1,4 +1,5 @@
 ﻿using Framework.Core.Services;
+using Framework.DomainDriven.ImpersonateService;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,13 +23,13 @@ public class ServiceEvaluator<TService> : IServiceEvaluator<TService>
             sessionMode,
             async serviceProvider =>
             {
-                var scopeEvaluator = ActivatorUtilities.CreateInstance<ScopeEvaluator<TService>>(serviceProvider, customPrincipalName);
+                var scopeEvaluator = ActivatorUtilities.CreateInstance<ScopeEvaluator>(serviceProvider, Tuple.Create(customPrincipalName));
 
                 return await scopeEvaluator.Invoke(getResult);
             });
     }
 
-    private class ScopeEvaluator<TService>
+    private class ScopeEvaluator
     {
         private readonly TService service;
 
@@ -40,14 +41,16 @@ public class ServiceEvaluator<TService> : IServiceEvaluator<TService>
             TService service,
             IUserAuthenticationService userAuthenticationService,
             IImpersonateService impersonateService,
-            string customPrincipalName)
+            Tuple<string> customPrincipalName = null)
         {
             this.service = service;
-            this.customPrincipalName = customPrincipalName;
-            this.actualImpersonateService = !string.IsNullOrWhiteSpace(customPrincipalName)
-                                            && customPrincipalName != userAuthenticationService.GetUserName()
-                                                ? impersonateService
-                                                : null;
+
+            this.customPrincipalName = customPrincipalName?.Item1;
+
+            this.actualImpersonateService =
+                this.customPrincipalName != null && this.customPrincipalName != userAuthenticationService.GetUserName()
+                    ? impersonateService
+                    : null;
         }
 
         public async Task<TResult> Invoke<TResult>(Func<TService, Task<TResult>> getResult)

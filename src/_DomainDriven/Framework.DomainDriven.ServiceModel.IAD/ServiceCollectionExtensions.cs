@@ -7,8 +7,9 @@ using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Authorization.SecuritySystem.OperationInitializer;
 using Framework.Configuration;
 using Framework.Configuration.Domain;
-using Framework.Core;
+using Framework.Core.Services;
 using Framework.DependencyInjection;
+using Framework.DomainDriven.ImpersonateService;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
@@ -39,6 +40,10 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
         services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
+
+        services.AddScoped<ApplicationUserAuthenticationService>();
+        services.AddScopedFrom<IUserAuthenticationService, ApplicationUserAuthenticationService>();
+        services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
 
         services.RegisterAuthorizationSystem();
 

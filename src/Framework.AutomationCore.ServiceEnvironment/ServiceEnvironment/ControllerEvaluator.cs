@@ -3,6 +3,7 @@
 using Automation.ServiceEnvironment.Services;
 
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.AspNetCore.Http;
@@ -70,7 +71,7 @@ public class ControllerEvaluator<TController>
 
         await new WebApiInvoker(c, context => InvokeController(context, func))
               .WithMiddleware(next => new ImpersonateMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, this.customPrincipalName))
-              .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>()))
+              .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IDBSessionManager>(), httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>()))
               .WithMiddleware(next => new InitCurrentMethodMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, invokeExpr))
               .WithMiddleware(next => new WebApiExceptionExpanderMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiExceptionExpander>()))
               .Invoke();

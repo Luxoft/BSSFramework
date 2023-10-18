@@ -7,12 +7,12 @@ namespace Framework.NotificationCore.Jobs;
 
 public class SendNotificationsJob : ISendNotificationsJob
 {
-    private readonly IContextEvaluator<IConfigurationBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<IConfigurationBLLContext> contextEvaluator;
 
     private readonly IExceptionStorage exceptionStorage;
 
     public SendNotificationsJob(
-            IContextEvaluator<IConfigurationBLLContext> contextEvaluator,
+            IServiceEvaluator<IConfigurationBLLContext> contextEvaluator,
             IExceptionStorage exceptionStorage = null)
     {
         this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));

@@ -2,6 +2,7 @@
 using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.NotificationCore.Monitoring;
+using Framework.SecuritySystem;
 
 using Hangfire.Dashboard;
 
@@ -13,29 +14,24 @@ namespace SampleSystem.WebApiCore;
 /// </summary>
 public class SampleSystemHangfireAuthorization : IDashboardAuthorizationFilter
 {
-    private readonly IDBSessionEvaluator dbSessionEvaluator;
+    private readonly IServiceEvaluator<IAuthorizationSystem> authorizationSystemEvaluator;
 
     private readonly IDashboardAuthorizationFilter baseFilter;
 
-    public SampleSystemHangfireAuthorization(IDBSessionEvaluator dbSessionEvaluator)
+    public SampleSystemHangfireAuthorization(IServiceEvaluator<IAuthorizationSystem> authorizationSystemEvaluator)
     {
-        this.baseFilter = new AdminHangfireAuthorization(dbSessionEvaluator);
-
-        this.dbSessionEvaluator = dbSessionEvaluator;
+        this.authorizationSystemEvaluator = authorizationSystemEvaluator;
+        this.baseFilter = new AdminHangfireAuthorization(authorizationSystemEvaluator);
     }
 
     public bool Authorize(DashboardContext context)
     {
-        return this.dbSessionEvaluator.EvaluateAsync(
+        return this.authorizationSystemEvaluator.Evaluate(
             DBSessionMode.Read,
-            async (sp, _) =>
-            {
-                return this.baseFilter.Authorize(context)
-                       || string.Compare(
-                           sp.GetRequiredService<IAuthorizationBLLContext>().CurrentPrincipalName,
-                           new DomainDefaultUserAuthenticationService().GetUserName(),
-                           StringComparison.InvariantCultureIgnoreCase)
-                       == 0;
-            }).GetAwaiter().GetResult();
+            authSystem => this.baseFilter.Authorize(context)
+                          || string.Compare(
+                              authSystem.CurrentPrincipalName,
+                              new DomainDefaultUserAuthenticationService().GetUserName(),
+                              StringComparison.InvariantCultureIgnoreCase) == 0);
     }
 }

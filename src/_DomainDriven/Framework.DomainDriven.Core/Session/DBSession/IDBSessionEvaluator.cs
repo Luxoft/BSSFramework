@@ -2,5 +2,5 @@
 
 public interface IDBSessionEvaluator
 {
-    Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, Func<IServiceProvider, IDBSession, Task<TResult>> getResult);
+    Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, Func<IServiceProvider, Task<TResult>> getResult);
 }

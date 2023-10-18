@@ -11,12 +11,12 @@ public class DBSessionEvaluator : IDBSessionEvaluator
         this.rootServiceProvider = rootServiceProvider ?? throw new ArgumentNullException(nameof(rootServiceProvider));
     }
 
-    public async Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, Func<IServiceProvider, IDBSession, Task<TResult>> getResult)
+    public async Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, Func<IServiceProvider, Task<TResult>> getResult)
     {
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
 
         var scopeServiceProvider = scope.ServiceProvider;
-        using var session = scopeServiceProvider.GetRequiredService<IDBSession>();
+        await using var session = scopeServiceProvider.GetRequiredService<IDBSession>();
 
         if (sessionMode == DBSessionMode.Read)
         {
@@ -25,7 +25,7 @@ public class DBSessionEvaluator : IDBSessionEvaluator
 
         try
         {
-            return await getResult(scopeServiceProvider, session);
+            return await getResult(scopeServiceProvider);
         }
         catch
         {

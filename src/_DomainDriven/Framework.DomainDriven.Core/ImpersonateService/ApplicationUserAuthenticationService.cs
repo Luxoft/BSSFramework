@@ -1,6 +1,6 @@
 ﻿using Framework.Core.Services;
 
-namespace Framework.DomainDriven.WebApiNetCore;
+namespace Framework.DomainDriven.ImpersonateService;
 
 public class ApplicationUserAuthenticationService : IUserAuthenticationService, IImpersonateService
 {

@@ -57,12 +57,11 @@ public class AuthPerformanceTest : TestBase
         var authPerfCount = await this.GenerateAuthPerformanceObject();
 
         // Act
-        var findCount = await this.RootServiceProvider.GetRequiredService<IDBSessionEvaluator>().EvaluateAsync(
+        var findCount = await this.RootServiceProvider.GetRequiredService<IServiceEvaluator<IRepositoryFactory<AuthPerformanceObject>>>().EvaluateAsync(
                             DBSessionMode.Write,
-                            async (sp, _) =>
+                            async service =>
                             {
-                                var testObjRep = sp.GetRequiredService<IRepositoryFactory<AuthPerformanceObject>>()
-                                                   .Create(BLLSecurityMode.View);
+                                var testObjRep = service.Create(BLLSecurityMode.View);
 
                                 return testObjRep.GetQueryable().Count();
                             });
@@ -90,7 +89,7 @@ public class AuthPerformanceTest : TestBase
     {
         return await this.RootServiceProvider.GetRequiredService<IDBSessionEvaluator>().EvaluateAsync(
                    DBSessionMode.Write,
-                   async (sp, _) =>
+                   async sp =>
                    {
                        var fbuRep = sp.GetRequiredService<IRepositoryFactory<BusinessUnit>>().Create();
                        var mbuRep = sp.GetRequiredService<IRepositoryFactory<ManagementUnit>>().Create();

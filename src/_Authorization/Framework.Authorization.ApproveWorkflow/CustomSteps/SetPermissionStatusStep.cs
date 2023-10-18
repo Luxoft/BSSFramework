@@ -2,8 +2,6 @@
 using Framework.Authorization.Domain;
 using Framework.DomainDriven;
 
-
-
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
@@ -11,10 +9,9 @@ namespace Framework.Authorization.ApproveWorkflow;
 
 public class SetPermissionStatusStep : IStepBody
 {
-    
-    private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<IAuthorizationBLLContext> contextEvaluator;
 
-    public SetPermissionStatusStep(IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+    public SetPermissionStatusStep(IServiceEvaluator<IAuthorizationBLLContext> contextEvaluator)
     {
         this.contextEvaluator = contextEvaluator;
     }

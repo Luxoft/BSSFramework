@@ -10,9 +10,9 @@ namespace Framework.Authorization.ApproveWorkflow;
 
 public class CalcHasAccessStep : WaitFor
 {
-    private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<IAuthorizationBLLContext> contextEvaluator;
 
-    public CalcHasAccessStep(IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+    public CalcHasAccessStep(IServiceEvaluator<IAuthorizationBLLContext> contextEvaluator)
     {
         this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
     }

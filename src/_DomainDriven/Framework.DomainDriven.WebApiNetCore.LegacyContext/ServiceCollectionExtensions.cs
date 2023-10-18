@@ -13,9 +13,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterContextEvaluators(this IServiceCollection services)
     {
-        services.AddSingleton<IContextEvaluator<IAuthorizationBLLContext>, ContextEvaluator<IAuthorizationBLLContext>>();
-        services.AddSingleton<IContextEvaluator<IConfigurationBLLContext>, ContextEvaluator<IConfigurationBLLContext>>();
-        services.AddSingletonFrom<IContextEvaluator<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext>, IContextEvaluator<IConfigurationBLLContext>>();
+        services.AddSingletonFrom<IServiceEvaluator<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext>, IServiceEvaluator<IConfigurationBLLContext>>();
 
         services
             .AddScoped<IApiControllerBaseEvaluator<EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>,

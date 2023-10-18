@@ -29,13 +29,13 @@ public class WorkflowController : ControllerBase
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
     public WorkflowController(
             StartWorkflowJob startWorkflowJob,
             IWorkflowHost workflowHost,
             IUserAuthenticationService userAuthenticationService,
-            IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
+            IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator)
 
     {
         this.startWorkflowJob = startWorkflowJob;
@@ -61,7 +61,7 @@ public class WorkflowController : ControllerBase
     [HttpPost(nameof(GetMyPendingApproveOperationWorkflowObjects))]
     public async Task<List<ApproveOperationWorkflowObject>> GetMyPendingApproveOperationWorkflowObjects(PermissionIdentityDTO permissionIdent)
     {
-        var workflowOperationIdents = await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, (ctx, _) =>
+        var workflowOperationIdents = await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, ctx =>
         {
             var permissionIdStr = permissionIdent.Id.ToString();
 
@@ -89,7 +89,7 @@ public class WorkflowController : ControllerBase
             }
         }
 
-        await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, default, (ctx, _) =>
+        await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, default, ctx =>
         {
             var authContext = ctx.Authorization;
 

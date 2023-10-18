@@ -15,11 +15,11 @@ public class CapIntegrationController
 {
     private readonly IMediator mediator;
 
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
     public CapIntegrationController(
             IMediator mediator,
-            IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
+            IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator)
     {
         this.mediator = mediator;
         this.contextEvaluator = contextEvaluator;

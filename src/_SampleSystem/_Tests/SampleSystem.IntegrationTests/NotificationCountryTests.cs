@@ -58,7 +58,7 @@ public class NotificationCountryTests : TestBase
         // Act
         this.ClearModifications();
 
-        this.Evaluate(DBSessionMode.Write, (context, session) =>
+        this.Evaluate(DBSessionMode.Write, context =>
                                            {
                                                var bll = context.Logics.Country;
 

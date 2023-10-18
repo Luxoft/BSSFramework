@@ -11,14 +11,14 @@ namespace SampleSystem.ServiceEnvironment;
 
 public class StartWorkflowJob
 {
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
     private readonly IWorkflowHost workflowHost;
 
     private readonly IWorkflowApproveProcessor workflowApproveProcessor;
 
 
-    public StartWorkflowJob(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator, IWorkflowHost workflowHost, IWorkflowApproveProcessor workflowApproveProcessor)
+    public StartWorkflowJob(IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator, IWorkflowHost workflowHost, IWorkflowApproveProcessor workflowApproveProcessor)
     {
         this.contextEvaluator = contextEvaluator;
         this.workflowHost = workflowHost;
@@ -27,7 +27,7 @@ public class StartWorkflowJob
 
     public Task<Dictionary<Guid, Guid>> Start()
     {
-        return this.contextEvaluator.EvaluateAsync(DBSessionMode.Write, (ctx, _) =>
+        return this.contextEvaluator.EvaluateAsync(DBSessionMode.Write, ctx =>
         {
             var permQ = ctx.Authorization.Logics.Permission.GetUnsecureQueryable();
 

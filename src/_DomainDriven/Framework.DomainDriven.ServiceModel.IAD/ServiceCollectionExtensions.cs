@@ -38,6 +38,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
 
         services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
+        services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
 
         services.RegisterAuthorizationSystem();
 

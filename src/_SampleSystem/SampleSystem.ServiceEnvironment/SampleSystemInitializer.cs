@@ -15,13 +15,13 @@ namespace SampleSystem.ServiceEnvironment;
 
 public class SampleSystemInitializer
 {
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
     private readonly SubscriptionMetadataStore subscriptionMetadataStore;
 
     private readonly IInitializeManager initializeManager;
 
-    public SampleSystemInitializer(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator, SubscriptionMetadataStore subscriptionMetadataStore, IInitializeManager initializeManager)
+    public SampleSystemInitializer(IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator, SubscriptionMetadataStore subscriptionMetadataStore, IInitializeManager initializeManager)
     {
         this.contextEvaluator = contextEvaluator;
         this.subscriptionMetadataStore = subscriptionMetadataStore;

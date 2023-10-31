@@ -1,10 +1,14 @@
 ﻿using Automation.Enums;
+using Automation.ServiceEnvironment.Services;
 using Automation.Utils.DatabaseUtils;
 
 using Framework.Core;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.Notification.DTO;
+using Framework.Persistent;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
@@ -26,6 +30,7 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
         this.ReattachDatabase();
         this.ClearNotifications();
         this.ClearIntegrationEvents();
+        this.ResetServices();
     }
 
     public virtual void Cleanup()
@@ -39,6 +44,12 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
         {
             this.ReleaseServiceProvider();
         }
+    }
+
+    protected virtual void ResetServices()
+    {
+        this.RootServiceProvider.GetService<IIntegrationTestUserAuthenticationService>()?.Reset();
+        this.RootServiceProvider.GetService<IIntegrationTestDateTimeService>()?.Reset();
     }
 
     protected virtual void DropDatabaseAfterTest()

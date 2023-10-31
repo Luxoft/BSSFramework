@@ -1,23 +1,19 @@
-﻿using Framework.Core.Services;
-using Framework.DomainDriven.NHibernate.Audit;
+﻿namespace Automation.ServiceEnvironment.Services;
 
-namespace Automation.ServiceEnvironment.Services;
-
-public class IntegrationTestUserAuthenticationService : IDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService
+public class IntegrationTestUserAuthenticationService : IIntegrationTestUserAuthenticationService
 {
     private readonly string integrationTestUserName;
 
-    public IntegrationTestUserAuthenticationService(string integrationTestUserName = "IntegrationTestRootUser")
-    {
+    public IntegrationTestUserAuthenticationService(string integrationTestUserName = "IntegrationTestRootUser") =>
         this.integrationTestUserName = integrationTestUserName;
-    }
 
     public string CustomUserName { get; internal set; }
 
-    public string GetUserName()
-    {
-        return this.CustomUserName ?? this.integrationTestUserName;
-    }
+    public void SetUserName(string customUserName) => this.CustomUserName = customUserName ?? this.integrationTestUserName;
+
+    public void Reset() => this.CustomUserName = this.integrationTestUserName;
+
+    public string GetUserName() => this.CustomUserName ?? this.integrationTestUserName;
 
     public async Task<T> WithImpersonateAsync<T>(string customUserName, Func<Task<T>> func)
     {

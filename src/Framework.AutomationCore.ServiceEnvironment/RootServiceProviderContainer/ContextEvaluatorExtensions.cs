@@ -2,7 +2,7 @@
 
 namespace Automation.ServiceEnvironment;
 
-public static class ContextEvaluatorExtensions
+public static class  ContextEvaluatorExtensions
 {
     public static TResult EvaluateWrite<TBLLContext, TResult>(this IServiceEvaluator<TBLLContext> contextEvaluator, Func<TBLLContext, TResult> func)
     {

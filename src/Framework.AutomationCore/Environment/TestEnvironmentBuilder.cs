@@ -1,4 +1,5 @@
-﻿using Automation.Utils;
+﻿using Automation.Extensions;
+using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
@@ -7,6 +8,7 @@ using Framework.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace Automation;
 
@@ -68,7 +70,7 @@ public class TestEnvironmentBuilder
         return this;
     }
 
-    public TestEnvironmentBuilder WithDatabaseGenerator<T>() where T: TestDatabaseGenerator
+    public TestEnvironmentBuilder WithDatabaseGenerator<T>() where T: ITestDatabaseGenerator
     {
         this.withDatabaseGenerator = typeof(T);
 
@@ -148,18 +150,15 @@ public class TestEnvironmentBuilder
             string[] secondaryDatabases)
     {
         var configUtil = new ConfigUtil(rootConfiguration);
-        var databaseContextSettings =
-                new DatabaseContextSettings(configUtil.GetConnectionString(connectionStringName), secondaryDatabases);
-        var databaseContext = new DatabaseContext(configUtil, databaseContextSettings);
-        var cfg = new ConfigurationBuilder()
-            .AddConfiguration(rootConfiguration)
-            .AddInMemoryCollection(
-                rootConfiguration.GetSection("ConnectionStrings")
-                    .GetChildren()
-                    .ToDictionary(
-                        x => $"ConnectionStrings:{x.Key}",
-                        _ => databaseContext.Main.ConnectionString))
-            .Build();
+        var databaseContextSettings = new DatabaseContextSettings(
+            connectionStringName,
+            secondaryDatabases);
+
+        var databaseContext = new DatabaseContext(
+            configUtil,
+            Options.Create(databaseContextSettings));
+
+        var cfg = rootConfiguration.BuildFromRootWithConnectionStrings(databaseContext);
 
         var environmentServices = new ServiceCollection();
         serviceProviderBuildFunc.Invoke(cfg, environmentServices);
@@ -167,7 +166,7 @@ public class TestEnvironmentBuilder
         environmentServices.TryAddSingleton<IDatabaseContext>(databaseContext);
         environmentServices.AddSingleton<IConfiguration>(cfg)
                            .AddSingleton<ConfigUtil>()
-                           .AddSingleton(typeof(TestDatabaseGenerator), databaseGenerator);
+                           .AddSingleton(typeof(ITestDatabaseGenerator), databaseGenerator);
 
         var environmentServiceProvider = this.BuildServiceProvider(environmentServices);
 

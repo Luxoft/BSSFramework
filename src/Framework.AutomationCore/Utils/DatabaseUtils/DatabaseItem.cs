@@ -6,17 +6,20 @@ namespace Automation.Utils.DatabaseUtils;
 public class DatabaseItem : IDatabaseItem
 {
     private readonly SqlConnectionStringBuilder builder;
-    private readonly ConfigUtil configUtil;
+
+    private readonly string dbDataDirectory;
 
     public DatabaseItem(
-        ConfigUtil configUtil,
         string connectionString,
-        string initialCatalog = null)
+        string databaseCollation,
+        string dbDataDirectory,
+        string initialCatalog = null,
+        bool randomizeDatabaseName = false)
     {
-        this.configUtil = configUtil;
+        this.dbDataDirectory = dbDataDirectory;
         this.builder = new SqlConnectionStringBuilder(connectionString);
         initialCatalog ??= this.builder.InitialCatalog;
-        this.DatabaseName = this.configUtil.TestsParallelize
+        this.DatabaseName = randomizeDatabaseName
             ? $"{initialCatalog}{TextRandomizer.RandomString(5)}"
             : initialCatalog;
 
@@ -26,7 +29,7 @@ public class DatabaseItem : IDatabaseItem
         this.CopyLogPath = this.ToCopyLogPath(initialCatalog);
         this.SourceDataPath = this.ToSourceDataPath(fileName);
         this.SourceLogPath = this.ToSourceLogPath(fileName);
-        this.DatabaseCollation = this.configUtil.DatabaseCollation;
+        this.DatabaseCollation = databaseCollation;
         this.builder.InitialCatalog = this.DatabaseName;
     }
 
@@ -59,13 +62,13 @@ public class DatabaseItem : IDatabaseItem
 
     private string ToCopyLogPath(string initialCatalog) => this.ToWorkPath(this.CopyLogFile(initialCatalog));
 
-    private string CopyDataFile(string initialCatalog) =>$"{this.configUtil.SystemName}_{Environment.UserName}_{initialCatalog}.mdf";
+    private string CopyDataFile(string initialCatalog) =>$"{Environment.UserName}_{initialCatalog}.mdf";
 
-    private string CopyLogFile(string initialCatalog) => $"{this.configUtil.SystemName}_{Environment.UserName}_{initialCatalog}_log.ldf";
+    private string CopyLogFile(string initialCatalog) => $"{Environment.UserName}_{initialCatalog}_log.ldf";
 
     private static string SourceDataFile(string fileName) => $"{fileName}.mdf";
 
     private static string SourceLogFile(string fileName) => $"{fileName}_log.ldf";
 
-    private string ToWorkPath(string fileName) => Path.Combine(this.configUtil.DbDataDirectory, fileName);
+    private string ToWorkPath(string fileName) => Path.Combine(this.dbDataDirectory, fileName);
 }

@@ -15,13 +15,13 @@ public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : I
 
     private readonly IRepository<PermissionFilterEntity> permissionFilterEntityRepository;
 
-    private readonly SecurityContextInfo securityContextInfo;
+    private readonly SecurityContextInfo<TSecurityContext, Guid> securityContextInfo;
 
     protected AuthorizationTypedExternalSourceBase(
         IRepository<TSecurityContext> securityContextRepository,
         IRepository<EntityType> entityTypeRepository,
         IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
-        SecurityContextInfo securityContextInfo)
+        SecurityContextInfo<TSecurityContext, Guid> securityContextInfo)
     {
         this.securityContextRepository = securityContextRepository;
         this.entityTypeRepository = entityTypeRepository;

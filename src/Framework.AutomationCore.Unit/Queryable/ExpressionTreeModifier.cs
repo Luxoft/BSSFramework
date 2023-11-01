@@ -35,5 +35,15 @@ internal class ExpressionTreeModifier : ExpressionVisitor
     private Expression AvoidFetch(MethodCallExpression node) =>
         IsFetchMethod(node.Method) ? this.AvoidFetch((node.Arguments[0] as MethodCallExpression)!) : node;
 
-    private static bool IsFetchMethod(MethodInfo info) => VisitedMethods.Contains(info.GetGenericMethodDefinition());
+    private static bool IsFetchMethod(MethodInfo info)
+    {
+        try
+        {
+            return VisitedMethods.Contains(info.GetGenericMethodDefinition());
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

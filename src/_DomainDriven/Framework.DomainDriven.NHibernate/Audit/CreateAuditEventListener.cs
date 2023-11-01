@@ -12,11 +12,11 @@ public class CreateAuditEventListener : AuditEventListenerBase, IPreInsertEventL
     {
     }
 
-    public Task<bool> OnPreInsertAsync(PreInsertEvent @event, CancellationToken cancellationToken)
+    public async Task<bool> OnPreInsertAsync(PreInsertEvent @event, CancellationToken cancellationToken)
     {
         this.SetAuditFields(@event, @event.State);
 
-        return Task.FromResult(true);
+        return true;
     }
 
     public bool OnPreInsert(PreInsertEvent @event)

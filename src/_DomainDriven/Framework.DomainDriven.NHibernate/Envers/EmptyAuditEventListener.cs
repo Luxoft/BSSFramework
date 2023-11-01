@@ -10,9 +10,8 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
                                        IPostCollectionRecreateEventListener,
                                        IInitializable
 {
-    public Task OnPostInsertAsync(PostInsertEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostInsertAsync(PostInsertEvent @event, CancellationToken cancellationToken)
     {
-        return Task.CompletedTask;
     }
 
     public void OnPostInsert(PostInsertEvent @event)
@@ -20,9 +19,8 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
         // Empty
     }
 
-    public Task OnPostUpdateAsync(PostUpdateEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostUpdateAsync(PostUpdateEvent @event, CancellationToken cancellationToken)
     {
-        return Task.CompletedTask;
     }
 
     public void OnPostUpdate(PostUpdateEvent @event)
@@ -30,9 +28,8 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
         // Empty
     }
 
-    public Task OnPostDeleteAsync(PostDeleteEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostDeleteAsync(PostDeleteEvent @event, CancellationToken cancellationToken)
     {
-        return Task.CompletedTask;
     }
 
     public void OnPostDelete(PostDeleteEvent @event)
@@ -40,9 +37,8 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
         // Empty
     }
 
-    public Task OnPreUpdateCollectionAsync(PreCollectionUpdateEvent @event, CancellationToken cancellationToken)
+    public async Task OnPreUpdateCollectionAsync(PreCollectionUpdateEvent @event, CancellationToken cancellationToken)
     {
-        return Task.CompletedTask;
     }
 
     public void OnPreUpdateCollection(PreCollectionUpdateEvent @event)
@@ -50,9 +46,8 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
         // Empty
     }
 
-    public Task OnPreRemoveCollectionAsync(PreCollectionRemoveEvent @event, CancellationToken cancellationToken)
+    public async Task OnPreRemoveCollectionAsync(PreCollectionRemoveEvent @event, CancellationToken cancellationToken)
     {
-        return Task.CompletedTask;
     }
 
     public void OnPreRemoveCollection(PreCollectionRemoveEvent @event)
@@ -60,9 +55,8 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
         // Empty
     }
 
-    public Task OnPostRecreateCollectionAsync(PostCollectionRecreateEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostRecreateCollectionAsync(PostCollectionRecreateEvent @event, CancellationToken cancellationToken)
     {
-        return Task.CompletedTask;
     }
 
     public void OnPostRecreateCollection(PostCollectionRecreateEvent @event)

@@ -11,10 +11,10 @@ public class GetEmployeesHandler : IRequestHandler<GetEmployeesQuery, GetEmploye
     public GetEmployeesHandler(IEmployeeBLLFactory employeeBllFactory) =>
             this.employeeBll = employeeBllFactory.Create(BLLSecurityMode.View);
 
-    public Task<GetEmployeesResponse[]> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
+    public async Task<GetEmployeesResponse[]> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
     {
         var result = this.employeeBll.GetUnsecureQueryable().Where(x => x.Active).ToList();
 
-        return Task.FromResult(result.Select(x => new GetEmployeesResponse(x.Id, x.NameEng.FullName)).ToArray());
+        return result.Select(x => new GetEmployeesResponse(x.Id, x.NameEng.FullName)).ToArray();
     }
 }

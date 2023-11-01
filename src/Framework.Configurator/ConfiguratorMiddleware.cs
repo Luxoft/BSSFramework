@@ -35,7 +35,7 @@ public sealed class ConfiguratorMiddleware
             new[] { this.route, $"{this.route}/", $"{this.route}/{StartPage}" }
                     .Any(x => path.EndsWith(x, StringComparison.OrdinalIgnoreCase));
 
-    private static Task<string> GetStartPageContentAsync()
+    private static async Task<string> GetStartPageContentAsync()
     {
         var assembly = typeof(ConfiguratorMiddleware).Assembly;
 
@@ -43,9 +43,9 @@ public sealed class ConfiguratorMiddleware
                            .GetManifestResourceNames()
                            .Single(z => z.EndsWith(StartPage, StringComparison.OrdinalIgnoreCase));
 
-        using var stream = assembly.GetManifestResourceStream(resourceName);
+        await using var stream = assembly.GetManifestResourceStream(resourceName);
         using var reader = new StreamReader(stream!);
-        return reader.ReadToEndAsync();
+        return await reader.ReadToEndAsync();
     }
 
     private string ChangeStaticLocation(string content) =>

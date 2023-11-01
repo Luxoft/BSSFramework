@@ -9,25 +9,40 @@ public class SampleConfiguratorIntegrationEvents : IConfiguratorIntegrationEvent
 
     public SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger) => this.logger = logger;
 
-    public Task PrincipalCreatedAsync(Principal principal, CancellationToken cancellationToken)
+    public async Task PrincipalCreatedAsync(Principal principal, CancellationToken cancellationToken)
     {
         this.logger.LogInformation("Principal {Name} has been created", principal.Name);
-        return Task.CompletedTask;
     }
 
-    public Task PrincipalRemovedAsync(Principal principal, CancellationToken cancellationToken) => Task.CompletedTask;
+    public async Task PrincipalRemovedAsync(Principal principal, CancellationToken cancellationToken)
+    {
+    }
 
-    public Task PrincipalChangedAsync(Principal principal, CancellationToken cancellationToken) => Task.CompletedTask;
+    public async Task PrincipalChangedAsync(Principal principal, CancellationToken cancellationToken)
+    {
+    }
 
-    public Task PermissionRemovedAsync(Permission permission, CancellationToken cancellationToken) => Task.CompletedTask;
+    public async Task PermissionRemovedAsync(Permission permission, CancellationToken cancellationToken)
+    {
+    }
 
-    public Task PermissionCreatedAsync(Permission permission, CancellationToken cancellationToken) => Task.CompletedTask;
+    public async Task PermissionCreatedAsync(Permission permission, CancellationToken cancellationToken)
+    {
+    }
 
-    public Task PermissionChangedAsync(Permission permission, CancellationToken cancellationToken) => Task.CompletedTask;
+    public async Task PermissionChangedAsync(Permission permission, CancellationToken cancellationToken)
+    {
+    }
 
-    public Task BusinessRoleCreatedAsync(BusinessRole businessRole, CancellationToken cancellationToken) => Task.CompletedTask;
+    public async Task BusinessRoleCreatedAsync(BusinessRole businessRole, CancellationToken cancellationToken)
+    {
+    }
 
-    public Task BusinessRoleChangedAsync(BusinessRole businessRole, CancellationToken cancellationToken) => Task.CompletedTask;
+    public async Task BusinessRoleChangedAsync(BusinessRole businessRole, CancellationToken cancellationToken)
+    {
+    }
 
-    public Task BusinessRoleRemovedAsync(BusinessRole businessRole, CancellationToken cancellationToken) => Task.CompletedTask;
+    public async Task BusinessRoleRemovedAsync(BusinessRole businessRole, CancellationToken cancellationToken)
+    {
+    }
 }

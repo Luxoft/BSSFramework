@@ -9,11 +9,11 @@ internal sealed class ClientIpHandling
 
     public ClientIpHandling(RequestDelegate next) => this.next = next;
 
-    public Task Invoke(HttpContext context, ILogger<ClientIpHandling> logger)
+    public async Task Invoke(HttpContext context, ILogger<ClientIpHandling> logger)
     {
         using (logger.BeginScope(new Dictionary<string, object> { [HttpHeaders.ClientIp] = context.Connection.RemoteIpAddress }))
         {
-            return this.next(context);
+            await this.next(context);
         }
     }
 }

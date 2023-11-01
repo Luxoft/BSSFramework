@@ -23,13 +23,13 @@ public class AutomationCoreTheoryTestCase : XunitTheoryTestCase, IAutomationCore
     {
     }
 
-    public Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink,
+    public async Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink,
                                               IMessageBus messageBus,
                                               object[] constructorArguments,
                                               ExceptionAggregator aggregator,
                                               CancellationTokenSource cancellationTokenSource,
                                               IServiceProvider testEnvServiceProvider)
-        => new AutomationCoreTheoryTestCaseRunner(
+        => await new AutomationCoreTheoryTestCaseRunner(
             this,
             this.DisplayName,
             this.SkipReason,

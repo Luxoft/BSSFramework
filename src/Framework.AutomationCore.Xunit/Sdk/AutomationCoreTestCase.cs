@@ -26,14 +26,14 @@ public class AutomationCoreTestCase : XunitTestCase, IAutomationCoreTheoryTestCa
     {
     }
 
-    public Task<RunSummary> RunAsync(
+    public async Task<RunSummary> RunAsync(
         IMessageSink diagnosticMessageSink,
         IMessageBus messageBus,
         object[] constructorArguments,
         ExceptionAggregator aggregator,
         CancellationTokenSource cancellationTokenSource,
         IServiceProvider testEnvServiceProvider)
-        => new AutomationCoreTestCaseRunner(
+        => await new AutomationCoreTestCaseRunner(
             this,
             this.DisplayName,
             this.SkipReason,

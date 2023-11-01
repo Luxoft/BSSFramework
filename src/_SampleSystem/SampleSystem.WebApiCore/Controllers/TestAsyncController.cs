@@ -38,7 +38,7 @@ public class TestAsyncController : ControllerBase
     }
 
     [HttpPost(nameof(AsyncSaveLocation))]
-    public Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
+    public async Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
     {
         var bll = this.buFactory.Create(BLLSecurityMode.Edit);
 
@@ -46,13 +46,13 @@ public class TestAsyncController : ControllerBase
 
         bll.Save(bu);
 
-        return Task.FromResult(bu.ToIdentityDTO());
+        return bu.ToIdentityDTO();
     }
 
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost(nameof(AsyncSaveLocationWithWriteException))]
-    public Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
+    public async Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
     {
-        return this.AsyncSaveLocation(businessUnitStrictDTO, cancellationToken);
+        return await this.AsyncSaveLocation(businessUnitStrictDTO, cancellationToken);
     }
 }

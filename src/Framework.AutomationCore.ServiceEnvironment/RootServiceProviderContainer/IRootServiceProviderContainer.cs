@@ -13,12 +13,12 @@ public interface IRootServiceProviderContainer
 
 public interface IRootServiceProviderContainer<out TBLLContext> : IRootServiceProviderContainer, IServiceEvaluator<TBLLContext>
 {
-    Task<TResult> IServiceEvaluator<TBLLContext>.EvaluateAsync<TResult>(
+    async Task<TResult> IServiceEvaluator<TBLLContext>.EvaluateAsync<TResult>(
             DBSessionMode sessionMode,
             string customPrincipalName,
             Func<TBLLContext, Task<TResult>> getResult)
     {
-        return this.RootServiceProvider.GetRequiredService<IServiceEvaluator<TBLLContext>>().EvaluateAsync(sessionMode, customPrincipalName, getResult);
+        return await this.RootServiceProvider.GetRequiredService<IServiceEvaluator<TBLLContext>>().EvaluateAsync(sessionMode, customPrincipalName, getResult);
     }
 }
 

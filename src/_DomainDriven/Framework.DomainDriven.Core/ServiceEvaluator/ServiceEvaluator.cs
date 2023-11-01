@@ -14,12 +14,12 @@ public class ServiceEvaluator<TService> : IServiceEvaluator<TService>
         this.dbSessionEvaluator = dbSessionEvaluator ?? throw new ArgumentNullException(nameof(dbSessionEvaluator));
     }
 
-    public Task<TResult> EvaluateAsync<TResult>(
+    public async Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
         string customPrincipalName,
         Func<TService, Task<TResult>> getResult)
     {
-        return this.dbSessionEvaluator.EvaluateAsync(
+        return await this.dbSessionEvaluator.EvaluateAsync(
             sessionMode,
             async serviceProvider =>
             {

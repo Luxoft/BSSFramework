@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 
 using Framework.RabbitMq.Consumer.Enums;
 using Framework.RabbitMq.Consumer.Interfaces;
@@ -121,5 +121,5 @@ public class RabbitMqBackgroundService : BackgroundService
         }
     }
 
-    private static Task Delay(int value, CancellationToken token) => Task.Delay(TimeSpan.FromMilliseconds(value), token);
+    private static async Task Delay(int value, CancellationToken token) => await Task.Delay(TimeSpan.FromMilliseconds(value), token);
 }

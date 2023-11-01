@@ -2,5 +2,5 @@
 
 public interface IAuthorizationOperationInitializer
 {
-    public Task InitSecurityOperations(UnexpectedAuthOperationMode mode, CancellationToken cancellationToken = default);
+    Task InitSecurityOperations(UnexpectedAuthOperationMode mode, CancellationToken cancellationToken = default);
 }

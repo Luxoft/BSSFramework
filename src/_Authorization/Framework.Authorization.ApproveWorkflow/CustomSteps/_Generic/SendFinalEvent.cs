@@ -14,13 +14,13 @@ public class SendFinalEvent : IStepBody
 
     public object Data { get; set; }
 
-    public Task<ExecutionResult> RunAsync(IStepExecutionContext context)
+    public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
     {
         this.publishEvent.EventName = EventName;
         this.publishEvent.EventKey = context.Workflow.Id;
         this.publishEvent.EventData = this.Data;
 
-        return this.publishEvent.RunAsync(context);
+        return await this.publishEvent.RunAsync(context);
     }
 
     public static readonly string EventName = "Finish Workflow";

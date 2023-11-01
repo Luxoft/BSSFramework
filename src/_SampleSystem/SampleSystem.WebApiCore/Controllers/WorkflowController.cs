@@ -107,15 +107,15 @@ public class WorkflowController : ControllerBase
     }
 
     [HttpPost(nameof(ApproveOperation))]
-    public Task ApproveOperation(PermissionIdentityDTO permissionIdentity, string approveEventId)
+    public async Task ApproveOperation(PermissionIdentityDTO permissionIdentity, string approveEventId)
     {
-        return this.ApproveRejectOperation(permissionIdentity, approveEventId, true);
+        await this.ApproveRejectOperation(permissionIdentity, approveEventId, true);
     }
 
     [HttpPost(nameof(RejectOperation))]
-    public Task RejectOperation(PermissionIdentityDTO permissionIdentity, string rejectEventId)
+    public async Task RejectOperation(PermissionIdentityDTO permissionIdentity, string rejectEventId)
     {
-        return this.ApproveRejectOperation(permissionIdentity, rejectEventId, false);
+        await this.ApproveRejectOperation(permissionIdentity, rejectEventId, false);
     }
 
     private async Task ApproveRejectOperation(PermissionIdentityDTO permissionIdentity, string eventId, bool isApprove)

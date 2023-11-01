@@ -4,23 +4,23 @@ namespace Framework.DomainDriven;
 
 public static class ServiceEvaluatorExtensions
 {
-    public static Task<TResult> EvaluateAsync<TService, TResult>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, Func<TService, Task<TResult>> getResult)
+    public static async Task<TResult> EvaluateAsync<TService, TResult>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, Func<TService, Task<TResult>> getResult)
     {
-        return contextEvaluator.EvaluateAsync(sessionMode, null, getResult);
+        return await contextEvaluator.EvaluateAsync(sessionMode, null, getResult);
     }
 
-    public static Task EvaluateAsync<TService>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, Func<TService, Task> action)
+    public static async Task EvaluateAsync<TService>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, Func<TService, Task> action)
     {
-        return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, async service =>
+        await contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, async service =>
                                                                                 {
                                                                                     await action(service);
                                                                                     return default(object);
                                                                                 });
     }
 
-    public static Task EvaluateAsync<TService>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, Func<TService, Task> action)
+    public static async Task EvaluateAsync<TService>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, Func<TService, Task> action)
     {
-        return contextEvaluator.EvaluateAsync(sessionMode, null, action);
+        await contextEvaluator.EvaluateAsync(sessionMode, null, action);
     }
 
     public static void Evaluate<TService>(

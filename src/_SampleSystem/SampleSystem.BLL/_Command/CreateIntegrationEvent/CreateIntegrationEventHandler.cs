@@ -21,14 +21,12 @@ public class CreateIntegrationEventHandler : IRequestHandler<CreateIntegrationEv
         this.countryBllFactory = countryBllFactory;
     }
 
-    public Task Handle(CreateIntegrationEventCommand request, CancellationToken cancellationToken)
+    public async Task Handle(CreateIntegrationEventCommand request, CancellationToken cancellationToken)
     {
         var country = new Country { Code = "test11", Name = "test11", Culture = "test11", NameNative = "test11" };
         this.countryBllFactory.Create()
             .Save(country);
 
-        this.integrationEventBus.Publish(new TestIntegrationEvent(country.Id));
-
-        return Task.FromResult(Unit.Value);
+        await this.integrationEventBus.PublishAsync(new TestIntegrationEvent(country.Id), cancellationToken);
     }
 }

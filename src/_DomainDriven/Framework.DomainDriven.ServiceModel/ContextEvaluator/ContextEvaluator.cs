@@ -15,12 +15,12 @@ public class ContextEvaluator<TBLLContext, TDTOMappingService> : IContextEvaluat
         this.baseContextEvaluator = baseContextEvaluator;
     }
 
-    public Task<TResult> EvaluateAsync<TResult>(
+    public async Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
         string customPrincipalName,
         Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task<TResult>> getResult)
     {
-        return this.baseContextEvaluator.EvaluateAsync(
+        return await this.baseContextEvaluator.EvaluateAsync(
             sessionMode,
             customPrincipalName,
             context => getResult(

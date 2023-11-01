@@ -13,11 +13,11 @@ public class ExceptionExpanderMiddleware
         this.next = next;
     }
 
-    public Task Invoke(HttpContext context, IExceptionExpander exceptionExpander)
+    public async Task Invoke(HttpContext context, IExceptionExpander exceptionExpander)
     {
         try
         {
-            return this.next(context);
+            await this.next(context);
         }
         catch (Exception ex)
         {

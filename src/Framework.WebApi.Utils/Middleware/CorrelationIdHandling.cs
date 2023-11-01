@@ -15,7 +15,7 @@ internal sealed class CorrelationIdHandling
         this.pattern = pattern;
     }
 
-    public Task Invoke(HttpContext context, ILogger<CorrelationIdHandling> logger)
+    public async Task Invoke(HttpContext context, ILogger<CorrelationIdHandling> logger)
     {
         var correlationId = context.Request.Headers[HttpHeaders.Correlation].FirstOrDefault();
 
@@ -29,7 +29,7 @@ internal sealed class CorrelationIdHandling
 
         using (logger.BeginScope(new Dictionary<string, object> { [HttpHeaders.Correlation] = correlationId }))
         {
-            return this.next(context);
+            await this.next(context);
         }
     }
 }

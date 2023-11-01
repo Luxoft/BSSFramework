@@ -16,7 +16,7 @@ public class HierarchicalAuthorizationTypedExternalSource<TSecurityContext> : Au
         IRepository<TSecurityContext> securityContextRepository,
         IRepository<EntityType> entityTypeRepository,
         IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
-        SecurityContextInfo securityContextInfo,
+        SecurityContextInfo<TSecurityContext, Guid> securityContextInfo,
         ISecurityContextDisplayService<TSecurityContext> displayService)
         : base(securityContextRepository, entityTypeRepository, permissionFilterEntityRepository, securityContextInfo)
     {

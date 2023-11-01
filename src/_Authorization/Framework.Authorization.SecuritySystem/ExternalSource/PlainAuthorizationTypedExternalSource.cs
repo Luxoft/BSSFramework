@@ -14,7 +14,7 @@ public class PlainAuthorizationTypedExternalSource<TSecurityContext> : Authoriza
         IRepository<TSecurityContext> securityContextRepository,
         IRepository<EntityType> entityTypeRepository,
         IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
-        SecurityContextInfo securityContextInfo,
+        SecurityContextInfo<TSecurityContext, Guid> securityContextInfo,
         ISecurityContextDisplayService<TSecurityContext> displayService)
         : base(securityContextRepository, entityTypeRepository, permissionFilterEntityRepository, securityContextInfo)
     {

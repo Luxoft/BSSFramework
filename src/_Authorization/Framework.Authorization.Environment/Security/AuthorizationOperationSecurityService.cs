@@ -10,12 +10,12 @@ namespace Framework.Authorization.Environment
         private readonly IAvailablePermissionSource availablePermissionSource;
 
         public AuthorizationOperationSecurityService(
-            IDisabledSecurityProviderSource disabledSecurityProviderSource,
+            ISecurityProvider<Operation> disabledSecurityProvider,
             ISecurityOperationResolver securityOperationResolver,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<Operation> securityPath,
             IAvailablePermissionSource availablePermissionSource)
-            : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
+            : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
         {
             this.availablePermissionSource = availablePermissionSource;
         }

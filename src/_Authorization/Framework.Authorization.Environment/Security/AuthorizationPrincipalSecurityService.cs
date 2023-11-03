@@ -10,12 +10,12 @@ namespace Framework.Authorization.Environment
         private readonly IActualPrincipalSource actualPrincipalSource;
 
         public AuthorizationPrincipalSecurityService(
-            IDisabledSecurityProviderSource disabledSecurityProviderSource,
+            ISecurityProvider<Principal> disabledSecurityProvider,
             ISecurityOperationResolver securityOperationResolver,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<Principal> securityPath,
             IActualPrincipalSource actualPrincipalSource)
-            : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
+            : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
         {
             this.actualPrincipalSource = actualPrincipalSource;
         }

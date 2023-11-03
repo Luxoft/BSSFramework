@@ -5,9 +5,9 @@ public abstract class DomainSecurityService<TDomainObject> : DomainSecurityServi
     private readonly ISecurityOperationResolver securityOperationResolver;
 
     protected DomainSecurityService(
-        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityProvider<TDomainObject> disabledSecurityProvider,
         ISecurityOperationResolver securityOperationResolver)
-        : base(disabledSecurityProviderSource)
+        : base(disabledSecurityProvider)
     {
         this.securityOperationResolver = securityOperationResolver ?? throw new ArgumentNullException(nameof(securityOperationResolver));
     }

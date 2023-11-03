@@ -34,7 +34,6 @@ public class RootSecurityService<TPersistentDomainObjectBase> : IRootSecuritySer
     protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>()
         where TDomainObject : TPersistentDomainObjectBase
     {
-        return this.ServiceProvider.GetService<IDomainSecurityService<TDomainObject>>()
-               ?? this.ServiceProvider.GetRequiredService<INotImplementedDomainSecurityService<TDomainObject>>();
+        return this.ServiceProvider.GetService<IDomainSecurityService<TDomainObject>>();
     }
 }

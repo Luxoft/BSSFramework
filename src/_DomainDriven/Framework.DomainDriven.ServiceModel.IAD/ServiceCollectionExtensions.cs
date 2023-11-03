@@ -34,7 +34,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>)); //TODO: add unsecurity di key "DisabledSecurity" after update to NET8.0
         services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
-
         services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
         services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
 
@@ -52,8 +51,6 @@ public static class ServiceCollectionExtensions
         services.RegisterConfigurationSecurity();
 
         services.AddSingleton<IDateTimeService>(DateTimeService.Default);
-
-        services.AddScoped(typeof(INotImplementedDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>));
 
         return services;
     }
@@ -94,7 +91,8 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
 
-                       .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
+                       .AddScoped(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
+                       .AddScoped(typeof(IDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>))
 
                        .AddScoped<IRunAsManager, RunAsManger>()
                        .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()

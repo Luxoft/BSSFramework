@@ -9,10 +9,10 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
     private readonly IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService;
 
     protected DependencyDomainSecurityServiceBase(
-        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityProvider<TDomainObject> disabledSecurityProvider,
         ISecurityOperationResolver securityOperationResolver,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
-        : base(disabledSecurityProviderSource)
+        : base(disabledSecurityProvider)
     {
         this.securityOperationResolver = securityOperationResolver;
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));

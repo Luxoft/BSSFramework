@@ -9,13 +9,13 @@ public abstract class DomainSecurityServiceBase<TDomainObject> : IDomainSecurity
     private readonly IDictionaryCache<SecurityOperation, ISecurityProvider<TDomainObject>> operationsProvidersCache;
 
 
-    protected DomainSecurityServiceBase(IDisabledSecurityProviderSource disabledSecurityProviderSource)
+    protected DomainSecurityServiceBase(ISecurityProvider<TDomainObject> disabledSecurityProvider)
     {
         this.operationsProvidersCache = new DictionaryCache<SecurityOperation, ISecurityProvider<TDomainObject>>(securityOperation =>
         {
             if (securityOperation is DisabledSecurityOperation)
             {
-                return disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
+                return disabledSecurityProvider;
             }
             else
             {
@@ -27,7 +27,7 @@ public abstract class DomainSecurityServiceBase<TDomainObject> : IDomainSecurity
         {
             if (securityMode == BLLSecurityMode.Disabled)
             {
-                return disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
+                return disabledSecurityProvider;
             }
             else
             {

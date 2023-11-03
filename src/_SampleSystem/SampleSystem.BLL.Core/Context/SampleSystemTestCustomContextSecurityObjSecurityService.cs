@@ -8,11 +8,10 @@ namespace SampleSystem.BLL;
 public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDomainSecurityServiceBase<TestCustomContextSecurityObj, Guid>
 {
     public SampleSystemTestCustomContextSecurityObjSecurityService(
-        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityProvider<TestCustomContextSecurityObj> disabledSecurityProvider,
         ISecurityOperationResolver securityOperationResolver,
-        IAuthorizationSystem<Guid> authorizationSystem,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
-        : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory)
+        : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory)
     {
     }
 

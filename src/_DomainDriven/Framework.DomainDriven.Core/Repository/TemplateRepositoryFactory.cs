@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.Repository;
@@ -15,11 +15,10 @@ public abstract class TemplateRepositoryFactory<TRepository, TTRepositoryImpl, T
 
     protected TemplateRepositoryFactory(
         IServiceProvider serviceProvider,
-        INotImplementedDomainSecurityService<TDomainObject> notImplementedDomainSecurityService,
-        IDomainSecurityService<TDomainObject>? domainSecurityService = null)
+        IDomainSecurityService<TDomainObject> domainSecurityService)
     {
         this.serviceProvider = serviceProvider;
-        this.domainSecurityService = domainSecurityService ?? notImplementedDomainSecurityService;
+        this.domainSecurityService = domainSecurityService;
     }
 
     public TRepository Create() =>

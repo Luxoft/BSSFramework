@@ -13,9 +13,8 @@ public class Repository<TDomainObject> : GenericRepository<TDomainObject, Guid>,
         IAsyncDal<TDomainObject, Guid> dal,
         ISpecificationEvaluator specificationEvaluator,
         IAccessDeniedExceptionService accessDeniedExceptionService,
-        IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityProvider<TDomainObject>? securityProvider = null)
-        : base(dal, specificationEvaluator, accessDeniedExceptionService, disabledSecurityProviderSource, securityProvider)
+        ISecurityProvider<TDomainObject> securityProvider)
+        : base(dal, specificationEvaluator, accessDeniedExceptionService, securityProvider)
     {
     }
 }

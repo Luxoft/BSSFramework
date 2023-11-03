@@ -14,9 +14,8 @@ public class RepositoryFactory<TDomainObject> : TemplateRepositoryFactory<
 {
     public RepositoryFactory(
         IServiceProvider serviceProvider,
-        INotImplementedDomainSecurityService<TDomainObject> notImplementedDomainSecurityService,
-        IDomainSecurityService<TDomainObject> domainSecurityService = null)
-        : base(serviceProvider, notImplementedDomainSecurityService, domainSecurityService)
+        IDomainSecurityService<TDomainObject> domainSecurityService)
+        : base(serviceProvider, domainSecurityService)
     {
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 
-public class OnlyDisabledDomainSecurityService<TDomainObject> : INotImplementedDomainSecurityService<TDomainObject>
+public class OnlyDisabledDomainSecurityService<TDomainObject> : IDomainSecurityService<TDomainObject>
 {
-    private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
+    private readonly ISecurityProvider<TDomainObject> disabledSecurityProvider;
 
-    public OnlyDisabledDomainSecurityService(IDisabledSecurityProviderSource disabledSecurityProviderSource)
+    public OnlyDisabledDomainSecurityService(ISecurityProvider<TDomainObject> disabledSecurityProvider)
     {
-        this.disabledSecurityProviderSource = disabledSecurityProviderSource;
+        this.disabledSecurityProvider = disabledSecurityProvider;
     }
 
     public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation securityOperation)
@@ -25,7 +25,7 @@ public class OnlyDisabledDomainSecurityService<TDomainObject> : INotImplementedD
     {
         if (isDisabled)
         {
-            return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
+            return this.disabledSecurityProvider;
         }
         else
         {

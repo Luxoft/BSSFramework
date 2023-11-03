@@ -9,7 +9,8 @@ public interface ISecurityBLLContext<in TPersistentDomainObjectBase, TIdent> :
 
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
-    ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>();
+    ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
+        where TDomainObject : TPersistentDomainObjectBase;
 
     ISecurityOperationResolver SecurityOperationResolver { get; }
 }

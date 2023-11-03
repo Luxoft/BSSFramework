@@ -102,7 +102,9 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
 
     public IServiceProvider ServiceProvider { get; }
 
-    public ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>() => this.ServiceProvider.GetRequiredService<ISecurityProvider<TDomainObject>>();
+    public ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
+        where TDomainObject : PersistentDomainObjectBase
+        => this.ServiceProvider.GetRequiredService<ISecurityProvider<TDomainObject>>();
 
     public ISecurityOperationResolver SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver>();
 }

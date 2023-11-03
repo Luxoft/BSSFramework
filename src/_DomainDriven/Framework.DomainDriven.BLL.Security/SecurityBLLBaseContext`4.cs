@@ -31,6 +31,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
     public virtual IAccessDeniedExceptionService AccessDeniedExceptionService { get; }
 
     public ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
+        where TDomainObject : TPersistentDomainObjectBase
     {
         return this.ServiceProvider.GetRequiredService<ISecurityProvider<TDomainObject>>();
     }

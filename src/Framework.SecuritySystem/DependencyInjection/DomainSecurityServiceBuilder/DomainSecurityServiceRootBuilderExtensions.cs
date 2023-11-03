@@ -5,6 +5,14 @@ public static class DomainSecurityServiceRootBuilderExtensions
     public static IDomainSecurityServiceRootBuilder Add<TDomainObject>(
         this IDomainSecurityServiceRootBuilder rootBuilder,
         SecurityOperation viewOperation,
+        SecurityPath<TDomainObject> securityPath)
+    {
+        return rootBuilder.Add(viewOperation, null, securityPath);
+    }
+
+    public static IDomainSecurityServiceRootBuilder Add<TDomainObject>(
+        this IDomainSecurityServiceRootBuilder rootBuilder,
+        SecurityOperation viewOperation,
         SecurityOperation editOperation = null,
         SecurityPath<TDomainObject> securityPath = null)
     {

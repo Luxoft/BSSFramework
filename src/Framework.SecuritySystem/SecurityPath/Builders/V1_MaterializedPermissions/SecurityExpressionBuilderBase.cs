@@ -35,7 +35,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
 
     public abstract IEnumerable<Type> GetUsedTypes();
 
-    public virtual Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(
+    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(
         List<Dictionary<Type, IEnumerable<TIdent>>> permissions)
     {
         if (permissions == null) throw new ArgumentNullException(nameof(permissions));
@@ -352,9 +352,9 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
             this._getAccessableFilterLazy = new Lazy<Expression<Func<TDomainObject, HierarchicalExpandType, Expression<Func<IPermission<TIdent>, bool>>>>>(() => this.CreateAccessorsFilterExpression(), true);
         }
 
-        public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(List<Dictionary<Type, IEnumerable<TIdent>>> permissions)
+        public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission)
         {
-            var filterExpression = permissions.BuildOr(this._nestedBuilder.GetSecurityFilterExpression);
+            var filterExpression = this._nestedBuilder.GetSecurityFilterExpression(permission);
 
             switch (this.Path.Mode)
             {
@@ -390,11 +390,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
                     throw new ArgumentOutOfRangeException("this.Path.Mode");
             }
-        }
-
-        public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission)
-        {
-            throw new NotImplementedException();
         }
 
         public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType)

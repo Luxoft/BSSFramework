@@ -34,9 +34,12 @@ public class ExceptionHandlingMiddleware
         }
         finally
         {
-            newBody.Seek(0, SeekOrigin.Begin);
-            await newBody.CopyToAsync(originBody, context.RequestAborted);
-            response.Body = originBody;
+            if (!context.RequestAborted.IsCancellationRequested)
+            {
+                newBody.Seek(0, SeekOrigin.Begin);
+                await newBody.CopyToAsync(originBody, context.RequestAborted);
+                response.Body = originBody;
+            }
         }
     }
 

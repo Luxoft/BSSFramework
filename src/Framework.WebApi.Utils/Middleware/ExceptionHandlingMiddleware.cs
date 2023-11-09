@@ -47,7 +47,7 @@ public class ExceptionHandlingMiddleware
     {
         var errorInfo = this.GetErrorInfo(exception);
         context.Response.ContentType = errorInfo.contentType;
-        context.Response.StatusCode = errorInfo.statucCode;
+        context.Response.StatusCode = errorInfo.statusCode;
 
         var errorData = JsonConvert.SerializeObject(errorInfo.errorMessage);
 
@@ -58,7 +58,7 @@ public class ExceptionHandlingMiddleware
         context.Response.ContentLength = newBody.Length;
     }
 
-    protected virtual (string contentType, int statucCode, string errorMessage) GetErrorInfo(Exception exception)
+    protected virtual (string contentType, int statusCode, string errorMessage) GetErrorInfo(Exception exception)
     {
         var code = (int)HttpStatusCode.InternalServerError;
         var exceptionMessage = exception.Message;

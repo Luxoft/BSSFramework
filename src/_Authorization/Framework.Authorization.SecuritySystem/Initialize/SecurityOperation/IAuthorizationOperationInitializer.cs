@@ -2,4 +2,5 @@
 
 public interface IAuthorizationOperationInitializer : ISecurityInitializer
 {
+    Task RemoveUnusedAsync(CancellationToken cancellationToken = default);
 }

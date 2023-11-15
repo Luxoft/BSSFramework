@@ -55,6 +55,12 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
         }
     }
 
+    public async Task RemoveUnusedAsync(CancellationToken cancellationToken = default)
+    {
+        var operations = await this.operationRepository.GetQueryable().Where(x => !x.Links.Any()).ToListAsync(cancellationToken);
+        foreach (var operation in operations) await this.operationRepository.RemoveAsync(operation, cancellationToken);
+    }
+
     private async Task<IReadOnlyDictionary<SecurityOperation<Guid>, Operation>> InitMainSecurityOperations(CancellationToken cancellationToken)
     {
         var dbOperations = await this.operationRepository.GetQueryable().ToListAsync(cancellationToken);

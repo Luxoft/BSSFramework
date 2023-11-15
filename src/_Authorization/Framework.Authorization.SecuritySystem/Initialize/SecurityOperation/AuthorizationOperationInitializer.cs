@@ -9,7 +9,7 @@ using NHibernate.Linq;
 
 using Serilog;
 
-namespace Framework.Authorization.SecuritySystem.OperationInitializer;
+namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationOperationInitializer : IAuthorizationOperationInitializer
 {
@@ -23,32 +23,41 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
 
     private readonly ISecurityOperationParser securityOperationParser;
 
+    private readonly ILogger logger;
+
+    private readonly InitializeSettings settings;
+
     public AuthorizationOperationInitializer(
         IRepository<Operation> operationRepository,
         IOperationDomainService operationDomainService,
         ISecurityOperationParser securityOperationParser,
         IRepository<BusinessRole> businessRoleRepository,
-        IBusinessRoleDomainService businessRoleDomainService)
+        IBusinessRoleDomainService businessRoleDomainService,
+        ILogger logger,
+        InitializeSettings settings)
     {
         this.operationRepository = operationRepository;
         this.operationDomainService = operationDomainService;
         this.securityOperationParser = securityOperationParser;
         this.businessRoleRepository = businessRoleRepository;
         this.businessRoleDomainService = businessRoleDomainService;
+        this.logger = logger.ForContext<AuthorizationOperationInitializer>();
+        this.settings = settings;
     }
 
-    public async Task InitSecurityOperations(UnexpectedAuthOperationMode mode, CancellationToken cancellationToken)
+    public async Task Init(CancellationToken cancellationToken)
     {
-        var fullOperations = await this.InitMainSecurityOperations(mode, cancellationToken);
+        var fullOperations = await this.InitMainSecurityOperations(cancellationToken);
 
-        await this.InitAdminSecurityOperations(fullOperations, cancellationToken);
+        if (this.settings.InitDefaultAdminRole)
+        {
+            await this.InitAdminSecurityOperations(fullOperations, cancellationToken);
+        }
     }
 
-    private async Task<IReadOnlyDictionary<SecurityOperation<Guid>, Operation>> InitMainSecurityOperations(UnexpectedAuthOperationMode mode, CancellationToken cancellationToken)
+    private async Task<IReadOnlyDictionary<SecurityOperation<Guid>, Operation>> InitMainSecurityOperations(CancellationToken cancellationToken)
     {
-        var operationRepository = this.operationRepository;
-
-        var dbOperations = await operationRepository.GetQueryable().ToListAsync(cancellationToken);
+        var dbOperations = await this.operationRepository.GetQueryable().ToListAsync(cancellationToken);
 
         var mergeResult = dbOperations.GetMergeResult(
             this.securityOperationParser
@@ -59,17 +68,17 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
 
         if (mergeResult.RemovingItems.Any())
         {
-            switch (mode)
+            switch (this.settings.UnexpectedAuthElementMode)
             {
-                case UnexpectedAuthOperationMode.RaiseError:
+                case UnexpectedAuthElementMode.RaiseError:
                     throw new InvalidOperationException(
                         $"Unexpected security operations in database: {mergeResult.RemovingItems.Join(", ")}");
 
-                case UnexpectedAuthOperationMode.Remove:
+                case UnexpectedAuthElementMode.Remove:
                     {
                         foreach (var removingItem in mergeResult.RemovingItems)
                         {
-                            Log.Verbose("Remove Operation: {RemovingItemName} {RemovingItemId}", removingItem.Name, removingItem.Id);
+                            this.logger.Verbose("Remove Operation: {RemovingItemName} {RemovingItemId}", removingItem.Name, removingItem.Id);
 
                             await this.operationDomainService.RemoveAsync(removingItem, cancellationToken);
                         }
@@ -89,8 +98,8 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
                     Description = securityOperation.Description
                 };
 
-                Log.Verbose("Add Operation: {OperationName} {AttributeGuid}", newAuthOperation.Name, newAuthOperation.Id);
-                await operationRepository.InsertAsync(newAuthOperation, securityOperation.Id, cancellationToken);
+                this.logger.Verbose("Add Operation: {OperationName} {AttributeGuid}", newAuthOperation.Name, newAuthOperation.Id);
+                await this.operationRepository.InsertAsync(newAuthOperation, securityOperation.Id, cancellationToken);
 
                 return newAuthOperation;
             });
@@ -102,7 +111,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
                 pair.Item1.Name = pair.Item2.Name;
                 pair.Item1.Description = pair.Item2.Description;
 
-                await operationRepository.SaveAsync(pair.Item1, cancellationToken);
+                await this.operationRepository.SaveAsync(pair.Item1, cancellationToken);
             }
         }
 
@@ -123,8 +132,6 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
 
     private async Task InitAdminSecurityOperations(IReadOnlyDictionary<SecurityOperation<Guid>, Operation> fullOperations, CancellationToken cancellationToken)
     {
-        var businessRoleRepository = this.businessRoleRepository;
-
         var adminRole = await this.businessRoleDomainService.GetOrCreateEmptyAdminRole(cancellationToken);
 
         var mergeResult = adminRole.BusinessRoleOperationLinks.GetMergeResult(
@@ -138,7 +145,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
 
             mergeResult.RemovingItems.Foreach(link => adminRole.RemoveDetail(link));
 
-            await businessRoleRepository.SaveAsync(adminRole, cancellationToken);
+            await this.businessRoleRepository.SaveAsync(adminRole, cancellationToken);
         }
     }
 }

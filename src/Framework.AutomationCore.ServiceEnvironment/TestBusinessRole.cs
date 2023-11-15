@@ -28,5 +28,6 @@ public class TestBusinessRole : IPermissionDefinition
 
     public static readonly TestBusinessRole Administrator = new(nameof(Administrator));
 
+
     public static readonly TestBusinessRole SystemIntegration = new(nameof(SystemIntegration));
 }

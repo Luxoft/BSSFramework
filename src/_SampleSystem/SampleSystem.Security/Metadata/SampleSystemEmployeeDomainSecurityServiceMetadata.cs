@@ -4,7 +4,7 @@ using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.ServiceEnvironment;
+namespace SampleSystem.Security.Metadata;
 
 public class SampleSystemEmployeeDomainSecurityServiceMetadata : IDomainSecurityServiceMetadata<Employee>
 {

@@ -4,7 +4,9 @@ using Framework.Authorization.Environment;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.DomainServices;
 using Framework.Authorization.SecuritySystem.ExternalSource;
-using Framework.Authorization.SecuritySystem.OperationInitializer;
+
+using Framework.Authorization.SecuritySystem.Initialize;
+
 using Framework.Configuration;
 using Framework.Configuration.Domain;
 using Framework.Core.Services;
@@ -118,7 +120,10 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
 
+                       .AddSingleton<InitializeSettings>()
+                       .AddScoped<IAuthorizationEntityTypeInitializer, AuthorizationEntityTypeInitializer>()
                        .AddScoped<IAuthorizationOperationInitializer, AuthorizationOperationInitializer>()
+                       .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
 

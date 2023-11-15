@@ -3,7 +3,7 @@ using Framework.SecuritySystem.Rules.Builders;
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.BLL;
+namespace SampleSystem.Security.Services;
 
 public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDomainSecurityServiceBase<TestCustomContextSecurityObj, Guid>
 {

@@ -18,11 +18,12 @@ public class AvailableSecurityOperationSource : IAvailableSecurityOperationSourc
 
     public async Task<List<SecurityOperation>> GetAvailableSecurityOperation (CancellationToken cancellationToken)
     {
-        var dbRequest = from permission in this.availablePermissionSource.GetAvailablePermissionsQueryable()
+        var dbRequest = (from permission in this.availablePermissionSource.GetAvailablePermissionsQueryable()
 
                         from operationLink in permission.Role.BusinessRoleOperationLinks
 
-                        select operationLink.Operation.Id;
+                        select operationLink.Operation.Id)
+                        .Distinct();
 
         var dbOperationIdents = await dbRequest.ToListAsync(cancellationToken);
 

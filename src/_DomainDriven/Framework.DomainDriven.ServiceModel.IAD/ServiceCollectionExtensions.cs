@@ -120,6 +120,8 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
 
+                       .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
+
                        .AddSingleton<InitializeSettings>()
                        .AddScoped<IAuthorizationEntityTypeInitializer, AuthorizationEntityTypeInitializer>()
                        .AddScoped<IAuthorizationOperationInitializer, AuthorizationOperationInitializer>()

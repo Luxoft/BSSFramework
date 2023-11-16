@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.Persistent;
@@ -14,11 +12,11 @@ namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleInitializer
 {
-    private readonly List<SecurityRoleTypeInfo> securityRoleTypeInfoList;
-
     private readonly IRepository<BusinessRole> businessRoleRepository;
 
     private readonly IRepository<Operation> operationRepository;
+
+    private readonly ISecurityRoleSource securityRoleSource;
 
     private readonly ILogger logger;
 
@@ -27,28 +25,20 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
     public AuthorizationBusinessRoleInitializer(
         IRepository<BusinessRole> businessRoleRepository,
         IRepository<Operation> operationRepository,
-        IEnumerable<SecurityRoleTypeInfo> securityRoleTypeInfoList,
+        ISecurityRoleSource securityRoleSource,
         ILogger logger,
         InitializeSettings settings)
     {
-        this.securityRoleTypeInfoList = securityRoleTypeInfoList.ToList();
         this.businessRoleRepository = businessRoleRepository;
         this.operationRepository = operationRepository;
+        this.securityRoleSource = securityRoleSource;
         this.logger = logger.ForContext<AuthorizationBusinessRoleInitializer>();
         this.settings = settings;
     }
 
     public async Task Init(CancellationToken cancellationToken)
     {
-        var request = from securityRoleTypeInfo in this.securityRoleTypeInfoList
-
-                      from property in securityRoleTypeInfo.SecurityRoleType.GetProperties(BindingFlags.Public | BindingFlags.Static)
-
-                      where typeof(SecurityRole).IsAssignableFrom(property.PropertyType)
-
-                      select (SecurityRole)property.GetValue(null);
-
-        await this.Init(request, cancellationToken);
+        await this.Init(this.securityRoleSource.SecurityRoles, cancellationToken);
     }
 
     public async Task Init(IEnumerable<SecurityRole> securityRoles, CancellationToken cancellationToken)

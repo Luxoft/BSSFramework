@@ -1,5 +1,6 @@
 ﻿using Framework.DomainDriven.Repository;
 using Framework.QueryableSource;
+using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +17,6 @@ public class RepositoryQueryableSource : IQueryableSource
 
     public IQueryable<TDomainObject> GetQueryable<TDomainObject>()
     {
-        return this.serviceProvider.GetRequiredService<IRepository<TDomainObject>>().GetQueryable();
+        return this.serviceProvider.GetRequiredKeyedService<IRepository<TDomainObject>>(BLLSecurityMode.Disabled).GetQueryable();
     }
 }

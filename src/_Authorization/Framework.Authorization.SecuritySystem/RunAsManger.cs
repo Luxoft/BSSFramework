@@ -1,6 +1,8 @@
 ﻿using Framework.Authorization.Domain;
 
 using Framework.DomainDriven.Repository;
+using Framework.SecuritySystem;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem;
 
@@ -13,7 +15,7 @@ public class RunAsManger : IRunAsManager
     private readonly Principal currentPrincipal;
 
     public RunAsManger(
-        IRepository<Principal> principalRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Principal> principalRepository,
         ICurrentPrincipalSource currentPrincipalSource,
         IOperationAccessorFactory operationAccessorFactory)
     {

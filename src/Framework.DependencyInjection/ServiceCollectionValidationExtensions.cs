@@ -31,9 +31,13 @@ public static class ServiceCollectionValidationExtensions
 
                 from service in serviceCollection
 
-                where service.ImplementationType != null && service.ImplementationFactory == null
+                let actualImplementationType = service.IsKeyedService ? service.KeyedImplementationType : service.ImplementationType
 
-                let ctors = service.ImplementationType!.GetConstructors()
+                let actualImplementationFactory = service.IsKeyedService ? (object)service.KeyedImplementationFactory : service.ImplementationFactory
+
+                where actualImplementationType != null && actualImplementationFactory == null
+
+                let ctors = actualImplementationType!.GetConstructors()
 
                 let actualCtor = ctors.Length == 1
                                          ? ctors[0]

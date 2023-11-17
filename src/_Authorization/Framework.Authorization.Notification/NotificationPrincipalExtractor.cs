@@ -30,8 +30,8 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
         IServiceProvider serviceProvider,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         INotificationBasePermissionFilterSource notificationBasePermissionFilterSource,
-        IRepository<Permission> permissionRepository,
-        IRepository<BusinessRole> businessRoleRepository)
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Permission> permissionRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<BusinessRole> businessRoleRepository)
     {
         this.serviceProvider = serviceProvider;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
@@ -140,7 +140,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 
         var grandAccess = notificationFilterGroup.ExpandType.AllowEmpty();
 
-        var securityContextQ = this.serviceProvider.GetRequiredService<IRepository<TSecurityContext>>().GetQueryable();
+        var securityContextQ = this.serviceProvider.GetRequiredKeyedService<IRepository<TSecurityContext>>(BLLSecurityMode.Disabled).GetQueryable();
 
         return from permissionInfo in source
 
@@ -182,7 +182,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 
         var grandAccess = notificationFilterGroup.ExpandType.AllowEmpty();
 
-        var securityContextQ = this.serviceProvider.GetRequiredService<IRepository<TSecurityContext>>().GetQueryable();
+        var securityContextQ = this.serviceProvider.GetRequiredKeyedService<IRepository<TSecurityContext>>(BLLSecurityMode.Disabled).GetQueryable();
 
         return from permissionInfo in source
 

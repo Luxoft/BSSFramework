@@ -33,7 +33,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>)); //TODO: add unsecurity di key "DisabledSecurity" after update to NET8.0
+        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Disabled, typeof(Repository<>));
         services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
         services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));

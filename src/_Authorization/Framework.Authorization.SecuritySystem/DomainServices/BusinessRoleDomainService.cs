@@ -1,5 +1,8 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.DomainDriven.Repository;
+using Framework.SecuritySystem;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using NHibernate.Linq;
 
@@ -9,7 +12,7 @@ public class BusinessRoleDomainService : IBusinessRoleDomainService
 {
     private readonly IRepository<BusinessRole> businessRoleRepository;
 
-    public BusinessRoleDomainService(IRepository<BusinessRole> businessRoleRepository)
+    public BusinessRoleDomainService([FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<BusinessRole> businessRoleRepository)
     {
         this.businessRoleRepository = businessRoleRepository;
     }

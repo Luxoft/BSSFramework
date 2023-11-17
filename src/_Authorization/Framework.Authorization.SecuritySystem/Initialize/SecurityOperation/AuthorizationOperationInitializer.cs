@@ -21,7 +21,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
 
     private readonly IBusinessRoleDomainService businessRoleDomainService;
 
-    private readonly ISecurityOperationParser securityOperationParser;
+    private readonly ISecurityOperationParser<Guid> securityOperationParser;
 
     private readonly ILogger logger;
 
@@ -30,7 +30,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
     public AuthorizationOperationInitializer(
         IRepository<Operation> operationRepository,
         IOperationDomainService operationDomainService,
-        ISecurityOperationParser securityOperationParser,
+        ISecurityOperationParser<Guid> securityOperationParser,
         IRepository<BusinessRole> businessRoleRepository,
         IBusinessRoleDomainService businessRoleDomainService,
         ILogger logger,
@@ -60,9 +60,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
         var dbOperations = await this.operationRepository.GetQueryable().ToListAsync(cancellationToken);
 
         var mergeResult = dbOperations.GetMergeResult(
-            this.securityOperationParser
-                .Operations
-                .Cast<SecurityOperation<Guid>>(),
+            this.securityOperationParser.Operations,
             operation => operation.Id,
             operation => operation.Id);
 

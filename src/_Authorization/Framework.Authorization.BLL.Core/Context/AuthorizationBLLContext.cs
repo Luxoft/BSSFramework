@@ -49,7 +49,7 @@ public partial class AuthorizationBLLContext
             IAuthorizationSystem<Guid> authorizationSystem,
             IRunAsManager runAsManager,
             IAvailablePermissionSource availablePermissionSource,
-            ISecurityOperationParser securityOperationParser,
+            ISecurityOperationParser<Guid> securityOperationParser,
             IAvailableSecurityOperationSource availableSecurityOperationSource,
             IActualPrincipalSource actualPrincipalSource)
             : base(
@@ -108,7 +108,7 @@ public partial class AuthorizationBLLContext
 
     public IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
 
-    public ISecurityOperationParser SecurityOperationParser { get; }
+    public ISecurityOperationParser<Guid> SecurityOperationParser { get; }
 
     public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
 

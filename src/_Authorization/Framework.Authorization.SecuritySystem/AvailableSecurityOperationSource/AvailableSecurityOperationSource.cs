@@ -27,6 +27,6 @@ public class AvailableSecurityOperationSource : IAvailableSecurityOperationSourc
 
         var dbOperationIdents = await dbRequest.ToListAsync(cancellationToken);
 
-        return dbOperationIdents.Select(this.parser.GetSecurityOperation).ToList();
+        return dbOperationIdents.Select(this.parser.GetSecurityOperation).ToList<SecurityOperation>();
     }
 }

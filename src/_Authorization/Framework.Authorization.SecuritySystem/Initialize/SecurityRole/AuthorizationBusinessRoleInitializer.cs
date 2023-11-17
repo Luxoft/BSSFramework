@@ -1,4 +1,5 @@
-﻿using Framework.Authorization.Domain;
+﻿using System.Linq;
+using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.Persistent;
@@ -47,9 +48,11 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
 
         var dbOperations = await this.operationRepository.GetQueryable().ToListAsync(cancellationToken);
 
-        var mergeRoleResult = dbRoles.GetMergeResult(securityRoles, br => br.Id, sr => sr.Id);
+        var mergeRoleResult = dbRoles.GetMergeResult(GetOrderedRoles(securityRoles), br => br.Id, sr => sr.Id);
 
         var dbOperationDict = dbOperations.ToDictionary(op => op.Id);
+
+        var mappingDict = new Dictionary<SecurityRole, BusinessRole>();
 
         if (mergeRoleResult.RemovingItems.Any())
         {
@@ -83,16 +86,23 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
 
             this.logger.Verbose("Create Role: {0} {1}", businessRole.Name, securityRole.Id);
 
-            foreach (var securityOperation in securityRole.Operations.Cast<SecurityOperation<Guid>>())
+            foreach (var securityOperationInfo in GetAllOperationsC(securityRole))
             {
-                var operation = dbOperationDict[securityOperation.Id];
+                var operation = dbOperationDict[securityOperationInfo.SecurityOperation.Id];
 
-                new BusinessRoleOperationLink(businessRole).Operation = operation;
+                new BusinessRoleOperationLink(businessRole) { Operation = operation, IsDenormalized = securityOperationInfo.IsDenormalized };
 
                 this.logger.Verbose("Add operation {0} to Role: {1}", operation.Name, businessRole.Name);
             }
 
+            foreach (var subRole in securityRole.Children)
+            {
+                new SubBusinessRoleLink(businessRole) { SubBusinessRole = mappingDict[subRole] };
+            }
+
             await this.businessRoleRepository.InsertAsync(businessRole, securityRole.Id, cancellationToken);
+
+            mappingDict.Add(securityRole, businessRole);
         }
 
         foreach (var combinePair in mergeRoleResult.CombineItems)
@@ -103,15 +113,18 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
             businessRole.Description = securityRole.Description;
 
             var mergeOperationResult = businessRole.BusinessRoleOperationLinks.GetMergeResult(
-                securityRole.Operations.Cast<SecurityOperation<Guid>>(),
+                GetAllOperationsC(securityRole),
                 link => link.Operation.Id,
-                operation => operation.Id);
+                pair => pair.SecurityOperation.Id);
 
-            foreach (var securityOperation in mergeOperationResult.AddingItems)
+            foreach (var securityOperationInfo in mergeOperationResult.AddingItems)
             {
-                var operation = dbOperationDict[securityOperation.Id];
+                var operation = dbOperationDict[securityOperationInfo.SecurityOperation.Id];
 
-                new BusinessRoleOperationLink(businessRole).Operation = operation;
+                new BusinessRoleOperationLink(businessRole)
+                {
+                    Operation = operation, IsDenormalized = securityOperationInfo.IsDenormalized
+                };
 
                 this.logger.Verbose("Add operation {0} to Role: {1}", operation.Name, businessRole.Name);
             }
@@ -123,9 +136,76 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
                 this.logger.Verbose("Remove operation {0} from Role: {1}", dbOperationLink.Operation.Name, businessRole.Name);
             }
 
+            foreach (var mergePair in mergeOperationResult.CombineItems)
+            {
+                mergePair.Item1.IsDenormalized = mergePair.Item2.IsDenormalized;
+            }
+
+            var mergeSubRoleResult = businessRole.SubBusinessRoleLinks.GetMergeResult(
+                securityRole.Children,
+                link => link.SubBusinessRole.Id,
+                child => child.Id);
+
+            foreach (var child in mergeSubRoleResult.AddingItems)
+            {
+                new SubBusinessRoleLink(businessRole).SubBusinessRole = mappingDict[child];
+            }
+
+            foreach (var subBusinessRoleLink in mergeOperationResult.RemovingItems)
+            {
+                businessRole.RemoveDetail(subBusinessRoleLink);
+            }
+
             businessRole.Description = securityRole.Description;
 
             await this.businessRoleRepository.SaveAsync(businessRole, cancellationToken);
+
+            mappingDict.Add(securityRole, businessRole);
         }
+    }
+
+    private static IEnumerable<(SecurityOperation<Guid> SecurityOperation, bool IsDenormalized)> GetAllOperationsC(SecurityRole securityRole)
+    {
+        return GetAllOperations(securityRole).Select(pair => ((SecurityOperation<Guid>)pair.SecurityOperation, pair.IsDenormalized));
+    }
+
+    private static IEnumerable<(SecurityOperation SecurityOperation, bool IsDenormalized)> GetAllOperations(SecurityRole securityRole)
+    {
+        var subOperations = securityRole.Children
+                                        .GetAllElements(child => child.Children)
+                                        .SelectMany(child => child.Operations)
+                                        .Distinct()
+                                        .Except(securityRole.Operations);
+
+        return securityRole.Operations.Select(rootOperation => (rootOperation, false))
+                           .Concat(subOperations.Select(subOperation => (subOperation, true)));
+    }
+
+    private static IEnumerable<SecurityRole> GetOrderedRoles(IEnumerable<SecurityRole> securityRoles)
+    {
+        var startParts = securityRoles.Partial(sr => sr.Children.Any(), (rootRoles, leafRoles) => new { rootRoles, leafRoles });
+
+        var orderedResult = startParts.leafRoles.ToList();
+
+        var processed = startParts.leafRoles.ToHashSet();
+
+        var unprocessed = new Queue<SecurityRole>(startParts.rootRoles);
+
+        while (unprocessed.Any())
+        {
+            var currentRole = unprocessed.Dequeue();
+
+            if (currentRole.Children.All(processed.Contains))
+            {
+                processed.Add(currentRole);
+                orderedResult.Add(currentRole);
+            }
+            else
+            {
+                unprocessed.Enqueue(currentRole);
+            }
+        }
+
+        return orderedResult;
     }
 }

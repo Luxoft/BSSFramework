@@ -1,6 +1,4 @@
-﻿using Automation.ServiceEnvironment;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.Authorization.Generated.DTO;
 using Framework.Authorization.Notification;

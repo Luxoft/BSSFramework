@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DependencyInjection\SecurityServiceMetadata\**" />
+    <EmbeddedResource Remove="DependencyInjection\SecurityServiceMetadata\**" />
+    <None Remove="DependencyInjection\SecurityServiceMetadata\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
@@ -30,10 +36,6 @@
     <ProjectReference Include="..\SampleSystem.Subscriptions.Metadata\SampleSystem.Subscriptions.Metadata.csproj" />
 
     <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DependencyInjection\SecurityServiceMetadata\" />
   </ItemGroup>
 
 </Project>

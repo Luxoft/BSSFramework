@@ -7,7 +7,6 @@ using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Bss;
 
 using Microsoft.Extensions.DependencyInjection;
 

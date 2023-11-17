@@ -1,7 +1,5 @@
 ﻿using Framework.WebApi.Utils;
 
-using Microsoft.AspNetCore;
-
 using Serilog;
 
 namespace SampleSystem.WebApiCore;

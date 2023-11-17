@@ -6,7 +6,6 @@ using Framework.Core;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.Notification.DTO;
-using Framework.Persistent;
 
 using Microsoft.Extensions.DependencyInjection;
 

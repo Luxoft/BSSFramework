@@ -3,7 +3,6 @@ using System.Reflection;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Persistent;
-using NHibernate;
 
 namespace Framework.DomainDriven.UnitTest.Mock;
 

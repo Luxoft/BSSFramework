@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;

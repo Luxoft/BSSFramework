@@ -1,11 +1,8 @@
 ﻿using System.Diagnostics;
 
 using Automation.Enums;
-using Automation.Interfaces;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
-
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation;
 

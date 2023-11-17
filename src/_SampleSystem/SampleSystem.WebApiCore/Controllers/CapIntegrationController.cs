@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-using DotNetCore.CAP;
+﻿using DotNetCore.CAP;
 
 using Framework.DomainDriven;
 
@@ -7,7 +6,6 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
-using SampleSystem.BLL;
 using SampleSystem.BLL.Core.IntegrationEvens;
 
 namespace SampleSystem.WebApiCore;

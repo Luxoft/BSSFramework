@@ -14,21 +14,4 @@ public static class SecurityOperationHelper
 
                select (SecurityOperation)prop.GetValue(null);
     }
-
-    //public static SecurityOperation Parse(Type securityOperationType, string name)
-    //{
-    //    var securityOperation = GetSecurityOperations(securityOperationType).Single(operation => operation.Name == name);
-
-    //    if (securityOperation is null || securityOperation is DisabledSecurityOperation)
-    //    {
-    //        throw new ArgumentOutOfRangeException(nameof(name));
-    //    }
-
-    //    return securityOperation;
-    //}
-
-    //public static SecurityOperation Parse(Type securityOperationType, Enum value)
-    //{
-    //    return Parse(securityOperationType, value.ToString());
-    //}
 }

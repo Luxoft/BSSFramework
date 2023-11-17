@@ -35,7 +35,7 @@ public partial interface IAuthorizationBLLContext :
 
     IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
 
-    ISecurityOperationParser SecurityOperationParser { get; }
+    ISecurityOperationParser<Guid> SecurityOperationParser { get; }
 
     IDateTimeService DateTimeService { get; }
 

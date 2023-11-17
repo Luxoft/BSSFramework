@@ -45,13 +45,6 @@ public static class DictionaryExtensions
         }
     }
 
-    public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return source.ToDictionary(pair => pair.Key, pair => pair.Value);
-    }
-
     public static async Task<Dictionary<TKey, TValue>> ToDictionaryAsync<TSource, TKey, TValue>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, Task<TValue>> valueSelector)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

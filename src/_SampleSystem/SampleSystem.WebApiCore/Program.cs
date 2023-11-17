@@ -26,16 +26,21 @@ public class Program
         }
     }
 
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                   .UseDefaultServiceProvider(o =>
-                                              {
-                                                  o.ValidateScopes = true;
-                                                  o.ValidateOnBuild = true;
-                                              })
-                   .UseConfiguration(Configuration)
-                   .UseSerilogBss()
-                   .UseStartup<Startup>();
+    public static IHostBuilder CreateWebHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .UseSerilogBss()
+            .UseDefaultServiceProvider(
+                o =>
+                {
+                    o.ValidateScopes = true;
+                    o.ValidateOnBuild = true;
+                })
+            .ConfigureWebHostDefaults(
+                webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>()
+                              .UseConfiguration(Configuration);
+                });
 
     private static IConfiguration Configuration =>
             new ConfigurationBuilder()

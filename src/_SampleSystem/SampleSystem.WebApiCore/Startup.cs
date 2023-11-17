@@ -69,7 +69,7 @@ public class Startup
 
         if (this.HostingEnvironment.IsProduction())
         {
-            services.AddMetrics();
+            AppMetricsServiceCollectionExtensions.AddMetrics(services);
             services.AddHangfireBss(this.Configuration.GetConnectionString("DefaultConnection"));
         }
 

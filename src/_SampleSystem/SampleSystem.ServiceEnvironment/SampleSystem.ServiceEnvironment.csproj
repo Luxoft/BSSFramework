@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DependencyInjection\SecurityServiceMetadata\**" />
+    <EmbeddedResource Remove="DependencyInjection\SecurityServiceMetadata\**" />
+    <None Remove="DependencyInjection\SecurityServiceMetadata\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 

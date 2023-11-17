@@ -32,8 +32,4 @@
     <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DependencyInjection\SecurityServiceMetadata\" />
-  </ItemGroup>
-
 </Project>

@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;

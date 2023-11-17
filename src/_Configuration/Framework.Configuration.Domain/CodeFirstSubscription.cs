@@ -4,7 +4,6 @@ using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
-using Framework.Security;
 
 namespace Framework.Configuration.Domain;
 

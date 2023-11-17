@@ -7,7 +7,6 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.Security;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;

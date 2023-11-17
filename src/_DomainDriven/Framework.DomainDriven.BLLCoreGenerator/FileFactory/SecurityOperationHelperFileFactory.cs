@@ -1,5 +1,4 @@
 ﻿using System.CodeDom;
-using System.Runtime.InteropServices.ComTypes;
 
 using Framework.CodeDom;
 using Framework.Core;
@@ -7,8 +6,6 @@ using Framework.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using NHibernate.Hql.Ast;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

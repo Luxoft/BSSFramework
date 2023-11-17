@@ -1,5 +1,4 @@
-﻿using Framework.Configuration.BLL;
-using Framework.Configuration.Generated.DTO;
+﻿using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
 
 namespace Framework.Configuration.WebApi;

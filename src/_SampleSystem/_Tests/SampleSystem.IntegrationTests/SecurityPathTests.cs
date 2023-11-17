@@ -1,12 +1,10 @@
 ﻿using FluentAssertions;
 
 using Framework.DomainDriven;
-using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;

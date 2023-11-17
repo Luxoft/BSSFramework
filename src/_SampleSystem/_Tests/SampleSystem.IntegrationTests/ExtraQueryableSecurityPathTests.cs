@@ -1,6 +1,4 @@
-﻿using Automation.ServiceEnvironment;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.Core;
 using Framework.DomainDriven;

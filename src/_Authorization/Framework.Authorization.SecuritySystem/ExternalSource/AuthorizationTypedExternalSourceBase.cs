@@ -3,6 +3,7 @@ using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
@@ -18,9 +19,9 @@ public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : I
     private readonly SecurityContextInfo<TSecurityContext, Guid> securityContextInfo;
 
     protected AuthorizationTypedExternalSourceBase(
-        IRepository<TSecurityContext> securityContextRepository,
-        IRepository<EntityType> entityTypeRepository,
-        IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<TSecurityContext> securityContextRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<EntityType> entityTypeRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
         SecurityContextInfo<TSecurityContext, Guid> securityContextInfo)
     {
         this.securityContextRepository = securityContextRepository;

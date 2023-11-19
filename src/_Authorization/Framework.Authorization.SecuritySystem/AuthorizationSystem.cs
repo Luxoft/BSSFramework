@@ -8,6 +8,8 @@ using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem;
@@ -35,7 +37,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IRealTypeResolver realTypeResolver,
         IUserAuthenticationService userAuthenticationService,
         IOperationAccessorFactory operationAccessorFactory,
-        IRepository<Principal> principalRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Principal> principalRepository,
         IDateTimeService dateTimeService)
     {
         this.availablePermissionSource = availablePermissionSource;

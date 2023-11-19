@@ -3,9 +3,8 @@ using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
-
+using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Linq;
-
 using Serilog;
 
 namespace Framework.Authorization.SecuritySystem.Initialize;
@@ -23,8 +22,8 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
     private readonly InitializeSettings settings;
 
     public AuthorizationBusinessRoleInitializer(
-        IRepository<BusinessRole> businessRoleRepository,
-        IRepository<Operation> operationRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<BusinessRole> businessRoleRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Operation> operationRepository,
         ISecurityRoleSource securityRoleSource,
         ILogger logger,
         InitializeSettings settings)

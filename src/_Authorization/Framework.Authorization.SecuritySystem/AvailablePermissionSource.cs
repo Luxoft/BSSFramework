@@ -2,6 +2,8 @@
 using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
+using Framework.SecuritySystem;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem;
 
@@ -16,7 +18,7 @@ public class AvailablePermissionSource : IAvailablePermissionSource
     private readonly IUserAuthenticationService userAuthenticationService;
 
     public AvailablePermissionSource(
-        IRepository<Permission> permissionRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Permission> permissionRepository,
         IDateTimeService dateTimeService,
         IActualPrincipalSource actualPrincipalSource,
         IUserAuthenticationService userAuthenticationService)

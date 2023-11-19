@@ -4,8 +4,9 @@ using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-using NHibernate.Linq;
+using Microsoft.Extensions.DependencyInjection;
 
+using NHibernate.Linq;
 using Serilog;
 
 namespace Framework.Authorization.SecuritySystem.Initialize;
@@ -21,7 +22,7 @@ public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitia
     private readonly InitializeSettings settings;
 
     public AuthorizationEntityTypeInitializer(
-        IRepository<EntityType> entityTypeRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<EntityType> entityTypeRepository,
         IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
         ILogger logger,
         InitializeSettings settings)

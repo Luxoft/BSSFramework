@@ -46,7 +46,7 @@ public class ControllerEvaluator<TController>
             throw new Exception($"For Task result use {nameof(EvaluateAsync)} method");
         }
 
-        return this.InternalEvaluateAsync(funcExpr, c => Task.FromResult(funcExpr.Eval(c))).GetAwaiter().GetResult();
+        return this.InternalEvaluateAsync(funcExpr, async c => funcExpr.Eval(c)).GetAwaiter().GetResult();
     }
 
     public async Task EvaluateAsync(Expression<Func<TController, Task>> actionExpr)

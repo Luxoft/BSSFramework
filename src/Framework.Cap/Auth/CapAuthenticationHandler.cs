@@ -28,23 +28,23 @@ public class CapAuthenticationHandler : AuthenticationHandler<AuthenticationSche
         this.dbSession = dbSession;
     }
 
-    protected override Task<AuthenticateResult> HandleAuthenticateAsync()
+    protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         var httpContext = this.Context;
 
         if (httpContext.User.Identity?.IsAuthenticated == false)
         {
-            return Task.FromResult(AuthenticateResult.NoResult());
+            return AuthenticateResult.NoResult();
         }
 
         this.dbSession.AsReadOnly();
 
         if (!this.authorizationSystem.IsAdmin())
         {
-            return Task.FromResult(AuthenticateResult.NoResult());
+            return AuthenticateResult.NoResult();
         }
 
         var authenticationTicket = new AuthenticationTicket(httpContext.User, DependencyInjections.CapAuthenticationScheme);
-        return Task.FromResult(AuthenticateResult.Success(authenticationTicket));
+        return AuthenticateResult.Success(authenticationTicket);
     }
 }

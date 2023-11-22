@@ -1,4 +1,4 @@
-using Framework.RabbitMq.Interfaces;
+﻿using Framework.RabbitMq.Interfaces;
 using Framework.RabbitMq.Settings;
 
 using Microsoft.Extensions.Logging;
@@ -31,7 +31,7 @@ public record RabbitMqClient(IOptions<RabbitMqServerSettings> Options, ILogger<R
         var policy = this.CreateRetryPolicy(attempts);
         try
         {
-            return await policy.ExecuteAsync(_ => Task.FromResult(factory.CreateConnection()), token);
+            return await policy.ExecuteAsync(async _ => factory.CreateConnection(), token);
         }
         catch (Exception ex)
         {

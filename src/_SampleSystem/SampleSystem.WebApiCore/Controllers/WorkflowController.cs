@@ -61,7 +61,7 @@ public class WorkflowController : ControllerBase
     [HttpPost(nameof(GetMyPendingApproveOperationWorkflowObjects))]
     public async Task<List<ApproveOperationWorkflowObject>> GetMyPendingApproveOperationWorkflowObjects(PermissionIdentityDTO permissionIdent)
     {
-        var workflowOperationIdents = await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, ctx =>
+        var workflowOperationIdents = await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, async ctx =>
         {
             var permissionIdStr = permissionIdent.Id.ToString();
 
@@ -72,7 +72,7 @@ public class WorkflowController : ControllerBase
                     && wi.WorkflowDefinitionId == nameof(__ApproveOperation_Workflow)
                     && wi.Status == WorkflowStatus.Runnable);
 
-            return Task.FromResult(instances.ToList().Select(wi => wi.Id));
+            return instances.ToList().Select(wi => wi.Id);
         });
 
         var result = new List<ApproveOperationWorkflowObject>();

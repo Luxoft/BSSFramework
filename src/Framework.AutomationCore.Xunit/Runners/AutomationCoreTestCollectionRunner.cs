@@ -55,19 +55,19 @@ public class AutomationCoreTestCollectionRunner : XunitTestCollectionRunner
         }
     }
 
-    protected override Task<RunSummary> RunTestClassAsync(
+    protected override async Task<RunSummary> RunTestClassAsync(
         ITestClass testClass,
         IReflectionTypeInfo @class,
         IEnumerable<IXunitTestCase> testCases)
-        => new AutomationCoreTestClassRunner(
-            this.fwServiceProvider,
-            testClass,
-            @class,
-            testCases,
-            this.DiagnosticMessageSink,
-            this.MessageBus,
-            this.TestCaseOrderer,
-            new ExceptionAggregator(this.Aggregator),
-            this.CancellationTokenSource,
-            this.CollectionFixtureMappings).RunAsync();
+        => await new AutomationCoreTestClassRunner(
+               this.fwServiceProvider,
+               testClass,
+               @class,
+               testCases,
+               this.DiagnosticMessageSink,
+               this.MessageBus,
+               this.TestCaseOrderer,
+               new ExceptionAggregator(this.Aggregator),
+               this.CancellationTokenSource,
+               this.CollectionFixtureMappings).RunAsync();
 }

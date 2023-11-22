@@ -267,12 +267,12 @@ public class AutomationCoreAssemblyRunner : TestAssemblyRunner<IXunitTestCase>
             return;
         }
 
-        if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanup>() is {} initialization)
+        if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanup>() is { } initialization)
         {
             this.Aggregator.Run(initialization.EnvironmentInitialize);
         }
 
-        if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanupAsync>() is {} initializationAsync)
+        if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanupAsync>() is { } initializationAsync)
         {
             await this.Aggregator.RunAsync(initializationAsync.EnvironmentInitializeAsync);
         }
@@ -285,23 +285,23 @@ public class AutomationCoreAssemblyRunner : TestAssemblyRunner<IXunitTestCase>
             return;
         }
 
-        if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanup>() is {} initialization)
+        if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanup>() is { } initialization)
         {
             this.Aggregator.Run(initialization.EnvironmentCleanup);
         }
 
-        if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanupAsync>() is {} initializationAsync)
+        if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanupAsync>() is { } initializationAsync)
         {
             await this.Aggregator.RunAsync(initializationAsync.EnvironmentCleanupAsync);
         }
     }
 
-    protected override Task<RunSummary> RunTestCollectionAsync(
+    protected override async Task<RunSummary> RunTestCollectionAsync(
         IMessageBus messageBus,
         ITestCollection testCollection,
         IEnumerable<IXunitTestCase> testCases,
         CancellationTokenSource cancellationTokenSource) =>
-        new AutomationCoreTestCollectionRunner(
+        await new AutomationCoreTestCollectionRunner(
             this.fwServiceProvider,
             testCollection,
             testCases,

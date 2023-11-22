@@ -1,4 +1,4 @@
-using Framework.RabbitMq.Consumer.Enums;
+﻿using Framework.RabbitMq.Consumer.Enums;
 
 using RabbitMQ.Client;
 
@@ -8,10 +8,10 @@ public interface IRabbitMqMessageProcessor
 {
     Task ProcessAsync(IBasicProperties properties, string routingKey, string message, CancellationToken token);
 
-    Task<DeadLetterBehaviour> ProcessDeadLetterAsync(
+    async Task<DeadLetterBehaviour> ProcessDeadLetterAsync(
         IBasicProperties properties,
         string routingKey,
         string message,
         CancellationToken token) =>
-        Task.FromResult(DeadLetterBehaviour.ForeverRetry);
+        DeadLetterBehaviour.ForeverRetry;
 }

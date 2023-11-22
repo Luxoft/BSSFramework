@@ -12,7 +12,11 @@ public static class ContextEvaluatorExtensions
 
     public static async Task EvaluateAsync<TBLLContext, TDTOMappingService>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task> action)
     {
-        await contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, evaluatedData => action(evaluatedData).ContinueWith(_ => default(object)));
+        await contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, async evaluatedData =>
+                                                                               {
+                                                                                   await action(evaluatedData);
+                                                                                   return default(object);
+                                                                               });
     }
 
     public static async Task EvaluateAsync<TBLLContext, TDTOMappingService>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task> action)

@@ -32,11 +32,11 @@ public class AutomationCoreTestMethodRunner : TestMethodRunner<IXunitTestCase>
         this.testEnvServiceProvider = testEnvServiceProvider;
     }
 
-    protected override Task<RunSummary> RunTestCaseAsync(IXunitTestCase testCase)
+    protected override async Task<RunSummary> RunTestCaseAsync(IXunitTestCase testCase)
     {
         if (testCase.GetType().GetInterface(nameof(IAutomationCoreTheoryTestCase)) != null)
         {
-            return ((IAutomationCoreTheoryTestCase)testCase).RunAsync(
+            return await ((IAutomationCoreTheoryTestCase)testCase).RunAsync(
                 this.diagnosticMessageSink,
                 this.MessageBus,
                 this.constructorArguments,
@@ -45,7 +45,7 @@ public class AutomationCoreTestMethodRunner : TestMethodRunner<IXunitTestCase>
                 this.testEnvServiceProvider);
         }
 
-        return testCase.RunAsync(
+        return await testCase.RunAsync(
             this.diagnosticMessageSink,
             this.MessageBus,
             this.constructorArguments,

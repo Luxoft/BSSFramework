@@ -41,6 +41,6 @@ public static class ContextEvaluatorExtensions
 
     public static TResult Evaluate<TBLLContext, TDTOMappingService, TResult>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, Func<EvaluatedData<TBLLContext, TDTOMappingService>, TResult> getResult)
     {
-        return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, c => Task.FromResult(getResult(c))).GetAwaiter().GetResult();
+        return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, async c => getResult(c)).GetAwaiter().GetResult();
     }
 }

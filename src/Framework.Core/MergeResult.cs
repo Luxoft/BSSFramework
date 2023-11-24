@@ -8,7 +8,7 @@ public struct MergeResult<TSource, TTarget>
 
     public IList<TTarget> AddingItems;
 
-    public IList<TupleStruct<TSource, TTarget>> CombineItems;
+    public IList<ValueTuple<TSource, TTarget>> CombineItems;
 
 
     public bool IsEmpty
@@ -19,7 +19,7 @@ public struct MergeResult<TSource, TTarget>
         }
     }
 
-    public MergeResult(IEnumerable<TTarget> addingItems, IEnumerable<TupleStruct<TSource, TTarget>> combineItems, IEnumerable<TSource> removingItems) : this()
+    public MergeResult(IEnumerable<TTarget> addingItems, IEnumerable<ValueTuple<TSource, TTarget>> combineItems, IEnumerable<TSource> removingItems) : this()
     {
         this.RemovingItems = removingItems.ToList();
         this.AddingItems = addingItems.ToList();
@@ -31,7 +31,7 @@ public struct MergeResult<TSource, TTarget>
                                                                  {
                                                                          AddingItems = new ReadOnlyCollection<TTarget>(new TTarget[0]),
                                                                          RemovingItems = new ReadOnlyCollection<TSource>(new TSource[0]),
-                                                                         CombineItems = new ReadOnlyCollection<TupleStruct<TSource, TTarget>>(new TupleStruct<TSource, TTarget>[0])
+                                                                         CombineItems = new ReadOnlyCollection<ValueTuple<TSource, TTarget>>(new ValueTuple<TSource, TTarget>[0])
                                                                  };
 }
 
@@ -45,7 +45,7 @@ public static class MergeResultExtensions
                {
                        AddingItems = mergeResult.AddingItems.ToList(selector),
                        RemovingItems = mergeResult.RemovingItems.ToList(selector),
-                       CombineItems = mergeResult.CombineItems.ToList(t => TupleStruct.Create(selector(t.Item1), selector(t.Item2)))
+                       CombineItems = mergeResult.CombineItems.ToList(t => ValueTuple.Create(selector(t.Item1), selector(t.Item2)))
                };
     }
 

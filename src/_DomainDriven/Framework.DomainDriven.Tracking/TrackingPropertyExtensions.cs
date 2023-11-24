@@ -18,7 +18,7 @@ public static class TrackingPropertyExtensions
 
                                      CombineItems = (from prev in previusValue
                                                      join next in currentValue on prev equals next
-                                                     select TupleStruct.Create(prev, next)).ToList()
+                                                     select ValueTuple.Create(prev, next)).ToList()
                              };
 
         return request.GetValueOrDefault(MergeResult<T, T>.Empty);

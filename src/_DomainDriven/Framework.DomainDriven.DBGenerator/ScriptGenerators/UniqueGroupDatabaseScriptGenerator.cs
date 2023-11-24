@@ -64,7 +64,7 @@ public class UniqueGroupDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
     private ILookup<Type, List<string>> GetIgnoreLinks(IDatabaseScriptGeneratorContext context)
     {
-        var result = new TupleStruct<Type, List<string>>[0].ToLookup(z => z.Item1, z => z.Item2);
+        var result = new ValueTuple<Type, List<string>>[0].ToLookup(z => z.Item1, z => z.Item2);
         var metadata = context.AssemblyMetadata;
 
         if (this.ignoreLinks.Any())
@@ -100,9 +100,9 @@ public class UniqueGroupDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
                                                          return
                                                                  uniqueIndexesFromRef.Select(
                                                                   w =>
-                                                                          TupleStruct.Create(propertyMetadata.ElementType, w.Fields.Select(e => e.Name).ToList()));
+                                                                          ValueTuple.Create(propertyMetadata.ElementType, w.Fields.Select(e => e.Name).ToList()));
                                                      }
-                                                     return new[] { TupleStruct.Create(z.FromType, new List<string>(0)) };
+                                                     return new[] { ValueTuple.Create(z.FromType, new List<string>(0)) };
                                                  })
                          .ToLookup(z => z.Item1, z => z.Item2);
         }

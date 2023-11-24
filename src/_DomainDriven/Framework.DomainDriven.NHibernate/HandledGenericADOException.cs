@@ -15,12 +15,12 @@ public class HandledGenericADOException : ADOException
 
     }
     public HandledGenericADOException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-    public HandledGenericADOException(string message, Exception innerException, string sql, TupleStruct<string, object> unTypeObjectInfo) : base(message, innerException, sql)
+    public HandledGenericADOException(string message, Exception innerException, string sql, ValueTuple<string, object> unTypeObjectInfo) : base(message, innerException, sql)
     {
         this.EntityName = unTypeObjectInfo.Item1;
         this.EntityId = unTypeObjectInfo.Item2;
     }
-    public HandledGenericADOException(string message, Exception innerException, TupleStruct<string, object> unTypeObjectInfo) : base(message, innerException)
+    public HandledGenericADOException(string message, Exception innerException, ValueTuple<string, object> unTypeObjectInfo) : base(message, innerException)
     {
         this.EntityName = unTypeObjectInfo.Item1;
         this.EntityId = unTypeObjectInfo.Item2;

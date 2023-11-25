@@ -8,16 +8,12 @@ public partial class NamedLockBLL
 {
     public void CheckInit()
     {
-        // TODO move generate enums into generate db script
-        MutexHelper.GlobalLock(this.GetType().FullName + "_InitLock", () =>
-                                                                      {
-                                                                          var actualValues = Enum.GetValues(typeof (NamedLockOperation)).Cast<NamedLockOperation>();
-                                                                          var expectedValues = this.GetFullList();
+        var actualValues = Enum.GetValues(typeof(NamedLockOperation)).Cast<NamedLockOperation>();
+        var expectedValues = this.GetFullList();
 
-                                                                          var mergeResult = expectedValues.GetMergeResult(actualValues, z => (int) z.LockOperation, z => (int) z);
+        var mergeResult = expectedValues.GetMergeResult(actualValues, z => (int)z.LockOperation, z => (int)z);
 
-                                                                          mergeResult.AddingItems.Select(z => new NamedLock() {LockOperation = z}).Foreach(this.Save);
-                                                                      });
+        mergeResult.AddingItems.Select(z => new NamedLock() { LockOperation = z }).Foreach(this.Save);
     }
 
     public void Lock(NamedLockOperation lockOperation, LockRole lockRole)

@@ -15,11 +15,11 @@ public abstract class DependencyDetailEventDALListener<TBLLContext, TPersistentD
         this.dependencies = (dependencies ?? throw new ArgumentNullException(nameof(dependencies))).ToArray();
     }
 
-    protected override IEnumerable<TupleStruct<IDALObject, EventOperation>> ProcessFinalAllFilteredOrderedValues(
+    protected override IEnumerable<ValueTuple<IDALObject, EventOperation>> ProcessFinalAllFilteredOrderedValues(
             DALChangesEventArgs eventArgs,
-            IEnumerable<TupleStruct<IDALObject, EventOperation>> allFilteredOrderedValues)
+            IEnumerable<ValueTuple<IDALObject, EventOperation>> allFilteredOrderedValues)
     {
-        var joinItems = eventArgs.Changes.GroupDALObjectByType().Join(this.dependencies, z => z.Key, z => z.SourceTypeEvent.Type, TupleStruct.Create).ToList();
+        var joinItems = eventArgs.Changes.GroupDALObjectByType().Join(this.dependencies, z => z.Key, z => z.SourceTypeEvent.Type, ValueTuple.Create).ToList();
 
         if (!joinItems.Any())
         {
@@ -47,7 +47,7 @@ public abstract class DependencyDetailEventDALListener<TBLLContext, TPersistentD
                             {
                                 DALChanges<IDALObject> dalChanges;
                                 eventArgs.Changes.GroupDALObjectByType().TryGetValue(z, out dalChanges);
-                                return TupleStruct.Create(z, dalChanges);
+                                return ValueTuple.Create(z, dalChanges);
                             })
                     .Where(z => z.Item2 != null)
                     .Select(z => z.Item2)
@@ -59,6 +59,6 @@ public abstract class DependencyDetailEventDALListener<TBLLContext, TPersistentD
                                                                     (anon, alwaysObject) => anon.TargetObject.Equals(alwaysObject)).ToList();
 
         // фильруем которые нужно обработать
-        return allFilteredOrderedValues.Concat(allAbsentsTargetObjects.Select(z => TupleStruct.Create((IDALObject)(new DALObject(z.TargetObject, z.TargetObjectType, 1)), EventOperation.Save)));
+        return allFilteredOrderedValues.Concat(allAbsentsTargetObjects.Select(z => ValueTuple.Create((IDALObject)(new DALObject(z.TargetObject, z.TargetObjectType, 1)), EventOperation.Save)));
     }
 }

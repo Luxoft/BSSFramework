@@ -21,7 +21,7 @@ public class SQLExceptionConverter : ISQLExceptionConverter
          * The System.Data.Common.DbException, of .NET2.0, don't give us something applicable to all dialects.
          */
         return HandledNonSpecificException(exceptionInfo.SqlException, exceptionInfo.Message, exceptionInfo.Sql,
-                                           TupleStruct.Create(exceptionInfo.EntityName, exceptionInfo.EntityId));
+                                           ValueTuple.Create(exceptionInfo.EntityName, exceptionInfo.EntityId));
     }
 
     #endregion
@@ -33,7 +33,7 @@ public class SQLExceptionConverter : ISQLExceptionConverter
     /// <param name="create"> </param>
     /// <returns> The converted exception; should <b>never</b> be null. </returns>
     public static ADOException HandledNonSpecificException(Exception sqlException, string message, string sql,
-                                                           TupleStruct<string, object> unTypedObjectInfo)
+                                                           ValueTuple<string, object> unTypedObjectInfo)
     {
         return new HandledGenericADOException(message, sqlException, sql, unTypedObjectInfo);
     }

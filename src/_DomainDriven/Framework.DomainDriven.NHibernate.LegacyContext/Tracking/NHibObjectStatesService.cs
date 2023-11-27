@@ -108,7 +108,7 @@ public class NHibObjectStatesService : IObjectStateService
         };
 
         return persister.PropertyNames
-                        .Select(TupleStruct.Create)
+                        .Select((str, index) => ValueTuple.Create(str, index))
                         .Where(z => isModifiedPropertyFunc(z.Item2))
                         .Select(z =>
                         {

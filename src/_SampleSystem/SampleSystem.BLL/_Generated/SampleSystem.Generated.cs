@@ -14,12 +14,9 @@ namespace SampleSystem.BLL
     public partial class ApprovePermissionWorkflowDomainObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL
     {
         
-		partial void Initialize();
-        
         public ApprovePermissionWorkflowDomainObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -35,12 +32,9 @@ namespace SampleSystem.BLL
     public partial class BusinessUnitBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.BusinessUnit, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IBusinessUnitBLL
     {
         
-		partial void Initialize();
-        
         public BusinessUnitBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnit> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -56,12 +50,9 @@ namespace SampleSystem.BLL
     public partial class BusinessUnitHrDepartmentBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.BusinessUnitHrDepartment, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IBusinessUnitHrDepartmentBLL
     {
         
-		partial void Initialize();
-        
         public BusinessUnitHrDepartmentBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitHrDepartment> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -77,12 +68,9 @@ namespace SampleSystem.BLL
     public partial class BusinessUnitManagerCommissionLinkBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.BusinessUnitManagerCommissionLink, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL
     {
         
-		partial void Initialize();
-        
         public BusinessUnitManagerCommissionLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitManagerCommissionLink> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -98,12 +86,9 @@ namespace SampleSystem.BLL
     public partial class BusinessUnitTypeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.BusinessUnitType, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IBusinessUnitTypeBLL
     {
         
-		partial void Initialize();
-        
         public BusinessUnitTypeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitType> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -119,12 +104,9 @@ namespace SampleSystem.BLL
     public partial class CompanyLegalEntityBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.CompanyLegalEntity, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ICompanyLegalEntityBLL
     {
         
-		partial void Initialize();
-        
         public CompanyLegalEntityBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.CompanyLegalEntity> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -139,8 +121,6 @@ namespace SampleSystem.BLL
     
     public partial class CountryBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Country, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ICountryBLL
     {
-        
-		partial void Initialize();
     }
     
     public partial class CountryBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ICountryBLL, SampleSystem.BLL.CountryBLL, SampleSystem.Domain.Country>, SampleSystem.BLL.ICountryBLLFactory
@@ -155,12 +135,9 @@ namespace SampleSystem.BLL
     public partial class EmployeeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Employee, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IEmployeeBLL
     {
         
-		partial void Initialize();
-        
         public EmployeeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Employee> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -176,12 +153,9 @@ namespace SampleSystem.BLL
     public partial class EmployeeInformationBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeeInformation, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IEmployeeInformationBLL
     {
         
-		partial void Initialize();
-        
         public EmployeeInformationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeInformation> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -197,12 +171,9 @@ namespace SampleSystem.BLL
     public partial class EmployeePhotoBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeePhoto, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IEmployeePhotoBLL
     {
         
-		partial void Initialize();
-        
         public EmployeePhotoBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeePhoto> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -218,12 +189,9 @@ namespace SampleSystem.BLL
     public partial class EmployeePositionBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeePosition, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IEmployeePositionBLL
     {
         
-		partial void Initialize();
-        
         public EmployeePositionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeePosition> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -239,12 +207,9 @@ namespace SampleSystem.BLL
     public partial class EmployeeRegistrationTypeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeeRegistrationType, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IEmployeeRegistrationTypeBLL
     {
         
-		partial void Initialize();
-        
         public EmployeeRegistrationTypeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRegistrationType> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -260,12 +225,9 @@ namespace SampleSystem.BLL
     public partial class EmployeeRoleBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeeRole, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IEmployeeRoleBLL
     {
         
-		partial void Initialize();
-        
         public EmployeeRoleBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRole> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -281,12 +243,9 @@ namespace SampleSystem.BLL
     public partial class EmployeeRoleDegreeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeeRoleDegree, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IEmployeeRoleDegreeBLL
     {
         
-		partial void Initialize();
-        
         public EmployeeRoleDegreeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRoleDegree> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -302,12 +261,9 @@ namespace SampleSystem.BLL
     public partial class EmployeeSpecializationBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeeSpecialization, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IEmployeeSpecializationBLL
     {
         
-		partial void Initialize();
-        
         public EmployeeSpecializationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeSpecialization> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -323,12 +279,9 @@ namespace SampleSystem.BLL
     public partial class Location1676BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EnversBug1676.Location1676, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ILocation1676BLL
     {
         
-		partial void Initialize();
-        
         public Location1676BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EnversBug1676.Location1676> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -344,12 +297,9 @@ namespace SampleSystem.BLL
     public partial class WorkingCalendar1676BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IWorkingCalendar1676BLL
     {
         
-		partial void Initialize();
-        
         public WorkingCalendar1676BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -365,12 +315,9 @@ namespace SampleSystem.BLL
     public partial class Example1BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Example1, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IExample1BLL
     {
         
-		partial void Initialize();
-        
         public Example1BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Example1> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -386,12 +333,9 @@ namespace SampleSystem.BLL
     public partial class HRDepartmentBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.HRDepartment, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IHRDepartmentBLL
     {
         
-		partial void Initialize();
-        
         public HRDepartmentBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.HRDepartment> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -407,12 +351,9 @@ namespace SampleSystem.BLL
     public partial class IMRequestBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.IMRequest, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IIMRequestBLL
     {
         
-		partial void Initialize();
-        
         public IMRequestBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IMRequest> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -428,12 +369,9 @@ namespace SampleSystem.BLL
     public partial class InformationBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Information, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IInformationBLL
     {
         
-		partial void Initialize();
-        
         public InformationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Information> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -449,12 +387,9 @@ namespace SampleSystem.BLL
     public partial class IntegrationVersionContainer1BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IIntegrationVersionContainer1BLL
     {
         
-		partial void Initialize();
-        
         public IntegrationVersionContainer1BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -470,12 +405,9 @@ namespace SampleSystem.BLL
     public partial class IntegrationVersionContainer2BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IIntegrationVersionContainer2BLL
     {
         
-		partial void Initialize();
-        
         public IntegrationVersionContainer2BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -491,12 +423,9 @@ namespace SampleSystem.BLL
     public partial class LocationBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Location, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ILocationBLL
     {
         
-		partial void Initialize();
-        
         public LocationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Location> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -512,12 +441,9 @@ namespace SampleSystem.BLL
     public partial class ManagementUnitBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ManagementUnit, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IManagementUnitBLL
     {
         
-		partial void Initialize();
-        
         public ManagementUnitBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnit> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -533,12 +459,9 @@ namespace SampleSystem.BLL
     public partial class ManagementUnitAndBusinessUnitLinkBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL
     {
         
-		partial void Initialize();
-        
         public ManagementUnitAndBusinessUnitLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -554,12 +477,9 @@ namespace SampleSystem.BLL
     public partial class ManagementUnitAndHRDepartmentLinkBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL
     {
         
-		partial void Initialize();
-        
         public ManagementUnitAndHRDepartmentLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -575,12 +495,9 @@ namespace SampleSystem.BLL
     public partial class ManagementUnitFluentMappingBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ManagementUnitFluentMapping, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IManagementUnitFluentMappingBLL
     {
         
-		partial void Initialize();
-        
         public ManagementUnitFluentMappingBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitFluentMapping> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -596,12 +513,9 @@ namespace SampleSystem.BLL
     public partial class TestManualEmployeeProjectionBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestManualEmployeeProjectionBLL
     {
         
-		partial void Initialize();
-        
         public TestManualEmployeeProjectionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -617,12 +531,9 @@ namespace SampleSystem.BLL
     public partial class NamedLockBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.NamedLock, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.INamedLockBLL
     {
         
-		partial void Initialize();
-        
         public NamedLockBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.NamedLock> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -638,12 +549,9 @@ namespace SampleSystem.BLL
     public partial class PrincipalBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Principal, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IPrincipalBLL
     {
         
-		partial void Initialize();
-        
         public PrincipalBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Principal> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -659,12 +567,9 @@ namespace SampleSystem.BLL
     public partial class BusinessUnitProgramClassBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.BusinessUnitProgramClass, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IBusinessUnitProgramClassBLL
     {
         
-		partial void Initialize();
-        
         public BusinessUnitProgramClassBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.BusinessUnitProgramClass> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -680,12 +585,9 @@ namespace SampleSystem.BLL
     public partial class CustomCompanyLegalEntityBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.CustomCompanyLegalEntity, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ICustomCompanyLegalEntityBLL
     {
         
-		partial void Initialize();
-        
         public CustomCompanyLegalEntityBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -701,12 +603,9 @@ namespace SampleSystem.BLL
     public partial class TestBusinessUnitBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestBusinessUnit, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestBusinessUnitBLL
     {
         
-		partial void Initialize();
-        
         public TestBusinessUnitBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestBusinessUnit> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -722,12 +621,9 @@ namespace SampleSystem.BLL
     public partial class TestCustomContextSecurityObjProjectionBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL
     {
         
-		partial void Initialize();
-        
         public TestCustomContextSecurityObjProjectionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -743,12 +639,9 @@ namespace SampleSystem.BLL
     public partial class TestDepartmentBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestDepartment, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestDepartmentBLL
     {
         
-		partial void Initialize();
-        
         public TestDepartmentBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestDepartment> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -764,12 +657,9 @@ namespace SampleSystem.BLL
     public partial class TestEmployeeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestEmployee, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestEmployeeBLL
     {
         
-		partial void Initialize();
-        
         public TestEmployeeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestEmployee> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -785,12 +675,9 @@ namespace SampleSystem.BLL
     public partial class TestIMRequestBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestIMRequest, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestIMRequestBLL
     {
         
-		partial void Initialize();
-        
         public TestIMRequestBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestIMRequest> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -806,12 +693,9 @@ namespace SampleSystem.BLL
     public partial class TestLegacyEmployeeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestLegacyEmployee, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestLegacyEmployeeBLL
     {
         
-		partial void Initialize();
-        
         public TestLegacyEmployeeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -827,12 +711,9 @@ namespace SampleSystem.BLL
     public partial class TestLocationBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestLocation, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestLocationBLL
     {
         
-		partial void Initialize();
-        
         public TestLocationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLocation> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -848,12 +729,9 @@ namespace SampleSystem.BLL
     public partial class TestLocationCollectionPropertiesBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestLocationCollectionProperties, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestLocationCollectionPropertiesBLL
     {
         
-		partial void Initialize();
-        
         public TestLocationCollectionPropertiesBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLocationCollectionProperties> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -869,12 +747,9 @@ namespace SampleSystem.BLL
     public partial class TestSecurityObjItemProjectionBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestSecurityObjItemProjection, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestSecurityObjItemProjectionBLL
     {
         
-		partial void Initialize();
-        
         public TestSecurityObjItemProjectionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -890,12 +765,9 @@ namespace SampleSystem.BLL
     public partial class RoleRoleDegreeLinkBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.RoleRoleDegreeLink, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IRoleRoleDegreeLinkBLL
     {
         
-		partial void Initialize();
-        
         public RoleRoleDegreeLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.RoleRoleDegreeLink> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -911,12 +783,9 @@ namespace SampleSystem.BLL
     public partial class SqlParserTestObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.SqlParserTestObj, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ISqlParserTestObjBLL
     {
         
-		partial void Initialize();
-        
         public SqlParserTestObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SqlParserTestObj> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -932,12 +801,9 @@ namespace SampleSystem.BLL
     public partial class SqlParserTestObjContainerBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.SqlParserTestObjContainer, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ISqlParserTestObjContainerBLL
     {
         
-		partial void Initialize();
-        
         public SqlParserTestObjContainerBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SqlParserTestObjContainer> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -953,12 +819,9 @@ namespace SampleSystem.BLL
     public partial class TestCustomContextSecurityObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestCustomContextSecurityObj, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestCustomContextSecurityObjBLL
     {
         
-		partial void Initialize();
-        
         public TestCustomContextSecurityObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestCustomContextSecurityObj> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -974,12 +837,9 @@ namespace SampleSystem.BLL
     public partial class TestImmutableObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestImmutableObj, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestImmutableObjBLL
     {
         
-		partial void Initialize();
-        
         public TestImmutableObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestImmutableObj> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -995,12 +855,9 @@ namespace SampleSystem.BLL
     public partial class TestPerformanceObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestPerformanceObject, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestPerformanceObjectBLL
     {
         
-		partial void Initialize();
-        
         public TestPerformanceObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPerformanceObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -1016,12 +873,9 @@ namespace SampleSystem.BLL
     public partial class TestPlainAuthObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestPlainAuthObject, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestPlainAuthObjectBLL
     {
         
-		partial void Initialize();
-        
         public TestPlainAuthObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPlainAuthObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -1037,12 +891,9 @@ namespace SampleSystem.BLL
     public partial class TestRootSecurityObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestRootSecurityObj, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestRootSecurityObjBLL
     {
         
-		partial void Initialize();
-        
         public TestRootSecurityObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestRootSecurityObj> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -1058,12 +909,9 @@ namespace SampleSystem.BLL
     public partial class TestSecurityObjItemBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestSecurityObjItem, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestSecurityObjItemBLL
     {
         
-		partial void Initialize();
-        
         public TestSecurityObjItemBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecurityObjItem> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -1079,12 +927,9 @@ namespace SampleSystem.BLL
     public partial class TestSecuritySubObjItemBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestSecuritySubObjItem, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestSecuritySubObjItemBLL
     {
         
-		partial void Initialize();
-        
         public TestSecuritySubObjItemBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -1100,12 +945,9 @@ namespace SampleSystem.BLL
     public partial class TestSecuritySubObjItem2BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestSecuritySubObjItem2, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestSecuritySubObjItem2BLL
     {
         
-		partial void Initialize();
-        
         public TestSecuritySubObjItem2BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem2> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -1121,12 +963,9 @@ namespace SampleSystem.BLL
     public partial class TestSecuritySubObjItem3BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestSecuritySubObjItem3, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestSecuritySubObjItem3BLL
     {
         
-		partial void Initialize();
-        
         public TestSecuritySubObjItem3BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -1142,12 +981,9 @@ namespace SampleSystem.BLL
     public partial class WorkflowCoreExecutionErrorBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.WorkflowCoreExecutionError, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL
     {
         
-		partial void Initialize();
-        
         public WorkflowCoreExecutionErrorBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreExecutionError> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -1163,12 +999,9 @@ namespace SampleSystem.BLL
     public partial class WorkflowCoreInstanceBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.WorkflowCoreInstance, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IWorkflowCoreInstanceBLL
     {
         
-		partial void Initialize();
-        
         public WorkflowCoreInstanceBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreInstance> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     

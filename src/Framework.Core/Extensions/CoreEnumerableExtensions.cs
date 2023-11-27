@@ -697,7 +697,7 @@ public static class CoreEnumerableExtensions
         items.Foreach(item => source.Remove(item));
     }
 
-    public static IEnumerable<TupleStruct<T1, T2>> GetCombineItems<T1, T2, TKey>(this IEnumerable<T1> source1, IEnumerable<T2> source2, Func<T1, TKey> key1Selector, Func<T2, TKey> key2Selector, Func<MergeResult<T1, T2>, Exception> getNonCombineItemsException)
+    public static IEnumerable<ValueTuple<T1, T2>> GetCombineItems<T1, T2, TKey>(this IEnumerable<T1> source1, IEnumerable<T2> source2, Func<T1, TKey> key1Selector, Func<T2, TKey> key2Selector, Func<MergeResult<T1, T2>, Exception> getNonCombineItemsException)
     {
         if (source1 == null) throw new ArgumentNullException(nameof(source1));
         if (source2 == null) throw new ArgumentNullException(nameof(source2));
@@ -761,7 +761,7 @@ public static class CoreEnumerableExtensions
 
         var removingItems = new List<TSource>();
 
-        var combineItems = new List<TupleStruct<TSource, TTarget>>();
+        var combineItems = new List<ValueTuple<TSource, TTarget>>();
 
         foreach (var sourceItem in source)
         {
@@ -771,7 +771,7 @@ public static class CoreEnumerableExtensions
 
             if (targetMap.TryGetValue(sourceKey, out targetItem))
             {
-                combineItems.Add(TupleStruct.Create(sourceItem, targetItem));
+                combineItems.Add(ValueTuple.Create(sourceItem, targetItem));
                 targetMap.Remove(sourceKey);
             }
             else
@@ -785,9 +785,9 @@ public static class CoreEnumerableExtensions
         return new MergeResult<TSource, TTarget>(addingItems, combineItems, removingItems);
     }
 
-    public static IEnumerable<TupleStruct<T, K>> UnionByIndex<T, K>(this IEnumerable<T> source, IEnumerable<K> other)
+    public static IEnumerable<ValueTuple<T, K>> UnionByIndex<T, K>(this IEnumerable<T> source, IEnumerable<K> other)
     {
-        return source.Zip(other, TupleStruct.Create);
+        return source.Zip(other, ValueTuple.Create);
     }
 
     public static IEnumerable<T> CheckNotNull<T>(this IEnumerable<T> source)

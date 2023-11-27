@@ -105,7 +105,7 @@ public record UpdatePermissionsHandler(
     }
 
     private async Task UpdatePermissions(
-            IList<TupleStruct<Permission, RequestBodyDto>> updatedItems,
+            IList<ValueTuple<Permission, RequestBodyDto>> updatedItems,
             ISet<PermissionFilterEntity> cache,
             CancellationToken cancellationToken)
     {

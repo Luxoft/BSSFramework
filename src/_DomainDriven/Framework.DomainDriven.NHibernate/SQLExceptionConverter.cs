@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using NHibernate;
+﻿using NHibernate;
 using NHibernate.Exceptions;
 
 namespace Framework.DomainDriven.NHibernate;

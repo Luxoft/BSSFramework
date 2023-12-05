@@ -1,5 +1,4 @@
-﻿using Framework.Core.Services;
-using Framework.DomainDriven.ImpersonateService;
+﻿using Framework.DomainDriven.ScopedEvaluate;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,11 +6,11 @@ namespace Framework.DomainDriven;
 
 public class ServiceEvaluator<TService> : IServiceEvaluator<TService>
 {
-    private readonly IDBSessionEvaluator dbSessionEvaluator;
+    private readonly IServiceProvider rootServiceProvider;
 
-    public ServiceEvaluator(IDBSessionEvaluator dbSessionEvaluator)
+    public ServiceEvaluator(IServiceProvider rootServiceProvider)
     {
-        this.dbSessionEvaluator = dbSessionEvaluator ?? throw new ArgumentNullException(nameof(dbSessionEvaluator));
+        this.rootServiceProvider = rootServiceProvider;
     }
 
     public async Task<TResult> EvaluateAsync<TResult>(
@@ -19,50 +18,13 @@ public class ServiceEvaluator<TService> : IServiceEvaluator<TService>
         string customPrincipalName,
         Func<TService, Task<TResult>> getResult)
     {
-        return await this.dbSessionEvaluator.EvaluateAsync(
-            sessionMode,
-            async serviceProvider =>
-            {
-                var scopeEvaluator = ActivatorUtilities.CreateInstance<ScopeEvaluator>(serviceProvider, Tuple.Create(customPrincipalName));
+        await using var scope = this.rootServiceProvider.CreateAsyncScope();
 
-                return await scopeEvaluator.Invoke(getResult);
-            });
-    }
+        var sessionMiddleware = new SessionEvaluatorMiddleware(scope.ServiceProvider, sessionMode);
 
-    private class ScopeEvaluator
-    {
-        private readonly TService service;
+        var impersonateMiddleware = new ImpersonateEvaluatorMiddleware(scope.ServiceProvider, customPrincipalName);
 
-        private readonly string customPrincipalName;
-
-        private readonly IImpersonateService actualImpersonateService;
-
-        public ScopeEvaluator(
-            TService service,
-            IUserAuthenticationService userAuthenticationService,
-            IImpersonateService impersonateService,
-            Tuple<string> customPrincipalName = null)
-        {
-            this.service = service;
-
-            this.customPrincipalName = customPrincipalName?.Item1;
-
-            this.actualImpersonateService =
-                this.customPrincipalName != null && this.customPrincipalName != userAuthenticationService.GetUserName()
-                    ? impersonateService
-                    : null;
-        }
-
-        public async Task<TResult> Invoke<TResult>(Func<TService, Task<TResult>> getResult)
-        {
-            if (this.actualImpersonateService == null)
-            {
-                return await getResult(this.service);
-            }
-            else
-            {
-                return await this.actualImpersonateService.WithImpersonateAsync(this.customPrincipalName, () => getResult(this.service));
-            }
-        }
+        return await sessionMiddleware.With(impersonateMiddleware).EvaluateAsync(
+                   async () => await getResult(scope.ServiceProvider.GetRequiredService<TService>()));
     }
 }

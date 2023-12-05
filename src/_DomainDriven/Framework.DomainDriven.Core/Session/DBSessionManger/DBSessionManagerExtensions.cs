@@ -2,7 +2,7 @@
 
 public static class DBSessionManagerExtensions
 {
-    public static async Task<T> EvaluateAsync<T>(this IDBSessionManager dbSessionManager, CancellationToken cancellationToken, Func<Task<T>> getResult)
+    public static async Task<T> EvaluateAsync<T>(this IDBSessionManager dbSessionManager, Func<Task<T>> getResult, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -19,14 +19,14 @@ public static class DBSessionManagerExtensions
         }
     }
 
-    public static async Task EvaluateAsync(this IDBSessionManager dbSessionManager, CancellationToken cancellationToken, Func<Task> action)
+    public static async Task EvaluateAsync(this IDBSessionManager dbSessionManager, Func<Task> action, CancellationToken cancellationToken = default)
     {
         await dbSessionManager.EvaluateAsync<object>(
-            cancellationToken,
             async () =>
             {
                 await action();
                 return default;
-            });
+            },
+            cancellationToken);
     }
 }

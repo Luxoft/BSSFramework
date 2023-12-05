@@ -15,23 +15,8 @@ public class DBSessionEvaluator : IDBSessionEvaluator
     {
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
 
-        var scopeServiceProvider = scope.ServiceProvider;
-        await using var session = scopeServiceProvider.GetRequiredService<IDBSession>();
+        var sessionMiddleware = new SessionEvaluatorMiddleware(scope.ServiceProvider, sessionMode);
 
-        if (sessionMode == DBSessionMode.Read)
-        {
-            session.AsReadOnly();
-        }
-
-        try
-        {
-            return await getResult(scopeServiceProvider);
-        }
-        catch
-        {
-            session.AsFault();
-
-            throw;
-        }
+        return await sessionMiddleware.EvaluateAsync(async () => await getResult(scope.ServiceProvider));
     }
 }

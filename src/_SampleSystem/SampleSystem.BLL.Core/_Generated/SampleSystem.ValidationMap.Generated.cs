@@ -3424,9 +3424,37 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.NamedLock>(this.GetNamedLockProperties);
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NoSecurityObject, System.DateTime?>> GetNoSecurityObject_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.NoSecurityObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NoSecurityObject, string>> GetNoSecurityObject_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.NoSecurityObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NoSecurityObject, string>> GetNoSecurityObject_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.NoSecurityObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NoSecurityObject, System.DateTime?>> GetNoSecurityObject_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.NoSecurityObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.NoSecurityObject>> GetNoSecurityObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.NoSecurityObject> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NoSecurityObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetNoSecurityObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NoSecurityObject, string>(source => source.CreatedBy, currentClass, this.GetNoSecurityObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NoSecurityObject, string>(source => source.ModifiedBy, currentClass, this.GetNoSecurityObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NoSecurityObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetNoSecurityObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.NoSecurityObject> GetNoSecurityObjectValidationMap()
         {
-            return Framework.Validation.ClassValidationMap<SampleSystem.Domain.NoSecurityObject>.Empty;
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.NoSecurityObject>(this.GetNoSecurityObjectProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.UniqueByMaster.ParentEntity, System.DateTime?>> GetParentEntity_CreateDateValidators()

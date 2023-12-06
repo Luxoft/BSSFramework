@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Framework.Core;
+
 using NHibernate;
 
 namespace Framework.DomainDriven.NHibernate;

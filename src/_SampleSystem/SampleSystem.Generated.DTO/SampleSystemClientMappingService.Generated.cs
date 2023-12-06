@@ -64,6 +64,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapBaseAuditPersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
+        void MapBaseAuditPersistentToStrictForNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
+        
         void MapBaseAuditPersistentToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
         void MapBaseAuditPersistentToStrictForSqlParserTestObj(SampleSystem.Generated.DTO.SqlParserTestObjStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
@@ -121,6 +123,8 @@ namespace SampleSystem.Generated.DTO
         void MapBasePersistentToStrictForManagementUnitAndBusinessUnitLink(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
+        
+        void MapBasePersistentToStrictForNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
@@ -331,6 +335,8 @@ namespace SampleSystem.Generated.DTO
         void MapSimpleToStrictForManagementUnitAndBusinessUnitLink(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkSimpleDTO currentSource);
         
         void MapSimpleToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO currentSource);
+        
+        void MapSimpleToStrictForNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO target, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO currentSource);
         
         void MapSimpleToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalSimpleDTO currentSource);
         
@@ -662,6 +668,19 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapBaseAuditPersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            if (object.ReferenceEquals(target, null))
+            {
+                throw new System.ArgumentNullException("target");
+            }
+            target.Version = source.Version;
+        }
+        
+        public virtual void MapBaseAuditPersistentToStrictForNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1039,6 +1058,19 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapBasePersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            if (object.ReferenceEquals(target, null))
+            {
+                throw new System.ArgumentNullException("target");
+            }
+            target.Id = source.Id;
+        }
+        
+        public virtual void MapBasePersistentToStrictForNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -3129,6 +3161,18 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapSimpleToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            if (object.ReferenceEquals(target, null))
+            {
+                throw new System.ArgumentNullException("target");
+            }
+        }
+        
+        public virtual void MapSimpleToStrictForNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO target, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {

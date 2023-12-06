@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 
-using Framework.Core;
 using Framework.DomainDriven.Tracking;
 
 using NHibernate;

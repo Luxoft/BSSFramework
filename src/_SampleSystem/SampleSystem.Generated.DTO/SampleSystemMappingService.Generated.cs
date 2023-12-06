@@ -638,6 +638,10 @@ namespace SampleSystem.Generated.DTO
         
         void MapNamedLock(SampleSystem.Domain.NamedLock domainObject, SampleSystem.Generated.DTO.NamedLockEventRichDTO mappingObject);
         
+        void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO mappingObject);
+        
+        void MapNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO mappingObject, SampleSystem.Domain.NoSecurityObject domainObject);
+        
         void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO mappingObject);
         
         void MapParentEntity(SampleSystem.Domain.UniqueByMaster.ParentEntity domainObject, SampleSystem.Generated.DTO.ParentEntityEventRichDTO mappingObject);
@@ -1185,6 +1189,10 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.NamedLock ToNamedLock(SampleSystem.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO);
         
         SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO noSecurityObjectIdentityDTO);
+        
+        SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO noSecurityObjectStrictDTO);
+        
+        SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO noSecurityObjectStrictDTO, bool allowCreate);
         
         SampleSystem.Domain.UniqueByMaster.ParentEntity ToParentEntity(SampleSystem.Generated.DTO.ParentEntityIdentityDTO parentEntityIdentityDTO);
         
@@ -6383,9 +6391,24 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO mappingObject, SampleSystem.Domain.NoSecurityObject domainObject)
+        {
+            domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
+        }
+        
         public virtual void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO mappingObject)
         {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
         }
         
         public virtual void MapParentEntity(SampleSystem.Domain.UniqueByMaster.ParentEntity domainObject, SampleSystem.Generated.DTO.ParentEntityEventRichDTO mappingObject)
@@ -8648,6 +8671,23 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO noSecurityObjectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.NoSecurityObject>(noSecurityObjectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO noSecurityObjectStrictDTO)
+        {
+            return this.ToDomainObject<SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO, SampleSystem.Domain.NoSecurityObject>(noSecurityObjectStrictDTO);
+        }
+        
+        public virtual SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO noSecurityObjectStrictDTO, bool allowCreate)
+        {
+            if (allowCreate)
+            {
+                return this.ToDomainObject(noSecurityObjectStrictDTO, () => new SampleSystem.Domain.NoSecurityObject());
+            }
+            else
+            {
+                return this.ToNoSecurityObject(noSecurityObjectStrictDTO);
+            }
         }
         
         public virtual SampleSystem.Domain.UniqueByMaster.ParentEntity ToParentEntity(SampleSystem.Generated.DTO.ParentEntityIdentityDTO parentEntityIdentityDTO)

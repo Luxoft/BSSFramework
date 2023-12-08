@@ -63,11 +63,11 @@ public class ExtraQueryableSecurityPathTests : TestBase
         // Arrange
         var createProviderFunc = FuncHelper.Create((ISampleSystemBLLContext context) =>
                                                    {
-                                                       var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable().Where(l => l.Id == this.loc1Ident.Id);
+                                                       var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable();
 
                                                        var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, SingleSecurityMode.Strictly)
                                                                .And(e => e.Location, SingleSecurityMode.Strictly)
-                                                               .And(_ => extraQueryableSecurity, ManySecurityPathMode.Any);
+                                                               .And(e => extraQueryableSecurity.Where(l => l == e.Location && e.Location.Id == this.loc1Ident.Id), ManySecurityPathMode.AnyStrictly);
 
                                                        return extraSecurityPath.ToProvider(
                                                            SampleSystemSecurityOperation.EmployeeView,

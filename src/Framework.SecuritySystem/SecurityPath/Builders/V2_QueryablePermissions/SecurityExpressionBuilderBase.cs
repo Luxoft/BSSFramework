@@ -295,30 +295,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                     }
                 }
 
-                case ManySecurityPathMode.All:
-                {
-                    if (this.Path.SecurityPathQ != null)
-                    {
-                        return (domainObject, permission) =>
-
-                                       !getIdents.Eval(permission).Any()
-
-                                       || this.Path.SecurityPathQ.Eval(domainObject).All(item => getIdents.Eval(permission).Contains(item.Id));
-                    }
-                    else if (this.Path.SecurityPath != null)
-                    {
-                        return (domainObject, permission) =>
-
-                                       !getIdents.Eval(permission).Any()
-
-                                       || this.Path.SecurityPath.Eval(domainObject).All(item => getIdents.Eval(permission).Contains(item.Id));
-                    }
-                    else
-                    {
-                        throw new Exception("Invalid path");
-                    }
-                }
-
                 default:
 
                     throw new ArgumentOutOfRangeException("this.Path.Mode");
@@ -342,7 +318,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
         private static readonly string getAccessortFilterMethodInfoName;
         private static readonly MethodInfo buildOrMethod;
-        private static readonly MethodInfo buildAndMethod;
 
         [SuppressMessage("SonarQube", "S2743")]
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
@@ -354,7 +329,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
         static NestedManySecurityExpressionBuilder()
         {
             buildOrMethod = ((Func<IEnumerable<Expression<Func<IPermission<TIdent>, bool>>>, Expression<Func<IPermission<TIdent>, bool>>>)(Framework.Core.ExpressionExtensions.BuildOr)).Method;
-            buildAndMethod = ((Func<IEnumerable<Expression<Func<IPermission<TIdent>, bool>>>, Expression<Func<IPermission<TIdent>, bool>>>)(Framework.Core.ExpressionExtensions.BuildAnd)).Method;
 
             getAccessortFilterMethodInfoName = "GetAccessorsFilter";
         }
@@ -383,10 +357,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                 case ManySecurityPathMode.AnyStrictly:
 
                     return (domainObject, permission) => this.Path.NestedObjectsPath.Eval(domainObject).Any(nestedObject => baseFilter.Eval(nestedObject, permission));
-
-                case ManySecurityPathMode.All:
-
-                    return (domainObject, permission) => this.Path.NestedObjectsPath.Eval(domainObject).All(nestedObject => baseFilter.Eval(nestedObject, permission));
 
                 default:
 
@@ -441,9 +411,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                 case ManySecurityPathMode.AnyStrictly:
                     buildMethodInfo = buildOrMethod;
                     break;
-                case ManySecurityPathMode.All:
-                    buildMethodInfo = buildAndMethod;
-                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException(this.Path.Mode.ToString());
             }

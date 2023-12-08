@@ -1,8 +1,8 @@
 ﻿using Framework.Core;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystem.PermissionOptimization;
 
-public class RuntimePermissionOptimizationService : IRuntimePermissionOptimizationService
+public class LegacyRuntimePermissionOptimizationService : IRuntimePermissionOptimizationService
 {
     public IEnumerable<Dictionary<Type, List<Guid>>> Optimize(IEnumerable<Dictionary<Type, List<Guid>>> permissions)
     {

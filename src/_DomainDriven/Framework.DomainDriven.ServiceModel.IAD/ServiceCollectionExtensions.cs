@@ -6,7 +6,7 @@ using Framework.Authorization.SecuritySystem.DomainServices;
 using Framework.Authorization.SecuritySystem.ExternalSource;
 
 using Framework.Authorization.SecuritySystem.Initialize;
-
+using Framework.Authorization.SecuritySystem.PermissionOptimization;
 using Framework.Configuration;
 using Framework.Configuration.Domain;
 using Framework.Core.Services;

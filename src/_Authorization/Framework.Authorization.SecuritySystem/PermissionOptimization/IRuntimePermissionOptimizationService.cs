@@ -1,4 +1,4 @@
-﻿namespace Framework.Authorization.SecuritySystem;
+﻿namespace Framework.Authorization.SecuritySystem.PermissionOptimization;
 
 public interface IRuntimePermissionOptimizationService
 {

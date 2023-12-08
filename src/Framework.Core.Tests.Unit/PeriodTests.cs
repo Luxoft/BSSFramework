@@ -287,62 +287,6 @@ public class PeriodTests
         return actualResult;
     }
 
-    /// <summary>
-    /// IADFRAME-796 Ошибка в методе GetFinancialYear
-    /// </summary>
-    [TestCase(2017, 1, 2017)]
-    [TestCase(2017, 3, 2017)]
-    [TestCase(2017, 4, 2018)]
-    [TestCase(2017, 12, 2018)]
-    [TestCase(1, 12, 2)]
-    [TestCase(1, 3, 1)]
-    [TestCase(9999, 3, 9999)]
-    public void GetFinancialYear_DifferentYearMonthCombinations_ResultAsExpected(int year, int month, int expectedFinYear)
-    {
-        // Arrange
-
-        // Act
-        var financialYear = Period.GetFinancialYear(year, month);
-
-        // Assert
-        financialYear.Should().Be(expectedFinYear);
-    }
-
-    /// <summary>
-    /// IADFRAME-796 Ошибка в методе GetFinancialYear
-    /// </summary>
-    [TestCase(-1)]
-    [TestCase(0)]
-    [TestCase(13)]
-    public void GetFinancialYear_MonthOutOfRange_ThrowArgumentOutOfRangeException(int month)
-    {
-        // Arrange
-
-        // Act
-        Action action = () => Period.GetFinancialYear(2017, month);
-
-        // Assert
-        action.Should().Throw<ArgumentOutOfRangeException>();
-    }
-
-    /// <summary>
-    /// IADFRAME-796 Ошибка в методе GetFinancialYear
-    /// </summary>
-    [TestCase(-1, 12)]
-    [TestCase(0, 12)]
-    [TestCase(10000, 1)]
-    [TestCase(9999, 4)]
-    public void GetFinancialYear_YearOutOfRange_ThrowArgumentOutOfRangeException(int year, int month)
-    {
-        // Arrange
-
-        // Act
-        Action action = () => Period.GetFinancialYear(year, month);
-
-        // Assert
-        action.Should().Throw<ArgumentOutOfRangeException>();
-    }
-
     [TestCase(2020, 05, 2020, 08, 3)]
     [TestCase(2020, 12, 2021, 02, 2)]
     [TestCase(2020, 01, 2020, 01, 0)]

@@ -101,7 +101,7 @@ public partial class DataHelper
                                   {
                                       if (!saveEmployeeWithNullHireDate)
                                       {
-                                          hireDate = hireDate ?? this.DateTimeService.CurrentMonth.StartDate;
+                                          hireDate = hireDate ?? this.TimeProvider.GetCurrentMonth().StartDate;
                                       }
 
                                       employee = new Employee

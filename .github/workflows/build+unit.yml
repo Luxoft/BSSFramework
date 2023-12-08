@@ -49,4 +49,5 @@ jobs:
           dotnet test src/_DomainDriven/Framework.DomainDriven.ServiceModel.Tests.Unit --no-build --verbosity normal
           dotnet test src/_DomainDriven/Framework.DomainDriven.DBGenerator.Tests.Unit --no-build --verbosity normal
           dotnet test src/_DomainDriven/Framework.DomainDriven.BLL.Security.Tests.Unit --no-build --verbosity normal
+          dotnet test src/_DomainDriven/Framework.FinancialYear.Tests.Unit --no-build --verbosity normal
           

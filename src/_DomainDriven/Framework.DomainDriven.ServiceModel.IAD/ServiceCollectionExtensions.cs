@@ -15,6 +15,7 @@ using Framework.DomainDriven.ImpersonateService;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
+using Framework.FinancialYear;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryableSource;
@@ -55,7 +56,10 @@ public static class ServiceCollectionExtensions
         services.RegisterAuthorizationSecurity();
         services.RegisterConfigurationSecurity();
 
-        services.AddSingleton<IDateTimeService>(DateTimeService.Default);
+        services.AddSingleton(TimeProvider.System);
+        services.AddSingleton<IFinancialYearCalculator, FinancialYearCalculator>();
+        services.AddSingleton<FinancialYearServiceSettings>();
+        services.AddSingleton<IFinancialYearService, FinancialYearService>();
 
         return services;
     }

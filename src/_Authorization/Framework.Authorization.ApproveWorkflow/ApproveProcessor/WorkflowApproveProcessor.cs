@@ -58,7 +58,7 @@ public class WorkflowApproveProcessor : BLLContextContainer<IAuthorizationBLLCon
 
         var autoApprove = createdByPrincipal != null
                           && permission.DelegatedFrom?.Principal == createdByPrincipal
-                          && createdByPrincipal.GetOperations(this.Context.DateTimeService.Now).Contains(approveOperation);
+                          && createdByPrincipal.GetOperations(this.Context.TimeProvider.GetLocalNow().Date).Contains(approveOperation);
 
         return autoApprove;
     }

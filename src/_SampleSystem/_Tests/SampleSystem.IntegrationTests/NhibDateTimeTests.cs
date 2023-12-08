@@ -18,7 +18,7 @@ public class NhibDateTimeTests : TestBase
     [TestInitialize]
     public void SetUp()
     {
-        this.prevDateTime = this.DateTimeService.Now;
+        this.prevDateTime = this.TimeProvider.GetLocalNow().DateTime;
     }
 
     [TestCleanup]

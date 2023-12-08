@@ -1,7 +1,5 @@
 ﻿using FluentAssertions;
 
-using Framework.SecuritySystem;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;

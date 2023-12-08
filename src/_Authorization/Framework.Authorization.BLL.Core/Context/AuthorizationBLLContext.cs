@@ -37,7 +37,7 @@ public partial class AuthorizationBLLContext
             IAuthorizationValidator validator,
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            IDateTimeService dateTimeService,
+            TimeProvider timeProvider,
             IConfigurationBLLContext configuration,
             IRootSecurityService<PersistentDomainObjectBase> securityService,
             IAuthorizationBLLFactoryContainer logics,
@@ -60,7 +60,7 @@ public partial class AuthorizationBLLContext
                    hierarchicalObjectExpanderFactory,
                    fetchService)
     {
-        this.DateTimeService = dateTimeService;
+        this.TimeProvider = timeProvider;
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
         this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
         this.AvailablePermissionSource = availablePermissionSource;
@@ -119,7 +119,7 @@ public partial class AuthorizationBLLContext
     public Principal CurrentPrincipal => this.lazyCurrentPrincipal.Value;
 
 
-    public IDateTimeService DateTimeService { get; }
+    public TimeProvider TimeProvider { get; }
 
 
     public EntityType GetEntityType(Type type)

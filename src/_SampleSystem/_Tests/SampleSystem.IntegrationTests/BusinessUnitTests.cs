@@ -181,7 +181,7 @@ public class BusinessUnitTests : TestBase
             .EvaluateWrite(
                            context =>
                            {
-                               var period = new Period(this.DateTimeService.CurrentFinancialYear.StartDate
+                               var period = new Period(this.FinancialYearService.GetCurrentFinancialYear().StartDate
                                                            .AddYears(-1));
                                var accountType = context.Logics.BusinessUnitType.GetById(buAccountId.Id);
 

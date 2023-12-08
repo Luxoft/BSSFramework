@@ -13,19 +13,19 @@ public class TestInitializeAndCleanup : ITestInitializeAndCleanup
 
     private readonly IDatabaseContext databaseContext;
 
-    private readonly IIntegrationTestDateTimeService dateTimeService;
+    private readonly IntegrationTestTimeProvider timeProvider;
 
     private readonly IIntegrationTestUserAuthenticationService userAuthenticationService;
 
     public TestInitializeAndCleanup(
         ConfigUtil configUtil,
         IDatabaseContext databaseContext,
-        IIntegrationTestDateTimeService dateTimeService,
+        IntegrationTestTimeProvider timeProvider,
         IIntegrationTestUserAuthenticationService userAuthenticationService)
     {
         this.configUtil = configUtil;
         this.databaseContext = databaseContext;
-        this.dateTimeService = dateTimeService;
+        this.timeProvider = timeProvider;
         this.userAuthenticationService = userAuthenticationService;
     }
 
@@ -43,7 +43,7 @@ public class TestInitializeAndCleanup : ITestInitializeAndCleanup
 
     protected virtual void ResetServices()
     {
-        this.dateTimeService.Reset();
+        this.timeProvider.Reset();
         this.userAuthenticationService.Reset();
     }
 

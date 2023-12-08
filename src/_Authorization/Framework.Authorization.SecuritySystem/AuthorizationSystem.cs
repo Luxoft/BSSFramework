@@ -3,7 +3,6 @@
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Core.Services;
-using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
@@ -28,7 +27,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     private readonly IRepository<Principal> principalRepository;
 
-    private readonly IDateTimeService dateTimeService;
+    private readonly TimeProvider timeProvider;
 
     public AuthorizationSystem(
         IAvailablePermissionSource availablePermissionSource,
@@ -38,7 +37,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IUserAuthenticationService userAuthenticationService,
         IOperationAccessorFactory operationAccessorFactory,
         [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Principal> principalRepository,
-        IDateTimeService dateTimeService)
+        TimeProvider timeProvider)
     {
         this.availablePermissionSource = availablePermissionSource;
         this.runtimePermissionOptimizationService = runtimePermissionOptimizationService;
@@ -46,7 +45,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         this.realTypeResolver = realTypeResolver;
         this.operationAccessorFactory = operationAccessorFactory;
         this.principalRepository = principalRepository;
-        this.dateTimeService = dateTimeService;
+        this.timeProvider = timeProvider;
 
         this.CurrentPrincipalName = userAuthenticationService.GetUserName();
     }
@@ -77,7 +76,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
         return this.GetAccessors(
             (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
-            new AvailablePermissionFilter(this.dateTimeService.Today) { SecurityOperationId = typedSecurityOperation.Id });
+            new AvailablePermissionFilter(this.timeProvider.GetToday()) { SecurityOperationId = typedSecurityOperation.Id });
     }
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(

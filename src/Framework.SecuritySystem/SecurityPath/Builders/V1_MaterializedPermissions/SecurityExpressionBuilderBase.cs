@@ -269,26 +269,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                         }
                     }
 
-                    case ManySecurityPathMode.All:
-                    {
-                        if (this.Path.SecurityPathQ != null)
-                        {
-                            return securityIdents => from securityObjects in this.Path.SecurityPathQ
-
-                                                     select securityObjects.All(item => securityIdents.Contains(item.Id));
-                        }
-                        else if (this.Path.SecurityPath != null)
-                        {
-                            return securityIdents => from securityObjects in this.Path.SecurityPath
-
-                                                     select securityObjects.All(item => securityIdents.Contains(item.Id));
-                        }
-                        else
-                        {
-                            throw new Exception("Invalid path");
-                        }
-                    }
-
                     default:
 
                         throw new ArgumentOutOfRangeException("this.Path.Mode");
@@ -316,7 +296,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
         private static readonly string getAccessortFilterMethodInfoName;
         private static readonly MethodInfo selectPermissionFuncEnumerableMethodInfo;
         private static readonly MethodInfo buildOrMethod;
-        private static readonly MethodInfo buildAndMethod;
 
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
 
@@ -333,7 +312,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
             allEnumerableMethodInfo = new Func<IEnumerable<TNestedObject>, Func<TNestedObject, bool>, bool>(Enumerable.All).Method;
 
             buildOrMethod = ((Func<IEnumerable<Expression<Func<IPermission<TIdent>, bool>>>, Expression<Func<IPermission<TIdent>, bool>>>)(Framework.Core.ExpressionExtensions.BuildOr)).Method;
-            buildAndMethod = ((Func<IEnumerable<Expression<Func<IPermission<TIdent>, bool>>>, Expression<Func<IPermission<TIdent>, bool>>>)(Framework.Core.ExpressionExtensions.BuildAnd)).Method;
 
             selectPermissionFuncEnumerableMethodInfo = ((Func<
                                                            IEnumerable<TNestedObject>,
@@ -377,14 +355,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                     var onlyAnyResult = Expression.Lambda<Func<TDomainObject, bool>>(onlyAnyFilter, this.Path.NestedObjectsPath.Parameters.First());
 
                     return onlyAnyResult;
-
-                case ManySecurityPathMode.All:
-
-                    var allFilter = Expression.Call(allEnumerableMethodInfo, this.Path.NestedObjectsPath.Body, filterExpression);
-
-                    var allResult = Expression.Lambda<Func<TDomainObject, bool>>(allFilter, this.Path.NestedObjectsPath.Parameters.First());
-
-                    return allResult;
 
                 default:
 
@@ -439,9 +409,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                 case ManySecurityPathMode.AnyStrictly:
                     buildMethodInfo = buildOrMethod;
                     break;
-                case ManySecurityPathMode.All:
-                    buildMethodInfo = buildAndMethod;
-                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException(this.Path.Mode.ToString());
             }

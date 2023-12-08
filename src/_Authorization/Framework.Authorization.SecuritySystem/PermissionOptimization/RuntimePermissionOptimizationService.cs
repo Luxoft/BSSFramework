@@ -7,8 +7,15 @@ namespace Framework.Authorization.SecuritySystem.PermissionOptimization;
 [SuppressMessage("SonarQube", "S4017", Justification = "Nested type arguments received from interface")]
 public class RuntimePermissionOptimizationService : IRuntimePermissionOptimizationService
 {
-    [SuppressMessage("SonarQube", "S3776", Justification = "Method have high cognitive complexity for performance")]
     public IEnumerable<Dictionary<Type, List<Guid>>> Optimize(IEnumerable<Dictionary<Type, List<Guid>>> permissions)
+    {
+        var result = this.InternalOptimize(permissions).ToList();
+
+        return result;
+    }
+
+    [SuppressMessage("SonarQube", "S3776", Justification = "Method have high cognitive complexity for performance")]
+    private IEnumerable<Dictionary<Type, List<Guid>>> InternalOptimize(IEnumerable<Dictionary<Type, List<Guid>>> permissions)
     {
         var cachedPermissions = permissions.ToList();
 

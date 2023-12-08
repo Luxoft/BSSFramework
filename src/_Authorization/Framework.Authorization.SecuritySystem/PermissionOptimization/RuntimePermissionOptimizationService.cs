@@ -9,14 +9,6 @@ public class RuntimePermissionOptimizationService : IRuntimePermissionOptimizati
 {
     public IEnumerable<Dictionary<Type, List<Guid>>> Optimize(IEnumerable<Dictionary<Type, List<Guid>>> permissions)
     {
-        var result = this.InternalOptimize(permissions).ToList();
-
-        return result;
-    }
-
-    [SuppressMessage("SonarQube", "S3776", Justification = "Method have high cognitive complexity for performance")]
-    private IEnumerable<Dictionary<Type, List<Guid>>> InternalOptimize(IEnumerable<Dictionary<Type, List<Guid>>> permissions)
-    {
         var cachedPermissions = permissions.ToList();
 
         // Data for first grouping probably have maximum length

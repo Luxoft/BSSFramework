@@ -44,7 +44,7 @@ public static class ServiceProviderExtensions
                 .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
-                .AddSingleton<IntegrationTestTimeProvider, IntegrationTestTimeProvider>()
+                .AddSingleton<IntegrationTestTimeProvider>()
                 .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
                 .AddScoped<TestWebApiCurrentMethodResolver>()

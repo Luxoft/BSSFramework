@@ -21,7 +21,7 @@ public static class RootServiceProviderContainerExtensions
         return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<ConfigUtil>();
     }
 
-    public static TimeProvider GetDateTimeService(this IRootServiceProviderContainer rootServiceProviderContainer)
+    public static TimeProvider GetTimeProvider(this IRootServiceProviderContainer rootServiceProviderContainer)
     {
         return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<TimeProvider>();
     }

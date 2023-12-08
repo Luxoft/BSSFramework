@@ -19,7 +19,7 @@ public abstract class RootServiceProviderContainer : IRootServiceProviderContain
 
     public ConfigUtil ConfigUtil => this.GetConfigUtil();
 
-    public TimeProvider TimeProvider => this.GetDateTimeService();
+    public TimeProvider TimeProvider => this.GetTimeProvider();
 
     public IFinancialYearService FinancialYearService => this.RootServiceProvider.GetRequiredService<IFinancialYearService>();
 

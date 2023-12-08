@@ -341,13 +341,3 @@ public partial class PermissionBLL
         this.Save(permission);
     }
 }
-public static class DateTimeServiceExtensions
-{
-    public static bool IsActivePeriod(this TimeProvider timeProvider, IPeriodObject periodObject)
-    {
-        if (periodObject == null) throw new ArgumentNullException(nameof(periodObject));
-        if (timeProvider == null) throw new ArgumentNullException(nameof(timeProvider));
-
-        return periodObject.Period.Contains(timeProvider.GetToday());
-    }
-}

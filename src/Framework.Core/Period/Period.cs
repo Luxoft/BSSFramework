@@ -5,11 +5,6 @@ namespace Framework.Core;
 [DataContract(Namespace = "")]
 public partial struct Period : IEquatable<Period>, IComparable<Period>, IComparable, IPeriod<Period>
 {
-    [Obsolete("v10 This is application logic, not a framework")]
-    public const int FinancialYearStartMonth = 4;
-    private const int MinMonthValue = 1;
-    private const int MaxMonthValue = 12;
-
     private DateTime startDate;
 
     private DateTime? endDate;
@@ -73,12 +68,6 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     public bool IsMonth
     {
         get { return this.StartDate.ToStartMonthDate() == this.StartDate && this.EndDateValue == this.StartDate.ToEndMonthDate(); }
-    }
-
-    [Obsolete("v10 This is application logic, not a framework")]
-    public bool IsFinancialYear
-    {
-        get { return this.StartDate.ToFinancialYearPeriod() == this; }
     }
 
     #region Public.Method
@@ -305,41 +294,6 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
         var start = new DateTime(year, 1, 1);
 
         return start.ToPeriod(start.ToEndYearDate());
-    }
-
-
-    [Obsolete("v10 This is application logic, not a framework")]
-    public static Period GetFinancialYearPeriod(DateTime date)
-    {
-        return date.ToFinancialYearPeriod();
-    }
-
-    [Obsolete("v10 This is application logic, not a framework")]
-    public static Period GetFinancialYearPeriod(int year)
-    {
-        return new DateTime(year, FinancialYearStartMonth, 1).ToFinancialYearPeriod();
-    }
-
-    /// <summary>
-    /// Gets financial year value that fits year and month specified
-    /// </summary>
-    /// <param name="year">Year value</param>
-    /// <param name="month">Month value</param>
-    /// <returns>Financial year value</returns>
-    [Obsolete("v10 This is application logic, not a framework")]
-    public static int GetFinancialYear(int year, int month)
-    {
-        if (month < MinMonthValue || month > MaxMonthValue)
-        {
-            throw new ArgumentOutOfRangeException(nameof(month));
-        }
-
-        if (year < DateTime.MinValue.Year || year > DateTime.MaxValue.Year || (month >= FinancialYearStartMonth && year == DateTime.MaxValue.Year))
-        {
-            throw new ArgumentOutOfRangeException(nameof(year));
-        }
-
-        return month >= FinancialYearStartMonth ? year + 1 : year;
     }
 
     #endregion

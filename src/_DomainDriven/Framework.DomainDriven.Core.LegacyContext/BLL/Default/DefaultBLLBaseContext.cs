@@ -44,7 +44,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
     /// or
     /// fetchService
     /// or
-    /// dateTimeService</exception>
+    /// timeProvider</exception>
     protected DefaultBLLBaseContext(
             IServiceProvider serviceProvider,
             IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,

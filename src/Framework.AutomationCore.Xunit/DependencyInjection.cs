@@ -5,7 +5,6 @@ using Automation.Settings;
 
 using Framework.Core.Services;
 using Framework.DependencyInjection;
-using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 
@@ -25,8 +24,8 @@ public static class DependencyInjection
                 .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
-                .AddSingleton<IIntegrationTestDateTimeService, IntegrationTestDateTimeService>()
-                .ReplaceSingletonFrom<IDateTimeService, IIntegrationTestDateTimeService>()
+                .AddSingleton<IntegrationTestTimeProvider>()
+                .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
                 .AddScoped<TestWebApiCurrentMethodResolver>()
                 .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()

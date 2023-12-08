@@ -1,6 +1,5 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore.Integration;
 using Framework.SecuritySystem;
 
@@ -17,9 +16,9 @@ public class IntegrationController : IntegrationSchemaControllerBase
 {
     public IntegrationController(
         IAuthorizationSystem authorizationSystem,
-        IDateTimeService dateTimeService,
+        TimeProvider timeProvider,
         IEventXsdExporter2 eventXsdExporter)
-        : base(authorizationSystem, dateTimeService, eventXsdExporter)
+        : base(authorizationSystem, timeProvider, eventXsdExporter)
     {
     }
 

@@ -48,7 +48,7 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
     protected virtual void ResetServices()
     {
         this.RootServiceProvider.GetService<IIntegrationTestUserAuthenticationService>()?.Reset();
-        this.RootServiceProvider.GetService<IIntegrationTestDateTimeService>()?.Reset();
+        this.RootServiceProvider.GetService<IntegrationTestTimeProvider>()?.Reset();
     }
 
     protected virtual void DropDatabaseAfterTest()

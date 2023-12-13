@@ -2,7 +2,7 @@
 
 namespace Framework.RabbitMq.Consumer.Services;
 
-public record RabbitMqSingleConsumerSemaphore : IRabbitMqConsumerSemaphore
+public record RabbitMqMultipleActiveConsumersSemaphore : IRabbitMqConsumerSemaphore
 {
     public bool TryObtain(Guid consumerId, out DateTime? obtainedAt)
     {

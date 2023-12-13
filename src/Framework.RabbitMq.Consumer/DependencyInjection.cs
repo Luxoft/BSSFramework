@@ -18,15 +18,15 @@ public static class DependencyInjection
         var settingsSection = configuration.GetSection("RabbitMQ:Consumer");
         settingsSection.Bind(settings);
 
-        if (settings.Mode == RabbitMqConsumerMode.Single)
+        if (settings.Mode == RabbitMqConsumerMode.MultipleActiveConsumers)
         {
             services
-                .AddSingleton<IRabbitMqConsumerSemaphore, RabbitMqSingleConsumerSemaphore>();
+                .AddSingleton<IRabbitMqConsumerSemaphore, RabbitMqMultipleActiveConsumersSemaphore>();
         }
         else
         {
             services
-                .AddSingleton<IRabbitMqConsumerSemaphore, RabbitMqMultipleConsumersSemaphore>();
+                .AddSingleton<IRabbitMqConsumerSemaphore, RabbitMqSingleActiveConsumerSemaphore>();
         }
 
         services

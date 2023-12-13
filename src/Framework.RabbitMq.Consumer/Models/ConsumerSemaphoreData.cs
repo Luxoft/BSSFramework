@@ -1,6 +1,6 @@
 ﻿namespace Framework.RabbitMq.Consumer.Models;
 
-public class ConsumerSemaphoreData
+public struct ConsumerSemaphoreData
 {
     public Guid ConsumerId { get; set; }
 

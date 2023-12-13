@@ -3,12 +3,12 @@
 public enum RabbitMqConsumerMode
 {
     /// <summary>
-    /// Singe app/pod/etc
+    /// Allows concurrent consuming
     /// </summary>
-    Single = 0,
+    MultipleActiveConsumers = 0,
 
     /// <summary>
-    /// Multiple apps/pods/etc
+    /// Restricts to consequential consuming
     /// </summary>
-    Multiple = 1
+    SingleActiveConsumer = 1
 }

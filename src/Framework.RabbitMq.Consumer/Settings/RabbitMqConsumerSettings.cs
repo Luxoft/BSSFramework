@@ -18,20 +18,15 @@ public class RabbitMqConsumerSettings
 
     public string[] RoutingKeys { get; set; } = Array.Empty<string>();
 
-    public RabbitMqConsumerMode Mode { get; set; } = RabbitMqConsumerMode.Single;
+    public RabbitMqConsumerMode Mode { get; set; } = RabbitMqConsumerMode.MultipleActiveConsumers;
 
     /// <summary>
-    /// for multiple consumers mode - delay before next attempt to change consumer
+    /// for single active consumer mode - how often should active consumer be actualized
     /// </summary>
-    public int NoAvailableConsumersDelayMilliseconds { get; set; } = 60 * 1000;
+    public int RefreshActiveConsumerTickMilliseconds { get; set; } = 60 * 1000;
 
     /// <summary>
-    /// for multiple consumers mode - how often should consumer confirm availability
+    /// for single active consumer mode - how long can consumer remain active without active status confirmation
     /// </summary>
-    public int ConsumerTickMilliseconds { get; set; } = 60 * 1000;
-
-    /// <summary>
-    /// for multiple consumers mode - how long can consumer be unavailable before it will be replaced
-    /// </summary>
-    public int ConsumerExpirationMilliseconds { get; set; } = 3 * 60 * 1000;
+    public int ActiveConsumerClaimTtlMilliseconds { get; set; } = 3 * 60 * 1000;
 }

@@ -80,7 +80,7 @@ public class RabbitMqBackgroundService : BackgroundService
         DateTime? obtainedSemaphoreAt = null;
         while (!token.IsCancellationRequested)
         {
-            if (obtainedSemaphoreAt?.AddMilliseconds(this._consumerSettings.ConsumerTickMilliseconds) > DateTime.Now
+            if (obtainedSemaphoreAt?.AddMilliseconds(this._consumerSettings.RefreshActiveConsumerTickMilliseconds) > DateTime.Now
                 || this._consumerSemaphore.TryObtain(this._consumerId, out obtainedSemaphoreAt))
             {
                 var result = this._channel!.BasicGet(this._consumerSettings.Queue, false);
@@ -94,7 +94,7 @@ public class RabbitMqBackgroundService : BackgroundService
             }
             else
             {
-                await Delay(this._consumerSettings.NoAvailableConsumersDelayMilliseconds, token);
+                await Delay(this._consumerSettings.RefreshActiveConsumerTickMilliseconds, token);
             }
         }
     }

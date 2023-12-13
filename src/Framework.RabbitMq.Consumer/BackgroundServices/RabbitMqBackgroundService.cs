@@ -80,28 +80,38 @@ public class RabbitMqBackgroundService : BackgroundService
         DateTime? obtainedSemaphoreAt = null;
         while (!token.IsCancellationRequested)
         {
-            if (obtainedSemaphoreAt?.AddMilliseconds(this._consumerSettings.RefreshActiveConsumerTickMilliseconds) > DateTime.Now
-                || this._consumerSemaphore.TryObtain(this._consumerId, out obtainedSemaphoreAt))
+            if (obtainedSemaphoreAt?.AddMilliseconds(this._consumerSettings.RefreshActiveConsumerTickMilliseconds) > DateTime.Now)
             {
-                var result = this._channel!.BasicGet(this._consumerSettings.Queue, false);
-                if (result is null)
-                {
-                    await Delay(this._consumerSettings.ReceiveMessageDelayMilliseconds, token);
-                    continue;
-                }
-
-                await this.ProcessAsync(result, token);
+                await this.ReadAsync(token);
+            }
+            else if (await this._consumerSemaphore.TryObtainAsync(this._consumerId, token) is (true, var newObtainedSemaphoreAt))
+            {
+                obtainedSemaphoreAt = newObtainedSemaphoreAt;
+                await this.ReadAsync(token);
             }
             else
             {
                 await Delay(this._consumerSettings.RefreshActiveConsumerTickMilliseconds, token);
             }
         }
+
+        await this._consumerSemaphore.TryReleaseAsync(this._consumerId, token);
+    }
+
+    private async Task ReadAsync(CancellationToken token)
+    {
+        var result = this._channel!.BasicGet(this._consumerSettings.Queue, false);
+        if (result is null)
+        {
+            await Delay(this._consumerSettings.ReceiveMessageDelayMilliseconds, token);
+            return;
+        }
+
+        await this.ProcessAsync(result, token);
     }
 
     public override void Dispose()
     {
-        this._consumerSemaphore.TryRelease(this._consumerId);
         this._channel?.Close();
         this._connection?.Close();
         base.Dispose();

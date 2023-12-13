@@ -19,21 +19,30 @@ public static class DependencyInjection
         settingsSection.Bind(settings);
 
         if (settings.Mode == RabbitMqConsumerMode.MultipleActiveConsumers)
-        {
             services
                 .AddSingleton<IRabbitMqConsumerSemaphore, RabbitMqMultipleActiveConsumersSemaphore>();
-        }
         else
-        {
             services
                 .AddSingleton<IRabbitMqConsumerSemaphore, RabbitMqSingleActiveConsumerSemaphore>();
-        }
 
         services
             .Configure<RabbitMqConsumerSettings>(settingsSection)
             .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
             .AddSingleton<IRabbitMqConsumerInitializer, RabbitMqConsumerInitializer>()
             .AddHostedService<RabbitMqBackgroundService>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddRabbitMqConsumerLock<TLockProvider, TDomainObject, TDomainObjectBase>(
+        this IServiceCollection services)
+        where TLockProvider : class, IRabbitMqConsumerLockProviderService<TDomainObjectBase>
+        where TDomainObjectBase : class
+        where TDomainObject : TDomainObjectBase
+    {
+        services
+            .AddScoped<IRabbitMqConsumerLockService, RabbitMqConsumerLockService<TDomainObject, TDomainObjectBase>>()
+            .AddScoped<IRabbitMqConsumerLockProviderService<TDomainObjectBase>, TLockProvider>();
 
         return services;
     }

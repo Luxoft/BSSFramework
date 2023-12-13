@@ -4,15 +4,8 @@ namespace Framework.RabbitMq.Consumer.Services;
 
 public record RabbitMqMultipleActiveConsumersSemaphore : IRabbitMqConsumerSemaphore
 {
-    public bool TryObtain(Guid consumerId, out DateTime? obtainedAt)
-    {
-        obtainedAt = null;
+    public Task<(bool IsSuccess, DateTime? ObtainedAt)> TryObtainAsync(Guid consumerId, CancellationToken cancellationToken) =>
+        Task.FromResult<(bool, DateTime?)>((true, null));
 
-        return true;
-    }
-
-    public void TryRelease(Guid consumerId)
-    {
-        // do nothing for single consumer
-    }
+    public Task<bool> TryReleaseAsync(Guid consumerId, CancellationToken cancellationToken) => Task.FromResult(true);
 }

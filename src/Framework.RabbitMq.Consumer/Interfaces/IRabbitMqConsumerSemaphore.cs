@@ -2,8 +2,8 @@
 
 public interface IRabbitMqConsumerSemaphore
 {
-    bool TryObtain(Guid consumerId, out DateTime? obtainedAt);
+    Task<(bool IsSuccess, DateTime? ObtainedAt)> TryObtainAsync(Guid consumerId, CancellationToken cancellationToken);
 
-    void TryRelease(Guid consumerId);
+    Task<bool> TryReleaseAsync(Guid consumerId, CancellationToken cancellationToken);
 }
 

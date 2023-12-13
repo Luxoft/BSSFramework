@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using Framework.DomainDriven;
 using Framework.RabbitMq.Consumer.Interfaces;
 using Framework.RabbitMq.Consumer.Models;
 using Framework.RabbitMq.Consumer.Settings;
@@ -12,7 +13,8 @@ namespace Framework.RabbitMq.Consumer.Services;
 
 public record RabbitMqSingleActiveConsumerSemaphore(
     IServiceProvider ServiceProvider,
-    IOptions<RabbitMqConsumerSettings> ConsumerOptions)
+    IOptions<RabbitMqConsumerSettings> ConsumerOptions,
+    IDBSessionEvaluator SessionEvaluator)
     : IRabbitMqConsumerSemaphore
 {
     private const string CacheKey = $"{nameof(RabbitMqSingleActiveConsumerSemaphore)}_Holder";
@@ -24,50 +26,61 @@ public record RabbitMqSingleActiveConsumerSemaphore(
 
     private readonly RabbitMqConsumerSettings _settings = ConsumerOptions.Value;
 
-    private readonly object _lock = new object();
-
-    public bool TryObtain(Guid consumerId, out DateTime? obtainedAt)
-    {
-        obtainedAt = null;
-
-        lock (this._lock)
-        {
-            var current = this.GetCurrentEntry();
-
-            if (current != null
-                && current.Value.ConsumerId != consumerId
-                && current.Value.ObtainedAt.AddMilliseconds(this._settings.ActiveConsumerClaimTtlMilliseconds) >= DateTime.Now)
+    public async Task<(bool IsSuccess, DateTime? ObtainedAt)> TryObtainAsync(Guid consumerId, CancellationToken cancellationToken) =>
+        await this.SessionEvaluator.EvaluateAsync<(bool, DateTime?)>(
+            DBSessionMode.Write,
+            async sp =>
             {
+                await sp.GetRequiredService<IRabbitMqConsumerLockService>().LockAsync(cancellationToken);
+
+                var current = await this.GetCurrentEntryAsync(cancellationToken);
+
+                if (current != null
+                    && current.Value.ConsumerId != consumerId
+                    && current.Value.ObtainedAt.AddMilliseconds(
+                        this._settings.ActiveConsumerClaimTtlMilliseconds)
+                    >= DateTime.Now)
+                {
+                    return (false, null);
+                }
+
+                var newEntry =
+                    new ConsumerSemaphoreData { ConsumerId = consumerId, ObtainedAt = DateTime.Now };
+
+                await this._cache.SetStringAsync(
+                    CacheKey,
+                    JsonSerializer.Serialize(newEntry),
+                    this._cacheOptions,
+                    cancellationToken);
+
+                return (true, newEntry.ObtainedAt);
+            });
+
+    public async Task<bool> TryReleaseAsync(Guid consumerId, CancellationToken cancellationToken) =>
+        await this.SessionEvaluator.EvaluateAsync(
+            DBSessionMode.Write,
+            async sp =>
+            {
+                await sp.GetRequiredService<IRabbitMqConsumerLockService>().LockAsync(cancellationToken);
+
+                var current = await this.GetCurrentEntryAsync(cancellationToken);
+
+                if (current?.ConsumerId == consumerId)
+                {
+                    await this._cache.RemoveAsync(CacheKey, cancellationToken);
+
+                    return true;
+                }
+
                 return false;
-            }
+            });
 
-            var newEntry = new ConsumerSemaphoreData { ConsumerId = consumerId, ObtainedAt = DateTime.Now };
-            this._cache.SetString(CacheKey, JsonSerializer.Serialize(newEntry), this._cacheOptions);
-
-            obtainedAt = newEntry.ObtainedAt;
-            return true;
-        }
-    }
-
-    public void TryRelease(Guid consumerId)
+    private async Task<ConsumerSemaphoreData?> GetCurrentEntryAsync(CancellationToken cancellationToken)
     {
-        lock (this._lock)
-        {
-            var current = this.GetCurrentEntry();
+        var currentStr = await this._cache.GetStringAsync(CacheKey, cancellationToken);
 
-            if (current?.ConsumerId == consumerId)
-            {
-                this._cache.Remove(CacheKey);
-            }
-        }
-    }
-
-    private ConsumerSemaphoreData? GetCurrentEntry()
-    {
-        var currentStr = this._cache.GetString(CacheKey);
-        var current = currentStr != null
-                          ? JsonSerializer.Deserialize<ConsumerSemaphoreData>(currentStr)
-                          : (ConsumerSemaphoreData?)null;
-        return current;
+        return currentStr != null
+                   ? JsonSerializer.Deserialize<ConsumerSemaphoreData>(currentStr)
+                   : null;
     }
 }

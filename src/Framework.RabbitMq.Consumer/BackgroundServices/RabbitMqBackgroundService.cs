@@ -90,7 +90,7 @@ public class RabbitMqBackgroundService : BackgroundService
             else if (await this._consumerSemaphore.TryObtainAsync(this._consumerId, token) is (true, var newObtainedSemaphoreAt))
             {
                 obtainedSemaphoreAt = newObtainedSemaphoreAt;
-                this._logger.LogInformation("Consumer obtained lock");
+                this._logger.LogInformation("Current consumer is active");
                 await this.ReadAsync(token);
             }
             else

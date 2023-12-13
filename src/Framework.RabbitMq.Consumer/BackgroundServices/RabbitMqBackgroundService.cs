@@ -16,6 +16,8 @@ namespace Framework.RabbitMq.Consumer.BackgroundServices;
 
 public class RabbitMqBackgroundService : BackgroundService
 {
+    private readonly Guid _consumerId;
+
     private readonly IRabbitMqClient _client;
 
     private readonly IRabbitMqConsumerInitializer _consumerInitializer;
@@ -25,6 +27,8 @@ public class RabbitMqBackgroundService : BackgroundService
     private readonly ILogger<RabbitMqBackgroundService> _logger;
 
     private readonly IRabbitMqMessageProcessor _messageProcessor;
+
+    private readonly IRabbitMqConsumerSemaphore _consumerSemaphore;
 
     private readonly RabbitMqServerSettings _serverSettings;
 
@@ -36,13 +40,16 @@ public class RabbitMqBackgroundService : BackgroundService
         IRabbitMqClient client,
         IRabbitMqConsumerInitializer consumerInitializer,
         IRabbitMqMessageProcessor messageProcessor,
+        IRabbitMqConsumerSemaphore consumerSemaphore,
         IOptions<RabbitMqServerSettings> serverOptions,
         IOptions<RabbitMqConsumerSettings> consumerOptions,
         ILogger<RabbitMqBackgroundService> logger)
     {
+        this._consumerId = Guid.NewGuid();
         this._client = client;
         this._consumerInitializer = consumerInitializer;
         this._messageProcessor = messageProcessor;
+        this._consumerSemaphore = consumerSemaphore;
         this._logger = logger;
         this._serverSettings = serverOptions.Value;
         this._consumerSettings = consumerOptions.Value;
@@ -50,17 +57,20 @@ public class RabbitMqBackgroundService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        this._connection = await this._client.TryConnectAsync(this._consumerSettings.ConnectionAttemptCount, stoppingToken);
-        if (this._connection == null)
+        using (this._logger.BeginScope(new Dictionary<string, object> { ["ConsumerId"] = this._consumerId }))
         {
-            this._logger.LogInformation("Listening RabbitMQ events wasn't started");
-            return;
+            this._connection = await this._client.TryConnectAsync(this._consumerSettings.ConnectionAttemptCount, stoppingToken);
+            if (this._connection == null)
+            {
+                this._logger.LogInformation("Listening RabbitMQ events wasn't started");
+                return;
+            }
+
+            this._channel = this._connection!.CreateModel();
+            this._consumerInitializer.Initialize(this._channel);
+
+            await this.Listen(stoppingToken);
         }
-
-        this._channel = this._connection!.CreateModel();
-        this._consumerInitializer.Initialize(this._channel);
-
-        await this.Listen(stoppingToken);
     }
 
     private async Task Listen(CancellationToken token)
@@ -70,21 +80,43 @@ public class RabbitMqBackgroundService : BackgroundService
             this._serverSettings.Address,
             this._consumerSettings.Queue);
 
+        DateTime? obtainedSemaphoreAt = null;
         while (!token.IsCancellationRequested)
         {
-            var result = this._channel!.BasicGet(this._consumerSettings.Queue, false);
-            if (result is null)
+            if (obtainedSemaphoreAt?.AddMilliseconds(this._consumerSettings.RefreshActiveConsumerTickMilliseconds) > DateTime.Now)
             {
-                await Delay(this._consumerSettings.ReceiveMessageDelayMilliseconds, token);
-                continue;
+                await this.ReadAsync(token);
             }
-
-            await this.ProcessAsync(result, token);
+            else if (await this._consumerSemaphore.TryObtainAsync(this._consumerId, token) is (true, var newObtainedSemaphoreAt))
+            {
+                obtainedSemaphoreAt = newObtainedSemaphoreAt;
+                this._logger.LogInformation("Current consumer is active");
+                await this.ReadAsync(token);
+            }
+            else
+            {
+                await Delay(this._consumerSettings.RefreshActiveConsumerTickMilliseconds, token);
+            }
         }
+
+        await this._consumerSemaphore.TryReleaseAsync(this._consumerId, token);
+    }
+
+    private async Task ReadAsync(CancellationToken token)
+    {
+        var result = this._channel!.BasicGet(this._consumerSettings.Queue, false);
+        if (result is null)
+        {
+            await Delay(this._consumerSettings.ReceiveMessageDelayMilliseconds, token);
+            return;
+        }
+
+        await this.ProcessAsync(result, token);
     }
 
     public override void Dispose()
     {
+        this._consumerSemaphore.TryReleaseAsync(this._consumerId, default).GetAwaiter().GetResult();
         this._channel?.Close();
         this._connection?.Close();
         base.Dispose();
@@ -121,5 +153,5 @@ public class RabbitMqBackgroundService : BackgroundService
         }
     }
 
-    private static async Task Delay(int value, CancellationToken token) => await Task.Delay(TimeSpan.FromMilliseconds(value), token);
+    private static Task Delay(int value, CancellationToken token) => Task.Delay(TimeSpan.FromMilliseconds(value), token);
 }

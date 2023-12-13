@@ -57,17 +57,20 @@ public class RabbitMqBackgroundService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        this._connection = await this._client.TryConnectAsync(this._consumerSettings.ConnectionAttemptCount, stoppingToken);
-        if (this._connection == null)
+        using (this._logger.BeginScope(new Dictionary<string, object> { ["ConsumerId"] = this._consumerId }))
         {
-            this._logger.LogInformation("Listening RabbitMQ events wasn't started");
-            return;
+            this._connection = await this._client.TryConnectAsync(this._consumerSettings.ConnectionAttemptCount, stoppingToken);
+            if (this._connection == null)
+            {
+                this._logger.LogInformation("Listening RabbitMQ events wasn't started");
+                return;
+            }
+
+            this._channel = this._connection!.CreateModel();
+            this._consumerInitializer.Initialize(this._channel);
+
+            await this.Listen(stoppingToken);
         }
-
-        this._channel = this._connection!.CreateModel();
-        this._consumerInitializer.Initialize(this._channel);
-
-        await this.Listen(stoppingToken);
     }
 
     private async Task Listen(CancellationToken token)
@@ -87,7 +90,7 @@ public class RabbitMqBackgroundService : BackgroundService
             else if (await this._consumerSemaphore.TryObtainAsync(this._consumerId, token) is (true, var newObtainedSemaphoreAt))
             {
                 obtainedSemaphoreAt = newObtainedSemaphoreAt;
-                this._logger.LogInformation("Consumer {Consumer} obtained lock", this._consumerId);
+                this._logger.LogInformation("Consumer obtained lock");
                 await this.ReadAsync(token);
             }
             else
@@ -113,7 +116,7 @@ public class RabbitMqBackgroundService : BackgroundService
 
     public override void Dispose()
     {
-        this._consumerSemaphore.TryReleaseAsync(this._consumerId, new CancellationToken()).GetAwaiter().GetResult();
+        this._consumerSemaphore.TryReleaseAsync(this._consumerId, default).GetAwaiter().GetResult();
         this._channel?.Close();
         this._connection?.Close();
         base.Dispose();

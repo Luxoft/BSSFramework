@@ -34,15 +34,14 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddRabbitMqConsumerLock<TLockProvider, TDomainObject, TDomainObjectBase>(
-        this IServiceCollection services)
-        where TLockProvider : class, IRabbitMqConsumerLockProviderService<TDomainObjectBase>
+    public static IServiceCollection AddRabbitMqConsumerLock<TLockProvider, TLockObject, TDomainObjectBase>(this IServiceCollection services)
+        where TLockProvider : class, IRabbitMqConsumerLockProviderService<TLockObject>
+        where TLockObject : TDomainObjectBase
         where TDomainObjectBase : class
-        where TDomainObject : TDomainObjectBase
     {
         services
-            .AddScoped<IRabbitMqConsumerLockService, RabbitMqConsumerLockService<TDomainObject, TDomainObjectBase>>()
-            .AddScoped<IRabbitMqConsumerLockProviderService<TDomainObjectBase>, TLockProvider>();
+            .AddScoped<IRabbitMqConsumerLockService, RabbitMqConsumerLockService<TLockObject, TDomainObjectBase>>()
+            .AddScoped<IRabbitMqConsumerLockProviderService<TLockObject>, TLockProvider>();
 
         return services;
     }

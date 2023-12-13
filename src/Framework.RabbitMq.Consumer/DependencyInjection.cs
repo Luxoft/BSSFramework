@@ -25,24 +25,19 @@ public static class DependencyInjection
             services
                 .AddSingleton<IRabbitMqConsumerSemaphore, RabbitMqSingleActiveConsumerSemaphore>();
 
-        services
-            .Configure<RabbitMqConsumerSettings>(settingsSection)
-            .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
-            .AddSingleton<IRabbitMqConsumerInitializer, RabbitMqConsumerInitializer>()
-            .AddHostedService<RabbitMqBackgroundService>();
-
-        return services;
+        return services
+               .Configure<RabbitMqConsumerSettings>(settingsSection)
+               .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
+               .AddSingleton<IRabbitMqConsumerInitializer, RabbitMqConsumerInitializer>()
+               .AddHostedService<RabbitMqBackgroundService>();
     }
 
-    public static IServiceCollection AddRabbitMqConsumerLock<TLockProvider, TLockObject, TDomainObjectBase>(this IServiceCollection services)
-        where TLockProvider : class, IRabbitMqConsumerLockProviderService<TLockObject>
+    public static IServiceCollection AddRabbitMqConsumerLock<TLockProvider, TLockObject, TDomainObjectBase>(
+        this IServiceCollection services)
+        where TLockProvider : class, IRabbitMqConsumerLockProvider<TLockObject>
         where TLockObject : TDomainObjectBase
-        where TDomainObjectBase : class
-    {
+        where TDomainObjectBase : class =>
         services
             .AddScoped<IRabbitMqConsumerLockService, RabbitMqConsumerLockService<TLockObject, TDomainObjectBase>>()
-            .AddScoped<IRabbitMqConsumerLockProviderService<TLockObject>, TLockProvider>();
-
-        return services;
-    }
+            .AddScoped<IRabbitMqConsumerLockProvider<TLockObject>, TLockProvider>();
 }

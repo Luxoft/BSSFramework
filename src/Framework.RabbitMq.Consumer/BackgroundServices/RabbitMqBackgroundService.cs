@@ -148,5 +148,5 @@ public class RabbitMqBackgroundService : BackgroundService
         }
     }
 
-    private static async Task Delay(int value, CancellationToken token) => await Task.Delay(TimeSpan.FromMilliseconds(value), token);
+    private static Task Delay(int value, CancellationToken token) => Task.Delay(TimeSpan.FromMilliseconds(value), token);
 }

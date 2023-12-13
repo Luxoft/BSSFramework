@@ -37,27 +37,17 @@ public record RabbitMqSingleActiveConsumerSemaphore(
 
                 if (current != null
                     && current.Value.ConsumerId != consumerId
-                    && current.Value.ObtainedAt.AddMilliseconds(
-                        this._settings.ActiveConsumerClaimTtlMilliseconds)
-                    >= DateTime.Now)
-                {
+                    && current.Value.ObtainedAt.AddMilliseconds(this._settings.ActiveConsumerClaimTtlMilliseconds) >= DateTime.Now)
                     return (false, null);
-                }
 
-                var newEntry =
-                    new ConsumerSemaphoreData { ConsumerId = consumerId, ObtainedAt = DateTime.Now };
-
-                await this._cache.SetStringAsync(
-                    CacheKey,
-                    JsonSerializer.Serialize(newEntry),
-                    this._cacheOptions,
-                    cancellationToken);
+                var newEntry = new ConsumerSemaphoreData { ConsumerId = consumerId, ObtainedAt = DateTime.Now };
+                await this._cache.SetStringAsync(CacheKey, JsonSerializer.Serialize(newEntry), this._cacheOptions, cancellationToken);
 
                 return (true, newEntry.ObtainedAt);
             });
 
-    public async Task<bool> TryReleaseAsync(Guid consumerId, CancellationToken cancellationToken) =>
-        await this.SessionEvaluator.EvaluateAsync(
+    public Task<bool> TryReleaseAsync(Guid consumerId, CancellationToken cancellationToken) =>
+        this.SessionEvaluator.EvaluateAsync(
             DBSessionMode.Write,
             async sp =>
             {
@@ -65,20 +55,16 @@ public record RabbitMqSingleActiveConsumerSemaphore(
 
                 var current = await this.GetCurrentEntryAsync(cancellationToken);
 
-                if (current?.ConsumerId == consumerId)
-                {
-                    await this._cache.RemoveAsync(CacheKey, cancellationToken);
+                if (current?.ConsumerId != consumerId) return false;
 
-                    return true;
-                }
+                await this._cache.RemoveAsync(CacheKey, cancellationToken);
 
-                return false;
+                return true;
             });
 
     private async Task<ConsumerSemaphoreData?> GetCurrentEntryAsync(CancellationToken cancellationToken)
     {
         var currentStr = await this._cache.GetStringAsync(CacheKey, cancellationToken);
-
         return currentStr != null
                    ? JsonSerializer.Deserialize<ConsumerSemaphoreData>(currentStr)
                    : null;

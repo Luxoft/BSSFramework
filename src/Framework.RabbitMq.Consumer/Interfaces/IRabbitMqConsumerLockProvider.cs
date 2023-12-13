@@ -1,6 +1,6 @@
 ﻿namespace Framework.RabbitMq.Consumer.Interfaces;
 
-public interface IRabbitMqConsumerLockProviderService<TDomainObject>
+public interface IRabbitMqConsumerLockProvider<TDomainObject>
 {
     Task<TDomainObject> GetLockObjectAsync(CancellationToken cancellationToken);
 }

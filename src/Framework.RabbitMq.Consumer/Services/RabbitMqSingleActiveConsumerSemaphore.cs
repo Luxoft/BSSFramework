@@ -12,14 +12,12 @@ using Microsoft.Extensions.Options;
 namespace Framework.RabbitMq.Consumer.Services;
 
 public record RabbitMqSingleActiveConsumerSemaphore(
-    IServiceProvider ServiceProvider,
     IOptions<RabbitMqConsumerSettings> ConsumerOptions,
-    IDBSessionEvaluator SessionEvaluator)
+    IDBSessionEvaluator SessionEvaluator,
+    IDistributedCache Cache)
     : IRabbitMqConsumerSemaphore
 {
     private const string CacheKey = $"{nameof(RabbitMqSingleActiveConsumerSemaphore)}_Holder";
-
-    private readonly IDistributedCache _cache = ServiceProvider.GetRequiredService<IDistributedCache>();
 
     private readonly DistributedCacheEntryOptions _cacheOptions =
         new() { SlidingExpiration = TimeSpan.FromMilliseconds(ConsumerOptions.Value.ActiveConsumerClaimTtlMilliseconds) };
@@ -41,7 +39,7 @@ public record RabbitMqSingleActiveConsumerSemaphore(
                     return (false, null);
 
                 var newEntry = new ConsumerSemaphoreData { ConsumerId = consumerId, ObtainedAt = DateTime.Now };
-                await this._cache.SetStringAsync(CacheKey, JsonSerializer.Serialize(newEntry), this._cacheOptions, cancellationToken);
+                await this.Cache.SetStringAsync(CacheKey, JsonSerializer.Serialize(newEntry), this._cacheOptions, cancellationToken);
 
                 return (true, newEntry.ObtainedAt);
             });
@@ -57,14 +55,14 @@ public record RabbitMqSingleActiveConsumerSemaphore(
 
                 if (current?.ConsumerId != consumerId) return false;
 
-                await this._cache.RemoveAsync(CacheKey, cancellationToken);
+                await this.Cache.RemoveAsync(CacheKey, cancellationToken);
 
                 return true;
             });
 
     private async Task<ConsumerSemaphoreData?> GetCurrentEntryAsync(CancellationToken cancellationToken)
     {
-        var currentStr = await this._cache.GetStringAsync(CacheKey, cancellationToken);
+        var currentStr = await this.Cache.GetStringAsync(CacheKey, cancellationToken);
         return currentStr != null
                    ? JsonSerializer.Deserialize<ConsumerSemaphoreData>(currentStr)
                    : null;

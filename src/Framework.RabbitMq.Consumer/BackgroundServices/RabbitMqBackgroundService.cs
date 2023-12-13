@@ -112,6 +112,7 @@ public class RabbitMqBackgroundService : BackgroundService
 
     public override void Dispose()
     {
+        this._consumerSemaphore.TryReleaseAsync(this._consumerId, new CancellationToken()).GetAwaiter().GetResult();
         this._channel?.Close();
         this._connection?.Close();
         base.Dispose();

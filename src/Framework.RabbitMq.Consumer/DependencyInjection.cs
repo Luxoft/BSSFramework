@@ -18,27 +18,27 @@ public static class DependencyInjection
         var settingsSection = configuration.GetSection("RabbitMQ:Consumer");
         settingsSection.Bind(settings);
 
-        if (settings.Mode == RabbitMqConsumerMode.MultipleActiveConsumers)
+        if (settings.Mode == ConsumerMode.MultipleActiveConsumers)
         {
             services
-                .AddSingleton<IRabbitMqConsumer, RabbitMqConcurrentConsumer>();
+                .AddSingleton<IRabbitMqConsumer, ConcurrentConsumer>();
         }
         else
         {
             services
-                .AddSingleton<IRabbitMqConsumer, RabbitMqSynchronizedConsumer>();
+                .AddSingleton<IRabbitMqConsumer, SynchronizedConsumer>();
         }
 
         return services
             .Configure<RabbitMqConsumerSettings>(settingsSection)
-            .AddSingleton<IRabbitMqMessageReader, RabbitMqMessageReader>()
+            .AddSingleton<IRabbitMqMessageReader, MessageReader>()
             .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
-            .AddSingleton<IRabbitMqConsumerInitializer, RabbitMqConsumerInitializer>()
+            .AddSingleton<IRabbitMqConsumerInitializer, ConsumerInitializer>()
             .AddHostedService<RabbitMqBackgroundService>();
     }
 
     public static IServiceCollection AddRabbitMqSqlServerConsumerLock(this IServiceCollection services, string connectionString) =>
         services
-            .AddSingleton<IRabbitMqConsumerLockService, RabbitMqSqlServerLockService>()
-            .AddSingleton<IRabbitMqSqlSeverConnectionStringProvider>(new RabbitMqSqlSeverConnectionStringProvider(connectionString));
+            .AddSingleton<IRabbitMqConsumerLockService, MsSqlLockService>()
+            .AddSingleton(new SqlConnectionStringProvider(connectionString));
 }

@@ -18,7 +18,7 @@ public class RabbitMqConsumerSettings
 
     public string[] RoutingKeys { get; set; } = Array.Empty<string>();
 
-    public RabbitMqConsumerMode Mode { get; set; } = RabbitMqConsumerMode.MultipleActiveConsumers;
+    public ConsumerMode Mode { get; set; } = ConsumerMode.MultipleActiveConsumers;
 
     /// <summary>
     /// for single active consumer mode - how often should consumer try to become active

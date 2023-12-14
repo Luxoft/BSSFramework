@@ -9,40 +9,26 @@ using RabbitMQ.Client;
 
 namespace Framework.RabbitMq.Consumer.Services;
 
-public record RabbitMqSynchronizedConsumer(
-    IRabbitMqSqlSeverConnectionStringProvider ConnectionStringProvider,
+internal record SynchronizedConsumer(
+    SqlConnectionStringProvider ConnectionStringProvider,
     IRabbitMqConsumerLockService LockService,
-    ILogger<RabbitMqSynchronizedConsumer> Logger,
+    ILogger<SynchronizedConsumer> Logger,
     IRabbitMqMessageReader MessageReader,
     IOptions<RabbitMqConsumerSettings> ConsumerOptions)
     : IRabbitMqConsumer
 {
     private readonly RabbitMqConsumerSettings _settings = ConsumerOptions.Value;
 
-    private SqlConnection? connection;
+    private SqlConnection? _connection;
+
+    private DateTime? _lockObtainedDate;
 
     public async Task ConsumeAsync(IModel channel, CancellationToken token)
     {
-        DateTime? lockObtainedDate = null;
         while (!token.IsCancellationRequested)
-        {
             try
             {
-                var hasLock = false;
-
-                if (lockObtainedDate?.AddMilliseconds(this._settings.ActiveConsumerRefreshMilliseconds) >= DateTime.Now)
-                {
-                    hasLock = true;
-                }
-                else
-                {
-                    await this.OpenConnectionAsync(token);
-                    hasLock = this.LockService.TryObtainLock(this.connection!);
-                    lockObtainedDate = hasLock ? DateTime.Now : null;
-                    this.Logger.LogInformation("Current consumer is active");
-                }
-
-                if (hasLock)
+                if (await this.GetLock(token))
                 {
                     await this.MessageReader.ReadAsync(channel, token);
                 }
@@ -58,25 +44,45 @@ public record RabbitMqSynchronizedConsumer(
                 await this.CloseConnectionAsync();
                 await Delay(this._settings.InactiveConsumerSleepMilliseconds, token);
             }
-        }
+    }
+
+    public void Dispose()
+    {
+        if (this._connection != null) this.LockService.TryReleaseLock(this._connection);
+
+        this._connection?.Close();
+        GC.SuppressFinalize(this);
+    }
+
+    private async Task<bool> GetLock(CancellationToken token)
+    {
+        if (this._lockObtainedDate?.AddMilliseconds(this._settings.ActiveConsumerRefreshMilliseconds) >= DateTime.Now) return true;
+
+        await this.OpenConnectionAsync(token);
+        if (!this.LockService.TryObtainLock(this._connection!)) return false;
+
+        this._lockObtainedDate = DateTime.Now;
+        this.Logger.LogInformation("Current consumer is active");
+
+        return true;
     }
 
     private async Task OpenConnectionAsync(CancellationToken token)
     {
         await this.CloseConnectionAsync();
 
-        this.connection = new SqlConnection(this.ConnectionStringProvider.GetConnectionString());
-        await this.connection.OpenAsync(token);
+        this._connection = new SqlConnection(this.ConnectionStringProvider.ConnectionString);
+        await this._connection.OpenAsync(token);
     }
 
     private async Task CloseConnectionAsync()
     {
         try
         {
-            if (this.connection != null)
+            if (this._connection != null)
             {
-                this.LockService.TryReleaseLock(this.connection);
-                await this.connection!.CloseAsync();
+                this.LockService.TryReleaseLock(this._connection);
+                await this._connection!.CloseAsync();
             }
         }
         catch (Exception e)
@@ -85,15 +91,5 @@ public record RabbitMqSynchronizedConsumer(
         }
     }
 
-    public void Dispose()
-    {
-        if (this.connection != null)
-        {
-            this.LockService.TryReleaseLock(this.connection);
-        }
-
-        this.connection?.Close();
-    }
-
-    private static async Task Delay(int value, CancellationToken token) => await Task.Delay(TimeSpan.FromMilliseconds(value), token);
+    private static Task Delay(int value, CancellationToken token) => Task.Delay(TimeSpan.FromMilliseconds(value), token);
 }

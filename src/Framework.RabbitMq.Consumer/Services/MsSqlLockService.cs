@@ -8,10 +8,9 @@ using Microsoft.Extensions.Options;
 
 namespace Framework.RabbitMq.Consumer.Services;
 
-public record RabbitMqSqlServerLockService(IOptions<RabbitMqConsumerSettings> ConsumerOptions)
-    : IRabbitMqConsumerLockService
+internal record MsSqlLockService(IOptions<RabbitMqConsumerSettings> ConsumerOptions) : IRabbitMqConsumerLockService
 {
-    private readonly string lockName = $"{ConsumerOptions.Value.Queue}_Consumer_Lock";
+    private readonly string _lockName = $"{ConsumerOptions.Value.Queue}_Consumer_Lock";
 
     public bool TryObtainLock(SqlConnection connection)
     {
@@ -19,7 +18,7 @@ public record RabbitMqSqlServerLockService(IOptions<RabbitMqConsumerSettings> Co
         {
             var cmd = new SqlCommand("sp_getapplock", connection);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@Resource", this.lockName));
+            cmd.Parameters.Add(new SqlParameter("@Resource", this._lockName));
             cmd.Parameters.Add(new SqlParameter("@LockMode", "Exclusive"));
             cmd.Parameters.Add(new SqlParameter("@LockOwner", "Session"));
             cmd.Parameters.Add(new SqlParameter("@LockTimeout", "0"));
@@ -43,7 +42,7 @@ public record RabbitMqSqlServerLockService(IOptions<RabbitMqConsumerSettings> Co
         {
             var cmd = new SqlCommand("sp_releaseapplock", connection);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@Resource", this.lockName));
+            cmd.Parameters.Add(new SqlParameter("@Resource", this._lockName));
             cmd.Parameters.Add(new SqlParameter("@LockOwner", "Session"));
 
             cmd.ExecuteNonQuery();

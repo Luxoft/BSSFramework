@@ -11,16 +11,16 @@ using RabbitMQ.Client;
 
 namespace Framework.RabbitMq.Consumer.Services;
 
-public record RabbitMqMessageReader(
+internal record MessageReader(
     IRabbitMqMessageProcessor MessageProcessor,
-    ILogger<RabbitMqMessageReader> Logger,
+    ILogger<MessageReader> Logger,
     IOptions<RabbitMqConsumerSettings> ConsumerOptions) : IRabbitMqMessageReader
 {
     private readonly RabbitMqConsumerSettings _settings = ConsumerOptions.Value;
 
     public async Task ReadAsync(IModel channel, CancellationToken token)
     {
-        var result = channel!.BasicGet(this._settings.Queue, false);
+        var result = channel.BasicGet(this._settings.Queue, false);
         if (result is null)
         {
             await Delay(this._settings.ReceiveMessageDelayMilliseconds, token);
@@ -44,7 +44,7 @@ public record RabbitMqMessageReader(
                                     token);
                 if (behaviour == DeadLetterBehaviour.Skip)
                 {
-                    channel!.BasicAck(result.DeliveryTag, false);
+                    channel.BasicAck(result.DeliveryTag, false);
                     return;
                 }
             }
@@ -60,5 +60,5 @@ public record RabbitMqMessageReader(
         }
     }
 
-    private static async Task Delay(int value, CancellationToken token) => await Task.Delay(TimeSpan.FromMilliseconds(value), token);
+    private static Task Delay(int value, CancellationToken token) => Task.Delay(TimeSpan.FromMilliseconds(value), token);
 }

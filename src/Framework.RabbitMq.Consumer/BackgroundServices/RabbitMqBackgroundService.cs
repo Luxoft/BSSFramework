@@ -50,7 +50,7 @@ public class RabbitMqBackgroundService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        using (this._logger.BeginScope(new Dictionary<string, string> { { "ConsumerId", this._consumerId.ToString() } }))
+        using (this._logger.BeginScope(new Dictionary<string, object> { ["ConsumerId"] = this._consumerId }))
         {
             this._connection = await this._client.TryConnectAsync(this._consumerSettings.ConnectionAttemptCount, stoppingToken);
             if (this._connection == null)

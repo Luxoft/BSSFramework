@@ -11,7 +11,7 @@ namespace Framework.RabbitMq.Consumer;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddRabbitMqConsumerFork<TMessageProcessor>(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddRabbitMqConsumer<TMessageProcessor>(this IServiceCollection services, IConfiguration configuration)
         where TMessageProcessor : class, IRabbitMqMessageProcessor
     {
         var settings = new RabbitMqConsumerSettings();

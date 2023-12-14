@@ -18,26 +18,27 @@ public static class DependencyInjection
         var settingsSection = configuration.GetSection("RabbitMQ:Consumer");
         settingsSection.Bind(settings);
 
-        if (settings.Mode == RabbitMqConsumerMode.MultipleActiveConsumers)
+        if (settings.Mode == ConsumerMode.MultipleActiveConsumers)
+        {
             services
-                .AddSingleton<IRabbitMqConsumerSemaphore, RabbitMqMultipleActiveConsumersSemaphore>();
+                .AddSingleton<IRabbitMqConsumer, ConcurrentConsumer>();
+        }
         else
+        {
             services
-                .AddSingleton<IRabbitMqConsumerSemaphore, RabbitMqSingleActiveConsumerSemaphore>();
+                .AddSingleton<IRabbitMqConsumer, SynchronizedConsumer>();
+        }
 
         return services
-               .Configure<RabbitMqConsumerSettings>(settingsSection)
-               .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
-               .AddSingleton<IRabbitMqConsumerInitializer, RabbitMqConsumerInitializer>()
-               .AddHostedService<RabbitMqBackgroundService>();
+            .Configure<RabbitMqConsumerSettings>(settingsSection)
+            .AddSingleton<IRabbitMqMessageReader, MessageReader>()
+            .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
+            .AddSingleton<IRabbitMqConsumerInitializer, ConsumerInitializer>()
+            .AddHostedService<RabbitMqBackgroundService>();
     }
 
-    public static IServiceCollection AddRabbitMqConsumerLock<TLockProvider, TLockObject, TDomainObjectBase>(
-        this IServiceCollection services)
-        where TLockProvider : class, IRabbitMqConsumerLockProvider<TLockObject>
-        where TLockObject : TDomainObjectBase
-        where TDomainObjectBase : class =>
+    public static IServiceCollection AddRabbitMqSqlServerConsumerLock(this IServiceCollection services, string connectionString) =>
         services
-            .AddScoped<IRabbitMqConsumerLockService, RabbitMqConsumerLockService<TLockObject, TDomainObjectBase>>()
-            .AddScoped<IRabbitMqConsumerLockProvider<TLockObject>, TLockProvider>();
+            .AddSingleton<IRabbitMqConsumerLockService, MsSqlLockService>()
+            .AddSingleton(new SqlConnectionStringProvider(connectionString));
 }

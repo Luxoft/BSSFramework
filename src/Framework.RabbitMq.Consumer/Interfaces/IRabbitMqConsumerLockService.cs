@@ -1,6 +1,10 @@
-﻿namespace Framework.RabbitMq.Consumer.Interfaces;
+﻿using Microsoft.Data.SqlClient;
+
+namespace Framework.RabbitMq.Consumer.Interfaces;
 
 public interface IRabbitMqConsumerLockService
 {
-    Task LockAsync(CancellationToken cancellationToken);
+    bool TryObtainLock(SqlConnection connection);
+
+    void TryReleaseLock(SqlConnection connection);
 }

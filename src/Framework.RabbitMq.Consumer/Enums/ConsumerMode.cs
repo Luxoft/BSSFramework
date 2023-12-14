@@ -1,6 +1,6 @@
 ﻿namespace Framework.RabbitMq.Consumer.Enums;
 
-public enum RabbitMqConsumerMode
+public enum ConsumerMode
 {
     /// <summary>
     ///     Allows concurrent consuming

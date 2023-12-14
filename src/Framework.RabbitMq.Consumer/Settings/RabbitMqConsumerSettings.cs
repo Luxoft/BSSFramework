@@ -18,15 +18,15 @@ public class RabbitMqConsumerSettings
 
     public string[] RoutingKeys { get; set; } = Array.Empty<string>();
 
-    public RabbitMqConsumerMode Mode { get; set; } = RabbitMqConsumerMode.MultipleActiveConsumers;
+    public ConsumerMode Mode { get; set; } = ConsumerMode.MultipleActiveConsumers;
 
     /// <summary>
-    ///     for single active consumer mode - how often should active consumer be actualized
+    /// for single active consumer mode - how often should consumer try to become active
     /// </summary>
-    public int RefreshActiveConsumerTickMilliseconds { get; set; } = 60 * 1000;
+    public int InactiveConsumerSleepMilliseconds { get; set; } = 60 * 1000;
 
     /// <summary>
-    ///     for single active consumer mode - how long can consumer remain active without active status confirmation
+    /// for single active consumer mode - how often should consumer update its active status
     /// </summary>
-    public int ActiveConsumerClaimTtlMilliseconds { get; set; } = 3 * 60 * 1000;
+    public int ActiveConsumerRefreshMilliseconds { get; set; } = 3 * 60 * 1000;
 }

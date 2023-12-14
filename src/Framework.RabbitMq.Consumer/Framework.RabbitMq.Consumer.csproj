@@ -6,10 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.RabbitMq\Framework.RabbitMq.csproj" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
   </ItemGroup>
 </Project>

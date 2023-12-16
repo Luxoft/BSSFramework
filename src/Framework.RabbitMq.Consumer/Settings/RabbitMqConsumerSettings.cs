@@ -1,3 +1,5 @@
+using Framework.RabbitMq.Consumer.Enums;
+
 namespace Framework.RabbitMq.Consumer.Settings;
 
 public class RabbitMqConsumerSettings
@@ -15,4 +17,16 @@ public class RabbitMqConsumerSettings
     public string Queue { get; set; } = default!;
 
     public string[] RoutingKeys { get; set; } = Array.Empty<string>();
+
+    public ConsumerMode Mode { get; set; } = ConsumerMode.MultipleActiveConsumers;
+
+    /// <summary>
+    /// for single active consumer mode - how often should consumer try to become active
+    /// </summary>
+    public int InactiveConsumerSleepMilliseconds { get; set; } = 60 * 1000;
+
+    /// <summary>
+    /// for single active consumer mode - how often should consumer update its active status
+    /// </summary>
+    public int ActiveConsumerRefreshMilliseconds { get; set; } = 3 * 60 * 1000;
 }

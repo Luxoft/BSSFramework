@@ -47,7 +47,7 @@ internal record MessageReader(
         Policy
             .HandleResult<bool>(x => !x)
             .WaitAndRetryForeverAsync(
-                (_, _) => TimeSpan.Zero,
+                (_, _) => TimeSpan.FromMilliseconds(this._settings.RejectMessageDelayMilliseconds),
                 (_, retryCount, _, ctx) =>
                 {
                     if (!ctx.Contains(RetryCountKey))
@@ -78,22 +78,20 @@ internal record MessageReader(
                                      ? (int?)retryContext[RetryCountKey]
                                      : null;
 
-                if (retryCount != null && retryCount % this._settings.FailedMessageRetryCount == 0)
+                if (retryCount == null
+                    || retryCount % this._settings.FailedMessageRetryCount != 0
+                    || this.DeadLetterProcessor.ProcessDeadLetter(channel, result, ex) != DeadLetterDecision.RemoveFromQueue)
                 {
-                    if (this.DeadLetterProcessor.ProcessDeadLetter(channel, result, ex) == DeadLetterDecision.RemoveFromQueue)
-                    {
-                        channel.BasicAck(result.DeliveryTag, false);
-                        return true;
-                    }
+                    return false;
                 }
 
-                await Delay(this._settings.RejectMessageDelayMilliseconds, token);
-                return false;
+                channel.BasicAck(result.DeliveryTag, false);
+                return true;
+
             }
             catch (Exception innerEx)
             {
                 this.Logger.LogError(innerEx, "Failed to retry consume on {RoutingKey}", result.RoutingKey);
-                await Delay(this._settings.RejectMessageDelayMilliseconds, token);
                 return false;
             }
         }

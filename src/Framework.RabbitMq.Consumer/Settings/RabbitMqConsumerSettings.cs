@@ -8,7 +8,7 @@ public class RabbitMqConsumerSettings
 
     public int RejectMessageDelayMilliseconds { get; set; } = 3000;
 
-    public ulong FailedMessageRetryCount { get; set; } = 3;
+    public int FailedMessageRetryCount { get; set; } = 3;
 
     public int? ConnectionAttemptCount { get; set; }
 
@@ -17,6 +17,8 @@ public class RabbitMqConsumerSettings
     public string Queue { get; set; } = default!;
 
     public string[] RoutingKeys { get; set; } = Array.Empty<string>();
+
+    public string DeadLetterExchange { get; set; } = "deadletters";
 
     public ConsumerMode Mode { get; set; } = ConsumerMode.MultipleActiveConsumers;
 

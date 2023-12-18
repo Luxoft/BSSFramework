@@ -32,6 +32,7 @@ public static class DependencyInjection
         return services
             .Configure<RabbitMqConsumerSettings>(settingsSection)
             .AddSingleton<IRabbitMqMessageReader, MessageReader>()
+            .AddSingleton<IDeadLetterProcessor, DeadLetterProcessor>()
             .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
             .AddSingleton<IRabbitMqConsumerInitializer, ConsumerInitializer>()
             .AddHostedService<RabbitMqBackgroundService>();

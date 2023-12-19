@@ -49,7 +49,7 @@ internal class RabbitMqBackgroundService(
         this.ConsumerInitializer.Initialize(this._channel);
 
         this.Logger.LogInformation(
-            "Listening RabbitMQ events has started on {Address}. Queue name is {Queue}, Consumer mode is {Mode}",
+            "Listening RabbitMQ events has started on {Address}. Queue name is {Queue}. Consumer mode is {Mode}",
             this._serverSettings.Address,
             this._consumerSettings.Queue,
             this._consumerSettings.Mode);

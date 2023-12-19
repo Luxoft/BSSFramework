@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using Polly;
-using Polly.Retry;
 
 using RabbitMQ.Client;
 
@@ -29,7 +28,7 @@ internal record MessageReader(
         var result = channel.BasicGet(this._settings.Queue, false);
         if (result is null)
         {
-            await Delay(this._settings.ReceiveMessageDelayMilliseconds, token);
+            await Task.Delay(TimeSpan.FromMilliseconds(this._settings.ReceiveMessageDelayMilliseconds), token);
             return;
         }
 
@@ -37,30 +36,20 @@ internal record MessageReader(
     }
 
     private async Task ProcessAsync(BasicGetResult result, IModel channel, CancellationToken token) =>
-        await this.GetRetryPolicy()
-                  .ExecuteAsync(
-                      (context, innerToken) => this.ProcessAsyncUnsafe(result, channel, context, innerToken),
-                      new Context(),
-                      token);
+        await Policy
+              .HandleResult<bool>(x => !x)
+              .WaitAndRetryForeverAsync(
+                  (_, _) => TimeSpan.FromMilliseconds(this._settings.RejectMessageDelayMilliseconds),
+                  (_, retryCount, _, ctx) =>
+                  {
+                      if (!ctx.Contains(RetryCountKey))
+                          ctx.Add(RetryCountKey, retryCount);
+                      else
+                          ctx[RetryCountKey] = retryCount;
+                  })
+              .ExecuteAsync((ctx, innerToken) => this.ProcessAsync(result, channel, ctx, innerToken), new Context(), token);
 
-    private AsyncRetryPolicy<bool> GetRetryPolicy() =>
-        Policy
-            .HandleResult<bool>(x => !x)
-            .WaitAndRetryForeverAsync(
-                (_, _) => TimeSpan.FromMilliseconds(this._settings.RejectMessageDelayMilliseconds),
-                (_, retryCount, _, ctx) =>
-                {
-                    if (!ctx.Contains(RetryCountKey))
-                    {
-                        ctx.Add(RetryCountKey, retryCount);
-                    }
-                    else
-                    {
-                        ctx[RetryCountKey] = retryCount;
-                    }
-                });
-
-    private async Task<bool> ProcessAsyncUnsafe(BasicGetResult result, IModel channel, Context retryContext, CancellationToken token)
+    private async Task<bool> ProcessAsync(BasicGetResult result, IModel channel, Context retryContext, CancellationToken token)
     {
         try
         {
@@ -72,30 +61,28 @@ internal record MessageReader(
         }
         catch (Exception ex)
         {
-            try
-            {
-                var retryCount = retryContext.Contains(RetryCountKey)
-                                     ? (int?)retryContext[RetryCountKey]
-                                     : null;
-
-                if (retryCount == null
-                    || retryCount % this._settings.FailedMessageRetryCount != 0
-                    || this.DeadLetterProcessor.ProcessDeadLetter(channel, result, ex) != DeadLetterDecision.RemoveFromQueue)
-                {
-                    return false;
-                }
-
-                channel.BasicAck(result.DeliveryTag, false);
-                return true;
-
-            }
-            catch (Exception innerEx)
-            {
-                this.Logger.LogError(innerEx, "Failed to retry consume on {RoutingKey}", result.RoutingKey);
-                return false;
-            }
+            return await this.RetryAsync(result, channel, retryContext, ex);
         }
     }
 
-    private static Task Delay(int value, CancellationToken token) => Task.Delay(TimeSpan.FromMilliseconds(value), token);
+    private async Task<bool> RetryAsync(BasicGetResult result, IModel channel, Context retryContext, Exception ex)
+    {
+        try
+        {
+            var retryCount = retryContext.Contains(RetryCountKey) ? (int?)retryContext[RetryCountKey] : null;
+            if (retryCount == null || retryCount % this._settings.FailedMessageRetryCount != 0)
+                return false;
+
+            var decision = await this.DeadLetterProcessor.ProcessAsync(channel, result, ex);
+            if (decision == DeadLetterDecision.Requeue) return false;
+
+            channel.BasicAck(result.DeliveryTag, false);
+            return true;
+        }
+        catch (Exception innerEx)
+        {
+            this.Logger.LogError(innerEx, "Failed to retry process message with routing key {RoutingKey}", result.RoutingKey);
+            return false;
+        }
+    }
 }

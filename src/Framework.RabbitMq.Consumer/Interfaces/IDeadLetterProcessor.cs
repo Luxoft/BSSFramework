@@ -6,8 +6,5 @@ namespace Framework.RabbitMq.Consumer.Interfaces;
 
 public interface IDeadLetterProcessor
 {
-    DeadLetterDecision ProcessDeadLetter(
-        IModel channel,
-        BasicGetResult message,
-        Exception exception);
+    Task<DeadLetterDecision> ProcessAsync(IModel channel, BasicGetResult message, Exception exception);
 }

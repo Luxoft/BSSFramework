@@ -9,16 +9,12 @@ using RabbitMQ.Client;
 
 namespace Framework.RabbitMq.Consumer.Services;
 
-internal record DeadLetterProcessor(
-    ILogger<DeadLetterProcessor> Logger,
-    IOptions<RabbitMqConsumerSettings> ConsumerOptions) : IDeadLetterProcessor
+internal record DeadLetterProcessor(ILogger<DeadLetterProcessor> Logger, IOptions<RabbitMqConsumerSettings> ConsumerOptions)
+    : IDeadLetterProcessor
 {
     private readonly RabbitMqConsumerSettings _settings = ConsumerOptions.Value;
 
-    public DeadLetterDecision ProcessDeadLetter(
-        IModel channel,
-        BasicGetResult message,
-        Exception exception)
+    public Task<DeadLetterDecision> ProcessAsync(IModel channel, BasicGetResult message, Exception exception)
     {
         try
         {
@@ -33,12 +29,12 @@ internal record DeadLetterProcessor(
                                  };
 
             channel.BasicPublish(this._settings.DeadLetterExchange, string.Empty, properties, message.Body.Span.ToArray());
-            return DeadLetterDecision.RemoveFromQueue;
+            return Task.FromResult(DeadLetterDecision.RemoveFromQueue);
         }
         catch (Exception e)
         {
             this.Logger.LogError(e, "Failed to process dead letter with routing key '{RoutingKey}'", message.RoutingKey);
-            return DeadLetterDecision.Requeue;
+            return Task.FromResult(DeadLetterDecision.Requeue);
         }
     }
 }

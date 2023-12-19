@@ -23,12 +23,12 @@ public class RabbitMqConsumerSettings
     public ConsumerMode Mode { get; set; } = ConsumerMode.MultipleActiveConsumers;
 
     /// <summary>
-    /// for single active consumer mode - how often should consumer try to become active
+    ///     for single active consumer mode - how often should consumer try to become active
     /// </summary>
     public int InactiveConsumerSleepMilliseconds { get; set; } = 60 * 1000;
 
     /// <summary>
-    /// for single active consumer mode - how often should consumer update its active status
+    ///     for single active consumer mode - how often should consumer update its active status
     /// </summary>
     public int ActiveConsumerRefreshMilliseconds { get; set; } = 3 * 60 * 1000;
 }

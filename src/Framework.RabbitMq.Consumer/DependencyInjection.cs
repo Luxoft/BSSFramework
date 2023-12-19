@@ -19,22 +19,17 @@ public static class DependencyInjection
         settingsSection.Bind(settings);
 
         if (settings.Mode == ConsumerMode.MultipleActiveConsumers)
-        {
-            services
-                .AddSingleton<IRabbitMqConsumer, ConcurrentConsumer>();
-        }
+            services.AddSingleton<IRabbitMqConsumer, ConcurrentConsumer>();
         else
-        {
-            services
-                .AddSingleton<IRabbitMqConsumer, SynchronizedConsumer>();
-        }
+            services.AddSingleton<IRabbitMqConsumer, SynchronizedConsumer>();
 
         return services
-            .Configure<RabbitMqConsumerSettings>(settingsSection)
-            .AddSingleton<IRabbitMqMessageReader, MessageReader>()
-            .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
-            .AddSingleton<IRabbitMqConsumerInitializer, ConsumerInitializer>()
-            .AddHostedService<RabbitMqBackgroundService>();
+               .Configure<RabbitMqConsumerSettings>(settingsSection)
+               .AddSingleton<IRabbitMqMessageReader, MessageReader>()
+               .AddSingleton<IDeadLetterProcessor, DeadLetterProcessor>()
+               .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
+               .AddSingleton<IRabbitMqConsumerInitializer, ConsumerInitializer>()
+               .AddHostedService<RabbitMqBackgroundService>();
     }
 
     public static IServiceCollection AddRabbitMqSqlServerConsumerLock(this IServiceCollection services, string connectionString) =>

@@ -7,12 +7,15 @@ using Framework.RabbitMq.Consumer.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+using Polly;
+
 using RabbitMQ.Client;
 
 namespace Framework.RabbitMq.Consumer.Services;
 
 internal record MessageReader(
     IRabbitMqMessageProcessor MessageProcessor,
+    IDeadLetterProcessor DeadLetterProcessor,
     ILogger<MessageReader> Logger,
     IOptions<RabbitMqConsumerSettings> ConsumerOptions) : IRabbitMqMessageReader
 {
@@ -27,36 +30,61 @@ internal record MessageReader(
             return;
         }
 
-        await this.ProcessAsync(result, channel!, token);
+        await this.ProcessAsync(result, channel, token);
     }
 
-    private async Task ProcessAsync(BasicGetResult result, IModel channel, CancellationToken token)
+    private async Task ProcessAsync(BasicGetResult message, IModel channel, CancellationToken token)
+    {
+        var result = await Policy
+                           .Handle<Exception>()
+                           .WaitAndRetryAsync(
+                               this._settings.FailedMessageRetryCount,
+                               _ => TimeSpan.FromMilliseconds(this._settings.RejectMessageDelayMilliseconds))
+                           .ExecuteAndCaptureAsync(
+                               innerToken => this.MessageProcessor.ProcessAsync(
+                                   message.BasicProperties,
+                                   message.RoutingKey,
+                                   GetMessageBody(message),
+                                   innerToken),
+                               token);
+
+        await this.HandleProcessResultAsync(message, channel, result, token);
+    }
+
+    private static string GetMessageBody(BasicGetResult message) => Encoding.UTF8.GetString(message.Body.Span);
+
+    private async Task HandleProcessResultAsync(BasicGetResult message, IModel channel, PolicyResult result, CancellationToken token)
     {
         try
         {
-            var message = Encoding.UTF8.GetString(result.Body.Span);
-            if (result.Redelivered && result.DeliveryTag > this._settings.FailedMessageRetryCount)
+            if (result.Outcome == OutcomeType.Successful)
             {
-                var behaviour = await this.MessageProcessor.ProcessDeadLetterAsync(
-                                    result.BasicProperties,
-                                    result.RoutingKey,
-                                    message,
-                                    token);
-                if (behaviour == DeadLetterBehaviour.Skip)
+                channel.BasicAck(message.DeliveryTag, false);
+            }
+            else
+            {
+                var deadLetteringResult = await this.DeadLetterProcessor.ProcessAsync(
+                                              GetMessageBody(message),
+                                              message.RoutingKey,
+                                              result.FinalException,
+                                              token);
+                if (deadLetteringResult == DeadLetterDecision.RemoveFromQueue)
                 {
-                    channel.BasicAck(result.DeliveryTag, false);
-                    return;
+                    channel.BasicAck(message.DeliveryTag, false);
+                }
+                else
+                {
+                    channel.BasicNack(message.DeliveryTag, false, true);
                 }
             }
-
-            await this.MessageProcessor.ProcessAsync(result.BasicProperties, result.RoutingKey, message, token);
-            channel.BasicAck(result.DeliveryTag, false);
         }
         catch (Exception ex)
         {
-            this.Logger.LogError(ex, "There was some problem with processing message. Routing key:'{RoutingKey}'", result.RoutingKey);
-            channel.BasicNack(result.DeliveryTag, false, true);
-            await Delay(this._settings.RejectMessageDelayMilliseconds, token);
+            this.Logger.LogError(ex, "Failed to deadLetter message with routing key {RoutingKey}", message.RoutingKey);
+
+            await Delay(this._settings.ReceiveMessageDelayMilliseconds, token);
+
+            channel.BasicNack(message.DeliveryTag, false, true);
         }
     }
 

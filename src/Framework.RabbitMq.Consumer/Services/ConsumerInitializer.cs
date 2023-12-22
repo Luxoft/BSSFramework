@@ -7,7 +7,7 @@ using RabbitMQ.Client;
 
 namespace Framework.RabbitMq.Consumer.Services;
 
-internal record ConsumerInitializer(IOptions<RabbitMqConsumerSettings> Options) : IRabbitMqConsumerInitializer
+internal record ConsumerInitializer(IOptions<RabbitMqConsumerSettings> Options) : IRabbitMqInitializer
 {
     public void Initialize(IModel model)
     {

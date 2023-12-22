@@ -39,7 +39,7 @@ internal record DeadLetterProcessor(
                                  {
                                      { "routingKey", routingKey },
                                      { "queue", this._settings.Queue },
-                                     { "error", exception?.Message ?? "unknown exception" },
+                                     { "error", exception?.GetBaseException().Message ?? "unknown exception" },
                                      { "stacktrace", exception?.StackTrace ?? "missing stacktrace" }
                                  };
 

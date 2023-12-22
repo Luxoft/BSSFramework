@@ -28,7 +28,7 @@ public static class DependencyInjection
                .AddSingleton<IRabbitMqMessageReader, MessageReader>()
                .AddSingleton<IDeadLetterProcessor, DeadLetterProcessor>()
                .AddSingleton<IRabbitMqMessageProcessor, TMessageProcessor>()
-               .AddSingleton<IRabbitMqConsumerInitializer, ConsumerInitializer>()
+               .AddSingleton<IRabbitMqInitializer, ConsumerInitializer>()
                .AddHostedService<RabbitMqBackgroundService>();
     }
 

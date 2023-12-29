@@ -58,17 +58,15 @@ public class OptimizeBooleanLogicVisitor : ExpressionVisitor
         var right = this.Visit(node.Right);
         var rightValue = right.GetPureDeepMemberConstExpression();
 
-        object methodResult = null;
-
         if (leftValue != null && rightValue != null)
         {
-            methodResult = node.Method?.Invoke(null, new[] { leftValue.Value, rightValue.Value })
+            var methodResult = node.Method?.Invoke(null, new[] { leftValue.Value, rightValue.Value })
                            ?? node.NodeType.GetBinaryMethod()?.Invoke(leftValue.Value, rightValue.Value);
-        }
 
-        if (methodResult != null)
-        {
-            return Expression.Constant(methodResult);
+            if (methodResult != null)
+            {
+                return Expression.Constant(methodResult);
+            }
         }
 
         if (node.Method == null)

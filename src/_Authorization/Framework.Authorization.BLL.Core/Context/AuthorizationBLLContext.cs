@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
@@ -39,7 +37,7 @@ public partial class AuthorizationBLLContext
             IAuthorizationValidator validator,
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            IDateTimeService dateTimeService,
+            TimeProvider timeProvider,
             IConfigurationBLLContext configuration,
             IRootSecurityService<PersistentDomainObjectBase> securityService,
             IAuthorizationBLLFactoryContainer logics,
@@ -49,7 +47,7 @@ public partial class AuthorizationBLLContext
             IAuthorizationSystem<Guid> authorizationSystem,
             IRunAsManager runAsManager,
             IAvailablePermissionSource availablePermissionSource,
-            ISecurityOperationParser securityOperationParser,
+            ISecurityOperationParser<Guid> securityOperationParser,
             IAvailableSecurityOperationSource availableSecurityOperationSource,
             IActualPrincipalSource actualPrincipalSource)
             : base(
@@ -62,7 +60,7 @@ public partial class AuthorizationBLLContext
                    hierarchicalObjectExpanderFactory,
                    fetchService)
     {
-        this.DateTimeService = dateTimeService;
+        this.TimeProvider = timeProvider;
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
         this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
         this.AvailablePermissionSource = availablePermissionSource;
@@ -108,7 +106,7 @@ public partial class AuthorizationBLLContext
 
     public IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
 
-    public ISecurityOperationParser SecurityOperationParser { get; }
+    public ISecurityOperationParser<Guid> SecurityOperationParser { get; }
 
     public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
 
@@ -121,7 +119,7 @@ public partial class AuthorizationBLLContext
     public Principal CurrentPrincipal => this.lazyCurrentPrincipal.Value;
 
 
-    public IDateTimeService DateTimeService { get; }
+    public TimeProvider TimeProvider { get; }
 
 
     public EntityType GetEntityType(Type type)

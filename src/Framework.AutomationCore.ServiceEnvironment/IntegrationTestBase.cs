@@ -6,7 +6,6 @@ using Framework.Core;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.Notification.DTO;
-using Framework.Persistent;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -49,7 +48,7 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
     protected virtual void ResetServices()
     {
         this.RootServiceProvider.GetService<IIntegrationTestUserAuthenticationService>()?.Reset();
-        this.RootServiceProvider.GetService<IIntegrationTestDateTimeService>()?.Reset();
+        this.RootServiceProvider.GetService<IntegrationTestTimeProvider>()?.Reset();
     }
 
     protected virtual void DropDatabaseAfterTest()

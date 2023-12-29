@@ -15,7 +15,6 @@ public class TryProcessDbSessionMiddleware
     public async Task Invoke(HttpContext context, IDBSessionManager dbSessionManager, IWebApiDBSessionModeResolver sessionModeResolver)
     {
         await dbSessionManager.EvaluateAsync(
-            context.RequestAborted,
             async () =>
             {
                 var sessionMode = sessionModeResolver.GetSessionMode();
@@ -38,6 +37,7 @@ public class TryProcessDbSessionMiddleware
                 }
 
                 await this.next(context);
-            });
+            },
+            context.RequestAborted);
     }
 }

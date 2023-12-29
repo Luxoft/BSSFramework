@@ -66,7 +66,7 @@ public class ReadOnlyNHibSession : NHibSessionBase
         }
     }
 
-    public override Task FlushAsync(CancellationToken cancellationToken = default)
+    public override async Task FlushAsync(CancellationToken cancellationToken = default)
     {
         throw new InvalidOperationException();
     }

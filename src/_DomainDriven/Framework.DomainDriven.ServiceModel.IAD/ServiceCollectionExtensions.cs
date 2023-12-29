@@ -4,7 +4,9 @@ using Framework.Authorization.Environment;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.DomainServices;
 using Framework.Authorization.SecuritySystem.ExternalSource;
-using Framework.Authorization.SecuritySystem.OperationInitializer;
+
+using Framework.Authorization.SecuritySystem.Initialize;
+using Framework.Authorization.SecuritySystem.PermissionOptimization;
 using Framework.Configuration;
 using Framework.Configuration.Domain;
 using Framework.Core.Services;
@@ -13,6 +15,7 @@ using Framework.DomainDriven.ImpersonateService;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
+using Framework.FinancialYear;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryableSource;
@@ -31,7 +34,10 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>)); //TODO: add unsecurity di key "DisabledSecurity" after update to NET8.0
+        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Disabled, typeof(Repository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.View, typeof(ViewRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Edit, typeof(EditRepository<>));
+
         services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
         services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
@@ -50,7 +56,10 @@ public static class ServiceCollectionExtensions
         services.RegisterAuthorizationSecurity();
         services.RegisterConfigurationSecurity();
 
-        services.AddSingleton<IDateTimeService>(DateTimeService.Default);
+        services.AddSingleton(TimeProvider.System);
+        services.AddSingleton<IFinancialYearCalculator, FinancialYearCalculator>();
+        services.AddSingleton<FinancialYearServiceSettings>();
+        services.AddSingleton<IFinancialYearService, FinancialYearService>();
 
         return services;
     }
@@ -118,7 +127,12 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
 
+                       .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
+
+                       .AddSingleton<InitializeSettings>()
+                       .AddScoped<IAuthorizationEntityTypeInitializer, AuthorizationEntityTypeInitializer>()
                        .AddScoped<IAuthorizationOperationInitializer, AuthorizationOperationInitializer>()
+                       .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
 

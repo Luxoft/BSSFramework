@@ -2,7 +2,7 @@
 
 public interface ISecurityContextInfoService
 {
-    SecurityContextInfo GetSecurityContextInfo(Type type);
+    ISecurityContextInfo GetSecurityContextInfo(Type type);
 
-    SecurityContextInfo GetSecurityContextInfo(string name);
+    ISecurityContextInfo GetSecurityContextInfo(string name);
 }

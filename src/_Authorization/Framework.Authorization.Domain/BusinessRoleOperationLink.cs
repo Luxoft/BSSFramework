@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.Tracking.LegacyValidators;
+﻿using Framework.DomainDriven.Serialization;
+using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Restriction;
 
@@ -58,10 +59,11 @@ public class BusinessRoleOperationLink : AuditPersistentDomainObjectBase, IDetai
     /// Признак "Is Denormalized" позволяет ускорить поиск по дереву, путем добавления изыточностых данных
     /// Данные в Sub Business Roles нормализированы, данные в Business Roles - денормализизованы
     /// </remarks>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual bool IsDenormalized
     {
         get { return this.isDenormalized; }
-        internal protected set { this.isDenormalized = value; }
+        set { this.isDenormalized = value; }
     }
 
     BusinessRole IDetail<BusinessRole>.Master

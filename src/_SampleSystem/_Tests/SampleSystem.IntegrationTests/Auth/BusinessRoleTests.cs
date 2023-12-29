@@ -6,6 +6,7 @@ using Framework.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests.Auth;
 
@@ -13,7 +14,8 @@ namespace SampleSystem.IntegrationTests.Auth;
 public class BusinessRoleTests : TestBase
 {
     private const string NewDescription = "test_description";
-    private const string RoleName = "SE Manager";
+
+    private static readonly string RoleName = SampleSystemSecurityRole.SeManager.Name;
 
     [TestMethod]
     public void SaveBusinessRole_CheckOperationAddition()
@@ -52,7 +54,7 @@ public class BusinessRoleTests : TestBase
         // Arrange
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
-        var subRole = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification"));
+        var subRole = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name));
 
         var oprManager = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
         oprManager.SubBusinessRoleLinks.Add(new SubBusinessRoleLinkRichDTO
@@ -164,7 +166,7 @@ public class BusinessRoleTests : TestBase
     public void SaveBusinessRole_CheckSubBusinessRoleRemoval()
     {
         // Arrange
-        var subRole = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification"));
+        var subRole = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name));
 
         var oprManager = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
         oprManager.SubBusinessRoleLinks.Add(new SubBusinessRoleLinkRichDTO
@@ -194,7 +196,7 @@ public class BusinessRoleTests : TestBase
     public void RemoveBusinessRoleWithOperations_CheckException()
     {
         // Arrange
-        var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName("SecretariatNotification")).ToStrict();
+        var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).ToStrict();
         role.BusinessRoleOperationLinks.Add(new BusinessRoleOperationLinkStrictDTO
                                             {
                                                 Operation = new OperationIdentityDTO(SampleSystemSecurityOperation.EmployeeView.Id)
@@ -206,6 +208,6 @@ public class BusinessRoleTests : TestBase
         Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemoveBusinessRole(role.Identity));
 
         // Assert
-        call.Should().Throw<Exception>().WithMessage("Removing business role \"SecretariatNotification\" must be empty");
+        call.Should().Throw<Exception>().WithMessage($"Removing business role \"{SampleSystemSecurityRole.SecretariatNotification.Name}\" must be empty");
     }
 }

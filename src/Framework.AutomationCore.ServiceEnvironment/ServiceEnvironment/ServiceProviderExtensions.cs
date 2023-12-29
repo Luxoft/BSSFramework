@@ -4,7 +4,6 @@ using Automation.ServiceEnvironment.Services;
 
 using Framework.Core.Services;
 using Framework.DependencyInjection;
-using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 
@@ -45,8 +44,8 @@ public static class ServiceProviderExtensions
                 .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
-                .AddSingleton<IIntegrationTestDateTimeService, IntegrationTestDateTimeService>()
-                .ReplaceSingletonFrom<IDateTimeService, IIntegrationTestDateTimeService>()
+                .AddSingleton<IntegrationTestTimeProvider>()
+                .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
                 .AddScoped<TestWebApiCurrentMethodResolver>()
                 .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()

@@ -14,12 +14,9 @@ namespace Framework.Configuration.BLL
     public partial class CodeFirstSubscriptionBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.CodeFirstSubscription, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLL
     {
         
-		partial void Initialize();
-        
         public CodeFirstSubscriptionBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -35,12 +32,9 @@ namespace Framework.Configuration.BLL
     public partial class DomainObjectEventBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectEvent, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IDomainObjectEventBLL
     {
         
-		partial void Initialize();
-        
         public DomainObjectEventBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectEvent> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -56,12 +50,9 @@ namespace Framework.Configuration.BLL
     public partial class DomainObjectModificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectModification, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IDomainObjectModificationBLL
     {
         
-		partial void Initialize();
-        
         public DomainObjectModificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectModification> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -77,12 +68,9 @@ namespace Framework.Configuration.BLL
     public partial class DomainObjectNotificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectNotification, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IDomainObjectNotificationBLL
     {
         
-		partial void Initialize();
-        
         public DomainObjectNotificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectNotification> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -98,12 +86,9 @@ namespace Framework.Configuration.BLL
     public partial class DomainTypeBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainType, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IDomainTypeBLL
     {
         
-		partial void Initialize();
-        
         public DomainTypeBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainType> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -119,12 +104,9 @@ namespace Framework.Configuration.BLL
     public partial class ExceptionMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.ExceptionMessage, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IExceptionMessageBLL
     {
         
-		partial void Initialize();
-        
         public ExceptionMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.ExceptionMessage> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -140,12 +122,9 @@ namespace Framework.Configuration.BLL
     public partial class NamedLockBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.NamedLock, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.INamedLockBLL
     {
         
-		partial void Initialize();
-        
         public NamedLockBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.NamedLock> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -161,12 +140,9 @@ namespace Framework.Configuration.BLL
     public partial class SentMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SentMessage, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISentMessageBLL
     {
         
-		partial void Initialize();
-        
         public SentMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SentMessage> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -182,12 +158,9 @@ namespace Framework.Configuration.BLL
     public partial class SequenceBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Sequence, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISequenceBLL
     {
         
-		partial void Initialize();
-        
         public SequenceBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Sequence> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -203,12 +176,9 @@ namespace Framework.Configuration.BLL
     public partial class SystemConstantBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SystemConstant, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISystemConstantBLL
     {
         
-		partial void Initialize();
-        
         public SystemConstantBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SystemConstant> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     
@@ -224,12 +194,9 @@ namespace Framework.Configuration.BLL
     public partial class TargetSystemBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.TargetSystem, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ITargetSystemBLL
     {
         
-		partial void Initialize();
-        
         public TargetSystemBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.TargetSystem> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
-            this.Initialize();
         }
     }
     

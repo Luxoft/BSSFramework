@@ -55,12 +55,12 @@ public class AutomationCoreTestClassRunner : XunitTestClassRunner
         }
     }
 
-    protected override Task<RunSummary> RunTestMethodAsync(
+    protected override async Task<RunSummary> RunTestMethodAsync(
         ITestMethod testMethod,
         IReflectionMethodInfo method,
         IEnumerable<IXunitTestCase> testCases,
         object[] constructorArguments)
-        => new AutomationCoreTestMethodRunner(
+        => await new AutomationCoreTestMethodRunner(
             testMethod,
             this.Class,
             method,

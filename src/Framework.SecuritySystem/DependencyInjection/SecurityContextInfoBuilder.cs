@@ -21,8 +21,9 @@ public class SecurityContextInfoBuilder<TIdent> : ISecurityContextInfoBuilder<TI
                     ident,
                     customName ?? typeof(TSecurityContext).Name);
 
-                services.AddSingleton((SecurityContextInfo)securityContextInfo);
                 services.AddSingleton(securityContextInfo);
+                services.AddSingleton<ISecurityContextInfo>(securityContextInfo);
+                services.AddSingleton<ISecurityContextInfo<TIdent>>(securityContextInfo);
 
                 services.AddSingleton<ISecurityContextDisplayService<TSecurityContext>>(
                     new SecurityContextDisplayService<TSecurityContext>(

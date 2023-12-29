@@ -1,6 +1,5 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
@@ -123,7 +122,7 @@ public partial class PermissionBLL
                                               $"Permission with Approving Role can't be changed, because selected period \"{permission.Period}\" not subset of \"{prevVersion.Period}\"");
             }
 
-            if (this.Context.DateTimeService.IsActivePeriod(permission))
+            if (this.Context.TimeProvider.IsActivePeriod(permission))
             {
                 var invalidEntityGroups = this.GetInvalidDelegatedPermissionSecurities(permission, prevVersion).ToList();
 
@@ -178,7 +177,7 @@ public partial class PermissionBLL
             }
         }
 
-        if (mode.HasFlag(ValidatePermissonDelegateMode.SecurityObjects) && this.Context.DateTimeService.IsActivePeriod(permission))
+        if (mode.HasFlag(ValidatePermissonDelegateMode.SecurityObjects) && this.Context.TimeProvider.IsActivePeriod(permission))
         {
             var invalidEntityGroups = this.GetInvalidDelegatedPermissionSecurities(permission).ToList();
 
@@ -335,20 +334,10 @@ public partial class PermissionBLL
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
-        var newPeriod = permission.Period.StartDate.ToPeriod(this.Context.DateTimeService.Today.SubtractDay());
+        var newPeriod = permission.Period.StartDate.ToPeriod(this.Context.TimeProvider.GetToday().SubtractDay());
 
         permission.GetAllChildren().Foreach(p => p.Period = newPeriod);
 
         this.Save(permission);
-    }
-}
-public static class DateTimeServiceExtensions
-{
-    public static bool IsActivePeriod(this IDateTimeService dateTimeService, IPeriodObject periodObject)
-    {
-        if (periodObject == null) throw new ArgumentNullException(nameof(periodObject));
-        if (dateTimeService == null) throw new ArgumentNullException(nameof(dateTimeService));
-
-        return periodObject.Period.Contains(dateTimeService.Today);
     }
 }

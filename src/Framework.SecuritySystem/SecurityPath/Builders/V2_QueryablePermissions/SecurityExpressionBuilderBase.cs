@@ -295,30 +295,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                     }
                 }
 
-                case ManySecurityPathMode.All:
-                {
-                    if (this.Path.SecurityPathQ != null)
-                    {
-                        return (domainObject, permission) =>
-
-                                       !getIdents.Eval(permission).Any()
-
-                                       || this.Path.SecurityPathQ.Eval(domainObject).All(item => getIdents.Eval(permission).Contains(item.Id));
-                    }
-                    else if (this.Path.SecurityPath != null)
-                    {
-                        return (domainObject, permission) =>
-
-                                       !getIdents.Eval(permission).Any()
-
-                                       || this.Path.SecurityPath.Eval(domainObject).All(item => getIdents.Eval(permission).Contains(item.Id));
-                    }
-                    else
-                    {
-                        throw new Exception("Invalid path");
-                    }
-                }
-
                 default:
 
                     throw new ArgumentOutOfRangeException("this.Path.Mode");
@@ -338,26 +314,11 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
     public class NestedManySecurityExpressionBuilder<TNestedObject> : SecurityPathExpressionBuilderBase<SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject>>
             where TNestedObject : class, IIdentityObject<TIdent>
     {
+
         private readonly SecurityExpressionBuilderBase<TNestedObject, TIdent> _nestedBuilder;
 
-        private static readonly string getAccessortFilterMethodInfoName;
-        private static readonly MethodInfo buildOrMethod;
-        private static readonly MethodInfo buildAndMethod;
-
-        [SuppressMessage("SonarQube", "S2743")]
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
 
-        private readonly Lazy<Expression<Func<TDomainObject, HierarchicalExpandType, Expression<Func<IPermission<TIdent>, bool>>>>> _getAccessableFilterLazy;
-
-
-
-        static NestedManySecurityExpressionBuilder()
-        {
-            buildOrMethod = ((Func<IEnumerable<Expression<Func<IPermission<TIdent>, bool>>>, Expression<Func<IPermission<TIdent>, bool>>>)(Framework.Core.ExpressionExtensions.BuildOr)).Method;
-            buildAndMethod = ((Func<IEnumerable<Expression<Func<IPermission<TIdent>, bool>>>, Expression<Func<IPermission<TIdent>, bool>>>)(Framework.Core.ExpressionExtensions.BuildAnd)).Method;
-
-            getAccessortFilterMethodInfoName = "GetAccessorsFilter";
-        }
 
         public NestedManySecurityExpressionBuilder(
                 SecurityExpressionBuilderFactory<TIdent> factory,
@@ -365,7 +326,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                 : base(factory, path)
         {
             this._nestedBuilder = (SecurityExpressionBuilderBase<TNestedObject, TIdent>)this.Factory.CreateBuilder(this.Path.NestedSecurityPath);
-            this._getAccessableFilterLazy = new Lazy<Expression<Func<TDomainObject, HierarchicalExpandType, Expression<Func<IPermission<TIdent>, bool>>>>>(() => this.CreateAccessorsFilterExpression(), true);
         }
 
         public override Expression<Func<TDomainObject, IPermission<TIdent>, bool>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
@@ -384,10 +344,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
                     return (domainObject, permission) => this.Path.NestedObjectsPath.Eval(domainObject).Any(nestedObject => baseFilter.Eval(nestedObject, permission));
 
-                case ManySecurityPathMode.All:
-
-                    return (domainObject, permission) => this.Path.NestedObjectsPath.Eval(domainObject).All(nestedObject => baseFilter.Eval(nestedObject, permission));
-
                 default:
 
                     throw new ArgumentOutOfRangeException("this.Path.Mode");
@@ -401,61 +357,8 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                 throw new ArgumentNullException(nameof(domainObject));
             }
 
-            var result = this._getAccessableFilterLazy.Value;
-
-            return result.Compile(LambdaCompileCache)(domainObject, expandType);
-        }
-
-        private Expression<Func<TDomainObject, HierarchicalExpandType, Expression<Func<IPermission<TIdent>, bool>>>> CreateAccessorsFilterExpression()
-        {
-            var nestedObjectParameter = Expression.Parameter(typeof(TNestedObject));
-            var expandTypeParameter = Expression.Parameter(typeof(HierarchicalExpandType));
-            var builderParameter = Expression.Constant(
-                                                       this._nestedBuilder,
-                                                       typeof(SecurityExpressionBuilderBase<TNestedObject, TIdent>));
-
-            var getAccessorFilters = Expression.Call(
-                                                     builderParameter,
-                                                     getAccessortFilterMethodInfoName,
-                                                     Type.EmptyTypes,
-                                                     nestedObjectParameter,
-                                                     expandTypeParameter);
-
-            var getAccessorFiltersExpression =
-                    Expression.Lambda<Func<TNestedObject, Expression<Func<IPermission<TIdent>, bool>>>>(
-                     getAccessorFilters,
-                     nestedObjectParameter);
-
-            var selectAccessorExpression = Expression.Call(
-                                                           typeof(Enumerable),
-                                                           "Select",
-                                                           new[] { typeof(TNestedObject), typeof(Expression<Func<IPermission<TIdent>, bool>>) },
-                                                           this.Path.NestedObjectsPath.Body,
-                                                           getAccessorFiltersExpression);
-
-            MethodInfo buildMethodInfo;
-
-            switch (this.Path.Mode)
-            {
-                case ManySecurityPathMode.Any:
-                case ManySecurityPathMode.AnyStrictly:
-                    buildMethodInfo = buildOrMethod;
-                    break;
-                case ManySecurityPathMode.All:
-                    buildMethodInfo = buildAndMethod;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(this.Path.Mode.ToString());
-            }
-
-            var buildOrExpression = Expression.Call(buildMethodInfo, selectAccessorExpression);
-
-            var result =
-                    Expression.Lambda<Func<TDomainObject, HierarchicalExpandType, Expression<Func<IPermission<TIdent>, bool>>>>(
-                     buildOrExpression,
-                     this.Path.NestedObjectsPath.Parameters.First(),
-                     expandTypeParameter);
-            return result;
+            return this.Path.NestedObjectsPath.Eval(domainObject, LambdaCompileCache)
+                       .BuildOr(item => this._nestedBuilder.GetAccessorsFilter(item, expandType));
         }
     }
 

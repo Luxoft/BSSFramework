@@ -25,12 +25,6 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
         var baseBLLType = this.Configuration.Environment.BLLCore.GetSecurityDomainBLLBaseTypeReference(this.DomainType)
                               .ToTypeReference(this.DomainType.ToTypeReference(), this.EventOperationType.ToTypeReference());
 
-
-        var initializeMethodName = "Initialize";
-        var initializeSnippet = new CodeSnippetTypeMember("\t\t" + $"partial void {initializeMethodName}();");
-        var invoikeInitializeStatement = new CodeThisReferenceExpression().ToMethodInvokeExpression(initializeMethodName).ToExpressionStatement();
-
-
         var codeTypeDeclaration = new CodeTypeDeclaration
                                   {
                                           Name = this.Name,
@@ -43,10 +37,6 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
                                                   baseBLLType,
 
                                                   this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.BLLInterface)
-                                          },
-                                          Members =
-                                          {
-                                                  initializeSnippet
                                           }
                                   };
 
@@ -82,8 +72,7 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
                                                                    contextParameterExpr,
                                                                    securityProviderParameter.ToVariableReferenceExpression(),
                                                                    specificationEvaluatorParameterArg
-                                                           },
-                                                           Statements = { invoikeInitializeStatement }
+                                                           }
                                                    };
 
                 codeTypeDeclaration.Members.Add(securityOperationConstructor);

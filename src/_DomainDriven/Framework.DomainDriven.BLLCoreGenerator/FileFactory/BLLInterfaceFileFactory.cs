@@ -2,12 +2,10 @@
 
 using Framework.CodeDom;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Persistent;
 using Framework.Projection;
-using Framework.Security;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

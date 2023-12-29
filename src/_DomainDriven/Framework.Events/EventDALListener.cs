@@ -36,19 +36,19 @@ public abstract class EventDALListener<TBLLContext, TPersistentDomainObjectBase>
         }
 
         // фильтруем изменения по тем типам, ко которым есть подписка
-        var joinItems = eventArgs.Changes.GroupDALObjectByType().Join(this.typeEvents, z => z.Key, z => z.Type, TupleStruct.Create);
+        var joinItems = eventArgs.Changes.GroupDALObjectByType().Join(this.typeEvents, z => z.Key, z => z.Type, ValueTuple.Create);
 
         // сопоставляем измененных объект с его описанием его изменения (save, remove) и функцией, определяющей необходимость отсылки события
         var values = joinItems.SelectMany(z =>
                                                   new[]
                                                   {
-                                                          TupleStruct.Create(z.Item1.Value.CreatedItems.Concat(z.Item1.Value.UpdatedItems), EventOperation.Save, z.Item2.IsSaveProcessingFunc),
-                                                          TupleStruct.Create((IEnumerable<IDALObject>)z.Item1.Value.RemovedItems, EventOperation.Remove, z.Item2.IsRemoveProcessingFunc)
+                                                          ValueTuple.Create(z.Item1.Value.CreatedItems.Concat(z.Item1.Value.UpdatedItems), EventOperation.Save, z.Item2.IsSaveProcessingFunc),
+                                                          ValueTuple.Create((IEnumerable<IDALObject>)z.Item1.Value.RemovedItems, EventOperation.Remove, z.Item2.IsRemoveProcessingFunc)
                                                   })
                               .ToList();
 
         // применяем функцию, определяющая необходимость отсылки события
-        var allFilteredValues = values.SelectMany(z => z.Item1.Where(q => z.Item3(q.Object)).Select(q => TupleStruct.Create(q, z.Item2))).ToList();
+        var allFilteredValues = values.SelectMany(z => z.Item1.Where(q => z.Item3(q.Object)).Select(q => ValueTuple.Create(q, z.Item2))).ToList();
 
         // группируем по порядку получения(применения в базу) инфы о коммите данной сущности
         // могут быть ньюансы, если сущность была сначало создана в базе, потом обновлена, в этом наборе будут две записи, с разными индексами
@@ -77,9 +77,9 @@ public abstract class EventDALListener<TBLLContext, TPersistentDomainObjectBase>
         }
     }
 
-    protected virtual IEnumerable<TupleStruct<IDALObject, EventOperation>> ProcessFinalAllFilteredOrderedValues(
+    protected virtual IEnumerable<ValueTuple<IDALObject, EventOperation>> ProcessFinalAllFilteredOrderedValues(
             DALChangesEventArgs eventArgs,
-            IEnumerable<TupleStruct<IDALObject, EventOperation>> allFilteredOrderedValues)
+            IEnumerable<ValueTuple<IDALObject, EventOperation>> allFilteredOrderedValues)
     {
         return allFilteredOrderedValues;
     }

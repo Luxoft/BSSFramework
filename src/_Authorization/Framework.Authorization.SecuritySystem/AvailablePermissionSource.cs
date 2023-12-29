@@ -1,7 +1,10 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Core;
 using Framework.Core.Services;
-using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
+using Framework.SecuritySystem;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem;
 
@@ -9,27 +12,27 @@ public class AvailablePermissionSource : IAvailablePermissionSource
 {
     private readonly IRepository<Permission> permissionRepository;
 
-    private readonly IDateTimeService dateTimeService;
+    private readonly TimeProvider timeProvider;
 
     private readonly IActualPrincipalSource actualPrincipalSource;
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
     public AvailablePermissionSource(
-        IRepository<Permission> permissionRepository,
-        IDateTimeService dateTimeService,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Permission> permissionRepository,
+        TimeProvider timeProvider,
         IActualPrincipalSource actualPrincipalSource,
         IUserAuthenticationService userAuthenticationService)
     {
         this.permissionRepository = permissionRepository;
-        this.dateTimeService = dateTimeService;
+        this.timeProvider = timeProvider;
         this.actualPrincipalSource = actualPrincipalSource;
         this.userAuthenticationService = userAuthenticationService;
     }
 
     public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, Guid securityOperationId = default, bool applyCurrentUser = true)
     {
-        var filter = new AvailablePermissionFilter(this.dateTimeService.Today)
+        var filter = new AvailablePermissionFilter(this.timeProvider.GetToday())
                      {
                          PrincipalName = applyCurrentUser ? withRunAs ? this.actualPrincipalSource.ActualPrincipal.Name : this.userAuthenticationService.GetUserName() : null,
                          SecurityOperationId = securityOperationId

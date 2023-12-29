@@ -294,7 +294,7 @@ public partial class DataHelper
         return this.EvaluateWrite(
                                   context =>
                                   {
-                                      period = period ?? new Period(this.DateTimeService.CurrentFinancialYear.StartDate.AddYears(-1));
+                                      period = period ?? new Period(this.FinancialYearService.GetCurrentFinancialYear().StartDate.AddYears(-1));
                                       businessUnit = context.Logics.BusinessUnit.GetById(this.GetGuid(id));
 
                                       if (businessUnit == null)
@@ -346,7 +346,7 @@ public partial class DataHelper
                                   context =>
                                   {
                                       unit = context.Logics.ManagementUnit.GetById(this.GetGuid(id));
-                                      period = period ?? new Period(this.DateTimeService.CurrentFinancialYear.StartDate);
+                                      period = period ?? new Period(this.FinancialYearService.GetCurrentFinancialYear().StartDate);
                                       if (unit == null)
                                       {
                                           unit = new ManagementUnit

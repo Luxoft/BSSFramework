@@ -21,6 +21,7 @@
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.SecuritySystem\Framework.Authorization.SecuritySystem.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
+    <ProjectReference Include="..\Framework.FinancialYear\Framework.FinancialYear.csproj" />
   </ItemGroup>
 
 </Project>

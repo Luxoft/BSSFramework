@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.Security;
 
 namespace Framework.DomainDriven.DTOGenerator;
 

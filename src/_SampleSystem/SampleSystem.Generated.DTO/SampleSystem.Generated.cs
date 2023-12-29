@@ -4769,6 +4769,15 @@ namespace SampleSystem.Generated.DTO
             this.Id = id;
         }
         
+        public NoSecurityObjectIdentityDTO(SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this.Id = source.Id;
+        }
+        
         public NoSecurityObjectIdentityDTO(SampleSystem.Domain.NoSecurityObject domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
@@ -15829,6 +15838,139 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToSingleEmployeeFilterModel(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NoSecurityObject), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class NoSecurityObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO>
+    {
+        
+        public NoSecurityObjectSimpleDTO()
+        {
+        }
+        
+        public NoSecurityObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NoSecurityObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapNoSecurityObject(domainObject, this);
+        }
+        
+        public NoSecurityObjectSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        public SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO(this.Id);
+            }
+        }
+        
+        public virtual SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NoSecurityObject), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class NoSecurityObjectStrictDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.NoSecurityObject, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.NoSecurityObject>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO>, Framework.Persistent.IVersionObject<long>
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version;
+        
+        public NoSecurityObjectStrictDTO()
+        {
+        }
+        
+        public NoSecurityObjectStrictDTO(SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapSimpleToStrictForNoSecurityObject(this, source);
+        }
+        
+        public NoSecurityObjectStrictDTO(SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private NoSecurityObjectStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBaseAuditPersistentToStrictForNoSecurityObject(this, source);
+        }
+        
+        private NoSecurityObjectStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private NoSecurityObjectStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBasePersistentToStrictForNoSecurityObject(this, source);
+        }
+        
+        private NoSecurityObjectStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO(this.Id);
+            }
+        }
+        
+        long Framework.Persistent.IVersionObject<long>.Version
+        {
+            get
+            {
+                return this.Version;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NoSecurityObject domainObject)
+        {
+            mappingService.MapNoSecurityObject(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.NoSecurityObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToNoSecurityObject(this);
+        }
+        
+        public SampleSystem.Domain.NoSecurityObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        {
+            return mappingService.ToNoSecurityObject(this, allowCreate);
         }
     }
     

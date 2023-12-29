@@ -17,6 +17,10 @@ public class WebApiExceptionExpanderMiddleware
         {
             await this.next(context);
         }
+        catch (TaskCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             var processedEx = exceptionExpander.Process(ex);

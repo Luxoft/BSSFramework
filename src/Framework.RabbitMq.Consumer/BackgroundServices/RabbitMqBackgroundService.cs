@@ -13,7 +13,7 @@ namespace Framework.RabbitMq.Consumer.BackgroundServices;
 
 internal class RabbitMqBackgroundService(
     IRabbitMqClient client,
-    IRabbitMqConsumerInitializer consumerInitializer,
+    IEnumerable<IRabbitMqInitializer> initializers,
     IRabbitMqConsumer consumer,
     IOptions<RabbitMqServerSettings> serverOptions,
     IOptions<RabbitMqConsumerSettings> consumerOptions,
@@ -30,7 +30,7 @@ internal class RabbitMqBackgroundService(
 
     private IRabbitMqClient Client { get; } = client;
 
-    private IRabbitMqConsumerInitializer ConsumerInitializer { get; } = consumerInitializer;
+    private IEnumerable<IRabbitMqInitializer> Initializers { get; } = initializers;
 
     private IRabbitMqConsumer Consumer { get; } = consumer;
 
@@ -46,12 +46,13 @@ internal class RabbitMqBackgroundService(
         }
 
         this._channel = this._connection!.CreateModel();
-        this.ConsumerInitializer.Initialize(this._channel);
+        foreach (var initializer in this.Initializers) initializer.Initialize(this._channel);
 
         this.Logger.LogInformation(
-            "Listening RabbitMQ events has started on {Address}. Queue name is {Queue}",
+            "Listening RabbitMQ events has started on {Address}. Queue name is {Queue}. Consumer mode is {Mode}",
             this._serverSettings.Address,
-            this._consumerSettings.Queue);
+            this._consumerSettings.Queue,
+            this._consumerSettings.Mode);
 
         await this.Consumer.ConsumeAsync(this._channel!, stoppingToken);
     }

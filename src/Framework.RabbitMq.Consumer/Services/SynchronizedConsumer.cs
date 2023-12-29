@@ -62,7 +62,7 @@ internal record SynchronizedConsumer(
         if (!this.LockService.TryObtainLock(this._connection!)) return false;
 
         this._lockObtainedDate = DateTime.Now;
-        this.Logger.LogInformation("Current consumer is active");
+        this.Logger.LogDebug("Current consumer is active");
 
         return true;
     }

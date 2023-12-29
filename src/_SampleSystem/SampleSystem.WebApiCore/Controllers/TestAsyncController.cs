@@ -55,4 +55,12 @@ public class TestAsyncController : ControllerBase
     {
         return await this.AsyncSaveLocation(businessUnitStrictDTO, cancellationToken);
     }
+
+    [HttpGet(nameof(TestDelay))]
+    public async Task<int> TestDelay(CancellationToken cancellationToken = default)
+    {
+        await Task.Delay(new TimeSpan(0, 1, 0), cancellationToken);
+
+        return 123;
+    }
 }

@@ -2,7 +2,7 @@
 
 [assembly: AssemblyProduct("BSS Framework")]
 [assembly: AssemblyCompany("Luxoft")]
-[assembly: AssemblyCopyright("Copyright © Luxoft 2009-2023")]
+[assembly: AssemblyCopyright("Copyright © Luxoft 2009-2024")]
 
 [assembly: AssemblyVersion("20.0.17.0")]
 [assembly: AssemblyFileVersion("20.0.17.0")]

@@ -17,7 +17,9 @@ public class TestPermission
         this.SecurityRoleName = securityRoleName;
     }
 
-    public string SecurityRoleName { get; }
+    public virtual string SecurityRoleName { get; }
+
+    public virtual Period Period { get; } = Period.Eternity;
 
     public IReadOnlyDictionary<Type, IReadOnlyList<Guid>> Restrictions => this.InternalRestrictions;
 
@@ -39,6 +41,25 @@ public class TestPermission
         else
         {
             this.InternalRestrictions[type] = new List<Guid> { map(value.Value) };
+        }
+    }
+
+    protected TIdentity GetSingleIdentityC<TIdentity>(Type type, Func<Guid, TIdentity> map)
+        where TIdentity : class
+    {
+        return this.Restrictions.GetValueOrDefault(type).Maybe(v => map(v.Single()));
+    }
+
+    protected void SetSingleIdentityC<TIdentity>(Type type, Func<TIdentity, Guid> map, TIdentity value)
+        where TIdentity : class
+    {
+        if (value == null)
+        {
+            this.InternalRestrictions[type] = new List<Guid>();
+        }
+        else
+        {
+            this.InternalRestrictions[type] = new List<Guid> { map(value) };
         }
     }
 

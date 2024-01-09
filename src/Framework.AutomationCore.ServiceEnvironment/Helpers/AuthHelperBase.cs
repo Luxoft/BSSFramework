@@ -45,28 +45,29 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
 
     public void AddUserRole(string principalName, params TestPermission[] permissions)
     {
-        foreach (var permission in permissions)
+        foreach (var testPermission in permissions)
         {
-            this.EvaluateWrite(
-                context =>
-                {
-                    var principalBLL = context.Authorization.Logics.Principal;
-                    var businessRoleBLL = context.Authorization.Logics.BusinessRole;
-                    var permissionBLL = context.Authorization.Logics.Permission;
-
-                    var principalDomainObject = principalName == null
-                                                    ? principalBLL.GetCurrent(true)
-                                                    : principalBLL.GetByNameOrCreate(principalName, true);
-
-                    var businessRole = businessRoleBLL.GetByName(permission.SecurityRoleName, true);
-
-                    var permissionDomainObject = new Permission(principalDomainObject) { Role = businessRole };
-
-                    this.FindAndSavePermissionFilter(context, permission, permissionDomainObject);
-
-                    permissionBLL.Save(permissionDomainObject);
-                });
+            this.EvaluateWrite(context => this.ApplyTestPermission(principalName, testPermission, context));
         }
+    }
+
+    protected virtual void ApplyTestPermission(string principalName, TestPermission testPermission, TBLLContext context)
+    {
+        var principalBLL = context.Authorization.Logics.Principal;
+        var businessRoleBLL = context.Authorization.Logics.BusinessRole;
+        var permissionBLL = context.Authorization.Logics.Permission;
+
+        var principalDomainObject = principalName == null
+                                        ? principalBLL.GetCurrent(true)
+                                        : principalBLL.GetByNameOrCreate(principalName, true);
+
+        var businessRole = businessRoleBLL.GetByName(testPermission.SecurityRoleName, true);
+
+        var permissionDomainObject = new Permission(principalDomainObject) { Role = businessRole, Period = testPermission.Period };
+
+        this.FindAndSavePermissionFilter(context, testPermission, permissionDomainObject);
+
+        permissionBLL.Save(permissionDomainObject);
     }
 
     public void SetCurrentUserRole(params TestPermission[] permissions)

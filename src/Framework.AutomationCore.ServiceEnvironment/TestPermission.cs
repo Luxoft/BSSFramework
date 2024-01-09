@@ -5,7 +5,7 @@ using Framework.SecuritySystem.Bss;
 
 namespace Automation.Utils;
 
-public class TestPermission
+public record TestPermission(string SecurityRoleName, Period Period, IReadOnlyDictionary<Type, IReadOnlyList<Guid>> Restrictions)
 {
     public TestPermission(SecurityRole securityRole)
         : this(securityRole.Name)
@@ -13,61 +13,19 @@ public class TestPermission
     }
 
     public TestPermission(string securityRoleName)
+        : this(securityRoleName, Period.Eternity)
     {
-        this.SecurityRoleName = securityRoleName;
     }
 
-    public virtual string SecurityRoleName { get; }
-
-    public virtual Period Period { get; } = Period.Eternity;
-
-    public IReadOnlyDictionary<Type, IReadOnlyList<Guid>> Restrictions => this.InternalRestrictions;
-
-    protected Dictionary<Type, IReadOnlyList<Guid>> InternalRestrictions { get; } = new();
-
-    protected TIdentity? GetSingleIdentity<TIdentity>(Type type, Func<Guid, TIdentity> map)
-        where TIdentity : struct
+    public TestPermission(string securityRoleName, Period period)
+        : this(securityRoleName, period, new Dictionary<Type, IReadOnlyList<Guid>>())
     {
-        return this.Restrictions.GetValueOrDefault(type).MaybeToNullable(v => map(v.Single()));
-    }
-
-    protected void SetSingleIdentity<TIdentity>(Type type, Func<TIdentity, Guid> map, TIdentity? value)
-        where TIdentity : struct
-    {
-        if (value == null)
-        {
-            this.InternalRestrictions[type] = new List<Guid>();
-        }
-        else
-        {
-            this.InternalRestrictions[type] = new List<Guid> { map(value.Value) };
-        }
-    }
-
-    protected TIdentity GetSingleIdentityC<TIdentity>(Type type, Func<Guid, TIdentity> map)
-        where TIdentity : class
-    {
-        return this.Restrictions.GetValueOrDefault(type).Maybe(v => map(v.Single()));
-    }
-
-    protected void SetSingleIdentityC<TIdentity>(Type type, Func<TIdentity, Guid> map, TIdentity value)
-        where TIdentity : class
-    {
-        if (value == null)
-        {
-            this.InternalRestrictions[type] = new List<Guid>();
-        }
-        else
-        {
-            this.InternalRestrictions[type] = new List<Guid> { map(value) };
-        }
     }
 
     public static implicit operator TestPermission(SecurityRole securityRole)
     {
         return new TestPermission(securityRole);
     }
-
 
     public static TestPermission Administrator { get; } = new(BusinessRole.AdminRoleName);
 

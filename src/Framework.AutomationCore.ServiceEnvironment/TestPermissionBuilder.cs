@@ -15,6 +15,10 @@ public class TestPermissionBuilder
         this.SecurityRoleName = securityRoleName;
     }
 
+    public TestPermissionBuilder()
+    {
+    }
+
     public string SecurityRoleName { get; set; }
 
     public Period Period { get; set; } = Period.Eternity;

@@ -7,11 +7,11 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 
-public class SampleSystemTestPermission : TestPermission
+public class SampleSystemTestPermission : TestPermissionBuilder
 {
     public SampleSystemTestPermission(
         string securityRoleName,
-        BusinessUnitIdentityDTO? businessUnit,
+        BusinessUnitIdentityDTO? businessUnit = null,
         ManagementUnitIdentityDTO? managementUnit = null,
         LocationIdentityDTO? location = null,
         EmployeeIdentityDTO? employee = null)
@@ -25,7 +25,7 @@ public class SampleSystemTestPermission : TestPermission
 
     public SampleSystemTestPermission(
         SecurityRole securityRole,
-        BusinessUnitIdentityDTO? businessUnit,
+        BusinessUnitIdentityDTO? businessUnit = null,
         ManagementUnitIdentityDTO? managementUnit = null,
         LocationIdentityDTO? location = null,
         EmployeeIdentityDTO? employee = null)

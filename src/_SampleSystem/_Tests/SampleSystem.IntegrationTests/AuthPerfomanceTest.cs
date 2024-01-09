@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using Automation.Utils;
+
+using FluentAssertions;
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
@@ -79,7 +81,7 @@ public class AuthPerformanceTest : TestBase
 
                       from employee in this.employeeSource
 
-                      select new SampleSystemTestPermission(SampleSystemSecurityRole.Administrator, fbu, mbu, location, employee);
+                      select (TestPermission)new SampleSystemTestPermission(SampleSystemSecurityRole.Administrator, fbu, mbu, location, employee);
 
         this.AuthHelper.SetUserRole(PrincipalName, request.ToArray());
     }

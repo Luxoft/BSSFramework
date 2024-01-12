@@ -5,13 +5,13 @@
 /// </summary>
 public class IntegrationTestTimeProvider : TimeProvider
 {
-    private Func<DateTimeOffset> getNow;
+    private Func<DateTimeOffset> getUtcNow;
 
     public IntegrationTestTimeProvider() => this.Reset();
 
-    public void Reset() => this.getNow = () => DateTimeOffset.UtcNow;
+    public void Reset() => this.getUtcNow = () => DateTimeOffset.UtcNow;
 
-    public override DateTimeOffset GetUtcNow() => this.getNow();
+    public override DateTimeOffset GetUtcNow() => this.getUtcNow();
 
     public virtual void SetCurrentDateTime(DateTime dateTime)
     {
@@ -21,6 +21,6 @@ public class IntegrationTestTimeProvider : TimeProvider
             _ => dateTime - DateTimeOffset.Now
         };
 
-        this.getNow = () => DateTimeOffset.UtcNow + dateTimeDelta;
+        this.getUtcNow = () => DateTimeOffset.UtcNow + dateTimeDelta;
     }
 }

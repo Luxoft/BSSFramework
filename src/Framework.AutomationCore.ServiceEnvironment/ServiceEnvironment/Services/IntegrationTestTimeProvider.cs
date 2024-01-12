@@ -9,14 +9,18 @@ public class IntegrationTestTimeProvider : TimeProvider
 
     public IntegrationTestTimeProvider() => this.Reset();
 
-    public void Reset() => this.getNow = () => DateTimeOffset.Now;
+    public void Reset() => this.getNow = () => DateTimeOffset.UtcNow;
 
     public override DateTimeOffset GetUtcNow() => this.getNow();
 
     public virtual void SetCurrentDateTime(DateTime dateTime)
     {
-        var dateTimeDelta = dateTime - DateTimeOffset.Now;
+        var dateTimeDelta = dateTime.Kind switch
+        {
+            DateTimeKind.Utc => dateTime - DateTimeOffset.UtcNow,
+            _ => dateTime - DateTimeOffset.Now
+        };
 
-        this.getNow = () => DateTimeOffset.Now + dateTimeDelta;
+        this.getNow = () => DateTimeOffset.UtcNow + dateTimeDelta;
     }
 }

@@ -1,22 +1,18 @@
 ﻿namespace Automation.ServiceEnvironment.Services;
 
 /// <summary>
-/// Реализация интерфейса <see cref="TimeProvider"/> для интеграционных тестов
+/// Реализация класса <see cref="TimeProvider"/> для интеграционных тестов
 /// </summary>
 public class IntegrationTestTimeProvider : TimeProvider
 {
-    private Func<DateTimeOffset> getNow;
+    private TimeSpan offset;
 
-    public IntegrationTestTimeProvider() => this.Reset();
+    public virtual void Reset() => this.offset = TimeSpan.Zero;
 
-    public void Reset() => this.getNow = () => DateTimeOffset.Now;
-
-    public override DateTimeOffset GetUtcNow() => this.getNow();
+    public override DateTimeOffset GetUtcNow() => DateTimeOffset.UtcNow + this.offset;
 
     public virtual void SetCurrentDateTime(DateTime dateTime)
     {
-        var dateTimeDelta = dateTime - DateTimeOffset.Now;
-
-        this.getNow = () => DateTimeOffset.Now + dateTimeDelta;
+        this.offset = dateTime - DateTimeOffset.UtcNow;
     }
 }

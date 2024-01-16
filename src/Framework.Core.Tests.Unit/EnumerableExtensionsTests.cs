@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Framework.Core.Tests.Unit;
 
@@ -232,6 +233,6 @@ public class EnumerableExtensionsTests
         var nullRefError = list.Distinct(z => z).ToList();
 
         // Assert
-        Assert.AreEqual(everythingIsFineHere.Count, nullRefError.Count);
+        ClassicAssert.AreEqual(everythingIsFineHere.Count, nullRefError.Count);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Framework.Authorization.BLL.Tests.Unit;
 
@@ -80,6 +81,6 @@ public class PermissionBLLTests : TestBase
         var zz = this.Context.Logics.Permission.GetFullList();
 
         // Assert
-        Assert.AreEqual(permission, zz.Single());
+        ClassicAssert.AreEqual(permission, zz.Single());
     }
 }

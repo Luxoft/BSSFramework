@@ -3,6 +3,7 @@
 using FluentAssertions;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Framework.Core.Tests.Unit;
 
@@ -27,7 +28,7 @@ public class PeriodTests
         var result = period1.IsIntersected(period2);
 
         // Assert
-        Assert.IsFalse(result);
+        ClassicAssert.IsFalse(result);
     }
 
     [Test]
@@ -41,7 +42,7 @@ public class PeriodTests
         var result = Period.Parse(str);
 
         // Assert
-        Assert.AreEqual(expected, result);
+        ClassicAssert.AreEqual(expected, result);
     }
 
     [Test]
@@ -69,7 +70,7 @@ public class PeriodTests
         var result = Period.Parse(str);
 
         // Assert
-        Assert.AreEqual(expected, result);
+        ClassicAssert.AreEqual(expected, result);
     }
 
     [Test]
@@ -82,7 +83,7 @@ public class PeriodTests
         var result = Period.Parse(str);
 
         // Assert
-        Assert.AreEqual(Period.Empty, result);
+        ClassicAssert.AreEqual(Period.Empty, result);
     }
 
     [TestCase(1, 2015, 1, 2015, ExpectedResult = "Январе 2015 г.")]

@@ -13,7 +13,7 @@ namespace Framework.Cap;
 
 public static class DependencyInjections
 {
-    public const string CapAuthenticationScheme = "CapAuthenticationScheme";
+    public const string CapAuthenticationScheme = nameof(CapAuthenticationScheme);
 
     /// <summary>
     /// Add CAP with authentication. For authentication add this code

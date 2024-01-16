@@ -1,6 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Framework.Authorization.BLL.Tests.Unit;
 

@@ -10,6 +10,7 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.UnitTesting;
 using NUnit.Framework;
@@ -22,7 +23,7 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 public sealed class ConfigurationContextFacadeTests : TestFixtureBase
 {
     private IConfigurationBLLContext context;
-    private IBLLSimpleQueryBase<IEmployee> simpleQuery;
+    private IEmployeeSource employeeSource;
     private INotificationPrincipalExtractor notificationPrincipalExtractor;
     private IAuthorizationBLLContext authorizationContext;
     private ITypeResolver<DomainType> domainTypeResolver;
@@ -33,7 +34,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     [SetUp]
     public void SetUp()
     {
-        this.simpleQuery = this.CreateStub<IBLLSimpleQueryBase<IEmployee>>();
+        this.employeeSource = this.CreateStub<IEmployeeSource>();
         this.notificationPrincipalExtractor = this.CreateStub<INotificationPrincipalExtractor>();
         this.domainTypeResolver = this.CreateStub<ITypeResolver<DomainType>>();
         this.domainTypeBll = this.CreateStub<IDomainTypeBLL>();
@@ -52,7 +53,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         this.authorizationContext.NotificationPrincipalExtractor.Returns(this.notificationPrincipalExtractor);
 
         this.context = this.Fixture.RegisterStub<IConfigurationBLLContext>();
-        this.context.GetEmployeeSource().Returns(this.simpleQuery);
+        this.context.EmployeeSource.Returns(this.employeeSource);
         this.context.Logics.Returns(configurationLogics);
         this.context.Authorization.Returns(this.authorizationContext);
         this.context.ComplexDomainTypeResolver.Returns(this.domainTypeResolver);
@@ -78,7 +79,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         var employees = new RecipientCollection(new[] { new Recipient("ivanov", "ivanov@ya.ru") });
         var principals = new[] { new Principal { Name = "ivanov" }, new Principal { Name = "petrov" } };
 
-        this.simpleQuery.GetUnsecureQueryable().Returns(employees.AsQueryable());
+        this.employeeSource.GetQueryable().Returns(employees.AsQueryable());
 
         // Act
         var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();

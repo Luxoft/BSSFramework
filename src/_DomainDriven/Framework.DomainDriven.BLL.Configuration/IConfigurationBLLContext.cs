@@ -1,10 +1,8 @@
-﻿using Framework.Configuration;
-
-namespace Framework.DomainDriven.BLL.Configuration;
+﻿namespace Framework.DomainDriven.BLL.Configuration;
 
 public interface IConfigurationBLLContext
 {
-    IBLLSimpleQueryBase<IEmployee> GetEmployeeSource();
+    IEmployeeSource EmployeeSource { get; }
 
     /// <summary>
     /// Получение текущей ревизии из аудита (пока возвращает 0, если вызван до флаша сессии)

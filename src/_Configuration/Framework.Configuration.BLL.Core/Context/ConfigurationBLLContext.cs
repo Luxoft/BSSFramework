@@ -20,8 +20,6 @@ namespace Framework.Configuration.BLL;
 
 public partial class ConfigurationBLLContext
 {
-    private readonly IBLLSimpleQueryBase<IEmployee> employeeSource;
-
     private readonly Lazy<Dictionary<TargetSystem, ITargetSystemService>> lazyTargetSystemServiceCache;
 
     private readonly IDictionaryCache<Type, DomainType> domainTypeCache;
@@ -43,7 +41,7 @@ public partial class ConfigurationBLLContext
             IRootSecurityService<PersistentDomainObjectBase> securityService,
             IConfigurationBLLFactoryContainer logics,
             IAuthorizationBLLContext authorization,
-            IBLLSimpleQueryBase<IEmployee> employeeSource,
+            IEmployeeSource employeeSource,
             IEnumerable<ITargetSystemService> targetSystemServices,
             IConfigurationBLLContextSettings settings,
             ICurrentRevisionService currentRevisionService)
@@ -55,7 +53,7 @@ public partial class ConfigurationBLLContext
         this.Logics = logics;
 
         this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
-        this.employeeSource = employeeSource ?? throw new ArgumentNullException(nameof(employeeSource));
+        this.EmployeeSource = employeeSource ?? throw new ArgumentNullException(nameof(employeeSource));
         this.currentRevisionService = currentRevisionService ?? throw new ArgumentNullException(nameof(currentRevisionService));
 
         this.lazyTargetSystemServiceCache = LazyHelper.Create(() => targetSystemServices.ToDictionary(s => s.TargetSystem));
@@ -103,17 +101,14 @@ public partial class ConfigurationBLLContext
 
     public bool SubscriptionEnabled => this.lazyTargetSystemServiceCache.Value.Values.Any(tss => tss.TargetSystem.SubscriptionEnabled);
 
+    public IEmployeeSource EmployeeSource { get; }
+
     IConfigurationBLLContext IConfigurationBLLContextContainer<IConfigurationBLLContext>.Configuration => this;
 
     /// <inheritdoc />
     public long GetCurrentRevision()
     {
         return this.currentRevisionService.GetCurrentRevision();
-    }
-
-    public IBLLSimpleQueryBase<IEmployee> GetEmployeeSource()
-    {
-        return this.employeeSource;
     }
 
     public IPersistentTargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem)

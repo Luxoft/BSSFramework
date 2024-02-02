@@ -120,7 +120,7 @@ public static class SampleSystemFrameworkExtensions
     {
         // For notification
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
-        services.AddScopedFrom<IEmployeeSource, EmployeeSource<Employee>>();
+        services.AddScoped<IEmployeeSource, EmployeeSource<Employee>>();
 
         // For subscription
         services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));

@@ -25,6 +25,7 @@ using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -56,7 +57,7 @@ public static class ServiceCollectionExtensions
         services.RegisterAuthorizationSecurity();
         services.RegisterConfigurationSecurity();
 
-        services.AddSingleton(TimeProvider.System);
+        services.TryAddSingleton(TimeProvider.System);
         services.AddSingleton<IFinancialYearCalculator, FinancialYearCalculator>();
         services.AddSingleton<FinancialYearServiceSettings>();
         services.AddSingleton<IFinancialYearService, FinancialYearService>();

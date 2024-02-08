@@ -1,4 +1,6 @@
-﻿using Framework.DomainDriven.DAL.Revisions;
+﻿using System.Data;
+
+using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate;
 using NHibernate.Envers.Patch;
@@ -38,6 +40,8 @@ public class NHibSession : INHibSession
     public ISession NativeSession => this.lazyInnerSession.Value.NativeSession;
 
     public DBSessionMode SessionMode => this.InnerSession.SessionMode;
+
+    public IDbTransaction Transaction => this.InnerSession.Transaction;
 
     public void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType)
     {

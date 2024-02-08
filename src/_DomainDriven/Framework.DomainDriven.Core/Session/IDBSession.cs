@@ -1,8 +1,12 @@
-﻿namespace Framework.DomainDriven;
+﻿using System.Data;
+
+namespace Framework.DomainDriven;
 
 public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDisposable
 {
     DBSessionMode SessionMode { get; }
+
+    IDbTransaction Transaction { get; }
 
     /// <summary>
     /// Мануальный флаш сессии, при его вызове срабатывают только Flushed-евенты, TransactionCompleted-евенты вызываются только при закрытие сессии

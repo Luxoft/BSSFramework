@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using System.Data;
+
+using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate;
@@ -21,6 +23,8 @@ public abstract class NHibSessionBase : INHibSession
     public abstract bool Closed { get; }
 
     public DBSessionMode SessionMode { get; }
+
+    public abstract IDbTransaction Transaction { get; }
 
     public IAuditReaderPatched AuditReader => this.lazyAuditReader.Value;
 

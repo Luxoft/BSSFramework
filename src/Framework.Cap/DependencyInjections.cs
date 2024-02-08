@@ -1,4 +1,6 @@
-﻿using DotNetCore.CAP;
+﻿using System.Data;
+
+using DotNetCore.CAP;
 
 using Framework.Cap.Abstractions;
 using Framework.Cap.Auth;
@@ -27,7 +29,17 @@ public static class DependencyInjections
             Action<CapOptions> setupAction = null)
     {
         services
-                .AddSingleton<ICapTransactionManager, CapTransactionManager>()
+                .AddScoped<ICapTransaction>(
+                    serviceProvider =>
+                    {
+                        var dbTransaction = serviceProvider.GetRequiredService<IDbTransaction>();
+
+                        var capTransaction = ActivatorUtilities.CreateInstance<SqlServerCapTransaction>(serviceProvider);
+
+                        capTransaction.DbTransaction = dbTransaction;
+
+                        return capTransaction;
+                    })
                 .AddScoped<IIntegrationEventBus, IntegrationEventBus>()
                 .AddCap(
                         z =>

@@ -15,7 +15,6 @@ using SampleSystem.AuditDAL.NHibernate;
 using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DAL.NHibernate;
-using SampleSystem.ServiceEnvironment.Database;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -41,8 +40,6 @@ public static class SampleSystemFrameworkDatabaseExtensions
     {
         return services.AddDatabaseSettings(setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
                                                                 .AddEventListener<SubscriptionDBSessionEventListener>()
-
-                                                                .SetEnvironment<SampleSystemNHibSessionEnvironment>()
 
                                                                 .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
                                                                 .AddMapping(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))

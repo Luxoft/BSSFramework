@@ -1,5 +1,7 @@
 ﻿using Automation.ServiceEnvironment;
 
+using DotNetCore.CAP;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
@@ -26,6 +28,8 @@ public class TestDataInitialize : RootServiceProviderContainer<ISampleSystemBLLC
     public void TestData()
     {
         this.RootServiceProvider.GetRequiredService<SampleSystemInitializer>().Initialize();
+
+        this.RootServiceProvider.GetService<IBootstrapper>().BootstrapAsync().GetAwaiter().GetResult();
 
         this.AuthHelper.AddCurrentUserToAdmin();
 

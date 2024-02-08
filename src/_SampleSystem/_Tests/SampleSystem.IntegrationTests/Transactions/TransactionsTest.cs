@@ -25,6 +25,8 @@ public class TransactionsTest : TestBase
         // Act
         await this.GetControllerEvaluator<ClassAAsyncController>()
                   .EvaluateAsync(c => c.CreateClassA(1234, false, default));
+
+        // TODO:Remove
         await Task.Delay(5000, default);
 
         // Assert
@@ -40,6 +42,8 @@ public class TransactionsTest : TestBase
         // Act
         await this.GetControllerEvaluator<ClassAAsyncController>()
                   .EvaluateAsync(c => c.CreateClassA(4321, true, default));
+
+        // TODO:Remove
         await Task.Delay(5000, default);
 
         // Assert

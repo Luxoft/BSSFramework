@@ -17,7 +17,6 @@ using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 using Framework.FinancialYear;
 using Framework.HierarchicalExpand;
-using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Bss;
@@ -86,8 +85,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection RegisterHierarchicalObjectExpander<TPersistentDomainObjectBase>(this IServiceCollection services)
-        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+    public static IServiceCollection RegisterHierarchicalObjectExpander(this IServiceCollection services)
     {
         return services.AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
                        .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<Guid>>();

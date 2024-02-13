@@ -126,7 +126,7 @@ public static class SampleSystemFrameworkExtensions
         services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));
 
         // For expand tree
-        services.RegisterHierarchicalObjectExpander<PersistentDomainObjectBase>();
+        services.RegisterHierarchicalObjectExpander();
 
         // Serilog
         services.AddSingleton(Serilog.Log.Logger);

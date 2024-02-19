@@ -45,7 +45,13 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IDefaultIde
 
     public virtual bool Equals(PersistentDomainObjectBase obj)
     {
-        return object.ReferenceEquals(this, obj) || (!object.ReferenceEquals(obj, null) && this.Id == obj.Id && this.Id != Guid.Empty);
+        return object.ReferenceEquals(this, obj)
+               || (!object.ReferenceEquals(obj, null)
+                   && this.Id == obj.Id
+                   && this.Id != Guid.Empty
+
+                   && (obj.GetType().IsAssignableFrom(this.GetType()) || this.GetType().IsAssignableFrom(obj.GetType()))
+                   );
     }
 
     public override bool Equals(object obj)

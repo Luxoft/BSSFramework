@@ -6,6 +6,7 @@ using Framework.Authorization.Generated.DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers;
 
 namespace SampleSystem.IntegrationTests.Auth;
@@ -24,7 +25,7 @@ public class PrincipalTests : TestBase
         var authorizationController = this.GetAuthControllerEvaluator();
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
-        var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
+        var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
         var principalIdentity = authorizationController.Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
@@ -50,7 +51,7 @@ public class PrincipalTests : TestBase
         var authorizationController = this.GetAuthControllerEvaluator();
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
-        var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
+        var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
         var principalStrict = new PrincipalStrictDTO
                               {
@@ -105,7 +106,7 @@ public class PrincipalTests : TestBase
         // Arrange
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
-        var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
+        var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
         var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
@@ -152,7 +153,7 @@ public class PrincipalTests : TestBase
     public void RemovePermission_CheckRemoval()
     {
         // Arrange
-        var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
+        var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
         var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetCurrentPrincipal()).Identity;
 

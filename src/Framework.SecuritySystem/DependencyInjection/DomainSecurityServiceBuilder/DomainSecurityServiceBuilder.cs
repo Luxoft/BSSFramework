@@ -15,7 +15,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
     public SecurityOperation EditSecurityOperation { get; private set; }
 
-    public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Condition(_ => true);
+    public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
 
     public object DependencySourcePath { get; private set; }
 

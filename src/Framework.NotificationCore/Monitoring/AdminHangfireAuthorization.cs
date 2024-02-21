@@ -3,15 +3,13 @@ using Framework.SecuritySystem;
 
 using Hangfire.Dashboard;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.NotificationCore.Monitoring;
 
 public class AdminHangfireAuthorization : IDashboardAuthorizationFilter
 {
-    private readonly IDBSessionEvaluator dbSessionEvaluator;
+    private readonly IServiceEvaluator<IAuthorizationSystem> authorizationSystemEvaluator;
 
-    public AdminHangfireAuthorization(IDBSessionEvaluator dbSessionEvaluator) => this.dbSessionEvaluator = dbSessionEvaluator;
+    public AdminHangfireAuthorization(IServiceEvaluator<IAuthorizationSystem> authorizationSystemEvaluator) => this.authorizationSystemEvaluator = authorizationSystemEvaluator;
 
     public bool Authorize(DashboardContext context)
     {
@@ -22,8 +20,6 @@ public class AdminHangfireAuthorization : IDashboardAuthorizationFilter
             return false;
         }
 
-        return this.dbSessionEvaluator.EvaluateAsync(
-            DBSessionMode.Read,
-            (sp, _) => Task.FromResult(sp.GetRequiredService<IAuthorizationSystem>().IsAdmin())).GetAwaiter().GetResult();
+        return this.authorizationSystemEvaluator.Evaluate(DBSessionMode.Read, service => service.IsAdmin());
     }
 }

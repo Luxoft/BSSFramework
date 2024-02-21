@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 using Serilog;
@@ -14,7 +14,7 @@ public static class LoggingExtensions
     /// Configures Serilog if not configured yet
     /// </summary>
     /// <param name="builder">A builder for Microsoft.AspNetCore.Hosting.IWebHost</param>
-    public static IWebHostBuilder UseSerilogBss(this IWebHostBuilder builder) =>
+    public static IHostBuilder UseSerilogBss(this IHostBuilder builder) =>
             builder
                     .ConfigureLogging((unused, z) => z.ClearProviders().AddSerilog(dispose: true))
                     .UseSerilog();

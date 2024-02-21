@@ -14,10 +14,6 @@ public static class UserAuthenticationDependencyInjectionExtensions
         services.AddSingletonFrom<IDefaultUserAuthenticationService, ApplicationDefaultUserAuthenticationService>();
         services.AddSingletonFrom<IAuditRevisionUserAuthenticationService, ApplicationDefaultUserAuthenticationService>();
 
-        services.AddScoped<ApplicationUserAuthenticationService>();
-        services.AddScopedFrom<IUserAuthenticationService, ApplicationUserAuthenticationService>();
-        services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
-
         return services;
     }
 }

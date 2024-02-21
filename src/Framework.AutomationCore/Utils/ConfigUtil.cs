@@ -10,16 +10,19 @@ public class ConfigUtil
     private readonly Lazy<string> dataDirectory;
     private readonly Lazy<bool> useLocalDbLazy;
     private readonly Lazy<bool> testsParallelizeLazy;
-    private readonly Lazy<string> systemNameLazy;
     private readonly Lazy<TestRunMode> testRunModeLazy;
     private readonly IConfiguration configuration;
     private readonly Lazy<string> databaseCollation;
+
+    private static readonly string LocalDbInstanceName;
+
+    static ConfigUtil() => LocalDbInstanceName = $"Test_{TextRandomizer.RandomString(10)}";
+
     public ConfigUtil(IConfiguration configuration)
     {
         this.configuration = configuration;
         this.useLocalDbLazy = new Lazy<bool>(() => this.configuration.GetValue<bool>("UseLocalDb"));
         this.testsParallelizeLazy = new Lazy<bool>(() => this.configuration.GetValue<bool>("TestsParallelize"));
-        this.systemNameLazy = new Lazy<string>(() => this.configuration.GetValue<string>("SystemName"));
         this.databaseCollation = new Lazy<string>(() => this.configuration.GetValue<string>("DatabaseCollation"));
         this.testRunModeLazy = new Lazy<TestRunMode>(
             () => this.configuration.GetValue<TestRunMode>("TestRunMode", TestRunMode.DefaultRunModeOnEmptyDatabase));
@@ -43,8 +46,6 @@ public class ConfigUtil
 
     public bool TestsParallelize => this.testsParallelizeLazy.Value;
 
-    public string SystemName => this.systemNameLazy.Value;
-
     public string DatabaseCollation => this.databaseCollation.Value;
 
     public string GetConnectionString(string connectionStringName)
@@ -53,9 +54,7 @@ public class ConfigUtil
 
         if (this.UseLocalDb)
         {
-            var instanceName = $"{this.SystemName}{TextRandomizer.RandomString(5)}";
-
-            connectionString = this.GetLocalDbConnectionString(connectionString, instanceName);
+            connectionString = this.GetLocalDbConnectionString(connectionString, LocalDbInstanceName);
         }
 
         return connectionString;

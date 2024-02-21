@@ -103,7 +103,7 @@ public class MainTests
                .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
 
                .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
-               .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
+               .AddScoped(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
 
                .AddScoped<ISecurityExpressionBuilderFactory, V1.SecurityExpressionBuilderFactory<Guid>>()
                .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()

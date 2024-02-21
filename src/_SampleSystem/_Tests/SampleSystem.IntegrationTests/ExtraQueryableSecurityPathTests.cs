@@ -1,6 +1,4 @@
-﻿using Automation.ServiceEnvironment;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.Core;
 using Framework.DomainDriven;
@@ -13,6 +11,7 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -48,8 +47,8 @@ public class ExtraQueryableSecurityPathTests : TestBase
 
         this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(TestBusinessRole.Administrator, this.bu2Ident, null, this.loc1Ident));
-        this.AuthHelper.AddUserRole(TestEmployeeLogin, new SampleSystemPermission(TestBusinessRole.Administrator, this.bu2Ident, null, this.loc2Ident));
+        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SampleSystemSecurityRole.Administrator, this.bu2Ident, null, this.loc1Ident));
+        this.AuthHelper.AddUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SampleSystemSecurityRole.Administrator, this.bu2Ident, null, this.loc2Ident));
 
         this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident, location: this.loc1Ident);
 
@@ -64,11 +63,11 @@ public class ExtraQueryableSecurityPathTests : TestBase
         // Arrange
         var createProviderFunc = FuncHelper.Create((ISampleSystemBLLContext context) =>
                                                    {
-                                                       var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable().Where(l => l.Id == this.loc1Ident.Id);
+                                                       var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable();
 
                                                        var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, SingleSecurityMode.Strictly)
                                                                .And(e => e.Location, SingleSecurityMode.Strictly)
-                                                               .And(_ => extraQueryableSecurity, ManySecurityPathMode.Any);
+                                                               .And(e => extraQueryableSecurity.Where(l => l == e.Location && e.Location.Id == this.loc1Ident.Id), ManySecurityPathMode.AnyStrictly);
 
                                                        return extraSecurityPath.ToProvider(
                                                            SampleSystemSecurityOperation.EmployeeView,

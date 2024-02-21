@@ -2,6 +2,7 @@
 
 using Framework.Core;
 using Framework.SecuritySystem;
+
 using NHibernate.Linq;
 
 using nuSpec.Abstraction;
@@ -23,13 +24,12 @@ public class GenericRepository<TDomainObject, TIdent> : IGenericRepository<TDoma
             IAsyncDal<TDomainObject, TIdent> dal,
             ISpecificationEvaluator specificationEvaluator,
             IAccessDeniedExceptionService accessDeniedExceptionService,
-            IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            ISecurityProvider<TDomainObject>? securityProvider = null)
+            ISecurityProvider<TDomainObject> securityProvider)
     {
         this.dal = dal;
         this.specificationEvaluator = specificationEvaluator;
         this.accessDeniedExceptionService = accessDeniedExceptionService;
-        this.securityProvider = securityProvider ?? disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
+        this.securityProvider = securityProvider;
     }
 
     public async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken)

@@ -2,6 +2,10 @@
 using Automation;
 using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
+
+using DotNetCore.CAP;
+using DotNetCore.CAP.Internal;
+
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Cap.Abstractions;
 using Framework.Configuration.BLL;
@@ -14,6 +18,8 @@ using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.Support.Utils;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Main;
+using SampleSystem.WebApiCore;
+using SampleSystem.IntegrationTests.__Support.Utils;
 
 namespace SampleSystem.IntegrationTests.__Support;
 
@@ -48,8 +54,10 @@ public class InitializeAndCleanup
 
                .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
 
-               .ReplaceSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
-               .ReplaceSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
+               .AddSingleton<ICapSubscribe, CapIntegrationController>()
+               .ReplaceSingleton<IConsumerServiceSelector, TestConsumerServiceSelector>()
+               //.ReplaceSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
+               //.ReplaceSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
 
                .AddSingleton<SampleSystemInitializer>()
 

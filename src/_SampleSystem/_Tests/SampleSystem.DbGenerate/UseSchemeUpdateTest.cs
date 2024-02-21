@@ -48,7 +48,6 @@ public class UseSchemeUpdateTest
         services.AddDatabaseSettings(connectionString, false);
 
         services.AddSingleton(_ => LazyInterfaceImplementHelper.CreateNotImplemented<IAuditRevisionUserAuthenticationService>());
-        services.AddSingleton(_ => LazyInterfaceImplementHelper.CreateNotImplemented<ICapTransactionManager>());
         var provider = services.BuildServiceProvider(false);
 
         var dbSessionFactory = provider.GetService<NHibSessionEnvironment>();

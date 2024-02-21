@@ -127,24 +127,42 @@ public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent>
         return this._collection.FirstOrDefault(z => EqualityComparer<TIdent>.Default.Equals(z.Id, id));
     }
 
-    public IQueryable<TDomain> GetQueryable() => throw new NotImplementedException();
+    public IQueryable<TDomain> GetQueryable() => this.GetQueryable(LockRole.None);
 
     public TDomain Load(TIdent id)
     {
         return this.GetById(id, LockRole.None);
     }
 
-    public Task<TDomain> LoadAsync(TIdent id, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public async Task<TDomain> LoadAsync(TIdent id, CancellationToken cancellationToken = default)
+    {
+        return this.Load(id);
+    }
 
-    public Task RefreshAsync(TDomain domainObject, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public async Task RefreshAsync(TDomain domainObject, CancellationToken cancellationToken = default)
+    {
+        this.Refresh(domainObject);
+    }
 
-    public Task SaveAsync(TDomain domainObject, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public async Task SaveAsync(TDomain domainObject, CancellationToken cancellationToken = default)
+    {
+        this.Save(domainObject);
+    }
 
-    public Task InsertAsync(TDomain domainObject, TIdent id, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public async Task InsertAsync(TDomain domainObject, TIdent id, CancellationToken cancellationToken = default)
+    {
+        this.Insert(domainObject, id);
+    }
 
-    public Task RemoveAsync(TDomain domainObject, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public async Task RemoveAsync(TDomain domainObject, CancellationToken cancellationToken = default)
+    {
+        this.Remove(domainObject);
+    }
 
-    public Task LockAsync(TDomain domain, LockRole lockRole, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public async Task LockAsync(TDomain domainObject, LockRole lockRole, CancellationToken cancellationToken = default)
+    {
+        this.Lock(domainObject, lockRole);
+    }
 
     public virtual void Save(TDomain domainObject)
     {

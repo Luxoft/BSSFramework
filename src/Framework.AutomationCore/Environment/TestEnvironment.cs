@@ -8,7 +8,7 @@ public class TestEnvironment
 
     internal TestEnvironment(IServiceProviderPool serviceProviderPool, AssemblyInitializeAndCleanup assemblyInitializeAndCleanup)
     {
-        AssemblyInitializeAndCleanup = assemblyInitializeAndCleanup;
-        ServiceProviderPool = serviceProviderPool;
+        this.AssemblyInitializeAndCleanup = assemblyInitializeAndCleanup;
+        this.ServiceProviderPool = serviceProviderPool;
     }
 }

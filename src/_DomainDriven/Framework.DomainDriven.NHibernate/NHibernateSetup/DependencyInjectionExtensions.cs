@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using System.Data;
+
+using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.DALExceptions;
 
@@ -20,8 +22,10 @@ public static class DependencyInjectionExtensions
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();
         services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<INHibSession>>();
         services.AddScopedFrom((ILazyObject<IDBSession> lazyDbSession) => lazyDbSession.Value);
+        services.AddScoped<IDBSessionManager, DBSessionManager>();
 
         services.AddScopedFrom<ISession, INHibSession>(session => session.NativeSession);
+        services.AddScopedFrom<IDbTransaction, IDBSession>(session => session.Transaction);
 
         services.AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>();
         services.AddSingleton<NHibConnectionSettings>();

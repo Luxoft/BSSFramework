@@ -11,23 +11,23 @@ namespace SampleSystem.ServiceEnvironment;
 
 public class StartWorkflowJob
 {
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
     private readonly IWorkflowHost workflowHost;
 
     private readonly IWorkflowApproveProcessor workflowApproveProcessor;
 
 
-    public StartWorkflowJob(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator, IWorkflowHost workflowHost, IWorkflowApproveProcessor workflowApproveProcessor)
+    public StartWorkflowJob(IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator, IWorkflowHost workflowHost, IWorkflowApproveProcessor workflowApproveProcessor)
     {
         this.contextEvaluator = contextEvaluator;
         this.workflowHost = workflowHost;
         this.workflowApproveProcessor = workflowApproveProcessor;
     }
 
-    public Task<Dictionary<Guid, Guid>> Start()
+    public async Task<Dictionary<Guid, Guid>> Start()
     {
-        return this.contextEvaluator.EvaluateAsync(DBSessionMode.Write, (ctx, _) =>
+        return await this.contextEvaluator.EvaluateAsync(DBSessionMode.Write, async ctx =>
         {
             var permQ = ctx.Authorization.Logics.Permission.GetUnsecureQueryable();
 
@@ -46,7 +46,7 @@ public class StartWorkflowJob
             var wfObjList = wfObjRequest.ToList();
 
 
-            return wfObjList.ToDictionaryAsync(pair => pair.wfObj.PermissionId,
+            return await wfObjList.ToDictionaryAsync(pair => pair.wfObj.PermissionId,
                 async pair =>
                 {
                     var startupObj = this.workflowApproveProcessor.GetPermissionStartupObject(pair.permission);

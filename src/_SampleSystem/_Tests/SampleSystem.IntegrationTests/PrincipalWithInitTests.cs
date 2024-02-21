@@ -19,11 +19,13 @@ public class PrincipalWithInitTests : TestBase
 {
     private const string TestPrincipalName = "Duplicate Permission Tester";
 
-    private static readonly Period TestPeriod = Framework.DomainDriven.DateTimeService.Default.CurrentMonth;
+    private Period testPeriod;
 
     [TestInitialize]
     public void SetUp()
     {
+        this.testPeriod = this.TimeProvider.GetCurrentMonth();
+
         var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
         var luxoftBuId = this.DataHelper.SaveBusinessUnit(
@@ -67,7 +69,7 @@ public class PrincipalWithInitTests : TestBase
 
                           var permission = new Permission(principal);
                           permission.Role = authContext.Logics.BusinessRole.GetOrCreateAdminRole();
-                          permission.Period = TestPeriod;
+                          permission.Period = this.testPeriod;
 
                           new PermissionFilterItem(permission) { Entity = filterEntity };
 
@@ -79,7 +81,7 @@ public class PrincipalWithInitTests : TestBase
     public void CreateDuplicatePermission_ValidationError()
     {
         // Arrange
-        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions (Role: {BusinessRole.AdminRoleName} | Period: {TestPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
+        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions (Role: {BusinessRole.AdminRoleName} | Period: {this.testPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
 
         // Act
         Action call = () =>
@@ -97,7 +99,7 @@ public class PrincipalWithInitTests : TestBase
 
                                             var newPermission = new Permission(principal);
                                             newPermission.Role = existsPermission.Role;
-                                            newPermission.Period = TestPeriod;
+                                            newPermission.Period = this.testPeriod;
 
                                             new PermissionFilterItem(newPermission) { Entity = existsPermission.FilterItems.Single().Entity };
 

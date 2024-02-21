@@ -17,11 +17,11 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : 
     private readonly ISecurityExpressionBuilderFactory securityExpressionBuilderFactory;
 
     protected ContextDomainSecurityServiceBase(
-        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityProvider<TDomainObject> disabledSecurityProvider,
         ISecurityOperationResolver securityOperationResolver,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
 
-        : base(disabledSecurityProviderSource, securityOperationResolver)
+        : base(disabledSecurityProvider, securityOperationResolver)
     {
         this.securityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
     }
@@ -60,11 +60,11 @@ public class ContextDomainSecurityService<TDomainObject, TIdent> : ContextDomain
     private readonly SecurityPath<TDomainObject> securityPath;
 
     public ContextDomainSecurityService(
-        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityProvider<TDomainObject> disabledSecurityProvider,
         ISecurityOperationResolver securityOperationResolver,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
         SecurityPath<TDomainObject> securityPath)
-        : base(disabledSecurityProviderSource, securityOperationResolver, securityExpressionBuilderFactory)
+        : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory)
     {
         this.securityPath = securityPath;
     }

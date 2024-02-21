@@ -5,19 +5,23 @@ namespace Framework.DomainDriven.ServiceModel;
 
 public static class ContextEvaluatorExtensions
 {
-    public static Task<TResult> EvaluateAsync<TBLLContext, TDTOMappingService, TResult>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task<TResult>> getResult)
+    public static async Task<TResult> EvaluateAsync<TBLLContext, TDTOMappingService, TResult>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task<TResult>> getResult)
     {
-        return contextEvaluator.EvaluateAsync(sessionMode, null, getResult);
+        return await contextEvaluator.EvaluateAsync(sessionMode, null, getResult);
     }
 
-    public static Task EvaluateAsync<TBLLContext, TDTOMappingService>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task> action)
+    public static async Task EvaluateAsync<TBLLContext, TDTOMappingService>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task> action)
     {
-        return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, evaluatedData => action(evaluatedData).ContinueWith(_ => default(object)));
+        await contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, async evaluatedData =>
+                                                                               {
+                                                                                   await action(evaluatedData);
+                                                                                   return default(object);
+                                                                               });
     }
 
-    public static Task EvaluateAsync<TBLLContext, TDTOMappingService>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task> action)
+    public static async Task EvaluateAsync<TBLLContext, TDTOMappingService>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task> action)
     {
-        return contextEvaluator.EvaluateAsync(sessionMode, null, action);
+        await contextEvaluator.EvaluateAsync(sessionMode, null, action);
     }
 
     public static void Evaluate<TBLLContext, TDTOMappingService>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, Action<EvaluatedData<TBLLContext, TDTOMappingService>> action)
@@ -37,6 +41,6 @@ public static class ContextEvaluatorExtensions
 
     public static TResult Evaluate<TBLLContext, TDTOMappingService, TResult>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, Func<EvaluatedData<TBLLContext, TDTOMappingService>, TResult> getResult)
     {
-        return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, c => Task.FromResult(getResult(c))).GetAwaiter().GetResult();
+        return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, async c => getResult(c)).GetAwaiter().GetResult();
     }
 }

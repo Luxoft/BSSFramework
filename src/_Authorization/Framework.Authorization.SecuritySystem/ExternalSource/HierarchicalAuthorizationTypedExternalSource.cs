@@ -4,6 +4,7 @@ using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
@@ -13,10 +14,10 @@ public class HierarchicalAuthorizationTypedExternalSource<TSecurityContext> : Au
     private readonly ISecurityContextDisplayService<TSecurityContext> displayService;
 
     public HierarchicalAuthorizationTypedExternalSource(
-        IRepository<TSecurityContext> securityContextRepository,
-        IRepository<EntityType> entityTypeRepository,
-        IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
-        SecurityContextInfo securityContextInfo,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<TSecurityContext> securityContextRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<EntityType> entityTypeRepository,
+        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
+        SecurityContextInfo<TSecurityContext, Guid> securityContextInfo,
         ISecurityContextDisplayService<TSecurityContext> displayService)
         : base(securityContextRepository, entityTypeRepository, permissionFilterEntityRepository, securityContextInfo)
     {

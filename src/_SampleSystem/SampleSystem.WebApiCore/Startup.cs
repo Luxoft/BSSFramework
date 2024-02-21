@@ -7,6 +7,7 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
+using Framework.SecuritySystem;
 using Framework.WebApi.Utils;
 
 using Microsoft.AspNetCore.Authentication.Negotiate;
@@ -68,7 +69,7 @@ public class Startup
 
         if (this.HostingEnvironment.IsProduction())
         {
-            services.AddMetrics();
+            AppMetricsServiceCollectionExtensions.AddMetrics(services);
             services.AddHangfireBss(this.Configuration.GetConnectionString("DefaultConnection"));
         }
 
@@ -120,8 +121,7 @@ public class Startup
                                       .BuildServiceProvider(
                                           new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
-                return serviceProvider
-                    .GetRequiredService<IDBSessionEvaluator>();
+                return serviceProvider.GetRequiredService<IServiceEvaluator<IAuthorizationSystem>>();
             });
 
         app.UseHangfireBss(

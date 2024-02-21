@@ -9,7 +9,7 @@ public class ServiceProviderPool : IServiceProviderPool
     private readonly SemaphoreSlim semaphore;
     private readonly bool enableLimiter;
 
-    internal ServiceProviderPool(Func<IServiceProvider> createServiceProviderFunc, bool parallelExecutionEnabled, bool disableLimiter)
+    public ServiceProviderPool(Func<IServiceProvider> createServiceProviderFunc, bool parallelExecutionEnabled, bool disableLimiter)
     {
         this.enableLimiter = !disableLimiter;
         if (this.enableLimiter)
@@ -33,7 +33,7 @@ public class ServiceProviderPool : IServiceProviderPool
         {
             return this.providersCache.TryTake(out var provider) ? provider : this.createServiceProviderFunc.Invoke();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             if (this.enableLimiter)
             {

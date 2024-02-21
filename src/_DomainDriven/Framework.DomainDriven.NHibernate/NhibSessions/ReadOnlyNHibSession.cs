@@ -1,4 +1,6 @@
-﻿using Framework.DomainDriven.DAL.Revisions;
+﻿using System.Data;
+
+using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate;
 
@@ -66,7 +68,9 @@ public class ReadOnlyNHibSession : NHibSessionBase
         }
     }
 
-    public override Task FlushAsync(CancellationToken cancellationToken = default)
+    public override IDbTransaction Transaction { get; } = null;
+
+    public override async Task FlushAsync(CancellationToken cancellationToken = default)
     {
         throw new InvalidOperationException();
     }

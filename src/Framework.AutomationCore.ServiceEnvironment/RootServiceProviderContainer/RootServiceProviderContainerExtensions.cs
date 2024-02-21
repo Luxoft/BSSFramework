@@ -4,8 +4,6 @@ using Automation.ServiceEnvironment.Services;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
-using Framework.DomainDriven;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,14 +21,14 @@ public static class RootServiceProviderContainerExtensions
         return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<ConfigUtil>();
     }
 
-    public static IDateTimeService GetDateTimeService(this IRootServiceProviderContainer rootServiceProviderContainer)
+    public static TimeProvider GetTimeProvider(this IRootServiceProviderContainer rootServiceProviderContainer)
     {
-        return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IDateTimeService>();
+        return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<TimeProvider>();
     }
 
     public static void SetCurrentDateTime(this IRootServiceProviderContainer rootServiceProviderContainer, DateTime newDateTime)
     {
-        rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IntegrationTestDateTimeService>().SetCurrentDateTime(newDateTime);
+        rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IntegrationTestTimeProvider>().SetCurrentDateTime(newDateTime);
     }
 
     public static TResult EvaluateController<TController, TResult>(

@@ -8,12 +8,12 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
     private readonly IEnumerable<IOverrideSecurityProviderFunctor<TDomainObject>> functorList;
 
     public DomainSecurityServiceWithFunctor(
-        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityProvider<TDomainObject> disabledSecurityProvider,
         ISecurityOperationResolver securityOperationResolver,
         TOriginalDomainSecurityService originalDomainSecurityService,
         IEnumerable<IOverrideSecurityProviderFunctor<TDomainObject>> functorList)
 
-        : base(disabledSecurityProviderSource, securityOperationResolver)
+        : base(disabledSecurityProvider, securityOperationResolver)
     {
         this.originalDomainSecurityService = originalDomainSecurityService;
         this.functorList = functorList;

@@ -1,4 +1,4 @@
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using NHibernate;
 using NHibernate.Linq;
@@ -21,12 +21,12 @@ internal class TestNhQueryProvider<TDomainObject> : INhQueryProvider
 
     public TResult Execute<TResult>(Expression expression) => this.ExecuteInMemoryQuery<TResult>(expression);
 
-    public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken) =>
-        Task.FromResult(this.Execute<TResult>(expression));
+    public async Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken) =>
+        this.Execute<TResult>(expression);
 
     public int ExecuteDml<T1>(QueryMode queryMode, Expression expression) => throw new NotImplementedException();
 
-    public Task<int> ExecuteDmlAsync<T1>(QueryMode queryMode, Expression expression, CancellationToken cancellationToken) =>
+    public async Task<int> ExecuteDmlAsync<T1>(QueryMode queryMode, Expression expression, CancellationToken cancellationToken) =>
         throw new NotImplementedException();
 
     public IFutureEnumerable<TResult> ExecuteFuture<TResult>(Expression expression) => throw new NotImplementedException();

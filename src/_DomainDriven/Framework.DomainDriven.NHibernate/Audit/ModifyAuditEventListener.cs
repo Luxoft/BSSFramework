@@ -12,9 +12,9 @@ public class ModifyAuditEventListener : AuditEventListenerBase, IPreInsertEventL
     {
     }
 
-    public Task<bool> OnPreInsertAsync(PreInsertEvent @event, CancellationToken cancellationToken)
+    public async Task<bool> OnPreInsertAsync(PreInsertEvent @event, CancellationToken cancellationToken)
     {
-        return Task.FromResult(this.OnPreInsert(@event));
+        return this.OnPreInsert(@event);
     }
 
     public bool OnPreInsert(PreInsertEvent @event)
@@ -22,9 +22,9 @@ public class ModifyAuditEventListener : AuditEventListenerBase, IPreInsertEventL
         return this.SetAuditFields(@event, @event.State);
     }
 
-    public Task<bool> OnPreUpdateAsync(PreUpdateEvent @event, CancellationToken cancellationToken)
+    public async Task<bool> OnPreUpdateAsync(PreUpdateEvent @event, CancellationToken cancellationToken)
     {
-        return Task.FromResult(this.OnPreUpdate(@event));
+        return this.OnPreUpdate(@event);
     }
 
     public bool OnPreUpdate(PreUpdateEvent @event)

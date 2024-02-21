@@ -13,7 +13,7 @@ public class GetManagementUnitFluentMappingsHandler : IRequestHandler<GetManagem
             IManagementUnitFluentMappingBLLFactory managementUnitFluentMappingBllFactory) =>
             this.managementUnitFluentMappingBll = managementUnitFluentMappingBllFactory.Create(BLLSecurityMode.View);
 
-    public Task<GetManagementUnitFluentMappingsResponse[]> Handle(
+    public async Task<GetManagementUnitFluentMappingsResponse[]> Handle(
             GetManagementUnitFluentMappingsQuery request,
             CancellationToken cancellationToken)
     {
@@ -21,6 +21,6 @@ public class GetManagementUnitFluentMappingsHandler : IRequestHandler<GetManagem
                          .Select(x => new GetManagementUnitFluentMappingsResponse(x.Id, x.Name, x.Parent.Id, x.Period))
                          .ToArray();
 
-        return Task.FromResult(result);
+        return result;
     }
 }

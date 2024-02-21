@@ -4,16 +4,19 @@ using Framework.Authorization.Environment;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.DomainServices;
 using Framework.Authorization.SecuritySystem.ExternalSource;
-using Framework.Authorization.SecuritySystem.OperationInitializer;
+
+using Framework.Authorization.SecuritySystem.Initialize;
+using Framework.Authorization.SecuritySystem.PermissionOptimization;
 using Framework.Configuration;
 using Framework.Configuration.Domain;
-using Framework.Core;
+using Framework.Core.Services;
 using Framework.DependencyInjection;
+using Framework.DomainDriven.ImpersonateService;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
+using Framework.FinancialYear;
 using Framework.HierarchicalExpand;
-using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Bss;
@@ -21,6 +24,7 @@ using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -30,14 +34,21 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>)); //TODO: add unsecurity di key "DisabledSecurity" after update to NET8.0
-        services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Disabled, typeof(Repository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.View, typeof(ViewRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Edit, typeof(EditRepository<>));
 
+        services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
         services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
         services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
 
         services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
+        services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
+
+        services.AddScoped<ApplicationUserAuthenticationService>();
+        services.AddScopedFrom<IUserAuthenticationService, ApplicationUserAuthenticationService>();
+        services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
 
         services.RegisterAuthorizationSystem();
 
@@ -45,9 +56,10 @@ public static class ServiceCollectionExtensions
         services.RegisterAuthorizationSecurity();
         services.RegisterConfigurationSecurity();
 
-        services.AddSingleton<IDateTimeService>(DateTimeService.Default);
-
-        services.AddScoped(typeof(INotImplementedDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>));
+        services.TryAddSingleton(TimeProvider.System);
+        services.AddSingleton<IFinancialYearCalculator, FinancialYearCalculator>();
+        services.AddSingleton<FinancialYearServiceSettings>();
+        services.AddSingleton<IFinancialYearService, FinancialYearService>();
 
         return services;
     }
@@ -73,8 +85,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection RegisterHierarchicalObjectExpander<TPersistentDomainObjectBase>(this IServiceCollection services)
-        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+    public static IServiceCollection RegisterHierarchicalObjectExpander(this IServiceCollection services)
     {
         return services.AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
                        .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<Guid>>();
@@ -88,7 +99,8 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
 
-                       .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
+                       .AddScoped(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
+                       .AddScoped(typeof(IDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>))
 
                        .AddScoped<IRunAsManager, RunAsManger>()
                        .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
@@ -114,7 +126,12 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
 
+                       .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
+
+                       .AddSingleton<InitializeSettings>()
+                       .AddScoped<IAuthorizationEntityTypeInitializer, AuthorizationEntityTypeInitializer>()
                        .AddScoped<IAuthorizationOperationInitializer, AuthorizationOperationInitializer>()
+                       .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
 

@@ -14,14 +14,14 @@ namespace SampleSystem.WebApiCore.Controllers;
 [ApiController]
 public class InitializationController : ControllerBase
 {
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
     private readonly SubscriptionMetadataStore subscriptionMetadataStore;
 
     private readonly IInitializeManager initializeManager;
 
     public InitializationController(
-            IContextEvaluator<ISampleSystemBLLContext> contextEvaluator,
+            IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator,
             SubscriptionMetadataStore
                     subscriptionMetadataStore,
             IInitializeManager initializeManager)
@@ -35,6 +35,7 @@ public class InitializationController : ControllerBase
     public void SampleSystemInitializer()
     {
         var service = new SampleSystemInitializer(this.contextEvaluator, this.subscriptionMetadataStore, this.initializeManager);
+
         service.Initialize();
     }
 }

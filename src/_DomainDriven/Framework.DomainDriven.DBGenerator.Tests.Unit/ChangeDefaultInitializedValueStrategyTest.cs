@@ -6,6 +6,7 @@ using Framework.Persistent;
 using Microsoft.SqlServer.Management.Smo;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace DBGenerator.Tests.Unit;
 
@@ -25,7 +26,7 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         // Assert
         var clippedScript = SkipDefaultTemplate(resultScript).ToList();
-        Assert.AreEqual(0, clippedScript.Count);
+        ClassicAssert.AreEqual(0, clippedScript.Count);
     }
 
     [Test]
@@ -48,7 +49,7 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         // Assert
         var clippedScript = SkipDefaultTemplate(resultScript).ToList();
-        Assert.AreEqual(0, clippedScript.Count);
+        ClassicAssert.AreEqual(0, clippedScript.Count);
     }
 
     [Test]
@@ -71,8 +72,8 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         // Assert
         var clippedScript = SkipDefaultTemplate(resultScript).ToList();
-        Assert.AreEqual(1, clippedScript.Count);
-        Assert.AreEqual("update Object set [test]=0\r\n", clippedScript.Single());
+        ClassicAssert.AreEqual(1, clippedScript.Count);
+        ClassicAssert.AreEqual("update Object set [test]=0\r\n", clippedScript.Single());
     }
 
     private DatabaseScriptGeneratorStrategyInfo CreateDatabaseScriptGeneratorStrategeInfo(IEnumerable<DomainTypeMetadata> domainTypeMetadata)

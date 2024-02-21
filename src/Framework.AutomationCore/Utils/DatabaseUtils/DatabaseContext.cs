@@ -1,4 +1,6 @@
 using Automation.Utils.DatabaseUtils.Interfaces;
+
+using Microsoft.Extensions.Options;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 using SqlConnection = Microsoft.Data.SqlClient.SqlConnection;
@@ -15,16 +17,36 @@ public class DatabaseContext : IDatabaseContext
 
     public DatabaseContext(
         ConfigUtil configUtil,
+        IOptions<DatabaseContextSettings> settings)
+    : this(configUtil, settings.Value)
+    {
+    }
+
+    private DatabaseContext(
+        ConfigUtil configUtil,
         DatabaseContextSettings settings)
     {
-        this.Main = new DatabaseItem(configUtil, settings.ConnectionString);
+        var connectionString = configUtil.GetConnectionString(settings.ConnectionStringName);
+        this.Main = new DatabaseItem(
+            connectionString,
+            configUtil.DatabaseCollation,
+            configUtil.DbDataDirectory,
+            null,
+            configUtil.TestsParallelize);
 
         if (settings.SecondaryDatabases != null)
         {
             this.Secondary = new Dictionary<string, DatabaseItem>();
             foreach (var database in settings.SecondaryDatabases)
             {
-                this.Secondary.Add(database, new DatabaseItem(configUtil, settings.ConnectionString, database));
+                this.Secondary.Add(
+                    database,
+                    new DatabaseItem(
+                        connectionString,
+                        configUtil.DatabaseCollation,
+                        configUtil.DbDataDirectory,
+                        database,
+                        configUtil.TestsParallelize));
             }
         }
 
@@ -42,14 +64,4 @@ public class DatabaseContext : IDatabaseContext
     }
 }
 
-public class DatabaseContextSettings
-{
-    public string ConnectionString { get; set; }
-    public string[] SecondaryDatabases { get; set; }
 
-    public DatabaseContextSettings(string connectionString, string[] secondaryDatabases)
-    {
-        this.ConnectionString = connectionString;
-        this.SecondaryDatabases = secondaryDatabases;
-    }
-}

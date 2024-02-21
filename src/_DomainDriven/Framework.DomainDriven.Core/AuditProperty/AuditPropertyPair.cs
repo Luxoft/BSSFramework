@@ -13,11 +13,11 @@ public class AuditPropertyPair<TDomainObject> : IEnumerable<IAuditProperty>
     private readonly IAuditProperty<TDomainObject, DateTime?> dateAudit;
 
 
-    public AuditPropertyPair(Expression<Func<TDomainObject, string>> authorPropertyExpr, Expression<Func<TDomainObject, DateTime?>> datePropertyExpr, IUserAuthenticationService userAuthenticationService, IDateTimeService dateTimeService)
-            : this(new AuditProperty<TDomainObject, string>(authorPropertyExpr, userAuthenticationService.GetUserName), new AuditProperty<TDomainObject, DateTime?>(datePropertyExpr, () => dateTimeService.Now))
+    public AuditPropertyPair(Expression<Func<TDomainObject, string>> authorPropertyExpr, Expression<Func<TDomainObject, DateTime?>> datePropertyExpr, IUserAuthenticationService userAuthenticationService, TimeProvider timeProvider)
+            : this(new AuditProperty<TDomainObject, string>(authorPropertyExpr, userAuthenticationService.GetUserName), new AuditProperty<TDomainObject, DateTime?>(datePropertyExpr, () => timeProvider.GetLocalNow().DateTime))
     {
         if (userAuthenticationService == null) throw new ArgumentNullException(nameof(userAuthenticationService));
-        if (dateTimeService == null) throw new ArgumentNullException(nameof(dateTimeService));
+        if (timeProvider == null) throw new ArgumentNullException(nameof(timeProvider));
     }
 
     public AuditPropertyPair(IAuditProperty<TDomainObject, string> authorAudit, IAuditProperty<TDomainObject, DateTime?> dateAudit)
@@ -42,10 +42,10 @@ public class AuditPropertyPair<TDomainObject> : IEnumerable<IAuditProperty>
 public class AuditPropertyPair : AuditPropertyPair<IAuditObject>
 {
     public AuditPropertyPair(IUserAuthenticationService userAuthenticationService,
-                             IDateTimeService dateTimeService,
+                             TimeProvider timeProvider,
                              Expression<Func<IAuditObject, string>> authorPropertyExpr,
                              Expression<Func<IAuditObject, DateTime?>> datePropertyExpr)
-            : base(authorPropertyExpr, datePropertyExpr, userAuthenticationService, dateTimeService)
+            : base(authorPropertyExpr, datePropertyExpr, userAuthenticationService, timeProvider)
     {
     }
 
@@ -56,7 +56,7 @@ public class AuditPropertyPair : AuditPropertyPair<IAuditObject>
     }
 
 
-    public static AuditPropertyPair GetCreateAuditProperty(IUserAuthenticationService userAuthenticationService, IDateTimeService dateTimeService) => new AuditPropertyPair(userAuthenticationService, dateTimeService, obj => obj.CreatedBy, obj => obj.CreateDate);
+    public static AuditPropertyPair GetCreateAuditProperty(IUserAuthenticationService userAuthenticationService, TimeProvider timeProvider) => new AuditPropertyPair(userAuthenticationService, timeProvider, obj => obj.CreatedBy, obj => obj.CreateDate);
 
-    public static AuditPropertyPair GetModifyAuditProperty(IUserAuthenticationService userAuthenticationService, IDateTimeService dateTimeService) => new AuditPropertyPair(userAuthenticationService, dateTimeService, obj => obj.ModifiedBy, obj => obj.ModifyDate);
+    public static AuditPropertyPair GetModifyAuditProperty(IUserAuthenticationService userAuthenticationService, TimeProvider timeProvider) => new AuditPropertyPair(userAuthenticationService, timeProvider, obj => obj.ModifiedBy, obj => obj.ModifyDate);
 }

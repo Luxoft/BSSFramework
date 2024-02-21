@@ -1,6 +1,5 @@
 ﻿using Framework.Core.Services;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.UnitTest.Mock;
 using Framework.HierarchicalExpand;
@@ -102,7 +101,9 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
 
     public IServiceProvider ServiceProvider { get; }
 
-    public IDisabledSecurityProviderSource DisabledSecurityProviderSource => this.ServiceProvider.GetRequiredService<IDisabledSecurityProviderSource>();
+    public ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
+        where TDomainObject : PersistentDomainObjectBase
+        => this.ServiceProvider.GetRequiredService<ISecurityProvider<TDomainObject>>();
 
     public ISecurityOperationResolver SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver>();
 }

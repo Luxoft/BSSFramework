@@ -1,4 +1,4 @@
-﻿using Automation.ServiceEnvironment;
+﻿using Automation.Utils;
 
 using FluentAssertions;
 
@@ -12,6 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -57,12 +58,11 @@ public class AuthPerformanceTest : TestBase
         var authPerfCount = await this.GenerateAuthPerformanceObject();
 
         // Act
-        var findCount = await this.RootServiceProvider.GetRequiredService<IDBSessionEvaluator>().EvaluateAsync(
+        var findCount = await this.RootServiceProvider.GetRequiredService<IServiceEvaluator<IRepositoryFactory<AuthPerformanceObject>>>().EvaluateAsync(
                             DBSessionMode.Write,
-                            async (sp, _) =>
+                            async service =>
                             {
-                                var testObjRep = sp.GetRequiredService<IRepositoryFactory<AuthPerformanceObject>>()
-                                                   .Create(BLLSecurityMode.View);
+                                var testObjRep = service.Create(BLLSecurityMode.View);
 
                                 return testObjRep.GetQueryable().Count();
                             });
@@ -81,7 +81,7 @@ public class AuthPerformanceTest : TestBase
 
                       from employee in this.employeeSource
 
-                      select new SampleSystemPermission(TestBusinessRole.Administrator, fbu, mbu, location, employee);
+                      select (TestPermission)new SampleSystemTestPermission(SampleSystemSecurityRole.Administrator, fbu, mbu, location, employee);
 
         this.AuthHelper.SetUserRole(PrincipalName, request.ToArray());
     }
@@ -90,7 +90,7 @@ public class AuthPerformanceTest : TestBase
     {
         return await this.RootServiceProvider.GetRequiredService<IDBSessionEvaluator>().EvaluateAsync(
                    DBSessionMode.Write,
-                   async (sp, _) =>
+                   async sp =>
                    {
                        var fbuRep = sp.GetRequiredService<IRepositoryFactory<BusinessUnit>>().Create();
                        var mbuRep = sp.GetRequiredService<IRepositoryFactory<ManagementUnit>>().Create();

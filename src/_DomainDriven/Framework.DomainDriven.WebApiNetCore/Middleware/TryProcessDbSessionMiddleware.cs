@@ -12,39 +12,32 @@ public class TryProcessDbSessionMiddleware
         this.next = next;
     }
 
-    public async Task Invoke(HttpContext context, IWebApiDBSessionModeResolver sessionModeResolver)
+    public async Task Invoke(HttpContext context, IDBSessionManager dbSessionManager, IWebApiDBSessionModeResolver sessionModeResolver)
     {
-        try
-        {
-            var sessionMode = sessionModeResolver.GetSessionMode();
-
-            if (sessionMode != null)
+        await dbSessionManager.EvaluateAsync(
+            async () =>
             {
-                var dbSession = context.RequestServices.GetRequiredService<IDBSession>();
+                var sessionMode = sessionModeResolver.GetSessionMode();
 
-                switch (sessionMode)
+                if (sessionMode != null)
                 {
-                    case DBSessionMode.Read:
-                        dbSession.AsReadOnly();
-                        break;
+                    var dbSession = context.RequestServices.GetRequiredService<IDBSession>();
 
-                    case DBSessionMode.Write:
-                        dbSession.AsWritable();
-                        break;
+                    switch (sessionMode)
+                    {
+                        case DBSessionMode.Read:
+                            dbSession.AsReadOnly();
+                            break;
 
+                        case DBSessionMode.Write:
+                            dbSession.AsWritable();
+                            break;
+
+                    }
                 }
-            }
 
-            await this.next(context);
-        }
-        catch
-        {
-            context.RequestServices.TryFaultDbSession();
-            throw;
-        }
-        finally
-        {
-            await context.RequestServices.TryCloseDbSessionAsync(context.RequestAborted);
-        }
+                await this.next(context);
+            },
+            context.RequestAborted);
     }
 }

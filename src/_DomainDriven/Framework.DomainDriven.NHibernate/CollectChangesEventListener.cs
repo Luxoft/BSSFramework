@@ -60,11 +60,9 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
         return this._insertedObjects.Any() || this._removedObjects.Any() || this._updatedObjects.Any();
     }
 
-    public Task OnPostDeleteAsync(PostDeleteEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostDeleteAsync(PostDeleteEvent @event, CancellationToken cancellationToken)
     {
         this.OnPostDelete(@event);
-
-        return Task.CompletedTask;
     }
 
     public void OnPostDelete(PostDeleteEvent @event)
@@ -76,10 +74,9 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
         this._removedObjects.Add(@event.ToDALObjects(this.counter++));
     }
 
-    public Task OnPostInsertAsync(PostInsertEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostInsertAsync(PostInsertEvent @event, CancellationToken cancellationToken)
     {
         this.OnPostInsert(@event);
-        return Task.CompletedTask;
     }
 
     public void OnPostInsert(PostInsertEvent @event)
@@ -92,10 +89,9 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
         this._insertedObjects.Add(@event.ToDALObjects(this.counter++));
     }
 
-    public Task OnPostUpdateAsync(PostUpdateEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostUpdateAsync(PostUpdateEvent @event, CancellationToken cancellationToken)
     {
         this.OnPostUpdate(@event);
-        return Task.CompletedTask;
     }
 
     public void OnPostUpdate(PostUpdateEvent @event)

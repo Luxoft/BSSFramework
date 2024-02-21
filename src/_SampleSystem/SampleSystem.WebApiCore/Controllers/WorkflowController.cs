@@ -29,13 +29,13 @@ public class WorkflowController : ControllerBase
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
     public WorkflowController(
             StartWorkflowJob startWorkflowJob,
             IWorkflowHost workflowHost,
             IUserAuthenticationService userAuthenticationService,
-            IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
+            IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator)
 
     {
         this.startWorkflowJob = startWorkflowJob;
@@ -61,7 +61,7 @@ public class WorkflowController : ControllerBase
     [HttpPost(nameof(GetMyPendingApproveOperationWorkflowObjects))]
     public async Task<List<ApproveOperationWorkflowObject>> GetMyPendingApproveOperationWorkflowObjects(PermissionIdentityDTO permissionIdent)
     {
-        var workflowOperationIdents = await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, (ctx, _) =>
+        var workflowOperationIdents = await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, async ctx =>
         {
             var permissionIdStr = permissionIdent.Id.ToString();
 
@@ -72,7 +72,7 @@ public class WorkflowController : ControllerBase
                     && wi.WorkflowDefinitionId == nameof(__ApproveOperation_Workflow)
                     && wi.Status == WorkflowStatus.Runnable);
 
-            return Task.FromResult(instances.ToList().Select(wi => wi.Id));
+            return instances.ToList().Select(wi => wi.Id);
         });
 
         var result = new List<ApproveOperationWorkflowObject>();
@@ -89,7 +89,7 @@ public class WorkflowController : ControllerBase
             }
         }
 
-        await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, default, (ctx, _) =>
+        await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, default, ctx =>
         {
             var authContext = ctx.Authorization;
 
@@ -107,15 +107,15 @@ public class WorkflowController : ControllerBase
     }
 
     [HttpPost(nameof(ApproveOperation))]
-    public Task ApproveOperation(PermissionIdentityDTO permissionIdentity, string approveEventId)
+    public async Task ApproveOperation(PermissionIdentityDTO permissionIdentity, string approveEventId)
     {
-        return this.ApproveRejectOperation(permissionIdentity, approveEventId, true);
+        await this.ApproveRejectOperation(permissionIdentity, approveEventId, true);
     }
 
     [HttpPost(nameof(RejectOperation))]
-    public Task RejectOperation(PermissionIdentityDTO permissionIdentity, string rejectEventId)
+    public async Task RejectOperation(PermissionIdentityDTO permissionIdentity, string rejectEventId)
     {
-        return this.ApproveRejectOperation(permissionIdentity, rejectEventId, false);
+        await this.ApproveRejectOperation(permissionIdentity, rejectEventId, false);
     }
 
     private async Task ApproveRejectOperation(PermissionIdentityDTO permissionIdentity, string eventId, bool isApprove)

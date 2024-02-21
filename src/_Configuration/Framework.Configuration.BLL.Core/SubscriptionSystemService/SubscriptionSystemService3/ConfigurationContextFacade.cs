@@ -46,8 +46,9 @@ public class ConfigurationContextFacade
 
         var principalNames = principals.ToList(principal => principal.Name);
 
-        var employees = this.context.GetEmployeeSource()
-                            .GetUnsecureQueryable()
+        var employees = this.context
+                            .EmployeeSource
+                            .GetQueryable()
                             .Where(employee => principalNames.Contains(employee.Login))
                             .ToList();
 

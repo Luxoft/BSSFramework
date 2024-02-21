@@ -17,6 +17,8 @@ using Framework.DomainDriven.NHibernate;
 using Framework.Events;
 using Framework.OData;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using NHibernate.Impl;
 
 using SampleSystem.Generated.DTO;
@@ -312,9 +314,10 @@ public class EmployeeTests : TestBase
     public void EventListenerTest()
     {
         this.Evaluate(DBSessionMode.Write,
-                      (_, dbContext) =>
+                      bllContext =>
                       {
-                          var writeNhibSession = dbContext as WriteNHibSession;
+                          var dbSession = bllContext.ServiceProvider.GetRequiredService<IDBSession>();
+                          var writeNhibSession = dbSession as WriteNHibSession;
                           var impl = writeNhibSession.NativeSession as SessionImpl;
                           return;
                       });
@@ -357,27 +360,5 @@ public class EmployeeTests : TestBase
 
         // Assert
         isVirtualResult.Should().Be(false);
-    }
-}
-
-[TestClass]
-public class DomainEmployeeTests
-{
-    [TestMethod]
-    public void CreateEmployeeFilter_IsNotVirtual()
-    {
-        // Arrange
-
-        // Act
-        var filter = new TestEmployeeFilter
-                     {
-                             BusinessUnit = new BusinessUnit()
-                     };
-
-        var operation = SelectOperation<Employee>.Default.AddFilter(e => e.CoreBusinessUnit.Id == filter.BusinessUnit.Id);
-        var result = operation.IsVirtual;
-
-        // Assert
-        result.Should().Be(false);
     }
 }

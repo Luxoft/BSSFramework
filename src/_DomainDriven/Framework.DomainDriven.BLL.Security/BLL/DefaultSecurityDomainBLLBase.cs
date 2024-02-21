@@ -44,7 +44,7 @@ namespace Framework.DomainDriven.BLL.Security
         where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer, IHierarchicalObjectExpanderFactoryContainer<TIdent>
     {
         protected DefaultSecurityDomainBLLBase(TBLLContext context, ISpecificationEvaluator specificationEvaluator = null)
-            : this(context, context.DisabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>(), specificationEvaluator)
+            : this(context, context.GetDisabledSecurityProvider<TDomainObject>(), specificationEvaluator)
         {
         }
 

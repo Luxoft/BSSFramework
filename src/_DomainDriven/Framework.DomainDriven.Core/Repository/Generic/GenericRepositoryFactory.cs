@@ -1,7 +1,4 @@
-﻿using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
-using Framework.SecuritySystem;
-
-
+﻿using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.Repository;
 
@@ -16,9 +13,8 @@ public class GenericRepositoryFactory<TDomainObject, TIdent> : TemplateRepositor
 {
     public GenericRepositoryFactory(
         IServiceProvider serviceProvider,
-        INotImplementedDomainSecurityService<TDomainObject> notImplementedDomainSecurityService,
-        IDomainSecurityService<TDomainObject> domainSecurityService = null)
-        : base(serviceProvider, notImplementedDomainSecurityService, domainSecurityService)
+        IDomainSecurityService<TDomainObject> domainSecurityService )
+        : base(serviceProvider, domainSecurityService)
     {
     }
 }

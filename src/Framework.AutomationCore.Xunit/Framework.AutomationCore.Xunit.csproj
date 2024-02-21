@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.AutomationCore.Xunit</PackageId>
+    <RootNamespace>Automation.Xunit</RootNamespace>    
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.abstractions" />
+    <PackageReference Include="xunit.core" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.AutomationCore.ServiceEnvironment\Framework.AutomationCore.ServiceEnvironment.csproj" />
+    <ProjectReference Include="..\Framework.AutomationCore\Framework.AutomationCore.csproj" />
+  </ItemGroup>
+</Project>

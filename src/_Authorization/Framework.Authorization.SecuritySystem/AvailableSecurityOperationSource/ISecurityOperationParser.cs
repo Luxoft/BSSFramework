@@ -9,7 +9,11 @@ public interface ISecurityOperationParser
     SecurityOperation Parse(string name);
 }
 
-public interface ISecurityOperationParser<in TIdent> : ISecurityOperationParser
+public interface ISecurityOperationParser<TIdent> : ISecurityOperationParser
 {
-    SecurityOperation GetSecurityOperation(TIdent id);
+    new IReadOnlyList<SecurityOperation<TIdent>> Operations { get; }
+
+    new SecurityOperation<TIdent> Parse(string name);
+
+    SecurityOperation<TIdent> GetSecurityOperation(TIdent id);
 }

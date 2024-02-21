@@ -4,7 +4,6 @@ using Automation.ServiceEnvironment.Services;
 
 using Framework.Core.Services;
 using Framework.DependencyInjection;
-using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 
@@ -40,18 +39,16 @@ public static class ServiceProviderExtensions
         return services;
     }
 
-    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services)
-    {
-        return services.AddSingleton<IntegrationTestUserAuthenticationService>()
-                       .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IntegrationTestUserAuthenticationService>()
-                       .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services) =>
+        services.AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+                .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
+                .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
-                       .AddSingleton<IntegrationTestDateTimeService>()
-                       .ReplaceSingletonFrom<IDateTimeService, IntegrationTestDateTimeService>()
+                .AddSingleton<IntegrationTestTimeProvider>()
+                .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
-                       .AddScoped<TestWebApiCurrentMethodResolver>()
-                       .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+                .AddScoped<TestWebApiCurrentMethodResolver>()
+                .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
 
-                       .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();;
-    }
+                .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();
 }

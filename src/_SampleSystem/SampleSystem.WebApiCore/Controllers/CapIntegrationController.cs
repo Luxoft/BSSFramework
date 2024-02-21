@@ -6,27 +6,27 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
-using SampleSystem.BLL;
+using SampleSystem.BLL._Command.CreateClassA.Intergation;
 using SampleSystem.BLL.Core.IntegrationEvens;
 
 namespace SampleSystem.WebApiCore;
 
-public class CapIntegrationController
+public class CapIntegrationController : ICapSubscribe
 {
-    private readonly IMediator mediator;
+    private readonly IServiceEvaluator<IMediator> mediatorEvaluator;
 
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
-
-    public CapIntegrationController(
-            IMediator mediator,
-            IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
+    public CapIntegrationController(IServiceEvaluator<IMediator> mediatorEvaluator)
     {
-        this.mediator = mediator;
-        this.contextEvaluator = contextEvaluator;
+        this.mediatorEvaluator = mediatorEvaluator;
     }
 
     [CapSubscribe(nameof(TestIntegrationEvent))]
     [NonAction]
     public async Task TestIntegrationEvent(TestIntegrationEvent @event, CancellationToken token) =>
-            await this.contextEvaluator.EvaluateAsync(DBSessionMode.Write, async _ => await this.mediator.Send(@event, token));
+            await this.mediatorEvaluator.EvaluateAsync(DBSessionMode.Write, mediator => mediator.Send(@event, token));
+
+    [CapSubscribe(nameof(ClassACreatedEvent))]
+    [NonAction]
+    public async Task ClassACreatedEvent(ClassACreatedEvent @event, CancellationToken token) =>
+        await this.mediatorEvaluator.EvaluateAsync(DBSessionMode.Write, mediator => mediator.Send(@event, token));
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using SampleSystem.Security;
+
 namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemGeneralDependencyInjectionExtensions
@@ -11,6 +13,6 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                .RegisterGeneralBssFramework()
                .RegisterGeneralDatabaseSettings(configuration)
                .RegisterGeneralApplicationServices(configuration)
-               .RegisterDomainSecurityServices();
+               .RegisterGeneralSecurityServices();
     }
 }

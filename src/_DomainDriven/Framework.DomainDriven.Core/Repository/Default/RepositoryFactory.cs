@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.Repository;
 
@@ -14,9 +13,8 @@ public class RepositoryFactory<TDomainObject> : TemplateRepositoryFactory<
 {
     public RepositoryFactory(
         IServiceProvider serviceProvider,
-        INotImplementedDomainSecurityService<TDomainObject> notImplementedDomainSecurityService,
-        IDomainSecurityService<TDomainObject> domainSecurityService = null)
-        : base(serviceProvider, notImplementedDomainSecurityService, domainSecurityService)
+        IDomainSecurityService<TDomainObject> domainSecurityService)
+        : base(serviceProvider, domainSecurityService)
     {
     }
 }

@@ -32,13 +32,13 @@ public static class DALChangesExtensions
         return request.ToDictionary(pair => pair.Key, pair => pair.Value);
     }
 
-    public static IEnumerable<TupleStruct<T, DALObjectChangeType>> ToPlainValues<T>(this DALChanges<T> source)
+    public static IEnumerable<ValueTuple<T, DALObjectChangeType>> ToPlainValues<T>(this DALChanges<T> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        var combined = source.CreatedItems.Select(item => TupleStruct.Create(item, DALObjectChangeType.Created))
-                             .Concat(source.UpdatedItems.Select(item => TupleStruct.Create(item, DALObjectChangeType.Updated)))
-                             .Concat(source.RemovedItems.Select(item => TupleStruct.Create(item, DALObjectChangeType.Removed)));
+        var combined = source.CreatedItems.Select(item => ValueTuple.Create(item, DALObjectChangeType.Created))
+                             .Concat(source.UpdatedItems.Select(item => ValueTuple.Create(item, DALObjectChangeType.Updated)))
+                             .Concat(source.RemovedItems.Select(item => ValueTuple.Create(item, DALObjectChangeType.Removed)));
 
         return combined;
     }
@@ -52,7 +52,7 @@ public static class DALChangesExtensions
 
                       from pair in dalChanges.ToChangeTypeDict()
 
-                      group pair.Key.ToKeyValuePair(pair.Value) by pair.Key.Object into changeGroup
+                      group pair.Key.ToKeyValuePair(pair.Value) by (pair.Key.Object, pair.Key.Type) into changeGroup
 
                       let finalState = changeGroup.ToDictionary().ToFinalState()
 

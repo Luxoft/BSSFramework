@@ -30,7 +30,11 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
 
     public virtual IAccessDeniedExceptionService AccessDeniedExceptionService { get; }
 
-    public virtual IDisabledSecurityProviderSource DisabledSecurityProviderSource => this.ServiceProvider.GetRequiredService<IDisabledSecurityProviderSource>();
+    public ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
+        where TDomainObject : TPersistentDomainObjectBase
+    {
+        return this.ServiceProvider.GetRequiredService<ISecurityProvider<TDomainObject>>();
+    }
 
     public virtual ISecurityOperationResolver SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver>();
 
@@ -39,9 +43,9 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
     {
         var viewOperation = this.SecurityOperationResolver.TryGetSecurityOperation<TDomainObject>(BLLSecurityMode.View);
 
-        if (viewOperation is SecurityOperation contextOperation)
+        if (viewOperation != null)
         {
-            return contextOperation.ExpandType.HasFlag(HierarchicalExpandType.Parents);
+            return viewOperation.ExpandType.HasFlag(HierarchicalExpandType.Parents);
         }
         else
         {

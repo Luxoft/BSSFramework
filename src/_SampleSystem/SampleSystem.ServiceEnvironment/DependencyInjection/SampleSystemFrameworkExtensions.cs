@@ -1,9 +1,6 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
 using Framework.Authorization.Generated.DTO;
-using Framework.Authorization.SecuritySystem;
-using Framework.Authorization.SecuritySystem.ExternalSource;
-using Framework.Configuration;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
@@ -11,7 +8,7 @@ using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
@@ -23,6 +20,8 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
+
+using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -112,7 +111,6 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterContextEvaluator(this IServiceCollection services)
     {
-        services.AddSingleton<IContextEvaluator<ISampleSystemBLLContext>, ContextEvaluator<ISampleSystemBLLContext>>();
         services.AddScoped<IApiControllerBaseEvaluator<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>, ApiControllerBaseSingleCallEvaluator<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>>();
 
         return services;
@@ -122,16 +120,16 @@ public static class SampleSystemFrameworkExtensions
     {
         // For notification
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
-        services.AddScopedFrom<IBLLSimpleQueryBase<IEmployee>, IEmployeeBLLFactory>(factory => factory.Create());
+        services.AddScoped<IEmployeeSource, EmployeeSource<Employee>>();
 
         // For subscription
         services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));
 
         // For expand tree
-        services.RegisterHierarchicalObjectExpander<PersistentDomainObjectBase>();
+        services.RegisterHierarchicalObjectExpander();
 
-        // For parsing auth operations
-        services.AddSingleton(new SecurityOperationTypeInfo(typeof(SampleSystemSecurityOperation)));
+        // Serilog
+        services.AddSingleton(Serilog.Log.Logger);
 
         return services;
     }

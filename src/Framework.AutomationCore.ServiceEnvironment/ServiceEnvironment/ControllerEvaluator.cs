@@ -3,6 +3,7 @@
 using Automation.ServiceEnvironment.Services;
 
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.AspNetCore.Http;
@@ -45,7 +46,7 @@ public class ControllerEvaluator<TController>
             throw new Exception($"For Task result use {nameof(EvaluateAsync)} method");
         }
 
-        return this.InternalEvaluateAsync(funcExpr, c => Task.FromResult(funcExpr.Eval(c))).GetAwaiter().GetResult();
+        return this.InternalEvaluateAsync(funcExpr, async c => funcExpr.Eval(c)).GetAwaiter().GetResult();
     }
 
     public async Task EvaluateAsync(Expression<Func<TController, Task>> actionExpr)
@@ -70,7 +71,7 @@ public class ControllerEvaluator<TController>
 
         await new WebApiInvoker(c, context => InvokeController(context, func))
               .WithMiddleware(next => new ImpersonateMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, this.customPrincipalName))
-              .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>()))
+              .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IDBSessionManager>(), httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>()))
               .WithMiddleware(next => new InitCurrentMethodMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, invokeExpr))
               .WithMiddleware(next => new WebApiExceptionExpanderMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiExceptionExpander>()))
               .Invoke();
@@ -111,7 +112,7 @@ public class ControllerEvaluator<TController>
             }
             else
             {
-                await context.RequestServices.GetRequiredService<IntegrationTestUserAuthenticationService>().WithImpersonateAsync(customPrincipalName, async () =>
+                await context.RequestServices.GetRequiredService<IIntegrationTestUserAuthenticationService>().WithImpersonateAsync(customPrincipalName, async () =>
                 {
                     await this.next(context);
                     return default(object);

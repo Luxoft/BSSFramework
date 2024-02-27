@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.SecuritySystem.Initialize;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.NamedLocks;
 using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.IAD;
 
@@ -31,8 +32,9 @@ public class SampleSystemInitializer
 
     private void InternalInitialize()
     {
-        this.contextEvaluator.Evaluate(DBSessionMode.Write, context => context.Configuration.Logics.NamedLock.CheckInit());
-        this.contextEvaluator.Evaluate(DBSessionMode.Write, context => context.Logics.NamedLock.CheckInit());
+        this.contextEvaluator.Evaluate(
+            DBSessionMode.Write,
+            context => context.ServiceProvider.GetRequiredService<INamedLockInitializer>().Initialize().GetAwaiter().GetResult());
 
         this.InitSecurity<IAuthorizationEntityTypeInitializer>();
         this.InitSecurity<IAuthorizationOperationInitializer>();

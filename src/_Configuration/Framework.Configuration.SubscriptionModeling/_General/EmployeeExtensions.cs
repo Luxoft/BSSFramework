@@ -1,4 +1,6 @@
-﻿namespace Framework.Configuration;
+﻿using Framework.Notification;
+
+namespace Framework.Configuration.SubscriptionModeling;
 
 public static class EmployeeExtensions
 {

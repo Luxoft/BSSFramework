@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.DomainDriven.Lock;
 using Framework.Exceptions;
 using Framework.OData;
 using Framework.Persistent;

@@ -1,7 +1,7 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Lock;
 
 namespace Framework.Configuration.BLL;
 
@@ -27,7 +27,7 @@ public partial class SequenceBLL
         return sequence.Number;
     }
 
-    protected virtual void LockSequence() => this.Context.Logics.NamedLock.Lock(NamedLockOperation.UpdateSequence, LockRole.Update);
+    protected virtual void LockSequence() => this.Context.NamedLockService.LockAsync(ConfigurationNamedLock.UpdateSequence, LockRole.Update).GetAwaiter().GetResult();
 
     public Sequence Create(SequenceCreateModel createModel) => new();
 }

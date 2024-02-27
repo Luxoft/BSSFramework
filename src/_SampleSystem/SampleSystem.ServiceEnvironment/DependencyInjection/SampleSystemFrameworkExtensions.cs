@@ -8,11 +8,12 @@ using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Configuration;
+using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
+using Framework.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,7 +22,7 @@ using SampleSystem.Domain;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
 
-using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
+using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBase;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -77,7 +78,7 @@ public static class SampleSystemFrameworkExtensions
     {
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
-        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
+        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
 
@@ -118,6 +119,9 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterSupportServices(this IServiceCollection services)
     {
+        // For NamedLocks
+        services.AddSingleton(new NamedLockTypeInfo(typeof(SampleSystemNamedLock)));
+
         // For notification
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
         services.AddScoped<IEmployeeSource, EmployeeSource<Employee>>();

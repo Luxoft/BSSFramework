@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 
 using Framework.Core;
+using Framework.DomainDriven.Lock;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.OData;

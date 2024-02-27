@@ -1,28 +1,28 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Core;
 using Framework.Core.Serialization;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 
 using Framework.Notification;
 using Framework.Configuration.Domain;
+using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
 namespace Framework.Configuration.BLL;
 
 public partial interface IConfigurationBLLContext :
 
-    Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext,
-
     ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
 
     ITypeResolverContainer<string>,
 
-    ITrackingServiceContainer<PersistentDomainObjectBase>,
-
-    IConfigurationBLLContextContainer<IConfigurationBLLContext>
+    ITrackingServiceContainer<PersistentDomainObjectBase>
 {
+    INamedLockService NamedLockService { get; }
+
+    IEmployeeSource EmployeeSource { get; }
+
     IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 
     bool SubscriptionEnabled { get; }
@@ -50,4 +50,10 @@ public partial interface IConfigurationBLLContext :
     ITargetSystemService GetMainTargetSystemService();
 
     IEnumerable<ITargetSystemService> GetTargetSystemServices();
+
+    /// <summary>
+    /// Получение текущей ревизии из аудита (пока возвращает 0, если вызван до флаша сессии)
+    /// </summary>
+    /// <returns></returns>
+    long GetCurrentRevision();
 }

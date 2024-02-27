@@ -4,6 +4,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DTOGenerator.Server;
+using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 using Framework.Transfering;
 

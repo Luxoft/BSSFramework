@@ -1,4 +1,6 @@
-﻿namespace Framework.DomainDriven;
+﻿using Framework.DomainDriven.Lock;
+
+namespace Framework.DomainDriven;
 
 public interface IAsyncDal<TDomainObject, in TIdent>
 {

@@ -6,8 +6,8 @@ using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
+using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.Tracking;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
@@ -42,6 +42,7 @@ public partial class ConfigurationBLLContext
             IConfigurationBLLFactoryContainer logics,
             IAuthorizationBLLContext authorization,
             IEmployeeSource employeeSource,
+            INamedLockService namedLockService,
             IEnumerable<ITargetSystemService> targetSystemServices,
             IConfigurationBLLContextSettings settings,
             ICurrentRevisionService currentRevisionService)
@@ -53,6 +54,7 @@ public partial class ConfigurationBLLContext
         this.Logics = logics;
 
         this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
+        this.NamedLockService = namedLockService;
         this.EmployeeSource = employeeSource ?? throw new ArgumentNullException(nameof(employeeSource));
         this.currentRevisionService = currentRevisionService ?? throw new ArgumentNullException(nameof(currentRevisionService));
 
@@ -101,9 +103,9 @@ public partial class ConfigurationBLLContext
 
     public bool SubscriptionEnabled => this.lazyTargetSystemServiceCache.Value.Values.Any(tss => tss.TargetSystem.SubscriptionEnabled);
 
-    public IEmployeeSource EmployeeSource { get; }
+    public INamedLockService NamedLockService { get; }
 
-    IConfigurationBLLContext IConfigurationBLLContextContainer<IConfigurationBLLContext>.Configuration => this;
+    public IEmployeeSource EmployeeSource { get; }
 
     /// <inheritdoc />
     public long GetCurrentRevision()

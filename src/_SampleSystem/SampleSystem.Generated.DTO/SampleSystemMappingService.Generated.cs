@@ -636,8 +636,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapMiniBusinessUnitEmployeeRole(SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole domainObject, SampleSystem.Generated.DTO.MiniBusinessUnitEmployeeRoleProjectionDTO mappingObject);
         
-        void MapNamedLock(SampleSystem.Domain.NamedLock domainObject, SampleSystem.Generated.DTO.NamedLockEventRichDTO mappingObject);
-        
         void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO mappingObject);
         
         void MapNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO mappingObject, SampleSystem.Domain.NoSecurityObject domainObject);
@@ -1185,8 +1183,6 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.ManagementUnitFluentMapping ToManagementUnitFluentMapping(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO managementUnitFluentMappingIdentityDTO);
         
         SampleSystem.Domain.ManagementUnitToAncestorChildView ToManagementUnitToAncestorChildView(SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewIdentityDTO managementUnitToAncestorChildViewIdentityDTO);
-        
-        SampleSystem.Domain.NamedLock ToNamedLock(SampleSystem.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO);
         
         SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO noSecurityObjectIdentityDTO);
         
@@ -6379,18 +6375,6 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapNamedLock(SampleSystem.Domain.NamedLock domainObject, SampleSystem.Generated.DTO.NamedLockEventRichDTO mappingObject)
-        {
-            mappingObject.Active = domainObject.Active;
-            mappingObject.CreateDate = domainObject.CreateDate;
-            mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.LockOperation = domainObject.LockOperation;
-            mappingObject.ModifiedBy = domainObject.ModifiedBy;
-            mappingObject.ModifyDate = domainObject.ModifyDate;
-            mappingObject.Version = domainObject.Version;
-        }
-        
         public virtual void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO mappingObject)
         {
         }
@@ -8480,7 +8464,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 ToIntegrationVersionContainer1(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO integrationVersionContainer1SimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.DomainDriven.IdCheckMode.SkipEmpty, Framework.DomainDriven.LockRole.Update);
+            return this.GetById<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.DomainDriven.IdCheckMode.SkipEmpty, Framework.DomainDriven.Lock.LockRole.Update);
         }
         
         public virtual SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel ToIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO)
@@ -8661,11 +8645,6 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.ManagementUnitToAncestorChildView ToManagementUnitToAncestorChildView(SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewIdentityDTO managementUnitToAncestorChildViewIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.ManagementUnitToAncestorChildView>(managementUnitToAncestorChildViewIdentityDTO.Id);
-        }
-        
-        public virtual SampleSystem.Domain.NamedLock ToNamedLock(SampleSystem.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.NamedLock>(namedLockIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO noSecurityObjectIdentityDTO)

@@ -1,5 +1,6 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.DomainDriven;
+using Framework.DomainDriven.Lock;
 
 namespace Framework.Configuration.Generated.DTO;
 

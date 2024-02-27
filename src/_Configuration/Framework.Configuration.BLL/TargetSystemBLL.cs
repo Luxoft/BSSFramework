@@ -2,8 +2,8 @@
 
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 using Framework.Transfering;
 
@@ -20,7 +20,7 @@ public partial class TargetSystemBLL
     /// <inheritdoc />
     public TargetSystem Register<TPersistentDomainObjectBase>(bool isMain, bool isRevision, IEnumerable<Assembly> assemblies = null, IReadOnlyDictionary<Guid, Type> extTypes = null)
     {
-        this.Context.Logics.NamedLock.Lock(NamedLockOperation.UpdateDomainTypeLock, LockRole.Update);
+        this.Context.NamedLockService.LockAsync(ConfigurationNamedLock.UpdateDomainTypeLock, LockRole.Update).GetAwaiter().GetResult();
 
         var request = from type in (assemblies ?? new[] { typeof(TPersistentDomainObjectBase).Assembly }).SelectMany(z => z.GetTypes())
 

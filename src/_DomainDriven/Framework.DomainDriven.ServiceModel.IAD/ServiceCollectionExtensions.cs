@@ -9,9 +9,11 @@ using Framework.Authorization.SecuritySystem.Initialize;
 using Framework.Authorization.SecuritySystem.PermissionOptimization;
 using Framework.Configuration;
 using Framework.Configuration.Domain;
+using Framework.Configuration.NamedLocks;
 using Framework.Core.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.ImpersonateService;
+using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
@@ -71,6 +73,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<FinancialYearServiceSettings>();
         services.AddSingleton<IFinancialYearService, FinancialYearService>();
 
+        services.RegisterNamedLocks();
+
         return services;
     }
 
@@ -99,6 +103,17 @@ public static class ServiceCollectionExtensions
     {
         return services.AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
                        .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<Guid>>();
+    }
+
+    private static IServiceCollection RegisterNamedLocks(this IServiceCollection services)
+    {
+        return services
+               .AddScoped<INamedLockService, NamedLockService>()
+               .AddScoped<INamedLockInitializer, NamedLockInitializer>()
+
+               .AddSingleton(new NamedLockTypeInfo(typeof(ConfigurationNamedLock)))
+               .AddSingleton<INamedLockSource, NamedLockSource>();
+
     }
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)

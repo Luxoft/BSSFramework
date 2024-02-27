@@ -1,4 +1,4 @@
-﻿namespace Framework.Configuration;
+﻿namespace Framework.Notification;
 
 public interface IEmployee
 {

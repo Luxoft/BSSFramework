@@ -9,9 +9,8 @@ using Framework.Configuration.BLL.SubscriptionSystemService3;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.Notification;
 using Framework.UnitTesting;
 using NUnit.Framework;
 

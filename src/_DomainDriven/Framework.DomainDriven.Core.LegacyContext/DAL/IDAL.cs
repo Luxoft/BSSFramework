@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven.DAL.Revisions;
+using Framework.DomainDriven.Lock;
 
 namespace Framework.DomainDriven;
 

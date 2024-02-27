@@ -3,6 +3,7 @@ using Framework.Authorization.Notification;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.Notification;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;

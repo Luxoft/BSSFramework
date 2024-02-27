@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.Configuration;
 
 namespace Framework.Notification;
 
@@ -8,7 +7,6 @@ public class NotificationMessageGenerationInfo
     public NotificationMessageGenerationInfo(string emails, object currentRoot, object previousRoot)
         : this(DefaultEmployee.CreateMany(emails), currentRoot, previousRoot)
     {
-
     }
 
     public NotificationMessageGenerationInfo(IEmployee recipient, object currentRoot, object previousRoot)

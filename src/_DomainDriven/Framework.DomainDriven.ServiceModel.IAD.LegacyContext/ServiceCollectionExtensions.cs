@@ -95,7 +95,6 @@ public static class ServiceCollectionExtensions
                .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
                .AddScopedFromLazyInterfaceImplement<IConfigurationBLLContext, ConfigurationBLLContext>()
 
-               .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
                .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);
     }
 

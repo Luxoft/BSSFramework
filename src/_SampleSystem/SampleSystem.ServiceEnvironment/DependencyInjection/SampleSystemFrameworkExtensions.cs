@@ -8,11 +8,11 @@ using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
+using Framework.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,8 +20,6 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
-
-using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace SampleSystem.ServiceEnvironment;
 

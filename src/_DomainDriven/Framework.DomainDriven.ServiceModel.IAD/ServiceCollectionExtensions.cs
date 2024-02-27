@@ -28,10 +28,19 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
+public class BssFrameworkSettings
+{
+}
+
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
+    public static IServiceCollection AddBssFramework(this IServiceCollection services, Action<BssFrameworkSettings> setupAction = null)
     {
+        var settings = new BssFrameworkSettings();
+
+        setupAction?.Invoke(settings);
+
+
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
         services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Disabled, typeof(Repository<>));
@@ -42,6 +51,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
         services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
+
 
         services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
         services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));

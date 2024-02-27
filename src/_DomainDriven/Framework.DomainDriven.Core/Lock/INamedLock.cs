@@ -1,7 +1,6 @@
 ﻿namespace Framework.DomainDriven.Lock;
 
-public interface INamedLock<out TNamedLockOperation>
-        where TNamedLockOperation : struct, Enum
-{
-    TNamedLockOperation LockOperation { get; }
-}
+/// <summary>
+/// Операция для объекта, на котором можно сделать пессимистическую блокировку
+/// </summary>
+public record NamedLock(Type DomainType);

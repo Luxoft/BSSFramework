@@ -80,13 +80,13 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetExceptionMessageContainer(rule)));
             }
+            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.GenericNamedLock)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetGenericNamedLockContainer(rule)));
+            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.LogMessage)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLogMessageContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetNamedLockContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
             {
@@ -333,6 +333,30 @@ namespace Framework.Configuration.BLL
             }
         }
         
+        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.GenericNamedLock> GetGenericNamedLockContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
         protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.LogMessage> GetLogMessageContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
@@ -350,30 +374,6 @@ namespace Framework.Configuration.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
                 return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.LogMessage>.Empty;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.NamedLock> GetNamedLockContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.NamedLock>.Empty;
             }
             else
             {

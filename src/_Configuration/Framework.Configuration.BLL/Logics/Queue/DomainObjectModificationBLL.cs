@@ -1,7 +1,7 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.DomainDriven.Lock;
 
 using Serilog;
 
@@ -11,7 +11,7 @@ public partial class DomainObjectModificationBLL
 {
     public ITryResult<int> Process(int limit = 1000)
     {
-        this.Context.Logics.NamedLock.Lock(NamedLockOperation.ProcessModifications, LockRole.Update);
+        this.Context.NamedLockService.LockAsync(ConfigurationNamedLock.ProcessModifications, LockRole.Update).GetAwaiter().GetResult();
 
         var modifications = this.Context.Logics.DomainObjectModification.GetUnsecureQueryable().Where(m => !m.Processed) // Add Order by time?
                                 .Take(limit).ToList();

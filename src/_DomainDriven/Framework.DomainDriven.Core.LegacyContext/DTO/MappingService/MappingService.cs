@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven;

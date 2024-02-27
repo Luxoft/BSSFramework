@@ -1,7 +1,9 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.UnitTest.Mock;

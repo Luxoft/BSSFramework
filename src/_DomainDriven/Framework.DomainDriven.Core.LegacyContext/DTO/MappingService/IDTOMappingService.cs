@@ -1,4 +1,6 @@
-﻿namespace Framework.DomainDriven;
+﻿using Framework.DomainDriven.Lock;
+
+namespace Framework.DomainDriven;
 
 public interface IDTOMappingService<in TPersistentDomainObjectBase, in TIdent>
 {

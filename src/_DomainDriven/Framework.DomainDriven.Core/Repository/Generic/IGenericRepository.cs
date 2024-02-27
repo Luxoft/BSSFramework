@@ -1,5 +1,7 @@
 ﻿#nullable enable
 
+using Framework.DomainDriven.Lock;
+
 using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Repository;
@@ -93,4 +95,6 @@ public interface IGenericRepository<TDomainObject, in TIdent>
     Task<List<TProjection>> GetListAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
         CancellationToken cancellationToken = default);
+
+    Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken = default);
 }

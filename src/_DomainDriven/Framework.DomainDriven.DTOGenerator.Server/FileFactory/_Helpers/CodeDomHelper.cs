@@ -3,6 +3,7 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLLCoreGenerator;
+using Framework.DomainDriven.Lock;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;

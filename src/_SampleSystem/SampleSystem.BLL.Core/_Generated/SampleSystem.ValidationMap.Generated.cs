@@ -2772,10 +2772,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSingleEmployeeFilterModelValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.NamedLock)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetNamedLockValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.NoSecurityObject)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetNoSecurityObjectValidationMap()));
@@ -3389,39 +3385,6 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.ManagementUnit> GetManagementUnitValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.ManagementUnit>(this.GetManagementUnitProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NamedLock, System.DateTime?>> GetNamedLock_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.NamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NamedLock, string>> GetNamedLock_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.NamedLock>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NamedLock, string>> GetNamedLock_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.NamedLock>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NamedLock, System.DateTime?>> GetNamedLock_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.NamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.NamedLock>> GetNamedLockProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.NamedLock> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NamedLock, System.DateTime?>(source => source.CreateDate, currentClass, this.GetNamedLock_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NamedLock, string>(source => source.CreatedBy, currentClass, this.GetNamedLock_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NamedLock, string>(source => source.ModifiedBy, currentClass, this.GetNamedLock_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NamedLock, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetNamedLock_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.NamedLock> GetNamedLockValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.NamedLock>(this.GetNamedLockProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NoSecurityObject, System.DateTime?>> GetNoSecurityObject_CreateDateValidators()

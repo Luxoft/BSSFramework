@@ -364,16 +364,6 @@ namespace SampleSystem.BLL
             get;
         }
         
-        SampleSystem.BLL.INamedLockBLL NamedLock
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.INamedLockBLLFactory NamedLockFactory
-        {
-            get;
-        }
-        
         SampleSystem.BLL.IPrincipalBLL Principal
         {
             get;
@@ -880,14 +870,6 @@ namespace SampleSystem.BLL
     }
     
     public partial interface ITestManualEmployeeProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>
-    {
-    }
-    
-    public partial interface INamedLockBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.NamedLock, System.Guid>
-    {
-    }
-    
-    public partial interface INamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.INamedLockBLL, SampleSystem.Domain.NamedLock>
     {
     }
     

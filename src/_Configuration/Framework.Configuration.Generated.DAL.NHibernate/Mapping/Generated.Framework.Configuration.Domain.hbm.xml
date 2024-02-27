@@ -161,6 +161,17 @@
     <property name="StackTrace" column="stackTrace" length="2147483647" access="field.camelcase" />
     <many-to-one name="InnerException" column="innerExceptionId" class="Framework.Configuration.Domain.ExceptionMessage" access="field.camelcase" />
   </class>
+  <class name="Framework.Configuration.Domain.GenericNamedLock" table="GenericNamedLock">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_nameGenericNamedLock" access="field.camelcase" />
+  </class>
   <class name="Framework.Configuration.Domain.LogMessage" table="LogMessage">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
@@ -178,17 +189,6 @@
       <property name="EndDate" column="periodendDate" access="field.camelcase" type="timestamp" />
       <property name="StartDate" column="periodstartDate" access="field.camelcase" type="timestamp" />
     </component>
-  </class>
-  <class name="Framework.Configuration.Domain.NamedLock" table="NamedLock">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="LockOperation" column="lockOperation" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
   </class>
   <class name="Framework.Configuration.Domain.SentMessage" table="SentMessage">
     <id name="Id" column="id" type="Guid" access="field.camelcase">

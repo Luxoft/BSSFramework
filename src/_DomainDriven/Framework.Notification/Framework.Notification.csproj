@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Notification</PackageId>
   </PropertyGroup>
@@ -6,8 +7,10 @@
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Persistent\Framework.Persistent.csproj" />
-    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
+    <ProjectReference Include="..\Framework.Notification.Abstract\Framework.Notification.Abstract.csproj" />
   </ItemGroup>
+
 </Project>

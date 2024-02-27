@@ -6,7 +6,6 @@ using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.Exceptions;
@@ -102,8 +101,6 @@ public partial class ConfigurationBLLContext
     public bool SubscriptionEnabled => this.lazyTargetSystemServiceCache.Value.Values.Any(tss => tss.TargetSystem.SubscriptionEnabled);
 
     public IEmployeeSource EmployeeSource { get; }
-
-    IConfigurationBLLContext IConfigurationBLLContextContainer<IConfigurationBLLContext>.Configuration => this;
 
     /// <inheritdoc />
     public long GetCurrentRevision()

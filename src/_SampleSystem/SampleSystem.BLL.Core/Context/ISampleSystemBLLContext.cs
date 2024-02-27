@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.BLL;
+using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
@@ -17,9 +18,9 @@ public partial interface ISampleSystemBLLContext :
 
     ITypeResolverContainer<string>,
 
-    Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>,
-
     IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>
 {
+    IConfigurationBLLContext Configuration { get; }
+
     ISecurityExpressionBuilderFactory SecurityExpressionBuilderFactory { get; }
 }

@@ -1,7 +1,4 @@
-﻿using Framework.Authorization.BLL;
-using Framework.DomainDriven.BLL.Configuration;
-using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.ServiceModel.Service;
+﻿using Framework.DomainDriven.ServiceModel.Service;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,12 +8,11 @@ namespace Framework.DomainDriven.WebApiNetCore;
 /// <summary>
 /// Class ApiControllerBase.
 /// </summary>
-/// <typeparam name="TServiceEnvironment">The type of the t service environment.</typeparam>
 /// <typeparam name="TBLLContext">The type of the TBLL context.</typeparam>
 /// <typeparam name="TEvaluatedData">The type of the t evaluated data.</typeparam>
 /// <seealso cref="ApiControllerBase{TBLLContext}" />
 public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiControllerBase<TBLLContext>
-        where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+        where TBLLContext : class
         where TEvaluatedData : EvaluatedData<TBLLContext>
 {
     /// <inheritdoc />

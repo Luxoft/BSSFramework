@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven.BLL.Configuration;
-using Framework.DomainDriven.Repository;
+﻿using Framework.DomainDriven.Repository;
+using Framework.Notification;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;

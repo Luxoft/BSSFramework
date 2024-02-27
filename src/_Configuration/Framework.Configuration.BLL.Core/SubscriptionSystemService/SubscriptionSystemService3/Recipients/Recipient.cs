@@ -1,4 +1,6 @@
-﻿namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+﻿using Framework.Notification;
+
+namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
 /// <summary>
 /// Получатель уведомления по подписке.

@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
+using Framework.DomainDriven.Lock;
 using Framework.Exceptions;
 using Framework.OData;
 
@@ -8,7 +9,7 @@ using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLL;
 
-public partial interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObject>
+public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObject>
 {
     /// <summary>
     /// Получение IQueryable с учётом безопасности

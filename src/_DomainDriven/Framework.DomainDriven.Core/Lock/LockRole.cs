@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven.Lock;
 
 public enum LockRole
 {

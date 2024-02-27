@@ -842,10 +842,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestManualEmployeeProjectionContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetNamedLockContainer(rule)));
-            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NoSecurityObject)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetNoSecurityObjectContainer(rule)));
@@ -2143,30 +2139,6 @@ namespace SampleSystem.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.ProjectionDTO))
             {
                 return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole>(fetchRootRule => fetchRootRule.SelectNested(miniBusinessUnitEmployeeRole => miniBusinessUnitEmployeeRole.Employee));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.NamedLock> GetNamedLockContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.NamedLock>.Empty;
             }
             else
             {

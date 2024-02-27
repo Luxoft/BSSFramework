@@ -8,4 +8,4 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [BLLRole]
 [UniqueGroup]
-public class GeneralNamedLock : BaseDirectory;
+public class GenericNamedLock : BaseDirectory;

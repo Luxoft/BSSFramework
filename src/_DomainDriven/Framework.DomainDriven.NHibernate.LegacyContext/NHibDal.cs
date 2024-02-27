@@ -2,6 +2,7 @@
 
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.Exceptions;
 using Framework.Persistent;

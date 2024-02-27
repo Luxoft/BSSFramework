@@ -7,22 +7,22 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomainObject,
+public class SyncDenormolizedValuesService<TDomainObject,
                                            TDomainObjectAncestorLink,
-                                           TSourceToAncestorOrChildLink, TIdent, TNamedLockObject, TNamedLockOperation>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObjectAncestorLink : class, TPersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, TIdent>, new()
-        where TDomainObject : class, TPersistentDomainObjectBase, IDenormalizedHierarchicalPersistentSource<TDomainObjectAncestorLink, TSourceToAncestorOrChildLink, TDomainObject, TIdent>
-        where TIdent : struct, IComparable<TIdent>
-        where TNamedLockObject : class, TPersistentDomainObjectBase, INamedLock<TNamedLockOperation>
-        where TNamedLockOperation : struct, Enum
-        where TSourceToAncestorOrChildLink : IHierarchicalToAncestorOrChildLink<TDomainObject, TIdent>
+                                           TSourceToAncestorOrChildLink, TIdent>
+    where TDomainObjectAncestorLink : class, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, TIdent>, new()
+    where TDomainObject : class, IDenormalizedHierarchicalPersistentSource<TDomainObjectAncestorLink, TSourceToAncestorOrChildLink,
+    TDomainObject, TIdent>
+    where TIdent : struct, IComparable<TIdent>
+    where TSourceToAncestorOrChildLink : IHierarchicalToAncestorOrChildLink<TDomainObject, TIdent>
 {
     private readonly IAsyncDal<TDomainObject, Guid> domainObjectDal;
 
     private readonly IAsyncDal<TDomainObjectAncestorLink, Guid> domainObjectAncestorLinkDal;
 
-    private readonly IAsyncDal<TNamedLockObject, Guid> namedLockObjectDal;
+    private readonly INamedLockSource namedLockSource;
+
+    private readonly INamedLockService namedLockService;
 
     private MemberExpression identityPropertyExpression;
 
@@ -30,11 +30,13 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
     public SyncDenormolizedValuesService(
         IAsyncDal<TDomainObject, Guid> domainObjectDal,
         IAsyncDal<TDomainObjectAncestorLink, Guid> domainObjectAncestorLinkDal,
-        IAsyncDal<TNamedLockObject, Guid> namedLockObjectDal)
+        INamedLockSource namedLockSource,
+        INamedLockService namedLockService)
     {
         this.domainObjectDal = domainObjectDal;
         this.domainObjectAncestorLinkDal = domainObjectAncestorLinkDal;
-        this.namedLockObjectDal = namedLockObjectDal;
+        this.namedLockSource = namedLockSource;
+        this.namedLockService = namedLockService;
         this.Init();
     }
 
@@ -45,12 +47,12 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
         var ancestorDiffLinks = this.GetAncestorDiffirence(domainObject);
 
         Func<DiffAncestorLinks, MergeResult<TDomainObjectAncestorLink, AncestorLink>> getMergeFunc = diff =>
-                diff.PersistentLinks.GetMergeResult(diff.ActualLinks,
-                                                    z => new { Child = z.Child, Ancestor = z.Ancestor },
-                                                    z => new { Child = z.Child, Ancestor = z.Ancestor },
-                                                    (previus, current) =>
-                                                            previus.Child.Id.CompareTo(current.Child.Id) == 0 &&
-                                                            previus.Ancestor.Id.CompareTo(current.Ancestor.Id) == 0);
+            diff.PersistentLinks.GetMergeResult(
+                diff.ActualLinks,
+                z => new { Child = z.Child, Ancestor = z.Ancestor },
+                z => new { Child = z.Child, Ancestor = z.Ancestor },
+                (previus, current) =>
+                    previus.Child.Id.CompareTo(current.Child.Id) == 0 && previus.Ancestor.Id.CompareTo(current.Ancestor.Id) == 0);
 
 
         var ancestorMergeResult = getMergeFunc(ancestorDiffLinks);
@@ -87,7 +89,8 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
 
         var combine = fromSyncResult.Concat(new[] { fromUnSyncResult }).Aggregate((prev, current) => prev.Union(current));
 
-        var newAncestorLinks = combine.Adding.Select(z => new TDomainObjectAncestorLink { Ancestor = z.Ancestor, Child = z.Child }).ToList();
+        var newAncestorLinks = combine.Adding.Select(z => new TDomainObjectAncestorLink { Ancestor = z.Ancestor, Child = z.Child })
+                                      .ToList();
 
         newAncestorLinks.Foreach(this.SaveAncestor);
 
@@ -123,10 +126,12 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
 
         var removingAncestors = this.domainObjectAncestorLinkDal
                                     .GetQueryable()
-                                    .Where(z => domainObjectIdents.Contains(z.Ancestor.Id) || domainObjectIdents.Contains(z.Child.Id)).ToList();
+                                    .Where(z => domainObjectIdents.Contains(z.Ancestor.Id) || domainObjectIdents.Contains(z.Child.Id))
+                                    .ToList();
 
         return new SyncResult(new AncestorLink[0], removingAncestors);
     }
+
     private SyncResult GetSyncResult(TDomainObject domainObject)
     {
         this.LockChanges();
@@ -134,10 +139,12 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
         var ancestorDiffs = domainObject.GetAllChildren().Select(this.GetAncestorDiffirence).ToList();
 
         Func<DiffAncestorLinks, MergeResult<TDomainObjectAncestorLink, AncestorLink>> getMergeFunc = diff =>
-                diff.PersistentLinks.GetMergeResult(diff.ActualLinks,
-                                                    z => new { Child = z.Child, Ancestor = z.Ancestor },
-                                                    z => new { Child = z.Child, Ancestor = z.Ancestor },
-                                                    (previus, current) => previus.Child.Id.CompareTo(current.Child.Id) == 0 && previus.Ancestor.Id.CompareTo(current.Ancestor.Id) == 0);
+            diff.PersistentLinks.GetMergeResult(
+                diff.ActualLinks,
+                z => new { Child = z.Child, Ancestor = z.Ancestor },
+                z => new { Child = z.Child, Ancestor = z.Ancestor },
+                (previus, current) => previus.Child.Id.CompareTo(current.Child.Id) == 0
+                                      && previus.Ancestor.Id.CompareTo(current.Ancestor.Id) == 0);
 
         var mergeResults = ancestorDiffs.Select(getMergeFunc).ToList();
 
@@ -147,14 +154,14 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
         }
 
         var addedLinks = mergeResults.Any(q => q.AddingItems.Any())
-                                 ? mergeResults.Select(z => (IEnumerable<AncestorLink>)z.AddingItems)
-                                               .Aggregate((prev, current) => prev.Concat(current))
-                                 : new AncestorLink[0];
+                             ? mergeResults.Select(z => (IEnumerable<AncestorLink>)z.AddingItems)
+                                           .Aggregate((prev, current) => prev.Concat(current))
+                             : new AncestorLink[0];
 
         var removingLinks = mergeResults.Any(q => q.RemovingItems.Any())
-                                    ? mergeResults.Select(z => (IEnumerable<TDomainObjectAncestorLink>)z.RemovingItems)
-                                                  .Aggregate((prev, current) => prev.Concat(current))
-                                    : new TDomainObjectAncestorLink[0];
+                                ? mergeResults.Select(z => (IEnumerable<TDomainObjectAncestorLink>)z.RemovingItems)
+                                              .Aggregate((prev, current) => prev.Concat(current))
+                                : new TDomainObjectAncestorLink[0];
 
 
         return new SyncResult(addedLinks, removingLinks);
@@ -162,21 +169,12 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
 
     private void LockChanges()
     {
-        var collectin = new[]
-                        {
-                                NamedLockExtension.GetGlobalLock<TNamedLockOperation>(
-                                                                                      typeof(TDomainObjectAncestorLink))
-                        };
+        var namedLock = this.namedLockSource.NamedLocks.Where(nl => nl.DomainType == typeof(TDomainObjectAncestorLink)).Single(
+            () => new System.ArgumentException($"System must have namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "),
+            () => new System.ArgumentException(
+                $"System have more then one namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "));
 
-        var queryable = this.namedLockObjectDal.GetQueryable();
-
-        var allNamed = queryable.Where(z => collectin.Contains(z.LockOperation)).ToList();
-
-        var namedLock = allNamed.Single(
-                                        () => new System.ArgumentException($"System must have namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "),
-                                        () => new System.ArgumentException($"System have more then one namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "));
-
-        this.namedLockObjectDal.LockAsync(namedLock, LockRole.Update).GetAwaiter().GetResult();
+        this.namedLockService.LockAsync(namedLock, LockRole.Update).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -236,17 +234,20 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
     enum UpdateAncestorLinksMode
     {
         None,
+
         CreateNew,
+
         UpdateExists
     }
 
     struct AncestorLink
     {
         public readonly TDomainObject Child;
+
         public readonly TDomainObject Ancestor;
 
         public AncestorLink(TDomainObject child, TDomainObject ancestor)
-                : this()
+            : this()
         {
             this.Child = child;
             this.Ancestor = ancestor;
@@ -256,10 +257,11 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
     struct DiffAncestorLinks
     {
         public readonly IEnumerable<AncestorLink> ActualLinks;
+
         public readonly IEnumerable<TDomainObjectAncestorLink> PersistentLinks;
 
         public DiffAncestorLinks(IEnumerable<AncestorLink> actualLinks, IEnumerable<TDomainObjectAncestorLink> persistentLinks)
-                : this()
+            : this()
         {
             this.PersistentLinks = persistentLinks;
             this.ActualLinks = actualLinks;
@@ -291,16 +293,18 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
         /// The removing.
         /// </param>
         public SyncResult(IEnumerable<AncestorLink> adding, IEnumerable<TDomainObjectAncestorLink> removing)
-                : this()
+            : this()
         {
             if (adding == null)
             {
                 throw new ArgumentNullException(nameof(adding));
             }
+
             if (removing == null)
             {
                 throw new ArgumentNullException(nameof(removing));
             }
+
             this.Adding = adding.ToList();
             this.Removing = removing.ToList();
         }

@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
+using Framework.DomainDriven.Lock;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

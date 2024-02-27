@@ -134,12 +134,12 @@ namespace Framework.Configuration.BLL
             get;
         }
         
-        Framework.Configuration.BLL.INamedLockBLL NamedLock
+        Framework.Configuration.BLL.IGenericNamedLockBLL GenericNamedLock
         {
             get;
         }
         
-        Framework.Configuration.BLL.INamedLockBLLFactory NamedLockFactory
+        Framework.Configuration.BLL.IGenericNamedLockBLLFactory GenericNamedLockFactory
         {
             get;
         }
@@ -233,11 +233,11 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface INamedLockBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.NamedLock, System.Guid>
+    public partial interface IGenericNamedLockBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.GenericNamedLock, System.Guid>
     {
     }
     
-    public partial interface INamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.INamedLockBLL, Framework.Configuration.Domain.NamedLock>
+    public partial interface IGenericNamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IGenericNamedLockBLL, Framework.Configuration.Domain.GenericNamedLock>
     {
     }
     

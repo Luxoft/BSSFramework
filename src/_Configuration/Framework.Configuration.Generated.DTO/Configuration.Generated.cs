@@ -34,9 +34,9 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapBaseAuditPersistentToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
-        void MapBaseAuditPersistentToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
+        void MapBaseAuditPersistentToStrictForGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
-        void MapBaseAuditPersistentToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
+        void MapBaseAuditPersistentToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
         void MapBaseAuditPersistentToStrictForSentMessage(Framework.Configuration.Generated.DTO.SentMessageStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
@@ -66,9 +66,9 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapBasePersistentToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
-        void MapBasePersistentToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
+        void MapBasePersistentToStrictForGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
-        void MapBasePersistentToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
+        void MapBasePersistentToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForSentMessage(Framework.Configuration.Generated.DTO.SentMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
@@ -106,9 +106,9 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapFullToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO currentSource);
         
-        void MapFullToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageFullDTO currentSource);
+        void MapFullToStrictForGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO target, Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO currentSource);
         
-        void MapFullToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.NamedLockFullDTO currentSource);
+        void MapFullToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageFullDTO currentSource);
         
         void MapFullToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO currentSource);
         
@@ -156,9 +156,9 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapRichToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO currentSource);
         
-        void MapRichToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageRichDTO currentSource);
+        void MapRichToStrictForGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO target, Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO currentSource);
         
-        void MapRichToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.NamedLockRichDTO currentSource);
+        void MapRichToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageRichDTO currentSource);
         
         void MapRichToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO currentSource);
         
@@ -206,9 +206,9 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapSimpleToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO currentSource);
         
-        void MapSimpleToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageSimpleDTO currentSource);
+        void MapSimpleToStrictForGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO target, Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO currentSource);
         
-        void MapSimpleToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.NamedLockSimpleDTO currentSource);
+        void MapSimpleToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageSimpleDTO currentSource);
         
         void MapSimpleToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO currentSource);
         
@@ -353,7 +353,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapBaseAuditPersistentToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
+        public virtual void MapBaseAuditPersistentToStrictForGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -365,7 +365,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapBaseAuditPersistentToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
+        public virtual void MapBaseAuditPersistentToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -555,7 +555,7 @@ namespace Framework.Configuration.Generated.DTO
             target.Id = source.Id;
         }
         
-        public virtual void MapBasePersistentToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
+        public virtual void MapBasePersistentToStrictForGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -568,7 +568,7 @@ namespace Framework.Configuration.Generated.DTO
             target.Id = source.Id;
         }
         
-        public virtual void MapBasePersistentToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
+        public virtual void MapBasePersistentToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -841,7 +841,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapFullToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageFullDTO source)
+        public virtual void MapFullToStrictForGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO target, Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -853,7 +853,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapFullToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.NamedLockFullDTO source)
+        public virtual void MapFullToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageFullDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1162,7 +1162,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapRichToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageRichDTO source)
+        public virtual void MapRichToStrictForGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO target, Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1174,7 +1174,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapRichToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.NamedLockRichDTO source)
+        public virtual void MapRichToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1488,6 +1488,19 @@ namespace Framework.Configuration.Generated.DTO
             target.Period = source.Period;
         }
         
+        public virtual void MapSimpleToStrictForGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO target, Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            if (object.ReferenceEquals(target, null))
+            {
+                throw new System.ArgumentNullException("target");
+            }
+            target.Name = source.Name;
+        }
+        
         public virtual void MapSimpleToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageSimpleDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -1503,19 +1516,6 @@ namespace Framework.Configuration.Generated.DTO
             target.OutputMessage = source.OutputMessage;
             target.Period = source.Period;
             target.UserName = source.UserName;
-        }
-        
-        public virtual void MapSimpleToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.NamedLockSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.LockOperation = source.LockOperation;
         }
         
         public virtual void MapSimpleToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO source)
@@ -2712,6 +2712,112 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.GenericNamedLock), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    public class GenericNamedLockIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public GenericNamedLockIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public GenericNamedLockIdentityDTO(Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public GenericNamedLockIdentityDTO(Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public GenericNamedLockIdentityDTO()
+        {
+        }
+        
+        public GenericNamedLockIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO Empty
+        {
+            get
+            {
+                return Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO identity1, Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO identity1, Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO identity2)
+        {
+            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO)) && identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO)(other)));
+        }
+        
+        public bool Equals(Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO other)
+        {
+            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public Framework.Configuration.Domain.GenericNamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        {
+            return mappingService.ToGenericNamedLock(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.LogMessage), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class LogMessageIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.LogMessageIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -2810,112 +2916,6 @@ namespace Framework.Configuration.Generated.DTO
         public Framework.Configuration.Domain.LogMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToLogMessage(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.NamedLock), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class NamedLockIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.NamedLockIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
-    {
-        
-        private static Framework.Configuration.Generated.DTO.NamedLockIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.NamedLockIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public NamedLockIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public NamedLockIdentityDTO(Framework.Configuration.Generated.DTO.NamedLockSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public NamedLockIdentityDTO(Framework.Configuration.Domain.NamedLock domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public NamedLockIdentityDTO()
-        {
-        }
-        
-        public NamedLockIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static Framework.Configuration.Generated.DTO.NamedLockIdentityDTO Empty
-        {
-            get
-            {
-                return Framework.Configuration.Generated.DTO.NamedLockIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(Framework.Configuration.Generated.DTO.NamedLockIdentityDTO identity1, Framework.Configuration.Generated.DTO.NamedLockIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(Framework.Configuration.Generated.DTO.NamedLockIdentityDTO identity1, Framework.Configuration.Generated.DTO.NamedLockIdentityDTO identity2)
-        {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.NamedLockIdentityDTO)) && identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.NamedLockIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.NamedLockIdentityDTO)(other)));
-        }
-        
-        public bool Equals(Framework.Configuration.Generated.DTO.NamedLockIdentityDTO other)
-        {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public Framework.Configuration.Domain.NamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToNamedLock(this);
         }
         
         public override string ToString()
@@ -7971,6 +7971,321 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.GenericNamedLock), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    public partial class GenericNamedLockVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.GenericNamedLock, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public GenericNamedLockVisualDTO()
+        {
+        }
+        
+        public GenericNamedLockVisualDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.GenericNamedLock domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapGenericNamedLock(domainObject, this);
+        }
+        
+        public Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+            mappingService.MapGenericNamedLock(this, domainObject);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.GenericNamedLock), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO))]
+    public partial class GenericNamedLockSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.GenericNamedLock, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.GenericNamedLock>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public GenericNamedLockSimpleDTO()
+        {
+        }
+        
+        public GenericNamedLockSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.GenericNamedLock domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapGenericNamedLock(domainObject, this);
+        }
+        
+        public GenericNamedLockSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        public Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+            mappingService.MapGenericNamedLock(this, domainObject);
+        }
+        
+        public Framework.Configuration.Domain.GenericNamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        {
+            return mappingService.ToGenericNamedLock(this);
+        }
+        
+        public virtual Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO ToStrict()
+        {
+            return new Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.GenericNamedLock), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO))]
+    public partial class GenericNamedLockFullDTO : Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.GenericNamedLock, System.Guid>
+    {
+        
+        public GenericNamedLockFullDTO()
+        {
+        }
+        
+        public GenericNamedLockFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.GenericNamedLock domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapGenericNamedLock(domainObject, this);
+        }
+        
+        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+            base.MapToDomainObject(mappingService, domainObject);
+            mappingService.MapGenericNamedLock(this, domainObject);
+        }
+        
+        public override Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO ToStrict()
+        {
+            return new Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.GenericNamedLock), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    public partial class GenericNamedLockRichDTO : Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.GenericNamedLock, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.GenericNamedLock>
+    {
+        
+        public GenericNamedLockRichDTO()
+        {
+        }
+        
+        public GenericNamedLockRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.GenericNamedLock domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapGenericNamedLock(domainObject, this);
+        }
+        
+        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+            base.MapToDomainObject(mappingService, domainObject);
+            mappingService.MapGenericNamedLock(this, domainObject);
+        }
+        
+        public Framework.Configuration.Domain.GenericNamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        {
+            return mappingService.ToGenericNamedLock(this);
+        }
+        
+        public Framework.Configuration.Domain.GenericNamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, bool allowCreate)
+        {
+            return mappingService.ToGenericNamedLock(this, allowCreate);
+        }
+        
+        public override Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO ToStrict()
+        {
+            return new Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.GenericNamedLock), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    public partial class GenericNamedLockStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.GenericNamedLock, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.GenericNamedLock>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO>
+    {
+        
+        private System.Guid _id;
+        
+        private string _name;
+        
+        public GenericNamedLockStrictDTO()
+        {
+        }
+        
+        public GenericNamedLockStrictDTO(Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
+                this(((Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapRichToStrictForGenericNamedLock(this, source);
+        }
+        
+        public GenericNamedLockStrictDTO(Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO source) : 
+                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public GenericNamedLockStrictDTO(Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
+                this(((Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapFullToStrictForGenericNamedLock(this, source);
+        }
+        
+        public GenericNamedLockStrictDTO(Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO source) : 
+                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public GenericNamedLockStrictDTO(Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
+                this(((Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapSimpleToStrictForGenericNamedLock(this, source);
+        }
+        
+        public GenericNamedLockStrictDTO(Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO source) : 
+                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private GenericNamedLockStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
+                this(((Framework.Configuration.Generated.DTO.BasePersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBaseAuditPersistentToStrictForGenericNamedLock(this, source);
+        }
+        
+        private GenericNamedLockStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source) : 
+                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private GenericNamedLockStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBasePersistentToStrictForGenericNamedLock(this, source);
+        }
+        
+        private GenericNamedLockStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source) : 
+                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+            mappingService.MapGenericNamedLock(this, domainObject);
+        }
+        
+        public Framework.Configuration.Domain.GenericNamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        {
+            return mappingService.ToGenericNamedLock(this);
+        }
+        
+        public Framework.Configuration.Domain.GenericNamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, bool allowCreate)
+        {
+            return mappingService.ToGenericNamedLock(this, allowCreate);
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.LogMessage), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.LogMessageFullDTO))]
@@ -8359,277 +8674,6 @@ namespace Framework.Configuration.Generated.DTO
         public Framework.Configuration.Domain.LogMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToLogMessage(this, allowCreate);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.NamedLock), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.NamedLockFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.NamedLockRichDTO))]
-    public partial class NamedLockSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.NamedLock, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.NamedLock>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.NamedLockIdentityDTO>
-    {
-        
-        private Framework.Configuration.Domain.NamedLockOperation _lockOperation;
-        
-        public NamedLockSimpleDTO()
-        {
-        }
-        
-        public NamedLockSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.NamedLock domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapNamedLock(domainObject, this);
-        }
-        
-        public NamedLockSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        public Framework.Configuration.Generated.DTO.NamedLockIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.NamedLockIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.NamedLockOperation LockOperation
-        {
-            get
-            {
-                return this._lockOperation;
-            }
-            set
-            {
-                this._lockOperation = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.NamedLock domainObject)
-        {
-            mappingService.MapNamedLock(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.NamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToNamedLock(this);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.NamedLockStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.NamedLockStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.NamedLock), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.NamedLockRichDTO))]
-    public partial class NamedLockFullDTO : Framework.Configuration.Generated.DTO.NamedLockSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.NamedLock, System.Guid>
-    {
-        
-        public NamedLockFullDTO()
-        {
-        }
-        
-        public NamedLockFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.NamedLock domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapNamedLock(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.NamedLock domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapNamedLock(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.NamedLockStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.NamedLockStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.NamedLock), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class NamedLockRichDTO : Framework.Configuration.Generated.DTO.NamedLockFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.NamedLock, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.NamedLock>
-    {
-        
-        public NamedLockRichDTO()
-        {
-        }
-        
-        public NamedLockRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.NamedLock domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapNamedLock(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.NamedLock domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapNamedLock(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.NamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToNamedLock(this);
-        }
-        
-        public Framework.Configuration.Domain.NamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, bool allowCreate)
-        {
-            return mappingService.ToNamedLock(this, allowCreate);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.NamedLockStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.NamedLockStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.NamedLock), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class NamedLockStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.NamedLock, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.NamedLock>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.NamedLockIdentityDTO>
-    {
-        
-        private System.Guid _id;
-        
-        private Framework.Configuration.Domain.NamedLockOperation _lockOperation;
-        
-        public NamedLockStrictDTO()
-        {
-        }
-        
-        public NamedLockStrictDTO(Framework.Configuration.Generated.DTO.NamedLockRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.NamedLockFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForNamedLock(this, source);
-        }
-        
-        public NamedLockStrictDTO(Framework.Configuration.Generated.DTO.NamedLockRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public NamedLockStrictDTO(Framework.Configuration.Generated.DTO.NamedLockFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.NamedLockSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForNamedLock(this, source);
-        }
-        
-        public NamedLockStrictDTO(Framework.Configuration.Generated.DTO.NamedLockFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public NamedLockStrictDTO(Framework.Configuration.Generated.DTO.NamedLockSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForNamedLock(this, source);
-        }
-        
-        public NamedLockStrictDTO(Framework.Configuration.Generated.DTO.NamedLockSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private NamedLockStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForNamedLock(this, source);
-        }
-        
-        private NamedLockStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private NamedLockStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForNamedLock(this, source);
-        }
-        
-        private NamedLockStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public Framework.Configuration.Generated.DTO.NamedLockIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.NamedLockIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.NamedLockOperation LockOperation
-        {
-            get
-            {
-                return this._lockOperation;
-            }
-            set
-            {
-                this._lockOperation = value;
-            }
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.NamedLock domainObject)
-        {
-            mappingService.MapNamedLock(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.NamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToNamedLock(this);
-        }
-        
-        public Framework.Configuration.Domain.NamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, bool allowCreate)
-        {
-            return mappingService.ToNamedLock(this, allowCreate);
         }
     }
     
@@ -11129,14 +11173,14 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO(mappingService, domainObject);
         }
         
+        public static Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO ToFullDTO(this Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        {
+            return new Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO(mappingService, domainObject);
+        }
+        
         public static Framework.Configuration.Generated.DTO.LogMessageFullDTO ToFullDTO(this Framework.Configuration.Domain.LogMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.LogMessageFullDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.NamedLockFullDTO ToFullDTO(this Framework.Configuration.Domain.NamedLock domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.NamedLockFullDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO ToFullDTO(this Framework.Configuration.Domain.QueueProcessingState domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -11254,12 +11298,12 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.GenericNamedLock> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.NamedLockFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.NamedLock> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
@@ -11359,14 +11403,14 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO(domainObject);
         }
         
+        public static Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+            return new Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO(domainObject);
+        }
+        
         public static Framework.Configuration.Generated.DTO.LogMessageIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.LogMessage domainObject)
         {
             return new Framework.Configuration.Generated.DTO.LogMessageIdentityDTO(domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.NamedLockIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.NamedLock domainObject)
-        {
-            return new Framework.Configuration.Generated.DTO.NamedLockIdentityDTO(domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.SentMessageIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.SentMessage domainObject)
@@ -11439,12 +11483,12 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects)
+        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.GenericNamedLock> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.NamedLockIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.NamedLock> domainObjects)
+        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -11539,14 +11583,14 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO(mappingService, domainObject);
         }
         
+        public static Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO ToRichDTO(this Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        {
+            return new Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO(mappingService, domainObject);
+        }
+        
         public static Framework.Configuration.Generated.DTO.LogMessageRichDTO ToRichDTO(this Framework.Configuration.Domain.LogMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.LogMessageRichDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.NamedLockRichDTO ToRichDTO(this Framework.Configuration.Domain.NamedLock domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.NamedLockRichDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO ToRichDTO(this Framework.Configuration.Domain.QueueProcessingState domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -11664,12 +11708,12 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.GenericNamedLock> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.NamedLockRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.NamedLock> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
@@ -11789,14 +11833,14 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO(mappingService, domainObject);
         }
         
+        public static Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        {
+            return new Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO(mappingService, domainObject);
+        }
+        
         public static Framework.Configuration.Generated.DTO.LogMessageSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.LogMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.LogMessageSimpleDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.NamedLockSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.NamedLock domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.NamedLockSimpleDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.QueueProcessingState domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -11914,12 +11958,12 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.GenericNamedLock> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.NamedLockSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.NamedLock> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
@@ -11984,6 +12028,11 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.DomainTypeEventOperationVisualDTO(mappingService, domainObject);
         }
         
+        public static Framework.Configuration.Generated.DTO.GenericNamedLockVisualDTO ToVisualDTO(this Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        {
+            return new Framework.Configuration.Generated.DTO.GenericNamedLockVisualDTO(mappingService, domainObject);
+        }
+        
         public static Framework.Configuration.Generated.DTO.SequenceVisualDTO ToVisualDTO(this Framework.Configuration.Domain.Sequence domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.SequenceVisualDTO(mappingService, domainObject);
@@ -12010,6 +12059,11 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventOperationVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventOperation> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.GenericNamedLockVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.GenericNamedLock> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
@@ -12246,6 +12300,24 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject);
         
+        void MapGenericNamedLock(Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.GenericNamedLockVisualDTO mappingObject);
+        
+        void MapGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockVisualDTO mappingObject, Framework.Configuration.Domain.GenericNamedLock domainObject);
+        
+        void MapGenericNamedLock(Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO mappingObject);
+        
+        void MapGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO mappingObject, Framework.Configuration.Domain.GenericNamedLock domainObject);
+        
+        void MapGenericNamedLock(Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO mappingObject);
+        
+        void MapGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO mappingObject, Framework.Configuration.Domain.GenericNamedLock domainObject);
+        
+        void MapGenericNamedLock(Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO mappingObject);
+        
+        void MapGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO mappingObject, Framework.Configuration.Domain.GenericNamedLock domainObject);
+        
+        void MapGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO mappingObject, Framework.Configuration.Domain.GenericNamedLock domainObject);
+        
         void MapLogMessage(Framework.Configuration.Domain.LogMessage domainObject, Framework.Configuration.Generated.DTO.LogMessageSimpleDTO mappingObject);
         
         void MapLogMessage(Framework.Configuration.Generated.DTO.LogMessageSimpleDTO mappingObject, Framework.Configuration.Domain.LogMessage domainObject);
@@ -12259,20 +12331,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapLogMessage(Framework.Configuration.Generated.DTO.LogMessageRichDTO mappingObject, Framework.Configuration.Domain.LogMessage domainObject);
         
         void MapLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO mappingObject, Framework.Configuration.Domain.LogMessage domainObject);
-        
-        void MapNamedLock(Framework.Configuration.Domain.NamedLock domainObject, Framework.Configuration.Generated.DTO.NamedLockSimpleDTO mappingObject);
-        
-        void MapNamedLock(Framework.Configuration.Generated.DTO.NamedLockSimpleDTO mappingObject, Framework.Configuration.Domain.NamedLock domainObject);
-        
-        void MapNamedLock(Framework.Configuration.Domain.NamedLock domainObject, Framework.Configuration.Generated.DTO.NamedLockFullDTO mappingObject);
-        
-        void MapNamedLock(Framework.Configuration.Generated.DTO.NamedLockFullDTO mappingObject, Framework.Configuration.Domain.NamedLock domainObject);
-        
-        void MapNamedLock(Framework.Configuration.Domain.NamedLock domainObject, Framework.Configuration.Generated.DTO.NamedLockRichDTO mappingObject);
-        
-        void MapNamedLock(Framework.Configuration.Generated.DTO.NamedLockRichDTO mappingObject, Framework.Configuration.Domain.NamedLock domainObject);
-        
-        void MapNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO mappingObject, Framework.Configuration.Domain.NamedLock domainObject);
         
         void MapPersistentDomainObjectBase(Framework.Configuration.Domain.PersistentDomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BasePersistentDTO mappingObject);
         
@@ -12534,6 +12592,18 @@ namespace Framework.Configuration.Generated.DTO
         
         Framework.Configuration.Domain.ExceptionMessageRootFilterModel ToExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO exceptionMessageRootFilterModelStrictDTO);
         
+        Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO genericNamedLockIdentityDTO);
+        
+        Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO genericNamedLockSimpleDTO);
+        
+        Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO genericNamedLockRichDTO);
+        
+        Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO genericNamedLockRichDTO, bool allowCreate);
+        
+        Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO genericNamedLockStrictDTO);
+        
+        Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO genericNamedLockStrictDTO, bool allowCreate);
+        
         Framework.Configuration.Domain.LogMessage ToLogMessage(Framework.Configuration.Generated.DTO.LogMessageIdentityDTO logMessageIdentityDTO);
         
         Framework.Configuration.Domain.LogMessage ToLogMessage(Framework.Configuration.Generated.DTO.LogMessageSimpleDTO logMessageSimpleDTO);
@@ -12545,18 +12615,6 @@ namespace Framework.Configuration.Generated.DTO
         Framework.Configuration.Domain.LogMessage ToLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO logMessageStrictDTO);
         
         Framework.Configuration.Domain.LogMessage ToLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO logMessageStrictDTO, bool allowCreate);
-        
-        Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO);
-        
-        Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockSimpleDTO namedLockSimpleDTO);
-        
-        Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockRichDTO namedLockRichDTO);
-        
-        Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockRichDTO namedLockRichDTO, bool allowCreate);
-        
-        Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO namedLockStrictDTO);
-        
-        Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO namedLockStrictDTO, bool allowCreate);
         
         Framework.Configuration.Domain.QueueProcessingState ToQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO queueProcessingStateRichDTO);
         
@@ -13364,6 +13422,47 @@ namespace Framework.Configuration.Generated.DTO
             domainObject.Period = mappingObject.Period;
         }
         
+        public virtual void MapGenericNamedLock(Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.GenericNamedLockVisualDTO mappingObject)
+        {
+            mappingObject.Name = domainObject.Name;
+        }
+        
+        public virtual void MapGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockVisualDTO mappingObject, Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+            domainObject.Name = mappingObject.Name;
+        }
+        
+        public virtual void MapGenericNamedLock(Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO mappingObject)
+        {
+            mappingObject.Name = domainObject.Name;
+        }
+        
+        public virtual void MapGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO mappingObject, Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+            domainObject.Name = mappingObject.Name;
+        }
+        
+        public virtual void MapGenericNamedLock(Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockFullDTO mappingObject, Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+        }
+        
+        public virtual void MapGenericNamedLock(Framework.Configuration.Domain.GenericNamedLock domainObject, Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO mappingObject, Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+        }
+        
+        public virtual void MapGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO mappingObject, Framework.Configuration.Domain.GenericNamedLock domainObject)
+        {
+            domainObject.Name = mappingObject.Name;
+        }
+        
         public virtual void MapLogMessage(Framework.Configuration.Domain.LogMessage domainObject, Framework.Configuration.Generated.DTO.LogMessageSimpleDTO mappingObject)
         {
             mappingObject.Action = domainObject.Action;
@@ -13405,37 +13504,6 @@ namespace Framework.Configuration.Generated.DTO
             domainObject.OutputMessage = mappingObject.OutputMessage;
             domainObject.Period = mappingObject.Period;
             domainObject.UserName = mappingObject.UserName;
-        }
-        
-        public virtual void MapNamedLock(Framework.Configuration.Domain.NamedLock domainObject, Framework.Configuration.Generated.DTO.NamedLockSimpleDTO mappingObject)
-        {
-            mappingObject.LockOperation = domainObject.LockOperation;
-        }
-        
-        public virtual void MapNamedLock(Framework.Configuration.Generated.DTO.NamedLockSimpleDTO mappingObject, Framework.Configuration.Domain.NamedLock domainObject)
-        {
-            domainObject.LockOperation = mappingObject.LockOperation;
-        }
-        
-        public virtual void MapNamedLock(Framework.Configuration.Domain.NamedLock domainObject, Framework.Configuration.Generated.DTO.NamedLockFullDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapNamedLock(Framework.Configuration.Generated.DTO.NamedLockFullDTO mappingObject, Framework.Configuration.Domain.NamedLock domainObject)
-        {
-        }
-        
-        public virtual void MapNamedLock(Framework.Configuration.Domain.NamedLock domainObject, Framework.Configuration.Generated.DTO.NamedLockRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapNamedLock(Framework.Configuration.Generated.DTO.NamedLockRichDTO mappingObject, Framework.Configuration.Domain.NamedLock domainObject)
-        {
-        }
-        
-        public virtual void MapNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO mappingObject, Framework.Configuration.Domain.NamedLock domainObject)
-        {
-            domainObject.LockOperation = mappingObject.LockOperation;
         }
         
         public virtual void MapPersistentDomainObjectBase(Framework.Configuration.Domain.PersistentDomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BasePersistentDTO mappingObject)
@@ -14186,6 +14254,50 @@ namespace Framework.Configuration.Generated.DTO
             return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO, Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(exceptionMessageRootFilterModelStrictDTO);
         }
         
+        public virtual Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO genericNamedLockIdentityDTO)
+        {
+            return this.GetById<Framework.Configuration.Domain.GenericNamedLock>(genericNamedLockIdentityDTO.Id);
+        }
+        
+        public virtual Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockSimpleDTO genericNamedLockSimpleDTO)
+        {
+            return this.GetById<Framework.Configuration.Domain.GenericNamedLock>(genericNamedLockSimpleDTO.Id);
+        }
+        
+        public virtual Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO genericNamedLockRichDTO)
+        {
+            return this.ToDomainObject<Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO, Framework.Configuration.Domain.GenericNamedLock>(genericNamedLockRichDTO);
+        }
+        
+        public virtual Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockRichDTO genericNamedLockRichDTO, bool allowCreate)
+        {
+            if (allowCreate)
+            {
+                return this.ToDomainObject(genericNamedLockRichDTO, () => new Framework.Configuration.Domain.GenericNamedLock());
+            }
+            else
+            {
+                return this.ToGenericNamedLock(genericNamedLockRichDTO);
+            }
+        }
+        
+        public virtual Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO genericNamedLockStrictDTO)
+        {
+            return this.ToDomainObject<Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO, Framework.Configuration.Domain.GenericNamedLock>(genericNamedLockStrictDTO);
+        }
+        
+        public virtual Framework.Configuration.Domain.GenericNamedLock ToGenericNamedLock(Framework.Configuration.Generated.DTO.GenericNamedLockStrictDTO genericNamedLockStrictDTO, bool allowCreate)
+        {
+            if (allowCreate)
+            {
+                return this.ToDomainObject(genericNamedLockStrictDTO, () => new Framework.Configuration.Domain.GenericNamedLock());
+            }
+            else
+            {
+                return this.ToGenericNamedLock(genericNamedLockStrictDTO);
+            }
+        }
+        
         public virtual Framework.Configuration.Domain.LogMessage ToLogMessage(Framework.Configuration.Generated.DTO.LogMessageIdentityDTO logMessageIdentityDTO)
         {
             return this.GetById<Framework.Configuration.Domain.LogMessage>(logMessageIdentityDTO.Id);
@@ -14227,50 +14339,6 @@ namespace Framework.Configuration.Generated.DTO
             else
             {
                 return this.ToLogMessage(logMessageStrictDTO);
-            }
-        }
-        
-        public virtual Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.NamedLock>(namedLockIdentityDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockSimpleDTO namedLockSimpleDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.NamedLock>(namedLockSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockRichDTO namedLockRichDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.NamedLockRichDTO, Framework.Configuration.Domain.NamedLock>(namedLockRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockRichDTO namedLockRichDTO, bool allowCreate)
-        {
-            if (allowCreate)
-            {
-                return this.ToDomainObject(namedLockRichDTO, () => new Framework.Configuration.Domain.NamedLock());
-            }
-            else
-            {
-                return this.ToNamedLock(namedLockRichDTO);
-            }
-        }
-        
-        public virtual Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO namedLockStrictDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.NamedLockStrictDTO, Framework.Configuration.Domain.NamedLock>(namedLockStrictDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.NamedLock ToNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO namedLockStrictDTO, bool allowCreate)
-        {
-            if (allowCreate)
-            {
-                return this.ToDomainObject(namedLockStrictDTO, () => new Framework.Configuration.Domain.NamedLock());
-            }
-            else
-            {
-                return this.ToNamedLock(namedLockStrictDTO);
             }
         }
         

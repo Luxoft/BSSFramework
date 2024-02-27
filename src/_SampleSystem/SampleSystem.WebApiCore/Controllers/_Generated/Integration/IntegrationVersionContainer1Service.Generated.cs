@@ -70,7 +70,7 @@
         
         protected virtual SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO SaveIntegrationVersionContainer1Internal(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationRichDTO integrationVersionContainer1, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IIntegrationVersionContainer1BLL bll)
         {
-            SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject = bll.GetById(integrationVersionContainer1.Id, false, null, Framework.DomainDriven.LockRole.Update);
+            SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject = bll.GetById(integrationVersionContainer1.Id, false, null, Framework.DomainDriven.Lock.LockRole.Update);
             if (object.ReferenceEquals(domainObject, null))
             {
                 domainObject = new SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1();

@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
 using NHibernate;

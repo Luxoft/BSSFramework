@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using Framework.Core;
+using Framework.DomainDriven.Lock;
 using Framework.SecuritySystem;
 
 using NHibernate.Linq;
@@ -62,13 +63,13 @@ public class GenericRepository<TDomainObject, TIdent> : IGenericRepository<TDoma
 
     public TDomainObject Load(TIdent id) => this.dal.Load(id);
 
-    public async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default) =>
+    public async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken) =>
         await this.dal.LoadAsync(id, cancellationToken);
 
     /// <summary>
     /// Re-read the state of the given instance from the underlying database.
     /// </summary>
-    public async Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken = default) =>
+    public async Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken) =>
         await this.dal.RefreshAsync(domainObject, cancellationToken);
 
     public IQueryable<TProjection> GetQueryable<TProjection>(Specification<TDomainObject, TProjection> specification)
@@ -119,4 +120,9 @@ public class GenericRepository<TDomainObject, TIdent> : IGenericRepository<TDoma
             Specification<TDomainObject, TProjection> specification,
             CancellationToken cancellationToken) =>
             await this.specificationEvaluator.GetQuery(this.GetQueryable(), specification).ToListAsync(cancellationToken);
+
+    public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)
+    {
+        await this.dal.LockAsync(domainObject, lockRole, cancellationToken);
+    }
 }

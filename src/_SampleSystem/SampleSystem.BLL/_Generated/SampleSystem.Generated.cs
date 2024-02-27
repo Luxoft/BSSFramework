@@ -528,24 +528,6 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class NamedLockBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.NamedLock, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.INamedLockBLL
-    {
-        
-        public NamedLockBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.NamedLock> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-        }
-    }
-    
-    public partial class NamedLockBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.INamedLockBLL, SampleSystem.BLL.NamedLockBLL, SampleSystem.Domain.NamedLock>, SampleSystem.BLL.INamedLockBLLFactory
-    {
-        
-        public NamedLockBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class PrincipalBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Principal, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IPrincipalBLL
     {
         
@@ -1078,8 +1060,6 @@ namespace SampleSystem.BLL
         private SampleSystem.BLL.IManagementUnitBLL managementUnitBLL;
         
         private SampleSystem.BLL.IManagementUnitFluentMappingBLL managementUnitFluentMappingBLL;
-        
-        private SampleSystem.BLL.INamedLockBLL namedLockBLL;
         
         private SampleSystem.BLL.IPrincipalBLL principalBLL;
         
@@ -1742,26 +1722,6 @@ namespace SampleSystem.BLL
             }
         }
         
-        public SampleSystem.BLL.INamedLockBLL NamedLock
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.namedLockBLL, null))
-                {
-                    this.namedLockBLL = this.NamedLockFactory.Create();
-                }
-                return this.namedLockBLL;
-            }
-        }
-        
-        public SampleSystem.BLL.INamedLockBLLFactory NamedLockFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.INamedLockBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
         public SampleSystem.BLL.IPrincipalBLL Principal
         {
             get
@@ -2342,8 +2302,6 @@ namespace SampleSystem.BLL
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid>, SampleSystem.Domain.ManagementUnitFluentMapping>, SampleSystem.BLL.IManagementUnitFluentMappingBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestManualEmployeeProjectionBLLFactory, SampleSystem.BLL.TestManualEmployeeProjectionBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, System.Guid>, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>, SampleSystem.BLL.ITestManualEmployeeProjectionBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.INamedLockBLLFactory, SampleSystem.BLL.NamedLockBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.NamedLock, System.Guid>, SampleSystem.Domain.NamedLock>, SampleSystem.BLL.INamedLockBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IPrincipalBLLFactory, SampleSystem.BLL.PrincipalBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Principal, System.Guid>, SampleSystem.Domain.Principal>, SampleSystem.BLL.IPrincipalBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitProgramClassBLLFactory, SampleSystem.BLL.BusinessUnitProgramClassBLLFactory>(serviceCollection);

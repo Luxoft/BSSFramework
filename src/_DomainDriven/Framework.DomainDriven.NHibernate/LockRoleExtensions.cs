@@ -1,4 +1,6 @@
-﻿using NHibernate;
+﻿using Framework.DomainDriven.Lock;
+
+using NHibernate;
 
 namespace Framework.DomainDriven.NHibernate;
 

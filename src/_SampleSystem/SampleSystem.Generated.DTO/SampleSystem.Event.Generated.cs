@@ -148,8 +148,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SingleEmployeeFilterModelSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SingleEmployeeFilterModelRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.NamedLockSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.NamedLockRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.NoSecurityObjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.NoSecurityObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalSaveEventDTO))]
@@ -6821,81 +6819,6 @@ namespace SampleSystem.Generated.DTO
         public SingleEmployeeFilterModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel domainObject)
         {
             mappingService.MapSingleEmployeeFilterModel(domainObject, this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NamedLock), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class NamedLockSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.NamedLockEventRichDTO NamedLock;
-        
-        public NamedLockSaveEventDTO()
-        {
-        }
-        
-        public NamedLockSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NamedLock domainObject)
-        {
-            this.NamedLock = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NamedLock), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class NamedLockRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.NamedLockEventRichDTO NamedLock;
-        
-        public NamedLockRemoveEventDTO()
-        {
-        }
-        
-        public NamedLockRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NamedLock domainObject)
-        {
-            this.NamedLock = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NamedLock), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class NamedLockEventRichDTO
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.NamedLockOperation LockOperation;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
-        
-        public NamedLockEventRichDTO()
-        {
-        }
-        
-        public NamedLockEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NamedLock domainObject)
-        {
-            mappingService.MapNamedLock(domainObject, this);
         }
     }
     

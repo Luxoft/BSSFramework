@@ -1,10 +1,12 @@
 ﻿using AutoFixture.Idioms;
 
 using FluentAssertions;
+
+using Framework.Configuration.Core;
 using Framework.UnitTesting;
 using NUnit.Framework;
 
-namespace Framework.Configuration.Core.Tests.Unit;
+namespace Framework.Configuration.SubscriptionModeling.Tests.Unit;
 
 [TestFixture]
 public sealed class DomainObjectVersionsTests : TestFixtureBase
@@ -76,7 +78,7 @@ public sealed class DomainObjectVersionsTests : TestFixtureBase
     public void ChangeType_Get_CorrectComputedChangeType(
             object previous,
             object current,
-            DomainObjectChangeType expectedChangeType)
+            Framework.Configuration.Core.DomainObjectChangeType expectedChangeType)
     {
         // Arrange
         var versions = new DomainObjectVersions<object>(previous, current);

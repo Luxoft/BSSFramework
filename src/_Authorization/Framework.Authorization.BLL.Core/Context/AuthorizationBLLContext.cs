@@ -2,7 +2,6 @@
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 
@@ -38,7 +37,6 @@ public partial class AuthorizationBLLContext
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             TimeProvider timeProvider,
-            IConfigurationBLLContext configuration,
             IRootSecurityService<PersistentDomainObjectBase> securityService,
             IAuthorizationBLLFactoryContainer logics,
             IAuthorizationExternalSource externalSource,
@@ -72,7 +70,6 @@ public partial class AuthorizationBLLContext
         this.RunAsManager = runAsManager;
 
         this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
-        this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
         this.lazyCurrentPrincipal = LazyHelper.Create(() => this.Logics.Principal.GetCurrent());
 
@@ -89,8 +86,6 @@ public partial class AuthorizationBLLContext
 
         this.TypeResolver = settings.TypeResolver;
     }
-
-    public IConfigurationBLLContext Configuration { get; }
 
     public ITypeResolver<string> TypeResolver { get; }
 

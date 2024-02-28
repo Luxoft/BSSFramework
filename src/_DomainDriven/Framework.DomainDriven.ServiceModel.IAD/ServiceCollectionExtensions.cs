@@ -30,19 +30,59 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class BssFrameworkSettings
-{
-}
-
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddBssFramework(this IServiceCollection services, Action<BssFrameworkSettings> setupAction = null)
+    public static IServiceCollection AddBssFramework(this IServiceCollection services, Action<IBssFrameworkSettings> setupAction)
     {
         var settings = new BssFrameworkSettings();
 
         setupAction?.Invoke(settings);
+        settings.InitSettings();
 
+        foreach (var securityOperationType in settings.SecurityOperationTypes)
+        {
+            services.AddSingleton(new SecurityOperationTypeInfo(securityOperationType));
+        }
 
+        foreach (var namedLockType in settings.NamedLockTypes)
+        {
+            services.AddSingleton(new NamedLockTypeInfo(namedLockType));
+        }
+
+        services.TryAddSingleton(TimeProvider.System);
+
+        services.RegisterFinancialYearServices();
+        services.RegisterRepository();
+        services.RegisterAuthenticationServices();
+        services.RegisterEvaluators();
+        services.RegisterAuthorizationSystem(); ;
+        services.RegisterAuthorizationSecurity();
+        services.RegisterConfigurationSecurity();
+        services.RegisterNamedLocks();
+        services.RegisterHierarchicalObjectExpander();
+        services.RegistryGenericDatabaseVisitors();
+
+        services.AddSingleton<IInitializeManager, InitializeManager>();
+
+        return services;
+    }
+    private static void InitSettings(this BssFrameworkSettings settings)
+    {
+        if (settings.RegisterBaseSecurityOperationTypes)
+        {
+            settings.SecurityOperationTypes.Add(typeof(BssSecurityOperation));
+            settings.SecurityOperationTypes.Add(typeof(AuthorizationSecurityOperation));
+            settings.SecurityOperationTypes.Add(typeof(ConfigurationSecurityOperation));
+        }
+
+        if (settings.RegisterBaseNamedLockTypes)
+        {
+            settings.NamedLockTypes.Add(typeof(ConfigurationNamedLock));
+        }
+    }
+
+    private static IServiceCollection RegisterRepository(this IServiceCollection services)
+    {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
         services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Disabled, typeof(Repository<>));
@@ -54,31 +94,36 @@ public static class ServiceCollectionExtensions
         services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
         services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
 
+        return services;
+    }
 
-        services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
-        services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
-
-        services.AddScoped<ApplicationUserAuthenticationService>();
-        services.AddScopedFrom<IUserAuthenticationService, ApplicationUserAuthenticationService>();
-        services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
-
-        services.RegisterAuthorizationSystem();
-
-        services.AddSingleton(new SecurityOperationTypeInfo(typeof(BssSecurityOperation)));
-        services.RegisterAuthorizationSecurity();
-        services.RegisterConfigurationSecurity();
-
-        services.TryAddSingleton(TimeProvider.System);
+    private static IServiceCollection RegisterFinancialYearServices(this IServiceCollection services)
+    {
         services.AddSingleton<IFinancialYearCalculator, FinancialYearCalculator>();
         services.AddSingleton<FinancialYearServiceSettings>();
         services.AddSingleton<IFinancialYearService, FinancialYearService>();
 
-        services.RegisterNamedLocks();
+        return services;
+    }
+
+    private static IServiceCollection RegisterEvaluators(this IServiceCollection services)
+    {
+        services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
+        services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
 
         return services;
     }
 
-    public static IServiceCollection RegistryGenericDatabaseVisitors(this IServiceCollection services)
+    private static IServiceCollection RegisterAuthenticationServices(this IServiceCollection services)
+    {
+        services.AddScoped<ApplicationUserAuthenticationService>();
+        services.AddScopedFrom<IUserAuthenticationService, ApplicationUserAuthenticationService>();
+        services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
+
+        return services;
+    }
+
+    private static IServiceCollection RegistryGenericDatabaseVisitors(this IServiceCollection services)
     {
         services
             .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
@@ -99,7 +144,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection RegisterHierarchicalObjectExpander(this IServiceCollection services)
+    private static IServiceCollection RegisterHierarchicalObjectExpander(this IServiceCollection services)
     {
         return services.AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
                        .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<Guid>>();
@@ -110,10 +155,7 @@ public static class ServiceCollectionExtensions
         return services
                .AddScoped<INamedLockService, NamedLockService>()
                .AddScoped<INamedLockInitializer, NamedLockInitializer>()
-
-               .AddSingleton(new NamedLockTypeInfo(typeof(ConfigurationNamedLock)))
                .AddSingleton<INamedLockSource, NamedLockSource>();
-
     }
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
@@ -166,9 +208,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)
     {
-        return services.AddSingleton(new SecurityOperationTypeInfo(typeof(AuthorizationSecurityOperation)))
-
-                       .RegisterDomainSecurityServices<Guid>(
+        return services.RegisterDomainSecurityServices<Guid>(
                            rb => rb.Add<Principal>(
                                        b => b.SetView(AuthorizationSecurityOperation.PrincipalView)
                                              .SetEdit(AuthorizationSecurityOperation.PrincipalEdit)
@@ -195,9 +235,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
     {
-        return services.AddSingleton(new SecurityOperationTypeInfo(typeof(ConfigurationSecurityOperation)))
-
-                       .RegisterDomainSecurityServices<Guid>(
+        return services.RegisterDomainSecurityServices<Guid>(
                            rb => rb.Add<ExceptionMessage>(
                                        b => b.SetView(ConfigurationSecurityOperation.ExceptionMessageView))
 

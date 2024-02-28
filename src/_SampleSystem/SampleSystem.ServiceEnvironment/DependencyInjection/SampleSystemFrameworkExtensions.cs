@@ -30,8 +30,7 @@ public static class SampleSystemFrameworkExtensions
 {
     public static IServiceCollection RegisterGeneralBssFramework(this IServiceCollection services)
     {
-        return services.RegisterGenericServices()
-                       .RegisterWebApiGenericServices()
+        return services.RegisterWebApiGenericServices()
                        .RegisterListeners()
                        .RegisterSupportServices()
 
@@ -76,8 +75,6 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterListeners(this IServiceCollection services)
     {
-        services.AddSingleton<IInitializeManager, InitializeManager>();
-
         services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
@@ -128,9 +125,6 @@ public static class SampleSystemFrameworkExtensions
 
         // For subscription
         services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));
-
-        // For expand tree
-        services.RegisterHierarchicalObjectExpander();
 
         // Serilog
         services.AddSingleton(Serilog.Log.Logger);

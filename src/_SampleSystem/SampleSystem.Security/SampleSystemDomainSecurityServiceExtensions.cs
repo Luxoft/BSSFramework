@@ -3,17 +3,17 @@ using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.Domain;
-using SampleSystem.Domain.Projections;
+using Framework.Authorization.SecuritySystem;
 
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
+using SampleSystem.Domain;
+using SampleSystem.Domain.Projections;
 using SampleSystem.Domain.EnversBug1676;
 using SampleSystem.Domain.ManualProjections;
 using SampleSystem.Security.Metadata;
 using SampleSystem.Security.Services;
-using Framework.Authorization.SecuritySystem;
 
 namespace SampleSystem.Security;
 

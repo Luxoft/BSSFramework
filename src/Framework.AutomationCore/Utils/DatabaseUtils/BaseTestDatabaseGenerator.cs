@@ -25,7 +25,7 @@ public abstract class BaseTestDatabaseGenerator
         }
     }
 
-    public void DeleteLocalDb()
+    public virtual void DeleteLocalDb()
     {
         if (this.configUtil.UseLocalDb)
         {

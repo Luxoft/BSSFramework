@@ -275,7 +275,7 @@ public static partial class CoreDatabaseUtil
         }
     }
 
-    public static void DeleteLocalDb(string instanceName)
+    public static void DeleteLocalDb(string instanceName, StopInstanceOptions stopOptions = StopInstanceOptions.KillProcess)
     {
         using (var localDb = new SqlLocalDbApi())
         {
@@ -283,7 +283,7 @@ public static partial class CoreDatabaseUtil
 
             if (instanceInfo.IsRunning)
             {
-                localDb.StopInstance(instanceInfo.Name);
+                localDb.StopInstance(instanceInfo.Name, stopOptions, TimeSpan.FromSeconds(1));
             }
 
             localDb.DeleteInstance(instanceName);

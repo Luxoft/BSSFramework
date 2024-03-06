@@ -11,7 +11,9 @@ public class Employee : Base
         set { this.department = value; }
     }
 
-    public int VirtualProperty { get; set; }
+    public int VirtualProperty => 123;
+
+    public int NonVirtualProperty { get; set; }
 
     public NameEng NameEng
     {

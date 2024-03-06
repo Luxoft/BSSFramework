@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Framework.OData.Tests.Unit.DomainModel;
+
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
@@ -65,5 +66,13 @@ public class HasVirtualPropertyTest
         Expression<Func<SubEmployee, bool>> expression = z => z.VirtualProperty == 5;
 
         ClassicAssert.IsTrue(expression.HasVirtualProperty());
+    }
+
+    [Test]
+    public void HasNotVirtualProperty_True()
+    {
+        Expression<Func<Employee, bool>> expression = z => z.NonVirtualProperty == 5;
+
+        ClassicAssert.IsFalse(expression.HasVirtualProperty());
     }
 }

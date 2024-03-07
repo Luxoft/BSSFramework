@@ -8,7 +8,6 @@ using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
-using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
@@ -73,7 +72,7 @@ public static class SampleSystemFrameworkExtensions
         return services;
     }
 
-    private static IServiceCollection RegisterListeners(this IServiceCollection services)
+    private static IServiceCollection  RegisterListeners(this IServiceCollection services)
     {
         services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
@@ -116,9 +115,6 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterSupportServices(this IServiceCollection services)
     {
-        // For NamedLocks
-        services.AddSingleton(new NamedLockTypeInfo(typeof(SampleSystemNamedLock)));
-
         // For notification
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
         services.AddScoped<IEmployeeSource, EmployeeSource<Employee>>();

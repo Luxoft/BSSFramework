@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.ServiceEnvironment\Framework.App.ServiceEnvironment.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.NamedLocks\Framework.Configuration.NamedLocks.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup\Framework.DomainDriven.Setup.csproj" />
 
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
 

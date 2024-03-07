@@ -21,7 +21,6 @@ using Framework.FinancialYear;
 using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Bss;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -32,23 +31,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddBssFramework(this IServiceCollection services, Action<IBssFrameworkSettings> setupAction)
+    public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
     {
-        var settings = new BssFrameworkSettings();
-
-        setupAction?.Invoke(settings);
-        settings.InitSettings();
-
-        foreach (var securityOperationType in settings.SecurityOperationTypes)
-        {
-            services.AddSingleton(new SecurityOperationTypeInfo(securityOperationType));
-        }
-
-        foreach (var namedLockType in settings.NamedLockTypes)
-        {
-            services.AddSingleton(new NamedLockTypeInfo(namedLockType));
-        }
-
         services.TryAddSingleton(TimeProvider.System);
 
         services.RegisterFinancialYearServices();
@@ -65,20 +49,6 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
         return services;
-    }
-    private static void InitSettings(this BssFrameworkSettings settings)
-    {
-        if (settings.RegisterBaseSecurityOperationTypes)
-        {
-            settings.SecurityOperationTypes.Add(typeof(BssSecurityOperation));
-            settings.SecurityOperationTypes.Add(typeof(AuthorizationSecurityOperation));
-            settings.SecurityOperationTypes.Add(typeof(ConfigurationSecurityOperation));
-        }
-
-        if (settings.RegisterBaseNamedLockTypes)
-        {
-            settings.NamedLockTypes.Add(typeof(ConfigurationNamedLock));
-        }
     }
 
     private static IServiceCollection RegisterRepository(this IServiceCollection services)

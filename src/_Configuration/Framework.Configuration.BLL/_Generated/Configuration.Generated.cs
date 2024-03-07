@@ -11,7 +11,7 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public partial class CodeFirstSubscriptionBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.CodeFirstSubscription, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLL
+    public partial class CodeFirstSubscriptionBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.CodeFirstSubscription, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLL
     {
         
         public CodeFirstSubscriptionBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -29,7 +29,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class DomainObjectEventBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectEvent, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IDomainObjectEventBLL
+    public partial class DomainObjectEventBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectEvent, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.IDomainObjectEventBLL
     {
         
         public DomainObjectEventBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectEvent> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -47,7 +47,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class DomainObjectModificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectModification, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IDomainObjectModificationBLL
+    public partial class DomainObjectModificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectModification, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.IDomainObjectModificationBLL
     {
         
         public DomainObjectModificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectModification> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -65,7 +65,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class DomainObjectNotificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectNotification, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IDomainObjectNotificationBLL
+    public partial class DomainObjectNotificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectNotification, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.IDomainObjectNotificationBLL
     {
         
         public DomainObjectNotificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectNotification> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -83,7 +83,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class DomainTypeBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainType, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IDomainTypeBLL
+    public partial class DomainTypeBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainType, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.IDomainTypeBLL
     {
         
         public DomainTypeBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainType> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -101,7 +101,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class ExceptionMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.ExceptionMessage, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IExceptionMessageBLL
+    public partial class ExceptionMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.ExceptionMessage, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.IExceptionMessageBLL
     {
         
         public ExceptionMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.ExceptionMessage> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -119,7 +119,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class GenericNamedLockBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.GenericNamedLock, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IGenericNamedLockBLL
+    public partial class GenericNamedLockBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.GenericNamedLock, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.IGenericNamedLockBLL
     {
         
         public GenericNamedLockBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.GenericNamedLock> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -137,7 +137,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class SentMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SentMessage, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISentMessageBLL
+    public partial class SentMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SentMessage, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.ISentMessageBLL
     {
         
         public SentMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SentMessage> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -155,7 +155,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class SequenceBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Sequence, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISequenceBLL
+    public partial class SequenceBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Sequence, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.ISequenceBLL
     {
         
         public SequenceBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Sequence> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -173,7 +173,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class SystemConstantBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SystemConstant, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISystemConstantBLL
+    public partial class SystemConstantBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SystemConstant, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.ISystemConstantBLL
     {
         
         public SystemConstantBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SystemConstant> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -191,7 +191,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class TargetSystemBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.TargetSystem, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ITargetSystemBLL
+    public partial class TargetSystemBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.TargetSystem, Framework.DomainDriven.BLL.EventOperation>, Framework.Configuration.BLL.ITargetSystemBLL
     {
         
         public TargetSystemBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.TargetSystem> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 

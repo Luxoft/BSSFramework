@@ -7,9 +7,7 @@ public sealed class OperationEventSenderContainer<TPersistentDomainObjectBase> :
 {
     private readonly IEnumerable<IOperationEventListener<TPersistentDomainObjectBase>> eventListeners;
 
-    private readonly object _locker = new object();
-
-    private readonly Dictionary<Type, Dictionary<Type, OperationEventSender>> _cache = new Dictionary<Type, Dictionary<Type, OperationEventSender>>();
+    private readonly Dictionary<Type, object> cache = new ();
 
 
     public OperationEventSenderContainer(IEnumerable<IOperationEventListener<TPersistentDomainObjectBase>> eventListeners)
@@ -18,45 +16,19 @@ public sealed class OperationEventSenderContainer<TPersistentDomainObjectBase> :
     }
 
 
-    public OperationEventSender<TDomainObject, BLLBaseOperation> GetEventListener<TDomainObject>()
+    public OperationEventSender<TDomainObject> GetEventListener<TDomainObject>()
             where TDomainObject : class, TPersistentDomainObjectBase
     {
-        return this.GetEventListener<TDomainObject, BLLBaseOperation>();
-    }
-
-    public OperationEventSender<TDomainObject, TOperation> GetEventListener<TDomainObject, TOperation>()
-            where TDomainObject : class, TPersistentDomainObjectBase
-            where TOperation : struct, Enum
-    {
-        lock (this._locker)
-        {
-            return this._cache.GetValueOrCreate(typeof(TDomainObject), () => new Dictionary<Type, OperationEventSender>()).Pipe(domainCache =>
-                   {
-                       var lazyBaseEventListener = LazyHelper.Create(() => domainCache.GetValueOrCreate(typeof(BLLBaseOperation), () => new DefaultOperationEventSender<TDomainObject>(this.eventListeners, this._cache)) as DefaultOperationEventSender<TDomainObject>);
-
-                       if (typeof(TOperation) == typeof(BLLBaseOperation))
-                       {
-                           return lazyBaseEventListener.Value;
-                       }
-                       else
-                       {
-                           return domainCache.GetValueOrCreate(typeof(TOperation), () =>
-                                                                                           new CustomOperationEventSender<TDomainObject, TOperation>(this.eventListeners, this._cache));
-                       }
-                   }) as OperationEventSender<TDomainObject, TOperation>;
-        }
+        return (OperationEventSender<TDomainObject>)this.cache.GetValueOrCreate(
+            typeof(TDomainObject),
+            () => new OperationEventSender<TDomainObject>(this.eventListeners));
     }
 
     #region IBLLOperationEventListenerContainer<TDomainObjectBase> Members
 
-    OperationEventSender<TDomainObject, BLLBaseOperation> IOperationEventSenderContainer<TPersistentDomainObjectBase>.GetEventSender<TDomainObject>()
+    OperationEventSender<TDomainObject> IOperationEventSenderContainer<TPersistentDomainObjectBase>.GetEventSender<TDomainObject>()
     {
         return this.GetEventListener<TDomainObject>();
-    }
-
-    OperationEventSender<TDomainObject, TOperation> IOperationEventSenderContainer<TPersistentDomainObjectBase>.GetEventSender<TDomainObject, TOperation>()
-    {
-        return this.GetEventListener<TDomainObject, TOperation>();
     }
 
     #endregion

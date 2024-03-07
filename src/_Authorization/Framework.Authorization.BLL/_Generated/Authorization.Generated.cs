@@ -11,7 +11,7 @@ namespace Framework.Authorization.BLL
 {
     
     
-    public partial class BusinessRoleBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.BusinessRole, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Authorization.BLL.IBusinessRoleBLL
+    public partial class BusinessRoleBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.BusinessRole, Framework.DomainDriven.BLL.EventOperation>, Framework.Authorization.BLL.IBusinessRoleBLL
     {
         
         public BusinessRoleBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.BusinessRole> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -29,7 +29,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class EntityTypeBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.EntityType, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Authorization.BLL.IEntityTypeBLL
+    public partial class EntityTypeBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.EntityType, Framework.DomainDriven.BLL.EventOperation>, Framework.Authorization.BLL.IEntityTypeBLL
     {
         
         public EntityTypeBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.EntityType> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -47,7 +47,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class OperationBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Operation, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Authorization.BLL.IOperationBLL
+    public partial class OperationBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Operation, Framework.DomainDriven.BLL.EventOperation>, Framework.Authorization.BLL.IOperationBLL
     {
         
         public OperationBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.Operation> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -65,7 +65,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class PermissionBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Permission, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Authorization.BLL.IPermissionBLL
+    public partial class PermissionBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Permission, Framework.DomainDriven.BLL.EventOperation>, Framework.Authorization.BLL.IPermissionBLL
     {
         
         public PermissionBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.Permission> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -83,7 +83,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class PermissionFilterEntityBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.PermissionFilterEntity, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Authorization.BLL.IPermissionFilterEntityBLL
+    public partial class PermissionFilterEntityBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.PermissionFilterEntity, Framework.DomainDriven.BLL.EventOperation>, Framework.Authorization.BLL.IPermissionFilterEntityBLL
     {
         
         public PermissionFilterEntityBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.PermissionFilterEntity> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -101,7 +101,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class PermissionFilterItemBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.PermissionFilterItem, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Authorization.BLL.IPermissionFilterItemBLL
+    public partial class PermissionFilterItemBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.PermissionFilterItem, Framework.DomainDriven.BLL.EventOperation>, Framework.Authorization.BLL.IPermissionFilterItemBLL
     {
         
         public PermissionFilterItemBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.PermissionFilterItem> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -119,7 +119,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class PrincipalBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Principal, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Authorization.BLL.IPrincipalBLL
+    public partial class PrincipalBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Principal, Framework.DomainDriven.BLL.EventOperation>, Framework.Authorization.BLL.IPrincipalBLL
     {
         
         public PrincipalBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.Principal> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 

@@ -7,7 +7,10 @@ public struct TypeEvent
 {
     public static TypeEvent SaveAndRemove<T>(Func<T, bool> isSaveProcessingFunc = null, Func<T, bool> isRemoveProcessingFunc = null)
     {
-        return TypeEvent.Create(EventOperation.Save | EventOperation.Remove, isSaveProcessingFunc, isRemoveProcessingFunc);
+        return TypeEvent.Create(
+            [EventOperation.Save, EventOperation.Remove],
+            isSaveProcessingFunc,
+            isRemoveProcessingFunc);
     }
 
     public static TypeEvent Save<T>(Func<T, bool> isSaveFunc = null)
@@ -15,7 +18,18 @@ public struct TypeEvent
         return TypeEvent.Create(EventOperation.Save, isSaveFunc);
     }
 
-    public static TypeEvent Create<T>(EventOperation eventOperation, Func<T, bool> isSaveProcessingFunc = null, Func<T, bool> isRemoveProcessingFunc = null)
+    public static TypeEvent Create<T>(
+        EventOperation eventOperation,
+        Func<T, bool> isSaveProcessingFunc = null,
+        Func<T, bool> isRemoveProcessingFunc = null)
+    {
+        return Create(new[] { eventOperation }, isSaveProcessingFunc, isRemoveProcessingFunc);
+    }
+
+    public static TypeEvent Create<T>(
+        EventOperation[] eventOperations,
+        Func<T, bool> isSaveProcessingFunc = null,
+        Func<T, bool> isRemoveProcessingFunc = null)
     {
         Func<object, bool> defaultFunc = z => true;
         var isSaveUntypedFunc = defaultFunc;
@@ -31,15 +45,14 @@ public struct TypeEvent
             isRemoveUntypeFunc = z => isRemoveProcessingFunc((T)z);
         }
 
-        return new TypeEvent(typeof(T), eventOperation, isSaveUntypedFunc, isRemoveUntypeFunc);
+        return new TypeEvent(typeof(T), eventOperations, isSaveUntypedFunc, isRemoveUntypeFunc);
     }
 
-
-    public TypeEvent(Type type, EventOperation operation, Func<object, bool> isSaveProcessingFunc, Func<object, bool> isRemoveProcessingFunc) : this()
+    public TypeEvent(Type type, IEnumerable<EventOperation> operations, Func<object, bool> isSaveProcessingFunc, Func<object, bool> isRemoveProcessingFunc) : this()
     {
         this.Type = type;
 
-        this.Operation = operation;
+        this.Operations = operations.ToList();
 
         this.IsSaveProcessingFunc = isSaveProcessingFunc;
 
@@ -53,9 +66,9 @@ public struct TypeEvent
     /// <summary>
     ///
     /// </summary>
-    public EventOperation Operation { get; private set; }
+    public IReadOnlyList<EventOperation> Operations { get; }
 
-    public Func<object, bool> IsSaveProcessingFunc { get; private set; }
+    public Func<object, bool> IsSaveProcessingFunc { get; }
 
-    public Func<object, bool> IsRemoveProcessingFunc { get; private set; }
+    public Func<object, bool> IsRemoveProcessingFunc { get; }
 }

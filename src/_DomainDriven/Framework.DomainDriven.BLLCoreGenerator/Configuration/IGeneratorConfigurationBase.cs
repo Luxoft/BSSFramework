@@ -59,8 +59,6 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     CodeTypeReference SecurityDomainBLLBaseTypeReference { get; }
 
-    CodeTypeReference DefaultOperationSecurityDomainBLLBaseTypeReference { get; }
-
     Type FilterModelType { get; }
 
     Type ContextFilterModelType { get; }

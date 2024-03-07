@@ -39,22 +39,6 @@ internal static class BaseCodeDomHelper
                                                                                               p.Constraints.Add(fileFactory.Configuration.Environment.PersistentDomainObjectBaseType));
     }
 
-    public static CodeTypeParameter GetOperationCodeTypeParameter<TConfiguration>(this IGeneratorConfigurationContainer<TConfiguration> fileFactory)
-            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-    {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
-
-        return new CodeTypeParameter
-               {
-                       Name = "TOperation",
-                       Constraints =
-                       {
-                               new CodeTypeReference(" struct"),
-                               typeof(Enum).ToTypeReference()
-                       }
-               };
-    }
-
     public static CodeTypeParameter GetSecurityModeCodeTypeParameter<TConfiguration>(this IGeneratorConfigurationContainer<TConfiguration> fileFactory)
             where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
     {

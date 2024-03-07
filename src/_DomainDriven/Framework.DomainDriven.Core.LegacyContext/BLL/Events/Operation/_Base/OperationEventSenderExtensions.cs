@@ -1,11 +1,12 @@
-﻿namespace Framework.DomainDriven.BLL;
+﻿using Framework.Events;
+
+namespace Framework.DomainDriven.BLL;
 
 public static class OperationEventSenderExtensions
 {
-    public static void SendEvent<TDomainObject, TOperation>(this IOperationEventSender<TDomainObject, TOperation> eventSender, TDomainObject domainObject, TOperation operation)
+    public static void SendEvent<TDomainObject>(this IOperationEventSender<TDomainObject> eventSender, TDomainObject domainObject, EventOperation operation)
             where TDomainObject : class
-            where TOperation : struct, Enum
     {
-        eventSender.SendEvent(new DomainOperationEventArgs<TDomainObject, TOperation>(domainObject, typeof(TDomainObject), operation));
+        eventSender.SendEvent(new DomainOperationEventArgs<TDomainObject>(domainObject, typeof(TDomainObject), operation));
     }
 }

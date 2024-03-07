@@ -29,7 +29,7 @@ public class DefaultBaseEventDTOFileFactory<TConfiguration> : FileFactory<IServe
 
                 where !domainType.IsProjection()
 
-                from eventOperationCode in domainType.GetEventOperations(typeof(BLLBaseOperation))
+                from eventOperationCode in domainType.GetEventOperations(typeof(EventOperation))
 
                 let fileType = new DomainOperationEventDTOFileType(eventOperationCode)
 

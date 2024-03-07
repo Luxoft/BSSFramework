@@ -17,7 +17,7 @@ public abstract class EventDTOMessageSender<TPersistentDomainObjectBase, TEventD
         this.messageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));
     }
 
-    public override void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
+    public override void Send<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
     {
         this.messageSender.Send(this.ToEventDTOBase(domainObjectEventArgs));
     }

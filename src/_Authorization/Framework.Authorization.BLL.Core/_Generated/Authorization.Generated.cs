@@ -56,7 +56,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.Authorization.BLL.SecurityDomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.BLLBaseOperation>
+    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.Authorization.BLL.SecurityDomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.EventOperation>
         where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
     {
         

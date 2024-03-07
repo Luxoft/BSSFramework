@@ -9,7 +9,7 @@ namespace SampleSystem.Events;
 
 public static class DomainEventDTOMapper<TDomainObject, TOperation>
         where TDomainObject : PersistentDomainObjectBase
-        where TOperation : struct, Enum
+    
 {
     private static readonly object SyncRoot = new object();
 

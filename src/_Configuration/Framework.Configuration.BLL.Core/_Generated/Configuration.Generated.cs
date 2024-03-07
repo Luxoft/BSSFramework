@@ -56,7 +56,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.Configuration.BLL.SecurityDomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.BLLBaseOperation>
+    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.Configuration.BLL.SecurityDomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.EventOperation>
         where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
     {
         

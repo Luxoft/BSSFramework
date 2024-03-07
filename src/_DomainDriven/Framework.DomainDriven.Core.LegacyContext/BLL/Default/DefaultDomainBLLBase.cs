@@ -14,12 +14,11 @@ using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLL;
 
-public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent, TOperation> :
-        BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent, TOperation>,
+public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent> :
+        BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>,
         IDefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
-        where TOperation : struct, Enum
         where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>, IBLLBaseContext<TPersistentDomainObjectBase, TIdent>
 {
     private const int MaxItemsInSql = 2000;

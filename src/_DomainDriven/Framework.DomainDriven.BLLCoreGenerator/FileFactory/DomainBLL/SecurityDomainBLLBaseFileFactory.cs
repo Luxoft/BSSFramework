@@ -26,9 +26,6 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
         var genericDomainObjectParameter = this.GetDomainObjectCodeTypeParameter();
         var genericDomainObjectParameterTypeRef = genericDomainObjectParameter.ToTypeReference();
 
-        var genericOperationParameter = this.GetOperationCodeTypeParameter();
-        var genericOperationParameterTypeRef = genericOperationParameter.ToTypeReference();
-
         var contextParameter = this.GetContextParameter();
         var contextParameterRefExpr = contextParameter.ToVariableReferenceExpression();
 
@@ -43,7 +40,7 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
                {
                        TypeParameters =
                        {
-                               genericDomainObjectParameter, genericOperationParameter
+                               genericDomainObjectParameter
                        },
 
                        TypeAttributes = TypeAttributes.Public,
@@ -52,11 +49,10 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
                        IsPartial = true,
                        BaseTypes =
                        {
-                               typeof(DefaultSecurityDomainBLLBase<,,,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference,
+                               typeof(DefaultSecurityDomainBLLBase<,,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference,
                                    this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
                                    genericDomainObjectParameterTypeRef,
-                                   this.Configuration.Environment.GetIdentityType().ToTypeReference(),
-                                   genericOperationParameterTypeRef)
+                                   this.Configuration.Environment.GetIdentityType().ToTypeReference())
                        },
                        Members =
                        {

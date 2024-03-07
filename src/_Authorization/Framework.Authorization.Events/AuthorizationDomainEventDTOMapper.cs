@@ -8,7 +8,7 @@ namespace Framework.Authorization.Events;
 
 public static class AuthorizationDomainEventDTOMapper<TDomainObject, TOperation>
         where TDomainObject : PersistentDomainObjectBase
-        where TOperation : struct, Enum
+    
 {
     private static object syncRoot = new object();
 

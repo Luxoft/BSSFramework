@@ -9,15 +9,9 @@ namespace Framework.Events;
 /// <typeparam name="TBLLContext"></typeparam>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 /// <typeparam name="TEventDTOBase"></typeparam>
-public abstract class EventDTOMessageSenderBase<TBLLContext, TPersistentDomainObjectBase, TEventDTOBase> : BLLContextContainer<TBLLContext>, IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>
+public abstract class EventDTOMessageSenderBase<TBLLContext, TPersistentDomainObjectBase, TEventDTOBase> : IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>
         where TPersistentDomainObjectBase : class
-        where TBLLContext : class
 {
-    protected EventDTOMessageSenderBase(TBLLContext context)
-            : base(context)
-    {
-    }
-
     public abstract void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
             where TDomainObject : class, TPersistentDomainObjectBase
             where TOperation : struct, Enum;

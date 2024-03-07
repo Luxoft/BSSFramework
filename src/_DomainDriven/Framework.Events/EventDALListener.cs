@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
 namespace Framework.Events;
 
@@ -9,16 +8,14 @@ namespace Framework.Events;
 /// </summary>
 /// <typeparam name="TBLLContext"></typeparam>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-public abstract class EventDALListener<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IManualEventDALListener<TPersistentDomainObjectBase>, IBeforeTransactionCompletedDALListener
-        where TBLLContext : class
+public abstract class EventDALListener<TPersistentDomainObjectBase> : IManualEventDALListener<TPersistentDomainObjectBase>, IBeforeTransactionCompletedDALListener
         where TPersistentDomainObjectBase : class
 {
     private readonly TypeEvent[] typeEvents;
 
     private readonly IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender;
 
-    protected EventDALListener(TBLLContext context, IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender, IEnumerable<TypeEvent> typeEvents)
-            : base(context)
+    protected EventDALListener(IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender, IEnumerable<TypeEvent> typeEvents)
     {
         this.messageSender = messageSender;
 

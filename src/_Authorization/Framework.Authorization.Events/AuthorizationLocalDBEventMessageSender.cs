@@ -1,5 +1,4 @@
-﻿using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Configuration.BLL;
 using Framework.DomainDriven.ServiceModel.IAD;

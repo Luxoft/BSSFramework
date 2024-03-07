@@ -1,12 +1,10 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
 
 namespace Framework.Events;
 
 /// <summary>
 /// Класс для отправки доменных евентов
 /// </summary>
-/// <typeparam name="TBLLContext"></typeparam>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 /// <typeparam name="TEventDTOBase"></typeparam>
 public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase, TEventDTOBase> : IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>

@@ -4,6 +4,7 @@ using Framework.Configuration;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.DomainDriven.WebApiNetCore;
 using Framework.SecuritySystem.Bss;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +42,8 @@ public static class ServiceCollectionExtensions
         settings.Extensions.ForEach(ex => ex.AddServices(services));
 
         services.RegisterGenericServices();
+
+        services.RegisterWebApiGenericServices();
 
         return services;
     }

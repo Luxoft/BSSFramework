@@ -29,8 +29,7 @@ public static class SampleSystemFrameworkExtensions
 {
     public static IServiceCollection RegisterGeneralBssFramework(this IServiceCollection services)
     {
-        return services.RegisterWebApiGenericServices()
-                       .RegisterListeners()
+        return services.RegisterListeners()
                        .RegisterSupportServices()
 
                        // Legacy

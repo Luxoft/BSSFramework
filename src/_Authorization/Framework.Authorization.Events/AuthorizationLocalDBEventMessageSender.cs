@@ -7,18 +7,23 @@ using Framework.Events;
 
 namespace Framework.Authorization.Events;
 
-public class AuthorizationLocalDBEventMessageSender : LocalDBEventMessageSender<IAuthorizationBLLContext, PersistentDomainObjectBase, EventDTOBase>
+public class AuthorizationLocalDBEventMessageSender : LocalDBEventMessageSender<PersistentDomainObjectBase, EventDTOBase>
 {
+    private readonly IAuthorizationDTOMappingService mappingService;
+
     private readonly bool shrinkDto;
 
-    public AuthorizationLocalDBEventMessageSender(IAuthorizationBLLContext context, IConfigurationBLLContext configurationContext, string queueTag = "authDALQuery", bool shrinkDto = true)
-            : base(context, configurationContext, queueTag) =>
-            this.shrinkDto = shrinkDto;
+    public AuthorizationLocalDBEventMessageSender(IAuthorizationDTOMappingService mappingService, IConfigurationBLLContext configurationContext, string queueTag = "authDALQuery", bool shrinkDto = true)
+            : base(configurationContext, queueTag)
+    {
+        this.mappingService = mappingService;
+        this.shrinkDto = shrinkDto;
+    }
 
     protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
     {
         var dto = AuthorizationDomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
-         new AuthorizationServerPrimitiveDTOMappingService(this.Context),
+         this.mappingService,
          domainObjectEventArgs.DomainObject,
          domainObjectEventArgs.Operation);
 

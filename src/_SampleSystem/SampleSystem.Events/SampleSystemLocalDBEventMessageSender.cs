@@ -2,24 +2,26 @@
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 
-using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.Events;
 
-public class SampleSystemLocalDBEventMessageSender : LocalDBEventMessageSender<ISampleSystemBLLContext, PersistentDomainObjectBase, EventDTOBase>
+public class SampleSystemLocalDBEventMessageSender : LocalDBEventMessageSender<PersistentDomainObjectBase, EventDTOBase>
 {
-    public SampleSystemLocalDBEventMessageSender(ISampleSystemBLLContext context, IConfigurationBLLContext configurationContext)
-            : base(context, configurationContext)
+    private readonly ISampleSystemDTOMappingService mappingService;
+
+    public SampleSystemLocalDBEventMessageSender(ISampleSystemDTOMappingService mappingService, IConfigurationBLLContext configurationContext)
+            : base(configurationContext)
     {
+        this.mappingService = mappingService;
     }
 
     protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
     {
         return DomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
-                                                                             new SampleSystemServerPrimitiveDTOMappingService(this.Context),
-                                                                             domainObjectEventArgs.DomainObject,
-                                                                             domainObjectEventArgs.Operation);
+            this.mappingService,
+            domainObjectEventArgs.DomainObject,
+            domainObjectEventArgs.Operation);
     }
 }

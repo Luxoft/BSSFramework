@@ -9,7 +9,7 @@ namespace Framework.Events;
 /// <typeparam name="TBLLContext"></typeparam>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 /// <typeparam name="TEventDTOBase"></typeparam>
-public abstract class EventDTOMessageSenderBase<TBLLContext, TPersistentDomainObjectBase, TEventDTOBase> : IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>
+public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase, TEventDTOBase> : IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>
         where TPersistentDomainObjectBase : class
 {
     public abstract void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)

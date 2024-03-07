@@ -1,12 +1,12 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven;
+using Framework.DomainDriven.BLL;
 
 namespace Framework.Events;
 
 /// <summary>
 /// Базовый класс для DAL-евентов
 /// </summary>
-/// <typeparam name="TBLLContext"></typeparam>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 public abstract class EventDALListener<TPersistentDomainObjectBase> : IManualEventDALListener<TPersistentDomainObjectBase>, IBeforeTransactionCompletedDALListener
         where TPersistentDomainObjectBase : class
@@ -89,9 +89,9 @@ public abstract class EventDALListener<TPersistentDomainObjectBase> : IManualEve
     private class ForceEventContainer<TDomainObject> : IOperationEventSender<TDomainObject, EventOperation>
             where TDomainObject : class, TPersistentDomainObjectBase
     {
-        private readonly EventDALListener<TBLLContext, TPersistentDomainObjectBase> dalListener;
+        private readonly EventDALListener<TPersistentDomainObjectBase> dalListener;
 
-        public ForceEventContainer(EventDALListener<TBLLContext, TPersistentDomainObjectBase> dalListener)
+        public ForceEventContainer(EventDALListener<TPersistentDomainObjectBase> dalListener)
         {
             this.dalListener = dalListener ?? throw new ArgumentNullException(nameof(dalListener));
         }

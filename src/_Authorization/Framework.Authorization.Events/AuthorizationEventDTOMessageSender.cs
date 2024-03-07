@@ -6,17 +6,20 @@ using Framework.Events;
 
 namespace Framework.Authorization.Events;
 
-public class AuthorizationEventDTOMessageSender : EventDTOMessageSender<IAuthorizationBLLContext, PersistentDomainObjectBase, EventDTOBase>
+public class AuthorizationEventDTOMessageSender : EventDTOMessageSender<PersistentDomainObjectBase, EventDTOBase>
 {
-    public AuthorizationEventDTOMessageSender(IAuthorizationBLLContext context, IMessageSender<EventDTOBase> messageSender)
-            : base(context, messageSender)
+    private readonly IAuthorizationDTOMappingService mappingService;
+
+    public AuthorizationEventDTOMessageSender(IAuthorizationDTOMappingService mappingService, IMessageSender<EventDTOBase> messageSender)
+            : base(messageSender)
     {
+        this.mappingService = mappingService;
     }
 
     protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
     {
         return AuthorizationDomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
-         new AuthorizationServerPrimitiveDTOMappingService(this.Context),
+         this.mappingService,
          domainObjectEventArgs.DomainObject,
          domainObjectEventArgs.Operation);
     }

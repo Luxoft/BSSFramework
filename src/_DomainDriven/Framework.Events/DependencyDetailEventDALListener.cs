@@ -9,7 +9,7 @@ public abstract class DependencyDetailEventDALListener<TPersistentDomainObjectBa
     private readonly TypeEventDependency[] dependencies;
 
     protected DependencyDetailEventDALListener(IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender, IEnumerable<TypeEvent> typeEvents, IEnumerable<TypeEventDependency> dependencies)
-            : base(context, messageSender, typeEvents)
+            : base(messageSender, typeEvents)
     {
         this.dependencies = (dependencies ?? throw new ArgumentNullException(nameof(dependencies))).ToArray();
     }

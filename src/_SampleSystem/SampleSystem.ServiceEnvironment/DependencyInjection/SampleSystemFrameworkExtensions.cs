@@ -103,15 +103,6 @@ public static class SampleSystemFrameworkExtensions
 
         services.AddScoped<IDomainEventDTOMapper<PersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<PersistentDomainObjectBase, ISampleSystemDTOMappingService, SampleSystem.Generated.DTO.EventDTOBase>>();
 
-        services.AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationRuntimeDomainEventDTOMapper>();
-
-        services.AddSingleton(typeof(LocalDBEventMessageSenderSettings<>));
-        services.AddSingleton(new LocalDBEventMessageSenderSettings<Framework.Authorization.Domain.PersistentDomainObjectBase> { QueueTag = "authDALQuery" });
-
-        services.AddScoped(typeof(IEventDTOMessageSender<>), typeof(LocalDBEventMessageSender<>));
-
-        services.AddSingleton(typeof(RuntimeDomainEventDTOConverter<,,>));
-
         services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemEventsSubscriptionManager>();
 
         services.AddScoped<SampleSystemAribaLocalDBEventMessageSender>();

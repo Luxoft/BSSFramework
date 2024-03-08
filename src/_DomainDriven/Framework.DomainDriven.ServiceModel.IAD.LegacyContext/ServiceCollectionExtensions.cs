@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using Framework.Authorization.BLL;
+using Framework.Authorization.Events;
 using Framework.Authorization.Notification;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
@@ -18,6 +19,8 @@ using Framework.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
+using Framework.Events.DTOMapper;
+using Framework.Events;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -47,6 +50,15 @@ public static class ServiceCollectionExtensions
 
         services.ReplaceSingleton<IRealTypeResolver, ProjectionRealTypeResolver>();
         services.ReplaceSingleton<ISecurityContextInfoService, ProjectionSecurityContextInfoService>();
+
+        services.AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationRuntimeDomainEventDTOMapper>();
+
+        services.AddSingleton(typeof(LocalDBEventMessageSenderSettings<>));
+        services.AddSingleton(new LocalDBEventMessageSenderSettings<Framework.Authorization.Domain.PersistentDomainObjectBase> { QueueTag = "authDALQuery" });
+
+        services.AddScoped(typeof(IEventDTOMessageSender<>), typeof(LocalDBEventMessageSender<>));
+
+        services.AddSingleton(typeof(RuntimeDomainEventDTOConverter<,,>));
 
         return services;
     }

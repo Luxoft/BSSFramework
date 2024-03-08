@@ -8,7 +8,7 @@ public class RuntimeDomainEventDTOConverter<TPersistentDomainObjectBase, TMappin
 {
     private readonly object syncRoot = new();
 
-    private readonly Dictionary<EventOperation, object> FuncDictionary = new();
+    private readonly Dictionary<(EventOperation, Type), object> FuncDictionary = new();
 
     public TEventDTOBase Convert<TDomainObject>(TMappingService mappingService, TDomainObject domainObject, EventOperation eventOperation)
         where TDomainObject : TPersistentDomainObjectBase
@@ -22,7 +22,7 @@ public class RuntimeDomainEventDTOConverter<TPersistentDomainObjectBase, TMappin
     {
         lock (this.syncRoot)
         {
-            var func = this.FuncDictionary.GetValueOrCreate(eventOperation, () => this.CreateLambda<TDomainObject>(eventOperation));
+            var func = this.FuncDictionary.GetValueOrCreate((eventOperation, typeof(TDomainObject)), () => this.CreateLambda<TDomainObject>(eventOperation));
 
             return (Func<TMappingService, TDomainObject, TEventDTOBase>)func;
         }

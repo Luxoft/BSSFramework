@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.Events;
+﻿using Framework.Events;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

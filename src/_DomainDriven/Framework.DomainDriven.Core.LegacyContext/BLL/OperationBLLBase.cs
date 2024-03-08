@@ -1,60 +1,51 @@
-﻿namespace Framework.DomainDriven.BLL;
+﻿using Framework.Events;
 
-public abstract class OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TOperation> : BLLContextContainer<TBLLContext>, IOperationBLLBase<TDomainObject>
+namespace Framework.DomainDriven.BLL;
+
+public abstract class OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject> : BLLContextContainer<TBLLContext>, IOperationBLLBase<TDomainObject>
 
         where TPersistentDomainObjectBase : class
 
         where TDomainObject : class, TPersistentDomainObjectBase
-        where TOperation : struct, Enum
         where TBLLContext : class, IBLLOperationEventContext<TPersistentDomainObjectBase>
 {
-    private readonly Lazy<IOperationEventSender<TDomainObject, TOperation>> _lazyOperationSender;
-
-    private readonly Lazy<IOperationEventSender<TDomainObject, BLLBaseOperation>> _lazyDefaultOperationSender;
+    private readonly Lazy<IOperationEventSender<TDomainObject>> _lazyOperationSender;
 
 
     protected OperationBLLBase(TBLLContext context)
             : base(context)
     {
-        this._lazyOperationSender = new Lazy<IOperationEventSender<TDomainObject, TOperation>>(() => this.Context.OperationSenders.GetEventSender<TDomainObject, TOperation>());
-        this._lazyDefaultOperationSender = new Lazy<IOperationEventSender<TDomainObject, BLLBaseOperation>>(() => this.Context.OperationSenders.GetEventSender<TDomainObject, BLLBaseOperation>());
+        this._lazyOperationSender = new Lazy<IOperationEventSender<TDomainObject>>(() => this.Context.OperationSenders.GetEventSender<TDomainObject>());
     }
 
 
-    private IOperationEventSender<TDomainObject, TOperation> OperationSender
+    private IOperationEventSender<TDomainObject> OperationSender
     {
         get { return this._lazyOperationSender.Value; }
     }
-
-
-    private IOperationEventSender<TDomainObject, BLLBaseOperation> DefaultOperationSender
-    {
-        get { return this._lazyDefaultOperationSender.Value; }
-    }
-
 
     public virtual void Save(TDomainObject domainObject)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        this.DefaultOperationSender.SendEvent(domainObject, BLLBaseOperation.Save);
+        this.OperationSender.SendEvent(domainObject, EventOperation.Save);
     }
 
     public virtual void Remove(TDomainObject domainObject)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        this.DefaultOperationSender.SendEvent(domainObject, BLLBaseOperation.Remove);
+        this.OperationSender.SendEvent(domainObject, EventOperation.Remove);
     }
 
-    protected void RaiseOperationProcessed(TDomainObject domainObject, TOperation operation)
+    protected void RaiseOperationProcessed(TDomainObject domainObject, EventOperation operation)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
         this.OperationSender.SendEvent(domainObject, operation);
     }
 
-    protected void RaiseOperationProcessed(IDomainOperationEventArgs<TDomainObject, TOperation> eventArgs)
+    protected void RaiseOperationProcessed(IDomainOperationEventArgs<TDomainObject> eventArgs)
     {
         if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
 

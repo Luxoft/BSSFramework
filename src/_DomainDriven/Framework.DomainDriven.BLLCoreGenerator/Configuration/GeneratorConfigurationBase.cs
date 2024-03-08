@@ -141,11 +141,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     protected virtual ICodeFileFactoryHeader<FileType> SecurityHierarchyDomainBLLBaseFileFactoryHeader { get; } =
 
         new CodeFileFactoryHeader<FileType>(FileType.SecurityHierarchyDomainBLLBase, string.Empty, _ => FileType.SecurityHierarchyDomainBLLBase.ToString());
-
-    protected virtual ICodeFileFactoryHeader<FileType> DefaultOperationSecurityDomainBLLBaseFileFactoryHeader { get; } =
-
-        new CodeFileFactoryHeader<FileType>(FileType.DefaultOperationSecurityDomainBLLBase, string.Empty, _ => FileType.SecurityDomainBLLBase.ToString());
-
+    
     protected virtual ICodeFileFactoryHeader<FileType> BLLInterfaceFileFactoryHeader { get; } =
 
         new CodeFileFactoryHeader<FileType>(FileType.BLLInterface, string.Empty, domainType => $"I{domainType.Name}BLL");
@@ -327,7 +323,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                        this.DomainSecurityServiceFileFactoryHeader,
 
                        this.SecurityDomainBLLBaseFileFactoryHeader,
-                       this.DefaultOperationSecurityDomainBLLBaseFileFactoryHeader,
 
                        this.BLLInterfaceFileFactoryHeader,
                        this.BLLFactoryInterfaceFileFactoryHeader,
@@ -366,8 +361,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     {
         return this.GetCodeTypeReference(type, FileType.SecurityHierarchyDomainBLLBase);
     }
-
-    public CodeTypeReference DefaultOperationSecurityDomainBLLBaseTypeReference => this.GetCodeTypeReference(null, FileType.DefaultOperationSecurityDomainBLLBase);
 
     public virtual Type FilterModelType { get; }
 
@@ -531,11 +524,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     public override CodeTypeReference GetCodeTypeReference(Type domainType, FileType fileType)
     {
         var baseRef = base.GetCodeTypeReference(domainType, fileType);
-
-        if (domainType?.Name == "TestSecurityObjItem")
-        {
-
-        }
 
         if (fileType == FileType.DomainSecurityService && !this.Environment.GetProjectionEnvironment(domainType).Maybe(v => v.UseDependencySecurity))
         {

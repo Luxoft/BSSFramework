@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.App.Events\Framework.App.Events.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.LegacyContext\Framework.DomainDriven.ServiceModel.IAD.LegacyContext.csproj" />
     <ProjectReference Include="..\SampleSystem.Generated.DTO\SampleSystem.Generated.DTO.csproj" />
   </ItemGroup>
 

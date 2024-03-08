@@ -7,6 +7,7 @@ using Framework.DomainDriven.Tracking;
 using Framework.Notification;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.Lock;
+using Framework.Events;
 using Framework.Persistent;
 
 namespace Framework.Configuration.BLL;
@@ -19,6 +20,8 @@ public partial interface IConfigurationBLLContext :
 
     ITrackingServiceContainer<PersistentDomainObjectBase>
 {
+    IEventOperationSource EventOperationSource { get; }
+
     INamedLockService NamedLockService { get; }
 
     IEmployeeSource EmployeeSource { get; }

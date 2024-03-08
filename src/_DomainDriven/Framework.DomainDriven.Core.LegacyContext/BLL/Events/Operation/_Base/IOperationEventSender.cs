@@ -4,10 +4,8 @@
 /// Контейнер для ручного инициирования евентов доменного объекта
 /// </summary>
 /// <typeparam name="TDomainObject">Тип доменного объекта</typeparam>
-/// <typeparam name="TOperation">Тип операции</typeparam>
-public interface IOperationEventSender<in TDomainObject, in TOperation>
-        where TDomainObject : class
-        where TOperation : struct, Enum
+public interface IOperationEventSender<in TDomainObject>
+    where TDomainObject : class
 {
-    void SendEvent(IDomainOperationEventArgs<TDomainObject, TOperation> eventArgs);
+    void SendEvent(IDomainOperationEventArgs<TDomainObject> eventArgs);
 }

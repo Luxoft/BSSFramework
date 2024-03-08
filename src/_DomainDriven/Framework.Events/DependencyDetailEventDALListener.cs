@@ -3,14 +3,13 @@ using Framework.DomainDriven;
 
 namespace Framework.Events;
 
-public abstract class DependencyDetailEventDALListener<TBLLContext, TPersistentDomainObjectBase> : EventDALListener<TBLLContext, TPersistentDomainObjectBase>
-        where TBLLContext : class
+public abstract class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : EventDALListener<TPersistentDomainObjectBase>
         where TPersistentDomainObjectBase : class
 {
     private readonly TypeEventDependency[] dependencies;
 
-    protected DependencyDetailEventDALListener(TBLLContext context, IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender, IEnumerable<TypeEvent> typeEvents, IEnumerable<TypeEventDependency> dependencies)
-            : base(context, messageSender, typeEvents)
+    protected DependencyDetailEventDALListener(IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender, IEnumerable<TypeEvent> typeEvents, IEnumerable<TypeEventDependency> dependencies)
+            : base(messageSender, typeEvents)
     {
         this.dependencies = (dependencies ?? throw new ArgumentNullException(nameof(dependencies))).ToArray();
     }

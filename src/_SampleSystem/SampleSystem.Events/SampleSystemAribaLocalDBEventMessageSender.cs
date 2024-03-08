@@ -1,25 +1,17 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.Events;
+using Framework.Events.DTOMapper;
 
-using SampleSystem.BLL;
 using SampleSystem.Domain;
-using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.Events;
 
-public class SampleSystemAribaLocalDBEventMessageSender : LocalDBEventMessageSender<ISampleSystemBLLContext, PersistentDomainObjectBase, EventDTOBase>
+public class SampleSystemAribaLocalDBEventMessageSender : LocalDBEventMessageSender<PersistentDomainObjectBase>
 {
-    public SampleSystemAribaLocalDBEventMessageSender(ISampleSystemBLLContext context, IConfigurationBLLContext configurationContext)
-            : base(context, configurationContext, "ariba")
+    public SampleSystemAribaLocalDBEventMessageSender(
+        IDomainEventDTOMapper<PersistentDomainObjectBase> mapper,
+        IConfigurationBLLContext configurationContext)
+        : base(mapper, configurationContext, new LocalDBEventMessageSenderSettings<PersistentDomainObjectBase>() { QueueTag = "ariba" })
     {
-    }
-
-    protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
-    {
-        return DomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
-                                                                             new SampleSystemServerPrimitiveDTOMappingService(this.Context),
-                                                                             domainObjectEventArgs.DomainObject,
-                                                                             domainObjectEventArgs.Operation);
     }
 }

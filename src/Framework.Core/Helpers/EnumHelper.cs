@@ -17,18 +17,6 @@ public static class EnumHelper
         return Cache<TEnum>.Values;
     }
 
-    public static IEnumerable<Enum> GetValuesE(Type t)
-    {
-        if (!t.IsEnum)
-        {
-            throw new InvalidOperationException($"Type:{t} is not Enum");
-        }
-        else
-        {
-            return Enum.GetValues(t).OfType<Enum>();
-        }
-    }
-
     public static object[] GetValues(Type enumType)
     {
         if (enumType == null) throw new ArgumentNullException(nameof(enumType));

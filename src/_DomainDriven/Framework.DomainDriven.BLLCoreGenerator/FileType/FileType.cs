@@ -23,10 +23,6 @@ public enum FileType
 
     SecurityDomainBLLBase,
 
-    DefaultOperationSecurityDomainBLLBase,
-
-
-
 
     BLLInterface,
 

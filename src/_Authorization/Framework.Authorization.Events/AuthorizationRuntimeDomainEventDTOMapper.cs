@@ -1,26 +1,26 @@
-﻿using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
-using Framework.Configuration.BLL;
-using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
+using Framework.Events.DTOMapper;
 
 namespace Framework.Authorization.Events;
 
-public class AuthorizationLocalDBEventMessageSender : LocalDBEventMessageSender<IAuthorizationBLLContext, PersistentDomainObjectBase, EventDTOBase>
+public class AuthorizationRuntimeDomainEventDTOMapper : RuntimeDomainEventDTOMapper<PersistentDomainObjectBase, IAuthorizationDTOMappingService, EventDTOBase>
 {
     private readonly bool shrinkDto;
 
-    public AuthorizationLocalDBEventMessageSender(IAuthorizationBLLContext context, IConfigurationBLLContext configurationContext, string queueTag = "authDALQuery", bool shrinkDto = true)
-            : base(context, configurationContext, queueTag) =>
-            this.shrinkDto = shrinkDto;
-
-    protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
+    public AuthorizationRuntimeDomainEventDTOMapper(
+        IAuthorizationDTOMappingService mappingService,
+        RuntimeDomainEventDTOConverter<PersistentDomainObjectBase, IAuthorizationDTOMappingService, EventDTOBase> converter,
+        bool shrinkDto = true)
+        : base(mappingService, converter)
     {
-        var dto = AuthorizationDomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
-         new AuthorizationServerPrimitiveDTOMappingService(this.Context),
-         domainObjectEventArgs.DomainObject,
-         domainObjectEventArgs.Operation);
+        this.shrinkDto = shrinkDto;
+    }
+
+    public override object Convert<TDomainObject>(TDomainObject domainObject, EventOperation eventOperation)
+    {
+        var dto = base.Convert(domainObject, eventOperation);
 
         if (this.shrinkDto)
         {

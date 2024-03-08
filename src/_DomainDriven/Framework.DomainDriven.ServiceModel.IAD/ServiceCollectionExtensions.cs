@@ -39,7 +39,7 @@ public static class ServiceCollectionExtensions
         services.RegisterRepository();
         services.RegisterAuthenticationServices();
         services.RegisterEvaluators();
-        services.RegisterAuthorizationSystem(); ;
+        services.RegisterAuthorizationSystem();
         services.RegisterAuthorizationSecurity();
         services.RegisterConfigurationSecurity();
         services.RegisterNamedLocks();

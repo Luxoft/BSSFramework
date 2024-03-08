@@ -38,8 +38,7 @@ public abstract class
         if (domainObjectEventArgs == null) throw new ArgumentNullException(nameof(domainObjectEventArgs));
 
         var func = new Action<TPersistentDomainObjectBase, EventOperation, object>(this.InternalSend).CreateGenericMethod(
-            domainObjectEventArgs.DomainObjectType,
-            domainObjectEventArgs.Operation.GetType());
+            domainObjectEventArgs.DomainObjectType);
 
         func.Invoke(
             this,

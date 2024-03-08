@@ -1,13 +1,11 @@
 ﻿using Framework.Authorization.Domain;
-
-using Framework.Core;
 using Framework.Events;
 
 namespace Framework.Authorization.Events;
 
 public class DefaultAuthDALListener : DependencyDetailEventDALListener<PersistentDomainObjectBase>
 {
-    public DefaultAuthDALListener(IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
+    public DefaultAuthDALListener(IEventDTOMessageSender<PersistentDomainObjectBase> messageSender)
             : base(messageSender, DefaultEventTypes, DefaultDependencyEvents)
     {
     }

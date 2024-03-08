@@ -1,12 +1,11 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Core;
 using Framework.Events;
 
 namespace Framework.Authorization.Events;
 
 public class AuthorizationEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
 {
-    public AuthorizationEventsSubscriptionManager(IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
+    public AuthorizationEventsSubscriptionManager(IEventDTOMessageSender<PersistentDomainObjectBase> messageSender)
             : base(messageSender)
     {
     }

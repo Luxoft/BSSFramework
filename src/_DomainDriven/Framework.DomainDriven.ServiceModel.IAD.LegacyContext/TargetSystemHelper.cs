@@ -1,4 +1,5 @@
-﻿using Framework.Persistent;
+﻿using Framework.Events;
+using Framework.Persistent;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 

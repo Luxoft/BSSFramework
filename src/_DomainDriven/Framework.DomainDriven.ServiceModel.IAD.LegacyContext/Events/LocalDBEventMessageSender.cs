@@ -1,6 +1,7 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.Events;
+using Framework.Events.DTOMapper;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
@@ -9,30 +10,33 @@ namespace Framework.DomainDriven.ServiceModel.IAD;
 /// Класс для отправки доменных евентов в локальную бд
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-/// <typeparam name="TEventDTOBase"></typeparam>
-public abstract class LocalDBEventMessageSender<TPersistentDomainObjectBase, TEventDTOBase> : EventDTOMessageSenderBase<TPersistentDomainObjectBase, TEventDTOBase>
-        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : EventDTOMessageSenderBase<TPersistentDomainObjectBase>
+    where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
+    private readonly IDomainEventDTOMapper<TPersistentDomainObjectBase> eventDtoMapper;
+
     private readonly IConfigurationBLLContext configurationContext;
 
-    private readonly string queueTag;
+    private readonly LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase> settings;
 
     /// <summary>
     /// Конструктор
     /// </summary>
     /// <param name="configurationContext">Контекст утилит</param>
-    /// <param name="queueTag">Таг, маркирующий очередь евентов</param>
-    protected LocalDBEventMessageSender(IConfigurationBLLContext configurationContext, string queueTag = "default")
+    public LocalDBEventMessageSender(
+        IDomainEventDTOMapper<TPersistentDomainObjectBase> eventDtoMapper,
+        IConfigurationBLLContext configurationContext,
+        LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase> settings)
     {
-        if (string.IsNullOrWhiteSpace(queueTag)) { throw new ArgumentException("Value cannot be null or whitespace.", nameof(queueTag)); }
-
-        this.configurationContext = configurationContext ?? throw new ArgumentNullException(nameof(configurationContext));
-        this.queueTag = queueTag;
+        this.eventDtoMapper = eventDtoMapper;
+        this.configurationContext = configurationContext;
+        this.settings = settings;
     }
 
     public override void Send<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
     {
-        var dto = domainObjectEventArgs.CustomSendObject ?? this.ToEventDTOBase(domainObjectEventArgs);
+        var dto = domainObjectEventArgs.CustomSendObject
+                  ?? this.eventDtoMapper.Convert(domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation);
 
         var serializedData = DataContractSerializerHelper.Serialize(dto);
         var dbEvent = new Framework.Configuration.Domain.DomainObjectEvent
@@ -42,7 +46,7 @@ public abstract class LocalDBEventMessageSender<TPersistentDomainObjectBase, TEv
                               SerializeType = dto.GetType().FullName,
                               DomainObjectId = domainObjectEventArgs.DomainObject.Id,
                               Revision = this.configurationContext.GetCurrentRevision(),
-                              QueueTag = this.queueTag
+                              QueueTag = this.settings.QueueTag
                       };
 
         this.configurationContext.GetDomainType(domainObjectEventArgs.DomainObjectType, false).Maybe(domainType =>

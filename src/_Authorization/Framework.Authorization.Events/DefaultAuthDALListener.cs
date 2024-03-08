@@ -1,15 +1,14 @@
-﻿using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 
 using Framework.Core;
 using Framework.Events;
 
 namespace Framework.Authorization.Events;
 
-public class DefaultAuthDALListener : DependencyDetailEventDALListener<IAuthorizationBLLContext, PersistentDomainObjectBase>
+public class DefaultAuthDALListener : DependencyDetailEventDALListener<PersistentDomainObjectBase>
 {
-    public DefaultAuthDALListener(IAuthorizationBLLContext context, IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
-            : base(context, messageSender, DefaultEventTypes, DefaultDependencyEvents)
+    public DefaultAuthDALListener(IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
+            : base(messageSender, DefaultEventTypes, DefaultDependencyEvents)
     {
     }
 

@@ -27,12 +27,10 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
 
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
-
         yield return new BLLContextFileFactory<TConfiguration>(this.Configuration);
         yield return new BLLContextInterfaceFileFactory<TConfiguration>(this.Configuration);
 
         yield return new SecurityDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
-        yield return new DefaultOperationSecurityDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
 
         foreach (var fileFactory in this.Configuration.Logics.GetFileFactories())
         {

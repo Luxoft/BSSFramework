@@ -1,5 +1,5 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.DomainDriven.BLL;
+using Framework.Events;
 
 namespace Framework.Authorization.BLL;
 
@@ -9,13 +9,13 @@ public partial class PermissionFilterItemBLL
     {
         if (permissionFilterItem == null) throw new ArgumentNullException(nameof(permissionFilterItem));
 
-        this.RaiseOperationProcessed(permissionFilterItem, BLLBaseOperation.Save);
+        this.RaiseOperationProcessed(permissionFilterItem, EventOperation.Save);
     }
 
     public void NotifyRemove(PermissionFilterItem permissionFilterItem)
     {
         if (permissionFilterItem == null) throw new ArgumentNullException(nameof(permissionFilterItem));
 
-        this.RaiseOperationProcessed(permissionFilterItem, BLLBaseOperation.Remove);
+        this.RaiseOperationProcessed(permissionFilterItem, EventOperation.Remove);
     }
 }

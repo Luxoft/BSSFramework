@@ -3,25 +3,24 @@
 using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;
+using Framework.Events;
 
 namespace Framework.Authorization.Events;
 
-public static class AuthorizationDomainEventDTOMapper<TDomainObject, TOperation>
+public static class AuthorizationDomainEventDTOMapper<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase
-        where TOperation : struct, Enum
 {
     private static object syncRoot = new object();
 
-    private static readonly Dictionary<TOperation, Func<IAuthorizationDTOMappingService, TDomainObject, EventDTOBase>> FuncDictionary =
-            new Dictionary<TOperation, Func<IAuthorizationDTOMappingService, TDomainObject, EventDTOBase>>();
+    private static readonly Dictionary<EventOperation, Func<IAuthorizationDTOMappingService, TDomainObject, EventDTOBase>> FuncDictionary = new ();
 
 
-    public static EventDTOBase MapToEventDTO(IAuthorizationDTOMappingService mappingService, TDomainObject domainObject, TOperation operation)
+    public static EventDTOBase MapToEventDTO(IAuthorizationDTOMappingService mappingService, TDomainObject domainObject, EventOperation operation)
     {
         return GetFunc(operation)(mappingService, domainObject);
     }
 
-    private static Func<IAuthorizationDTOMappingService, TDomainObject, EventDTOBase> GetFunc(TOperation operation)
+    private static Func<IAuthorizationDTOMappingService, TDomainObject, EventDTOBase> GetFunc(EventOperation operation)
     {
         lock (syncRoot)
         {
@@ -29,10 +28,10 @@ public static class AuthorizationDomainEventDTOMapper<TDomainObject, TOperation>
         }
     }
 
-    private static Func<IAuthorizationDTOMappingService, TDomainObject, EventDTOBase> CreateLambda(TOperation operation)
+    private static Func<IAuthorizationDTOMappingService, TDomainObject, EventDTOBase> CreateLambda(EventOperation operation)
     {
         var eventDtoTypeName = "Framework.Authorization.Generated.DTO." + typeof(TDomainObject).Name +
-                               operation + "EventDTO";
+                               operation.Name + "EventDTO";
 
         var eventDtoType = typeof(EventDTOBase).Assembly.GetType(eventDtoTypeName);
         var eventDtoTypeConstructor = eventDtoType.GetConstructor(new[] { typeof(IAuthorizationDTOMappingService), typeof(TDomainObject) });

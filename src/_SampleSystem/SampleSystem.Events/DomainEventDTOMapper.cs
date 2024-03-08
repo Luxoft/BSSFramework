@@ -1,28 +1,28 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
+using Framework.Events;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.Events;
 
-public static class DomainEventDTOMapper<TDomainObject, TOperation>
+public static class DomainEventDTOMapper<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase
-        where TOperation : struct, Enum
+
 {
     private static readonly object SyncRoot = new object();
 
-    private static readonly Dictionary<TOperation, Func<ISampleSystemDTOMappingService, TDomainObject, EventDTOBase>> FuncDictionary =
-            new Dictionary<TOperation, Func<ISampleSystemDTOMappingService, TDomainObject, EventDTOBase>>();
+    private static readonly Dictionary<EventOperation, Func<ISampleSystemDTOMappingService, TDomainObject, EventDTOBase>> FuncDictionary = new ();
 
 
-    public static EventDTOBase MapToEventDTO(ISampleSystemDTOMappingService mappingService, TDomainObject domainObject, TOperation operation)
+    public static EventDTOBase MapToEventDTO(ISampleSystemDTOMappingService mappingService, TDomainObject domainObject, EventOperation operation)
     {
         return GetFunc(operation)(mappingService, domainObject);
     }
 
-    private static Func<ISampleSystemDTOMappingService, TDomainObject, EventDTOBase> GetFunc(TOperation operation)
+    private static Func<ISampleSystemDTOMappingService, TDomainObject, EventDTOBase> GetFunc(EventOperation operation)
     {
         lock (SyncRoot)
         {
@@ -30,9 +30,9 @@ public static class DomainEventDTOMapper<TDomainObject, TOperation>
         }
     }
 
-    private static Func<ISampleSystemDTOMappingService, TDomainObject, EventDTOBase> CreateLambda(TOperation operation)
+    private static Func<ISampleSystemDTOMappingService, TDomainObject, EventDTOBase> CreateLambda(EventOperation operation)
     {
-        var eventDtoTypeName = "SampleSystem.Generated.DTO." + typeof(TDomainObject).Name + operation + "EventDTO";
+        var eventDtoTypeName = "SampleSystem.Generated.DTO." + typeof(TDomainObject).Name + operation.Name + "EventDTO";
         var eventDtoType = typeof(EventDTOBase).Assembly.GetType(eventDtoTypeName);
         if (null == eventDtoType)
         {

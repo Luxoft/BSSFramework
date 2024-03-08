@@ -25,9 +25,9 @@ public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManagerBa
         this.SubscribeForSaveOperation<Employee>();
         this.SubscribeForSaveAndRemoveOperation<Information>();
 
-        this.SubscribeCustom<Employee, BLLBaseOperation>(
-                                                         _ => true,
-                                                         operation => operation == BLLBaseOperation.Save,
-                                                         domainObject => new EmployeeCustomEventModelSaveEventDTO(this.mappingService, new EmployeeCustomEventModel(domainObject)));
+        this.SubscribeCustom<Employee>(
+            _ => true,
+            operation => operation == EventOperation.Save,
+            domainObject => new EmployeeCustomEventModelSaveEventDTO(this.mappingService, new EmployeeCustomEventModel(domainObject)));
     }
 }

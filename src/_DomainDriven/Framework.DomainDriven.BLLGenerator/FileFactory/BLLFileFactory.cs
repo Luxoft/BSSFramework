@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.DomainDriven.BLL;
 using Framework.SecuritySystem;
 using nuSpec.Abstraction;
 
@@ -15,15 +14,13 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
     {
     }
 
-    private Type EventOperationType => this.DomainType.GetEventOperationType() ?? typeof(BLLBaseOperation);
-
     public override FileType FileType => FileType.BLL;
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
         var baseBLLType = this.Configuration.Environment.BLLCore.GetSecurityDomainBLLBaseTypeReference(this.DomainType)
-                              .ToTypeReference(this.DomainType.ToTypeReference(), this.EventOperationType.ToTypeReference());
+                              .ToTypeReference(this.DomainType.ToTypeReference());
 
         var codeTypeDeclaration = new CodeTypeDeclaration
                                   {

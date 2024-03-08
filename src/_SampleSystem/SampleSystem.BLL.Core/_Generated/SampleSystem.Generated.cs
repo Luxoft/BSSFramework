@@ -40,9 +40,8 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
+    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
         where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-        where TOperation :  struct, System.Enum
     {
         
         public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -52,21 +51,6 @@ namespace SampleSystem.BLL
         
         public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
-        {
-        }
-    }
-    
-    public partial class SecurityDomainBLLBase<TDomainObject> : SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.BLLBaseOperation>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-    {
-        
-        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context) : 
-                base(context)
-        {
-        }
-        
-        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
-                base(context, securityProvider)
         {
         }
     }

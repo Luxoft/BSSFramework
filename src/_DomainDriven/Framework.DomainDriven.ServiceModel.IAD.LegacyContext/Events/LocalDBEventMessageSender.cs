@@ -8,12 +8,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD;
 /// <summary>
 /// Класс для отправки доменных евентов в локальную бд
 /// </summary>
-/// <typeparam name="TBLLContext"></typeparam>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 /// <typeparam name="TEventDTOBase"></typeparam>
-public abstract class LocalDBEventMessageSender<TBLLContext, TPersistentDomainObjectBase, TEventDTOBase> : EventDTOMessageSenderBase<TBLLContext, TPersistentDomainObjectBase, TEventDTOBase>
+public abstract class LocalDBEventMessageSender<TPersistentDomainObjectBase, TEventDTOBase> : EventDTOMessageSenderBase<TPersistentDomainObjectBase, TEventDTOBase>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
-        where TBLLContext : class
 {
     private readonly IConfigurationBLLContext configurationContext;
 
@@ -22,11 +20,9 @@ public abstract class LocalDBEventMessageSender<TBLLContext, TPersistentDomainOb
     /// <summary>
     /// Конструктор
     /// </summary>
-    /// <param name="context">Контекст системы</param>
     /// <param name="configurationContext">Контекст утилит</param>
     /// <param name="queueTag">Таг, маркирующий очередь евентов</param>
-    protected LocalDBEventMessageSender(TBLLContext context, IConfigurationBLLContext configurationContext, string queueTag = "default")
-            : base(context)
+    protected LocalDBEventMessageSender(IConfigurationBLLContext configurationContext, string queueTag = "default")
     {
         if (string.IsNullOrWhiteSpace(queueTag)) { throw new ArgumentException("Value cannot be null or whitespace.", nameof(queueTag)); }
 
@@ -34,7 +30,7 @@ public abstract class LocalDBEventMessageSender<TBLLContext, TPersistentDomainOb
         this.queueTag = queueTag;
     }
 
-    public override void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
+    public override void Send<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
     {
         var dto = domainObjectEventArgs.CustomSendObject ?? this.ToEventDTOBase(domainObjectEventArgs);
 

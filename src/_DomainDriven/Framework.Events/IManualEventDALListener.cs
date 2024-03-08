@@ -13,6 +13,6 @@ public interface IManualEventDALListener<in TPersistentDomainObjectBase> : IDALL
     /// </summary>
     /// <typeparam name="TDomainObject"></typeparam>
     /// <returns></returns>
-    IOperationEventSender<TDomainObject, EventOperation> GetForceEventContainer<TDomainObject>()
-            where TDomainObject : class, TPersistentDomainObjectBase;
+    IOperationEventSender<TDomainObject> GetForceEventContainer<TDomainObject>()
+        where TDomainObject : class, TPersistentDomainObjectBase;
 }

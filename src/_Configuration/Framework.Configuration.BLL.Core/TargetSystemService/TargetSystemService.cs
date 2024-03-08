@@ -59,31 +59,26 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
 
         var domainType = this.TypeResolver.Resolve(operation.DomainType);
 
-        var operationType = domainType.GetEventOperationType() ?? typeof(EventOperation);
-
-        new Action<string, long?, Guid>(this.ForceEvent<TPersistentDomainObjectBase, TypeCode>)
-            .CreateGenericMethod(domainType, operationType)
+        new Action<string, long?, Guid>(this.ForceEvent<TPersistentDomainObjectBase>)
+            .CreateGenericMethod(domainType)
             .Invoke(this, new object[] { operation.Name, revision, domainObjectId });
     }
 
-    private void ForceEvent<TDomainObject, TOperation>(string operationName, long? revision, Guid domainObjectId)
+    private void ForceEvent<TDomainObject>(string operationName, long? revision, Guid domainObjectId)
             where TDomainObject : class, TPersistentDomainObjectBase
-        
     {
         var bll = this.TargetSystemContext.Logics.Default.Create<TDomainObject>();
 
         var domainObject = revision == null ? bll.GetById(domainObjectId, true)
                                    : bll.GetObjectByRevision(domainObjectId, revision.Value);
 
-        var operation = EnumHelper.Parse<TOperation>(operationName);
+        var eventOperation = new EventOperation(operationName);
 
-        var listener = this.TargetSystemContext.OperationSenders.GetEventSender<TDomainObject, TOperation>();
+        var listener = this.TargetSystemContext.OperationSenders.GetEventSender<TDomainObject>();
 
-        listener.SendEvent(domainObject, operation);
+        listener.SendEvent(domainObject, eventOperation);
 
-        operation.ToOperationMaybe<TOperation, EventOperation>().Match(
-                                                                       eventOperation =>
-                                                                               this.eventDalListeners.Foreach(dalListener => dalListener.GetForceEventContainer<TDomainObject>().SendEvent(domainObject, eventOperation)));
+        this.eventDalListeners.Foreach(dalListener => dalListener.GetForceEventContainer<TDomainObject>().SendEvent(domainObject, eventOperation));
     }
 
     public override bool IsAssignable(Type domainType)

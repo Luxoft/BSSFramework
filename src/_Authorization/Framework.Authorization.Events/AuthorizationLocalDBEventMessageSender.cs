@@ -19,9 +19,9 @@ public class AuthorizationLocalDBEventMessageSender : LocalDBEventMessageSender<
         this.shrinkDto = shrinkDto;
     }
 
-    protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
+    protected override EventDTOBase ToEventDTOBase<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
     {
-        var dto = AuthorizationDomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
+        var dto = AuthorizationDomainEventDTOMapper<TDomainObject>.MapToEventDTO(
          this.mappingService,
          domainObjectEventArgs.DomainObject,
          domainObjectEventArgs.Operation);

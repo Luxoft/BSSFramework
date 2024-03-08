@@ -30,7 +30,7 @@ public abstract class LocalDBEventMessageSender<TPersistentDomainObjectBase, TEv
         this.queueTag = queueTag;
     }
 
-    public override void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
+    public override void Send<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
     {
         var dto = domainObjectEventArgs.CustomSendObject ?? this.ToEventDTOBase(domainObjectEventArgs);
 

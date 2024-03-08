@@ -1,5 +1,5 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.DomainDriven.BLL;
+using Framework.Events;
 
 namespace Framework.Authorization.BLL;
 

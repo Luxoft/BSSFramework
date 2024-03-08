@@ -3,18 +3,19 @@ using System.Reflection;
 using System.Runtime.Serialization;
 
 using Framework.CodeDom;
+using Framework.Events;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, DomainOperationEventDTOFileType>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultDomainOperationEventDTOFileFactory(TConfiguration configuration, Type domainType, Enum eventOperationCode)
+    public DefaultDomainOperationEventDTOFileFactory(TConfiguration configuration, Type domainType, EventOperation eventOperation)
             : base(configuration, domainType)
     {
-        if (eventOperationCode == null) throw new ArgumentNullException(nameof(eventOperationCode));
+        if (eventOperation == null) throw new ArgumentNullException(nameof(eventOperation));
 
-        this.FileType = new DomainOperationEventDTOFileType(eventOperationCode);
+        this.FileType = new DomainOperationEventDTOFileType(eventOperation);
     }
 
 

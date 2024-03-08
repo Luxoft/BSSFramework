@@ -9,6 +9,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.Tracking;
+using Framework.Events;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.Notification;
@@ -42,6 +43,7 @@ public partial class ConfigurationBLLContext
             IConfigurationBLLFactoryContainer logics,
             IAuthorizationBLLContext authorization,
             IEmployeeSource employeeSource,
+            IEventOperationSource eventOperationSource,
             INamedLockService namedLockService,
             IEnumerable<ITargetSystemService> targetSystemServices,
             IConfigurationBLLContextSettings settings,
@@ -56,6 +58,7 @@ public partial class ConfigurationBLLContext
         this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
         this.NamedLockService = namedLockService;
         this.EmployeeSource = employeeSource ?? throw new ArgumentNullException(nameof(employeeSource));
+        this.EventOperationSource = eventOperationSource;
         this.currentRevisionService = currentRevisionService ?? throw new ArgumentNullException(nameof(currentRevisionService));
 
         this.lazyTargetSystemServiceCache = LazyHelper.Create(() => targetSystemServices.ToDictionary(s => s.TargetSystem));
@@ -106,6 +109,8 @@ public partial class ConfigurationBLLContext
     public INamedLockService NamedLockService { get; }
 
     public IEmployeeSource EmployeeSource { get; }
+
+    public IEventOperationSource EventOperationSource { get; }
 
     /// <inheritdoc />
     public long GetCurrentRevision()

@@ -1,11 +1,13 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.Reflection;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
+using Framework.Events;
 using Framework.Persistent;
 using Framework.Projection;
 
@@ -74,6 +76,8 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
 
     public IPropertyAssignerConfigurator PropertyAssignerConfigurator { get; }
 
+    public virtual IEventOperationSource EventOperationSource { get; } = new EventOperationSource();
+
     public sealed override Type CollectionType { get; } = typeof(List<>);
 
     public virtual ClientDTORole MapToDomainRole { get; } = ClientDTORole.Strict | ClientDTORole.Update;
@@ -137,9 +141,9 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         {
             if (!domainType.IsProjection())
             {
-                foreach (var eventOperationCode in domainType.GetEventOperations(typeof(EventOperation)))
+                foreach (var eventOperation in this.EventOperationSource.GetEventOperations(domainType))
                 {
-                    yield return this.GetTypeMap(domainType, new DomainOperationEventDTOFileType(eventOperationCode));
+                    yield return this.GetTypeMap(domainType, new DomainOperationEventDTOFileType(eventOperation));
                 }
 
                 yield return this.GetTypeMap(domainType, ServerFileType.SimpleEventDTO);
@@ -243,7 +247,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         switch (fileType)
         {
             case DomainOperationEventDTOFileType eventFileType:
-                return $"Operation = {eventFileType.Operation}";
+                return $"Operation = {eventFileType.EventOperation.Name}";
 
             default:
                 return null;
@@ -258,7 +262,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         {
             var eventFileType = fileType as DomainOperationEventDTOFileType;
 
-            return new CodeFileFactoryHeader<DomainOperationEventDTOFileType>(eventFileType, "EventOperation", domainType => $"{domainType.Name}{eventFileType.Operation}{DTORole.Event}DTO");
+            return new CodeFileFactoryHeader<DomainOperationEventDTOFileType>(eventFileType, "EventOperation", domainType => $"{domainType.Name}{eventFileType.EventOperation.Name}{DTORole.Event}DTO");
         }
         else
         {

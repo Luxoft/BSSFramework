@@ -17,9 +17,9 @@ public class SampleSystemLocalDBEventMessageSender : LocalDBEventMessageSender<P
         this.mappingService = mappingService;
     }
 
-    protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
+    protected override EventDTOBase ToEventDTOBase<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
     {
-        return DomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
+        return DomainEventDTOMapper<TDomainObject>.MapToEventDTO(
             this.mappingService,
             domainObjectEventArgs.DomainObject,
             domainObjectEventArgs.Operation);

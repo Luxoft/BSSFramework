@@ -15,9 +15,9 @@ public class AuthorizationEventDTOMessageSender : EventDTOMessageSender<Persiste
         this.mappingService = mappingService;
     }
 
-    protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
+    protected override EventDTOBase ToEventDTOBase<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
     {
-        return AuthorizationDomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
+        return AuthorizationDomainEventDTOMapper<TDomainObject>.MapToEventDTO(
          this.mappingService,
          domainObjectEventArgs.DomainObject,
          domainObjectEventArgs.Operation);

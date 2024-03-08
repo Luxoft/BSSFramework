@@ -3,7 +3,7 @@ using Framework.Validation;
 
 namespace Framework.Authorization.BLL;
 
-public abstract partial class SecurityDomainBLLBase<TDomainObject, TOperation>
+public partial class SecurityDomainBLLBase<TDomainObject>
 {
     private void ExecuteBasePersist(TDomainObject domainObject)
     {

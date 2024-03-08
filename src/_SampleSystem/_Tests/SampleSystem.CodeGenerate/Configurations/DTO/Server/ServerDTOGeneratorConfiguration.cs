@@ -6,6 +6,7 @@ using Framework.DomainDriven.DTOGenerator;
 using Framework.DomainDriven.DTOGenerator.Server;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
+using Framework.Events;
 using Framework.SecuritySystem;
 
 using SampleSystem.Domain;
@@ -26,6 +27,8 @@ public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> FullRefDTOFileFactoryHeader { get; } = SampleSystemFileType.FullRefDTO.ToHeader();
 
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> SimpleRefFullDetailDTOFileFactoryHeader { get; } = SampleSystemFileType.SimpleRefFullDetailDTO.ToHeader();
+
+    public override IEventOperationSource EventOperationSource { get; } = new SampleSystemEventOperationSource();
 
     protected override IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetMainTypesWithSecondarySecurityOperations()
     {

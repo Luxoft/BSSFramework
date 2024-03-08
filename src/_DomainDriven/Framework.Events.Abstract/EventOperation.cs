@@ -14,4 +14,6 @@ public record EventOperation(string Name)
     /// Удаление объекта
     /// </summary>
     public static EventOperation Remove { get; } = new(nameof(Remove));
+
+    public sealed override string ToString() => this.Name;
 }

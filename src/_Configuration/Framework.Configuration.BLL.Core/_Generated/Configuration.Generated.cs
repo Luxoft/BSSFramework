@@ -40,9 +40,8 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
+    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
         where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
-        where TOperation :  struct, System.Enum
     {
         
         public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
@@ -52,21 +51,6 @@ namespace Framework.Configuration.BLL
         
         public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
-        {
-        }
-    }
-    
-    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.Configuration.BLL.SecurityDomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.EventOperation>
-        where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
-    {
-        
-        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-        
-        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
-                base(context, securityProvider)
         {
         }
     }

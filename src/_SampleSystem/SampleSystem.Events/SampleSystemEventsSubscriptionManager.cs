@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.Events;
 
 using SampleSystem.Domain;
@@ -12,7 +11,7 @@ public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManagerBa
     private readonly ISampleSystemDTOMappingService mappingService;
 
     public SampleSystemEventsSubscriptionManager(
-            IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender,
+        IEventDTOMessageSender<PersistentDomainObjectBase> messageSender,
             ISampleSystemDTOMappingService mappingService)
             : base(messageSender)
     {

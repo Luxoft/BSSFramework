@@ -14,10 +14,10 @@ public abstract class EventDALListener<TPersistentDomainObjectBase> : IManualEve
 {
     private readonly TypeEvent[] typeEvents;
 
-    private readonly IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender;
+    private readonly IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender;
 
     protected EventDALListener(
-        IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender,
+        IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender,
         IEnumerable<TypeEvent> typeEvents)
     {
         this.messageSender = messageSender;

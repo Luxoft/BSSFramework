@@ -13,6 +13,7 @@ using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
+using Framework.Events.DTOMapper;
 using Framework.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -99,10 +100,19 @@ public static class SampleSystemFrameworkExtensions
         services.AddScoped<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>();
         services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
 
-        services.AddScoped<IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>>, SampleSystemLocalDBEventMessageSender>();
-        services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemEventsSubscriptionManager>();
 
-        services.AddScoped<IMessageSender<IDomainOperationSerializeData<Framework.Authorization.Domain.PersistentDomainObjectBase>>, AuthorizationLocalDBEventMessageSender>();
+        services.AddScoped<IDomainEventDTOMapper<PersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<PersistentDomainObjectBase, ISampleSystemDTOMappingService, SampleSystem.Generated.DTO.EventDTOBase>>();
+
+        services.AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationRuntimeDomainEventDTOMapper>();
+
+        services.AddSingleton(typeof(LocalDBEventMessageSenderSettings<>));
+        services.AddSingleton(new LocalDBEventMessageSenderSettings<Framework.Authorization.Domain.PersistentDomainObjectBase> { QueueTag = "authDALQuery" });
+
+        services.AddScoped(typeof(IEventDTOMessageSender<>), typeof(LocalDBEventMessageSender<>));
+
+        services.AddSingleton(typeof(RuntimeDomainEventDTOConverter<,,>));
+
+        services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemEventsSubscriptionManager>();
 
         services.AddScoped<SampleSystemAribaLocalDBEventMessageSender>();
         services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemAribaEventsSubscriptionManager>();

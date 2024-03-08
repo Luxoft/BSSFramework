@@ -16,14 +16,14 @@ public abstract class EventsSubscriptionManagerBase<TPersistentDomainObjectBase>
 
     private readonly Lazy<IServiceProvider> cache;
 
-    protected EventsSubscriptionManagerBase(IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
+    protected EventsSubscriptionManagerBase(IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender)
     {
         this.MessageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));
 
         this.cache = new Lazy<IServiceProvider>(this.BuildCache);
     }
 
-    protected IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> MessageSender { get; }
+    protected IEventDTOMessageSender<TPersistentDomainObjectBase> MessageSender { get; }
 
     /// <inheritdoc />
     public abstract void Subscribe();

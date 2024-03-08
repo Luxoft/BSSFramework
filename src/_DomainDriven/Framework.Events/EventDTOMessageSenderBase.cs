@@ -6,16 +6,10 @@ namespace Framework.Events;
 /// Класс для отправки доменных евентов
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-/// <typeparam name="TEventDTOBase"></typeparam>
-public abstract class
-    EventDTOMessageSenderBase<TPersistentDomainObjectBase, TEventDTOBase> : IMessageSender<
-    IDomainOperationSerializeData<TPersistentDomainObjectBase>>
+public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase> : IEventDTOMessageSender<TPersistentDomainObjectBase>
     where TPersistentDomainObjectBase : class
 {
     public abstract void Send<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
-        where TDomainObject : class, TPersistentDomainObjectBase;
-
-    protected abstract TEventDTOBase ToEventDTOBase<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
         where TDomainObject : class, TPersistentDomainObjectBase;
 
     private void InternalSend<TDomainObject>(
@@ -23,7 +17,6 @@ public abstract class
         EventOperation operation,
         object customSendObject)
         where TDomainObject : class, TPersistentDomainObjectBase
-
     {
         this.Send(
             new DomainOperationSerializeData<TDomainObject>
@@ -42,6 +35,6 @@ public abstract class
 
         func.Invoke(
             this,
-            new object[] { domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation, domainObjectEventArgs.CustomSendObject });
+            [domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation, domainObjectEventArgs.CustomSendObject]);
     }
 }

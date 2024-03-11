@@ -68,6 +68,8 @@ public static class ServiceCollectionExtensions
 
         services.RegisterNamedLocks();
 
+        services.AddSingleton<IInitializeManager, InitializeManager>();
+
         return services;
     }
 

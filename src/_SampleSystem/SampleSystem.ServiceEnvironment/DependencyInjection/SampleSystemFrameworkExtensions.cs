@@ -76,25 +76,12 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterListeners(this IServiceCollection services)
     {
-        services.AddSingleton<IInitializeManager, InitializeManager>();
-
+        services.AddScoped<FaultDALListener>();
+        services.AddScopedFrom<IBeforeTransactionCompletedDALListener, FaultDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
-
-        services.AddScoped<FaultDALListener>();
-        services.AddScopedFrom<IBeforeTransactionCompletedDALListener, FaultDALListener>();
-
-        services.AddScoped<DefaultAuthDALListener>();
-
-        services.AddScopedFrom<IBeforeTransactionCompletedDALListener, DefaultAuthDALListener>();
-
-        services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
-        services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
-        services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
-
-
-        services.AddScoped<IDomainEventDTOMapper<PersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<PersistentDomainObjectBase, ISampleSystemDTOMappingService, SampleSystem.Generated.DTO.EventDTOBase>>();
+        services.AddScoped<IBeforeTransactionCompletedDALListener, DefaultAuthDALListener>();
 
         services.AddScoped<IEventOperationReceiver, SampleSystemEventsSubscriptionManager>();
         services.AddScoped<IEventOperationReceiver, SampleSystemAribaEventsSubscriptionManager>();
@@ -113,6 +100,14 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterSupportServices(this IServiceCollection services)
     {
+        //For dto mapping
+        services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
+
+        //For mapping domain objects to dto events
+        services
+            .AddScoped<IDomainEventDTOMapper<PersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<PersistentDomainObjectBase,
+                ISampleSystemDTOMappingService, SampleSystem.Generated.DTO.EventDTOBase>>();
+
         // For NamedLocks
         services.AddSingleton(new NamedLockTypeInfo(typeof(SampleSystemNamedLock)));
 

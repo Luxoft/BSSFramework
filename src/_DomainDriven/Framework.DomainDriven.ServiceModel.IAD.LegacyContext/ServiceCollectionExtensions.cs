@@ -21,6 +21,8 @@ using Framework.Events;
 using Framework.DomainDriven.ServiceModel.Service;
 
 using Microsoft.Extensions.DependencyInjection;
+using Framework.Authorization.Generated.DTO;
+using Framework.Configuration.Generated.DTO;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -28,6 +30,9 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyGenericServices(this IServiceCollection services)
     {
+        services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
+        services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
+
         services.AddScoped(typeof(EvaluatedData<,>));
 
         services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("DAL");

@@ -4,11 +4,11 @@ namespace SampleSystem.Domain;
 
 public class SampleSystemEventOperationSource : DomainObjectEventMetadata
 {
-    public override IEnumerable<DomainObjectEvent> GetEventOperations(Type domainType)
+    public override IEnumerable<EventOperation> GetEventOperations(Type domainType)
     {
         if (domainType == typeof(Employee))
         {
-            return [DomainObjectEvent.Save];
+            return [EventOperation.Save];
         }
         else
         {

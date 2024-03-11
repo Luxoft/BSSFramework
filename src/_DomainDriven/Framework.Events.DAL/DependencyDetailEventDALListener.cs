@@ -42,11 +42,11 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
                                       {
                                           ValueTuple.Create(
                                               z.Item1.Value.CreatedItems.Concat(z.Item1.Value.UpdatedItems),
-                                              DomainObjectEvent.Save,
+                                              EventOperation.Save,
                                               z.Item2.IsSaveProcessingFunc),
                                           ValueTuple.Create(
                                               (IEnumerable<IDALObject>)z.Item1.Value.RemovedItems,
-                                              DomainObjectEvent.Remove,
+                                              EventOperation.Remove,
                                               z.Item2.IsRemoveProcessingFunc)
                                       })
                               .ToList();
@@ -74,9 +74,9 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
             this.eventOperationSender.Send(domainObject, domainObjectType, eventType);
         }
     }
-    protected virtual IEnumerable<ValueTuple<IDALObject, DomainObjectEvent>> ProcessFinalAllFilteredOrderedValues(
+    protected virtual IEnumerable<ValueTuple<IDALObject, EventOperation>> ProcessFinalAllFilteredOrderedValues(
             DALChangesEventArgs eventArgs,
-            IEnumerable<ValueTuple<IDALObject, DomainObjectEvent>> allFilteredOrderedValues)
+            IEnumerable<ValueTuple<IDALObject, EventOperation>> allFilteredOrderedValues)
     {
         var joinItems = eventArgs.Changes.GroupDALObjectByType().Join(this.settings.Dependencies, z => z.Key, z => z.SourceTypeEvent.Type, ValueTuple.Create).ToList();
 
@@ -118,6 +118,6 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
                                                                     (anon, alwaysObject) => anon.TargetObject.Equals(alwaysObject)).ToList();
 
         // фильруем которые нужно обработать
-        return allFilteredOrderedValues.Concat(allAbsentsTargetObjects.Select(z => ValueTuple.Create((IDALObject)(new DALObject(z.TargetObject, z.TargetObjectType, 1)), DomainObjectEvent.Save)));
+        return allFilteredOrderedValues.Concat(allAbsentsTargetObjects.Select(z => ValueTuple.Create((IDALObject)(new DALObject(z.TargetObject, z.TargetObjectType, 1)), EventOperation.Save)));
     }
 }

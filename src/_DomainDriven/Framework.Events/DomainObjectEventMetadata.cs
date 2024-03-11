@@ -2,9 +2,9 @@
 
 public class DomainObjectEventMetadata : IDomainObjectEventMetadata
 {
-    public virtual IEnumerable<DomainObjectEvent> GetEventOperations(Type domainType)
+    public virtual IEnumerable<EventOperation> GetEventOperations(Type domainType)
     {
-        yield return DomainObjectEvent.Save;
-        yield return DomainObjectEvent.Remove;
+        yield return EventOperation.Save;
+        yield return EventOperation.Remove;
     }
 }

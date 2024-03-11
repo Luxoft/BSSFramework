@@ -2,5 +2,5 @@
 
 public interface IEventOperationSender
 {
-    void Send<TDomainObject>(TDomainObject domainObject, DomainObjectEvent domainObjectEvent);
+    void Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent);
 }

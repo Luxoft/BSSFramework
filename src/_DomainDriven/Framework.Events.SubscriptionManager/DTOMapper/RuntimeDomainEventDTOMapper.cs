@@ -14,7 +14,7 @@ public class RuntimeDomainEventDTOMapper<TPersistentDomainObjectBase, TMappingSe
         this.converter = converter;
     }
 
-    public virtual object Convert<TDomainObject>(TDomainObject domainObject, DomainObjectEvent domainObjectEvent)
+    public virtual object Convert<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
         where TDomainObject : TPersistentDomainObjectBase
     {
         return this.converter.Convert(this.mappingService, domainObject, domainObjectEvent);

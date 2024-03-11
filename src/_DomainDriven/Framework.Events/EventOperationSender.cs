@@ -9,7 +9,7 @@ public class EventOperationSender : IEventOperationSender
         this.receivers = receivers;
     }
 
-    public void Send<TDomainObject>(TDomainObject domainObject, DomainObjectEvent domainObjectEvent)
+    public void Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
     {
         foreach (var receiver in this.receivers)
         {

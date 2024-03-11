@@ -5,10 +5,10 @@ namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public class DomainOperationEventDTOFileType : DTOFileType, IEquatable<DomainOperationEventDTOFileType>
 {
-    public readonly DomainObjectEvent EventOperation;
+    public readonly EventOperation EventOperation;
 
 
-    public DomainOperationEventDTOFileType(DomainObjectEvent domainObjectEvent)
+    public DomainOperationEventDTOFileType(EventOperation domainObjectEvent)
         : base("OperationEventDTO", DTORole.Event)
     {
         this.EventOperation = domainObjectEvent ?? throw new ArgumentNullException(nameof(domainObjectEvent));

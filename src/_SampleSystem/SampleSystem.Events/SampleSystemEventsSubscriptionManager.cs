@@ -25,7 +25,7 @@ public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManager<P
 
         this.SubscribeCustom<Employee>(
             _ => true,
-            operation => operation == DomainObjectEvent.Save,
+            operation => operation == EventOperation.Save,
             domainObject => new EmployeeCustomEventModelSaveEventDTO(this.mappingService, new EmployeeCustomEventModel(domainObject)));
     }
 }

@@ -2,5 +2,5 @@
 
 public interface IDomainObjectEventMetadata
 {
-    IEnumerable<DomainObjectEvent> GetEventOperations(Type domainType);
+    IEnumerable<EventOperation> GetEventOperations(Type domainType);
 }

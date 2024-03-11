@@ -4,7 +4,7 @@ public struct DomainOperationSerializeData<TDomainObject> : IDomainOperationSeri
 {
     public TDomainObject DomainObject { get; set; }
 
-    public DomainObjectEvent Operation { get; set; }
+    public EventOperation Operation { get; set; }
 
     public object CustomSendObject { get; set; }
 

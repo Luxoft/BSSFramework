@@ -18,13 +18,13 @@ public abstract class OperationBLLBase<TBLLContext, TPersistentDomainObjectBase,
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        this.Context.OperationSender.Send(domainObject, DomainObjectEvent.Save);
+        this.Context.OperationSender.Send(domainObject, EventOperation.Save);
     }
 
     public virtual void Remove(TDomainObject domainObject)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        this.Context.OperationSender.Send(domainObject, DomainObjectEvent.Remove);
+        this.Context.OperationSender.Send(domainObject, EventOperation.Remove);
     }
 }

@@ -8,18 +8,18 @@ public struct TypeEvent
     public static TypeEvent SaveAndRemove<T>(Func<T, bool> isSaveProcessingFunc = null, Func<T, bool> isRemoveProcessingFunc = null)
     {
         return TypeEvent.Create(
-            [DomainObjectEvent.Save, DomainObjectEvent.Remove],
+            [EventOperation.Save, EventOperation.Remove],
             isSaveProcessingFunc,
             isRemoveProcessingFunc);
     }
 
     public static TypeEvent Save<T>(Func<T, bool> isSaveFunc = null)
     {
-        return TypeEvent.Create(DomainObjectEvent.Save, isSaveFunc);
+        return TypeEvent.Create(EventOperation.Save, isSaveFunc);
     }
 
     public static TypeEvent Create<T>(
-        DomainObjectEvent domainObjectEvent,
+        EventOperation domainObjectEvent,
         Func<T, bool> isSaveProcessingFunc = null,
         Func<T, bool> isRemoveProcessingFunc = null)
     {
@@ -27,7 +27,7 @@ public struct TypeEvent
     }
 
     public static TypeEvent Create<T>(
-        DomainObjectEvent[] eventOperations,
+        EventOperation[] eventOperations,
         Func<T, bool> isSaveProcessingFunc = null,
         Func<T, bool> isRemoveProcessingFunc = null)
     {
@@ -48,7 +48,7 @@ public struct TypeEvent
         return new TypeEvent(typeof(T), eventOperations, isSaveUntypedFunc, isRemoveUntypeFunc);
     }
 
-    public TypeEvent(Type type, IEnumerable<DomainObjectEvent> operations, Func<object, bool> isSaveProcessingFunc, Func<object, bool> isRemoveProcessingFunc) : this()
+    public TypeEvent(Type type, IEnumerable<EventOperation> operations, Func<object, bool> isSaveProcessingFunc, Func<object, bool> isRemoveProcessingFunc) : this()
     {
         this.Type = type;
 
@@ -66,7 +66,7 @@ public struct TypeEvent
     /// <summary>
     ///
     /// </summary>
-    public IReadOnlyList<DomainObjectEvent> Operations { get; }
+    public IReadOnlyList<EventOperation> Operations { get; }
 
     public Func<object, bool> IsSaveProcessingFunc { get; }
 

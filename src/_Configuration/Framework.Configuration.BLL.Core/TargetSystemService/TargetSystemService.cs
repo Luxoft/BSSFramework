@@ -11,8 +11,6 @@ using Framework.Persistent;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using DomainObjectEvent = Framework.Events.DomainObjectEvent;
-
 namespace Framework.Configuration.BLL;
 
 public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : TargetSystemService<TBLLContext>, IPersistentTargetSystemService
@@ -74,7 +72,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
         var domainObject = revision == null ? bll.GetById(domainObjectId, true)
                                    : bll.GetObjectByRevision(domainObjectId, revision.Value);
 
-        var domainObjectEvent = new DomainObjectEvent(operationName);
+        var domainObjectEvent = new EventOperation(operationName);
 
         this.eventOperationSender.Send(domainObject, domainObjectEvent);
     }

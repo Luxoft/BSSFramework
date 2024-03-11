@@ -2,7 +2,7 @@
 
 public class EmptyEventOperationSender : IEventOperationSender
 {
-    public void Send<TDomainObject>(TDomainObject domainObject, DomainObjectEvent domainObjectEvent)
+    public void Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
     {
     }
 }

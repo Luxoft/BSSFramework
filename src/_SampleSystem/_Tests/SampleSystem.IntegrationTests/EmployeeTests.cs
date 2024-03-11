@@ -212,7 +212,7 @@ public class EmployeeTests : TestBase
 
         var domainType = configFacade.Evaluate(c => c.GetRichDomainTypeByName(nameof(Employee)));
 
-        var operation = domainType.EventOperations.Single(op => op.Name == DomainObjectEvent.Save.Name);
+        var operation = domainType.EventOperations.Single(op => op.Name == EventOperation.Save.Name);
 
         this.ClearIntegrationEvents();
 

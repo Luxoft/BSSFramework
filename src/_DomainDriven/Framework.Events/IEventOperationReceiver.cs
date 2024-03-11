@@ -2,5 +2,5 @@
 
 public interface IEventOperationReceiver
 {
-    void Receive<TDomainObject>(TDomainObject domainObject, DomainObjectEvent domainObjectEvent);
+    void Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent);
 }

@@ -3,17 +3,17 @@
 /// <summary>
 /// Константы, описывающие тип события(event-a во внешнюю систему)
 /// </summary>
-public record EventOperation(string Name)
+public record DomainObjectEvent(string Name)
 {
     /// <summary>
     /// Сохранение объекта
     /// </summary>
-    public static EventOperation Save { get; } = new(nameof(Save));
+    public static DomainObjectEvent Save { get; } = new(nameof(Save));
 
     /// <summary>
     /// Удаление объекта
     /// </summary>
-    public static EventOperation Remove { get; } = new(nameof(Remove));
+    public static DomainObjectEvent Remove { get; } = new(nameof(Remove));
 
     public sealed override string ToString() => this.Name;
 }

@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,14 +8,14 @@ namespace Framework.Events;
 /// Класс для описания правил подписок на доменные евенты
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-public abstract class EventsSubscriptionManagerBase<TPersistentDomainObjectBase> : IOperationEventListener<TPersistentDomainObjectBase>
-        where TPersistentDomainObjectBase : class
+public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : IEventOperationReceiver
+    where TPersistentDomainObjectBase : class
 {
     private readonly IServiceCollection sc = new ServiceCollection();
 
     private readonly Lazy<IServiceProvider> cache;
 
-    protected EventsSubscriptionManagerBase(IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender)
+    protected EventsSubscriptionManager(IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender)
     {
         this.MessageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));
 
@@ -25,24 +24,23 @@ public abstract class EventsSubscriptionManagerBase<TPersistentDomainObjectBase>
 
     protected IEventDTOMessageSender<TPersistentDomainObjectBase> MessageSender { get; }
 
-    /// <inheritdoc />
     public abstract void Subscribe();
 
     protected void SubscribeForSaveOperation<T>()
         where T : class, TPersistentDomainObjectBase
     {
-        this.Subscribe<T>(z => true, z => z == EventOperation.Save);
+        this.Subscribe<T>(z => true, z => z == DomainObjectEvent.Save);
     }
 
     protected void SubscribeForSaveAndRemoveOperation<TDomainObject>()
         where TDomainObject : class, TPersistentDomainObjectBase
     {
-        this.Subscribe<TDomainObject>(z => true, z => z == EventOperation.Save || z == EventOperation.Remove);
+        this.Subscribe<TDomainObject>(z => true, z => z == DomainObjectEvent.Save || z == DomainObjectEvent.Remove);
     }
 
     protected void Subscribe<TDomainObject>(
             Func<TDomainObject, bool> domainObjectFilter,
-            Func<EventOperation, bool> operationFilter)
+            Func<DomainObjectEvent, bool> operationFilter)
             where TDomainObject : class, TPersistentDomainObjectBase
     {
         var listener = new Listener<TDomainObject>()
@@ -60,7 +58,7 @@ public abstract class EventsSubscriptionManagerBase<TPersistentDomainObjectBase>
 
     protected void SubscribeCustom<TDomainObject>(
             Func<TDomainObject, bool> domainObjectFilter,
-            Func<EventOperation, bool> operationFilter,
+            Func<DomainObjectEvent, bool> operationFilter,
             Func<TDomainObject, object> convertFunc)
             where TDomainObject : class, TPersistentDomainObjectBase
     {
@@ -85,25 +83,31 @@ public abstract class EventsSubscriptionManagerBase<TPersistentDomainObjectBase>
         return this.sc.BuildServiceProvider();
     }
 
-    public virtual void OnFired<TDomainObject>(IDomainOperationEventArgs<TDomainObject> eventArgs)
+    private void Receive<TDomainObject>(TDomainObject domainObject, DomainObjectEvent domainObjectEvent)
         where TDomainObject : class, TPersistentDomainObjectBase
     {
         this.cache.Value.GetRequiredService<IEnumerable<Listener<TDomainObject>>>().Foreach(listener =>
         {
-            if (listener.Filter(eventArgs.DomainObject, eventArgs.Operation))
+            if (listener.Filter(domainObject, domainObjectEvent))
             {
-                var message = listener.CreateMessage(eventArgs.DomainObject, eventArgs.Operation);
+                var message = listener.CreateMessage(domainObject, domainObjectEvent);
 
                 this.MessageSender.Send(message);
             }
         });
     }
 
-    private class Listener<TDomainObject>
-        where TDomainObject : class
+    void IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, DomainObjectEvent domainObjectEvent)
     {
-        public Func<TDomainObject, EventOperation, bool> Filter { get; set; }
+        new Action<TPersistentDomainObjectBase, DomainObjectEvent>(this.Receive)
+            .CreateGenericMethod(typeof(TDomainObject))
+            .Invoke(this, [domainObject, domainObjectEvent]);
+    }
 
-        public Func<TDomainObject, EventOperation, DomainOperationSerializeData<TDomainObject>> CreateMessage { get; set; }
+    private class Listener<TDomainObject>
+    {
+        public Func<TDomainObject, DomainObjectEvent, bool> Filter { get; init; }
+
+        public Func<TDomainObject, DomainObjectEvent, DomainOperationSerializeData<TDomainObject>> CreateMessage { get; init; }
     }
 }

@@ -64,7 +64,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<FinancialYearServiceSettings>();
         services.AddSingleton<IFinancialYearService, FinancialYearService>();
 
-        services.AddSingleton<IEventOperationSource, EventOperationSource>();
+        services.AddSingleton<IDomainObjectEventMetadata, DomainObjectEventMetadata>();
 
         services.RegisterNamedLocks();
 

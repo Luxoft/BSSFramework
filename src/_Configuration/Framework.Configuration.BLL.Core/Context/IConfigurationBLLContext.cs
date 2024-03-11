@@ -20,7 +20,7 @@ public partial interface IConfigurationBLLContext :
 
     ITrackingServiceContainer<PersistentDomainObjectBase>
 {
-    IEventOperationSource EventOperationSource { get; }
+    IDomainObjectEventMetadata EventOperationSource { get; }
 
     INamedLockService NamedLockService { get; }
 

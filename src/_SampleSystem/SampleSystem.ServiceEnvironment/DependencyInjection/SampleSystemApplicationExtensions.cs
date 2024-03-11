@@ -38,7 +38,7 @@ public static class SampleSystemApplicationExtensions
         services.AddScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>();
         //services.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>();
 
-        services.ReplaceSingleton<IEventOperationSource, SampleSystemEventOperationSource>();
+        services.ReplaceSingleton<IDomainObjectEventMetadata, SampleSystemEventOperationSource>();
 
         return services;
     }

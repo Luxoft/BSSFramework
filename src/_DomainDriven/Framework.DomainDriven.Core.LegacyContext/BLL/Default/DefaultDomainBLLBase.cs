@@ -19,7 +19,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         IDefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
-        where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>, IBLLBaseContext<TPersistentDomainObjectBase, TIdent>
+        where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>, IBLLBaseContext
 {
     private const int MaxItemsInSql = 2000;
 

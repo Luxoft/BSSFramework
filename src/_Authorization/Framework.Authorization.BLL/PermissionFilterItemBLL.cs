@@ -9,13 +9,13 @@ public partial class PermissionFilterItemBLL
     {
         if (permissionFilterItem == null) throw new ArgumentNullException(nameof(permissionFilterItem));
 
-        this.RaiseOperationProcessed(permissionFilterItem, EventOperation.Save);
+        this.Context.OperationSender.Send(permissionFilterItem, DomainObjectEvent.Save);
     }
 
     public void NotifyRemove(PermissionFilterItem permissionFilterItem)
     {
         if (permissionFilterItem == null) throw new ArgumentNullException(nameof(permissionFilterItem));
 
-        this.RaiseOperationProcessed(permissionFilterItem, EventOperation.Remove);
+        this.Context.OperationSender.Send(permissionFilterItem, DomainObjectEvent.Remove);
     }
 }

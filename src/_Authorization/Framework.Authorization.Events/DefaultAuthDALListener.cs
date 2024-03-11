@@ -5,22 +5,24 @@ namespace Framework.Authorization.Events;
 
 public class DefaultAuthDALListener : DependencyDetailEventDALListener<PersistentDomainObjectBase>
 {
-    public DefaultAuthDALListener(IEventDTOMessageSender<PersistentDomainObjectBase> messageSender)
-            : base(messageSender, DefaultEventTypes, DefaultDependencyEvents)
+    public DefaultAuthDALListener(IEventOperationSender eventOperationSender)
+        : base(eventOperationSender, DefaultSettings)
     {
     }
 
-    public static readonly IReadOnlyCollection<TypeEvent> DefaultEventTypes = new[]
-                                                                              {
-                                                                                      TypeEvent.Save<Principal>(),
-                                                                                      TypeEvent.SaveAndRemove<Permission>(),
-                                                                                      TypeEvent.SaveAndRemove<BusinessRole>()
-                                                                              };
-
-
-    public static readonly IReadOnlyCollection<TypeEventDependency> DefaultDependencyEvents = new[]
+    public static readonly EventDALListenerSettings<PersistentDomainObjectBase> DefaultSettings =
+        new()
         {
+            TypeEvents =
+            [
+                TypeEvent.Save<Principal>(),
+                TypeEvent.SaveAndRemove<Permission>(),
+                TypeEvent.SaveAndRemove<BusinessRole>()
+            ],
+            Dependencies = new[]
+            {
                 TypeEventDependency.FromSaveAndRemove<PermissionFilterItem, Permission>(z => z.Permission),
                 TypeEventDependency.FromSaveAndRemove<Permission, Principal>(z => z.Principal)
+            }
         };
 }

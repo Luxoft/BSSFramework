@@ -2,13 +2,13 @@
 
 namespace SampleSystem.Domain;
 
-public class SampleSystemEventOperationSource : EventOperationSource
+public class SampleSystemEventOperationSource : DomainObjectEventMetadata
 {
-    public override IEnumerable<EventOperation> GetEventOperations(Type domainType)
+    public override IEnumerable<DomainObjectEvent> GetEventOperations(Type domainType)
     {
         if (domainType == typeof(Employee))
         {
-            return [EventOperation.Save];
+            return [DomainObjectEvent.Save];
         }
         else
         {

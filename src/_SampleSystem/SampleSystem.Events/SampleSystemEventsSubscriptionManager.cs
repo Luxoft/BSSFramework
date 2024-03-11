@@ -5,7 +5,7 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.Events;
 
-public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
+public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManager<PersistentDomainObjectBase>
 {
     private readonly ISampleSystemDTOMappingService mappingService;
 
@@ -25,7 +25,7 @@ public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManagerBa
 
         this.SubscribeCustom<Employee>(
             _ => true,
-            operation => operation == EventOperation.Save,
+            operation => operation == DomainObjectEvent.Save,
             domainObject => new EmployeeCustomEventModelSaveEventDTO(this.mappingService, new EmployeeCustomEventModel(domainObject)));
     }
 }

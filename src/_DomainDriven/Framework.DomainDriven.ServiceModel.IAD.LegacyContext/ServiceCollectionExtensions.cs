@@ -7,7 +7,6 @@ using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.DependencyInjection;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.NHibernate;
@@ -17,10 +16,11 @@ using Framework.Projection;
 using Framework.QueryLanguage;
 using Framework.Security;
 using Framework.SecuritySystem;
-
-using Microsoft.Extensions.DependencyInjection;
 using Framework.Events.DTOMapper;
 using Framework.Events;
+using Framework.DomainDriven.ServiceModel.Service;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -28,7 +28,13 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyGenericServices(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IOperationEventSenderContainer<>), typeof(OperationEventSenderContainer<>));
+        services.AddScoped(typeof(EvaluatedData<,>));
+
+        services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("DAL");
+        services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("AuthBLL");
+        services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("ConfigBLL");
+        services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("MainBLL");
+        services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("Force");
 
         services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
 

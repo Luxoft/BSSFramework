@@ -8,6 +8,7 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.UnitTest.Mock;
 using Framework.DomainDriven.UnitTest.Mock.StubProxy;
+using Framework.Events;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -135,7 +136,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
         ((IBLLFactoryContainerContext<IAuthorizationBLLFactoryContainer>)result).Logics.Returns(bllFactoryContainer);
 
         result.SecurityService.Returns(new RootSecurityService<PersistentDomainObjectBase>(result.ServiceProvider));
-        result.OperationSenders.Returns(new OperationEventSenderContainer<DomainObjectBase>(new List<IOperationEventListener<DomainObjectBase>>()));
+        result.OperationSender.Returns(new EmptyEventOperationSender());
 
         var authContext = this.AuthorizationBLLContext;
 

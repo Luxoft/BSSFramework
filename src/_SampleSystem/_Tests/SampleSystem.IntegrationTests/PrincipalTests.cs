@@ -41,7 +41,7 @@ public class PrincipalTests : TestBase
 
         var domainType = configFacade.Evaluate(c => c.GetRichDomainType(domainTypeIdentity));
 
-        var operation = domainType.EventOperations.Single(op => op.Name == EventOperation.Save.Name);
+        var operation = domainType.EventOperations.Single(op => op.Name == DomainObjectEvent.Save.Name);
 
         this.ClearIntegrationEvents();
 
@@ -79,7 +79,7 @@ public class PrincipalTests : TestBase
 
         var domainType = configFacade.Evaluate(c => c.GetRichDomainType(domainTypeIdentity));
 
-        var operation = domainType.EventOperations.Single(op => op.Name == EventOperation.Save.Name);
+        var operation = domainType.EventOperations.Single(op => op.Name == DomainObjectEvent.Save.Name);
 
         this.ClearIntegrationEvents();
 

@@ -10,12 +10,12 @@ namespace Framework.DomainDriven.DTOGenerator.Server;
 public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, DomainOperationEventDTOFileType>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultDomainOperationEventDTOFileFactory(TConfiguration configuration, Type domainType, EventOperation eventOperation)
+    public DefaultDomainOperationEventDTOFileFactory(TConfiguration configuration, Type domainType, DomainObjectEvent domainObjectEvent)
             : base(configuration, domainType)
     {
-        if (eventOperation == null) throw new ArgumentNullException(nameof(eventOperation));
+        if (domainObjectEvent == null) throw new ArgumentNullException(nameof(domainObjectEvent));
 
-        this.FileType = new DomainOperationEventDTOFileType(eventOperation);
+        this.FileType = new DomainOperationEventDTOFileType(domainObjectEvent);
     }
 
 

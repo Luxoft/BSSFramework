@@ -37,7 +37,6 @@ public static class SampleSystemFrameworkExtensions
                        .RegisterSupportServices()
 
                        // Legacy
-
                        .RegisterLegacyGenericServices()
                        .RegisterContextEvaluators()
 
@@ -89,24 +88,18 @@ public static class SampleSystemFrameworkExtensions
         services.AddScoped<DefaultAuthDALListener>();
 
         services.AddScopedFrom<IBeforeTransactionCompletedDALListener, DefaultAuthDALListener>();
-        services.AddScopedFrom<IManualEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>, DefaultAuthDALListener>();
 
-        services.AddScoped<EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>();
         services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
-
-        services.AddScoped<EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>();
         services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
-
-        services.AddScoped<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>();
         services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
 
 
         services.AddScoped<IDomainEventDTOMapper<PersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<PersistentDomainObjectBase, ISampleSystemDTOMappingService, SampleSystem.Generated.DTO.EventDTOBase>>();
 
-        services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemEventsSubscriptionManager>();
+        services.AddScoped<IEventOperationReceiver, SampleSystemEventsSubscriptionManager>();
+        services.AddScoped<IEventOperationReceiver, SampleSystemAribaEventsSubscriptionManager>();
 
-        services.AddScoped<SampleSystemAribaLocalDBEventMessageSender>();
-        services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemAribaEventsSubscriptionManager>();
+        services.AddScoped<IEventDTOMessageSender<PersistentDomainObjectBase>, SampleSystemAribaLocalDBEventMessageSender>();
 
         return services;
     }

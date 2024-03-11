@@ -18,9 +18,9 @@ public class AuthorizationRuntimeDomainEventDTOMapper : RuntimeDomainEventDTOMap
         this.shrinkDto = shrinkDto;
     }
 
-    public override object Convert<TDomainObject>(TDomainObject domainObject, EventOperation eventOperation)
+    public override object Convert<TDomainObject>(TDomainObject domainObject, DomainObjectEvent domainObjectEvent)
     {
-        var dto = base.Convert(domainObject, eventOperation);
+        var dto = base.Convert(domainObject, domainObjectEvent);
 
         if (this.shrinkDto)
         {

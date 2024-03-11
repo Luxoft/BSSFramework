@@ -9,14 +9,18 @@ using Framework.Events;
 using Framework.Notification;
 using Framework.Persistent;
 
+using Microsoft.Extensions.DependencyInjection;
+
+using DomainObjectEvent = Framework.Events.DomainObjectEvent;
+
 namespace Framework.Configuration.BLL;
 
 public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : TargetSystemService<TBLLContext>, IPersistentTargetSystemService
 
-        where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>, IBLLOperationEventContext<TPersistentDomainObjectBase>
+        where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
-    private readonly IEnumerable<IManualEventDALListener<TPersistentDomainObjectBase>> eventDalListeners;
+    private readonly IEventOperationSender eventOperationSender;
 
     private readonly IRevisionSubscriptionSystemService subscriptionService;
 
@@ -28,17 +32,15 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
     /// <param name="targetSystemContext">Контекст целевой системы.</param>
     /// <param name="targetSystem">Целевая система.</param>
     /// <param name="subscriptionMetadataStore">Хранилище описаний подписок.</param>
-    /// <param name="eventDalListeners">DAL-подписчики для пробразсывания евентов</param>
     public TargetSystemService(
             IConfigurationBLLContext context,
             TBLLContext targetSystemContext,
             TargetSystem targetSystem,
-            IEnumerable<IManualEventDALListener<TPersistentDomainObjectBase>> eventDalListeners,
+            [FromKeyedServices("Force")] IEventOperationSender eventOperationSender,
             SubscriptionMetadataStore subscriptionMetadataStore = null)
             : base(context, targetSystemContext, targetSystem, targetSystemContext.FromMaybe(() => new ArgumentNullException(nameof(targetSystemContext))).TypeResolver)
     {
-        this.eventDalListeners = (eventDalListeners ?? throw new ArgumentNullException(nameof(eventDalListeners)));
-
+        this.eventOperationSender = eventOperationSender;
         this.subscriptionService = this.GetSubscriptionService(subscriptionMetadataStore ?? new SubscriptionMetadataStore(new SubscriptionMetadataFinder()));
     }
 
@@ -72,13 +74,9 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
         var domainObject = revision == null ? bll.GetById(domainObjectId, true)
                                    : bll.GetObjectByRevision(domainObjectId, revision.Value);
 
-        var eventOperation = new EventOperation(operationName);
+        var domainObjectEvent = new DomainObjectEvent(operationName);
 
-        var listener = this.TargetSystemContext.OperationSenders.GetEventSender<TDomainObject>();
-
-        listener.SendEvent(domainObject, eventOperation);
-
-        this.eventDalListeners.Foreach(dalListener => dalListener.GetForceEventContainer<TDomainObject>().SendEvent(domainObject, eventOperation));
+        this.eventOperationSender.Send(domainObject, domainObjectEvent);
     }
 
     public override bool IsAssignable(Type domainType)

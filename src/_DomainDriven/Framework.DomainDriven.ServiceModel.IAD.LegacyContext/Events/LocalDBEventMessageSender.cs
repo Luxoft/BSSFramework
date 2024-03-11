@@ -10,7 +10,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD;
 /// Класс для отправки доменных евентов в локальную бд
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : EventDTOMessageSenderBase<TPersistentDomainObjectBase>
+public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : IEventDTOMessageSender<TPersistentDomainObjectBase>
     where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
     private readonly IDomainEventDTOMapper<TPersistentDomainObjectBase> eventDtoMapper;
@@ -33,7 +33,7 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : EventDTOMe
         this.settings = settings;
     }
 
-    public override void Send<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
+    public void Send(IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs)
     {
         var dto = domainObjectEventArgs.CustomSendObject
                   ?? this.eventDtoMapper.Convert(domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation);

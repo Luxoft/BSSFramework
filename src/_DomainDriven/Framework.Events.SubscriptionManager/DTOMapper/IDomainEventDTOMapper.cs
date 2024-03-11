@@ -2,6 +2,6 @@
 
 public interface IDomainEventDTOMapper<in TPersistentDomainObjectBase>
 {
-    object Convert<TDomainObject>(TDomainObject domainObject, EventOperation eventOperation)
+    object Convert<TDomainObject>(TDomainObject domainObject, DomainObjectEvent domainObjectEvent)
         where TDomainObject : TPersistentDomainObjectBase;
 }

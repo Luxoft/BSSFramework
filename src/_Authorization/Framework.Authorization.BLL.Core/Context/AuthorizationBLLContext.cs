@@ -12,6 +12,9 @@ using Framework.SecuritySystem;
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
+using Framework.Events;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.BLL;
 
@@ -29,7 +32,7 @@ public partial class AuthorizationBLLContext
 
     public AuthorizationBLLContext(
             IServiceProvider serviceProvider,
-            IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
+            [FromKeyedServices("AuthBLL")] IEventOperationSender operationSender,
             ITrackingService<PersistentDomainObjectBase> trackingService,
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
@@ -50,7 +53,7 @@ public partial class AuthorizationBLLContext
             IActualPrincipalSource actualPrincipalSource)
             : base(
                    serviceProvider,
-                   operationSenders,
+                   operationSender,
                    trackingService,
                    accessDeniedExceptionService,
                    standartExpressionBuilder,

@@ -8,26 +8,26 @@ public struct TypeEvent
     public static TypeEvent SaveAndRemove<T>(Func<T, bool> isSaveProcessingFunc = null, Func<T, bool> isRemoveProcessingFunc = null)
     {
         return TypeEvent.Create(
-            [EventOperation.Save, EventOperation.Remove],
+            [DomainObjectEvent.Save, DomainObjectEvent.Remove],
             isSaveProcessingFunc,
             isRemoveProcessingFunc);
     }
 
     public static TypeEvent Save<T>(Func<T, bool> isSaveFunc = null)
     {
-        return TypeEvent.Create(EventOperation.Save, isSaveFunc);
+        return TypeEvent.Create(DomainObjectEvent.Save, isSaveFunc);
     }
 
     public static TypeEvent Create<T>(
-        EventOperation eventOperation,
+        DomainObjectEvent domainObjectEvent,
         Func<T, bool> isSaveProcessingFunc = null,
         Func<T, bool> isRemoveProcessingFunc = null)
     {
-        return Create(new[] { eventOperation }, isSaveProcessingFunc, isRemoveProcessingFunc);
+        return Create(new[] { domainObjectEvent }, isSaveProcessingFunc, isRemoveProcessingFunc);
     }
 
     public static TypeEvent Create<T>(
-        EventOperation[] eventOperations,
+        DomainObjectEvent[] eventOperations,
         Func<T, bool> isSaveProcessingFunc = null,
         Func<T, bool> isRemoveProcessingFunc = null)
     {
@@ -48,7 +48,7 @@ public struct TypeEvent
         return new TypeEvent(typeof(T), eventOperations, isSaveUntypedFunc, isRemoveUntypeFunc);
     }
 
-    public TypeEvent(Type type, IEnumerable<EventOperation> operations, Func<object, bool> isSaveProcessingFunc, Func<object, bool> isRemoveProcessingFunc) : this()
+    public TypeEvent(Type type, IEnumerable<DomainObjectEvent> operations, Func<object, bool> isSaveProcessingFunc, Func<object, bool> isRemoveProcessingFunc) : this()
     {
         this.Type = type;
 
@@ -66,7 +66,7 @@ public struct TypeEvent
     /// <summary>
     ///
     /// </summary>
-    public IReadOnlyList<EventOperation> Operations { get; }
+    public IReadOnlyList<DomainObjectEvent> Operations { get; }
 
     public Func<object, bool> IsSaveProcessingFunc { get; }
 

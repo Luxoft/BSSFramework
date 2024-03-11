@@ -77,8 +77,6 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterListeners(this IServiceCollection services)
     {
-        services.AddSingleton<IInitializeManager, InitializeManager>();
-
         services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();

@@ -35,7 +35,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
         services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
 
-        services.AddScoped<IEventOperationSender, EventOperationSender>();
+        services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>("BLL");
 
         services.AddScoped(typeof(EvaluatedData<,>));
 

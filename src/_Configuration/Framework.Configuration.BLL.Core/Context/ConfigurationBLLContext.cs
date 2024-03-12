@@ -33,7 +33,7 @@ public partial class ConfigurationBLLContext
 
     public ConfigurationBLLContext(
             IServiceProvider serviceProvider,
-            IEventOperationSender operationSender,
+            [FromKeyedServices("BLL")] IEventOperationSender operationSender,
             ITrackingService<PersistentDomainObjectBase> trackingService,
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,

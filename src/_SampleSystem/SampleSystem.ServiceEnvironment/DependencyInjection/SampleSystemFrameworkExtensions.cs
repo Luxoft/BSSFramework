@@ -87,8 +87,10 @@ public static class SampleSystemFrameworkExtensions
 
         services.AddScoped<IBeforeTransactionCompletedDALListener, DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
 
+        services.AddKeyedScoped<IEventOperationReceiver, SampleSystemEventsSubscriptionManager>("BLL");
         services.AddScoped<IEventOperationReceiver, SampleSystemEventsSubscriptionManager>();
 
+        services.AddKeyedScoped<IEventOperationReceiver, SampleSystemAribaEventsSubscriptionManager>("BLL");
         services.AddScoped<IEventOperationReceiver, SampleSystemAribaEventsSubscriptionManager>();
 
         return services;

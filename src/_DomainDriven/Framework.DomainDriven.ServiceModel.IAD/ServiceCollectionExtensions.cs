@@ -35,6 +35,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
     {
+        services.AddScoped<IEventOperationSender, EventOperationSender>();
+
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
         services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Disabled, typeof(Repository<>));

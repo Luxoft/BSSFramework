@@ -32,7 +32,7 @@ public partial class AuthorizationBLLContext
 
     public AuthorizationBLLContext(
             IServiceProvider serviceProvider,
-            IEventOperationSender operationSender,
+            [FromKeyedServices("BLL")] IEventOperationSender operationSender,
             ITrackingService<PersistentDomainObjectBase> trackingService,
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,

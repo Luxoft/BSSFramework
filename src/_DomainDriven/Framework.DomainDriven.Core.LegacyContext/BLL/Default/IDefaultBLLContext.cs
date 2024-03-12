@@ -3,7 +3,7 @@ using Framework.Validation;
 
 namespace Framework.DomainDriven.BLL;
 
-public interface IDefaultBLLContext<in TPersistentDomainObjectBase, TIdent> : IBLLBaseContext<TPersistentDomainObjectBase, TIdent>,
+public interface IDefaultBLLContext<in TPersistentDomainObjectBase, TIdent> : IBLLBaseContext,
 
     IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>>,
 

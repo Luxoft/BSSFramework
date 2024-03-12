@@ -1,6 +1,7 @@
 ﻿using Framework.Core;
+using Framework.Events;
 
-namespace Framework.Events;
+namespace Framework.DomainDriven.ServiceModel.IAD;
 
 /// <summary>
 /// Класс для отправки доменных евентов
@@ -21,7 +22,9 @@ public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase> : I
         this.Send(
             new DomainOperationSerializeData<TDomainObject>
             {
-                DomainObject = domainObject, Operation = operation, CustomSendObject = customSendObject
+                DomainObject = domainObject,
+                Operation = operation,
+                CustomSendObject = customSendObject
             });
     }
 

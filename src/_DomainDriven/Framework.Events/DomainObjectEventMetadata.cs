@@ -1,6 +1,6 @@
 ﻿namespace Framework.Events;
 
-public class EventOperationSource : IEventOperationSource
+public class DomainObjectEventMetadata : IDomainObjectEventMetadata
 {
     public virtual IEnumerable<EventOperation> GetEventOperations(Type domainType)
     {

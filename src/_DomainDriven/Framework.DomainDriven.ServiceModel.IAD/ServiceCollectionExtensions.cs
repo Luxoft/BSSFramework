@@ -35,6 +35,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
     {
+        services.AddScoped<IEventOperationSender, EventOperationSender>();
+
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
         services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Disabled, typeof(Repository<>));
@@ -64,9 +66,11 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<FinancialYearServiceSettings>();
         services.AddSingleton<IFinancialYearService, FinancialYearService>();
 
-        services.AddSingleton<IEventOperationSource, EventOperationSource>();
+        services.AddSingleton<IDomainObjectEventMetadata, DomainObjectEventMetadata>();
 
         services.RegisterNamedLocks();
+
+        services.AddSingleton<IInitializeManager, InitializeManager>();
 
         return services;
     }

@@ -6,7 +6,6 @@ public interface IOperationBLLBase<in TDomainObject>
 {
     void Save(TDomainObject domainObject);
 
-
     void Remove(TDomainObject domainObject);
 }
 

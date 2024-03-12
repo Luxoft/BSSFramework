@@ -3,7 +3,7 @@ using Framework.Events;
 
 namespace Framework.Authorization.Events;
 
-public class AuthorizationEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
+public class AuthorizationEventsSubscriptionManager : EventsSubscriptionManager<PersistentDomainObjectBase>
 {
     public AuthorizationEventsSubscriptionManager(IEventDTOMessageSender<PersistentDomainObjectBase> messageSender)
             : base(messageSender)

@@ -1,13 +1,15 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
+using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
@@ -18,7 +20,7 @@ public partial class SampleSystemBLLContext
 {
     public SampleSystemBLLContext(
             IServiceProvider serviceProvider,
-            IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
+            [FromKeyedServices("BLL")] IEventOperationSender operationSender,
             ITrackingService<PersistentDomainObjectBase> trackingService,
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
@@ -31,7 +33,7 @@ public partial class SampleSystemBLLContext
             Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             ISampleSystemBLLContextSettings settings,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
-            : base(serviceProvider, operationSenders, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSender, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
         this.Logics = logics ?? throw new ArgumentNullException(nameof(logics));

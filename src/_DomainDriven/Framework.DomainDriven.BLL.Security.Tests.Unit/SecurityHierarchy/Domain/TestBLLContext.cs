@@ -2,6 +2,7 @@
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.UnitTest.Mock;
+using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.QueryableSource;
@@ -71,7 +72,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
 
     public MockDAL<HierarchyObjectAncestorLink, Guid> DomainAncestorLinkDal { get; }
 
-    public IOperationEventSenderContainer<PersistentDomainObjectBase> OperationSenders => new OperationEventSenderContainer<DomainObjectBase>(new List<IOperationEventListener<DomainObjectBase>>());
+    public IEventOperationSender OperationSender { get; } = new EmptyEventOperationSender();
 
     public IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> Logics => this.defaultFactoryContainer;
 

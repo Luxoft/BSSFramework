@@ -10,37 +10,37 @@ public class RuntimeDomainEventDTOConverter<TPersistentDomainObjectBase, TMappin
 
     private readonly Dictionary<(EventOperation, Type), object> FuncDictionary = new();
 
-    public TEventDTOBase Convert<TDomainObject>(TMappingService mappingService, TDomainObject domainObject, EventOperation eventOperation)
+    public TEventDTOBase Convert<TDomainObject>(TMappingService mappingService, TDomainObject domainObject, EventOperation domainObjectEvent)
         where TDomainObject : TPersistentDomainObjectBase
     {
-        var func = this.GetFunc<TDomainObject>(eventOperation);
+        var func = this.GetFunc<TDomainObject>(domainObjectEvent);
 
         return func(mappingService, domainObject);
     }
 
-    private Func<TMappingService, TDomainObject, TEventDTOBase> GetFunc<TDomainObject>(EventOperation eventOperation)
+    private Func<TMappingService, TDomainObject, TEventDTOBase> GetFunc<TDomainObject>(EventOperation domainObjectEvent)
     {
         lock (this.syncRoot)
         {
-            var func = this.FuncDictionary.GetValueOrCreate((eventOperation, typeof(TDomainObject)), () => this.CreateLambda<TDomainObject>(eventOperation));
+            var func = this.FuncDictionary.GetValueOrCreate((domainObjectEvent, typeof(TDomainObject)), () => this.CreateLambda<TDomainObject>(domainObjectEvent));
 
             return (Func<TMappingService, TDomainObject, TEventDTOBase>)func;
         }
     }
 
-    protected virtual string GetEventDtoTypeName<TDomainObject>(EventOperation eventOperation)
+    protected virtual string GetEventDtoTypeName<TDomainObject>(EventOperation domainObjectEvent)
     {
-        return $"{typeof(TEventDTOBase).Namespace}.{typeof(TDomainObject).Name}{eventOperation.Name}EventDTO";
+        return $"{typeof(TEventDTOBase).Namespace}.{typeof(TDomainObject).Name}{domainObjectEvent.Name}EventDTO";
     }
 
-    protected virtual Type GetEventDtoType<TDomainObject>(EventOperation eventOperation)
+    protected virtual Type GetEventDtoType<TDomainObject>(EventOperation domainObjectEvent)
     {
-        return typeof(TEventDTOBase).Assembly.GetType(this.GetEventDtoTypeName<TDomainObject>(eventOperation));
+        return typeof(TEventDTOBase).Assembly.GetType(this.GetEventDtoTypeName<TDomainObject>(domainObjectEvent));
     }
 
-    private Func<TMappingService, TDomainObject, TEventDTOBase> CreateLambda<TDomainObject>(EventOperation eventOperation)
+    private Func<TMappingService, TDomainObject, TEventDTOBase> CreateLambda<TDomainObject>(EventOperation domainObjectEvent)
     {
-        var eventDtoType = this.GetEventDtoType<TDomainObject>(eventOperation);
+        var eventDtoType = this.GetEventDtoType<TDomainObject>(domainObjectEvent);
         var eventDtoTypeConstructor = eventDtoType.GetConstructor([typeof(TMappingService), typeof(TDomainObject)]);
 
         var mappingServiceParam = Expression.Parameter(typeof(TMappingService), "mappingService");

@@ -16,7 +16,7 @@ public interface IServerGeneratorConfigurationBase : IGeneratorConfigurationBase
     IPropertyAssignerConfigurator PropertyAssignerConfigurator { get; }
 
 
-    IEventOperationSource EventOperationSource { get; }
+    IDomainObjectEventMetadata EventOperationSource { get; }
 
     Type ExceptionType { get; }
 

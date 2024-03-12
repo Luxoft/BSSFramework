@@ -19,11 +19,11 @@ public struct TypeEvent
     }
 
     public static TypeEvent Create<T>(
-        EventOperation eventOperation,
+        EventOperation domainObjectEvent,
         Func<T, bool> isSaveProcessingFunc = null,
         Func<T, bool> isRemoveProcessingFunc = null)
     {
-        return Create(new[] { eventOperation }, isSaveProcessingFunc, isRemoveProcessingFunc);
+        return Create(new[] { domainObjectEvent }, isSaveProcessingFunc, isRemoveProcessingFunc);
     }
 
     public static TypeEvent Create<T>(

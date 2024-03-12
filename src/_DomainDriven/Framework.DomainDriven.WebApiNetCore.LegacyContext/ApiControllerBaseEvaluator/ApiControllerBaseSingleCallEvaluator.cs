@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven.ServiceModel.Service;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.WebApiNetCore;

@@ -1,6 +1,4 @@
-﻿using Framework.DomainDriven.Lock;
-using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.Setup;
+﻿using Framework.DomainDriven.Setup;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

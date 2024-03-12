@@ -22,7 +22,8 @@ public static class SampleSystemApplicationExtensions
             this IServiceCollection services,
             IConfiguration configuration)
     {
-        return services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
+        return services.AddHttpContextAccessor()
+                       .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
                        .RegisterSmtpNotification(configuration)
                        .RegisterWorkflowCore(configuration)
                        .RegisterApplicationServices()

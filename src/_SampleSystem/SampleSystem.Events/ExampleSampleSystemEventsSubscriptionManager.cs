@@ -6,11 +6,11 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.Events;
 
-public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManager<PersistentDomainObjectBase>
+public class ExampleSampleSystemEventsSubscriptionManager : EventsSubscriptionManager<PersistentDomainObjectBase>
 {
     private readonly ISampleSystemDTOMappingService mappingService;
 
-    public SampleSystemEventsSubscriptionManager(
+    public ExampleSampleSystemEventsSubscriptionManager(
         IEventDTOMessageSender<PersistentDomainObjectBase> messageSender,
             ISampleSystemDTOMappingService mappingService)
             : base(messageSender)

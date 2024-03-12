@@ -9,9 +9,9 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.ServiceEnvironment;
 
-public class PermissionWorkflowDALListener : BLLContextContainer<ISampleSystemBLLContext>, IBeforeTransactionCompletedDALListener
+public class ExamplePermissionWorkflowDALListener : BLLContextContainer<ISampleSystemBLLContext>, IBeforeTransactionCompletedDALListener
 {
-    public PermissionWorkflowDALListener(ISampleSystemBLLContext context)
+    public ExamplePermissionWorkflowDALListener(ISampleSystemBLLContext context)
         : base(context)
     {
     }

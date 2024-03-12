@@ -2,7 +2,7 @@
 
 namespace SampleSystem.ServiceEnvironment;
 
-public class FaultDALListener : IBeforeTransactionCompletedDALListener
+public class ExampleFaultDALListener : IBeforeTransactionCompletedDALListener
 {
     public bool Raise { get; set; }
 
@@ -10,7 +10,7 @@ public class FaultDALListener : IBeforeTransactionCompletedDALListener
     {
         if (this.Raise)
         {
-            throw new Exception(nameof(FaultDALListener));
+            throw new Exception(nameof(ExampleFaultDALListener));
         }
     }
 }

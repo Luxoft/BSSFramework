@@ -33,7 +33,7 @@ public static class SampleSystemApplicationExtensions
 
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
     {
-        services.AddScoped<SampleSystemAribaLocalDBEventMessageSender>();
+        services.AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>();
 
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
 

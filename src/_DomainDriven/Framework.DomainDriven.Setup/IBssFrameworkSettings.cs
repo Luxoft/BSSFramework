@@ -11,6 +11,8 @@ public interface IBssFrameworkSettings
 
     bool RegisterBaseNamedLockTypes { get; set; }
 
+    bool RegisterDenormalizeHierarchicalDALListener { get; set; }
+
     IBssFrameworkSettings AddSecurityOperationType(Type securityOperationType);
 
     IBssFrameworkSettings AddSecurityRoleTypeType(Type securityRoleType);
@@ -23,6 +25,9 @@ public interface IBssFrameworkSettings
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>;
 
     IBssFrameworkSettings AddDomainSecurityServices(Action<IDomainSecurityServiceRootBuilder> setup);
+
+    IBssFrameworkSettings AddListener<TListener>(bool registerSelf = false)
+        where TListener : class, IDALListener;
 
     IBssFrameworkSettings AddExtensions(IBssFrameworkExtension extension);
 }

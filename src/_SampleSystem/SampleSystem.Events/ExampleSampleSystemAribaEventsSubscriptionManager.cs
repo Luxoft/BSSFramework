@@ -4,9 +4,9 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.Events;
 
-public class SampleSystemAribaEventsSubscriptionManager : EventsSubscriptionManager<PersistentDomainObjectBase>
+public class ExampleSampleSystemAribaEventsSubscriptionManager : EventsSubscriptionManager<PersistentDomainObjectBase>
 {
-    public SampleSystemAribaEventsSubscriptionManager(SampleSystemAribaLocalDBEventMessageSender messageSender)
+    public ExampleSampleSystemAribaEventsSubscriptionManager(SampleSystemCustomAribaLocalDBEventMessageSender messageSender)
             : base(messageSender)
     {
     }

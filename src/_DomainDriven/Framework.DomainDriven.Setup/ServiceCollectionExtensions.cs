@@ -20,6 +20,11 @@ public static class ServiceCollectionExtensions
         setupAction?.Invoke(settings);
         settings.InitSettings();
 
+        if (settings.RegisterDenormalizeHierarchicalDALListener)
+        {
+            settings.AddListener<DenormalizeHierarchicalDALListener>();
+        }
+
         foreach (var securityOperationType in settings.SecurityOperationTypes)
         {
             services.AddSingleton(new SecurityOperationTypeInfo(securityOperationType));
@@ -35,9 +40,7 @@ public static class ServiceCollectionExtensions
             services.AddSingleton(new NamedLockTypeInfo(namedLockType));
         }
 
-        settings.RegisterSecurityContextActions.ForEach(a => a(services));
-
-        settings.RegisterDomainSecurityServicesActions.ForEach(a => a(services));
+        settings.RegisterActions.ForEach(a => a(services));
 
         settings.Extensions.ForEach(ex => ex.AddServices(services));
 

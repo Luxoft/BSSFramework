@@ -6,9 +6,9 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.Events;
 
-public class SampleSystemAribaLocalDBEventMessageSender : LocalDBEventMessageSender<PersistentDomainObjectBase>
+public class SampleSystemCustomAribaLocalDBEventMessageSender : LocalDBEventMessageSender<PersistentDomainObjectBase>
 {
-    public SampleSystemAribaLocalDBEventMessageSender(
+    public SampleSystemCustomAribaLocalDBEventMessageSender(
         IDomainEventDTOMapper<PersistentDomainObjectBase> mapper,
         IConfigurationBLLContext configurationContext)
         : base(mapper, configurationContext, new LocalDBEventMessageSenderSettings<PersistentDomainObjectBase>() { QueueTag = "ariba" })

@@ -69,15 +69,12 @@ public static class SampleSystemFrameworkExtensions
     private static IServiceCollection RegisterListeners(this IServiceCollection services)
     {
         services.RegisterListeners(
-            s => s.Add<FaultDALListener>(true)
-                  .Add<DenormalizeHierarchicalDALListener>()
-                  .Add<FixDomainObjectEventRevisionNumberDALListener>()
-                  .Add<PermissionWorkflowDALListener>()
+            s => s.Add<FixDomainObjectEventRevisionNumberDALListener>()
                   .Add<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>());
 
         services.RegisterSubscriptionManagers(
-            s => s.Add<SampleSystemEventsSubscriptionManager>()
-                  .Add<SampleSystemAribaEventsSubscriptionManager>());
+            s => s.Add<ExampleSampleSystemEventsSubscriptionManager>()
+                  .Add<ExampleSampleSystemAribaEventsSubscriptionManager>());
 
         return services;
     }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Events;
+namespace Framework.Events.Legacy;
 
 public class BLLEventOperationSender : IEventOperationSender
 {

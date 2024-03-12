@@ -1,19 +1,14 @@
 ﻿using Framework.Authorization.BLL;
-using Framework.Authorization.Events;
-using Framework.Authorization.Generated.DTO;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.Events;
-using Framework.Events.DTOMapper;
+using Framework.Events.Legacy;
 using Framework.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -76,22 +71,16 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterListeners(this IServiceCollection services)
     {
-        services.AddScoped<FaultDALListener>();
-        services.AddScopedFrom<IBeforeTransactionCompletedDALListener, FaultDALListener>();
+        services.RegisterListeners(
+            s => s.Add<FaultDALListener>(true)
+                  .Add<DenormalizeHierarchicalDALListener>()
+                  .Add<FixDomainObjectEventRevisionNumberDALListener>()
+                  .Add<PermissionWorkflowDALListener>()
+                  .Add<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>());
 
-        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener>();
-        services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
-        services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
-
-        services.AddScoped<IEventOperationReceiver, DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
-
-        services.AddScoped<IBeforeTransactionCompletedDALListener, DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
-
-        services.AddKeyedScoped<IEventOperationReceiver, SampleSystemEventsSubscriptionManager>("BLL");
-        services.AddScoped<IEventOperationReceiver, SampleSystemEventsSubscriptionManager>();
-
-        services.AddKeyedScoped<IEventOperationReceiver, SampleSystemAribaEventsSubscriptionManager>("BLL");
-        services.AddScoped<IEventOperationReceiver, SampleSystemAribaEventsSubscriptionManager>();
+        services.RegisterSubscriptionManagers(
+            s => s.Add<SampleSystemEventsSubscriptionManager>()
+                  .Add<SampleSystemAribaEventsSubscriptionManager>());
 
         return services;
     }
@@ -122,9 +111,6 @@ public static class SampleSystemFrameworkExtensions
 
         // For subscription
         services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));
-
-        // For expand tree
-        services.RegisterHierarchicalObjectExpander();
 
         // Serilog
         services.AddSingleton(Serilog.Log.Logger);

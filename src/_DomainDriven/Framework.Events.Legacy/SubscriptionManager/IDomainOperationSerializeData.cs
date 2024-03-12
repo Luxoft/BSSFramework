@@ -1,4 +1,4 @@
-﻿namespace Framework.Events;
+﻿namespace Framework.Events.Legacy;
 
 public interface IDomainOperationSerializeData<out TDomainObject>
 {

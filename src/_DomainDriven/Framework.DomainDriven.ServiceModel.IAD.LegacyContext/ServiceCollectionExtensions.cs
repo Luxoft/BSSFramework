@@ -16,7 +16,7 @@ using Framework.Projection;
 using Framework.QueryLanguage;
 using Framework.Security;
 using Framework.SecuritySystem;
-using Framework.Events.DTOMapper;
+using Framework.Events.Legacy;
 using Framework.Events;
 using Framework.DomainDriven.ServiceModel.Service;
 

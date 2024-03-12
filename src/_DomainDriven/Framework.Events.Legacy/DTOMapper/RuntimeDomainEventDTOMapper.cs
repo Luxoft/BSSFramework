@@ -1,4 +1,4 @@
-﻿namespace Framework.Events.DTOMapper;
+﻿namespace Framework.Events.Legacy;
 
 public class RuntimeDomainEventDTOMapper<TPersistentDomainObjectBase, TMappingService, TEventDTOBase> : IDomainEventDTOMapper<TPersistentDomainObjectBase>
 {

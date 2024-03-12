@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Events;
+using Framework.Events.Legacy;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 

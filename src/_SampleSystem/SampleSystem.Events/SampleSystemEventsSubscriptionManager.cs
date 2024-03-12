@@ -1,4 +1,5 @@
 ﻿using Framework.Events;
+using Framework.Events.Legacy;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

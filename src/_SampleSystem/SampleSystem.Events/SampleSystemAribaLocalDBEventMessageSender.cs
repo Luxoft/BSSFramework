@@ -1,6 +1,6 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.Events.DTOMapper;
+using Framework.Events.Legacy;
 
 using SampleSystem.Domain;
 

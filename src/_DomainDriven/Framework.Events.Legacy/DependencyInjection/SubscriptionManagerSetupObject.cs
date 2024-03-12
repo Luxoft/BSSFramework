@@ -4,7 +4,7 @@ namespace Framework.Events.Legacy;
 
 public class SubscriptionManagerSetupObject : ISubscriptionManagerSetupObject
 {
-    private List<Action<IServiceCollection>> initActions = new();
+    private readonly List<Action<IServiceCollection>> initActions = new();
 
     public IReadOnlyList<Action<IServiceCollection>> InitActions => this.initActions;
 

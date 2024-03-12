@@ -8,7 +8,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public class ListenerSetupObject : IListenerSetupObject
 {
-    private List<Action<IServiceCollection>> initActions = new();
+    private readonly List<Action<IServiceCollection>> initActions = new();
 
     public IReadOnlyList<Action<IServiceCollection>> InitActions => this.initActions;
 
@@ -34,7 +34,7 @@ public class ListenerSetupObject : IListenerSetupObject
             typeof(IBeforeTransactionCompletedDALListener),
             typeof(IFlushedDALListener),
             typeof(IEventOperationReceiver)
-        }.ToArray(interfaceType => this.TryCastListener<TListener>(services, interfaceType, registerSelf));
+        }.ToArray(interfaceType => this.TryCastService<TListener>(services, interfaceType, registerSelf));
 
         if (!result.Any(v => v))
         {
@@ -42,12 +42,12 @@ public class ListenerSetupObject : IListenerSetupObject
         }
     }
 
-    private bool TryCastListener<TCurrentListener>(IServiceCollection services, Type targetListenerList, bool registerSelf)
+    private bool TryCastService<TCurrentListener>(IServiceCollection services, Type targetServiceType, bool registerSelf)
         where TCurrentListener : class, IDALListener
     {
         if (registerSelf)
         {
-            if (targetListenerList.IsAssignableFrom(typeof(TCurrentListener)))
+            if (targetServiceType.IsAssignableFrom(typeof(TCurrentListener)))
             {
                 services.AddScoped(sp => (IBeforeTransactionCompletedDALListener)sp.GetRequiredService(typeof(TCurrentListener)));
 
@@ -56,9 +56,9 @@ public class ListenerSetupObject : IListenerSetupObject
         }
         else
         {
-            if (targetListenerList.IsAssignableFrom(typeof(TCurrentListener)))
+            if (targetServiceType.IsAssignableFrom(typeof(TCurrentListener)))
             {
-                services.AddScoped(targetListenerList, typeof(TCurrentListener));
+                services.AddScoped(targetServiceType, typeof(TCurrentListener));
 
                 return true;
             }

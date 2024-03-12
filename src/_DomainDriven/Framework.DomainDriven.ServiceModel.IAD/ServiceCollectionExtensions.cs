@@ -22,6 +22,7 @@ using Framework.FinancialYear;
 using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -50,6 +51,13 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEventOperationSender, EventOperationSender>();
 
         services.AddSingleton<IInitializeManager, InitializeManager>();
+
+
+        services.AddSingleton(new NamedLockTypeInfo(typeof(ConfigurationNamedLock)));
+
+        services.AddSingleton(new SecurityOperationTypeInfo(typeof(BssSecurityOperation)));
+        services.AddSingleton(new SecurityOperationTypeInfo(typeof(AuthorizationSecurityOperation)));
+        services.AddSingleton(new SecurityOperationTypeInfo(typeof(ConfigurationSecurityOperation)));
 
         return services;
     }

@@ -34,7 +34,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                            ;
                    })
 
-               .RegisterGeneralBssFramework()
+               .RegisterLegacyGeneralBssFramework()
                .RegisterGeneralDatabaseSettings(configuration)
                .RegisterGeneralApplicationServices(configuration);
     }

@@ -23,7 +23,7 @@ namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemFrameworkExtensions
 {
-    public static IServiceCollection RegisterGeneralBssFramework(this IServiceCollection services)
+    public static IServiceCollection RegisterLegacyGeneralBssFramework(this IServiceCollection services)
     {
         return services.RegisterListeners()
                        .RegisterSupportServices()

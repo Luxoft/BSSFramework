@@ -9,11 +9,10 @@ namespace Framework.DomainDriven.WebApiNetCore;
 /// Class ApiControllerBase.
 /// </summary>
 /// <typeparam name="TBLLContext">The type of the TBLL context.</typeparam>
-/// <typeparam name="TEvaluatedData">The type of the t evaluated data.</typeparam>
+/// <typeparam name="EvaluatedData<TBLLContext, TMappingService>">The type of the t evaluated data.</typeparam>
 /// <seealso cref="ApiControllerBase{TBLLContext}" />
-public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiControllerBase<TBLLContext>
+public abstract class ApiControllerBase<TBLLContext, TMappingService> : ApiControllerBase<TBLLContext>
         where TBLLContext : class
-        where TEvaluatedData : EvaluatedData<TBLLContext>
 {
     /// <inheritdoc />
     [NonAction]
@@ -33,7 +32,7 @@ public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiContro
     /// Open DB Session and run action
     /// </summary>
     [NonAction]
-    public void Evaluate(DBSessionMode sessionMode, Action<TEvaluatedData> action)
+    public void Evaluate(DBSessionMode sessionMode, Action<EvaluatedData<TBLLContext, TMappingService>> action)
     {
         if (action == null)
         {
@@ -51,16 +50,16 @@ public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiContro
     /// Open DB Session and run Func
     /// </summary>
     [NonAction]
-    public TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<TEvaluatedData, TResult> getResult)
+    public TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<EvaluatedData<TBLLContext, TMappingService>, TResult> getResult)
     {
-        return this.HttpContext.RequestServices.GetRequiredService<IApiControllerBaseEvaluator<TEvaluatedData>>().Evaluate(sessionMode, getResult);
+        return this.HttpContext.RequestServices.GetRequiredService<IApiControllerBaseEvaluator<TBLLContext, TMappingService>>().Evaluate(sessionMode, getResult);
     }
 
     /// <summary>
     /// Open DB Session and run action for only Read operations
     /// </summary>
     [NonAction]
-    public void EvaluateRead(Action<TEvaluatedData> action)
+    public void EvaluateRead(Action<EvaluatedData<TBLLContext, TMappingService>> action)
     {
         if (action == null)
         {
@@ -74,7 +73,7 @@ public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiContro
     /// Open DB Session and run action for only Read operations
     /// </summary>
     [NonAction]
-    public TResult EvaluateRead<TResult>(Func<TEvaluatedData, TResult> getResult)
+    public TResult EvaluateRead<TResult>(Func<EvaluatedData<TBLLContext, TMappingService>, TResult> getResult)
     {
         if (getResult == null)
         {
@@ -88,7 +87,7 @@ public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiContro
     /// Open DB Session and run action for only Read/Write operations
     /// </summary>
     [NonAction]
-    public void EvaluateWrite(Action<TEvaluatedData> action)
+    public void EvaluateWrite(Action<EvaluatedData<TBLLContext, TMappingService>> action)
     {
         if (action == null)
         {
@@ -102,7 +101,7 @@ public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiContro
     /// Open DB Session and run action for only Read/Write operations
     /// </summary>
     [NonAction]
-    public TResult EvaluateWrite<TResult>(Func<TEvaluatedData, TResult> getResult)
+    public TResult EvaluateWrite<TResult>(Func<EvaluatedData<TBLLContext, TMappingService>, TResult> getResult)
     {
         if (getResult == null)
         {

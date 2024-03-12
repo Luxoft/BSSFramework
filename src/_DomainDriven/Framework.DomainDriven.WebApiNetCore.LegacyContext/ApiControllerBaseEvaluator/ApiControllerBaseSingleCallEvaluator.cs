@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Framework.DomainDriven.ServiceModel.Service;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
-public class ApiControllerBaseSingleCallEvaluator<TEvaluatedData> : IApiControllerBaseEvaluator<TEvaluatedData>
+public class ApiControllerBaseSingleCallEvaluator<TBLLContext, TMappingService> : IApiControllerBaseEvaluator<TBLLContext, TMappingService>
 {
     private readonly IServiceProvider serviceProvider;
 
@@ -13,7 +14,7 @@ public class ApiControllerBaseSingleCallEvaluator<TEvaluatedData> : IApiControll
         this.serviceProvider = serviceProvider;
     }
 
-    public TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<TEvaluatedData, TResult> getResult)
+    public TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<EvaluatedData<TBLLContext, TMappingService>, TResult> getResult)
     {
         if (this.evaluateInvoked)
         {
@@ -27,7 +28,7 @@ public class ApiControllerBaseSingleCallEvaluator<TEvaluatedData> : IApiControll
             this.serviceProvider.GetRequiredService<IDBSession>().AsReadOnly();
         }
 
-        return getResult(this.serviceProvider.GetRequiredService<TEvaluatedData>());
+        return getResult(this.serviceProvider.GetRequiredService<EvaluatedData<TBLLContext, TMappingService>>());
     }
 }
 

@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel;
 
-public class ContextEvaluator<TBLLContext, TDTOMappingService> : IContextEvaluator<TBLLContext, TDTOMappingService>
+public class ContextEvaluator<TBLLContext, TMappingService> : IContextEvaluator<TBLLContext, TMappingService>
     where TBLLContext : IServiceProviderContainer
 {
     private readonly IServiceEvaluator<TBLLContext> baseContextEvaluator;
@@ -18,14 +18,14 @@ public class ContextEvaluator<TBLLContext, TDTOMappingService> : IContextEvaluat
     public async Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
         string customPrincipalName,
-        Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task<TResult>> getResult)
+        Func<EvaluatedData<TBLLContext, TMappingService>, Task<TResult>> getResult)
     {
         return await this.baseContextEvaluator.EvaluateAsync(
             sessionMode,
             customPrincipalName,
             context => getResult(
-                new EvaluatedData<TBLLContext, TDTOMappingService>(
+                new EvaluatedData<TBLLContext, TMappingService>(
                     context,
-                    context.ServiceProvider.GetRequiredService<TDTOMappingService>())));
+                    context.ServiceProvider.GetRequiredService<TMappingService>())));
     }
 }

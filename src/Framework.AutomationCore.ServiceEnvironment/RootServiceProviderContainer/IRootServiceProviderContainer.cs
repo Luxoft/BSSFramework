@@ -22,13 +22,13 @@ public interface IRootServiceProviderContainer<out TBLLContext> : IRootServicePr
     }
 }
 
-public interface IRootServiceProviderContainer<TBLLContext, TDTOMappingService> : IRootServiceProviderContainer<TBLLContext>, IContextEvaluator<TBLLContext, TDTOMappingService>
+public interface IRootServiceProviderContainer<TBLLContext, TMappingService> : IRootServiceProviderContainer<TBLLContext>, IContextEvaluator<TBLLContext, TMappingService>
 {
-    async Task<TResult> IContextEvaluator<TBLLContext, TDTOMappingService>.EvaluateAsync<TResult>(
+    async Task<TResult> IContextEvaluator<TBLLContext, TMappingService>.EvaluateAsync<TResult>(
             DBSessionMode sessionMode,
             string customPrincipalName,
-            Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task<TResult>> getResult)
+            Func<EvaluatedData<TBLLContext, TMappingService>, Task<TResult>> getResult)
     {
-        return await this.RootServiceProvider.GetRequiredService<IContextEvaluator<TBLLContext, TDTOMappingService>>().EvaluateAsync(sessionMode, customPrincipalName, getResult);
+        return await this.RootServiceProvider.GetRequiredService<IContextEvaluator<TBLLContext, TMappingService>>().EvaluateAsync(sessionMode, customPrincipalName, getResult);
     }
 }

@@ -31,7 +31,7 @@ public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
     /// </summary>
     /// <param name="domainType">Доменный тип</param>
     /// <param name="operation">Операция</param>
-    public DomainTypeEventOperation(DomainType domainType, EventOperation operation)
+    public DomainTypeEventOperation(DomainType domainType, Events.EventOperation operation)
             : this(domainType)
     {
         if (operation == null) throw new ArgumentNullException(nameof(operation));

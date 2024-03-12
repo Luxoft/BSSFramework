@@ -14,6 +14,6 @@ namespace Framework.Authorization.WebApi;
 [Route("AuthSLJsonFacade.svc")]
 [ApiExplorerSettings(IgnoreApi = true)]
 //[Authorize(nameof(AuthenticationSchemes.NTLM))]
-public abstract partial class AuthSLJsonController : ApiControllerBase<IAuthorizationBLLContext, EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>
+public abstract partial class AuthSLJsonController : ApiControllerBase<IAuthorizationBLLContext, IAuthorizationDTOMappingService>
 {
 }

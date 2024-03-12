@@ -17,6 +17,8 @@ using Framework.Persistent;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.Configuration.BLL;
 
 public partial class ConfigurationBLLContext
@@ -31,7 +33,7 @@ public partial class ConfigurationBLLContext
 
     public ConfigurationBLLContext(
             IServiceProvider serviceProvider,
-            IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
+            [FromKeyedServices("BLL")] IEventOperationSender operationSender,
             ITrackingService<PersistentDomainObjectBase> trackingService,
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
@@ -43,12 +45,12 @@ public partial class ConfigurationBLLContext
             IConfigurationBLLFactoryContainer logics,
             IAuthorizationBLLContext authorization,
             IEmployeeSource employeeSource,
-            IEventOperationSource eventOperationSource,
+            IDomainObjectEventMetadata eventOperationSource,
             INamedLockService namedLockService,
             IEnumerable<ITargetSystemService> targetSystemServices,
             IConfigurationBLLContextSettings settings,
             ICurrentRevisionService currentRevisionService)
-            : base(serviceProvider, operationSenders, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSender, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
         this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));
 
@@ -110,7 +112,7 @@ public partial class ConfigurationBLLContext
 
     public IEmployeeSource EmployeeSource { get; }
 
-    public IEventOperationSource EventOperationSource { get; }
+    public IDomainObjectEventMetadata EventOperationSource { get; }
 
     /// <inheritdoc />
     public long GetCurrentRevision()

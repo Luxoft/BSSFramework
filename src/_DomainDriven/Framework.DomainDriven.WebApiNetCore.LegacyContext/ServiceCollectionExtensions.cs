@@ -2,7 +2,6 @@
 using Framework.Authorization.Generated.DTO;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Generated.DTO;
-using Framework.DomainDriven.ServiceModel.Service;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,13 +12,12 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterContextEvaluators(this IServiceCollection services)
     {
         services
-            .AddScoped<IApiControllerBaseEvaluator<EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>,
-                ApiControllerBaseSingleCallEvaluator<
-                EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>>();
+            .AddScoped<IApiControllerBaseEvaluator<IAuthorizationBLLContext, IAuthorizationDTOMappingService>,
+                ApiControllerBaseSingleCallEvaluator<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>();
+
         services
-            .AddScoped<IApiControllerBaseEvaluator<EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>,
-                ApiControllerBaseSingleCallEvaluator<
-                EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>>();
+            .AddScoped<IApiControllerBaseEvaluator<IConfigurationBLLContext, IConfigurationDTOMappingService>,
+                ApiControllerBaseSingleCallEvaluator<IConfigurationBLLContext, IConfigurationDTOMappingService>>();
 
         return services;
     }

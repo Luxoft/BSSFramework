@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Events.Legacy</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+    <ProjectReference Include="..\Framework.Events\Framework.Events.csproj" />
+  </ItemGroup>
+
+</Project>

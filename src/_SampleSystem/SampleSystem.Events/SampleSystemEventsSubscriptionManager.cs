@@ -5,7 +5,7 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.Events;
 
-public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
+public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManager<PersistentDomainObjectBase>
 {
     private readonly ISampleSystemDTOMappingService mappingService;
 

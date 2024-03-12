@@ -26,11 +26,11 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : EventDTOMe
     public LocalDBEventMessageSender(
         IDomainEventDTOMapper<TPersistentDomainObjectBase> eventDtoMapper,
         IConfigurationBLLContext configurationContext,
-        LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase> settings)
+        LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase> settings = null)
     {
         this.eventDtoMapper = eventDtoMapper;
         this.configurationContext = configurationContext;
-        this.settings = settings;
+        this.settings = settings ?? new LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase>();
     }
 
     public override void Send<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
@@ -40,14 +40,14 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : EventDTOMe
 
         var serializedData = DataContractSerializerHelper.Serialize(dto);
         var dbEvent = new Framework.Configuration.Domain.DomainObjectEvent
-                      {
-                              SerializeData = serializedData,
-                              Size = serializedData.Length,
-                              SerializeType = dto.GetType().FullName,
-                              DomainObjectId = domainObjectEventArgs.DomainObject.Id,
-                              Revision = this.configurationContext.GetCurrentRevision(),
-                              QueueTag = this.settings.QueueTag
-                      };
+        {
+            SerializeData = serializedData,
+            Size = serializedData.Length,
+            SerializeType = dto.GetType().FullName,
+            DomainObjectId = domainObjectEventArgs.DomainObject.Id,
+            Revision = this.configurationContext.GetCurrentRevision(),
+            QueueTag = this.settings.QueueTag
+        };
 
         this.configurationContext.GetDomainType(domainObjectEventArgs.DomainObjectType, false).Maybe(domainType =>
         {

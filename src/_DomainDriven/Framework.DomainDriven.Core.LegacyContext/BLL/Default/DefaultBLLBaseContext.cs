@@ -1,5 +1,6 @@
 ﻿using Framework.Core.Serialization;
 using Framework.DomainDriven.Tracking;
+using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.Persistent;
@@ -22,10 +23,9 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
     /// Initializes a new instance of the <see cref="DefaultBLLBaseContext&lt;TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer&gt;" /> class.
     /// </summary>
     /// <param name="serviceProvider">DI interface.</param>
-    /// <param name="dalFactory">The dal factory.</param>
-    /// <param name="operationSenders">The operation senders.</param>
-    /// <param name="sourceListeners">The source listeners.</param>
-    /// <param name="objectStateService">The object state service.</param>
+    /// <param name="operationSender">The operation senders.</param>
+    /// <param name="operationSender">The source listeners.</param>
+    /// <param name="trackingService">The object state service.</param>
     /// <param name="standardExpressionBuilder">The standart expression builder.</param>
     /// <param name="validator">The validator.</param>
     /// <param name="hierarchicalObjectExpanderFactory">The hierarchical object expander factory.</param>
@@ -34,7 +34,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
     /// or
     /// operationListeners
     /// or
-    /// sourceListeners
+    /// operationSender
     /// or
     /// objectStateService
     /// or
@@ -47,7 +47,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
     /// timeProvider</exception>
     protected DefaultBLLBaseContext(
             IServiceProvider serviceProvider,
-            IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
+            IEventOperationSender operationSender,
             ITrackingService<TPersistentDomainObjectBase> trackingService,
             IStandartExpressionBuilder standardExpressionBuilder,
             IValidator validator,
@@ -55,7 +55,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
             IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
     {
         this.ServiceProvider = serviceProvider;
-        this.OperationSenders = operationSenders ?? throw new ArgumentNullException(nameof(operationSenders));
+        this.OperationSender = operationSender;
         this.TrackingService = trackingService;
 
         this.StandartExpressionBuilder = standardExpressionBuilder ?? throw new ArgumentNullException(nameof(standardExpressionBuilder));
@@ -75,7 +75,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
 
     public ITrackingService<TPersistentDomainObjectBase> TrackingService { get; }
 
-    public IOperationEventSenderContainer<TPersistentDomainObjectBase> OperationSenders { get; }
+    public IEventOperationSender OperationSender { get; }
 
     public IStandartExpressionBuilder StandartExpressionBuilder { get; }
 
@@ -108,13 +108,13 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent,
     /// <inheritdoc />
     protected DefaultBLLBaseContext(
             IServiceProvider serviceProvider,
-            IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
+            IEventOperationSender operationSender,
             ITrackingService<TPersistentDomainObjectBase> trackingService,
             IStandartExpressionBuilder standardExpressionBuilder,
             IValidator validator,
             IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
             IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, operationSenders, trackingService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSender, trackingService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
     }
 

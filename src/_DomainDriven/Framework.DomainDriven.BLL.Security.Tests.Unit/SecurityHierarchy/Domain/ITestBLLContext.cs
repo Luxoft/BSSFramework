@@ -13,7 +13,7 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 using System;
 
-public interface ITestBLLContext : IBLLBaseContext<PersistentDomainObjectBase, Guid>, ITrackingServiceContainer<PersistentDomainObjectBase>
+public interface ITestBLLContext : IBLLBaseContext, ITrackingServiceContainer<PersistentDomainObjectBase>
 {
 
 }

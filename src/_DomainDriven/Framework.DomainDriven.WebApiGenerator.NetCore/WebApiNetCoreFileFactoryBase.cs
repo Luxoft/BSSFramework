@@ -31,29 +31,15 @@ public class WebApiNetCoreFileFactoryBase<TConfiguration> : FileFactory<TConfigu
 
     protected sealed override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-
-        var evaluateDataTypeReference = this.GetEvaluateDataTypeReference();
-
         var result = new CodeTypeReference(typeof(ApiControllerBase<,>))
                      {
                              TypeArguments =
                              {
                                      this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference,
-                                     evaluateDataTypeReference
+                                     this.Configuration.Environment.ServerDTO.DTOMappingServiceInterfaceTypeReference
                              }
                      };
 
         yield return result;
     }
-
-    private CodeTypeReference GetEvaluateDataTypeReference() => new CodeTypeReference(typeof(EvaluatedData<,>))
-                                                                {
-                                                                        TypeArguments =
-                                                                        {
-                                                                                this.Configuration.Environment.BLLCore
-                                                                                    .BLLContextInterfaceTypeReference,
-                                                                                this.Configuration.Environment.ServerDTO
-                                                                                    .DTOMappingServiceInterfaceTypeReference
-                                                                        }
-                                                                };
 }

@@ -46,6 +46,8 @@ public static class ServiceCollectionExtensions
         services.RegisterHierarchicalObjectExpander();
         services.RegistryGenericDatabaseVisitors();
 
+        services.AddScoped<IEventOperationSender, EventOperationSender>();
+
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
         return services;

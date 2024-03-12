@@ -33,7 +33,8 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : IEventDTOM
         this.settings = settings ?? new LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase>();
     }
 
-    public void Send(IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs)
+    private void InternalSend<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
+        where TDomainObject : class, TPersistentDomainObjectBase
     {
         var dto = domainObjectEventArgs.CustomSendObject
                   ?? this.eventDtoMapper.Convert(domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation);
@@ -55,5 +56,16 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : IEventDTOM
         });
 
         this.configurationContext.Logics.Default.Create<Framework.Configuration.Domain.DomainObjectEvent>().Save(dbEvent);
+    }
+
+    void IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>.Send(
+        IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs)
+    {
+        if (domainObjectEventArgs == null) throw new ArgumentNullException(nameof(domainObjectEventArgs));
+
+        var func = new Action<IDomainOperationSerializeData<TPersistentDomainObjectBase>>(this.InternalSend).CreateGenericMethod(
+            domainObjectEventArgs.DomainObjectType);
+
+        func.Invoke(this, [domainObjectEventArgs]);
     }
 }

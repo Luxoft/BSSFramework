@@ -12,6 +12,7 @@ using SampleSystem.BLL;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
 using SampleSystem.Domain;
+using SampleSystem.Events;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -31,6 +32,8 @@ public static class SampleSystemApplicationExtensions
 
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
     {
+        services.AddScoped<SampleSystemAribaLocalDBEventMessageSender>();
+
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
 
         services.ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();

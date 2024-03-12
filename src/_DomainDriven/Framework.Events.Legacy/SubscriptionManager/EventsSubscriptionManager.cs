@@ -99,9 +99,12 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
 
     void IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
     {
-        new Action<TPersistentDomainObjectBase, EventOperation>(this.Receive)
-            .CreateGenericMethod(typeof(TDomainObject))
-            .Invoke(this, [domainObject, domainObjectEvent]);
+        if (domainObject is TPersistentDomainObjectBase)
+        {
+            new Action<TPersistentDomainObjectBase, EventOperation>(this.Receive)
+                .CreateGenericMethod(typeof(TDomainObject))
+                .Invoke(this, [domainObject, domainObjectEvent]);
+        }
     }
 
     private class Listener<TDomainObject>

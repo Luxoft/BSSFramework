@@ -683,10 +683,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetGenericNamedLockValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.LogMessage)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetLogMessageValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.QueueProcessingState)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetQueueProcessingStateValidationMap()));
@@ -727,69 +723,6 @@ namespace Framework.Configuration.BLL
             {
                 return Framework.Validation.ValidationMapExtensions.GetClassMap<TSource>(this._defaultValidatorMap);
             }
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_ActionValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(512);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, System.DateTime?>> GetLogMessage_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.LogMessage>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_InputMessageValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, System.DateTime?>> GetLogMessage_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.LogMessage>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_OutputMessageValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, Framework.Core.Period>> GetLogMessage_PeriodValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<Framework.Configuration.Domain.LogMessage>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_UserNameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(512);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.LogMessage>> GetLogMessageProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.LogMessage> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.Action, currentClass, this.GetLogMessage_ActionValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, System.DateTime?>(source => source.CreateDate, currentClass, this.GetLogMessage_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.CreatedBy, currentClass, this.GetLogMessage_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.InputMessage, currentClass, this.GetLogMessage_InputMessageValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.ModifiedBy, currentClass, this.GetLogMessage_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetLogMessage_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.OutputMessage, currentClass, this.GetLogMessage_OutputMessageValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, Framework.Core.Period>(source => source.Period, currentClass, this.GetLogMessage_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.UserName, currentClass, this.GetLogMessage_UserNameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.LogMessage> GetLogMessageValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.LogMessage>(this.GetLogMessageProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.QueueProcessingState, System.DateTime?>> GetQueueProcessingState_LastProcessedItemDateTimeValidators()

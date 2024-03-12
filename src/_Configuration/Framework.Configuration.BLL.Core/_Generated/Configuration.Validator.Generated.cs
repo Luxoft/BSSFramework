@@ -32,7 +32,6 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessage>(this.GetExceptionMessageValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(this.GetExceptionMessageRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.GenericNamedLock>(this.GetGenericNamedLockValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.LogMessage>(this.GetLogMessageValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.QueueProcessingState>(this.GetQueueProcessingStateValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.SentMessage>(this.GetSentMessageValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Sequence>(this.GetSequenceValidationResult);
@@ -115,11 +114,6 @@ namespace Framework.Configuration.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetGenericNamedLockValidationResult(Framework.Configuration.Domain.GenericNamedLock source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetLogMessageValidationResult(Framework.Configuration.Domain.LogMessage source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

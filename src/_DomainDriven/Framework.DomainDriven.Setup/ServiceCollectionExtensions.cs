@@ -6,6 +6,7 @@ using Framework.Configuration.Domain;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
+using Framework.Events;
 using Framework.SecuritySystem.Bss;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -42,7 +43,7 @@ public static class ServiceCollectionExtensions
         }
 
         services.AddScoped(typeof(INotificationPrincipalExtractor), settings.NotificationPrincipalExtractorType);
-        services.AddScoped(typeof(IDomainObjectChangeModel<>), settings.DomainObjectEventMetadataType);
+        services.AddScoped(typeof(IDomainObjectEventMetadata), settings.DomainObjectEventMetadataType);
 
         settings.RegisterActions.ForEach(a => a(services));
 

@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.SecuritySystem.Bss\Framework.SecuritySystem.Bss.csproj" />
+    <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
   </ItemGroup>
 

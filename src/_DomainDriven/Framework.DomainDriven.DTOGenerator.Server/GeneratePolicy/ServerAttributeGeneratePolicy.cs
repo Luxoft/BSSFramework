@@ -21,7 +21,7 @@ public class ServerAttributeGeneratePolicy : AttributeGeneratePolicy
         {
             var operation = (fileType as DomainOperationEventDTOFileType).EventOperation;
 
-            return this.configuration.EventOperationSource.GetEventOperations(domainType).Contains(operation);
+            return this.configuration.DomainObjectEventMetadata.GetEventOperations(domainType).Contains(operation);
         }
         else if (fileType == ServerFileType.RichEventDTO)
         {

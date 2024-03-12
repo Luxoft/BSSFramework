@@ -28,7 +28,7 @@ public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<
 
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> SimpleRefFullDetailDTOFileFactoryHeader { get; } = SampleSystemFileType.SimpleRefFullDetailDTO.ToHeader();
 
-    public override IDomainObjectEventMetadata EventOperationSource { get; } = new SampleSystemEventOperationSource();
+    public override IDomainObjectEventMetadata DomainObjectEventMetadata { get; } = new SampleSystemDomainObjectEventMetadata();
 
     protected override IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetMainTypesWithSecondarySecurityOperations()
     {

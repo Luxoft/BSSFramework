@@ -10,7 +10,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD;
 /// Класс для отправки доменных евентов в локальную бд
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : IEventDTOMessageSender<TPersistentDomainObjectBase>
+public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : EventDTOMessageSenderBase<TPersistentDomainObjectBase>
     where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
     private readonly IDomainEventDTOMapper<TPersistentDomainObjectBase> eventDtoMapper;
@@ -26,29 +26,28 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : IEventDTOM
     public LocalDBEventMessageSender(
         IDomainEventDTOMapper<TPersistentDomainObjectBase> eventDtoMapper,
         IConfigurationBLLContext configurationContext,
-        LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase> settings = null)
+        LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase> settings)
     {
         this.eventDtoMapper = eventDtoMapper;
         this.configurationContext = configurationContext;
-        this.settings = settings ?? new LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase>();
+        this.settings = settings;
     }
 
-    private void InternalSend<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
-        where TDomainObject : class, TPersistentDomainObjectBase
+    public override void Send<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs)
     {
         var dto = domainObjectEventArgs.CustomSendObject
                   ?? this.eventDtoMapper.Convert(domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation);
 
         var serializedData = DataContractSerializerHelper.Serialize(dto);
         var dbEvent = new Framework.Configuration.Domain.DomainObjectEvent
-                      {
-                              SerializeData = serializedData,
-                              Size = serializedData.Length,
-                              SerializeType = dto.GetType().FullName,
-                              DomainObjectId = domainObjectEventArgs.DomainObject.Id,
-                              Revision = this.configurationContext.GetCurrentRevision(),
-                              QueueTag = this.settings.QueueTag
-                      };
+        {
+            SerializeData = serializedData,
+            Size = serializedData.Length,
+            SerializeType = dto.GetType().FullName,
+            DomainObjectId = domainObjectEventArgs.DomainObject.Id,
+            Revision = this.configurationContext.GetCurrentRevision(),
+            QueueTag = this.settings.QueueTag
+        };
 
         this.configurationContext.GetDomainType(domainObjectEventArgs.DomainObjectType, false).Maybe(domainType =>
         {
@@ -56,16 +55,5 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : IEventDTOM
         });
 
         this.configurationContext.Logics.Default.Create<Framework.Configuration.Domain.DomainObjectEvent>().Save(dbEvent);
-    }
-
-    void IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>.Send(
-        IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs)
-    {
-        if (domainObjectEventArgs == null) throw new ArgumentNullException(nameof(domainObjectEventArgs));
-
-        var func = new Action<IDomainOperationSerializeData<TPersistentDomainObjectBase>>(this.InternalSend).CreateGenericMethod(
-            domainObjectEventArgs.DomainObjectType);
-
-        func.Invoke(this, [domainObjectEventArgs]);
     }
 }

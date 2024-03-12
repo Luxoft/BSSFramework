@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.Events;
+namespace Framework.Events.Legacy;
 
 public interface IEventDTOMessageSender<in TPersistentDomainObjectBase> : IMessageSender<
     IDomainOperationSerializeData<TPersistentDomainObjectBase>>

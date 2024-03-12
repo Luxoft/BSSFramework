@@ -26,7 +26,6 @@ public static class SampleSystemFrameworkDatabaseExtensions
 
         return services.AddDatabaseSettings(connectionString)
                        .AddLegacyDatabaseSettings()
-                       .RegistryGenericDatabaseVisitors()
                        .RegistryDatabaseVisitors()
                        .RegisterSpecificationEvaluator();
     }

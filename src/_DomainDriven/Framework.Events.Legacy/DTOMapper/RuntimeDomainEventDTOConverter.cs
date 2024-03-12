@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.Events.DTOMapper;
+namespace Framework.Events.Legacy;
 
 public class RuntimeDomainEventDTOConverter<TPersistentDomainObjectBase, TMappingService, TEventDTOBase>
 {

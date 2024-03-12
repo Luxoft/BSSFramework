@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DependencyInjection;
+using Framework.Events;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,10 +12,12 @@ public class ListenerSetupObject : IListenerSetupObject
 
     public IReadOnlyList<Action<IServiceCollection>> InitActions => this.initActions;
 
-    public IListenerSetupObject AddListener<TListener>(bool registerSelf = false)
+    public IListenerSetupObject Add<TListener>(bool registerSelf = false)
         where TListener : class, IDALListener
     {
         this.initActions.Add(services => this.AddListener<TListener>(services, registerSelf));
+
+        return this;
     }
 
     private void AddListener<TListener>(IServiceCollection services, bool registerSelf)
@@ -25,15 +28,18 @@ public class ListenerSetupObject : IListenerSetupObject
             services.AddScoped<TListener>();
         }
 
-        var manualEvent = typeof(TListener).GetInterfaceImplementationArgument(typeof(IManualEventDALListener<>))
-
         var result = new[]
-                     {
-                         typeof(IAfterTransactionCompletedDALListener),
-                         typeof(IBeforeTransactionCompletedDALListener),
-                         typeof(IFlushedDALListener),
-                     }
-            this.TryCastListener<TListener>(services, registerSelf);
+        {
+            typeof(IAfterTransactionCompletedDALListener),
+            typeof(IBeforeTransactionCompletedDALListener),
+            typeof(IFlushedDALListener),
+            typeof(IEventOperationReceiver)
+        }.ToArray(interfaceType => this.TryCastListener<TListener>(services, interfaceType, registerSelf));
+
+        if (!result.Any(v => v))
+        {
+            throw new Exception($"Invalid listener: {typeof(TListener)}");
+        }
     }
 
     private bool TryCastListener<TCurrentListener>(IServiceCollection services, Type targetListenerList, bool registerSelf)
@@ -41,17 +47,23 @@ public class ListenerSetupObject : IListenerSetupObject
     {
         if (registerSelf)
         {
-            if (typeof(TTargetListener).IsAssignableFrom(typeof(TCurrentListener)))
+            if (targetListenerList.IsAssignableFrom(typeof(TCurrentListener)))
             {
                 services.AddScoped(sp => (IBeforeTransactionCompletedDALListener)sp.GetRequiredService(typeof(TCurrentListener)));
+
+                return true;
             }
         }
         else
         {
-            if (typeof(TTargetListener).IsAssignableFrom(typeof(TCurrentListener)))
+            if (targetListenerList.IsAssignableFrom(typeof(TCurrentListener)))
             {
-                services.AddScoped(typeof(TTargetListener), typeof(TCurrentListener));
+                services.AddScoped(targetListenerList, typeof(TCurrentListener));
+
+                return true;
             }
         }
+
+        return false;
     }
 }

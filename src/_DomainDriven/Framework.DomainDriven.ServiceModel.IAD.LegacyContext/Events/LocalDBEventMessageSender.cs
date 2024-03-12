@@ -1,7 +1,6 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.Core;
-using Framework.Events;
-using Framework.Events.DTOMapper;
+using Framework.Events.Legacy;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;

@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Events;
+namespace Framework.Events.Legacy;
 
 /// <summary>
 /// Класс для описания правил подписок на доменные евенты

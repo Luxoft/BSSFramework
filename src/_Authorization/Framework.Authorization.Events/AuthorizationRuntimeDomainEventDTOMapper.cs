@@ -1,7 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Events;
-using Framework.Events.DTOMapper;
+using Framework.Events.Legacy;
 
 namespace Framework.Authorization.Events;
 

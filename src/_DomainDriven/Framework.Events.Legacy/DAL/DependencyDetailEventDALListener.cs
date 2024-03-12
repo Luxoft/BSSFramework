@@ -1,7 +1,7 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven;
 
-namespace Framework.Events;
+namespace Framework.Events.Legacy;
 
 /// <summary>
 /// Базовый класс для DAL-евентов

@@ -17,6 +17,7 @@ using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
+using Framework.Events;
 using Framework.FinancialYear;
 using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
@@ -55,7 +56,16 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterListeners(this IServiceCollection services, Action<IListenerSetupObject> setup)
     {
+        var setupObject = new ListenerSetupObject();
 
+        setup(setupObject);
+
+        foreach (var setupObjectInitAction in setupObject.InitActions)
+        {
+            setupObjectInitAction(services);
+        }
+
+        return services;
     }
 
     private static IServiceCollection RegisterRepository(this IServiceCollection services)

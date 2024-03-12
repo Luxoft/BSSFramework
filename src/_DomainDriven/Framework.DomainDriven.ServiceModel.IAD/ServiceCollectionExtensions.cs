@@ -17,6 +17,7 @@ using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
+using Framework.Events;
 using Framework.FinancialYear;
 using Framework.HierarchicalExpand;
 using Framework.QueryableSource;

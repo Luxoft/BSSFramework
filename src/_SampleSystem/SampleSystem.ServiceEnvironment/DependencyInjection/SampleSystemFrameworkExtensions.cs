@@ -5,6 +5,7 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
+using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events.Legacy;
@@ -66,7 +67,7 @@ public static class SampleSystemFrameworkExtensions
         return services;
     }
 
-    private static IServiceCollection  RegisterListeners(this IServiceCollection services)
+    private static IServiceCollection RegisterListeners(this IServiceCollection services)
     {
         services.RegisterListeners(
             s => s.Add<FaultDALListener>(true)
@@ -98,9 +99,6 @@ public static class SampleSystemFrameworkExtensions
         services
             .AddScoped<IDomainEventDTOMapper<PersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<PersistentDomainObjectBase,
                 ISampleSystemDTOMappingService, SampleSystem.Generated.DTO.EventDTOBase>>();
-
-        // For NamedLocks
-        services.AddSingleton(new NamedLockTypeInfo(typeof(SampleSystemNamedLock)));
 
         // For notification
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));

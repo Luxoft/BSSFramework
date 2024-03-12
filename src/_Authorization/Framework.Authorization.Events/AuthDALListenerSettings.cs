@@ -3,13 +3,8 @@ using Framework.Events;
 
 namespace Framework.Authorization.Events;
 
-public class DefaultAuthDALListener : DependencyDetailEventDALListener<PersistentDomainObjectBase>
+public static class AuthDALListenerSettings
 {
-    public DefaultAuthDALListener(IEventOperationSender eventOperationSender)
-        : base(eventOperationSender, DefaultSettings)
-    {
-    }
-
     public static readonly EventDALListenerSettings<PersistentDomainObjectBase> DefaultSettings =
         new()
         {
@@ -20,9 +15,9 @@ public class DefaultAuthDALListener : DependencyDetailEventDALListener<Persisten
                 TypeEvent.SaveAndRemove<BusinessRole>()
             ],
             Dependencies = new[]
-            {
-                TypeEventDependency.FromSaveAndRemove<PermissionFilterItem, Permission>(z => z.Permission),
-                TypeEventDependency.FromSaveAndRemove<Permission, Principal>(z => z.Principal)
-            }
+                           {
+                               TypeEventDependency.FromSaveAndRemove<PermissionFilterItem, Permission>(z => z.Permission),
+                               TypeEventDependency.FromSaveAndRemove<Permission, Principal>(z => z.Principal)
+                           }
         };
 }

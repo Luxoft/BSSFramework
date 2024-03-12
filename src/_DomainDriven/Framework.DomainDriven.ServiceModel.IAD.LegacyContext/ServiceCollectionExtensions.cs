@@ -30,16 +30,14 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyGenericServices(this IServiceCollection services)
     {
+        services.AddSingleton(AuthDALListenerSettings.DefaultSettings);
+
         services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
         services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
 
-        services.AddScoped(typeof(EvaluatedData<,>));
+        services.AddScoped<IEventOperationSender, EventOperationSender>();
 
-        services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("DAL");
-        services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("AuthBLL");
-        services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("ConfigBLL");
-        services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("MainBLL");
-        services.AddKeyedScoped<IEventOperationSender, EventOperationSender>("Force");
+        services.AddScoped(typeof(EvaluatedData<,>));
 
         services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
 
@@ -64,7 +62,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationRuntimeDomainEventDTOMapper>();
 
-        services.AddSingleton(typeof(LocalDBEventMessageSenderSettings<>));
         services.AddSingleton(new LocalDBEventMessageSenderSettings<Framework.Authorization.Domain.PersistentDomainObjectBase> { QueueTag = "authDALQuery" });
 
         services.AddScoped(typeof(IEventDTOMessageSender<>), typeof(LocalDBEventMessageSender<>));

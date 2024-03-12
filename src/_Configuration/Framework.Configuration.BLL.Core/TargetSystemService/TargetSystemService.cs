@@ -34,7 +34,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
             IConfigurationBLLContext context,
             TBLLContext targetSystemContext,
             TargetSystem targetSystem,
-            [FromKeyedServices("Force")] IEventOperationSender eventOperationSender,
+            IEventOperationSender eventOperationSender,
             SubscriptionMetadataStore subscriptionMetadataStore = null)
             : base(context, targetSystemContext, targetSystem, targetSystemContext.FromMaybe(() => new ArgumentNullException(nameof(targetSystemContext))).TypeResolver)
     {

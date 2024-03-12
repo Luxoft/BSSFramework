@@ -26,11 +26,11 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : IEventDTOM
     public LocalDBEventMessageSender(
         IDomainEventDTOMapper<TPersistentDomainObjectBase> eventDtoMapper,
         IConfigurationBLLContext configurationContext,
-        LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase> settings)
+        LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase> settings = null)
     {
         this.eventDtoMapper = eventDtoMapper;
         this.configurationContext = configurationContext;
-        this.settings = settings;
+        this.settings = settings ?? new LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase>();
     }
 
     public void Send(IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs)

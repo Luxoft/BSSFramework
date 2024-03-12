@@ -1,27 +1,25 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.Events;
 
 /// <summary>
 /// Базовый класс для DAL-евентов
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBeforeTransactionCompletedDALListener
+public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBeforeTransactionCompletedDALListener, IEventOperationReceiver
     where TPersistentDomainObjectBase : class
 {
-    private readonly IEventOperationSender eventOperationSender;
+    private readonly IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender;
 
     private readonly EventDALListenerSettings<TPersistentDomainObjectBase> settings;
 
     public DependencyDetailEventDALListener(
-        [FromKeyedServices("DAL")] IEventOperationSender eventOperationSender,
-        EventDALListenerSettings<TPersistentDomainObjectBase> settings)
+        IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender,
+        EventDALListenerSettings<TPersistentDomainObjectBase> settings = null)
     {
-        this.eventOperationSender = eventOperationSender;
-        this.settings = settings;
+        this.messageSender = messageSender;
+        this.settings = settings ?? new EventDALListenerSettings<TPersistentDomainObjectBase>();
     }
 
     /// <inheritdoc />
@@ -71,7 +69,14 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
             var domainObjectType = item.Item1.Type;
             var eventType = item.Item2;
 
-            this.eventOperationSender.Send(domainObject, domainObjectType, eventType);
+            var message = new DomainOperationSerializeData<TPersistentDomainObjectBase>
+                          {
+                              DomainObject = domainObject,
+                              Operation = eventType,
+                              CustomDomainObjectType = domainObjectType
+                          };
+
+            this.messageSender.Send(message);
         }
     }
     protected virtual IEnumerable<ValueTuple<IDALObject, EventOperation>> ProcessFinalAllFilteredOrderedValues(
@@ -119,5 +124,33 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
 
         // фильруем которые нужно обработать
         return allFilteredOrderedValues.Concat(allAbsentsTargetObjects.Select(z => ValueTuple.Create((IDALObject)(new DALObject(z.TargetObject, z.TargetObjectType, 1)), EventOperation.Save)));
+    }
+
+    void IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
+    {
+        this.Process(new DALChangesEventArgs(GetDALChanges(domainObject, domainObjectEvent)));
+    }
+
+    private static DALChanges GetDALChanges<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
+    {
+        switch (domainObjectEvent.Name)
+        {
+            case nameof(EventOperation.Save):
+
+                return new DALChanges(
+                    new IDALObject[0],
+                    new IDALObject[] { new DALObject(domainObject, typeof(TDomainObject), 0) },
+                    new IDALObject[0]);
+
+            case nameof(EventOperation.Remove):
+
+                return new DALChanges(
+                    new IDALObject[0],
+                    new IDALObject[0],
+                    new IDALObject[] { new DALObject(domainObject, typeof(TDomainObject), 0) });
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(domainObjectEvent));
+        }
     }
 }

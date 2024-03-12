@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Events.DAL</PackageId>
+    <PackageId>Luxoft.Framework.Events.Legacy</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -81,7 +81,10 @@ public static class SampleSystemFrameworkExtensions
         services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
-        services.AddScoped<IBeforeTransactionCompletedDALListener, DefaultAuthDALListener>();
+
+        services.AddScoped<IEventOperationReceiver, DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
+
+        services.AddScoped<IBeforeTransactionCompletedDALListener, DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
 
         services.AddScoped<IEventOperationReceiver, SampleSystemEventsSubscriptionManager>();
         services.AddScoped<IEventOperationReceiver, SampleSystemAribaEventsSubscriptionManager>();

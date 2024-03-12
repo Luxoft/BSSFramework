@@ -9,8 +9,6 @@ using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
 
@@ -20,7 +18,7 @@ public partial class SampleSystemBLLContext
 {
     public SampleSystemBLLContext(
             IServiceProvider serviceProvider,
-            [FromKeyedServices("MainBLL")] IEventOperationSender operationSender,
+            IEventOperationSender operationSender,
             ITrackingService<PersistentDomainObjectBase> trackingService,
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,

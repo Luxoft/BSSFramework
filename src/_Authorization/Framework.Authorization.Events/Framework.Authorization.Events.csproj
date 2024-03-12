@@ -9,8 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.Events.DAL\Framework.Events.DAL.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.Events.SubscriptionManager\Framework.Events.SubscriptionManager.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.Events.Legacy\Framework.Events.Legacy.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.Events\Framework.Events.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Generated.DTO\Framework.Authorization.Generated.DTO.csproj" />
   </ItemGroup>

@@ -54,6 +54,20 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
+    public static IServiceCollection RegisterListeners(this IServiceCollection services, Action<IListenerSetupObject> setup)
+    {
+        var setupObject = new ListenerSetupObject();
+
+        setup(setupObject);
+
+        foreach (var setupObjectInitAction in setupObject.InitActions)
+        {
+            setupObjectInitAction(services);
+        }
+
+        return services;
+    }
+
     private static IServiceCollection RegisterRepository(this IServiceCollection services)
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));

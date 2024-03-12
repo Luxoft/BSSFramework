@@ -1,10 +1,12 @@
-﻿using Framework.Persistent;
+﻿using Framework.Authorization.Notification;
+using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using Microsoft.Extensions.DependencyInjection;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.Events;
 
 namespace Framework.DomainDriven.Setup;
 
@@ -25,6 +27,10 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public List<Action<IServiceCollection>> RegisterActions { get; set; } = new();
 
     public List<IBssFrameworkExtension> Extensions = new();
+
+    public Type NotificationPrincipalExtractorType { get; private set; } = typeof(NotificationPrincipalExtractor);
+
+    public Type DomainObjectEventMetadataType { get; private set; } = typeof(DomainObjectEventMetadata);
 
 
     public IBssFrameworkSettings AddSecurityOperationType(Type securityOperationType)
@@ -80,6 +86,22 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public IBssFrameworkSettings AddExtensions(IBssFrameworkExtension extension)
     {
         this.Extensions.Add(extension);
+
+        return this;
+    }
+
+    public IBssFrameworkSettings SetNotificationPrincipalExtractor<T>()
+        where T : INotificationPrincipalExtractor
+    {
+        this.NotificationPrincipalExtractorType = typeof(T);
+
+        return this;
+    }
+
+    public IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
+        where T : IDomainObjectEventMetadata
+    {
+        this.DomainObjectEventMetadataType = typeof(T);
 
         return this;
     }

@@ -1,4 +1,6 @@
-﻿using Framework.Persistent;
+﻿using Framework.Authorization.Notification;
+using Framework.Events;
+using Framework.Persistent;
 
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
@@ -30,4 +32,10 @@ public interface IBssFrameworkSettings
         where TListener : class, IDALListener;
 
     IBssFrameworkSettings AddExtensions(IBssFrameworkExtension extension);
+
+    IBssFrameworkSettings SetNotificationPrincipalExtractor<T>()
+        where T : INotificationPrincipalExtractor;
+
+    IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
+        where T : IDomainObjectEventMetadata;
 }

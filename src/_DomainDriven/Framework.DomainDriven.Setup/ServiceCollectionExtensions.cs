@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization;
+using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Configuration;
 using Framework.Configuration.Domain;
@@ -39,6 +40,9 @@ public static class ServiceCollectionExtensions
         {
             services.AddSingleton(new NamedLockTypeInfo(namedLockType));
         }
+
+        services.AddScoped(typeof(INotificationPrincipalExtractor), settings.NotificationPrincipalExtractorType);
+        services.AddScoped(typeof(IDomainObjectChangeModel<>), settings.DomainObjectEventMetadataType);
 
         settings.RegisterActions.ForEach(a => a(services));
 

@@ -33,16 +33,9 @@ public static class SampleSystemApplicationExtensions
 
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
     {
-        services.AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>();
-
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
 
         services.ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
-
-        services.AddScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>();
-        //services.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>();
-
-        services.ReplaceSingleton<IDomainObjectEventMetadata, SampleSystemDomainObjectEventMetadata>();
 
         return services;
     }

@@ -33,8 +33,7 @@ public static class SampleSystemFrameworkExtensions
                        .RegisterContextEvaluators()
 
                        .RegisterMainBLLContext()
-                       .RegisterConfigurationTargetSystems()
-                       .RegisterContextEvaluator();
+                       .RegisterConfigurationTargetSystems();
     }
 
     private static IServiceCollection RegisterMainBLLContext(this IServiceCollection services)
@@ -79,15 +78,11 @@ public static class SampleSystemFrameworkExtensions
         return services;
     }
 
-    private static IServiceCollection RegisterContextEvaluator(this IServiceCollection services)
-    {
-        services.AddScoped<IApiControllerBaseEvaluator<ISampleSystemBLLContext, ISampleSystemDTOMappingService>, ApiControllerBaseSingleCallEvaluator<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>();
-
-        return services;
-    }
-
     private static IServiceCollection RegisterSupportServices(this IServiceCollection services)
     {
+        //Custom ariba sender
+        services.AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>();
+
         //For dto mapping
         services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
 

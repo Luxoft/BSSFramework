@@ -29,9 +29,10 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .AddDomainSecurityServices()
 
+                           .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
+
                            .AddListener<ExampleFaultDALListener>(true)
-                           .AddListener<ExamplePermissionWorkflowDALListener>()
-                           ;
+                           .AddListener<ExamplePermissionWorkflowDALListener>();
                    })
 
                .RegisterLegacyGeneralBssFramework()

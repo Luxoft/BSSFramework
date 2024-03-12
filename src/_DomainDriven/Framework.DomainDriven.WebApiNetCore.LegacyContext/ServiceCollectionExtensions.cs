@@ -1,23 +1,14 @@
-﻿using Framework.Authorization.BLL;
-using Framework.Authorization.Generated.DTO;
-using Framework.Configuration.BLL;
-using Framework.Configuration.Generated.DTO;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterContextEvaluators(this IServiceCollection services)
+    public static IServiceCollection RegisterContextEvaluators(this IServiceCollection services, bool useSingleCall = true)
     {
-        services
-            .AddScoped<IApiControllerBaseEvaluator<IAuthorizationBLLContext, IAuthorizationDTOMappingService>,
-                ApiControllerBaseSingleCallEvaluator<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>();
-
-        services
-            .AddScoped<IApiControllerBaseEvaluator<IConfigurationBLLContext, IConfigurationDTOMappingService>,
-                ApiControllerBaseSingleCallEvaluator<IConfigurationBLLContext, IConfigurationDTOMappingService>>();
+        services.AddScoped(
+            typeof(IApiControllerBaseEvaluator<,>),
+            useSingleCall ? typeof(ApiControllerBaseSingleCallEvaluator<,>) : typeof(ApiControllerNewScopeEvaluator<,>));
 
         return services;
     }

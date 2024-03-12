@@ -1,6 +1,8 @@
-﻿namespace Framework.DomainDriven.WebApiNetCore;
+﻿using Framework.DomainDriven.ServiceModel.Service;
 
-public interface IApiControllerBaseEvaluator<out TEvaluatedData>
+namespace Framework.DomainDriven.WebApiNetCore;
+
+public interface IApiControllerBaseEvaluator<TBLLContext, TMappingService>
 {
-    TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<TEvaluatedData, TResult> getResult);
+    TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<EvaluatedData<TBLLContext, TMappingService>, TResult> getResult);
 }

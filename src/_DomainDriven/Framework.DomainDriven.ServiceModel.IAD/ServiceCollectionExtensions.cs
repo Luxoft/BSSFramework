@@ -48,6 +48,8 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
+        services.AddScoped<IEventOperationSender, EventOperationSender>();
+
         return services;
     }
 

@@ -22,14 +22,14 @@ public class TargetSystemServiceFactory
     }
 
     public ITargetSystemService Create<TBLLContext, TPersistentDomainObjectBase>(string name)
-            where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>, IBLLOperationEventContext<TPersistentDomainObjectBase>
+            where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
             where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {
         return this.Create<TBLLContext, TPersistentDomainObjectBase>(tss => tss.Name == name);
     }
 
     public ITargetSystemService Create<TBLLContext, TPersistentDomainObjectBase>(Func<TargetSystem, bool> filter)
-            where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>, IBLLOperationEventContext<TPersistentDomainObjectBase>
+            where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
             where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {
         return LazyInterfaceImplementHelper<IPersistentTargetSystemService>.CreateProxy(() =>

@@ -8,10 +8,10 @@ public class DomainOperationEventDTOFileType : DTOFileType, IEquatable<DomainOpe
     public readonly EventOperation EventOperation;
 
 
-    public DomainOperationEventDTOFileType(EventOperation eventOperation)
+    public DomainOperationEventDTOFileType(EventOperation domainObjectEvent)
         : base("OperationEventDTO", DTORole.Event)
     {
-        this.EventOperation = eventOperation ?? throw new ArgumentNullException(nameof(eventOperation));
+        this.EventOperation = domainObjectEvent ?? throw new ArgumentNullException(nameof(domainObjectEvent));
     }
 
 

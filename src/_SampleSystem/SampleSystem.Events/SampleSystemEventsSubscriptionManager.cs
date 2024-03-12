@@ -1,11 +1,12 @@
 ﻿using Framework.Events;
+using Framework.Events.Legacy;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.Events;
 
-public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
+public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManager<PersistentDomainObjectBase>
 {
     private readonly ISampleSystemDTOMappingService mappingService;
 

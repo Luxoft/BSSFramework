@@ -7,7 +7,6 @@ using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.DependencyInjection;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.NHibernate;
@@ -17,10 +16,13 @@ using Framework.Projection;
 using Framework.QueryLanguage;
 using Framework.Security;
 using Framework.SecuritySystem;
+using Framework.Events.Legacy;
+using Framework.Events;
+using Framework.DomainDriven.ServiceModel.Service;
 
 using Microsoft.Extensions.DependencyInjection;
-using Framework.Events.DTOMapper;
-using Framework.Events;
+using Framework.Authorization.Generated.DTO;
+using Framework.Configuration.Generated.DTO;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -28,7 +30,14 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyGenericServices(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IOperationEventSenderContainer<>), typeof(OperationEventSenderContainer<>));
+        services.AddSingleton(AuthDALListenerSettings.DefaultSettings);
+
+        services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
+        services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
+
+        services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>("BLL");
+
+        services.AddScoped(typeof(EvaluatedData<,>));
 
         services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
 
@@ -53,7 +62,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationRuntimeDomainEventDTOMapper>();
 
-        services.AddSingleton(typeof(LocalDBEventMessageSenderSettings<>));
         services.AddSingleton(new LocalDBEventMessageSenderSettings<Framework.Authorization.Domain.PersistentDomainObjectBase> { QueueTag = "authDALQuery" });
 
         services.AddScoped(typeof(IEventDTOMessageSender<>), typeof(LocalDBEventMessageSender<>));

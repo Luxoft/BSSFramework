@@ -17,7 +17,7 @@ namespace Framework.DomainDriven.BLL;
 public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent> :
     OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject>,
     IBLLBase<TBLLContext, TDomainObject>
-    where TBLLContext : class, IBLLBaseContext<TPersistentDomainObjectBase, TIdent>, IBLLOperationEventContext<TPersistentDomainObjectBase>
+    where TBLLContext : class, IBLLBaseContext
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
 {

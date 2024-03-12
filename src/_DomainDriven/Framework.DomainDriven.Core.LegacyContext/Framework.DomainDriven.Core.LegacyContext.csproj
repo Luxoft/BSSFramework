@@ -22,7 +22,7 @@
     <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Tracking\Framework.DomainDriven.Tracking.csproj" />
-    <ProjectReference Include="..\Framework.Events.Abstract\Framework.Events.Abstract.csproj" />
+    <ProjectReference Include="..\Framework.Events\Framework.Events.csproj" />
   </ItemGroup>
 
 </Project>

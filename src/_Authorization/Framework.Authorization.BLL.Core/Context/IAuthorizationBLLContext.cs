@@ -3,6 +3,7 @@ using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Core;
+using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;

@@ -13,6 +13,6 @@ namespace Framework.Configuration.WebApi;
 [ApiController]
 [Route("ConfigSLJsonFacade.svc")]
 [ApiExplorerSettings(IgnoreApi = true)]
-public abstract partial class ConfigSLJsonController : ApiControllerBase<IConfigurationBLLContext, EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>
+public abstract partial class ConfigSLJsonController : ApiControllerBase<IConfigurationBLLContext, IConfigurationDTOMappingService>
 {
 }

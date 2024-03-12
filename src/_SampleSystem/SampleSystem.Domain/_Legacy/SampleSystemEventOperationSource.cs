@@ -2,7 +2,7 @@
 
 namespace SampleSystem.Domain;
 
-public class SampleSystemEventOperationSource : EventOperationSource
+public class SampleSystemEventOperationSource : DomainObjectEventMetadata
 {
     public override IEnumerable<EventOperation> GetEventOperations(Type domainType)
     {

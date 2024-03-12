@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven.Tracking;
+using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryLanguage;
@@ -17,14 +18,14 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
 {
     protected SecurityBLLBaseContext(
             IServiceProvider serviceProvider,
-            IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
+            IEventOperationSender operationSender,
             ITrackingService<TPersistentDomainObjectBase> trackingService,
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IValidator validator,
             IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
             IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, operationSenders, trackingService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService) =>
+            : base(serviceProvider, operationSender, trackingService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService) =>
 
             this.AccessDeniedExceptionService = accessDeniedExceptionService ?? throw new ArgumentNullException(nameof(accessDeniedExceptionService));
 

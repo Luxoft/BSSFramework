@@ -1,18 +1,13 @@
 ﻿using Framework.Authorization.BLL;
-using Framework.Authorization.Events;
-using Framework.Authorization.Generated.DTO;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.Events;
-using Framework.Events.DTOMapper;
+using Framework.Events.Legacy;
 using Framework.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +29,6 @@ public static class SampleSystemFrameworkExtensions
                        .RegisterSupportServices()
 
                        // Legacy
-
                        .RegisterLegacyGenericServices()
                        .RegisterContextEvaluators()
 
@@ -74,47 +68,40 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection  RegisterListeners(this IServiceCollection services)
     {
-        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener>();
-        services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
-        services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
+        services.RegisterListeners(
+            s => s.Add<FaultDALListener>(true)
+                  .Add<DenormalizeHierarchicalDALListener>()
+                  .Add<FixDomainObjectEventRevisionNumberDALListener>()
+                  .Add<PermissionWorkflowDALListener>()
+                  .Add<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>());
 
-        services.AddScoped<FaultDALListener>();
-        services.AddScopedFrom<IBeforeTransactionCompletedDALListener, FaultDALListener>();
-
-        services.AddScoped<DefaultAuthDALListener>();
-
-        services.AddScopedFrom<IBeforeTransactionCompletedDALListener, DefaultAuthDALListener>();
-        services.AddScopedFrom<IManualEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>, DefaultAuthDALListener>();
-
-        services.AddScoped<EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>();
-        services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
-
-        services.AddScoped<EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>();
-        services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
-
-        services.AddScoped<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>();
-        services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
-
-
-        services.AddScoped<IDomainEventDTOMapper<PersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<PersistentDomainObjectBase, ISampleSystemDTOMappingService, SampleSystem.Generated.DTO.EventDTOBase>>();
-
-        services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemEventsSubscriptionManager>();
-
-        services.AddScoped<SampleSystemAribaLocalDBEventMessageSender>();
-        services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemAribaEventsSubscriptionManager>();
+        services.RegisterSubscriptionManagers(
+            s => s.Add<SampleSystemEventsSubscriptionManager>()
+                  .Add<SampleSystemAribaEventsSubscriptionManager>());
 
         return services;
     }
 
     private static IServiceCollection RegisterContextEvaluator(this IServiceCollection services)
     {
-        services.AddScoped<IApiControllerBaseEvaluator<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>, ApiControllerBaseSingleCallEvaluator<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>>();
+        services.AddScoped<IApiControllerBaseEvaluator<ISampleSystemBLLContext, ISampleSystemDTOMappingService>, ApiControllerBaseSingleCallEvaluator<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>();
 
         return services;
     }
 
     private static IServiceCollection RegisterSupportServices(this IServiceCollection services)
     {
+        //For dto mapping
+        services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
+
+        //For mapping domain objects to dto events
+        services
+            .AddScoped<IDomainEventDTOMapper<PersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<PersistentDomainObjectBase,
+                ISampleSystemDTOMappingService, SampleSystem.Generated.DTO.EventDTOBase>>();
+
+        // For NamedLocks
+        services.AddSingleton(new NamedLockTypeInfo(typeof(SampleSystemNamedLock)));
+
         // For notification
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
         services.AddScoped<IEmployeeSource, EmployeeSource<Employee>>();

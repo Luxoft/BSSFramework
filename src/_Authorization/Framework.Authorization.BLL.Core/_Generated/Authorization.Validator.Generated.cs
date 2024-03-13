@@ -37,8 +37,6 @@ namespace Framework.Authorization.BLL
             base.RegisterHandler<Framework.Authorization.Domain.PrincipalCreateModel>(this.GetPrincipalCreateModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.PrincipalRootFilterModel>(this.GetPrincipalRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.SecurityEntity>(this.GetSecurityEntityValidationResult);
-            base.RegisterHandler<Framework.Authorization.Domain.Setting>(this.GetSettingValidationResult);
-            base.RegisterHandler<Framework.Authorization.Domain.Settings>(this.GetSettingsValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.SubBusinessRoleLink>(this.GetSubBusinessRoleLinkValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.UpdatePermissionDelegatesModel>(this.GetUpdatePermissionDelegatesModelValidationResult);
         }
@@ -139,16 +137,6 @@ namespace Framework.Authorization.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetSecurityEntityValidationResult(Framework.Authorization.Domain.SecurityEntity source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSettingsValidationResult(Framework.Authorization.Domain.Settings source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSettingValidationResult(Framework.Authorization.Domain.Setting source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

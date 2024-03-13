@@ -139,18 +139,6 @@
       <one-to-many class="Framework.Authorization.Domain.Permission" />
     </set>
   </class>
-  <class name="Framework.Authorization.Domain.Setting" table="Setting">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="Key" column="key" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Value" column="value" access="field.camelcase" />
-  </class>
   <class name="Framework.Authorization.Domain.SubBusinessRoleLink" table="SubBusinessRoleLink">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

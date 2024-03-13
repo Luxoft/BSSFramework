@@ -23,9 +23,6 @@ public partial class AuthorizationBLLContext
     private readonly IAuthorizationBLLFactoryContainer logics;
 
     private readonly Lazy<Principal> lazyCurrentPrincipal;
-
-    private readonly Lazy<Settings> lazySettings;
-
     private readonly IDictionaryCache<string, EntityType> entityTypeByNameCache;
 
     private readonly IDictionaryCache<Guid, EntityType> entityTypeByIdCache;
@@ -76,8 +73,6 @@ public partial class AuthorizationBLLContext
 
         this.lazyCurrentPrincipal = LazyHelper.Create(() => this.Logics.Principal.GetCurrent());
 
-        this.lazySettings = LazyHelper.Create(() => this.Logics.Default.Create<Setting>().GetFullList().ToSettings());
-
         this.entityTypeByNameCache = new DictionaryCache<string, EntityType>(
                                                                              domainTypeName => this.Logics.EntityType.GetByName(domainTypeName, true),
                                                                              StringComparer.CurrentCultureIgnoreCase)
@@ -107,8 +102,6 @@ public partial class AuthorizationBLLContext
     public ISecurityOperationParser<Guid> SecurityOperationParser { get; }
 
     public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
-
-    public Settings Settings => this.lazySettings.Value;
 
     public override IAuthorizationBLLFactoryContainer Logics => this.logics;
 

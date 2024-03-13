@@ -360,14 +360,6 @@ namespace Framework.Authorization.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSecurityEntityValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.Setting)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSettingValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.Settings)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSettingsValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.SubBusinessRoleLink)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSubBusinessRoleLinkValidationMap()));
@@ -699,56 +691,6 @@ namespace Framework.Authorization.BLL
         protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SecurityEntity> GetSecurityEntityValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.SecurityEntity>(this.GetSecurityEntityProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Setting, System.DateTime?>> GetSetting_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Authorization.Domain.Setting>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Setting, string>> GetSetting_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.Setting>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Setting, string>> GetSetting_KeyValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.Setting>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Setting, string>> GetSetting_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.Setting>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Setting, System.DateTime?>> GetSetting_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Authorization.Domain.Setting>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Setting, string>> GetSetting_ValueValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.Setting>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.Setting>> GetSettingProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.Setting> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Setting, System.DateTime?>(source => source.CreateDate, currentClass, this.GetSetting_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Setting, string>(source => source.CreatedBy, currentClass, this.GetSetting_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Setting, string>(source => source.Key, currentClass, this.GetSetting_KeyValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Setting, string>(source => source.ModifiedBy, currentClass, this.GetSetting_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Setting, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetSetting_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Setting, string>(source => source.Value, currentClass, this.GetSetting_ValueValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.Settings> GetSettingsValidationMap()
-        {
-            return Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.Settings>.Empty;
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.Setting> GetSettingValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.Setting>(this.GetSettingProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, System.DateTime?>> GetSubBusinessRoleLink_CreateDateValidators()

@@ -1,9 +1,7 @@
 ﻿using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.BLL;
-using Framework.Authorization.Notification;
 using Framework.Cap;
 using Framework.DependencyInjection;
-using Framework.Events;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.BLL;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
-using SampleSystem.Domain;
-using SampleSystem.Events;
 
 namespace SampleSystem.ServiceEnvironment;
 

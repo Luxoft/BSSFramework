@@ -1,30 +1,33 @@
 ﻿using Framework.Configuration.BLL;
-using Framework.Core;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public class SubscriptionDALListener : IBeforeTransactionCompletedDALListener
 {
-    private readonly IPersistentTargetSystemService targetSystemService;
+    private readonly IConfigurationBLLContext configurationBllContext;
 
     private readonly IStandardSubscriptionService subscriptionService;
 
-    public SubscriptionDALListener(IPersistentTargetSystemService targetSystemService, IStandardSubscriptionService subscriptionService)
+    public SubscriptionDALListener(
+        IConfigurationBLLContext configurationBLLContext,
+        IStandardSubscriptionService subscriptionService)
     {
-        this.targetSystemService = targetSystemService ?? throw new ArgumentNullException(nameof(targetSystemService));
-        this.subscriptionService = subscriptionService ?? throw new ArgumentNullException(nameof(subscriptionService));
+        this.configurationBllContext = configurationBLLContext;
+        this.subscriptionService = subscriptionService;
     }
 
     public void Process(DALChangesEventArgs eventArgs)
     {
-        if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
-
-        if (!this.targetSystemService.TargetSystem.SubscriptionEnabled)
+        foreach (var targetSystemService in this.configurationBllContext.GetPersistentTargetSystemServices())
         {
-            return;
+            if (targetSystemService.TargetSystem.SubscriptionEnabled)
+            {
+                foreach (var info in targetSystemService.SubscriptionService.GetObjectModifications(eventArgs.Changes))
+                {
+                    this.subscriptionService.ProcessChanged(new ObjectModificationInfoDTO<Guid>(info));
+                }
+            }
         }
-
-        this.targetSystemService.SubscriptionService.GetObjectModifications(eventArgs.Changes).Foreach(info => this.subscriptionService.ProcessChanged(new ObjectModificationInfoDTO<Guid>(info)));
     }
 }

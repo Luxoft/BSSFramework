@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.Setup;
+﻿using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.DomainDriven.Setup;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                            .AddDomainSecurityServices()
 
                            .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
+
+                           .AddListener<SubscriptionDALListener>()
 
                            .AddListener<ExampleFaultDALListener>(true)
                            .AddListener<ExamplePermissionWorkflowDALListener>();

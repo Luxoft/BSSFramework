@@ -133,10 +133,11 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// <summary>
     /// Признак того, что даннная пермиссия была делегирована кому-либо
     /// </summary>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual bool IsDelegatedTo
     {
         get { return this.isDelegatedTo; }
-        internal protected set { this.isDelegatedTo = value; }
+        set { this.isDelegatedTo = value; }
     }
 
     /// <summary>

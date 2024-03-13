@@ -64,10 +64,11 @@ public class ManagementUnit :
     /// <summary>
     ///  Supposed to be set from dto only.
     /// </summary>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual ManagementUnit Parent
     {
         get { return this.parent; }
-        protected internal set { this.parent = value; }
+        set { this.parent = value; }
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client | DTORole.Report)]

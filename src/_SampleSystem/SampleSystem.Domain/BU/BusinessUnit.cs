@@ -85,10 +85,11 @@ public partial class BusinessUnit :
         protected internal set { this.needSendBusinessUnitHasNoLinkedProjectsWarning = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual BusinessUnitType BusinessUnitType
     {
         get { return this.businessUnitType; }
-        protected internal set { this.businessUnitType = value; }
+        set { this.businessUnitType = value; }
     }
 
     public virtual decimal Commission
@@ -174,10 +175,11 @@ public partial class BusinessUnit :
         set { this.leastProjectStartDate = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Period Period
     {
         get { return this.period; }
-        protected internal set { this.period = value; }
+        set { this.period = value; }
     }
 
     public virtual int Rank
@@ -385,10 +387,11 @@ public partial class BusinessUnit :
     /// Supposed to be set from dto only.
     /// </summary>
     [IsMaster]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual BusinessUnit Parent
     {
         get { return this.parent; }
-        protected internal set { this.parent = value; }
+        set { this.parent = value; }
     }
 
     BusinessUnit IUnit<BusinessUnit>.CurrentObject

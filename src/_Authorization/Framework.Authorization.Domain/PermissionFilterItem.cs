@@ -77,18 +77,20 @@ public partial class PermissionFilterItem : AuditPersistentDomainObjectBase, IDe
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Integration)]
     [FixedPropertyValidator]
     [Required]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual EntityType EntityType
     {
         get { return this.entityType; }
-        protected internal set { this.entityType = value; }
+        set { this.entityType = value; }
     }
 
     [FixedPropertyValidator]
     [Required]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Guid ContextEntityId
     {
         get { return this.contextEntityId; }
-        protected internal set { this.contextEntityId = value; }
+        set { this.contextEntityId = value; }
     }
 
     Permission IDetail<Permission>.Master => this.permission;

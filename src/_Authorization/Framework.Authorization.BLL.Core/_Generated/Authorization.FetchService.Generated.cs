@@ -102,10 +102,6 @@ namespace Framework.Authorization.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetPrincipalContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.Setting)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSettingContainer(rule)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.SubBusinessRoleLink)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSubBusinessRoleLinkContainer(rule)));
@@ -281,30 +277,6 @@ namespace Framework.Authorization.BLL
                     fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.FilterItems).SelectNested(permissionFilterItem => permissionFilterItem.EntityType),
                     fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectNested(permission => permission.Role),
                     fetchRootRule => fetchRootRule.SelectNested(principal => principal.RunAs));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.Setting> GetSettingContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.Setting>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.Setting>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.Setting>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.Setting>.Empty;
             }
             else
             {

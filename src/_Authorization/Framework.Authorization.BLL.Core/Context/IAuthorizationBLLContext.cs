@@ -40,9 +40,6 @@ public partial interface IAuthorizationBLLContext :
 
     Principal CurrentPrincipal { get; }
 
-    Settings Settings { get; }
-
-
     EntityType GetEntityType(Type type);
 
     EntityType GetEntityType(string domainTypeName);

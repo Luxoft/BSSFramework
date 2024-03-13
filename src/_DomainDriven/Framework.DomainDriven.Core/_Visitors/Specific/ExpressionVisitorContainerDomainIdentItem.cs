@@ -1,10 +1,12 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.DomainDriven.BLL;
+using Framework.Persistent;
 
 namespace Framework.DomainDriven;
 
 public class ExpressionVisitorContainerDomainIdentItem<TPersistentDomainObjectBase, TIdent> : IExpressionVisitorContainerItem
+    where TPersistentDomainObjectBase : IIdentityObject<TIdent>
 {
     private readonly IIdPropertyResolver idPropertyResolver;
 

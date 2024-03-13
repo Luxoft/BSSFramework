@@ -12,7 +12,6 @@ using nuSpec.Abstraction;
 using nuSpec.NHibernate;
 
 using SampleSystem.AuditDAL.NHibernate;
-using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DAL.NHibernate;
 
@@ -56,7 +55,7 @@ public static class SampleSystemFrameworkDatabaseExtensions
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
 
         // For reports
-        services.AddScoped<IExpressionVisitorContainerItem, ExpressionVisitorContainerODataItem<ISampleSystemBLLContext, PersistentDomainObjectBase, Guid>>();
+        services.AddScoped<IExpressionVisitorContainerItem, ExpressionVisitorContainerODataItem<PersistentDomainObjectBase, Guid>>();
 
         return services;
     }

@@ -6,18 +6,16 @@ using Framework.HierarchicalExpand;
 
 namespace Framework.DomainDriven.BLL;
 
-internal class OverrideExpandContainsVisitor<TBLLContext, TIdent> : ExpressionVisitor
-
-        where TBLLContext : class, IHierarchicalObjectExpanderFactoryContainer<TIdent>
+internal class OverrideExpandContainsVisitor<TIdent> : ExpressionVisitor
 {
-    private readonly TBLLContext context;
+    private readonly IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory;
 
     private readonly PropertyInfo idProperty;
 
 
-    public OverrideExpandContainsVisitor(TBLLContext context, PropertyInfo idProperty)
+    public OverrideExpandContainsVisitor(IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory, PropertyInfo idProperty)
     {
-        this.context = context ?? throw new ArgumentNullException(nameof(context));
+        this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.idProperty = idProperty;
     }
 
@@ -32,7 +30,7 @@ internal class OverrideExpandContainsVisitor<TBLLContext, TIdent> : ExpressionVi
 
             var expandType = node.Arguments[2].GetDeepMemberConstValue<HierarchicalExpandType>().GetValue();
 
-            var expandedIdents = this.context.HierarchicalObjectExpanderFactory.Create(source.Type).Expand(new[] { ident }, expandType);
+            var expandedIdents = this.hierarchicalObjectExpanderFactory.Create(source.Type).Expand(new[] { ident }, expandType);
 
             var enumerableContainsMethod = new Func<TIdent, bool>(expandedIdents.Contains).Method;
 

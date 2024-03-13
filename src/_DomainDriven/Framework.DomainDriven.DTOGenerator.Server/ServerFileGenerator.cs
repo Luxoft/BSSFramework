@@ -128,7 +128,7 @@ public class ServerFileGenerator<TConfiguration> : FileGenerator<TConfiguration>
                 yield return new DefaultRichIntegrationDTOFileFactory<TConfiguration>(this.Configuration, domainType);
                 yield return new DefaultSimpleIntegrationDTOFileFactory<TConfiguration>(this.Configuration, domainType);
 
-                foreach (var domainObjectEvent in this.Configuration.EventOperationSource.GetEventOperations(domainType))
+                foreach (var domainObjectEvent in this.Configuration.DomainObjectEventMetadata.GetEventOperations(domainType))
                 {
                     yield return new DefaultDomainOperationEventDTOFileFactory<TConfiguration>(this.Configuration, domainType, domainObjectEvent);
                 }

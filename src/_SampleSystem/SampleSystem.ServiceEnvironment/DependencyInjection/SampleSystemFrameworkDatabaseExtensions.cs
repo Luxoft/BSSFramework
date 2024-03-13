@@ -38,7 +38,6 @@ public static class SampleSystemFrameworkDatabaseExtensions
     public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString, bool includeTypedAudit = true)
     {
         return services.AddDatabaseSettings(setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
-                                                                .AddEventListener<SubscriptionDBSessionEventListener>()
 
                                                                 .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
                                                                 .AddMapping(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))

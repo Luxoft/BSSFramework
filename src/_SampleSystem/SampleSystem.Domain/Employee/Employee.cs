@@ -212,10 +212,11 @@ public partial class Employee :
     }
 
     [PropertyValidationMode(false)]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual string CellPhone
     {
         get { return this.cellPhone.TrimNull(); }
-        protected internal set { this.cellPhone = value.TrimNull(); }
+        set { this.cellPhone = value.TrimNull(); }
     }
 
     [MaxLength(40)]
@@ -226,10 +227,11 @@ public partial class Employee :
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
+    [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client)]
     public virtual string PersonalCellPhone
     {
         get { return this.personalCellPhone.TrimNull(); }
-        protected internal set { this.personalCellPhone = value.TrimNull(); }
+        set { this.personalCellPhone = value.TrimNull(); }
     }
 
     public virtual bool IsCandidate
@@ -261,10 +263,11 @@ public partial class Employee :
         set { this.nameRussian = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual DateTime? DismissDate
     {
         get { return this.dismissDate; }
-        protected internal set { this.dismissDate = value; }
+        set { this.dismissDate = value; }
     }
 
     public virtual DateTime? BirthDate
@@ -273,10 +276,11 @@ public partial class Employee :
         set { this.birthDate = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual DateTime? HireDate
     {
         get { return this.hireDate; }
-        protected internal set { this.hireDate = value; }
+        set { this.hireDate = value; }
     }
 
     ////public virtual WorkplaceOfficeAddress Address
@@ -298,10 +302,11 @@ public partial class Employee :
         get { return this.Location?.Code; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual BusinessUnit CoreBusinessUnit
     {
         get { return this.coreBusinessUnit; }
-        protected internal set { this.coreBusinessUnit = value; }
+        set { this.coreBusinessUnit = value; }
     }
 
     [ExpandPath("CoreBusinessUnit.Period")]
@@ -310,16 +315,18 @@ public partial class Employee :
         get { return this.CoreBusinessUnit?.Period; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual ManagementUnit ManagementUnit
     {
         get { return this.managementUnit; }
-        protected internal set { this.managementUnit = value; }
+        set { this.managementUnit = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual HRDepartment HRDepartment
     {
         get { return this.hRDepartment; }
-        protected internal set { this.hRDepartment = value; }
+        set { this.hRDepartment = value; }
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Event | DTORole.Integration)]

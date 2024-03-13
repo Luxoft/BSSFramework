@@ -76,7 +76,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
 
     public IPropertyAssignerConfigurator PropertyAssignerConfigurator { get; }
 
-    public virtual IDomainObjectEventMetadata EventOperationSource { get; } = new DomainObjectEventMetadata();
+    public virtual IDomainObjectEventMetadata DomainObjectEventMetadata { get; } = new DomainObjectEventMetadata();
 
     public sealed override Type CollectionType { get; } = typeof(List<>);
 
@@ -141,7 +141,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         {
             if (!domainType.IsProjection())
             {
-                foreach (var domainObjectEvent in this.EventOperationSource.GetEventOperations(domainType))
+                foreach (var domainObjectEvent in this.DomainObjectEventMetadata.GetEventOperations(domainType))
                 {
                     yield return this.GetTypeMap(domainType, new DomainOperationEventDTOFileType(domainObjectEvent));
                 }

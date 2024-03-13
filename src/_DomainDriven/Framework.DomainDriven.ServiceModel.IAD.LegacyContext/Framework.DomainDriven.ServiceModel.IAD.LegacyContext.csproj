@@ -22,7 +22,7 @@
 
     <ProjectReference Include="..\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
 
-    <ProjectReference Include="..\Framework.Events.Legacy\Framework.Events.Legacy.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Setup.Abstract\Framework.DomainDriven.Setup.Abstract.csproj" />
     <ProjectReference Include="..\Framework.Events\Framework.Events.csproj" />
   </ItemGroup>
 

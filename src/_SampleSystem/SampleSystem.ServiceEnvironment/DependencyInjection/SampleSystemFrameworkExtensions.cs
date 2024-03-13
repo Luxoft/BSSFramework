@@ -5,7 +5,6 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
-using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events.Legacy;
@@ -24,11 +23,9 @@ namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemFrameworkExtensions
 {
-    public static IServiceCollection RegisterGeneralBssFramework(this IServiceCollection services)
+    public static IServiceCollection RegisterLegacyGeneralBssFramework(this IServiceCollection services)
     {
-        return services.RegisterGenericServices()
-                       .RegisterWebApiGenericServices()
-                       .RegisterListeners()
+        return services.RegisterListeners()
                        .RegisterSupportServices()
 
                        // Legacy
@@ -36,8 +33,7 @@ public static class SampleSystemFrameworkExtensions
                        .RegisterContextEvaluators()
 
                        .RegisterMainBLLContext()
-                       .RegisterConfigurationTargetSystems()
-                       .RegisterContextEvaluator();
+                       .RegisterConfigurationTargetSystems();
     }
 
     private static IServiceCollection RegisterMainBLLContext(this IServiceCollection services)
@@ -72,28 +68,21 @@ public static class SampleSystemFrameworkExtensions
     private static IServiceCollection RegisterListeners(this IServiceCollection services)
     {
         services.RegisterListeners(
-            s => s.Add<FaultDALListener>(true)
-                  .Add<DenormalizeHierarchicalDALListener>()
-                  .Add<FixDomainObjectEventRevisionNumberDALListener>()
-                  .Add<PermissionWorkflowDALListener>()
+            s => s.Add<FixDomainObjectEventRevisionNumberDALListener>()
                   .Add<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>());
 
         services.RegisterSubscriptionManagers(
-            s => s.Add<SampleSystemEventsSubscriptionManager>()
-                  .Add<SampleSystemAribaEventsSubscriptionManager>());
-
-        return services;
-    }
-
-    private static IServiceCollection RegisterContextEvaluator(this IServiceCollection services)
-    {
-        services.AddScoped<IApiControllerBaseEvaluator<ISampleSystemBLLContext, ISampleSystemDTOMappingService>, ApiControllerBaseSingleCallEvaluator<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>();
+            s => s.Add<ExampleSampleSystemEventsSubscriptionManager>()
+                  .Add<ExampleSampleSystemAribaEventsSubscriptionManager>());
 
         return services;
     }
 
     private static IServiceCollection RegisterSupportServices(this IServiceCollection services)
     {
+        //Custom ariba sender
+        services.AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>();
+
         //For dto mapping
         services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
 
@@ -101,9 +90,6 @@ public static class SampleSystemFrameworkExtensions
         services
             .AddScoped<IDomainEventDTOMapper<PersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<PersistentDomainObjectBase,
                 ISampleSystemDTOMappingService, SampleSystem.Generated.DTO.EventDTOBase>>();
-
-        // For NamedLocks
-        services.AddSingleton(new NamedLockTypeInfo(typeof(SampleSystemNamedLock)));
 
         // For notification
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));

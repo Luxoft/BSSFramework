@@ -16,11 +16,11 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 [ApiController]
 public class FaultDALListenerController : ControllerBase
 {
-    private readonly FaultDALListener listener;
+    private readonly ExampleFaultDALListener listener;
 
     private readonly IRepository<NoSecurityObject> repository;
 
-    public FaultDALListenerController(FaultDALListener listener, IRepositoryFactory<NoSecurityObject> repositoryFactory)
+    public FaultDALListenerController(ExampleFaultDALListener listener, IRepositoryFactory<NoSecurityObject> repositoryFactory)
     {
         this.listener = listener;
         this.repository = repositoryFactory.Create(BLLSecurityMode.Disabled);

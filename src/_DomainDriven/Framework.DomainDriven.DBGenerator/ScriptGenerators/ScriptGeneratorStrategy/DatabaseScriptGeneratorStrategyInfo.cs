@@ -7,7 +7,7 @@ namespace Framework.DomainDriven.DBGenerator.ScriptGenerators.ScriptGeneratorStr
 /// <summary>
 /// Предоставляет доступ к параметрам, необходимым для генерации основной базы данных, и хранит списки добавленных и удаленных колонок
 /// </summary>
-internal struct DatabaseScriptGeneratorStrategyInfo
+public struct DatabaseScriptGeneratorStrategyInfo
 {
     public readonly IEnumerable<DomainTypeMetadata> DomainTypesLocal;
 

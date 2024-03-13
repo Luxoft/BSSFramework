@@ -7,8 +7,7 @@ namespace Framework.DomainDriven.WebApiNetCore;
 public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterWebApiGenericServices(this IServiceCollection services) =>
-        services.AddHttpContextAccessor()
-                .RegisterMiddlewareServices()
+        services.RegisterMiddlewareServices()
                 .RegisterUserAuthenticationServices()
                 .RegisterXsdExport();
 

@@ -1,9 +1,7 @@
 ﻿using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.BLL;
-using Framework.Authorization.Notification;
 using Framework.Cap;
 using Framework.DependencyInjection;
-using Framework.Events;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.BLL;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
-using SampleSystem.Domain;
-using SampleSystem.Events;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -22,7 +18,8 @@ public static class SampleSystemApplicationExtensions
             this IServiceCollection services,
             IConfiguration configuration)
     {
-        return services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
+        return services.AddHttpContextAccessor()
+                       .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
                        .RegisterSmtpNotification(configuration)
                        .RegisterWorkflowCore(configuration)
                        .RegisterApplicationServices()
@@ -32,16 +29,9 @@ public static class SampleSystemApplicationExtensions
 
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
     {
-        services.AddScoped<SampleSystemAribaLocalDBEventMessageSender>();
-
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
 
         services.ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
-
-        services.AddScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>();
-        //services.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>();
-
-        services.ReplaceSingleton<IDomainObjectEventMetadata, SampleSystemEventOperationSource>();
 
         return services;
     }

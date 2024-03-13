@@ -40,6 +40,7 @@ public static class ServiceProviderExtensions
     }
 
     public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services) =>
+
         services.AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()

@@ -21,10 +21,11 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IDefaultIde
     /// <summary>
     /// ID доменного объекта
     /// </summary>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Guid Id
     {
         get { return this.id; }
-        protected internal set { this.id = value; }
+        set { this.id = value; }
     }
 
     /// <summary>

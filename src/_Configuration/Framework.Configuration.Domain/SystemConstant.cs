@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
@@ -53,10 +54,11 @@ public class SystemConstant :
     /// Тип константы
     /// </summary>
     [Required]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual DomainType Type
     {
         get { return this.type; }
-        internal protected set { this.type = value; }
+        set { this.type = value; }
     }
 
     /// <summary>
@@ -65,10 +67,11 @@ public class SystemConstant :
     [UniqueElement]
     [VisualIdentity]
     [Required]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual string Code
     {
         get { return this.code.TrimNull(); }
-        internal protected set { this.code = value.TrimNull(); }
+        set { this.code = value.TrimNull(); }
     }
 
     /// <summary>
@@ -94,10 +97,11 @@ public class SystemConstant :
     /// <summary>
     /// Признак изменения константы вручную
     /// </summary>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual bool IsManual
     {
         get { return this.isManual; }
-        internal protected set { this.isManual = value; }
+        set { this.isManual = value; }
     }
 
     public override string ToString()

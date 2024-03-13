@@ -22,11 +22,6 @@ public static class ServiceCollectionExtensions
         setupAction?.Invoke(settings);
         settings.InitSettings();
 
-        if (settings.RegisterDenormalizeHierarchicalDALListener)
-        {
-            settings.AddListener<DenormalizeHierarchicalDALListener>();
-        }
-
         foreach (var securityOperationType in settings.SecurityOperationTypes)
         {
             services.AddSingleton(new SecurityOperationTypeInfo(securityOperationType));
@@ -68,6 +63,21 @@ public static class ServiceCollectionExtensions
         if (settings.RegisterBaseNamedLockTypes)
         {
             settings.NamedLockTypes.Add(typeof(ConfigurationNamedLock));
+        }
+
+        if (settings.RegisterDenormalizeHierarchicalDALListener)
+        {
+            settings.AddListener<DenormalizeHierarchicalDALListener>();
+        }
+
+        if (settings.NotificationPrincipalExtractorType == null)
+        {
+            settings.SetNotificationPrincipalExtractor<NotificationPrincipalExtractor>();
+        }
+
+        if (settings.DomainObjectEventMetadataType == null)
+        {
+            settings.SetDomainObjectEventMetadata<DomainObjectEventMetadata>();
         }
     }
 }

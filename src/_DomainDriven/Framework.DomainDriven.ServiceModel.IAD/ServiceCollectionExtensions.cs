@@ -48,7 +48,6 @@ public static class ServiceCollectionExtensions
         services.RegistryGenericDatabaseVisitors();
 
         services.AddSingleton<IInitializeManager, InitializeManager>();
-
         services.AddScoped<IEventOperationSender, EventOperationSender>();
 
         return services;

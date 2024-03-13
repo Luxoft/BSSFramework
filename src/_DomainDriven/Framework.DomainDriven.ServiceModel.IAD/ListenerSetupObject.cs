@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DependencyInjection;
 using Framework.Events;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -32,9 +31,10 @@ public class ListenerSetupObject : IListenerSetupObject
         {
             typeof(IAfterTransactionCompletedDALListener),
             typeof(IBeforeTransactionCompletedDALListener),
-            typeof(IFlushedDALListener),
-            typeof(IEventOperationReceiver)
+            typeof(IFlushedDALListener)
         }.ToArray(interfaceType => this.TryCastService<TListener>(services, interfaceType, registerSelf));
+
+        this.TryCastService<TListener>(services, typeof(IEventOperationReceiver), registerSelf);
 
         if (!result.Any(v => v))
         {

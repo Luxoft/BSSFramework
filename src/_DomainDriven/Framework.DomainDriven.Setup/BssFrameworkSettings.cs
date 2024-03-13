@@ -28,9 +28,9 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public List<IBssFrameworkExtension> Extensions = new();
 
-    public Type NotificationPrincipalExtractorType { get; private set; } = typeof(NotificationPrincipalExtractor);
+    public Type NotificationPrincipalExtractorType { get; private set; }
 
-    public Type DomainObjectEventMetadataType { get; private set; } = typeof(DomainObjectEventMetadata);
+    public Type DomainObjectEventMetadataType { get; private set; }
 
 
     public IBssFrameworkSettings AddSecurityOperationType(Type securityOperationType)

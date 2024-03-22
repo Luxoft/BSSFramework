@@ -51,7 +51,7 @@ public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitia
                 {
                     foreach (var removingItem in mergeResult.RemovingItems)
                     {
-                        this.logger.Verbose("Remove Role: {RemovingItemName} {RemovingItemId}", removingItem.Name, removingItem.Id);
+                        this.logger.Verbose("Remove EntityType: {RemovingItemName} {RemovingItemId}", removingItem.Name, removingItem.Id);
 
                         await this.entityTypeRepository.RemoveAsync(removingItem, cancellationToken);
                     }

@@ -149,7 +149,7 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
                 new SubBusinessRoleLink(businessRole).SubBusinessRole = mappingDict[child];
             }
 
-            foreach (var subBusinessRoleLink in mergeOperationResult.RemovingItems)
+            foreach (var subBusinessRoleLink in mergeSubRoleResult.RemovingItems)
             {
                 businessRole.RemoveDetail(subBusinessRoleLink);
             }

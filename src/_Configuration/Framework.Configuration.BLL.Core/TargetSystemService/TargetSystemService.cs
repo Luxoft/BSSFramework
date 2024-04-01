@@ -35,11 +35,12 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
             TBLLContext targetSystemContext,
             TargetSystem targetSystem,
             IEventOperationSender eventOperationSender,
-            SubscriptionMetadataStore subscriptionMetadataStore = null)
+            SubscriptionMetadataStore subscriptionMetadataStore)
             : base(context, targetSystemContext, targetSystem, targetSystemContext.FromMaybe(() => new ArgumentNullException(nameof(targetSystemContext))).TypeResolver)
     {
         this.eventOperationSender = eventOperationSender;
-        this.subscriptionService = this.GetSubscriptionService(subscriptionMetadataStore ?? new SubscriptionMetadataStore(new SubscriptionMetadataFinder()));
+
+        this.subscriptionService = this.GetSubscriptionService(subscriptionMetadataStore);
     }
 
 
@@ -85,16 +86,11 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
     private IRevisionSubscriptionSystemService GetSubscriptionService(
             SubscriptionMetadataStore subscriptionMetadataStore)
     {
-        if (subscriptionMetadataStore == null)
-        {
-            throw new InvalidOperationException("SubscriptionMetadataStore instance can not be null for use new subscription services.");
-        }
-
         var subscriptionServicesFactory = new SubscriptionServicesFactory<TBLLContext, TPersistentDomainObjectBase>(
-         this.Context,
-         this.TargetSystemContext.Logics.Default,
-         this.TargetSystemContext,
-         subscriptionMetadataStore);
+            this.Context,
+            this.TargetSystemContext.Logics.Default,
+            this.TargetSystemContext,
+            subscriptionMetadataStore);
 
         return new RevisionSubscriptionSystemService<TBLLContext, TPersistentDomainObjectBase>(subscriptionServicesFactory);
     }

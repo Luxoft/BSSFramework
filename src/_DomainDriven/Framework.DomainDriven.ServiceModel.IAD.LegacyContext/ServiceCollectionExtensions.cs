@@ -23,6 +23,7 @@ using Framework.DomainDriven.ServiceModel.Service;
 using Microsoft.Extensions.DependencyInjection;
 using Framework.Authorization.Generated.DTO;
 using Framework.Configuration.Generated.DTO;
+using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -30,6 +31,9 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyGenericServices(this IServiceCollection services)
     {
+        services.AddSingleton<SubscriptionMetadataStore>();
+        services.AddSingleton<ISubscriptionMetadataFinder, SubscriptionMetadataFinder>();
+
         services.AddSingleton(AuthDALListenerSettings.DefaultSettings);
 
         services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();

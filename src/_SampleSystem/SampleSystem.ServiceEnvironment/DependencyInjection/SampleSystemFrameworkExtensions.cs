@@ -16,6 +16,7 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
+using SampleSystem.Subscriptions.Metadata.Employee.Update;
 
 using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBase;
 
@@ -96,7 +97,7 @@ public static class SampleSystemFrameworkExtensions
         services.AddScoped<IEmployeeSource, EmployeeSource<Employee>>();
 
         // For subscription
-        services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));
+        services.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(typeof(EmployeeUpdateSubscription).Assembly));
 
         // Serilog
         services.AddSingleton(Serilog.Log.Logger);

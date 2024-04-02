@@ -13,7 +13,7 @@ public class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<T
         this.DatabaseName = new DatabaseName(this.Environment.TargetSystemName);
     }
 
-    public virtual IEscapeWordService EscapeWordService { get; } = new EscapeWordService();
+    public virtual IEscapeWordService EscapeWordService { get; } = new EmptyEscapeWordService();
 
     public virtual DatabaseName DatabaseName { get; }
 

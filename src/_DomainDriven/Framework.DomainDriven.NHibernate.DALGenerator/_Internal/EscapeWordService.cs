@@ -19,3 +19,8 @@ public class EscapeWordService : IEscapeWordService
         yield return "order";
     }
 }
+
+public class EmptyEscapeWordService : IEscapeWordService
+{
+    public bool IsEscapeWord(string word) => false;
+}

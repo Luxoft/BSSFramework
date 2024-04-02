@@ -7245,9 +7245,6 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.BusinessUnitOptions Options;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Order;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public Framework.Core.Period Period = Framework.Core.Period.Eternity;
         
         [System.Runtime.Serialization.DataMemberAttribute()]

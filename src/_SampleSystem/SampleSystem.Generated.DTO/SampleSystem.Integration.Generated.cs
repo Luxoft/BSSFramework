@@ -83,9 +83,6 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.BusinessUnitOptions Options;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Order;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public Framework.Core.Period Period;
         
         [System.Runtime.Serialization.DataMemberAttribute()]

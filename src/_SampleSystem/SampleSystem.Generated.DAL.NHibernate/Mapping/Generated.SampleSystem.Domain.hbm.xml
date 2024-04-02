@@ -91,7 +91,6 @@
     <property name="NeedSendBusinessUnitHasNoLinkedProjectsWarning" column="needSendBusinessUnitHasNoLinkedProjectsWarning" access="field.camelcase" />
     <property name="NewBusinessStatusLeft" column="newBusinessStatusLeft" access="field.camelcase" />
     <property name="Options" column="options" access="field.camelcase" />
-    <property name="Order" column="[order]" access="field.camelcase" />
     <property name="ProjectStartMailList" column="projectStartMailList" access="field.camelcase" />
     <property name="Rank" column="rank" access="field.camelcase" />
     <many-to-one name="BusinessUnitForRent" column="businessUnitForRentId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />

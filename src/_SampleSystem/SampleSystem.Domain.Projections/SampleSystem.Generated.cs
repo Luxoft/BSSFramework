@@ -412,8 +412,6 @@ namespace SampleSystem.Domain.Projections
         
         private string name;
         
-        private int order;
-        
         private SampleSystem.Domain.Projections.TestBusinessUnit_AutoProp_Parent parent_Auto;
         
         private System.DateTime? periodEndDate;
@@ -453,17 +451,6 @@ namespace SampleSystem.Domain.Projections
             get
             {
                 return this.name;
-            }
-        }
-        
-        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="order")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual int Order
-        {
-            get
-            {
-                return this.order;
             }
         }
         

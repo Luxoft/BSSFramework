@@ -63,6 +63,7 @@
       <generator class="guid.comb" />
     </id>
     <property name="Name" column="name" insert="false" update="false" access="field.camelcase" />
+    <property name="Order" column="[order]" insert="false" update="false" access="field.camelcase" />
     <property name="PeriodEndDate" column="periodEndDate" type="timestamp" insert="false" update="false" access="field.camelcase" />
     <many-to-one name="Her" column="Id" class="SampleSystem.Domain.Projections.HerBusinessUnit" access="field.camelcase" insert="false" update="false" />
     <many-to-one name="Parent_Auto" column="parentId" class="SampleSystem.Domain.Projections.TestBusinessUnit_AutoProp_Parent" access="field.camelcase" insert="false" update="false" />

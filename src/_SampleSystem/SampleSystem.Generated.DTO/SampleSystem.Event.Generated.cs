@@ -702,6 +702,9 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.BusinessUnitOptions Options;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Order;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Parent;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -826,6 +829,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Domain.BusinessUnitOptions Options;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Order;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public Framework.Core.Period Period;

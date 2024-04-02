@@ -36,6 +36,7 @@ public class SampleSystemProjectionSource : ProjectionSource
 
         this.TestBusinessUnit = new Projection<BusinessUnit>(() => this.TestBusinessUnit, true)
                                 .Property(bu => bu.Name)
+                                .Property(bu => bu.Order)
                                 .Property(bu => bu.Period.EndDate)
 
                                 .Property(bu => bu.Parent.Period.StartDate)

@@ -1453,6 +1453,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NeedSendBusinessUnitHasNoLinkedProjectsWarning = domainObject.NeedSendBusinessUnitHasNoLinkedProjectsWarning;
             mappingObject.NewBusinessStatusLeft = domainObject.NewBusinessStatusLeft;
             mappingObject.Options = domainObject.Options;
+            mappingObject.Order = domainObject.Order;
             mappingObject.Period = domainObject.Period;
             mappingObject.ProjectStartMailList = domainObject.ProjectStartMailList;
             mappingObject.Rank = domainObject.Rank;
@@ -1556,6 +1557,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NeedSendBusinessUnitHasNoLinkedProjectsWarning = domainObject.NeedSendBusinessUnitHasNoLinkedProjectsWarning;
             mappingObject.NewBusinessStatusLeft = domainObject.NewBusinessStatusLeft;
             mappingObject.Options = domainObject.Options;
+            mappingObject.Order = domainObject.Order;
             mappingObject.Period = domainObject.Period;
             mappingObject.ProjectStartMailList = domainObject.ProjectStartMailList;
             mappingObject.Rank = domainObject.Rank;
@@ -1661,6 +1663,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NeedSendBusinessUnitHasNoLinkedProjectsWarning = domainObject.NeedSendBusinessUnitHasNoLinkedProjectsWarning;
             mappingObject.NewBusinessStatusLeft = domainObject.NewBusinessStatusLeft;
             mappingObject.Options = domainObject.Options;
+            mappingObject.Order = domainObject.Order;
             if (!object.ReferenceEquals(domainObject.Parent, null))
             {
                 mappingObject.Parent = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Parent, this);
@@ -1716,6 +1719,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NeedSendBusinessUnitHasNoLinkedProjectsWarning = domainObject.NeedSendBusinessUnitHasNoLinkedProjectsWarning;
             mappingObject.NewBusinessStatusLeft = domainObject.NewBusinessStatusLeft;
             mappingObject.Options = domainObject.Options;
+            mappingObject.Order = domainObject.Order;
             mappingObject.Period = domainObject.Period;
             mappingObject.ProgramName = domainObject.ProgramName;
             mappingObject.ProjectStartMailList = domainObject.ProjectStartMailList;
@@ -6626,6 +6630,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Employees = domainObject.Employees;
             mappingObject.HerBusinessUnit_Full = domainObject.HerBusinessUnit_Full;
             mappingObject.Name = domainObject.Name;
+            mappingObject.Order = domainObject.Order;
             mappingObject.ParentPeriodStartDate = domainObject.ParentPeriodStartDate;
             mappingObject.PeriodEndDate = domainObject.PeriodEndDate;
         }

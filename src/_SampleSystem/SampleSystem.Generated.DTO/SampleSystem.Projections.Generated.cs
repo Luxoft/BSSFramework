@@ -254,6 +254,9 @@ namespace SampleSystem.Generated.DTO
         public string Name;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Order;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime? ParentPeriodStartDate;
         
         [System.Runtime.Serialization.DataMemberAttribute()]

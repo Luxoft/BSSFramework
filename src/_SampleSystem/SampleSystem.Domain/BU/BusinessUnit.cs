@@ -51,6 +51,8 @@ public partial class BusinessUnit :
 
     private int deepLevel;
 
+    private int order;
+
     public BusinessUnit()
     {
     }
@@ -71,6 +73,11 @@ public partial class BusinessUnit :
     {
         get { return this.deepLevel; }
         protected set { this.deepLevel = value; }
+    }
+    public virtual int Order
+    {
+        get { return this.order; }
+        protected set { this.order = value; }
     }
 
     public virtual DateTime? LastBusinessUnitHasNoLinkedProjectsWarningCheckDate

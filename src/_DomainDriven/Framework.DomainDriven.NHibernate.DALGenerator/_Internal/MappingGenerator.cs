@@ -24,13 +24,17 @@ public class MappingGenerator : IMappingGenerator
     private static readonly XNamespace RootNameNamespace = "urn:" + NHibernateNamespace;
 
     private readonly IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup;
+
+    private readonly IEscapeWordService escapeWordService;
+
     private readonly DatabaseName schema;
 
     private readonly bool useSmartUpdate;
 
-    public MappingGenerator(IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup, DatabaseName schema, bool useSmartUpdate)
+    public MappingGenerator(IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup, IEscapeWordService escapeWordService, DatabaseName schema, bool useSmartUpdate)
     {
         this.assemblyGroup = assemblyGroup ?? throw new ArgumentNullException(nameof(assemblyGroup));
+        this.escapeWordService = escapeWordService;
         this.schema = schema ?? throw new ArgumentNullException(nameof(schema));
         this.useSmartUpdate = useSmartUpdate;
     }
@@ -353,11 +357,17 @@ public class MappingGenerator : IMappingGenerator
         return result;
     }
 
+    protected virtual string GetColumnName(FieldMetadata fieldMetadata)
+    {
+        var columnName = fieldMetadata.ToColumnName();
+        return this.escapeWordService.IsEscapeWord(columnName) ? $"[{columnName}]" : columnName;
+    }
+
     protected virtual void GeneratePrimitivePropertyMapping(FieldMetadata fieldMetadata, XElement rootElement)
     {
         rootElement.CreatePropertyElementWithRootNamespace()
                    .WithLowNameAttribute(fieldMetadata.Name.ToPropertyName())
-                   .WithColumnAttribute(fieldMetadata.ToColumnName())
+                   .WithColumnAttribute(this.GetColumnName(fieldMetadata))
                    .WithTryUniqueAttribute(fieldMetadata)
                    .Pipe(el =>
                          {

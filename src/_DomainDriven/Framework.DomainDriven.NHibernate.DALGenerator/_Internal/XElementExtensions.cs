@@ -98,11 +98,6 @@ internal static class XElementExtensions
 
     public static XElement WithColumnAttribute(this XElement source, string columnName)
     {
-        if (columnName == "order")
-        {
-
-        }
-
         return source.WithAttribute("column", columnName);
     }
 

@@ -79,7 +79,7 @@ public class NHibSessionEnvironment : IDisposable
         }
     }
 
-    
+
     public NHibConnectionSettings ConnectionSettings { get; }
 
     internal TimeSpan TransactionTimeout { get; }

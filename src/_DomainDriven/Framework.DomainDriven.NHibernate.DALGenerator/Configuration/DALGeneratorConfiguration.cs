@@ -13,6 +13,8 @@ public class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<T
         this.DatabaseName = new DatabaseName(this.Environment.TargetSystemName);
     }
 
+    public virtual IEscapeWordService EscapeWordService { get; } = new EmptyEscapeWordService();
+
     public virtual DatabaseName DatabaseName { get; }
 
     public virtual bool UseSmartUpdate { get; } = false;
@@ -42,7 +44,11 @@ public class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<T
         }
     }
 
-    protected virtual MappingGenerator CreateMappingGenerator(IAssemblyInfo assembly, AssemblyMetadata metadata) => new MappingGenerator(assembly.ToGroup(metadata.DomainTypes), this.DatabaseName, this.UseSmartUpdate);
+    protected virtual MappingGenerator CreateMappingGenerator(IAssemblyInfo assembly, AssemblyMetadata metadata) => new MappingGenerator(
+        assembly.ToGroup(metadata.DomainTypes),
+        this.EscapeWordService,
+        this.DatabaseName,
+        this.UseSmartUpdate);
 
     protected virtual AssemblyMetadata CreateAssemblyMetadata(IAssemblyInfo assembly) => MetadataReader.GetAssemblyMetadata(this.Environment.PersistentDomainObjectBaseType, assembly);
 

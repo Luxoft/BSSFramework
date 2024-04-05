@@ -17,6 +17,6 @@ public class RepositoryQueryableSource : IQueryableSource
 
     public IQueryable<TDomainObject> GetQueryable<TDomainObject>()
     {
-        return this.serviceProvider.GetRequiredKeyedService<IRepository<TDomainObject>>(BLLSecurityMode.Disabled).GetQueryable();
+        return this.serviceProvider.GetRequiredKeyedService<IRepository<TDomainObject>>(SecurityRule.Disabled).GetQueryable();
     }
 }

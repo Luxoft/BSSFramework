@@ -5,7 +5,7 @@ namespace Framework.DomainDriven.BLL.Security;
 public interface IRootSecurityService<in TPersistentDomainObjectBase>
     where TPersistentDomainObjectBase : class
 {
-    ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(BLLSecurityMode securityMode)
+    ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityMode)
         where TDomainObject : TPersistentDomainObjectBase;
 
     ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation securityOperation)

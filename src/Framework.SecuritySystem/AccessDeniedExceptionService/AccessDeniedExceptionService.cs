@@ -18,33 +18,33 @@ public class AccessDeniedExceptionService<TIdent> : IAccessDeniedExceptionServic
         }
         else
         {
-            var securityOperation = accessDeniedResult.SecurityOperation;
+            var securityRule = accessDeniedResult.SecurityRule;
 
             if (accessDeniedResult.DomainObjectInfo == null)
             {
-                if (securityOperation == null)
+                if (securityRule == null)
                 {
                     return $"You are not authorized to perform operation";
                 }
                 else
                 {
-                    return $"You are not authorized to perform '{securityOperation}' operation";
+                    return $"You are not authorized to perform '{securityRule}' operation";
                 }
             }
             else
             {
                 var info = accessDeniedResult.DomainObjectInfo.Value;
 
-                return this.GetAccessDeniedExceptionMessage(info.DomainObject, info.DomainObjectType, securityOperation);
+                return this.GetAccessDeniedExceptionMessage(info.DomainObject, info.DomainObjectType, securityRule);
             }
         }
     }
 
-    protected virtual string GetAccessDeniedExceptionMessage(object domainObject, Type domainObjectType, SecurityOperation securityOperation)
+    protected virtual string GetAccessDeniedExceptionMessage(object domainObject, Type domainObjectType, SecurityRule securityRule)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        var elements = this.GetAccessDeniedExceptionMessageElements(domainObject, domainObjectType, securityOperation).ToDictionary();
+        var elements = this.GetAccessDeniedExceptionMessageElements(domainObject, domainObjectType, securityRule).ToDictionary();
 
         return elements.GetByFirst((first, other) =>
                                    {
@@ -65,7 +65,7 @@ public class AccessDeniedExceptionService<TIdent> : IAccessDeniedExceptionServic
         return $"{key} = '{value}'";
     }
 
-    protected virtual IEnumerable<KeyValuePair<string, object>> GetAccessDeniedExceptionMessageElements(object domainObject, Type domainObjectType, SecurityOperation securityOperation)
+    protected virtual IEnumerable<KeyValuePair<string, object>> GetAccessDeniedExceptionMessageElements(object domainObject, Type domainObjectType, SecurityRule securityRule)
     {
         if (domainObject is IVisualIdentityObject visualIdentityObject)
         {
@@ -81,9 +81,9 @@ public class AccessDeniedExceptionService<TIdent> : IAccessDeniedExceptionServic
             yield return new KeyValuePair<string, object>("id", identityObject.Id);
         }
 
-        if (securityOperation != null)
+        if (securityRule != null)
         {
-            yield return new KeyValuePair<string, object>("securityOperation", securityOperation.Name);
+            yield return new KeyValuePair<string, object>("securityRule", securityRule);
         }
     }
 }

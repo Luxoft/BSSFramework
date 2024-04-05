@@ -37,7 +37,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IRealTypeResolver realTypeResolver,
         IUserAuthenticationService userAuthenticationService,
         IOperationAccessorFactory operationAccessorFactory,
-        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Principal> principalRepository,
+        [FromKeyedServices(SecurityRule.Disabled)] IRepository<Principal> principalRepository,
         TimeProvider timeProvider)
     {
         this.availablePermissionSource = availablePermissionSource;
@@ -73,7 +73,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     {
         if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
 
-        var typedSecurityOperation = (SecurityOperation<Guid>)securityOperation;
+        var typedSecurityOperation = (SecurityOperation)securityOperation;
 
         return this.GetAccessors(
             (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
@@ -84,7 +84,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         SecurityOperation securityOperation,
         IEnumerable<Type> securityTypes)
     {
-        var typedSecurityOperation = (SecurityOperation<Guid>)securityOperation;
+        var typedSecurityOperation = (SecurityOperation)securityOperation;
 
         var permissions = this.availablePermissionSource.GetAvailablePermissionsQueryable(true, typedSecurityOperation.Id)
                               .FetchMany(q => q.FilterItems)
@@ -102,7 +102,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityOperation securityOperation)
     {
-        var typedSecurityOperation = (SecurityOperation<Guid>)securityOperation;
+        var typedSecurityOperation = (SecurityOperation)securityOperation;
 
         return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityOperationId: typedSecurityOperation.Id);
     }

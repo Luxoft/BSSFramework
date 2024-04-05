@@ -20,12 +20,12 @@ public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObj
 
     public TBLL Create()
     {
-        var disabledProvider = this.Context.SecurityService.GetSecurityProvider<TDomainObject>(BLLSecurityMode.Disabled);
+        var disabledProvider = this.Context.SecurityService.GetSecurityProvider<TDomainObject>(SecurityRule.Disabled);
 
         return this.Create(disabledProvider);
     }
 
-    public TBLL Create(BLLSecurityMode securityMode)
+    public TBLL Create(SecurityRule securityMode)
     {
         return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityMode));
     }

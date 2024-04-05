@@ -31,7 +31,7 @@ public record UpdatePermissionsHandler(
     private async Task Update(Guid id, IEnumerable<RequestBodyDto> permissions, CancellationToken cancellationToken)
     {
         var cache = new HashSet<PermissionFilterEntity>();
-        var principalRepository = this.PrincipalRepositoryFactory.Create(BLLSecurityMode.Edit);
+        var principalRepository = this.PrincipalRepositoryFactory.Create(SecurityRule.Edit);
         var principal = await principalRepository
                               .GetQueryable()
                               .Where(x => x.Id == id)
@@ -79,7 +79,7 @@ public record UpdatePermissionsHandler(
                                      Active = true
                              };
 
-            await this.PermissionRepositoryFactory.Create(BLLSecurityMode.Edit).SaveAsync(permission, cancellationToken);
+            await this.PermissionRepositoryFactory.Create(SecurityRule.Edit).SaveAsync(permission, cancellationToken);
 
             foreach (var context in dto.Contexts)
             {
@@ -141,7 +141,7 @@ public record UpdatePermissionsHandler(
 
             item.Item1.RemoveDetails(mergeResult.RemovingItems);
 
-            await this.PermissionRepositoryFactory.Create(BLLSecurityMode.Edit).SaveAsync(item.Item1, cancellationToken);
+            await this.PermissionRepositoryFactory.Create(SecurityRule.Edit).SaveAsync(item.Item1, cancellationToken);
 
             if (this.ConfiguratorIntegrationEvents != null)
             {

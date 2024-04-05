@@ -4,6 +4,16 @@ namespace Framework.Core;
 
 public static class EnumerableExtensions
 {
+    public static IEnumerable<T> GetAllElements<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getChildFunc)
+    {
+        if (null == getChildFunc)
+        {
+            throw new ArgumentNullException(nameof(getChildFunc));
+        }
+
+        return source.SelectMany(child => child.GetAllElements(getChildFunc));
+    }
+
     public static IEnumerable<T> SelectMany<T>(this IEnumerable<IEnumerable<T>> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

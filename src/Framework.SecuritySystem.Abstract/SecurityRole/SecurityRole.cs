@@ -1,8 +1,6 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Security;
-using Framework.SecuritySystem;
+﻿using Framework.Security;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.SecuritySystem;
 
 public class SecurityRole
 {
@@ -27,10 +25,10 @@ public class SecurityRole
     {
         return new SecurityRole(
                id,
-               BusinessRole.AdminRoleName,
+               "Administrator",
                securityOperationTypes.SelectMany(SecurityOperationHelper.GetSecurityOperations)
                                      .Distinct()
-                                     .Where(operation => operation is not DisabledSecurityOperation && operation.AdminHasAccess)
+                                     .Where(operation => operation != SecurityOperation.Disabled)
                                      .ToArray())
                { Description = description };
     }

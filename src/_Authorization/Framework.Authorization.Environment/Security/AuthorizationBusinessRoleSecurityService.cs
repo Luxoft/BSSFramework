@@ -20,13 +20,13 @@ namespace Framework.Authorization.Environment
             this.availablePermissionSource = availablePermissionSource;
         }
 
-        protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(BLLSecurityMode securityMode)
+        protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(SecurityRule securityMode)
         {
             var baseProvider = base.CreateSecurityProvider(securityMode);
 
             switch (securityMode)
             {
-                case BLLSecurityMode.View:
+                case SecurityRule.View:
                     return baseProvider.Or(new BusinessRoleSecurityProvider<BusinessRole>(this.availablePermissionSource, v => v));
 
                 default:

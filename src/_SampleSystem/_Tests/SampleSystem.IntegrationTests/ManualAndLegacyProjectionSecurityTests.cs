@@ -81,7 +81,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
         // Act
         var items = this.Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
                                                                          {
-                                                                             var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(BLLSecurityMode.View);
+                                                                             var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(SecurityRule.View);
 
                                                                              return bll.GetListBy(v => v.BusinessUnit_Security != null).ToDictionary(v => v.Id, bll.SecurityProvider.GetAccessors);
                                                                          });

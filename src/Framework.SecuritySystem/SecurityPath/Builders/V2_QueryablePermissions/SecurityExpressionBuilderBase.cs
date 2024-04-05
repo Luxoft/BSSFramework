@@ -21,17 +21,17 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityOperation securityOperation)
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityOperation securityRule)
     {
-        return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityOperation);
+        return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule);
     }
 
 
-    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(SecurityOperation securityOperation)
+    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(SecurityOperation securityRule)
     {
-        var filterExpression = this.GetSecurityFilterExpression(securityOperation.ExpandType).ExpandConst().InlineEval();
+        var filterExpression = this.GetSecurityFilterExpression(securityRule.ExpandType).ExpandConst().InlineEval();
 
-        var baseQuery = this.Factory.AuthorizationSystem.GetPermissionQuery(securityOperation);
+        var baseQuery = this.Factory.AuthorizationSystem.GetPermissionQuery(securityRule);
 
         return domainObject => baseQuery.Any(permission => filterExpression.Eval(domainObject, permission));
     }

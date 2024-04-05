@@ -14,7 +14,7 @@ public class GetDomainTypesHandler : BaseReadHandler, IGetDomainTypesHandler
     public GetDomainTypesHandler(IDomainTypeBLLFactory domainTypeBllFactory) => this.domainTypeBllFactory = domainTypeBllFactory;
 
     protected override object GetData(HttpContext context) =>
-            this.domainTypeBllFactory.Create(BLLSecurityMode.View)
+            this.domainTypeBllFactory.Create(SecurityRule.View)
                 .GetSecureQueryable()
                 .Where(d => d.TargetSystem.IsRevision)
                 .OrderBy(d => d.Name)

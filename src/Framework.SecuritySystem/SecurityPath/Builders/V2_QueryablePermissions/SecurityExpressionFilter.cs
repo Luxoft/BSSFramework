@@ -19,12 +19,12 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
 
     public SecurityExpressionFilter(
         SecurityExpressionBuilderBase<TDomainObject, TIdent> builder,
-        SecurityOperation securityOperation)
+        SecurityOperation securityRule)
     {
         if (builder == null) throw new ArgumentNullException(nameof(builder));
-        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
+        if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
 
-        var filterExpression = builder.GetSecurityFilterExpression(securityOperation).ExpandConst().InlineEval();
+        var filterExpression = builder.GetSecurityFilterExpression(securityRule).ExpandConst().InlineEval();
 
         this.InjectFunc = q => q.Where(filterExpression);
 
@@ -35,11 +35,11 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
             () => FuncHelper.Create(
                 (TDomainObject domainObject) =>
                 {
-                    var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityOperation.ExpandType);
+                    var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityRule.ExpandType);
 
                     var filter = baseFilter.OverrideInput((IPrincipal<TIdent> principal) => principal.Permissions);
 
-                    return builder.Factory.AuthorizationSystem.GetNonContextAccessors(securityOperation, filter);
+                    return builder.Factory.AuthorizationSystem.GetNonContextAccessors(securityRule, filter);
                 }));
     }
 

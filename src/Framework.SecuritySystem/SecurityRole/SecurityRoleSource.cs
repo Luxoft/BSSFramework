@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.SecuritySystem;
 
 public class SecurityRoleSource : ISecurityRoleSource
 {

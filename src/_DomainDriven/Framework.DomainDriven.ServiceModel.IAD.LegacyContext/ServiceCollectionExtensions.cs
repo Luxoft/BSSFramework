@@ -145,7 +145,7 @@ public static class ServiceCollectionExtensions
 
             if (pair.CustomViewSecurityOperation != null)
             {
-                services.AddSingleton(new DomainObjectSecurityOperationInfo(pair.DomainType, pair.CustomViewSecurityOperation, null));
+                services.AddSingleton(new DomainObjectSecurityModeInfo(pair.DomainType, pair.CustomViewSecurityOperation, null));
             }
         }
 

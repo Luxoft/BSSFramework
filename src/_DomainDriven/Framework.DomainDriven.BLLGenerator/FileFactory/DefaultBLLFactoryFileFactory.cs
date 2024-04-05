@@ -153,7 +153,7 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
     ////{
     ////    var genericDomainTypeRef = new CodeTypeParameter("TDomainObject");
 
-    ////    var bllSecurityModeTypeRef = typeof(BLLSecurityMode).ToTypeReference();
+    ////    var bllSecurityModeTypeRef = typeof(SecurityRule).ToTypeReference();
 
     ////    var bllSecurityModeParamName = "bllSecurityMode";
 

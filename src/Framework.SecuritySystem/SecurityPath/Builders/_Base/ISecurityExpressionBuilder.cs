@@ -2,5 +2,5 @@
 
 public interface ISecurityExpressionBuilder<TDomainObject>
 {
-    ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityOperation securityOperation);
+    ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule securityRule);
 }

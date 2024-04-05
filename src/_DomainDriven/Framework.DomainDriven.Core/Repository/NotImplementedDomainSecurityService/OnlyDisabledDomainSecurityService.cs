@@ -13,12 +13,12 @@ public class OnlyDisabledDomainSecurityService<TDomainObject> : IDomainSecurityS
 
     public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation securityOperation)
     {
-        return this.GetSecurityProviderInternal(securityOperation, securityOperation is DisabledSecurityOperation);
+        return this.GetSecurityProviderInternal(securityOperation, securityOperation == SecurityOperation.Disabled);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(BLLSecurityMode securityMode)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityRule securityMode)
     {
-        return this.GetSecurityProviderInternal(securityMode, securityMode == BLLSecurityMode.Disabled);
+        return this.GetSecurityProviderInternal(securityMode, securityMode == SecurityRule.Disabled);
     }
 
     private ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityMode, bool isDisabled)

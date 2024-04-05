@@ -16,7 +16,7 @@ public class RootSecurityService<TPersistentDomainObjectBase> : IRootSecuritySer
 
     public IServiceProvider ServiceProvider { get; }
 
-    public virtual ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(BLLSecurityMode securityMode)
+    public virtual ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityMode)
         where TDomainObject : TPersistentDomainObjectBase
     {
         return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityMode);

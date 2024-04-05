@@ -12,9 +12,9 @@ public class PlainAuthorizationTypedExternalSource<TSecurityContext> : Authoriza
     private readonly ISecurityContextDisplayService<TSecurityContext> displayService;
 
     public PlainAuthorizationTypedExternalSource(
-        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<TSecurityContext> securityContextRepository,
-        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<EntityType> entityTypeRepository,
-        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
+        [FromKeyedServices(SecurityRule.Disabled)] IRepository<TSecurityContext> securityContextRepository,
+        [FromKeyedServices(SecurityRule.Disabled)] IRepository<EntityType> entityTypeRepository,
+        [FromKeyedServices(SecurityRule.Disabled)] IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
         SecurityContextInfo<TSecurityContext, Guid> securityContextInfo,
         ISecurityContextDisplayService<TSecurityContext> displayService)
         : base(securityContextRepository, entityTypeRepository, permissionFilterEntityRepository, securityContextInfo)

@@ -14,7 +14,7 @@ public class RunAsManger : IRunAsManager
     private readonly ICurrentPrincipalSource currentPrincipalSource;
 
     public RunAsManger(
-        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Principal> principalRepository,
+        [FromKeyedServices(SecurityRule.Disabled)] IRepository<Principal> principalRepository,
         ICurrentPrincipalSource currentPrincipalSource,
         IOperationAccessorFactory operationAccessorFactory)
     {

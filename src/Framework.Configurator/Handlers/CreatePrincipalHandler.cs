@@ -17,7 +17,7 @@ public record CreatePrincipalHandler(
         var principal = new Principal { Name = name };
 
         await this.AuthorizationRepositoryFactory
-                  .Create(BLLSecurityMode.Edit)
+                  .Create(SecurityRule.Edit)
                   .SaveAsync(principal, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)

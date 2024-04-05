@@ -17,7 +17,7 @@ public class GetOperationHandler : BaseReadHandler, IGetOperationHandler
     protected override object GetData(HttpContext context)
     {
         var operationId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
-        var businessRoles = this.authorizationBllContext.Authorization.Logics.BusinessRoleFactory.Create(BLLSecurityMode.View)
+        var businessRoles = this.authorizationBllContext.Authorization.Logics.BusinessRoleFactory.Create(SecurityRule.View)
                                 .GetSecureQueryable()
                                 .Where(z => z.BusinessRoleOperationLinks.Any(link => link.Operation.Id == operationId))
                                 .Select(r => r.Name)
@@ -25,7 +25,7 @@ public class GetOperationHandler : BaseReadHandler, IGetOperationHandler
                                 .Distinct()
                                 .ToList();
 
-        var principals = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.View)
+        var principals = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(SecurityRule.View)
                              .GetSecureQueryable()
                              .Where(
                                     p => p.Permissions.Any(

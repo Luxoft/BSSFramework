@@ -60,7 +60,7 @@ public class SecurityOperationHelperFileFactory<TConfiguration> : FileFactory<TC
     }
     private CodeExpressionStatement GetRegisterStatement(CodeExpression serviceCollectionExpr, Type domainType, SecurityOperation viewSecurityOperation, SecurityOperation editSecurityOperation)
     {
-        var createExpr = typeof(DomainObjectSecurityOperationInfo).ToTypeReference().ToObjectCreateExpression(
+        var createExpr = typeof(DomainObjectSecurityModeInfo).ToTypeReference().ToObjectCreateExpression(
             domainType.ToTypeOfExpression(),
             viewSecurityOperation.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression(),
             editSecurityOperation.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression());

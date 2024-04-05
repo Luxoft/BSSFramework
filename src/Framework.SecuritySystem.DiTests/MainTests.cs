@@ -58,7 +58,7 @@ public class MainTests
 
         var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee>>();
         var counterService = scope.ServiceProvider.GetRequiredService<BusinessUnitAncestorLinkSourceExecuteCounter>();
-        var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
+        var securityProvider = employeeDomainSecurityService.GetSecurityProvider(SecurityRule.View);
 
         // Act
         var result1 = securityProvider.HasAccess(this.employee1);
@@ -82,7 +82,7 @@ public class MainTests
         var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee>>();
         var accessDeniedExceptionService = scope.ServiceProvider.GetRequiredService<IAccessDeniedExceptionService>();
 
-        var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
+        var securityProvider = employeeDomainSecurityService.GetSecurityProvider(SecurityRule.View);
 
 
         // Act

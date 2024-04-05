@@ -29,7 +29,7 @@ public record UpdateBusinessRoleHandler(
     [SuppressMessage("SonarQube", "S2436", Justification = "It's ok. BusinessRoleOperationLink automatically link to BusinessRole")]
     private async Task Update(Guid id, RequestBodyDto role, CancellationToken cancellationToken)
     {
-        var businessRoleBll = this.BusinessRoleRepositoryFactory.Create(BLLSecurityMode.Edit);
+        var businessRoleBll = this.BusinessRoleRepositoryFactory.Create(SecurityRule.Edit);
 
         var domainObject = await businessRoleBll.GetQueryable()
                                                 .Where(x => x.Id == id)

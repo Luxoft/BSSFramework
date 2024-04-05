@@ -22,7 +22,7 @@ public record DeleteBusinessRoleHandler
 
     private async Task Delete(Guid id, CancellationToken cancellationToken)
     {
-        var businessRoleBll = this.BusinessRoleRepositoryFactory.Create(BLLSecurityMode.Edit);
+        var businessRoleBll = this.BusinessRoleRepositoryFactory.Create(SecurityRule.Edit);
         var domainObject = await businessRoleBll.GetQueryable()
                                                 .Where(x => x.Id == id)
                                                 .SingleAsync(cancellationToken);

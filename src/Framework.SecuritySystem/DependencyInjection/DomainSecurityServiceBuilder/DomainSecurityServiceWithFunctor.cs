@@ -19,16 +19,16 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
         this.functorList = functorList;
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityRule)
     {
-        var originalSecurityProvider = this.originalDomainSecurityService.GetSecurityProvider(securityOperation);
+        var originalSecurityProvider = this.originalDomainSecurityService.GetSecurityProvider(securityRule);
 
         return this.functorList.Aggregate(
             originalSecurityProvider,
-            (provider, functor) => functor.OverrideSecurityProvider(provider, securityOperation));
+            (provider, functor) => functor.OverrideSecurityProvider(provider, securityRule));
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityMode)
     {
         var baseSecurityProvider = base.CreateSecurityProvider(securityMode);
 

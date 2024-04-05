@@ -3,38 +3,28 @@ using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class SecurityOperationParser<TIdent> : ISecurityOperationParser<TIdent>
-    where TIdent : notnull
+public class SecurityOperationParser : ISecurityOperationParser
 {
-    private readonly IReadOnlyDictionary<TIdent, SecurityOperation<TIdent>> securityOperationByIdDict;
-
-    private readonly IReadOnlyDictionary<string, SecurityOperation<TIdent>> securityOperationByNameDict;
+    private readonly IReadOnlyDictionary<string, SecurityOperation> securityOperationByNameDict;
 
     public SecurityOperationParser(IEnumerable<SecurityOperationTypeInfo> securityOperationTypeInfos)
     {
         this.Operations = securityOperationTypeInfos
                             .SelectMany(v => SecurityOperationHelper.GetSecurityOperations(v.SecurityOperationType))
-                            .Where(op => op is not DisabledSecurityOperation)
-                            .Cast<SecurityOperation<TIdent>>()
+                            .Where(op => op != SecurityOperation.Disabled)
+                            .Cast<SecurityOperation>()
                             .Distinct()
                             .ToList();
 
         this.securityOperationByNameDict = this.Operations.ToDictionary(v => v.Name);
-
-        this.securityOperationByIdDict = this.Operations.ToDictionary(v => v.Id);
     }
 
-    public IReadOnlyList<SecurityOperation<TIdent>> Operations { get; }
+    public IReadOnlyList<SecurityOperation> Operations { get; }
 
-    public SecurityOperation<TIdent> Parse(string name)
+    public SecurityOperation Parse(string name)
     {
         return this.securityOperationByNameDict.GetValueOrDefault(name)
                ?? throw new Exception($"SecurityOperation with name '{name}' not found");
-    }
-
-    public SecurityOperation<TIdent> GetSecurityOperation(TIdent id)
-    {
-        return this.securityOperationByIdDict.GetValueOrDefault(id) ?? throw new Exception($"SecurityOperation with id '{id}' not found");
     }
 
     SecurityOperation ISecurityOperationParser.Parse(string name) => this.Parse(name);

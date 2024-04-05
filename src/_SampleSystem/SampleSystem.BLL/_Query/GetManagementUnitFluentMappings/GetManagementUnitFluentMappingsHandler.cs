@@ -11,7 +11,7 @@ public class GetManagementUnitFluentMappingsHandler : IRequestHandler<GetManagem
 
     public GetManagementUnitFluentMappingsHandler(
             IManagementUnitFluentMappingBLLFactory managementUnitFluentMappingBllFactory) =>
-            this.managementUnitFluentMappingBll = managementUnitFluentMappingBllFactory.Create(BLLSecurityMode.View);
+            this.managementUnitFluentMappingBll = managementUnitFluentMappingBllFactory.Create(SecurityRule.View);
 
     public async Task<GetManagementUnitFluentMappingsResponse[]> Handle(
             GetManagementUnitFluentMappingsQuery request,

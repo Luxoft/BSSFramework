@@ -11,7 +11,7 @@ public class EmployeeSource<TEmployee> : IEmployeeSource
 {
     private readonly IRepository<TEmployee> employeeRepository;
 
-    public EmployeeSource([FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<TEmployee> employeeRepository)
+    public EmployeeSource([FromKeyedServices(SecurityRule.Disabled)] IRepository<TEmployee> employeeRepository)
     {
         this.employeeRepository = employeeRepository;
     }

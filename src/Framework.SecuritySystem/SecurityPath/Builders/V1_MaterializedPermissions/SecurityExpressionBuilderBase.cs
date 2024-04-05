@@ -21,9 +21,9 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityOperation securityOperation)
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule securityRule)
     {
-        return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityOperation);
+        return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule);
     }
 
 

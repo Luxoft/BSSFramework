@@ -20,7 +20,7 @@ public class GetBusinessRoleContextEntitiesHandler : BaseReadHandler, IGetBusine
         var searchToken = context.Request.Query["searchToken"];
 
         var entityType = this.authorizationBllContext.Authorization.Logics.EntityTypeFactory
-            .Create(BLLSecurityMode.View)
+            .Create(SecurityRule.View)
             .GetById(entityTypeId, true);
 
         var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(entityType)

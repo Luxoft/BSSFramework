@@ -1,4 +1,4 @@
-﻿namespace Framework.Authorization.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 public interface ISecurityRoleSource
 {

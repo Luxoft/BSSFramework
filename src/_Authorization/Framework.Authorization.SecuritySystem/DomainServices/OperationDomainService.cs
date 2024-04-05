@@ -10,7 +10,7 @@ public class OperationDomainService : IOperationDomainService
 {
     private readonly IRepository<Operation> operationRepository;
 
-    public OperationDomainService([FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Operation> operationRepository)
+    public OperationDomainService([FromKeyedServices(SecurityRule.Disabled)] IRepository<Operation> operationRepository)
     {
         this.operationRepository = operationRepository;
     }

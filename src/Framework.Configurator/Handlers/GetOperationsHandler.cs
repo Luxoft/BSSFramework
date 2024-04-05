@@ -16,7 +16,7 @@ public class GetOperationsHandler : BaseReadHandler, IGetOperationsHandler
             this.authorizationBllContext = authorizationBllContext;
 
     protected override object GetData(HttpContext context)
-        => this.authorizationBllContext.Authorization.Logics.OperationFactory.Create(BLLSecurityMode.View)
+        => this.authorizationBllContext.Authorization.Logics.OperationFactory.Create(SecurityRule.View)
                .GetSecureQueryable()
                .Select(o => new OperationDto { Id = o.Id, Name = o.Name, Description = o.Description })
                .OrderBy(o => o.Name)

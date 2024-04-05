@@ -20,7 +20,7 @@ namespace Framework.Authorization.Environment
             this.actualPrincipalSource = actualPrincipalSource;
         }
 
-        protected override ISecurityProvider<Permission> CreateSecurityProvider(BLLSecurityMode securityMode)
+        protected override ISecurityProvider<Permission> CreateSecurityProvider(SecurityRule securityMode)
         {
             var baseProvider = base.CreateSecurityProvider(securityMode);
 
@@ -29,11 +29,11 @@ namespace Framework.Authorization.Environment
 
             switch (securityMode)
             {
-                case BLLSecurityMode.View:
+                case SecurityRule.View:
                     return withDelegatedFrom.Or(
                         new PrincipalSecurityProvider<Permission>(this.actualPrincipalSource, permission => permission.Principal));
 
-                case BLLSecurityMode.Edit:
+                case SecurityRule.Edit:
                     return withDelegatedFrom;
 
                 default:

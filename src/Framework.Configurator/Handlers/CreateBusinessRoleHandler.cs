@@ -36,7 +36,7 @@ public record CreateBusinessRoleHandler(
             var _ = new BusinessRoleOperationLink(domainObject) { Operation = operation };
         }
 
-        await this.BusinessRoleRepositoryFactory.Create(BLLSecurityMode.Edit).SaveAsync(domainObject, cancellationToken);
+        await this.BusinessRoleRepositoryFactory.Create(SecurityRule.Edit).SaveAsync(domainObject, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
         {

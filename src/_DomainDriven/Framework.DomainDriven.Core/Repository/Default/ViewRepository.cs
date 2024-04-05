@@ -13,7 +13,7 @@ public class ViewRepository<TDomainObject> : Repository<TDomainObject>
         ISpecificationEvaluator specificationEvaluator,
         IAccessDeniedExceptionService accessDeniedExceptionService,
         IDomainSecurityService<TDomainObject> domainSecurityService)
-        : base(dal, specificationEvaluator, accessDeniedExceptionService, domainSecurityService.GetSecurityProvider(BLLSecurityMode.View))
+        : base(dal, specificationEvaluator, accessDeniedExceptionService, domainSecurityService.GetSecurityProvider(SecurityRule.View))
     {
     }
 }

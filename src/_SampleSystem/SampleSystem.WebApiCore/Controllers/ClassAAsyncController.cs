@@ -39,7 +39,7 @@ namespace SampleSystem.WebApiCore.Controllers
         {
             if (withSession)
             {
-                var repository = this.classARepositoryFactory.Create(BLLSecurityMode.Disabled);
+                var repository = this.classARepositoryFactory.Create(SecurityRule.Disabled);
 
                 var classA = await repository.GetQueryable().Where(x => x.Value == value).SingleOrDefaultAsync(cancellationToken);
 

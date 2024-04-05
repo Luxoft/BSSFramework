@@ -42,7 +42,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
     /// <inheritdoc />
     public override bool AllowedExpandTreeParents<TDomainObject>()
     {
-        var viewOperation = this.SecurityOperationResolver.TryGetSecurityOperation<TDomainObject>(BLLSecurityMode.View);
+        var viewOperation = this.SecurityOperationResolver.TryGetSecurityOperation<TDomainObject>(SecurityRule.View);
 
         if (viewOperation != null)
         {

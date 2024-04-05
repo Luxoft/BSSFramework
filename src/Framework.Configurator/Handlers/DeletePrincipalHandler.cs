@@ -21,7 +21,7 @@ public record DeletePrincipalHandler(
 
     private async Task Delete(Guid id, CancellationToken cancellationToken)
     {
-        var principalBll = this.PrincipalRepositoryFactory.Create(BLLSecurityMode.Edit);
+        var principalBll = this.PrincipalRepositoryFactory.Create(SecurityRule.Edit);
         var domainObject = await principalBll.GetQueryable()
                                              .Where(x => x.Id == id)
                                              .SingleAsync(cancellationToken);

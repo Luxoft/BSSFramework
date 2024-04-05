@@ -18,7 +18,7 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityMode)
     {
         var customSecurityOperation = this.securityOperationResolver.TryGetSecurityOperation<TDomainObject>(securityMode);
 
@@ -32,9 +32,9 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
         }
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityRule)
     {
-        return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityOperation));
+        return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityRule));
     }
 
     protected abstract ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider);

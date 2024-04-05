@@ -22,8 +22,8 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
     private readonly InitializeSettings settings;
 
     public AuthorizationBusinessRoleInitializer(
-        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<BusinessRole> businessRoleRepository,
-        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Operation> operationRepository,
+        [FromKeyedServices(SecurityRule.Disabled)] IRepository<BusinessRole> businessRoleRepository,
+        [FromKeyedServices(SecurityRule.Disabled)] IRepository<Operation> operationRepository,
         ISecurityRoleSource securityRoleSource,
         ILogger logger,
         InitializeSettings settings)
@@ -162,9 +162,9 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
         }
     }
 
-    private static IEnumerable<(SecurityOperation<Guid> SecurityOperation, bool IsDenormalized)> GetAllOperationsC(SecurityRole securityRole)
+    private static IEnumerable<(SecurityOperation SecurityOperation, bool IsDenormalized)> GetAllOperationsC(SecurityRole securityRole)
     {
-        return GetAllOperations(securityRole).Select(pair => ((SecurityOperation<Guid>)pair.SecurityOperation, pair.IsDenormalized));
+        return GetAllOperations(securityRole).Select(pair => ((SecurityOperation)pair.SecurityOperation, pair.IsDenormalized));
     }
 
     private static IEnumerable<(SecurityOperation SecurityOperation, bool IsDenormalized)> GetAllOperations(SecurityRole securityRole)

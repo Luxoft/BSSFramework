@@ -114,7 +114,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
     {
         if (this.RequiredSecurity)
         {
-            return this.IsEdit ? BLLSecurityMode.Edit : BLLSecurityMode.View;
+            return this.IsEdit ? SecurityRule.Edit : SecurityRule.View;
         }
         else
         {

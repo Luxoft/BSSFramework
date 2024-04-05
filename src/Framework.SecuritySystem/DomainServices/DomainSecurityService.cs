@@ -12,7 +12,7 @@ public abstract class DomainSecurityService<TDomainObject> : DomainSecurityServi
         this.securityOperationResolver = securityOperationResolver ?? throw new ArgumentNullException(nameof(securityOperationResolver));
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityMode)
     {
         return this.GetSecurityProvider(this.securityOperationResolver.GetSecurityOperation<TDomainObject>(securityMode));
     }

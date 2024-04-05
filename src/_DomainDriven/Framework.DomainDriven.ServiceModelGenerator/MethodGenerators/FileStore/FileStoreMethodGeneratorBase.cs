@@ -60,7 +60,7 @@ public abstract class FileStoreMethodGeneratorBase<TConfiguration> : MethodGener
 
         if (null == attr)
         {
-            attr = BLLSecurityMode.View;
+            attr = SecurityRule.View;
         }
 
         var bllRef = this.Configuration.Environment.BLLCore.GetCodeTypeReference(

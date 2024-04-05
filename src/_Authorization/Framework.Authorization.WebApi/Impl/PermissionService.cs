@@ -34,7 +34,7 @@ public partial class AuthSLJsonController
     {
         return this.Evaluate(DBSessionMode.Write, evaluateData =>
                                                           evaluateData.Context.Logics.PermissionFactory
-                                                                      .Create(BLLSecurityMode.View)
+                                                                      .Create(SecurityRule.View)
                                                                       .GetById(permission.Id, true)
                                                                       .Role
                                                                       .GetAllChildren()

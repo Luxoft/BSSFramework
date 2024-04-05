@@ -26,7 +26,7 @@ public class OperationAccessor : IOperationAccessor
 
     public bool HasAccess(SecurityOperation securityOperation)
     {
-        var typedOperation = (SecurityOperation<Guid>)securityOperation;
+        var typedOperation = (SecurityOperation)securityOperation;
 
         return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityOperationId: typedOperation.Id, withRunAs: this.withRunAs).Any();
     }

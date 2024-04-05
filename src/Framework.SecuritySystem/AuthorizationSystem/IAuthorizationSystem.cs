@@ -5,12 +5,12 @@ namespace Framework.SecuritySystem;
 public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
 {
     IEnumerable<string> GetNonContextAccessors(
-        SecurityOperation securityOperation,
+        SecurityOperation securityRule,
         Expression<Func<IPrincipal<TIdent>, bool>> principalFilter);
 
     List<Dictionary<Type, IEnumerable<TIdent>>> GetPermissions(
-        SecurityOperation securityOperation,
+        SecurityOperation securityRule,
         IEnumerable<Type> securityTypes);
 
-    IQueryable<IPermission<TIdent>> GetPermissionQuery(SecurityOperation securityOperation);
+    IQueryable<IPermission<TIdent>> GetPermissionQuery(SecurityOperation securityRule);
 }

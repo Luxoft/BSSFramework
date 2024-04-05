@@ -71,9 +71,9 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Disabled, typeof(Repository<>));
-        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.View, typeof(ViewRepository<>));
-        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Edit, typeof(EditRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), SecurityRule.Disabled, typeof(Repository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), SecurityRule.View, typeof(ViewRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), SecurityRule.Edit, typeof(EditRepository<>));
 
         services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 

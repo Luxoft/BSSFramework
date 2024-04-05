@@ -20,13 +20,13 @@ namespace Framework.Authorization.Environment
             this.actualPrincipalSource = actualPrincipalSource;
         }
 
-        protected override ISecurityProvider<Principal> CreateSecurityProvider(BLLSecurityMode securityMode)
+        protected override ISecurityProvider<Principal> CreateSecurityProvider(SecurityRule securityMode)
         {
             var baseProvider = base.CreateSecurityProvider(securityMode);
 
             switch (securityMode)
             {
-                case BLLSecurityMode.View:
+                case SecurityRule.View:
                     return baseProvider.Or(new PrincipalSecurityProvider<Principal>(this.actualPrincipalSource, v => v));
 
                 default:

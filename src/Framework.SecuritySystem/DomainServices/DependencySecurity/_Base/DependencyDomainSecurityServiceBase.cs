@@ -4,31 +4,31 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
 
     DomainSecurityServiceBase<TDomainObject>
 {
-    private readonly ISecurityRuleExpander securityRuleExpander;
+    private readonly IEnumerable<ISecurityRuleExpander> securityRuleExpanders;
 
     private readonly IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService;
 
     protected DependencyDomainSecurityServiceBase(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        ISecurityRuleExpander securityRuleExpander,
+        IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
         : base(disabledSecurityProvider)
     {
-        this.securityRuleExpander = securityRuleExpander;
+        this.securityRuleExpanders = securityRuleExpanders;
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));
     }
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {
-        var customSecurityRule = this.securityRuleExpander.TryExpand<TDomainObject>(securityRule);
+        var expandedSecurityRule = this.securityRuleExpanders.TryExpand<TDomainObject>(securityRule);
 
-        if (customSecurityRule == null)
+        if (expandedSecurityRule == null)
         {
             return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityRule));
         }
         else
         {
-            return this.GetSecurityProvider(customSecurityRule);
+            return this.GetSecurityProvider(expandedSecurityRule);
         }
     }
 

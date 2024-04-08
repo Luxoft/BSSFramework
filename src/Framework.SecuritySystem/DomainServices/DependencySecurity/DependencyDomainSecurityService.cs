@@ -12,12 +12,12 @@ public class DependencyDomainSecurityService<TDomainObject, TBaseDomainObject> :
 
     public DependencyDomainSecurityService(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        ISecurityOperationResolver securityOperationResolver,
+        IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
         IQueryableSource queryableSource,
         DependencyDomainSecurityServicePath<TDomainObject, TBaseDomainObject> path)
 
-        : base(disabledSecurityProvider, securityOperationResolver, baseDomainSecurityService)
+        : base(disabledSecurityProvider, securityRuleExpanders, baseDomainSecurityService)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
         this.path = path;

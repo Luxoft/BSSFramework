@@ -1,26 +1,7 @@
 ﻿#nullable enable
-
 using Framework.Core;
 
 namespace Framework.SecuritySystem;
-
-public class SecurityOperationExpander : ISecurityRuleExpander
-{
-    private readonly ISecurityRoleSource securityRoleSource;
-
-    public SecurityOperationExpander(ISecurityRoleSource securityRoleSource)
-    {
-        this.securityRoleSource = securityRoleSource;
-    }
-
-    public SecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
-    {
-        if (securityRule is SecurityRule<SecurityOperation> operationRule)
-        {
-            var operation = operationRule.Value;
-        }
-    }
-}
 
 public class SecurityModeExpander : ISecurityRuleExpander
 {

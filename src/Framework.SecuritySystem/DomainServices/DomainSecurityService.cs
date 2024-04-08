@@ -2,25 +2,27 @@
 
 public abstract class DomainSecurityService<TDomainObject> : DomainSecurityServiceBase<TDomainObject>
 {
-    private readonly ISecurityRuleExpander securityRuleExpander;
+    private readonly IEnumerable<ISecurityRuleExpander> securityRuleExpanders;
 
     protected DomainSecurityService(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        ISecurityRuleExpander securityRuleExpander)
+        IEnumerable<ISecurityRuleExpander> securityRuleExpanders)
         : base(disabledSecurityProvider)
     {
-        this.securityRuleExpander = securityRuleExpander;
+        this.securityRuleExpanders = securityRuleExpanders;
     }
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {
-        var modeExpanded = this.securityRuleExpander.TryExpand<TDomainObject>(securityRule);
+        var expandedSecurityRule = this.securityRuleExpanders.TryExpand<TDomainObject>(securityRule);
 
-        if (modeExpanded != null)
+        if (expandedSecurityRule != null)
         {
-
+            return this.GetSecurityProvider(expandedSecurityRule);
         }
-
-        return this.GetSecurityProvider(this.securityOperationResolver.GetSecurityOperation<TDomainObject>(securityRule));
+        else
+        {
+            return this.GetSecurityProvider(securityRule);
+        }
     }
 }

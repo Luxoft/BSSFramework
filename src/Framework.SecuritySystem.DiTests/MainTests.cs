@@ -116,7 +116,10 @@ public class MainTests
                                  .SetEdit(ExampleSecurityOperation.EmployeeEdit)
                                  .SetPath(SecurityPath<Employee>.Create(v => v.BusinessUnit))))
 
-               .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>()
+               .AddSingleton<ISecurityRuleExpander, SecurityModeExpander>()
+               .AddSingleton<ISecurityRuleExpander, SecurityOperationExpander>()
+
+               .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 
                .AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
 

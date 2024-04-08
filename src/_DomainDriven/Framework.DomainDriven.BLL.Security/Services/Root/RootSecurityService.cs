@@ -22,14 +22,6 @@ public class RootSecurityService<TPersistentDomainObjectBase> : IRootSecuritySer
         return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityRule);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityRule)
-        where TDomainObject : TPersistentDomainObjectBase
-    {
-        if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
-
-        return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityRule);
-    }
-
     protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>()
         where TDomainObject : TPersistentDomainObjectBase
     {

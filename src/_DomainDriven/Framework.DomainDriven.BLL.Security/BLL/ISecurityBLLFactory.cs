@@ -8,7 +8,5 @@ public interface ISecurityBLLFactory<out TBLL, TDomainObject>
 
     TBLL Create(SecurityRule securityRule);
 
-    TBLL Create(SecurityRule securityRule);
-
     TBLL Create(ISecurityProvider<TDomainObject> securityProvider);
 }

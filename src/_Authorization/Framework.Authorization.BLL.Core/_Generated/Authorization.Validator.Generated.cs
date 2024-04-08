@@ -20,14 +20,11 @@ namespace Framework.Authorization.BLL
             base.RegisterHandler<Framework.Authorization.Domain.BusinessRole>(this.GetBusinessRoleValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.BusinessRoleCreateModel>(this.GetBusinessRoleCreateModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.BusinessRoleNode>(this.GetBusinessRoleNodeValidationResult);
-            base.RegisterHandler<Framework.Authorization.Domain.BusinessRoleOperationLink>(this.GetBusinessRoleOperationLinkValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.BusinessRoleRootFilterModel>(this.GetBusinessRoleRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.ChangePermissionDelegatesModel>(this.GetChangePermissionDelegatesModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.DelegateToItemModel>(this.GetDelegateToItemModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.EntityType>(this.GetEntityTypeValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.EntityTypeRootFilterModel>(this.GetEntityTypeRootFilterModelValidationResult);
-            base.RegisterHandler<Framework.Authorization.Domain.Operation>(this.GetOperationValidationResult);
-            base.RegisterHandler<Framework.Authorization.Domain.OperationRootFilterModel>(this.GetOperationRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.Permission>(this.GetPermissionValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.PermissionDirectFilterModel>(this.GetPermissionDirectFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.PermissionFilterEntity>(this.GetPermissionFilterEntityValidationResult);
@@ -47,11 +44,6 @@ namespace Framework.Authorization.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetBusinessRoleNodeValidationResult(Framework.Authorization.Domain.BusinessRoleNode source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetBusinessRoleOperationLinkValidationResult(Framework.Authorization.Domain.BusinessRoleOperationLink source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -82,16 +74,6 @@ namespace Framework.Authorization.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetEntityTypeValidationResult(Framework.Authorization.Domain.EntityType source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetOperationRootFilterModelValidationResult(Framework.Authorization.Domain.OperationRootFilterModel source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetOperationValidationResult(Framework.Authorization.Domain.Operation source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

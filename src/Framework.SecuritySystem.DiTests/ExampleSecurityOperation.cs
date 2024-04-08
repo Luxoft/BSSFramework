@@ -2,9 +2,7 @@
 
 public static class ExampleSecurityOperation
 {
-    public static SecurityRule Disabled { get; } = SecurityRule.Disabled;
+    public static SecurityOperation EmployeeView { get; } = new SecurityOperation(nameof(EmployeeView));
 
-    public static SecurityRule EmployeeView { get; } = new SecurityRule(nameof(EmployeeView));
-
-    public static SecurityRule EmployeeEdit { get; } = new SecurityRule(nameof(EmployeeEdit));
+    public static SecurityOperation EmployeeEdit { get; } = new SecurityOperation(nameof(EmployeeEdit));
 }

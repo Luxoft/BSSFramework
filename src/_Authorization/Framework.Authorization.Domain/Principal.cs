@@ -66,11 +66,4 @@ public class Principal : BaseDirectory, IMaster<Permission>, IPrincipal<Guid>
     {
         get { return this.Permissions; }
     }
-
-    public virtual IEnumerable<Operation> GetOperations(DateTime date)
-    {
-        return this.Permissions.Where(permission => permission.Status == PermissionStatus.Approved && permission.Period.Contains(date))
-                   .SelectMany(permission => permission.Role.BusinessRoleOperationLinks.Select(link => link.Operation))
-                   .Distinct();
-    }
 }

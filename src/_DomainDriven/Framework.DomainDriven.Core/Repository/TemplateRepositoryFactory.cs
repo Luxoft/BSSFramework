@@ -27,9 +27,6 @@ public abstract class TemplateRepositoryFactory<TRepository, TTRepositoryImpl, T
     public TRepository Create(SecurityRule securityRule) =>
         this.Create(this.domainSecurityService.GetSecurityProvider(securityRule));
 
-    public TRepository Create(SecurityRule securityRule) =>
-        this.Create(this.domainSecurityService.GetSecurityProvider(securityRule));
-
     public TRepository Create(ISecurityProvider<TDomainObject> securityProvider) =>
         ActivatorUtilities.CreateInstance<TTRepositoryImpl>(this.serviceProvider, securityProvider);
 }

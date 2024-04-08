@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStore;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -32,7 +33,7 @@ public abstract class FileStoreGeneratorConfigurationBase<TEnvironment> : Genera
 
     public virtual string WebGetPath { get; } = "AttachmentService";
 
-    public Enum TryGetSecurityAttribute(Type type, bool forEdit)
+    public SecurityRule TryGetSecurityAttribute(Type type, bool forEdit)
     {
         var dict = this._dictionaryLazy.Value;
         var collection = dict[type];
@@ -57,7 +58,7 @@ public abstract class FileStoreGeneratorConfigurationBase<TEnvironment> : Genera
 
     public class FileStoreBLLParameter
     {
-        public FileStoreBLLParameter(Type type, Enum securityRule, bool isEdit)
+        public FileStoreBLLParameter(Type type, SecurityRule securityRule, bool isEdit)
         {
             this.ForEdit = isEdit;
             this.SecurityRule = securityRule;
@@ -65,7 +66,9 @@ public abstract class FileStoreGeneratorConfigurationBase<TEnvironment> : Genera
         }
 
         public Type Type { get; }
-        public Enum SecurityRule { get; }
+
+        public SecurityRule SecurityRule { get; }
+
         public bool ForEdit { get; }
 
         public override int GetHashCode()

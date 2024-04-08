@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStore;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -35,7 +36,7 @@ public abstract class FileStoreAttachmentGeneratorConfigurationBase<TEnvironment
         yield break;
     }
 
-    public Enum TryGetSecurityAttribute(Type domainType, bool isEdit)
+    public SecurityRule TryGetSecurityAttribute(Type domainType, bool isEdit)
     {
         return this.Environment.FileStore.TryGetSecurityAttribute(domainType, isEdit);
     }

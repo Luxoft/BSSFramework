@@ -1,3 +1,5 @@
+﻿using Framework.SecuritySystem;
+
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public interface IFileStoreGeneratorConfigurationBase<out TEnvironment> : IFileStoreGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
@@ -22,5 +24,5 @@ public interface IFileStoreGeneratorConfigurationBase : IGeneratorConfigurationB
 
 
 
-    Enum TryGetSecurityAttribute(Type type, bool forEdit);
+    SecurityRule TryGetSecurityAttribute(Type type, bool forEdit);
 }

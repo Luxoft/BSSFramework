@@ -37,12 +37,12 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
         return this.ServiceProvider.GetRequiredService<ISecurityProvider<TDomainObject>>();
     }
 
-    public virtual ISecurityOperationResolver SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver>();
+    public virtual IEnumerable<ISecurityRuleExpander> SecurityRuleExpanders => this.ServiceProvider.GetRequiredService<IEnumerable<ISecurityRuleExpander>>();
 
     /// <inheritdoc />
     public override bool AllowedExpandTreeParents<TDomainObject>()
     {
-        var viewOperation = this.SecurityOperationResolver.TryGetSecurityOperation<TDomainObject>(SecurityRule.View);
+        var viewOperation = this.SecurityRuleExpanders.TryExpand<TDomainObject>(SecurityRule.View);
 
         if (viewOperation != null)
         {

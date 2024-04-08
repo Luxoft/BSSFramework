@@ -11,7 +11,5 @@ public interface ITemplateGenericRepositoryFactory<out TRepository, TDomainObjec
 
     TRepository Create(SecurityRule securityRule);
 
-    TRepository Create(SecurityRule securityRule);
-
     TRepository Create(ISecurityProvider<TDomainObject> securityProvider);
 }

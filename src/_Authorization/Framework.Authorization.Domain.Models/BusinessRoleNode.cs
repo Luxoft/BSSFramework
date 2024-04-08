@@ -1,16 +1,10 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.Serialization;
+﻿using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 
 namespace Framework.Authorization.Domain;
 
 public class BusinessRoleNode : DomainObjectBase
 {
-    public BusinessRoleNode()
-    {
-        this.Operations = new List<Operation>();
-    }
-
     public BusinessRoleNode(BusinessRole businessRole, BusinessRole parentRole)
     {
         if (businessRole == null) throw new ArgumentNullException(nameof(businessRole));
@@ -25,7 +19,6 @@ public class BusinessRoleNode : DomainObjectBase
         this.ModifiedBy = businessRole.ModifiedBy;
         this.Name = businessRole.Name;
         this.Description = businessRole.Description;
-        this.Operations = businessRole.BusinessRoleOperationLinks.ToList(link => link.Operation);
 
         this.Children = businessRole.SubBusinessRoles;
     }
@@ -50,6 +43,4 @@ public class BusinessRoleNode : DomainObjectBase
     public string Name { get; set; }
 
     public string Description { get; set; }
-
-    public List<Operation> Operations { get; set; }
 }

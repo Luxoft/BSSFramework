@@ -1,4 +1,6 @@
-﻿namespace Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.SecuritySystem;
+
+namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public interface IFileStoreAttachmentGeneratorConfigurationBase<out TEnvironment> : IFileStoreAttachmentGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : IFileStoreAttachmentGenerationEnvironmentBase
@@ -18,5 +20,5 @@ public interface IFileStoreAttachmentGeneratorConfigurationBase : IGeneratorConf
 
     string WebGetPath { get; }
 
-    Enum TryGetSecurityAttribute(Type type, bool forEdit);
+    SecurityRule TryGetSecurityAttribute(Type type, bool forEdit);
 }

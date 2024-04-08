@@ -30,11 +30,6 @@ public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObj
         return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityRule));
     }
 
-    public TBLL Create(SecurityRule securityRule)
-    {
-        return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityRule));
-    }
-
     public virtual TBLL Create(ISecurityProvider<TDomainObject> securityProvider)
     {
         return ActivatorUtilities.CreateInstance<TBLLImpl>(this.Context.ServiceProvider, securityProvider);

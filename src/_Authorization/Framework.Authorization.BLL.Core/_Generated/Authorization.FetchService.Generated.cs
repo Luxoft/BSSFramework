@@ -30,37 +30,7 @@ namespace Framework.Authorization.BLL
             }
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.BusinessRole>(
-                    fetchRootRule => fetchRootRule.SelectMany(businessRole => businessRole.BusinessRoleOperationLinks).SelectNested(businessRoleOperationLink => businessRoleOperationLink.Operation),
-                    fetchRootRule => fetchRootRule.SelectMany(businessRole => businessRole.SubBusinessRoleLinks).SelectNested(subBusinessRoleLink => subBusinessRoleLink.SubBusinessRole));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.BusinessRoleOperationLink> GetBusinessRoleOperationLinkContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.BusinessRoleOperationLink>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.BusinessRoleOperationLink>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.BusinessRoleOperationLink>(
-                    fetchRootRule => fetchRootRule.SelectNested(businessRoleOperationLink => businessRoleOperationLink.BusinessRole),
-                    fetchRootRule => fetchRootRule.SelectNested(businessRoleOperationLink => businessRoleOperationLink.Operation));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.BusinessRoleOperationLink>(
-                    fetchRootRule => fetchRootRule.SelectNested(businessRoleOperationLink => businessRoleOperationLink.BusinessRole),
-                    fetchRootRule => fetchRootRule.SelectNested(businessRoleOperationLink => businessRoleOperationLink.Operation));
+                return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.BusinessRole>(fetchRootRule => fetchRootRule.SelectMany(businessRole => businessRole.SubBusinessRoleLinks).SelectNested(subBusinessRoleLink => subBusinessRoleLink.SubBusinessRole));
             }
             else
             {
@@ -74,17 +44,9 @@ namespace Framework.Authorization.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessRoleContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.BusinessRoleOperationLink)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessRoleOperationLinkContainer(rule)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.EntityType)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEntityTypeContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.Operation)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetOperationContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.Permission)))
             {
@@ -129,30 +91,6 @@ namespace Framework.Authorization.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
                 return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.EntityType>.Empty;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.Operation> GetOperationContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.Operation>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.Operation>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.Operation>(fetchRootRule => fetchRootRule.SelectNested(operation => operation.ApproveOperation));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.Operation>(fetchRootRule => fetchRootRule.SelectNested(operation => operation.ApproveOperation));
             }
             else
             {

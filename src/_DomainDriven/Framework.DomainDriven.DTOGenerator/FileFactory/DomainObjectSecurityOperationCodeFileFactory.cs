@@ -50,7 +50,7 @@ public class DomainObjectSecurityOperationCodeFileFactory<TConfiguration> : File
 
                select new CodeMemberField
                       {
-                              Name = securityRule.Name,
+                              Name = securityRule.ToString(),
                               CustomAttributes =
                               {
                                       new CodeAttributeDeclaration (new CodeTypeReference(typeof(EnumMemberAttribute)))

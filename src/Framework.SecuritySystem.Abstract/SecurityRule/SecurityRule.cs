@@ -1,22 +1,19 @@
-﻿using Framework.HierarchicalExpand;
+﻿using Framework.Core;
+
+using Framework.HierarchicalExpand;
 
 namespace Framework.SecuritySystem;
 
-public record SecurityRule<T>(T Value) : SecurityRule
-{
-    public sealed override string ToString() => this.Value.ToString();
-}
-
 public abstract record SecurityRule
 {
-    public static SecurityRule View { get; } = new SecurityRule<string>(nameof(View));
+    public static SecurityRule View { get; } = new SpecialSecurityRule(nameof(View));
 
-    public static SecurityRule Edit { get; } = new SecurityRule<string>(nameof(Edit));
+    public static SecurityRule Edit { get; } = new SpecialSecurityRule(nameof(Edit));
 
     /// <summary>
     /// Специальная правило доступа для отключения безопасности
     /// </summary>
-    public static SecurityRule Disabled { get; } = new SecurityRule<string>(nameof(Disabled));
+    public static SecurityRule Disabled { get; } = new SpecialSecurityRule(nameof(Disabled));
 
     /// <summary>
     /// Тип разворачивания деревьев (как правило для операции просмотра самого дерева выбирается HierarchicalExpandType.All)
@@ -26,7 +23,7 @@ public abstract record SecurityRule
 
     public static implicit operator SecurityRule(SecurityOperation securityOperation)
     {
-        return new SecurityRule<SecurityOperation>(securityOperation) { ExpandType = securityOperation.ExpandType };
+        return new OperationSecurityRule(securityOperation) { ExpandType = securityOperation.ExpandType };
     }
 
     public static implicit operator SecurityRule(SecurityRole securityRole)
@@ -36,6 +33,23 @@ public abstract record SecurityRule
 
     public static implicit operator SecurityRule(SecurityRole[] securityRoles)
     {
-        return new SecurityRule<SecurityRole[]>(securityRoles);
+        return new RolesSecurityRule(new DeepEqualsOrderedCollection<SecurityRole>(securityRoles));
+    }
+
+    public record SpecialSecurityRule(string Name) : SecurityRule
+    {
+        public override string ToString() => this.Name;
+    }
+
+    public record OperationSecurityRule(SecurityOperation SecurityOperation) : SecurityRule
+    {
+        public override string ToString() => this.SecurityOperation.Name;
+    }
+
+    public record RolesSecurityRule(DeepEqualsOrderedCollection<SecurityRole> SecurityRoles) : SecurityRule
+    {
+        public override string ToString() => this.SecurityRoles.Count == 1
+                                                 ? this.SecurityRoles.Single().Name
+                                                 : $"SecurityRoles: {this.SecurityRoles.Join(", ", sr => sr.Name)}";
     }
 }

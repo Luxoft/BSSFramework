@@ -9,11 +9,11 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
 
     public DomainSecurityServiceWithFunctor(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        ISecurityOperationResolver securityOperationResolver,
+        IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
         TOriginalDomainSecurityService originalDomainSecurityService,
         IEnumerable<IOverrideSecurityProviderFunctor<TDomainObject>> functorList)
 
-        : base(disabledSecurityProvider, securityOperationResolver)
+        : base(disabledSecurityProvider, securityRuleExpanders)
     {
         this.originalDomainSecurityService = originalDomainSecurityService;
         this.functorList = functorList;
@@ -27,4 +27,9 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
             originalSecurityProvider,
             (provider, functor) => functor.OverrideSecurityProvider(provider, securityRule));
     }
-}
+
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.RolesSecurityRule securityRule)
+    {
+
+    }
+}}

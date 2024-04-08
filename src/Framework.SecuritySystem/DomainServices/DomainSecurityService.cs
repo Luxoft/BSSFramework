@@ -22,7 +22,10 @@ public abstract class DomainSecurityService<TDomainObject> : DomainSecurityServi
         }
         else
         {
-            return this.GetSecurityProvider(securityRule);
+            return this.CreateSecurityProvider(
+                securityRule as SecurityRule.RolesSecurityRule ?? throw new ArgumentOutOfRangeException(nameof(securityRule)));
         }
     }
+
+    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.RolesSecurityRule securityRule);
 }

@@ -4,9 +4,9 @@ namespace Framework.DomainDriven.BLL.Security;
 
 public class BLLSecurityModeAttribute : Attribute
 {
-    public BLLSecurityModeAttribute(SecurityRule securityMode)
+    public BLLSecurityModeAttribute(SecurityRule securityRule)
     {
-        this.SecurityMode = securityMode;
+        this.SecurityMode = securityRule;
     }
 
 

@@ -20,17 +20,17 @@ namespace Framework.Authorization.Environment
             this.availablePermissionSource = availablePermissionSource;
         }
 
-        protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(SecurityRule securityMode)
+        protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(SecurityRule securityRule)
         {
-            var baseProvider = base.CreateSecurityProvider(securityMode);
+            var baseProvider = base.CreateSecurityProvider(securityRule);
 
-            switch (securityMode)
+            if (securityRule == SecurityRule.View)
             {
-                case SecurityRule.View:
-                    return baseProvider.Or(new BusinessRoleSecurityProvider<BusinessRole>(this.availablePermissionSource, v => v));
-
-                default:
-                    return baseProvider;
+                return baseProvider.Or(new BusinessRoleSecurityProvider<BusinessRole>(this.availablePermissionSource, v => v));
+            }
+            else
+            {
+                return baseProvider;
             }
         }
     }

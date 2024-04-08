@@ -20,14 +20,14 @@ namespace Framework.Authorization.Environment
             this.actualPrincipalSource = actualPrincipalSource;
         }
 
-        protected override ISecurityProvider<Permission> CreateSecurityProvider(SecurityRule securityMode)
+        protected override ISecurityProvider<Permission> CreateSecurityProvider(SecurityRule securityRule)
         {
-            var baseProvider = base.CreateSecurityProvider(securityMode);
+            var baseProvider = base.CreateSecurityProvider(securityRule);
 
             var withDelegatedFrom = baseProvider.Or(
                 new PrincipalSecurityProvider<Permission>(this.actualPrincipalSource, permission => permission.DelegatedFrom.Principal));
 
-            switch (securityMode)
+            switch (securityRule)
             {
                 case SecurityRule.View:
                     return withDelegatedFrom.Or(

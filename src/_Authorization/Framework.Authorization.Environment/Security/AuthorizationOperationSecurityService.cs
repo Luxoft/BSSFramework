@@ -20,11 +20,11 @@ namespace Framework.Authorization.Environment
             this.availablePermissionSource = availablePermissionSource;
         }
 
-        protected override ISecurityProvider<Operation> CreateSecurityProvider(SecurityRule securityMode)
+        protected override ISecurityProvider<Operation> CreateSecurityProvider(SecurityRule securityRule)
         {
-            var baseProvider = base.CreateSecurityProvider(securityMode);
+            var baseProvider = base.CreateSecurityProvider(securityRule);
 
-            switch (securityMode)
+            switch (securityRule)
             {
                 case SecurityRule.View:
                     return baseProvider.Or(new OperationSecurityProvider(this.availablePermissionSource));

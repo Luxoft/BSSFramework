@@ -6,7 +6,7 @@ public interface ISecurityBLLFactory<out TBLL, TDomainObject>
 {
     TBLL Create();
 
-    TBLL Create(SecurityRule securityMode);
+    TBLL Create(SecurityRule securityRule);
 
     TBLL Create(SecurityRule securityRule);
 

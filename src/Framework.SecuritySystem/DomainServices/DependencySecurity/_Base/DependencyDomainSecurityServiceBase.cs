@@ -4,37 +4,32 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
 
     DomainSecurityServiceBase<TDomainObject>
 {
-    private readonly ISecurityOperationResolver securityOperationResolver;
+    private readonly ISecurityRuleExpander securityRuleExpander;
 
     private readonly IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService;
 
     protected DependencyDomainSecurityServiceBase(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        ISecurityOperationResolver securityOperationResolver,
+        ISecurityRuleExpander securityRuleExpander,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
         : base(disabledSecurityProvider)
     {
-        this.securityOperationResolver = securityOperationResolver;
+        this.securityRuleExpander = securityRuleExpander;
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));
-    }
-
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityMode)
-    {
-        var customSecurityOperation = this.securityOperationResolver.TryGetSecurityOperation<TDomainObject>(securityMode);
-
-        if (customSecurityOperation == null)
-        {
-            return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityMode));
-        }
-        else
-        {
-            return this.GetSecurityProvider(customSecurityOperation);
-        }
     }
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {
-        return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityRule));
+        var customSecurityRule = this.securityRuleExpander.TryExpand<TDomainObject>(securityRule);
+
+        if (customSecurityRule == null)
+        {
+            return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityRule));
+        }
+        else
+        {
+            return this.GetSecurityProvider(customSecurityRule);
+        }
     }
 
     protected abstract ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider);

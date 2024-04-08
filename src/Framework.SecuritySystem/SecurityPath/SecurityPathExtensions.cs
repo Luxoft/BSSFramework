@@ -7,12 +7,12 @@ public static class SecurityPathExtensions
 {
     public static ISecurityProvider<TDomainObject> ToProvider<TDomainObject>(
         this SecurityPath<TDomainObject> securityPath,
-        SecurityRule operation,
+        SecurityRule securityRule ,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
     {
         return new ContextSecurityPathProvider<TDomainObject>(
             securityPath,
-            operation,
+            securityRule,
             securityExpressionBuilderFactory);
     }
 }

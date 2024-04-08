@@ -15,7 +15,7 @@ public class SecurityOperationExpander : ISecurityRuleExpander
 
     public SecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
     {
-        if (securityRule is SecurityRule<SecurityRule> operationRule)
+        if (securityRule is SecurityRule<SecurityOperation> operationRule)
         {
             var operation = operationRule.Value;
         }
@@ -46,10 +46,8 @@ public class SecurityModeExpander : ISecurityRuleExpander
         {
             return this.editDict.GetValueOrDefault(typeof(TDomainObject));
         }
-        else
-        {
-            return securityRule;
-        }
+
+        return null;
     }
 
     private static Dictionary<Type, SecurityRule> GetDict(IEnumerable<DomainObjectSecurityModeInfo> infos, Func<DomainObjectSecurityModeInfo, SecurityRule?> selector)

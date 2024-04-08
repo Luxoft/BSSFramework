@@ -16,12 +16,12 @@ public class OnlyDisabledDomainSecurityService<TDomainObject> : IDomainSecurityS
         return this.GetSecurityProviderInternal(securityRule, securityRule == SecurityRule.Disabled);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityRule securityMode)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityRule securityRule)
     {
-        return this.GetSecurityProviderInternal(securityMode, securityMode == SecurityRule.Disabled);
+        return this.GetSecurityProviderInternal(securityRule, securityRule == SecurityRule.Disabled);
     }
 
-    private ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityMode, bool isDisabled)
+    private ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityRule, bool isDisabled)
     {
         if (isDisabled)
         {
@@ -29,7 +29,7 @@ public class OnlyDisabledDomainSecurityService<TDomainObject> : IDomainSecurityS
         }
         else
         {
-            throw new InvalidOperationException($"Security mode \"{securityMode}\" not allowed");
+            throw new InvalidOperationException($"Security mode \"{securityRule}\" not allowed");
         }
     }
 }

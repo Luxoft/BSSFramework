@@ -2,18 +2,25 @@
 
 public abstract class DomainSecurityService<TDomainObject> : DomainSecurityServiceBase<TDomainObject>
 {
-    private readonly ISecurityOperationResolver securityOperationResolver;
+    private readonly ISecurityRuleExpander securityRuleExpander;
 
     protected DomainSecurityService(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        ISecurityOperationResolver securityOperationResolver)
+        ISecurityRuleExpander securityRuleExpander)
         : base(disabledSecurityProvider)
     {
-        this.securityOperationResolver = securityOperationResolver ?? throw new ArgumentNullException(nameof(securityOperationResolver));
+        this.securityRuleExpander = securityRuleExpander;
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityMode)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {
-        return this.GetSecurityProvider(this.securityOperationResolver.GetSecurityOperation<TDomainObject>(securityMode));
+        var modeExpanded = this.securityRuleExpander.TryExpand<TDomainObject>(securityRule);
+
+        if (modeExpanded != null)
+        {
+
+        }
+
+        return this.GetSecurityProvider(this.securityOperationResolver.GetSecurityOperation<TDomainObject>(securityRule));
     }
 }

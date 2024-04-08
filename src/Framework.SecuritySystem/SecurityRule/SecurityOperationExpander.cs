@@ -13,16 +13,14 @@ public class SecurityOperationExpander : ISecurityRuleExpander
         this.tryExpandCache = new DictionaryCache<SecurityRule, SecurityRule?>(
             securityRule =>
             {
-                if (securityRule is SecurityRule<SecurityOperation> operationRule)
+                if (securityRule is SecurityRule.OperationSecurityRule operationRule)
                 {
-                    var securityOperation = operationRule.Value;
-
                     var securityRoles = securityRoleSource.SecurityRoles.GetAllElements(sr => sr.Children)
-                                                          .Where(sr => sr.Operations.Contains(securityOperation))
+                                                          .Where(sr => sr.Operations.Contains(operationRule.SecurityOperation))
                                                           .Distinct()
                                                           .ToArray();
 
-                    return new SecurityRule<SecurityRole[]>(securityRoles);
+                    return securityRoles.ToArray();
                 }
                 else
                 {

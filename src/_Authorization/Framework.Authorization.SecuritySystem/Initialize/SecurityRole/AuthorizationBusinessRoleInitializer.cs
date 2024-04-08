@@ -13,8 +13,6 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
 {
     private readonly IRepository<BusinessRole> businessRoleRepository;
 
-    private readonly IRepository<Operation> operationRepository;
-
     private readonly ISecurityRoleSource securityRoleSource;
 
     private readonly ILogger logger;
@@ -22,14 +20,12 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
     private readonly InitializeSettings settings;
 
     public AuthorizationBusinessRoleInitializer(
-        [FromKeyedServices(SecurityRule.Disabled)] IRepository<BusinessRole> businessRoleRepository,
-        [FromKeyedServices(SecurityRule.Disabled)] IRepository<Operation> operationRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
         ISecurityRoleSource securityRoleSource,
         ILogger logger,
         InitializeSettings settings)
     {
         this.businessRoleRepository = businessRoleRepository;
-        this.operationRepository = operationRepository;
         this.securityRoleSource = securityRoleSource;
         this.logger = logger.ForContext<AuthorizationBusinessRoleInitializer>();
         this.settings = settings;
@@ -44,11 +40,7 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
     {
         var dbRoles = await this.businessRoleRepository.GetQueryable().ToListAsync(cancellationToken);
 
-        var dbOperations = await this.operationRepository.GetQueryable().ToListAsync(cancellationToken);
-
         var mergeRoleResult = dbRoles.GetMergeResult(GetOrderedRoles(securityRoles), br => br.Id, sr => sr.Id);
-
-        var dbOperationDict = dbOperations.ToDictionary(op => op.Id);
 
         var mappingDict = new Dictionary<SecurityRole, BusinessRole>();
 
@@ -84,15 +76,6 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
 
             this.logger.Verbose("Create Role: {0} {1}", businessRole.Name, securityRole.Id);
 
-            foreach (var securityOperationInfo in GetAllOperationsC(securityRole))
-            {
-                var operation = dbOperationDict[securityOperationInfo.SecurityRule.Id];
-
-                new BusinessRoleOperationLink(businessRole) { Operation = operation, IsDenormalized = securityOperationInfo.IsDenormalized };
-
-                this.logger.Verbose("Add operation {0} to Role: {1}", operation.Name, businessRole.Name);
-            }
-
             foreach (var subRole in securityRole.Children)
             {
                 new SubBusinessRoleLink(businessRole) { SubBusinessRole = mappingDict[subRole] };
@@ -109,35 +92,6 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
             var securityRole = combinePair.Item2;
 
             businessRole.Description = securityRole.Description;
-
-            var mergeOperationResult = businessRole.BusinessRoleOperationLinks.GetMergeResult(
-                GetAllOperationsC(securityRole),
-                link => link.Operation.Id,
-                pair => pair.SecurityRule.Id);
-
-            foreach (var securityOperationInfo in mergeOperationResult.AddingItems)
-            {
-                var operation = dbOperationDict[securityOperationInfo.SecurityRule.Id];
-
-                new BusinessRoleOperationLink(businessRole)
-                {
-                    Operation = operation, IsDenormalized = securityOperationInfo.IsDenormalized
-                };
-
-                this.logger.Verbose("Add operation {0} to Role: {1}", operation.Name, businessRole.Name);
-            }
-
-            foreach (var dbOperationLink in mergeOperationResult.RemovingItems)
-            {
-                businessRole.RemoveDetail(dbOperationLink);
-
-                this.logger.Verbose("Remove operation {0} from Role: {1}", dbOperationLink.Operation.Name, businessRole.Name);
-            }
-
-            foreach (var mergePair in mergeOperationResult.CombineItems)
-            {
-                mergePair.Item1.IsDenormalized = mergePair.Item2.IsDenormalized;
-            }
 
             var mergeSubRoleResult = businessRole.SubBusinessRoleLinks.GetMergeResult(
                 securityRole.Children,
@@ -160,23 +114,6 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
 
             mappingDict.Add(securityRole, businessRole);
         }
-    }
-
-    private static IEnumerable<(SecurityRule SecurityRule, bool IsDenormalized)> GetAllOperationsC(SecurityRole securityRole)
-    {
-        return GetAllOperations(securityRole).Select(pair => ((SecurityRule)pair.SecurityRule, pair.IsDenormalized));
-    }
-
-    private static IEnumerable<(SecurityRule SecurityRule, bool IsDenormalized)> GetAllOperations(SecurityRole securityRole)
-    {
-        var subOperations = securityRole.Children
-                                        .GetAllElements(child => child.Children)
-                                        .SelectMany(child => child.Operations)
-                                        .Distinct()
-                                        .Except(securityRole.Operations);
-
-        return securityRole.Operations.Select(rootOperation => (rootOperation, false))
-                           .Concat(subOperations.Select(subOperation => (subOperation, true)));
     }
 
     private static IEnumerable<SecurityRole> GetOrderedRoles(IEnumerable<SecurityRole> securityRoles)

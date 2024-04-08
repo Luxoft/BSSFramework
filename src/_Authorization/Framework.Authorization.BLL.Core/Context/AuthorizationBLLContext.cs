@@ -46,7 +46,7 @@ public partial class AuthorizationBLLContext
             IRunAsManager runAsManager,
             IAvailablePermissionSource availablePermissionSource,
             ISecurityOperationParser<Guid> securityOperationParser,
-            IAvailableSecurityOperationSource availableSecurityOperationSource,
+            IAvailableSecurityRoleSource availableSecurityRoleSource,
             IActualPrincipalSource actualPrincipalSource)
             : base(
                    serviceProvider,
@@ -63,7 +63,7 @@ public partial class AuthorizationBLLContext
         this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
         this.AvailablePermissionSource = availablePermissionSource;
         this.SecurityOperationParser = securityOperationParser;
-        this.AvailableSecurityOperationSource = availableSecurityOperationSource;
+        this.AvailableSecurityRoleSource = availableSecurityRoleSource;
         this.ActualPrincipalSource = actualPrincipalSource;
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
         this.AuthorizationSystem = authorizationSystem;
@@ -97,7 +97,7 @@ public partial class AuthorizationBLLContext
 
     public IAvailablePermissionSource AvailablePermissionSource { get; }
 
-    public IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
+    public IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
 
     public ISecurityOperationParser<Guid> SecurityOperationParser { get; }
 

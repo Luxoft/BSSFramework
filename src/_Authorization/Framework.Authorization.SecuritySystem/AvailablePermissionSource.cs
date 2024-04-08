@@ -19,7 +19,7 @@ public class AvailablePermissionSource : IAvailablePermissionSource
     private readonly IUserAuthenticationService userAuthenticationService;
 
     public AvailablePermissionSource(
-        [FromKeyedServices(SecurityRule.Disabled)] IRepository<Permission> permissionRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Permission> permissionRepository,
         TimeProvider timeProvider,
         IActualPrincipalSource actualPrincipalSource,
         IUserAuthenticationService userAuthenticationService)

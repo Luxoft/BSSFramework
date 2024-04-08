@@ -4,29 +4,26 @@ using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class AvailableSecurityOperationSource : IAvailableSecurityOperationSource
+public class AvailableSecurityRoleSource : IAvailableSecurityRoleSource
 {
     private readonly IAvailablePermissionSource availablePermissionSource;
 
-    private readonly ISecurityOperationParser<Guid> parser;
+    private readonly ISecurityOperationParser parser;
 
-    public AvailableSecurityOperationSource(IAvailablePermissionSource availablePermissionSource, ISecurityOperationParser<Guid> parser)
+    public AvailableSecurityRoleSource(IAvailablePermissionSource availablePermissionSource, ISecurityOperationParser parser)
     {
         this.availablePermissionSource = availablePermissionSource;
         this.parser = parser;
     }
 
-    public async Task<List<SecurityRule>> GetAvailableSecurityOperation (CancellationToken cancellationToken)
+    public async Task<List<SecurityRole>> GetAvailableSecurityRole (CancellationToken cancellationToken)
     {
-        var dbRequest = (from permission in this.availablePermissionSource.GetAvailablePermissionsQueryable()
+        var dbRequest = from permission in this.availablePermissionSource.GetAvailablePermissionsQueryable()
 
-                        from operationLink in permission.Role.BusinessRoleOperationLinks
+                        select permission.Role.Id;
 
-                        select operationLink.Operation.Id)
-                        .Distinct();
+        var dbOperationIdents = await dbRequest.Distinct().ToListAsync(cancellationToken);
 
-        var dbOperationIdents = await dbRequest.ToListAsync(cancellationToken);
-
-        return dbOperationIdents.Select(this.parser.GetSecurityOperation).ToList<SecurityRule>();
+        return dbOperationIdents.Select(this.parser.GetSecurityOperation).ToList<SecurityRole>();
     }
 }

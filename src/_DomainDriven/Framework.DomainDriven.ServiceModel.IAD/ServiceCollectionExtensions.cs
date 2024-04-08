@@ -71,9 +71,9 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        services.AddKeyedScoped(typeof(IRepository<>), SecurityRule.Disabled, typeof(Repository<>));
-        services.AddKeyedScoped(typeof(IRepository<>), SecurityRule.View, typeof(ViewRepository<>));
-        services.AddKeyedScoped(typeof(IRepository<>), SecurityRule.Edit, typeof(EditRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Disabled), typeof(Repository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.View), typeof(ViewRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Edit), typeof(EditRepository<>));
 
         services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
@@ -177,7 +177,7 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IOperationDomainService, OperationDomainService>()
                        .AddScoped<IBusinessRoleDomainService, BusinessRoleDomainService>()
 
-                       .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
+                       .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
 
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 

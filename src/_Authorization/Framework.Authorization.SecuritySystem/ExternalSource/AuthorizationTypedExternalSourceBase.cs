@@ -19,9 +19,9 @@ public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : I
     private readonly SecurityContextInfo<TSecurityContext, Guid> securityContextInfo;
 
     protected AuthorizationTypedExternalSourceBase(
-        [FromKeyedServices(SecurityRule.Disabled)] IRepository<TSecurityContext> securityContextRepository,
-        [FromKeyedServices(SecurityRule.Disabled)] IRepository<EntityType> entityTypeRepository,
-        [FromKeyedServices(SecurityRule.Disabled)] IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<TSecurityContext> securityContextRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<EntityType> entityTypeRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
         SecurityContextInfo<TSecurityContext, Guid> securityContextInfo)
     {
         this.securityContextRepository = securityContextRepository;

@@ -37,7 +37,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IRealTypeResolver realTypeResolver,
         IUserAuthenticationService userAuthenticationService,
         IOperationAccessorFactory operationAccessorFactory,
-        [FromKeyedServices(SecurityRule.Disabled)] IRepository<Principal> principalRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
         TimeProvider timeProvider)
     {
         this.availablePermissionSource = availablePermissionSource;

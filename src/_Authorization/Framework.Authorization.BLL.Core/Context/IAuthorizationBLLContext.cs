@@ -28,7 +28,7 @@ public partial interface IAuthorizationBLLContext :
 
     IAvailablePermissionSource AvailablePermissionSource { get; }
 
-    IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
+    IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
 
     ISecurityOperationParser<Guid> SecurityOperationParser { get; }
 

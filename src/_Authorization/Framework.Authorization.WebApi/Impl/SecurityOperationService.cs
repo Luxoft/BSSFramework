@@ -8,7 +8,7 @@ public partial class AuthSLJsonController
     public IEnumerable<string> GetSecurityOperations()
     {
         return this.EvaluateC(DBSessionMode.Read,
-                              context => context.AvailableSecurityOperationSource.GetAvailableSecurityOperation().GetAwaiter().GetResult()
+                              context => context.AvailableSecurityRoleSource.GetAvailableSecurityRole().GetAwaiter().GetResult()
                                                 .Select(op => op.Name)
                                                 .ToList());
     }

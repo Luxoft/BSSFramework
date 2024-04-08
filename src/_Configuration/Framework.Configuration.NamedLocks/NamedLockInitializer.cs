@@ -17,7 +17,7 @@ public class NamedLockInitializer : INamedLockInitializer
     private readonly INamedLockSource namedLockSource;
 
     public NamedLockInitializer(
-        [FromKeyedServices(SecurityRule.Disabled)] IRepository<GenericNamedLock> namedLockRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<GenericNamedLock> namedLockRepository,
         INamedLockSource namedLockSource)
     {
         this.namedLockRepository = namedLockRepository;

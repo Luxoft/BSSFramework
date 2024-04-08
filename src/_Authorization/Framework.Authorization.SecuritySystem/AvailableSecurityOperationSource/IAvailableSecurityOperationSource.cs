@@ -2,7 +2,7 @@
 
 namespace Framework.Authorization.SecuritySystem;
 
-public interface IAvailableSecurityOperationSource
+public interface IAvailableSecurityRoleSource
 {
-    Task<List<SecurityRule>> GetAvailableSecurityOperation(CancellationToken cancellationToken = default);
+    Task<List<SecurityRole>> GetAvailableSecurityRole(CancellationToken cancellationToken = default);
 }

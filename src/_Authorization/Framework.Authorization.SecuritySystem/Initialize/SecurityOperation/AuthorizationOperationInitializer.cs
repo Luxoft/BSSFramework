@@ -27,10 +27,10 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
     private readonly InitializeSettings settings;
 
     public AuthorizationOperationInitializer(
-        [FromKeyedServices(SecurityRule.Disabled)] IRepository<Operation> operationRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Operation> operationRepository,
         IOperationDomainService operationDomainService,
         ISecurityOperationParser<Guid> securityOperationParser,
-        [FromKeyedServices(SecurityRule.Disabled)] IRepository<BusinessRole> businessRoleRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
         IBusinessRoleDomainService businessRoleDomainService,
         ILogger logger,
         InitializeSettings settings)

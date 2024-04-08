@@ -69,11 +69,11 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     }
 
     public IEnumerable<string> GetNonContextAccessors(
-        SecurityOperation securityOperation, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
+        SecurityRule securityRule, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
     {
         if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
 
-        var typedSecurityOperation = (SecurityOperation)securityOperation;
+        var typedSecurityOperation = (SecurityRule)securityRule;
 
         return this.GetAccessors(
             (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
@@ -81,10 +81,10 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     }
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
-        SecurityOperation securityOperation,
+        SecurityRule securityRule,
         IEnumerable<Type> securityTypes)
     {
-        var typedSecurityOperation = (SecurityOperation)securityOperation;
+        var typedSecurityOperation = (SecurityRule)securityRule;
 
         var permissions = this.availablePermissionSource.GetAvailablePermissionsQueryable(true, typedSecurityOperation.Id)
                               .FetchMany(q => q.FilterItems)
@@ -97,12 +97,12 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         return permissions
                .Select(permission => permission.ToDictionary(this.realTypeResolver, securityTypesCache))
                .Pipe(this.runtimePermissionOptimizationService.Optimize)
-               .ToList(permission => this.TryExpandPermission(permission, securityOperation.ExpandType));
+               .ToList(permission => this.TryExpandPermission(permission, securityRule.ExpandType));
     }
 
-    public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityOperation securityOperation)
+    public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityRule securityRule)
     {
-        var typedSecurityOperation = (SecurityOperation)securityOperation;
+        var typedSecurityOperation = (SecurityRule)securityRule;
 
         return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityOperationId: typedSecurityOperation.Id);
     }
@@ -120,9 +120,9 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     public bool IsAdmin() => this.operationAccessorFactory.Create(true).IsAdmin();
 
-    public bool HasAccess(SecurityOperation securityOperation) => this.operationAccessorFactory.Create(true).HasAccess(securityOperation);
+    public bool HasAccess(SecurityRule securityRule) => this.operationAccessorFactory.Create(true).HasAccess(securityRule);
 
-    public void CheckAccess(SecurityOperation securityOperation) => this.operationAccessorFactory.Create(true).CheckAccess(securityOperation);
+    public void CheckAccess(SecurityRule securityRule) => this.operationAccessorFactory.Create(true).CheckAccess(securityRule);
 
     private static readonly ExpressionVisitor AuthVisitor = new OverrideParameterTypeVisitor(
         new Dictionary<Type, Type>

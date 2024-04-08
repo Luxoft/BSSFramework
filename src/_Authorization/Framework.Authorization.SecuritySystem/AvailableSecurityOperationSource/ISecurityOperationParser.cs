@@ -4,7 +4,7 @@ namespace Framework.Authorization.SecuritySystem;
 
 public interface ISecurityOperationParser
 {
-    IReadOnlyList<SecurityOperation> Operations { get; }
+    IReadOnlyList<SecurityRule> Operations { get; }
 
-    SecurityOperation Parse(string name);
+    SecurityRule Parse(string name);
 }

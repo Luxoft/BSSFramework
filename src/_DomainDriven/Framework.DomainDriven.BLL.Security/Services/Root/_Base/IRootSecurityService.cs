@@ -8,6 +8,6 @@ public interface IRootSecurityService<in TPersistentDomainObjectBase>
     ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityMode)
         where TDomainObject : TPersistentDomainObjectBase;
 
-    ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation securityOperation)
+    ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityRule)
         where TDomainObject : TPersistentDomainObjectBase;
 }

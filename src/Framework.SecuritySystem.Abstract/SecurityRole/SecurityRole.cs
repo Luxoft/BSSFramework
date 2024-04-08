@@ -28,7 +28,6 @@ public class SecurityRole
                "Administrator",
                securityOperationTypes.SelectMany(SecurityOperationHelper.GetSecurityOperations)
                                      .Distinct()
-                                     .Where(operation => operation != SecurityOperation.Disabled)
                                      .ToArray())
                { Description = description };
     }

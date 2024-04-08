@@ -16,8 +16,8 @@ public class EditDomainObjectAttribute : DomainObjectAccessAttribute
     {
     }
 
-    public EditDomainObjectAttribute(SecurityOperation securityOperation)
-        : base(securityOperation)
+    public EditDomainObjectAttribute(SecurityRule securityRule)
+        : base(securityRule)
     {
     }
 

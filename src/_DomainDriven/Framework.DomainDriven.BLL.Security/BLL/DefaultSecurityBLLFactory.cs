@@ -29,10 +29,10 @@ public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainOb
     }
 
     public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(
-        SecurityOperation securityOperation)
+        SecurityRule securityRule)
         where TDomainObject : class, TPersistentDomainObjectBase
     {
-        return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityOperation));
+        return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityRule));
     }
 
     public abstract IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(

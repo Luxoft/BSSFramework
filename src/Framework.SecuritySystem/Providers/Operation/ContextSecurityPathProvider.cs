@@ -20,7 +20,7 @@ namespace Framework.SecuritySystem.Providers.Operation
 
         public ContextSecurityPathProvider(
             SecurityPath<TDomainObject> securityPathBase,
-            SecurityOperation securityRule,
+            SecurityRule securityRule,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
         {
             if (securityPathBase == null) throw new ArgumentNullException(nameof(securityPathBase));
@@ -56,7 +56,7 @@ namespace Framework.SecuritySystem.Providers.Operation
             {
                 return new AccessResult.AccessDeniedResult
                        {
-                           SecurityOperation = this.securityRule, DomainObjectInfo = (domainObject, typeof(TDomainObject))
+                           SecurityRule = this.securityRule, DomainObjectInfo = (domainObject, typeof(TDomainObject))
                        };
             }
         }

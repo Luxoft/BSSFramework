@@ -42,14 +42,14 @@ public class AccessDeniedExceptionServiceTests
         // Arrange
         var service = new AccessDeniedExceptionService<Guid>();
         var employee = new Employee();
-        var securityOperation = ExampleSecurityOperation.EmployeeView;
+        var securityRule = ExampleSecurityOperation.EmployeeView;
 
         // Act
         var result = service.GetAccessDeniedException(
-            new AccessResult.AccessDeniedResult { DomainObjectInfo = (employee, typeof(Employee)), SecurityOperation = securityOperation });
+            new AccessResult.AccessDeniedResult { DomainObjectInfo = (employee, typeof(Employee)), SecurityRule = securityRule });
 
         // Assert
-        result.Message.Should().Be($"You have no permissions to create object with type = '{nameof(Employee)}' (securityOperation = '{securityOperation.Name}')");
+        result.Message.Should().Be($"You have no permissions to create object with type = '{nameof(Employee)}' (securityRule = '{securityRule.Name}')");
     }
 
     [Fact]
@@ -58,13 +58,13 @@ public class AccessDeniedExceptionServiceTests
         // Arrange
         var service = new AccessDeniedExceptionService<Guid>();
         var employee = new Employee() { Id = Guid.NewGuid() };
-        var securityOperation = ExampleSecurityOperation.EmployeeView;
+        var securityRule = ExampleSecurityOperation.EmployeeView;
 
         // Act
         var result = service.GetAccessDeniedException(
-            new AccessResult.AccessDeniedResult { DomainObjectInfo = (employee, typeof(Employee)), SecurityOperation = securityOperation });
+            new AccessResult.AccessDeniedResult { DomainObjectInfo = (employee, typeof(Employee)), SecurityRule = securityRule });
 
         // Assert
-        result.Message.Should().Be($"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{employee.Id}', securityOperation = '{securityOperation.Name}')");
+        result.Message.Should().Be($"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{employee.Id}', securityRule = '{securityRule.Name}')");
     }
 }

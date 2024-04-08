@@ -26,7 +26,7 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : 
         this.securityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
     }
 
-    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SecurityOperation securityRule)
+    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SecurityRule securityRule)
         where TSecurityContext : class, ISecurityContext
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
@@ -35,7 +35,7 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : 
         return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityRule);
     }
 
-    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, SecurityOperation securityRule)
+    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, SecurityRule securityRule)
         where TSecurityContext : class, ISecurityContext
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
@@ -44,7 +44,7 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : 
         return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityRule);
     }
 
-    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, SecurityOperation securityRule)
+    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, SecurityRule securityRule)
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
         if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
@@ -69,7 +69,7 @@ public class ContextDomainSecurityService<TDomainObject, TIdent> : ContextDomain
         this.securityPath = securityPath;
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityRule)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {
         return this.Create(this.securityPath, securityRule);
     }

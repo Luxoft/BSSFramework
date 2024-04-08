@@ -7,7 +7,7 @@ public interface IOverrideSecurityProviderFunctor<TDomainObject>
         return baseProvider;
     }
 
-    ISecurityProvider<TDomainObject> OverrideSecurityProvider(ISecurityProvider<TDomainObject> baseProvider, SecurityOperation securityRule)
+    ISecurityProvider<TDomainObject> OverrideSecurityProvider(ISecurityProvider<TDomainObject> baseProvider, SecurityRule securityRule)
     {
         return baseProvider;
     }

@@ -7,9 +7,9 @@ namespace Framework.Security;
 
 public static class TypeExtensions
 {
-    internal static SecurityOperation GetSecurityOperation(this Type securityOperationType, string name)
+    internal static SecurityRule GetSecurityOperation(this Type securityOperationType, string name)
     {
-        return (SecurityOperation)securityOperationType.GetProperty(name)!.GetValue(null);
+        return (SecurityRule)securityOperationType.GetProperty(name)!.GetValue(null);
     }
 
     public static Type GetDependencySecuritySourceType(this Type type, bool recurse)
@@ -52,7 +52,7 @@ public static class TypeExtensions
         return sourceType.GetSecurityNodeInterfaces().Where(interfaceType => interfaceType.IsGenericType);
     }
 
-    public static Dictionary<Type, ReadOnlyCollection<SecurityOperation>> GetTypesWithSecondarySecurityOperations(this IEnumerable<Type> source)
+    public static Dictionary<Type, ReadOnlyCollection<SecurityRule>> GetTypesWithSecondarySecurityOperations(this IEnumerable<Type> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 

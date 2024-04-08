@@ -22,7 +22,7 @@ public abstract class FileGenerator<TConfiguration> : CodeFileGenerator<TConfigu
         return new DefaultIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }
 
-    protected virtual ICodeFileFactory<RoleFileType> GetDomainObjectSecurityOperationCodeFileFactory(Type domainType, IEnumerable<SecurityOperation> securityOperations)
+    protected virtual ICodeFileFactory<RoleFileType> GetDomainObjectSecurityOperationCodeFileFactory(Type domainType, IEnumerable<SecurityRule> securityOperations)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (securityOperations == null) throw new ArgumentNullException(nameof(securityOperations));

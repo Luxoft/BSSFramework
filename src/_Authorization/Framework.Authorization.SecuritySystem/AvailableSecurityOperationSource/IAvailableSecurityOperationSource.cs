@@ -4,5 +4,5 @@ namespace Framework.Authorization.SecuritySystem;
 
 public interface IAvailableSecurityOperationSource
 {
-    Task<List<SecurityOperation>> GetAvailableSecurityOperation(CancellationToken cancellationToken = default);
+    Task<List<SecurityRule>> GetAvailableSecurityOperation(CancellationToken cancellationToken = default);
 }

@@ -37,10 +37,10 @@ public class BLLFactoryContainerInterfaceGeneratorConfiguration<TConfiguration> 
         {
             return logicExpressionSource.ToPropertyReference(domainType.Name);
         }
-        else if (securitySource is SecurityOperation securityOperation)
+        else if (securitySource is SecurityRule securityRule)
         {
             return logicExpressionSource.ToPropertyReference(domainType.Name + "Factory")
-                                        .ToMethodInvokeExpression("Create", this.Configuration.GetSecurityCodeExpression(securityOperation));
+                                        .ToMethodInvokeExpression("Create", this.Configuration.GetSecurityCodeExpression(securityRule));
         }
         else if (securitySource is SecurityRule securityMode)
         {

@@ -125,7 +125,7 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
 
     ////    var securityOperationModeTypeRef = this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference();
 
-    ////    var securityOperationModeParamName = "securityOperation";
+    ////    var securityOperationModeParamName = "securityRule";
 
 
     ////    var genericDomainTypeRefExpr = genericDomainTypeRef.ToTypeReference();

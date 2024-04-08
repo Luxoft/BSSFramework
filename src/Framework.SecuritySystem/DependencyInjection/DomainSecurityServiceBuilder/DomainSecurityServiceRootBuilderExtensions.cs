@@ -4,7 +4,7 @@ public static class DomainSecurityServiceRootBuilderExtensions
 {
     public static IDomainSecurityServiceRootBuilder Add<TDomainObject>(
         this IDomainSecurityServiceRootBuilder rootBuilder,
-        SecurityOperation viewOperation,
+        SecurityRule viewOperation,
         SecurityPath<TDomainObject> securityPath)
     {
         return rootBuilder.Add(viewOperation, null, securityPath);
@@ -12,8 +12,8 @@ public static class DomainSecurityServiceRootBuilderExtensions
 
     public static IDomainSecurityServiceRootBuilder Add<TDomainObject>(
         this IDomainSecurityServiceRootBuilder rootBuilder,
-        SecurityOperation viewOperation,
-        SecurityOperation editOperation = null,
+        SecurityRule viewOperation,
+        SecurityRule editOperation = null,
         SecurityPath<TDomainObject> securityPath = null)
     {
         return rootBuilder.Add<TDomainObject>(
@@ -35,11 +35,11 @@ public static class DomainSecurityServiceRootBuilderExtensions
 
     public static IDomainSecurityServiceRootBuilder AddViewDisabled<TDomainObject>(this IDomainSecurityServiceRootBuilder rootBuilder)
     {
-        return rootBuilder.Add<TDomainObject>(SecurityOperation.Disabled);
+        return rootBuilder.Add<TDomainObject>(SecurityRule.Disabled);
     }
 
     public static IDomainSecurityServiceRootBuilder AddFullDisabled<TDomainObject>(this IDomainSecurityServiceRootBuilder rootBuilder)
     {
-        return rootBuilder.Add<TDomainObject>(SecurityOperation.Disabled, SecurityOperation.Disabled);
+        return rootBuilder.Add<TDomainObject>(SecurityRule.Disabled, SecurityRule.Disabled);
     }
 }

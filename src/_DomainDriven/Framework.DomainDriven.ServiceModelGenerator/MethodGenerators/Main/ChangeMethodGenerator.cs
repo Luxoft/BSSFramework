@@ -68,6 +68,6 @@ public class ChangeMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfi
             return base.GetBLLSecurityParameter(evaluateDataExpr);
         }
 
-        return modelSecurityAttribute.SecurityOperation;
+        return modelSecurityAttribute.SecurityRule;
     }
 }

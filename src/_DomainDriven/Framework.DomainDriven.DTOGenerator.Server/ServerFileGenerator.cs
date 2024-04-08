@@ -29,7 +29,7 @@ public class ServerFileGenerator<TConfiguration> : FileGenerator<TConfiguration>
         return new DefaultServerIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }
 
-    protected override ICodeFileFactory<RoleFileType> GetDomainObjectSecurityOperationCodeFileFactory(Type domainType, IEnumerable<SecurityOperation> securityOperations)
+    protected override ICodeFileFactory<RoleFileType> GetDomainObjectSecurityOperationCodeFileFactory(Type domainType, IEnumerable<SecurityRule> securityOperations)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (securityOperations == null) throw new ArgumentNullException(nameof(securityOperations));

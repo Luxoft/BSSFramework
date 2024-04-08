@@ -61,7 +61,7 @@ public class InitializeAndCleanup
 
                .AddSingleton<SampleSystemInitializer>()
 
-               .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
+               .RegisterControllers([typeof(EmployeeController).Assembly])
 
                .AddSingleton<DataHelper>()
                .AddSingleton<AuthHelper>();

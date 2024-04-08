@@ -15,7 +15,7 @@ public class SecurityOperationExpander : ISecurityRuleExpander
 
     public SecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
     {
-        if (securityRule is SecurityRule<SecurityOperation> operationRule)
+        if (securityRule is SecurityRule<SecurityRule> operationRule)
         {
             var operation = operationRule.Value;
         }

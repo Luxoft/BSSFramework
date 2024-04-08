@@ -11,9 +11,9 @@ public class OnlyDisabledDomainSecurityService<TDomainObject> : IDomainSecurityS
         this.disabledSecurityProvider = disabledSecurityProvider;
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation securityOperation)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityRule securityRule)
     {
-        return this.GetSecurityProviderInternal(securityOperation, securityOperation == SecurityOperation.Disabled);
+        return this.GetSecurityProviderInternal(securityRule, securityRule == SecurityRule.Disabled);
     }
 
     public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityRule securityMode)

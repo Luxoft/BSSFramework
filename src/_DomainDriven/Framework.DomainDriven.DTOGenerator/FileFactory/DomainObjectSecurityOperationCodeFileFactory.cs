@@ -9,10 +9,10 @@ namespace Framework.DomainDriven.DTOGenerator;
 public class DomainObjectSecurityOperationCodeFileFactory<TConfiguration> : FileFactory<TConfiguration, RoleFileType>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    protected readonly IReadOnlyCollection<SecurityOperation> SecurityOperations;
+    protected readonly IReadOnlyCollection<SecurityRule> SecurityOperations;
 
 
-    public DomainObjectSecurityOperationCodeFileFactory(TConfiguration configuration, Type domainType, IEnumerable<SecurityOperation> securityOperations)
+    public DomainObjectSecurityOperationCodeFileFactory(TConfiguration configuration, Type domainType, IEnumerable<SecurityRule> securityOperations)
             : base(configuration, domainType)
     {
         if (securityOperations == null) throw new ArgumentNullException(nameof(securityOperations));
@@ -46,11 +46,11 @@ public class DomainObjectSecurityOperationCodeFileFactory<TConfiguration> : File
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {
-        return from securityOperation in this.SecurityOperations
+        return from securityRule in this.SecurityOperations
 
                select new CodeMemberField
                       {
-                              Name = securityOperation.Name,
+                              Name = securityRule.Name,
                               CustomAttributes =
                               {
                                       new CodeAttributeDeclaration (new CodeTypeReference(typeof(EnumMemberAttribute)))

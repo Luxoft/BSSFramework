@@ -11,11 +11,11 @@ namespace Framework.Security;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Property)]
 public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
 {
-    private readonly ReadOnlyCollection<SecurityOperation> baseSecondaryOperations = new ReadOnlyCollection<SecurityOperation>(new List<SecurityOperation>());
+    private readonly ReadOnlyCollection<SecurityRule> baseSecondaryOperations = new ReadOnlyCollection<SecurityRule>(new List<SecurityRule>());
 
     private Type[] sourceTypes;
 
-    private ReadOnlyCollection<SecurityOperation> editSourceOperations = new ReadOnlyCollection<SecurityOperation>(new List<SecurityOperation>());
+    private ReadOnlyCollection<SecurityRule> editSourceOperations = new ReadOnlyCollection<SecurityRule>(new List<SecurityRule>());
 
     /// <summary>
     /// Пустой констуктор для кастомной безопасности
@@ -58,7 +58,7 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     {
     }
 
-    public ViewDomainObjectAttribute(SecurityOperation primarySecurityOperation, params SecurityOperation[] baseSecondaryOperations)
+    public ViewDomainObjectAttribute(SecurityRule primarySecurityOperation, params SecurityRule[] baseSecondaryOperations)
         : base(primarySecurityOperation)
     {
         if (baseSecondaryOperations == null) throw new ArgumentNullException(nameof(baseSecondaryOperations));
@@ -71,12 +71,12 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     /// <summary>
     /// Дополнительные операции для просмотра
     /// </summary>
-    public IEnumerable<SecurityOperation> SecondaryOperations => this.baseSecondaryOperations.Concat(this.editSourceOperations).Distinct();
+    public IEnumerable<SecurityRule> SecondaryOperations => this.baseSecondaryOperations.Concat(this.editSourceOperations).Distinct();
 
     /// <summary>
     /// Все операции для просмотра объекта
     /// </summary>
-    public IEnumerable<SecurityOperation> AllOperations => new[] { this.SecurityOperation }.Concat(this.SecondaryOperations).Distinct();
+    public IEnumerable<SecurityRule> AllOperations => new[] { this.SecurityRule }.Concat(this.SecondaryOperations).Distinct();
 
     /// <summary>
     /// Типы, для редактирования которых требуется данный объекта (из типов забираются edit-операции)
@@ -95,13 +95,13 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
         }
     }
 
-    private void CheckSecondaryOperations(IEnumerable<SecurityOperation> secondaryOperations)
+    private void CheckSecondaryOperations(IEnumerable<SecurityRule> secondaryOperations)
     {
         if (secondaryOperations == null) throw new ArgumentNullException(nameof(secondaryOperations));
 
         if (this.HasContext)
         {
-            var nonContextOperations = secondaryOperations.Where(operation => !(operation is SecurityOperation)).ToList();
+            var nonContextOperations = secondaryOperations.Where(operation => !(operation is SecurityRule)).ToList();
 
             if (nonContextOperations.Any())
             {

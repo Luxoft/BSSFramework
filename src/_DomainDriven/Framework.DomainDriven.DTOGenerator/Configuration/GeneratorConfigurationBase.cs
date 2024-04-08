@@ -48,7 +48,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public IReadOnlyCollection<Type> ProjectionTypes { get; }
 
-    public IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityOperation>> TypesWithSecondarySecurityOperations { get; }
+    public IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityRule>> TypesWithSecondarySecurityOperations { get; }
 
     public virtual bool ExpandStrictMaybeToDefault { get; } = false;
 
@@ -116,12 +116,12 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     }
 
 
-    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetMainTypesWithSecondarySecurityOperations()
+    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>> GetMainTypesWithSecondarySecurityOperations()
     {
         return this.DomainTypes.GetTypesWithSecondarySecurityOperations();
     }
 
-    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetTypesWithSecondarySecurityOperations()
+    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>> GetTypesWithSecondarySecurityOperations()
     {
         var mainResult = this.GetMainTypesWithSecondarySecurityOperations().ToDictionary();
 

@@ -22,12 +22,12 @@ public class RootSecurityService<TPersistentDomainObjectBase> : IRootSecuritySer
         return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityMode);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation securityOperation)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityRule)
         where TDomainObject : TPersistentDomainObjectBase
     {
-        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
+        if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
 
-        return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityOperation);
+        return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityRule);
     }
 
     protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>()

@@ -86,7 +86,7 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
 
             foreach (var securityOperationInfo in GetAllOperationsC(securityRole))
             {
-                var operation = dbOperationDict[securityOperationInfo.SecurityOperation.Id];
+                var operation = dbOperationDict[securityOperationInfo.SecurityRule.Id];
 
                 new BusinessRoleOperationLink(businessRole) { Operation = operation, IsDenormalized = securityOperationInfo.IsDenormalized };
 
@@ -113,11 +113,11 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
             var mergeOperationResult = businessRole.BusinessRoleOperationLinks.GetMergeResult(
                 GetAllOperationsC(securityRole),
                 link => link.Operation.Id,
-                pair => pair.SecurityOperation.Id);
+                pair => pair.SecurityRule.Id);
 
             foreach (var securityOperationInfo in mergeOperationResult.AddingItems)
             {
-                var operation = dbOperationDict[securityOperationInfo.SecurityOperation.Id];
+                var operation = dbOperationDict[securityOperationInfo.SecurityRule.Id];
 
                 new BusinessRoleOperationLink(businessRole)
                 {
@@ -162,12 +162,12 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
         }
     }
 
-    private static IEnumerable<(SecurityOperation SecurityOperation, bool IsDenormalized)> GetAllOperationsC(SecurityRole securityRole)
+    private static IEnumerable<(SecurityRule SecurityRule, bool IsDenormalized)> GetAllOperationsC(SecurityRole securityRole)
     {
-        return GetAllOperations(securityRole).Select(pair => ((SecurityOperation)pair.SecurityOperation, pair.IsDenormalized));
+        return GetAllOperations(securityRole).Select(pair => ((SecurityRule)pair.SecurityRule, pair.IsDenormalized));
     }
 
-    private static IEnumerable<(SecurityOperation SecurityOperation, bool IsDenormalized)> GetAllOperations(SecurityRole securityRole)
+    private static IEnumerable<(SecurityRule SecurityRule, bool IsDenormalized)> GetAllOperations(SecurityRole securityRole)
     {
         var subOperations = securityRole.Children
                                         .GetAllElements(child => child.Children)

@@ -32,7 +32,7 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
         }
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityRule)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {
         return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityRule));
     }

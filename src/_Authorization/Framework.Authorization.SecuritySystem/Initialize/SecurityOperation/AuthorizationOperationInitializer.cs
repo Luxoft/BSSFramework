@@ -54,7 +54,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
         }
     }
 
-    private async Task<IReadOnlyDictionary<SecurityOperation, Operation>> InitMainSecurityOperations(CancellationToken cancellationToken)
+    private async Task<IReadOnlyDictionary<SecurityRule, Operation>> InitMainSecurityOperations(CancellationToken cancellationToken)
     {
         var dbOperations = await this.operationRepository.GetQueryable().ToListAsync(cancellationToken);
 
@@ -87,16 +87,16 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
 
         var addingOperations = await mergeResult.AddingItems.ToDictionaryAsync(
             v => v,
-            async securityOperation =>
+            async securityRule =>
             {
                 var newAuthOperation = new Operation
                 {
-                    Name = securityOperation.Name,
-                    Description = securityOperation.Description
+                    Name = securityRule.Name,
+                    Description = securityRule.Description
                 };
 
                 this.logger.Verbose("Add Operation: {OperationName} {AttributeGuid}", newAuthOperation.Name, newAuthOperation.Id);
-                await this.operationRepository.InsertAsync(newAuthOperation, securityOperation.Id, cancellationToken);
+                await this.operationRepository.InsertAsync(newAuthOperation, securityRule.Id, cancellationToken);
 
                 return newAuthOperation;
             });
@@ -116,7 +116,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
 
         foreach (var pair in result)
         {
-            var approveSecurityOperation = pair.Key.ApproveOperation as SecurityOperation;
+            var approveSecurityOperation = pair.Key.ApproveOperation as SecurityRule;
 
             if (pair.Value.ApproveOperation?.Id != approveSecurityOperation?.Id)
             {
@@ -127,7 +127,7 @@ public class AuthorizationOperationInitializer : IAuthorizationOperationInitiali
         return result;
     }
 
-    private async Task InitAdminSecurityOperations(IReadOnlyDictionary<SecurityOperation, Operation> fullOperations, CancellationToken cancellationToken)
+    private async Task InitAdminSecurityOperations(IReadOnlyDictionary<SecurityRule, Operation> fullOperations, CancellationToken cancellationToken)
     {
         var adminRole = await this.businessRoleDomainService.GetOrCreateEmptyAdminRole(cancellationToken);
 

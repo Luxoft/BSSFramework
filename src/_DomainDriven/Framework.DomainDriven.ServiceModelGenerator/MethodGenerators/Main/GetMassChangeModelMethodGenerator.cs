@@ -70,6 +70,6 @@ public class GetMassChangeModelMethodGenerator<TConfiguration> : ModelMethodGene
             return base.GetBLLSecurityParameter(evaluateDataExpr);
         }
 
-        return modelSecurityAttribute.SecurityOperation;
+        return modelSecurityAttribute.SecurityRule;
     }
 }

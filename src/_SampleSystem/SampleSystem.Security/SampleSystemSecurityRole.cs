@@ -1,6 +1,7 @@
 ﻿using Framework.Authorization;
 using Framework.Authorization.SecuritySystem;
 using Framework.Configuration;
+using Framework.SecuritySystem;
 using Framework.SecuritySystem.Bss;
 
 namespace SampleSystem.Security;

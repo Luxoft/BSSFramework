@@ -58,7 +58,7 @@ public class SecurityOperationHelperFileFactory<TConfiguration> : FileFactory<TC
                    Parameters = { serviceCollectionParameter }
                }.Self(v => v.Statements.AddRange(domainObjectSecurityOperationInfoRequest.ToArray()));
     }
-    private CodeExpressionStatement GetRegisterStatement(CodeExpression serviceCollectionExpr, Type domainType, SecurityOperation viewSecurityOperation, SecurityOperation editSecurityOperation)
+    private CodeExpressionStatement GetRegisterStatement(CodeExpression serviceCollectionExpr, Type domainType, SecurityRule viewSecurityOperation, SecurityRule editSecurityOperation)
     {
         var createExpr = typeof(DomainObjectSecurityModeInfo).ToTypeReference().ToObjectCreateExpression(
             domainType.ToTypeOfExpression(),

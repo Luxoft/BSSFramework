@@ -7,7 +7,7 @@ namespace Framework.DomainDriven.DTOGenerator.Server;
 public class DefaultServerDomainObjectSecurityOperationCodeFileFactory<TConfiguration> : DomainObjectSecurityOperationCodeFileFactory<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultServerDomainObjectSecurityOperationCodeFileFactory(TConfiguration configuration, Type domainType, IEnumerable<SecurityOperation> securityOperations)
+    public DefaultServerDomainObjectSecurityOperationCodeFileFactory(TConfiguration configuration, Type domainType, IEnumerable<SecurityRule> securityOperations)
             : base(configuration, domainType, securityOperations)
     {
     }

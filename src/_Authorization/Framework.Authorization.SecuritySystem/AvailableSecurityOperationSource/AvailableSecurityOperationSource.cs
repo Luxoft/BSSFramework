@@ -16,7 +16,7 @@ public class AvailableSecurityOperationSource : IAvailableSecurityOperationSourc
         this.parser = parser;
     }
 
-    public async Task<List<SecurityOperation>> GetAvailableSecurityOperation (CancellationToken cancellationToken)
+    public async Task<List<SecurityRule>> GetAvailableSecurityOperation (CancellationToken cancellationToken)
     {
         var dbRequest = (from permission in this.availablePermissionSource.GetAvailablePermissionsQueryable()
 
@@ -27,6 +27,6 @@ public class AvailableSecurityOperationSource : IAvailableSecurityOperationSourc
 
         var dbOperationIdents = await dbRequest.ToListAsync(cancellationToken);
 
-        return dbOperationIdents.Select(this.parser.GetSecurityOperation).ToList<SecurityOperation>();
+        return dbOperationIdents.Select(this.parser.GetSecurityOperation).ToList<SecurityRule>();
     }
 }

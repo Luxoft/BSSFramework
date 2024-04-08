@@ -12,8 +12,8 @@ public class ExampleSampleSystemEventsSubscriptionManager : EventsSubscriptionMa
 
     public ExampleSampleSystemEventsSubscriptionManager(
         IEventDTOMessageSender<PersistentDomainObjectBase> messageSender,
-            ISampleSystemDTOMappingService mappingService)
-            : base(messageSender)
+        ISampleSystemDTOMappingService mappingService)
+        : base(messageSender)
     {
         this.mappingService = mappingService ?? throw new ArgumentNullException(nameof(mappingService));
     }
@@ -24,9 +24,8 @@ public class ExampleSampleSystemEventsSubscriptionManager : EventsSubscriptionMa
         this.SubscribeForSaveOperation<Employee>();
         this.SubscribeForSaveAndRemoveOperation<Information>();
 
-        this.SubscribeCustom<Employee>(
-            _ => true,
-            operation => operation == EventOperation.Save,
-            domainObject => new EmployeeCustomEventModelSaveEventDTO(this.mappingService, new EmployeeCustomEventModel(domainObject)));
+        this.Subscribe<Employee>(
+            (_, operation) => operation == EventOperation.Save,
+            (domainObject, _) => new EmployeeCustomEventModelSaveEventDTO(this.mappingService, new EmployeeCustomEventModel(domainObject)));
     }
 }

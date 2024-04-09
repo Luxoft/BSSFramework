@@ -5,6 +5,8 @@ using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.Validation;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.Authorization.BLL;
 
 public partial class PermissionBLL
@@ -112,7 +114,11 @@ public partial class PermissionBLL
 
     public void ValidateApprovingPermission(Permission permission)
     {
-        if (!permission.IsNew && permission.Role.RequiredApprove && this.Context.TrackingService.GetChanges(permission).HasChange(p => p.FilterItems, p => p.Period))
+        var requiredApproveService = this.Context.ServiceProvider.GetService<IRequiredApproveService>();
+
+        if (!permission.IsNew
+            && (requiredApproveService != null && requiredApproveService.RequiredApprove(permission.Role))
+            && this.Context.TrackingService.GetChanges(permission).HasChange(p => p.FilterItems, p => p.Period))
         {
             var prevVersion = this.GetObjectsByPrevRevision(permission.Id);
 

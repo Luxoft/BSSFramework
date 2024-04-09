@@ -160,7 +160,7 @@ public class RevisionService<T>
         }
 
         var revisions = this.revisionBll.GetObjectRevisions(domainObjectId)
-                            .RevisionInfoList.OrderByDescending(info => info.Date);
+                            .RevisionInfos.OrderByDescending(info => info.Date);
 
         var message = $"Object with id:{domainObjectId} not found. (Type:{typeof(T)})";
 

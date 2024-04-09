@@ -40,27 +40,6 @@ public partial class BusinessRoleBLL
     {
         if (businessRole == null) throw new ArgumentNullException(nameof(businessRole));
 
-        if (businessRole.SubBusinessRoles.Any())
-        {
-            var operations = businessRole.SubBusinessRoles.SelectMany(subRole => subRole.BusinessRoleOperationLinks.Select(link => link.Operation)).Distinct();
-
-            businessRole.BusinessRoleOperationLinks.Merge(
-                                                          operations,
-                                                          operation => operation.Id,
-                                                          link => link.Operation.Id,
-                                                          operation => new BusinessRoleOperationLink(businessRole),
-                                                          businessRole.RemoveDetails,
-                                                          (operation, link) =>
-                                                          {
-                                                              link.Operation = operation;
-                                                              link.IsDenormalized = true;
-                                                          });
-        }
-        else
-        {
-            businessRole.RemoveDetails(businessRole.BusinessRoleOperationLinks.Where(link => link.IsDenormalized).ToArray());
-        }
-
         if (withParents)
         {
             var parentRoles = this.GetUnsecureQueryable().Where(br => br.SubBusinessRoleLinks.Any(link => link.SubBusinessRole == businessRole)).ToList();
@@ -108,38 +87,6 @@ public partial class BusinessRoleBLL
         if (businessRole == null) throw new ArgumentNullException(nameof(businessRole));
 
         this.ValidateDelegatePermissions(businessRole, true);
-
-        if (!businessRole.IsAdmin && businessRole.Permissions.Any())
-        {
-            this.Context.TrackingService.GetChanges(businessRole).GetChange(prop => prop.BusinessRoleOperationLinks).Match(trackingProp =>
-            {
-                var prev = trackingProp.PreviusValue.GetValue();
-
-                var next = trackingProp.CurrentValue.GetValue();
-
-                var mergeResult = prev.GetMergeResult(next)
-                                      .Select(link => link.Operation)
-                                      .Where(operation => operation.ApproveOperation != null);
-
-                if (!mergeResult.IsEmpty)
-                {
-                    throw new BusinessLogicException(GetFixedOperationMessageBlocks(businessRole, mergeResult));
-                }
-            });
-        }
-    }
-
-    private static string GetFixedOperationMessageBlocks(BusinessRole businessRole, MergeResult<Operation, Operation> mergeResult)
-    {
-        if (businessRole == null) throw new ArgumentNullException(nameof(businessRole));
-
-        var items = new Dictionary<string, IList<Operation>>
-                    {
-                            { "add", mergeResult.AddingItems },
-                            { "remove", mergeResult.RemovingItems }
-                    }.Where(pair => pair.Value.Any()).ToList();
-
-        return $"You can not {items.Join("/", v => v.Key)} operations ({items.Join("/", v => v.Value.Join(", ", op => op.Name))}) which requires approvement to assigned user role ({businessRole.Name}). Please unassign role first.";
     }
 
     private void ValidateDelegatePermissions(BusinessRole businessRole, bool withParents)
@@ -160,7 +107,7 @@ public partial class BusinessRoleBLL
     {
         if (businessRole == null) throw new ArgumentNullException(nameof(businessRole));
 
-        if (businessRole.SubBusinessRoles.Any() || businessRole.BusinessRoleOperationLinks.Any())
+        if (businessRole.SubBusinessRoles.Any())
         {
             throw new BusinessLogicException($"Removing business role \"{businessRole.Name}\" must be empty");
         }
@@ -237,16 +184,6 @@ public partial class BusinessRoleBLL
                 this.Save(prevParentRole);
             }
         }
-
-        businessRole
-                .BusinessRoleOperationLinks
-                .Merge(
-                       businessRoleNode.Operations,
-                       op => op.Id,
-                       link => link.Operation.Id,
-                       operation => new BusinessRoleOperationLink(businessRole),
-                       businessRole.RemoveDetails,
-                       (operation, link) => link.Operation = operation);
 
         this.Save(businessRole);
 

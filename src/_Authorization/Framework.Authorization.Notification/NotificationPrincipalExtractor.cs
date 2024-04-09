@@ -40,17 +40,6 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
         this.businessRoleRepository = businessRoleRepository;
     }
 
-    public IEnumerable<Principal> GetNotificationPrincipalsByOperations(
-        Guid[] operationsIds,
-        IEnumerable<NotificationFilterGroup> notificationFilterGroups)
-    {
-        var roleIdents = this.businessRoleRepository.GetQueryable()
-                             .Where(role => role.BusinessRoleOperationLinks.Any(link => operationsIds.Contains(link.Operation.Id)))
-                             .ToArray(role => role.Id);
-
-        return this.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
-    }
-
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(
         Guid[] roleIdents,
         IEnumerable<NotificationFilterGroup> preNotificationFilterGroups)

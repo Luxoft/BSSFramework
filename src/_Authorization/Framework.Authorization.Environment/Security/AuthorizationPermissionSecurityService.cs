@@ -11,11 +11,11 @@ namespace Framework.Authorization.Environment
 
         public AuthorizationPermissionSecurityService(
             ISecurityProvider<Permission> disabledSecurityProvider,
-            ISecurityOperationResolver securityOperationResolver,
+            IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<Permission> securityPath,
             IActualPrincipalSource actualPrincipalSource)
-            : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
+            : base(disabledSecurityProvider, securityRuleExpanders, securityExpressionBuilderFactory, securityPath)
         {
             this.actualPrincipalSource = actualPrincipalSource;
         }
@@ -27,17 +27,18 @@ namespace Framework.Authorization.Environment
             var withDelegatedFrom = baseProvider.Or(
                 new PrincipalSecurityProvider<Permission>(this.actualPrincipalSource, permission => permission.DelegatedFrom.Principal));
 
-            switch (securityRule)
+            if (securityRule == SecurityRule.View)
             {
-                case SecurityRule.View:
-                    return withDelegatedFrom.Or(
-                        new PrincipalSecurityProvider<Permission>(this.actualPrincipalSource, permission => permission.Principal));
-
-                case SecurityRule.Edit:
-                    return withDelegatedFrom;
-
-                default:
-                    return baseProvider;
+                return withDelegatedFrom.Or(
+                    new PrincipalSecurityProvider<Permission>(this.actualPrincipalSource, permission => permission.Principal));
+            }
+            else if (securityRule == SecurityRule.Edit)
+            {
+                return withDelegatedFrom;
+            }
+            else
+            {
+                return baseProvider;
             }
         }
     }

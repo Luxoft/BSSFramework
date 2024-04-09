@@ -11,11 +11,11 @@ namespace Framework.Authorization.Environment
 
         public AuthorizationBusinessRoleSecurityService(
             ISecurityProvider<BusinessRole> disabledSecurityProvider,
-            ISecurityOperationResolver securityOperationResolver,
+            IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<BusinessRole> securityPath,
             IAvailablePermissionSource availablePermissionSource)
-            : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
+            : base(disabledSecurityProvider, securityRuleExpanders, securityExpressionBuilderFactory, securityPath)
         {
             this.availablePermissionSource = availablePermissionSource;
         }

@@ -18,10 +18,10 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : 
 
     protected ContextDomainSecurityServiceBase(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
+        ISecurityRuleExpander securityRuleExpander,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
 
-        : base(disabledSecurityProvider, securityRuleExpanders)
+        : base(disabledSecurityProvider, securityRuleExpander)
     {
         this.securityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
     }
@@ -61,15 +61,15 @@ public class ContextDomainSecurityService<TDomainObject, TIdent> : ContextDomain
 
     public ContextDomainSecurityService(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
+        ISecurityRuleExpander securityRuleExpander,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
         SecurityPath<TDomainObject> securityPath)
-        : base(disabledSecurityProvider, securityRuleExpanders, securityExpressionBuilderFactory)
+        : base(disabledSecurityProvider, securityRuleExpander, securityExpressionBuilderFactory)
     {
         this.securityPath = securityPath;
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule)
     {
         return this.Create(this.securityPath, securityRule);
     }

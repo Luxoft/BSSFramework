@@ -4,6 +4,7 @@ using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
 
 using Microsoft.AspNetCore.Http;
 

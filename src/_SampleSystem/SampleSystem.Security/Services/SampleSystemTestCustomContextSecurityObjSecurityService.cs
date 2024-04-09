@@ -9,14 +9,30 @@ public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDo
 {
     public SampleSystemTestCustomContextSecurityObjSecurityService(
         ISecurityProvider<TestCustomContextSecurityObj> disabledSecurityProvider,
-        IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
+        ISecurityRuleExpander securityRuleExpander,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
-        : base(disabledSecurityProvider, securityRuleExpanders, securityExpressionBuilderFactory)
+        : base(disabledSecurityProvider, securityRuleExpander, securityExpressionBuilderFactory)
     {
     }
 
     protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule)
     {
+        if (securityRule == SecurityRule.View)
+        {
+        }
+
+        if (securityRule == SampleSystemSecurityOperation.BusinessUnitEdit)
+        {
+        }
+
+        if (securityRule == SampleSystemSecurityRole.SeManager)
+        {
+        }
+
+        if (securityRule is SecurityRule.ExpandedRolesSecurityRule final && final.SecurityRoles.Contains(SampleSystemSecurityRole.SeManager))
+        {
+        }
+
         return new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();
     }
 }

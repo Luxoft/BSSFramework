@@ -14,11 +14,11 @@ public class UntypedDependencyDomainSecurityService<TDomainObject, TBaseDomainOb
 
     public UntypedDependencyDomainSecurityService(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
+        ISecurityRuleExpander securityRuleExpander,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
         IQueryableSource queryableSource)
 
-        : base(disabledSecurityProvider, securityRuleExpanders, baseDomainSecurityService)
+        : base(disabledSecurityProvider, securityRuleExpander, baseDomainSecurityService)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }

@@ -26,17 +26,16 @@ public static class SampleSystemSecurityRole
         "SE Manager",
         SampleSystemSecurityOperation.EmployeeView);
 
-    public static SecurityRole TestChildRole { get; } = new SecurityRole(
+    public static SecurityRole TestRole1 { get; } = new SecurityRole(
 
-        new Guid("{9F080934-5009-4253-B537-99A2211C3474}"),
-        nameof(TestChildRole),
-        SampleSystemSecurityOperation.EmployeeView,
-        SampleSystemSecurityOperation.BusinessUnitView);
+        new Guid("{597AAB2A-76F7-42CF-B606-3D4550062596}"),
+        nameof(TestRole1),
+        SampleSystemSecurityOperation.EmployeeView);
 
-    public static SecurityRole TestRootRole { get; } = new SecurityRole(
+    public static SecurityRole TestRole2 { get; } = new SecurityRole(
 
-        new Guid("{20C220CF-D5CE-4F0B-98C7-1211A45845D1}"),
-        nameof(TestRootRole),
-        SampleSystemSecurityOperation.EmployeeEdit,
-        SampleSystemSecurityOperation.BusinessUnitView) { Children = new[] { TestChildRole } };
+        new Guid("{AD5EC94F-CC3D-451B-9051-B83059707E11}"),
+        nameof(TestRole2),
+        SampleSystemSecurityOperation.EmployeePositionView);
+
 }

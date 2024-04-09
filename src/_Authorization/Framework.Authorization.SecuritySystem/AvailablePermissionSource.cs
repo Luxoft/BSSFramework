@@ -20,23 +20,30 @@ public class AvailablePermissionSource : IAvailablePermissionSource
 
     private readonly SecurityOperationExpander securityOperationExpander;
 
+    private readonly SecurityRoleExpander securityRoleExpander;
+
     public AvailablePermissionSource(
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Permission> permissionRepository,
         TimeProvider timeProvider,
         IActualPrincipalSource actualPrincipalSource,
         IUserAuthenticationService userAuthenticationService,
-        SecurityOperationExpander securityOperationExpander)
+        SecurityOperationExpander securityOperationExpander,
+        SecurityRoleExpander securityRoleExpander)
     {
         this.permissionRepository = permissionRepository;
         this.timeProvider = timeProvider;
         this.actualPrincipalSource = actualPrincipalSource;
         this.userAuthenticationService = userAuthenticationService;
         this.securityOperationExpander = securityOperationExpander;
+        this.securityRoleExpander = securityRoleExpander;
     }
 
     public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, SecurityRule.DomainObjectSecurityRule? securityRule = null, bool applyCurrentUser = true)
     {
-        var securityRoleIdents = securityRule == null ? null : this.securityOperationExpander.Expand(securityRule).SecurityRoles.ToList(sr => sr.Id);
+        var securityRoleIdents =
+            securityRule == null
+                ? null
+                : this.securityOperationExpander.Expand(securityRule).Pipe(this.securityRoleExpander.Expand).SecurityRoles.ToList(sr => sr.Id);
 
         var filter = new AvailablePermissionFilter(this.timeProvider.GetToday())
                      {

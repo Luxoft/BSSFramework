@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
@@ -76,15 +77,9 @@ public class EmployeeProjectionTests : TestBase
                           var permission = new Permission(principal1);
                           permission.Role = authContext.Logics.BusinessRole.GetOrCreateAdminRole();
 
-                          var role1 = new BusinessRole { Name = TestEmployee1Login };
+                          var role1 = SampleSystemSecurityRole.TestRole1;
 
-                          var employeeView = authContext.Logics.Operation.GetByName(SampleSystemSecurityOperation.EmployeeView.ToString());
-
-                          var link1 = new BusinessRoleOperationLink(role1) { Operation = employeeView };
-
-                          authContext.Logics.BusinessRole.Save(role1);
-
-                          var permission1 = new Permission(principal2) { Role = role1 };
+                          var permission1 = new Permission(principal2) { Role = context.Logics.bu role1 };
 
                           var role2 = new BusinessRole { Name = TestEmployee3Login };
 

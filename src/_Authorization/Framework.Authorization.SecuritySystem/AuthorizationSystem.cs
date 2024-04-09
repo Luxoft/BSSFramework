@@ -30,6 +30,8 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     private readonly SecurityOperationExpander securityOperationExpander;
 
+    private readonly SecurityRoleExpander securityRoleExpander;
+
     private readonly TimeProvider timeProvider;
 
     public AuthorizationSystem(
@@ -41,6 +43,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IOperationAccessorFactory operationAccessorFactory,
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
         SecurityOperationExpander securityOperationExpander,
+        SecurityRoleExpander securityRoleExpander,
         TimeProvider timeProvider)
     {
         this.availablePermissionSource = availablePermissionSource;
@@ -50,6 +53,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         this.operationAccessorFactory = operationAccessorFactory;
         this.principalRepository = principalRepository;
         this.securityOperationExpander = securityOperationExpander;
+        this.securityRoleExpander = securityRoleExpander;
         this.timeProvider = timeProvider;
 
         this.CurrentPrincipalName = userAuthenticationService.GetUserName();
@@ -77,7 +81,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     {
         if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
 
-        var expandedRule = this.securityOperationExpander.Expand(securityRule);
+        var expandedRule = this.securityOperationExpander.Expand(securityRule).Pipe(this.securityRoleExpander.Expand);
 
         return this.GetAccessors(
             (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),

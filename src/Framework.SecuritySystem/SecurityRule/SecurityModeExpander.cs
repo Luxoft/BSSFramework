@@ -3,7 +3,7 @@ using Framework.Core;
 
 namespace Framework.SecuritySystem;
 
-public class SecurityModeExpander : ISecurityRuleExpander
+public class SecurityModeExpander
 {
     private readonly IReadOnlyDictionary<Type, SecurityRule> viewDict;
 
@@ -40,7 +40,6 @@ public class SecurityModeExpander : ISecurityRuleExpander
                       where securityRule != null
 
                       select info.DomainType.ToKeyValuePair(securityRule);
-
 
         return request.ToDictionary();
     }

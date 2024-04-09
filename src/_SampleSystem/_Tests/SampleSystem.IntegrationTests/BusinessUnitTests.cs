@@ -14,6 +14,7 @@ using Framework.DomainDriven.BLL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
+using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
@@ -110,7 +111,7 @@ public class BusinessUnitTests : TestBase
         var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
                                                                         {
                                                                                 odataQueryString = string.Empty,
-                                                                                securityOperationCode = SampleSystemBusinessUnitSecurityOperationCode.EmployeeEdit
+                                                                                securityRuleCode = SampleSystemBusinessUnitSecurityRuleCode.EmployeeEdit
                                                                         }));
 
         // Assert
@@ -131,7 +132,7 @@ public class BusinessUnitTests : TestBase
         var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
                                                                         {
                                                                                 odataQueryString = "$filter=Name eq 'test'",
-                                                                                securityOperationCode = SampleSystemBusinessUnitSecurityOperationCode.EmployeeEdit
+                                                                                securityRuleCode = SampleSystemBusinessUnitSecurityRuleCode.EmployeeEdit
                                                                         }));
 
         // Assert

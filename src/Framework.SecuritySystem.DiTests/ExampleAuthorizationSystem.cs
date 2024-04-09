@@ -23,16 +23,16 @@ public class ExampleAuthorizationSystem : IAuthorizationSystem<Guid>
 
     public bool IsAdmin() => throw new NotImplementedException();
 
-    public bool HasAccess(SecurityRule securityRule) => throw new NotImplementedException();
+    public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule) => throw new NotImplementedException();
 
-    public void CheckAccess(SecurityRule securityRule) => throw new NotImplementedException();
+    public void CheckAccess(SecurityRule.DomainObjectSecurityRule securityRule) => throw new NotImplementedException();
 
     public IEnumerable<string> GetNonContextAccessors(
-        SecurityRule securityRule,
+        SecurityRule.DomainObjectSecurityRule securityRule,
         Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
-        SecurityRule securityRule,
+        SecurityRule.DomainObjectSecurityRule securityRule,
         IEnumerable<Type> securityTypes)
     {
         return this.principalPermissionSource.GetPermissions()
@@ -40,7 +40,7 @@ public class ExampleAuthorizationSystem : IAuthorizationSystem<Guid>
     }
 
     public IQueryable<IPermission<Guid>> GetPermissionQuery(
-        SecurityRule securityRule)
+        SecurityRule.DomainObjectSecurityRule securityRule)
     {
         return this.principalPermissionSource.GetPermissionQuery(securityRule);
     }

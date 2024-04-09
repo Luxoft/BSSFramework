@@ -102,9 +102,9 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
     private bool HasAccess<TDomain>(TDomain domainObject, PropertyInfo propertyInfo)
             where TDomain : class, TPersistentObjectBase
     {
-        var viewOperation = propertyInfo.GetViewSecurityRule();
+        var viewSecurityRule = propertyInfo.GetViewSecurityRule();
 
-        return this._bllContext.SecurityService.GetSecurityProvider<TDomain>(viewOperation).HasAccess(domainObject);
+        return this._bllContext.SecurityService.GetSecurityProvider<TDomain>(viewSecurityRule).HasAccess(domainObject);
     }
 
     private TPropertyRevisionDTO ToPropertyRevisionDTO<TDTOProperty, TProperty>(

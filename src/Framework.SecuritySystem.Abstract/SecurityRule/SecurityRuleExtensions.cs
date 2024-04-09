@@ -10,12 +10,12 @@ public static class SecurityRuleExtensions
         return new SecurityRule.OperationSecurityRule(securityOperation) { ExpandType = securityOperation.ExpandType };
     }
 
-    public static SecurityRule.RolesSecurityRule ToSecurityRule(this IEnumerable<SecurityRole> securityRoles)
+    public static SecurityRule.NonExpandedRolesSecurityRule ToSecurityRule(this IEnumerable<SecurityRole> securityRoles)
     {
-        return new SecurityRule.RolesSecurityRule(new DeepEqualsCollection<SecurityRole>(securityRoles));
+        return new SecurityRule.NonExpandedRolesSecurityRule(new DeepEqualsCollection<SecurityRole>(securityRoles));
     }
 
-    public static SecurityRule.RolesSecurityRule ToSecurityRule(this SecurityRole securityRole)
+    public static SecurityRule.NonExpandedRolesSecurityRule ToSecurityRule(this SecurityRole securityRole)
     {
         return new[] { securityRole }.ToSecurityRule();
     }

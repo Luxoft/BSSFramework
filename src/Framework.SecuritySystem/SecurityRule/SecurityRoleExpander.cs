@@ -4,31 +4,13 @@ using Framework.Core;
 
 namespace Framework.SecuritySystem;
 
-public class SecurityRoleExpander : ISecurityRuleExpander
+public class SecurityRoleExpander
 {
-    private readonly IDictionaryCache<SecurityRule, SecurityRule.RolesSecurityRule?> tryExpandCache;
-
-    private readonly IDictionaryCache<SecurityRule.RolesSecurityRule, SecurityRule.RolesSecurityRule> expandCache;
+    private readonly IDictionaryCache<SecurityRule.NonExpandedRolesSecurityRule, SecurityRule.ExpandedRolesSecurityRule> expandCache;
 
     public SecurityRoleExpander(ISecurityRoleSource securityRoleSource)
     {
-        this.tryExpandCache = new DictionaryCache<SecurityRule, SecurityRule.RolesSecurityRule?>(
-            securityRule =>
-            {
-                if (securityRule is SecurityRule.RolesSecurityRule rolesSecurityRule)
-                {
-                    var expandedSecurityRule = this.Expand(rolesSecurityRule);
-
-                    if (expandedSecurityRule != securityRule)
-                    {
-                        return expandedSecurityRule;
-                    }
-                }
-
-                return null;
-            }).WithLock();
-
-        this.expandCache = new DictionaryCache<SecurityRule.RolesSecurityRule, SecurityRule.RolesSecurityRule>(
+        this.expandCache = new DictionaryCache<SecurityRule.NonExpandedRolesSecurityRule, SecurityRule.ExpandedRolesSecurityRule>(
             securityRule =>
             {
                 var securityRoles = securityRoleSource.SecurityRoles.GetAllElements(sr => sr.Children)
@@ -41,17 +23,12 @@ public class SecurityRoleExpander : ISecurityRuleExpander
                     throw new Exception("The list of security roles cannot be empty!");
                 }
 
-                return securityRoles.ToSecurityRule();
+                return new SecurityRule.ExpandedRolesSecurityRule(new DeepEqualsCollection<SecurityRole>(securityRoles));
             }).WithLock();
     }
 
-    public SecurityRule.RolesSecurityRule Expand(SecurityRule.RolesSecurityRule securityRule)
+    public SecurityRule.ExpandedRolesSecurityRule Expand(SecurityRule.NonExpandedRolesSecurityRule securityRule)
     {
         return this.expandCache[securityRule];
-    }
-
-    public SecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
-    {
-        return this.tryExpandCache[securityRule];
     }
 }

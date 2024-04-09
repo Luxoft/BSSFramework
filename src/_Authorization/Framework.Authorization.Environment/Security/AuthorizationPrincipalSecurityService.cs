@@ -11,11 +11,11 @@ namespace Framework.Authorization.Environment
 
         public AuthorizationPrincipalSecurityService(
             ISecurityProvider<Principal> disabledSecurityProvider,
-            IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
+            ISecurityRuleExpander securityRuleExpander,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<Principal> securityPath,
             IActualPrincipalSource actualPrincipalSource)
-            : base(disabledSecurityProvider, securityRuleExpanders, securityExpressionBuilderFactory, securityPath)
+            : base(disabledSecurityProvider, securityRuleExpander, securityExpressionBuilderFactory, securityPath)
         {
             this.actualPrincipalSource = actualPrincipalSource;
         }

@@ -117,9 +117,8 @@ public class MainTests
                                  .SetPath(SecurityPath<Employee>.Create(v => v.BusinessUnit))))
 
                .AddSingleton<ISecurityRuleExpander, SecurityModeExpander>()
-               .AddSingleton<ISecurityRuleExpander, SecurityOperationExpander>()
-
-               .AddSingleton<SecurityOperationExpander>()
+               //.AddSingleton<ISecurityRuleExpander, SecurityOperationExpander>()
+               //.AddSingleton<ISecurityRuleExpander, SecurityRoleExpander>()
 
                .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 

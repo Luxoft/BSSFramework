@@ -6,14 +6,14 @@ namespace Framework.SecuritySystem;
 
 public abstract record SecurityRule
 {
-    public static SecurityRule View { get; } = new SpecialSecurityRule(nameof(View));
+    public static SpecialSecurityRule View { get; } = new (nameof(View));
 
-    public static SecurityRule Edit { get; } = new SpecialSecurityRule(nameof(Edit));
+    public static SpecialSecurityRule Edit { get; } = new (nameof(Edit));
 
     /// <summary>
     /// Специальная правило доступа для отключения безопасности
     /// </summary>
-    public static SecurityRule Disabled { get; } = new SpecialSecurityRule(nameof(Disabled));
+    public static SpecialSecurityRule Disabled { get; } = new (nameof(Disabled));
 
     /// <summary>
     /// Тип разворачивания деревьев (как правило для операции просмотра самого дерева выбирается HierarchicalExpandType.All)
@@ -59,7 +59,22 @@ public abstract record SecurityRule
         public override string ToString() => this.SecurityOperation.Name;
     }
 
-    public record RolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : DomainObjectSecurityRule
+    /// <summary>
+    /// Список ролей ДО разворачиния дерева ролей вверх
+    /// </summary>
+    /// <param name="SecurityRoles">Список неразвёрнутых ролей</param>
+    public record NonExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : DomainObjectSecurityRule
+    {
+        public override string ToString() => this.SecurityRoles.Count == 1
+                                                 ? this.SecurityRoles.Single().Name
+                                                 : $"SecurityRoles: {this.SecurityRoles.Join(", ", sr => sr.Name)}";
+    }
+
+    /// <summary>
+    /// Список ролей ПОСЛЕ разворачиния дерева ролей вверх
+    /// </summary>
+    /// <param name="SecurityRoles">Список развёрнутых ролей</param>
+    public record ExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : DomainObjectSecurityRule
     {
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name

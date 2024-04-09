@@ -2,30 +2,53 @@
 
 public abstract class DomainSecurityService<TDomainObject> : DomainSecurityServiceBase<TDomainObject>
 {
-    private readonly IEnumerable<ISecurityRuleExpander> securityRuleExpanders;
+    private readonly ISecurityRuleExpander securityRuleExpander;
 
     protected DomainSecurityService(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        IEnumerable<ISecurityRuleExpander> securityRuleExpanders)
+        ISecurityRuleExpander securityRuleExpander)
         : base(disabledSecurityProvider)
     {
-        this.securityRuleExpanders = securityRuleExpanders;
+        this.securityRuleExpander = securityRuleExpander;
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
+    protected sealed override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {
-        var expandedSecurityRule = this.securityRuleExpanders.TryExpand<TDomainObject>(securityRule);
+        switch (securityRule)
+        {
+            case SecurityRule.SpecialSecurityRule specialSecurityRule:
+                return this.CreateSecurityProvider(specialSecurityRule);
 
-        if (expandedSecurityRule != null)
-        {
-            return this.GetSecurityProvider(expandedSecurityRule);
-        }
-        else
-        {
-            return this.CreateSecurityProvider(
-                securityRule as SecurityRule.DomainObjectSecurityRule ?? throw new ArgumentOutOfRangeException(nameof(securityRule)));
+            case SecurityRule.OperationSecurityRule operationSecurityRule:
+                return this.CreateSecurityProvider(operationSecurityRule);
+
+            case SecurityRule.NonExpandedRolesSecurityRule nonExpandedRolesSecurityRule:
+                return this.CreateSecurityProvider(nonExpandedRolesSecurityRule);
+
+            case SecurityRule.ExpandedRolesSecurityRule expandedRolesSecurityRule:
+                return this.CreateSecurityProvider(expandedRolesSecurityRule);
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(securityRule));
         }
     }
 
-    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule);
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
+    {
+        return this.CreateSecurityProvider(
+                   this.securityRuleExpander.TryExpand<TDomainObject>(securityRule))
+               ?? throw new Exception($"SecurityRule with mode '{securityRule}' not found for type '{typeof(TDomainObject).Name}'");
+    }
+
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.OperationSecurityRule securityRule)
+    {
+        return this.CreateSecurityProvider(this.securityRuleExpander.Expand(securityRule));
+    }
+
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.NonExpandedRolesSecurityRule securityRule)
+    {
+        return this.CreateSecurityProvider(this.securityRuleExpander.Expand(securityRule));
+    }
+
+    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule);
 }

@@ -4,28 +4,13 @@ using Framework.Core;
 
 namespace Framework.SecuritySystem;
 
-public class SecurityOperationExpander : ISecurityRuleExpander
+public class SecurityOperationExpander
 {
-    private readonly IDictionaryCache<SecurityRule, SecurityRule?> tryExpandCache;
-
-    private readonly IDictionaryCache<SecurityRule.OperationSecurityRule, SecurityRule.RolesSecurityRule> expandCache;
+    private readonly IDictionaryCache<SecurityRule.OperationSecurityRule, SecurityRule.NonExpandedRolesSecurityRule> expandCache;
 
     public SecurityOperationExpander(ISecurityRoleSource securityRoleSource)
     {
-        this.tryExpandCache = new DictionaryCache<SecurityRule, SecurityRule?>(
-            securityRule =>
-            {
-                if (securityRule is SecurityRule.OperationSecurityRule operationRule)
-                {
-                    return this.Expand(operationRule);
-                }
-                else
-                {
-                    return null;
-                }
-            }).WithLock();
-
-        this.expandCache = new DictionaryCache<SecurityRule.OperationSecurityRule, SecurityRule.RolesSecurityRule>(
+        this.expandCache = new DictionaryCache<SecurityRule.OperationSecurityRule, SecurityRule.NonExpandedRolesSecurityRule>(
             securityRule =>
             {
                 var securityRoles = securityRoleSource.SecurityRoles
@@ -42,23 +27,13 @@ public class SecurityOperationExpander : ISecurityRuleExpander
             }).WithLock();
     }
 
-    public SecurityRule.RolesSecurityRule Expand(SecurityRule.DomainObjectSecurityRule securityRule)
+    public SecurityRule.NonExpandedRolesSecurityRule Expand(SecurityRule.DomainObjectSecurityRule securityRule)
     {
         return securityRule switch
         {
-            SecurityRule.RolesSecurityRule rolesSecurityRule => rolesSecurityRule,
-            SecurityRule.OperationSecurityRule operationSecurityRule => this.Expand(operationSecurityRule),
+            SecurityRule.NonExpandedRolesSecurityRule rolesSecurityRule => rolesSecurityRule,
+            SecurityRule.OperationSecurityRule operationSecurityRule => this.expandCache[operationSecurityRule],
             _ => throw new ArgumentOutOfRangeException(nameof(securityRule))
         };
-    }
-
-    public SecurityRule.RolesSecurityRule Expand(SecurityRule.OperationSecurityRule securityRule)
-    {
-        return this.expandCache[securityRule];
-    }
-
-    public SecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
-    {
-        return this.tryExpandCache[securityRule];
     }
 }

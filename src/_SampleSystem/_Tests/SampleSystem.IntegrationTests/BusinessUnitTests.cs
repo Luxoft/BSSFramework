@@ -16,6 +16,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
@@ -25,8 +26,6 @@ namespace SampleSystem.IntegrationTests;
 public class BusinessUnitTests : TestBase
 {
     private const string EmployeeName = "TestSecondaryAccessEmployee";
-
-    private const string EditEmployeeRoleName = "EditEmployeeRole";
 
     private const int ParentsCount = 2200;
 
@@ -54,51 +53,7 @@ public class BusinessUnitTests : TestBase
                                          type: buTypeId,
                                          parent: luxoftBuId);
 
-        this.Evaluate(
-                      DBSessionMode.Write,
-                      context =>
-                      {
-                          var authContext = context.Authorization;
-
-                          var principalBll = authContext.Logics.Principal;
-                          var principal = principalBll.GetByNameOrCreate(EmployeeName, true);
-
-                          var entityType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
-
-                          Expression<Func<PermissionFilterEntity, bool>> entitySearchFilter =
-                                  entity =>
-                                          entity.EntityType == entityType
-                                          && entity.EntityId == DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID;
-
-                          var filterEntity = authContext.Logics.PermissionFilterEntity.GetObjectBy(entitySearchFilter) ??
-                                             new PermissionFilterEntity
-                                             {
-                                                     EntityType = entityType,
-                                                     EntityId = DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID
-                                             }.Self(bu => authContext.Logics.PermissionFilterEntity.Save(bu));
-
-                          var permission = new Permission(principal);
-
-                          permission.Role = authContext.Logics.BusinessRole.GetByName(EditEmployeeRoleName) ??
-                                            this.CreateEditEmployeeRole(authContext);
-
-                          new PermissionFilterItem(permission) { Entity = filterEntity };
-
-                          principalBll.Save(principal);
-                      });
-    }
-
-    private BusinessRole CreateEditEmployeeRole(IAuthorizationBLLContext authContext)
-    {
-        var role = new BusinessRole { Name = EditEmployeeRoleName };
-
-        var operation = authContext.Logics.Operation.GetByName(SampleSystemBusinessUnitSecurityOperationCode.EmployeeEdit.ToString());
-
-        var link = new BusinessRoleOperationLink(role) { Operation = operation };
-
-        authContext.Logics.BusinessRole.Save(role);
-
-        return role;
+        this.AuthHelper.SetUserRole(EmployeeName, new SampleSystemTestPermission(SampleSystemSecurityRole.TestRole3, new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
     }
 
     [TestMethod]

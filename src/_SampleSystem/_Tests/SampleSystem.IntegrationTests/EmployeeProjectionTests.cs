@@ -1,4 +1,7 @@
 ﻿using System.Linq.Expressions;
+
+using Automation.Utils;
+
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
@@ -9,6 +12,7 @@ using Framework.DomainDriven.BLL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
+using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
@@ -50,53 +54,14 @@ public class EmployeeProjectionTests : TestBase
         this.DataHelper.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
         this.DataHelper.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
 
-        this.Evaluate(
-                      DBSessionMode.Write,
-                      context =>
-                      {
-                          var authContext = context.Authorization;
+        this.AuthHelper.SetUserRole(
+            ProjectionPrincipalName,
+            new SampleSystemTestPermission(
+                SampleSystemSecurityRole.Administrator,
+                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
 
-                          var principalBll = authContext.Logics.Principal;
-                          var principal1 = principalBll.GetByNameOrCreate(ProjectionPrincipalName, true);
-                          var principal2 = principalBll.GetByNameOrCreate(TestEmployee1Login, true);
-                          var principal3 = principalBll.GetByNameOrCreate(TestEmployee3Login, true);
-
-                          var entityType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
-
-                          Expression<Func<PermissionFilterEntity, bool>> entitySearchFilter =
-                                  entity =>
-                                          entity.EntityType == entityType
-                                          && entity.EntityId == DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID;
-
-                          var filterEntity = authContext.Logics.PermissionFilterEntity.GetObjectBy(entitySearchFilter) ?? new PermissionFilterEntity
-                                                 {
-                                                         EntityType = entityType,
-                                                         EntityId = DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID
-                                                 }.Self(bu => authContext.Logics.PermissionFilterEntity.Save(bu));
-
-                          var permission = new Permission(principal1);
-                          permission.Role = authContext.Logics.BusinessRole.GetOrCreateAdminRole();
-
-                          var role1 = SampleSystemSecurityRole.TestRole1;
-
-                          var permission1 = new Permission(principal2) { Role = context.Logics.bu role1 };
-
-                          var role2 = new BusinessRole { Name = TestEmployee3Login };
-
-                          var employeePositionView = authContext.Logics.Operation.GetByName(SampleSystemSecurityOperation.EmployeePositionView.ToString());
-
-                          var link2 = new BusinessRoleOperationLink(role2) { Operation = employeePositionView };
-
-                          authContext.Logics.BusinessRole.Save(role2);
-
-                          var permission2 = new Permission(principal3) { Role = role2 };
-
-                          new PermissionFilterItem(permission) { Entity = filterEntity };
-
-                          principalBll.Save(principal1);
-                          principalBll.Save(principal2);
-                          principalBll.Save(principal3);
-                      });
+        this.AuthHelper.SetUserRole(TestEmployee1Login, SampleSystemSecurityRole.TestRole1);
+        this.AuthHelper.SetUserRole(TestEmployee3Login, SampleSystemSecurityRole.TestRole2);
     }
 
     [TestMethod]

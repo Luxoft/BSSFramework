@@ -9,6 +9,10 @@ public record TestPermission(string SecurityRoleName, Period Period, IReadOnlyDi
         : this(securityRole.Name)
     {
     }
+    public TestPermission(SecurityRole securityRole, IReadOnlyDictionary<Type, IReadOnlyList<Guid>> restrictions)
+        : this(securityRole.Name, Period.Eternity, restrictions)
+    {
+    }
 
     public TestPermission(string securityRoleName)
         : this(securityRoleName, Period.Eternity)

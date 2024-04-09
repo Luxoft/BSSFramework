@@ -20,7 +20,6 @@ public class PermissionBLLTests : TestBase
     private BusinessRole businessRoleSEManager;
 
     private Guid businessUnitChangeViewOperationId;
-    private Operation businessUnitChangeViewOperation;
     private Guid ubsId;
     private PermissionFilterEntity permissionFilterEntityUbs;
 
@@ -34,7 +33,6 @@ public class PermissionBLLTests : TestBase
         Guid.Parse("a893dfa6-830e-44bc-8887-c98721005156");
         this.businessUnitChangeViewOperationId = Guid.Parse("7e9516b6-059f-4ec5-817f-f9ce9faacdc4");
 
-        this.businessUnitChangeViewOperation = new Operation { Name = "BusinessUnitChangeView", Id = this.businessUnitChangeViewOperationId };
         this.entityType = new EntityType(true, true) { Name = "BusinessUnit" };
         this.principalTest1 = new Principal { Name = "test1" };
         this.permissionFilterEntityBoeing = new PermissionFilterEntity { EntityType = this.entityType, EntityId = this.boeingId };
@@ -44,12 +42,8 @@ public class PermissionBLLTests : TestBase
         this.businessRoleSEManager = new BusinessRole { Name = "SE Manager", Id = this.seManagerId };
 
         // ReSharper disable once ObjectCreationAsStatement
-        new BusinessRoleOperationLink(this.businessRoleSEManager)
-        {
-                Operation = this.businessUnitChangeViewOperation
-        };
 
-        this.RegisterDomainObject(this.businessUnitChangeViewOperation);
+
         this.RegisterDomainObject(this.businessRoleLuxTravelSEApprover);
         this.RegisterDomainObject(this.businessRoleSEManager);
         this.RegisterDomainObject(this.permissionFilterEntityBoeing);
@@ -61,7 +55,6 @@ public class PermissionBLLTests : TestBase
     [TearDown]
     public void Cleanup()
     {
-        this.businessUnitChangeViewOperation = null;
         this.entityType = null;
         this.principalTest1 = null;
         this.permissionFilterEntityBoeing = null;

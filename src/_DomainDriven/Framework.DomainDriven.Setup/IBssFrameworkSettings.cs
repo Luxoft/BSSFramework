@@ -38,4 +38,8 @@ public interface IBssFrameworkSettings
 
     IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
+
+    IBssFrameworkSettings SetAdministratorRole(SecurityRole securityRole);
+
+    IBssFrameworkSettings SetSystemIntegrationRole(SecurityRole securityRole);
 }

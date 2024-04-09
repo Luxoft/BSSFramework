@@ -6,9 +6,9 @@ public class DeepEqualsCollection<T> : IReadOnlyList<T>, IEquatable<DeepEqualsCo
 {
     private readonly IReadOnlyList<T> baseSource;
 
-    public DeepEqualsCollection(IEnumerable<T> baseSource, bool ordered = true)
+    public DeepEqualsCollection(IEnumerable<T> baseSource)
     {
-        this.baseSource = (ordered ? baseSource.OrderBy(v => v) : baseSource).ToList();
+        this.baseSource = baseSource.ToList();
     }
 
     public int Count => this.baseSource.Count;

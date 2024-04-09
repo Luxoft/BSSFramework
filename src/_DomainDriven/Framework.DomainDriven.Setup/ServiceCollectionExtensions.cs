@@ -8,6 +8,7 @@ using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -35,6 +36,16 @@ public static class ServiceCollectionExtensions
         foreach (var namedLockType in settings.NamedLockTypes)
         {
             services.AddSingleton(new NamedLockTypeInfo(namedLockType));
+        }
+
+        if (settings.AdministratorRole == null)
+        {
+            services.AddSingleton(new AdministratorRoleInfo(settings.AdministratorRole));
+        }
+
+        if (settings.SystemIntegrationRole == null)
+        {
+            services.AddSingleton(new SystemIntegrationRoleInfo(settings.SystemIntegrationRole));
         }
 
         services.AddScoped(typeof(INotificationPrincipalExtractor), settings.NotificationPrincipalExtractorType);

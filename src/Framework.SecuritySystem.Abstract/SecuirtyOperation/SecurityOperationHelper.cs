@@ -2,14 +2,16 @@
 
 namespace Framework.SecuritySystem;
 
-public static class SecurityOperationHelper
+public static class SecurityRoleHelper
 {
-    public static IEnumerable<SecurityOperation> GetSecurityOperations(Type securityOperationType)
+    public static IEnumerable<SecurityRole> GetSecurityRoles(Type securityRoleType, Func<string, bool> filter)
     {
-        return from prop in securityOperationType.GetProperties(BindingFlags.Static | BindingFlags.Public)
+        return from prop in securityRoleType.GetProperties(BindingFlags.Static | BindingFlags.Public)
 
-               where typeof(SecurityOperation).IsAssignableFrom(prop.PropertyType)
+               where filter(prop.Name)
 
-               select (SecurityOperation)prop.GetValue(null);
+               where typeof(SecurityRole).IsAssignableFrom(prop.PropertyType)
+
+               select (SecurityRole)prop.GetValue(null);
     }
 }

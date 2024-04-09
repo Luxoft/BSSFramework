@@ -9,8 +9,14 @@ public static class ExampleSecurityOperation
 
 public static class ExampleSecurityRole
 {
+    public static SecurityRole TestRole { get; } = new SecurityRole(
+        Guid.NewGuid(),
+        nameof(TestRole),
+        ExampleSecurityOperation.EmployeeView,
+        ExampleSecurityOperation.EmployeeEdit);
+
     public static SecurityRole Administrator { get; } =
         SecurityRole.CreateAdministrator(
             Guid.NewGuid(),
-            new[] { typeof(ExampleSecurityOperation) });
+            new[] { typeof(ExampleSecurityRole) });
 }

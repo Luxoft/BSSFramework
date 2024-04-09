@@ -16,6 +16,7 @@ public class SecurityRoleSource : ISecurityRoleSource
                 var result = GetSecurityRoles(securityRoleTypeInfoList)
                              .GetAllElements(sr => sr.Children)
                              .Distinct() // distinct by memory reference
+                             .OrderBy(sr => sr.Name)
                              .ToList();
 
                 ValidateDuplicates(result);
@@ -30,12 +31,9 @@ public class SecurityRoleSource : ISecurityRoleSource
     {
         return from securityRoleTypeInfo in securityRoleTypeInfoList
 
-               from property in securityRoleTypeInfo.SecurityRoleType.GetProperties(
-                   BindingFlags.Public | BindingFlags.Static)
+               from securityRole in SecurityRoleHelper.GetSecurityRoles(securityRoleTypeInfo.SecurityRoleType, _ => true)
 
-               where typeof(SecurityRole).IsAssignableFrom(property.PropertyType)
-
-               select (SecurityRole)property.GetValue(null);
+               select securityRole;
     }
 
     private static void ValidateDuplicates(IReadOnlyList<SecurityRole> securityRoles)

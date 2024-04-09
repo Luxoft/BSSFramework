@@ -33,6 +33,10 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public Type DomainObjectEventMetadataType { get; private set; }
 
 
+    public SecurityRole AdministratorRole { get; private set; }
+
+    public SecurityRole SystemIntegrationRole { get; private set; }
+
     public IBssFrameworkSettings AddSecurityOperationType(Type securityOperationType)
     {
         this.SecurityOperationTypes.Add(securityOperationType);
@@ -102,6 +106,20 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         where T : IDomainObjectEventMetadata
     {
         this.DomainObjectEventMetadataType = typeof(T);
+
+        return this;
+    }
+
+    public IBssFrameworkSettings SetAdministratorRole(SecurityRole securityRole)
+    {
+        this.AdministratorRole = securityRole;
+
+        return this;
+    }
+
+    public IBssFrameworkSettings SetSystemIntegrationRole(SecurityRole securityRole)
+    {
+        this.SystemIntegrationRole = securityRole;
 
         return this;
     }

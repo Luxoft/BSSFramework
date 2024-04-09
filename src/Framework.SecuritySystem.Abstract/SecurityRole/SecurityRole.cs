@@ -19,14 +19,25 @@ public class SecurityRole
 
     public IReadOnlyList<SecurityRole> Children { get; init; } = new List<SecurityRole>();
 
-    public static SecurityRole CreateAdministrator(Guid id, IEnumerable<Type> securityOperationTypes, string? description = null)
+    public static SecurityRole CreateAdministrator(
+        Guid id,
+        IEnumerable<Type> securityRoleTypes,
+        string? description = null)
     {
-        return new SecurityRole(
-               id,
-               "Administrator",
-               securityOperationTypes.SelectMany(SecurityOperationHelper.GetSecurityOperations)
-                                     .Distinct()
-                                     .ToArray())
-               { Description = description };
+        const string administratorRoleName = "Administrator";
+
+        var children = securityRoleTypes
+                       .SelectMany(
+                           securityRoleType => SecurityRoleHelper.GetSecurityRoles(
+                               securityRoleType,
+                               srName => srName != administratorRoleName))
+                       .Distinct()
+                       .ToList();
+
+        return new SecurityRole(id, administratorRoleName)
+               {
+                   Children = children,
+                   Description = description
+               };
     }
 }

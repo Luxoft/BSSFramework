@@ -7,7 +7,7 @@ using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
-using Framework.SecuritySystem.Bss;
+using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -55,7 +55,6 @@ public static class ServiceCollectionExtensions
     {
         if (settings.RegisterBaseSecurityOperationTypes)
         {
-            settings.SecurityOperationTypes.Add(typeof(BssSecurityOperation));
             settings.SecurityOperationTypes.Add(typeof(AuthorizationSecurityOperation));
             settings.SecurityOperationTypes.Add(typeof(ConfigurationSecurityOperation));
         }

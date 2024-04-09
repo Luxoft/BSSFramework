@@ -14,23 +14,13 @@ namespace Framework.Authorization.Domain;
 [BLLViewRole]
 [BLLSaveRole]
 [BLLRemoveRole]
-public class BusinessRole : BaseDirectory,
-                            IMaster<SubBusinessRoleLink>,
-                            IChildrenSource<BusinessRole>
+public class BusinessRole : BaseDirectory
 {
     private readonly ICollection<Permission> permissions = new List<Permission>();
-
-    private readonly ICollection<SubBusinessRoleLink> subBusinessRoleLinks = new List<SubBusinessRoleLink>();
 
     private string description;
 
     public const string AdminRoleName = "Administrator";
-
-    /// <summary>
-    /// Коллекция связей бизнес-роли с дочерними ролями
-    /// </summary>
-    [UniqueGroup]
-    public virtual IEnumerable<SubBusinessRoleLink> SubBusinessRoleLinks => this.subBusinessRoleLinks;
 
     /// <summary>
     /// Коллекция пермиссий принципалов, выданных по одной бизнес-роль
@@ -38,13 +28,6 @@ public class BusinessRole : BaseDirectory,
     [DetailRole(false)]
     [CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual IEnumerable<Permission> Permissions => this.permissions;
-
-    /// <summary>
-    /// Вычисляемая коллекция дочерних ролей, выданных на одну бизнес-роль
-    /// </summary>
-    [DetailRole(false)]
-    [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual IEnumerable<BusinessRole> SubBusinessRoles => this.SubBusinessRoleLinks.Select(link => link.SubBusinessRole);
 
     /// <summary>
     /// Описание бизнес-роли
@@ -59,9 +42,4 @@ public class BusinessRole : BaseDirectory,
     /// Вычисляемый признак того, что текущая бизнес-роль является админской
     /// </summary>
     public virtual bool IsAdmin => this.Name == AdminRoleName;
-
-    ICollection<SubBusinessRoleLink> IMaster<SubBusinessRoleLink>.Details =>
-            (ICollection<SubBusinessRoleLink>)this.SubBusinessRoleLinks;
-
-    IEnumerable<BusinessRole> IChildrenSource<BusinessRole>.Children => this.SubBusinessRoles;
 }

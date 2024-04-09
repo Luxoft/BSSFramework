@@ -169,12 +169,15 @@ public static class ServiceCollectionExtensions
                        .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.
                            SecurityExpressionBuilderFactory<Guid>>()
 
-                       .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>()
 
-                       .AddSingleton<ISecurityRoleParser, SecurityRoleParser<Guid>>()
-                       .AddSingletonFrom<ISecurityRoleParser, ISecurityRoleParser>()
+                       .AddSingleton<ISecurityRuleExpander, SecurityModeExpander>()
+                       .AddSingleton<SecurityOperationExpander>()
+                       .AddSingletonFrom<ISecurityRuleExpander, SecurityOperationExpander>()
+                       .AddSingleton<SecurityRoleExpander>()
+                       .AddSingletonFrom<ISecurityRuleExpander, SecurityRoleExpander>()
 
-                       .AddScoped<IOperationDomainService, OperationDomainService>()
+                       .AddSingleton<ISecurityRoleParser, SecurityRoleParser>()
+
                        .AddScoped<IBusinessRoleDomainService, BusinessRoleDomainService>()
 
                        .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
@@ -183,7 +186,6 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<InitializeSettings>()
                        .AddScoped<IAuthorizationEntityTypeInitializer, AuthorizationEntityTypeInitializer>()
-                       .AddScoped<IAuthorizationOperationInitializer, AuthorizationOperationInitializer>()
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
@@ -210,13 +212,8 @@ public static class ServiceCollectionExtensions
                                              .SetEdit(AuthorizationSecurityOperation.BusinessRoleEdit)
                                              .SetCustomService<AuthorizationBusinessRoleSecurityService>())
 
-                                   .Add<Operation>(
-                                       b => b.SetView(AuthorizationSecurityOperation.OperationView)
-                                             .SetEdit(AuthorizationSecurityOperation.OperationEdit)
-                                             .SetCustomService<AuthorizationOperationSecurityService>())
-
                                    .Add<EntityType>(
-                                       b => b.SetView(AuthorizationSecurityOperation.Disabled)));
+                                       b => b.SetView(SecurityRule.Disabled)));
     }
 
     public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
@@ -242,6 +239,6 @@ public static class ServiceCollectionExtensions
                                              .SetEdit(ConfigurationSecurityOperation.TargetSystemEdit))
 
                                    .Add<DomainType>(
-                                       b => b.SetView(ConfigurationSecurityOperation.Disabled)));
+                                       b => b.SetView(SecurityRule.Disabled)));
     }
 }

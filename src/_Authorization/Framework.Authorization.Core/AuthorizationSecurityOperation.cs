@@ -18,12 +18,5 @@ public static class AuthorizationSecurityOperation
     public static SecurityOperation BusinessRoleEdit { get; } = new(nameof(BusinessRoleEdit)) { Description = "Can edit BusinessRole" };
 
 
-    public static SecurityOperation OperationOpenModule { get; } = new(nameof(OperationOpenModule)) { Description = "Can open Operation module" };
-
-    public static SecurityOperation OperationView { get; } = new(nameof(OperationView)) { Description = "Can view Operation" };
-
-    public static SecurityOperation OperationEdit { get; } = new(nameof(OperationEdit)) { Description = "Can edit Operation" };
-
-
     public static SecurityOperation AuthorizationImpersonate { get; } = new(nameof(AuthorizationImpersonate)) { Description = "Can authorization impersonate" };
 }

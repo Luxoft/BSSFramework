@@ -76,11 +76,6 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
 
             this.logger.Verbose("Create Role: {0} {1}", businessRole.Name, securityRole.Id);
 
-            foreach (var subRole in securityRole.Children)
-            {
-                new SubBusinessRoleLink(businessRole) { SubBusinessRole = mappingDict[subRole] };
-            }
-
             await this.businessRoleRepository.InsertAsync(businessRole, securityRole.Id, cancellationToken);
 
             mappingDict.Add(securityRole, businessRole);
@@ -90,23 +85,6 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
         {
             var businessRole = combinePair.Item1;
             var securityRole = combinePair.Item2;
-
-            businessRole.Description = securityRole.Description;
-
-            var mergeSubRoleResult = businessRole.SubBusinessRoleLinks.GetMergeResult(
-                securityRole.Children,
-                link => link.SubBusinessRole.Id,
-                child => child.Id);
-
-            foreach (var child in mergeSubRoleResult.AddingItems)
-            {
-                new SubBusinessRoleLink(businessRole).SubBusinessRole = mappingDict[child];
-            }
-
-            foreach (var subBusinessRoleLink in mergeSubRoleResult.RemovingItems)
-            {
-                businessRole.RemoveDetail(subBusinessRoleLink);
-            }
 
             businessRole.Description = securityRole.Description;
 

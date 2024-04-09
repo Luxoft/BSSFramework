@@ -15,10 +15,6 @@
       <key column="roleId" />
       <one-to-many class="Framework.Authorization.Domain.Permission" />
     </set>
-    <set name="SubBusinessRoleLinks" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="businessRoleId" />
-      <one-to-many class="Framework.Authorization.Domain.SubBusinessRoleLink" />
-    </set>
   </class>
   <class name="Framework.Authorization.Domain.EntityType" table="EntityType">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
@@ -104,17 +100,5 @@
       <key column="principalId" />
       <one-to-many class="Framework.Authorization.Domain.Permission" />
     </set>
-  </class>
-  <class name="Framework.Authorization.Domain.SubBusinessRoleLink" table="SubBusinessRoleLink">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessRole" column="businessRoleId" class="Framework.Authorization.Domain.BusinessRole" unique-key="UIX_businessRole_subBusinessRoleSubBusinessRoleLink" access="field.camelcase" />
-    <many-to-one name="SubBusinessRole" column="subBusinessRoleId" class="Framework.Authorization.Domain.BusinessRole" unique-key="UIX_businessRole_subBusinessRoleSubBusinessRoleLink" access="field.camelcase" />
   </class>
 </hibernate-mapping>

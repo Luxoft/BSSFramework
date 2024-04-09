@@ -165,15 +165,6 @@ public partial class PermissionBLL
             }
         }
 
-        if (mode.HasFlag(ValidatePermissonDelegateMode.Role))
-        {
-            if (!permission.DelegatedFrom.Role.GetGraphElements(r => r.SubBusinessRoles).Contains(permission.Role))
-            {
-                throw new ValidationException(
-                                              $"Invalid delegated permission role. Selected role \"{permission.Role.Name}\" not derived from role \"{permission.DelegatedFrom.Role.Name}\"");
-            }
-        }
-
         if (mode.HasFlag(ValidatePermissonDelegateMode.Period))
         {
             if (!this.IsCorrentPeriodSubset(permission))

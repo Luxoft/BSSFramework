@@ -53,66 +53,9 @@ namespace Framework.Authorization.BLL
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.BusinessRole, string>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRole, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SubBusinessRoleLink>>> GetBusinessRole_SubBusinessRoleLinksValidators()
-        {
-            yield return new Framework.Validation.UniqueCollectionValidator<Framework.Authorization.Domain.BusinessRole, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SubBusinessRoleLink>, Framework.Authorization.Domain.SubBusinessRoleLink, System.Tuple<Framework.Authorization.Domain.BusinessRole>>(source => new System.Tuple<Framework.Authorization.Domain.BusinessRole>(source.SubBusinessRole), "SubBusinessRole");
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Authorization.Domain.BusinessRole, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SubBusinessRoleLink>, Framework.Authorization.Domain.SubBusinessRoleLink>();
-        }
-        
         protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.BusinessRoleCreateModel> GetBusinessRoleCreateModelValidationMap()
         {
             return Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.BusinessRoleCreateModel>.Empty;
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRoleNode, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.BusinessRole>>> GetBusinessRoleNode_ChildrenValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Authorization.Domain.BusinessRoleNode, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.BusinessRole>, Framework.Authorization.Domain.BusinessRole>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRoleNode, System.DateTime?>> GetBusinessRoleNode_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Authorization.Domain.BusinessRoleNode>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRoleNode, string>> GetBusinessRoleNode_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.BusinessRoleNode>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRoleNode, string>> GetBusinessRoleNode_DescriptionValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.BusinessRoleNode>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRoleNode, string>> GetBusinessRoleNode_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.BusinessRoleNode>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRoleNode, System.DateTime?>> GetBusinessRoleNode_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Authorization.Domain.BusinessRoleNode>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRoleNode, string>> GetBusinessRoleNode_NameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.BusinessRoleNode>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.BusinessRoleNode>> GetBusinessRoleNodeProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.BusinessRoleNode> currentClass)
-        {
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Authorization.Domain.BusinessRoleNode, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.BusinessRole>, Framework.Authorization.Domain.BusinessRole>(source => source.Children, currentClass, this.GetBusinessRoleNode_ChildrenValidators(), this.GetClassMap<Framework.Authorization.Domain.BusinessRole>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.BusinessRoleNode, System.DateTime?>(source => source.CreateDate, currentClass, this.GetBusinessRoleNode_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.BusinessRoleNode, string>(source => source.CreatedBy, currentClass, this.GetBusinessRoleNode_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.BusinessRoleNode, string>(source => source.Description, currentClass, this.GetBusinessRoleNode_DescriptionValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.BusinessRoleNode, string>(source => source.ModifiedBy, currentClass, this.GetBusinessRoleNode_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.BusinessRoleNode, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetBusinessRoleNode_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.BusinessRoleNode, string>(source => source.Name, currentClass, this.GetBusinessRoleNode_NameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.BusinessRoleNode> GetBusinessRoleNodeValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.BusinessRoleNode>(this.GetBusinessRoleNodeProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.BusinessRole>> GetBusinessRoleProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.BusinessRole> currentClass)
@@ -123,7 +66,6 @@ namespace Framework.Authorization.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.BusinessRole, string>(source => source.ModifiedBy, currentClass, this.GetBusinessRole_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.BusinessRole, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetBusinessRole_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.BusinessRole, string>(source => source.Name, currentClass, this.GetBusinessRole_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Authorization.Domain.BusinessRole, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SubBusinessRoleLink>, Framework.Authorization.Domain.SubBusinessRoleLink>(source => source.SubBusinessRoleLinks, currentClass, this.GetBusinessRole_SubBusinessRoleLinksValidators(), this.GetClassMap<Framework.Authorization.Domain.SubBusinessRoleLink>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.BusinessRoleRootFilterModel> GetBusinessRoleRootFilterModelValidationMap()
@@ -235,10 +177,6 @@ namespace Framework.Authorization.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetBusinessRoleCreateModelValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.BusinessRoleNode)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetBusinessRoleNodeValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.BusinessRoleRootFilterModel)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetBusinessRoleRootFilterModelValidationMap()));
@@ -294,10 +232,6 @@ namespace Framework.Authorization.BLL
             else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.SecurityEntity)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSecurityEntityValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.SubBusinessRoleLink)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSubBusinessRoleLinkValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel)))
             {
@@ -569,46 +503,6 @@ namespace Framework.Authorization.BLL
         protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SecurityEntity> GetSecurityEntityValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.SecurityEntity>(this.GetSecurityEntityProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, System.DateTime?>> GetSubBusinessRoleLink_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Authorization.Domain.SubBusinessRoleLink>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, string>> GetSubBusinessRoleLink_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.SubBusinessRoleLink>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, string>> GetSubBusinessRoleLink_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.SubBusinessRoleLink>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, System.DateTime?>> GetSubBusinessRoleLink_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Authorization.Domain.SubBusinessRoleLink>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole>> GetSubBusinessRoleLink_SubBusinessRoleValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.SubBusinessRole);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink>> GetSubBusinessRoleLinkProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink, System.DateTime?>(source => source.CreateDate, currentClass, this.GetSubBusinessRoleLink_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink, string>(source => source.CreatedBy, currentClass, this.GetSubBusinessRoleLink_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink, string>(source => source.ModifiedBy, currentClass, this.GetSubBusinessRoleLink_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetSubBusinessRoleLink_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole>(source => source.SubBusinessRole, currentClass, this.GetSubBusinessRoleLink_SubBusinessRoleValidators(), this.GetClassMap<Framework.Authorization.Domain.BusinessRole>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink> GetSubBusinessRoleLinkValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink>(this.GetSubBusinessRoleLinkProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.DelegateToItemModel>>> GetUpdatePermissionDelegatesModel_AddItemsValidators()

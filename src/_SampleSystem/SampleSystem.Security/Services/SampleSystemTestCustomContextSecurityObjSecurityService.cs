@@ -9,13 +9,13 @@ public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDo
 {
     public SampleSystemTestCustomContextSecurityObjSecurityService(
         ISecurityProvider<TestCustomContextSecurityObj> disabledSecurityProvider,
-        ISecurityOperationResolver securityOperationResolver,
+        IEnumerable<ISecurityRuleExpander> securityRuleExpanders,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
-        : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory)
+        : base(disabledSecurityProvider, securityRuleExpanders, securityExpressionBuilderFactory)
     {
     }
 
-    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityRule securityRule)
+    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule)
     {
         return new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();
     }

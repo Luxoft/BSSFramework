@@ -14,9 +14,9 @@ public class SecurityOperationExpander
             securityRule =>
             {
                 var securityRoles = securityRoleSource.SecurityRoles
-                                        .Where(sr => sr.Operations.Contains(securityRule.SecurityOperation))
-                                        .Distinct()
-                                        .ToArray();
+                                                      .Where(sr => sr.Operations.Contains(securityRule.SecurityOperation))
+                                                      .Distinct()
+                                                      .ToArray();
 
                 if (securityRoles.Length == 0)
                 {

@@ -13,10 +13,12 @@ public class SecurityRoleExpander
         this.expandCache = new DictionaryCache<SecurityRule.NonExpandedRolesSecurityRule, SecurityRule.ExpandedRolesSecurityRule>(
             securityRule =>
             {
-                var securityRoles = securityRoleSource.SecurityRoles.GetAllElements(sr => sr.Children)
-                                        .Distinct()
-                                        .Where(sr => sr.Children.IsIntersected(securityRule.SecurityRoles))
-                                        .ToArray();
+                var securityRoles = securityRoleSource.SecurityRoles
+                                                      .Distinct()
+                                                      .Where(sr => sr.Children.IsIntersected(securityRule.SecurityRoles))
+                                                      .Concat(securityRoleSource.SecurityRoles)
+                                                      .Distinct()
+                                                      .ToArray();
 
                 if (securityRoles.Length == 0)
                 {

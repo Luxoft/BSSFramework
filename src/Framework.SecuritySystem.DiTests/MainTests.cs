@@ -116,9 +116,10 @@ public class MainTests
                                  .SetEdit(ExampleSecurityOperation.EmployeeEdit)
                                  .SetPath(SecurityPath<Employee>.Create(v => v.BusinessUnit))))
 
-               .AddSingleton<ISecurityRuleExpander, SecurityModeExpander>()
-               //.AddSingleton<ISecurityRuleExpander, SecurityOperationExpander>()
-               //.AddSingleton<ISecurityRuleExpander, SecurityRoleExpander>()
+               .AddSingleton<SecurityModeExpander>()
+               .AddSingleton<SecurityOperationExpander>()
+               .AddSingleton<SecurityRoleExpander>()
+               .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
 
                .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 
@@ -126,6 +127,8 @@ public class MainTests
 
                .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
                .RegisterSecurityContextInfoService<Guid>(b => b.Add<BusinessUnit>(Guid.NewGuid()))
+
+               .AddSingleton(new SecurityRoleTypeInfo(typeof(ExampleSecurityRole)))
 
                .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }

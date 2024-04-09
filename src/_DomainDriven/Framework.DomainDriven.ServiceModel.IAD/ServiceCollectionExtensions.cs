@@ -174,7 +174,7 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<SecurityOperationExpander>()
                        .AddSingleton<SecurityRoleExpander>()
 
-                       .AddSingletonFrom<ISecurityRuleExpander, SecurityRuleExpander>()
+                       .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
 
                        .AddSingleton<ISecurityRoleParser, SecurityRoleParser>()
 

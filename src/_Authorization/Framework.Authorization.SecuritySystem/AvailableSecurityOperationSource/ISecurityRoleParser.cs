@@ -4,7 +4,9 @@ namespace Framework.Authorization.SecuritySystem;
 
 public interface ISecurityRoleParser
 {
-    IReadOnlyList<SecurityRule> Operations { get; }
+    IReadOnlyList<SecurityRole> Roles { get; }
 
-    SecurityRule Parse(string name);
+    SecurityRole Parse(string name);
+
+    SecurityRole GetSecurityRole(Guid id);
 }

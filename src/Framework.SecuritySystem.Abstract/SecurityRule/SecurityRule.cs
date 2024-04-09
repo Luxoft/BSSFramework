@@ -31,17 +31,23 @@ public abstract record SecurityRule
         return securityRole.ToSecurityRule();
     }
 
-    public static implicit operator SecurityRule(SecurityRole[] securityRoles)
-    {
-        return securityRoles.ToSecurityRule();
-    }
-
     public record SpecialSecurityRule(string Name) : SecurityRule
     {
         public override string ToString() => this.Name;
     }
 
-    public abstract record DomainObjectSecurityRule : SecurityRule;
+    public abstract record DomainObjectSecurityRule : SecurityRule
+    {
+        public static implicit operator DomainObjectSecurityRule(SecurityOperation securityOperation)
+        {
+            return securityOperation.ToSecurityRule();
+        }
+
+        public static implicit operator DomainObjectSecurityRule(SecurityRole securityRole)
+        {
+            return securityRole.ToSecurityRule();
+        }
+    }
 
     public record OperationSecurityRule(SecurityOperation SecurityOperation) : DomainObjectSecurityRule
     {

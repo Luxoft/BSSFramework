@@ -15,7 +15,7 @@ public class AvailablePermissionFilter
 
     public string? PrincipalName { get; set; }
 
-    public List<Guid> SecurityRoleIdents { get; set; }
+    public List<Guid>? SecurityRoleIdents { get; set; }
 
     public Expression<Func<Permission, bool>> ToFilterExpression()
     {
@@ -32,7 +32,7 @@ public class AvailablePermissionFilter
             yield return permission => this.PrincipalName == permission.Principal.Name;
         }
 
-        if (!this.SecurityRoleIdents.IsDefault())
+        if (this.SecurityRoleIdents != null)
         {
             yield return permission => this.SecurityRoleIdents.Contains(permission.Role.Id);
         }

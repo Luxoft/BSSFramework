@@ -24,14 +24,12 @@ public class OperationAccessor : IOperationAccessor
     public bool IsAdmin() => this.availablePermissionSource.GetAvailablePermissionsQueryable(this.withRunAs)
                                  .Any(permission => permission.Role.Name == BusinessRole.AdminRoleName);
 
-    public bool HasAccess(SecurityRule securityRule)
+    public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        var typedOperation = (SecurityRule)securityRule;
-
-        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityRoleIdents: typedOperation.Id, withRunAs: this.withRunAs).Any();
+        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityRule: securityRule, withRunAs: this.withRunAs).Any();
     }
 
-    public void CheckAccess(SecurityRule securityRule)
+    public void CheckAccess(SecurityRule.DomainObjectSecurityRule securityRule)
     {
         if (!this.HasAccess(securityRule))
         {

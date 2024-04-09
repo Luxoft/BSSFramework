@@ -1,33 +1,32 @@
-﻿using Framework.Security;
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem;
 
 public class SecurityRoleParser : ISecurityRoleParser
 {
-    private readonly IReadOnlyDictionary<string, SecurityRule> securityOperationByNameDict;
+    private readonly IReadOnlyDictionary<Guid, SecurityRole> securityRoleByIdDict;
 
-    public SecurityRoleParser(IEnumerable<SecurityRoleTypeInfo> securityRoleTypeInfoList)
+    private readonly IReadOnlyDictionary<string, SecurityRole> securityRoleByNameDict;
+
+    public SecurityRoleParser(ISecurityRoleSource securityRoleSource)
     {
-        this.Operations = securityRoleTypeInfoList
-                            .SelectMany(v => SecurityOperationHelper.GetSecurityOperations(v.SecurityOperationType))
-                            .Where(op => op != SecurityRule.Disabled)
-                            .Cast<SecurityRule>()
-                            .Distinct()
-                            .ToList();
+        this.Roles = securityRoleSource.SecurityRoles;
 
-        this.securityOperationByNameDict = this.Operations.ToDictionary(v => v.Name);
+        this.securityRoleByIdDict = this.Roles.ToDictionary(v => v.Id);
+
+        this.securityRoleByNameDict = this.Roles.ToDictionary(v => v.Name);
     }
 
-    public IReadOnlyList<SecurityRule> Operations { get; }
+    public IReadOnlyList<SecurityRole> Roles { get; }
 
-    public SecurityRule Parse(string name)
+    public SecurityRole Parse(string name)
     {
-        return this.securityOperationByNameDict.GetValueOrDefault(name)
-               ?? throw new Exception($"SecurityRule with name '{name}' not found");
+        return this.securityRoleByNameDict.GetValueOrDefault(name)
+               ?? throw new Exception($"SecurityRole with name '{name}' not found");
     }
 
-    SecurityRule ISecurityRoleParser.Parse(string name) => this.Parse(name);
-
-    IReadOnlyList<SecurityRule> ISecurityRoleParser.Operations => this.Operations;
+    public SecurityRole GetSecurityRole(Guid id)
+    {
+        return this.securityRoleByIdDict.GetValueOrDefault(id) ?? throw new Exception($"SecurityRole with id '{id}' not found");
+    }
 }

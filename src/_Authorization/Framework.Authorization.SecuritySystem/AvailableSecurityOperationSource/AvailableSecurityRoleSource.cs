@@ -24,6 +24,6 @@ public class AvailableSecurityRoleSource : IAvailableSecurityRoleSource
 
         var dbOperationIdents = await dbRequest.Distinct().ToListAsync(cancellationToken);
 
-        return dbOperationIdents.Select(this.parser.GetSecurityOperation).ToList<SecurityRole>();
+        return dbOperationIdents.Select(this.parser.GetSecurityRole).ToList();
     }
 }

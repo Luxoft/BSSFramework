@@ -8,9 +8,9 @@ public class AvailableSecurityRoleSource : IAvailableSecurityRoleSource
 {
     private readonly IAvailablePermissionSource availablePermissionSource;
 
-    private readonly ISecurityOperationParser parser;
+    private readonly ISecurityRoleParser parser;
 
-    public AvailableSecurityRoleSource(IAvailablePermissionSource availablePermissionSource, ISecurityOperationParser parser)
+    public AvailableSecurityRoleSource(IAvailablePermissionSource availablePermissionSource, ISecurityRoleParser parser)
     {
         this.availablePermissionSource = availablePermissionSource;
         this.parser = parser;

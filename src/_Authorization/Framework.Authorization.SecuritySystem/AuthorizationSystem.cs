@@ -81,12 +81,10 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     }
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
-        SecurityRule securityRule,
+        SecurityRule.DomainObjectSecurityRule securityRule,
         IEnumerable<Type> securityTypes)
     {
-        var typedSecurityOperation = (SecurityRule)securityRule;
-
-        var permissions = this.availablePermissionSource.GetAvailablePermissionsQueryable(true, typedSecurityOperation.Id)
+        var permissions = this.availablePermissionSource.GetAvailablePermissionsQueryable(true, securityRule.Id)
                               .FetchMany(q => q.FilterItems)
                               .ThenFetch(q => q.Entity)
                               .ThenFetch(q => q.EntityType)
@@ -100,7 +98,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
                .ToList(permission => this.TryExpandPermission(permission, securityRule.ExpandType));
     }
 
-    public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityRule securityRule)
+    public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityRule.DomainObjectSecurityRule securityRule)
     {
         var typedSecurityOperation = (SecurityRule)securityRule;
 

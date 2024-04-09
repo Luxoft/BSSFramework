@@ -30,7 +30,7 @@ public partial interface IAuthorizationBLLContext :
 
     IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
 
-    ISecurityOperationParser<Guid> SecurityOperationParser { get; }
+    ISecurityRoleParser<Guid> SecurityRoleParser { get; }
 
     TimeProvider TimeProvider { get; }
 

@@ -2,13 +2,13 @@
 
 namespace Framework.Core;
 
-public class DeepEqualsOrderedCollection<T> : IReadOnlyList<T>, IEquatable<DeepEqualsOrderedCollection<T>>
+public class DeepEqualsCollection<T> : IReadOnlyList<T>, IEquatable<DeepEqualsCollection<T>>
 {
     private readonly IReadOnlyList<T> baseSource;
 
-    public DeepEqualsOrderedCollection(IEnumerable<T> baseSource)
+    public DeepEqualsCollection(IEnumerable<T> baseSource, bool ordered = true)
     {
-        this.baseSource = baseSource.OrderBy(v => v).ToList();
+        this.baseSource = (ordered ? baseSource.OrderBy(v => v) : baseSource).ToList();
     }
 
     public int Count => this.baseSource.Count;
@@ -19,7 +19,7 @@ public class DeepEqualsOrderedCollection<T> : IReadOnlyList<T>, IEquatable<DeepE
 
     IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
-    public bool Equals(DeepEqualsOrderedCollection<T> other) =>
+    public bool Equals(DeepEqualsCollection<T> other) =>
         !object.ReferenceEquals(other, null) && this.baseSource.SequenceEqual(other.baseSource);
 
     public override bool Equals(object obj)
@@ -27,7 +27,7 @@ public class DeepEqualsOrderedCollection<T> : IReadOnlyList<T>, IEquatable<DeepE
         if (object.ReferenceEquals(null, obj)) return false;
         if (object.ReferenceEquals(this, obj)) return true;
 
-        return this.Equals(obj as DeepEqualsOrderedCollection<T>);
+        return this.Equals(obj as DeepEqualsCollection<T>);
     }
 
     public override int GetHashCode() => this.baseSource.Count;

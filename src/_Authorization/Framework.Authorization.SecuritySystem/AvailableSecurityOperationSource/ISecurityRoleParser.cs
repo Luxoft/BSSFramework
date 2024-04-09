@@ -2,7 +2,7 @@
 
 namespace Framework.Authorization.SecuritySystem;
 
-public interface ISecurityOperationParser
+public interface ISecurityRoleParser
 {
     IReadOnlyList<SecurityRule> Operations { get; }
 

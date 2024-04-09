@@ -202,7 +202,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
     {
         return evaluateDataExpr.GetContext()
                                .ToPropertyReference((IAuthorizationBLLContextContainer<object> context) => context.Authorization)
-                               .ToPropertyReference("SecurityOperationParser")
+                               .ToPropertyReference("SecurityRoleParser")
                                .ToMethodInvokeExpression(
                                    "Parse",
                                    this.Parameters[parameterIndex]

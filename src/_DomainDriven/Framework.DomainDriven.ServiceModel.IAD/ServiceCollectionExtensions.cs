@@ -171,8 +171,8 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>()
 
-                       .AddSingleton<ISecurityOperationParser<Guid>, SecurityOperationParser<Guid>>()
-                       .AddSingletonFrom<ISecurityOperationParser, ISecurityOperationParser<Guid>>()
+                       .AddSingleton<ISecurityRoleParser<Guid>, SecurityRoleParser<Guid>>()
+                       .AddSingletonFrom<ISecurityRoleParser, ISecurityRoleParser<Guid>>()
 
                        .AddScoped<IOperationDomainService, OperationDomainService>()
                        .AddScoped<IBusinessRoleDomainService, BusinessRoleDomainService>()

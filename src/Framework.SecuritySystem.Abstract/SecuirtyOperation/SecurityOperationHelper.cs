@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 
-using Framework.SecuritySystem;
-
-namespace Framework.Security;
+namespace Framework.SecuritySystem;
 
 public static class SecurityOperationHelper
 {

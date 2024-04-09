@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
 
         foreach (var securityOperationType in settings.SecurityOperationTypes)
         {
-            services.AddSingleton(new SecurityOperationTypeInfo(securityOperationType));
+            services.AddSingleton(new SecurityRoleTypeInfo(securityOperationType));
         }
 
         foreach (var securityRoleType in settings.SecurityRoleTypes)

@@ -33,7 +33,7 @@ public abstract record SecurityRule
 
     public static implicit operator SecurityRule(SecurityRole[] securityRoles)
     {
-        return new RolesSecurityRule(new DeepEqualsOrderedCollection<SecurityRole>(securityRoles));
+        return new RolesSecurityRule(new DeepEqualsCollection<SecurityRole>(securityRoles));
     }
 
     public record SpecialSecurityRule(string Name) : SecurityRule
@@ -41,12 +41,14 @@ public abstract record SecurityRule
         public override string ToString() => this.Name;
     }
 
-    public record OperationSecurityRule(SecurityOperation SecurityOperation) : SecurityRule
+    public abstract record DomainObjectSecurityRule : SecurityRule;
+
+    public record OperationSecurityRule(SecurityOperation SecurityOperation) : DomainObjectSecurityRule
     {
         public override string ToString() => this.SecurityOperation.Name;
     }
 
-    public record RolesSecurityRule(DeepEqualsOrderedCollection<SecurityRole> SecurityRoles) : SecurityRule
+    public record RolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : DomainObjectSecurityRule
     {
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name

@@ -3,13 +3,13 @@ using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class SecurityOperationParser : ISecurityOperationParser
+public class SecurityRoleParser : ISecurityRoleParser
 {
     private readonly IReadOnlyDictionary<string, SecurityRule> securityOperationByNameDict;
 
-    public SecurityOperationParser(IEnumerable<SecurityOperationTypeInfo> securityOperationTypeInfos)
+    public SecurityRoleParser(IEnumerable<SecurityRoleTypeInfo> securityRoleTypeInfoList)
     {
-        this.Operations = securityOperationTypeInfos
+        this.Operations = securityRoleTypeInfoList
                             .SelectMany(v => SecurityOperationHelper.GetSecurityOperations(v.SecurityOperationType))
                             .Where(op => op != SecurityRule.Disabled)
                             .Cast<SecurityRule>()
@@ -27,7 +27,7 @@ public class SecurityOperationParser : ISecurityOperationParser
                ?? throw new Exception($"SecurityRule with name '{name}' not found");
     }
 
-    SecurityRule ISecurityOperationParser.Parse(string name) => this.Parse(name);
+    SecurityRule ISecurityRoleParser.Parse(string name) => this.Parse(name);
 
-    IReadOnlyList<SecurityRule> ISecurityOperationParser.Operations => this.Operations;
+    IReadOnlyList<SecurityRule> ISecurityRoleParser.Operations => this.Operations;
 }

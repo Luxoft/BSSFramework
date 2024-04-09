@@ -56,11 +56,11 @@ public class GenerationRecipientsResolver<TBLLContext>
         var ccProcessor = this.lambdaProcessorFactory.Create<GenerationLambdaProcessorCc<TBLLContext>>();
         var replyToProcessor = this.lambdaProcessorFactory.Create<GenerationLambdaProcessorReplyTo<TBLLContext>>();
 
-        var toInfos = toProcessor.Invoke(subscription, versions).ToList();
-        var ccInfos = ccProcessor.Invoke(subscription, versions).ToList();
-        var replyToInfos = replyToProcessor.Invoke(subscription, versions).ToList();
+        var toInfoList = toProcessor.Invoke(subscription, versions).ToList();
+        var ccInfoList = ccProcessor.Invoke(subscription, versions).ToList();
+        var replyToInfoList = replyToProcessor.Invoke(subscription, versions).ToList();
 
-        var results = this.CreateResults(toInfos, ccInfos, replyToInfos);
+        var results = this.CreateResults(toInfoList, ccInfoList, replyToInfoList);
 
         return results;
     }
@@ -87,13 +87,13 @@ public class GenerationRecipientsResolver<TBLLContext>
     }
 
     private IEnumerable<RecipientsResolverResult> CreateResults(
-            IEnumerable<NotificationMessageGenerationInfo> toInfos,
-            IEnumerable<NotificationMessageGenerationInfo> ccInfos,
+            IEnumerable<NotificationMessageGenerationInfo> toInfoList,
+            IEnumerable<NotificationMessageGenerationInfo> ccInfoList,
             IEnumerable<NotificationMessageGenerationInfo> replyTo)
     {
-        var intermediateResults = toInfos
+        var intermediateResults = toInfoList
                                   .Select(this.CreateToResult)
-                                  .Concat(ccInfos.Select(this.CreateCcResult))
+                                  .Concat(ccInfoList.Select(this.CreateCcResult))
                                   .Concat(replyTo.Select(this.CreateReplyToResult))
                                   .ToList();
 

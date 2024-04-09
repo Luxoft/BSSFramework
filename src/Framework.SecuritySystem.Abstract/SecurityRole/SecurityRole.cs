@@ -1,6 +1,4 @@
-﻿using Framework.Security;
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 public class SecurityRole
 {

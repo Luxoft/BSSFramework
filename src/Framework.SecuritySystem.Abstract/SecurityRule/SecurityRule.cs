@@ -31,6 +31,11 @@ public abstract record SecurityRule
         return securityRole.ToSecurityRule();
     }
 
+    public static implicit operator SecurityRule(SecurityRole[] securityRoles)
+    {
+        return securityRoles.ToSecurityRule();
+    }
+
     public record SpecialSecurityRule(string Name) : SecurityRule
     {
         public override string ToString() => this.Name;

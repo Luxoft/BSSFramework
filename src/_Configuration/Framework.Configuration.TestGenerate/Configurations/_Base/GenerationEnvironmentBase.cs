@@ -13,7 +13,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
     {
     }
 
-    public override Type SecurityRulesTypes { get; } = typeof(ConfigurationSecurityOperation);
+    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(ConfigurationSecurityOperation) };
 
     public override Type OperationContextType { get; } = typeof(ConfigurationOperationContext);
 }

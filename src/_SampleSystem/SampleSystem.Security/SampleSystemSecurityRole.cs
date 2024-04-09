@@ -1,8 +1,6 @@
 ﻿using Framework.Authorization;
-using Framework.Authorization.SecuritySystem;
 using Framework.Configuration;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Bss;
 
 namespace SampleSystem.Security;
 
@@ -15,7 +13,6 @@ public static class SampleSystemSecurityRole
     public static SecurityRole SystemIntegration { get; } = new SecurityRole(
         new Guid("df74d544-5945-4380-944e-a3a9001252be"),
         nameof(SystemIntegration),
-        BssSecurityOperation.SystemIntegration,
         ConfigurationSecurityOperation.ProcessModifications,
         ConfigurationSecurityOperation.QueueMonitoring);
 

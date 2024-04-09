@@ -20,7 +20,7 @@ namespace Framework.Authorization.Environment
             this.availablePermissionSource = availablePermissionSource;
         }
 
-        protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(SecurityRule securityRule)
+        protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
         {
             var baseProvider = base.CreateSecurityProvider(securityRule);
 

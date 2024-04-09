@@ -28,9 +28,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     private readonly IRepository<Principal> principalRepository;
 
-    private readonly SecurityOperationExpander securityOperationExpander;
-
-    private readonly SecurityRoleExpander securityRoleExpander;
+    private readonly ISecurityRuleExpander securityRuleExpander;
 
     private readonly TimeProvider timeProvider;
 
@@ -42,8 +40,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IUserAuthenticationService userAuthenticationService,
         IOperationAccessorFactory operationAccessorFactory,
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
-        SecurityOperationExpander securityOperationExpander,
-        SecurityRoleExpander securityRoleExpander,
+        ISecurityRuleExpander securityRuleExpander,
         TimeProvider timeProvider)
     {
         this.availablePermissionSource = availablePermissionSource;
@@ -52,8 +49,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         this.realTypeResolver = realTypeResolver;
         this.operationAccessorFactory = operationAccessorFactory;
         this.principalRepository = principalRepository;
-        this.securityOperationExpander = securityOperationExpander;
-        this.securityRoleExpander = securityRoleExpander;
+        this.securityRuleExpander = securityRuleExpander;
         this.timeProvider = timeProvider;
 
         this.CurrentPrincipalName = userAuthenticationService.GetUserName();
@@ -81,7 +77,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     {
         if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
 
-        var expandedRule = this.securityOperationExpander.Expand(securityRule).Pipe(this.securityRoleExpander.Expand);
+        var expandedRule = this.securityRuleExpander.FullExpand(securityRule);
 
         return this.GetAccessors(
             (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),

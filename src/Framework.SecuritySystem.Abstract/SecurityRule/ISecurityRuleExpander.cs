@@ -9,4 +9,6 @@ public interface ISecurityRuleExpander
     SecurityRule.NonExpandedRolesSecurityRule Expand(SecurityRule.OperationSecurityRule securityRule);
 
     SecurityRule.ExpandedRolesSecurityRule Expand(SecurityRule.NonExpandedRolesSecurityRule securityRule);
+
+    SecurityRule.ExpandedRolesSecurityRule FullExpand(SecurityRule.DomainObjectSecurityRule securityRule);
 }

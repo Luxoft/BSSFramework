@@ -1,38 +1,19 @@
 ﻿using Framework.SecuritySystem;
-using Framework.SecuritySystem.Rules.Builders;
 
 using SampleSystem.Domain;
 
 namespace SampleSystem.Security.Services;
 
-public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDomainSecurityServiceBase<TestCustomContextSecurityObj, Guid>
+public class SampleSystemTestCustomContextSecurityObjSecurityService : DomainSecurityServiceBase<TestCustomContextSecurityObj>
 {
     public SampleSystemTestCustomContextSecurityObjSecurityService(
-        ISecurityProvider<TestCustomContextSecurityObj> disabledSecurityProvider,
-        ISecurityRuleExpander securityRuleExpander,
-        ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
-        : base(disabledSecurityProvider, securityRuleExpander, securityExpressionBuilderFactory)
+        ISecurityProvider<TestCustomContextSecurityObj> disabledSecurityProvider)
+        : base(disabledSecurityProvider)
     {
     }
 
-    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule)
+    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityRule securityRule)
     {
-        if (securityRule == SecurityRule.View)
-        {
-        }
-
-        if (securityRule == SampleSystemSecurityOperation.BusinessUnitEdit)
-        {
-        }
-
-        if (securityRule == SampleSystemSecurityRole.SeManager)
-        {
-        }
-
-        if (securityRule is SecurityRule.ExpandedRolesSecurityRule final && final.SecurityRoles.Contains(SampleSystemSecurityRole.SeManager))
-        {
-        }
-
         return new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();
     }
 }

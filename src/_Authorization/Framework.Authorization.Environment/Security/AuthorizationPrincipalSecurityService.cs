@@ -20,7 +20,7 @@ namespace Framework.Authorization.Environment
             this.actualPrincipalSource = actualPrincipalSource;
         }
 
-        protected override ISecurityProvider<Principal> CreateSecurityProvider(SecurityRule securityRule)
+        protected override ISecurityProvider<Principal> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
         {
             var baseProvider = base.CreateSecurityProvider(securityRule);
 

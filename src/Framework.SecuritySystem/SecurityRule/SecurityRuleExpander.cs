@@ -33,4 +33,22 @@ public class SecurityRuleExpander : ISecurityRuleExpander
     {
         return this.securityRoleExpander.Expand(securityRule);
     }
+
+    public SecurityRule.ExpandedRolesSecurityRule FullExpand(SecurityRule.DomainObjectSecurityRule securityRule)
+    {
+        switch (securityRule)
+        {
+            case SecurityRule.OperationSecurityRule operationSecurityRule:
+                return this.Expand(this.Expand(operationSecurityRule));
+
+            case SecurityRule.NonExpandedRolesSecurityRule nonExpandedRolesSecurityRule:
+                return this.Expand(nonExpandedRolesSecurityRule);
+
+            case SecurityRule.ExpandedRolesSecurityRule expandedRolesSecurityRule:
+                return expandedRolesSecurityRule;
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(securityRule));
+        }
+    }
 }

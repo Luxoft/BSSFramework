@@ -27,13 +27,8 @@ public class SecurityOperationExpander
             }).WithLock();
     }
 
-    public SecurityRule.NonExpandedRolesSecurityRule Expand(SecurityRule.DomainObjectSecurityRule securityRule)
+    public SecurityRule.NonExpandedRolesSecurityRule Expand(SecurityRule.OperationSecurityRule securityRule)
     {
-        return securityRule switch
-        {
-            SecurityRule.NonExpandedRolesSecurityRule rolesSecurityRule => rolesSecurityRule,
-            SecurityRule.OperationSecurityRule operationSecurityRule => this.expandCache[operationSecurityRule],
-            _ => throw new ArgumentOutOfRangeException(nameof(securityRule))
-        };
+        return this.expandCache[securityRule];
     }
 }

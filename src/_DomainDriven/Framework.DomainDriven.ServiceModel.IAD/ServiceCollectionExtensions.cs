@@ -170,11 +170,11 @@ public static class ServiceCollectionExtensions
                            SecurityExpressionBuilderFactory<Guid>>()
 
 
-                       .AddSingleton<ISecurityRuleExpander, SecurityModeExpander>()
+                       .AddSingleton<SecurityModeExpander>()
                        .AddSingleton<SecurityOperationExpander>()
-                       .AddSingletonFrom<ISecurityRuleExpander, SecurityOperationExpander>()
                        .AddSingleton<SecurityRoleExpander>()
-                       .AddSingletonFrom<ISecurityRuleExpander, SecurityRoleExpander>()
+
+                       .AddSingletonFrom<ISecurityRuleExpander, SecurityRuleExpander>()
 
                        .AddSingleton<ISecurityRoleParser, SecurityRoleParser>()
 

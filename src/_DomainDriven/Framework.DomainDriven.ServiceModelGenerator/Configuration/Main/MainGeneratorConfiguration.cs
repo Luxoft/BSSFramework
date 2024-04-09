@@ -82,7 +82,7 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
                 }
             }
 
-            if (this.Environment.ServerDTO.TypesWithSecondarySecurityOperations.ContainsKey(domainType))
+            if (this.Environment.ServerDTO.TypesWithSecondarySecurityRules.ContainsKey(domainType))
             {
                 yield return new GetListByOperationMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType);
 

@@ -22,12 +22,12 @@ public abstract class FileGenerator<TConfiguration> : CodeFileGenerator<TConfigu
         return new DefaultIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }
 
-    protected virtual ICodeFileFactory<RoleFileType> GetDomainObjectSecurityOperationCodeFileFactory(Type domainType, IEnumerable<SecurityRule> securityOperations)
+    protected virtual ICodeFileFactory<RoleFileType> GetDomainObjectSecurityRuleCodeFileFactory(Type domainType, IEnumerable<SecurityRule> securityRules)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (securityOperations == null) throw new ArgumentNullException(nameof(securityOperations));
+        if (securityRules == null) throw new ArgumentNullException(nameof(securityRules));
 
-        return new DomainObjectSecurityOperationCodeFileFactory<TConfiguration>(this.Configuration, domainType, securityOperations);
+        return new DomainObjectSecurityRuleCodeFileFactory<TConfiguration>(this.Configuration, domainType, securityRules);
     }
 
 
@@ -62,7 +62,7 @@ public abstract class FileGenerator<TConfiguration> : CodeFileGenerator<TConfigu
 
     protected virtual IEnumerable<ICodeFileFactory<RoleFileType>> GetRoleFileGenerators()
     {
-        foreach (var fileFactory in this.GetDomainObjectSecurityOperationCodeFileGenerators())
+        foreach (var fileFactory in this.GetDomainObjectSecurityRuleCodeFileGenerators())
         {
             yield return fileFactory;
         }
@@ -88,13 +88,13 @@ public abstract class FileGenerator<TConfiguration> : CodeFileGenerator<TConfigu
     }
 
 
-    private IEnumerable<ICodeFileFactory<RoleFileType>> GetDomainObjectSecurityOperationCodeFileGenerators()
+    private IEnumerable<ICodeFileFactory<RoleFileType>> GetDomainObjectSecurityRuleCodeFileGenerators()
     {
-        foreach (var pair in this.Configuration.TypesWithSecondarySecurityOperations)
+        foreach (var pair in this.Configuration.TypesWithSecondarySecurityRules)
         {
             if (!pair.Key.IsProjection())
             {
-                yield return this.GetDomainObjectSecurityOperationCodeFileFactory(pair.Key, pair.Value);
+                yield return this.GetDomainObjectSecurityRuleCodeFileFactory(pair.Key, pair.Value);
             }
         }
     }

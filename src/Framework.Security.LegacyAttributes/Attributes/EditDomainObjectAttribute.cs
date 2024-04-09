@@ -24,8 +24,8 @@ public class EditDomainObjectAttribute : DomainObjectAccessAttribute
     /// <summary>
     /// Констуктор с доступом по операции
     /// </summary>
-    public EditDomainObjectAttribute(Type securityOperationType, string name)
-        : base(securityOperationType, name)
+    public EditDomainObjectAttribute(Type securityRuleType, string name)
+        : base(securityRuleType, name)
     {
     }
 
@@ -34,7 +34,7 @@ public class EditDomainObjectAttribute : DomainObjectAccessAttribute
     /// </summary>
     /// <param name="editSecurityType">Доменный тип</param>
     public EditDomainObjectAttribute(Type editSecurityType)
-        : base(editSecurityType.GetEditSecurityOperation(true))
+        : base(editSecurityType.GetEditSecurityRule(true))
     {
     }
 }

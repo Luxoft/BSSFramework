@@ -32,7 +32,7 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
 
     protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.GetConvertToSecurityOperationCodeParameterExpression(evaluateDataExpr, 0);
+        return this.GetConvertToSecurityRuleCodeParameterExpression(evaluateDataExpr, 0);
     }
 
     protected override string GetComment()
@@ -44,8 +44,8 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
     {
         yield return new CodeParameterDeclarationExpression
                      {
-                             Name = "securityOperationCode",
-                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), Framework.DomainDriven.DTOGenerator.FileType.DomainObjectSecurityOperationCode)
+                             Name = "securityRuleCode",
+                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), Framework.DomainDriven.DTOGenerator.FileType.DomainObjectSecurityRuleCode)
                      };
     }
 

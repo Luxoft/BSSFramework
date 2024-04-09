@@ -13,7 +13,7 @@ public static class CustomAttributeProviderExtensions
     /// <param name="source">Источник</param>
     /// <param name="throwIfNull">Ошибка, если операция отсутствует</param>
     /// <returns></returns>
-    public static SecurityRule GetViewSecurityOperation(this ICustomAttributeProvider source, bool throwIfNull = false)
+    public static SecurityRule GetViewSecurityRule(this ICustomAttributeProvider source, bool throwIfNull = false)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -33,7 +33,7 @@ public static class CustomAttributeProviderExtensions
     /// <param name="source">Источник</param>
     /// <param name="throwIfNull">Ошибка, если операция отсутствует</param>
     /// <returns></returns>
-    public static SecurityRule GetEditSecurityOperation(this ICustomAttributeProvider source, bool throwIfNull = false)
+    public static SecurityRule GetEditSecurityRule(this ICustomAttributeProvider source, bool throwIfNull = false)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 

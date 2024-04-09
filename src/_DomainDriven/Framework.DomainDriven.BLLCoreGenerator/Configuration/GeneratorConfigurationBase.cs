@@ -84,7 +84,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected override string NamespacePostfix { get; } = "BLL";
 
-    public virtual string GetOperationByModeMethodName { get; } = "GetSecurityOperation";
+    public virtual string GetOperationByModeMethodName { get; } = "GetSecurityRule";
 
     public ReadOnlyCollection<Type> SecurityServiceDomainTypes => this.lazySecurityServiceDomainTypes.Value;
 
@@ -122,9 +122,9 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
             new CodeFileFactoryHeader<FileType>(FileType.RootSecurityService, string.Empty, _ => $"{this.Environment.TargetSystemName}SecurityService");
 
-    protected virtual ICodeFileFactoryHeader<FileType> SecurityOperationHelperFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> SecurityRuleHelperFactoryHeader =>
 
-            new CodeFileFactoryHeader<FileType>(FileType.SecurityOperationHelper, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.SecurityOperationHelper}");
+            new CodeFileFactoryHeader<FileType>(FileType.SecurityRuleHelper, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.SecurityRuleHelper}");
 
     protected virtual ICodeFileFactoryHeader<FileType> RootSecurityServiceBaseFileFactoryHeader =>
 
@@ -314,7 +314,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     {
         return new[]
                {
-                      this.SecurityOperationHelperFactoryHeader,
+                      this.SecurityRuleHelperFactoryHeader,
 
                        this.BLLContextFileFactoryHeader,
                        this.BLLContextInterfaceFileFactoryHeader,

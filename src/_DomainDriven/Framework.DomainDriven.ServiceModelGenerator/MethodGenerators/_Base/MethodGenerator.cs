@@ -198,7 +198,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         return bllRef.ToVariableDeclarationStatement(varName, bllCreateExpr);
     }
 
-    protected CodeExpression GetConvertToSecurityOperationCodeParameterExpression(CodeExpression evaluateDataExpr, int parameterIndex)
+    protected CodeExpression GetConvertToSecurityRuleCodeParameterExpression(CodeExpression evaluateDataExpr, int parameterIndex)
     {
         return evaluateDataExpr.GetContext()
                                .ToPropertyReference((IAuthorizationBLLContextContainer<object> context) => context.Authorization)

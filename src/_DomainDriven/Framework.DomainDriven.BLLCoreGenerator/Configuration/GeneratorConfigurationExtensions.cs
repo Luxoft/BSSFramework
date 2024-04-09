@@ -10,16 +10,22 @@ namespace Framework.DomainDriven.BLLCoreGenerator;
 
 public static class GeneratorConfigurationExtensions
 {
-    public static CodeExpression GetSecurityCodeExpression(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration, SecurityRule securityRule, Type securityOperationType = null)
+    public static CodeExpression GetSecurityCodeExpression(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration, SecurityRule securityRule, Type securityRuleType = null)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        var realSecurityOperationType = securityOperationType ?? configuration.Environment.SecurityOperationType;
+        var realSecurityRuleTypes = securityRuleType == null ? configuration.Environment.SecurityRuleTypeList : new[] { securityRuleType };
 
-        var prop = realSecurityOperationType.GetProperties()
-                                            .Single(p => (SecurityRule)p.GetValue(null) == securityRule, () => new Exception($"Type '{realSecurityOperationType}' does not contains operation '{securityRule}'"));
+        var request = from realSecurityRuleType in realSecurityRuleTypes
 
-        return realSecurityOperationType.ToTypeReferenceExpression().ToPropertyReference(prop);
+                      from prop in realSecurityRuleType.GetProperties()
+
+                      where (SecurityRule)prop.GetValue(null) == securityRule
+
+                      select realSecurityRuleType.ToTypeReferenceExpression().ToPropertyReference(prop);
+
+
+        return request.Single(() => new Exception($"Security rule '{securityRule}' not found"));
     }
 
     public static CodeExpression GetDisabledSecurityCodeExpression(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)

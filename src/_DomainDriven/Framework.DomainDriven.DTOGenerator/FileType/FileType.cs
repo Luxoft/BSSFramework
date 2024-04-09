@@ -51,7 +51,7 @@ public class FileType : IEquatable<FileType>
     public static readonly DTOFileType UpdateDTO = new DTOFileType(() => UpdateDTO, DTORole.Client);
 
 
-    public static readonly RoleFileType DomainObjectSecurityOperationCode = new RoleFileType(() => DomainObjectSecurityOperationCode, DTORole.Client);
+    public static readonly RoleFileType DomainObjectSecurityRuleCode = new RoleFileType(() => DomainObjectSecurityRuleCode, DTORole.Client);
 
     public static readonly RoleFileType ClientDTOMappingServiceInterface = new RoleFileType(() => ClientDTOMappingServiceInterface, DTORole.Client);
 

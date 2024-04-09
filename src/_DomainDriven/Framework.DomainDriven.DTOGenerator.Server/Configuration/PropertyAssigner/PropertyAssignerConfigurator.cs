@@ -22,9 +22,9 @@ public class PropertyAssignerConfigurator<TConfiguration> : PropertyAssignerConf
 
         var attr = this.GetDomainObjectAttribute(propertyAssigner, property, isEdit);
 
-        if ((attr as ViewDomainObjectAttribute).Maybe(viewAttr => viewAttr.SecondaryOperations.Any()))
+        if ((attr as ViewDomainObjectAttribute).Maybe(viewAttr => viewAttr.SecondaryRules.Any()))
         {
-            throw new Exception("Secondary operations not allowed for column security");
+            throw new Exception("Secondary rules not allowed for column security");
         }
 
         return this.Configuration.ToHasAccessMethod(propertyAssigner.ContextRef, attr.SecurityRule, propertyAssigner.DomainType, propertyAssigner.DomainParameter);

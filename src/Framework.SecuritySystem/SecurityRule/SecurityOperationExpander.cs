@@ -28,7 +28,7 @@ public class SecurityOperationExpander : ISecurityRuleExpander
         this.expandCache = new DictionaryCache<SecurityRule.OperationSecurityRule, SecurityRule.RolesSecurityRule>(
             securityRule =>
             {
-                var securityRoles = securityRoleSource.SecurityRoles.GetAllElements(sr => sr.Children)
+                var securityRoles = securityRoleSource.SecurityRoles
                                         .Where(sr => sr.Operations.Contains(securityRule.SecurityOperation))
                                         .Distinct()
                                         .ToArray();

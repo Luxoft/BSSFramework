@@ -75,7 +75,7 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
 
         if (propertyInfo.IsSecurity())
         {
-            if (!this.HassAccess(domainObject, propertyInfo))
+            if (!this.HasAccess(domainObject, propertyInfo))
             {
                 return result;
             }
@@ -99,10 +99,10 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
 
         return result;
     }
-    private bool HassAccess<TDomain>(TDomain domainObject, PropertyInfo propertyInfo)
+    private bool HasAccess<TDomain>(TDomain domainObject, PropertyInfo propertyInfo)
             where TDomain : class, TPersistentObjectBase
     {
-        var viewOperation = propertyInfo.GetViewSecurityOperation();
+        var viewOperation = propertyInfo.GetViewSecurityRule();
 
         return this._bllContext.SecurityService.GetSecurityProvider<TDomain>(viewOperation).HasAccess(domainObject);
     }

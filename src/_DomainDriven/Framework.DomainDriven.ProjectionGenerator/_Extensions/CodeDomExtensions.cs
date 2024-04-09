@@ -15,7 +15,7 @@ namespace Framework.DomainDriven.ProjectionGenerator;
 
 internal static class CodeDomExtensions
 {
-    public static IEnumerable<CodeAttributeDeclaration> GetSecurityAttributes(this ICustomAttributeProvider source, Type securityOperationType)
+    public static IEnumerable<CodeAttributeDeclaration> GetSecurityAttributes(this ICustomAttributeProvider source, Type securityRuleType)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -25,17 +25,17 @@ internal static class CodeDomExtensions
         {
             yield return viewAttr.GetType().ToTypeReference().ToAttributeDeclaration(
 
-                viewAttr.GetViewSecurityAttributesArguments(securityOperationType).ToArray());
+                viewAttr.GetViewSecurityAttributesArguments(securityRuleType).ToArray());
         }
     }
 
-    private static IEnumerable<CodeAttributeArgument> GetViewSecurityAttributesArguments(this ViewDomainObjectAttribute viewAttr, Type securityOperationType)
+    private static IEnumerable<CodeAttributeArgument> GetViewSecurityAttributesArguments(this ViewDomainObjectAttribute viewAttr, Type securityRuleType)
     {
-        yield return new CodeAttributeArgument { Value = securityOperationType.ToTypeOfExpression() };
+        yield return new CodeAttributeArgument { Value = securityRuleType.ToTypeOfExpression() };
 
-        foreach (var operation in viewAttr.AllOperations)
+        foreach (var secondaryRule in viewAttr.SecondaryRules)
         {
-            yield return new CodeAttributeArgument { Value = operation.Name.ToPrimitiveExpression() };
+            yield return new CodeAttributeArgument { Value = secondaryRule.ToString().ToPrimitiveExpression() };
         }
     }
 

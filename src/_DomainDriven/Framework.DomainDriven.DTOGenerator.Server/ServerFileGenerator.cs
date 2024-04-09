@@ -29,12 +29,12 @@ public class ServerFileGenerator<TConfiguration> : FileGenerator<TConfiguration>
         return new DefaultServerIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }
 
-    protected override ICodeFileFactory<RoleFileType> GetDomainObjectSecurityOperationCodeFileFactory(Type domainType, IEnumerable<SecurityRule> securityOperations)
+    protected override ICodeFileFactory<RoleFileType> GetDomainObjectSecurityRuleCodeFileFactory(Type domainType, IEnumerable<SecurityRule> securityRules)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (securityOperations == null) throw new ArgumentNullException(nameof(securityOperations));
+        if (securityRules == null) throw new ArgumentNullException(nameof(securityRules));
 
-        return new DefaultServerDomainObjectSecurityOperationCodeFileFactory<TConfiguration>(this.Configuration, domainType, securityOperations);
+        return new DefaultServerDomainObjectSecurityRuleCodeFileFactory<TConfiguration>(this.Configuration, domainType, securityRules);
     }
 
     protected virtual ICodeFileFactory<DTOFileType> GetVisualDTOFileFactory(Type domainType)

@@ -9,15 +9,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
-public class SecurityOperationHelperFileFactory<TConfiguration> : FileFactory<TConfiguration>
+public class SecurityRuleHelperFileFactory<TConfiguration> : FileFactory<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public SecurityOperationHelperFileFactory(TConfiguration configuration)
+    public SecurityRuleHelperFileFactory(TConfiguration configuration)
             : base(configuration, null)
     {
     }
 
-    public override FileType FileType => FileType.SecurityOperationHelper;
+    public override FileType FileType => FileType.SecurityRuleHelper;
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
@@ -37,33 +37,33 @@ public class SecurityOperationHelperFileFactory<TConfiguration> : FileFactory<TC
     {
         var serviceCollectionParameter = new CodeParameterDeclarationExpression(typeof(IServiceCollection), "services");
 
-        var domainObjectSecurityOperationInfoRequest =
+        var domainObjectSecurityRuleInfoRequest =
 
             from domainType in this.Configuration.DomainTypes
 
-            let viewSecurityOperation = domainType.GetViewSecurityOperation()
+            let viewSecurityRule = domainType.GetViewSecurityRule()
 
-            let editSecurityOperation = domainType.GetEditSecurityOperation()
+            let editSecurityRule = domainType.GetEditSecurityRule()
 
-            where viewSecurityOperation != null || editSecurityOperation != null
+            where viewSecurityRule != null || editSecurityRule != null
 
-            select this.GetRegisterStatement(serviceCollectionParameter.ToVariableReferenceExpression(), domainType, viewSecurityOperation, editSecurityOperation);
+            select this.GetRegisterStatement(serviceCollectionParameter.ToVariableReferenceExpression(), domainType, viewSecurityRule, editSecurityRule);
 
         return new CodeMemberMethod
                {
                    Attributes = MemberAttributes.Public | MemberAttributes.Static,
 
-                   Name = "RegisterDomainObjectSecurityOperations",
+                   Name = "RegisterDomainObjectSecurityRules",
 
                    Parameters = { serviceCollectionParameter }
-               }.Self(v => v.Statements.AddRange(domainObjectSecurityOperationInfoRequest.ToArray()));
+               }.Self(v => v.Statements.AddRange(domainObjectSecurityRuleInfoRequest.ToArray()));
     }
-    private CodeExpressionStatement GetRegisterStatement(CodeExpression serviceCollectionExpr, Type domainType, SecurityRule viewSecurityOperation, SecurityRule editSecurityOperation)
+    private CodeExpressionStatement GetRegisterStatement(CodeExpression serviceCollectionExpr, Type domainType, SecurityRule viewSecurityRule, SecurityRule editSecurityRule)
     {
         var createExpr = typeof(DomainObjectSecurityModeInfo).ToTypeReference().ToObjectCreateExpression(
             domainType.ToTypeOfExpression(),
-            viewSecurityOperation.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression(),
-            editSecurityOperation.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression());
+            viewSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression(),
+            editSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression());
 
         var addSingletonMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
                                                                         .ToMethodReferenceExpression(

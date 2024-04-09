@@ -20,7 +20,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     IReadOnlyCollection<Type> ProjectionTypes { get; }
 
-    IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityRule>> TypesWithSecondarySecurityOperations { get; }
+    IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityRule>> TypesWithSecondarySecurityRules { get; }
 
     bool ExpandStrictMaybeToDefault { get; }
 

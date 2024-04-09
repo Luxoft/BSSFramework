@@ -28,7 +28,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
                 useDependencySecurity: false));
     }
 
-    public override Type SecurityOperationType { get; } = typeof(SampleSystemSecurityOperation);
+    public override Type SecurityRulesTypes { get; } = typeof(SampleSystemSecurityOperation);
 
     public override Type OperationContextType { get; } = typeof(SampleSystemOperationContext);
 

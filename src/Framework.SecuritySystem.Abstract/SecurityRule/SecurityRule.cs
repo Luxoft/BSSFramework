@@ -23,17 +23,17 @@ public abstract record SecurityRule
 
     public static implicit operator SecurityRule(SecurityOperation securityOperation)
     {
-        return new OperationSecurityRule(securityOperation) { ExpandType = securityOperation.ExpandType };
+        return securityOperation.ToSecurityRule();
     }
 
     public static implicit operator SecurityRule(SecurityRole securityRole)
     {
-        return new[] { securityRole };
+        return securityRole.ToSecurityRule();
     }
 
     public static implicit operator SecurityRule(SecurityRole[] securityRoles)
     {
-        return new RolesSecurityRule(new DeepEqualsCollection<SecurityRole>(securityRoles));
+        return securityRoles.ToSecurityRule();
     }
 
     public record SpecialSecurityRule(string Name) : SecurityRule

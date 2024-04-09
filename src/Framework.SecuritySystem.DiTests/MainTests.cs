@@ -119,6 +119,8 @@ public class MainTests
                .AddSingleton<ISecurityRuleExpander, SecurityModeExpander>()
                .AddSingleton<ISecurityRuleExpander, SecurityOperationExpander>()
 
+               .AddSingleton<SecurityOperationExpander>()
+
                .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 
                .AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()

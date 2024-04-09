@@ -28,7 +28,7 @@ public class OperationAccessor : IOperationAccessor
     {
         var typedOperation = (SecurityRule)securityRule;
 
-        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityOperationId: typedOperation.Id, withRunAs: this.withRunAs).Any();
+        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityRoleIdents: typedOperation.Id, withRunAs: this.withRunAs).Any();
     }
 
     public void CheckAccess(SecurityRule securityRule)

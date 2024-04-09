@@ -42,7 +42,7 @@ namespace Framework.Authorization.Environment
             if (operation == null) throw new ArgumentNullException(nameof(operation));
 
             return this.availablePermissionSource
-                       .GetAvailablePermissionsQueryable(securityOperationId: operation.Id, applyCurrentUser: false)
+                       .GetAvailablePermissionsQueryable(securityRoleIdents: operation.Id, applyCurrentUser: false)
                        .Select(permission => permission.Principal.Name)
                        .Distinct()
                        .ToUnboundedList();

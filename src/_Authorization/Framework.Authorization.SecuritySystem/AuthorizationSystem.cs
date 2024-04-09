@@ -69,15 +69,15 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     }
 
     public IEnumerable<string> GetNonContextAccessors(
-        SecurityRule securityRule, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
+        SecurityRule.DomainObjectSecurityRule securityRule, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
     {
         if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
 
-        var typedSecurityOperation = (SecurityRule)securityRule;
+        var typedSecurityOperation = securityRule;
 
         return this.GetAccessors(
             (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
-            new AvailablePermissionFilter(this.timeProvider.GetToday()) { SecurityOperationId = typedSecurityOperation.Id });
+            new AvailablePermissionFilter(this.timeProvider.GetToday()) { SecurityRoleIdents = typedSecurityOperation.Id });
     }
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
@@ -102,7 +102,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     {
         var typedSecurityOperation = (SecurityRule)securityRule;
 
-        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityOperationId: typedSecurityOperation.Id);
+        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityRoleIdents: typedSecurityOperation.Id);
     }
 
     private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(
@@ -118,9 +118,9 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     public bool IsAdmin() => this.operationAccessorFactory.Create(true).IsAdmin();
 
-    public bool HasAccess(SecurityRule securityRule) => this.operationAccessorFactory.Create(true).HasAccess(securityRule);
+    public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule) => this.operationAccessorFactory.Create(true).HasAccess(securityRule);
 
-    public void CheckAccess(SecurityRule securityRule) => this.operationAccessorFactory.Create(true).CheckAccess(securityRule);
+    public void CheckAccess(SecurityRule.DomainObjectSecurityRule securityRule) => this.operationAccessorFactory.Create(true).CheckAccess(securityRule);
 
     private static readonly ExpressionVisitor AuthVisitor = new OverrideParameterTypeVisitor(
         new Dictionary<Type, Type>

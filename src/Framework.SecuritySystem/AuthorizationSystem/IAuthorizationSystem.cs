@@ -12,5 +12,5 @@ public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
         SecurityRule.DomainObjectSecurityRule securityRule,
         IEnumerable<Type> securityTypes);
 
-    IQueryable<IPermission<TIdent>> GetPermissionQuery(SecurityRule securityRule);
+    IQueryable<IPermission<TIdent>> GetPermissionQuery(SecurityRule.DomainObjectSecurityRule securityRule);
 }

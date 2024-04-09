@@ -30,12 +30,12 @@ public class AvailablePermissionSource : IAvailablePermissionSource
         this.userAuthenticationService = userAuthenticationService;
     }
 
-    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, Guid securityOperationId = default, bool applyCurrentUser = true)
+    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, Guid securityRoleIdents = default, bool applyCurrentUser = true)
     {
         var filter = new AvailablePermissionFilter(this.timeProvider.GetToday())
                      {
                          PrincipalName = applyCurrentUser ? withRunAs ? this.actualPrincipalSource.ActualPrincipal.Name : this.userAuthenticationService.GetUserName() : null,
-                         SecurityOperationId = securityOperationId
+                         SecurityRoleIdents = securityRoleIdents
                      };
 
         return this.GetAvailablePermissionsQueryable(filter);

@@ -1,5 +1,4 @@
-﻿using Framework.Authorization.ApproveWorkflow;
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Cap;
 using Framework.DependencyInjection;
 
@@ -21,7 +20,6 @@ public static class SampleSystemApplicationExtensions
         return services.AddHttpContextAccessor()
                        .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
                        .RegisterSmtpNotification(configuration)
-                       .RegisterWorkflowCore(configuration)
                        .RegisterApplicationServices()
                        .AddCapBss(configuration.GetConnectionString("DefaultConnection"))
                        .RegisterJobs();
@@ -45,34 +43,9 @@ public static class SampleSystemApplicationExtensions
         return services;
     }
 
-    private static IServiceCollection RegisterWorkflowCore(this IServiceCollection services, IConfiguration configuration)
-    {
-        var connectionString = configuration.GetConnectionString("WorkflowCoreConnection");
-
-        services.RegisterPureWorkflowCore(connectionString);
-
-        services.AddSingleton<WorkflowManager>();
-        services.AddSingletonFrom<IWorkflowManager, WorkflowManager>();
-
-        services.AddAuthWorkflow();
-
-        return services;
-    }
-
-    public static IServiceCollection RegisterPureWorkflowCore(this IServiceCollection services, string connectionString)
-    {
-        if (services == null) throw new ArgumentNullException(nameof(services));
-        if (connectionString == null) throw new ArgumentNullException(nameof(connectionString));
-
-        return services
-               .AddWorkflow(x => x.UseSqlServer(connectionString, true, true))
-               .AddLogging();
-    }
-
     private static IServiceCollection RegisterJobs(this IServiceCollection services)
     {
         services.AddScoped<ISampleJob, SampleJob>();
-        services.AddScoped<StartWorkflowJob>();
 
         return services;
     }

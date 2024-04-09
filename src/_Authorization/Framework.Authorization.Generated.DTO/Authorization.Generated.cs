@@ -4452,8 +4452,6 @@ namespace Framework.Authorization.Generated.DTO
         
         private Framework.Core.Period _period = Framework.Core.Period.Eternity;
         
-        private Framework.Authorization.Domain.PermissionStatus _status;
-        
         public PermissionSimpleDTO()
         {
         }
@@ -4526,19 +4524,6 @@ namespace Framework.Authorization.Generated.DTO
             set
             {
                 this._period = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Domain.PermissionStatus Status
-        {
-            get
-            {
-                return this._status;
-            }
-            set
-            {
-                this._status = value;
             }
         }
         
@@ -4920,8 +4905,6 @@ namespace Framework.Authorization.Generated.DTO
         
         private Framework.Authorization.Generated.DTO.BusinessRoleEventSimpleDTO _role;
         
-        private Framework.Authorization.Domain.PermissionStatus _status;
-        
         public PermissionEventRichDTO()
         {
         }
@@ -5112,19 +5095,6 @@ namespace Framework.Authorization.Generated.DTO
                 this._role = value;
             }
         }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Domain.PermissionStatus Status
-        {
-            get
-            {
-                return this._status;
-            }
-            set
-            {
-                this._status = value;
-            }
-        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -5151,8 +5121,6 @@ namespace Framework.Authorization.Generated.DTO
         private System.DateTime? _modifyDate;
         
         private Framework.Core.Period _period;
-        
-        private Framework.Authorization.Domain.PermissionStatus _status;
         
         public PermissionEventSimpleDTO()
         {
@@ -5290,19 +5258,6 @@ namespace Framework.Authorization.Generated.DTO
             set
             {
                 this._period = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Domain.PermissionStatus Status
-        {
-            get
-            {
-                return this._status;
-            }
-            set
-            {
-                this._status = value;
             }
         }
     }
@@ -10675,7 +10630,6 @@ namespace Framework.Authorization.Generated.DTO
             mappingObject.IsDelegatedFrom = domainObject.IsDelegatedFrom;
             mappingObject.IsDelegatedTo = domainObject.IsDelegatedTo;
             mappingObject.Period = domainObject.Period;
-            mappingObject.Status = domainObject.Status;
         }
         
         public virtual void MapPermission(Framework.Authorization.Domain.Permission domainObject, Framework.Authorization.Generated.DTO.PermissionFullDTO mappingObject)
@@ -10767,7 +10721,6 @@ namespace Framework.Authorization.Generated.DTO
             {
                 mappingObject.Role = null;
             }
-            mappingObject.Status = domainObject.Status;
         }
         
         public virtual void MapPermission(Framework.Authorization.Domain.Permission domainObject, Framework.Authorization.Generated.DTO.PermissionEventSimpleDTO mappingObject)
@@ -10782,7 +10735,6 @@ namespace Framework.Authorization.Generated.DTO
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
             mappingObject.Period = domainObject.Period;
-            mappingObject.Status = domainObject.Status;
         }
         
         public virtual void MapPermissionDirectFilterModel(Framework.Authorization.Domain.PermissionDirectFilterModel domainObject, Framework.Authorization.Generated.DTO.PermissionDirectFilterModelSimpleDTO mappingObject)

@@ -34,8 +34,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .AddListener<SubscriptionDALListener>()
 
-                           .AddListener<ExampleFaultDALListener>(true)
-                           .AddListener<ExamplePermissionWorkflowDALListener>();
+                           .AddListener<ExampleFaultDALListener>(true);
                    })
 
                .RegisterLegacyGeneralBssFramework()

@@ -12,7 +12,6 @@ using NHibernate.Linq;
 namespace Framework.Configurator.Handlers;
 
 public record CreateBusinessRoleHandler(
-        IRepositoryFactory<Operation> OperationRepositoryFactory,
         IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, ICreateBusinessRoleHandler
 {
@@ -26,15 +25,6 @@ public record CreateBusinessRoleHandler(
     private async Task Create(RequestBodyDto newRole, CancellationToken cancellationToken)
     {
         var domainObject = new BusinessRole { Name = newRole.Name };
-        var operationIds = await this.OperationRepositoryFactory.Create()
-                                     .GetQueryable()
-                                     .Where(x => newRole.OperationIds.Contains(x.Id))
-                                     .ToListAsync(cancellationToken);
-
-        foreach (var operation in operationIds)
-        {
-            var _ = new BusinessRoleOperationLink(domainObject) { Operation = operation };
-        }
 
         await this.BusinessRoleRepositoryFactory.Create(SecurityRule.Edit).SaveAsync(domainObject, cancellationToken);
 
@@ -46,12 +36,6 @@ public record CreateBusinessRoleHandler(
 
     private class RequestBodyDto
     {
-        public List<Guid> OperationIds
-        {
-            get;
-            set;
-        } = default!;
-
         public string Name
         {
             get;

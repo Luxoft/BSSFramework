@@ -26,8 +26,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapAnotherSqlParserTestObj(SampleSystem.Domain.AnotherSqlParserTestObj domainObject, SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO mappingObject);
         
-        void MapApprovePermissionWorkflowDomainObject(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject, SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO mappingObject);
-        
         void MapAuditPersistentDomainObjectBase(SampleSystem.Domain.AuditPersistentDomainObjectBase domainObject, SampleSystem.Generated.DTO.BaseAuditPersistentDTO mappingObject);
         
         void MapAuthPerformanceObject(SampleSystem.Domain.AuthPerformanceObject domainObject, SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO mappingObject);
@@ -844,12 +842,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapVisualProject(SampleSystem.Domain.Projections.VisualProject domainObject, SampleSystem.Generated.DTO.VisualProjectProjectionDTO mappingObject);
         
-        void MapWorkflowCoreExecutionError(SampleSystem.Domain.WorkflowCoreExecutionError domainObject, SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO mappingObject);
-        
-        void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO mappingObject);
-        
-        void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO mappingObject);
-        
         void MapWorkingCalendar1676(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject, SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO mappingObject);
         
         void MapWorkingCalendar1676(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject, SampleSystem.Generated.DTO.WorkingCalendar1676SimpleDTO mappingObject);
@@ -869,8 +861,6 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.Address ToAddress(SampleSystem.Generated.DTO.AddressStrictDTO addressStrictDTO, SampleSystem.Domain.LegalEntityBase master);
         
         SampleSystem.Domain.AnotherSqlParserTestObj ToAnotherSqlParserTestObj(SampleSystem.Generated.DTO.AnotherSqlParserTestObjIdentityDTO anotherSqlParserTestObjIdentityDTO);
-        
-        SampleSystem.Domain.ApprovePermissionWorkflowDomainObject ToApprovePermissionWorkflowDomainObject(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO approvePermissionWorkflowDomainObjectIdentityDTO);
         
         SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO);
         
@@ -1252,10 +1242,6 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.TestSecuritySubObjItem3 ToTestSecuritySubObjItem3(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3IdentityDTO);
         
-        SampleSystem.Domain.WorkflowCoreExecutionError ToWorkflowCoreExecutionError(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO workflowCoreExecutionErrorIdentityDTO);
-        
-        SampleSystem.Domain.WorkflowCoreInstance ToWorkflowCoreInstance(SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO workflowCoreInstanceIdentityDTO);
-        
         SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 ToWorkingCalendar1676(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676IdentityDTO);
     }
     
@@ -1361,19 +1347,6 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NotNullColumn = domainObject.NotNullColumn;
             mappingObject.UniqueColumn = domainObject.UniqueColumn;
             mappingObject.Version = domainObject.Version;
-        }
-        
-        public virtual void MapApprovePermissionWorkflowDomainObject(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject, SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO mappingObject)
-        {
-            mappingObject.Active = domainObject.Active;
-            mappingObject.CreateDate = domainObject.CreateDate;
-            mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.ModifiedBy = domainObject.ModifiedBy;
-            mappingObject.ModifyDate = domainObject.ModifyDate;
-            mappingObject.PermissionId = domainObject.PermissionId;
-            mappingObject.Version = domainObject.Version;
-            mappingObject.WorkflowInstanceId = domainObject.WorkflowInstanceId;
         }
         
         public virtual void MapAuditPersistentDomainObjectBase(SampleSystem.Domain.AuditPersistentDomainObjectBase domainObject, SampleSystem.Generated.DTO.BaseAuditPersistentDTO mappingObject)
@@ -7564,37 +7537,6 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Code = domainObject.Code;
         }
         
-        public virtual void MapWorkflowCoreExecutionError(SampleSystem.Domain.WorkflowCoreExecutionError domainObject, SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO mappingObject)
-        {
-            mappingObject.ErrorTime = domainObject.ErrorTime;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.Message = domainObject.Message;
-            if (!object.ReferenceEquals(domainObject.WorkflowInstance, null))
-            {
-                mappingObject.WorkflowInstance = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.WorkflowInstance, this);
-            }
-            else
-            {
-                mappingObject.WorkflowInstance = null;
-            }
-        }
-        
-        public virtual void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO mappingObject)
-        {
-            mappingObject.Data = domainObject.Data;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.Status = domainObject.Status;
-            mappingObject.WorkflowDefinitionId = domainObject.WorkflowDefinitionId;
-        }
-        
-        public virtual void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO mappingObject)
-        {
-            mappingObject.Data = domainObject.Data;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.Status = domainObject.Status;
-            mappingObject.WorkflowDefinitionId = domainObject.WorkflowDefinitionId;
-        }
-        
         public virtual void MapWorkingCalendar1676(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject, SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
@@ -7664,11 +7606,6 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.AnotherSqlParserTestObj ToAnotherSqlParserTestObj(SampleSystem.Generated.DTO.AnotherSqlParserTestObjIdentityDTO anotherSqlParserTestObjIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.AnotherSqlParserTestObj>(anotherSqlParserTestObjIdentityDTO.Id);
-        }
-        
-        public virtual SampleSystem.Domain.ApprovePermissionWorkflowDomainObject ToApprovePermissionWorkflowDomainObject(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO approvePermissionWorkflowDomainObjectIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(approvePermissionWorkflowDomainObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO)
@@ -8857,16 +8794,6 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.TestSecuritySubObjItem3 ToTestSecuritySubObjItem3(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3IdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestSecuritySubObjItem3>(testSecuritySubObjItem3IdentityDTO.Id);
-        }
-        
-        public virtual SampleSystem.Domain.WorkflowCoreExecutionError ToWorkflowCoreExecutionError(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO workflowCoreExecutionErrorIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.WorkflowCoreExecutionError>(workflowCoreExecutionErrorIdentityDTO.Id);
-        }
-        
-        public virtual SampleSystem.Domain.WorkflowCoreInstance ToWorkflowCoreInstance(SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO workflowCoreInstanceIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.WorkflowCoreInstance>(workflowCoreInstanceIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 ToWorkingCalendar1676(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676IdentityDTO)

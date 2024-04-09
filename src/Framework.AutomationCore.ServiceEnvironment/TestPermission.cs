@@ -1,7 +1,5 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
-using Framework.Core;
-using Framework.SecuritySystem.Bss;
+﻿using Framework.Core;
+using Framework.SecuritySystem;
 
 namespace Automation.Utils;
 
@@ -26,9 +24,4 @@ public record TestPermission(string SecurityRoleName, Period Period, IReadOnlyDi
     {
         return new TestPermission(securityRole);
     }
-
-    public static TestPermission Administrator { get; } = new(BusinessRole.AdminRoleName);
-
-
-    public static TestPermission SystemIntegration { get; } = new(BssSecurityOperation.SystemIntegration.Name);
 }

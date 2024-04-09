@@ -35,9 +35,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
                                   IPeriodObject,
 
-                                  IPermission<Guid>,
-
-                                  IStatusObject<PermissionStatus>
+                                  IPermission<Guid>
 {
     private readonly ICollection<PermissionFilterItem> filterItems = new List<PermissionFilterItem>();
 
@@ -54,8 +52,6 @@ public class Permission : AuditPersistentDomainObjectBase,
     private bool isDelegatedTo;
 
     private Period period = Period.Eternity;
-
-    private PermissionStatus status = PermissionStatus.Approved;
 
     private string comment;
 
@@ -118,16 +114,6 @@ public class Permission : AuditPersistentDomainObjectBase,
     {
         get { return this.period.Round(); }
         set { this.period = value.Round(); }
-    }
-
-    /// <summary>
-    /// Статус пермиссии
-    /// </summary>
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual PermissionStatus Status
-    {
-        get { return this.status; }
-        set { this.status = value; }
     }
 
     /// <summary>

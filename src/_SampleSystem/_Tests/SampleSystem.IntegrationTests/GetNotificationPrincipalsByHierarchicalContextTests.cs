@@ -32,8 +32,6 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
 
     private EmployeeIdentityDTO rootEmployee;
 
-    private OperationIdentityDTO searchNotificationOperation;
-
     private readonly string searchTestBusinessRoleName = nameof(searchNotificationRole);
 
     private BusinessRoleIdentityDTO searchNotificationRole;
@@ -60,15 +58,11 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
 
         var authFacade = this.GetAuthControllerEvaluator();
 
-        this.searchNotificationOperation = authFacade.Evaluate(
-            c => c.GetSimpleOperationByName(SampleSystemSecurityOperation.SearchNotificationOperation.Name)).Identity;
-
         this.searchNotificationRole = authFacade.Evaluate(
             c => c.SaveBusinessRole(
                 new BusinessRoleStrictDTO
                 {
-                    Name = this.searchTestBusinessRoleName,
-                    BusinessRoleOperationLinks = { new BusinessRoleOperationLinkStrictDTO { Operation = this.searchNotificationOperation } }
+                    Name = this.searchTestBusinessRoleName
                 }));
     }
 

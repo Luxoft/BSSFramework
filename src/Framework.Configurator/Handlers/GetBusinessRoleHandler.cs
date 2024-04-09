@@ -19,14 +19,6 @@ public class GetBusinessRoleHandler : BaseReadHandler, IGetBusinessRoleHandler
     {
         var roleId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
 
-        var operationDtos = this.authorizationBllContext.Authorization.Logics.OperationFactory.Create(SecurityRule.View)
-                                .GetSecureQueryable()
-                                .Where(z => z.Links.Any(o => o.BusinessRole.Id == roleId))
-                                .Select(o => new OperationDto { Id = o.Id, Name = o.Name, Description = o.Description })
-                                .OrderBy(o => o.Name)
-                                .Distinct()
-                                .ToList();
-
         var principals = this.authorizationBllContext.Authorization.Logics.PermissionFactory.Create(SecurityRule.View)
                              .GetSecureQueryable()
                              .Where(p => p.Role.Id == roleId)
@@ -35,6 +27,6 @@ public class GetBusinessRoleHandler : BaseReadHandler, IGetBusinessRoleHandler
                              .Distinct()
                              .ToList();
 
-        return new BusinessRoleDetailsDto { Operations = operationDtos, Principals = principals };
+        return new BusinessRoleDetailsDto { Operations = new List<OperationDto>(), Principals = principals };
     }
 }

@@ -74,7 +74,6 @@ public record UpdatePermissionsHandler(
                                                        .Where(x => x.Id == new Guid(dto.RoleId))
                                                        .SingleAsync(cancellationToken),
                                      Comment = dto.Comment,
-                                     Status = PermissionStatus.Approved,
                                      Period = dto.StartDate.ToPeriod(dto.EndDate),
                                      Active = true
                              };

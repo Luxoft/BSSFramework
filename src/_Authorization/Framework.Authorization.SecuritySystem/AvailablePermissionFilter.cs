@@ -24,8 +24,7 @@ public class AvailablePermissionFilter
 
     public IEnumerable<Expression<Func<Permission, bool>>> GetFilterExpressionElements()
     {
-        yield return permission => permission.Status == PermissionStatus.Approved
-                                   && permission.Period.Contains(this.today);
+        yield return permission => permission.Period.Contains(this.today);
 
         if (this.PrincipalName != null)
         {

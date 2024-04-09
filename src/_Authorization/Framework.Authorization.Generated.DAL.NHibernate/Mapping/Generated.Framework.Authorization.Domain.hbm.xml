@@ -41,7 +41,6 @@
     <property name="IsDelegatedTo" column="isDelegatedTo" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Status" column="status" access="field.camelcase" />
     <many-to-one name="DelegatedFrom" column="delegatedFromId" class="Framework.Authorization.Domain.Permission" access="field.camelcase" />
     <many-to-one name="Principal" column="principalId" class="Framework.Authorization.Domain.Principal" access="field.camelcase" />
     <many-to-one name="Role" column="roleId" class="Framework.Authorization.Domain.BusinessRole" access="field.camelcase" />

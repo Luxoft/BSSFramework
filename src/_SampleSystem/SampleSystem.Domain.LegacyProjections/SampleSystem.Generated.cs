@@ -262,7 +262,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeeView")]
+        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation))]
         [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
         [Framework.Persistent.Mapping.MappingAttribute(ColumnName="login")]
@@ -537,7 +537,7 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeeView")]
+        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation))]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Persistent.Mapping.MappingAttribute(ColumnName="login")]
         [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]

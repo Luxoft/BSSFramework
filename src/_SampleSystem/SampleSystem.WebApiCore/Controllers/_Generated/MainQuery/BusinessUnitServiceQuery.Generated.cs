@@ -114,14 +114,14 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitProgramClassesByOperation")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitProgramClassProjectionDTO> GetBusinessUnitProgramClassesByOperation(GetBusinessUnitProgramClassesByOperationAutoRequest getBusinessUnitProgramClassesByOperationAutoRequest)
         {
-            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode = getBusinessUnitProgramClassesByOperationAutoRequest.securityOperationCode;
+            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode = getBusinessUnitProgramClassesByOperationAutoRequest.securityRuleCode;
             string odataQueryString = getBusinessUnitProgramClassesByOperationAutoRequest.odataQueryString;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitProgramClassesByOperationInternal(odataQueryString, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitProgramClassesByOperationInternal(odataQueryString, securityRuleCode, evaluateData));
         }
         
-        protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitProgramClassProjectionDTO> GetBusinessUnitProgramClassesByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitProgramClassProjectionDTO> GetBusinessUnitProgramClassesByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IBusinessUnitProgramClassBLL bll = evaluateData.Context.Logics.BusinessUnitProgramClassFactory.Create(evaluateData.Context.Authorization.SecurityRoleParser.Parse(securityOperationCode.ToString()));
+            SampleSystem.BLL.IBusinessUnitProgramClassBLL bll = evaluateData.Context.Logics.BusinessUnitProgramClassFactory.Create(evaluateData.Context.Authorization.SecurityRoleParser.Parse(securityRuleCode.ToString()));
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.BusinessUnitProgramClass>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
             var odataList = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.BusinessUnitProgramClass>(Framework.Transfering.ViewDTOType.ProjectionDTO));
@@ -135,14 +135,14 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitProgramClassTreeByOperation")]
         public virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.BusinessUnitProgramClassProjectionDTO, System.Guid>> GetBusinessUnitProgramClassTreeByOperation(GetBusinessUnitProgramClassTreeByOperationAutoRequest getBusinessUnitProgramClassTreeByOperationAutoRequest)
         {
-            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode = getBusinessUnitProgramClassTreeByOperationAutoRequest.securityOperationCode;
+            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode = getBusinessUnitProgramClassTreeByOperationAutoRequest.securityRuleCode;
             string odataQueryString = getBusinessUnitProgramClassTreeByOperationAutoRequest.odataQueryString;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitProgramClassTreeByOperationInternal(odataQueryString, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitProgramClassTreeByOperationInternal(odataQueryString, securityRuleCode, evaluateData));
         }
         
-        protected virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.BusinessUnitProgramClassProjectionDTO, System.Guid>> GetBusinessUnitProgramClassTreeByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.BusinessUnitProgramClassProjectionDTO, System.Guid>> GetBusinessUnitProgramClassTreeByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IBusinessUnitProgramClassBLL bll = evaluateData.Context.Logics.BusinessUnitProgramClassFactory.Create(evaluateData.Context.Authorization.SecurityRoleParser.Parse(securityOperationCode.ToString()));
+            SampleSystem.BLL.IBusinessUnitProgramClassBLL bll = evaluateData.Context.Logics.BusinessUnitProgramClassFactory.Create(evaluateData.Context.Authorization.SecurityRoleParser.Parse(securityRuleCode.ToString()));
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.BusinessUnitProgramClass>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
             var odataTree = bll.GetTreeByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.BusinessUnitProgramClass>(Framework.Transfering.ViewDTOType.ProjectionDTO));
@@ -175,14 +175,14 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestBusinessUnitsByOperation")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO> GetTestBusinessUnitsByOperation(GetTestBusinessUnitsByOperationAutoRequest getTestBusinessUnitsByOperationAutoRequest)
         {
-            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode = getTestBusinessUnitsByOperationAutoRequest.securityOperationCode;
+            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode = getTestBusinessUnitsByOperationAutoRequest.securityRuleCode;
             string odataQueryString = getTestBusinessUnitsByOperationAutoRequest.odataQueryString;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestBusinessUnitsByOperationInternal(odataQueryString, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestBusinessUnitsByOperationInternal(odataQueryString, securityRuleCode, evaluateData));
         }
         
-        protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO> GetTestBusinessUnitsByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO> GetTestBusinessUnitsByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestBusinessUnitBLL bll = evaluateData.Context.Logics.TestBusinessUnitFactory.Create(evaluateData.Context.Authorization.SecurityRoleParser.Parse(securityOperationCode.ToString()));
+            SampleSystem.BLL.ITestBusinessUnitBLL bll = evaluateData.Context.Logics.TestBusinessUnitFactory.Create(evaluateData.Context.Authorization.SecurityRoleParser.Parse(securityRuleCode.ToString()));
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.TestBusinessUnit>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
             var odataList = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestBusinessUnit>(Framework.Transfering.ViewDTOType.ProjectionDTO));
@@ -218,14 +218,14 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestBusinessUnitTreeByOperation")]
         public virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO, System.Guid>> GetTestBusinessUnitTreeByOperation(GetTestBusinessUnitTreeByOperationAutoRequest getTestBusinessUnitTreeByOperationAutoRequest)
         {
-            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode = getTestBusinessUnitTreeByOperationAutoRequest.securityOperationCode;
+            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode = getTestBusinessUnitTreeByOperationAutoRequest.securityRuleCode;
             string odataQueryString = getTestBusinessUnitTreeByOperationAutoRequest.odataQueryString;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestBusinessUnitTreeByOperationInternal(odataQueryString, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestBusinessUnitTreeByOperationInternal(odataQueryString, securityRuleCode, evaluateData));
         }
         
-        protected virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO, System.Guid>> GetTestBusinessUnitTreeByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO, System.Guid>> GetTestBusinessUnitTreeByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestBusinessUnitBLL bll = evaluateData.Context.Logics.TestBusinessUnitFactory.Create(evaluateData.Context.Authorization.SecurityRoleParser.Parse(securityOperationCode.ToString()));
+            SampleSystem.BLL.ITestBusinessUnitBLL bll = evaluateData.Context.Logics.TestBusinessUnitFactory.Create(evaluateData.Context.Authorization.SecurityRoleParser.Parse(securityRuleCode.ToString()));
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.TestBusinessUnit>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
             var odataTree = bll.GetTreeByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestBusinessUnit>(Framework.Transfering.ViewDTOType.ProjectionDTO));
@@ -258,7 +258,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode;
+        public SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode;
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -272,7 +272,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode;
+        public SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode;
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -286,7 +286,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode;
+        public SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode;
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -314,6 +314,6 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityOperationCode securityOperationCode;
+        public SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode;
     }
 }

@@ -11,9 +11,9 @@ namespace SampleSystem.Generated.DTO
 {
     
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "DomainObjectSecurityRuleCode", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemBusinessUnitSecurityOperationCode
+    public enum SampleSystemBusinessUnitSecurityRuleCode
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]

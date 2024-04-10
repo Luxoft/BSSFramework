@@ -13,6 +13,11 @@ public class SecurityRoleExpander
         this.expandCache = new DictionaryCache<SecurityRule.NonExpandedRolesSecurityRule, SecurityRule.ExpandedRolesSecurityRule>(
             securityRule =>
             {
+                if (securityRule.SecurityRoles.Count == 0)
+                {
+                    throw new Exception("The list of security roles cannot be empty.");
+                }
+
                 var securityRoles = securityRoleSource.SecurityRoles
                                                       .Distinct()
                                                       .Where(sr => sr.Children.IsIntersected(securityRule.SecurityRoles))
@@ -20,11 +25,6 @@ public class SecurityRoleExpander
                                                       .Distinct()
                                                       .OrderBy(sr => sr.Name)
                                                       .ToArray();
-
-                if (securityRoles.Length == 0)
-                {
-                    throw new Exception("The list of security roles cannot be empty!");
-                }
 
                 return new SecurityRule.ExpandedRolesSecurityRule(new DeepEqualsCollection<SecurityRole>(securityRoles));
             }).WithLock();

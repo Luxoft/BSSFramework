@@ -20,7 +20,7 @@ public class SecurityOperationExpander
 
                 if (securityRoles.Length == 0)
                 {
-                    throw new Exception("The list of security roles cannot be empty!");
+                    throw new Exception($"No security roles found for operation \"{securityRule.SecurityOperation}\"");
                 }
 
                 return securityRoles.ToSecurityRule();

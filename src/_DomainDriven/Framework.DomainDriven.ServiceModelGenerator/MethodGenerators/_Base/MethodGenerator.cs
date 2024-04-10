@@ -7,6 +7,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.Projection;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -201,10 +202,9 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
     protected CodeExpression GetConvertToSecurityRuleCodeParameterExpression(CodeExpression evaluateDataExpr, int parameterIndex)
     {
         return evaluateDataExpr.GetContext()
-                               .ToPropertyReference((IAuthorizationBLLContextContainer<object> context) => context.Authorization)
-                               .ToPropertyReference("SecurityRoleParser")
+                               .ToPropertyReference("SecurityRuleParser")
+                               .ToMethodReferenceExpression("Parse", this.DomainType.GetProjectionSourceTypeOrSelf().ToTypeReference())
                                .ToMethodInvokeExpression(
-                                   "Parse",
                                    this.Parameters[parameterIndex]
                                        .Pipe(v => v.Type.BaseType == nameof(String)
                                                       ? (CodeExpression)v.ToVariableReferenceExpression()

@@ -32,7 +32,8 @@ public partial class SampleSystemBLLContext
             IAuthorizationBLLContext authorization,
             Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             ISampleSystemBLLContextSettings settings,
-            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
+            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
+            ISecurityRuleParser securityRuleParser)
             : base(serviceProvider, operationSender, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
@@ -41,11 +42,14 @@ public partial class SampleSystemBLLContext
         this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
         this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory;
+        this.SecurityRuleParser = securityRuleParser;
 
         this.TypeResolver = settings.TypeResolver;
     }
 
     public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
+
+    public ISecurityRuleParser SecurityRuleParser { get; }
 
     public override ISampleSystemBLLFactoryContainer Logics { get; }
 

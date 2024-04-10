@@ -1,6 +1,7 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Configuration.BLL;
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
@@ -23,4 +24,6 @@ public partial interface ISampleSystemBLLContext :
     IConfigurationBLLContext Configuration { get; }
 
     ISecurityExpressionBuilderFactory SecurityExpressionBuilderFactory { get; }
+
+    ISecurityRuleParser SecurityRuleParser { get; }
 }

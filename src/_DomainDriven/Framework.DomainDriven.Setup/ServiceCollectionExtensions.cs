@@ -23,11 +23,6 @@ public static class ServiceCollectionExtensions
         setupAction?.Invoke(settings);
         settings.InitSettings();
 
-        foreach (var securityOperationType in settings.SecurityOperationTypes)
-        {
-            services.AddSingleton(new SecurityRoleTypeInfo(securityOperationType));
-        }
-
         foreach (var securityRoleType in settings.SecurityRoleTypes)
         {
             services.AddSingleton(new SecurityRoleTypeInfo(securityRoleType));
@@ -64,12 +59,6 @@ public static class ServiceCollectionExtensions
 
     private static void InitSettings(this BssFrameworkSettings settings)
     {
-        if (settings.RegisterBaseSecurityOperationTypes)
-        {
-            settings.SecurityOperationTypes.Add(typeof(AuthorizationSecurityOperation));
-            settings.SecurityOperationTypes.Add(typeof(ConfigurationSecurityOperation));
-        }
-
         if (settings.RegisterBaseNamedLockTypes)
         {
             settings.NamedLockTypes.Add(typeof(ConfigurationNamedLock));

@@ -19,7 +19,6 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                    settings =>
                    {
                        settings
-                           .AddSecurityOperationType(typeof(SampleSystemSecurityOperation))
                            .AddSecurityRoleTypeType(typeof(SampleSystemSecurityRole))
                            .AddNamedLockType(typeof(SampleSystemNamedLock))
 

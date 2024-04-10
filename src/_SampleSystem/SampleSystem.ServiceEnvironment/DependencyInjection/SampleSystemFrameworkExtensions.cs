@@ -81,6 +81,8 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterSupportServices(this IServiceCollection services)
     {
+        services.AddSingleton<ISecurityRuleParser, SampleSystemSecurityRuleParser>();
+
         //Custom ariba sender
         services.AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>();
 

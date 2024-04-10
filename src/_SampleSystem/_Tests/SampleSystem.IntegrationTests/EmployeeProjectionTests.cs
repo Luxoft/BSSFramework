@@ -79,11 +79,13 @@ public class EmployeeProjectionTests : TestBase
         var controller = this.GetControllerEvaluator<EmployeeQueryController>(ProjectionPrincipalName);
 
         // Act
-        var actual = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null"))
-                               .Items.Select(dto => dto.Login);
+        var employees = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null"))
+                               .Items;
+
+        var logins = employees.Select(dto => dto.Login);
 
         // Assert
-        actual.Should().BeEquivalentTo(expected);
+        logins.Should().BeEquivalentTo(expected);
     }
 
     [TestMethod]
@@ -93,11 +95,11 @@ public class EmployeeProjectionTests : TestBase
         var controller = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployee1Login);
 
         // Act
-        var result = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null")).Items;
+        var employees = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null")).Items;
 
         // Assert
-        var positions = result.Select(dto => dto.PositionName);
-        var logins = result.Select(dto => dto.Login);
+        var positions = employees.Select(dto => dto.PositionName);
+        var logins = employees.Select(dto => dto.Login);
         positions.All(x => x.HasValue).Should().BeFalse();
         logins.All(x => x.HasValue).Should().BeTrue();
     }

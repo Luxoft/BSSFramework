@@ -18,7 +18,7 @@ public class GetPrincipalsHandler : BaseReadHandler, IGetPrincipalsHandler
     {
         var searchToken = context.Request.Query["searchToken"];
 
-        var query = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.View)
+        var query = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(SecurityRule.View)
                         .GetSecureQueryable();
         if (!string.IsNullOrWhiteSpace(searchToken))
         {

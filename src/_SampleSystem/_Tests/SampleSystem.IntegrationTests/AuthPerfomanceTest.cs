@@ -62,7 +62,7 @@ public class AuthPerformanceTest : TestBase
                             DBSessionMode.Write,
                             async service =>
                             {
-                                var testObjRep = service.Create(BLLSecurityMode.View);
+                                var testObjRep = service.Create(SecurityRule.View);
 
                                 return testObjRep.GetQueryable().Count();
                             });

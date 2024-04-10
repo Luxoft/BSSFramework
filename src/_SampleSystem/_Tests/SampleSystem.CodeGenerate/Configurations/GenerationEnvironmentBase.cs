@@ -28,7 +28,8 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
                 useDependencySecurity: false));
     }
 
-    public override Type SecurityOperationType { get; } = typeof(SampleSystemSecurityOperation);
+
+    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SampleSystemSecurityOperation) };
 
     public override Type OperationContextType { get; } = typeof(SampleSystemOperationContext);
 

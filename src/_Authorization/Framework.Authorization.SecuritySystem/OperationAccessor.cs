@@ -24,19 +24,17 @@ public class OperationAccessor : IOperationAccessor
     public bool IsAdmin() => this.availablePermissionSource.GetAvailablePermissionsQueryable(this.withRunAs)
                                  .Any(permission => permission.Role.Name == BusinessRole.AdminRoleName);
 
-    public bool HasAccess(SecurityOperation securityOperation)
+    public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        var typedOperation = (SecurityOperation<Guid>)securityOperation;
-
-        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityOperationId: typedOperation.Id, withRunAs: this.withRunAs).Any();
+        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityRule: securityRule, withRunAs: this.withRunAs).Any();
     }
 
-    public void CheckAccess(SecurityOperation securityOperation)
+    public void CheckAccess(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        if (!this.HasAccess(securityOperation))
+        if (!this.HasAccess(securityRule))
         {
             throw this.accessDeniedExceptionService.GetAccessDeniedException(
-                new AccessResult.AccessDeniedResult { SecurityOperation = securityOperation });
+                new AccessResult.AccessDeniedResult { SecurityRule = securityRule });
         }
     }
 }

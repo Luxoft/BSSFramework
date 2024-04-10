@@ -13,10 +13,4 @@ public partial interface IBusinessRoleBLL
     bool HasAdminRole();
 
     bool HasBusinessRole(string roleName, bool withRunAs = true);
-
-    IEnumerable<BusinessRoleNode> GetNodes();
-
-    BusinessRole Save(BusinessRoleNode businessRoleNode);
-
-    IEnumerable<BusinessRole> GetParents(ICollection<BusinessRole> businessRoles);
 }

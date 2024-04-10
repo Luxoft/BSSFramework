@@ -11,11 +11,11 @@ namespace Framework.Security;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Property)]
 public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
 {
-    private readonly ReadOnlyCollection<SecurityOperation> baseSecondaryOperations = new ReadOnlyCollection<SecurityOperation>(new List<SecurityOperation>());
+    private readonly ReadOnlyCollection<SecurityRule> baseSecondaryRules = new ReadOnlyCollection<SecurityRule>(new List<SecurityRule>());
 
     private Type[] sourceTypes;
 
-    private ReadOnlyCollection<SecurityOperation> editSourceOperations = new ReadOnlyCollection<SecurityOperation>(new List<SecurityOperation>());
+    private ReadOnlyCollection<SecurityRule> editSourceRules = new ReadOnlyCollection<SecurityRule>(new List<SecurityRule>());
 
     /// <summary>
     /// Пустой констуктор для кастомной безопасности
@@ -28,9 +28,9 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     /// <summary>
     /// Констуктор с доступом по операции
     /// </summary>
-    /// <param name="primarySecurityOperation">Операция просмотра</param>
-    public ViewDomainObjectAttribute(Type securityOperationType, string primarySecurityOperation)
-        : this(securityOperationType, primarySecurityOperation, new string[0])
+    /// <param name="primarySecurityRule">Операция просмотра</param>
+    public ViewDomainObjectAttribute(Type securityRuleType, string primarySecurityRule)
+        : this(securityRuleType, primarySecurityRule, new string[0])
     {
     }
 
@@ -39,44 +39,44 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     /// </summary>
     /// <param name="viewSecurityType">Доменный тип</param>
     public ViewDomainObjectAttribute(Type viewSecurityType)
-        : base(viewSecurityType.GetViewSecurityOperation(true))
+        : base(viewSecurityType.GetViewSecurityRule(true))
     {
     }
 
     /// <summary>
     /// Констуктор с доступом по операциям
     /// </summary>
-    /// <param name="primarySecurityOperation">Операция просмотра</param>
-    /// <param name="baseSecondaryOperations">Дополнительные операции для просмотра</param>
+    /// <param name="primarySecurityRule">Операция просмотра</param>
+    /// <param name="baseSecondaryRules">Дополнительные операции для просмотра</param>
     public ViewDomainObjectAttribute(
-        Type securityOperationType,
-        string primarySecurityOperation,
-        params string[] baseSecondaryOperations)
+        Type securityRuleType,
+        string primarySecurityRule,
+        params string[] baseSecondaryRules)
         : this(
-            securityOperationType.Maybe(v => v.GetSecurityOperation(primarySecurityOperation)),
-            baseSecondaryOperations.ToArray(v => securityOperationType.GetSecurityOperation(v)))
+            securityRuleType.Maybe(v => v.GetSecurityRule(primarySecurityRule)),
+            baseSecondaryRules.ToArray(v => securityRuleType.GetSecurityRule(v)))
     {
     }
 
-    public ViewDomainObjectAttribute(SecurityOperation primarySecurityOperation, params SecurityOperation[] baseSecondaryOperations)
-        : base(primarySecurityOperation)
+    public ViewDomainObjectAttribute(SecurityRule primarySecurityRule, params SecurityRule[] baseSecondaryRules)
+        : base(primarySecurityRule)
     {
-        if (baseSecondaryOperations == null) throw new ArgumentNullException(nameof(baseSecondaryOperations));
+        if (baseSecondaryRules == null) throw new ArgumentNullException(nameof(baseSecondaryRules));
 
-        this.baseSecondaryOperations = baseSecondaryOperations.ToReadOnlyCollection();
+        this.baseSecondaryRules = baseSecondaryRules.ToReadOnlyCollection();
 
-        this.CheckSecondaryOperations(this.baseSecondaryOperations);
+        this.CheckSecondaryRules(this.baseSecondaryRules);
     }
 
     /// <summary>
     /// Дополнительные операции для просмотра
     /// </summary>
-    public IEnumerable<SecurityOperation> SecondaryOperations => this.baseSecondaryOperations.Concat(this.editSourceOperations).Distinct();
+    public IEnumerable<SecurityRule> SecondaryRules => this.baseSecondaryRules.Concat(this.editSourceRules).Distinct();
 
     /// <summary>
     /// Все операции для просмотра объекта
     /// </summary>
-    public IEnumerable<SecurityOperation> AllOperations => new[] { this.SecurityOperation }.Concat(this.SecondaryOperations).Distinct();
+    public IEnumerable<SecurityRule> AllRules => new[] { this.SecurityRule }.Concat(this.SecondaryRules).Distinct();
 
     /// <summary>
     /// Типы, для редактирования которых требуется данный объекта (из типов забираются edit-операции)
@@ -86,26 +86,26 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
         get { return this.sourceTypes.ToArray(); }
         set
         {
-            var operations = value.ToReadOnlyCollection(type => type.GetEditSecurityOperation(true));
+            var rules = value.ToReadOnlyCollection(type => type.GetEditSecurityRule(true));
 
-            this.CheckSecondaryOperations(operations);
+            this.CheckSecondaryRules(rules);
 
-            this.editSourceOperations = operations;
+            this.editSourceRules = rules;
             this.sourceTypes = value.ToArray();
         }
     }
 
-    private void CheckSecondaryOperations(IEnumerable<SecurityOperation> secondaryOperations)
+    private void CheckSecondaryRules(IEnumerable<SecurityRule> secondaryRules)
     {
-        if (secondaryOperations == null) throw new ArgumentNullException(nameof(secondaryOperations));
+        if (secondaryRules == null) throw new ArgumentNullException(nameof(secondaryRules));
 
         if (this.HasContext)
         {
-            var nonContextOperations = secondaryOperations.Where(operation => !(operation is SecurityOperation)).ToList();
+            var nonContextRules = secondaryRules.Where(rule => !(rule is SecurityRule)).ToList();
 
-            if (nonContextOperations.Any())
+            if (nonContextRules.Any())
             {
-                throw new Exception($"Invalid secondary operations: {nonContextOperations.Join(", ")}. All operations must be context.");
+                throw new Exception($"Invalid secondary rules: {nonContextRules.Join(", ")}. All rules must be context.");
             }
         }
     }

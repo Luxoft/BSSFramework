@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStore;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -32,12 +33,12 @@ public abstract class FileStoreGeneratorConfigurationBase<TEnvironment> : Genera
 
     public virtual string WebGetPath { get; } = "AttachmentService";
 
-    public Enum TryGetSecurityAttribute(Type type, bool forEdit)
+    public SecurityRule TryGetSecurityAttribute(Type type, bool forEdit)
     {
         var dict = this._dictionaryLazy.Value;
         var collection = dict[type];
 
-        return collection.FirstOrDefault(z => z.ForEdit == forEdit).Maybe(z => z.SecurityOperation);
+        return collection.FirstOrDefault(z => z.ForEdit == forEdit).Maybe(z => z.SecurityRule);
     }
 
 
@@ -57,20 +58,22 @@ public abstract class FileStoreGeneratorConfigurationBase<TEnvironment> : Genera
 
     public class FileStoreBLLParameter
     {
-        public FileStoreBLLParameter(Type type, Enum securityOperation, bool isEdit)
+        public FileStoreBLLParameter(Type type, SecurityRule securityRule, bool isEdit)
         {
             this.ForEdit = isEdit;
-            this.SecurityOperation = securityOperation;
+            this.SecurityRule = securityRule;
             this.Type = type;
         }
 
         public Type Type { get; }
-        public Enum SecurityOperation { get; }
+
+        public SecurityRule SecurityRule { get; }
+
         public bool ForEdit { get; }
 
         public override int GetHashCode()
         {
-            return this.Type.GetHashCode() ^ this.SecurityOperation.GetHashCode() ^ this.ForEdit.GetHashCode();
+            return this.Type.GetHashCode() ^ this.SecurityRule.GetHashCode() ^ this.ForEdit.GetHashCode();
         }
 
         public override bool Equals(object obj)
@@ -81,7 +84,7 @@ public abstract class FileStoreGeneratorConfigurationBase<TEnvironment> : Genera
                 return false;
             }
 
-            return this.Type == target.Type && this.SecurityOperation.Equals(target.SecurityOperation)
+            return this.Type == target.Type && this.SecurityRule.Equals(target.SecurityRule)
                                             && this.ForEdit.Equals(target.ForEdit);
         }
     }

@@ -30,15 +30,15 @@ public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<
 
     public override IDomainObjectEventMetadata DomainObjectEventMetadata { get; } = new SampleSystemDomainObjectEventMetadata();
 
-    protected override IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetMainTypesWithSecondarySecurityOperations()
+    protected override IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>> GetMainTypesWithSecondarySecurityRules()
     {
-        foreach (var baseData in base.GetMainTypesWithSecondarySecurityOperations())
+        foreach (var baseData in base.GetMainTypesWithSecondarySecurityRules())
         {
             yield return baseData;
         }
 
         yield return typeof(BusinessUnit).ToKeyValuePair(
-            new SecurityOperation[]
+            new SecurityRule[]
             {
                 SampleSystemSecurityOperation.BusinessUnitView,
                 SampleSystemSecurityOperation.BusinessUnitHrDepartmentView,

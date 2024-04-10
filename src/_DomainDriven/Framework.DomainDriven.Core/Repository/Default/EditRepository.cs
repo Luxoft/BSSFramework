@@ -13,7 +13,7 @@ public class EditRepository<TDomainObject> : Repository<TDomainObject>
         ISpecificationEvaluator specificationEvaluator,
         IAccessDeniedExceptionService accessDeniedExceptionService,
         IDomainSecurityService<TDomainObject> domainSecurityService)
-        : base(dal, specificationEvaluator, accessDeniedExceptionService, domainSecurityService.GetSecurityProvider(BLLSecurityMode.Edit))
+        : base(dal, specificationEvaluator, accessDeniedExceptionService, domainSecurityService.GetSecurityProvider(SecurityRule.Edit))
     {
     }
 }

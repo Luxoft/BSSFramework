@@ -58,7 +58,7 @@ public class MainTests
 
         var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee>>();
         var counterService = scope.ServiceProvider.GetRequiredService<BusinessUnitAncestorLinkSourceExecuteCounter>();
-        var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
+        var securityProvider = employeeDomainSecurityService.GetSecurityProvider(SecurityRule.View);
 
         // Act
         var result1 = securityProvider.HasAccess(this.employee1);
@@ -82,7 +82,7 @@ public class MainTests
         var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee>>();
         var accessDeniedExceptionService = scope.ServiceProvider.GetRequiredService<IAccessDeniedExceptionService>();
 
-        var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
+        var securityProvider = employeeDomainSecurityService.GetSecurityProvider(SecurityRule.View);
 
 
         // Act
@@ -116,12 +116,19 @@ public class MainTests
                                  .SetEdit(ExampleSecurityOperation.EmployeeEdit)
                                  .SetPath(SecurityPath<Employee>.Create(v => v.BusinessUnit))))
 
-               .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>()
+               .AddSingleton<SecurityModeExpander>()
+               .AddSingleton<SecurityOperationExpander>()
+               .AddSingleton<SecurityRoleExpander>()
+               .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
+
+               .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 
                .AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
 
                .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
                .RegisterSecurityContextInfoService<Guid>(b => b.Add<BusinessUnit>(Guid.NewGuid()))
+
+               .AddSingleton(new SecurityRoleTypeInfo(typeof(ExampleSecurityRole)))
 
                .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }

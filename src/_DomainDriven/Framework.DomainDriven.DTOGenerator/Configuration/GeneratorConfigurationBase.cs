@@ -28,13 +28,13 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
         this.DefaultCodeTypeReferenceService = new ConfigurationCodeTypeReferenceService<GeneratorConfigurationBase<TEnvironment>>(this);
 
-        this.DomainObjectSecurityOperationCodeFileFactoryHeader = new CodeFileFactoryHeader<RoleFileType>(FileType.DomainObjectSecurityOperationCode, string.Empty, domainType => $"{this.Environment.TargetSystemName}{domainType.Name}SecurityOperationCode");
+        this.DomainObjectSecurityRuleCodeFileFactoryHeader = new CodeFileFactoryHeader<RoleFileType>(FileType.DomainObjectSecurityRuleCode, string.Empty, domainType => $"{this.Environment.TargetSystemName}{domainType.Name}SecurityRuleCode");
 
         this.ProjectionTypes = LazyInterfaceImplementHelper.CreateProxy(() => this.GetProjectionTypes().ToReadOnlyCollectionI());
 
         this.GeneratePolicy = LazyInterfaceImplementHelper.CreateProxy(this.CreateGeneratePolicy);
 
-        this.TypesWithSecondarySecurityOperations = LazyInterfaceImplementHelper.CreateProxy(() => this.GetTypesWithSecondarySecurityOperations().ToReadOnlyDictionaryI());
+        this.TypesWithSecondarySecurityRules = LazyInterfaceImplementHelper.CreateProxy(() => this.GetTypesWithSecondarySecurityRules().ToReadOnlyDictionaryI());
 
 
         this.ClientDTOMappingServiceInterfaceFileFactoryHeader = FileType.ClientDTOMappingServiceInterface.ToHeader("", _ => $"I{this.Environment.TargetSystemName}ClientDTOMappingService");
@@ -48,7 +48,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public IReadOnlyCollection<Type> ProjectionTypes { get; }
 
-    public IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityOperation>> TypesWithSecondarySecurityOperations { get; }
+    public IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityRule>> TypesWithSecondarySecurityRules { get; }
 
     public virtual bool ExpandStrictMaybeToDefault { get; } = false;
 
@@ -98,7 +98,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> RichDTOFileFactoryHeader { get; } = FileType.RichDTO.ToHeader();
 
-    protected virtual ICodeFileFactoryHeader<RoleFileType> DomainObjectSecurityOperationCodeFileFactoryHeader { get; }
+    protected virtual ICodeFileFactoryHeader<RoleFileType> DomainObjectSecurityRuleCodeFileFactoryHeader { get; }
 
     protected virtual ICodeFileFactoryHeader<FileType> ClientDTOMappingServiceInterfaceFileFactoryHeader { get; }
 
@@ -116,14 +116,14 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     }
 
 
-    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetMainTypesWithSecondarySecurityOperations()
+    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>> GetMainTypesWithSecondarySecurityRules()
     {
-        return this.DomainTypes.GetTypesWithSecondarySecurityOperations();
+        return this.DomainTypes.GetTypesWithSecondarySecurityRules();
     }
 
-    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetTypesWithSecondarySecurityOperations()
+    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>> GetTypesWithSecondarySecurityRules()
     {
-        var mainResult = this.GetMainTypesWithSecondarySecurityOperations().ToDictionary();
+        var mainResult = this.GetMainTypesWithSecondarySecurityRules().ToDictionary();
 
         var dependencyRequest = from domainType in this.GetDomainTypes()
 
@@ -443,7 +443,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
         yield return this.ProjectionDTOFileFactoryHeader;
 
-        yield return this.DomainObjectSecurityOperationCodeFileFactoryHeader;
+        yield return this.DomainObjectSecurityRuleCodeFileFactoryHeader;
 
         yield return this.ClientDTOMappingServiceInterfaceFileFactoryHeader;
 

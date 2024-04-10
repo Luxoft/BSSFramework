@@ -18,38 +18,38 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : 
 
     protected ContextDomainSecurityServiceBase(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        ISecurityOperationResolver securityOperationResolver,
+        ISecurityRuleExpander securityRuleExpander,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
 
-        : base(disabledSecurityProvider, securityOperationResolver)
+        : base(disabledSecurityProvider, securityRuleExpander)
     {
         this.securityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
     }
 
-    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SecurityOperation securityOperation)
+    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SecurityRule.DomainObjectSecurityRule securityRule)
         where TSecurityContext : class, ISecurityContext
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
-        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
+        if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
 
-        return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
+        return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityRule);
     }
 
-    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, SecurityOperation securityOperation)
+    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, SecurityRule.DomainObjectSecurityRule securityRule)
         where TSecurityContext : class, ISecurityContext
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
-        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
+        if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
 
-        return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
+        return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityRule);
     }
 
-    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, SecurityOperation securityOperation)
+    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainObjectSecurityRule securityRule)
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
-        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
+        if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
 
-        return securityPath.ToProvider(securityOperation, this.securityExpressionBuilderFactory);
+        return securityPath.ToProvider(securityRule, this.securityExpressionBuilderFactory);
     }
 }
 
@@ -61,16 +61,16 @@ public class ContextDomainSecurityService<TDomainObject, TIdent> : ContextDomain
 
     public ContextDomainSecurityService(
         ISecurityProvider<TDomainObject> disabledSecurityProvider,
-        ISecurityOperationResolver securityOperationResolver,
+        ISecurityRuleExpander securityRuleExpander,
         ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
         SecurityPath<TDomainObject> securityPath)
-        : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory)
+        : base(disabledSecurityProvider, securityRuleExpander, securityExpressionBuilderFactory)
     {
         this.securityPath = securityPath;
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule)
     {
-        return this.Create(this.securityPath, securityOperation);
+        return this.Create(this.securityPath, securityRule);
     }
 }

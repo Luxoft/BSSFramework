@@ -8,7 +8,7 @@ public interface IIntegrationGeneratorConfigurationBase : IGeneratorConfiguratio
 
     string SaveMethodName { get; }
 
-    CodeExpression IntegrationSecurityOperation { get; }
+    CodeExpression IntegrationSecurityRule { get; }
 }
 
 public interface IIntegrationGeneratorConfigurationBase<out TEnvironment> : IIntegrationGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>

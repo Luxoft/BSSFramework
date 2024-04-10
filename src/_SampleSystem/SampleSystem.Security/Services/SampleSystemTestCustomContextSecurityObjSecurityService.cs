@@ -1,21 +1,18 @@
 ﻿using Framework.SecuritySystem;
-using Framework.SecuritySystem.Rules.Builders;
 
 using SampleSystem.Domain;
 
 namespace SampleSystem.Security.Services;
 
-public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDomainSecurityServiceBase<TestCustomContextSecurityObj, Guid>
+public class SampleSystemTestCustomContextSecurityObjSecurityService : DomainSecurityServiceBase<TestCustomContextSecurityObj>
 {
     public SampleSystemTestCustomContextSecurityObjSecurityService(
-        ISecurityProvider<TestCustomContextSecurityObj> disabledSecurityProvider,
-        ISecurityOperationResolver securityOperationResolver,
-        ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
-        : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory)
+        ISecurityProvider<TestCustomContextSecurityObj> disabledSecurityProvider)
+        : base(disabledSecurityProvider)
     {
     }
 
-    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityOperation securityOperation)
+    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityRule securityRule)
     {
         return new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();
     }

@@ -19,7 +19,7 @@ public record UpdateSystemConstantHandler(ISystemConstantBLLFactory SystemConsta
 
     private void Update(Guid id, string newValue)
     {
-        var systemConstantBll = this.SystemConstantBllFactory.Create(BLLSecurityMode.Edit);
+        var systemConstantBll = this.SystemConstantBllFactory.Create(SecurityRule.Edit);
         var systemConstant = systemConstantBll.GetById(id, true);
         systemConstant.Value = newValue;
         systemConstantBll.Save(systemConstant);

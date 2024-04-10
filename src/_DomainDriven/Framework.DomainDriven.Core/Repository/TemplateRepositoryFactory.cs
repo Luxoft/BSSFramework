@@ -22,13 +22,10 @@ public abstract class TemplateRepositoryFactory<TRepository, TTRepositoryImpl, T
     }
 
     public TRepository Create() =>
-        this.Create(this.domainSecurityService.GetSecurityProvider(BLLSecurityMode.Disabled));
+        this.Create(this.domainSecurityService.GetSecurityProvider(SecurityRule.Disabled));
 
-    public TRepository Create(BLLSecurityMode securityMode) =>
-        this.Create(this.domainSecurityService.GetSecurityProvider(securityMode));
-
-    public TRepository Create(SecurityOperation securityOperation) =>
-        this.Create(this.domainSecurityService.GetSecurityProvider(securityOperation));
+    public TRepository Create(SecurityRule securityRule) =>
+        this.Create(this.domainSecurityService.GetSecurityProvider(securityRule));
 
     public TRepository Create(ISecurityProvider<TDomainObject> securityProvider) =>
         ActivatorUtilities.CreateInstance<TTRepositoryImpl>(this.serviceProvider, securityProvider);

@@ -78,16 +78,6 @@ namespace Framework.Authorization.BLL
             get;
         }
         
-        Framework.Authorization.BLL.IOperationBLL Operation
-        {
-            get;
-        }
-        
-        Framework.Authorization.BLL.IOperationBLLFactory OperationFactory
-        {
-            get;
-        }
-        
         Framework.Authorization.BLL.IPermissionBLL Permission
         {
             get;
@@ -144,14 +134,6 @@ namespace Framework.Authorization.BLL
     }
     
     public partial interface IEntityTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IEntityTypeBLL, Framework.Authorization.Domain.EntityType>
-    {
-    }
-    
-    public partial interface IOperationBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Operation, System.Guid>
-    {
-    }
-    
-    public partial interface IOperationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IOperationBLL, Framework.Authorization.Domain.Operation>
     {
     }
     

@@ -37,7 +37,6 @@ public class SampleSystemInitializer
             context => context.ServiceProvider.GetRequiredService<INamedLockInitializer>().Initialize().GetAwaiter().GetResult());
 
         this.InitSecurity<IAuthorizationEntityTypeInitializer>();
-        this.InitSecurity<IAuthorizationOperationInitializer>();
         this.InitSecurity<IAuthorizationBusinessRoleInitializer>();
 
         this.contextEvaluator.Evaluate(

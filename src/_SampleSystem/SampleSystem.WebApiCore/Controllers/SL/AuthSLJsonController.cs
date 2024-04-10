@@ -23,8 +23,8 @@ public class AuthSLJsonController : Framework.Authorization.WebApi.AuthSLJsonCon
                                                       var principalIdent = savePermissionAutoRequest.principalIdent;
                                                       var permissionDTO = savePermissionAutoRequest.permissionDTO;
 
-                                                      var principalBLL = evaluateData.Context.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit);
-                                                      var permissionBLL = evaluateData.Context.Logics.PermissionFactory.Create(BLLSecurityMode.Edit);
+                                                      var principalBLL = evaluateData.Context.Logics.PrincipalFactory.Create(SecurityRule.Edit);
+                                                      var permissionBLL = evaluateData.Context.Logics.PermissionFactory.Create(SecurityRule.Edit);
 
                                                       var principal = principalBLL.GetById(principalIdent.Id, true);
 

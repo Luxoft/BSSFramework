@@ -12,9 +12,9 @@ public class SampleSystemEmployeeDomainSecurityServiceMetadata : IDomainSecurity
 
     public SampleSystemEmployeeDomainSecurityServiceMetadata(IActualPrincipalSource actualPrincipalSource) => this.actualPrincipalSource = actualPrincipalSource;
 
-    public ISecurityProvider<Employee> OverrideSecurityProvider(ISecurityProvider<Employee> baseProvider, SecurityOperation securityOperation)
+    public ISecurityProvider<Employee> OverrideSecurityProvider(ISecurityProvider<Employee> baseProvider, SecurityRule.OperationSecurityRule securityRule)
     {
-        if (securityOperation == SampleSystemSecurityOperation.EmployeeView)
+        if (securityRule == SampleSystemSecurityOperation.EmployeeView)
         {
             return baseProvider.Or(employee => employee.Login == this.actualPrincipalSource.ActualPrincipal.Name);
         }

@@ -15,7 +15,7 @@ public class AvailablePermissionFilter
 
     public string? PrincipalName { get; set; }
 
-    public Guid SecurityOperationId { get; set; }
+    public List<Guid>? SecurityRoleIdents { get; set; }
 
     public Expression<Func<Permission, bool>> ToFilterExpression()
     {
@@ -24,17 +24,16 @@ public class AvailablePermissionFilter
 
     public IEnumerable<Expression<Func<Permission, bool>>> GetFilterExpressionElements()
     {
-        yield return permission => permission.Status == PermissionStatus.Approved
-                                   && permission.Period.Contains(this.today);
+        yield return permission => permission.Period.Contains(this.today);
 
         if (this.PrincipalName != null)
         {
             yield return permission => this.PrincipalName == permission.Principal.Name;
         }
 
-        if (!this.SecurityOperationId.IsDefault())
+        if (this.SecurityRoleIdents != null)
         {
-            yield return permission => permission.Role.BusinessRoleOperationLinks.Any(link => link.Operation.Id == this.SecurityOperationId);
+            yield return permission => this.SecurityRoleIdents.Contains(permission.Role.Id);
         }
     }
 }

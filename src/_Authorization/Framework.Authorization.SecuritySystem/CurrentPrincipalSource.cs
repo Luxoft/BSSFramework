@@ -16,7 +16,7 @@ public class CurrentPrincipalSource : ICurrentPrincipalSource
 
     private readonly Lazy<Principal> currentPrincipalLazy;
 
-    public CurrentPrincipalSource([FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Principal> principalRepository,
+    public CurrentPrincipalSource([FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
                                   IUserAuthenticationService userAuthenticationService)
     {
         this.principalRepository = principalRepository;

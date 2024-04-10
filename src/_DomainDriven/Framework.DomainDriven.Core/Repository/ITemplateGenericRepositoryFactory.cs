@@ -9,9 +9,7 @@ public interface ITemplateGenericRepositoryFactory<out TRepository, TDomainObjec
     /// </summary>
     TRepository Create();
 
-    TRepository Create(BLLSecurityMode securityMode);
-
-    TRepository Create(SecurityOperation securityOperation);
+    TRepository Create(SecurityRule securityRule);
 
     TRepository Create(ISecurityProvider<TDomainObject> securityProvider);
 }

@@ -37,6 +37,6 @@ public class RepositoryWithoutSecurityTests : TestBase
         Func<Task> saveAction = () => controllerEvaluator.EvaluateAsync(c => c.TestFaultSave(default));
 
         // Assert
-        await saveAction.Should().ThrowAsync<InvalidOperationException>($"Security mode \"{BLLSecurityMode.Edit}\" not allowed");
+        await saveAction.Should().ThrowAsync<InvalidOperationException>($"Security mode \"{SecurityRule.Edit}\" not allowed");
     }
 }

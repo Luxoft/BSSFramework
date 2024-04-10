@@ -69,6 +69,6 @@ public class CreateMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfi
 
         return null == modelSecurityAttribute
                        ? base.GetBLLSecurityParameter(evaluateDataExpr)
-                       : modelSecurityAttribute.SecurityOperation;
+                       : modelSecurityAttribute.SecurityRule;
     }
 }

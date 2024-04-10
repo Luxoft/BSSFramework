@@ -191,7 +191,7 @@ public class RevisionServiceTests : TestFixtureBase
     }
 
     [Test]
-    public void GetObjectModifications_Call_CollectionOfModificationInfos()
+    public void GetObjectModifications_Call_CollectionOfModificationInfoList()
     {
         // Arrange
         var created = this.Fixture.Create<DALObject<IdentityObject>>();
@@ -211,13 +211,13 @@ public class RevisionServiceTests : TestFixtureBase
 
         // Act
         var service = this.Fixture.Create<RevisionService<IdentityObject>>();
-        var modificationInfos = service.GetObjectModifications(changes).ToList();
+        var modificationInfoList = service.GetObjectModifications(changes).ToList();
 
         // Assert
-        modificationInfos.Should().HaveCount(3);
-        modificationInfos[0].Identity.Should().Be(created.Object.Id);
-        modificationInfos[1].Identity.Should().Be(updated.Object.Id);
-        modificationInfos[2].Identity.Should().Be(removed.Object.Id);
+        modificationInfoList.Should().HaveCount(3);
+        modificationInfoList[0].Identity.Should().Be(created.Object.Id);
+        modificationInfoList[1].Identity.Should().Be(updated.Object.Id);
+        modificationInfoList[2].Identity.Should().Be(removed.Object.Id);
     }
 
     [Test]
@@ -236,9 +236,9 @@ public class RevisionServiceTests : TestFixtureBase
 
         // Act
         var service = this.Fixture.Create<RevisionService<IdentityObject>>();
-        var modificationInfos = service.GetObjectModifications(changes).ToList();
+        var modificationInfoList = service.GetObjectModifications(changes).ToList();
 
         // Assert
-        modificationInfos.Should().BeEmpty();
+        modificationInfoList.Should().BeEmpty();
     }
 }

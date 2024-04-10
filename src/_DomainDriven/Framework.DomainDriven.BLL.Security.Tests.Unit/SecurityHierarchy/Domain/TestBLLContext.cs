@@ -9,15 +9,14 @@ using Framework.QueryableSource;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 using Framework.Validation;
+using Framework.Core.Serialization;
+using Framework.DomainDriven.Lock;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using NSubstitute;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
-
-using Framework.Core.Serialization;
-using Framework.DomainDriven.Lock;
 
 public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer
 {
@@ -109,6 +108,4 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
     public ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
         where TDomainObject : PersistentDomainObjectBase
         => this.ServiceProvider.GetRequiredService<ISecurityProvider<TDomainObject>>();
-
-    public ISecurityOperationResolver SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver>();
 }

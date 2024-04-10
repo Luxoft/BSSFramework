@@ -66,6 +66,6 @@ public class GetExtendedModelMethodGenerator<TConfiguration> : ModelMethodGenera
             return base.GetBLLSecurityParameter(evaluateDataExpr);
         }
 
-        return modelSecurityAttribute.SecurityOperation;
+        return modelSecurityAttribute.SecurityRule;
     }
 }

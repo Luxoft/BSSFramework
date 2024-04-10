@@ -16,18 +16,10 @@ public class RootSecurityService<TPersistentDomainObjectBase> : IRootSecuritySer
 
     public IServiceProvider ServiceProvider { get; }
 
-    public virtual ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(BLLSecurityMode securityMode)
+    public virtual ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityRule)
         where TDomainObject : TPersistentDomainObjectBase
     {
-        return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityMode);
-    }
-
-    public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation securityOperation)
-        where TDomainObject : TPersistentDomainObjectBase
-    {
-        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-
-        return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityOperation);
+        return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityRule);
     }
 
     protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>()

@@ -14,10 +14,10 @@ public class SecurityExpressionBuilder<TDomainObject> : ISecurityExpressionBuild
         this.queryBuilder = queryBuilder ?? throw new ArgumentNullException(nameof(queryBuilder));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityOperation securityOperation)
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        var hasAccessFilter = this.hasAccessBuilder.GetFilter(securityOperation);
-        var queryFilter = this.queryBuilder.GetFilter(securityOperation);
+        var hasAccessFilter = this.hasAccessBuilder.GetFilter(securityRule);
+        var queryFilter = this.queryBuilder.GetFilter(securityRule);
 
         return new SecurityExpressionFilter<TDomainObject>(hasAccessFilter, queryFilter);
     }

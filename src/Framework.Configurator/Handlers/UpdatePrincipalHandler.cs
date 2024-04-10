@@ -23,7 +23,7 @@ public record UpdatePrincipalHandler(
 
     private async Task Update(Guid id, string newName, CancellationToken cancellationToken)
     {
-        var principalBll = this.PrincipalRepositoryFactory.Create(BLLSecurityMode.Edit);
+        var principalBll = this.PrincipalRepositoryFactory.Create(SecurityRule.Edit);
         var domainObject = await principalBll.GetQueryable()
                                              .Where(x => x.Id == id)
                                              .SingleAsync(cancellationToken);

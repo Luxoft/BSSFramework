@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStore;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -35,27 +36,27 @@ public abstract class FileStoreAttachmentGeneratorConfigurationBase<TEnvironment
         yield break;
     }
 
-    public Enum TryGetSecurityAttribute(Type domainType, bool isEdit)
+    public SecurityRule TryGetSecurityAttribute(Type domainType, bool isEdit)
     {
         return this.Environment.FileStore.TryGetSecurityAttribute(domainType, isEdit);
     }
 
     public class FileStoreBLLParameter
     {
-        public FileStoreBLLParameter(Type type, Enum securityOperation, bool isEdit)
+        public FileStoreBLLParameter(Type type, Enum securityRule, bool isEdit)
         {
             this.ForEdit = isEdit;
-            this.SecurityOperation = securityOperation;
+            this.SecurityRule = securityRule;
             this.Type = type;
         }
 
         public Type Type { get; }
-        public Enum SecurityOperation { get; }
+        public Enum SecurityRule { get; }
         public bool ForEdit { get; }
 
         public override int GetHashCode()
         {
-            return this.Type.GetHashCode() ^ this.SecurityOperation.GetHashCode() ^ this.ForEdit.GetHashCode();
+            return this.Type.GetHashCode() ^ this.SecurityRule.GetHashCode() ^ this.ForEdit.GetHashCode();
         }
 
         public override bool Equals(object obj)
@@ -66,7 +67,7 @@ public abstract class FileStoreAttachmentGeneratorConfigurationBase<TEnvironment
                 return false;
             }
 
-            return this.Type == target.Type && this.SecurityOperation.Equals(target.SecurityOperation)
+            return this.Type == target.Type && this.SecurityRule.Equals(target.SecurityRule)
                                             && this.ForEdit.Equals(target.ForEdit);
         }
     }

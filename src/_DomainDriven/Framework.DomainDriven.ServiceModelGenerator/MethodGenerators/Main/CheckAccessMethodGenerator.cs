@@ -35,7 +35,7 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
         return $"Check {this.DomainType.Name} access";
     }
 
-    private CodeParameterDeclarationExpression SecurityOperationCodeParameter => typeof(string).ToTypeReference().ToParameterDeclarationExpression("securityOperationName");
+    private CodeParameterDeclarationExpression SecurityRuleCodeParameter => typeof(string).ToTypeReference().ToParameterDeclarationExpression("securityRuleName");
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {
@@ -43,12 +43,12 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
                          .GetCodeTypeReference(this.DomainType, DTOType.IdentityDTO)
                          .ToParameterDeclarationExpression(this.DomainType.Name.ToStartLowerCase() + "Ident");
 
-        yield return this.SecurityOperationCodeParameter;
+        yield return this.SecurityRuleCodeParameter;
     }
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        var operationVarStatement = new CodeVariableDeclarationStatement(typeof(SecurityOperation), "operation", this.GetConvertToSecurityOperationCodeParameterExpression(evaluateDataExpr, 1));
+        var operationVarStatement = new CodeVariableDeclarationStatement(typeof(SecurityRule), "operation", this.GetConvertToSecurityRuleCodeParameterExpression(evaluateDataExpr, 1));
 
         yield return operationVarStatement;
 

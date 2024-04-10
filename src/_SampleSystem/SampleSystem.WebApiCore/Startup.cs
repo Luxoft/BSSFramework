@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 
-using Framework.Authorization.ApproveWorkflow;
 using Framework.Configurator;
 using Framework.Configurator.Interfaces;
 using Framework.Core;
@@ -104,9 +103,6 @@ public class Startup
             app.UseMetricsAllMiddleware();
             this.UseHangfireBss(app);
         }
-
-        app.ApplicationServices.RegisterAuthWorkflow();
-        app.ApplicationServices.GetRequiredService<WorkflowManager>().Start();
     }
 
     private void UseHangfireBss(IApplicationBuilder app)

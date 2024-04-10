@@ -6,19 +6,19 @@ namespace Framework.Security;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 public class DomainObjectAccessAttribute : Attribute
 {
-    public DomainObjectAccessAttribute(Type securityOperationType, string name)
-        : this(securityOperationType.Maybe(v => v.GetSecurityOperation(name)))
+    public DomainObjectAccessAttribute(Type securityRuleType, string name)
+        : this(securityRuleType.Maybe(v => v.GetSecurityRule(name)))
     {
     }
 
-    protected DomainObjectAccessAttribute(SecurityOperation securityOperation)
+    protected DomainObjectAccessAttribute(SecurityRule securityRule)
     {
-        this.SecurityOperation = securityOperation;
+        this.SecurityRule = securityRule;
     }
 
 
-    public SecurityOperation SecurityOperation { get; private set; }
+    public SecurityRule SecurityRule { get; private set; }
 
 
-    public bool HasContext => this.SecurityOperation is SecurityOperation;
+    public bool HasContext => this.SecurityRule is SecurityRule;
 }

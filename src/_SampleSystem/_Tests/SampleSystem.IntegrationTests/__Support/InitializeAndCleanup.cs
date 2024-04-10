@@ -1,13 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Automation;
 using Automation.ServiceEnvironment;
-using Automation.ServiceEnvironment.Services;
 
 using DotNetCore.CAP;
 using DotNetCore.CAP.Internal;
 
-using Framework.Authorization.ApproveWorkflow;
-using Framework.Cap.Abstractions;
 using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DependencyInjection;
@@ -30,7 +27,6 @@ public class InitializeAndCleanup
                                                              .WithDefaultConfiguration($"{nameof(SampleSystem)}_")
                                                              .WithDatabaseGenerator<SampleSystemTestDatabaseGenerator>()
                                                              .WithServiceProviderBuildFunc(GetServices)
-                                                             .WithServiceProviderAfterBuildAction(z => z.RegisterAuthWorkflow())
                                                              .Build();
 
     [AssemblyInitialize]
@@ -61,7 +57,7 @@ public class InitializeAndCleanup
 
                .AddSingleton<SampleSystemInitializer>()
 
-               .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
+               .RegisterControllers([typeof(EmployeeController).Assembly])
 
                .AddSingleton<DataHelper>()
                .AddSingleton<AuthHelper>();

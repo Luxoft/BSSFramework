@@ -88,7 +88,6 @@ public partial class PrincipalBLL
         foreach (var permission in principal.Permissions)
         {
             this.Context.Logics.Permission.ValidatePermissionDelegated(permission, ValidatePermissonDelegateMode.All);
-            this.Context.Logics.Permission.ValidateApprovingPermission(permission);
         }
     }
 

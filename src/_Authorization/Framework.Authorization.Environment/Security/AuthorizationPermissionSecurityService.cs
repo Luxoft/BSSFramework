@@ -11,33 +11,34 @@ namespace Framework.Authorization.Environment
 
         public AuthorizationPermissionSecurityService(
             ISecurityProvider<Permission> disabledSecurityProvider,
-            ISecurityOperationResolver securityOperationResolver,
+            ISecurityRuleExpander securityRuleExpander,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<Permission> securityPath,
             IActualPrincipalSource actualPrincipalSource)
-            : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
+            : base(disabledSecurityProvider, securityRuleExpander, securityExpressionBuilderFactory, securityPath)
         {
             this.actualPrincipalSource = actualPrincipalSource;
         }
 
-        protected override ISecurityProvider<Permission> CreateSecurityProvider(BLLSecurityMode securityMode)
+        protected override ISecurityProvider<Permission> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
         {
-            var baseProvider = base.CreateSecurityProvider(securityMode);
+            var baseProvider = base.CreateSecurityProvider(securityRule);
 
             var withDelegatedFrom = baseProvider.Or(
                 new PrincipalSecurityProvider<Permission>(this.actualPrincipalSource, permission => permission.DelegatedFrom.Principal));
 
-            switch (securityMode)
+            if (securityRule == SecurityRule.View)
             {
-                case BLLSecurityMode.View:
-                    return withDelegatedFrom.Or(
-                        new PrincipalSecurityProvider<Permission>(this.actualPrincipalSource, permission => permission.Principal));
-
-                case BLLSecurityMode.Edit:
-                    return withDelegatedFrom;
-
-                default:
-                    return baseProvider;
+                return withDelegatedFrom.Or(
+                    new PrincipalSecurityProvider<Permission>(this.actualPrincipalSource, permission => permission.Principal));
+            }
+            else if (securityRule == SecurityRule.Edit)
+            {
+                return withDelegatedFrom;
+            }
+            else
+            {
+                return baseProvider;
             }
         }
     }

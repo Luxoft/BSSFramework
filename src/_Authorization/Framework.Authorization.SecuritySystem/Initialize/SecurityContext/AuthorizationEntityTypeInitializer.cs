@@ -22,7 +22,7 @@ public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitia
     private readonly InitializeSettings settings;
 
     public AuthorizationEntityTypeInitializer(
-        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<EntityType> entityTypeRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<EntityType> entityTypeRepository,
         IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
         ILogger logger,
         InitializeSettings settings)

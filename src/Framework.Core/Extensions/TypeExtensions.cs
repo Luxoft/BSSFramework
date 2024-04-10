@@ -5,6 +5,17 @@ namespace Framework.Core;
 
 public static class TypeExtensions
 {
+    public static IEnumerable<T> GetStaticPropertyValueList<T>(this Type type, Func<string, bool> filter = null)
+    {
+        return from prop in type.GetProperties(BindingFlags.Static | BindingFlags.Public)
+
+               where filter == null || filter(prop.Name)
+
+               where typeof(T).IsAssignableFrom(prop.PropertyType)
+
+               select (T)prop.GetValue(null);
+    }
+
     public static Dictionary<MethodInfo, MethodInfo> GetInterfaceMapDictionary(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));

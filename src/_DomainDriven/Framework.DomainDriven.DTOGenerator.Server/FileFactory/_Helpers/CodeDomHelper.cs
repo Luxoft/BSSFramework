@@ -55,10 +55,10 @@ internal static class CodeDomHelper
 
 
 
-    public static CodeExpression ToHasAccessMethod(this IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> configuration, CodeExpression contextRef, SecurityOperation securityOperation, Type domainType, CodeParameterDeclarationExpression domainObjectParameter)
+    public static CodeExpression ToHasAccessMethod(this IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> configuration, CodeExpression contextRef, SecurityRule securityRule, Type domainType, CodeParameterDeclarationExpression domainObjectParameter)
     {
         return configuration.Environment.BLLCore.GetGetSecurityProviderMethodReferenceExpression(contextRef, domainType)
-                            .ToMethodInvokeExpression(configuration.Environment.BLLCore.GetSecurityCodeExpression(securityOperation))
+                            .ToMethodInvokeExpression(configuration.Environment.BLLCore.GetSecurityCodeExpression(securityRule))
                             .ToMethodInvokeExpression("HasAccess", domainObjectParameter.ToVariableReferenceExpression());
     }
 

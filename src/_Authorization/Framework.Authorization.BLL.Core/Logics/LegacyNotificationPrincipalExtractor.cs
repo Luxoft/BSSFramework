@@ -20,25 +20,11 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
 
         var roles = this.Context.Logics.BusinessRole.GetListByIdents(roleIdents);
-        var expandedRoles = this.Context.Logics.BusinessRole.GetParents(roles).ToArray();
 
         var permissionQ = this.Context.AvailablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false);
 
-        return permission => expandedRoles.Contains(permission.Role) && permissionQ.Contains(permission);
+        return permission => roles.Contains(permission.Role) && permissionQ.Contains(permission);
     }
-
-    public IEnumerable<Principal> GetNotificationPrincipalsByOperations(Guid[] operationsIds, IEnumerable<NotificationFilterGroup> notificationFilterGroups)
-    {
-        if (operationsIds == null) throw new ArgumentNullException(nameof(operationsIds));
-        if (notificationFilterGroups == null) throw new ArgumentNullException(nameof(notificationFilterGroups));
-
-        var operations = this.Context.Logics.Operation.GetListByIdents(operationsIds).ToArray();
-
-        var roleIdents = this.Context.Logics.BusinessRole.GetListBy(role => role.BusinessRoleOperationLinks.Any(link => operations.Contains(link.Operation))).ToArray(role => role.Id);
-
-        return this.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
-    }
-
 
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, IEnumerable<NotificationFilterGroup> notificationFilterGroups)
     {

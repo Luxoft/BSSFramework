@@ -1,4 +1,7 @@
 ﻿using Framework.DomainDriven.ServiceModelGenerator;
+using Framework.SecuritySystem;
+
+using SampleSystem.Security;
 
 namespace SampleSystem.CodeGenerate;
 
@@ -8,4 +11,8 @@ public class IntegrationGeneratorConfiguration : IntegrationGeneratorConfigurati
             : base(environment)
     {
     }
+
+    public override SecurityRole IntegrationSecurityRole { get; } = SampleSystemSecurityRole.SystemIntegration;
+
+    public override Type IntegrationSecurityRoleType { get; } = typeof(SampleSystemSecurityRole);
 }

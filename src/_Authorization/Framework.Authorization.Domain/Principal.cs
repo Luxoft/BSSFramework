@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 
-using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
@@ -65,12 +64,5 @@ public class Principal : BaseDirectory, IMaster<Permission>, IPrincipal<Guid>
     IEnumerable<IPermission<Guid>> IPrincipal<Guid>.Permissions
     {
         get { return this.Permissions; }
-    }
-
-    public virtual IEnumerable<Operation> GetOperations(DateTime date)
-    {
-        return this.Permissions.Where(permission => permission.Status == PermissionStatus.Approved && permission.Period.Contains(date))
-                   .SelectMany(permission => permission.Role.BusinessRoleOperationLinks.Select(link => link.Operation))
-                   .Distinct();
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Configurator.Interfaces;
-using Framework.Configurator.Models;
-using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
@@ -16,9 +14,5 @@ public class GetOperationsHandler : BaseReadHandler, IGetOperationsHandler
             this.authorizationBllContext = authorizationBllContext;
 
     protected override object GetData(HttpContext context)
-        => this.authorizationBllContext.Authorization.Logics.OperationFactory.Create(BLLSecurityMode.View)
-               .GetSecureQueryable()
-               .Select(o => new OperationDto { Id = o.Id, Name = o.Name, Description = o.Description })
-               .OrderBy(o => o.Name)
-               .ToList();
+        => new List<string>();
 }

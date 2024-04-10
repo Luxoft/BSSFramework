@@ -5,8 +5,8 @@ using System.ServiceModel;
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.Projection;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -114,7 +114,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
     {
         if (this.RequiredSecurity)
         {
-            return this.IsEdit ? BLLSecurityMode.Edit : BLLSecurityMode.View;
+            return this.IsEdit ? SecurityRule.Edit : SecurityRule.View;
         }
         else
         {
@@ -198,13 +198,12 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         return bllRef.ToVariableDeclarationStatement(varName, bllCreateExpr);
     }
 
-    protected CodeExpression GetConvertToSecurityOperationCodeParameterExpression(CodeExpression evaluateDataExpr, int parameterIndex)
+    protected CodeExpression GetConvertToSecurityRuleCodeParameterExpression(CodeExpression evaluateDataExpr, int parameterIndex)
     {
         return evaluateDataExpr.GetContext()
-                               .ToPropertyReference((IAuthorizationBLLContextContainer<object> context) => context.Authorization)
-                               .ToPropertyReference("SecurityOperationParser")
+                               .ToPropertyReference("SecurityRuleParser")
+                               .ToMethodReferenceExpression("Parse", this.DomainType.GetProjectionSourceTypeOrSelf().ToTypeReference())
                                .ToMethodInvokeExpression(
-                                   "Parse",
                                    this.Parameters[parameterIndex]
                                        .Pipe(v => v.Type.BaseType == nameof(String)
                                                       ? (CodeExpression)v.ToVariableReferenceExpression()

@@ -1,15 +1,15 @@
 ﻿namespace Framework.Security;
 
 [AttributeUsage(AttributeTargets.Field)]
-public abstract class ApproveOperationAttribute : Attribute
+public abstract class ApproveRuleAttribute : Attribute
 {
-    public readonly Enum Operation;
+    public readonly Enum Rule;
 
 
-    protected ApproveOperationAttribute(Enum operation)
+    protected ApproveRuleAttribute(Enum rule)
     {
-        if (operation == null) throw new ArgumentNullException(nameof(operation));
+        if (rule == null) throw new ArgumentNullException(nameof(rule));
 
-        this.Operation = operation;
+        this.Rule = rule;
     }
 }

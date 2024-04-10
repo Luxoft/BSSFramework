@@ -40,7 +40,7 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
 
         if (this.Configuration.GenerateAuthServices)
         {
-            yield return new SecurityOperationHelperFileFactory<TConfiguration>(this.Configuration);
+            yield return new SecurityRuleHelperFileFactory<TConfiguration>(this.Configuration);
 
             yield return new RootSecurityServiceFileFactory<TConfiguration>(this.Configuration);
             yield return new RootSecurityServiceBaseFileFactory<TConfiguration>(this.Configuration);

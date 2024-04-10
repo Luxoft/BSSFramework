@@ -71,9 +71,9 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Disabled, typeof(Repository<>));
-        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.View, typeof(ViewRepository<>));
-        services.AddKeyedScoped(typeof(IRepository<>), BLLSecurityMode.Edit, typeof(EditRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Disabled), typeof(Repository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.View), typeof(ViewRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Edit), typeof(EditRepository<>));
 
         services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
@@ -169,21 +169,23 @@ public static class ServiceCollectionExtensions
                        .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.
                            SecurityExpressionBuilderFactory<Guid>>()
 
-                       .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>()
 
-                       .AddSingleton<ISecurityOperationParser<Guid>, SecurityOperationParser<Guid>>()
-                       .AddSingletonFrom<ISecurityOperationParser, ISecurityOperationParser<Guid>>()
+                       .AddSingleton<SecurityModeExpander>()
+                       .AddSingleton<SecurityOperationExpander>()
+                       .AddSingleton<SecurityRoleExpander>()
 
-                       .AddScoped<IOperationDomainService, OperationDomainService>()
+                       .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
+
+                       .AddSingleton<ISecurityRoleParser, SecurityRoleParser>()
+
                        .AddScoped<IBusinessRoleDomainService, BusinessRoleDomainService>()
 
-                       .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
+                       .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
 
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 
                        .AddSingleton<InitializeSettings>()
                        .AddScoped<IAuthorizationEntityTypeInitializer, AuthorizationEntityTypeInitializer>()
-                       .AddScoped<IAuthorizationOperationInitializer, AuthorizationOperationInitializer>()
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
@@ -210,13 +212,8 @@ public static class ServiceCollectionExtensions
                                              .SetEdit(AuthorizationSecurityOperation.BusinessRoleEdit)
                                              .SetCustomService<AuthorizationBusinessRoleSecurityService>())
 
-                                   .Add<Operation>(
-                                       b => b.SetView(AuthorizationSecurityOperation.OperationView)
-                                             .SetEdit(AuthorizationSecurityOperation.OperationEdit)
-                                             .SetCustomService<AuthorizationOperationSecurityService>())
-
                                    .Add<EntityType>(
-                                       b => b.SetView(AuthorizationSecurityOperation.Disabled)));
+                                       b => b.SetView(SecurityRule.Disabled)));
     }
 
     public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
@@ -242,6 +239,6 @@ public static class ServiceCollectionExtensions
                                              .SetEdit(ConfigurationSecurityOperation.TargetSystemEdit))
 
                                    .Add<DomainType>(
-                                       b => b.SetView(ConfigurationSecurityOperation.Disabled)));
+                                       b => b.SetView(SecurityRule.Disabled)));
     }
 }

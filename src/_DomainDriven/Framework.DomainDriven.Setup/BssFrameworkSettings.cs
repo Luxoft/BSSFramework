@@ -12,13 +12,9 @@ namespace Framework.DomainDriven.Setup;
 
 public class BssFrameworkSettings : IBssFrameworkSettings
 {
-    public List<Type> SecurityOperationTypes { get; set; } = new();
-
     public List<Type> SecurityRoleTypes { get; set; } = new();
 
     public List<Type> NamedLockTypes { get; set; } = new();
-
-    public bool RegisterBaseSecurityOperationTypes { get; set; } = true;
 
     public bool RegisterBaseNamedLockTypes { get; set; } = true;
 
@@ -33,12 +29,9 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public Type DomainObjectEventMetadataType { get; private set; }
 
 
-    public IBssFrameworkSettings AddSecurityOperationType(Type securityOperationType)
-    {
-        this.SecurityOperationTypes.Add(securityOperationType);
+    public SecurityRole AdministratorRole { get; private set; }
 
-        return this;
-    }
+    public SecurityRole SystemIntegrationRole { get; private set; }
 
     public IBssFrameworkSettings AddSecurityRoleTypeType(Type securityRoleType)
     {
@@ -102,6 +95,20 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         where T : IDomainObjectEventMetadata
     {
         this.DomainObjectEventMetadataType = typeof(T);
+
+        return this;
+    }
+
+    public IBssFrameworkSettings SetAdministratorRole(SecurityRole securityRole)
+    {
+        this.AdministratorRole = securityRole;
+
+        return this;
+    }
+
+    public IBssFrameworkSettings SetSystemIntegrationRole(SecurityRole securityRole)
+    {
+        this.SystemIntegrationRole = securityRole;
 
         return this;
     }

@@ -19,7 +19,6 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                    settings =>
                    {
                        settings
-                           .AddSecurityOperationType(typeof(SampleSystemSecurityOperation))
                            .AddSecurityRoleTypeType(typeof(SampleSystemSecurityRole))
                            .AddNamedLockType(typeof(SampleSystemNamedLock))
 
@@ -28,14 +27,16 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                            .AddSecurityContext<ManagementUnit>(new Guid("77E78AEF-9512-46E0-A33D-AAE58DC7E18C"))
                            .AddSecurityContext<Employee>(new Guid("B3F2536E-27C4-4B91-AE0B-0EE2FFD4465F"), displayFunc: employee => employee.Login)
 
+                           .SetAdministratorRole(SampleSystemSecurityRole.Administrator)
+                           .SetSystemIntegrationRole(SampleSystemSecurityRole.SystemIntegration)
+
                            .AddDomainSecurityServices()
 
                            .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 
                            .AddListener<SubscriptionDALListener>()
 
-                           .AddListener<ExampleFaultDALListener>(true)
-                           .AddListener<ExamplePermissionWorkflowDALListener>();
+                           .AddListener<ExampleFaultDALListener>(true);
                    })
 
                .RegisterLegacyGeneralBssFramework()

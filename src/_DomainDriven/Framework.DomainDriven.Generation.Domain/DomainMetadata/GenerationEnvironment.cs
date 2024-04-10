@@ -50,7 +50,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
     protected virtual string ProjectionNamespace => $"{this.PersistentDomainObjectBaseType.GetNamespacePrefix()}.Domain.Projections";
 
-    public abstract Type SecurityOperationType { get; }
+    public virtual IReadOnlyList<Type> SecurityRuleTypeList { get; } = new List<Type>();
 
     public abstract Type OperationContextType { get; }
 

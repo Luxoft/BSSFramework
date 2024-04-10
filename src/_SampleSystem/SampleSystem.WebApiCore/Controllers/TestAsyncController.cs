@@ -30,7 +30,7 @@ public class TestAsyncController : ControllerBase
     [HttpPost(nameof(AsyncGetLocations))]
     public async Task<List<LocationSimpleDTO>> AsyncGetLocations(CancellationToken cancellationToken = default)
     {
-        var bll = this.buFactory.Create(BLLSecurityMode.View);
+        var bll = this.buFactory.Create(SecurityRule.View);
 
         var list = await bll.GetSecureQueryable().ToListAsync(cancellationToken);
 
@@ -40,7 +40,7 @@ public class TestAsyncController : ControllerBase
     [HttpPost(nameof(AsyncSaveLocation))]
     public async Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
     {
-        var bll = this.buFactory.Create(BLLSecurityMode.Edit);
+        var bll = this.buFactory.Create(SecurityRule.Edit);
 
         var bu = businessUnitStrictDTO.ToDomainObject(this.mappingService, true);
 

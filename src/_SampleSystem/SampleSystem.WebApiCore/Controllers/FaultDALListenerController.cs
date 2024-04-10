@@ -23,7 +23,7 @@ public class FaultDALListenerController : ControllerBase
     public FaultDALListenerController(ExampleFaultDALListener listener, IRepositoryFactory<NoSecurityObject> repositoryFactory)
     {
         this.listener = listener;
-        this.repository = repositoryFactory.Create(BLLSecurityMode.Disabled);
+        this.repository = repositoryFactory.Create(SecurityRule.Disabled);
     }
 
     [HttpPost(nameof(TestFault))]

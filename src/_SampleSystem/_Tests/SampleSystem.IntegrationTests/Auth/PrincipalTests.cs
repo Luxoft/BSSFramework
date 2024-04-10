@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 
-using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -40,7 +39,6 @@ public class PrincipalTests : TestBase
         permissionSimple.Active.Should().BeTrue();
         permissionSimple.CreatedBy.Should().Be(currentUser.Login.ToString());
         permissionSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
-        permissionSimple.Status.Should().Be(PermissionStatus.Approved);
     }
 
     [TestMethod]

@@ -7,9 +7,23 @@ namespace Framework.Security;
 
 public static class TypeExtensions
 {
-    internal static SecurityOperation GetSecurityOperation(this Type securityOperationType, string name)
+    internal static SecurityRule GetSecurityRule(this Type securityRuleType, string name)
     {
-        return (SecurityOperation)securityOperationType.GetProperty(name)!.GetValue(null);
+        switch (securityRuleType.GetProperty(name)!.GetValue(null))
+        {
+            case SecurityRule securityRule:
+                return securityRule;
+
+            case SecurityRole securityRole:
+                return securityRole;
+
+            case SecurityOperation securityOperation:
+                return securityOperation;
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(name));
+
+        }
     }
 
     public static Type GetDependencySecuritySourceType(this Type type, bool recurse)
@@ -52,7 +66,7 @@ public static class TypeExtensions
         return sourceType.GetSecurityNodeInterfaces().Where(interfaceType => interfaceType.IsGenericType);
     }
 
-    public static Dictionary<Type, ReadOnlyCollection<SecurityOperation>> GetTypesWithSecondarySecurityOperations(this IEnumerable<Type> source)
+    public static Dictionary<Type, ReadOnlyCollection<SecurityRule>> GetTypesWithSecondarySecurityRules(this IEnumerable<Type> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -60,15 +74,15 @@ public static class TypeExtensions
 
                       let attr = type.GetViewDomainObjectAttribute()
 
-                      where attr != null && attr.SecondaryOperations.Any()
+                      where attr != null && attr.SecondaryRules.Any()
 
                       select new
                              {
                                      Type = type,
 
-                                     Operations = attr.AllOperations.ToReadOnlyCollection()
+                                     Rules = attr.AllRules.ToReadOnlyCollection()
                              };
 
-        return request.ToDictionary(pair => pair.Type, pair => pair.Operations);
+        return request.ToDictionary(pair => pair.Type, pair => pair.Rules);
     }
 }

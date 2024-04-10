@@ -11,8 +11,6 @@ using Framework.DomainDriven.Tracking;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
-using System;
-
 public interface ITestBLLContext : IBLLBaseContext, ITrackingServiceContainer<PersistentDomainObjectBase>
 {
 

@@ -13,7 +13,7 @@ public class NamedLockService : INamedLockService
 {
     private readonly IRepository<GenericNamedLock> namedLockRepository;
 
-    public NamedLockService([FromKeyedServices(BLLSecurityMode.Disabled)]IRepository<GenericNamedLock> namedLockRepository)
+    public NamedLockService([FromKeyedServices(nameof(SecurityRule.Disabled))]IRepository<GenericNamedLock> namedLockRepository)
     {
         this.namedLockRepository = namedLockRepository;
     }

@@ -2,6 +2,7 @@
 using Framework.Core;
 using Framework.DomainDriven.WebApiNetCore.Integration;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,10 @@ public class IntegrationController : IntegrationSchemaControllerBase
 {
     public IntegrationController(
         IAuthorizationSystem authorizationSystem,
+        SystemIntegrationRoleInfo systemIntegrationRoleInfo,
         TimeProvider timeProvider,
         IEventXsdExporter2 eventXsdExporter)
-        : base(authorizationSystem, timeProvider, eventXsdExporter)
+        : base(authorizationSystem, systemIntegrationRoleInfo, timeProvider, eventXsdExporter)
     {
     }
 

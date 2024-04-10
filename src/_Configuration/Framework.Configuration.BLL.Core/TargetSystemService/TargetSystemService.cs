@@ -9,8 +9,6 @@ using Framework.Events;
 using Framework.Notification;
 using Framework.Persistent;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.Configuration.BLL;
 
 public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : TargetSystemService<TBLLContext>, IPersistentTargetSystemService

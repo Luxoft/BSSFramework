@@ -113,16 +113,6 @@ public static class CoreEnumerableExtensions
         newItems.Foreach(source.Add);
     }
 
-    public static IEnumerable<T> GetAllElements<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getChildFunc)
-    {
-        if (null == getChildFunc)
-        {
-            throw new ArgumentNullException(nameof(getChildFunc));
-        }
-
-        return source.SelectMany(child => child.GetAllElements(getChildFunc));
-    }
-
     public static IEnumerable<T> Skip<T>(this IEnumerable<T> source, T expectedElement, bool raiseIfNotEquals = false)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

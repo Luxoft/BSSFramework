@@ -1,5 +1,5 @@
-﻿using Framework.Authorization.SecuritySystem;
-using Framework.Core;
+﻿using Framework.Core;
+using Framework.SecuritySystem;
 
 namespace Automation.Utils;
 

@@ -12,7 +12,7 @@ public class BusinessRoleDomainService : IBusinessRoleDomainService
 {
     private readonly IRepository<BusinessRole> businessRoleRepository;
 
-    public BusinessRoleDomainService([FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<BusinessRole> businessRoleRepository)
+    public BusinessRoleDomainService([FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository)
     {
         this.businessRoleRepository = businessRoleRepository;
     }

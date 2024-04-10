@@ -9,7 +9,7 @@ namespace Framework.SecuritySystem.Providers.Operation
     /// <typeparam name="TDomainObject"></typeparam>
     public class ContextSecurityPathProvider<TDomainObject> : ISecurityProvider<TDomainObject>
     {
-        private readonly SecurityOperation securityOperation;
+        private readonly SecurityRule.DomainObjectSecurityRule securityRule;
 
         private readonly Lazy<Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>>> injectFilterFunc;
 
@@ -20,17 +20,16 @@ namespace Framework.SecuritySystem.Providers.Operation
 
         public ContextSecurityPathProvider(
             SecurityPath<TDomainObject> securityPathBase,
-            SecurityOperation securityOperation,
+            SecurityRule.DomainObjectSecurityRule securityRule,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
         {
             if (securityPathBase == null) throw new ArgumentNullException(nameof(securityPathBase));
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
-            this.securityOperation = securityOperation;
+            this.securityRule = securityRule ?? throw new ArgumentNullException(nameof(securityRule));
 
             this.securityExpressionBuilder = securityExpressionBuilderFactory.CreateBuilder(securityPathBase);
 
-            this.lazyFilter = LazyHelper.Create(() => this.securityExpressionBuilder.GetFilter(securityOperation));
+            this.lazyFilter = LazyHelper.Create(() => this.securityExpressionBuilder.GetFilter(securityRule));
             this.injectFilterFunc = LazyHelper.Create(() => this.lazyFilter.Value.InjectFunc);
         }
 
@@ -56,7 +55,7 @@ namespace Framework.SecuritySystem.Providers.Operation
             {
                 return new AccessResult.AccessDeniedResult
                        {
-                           SecurityOperation = this.securityOperation, DomainObjectInfo = (domainObject, typeof(TDomainObject))
+                           SecurityRule = this.securityRule, DomainObjectInfo = (domainObject, typeof(TDomainObject))
                        };
             }
         }

@@ -1,6 +1,5 @@
 ﻿using System.CodeDom;
 
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.ServiceModelGenerator;
 using Framework.DomainDriven.WebApiNetCore;
 

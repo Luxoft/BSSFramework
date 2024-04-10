@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;

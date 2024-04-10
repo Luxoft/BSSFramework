@@ -7,7 +7,7 @@ public interface IGenerationEnvironment : IDomainMetadata
 {
     string TargetSystemName { get; }
 
-    Type SecurityOperationType { get; }
+    IReadOnlyList<Type> SecurityRuleTypeList { get; }
 
     Type OperationContextType { get; }
 

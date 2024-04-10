@@ -4,11 +4,11 @@ using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
-public class DefaultServerDomainObjectSecurityOperationCodeFileFactory<TConfiguration> : DomainObjectSecurityOperationCodeFileFactory<TConfiguration>
+public class DefaultServerDomainObjectSecurityRuleCodeFileFactory<TConfiguration> : DomainObjectSecurityRuleCodeFileFactory<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultServerDomainObjectSecurityOperationCodeFileFactory(TConfiguration configuration, Type domainType, IEnumerable<SecurityOperation> securityOperations)
-            : base(configuration, domainType, securityOperations)
+    public DefaultServerDomainObjectSecurityRuleCodeFileFactory(TConfiguration configuration, Type domainType, IEnumerable<SecurityRule> securityRules)
+            : base(configuration, domainType, securityRules)
     {
     }
 

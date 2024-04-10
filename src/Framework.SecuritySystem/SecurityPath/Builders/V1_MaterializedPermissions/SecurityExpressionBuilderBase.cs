@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using System.Reflection;
 
 using Framework.Core;
 using Framework.HierarchicalExpand;
@@ -21,9 +20,9 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityOperation securityOperation)
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityOperation);
+        return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule);
     }
 
 

@@ -13,11 +13,11 @@ public static class CustomAttributeProviderExtensions
     /// <param name="source">Источник</param>
     /// <param name="throwIfNull">Ошибка, если операция отсутствует</param>
     /// <returns></returns>
-    public static SecurityOperation GetViewSecurityOperation(this ICustomAttributeProvider source, bool throwIfNull = false)
+    public static SecurityRule GetViewSecurityRule(this ICustomAttributeProvider source, bool throwIfNull = false)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        var res = source.GetViewDomainObjectAttribute().Maybe(attr => attr.SecurityOperation);
+        var res = source.GetViewDomainObjectAttribute().Maybe(attr => attr.SecurityRule);
 
         if (res == null && throwIfNull)
         {
@@ -33,11 +33,11 @@ public static class CustomAttributeProviderExtensions
     /// <param name="source">Источник</param>
     /// <param name="throwIfNull">Ошибка, если операция отсутствует</param>
     /// <returns></returns>
-    public static SecurityOperation GetEditSecurityOperation(this ICustomAttributeProvider source, bool throwIfNull = false)
+    public static SecurityRule GetEditSecurityRule(this ICustomAttributeProvider source, bool throwIfNull = false)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        var res = source.GetEditDomainObjectAttribute().Maybe(attr => attr.SecurityOperation);
+        var res = source.GetEditDomainObjectAttribute().Maybe(attr => attr.SecurityRule);
 
         if (res == null && throwIfNull)
         {

@@ -16,7 +16,7 @@ public class GetSystemConstantsHandler : BaseReadHandler, IGetSystemConstantsHan
         this.systemConstantRepositoryFactory = systemConstantRepositoryFactory;
 
     protected override object GetData(HttpContext context) =>
-        this.systemConstantRepositoryFactory.Create(BLLSecurityMode.View)
+        this.systemConstantRepositoryFactory.Create(SecurityRule.View)
             .GetQueryable()
             .Select(
                 s => new SystemConstantDto { Id = s.Id, Name = s.Code, Description = s.Description, Value = s.Value })

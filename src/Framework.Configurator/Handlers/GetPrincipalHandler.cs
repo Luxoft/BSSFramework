@@ -24,7 +24,7 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
     }
 
     private List<PermissionDetails> GetPermissions(Guid principalId) =>
-            this.authorizationBllContext.Authorization.Logics.PermissionFactory.Create(BLLSecurityMode.View)
+            this.authorizationBllContext.Authorization.Logics.PermissionFactory.Create(SecurityRule.View)
                 .GetSecureQueryable()
                 .Where(p => p.Principal.Id == principalId)
                 .Select(

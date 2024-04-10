@@ -1,4 +1,6 @@
-﻿namespace Framework.Authorization.SecuritySystem.Initialize;
+﻿using Framework.SecuritySystem;
+
+namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public interface IAuthorizationBusinessRoleInitializer : ISecurityInitializer
 {

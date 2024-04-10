@@ -11,31 +11,10 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" unique-key="UIX_nameBusinessRole" access="field.camelcase" />
-    <set name="BusinessRoleOperationLinks" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="businessRoleId" />
-      <one-to-many class="Framework.Authorization.Domain.BusinessRoleOperationLink" />
-    </set>
     <set name="Permissions" inverse="true" access="field.camelcase" cascade="None">
       <key column="roleId" />
       <one-to-many class="Framework.Authorization.Domain.Permission" />
     </set>
-    <set name="SubBusinessRoleLinks" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="businessRoleId" />
-      <one-to-many class="Framework.Authorization.Domain.SubBusinessRoleLink" />
-    </set>
-  </class>
-  <class name="Framework.Authorization.Domain.BusinessRoleOperationLink" table="BusinessRoleOperationLink">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="IsDenormalized" column="isDenormalized" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessRole" column="businessRoleId" class="Framework.Authorization.Domain.BusinessRole" unique-key="UIX_businessRole_operationBusinessRoleOperationLink" access="field.camelcase" />
-    <many-to-one name="Operation" column="operationId" class="Framework.Authorization.Domain.Operation" unique-key="UIX_businessRole_operationBusinessRoleOperationLink" access="field.camelcase" />
   </class>
   <class name="Framework.Authorization.Domain.EntityType" table="EntityType">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
@@ -50,23 +29,6 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" access="field.camelcase" />
   </class>
-  <class name="Framework.Authorization.Domain.Operation" table="Operation">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="Description" column="description" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <many-to-one name="ApproveOperation" column="approveOperationId" class="Framework.Authorization.Domain.Operation" access="field.camelcase" />
-    <set name="Links" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="operationId" />
-      <one-to-many class="Framework.Authorization.Domain.BusinessRoleOperationLink" />
-    </set>
-  </class>
   <class name="Framework.Authorization.Domain.Permission" table="Permission">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
@@ -79,7 +41,6 @@
     <property name="IsDelegatedTo" column="isDelegatedTo" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Status" column="status" access="field.camelcase" />
     <many-to-one name="DelegatedFrom" column="delegatedFromId" class="Framework.Authorization.Domain.Permission" access="field.camelcase" />
     <many-to-one name="Principal" column="principalId" class="Framework.Authorization.Domain.Principal" access="field.camelcase" />
     <many-to-one name="Role" column="roleId" class="Framework.Authorization.Domain.BusinessRole" access="field.camelcase" />
@@ -138,17 +99,5 @@
       <key column="principalId" />
       <one-to-many class="Framework.Authorization.Domain.Permission" />
     </set>
-  </class>
-  <class name="Framework.Authorization.Domain.SubBusinessRoleLink" table="SubBusinessRoleLink">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessRole" column="businessRoleId" class="Framework.Authorization.Domain.BusinessRole" unique-key="UIX_businessRole_subBusinessRoleSubBusinessRoleLink" access="field.camelcase" />
-    <many-to-one name="SubBusinessRole" column="subBusinessRoleId" class="Framework.Authorization.Domain.BusinessRole" unique-key="UIX_businessRole_subBusinessRoleSubBusinessRoleLink" access="field.camelcase" />
   </class>
 </hibernate-mapping>

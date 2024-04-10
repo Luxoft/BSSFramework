@@ -11,26 +11,26 @@ namespace Framework.Authorization.Environment
 
         public AuthorizationBusinessRoleSecurityService(
             ISecurityProvider<BusinessRole> disabledSecurityProvider,
-            ISecurityOperationResolver securityOperationResolver,
+            ISecurityRuleExpander securityRuleExpander,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<BusinessRole> securityPath,
             IAvailablePermissionSource availablePermissionSource)
-            : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
+            : base(disabledSecurityProvider, securityRuleExpander, securityExpressionBuilderFactory, securityPath)
         {
             this.availablePermissionSource = availablePermissionSource;
         }
 
-        protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(BLLSecurityMode securityMode)
+        protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
         {
-            var baseProvider = base.CreateSecurityProvider(securityMode);
+            var baseProvider = base.CreateSecurityProvider(securityRule);
 
-            switch (securityMode)
+            if (securityRule == SecurityRule.View)
             {
-                case BLLSecurityMode.View:
-                    return baseProvider.Or(new BusinessRoleSecurityProvider<BusinessRole>(this.availablePermissionSource, v => v));
-
-                default:
-                    return baseProvider;
+                return baseProvider.Or(new BusinessRoleSecurityProvider<BusinessRole>(this.availablePermissionSource, v => v));
+            }
+            else
+            {
+                return baseProvider;
             }
         }
     }

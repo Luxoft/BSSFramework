@@ -11,26 +11,26 @@ namespace Framework.Authorization.Environment
 
         public AuthorizationPrincipalSecurityService(
             ISecurityProvider<Principal> disabledSecurityProvider,
-            ISecurityOperationResolver securityOperationResolver,
+            ISecurityRuleExpander securityRuleExpander,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<Principal> securityPath,
             IActualPrincipalSource actualPrincipalSource)
-            : base(disabledSecurityProvider, securityOperationResolver, securityExpressionBuilderFactory, securityPath)
+            : base(disabledSecurityProvider, securityRuleExpander, securityExpressionBuilderFactory, securityPath)
         {
             this.actualPrincipalSource = actualPrincipalSource;
         }
 
-        protected override ISecurityProvider<Principal> CreateSecurityProvider(BLLSecurityMode securityMode)
+        protected override ISecurityProvider<Principal> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
         {
-            var baseProvider = base.CreateSecurityProvider(securityMode);
+            var baseProvider = base.CreateSecurityProvider(securityRule);
 
-            switch (securityMode)
+            if (securityRule == SecurityRule.View)
             {
-                case BLLSecurityMode.View:
-                    return baseProvider.Or(new PrincipalSecurityProvider<Principal>(this.actualPrincipalSource, v => v));
-
-                default:
-                    return baseProvider;
+                return baseProvider.Or(new PrincipalSecurityProvider<Principal>(this.actualPrincipalSource, v => v));
+            }
+            else
+            {
+                return baseProvider;
             }
         }
     }

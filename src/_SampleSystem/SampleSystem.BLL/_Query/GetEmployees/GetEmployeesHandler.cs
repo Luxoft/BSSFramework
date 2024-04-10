@@ -9,7 +9,7 @@ public class GetEmployeesHandler : IRequestHandler<GetEmployeesQuery, GetEmploye
     private readonly IEmployeeBLL employeeBll;
 
     public GetEmployeesHandler(IEmployeeBLLFactory employeeBllFactory) =>
-            this.employeeBll = employeeBllFactory.Create(BLLSecurityMode.View);
+            this.employeeBll = employeeBllFactory.Create(SecurityRule.View);
 
     public async Task<GetEmployeesResponse[]> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
     {

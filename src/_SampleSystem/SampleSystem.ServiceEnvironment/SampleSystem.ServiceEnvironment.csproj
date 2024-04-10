@@ -5,19 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DependencyInjection\SecurityServiceMetadata\**" />
-    <EmbeddedResource Remove="DependencyInjection\SecurityServiceMetadata\**" />
-    <None Remove="DependencyInjection\SecurityServiceMetadata\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="nuSpec.NHibernate" />
-    <PackageReference Include="WorkflowCore" />
-    <PackageReference Include="WorkflowCore.Persistence.SqlServer" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,8 +18,6 @@
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup\Framework.DomainDriven.Setup.csproj" />
 
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
-
-    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.ApproveWorkflow\Framework.Authorization.ApproveWorkflow.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Notification\Framework.Authorization.Notification.csproj" />
 
     <ProjectReference Include="..\SampleSystem.BLL\SampleSystem.BLL.csproj" />

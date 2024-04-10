@@ -14,7 +14,7 @@ public abstract record AccessResult
 
     public record AccessDeniedResult : AccessResult
     {
-        public SecurityOperation SecurityOperation { get; init; }
+        public SecurityRule SecurityRule { get; init; }
 
         public string CustomMessage { get; init; }
 

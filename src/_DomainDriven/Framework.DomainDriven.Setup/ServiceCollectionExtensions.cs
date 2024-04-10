@@ -1,12 +1,10 @@
-﻿using Framework.Authorization;
-using Framework.Authorization.Notification;
-using Framework.Authorization.SecuritySystem;
-using Framework.Configuration;
+﻿using Framework.Authorization.Notification;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
+using Framework.SecuritySystem;
 using Framework.SecuritySystem.Bss;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -22,11 +20,6 @@ public static class ServiceCollectionExtensions
         setupAction?.Invoke(settings);
         settings.InitSettings();
 
-        foreach (var securityOperationType in settings.SecurityOperationTypes)
-        {
-            services.AddSingleton(new SecurityOperationTypeInfo(securityOperationType));
-        }
-
         foreach (var securityRoleType in settings.SecurityRoleTypes)
         {
             services.AddSingleton(new SecurityRoleTypeInfo(securityRoleType));
@@ -35,6 +28,16 @@ public static class ServiceCollectionExtensions
         foreach (var namedLockType in settings.NamedLockTypes)
         {
             services.AddSingleton(new NamedLockTypeInfo(namedLockType));
+        }
+
+        if (settings.AdministratorRole != null)
+        {
+            services.AddSingleton(new AdministratorRoleInfo(settings.AdministratorRole));
+        }
+
+        if (settings.SystemIntegrationRole != null)
+        {
+            services.AddSingleton(new SystemIntegrationRoleInfo(settings.SystemIntegrationRole));
         }
 
         services.AddScoped(typeof(INotificationPrincipalExtractor), settings.NotificationPrincipalExtractorType);
@@ -53,13 +56,6 @@ public static class ServiceCollectionExtensions
 
     private static void InitSettings(this BssFrameworkSettings settings)
     {
-        if (settings.RegisterBaseSecurityOperationTypes)
-        {
-            settings.SecurityOperationTypes.Add(typeof(BssSecurityOperation));
-            settings.SecurityOperationTypes.Add(typeof(AuthorizationSecurityOperation));
-            settings.SecurityOperationTypes.Add(typeof(ConfigurationSecurityOperation));
-        }
-
         if (settings.RegisterBaseNamedLockTypes)
         {
             settings.NamedLockTypes.Add(typeof(ConfigurationNamedLock));

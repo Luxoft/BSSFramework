@@ -12,7 +12,7 @@ public class CreateManagementUnitFluentMappingHandler : IRequestHandler<CreateMa
 
     public CreateManagementUnitFluentMappingHandler(
             IManagementUnitFluentMappingBLLFactory managementUnitFluentMappingBllFactory) =>
-            this.managementUnitFluentMappingBll = managementUnitFluentMappingBllFactory.Create(BLLSecurityMode.Disabled);
+            this.managementUnitFluentMappingBll = managementUnitFluentMappingBllFactory.Create(SecurityRule.Disabled);
 
     public async Task<Guid> Handle(CreateManagementUnitFluentMappingCommand request, CancellationToken cancellationToken)
     {

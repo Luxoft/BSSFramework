@@ -134,7 +134,7 @@ public static class ServiceCollectionExtensions
                                         {
                                             DomainType = type,
                                             SourceType = projectionAttr.SourceType,
-                                            CustomViewSecurityOperation = type.GetViewSecurityOperation()
+                                            CustomViewSecurityRule = type.GetViewSecurityRule()
                                         };
 
         foreach (var pair in projectionsRequest)
@@ -143,9 +143,9 @@ public static class ServiceCollectionExtensions
                 typeof(IDomainSecurityService<>).MakeGenericType(pair.DomainType),
                 typeof(UntypedDependencyDomainSecurityService<,,>).MakeGenericType(pair.DomainType, pair.SourceType, typeof(Guid)));
 
-            if (pair.CustomViewSecurityOperation != null)
+            if (pair.CustomViewSecurityRule != null)
             {
-                services.AddSingleton(new DomainObjectSecurityOperationInfo(pair.DomainType, pair.CustomViewSecurityOperation, null));
+                services.AddSingleton(new DomainObjectSecurityModeInfo(pair.DomainType, pair.CustomViewSecurityRule, null));
             }
         }
 

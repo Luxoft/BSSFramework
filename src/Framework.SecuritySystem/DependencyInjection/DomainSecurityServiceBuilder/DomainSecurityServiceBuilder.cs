@@ -11,9 +11,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 {
     private readonly List<Type> securityFunctorTypes = new ();
 
-    public SecurityOperation ViewSecurityOperation { get; private set; }
+    public SecurityRule ViewRule { get; private set; }
 
-    public SecurityOperation EditSecurityOperation { get; private set; }
+    public SecurityRule EditRule { get; private set; }
 
     public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
 
@@ -26,10 +26,10 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
     public void Register(IServiceCollection services)
     {
-        if (this.ViewSecurityOperation != null || this.EditSecurityOperation != null)
+        if (this.ViewRule != null || this.EditRule != null)
         {
             services.AddSingleton(
-                new DomainObjectSecurityOperationInfo(typeof(TDomainObject), this.ViewSecurityOperation, this.EditSecurityOperation));
+                new DomainObjectSecurityModeInfo(typeof(TDomainObject), this.ViewRule, this.EditRule));
         }
 
         services.AddSingleton(this.SecurityPath);
@@ -77,16 +77,16 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
         }
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityOperation securityOperation)
+    public IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityRule securityRule)
     {
-        this.ViewSecurityOperation = securityOperation;
+        this.ViewRule = securityRule;
 
         return this;
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityOperation securityOperation)
+    public IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityRule securityRule)
     {
-        this.EditSecurityOperation = securityOperation;
+        this.EditRule = securityRule;
 
         return this;
     }

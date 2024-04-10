@@ -96,8 +96,6 @@ public partial class PermissionBLL
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
         this.ValidatePermissionDelegated(permission, ValidatePermissonDelegateMode.All);
-
-        this.ValidateApprovingPermission(permission);
     }
 
     public void ValidatePermissionDelegated(Permission permission, ValidatePermissonDelegateMode mode)
@@ -108,31 +106,6 @@ public partial class PermissionBLL
         }
 
         this.ValidatePermissionDelegatedTo(permission, mode);
-    }
-
-    public void ValidateApprovingPermission(Permission permission)
-    {
-        if (!permission.IsNew && permission.Role.RequiredApprove && this.Context.TrackingService.GetChanges(permission).HasChange(p => p.FilterItems, p => p.Period))
-        {
-            var prevVersion = this.GetObjectsByPrevRevision(permission.Id);
-
-            if (!this.IsCorrentPeriodSubset(permission, prevVersion))
-            {
-                throw new ValidationException(
-                                              $"Permission with Approving Role can't be changed, because selected period \"{permission.Period}\" not subset of \"{prevVersion.Period}\"");
-            }
-
-            if (this.Context.TimeProvider.IsActivePeriod(permission))
-            {
-                var invalidEntityGroups = this.GetInvalidDelegatedPermissionSecurities(permission, prevVersion).ToList();
-
-                if (invalidEntityGroups.Any())
-                {
-                    throw new ValidationException(
-                                                  $"Permission with Approving Role can't be changed, because permission have no access to new object subset ({invalidEntityGroups.Join(" | ", g => $"{g.Key.Name}: {g.Value.Join(", ", s => s.Name)}")})");
-                }
-            }
-        }
     }
 
     private void ValidatePermissionDelegatedTo(Permission permission, ValidatePermissonDelegateMode mode)
@@ -149,24 +122,6 @@ public partial class PermissionBLL
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
         if (permission.DelegatedFrom == null) { throw new System.ArgumentException("is not delegated permission"); }
-
-        if (mode.HasFlag(ValidatePermissonDelegateMode.ApproveState))
-        {
-            if (permission.DelegatedFrom.Status != PermissionStatus.Approved)
-            {
-                throw new ValidationException(
-                                              $"Invalid delegated permission period. Owner Permission must have status \"{PermissionStatus.Approved}\"");
-            }
-        }
-
-        if (mode.HasFlag(ValidatePermissonDelegateMode.Role))
-        {
-            if (!permission.DelegatedFrom.Role.GetGraphElements(r => r.SubBusinessRoles).Contains(permission.Role))
-            {
-                throw new ValidationException(
-                                              $"Invalid delegated permission role. Selected role \"{permission.Role.Name}\" not derived from role \"{permission.DelegatedFrom.Role.Name}\"");
-            }
-        }
 
         if (mode.HasFlag(ValidatePermissonDelegateMode.Period))
         {
@@ -293,11 +248,6 @@ public partial class PermissionBLL
         this.Context.Validator.Validate(changePermissionDelegatesModel);
 
         var delegatedFromPermission = changePermissionDelegatesModel.DelegateFromPermission;
-
-        if (delegatedFromPermission.Status != PermissionStatus.Approved)
-        {
-            throw new BusinessLogicException($"Source permission ({delegatedFromPermission.Principal.Name}) must be {PermissionStatus.Approved}");
-        }
 
         var currentDelegatedToPermissions = delegatedFromPermission.DelegatedTo.ToList();
 

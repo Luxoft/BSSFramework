@@ -1,6 +1,6 @@
 ﻿using Automation.Utils;
 
-using Framework.Authorization.SecuritySystem;
+using Framework.SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

@@ -9,13 +9,9 @@ namespace Framework.DomainDriven.Setup;
 
 public interface IBssFrameworkSettings
 {
-    bool RegisterBaseSecurityOperationTypes { get; set; }
-
     bool RegisterBaseNamedLockTypes { get; set; }
 
     bool RegisterDenormalizeHierarchicalDALListener { get; set; }
-
-    IBssFrameworkSettings AddSecurityOperationType(Type securityOperationType);
 
     IBssFrameworkSettings AddSecurityRoleTypeType(Type securityRoleType);
 
@@ -38,4 +34,8 @@ public interface IBssFrameworkSettings
 
     IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
+
+    IBssFrameworkSettings SetAdministratorRole(SecurityRole securityRole);
+
+    IBssFrameworkSettings SetSystemIntegrationRole(SecurityRole securityRole);
 }

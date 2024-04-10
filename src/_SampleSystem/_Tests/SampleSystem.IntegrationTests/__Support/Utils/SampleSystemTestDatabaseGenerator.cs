@@ -3,13 +3,9 @@ using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 using Framework.DomainDriven.DBGenerator;
 
-using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.DbGenerate;
 using SampleSystem.IntegrationTests.__Support;
 using SampleSystem.IntegrationTests.__Support.TestData;
-using SampleSystem.ServiceEnvironment;
-
-using WorkflowCore.Interface;
 
 namespace SampleSystem.IntegrationTests.Support.Utils;
 
@@ -56,22 +52,8 @@ public class SampleSystemTestDatabaseGenerator : TestDatabaseGenerator
         CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.Main.ConnectionString, @"__Support/Scripts/Authorization", this.DatabaseContext.Main.DatabaseName);
         CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.Main.ConnectionString,@"__Support/Scripts/Configuration", this.DatabaseContext.Main.DatabaseName);
 
-        this.GenerateWorkflowCoreDataBase();
-
         CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.Main.ConnectionString,@"__Support/Scripts/SampleSystem", this.DatabaseContext.Main.DatabaseName);
 
         new BssFluentMigrator(this.DatabaseContext.Main.ConnectionString, typeof(InitNumberInDomainObjectEventMigration).Assembly).Migrate();
-    }
-
-    private void GenerateWorkflowCoreDataBase()
-    {
-        var serviceProvider = new ServiceCollection()
-                              .RegisterPureWorkflowCore(this.DatabaseContext.Main.ConnectionString)
-                              .BuildServiceProvider();
-
-        var workflowHost = serviceProvider.GetRequiredService<IWorkflowHost>();
-
-        workflowHost.Start();
-        workflowHost.Stop();
     }
 }

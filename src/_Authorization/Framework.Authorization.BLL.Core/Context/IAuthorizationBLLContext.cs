@@ -3,7 +3,6 @@ using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
@@ -28,9 +27,9 @@ public partial interface IAuthorizationBLLContext :
 
     IAvailablePermissionSource AvailablePermissionSource { get; }
 
-    IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
+    IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
 
-    ISecurityOperationParser<Guid> SecurityOperationParser { get; }
+    ISecurityRoleParser SecurityRoleParser { get; }
 
     TimeProvider TimeProvider { get; }
 

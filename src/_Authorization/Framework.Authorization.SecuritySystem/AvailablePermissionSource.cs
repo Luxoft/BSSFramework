@@ -18,24 +18,33 @@ public class AvailablePermissionSource : IAvailablePermissionSource
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
+    private readonly ISecurityRuleExpander securityRuleExpander;
+
     public AvailablePermissionSource(
-        [FromKeyedServices(BLLSecurityMode.Disabled)] IRepository<Permission> permissionRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Permission> permissionRepository,
         TimeProvider timeProvider,
         IActualPrincipalSource actualPrincipalSource,
-        IUserAuthenticationService userAuthenticationService)
+        IUserAuthenticationService userAuthenticationService,
+        ISecurityRuleExpander securityRuleExpander)
     {
         this.permissionRepository = permissionRepository;
         this.timeProvider = timeProvider;
         this.actualPrincipalSource = actualPrincipalSource;
         this.userAuthenticationService = userAuthenticationService;
+        this.securityRuleExpander = securityRuleExpander;
     }
 
-    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, Guid securityOperationId = default, bool applyCurrentUser = true)
+    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, SecurityRule.DomainObjectSecurityRule? securityRule = null, bool applyCurrentUser = true)
     {
+        var securityRoleIdents =
+            securityRule == null
+                ? null
+                : this.securityRuleExpander.FullExpand(securityRule).SecurityRoles.ToList(sr => sr.Id);
+
         var filter = new AvailablePermissionFilter(this.timeProvider.GetToday())
                      {
                          PrincipalName = applyCurrentUser ? withRunAs ? this.actualPrincipalSource.ActualPrincipal.Name : this.userAuthenticationService.GetUserName() : null,
-                         SecurityOperationId = securityOperationId
+                         SecurityRoleIdents = securityRoleIdents
                      };
 
         return this.GetAvailablePermissionsQueryable(filter);

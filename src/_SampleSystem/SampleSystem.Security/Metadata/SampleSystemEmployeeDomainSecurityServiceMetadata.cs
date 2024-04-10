@@ -12,7 +12,7 @@ public class SampleSystemEmployeeDomainSecurityServiceMetadata : IDomainSecurity
 
     public SampleSystemEmployeeDomainSecurityServiceMetadata(IActualPrincipalSource actualPrincipalSource) => this.actualPrincipalSource = actualPrincipalSource;
 
-    public ISecurityProvider<Employee> OverrideSecurityProvider(ISecurityProvider<Employee> baseProvider, SecurityRule securityRule)
+    public ISecurityProvider<Employee> OverrideSecurityProvider(ISecurityProvider<Employee> baseProvider, SecurityRule.OperationSecurityRule securityRule)
     {
         if (securityRule == SampleSystemSecurityOperation.EmployeeView)
         {

@@ -3,7 +3,6 @@ using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 using Framework.DomainDriven.DBGenerator;
 
-using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.DbGenerate;
 using SampleSystem.IntegrationTests.__Support;
 using SampleSystem.IntegrationTests.__Support.TestData;

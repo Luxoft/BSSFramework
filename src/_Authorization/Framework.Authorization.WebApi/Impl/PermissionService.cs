@@ -2,7 +2,6 @@
 using Framework.Authorization.Environment;
 using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
-using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;

@@ -1,7 +1,5 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Configurator.Interfaces;
-using Framework.Configurator.Models;
-using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 

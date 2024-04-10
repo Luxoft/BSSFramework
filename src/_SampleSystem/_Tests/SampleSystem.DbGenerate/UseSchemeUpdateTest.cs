@@ -1,5 +1,4 @@
-﻿using Framework.Cap.Abstractions;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.NHibernate.Audit;
 

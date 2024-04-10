@@ -5,8 +5,6 @@ using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.Validation;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.Authorization.BLL;
 
 public partial class PermissionBLL

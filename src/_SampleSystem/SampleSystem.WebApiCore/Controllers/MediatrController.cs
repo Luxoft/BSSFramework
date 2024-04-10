@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 
 using MediatR;

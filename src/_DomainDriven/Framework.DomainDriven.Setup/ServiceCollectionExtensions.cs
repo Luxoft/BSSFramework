@@ -1,7 +1,4 @@
-﻿using Framework.Authorization;
-using Framework.Authorization.Notification;
-using Framework.Authorization.SecuritySystem;
-using Framework.Configuration;
+﻿using Framework.Authorization.Notification;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;

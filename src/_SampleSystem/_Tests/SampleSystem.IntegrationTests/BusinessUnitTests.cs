@@ -1,15 +1,9 @@
-﻿using System.Linq.Expressions;
-
-using Automation.ServiceEnvironment;
+﻿using Automation.ServiceEnvironment;
 using Automation.Utils;
 
 using FluentAssertions;
 
-using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

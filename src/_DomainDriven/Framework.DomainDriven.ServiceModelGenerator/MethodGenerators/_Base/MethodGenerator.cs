@@ -5,7 +5,6 @@ using System.ServiceModel;
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
 using Framework.SecuritySystem;

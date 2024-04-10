@@ -1,6 +1,5 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Generated.DTO;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.WebApi.Utils.SL;
 

@@ -5,7 +5,6 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.Integration.Remove;
 using Framework.Projection;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Bss;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 

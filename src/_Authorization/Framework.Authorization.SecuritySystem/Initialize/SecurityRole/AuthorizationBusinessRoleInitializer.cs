@@ -1,7 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
-using Framework.Persistent;
 using Framework.SecuritySystem;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Linq;

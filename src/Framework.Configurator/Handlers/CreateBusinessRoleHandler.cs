@@ -7,8 +7,6 @@ using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-using NHibernate.Linq;
-
 namespace Framework.Configurator.Handlers;
 
 public record CreateBusinessRoleHandler(

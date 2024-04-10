@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Generation;
+﻿using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
 using Framework.Projection;

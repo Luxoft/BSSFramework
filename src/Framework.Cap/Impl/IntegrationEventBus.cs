@@ -1,9 +1,6 @@
-﻿using System.Data;
-using DotNetCore.CAP;
+﻿using DotNetCore.CAP;
 
 using Framework.Cap.Abstractions;
-
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Cap.Impl;
 

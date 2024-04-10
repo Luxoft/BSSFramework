@@ -21,7 +21,7 @@ public class SecurityRoleExpander
                 var securityRoles = securityRoleSource.SecurityRoles
                                                       .Distinct()
                                                       .Where(sr => sr.Children.IsIntersected(securityRule.SecurityRoles))
-                                                      .Concat(securityRoleSource.SecurityRoles)
+                                                      .Concat(securityRule.SecurityRoles)
                                                       .Distinct()
                                                       .OrderBy(sr => sr.Name)
                                                       .ToArray();

@@ -21,6 +21,8 @@ public class SecurityRole
 
     public IReadOnlyList<SecurityRole> Children { get; init; } = new List<SecurityRole>();
 
+    public override string ToString() => this.Name;
+
     public static SecurityRole CreateAdministrator(
         Guid id,
         IEnumerable<Type> securityRoleTypes,

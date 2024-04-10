@@ -9,7 +9,21 @@ public static class TypeExtensions
 {
     internal static SecurityRule GetSecurityRule(this Type securityRuleType, string name)
     {
-        return (SecurityRule)securityRuleType.GetProperty(name)!.GetValue(null);
+        switch (securityRuleType.GetProperty(name)!.GetValue(null))
+        {
+            case SecurityRule securityRule:
+                return securityRule;
+
+            case SecurityRole securityRole:
+                return securityRole;
+
+            case SecurityOperation securityOperation:
+                return securityOperation;
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(name));
+
+        }
     }
 
     public static Type GetDependencySecuritySourceType(this Type type, bool recurse)

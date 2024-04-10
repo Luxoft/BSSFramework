@@ -15,7 +15,7 @@ namespace Framework.DomainDriven.ProjectionGenerator;
 
 internal static class CodeDomExtensions
 {
-    public static IEnumerable<CodeAttributeDeclaration> GetSecurityAttributes(this ICustomAttributeProvider source, Type securityRuleType)
+    public static IEnumerable<CodeAttributeDeclaration> GetSecurityAttributes(this ICustomAttributeProvider source, Type securityOperationType)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -25,17 +25,17 @@ internal static class CodeDomExtensions
         {
             yield return viewAttr.GetType().ToTypeReference().ToAttributeDeclaration(
 
-                viewAttr.GetViewSecurityAttributesArguments(securityRuleType).ToArray());
+                viewAttr.GetViewSecurityAttributesArguments(securityOperationType).ToArray());
         }
     }
 
-    private static IEnumerable<CodeAttributeArgument> GetViewSecurityAttributesArguments(this ViewDomainObjectAttribute viewAttr, Type securityRuleType)
+    private static IEnumerable<CodeAttributeArgument> GetViewSecurityAttributesArguments(this ViewDomainObjectAttribute viewAttr, Type securityOperationType)
     {
-        yield return new CodeAttributeArgument { Value = securityRuleType.ToTypeOfExpression() };
+        yield return new CodeAttributeArgument { Value = securityOperationType.ToTypeOfExpression() };
 
-        foreach (var secondaryRule in viewAttr.SecondaryRules)
+        foreach (var operation in viewAttr.AllRules)
         {
-            yield return new CodeAttributeArgument { Value = secondaryRule.ToString().ToPrimitiveExpression() };
+            yield return new CodeAttributeArgument { Value = operation.ToString().ToPrimitiveExpression() };
         }
     }
 
@@ -178,11 +178,11 @@ internal static class CodeDomExtensions
         if (attr == null) throw new ArgumentNullException(nameof(attr));
 
         var canInsertArrb = new CodeAttributeArgument
-                            { Name = "CanInsert", Value = attr.CanInsert.ToPrimitiveExpression() };
+        { Name = "CanInsert", Value = attr.CanInsert.ToPrimitiveExpression() };
         var canUpdateArrb = new CodeAttributeArgument
-                            { Name = "CanUpdate", Value = attr.CanUpdate.ToPrimitiveExpression() };
+        { Name = "CanUpdate", Value = attr.CanUpdate.ToPrimitiveExpression() };
 
-        return typeof(MappingPropertyAttribute).ToTypeReference().ToAttributeDeclaration(new []{ canInsertArrb, canUpdateArrb});
+        return typeof(MappingPropertyAttribute).ToTypeReference().ToAttributeDeclaration(new[] { canInsertArrb, canUpdateArrb });
     }
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this InlineBaseTypeMappingAttribute mappingAttr)

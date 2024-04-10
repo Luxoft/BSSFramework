@@ -29,7 +29,7 @@ public static class SampleSystemSecurityRole
     public static SecurityRole TestRole3 { get; } = new SecurityRole(
 
         new Guid("{B1B30E65-36BF-4ED1-9BD1-E614BA349507}"),
-        nameof(TestRole1),
+        nameof(TestRole3),
         SampleSystemSecurityOperation.EmployeeEdit);
 
     public static SecurityRole SystemIntegration { get; } = new SecurityRole(

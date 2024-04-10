@@ -38,12 +38,12 @@ public static class ServiceCollectionExtensions
             services.AddSingleton(new NamedLockTypeInfo(namedLockType));
         }
 
-        if (settings.AdministratorRole == null)
+        if (settings.AdministratorRole != null)
         {
             services.AddSingleton(new AdministratorRoleInfo(settings.AdministratorRole));
         }
 
-        if (settings.SystemIntegrationRole == null)
+        if (settings.SystemIntegrationRole != null)
         {
             services.AddSingleton(new SystemIntegrationRoleInfo(settings.SystemIntegrationRole));
         }

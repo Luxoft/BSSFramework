@@ -1,4 +1,5 @@
-﻿using Framework.Configuration;
+﻿using Framework.Authorization;
+using Framework.Configuration;
 using Framework.SecuritySystem;
 
 namespace SampleSystem.Security;
@@ -40,5 +41,6 @@ public static class SampleSystemSecurityRole
 
     public static SecurityRole Administrator { get; } = SecurityRole.CreateAdministrator(
         new Guid("d9c1d2f0-0c2f-49ab-bb0b-de13a456169e"),
-        new[] { typeof(SampleSystemSecurityRole) });
+        new[] { typeof(SampleSystemSecurityRole) },
+        new[] { typeof(AuthorizationSecurityOperation), typeof(ConfigurationSecurityOperation), typeof(SampleSystemSecurityOperation) });
 }

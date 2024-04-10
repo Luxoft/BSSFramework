@@ -31,7 +31,7 @@ public class SecurityRoleSource : ISecurityRoleSource
     {
         return from securityRoleTypeInfo in securityRoleTypeInfoList
 
-               from securityRole in SecurityRoleHelper.GetSecurityRoles(securityRoleTypeInfo.SecurityRoleType, _ => true)
+               from securityRole in securityRoleTypeInfo.SecurityRoleType.GetStaticPropertyValueList<SecurityRole>()
 
                select securityRole;
     }

@@ -1,4 +1,6 @@
-﻿namespace Framework.SecuritySystem;
+﻿using Framework.Core;
+
+namespace Framework.SecuritySystem;
 
 public class SecurityRole
 {
@@ -22,19 +24,24 @@ public class SecurityRole
     public static SecurityRole CreateAdministrator(
         Guid id,
         IEnumerable<Type> securityRoleTypes,
+        IEnumerable<Type> securityOperationTypes = null,
         string? description = null)
     {
         const string administratorRoleName = "Administrator";
 
         var children = securityRoleTypes
                        .SelectMany(
-                           securityRoleType => SecurityRoleHelper.GetSecurityRoles(
-                               securityRoleType,
-                               srName => srName != administratorRoleName))
+                           securityRoleType => securityRoleType.GetStaticPropertyValueList<SecurityRole>(srName => srName != administratorRoleName))
                        .Distinct()
                        .ToList();
 
-        return new SecurityRole(id, administratorRoleName)
+        var operations = securityOperationTypes
+                         .EmptyIfNull()
+                         .SelectMany(securityOperationType => securityOperationType.GetStaticPropertyValueList<SecurityOperation>())
+                         .Distinct()
+                         .ToArray();
+
+        return new SecurityRole(id, administratorRoleName, operations)
                {
                    Children = children,
                    Description = description

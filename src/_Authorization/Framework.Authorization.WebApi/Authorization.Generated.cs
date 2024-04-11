@@ -347,276 +347,6 @@ namespace Framework.Authorization.WebApi
     {
         
         /// <summary>
-        /// Get EntityType (FullDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullEntityType))]
-        public virtual Framework.Authorization.Generated.DTO.EntityTypeFullDTO GetFullEntityType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEntityTypeInternal(entityTypeIdentity, evaluateData));
-        }
-        
-        /// <summary>
-        /// Get EntityType (FullDTO) by name
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullEntityTypeByName))]
-        public virtual Framework.Authorization.Generated.DTO.EntityTypeFullDTO GetFullEntityTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string entityTypeName)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEntityTypeByNameInternal(entityTypeName, evaluateData));
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.EntityTypeFullDTO GetFullEntityTypeByNameInternal(string entityTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, entityTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.EntityTypeFullDTO GetFullEntityTypeInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(entityTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get full list of EntityTypes (FullDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullEntityTypes))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypes()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEntityTypesInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get EntityTypes (FullDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullEntityTypesByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEntityTypesByIdentsInternal(entityTypeIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypesByIdentsInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(entityTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get EntityTypes (FullDTO) by filter (Framework.Authorization.Domain.EntityTypeRootFilterModel)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullEntityTypesByRootFilter))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEntityTypesByRootFilterInternal(filter, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypesByRootFilterInternal(Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextTypeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get EntityType (RichDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichEntityType))]
-        public virtual Framework.Authorization.Generated.DTO.EntityTypeRichDTO GetRichEntityType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEntityTypeInternal(entityTypeIdentity, evaluateData));
-        }
-        
-        /// <summary>
-        /// Get EntityType (RichDTO) by name
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichEntityTypeByName))]
-        public virtual Framework.Authorization.Generated.DTO.EntityTypeRichDTO GetRichEntityTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string entityTypeName)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEntityTypeByNameInternal(entityTypeName, evaluateData));
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.EntityTypeRichDTO GetRichEntityTypeByNameInternal(string entityTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, entityTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.EntityTypeRichDTO GetRichEntityTypeInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(entityTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get EntityType (SimpleDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleEntityType))]
-        public virtual Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO GetSimpleEntityType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypeInternal(entityTypeIdentity, evaluateData));
-        }
-        
-        /// <summary>
-        /// Get EntityType (SimpleDTO) by name
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleEntityTypeByName))]
-        public virtual Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO GetSimpleEntityTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string entityTypeName)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypeByNameInternal(entityTypeName, evaluateData));
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO GetSimpleEntityTypeByNameInternal(string entityTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, entityTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO));
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO GetSimpleEntityTypeInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(entityTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO));
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get full list of EntityTypes (SimpleDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleEntityTypes))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypes()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypesInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get EntityTypes (SimpleDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleEntityTypesByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypesByIdentsInternal(entityTypeIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypesByIdentsInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(entityTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get EntityTypes (SimpleDTO) by filter (Framework.Authorization.Domain.EntityTypeRootFilterModel)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleEntityTypesByRootFilter))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypesByRootFilterInternal(filter, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypesByRootFilterInternal(Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextTypeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get EntityType (VisualDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualEntityType))]
-        public virtual Framework.Authorization.Generated.DTO.EntityTypeVisualDTO GetVisualEntityType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypeInternal(entityTypeIdentity, evaluateData));
-        }
-        
-        /// <summary>
-        /// Get EntityType (VisualDTO) by name
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualEntityTypeByName))]
-        public virtual Framework.Authorization.Generated.DTO.EntityTypeVisualDTO GetVisualEntityTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string entityTypeName)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypeByNameInternal(entityTypeName, evaluateData));
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.EntityTypeVisualDTO GetVisualEntityTypeByNameInternal(string entityTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, entityTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO));
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.EntityTypeVisualDTO GetVisualEntityTypeInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(entityTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO));
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get full list of EntityTypes (VisualDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualEntityTypes))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypes()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypesInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get EntityTypes (VisualDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualEntityTypesByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypesByIdentsInternal(entityTypeIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypesByIdentsInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(entityTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get EntityTypes (VisualDTO) by filter (Framework.Authorization.Domain.EntityTypeRootFilterModel)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualEntityTypesByRootFilter))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypesByRootFilterInternal(filter, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypesByRootFilterInternal(Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextTypeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
-        }
-    }
-    
-    public partial class AuthSLJsonController
-    {
-        
-        /// <summary>
         /// Get Permission (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullPermission))]
@@ -1201,6 +931,276 @@ namespace Framework.Authorization.WebApi
             principalStrict.MapToDomainObject(evaluateData.MappingService, domainObject);
             bll.Save(domainObject);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
+        }
+    }
+    
+    public partial class AuthSLJsonController
+    {
+        
+        /// <summary>
+        /// Get SecurityContextType (FullDTO) by identity
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSecurityContextType))]
+        public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO GetFullSecurityContextType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
+        }
+        
+        /// <summary>
+        /// Get SecurityContextType (FullDTO) by name
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSecurityContextTypeByName))]
+        public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO GetFullSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityContextTypeName)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
+        }
+        
+        protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO GetFullSecurityContextTypeByNameInternal(string securityContextTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
+        }
+        
+        protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO GetFullSecurityContextTypeInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get full list of SecurityContextTypes (FullDTO)
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSecurityContextTypes))]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypes()
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypesInternal(evaluateData));
+        }
+        
+        /// <summary>
+        /// Get SecurityContextTypes (FullDTO) by idents
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSecurityContextTypesByIdents))]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypesByIdentsInternal(securityContextTypeIdents, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypesByIdentsInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(securityContextTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get SecurityContextTypes (FullDTO) by filter (Framework.Authorization.Domain.SecurityContextTypeRootFilterModel)
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSecurityContextTypesByRootFilter))]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeRootFilterModelStrictDTO filter)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypesByRootFilterInternal(filter, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypesByRootFilterInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextTypeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get SecurityContextType (RichDTO) by identity
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichSecurityContextType))]
+        public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO GetRichSecurityContextType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
+        }
+        
+        /// <summary>
+        /// Get SecurityContextType (RichDTO) by name
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichSecurityContextTypeByName))]
+        public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO GetRichSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityContextTypeName)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
+        }
+        
+        protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO GetRichSecurityContextTypeByNameInternal(string securityContextTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
+        }
+        
+        protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO GetRichSecurityContextTypeInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get SecurityContextType (SimpleDTO) by identity
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSecurityContextType))]
+        public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO GetSimpleSecurityContextType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
+        }
+        
+        /// <summary>
+        /// Get SecurityContextType (SimpleDTO) by name
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSecurityContextTypeByName))]
+        public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO GetSimpleSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityContextTypeName)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
+        }
+        
+        protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO GetSimpleSecurityContextTypeByNameInternal(string securityContextTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
+        }
+        
+        protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO GetSimpleSecurityContextTypeInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get full list of SecurityContextTypes (SimpleDTO)
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSecurityContextTypes))]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypes()
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypesInternal(evaluateData));
+        }
+        
+        /// <summary>
+        /// Get SecurityContextTypes (SimpleDTO) by idents
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSecurityContextTypesByIdents))]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypesByIdentsInternal(securityContextTypeIdents, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypesByIdentsInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(securityContextTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get SecurityContextTypes (SimpleDTO) by filter (Framework.Authorization.Domain.SecurityContextTypeRootFilterModel)
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSecurityContextTypesByRootFilter))]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeRootFilterModelStrictDTO filter)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypesByRootFilterInternal(filter, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypesByRootFilterInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextTypeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get SecurityContextType (VisualDTO) by identity
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSecurityContextType))]
+        public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO GetVisualSecurityContextType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
+        }
+        
+        /// <summary>
+        /// Get SecurityContextType (VisualDTO) by name
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSecurityContextTypeByName))]
+        public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO GetVisualSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityContextTypeName)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
+        }
+        
+        protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO GetVisualSecurityContextTypeByNameInternal(string securityContextTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO));
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
+        }
+        
+        protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO GetVisualSecurityContextTypeInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO));
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get full list of SecurityContextTypes (VisualDTO)
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSecurityContextTypes))]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypes()
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypesInternal(evaluateData));
+        }
+        
+        /// <summary>
+        /// Get SecurityContextTypes (VisualDTO) by idents
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSecurityContextTypesByIdents))]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypesByIdentsInternal(securityContextTypeIdents, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypesByIdentsInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(securityContextTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get SecurityContextTypes (VisualDTO) by filter (Framework.Authorization.Domain.SecurityContextTypeRootFilterModel)
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSecurityContextTypesByRootFilter))]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeRootFilterModelStrictDTO filter)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypesByRootFilterInternal(filter, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypesByRootFilterInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            Framework.Authorization.Domain.SecurityContextTypeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        {
+            Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
     }
 }

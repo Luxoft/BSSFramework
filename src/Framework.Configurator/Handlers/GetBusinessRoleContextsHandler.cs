@@ -15,7 +15,7 @@ public class GetBusinessRoleContextsHandler : BaseReadHandler, IGetBusinessRoleC
             this.authorizationBllContext = authorizationBllContext;
 
     protected override object GetData(HttpContext context) =>
-            this.authorizationBllContext.Logics.EntityTypeFactory.Create(SecurityRule.View)
+            this.authorizationBllContext.Logics.SecurityContextTypeFactory.Create(SecurityRule.View)
                 .GetSecureQueryable()
                 .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
                 .OrderBy(r => r.Name)

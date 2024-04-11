@@ -21,7 +21,7 @@ public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGene
     public ComplexChangeMethodGenerator(MainServiceGeneratorConfiguration configuration, Type domainType, Type changeModel)
             : base(configuration, domainType, changeModel)
     {
-        this.Identity = new MethodIdentity(SampleSystemMethodIdsecurityContextType.ComplexChange, this.ModelType);
+        this.Identity = new MethodIdentity(SampleSystemMethodIdentityType.ComplexChange, this.ModelType);
     }
 
 

@@ -50,7 +50,7 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
         var result = new Dictionary<Guid, (string Context, Dictionary<Guid, string> Entities)>();
         foreach (var group in permissions.SelectMany(x => x.Contexts).GroupBy(x => x.Key, x => x.Value))
         {
-            var securityContextType = this.authorizationBllContext.Authorization.Logics.EntityType.GetById(group.Key, true);
+            var securityContextType = this.authorizationBllContext.Authorization.Logics.SecurityContextType.GetById(group.Key, true);
             var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(securityContextType)
                                .GetSecurityEntitiesByIdents(group.Distinct().ToList())
                                .ToDictionary(e => e.Id, e => e.Name);

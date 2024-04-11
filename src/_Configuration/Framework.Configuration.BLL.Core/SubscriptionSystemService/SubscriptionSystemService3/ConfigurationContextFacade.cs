@@ -33,6 +33,8 @@ public class ConfigurationContextFacade
         this.context = context;
     }
 
+    public IServiceProvider ServiceProvider => this.context.ServiceProvider;
+
     /// <summary>
     ///     Преобразует список экземпляров <see cref="IPrincipal{Guid}" /> в список экземпляров <see cref="IEmployee" />.
     /// </summary>
@@ -101,7 +103,7 @@ public class ConfigurationContextFacade
     /// <param name="domainTypeName">Имя доменного типа.</param>
     /// <returns>Экземпляр <see cref="SecurityContextType" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент domainTypeName равен null.</exception>
-    public virtual SecurityContextType GetEntityType(string domainTypeName)
+    public virtual SecurityContextType GetSecurityContextType(string domainTypeName)
     {
         if (domainTypeName == null)
         {

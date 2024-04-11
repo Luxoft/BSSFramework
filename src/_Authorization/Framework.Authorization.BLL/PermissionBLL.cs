@@ -61,39 +61,6 @@ public partial class PermissionBLL
                                        });
     }
 
-    //public void RecalculateDenormalizedItems(Permission permission)
-    //{
-    //    if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-    //    var expectedItems = from securityContextType in this.Context.Logics.EntityType.GetFullList()
-
-    //                        join filterItem in permission.Restrictions on securityContextType equals filterItem.EntityType into filterItemGroup
-
-    //                        from accessId in this.GetAccessIdents(filterItemGroup.ToArray(fi => fi.SecurityContextId))
-
-    //                        select new { EntityType = securityContextType, EntityId = accessId };
-
-    //    var mergeResult = permission.DenormalizedItems.GetMergeResult(expectedItems, di => new { di.EntityType, di.EntityId }, pair => pair);
-
-    //    permission.RemoveDetails(mergeResult.RemovingItems);
-
-    //    mergeResult.AddingItems.Foreach(pair => new DenormalizedPermissionItem(permission, pair.EntityType, pair.EntityId));
-    //}
-
-    //private IEnumerable<Guid> GetAccessIdents(Guid[] baseIdents)
-    //{
-    //    foreach (var baseIdent in baseIdents)
-    //    {
-    //        yield return baseIdent;
-    //    }
-
-    //    if (!baseIdents.Any())
-    //    {
-    //        yield return this.Context.GrandAccessIdent;
-    //    }
-    //}
-
-
     protected override void PostValidate(Permission permission, AuthorizationOperationContext operationContext)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));

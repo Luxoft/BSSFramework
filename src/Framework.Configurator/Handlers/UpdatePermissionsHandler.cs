@@ -116,10 +116,10 @@ public record UpdatePermissionsHandler(
                                       x => new { TypeId = x.SecurityContextType.Id, ObjectId = x.SecurityContextId },
                                       x => new { x.TypeId, x.ObjectId });
 
-            foreach (var filterEntityItem in mergeResult.AddingItems)
+            foreach (var permissionRestriction in mergeResult.AddingItems)
             {
                 await this.PermissionRestrictionRepositoryFactory.Create()
-                          .SaveAsync(this.CreatePermissionRestriction(item.Item1, filterEntityItem.TypeId, filterEntityItem.ObjectId),
+                          .SaveAsync(this.CreatePermissionRestriction(item.Item1, permissionRestriction.TypeId, permissionRestriction.ObjectId),
                                      cancellationToken);
             }
 

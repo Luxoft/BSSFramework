@@ -11,7 +11,7 @@ using Serilog;
 
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
-public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitializer
+public class AuthorizationSecurityContextInitializer : IAuthorizationSecurityContextInitializer
 {
     private readonly IRepository<SecurityContextType> securityContextTypeRepository;
 
@@ -21,14 +21,14 @@ public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitia
 
     private readonly InitializeSettings settings;
 
-    public AuthorizationEntityTypeInitializer(
+    public AuthorizationSecurityContextInitializer(
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> securityContextTypeRepository,
         IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
         ILogger logger,
         InitializeSettings settings)
     {
         this.securityContextInfoList = securityContextInfoList.ToList();
-        this.logger = logger.ForContext<AuthorizationEntityTypeInitializer>();
+        this.logger = logger.ForContext<AuthorizationSecurityContextInitializer>();
         this.securityContextTypeRepository = securityContextTypeRepository;
         this.settings = settings;
     }

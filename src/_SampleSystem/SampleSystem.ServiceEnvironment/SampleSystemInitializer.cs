@@ -36,7 +36,7 @@ public class SampleSystemInitializer
             DBSessionMode.Write,
             context => context.ServiceProvider.GetRequiredService<INamedLockInitializer>().Initialize().GetAwaiter().GetResult());
 
-        this.InitSecurity<IAuthorizationEntityTypeInitializer>();
+        this.InitSecurity<IAuthorizationSecurityContextInitializer>();
         this.InitSecurity<IAuthorizationBusinessRoleInitializer>();
 
         this.contextEvaluator.Evaluate(

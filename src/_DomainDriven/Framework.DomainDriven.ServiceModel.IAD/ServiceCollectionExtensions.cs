@@ -185,7 +185,7 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 
                        .AddSingleton<InitializeSettings>()
-                       .AddScoped<IAuthorizationEntityTypeInitializer, AuthorizationEntityTypeInitializer>()
+                       .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()

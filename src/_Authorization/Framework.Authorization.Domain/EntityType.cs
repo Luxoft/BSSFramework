@@ -1,7 +1,7 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
-using Framework.HierarchicalExpand;
-using Framework.SecuritySystem;
+
+using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.Domain;
 
@@ -10,42 +10,13 @@ namespace Framework.Authorization.Domain;
 /// </summary>
 /// <remarks>
 /// В коде контекст описывается следующими сущностями:
-/// <seealso cref="EntityType"/>
-/// <seealso cref="PermissionFilterEntity"/>
-/// <seealso cref="PermissionFilterItem"/>
+/// <seealso cref="SecurityContextType"/>
+/// <seealso cref="PermissionRestriction"/>
 /// Типы, в контексте которых выдаются права пользователю, записываются вручную на уровне SQL в базу конкретной системы
 /// </remarks>
 [BLLViewRole]
-public class EntityType : BaseDirectory, IEntityType<Guid>
+public class SecurityContextType : BaseDirectory, ISecurityContextType<Guid>
 {
-    private readonly bool isFilter;
-
-    private readonly bool expandable;
-
-    /// <summary>
-    /// Конструктор
-    /// </summary>
-    protected EntityType()
-    {
-    }
-
-    public EntityType(bool isFilter, bool expandable)
-    {
-        this.isFilter = isFilter;
-        this.expandable = expandable;
-    }
-
-    /// <summary>
-    /// Признак того, что доменный тип является контекстом безопасности
-    /// </summary>
-    public virtual bool IsFilter => this.isFilter;
-
-    /// <summary>
-    /// Расширение прав по дереву в зависимости от типа Expand Type
-    /// </summary>
-    /// <seealso cref="HierarchicalExpandType"/>
-    public virtual bool Expandable => this.expandable;
-
     /// <summary>
     /// Вычисляемое название доменного типа
     /// </summary>

@@ -15,9 +15,9 @@ public record UpdatePermissionsHandler(
         IRepositoryFactory<Principal> PrincipalRepositoryFactory,
         IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
         IRepositoryFactory<Permission> PermissionRepositoryFactory,
-        IRepositoryFactory<PermissionFilterItem> PermissionFilterItemRepositoryFactory,
+        IRepositoryFactory<PermissionRestriction> PermissionRestrictionRepositoryFactory,
         IRepositoryFactory<PermissionFilterEntity> PermissionFilterEntityRepositoryFactory,
-        IRepositoryFactory<EntityType> EntityTypeRepositoryFactory,
+        IRepositoryFactory<SecurityContextType> EntityTypeRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
@@ -90,9 +90,9 @@ public record UpdatePermissionsHandler(
                                                                                     cache,
                                                                                     cancellationToken);
 
-                    await this.PermissionFilterItemRepositoryFactory
+                    await this.PermissionRestrictionRepositoryFactory
                               .Create()
-                              .SaveAsync(new PermissionFilterItem(permission, filterEntity), cancellationToken);
+                              .SaveAsync(new PermissionRestriction(permission, filterEntity), cancellationToken);
                 }
             }
 
@@ -113,7 +113,7 @@ public record UpdatePermissionsHandler(
             item.Item1.Comment = item.Item2.Comment;
             item.Item1.Period = item.Item2.StartDate.ToPeriod(item.Item2.EndDate);
 
-            var mergeResult = item.Item1.FilterItems
+            var mergeResult = item.Item1.Restrictions
                                   .GetMergeResult(
                                       item.Item2.Contexts.SelectMany(
                                           x => x.Entities.Select(
@@ -122,7 +122,7 @@ public record UpdatePermissionsHandler(
                                                        TypeId = new Guid(x.Id),
                                                        ObjectId = new Guid(e)
                                                    })),
-                                      x => new { TypeId = x.EntityType.Id, ObjectId = x.Entity.EntityId },
+                                      x => new { TypeId = x.SecurityContextType.Id, ObjectId = x.Entity.EntityId },
                                       x => new { x.TypeId, x.ObjectId });
 
             foreach (var filterEntityItem in mergeResult.AddingItems)
@@ -132,9 +132,9 @@ public record UpdatePermissionsHandler(
                                                                                     filterEntityItem.ObjectId),
                                                                                 cache,
                                                                                 cancellationToken);
-                await this.PermissionFilterItemRepositoryFactory.Create()
+                await this.PermissionRestrictionRepositoryFactory.Create()
                           .SaveAsync(
-                                     new PermissionFilterItem(item.Item1, filterEntity),
+                                     new PermissionRestriction(item.Item1, filterEntity),
                                      cancellationToken);
             }
 

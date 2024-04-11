@@ -12,7 +12,7 @@ public class AuthorizationExternalSource : IAuthorizationExternalSource
 
     private readonly ISecurityContextInfoService securityContextInfoService;
 
-    private readonly IDictionaryCache<EntityType, IAuthorizationTypedExternalSource> typedCache;
+    private readonly IDictionaryCache<SecurityContextType, IAuthorizationTypedExternalSource> typedCache;
 
 
     public AuthorizationExternalSource(IServiceProvider serviceProvider, ISecurityContextInfoService securityContextInfoService)
@@ -20,17 +20,17 @@ public class AuthorizationExternalSource : IAuthorizationExternalSource
         this.serviceProvider = serviceProvider;
         this.securityContextInfoService = securityContextInfoService;
 
-        this.typedCache = new DictionaryCache<EntityType, IAuthorizationTypedExternalSource>(entityType => this.GetTypedInternal(entityType, true));
+        this.typedCache = new DictionaryCache<SecurityContextType, IAuthorizationTypedExternalSource>(entityType => this.GetTypedInternal(entityType, true));
     }
 
-    public IAuthorizationTypedExternalSource GetTyped(EntityType entityType, bool withCache = true)
+    public IAuthorizationTypedExternalSource GetTyped(SecurityContextType entityType, bool withCache = true)
     {
         if (entityType == null) throw new ArgumentNullException(nameof(entityType));
 
         return withCache ? this.typedCache[entityType] : this.GetTypedInternal(entityType, false);
     }
 
-    private IAuthorizationTypedExternalSource GetTypedInternal(EntityType entityType, bool withCache)
+    private IAuthorizationTypedExternalSource GetTypedInternal(SecurityContextType entityType, bool withCache)
     {
         if (entityType == null) throw new ArgumentNullException(nameof(entityType));
 

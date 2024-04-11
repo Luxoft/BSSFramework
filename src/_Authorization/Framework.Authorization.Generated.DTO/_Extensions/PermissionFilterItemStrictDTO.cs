@@ -2,7 +2,7 @@
 
 namespace Framework.Authorization.Generated.DTO;
 
-public partial class PermissionFilterItemStrictDTO
+public partial class PermissionRestrictionStrictDTO
 {
     [DataMember]
     public SecurityEntityIdentityDTO SecurityEntity

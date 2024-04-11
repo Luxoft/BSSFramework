@@ -136,17 +136,17 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
                let permission = permissionInfo.Permission
 
                let permissionSecurityContextItems = securityContextQ.Where(
-                   securityContext => permission.FilterItems
+                   securityContext => permission.Restrictions
                                                 .Any(
-                                                    fi => fi.EntityType.Name == typeof(TSecurityContext).Name
-                                                          && fi.ContextEntityId == securityContext.Id))
+                                                    fi => fi.SecurityContextType.Name == typeof(TSecurityContext).Name
+                                                          && fi.SecurityContextId == securityContext.Id))
 
 
                let directLevel = permissionSecurityContextItems.Where(securityContext => expandedSecIdents.Contains(securityContext.Id))
                                                                .Select(secItem => (int?)secItem.DeepLevel).Max()
                                  ?? PriorityLevels.Access_Denied
 
-               let grandLevel = grandAccess && permission.FilterItems.All(fi => fi.EntityType.Name != typeof(TSecurityContext).Name)
+               let grandLevel = grandAccess && permission.Restrictions.All(fi => fi.SecurityContextType.Name != typeof(TSecurityContext).Name)
                                     ? PriorityLevels.Grand_Access
                                     : PriorityLevels.Access_Denied
 
@@ -178,15 +178,15 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
                let permission = permissionInfo.Permission
 
                let permissionSecurityContextItems = securityContextQ.Where(
-                   securityContext => permission.FilterItems
+                   securityContext => permission.Restrictions
                                                 .Any(
-                                                    fi => fi.EntityType.Name == typeof(TSecurityContext).Name
-                                                          && fi.ContextEntityId == securityContext.Id))
+                                                    fi => fi.SecurityContextType.Name == typeof(TSecurityContext).Name
+                                                          && fi.SecurityContextId == securityContext.Id))
 
 
                let directLevel = permissionSecurityContextItems.Any(securityContext => expandedSecIdents.Contains(securityContext.Id)) ? 0 : PriorityLevels.Access_Denied
 
-               let grandLevel = grandAccess && permission.FilterItems.All(fi => fi.EntityType.Name != typeof(TSecurityContext).Name)
+               let grandLevel = grandAccess && permission.Restrictions.All(fi => fi.SecurityContextType.Name != typeof(TSecurityContext).Name)
                                     ? PriorityLevels.Grand_Access
                                     : PriorityLevels.Access_Denied
 

@@ -108,13 +108,13 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
         return this.GetNotificationPrincipalsByRoles(totalFilter);
     }
 
-    private Expression<Func<Permission, bool>> GetDirectPermissionFilter(EntityType entityType, IEnumerable<Guid> idetns, bool allowEmpty)
+    private Expression<Func<Permission, bool>> GetDirectPermissionFilter(SecurityContextType entityType, IEnumerable<Guid> idetns, bool allowEmpty)
     {
         if (entityType == null) throw new ArgumentNullException(nameof(entityType));
         if (idetns == null) throw new ArgumentNullException(nameof(idetns));
 
-        return permission => permission.FilterItems.Any(fi => fi.EntityType == entityType && idetns.Contains(fi.Entity.EntityId))
-                             || (allowEmpty && permission.FilterItems.All(fi => fi.EntityType != entityType));
+        return permission => permission.Restrictions.Any(fi => fi.SecurityContextType == entityType && idetns.Contains(fi.Entity.EntityId))
+                             || (allowEmpty && permission.Restrictions.All(fi => fi.SecurityContextType != entityType));
     }
 
     private IEnumerable<Principal> GetNotificationPrincipalsByRoles(Expression<Func<Permission, bool>> filter)

@@ -71,7 +71,7 @@ public class PrincipalWithInitTests : TestBase
                           permission.Role = authContext.Logics.BusinessRole.GetOrCreateAdminRole();
                           permission.Period = this.testPeriod;
 
-                          new PermissionFilterItem(permission) { Entity = filterEntity };
+                          new PermissionRestriction(permission) { Entity = filterEntity };
 
                           principalBll.Save(principal);
                       });
@@ -101,7 +101,7 @@ public class PrincipalWithInitTests : TestBase
                                             newPermission.Role = existsPermission.Role;
                                             newPermission.Period = this.testPeriod;
 
-                                            new PermissionFilterItem(newPermission) { Entity = existsPermission.FilterItems.Single().Entity };
+                                            new PermissionRestriction(newPermission) { Entity = existsPermission.Restrictions.Single().Entity };
 
                                             principalBll.Save(principal);
                                         });

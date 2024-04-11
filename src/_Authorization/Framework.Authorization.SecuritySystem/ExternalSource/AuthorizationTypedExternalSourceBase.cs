@@ -12,7 +12,7 @@ public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : I
 {
     private readonly IRepository<TSecurityContext> securityContextRepository;
 
-    private readonly IRepository<EntityType> entityTypeRepository;
+    private readonly IRepository<SecurityContextType> entityTypeRepository;
 
     private readonly IRepository<PermissionFilterEntity> permissionFilterEntityRepository;
 
@@ -20,7 +20,7 @@ public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : I
 
     protected AuthorizationTypedExternalSourceBase(
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<TSecurityContext> securityContextRepository,
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<EntityType> entityTypeRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> entityTypeRepository,
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
         SecurityContextInfo<TSecurityContext, Guid> securityContextInfo)
     {

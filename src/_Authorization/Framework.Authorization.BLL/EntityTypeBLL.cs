@@ -33,7 +33,7 @@ public partial class EntityTypeBLL
 
         foreach (var pair in mergeResult.AddingItems)
         {
-            this.Insert(new EntityType(true, pair.Type.IsHierarchical()) { Id = pair.Id, Name = pair.Type.Name }, pair.Id);
+            this.Insert(new SecurityContextType(true, pair.Type.IsHierarchical()) { Id = pair.Id, Name = pair.Type.Name }, pair.Id);
         }
 
         foreach (var pair in mergeResult.CombineItems)

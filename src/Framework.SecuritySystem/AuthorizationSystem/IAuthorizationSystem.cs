@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using Framework.SecuritySystem.ExternalSystem;
+
 namespace Framework.SecuritySystem;
 
 public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem

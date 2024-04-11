@@ -72,24 +72,24 @@ public class AuthPerformanceTests : TestBase
 
                                                     foreach (var genObject in genObjectSubEnumerable)
                                                     {
-                                                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.Employee.Id))
+                                                        if (!genPermission.Restrictions.Select(fi => fi.Entity.EntityId).Contains(genObject.Employee.Id))
                                                         {
-                                                            new PermissionFilterItem(genPermission, pfeCache[genObject.Employee]);
+                                                            new PermissionRestriction(genPermission, pfeCache[genObject.Employee]);
                                                         }
 
-                                                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.Location.Id))
+                                                        if (!genPermission.Restrictions.Select(fi => fi.Entity.EntityId).Contains(genObject.Location.Id))
                                                         {
-                                                            new PermissionFilterItem(genPermission, pfeCache[genObject.Location]);
+                                                            new PermissionRestriction(genPermission, pfeCache[genObject.Location]);
                                                         }
 
-                                                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.BusinessUnit.Id))
+                                                        if (!genPermission.Restrictions.Select(fi => fi.Entity.EntityId).Contains(genObject.BusinessUnit.Id))
                                                         {
-                                                            new PermissionFilterItem(genPermission, pfeCache[genObject.BusinessUnit]);
+                                                            new PermissionRestriction(genPermission, pfeCache[genObject.BusinessUnit]);
                                                         }
 
-                                                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.ManagementUnit.Id))
+                                                        if (!genPermission.Restrictions.Select(fi => fi.Entity.EntityId).Contains(genObject.ManagementUnit.Id))
                                                         {
-                                                            new PermissionFilterItem(genPermission, pfeCache[genObject.ManagementUnit]);
+                                                            new PermissionRestriction(genPermission, pfeCache[genObject.ManagementUnit]);
                                                         }
                                                     }
                                                 }

@@ -126,7 +126,7 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
             context.Authorization.Logics.PermissionFilterEntity.Save(entity);
         }
 
-        var item = new PermissionFilterItem(permission, entity);
+        var item = new PermissionRestriction(permission, entity);
     }
 
     private void RemovePermissions(string principalName)

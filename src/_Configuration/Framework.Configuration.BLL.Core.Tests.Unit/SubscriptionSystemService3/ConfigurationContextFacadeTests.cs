@@ -133,7 +133,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     {
         //Arrange
         var domainTypeName = this.Fixture.Create<string>();
-        var entityType = this.Fixture.Create<EntityType>();
+        var entityType = this.Fixture.Create<SecurityContextType>();
 
         this.authorizationContext
             .GetEntityType(domainTypeName)

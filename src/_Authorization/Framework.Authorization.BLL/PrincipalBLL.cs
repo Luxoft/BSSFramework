@@ -34,7 +34,7 @@ public partial class PrincipalBLL
             permission.RemoveDetails(removedSelfDelegatePermissions);
         }
 
-        this.PermissionFilterItemNotifyProgress(principal);
+        this.PermissionRestrictionNotifyProgress(principal);
 
         foreach (var permission in principal.Permissions)
         {
@@ -101,15 +101,15 @@ public partial class PrincipalBLL
                 trackProp.ToMergeResult().RemovingItems.Foreach(this.Context.Logics.Permission.Remove));
     }
 
-    private void PermissionFilterItemNotifyProgress(Principal principal)
+    private void PermissionRestrictionNotifyProgress(Principal principal)
     {
         if (principal == null) throw new ArgumentNullException(nameof(principal));
 
-        var filterItemBLL = this.Context.Logics.PermissionFilterItem;
+        var filterItemBLL = this.Context.Logics.PermissionRestriction;
 
         var prevFilterItems = filterItemBLL.GetListBy(filterItem => filterItem.Permission.Principal == principal);
 
-        var currentFilterItems = principal.Permissions.SelectMany(permission => permission.FilterItems).ToList();
+        var currentFilterItems = principal.Permissions.SelectMany(permission => permission.Restrictions).ToList();
 
         var mergeResult = prevFilterItems.GetMergeResult(currentFilterItems);
 

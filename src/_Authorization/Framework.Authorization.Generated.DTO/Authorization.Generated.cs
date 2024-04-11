@@ -22,7 +22,7 @@ namespace Framework.Authorization.Generated.DTO
         
         void MapBaseAuditPersistentToStrictForPermissionFilterEntity(Framework.Authorization.Generated.DTO.PermissionFilterEntityStrictDTO target, Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
-        void MapBaseAuditPersistentToStrictForPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO target, Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO currentSource);
+        void MapBaseAuditPersistentToStrictForPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO target, Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
         void MapBaseAuditPersistentToStrictForPrincipal(Framework.Authorization.Generated.DTO.PrincipalStrictDTO target, Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
@@ -34,7 +34,7 @@ namespace Framework.Authorization.Generated.DTO
         
         void MapBasePersistentToStrictForPermissionFilterEntity(Framework.Authorization.Generated.DTO.PermissionFilterEntityStrictDTO target, Framework.Authorization.Generated.DTO.BasePersistentDTO currentSource);
         
-        void MapBasePersistentToStrictForPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO target, Framework.Authorization.Generated.DTO.BasePersistentDTO currentSource);
+        void MapBasePersistentToStrictForPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO target, Framework.Authorization.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForPrincipal(Framework.Authorization.Generated.DTO.PrincipalStrictDTO target, Framework.Authorization.Generated.DTO.BasePersistentDTO currentSource);
         
@@ -58,7 +58,7 @@ namespace Framework.Authorization.Generated.DTO
         
         void MapFullToStrictForPermissionFilterEntity(Framework.Authorization.Generated.DTO.PermissionFilterEntityStrictDTO target, Framework.Authorization.Generated.DTO.PermissionFilterEntityFullDTO currentSource);
         
-        void MapFullToStrictForPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO target, Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO currentSource);
+        void MapFullToStrictForPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO target, Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO currentSource);
         
         void MapFullToStrictForPermissionRootFilterModel(Framework.Authorization.Generated.DTO.PermissionRootFilterModelStrictDTO target, Framework.Authorization.Generated.DTO.PermissionRootFilterModelFullDTO currentSource);
         
@@ -92,7 +92,7 @@ namespace Framework.Authorization.Generated.DTO
         
         void MapRichToStrictForPermissionFilterEntity(Framework.Authorization.Generated.DTO.PermissionFilterEntityStrictDTO target, Framework.Authorization.Generated.DTO.PermissionFilterEntityRichDTO currentSource);
         
-        void MapRichToStrictForPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO target, Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO currentSource);
+        void MapRichToStrictForPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO target, Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO currentSource);
         
         void MapRichToStrictForPermissionRootFilterModel(Framework.Authorization.Generated.DTO.PermissionRootFilterModelStrictDTO target, Framework.Authorization.Generated.DTO.PermissionRootFilterModelRichDTO currentSource);
         
@@ -126,7 +126,7 @@ namespace Framework.Authorization.Generated.DTO
         
         void MapSimpleToStrictForPermissionFilterEntity(Framework.Authorization.Generated.DTO.PermissionFilterEntityStrictDTO target, Framework.Authorization.Generated.DTO.PermissionFilterEntitySimpleDTO currentSource);
         
-        void MapSimpleToStrictForPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO target, Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO currentSource);
+        void MapSimpleToStrictForPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO target, Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO currentSource);
         
         void MapSimpleToStrictForPermissionRootFilterModel(Framework.Authorization.Generated.DTO.PermissionRootFilterModelStrictDTO target, Framework.Authorization.Generated.DTO.PermissionRootFilterModelSimpleDTO currentSource);
         
@@ -192,7 +192,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public virtual void MapBaseAuditPersistentToStrictForPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO target, Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO source)
+        public virtual void MapBaseAuditPersistentToStrictForPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO target, Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -269,7 +269,7 @@ namespace Framework.Authorization.Generated.DTO
             target.Id = source.Id;
         }
         
-        public virtual void MapBasePersistentToStrictForPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO target, Framework.Authorization.Generated.DTO.BasePersistentDTO source)
+        public virtual void MapBasePersistentToStrictForPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO target, Framework.Authorization.Generated.DTO.BasePersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -463,7 +463,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public virtual void MapFullToStrictForPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO target, Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO source)
+        public virtual void MapFullToStrictForPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO target, Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -703,7 +703,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             if (!object.ReferenceEquals(source.FilterItems, null))
             {
-                target.FilterItems = Framework.Core.EnumerableExtensions.ToList(source.FilterItems, permissionFilterItem => new Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO(permissionFilterItem));
+                target.FilterItems = Framework.Core.EnumerableExtensions.ToList(source.FilterItems, permissionRestriction => new Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO(permissionRestriction));
             }
         }
         
@@ -731,7 +731,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public virtual void MapRichToStrictForPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO target, Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO source)
+        public virtual void MapRichToStrictForPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO target, Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -955,7 +955,7 @@ namespace Framework.Authorization.Generated.DTO
             target.EntityId = source.EntityId;
         }
         
-        public virtual void MapSimpleToStrictForPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO target, Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO source)
+        public virtual void MapSimpleToStrictForPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO target, Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1166,7 +1166,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public class EntityTypeIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -1189,7 +1189,7 @@ namespace Framework.Authorization.Generated.DTO
             this._id = source.Id;
         }
         
-        public EntityTypeIdentityDTO(Framework.Authorization.Domain.EntityType domainObject)
+        public EntityTypeIdentityDTO(Framework.Authorization.Domain.SecurityContextType domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1261,7 +1261,7 @@ namespace Framework.Authorization.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public Framework.Authorization.Domain.EntityType ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public Framework.Authorization.Domain.SecurityContextType ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return mappingService.ToEntityType(this);
         }
@@ -1484,21 +1484,21 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterItem), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public class PermissionFilterItemIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class PermissionRestrictionIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
         
-        private static Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO EmptyField = new Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO(System.Guid.Empty);
+        private static Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO EmptyField = new Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO(System.Guid.Empty);
         
         private System.Guid _id;
         
-        public PermissionFilterItemIdentityDTO(System.Guid id)
+        public PermissionRestrictionIdentityDTO(System.Guid id)
         {
             this._id = id;
         }
         
-        public PermissionFilterItemIdentityDTO(Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO source)
+        public PermissionRestrictionIdentityDTO(Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1507,7 +1507,7 @@ namespace Framework.Authorization.Generated.DTO
             this._id = source.Id;
         }
         
-        public PermissionFilterItemIdentityDTO(Framework.Authorization.Domain.PermissionFilterItem domainObject)
+        public PermissionRestrictionIdentityDTO(Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1516,20 +1516,20 @@ namespace Framework.Authorization.Generated.DTO
             this._id = domainObject.Id;
         }
         
-        public PermissionFilterItemIdentityDTO()
+        public PermissionRestrictionIdentityDTO()
         {
         }
         
-        public PermissionFilterItemIdentityDTO(string id) : 
+        public PermissionRestrictionIdentityDTO(string id) : 
                 this(new System.Guid(id))
         {
         }
         
-        public static Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO Empty
+        public static Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO Empty
         {
             get
             {
-                return Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO.EmptyField;
+                return Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO.EmptyField;
             }
         }
         
@@ -1554,22 +1554,22 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public static bool operator !=(Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO identity1, Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO identity2)
+        public static bool operator !=(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO identity1, Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO identity2)
         {
             return !(identity1 == identity2);
         }
         
-        public static bool operator ==(Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO identity1, Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO identity2)
+        public static bool operator ==(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO identity1, Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO identity2)
         {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO)) && identity1.Equals(identity2);
+            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO)) && identity1.Equals(identity2);
         }
         
         public override bool Equals(object other)
         {
-            return !object.ReferenceEquals(other, null) && (typeof(Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO) == other.GetType()) && this.Equals(((Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO)(other)));
+            return !object.ReferenceEquals(other, null) && (typeof(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO) == other.GetType()) && this.Equals(((Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO other)
+        public bool Equals(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1579,9 +1579,9 @@ namespace Framework.Authorization.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public Framework.Authorization.Domain.PermissionFilterItem ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public Framework.Authorization.Domain.PermissionRestriction ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
-            return mappingService.ToPermissionFilterItem(this);
+            return mappingService.ToPermissionRestriction(this);
         }
         
         public override string ToString()
@@ -1871,8 +1871,8 @@ namespace Framework.Authorization.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionDirectFilterModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionFilterEntitySaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionFilterEntityRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionFilterItemSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionFilterItemRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRestrictionSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRestrictionRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRootFilterModelSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRootFilterModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO))]
@@ -3557,7 +3557,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class EntityTypeVisualDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO>
     {
@@ -3568,7 +3568,7 @@ namespace Framework.Authorization.Generated.DTO
         {
         }
         
-        public EntityTypeVisualDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.EntityType domainObject) : 
+        public EntityTypeVisualDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEntityType(domainObject, this);
@@ -3596,7 +3596,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.EntityTypeFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.EntityTypeRichDTO))]
@@ -3613,7 +3613,7 @@ namespace Framework.Authorization.Generated.DTO
         {
         }
         
-        public EntityTypeSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.EntityType domainObject) : 
+        public EntityTypeSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEntityType(domainObject, this);
@@ -3677,7 +3677,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.EntityTypeRichDTO))]
     public partial class EntityTypeFullDTO : Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO
@@ -3687,7 +3687,7 @@ namespace Framework.Authorization.Generated.DTO
         {
         }
         
-        public EntityTypeFullDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.EntityType domainObject) : 
+        public EntityTypeFullDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEntityType(domainObject, this);
@@ -3699,7 +3699,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class EntityTypeRichDTO : Framework.Authorization.Generated.DTO.EntityTypeFullDTO
     {
@@ -3708,7 +3708,7 @@ namespace Framework.Authorization.Generated.DTO
         {
         }
         
-        public EntityTypeRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.EntityType domainObject) : 
+        public EntityTypeRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEntityType(domainObject, this);
@@ -3720,9 +3720,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class EntityTypeStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.EntityType, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.EntityType>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO>
+    public partial class EntityTypeStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityContextType, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityContextType>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO>
     {
         
         private System.Guid _id;
@@ -3834,18 +3834,18 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.EntityType domainObject)
+        public void MapToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject)
         {
             mappingService.MapEntityType(this, domainObject);
         }
         
-        public Framework.Authorization.Domain.EntityType ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public Framework.Authorization.Domain.SecurityContextType ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return mappingService.ToEntityType(this);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class EntityTypeSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -3857,13 +3857,13 @@ namespace Framework.Authorization.Generated.DTO
         {
         }
         
-        public EntityTypeSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.EntityType domainObject)
+        public EntityTypeSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject)
         {
             this.EntityType = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class EntityTypeRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -3875,13 +3875,13 @@ namespace Framework.Authorization.Generated.DTO
         {
         }
         
-        public EntityTypeRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.EntityType domainObject)
+        public EntityTypeRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject)
         {
             this.EntityType = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class EntityTypeEventRichDTO
     {
@@ -3908,7 +3908,7 @@ namespace Framework.Authorization.Generated.DTO
         {
         }
         
-        public EntityTypeEventRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.EntityType domainObject)
+        public EntityTypeEventRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject)
         {
             mappingService.MapEntityType(domainObject, this);
         }
@@ -4031,7 +4031,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class EntityTypeEventSimpleDTO
     {
@@ -4058,7 +4058,7 @@ namespace Framework.Authorization.Generated.DTO
         {
         }
         
-        public EntityTypeEventSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.EntityType domainObject)
+        public EntityTypeEventSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject)
         {
             mappingService.MapEntityType(domainObject, this);
         }
@@ -4607,7 +4607,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRichDTO> _delegatedTo = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRichDTO>();
         
-        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO> _filterItems = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO>();
+        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO> _filterItems = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO>();
         
         public PermissionRichDTO()
         {
@@ -4633,7 +4633,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO> FilterItems
+        public System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO> FilterItems
         {
             get
             {
@@ -4658,7 +4658,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private string _comment;
         
-        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO> _filterItems = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO>();
+        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO> _filterItems = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO>();
         
         private System.Guid _id;
         
@@ -4758,7 +4758,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO> FilterItems
+        public System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO> FilterItems
         {
             get
             {
@@ -4887,7 +4887,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO _delegatedFromPrincipal;
         
-        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemEventRichDTO> _filterItems;
+        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO> _filterItems;
         
         private System.Guid _id;
         
@@ -4980,7 +4980,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemEventRichDTO> FilterItems
+        public System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO> FilterItems
         {
             get
             {
@@ -6183,26 +6183,26 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterItem), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO))]
-    public partial class PermissionFilterItemSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO>
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO))]
+    public partial class PermissionRestrictionSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>
     {
         
         private System.Guid _contextEntityId;
         
-        public PermissionFilterItemSimpleDTO()
+        public PermissionRestrictionSimpleDTO()
         {
         }
         
-        public PermissionFilterItemSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionFilterItem domainObject) : 
+        public PermissionRestrictionSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject) : 
                 base(mappingService, domainObject)
         {
-            mappingService.MapPermissionFilterItem(domainObject, this);
+            mappingService.MapPermissionRestriction(domainObject, this);
         }
         
-        public PermissionFilterItemSimpleDTO(string id)
+        public PermissionRestrictionSimpleDTO(string id)
         {
             this.Id = new System.Guid(id);
         }
@@ -6220,24 +6220,24 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO Identity
+        public Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO Identity
         {
             get
             {
-                return new Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO(this.Id);
+                return new Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO(this.Id);
             }
         }
         
-        public virtual Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO ToStrict()
+        public virtual Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO ToStrict()
         {
-            return new Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO(this);
+            return new Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO(this);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterItem), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO))]
-    public partial class PermissionFilterItemFullDTO : Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO))]
+    public partial class PermissionRestrictionFullDTO : Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO
     {
         
         private Framework.Authorization.Generated.DTO.PermissionFilterEntitySimpleDTO _entity;
@@ -6246,14 +6246,14 @@ namespace Framework.Authorization.Generated.DTO
         
         private Framework.Authorization.Generated.DTO.PermissionSimpleDTO _permission;
         
-        public PermissionFilterItemFullDTO()
+        public PermissionRestrictionFullDTO()
         {
         }
         
-        public PermissionFilterItemFullDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionFilterItem domainObject) : 
+        public PermissionRestrictionFullDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject) : 
                 base(mappingService, domainObject)
         {
-            mappingService.MapPermissionFilterItem(domainObject, this);
+            mappingService.MapPermissionRestriction(domainObject, this);
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -6295,114 +6295,114 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public override Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO ToStrict()
+        public override Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO ToStrict()
         {
-            return new Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO(this);
+            return new Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO(this);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterItem), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PermissionFilterItemRichDTO : Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO
+    public partial class PermissionRestrictionRichDTO : Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO
     {
         
-        public PermissionFilterItemRichDTO()
+        public PermissionRestrictionRichDTO()
         {
         }
         
-        public PermissionFilterItemRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionFilterItem domainObject) : 
+        public PermissionRestrictionRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject) : 
                 base(mappingService, domainObject)
         {
-            mappingService.MapPermissionFilterItem(domainObject, this);
+            mappingService.MapPermissionRestriction(domainObject, this);
         }
         
-        public override Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO ToStrict()
+        public override Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO ToStrict()
         {
-            return new Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO(this);
+            return new Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO(this);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterItem), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PermissionFilterItemStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionFilterItem, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionFilterItem>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO>
+    public partial class PermissionRestrictionStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionRestriction, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionRestriction>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>
     {
         
         private System.Guid _id;
         
-        public PermissionFilterItemStrictDTO()
+        public PermissionRestrictionStrictDTO()
         {
         }
         
-        public PermissionFilterItemStrictDTO(Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO source, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService mappingService) : 
-                this(((Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForPermissionFilterItem(this, source);
-        }
-        
-        public PermissionFilterItemStrictDTO(Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO source) : 
-                this(source, Framework.Authorization.Generated.DTO.AuthorizationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public PermissionFilterItemStrictDTO(Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO source, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService mappingService) : 
-                this(((Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO)(source)), mappingService)
+        public PermissionRestrictionStrictDTO(Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO source, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService mappingService) : 
+                this(((Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO)(source)), mappingService)
         {
             if (object.ReferenceEquals(mappingService, null))
             {
                 throw new System.ArgumentNullException("mappingService");
             }
-            mappingService.MapFullToStrictForPermissionFilterItem(this, source);
+            mappingService.MapRichToStrictForPermissionRestriction(this, source);
         }
         
-        public PermissionFilterItemStrictDTO(Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO source) : 
+        public PermissionRestrictionStrictDTO(Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO source) : 
                 this(source, Framework.Authorization.Generated.DTO.AuthorizationClientPrimitiveDTOMappingService.Default)
         {
         }
         
-        public PermissionFilterItemStrictDTO(Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO source, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService mappingService) : 
+        public PermissionRestrictionStrictDTO(Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO source, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService mappingService) : 
+                this(((Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapFullToStrictForPermissionRestriction(this, source);
+        }
+        
+        public PermissionRestrictionStrictDTO(Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO source) : 
+                this(source, Framework.Authorization.Generated.DTO.AuthorizationClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public PermissionRestrictionStrictDTO(Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO source, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService mappingService) : 
                 this(((Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
         {
             if (object.ReferenceEquals(mappingService, null))
             {
                 throw new System.ArgumentNullException("mappingService");
             }
-            mappingService.MapSimpleToStrictForPermissionFilterItem(this, source);
+            mappingService.MapSimpleToStrictForPermissionRestriction(this, source);
         }
         
-        public PermissionFilterItemStrictDTO(Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO source) : 
+        public PermissionRestrictionStrictDTO(Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO source) : 
                 this(source, Framework.Authorization.Generated.DTO.AuthorizationClientPrimitiveDTOMappingService.Default)
         {
         }
         
-        private PermissionFilterItemStrictDTO(Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO source, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService mappingService) : 
+        private PermissionRestrictionStrictDTO(Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO source, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService mappingService) : 
                 this(((Framework.Authorization.Generated.DTO.BasePersistentDTO)(source)), mappingService)
         {
             if (object.ReferenceEquals(mappingService, null))
             {
                 throw new System.ArgumentNullException("mappingService");
             }
-            mappingService.MapBaseAuditPersistentToStrictForPermissionFilterItem(this, source);
+            mappingService.MapBaseAuditPersistentToStrictForPermissionRestriction(this, source);
         }
         
-        private PermissionFilterItemStrictDTO(Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO source) : 
+        private PermissionRestrictionStrictDTO(Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO source) : 
                 this(source, Framework.Authorization.Generated.DTO.AuthorizationClientPrimitiveDTOMappingService.Default)
         {
         }
         
-        private PermissionFilterItemStrictDTO(Framework.Authorization.Generated.DTO.BasePersistentDTO source, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService mappingService)
+        private PermissionRestrictionStrictDTO(Framework.Authorization.Generated.DTO.BasePersistentDTO source, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService mappingService)
         {
             if (object.ReferenceEquals(mappingService, null))
             {
                 throw new System.ArgumentNullException("mappingService");
             }
-            mappingService.MapBasePersistentToStrictForPermissionFilterItem(this, source);
+            mappingService.MapBasePersistentToStrictForPermissionRestriction(this, source);
         }
         
-        private PermissionFilterItemStrictDTO(Framework.Authorization.Generated.DTO.BasePersistentDTO source) : 
+        private PermissionRestrictionStrictDTO(Framework.Authorization.Generated.DTO.BasePersistentDTO source) : 
                 this(source, Framework.Authorization.Generated.DTO.AuthorizationClientPrimitiveDTOMappingService.Default)
         {
         }
@@ -6428,64 +6428,64 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO Identity
+        public Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO Identity
         {
             get
             {
-                return new Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO(this.Id);
+                return new Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO(this.Id);
             }
         }
         
-        public void MapToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionFilterItem domainObject)
+        public void MapToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
-            mappingService.MapPermissionFilterItem(this, domainObject);
+            mappingService.MapPermissionRestriction(this, domainObject);
         }
         
-        public Framework.Authorization.Domain.PermissionFilterItem ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public Framework.Authorization.Domain.PermissionRestriction ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
-            return mappingService.ToPermissionFilterItem(this);
+            return mappingService.ToPermissionRestriction(this);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterItem), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
-    public partial class PermissionFilterItemSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
+    public partial class PermissionRestrictionSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PermissionFilterItemEventRichDTO PermissionFilterItem;
+        public Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO PermissionRestriction;
         
-        public PermissionFilterItemSaveEventDTO()
+        public PermissionRestrictionSaveEventDTO()
         {
         }
         
-        public PermissionFilterItemSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionFilterItem domainObject)
+        public PermissionRestrictionSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
-            this.PermissionFilterItem = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.PermissionRestriction = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterItem), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
-    public partial class PermissionFilterItemRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
+    public partial class PermissionRestrictionRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PermissionFilterItemEventRichDTO PermissionFilterItem;
+        public Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO PermissionRestriction;
         
-        public PermissionFilterItemRemoveEventDTO()
+        public PermissionRestrictionRemoveEventDTO()
         {
         }
         
-        public PermissionFilterItemRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionFilterItem domainObject)
+        public PermissionRestrictionRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
-            this.PermissionFilterItem = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.PermissionRestriction = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterItem), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
-    public partial class PermissionFilterItemEventRichDTO
+    public partial class PermissionRestrictionEventRichDTO
     {
         
         private bool _active;
@@ -6512,13 +6512,13 @@ namespace Framework.Authorization.Generated.DTO
         
         private Framework.Authorization.Generated.DTO.BusinessRoleEventSimpleDTO _role;
         
-        public PermissionFilterItemEventRichDTO()
+        public PermissionRestrictionEventRichDTO()
         {
         }
         
-        public PermissionFilterItemEventRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionFilterItem domainObject)
+        public PermissionRestrictionEventRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
-            mappingService.MapPermissionFilterItem(domainObject, this);
+            mappingService.MapPermissionRestriction(domainObject, this);
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -6678,9 +6678,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterItem), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
-    public partial class PermissionFilterItemEventSimpleDTO
+    public partial class PermissionRestrictionEventSimpleDTO
     {
         
         private bool _active;
@@ -6697,13 +6697,13 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _modifyDate;
         
-        public PermissionFilterItemEventSimpleDTO()
+        public PermissionRestrictionEventSimpleDTO()
         {
         }
         
-        public PermissionFilterItemEventSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionFilterItem domainObject)
+        public PermissionRestrictionEventSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
-            mappingService.MapPermissionFilterItem(domainObject, this);
+            mappingService.MapPermissionRestriction(domainObject, this);
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -9082,7 +9082,7 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.DelegateToItemModelFullDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.EntityTypeFullDTO ToFullDTO(this Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.EntityTypeFullDTO ToFullDTO(this Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return new Framework.Authorization.Generated.DTO.EntityTypeFullDTO(mappingService, domainObject);
         }
@@ -9107,9 +9107,9 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.PermissionFilterEntityFullDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO ToFullDTO(this Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO ToFullDTO(this Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
-            return new Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO(mappingService, domainObject);
+            return new Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO(mappingService, domainObject);
         }
         
         public static Framework.Authorization.Generated.DTO.PermissionRootFilterModelFullDTO ToFullDTO(this Framework.Authorization.Domain.PermissionRootFilterModel domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
@@ -9167,7 +9167,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.EntityType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SecurityContextType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
@@ -9192,7 +9192,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionFilterItem> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionRestriction> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
@@ -9232,7 +9232,7 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO(domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO ToIdentityDTO(this Framework.Authorization.Domain.EntityType domainObject)
+        public static Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO ToIdentityDTO(this Framework.Authorization.Domain.SecurityContextType domainObject)
         {
             return new Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO(domainObject);
         }
@@ -9247,9 +9247,9 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.PermissionFilterEntityIdentityDTO(domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO ToIdentityDTO(this Framework.Authorization.Domain.PermissionFilterItem domainObject)
+        public static Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO ToIdentityDTO(this Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
-            return new Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO(domainObject);
+            return new Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO(domainObject);
         }
         
         public static Framework.Authorization.Generated.DTO.PrincipalIdentityDTO ToIdentityDTO(this Framework.Authorization.Domain.Principal domainObject)
@@ -9262,7 +9262,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.EntityType> domainObjects)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SecurityContextType> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -9277,7 +9277,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionFilterItem> domainObjects)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionRestriction> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -9312,7 +9312,7 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.DelegateToItemModelRichDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.EntityTypeRichDTO ToRichDTO(this Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.EntityTypeRichDTO ToRichDTO(this Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return new Framework.Authorization.Generated.DTO.EntityTypeRichDTO(mappingService, domainObject);
         }
@@ -9337,9 +9337,9 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.PermissionFilterEntityRichDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO ToRichDTO(this Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO ToRichDTO(this Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
-            return new Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO(mappingService, domainObject);
+            return new Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO(mappingService, domainObject);
         }
         
         public static Framework.Authorization.Generated.DTO.PermissionRootFilterModelRichDTO ToRichDTO(this Framework.Authorization.Domain.PermissionRootFilterModel domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
@@ -9397,7 +9397,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.EntityType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SecurityContextType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
@@ -9422,7 +9422,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionFilterItem> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionRestriction> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
@@ -9482,7 +9482,7 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.EntityTypeEventRichDTO ToRichEventDTO(this Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.EntityTypeEventRichDTO ToRichEventDTO(this Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return new Framework.Authorization.Generated.DTO.EntityTypeEventRichDTO(mappingService, domainObject);
         }
@@ -9507,9 +9507,9 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.PermissionFilterEntityEventRichDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.PermissionFilterItemEventRichDTO ToRichEventDTO(this Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO ToRichEventDTO(this Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
-            return new Framework.Authorization.Generated.DTO.PermissionFilterItemEventRichDTO(mappingService, domainObject);
+            return new Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO(mappingService, domainObject);
         }
         
         public static Framework.Authorization.Generated.DTO.PermissionRootFilterModelEventRichDTO ToRichEventDTO(this Framework.Authorization.Domain.PermissionRootFilterModel domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
@@ -9567,7 +9567,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.EntityType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SecurityContextType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
@@ -9592,7 +9592,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionFilterItem> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionRestriction> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
@@ -9652,7 +9652,7 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.DelegateToItemModelSimpleDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO ToSimpleDTO(this Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO ToSimpleDTO(this Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return new Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO(mappingService, domainObject);
         }
@@ -9677,9 +9677,9 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.PermissionFilterEntitySimpleDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO ToSimpleDTO(this Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO ToSimpleDTO(this Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
-            return new Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO(mappingService, domainObject);
+            return new Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO(mappingService, domainObject);
         }
         
         public static Framework.Authorization.Generated.DTO.PermissionRootFilterModelSimpleDTO ToSimpleDTO(this Framework.Authorization.Domain.PermissionRootFilterModel domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
@@ -9737,7 +9737,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.EntityType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SecurityContextType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
@@ -9762,7 +9762,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionFilterItem> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionRestriction> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
@@ -9822,7 +9822,7 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.DelegateToItemModelEventSimpleDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.EntityTypeEventSimpleDTO ToSimpleEventDTO(this Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.EntityTypeEventSimpleDTO ToSimpleEventDTO(this Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return new Framework.Authorization.Generated.DTO.EntityTypeEventSimpleDTO(mappingService, domainObject);
         }
@@ -9847,9 +9847,9 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.PermissionFilterEntityEventSimpleDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.PermissionFilterItemEventSimpleDTO ToSimpleEventDTO(this Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.PermissionRestrictionEventSimpleDTO ToSimpleEventDTO(this Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
-            return new Framework.Authorization.Generated.DTO.PermissionFilterItemEventSimpleDTO(mappingService, domainObject);
+            return new Framework.Authorization.Generated.DTO.PermissionRestrictionEventSimpleDTO(mappingService, domainObject);
         }
         
         public static Framework.Authorization.Generated.DTO.PermissionRootFilterModelEventSimpleDTO ToSimpleEventDTO(this Framework.Authorization.Domain.PermissionRootFilterModel domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
@@ -9907,7 +9907,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.EntityType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SecurityContextType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
         }
@@ -9932,7 +9932,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionFilterItemEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionFilterItem> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionRestriction> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
         }
@@ -9972,7 +9972,7 @@ namespace Framework.Authorization.Generated.DTO
             return new Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO(mappingService, domainObject);
         }
         
-        public static Framework.Authorization.Generated.DTO.EntityTypeVisualDTO ToVisualDTO(this Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static Framework.Authorization.Generated.DTO.EntityTypeVisualDTO ToVisualDTO(this Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return new Framework.Authorization.Generated.DTO.EntityTypeVisualDTO(mappingService, domainObject);
         }
@@ -9987,7 +9987,7 @@ namespace Framework.Authorization.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.EntityType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
+        public static System.Collections.Generic.List<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SecurityContextType> domainObjects, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
@@ -10068,19 +10068,19 @@ namespace Framework.Authorization.Generated.DTO
         
         void MapDomainObjectBase(Framework.Authorization.Domain.DomainObjectBase domainObject, Framework.Authorization.Generated.DTO.BaseAbstractDTO mappingObject);
         
-        void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeVisualDTO mappingObject);
+        void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeVisualDTO mappingObject);
         
-        void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO mappingObject);
+        void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO mappingObject);
         
-        void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeFullDTO mappingObject);
+        void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeFullDTO mappingObject);
         
-        void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeRichDTO mappingObject);
+        void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeRichDTO mappingObject);
         
-        void MapEntityType(Framework.Authorization.Generated.DTO.EntityTypeStrictDTO mappingObject, Framework.Authorization.Domain.EntityType domainObject);
+        void MapEntityType(Framework.Authorization.Generated.DTO.EntityTypeStrictDTO mappingObject, Framework.Authorization.Domain.SecurityContextType domainObject);
         
-        void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeEventRichDTO mappingObject);
+        void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeEventRichDTO mappingObject);
         
-        void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeEventSimpleDTO mappingObject);
+        void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeEventSimpleDTO mappingObject);
         
         void MapEntityTypeRootFilterModel(Framework.Authorization.Domain.EntityTypeRootFilterModel domainObject, Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelSimpleDTO mappingObject);
         
@@ -10130,17 +10130,17 @@ namespace Framework.Authorization.Generated.DTO
         
         void MapPermissionFilterEntity(Framework.Authorization.Domain.PermissionFilterEntity domainObject, Framework.Authorization.Generated.DTO.PermissionFilterEntityEventSimpleDTO mappingObject);
         
-        void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO mappingObject);
+        void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO mappingObject);
         
-        void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO mappingObject);
+        void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO mappingObject);
         
-        void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO mappingObject);
+        void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO mappingObject);
         
-        void MapPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO mappingObject, Framework.Authorization.Domain.PermissionFilterItem domainObject);
+        void MapPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO mappingObject, Framework.Authorization.Domain.PermissionRestriction domainObject);
         
-        void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemEventRichDTO mappingObject);
+        void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO mappingObject);
         
-        void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemEventSimpleDTO mappingObject);
+        void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionEventSimpleDTO mappingObject);
         
         void MapPermissionRootFilterModel(Framework.Authorization.Domain.PermissionRootFilterModel domainObject, Framework.Authorization.Generated.DTO.PermissionRootFilterModelSimpleDTO mappingObject);
         
@@ -10232,9 +10232,9 @@ namespace Framework.Authorization.Generated.DTO
         
         Framework.Authorization.Domain.DelegateToItemModel ToDelegateToItemModel(Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO delegateToItemModelStrictDTO);
         
-        Framework.Authorization.Domain.EntityType ToEntityType(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentityDTO);
+        Framework.Authorization.Domain.SecurityContextType ToEntityType(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentityDTO);
         
-        Framework.Authorization.Domain.EntityType ToEntityType(Framework.Authorization.Generated.DTO.EntityTypeStrictDTO entityTypeStrictDTO);
+        Framework.Authorization.Domain.SecurityContextType ToEntityType(Framework.Authorization.Generated.DTO.EntityTypeStrictDTO entityTypeStrictDTO);
         
         Framework.Authorization.Domain.EntityTypeRootFilterModel ToEntityTypeRootFilterModel(Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO entityTypeRootFilterModelStrictDTO);
         
@@ -10252,11 +10252,11 @@ namespace Framework.Authorization.Generated.DTO
         
         Framework.Authorization.Domain.PermissionFilterEntity ToPermissionFilterEntity(Framework.Authorization.Generated.DTO.PermissionFilterEntityStrictDTO permissionFilterEntityStrictDTO, bool allowCreate);
         
-        Framework.Authorization.Domain.PermissionFilterItem ToPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO permissionFilterItemIdentityDTO);
+        Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO permissionRestrictionIdentityDTO);
         
-        Framework.Authorization.Domain.PermissionFilterItem ToPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO permissionFilterItemStrictDTO);
+        Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO);
         
-        Framework.Authorization.Domain.PermissionFilterItem ToPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO permissionFilterItemStrictDTO, Framework.Authorization.Domain.Permission master);
+        Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO, Framework.Authorization.Domain.Permission master);
         
         Framework.Authorization.Domain.PermissionRootFilterModel ToPermissionRootFilterModel(Framework.Authorization.Generated.DTO.PermissionRootFilterModelStrictDTO permissionRootFilterModelStrictDTO);
         
@@ -10546,31 +10546,31 @@ namespace Framework.Authorization.Generated.DTO
         {
         }
         
-        public virtual void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeVisualDTO mappingObject)
+        public virtual void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeVisualDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
         }
         
-        public virtual void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO mappingObject)
+        public virtual void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO mappingObject)
         {
             mappingObject.Expandable = domainObject.Expandable;
             mappingObject.IsFilter = domainObject.IsFilter;
             mappingObject.Name = domainObject.Name;
         }
         
-        public virtual void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeFullDTO mappingObject)
+        public virtual void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeFullDTO mappingObject)
         {
         }
         
-        public virtual void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeRichDTO mappingObject)
+        public virtual void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeRichDTO mappingObject)
         {
         }
         
-        public virtual void MapEntityType(Framework.Authorization.Generated.DTO.EntityTypeStrictDTO mappingObject, Framework.Authorization.Domain.EntityType domainObject)
+        public virtual void MapEntityType(Framework.Authorization.Generated.DTO.EntityTypeStrictDTO mappingObject, Framework.Authorization.Domain.SecurityContextType domainObject)
         {
         }
         
-        public virtual void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeEventRichDTO mappingObject)
+        public virtual void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
@@ -10583,7 +10583,7 @@ namespace Framework.Authorization.Generated.DTO
             mappingObject.Name = domainObject.Name;
         }
         
-        public virtual void MapEntityType(Framework.Authorization.Domain.EntityType domainObject, Framework.Authorization.Generated.DTO.EntityTypeEventSimpleDTO mappingObject)
+        public virtual void MapEntityType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.EntityTypeEventSimpleDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
@@ -10663,7 +10663,7 @@ namespace Framework.Authorization.Generated.DTO
         public virtual void MapPermission(Framework.Authorization.Domain.Permission domainObject, Framework.Authorization.Generated.DTO.PermissionRichDTO mappingObject)
         {
             mappingObject.DelegatedTo = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.DelegatedTo, this);
-            mappingObject.FilterItems = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.FilterItems, this);
+            mappingObject.FilterItems = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.Restrictions, this);
         }
         
         public virtual void MapPermission(Framework.Authorization.Generated.DTO.PermissionStrictDTO mappingObject, Framework.Authorization.Domain.Permission domainObject)
@@ -10671,7 +10671,7 @@ namespace Framework.Authorization.Generated.DTO
             domainObject.Comment = mappingObject.Comment;
             if (!object.ReferenceEquals(mappingObject.FilterItems, null))
             {
-                this.GetCollectionMappingService<Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO, Framework.Authorization.Domain.PermissionFilterItem>(detailDTO => this.ToPermissionFilterItem(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.PermissionFilterItem>(domainObject, detail)).Map(mappingObject.FilterItems, domainObject.FilterItems);
+                this.GetCollectionMappingService<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO, Framework.Authorization.Domain.PermissionRestriction>(detailDTO => this.ToPermissionRestriction(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.PermissionRestriction>(domainObject, detail)).Map(mappingObject.FilterItems, domainObject.Restrictions);
             }
             domainObject.Period = mappingObject.Period;
             if (!object.Equals(mappingObject.Role, default(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO)))
@@ -10698,7 +10698,7 @@ namespace Framework.Authorization.Generated.DTO
             {
                 mappingObject.DelegatedFromPrincipal = null;
             }
-            mappingObject.FilterItems = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.FilterItems, this);
+            mappingObject.FilterItems = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Restrictions, this);
             mappingObject.Id = domainObject.Id;
             mappingObject.IsDelegatedFrom = domainObject.IsDelegatedFrom;
             mappingObject.IsDelegatedTo = domainObject.IsDelegatedTo;
@@ -10857,12 +10857,12 @@ namespace Framework.Authorization.Generated.DTO
             mappingObject.ModifyDate = domainObject.ModifyDate;
         }
         
-        public virtual void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO mappingObject)
+        public virtual void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO mappingObject)
         {
-            mappingObject.ContextEntityId = domainObject.ContextEntityId;
+            mappingObject.ContextEntityId = domainObject.SecurityContextId;
         }
         
-        public virtual void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO mappingObject)
+        public virtual void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO mappingObject)
         {
             if (!object.ReferenceEquals(domainObject.Entity, null))
             {
@@ -10872,9 +10872,9 @@ namespace Framework.Authorization.Generated.DTO
             {
                 mappingObject.Entity = null;
             }
-            if (!object.ReferenceEquals(domainObject.EntityType, null))
+            if (!object.ReferenceEquals(domainObject.SecurityContextType, null))
             {
-                mappingObject.EntityType = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.EntityType, this);
+                mappingObject.EntityType = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.SecurityContextType, this);
             }
             else
             {
@@ -10890,18 +10890,18 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public virtual void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemRichDTO mappingObject)
+        public virtual void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO mappingObject)
         {
         }
         
-        public virtual void MapPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO mappingObject, Framework.Authorization.Domain.PermissionFilterItem domainObject)
+        public virtual void MapPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO mappingObject, Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
         }
         
-        public virtual void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemEventRichDTO mappingObject)
+        public virtual void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
-            mappingObject.ContextEntityId = domainObject.ContextEntityId;
+            mappingObject.ContextEntityId = domainObject.SecurityContextId;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             if (!object.ReferenceEquals(domainObject.Entity, null))
@@ -10912,9 +10912,9 @@ namespace Framework.Authorization.Generated.DTO
             {
                 mappingObject.Entity = null;
             }
-            if (!object.ReferenceEquals(domainObject.EntityType, null))
+            if (!object.ReferenceEquals(domainObject.SecurityContextType, null))
             {
-                mappingObject.EntityType = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.EntityType, this);
+                mappingObject.EntityType = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.SecurityContextType, this);
             }
             else
             {
@@ -10949,10 +10949,10 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public virtual void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemEventSimpleDTO mappingObject)
+        public virtual void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionEventSimpleDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
-            mappingObject.ContextEntityId = domainObject.ContextEntityId;
+            mappingObject.ContextEntityId = domainObject.SecurityContextId;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Id = domainObject.Id;
@@ -11389,14 +11389,14 @@ namespace Framework.Authorization.Generated.DTO
             return domainObject;
         }
         
-        public virtual Framework.Authorization.Domain.EntityType ToEntityType(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentityDTO)
+        public virtual Framework.Authorization.Domain.SecurityContextType ToEntityType(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentityDTO)
         {
-            return this.GetById<Framework.Authorization.Domain.EntityType>(entityTypeIdentityDTO.Id);
+            return this.GetById<Framework.Authorization.Domain.SecurityContextType>(entityTypeIdentityDTO.Id);
         }
         
-        public virtual Framework.Authorization.Domain.EntityType ToEntityType(Framework.Authorization.Generated.DTO.EntityTypeStrictDTO entityTypeStrictDTO)
+        public virtual Framework.Authorization.Domain.SecurityContextType ToEntityType(Framework.Authorization.Generated.DTO.EntityTypeStrictDTO entityTypeStrictDTO)
         {
-            return this.ToDomainObject<Framework.Authorization.Generated.DTO.EntityTypeStrictDTO, Framework.Authorization.Domain.EntityType>(entityTypeStrictDTO);
+            return this.ToDomainObject<Framework.Authorization.Generated.DTO.EntityTypeStrictDTO, Framework.Authorization.Domain.SecurityContextType>(entityTypeStrictDTO);
         }
         
         public virtual Framework.Authorization.Domain.EntityTypeRootFilterModel ToEntityTypeRootFilterModel(Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO entityTypeRootFilterModelStrictDTO)
@@ -11446,19 +11446,19 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        public virtual Framework.Authorization.Domain.PermissionFilterItem ToPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO permissionFilterItemIdentityDTO)
+        public virtual Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO permissionRestrictionIdentityDTO)
         {
-            return this.GetById<Framework.Authorization.Domain.PermissionFilterItem>(permissionFilterItemIdentityDTO.Id);
+            return this.GetById<Framework.Authorization.Domain.PermissionRestriction>(permissionRestrictionIdentityDTO.Id);
         }
         
-        public virtual Framework.Authorization.Domain.PermissionFilterItem ToPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO permissionFilterItemStrictDTO)
+        public virtual Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO)
         {
-            return this.ToDomainObject<Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO, Framework.Authorization.Domain.PermissionFilterItem>(permissionFilterItemStrictDTO);
+            return this.ToDomainObject<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO, Framework.Authorization.Domain.PermissionRestriction>(permissionRestrictionStrictDTO);
         }
         
-        public virtual Framework.Authorization.Domain.PermissionFilterItem ToPermissionFilterItem(Framework.Authorization.Generated.DTO.PermissionFilterItemStrictDTO permissionFilterItemStrictDTO, Framework.Authorization.Domain.Permission permission)
+        public virtual Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO, Framework.Authorization.Domain.Permission permission)
         {
-            return this.ToDomainObject(permissionFilterItemStrictDTO, () => new Framework.Authorization.Domain.PermissionFilterItem(permission));
+            return this.ToDomainObject(permissionRestrictionStrictDTO, () => new Framework.Authorization.Domain.PermissionRestriction(permission));
         }
         
         public virtual Framework.Authorization.Domain.PermissionRootFilterModel ToPermissionRootFilterModel(Framework.Authorization.Generated.DTO.PermissionRootFilterModelStrictDTO permissionRootFilterModelStrictDTO)

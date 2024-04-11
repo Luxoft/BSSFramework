@@ -2,9 +2,9 @@
 
 namespace Framework.Authorization.BLL;
 
-public partial interface IPermissionFilterItemBLL
+public partial interface IPermissionRestrictionBLL
 {
-    void NotifySave(PermissionFilterItem permissionFilterItem);
+    void NotifySave(PermissionRestriction permissionRestriction);
 
-    void NotifyRemove(PermissionFilterItem permissionFilterItem);
+    void NotifyRemove(PermissionRestriction permissionRestriction);
 }

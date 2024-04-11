@@ -83,7 +83,7 @@ public class ConfigurationContextFacade
     /// <param name="entityType">Описатель доменного типа.</param>
     /// <returns>Экземпляр <see cref="Type" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент entityType равен null.</exception>
-    public virtual Type GetSecurityType(EntityType entityType)
+    public virtual Type GetSecurityType(SecurityContextType entityType)
     {
         if (entityType == null)
         {
@@ -98,9 +98,9 @@ public class ConfigurationContextFacade
     ///     Возвращает описатель сущности в котексте которой выдаются права пользователю.
     /// </summary>
     /// <param name="domainTypeName">Имя доменного типа.</param>
-    /// <returns>Экземпляр <see cref="EntityType" />.</returns>
+    /// <returns>Экземпляр <see cref="SecurityContextType" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент domainTypeName равен null.</exception>
-    public virtual EntityType GetEntityType(string domainTypeName)
+    public virtual SecurityContextType GetEntityType(string domainTypeName)
     {
         if (domainTypeName == null)
         {

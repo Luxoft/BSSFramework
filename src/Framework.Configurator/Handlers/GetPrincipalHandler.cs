@@ -35,10 +35,10 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
                                      Comment = x.Comment,
                                      StartDate = x.Period.StartDate,
                                      EndDate = x.Period.EndDate,
-                                     Contexts = x.FilterItems
+                                     Contexts = x.Restrictions
                                                  .Select(
                                                          f => new KeyValuePair<Guid, Guid>(
-                                                          f.EntityType.Id,
+                                                          f.SecurityContextType.Id,
                                                           f.Entity.EntityId))
                                                  .ToList()
                              })

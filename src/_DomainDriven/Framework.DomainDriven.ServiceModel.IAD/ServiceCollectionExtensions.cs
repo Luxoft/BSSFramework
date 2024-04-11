@@ -212,7 +212,7 @@ public static class ServiceCollectionExtensions
                                              .SetEdit(AuthorizationSecurityOperation.BusinessRoleEdit)
                                              .SetCustomService<AuthorizationBusinessRoleSecurityService>())
 
-                                   .Add<EntityType>(
+                                   .Add<SecurityContextType>(
                                        b => b.SetView(SecurityRule.Disabled)));
     }
 

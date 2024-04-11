@@ -45,16 +45,16 @@ public partial class PermissionBLL
 
     public void DenormalizePermission(Permission permission)
     {
-        this.DenormalizePermissionFilterItems(permission);
+        this.DenormalizePermissionRestrictions(permission);
 
         //this.RecalculateDenormalizedItems(permission);
     }
-    protected void DenormalizePermissionFilterItems(Permission permission)
+    protected void DenormalizePermissionRestrictions(Permission permission)
     {
-        permission.FilterItems.Foreach(item =>
+        permission.Restrictions.Foreach(item =>
                                        {
-                                           item.ContextEntityId = item.Entity.EntityId;
-                                           item.EntityType = item.Entity.EntityType;
+                                           item.SecurityContextId = item.Entity.EntityId;
+                                           item.SecurityContextType = item.Entity.EntityType;
                                        });
     }
 
@@ -167,7 +167,7 @@ public partial class PermissionBLL
         return subPermission.Period.IsEmpty || parentPermission.Period.Contains(subPermission.Period);
     }
 
-    private Dictionary<EntityType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(Permission permission)
+    private Dictionary<SecurityContextType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(Permission permission)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
@@ -176,18 +176,18 @@ public partial class PermissionBLL
         return this.GetInvalidDelegatedPermissionSecurities(permission, delegatedFromPermission);
     }
 
-    private Dictionary<EntityType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(Permission subPermission, Permission parentPermission)
+    private Dictionary<SecurityContextType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(Permission subPermission, Permission parentPermission)
     {
         if (subPermission == null) throw new ArgumentNullException(nameof(subPermission));
         if (parentPermission == null) throw new ArgumentNullException(nameof(parentPermission));
 
-        var allowedEntitiesRequest = from filterItem in parentPermission.FilterItems
+        var allowedEntitiesRequest = from filterItem in parentPermission.Restrictions
 
                                      group filterItem.Entity.EntityId by filterItem.Entity.EntityType;
 
         var allowedEntitiesDict = allowedEntitiesRequest.ToDictionary(g => g.Key, g => g.ToList());
 
-        var requaredEntitiesRequest = (from filterItem in subPermission.FilterItems
+        var requaredEntitiesRequest = (from filterItem in subPermission.Restrictions
 
                                        group filterItem.Entity.EntityId by filterItem.Entity.EntityType).ToArray();
 

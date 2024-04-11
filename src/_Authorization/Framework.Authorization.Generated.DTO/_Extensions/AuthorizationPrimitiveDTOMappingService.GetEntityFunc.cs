@@ -16,7 +16,7 @@ public partial class AuthorizationServerPrimitiveDTOMappingService
             {
                 this._getEntityFunc = FuncHelper.Create((EntityTypeIdentityDTO entityTypeIdent, SecurityEntityIdentityDTO securityEntityIdent) =>
                                                         {
-                                                            var entityType = this.GetById<EntityType>(entityTypeIdent.Id, IdCheckMode.CheckAll);
+                                                            var entityType = this.GetById<SecurityContextType>(entityTypeIdent.Id, IdCheckMode.CheckAll);
 
                                                             return this.Context.Logics.PermissionFilterEntity.GetOrCreate(entityType, securityEntityIdent.ToDomainObject());
                                                         }).WithCache();

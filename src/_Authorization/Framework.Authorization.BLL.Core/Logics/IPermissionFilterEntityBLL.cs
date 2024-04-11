@@ -4,5 +4,5 @@ namespace Framework.Authorization.BLL;
 
 public partial interface IPermissionFilterEntityBLL
 {
-    PermissionFilterEntity GetOrCreate(EntityType entityType, SecurityEntity securityEntity, bool disableExistsCheck = false);
+    PermissionFilterEntity GetOrCreate(SecurityContextType entityType, SecurityEntity securityEntity, bool disableExistsCheck = false);
 }

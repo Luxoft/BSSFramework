@@ -13,7 +13,7 @@ public class PlainAuthorizationTypedExternalSource<TSecurityContext> : Authoriza
 
     public PlainAuthorizationTypedExternalSource(
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<TSecurityContext> securityContextRepository,
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<EntityType> entityTypeRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> entityTypeRepository,
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
         SecurityContextInfo<TSecurityContext, Guid> securityContextInfo,
         ISecurityContextDisplayService<TSecurityContext> displayService)

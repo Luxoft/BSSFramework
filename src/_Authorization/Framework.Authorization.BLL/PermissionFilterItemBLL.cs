@@ -3,19 +3,19 @@ using Framework.Events;
 
 namespace Framework.Authorization.BLL;
 
-public partial class PermissionFilterItemBLL
+public partial class PermissionRestrictionBLL
 {
-    public void NotifySave(PermissionFilterItem permissionFilterItem)
+    public void NotifySave(PermissionRestriction permissionRestriction)
     {
-        if (permissionFilterItem == null) throw new ArgumentNullException(nameof(permissionFilterItem));
+        if (permissionRestriction == null) throw new ArgumentNullException(nameof(permissionRestriction));
 
-        this.Context.OperationSender.Send(permissionFilterItem, EventOperation.Save);
+        this.Context.OperationSender.Send(permissionRestriction, EventOperation.Save);
     }
 
-    public void NotifyRemove(PermissionFilterItem permissionFilterItem)
+    public void NotifyRemove(PermissionRestriction permissionRestriction)
     {
-        if (permissionFilterItem == null) throw new ArgumentNullException(nameof(permissionFilterItem));
+        if (permissionRestriction == null) throw new ArgumentNullException(nameof(permissionRestriction));
 
-        this.Context.OperationSender.Send(permissionFilterItem, EventOperation.Remove);
+        this.Context.OperationSender.Send(permissionRestriction, EventOperation.Remove);
     }
 }

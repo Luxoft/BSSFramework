@@ -13,7 +13,7 @@ namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitializer
 {
-    private readonly IRepository<EntityType> entityTypeRepository;
+    private readonly IRepository<SecurityContextType> entityTypeRepository;
 
     private readonly List<ISecurityContextInfo<Guid>> securityContextInfoList;
 
@@ -22,7 +22,7 @@ public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitia
     private readonly InitializeSettings settings;
 
     public AuthorizationEntityTypeInitializer(
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<EntityType> entityTypeRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> entityTypeRepository,
         IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
         ILogger logger,
         InitializeSettings settings)
@@ -63,7 +63,7 @@ public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitia
 
         foreach (var securityContextInfo in mergeResult.AddingItems)
         {
-            var entityTpe = new EntityType(true, securityContextInfo.Type.IsHierarchical())
+            var entityTpe = new SecurityContextType(true, securityContextInfo.Type.IsHierarchical())
             {
                 Name = securityContextInfo.Name
             };

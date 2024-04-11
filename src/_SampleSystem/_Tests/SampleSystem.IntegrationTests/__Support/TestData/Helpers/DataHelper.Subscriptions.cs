@@ -19,7 +19,7 @@ public partial class DataHelper
                                  });
     }
 
-    public EntityType GetEntityType(Type domainObjectType)
+    public SecurityContextType GetEntityType(Type domainObjectType)
     {
         return this.EvaluateRead(context =>
                                  {

@@ -23,9 +23,9 @@ public partial class AuthorizationBLLContext
     private readonly IAuthorizationBLLFactoryContainer logics;
 
     private readonly Lazy<Principal> lazyCurrentPrincipal;
-    private readonly IDictionaryCache<string, EntityType> entityTypeByNameCache;
+    private readonly IDictionaryCache<string, SecurityContextType> entityTypeByNameCache;
 
-    private readonly IDictionaryCache<Guid, EntityType> entityTypeByIdCache;
+    private readonly IDictionaryCache<Guid, SecurityContextType> entityTypeByIdCache;
 
     public AuthorizationBLLContext(
             IServiceProvider serviceProvider,
@@ -73,12 +73,12 @@ public partial class AuthorizationBLLContext
 
         this.lazyCurrentPrincipal = LazyHelper.Create(() => this.Logics.Principal.GetCurrent());
 
-        this.entityTypeByNameCache = new DictionaryCache<string, EntityType>(
+        this.entityTypeByNameCache = new DictionaryCache<string, SecurityContextType>(
                                                                              domainTypeName => this.Logics.EntityType.GetByName(domainTypeName, true),
                                                                              StringComparer.CurrentCultureIgnoreCase)
                 .WithLock();
 
-        this.entityTypeByIdCache = new DictionaryCache<Guid, EntityType>(
+        this.entityTypeByIdCache = new DictionaryCache<Guid, SecurityContextType>(
                                                                          domainTypeId => this.Logics.EntityType.GetById(domainTypeId, true))
                 .WithLock();
 
@@ -113,21 +113,21 @@ public partial class AuthorizationBLLContext
     public TimeProvider TimeProvider { get; }
 
 
-    public EntityType GetEntityType(Type type)
+    public SecurityContextType GetEntityType(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
         return this.GetEntityType(type.Name);
     }
 
-    public EntityType GetEntityType(string domainTypeName)
+    public SecurityContextType GetEntityType(string domainTypeName)
     {
         if (domainTypeName == null) throw new ArgumentNullException(nameof(domainTypeName));
 
         return this.entityTypeByNameCache[domainTypeName];
     }
 
-    public EntityType GetEntityType(Guid domainTypeId)
+    public SecurityContextType GetEntityType(Guid domainTypeId)
     {
         if (domainTypeId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainTypeId));
 
@@ -150,7 +150,7 @@ public partial class AuthorizationBLLContext
 
         yield return $"Period: {permission.Period}";
 
-        foreach (var entityTypeGroup in permission.FilterItems.GroupBy(fi => fi.Entity.EntityType, fi => fi.Entity.EntityId))
+        foreach (var entityTypeGroup in permission.Restrictions.GroupBy(fi => fi.Entity.EntityType, fi => fi.Entity.EntityId))
         {
             var securityEntities = this.ExternalSource.GetTyped(entityTypeGroup.Key).GetSecurityEntitiesByIdents(entityTypeGroup);
 

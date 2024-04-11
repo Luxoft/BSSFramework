@@ -4,7 +4,7 @@ namespace Framework.Authorization.BLL;
 
 public partial class PermissionFilterEntityBLL
 {
-    public PermissionFilterEntity GetOrCreate(EntityType entityType, SecurityEntity securityEntity, bool disableExistsCheck = false)
+    public PermissionFilterEntity GetOrCreate(SecurityContextType entityType, SecurityEntity securityEntity, bool disableExistsCheck = false)
     {
         if (entityType == null) throw new ArgumentNullException(nameof(entityType));
         if (securityEntity == null) throw new ArgumentNullException(nameof(securityEntity));

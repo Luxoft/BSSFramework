@@ -8,7 +8,7 @@ namespace Framework.Authorization.BLL.Tests.Unit;
 [TestFixture]
 public class PermissionBLLTests : TestBase
 {
-    private EntityType entityType;
+    private SecurityContextType entityType;
     private Principal principalTest1;
 
     private Guid luxTravelSEApproverId;
@@ -33,7 +33,7 @@ public class PermissionBLLTests : TestBase
         Guid.Parse("a893dfa6-830e-44bc-8887-c98721005156");
         this.businessUnitChangeViewOperationId = Guid.Parse("7e9516b6-059f-4ec5-817f-f9ce9faacdc4");
 
-        this.entityType = new EntityType(true, true) { Name = "BusinessUnit" };
+        this.entityType = new SecurityContextType(true, true) { Name = "BusinessUnit" };
         this.principalTest1 = new Principal { Name = "test1" };
         this.permissionFilterEntityBoeing = new PermissionFilterEntity { EntityType = this.entityType, EntityId = this.boeingId };
         this.permissionFilterEntityUbs = new PermissionFilterEntity { EntityType = this.entityType, EntityId = this.ubsId };

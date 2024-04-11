@@ -2,10 +2,10 @@
 
 public static class PermissionExtensions
 {
-    public static IEnumerable<Guid> GetOrderedEntityIdents(this Permission permission)
+    public static IEnumerable<Guid> GetOrderedSecurityContextIdents(this Permission permission)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
-        return permission.FilterItems.Select(fi => fi.Entity.EntityId).OrderBy(id => id);
+        return permission.Restrictions.Select(fi => fi.SecurityContextId).OrderBy(id => id);
     }
 }

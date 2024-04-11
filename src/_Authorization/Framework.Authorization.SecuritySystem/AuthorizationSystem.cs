@@ -89,7 +89,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IEnumerable<Type> securityTypes)
     {
         var permissions = this.availablePermissionSource.GetAvailablePermissionsQueryable(true, securityRule)
-                              .FetchMany(q => q.FilterItems)
+                              .FetchMany(q => q.Restrictions)
                               .ThenFetch(q => q.Entity)
                               .ThenFetch(q => q.EntityType)
                               .ToList();
@@ -129,8 +129,8 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         {
             { typeof(IPrincipal<Guid>), typeof(Principal) },
             { typeof(IPermission<Guid>), typeof(Permission) },
-            { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
+            { typeof(IPermissionRestriction<Guid>), typeof(PermissionRestriction) },
             { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
-            { typeof(IEntityType<Guid>), typeof(EntityType) },
+            { typeof(IEntityType<Guid>), typeof(SecurityContextType) },
         });
 }

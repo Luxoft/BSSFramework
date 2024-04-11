@@ -4,9 +4,9 @@ namespace Framework.Authorization.Generated.DTO;
 
 public partial class AuthorizationServerPrimitiveDTOMappingService
 {
-    public override void MapPermissionFilterItem(PermissionFilterItemStrictDTO mappingObject, PermissionFilterItem domainObject)
+    public override void MapPermissionRestriction(PermissionRestrictionStrictDTO mappingObject, PermissionRestriction domainObject)
     {
-        base.MapPermissionFilterItem(mappingObject, domainObject);
+        base.MapPermissionRestriction(mappingObject, domainObject);
 
         if (domainObject.Entity == null)
         {

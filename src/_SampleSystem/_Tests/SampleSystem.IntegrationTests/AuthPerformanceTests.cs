@@ -72,22 +72,22 @@ public class AuthPerformanceTests : TestBase
 
                                                     foreach (var genObject in genObjectSubEnumerable)
                                                     {
-                                                        if (!genPermission.Restrictions.Select(fi => fi.Entity.EntityId).Contains(genObject.Employee.Id))
+                                                        if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(genObject.Employee.Id))
                                                         {
                                                             new PermissionRestriction(genPermission, pfeCache[genObject.Employee]);
                                                         }
 
-                                                        if (!genPermission.Restrictions.Select(fi => fi.Entity.EntityId).Contains(genObject.Location.Id))
+                                                        if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(genObject.Location.Id))
                                                         {
                                                             new PermissionRestriction(genPermission, pfeCache[genObject.Location]);
                                                         }
 
-                                                        if (!genPermission.Restrictions.Select(fi => fi.Entity.EntityId).Contains(genObject.BusinessUnit.Id))
+                                                        if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(genObject.BusinessUnit.Id))
                                                         {
                                                             new PermissionRestriction(genPermission, pfeCache[genObject.BusinessUnit]);
                                                         }
 
-                                                        if (!genPermission.Restrictions.Select(fi => fi.Entity.EntityId).Contains(genObject.ManagementUnit.Id))
+                                                        if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(genObject.ManagementUnit.Id))
                                                         {
                                                             new PermissionRestriction(genPermission, pfeCache[genObject.ManagementUnit]);
                                                         }

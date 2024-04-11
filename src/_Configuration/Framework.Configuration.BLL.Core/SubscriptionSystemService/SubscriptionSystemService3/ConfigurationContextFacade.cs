@@ -65,14 +65,14 @@ public class ConfigurationContextFacade
     /// </returns>
     public virtual Type GetSecurityType(Guid authDomainTypeId)
     {
-        var entityType = this.context.Authorization.Logics.EntityType.GetById(authDomainTypeId);
+        var securityContextType = this.context.Authorization.Logics.EntityType.GetById(authDomainTypeId);
 
-        if (entityType == null)
+        if (securityContextType == null)
         {
             return null;
         }
 
-        var result = this.GetSecurityType(entityType);
+        var result = this.GetSecurityType(securityContextType);
 
         return result;
     }
@@ -80,17 +80,17 @@ public class ConfigurationContextFacade
     /// <summary>
     ///     Возращает тип контекста безопасности доменного типа.
     /// </summary>
-    /// <param name="entityType">Описатель доменного типа.</param>
+    /// <param name="securityContextType">Описатель доменного типа.</param>
     /// <returns>Экземпляр <see cref="Type" />.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент entityType равен null.</exception>
-    public virtual Type GetSecurityType(SecurityContextType entityType)
+    /// <exception cref="ArgumentNullException">Аргумент securityContextType равен null.</exception>
+    public virtual Type GetSecurityType(SecurityContextType securityContextType)
     {
-        if (entityType == null)
+        if (securityContextType == null)
         {
-            throw new ArgumentNullException(nameof(entityType));
+            throw new ArgumentNullException(nameof(securityContextType));
         }
 
-        var result = this.context.ServiceProvider.GetRequiredService<ISecurityContextInfoService>().GetSecurityContextInfo(entityType.Name).Type;
+        var result = this.context.ServiceProvider.GetRequiredService<ISecurityContextInfoService>().GetSecurityContextInfo(securityContextType.Name).Type;
         return result;
     }
 

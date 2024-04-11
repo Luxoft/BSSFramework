@@ -7,27 +7,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
-public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : IAuthorizationTypedExternalSource
+public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : IAuthorizationTypedExternalSourceBase
     where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext
 {
     private readonly IRepository<TSecurityContext> securityContextRepository;
 
-    private readonly IRepository<SecurityContextType> entityTypeRepository;
-
-    private readonly IRepository<PermissionFilterEntity> permissionFilterEntityRepository;
-
-    private readonly SecurityContextInfo<TSecurityContext, Guid> securityContextInfo;
-
     protected AuthorizationTypedExternalSourceBase(
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<TSecurityContext> securityContextRepository,
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> entityTypeRepository,
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
-        SecurityContextInfo<TSecurityContext, Guid> securityContextInfo)
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<TSecurityContext> securityContextRepository)
     {
         this.securityContextRepository = securityContextRepository;
-        this.entityTypeRepository = entityTypeRepository;
-        this.permissionFilterEntityRepository = permissionFilterEntityRepository;
-        this.securityContextInfo = securityContextInfo;
     }
 
     protected abstract SecurityEntity CreateSecurityEntity(TSecurityContext securityContext);
@@ -53,35 +41,4 @@ public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : I
     }
 
     protected abstract IEnumerable<TSecurityContext> GetSecurityEntitiesWithMasterExpand(TSecurityContext startSecurityObject);
-
-    public PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false)
-    {
-        if (securityEntity == null) throw new ArgumentNullException(nameof(securityEntity));
-
-        var entityType = this.entityTypeRepository.GetQueryable()
-                             .Single(entityType => entityType.Name == this.securityContextInfo.Name);
-
-        var existsFilterEntity = this.permissionFilterEntityRepository
-                                     .GetQueryable()
-                                     .SingleOrDefault(v => v.EntityType == entityType && v.EntityId == securityEntity.Id);
-
-        if (disableExistsCheck)
-        {
-            return existsFilterEntity ?? new PermissionFilterEntity
-                                         {
-                                             EntityType = entityType,
-                                             EntityId = securityEntity.Id
-                                         }.Self(v => this.permissionFilterEntityRepository.SaveAsync(v).GetAwaiter().GetResult());
-        }
-        else
-        {
-            var entity = this.securityContextRepository.GetQueryable().Single(obj => obj.Id == securityEntity.Id);
-
-            return existsFilterEntity ?? new PermissionFilterEntity
-                                         {
-                                             EntityType = entityType,
-                                             EntityId = entity.Id
-                                         }.Self(v => this.permissionFilterEntityRepository.SaveAsync(v).GetAwaiter().GetResult());
-        }
-    }
 }

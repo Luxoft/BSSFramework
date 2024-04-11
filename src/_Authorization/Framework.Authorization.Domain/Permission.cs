@@ -5,7 +5,6 @@ using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
-using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.Transfering;
 

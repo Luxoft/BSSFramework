@@ -15,11 +15,8 @@ public class HierarchicalAuthorizationTypedExternalSource<TSecurityContext> : Au
 
     public HierarchicalAuthorizationTypedExternalSource(
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<TSecurityContext> securityContextRepository,
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> entityTypeRepository,
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<PermissionFilterEntity> permissionFilterEntityRepository,
-        SecurityContextInfo<TSecurityContext, Guid> securityContextInfo,
         ISecurityContextDisplayService<TSecurityContext> displayService)
-        : base(securityContextRepository, entityTypeRepository, permissionFilterEntityRepository, securityContextInfo)
+        : base(securityContextRepository)
     {
         this.displayService = displayService;
     }

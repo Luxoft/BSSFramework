@@ -22,16 +22,15 @@ namespace Framework.Authorization.BLL
             base.RegisterHandler<Framework.Authorization.Domain.BusinessRoleRootFilterModel>(this.GetBusinessRoleRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.ChangePermissionDelegatesModel>(this.GetChangePermissionDelegatesModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.DelegateToItemModel>(this.GetDelegateToItemModelValidationResult);
-            base.RegisterHandler<Framework.Authorization.Domain.SecurityContextType>(this.GetEntityTypeValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.EntityTypeRootFilterModel>(this.GetEntityTypeRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.Permission>(this.GetPermissionValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.PermissionDirectFilterModel>(this.GetPermissionDirectFilterModelValidationResult);
-            base.RegisterHandler<Framework.Authorization.Domain.PermissionFilterEntity>(this.GetPermissionFilterEntityValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.PermissionRestriction>(this.GetPermissionRestrictionValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.PermissionRootFilterModel>(this.GetPermissionRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.Principal>(this.GetPrincipalValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.PrincipalCreateModel>(this.GetPrincipalCreateModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.PrincipalRootFilterModel>(this.GetPrincipalRootFilterModelValidationResult);
+            base.RegisterHandler<Framework.Authorization.Domain.SecurityContextType>(this.GetSecurityContextTypeValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.SecurityEntity>(this.GetSecurityEntityValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.UpdatePermissionDelegatesModel>(this.GetUpdatePermissionDelegatesModelValidationResult);
         }
@@ -66,17 +65,7 @@ namespace Framework.Authorization.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEntityTypeValidationResult(Framework.Authorization.Domain.SecurityContextType source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
         protected virtual Framework.Validation.ValidationResult GetPermissionDirectFilterModelValidationResult(Framework.Authorization.Domain.PermissionDirectFilterModel source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetPermissionFilterEntityValidationResult(Framework.Authorization.Domain.PermissionFilterEntity source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -107,6 +96,11 @@ namespace Framework.Authorization.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetPrincipalValidationResult(Framework.Authorization.Domain.Principal source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetSecurityContextTypeValidationResult(Framework.Authorization.Domain.SecurityContextType source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

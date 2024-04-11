@@ -68,32 +68,12 @@ namespace Framework.Authorization.BLL
             get;
         }
         
-        Framework.Authorization.BLL.IEntityTypeBLL EntityType
-        {
-            get;
-        }
-        
-        Framework.Authorization.BLL.IEntityTypeBLLFactory EntityTypeFactory
-        {
-            get;
-        }
-        
         Framework.Authorization.BLL.IPermissionBLL Permission
         {
             get;
         }
         
         Framework.Authorization.BLL.IPermissionBLLFactory PermissionFactory
-        {
-            get;
-        }
-        
-        Framework.Authorization.BLL.IPermissionFilterEntityBLL PermissionFilterEntity
-        {
-            get;
-        }
-        
-        Framework.Authorization.BLL.IPermissionFilterEntityBLLFactory PermissionFilterEntityFactory
         {
             get;
         }
@@ -117,6 +97,16 @@ namespace Framework.Authorization.BLL
         {
             get;
         }
+        
+        Framework.Authorization.BLL.ISecurityContextTypeBLL SecurityContextType
+        {
+            get;
+        }
+        
+        Framework.Authorization.BLL.ISecurityContextTypeBLLFactory SecurityContextTypeFactory
+        {
+            get;
+        }
     }
     
     public partial interface IBusinessRoleBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.BusinessRole, System.Guid>
@@ -129,14 +119,6 @@ namespace Framework.Authorization.BLL
     {
     }
     
-    public partial interface IEntityTypeBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.SecurityContextType, System.Guid>
-    {
-    }
-    
-    public partial interface IEntityTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IEntityTypeBLL, Framework.Authorization.Domain.SecurityContextType>
-    {
-    }
-    
     public partial interface IPermissionBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Permission, System.Guid>
     {
         
@@ -144,14 +126,6 @@ namespace Framework.Authorization.BLL
     }
     
     public partial interface IPermissionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionBLL, Framework.Authorization.Domain.Permission>
-    {
-    }
-    
-    public partial interface IPermissionFilterEntityBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionFilterEntity, System.Guid>
-    {
-    }
-    
-    public partial interface IPermissionFilterEntityBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionFilterEntityBLL, Framework.Authorization.Domain.PermissionFilterEntity>
     {
     }
     
@@ -170,6 +144,14 @@ namespace Framework.Authorization.BLL
     }
     
     public partial interface IPrincipalBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPrincipalBLL, Framework.Authorization.Domain.Principal>
+    {
+    }
+    
+    public partial interface ISecurityContextTypeBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.SecurityContextType, System.Guid>
+    {
+    }
+    
+    public partial interface ISecurityContextTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.ISecurityContextTypeBLL, Framework.Authorization.Domain.SecurityContextType>
     {
     }
 }

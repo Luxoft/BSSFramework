@@ -39,7 +39,7 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
                                                  .Select(
                                                          f => new KeyValuePair<Guid, Guid>(
                                                           f.SecurityContextType.Id,
-                                                          f.Entity.EntityId))
+                                                          f.SecurityContextId))
                                                  .ToList()
                              })
                 .ToList();

@@ -13,7 +13,7 @@ namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitializer
 {
-    private readonly IRepository<SecurityContextType> entityTypeRepository;
+    private readonly IRepository<SecurityContextType> securityContextTypeRepository;
 
     private readonly List<ISecurityContextInfo<Guid>> securityContextInfoList;
 
@@ -22,20 +22,20 @@ public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitia
     private readonly InitializeSettings settings;
 
     public AuthorizationEntityTypeInitializer(
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> entityTypeRepository,
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> securityContextTypeRepository,
         IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
         ILogger logger,
         InitializeSettings settings)
     {
         this.securityContextInfoList = securityContextInfoList.ToList();
         this.logger = logger.ForContext<AuthorizationEntityTypeInitializer>();
-        this.entityTypeRepository = entityTypeRepository;
+        this.securityContextTypeRepository = securityContextTypeRepository;
         this.settings = settings;
     }
 
     public async Task Init(CancellationToken cancellationToken)
     {
-        var dbEntityTypes = await this.entityTypeRepository.GetQueryable().ToListAsync(cancellationToken);
+        var dbEntityTypes = await this.securityContextTypeRepository.GetQueryable().ToListAsync(cancellationToken);
 
         var mergeResult = dbEntityTypes.GetMergeResult(this.securityContextInfoList, et => et.Id, sc => sc.Id);
 
@@ -53,7 +53,7 @@ public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitia
                     {
                         this.logger.Verbose("Remove EntityType: {RemovingItemName} {RemovingItemId}", removingItem.Name, removingItem.Id);
 
-                        await this.entityTypeRepository.RemoveAsync(removingItem, cancellationToken);
+                        await this.securityContextTypeRepository.RemoveAsync(removingItem, cancellationToken);
                     }
 
                     break;
@@ -63,14 +63,14 @@ public class AuthorizationEntityTypeInitializer : IAuthorizationEntityTypeInitia
 
         foreach (var securityContextInfo in mergeResult.AddingItems)
         {
-            var entityTpe = new SecurityContextType(true, securityContextInfo.Type.IsHierarchical())
+            var entityTpe = new SecurityContextType
             {
                 Name = securityContextInfo.Name
             };
 
             this.logger.Verbose("Create EntityType: {0} {1}", entityTpe.Name, entityTpe.Id);
 
-            await this.entityTypeRepository.InsertAsync(entityTpe, securityContextInfo.Id, cancellationToken);
+            await this.securityContextTypeRepository.InsertAsync(entityTpe, securityContextInfo.Id, cancellationToken);
         }
     }
 }

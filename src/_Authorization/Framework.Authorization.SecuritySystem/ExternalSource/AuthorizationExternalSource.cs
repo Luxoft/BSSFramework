@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Authorization.Domain;
+using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +13,7 @@ public class AuthorizationExternalSource : IAuthorizationExternalSource
 
     private readonly ISecurityContextInfoService securityContextInfoService;
 
-    private readonly IDictionaryCache<SecurityContextType, IAuthorizationTypedExternalSource> typedCache;
+    private readonly IDictionaryCache<SecurityContextType, IAuthorizationTypedExternalSourceBase> typedCache;
 
 
     public AuthorizationExternalSource(IServiceProvider serviceProvider, ISecurityContextInfoService securityContextInfoService)
@@ -20,29 +21,29 @@ public class AuthorizationExternalSource : IAuthorizationExternalSource
         this.serviceProvider = serviceProvider;
         this.securityContextInfoService = securityContextInfoService;
 
-        this.typedCache = new DictionaryCache<SecurityContextType, IAuthorizationTypedExternalSource>(entityType => this.GetTypedInternal(entityType, true));
+        this.typedCache = new DictionaryCache<SecurityContextType, IAuthorizationTypedExternalSourceBase>(entityType => this.GetTypedInternal(entityType, true));
     }
 
-    public IAuthorizationTypedExternalSource GetTyped(SecurityContextType entityType, bool withCache = true)
+    public IAuthorizationTypedExternalSourceBase GetTyped(SecurityContextType entityType, bool withCache = true)
     {
         if (entityType == null) throw new ArgumentNullException(nameof(entityType));
 
         return withCache ? this.typedCache[entityType] : this.GetTypedInternal(entityType, false);
     }
 
-    private IAuthorizationTypedExternalSource GetTypedInternal(SecurityContextType entityType, bool withCache)
+    private IAuthorizationTypedExternalSourceBase GetTypedInternal(SecurityContextType entityType, bool withCache)
     {
         if (entityType == null) throw new ArgumentNullException(nameof(entityType));
 
-        var domainType = this.securityContextInfoService.GetSecurityContextInfo(entityType.Name).Type;
+        var securityContextInfo = this.securityContextInfoService.GetSecurityContextInfo(entityType.Name);
 
-        var authorizationTypedExternalSourceType = entityType.Expandable
+        var authorizationTypedExternalSourceType = securityContextInfo.Type.IsHierarchical()
                                                            ? typeof(HierarchicalAuthorizationTypedExternalSource<>)
                                                            : typeof(PlainAuthorizationTypedExternalSource<>);
 
-        var authorizationTypedExternalSourceImplType = authorizationTypedExternalSourceType.MakeGenericType(domainType);
+        var authorizationTypedExternalSourceImplType = authorizationTypedExternalSourceType.MakeGenericType(securityContextInfo.Type);
 
-        var result = (IAuthorizationTypedExternalSource)
+        var result = (IAuthorizationTypedExternalSourceBase)
             ActivatorUtilities.CreateInstance(this.serviceProvider, authorizationTypedExternalSourceImplType);
 
         return withCache ? result.WithCache() : result;

@@ -4,5 +4,5 @@ namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
 public interface IAuthorizationExternalSource
 {
-    IAuthorizationTypedExternalSource GetTyped(SecurityContextType entityType, bool withCache = true);
+    IAuthorizationTypedExternalSourceBase GetTyped(SecurityContextType entityType, bool withCache = true);
 }

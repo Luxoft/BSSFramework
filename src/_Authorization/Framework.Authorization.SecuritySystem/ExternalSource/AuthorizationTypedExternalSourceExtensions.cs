@@ -7,7 +7,7 @@ namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
 public static class AuthorizationTypedExternalSourceExtensions
 {
-    public static IAuthorizationTypedExternalSource WithCache(this IAuthorizationTypedExternalSource source)
+    public static IAuthorizationTypedExternalSourceBase WithCache(this IAuthorizationTypedExternalSourceBase source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -15,9 +15,9 @@ public static class AuthorizationTypedExternalSourceExtensions
     }
 
 
-    private class AuthorizationTypedExternalSource : IAuthorizationTypedExternalSource
+    private class AuthorizationTypedExternalSource : IAuthorizationTypedExternalSourceBase
     {
-        private readonly IAuthorizationTypedExternalSource _baseSource;
+        private readonly IAuthorizationTypedExternalSourceBase _baseSource;
 
         private readonly Lazy<ReadOnlyCollection<SecurityEntity>> _lazySecurityEntities;
 
@@ -26,7 +26,7 @@ public static class AuthorizationTypedExternalSourceExtensions
         private readonly IDictionaryCache<Guid, SecurityEntity[]> _securityEntitiesWithMasterExpandCache;
 
 
-        public AuthorizationTypedExternalSource(IAuthorizationTypedExternalSource baseSource)
+        public AuthorizationTypedExternalSource(IAuthorizationTypedExternalSourceBase baseSource)
         {
             if (baseSource == null) throw new ArgumentNullException(nameof(baseSource));
 
@@ -52,11 +52,6 @@ public static class AuthorizationTypedExternalSourceExtensions
         public IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId)
         {
             return this._securityEntitiesWithMasterExpandCache[startSecurityEntityId];
-        }
-
-        public PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false)
-        {
-            return this._baseSource.AddSecurityEntity(securityEntity, disableExistsCheck);
         }
     }
 }

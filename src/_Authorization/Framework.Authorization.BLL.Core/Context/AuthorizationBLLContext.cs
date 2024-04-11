@@ -150,7 +150,7 @@ public partial class AuthorizationBLLContext
 
         yield return $"Period: {permission.Period}";
 
-        foreach (var entityTypeGroup in permission.Restrictions.GroupBy(fi => fi.Entity.EntityType, fi => fi.Entity.EntityId))
+        foreach (var entityTypeGroup in permission.Restrictions.GroupBy(fi => fi.SecurityContextType, fi => fi.SecurityContextId))
         {
             var securityEntities = this.ExternalSource.GetTyped(entityTypeGroup.Key).GetSecurityEntitiesByIdents(entityTypeGroup);
 

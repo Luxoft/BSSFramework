@@ -113,7 +113,7 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
         if (entityType == null) throw new ArgumentNullException(nameof(entityType));
         if (idetns == null) throw new ArgumentNullException(nameof(idetns));
 
-        return permission => permission.Restrictions.Any(fi => fi.SecurityContextType == entityType && idetns.Contains(fi.Entity.EntityId))
+        return permission => permission.Restrictions.Any(fi => fi.SecurityContextType == entityType && idetns.Contains(fi.SecurityContextId))
                              || (allowEmpty && permission.Restrictions.All(fi => fi.SecurityContextType != entityType));
     }
 

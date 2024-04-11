@@ -3,7 +3,6 @@ using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.Domain;
@@ -49,6 +48,7 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     [FixedPropertyValidator]
     [Required]
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
+    [UniqueElement]
     public virtual SecurityContextType SecurityContextType
     {
         get { return this.securityContextType; }
@@ -58,13 +58,14 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     [FixedPropertyValidator]
     [Required]
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
+    [UniqueElement]
     public virtual Guid SecurityContextId
     {
         get { return this.securityContextId; }
         set { this.securityContextId = value; }
     }
 
-    Permission IDetail<Permission>.Master => this.permission;
+    Permission IDetail<Permission>.Master => this.Permission;
 
     ISecurityContextType<Guid> IPermissionRestriction<Guid>.SecurityContextType => this.SecurityContextType;
 }

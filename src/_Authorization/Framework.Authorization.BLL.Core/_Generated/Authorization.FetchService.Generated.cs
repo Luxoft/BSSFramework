@@ -44,17 +44,9 @@ namespace Framework.Authorization.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessRoleContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.SecurityContextType)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEntityTypeContainer(rule)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.Permission)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetPermissionContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.PermissionFilterEntity)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetPermissionFilterEntityContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.PermissionRestriction)))
             {
@@ -64,33 +56,13 @@ namespace Framework.Authorization.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetPrincipalContainer(rule)));
             }
+            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.SecurityContextType)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSecurityContextTypeContainer(rule)));
+            }
             else
             {
                 throw new System.ArgumentOutOfRangeException("TDomainObject");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.SecurityContextType> GetEntityTypeContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.SecurityContextType>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.SecurityContextType>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.SecurityContextType>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.SecurityContextType>.Empty;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
             }
         }
         
@@ -116,38 +88,12 @@ namespace Framework.Authorization.BLL
                 return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.Permission>(
                     fetchRootRule => fetchRootRule.SelectNested(permission => permission.DelegatedFrom).SelectNested(permission => permission.Principal),
                     fetchRootRule => fetchRootRule.SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.DelegatedFrom).SelectNested(permission => permission.Principal),
-                    fetchRootRule => fetchRootRule.SelectMany(permission => permission.DelegatedTo).SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.Entity),
-                    fetchRootRule => fetchRootRule.SelectMany(permission => permission.DelegatedTo).SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
                     fetchRootRule => fetchRootRule.SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.Principal),
+                    fetchRootRule => fetchRootRule.SelectMany(permission => permission.DelegatedTo).SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
                     fetchRootRule => fetchRootRule.SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.Role),
-                    fetchRootRule => fetchRootRule.SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.Entity),
-                    fetchRootRule => fetchRootRule.SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
                     fetchRootRule => fetchRootRule.SelectNested(permission => permission.Principal),
+                    fetchRootRule => fetchRootRule.SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
                     fetchRootRule => fetchRootRule.SelectNested(permission => permission.Role));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.PermissionFilterEntity> GetPermissionFilterEntityContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.PermissionFilterEntity>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.PermissionFilterEntity>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.PermissionFilterEntity>(fetchRootRule => fetchRootRule.SelectNested(permissionFilterEntity => permissionFilterEntity.EntityType));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.PermissionFilterEntity>(fetchRootRule => fetchRootRule.SelectNested(permissionFilterEntity => permissionFilterEntity.EntityType));
             }
             else
             {
@@ -168,16 +114,14 @@ namespace Framework.Authorization.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
             {
                 return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.PermissionRestriction>(
-                    fetchRootRule => fetchRootRule.SelectNested(permissionRestriction => permissionRestriction.Entity),
-                    fetchRootRule => fetchRootRule.SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
-                    fetchRootRule => fetchRootRule.SelectNested(permissionRestriction => permissionRestriction.Permission));
+                    fetchRootRule => fetchRootRule.SelectNested(permissionRestriction => permissionRestriction.Permission),
+                    fetchRootRule => fetchRootRule.SelectNested(permissionRestriction => permissionRestriction.SecurityContextType));
             }
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
                 return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.PermissionRestriction>(
-                    fetchRootRule => fetchRootRule.SelectNested(permissionRestriction => permissionRestriction.Entity),
-                    fetchRootRule => fetchRootRule.SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
-                    fetchRootRule => fetchRootRule.SelectNested(permissionRestriction => permissionRestriction.Permission));
+                    fetchRootRule => fetchRootRule.SelectNested(permissionRestriction => permissionRestriction.Permission),
+                    fetchRootRule => fetchRootRule.SelectNested(permissionRestriction => permissionRestriction.SecurityContextType));
             }
             else
             {
@@ -203,14 +147,36 @@ namespace Framework.Authorization.BLL
             {
                 return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.Principal>(
                     fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.DelegatedFrom).SelectNested(permission => permission.Principal),
-                    fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.DelegatedTo).SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.Entity),
-                    fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.DelegatedTo).SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
                     fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.Principal),
+                    fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.DelegatedTo).SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
                     fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.Role),
-                    fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.Entity),
                     fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
                     fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectNested(permission => permission.Role),
                     fetchRootRule => fetchRootRule.SelectNested(principal => principal.RunAs));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.SecurityContextType> GetSecurityContextTypeContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.SecurityContextType>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.SecurityContextType>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.SecurityContextType>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.SecurityContextType>.Empty;
             }
             else
             {

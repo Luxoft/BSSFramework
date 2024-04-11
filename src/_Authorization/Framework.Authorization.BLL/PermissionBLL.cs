@@ -53,8 +53,8 @@ public partial class PermissionBLL
     {
         permission.Restrictions.Foreach(item =>
                                        {
-                                           item.SecurityContextId = item.Entity.EntityId;
-                                           item.SecurityContextType = item.Entity.EntityType;
+                                           item.SecurityContextId = item.SecurityContextId;
+                                           item.SecurityContextType = item.SecurityContextType;
                                        });
     }
 
@@ -64,9 +64,9 @@ public partial class PermissionBLL
 
     //    var expectedItems = from entityType in this.Context.Logics.EntityType.GetFullList()
 
-    //                        join filterItem in permission.FilterItems on entityType equals filterItem.EntityType into filterItemGroup
+    //                        join filterItem in permission.Restrictions on entityType equals filterItem.EntityType into filterItemGroup
 
-    //                        from accessId in this.GetAccessIdents(filterItemGroup.ToArray(fi => fi.Entity.EntityId))
+    //                        from accessId in this.GetAccessIdents(filterItemGroup.ToArray(fi => fi.SecurityContextId))
 
     //                        select new { EntityType = entityType, EntityId = accessId };
 
@@ -183,13 +183,13 @@ public partial class PermissionBLL
 
         var allowedEntitiesRequest = from filterItem in parentPermission.Restrictions
 
-                                     group filterItem.Entity.EntityId by filterItem.Entity.EntityType;
+                                     group filterItem.SecurityContextId by filterItem.SecurityContextType;
 
         var allowedEntitiesDict = allowedEntitiesRequest.ToDictionary(g => g.Key, g => g.ToList());
 
         var requaredEntitiesRequest = (from filterItem in subPermission.Restrictions
 
-                                       group filterItem.Entity.EntityId by filterItem.Entity.EntityType).ToArray();
+                                       group filterItem.SecurityContextId by filterItem.SecurityContextType).ToArray();
 
         var invalidRequest1 = from requeredGroup in requaredEntitiesRequest
 

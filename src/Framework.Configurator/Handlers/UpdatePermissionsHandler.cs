@@ -122,7 +122,7 @@ public record UpdatePermissionsHandler(
                                                        TypeId = new Guid(x.Id),
                                                        ObjectId = new Guid(e)
                                                    })),
-                                      x => new { TypeId = x.SecurityContextType.Id, ObjectId = x.Entity.EntityId },
+                                      x => new { TypeId = x.SecurityContextType.Id, ObjectId = x.SecurityContextId },
                                       x => new { x.TypeId, x.ObjectId });
 
             foreach (var filterEntityItem in mergeResult.AddingItems)

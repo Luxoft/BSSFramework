@@ -26,7 +26,7 @@ internal class PermissionDirectInternalFilterModel : DomainObjectFilterModel<Per
 
         if (this.baseFilterModel.StrongDirect)
         {
-            return permission => permission.Restrictions.Any(filterItem => filterItem.Entity.EntityType == entityType && filterItem.Entity.EntityId == entityId);
+            return permission => permission.Restrictions.Any(filterItem => filterItem.SecurityContextType == entityType && filterItem.SecurityContextId == entityId);
         }
         else
         {
@@ -34,8 +34,8 @@ internal class PermissionDirectInternalFilterModel : DomainObjectFilterModel<Per
 
             var enitityIdents = securityEntities.ToList(se => se.Id);
 
-            return permission => permission.Restrictions.All(filterItem => filterItem.Entity.EntityType != entityType)
-                                 || permission.Restrictions.Any(filterItem => enitityIdents.Contains(filterItem.Entity.EntityId));
+            return permission => permission.Restrictions.All(filterItem => filterItem.SecurityContextType != entityType)
+                                 || permission.Restrictions.Any(filterItem => enitityIdents.Contains(filterItem.SecurityContextId));
         }
     }
 }

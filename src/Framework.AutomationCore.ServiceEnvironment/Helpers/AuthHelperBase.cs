@@ -102,31 +102,21 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
         {
             foreach (var restriction in pair.Value)
             {
-                this.SavePermissionFilter(context, permissionObject, restriction, pair.Key);
+                this.CreatePermissionRestriction(context, permissionObject, restriction, pair.Key);
             }
         }
     }
 
-    private void SavePermissionFilter(TBLLContext context, Permission permission, Guid entityId, Type securityContextType)
+    private void CreatePermissionRestriction(TBLLContext context, Permission permission, Guid securityContextId, Type securityContextType)
     {
         var securityContextInfo = (ISecurityContextInfo<Guid>)context
                                                               .Authorization.ServiceProvider
                                                               .GetRequiredService<ISecurityContextInfoService>()
                                                               .GetSecurityContextInfo(securityContextType);
 
-        var securityContextType = context.Authorization.Logics.EntityType.GetById(securityContextInfo.Id)!;
+        var domainSecurityContextType = context.Authorization.Logics.SecurityContextType.GetById(securityContextInfo.Id, true);
 
-        var entity = context.Authorization.Logics.PermissionFilterEntity.GetUnsecureQueryable()
-                            .FirstOrDefault(e => e.EntityId == entityId && e.EntityType == securityContextType);
-
-        if (entity == null)
-        {
-            entity = new PermissionFilterEntity { EntityId = entityId, EntityType = securityContextType };
-
-            context.Authorization.Logics.PermissionFilterEntity.Save(entity);
-        }
-
-        var item = new PermissionRestriction(permission, entity);
+        new PermissionRestriction(permission) { SecurityContextType = domainSecurityContextType, SecurityContextId = securityContextId };
     }
 
     private void RemovePermissions(string principalName)

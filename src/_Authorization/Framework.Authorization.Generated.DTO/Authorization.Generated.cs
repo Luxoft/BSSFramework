@@ -374,13 +374,13 @@ namespace Framework.Authorization.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-            if (!object.ReferenceEquals(source.EntityType, null))
+            if (!object.ReferenceEquals(source.SecurityContextType, null))
             {
-                target.EntityType = source.EntityType.Identity;
+                target.SecurityContextType = source.SecurityContextType.Identity;
             }
             else
             {
-                target.EntityType = default(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO);
+                target.SecurityContextType = default(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO);
             }
         }
         
@@ -854,7 +854,7 @@ namespace Framework.Authorization.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-            target.EntityId = source.EntityId;
+            target.SecurityContextId = source.SecurityContextId;
             target.StrongDirect = source.StrongDirect;
         }
         
@@ -4210,7 +4210,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionDirectFilterModelSimpleDTO : Framework.Authorization.Generated.DTO.BaseAbstractDTO
     {
         
-        private System.Guid _entityId;
+        private System.Guid _securityContextId;
         
         private bool _strongDirect;
         
@@ -4225,15 +4225,15 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid EntityId
+        public System.Guid SecurityContextId
         {
             get
             {
-                return this._entityId;
+                return this._securityContextId;
             }
             set
             {
-                this._entityId = value;
+                this._securityContextId = value;
             }
         }
         
@@ -4262,7 +4262,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionDirectFilterModelFullDTO : Framework.Authorization.Generated.DTO.PermissionDirectFilterModelSimpleDTO
     {
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO _entityType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO _securityContextType;
         
         public PermissionDirectFilterModelFullDTO()
         {
@@ -4275,15 +4275,15 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO EntityType
+        public Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO SecurityContextType
         {
             get
             {
-                return this._entityType;
+                return this._securityContextType;
             }
             set
             {
-                this._entityType = value;
+                this._securityContextType = value;
             }
         }
         
@@ -4319,9 +4319,9 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionDirectFilterModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionDirectFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionDirectFilterModel>
     {
         
-        private System.Guid _entityId;
+        private System.Guid _securityContextId;
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO _entityType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO _securityContextType;
         
         private bool _strongDirect;
         
@@ -4374,28 +4374,28 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid EntityId
+        public System.Guid SecurityContextId
         {
             get
             {
-                return this._entityId;
+                return this._securityContextId;
             }
             set
             {
-                this._entityId = value;
+                this._securityContextId = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO EntityType
+        public Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO SecurityContextType
         {
             get
             {
-                return this._entityType;
+                return this._securityContextType;
             }
             set
             {
-                this._entityType = value;
+                this._securityContextType = value;
             }
         }
         
@@ -4464,9 +4464,9 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionDirectFilterModelEventRichDTO
     {
         
-        private System.Guid _entityId;
+        private System.Guid _securityContextId;
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventSimpleDTO _entityType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventSimpleDTO _securityContextType;
         
         private bool _strongDirect;
         
@@ -4480,28 +4480,28 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid EntityId
+        public System.Guid SecurityContextId
         {
             get
             {
-                return this._entityId;
+                return this._securityContextId;
             }
             set
             {
-                this._entityId = value;
+                this._securityContextId = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.SecurityContextTypeEventSimpleDTO EntityType
+        public Framework.Authorization.Generated.DTO.SecurityContextTypeEventSimpleDTO SecurityContextType
         {
             get
             {
-                return this._entityType;
+                return this._securityContextType;
             }
             set
             {
-                this._entityType = value;
+                this._securityContextType = value;
             }
         }
         
@@ -4524,7 +4524,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionDirectFilterModelEventSimpleDTO
     {
         
-        private System.Guid _entityId;
+        private System.Guid _securityContextId;
         
         private bool _strongDirect;
         
@@ -4538,15 +4538,15 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid EntityId
+        public System.Guid SecurityContextId
         {
             get
             {
-                return this._entityId;
+                return this._securityContextId;
             }
             set
             {
-                this._entityId = value;
+                this._securityContextId = value;
             }
         }
         
@@ -9731,19 +9731,19 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPermissionDirectFilterModel(Framework.Authorization.Domain.PermissionDirectFilterModel domainObject, Framework.Authorization.Generated.DTO.PermissionDirectFilterModelSimpleDTO mappingObject)
         {
-            mappingObject.EntityId = domainObject.EntityId;
+            mappingObject.SecurityContextId = domainObject.SecurityContextId;
             mappingObject.StrongDirect = domainObject.StrongDirect;
         }
         
         public virtual void MapPermissionDirectFilterModel(Framework.Authorization.Domain.PermissionDirectFilterModel domainObject, Framework.Authorization.Generated.DTO.PermissionDirectFilterModelFullDTO mappingObject)
         {
-            if (!object.ReferenceEquals(domainObject.EntityType, null))
+            if (!object.ReferenceEquals(domainObject.SecurityContextType, null))
             {
-                mappingObject.EntityType = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.EntityType, this);
+                mappingObject.SecurityContextType = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.SecurityContextType, this);
             }
             else
             {
-                mappingObject.EntityType = null;
+                mappingObject.SecurityContextType = null;
             }
         }
         
@@ -9753,35 +9753,35 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPermissionDirectFilterModel(Framework.Authorization.Generated.DTO.PermissionDirectFilterModelStrictDTO mappingObject, Framework.Authorization.Domain.PermissionDirectFilterModel domainObject)
         {
-            domainObject.EntityId = mappingObject.EntityId;
-            if (!object.Equals(mappingObject.EntityType, default(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO)))
+            domainObject.SecurityContextId = mappingObject.SecurityContextId;
+            if (!object.Equals(mappingObject.SecurityContextType, default(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO)))
             {
-                domainObject.EntityType = this.ToSecurityContextType(mappingObject.EntityType);
+                domainObject.SecurityContextType = this.ToSecurityContextType(mappingObject.SecurityContextType);
             }
             else
             {
-                domainObject.EntityType = null;
+                domainObject.SecurityContextType = null;
             }
             domainObject.StrongDirect = mappingObject.StrongDirect;
         }
         
         public virtual void MapPermissionDirectFilterModel(Framework.Authorization.Domain.PermissionDirectFilterModel domainObject, Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO mappingObject)
         {
-            mappingObject.EntityId = domainObject.EntityId;
-            if (!object.ReferenceEquals(domainObject.EntityType, null))
+            mappingObject.SecurityContextId = domainObject.SecurityContextId;
+            if (!object.ReferenceEquals(domainObject.SecurityContextType, null))
             {
-                mappingObject.EntityType = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.EntityType, this);
+                mappingObject.SecurityContextType = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.SecurityContextType, this);
             }
             else
             {
-                mappingObject.EntityType = null;
+                mappingObject.SecurityContextType = null;
             }
             mappingObject.StrongDirect = domainObject.StrongDirect;
         }
         
         public virtual void MapPermissionDirectFilterModel(Framework.Authorization.Domain.PermissionDirectFilterModel domainObject, Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventSimpleDTO mappingObject)
         {
-            mappingObject.EntityId = domainObject.EntityId;
+            mappingObject.SecurityContextId = domainObject.SecurityContextId;
             mappingObject.StrongDirect = domainObject.StrongDirect;
         }
         

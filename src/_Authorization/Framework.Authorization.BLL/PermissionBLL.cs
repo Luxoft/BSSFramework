@@ -211,13 +211,13 @@ public partial class PermissionBLL
 
                                                             : preAllowedEntities.Distinct().ToList()
 
-                              from entityId in requiredGroup
+                              from securityContextId in requiredGroup
 
-                              let securityObject = allSecurityEntities.SingleOrDefault(v => v.Id == entityId)
+                              let securityObject = allSecurityEntities.SingleOrDefault(v => v.Id == securityContextId)
 
                               where securityObject != null // Протухшая безопасность
 
-                              let hasAccess = allowedEntities.Contains(entityId)
+                              let hasAccess = allowedEntities.Contains(securityContextId)
 
                               where !hasAccess
 

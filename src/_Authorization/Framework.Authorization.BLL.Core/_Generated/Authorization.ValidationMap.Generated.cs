@@ -241,20 +241,20 @@ namespace Framework.Authorization.BLL
             yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.Role);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionDirectFilterModel, System.Guid>> GetPermissionDirectFilterModel_EntityIdValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionDirectFilterModel, System.Guid>> GetPermissionDirectFilterModel_SecurityContextIdValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionDirectFilterModel, System.Guid>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionDirectFilterModel, Framework.Authorization.Domain.SecurityContextType>> GetPermissionDirectFilterModel_EntityTypeValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionDirectFilterModel, Framework.Authorization.Domain.SecurityContextType>> GetPermissionDirectFilterModel_SecurityContextTypeValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionDirectFilterModel, Framework.Authorization.Domain.SecurityContextType>(Framework.Restriction.RequiredMode.Default);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.PermissionDirectFilterModel>> GetPermissionDirectFilterModelProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.PermissionDirectFilterModel> currentClass)
         {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionDirectFilterModel, System.Guid>(source => source.EntityId, currentClass, this.GetPermissionDirectFilterModel_EntityIdValidators(), this.GetClassMap<System.Guid>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionDirectFilterModel, Framework.Authorization.Domain.SecurityContextType>(source => source.EntityType, currentClass, this.GetPermissionDirectFilterModel_EntityTypeValidators(), this.GetClassMap<Framework.Authorization.Domain.SecurityContextType>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionDirectFilterModel, System.Guid>(source => source.SecurityContextId, currentClass, this.GetPermissionDirectFilterModel_SecurityContextIdValidators(), this.GetClassMap<System.Guid>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionDirectFilterModel, Framework.Authorization.Domain.SecurityContextType>(source => source.SecurityContextType, currentClass, this.GetPermissionDirectFilterModel_SecurityContextTypeValidators(), this.GetClassMap<Framework.Authorization.Domain.SecurityContextType>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.PermissionDirectFilterModel> GetPermissionDirectFilterModelValidationMap()

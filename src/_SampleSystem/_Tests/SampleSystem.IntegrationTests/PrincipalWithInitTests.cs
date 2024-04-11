@@ -51,7 +51,7 @@ public class PrincipalWithInitTests : TestBase
             TestPrincipalName,
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.Administrator,
-                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
+                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = this.testPeriod });
     }
 
     [TestMethod]

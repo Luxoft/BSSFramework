@@ -29,8 +29,6 @@ public partial interface IAuthorizationBLLContext :
 
     IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
 
-    ISecurityRoleParser SecurityRoleParser { get; }
-
     TimeProvider TimeProvider { get; }
 
     IAuthorizationExternalSource ExternalSource { get; }
@@ -39,11 +37,11 @@ public partial interface IAuthorizationBLLContext :
 
     Principal CurrentPrincipal { get; }
 
-    EntityType GetEntityType(Type type);
+    SecurityContextType GetSecurityContextType(Type type);
 
-    EntityType GetEntityType(string domainTypeName);
+    SecurityContextType GetSecurityContextType(string domainTypeName);
 
-    EntityType GetEntityType(Guid domainTypeId);
+    SecurityContextType GetSecurityContextType(Guid domainTypeId);
 
 
     /// <summary>

@@ -16,7 +16,7 @@ public static class AuthDALListenerSettings
             ],
             Dependencies = new[]
                            {
-                               TypeEventDependency.FromSaveAndRemove<PermissionFilterItem, Permission>(z => z.Permission),
+                               TypeEventDependency.FromSaveAndRemove<PermissionRestriction, Permission>(z => z.Permission),
                                TypeEventDependency.FromSaveAndRemove<Permission, Principal>(z => z.Principal)
                            }
         };

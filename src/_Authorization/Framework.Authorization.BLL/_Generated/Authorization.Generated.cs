@@ -29,24 +29,6 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class EntityTypeBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.EntityType>, Framework.Authorization.BLL.IEntityTypeBLL
-    {
-        
-        public EntityTypeBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.EntityType> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-        }
-    }
-    
-    public partial class EntityTypeBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IEntityTypeBLL, Framework.Authorization.BLL.EntityTypeBLL, Framework.Authorization.Domain.EntityType>, Framework.Authorization.BLL.IEntityTypeBLLFactory
-    {
-        
-        public EntityTypeBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class PermissionBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Permission>, Framework.Authorization.BLL.IPermissionBLL
     {
         
@@ -65,37 +47,19 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class PermissionFilterEntityBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.PermissionFilterEntity>, Framework.Authorization.BLL.IPermissionFilterEntityBLL
+    public partial class PermissionRestrictionBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.PermissionRestriction>, Framework.Authorization.BLL.IPermissionRestrictionBLL
     {
         
-        public PermissionFilterEntityBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.PermissionFilterEntity> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+        public PermissionRestrictionBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.PermissionRestriction> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, securityProvider, specificationEvaluator)
         {
         }
     }
     
-    public partial class PermissionFilterEntityBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPermissionFilterEntityBLL, Framework.Authorization.BLL.PermissionFilterEntityBLL, Framework.Authorization.Domain.PermissionFilterEntity>, Framework.Authorization.BLL.IPermissionFilterEntityBLLFactory
+    public partial class PermissionRestrictionBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPermissionRestrictionBLL, Framework.Authorization.BLL.PermissionRestrictionBLL, Framework.Authorization.Domain.PermissionRestriction>, Framework.Authorization.BLL.IPermissionRestrictionBLLFactory
     {
         
-        public PermissionFilterEntityBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
-    public partial class PermissionFilterItemBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.PermissionFilterItem>, Framework.Authorization.BLL.IPermissionFilterItemBLL
-    {
-        
-        public PermissionFilterItemBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.PermissionFilterItem> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-        }
-    }
-    
-    public partial class PermissionFilterItemBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPermissionFilterItemBLL, Framework.Authorization.BLL.PermissionFilterItemBLL, Framework.Authorization.Domain.PermissionFilterItem>, Framework.Authorization.BLL.IPermissionFilterItemBLLFactory
-    {
-        
-        public PermissionFilterItemBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
+        public PermissionRestrictionBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
                 base(context)
         {
         }
@@ -119,6 +83,24 @@ namespace Framework.Authorization.BLL
         }
     }
     
+    public partial class SecurityContextTypeBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.SecurityContextType>, Framework.Authorization.BLL.ISecurityContextTypeBLL
+    {
+        
+        public SecurityContextTypeBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.SecurityContextType> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
+        {
+        }
+    }
+    
+    public partial class SecurityContextTypeBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.ISecurityContextTypeBLL, Framework.Authorization.BLL.SecurityContextTypeBLL, Framework.Authorization.Domain.SecurityContextType>, Framework.Authorization.BLL.ISecurityContextTypeBLLFactory
+    {
+        
+        public SecurityContextTypeBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
+                base(context)
+        {
+        }
+    }
+    
     public partial class AuthorizationBLLFactoryContainer : Framework.DomainDriven.BLL.BLLContextContainer<Framework.Authorization.BLL.IAuthorizationBLLContext>, Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer
     {
         
@@ -126,17 +108,15 @@ namespace Framework.Authorization.BLL
         
         private Framework.Authorization.BLL.AuthorizationDefaultBLLFactory defaultBLLFactory;
         
-        private Framework.Authorization.BLL.IEntityTypeBLL entityTypeBLL;
-        
         private Framework.Authorization.BLL.AuthorizationImplementedBLLFactory implementedBLLFactory;
         
         private Framework.Authorization.BLL.IPermissionBLL permissionBLL;
         
-        private Framework.Authorization.BLL.IPermissionFilterEntityBLL permissionFilterEntityBLL;
-        
-        private Framework.Authorization.BLL.IPermissionFilterItemBLL permissionFilterItemBLL;
+        private Framework.Authorization.BLL.IPermissionRestrictionBLL permissionRestrictionBLL;
         
         private Framework.Authorization.BLL.IPrincipalBLL principalBLL;
+        
+        private Framework.Authorization.BLL.ISecurityContextTypeBLL securityContextTypeBLL;
         
         public AuthorizationBLLFactoryContainer(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
                 base(context)
@@ -175,26 +155,6 @@ namespace Framework.Authorization.BLL
             }
         }
         
-        public Framework.Authorization.BLL.IEntityTypeBLL EntityType
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.entityTypeBLL, null))
-                {
-                    this.entityTypeBLL = this.EntityTypeFactory.Create();
-                }
-                return this.entityTypeBLL;
-            }
-        }
-        
-        public Framework.Authorization.BLL.IEntityTypeBLLFactory EntityTypeFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Authorization.BLL.IEntityTypeBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
         public Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid> Implemented
         {
             get
@@ -227,43 +187,23 @@ namespace Framework.Authorization.BLL
             }
         }
         
-        public Framework.Authorization.BLL.IPermissionFilterEntityBLL PermissionFilterEntity
+        public Framework.Authorization.BLL.IPermissionRestrictionBLL PermissionRestriction
         {
             get
             {
-                if (object.ReferenceEquals(this.permissionFilterEntityBLL, null))
+                if (object.ReferenceEquals(this.permissionRestrictionBLL, null))
                 {
-                    this.permissionFilterEntityBLL = this.PermissionFilterEntityFactory.Create();
+                    this.permissionRestrictionBLL = this.PermissionRestrictionFactory.Create();
                 }
-                return this.permissionFilterEntityBLL;
+                return this.permissionRestrictionBLL;
             }
         }
         
-        public Framework.Authorization.BLL.IPermissionFilterEntityBLLFactory PermissionFilterEntityFactory
+        public Framework.Authorization.BLL.IPermissionRestrictionBLLFactory PermissionRestrictionFactory
         {
             get
             {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Authorization.BLL.IPermissionFilterEntityBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
-        public Framework.Authorization.BLL.IPermissionFilterItemBLL PermissionFilterItem
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.permissionFilterItemBLL, null))
-                {
-                    this.permissionFilterItemBLL = this.PermissionFilterItemFactory.Create();
-                }
-                return this.permissionFilterItemBLL;
-            }
-        }
-        
-        public Framework.Authorization.BLL.IPermissionFilterItemBLLFactory PermissionFilterItemFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Authorization.BLL.IPermissionFilterItemBLLFactory>(this.Context.ServiceProvider);
+                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Authorization.BLL.IPermissionRestrictionBLLFactory>(this.Context.ServiceProvider);
             }
         }
         
@@ -287,20 +227,38 @@ namespace Framework.Authorization.BLL
             }
         }
         
+        public Framework.Authorization.BLL.ISecurityContextTypeBLL SecurityContextType
+        {
+            get
+            {
+                if (object.ReferenceEquals(this.securityContextTypeBLL, null))
+                {
+                    this.securityContextTypeBLL = this.SecurityContextTypeFactory.Create();
+                }
+                return this.securityContextTypeBLL;
+            }
+        }
+        
+        public Framework.Authorization.BLL.ISecurityContextTypeBLLFactory SecurityContextTypeFactory
+        {
+            get
+            {
+                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Authorization.BLL.ISecurityContextTypeBLLFactory>(this.Context.ServiceProvider);
+            }
+        }
+        
         public static void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IBusinessRoleBLLFactory, Framework.Authorization.BLL.BusinessRoleBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.BusinessRole, System.Guid>, Framework.Authorization.Domain.BusinessRole>, Framework.Authorization.BLL.IBusinessRoleBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IEntityTypeBLLFactory, Framework.Authorization.BLL.EntityTypeBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.EntityType, System.Guid>, Framework.Authorization.Domain.EntityType>, Framework.Authorization.BLL.IEntityTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IPermissionBLLFactory, Framework.Authorization.BLL.PermissionBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Permission, System.Guid>, Framework.Authorization.Domain.Permission>, Framework.Authorization.BLL.IPermissionBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IPermissionFilterEntityBLLFactory, Framework.Authorization.BLL.PermissionFilterEntityBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionFilterEntity, System.Guid>, Framework.Authorization.Domain.PermissionFilterEntity>, Framework.Authorization.BLL.IPermissionFilterEntityBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IPermissionFilterItemBLLFactory, Framework.Authorization.BLL.PermissionFilterItemBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionFilterItem, System.Guid>, Framework.Authorization.Domain.PermissionFilterItem>, Framework.Authorization.BLL.IPermissionFilterItemBLLFactory>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IPermissionRestrictionBLLFactory, Framework.Authorization.BLL.PermissionRestrictionBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionRestriction, System.Guid>, Framework.Authorization.Domain.PermissionRestriction>, Framework.Authorization.BLL.IPermissionRestrictionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IPrincipalBLLFactory, Framework.Authorization.BLL.PrincipalBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Principal, System.Guid>, Framework.Authorization.Domain.Principal>, Framework.Authorization.BLL.IPrincipalBLLFactory>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.ISecurityContextTypeBLLFactory, Framework.Authorization.BLL.SecurityContextTypeBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.SecurityContextType, System.Guid>, Framework.Authorization.Domain.SecurityContextType>, Framework.Authorization.BLL.ISecurityContextTypeBLLFactory>(serviceCollection);
         }
     }
     

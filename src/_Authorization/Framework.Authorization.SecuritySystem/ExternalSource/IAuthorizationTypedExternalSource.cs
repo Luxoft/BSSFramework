@@ -2,7 +2,11 @@
 
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
-public interface IAuthorizationTypedExternalSource : IAuthorizationTypedExternalSourceBase
+public interface IAuthorizationTypedExternalSource
 {
-    PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false);
+    IEnumerable<SecurityEntity> GetSecurityEntities();
+
+    IEnumerable<SecurityEntity> GetSecurityEntitiesByIdents(IEnumerable<Guid> securityEntityIdents);
+
+    IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId);
 }

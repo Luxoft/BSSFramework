@@ -5,6 +5,7 @@ using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,6 +32,8 @@ public class ConfigurationContextFacade
 
         this.context = context;
     }
+
+    public IServiceProvider ServiceProvider => this.context.ServiceProvider;
 
     /// <summary>
     ///     Преобразует список экземпляров <see cref="IPrincipal{Guid}" /> в список экземпляров <see cref="IEmployee" />.
@@ -65,14 +68,14 @@ public class ConfigurationContextFacade
     /// </returns>
     public virtual Type GetSecurityType(Guid authDomainTypeId)
     {
-        var entityType = this.context.Authorization.Logics.EntityType.GetById(authDomainTypeId);
+        var securityContextType = this.context.Authorization.Logics.SecurityContextType.GetById(authDomainTypeId);
 
-        if (entityType == null)
+        if (securityContextType == null)
         {
             return null;
         }
 
-        var result = this.GetSecurityType(entityType);
+        var result = this.GetSecurityType(securityContextType);
 
         return result;
     }
@@ -80,17 +83,17 @@ public class ConfigurationContextFacade
     /// <summary>
     ///     Возращает тип контекста безопасности доменного типа.
     /// </summary>
-    /// <param name="entityType">Описатель доменного типа.</param>
+    /// <param name="securityContextType">Описатель доменного типа.</param>
     /// <returns>Экземпляр <see cref="Type" />.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент entityType равен null.</exception>
-    public virtual Type GetSecurityType(EntityType entityType)
+    /// <exception cref="ArgumentNullException">Аргумент securityContextType равен null.</exception>
+    public virtual Type GetSecurityType(SecurityContextType securityContextType)
     {
-        if (entityType == null)
+        if (securityContextType == null)
         {
-            throw new ArgumentNullException(nameof(entityType));
+            throw new ArgumentNullException(nameof(securityContextType));
         }
 
-        var result = this.context.ServiceProvider.GetRequiredService<ISecurityContextInfoService>().GetSecurityContextInfo(entityType.Name).Type;
+        var result = this.context.ServiceProvider.GetRequiredService<ISecurityContextInfoService>().GetSecurityContextInfo(securityContextType.Name).Type;
         return result;
     }
 
@@ -98,16 +101,16 @@ public class ConfigurationContextFacade
     ///     Возвращает описатель сущности в котексте которой выдаются права пользователю.
     /// </summary>
     /// <param name="domainTypeName">Имя доменного типа.</param>
-    /// <returns>Экземпляр <see cref="EntityType" />.</returns>
+    /// <returns>Экземпляр <see cref="SecurityContextType" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент domainTypeName равен null.</exception>
-    public virtual EntityType GetEntityType(string domainTypeName)
+    public virtual SecurityContextType GetSecurityContextType(string domainTypeName)
     {
         if (domainTypeName == null)
         {
             throw new ArgumentNullException(nameof(domainTypeName));
         }
 
-        var result = this.context.Authorization.GetEntityType(domainTypeName);
+        var result = this.context.Authorization.GetSecurityContextType(domainTypeName);
         return result;
     }
 

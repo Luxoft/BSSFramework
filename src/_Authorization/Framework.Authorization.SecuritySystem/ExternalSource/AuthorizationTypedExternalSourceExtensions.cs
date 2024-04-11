@@ -53,10 +53,5 @@ public static class AuthorizationTypedExternalSourceExtensions
         {
             return this._securityEntitiesWithMasterExpandCache[startSecurityEntityId];
         }
-
-        public PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false)
-        {
-            return this._baseSource.AddSecurityEntity(securityEntity, disableExistsCheck);
-        }
     }
 }

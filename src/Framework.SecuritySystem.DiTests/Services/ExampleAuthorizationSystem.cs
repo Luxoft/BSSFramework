@@ -2,6 +2,7 @@
 
 using Framework.Core;
 using Framework.HierarchicalExpand;
+using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.DiTests;
 

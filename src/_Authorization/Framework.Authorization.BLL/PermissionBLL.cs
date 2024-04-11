@@ -3,7 +3,10 @@ using Framework.Core;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
+using Framework.SecuritySystem;
 using Framework.Validation;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.BLL;
 
@@ -45,51 +48,18 @@ public partial class PermissionBLL
 
     public void DenormalizePermission(Permission permission)
     {
-        this.DenormalizePermissionFilterItems(permission);
+        this.DenormalizePermissionRestrictions(permission);
 
         //this.RecalculateDenormalizedItems(permission);
     }
-    protected void DenormalizePermissionFilterItems(Permission permission)
+    protected void DenormalizePermissionRestrictions(Permission permission)
     {
-        permission.FilterItems.Foreach(item =>
+        permission.Restrictions.Foreach(item =>
                                        {
-                                           item.ContextEntityId = item.Entity.EntityId;
-                                           item.EntityType = item.Entity.EntityType;
+                                           item.SecurityContextId = item.SecurityContextId;
+                                           item.SecurityContextType = item.SecurityContextType;
                                        });
     }
-
-    //public void RecalculateDenormalizedItems(Permission permission)
-    //{
-    //    if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-    //    var expectedItems = from entityType in this.Context.Logics.EntityType.GetFullList()
-
-    //                        join filterItem in permission.FilterItems on entityType equals filterItem.EntityType into filterItemGroup
-
-    //                        from accessId in this.GetAccessIdents(filterItemGroup.ToArray(fi => fi.Entity.EntityId))
-
-    //                        select new { EntityType = entityType, EntityId = accessId };
-
-    //    var mergeResult = permission.DenormalizedItems.GetMergeResult(expectedItems, di => new { di.EntityType, di.EntityId }, pair => pair);
-
-    //    permission.RemoveDetails(mergeResult.RemovingItems);
-
-    //    mergeResult.AddingItems.Foreach(pair => new DenormalizedPermissionItem(permission, pair.EntityType, pair.EntityId));
-    //}
-
-    //private IEnumerable<Guid> GetAccessIdents(Guid[] baseIdents)
-    //{
-    //    foreach (var baseIdent in baseIdents)
-    //    {
-    //        yield return baseIdent;
-    //    }
-
-    //    if (!baseIdents.Any())
-    //    {
-    //        yield return this.Context.GrandAccessIdent;
-    //    }
-    //}
-
 
     protected override void PostValidate(Permission permission, AuthorizationOperationContext operationContext)
     {
@@ -167,7 +137,7 @@ public partial class PermissionBLL
         return subPermission.Period.IsEmpty || parentPermission.Period.Contains(subPermission.Period);
     }
 
-    private Dictionary<EntityType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(Permission permission)
+    private Dictionary<SecurityContextType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(Permission permission)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
@@ -176,49 +146,49 @@ public partial class PermissionBLL
         return this.GetInvalidDelegatedPermissionSecurities(permission, delegatedFromPermission);
     }
 
-    private Dictionary<EntityType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(Permission subPermission, Permission parentPermission)
+    private Dictionary<SecurityContextType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(Permission subPermission, Permission parentPermission)
     {
         if (subPermission == null) throw new ArgumentNullException(nameof(subPermission));
         if (parentPermission == null) throw new ArgumentNullException(nameof(parentPermission));
 
-        var allowedEntitiesRequest = from filterItem in parentPermission.FilterItems
+        var allowedEntitiesRequest = from filterItem in parentPermission.Restrictions
 
-                                     group filterItem.Entity.EntityId by filterItem.Entity.EntityType;
+                                     group filterItem.SecurityContextId by filterItem.SecurityContextType;
 
         var allowedEntitiesDict = allowedEntitiesRequest.ToDictionary(g => g.Key, g => g.ToList());
 
-        var requaredEntitiesRequest = (from filterItem in subPermission.FilterItems
+        var requiredEntitiesRequest = (from filterItem in subPermission.Restrictions
 
-                                       group filterItem.Entity.EntityId by filterItem.Entity.EntityType).ToArray();
+                                       group filterItem.SecurityContextId by filterItem.SecurityContextType).ToArray();
 
-        var invalidRequest1 = from requeredGroup in requaredEntitiesRequest
+        var invalidRequest1 = from requiredGroup in requiredEntitiesRequest
 
-                              let allSecurityEntities = this.Context.ExternalSource.GetTyped(requeredGroup.Key).GetSecurityEntities()
+                              let allSecurityEntities = this.Context.ExternalSource.GetTyped(requiredGroup.Key).GetSecurityEntities()
 
-                              let entityType = requeredGroup.Key
+                              let securityContextType = requiredGroup.Key
 
-                              let preAllowedEntities = allowedEntitiesDict.GetValueOrDefault(entityType).Maybe(v => v.Distinct())
+                              let preAllowedEntities = allowedEntitiesDict.GetValueOrDefault(securityContextType).Maybe(v => v.Distinct())
 
                               where preAllowedEntities != null // доступны все
 
-                              let allowedEntities = entityType.Expandable ? preAllowedEntities.Distinct()
+                              let allowedEntities = this.IsExpandable(securityContextType) ? preAllowedEntities.Distinct()
                                                                     .GetAllElements(allowedEntityId => allSecurityEntities.Where(v => v.ParentId == allowedEntityId).Select(v => v.Id))
                                                                     .Distinct()
                                                                     .ToList()
 
                                                             : preAllowedEntities.Distinct().ToList()
 
-                              from entityId in requeredGroup
+                              from securityContextId in requiredGroup
 
-                              let securityObject = allSecurityEntities.SingleOrDefault(v => v.Id == entityId)
+                              let securityObject = allSecurityEntities.SingleOrDefault(v => v.Id == securityContextId)
 
                               where securityObject != null // Протухшая безопасность
 
-                              let hasAccess = allowedEntities.Contains(entityId)
+                              let hasAccess = allowedEntities.Contains(securityContextId)
 
                               where !hasAccess
 
-                              group securityObject by entityType into g
+                              group securityObject by securityContextType into g
 
                               let key = g.Key
 
@@ -226,19 +196,25 @@ public partial class PermissionBLL
 
                               select key.ToKeyValuePair(value);
 
-        var invalidRequest2 = from entityType in allowedEntitiesDict.Keys
+        var invalidRequest2 = from securityContextType in allowedEntitiesDict.Keys
 
-                              join requeredGroup in requaredEntitiesRequest on entityType equals requeredGroup.Key into g
+                              join requeredGroup in requiredEntitiesRequest on securityContextType equals requeredGroup.Key into g
 
                               where !g.Any()
 
-                              let key = entityType
+                              let key = securityContextType
 
                               let value = (IEnumerable<SecurityEntity>)new[] { new SecurityEntity { Name = "[Not Selected Element]" } }
 
                               select key.ToKeyValuePair(value);
 
         return invalidRequest1.Concat(invalidRequest2).ToDictionary();
+    }
+
+    private bool IsExpandable(SecurityContextType securityContextType)
+    {
+        return this.Context.ServiceProvider.GetRequiredService<ISecurityContextInfoService>()
+                   .GetSecurityContextInfo(securityContextType.Name).Type.IsHierarchical();
     }
 
     public void ChangeDelegatePermissions(ChangePermissionDelegatesModel changePermissionDelegatesModel)

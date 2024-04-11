@@ -8,13 +8,13 @@ namespace Framework.Authorization.WebApi;
 public partial class AuthSLJsonController
 {
     [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetFullSecurityEntities))]
-    public IEnumerable<SecurityEntityFullDTO> GetFullSecurityEntities([FromForm] EntityTypeIdentityDTO entityTypeIdentity)
+    public IEnumerable<SecurityEntityFullDTO> GetFullSecurityEntities([FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity)
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
                                                  {
-                                                     var entityType = evaluateData.Context.Logics.EntityType.GetById(entityTypeIdentity.Id, true);
+                                                     var securityContextType = evaluateData.Context.Logics.SecurityContextType.GetById(securityContextTypeIdentity.Id, true);
 
-                                                     return evaluateData.Context.ExternalSource.GetTyped(entityType).GetSecurityEntities().ToFullDTOList(evaluateData.MappingService);
+                                                     return evaluateData.Context.ExternalSource.GetTyped(securityContextType).GetSecurityEntities().ToFullDTOList(evaluateData.MappingService);
                                                  });
     }
 
@@ -23,9 +23,9 @@ public partial class AuthSLJsonController
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
                                                  {
-                                                     var entityType = evaluateData.Context.Logics.EntityType.GetById(request.EntityType.Id, true);
+                                                     var securityContextType = evaluateData.Context.Logics.SecurityContextType.GetById(request.SecurityContextType.Id, true);
 
-                                                     return evaluateData.Context.ExternalSource.GetTyped(entityType).GetSecurityEntitiesByIdents(request.SecurityEntities.Select(v => v.Id)).ToFullDTOList(evaluateData.MappingService);
+                                                     return evaluateData.Context.ExternalSource.GetTyped(securityContextType).GetSecurityEntitiesByIdents(request.SecurityEntities.Select(v => v.Id)).ToFullDTOList(evaluateData.MappingService);
                                                  });
     }
 }

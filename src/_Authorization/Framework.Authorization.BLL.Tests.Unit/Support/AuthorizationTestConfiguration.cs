@@ -46,7 +46,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
     private AuthorizationTestConfiguration WithExternalSourceMock(AuthorizationTypedExternalSourceStub stub)
     {
         var authorizationExternalSourceMock = Substitute.For<IAuthorizationExternalSource>();
-        authorizationExternalSourceMock.GetTyped(Arg.Any<EntityType>()).Returns(stub);
+        authorizationExternalSourceMock.GetTyped(Arg.Any<SecurityContextType>()).Returns(stub);
 
         this.Context.ExternalSource.Returns(authorizationExternalSourceMock);
         return this;
@@ -118,11 +118,6 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
                     }
                 }
             }
-        }
-
-        public PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false)
-        {
-            throw new NotImplementedException();
         }
     }
 

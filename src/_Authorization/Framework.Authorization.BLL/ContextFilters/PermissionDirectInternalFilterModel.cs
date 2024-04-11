@@ -21,21 +21,21 @@ internal class PermissionDirectInternalFilterModel : DomainObjectFilterModel<Per
 
     public override Expression<Func<Permission, bool>> ToFilterExpression()
     {
-        var entityType = this.baseFilterModel.EntityType;
-        var entityId = this.baseFilterModel.EntityId;
+        var securityContextType = this.baseFilterModel.SecurityContextType;
+        var securityContextId = this.baseFilterModel.SecurityContextId;
 
         if (this.baseFilterModel.StrongDirect)
         {
-            return permission => permission.FilterItems.Any(filterItem => filterItem.Entity.EntityType == entityType && filterItem.Entity.EntityId == entityId);
+            return permission => permission.Restrictions.Any(filterItem => filterItem.SecurityContextType == securityContextType && filterItem.SecurityContextId == securityContextId);
         }
         else
         {
-            var securityEntities = this.context.ExternalSource.GetTyped(entityType).GetSecurityEntitiesWithMasterExpand(entityId);
+            var securityEntities = this.context.ExternalSource.GetTyped(securityContextType).GetSecurityEntitiesWithMasterExpand(securityContextId);
 
             var enitityIdents = securityEntities.ToList(se => se.Id);
 
-            return permission => permission.FilterItems.All(filterItem => filterItem.Entity.EntityType != entityType)
-                                 || permission.FilterItems.Any(filterItem => enitityIdents.Contains(filterItem.Entity.EntityId));
+            return permission => permission.Restrictions.All(filterItem => filterItem.SecurityContextType != securityContextType)
+                                 || permission.Restrictions.Any(filterItem => enitityIdents.Contains(filterItem.SecurityContextId));
         }
     }
 }

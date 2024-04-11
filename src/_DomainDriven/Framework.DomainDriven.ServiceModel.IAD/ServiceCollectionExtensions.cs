@@ -185,7 +185,7 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 
                        .AddSingleton<InitializeSettings>()
-                       .AddScoped<IAuthorizationEntityTypeInitializer, AuthorizationEntityTypeInitializer>()
+                       .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
@@ -212,7 +212,7 @@ public static class ServiceCollectionExtensions
                                              .SetEdit(AuthorizationSecurityOperation.BusinessRoleEdit)
                                              .SetCustomService<AuthorizationBusinessRoleSecurityService>())
 
-                                   .Add<EntityType>(
+                                   .Add<SecurityContextType>(
                                        b => b.SetView(SecurityRule.Disabled)));
     }
 

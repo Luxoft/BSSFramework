@@ -11,19 +11,19 @@ public class GetBusinessRoleContextEntitiesHandler : BaseReadHandler, IGetBusine
 {
     private readonly IAuthorizationBLLContext authorizationBllContext;
 
-    public GetBusinessRoleContextEntitiesHandler(IAuthorizationBLLContext authorizationBllContext) => 
+    public GetBusinessRoleContextEntitiesHandler(IAuthorizationBLLContext authorizationBllContext) =>
         this.authorizationBllContext = authorizationBllContext;
 
     protected override object GetData(HttpContext context)
     {
-        var entityTypeId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
+        var securityContextTypeId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
         var searchToken = context.Request.Query["searchToken"];
 
-        var entityType = this.authorizationBllContext.Authorization.Logics.EntityTypeFactory
+        var securityContextType = this.authorizationBllContext.Authorization.Logics.SecurityContextTypeFactory
             .Create(SecurityRule.View)
-            .GetById(entityTypeId, true);
+            .GetById(securityContextTypeId, true);
 
-        var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(entityType)
+        var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(securityContextType)
             .GetSecurityEntities();
 
         if (!string.IsNullOrWhiteSpace(searchToken))

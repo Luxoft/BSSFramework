@@ -5,7 +5,7 @@ using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
-using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem;
 using Framework.Transfering;
 
 namespace Framework.Authorization.Domain;
@@ -16,7 +16,7 @@ namespace Framework.Authorization.Domain;
 /// <remarks>
 /// Пермиссии могут выдаваться в рамках контекстов
 /// </remarks>
-/// <seealso cref="EntityType"/>
+/// <seealso cref="SecurityContextType"/>
 [DomainType("{5d774041-bc69-4841-b64e-a2ee0131e632}")]
 [BLLViewRole(MaxCollection = MainDTOType.RichDTO)]
 [BLLRemoveRole]
@@ -25,7 +25,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
                                   IDetail<Principal>,
 
-                                  IMaster<PermissionFilterItem>,
+                                  IMaster<PermissionRestriction>,
 
                                   IMaster<Permission>,
 
@@ -37,7 +37,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
                                   IPermission<Guid>
 {
-    private readonly ICollection<PermissionFilterItem> filterItems = new List<PermissionFilterItem>();
+    private readonly ICollection<PermissionRestriction> restrictions = new List<PermissionRestriction>();
 
     private readonly ICollection<Permission> delegatedTo = new List<Permission>();
 
@@ -91,7 +91,7 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// Коллекция контекстов пермиссии
     /// </summary>
     [UniqueGroup]
-    public virtual IEnumerable<PermissionFilterItem> FilterItems => this.filterItems;
+    public virtual IEnumerable<PermissionRestriction> Restrictions => this.restrictions;
 
     /// <summary>
     /// Коллекция пермиссий, которым данная пермиссия была делегирована
@@ -169,7 +169,7 @@ public class Permission : AuditPersistentDomainObjectBase,
         set { this.comment = value.TrimNull(); }
     }
 
-    ICollection<PermissionFilterItem> IMaster<PermissionFilterItem>.Details => (ICollection<PermissionFilterItem>)this.FilterItems;
+    ICollection<PermissionRestriction> IMaster<PermissionRestriction>.Details => (ICollection<PermissionRestriction>)this.Restrictions;
 
     Principal IDetail<Principal>.Master => this.Principal;
 
@@ -181,7 +181,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     IEnumerable<Permission> IChildrenSource<Permission>.Children => this.DelegatedTo;
 
-    IEnumerable<IPermissionFilterItem<Guid>> IPermission<Guid>.FilterItems => this.FilterItems;
+    IEnumerable<IPermissionRestriction<Guid>> IPermission<Guid>.Restrictions => this.Restrictions;
 
     /// <summary>
     /// Проверка на уникальноть
@@ -194,6 +194,6 @@ public class Permission : AuditPersistentDomainObjectBase,
 
         return otherPermission.Role == this.Role
                && otherPermission.Period.IsIntersected(this.Period)
-               && otherPermission.GetOrderedEntityIdents().SequenceEqual(this.GetOrderedEntityIdents());
+               && otherPermission.GetOrderedSecurityContextIdents().SequenceEqual(this.GetOrderedSecurityContextIdents());
     }
 }

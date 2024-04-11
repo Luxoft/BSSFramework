@@ -68,16 +68,6 @@ namespace Framework.Authorization.BLL
             get;
         }
         
-        Framework.Authorization.BLL.IEntityTypeBLL EntityType
-        {
-            get;
-        }
-        
-        Framework.Authorization.BLL.IEntityTypeBLLFactory EntityTypeFactory
-        {
-            get;
-        }
-        
         Framework.Authorization.BLL.IPermissionBLL Permission
         {
             get;
@@ -88,22 +78,12 @@ namespace Framework.Authorization.BLL
             get;
         }
         
-        Framework.Authorization.BLL.IPermissionFilterEntityBLL PermissionFilterEntity
+        Framework.Authorization.BLL.IPermissionRestrictionBLL PermissionRestriction
         {
             get;
         }
         
-        Framework.Authorization.BLL.IPermissionFilterEntityBLLFactory PermissionFilterEntityFactory
-        {
-            get;
-        }
-        
-        Framework.Authorization.BLL.IPermissionFilterItemBLL PermissionFilterItem
-        {
-            get;
-        }
-        
-        Framework.Authorization.BLL.IPermissionFilterItemBLLFactory PermissionFilterItemFactory
+        Framework.Authorization.BLL.IPermissionRestrictionBLLFactory PermissionRestrictionFactory
         {
             get;
         }
@@ -114,6 +94,16 @@ namespace Framework.Authorization.BLL
         }
         
         Framework.Authorization.BLL.IPrincipalBLLFactory PrincipalFactory
+        {
+            get;
+        }
+        
+        Framework.Authorization.BLL.ISecurityContextTypeBLL SecurityContextType
+        {
+            get;
+        }
+        
+        Framework.Authorization.BLL.ISecurityContextTypeBLLFactory SecurityContextTypeFactory
         {
             get;
         }
@@ -129,14 +119,6 @@ namespace Framework.Authorization.BLL
     {
     }
     
-    public partial interface IEntityTypeBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.EntityType, System.Guid>
-    {
-    }
-    
-    public partial interface IEntityTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IEntityTypeBLL, Framework.Authorization.Domain.EntityType>
-    {
-    }
-    
     public partial interface IPermissionBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Permission, System.Guid>
     {
         
@@ -147,19 +129,11 @@ namespace Framework.Authorization.BLL
     {
     }
     
-    public partial interface IPermissionFilterEntityBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionFilterEntity, System.Guid>
+    public partial interface IPermissionRestrictionBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionRestriction, System.Guid>
     {
     }
     
-    public partial interface IPermissionFilterEntityBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionFilterEntityBLL, Framework.Authorization.Domain.PermissionFilterEntity>
-    {
-    }
-    
-    public partial interface IPermissionFilterItemBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionFilterItem, System.Guid>
-    {
-    }
-    
-    public partial interface IPermissionFilterItemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionFilterItemBLL, Framework.Authorization.Domain.PermissionFilterItem>
+    public partial interface IPermissionRestrictionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionRestrictionBLL, Framework.Authorization.Domain.PermissionRestriction>
     {
     }
     
@@ -170,6 +144,14 @@ namespace Framework.Authorization.BLL
     }
     
     public partial interface IPrincipalBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPrincipalBLL, Framework.Authorization.Domain.Principal>
+    {
+    }
+    
+    public partial interface ISecurityContextTypeBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.SecurityContextType, System.Guid>
+    {
+    }
+    
+    public partial interface ISecurityContextTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.ISecurityContextTypeBLL, Framework.Authorization.Domain.SecurityContextType>
     {
     }
 }

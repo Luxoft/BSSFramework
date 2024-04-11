@@ -3,6 +3,7 @@
 using Framework.Core;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
+using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
@@ -119,7 +120,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
             var securityContextTypeName = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Name;
 
-            var fullAccessFilter = ExpressionHelper.Create((IPermission<TIdent> permission) => permission.FilterItems.All(filterItem => filterItem.Entity.EntityType.Name != securityContextTypeName));
+            var fullAccessFilter = ExpressionHelper.Create((IPermission<TIdent> permission) => permission.Restrictions.All(restriction => restriction.SecurityContextType.Name != securityContextTypeName));
 
             if (securityObjects.Any())
             {
@@ -129,8 +130,8 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
                 return fullAccessFilter.BuildOr(permission =>
 
-                                                        permission.FilterItems.Any(filterItem => filterItem.Entity.EntityType.Name == securityContextTypeName
-                                                                                       && securityIdents.Contains(filterItem.Entity.EntityId)));
+                                                        permission.Restrictions.Any(restriction => restriction.SecurityContextType.Name == securityContextTypeName
+                                                                                       && securityIdents.Contains(restriction.SecurityContextId)));
             }
             else
             {

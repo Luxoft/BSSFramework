@@ -35,11 +35,11 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
                                      Comment = x.Comment,
                                      StartDate = x.Period.StartDate,
                                      EndDate = x.Period.EndDate,
-                                     Contexts = x.FilterItems
+                                     Contexts = x.Restrictions
                                                  .Select(
                                                          f => new KeyValuePair<Guid, Guid>(
-                                                          f.EntityType.Id,
-                                                          f.Entity.EntityId))
+                                                          f.SecurityContextType.Id,
+                                                          f.SecurityContextId))
                                                  .ToList()
                              })
                 .ToList();
@@ -50,12 +50,12 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
         var result = new Dictionary<Guid, (string Context, Dictionary<Guid, string> Entities)>();
         foreach (var group in permissions.SelectMany(x => x.Contexts).GroupBy(x => x.Key, x => x.Value))
         {
-            var entityType = this.authorizationBllContext.Authorization.Logics.EntityType.GetById(group.Key, true);
-            var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(entityType)
+            var securityContextType = this.authorizationBllContext.Authorization.Logics.SecurityContextType.GetById(group.Key, true);
+            var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(securityContextType)
                                .GetSecurityEntitiesByIdents(group.Distinct().ToList())
                                .ToDictionary(e => e.Id, e => e.Name);
 
-            result.Add(entityType.Id, (Context: entityType.Name, Entities: entities));
+            result.Add(securityContextType.Id, (Context: securityContextType.Name, Entities: entities));
         }
 
         return result;

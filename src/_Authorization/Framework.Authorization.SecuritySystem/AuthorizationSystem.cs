@@ -7,6 +7,7 @@ using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -89,9 +90,8 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IEnumerable<Type> securityTypes)
     {
         var permissions = this.availablePermissionSource.GetAvailablePermissionsQueryable(true, securityRule)
-                              .FetchMany(q => q.FilterItems)
-                              .ThenFetch(q => q.Entity)
-                              .ThenFetch(q => q.EntityType)
+                              .FetchMany(q => q.Restrictions)
+                              .ThenFetch(q => q.SecurityContextType)
                               .ToList();
 
         var securityTypesCache = securityTypes.ToReadOnlyCollection();
@@ -129,8 +129,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         {
             { typeof(IPrincipal<Guid>), typeof(Principal) },
             { typeof(IPermission<Guid>), typeof(Permission) },
-            { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
-            { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
-            { typeof(IEntityType<Guid>), typeof(EntityType) },
+            { typeof(IPermissionRestriction<Guid>), typeof(PermissionRestriction) },
+            { typeof(ISecurityContextType<Guid>), typeof(SecurityContextType) },
         });
 }

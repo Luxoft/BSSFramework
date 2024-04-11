@@ -3,7 +3,8 @@
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
-using Framework.SecuritySystem;
+
+using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.Domain;
 

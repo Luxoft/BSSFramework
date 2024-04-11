@@ -1,4 +1,6 @@
-﻿namespace Framework.SecuritySystem.DiTests;
+﻿using Framework.SecuritySystem.ExternalSystem;
+
+namespace Framework.SecuritySystem.DiTests;
 
 public class ExamplePrincipalPermissionSource : IPrincipalPermissionSource<Guid>
 {

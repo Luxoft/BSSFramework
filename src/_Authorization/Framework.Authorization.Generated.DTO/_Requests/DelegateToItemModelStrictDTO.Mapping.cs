@@ -10,7 +10,7 @@ public class GetFullSecurityEntitiesByIdentsRequest
 {
     [DataMember]
     [AutoRequestProperty(OrderIndex = 0)]
-    public EntityTypeIdentityDTO EntityType { get; set; }
+    public SecurityContextTypeIdentityDTO SecurityContextType { get; set; }
 
     [DataMember]
     [AutoRequestProperty(OrderIndex = 1)]

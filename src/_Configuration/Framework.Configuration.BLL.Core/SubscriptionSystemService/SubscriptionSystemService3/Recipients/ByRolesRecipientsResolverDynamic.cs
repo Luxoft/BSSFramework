@@ -56,10 +56,10 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRec
             NotificationExpandType expandType)
     {
         var result =
-                from item in fids.GroupBy(fid => fid.EntityName)
+                from item in fids.GroupBy(fid => fid.SecurityContextTypeName)
                 let securityContextType = this.ConfigurationContextFacade.GetSecurityContextType(item.Key.ToLowerInvariant())
                 let securityType = this.ConfigurationContextFacade.GetSecurityType(securityContextType)
-                let ids = item.Select(i => i.Id)
+                let ids = item.Select(i => i.SecurityContextId)
                 let et = this.IsExpandable(securityContextType) ? expandType : expandType.WithoutHierarchical()
                 select new NotificationFilterGroup(securityType, ids, et);
 

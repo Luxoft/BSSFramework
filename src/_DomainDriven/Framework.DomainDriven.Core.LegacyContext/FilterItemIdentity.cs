@@ -3,47 +3,36 @@ using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven;
 
-public struct FilterItemIdentity : IDefaultIdentityObject, IEquatable<FilterItemIdentity>
+public struct FilterItemIdentity : IEquatable<FilterItemIdentity>
 {
-    public FilterItemIdentity(FilterItemType securityContextType, string id)
-            : this(securityContextType.ToString(), id)
+
+    public FilterItemIdentity(string securityContextTypeName, string securityContextId)
+            : this(securityContextTypeName, new Guid(securityContextId))
     {
 
     }
 
-    public FilterItemIdentity(string entityName, string id)
-            : this(entityName, new Guid(id))
-    {
-
-    }
-
-    public FilterItemIdentity(FilterItemType securityContextType, Guid id)
-            : this(securityContextType.ToString(), id)
-    {
-
-    }
-
-    public FilterItemIdentity(string entityName, Guid id)
+    public FilterItemIdentity(string securityContextTypeName, Guid securityContextId)
             : this()
     {
-        this.EntityName = entityName;
-        this.Id = id;
+        this.SecurityContextTypeName = securityContextTypeName;
+        this.SecurityContextId = securityContextId;
     }
 
 
-    public string EntityName { get; set; }
+    public string SecurityContextTypeName { get; set; }
 
-    public Guid Id { get; set; }
+    public Guid SecurityContextId { get; set; }
 
 
     public override string ToString()
     {
-        return $"Id: {this.Id}, EntityType: {this.EntityName}";
+        return $"SecurityContextId: {this.SecurityContextId}, SecurityContextTypeName: {this.SecurityContextTypeName}";
     }
 
     public override int GetHashCode()
     {
-        return this.Id.GetHashCode();
+        return this.SecurityContextId.GetHashCode();
     }
 
     public override bool Equals(object obj)
@@ -53,7 +42,7 @@ public struct FilterItemIdentity : IDefaultIdentityObject, IEquatable<FilterItem
 
     public bool Equals(FilterItemIdentity other)
     {
-        return this.Id == other.Id && this.EntityName == other.EntityName;
+        return this.SecurityContextId == other.SecurityContextId && this.SecurityContextTypeName == other.SecurityContextTypeName;
     }
 }
 
@@ -81,15 +70,4 @@ public static class FilterItemIdentityExtensions
 
         return new FilterItemIdentity(typeof(TDomainObject).Name, domainObject.Id);
     }
-}
-
-public enum FilterItemType
-{
-    Location,
-
-    BusinessUnit,
-
-    ManagementUnit,
-
-    Employee
 }

@@ -118,7 +118,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
             .Returns(new[] { fid });
 
         this.configurationContextFacade
-            .GetSecurityContextType(fid.EntityName.ToLowerInvariant())
+            .GetSecurityContextType(fid.SecurityContextTypeName.ToLowerInvariant())
             .Returns(securityContextType);
 
         this.configurationContextFacade

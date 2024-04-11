@@ -7,28 +7,21 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetPrincipalsHandler : BaseReadHandler, IGetPrincipalsHandler
+public class GetPrincipalsHandler(IAuthorizationBLLContext authorizationBllContext) : BaseReadHandler, IGetPrincipalsHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public GetPrincipalsHandler(IAuthorizationBLLContext authorizationBllContext) =>
-            this.authorizationBllContext = authorizationBllContext;
-
-    protected override object GetData(HttpContext context)
+    protected override Task<object> GetData(HttpContext context)
     {
         var searchToken = context.Request.Query["searchToken"];
 
-        var query = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(SecurityRule.View)
-                        .GetSecureQueryable();
-        if (!string.IsNullOrWhiteSpace(searchToken))
-        {
-            query = query.Where(p => p.Name.Contains(searchToken));
-        }
+        var query = authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(SecurityRule.View)
+                                           .GetSecureQueryable();
+        if (!string.IsNullOrWhiteSpace(searchToken)) query = query.Where(p => p.Name.Contains(searchToken));
 
-        return query
-               .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
-               .OrderBy(r => r.Name)
-               .Take(70)
-               .ToList();
+        return Task.FromResult<object>(
+            query
+                .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
+                .OrderBy(r => r.Name)
+                .Take(70)
+                .ToList());
     }
 }

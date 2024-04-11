@@ -25,10 +25,14 @@ export interface IOperationDetails {
 export class ViewOperationDialogComponent implements OnInit {
   public details: IOperationDetails = { BusinessRoles: [], Principals: [] };
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IOperation, private readonly http: HttpClient, private readonly cdr: ChangeDetectorRef) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: IOperation,
+    private readonly http: HttpClient,
+    private readonly cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.http.get<IOperationDetails>(`api/operation/${this.data.Id}`).subscribe((x) => {
+    this.http.get<IOperationDetails>(`api/operation/${this.data.Name}`).subscribe((x) => {
       this.details = x;
       this.cdr.markForCheck();
     });

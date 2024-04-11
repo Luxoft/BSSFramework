@@ -10,9 +10,9 @@ public abstract class BaseReadHandler : IHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var data = this.GetData(context);
+        var data = await this.GetData(context);
         await context.Response.WriteAsync(JsonSerializer.Serialize(data), cancellationToken);
     }
 
-    protected abstract object GetData(HttpContext context);
+    protected abstract Task<object> GetData(HttpContext context);
 }

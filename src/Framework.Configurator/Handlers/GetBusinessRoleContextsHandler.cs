@@ -7,17 +7,14 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetBusinessRoleContextsHandler : BaseReadHandler, IGetBusinessRoleContextsHandler
+public class GetBusinessRoleContextsHandler(IAuthorizationBLLContext authorizationBllContext)
+    : BaseReadHandler, IGetBusinessRoleContextsHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public GetBusinessRoleContextsHandler(IAuthorizationBLLContext authorizationBllContext) =>
-            this.authorizationBllContext = authorizationBllContext;
-
-    protected override object GetData(HttpContext context) =>
-            this.authorizationBllContext.Logics.SecurityContextTypeFactory.Create(SecurityRule.View)
-                .GetSecureQueryable()
-                .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
-                .OrderBy(r => r.Name)
-                .ToList();
+    protected override Task<object> GetData(HttpContext context) =>
+        Task.FromResult<object>(
+            authorizationBllContext.Logics.SecurityContextTypeFactory.Create(SecurityRule.View)
+                                   .GetSecureQueryable()
+                                   .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
+                                   .OrderBy(r => r.Name)
+                                   .ToList());
 }

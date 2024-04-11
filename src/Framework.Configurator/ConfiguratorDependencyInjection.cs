@@ -55,7 +55,7 @@ public static class ConfiguratorDependencyInjection
             .Get<IGetSystemConstantsHandler>($"{route}/api/constants")
             .Get<IGetDomainTypesHandler>($"{route}/api/domainTypes")
             .Get<IGetOperationsHandler>($"{route}/api/operations")
-            .Get<IGetOperationHandler>(route + "/api/operation/{id}")
+            .Get<IGetOperationHandler>(route + "/api/operation/{name}")
             .Get<IGetBusinessRolesHandler>($"{route}/api/roles")
             .Get<IGetBusinessRoleContextsHandler>($"{route}/api/contexts")
             .Get<IGetPrincipalsHandler>($"{route}/api/principals")

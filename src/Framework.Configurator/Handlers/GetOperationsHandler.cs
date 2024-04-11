@@ -9,15 +9,17 @@ namespace Framework.Configurator.Handlers;
 public class GetOperationsHandler(IOperationAccessor operationAccessor, ISecurityRoleSource roleSource)
     : BaseReadHandler, IGetOperationsHandler
 {
-    protected override object GetData(HttpContext context)
+    protected override Task<object> GetData(HttpContext context)
     {
-        if (!operationAccessor.IsAdmin()) return new List<string>();
+        if (!operationAccessor.IsAdmin()) return Task.FromResult<object>(new List<string>());
 
-        return roleSource.SecurityRoles
-                         .SelectMany(x => x.Operations)
-                         .Select(o => new OperationDto { Name = o.Name, Description = o.Description })
-                         .OrderBy(x => x.Name)
-                         .DistinctBy(x => x.Name)
-                         .ToList();
+        var operations = roleSource.SecurityRoles
+                                   .SelectMany(x => x.Operations)
+                                   .Select(o => new OperationDto { Name = o.Name, Description = o.Description })
+                                   .OrderBy(x => x.Name)
+                                   .DistinctBy(x => x.Name)
+                                   .ToList();
+
+        return Task.FromResult<object>(operations);
     }
 }

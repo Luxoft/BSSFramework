@@ -13,7 +13,6 @@ public class PermissionBLLTests : TestBase
 
     private Guid luxTravelSEApproverId;
     private Guid boeingId;
-    private PermissionFilterEntity permissionFilterEntityBoeing;
     private BusinessRole businessRoleLuxTravelSEApprover;
 
     private Guid seManagerId;
@@ -21,7 +20,6 @@ public class PermissionBLLTests : TestBase
 
     private Guid businessUnitChangeViewOperationId;
     private Guid ubsId;
-    private PermissionFilterEntity permissionFilterEntityUbs;
 
     [SetUp]
     public void Initialize()
@@ -33,10 +31,8 @@ public class PermissionBLLTests : TestBase
         Guid.Parse("a893dfa6-830e-44bc-8887-c98721005156");
         this.businessUnitChangeViewOperationId = Guid.Parse("7e9516b6-059f-4ec5-817f-f9ce9faacdc4");
 
-        this.securityContextType = new SecurityContextType(true, true) { Name = "BusinessUnit" };
+        this.securityContextType = new SecurityContextType() { Name = "BusinessUnit" };
         this.principalTest1 = new Principal { Name = "test1" };
-        this.permissionFilterEntityBoeing = new PermissionFilterEntity { EntityType = this.securityContextType, EntityId = this.boeingId };
-        this.permissionFilterEntityUbs = new PermissionFilterEntity { EntityType = this.securityContextType, EntityId = this.ubsId };
 
         this.businessRoleLuxTravelSEApprover = new BusinessRole { Name = "LuxTravel SE Approver", Id = this.luxTravelSEApproverId };
         this.businessRoleSEManager = new BusinessRole { Name = "SE Manager", Id = this.seManagerId };
@@ -46,8 +42,6 @@ public class PermissionBLLTests : TestBase
 
         this.RegisterDomainObject(this.businessRoleLuxTravelSEApprover);
         this.RegisterDomainObject(this.businessRoleSEManager);
-        this.RegisterDomainObject(this.permissionFilterEntityBoeing);
-        this.RegisterDomainObject(this.permissionFilterEntityUbs);
         this.RegisterDomainObject(this.securityContextType);
         this.RegisterDomainObject(this.principalTest1);
     }
@@ -57,8 +51,6 @@ public class PermissionBLLTests : TestBase
     {
         this.securityContextType = null;
         this.principalTest1 = null;
-        this.permissionFilterEntityBoeing = null;
-        this.permissionFilterEntityUbs = null;
         this.businessRoleLuxTravelSEApprover = null;
         this.businessRoleSEManager = null;
     }

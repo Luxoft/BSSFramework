@@ -119,11 +119,6 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
                 }
             }
         }
-
-        public PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     protected override void Initialize<T>(T result)

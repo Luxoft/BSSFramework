@@ -27,7 +27,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     private IAuthorizationBLLContext authorizationContext;
     private ITypeResolver<DomainType> domainTypeResolver;
     private IDomainTypeBLL domainTypeBll;
-    private IEntityTypeBLL securityContextTypeBll;
+    private ISecurityContextTypeBLL securityContextTypeBll;
     private ICodeFirstSubscriptionBLL codeFirstSubscriptionBLL;
 
     [SetUp]
@@ -37,7 +37,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         this.notificationPrincipalExtractor = this.CreateStub<INotificationPrincipalExtractor>();
         this.domainTypeResolver = this.CreateStub<ITypeResolver<DomainType>>();
         this.domainTypeBll = this.CreateStub<IDomainTypeBLL>();
-        this.securityContextTypeBll = this.CreateStub<IEntityTypeBLL>();
+        this.securityContextTypeBll = this.CreateStub<ISecurityContextTypeBLL>();
         this.codeFirstSubscriptionBLL = this.CreateStub<ICodeFirstSubscriptionBLL>();
 
         var configurationLogics = this.CreateStub<IConfigurationBLLFactoryContainer>();
@@ -45,7 +45,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         configurationLogics.CodeFirstSubscription.Returns(this.codeFirstSubscriptionBLL);
 
         var authorizationLogics = this.CreateStub<IAuthorizationBLLFactoryContainer>();
-        authorizationLogics.EntityType.Returns(this.securityContextTypeBll);
+        authorizationLogics.SecurityContextType.Returns(this.securityContextTypeBll);
 
         this.authorizationContext = this.CreateStub<IAuthorizationBLLContext>();
         this.authorizationContext.Logics.Returns(authorizationLogics);
@@ -129,19 +129,19 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     }
 
     [Test]
-    public void GetEntityType_Call_FoundEntityType()
+    public void GetSecurityContextType_Call_FoundSecurityContextType()
     {
         //Arrange
         var domainTypeName = this.Fixture.Create<string>();
         var securityContextType = this.Fixture.Create<SecurityContextType>();
 
         this.authorizationContext
-            .GetEntityType(domainTypeName)
+            .GetSecurityContextType(domainTypeName)
             .Returns(securityContextType);
 
         // Act
         var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-        var result = configurationContextFacade.GetEntityType(domainTypeName);
+        var result = configurationContextFacade.GetSecurityContextType(domainTypeName);
 
         // Assert
         result.Should().Be(securityContextType);

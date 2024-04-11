@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
-public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : IAuthorizationTypedExternalSourceBase
+public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : IAuthorizationTypedExternalSource
     where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext
 {
     private readonly IRepository<TSecurityContext> securityContextRepository;

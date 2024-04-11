@@ -2,7 +2,7 @@
 
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
-public interface IAuthorizationTypedExternalSourceBase
+public interface IAuthorizationTypedExternalSource
 {
     IEnumerable<SecurityEntity> GetSecurityEntities();
 

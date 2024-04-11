@@ -7,7 +7,7 @@ namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
 public static class AuthorizationTypedExternalSourceExtensions
 {
-    public static IAuthorizationTypedExternalSourceBase WithCache(this IAuthorizationTypedExternalSourceBase source)
+    public static IAuthorizationTypedExternalSource WithCache(this IAuthorizationTypedExternalSource source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -15,9 +15,9 @@ public static class AuthorizationTypedExternalSourceExtensions
     }
 
 
-    private class AuthorizationTypedExternalSource : IAuthorizationTypedExternalSourceBase
+    private class AuthorizationTypedExternalSource : IAuthorizationTypedExternalSource
     {
-        private readonly IAuthorizationTypedExternalSourceBase _baseSource;
+        private readonly IAuthorizationTypedExternalSource _baseSource;
 
         private readonly Lazy<ReadOnlyCollection<SecurityEntity>> _lazySecurityEntities;
 
@@ -26,7 +26,7 @@ public static class AuthorizationTypedExternalSourceExtensions
         private readonly IDictionaryCache<Guid, SecurityEntity[]> _securityEntitiesWithMasterExpandCache;
 
 
-        public AuthorizationTypedExternalSource(IAuthorizationTypedExternalSourceBase baseSource)
+        public AuthorizationTypedExternalSource(IAuthorizationTypedExternalSource baseSource)
         {
             if (baseSource == null) throw new ArgumentNullException(nameof(baseSource));
 

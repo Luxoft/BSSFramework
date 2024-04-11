@@ -3,46 +3,21 @@ using Framework.Configurator.Interfaces;
 
 namespace SampleSystem.WebApiCore.Services;
 
-public class SampleConfiguratorIntegrationEvents : IConfiguratorIntegrationEvents
+public class SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger) : IConfiguratorIntegrationEvents
 {
-    private readonly ILogger<SampleConfiguratorIntegrationEvents> logger;
-
-    public SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger) => this.logger = logger;
-
-    public async Task PrincipalCreatedAsync(Principal principal, CancellationToken cancellationToken)
+    public Task PrincipalCreatedAsync(Principal principal, CancellationToken cancellationToken)
     {
-        this.logger.LogInformation("Principal {Name} has been created", principal.Name);
+        logger.LogInformation("Principal {Name} has been created", principal.Name);
+        return Task.CompletedTask;
     }
 
-    public async Task PrincipalRemovedAsync(Principal principal, CancellationToken cancellationToken)
-    {
-    }
+    public Task PrincipalRemovedAsync(Principal principal, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public async Task PrincipalChangedAsync(Principal principal, CancellationToken cancellationToken)
-    {
-    }
+    public Task PrincipalChangedAsync(Principal principal, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public async Task PermissionRemovedAsync(Permission permission, CancellationToken cancellationToken)
-    {
-    }
+    public Task PermissionRemovedAsync(Permission permission, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public async Task PermissionCreatedAsync(Permission permission, CancellationToken cancellationToken)
-    {
-    }
+    public Task PermissionCreatedAsync(Permission permission, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public async Task PermissionChangedAsync(Permission permission, CancellationToken cancellationToken)
-    {
-    }
-
-    public async Task BusinessRoleCreatedAsync(BusinessRole businessRole, CancellationToken cancellationToken)
-    {
-    }
-
-    public async Task BusinessRoleChangedAsync(BusinessRole businessRole, CancellationToken cancellationToken)
-    {
-    }
-
-    public async Task BusinessRoleRemovedAsync(BusinessRole businessRole, CancellationToken cancellationToken)
-    {
-    }
+    public Task PermissionChangedAsync(Permission permission, CancellationToken cancellationToken) => Task.CompletedTask;
 }

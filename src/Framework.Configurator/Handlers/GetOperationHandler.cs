@@ -20,7 +20,7 @@ public class GetOperationHandler(
     {
         if (!operationAccessor.IsAdmin()) return new OperationDetailsDto { BusinessRoles = [], Principals = [] };
 
-        var operationName = (string)context.Request.RouteValues["name"]! ?? throw new InvalidOperationException();
+        var operationName = (string)context.Request.RouteValues["name"]!;
 
         var roles = roleSource.SecurityRoles
                               .Where(x => x.Operations.Any(o => o.Name == operationName))

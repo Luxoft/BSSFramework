@@ -114,14 +114,14 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
                                                               .GetRequiredService<ISecurityContextInfoService>()
                                                               .GetSecurityContextInfo(securityContextType);
 
-        var entityType = context.Authorization.Logics.EntityType.GetById(securityContextInfo.Id)!;
+        var securityContextType = context.Authorization.Logics.EntityType.GetById(securityContextInfo.Id)!;
 
         var entity = context.Authorization.Logics.PermissionFilterEntity.GetUnsecureQueryable()
-                            .FirstOrDefault(e => e.EntityId == entityId && e.EntityType == entityType);
+                            .FirstOrDefault(e => e.EntityId == entityId && e.EntityType == securityContextType);
 
         if (entity == null)
         {
-            entity = new PermissionFilterEntity { EntityId = entityId, EntityType = entityType };
+            entity = new PermissionFilterEntity { EntityId = entityId, EntityType = securityContextType };
 
             context.Authorization.Logics.PermissionFilterEntity.Save(entity);
         }

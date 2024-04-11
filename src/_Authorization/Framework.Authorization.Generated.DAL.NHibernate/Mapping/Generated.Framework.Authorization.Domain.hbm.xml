@@ -81,7 +81,6 @@
     <property name="Active" column="active" access="field.camelcase" />
     <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="Expandable" column="expandable" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" access="field.camelcase" />

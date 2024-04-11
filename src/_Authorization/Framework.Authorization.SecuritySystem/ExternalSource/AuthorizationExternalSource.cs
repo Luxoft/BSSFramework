@@ -21,21 +21,21 @@ public class AuthorizationExternalSource : IAuthorizationExternalSource
         this.serviceProvider = serviceProvider;
         this.securityContextInfoService = securityContextInfoService;
 
-        this.typedCache = new DictionaryCache<SecurityContextType, IAuthorizationTypedExternalSourceBase>(entityType => this.GetTypedInternal(entityType, true));
+        this.typedCache = new DictionaryCache<SecurityContextType, IAuthorizationTypedExternalSourceBase>(securityContextType => this.GetTypedInternal(securityContextType, true));
     }
 
-    public IAuthorizationTypedExternalSourceBase GetTyped(SecurityContextType entityType, bool withCache = true)
+    public IAuthorizationTypedExternalSourceBase GetTyped(SecurityContextType securityContextType, bool withCache = true)
     {
-        if (entityType == null) throw new ArgumentNullException(nameof(entityType));
+        if (securityContextType == null) throw new ArgumentNullException(nameof(securityContextType));
 
-        return withCache ? this.typedCache[entityType] : this.GetTypedInternal(entityType, false);
+        return withCache ? this.typedCache[securityContextType] : this.GetTypedInternal(securityContextType, false);
     }
 
-    private IAuthorizationTypedExternalSourceBase GetTypedInternal(SecurityContextType entityType, bool withCache)
+    private IAuthorizationTypedExternalSourceBase GetTypedInternal(SecurityContextType securityContextType, bool withCache)
     {
-        if (entityType == null) throw new ArgumentNullException(nameof(entityType));
+        if (securityContextType == null) throw new ArgumentNullException(nameof(securityContextType));
 
-        var securityContextInfo = this.securityContextInfoService.GetSecurityContextInfo(entityType.Name);
+        var securityContextInfo = this.securityContextInfoService.GetSecurityContextInfo(securityContextType.Name);
 
         var authorizationTypedExternalSourceType = securityContextInfo.Type.IsHierarchical()
                                                            ? typeof(HierarchicalAuthorizationTypedExternalSource<>)

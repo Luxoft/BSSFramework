@@ -91,7 +91,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 
         var versions = this.Fixture.Create<DomainObjectVersions<string>>();
         var fid = new FilterItemIdentity("name", Guid.NewGuid());
-        var entityType = this.Fixture.Create<SecurityContextType>();
+        var securityContextType = this.Fixture.Create<SecurityContextType>();
         var securityType = typeof(object);
 
         var principals = new[] { this.Fixture.Create<Principal>() };
@@ -119,10 +119,10 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 
         this.configurationContextFacade
             .GetEntityType(fid.EntityName.ToLowerInvariant())
-            .Returns(entityType);
+            .Returns(securityContextType);
 
         this.configurationContextFacade
-            .GetSecurityType(entityType)
+            .GetSecurityType(securityContextType)
             .Returns(securityType);
 
         this.configurationContextFacade

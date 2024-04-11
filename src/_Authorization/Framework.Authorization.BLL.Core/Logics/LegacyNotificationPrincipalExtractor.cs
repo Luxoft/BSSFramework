@@ -98,9 +98,9 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
 
         var totalFilter = notificationFilterGroups.Aggregate(baseNotificationFilter, (accumFilter, group) =>
         {
-            var entityType = this.Context.GetEntityType(group.EntityType);
+            var securityContextType = this.Context.GetEntityType(group.EntityType);
 
-            var entityTypeFilter = this.GetDirectPermissionFilter(entityType, group.Idents, group.ExpandType.AllowEmpty());
+            var entityTypeFilter = this.GetDirectPermissionFilter(securityContextType, group.Idents, group.ExpandType.AllowEmpty());
 
             return accumFilter.BuildAnd(entityTypeFilter);
         });
@@ -108,13 +108,13 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
         return this.GetNotificationPrincipalsByRoles(totalFilter);
     }
 
-    private Expression<Func<Permission, bool>> GetDirectPermissionFilter(SecurityContextType entityType, IEnumerable<Guid> idetns, bool allowEmpty)
+    private Expression<Func<Permission, bool>> GetDirectPermissionFilter(SecurityContextType securityContextType, IEnumerable<Guid> idetns, bool allowEmpty)
     {
-        if (entityType == null) throw new ArgumentNullException(nameof(entityType));
+        if (securityContextType == null) throw new ArgumentNullException(nameof(securityContextType));
         if (idetns == null) throw new ArgumentNullException(nameof(idetns));
 
-        return permission => permission.Restrictions.Any(fi => fi.SecurityContextType == entityType && idetns.Contains(fi.SecurityContextId))
-                             || (allowEmpty && permission.Restrictions.All(fi => fi.SecurityContextType != entityType));
+        return permission => permission.Restrictions.Any(fi => fi.SecurityContextType == securityContextType && idetns.Contains(fi.SecurityContextId))
+                             || (allowEmpty && permission.Restrictions.All(fi => fi.SecurityContextType != securityContextType));
     }
 
     private IEnumerable<Principal> GetNotificationPrincipalsByRoles(Expression<Func<Permission, bool>> filter)

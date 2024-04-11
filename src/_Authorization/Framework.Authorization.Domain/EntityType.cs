@@ -1,5 +1,6 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
+using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.Domain;
@@ -16,8 +17,6 @@ namespace Framework.Authorization.Domain;
 [BLLViewRole]
 public class SecurityContextType : BaseDirectory, ISecurityContextType<Guid>
 {
-    private readonly bool expandable;
-
     /// <summary>
     /// Вычисляемое название доменного типа
     /// </summary>
@@ -27,10 +26,4 @@ public class SecurityContextType : BaseDirectory, ISecurityContextType<Guid>
         get { return base.Name; }
         set { base.Name = value; }
     }
-
-    /// <summary>
-    /// Расширение прав по дереву в зависимости от типа Expand Type
-    /// </summary>
-    /// <seealso cref="Framework.HierarchicalExpand.HierarchicalExpandType"/>
-    public virtual bool Expandable => this.expandable;
 }

@@ -23,7 +23,7 @@ public partial class AuthorizationBLLContext
     private readonly IAuthorizationBLLFactoryContainer logics;
 
     private readonly Lazy<Principal> lazyCurrentPrincipal;
-    private readonly IDictionaryCache<string, SecurityContextType> entityTypeByNameCache;
+    private readonly IDictionaryCache<string, SecurityContextType> securityContextTypeByNameCache;
 
     private readonly IDictionaryCache<Guid, SecurityContextType> entityTypeByIdCache;
 
@@ -73,13 +73,13 @@ public partial class AuthorizationBLLContext
 
         this.lazyCurrentPrincipal = LazyHelper.Create(() => this.Logics.Principal.GetCurrent());
 
-        this.entityTypeByNameCache = new DictionaryCache<string, SecurityContextType>(
-                                                                             domainTypeName => this.Logics.EntityType.GetByName(domainTypeName, true),
+        this.securityContextTypeByNameCache = new DictionaryCache<string, SecurityContextType>(
+                                                                             domainTypeName => this.Logics.SecurityContextType.GetByName(domainTypeName, true),
                                                                              StringComparer.CurrentCultureIgnoreCase)
                 .WithLock();
 
         this.entityTypeByIdCache = new DictionaryCache<Guid, SecurityContextType>(
-                                                                         domainTypeId => this.Logics.EntityType.GetById(domainTypeId, true))
+                                                                         domainTypeId => this.Logics.SecurityContextType.GetById(domainTypeId, true))
                 .WithLock();
 
         this.TypeResolver = settings.TypeResolver;
@@ -124,7 +124,7 @@ public partial class AuthorizationBLLContext
     {
         if (domainTypeName == null) throw new ArgumentNullException(nameof(domainTypeName));
 
-        return this.entityTypeByNameCache[domainTypeName];
+        return this.securityContextTypeByNameCache[domainTypeName];
     }
 
     public SecurityContextType GetEntityType(Guid domainTypeId)

@@ -52,10 +52,10 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRec
     {
         var result =
                 from item in fids.GroupBy(fid => fid.EntityName)
-                let entityType = this.ConfigurationContextFacade.GetEntityType(item.Key.ToLowerInvariant())
-                let securityType = this.ConfigurationContextFacade.GetSecurityType(entityType)
+                let securityContextType = this.ConfigurationContextFacade.GetEntityType(item.Key.ToLowerInvariant())
+                let securityType = this.ConfigurationContextFacade.GetSecurityType(securityContextType)
                 let ids = item.Select(i => i.Id)
-                let et = entityType.Expandable ? expandType : expandType.WithoutHierarchical()
+                let et = securityContextType.Expandable ? expandType : expandType.WithoutHierarchical()
                 select new NotificationFilterGroup(securityType, ids, et);
 
         return result;

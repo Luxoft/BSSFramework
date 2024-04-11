@@ -17,12 +17,12 @@ public class NotificationFilterGroup<TDomainObject> : NotificationFilterGroup
 
 public class NotificationFilterGroup
 {
-    public NotificationFilterGroup(Type entityType, IEnumerable<Guid> idents, NotificationExpandType expandType)
+    public NotificationFilterGroup(Type securityContextType, IEnumerable<Guid> idents, NotificationExpandType expandType)
     {
-        if (entityType == null) throw new ArgumentNullException(nameof(entityType));
+        if (securityContextType == null) throw new ArgumentNullException(nameof(securityContextType));
         if (idents == null) throw new ArgumentNullException(nameof(idents));
 
-        this.EntityType = entityType;
+        this.EntityType = securityContextType;
         this.Idents = idents.ToReadOnlyCollection();
         this.ExpandType = expandType;
     }

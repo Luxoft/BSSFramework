@@ -21,20 +21,20 @@ internal class PermissionDirectInternalFilterModel : DomainObjectFilterModel<Per
 
     public override Expression<Func<Permission, bool>> ToFilterExpression()
     {
-        var entityType = this.baseFilterModel.EntityType;
+        var securityContextType = this.baseFilterModel.EntityType;
         var entityId = this.baseFilterModel.EntityId;
 
         if (this.baseFilterModel.StrongDirect)
         {
-            return permission => permission.Restrictions.Any(filterItem => filterItem.SecurityContextType == entityType && filterItem.SecurityContextId == entityId);
+            return permission => permission.Restrictions.Any(filterItem => filterItem.SecurityContextType == securityContextType && filterItem.SecurityContextId == entityId);
         }
         else
         {
-            var securityEntities = this.context.ExternalSource.GetTyped(entityType).GetSecurityEntitiesWithMasterExpand(entityId);
+            var securityEntities = this.context.ExternalSource.GetTyped(securityContextType).GetSecurityEntitiesWithMasterExpand(entityId);
 
             var enitityIdents = securityEntities.ToList(se => se.Id);
 
-            return permission => permission.Restrictions.All(filterItem => filterItem.SecurityContextType != entityType)
+            return permission => permission.Restrictions.All(filterItem => filterItem.SecurityContextType != securityContextType)
                                  || permission.Restrictions.Any(filterItem => enitityIdents.Contains(filterItem.SecurityContextId));
         }
     }

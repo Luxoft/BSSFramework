@@ -62,13 +62,13 @@ public partial class PermissionBLL
     //{
     //    if (permission == null) throw new ArgumentNullException(nameof(permission));
 
-    //    var expectedItems = from entityType in this.Context.Logics.EntityType.GetFullList()
+    //    var expectedItems = from securityContextType in this.Context.Logics.EntityType.GetFullList()
 
-    //                        join filterItem in permission.Restrictions on entityType equals filterItem.EntityType into filterItemGroup
+    //                        join filterItem in permission.Restrictions on securityContextType equals filterItem.EntityType into filterItemGroup
 
     //                        from accessId in this.GetAccessIdents(filterItemGroup.ToArray(fi => fi.SecurityContextId))
 
-    //                        select new { EntityType = entityType, EntityId = accessId };
+    //                        select new { EntityType = securityContextType, EntityId = accessId };
 
     //    var mergeResult = permission.DenormalizedItems.GetMergeResult(expectedItems, di => new { di.EntityType, di.EntityId }, pair => pair);
 
@@ -195,13 +195,13 @@ public partial class PermissionBLL
 
                               let allSecurityEntities = this.Context.ExternalSource.GetTyped(requeredGroup.Key).GetSecurityEntities()
 
-                              let entityType = requeredGroup.Key
+                              let securityContextType = requeredGroup.Key
 
-                              let preAllowedEntities = allowedEntitiesDict.GetValueOrDefault(entityType).Maybe(v => v.Distinct())
+                              let preAllowedEntities = allowedEntitiesDict.GetValueOrDefault(securityContextType).Maybe(v => v.Distinct())
 
                               where preAllowedEntities != null // доступны все
 
-                              let allowedEntities = entityType.Expandable ? preAllowedEntities.Distinct()
+                              let allowedEntities = securityContextType.Expandable ? preAllowedEntities.Distinct()
                                                                     .GetAllElements(allowedEntityId => allSecurityEntities.Where(v => v.ParentId == allowedEntityId).Select(v => v.Id))
                                                                     .Distinct()
                                                                     .ToList()
@@ -218,7 +218,7 @@ public partial class PermissionBLL
 
                               where !hasAccess
 
-                              group securityObject by entityType into g
+                              group securityObject by securityContextType into g
 
                               let key = g.Key
 
@@ -226,13 +226,13 @@ public partial class PermissionBLL
 
                               select key.ToKeyValuePair(value);
 
-        var invalidRequest2 = from entityType in allowedEntitiesDict.Keys
+        var invalidRequest2 = from securityContextType in allowedEntitiesDict.Keys
 
-                              join requeredGroup in requaredEntitiesRequest on entityType equals requeredGroup.Key into g
+                              join requeredGroup in requaredEntitiesRequest on securityContextType equals requeredGroup.Key into g
 
                               where !g.Any()
 
-                              let key = entityType
+                              let key = securityContextType
 
                               let value = (IEnumerable<SecurityEntity>)new[] { new SecurityEntity { Name = "[Not Selected Element]" } }
 

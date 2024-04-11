@@ -6899,8 +6899,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityContextTypeSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
     {
         
-        private bool _expandable;
-        
         private string _name;
         
         public SecurityContextTypeSimpleDTO()
@@ -6916,19 +6914,6 @@ namespace Framework.Authorization.Generated.DTO
         public SecurityContextTypeSimpleDTO(string id)
         {
             this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Expandable
-        {
-            get
-            {
-                return this._expandable;
-            }
-            set
-            {
-                this._expandable = value;
-            }
         }
         
         public Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO Identity
@@ -7178,8 +7163,6 @@ namespace Framework.Authorization.Generated.DTO
         
         private string _createdBy;
         
-        private bool _expandable;
-        
         private System.Guid _id;
         
         private string _modifiedBy;
@@ -7233,19 +7216,6 @@ namespace Framework.Authorization.Generated.DTO
             set
             {
                 this._createdBy = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Expandable
-        {
-            get
-            {
-                return this._expandable;
-            }
-            set
-            {
-                this._expandable = value;
             }
         }
         
@@ -7313,8 +7283,6 @@ namespace Framework.Authorization.Generated.DTO
         
         private string _createdBy;
         
-        private bool _expandable;
-        
         private System.Guid _id;
         
         private string _modifiedBy;
@@ -7368,19 +7336,6 @@ namespace Framework.Authorization.Generated.DTO
             set
             {
                 this._createdBy = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Expandable
-        {
-            get
-            {
-                return this._expandable;
-            }
-            set
-            {
-                this._expandable = value;
             }
         }
         
@@ -10150,7 +10105,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapSecurityContextType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO mappingObject)
         {
-            mappingObject.Expandable = domainObject.Expandable;
             mappingObject.Name = domainObject.Name;
         }
         
@@ -10171,7 +10125,6 @@ namespace Framework.Authorization.Generated.DTO
             mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.Expandable = domainObject.Expandable;
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -10183,7 +10136,6 @@ namespace Framework.Authorization.Generated.DTO
             mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.Expandable = domainObject.Expandable;
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;

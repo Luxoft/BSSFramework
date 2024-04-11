@@ -54,16 +54,16 @@ public class PrincipalWithInitTests : TestBase
                           var principalBll = authContext.Logics.Principal;
                           var principal = principalBll.GetByNameOrCreate(TestPrincipalName, true);
 
-                          var entityType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
+                          var securityContextType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
 
                           Expression<Func<PermissionFilterEntity, bool>> entitySearchFilter =
                                   entity =>
-                                          entity.EntityType == entityType
+                                          entity.EntityType == securityContextType
                                           && entity.EntityId == DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID;
 
                           var filterEntity = authContext.Logics.PermissionFilterEntity.GetObjectBy(entitySearchFilter) ?? new PermissionFilterEntity
                                                  {
-                                                         EntityType = entityType,
+                                                         EntityType = securityContextType,
                                                          EntityId = DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID
                                                  }.Self(bu => authContext.Logics.PermissionFilterEntity.Save(bu));
 

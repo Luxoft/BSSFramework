@@ -5,8 +5,8 @@ namespace Framework.DomainDriven;
 
 public struct FilterItemIdentity : IDefaultIdentityObject, IEquatable<FilterItemIdentity>
 {
-    public FilterItemIdentity(FilterItemType entityType, string id)
-            : this(entityType.ToString(), id)
+    public FilterItemIdentity(FilterItemType securityContextType, string id)
+            : this(securityContextType.ToString(), id)
     {
 
     }
@@ -17,8 +17,8 @@ public struct FilterItemIdentity : IDefaultIdentityObject, IEquatable<FilterItem
 
     }
 
-    public FilterItemIdentity(FilterItemType entityType, Guid id)
-            : this(entityType.ToString(), id)
+    public FilterItemIdentity(FilterItemType securityContextType, Guid id)
+            : this(securityContextType.ToString(), id)
     {
 
     }

@@ -33,20 +33,20 @@ public partial class EntityTypeBLL
 
         foreach (var pair in mergeResult.AddingItems)
         {
-            this.Insert(new SecurityContextType(true, pair.Type.IsHierarchical()) { Id = pair.Id, Name = pair.Type.Name }, pair.Id);
+            this.Insert(new SecurityContextType { Id = pair.Id, Name = pair.Type.Name, Expandable = pair.Type.IsHierarchical() }, pair.Id);
         }
 
         foreach (var pair in mergeResult.CombineItems)
         {
-            var entityType = pair.Item1;
+            var securityContextType = pair.Item1;
 
             var expectedName = pair.Item2.Type.Name;
 
-            if (entityType.Name != expectedName)
+            if (securityContextType.Name != expectedName)
             {
-                entityType.Name = expectedName;
+                securityContextType.Name = expectedName;
 
-                this.Save(entityType);
+                this.Save(securityContextType);
             }
         }
 

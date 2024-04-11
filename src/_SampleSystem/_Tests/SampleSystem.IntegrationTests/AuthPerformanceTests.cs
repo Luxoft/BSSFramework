@@ -59,9 +59,9 @@ public class AuthPerformanceTests : TestBase
 
                                                 var pfeCache = new DictionaryCache<PersistentDomainObjectBase, PermissionFilterEntity>(domainObj =>
                                                 {
-                                                    var entityType = ctx.Authorization.GetEntityType(domainObj.GetType());
+                                                    var securityContextType = ctx.Authorization.GetEntityType(domainObj.GetType());
 
-                                                    return ctx.Authorization.Logics.PermissionFilterEntity.GetOrCreate(entityType, new SecurityEntity { Id = domainObj.Id });
+                                                    return ctx.Authorization.Logics.PermissionFilterEntity.GetOrCreate(securityContextType, new SecurityEntity { Id = domainObj.Id });
                                                 });
 
                                                 var adminRole = ctx.Authorization.Logics.BusinessRole.GetAdminRole();

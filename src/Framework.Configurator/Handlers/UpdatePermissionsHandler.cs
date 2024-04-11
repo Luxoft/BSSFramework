@@ -165,12 +165,12 @@ public record UpdatePermissionsHandler(
             return result;
         }
 
-        var entityType = await this.EntityTypeRepositoryFactory
+        var securityContextType = await this.EntityTypeRepositoryFactory
                                    .Create()
                                    .GetQueryable()
                                    .Where(x => x.Id == key.TypeId)
                                    .SingleAsync(cancellationToken);
-        var filterEntity = new PermissionFilterEntity { EntityType = entityType, EntityId = key.ObjectId, Active = true };
+        var filterEntity = new PermissionFilterEntity { EntityType = securityContextType, EntityId = key.ObjectId, Active = true };
 
         await this.PermissionFilterEntityRepositoryFactory.Create().SaveAsync(filterEntity, cancellationToken);
         cache.Add(filterEntity);

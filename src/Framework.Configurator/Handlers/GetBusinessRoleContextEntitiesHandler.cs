@@ -19,11 +19,11 @@ public class GetBusinessRoleContextEntitiesHandler : BaseReadHandler, IGetBusine
         var entityTypeId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
         var searchToken = context.Request.Query["searchToken"];
 
-        var entityType = this.authorizationBllContext.Authorization.Logics.EntityTypeFactory
+        var securityContextType = this.authorizationBllContext.Authorization.Logics.EntityTypeFactory
             .Create(SecurityRule.View)
             .GetById(entityTypeId, true);
 
-        var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(entityType)
+        var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(securityContextType)
             .GetSecurityEntities();
 
         if (!string.IsNullOrWhiteSpace(searchToken))

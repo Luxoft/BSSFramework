@@ -88,15 +88,15 @@ public class SubscriptionMetadataMapper
 
     private static void MapSubBusinessRoles(ISubscriptionMetadata metadata, Subscription subscription)
     {
-        if (metadata.SubBusinessRoleIds == null)
+        if (metadata.SubBusinessRoles == null)
         {
             return;
         }
 
-        foreach (var id in metadata.SubBusinessRoleIds)
+        foreach (var securityRole in metadata.SubBusinessRoles)
         {
             var role = new SubBusinessRole(subscription);
-            role.BusinessRoleId = id;
+            role.BusinessRoleId = securityRole.Id;
         }
     }
 

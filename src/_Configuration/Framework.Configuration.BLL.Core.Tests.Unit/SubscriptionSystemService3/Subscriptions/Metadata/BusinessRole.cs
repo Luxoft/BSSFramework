@@ -1,6 +1,10 @@
-﻿namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
+﻿using Framework.SecuritySystem;
 
-internal static class BusinessRole
+namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
+
+internal static class TestSecurityRole
 {
-    public static Guid Administrator { get; } = Guid.Parse("{137C3ADD-64F4-40E9-BF33-D42159267DA6}");
+    public static SecurityRole Administrator { get; } = SecurityRole.CreateAdministrator(
+        Guid.Parse("{137C3ADD-64F4-40E9-BF33-D42159267DA6}"),
+        new List<Type>());
 }

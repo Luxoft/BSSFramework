@@ -65,8 +65,8 @@ public sealed class SubscriptionMetadataMapperTests : TestFixtureBase
         subscription.SecurityItems.Should().HaveCount(1);
         subscription.MetadataSourceType.Should().Be(metadata.GetType());
 
-        subscription.SubBusinessRoles.Should().HaveCount(metadata.SubBusinessRoleIds.Count());
-        subscription.SubBusinessRoles.First().BusinessRoleId.Should().Be(metadata.SubBusinessRoleIds.First());
+        subscription.SubBusinessRoles.Should().HaveCount(metadata.SubBusinessRoles.Count());
+        subscription.SubBusinessRoles.First().BusinessRoleId.Should().Be(metadata.SubBusinessRoles.Select(v => v.Id).First());
 
         subscription.SecurityItems.Should().HaveCount(1);
         CheckLambdaMapping(metadata.SecurityItemSourceLambdas.Single(), subscription.SecurityItems.First().Source);

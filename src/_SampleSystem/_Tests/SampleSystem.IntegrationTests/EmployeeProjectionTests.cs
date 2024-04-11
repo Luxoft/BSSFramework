@@ -1,10 +1,7 @@
 ﻿using FluentAssertions;
 
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Generated.DTO;

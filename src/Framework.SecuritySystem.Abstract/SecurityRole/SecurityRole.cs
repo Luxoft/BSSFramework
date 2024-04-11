@@ -27,13 +27,16 @@ public class SecurityRole
         Guid id,
         IEnumerable<Type> securityRoleTypes,
         IEnumerable<Type> securityOperationTypes = null,
+        IEnumerable<string> exceptPropertyNames = null,
         string? description = null)
     {
         const string administratorRoleName = "Administrator";
 
+        var realExceptPropertyNames = (exceptPropertyNames ?? [administratorRoleName, "SystemIntegration"]).ToHashSet();
+
         var children = securityRoleTypes
                        .SelectMany(
-                           securityRoleType => securityRoleType.GetStaticPropertyValueList<SecurityRole>(srName => srName != administratorRoleName))
+                           securityRoleType => securityRoleType.GetStaticPropertyValueList<SecurityRole>(srName => !realExceptPropertyNames.Contains(srName)))
                        .Distinct()
                        .ToList();
 

@@ -1,6 +1,5 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.Domain;

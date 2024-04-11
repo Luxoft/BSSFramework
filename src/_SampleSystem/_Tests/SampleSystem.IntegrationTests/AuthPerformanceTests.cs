@@ -4,6 +4,7 @@ using FluentAssertions;
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -57,12 +58,6 @@ public class AuthPerformanceTests : TestBase
 
                                                 var testPrincipal = ctx.Authorization.Logics.Principal.GetByNameOrCreate(TestUser);
 
-                                                var pfeCache = new DictionaryCache<PersistentDomainObjectBase, PermissionFilterEntity>(domainObj =>
-                                                {
-                                                    var securityContextType = ctx.Authorization.GetEntityType(domainObj.GetType());
-
-                                                    return ctx.Authorization.Logics.PermissionFilterEntity.GetOrCreate(securityContextType, new SecurityEntity { Id = domainObj.Id });
-                                                });
 
                                                 var adminRole = ctx.Authorization.Logics.BusinessRole.GetAdminRole();
 
@@ -72,25 +67,25 @@ public class AuthPerformanceTests : TestBase
 
                                                     foreach (var genObject in genObjectSubEnumerable)
                                                     {
-                                                        if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(genObject.Employee.Id))
+                                                        void tryAddRestrictions<TSecurityContext>(Func<TestPerformanceObject, TSecurityContext> getSecurityContext)
+                                                            where TSecurityContext : PersistentDomainObjectBase, ISecurityContext
                                                         {
-                                                            new PermissionRestriction(genPermission, pfeCache[genObject.Employee]);
+                                                            var securityContext = getSecurityContext(genObject);
+
+                                                            if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(securityContext.Id))
+                                                            {
+                                                                new PermissionRestriction(genPermission)
+                                                                {
+                                                                    SecurityContextId = securityContext.Id,
+                                                                    SecurityContextType = ctx.Authorization.GetSecurityContextType(typeof(TSecurityContext))
+                                                                };
+                                                            }
                                                         }
 
-                                                        if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(genObject.Location.Id))
-                                                        {
-                                                            new PermissionRestriction(genPermission, pfeCache[genObject.Location]);
-                                                        }
-
-                                                        if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(genObject.BusinessUnit.Id))
-                                                        {
-                                                            new PermissionRestriction(genPermission, pfeCache[genObject.BusinessUnit]);
-                                                        }
-
-                                                        if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(genObject.ManagementUnit.Id))
-                                                        {
-                                                            new PermissionRestriction(genPermission, pfeCache[genObject.ManagementUnit]);
-                                                        }
+                                                        tryAddRestrictions(v => v.Employee);
+                                                        tryAddRestrictions(v => v.Location);
+                                                        tryAddRestrictions(v => v.BusinessUnit);
+                                                        tryAddRestrictions(v => v.ManagementUnit);
                                                     }
                                                 }
 

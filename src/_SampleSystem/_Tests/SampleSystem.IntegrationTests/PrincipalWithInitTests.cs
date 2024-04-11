@@ -10,7 +10,9 @@ using Framework.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
+using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -45,36 +47,11 @@ public class PrincipalWithInitTests : TestBase
                                                           type: buTypeId,
                                                           parent: luxoftBuId);
 
-        this.Evaluate(
-                      DBSessionMode.Write,
-                      context =>
-                      {
-                          var authContext = context.Authorization;
-
-                          var principalBll = authContext.Logics.Principal;
-                          var principal = principalBll.GetByNameOrCreate(TestPrincipalName, true);
-
-                          var securityContextType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
-
-                          Expression<Func<PermissionFilterEntity, bool>> entitySearchFilter =
-                                  entity =>
-                                          entity.EntityType == securityContextType
-                                          && entity.EntityId == DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID;
-
-                          var filterEntity = authContext.Logics.PermissionFilterEntity.GetObjectBy(entitySearchFilter) ?? new PermissionFilterEntity
-                                                 {
-                                                         EntityType = securityContextType,
-                                                         EntityId = DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID
-                                                 }.Self(bu => authContext.Logics.PermissionFilterEntity.Save(bu));
-
-                          var permission = new Permission(principal);
-                          permission.Role = authContext.Logics.BusinessRole.GetOrCreateAdminRole();
-                          permission.Period = this.testPeriod;
-
-                          new PermissionRestriction(permission) { Entity = filterEntity };
-
-                          principalBll.Save(principal);
-                      });
+        this.AuthHelper.SetUserRole(
+            TestPrincipalName,
+            new SampleSystemTestPermission(
+                SampleSystemSecurityRole.Administrator,
+                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
     }
 
     [TestMethod]
@@ -101,7 +78,13 @@ public class PrincipalWithInitTests : TestBase
                                             newPermission.Role = existsPermission.Role;
                                             newPermission.Period = this.testPeriod;
 
-                                            new PermissionRestriction(newPermission) { Entity = existsPermission.Restrictions.Single().Entity };
+                                            var restriction = existsPermission.Restrictions.Single();
+
+                                            new PermissionRestriction(newPermission)
+                                            {
+                                                SecurityContextId = restriction.SecurityContextId,
+                                                SecurityContextType = restriction.SecurityContextType
+                                            };
 
                                             principalBll.Save(principal);
                                         });

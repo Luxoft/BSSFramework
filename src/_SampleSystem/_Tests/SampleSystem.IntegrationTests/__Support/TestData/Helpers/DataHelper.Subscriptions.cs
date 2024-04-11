@@ -19,11 +19,11 @@ public partial class DataHelper
                                  });
     }
 
-    public SecurityContextType GetEntityType(Type domainObjectType)
+    public SecurityContextType GetSecurityContextType(Type domainObjectType)
     {
         return this.EvaluateRead(context =>
                                  {
-                                     var bll = context.Authorization.Logics.EntityType;
+                                     var bll = context.Authorization.Logics.SecurityContextType;
                                      var result = bll.GetObjectBy(x => x.Name == domainObjectType.Name);
                                      return result;
                                  });

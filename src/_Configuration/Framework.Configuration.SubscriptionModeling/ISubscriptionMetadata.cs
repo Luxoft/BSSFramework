@@ -1,4 +1,6 @@
-﻿namespace Framework.Configuration.SubscriptionModeling;
+﻿using Framework.SecuritySystem;
+
+namespace Framework.Configuration.SubscriptionModeling;
 
 /// <summary>
 ///     Определяет интерфейс экземпляра метаданных Code first подписки.
@@ -107,7 +109,7 @@ public interface ISubscriptionMetadata
     /// <value>
     ///     Идентификаторы бизнес-ролей..
     /// </value>
-    IEnumerable<Guid> SubBusinessRoleIds { get; }
+    IEnumerable<SecurityRole> SubBusinessRoles { get; }
 
     /// <summary>
     ///     Возвращает экземпляр лямбда-выражения Condition.

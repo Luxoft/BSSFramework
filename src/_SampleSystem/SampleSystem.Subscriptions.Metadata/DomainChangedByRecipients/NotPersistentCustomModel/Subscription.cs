@@ -14,7 +14,6 @@ public sealed class Subscription
         this.ReplyToGenerationLambda = new ReplyToGenerationLambda();
         this.AttachmentLambda = new AttachmentLambda();
         this.RecepientsSelectorMode = Framework.Configuration.RecepientsSelectorMode.Union;
-        this.SubBusinessRoleIds = Enumerable.Empty<Guid>();
         this.SendIndividualLetters = true;
         this.ExcludeCurrentUser = true;
         this.IncludeAttachments = true;

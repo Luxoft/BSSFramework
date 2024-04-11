@@ -32,7 +32,7 @@ internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<obj
     public override RecepientsSelectorMode RecepientsSelectorMode { get; protected set; } =
         RecepientsSelectorMode.RolesExceptGeneration;
 
-    public override IEnumerable<Guid> SubBusinessRoleIds { get; protected set; } = new[] {BusinessRole.Administrator};
+    public override IEnumerable<SecurityRole> SubBusinessRoles { get; protected set; } = new[] { TestSecurityRole.Administrator };
 
     public override bool SendIndividualLetters { get; protected set; } = true;
 

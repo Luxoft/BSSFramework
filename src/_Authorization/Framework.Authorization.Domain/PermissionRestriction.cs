@@ -47,7 +47,6 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Integration)]
     [FixedPropertyValidator]
     [Required]
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     [UniqueElement]
     public virtual SecurityContextType SecurityContextType
     {
@@ -57,7 +56,6 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
 
     [FixedPropertyValidator]
     [Required]
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     [UniqueElement]
     public virtual Guid SecurityContextId
     {

@@ -122,11 +122,6 @@ namespace Framework.Authorization.BLL
             return new Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.DelegateToItemModel>(this.GetDelegateToItemModelProperties);
         }
         
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.EntityTypeRootFilterModel> GetEntityTypeRootFilterModelValidationMap()
-        {
-            return Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.EntityTypeRootFilterModel>.Empty;
-        }
-        
         protected override Framework.Validation.IClassValidationMap<TSource> GetInternalClassMap<TSource>()
         {
             if ((typeof(TSource) == typeof(Framework.Authorization.Domain.BusinessRole)))
@@ -148,10 +143,6 @@ namespace Framework.Authorization.BLL
             else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.DelegateToItemModel)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetDelegateToItemModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.EntityTypeRootFilterModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetEntityTypeRootFilterModelValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.Permission)))
             {
@@ -184,6 +175,10 @@ namespace Framework.Authorization.BLL
             else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.SecurityContextType)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSecurityContextTypeValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.SecurityContextTypeRootFilterModel)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSecurityContextTypeRootFilterModelValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.SecurityEntity)))
             {
@@ -426,6 +421,11 @@ namespace Framework.Authorization.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.SecurityContextType, string>(source => source.ModifiedBy, currentClass, this.GetSecurityContextType_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.SecurityContextType, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetSecurityContextType_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.SecurityContextType, string>(source => source.Name, currentClass, this.GetSecurityContextType_NameValidators(), this.GetClassMap<string>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SecurityContextTypeRootFilterModel> GetSecurityContextTypeRootFilterModelValidationMap()
+        {
+            return Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.SecurityContextTypeRootFilterModel>.Empty;
         }
         
         protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SecurityContextType> GetSecurityContextTypeValidationMap()

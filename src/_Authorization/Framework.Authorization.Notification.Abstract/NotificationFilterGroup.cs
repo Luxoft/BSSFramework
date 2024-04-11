@@ -22,13 +22,13 @@ public class NotificationFilterGroup
         if (securityContextType == null) throw new ArgumentNullException(nameof(securityContextType));
         if (idents == null) throw new ArgumentNullException(nameof(idents));
 
-        this.EntityType = securityContextType;
+        this.SecurityContextType = securityContextType;
         this.Idents = idents.ToReadOnlyCollection();
         this.ExpandType = expandType;
     }
 
 
-    public Type EntityType { get; private set; }
+    public Type SecurityContextType { get; private set; }
 
     public ReadOnlyCollection<Guid> Idents { get; private set; }
 
@@ -46,7 +46,7 @@ public static class NotificationFilterGroupExtensions
     public static NotificationFilterGroup OverrideExpand(this NotificationFilterGroup group, NotificationExpandType newExpandType)
     {
         return newExpandType == group.ExpandType ? group
-                       : new NotificationFilterGroup(group.EntityType, group.Idents, newExpandType);
+                       : new NotificationFilterGroup(group.SecurityContextType, group.Idents, newExpandType);
     }
 
     public static IEnumerable<NotificationFilterGroup[]> PermuteByExpand(this IEnumerable<NotificationFilterGroup> source)

@@ -3,7 +3,10 @@ using Framework.Core;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
+using Framework.SecuritySystem;
 using Framework.Validation;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.BLL;
 
@@ -187,28 +190,28 @@ public partial class PermissionBLL
 
         var allowedEntitiesDict = allowedEntitiesRequest.ToDictionary(g => g.Key, g => g.ToList());
 
-        var requaredEntitiesRequest = (from filterItem in subPermission.Restrictions
+        var requiredEntitiesRequest = (from filterItem in subPermission.Restrictions
 
                                        group filterItem.SecurityContextId by filterItem.SecurityContextType).ToArray();
 
-        var invalidRequest1 = from requeredGroup in requaredEntitiesRequest
+        var invalidRequest1 = from requiredGroup in requiredEntitiesRequest
 
-                              let allSecurityEntities = this.Context.ExternalSource.GetTyped(requeredGroup.Key).GetSecurityEntities()
+                              let allSecurityEntities = this.Context.ExternalSource.GetTyped(requiredGroup.Key).GetSecurityEntities()
 
-                              let securityContextType = requeredGroup.Key
+                              let securityContextType = requiredGroup.Key
 
                               let preAllowedEntities = allowedEntitiesDict.GetValueOrDefault(securityContextType).Maybe(v => v.Distinct())
 
                               where preAllowedEntities != null // доступны все
 
-                              let allowedEntities = securityContextType.Expandable ? preAllowedEntities.Distinct()
+                              let allowedEntities = this.IsExpandable(securityContextType) ? preAllowedEntities.Distinct()
                                                                     .GetAllElements(allowedEntityId => allSecurityEntities.Where(v => v.ParentId == allowedEntityId).Select(v => v.Id))
                                                                     .Distinct()
                                                                     .ToList()
 
                                                             : preAllowedEntities.Distinct().ToList()
 
-                              from entityId in requeredGroup
+                              from entityId in requiredGroup
 
                               let securityObject = allSecurityEntities.SingleOrDefault(v => v.Id == entityId)
 
@@ -228,7 +231,7 @@ public partial class PermissionBLL
 
         var invalidRequest2 = from securityContextType in allowedEntitiesDict.Keys
 
-                              join requeredGroup in requaredEntitiesRequest on securityContextType equals requeredGroup.Key into g
+                              join requeredGroup in requiredEntitiesRequest on securityContextType equals requeredGroup.Key into g
 
                               where !g.Any()
 
@@ -239,6 +242,12 @@ public partial class PermissionBLL
                               select key.ToKeyValuePair(value);
 
         return invalidRequest1.Concat(invalidRequest2).ToDictionary();
+    }
+
+    private bool IsExpandable(SecurityContextType securityContextType)
+    {
+        return this.Context.ServiceProvider.GetRequiredService<ISecurityContextInfoService>()
+                   .GetSecurityContextInfo(securityContextType.Name).Type.IsHierarchical();
     }
 
     public void ChangeDelegatePermissions(ChangePermissionDelegatesModel changePermissionDelegatesModel)

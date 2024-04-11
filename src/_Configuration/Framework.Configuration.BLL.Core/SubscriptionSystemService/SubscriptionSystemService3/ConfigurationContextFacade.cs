@@ -5,6 +5,7 @@ using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -65,7 +66,7 @@ public class ConfigurationContextFacade
     /// </returns>
     public virtual Type GetSecurityType(Guid authDomainTypeId)
     {
-        var securityContextType = this.context.Authorization.Logics.EntityType.GetById(authDomainTypeId);
+        var securityContextType = this.context.Authorization.Logics.SecurityContextType.GetById(authDomainTypeId);
 
         if (securityContextType == null)
         {
@@ -107,7 +108,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(domainTypeName));
         }
 
-        var result = this.context.Authorization.GetEntityType(domainTypeName);
+        var result = this.context.Authorization.GetSecurityContextType(domainTypeName);
         return result;
     }
 

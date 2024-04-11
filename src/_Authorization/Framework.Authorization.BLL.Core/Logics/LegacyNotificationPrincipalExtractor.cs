@@ -49,17 +49,17 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
             {
                 var tailGroups = notificationFilterGroups.Skip(1).ToArray();
 
-                var firstGroupEntityType = this.Context.GetEntityType(firstGroup.EntityType);
+                var firstGroupSecurityContextType = this.Context.GetSecurityContextType(firstGroup.SecurityContextType);
 
-                var firstGroupExternalSource = this.Context.ExternalSource.GetTyped(firstGroupEntityType);
+                var firstGroupExternalSource = this.Context.ExternalSource.GetTyped(firstGroupSecurityContextType);
 
                 foreach (var preExpandedIdent in firstGroup.Idents)
                 {
                     var withExpandPrincipalsRequest = from expandedIdent in firstGroupExternalSource.GetSecurityEntitiesWithMasterExpand(preExpandedIdent)
 
-                                                      let newFirtstGroup = new NotificationFilterGroup(firstGroup.EntityType, new[] { expandedIdent.Id }, firstGroup.ExpandType.WithoutHierarchical())
+                                                      let newFirstGroup = new NotificationFilterGroup(firstGroup.SecurityContextType, new[] { expandedIdent.Id }, firstGroup.ExpandType.WithoutHierarchical())
 
-                                                      let principals = this.GetDirectNotificationPrincipals(baseNotificationFilter, new[] { newFirtstGroup }.Concat(tailGroups)).ToArray()
+                                                      let principals = this.GetDirectNotificationPrincipals(baseNotificationFilter, new[] { newFirstGroup }.Concat(tailGroups)).ToArray()
 
                                                       where principals.Any()
 
@@ -98,11 +98,11 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
 
         var totalFilter = notificationFilterGroups.Aggregate(baseNotificationFilter, (accumFilter, group) =>
         {
-            var securityContextType = this.Context.GetEntityType(group.EntityType);
+            var securityContextType = this.Context.GetSecurityContextType(group.SecurityContextType);
 
-            var entityTypeFilter = this.GetDirectPermissionFilter(securityContextType, group.Idents, group.ExpandType.AllowEmpty());
+            var securityContextTypeFilter = this.GetDirectPermissionFilter(securityContextType, group.Idents, group.ExpandType.AllowEmpty());
 
-            return accumFilter.BuildAnd(entityTypeFilter);
+            return accumFilter.BuildAnd(securityContextTypeFilter);
         });
 
         return this.GetNotificationPrincipalsByRoles(totalFilter);

@@ -56,7 +56,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 
 
 
-        var typeDict = notificationFilterGroups.Select(g => g.EntityType).ToDictionary(g => g.Name);
+        var typeDict = notificationFilterGroups.Select(g => g.SecurityContextType).ToDictionary(g => g.Name);
 
         var parsedLevelInfoResult =
             principalInfoResult
@@ -85,7 +85,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
                 {
                     var request = from pair in state
 
-                                  group pair by pair.LevelInfo[notificationFilterGroup.EntityType] into levelGroup
+                                  group pair by pair.LevelInfo[notificationFilterGroup.SecurityContextType] into levelGroup
 
                                   orderby levelGroup.Key descending
 
@@ -106,12 +106,12 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
     {
         var genericMethod =
 
-            notificationFilterGroup.EntityType.IsHierarchical()
+            notificationFilterGroup.SecurityContextType.IsHierarchical()
 
                 ? this.GetType().GetMethod(nameof(this.ApplyNotificationFilterTypedHierarchical), BindingFlags.Instance | BindingFlags.NonPublic)
                 : this.GetType().GetMethod(nameof(this.ApplyNotificationFilterTypedPlain), BindingFlags.Instance | BindingFlags.NonPublic);
 
-        var method = genericMethod.MakeGenericMethod(notificationFilterGroup.EntityType);
+        var method = genericMethod.MakeGenericMethod(notificationFilterGroup.SecurityContextType);
 
         return method.Invoke<IQueryable<PermissionLevelInfo>>(this, source, notificationFilterGroup);
     }
@@ -122,7 +122,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
         where TSecurityContext : IIdentityObject<Guid>, ISecurityContext, IHierarchicalLevelObject
     {
         var expandedSecIdents = notificationFilterGroup.ExpandType.IsHierarchical()
-                                    ? this.hierarchicalObjectExpanderFactory.Create(notificationFilterGroup.EntityType).Expand(
+                                    ? this.hierarchicalObjectExpanderFactory.Create(notificationFilterGroup.SecurityContextType).Expand(
                                         notificationFilterGroup.Idents,
                                         HierarchicalExpandType.Parents)
                                     : notificationFilterGroup.Idents;

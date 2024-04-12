@@ -25,12 +25,8 @@ public abstract class IntegrationGeneratorConfigurationBase<TEnvironment> : Gene
 
     public virtual string SaveMethodName { get; } = "Save";
 
-    public abstract SecurityRole IntegrationSecurityRole { get; }
-
-    public abstract Type IntegrationSecurityRoleType { get; }
-
     public virtual CodeExpression IntegrationSecurityRule =>
-        this.Environment.BLLCore.GetSecurityCodeExpression(this.IntegrationSecurityRole, this.IntegrationSecurityRoleType);
+        this.Environment.BLLCore.GetSecurityCodeExpression(SpecialRoleSecurityRule.SystemIntegration);
 
     protected override IEnumerable<Type> GetDomainTypes()
     {

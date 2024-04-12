@@ -12,8 +12,7 @@ public static class GeneratorConfigurationExtensions
 {
     public static CodeExpression GetSecurityCodeExpression(
         this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration,
-        SecurityRule securityRule,
-        Type securityRuleType = null)
+        SecurityRule securityRule)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
@@ -21,9 +20,13 @@ public static class GeneratorConfigurationExtensions
         {
             return typeof(SecurityRule).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
         }
+        else if (securityRule is SpecialRoleSecurityRule)
+        {
+            return typeof(SpecialRoleSecurityRule).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
+        }
         else
         {
-            var realSecurityRuleTypes = securityRuleType == null ? configuration.Environment.SecurityRuleTypeList : new[] { securityRuleType };
+            var realSecurityRuleTypes = configuration.Environment.SecurityRuleTypeList;
 
             var request = from realSecurityRuleType in realSecurityRuleTypes
 

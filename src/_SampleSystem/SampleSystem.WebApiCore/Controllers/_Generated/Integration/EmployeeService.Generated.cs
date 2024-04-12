@@ -22,7 +22,7 @@
         protected virtual SampleSystem.Generated.DTO.EmployeeIdentityDTO SaveEmployeeInternal(SampleSystem.Generated.DTO.EmployeeIntegrationRichDTO employee, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.Employee;
-            evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SampleSystem.Security.SampleSystemSecurityRole.SystemIntegration);
+            evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(Framework.SecuritySystem.SpecialRoleSecurityRule.SystemIntegration);
             return this.SaveEmployeeInternal(employee, evaluateData, bll);
         }
         

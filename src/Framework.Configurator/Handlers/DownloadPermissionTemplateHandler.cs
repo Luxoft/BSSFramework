@@ -4,7 +4,6 @@ using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Bss;
 
 using Microsoft.AspNetCore.Http;
 
@@ -14,7 +13,6 @@ namespace Framework.Configurator.Handlers;
 
 public record DownloadPermissionTemplateHandler(
     IRepositoryFactory<SecurityContextType> RepositoryFactory,
-    AdministratorRoleInfo AdministratorRoleInfo,
     IOperationAccessor OperationAccessor)
     : IDownloadPermissionTemplateHandler
 {
@@ -22,7 +20,7 @@ public record DownloadPermissionTemplateHandler(
 
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.OperationAccessor.CheckAccess(this.AdministratorRoleInfo.AdministratorRole);
+        this.OperationAccessor.CheckAccess(SpecialRoleSecurityRule.Administrator);
 
         var contexts = await this.RepositoryFactory
                                  .Create()

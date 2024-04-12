@@ -1,13 +1,13 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem.Bss;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public record UpdateSystemConstantHandler(IRepositoryFactory<SystemConstant> RepoFactory, AdministratorRoleInfo AdministratorRoleInfo)
+public record UpdateSystemConstantHandler(IRepositoryFactory<SystemConstant> RepoFactory)
     : BaseWriteHandler, IUpdateSystemConstantHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
@@ -22,6 +22,6 @@ public record UpdateSystemConstantHandler(IRepositoryFactory<SystemConstant> Rep
     {
         var systemConstant = await this.RepoFactory.Create().LoadAsync(id, token);
         systemConstant.Value = newValue;
-        await this.RepoFactory.Create(this.AdministratorRoleInfo.AdministratorRole).SaveAsync(systemConstant, token);
+        await this.RepoFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(systemConstant, token);
     }
 }

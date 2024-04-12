@@ -19,6 +19,9 @@ public abstract class DomainSecurityService<TDomainObject> : DomainSecurityServi
             case SecurityRule.SpecialSecurityRule specialSecurityRule:
                 return this.CreateSecurityProvider(specialSecurityRule);
 
+            case SpecialRoleSecurityRule specialRoleSecurityRule:
+                return this.CreateSecurityProvider(specialRoleSecurityRule);
+
             case SecurityRule.OperationSecurityRule operationSecurityRule:
                 return this.CreateSecurityProvider(operationSecurityRule);
 
@@ -38,6 +41,11 @@ public abstract class DomainSecurityService<TDomainObject> : DomainSecurityServi
         return this.GetSecurityProvider(
                    this.securityRuleExpander.TryExpand<TDomainObject>(securityRule))
                ?? throw new Exception($"SecurityRule with mode '{securityRule}' not found for type '{typeof(TDomainObject).Name}'");
+    }
+
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SpecialRoleSecurityRule securityRule)
+    {
+        return this.GetSecurityProvider(this.securityRuleExpander.Expand(securityRule));
     }
 
     protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.OperationSecurityRule securityRule)

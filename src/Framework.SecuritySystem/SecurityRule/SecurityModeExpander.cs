@@ -9,7 +9,8 @@ public class SecurityModeExpander
 
     private readonly IReadOnlyDictionary<Type, SecurityRule> editDict;
 
-    public SecurityModeExpander(IEnumerable<DomainObjectSecurityModeInfo> infos)
+    public SecurityModeExpander(
+        IEnumerable<DomainObjectSecurityModeInfo> infos)
     {
         var cached = infos.ToList();
 

@@ -1,5 +1,4 @@
-﻿using Framework.Authorization;
-using Framework.HierarchicalExpand;
+﻿using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 
 namespace SampleSystem;
@@ -149,8 +148,6 @@ public static class SampleSystemSecurityOperation
     #endregion
 
     public static SecurityOperation SearchNotificationOperation { get; } = new(nameof(SearchNotificationOperation));
-
-    public static SecurityOperation AuthorizationImpersonate { get; } = AuthorizationSecurityOperation.AuthorizationImpersonate;
 
     #region AuthWorkflow
 

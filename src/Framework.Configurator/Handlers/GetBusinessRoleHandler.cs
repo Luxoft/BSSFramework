@@ -18,7 +18,7 @@ public class GetBusinessRoleHandler(
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdmin()) return new BusinessRoleDetailsDto { Operations = [], Principals = [] };
+        if (!operationAccessor.IsAdministrator()) return new BusinessRoleDetailsDto { Operations = [], Principals = [] };
 
         var roleId = new Guid((string)context.Request.RouteValues["id"]!);
 

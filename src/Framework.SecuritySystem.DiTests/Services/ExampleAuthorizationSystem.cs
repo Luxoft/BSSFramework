@@ -22,8 +22,6 @@ public class ExampleAuthorizationSystem : IAuthorizationSystem<Guid>
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
     }
 
-    public bool IsAdmin() => throw new NotImplementedException();
-
     public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule) => throw new NotImplementedException();
 
     public void CheckAccess(SecurityRule.DomainObjectSecurityRule securityRule) => throw new NotImplementedException();

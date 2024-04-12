@@ -15,7 +15,7 @@ public class GetBusinessRolesHandler(IRepositoryFactory<BusinessRole> roleRepoFa
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdmin()) return new List<EntityDto>();
+        if (!operationAccessor.IsAdministrator()) return new List<EntityDto>();
 
         return await roleRepoFactory.Create()
                                     .GetQueryable()

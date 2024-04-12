@@ -118,6 +118,7 @@ public class MainTests
 
                .AddSingleton<SecurityModeExpander>()
                .AddSingleton<SecurityOperationExpander>()
+               .AddSingleton<SpecialRoleSecurityRuleExpander>()
                .AddSingleton<SecurityRoleExpander>()
                .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
 

@@ -35,12 +35,10 @@ public static class SampleSystemSecurityRole
 
     public static SecurityRole SystemIntegration { get; } = new(
         new Guid("df74d544-5945-4380-944e-a3a9001252be"),
-        nameof(SystemIntegration),
-        ConfigurationSecurityOperation.ProcessModifications,
-        ConfigurationSecurityOperation.QueueMonitoring);
+        nameof(SystemIntegration));
 
     public static SecurityRole Administrator { get; } = SecurityRole.CreateAdministrator(
         new Guid("d9c1d2f0-0c2f-49ab-bb0b-de13a456169e"),
         new[] { typeof(SampleSystemSecurityRole) },
-        new[] { typeof(AuthorizationSecurityOperation), typeof(ConfigurationSecurityOperation), typeof(SampleSystemSecurityOperation) });
+        new[] { typeof(SampleSystemSecurityOperation) });
 }

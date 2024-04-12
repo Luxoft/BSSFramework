@@ -15,7 +15,7 @@ public class GetDomainTypesHandler(IRepositoryFactory<DomainType> repoFactory, I
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdmin()) return new List<DomainTypeDto>();
+        if (!operationAccessor.IsAdministrator()) return new List<DomainTypeDto>();
 
         return await repoFactory.Create()
                                 .GetQueryable()

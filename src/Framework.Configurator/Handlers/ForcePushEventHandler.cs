@@ -3,7 +3,6 @@ using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Bss;
 
 using Microsoft.AspNetCore.Http;
 
@@ -15,12 +14,11 @@ namespace Framework.Configurator.Handlers;
 public record ForcePushEventHandler(
     IRepositoryFactory<DomainTypeEventOperation> EventOperationRepoFactory,
     IDomainTypeBLLFactory DomainTypeBllFactory,
-    AdministratorRoleInfo AdministratorRoleInfo,
     IOperationAccessor OperationAccessor) : BaseWriteHandler, IForcePushEventHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.OperationAccessor.CheckAccess(this.AdministratorRoleInfo.AdministratorRole);
+        this.OperationAccessor.CheckAccess(SpecialRoleSecurityRule.Administrator);
 
         var operationId = (string)context.Request.RouteValues["operationId"]!;
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);

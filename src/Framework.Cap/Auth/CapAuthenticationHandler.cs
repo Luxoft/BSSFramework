@@ -39,7 +39,7 @@ public class CapAuthenticationHandler : AuthenticationHandler<AuthenticationSche
 
         this.dbSession.AsReadOnly();
 
-        if (!this.authorizationSystem.IsAdmin())
+        if (!this.authorizationSystem.IsAdministrator())
         {
             return AuthenticateResult.NoResult();
         }

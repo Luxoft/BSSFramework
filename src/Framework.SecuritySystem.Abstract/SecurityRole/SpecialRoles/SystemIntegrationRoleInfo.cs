@@ -1,3 +1,3 @@
-﻿namespace Framework.SecuritySystem.Bss;
+﻿namespace Framework.SecuritySystem;
 
 public record SystemIntegrationRoleInfo(SecurityRole SystemIntegrationRole);

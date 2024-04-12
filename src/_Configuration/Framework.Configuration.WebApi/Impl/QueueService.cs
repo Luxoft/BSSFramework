@@ -1,6 +1,7 @@
 ﻿using Framework.Core;
 using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
+using Framework.SecuritySystem;
 
 using Serilog.Context;
 
@@ -13,9 +14,9 @@ public partial class ConfigSLJsonController
     {
         var result = this.EvaluateC(DBSessionMode.Write, context =>
                                                          {
-                                                             using (LogContext.PushProperty("Method", nameof(ConfigurationSecurityOperation.ProcessModifications)))
+                                                             using (LogContext.PushProperty("Method", nameof(this.ProcessModifications)))
                                                              {
-                                                                 context.Authorization.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.ProcessModifications);
+                                                                 context.Authorization.AuthorizationSystem.CheckAccess(SpecialRoleSecurityRule.SystemIntegration);
 
                                                                  return context.Logics.DomainObjectModification.Process(limit == default(int) ? 1000 : limit);
                                                              }
@@ -29,7 +30,7 @@ public partial class ConfigSLJsonController
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
                                                  {
-                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.QueueMonitoring);
+                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SpecialRoleSecurityRule.SystemIntegration);
 
                                                      return evaluateData.Context.Logics.DomainObjectEvent.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                                  });
@@ -40,7 +41,7 @@ public partial class ConfigSLJsonController
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
                                                  {
-                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.QueueMonitoring);
+                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SpecialRoleSecurityRule.SystemIntegration);
 
                                                      return evaluateData.Context.Logics.DomainObjectModification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                                  });
@@ -51,7 +52,7 @@ public partial class ConfigSLJsonController
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
                                                  {
-                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.QueueMonitoring);
+                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SpecialRoleSecurityRule.SystemIntegration);
 
                                                      return evaluateData.Context.Logics.DomainObjectNotification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                                  });

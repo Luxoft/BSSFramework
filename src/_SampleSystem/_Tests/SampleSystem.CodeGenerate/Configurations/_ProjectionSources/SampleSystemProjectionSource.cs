@@ -91,7 +91,7 @@ public class SampleSystemProjectionSource : ProjectionSource
 
         this.CustomCompanyLegalEntity = new Projection<CompanyLegalEntity>(() => this.CustomCompanyLegalEntity, true)
                                         .Attribute(new ExampleCustomProjectionAttribute()) // Добавлям кастомный атрибут в проекцию
-                                        .Attribute(new ViewDomainObjectAttribute(AuthorizationSecurityOperation.AuthorizationImpersonate)) // Подменяем атрибут доступа проекции
+                                        .Attribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.BusinessUnitEdit)) // Подменяем атрибут доступа проекции
                                         .Property(legalEntity => legalEntity.Code, propertyAttributes: new Attribute[] { new ViewDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityView) }) // Добавляем свойство и атрибут доступа к нему
                                         .Property(legalEntity => legalEntity.Name)
                                         .Property(legalEntity => legalEntity.NameEnglish)

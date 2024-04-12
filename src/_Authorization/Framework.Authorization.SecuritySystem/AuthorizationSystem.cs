@@ -118,8 +118,6 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
             pair => this.hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
     }
 
-    public bool IsAdmin() => this.operationAccessorFactory.Create(true).IsAdmin();
-
     public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule) => this.operationAccessorFactory.Create(true).HasAccess(securityRule);
 
     public void CheckAccess(SecurityRule.DomainObjectSecurityRule securityRule) => this.operationAccessorFactory.Create(true).CheckAccess(securityRule);

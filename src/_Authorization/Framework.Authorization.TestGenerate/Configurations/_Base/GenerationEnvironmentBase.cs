@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.SecuritySystem;
 
 namespace Framework.Authorization.TestGenerate;
 
@@ -13,7 +14,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
     {
     }
 
-    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(AuthorizationSecurityOperation) };
+    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SpecialRoleSecurityRule) };
 
     public override Type OperationContextType { get; } = typeof(AuthorizationOperationContext);
 }

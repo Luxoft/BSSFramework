@@ -5,21 +5,13 @@ namespace Framework.SecuritySystem;
 
 public class SecurityModeExpander
 {
-    private readonly AdministratorRoleInfo administratorRoleInfo;
-
-    private readonly SystemIntegrationRoleInfo? systemIntegrationRoleInfo;
-
     private readonly IReadOnlyDictionary<Type, SecurityRule> viewDict;
 
     private readonly IReadOnlyDictionary<Type, SecurityRule> editDict;
 
     public SecurityModeExpander(
-        IEnumerable<DomainObjectSecurityModeInfo> infos,
-        AdministratorRoleInfo administratorRoleInfo,
-        SystemIntegrationRoleInfo? systemIntegrationRoleInfo = null)
+        IEnumerable<DomainObjectSecurityModeInfo> infos)
     {
-        this.administratorRoleInfo = administratorRoleInfo;
-        this.systemIntegrationRoleInfo = systemIntegrationRoleInfo;
         var cached = infos.ToList();
 
         this.viewDict = GetDict(cached, info => info.ViewRule);
@@ -35,14 +27,6 @@ public class SecurityModeExpander
         else if (securityRule == SecurityRule.Edit)
         {
             return this.editDict.GetValueOrDefault(typeof(TDomainObject));
-        }
-        else if (securityRule == SpecialRoleSecurityRule.Administrator)
-        {
-            return this.administratorRoleInfo.AdministratorRole;
-        }
-        else if (securityRule == SpecialRoleSecurityRule.SystemIntegration)
-        {
-            return this.systemIntegrationRoleInfo?.SystemIntegrationRole ?? throw new ArgumentOutOfRangeException(nameof(securityRule), $"{nameof(SpecialRoleSecurityRule.SystemIntegration)}Role not defined");
         }
 
         return null;

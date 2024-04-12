@@ -171,6 +171,7 @@ public static class ServiceCollectionExtensions
 
 
                        .AddSingleton<SecurityModeExpander>()
+                       .AddSingleton<SpecialRoleSecurityRuleExpander>()
                        .AddSingleton<SecurityOperationExpander>()
                        .AddSingleton<SecurityRoleExpander>()
 

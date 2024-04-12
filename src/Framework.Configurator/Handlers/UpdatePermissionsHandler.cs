@@ -7,6 +7,9 @@ using Framework.SecuritySystem.Bss;
 
 using Microsoft.AspNetCore.Http;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
+
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePermissionsHandler(
@@ -126,23 +129,23 @@ public record UpdatePermissionsHandler(
 
     private class RequestBodyDto
     {
-        public string PermissionId { get; } = default!;
+        public string PermissionId { get; set; } = default!;
 
-        public string RoleId { get; } = default!;
+        public string RoleId { get; set; } = default!;
 
-        public string Comment { get; } = default!;
+        public string Comment { get; set; } = default!;
 
-        public List<ContextDto> Contexts { get; } = default!;
+        public List<ContextDto> Contexts { get; set; } = default!;
 
-        public DateTime? EndDate { get; }
+        public DateTime? EndDate { get; set; }
 
-        public DateTime StartDate { get; }
+        public DateTime StartDate { get; set; }
 
         public class ContextDto
         {
-            public string Id { get; } = default!;
+            public string Id { get; set; } = default!;
 
-            public List<string> Entities { get; } = default!;
+            public List<string> Entities { get; set; } = default!;
         }
     }
 }

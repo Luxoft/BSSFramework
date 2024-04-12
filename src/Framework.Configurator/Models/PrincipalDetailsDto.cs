@@ -2,9 +2,5 @@
 
 public class PrincipalDetailsDto
 {
-    public List<PermissionDto> Permissions
-    {
-        get;
-        set;
-    }
+    public List<PermissionDto> Permissions { get; set; }
 }

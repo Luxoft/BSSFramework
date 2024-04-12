@@ -25,7 +25,7 @@ public class GetPrincipalHandler(
 
         var permissions = await this.GetPermissionsAsync(principalId, cancellationToken);
         var contexts = await this.GetContextsAsync(permissions, cancellationToken);
-        return Task.FromResult<object>(new PrincipalDetailsDto { Permissions = ToDto(permissions, contexts) });
+        return new PrincipalDetailsDto { Permissions = ToDto(permissions, contexts) };
     }
 
     private Task<List<PermissionDetails>> GetPermissionsAsync(Guid principalId, CancellationToken token) =>

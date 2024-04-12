@@ -7,6 +7,9 @@ using Framework.SecuritySystem.Bss;
 
 using Microsoft.AspNetCore.Http;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
+
 namespace Framework.Configurator.Handlers;
 
 public record ForcePushEventHandler(
@@ -41,8 +44,8 @@ public record ForcePushEventHandler(
 
     private class RequestBodyDto
     {
-        public long? Revision { get; }
+        public long? Revision { get; set; }
 
-        public string Ids { get; } = default!;
+        public string Ids { get; set; } = default!;
     }
 }

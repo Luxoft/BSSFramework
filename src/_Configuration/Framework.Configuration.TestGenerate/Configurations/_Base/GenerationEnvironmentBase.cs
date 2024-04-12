@@ -1,5 +1,6 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.SecuritySystem;
 
 namespace Framework.Configuration.TestGenerate;
 
@@ -13,7 +14,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
     {
     }
 
-    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(ConfigurationSecurityOperation) };
+    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SpecialRoleSecurityRule) };
 
     public override Type OperationContextType { get; } = typeof(ConfigurationOperationContext);
 }

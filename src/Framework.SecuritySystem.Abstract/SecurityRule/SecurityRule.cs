@@ -1,6 +1,7 @@
 ﻿using Framework.Core;
 
 using Framework.HierarchicalExpand;
+using static Framework.SecuritySystem.SecurityRule;
 
 namespace Framework.SecuritySystem;
 

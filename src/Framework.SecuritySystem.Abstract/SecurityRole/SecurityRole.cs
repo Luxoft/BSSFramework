@@ -30,7 +30,7 @@ public class SecurityRole
         IEnumerable<string> exceptPropertyNames = null,
         string? description = null)
     {
-        const string administratorRoleName = "Administrator";
+        const string administratorRoleName =  "Administrator";
 
         var realExceptPropertyNames = (exceptPropertyNames ?? [administratorRoleName, "SystemIntegration"]).ToHashSet();
 

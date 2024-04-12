@@ -1,7 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem.Bss;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
@@ -9,7 +9,6 @@ namespace Framework.Configurator.Handlers;
 
 public record UpdatePrincipalHandler(
     IRepositoryFactory<Principal> PrincipalRepoFactory,
-    AdministratorRoleInfo AdministratorRoleInfo,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
     : BaseWriteHandler, IUpdatePrincipalHandler
 {
@@ -25,7 +24,7 @@ public record UpdatePrincipalHandler(
     {
         var domainObject = await this.PrincipalRepoFactory.Create().LoadAsync(id, cancellationToken);
         domainObject.Name = newName;
-        await this.PrincipalRepoFactory.Create(this.AdministratorRoleInfo.AdministratorRole).SaveAsync(domainObject, cancellationToken);
+        await this.PrincipalRepoFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(domainObject, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
             await this.ConfiguratorIntegrationEvents.PrincipalChangedAsync(domainObject, cancellationToken);

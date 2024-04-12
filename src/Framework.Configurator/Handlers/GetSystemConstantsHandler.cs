@@ -15,7 +15,7 @@ public class GetSystemConstantsHandler(IRepositoryFactory<SystemConstant> repoFa
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdmin()) return new List<SystemConstantDto>();
+        if (!operationAccessor.IsAdministrator()) return new List<SystemConstantDto>();
 
         return await repoFactory
                      .Create()

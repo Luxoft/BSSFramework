@@ -20,6 +20,6 @@ public class AdminHangfireAuthorization : IDashboardAuthorizationFilter
             return false;
         }
 
-        return this.authorizationSystemEvaluator.Evaluate(DBSessionMode.Read, service => service.IsAdmin());
+        return this.authorizationSystemEvaluator.Evaluate(DBSessionMode.Read, service => service.IsAdministrator());
     }
 }

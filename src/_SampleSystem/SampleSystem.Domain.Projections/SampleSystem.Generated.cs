@@ -139,7 +139,7 @@ namespace SampleSystem.Domain.Projections
     [Framework.Persistent.Mapping.TableAttribute(Name="CompanyLegalEntity")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), Framework.Projection.ProjectionRole.Default)]
     [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity))]
-    [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "AuthorizationImpersonate")]
+    [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "BusinessUnitEdit")]
     [SampleSystem.Domain.ExampleCustomProjectionAttribute()]
     public partial class CustomCompanyLegalEntity : SampleSystem.Domain.PersistentDomainObjectBase
     {

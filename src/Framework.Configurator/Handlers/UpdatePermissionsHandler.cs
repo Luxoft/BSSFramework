@@ -3,7 +3,7 @@ using Framework.Configurator.Interfaces;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.Persistent;
-using Framework.SecuritySystem.Bss;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
@@ -18,7 +18,6 @@ public record UpdatePermissionsHandler(
     IRepositoryFactory<Permission> PermissionRepositoryFactory,
     IRepositoryFactory<PermissionRestriction> PermissionRestrictionRepositoryFactory,
     IRepositoryFactory<SecurityContextType> SecurityContextTypeRepositoryFactory,
-    AdministratorRoleInfo AdministratorRoleInfo,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
@@ -43,7 +42,7 @@ public record UpdatePermissionsHandler(
         await this.UpdatePermissionsAsync(mergeResult.CombineItems, cancellationToken);
         principal.RemoveDetails(mergeResult.RemovingItems);
 
-        await this.PrincipalRepositoryFactory.Create(this.AdministratorRoleInfo.AdministratorRole).SaveAsync(principal, cancellationToken);
+        await this.PrincipalRepositoryFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(principal, cancellationToken);
         if (this.ConfiguratorIntegrationEvents != null)
             foreach (var removingItem in mergeResult.RemovingItems)
                 await this.ConfiguratorIntegrationEvents.PermissionRemovedAsync(removingItem, cancellationToken);
@@ -61,7 +60,7 @@ public record UpdatePermissionsHandler(
                                  Active = true
                              };
 
-            await this.PermissionRepositoryFactory.Create(this.AdministratorRoleInfo.AdministratorRole).SaveAsync(permission, token);
+            await this.PermissionRepositoryFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(permission, token);
 
             foreach (var context in dto.Contexts)
             {
@@ -109,7 +108,7 @@ public record UpdatePermissionsHandler(
 
             item.Item1.RemoveDetails(mergeResult.RemovingItems);
 
-            await this.PermissionRepositoryFactory.Create(this.AdministratorRoleInfo.AdministratorRole).SaveAsync(item.Item1, token);
+            await this.PermissionRepositoryFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(item.Item1, token);
 
             if (this.ConfiguratorIntegrationEvents != null)
                 await this.ConfiguratorIntegrationEvents.PermissionChangedAsync(item.Item1, token);

@@ -2,7 +2,7 @@
 
 public interface IOperationAccessor
 {
-    bool IsAdmin();
+    bool IsAdministrator() => this.HasAccess(SpecialRoleSecurityRule.Administrator);
 
     bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule);
 

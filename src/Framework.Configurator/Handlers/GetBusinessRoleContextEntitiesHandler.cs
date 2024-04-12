@@ -17,7 +17,7 @@ public class GetBusinessRoleContextEntitiesHandler(
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdmin()) return new List<EntityDto>();
+        if (!operationAccessor.IsAdministrator()) return new List<EntityDto>();
 
         var securityContextTypeId = new Guid((string)context.Request.RouteValues["id"]!);
         var searchToken = context.Request.Query["searchToken"];

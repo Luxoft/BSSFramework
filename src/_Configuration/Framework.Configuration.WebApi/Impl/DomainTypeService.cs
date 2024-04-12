@@ -1,5 +1,6 @@
 ﻿using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
+using Framework.SecuritySystem;
 
 namespace Framework.Configuration.WebApi;
 
@@ -21,7 +22,7 @@ public partial class ConfigSLJsonController
 
         this.Evaluate(DBSessionMode.Write, evaluateData =>
                                            {
-                                               evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.ForceDomainTypeEvent);
+                                               evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SpecialRoleSecurityRule.Administrator);
 
                                                evaluateData.Context.Logics.DomainType.ForceEvent(domainTypeEventModel.ToDomainObject(evaluateData.MappingService));
                                            });

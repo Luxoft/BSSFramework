@@ -1,7 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem.Bss;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
@@ -9,7 +9,6 @@ namespace Framework.Configurator.Handlers;
 
 public record DeletePrincipalHandler(
     IRepositoryFactory<Principal> RepoFactory,
-    AdministratorRoleInfo AdministratorRoleInfo,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
     : BaseWriteHandler, IDeletePrincipalHandler
 {
@@ -22,7 +21,7 @@ public record DeletePrincipalHandler(
     private async Task Delete(Guid id, CancellationToken cancellationToken)
     {
         var domainObject = await this.RepoFactory.Create().LoadAsync(id, cancellationToken);
-        await this.RepoFactory.Create(this.AdministratorRoleInfo.AdministratorRole).RemoveAsync(domainObject, cancellationToken);
+        await this.RepoFactory.Create(SpecialRoleSecurityRule.Administrator).RemoveAsync(domainObject, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
             await this.ConfiguratorIntegrationEvents.PrincipalRemovedAsync(domainObject, cancellationToken);

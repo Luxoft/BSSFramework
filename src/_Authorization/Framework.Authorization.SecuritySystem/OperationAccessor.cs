@@ -1,5 +1,4 @@
-﻿using Framework.Authorization.Domain;
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem;
 
@@ -20,9 +19,6 @@ public class OperationAccessor : IOperationAccessor
         this.accessDeniedExceptionService = accessDeniedExceptionService;
         this.withRunAs = withRunAs;
     }
-
-    public bool IsAdmin() => this.availablePermissionSource.GetAvailablePermissionsQueryable(this.withRunAs)
-                                 .Any(permission => permission.Role.Name == BusinessRole.AdminRoleName);
 
     public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule)
     {

@@ -33,7 +33,7 @@ public class RunAsManger : IRunAsManager
     {
         if (principalName == null) throw new ArgumentNullException(nameof(principalName));
 
-        this.operationAccessorFactory.Create(false).CheckAccess(AuthorizationSecurityOperation.AuthorizationImpersonate);
+        this.operationAccessorFactory.Create(false).CheckAccess(SpecialRoleSecurityRule.Administrator);
 
         if (string.Equals(principalName, this.CurrentPrincipal.RunAs?.Name, StringComparison.CurrentCultureIgnoreCase))
         {

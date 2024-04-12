@@ -19,7 +19,7 @@ public class GetPrincipalHandler(
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdmin()) return new PrincipalDetailsDto();
+        if (!operationAccessor.IsAdministrator()) return new PrincipalDetailsDto();
 
         var principalId = new Guid((string)context.Request.RouteValues["id"]!);
 

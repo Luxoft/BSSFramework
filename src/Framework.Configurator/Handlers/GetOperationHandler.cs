@@ -18,7 +18,7 @@ public class GetOperationHandler(
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdmin()) return new OperationDetailsDto { BusinessRoles = [], Principals = [] };
+        if (!operationAccessor.IsAdministrator()) return new OperationDetailsDto { BusinessRoles = [], Principals = [] };
 
         var operationName = (string)context.Request.RouteValues["name"]!;
 

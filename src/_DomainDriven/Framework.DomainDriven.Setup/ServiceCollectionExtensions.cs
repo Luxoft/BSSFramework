@@ -5,7 +5,6 @@ using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Bss;
 
 using Microsoft.Extensions.DependencyInjection;
 

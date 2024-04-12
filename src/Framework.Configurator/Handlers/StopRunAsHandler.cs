@@ -1,14 +1,12 @@
-﻿using Framework.Authorization.BLL;
+﻿using Framework.Authorization.SecuritySystem;
 using Framework.Configurator.Interfaces;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public record StopRunAsHandler(IAuthorizationBLLContext AuthorizationBllContext) : BaseWriteHandler, IStopRunAsHandler
+public record StopRunAsHandler(IRunAsManager RunAsManager) : BaseWriteHandler, IStopRunAsHandler
 {
-    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
-    {
-        await this.AuthorizationBllContext.Authorization.RunAsManager.FinishRunAsUserAsync(cancellationToken);
-    }
+    public Task Execute(HttpContext context, CancellationToken cancellationToken) =>
+        this.RunAsManager.FinishRunAsUserAsync(cancellationToken);
 }

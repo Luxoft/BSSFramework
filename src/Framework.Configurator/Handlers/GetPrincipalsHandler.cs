@@ -1,27 +1,31 @@
-﻿using Framework.Authorization.BLL;
+﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class GetPrincipalsHandler(IAuthorizationBLLContext authorizationBllContext) : BaseReadHandler, IGetPrincipalsHandler
+public class GetPrincipalsHandler(IRepositoryFactory<Principal> repoFactory, IOperationAccessor operationAccessor)
+    : BaseReadHandler, IGetPrincipalsHandler
 {
-    protected override Task<object> GetData(HttpContext context)
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
+        if (!operationAccessor.IsAdmin()) return new List<EntityDto>();
+
         var searchToken = context.Request.Query["searchToken"];
 
-        var query = authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(SecurityRule.View)
-                                           .GetSecureQueryable();
-        if (!string.IsNullOrWhiteSpace(searchToken)) query = query.Where(p => p.Name.Contains(searchToken));
+        var query = repoFactory.Create().GetQueryable();
+        if (!string.IsNullOrWhiteSpace(searchToken)) query = query.Where(p => p.Name.Contains(searchToken!));
 
-        return Task.FromResult<object>(
-            query
-                .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
-                .OrderBy(r => r.Name)
-                .Take(70)
-                .ToList());
+        return await query
+                     .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
+                     .OrderBy(x => x.Name)
+                     .Take(70)
+                     .ToListAsync(cancellationToken);
     }
 }

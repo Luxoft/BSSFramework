@@ -16,7 +16,7 @@ public class GetBusinessRoleHandler(
     ISecurityRoleSource roleSource)
     : BaseReadHandler, IGetBusinessRoleHandler
 {
-    protected override async Task<object> GetData(HttpContext context)
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
         if (!operationAccessor.IsAdmin()) return new BusinessRoleDetailsDto { Operations = [], Principals = [] };
 
@@ -35,7 +35,7 @@ public class GetBusinessRoleHandler(
                                           .Select(x => x.Principal.Name)
                                           .OrderBy(x => x)
                                           .Distinct()
-                                          .ToListAsync();
+                                          .ToListAsync(cancellationToken);
 
         return new BusinessRoleDetailsDto { Operations = operations, Principals = principals };
     }

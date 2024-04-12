@@ -1,38 +1,33 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
 
 using Microsoft.AspNetCore.Http;
-
-using NHibernate.Linq;
 
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePrincipalHandler(
-        IRepositoryFactory<Principal> PrincipalRepositoryFactory,
-        IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePrincipalHandler
+    IRepositoryFactory<Principal> PrincipalRepoFactory,
+    AdministratorRoleInfo AdministratorRoleInfo,
+    IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
+    : BaseWriteHandler, IUpdatePrincipalHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var principalId = (string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var principalId = (string?)context.Request.RouteValues["id"]!;
         var name = await this.ParseRequestBodyAsync<string>(context);
 
-        await this.Update(new Guid(principalId), name, cancellationToken);
+        await this.UpdateAsync(new Guid(principalId), name, cancellationToken);
     }
 
-    private async Task Update(Guid id, string newName, CancellationToken cancellationToken)
+    private async Task UpdateAsync(Guid id, string newName, CancellationToken cancellationToken)
     {
-        var principalBll = this.PrincipalRepositoryFactory.Create(SecurityRule.Edit);
-        var domainObject = await principalBll.GetQueryable()
-                                             .Where(x => x.Id == id)
-                                             .SingleAsync(cancellationToken);
+        var domainObject = await this.PrincipalRepoFactory.Create().LoadAsync(id, cancellationToken);
         domainObject.Name = newName;
-        await principalBll.SaveAsync(domainObject, cancellationToken);
+        await this.PrincipalRepoFactory.Create(this.AdministratorRoleInfo.AdministratorRole).SaveAsync(domainObject, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
-        {
             await this.ConfiguratorIntegrationEvents.PrincipalChangedAsync(domainObject, cancellationToken);
-        }
     }
 }

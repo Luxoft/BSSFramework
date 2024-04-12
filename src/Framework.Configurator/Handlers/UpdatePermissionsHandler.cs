@@ -3,101 +3,86 @@ using Framework.Configurator.Interfaces;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.Persistent;
-using Framework.SecuritySystem;
+using Framework.SecuritySystem.Bss;
 
 using Microsoft.AspNetCore.Http;
 
-using NHibernate.Linq;
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePermissionsHandler(
-        IRepositoryFactory<Principal> PrincipalRepositoryFactory,
-        IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
-        IRepositoryFactory<Permission> PermissionRepositoryFactory,
-        IRepositoryFactory<PermissionRestriction> PermissionRestrictionRepositoryFactory,
-        IRepositoryFactory<SecurityContextType> SecurityContextTypeRepositoryFactory,
-        IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
+    IRepositoryFactory<Principal> PrincipalRepositoryFactory,
+    IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+    IRepositoryFactory<Permission> PermissionRepositoryFactory,
+    IRepositoryFactory<PermissionRestriction> PermissionRestrictionRepositoryFactory,
+    IRepositoryFactory<SecurityContextType> SecurityContextTypeRepositoryFactory,
+    AdministratorRoleInfo AdministratorRoleInfo,
+    IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var principalId = (string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var principalId = (string)context.Request.RouteValues["id"]!;
         var permissions = await this.ParseRequestBodyAsync<List<RequestBodyDto>>(context);
 
-        await this.Update(new Guid(principalId), permissions, cancellationToken);
+        await this.UpdateAsync(new Guid(principalId), permissions, cancellationToken);
     }
 
-    private async Task Update(Guid id, IEnumerable<RequestBodyDto> permissions, CancellationToken cancellationToken)
+    private async Task UpdateAsync(Guid id, IEnumerable<RequestBodyDto> permissions, CancellationToken cancellationToken)
     {
-        var principalRepository = this.PrincipalRepositoryFactory.Create(SecurityRule.Edit);
-        var principal = await principalRepository
-                              .GetQueryable()
-                              .Where(x => x.Id == id)
-                              .SingleAsync(cancellationToken);
+        var principal = await this.PrincipalRepositoryFactory.Create().LoadAsync(id, cancellationToken);
 
-        var mergeResult = principal.Permissions.GetMergeResult(
-                                                               permissions,
-                                                               p => p.Id,
-                                                               p => string.IsNullOrWhiteSpace(p.PermissionId)
-                                                                            ? Guid.NewGuid()
-                                                                            : new Guid(p.PermissionId));
+        var mergeResult = principal.Permissions
+                                   .GetMergeResult(
+                                       permissions,
+                                       x => x.Id,
+                                       x => string.IsNullOrWhiteSpace(x.PermissionId) ? Guid.NewGuid() : new Guid(x.PermissionId));
 
-        await this.CreatePermissions(principal, mergeResult.AddingItems, cancellationToken);
-        await this.UpdatePermissions(mergeResult.CombineItems, cancellationToken);
+        await this.CreatePermissionsAsync(principal, mergeResult.AddingItems, cancellationToken);
+        await this.UpdatePermissionsAsync(mergeResult.CombineItems, cancellationToken);
         principal.RemoveDetails(mergeResult.RemovingItems);
 
-        await principalRepository.SaveAsync(principal, cancellationToken);
+        await this.PrincipalRepositoryFactory.Create(this.AdministratorRoleInfo.AdministratorRole).SaveAsync(principal, cancellationToken);
         if (this.ConfiguratorIntegrationEvents != null)
-        {
             foreach (var removingItem in mergeResult.RemovingItems)
-            {
                 await this.ConfiguratorIntegrationEvents.PermissionRemovedAsync(removingItem, cancellationToken);
-            }
-        }
     }
 
-    private async Task CreatePermissions(
-            Principal principal,
-            IEnumerable<RequestBodyDto> dtoModels,
-            CancellationToken cancellationToken)
+    private async Task CreatePermissionsAsync(Principal principal, IEnumerable<RequestBodyDto> dtoModels, CancellationToken token)
     {
         foreach (var dto in dtoModels)
         {
             var permission = new Permission(principal)
                              {
-                                     Role =
-                                             await this.BusinessRoleRepositoryFactory.Create()
-                                                       .GetQueryable()
-                                                       .Where(x => x.Id == new Guid(dto.RoleId))
-                                                       .SingleAsync(cancellationToken),
-                                     Comment = dto.Comment,
-                                     Period = dto.StartDate.ToPeriod(dto.EndDate),
-                                     Active = true
+                                 Role = await this.BusinessRoleRepositoryFactory.Create().LoadAsync(new Guid(dto.RoleId), token),
+                                 Comment = dto.Comment,
+                                 Period = dto.StartDate.ToPeriod(dto.EndDate),
+                                 Active = true
                              };
 
-            await this.PermissionRepositoryFactory.Create(SecurityRule.Edit).SaveAsync(permission, cancellationToken);
+            await this.PermissionRepositoryFactory.Create(this.AdministratorRoleInfo.AdministratorRole).SaveAsync(permission, token);
 
             foreach (var context in dto.Contexts)
             {
                 foreach (var contextEntity in context.Entities)
-                {
                     await this.PermissionRestrictionRepositoryFactory
                               .Create()
                               .SaveAsync(
-                            this.CreatePermissionRestriction(permission, new Guid(context.Id), new Guid(contextEntity)), cancellationToken);
-                }
+                                  await this.CreatePermissionRestrictionAsync(
+                                      permission,
+                                      new Guid(context.Id),
+                                      new Guid(contextEntity),
+                                      token),
+                                  token);
             }
 
             if (this.ConfiguratorIntegrationEvents != null)
-            {
-                await this.ConfiguratorIntegrationEvents.PermissionCreatedAsync(permission, cancellationToken);
-            }
+                await this.ConfiguratorIntegrationEvents.PermissionCreatedAsync(permission, token);
         }
     }
 
-    private async Task UpdatePermissions(
-            IList<ValueTuple<Permission, RequestBodyDto>> updatedItems,
-            CancellationToken cancellationToken)
+    private async Task UpdatePermissionsAsync(IEnumerable<(Permission, RequestBodyDto)> updatedItems, CancellationToken token)
     {
         foreach (var item in updatedItems)
         {
@@ -108,66 +93,49 @@ public record UpdatePermissionsHandler(
                                   .GetMergeResult(
                                       item.Item2.Contexts.SelectMany(
                                           x => x.Entities.Select(
-                                              e => new
-                                                   {
-                                                       TypeId = new Guid(x.Id),
-                                                       ObjectId = new Guid(e)
-                                                   })),
+                                              e => new { TypeId = new Guid(x.Id), ObjectId = new Guid(e) })),
                                       x => new { TypeId = x.SecurityContextType.Id, ObjectId = x.SecurityContextId },
                                       x => new { x.TypeId, x.ObjectId });
 
             foreach (var permissionRestriction in mergeResult.AddingItems)
-            {
                 await this.PermissionRestrictionRepositoryFactory.Create()
-                          .SaveAsync(this.CreatePermissionRestriction(item.Item1, permissionRestriction.TypeId, permissionRestriction.ObjectId),
-                                     cancellationToken);
-            }
+                          .SaveAsync(
+                              await this.CreatePermissionRestrictionAsync(
+                                  item.Item1,
+                                  permissionRestriction.TypeId,
+                                  permissionRestriction.ObjectId,
+                                  token),
+                              token);
 
             item.Item1.RemoveDetails(mergeResult.RemovingItems);
 
-            await this.PermissionRepositoryFactory.Create(SecurityRule.Edit).SaveAsync(item.Item1, cancellationToken);
+            await this.PermissionRepositoryFactory.Create(this.AdministratorRoleInfo.AdministratorRole).SaveAsync(item.Item1, token);
 
             if (this.ConfiguratorIntegrationEvents != null)
-            {
-                await this.ConfiguratorIntegrationEvents.PermissionChangedAsync(item.Item1, cancellationToken);
-            }
+                await this.ConfiguratorIntegrationEvents.PermissionChangedAsync(item.Item1, token);
         }
     }
 
-    private PermissionRestriction CreatePermissionRestriction(Permission permission, Guid securityContextTypeId, Guid securityContextId)
-    {
-        return new PermissionRestriction(permission)
-               {
-                   SecurityContextId = securityContextId,
-                   SecurityContextType = this.SecurityContextTypeRepositoryFactory.Create().Load(securityContextTypeId)
-               };
-    }
+    private async Task<PermissionRestriction> CreatePermissionRestrictionAsync(
+        Permission permission,
+        Guid securityContextTypeId,
+        Guid securityContextId,
+        CancellationToken token) =>
+        new(permission)
+        {
+            SecurityContextId = securityContextId,
+            SecurityContextType = await this.SecurityContextTypeRepositoryFactory.Create().LoadAsync(securityContextTypeId, token)
+        };
 
     private class RequestBodyDto
     {
-        public string PermissionId
-        {
-            get;
-            set;
-        } = default!;
+        public string PermissionId { get; set; } = default!;
 
-        public string RoleId
-        {
-            get;
-            set;
-        } = default!;
+        public string RoleId { get; set; } = default!;
 
-        public string Comment
-        {
-            get;
-            set;
-        } = default!;
+        public string Comment { get; set; } = default!;
 
-        public List<ContextDto> Contexts
-        {
-            get;
-            set;
-        } = default!;
+        public List<ContextDto> Contexts { get; set; } = default!;
 
         public DateTime? EndDate { get; set; }
 
@@ -175,17 +143,9 @@ public record UpdatePermissionsHandler(
 
         public class ContextDto
         {
-            public string Id
-            {
-                get;
-                set;
-            } = default!;
+            public string Id { get; set; } = default!;
 
-            public List<string> Entities
-            {
-                get;
-                set;
-            } = default!;
+            public List<string> Entities { get; set; } = default!;
         }
     }
 }

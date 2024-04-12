@@ -9,7 +9,7 @@ namespace Framework.Configurator.Handlers;
 public class GetOperationsHandler(IOperationAccessor operationAccessor, ISecurityRoleSource roleSource)
     : BaseReadHandler, IGetOperationsHandler
 {
-    protected override Task<object> GetData(HttpContext context)
+    protected override Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
         if (!operationAccessor.IsAdmin()) return Task.FromResult<object>(new List<string>());
 

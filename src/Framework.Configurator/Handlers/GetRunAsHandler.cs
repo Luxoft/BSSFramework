@@ -1,12 +1,12 @@
-﻿using Framework.Authorization.BLL;
+﻿using Framework.Authorization.SecuritySystem;
 using Framework.Configurator.Interfaces;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetRunAsHandler(IAuthorizationBLLContext authorizationBllContext) : BaseReadHandler, IGetRunAsHandler
+public class GetRunAsHandler(ICurrentPrincipalSource principalSource) : BaseReadHandler, IGetRunAsHandler
 {
-    protected override Task<object> GetData(HttpContext context) =>
-        Task.FromResult<object>(authorizationBllContext.CurrentPrincipal.RunAs?.Name);
+    protected override Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken) =>
+        Task.FromResult<object>(principalSource.CurrentPrincipal.RunAs?.Name ?? string.Empty);
 }

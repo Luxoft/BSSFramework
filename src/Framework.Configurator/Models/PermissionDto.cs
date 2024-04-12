@@ -2,29 +2,13 @@
 
 public class PermissionDto
 {
-    public Guid Id
-    {
-        get;
-        set;
-    }
+    public Guid Id { get; set; }
 
-    public string Role
-    {
-        get;
-        set;
-    }
+    public string Role { get; set; }
 
-    public string Comment
-    {
-        get;
-        set;
-    }
+    public string Comment { get; set; }
 
-    public List<ContextDto> Contexts
-    {
-        get;
-        set;
-    }
+    public List<ContextDto> Contexts { get; set; }
 
     public DateTime? EndDate { get; set; }
 

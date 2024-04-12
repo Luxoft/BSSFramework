@@ -8,10 +8,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ViewOperationDialogComponent } from './components/view-operation-dialog/view-operation-dialog.component';
 
 export interface IOperation {
-  Id: string;
   Name: string;
   Description: string;
-  Selected: boolean;
 }
 
 @Component({

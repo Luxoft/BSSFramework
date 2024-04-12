@@ -8,18 +8,15 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetSystemConstantsHandler : BaseReadHandler, IGetSystemConstantsHandler
+public class GetSystemConstantsHandler(IRepositoryFactory<SystemConstant> systemConstantRepositoryFactory)
+    : BaseReadHandler, IGetSystemConstantsHandler
 {
-    private readonly IRepositoryFactory<SystemConstant> systemConstantRepositoryFactory;
-
-    public GetSystemConstantsHandler(IRepositoryFactory<SystemConstant> systemConstantRepositoryFactory) =>
-        this.systemConstantRepositoryFactory = systemConstantRepositoryFactory;
-
-    protected override object GetData(HttpContext context) =>
-        this.systemConstantRepositoryFactory.Create(SecurityRule.View)
-            .GetQueryable()
-            .Select(
-                s => new SystemConstantDto { Id = s.Id, Name = s.Code, Description = s.Description, Value = s.Value })
-            .OrderBy(s => s.Name)
-            .ToList();
+    protected override Task<object> GetData(HttpContext context) =>
+        Task.FromResult<object>(
+            systemConstantRepositoryFactory
+                .Create(SecurityRule.View)
+                .GetQueryable()
+                .Select(s => new SystemConstantDto { Id = s.Id, Name = s.Code, Description = s.Description, Value = s.Value })
+                .OrderBy(s => s.Name)
+                .ToList());
 }

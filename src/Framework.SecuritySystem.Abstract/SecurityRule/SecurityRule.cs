@@ -1,7 +1,6 @@
 ﻿using Framework.Core;
 
 using Framework.HierarchicalExpand;
-using static Framework.SecuritySystem.SecurityRule;
 
 namespace Framework.SecuritySystem;
 
@@ -15,11 +14,6 @@ public abstract record SecurityRule
     /// Специальная правило доступа для отключения безопасности
     /// </summary>
     public static SpecialSecurityRule Disabled { get; } = new (nameof(Disabled));
-
-    /// <summary>
-    /// Тип разворачивания деревьев (как правило для операции просмотра самого дерева выбирается HierarchicalExpandType.All)
-    /// </summary>
-    public HierarchicalExpandType ExpandType { get; init; } = HierarchicalExpandType.Children;
 
 
     public static implicit operator SecurityRule(SecurityOperation securityOperation)
@@ -44,6 +38,11 @@ public abstract record SecurityRule
 
     public abstract record DomainObjectSecurityRule : SecurityRule
     {
+        /// <summary>
+        /// Тип разворачивания деревьев (как правило для просмотра самого дерева выбирается HierarchicalExpandType.All)
+        /// </summary>
+        public HierarchicalExpandType ExpandType { get; init; } = HierarchicalExpandType.Children;
+
         public static implicit operator DomainObjectSecurityRule(SecurityOperation securityOperation)
         {
             return securityOperation.ToSecurityRule();

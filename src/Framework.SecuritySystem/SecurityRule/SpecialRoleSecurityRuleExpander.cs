@@ -17,13 +17,13 @@ public class SpecialRoleSecurityRuleExpander
 
     public SecurityRule.NonExpandedRolesSecurityRule Expand(SpecialRoleSecurityRule securityRule)
     {
-        if (securityRule == SpecialRoleSecurityRule.Administrator)
+        if (securityRule.Name == SpecialRoleSecurityRule.Administrator.Name)
         {
-            return this.administratorRoleInfo.AdministratorRole.ToSecurityRule();
+            return this.administratorRoleInfo.AdministratorRole.ToSecurityRule(securityRule.ExpandType);
         }
-        else if (securityRule == SpecialRoleSecurityRule.SystemIntegration)
+        else if (securityRule.Name == SpecialRoleSecurityRule.SystemIntegration.Name)
         {
-            return this.systemIntegrationRoleInfo?.SystemIntegrationRole?.ToSecurityRule()
+            return this.systemIntegrationRoleInfo?.SystemIntegrationRole?.ToSecurityRule(securityRule.ExpandType)
                    ?? throw new ArgumentOutOfRangeException(
                        nameof(securityRule),
                        $"{nameof(SpecialRoleSecurityRule.SystemIntegration)}Role not defined");

@@ -26,7 +26,7 @@ public class SecurityRoleExpander
                                                       .OrderBy(sr => sr.Name)
                                                       .ToArray();
 
-                return new SecurityRule.ExpandedRolesSecurityRule(new DeepEqualsCollection<SecurityRole>(securityRoles));
+                return new SecurityRule.ExpandedRolesSecurityRule(new DeepEqualsCollection<SecurityRole>(securityRoles)) { ExpandType = securityRule.ExpandType };
             }).WithLock();
     }
 

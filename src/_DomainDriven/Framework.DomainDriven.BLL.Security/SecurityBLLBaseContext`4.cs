@@ -42,9 +42,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
     /// <inheritdoc />
     public override bool AllowedExpandTreeParents<TDomainObject>()
     {
-        var viewSecurityRule = this.SecurityRuleExpanders.TryExpand<TDomainObject>(SecurityRule.View);
-
-        if (viewSecurityRule != null)
+        if (this.SecurityRuleExpanders.TryExpand<TDomainObject>(SecurityRule.View) is SecurityRule.DomainObjectSecurityRule viewSecurityRule)
         {
             return viewSecurityRule.ExpandType.HasFlag(HierarchicalExpandType.Parents);
         }

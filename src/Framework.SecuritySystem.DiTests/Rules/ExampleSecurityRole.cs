@@ -2,11 +2,30 @@
 
 public static class ExampleSecurityRole
 {
+
+    public static SecurityRole TestRole3 { get; } = new SecurityRole(
+        Guid.NewGuid(),
+        nameof(TestRole3),
+        ExampleSecurityOperation.EmployeeView,
+        ExampleSecurityOperation.EmployeeEdit);
+
+    public static SecurityRole TestRole2 { get; } = new SecurityRole(
+        Guid.NewGuid(),
+        nameof(TestRole2),
+        ExampleSecurityOperation.EmployeeView,
+        ExampleSecurityOperation.EmployeeEdit)
+        {
+            Children = [TestRole3]
+        };
+
     public static SecurityRole TestRole { get; } = new SecurityRole(
         Guid.NewGuid(),
         nameof(TestRole),
         ExampleSecurityOperation.EmployeeView,
-        ExampleSecurityOperation.EmployeeEdit);
+        ExampleSecurityOperation.EmployeeEdit)
+        {
+            Children = [TestRole2]
+        };
 
     public static SecurityRole SystemIntegration { get; } = new SecurityRole(
         Guid.NewGuid(),

@@ -1,33 +1,30 @@
-﻿using Framework.Core;
+﻿#nullable enable
+
+using Framework.Core;
 
 namespace Framework.SecuritySystem;
 
-public class SecurityRole
+public class SecurityRole(Guid id, string name)
 {
-    public SecurityRole(Guid id, string name, params SecurityOperation[] operations)
-    {
-        this.Id = id;
-        this.Name = name;
-        this.Operations = operations;
-    }
+    public Guid Id { get; } = id;
 
-    public Guid Id { get; }
-
-    public string Name { get; }
-
-    public IReadOnlyList<SecurityOperation> Operations { get; }
+    public string Name { get; } = name;
 
     public string? Description { get; init; }
 
-    public IReadOnlyList<SecurityRole> Children { get; init; } = new List<SecurityRole>();
+    public SecurityRuleRestriction? Restriction { get; init; } = null;
+
+    public IReadOnlyList<SecurityRole> Children { get; init; } = [];
+
+    public IReadOnlyList<SecurityOperation> Operations { get; init; } = [];
 
     public override string ToString() => this.Name;
 
     public static SecurityRole CreateAdministrator(
         Guid id,
         IEnumerable<Type> securityRoleTypes,
-        IEnumerable<Type> securityOperationTypes = null,
-        IEnumerable<string> exceptPropertyNames = null,
+        IEnumerable<Type>? securityOperationTypes = null,
+        IEnumerable<string>? exceptPropertyNames = null,
         string? description = null)
     {
         const string administratorRoleName = "Administrator";
@@ -36,7 +33,9 @@ public class SecurityRole
 
         var children = securityRoleTypes
                        .SelectMany(
-                           securityRoleType => securityRoleType.GetStaticPropertyValueList<SecurityRole>(srName => !realExceptPropertyNames.Contains(srName)))
+                           securityRoleType =>
+                               securityRoleType.GetStaticPropertyValueList<SecurityRole>(
+                                   srName => !realExceptPropertyNames.Contains(srName)))
                        .Distinct()
                        .ToList();
 
@@ -46,10 +45,6 @@ public class SecurityRole
                          .Distinct()
                          .ToArray();
 
-        return new SecurityRole(id, administratorRoleName, operations)
-               {
-                   Children = children,
-                   Description = description
-               };
+        return new SecurityRole(id, administratorRoleName) { Children = children, Description = description, Operations = operations };
     }
 }

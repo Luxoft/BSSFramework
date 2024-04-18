@@ -12,8 +12,10 @@ public static class SampleSystemSecurityRole
 
     public static SecurityRole SeManager { get; } = new(
         new Guid("dbf3556d-7106-4175-b5e4-a32d00bd857a"),
-        "SE Manager",
-        SampleSystemSecurityOperation.EmployeeView);
+        "SE Manager")
+        {
+            Operations = [SampleSystemSecurityOperation.EmployeeView]
+        };
 
     public static SecurityRole TestRole1 { get; } = new(
 

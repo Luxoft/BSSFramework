@@ -19,11 +19,11 @@ public class SpecialRoleSecurityRuleExpander
     {
         if (securityRule.Name == SpecialRoleSecurityRule.Administrator.Name)
         {
-            return this.administratorRoleInfo.AdministratorRole.ToSecurityRule(securityRule.ExpandType);
+            return this.administratorRoleInfo.AdministratorRole.ToSecurityRule(securityRule.ExpandType, securityRule.Restriction);
         }
         else if (securityRule.Name == SpecialRoleSecurityRule.SystemIntegration.Name)
         {
-            return this.systemIntegrationRoleInfo?.SystemIntegrationRole?.ToSecurityRule(securityRule.ExpandType)
+            return this.systemIntegrationRoleInfo?.SystemIntegrationRole?.ToSecurityRule(securityRule.ExpandType, securityRule.Restriction)
                    ?? throw new ArgumentOutOfRangeException(
                        nameof(securityRule),
                        $"{nameof(SpecialRoleSecurityRule.SystemIntegration)}Role not defined");

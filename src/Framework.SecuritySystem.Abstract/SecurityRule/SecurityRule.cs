@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿#nullable enable
+
+using Framework.Core;
 
 using Framework.HierarchicalExpand;
 
@@ -42,6 +44,8 @@ public abstract record SecurityRule
         /// Тип разворачивания деревьев (как правило для просмотра самого дерева выбирается HierarchicalExpandType.All)
         /// </summary>
         public HierarchicalExpandType ExpandType { get; init; } = HierarchicalExpandType.Children;
+
+        public SecurityRuleRestriction? Restriction { get; init; } = null;
 
         public static implicit operator DomainObjectSecurityRule(SecurityOperation securityOperation)
         {

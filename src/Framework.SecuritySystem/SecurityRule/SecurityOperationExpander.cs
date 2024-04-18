@@ -23,7 +23,7 @@ public class SecurityOperationExpander
                     throw new Exception($"No security roles found for operation \"{securityRule.SecurityOperation}\"");
                 }
 
-                return securityRoles.ToSecurityRule(securityRule.ExpandType);
+                return securityRoles.ToSecurityRule(securityRule.ExpandType, securityRule.Restriction);
             }).WithLock();
     }
 

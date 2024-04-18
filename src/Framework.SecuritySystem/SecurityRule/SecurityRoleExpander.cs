@@ -19,8 +19,7 @@ public class SecurityRoleExpander
                 }
 
                 var securityRoles = securityRoleSource.SecurityRoles
-                                                      .Distinct()
-                                                      .Where(sr => sr.Children.IsIntersected(securityRule.SecurityRoles))
+                                                      .Where(sr => sr.GetAllElements(c => c.Children).IsIntersected(securityRule.SecurityRoles))
                                                       .Concat(securityRule.SecurityRoles)
                                                       .Distinct()
                                                       .OrderBy(sr => sr.Name)

@@ -129,7 +129,10 @@ public class MainTests
                .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
                .RegisterSecurityContextInfoService<Guid>(b => b.Add<BusinessUnit>(Guid.NewGuid()))
 
+               .AddScoped<ISecurityPathProviderFactory, SecurityPathProviderFactory>()
+
                .AddSingleton(new SecurityRoleTypeInfo(typeof(ExampleSecurityRole)))
+               .AddSingleton(new AdministratorRoleInfo(ExampleSecurityRole.Administrator))
 
                .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }

@@ -191,6 +191,7 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
 
+                       .AddScoped<ISecurityPathProviderFactory, SecurityPathProviderFactory>()
                        .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>();
     }
 

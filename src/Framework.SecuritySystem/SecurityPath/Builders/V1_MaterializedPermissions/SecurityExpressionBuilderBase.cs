@@ -33,8 +33,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
         TDomainObject domainObject,
         HierarchicalExpandType expandType);
 
-    public abstract IEnumerable<Type> GetUsedTypes();
-
     public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(
         List<Dictionary<Type, IEnumerable<TIdent>>> permissions)
     {
@@ -65,12 +63,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                                             TPath path) : base(factory)
     {
         this.Path = path ?? throw new ArgumentNullException(nameof(path));
-    }
-
-
-    public override IEnumerable<Type> GetUsedTypes()
-    {
-        return this.Path.GetUsedTypes();
     }
 
 

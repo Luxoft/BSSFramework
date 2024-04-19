@@ -1,32 +1,24 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Rules.Builders;
 
 namespace Framework.Authorization.Environment
 {
-    public class AuthorizationPrincipalSecurityService : ContextDomainSecurityService<Principal, Guid>
+    public class AuthorizationPrincipalSecurityService(
+        ISecurityProvider<Principal> disabledSecurityProvider,
+        ISecurityRuleExpander securityRuleExpander,
+        ISecurityPathProviderFactory securityPathProviderFactory,
+        SecurityPath<Principal> securityPath,
+        IActualPrincipalSource actualPrincipalSource)
+        : ContextDomainSecurityService<Principal>(disabledSecurityProvider, securityRuleExpander, securityPathProviderFactory, securityPath)
     {
-        private readonly IActualPrincipalSource actualPrincipalSource;
-
-        public AuthorizationPrincipalSecurityService(
-            ISecurityProvider<Principal> disabledSecurityProvider,
-            ISecurityRuleExpander securityRuleExpander,
-            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
-            SecurityPath<Principal> securityPath,
-            IActualPrincipalSource actualPrincipalSource)
-            : base(disabledSecurityProvider, securityRuleExpander, securityExpressionBuilderFactory, securityPath)
-        {
-            this.actualPrincipalSource = actualPrincipalSource;
-        }
-
         protected override ISecurityProvider<Principal> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
         {
             var baseProvider = base.CreateSecurityProvider(securityRule);
 
             if (securityRule == SecurityRule.View)
             {
-                return baseProvider.Or(new PrincipalSecurityProvider<Principal>(this.actualPrincipalSource, v => v));
+                return baseProvider.Or(new PrincipalSecurityProvider<Principal>(actualPrincipalSource, v => v));
             }
             else
             {

@@ -73,7 +73,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
         }
         else
         {
-            return typeof(ContextDomainSecurityService<TDomainObject, TIdent>);
+            return typeof(ContextDomainSecurityService<TDomainObject>);
         }
     }
 

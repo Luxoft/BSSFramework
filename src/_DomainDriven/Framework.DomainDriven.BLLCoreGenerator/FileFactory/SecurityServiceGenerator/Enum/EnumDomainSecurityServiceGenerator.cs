@@ -18,9 +18,8 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
         this.DomainTypeReference = genericTypes.FirstOr(() => this.DomainType.ToTypeReference());
 
-        this.BaseServiceType = typeof(ContextDomainSecurityService<,>).ToTypeReference(
-         this.DomainTypeReference,
-         this.Configuration.Environment.GetIdentityType().ToTypeReference());
+        this.BaseServiceType = typeof(ContextDomainSecurityService<>).ToTypeReference(
+         this.DomainTypeReference);
     }
 
 

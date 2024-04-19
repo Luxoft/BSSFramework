@@ -10,7 +10,11 @@ public class SecurityContextInfoService : ISecurityContextInfoService
     {
         this.byTypeSecurityContextInfoDict = securityContextInfoList.ToDictionary(v => v.Type);
         this.byNameSecurityContextInfoDict = this.byTypeSecurityContextInfoDict.Values.ToDictionary(v => v.Name);
+
+        this.SecurityContextTypes = this.byTypeSecurityContextInfoDict.Keys.ToList();
     }
+
+    public IReadOnlyList<Type> SecurityContextTypes { get; }
 
     public virtual ISecurityContextInfo GetSecurityContextInfo(Type type) => this.byTypeSecurityContextInfoDict[type];
 

@@ -6,21 +6,12 @@ using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.DiTests;
 
-public class ExampleAuthorizationSystem : IAuthorizationSystem<Guid>
+public class ExampleAuthorizationSystem(
+    IPrincipalPermissionSource<Guid> principalPermissionSource,
+    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory)
+    : IAuthorizationSystem<Guid>
 {
-    private readonly IPrincipalPermissionSource<Guid> principalPermissionSource;
-
-    private readonly IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory;
-
     public string CurrentPrincipalName => throw new NotImplementedException();
-
-    public ExampleAuthorizationSystem(
-        IPrincipalPermissionSource<Guid> principalPermissionSource,
-        IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory)
-    {
-        this.principalPermissionSource = principalPermissionSource;
-        this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
-    }
 
     public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule) => throw new NotImplementedException();
 
@@ -31,17 +22,16 @@ public class ExampleAuthorizationSystem : IAuthorizationSystem<Guid>
         Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
-        SecurityRule.DomainObjectSecurityRule securityRule,
-        IEnumerable<Type> securityTypes)
+        SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        return this.principalPermissionSource.GetPermissions()
+        return principalPermissionSource.GetPermissions()
                    .ToList(permission => this.TryExpandPermission(permission, securityRule.ExpandType));
     }
 
     public IQueryable<IPermission<Guid>> GetPermissionQuery(
         SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        return this.principalPermissionSource.GetPermissionQuery(securityRule);
+        return principalPermissionSource.GetPermissionQuery(securityRule);
     }
 
     private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(
@@ -52,6 +42,6 @@ public class ExampleAuthorizationSystem : IAuthorizationSystem<Guid>
 
         return permission.ToDictionary(
             pair => pair.Key,
-            pair => this.hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
+            pair => hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
     }
 }

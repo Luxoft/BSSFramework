@@ -11,8 +11,7 @@ public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
         Expression<Func<IPrincipal<TIdent>, bool>> principalFilter);
 
     List<Dictionary<Type, IEnumerable<TIdent>>> GetPermissions(
-        SecurityRule.DomainObjectSecurityRule securityRule,
-        IEnumerable<Type> securityTypes);
+        SecurityRule.DomainObjectSecurityRule securityRule);
 
     IQueryable<IPermission<TIdent>> GetPermissionQuery(SecurityRule.DomainObjectSecurityRule securityRule);
 }

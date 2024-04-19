@@ -3,6 +3,7 @@
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
@@ -25,11 +26,12 @@ public class SecurityPathTests : TestBase
                                    DBSessionMode.Read,
                                    context =>
                                    {
-                                       var securityProvider = SecurityPath<Employee>.Create(x => x.Location)
-                                                                                    .Or(_ => false)
-                                                                                    .ToProvider(
-                                                                                        SampleSystemSecurityOperation.EmployeeView,
-                                                                                        context.SecurityExpressionBuilderFactory);
+                                       var securityPath = SecurityPath<Employee>.Create(x => x.Location).Or(_ => false);
+
+                                       var securityProvider = context.ServiceProvider.GetRequiredService<ISecurityPathProviderFactory>().Create(
+                                           securityPath,
+                                           SampleSystemSecurityOperation.EmployeeView);
+
 
                                        var employeeBll = context.Logics.EmployeeFactory.Create(securityProvider);
 

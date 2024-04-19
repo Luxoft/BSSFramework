@@ -1,6 +1,4 @@
-﻿using Framework.Authorization;
-using Framework.Configuration;
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 namespace SampleSystem.Security;
 
@@ -20,20 +18,26 @@ public static class SampleSystemSecurityRole
     public static SecurityRole TestRole1 { get; } = new(
 
         new Guid("{597AAB2A-76F7-42CF-B606-3D4550062596}"),
-        nameof(TestRole1),
-        SampleSystemSecurityOperation.EmployeeView);
+        nameof(TestRole1))
+        {
+            Operations = [SampleSystemSecurityOperation.EmployeeView]
+        };
 
     public static SecurityRole TestRole2 { get; } = new(
 
         new Guid("{AD5EC94F-CC3D-451B-9051-B83059707E11}"),
-        nameof(TestRole2),
-        SampleSystemSecurityOperation.EmployeePositionView);
+        nameof(TestRole2))
+        {
+            Operations = [SampleSystemSecurityOperation.EmployeePositionView]
+        };
 
     public static SecurityRole TestRole3 { get; } = new(
 
         new Guid("{B1B30E65-36BF-4ED1-9BD1-E614BA349507}"),
-        nameof(TestRole3),
-        SampleSystemSecurityOperation.EmployeeEdit);
+        nameof(TestRole3))
+        {
+            Operations = [SampleSystemSecurityOperation.EmployeeEdit]
+        };
 
     public static SecurityRole SystemIntegration { get; } = new(
         new Guid("df74d544-5945-4380-944e-a3a9001252be"),
@@ -41,6 +45,6 @@ public static class SampleSystemSecurityRole
 
     public static SecurityRole Administrator { get; } = SecurityRole.CreateAdministrator(
         new Guid("d9c1d2f0-0c2f-49ab-bb0b-de13a456169e"),
-        new[] { typeof(SampleSystemSecurityRole) },
-        new[] { typeof(SampleSystemSecurityOperation) });
+        [typeof(SampleSystemSecurityRole)],
+        [typeof(SampleSystemSecurityOperation)]);
 }

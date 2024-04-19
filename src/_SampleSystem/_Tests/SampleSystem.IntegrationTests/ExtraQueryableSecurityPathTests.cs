@@ -5,6 +5,7 @@ using Framework.DomainDriven;
 
 using Framework.SecuritySystem;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.BLL;
@@ -69,9 +70,9 @@ public class ExtraQueryableSecurityPathTests : TestBase
                                                                .And(e => e.Location, SingleSecurityMode.Strictly)
                                                                .And(e => extraQueryableSecurity.Where(l => l == e.Location && e.Location.Id == this.loc1Ident.Id), ManySecurityPathMode.AnyStrictly);
 
-                                                       return extraSecurityPath.ToProvider(
-                                                           SampleSystemSecurityOperation.EmployeeView,
-                                                           context.SecurityExpressionBuilderFactory);
+                                                       return context.ServiceProvider.GetRequiredService<ISecurityPathProviderFactory>().Create(
+                                                           extraSecurityPath,
+                                                           SampleSystemSecurityOperation.EmployeeView);
                                                    });
 
         // Act

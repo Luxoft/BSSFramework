@@ -33,6 +33,8 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     private readonly TimeProvider timeProvider;
 
+    private readonly ISecurityContextInfoService securityContextInfoService;
+
     public AuthorizationSystem(
         IAvailablePermissionSource availablePermissionSource,
         IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
@@ -42,7 +44,8 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IOperationAccessorFactory operationAccessorFactory,
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
         ISecurityRuleExpander securityRuleExpander,
-        TimeProvider timeProvider)
+        TimeProvider timeProvider,
+        ISecurityContextInfoService securityContextInfoService)
     {
         this.availablePermissionSource = availablePermissionSource;
         this.runtimePermissionOptimizationService = runtimePermissionOptimizationService;
@@ -52,6 +55,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         this.principalRepository = principalRepository;
         this.securityRuleExpander = securityRuleExpander;
         this.timeProvider = timeProvider;
+        this.securityContextInfoService = securityContextInfoService;
 
         this.CurrentPrincipalName = userAuthenticationService.GetUserName();
     }
@@ -86,18 +90,17 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     }
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
-        SecurityRule.DomainObjectSecurityRule securityRule,
-        IEnumerable<Type> securityTypes)
+        SecurityRule.DomainObjectSecurityRule securityRule)
     {
         var permissions = this.availablePermissionSource.GetAvailablePermissionsQueryable(true, securityRule)
                               .FetchMany(q => q.Restrictions)
                               .ThenFetch(q => q.SecurityContextType)
                               .ToList();
 
-        var securityTypesCache = securityTypes.ToReadOnlyCollection();
+        var restriction = securityRule.Restriction?.SecurityContexts ?? this.securityContextInfoService.SecurityContextTypes;
 
         return permissions
-               .Select(permission => permission.ToDictionary(this.realTypeResolver, securityTypesCache))
+               .Select(permission => permission.ToDictionary(this.realTypeResolver, restriction))
                .Pipe(this.runtimePermissionOptimizationService.Optimize)
                .ToList(permission => this.TryExpandPermission(permission, securityRule.ExpandType));
     }

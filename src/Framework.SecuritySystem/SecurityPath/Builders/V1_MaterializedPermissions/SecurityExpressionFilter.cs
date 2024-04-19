@@ -21,9 +21,7 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
         if (builder == null) throw new ArgumentNullException(nameof(builder));
         if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
 
-        var usedTypes = builder.GetUsedTypes().Distinct();
-
-        var permissions = builder.Factory.AuthorizationSystem.GetPermissions(securityRule, usedTypes);
+        var permissions = builder.Factory.AuthorizationSystem.GetPermissions(securityRule);
 
         var filterExpression = builder.GetSecurityFilterExpression(permissions);
 

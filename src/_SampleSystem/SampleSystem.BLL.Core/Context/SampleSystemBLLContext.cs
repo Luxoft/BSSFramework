@@ -32,7 +32,6 @@ public partial class SampleSystemBLLContext
             IAuthorizationBLLContext authorization,
             Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             ISampleSystemBLLContextSettings settings,
-            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             ISecurityRuleParser securityRuleParser)
             : base(serviceProvider, operationSender, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
@@ -41,7 +40,6 @@ public partial class SampleSystemBLLContext
 
         this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
         this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-        this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory;
         this.SecurityRuleParser = securityRuleParser;
 
         this.TypeResolver = settings.TypeResolver;
@@ -56,8 +54,6 @@ public partial class SampleSystemBLLContext
     public IAuthorizationBLLContext Authorization { get; }
 
     public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; }
-
-    public ISecurityExpressionBuilderFactory SecurityExpressionBuilderFactory { get; }
 
     public ITypeResolver<string> TypeResolver { get; }
 

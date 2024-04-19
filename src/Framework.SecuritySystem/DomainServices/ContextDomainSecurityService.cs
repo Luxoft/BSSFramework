@@ -1,25 +1,15 @@
-﻿using System.Linq.Expressions;
-
-using Framework.SecuritySystem.Rules.Builders;
-using Framework.Persistent;
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 /// <summary>
 /// Сервис с кешированием доступа к контекстным операциям
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
-/// <typeparam name="TIdent"></typeparam>
-public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent>(
+public abstract class ContextDomainSecurityServiceBase<TDomainObject>(
     ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
-    ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
+    ISecurityPathProviderFactory securityPathProviderFactory)
     : DomainSecurityService<TDomainObject>(disabledSecurityProvider, securityRuleExpander)
-    where TDomainObject : IIdentityObject<TIdent>
 {
-    private readonly ISecurityExpressionBuilderFactory securityExpressionBuilderFactory = securityExpressionBuilderFactory
-                                                                                          ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
-
     protected virtual ISecurityProvider<TDomainObject> Create(
         SecurityPath<TDomainObject> securityPath,
         SecurityRule.DomainObjectSecurityRule securityRule)
@@ -27,20 +17,19 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent>(
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
         if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
 
-        return securityPath.ToProvider(securityRule, this.securityExpressionBuilderFactory);
+        return securityPathProviderFactory.Create(securityPath, securityRule);
     }
 }
 
-public class ContextDomainSecurityService<TDomainObject, TIdent>(
+public class ContextDomainSecurityService<TDomainObject>(
     ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
-    ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
+    ISecurityPathProviderFactory securityPathProviderFactory,
     SecurityPath<TDomainObject> securityPath)
-    : ContextDomainSecurityServiceBase<TDomainObject, TIdent>(
+    : ContextDomainSecurityServiceBase<TDomainObject>(
         disabledSecurityProvider,
         securityRuleExpander,
-        securityExpressionBuilderFactory)
-    where TDomainObject : IIdentityObject<TIdent>
+        securityPathProviderFactory)
 {
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule)
     {

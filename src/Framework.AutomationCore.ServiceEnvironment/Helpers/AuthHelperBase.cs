@@ -61,7 +61,9 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
                                         ? principalBLL.GetCurrent(true)
                                         : principalBLL.GetByNameOrCreate(principalName, true);
 
-        var businessRole = businessRoleBLL.GetByName(testPermission.SecurityRole.Name, true);
+        var securityRole = this.RootServiceProvider.GetRequiredService<ISecurityRoleSource>().GetFullRole(testPermission.SecurityRole);
+
+        var businessRole = businessRoleBLL.GetById(securityRole.Id, true);
 
         var permissionDomainObject = new Permission(principalDomainObject) { Role = businessRole, Period = testPermission.Period };
 

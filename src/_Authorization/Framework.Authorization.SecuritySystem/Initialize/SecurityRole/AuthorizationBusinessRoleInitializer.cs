@@ -69,7 +69,7 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
         {
             var businessRole = new BusinessRole
             {
-                Name = securityRole.Name,
+                Name = securityRole.Information.CustomName ?? securityRole.Name,
                 Description = securityRole.Information.Description
             };
 

@@ -56,12 +56,12 @@ public class BusinessRoleTests : TestBase
         this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(businessRoleStrict));
 
         // Assert
-        var businessRoleSiple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRole(businessRoleIdentity));
+        var businessRoleSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRole(businessRoleIdentity));
 
-        businessRoleSiple.Name.Should().Be(RoleName);
-        businessRoleSiple.Description.Should().Be(NewDescription);
-        businessRoleSiple.Active.Should().BeTrue();
-        businessRoleSiple.ModifiedBy.Should().Be(currentUser.Login.ToString());
+        businessRoleSimple.Name.Should().Be(RoleName);
+        businessRoleSimple.Description.Should().Be(NewDescription);
+        businessRoleSimple.Active.Should().BeTrue();
+        businessRoleSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
     }
 
     [TestMethod]

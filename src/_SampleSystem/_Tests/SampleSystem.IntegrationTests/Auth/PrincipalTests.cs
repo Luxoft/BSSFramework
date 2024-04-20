@@ -20,7 +20,6 @@ public class PrincipalTests : TestBase
     public void AddPermission_CheckAddition()
     {
         // Arrange
-        var employeeController = this.MainWebApi.Employee;
         var authorizationController = this.GetAuthControllerEvaluator();
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
@@ -45,7 +44,6 @@ public class PrincipalTests : TestBase
     public void SavePrincipal_CheckCreateon()
     {
         // Arrange
-        var employeeController = this.MainWebApi.Employee;
         var authorizationController = this.GetAuthControllerEvaluator();
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
@@ -77,7 +75,6 @@ public class PrincipalTests : TestBase
     public void SavePrincipal_CheckPrincipalChanges()
     {
         // Arrange
-        var employeeController = this.MainWebApi.Employee;
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
         var principalStrict = new PrincipalStrictDTO { Name = Name };
@@ -91,11 +88,11 @@ public class PrincipalTests : TestBase
         this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(principalStrict));
 
         // Assert
-        var principalSiple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalStrict.Identity));
+        var principalSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalStrict.Identity));
 
-        principalSiple.Name.Should().Be(NewName);
-        principalSiple.Active.Should().BeTrue();
-        principalSiple.ModifiedBy.Should().Be(currentUser.Login.ToString());
+        principalSimple.Name.Should().Be(NewName);
+        principalSimple.Active.Should().BeTrue();
+        principalSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
     }
 
     [TestMethod]
@@ -113,8 +110,8 @@ public class PrincipalTests : TestBase
         var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
         var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
-        var newprincipalStrict = new PrincipalStrictDTO { Name = Name };
-        var newPrincipalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(newprincipalStrict));
+        var newPrincipalStrict = new PrincipalStrictDTO { Name = Name };
+        var newPrincipalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(newPrincipalStrict));
 
         var changePermissionDelegate = new ChangePermissionDelegatesModelStrictDTO
                                        {
@@ -169,13 +166,13 @@ public class PrincipalTests : TestBase
     }
 
     [TestMethod]
-    public void RemovePrinchipaWithRole_CheckException()
+    public void RemovePrincipalWithRole_CheckException()
     {
         // Arrange
         var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
         // Act
-        Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
+        var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
 
         // Assert
         call.Should().Throw<Exception>().WithMessage("Removing principal \"*\" must be empty");
@@ -191,7 +188,7 @@ public class PrincipalTests : TestBase
 
         // Act
         this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
-        Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalIdentity));
+        var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalIdentity));
 
         // Assert
         call.Should().Throw<Exception>().WithMessage("Principal with id = \"*\" not found");

@@ -15,4 +15,6 @@ public record SecurityRoleInfo(Guid Id)
     public IReadOnlyList<SecurityRole> Children { get; init; } = [];
 
     public string? Description { get; init; }
+
+    public string? CustomName { get; init; }
 }

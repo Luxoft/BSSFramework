@@ -10,7 +10,6 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Notification.Abstract\Framework.Authorization.Notification.Abstract.csproj" />
     <ProjectReference Include="..\Framework.Authorization.SecuritySystem\Framework.Authorization.SecuritySystem.csproj" />

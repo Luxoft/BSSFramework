@@ -1,6 +1,6 @@
 ﻿using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.SecuritySystem;
-using Framework.DomainDriven.Setup;
+using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using SampleSystem.Domain;
@@ -14,7 +14,7 @@ namespace SampleSystem.Security;
 
 public static class SampleSystemSecurityServiceExtensions
 {
-    public static IBssFrameworkSettings AddDomainSecurityServices(this IBssFrameworkSettings settings)
+    public static ISecuritySystemSettings AddDomainSecurityServices(this ISecuritySystemSettings settings)
     {
         return settings.RegisterMainDomainSecurityServices()
                        .RegisterDisabledDomainSecurityServices()
@@ -24,7 +24,7 @@ public static class SampleSystemSecurityServiceExtensions
                        .AddExtensions(new ProjectionDomainSecurityBssFrameworkExtension(typeof(TestManualEmployeeProjection).Assembly));
     }
 
-    private static IBssFrameworkSettings RegisterMainDomainSecurityServices(this IBssFrameworkSettings settings)
+    private static ISecuritySystemSettings RegisterMainDomainSecurityServices(this ISecuritySystemSettings settings)
     {
         return settings.AddDomainSecurityServices(
 
@@ -153,7 +153,7 @@ public static class SampleSystemSecurityServiceExtensions
             );
     }
 
-    private static IBssFrameworkSettings RegisterDisabledDomainSecurityServices(this IBssFrameworkSettings settings)
+    private static ISecuritySystemSettings RegisterDisabledDomainSecurityServices(this ISecuritySystemSettings settings)
     {
         return settings.AddDomainSecurityServices(
 
@@ -173,7 +173,7 @@ public static class SampleSystemSecurityServiceExtensions
             );
     }
 
-    private static IBssFrameworkSettings RegisterLegacyProjectionDomainSecurityServices(this IBssFrameworkSettings settings)
+    private static ISecuritySystemSettings RegisterLegacyProjectionDomainSecurityServices(this ISecuritySystemSettings settings)
     {
         return settings.AddDomainSecurityServices(
 

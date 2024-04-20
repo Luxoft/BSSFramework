@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 
-using Framework.DomainDriven.Setup;
+using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class ProjectionDomainSecurityBssFrameworkExtension : IBssFrameworkExtension
+public class ProjectionDomainSecurityBssFrameworkExtension : ISecuritySystemExtension
 {
     private readonly Assembly assembly;
 

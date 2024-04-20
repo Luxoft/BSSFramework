@@ -38,6 +38,13 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
+    public ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions)
+    {
+        this.RegisterActions.Add(extensions.AddServices);
+
+        return this;
+    }
+
     private void AddSecurityRole(IServiceCollection serviceCollection, FullSecurityRole fullSecurityRole)
     {
         if (this.InitializeAdministratorRole)

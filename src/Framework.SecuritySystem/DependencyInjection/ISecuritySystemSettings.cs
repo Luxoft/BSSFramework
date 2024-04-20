@@ -16,4 +16,6 @@ public interface ISecuritySystemSettings
     ISecuritySystemSettings AddDomainSecurityServices(Action<IDomainSecurityServiceRootBuilder> setup);
 
     ISecuritySystemSettings AddSecurityRole(SecurityRole securityRole, SecurityRoleInfo info);
+
+    ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions);
 }

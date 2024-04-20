@@ -4,7 +4,6 @@ using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
-using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

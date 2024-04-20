@@ -10,7 +10,7 @@ public record SecurityRoleInfo(Guid Id)
 
     public SecurityPathRestriction Restriction { get; init; } = SecurityPathRestriction.Empty;
 
-    public IReadOnlyList<SecurityOperation> Operations { get; } = [];
+    public IReadOnlyList<SecurityOperation> Operations { get; init; } = [];
 
     public IReadOnlyList<SecurityRole> Children { get; init; } = [];
 

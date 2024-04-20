@@ -32,10 +32,10 @@ internal class PermissionDirectInternalFilterModel : DomainObjectFilterModel<Per
         {
             var securityEntities = this.context.ExternalSource.GetTyped(securityContextType).GetSecurityEntitiesWithMasterExpand(securityContextId);
 
-            var enitityIdents = securityEntities.ToList(se => se.Id);
+            var entityIdents = securityEntities.ToList(se => se.Id);
 
             return permission => permission.Restrictions.All(filterItem => filterItem.SecurityContextType != securityContextType)
-                                 || permission.Restrictions.Any(filterItem => enitityIdents.Contains(filterItem.SecurityContextId));
+                                 || permission.Restrictions.Any(filterItem => entityIdents.Contains(filterItem.SecurityContextId));
         }
     }
 }

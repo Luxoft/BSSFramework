@@ -19,7 +19,6 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                    settings =>
                    {
                        settings
-                           .AddSecurityRoleTypeType(typeof(SampleSystemSecurityRole))
                            .AddNamedLockType(typeof(SampleSystemNamedLock))
 
                            .AddSecurityContext<BusinessUnit>(new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"))

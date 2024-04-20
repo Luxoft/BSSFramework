@@ -1,15 +1,12 @@
 ﻿using Framework.DomainDriven;
-using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.Persistent;
-using Framework.SecuritySystem;
 using Framework.Transfering;
 
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
-using SampleSystem.Security;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
@@ -22,9 +19,6 @@ public partial class BusinessUnitController
                              DBSessionMode.Read,
                              evaluateData =>
                              {
-
-                                 var zz = evaluateData.Context.Logics.BusinessUnitFactory.Create(SampleSystemSecurityRole.SeManager.ToSecurityRule(HierarchicalExpandType.All));
-
                                  var bll = evaluateData.Context.Logics.BusinessUnit;
                                  var tree = bll.GetTree(evaluateData.Context.FetchService.GetContainer<BusinessUnit>(ViewDTOType.FullDTO));
                                  return tree.ToList(unit => unit.ToFullDTO(evaluateData.MappingService));

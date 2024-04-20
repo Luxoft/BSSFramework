@@ -11,7 +11,6 @@ using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
-using SampleSystem.Security;
 using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;

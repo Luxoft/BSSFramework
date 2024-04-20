@@ -1,10 +1,6 @@
 ﻿using Framework.Authorization.Notification;
 using Framework.Events;
-using Framework.Persistent;
-
-using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
-using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 namespace Framework.DomainDriven.Setup;
 

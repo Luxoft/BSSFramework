@@ -12,7 +12,6 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
-using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 

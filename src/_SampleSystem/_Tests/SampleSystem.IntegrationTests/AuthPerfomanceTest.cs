@@ -81,7 +81,7 @@ public class AuthPerformanceTest : TestBase
 
                       from employee in this.employeeSource
 
-                      select (TestPermission)new SampleSystemTestPermission(SampleSystemSecurityRole.Administrator, fbu, mbu, location, employee);
+                      select (TestPermission)new SampleSystemTestPermission(SecurityRole.Administrator, fbu, mbu, location, employee);
 
         this.AuthHelper.SetUserRole(PrincipalName, request.ToArray());
     }

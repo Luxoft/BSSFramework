@@ -16,7 +16,7 @@ public class AvailableSecurityRoleSource : IAvailableSecurityRoleSource
         this.securityRoleSource = securityRoleSource;
     }
 
-    public async Task<List<SecurityRole>> GetAvailableSecurityRole (CancellationToken cancellationToken)
+    public async Task<List<FullSecurityRole>> GetAvailableSecurityRole (CancellationToken cancellationToken)
     {
         var dbRequest = from permission in this.availablePermissionSource.GetAvailablePermissionsQueryable()
 
@@ -24,6 +24,6 @@ public class AvailableSecurityRoleSource : IAvailableSecurityRoleSource
 
         var dbOperationIdents = await dbRequest.Distinct().ToListAsync(cancellationToken);
 
-        return dbOperationIdents.Select(this.securityRoleSource.GetSecurityRole).ToList<SecurityRole>();
+        return dbOperationIdents.Select(this.securityRoleSource.GetSecurityRole).ToList();
     }
 }

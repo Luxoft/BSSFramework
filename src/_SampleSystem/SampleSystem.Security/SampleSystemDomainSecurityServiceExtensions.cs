@@ -32,7 +32,7 @@ public static class SampleSystemSecurityServiceExtensions
 
                 rb.AddMetadata<SampleSystemEmployeeDomainSecurityServiceMetadata>()
 
-                  .Add(new[] { SampleSystemSecurityRole.Administrator, SampleSystemSecurityRole.SeManager },
+                  .Add(new[] { SecurityRole.Administrator, SampleSystemSecurityRole.SeManager },
                        SampleSystemSecurityOperation.BusinessUnitEdit,
                        SecurityPath<BusinessUnit>.Create(fbu => fbu))
 

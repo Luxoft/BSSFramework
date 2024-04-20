@@ -95,8 +95,7 @@ public class SubscriptionMetadataMapper
 
         foreach (var securityRole in metadata.SubBusinessRoles)
         {
-            var role = new SubBusinessRole(subscription);
-            role.BusinessRoleId = securityRole.Id;
+            var role = new SubBusinessRole(subscription) { SecurityRole = securityRole };
         }
     }
 

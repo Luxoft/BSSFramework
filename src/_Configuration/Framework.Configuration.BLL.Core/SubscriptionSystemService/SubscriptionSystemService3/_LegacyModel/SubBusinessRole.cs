@@ -1,14 +1,13 @@
 ﻿using Framework.Persistent;
+using Framework.SecuritySystem;
 
 namespace Framework.Configuration.Domain;
 
 /// <summary>
 /// Связь между подпиской и бизнес-ролью
 /// </summary>
-public class SubBusinessRole : IIdentityObject<Guid>
+public class SubBusinessRole
 {
-    private Guid businessRoleId;
-
     public SubBusinessRole()
     {
     }
@@ -24,11 +23,6 @@ public class SubBusinessRole : IIdentityObject<Guid>
     /// <summary>
     /// ID бизнес-роли
     /// </summary>
-    public virtual Guid BusinessRoleId
-    {
-        get { return this.businessRoleId; }
-        set { this.businessRoleId = value; }
+    public virtual SecurityRole SecurityRole { get; set;
     }
-
-    Guid IIdentityObject<Guid>.Id => Guid.Empty;
 }

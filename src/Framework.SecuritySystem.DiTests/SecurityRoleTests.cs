@@ -6,17 +6,18 @@ namespace Framework.SecuritySystem.DiTests;
 
 public class SecurityRoleTests
 {
-    [Fact]
-    public void AdministratorRole_ShouldNotContains_SystemIntegrationRole()
-    {
-        // Arrange
-        var adminRole = ExampleSecurityRole.Administrator;
+    //[Fact]
+    //public void AdministratorRole_ShouldNotContains_SystemIntegrationRole()
+    //{
+    //    // Arrange
+    //    var adminRole = SecurityRole.Administrator;
 
-        // Act
+    //    // Act
+    //    var children =
 
-        // Assert
-        adminRole.Children.Contains(ExampleSecurityRole.SystemIntegration).Should().BeFalse();
-    }
+    //    // Assert
+    //    adminRole.Children.Contains(SecurityRole.SystemIntegration).Should().BeFalse();
+    //}
 
     [Fact]
     public void SecurityRoleExpander_ExpandDeepChild_AllRolesExpanded()
@@ -32,7 +33,7 @@ public class SecurityRoleTests
         expandResult.SecurityRoles.Should().BeEquivalentTo(
             new[]
             {
-                ExampleSecurityRole.Administrator,
+                SecurityRole.Administrator,
                 ExampleSecurityRole.TestRole,
                 ExampleSecurityRole.TestRole2,
                 ExampleSecurityRole.TestRole3

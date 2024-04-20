@@ -1,4 +1,5 @@
 ﻿using Framework.Configuration.SubscriptionModeling;
+using Framework.SecuritySystem;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
 
@@ -13,7 +14,7 @@ internal sealed class ObjectChangingSubscription : SubscriptionMetadata<object, 
         this.CopyGenerationLambda = new CopyGenerationLambda();
         this.SecurityItemSourceLambdas = new[] { new SecurityItemSourceLambda() };
         this.RecepientsSelectorMode = RecepientsSelectorMode.RolesExceptGeneration;
-        this.SubBusinessRoles = new[] { TestSecurityRole.Administrator };
+        this.SubBusinessRoles = new[] { SecurityRole.Administrator };
         this.SendIndividualLetters = true;
         this.ExcludeCurrentUser = true;
         this.IncludeAttachments = true;

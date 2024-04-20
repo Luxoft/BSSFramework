@@ -29,7 +29,7 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRec
             return new RecipientCollection();
         }
 
-        var businessRolesIds = this.GetBusinessRolesIds(subscription);
+        var businessRolesIds = this.GetBusinessRoles(subscription);
         var fids = this.GetFilterItemIdentities(subscription, versions).ToList();
         var filterGroups = this.GetNotificationFilterGroups(fids, subscription.DynamicSourceExpandType.Value);
 

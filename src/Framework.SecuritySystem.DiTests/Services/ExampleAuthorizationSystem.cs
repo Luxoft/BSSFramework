@@ -22,10 +22,11 @@ public class ExampleAuthorizationSystem(
         Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
-        SecurityRule.DomainObjectSecurityRule securityRule)
+        SecurityRule.DomainObjectSecurityRule securityRule,
+        IEnumerable<Type> securityTypes)
     {
         return principalPermissionSource.GetPermissions()
-                   .ToList(permission => this.TryExpandPermission(permission, securityRule.ExpandType));
+                   .ToList(permission => this.TryExpandPermission(permission, securityRule.CustomExpandType!.Value));
     }
 
     public IQueryable<IPermission<Guid>> GetPermissionQuery(

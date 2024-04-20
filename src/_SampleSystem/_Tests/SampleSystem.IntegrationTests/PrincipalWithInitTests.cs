@@ -4,6 +4,7 @@ using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.SecuritySystem;
 using Framework.Validation;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -48,7 +49,7 @@ public class PrincipalWithInitTests : TestBase
         this.AuthHelper.SetUserRole(
             TestPrincipalName,
             new SampleSystemTestPermission(
-                SampleSystemSecurityRole.Administrator,
+                SecurityRole.Administrator,
                 new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = this.testPeriod });
     }
 

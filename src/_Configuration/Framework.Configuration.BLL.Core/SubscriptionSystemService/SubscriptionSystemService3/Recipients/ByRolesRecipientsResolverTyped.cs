@@ -23,7 +23,7 @@ internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecip
 
     internal override RecipientCollection Resolve<T>(Subscription subscription, DomainObjectVersions<T> versions)
     {
-        var businessRolesIds = this.GetBusinessRolesIds(subscription);
+        var businessRolesIds = this.GetBusinessRoles(subscription);
         var filterGroups = this.GetNotificationFilterGroups(subscription, versions);
         var principals = this.ConfigurationContextFacade.GetNotificationPrincipals(businessRolesIds, filterGroups);
         var employees = this.ConfigurationContextFacade.ConvertPrincipals(principals);

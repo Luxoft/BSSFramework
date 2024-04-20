@@ -15,6 +15,7 @@ using Framework.UnitTesting;
 using NUnit.Framework;
 
 using NSubstitute;
+using Framework.SecuritySystem;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3;
 
@@ -93,16 +94,16 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     public void GetNotificationPrincipals_Call_CollectionOfPrincipals()
     {
         // Arrange
-        var idents = this.Fixture.CreateMany<Guid>().ToArray();
+        var securityRoles = this.Fixture.CreateMany<SecurityRole>().ToArray();
         var principals = this.Fixture.CreateMany<Principal>();
 
         this.notificationPrincipalExtractor
-            .GetNotificationPrincipalsByRoles(idents, Array.Empty<NotificationFilterGroup>())
+            .GetNotificationPrincipalsByRoles(securityRoles, Array.Empty<NotificationFilterGroup>())
             .Returns(principals);
 
         // Act
         var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-        var result = configurationContextFacade.GetNotificationPrincipals(idents);
+        var result = configurationContextFacade.GetNotificationPrincipals(securityRoles);
 
         // Assert
         result.Should().BeEquivalentTo(principals);
@@ -112,17 +113,17 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     public void GetNotificationPrincipals2_Call_CollectionOfPrincipals()
     {
         // Arrange
-        var idents = this.Fixture.CreateMany<Guid>().ToArray();
+        var securityRoles = this.Fixture.CreateMany<SecurityRole>().ToArray();
         var notificationFilterGroups = this.Fixture.CreateMany<NotificationFilterGroup>();
         var principals = this.Fixture.CreateMany<Principal>();
 
         this.notificationPrincipalExtractor
-            .GetNotificationPrincipalsByRoles(idents, notificationFilterGroups)
+            .GetNotificationPrincipalsByRoles(securityRoles, notificationFilterGroups)
             .Returns(principals);
 
         // Act
         var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-        var result = configurationContextFacade.GetNotificationPrincipals(idents, notificationFilterGroups);
+        var result = configurationContextFacade.GetNotificationPrincipals(securityRoles, notificationFilterGroups);
 
         // Assert
         result.Should().BeEquivalentTo(principals);

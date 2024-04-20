@@ -41,13 +41,13 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
     }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(
-        Guid[] roleIdents,
+        SecurityRole[] securityRole,
         IEnumerable<NotificationFilterGroup> preNotificationFilterGroups)
     {
         var notificationFilterGroups = preNotificationFilterGroups.ToArray();
 
         var startPermissionQ = this.permissionRepository.GetQueryable()
-                                   .Where(this.notificationBasePermissionFilterSource.GetBasePermissionFilter(roleIdents))
+                                   .Where(this.notificationBasePermissionFilterSource.GetBasePermissionFilter(securityRole))
                                    .Select(p => new PermissionLevelInfo { Permission = p, LevelInfo = "" });
 
         var principalInfoResult = notificationFilterGroups.Aggregate(startPermissionQ, this.ApplyNotificationFilter)

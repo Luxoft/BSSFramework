@@ -181,7 +181,7 @@ public class ConfigurationContextFacade
     /// <summary>
     ///     Возвращает список получателей уведомлений.
     /// </summary>
-    /// <param name="roleIdents">Идентификаторы ролей получателей.</param>
+    /// <param name="securityRoles"></param>
     /// <param name="notificationFilterGroups">Список фильтров получателей.</param>
     /// <returns>Экземпляр <see cref="IEnumerable{Principal}" />.</returns>
     /// <exception cref="ArgumentNullException">
@@ -191,12 +191,12 @@ public class ConfigurationContextFacade
     ///     notificationFilterGroups равен null.
     /// </exception>
     public virtual IEnumerable<Principal> GetNotificationPrincipals(
-            Guid[] roleIdents,
-            IEnumerable<NotificationFilterGroup> notificationFilterGroups)
+        SecurityRole[] securityRoles,
+        IEnumerable<NotificationFilterGroup> notificationFilterGroups)
     {
-        if (roleIdents == null)
+        if (securityRoles == null)
         {
-            throw new ArgumentNullException(nameof(roleIdents));
+            throw new ArgumentNullException(nameof(securityRoles));
         }
 
         if (notificationFilterGroups == null)
@@ -204,7 +204,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(notificationFilterGroups));
         }
 
-        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(securityRoles, notificationFilterGroups);
 
         return result;
     }
@@ -212,17 +212,17 @@ public class ConfigurationContextFacade
     /// <summary>
     ///     Возвращает список получателей уведомлений.
     /// </summary>
-    /// <param name="roleIdents">Идентификаторы ролей получателей.</param>
+    /// <param name="securityRoles"></param>
     /// <returns>Экземпляр <see cref="IEnumerable{Principal}" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент roleIdents равен null.</exception>
-    public virtual IEnumerable<Principal> GetNotificationPrincipals(Guid[] roleIdents)
+    public virtual IEnumerable<Principal> GetNotificationPrincipals(SecurityRole[] securityRoles)
     {
-        if (roleIdents == null)
+        if (securityRoles == null)
         {
-            throw new ArgumentNullException(nameof(roleIdents));
+            throw new ArgumentNullException(nameof(securityRoles));
         }
 
-        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(roleIdents, Array.Empty<NotificationFilterGroup>());
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(securityRoles, Array.Empty<NotificationFilterGroup>());
 
         return result;
     }

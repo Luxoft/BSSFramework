@@ -12,7 +12,7 @@ public partial class AuthSLJsonController
                                                 .GetAvailableSecurityRole()
                                                 .GetAwaiter()
                                                 .GetResult()
-                                                .SelectMany(sr => sr.Operations)
+                                                .SelectMany(sr => sr.Information.Operations)
                                                 .Distinct()
                                                 .Select(op => op.Name)
                                                 .ToList());

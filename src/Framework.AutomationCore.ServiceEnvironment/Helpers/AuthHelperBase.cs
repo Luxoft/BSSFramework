@@ -61,7 +61,7 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
                                         ? principalBLL.GetCurrent(true)
                                         : principalBLL.GetByNameOrCreate(principalName, true);
 
-        var businessRole = businessRoleBLL.GetByName(testPermission.SecurityRoleName, true);
+        var businessRole = businessRoleBLL.GetByName(testPermission.SecurityRole.Name, true);
 
         var permissionDomainObject = new Permission(principalDomainObject) { Role = businessRole, Period = testPermission.Period };
 
@@ -89,10 +89,7 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
 
     public virtual void AddCurrentUserToAdmin()
     {
-        var integrationRoleInfo = this.RootServiceProvider.GetRequiredService<SystemIntegrationRoleInfo>();
-        var administratorRoleInfo = this.RootServiceProvider.GetRequiredService<AdministratorRoleInfo>();
-
-        this.SetCurrentUserRole(administratorRoleInfo.AdministratorRole, integrationRoleInfo.SystemIntegrationRole);
+        this.SetCurrentUserRole(SecurityRole.Administrator, SecurityRole.SystemIntegration);
     }
 
     private void FindAndSavePermissionFilter(TBLLContext context, TestPermission permission, Permission permissionObject)

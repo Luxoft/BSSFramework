@@ -5,6 +5,7 @@ using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Notification;
+using Framework.SecuritySystem;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -46,9 +47,9 @@ internal class ByRolesRecipientsResolverBase<TBLLContext>
         return new Recipient(employee.Login, employee.Email);
     }
 
-    protected Guid[] GetBusinessRolesIds(Subscription subscription)
+    protected SecurityRole[] GetBusinessRoles(Subscription subscription)
     {
-        var result = subscription.SubBusinessRoles.ToArray(r => r.BusinessRoleId);
+        var result = subscription.SubBusinessRoles.ToArray(r => r.SecurityRole);
         return result;
     }
 }

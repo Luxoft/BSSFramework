@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.ServiceModel.IAD;
+﻿using Framework.Core;
+using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
@@ -14,6 +15,54 @@ namespace SampleSystem.Security;
 
 public static class SampleSystemSecurityServiceExtensions
 {
+    public static ISecuritySystemSettings AddSecurityRoles(this ISecuritySystemSettings settings)
+    {
+        return settings
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.SecretariatNotification,
+                   new SecurityRoleInfo(new Guid("8fd79f66-218a-47bc-9649-a07500fa6d11")))
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.SeManager,
+                   new SecurityRoleInfo(new Guid("dbf3556d-7106-4175-b5e4-a32d00bd857a"))
+                   {
+                       Operations = [SampleSystemSecurityOperation.EmployeeView]
+                   })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.TestRole1,
+                   new SecurityRoleInfo(new Guid("{597AAB2A-76F7-42CF-B606-3D4550062596}"))
+                   {
+                       Operations = [SampleSystemSecurityOperation.EmployeeView]
+                   })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.TestRole2,
+                   new SecurityRoleInfo(new Guid("{AD5EC94F-CC3D-451B-9051-B83059707E11}"))
+                   {
+                       Operations = [SampleSystemSecurityOperation.EmployeePositionView]
+                   })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.TestRole3,
+                   new SecurityRoleInfo(new Guid("{B1B30E65-36BF-4ED1-9BD1-E614BA349507}"))
+                   {
+                       Operations = [SampleSystemSecurityOperation.EmployeeEdit]
+                   })
+
+               .AddSecurityRole(
+                   SecurityRole.SystemIntegration,
+                   new SecurityRoleInfo(new Guid("df74d544-5945-4380-944e-a3a9001252be")))
+
+               .AddSecurityRole(
+                   SecurityRole.Administrator,
+                   new SecurityRoleInfo(new Guid("d9c1d2f0-0c2f-49ab-bb0b-de13a456169e"))
+                   {
+                       Operations = typeof(SampleSystemSecurityOperation).GetStaticPropertyValueList<SecurityOperation>().ToList()
+                   });
+    }
+
+
     public static ISecuritySystemSettings AddDomainSecurityServices(this ISecuritySystemSettings settings)
     {
         return settings.RegisterMainDomainSecurityServices()

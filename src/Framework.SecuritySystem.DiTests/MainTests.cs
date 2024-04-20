@@ -14,7 +14,7 @@ using Xunit;
 
 namespace Framework.SecuritySystem.DiTests;
 
-public class MainTests
+public partial class MainTests
 {
     private readonly BusinessUnit bu1;
     private readonly BusinessUnit bu2;
@@ -129,6 +129,7 @@ public class MainTests
                .RegisterSecurityContextInfoService<Guid>(b => b.Add<BusinessUnit>(Guid.NewGuid()))
 
                .AddScoped<ISecurityPathProviderFactory, SecurityPathProviderFactory>()
+               .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
 
                .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }

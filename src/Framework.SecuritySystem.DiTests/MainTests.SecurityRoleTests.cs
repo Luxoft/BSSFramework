@@ -1,32 +1,34 @@
 ﻿using FluentAssertions;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using Xunit;
 
 namespace Framework.SecuritySystem.DiTests;
 
-public class SecurityRoleTests
+public partial class MainTests
 {
-    //[Fact]
-    //public void AdministratorRole_ShouldNotContains_SystemIntegrationRole()
-    //{
-    //    // Arrange
-    //    var adminRole = SecurityRole.Administrator;
+    [Fact]
+    public void AdministratorRole_ShouldNotContains_SystemIntegrationRole()
+    {
+        // Arrange
+        var securityRoleSource = this.rootServiceProvider.GetRequiredService<ISecurityRoleSource>();
 
-    //    // Act
-    //    var children =
+        var adminRole = securityRoleSource.GetFullRole(SecurityRole.Administrator);
 
-    //    // Assert
-    //    adminRole.Children.Contains(SecurityRole.SystemIntegration).Should().BeFalse();
-    //}
+        // Act
+
+        // Assert
+        adminRole.Information.Children.Contains(SecurityRole.SystemIntegration).Should().BeFalse();
+    }
 
     [Fact]
     public void SecurityRoleExpander_ExpandDeepChild_AllRolesExpanded()
     {
         // Arrange
-        var expander = new SecurityRoleExpander(new SecurityRoleSource([new SecurityRoleTypeInfo(typeof(ExampleSecurityRole))]));
+        var expander = this.rootServiceProvider.GetRequiredService<SecurityRoleExpander>();
 
         // Act
-
         var expandResult = expander.Expand(ExampleSecurityRole.TestRole3.ToSecurityRule());
 
         // Assert

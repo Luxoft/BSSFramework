@@ -129,6 +129,8 @@ public partial class MainTests
 
                                .AddSecurityRole(ExampleSecurityRole.TestRole3, new SecurityRoleInfo(Guid.NewGuid()))
 
+                               .AddSecurityRole(SecurityRole.Administrator, new SecurityRoleInfo(Guid.NewGuid()))
+
                    )
 
                .ValidateDuplicateDeclaration()

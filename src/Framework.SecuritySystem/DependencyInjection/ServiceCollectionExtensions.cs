@@ -1,6 +1,6 @@
-﻿using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+﻿using Framework.DependencyInjection;
+using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Rules.Builders;
-using Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,8 +25,6 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.
                            SecurityExpressionBuilderFactory<Guid>>()
-
-                       .AddScoped<ISecurityExpressionBuilderFactory, SecurityExpressionBuilderFactory<Guid>>()
 
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
 
@@ -66,6 +64,12 @@ public static class ServiceCollectionExtensions
         setup(settings);
 
         settings.RegisterActions.ForEach(v => v(services));
+
+        if (settings.InitializeAdministratorRole)
+        {
+            services.AddSingleton<InitializedSecurityRoleSource>();
+            services.AddSingletonFrom((InitializedSecurityRoleSource source) => source.GetSecurityRoles());
+        }
 
         services.RegisterGeneralSecuritySystem();
 

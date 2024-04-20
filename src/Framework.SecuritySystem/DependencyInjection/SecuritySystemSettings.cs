@@ -9,6 +9,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 {
     public List<Action<IServiceCollection>> RegisterActions { get; set; } = new();
 
+    public bool InitializeAdministratorRole { get; set; } = true;
+
     public ISecuritySystemSettings AddSecurityContext<TSecurityContext>(Guid ident, string name = null, Func<TSecurityContext, string> displayFunc = null)
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
@@ -31,11 +33,20 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public ISecuritySystemSettings AddSecurityRole(SecurityRole securityRole, SecurityRoleInfo info)
     {
-        if (securityRole == SecurityRole.Administrator)
+        this.RegisterActions.Add(sc => this.AddSecurityRole(sc, new FullSecurityRole(securityRole.Name, info)));
+
+        return this;
+    }
+
+    private void AddSecurityRole(IServiceCollection serviceCollection, FullSecurityRole fullSecurityRole)
+    {
+        if (this.InitializeAdministratorRole)
         {
-
+            serviceCollection.AddSingleton(new PreInitializerFullSecurityRole(fullSecurityRole));
         }
-
-        throw new NotImplementedException();
+        else
+        {
+            serviceCollection.AddSingleton(fullSecurityRole);
+        }
     }
 }

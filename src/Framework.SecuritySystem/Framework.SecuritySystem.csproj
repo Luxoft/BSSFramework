@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\Framework.Persistent.Idents\Framework.Persistent.Idents.csproj" />
     <ProjectReference Include="..\Framework.QueryableSource\Framework.QueryableSource.csproj" />
     <ProjectReference Include="..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />

@@ -140,8 +140,7 @@ public static class ServiceCollectionExtensions
         return services.AddScoped<IAuthorizationSystem<Guid>, AuthorizationSystem>()
                        .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
                        .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>()
-
-                       .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
+                       .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
 
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>))
 

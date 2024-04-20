@@ -6,20 +6,16 @@ namespace Automation.Utils;
 public class TestPermissionBuilder
 {
     public TestPermissionBuilder(SecurityRole securityRole)
-        : this(securityRole.Name)
+        :this()
     {
-    }
-
-    public TestPermissionBuilder(string securityRoleName)
-    {
-        this.SecurityRoleName = securityRoleName;
+        this.SecurityRole = securityRole;
     }
 
     public TestPermissionBuilder()
     {
     }
 
-    public string SecurityRoleName { get; set; }
+    public SecurityRole SecurityRole { get; set; }
 
     public Period Period { get; set; } = Period.Eternity;
 
@@ -66,13 +62,13 @@ public class TestPermissionBuilder
 
     public static implicit operator TestPermission(TestPermissionBuilder securityRole)
     {
-        if (securityRole.SecurityRoleName == null)
+        if (securityRole.SecurityRole == null)
         {
-            throw new InvalidOperationException($"{nameof(securityRole.SecurityRoleName)} not initialized");
+            throw new InvalidOperationException($"{nameof(securityRole.SecurityRole)} not initialized");
         }
 
         return new TestPermission(
-            securityRole.SecurityRoleName,
+            securityRole.SecurityRole,
             securityRole.Period,
             securityRole.Restrictions.ChangeValue(v => v.ToReadOnlyListI()));
     }

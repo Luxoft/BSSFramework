@@ -7,8 +7,6 @@ namespace Framework.SecuritySystem
     public static class SecurityProviderExtensions
     {
         public static ISecurityProvider<TDomainObject> And<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, UnboundedList<string>> getAccessorsFunc = null, LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
-
-            where TDomainObject : class
         {
             if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
 
@@ -16,8 +14,6 @@ namespace Framework.SecuritySystem
         }
 
         public static ISecurityProvider<TDomainObject> Or<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, UnboundedList<string>> getAccessorsFunc = null, LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
-
-            where TDomainObject : class
         {
             if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
 
@@ -25,7 +21,6 @@ namespace Framework.SecuritySystem
         }
 
         public static ISecurityProvider<TDomainObject> And<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, ISecurityProvider<TDomainObject> otherSecurityProvider)
-            where TDomainObject : class
         {
             if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
             if (otherSecurityProvider == null) throw new ArgumentNullException(nameof(otherSecurityProvider));
@@ -34,7 +29,6 @@ namespace Framework.SecuritySystem
         }
 
         public static ISecurityProvider<TDomainObject> Or<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, ISecurityProvider<TDomainObject> otherSecurityProvider)
-            where TDomainObject : class
         {
             if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
             if (otherSecurityProvider == null) throw new ArgumentNullException(nameof(otherSecurityProvider));
@@ -43,8 +37,6 @@ namespace Framework.SecuritySystem
         }
 
         public static ISecurityProvider<TDomainObject> And<TDomainObject>(this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders)
-
-            where TDomainObject : class
         {
             if (securityProviders == null) throw new ArgumentNullException(nameof(securityProviders));
 
@@ -54,8 +46,6 @@ namespace Framework.SecuritySystem
         }
 
         public static ISecurityProvider<TDomainObject> Or<TDomainObject>(this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders)
-
-            where TDomainObject : class
         {
             if (securityProviders == null) throw new ArgumentNullException(nameof(securityProviders));
 
@@ -65,7 +55,6 @@ namespace Framework.SecuritySystem
         }
 
         private class CompositeSecurityProvider<TDomainObject> : ISecurityProvider<TDomainObject>
-            where TDomainObject : class
         {
             private readonly ISecurityProvider<TDomainObject> securityProvider;
 

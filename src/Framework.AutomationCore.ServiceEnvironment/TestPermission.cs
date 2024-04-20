@@ -3,24 +3,15 @@ using Framework.SecuritySystem;
 
 namespace Automation.Utils;
 
-public record TestPermission(string SecurityRoleName, Period Period, IReadOnlyDictionary<Type, IReadOnlyList<Guid>> Restrictions)
+public record TestPermission(SecurityRole SecurityRole, Period Period, IReadOnlyDictionary<Type, IReadOnlyList<Guid>> Restrictions)
 {
     public TestPermission(SecurityRole securityRole)
-        : this(securityRole.Name)
-    {
-    }
-    public TestPermission(SecurityRole securityRole, IReadOnlyDictionary<Type, IReadOnlyList<Guid>> restrictions)
-        : this(securityRole.Name, Period.Eternity, restrictions)
+        : this(securityRole, Period.Eternity)
     {
     }
 
-    public TestPermission(string securityRoleName)
-        : this(securityRoleName, Period.Eternity)
-    {
-    }
-
-    public TestPermission(string securityRoleName, Period period)
-        : this(securityRoleName, period, new Dictionary<Type, IReadOnlyList<Guid>>())
+    public TestPermission(SecurityRole securityRole, Period period)
+        : this(securityRole, period, new Dictionary<Type, IReadOnlyList<Guid>>())
     {
     }
 

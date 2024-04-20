@@ -35,7 +35,7 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
         await this.Init(this.securityRoleSource.SecurityRoles, cancellationToken);
     }
 
-    public async Task Init(IEnumerable<SecurityRole> securityRoles, CancellationToken cancellationToken)
+    public async Task Init(IEnumerable<FullSecurityRole> securityRoles, CancellationToken cancellationToken)
     {
         var dbRoles = await this.businessRoleRepository.GetQueryable().ToListAsync(cancellationToken);
 
@@ -70,7 +70,7 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
             var businessRole = new BusinessRole
             {
                 Name = securityRole.Name,
-                Description = securityRole.Description
+                Description = securityRole.Information.Description
             };
 
             this.logger.Verbose("Create Role: {0} {1}", businessRole.Name, securityRole.Id);
@@ -85,7 +85,7 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
             var businessRole = combinePair.Item1;
             var securityRole = combinePair.Item2;
 
-            businessRole.Description = securityRole.Description;
+            businessRole.Description = securityRole.Information.Description;
 
             await this.businessRoleRepository.SaveAsync(businessRole, cancellationToken);
 
@@ -93,21 +93,21 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
         }
     }
 
-    private static IEnumerable<SecurityRole> GetOrderedRoles(IEnumerable<SecurityRole> securityRoles)
+    private static IEnumerable<FullSecurityRole> GetOrderedRoles(IEnumerable<FullSecurityRole> securityRoles)
     {
-        var startParts = securityRoles.Partial(sr => sr.Children.Any(), (rootRoles, leafRoles) => new { rootRoles, leafRoles });
+        var startParts = securityRoles.Partial(sr => sr.Information.Children.Any(), (rootRoles, leafRoles) => new { rootRoles, leafRoles });
 
         var orderedResult = startParts.leafRoles.ToList();
 
         var processed = startParts.leafRoles.ToHashSet();
 
-        var unprocessed = new Queue<SecurityRole>(startParts.rootRoles);
+        var unprocessed = new Queue<FullSecurityRole>(startParts.rootRoles);
 
         while (unprocessed.Any())
         {
             var currentRole = unprocessed.Dequeue();
 
-            if (currentRole.Children.All(processed.Contains))
+            if (currentRole.Information.Children.All(processed.Contains))
             {
                 processed.Add(currentRole);
                 orderedResult.Add(currentRole);

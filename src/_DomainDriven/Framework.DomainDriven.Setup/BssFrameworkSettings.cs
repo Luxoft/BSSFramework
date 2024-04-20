@@ -98,18 +98,4 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
         return this;
     }
-
-    public IBssFrameworkSettings SetAdministratorRole(SecurityRole securityRole)
-    {
-        this.AdministratorRole = securityRole;
-
-        return this;
-    }
-
-    public IBssFrameworkSettings SetSystemIntegrationRole(SecurityRole securityRole)
-    {
-        this.SystemIntegrationRole = securityRole;
-
-        return this;
-    }
 }

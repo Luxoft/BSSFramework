@@ -171,13 +171,10 @@ public static class ServiceCollectionExtensions
 
 
                        .AddSingleton<SecurityModeExpander>()
-                       .AddSingleton<SpecialRoleSecurityRuleExpander>()
                        .AddSingleton<SecurityOperationExpander>()
                        .AddSingleton<SecurityRoleExpander>()
 
                        .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
-
-                       .AddSingleton<ISecurityRoleParser, SecurityRoleParser>()
 
                        .AddScoped<IBusinessRoleDomainService, BusinessRoleDomainService>()
 
@@ -200,18 +197,18 @@ public static class ServiceCollectionExtensions
     {
         return services.RegisterDomainSecurityServices<Guid>(
                            rb => rb.Add<Principal>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator)
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator)
                                              .SetCustomService<AuthorizationPrincipalSecurityService>())
 
                                    .Add<Permission>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator)
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator)
                                              .SetCustomService<AuthorizationPermissionSecurityService>())
 
                                    .Add<BusinessRole>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator)
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator)
                                              .SetCustomService<AuthorizationBusinessRoleSecurityService>())
 
                                    .Add<SecurityContextType>(
@@ -222,23 +219,23 @@ public static class ServiceCollectionExtensions
     {
         return services.RegisterDomainSecurityServices<Guid>(
                            rb => rb.Add<ExceptionMessage>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator))
+                                       b => b.SetView(SecurityRole.Administrator))
 
                                    .Add<Sequence>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator))
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
                                    .Add<SystemConstant>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator))
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
                                    .Add<CodeFirstSubscription>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator))
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
                                    .Add<TargetSystem>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator))
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
                                    .Add<DomainType>(
                                        b => b.SetView(SecurityRule.Disabled)));

@@ -19,13 +19,13 @@ public class SecurityRoleExpander
                 }
 
                 var securityRoles = securityRoleSource.SecurityRoles
-                                                      .Where(sr => sr.GetAllElements(c => c.Children).IsIntersected(securityRule.SecurityRoles))
+                                                      .Where(sr => sr.GetAllElements(c => c.Information.Children.Select(securityRoleSource.GetFullRole)).IsIntersected(securityRule.SecurityRoles))
                                                       .Concat(securityRule.SecurityRoles)
                                                       .Distinct()
                                                       .OrderBy(sr => sr.Name)
                                                       .ToArray();
 
-                return new SecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles)) { ExpandType = securityRule.ExpandType, Restriction = securityRule.Restriction };
+                return new SecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles)) {CustomExpandType = securityRule.CustomExpandType };
             }).WithLock();
     }
 

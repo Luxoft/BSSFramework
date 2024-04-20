@@ -14,7 +14,7 @@ public class GetOperationsHandler(IOperationAccessor operationAccessor, ISecurit
         if (!operationAccessor.IsAdministrator()) return Task.FromResult<object>(new List<string>());
 
         var operations = roleSource.SecurityRoles
-                                   .SelectMany(x => x.Operations)
+                                   .SelectMany(x => x.Information.Operations)
                                    .Select(o => new OperationDto { Name = o.Name, Description = o.Description })
                                    .OrderBy(x => x.Name)
                                    .DistinctBy(x => x.Name)

@@ -25,7 +25,7 @@ public partial class AuthSLJsonController
                 var securityProvider = new PrincipalSecurityProvider<Permission>(
                         evaluateData.Context.ActualPrincipalSource,
                         permission => permission.Principal)
-                    .Or(evaluateData.Context.SecurityService.GetSecurityProvider<Permission>(SpecialRoleSecurityRule.Administrator));
+                    .Or(evaluateData.Context.SecurityService.GetSecurityProvider<Permission>(SecurityRole.Administrator));
 
                 var bll = evaluateData.Context.Logics.PermissionFactory.Create(securityProvider);
 

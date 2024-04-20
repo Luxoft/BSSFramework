@@ -29,7 +29,7 @@ namespace Framework.SecuritySystem.Providers.Operation
 
             this.securityExpressionBuilder = securityExpressionBuilderFactory.CreateBuilder(securityPath);
 
-            this.lazyFilter = LazyHelper.Create(() => this.securityExpressionBuilder.GetFilter(securityRule));
+            this.lazyFilter = LazyHelper.Create(() => this.securityExpressionBuilder.GetFilter(securityRule, securityPath.GetUsedTypes()));
             this.injectFilterFunc = LazyHelper.Create(() => this.lazyFilter.Value.InjectFunc);
         }
 

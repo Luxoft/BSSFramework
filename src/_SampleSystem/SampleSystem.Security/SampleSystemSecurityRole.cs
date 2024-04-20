@@ -4,6 +4,8 @@ namespace SampleSystem.Security;
 
 public static class SampleSystemSecurityRole
 {
+    public static SecurityRole SecretariatNotification { get; } = new(nameof(SecretariatNotification));
+
     public static SecurityRole SecretariatNotification { get; } = new(
         new Guid("8fd79f66-218a-47bc-9649-a07500fa6d11"),
         nameof(SecretariatNotification));

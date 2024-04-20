@@ -10,20 +10,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData;
 public class SampleSystemTestPermission : TestPermissionBuilder
 {
     public SampleSystemTestPermission(
-        string securityRoleName,
-        BusinessUnitIdentityDTO? businessUnit = null,
-        ManagementUnitIdentityDTO? managementUnit = null,
-        LocationIdentityDTO? location = null,
-        EmployeeIdentityDTO? employee = null)
-        : base(securityRoleName)
-    {
-        this.BusinessUnit = businessUnit;
-        this.ManagementUnit = managementUnit;
-        this.Location = location;
-        this.Employee = employee;
-    }
-
-    public SampleSystemTestPermission(
         SecurityRole securityRole,
         BusinessUnitIdentityDTO? businessUnit = null,
         ManagementUnitIdentityDTO? managementUnit = null,

@@ -18,7 +18,7 @@ public record ForcePushEventHandler(
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.OperationAccessor.CheckAccess(SpecialRoleSecurityRule.Administrator);
+        this.OperationAccessor.CheckAccess(SecurityRole.Administrator);
 
         var operationId = (string)context.Request.RouteValues["operationId"]!;
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);

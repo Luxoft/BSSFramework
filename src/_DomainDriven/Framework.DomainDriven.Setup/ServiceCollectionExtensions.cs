@@ -19,24 +19,9 @@ public static class ServiceCollectionExtensions
         setupAction?.Invoke(settings);
         settings.InitSettings();
 
-        foreach (var securityRoleType in settings.SecurityRoleTypes)
-        {
-            services.AddSingleton(new SecurityRoleTypeInfo(securityRoleType));
-        }
-
         foreach (var namedLockType in settings.NamedLockTypes)
         {
             services.AddSingleton(new NamedLockTypeInfo(namedLockType));
-        }
-
-        if (settings.AdministratorRole != null)
-        {
-            services.AddSingleton(new AdministratorRoleInfo(settings.AdministratorRole));
-        }
-
-        if (settings.SystemIntegrationRole != null)
-        {
-            services.AddSingleton(new SystemIntegrationRoleInfo(settings.SystemIntegrationRole));
         }
 
         services.AddScoped(typeof(INotificationPrincipalExtractor), settings.NotificationPrincipalExtractorType);

@@ -22,6 +22,6 @@ public record UpdateSystemConstantHandler(IRepositoryFactory<SystemConstant> Rep
     {
         var systemConstant = await this.RepoFactory.Create().LoadAsync(id, token);
         systemConstant.Value = newValue;
-        await this.RepoFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(systemConstant, token);
+        await this.RepoFactory.Create(SecurityRole.Administrator).SaveAsync(systemConstant, token);
     }
 }

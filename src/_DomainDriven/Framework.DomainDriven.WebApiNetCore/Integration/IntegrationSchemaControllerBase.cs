@@ -17,18 +17,14 @@ public abstract class IntegrationSchemaControllerBase : ControllerBase
 
     private readonly IAuthorizationSystem authorizationSystem;
 
-    private readonly SystemIntegrationRoleInfo systemIntegrationRoleInfo;
-
     private const string AuthIntegrationNamespace = "http://authorization.luxoft.com/IntegrationEvent";
 
     protected IntegrationSchemaControllerBase(
         IAuthorizationSystem authorizationSystem,
-        SystemIntegrationRoleInfo systemIntegrationRoleInfo,
         TimeProvider timeProvider,
         IEventXsdExporter2 eventXsdExporter)
     {
         this.authorizationSystem = authorizationSystem;
-        this.systemIntegrationRoleInfo = systemIntegrationRoleInfo;
         this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
         this.eventXsdExporter = eventXsdExporter;
     }
@@ -40,7 +36,7 @@ public abstract class IntegrationSchemaControllerBase : ControllerBase
 
     private IActionResult DownloadKnownTypesWsdl(string xsdNamespace, IReadOnlyCollection<Type> eventTypes)
     {
-        this.authorizationSystem.CheckAccess(this.systemIntegrationRoleInfo.SystemIntegrationRole);
+        this.authorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
 
         var content = this.eventXsdExporter.Export(xsdNamespace, "IntegrationEvent", eventTypes);
 

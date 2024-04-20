@@ -44,7 +44,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
     {
         if (this.SecurityRuleExpanders.TryExpand<TDomainObject>(SecurityRule.View) is SecurityRule.DomainObjectSecurityRule viewSecurityRule)
         {
-            return viewSecurityRule.ExpandType.HasFlag(HierarchicalExpandType.Parents);
+            return viewSecurityRule.CustomExpandType?.HasFlag(HierarchicalExpandType.Parents) == true;
         }
         else
         {

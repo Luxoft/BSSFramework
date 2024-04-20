@@ -20,7 +20,7 @@ public static class GeneratorConfigurationExtensions
         {
             return typeof(SecurityRule).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
         }
-        else if (securityRule is SecurityRole)
+        else if (securityRule is SecurityRule.NonExpandedRolesSecurityRule)
         {
             return typeof(SecurityRole).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
         }

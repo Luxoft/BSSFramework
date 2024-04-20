@@ -310,51 +310,5 @@
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
-        
-        /// <summary>
-        /// Remove BusinessRole
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("RemoveBusinessRole")]
-        public virtual void RemoveBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemoveBusinessRoleInternal(businessRoleIdent, evaluateData));
-        }
-        
-        protected virtual void RemoveBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Framework.SecuritySystem.SecurityRule.Edit);
-            this.RemoveBusinessRoleInternal(businessRoleIdent, evaluateData, bll);
-        }
-        
-        protected virtual void RemoveBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData, Framework.Authorization.BLL.IBusinessRoleBLL bll)
-        {
-            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdent.Id, true);
-            bll.Remove(domainObject);
-        }
-        
-        /// <summary>
-        /// Save BusinessRoles
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("SaveBusinessRole")]
-        public virtual Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO SaveBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleStrictDTO businessRoleStrict)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveBusinessRoleInternal(businessRoleStrict, evaluateData));
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO SaveBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleStrictDTO businessRoleStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Framework.SecuritySystem.SecurityRule.Edit);
-            return this.SaveBusinessRoleInternal(businessRoleStrict, evaluateData, bll);
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO SaveBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleStrictDTO businessRoleStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData, Framework.Authorization.BLL.IBusinessRoleBLL bll)
-        {
-            Framework.Authorization.Domain.BusinessRole domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, businessRoleStrict.Id);
-            businessRoleStrict.MapToDomainObject(evaluateData.MappingService, domainObject);
-            bll.Save(domainObject);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
-        }
     }
 }

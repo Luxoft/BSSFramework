@@ -67,8 +67,8 @@ public static class ServiceCollectionExtensions
 
         if (settings.InitializeAdministratorRole)
         {
-            services.AddSingleton<InitializedSecurityRoleSource>();
-            services.AddSingletonFrom((InitializedSecurityRoleSource source) => source.GetSecurityRoles());
+            services.AddSingleton<IInitializedSecurityRoleSource, InitializedSecurityRoleSource>();
+            services.AddSingletonFrom((IInitializedSecurityRoleSource source) => source.GetSecurityRoles());
         }
 
         services.RegisterGeneralSecuritySystem();

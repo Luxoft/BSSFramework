@@ -1,6 +1,6 @@
 ﻿namespace Framework.SecuritySystem.DependencyInjection;
 
-public class InitializedSecurityRoleSource(IEnumerable<PreInitializerFullSecurityRole> securityRoles)
+public class InitializedSecurityRoleSource(IEnumerable<PreInitializerFullSecurityRole> securityRoles) : IInitializedSecurityRoleSource
 {
     public IEnumerable<FullSecurityRole> GetSecurityRoles()
     {

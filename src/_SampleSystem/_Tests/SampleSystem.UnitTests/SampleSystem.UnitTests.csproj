@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework.AutomationCore.Unit\Framework.AutomationCore.Unit.csproj" />
     <ProjectReference Include="..\..\..\Framework.Core.Expression\Framework.Core.Expression.csproj" />
     <ProjectReference Include="..\..\..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
   </ItemGroup>

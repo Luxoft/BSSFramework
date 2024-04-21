@@ -80,11 +80,20 @@ public partial class Employee :
 
     private int age;
 
+    private bool restrictionHandler;
+
     [NotPersistentField]
     private DateTime nonValidateVirtualField = DateTime.Now;
 
     [NotPersistentField]
     private DateTime validateVirtualField = DateTime.Now;
+
+    public virtual bool RestrictionHandler
+    {
+        get { return this.restrictionHandler; }
+        set { this.restrictionHandler = value; }
+    }
+
 
     public virtual DateTime NonValidateVirtualProp
     {

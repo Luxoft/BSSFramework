@@ -9637,6 +9637,9 @@ namespace SampleSystem.Generated.DTO
         public System.DateTime? PlannedHireDate;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool RestrictionHandler;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime ValidateVirtualProp;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -9835,6 +9838,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO RegistrationType;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool RestrictionHandler;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO Role;
@@ -10053,6 +10059,9 @@ namespace SampleSystem.Generated.DTO
         public Framework.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO> RegistrationType = Framework.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO>.Nothing;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Maybe<bool> RestrictionHandler = Framework.Core.Maybe<bool>.Nothing;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public Framework.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO> Role = Framework.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>.Nothing;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -10125,7 +10134,7 @@ namespace SampleSystem.Generated.DTO
         {
             get
             {
-                return !this.Age.HasValue && !this.BirthDate.HasValue && !this.CanBePPM.HasValue && (this.CellPhones.Count == 0) && !this.EducationDuration.HasValue && !this.Email.HasValue && (this.EmployeeToEmployeeLinks.Count == 0) && !this.ExternalId.HasValue && !this.Gender.HasValue && !this.Interphone.HasValue && !this.Landlinephone.HasValue && !this.LastActionDate.HasValue && !this.Login.HasValue && !this.NameEng.HasValue && !this.NameNative.HasValue && !this.NameRussian.HasValue && !this.NonValidateVirtualProp.HasValue && (this.PersonalCellPhones.Count == 0) && !this.Pin.HasValue && !this.PlannedHireDate.HasValue && !this.Position.HasValue && !this.Ppm.HasValue && !this.RegistrationType.HasValue && !this.Role.HasValue && !this.RoleDegree.HasValue && (this.Specializations.Count == 0) && !this.VacationApprover.HasValue && !this.ValidateVirtualProp.HasValue && !this.WorkPeriod.HasValue;
+                return !this.Age.HasValue && !this.BirthDate.HasValue && !this.CanBePPM.HasValue && (this.CellPhones.Count == 0) && !this.EducationDuration.HasValue && !this.Email.HasValue && (this.EmployeeToEmployeeLinks.Count == 0) && !this.ExternalId.HasValue && !this.Gender.HasValue && !this.Interphone.HasValue && !this.Landlinephone.HasValue && !this.LastActionDate.HasValue && !this.Login.HasValue && !this.NameEng.HasValue && !this.NameNative.HasValue && !this.NameRussian.HasValue && !this.NonValidateVirtualProp.HasValue && (this.PersonalCellPhones.Count == 0) && !this.Pin.HasValue && !this.PlannedHireDate.HasValue && !this.Position.HasValue && !this.Ppm.HasValue && !this.RegistrationType.HasValue && !this.RestrictionHandler.HasValue && !this.Role.HasValue && !this.RoleDegree.HasValue && (this.Specializations.Count == 0) && !this.VacationApprover.HasValue && !this.ValidateVirtualProp.HasValue && !this.WorkPeriod.HasValue;
             }
         }
         

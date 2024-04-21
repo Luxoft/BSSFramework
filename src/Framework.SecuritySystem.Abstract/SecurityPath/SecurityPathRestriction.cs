@@ -16,17 +16,18 @@ public record SecurityPathRestriction(DeepEqualsCollection<Type>? SecurityContex
     {
     }
 
-    private IEnumerable<Type> SafeSecurityContexts => this.SecurityContexts.EmptyIfNull();
-
     public static SecurityPathRestriction Empty { get; } = new(null, Array.Empty<LambdaExpression>());
 
     public SecurityPathRestriction Add<TSecurityContext>()
         where TSecurityContext : ISecurityContext =>
-        new(this.SafeSecurityContexts.Concat(new[] { typeof(TSecurityContext) }.Distinct()), this.Conditions);
+        new(this.SecurityContexts.EmptyIfNull().Concat(new[] { typeof(TSecurityContext) }.Distinct()), this.Conditions);
 
     public SecurityPathRestriction Add<TDomainObject>(Expression<Func<TDomainObject, bool>> condition) =>
-        new(this.SafeSecurityContexts, this.Conditions.Concat(new[] { condition }));
+        new(this.SecurityContexts, this.Conditions.Concat(new[] { condition }));
 
     public static SecurityPathRestriction Create<TSecurityContext>()
         where TSecurityContext : ISecurityContext => Empty.Add<TSecurityContext>();
+
+    public static SecurityPathRestriction Create<TDomainObject>(Expression<Func<TDomainObject, bool>> condition)
+        => Empty.Add(condition);
 }

@@ -2121,6 +2121,9 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventSimpleDTO RegistrationType;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool RestrictionHandler;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO Role;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -2251,6 +2254,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime? PlannedHireDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool RestrictionHandler;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime ValidateVirtualProp;

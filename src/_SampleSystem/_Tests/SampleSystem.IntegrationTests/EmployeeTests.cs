@@ -22,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Impl;
 
 using SampleSystem.Generated.DTO;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -360,5 +361,26 @@ public class EmployeeTests : TestBase
 
         // Assert
         isVirtualResult.Should().Be(false);
+    }
+
+    [TestMethod]
+    public void GetEmployeeWithRestrictionRole_EmployeeFiltered()
+    {
+        // Arrange
+        var emp1 = this.DataHelper.SaveEmployee(restrictionHandler: true);
+        var emp2 = this.DataHelper.SaveEmployee(restrictionHandler: false);
+        var emp3 = this.DataHelper.SaveEmployee(restrictionHandler: true);
+
+        // Act
+        var result = this.Evaluate(DBSessionMode.Read, ctx =>
+        {
+            var bll = ctx.Logics.EmployeeFactory.Create(SampleSystemSecurityRole.RestrictionRole);
+
+            var result = bll.GetFullList();
+
+            return result.ToIdentityDTOList();
+        });
+
+        result.Should().BeEquivalentTo([emp1, emp3]);
     }
 }

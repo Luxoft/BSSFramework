@@ -315,6 +315,7 @@
     <property name="PersonalCellPhone" column="personalCellPhone" access="field.camelcase" />
     <property name="Pin" column="pin" access="field.camelcase" />
     <property name="PlannedHireDate" column="plannedHireDate" type="timestamp" access="field.camelcase" />
+    <property name="RestrictionHandler" column="restrictionHandler" access="field.camelcase" />
     <many-to-one name="CoreBusinessUnit" column="coreBusinessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
     <many-to-one name="HRDepartment" column="hRDepartmentId" class="SampleSystem.Domain.HRDepartment" access="field.camelcase" />
     <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />

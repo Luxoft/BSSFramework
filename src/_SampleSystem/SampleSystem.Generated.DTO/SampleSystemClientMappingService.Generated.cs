@@ -1169,6 +1169,7 @@ namespace SampleSystem.Generated.DTO
             target.Position = currentSource.Position;
             target.Ppm = Framework.Core.Maybe.Return(currentSource.Ppm);
             target.RegistrationType = Framework.Core.Maybe.Return(currentSource.RegistrationType);
+            target.RestrictionHandler = Framework.Core.Maybe.Return(currentSource.RestrictionHandler);
             target.Role = Framework.Core.Maybe.Return(currentSource.Role);
             target.RoleDegree = Framework.Core.Maybe.Return(currentSource.RoleDegree);
             target.Specializations = this.ExtractUpdateDataFromSingle<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO>(currentSource.Specializations, employeeAndEmployeeSpecializationLink => new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO(employeeAndEmployeeSpecializationLink, this));
@@ -1275,6 +1276,10 @@ namespace SampleSystem.Generated.DTO
             if (baseSource.RegistrationType != currentSource.RegistrationType)
             {
                 target.RegistrationType = Framework.Core.Maybe.Return(currentSource.RegistrationType);
+            }
+            if (baseSource.RestrictionHandler != currentSource.RestrictionHandler)
+            {
+                target.RestrictionHandler = Framework.Core.Maybe.Return(currentSource.RestrictionHandler);
             }
             if (baseSource.Role != currentSource.Role)
             {
@@ -2946,6 +2951,7 @@ namespace SampleSystem.Generated.DTO
             target.NonValidateVirtualProp = source.NonValidateVirtualProp;
             target.Pin = source.Pin;
             target.PlannedHireDate = source.PlannedHireDate;
+            target.RestrictionHandler = source.RestrictionHandler;
             target.ValidateVirtualProp = source.ValidateVirtualProp;
             target.WorkPeriod = source.WorkPeriod;
         }

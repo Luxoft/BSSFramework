@@ -2769,6 +2769,7 @@ namespace SampleSystem.Generated.DTO
             }
             mappingObject.Pin = domainObject.Pin;
             mappingObject.PlannedHireDate = domainObject.PlannedHireDate;
+            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             mappingObject.ValidateVirtualProp = domainObject.ValidateVirtualProp;
             mappingObject.WorkPeriod = domainObject.WorkPeriod;
         }
@@ -2934,6 +2935,7 @@ namespace SampleSystem.Generated.DTO
             {
                 domainObject.RegistrationType = null;
             }
+            domainObject.RestrictionHandler = mappingObject.RestrictionHandler;
             if (!object.Equals(mappingObject.Role, default(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO)))
             {
                 domainObject.Role = this.ToEmployeeRole(mappingObject.Role);
@@ -3166,6 +3168,11 @@ namespace SampleSystem.Generated.DTO
                     domainObject.RegistrationType = null;
                 }
             }
+            Framework.Core.Just<bool> justRestrictionHandler = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<bool>>(mappingObject.RestrictionHandler);
+            if (!object.ReferenceEquals(justRestrictionHandler, null))
+            {
+                domainObject.RestrictionHandler = justRestrictionHandler.Value;
+            }
             Framework.Core.Just<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO> justRole = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>>(mappingObject.Role);
             if (!object.ReferenceEquals(justRole, null))
             {
@@ -3322,6 +3329,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.RegistrationType = null;
             }
+            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             if (!object.ReferenceEquals(domainObject.Role, null))
             {
                 mappingObject.Role = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject.Role, this);
@@ -3402,6 +3410,7 @@ namespace SampleSystem.Generated.DTO
             {
                 domainObject.RegistrationType = null;
             }
+            domainObject.RestrictionHandler = mappingObject.RestrictionHandler;
             if (!object.Equals(mappingObject.Role, default(SampleSystem.Generated.DTO.EmployeeRoleIntegrationSimpleDTO)))
             {
                 domainObject.Role = this.ToEmployeeRole(mappingObject.Role);
@@ -3468,6 +3477,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NonValidateVirtualProp = domainObject.NonValidateVirtualProp;
             mappingObject.Pin = domainObject.Pin;
             mappingObject.PlannedHireDate = domainObject.PlannedHireDate;
+            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             mappingObject.ValidateVirtualProp = domainObject.ValidateVirtualProp;
             mappingObject.WorkPeriod = domainObject.WorkPeriod;
         }
@@ -3491,6 +3501,7 @@ namespace SampleSystem.Generated.DTO
             domainObject.NonValidateVirtualProp = mappingObject.NonValidateVirtualProp;
             domainObject.Pin = mappingObject.Pin;
             domainObject.PlannedHireDate = mappingObject.PlannedHireDate;
+            domainObject.RestrictionHandler = mappingObject.RestrictionHandler;
             domainObject.ValidateVirtualProp = mappingObject.ValidateVirtualProp;
             domainObject.WorkPeriod = mappingObject.WorkPeriod;
         }
@@ -3603,6 +3614,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.RegistrationType = null;
             }
+            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             if (!object.ReferenceEquals(domainObject.Role, null))
             {
                 mappingObject.Role = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Role, this);
@@ -3667,6 +3679,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NonValidateVirtualProp = domainObject.NonValidateVirtualProp;
             mappingObject.Pin = domainObject.Pin;
             mappingObject.PlannedHireDate = domainObject.PlannedHireDate;
+            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             mappingObject.ValidateVirtualProp = domainObject.ValidateVirtualProp;
             mappingObject.Version = domainObject.Version;
             mappingObject.WorkPeriod = domainObject.WorkPeriod;

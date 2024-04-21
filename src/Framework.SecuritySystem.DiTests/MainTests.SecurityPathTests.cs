@@ -1,7 +1,5 @@
 ﻿using FluentAssertions;
 
-using Framework.Core;
-
 using Microsoft.Extensions.DependencyInjection;
 
 using Xunit;
@@ -26,7 +24,5 @@ public partial class MainTests
 
         //Assert
         newSecurityPath.GetUsedTypes().Should().BeEquivalentTo(restriction.SecurityContexts);
-
-        return;
     }
 }

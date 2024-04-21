@@ -114,6 +114,7 @@ public partial class MainTests
                                                  .SetPath(SecurityPath<Employee>.Create(v => v.BusinessUnit))))
 
                                .AddSecurityContext<BusinessUnit>(Guid.NewGuid())
+                               .AddSecurityContext<Location>(Guid.NewGuid())
 
                                .AddSecurityRole(
                                    ExampleSecurityRole.TestRole,

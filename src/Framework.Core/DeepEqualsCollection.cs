@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿#nullable enable
+
+using System.Collections;
 
 namespace Framework.Core;
 
@@ -8,7 +10,7 @@ public class DeepEqualsCollection<T> : IReadOnlyList<T>, IEquatable<DeepEqualsCo
 
     private readonly IReadOnlyList<T> baseSource;
 
-    public DeepEqualsCollection(IEnumerable<T> baseSource, IEqualityComparer<T> comparer = null)
+    public DeepEqualsCollection(IEnumerable<T> baseSource, IEqualityComparer<T>? comparer = null)
     {
         this.comparer = comparer ?? EqualityComparer<T>.Default;
         this.baseSource = baseSource.ToList();
@@ -22,10 +24,10 @@ public class DeepEqualsCollection<T> : IReadOnlyList<T>, IEquatable<DeepEqualsCo
 
     IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
-    public bool Equals(DeepEqualsCollection<T> other) =>
+    public bool Equals(DeepEqualsCollection<T>? other) =>
         !object.ReferenceEquals(other, null) && this.baseSource.SequenceEqual(other.baseSource, this.comparer);
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (object.ReferenceEquals(null, obj)) return false;
         if (object.ReferenceEquals(this, obj)) return true;

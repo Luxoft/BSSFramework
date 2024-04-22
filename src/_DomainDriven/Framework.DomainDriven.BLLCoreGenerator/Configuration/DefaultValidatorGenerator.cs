@@ -172,7 +172,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        var instanceType = attribute.CreateValidator().GetLastPropertyValidator(property, new ServiceCollection().BuildServiceProvider()).GetType();
+        var instanceType = attribute.CreateValidator(this.Configuration.ServiceProvider).GetLastPropertyValidator(property, this.Configuration.ServiceProvider).GetType();
 
         if (instanceType.IsInterfaceImplementation(typeof(IPropertyValidator<,>)))
         {
@@ -216,7 +216,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (attribute == null) throw new ArgumentNullException(nameof(attribute));
 
-        var instanceType = attribute.CreateValidator().GetType();
+        var instanceType = attribute.CreateValidator(this.Configuration.ServiceProvider).GetType();
 
         if (instanceType.IsInterfaceImplementation(typeof(IClassValidator<>)))
         {

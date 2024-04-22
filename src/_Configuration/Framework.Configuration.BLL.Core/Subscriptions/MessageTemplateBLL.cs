@@ -10,7 +10,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Notification;
 
-
+using Microsoft.Extensions.DependencyInjection;
 
 using MAttachment = System.Net.Mail.Attachment;
 
@@ -299,11 +299,10 @@ public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
             throw new InvalidOperationException($"Wrong type of DomainObjectVersions instance. Required type '{typeof(DomainObjectVersions<TModelObjectType>)}' but actual type {messageTemplate.ContextObject.GetType()}");
         }
 
-        var viewTemplate = (RazorTemplate<TModelObjectType>)Activator.CreateInstance(messageTemplate.RazorMessageTemplateType);
+        var viewTemplate = (RazorTemplate<TModelObjectType>)ActivatorUtilities.CreateInstance(this.Context.ServiceProvider, messageTemplate.RazorMessageTemplateType);
         viewTemplate.Previous = versions.Previous;
         viewTemplate.Current = versions.Current;
-        viewTemplate.Context = this.Context.GetTargetSystemService(typeof(TModelObjectType), false)?.TargetSystemContext
-                               ?? this.Context.GetTargetSystemService(typeof(TSourceDomainObjectType), true).TargetSystemContext;
+        viewTemplate.ServiceProvider = this.Context.ServiceProvider;
 
         return viewTemplate;
     }

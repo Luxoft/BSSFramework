@@ -15,7 +15,7 @@ public class RequiredGroupValidatorAttribute : ClassValidatorAttribute
     public string GroupKey { get; set; }
 
 
-    public override IClassValidator CreateValidator()
+    public override IClassValidator CreateValidator(IServiceProvider serviceProvider)
     {
         return new RequiredGroupValidator(this.Mode, this.GroupKey);
     }

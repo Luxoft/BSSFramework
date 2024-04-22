@@ -2,12 +2,14 @@
 
 using Framework.Core;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class AnyElementsValidatorAttribute : PropertyValidatorAttribute
 {
-    public override IPropertyValidator CreateValidator()
+    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
     {
         return AnyElementsValidator.Value;
     }
@@ -22,7 +24,7 @@ public class AnyElementsValidator : IDynamicPropertyValidator
 
         var elementType = property.PropertyType.GetCollectionElementType();
 
-        return (IPropertyValidator)Activator.CreateInstance(typeof(AnyElementsValidator<>).MakeGenericType(elementType));
+        return (IPropertyValidator)ActivatorUtilities.CreateInstance(serviceProvider, typeof(AnyElementsValidator<>).MakeGenericType(elementType));
     }
 
     public static AnyElementsValidator Value { get; } = new AnyElementsValidator();

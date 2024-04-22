@@ -58,7 +58,7 @@ public static class SampleSystemSecurityServiceExtensions
                    SampleSystemSecurityRole.RestrictionRole,
                    new SecurityRoleInfo(new Guid("{ACAA7B42-09AA-438A-B6EC-058506E0C103}"))
                    {
-                       Restriction = SecurityPathRestriction.Create((Employee employee) => employee.RestrictionHandler) 
+                       Restriction = SecurityPathRestriction.Create((TestRestrictionObject v) => v.RestrictionHandler)
                    })
 
                .AddSecurityRole(
@@ -203,6 +203,8 @@ public static class SampleSystemSecurityServiceExtensions
                   .Add<Example1>(
                       b => b.SetView(SampleSystemSecurityOperation.LocationView)
                             .SetEdit(SampleSystemSecurityOperation.LocationEdit))
+
+                  .Add<TestRestrictionObject>(SampleSystemSecurityRole.RestrictionRole)
 
                   .Add<TestCustomContextSecurityObj>(b => b.SetCustomService<SampleSystemTestCustomContextSecurityObjSecurityService>())
 

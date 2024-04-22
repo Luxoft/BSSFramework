@@ -852,6 +852,24 @@ namespace SampleSystem.BLL
         }
     }
     
+    public partial class TestRestrictionObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestRestrictionObject>, SampleSystem.BLL.ITestRestrictionObjectBLL
+    {
+        
+        public TestRestrictionObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestRestrictionObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
+        {
+        }
+    }
+    
+    public partial class TestRestrictionObjectBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ITestRestrictionObjectBLL, SampleSystem.BLL.TestRestrictionObjectBLL, SampleSystem.Domain.TestRestrictionObject>, SampleSystem.BLL.ITestRestrictionObjectBLLFactory
+    {
+        
+        public TestRestrictionObjectBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
+                base(context)
+        {
+        }
+    }
+    
     public partial class TestRootSecurityObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestRootSecurityObj>, SampleSystem.BLL.ITestRootSecurityObjBLL
     {
         
@@ -1038,6 +1056,8 @@ namespace SampleSystem.BLL
         private SampleSystem.BLL.ITestPerformanceObjectBLL testPerformanceObjectBLL;
         
         private SampleSystem.BLL.ITestPlainAuthObjectBLL testPlainAuthObjectBLL;
+        
+        private SampleSystem.BLL.ITestRestrictionObjectBLL testRestrictionObjectBLL;
         
         private SampleSystem.BLL.ITestRootSecurityObjBLL testRootSecurityObjBLL;
         
@@ -1982,6 +2002,26 @@ namespace SampleSystem.BLL
             }
         }
         
+        public SampleSystem.BLL.ITestRestrictionObjectBLL TestRestrictionObject
+        {
+            get
+            {
+                if (object.ReferenceEquals(this.testRestrictionObjectBLL, null))
+                {
+                    this.testRestrictionObjectBLL = this.TestRestrictionObjectFactory.Create();
+                }
+                return this.testRestrictionObjectBLL;
+            }
+        }
+        
+        public SampleSystem.BLL.ITestRestrictionObjectBLLFactory TestRestrictionObjectFactory
+        {
+            get
+            {
+                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.ITestRestrictionObjectBLLFactory>(this.Context.ServiceProvider);
+            }
+        }
+        
         public SampleSystem.BLL.ITestRootSecurityObjBLL TestRootSecurityObj
         {
             get
@@ -2218,6 +2258,8 @@ namespace SampleSystem.BLL
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid>, SampleSystem.Domain.TestPerformanceObject>, SampleSystem.BLL.ITestPerformanceObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestPlainAuthObjectBLLFactory, SampleSystem.BLL.TestPlainAuthObjectBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid>, SampleSystem.Domain.TestPlainAuthObject>, SampleSystem.BLL.ITestPlainAuthObjectBLLFactory>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestRestrictionObjectBLLFactory, SampleSystem.BLL.TestRestrictionObjectBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRestrictionObject, System.Guid>, SampleSystem.Domain.TestRestrictionObject>, SampleSystem.BLL.ITestRestrictionObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestRootSecurityObjBLLFactory, SampleSystem.BLL.TestRootSecurityObjBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid>, SampleSystem.Domain.TestRootSecurityObj>, SampleSystem.BLL.ITestRootSecurityObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecurityObjItemBLLFactory, SampleSystem.BLL.TestSecurityObjItemBLLFactory>(serviceCollection);

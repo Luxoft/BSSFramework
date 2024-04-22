@@ -508,6 +508,16 @@ namespace SampleSystem.BLL
             get;
         }
         
+        SampleSystem.BLL.ITestRestrictionObjectBLL TestRestrictionObject
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.ITestRestrictionObjectBLLFactory TestRestrictionObjectFactory
+        {
+            get;
+        }
+        
         SampleSystem.BLL.ITestRootSecurityObjBLL TestRootSecurityObj
         {
             get;
@@ -982,6 +992,14 @@ namespace SampleSystem.BLL
     }
     
     public partial interface ITestPlainAuthObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, SampleSystem.Domain.TestPlainAuthObject>
+    {
+    }
+    
+    public partial interface ITestRestrictionObjectBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRestrictionObject, System.Guid>
+    {
+    }
+    
+    public partial interface ITestRestrictionObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRestrictionObjectBLL, SampleSystem.Domain.TestRestrictionObject>
     {
     }
     

@@ -5978,6 +5978,96 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestRestrictionObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public TestRestrictionObjectIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public TestRestrictionObjectIdentityDTO(SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this.Id = source.Id;
+        }
+        
+        public TestRestrictionObjectIdentityDTO(SampleSystem.Domain.TestRestrictionObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public TestRestrictionObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestRestrictionObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestRestrictionObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRootSecurityObj), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct TestRootSecurityObjIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -9637,9 +9727,6 @@ namespace SampleSystem.Generated.DTO
         public System.DateTime? PlannedHireDate;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool RestrictionHandler;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime ValidateVirtualProp;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -9838,9 +9925,6 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO RegistrationType;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool RestrictionHandler;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO Role;
@@ -10059,9 +10143,6 @@ namespace SampleSystem.Generated.DTO
         public Framework.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO> RegistrationType = Framework.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO>.Nothing;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Maybe<bool> RestrictionHandler = Framework.Core.Maybe<bool>.Nothing;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public Framework.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO> Role = Framework.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>.Nothing;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -10134,7 +10215,7 @@ namespace SampleSystem.Generated.DTO
         {
             get
             {
-                return !this.Age.HasValue && !this.BirthDate.HasValue && !this.CanBePPM.HasValue && (this.CellPhones.Count == 0) && !this.EducationDuration.HasValue && !this.Email.HasValue && (this.EmployeeToEmployeeLinks.Count == 0) && !this.ExternalId.HasValue && !this.Gender.HasValue && !this.Interphone.HasValue && !this.Landlinephone.HasValue && !this.LastActionDate.HasValue && !this.Login.HasValue && !this.NameEng.HasValue && !this.NameNative.HasValue && !this.NameRussian.HasValue && !this.NonValidateVirtualProp.HasValue && (this.PersonalCellPhones.Count == 0) && !this.Pin.HasValue && !this.PlannedHireDate.HasValue && !this.Position.HasValue && !this.Ppm.HasValue && !this.RegistrationType.HasValue && !this.RestrictionHandler.HasValue && !this.Role.HasValue && !this.RoleDegree.HasValue && (this.Specializations.Count == 0) && !this.VacationApprover.HasValue && !this.ValidateVirtualProp.HasValue && !this.WorkPeriod.HasValue;
+                return !this.Age.HasValue && !this.BirthDate.HasValue && !this.CanBePPM.HasValue && (this.CellPhones.Count == 0) && !this.EducationDuration.HasValue && !this.Email.HasValue && (this.EmployeeToEmployeeLinks.Count == 0) && !this.ExternalId.HasValue && !this.Gender.HasValue && !this.Interphone.HasValue && !this.Landlinephone.HasValue && !this.LastActionDate.HasValue && !this.Login.HasValue && !this.NameEng.HasValue && !this.NameNative.HasValue && !this.NameRussian.HasValue && !this.NonValidateVirtualProp.HasValue && (this.PersonalCellPhones.Count == 0) && !this.Pin.HasValue && !this.PlannedHireDate.HasValue && !this.Position.HasValue && !this.Ppm.HasValue && !this.RegistrationType.HasValue && !this.Role.HasValue && !this.RoleDegree.HasValue && (this.Specializations.Count == 0) && !this.VacationApprover.HasValue && !this.ValidateVirtualProp.HasValue && !this.WorkPeriod.HasValue;
             }
         }
         
@@ -16961,6 +17042,73 @@ namespace SampleSystem.Generated.DTO
                 base(mappingService, domainObject)
         {
             mappingService.MapTestPlainAuthObject(domainObject, this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO))]
+    public partial class TestRestrictionObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO>
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool RestrictionHandler;
+        
+        public TestRestrictionObjectSimpleDTO()
+        {
+        }
+        
+        public TestRestrictionObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRestrictionObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestRestrictionObject(domainObject, this);
+        }
+        
+        public TestRestrictionObjectSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        public SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO(this.Id);
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO))]
+    public partial class TestRestrictionObjectFullDTO : SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO
+    {
+        
+        public TestRestrictionObjectFullDTO()
+        {
+        }
+        
+        public TestRestrictionObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRestrictionObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestRestrictionObject(domainObject, this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestRestrictionObjectRichDTO : SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO
+    {
+        
+        public TestRestrictionObjectRichDTO()
+        {
+        }
+        
+        public TestRestrictionObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRestrictionObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestRestrictionObject(domainObject, this);
         }
     }
     

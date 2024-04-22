@@ -40,8 +40,7 @@ public partial class DataHelper
             Period? educationDuration = null,
             string cellPhone = "3365",
             LocationIdentityDTO? location = null,
-            int age = 0,
-            bool restrictionHandler = false)
+            int age = 0)
     {
         Employee employee;
 
@@ -133,8 +132,7 @@ public partial class DataHelper
                                                          EducationDuration = educationDuration ?? new Period(DateTime.Now.Date.AddYears(-5), DateTime.Now.Date.AddYears(-2)),
                                                          NonValidateVirtualProp = nonValidateVirtualProp ?? DateTime.Now,
                                                          ValidateVirtualProp = validateVirtualProp ?? DateTime.Now,
-                                                         Age = age,
-                                                         RestrictionHandler = restrictionHandler
+                                                         Age = age
                                       };
 
                                       if (coreBusinessUnit != null)

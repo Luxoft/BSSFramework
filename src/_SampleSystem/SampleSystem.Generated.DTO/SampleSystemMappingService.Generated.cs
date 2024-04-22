@@ -778,6 +778,14 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestPlainAuthObject(SampleSystem.Domain.TestPlainAuthObject domainObject, SampleSystem.Generated.DTO.TestPlainAuthObjectEventSimpleDTO mappingObject);
         
+        void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO mappingObject);
+        
+        void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO mappingObject);
+        
+        void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO mappingObject);
+        
+        void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO mappingObject);
+        
         void MapTestRootSecurityObj(SampleSystem.Domain.TestRootSecurityObj domainObject, SampleSystem.Generated.DTO.TestRootSecurityObjVisualDTO mappingObject);
         
         void MapTestRootSecurityObj(SampleSystem.Domain.TestRootSecurityObj domainObject, SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO mappingObject);
@@ -1231,6 +1239,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.TestPerformanceObject ToTestPerformanceObject(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentityDTO);
         
         SampleSystem.Domain.TestPlainAuthObject ToTestPlainAuthObject(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentityDTO);
+        
+        SampleSystem.Domain.TestRestrictionObject ToTestRestrictionObject(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentityDTO);
         
         SampleSystem.Domain.TestRootSecurityObj ToTestRootSecurityObj(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentityDTO);
         
@@ -2769,7 +2779,6 @@ namespace SampleSystem.Generated.DTO
             }
             mappingObject.Pin = domainObject.Pin;
             mappingObject.PlannedHireDate = domainObject.PlannedHireDate;
-            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             mappingObject.ValidateVirtualProp = domainObject.ValidateVirtualProp;
             mappingObject.WorkPeriod = domainObject.WorkPeriod;
         }
@@ -2935,7 +2944,6 @@ namespace SampleSystem.Generated.DTO
             {
                 domainObject.RegistrationType = null;
             }
-            domainObject.RestrictionHandler = mappingObject.RestrictionHandler;
             if (!object.Equals(mappingObject.Role, default(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO)))
             {
                 domainObject.Role = this.ToEmployeeRole(mappingObject.Role);
@@ -3168,11 +3176,6 @@ namespace SampleSystem.Generated.DTO
                     domainObject.RegistrationType = null;
                 }
             }
-            Framework.Core.Just<bool> justRestrictionHandler = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<bool>>(mappingObject.RestrictionHandler);
-            if (!object.ReferenceEquals(justRestrictionHandler, null))
-            {
-                domainObject.RestrictionHandler = justRestrictionHandler.Value;
-            }
             Framework.Core.Just<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO> justRole = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>>(mappingObject.Role);
             if (!object.ReferenceEquals(justRole, null))
             {
@@ -3329,7 +3332,6 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.RegistrationType = null;
             }
-            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             if (!object.ReferenceEquals(domainObject.Role, null))
             {
                 mappingObject.Role = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject.Role, this);
@@ -3410,7 +3412,6 @@ namespace SampleSystem.Generated.DTO
             {
                 domainObject.RegistrationType = null;
             }
-            domainObject.RestrictionHandler = mappingObject.RestrictionHandler;
             if (!object.Equals(mappingObject.Role, default(SampleSystem.Generated.DTO.EmployeeRoleIntegrationSimpleDTO)))
             {
                 domainObject.Role = this.ToEmployeeRole(mappingObject.Role);
@@ -3477,7 +3478,6 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NonValidateVirtualProp = domainObject.NonValidateVirtualProp;
             mappingObject.Pin = domainObject.Pin;
             mappingObject.PlannedHireDate = domainObject.PlannedHireDate;
-            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             mappingObject.ValidateVirtualProp = domainObject.ValidateVirtualProp;
             mappingObject.WorkPeriod = domainObject.WorkPeriod;
         }
@@ -3501,7 +3501,6 @@ namespace SampleSystem.Generated.DTO
             domainObject.NonValidateVirtualProp = mappingObject.NonValidateVirtualProp;
             domainObject.Pin = mappingObject.Pin;
             domainObject.PlannedHireDate = mappingObject.PlannedHireDate;
-            domainObject.RestrictionHandler = mappingObject.RestrictionHandler;
             domainObject.ValidateVirtualProp = mappingObject.ValidateVirtualProp;
             domainObject.WorkPeriod = mappingObject.WorkPeriod;
         }
@@ -3614,7 +3613,6 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.RegistrationType = null;
             }
-            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             if (!object.ReferenceEquals(domainObject.Role, null))
             {
                 mappingObject.Role = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Role, this);
@@ -3679,7 +3677,6 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NonValidateVirtualProp = domainObject.NonValidateVirtualProp;
             mappingObject.Pin = domainObject.Pin;
             mappingObject.PlannedHireDate = domainObject.PlannedHireDate;
-            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             mappingObject.ValidateVirtualProp = domainObject.ValidateVirtualProp;
             mappingObject.Version = domainObject.Version;
             mappingObject.WorkPeriod = domainObject.WorkPeriod;
@@ -7189,6 +7186,31 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO mappingObject)
+        {
+            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
+        }
+        
+        public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapTestRootSecurityObj(SampleSystem.Domain.TestRootSecurityObj domainObject, SampleSystem.Generated.DTO.TestRootSecurityObjVisualDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
@@ -8782,6 +8804,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.TestPlainAuthObject ToTestPlainAuthObject(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestPlainAuthObject>(testPlainAuthObjectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TestRestrictionObject ToTestRestrictionObject(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestRestrictionObject>(testRestrictionObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.TestRootSecurityObj ToTestRootSecurityObj(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentityDTO)

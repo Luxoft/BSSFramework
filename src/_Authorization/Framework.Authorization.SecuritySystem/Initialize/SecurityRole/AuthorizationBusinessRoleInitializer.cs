@@ -2,42 +2,29 @@
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
 using NHibernate.Linq;
-using Serilog;
 
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
-public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleInitializer
+public class AuthorizationBusinessRoleInitializer(
+    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
+    ISecurityRoleSource securityRoleSource,
+    ILogger<AuthorizationBusinessRoleInitializer> logger,
+    InitializerSettings settings)
+    : IAuthorizationBusinessRoleInitializer
 {
-    private readonly IRepository<BusinessRole> businessRoleRepository;
-
-    private readonly ISecurityRoleSource securityRoleSource;
-
-    private readonly ILogger logger;
-
-    private readonly InitializerSettings settings;
-
-    public AuthorizationBusinessRoleInitializer(
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
-        ISecurityRoleSource securityRoleSource,
-        ILogger logger,
-        InitializerSettings settings)
-    {
-        this.businessRoleRepository = businessRoleRepository;
-        this.securityRoleSource = securityRoleSource;
-        this.logger = logger.ForContext<AuthorizationBusinessRoleInitializer>();
-        this.settings = settings;
-    }
-
     public async Task Init(CancellationToken cancellationToken)
     {
-        await this.Init(this.securityRoleSource.SecurityRoles, cancellationToken);
+        await this.Init(securityRoleSource.SecurityRoles, cancellationToken);
     }
 
     public async Task Init(IEnumerable<FullSecurityRole> securityRoles, CancellationToken cancellationToken)
     {
-        var dbRoles = await this.businessRoleRepository.GetQueryable().ToListAsync(cancellationToken);
+        var dbRoles = await businessRoleRepository.GetQueryable().ToListAsync(cancellationToken);
 
         var mergeRoleResult = dbRoles.GetMergeResult(GetOrderedRoles(securityRoles), br => br.Id, sr => sr.Id);
 
@@ -45,7 +32,7 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
 
         if (mergeRoleResult.RemovingItems.Any())
         {
-            switch (this.settings.UnexpectedAuthElementMode)
+            switch (settings.UnexpectedAuthElementMode)
             {
                 case UnexpectedAuthElementMode.RaiseError:
                     throw new InvalidOperationException(
@@ -55,9 +42,9 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
                 {
                     foreach (var removingItem in mergeRoleResult.RemovingItems)
                     {
-                        this.logger.Verbose("Remove Role: {RemovingItemName} {RemovingItemId}", removingItem.Name, removingItem.Id);
+                        logger.LogDebug("Remove Role: {RemovingItemName} {RemovingItemId}", removingItem.Name, removingItem.Id);
 
-                        await this.businessRoleRepository.RemoveAsync(removingItem, cancellationToken);
+                        await businessRoleRepository.RemoveAsync(removingItem, cancellationToken);
                     }
 
                     break;
@@ -73,9 +60,9 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
                 Description = securityRole.Information.Description
             };
 
-            this.logger.Verbose("Create Role: {0} {1}", businessRole.Name, securityRole.Id);
+            logger.LogDebug("Create Role: {BusinessRole} {SecurityRole}", businessRole.Name, securityRole.Id);
 
-            await this.businessRoleRepository.InsertAsync(businessRole, securityRole.Id, cancellationToken);
+            await businessRoleRepository.InsertAsync(businessRole, securityRole.Id, cancellationToken);
 
             mappingDict.Add(securityRole, businessRole);
         }
@@ -87,7 +74,7 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
 
             businessRole.Description = securityRole.Information.Description;
 
-            await this.businessRoleRepository.SaveAsync(businessRole, cancellationToken);
+            await businessRoleRepository.SaveAsync(businessRole, cancellationToken);
 
             mappingDict.Add(securityRole, businessRole);
         }

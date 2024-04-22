@@ -46,6 +46,6 @@ public partial class MainTests
         var getResult = () => service.ApplyRestriction(baseSecurityPath, restriction);
 
         //Assert
-        getResult.Should().Throw<Exception>($"Can't apply restriction. InvalidType: {nameof(Location)}");
+        getResult.Should().Throw<Exception>($"Can't apply restriction. Invalid types: {nameof(Location)}");
     }
 }

@@ -1,5 +1,4 @@
-﻿using Framework.Configuration.BLL;
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
@@ -13,8 +12,8 @@ namespace Framework.Configurator.Handlers;
 
 public record ForcePushEventHandler(
     IRepositoryFactory<DomainTypeEventOperation> EventOperationRepoFactory,
-    IDomainTypeBLLFactory DomainTypeBllFactory,
-    IOperationAccessor OperationAccessor) : BaseWriteHandler, IForcePushEventHandler
+    IOperationAccessor OperationAccessor,
+    ILegacyForceEventSystem? LegacyForceEventSystem = null) : BaseWriteHandler, IForcePushEventHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
@@ -30,14 +29,19 @@ public record ForcePushEventHandler(
     {
         var domainTypeEventOperation = await this.EventOperationRepoFactory.Create().LoadAsync(operationId, token);
 
-        this.DomainTypeBllFactory.Create()
-            .ForceEvent(
-                new DomainTypeEventModel
-                {
-                    Operation = domainTypeEventOperation,
-                    Revision = body.Revision,
-                    DomainObjectIdents = body.Ids.Split(',').Select(i => new Guid(i)).ToList()
-                });
+        if (this.LegacyForceEventSystem == null)
+        {
+            throw new Exception($"{nameof(this.LegacyForceEventSystem)} not implemented");
+        }
+        else
+        {
+            this.LegacyForceEventSystem.ForceEvent(new DomainTypeEventModel
+                                                   {
+                                                       Operation = domainTypeEventOperation,
+                                                       Revision = body.Revision,
+                                                       DomainObjectIdents = body.Ids.Split(',').Select(i => new Guid(i)).ToList()
+                                                   });
+        }
     }
 
     private class RequestBodyDto

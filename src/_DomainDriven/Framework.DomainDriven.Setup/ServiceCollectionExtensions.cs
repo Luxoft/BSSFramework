@@ -23,7 +23,9 @@ public static class ServiceCollectionExtensions
             services.AddSingleton(new NamedLockTypeInfo(namedLockType));
         }
 
+        services.AddScoped<INotificationBasePermissionFilterSource, NotificationBasePermissionFilterSource>();
         services.AddScoped(typeof(INotificationPrincipalExtractor), settings.NotificationPrincipalExtractorType);
+
         services.AddScoped(typeof(IDomainObjectEventMetadata), settings.DomainObjectEventMetadataType);
 
         settings.RegisterActions.ForEach(a => a(services));

@@ -2,7 +2,6 @@
 
 using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
-using Framework.Authorization.Notification;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
@@ -10,7 +9,6 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.NHibernate;
-using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.Projection;
 using Framework.QueryLanguage;
@@ -47,8 +45,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped(typeof(EvaluatedData<,>));
 
         services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
-
-        services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
         services.AddSingleton<IStandartExpressionBuilder, StandartExpressionBuilder>();
 
@@ -91,9 +87,6 @@ public static class ServiceCollectionExtensions
                        FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData))
 
                .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
-
-               //.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>()
-               .AddScoped<INotificationBasePermissionFilterSource, LegacyNotificationPrincipalExtractor>()
                .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
 
                .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()

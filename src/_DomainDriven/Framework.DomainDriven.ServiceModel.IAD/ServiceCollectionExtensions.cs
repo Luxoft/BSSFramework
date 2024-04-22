@@ -15,6 +15,7 @@ using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.Events;
+using Framework.Exceptions;
 using Framework.FinancialYear;
 using Framework.HierarchicalExpand.DependencyInjection;
 using Framework.QueryableSource;
@@ -31,6 +32,8 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
     {
         services.TryAddSingleton(TimeProvider.System);
+
+        services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
         services.RegisterFinancialYearServices();
         services.RegisterRepository();

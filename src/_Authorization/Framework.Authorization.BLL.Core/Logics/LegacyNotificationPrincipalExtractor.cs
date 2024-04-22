@@ -9,26 +9,16 @@ using Framework.SecuritySystem;
 
 namespace Framework.Authorization.BLL;
 
-public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthorizationBLLContext>, INotificationPrincipalExtractor, INotificationBasePermissionFilterSource
+public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthorizationBLLContext>, INotificationPrincipalExtractor
 {
-    private readonly ISecurityRoleSource securityRoleSource;
+    private readonly INotificationBasePermissionFilterSource notificationBasePermissionFilterSource;
 
-    public LegacyNotificationPrincipalExtractor(IAuthorizationBLLContext context, ISecurityRoleSource securityRoleSource)
+    public LegacyNotificationPrincipalExtractor(
+        IAuthorizationBLLContext context,
+        INotificationBasePermissionFilterSource notificationBasePermissionFilterSource)
         : base(context)
     {
-        this.securityRoleSource = securityRoleSource;
-    }
-
-    public Expression<Func<Permission, bool>> GetBasePermissionFilter(SecurityRole[] securityRoles)
-    {
-        if (securityRoles == null) throw new ArgumentNullException(nameof(securityRoles));
-
-        var businessRole = this.Context.Logics.BusinessRole.GetListByIdents(
-            securityRoles.Select(sr => this.securityRoleSource.GetFullRole(sr).Id));
-
-        var permissionQ = this.Context.AvailablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false);
-
-        return permission => businessRole.Contains(permission.Role) && permissionQ.Contains(permission);
+        this.notificationBasePermissionFilterSource = notificationBasePermissionFilterSource;
     }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(
@@ -46,7 +36,7 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
         if (securityRoles == null) throw new ArgumentNullException(nameof(securityRoles));
         if (baseNotificationFilterGroups == null) throw new ArgumentNullException(nameof(baseNotificationFilterGroups));
 
-        var baseNotificationFilter = this.GetBasePermissionFilter(securityRoles);
+        var baseNotificationFilter = this.notificationBasePermissionFilterSource.GetBasePermissionFilter(securityRoles);
 
         foreach (var notificationFilterGroups in baseNotificationFilterGroups.PermuteByExpand())
         {
@@ -64,7 +54,7 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
                 {
                     var withExpandPrincipalsRequest = from expandedIdent in firstGroupExternalSource.GetSecurityEntitiesWithMasterExpand(preExpandedIdent)
 
-                                                      let newFirstGroup = new NotificationFilterGroup(firstGroup.SecurityContextType, new[] { expandedIdent.Id }, firstGroup.ExpandType.WithoutHierarchical())
+                                                      let newFirstGroup = new NotificationFilterGroup(firstGroup.SecurityContextType, [expandedIdent.Id], firstGroup.ExpandType.WithoutHierarchical())
 
                                                       let principals = this.GetDirectNotificationPrincipals(baseNotificationFilter, new[] { newFirstGroup }.Concat(tailGroups)).ToArray()
 

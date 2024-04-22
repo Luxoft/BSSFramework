@@ -1,19 +1,12 @@
 ﻿using System.Reflection;
 
 using Framework.Core;
-using Framework.Exceptions;
-using Framework.Validation;
 
-namespace Framework.Configuration.BLL;
-
+namespace Framework.Exceptions;
 public class ExceptionExpander : IExceptionExpander
 {
-    private readonly MethodInfo processAggregateExceptionMethod;
+    private static readonly MethodInfo ProcessAggregateExceptionMethod = typeof(ExceptionExpander).GetMethod(nameof(ProcessAggregateException), BindingFlags.NonPublic | BindingFlags.Instance, true);
 
-    public ExceptionExpander()
-    {
-        this.processAggregateExceptionMethod = new Func<AggregateValidationException, Exception>(this.ProcessAggregateException<AggregateValidationException, ValidationExceptionBase>).Method.GetGenericMethodDefinition();
-    }
 
     protected virtual Exception ProcessAggregateException<TCurrentException, TInnerException>(TCurrentException currentException)
             where TCurrentException : Exception, IAggregateException<TInnerException>
@@ -33,19 +26,14 @@ public class ExceptionExpander : IExceptionExpander
 
     public virtual Exception Process(Exception exception)
     {
-        var convertibleExceptionRequest = from convertible in (exception as IConvertible<ValidationException>).ToMaybe()
-                                          let next = convertible.Convert()
-                                          select this.Process(next);
-
         var targetInvocationRequest = from targetInvocationException in (exception as TargetInvocationException).ToMaybe()
                                       let lastInnerException = targetInvocationException.GetLastInnerException()
                                       select this.Process(lastInnerException);
 
-        return convertibleExceptionRequest
-               .Or(targetInvocationRequest)
-               .Or(
-                   () => from innerExceptionType in exception.GetType().GetAggregateExceptionInnerExceptionType().ToMaybe()
-                         select (Exception)this.processAggregateExceptionMethod.MakeGenericMethod(exception.GetType(), innerExceptionType).Invoke(this, new[] { exception }))
+        return targetInvocationRequest
+               .Or(() => from innerExceptionType in exception.GetType().GetAggregateExceptionInnerExceptionType().ToMaybe()
+                         select (Exception)ProcessAggregateExceptionMethod.MakeGenericMethod(exception.GetType(), innerExceptionType).Invoke(this,
+                             [exception]))
                .GetValueOrDefault(exception);
     }
 

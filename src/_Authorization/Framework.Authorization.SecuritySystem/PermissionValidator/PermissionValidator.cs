@@ -23,7 +23,7 @@ public class PermissionValidator(
 
     public void ValidateRestriction(Permission permission)
     {
-        var securityRole = securityRoleSource.GetSecurityRole(permission.Role.Name);
+        var securityRole = securityRoleSource.GetSecurityRole(permission.Role.Id);
 
         var allowedSecurityContexts = securityRole.Information.Restriction.SecurityContexts;
 

@@ -8,6 +8,9 @@ public class SecurityRoleSource : ISecurityRoleSource
 
     private readonly IReadOnlyDictionary<string, FullSecurityRole> securityRoleByNameDict;
 
+
+    private readonly IReadOnlyDictionary<string, FullSecurityRole> securityRoleByCustomNameDict;
+
     public SecurityRoleSource(IEnumerable<FullSecurityRole> securityRoles)
     {
         this.SecurityRoles = securityRoles.ToList();
@@ -17,16 +20,19 @@ public class SecurityRoleSource : ISecurityRoleSource
         this.securityRoleByIdDict = this.SecurityRoles.ToDictionary(v => v.Id);
 
         this.securityRoleByNameDict = this.SecurityRoles.ToDictionary(v => v.Name);
+
+        this.securityRoleByCustomNameDict =
+            this.SecurityRoles.Where(v => v.Information.CustomName != null).ToDictionary(v => v.Information.CustomName);
     }
 
     public IReadOnlyList<FullSecurityRole> SecurityRoles { get; }
 
     public FullSecurityRole GetFullRole(SecurityRole securityRole) => this.SecurityRoles.Single(sr => sr == securityRole);
 
-
     public FullSecurityRole GetSecurityRole(string name)
     {
         return this.securityRoleByNameDict.GetValueOrDefault(name)
+               ?? this.securityRoleByCustomNameDict.GetValueOrDefault(name)
                ?? throw new Exception($"SecurityRole with name '{name}' not found");
     }
 

@@ -24,6 +24,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Framework.Authorization.Generated.DTO;
 using Framework.Configuration.Generated.DTO;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.Domain;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -31,6 +32,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyGenericServices(this IServiceCollection services)
     {
+        services.AddScopedFrom<ILegacyForceEventSystem, IDomainTypeBLLFactory>(domainTypeBllFactory => domainTypeBllFactory.Create());
+
         services.AddSingleton<SubscriptionMetadataStore>();
         services.AddSingleton<ISubscriptionMetadataFinder, SubscriptionMetadataFinder>();
 

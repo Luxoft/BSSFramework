@@ -19,12 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
+    <!-- TODO Upgrade after fix https://github.com/ClosedXML/ClosedXML.Report/issues/303-->
+    <PackageReference Include="ClosedXML" />
   </ItemGroup>
 
   <ItemGroup>
-    <!-- TODO Upgrade after fix https://github.com/ClosedXML/ClosedXML.Report/issues/303-->
-    <PackageReference Include="ClosedXML" />
+    <ProjectReference Include="..\_Authorization\Framework.Authorization.SecuritySystem\Framework.Authorization.SecuritySystem.csproj" />
+    <ProjectReference Include="..\_Configuration\Framework.Configuration.Domain.Models\Framework.Configuration.Domain.Models.csproj" />
   </ItemGroup>
 
 </Project>

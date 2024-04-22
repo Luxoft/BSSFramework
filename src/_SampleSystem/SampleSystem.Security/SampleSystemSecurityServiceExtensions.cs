@@ -58,7 +58,8 @@ public static class SampleSystemSecurityServiceExtensions
                    SampleSystemSecurityRole.RestrictionRole,
                    new SecurityRoleInfo(new Guid("{ACAA7B42-09AA-438A-B6EC-058506E0C103}"))
                    {
-                       Restriction = SecurityPathRestriction.Create((TestRestrictionObject v) => v.RestrictionHandler)
+                       Restriction = SecurityPathRestriction.Create<BusinessUnit>()
+                                                            .Add((TestRestrictionObject v) => v.RestrictionHandler)
                    })
 
                .AddSecurityRole(

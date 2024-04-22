@@ -7,6 +7,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.Validation;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.Security;
@@ -46,6 +47,41 @@ public class TestRestrictionRoleTests : TestBase
                          .Evaluate(c => c.GetSimpleTestRestrictionObjects())
                          .Select(v => v.Identity);
 
+        // Assert
         result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
+    }
+
+    [TestMethod]
+    public void TryCreatePermissionWithCorrectSecurityContext_PermissionCreated()
+    {
+        // Arrange
+        var businessUnit = this.DataHelper.SaveBusinessUnit();
+
+        // Act
+        var action = () =>
+                         this.AuthHelper.SetCurrentUserRole(
+                             new SampleSystemTestPermission(
+                                 SampleSystemSecurityRole.RestrictionRole,
+                                 businessUnit: businessUnit));
+
+        // Assert
+        action.Should().NotThrow();
+    }
+
+    [TestMethod]
+    public void TryCreatePermissionWithInvalidSecurityContext_ExceptionRaised()
+    {
+        // Arrange
+        var location = this.DataHelper.SaveLocation();
+
+        // Act
+        var action = () =>
+                         this.AuthHelper.SetCurrentUserRole(
+                             new SampleSystemTestPermission(
+                                 SampleSystemSecurityRole.RestrictionRole,
+                                 location: location));
+
+        // Assert
+        action.Should().Throw<ValidationException>($"Invalid permission restriction types: {nameof(Location)}");
     }
 }

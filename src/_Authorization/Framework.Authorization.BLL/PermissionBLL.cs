@@ -1,12 +1,9 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
 using Framework.Core;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.Validation;
-
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.BLL;
 

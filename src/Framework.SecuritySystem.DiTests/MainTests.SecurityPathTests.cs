@@ -32,6 +32,7 @@ public partial class MainTests
         //Assert
         newSecurityPath.Should().Be(expectedNewSecurityPath);
     }
+
     [Fact]
     public void TryApplyInvalidRestriction_ExceptionRaised()
     {

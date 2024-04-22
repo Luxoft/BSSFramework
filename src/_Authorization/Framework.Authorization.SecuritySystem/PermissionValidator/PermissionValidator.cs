@@ -10,15 +10,37 @@ namespace Framework.Authorization.SecuritySystem;
 public class PermissionValidator(
     TimeProvider timeProvider,
     IAuthorizationExternalSource externalSource,
-    ISecurityContextInfoService securityContextInfoService)
+    ISecurityContextInfoService securityContextInfoService,
+    ISecurityRoleSource securityRoleSource)
     : IPermissionValidator
 {
     public void Validate(Permission permission)
     {
+        this.ValidateRestriction(permission);
+
         this.ValidateDelegation(permission);
     }
 
-    public void ValidateDelegation(Permission permission, ValidatePermissionDelegateMode mode = ValidatePermissionDelegateMode.All)
+    public void ValidateRestriction(Permission permission)
+    {
+        var securityRole = securityRoleSource.GetSecurityRole(permission.Role.Name);
+
+        var allowedSecurityContexts = securityRole.Information.Restriction.SecurityContexts;
+
+        if (allowedSecurityContexts != null)
+        {
+            var usedTypes = permission.Restrictions.Select(pr => this.GetSecurityContextInfo(pr.SecurityContextType).Type);
+
+            var invalidTypes = usedTypes.Except(allowedSecurityContexts).ToList();
+
+            if (invalidTypes.Any())
+            {
+                throw new ValidationException($"Invalid permission restriction types: {invalidTypes.Join(", ", t => t.Name)}");
+            }
+        }
+    }
+
+    private void ValidateDelegation(Permission permission, ValidatePermissionDelegateMode mode = ValidatePermissionDelegateMode.All)
     {
         if (permission.IsDelegatedFrom)
         {
@@ -173,8 +195,13 @@ public class PermissionValidator(
         return invalidRequest1.Concat(invalidRequest2).ToDictionary();
     }
 
+    private ISecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)
+    {
+        return securityContextInfoService.GetSecurityContextInfo(securityContextType.Name);
+    }
+
     private bool IsExpandable(SecurityContextType securityContextType)
     {
-        return securityContextInfoService.GetSecurityContextInfo(securityContextType.Name).Type.IsHierarchical();
+        return this.GetSecurityContextInfo(securityContextType).Type.IsHierarchical();
     }
 }

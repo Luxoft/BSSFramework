@@ -36,11 +36,6 @@ public partial class PrincipalBLL
 
         this.PermissionRestrictionNotifyProgress(principal);
 
-        foreach (var permission in principal.Permissions)
-        {
-            this.Context.Logics.Permission.DenormalizePermission(permission);
-        }
-
         base.Save(principal);
 
         this.NotifySaveAndRemove(principal);
@@ -87,7 +82,7 @@ public partial class PrincipalBLL
 
         foreach (var permission in principal.Permissions)
         {
-            this.Context.Logics.Permission.ValidatePermissionDelegated(permission, ValidatePermissonDelegateMode.All);
+            this.Context.PermissionValidator.Validate(permission);
         }
     }
 

@@ -95,12 +95,7 @@ public partial class MainTests
         return new ServiceCollection()
 
                .RegisterHierarchicalObjectExpander()
-
-               .AddScoped<BusinessUnitAncestorLinkSourceExecuteCounter>()
-
                .AddScoped(this.BuildQueryableSource)
-               .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
-
                .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()
 
                .AddSecuritySystem(
@@ -134,8 +129,10 @@ public partial class MainTests
 
                    )
 
-               .ValidateDuplicateDeclaration()
+               .AddScoped<BusinessUnitAncestorLinkSourceExecuteCounter>()
+               .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
 
+               .ValidateDuplicateDeclaration()
                .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }
 

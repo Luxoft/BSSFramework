@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.SecuritySystem;
 using Framework.Configurator.Interfaces;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
@@ -18,6 +19,7 @@ public record UpdatePermissionsHandler(
     IRepositoryFactory<Permission> PermissionRepositoryFactory,
     IRepositoryFactory<PermissionRestriction> PermissionRestrictionRepositoryFactory,
     IRepositoryFactory<SecurityContextType> SecurityContextTypeRepositoryFactory,
+    IPermissionValidator PermissionValidator,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
@@ -46,6 +48,8 @@ public record UpdatePermissionsHandler(
         if (this.ConfiguratorIntegrationEvents != null)
             foreach (var removingItem in mergeResult.RemovingItems)
                 await this.ConfiguratorIntegrationEvents.PermissionRemovedAsync(removingItem, cancellationToken);
+
+        principal.Permissions.Foreach(this.PermissionValidator.Validate);
     }
 
     private async Task CreatePermissionsAsync(Principal principal, IEnumerable<RequestBodyDto> dtoModels, CancellationToken token)

@@ -1,7 +1,7 @@
-﻿namespace Framework.Authorization.BLL;
+﻿namespace Framework.Authorization.SecuritySystem;
 
 [Flags]
-public enum ValidatePermissonDelegateMode
+public enum ValidatePermissionDelegateMode
 {
     Role = 1,
 

@@ -16,13 +16,13 @@ public class AuthorizationBusinessRoleInitializer : IAuthorizationBusinessRoleIn
 
     private readonly ILogger logger;
 
-    private readonly InitializeSettings settings;
+    private readonly InitializerSettings settings;
 
     public AuthorizationBusinessRoleInitializer(
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
         ISecurityRoleSource securityRoleSource,
         ILogger logger,
-        InitializeSettings settings)
+        InitializerSettings settings)
     {
         this.businessRoleRepository = businessRoleRepository;
         this.securityRoleSource = securityRoleSource;

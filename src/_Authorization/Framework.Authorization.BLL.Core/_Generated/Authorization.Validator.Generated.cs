@@ -18,7 +18,6 @@ namespace Framework.Authorization.BLL
                 base(context, cache)
         {
             base.RegisterHandler<Framework.Authorization.Domain.BusinessRole>(this.GetBusinessRoleValidationResult);
-            base.RegisterHandler<Framework.Authorization.Domain.BusinessRoleCreateModel>(this.GetBusinessRoleCreateModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.BusinessRoleRootFilterModel>(this.GetBusinessRoleRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.ChangePermissionDelegatesModel>(this.GetChangePermissionDelegatesModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.DelegateToItemModel>(this.GetDelegateToItemModelValidationResult);
@@ -33,11 +32,6 @@ namespace Framework.Authorization.BLL
             base.RegisterHandler<Framework.Authorization.Domain.SecurityContextTypeRootFilterModel>(this.GetSecurityContextTypeRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.SecurityEntity>(this.GetSecurityEntityValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.UpdatePermissionDelegatesModel>(this.GetUpdatePermissionDelegatesModelValidationResult);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetBusinessRoleCreateModelValidationResult(Framework.Authorization.Domain.BusinessRoleCreateModel source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
         protected virtual Framework.Validation.ValidationResult GetBusinessRoleRootFilterModelValidationResult(Framework.Authorization.Domain.BusinessRoleRootFilterModel source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)

@@ -28,7 +28,11 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
 
-                       .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>));
+                       .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
+                       .AddScoped(typeof(IDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>))
+
+                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
+                       .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>();
     }
 
     public static IServiceCollection RegisterDomainSecurityServices<TIdent>(

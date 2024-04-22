@@ -2,7 +2,6 @@
 
 using Framework.CodeDom;
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -12,15 +11,13 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
     public EnumDomainSecurityServiceGenerator(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
+        : base(configuration, domainType)
     {
         var genericTypes = this.Configuration.GetDomainTypeSecurityParameters(this.DomainType).Select(p => p.ToTypeReference()).ToArray();
 
         this.DomainTypeReference = genericTypes.FirstOr(() => this.DomainType.ToTypeReference());
 
-        this.BaseServiceType = typeof(ContextDomainSecurityService<,>).ToTypeReference(
-         this.DomainTypeReference,
-         this.Configuration.Environment.GetIdentityType().ToTypeReference());
+        this.BaseServiceType = typeof(ContextDomainSecurityService<>).ToTypeReference(this.DomainTypeReference);
     }
 
 

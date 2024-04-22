@@ -8,15 +8,15 @@ public class AvailableSecurityRoleSource : IAvailableSecurityRoleSource
 {
     private readonly IAvailablePermissionSource availablePermissionSource;
 
-    private readonly ISecurityRoleParser parser;
+    private readonly ISecurityRoleSource securityRoleSource;
 
-    public AvailableSecurityRoleSource(IAvailablePermissionSource availablePermissionSource, ISecurityRoleParser parser)
+    public AvailableSecurityRoleSource(IAvailablePermissionSource availablePermissionSource, ISecurityRoleSource securityRoleSource)
     {
         this.availablePermissionSource = availablePermissionSource;
-        this.parser = parser;
+        this.securityRoleSource = securityRoleSource;
     }
 
-    public async Task<List<SecurityRole>> GetAvailableSecurityRole (CancellationToken cancellationToken)
+    public async Task<List<FullSecurityRole>> GetAvailableSecurityRole (CancellationToken cancellationToken)
     {
         var dbRequest = from permission in this.availablePermissionSource.GetAvailablePermissionsQueryable()
 
@@ -24,6 +24,6 @@ public class AvailableSecurityRoleSource : IAvailableSecurityRoleSource
 
         var dbOperationIdents = await dbRequest.Distinct().ToListAsync(cancellationToken);
 
-        return dbOperationIdents.Select(this.parser.GetSecurityRole).SelectMany(sr => sr.Children).Distinct().ToList();
+        return dbOperationIdents.Select(this.securityRoleSource.GetSecurityRole).ToList();
     }
 }

@@ -133,7 +133,7 @@ public partial class DataHelper
                                                          NonValidateVirtualProp = nonValidateVirtualProp ?? DateTime.Now,
                                                          ValidateVirtualProp = validateVirtualProp ?? DateTime.Now,
                                                          Age = age
-                                                 };
+                                      };
 
                                       if (coreBusinessUnit != null)
                                       {

@@ -21,7 +21,7 @@ public record DeletePrincipalHandler(
     private async Task Delete(Guid id, CancellationToken cancellationToken)
     {
         var domainObject = await this.RepoFactory.Create().LoadAsync(id, cancellationToken);
-        await this.RepoFactory.Create(SpecialRoleSecurityRule.Administrator).RemoveAsync(domainObject, cancellationToken);
+        await this.RepoFactory.Create(SecurityRole.Administrator).RemoveAsync(domainObject, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
             await this.ConfiguratorIntegrationEvents.PrincipalRemovedAsync(domainObject, cancellationToken);

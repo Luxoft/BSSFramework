@@ -8,16 +8,16 @@ public static class SecurityRuleExtensions
 {
     public static SecurityRule.OperationSecurityRule ToSecurityRule(this SecurityOperation securityOperation)
     {
-        return new SecurityRule.OperationSecurityRule(securityOperation) { ExpandType = securityOperation.ExpandType };
+        return new SecurityRule.OperationSecurityRule(securityOperation);
     }
 
-    public static SecurityRule.NonExpandedRolesSecurityRule ToSecurityRule(this IEnumerable<SecurityRole> securityRoles, HierarchicalExpandType expandType = HierarchicalExpandType.Children)
+    public static SecurityRule.NonExpandedRolesSecurityRule ToSecurityRule(this IEnumerable<SecurityRole> securityRoles, HierarchicalExpandType? customExpandType = null)
     {
-        return new SecurityRule.NonExpandedRolesSecurityRule(new DeepEqualsCollection<SecurityRole>(securityRoles.OrderBy(sr => sr.Name))) { ExpandType = expandType };
+        return new SecurityRule.NonExpandedRolesSecurityRule(new DeepEqualsCollection<SecurityRole>(securityRoles.OrderBy(sr => sr.Name))) { CustomExpandType = customExpandType };
     }
 
-    public static SecurityRule.NonExpandedRolesSecurityRule ToSecurityRule(this SecurityRole securityRole, HierarchicalExpandType expandType = HierarchicalExpandType.Children)
+    public static SecurityRule.NonExpandedRolesSecurityRule ToSecurityRule(this SecurityRole securityRole, HierarchicalExpandType? customExpandType = null)
     {
-        return new[] { securityRole }.ToSecurityRule(expandType);
+        return new[] { securityRole }.ToSecurityRule(customExpandType);
     }
 }

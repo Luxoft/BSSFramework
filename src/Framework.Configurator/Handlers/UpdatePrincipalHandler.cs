@@ -24,7 +24,7 @@ public record UpdatePrincipalHandler(
     {
         var domainObject = await this.PrincipalRepoFactory.Create().LoadAsync(id, cancellationToken);
         domainObject.Name = newName;
-        await this.PrincipalRepoFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(domainObject, cancellationToken);
+        await this.PrincipalRepoFactory.Create(SecurityRole.Administrator).SaveAsync(domainObject, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
             await this.ConfiguratorIntegrationEvents.PrincipalChangedAsync(domainObject, cancellationToken);

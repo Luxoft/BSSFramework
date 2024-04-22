@@ -29,9 +29,9 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     private readonly IRepository<Principal> principalRepository;
 
-    private readonly ISecurityRuleExpander securityRuleExpander;
-
     private readonly TimeProvider timeProvider;
+
+    private readonly ISecurityRolesIdentsResolver securityRolesIdentsResolver;
 
     public AuthorizationSystem(
         IAvailablePermissionSource availablePermissionSource,
@@ -42,7 +42,8 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IOperationAccessorFactory operationAccessorFactory,
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
         ISecurityRuleExpander securityRuleExpander,
-        TimeProvider timeProvider)
+        TimeProvider timeProvider,
+        ISecurityRolesIdentsResolver securityRolesIdentsResolver)
     {
         this.availablePermissionSource = availablePermissionSource;
         this.runtimePermissionOptimizationService = runtimePermissionOptimizationService;
@@ -50,8 +51,8 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         this.realTypeResolver = realTypeResolver;
         this.operationAccessorFactory = operationAccessorFactory;
         this.principalRepository = principalRepository;
-        this.securityRuleExpander = securityRuleExpander;
         this.timeProvider = timeProvider;
+        this.securityRolesIdentsResolver = securityRolesIdentsResolver;
 
         this.CurrentPrincipalName = userAuthenticationService.GetUserName();
     }
@@ -78,11 +79,11 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     {
         if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
 
-        var expandedRule = this.securityRuleExpander.FullExpand(securityRule);
+        var securityRoleIdents = this.securityRolesIdentsResolver.Resolve(securityRule);
 
         return this.GetAccessors(
             (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
-            new AvailablePermissionFilter(this.timeProvider.GetToday()) { SecurityRoleIdents = expandedRule.SecurityRoles.ToList(sr => sr.Id) });
+            new AvailablePermissionFilter(this.timeProvider.GetToday()) { SecurityRoleIdents = securityRoleIdents.ToList() });
     }
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
@@ -93,13 +94,10 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
                               .FetchMany(q => q.Restrictions)
                               .ThenFetch(q => q.SecurityContextType)
                               .ToList();
-
-        var securityTypesCache = securityTypes.ToReadOnlyCollection();
-
         return permissions
-               .Select(permission => permission.ToDictionary(this.realTypeResolver, securityTypesCache))
+               .Select(permission => permission.ToDictionary(this.realTypeResolver, securityTypes))
                .Pipe(this.runtimePermissionOptimizationService.Optimize)
-               .ToList(permission => this.TryExpandPermission(permission, securityRule.ExpandType));
+               .ToList(permission => this.TryExpandPermission(permission, securityRule.CustomExpandType!.Value));
     }
 
     public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityRule.DomainObjectSecurityRule securityRule)

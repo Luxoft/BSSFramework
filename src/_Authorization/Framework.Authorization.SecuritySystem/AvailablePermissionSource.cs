@@ -8,42 +8,24 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class AvailablePermissionSource : IAvailablePermissionSource
+public class AvailablePermissionSource(
+    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Permission> permissionRepository,
+    TimeProvider timeProvider,
+    IActualPrincipalSource actualPrincipalSource,
+    IUserAuthenticationService userAuthenticationService,
+    ISecurityRolesIdentsResolver securityRolesIdentsResolver)
+    : IAvailablePermissionSource
 {
-    private readonly IRepository<Permission> permissionRepository;
-
-    private readonly TimeProvider timeProvider;
-
-    private readonly IActualPrincipalSource actualPrincipalSource;
-
-    private readonly IUserAuthenticationService userAuthenticationService;
-
-    private readonly ISecurityRuleExpander securityRuleExpander;
-
-    public AvailablePermissionSource(
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Permission> permissionRepository,
-        TimeProvider timeProvider,
-        IActualPrincipalSource actualPrincipalSource,
-        IUserAuthenticationService userAuthenticationService,
-        ISecurityRuleExpander securityRuleExpander)
-    {
-        this.permissionRepository = permissionRepository;
-        this.timeProvider = timeProvider;
-        this.actualPrincipalSource = actualPrincipalSource;
-        this.userAuthenticationService = userAuthenticationService;
-        this.securityRuleExpander = securityRuleExpander;
-    }
-
     public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, SecurityRule.DomainObjectSecurityRule? securityRule = null, bool applyCurrentUser = true)
     {
         var securityRoleIdents =
             securityRule == null
                 ? null
-                : this.securityRuleExpander.FullExpand(securityRule).SecurityRoles.ToList(sr => sr.Id);
+                : securityRolesIdentsResolver.Resolve(securityRule).ToList();
 
-        var filter = new AvailablePermissionFilter(this.timeProvider.GetToday())
+        var filter = new AvailablePermissionFilter(timeProvider.GetToday())
                      {
-                         PrincipalName = applyCurrentUser ? withRunAs ? this.actualPrincipalSource.ActualPrincipal.Name : this.userAuthenticationService.GetUserName() : null,
+                         PrincipalName = applyCurrentUser ? withRunAs ? actualPrincipalSource.ActualPrincipal.Name : userAuthenticationService.GetUserName() : null,
                          SecurityRoleIdents = securityRoleIdents
                      };
 
@@ -52,6 +34,6 @@ public class AvailablePermissionSource : IAvailablePermissionSource
 
     public IQueryable<Permission> GetAvailablePermissionsQueryable(AvailablePermissionFilter filter)
     {
-        return this.permissionRepository.GetQueryable().Where(filter.ToFilterExpression());
+        return permissionRepository.GetQueryable().Where(filter.ToFilterExpression());
     }
 }

@@ -7,10 +7,6 @@ namespace Framework.SecuritySystem.Rules.Builders;
 
 public abstract class SecurityExpressionBuilderFactoryBase<TIdent> : ISecurityExpressionBuilderFactory
 {
-    protected SecurityExpressionBuilderFactoryBase()
-    {
-    }
-
     public ISecurityExpressionBuilder<TDomainObject> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject> path)
     {
         var func =
@@ -27,17 +23,17 @@ public abstract class SecurityExpressionBuilderFactoryBase<TIdent> : ISecurityEx
 
         var pathType = path.GetType();
 
-        if (path is SecurityPath<TDomainObject>.ConditionPath)
+        if (path is SecurityPath<TDomainObject>.ConditionPath conditionPath)
         {
-            return this.CreateBuilder(path as SecurityPath<TDomainObject>.ConditionPath);
+            return this.CreateBuilder(conditionPath);
         }
-        else if (path is SecurityPath<TDomainObject>.AndSecurityPath)
+        else if (path is SecurityPath<TDomainObject>.AndSecurityPath andSecurityPath)
         {
-            return this.CreateBuilder(path as SecurityPath<TDomainObject>.AndSecurityPath);
+            return this.CreateBuilder(andSecurityPath);
         }
-        else if (path is SecurityPath<TDomainObject>.OrSecurityPath)
+        else if (path is SecurityPath<TDomainObject>.OrSecurityPath securityPath)
         {
-            return this.CreateBuilder(path as SecurityPath<TDomainObject>.OrSecurityPath);
+            return this.CreateBuilder(securityPath);
         }
         else if (pathType.IsGenericTypeImplementation(typeof(SecurityPath<>.NestedManySecurityPath<>)))
         {
@@ -49,19 +45,19 @@ public abstract class SecurityExpressionBuilderFactoryBase<TIdent> : ISecurityEx
 
             var method = func.Method.GetGenericMethodDefinition().MakeGenericMethod(args);
 
-            return method.Invoke(this, new object[] { path }) as ISecurityExpressionBuilder<TDomainObject>;
+            return method.Invoke(this, [path]) as ISecurityExpressionBuilder<TDomainObject>;
         }
         else if (pathType.BaseType.Maybe(baseType => baseType.IsGenericTypeImplementation(typeof(SecurityPath<>))))
         {
             var genericMethod = typeof(SecurityExpressionBuilderFactoryBase<TIdent>).GetMethod(
                 nameof(this.CreateGenericBuilder),
-                BindingFlags.Instance | BindingFlags.NonPublic);
+                BindingFlags.Instance | BindingFlags.NonPublic)!;
 
             var args = pathType.GetGenericArguments().ToArray();
 
             var method = genericMethod.GetGenericMethodDefinition().MakeGenericMethod(args);
 
-            return method.Invoke(this, new object[] { path }) as ISecurityExpressionBuilder<TDomainObject>;
+            return method.Invoke(this, [path]) as ISecurityExpressionBuilder<TDomainObject>;
         }
         else
         {
@@ -74,20 +70,13 @@ public abstract class SecurityExpressionBuilderFactoryBase<TIdent> : ISecurityEx
         where TSecurityContext : class, IIdentityObject<TIdent>, ISecurityContext
         where TDomainObject : class, IIdentityObject<TIdent>
     {
-        if (path == null) throw new ArgumentNullException(nameof(path));
-
-        if (path is SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext>)
+        return path switch
         {
-            return this.CreateBuilder(path as SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext>);
-        }
-        else if (path is SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext>)
-        {
-            return this.CreateBuilder(path as SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext>);
-        }
-        else
-        {
-            throw new ArgumentOutOfRangeException(nameof(path));
-        }
+            null => throw new ArgumentNullException(nameof(path)),
+            SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> manySecurityPath => this.CreateBuilder(manySecurityPath),
+            SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath => this.CreateBuilder(securityPath),
+            _ => throw new ArgumentOutOfRangeException(nameof(path))
+        };
     }
 
     private ISecurityExpressionBuilder<TDomainObject> CreateNestedBuilder<TDomainObject, TNestedObject>(

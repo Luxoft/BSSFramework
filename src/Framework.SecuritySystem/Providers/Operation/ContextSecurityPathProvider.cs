@@ -19,17 +19,17 @@ namespace Framework.SecuritySystem.Providers.Operation
 
 
         public ContextSecurityPathProvider(
-            SecurityPath<TDomainObject> securityPathBase,
+            SecurityPath<TDomainObject> securityPath,
             SecurityRule.DomainObjectSecurityRule securityRule,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
         {
-            if (securityPathBase == null) throw new ArgumentNullException(nameof(securityPathBase));
+            if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
 
             this.securityRule = securityRule ?? throw new ArgumentNullException(nameof(securityRule));
 
-            this.securityExpressionBuilder = securityExpressionBuilderFactory.CreateBuilder(securityPathBase);
+            this.securityExpressionBuilder = securityExpressionBuilderFactory.CreateBuilder(securityPath);
 
-            this.lazyFilter = LazyHelper.Create(() => this.securityExpressionBuilder.GetFilter(securityRule));
+            this.lazyFilter = LazyHelper.Create(() => this.securityExpressionBuilder.GetFilter(securityRule, securityPath.GetUsedTypes()));
             this.injectFilterFunc = LazyHelper.Create(() => this.lazyFilter.Value.InjectFunc);
         }
 

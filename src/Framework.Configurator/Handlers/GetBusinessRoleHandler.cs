@@ -24,6 +24,7 @@ public class GetBusinessRoleHandler(
 
         var operations = roleSource.SecurityRoles
                                    .Single(x => x.Id == roleId)
+                                   .Information
                                    .Operations
                                    .Select(x => new OperationDto { Name = x.Name, Description = x.Description })
                                    .OrderBy(x => x.Name)

@@ -23,7 +23,7 @@ public class GetOperationHandler(
         var operationName = (string)context.Request.RouteValues["name"]!;
 
         var roles = roleSource.SecurityRoles
-                              .Where(x => x.Operations.Any(o => o.Name == operationName))
+                              .Where(x => x.Information.Operations.Any(o => o.Name == operationName))
                               .ToList();
 
         var roleIds = roles.Select(x => x.Id).ToList();

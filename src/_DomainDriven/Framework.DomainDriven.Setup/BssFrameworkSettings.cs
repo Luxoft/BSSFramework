@@ -1,19 +1,14 @@
 ﻿using Framework.Authorization.Notification;
-using Framework.Persistent;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.DependencyInjection;
-using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using Microsoft.Extensions.DependencyInjection;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
+using Framework.SecuritySystem.DependencyInjection;
 
 namespace Framework.DomainDriven.Setup;
 
 public class BssFrameworkSettings : IBssFrameworkSettings
 {
-    public List<Type> SecurityRoleTypes { get; set; } = new();
-
     public List<Type> NamedLockTypes { get; set; } = new();
 
     public bool RegisterBaseNamedLockTypes { get; set; } = true;
@@ -28,14 +23,9 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public Type DomainObjectEventMetadataType { get; private set; }
 
-
-    public SecurityRole AdministratorRole { get; private set; }
-
-    public SecurityRole SystemIntegrationRole { get; private set; }
-
-    public IBssFrameworkSettings AddSecurityRoleTypeType(Type securityRoleType)
+    public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> settings)
     {
-        this.SecurityRoleTypes.Add(securityRoleType);
+        this.RegisterActions.Add(sc => sc.AddSecuritySystem(settings));
 
         return this;
     }
@@ -43,27 +33,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public IBssFrameworkSettings AddNamedLockType(Type namedLockType)
     {
         this.NamedLockTypes.Add(namedLockType);
-
-        return this;
-    }
-
-
-    public IBssFrameworkSettings AddSecurityContext<TSecurityContext>(Guid ident, string name = null, Func<TSecurityContext, string> displayFunc = null)
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
-    {
-        return this.AddSecurityContext(b => b.Add(ident, name, displayFunc));
-    }
-
-    public IBssFrameworkSettings AddSecurityContext(Action<ISecurityContextInfoBuilder<Guid>> setup)
-    {
-        this.RegisterActions.Add(sc => sc.RegisterSecurityContextInfoService(setup));
-
-        return this;
-    }
-
-    public IBssFrameworkSettings AddDomainSecurityServices(Action<IDomainSecurityServiceRootBuilder> setup)
-    {
-        this.RegisterActions.Add(sc => sc.RegisterDomainSecurityServices<Guid>(setup));
 
         return this;
     }
@@ -95,20 +64,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         where T : IDomainObjectEventMetadata
     {
         this.DomainObjectEventMetadataType = typeof(T);
-
-        return this;
-    }
-
-    public IBssFrameworkSettings SetAdministratorRole(SecurityRole securityRole)
-    {
-        this.AdministratorRole = securityRole;
-
-        return this;
-    }
-
-    public IBssFrameworkSettings SetSystemIntegrationRole(SecurityRole securityRole)
-    {
-        this.SystemIntegrationRole = securityRole;
 
         return this;
     }

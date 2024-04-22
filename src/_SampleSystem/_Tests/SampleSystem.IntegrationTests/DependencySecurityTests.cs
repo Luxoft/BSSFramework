@@ -2,12 +2,13 @@
 
 using FluentAssertions;
 
+using Framework.SecuritySystem;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
-using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
@@ -44,7 +45,7 @@ public class DependencySecurityTests : TestBase
 
         this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SampleSystemSecurityRole.Administrator, this.bu2Ident, null, null));
+        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SecurityRole.Administrator, this.bu2Ident, null, null));
 
         this.EvaluateWrite(
                            context =>

@@ -21,6 +21,6 @@ public class OperationController : ControllerBase
     {
         var roles = await this.availableSecurityRoleSource.GetAvailableSecurityRole(cancellationToken);
 
-        return roles.SelectMany(sr => sr.Operations).Distinct().Select(op => op.Name);
+        return roles.SelectMany(sr => sr.Information.Operations).Distinct().Select(op => op.Name);
     }
 }

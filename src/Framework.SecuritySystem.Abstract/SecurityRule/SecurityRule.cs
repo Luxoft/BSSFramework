@@ -1,5 +1,6 @@
-﻿using Framework.Core;
+﻿#nullable enable
 
+using Framework.Core;
 using Framework.HierarchicalExpand;
 
 namespace Framework.SecuritySystem;
@@ -41,7 +42,8 @@ public abstract record SecurityRule
         /// <summary>
         /// Тип разворачивания деревьев (как правило для просмотра самого дерева выбирается HierarchicalExpandType.All)
         /// </summary>
-        public HierarchicalExpandType ExpandType { get; init; } = HierarchicalExpandType.Children;
+        public HierarchicalExpandType? CustomExpandType { get; init; } = null;
+
 
         public static implicit operator DomainObjectSecurityRule(SecurityOperation securityOperation)
         {
@@ -67,7 +69,7 @@ public abstract record SecurityRule
     {
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
-                                                 : $"SecurityRoles: {this.SecurityRoles.Join(", ", sr => sr.Name)}";
+                                                 : $"{nameof(this.SecurityRoles)}: {this.SecurityRoles.Join(", ", sr => sr.Name)}";
     }
 
     /// <summary>
@@ -78,6 +80,17 @@ public abstract record SecurityRule
     {
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
-                                                 : $"SecurityRoles: {this.SecurityRoles.Join(", ", sr => sr.Name)}";
+                                                 : $"{nameof(this.SecurityRoles)}: {this.SecurityRoles.Join(", ", sr => sr.Name)}";
+    }
+
+    /// <summary>
+    /// Композитное правило
+    /// </summary>
+    /// <param name="Children"></param>
+    public record CompositeSecurityRule(DeepEqualsCollection<DomainObjectSecurityRule> Children) : DomainObjectSecurityRule
+    {
+        public override string ToString() => this.Children.Count == 1
+                                                 ? this.Children.Single().ToString()
+                                                 : $"{nameof(this.Children)}: {this.Children.Join(", ")}";
     }
 }

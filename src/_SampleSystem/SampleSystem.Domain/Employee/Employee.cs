@@ -86,6 +86,8 @@ public partial class Employee :
     [NotPersistentField]
     private DateTime validateVirtualField = DateTime.Now;
 
+
+
     public virtual DateTime NonValidateVirtualProp
     {
         get { return this.nonValidateVirtualField; }

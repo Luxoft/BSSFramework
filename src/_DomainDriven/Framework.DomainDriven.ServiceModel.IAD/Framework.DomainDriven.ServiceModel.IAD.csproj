@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj" />

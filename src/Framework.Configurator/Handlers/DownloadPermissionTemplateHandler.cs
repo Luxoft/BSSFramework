@@ -20,7 +20,7 @@ public record DownloadPermissionTemplateHandler(
 
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.OperationAccessor.CheckAccess(SpecialRoleSecurityRule.Administrator);
+        this.OperationAccessor.CheckAccess(SecurityRole.Administrator);
 
         var contexts = await this.RepositoryFactory
                                  .Create()

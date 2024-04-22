@@ -2,6 +2,8 @@
 
 using DotNetCore.CAP;
 
+using Framework.SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
@@ -9,7 +11,6 @@ using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
-using SampleSystem.Security;
 using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;
@@ -33,8 +34,8 @@ public class TestDataInitialize : RootServiceProviderContainer<ISampleSystemBLLC
 
         this.AuthHelper.AddCurrentUserToAdmin();
 
-        this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, SampleSystemSecurityRole.SystemIntegration);
-        this.AuthHelper.SetUserRole(DefaultConstants.INTEGRATION_USER, SampleSystemSecurityRole.SystemIntegration);
+        this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, SecurityRole.SystemIntegration);
+        this.AuthHelper.SetUserRole(DefaultConstants.INTEGRATION_USER, SecurityRole.SystemIntegration);
 
         this.DataHelper.SaveCountry(
                                     id: DefaultConstants.COUNTRY_RUSSIA_ID,

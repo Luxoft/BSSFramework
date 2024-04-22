@@ -2811,6 +2811,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestPlainAuthObjectValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestRestrictionObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestRestrictionObjectValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestRootSecurityObjValidationMap()));
@@ -3960,6 +3964,39 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestPlainAuthObject>(this.GetTestPlainAuthObjectProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRestrictionObject, System.DateTime?>> GetTestRestrictionObject_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestRestrictionObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRestrictionObject, string>> GetTestRestrictionObject_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestRestrictionObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRestrictionObject, string>> GetTestRestrictionObject_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestRestrictionObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRestrictionObject, System.DateTime?>> GetTestRestrictionObject_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestRestrictionObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TestRestrictionObject>> GetTestRestrictionObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestRestrictionObject> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRestrictionObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetTestRestrictionObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRestrictionObject, string>(source => source.CreatedBy, currentClass, this.GetTestRestrictionObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRestrictionObject, string>(source => source.ModifiedBy, currentClass, this.GetTestRestrictionObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRestrictionObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestRestrictionObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestRestrictionObject> GetTestRestrictionObjectValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestRestrictionObject>(this.GetTestRestrictionObjectProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRootSecurityObj, System.DateTime?>> GetTestRootSecurityObj_CreateDateValidators()

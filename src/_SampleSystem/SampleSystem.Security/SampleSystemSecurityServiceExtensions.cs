@@ -1,6 +1,7 @@
-﻿using Framework.DomainDriven.ServiceModel.IAD;
+﻿using Framework.Core;
+using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.SecuritySystem;
-using Framework.DomainDriven.Setup;
+using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using SampleSystem.Domain;
@@ -14,7 +15,66 @@ namespace SampleSystem.Security;
 
 public static class SampleSystemSecurityServiceExtensions
 {
-    public static IBssFrameworkSettings AddDomainSecurityServices(this IBssFrameworkSettings settings)
+    public static ISecuritySystemSettings AddSecurityRoles(this ISecuritySystemSettings settings)
+    {
+        return settings
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.SecretariatNotification,
+                   new SecurityRoleInfo(new Guid("8fd79f66-218a-47bc-9649-a07500fa6d11")))
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.SeManager,
+                   new SecurityRoleInfo(new Guid("dbf3556d-7106-4175-b5e4-a32d00bd857a"))
+                   {
+                       Operations = [SampleSystemSecurityOperation.EmployeeView]
+                   })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.TestRole1,
+                   new SecurityRoleInfo(new Guid("{597AAB2A-76F7-42CF-B606-3D4550062596}"))
+                   {
+                       Operations = [SampleSystemSecurityOperation.EmployeeView]
+                   })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.TestRole2,
+                   new SecurityRoleInfo(new Guid("{AD5EC94F-CC3D-451B-9051-B83059707E11}"))
+                   {
+                       Operations = [SampleSystemSecurityOperation.EmployeePositionView]
+                   })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.TestRole3,
+                   new SecurityRoleInfo(new Guid("{B1B30E65-36BF-4ED1-9BD1-E614BA349507}"))
+                   {
+                       Operations = [SampleSystemSecurityOperation.EmployeeEdit]
+                   })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.SearchTestBusinessRole,
+                   new SecurityRoleInfo(new Guid("{05271C71-7E6B-430A-9EC7-F838845D0F33}")))
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.RestrictionRole,
+                   new SecurityRoleInfo(new Guid("{ACAA7B42-09AA-438A-B6EC-058506E0C103}"))
+                   {
+                       Restriction = SecurityPathRestriction.Create((TestRestrictionObject v) => v.RestrictionHandler)
+                   })
+
+               .AddSecurityRole(
+                   SecurityRole.SystemIntegration,
+                   new SecurityRoleInfo(new Guid("df74d544-5945-4380-944e-a3a9001252be")))
+
+               .AddSecurityRole(
+                   SecurityRole.Administrator,
+                   new SecurityRoleInfo(new Guid("d9c1d2f0-0c2f-49ab-bb0b-de13a456169e"))
+                   {
+                       Operations = typeof(SampleSystemSecurityOperation).GetStaticPropertyValueList<SecurityOperation>().ToList()
+                   });
+    }
+
+
+    public static ISecuritySystemSettings AddDomainSecurityServices(this ISecuritySystemSettings settings)
     {
         return settings.RegisterMainDomainSecurityServices()
                        .RegisterDisabledDomainSecurityServices()
@@ -24,7 +84,7 @@ public static class SampleSystemSecurityServiceExtensions
                        .AddExtensions(new ProjectionDomainSecurityBssFrameworkExtension(typeof(TestManualEmployeeProjection).Assembly));
     }
 
-    private static IBssFrameworkSettings RegisterMainDomainSecurityServices(this IBssFrameworkSettings settings)
+    private static ISecuritySystemSettings RegisterMainDomainSecurityServices(this ISecuritySystemSettings settings)
     {
         return settings.AddDomainSecurityServices(
 
@@ -32,7 +92,7 @@ public static class SampleSystemSecurityServiceExtensions
 
                 rb.AddMetadata<SampleSystemEmployeeDomainSecurityServiceMetadata>()
 
-                  .Add(new[] { SampleSystemSecurityRole.Administrator, SampleSystemSecurityRole.SeManager },
+                  .Add(new[] { SecurityRole.Administrator, SampleSystemSecurityRole.SeManager },
                        SampleSystemSecurityOperation.BusinessUnitEdit,
                        SecurityPath<BusinessUnit>.Create(fbu => fbu))
 
@@ -144,6 +204,8 @@ public static class SampleSystemSecurityServiceExtensions
                       b => b.SetView(SampleSystemSecurityOperation.LocationView)
                             .SetEdit(SampleSystemSecurityOperation.LocationEdit))
 
+                  .Add<TestRestrictionObject>(SampleSystemSecurityRole.RestrictionRole)
+
                   .Add<TestCustomContextSecurityObj>(b => b.SetCustomService<SampleSystemTestCustomContextSecurityObjSecurityService>())
 
                   .Add<TestSecurityObjItem>(b => b.SetDependency(v => v.FirstMaster))
@@ -153,7 +215,7 @@ public static class SampleSystemSecurityServiceExtensions
             );
     }
 
-    private static IBssFrameworkSettings RegisterDisabledDomainSecurityServices(this IBssFrameworkSettings settings)
+    private static ISecuritySystemSettings RegisterDisabledDomainSecurityServices(this ISecuritySystemSettings settings)
     {
         return settings.AddDomainSecurityServices(
 
@@ -173,7 +235,7 @@ public static class SampleSystemSecurityServiceExtensions
             );
     }
 
-    private static IBssFrameworkSettings RegisterLegacyProjectionDomainSecurityServices(this IBssFrameworkSettings settings)
+    private static ISecuritySystemSettings RegisterLegacyProjectionDomainSecurityServices(this ISecuritySystemSettings settings)
     {
         return settings.AddDomainSecurityServices(
 

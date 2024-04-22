@@ -17,7 +17,7 @@ public record CreatePrincipalHandler(
         var name = await this.ParseRequestBodyAsync<string>(context);
         var principal = new Principal { Name = name };
 
-        await this.RepoFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(principal, cancellationToken);
+        await this.RepoFactory.Create(SecurityRole.Administrator).SaveAsync(principal, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
             await this.ConfiguratorIntegrationEvents.PrincipalCreatedAsync(principal, cancellationToken);

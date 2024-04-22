@@ -11,6 +11,7 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
+using Framework.SecuritySystem;
 using Framework.UnitTesting;
 using NUnit.Framework;
 using NSubstitute;
@@ -87,7 +88,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
     {
         // Arrange
         var businessRole = this.Fixture.Create<SubBusinessRole>();
-        var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
+        var businessRoleIds = new[] { businessRole.SecurityRole };
 
         var versions = this.Fixture.Create<DomainObjectVersions<string>>();
         var fid = new FilterItemIdentity("name", Guid.NewGuid());
@@ -109,7 +110,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 
         this.configurationContextFacade
             .GetNotificationPrincipals(
-                                       Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)),
+                                       Arg.Is<SecurityRole[]>(v => v.SequenceEqual(businessRoleIds)),
                                        Arg.Is<IEnumerable<NotificationFilterGroup>>(v => v != null))
             .Returns(principals);
 
@@ -145,7 +146,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
         var versions = this.Fixture.Create<DomainObjectVersions<string>>();
 
         var businessRole = this.Fixture.Create<SubBusinessRole>();
-        var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
+        var businessRoleIds = new[] { businessRole.SecurityRole };
 
         var principals = new[] { this.Fixture.Create<Principal>() };
         var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
@@ -161,7 +162,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
         ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
 
         this.configurationContextFacade
-            .GetNotificationPrincipals(Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)))
+            .GetNotificationPrincipals(Arg.Is<SecurityRole[]>(v => v.SequenceEqual(businessRoleIds)))
             .Returns(principals);
 
         this.configurationContextFacade
@@ -198,7 +199,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
                                .Create();
 
         var businessRole = this.Fixture.Build<SubBusinessRole>().With(item => item.Subscription, subscription).Create();
-        var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
+        var businessRoleIds = new[] { businessRole.SecurityRole };
 
         var identityObject = this.Fixture.Create<IdentityObject>();
 
@@ -211,7 +212,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 
         this.configurationContextFacade
             .GetNotificationPrincipals(
-                                       Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)),
+                                       Arg.Is<SecurityRole[]>(v => v.SequenceEqual(businessRoleIds)),
                                        Arg.Is<IEnumerable<NotificationFilterGroup>>(v => v != null))
             .Returns(principals);
 
@@ -244,7 +245,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
                                .Create();
 
         var businessRole = this.Fixture.Create<SubBusinessRole>();
-        var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
+        var businessRoleIds = new[] { businessRole.SecurityRole };
 
         var identityObject = this.Fixture.Create<IdentityObject>();
 
@@ -270,7 +271,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 
         this.configurationContextFacade
             .GetNotificationPrincipals(
-                                       Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)),
+                                       Arg.Is<SecurityRole[]>(v => v.SequenceEqual(businessRoleIds)),
                                        Arg.Is<IEnumerable<NotificationFilterGroup>>(z => z != null))
             .Returns(principals);
 

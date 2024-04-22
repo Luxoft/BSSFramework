@@ -12,8 +12,6 @@ namespace Framework.Authorization.Domain;
 [DomainType("{3823172C-B703-46FD-A82F-B55833EBCD38}")]
 [UniqueGroup]
 [BLLViewRole]
-[BLLSaveRole]
-[BLLRemoveRole]
 public class BusinessRole : BaseDirectory
 {
     private readonly ICollection<Permission> permissions = new List<Permission>();

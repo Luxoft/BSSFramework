@@ -1,5 +1,4 @@
-﻿using Framework.Authorization;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Environment;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.DomainServices;
@@ -7,7 +6,6 @@ using Framework.Authorization.SecuritySystem.ExternalSource;
 
 using Framework.Authorization.SecuritySystem.Initialize;
 using Framework.Authorization.SecuritySystem.PermissionOptimization;
-using Framework.Configuration;
 using Framework.Configuration.Domain;
 using Framework.Configuration.NamedLocks;
 using Framework.Core.Services;
@@ -19,11 +17,10 @@ using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 using Framework.Events;
 using Framework.FinancialYear;
-using Framework.HierarchicalExpand;
+using Framework.HierarchicalExpand.DependencyInjection;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
-using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -130,12 +127,6 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    private static IServiceCollection RegisterHierarchicalObjectExpander(this IServiceCollection services)
-    {
-        return services.AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
-                       .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<Guid>>();
-    }
-
     private static IServiceCollection RegisterNamedLocks(this IServiceCollection services)
     {
         return services
@@ -149,10 +140,8 @@ public static class ServiceCollectionExtensions
         return services.AddScoped<IAuthorizationSystem<Guid>, AuthorizationSystem>()
                        .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
                        .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>()
+                       .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
 
-                       .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
-
-                       .AddScoped(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>))
 
                        .AddScoped<IRunAsManager, RunAsManger>()
@@ -166,30 +155,14 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IQueryableSource, RepositoryQueryableSource>()
 
-                       .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.
-                           SecurityExpressionBuilderFactory<Guid>>()
-
-
-                       .AddSingleton<SecurityModeExpander>()
-                       .AddSingleton<SpecialRoleSecurityRuleExpander>()
-                       .AddSingleton<SecurityOperationExpander>()
-                       .AddSingleton<SecurityRoleExpander>()
-
-                       .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
-
-                       .AddSingleton<ISecurityRoleParser, SecurityRoleParser>()
-
                        .AddScoped<IBusinessRoleDomainService, BusinessRoleDomainService>()
-
                        .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
 
-                       .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 
                        .AddSingleton<InitializeSettings>()
                        .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
-                       .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
 
                        .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>();
     }
@@ -199,18 +172,18 @@ public static class ServiceCollectionExtensions
     {
         return services.RegisterDomainSecurityServices<Guid>(
                            rb => rb.Add<Principal>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator)
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator)
                                              .SetCustomService<AuthorizationPrincipalSecurityService>())
 
                                    .Add<Permission>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator)
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator)
                                              .SetCustomService<AuthorizationPermissionSecurityService>())
 
                                    .Add<BusinessRole>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator)
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator)
                                              .SetCustomService<AuthorizationBusinessRoleSecurityService>())
 
                                    .Add<SecurityContextType>(
@@ -221,23 +194,23 @@ public static class ServiceCollectionExtensions
     {
         return services.RegisterDomainSecurityServices<Guid>(
                            rb => rb.Add<ExceptionMessage>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator))
+                                       b => b.SetView(SecurityRole.Administrator))
 
                                    .Add<Sequence>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator))
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
                                    .Add<SystemConstant>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator))
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
                                    .Add<CodeFirstSubscription>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator))
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
                                    .Add<TargetSystem>(
-                                       b => b.SetView(SpecialRoleSecurityRule.Administrator)
-                                             .SetEdit(SpecialRoleSecurityRule.Administrator))
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
                                    .Add<DomainType>(
                                        b => b.SetView(SecurityRule.Disabled)));

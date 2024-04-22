@@ -1172,6 +1172,20 @@
       <one-to-many class="SampleSystem.Domain.TestItemAuthObject" />
     </set>
   </class>
+  <class name="SampleSystem.Domain.TestRestrictionObject" table="TestRestrictionObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="RestrictionHandler" column="restrictionHandler" access="field.camelcase" />
+  </class>
   <class name="SampleSystem.Domain.TestRootSecurityObj" table="TestRootSecurityObj">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

@@ -2,7 +2,6 @@
 
 using Framework.CodeDom;
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -18,9 +17,8 @@ namespace Framework.DomainDriven.BLLCoreGenerator
 
             this.DomainTypeReference = genericTypes.FirstOr(() => this.DomainType.ToTypeReference());
 
-            this.BaseServiceType = typeof(ContextDomainSecurityServiceBase<,>).ToTypeReference(
-                this.DomainTypeReference,
-                this.Configuration.Environment.GetIdentityType().ToTypeReference());
+            this.BaseServiceType = typeof(ContextDomainSecurityServiceBase<>).ToTypeReference(
+                this.DomainTypeReference);
         }
 
 

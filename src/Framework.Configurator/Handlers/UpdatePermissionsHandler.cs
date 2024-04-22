@@ -42,7 +42,7 @@ public record UpdatePermissionsHandler(
         await this.UpdatePermissionsAsync(mergeResult.CombineItems, cancellationToken);
         principal.RemoveDetails(mergeResult.RemovingItems);
 
-        await this.PrincipalRepositoryFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(principal, cancellationToken);
+        await this.PrincipalRepositoryFactory.Create(SecurityRole.Administrator).SaveAsync(principal, cancellationToken);
         if (this.ConfiguratorIntegrationEvents != null)
             foreach (var removingItem in mergeResult.RemovingItems)
                 await this.ConfiguratorIntegrationEvents.PermissionRemovedAsync(removingItem, cancellationToken);
@@ -60,7 +60,7 @@ public record UpdatePermissionsHandler(
                                  Active = true
                              };
 
-            await this.PermissionRepositoryFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(permission, token);
+            await this.PermissionRepositoryFactory.Create(SecurityRole.Administrator).SaveAsync(permission, token);
 
             foreach (var context in dto.Contexts)
             {
@@ -108,7 +108,7 @@ public record UpdatePermissionsHandler(
 
             item.Item1.RemoveDetails(mergeResult.RemovingItems);
 
-            await this.PermissionRepositoryFactory.Create(SpecialRoleSecurityRule.Administrator).SaveAsync(item.Item1, token);
+            await this.PermissionRepositoryFactory.Create(SecurityRole.Administrator).SaveAsync(item.Item1, token);
 
             if (this.ConfiguratorIntegrationEvents != null)
                 await this.ConfiguratorIntegrationEvents.PermissionChangedAsync(item.Item1, token);

@@ -954,6 +954,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestPlainAuthObjectContainer(rule)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRestrictionObject)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRestrictionObjectContainer(rule)));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRootSecurityObjContainer(rule)));
@@ -2808,6 +2812,30 @@ namespace SampleSystem.BLL
                     fetchRootRule => fetchRootRule.SelectMany(testPlainAuthObject => testPlainAuthObject.Items).SelectNested(testItemAuthObject => testItemAuthObject.BusinessUnit),
                     fetchRootRule => fetchRootRule.SelectMany(testPlainAuthObject => testPlainAuthObject.Items).SelectNested(testItemAuthObject => testItemAuthObject.ManagementUnit),
                     fetchRootRule => fetchRootRule.SelectNested(testPlainAuthObject => testPlainAuthObject.Location).SelectMany(location => location.Children));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestRestrictionObject> GetTestRestrictionObjectContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestRestrictionObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestRestrictionObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestRestrictionObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestRestrictionObject>.Empty;
             }
             else
             {

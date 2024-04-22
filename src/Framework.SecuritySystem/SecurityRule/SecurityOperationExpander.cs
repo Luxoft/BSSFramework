@@ -14,7 +14,7 @@ public class SecurityOperationExpander
             securityRule =>
             {
                 var securityRoles = securityRoleSource.SecurityRoles
-                                                      .Where(sr => sr.Operations.Contains(securityRule.SecurityOperation))
+                                                      .Where(sr => sr.Information.Operations.Contains(securityRule.SecurityOperation))
                                                       .Distinct()
                                                       .ToArray();
 
@@ -23,7 +23,7 @@ public class SecurityOperationExpander
                     throw new Exception($"No security roles found for operation \"{securityRule.SecurityOperation}\"");
                 }
 
-                return securityRoles.ToSecurityRule(securityRule.ExpandType);
+                return securityRoles.ToSecurityRule(securityRule.CustomExpandType);
             }).WithLock();
     }
 

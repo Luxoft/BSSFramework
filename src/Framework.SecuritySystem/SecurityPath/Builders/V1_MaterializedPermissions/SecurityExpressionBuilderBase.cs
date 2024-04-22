@@ -21,9 +21,9 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.DomainObjectSecurityRule securityRule)
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.DomainObjectSecurityRule securityRule, IEnumerable<Type> securityTypes)
     {
-        return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule);
+        return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule, securityTypes);
     }
 
 
@@ -32,8 +32,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
     public abstract Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(
         TDomainObject domainObject,
         HierarchicalExpandType expandType);
-
-    public abstract IEnumerable<Type> GetUsedTypes();
 
     public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(
         List<Dictionary<Type, IEnumerable<TIdent>>> permissions)
@@ -65,12 +63,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                                             TPath path) : base(factory)
     {
         this.Path = path ?? throw new ArgumentNullException(nameof(path));
-    }
-
-
-    public override IEnumerable<Type> GetUsedTypes()
-    {
-        return this.Path.GetUsedTypes();
     }
 
 

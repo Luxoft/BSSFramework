@@ -1,10 +1,9 @@
 ﻿using FluentAssertions;
 
-using Framework.HierarchicalExpand;
+using Framework.DependencyInjection;
+using Framework.HierarchicalExpand.DependencyInjection;
 using Framework.QueryableSource;
 using Framework.SecuritySystem.DependencyInjection;
-using Framework.SecuritySystem.Rules.Builders;
-using V1 = Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,16 +13,20 @@ using Xunit;
 
 namespace Framework.SecuritySystem.DiTests;
 
-public class MainTests
+public partial class MainTests
 {
     private readonly BusinessUnit bu1;
+
     private readonly BusinessUnit bu2;
+
     private readonly BusinessUnit bu3;
 
     private readonly List<Dictionary<Type, List<Guid>>> permissions;
 
     private readonly Employee employee1;
+
     private readonly Employee employee2;
+
     private readonly Employee employee3;
 
     private readonly IServiceProvider rootServiceProvider;
@@ -34,13 +37,7 @@ public class MainTests
         this.bu2 = new BusinessUnit() { Id = Guid.NewGuid(), Parent = this.bu1 };
         this.bu3 = new BusinessUnit() { Id = Guid.NewGuid() };
 
-        this.permissions = new List<Dictionary<Type, List<Guid>>>
-                           {
-                                   new()
-                                   {
-                                           { typeof(BusinessUnit), new [] { this.bu1.Id }.ToList() }
-                                   }
-                           };
+        this.permissions = new List<Dictionary<Type, List<Guid>>> { new() { { typeof(BusinessUnit), new[] { this.bu1.Id }.ToList() } } };
 
 
         this.employee1 = new Employee() { Id = Guid.NewGuid(), BusinessUnit = this.bu1 };
@@ -97,39 +94,47 @@ public class MainTests
     {
         return new ServiceCollection()
 
+               .RegisterHierarchicalObjectExpander()
+
                .AddScoped<BusinessUnitAncestorLinkSourceExecuteCounter>()
 
                .AddScoped(this.BuildQueryableSource)
                .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
 
-               .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
-               .AddScoped(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
-
-               .AddScoped<ISecurityExpressionBuilderFactory, V1.SecurityExpressionBuilderFactory<Guid>>()
                .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()
-               .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<Guid>>()
 
-               .RegisterDomainSecurityServices<Guid>(
-                   rb =>
-                       rb.Add<Employee>(
-                           b => b.SetView(ExampleSecurityOperation.EmployeeView)
-                                 .SetEdit(ExampleSecurityOperation.EmployeeEdit)
-                                 .SetPath(SecurityPath<Employee>.Create(v => v.BusinessUnit))))
+               .AddSecuritySystem(
+                   settings =>
 
-               .AddSingleton<SecurityModeExpander>()
-               .AddSingleton<SecurityOperationExpander>()
-               .AddSingleton<SpecialRoleSecurityRuleExpander>()
-               .AddSingleton<SecurityRoleExpander>()
-               .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
+                       settings.AddDomainSecurityServices(
+                                   rb =>
+                                       rb.Add<Employee>(
+                                           b => b.SetView(ExampleSecurityOperation.EmployeeView)
+                                                 .SetEdit(ExampleSecurityOperation.EmployeeEdit)
+                                                 .SetPath(SecurityPath<Employee>.Create(v => v.BusinessUnit))))
 
-               .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
+                               .AddSecurityContext<BusinessUnit>(Guid.NewGuid())
+                               .AddSecurityContext<Location>(Guid.NewGuid())
 
-               .AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
+                               .AddSecurityRole(
+                                   ExampleSecurityRole.TestRole,
+                                   new SecurityRoleInfo(Guid.NewGuid())
+                                   {
+                                       Children = [ExampleSecurityRole.TestRole2],
+                                       Operations = [ExampleSecurityOperation.EmployeeView, ExampleSecurityOperation.EmployeeEdit]
+                                   })
 
-               .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
-               .RegisterSecurityContextInfoService<Guid>(b => b.Add<BusinessUnit>(Guid.NewGuid()))
+                               .AddSecurityRole(
+                                   ExampleSecurityRole.TestRole2,
+                                   new SecurityRoleInfo(Guid.NewGuid()) { Children = [ExampleSecurityRole.TestRole3] })
 
-               .AddSingleton(new SecurityRoleTypeInfo(typeof(ExampleSecurityRole)))
+                               .AddSecurityRole(ExampleSecurityRole.TestRole3, new SecurityRoleInfo(Guid.NewGuid()))
+
+                               .AddSecurityRole(SecurityRole.Administrator, new SecurityRoleInfo(Guid.NewGuid()))
+
+                   )
+
+               .ValidateDuplicateDeclaration()
 
                .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }
@@ -138,7 +143,8 @@ public class MainTests
     {
         var queryableSource = Substitute.For<IQueryableSource>();
 
-        queryableSource.GetQueryable<BusinessUnitAncestorLink>().Returns(this.GetBusinessUnitAncestorLinkSource(serviceProvider).AsQueryable());
+        queryableSource.GetQueryable<BusinessUnitAncestorLink>()
+                       .Returns(this.GetBusinessUnitAncestorLinkSource(serviceProvider).AsQueryable());
         queryableSource.GetQueryable<Employee>().Returns(new[] { this.employee1, this.employee2, this.employee3 }.AsQueryable());
 
         return queryableSource;

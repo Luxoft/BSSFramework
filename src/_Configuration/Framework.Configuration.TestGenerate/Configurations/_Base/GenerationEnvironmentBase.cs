@@ -14,7 +14,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
     {
     }
 
-    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SpecialRoleSecurityRule) };
+    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SecurityRole) };
 
     public override Type OperationContextType { get; } = typeof(ConfigurationOperationContext);
 }

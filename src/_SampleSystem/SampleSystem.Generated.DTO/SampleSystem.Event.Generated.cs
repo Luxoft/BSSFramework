@@ -8318,6 +8318,9 @@ namespace SampleSystem.Generated.DTO
         public bool Active;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime? CreateDate;
         
         [System.Runtime.Serialization.DataMemberAttribute()]

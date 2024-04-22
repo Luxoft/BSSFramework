@@ -52,6 +52,18 @@ public class TestRestrictionRoleTests : TestBase
     }
 
     [TestMethod]
+    public void TryCreateEmptyPermission_PermissionCreated()
+    {
+        // Arrange
+
+        // Act
+        var action = () => this.AuthHelper.SetCurrentUserRole(SampleSystemSecurityRole.RestrictionRole);
+
+        // Assert
+        action.Should().NotThrow();
+    }
+
+    [TestMethod]
     public void TryCreatePermissionWithCorrectSecurityContext_PermissionCreated()
     {
         // Arrange

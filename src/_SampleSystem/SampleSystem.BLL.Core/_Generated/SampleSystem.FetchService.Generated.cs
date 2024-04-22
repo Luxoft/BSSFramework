@@ -2831,11 +2831,11 @@ namespace SampleSystem.BLL
             }
             else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestRestrictionObject>.Empty;
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestRestrictionObject>(fetchRootRule => fetchRootRule.SelectNested(testRestrictionObject => testRestrictionObject.BusinessUnit));
             }
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestRestrictionObject>.Empty;
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestRestrictionObject>(fetchRootRule => fetchRootRule.SelectNested(testRestrictionObject => testRestrictionObject.BusinessUnit));
             }
             else
             {

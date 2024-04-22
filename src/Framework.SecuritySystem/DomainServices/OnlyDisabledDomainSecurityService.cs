@@ -1,6 +1,4 @@
-﻿using Framework.SecuritySystem;
-
-namespace Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
+﻿namespace Framework.SecuritySystem;
 
 public class OnlyDisabledDomainSecurityService<TDomainObject> : IDomainSecurityService<TDomainObject>
 {

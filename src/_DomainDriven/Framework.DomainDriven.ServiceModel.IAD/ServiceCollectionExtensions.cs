@@ -14,7 +14,6 @@ using Framework.DomainDriven.ImpersonateService;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
-using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 using Framework.Events;
 using Framework.FinancialYear;
 using Framework.HierarchicalExpand.DependencyInjection;
@@ -137,12 +136,10 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScoped<IAuthorizationSystem<Guid>, AuthorizationSystem>()
-                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
-                       .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>()
-                       .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
+        return services.AddScoped<IQueryableSource, RepositoryQueryableSource>()
+                       .AddScoped<IAuthorizationSystem<Guid>, AuthorizationSystem>()
 
-                       .AddScoped(typeof(IDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>))
+                       .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
 
                        .AddScoped<IRunAsManager, RunAsManger>()
                        .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
@@ -150,19 +147,16 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IActualPrincipalSource, ActualPrincipalSource>()
                        .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
                        .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
+                       .AddScoped<IPermissionValidator, PermissionValidator>()
 
                        .AddScoped<IOperationAccessorFactory, OperationAccessorFactory>()
-
-                       .AddScoped<IQueryableSource, RepositoryQueryableSource>()
 
                        .AddScoped<IBusinessRoleDomainService, BusinessRoleDomainService>()
                        .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
 
-
-                       .AddSingleton<InitializeSettings>()
+                       .AddSingleton<InitializerSettings>()
                        .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
-
 
                        .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>();
     }

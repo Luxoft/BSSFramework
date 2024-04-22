@@ -15,24 +15,6 @@ namespace Framework.Authorization.WebApi
     {
         
         /// <summary>
-        /// Create BusinessRole by model (BusinessRoleCreateModel)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CreateBusinessRole))]
-        public virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO CreateBusinessRole([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleCreateModelStrictDTO businessRoleCreateModel)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CreateBusinessRoleInternal(businessRoleCreateModel, evaluateData));
-        }
-        
-        protected virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO CreateBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleCreateModelStrictDTO businessRoleCreateModel, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
-        {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Framework.SecuritySystem.SecurityRule.Edit);
-            Framework.Authorization.Domain.BusinessRoleCreateModel createModel = businessRoleCreateModel.ToDomainObject(evaluateData.MappingService);
-            Framework.Authorization.Domain.BusinessRole domainObject = bll.Create(createModel);
-            bll.CheckAccess(domainObject);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
         /// Get BusinessRole (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullBusinessRole))]

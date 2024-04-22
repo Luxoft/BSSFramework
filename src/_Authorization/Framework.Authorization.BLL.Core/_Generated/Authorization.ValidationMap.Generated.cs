@@ -53,11 +53,6 @@ namespace Framework.Authorization.BLL
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.BusinessRole, string>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.BusinessRoleCreateModel> GetBusinessRoleCreateModelValidationMap()
-        {
-            return Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.BusinessRoleCreateModel>.Empty;
-        }
-        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.BusinessRole>> GetBusinessRoleProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.BusinessRole> currentClass)
         {
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.BusinessRole, System.DateTime?>(source => source.CreateDate, currentClass, this.GetBusinessRole_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
@@ -127,10 +122,6 @@ namespace Framework.Authorization.BLL
             if ((typeof(TSource) == typeof(Framework.Authorization.Domain.BusinessRole)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetBusinessRoleValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.BusinessRoleCreateModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetBusinessRoleCreateModelValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.BusinessRoleRootFilterModel)))
             {

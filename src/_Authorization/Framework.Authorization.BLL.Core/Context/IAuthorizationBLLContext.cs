@@ -19,6 +19,8 @@ public partial interface IAuthorizationBLLContext :
 {
     string CurrentPrincipalName => this.AuthorizationSystem.CurrentPrincipalName;
 
+    IPermissionValidator PermissionValidator { get; }
+
     IActualPrincipalSource ActualPrincipalSource { get; }
 
     IRunAsManager RunAsManager { get; }

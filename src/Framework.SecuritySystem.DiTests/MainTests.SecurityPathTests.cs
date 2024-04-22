@@ -11,7 +11,7 @@ namespace Framework.SecuritySystem.DiTests;
 public partial class MainTests
 {
     [Fact]
-    public void TryApplySRestriction_RestrictionApplied()
+    public void TryApplyRestriction_RestrictionApplied()
     {
         //Arrange
         var service = this.rootServiceProvider.GetRequiredService<ISecurityPathRestrictionService>();
@@ -31,5 +31,22 @@ public partial class MainTests
 
         //Assert
         newSecurityPath.Should().Be(expectedNewSecurityPath);
+    }
+
+    [Fact]
+    public void TryApplyInvalidRestriction_ExceptionRaised()
+    {
+        //Arrange
+        var service = this.rootServiceProvider.GetRequiredService<ISecurityPathRestrictionService>();
+
+        var baseSecurityPath = SecurityPath<Employee>.Create(employee => employee.BusinessUnit);
+
+        var restriction = SecurityPathRestriction.Create<Location>();
+
+        //Act
+        var getResult = () => service.ApplyRestriction(baseSecurityPath, restriction);
+
+        //Assert
+        getResult.Should().Throw<Exception>($"Can't apply restriction. Invalid types: {nameof(Location)}");
     }
 }

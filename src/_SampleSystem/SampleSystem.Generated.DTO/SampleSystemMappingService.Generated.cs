@@ -7193,6 +7193,14 @@ namespace SampleSystem.Generated.DTO
         
         public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO mappingObject)
         {
+            if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
+            {
+                mappingObject.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.BusinessUnit, this);
+            }
+            else
+            {
+                mappingObject.BusinessUnit = null;
+            }
         }
         
         public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO mappingObject)
@@ -7202,6 +7210,14 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
+            {
+                mappingObject.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.BusinessUnit, this);
+            }
+            else
+            {
+                mappingObject.BusinessUnit = null;
+            }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Id = domainObject.Id;

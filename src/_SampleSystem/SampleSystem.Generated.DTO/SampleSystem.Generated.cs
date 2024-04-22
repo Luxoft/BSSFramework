@@ -17085,6 +17085,9 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRestrictionObjectFullDTO : SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO
     {
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnit;
+        
         public TestRestrictionObjectFullDTO()
         {
         }

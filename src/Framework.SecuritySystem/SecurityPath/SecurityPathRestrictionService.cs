@@ -35,7 +35,7 @@ public class SecurityPathRestrictionService : ISecurityPathRestrictionService
 
             if (invalidTypes.Any())
             {
-                throw new Exception($"Can't apply restriction. InvalidType: {invalidTypes.Join(", ", t => t.Name)}");
+                throw new Exception($"Can't apply restriction. Invalid types: {invalidTypes.Join(", ", t => t.Name)}");
             }
 
             return this.Visit(securityPath, [.. restriction.SecurityContexts]);

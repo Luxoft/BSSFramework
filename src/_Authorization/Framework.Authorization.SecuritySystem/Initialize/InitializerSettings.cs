@@ -1,5 +1,5 @@
 ﻿namespace Framework.Authorization.SecuritySystem.Initialize;
 
-public record InitializeSettings(
+public record InitializerSettings(
     UnexpectedAuthElementMode UnexpectedAuthElementMode = UnexpectedAuthElementMode.Remove,
     bool InitDefaultAdminRole = false);

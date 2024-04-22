@@ -18,13 +18,13 @@ public class AuthorizationSecurityContextInitializer : IAuthorizationSecurityCon
 
     private readonly ILogger logger;
 
-    private readonly InitializeSettings settings;
+    private readonly InitializerSettings settings;
 
     public AuthorizationSecurityContextInitializer(
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> securityContextTypeRepository,
         IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
         ILogger logger,
-        InitializeSettings settings)
+        InitializerSettings settings)
     {
         this.securityContextInfoList = securityContextInfoList.ToList();
         this.logger = logger.ForContext<AuthorizationSecurityContextInitializer>();

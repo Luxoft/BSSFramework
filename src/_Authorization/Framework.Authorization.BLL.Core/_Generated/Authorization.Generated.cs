@@ -111,8 +111,6 @@ namespace Framework.Authorization.BLL
     
     public partial interface IBusinessRoleBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.BusinessRole, System.Guid>
     {
-        
-        Framework.Authorization.Domain.BusinessRole Create(Framework.Authorization.Domain.BusinessRoleCreateModel createModel);
     }
     
     public partial interface IBusinessRoleBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IBusinessRoleBLL, Framework.Authorization.Domain.BusinessRole>

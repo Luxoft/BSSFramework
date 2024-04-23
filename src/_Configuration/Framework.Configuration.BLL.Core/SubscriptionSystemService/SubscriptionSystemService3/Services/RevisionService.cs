@@ -112,12 +112,12 @@ public class RevisionService<T>
     private T GetDomainObjectByRevisionNumber(Guid domainObjectId, long? revisionNumber)
     {
         var logger = this.GetLogger();
-        logger.LogInformation("Get current domain object revision by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", domainObjectId, revisionNumber?.ToString() ?? "null");
+        logger.LogDebug("Get current domain object revision by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", domainObjectId, revisionNumber?.ToString() ?? "null");
 
         var lastRevisionNumber = this.ResolveLastObjectRevisionNumber(domainObjectId, revisionNumber);
         var result = this.revisionBll.GetObjectByRevision(domainObjectId, lastRevisionNumber);
 
-        logger.LogInformation("Current domain object revision '{result}' has been found by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", domainObjectId, revisionNumber?.ToString() ?? "null");
+        logger.LogDebug("Current domain object revision '{result}' has been found by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", domainObjectId, revisionNumber?.ToString() ?? "null");
 
         return result;
     }
@@ -135,7 +135,7 @@ public class RevisionService<T>
 
         var result = this.GetDomainObjectByRevisionNumber(domainObjectId, previousRevisionNumber);
 
-        this.GetLogger().LogInformation("Previous domain object revision '{result}' has been found by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", result, domainObjectId, revisionNumber);
+        this.GetLogger().LogDebug("Previous domain object revision '{result}' has been found by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", result, domainObjectId, revisionNumber);
 
         return result;
     }

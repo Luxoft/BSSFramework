@@ -6,7 +6,7 @@ using Framework.Core;
 
 namespace Framework.SecuritySystem;
 
-public class SecurityPathRestrictionService : ISecurityPathRestrictionService
+public class SecurityPathRestrictionService(SecurityPathRestrictionServiceSettings? settings = null) : ISecurityPathRestrictionService
 {
     public SecurityPath<TDomainObject> ApplyRestriction<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
@@ -29,13 +29,16 @@ public class SecurityPathRestrictionService : ISecurityPathRestrictionService
         }
         else
         {
-            var usedTypes = securityPath.GetUsedTypes().ToList();
-
-            var invalidTypes = restriction.SecurityContexts.Except(usedTypes).ToList();
-
-            if (invalidTypes.Any())
+            if (settings?.ValidateSecurityPath == true)
             {
-                throw new Exception($"Can't apply restriction. Invalid types: {invalidTypes.Join(", ", t => t.Name)}");
+                var usedTypes = securityPath.GetUsedTypes().ToList();
+
+                var invalidTypes = restriction.SecurityContexts.Except(usedTypes).ToList();
+
+                if (invalidTypes.Any())
+                {
+                    throw new Exception($"Can't apply restriction. Invalid types: {invalidTypes.Join(", ", t => t.Name)}");
+                }
             }
 
             return this.Visit(securityPath, [.. restriction.SecurityContexts]);

@@ -8,7 +8,7 @@ public class Int64ValueValidatorAttribute : PropertyValidatorAttribute
     public long Max { get; set; } = long.MaxValue;
 
 
-    public override IPropertyValidator CreateValidator()
+    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
     {
         return new Int64ValueValidator(this.Min, this.Max);
     }

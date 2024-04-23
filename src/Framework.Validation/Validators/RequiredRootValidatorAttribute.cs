@@ -3,11 +3,13 @@
 using Framework.Persistent;
 using Framework.Restriction;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.Validation;
 
 public class RequiredRootValidatorAttribute : PropertyValidatorAttribute
 {
-    public override IPropertyValidator CreateValidator()
+    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
     {
         return new RequiredRootValidator();
     }
@@ -19,13 +21,12 @@ public class RequiredRootValidatorAttribute : PropertyValidatorAttribute
             if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
             if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-            var sourceType = propertyInfo.ReflectedType;
+            var sourceType = propertyInfo.ReflectedType!;
 
             if (sourceType.IsClass && typeof(IParentSource<>).MakeGenericType(sourceType).IsAssignableFrom(sourceType))
             {
                 var validatorType = typeof(InternalRequiredRootValidator<,>).MakeGenericType(sourceType, propertyInfo.PropertyType);
-
-                return (IPropertyValidator)Activator.CreateInstance(validatorType);
+                return (IPropertyValidator)ActivatorUtilities.CreateInstance(serviceProvider, validatorType);
             }
             else
             {

@@ -9,5 +9,5 @@ public abstract class ClassValidatorAttribute : ValidatorAttribute
     }
 
 
-    public abstract IClassValidator CreateValidator();
+    public abstract IClassValidator CreateValidator(IServiceProvider serviceProvider);
 }

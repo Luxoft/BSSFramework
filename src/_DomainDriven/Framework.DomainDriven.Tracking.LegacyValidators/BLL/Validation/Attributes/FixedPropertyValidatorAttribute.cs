@@ -8,7 +8,7 @@ namespace Framework.DomainDriven.Tracking.LegacyValidators;
 [AttributeUsage(AttributeTargets.Property)]
 public class FixedPropertyValidatorAttribute : PropertyValidatorAttribute
 {
-    public override IPropertyValidator CreateValidator()
+    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
     {
         return new FixedPropertyValidator();
     }

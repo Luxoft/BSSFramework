@@ -26,7 +26,7 @@ public class UniDBGroupValidatorAttribute : ClassValidatorAttribute
     public bool UseDbEvaluation { get; set; }
 
     /// <inheritdoc />
-    public override IClassValidator CreateValidator()
+    public override IClassValidator CreateValidator(IServiceProvider serviceProvider)
     {
         return new UniqueGroupDatabaseValidator(this.GroupKey);
     }

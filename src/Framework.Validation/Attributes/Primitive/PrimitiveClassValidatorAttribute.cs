@@ -1,27 +1,24 @@
 ﻿using Framework.Core;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class PrimitiveClassValidatorAttribute : ClassValidatorAttribute
 {
-    private static readonly IDictionaryCache<Type, IClassValidator> Cache = new DictionaryCache<Type, IClassValidator>(
-     type => (IClassValidator)Activator.CreateInstance(type)).WithLock();
+    private readonly Type validatorType;
 
 
-    private readonly Type _validatatorType;
-
-
-    public PrimitiveClassValidatorAttribute(Type validatatorType)
+    public PrimitiveClassValidatorAttribute(Type validatorType)
     {
-        if (validatatorType == null) throw new ArgumentNullException(nameof(validatatorType));
+        if (validatorType == null) throw new ArgumentNullException(nameof(validatorType));
 
-        this._validatatorType = validatatorType;
+        this.validatorType = validatorType;
     }
 
 
-    public override IClassValidator CreateValidator()
+    public override IClassValidator CreateValidator(IServiceProvider serviceProvider)
     {
-        return Cache[this._validatatorType];
+        return (IClassValidator)ActivatorUtilities.CreateInstance(serviceProvider, this.validatorType);
     }
 }

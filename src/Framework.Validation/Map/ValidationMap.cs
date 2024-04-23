@@ -101,7 +101,7 @@ public class ValidationMap : ValidationMapBase
 
 
         var selfClassValidator = typeof(IClassValidator<TSource>).IsAssignableFrom(typeof(TSource))
-                                         ? (IClassValidator<TSource>)Activator.CreateInstance(typeof(SelfClassValidator<>).MakeGenericType(typeof(TSource)))
+                                         ? (IClassValidator<TSource>)ActivatorUtilities.CreateInstance(this.ServiceProvider, typeof(SelfClassValidator<>).MakeGenericType(typeof(TSource)))
                                          : null;
 
         return classValidators.Concat(selfClassValidator.MaybeYield());
@@ -150,7 +150,7 @@ public class ValidationMap : ValidationMapBase
     {
         return from attribute in typeof(TSource).GetCustomAttributes<ClassValidatorAttribute>()
 
-               select attribute.CreateValidator().ToKeyValuePair((IValidationData)attribute);
+               select attribute.CreateValidator(this.ServiceProvider).ToKeyValuePair((IValidationData)attribute);
     }
 
     private IEnumerable<KeyValuePair<TFilterValidator, IValidationData>> GetClassValidatorDict<TSource, TFilterValidator>()
@@ -181,7 +181,7 @@ public class ValidationMap : ValidationMapBase
 
         return from attribute in this.GetPropertyValidatorAttributes(property)
 
-               select attribute.CreateValidator().ToKeyValuePair((IValidationData)attribute);
+               select attribute.CreateValidator(this.ServiceProvider).ToKeyValuePair((IValidationData)attribute);
     }
 
 

@@ -1,51 +1,113 @@
-﻿using Framework.WebApi.Utils;
+﻿using System.Reflection;
 
-using Serilog;
+using Framework.Configurator;
+using Framework.Configurator.Interfaces;
+using Framework.Core;
+using Framework.DependencyInjection;
+using Framework.DomainDriven;
+using Framework.DomainDriven.WebApiNetCore;
+using Framework.SecuritySystem;
+using Framework.WebApi.Utils;
 
-namespace SampleSystem.WebApiCore;
+using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.OpenApi.Models;
 
-public class Program
+using Newtonsoft.Json;
+
+using SampleSystem.ServiceEnvironment;
+using SampleSystem.WebApiCore;
+using SampleSystem.WebApiCore.NewtonsoftJson;
+using SampleSystem.WebApiCore.Services;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.Sources.Clear();
+builder.Configuration
+       .AddJsonFile("appsettings.json", false, true)
+       .AddEnvironmentVariables();
+
+builder.Host
+       .UseDefaultServiceProvider(
+           x =>
+           {
+               x.ValidateScopes = true;
+               x.ValidateOnBuild = true;
+           })
+       .UseSerilogBss(new Dictionary<string, string> { { "Version", Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString()! } });
+
+if (builder.Environment.IsProduction())
+    builder.Services.AddMetricsBss(builder.Configuration, 0.5);
+
+builder.Services
+       .RegisterGeneralDependencyInjection(builder.Configuration)
+       .AddApiVersion()
+       .AddSwaggerBss(
+           new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
+           new List<string> { Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml") })
+       .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+       .AddNegotiate();
+
+builder.Services
+       .AddConfigurator()
+       .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
+       .AddMvcBss()
+       .AddNewtonsoftJson(
+           x =>
+           {
+               x.SerializerSettings.Converters.Add(new UtcDateTimeJsonConverter());
+               x.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
+           });
+
+if (builder.Environment.IsProduction())
 {
-    public static void Main(string[] args)
-    {
-        CreateWebHostBuilder(args).Build().Run();
-        //
-        // Log.Logger = Configuration.CreateLoggerBss();
-        //
-        // try
-        // {
-        //
-        // }
-        // catch (Exception ex)
-        // {
-        //     // Log.Logger.Fatal(ex, "Host terminated unexpectedly");
-        // // }
-        // finally
-        // {
-        //     Log.Logger.CloseAndFlush();
-        // }
-    }
-
-    public static IHostBuilder CreateWebHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .UseSerilogBss()
-            .UseDefaultServiceProvider(
-                o =>
-                {
-                    o.ValidateScopes = true;
-                    o.ValidateOnBuild = true;
-                })
-            .ConfigureWebHostDefaults(
-                webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>()
-                              .UseConfiguration(Configuration);
-                });
-
-    private static IConfiguration Configuration =>
-            new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", false, true)
-                    .AddEnvironmentVariables()
-                    .Build();
+    AppMetricsServiceCollectionExtensions.AddMetrics(builder.Services);
+    builder.Services.AddHangfireBss(builder.Configuration.GetConnectionString("DefaultConnection"));
 }
+
+builder.Services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));
+
+var app = builder.Build();
+if (builder.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwaggerBss(app.Services.GetRequiredService<IApiVersionDescriptionProvider>());
+}
+else
+{
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection()
+   .UseRouting()
+   .UseDefaultExceptionsHandling()
+   .UseCorrelationId("SampleSystem_{0}")
+   .UseTryProcessDbSession()
+   .UseWebApiExceptionExpander()
+   .UseAuthentication()
+   .UseAuthorization()
+   .UseConfigurator()
+   .UseEndpoints(z => z.MapControllers());
+
+if (builder.Environment.IsProduction())
+{
+    app.UseMetricsAllMiddleware();
+
+    var contextEvaluator = LazyInterfaceImplementHelper.CreateProxy(
+        () =>
+        {
+            var serviceProvider = new ServiceCollection()
+                                  .RegisterGeneralDependencyInjection(builder.Configuration)
+                                  .ValidateDuplicateDeclaration()
+                                  .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+
+            return serviceProvider.GetRequiredService<IServiceEvaluator<IAuthorizationSystem>>();
+        });
+
+    app.UseHangfireBss(
+        builder.Configuration,
+        JobList.RunAll,
+        authorizationFilter: new SampleSystemHangfireAuthorization(contextEvaluator));
+}
+
+app.Run();

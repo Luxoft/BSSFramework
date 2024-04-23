@@ -1,8 +1,4 @@
-﻿using Automation.Enums;
-using Automation.ServiceEnvironment.Services;
-using Automation.Utils.DatabaseUtils;
-
-using Framework.Configuration.BLL;
+﻿using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.Notification.DTO;

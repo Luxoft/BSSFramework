@@ -4,43 +4,30 @@ using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using NHibernate.Linq;
-using Serilog;
 
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
-public class AuthorizationSecurityContextInitializer : IAuthorizationSecurityContextInitializer
+public class AuthorizationSecurityContextInitializer(
+    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> securityContextTypeRepository,
+    IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
+    ILogger<AuthorizationSecurityContextInitializer> logger,
+    InitializerSettings settings)
+    : IAuthorizationSecurityContextInitializer
 {
-    private readonly IRepository<SecurityContextType> securityContextTypeRepository;
-
-    private readonly List<ISecurityContextInfo<Guid>> securityContextInfoList;
-
-    private readonly ILogger logger;
-
-    private readonly InitializerSettings settings;
-
-    public AuthorizationSecurityContextInitializer(
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> securityContextTypeRepository,
-        IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
-        ILogger logger,
-        InitializerSettings settings)
-    {
-        this.securityContextInfoList = securityContextInfoList.ToList();
-        this.logger = logger.ForContext<AuthorizationSecurityContextInitializer>();
-        this.securityContextTypeRepository = securityContextTypeRepository;
-        this.settings = settings;
-    }
+    private readonly List<ISecurityContextInfo<Guid>> securityContextInfoList = securityContextInfoList.ToList();
 
     public async Task Init(CancellationToken cancellationToken)
     {
-        var dbSecurityContextTypes = await this.securityContextTypeRepository.GetQueryable().ToListAsync(cancellationToken);
+        var dbSecurityContextTypes = await securityContextTypeRepository.GetQueryable().ToListAsync(cancellationToken);
 
         var mergeResult = dbSecurityContextTypes.GetMergeResult(this.securityContextInfoList, et => et.Id, sc => sc.Id);
 
         if (mergeResult.RemovingItems.Any())
         {
-            switch (this.settings.UnexpectedAuthElementMode)
+            switch (settings.UnexpectedAuthElementMode)
             {
                 case UnexpectedAuthElementMode.RaiseError:
                     throw new InvalidOperationException(
@@ -50,9 +37,9 @@ public class AuthorizationSecurityContextInitializer : IAuthorizationSecurityCon
                 {
                     foreach (var removingItem in mergeResult.RemovingItems)
                     {
-                        this.logger.Verbose("Remove SecurityContextType: {RemovingItemName} {RemovingItemId}", removingItem.Name, removingItem.Id);
+                        logger.LogDebug("Remove SecurityContextType: {RemovingItemName} {RemovingItemId}", removingItem.Name, removingItem.Id);
 
-                        await this.securityContextTypeRepository.RemoveAsync(removingItem, cancellationToken);
+                        await securityContextTypeRepository.RemoveAsync(removingItem, cancellationToken);
                     }
 
                     break;
@@ -62,14 +49,14 @@ public class AuthorizationSecurityContextInitializer : IAuthorizationSecurityCon
 
         foreach (var securityContextInfo in mergeResult.AddingItems)
         {
-            var entityTpe = new SecurityContextType
+            var securityContextType = new SecurityContextType
             {
                 Name = securityContextInfo.Name
             };
 
-            this.logger.Verbose("Create SecurityContextType: {0} {1}", entityTpe.Name, entityTpe.Id);
+            logger.LogDebug("Create SecurityContextType: {Name} {Id}", securityContextType.Name, securityContextType.Id);
 
-            await this.securityContextTypeRepository.InsertAsync(entityTpe, securityContextInfo.Id, cancellationToken);
+            await securityContextTypeRepository.InsertAsync(securityContextType, securityContextInfo.Id, cancellationToken);
         }
     }
 }

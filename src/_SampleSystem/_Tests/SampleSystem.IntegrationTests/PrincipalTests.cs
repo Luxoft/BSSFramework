@@ -22,10 +22,10 @@ public class PrincipalTests : TestBase
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
         // Act
-        var principalIdentity = this.AuthHelper.SavePrincipal(name, true);
+        var principalId = this.AuthHelper.SavePrincipal(name, true);
 
         // Assert
-        this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalIdentity.Id);
+        this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
     }
 
     [TestMethod]
@@ -33,7 +33,8 @@ public class PrincipalTests : TestBase
     {
         // Arrange
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
-        var principalIdentity = this.AuthHelper.SavePrincipal(name, true);
+
+        var principalId = this.AuthHelper.SavePrincipal(name, true);
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
@@ -50,11 +51,11 @@ public class PrincipalTests : TestBase
                                                           {
                                                                   Operation = operation.Identity,
 
-                                                                  DomainObjectIdents = new List<Guid> { principalIdentity.Id }
+                                                                  DomainObjectIdents = new List<Guid> { principalId }
                                                           }));
 
         // Assert
-        this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalIdentity.Id);
+        this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
     }
 
     [TestMethod]
@@ -62,11 +63,12 @@ public class PrincipalTests : TestBase
     {
         // Arrange
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
-        var principalIdentity = this.AuthHelper.SavePrincipal(name, true);
+
+        var principalId = this.AuthHelper.SavePrincipal(name, true);
 
         var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(Framework.Authorization.Domain.BusinessRole.AdminRoleName)).Identity;
 
-        var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, new PermissionStrictDTO
+        var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(new PrincipalIdentityDTO(principalId), new PermissionStrictDTO
                                                                                  {
                                                                                          Role = role,
                                                                                          Period = Period.Eternity
@@ -93,7 +95,7 @@ public class PrincipalTests : TestBase
 
         // Assert
         this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PermissionSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Permission.Id == permissionIdentity.Id);
-        this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalIdentity.Id);
+        this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
     }
 
     [TestMethod]
@@ -121,7 +123,7 @@ public class PrincipalTests : TestBase
         // Act
         var principalId = this.AuthHelper.SavePrincipal(Name, true, expected);
 
-        var principal = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalId));
+        var principal = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(new PrincipalIdentityDTO(principalId)));
 
         // Assert
         principal.ExternalId.Should().Be(expected);

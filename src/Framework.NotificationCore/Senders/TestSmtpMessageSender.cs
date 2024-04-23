@@ -6,18 +6,19 @@ using Framework.NotificationCore.Extensions;
 using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
 
+using Microsoft.Extensions.Logging;
+
 namespace Framework.NotificationCore.Senders;
 
 /// <summary>
 /// логика для тестовых стендов - письма перенаправляются на тестовый почтовый ящик, а исходные адресаты записываются в тело письма
 /// </summary>
-internal class TestSmtpMessageSender : ProdSmtpMessageSender
+internal class TestSmtpMessageSender(
+    SmtpSettings settings,
+    IRewriteReceiversService rewriteReceiversService,
+    ILogger<SmtpNotificationMessageSender> logger)
+    : ProdSmtpMessageSender(settings, rewriteReceiversService, logger)
 {
-    public TestSmtpMessageSender(SmtpSettings settings, IRewriteReceiversService rewriteReceiversService)
-            : base(settings, rewriteReceiversService)
-    {
-    }
-
     protected override MailMessage ToMailMessage(NotificationEventDTO dto)
     {
         var message = base.ToMailMessage(dto);
@@ -36,9 +37,9 @@ internal class TestSmtpMessageSender : ProdSmtpMessageSender
         message.Bcc.Clear();
         message.ReplyToList.Clear();
 
-        if (this.settings.TestEmails.Any())
+        if (settings.TestEmails.Any())
         {
-            message.To.AddRange(RecipientsHelper.ToRecipients(this.settings.TestEmails));
+            message.To.AddRange(RecipientsHelper.ToRecipients(settings.TestEmails));
         }
     }
 

@@ -8,20 +8,22 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Log.Logger = Configuration.CreateLoggerBss();
-
-        try
-        {
-            CreateWebHostBuilder(args).Build().Run();
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "Host terminated unexpectedly");
-        }
-        finally
-        {
-            Log.CloseAndFlush();
-        }
+        CreateWebHostBuilder(args).Build().Run();
+        //
+        // Log.Logger = Configuration.CreateLoggerBss();
+        //
+        // try
+        // {
+        //
+        // }
+        // catch (Exception ex)
+        // {
+        //     // Log.Logger.Fatal(ex, "Host terminated unexpectedly");
+        // // }
+        // finally
+        // {
+        //     Log.Logger.CloseAndFlush();
+        // }
     }
 
     public static IHostBuilder CreateWebHostBuilder(string[] args) =>

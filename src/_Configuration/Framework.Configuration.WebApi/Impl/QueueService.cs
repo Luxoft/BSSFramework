@@ -3,8 +3,6 @@ using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
 
-using Serilog.Context;
-
 namespace Framework.Configuration.WebApi;
 
 public partial class ConfigSLJsonController
@@ -14,47 +12,37 @@ public partial class ConfigSLJsonController
     {
         var result = this.EvaluateC(DBSessionMode.Write, context =>
                                                          {
-                                                             using (LogContext.PushProperty("Method", nameof(this.ProcessModifications)))
-                                                             {
-                                                                 context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
-
-                                                                 return context.Logics.DomainObjectModification.Process(limit == default(int) ? 1000 : limit);
-                                                             }
+                                                             context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
+                                                             return context.Logics.DomainObjectModification.Process(limit == default(int) ? 1000 : limit);
                                                          });
 
         return result.Match(v => v, ex => throw ex);
     }
 
     [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetEventQueueProcessingState))]
-    public QueueProcessingStateSimpleDTO GetEventQueueProcessingState()
-    {
-        return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                 {
-                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
+    public QueueProcessingStateSimpleDTO GetEventQueueProcessingState() =>
+        this.Evaluate(DBSessionMode.Read, evaluateData =>
+                                          {
+                                              evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
 
-                                                     return evaluateData.Context.Logics.DomainObjectEvent.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
-                                                 });
-    }
+                                              return evaluateData.Context.Logics.DomainObjectEvent.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
+                                          });
 
     [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetModificationQueueProcessingState))]
-    public QueueProcessingStateSimpleDTO GetModificationQueueProcessingState()
-    {
-        return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                 {
-                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
+    public QueueProcessingStateSimpleDTO GetModificationQueueProcessingState() =>
+        this.Evaluate(DBSessionMode.Read, evaluateData =>
+                                          {
+                                              evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
 
-                                                     return evaluateData.Context.Logics.DomainObjectModification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
-                                                 });
-    }
+                                              return evaluateData.Context.Logics.DomainObjectModification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
+                                          });
 
     [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetNotificationQueueProcessingState))]
-    public QueueProcessingStateSimpleDTO GetNotificationQueueProcessingState()
-    {
-        return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                 {
-                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
+    public QueueProcessingStateSimpleDTO GetNotificationQueueProcessingState() =>
+        this.Evaluate(DBSessionMode.Read, evaluateData =>
+                                          {
+                                              evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
 
-                                                     return evaluateData.Context.Logics.DomainObjectNotification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
-                                                 });
-    }
+                                              return evaluateData.Context.Logics.DomainObjectNotification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
+                                          });
 }

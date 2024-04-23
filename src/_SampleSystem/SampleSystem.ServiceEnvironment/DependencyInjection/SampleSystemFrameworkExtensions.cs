@@ -100,10 +100,6 @@ public static class SampleSystemFrameworkExtensions
 
         // For subscription
         services.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(typeof(EmployeeUpdateSubscription).Assembly));
-
-        // Serilog
-        services.AddSingleton(Serilog.Log.Logger);
-
         return services;
     }
 }

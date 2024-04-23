@@ -3,9 +3,6 @@
     <PackageId>Luxoft.Framework.Configuration.BLL.Core</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Serilog" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

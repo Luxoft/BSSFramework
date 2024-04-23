@@ -34,7 +34,6 @@ public class AuthManager(
         return principal.Id;
     }
 
-
     public void AddUserRole(string principalName, params TestPermission[] permissions)
     {
         var actualPrincipalName = principalName ?? this.GetCurrentUserLogin();
@@ -65,7 +64,10 @@ public class AuthManager(
 
             permissionValidator.Validate(permissionDomainObject);
         }
+
+        principalRepository.SaveAsync(principalDomainObject).GetAwaiter().GetResult();
     }
+
     public void RemovePermissions(string principalName)
     {
         var actualPrincipalName = principalName ?? this.GetCurrentUserLogin();

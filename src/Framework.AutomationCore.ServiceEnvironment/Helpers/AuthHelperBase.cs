@@ -15,14 +15,14 @@ public class AuthHelperBase : RootServiceProviderContainer
     {
     }
 
-    protected TResult EvaluateManager<TResult>(Func<AuthManager, TResult> getResult)
+    protected TResult EvaluateManager<TResult>(DBSessionMode dbSessionMode, Func<AuthManager, TResult> getResult)
     {
         return this.RootServiceProvider.GetRequiredService<IServiceEvaluator<AuthManager>>().Evaluate(DBSessionMode.Write, getResult);
     }
 
-    protected void EvaluateManager(Action<AuthManager> action)
+    protected void EvaluateManager(DBSessionMode dbSessionMode, Action<AuthManager> action)
     {
-        this.EvaluateManager<object>(
+        this.EvaluateManager<object>(dbSessionMode,
             manager =>
             {
                 action(manager);
@@ -32,7 +32,7 @@ public class AuthHelperBase : RootServiceProviderContainer
 
     public string GetCurrentUserLogin()
     {
-        return this.EvaluateManager(manager => manager.GetCurrentUserLogin());
+        return this.EvaluateManager(DBSessionMode.Read, manager => manager.GetCurrentUserLogin());
     }
 
     public void LoginAs(string principalName = null)
@@ -42,12 +42,12 @@ public class AuthHelperBase : RootServiceProviderContainer
 
     public Guid SavePrincipal(string name, bool active, Guid? externalId = null)
     {
-        return this.EvaluateManager(manger => manger.SavePrincipal(name, active, externalId));
+        return this.EvaluateManager(DBSessionMode.Write, manger => manger.SavePrincipal(name, active, externalId));
     }
 
     public void AddUserRole(string principalName, params TestPermission[] permissions)
     {
-        this.EvaluateManager(manger => manger.AddUserRole(principalName, permissions));
+        this.EvaluateManager(DBSessionMode.Write, manger => manger.AddUserRole(principalName, permissions));
     }
 
     public void SetCurrentUserRole(params TestPermission[] permissions)
@@ -72,8 +72,8 @@ public class AuthHelperBase : RootServiceProviderContainer
         this.SetCurrentUserRole(SecurityRole.Administrator, SecurityRole.SystemIntegration);
     }
 
-    private void RemovePermissions(string principalName)
+    public void RemovePermissions(string principalName)
     {
-        this.EvaluateManager(manager => manager.RemovePermissions(principalName));
+        this.EvaluateManager(DBSessionMode.Write, manager => manager.RemovePermissions(principalName));
     }
 }

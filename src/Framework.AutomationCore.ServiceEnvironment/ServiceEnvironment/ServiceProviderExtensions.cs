@@ -32,8 +32,6 @@ public static class ServiceProviderExtensions
                      .Where(t => !t.IsAbstract && typeof(ControllerBase).IsAssignableFrom(t)))
         {
             services.AddScoped(controllerType);
-
-            services.AddSingleton(typeof(ControllerEvaluator<>).MakeGenericType(controllerType));
         }
 
         return services;
@@ -51,5 +49,9 @@ public static class ServiceProviderExtensions
                 .AddScoped<TestWebApiCurrentMethodResolver>()
                 .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
 
-                .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();
+                .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
+
+                .AddSingleton(typeof(ControllerEvaluator<>))
+
+                .AddScoped<AuthManager>();
 }

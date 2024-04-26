@@ -2,7 +2,8 @@
 using Framework.Configuration.Domain;
 using Framework.Configuration.SubscriptionModeling;
 
-using Serilog;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 
@@ -19,7 +20,6 @@ public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResol
     private readonly SubscriptionMetadataStore metadataStore;
     private readonly SubscriptionMetadataMapper metadataMapper;
     private readonly ConfigurationContextFacade configurationContextFacade;
-    private readonly ILogger logger;
 
     /// <summary>
     ///     Создаёт экземпляр класса <see cref="SubscriptionMetadataSubscriptionResolver" />.
@@ -45,32 +45,10 @@ public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResol
             SubscriptionMetadataMapper metadataMapper,
             ConfigurationContextFacade configurationContextFacade)
     {
-        if (resolver == null)
-        {
-            throw new ArgumentNullException(nameof(resolver));
-        }
-
-        if (metadataStore == null)
-        {
-            throw new ArgumentNullException(nameof(metadataStore));
-        }
-
-        if (metadataMapper == null)
-        {
-            throw new ArgumentNullException(nameof(metadataMapper));
-        }
-
-        if (configurationContextFacade == null)
-        {
-            throw new ArgumentNullException(nameof(configurationContextFacade));
-        }
-
-        this.wrappedResolver = resolver;
-        this.metadataStore = metadataStore;
-        this.metadataMapper = metadataMapper;
-        this.configurationContextFacade = configurationContextFacade;
-
-        this.logger = Log.Logger.ForContext(this.GetType());
+        this.wrappedResolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
+        this.metadataStore = metadataStore ?? throw new ArgumentNullException(nameof(metadataStore));
+        this.metadataMapper = metadataMapper ?? throw new ArgumentNullException(nameof(metadataMapper));
+        this.configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
     }
 
     /// <inheritdoc />
@@ -103,11 +81,9 @@ public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResol
             throw new ArgumentNullException(nameof(versions));
         }
 
-        var result = this
-                     .Resolve(versions)
-                     .FirstOrDefault(s => string.Equals(s.Code, subscriptionCode, StringComparison.OrdinalIgnoreCase));
-
-        return result;
+        return this
+               .Resolve(versions)
+               .FirstOrDefault(s => string.Equals(s.Code, subscriptionCode, StringComparison.OrdinalIgnoreCase));
     }
 
     /// <inheritdoc />
@@ -126,18 +102,20 @@ public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResol
 
     private bool IsSubscriptionExists(Type domainObjectType)
     {
-        this.logger.Verbose("Check subscription metadata for domain object type '{domainObjectType}' exists", domainObjectType);
+        var logger = this.GetLogger();
+        logger.LogDebug("Check subscription metadata for domain object type '{domainObjectType}' exists", domainObjectType);
 
         var result = this.metadataStore.Get(domainObjectType).Any();
 
-        this.logger.Verbose("Existing subscription metadata for domain object type '{domainObjectType}' {result}", domainObjectType, result ? "exists" : "not exists");
+        logger.LogDebug("Existing subscription metadata for domain object type '{domainObjectType}' {result}", domainObjectType, result ? "exists" : "not exists");
 
         return result;
     }
 
     private IEnumerable<Subscription> GetSubscriptionsFromMetadata(Type domainObjectType)
     {
-        this.logger.Verbose("Search subscriptions in metadata for domain object type '{domainObjectType}'", domainObjectType);
+        var logger = this.GetLogger();
+        logger.LogDebug("Search subscriptions in metadata for domain object type '{domainObjectType}'", domainObjectType);
 
         var metadata = this.metadataStore.Get(domainObjectType).ToList();
 
@@ -152,8 +130,11 @@ public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResol
                      .Where(m => activeCodeFirstSubscriptionCodes.Contains(m.Code))
                      .Select(m => this.metadataMapper.Map(m)).ToArray();
 
-        this.logger.Verbose("'{resultLength}' subscriptions has been found in metadata for domain object type '{domainObjectType}'", result.Length, domainObjectType);
+        logger.LogDebug("'{resultLength}' subscriptions has been found in metadata for domain object type '{domainObjectType}'", result.Length, domainObjectType);
 
         return result;
     }
+
+    private ILogger<SubscriptionMetadataSubscriptionResolver> GetLogger() =>
+        this.configurationContextFacade.ServiceProvider.GetRequiredService<ILogger<SubscriptionMetadataSubscriptionResolver>>();
 }

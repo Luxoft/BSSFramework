@@ -6,7 +6,8 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Persistent;
 
-using Serilog;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 
@@ -18,7 +19,9 @@ public class RevisionService<T>
         where T : class, IIdentityObject<Guid>
 {
     private readonly IRevisionBLL<T, Guid> revisionBll;
-    private readonly ILogger logger;
+
+    private readonly ConfigurationContextFacade _configurationContextFacade;
+
     private readonly SubscriptionResolver subscriptionResolver;
 
     /// <summary>Создаёт экземпляр класса <see cref="RevisionService{T}" />.</summary>
@@ -34,25 +37,9 @@ public class RevisionService<T>
             ConfigurationContextFacade configurationContextFacade,
             SubscriptionResolver subscriptionResolver)
     {
-        if (revisionBll == null)
-        {
-            throw new ArgumentNullException(nameof(revisionBll));
-        }
-
-        if (configurationContextFacade == null)
-        {
-            throw new ArgumentNullException(nameof(configurationContextFacade));
-        }
-
-        if (subscriptionResolver == null)
-        {
-            throw new ArgumentNullException(nameof(subscriptionResolver));
-        }
-
-        this.revisionBll = revisionBll;
-        this.subscriptionResolver = subscriptionResolver;
-
-        this.logger = Log.Logger.ForContext(this.GetType());
+        this.revisionBll = revisionBll ?? throw new ArgumentNullException(nameof(revisionBll));
+        this._configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
+        this.subscriptionResolver = subscriptionResolver ?? throw new ArgumentNullException(nameof(subscriptionResolver));
     }
 
     /// <summary>
@@ -124,12 +111,13 @@ public class RevisionService<T>
 
     private T GetDomainObjectByRevisionNumber(Guid domainObjectId, long? revisionNumber)
     {
-        this.logger.Information("Get current domain object revision by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", domainObjectId, revisionNumber?.ToString() ?? "null");
+        var logger = this.GetLogger();
+        logger.LogDebug("Get current domain object revision by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", domainObjectId, revisionNumber?.ToString() ?? "null");
 
         var lastRevisionNumber = this.ResolveLastObjectRevisionNumber(domainObjectId, revisionNumber);
         var result = this.revisionBll.GetObjectByRevision(domainObjectId, lastRevisionNumber);
 
-        this.logger.Information("Current domain object revision '{result}' has been found by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", domainObjectId, revisionNumber?.ToString() ?? "null");
+        logger.LogDebug("Current domain object revision '{result}' has been found by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", domainObjectId, revisionNumber?.ToString() ?? "null");
 
         return result;
     }
@@ -147,7 +135,7 @@ public class RevisionService<T>
 
         var result = this.GetDomainObjectByRevisionNumber(domainObjectId, previousRevisionNumber);
 
-        this.logger.Information("Previous domain object revision '{result}' has been found by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", result, domainObjectId, revisionNumber);
+        this.GetLogger().LogDebug("Previous domain object revision '{result}' has been found by domain object id '{domainObjectId}' and revision number '{revisionNumber}'.", result, domainObjectId, revisionNumber);
 
         return result;
     }
@@ -189,4 +177,7 @@ public class RevisionService<T>
             }
         }
     }
+
+    private ILogger<RevisionService<T>> GetLogger() =>
+        this._configurationContextFacade.ServiceProvider.GetRequiredService<ILogger<RevisionService<T>>>();
 }

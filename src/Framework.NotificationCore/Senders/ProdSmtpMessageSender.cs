@@ -7,22 +7,13 @@ using Framework.Notification.New;
 using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
 
-using Serilog;
+using Microsoft.Extensions.Logging;
 
 namespace Framework.NotificationCore.Senders
 {
-    internal class ProdSmtpMessageSender : ISmtpMessageSender
+    internal class ProdSmtpMessageSender(SmtpSettings settings, IRewriteReceiversService rewriteReceiversService, ILogger<SmtpNotificationMessageSender> logger)
+        : ISmtpMessageSender
     {
-        private readonly IRewriteReceiversService rewriteReceiversService;
-
-        protected readonly SmtpSettings settings;
-
-        public ProdSmtpMessageSender(SmtpSettings settings, IRewriteReceiversService rewriteReceiversService)
-        {
-            this.settings = settings;
-            this.rewriteReceiversService = rewriteReceiversService;
-        }
-
         public void Send(SmtpClient client, NotificationEventDTO message) => client.Send(this.ToMailMessage(message));
 
         protected virtual MailMessage ToMailMessage(NotificationEventDTO dto)
@@ -45,28 +36,29 @@ namespace Framework.NotificationCore.Senders
 
         private void TryRunRewriteRules(NotificationEventDTO dto, MailMessage mailMessage)
         {
-            if (this.rewriteReceiversService == null)
+            if (rewriteReceiversService == null)
             {
                 return;
             }
 
-            this.rewriteReceiversService.RewriteToRecipients(mailMessage, dto);
-            this.rewriteReceiversService.RewriteCopyRecipients(mailMessage, dto);
-            this.rewriteReceiversService.RewriteReplyTo(mailMessage, dto);
+            rewriteReceiversService.RewriteToRecipients(mailMessage, dto);
+            rewriteReceiversService.RewriteCopyRecipients(mailMessage, dto);
+            rewriteReceiversService.RewriteReplyTo(mailMessage, dto);
         }
 
         private void SetSupportTeamAsReceiver(NotificationEventDTO dto)
         {
-            if (this.settings.DefaultReceiverEmails == null)
+            if (settings.DefaultReceiverEmails == null)
             {
                 return;
             }
 
-            Log.Warning(
-                $"Recipients for notification {dto.TechnicalInformation.MessageTemplateCode} were not found - notification was redirected to support");
+            logger.LogWarning(
+                "Recipients for notification {TemplateCode} were not found - notification was redirected to support",
+                dto.TechnicalInformation.MessageTemplateCode);
 
             dto.Targets.AddRange(
-                this.settings.DefaultReceiverEmails.Select(
+                settings.DefaultReceiverEmails.Select(
                     x => new NotificationTargetDTO { Type = NotificationTargetTypes.To, Name = x }));
         }
     }

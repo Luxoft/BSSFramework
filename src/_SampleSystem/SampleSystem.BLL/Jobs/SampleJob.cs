@@ -1,9 +1,10 @@
-﻿using SampleSystem.BLL.Core.Jobs;
-using Serilog;
+﻿using Microsoft.Extensions.Logging;
+
+using SampleSystem.BLL.Core.Jobs;
 
 namespace SampleSystem.BLL.Jobs;
 
-public class SampleJob : ISampleJob
+public class SampleJob(ILogger<SampleJob> logger) : ISampleJob
 {
-    public void LogExecution() => Log.Information("Job executed");
+    public void LogExecution() => logger.LogInformation("Job executed");
 }

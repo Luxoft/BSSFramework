@@ -7,8 +7,6 @@ using Framework.Notification;
 using Framework.Notification.DTO;
 using Framework.Persistent;
 
-using Serilog;
-
 namespace Framework.Configuration.BLL.Notification;
 
 public class TemplateMessageSender : BLLContextContainer<IConfigurationBLLContext>, IMessageSender<MessageTemplateNotification>
@@ -21,10 +19,7 @@ public class TemplateMessageSender : BLLContextContainer<IConfigurationBLLContex
     {
         this.defaultMailSenderContainer = defaultMailSenderContainer ?? throw new ArgumentNullException(nameof(defaultMailSenderContainer));
         this.notificationEventSender = notificationEventSender ?? throw new ArgumentNullException(nameof(notificationEventSender));
-        this.Logger = Log.Logger.ForContext(this.GetType());
     }
-
-    private ILogger Logger { get; }
 
     public void Send(MessageTemplateNotification message)
     {
@@ -44,15 +39,7 @@ public class TemplateMessageSender : BLLContextContainer<IConfigurationBLLContex
         }
 
         var notification = this.CreateNotification(message);
-
         notification.Message.IsBodyHtml = true;
-
-        this.Logger.Information(
-                                "Send message template: '{MessageTemplateCode}'; Receivers: '{To}'; From: '{From}'; Send message body:{Body}",
-                                message.MessageTemplateCode,
-                                notification.Message.To,
-                                notification.Message.From,
-                                notification.Message.Body);
 
         this.notificationEventSender.Send(new NotificationEventDTO(notification));
     }
@@ -74,9 +61,7 @@ public class TemplateMessageSender : BLLContextContainer<IConfigurationBLLContex
 
         var sender = message.Subscription.Maybe(s => s.Sender) ?? this.defaultMailSenderContainer.DefaultSender;
 
-        var messageTemplateBLL = new MessageTemplateBLL(this.Context);
-
-        var mailMessage = messageTemplateBLL.CreateMailMessage(
+        var mailMessage = new MessageTemplateBLL(this.Context).CreateMailMessage(
                                                                message,
                                                                messageTemplate,
                                                                includeAttachments,

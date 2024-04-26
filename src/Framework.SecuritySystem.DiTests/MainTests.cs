@@ -129,6 +129,8 @@ public partial class MainTests
 
                    )
 
+               .AddSingleton(new SecurityPathRestrictionServiceSettings { ValidateSecurityPath = true })
+
                .AddScoped<BusinessUnitAncestorLinkSourceExecuteCounter>()
                .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
 

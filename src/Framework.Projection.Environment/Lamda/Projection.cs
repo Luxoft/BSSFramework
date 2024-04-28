@@ -267,7 +267,7 @@ public class Projection<TDomainObject> : IProjection
         if (name == null) throw new ArgumentNullException(nameof(name));
 
         return new Projection<TDomainObject>(
-                                             this.Name,
+                                             name,
                                              bllView ?? this.BLLView,
                                              this.properties,
                                              this.filterAttributes,

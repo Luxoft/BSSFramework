@@ -24,6 +24,12 @@ public class EnhancedMsSql2012Dialect : MsSql2012Dialect
         this.RegisterFunction("AddYears", new SQLFunctionTemplate(NHibernateUtil.DateTime, "dateadd(year,?2,?1)"));
         this.RegisterFunction("DiffDays", new SQLFunctionTemplate(NHibernateUtil.Int32, "DATEDIFF(day,?1,?2)"));
 
+    }
+
+    protected override void RegisterCharacterTypeMappings()
+    {
+        base.RegisterCharacterTypeMappings();
+
         this.RegisterColumnType(DbType.String, MaxSizeForBlob, "NVARCHAR(MAX)");
     }
 }

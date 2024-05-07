@@ -50,7 +50,7 @@ cd /configurator-ui
 
 npm install
 
-npm ng build
+npm run ng build
 
 ```
 

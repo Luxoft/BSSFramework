@@ -1,4 +1,6 @@
-﻿using NHibernate;
+﻿using System.Data;
+
+using NHibernate;
 using NHibernate.Dialect;
 using NHibernate.Dialect.Function;
 
@@ -21,5 +23,7 @@ public class EnhancedMsSql2012Dialect : MsSql2012Dialect
         this.RegisterFunction("AddMonths", new SQLFunctionTemplate(NHibernateUtil.DateTime, "dateadd(month,?2,?1)"));
         this.RegisterFunction("AddYears", new SQLFunctionTemplate(NHibernateUtil.DateTime, "dateadd(year,?2,?1)"));
         this.RegisterFunction("DiffDays", new SQLFunctionTemplate(NHibernateUtil.Int32, "DATEDIFF(day,?1,?2)"));
+
+        this.RegisterColumnType(DbType.String, MaxSizeForBlob, "NVARCHAR(MAX)");
     }
 }

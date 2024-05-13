@@ -3,7 +3,6 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Rules.Builders;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
@@ -43,7 +42,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
         yield return (typeof(ISecurityRuleExpander).ToTypeReference(), "securityRuleExpander", null);
 
         {
-            yield return (typeof(ISecurityExpressionBuilderFactory).ToTypeReference(), "securityExpressionBuilderFactory", null);
+            yield return (typeof(ISecurityPathProviderFactory).ToTypeReference(), "securityPathProviderFactory", null);
 
             var securityPathContainerParam = new CodeParameterDeclarationExpression(this.Configuration.GetCodeTypeReference(null, FileType.RootSecurityServicePathContainerInterface), "securityPathContainer");
 

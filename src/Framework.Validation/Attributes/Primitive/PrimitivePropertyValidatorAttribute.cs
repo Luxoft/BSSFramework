@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 

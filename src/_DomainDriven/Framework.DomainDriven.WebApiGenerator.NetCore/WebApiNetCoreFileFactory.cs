@@ -30,12 +30,8 @@ public class WebApiNetCoreFileFactory<TConfiguration> : WebApiNetCoreFileFactory
         yield return new CodeAttributeDeclaration(typeof(ApiControllerAttribute).ToTypeReference());
 
         yield return new CodeAttributeDeclaration(
-                                                  typeof(ApiVersionAttribute).ToTypeReference(),
-                                                  new CodeAttributeArgument(new CodePrimitiveExpression("1.0")));
-
-        yield return new CodeAttributeDeclaration(
                                                   typeof(RouteAttribute).ToTypeReference(),
-                                                  new CodeAttributeArgument(new CodePrimitiveExpression("api/v{version:apiVersion}/[controller]")));
+                                                  new CodeAttributeArgument(new CodePrimitiveExpression("api/[controller]")));
 
         foreach (var attribute in base.GetCustomAttributes().Concat(this.additionalAttributes))
         {

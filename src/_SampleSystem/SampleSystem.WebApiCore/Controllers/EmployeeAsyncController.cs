@@ -11,8 +11,7 @@ using NHibernate.Linq;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class EmployeeAsyncController : ControllerBase
 {

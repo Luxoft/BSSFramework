@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Authorization.WebApi.Controllers;
 
 [ApiController]
-[ApiVersion("1.0")]
-[Route("authApi/v{version:apiVersion}/[controller]")]
+[Route("authApi/[controller]")]
 public class OperationController : ControllerBase
 {
     private readonly IAvailableSecurityRoleSource availableSecurityRoleSource;

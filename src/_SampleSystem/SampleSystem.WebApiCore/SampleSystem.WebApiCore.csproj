@@ -6,8 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Luxoft.Bss.Platform.Api.Documentation" />
+    <PackageReference Include="Luxoft.Bss.Platform.Api.Middlewares" />
+    <PackageReference Include="Luxoft.Bss.Platform.Logging" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
     <PackageReference Include="nuSpec.NHibernate" />
   </ItemGroup>
 

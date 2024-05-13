@@ -15,8 +15,7 @@ using SampleSystem.Generated.DTO;
 namespace SampleSystem.WebApiCore.Controllers;
 
 [ApiController]
-[ApiVersion("1.0")]
-[Route("authApi/v{version:apiVersion}/[controller]/[action]")]
+[Route("authApi/[controller]/[action]")]
 public class MediatrController : ApiControllerBase<ISampleSystemBLLContext, ISampleSystemDTOMappingService>
 {
     private readonly IMediator mediator;

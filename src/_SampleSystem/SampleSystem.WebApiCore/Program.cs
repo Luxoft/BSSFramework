@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http.Json;
 
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
+using SampleSystem.WebApiCore.Extensions;
 using SampleSystem.WebApiCore.Json;
 using SampleSystem.WebApiCore.Services;
 
@@ -38,7 +39,7 @@ builder.Services
        .RegisterGeneralDependencyInjection(builder.Configuration)
        .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
        .Configure<JsonOptions>(x => x.SerializerOptions.Converters.Add(new UtcDateTimeJsonConverter()))
-       .AddPlatformApiDocumentation(builder.Environment, "SampleSystem API")
+       .AddSwaggerOld(builder.Environment)
        .AddConfigurator()
        .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
        .AddNegotiate();

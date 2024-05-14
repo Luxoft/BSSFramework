@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using Bss.Platform.Api.Documentation;
+using Bss.Platform.Api.Middlewares;
+using Bss.Platform.Logging;
 
 using Framework.Configurator;
 using Framework.Configurator.Interfaces;
@@ -7,17 +9,14 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.SecuritySystem;
-using Framework.WebApi.Utils;
 
 using Microsoft.AspNetCore.Authentication.Negotiate;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.OpenApi.Models;
-
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http.Json;
 
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
-using SampleSystem.WebApiCore.NewtonsoftJson;
+using SampleSystem.WebApiCore.Extensions;
+using SampleSystem.WebApiCore.Json;
 using SampleSystem.WebApiCore.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,65 +33,41 @@ builder.Host
                x.ValidateScopes = true;
                x.ValidateOnBuild = true;
            })
-       .UseSerilogBss(new Dictionary<string, string> { { "Version", Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString()! } });
-
-if (builder.Environment.IsProduction())
-    builder.Services.AddMetricsBss(builder.Configuration, 0.5);
+       .AddPlatformLogging();
 
 builder.Services
        .RegisterGeneralDependencyInjection(builder.Configuration)
-       .AddApiVersion()
-       .AddSwaggerBss(
-           new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
-           new List<string> { Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml") })
+       .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
+       .Configure<JsonOptions>(x => x.SerializerOptions.Converters.Add(new UtcDateTimeJsonConverter()))
+       .AddSwaggerOld(builder.Environment)
+       .AddConfigurator()
        .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
        .AddNegotiate();
 
 builder.Services
-       .AddConfigurator()
-       .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
-       .AddMvcBss()
-       .AddNewtonsoftJson(
-           x =>
-           {
-               x.SerializerSettings.Converters.Add(new UtcDateTimeJsonConverter());
-               x.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
-           });
+       .AddMvc(x => x.EnableEndpointRouting = false);
 
-if (builder.Environment.IsProduction())
-{
-    AppMetricsServiceCollectionExtensions.AddMetrics(builder.Services);
-    builder.Services.AddHangfireBss(builder.Configuration.GetConnectionString("DefaultConnection"));
-}
+if (builder.Environment.IsProduction()) builder.Services.AddHangfireBss(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 builder.Services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));
 
 var app = builder.Build();
-if (builder.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-    app.UseSwaggerBss(app.Services.GetRequiredService<IApiVersionDescriptionProvider>());
-}
-else
-{
-    app.UseHsts();
-}
 
-app.UseHttpsRedirection()
+app
+   .UsePlatformErrorsMiddleware()
+   .UseHttpsRedirection()
+   .UseHsts()
    .UseRouting()
-   .UseDefaultExceptionsHandling()
-   .UseCorrelationId("SampleSystem_{0}")
    .UseTryProcessDbSession()
    .UseWebApiExceptionExpander()
    .UseAuthentication()
    .UseAuthorization()
    .UseConfigurator()
-   .UseEndpoints(z => z.MapControllers());
+   .UsePlatformApiDocumentation(builder.Environment)
+   .UseEndpoints(x => x.MapControllers());
 
 if (builder.Environment.IsProduction())
 {
-    app.UseMetricsAllMiddleware();
-
     var contextEvaluator = LazyInterfaceImplementHelper.CreateProxy(
         () =>
         {

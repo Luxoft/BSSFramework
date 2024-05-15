@@ -1,6 +1,5 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.DomainDriven.Tracking;
 using Framework.Exceptions;
 using Framework.Persistent;
 
@@ -8,11 +7,6 @@ namespace Framework.Authorization.BLL;
 
 public partial class PrincipalBLL
 {
-    public Principal Create(PrincipalCreateModel createModel)
-    {
-        return new Principal();
-    }
-
     public override void Save(Principal principal)
     {
         if (principal == null) throw new ArgumentNullException(nameof(principal));
@@ -34,11 +28,14 @@ public partial class PrincipalBLL
             permission.RemoveDetails(removedSelfDelegatePermissions);
         }
 
-        this.PermissionRestrictionNotifyProgress(principal);
-
         base.Save(principal);
+    }
 
-        this.NotifySaveAndRemove(principal);
+    protected override void Validate(Principal domainObject, AuthorizationOperationContext operationContext)
+    {
+        this.Context.GeneralPrincipalValidator.Validate(domainObject);
+
+        base.Validate(domainObject, operationContext);
     }
 
     public Principal GetByNameOrCreate(string name, bool autoSave = false)
@@ -74,43 +71,6 @@ public partial class PrincipalBLL
         }
 
         base.Remove(principal);
-    }
-
-    protected override void PostValidate(Principal principal, AuthorizationOperationContext operationContext)
-    {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
-
-        foreach (var permission in principal.Permissions)
-        {
-            this.Context.PermissionValidator.Validate(permission);
-        }
-    }
-
-    private void NotifySaveAndRemove(Principal principal)
-    {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
-
-        principal.Permissions.Foreach(permission => this.Context.Logics.Permission.Save(permission, false));
-
-        this.Context.TrackingService.GetChanges(principal).GetChange(p => p.Permissions).Match(trackProp =>
-                trackProp.ToMergeResult().RemovingItems.Foreach(this.Context.Logics.Permission.Remove));
-    }
-
-    private void PermissionRestrictionNotifyProgress(Principal principal)
-    {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
-
-        var filterItemBLL = this.Context.Logics.PermissionRestriction;
-
-        var prevFilterItems = filterItemBLL.GetListBy(filterItem => filterItem.Permission.Principal == principal);
-
-        var currentFilterItems = principal.Permissions.SelectMany(permission => permission.Restrictions).ToList();
-
-        var mergeResult = prevFilterItems.GetMergeResult(currentFilterItems);
-
-        mergeResult.RemovingItems.Foreach(filterItemBLL.NotifyRemove);
-
-        mergeResult.AddingItems.Foreach(filterItemBLL.NotifySave);
     }
 
     private Principal GetActiveByName(string name)

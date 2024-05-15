@@ -45,11 +45,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     private readonly Permission delegatedFrom;
 
-    private readonly bool isDelegatedFrom;
-
     private BusinessRole role;
-
-    private bool isDelegatedTo;
 
     private Period period = Period.Eternity;
 
@@ -83,8 +79,6 @@ public class Permission : AuditPersistentDomainObjectBase,
 
         this.delegatedFrom = delegatedFrom;
         this.delegatedFrom.AddDetail(this);
-
-        this.isDelegatedFrom = true;
     }
 
     /// <summary>
@@ -115,21 +109,6 @@ public class Permission : AuditPersistentDomainObjectBase,
         get { return this.period.Round(); }
         set { this.period = value.Round(); }
     }
-
-    /// <summary>
-    /// Признак того, что даннная пермиссия была делегирована кому-либо
-    /// </summary>
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual bool IsDelegatedTo
-    {
-        get { return this.isDelegatedTo; }
-        set { this.isDelegatedTo = value; }
-    }
-
-    /// <summary>
-    /// Признак того, что данная пермиссия была делегирована от кого-то
-    /// </summary>
-    public virtual bool IsDelegatedFrom => this.isDelegatedFrom;
 
     /// <summary>
     /// Вычисляемый принципал, который делегировал пермиссию
@@ -182,18 +161,4 @@ public class Permission : AuditPersistentDomainObjectBase,
     IEnumerable<Permission> IChildrenSource<Permission>.Children => this.DelegatedTo;
 
     IEnumerable<IPermissionRestriction<Guid>> IPermission<Guid>.Restrictions => this.Restrictions;
-
-    /// <summary>
-    /// Проверка на уникальноть
-    /// </summary>
-    /// <param name="otherPermission">Другая пермиссия</param>
-    /// <returns></returns>
-    public virtual bool IsDuplicate(Permission otherPermission)
-    {
-        if (otherPermission == null) throw new ArgumentNullException(nameof(otherPermission));
-
-        return otherPermission.Role == this.Role
-               && otherPermission.Period.IsIntersected(this.Period)
-               && otherPermission.GetOrderedSecurityContextIdents().SequenceEqual(this.GetOrderedSecurityContextIdents());
-    }
 }

@@ -18,8 +18,6 @@ public class BusinessRole : BaseDirectory
 
     private string description;
 
-    public const string AdminRoleName = "Administrator";
-
     /// <summary>
     /// Коллекция пермиссий принципалов, выданных по одной бизнес-роль
     /// </summary>
@@ -30,14 +28,10 @@ public class BusinessRole : BaseDirectory
     /// <summary>
     /// Описание бизнес-роли
     /// </summary>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual string Description
     {
         get => this.description.TrimNull();
         set => this.description = value.TrimNull();
     }
-
-    /// <summary>
-    /// Вычисляемый признак того, что текущая бизнес-роль является админской
-    /// </summary>
-    public virtual bool IsAdmin => this.Name == AdminRoleName;
 }

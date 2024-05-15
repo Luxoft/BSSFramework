@@ -18,7 +18,7 @@ public class AuthManager(
     [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
     [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> securityContextTypeRepository,
     ISecurityRoleSource securityRoleSource,
-    IPermissionValidator permissionValidator)
+    IPrincipalGeneralValidator principalGeneralValidator)
 {
     public string GetCurrentUserLogin()
     {
@@ -34,51 +34,51 @@ public class AuthManager(
         return principal.Id;
     }
 
-    public void AddUserRole(string principalName, params TestPermission[] permissions)
+    public void AddUserRole(string principalName, params TestPermission[] testPermissions)
     {
         var actualPrincipalName = principalName ?? this.GetCurrentUserLogin();
 
-        var principalDomainObject = principalRepository.GetQueryable().SingleOrDefault(p => p.Name == actualPrincipalName)
+        var principal = principalRepository.GetQueryable().SingleOrDefault(p => p.Name == actualPrincipalName)
                                     ?? new Principal { Name = actualPrincipalName };
 
-        foreach (var testPermission in permissions)
+        foreach (var testPermission in testPermissions)
         {
             var securityRole = securityRoleSource.GetFullRole(testPermission.SecurityRole);
 
             var businessRole = businessRoleRepository.Load(securityRole.Id);
 
-            var permissionDomainObject = new Permission(principalDomainObject) { Role = businessRole, Period = testPermission.Period };
+            var permission = new Permission(principal) { Role = businessRole, Period = testPermission.Period };
 
-            foreach (var pair in testPermission.Restrictions)
+            foreach (var restrictionInfo in testPermission.Restrictions)
             {
                 var securityContextInfo = (ISecurityContextInfo<Guid>)securityContextInfoService
-                    .GetSecurityContextInfo(pair.Key);
+                    .GetSecurityContextInfo(restrictionInfo.Key);
 
                 var domainSecurityContextType = securityContextTypeRepository.Load(securityContextInfo.Id);
 
-                foreach (var securityContextId in pair.Value)
+                foreach (var securityContextId in restrictionInfo.Value)
                 {
-                    new PermissionRestriction(permissionDomainObject) { SecurityContextType = domainSecurityContextType, SecurityContextId = securityContextId };
+                    new PermissionRestriction(permission) { SecurityContextType = domainSecurityContextType, SecurityContextId = securityContextId };
                 }
             }
-
-            permissionValidator.Validate(permissionDomainObject);
         }
 
-        principalRepository.SaveAsync(principalDomainObject).GetAwaiter().GetResult();
+        principalGeneralValidator.Validate(principal);
+
+        principalRepository.SaveAsync(principal).GetAwaiter().GetResult();
     }
 
     public void RemovePermissions(string principalName)
     {
         var actualPrincipalName = principalName ?? this.GetCurrentUserLogin();
 
-        var principalDomainObject = principalRepository.GetQueryable().SingleOrDefault(p => p.Name == actualPrincipalName);
+        var principal = principalRepository.GetQueryable().SingleOrDefault(p => p.Name == actualPrincipalName);
 
-        if (principalDomainObject != null)
+        if (principal != null)
         {
-            principalDomainObject.ClearDetails<Principal, Permission>();
+            principal.ClearDetails<Principal, Permission>();
 
-            principalRepository.SaveAsync(principalDomainObject).GetAwaiter().GetResult();
+            principalRepository.SaveAsync(principal).GetAwaiter().GetResult();
         }
     }
 }

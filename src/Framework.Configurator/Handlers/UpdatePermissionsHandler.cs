@@ -7,6 +7,7 @@ using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
@@ -14,12 +15,12 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePermissionsHandler(
-    IRepositoryFactory<Principal> PrincipalRepositoryFactory,
+    [FromKeyedServices(nameof(SecurityRole.Administrator))] IRepository<Principal> PrincipalRepository,
+    [FromKeyedServices(nameof(SecurityRole.Administrator))] IRepository<Permission> PermissionRepository,
     IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
-    IRepositoryFactory<Permission> PermissionRepositoryFactory,
     IRepositoryFactory<PermissionRestriction> PermissionRestrictionRepositoryFactory,
     IRepositoryFactory<SecurityContextType> SecurityContextTypeRepositoryFactory,
-    IPermissionValidator PermissionValidator,
+    IPrincipalValidator PrincipalValidator,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
@@ -32,7 +33,7 @@ public record UpdatePermissionsHandler(
 
     private async Task UpdateAsync(Guid id, IEnumerable<RequestBodyDto> permissions, CancellationToken cancellationToken)
     {
-        var principal = await this.PrincipalRepositoryFactory.Create().LoadAsync(id, cancellationToken);
+        var principal = await this.PrincipalRepository.LoadAsync(id, cancellationToken);
 
         var mergeResult = principal.Permissions
                                    .GetMergeResult(
@@ -44,12 +45,13 @@ public record UpdatePermissionsHandler(
         await this.UpdatePermissionsAsync(mergeResult.CombineItems, cancellationToken);
         principal.RemoveDetails(mergeResult.RemovingItems);
 
-        await this.PrincipalRepositoryFactory.Create(SecurityRole.Administrator).SaveAsync(principal, cancellationToken);
+        await this.PrincipalRepository.SaveAsync(principal, cancellationToken);
+
         if (this.ConfiguratorIntegrationEvents != null)
             foreach (var removingItem in mergeResult.RemovingItems)
                 await this.ConfiguratorIntegrationEvents.PermissionRemovedAsync(removingItem, cancellationToken);
 
-        principal.Permissions.Foreach(this.PermissionValidator.Validate);
+        this.PrincipalValidator.Validate(principal);
     }
 
     private async Task CreatePermissionsAsync(Principal principal, IEnumerable<RequestBodyDto> dtoModels, CancellationToken token)
@@ -64,7 +66,7 @@ public record UpdatePermissionsHandler(
                                  Active = true
                              };
 
-            await this.PermissionRepositoryFactory.Create(SecurityRole.Administrator).SaveAsync(permission, token);
+            await this.PermissionRepository.SaveAsync(permission, token);
 
             foreach (var context in dto.Contexts)
             {
@@ -112,7 +114,7 @@ public record UpdatePermissionsHandler(
 
             item.Item1.RemoveDetails(mergeResult.RemovingItems);
 
-            await this.PermissionRepositoryFactory.Create(SecurityRole.Administrator).SaveAsync(item.Item1, token);
+            await this.PermissionRepository.SaveAsync(item.Item1, token);
 
             if (this.ConfiguratorIntegrationEvents != null)
                 await this.ConfiguratorIntegrationEvents.PermissionChangedAsync(item.Item1, token);

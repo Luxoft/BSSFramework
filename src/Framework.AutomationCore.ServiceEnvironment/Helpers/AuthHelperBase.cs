@@ -17,7 +17,7 @@ public class AuthHelperBase : RootServiceProviderContainer
 
     protected TResult EvaluateManager<TResult>(DBSessionMode dbSessionMode, Func<AuthManager, TResult> getResult)
     {
-        return this.RootServiceProvider.GetRequiredService<IServiceEvaluator<AuthManager>>().Evaluate(DBSessionMode.Write, getResult);
+        return this.RootServiceProvider.GetRequiredService<IServiceEvaluator<AuthManager>>().Evaluate(dbSessionMode, getResult);
     }
 
     protected void EvaluateManager(DBSessionMode dbSessionMode, Action<AuthManager> action)

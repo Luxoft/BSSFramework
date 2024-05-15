@@ -2,10 +2,11 @@
 
 using Framework.Authorization.Domain;
 using Framework.Core;
+using Framework.DomainDriven;
 
 namespace Framework.Authorization.BLL;
 
-internal class PermissionDirectInternalFilterModel : DomainObjectFilterModel<Permission>
+internal class PermissionDirectInternalFilterModel : IDomainObjectFilterModel<Permission>
 {
     private readonly IAuthorizationBLLContext context;
     private readonly PermissionDirectFilterModel baseFilterModel;
@@ -19,7 +20,7 @@ internal class PermissionDirectInternalFilterModel : DomainObjectFilterModel<Per
         this.baseFilterModel = baseFilterModel;
     }
 
-    public override Expression<Func<Permission, bool>> ToFilterExpression()
+    public Expression<Func<Permission, bool>> ToFilterExpression()
     {
         var securityContextType = this.baseFilterModel.SecurityContextType;
         var securityContextId = this.baseFilterModel.SecurityContextId;

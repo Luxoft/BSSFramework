@@ -9,32 +9,18 @@ public partial class SecurityDomainBLLBase<TDomainObject>
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        this.PreValidate(domainObject, AuthorizationOperationContext.Save);
-        this.PreRecalculate(domainObject);
-
-        this.PostValidate(domainObject, AuthorizationOperationContext.Save);
-        this.PostRecalculate(domainObject);
+        this.Recalculate(domainObject);
+        this.Validate(domainObject, AuthorizationOperationContext.Save);
     }
 
+    protected internal virtual void Recalculate(TDomainObject domainObject)
+    {
 
-    protected internal virtual void PreValidate(TDomainObject domainObject, AuthorizationOperationContext operationContext)
+    }
+
+    protected internal virtual void Validate(TDomainObject domainObject, AuthorizationOperationContext operationContext)
     {
         this.Context.Validator.Validate(domainObject, (int)operationContext);
-    }
-
-    protected internal virtual void PostValidate(TDomainObject domainObject, AuthorizationOperationContext operationContext)
-    {
-
-    }
-
-    protected internal virtual void PreRecalculate(TDomainObject domainObject)
-    {
-
-    }
-
-    protected internal virtual void PostRecalculate(TDomainObject domainObject)
-    {
-
     }
 
     internal protected void Save(TDomainObject domainObject, bool validate)

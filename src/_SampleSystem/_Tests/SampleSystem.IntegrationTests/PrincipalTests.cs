@@ -3,6 +3,7 @@
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.Events;
+using Framework.SecuritySystem;
 using Framework.Validation;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -66,7 +67,7 @@ public class PrincipalTests : TestBase
 
         var principalId = this.AuthHelper.SavePrincipal(name, true);
 
-        var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(Framework.Authorization.Domain.BusinessRole.AdminRoleName)).Identity;
+        var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(SecurityRole.Administrator.Name)).Identity;
 
         var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(new PrincipalIdentityDTO(principalId), new PermissionStrictDTO
                                                                                  {

@@ -24,8 +24,6 @@
     <property name="Comment" column="comment" length="2147483647" access="field.camelcase" />
     <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="IsDelegatedFrom" column="isDelegatedFrom" access="field.camelcase" />
-    <property name="IsDelegatedTo" column="isDelegatedTo" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <many-to-one name="DelegatedFrom" column="delegatedFromId" class="Framework.Authorization.Domain.Permission" access="field.camelcase" />

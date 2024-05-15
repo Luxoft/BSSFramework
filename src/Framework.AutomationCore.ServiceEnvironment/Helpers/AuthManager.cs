@@ -4,7 +4,6 @@ using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem;
 using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
-using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;

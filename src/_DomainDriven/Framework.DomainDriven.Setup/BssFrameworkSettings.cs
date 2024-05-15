@@ -6,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
-using System.Net.Sockets;
-
 using Framework.Authorization.SecuritySystem;
 using Framework.Persistent;
 

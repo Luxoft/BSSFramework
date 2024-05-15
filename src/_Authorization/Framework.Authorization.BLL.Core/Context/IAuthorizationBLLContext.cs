@@ -18,9 +18,11 @@ public partial interface IAuthorizationBLLContext :
 
     ITypeResolverContainer<string>
 {
-    IPrincipalGeneralValidator GeneralPrincipalValidator { get; }
+    IPrincipalGeneralValidator PrincipalValidator { get; }
 
     ICurrentPrincipalSource CurrentPrincipalSource { get; }
+
+    IActualPrincipalSource ActualPrincipalSource { get; }
 
     Principal CurrentPrincipal => this.CurrentPrincipalSource.CurrentPrincipal;
 

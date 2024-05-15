@@ -31,24 +31,14 @@ public partial class PermissionBLL
         permission.DelegatedTo.Foreach(delegatedPermission => this.Context.Logics.Permission.Save(delegatedPermission, false));
     }
 
-    protected override void Recalculate(Permission permission)
-    {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-        permission.IsDelegatedTo = permission.DelegatedTo.Any();
-
-        base.Recalculate(permission);
-    }
-
     protected override void Validate(Permission permission, AuthorizationOperationContext operationContext)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
-        this.Context.GeneralPrincipalValidator.Validate(permission.Principal);
+        this.Context.PrincipalValidator.Validate(permission.Principal);
 
         base.Validate(permission, operationContext);
     }
-
 
     public void ChangeDelegatePermissions(ChangePermissionDelegatesModel changePermissionDelegatesModel)
     {

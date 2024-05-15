@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Configurator.Interfaces;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
@@ -20,7 +21,7 @@ public record UpdatePermissionsHandler(
     IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
     IRepositoryFactory<PermissionRestriction> PermissionRestrictionRepositoryFactory,
     IRepositoryFactory<SecurityContextType> SecurityContextTypeRepositoryFactory,
-    IPrincipalValidator PrincipalValidator,
+    IPrincipalGeneralValidator PrincipalValidator,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
@@ -45,13 +46,12 @@ public record UpdatePermissionsHandler(
         await this.UpdatePermissionsAsync(mergeResult.CombineItems, cancellationToken);
         principal.RemoveDetails(mergeResult.RemovingItems);
 
+        await this.PrincipalValidator.ValidateAsync(principal, cancellationToken);
         await this.PrincipalRepository.SaveAsync(principal, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
             foreach (var removingItem in mergeResult.RemovingItems)
                 await this.ConfiguratorIntegrationEvents.PermissionRemovedAsync(removingItem, cancellationToken);
-
-        this.PrincipalValidator.Validate(principal);
     }
 
     private async Task CreatePermissionsAsync(Principal principal, IEnumerable<RequestBodyDto> dtoModels, CancellationToken token)
@@ -62,8 +62,7 @@ public record UpdatePermissionsHandler(
                              {
                                  Role = await this.BusinessRoleRepositoryFactory.Create().LoadAsync(new Guid(dto.RoleId), token),
                                  Comment = dto.Comment,
-                                 Period = dto.StartDate.ToPeriod(dto.EndDate),
-                                 Active = true
+                                 Period = dto.StartDate.ToPeriod(dto.EndDate)
                              };
 
             await this.PermissionRepository.SaveAsync(permission, token);

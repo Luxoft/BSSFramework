@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
@@ -18,6 +19,8 @@ namespace Framework.Authorization.Domain;
 [DebuggerDisplay("{Name}, RunAs={RunAs}")]
 public class Principal : BaseDirectory, IMaster<Permission>, IPrincipal<Guid>
 {
+    private bool active = true;
+
     private readonly ICollection<Permission> permissions = new List<Permission>();
 
     private Principal runAs;
@@ -33,11 +36,14 @@ public class Principal : BaseDirectory, IMaster<Permission>, IPrincipal<Guid>
         set { this.externalId = value; }
     }
 
-    [CustomSerialization(CustomSerializationMode.Normal)]
-    public override bool Active
+    /// <summary>
+    /// Признак активности доменного объекта
+    /// </summary>
+    [DefaultValue(true)]
+    public virtual bool Active
     {
-        get { return base.Active; }
-        set { base.Active = value; }
+        get { return this.active; }
+        set { this.active = value; }
     }
 
     /// <summary>

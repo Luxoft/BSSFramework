@@ -6,7 +6,7 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 /// Контексты, в разрезе которых выдаются права
 /// </summary>
-public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, IVisualIdentityObject, IActiveObject, IEquatable<SecurityEntity>
+public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, IVisualIdentityObject, IEquatable<SecurityEntity>
 {
     /// <summary>
     /// Конструктор
@@ -16,8 +16,6 @@ public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, IVisualI
     }
 
     public Guid Id { get; set; }
-
-    public bool Active { get; set; }
 
     public string Name { get; set; }
 

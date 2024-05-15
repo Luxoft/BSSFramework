@@ -8,7 +8,7 @@ namespace Framework.Authorization.SecuritySystem.Validation;
 
 public class PrincipalGeneralValidator : AbstractValidator<Principal>, IPrincipalGeneralValidator
 {
-    public const string Key = "General";
+    //public const string Key = "General";
 
     public PrincipalGeneralValidator(
         [FromKeyedServices(PrincipalNameValidator.Key)] IValidator<Principal> principalNameValidator,

@@ -47,7 +47,8 @@ public partial class AuthorizationBLLContext
             IAvailablePermissionSource availablePermissionSource,
             IAvailableSecurityRoleSource availableSecurityRoleSource,
             ICurrentPrincipalSource currentPrincipalSource,
-            IPrincipalGeneralValidator generalPrincipalValidator)
+            IPrincipalGeneralValidator principalValidator,
+            IActualPrincipalSource actualPrincipalSource)
             : base(
                    serviceProvider,
                    operationSender,
@@ -64,7 +65,8 @@ public partial class AuthorizationBLLContext
         this.AvailablePermissionSource = availablePermissionSource;
         this.AvailableSecurityRoleSource = availableSecurityRoleSource;
         this.CurrentPrincipalSource = currentPrincipalSource;
-        this.GeneralPrincipalValidator = generalPrincipalValidator;
+        this.PrincipalValidator = principalValidator;
+        this.ActualPrincipalSource = actualPrincipalSource;
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
         this.AuthorizationSystem = authorizationSystem;
         this.RunAsManager = runAsManager;
@@ -89,9 +91,11 @@ public partial class AuthorizationBLLContext
 
     public IAuthorizationSystem<Guid> AuthorizationSystem { get; }
 
-    public IPrincipalGeneralValidator GeneralPrincipalValidator { get; }
+    public IPrincipalGeneralValidator PrincipalValidator { get; }
 
     public ICurrentPrincipalSource CurrentPrincipalSource { get; }
+
+    public IActualPrincipalSource ActualPrincipalSource { get; }
 
     public IRunAsManager RunAsManager { get; }
 

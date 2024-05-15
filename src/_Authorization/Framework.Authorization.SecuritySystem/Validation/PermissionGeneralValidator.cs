@@ -11,10 +11,11 @@ public class PermissionGeneralValidator : AbstractValidator<Permission>
     public const string Key = "General";
 
     public PermissionGeneralValidator(
-        [FromKeyedServices(PermissionRestrictionValidator.Key)] IValidator<Permission> permissionRestrictionValidator,
+        IValidator<PermissionRestriction> permissionRestrictionValidator,
         [FromKeyedServices(PermissionDelegateValidator.Key)] IValidator<Permission> permissionDelegateValidator)
     {
-        this.Include(permissionRestrictionValidator);
+        this.RuleForEach(permission => permission.Restrictions).SetValidator(permissionRestrictionValidator);
+
         this.Include(permissionDelegateValidator);
     }
 }

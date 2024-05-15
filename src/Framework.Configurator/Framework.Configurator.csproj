@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\_Authorization\Framework.Authorization.SecuritySystem\Framework.Authorization.SecuritySystem.csproj" />
-    <ProjectReference Include="..\_Configuration\Framework.Configuration.Domain.Models\Framework.Configuration.Domain.Models.csproj" />
+    <ProjectReference Include="..\_Configuration\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
   </ItemGroup>
 
 </Project>

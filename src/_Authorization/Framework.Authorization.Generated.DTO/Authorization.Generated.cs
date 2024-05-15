@@ -144,7 +144,6 @@ namespace Framework.Authorization.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-            target.Active = source.Active;
         }
         
         public virtual void MapBaseAuditPersistentToStrictForSecurityContextType(Framework.Authorization.Generated.DTO.SecurityContextTypeStrictDTO target, Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO source)
@@ -636,6 +635,7 @@ namespace Framework.Authorization.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
+            target.Active = source.Active;
             target.ExternalId = source.ExternalId;
             target.Name = source.Name;
         }
@@ -662,7 +662,6 @@ namespace Framework.Authorization.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-            target.Active = source.Active;
             target.Id = source.Id;
             target.Name = source.Name;
             target.ParentId = source.ParentId;
@@ -1292,8 +1291,6 @@ namespace Framework.Authorization.Generated.DTO
     public abstract partial class BaseAuditPersistentDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO
     {
         
-        private bool _active;
-        
         private System.DateTime? _createDate;
         
         private string _createdBy;
@@ -1310,19 +1307,6 @@ namespace Framework.Authorization.Generated.DTO
                 base(mappingService, domainObject)
         {
             mappingService.MapAuditPersistentDomainObjectBase(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -1738,8 +1722,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class BusinessRoleEventRichDTO
     {
         
-        private bool _active;
-        
         private System.DateTime? _createDate;
         
         private string _createdBy;
@@ -1761,19 +1743,6 @@ namespace Framework.Authorization.Generated.DTO
         public BusinessRoleEventRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.BusinessRole domainObject)
         {
             mappingService.MapBusinessRole(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -1873,8 +1842,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class BusinessRoleEventSimpleDTO
     {
         
-        private bool _active;
-        
         private System.DateTime? _createDate;
         
         private string _createdBy;
@@ -1896,19 +1863,6 @@ namespace Framework.Authorization.Generated.DTO
         public BusinessRoleEventSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.BusinessRole domainObject)
         {
             mappingService.MapBusinessRole(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -2985,8 +2939,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionEventRichDTO
     {
         
-        private bool _active;
-        
         private string _comment;
         
         private System.DateTime? _createDate;
@@ -3016,19 +2968,6 @@ namespace Framework.Authorization.Generated.DTO
         public PermissionEventRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.Permission domainObject)
         {
             mappingService.MapPermission(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -3180,8 +3119,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionEventSimpleDTO
     {
         
-        private bool _active;
-        
         private string _comment;
         
         private System.DateTime? _createDate;
@@ -3203,19 +3140,6 @@ namespace Framework.Authorization.Generated.DTO
         public PermissionEventSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.Permission domainObject)
         {
             mappingService.MapPermission(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -3991,8 +3915,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionRestrictionEventRichDTO
     {
         
-        private bool _active;
-        
         private System.DateTime? _createDate;
         
         private string _createdBy;
@@ -4016,19 +3938,6 @@ namespace Framework.Authorization.Generated.DTO
         public PermissionRestrictionEventRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
             mappingService.MapPermissionRestriction(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -4141,8 +4050,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionRestrictionEventSimpleDTO
     {
         
-        private bool _active;
-        
         private System.DateTime? _createDate;
         
         private string _createdBy;
@@ -4162,19 +4069,6 @@ namespace Framework.Authorization.Generated.DTO
         public PermissionRestrictionEventSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
             mappingService.MapPermissionRestriction(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -4302,6 +4196,8 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
     {
         
+        private bool _active;
+        
         private System.Guid? _externalId;
         
         private string _name;
@@ -4319,6 +4215,19 @@ namespace Framework.Authorization.Generated.DTO
         public PrincipalSimpleDTO(string id)
         {
             this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -5279,8 +5188,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityContextTypeEventRichDTO
     {
         
-        private bool _active;
-        
         private System.DateTime? _createDate;
         
         private string _createdBy;
@@ -5300,19 +5207,6 @@ namespace Framework.Authorization.Generated.DTO
         public SecurityContextTypeEventRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject)
         {
             mappingService.MapSecurityContextType(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -5399,8 +5293,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityContextTypeEventSimpleDTO
     {
         
-        private bool _active;
-        
         private System.DateTime? _createDate;
         
         private string _createdBy;
@@ -5420,19 +5312,6 @@ namespace Framework.Authorization.Generated.DTO
         public SecurityContextTypeEventSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject)
         {
             mappingService.MapSecurityContextType(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -5521,8 +5400,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityEntitySimpleDTO : Framework.Authorization.Generated.DTO.BaseAbstractDTO
     {
         
-        private bool _active;
-        
         private System.Guid _id;
         
         private string _name;
@@ -5537,19 +5414,6 @@ namespace Framework.Authorization.Generated.DTO
                 base(mappingService, domainObject)
         {
             mappingService.MapSecurityEntity(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -5645,8 +5509,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityEntityStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityEntity>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityEntity>
     {
         
-        private bool _active;
-        
         private System.Guid _id;
         
         private string _name;
@@ -5699,19 +5561,6 @@ namespace Framework.Authorization.Generated.DTO
         public SecurityEntityStrictDTO(Framework.Authorization.Generated.DTO.SecurityEntitySimpleDTO source) : 
                 this(source, Framework.Authorization.Generated.DTO.AuthorizationClientPrimitiveDTOMappingService.Default)
         {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -5805,8 +5654,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityEntityEventRichDTO
     {
         
-        private bool _active;
-        
         private System.Guid _id;
         
         private string _name;
@@ -5820,19 +5667,6 @@ namespace Framework.Authorization.Generated.DTO
         public SecurityEntityEventRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityEntity domainObject)
         {
             mappingService.MapSecurityEntity(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -5880,8 +5714,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityEntityEventSimpleDTO
     {
         
-        private bool _active;
-        
         private System.Guid _id;
         
         private string _name;
@@ -5895,19 +5727,6 @@ namespace Framework.Authorization.Generated.DTO
         public SecurityEntityEventSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityEntity domainObject)
         {
             mappingService.MapSecurityEntity(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -7054,7 +6873,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapAuditPersistentDomainObjectBase(Framework.Authorization.Domain.AuditPersistentDomainObjectBase domainObject, Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -7087,7 +6905,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapBusinessRole(Framework.Authorization.Domain.BusinessRole domainObject, Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Description = domainObject.Description;
@@ -7099,7 +6916,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapBusinessRole(Framework.Authorization.Domain.BusinessRole domainObject, Framework.Authorization.Generated.DTO.BusinessRoleEventSimpleDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Description = domainObject.Description;
@@ -7299,7 +7115,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPermission(Framework.Authorization.Domain.Permission domainObject, Framework.Authorization.Generated.DTO.PermissionEventRichDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.Comment = domainObject.Comment;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -7336,7 +7151,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPermission(Framework.Authorization.Domain.Permission domainObject, Framework.Authorization.Generated.DTO.PermissionEventSimpleDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.Comment = domainObject.Comment;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -7446,7 +7260,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Id = domainObject.Id;
@@ -7473,7 +7286,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPermissionRestriction(Framework.Authorization.Domain.PermissionRestriction domainObject, Framework.Authorization.Generated.DTO.PermissionRestrictionEventSimpleDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Id = domainObject.Id;
@@ -7494,6 +7306,7 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPrincipal(Framework.Authorization.Domain.Principal domainObject, Framework.Authorization.Generated.DTO.PrincipalSimpleDTO mappingObject)
         {
+            mappingObject.Active = domainObject.Active;
             mappingObject.ExternalId = domainObject.ExternalId;
             mappingObject.Name = domainObject.Name;
         }
@@ -7591,7 +7404,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapSecurityContextType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Id = domainObject.Id;
@@ -7602,7 +7414,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapSecurityContextType(Framework.Authorization.Domain.SecurityContextType domainObject, Framework.Authorization.Generated.DTO.SecurityContextTypeEventSimpleDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Id = domainObject.Id;
@@ -7613,7 +7424,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapSecurityEntity(Framework.Authorization.Domain.SecurityEntity domainObject, Framework.Authorization.Generated.DTO.SecurityEntitySimpleDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.Id = domainObject.Id;
             mappingObject.Name = domainObject.Name;
             mappingObject.ParentId = domainObject.ParentId;
@@ -7629,7 +7439,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapSecurityEntity(Framework.Authorization.Generated.DTO.SecurityEntityStrictDTO mappingObject, Framework.Authorization.Domain.SecurityEntity domainObject)
         {
-            domainObject.Active = mappingObject.Active;
             domainObject.Id = mappingObject.Id;
             domainObject.Name = mappingObject.Name;
             domainObject.ParentId = mappingObject.ParentId;
@@ -7637,7 +7446,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapSecurityEntity(Framework.Authorization.Domain.SecurityEntity domainObject, Framework.Authorization.Generated.DTO.SecurityEntityEventRichDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.Id = domainObject.Id;
             mappingObject.Name = domainObject.Name;
             mappingObject.ParentId = domainObject.ParentId;
@@ -7645,7 +7453,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapSecurityEntity(Framework.Authorization.Domain.SecurityEntity domainObject, Framework.Authorization.Generated.DTO.SecurityEntityEventSimpleDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.Id = domainObject.Id;
             mappingObject.Name = domainObject.Name;
             mappingObject.ParentId = domainObject.ParentId;

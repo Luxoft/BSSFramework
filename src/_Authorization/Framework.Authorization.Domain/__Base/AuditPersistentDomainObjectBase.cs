@@ -12,8 +12,6 @@ namespace Framework.Authorization.Domain;
 /// </summary>
 public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IDefaultAuditPersistentDomainObjectBase
 {
-    private bool active = true;
-
     private string createdBy;
     private DateTime? createDate;
 
@@ -60,16 +58,5 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     {
         get { return this.createdBy.TrimNull(); }
         internal protected set { this.createdBy = value.TrimNull(); }
-    }
-
-    /// <summary>
-    /// Признак активности доменного объекта
-    /// </summary>
-    [DefaultValue(true)]
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual bool Active
-    {
-        get { return this.active; }
-        set { this.active = value; }
     }
 }

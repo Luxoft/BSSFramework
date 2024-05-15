@@ -33,7 +33,7 @@ public partial class PrincipalBLL
 
     protected override void Validate(Principal domainObject, AuthorizationOperationContext operationContext)
     {
-        this.Context.GeneralPrincipalValidator.Validate(domainObject);
+        this.Context.PrincipalValidator.Validate(domainObject);
 
         base.Validate(domainObject, operationContext);
     }

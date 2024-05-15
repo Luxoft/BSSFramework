@@ -9,4 +9,6 @@ public interface IAuthorizationTypedExternalSource
     IEnumerable<SecurityEntity> GetSecurityEntitiesByIdents(IEnumerable<Guid> securityEntityIdents);
 
     IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId);
+
+    bool IsExists (Guid securityEntityId);
 }

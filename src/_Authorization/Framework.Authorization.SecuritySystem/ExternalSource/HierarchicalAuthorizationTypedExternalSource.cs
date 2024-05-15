@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
 public class HierarchicalAuthorizationTypedExternalSource<TSecurityContext> : AuthorizationTypedExternalSourceBase<TSecurityContext>
-    where TSecurityContext : class, IIdentityObject<Guid>, IActiveObject, IParentSource<TSecurityContext>, ISecurityContext
+    where TSecurityContext : class, IIdentityObject<Guid>, IParentSource<TSecurityContext>, ISecurityContext
 {
     private readonly ISecurityContextDisplayService<TSecurityContext> displayService;
 
@@ -25,7 +25,6 @@ public class HierarchicalAuthorizationTypedExternalSource<TSecurityContext> : Au
 
         new SecurityEntity
         {
-            Active = securityContext.Active,
             Name = this.displayService.ToString(securityContext),
             Id = securityContext.Id,
             ParentId = securityContext.Parent.Maybe(v => v.Id)

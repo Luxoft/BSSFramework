@@ -9,9 +9,8 @@ using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
 
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
-using Serilog;
 
 namespace Framework.NotificationCore.Senders;
 
@@ -23,26 +22,28 @@ public class SmtpNotificationMessageSender : IMessageSender<NotificationEventDTO
 
     private readonly IRewriteReceiversService rewriteReceiversService;
 
+    private readonly ILogger<SmtpNotificationMessageSender> logger;
+
     private readonly ISmtpMessageSender sender;
 
     public SmtpNotificationMessageSender(
             IOptions<SmtpSettings> settings,
             IRewriteReceiversService rewriteReceiversService,
+            ILogger<SmtpNotificationMessageSender> logger,
             IConfigurationBLLContext context)
     {
         this.context = context;
-
         this.settings = settings;
-
         this.rewriteReceiversService = rewriteReceiversService;
+        this.logger = logger;
 
         this.sender = this.GetSender();
     }
 
     private ISmtpMessageSender GetSender() =>
             this.IsProduction()
-                    ? new ProdSmtpMessageSender(this.settings.Value, this.rewriteReceiversService)
-                    : new TestSmtpMessageSender(this.settings.Value, this.rewriteReceiversService);
+                    ? new ProdSmtpMessageSender(this.settings.Value, this.rewriteReceiversService, this.logger)
+                    : new TestSmtpMessageSender(this.settings.Value, this.rewriteReceiversService, this.logger);
 
     /// <summary>
     /// Переопределять только если на проде ASPNETCORE_ENVIRONMENT не Production и нужен workaround.
@@ -63,7 +64,7 @@ public class SmtpNotificationMessageSender : IMessageSender<NotificationEventDTO
         }
         catch (Exception e)
         {
-            Log.Error(e, "Failed to send notification to smtp server");
+            this.logger.LogError(e, "Failed to send notification to smtp server");
 
             throw;
         }

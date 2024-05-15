@@ -5,9 +5,8 @@ using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Notification;
 
-
-
-using Serilog;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
 
@@ -23,7 +22,8 @@ public class MessageTemplateFactory<TBLLContext>
     private readonly AttachmentsResolver<TBLLContext> attachmentResolver;
 
     private readonly ExcessTemplatesFilter templatesFilter;
-    private readonly ILogger logger;
+
+    private readonly ConfigurationContextFacade _configurationContextFacade;
 
     /// <summary>Создаёт экземпляр класса <see cref="MessageTemplateFactory" />.</summary>
     /// <param name="recipientsResolver">
@@ -44,16 +44,10 @@ public class MessageTemplateFactory<TBLLContext>
             ExcessTemplatesFilter templatesFilter,
             ConfigurationContextFacade configurationContextFacade)
     {
-        if (configurationContextFacade == null)
-        {
-            throw new ArgumentNullException(nameof(configurationContextFacade));
-        }
-
         this.recipientsResolver = recipientsResolver ?? throw new ArgumentNullException(nameof(recipientsResolver));
         this.attachmentResolver = attachmentResolver ?? throw new ArgumentNullException(nameof(attachmentResolver));
         this.templatesFilter = templatesFilter ?? throw new ArgumentNullException(nameof(templatesFilter));
-
-        this.logger = Log.Logger.ForContext(this.GetType());
+        this._configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
     }
 
     /// <summary>Создаёт список шаблонов уведомлений.</summary>
@@ -88,23 +82,24 @@ public class MessageTemplateFactory<TBLLContext>
         var exceptions = new List<Exception>();
         var templates = new List<MessageTemplateNotification>();
 
+        var logger = this.GetLogger();
         foreach (var subscription in subscriptions)
         {
             try
             {
-                this.logger.Information("Create templates for subscription '{subscription}'.", subscription);
+                logger.LogDebug("Create templates for subscription '{subscription}'.", subscription);
 
                 var createResult = this.Create(subscription, versions).ToList();
                 templates.AddRange(createResult);
 
-                this.logger.Information("For subscription '{subscription}' '{createResultCount}' templates has been created. Templates: '{createResult}'.",
-                                        subscription,
-                                        createResult.Count,
-                                        createResult.Select(notification => notification).Join(", "));
+                logger.LogDebug("For subscription '{subscription}' '{createResultCount}' templates has been created. Templates: '{createResult}'.",
+                                       subscription,
+                                       createResult.Count,
+                                       createResult.Select(notification => notification).Join(", "));
             }
             catch (Exception ex)
             {
-                this.logger.Error(ex, "Can't create template");
+                logger.LogError(ex, "Can't create template");
                 exceptions.Add(ex);
             }
         }
@@ -119,14 +114,14 @@ public class MessageTemplateFactory<TBLLContext>
         return result;
     }
 
-    private IEnumerable<MessageTemplateNotification> FilterTemplates(
-            IList<MessageTemplateNotification> templates)
+    private IEnumerable<MessageTemplateNotification> FilterTemplates(IList<MessageTemplateNotification> templates)
     {
-        this.logger.Information("Remove excess message templates. Incoming templates: {templates}", templates.Select(t => t.MessageTemplateCode).Join(", "));
+        var logger = this.GetLogger();
+        logger.LogDebug("Remove excess message templates. Incoming templates: {templates}", templates.Select(t => t.MessageTemplateCode).Join(", "));
 
         var result = this.templatesFilter.FilterTemplates(templates).ToList();
 
-        this.logger.Information("Excess message templates has been removed. Outgoing templates: {result}", result.Select(t => t.MessageTemplateCode).Join(", "));
+        logger.LogDebug("Excess message templates has been removed. Outgoing templates: {result}", result.Select(t => t.MessageTemplateCode).Join(", "));
 
         return result;
     }
@@ -185,10 +180,9 @@ public class MessageTemplateFactory<TBLLContext>
         return result;
     }
 
-    private MessageTemplateFactoryBase CreateFactory(RecipientsBag recipientsBag)
-    {
-        return recipientsBag.Cc.Any()
-                       ? (MessageTemplateFactoryBase)new MessageTemplateFactoryCc()
-                       : new MessageTemplateFactoryTo();
-    }
+    private MessageTemplateFactoryBase CreateFactory(RecipientsBag recipientsBag) =>
+        recipientsBag.Cc.Any() ? new MessageTemplateFactoryCc() : new MessageTemplateFactoryTo();
+
+    private ILogger<MessageTemplateFactory<TBLLContext>> GetLogger() =>
+        this._configurationContextFacade.ServiceProvider.GetRequiredService<ILogger<MessageTemplateFactory<TBLLContext>>>();
 }

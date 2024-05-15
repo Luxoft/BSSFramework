@@ -3,20 +3,19 @@
     <PackageId>Luxoft.Framework.WebApi.Utils</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs"/>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="App.Metrics.AspNetCore.Mvc" />
-    <PackageReference Include="App.Metrics.Reporting.InfluxDB" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" />
-    <PackageReference Include="Microsoft.Extensions.Logging" />
-    <PackageReference Include="Serilog" />
-    <PackageReference Include="Serilog.AspNetCore" />
-    <PackageReference Include="Swashbuckle.AspNetCore" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" />
+    <PackageReference Include="App.Metrics.AspNetCore.Mvc"/>
+    <PackageReference Include="App.Metrics.Reporting.InfluxDB"/>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer"/>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning"/>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer"/>
+    <PackageReference Include="Microsoft.Extensions.Logging"/>
+    <PackageReference Include="Serilog.AspNetCore"/>
+    <PackageReference Include="Swashbuckle.AspNetCore"/>
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft"/>
   </ItemGroup>
 
 </Project>

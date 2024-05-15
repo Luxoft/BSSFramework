@@ -1,19 +1,20 @@
-﻿namespace Automation.ServiceEnvironment.Services;
+﻿using Automation.Settings;
+using Microsoft.Extensions.Options;
 
-public class IntegrationTestUserAuthenticationService : IIntegrationTestUserAuthenticationService
+namespace Automation.ServiceEnvironment.Services;
+
+public class IntegrationTestUserAuthenticationService(IOptions<AutomationFrameworkSettings> settings)
+    : IIntegrationTestUserAuthenticationService
 {
-    private readonly string integrationTestUserName;
-
-    public IntegrationTestUserAuthenticationService(string integrationTestUserName = "IntegrationTestRootUser") =>
-        this.integrationTestUserName = integrationTestUserName;
+    private string IntegrationTestUserName => settings.Value.IntegrationTestUserName;
 
     public string CustomUserName { get; internal set; }
 
-    public void SetUserName(string customUserName) => this.CustomUserName = customUserName ?? this.integrationTestUserName;
+    public void SetUserName(string customUserName) => this.CustomUserName = customUserName ?? this.IntegrationTestUserName;
 
-    public void Reset() => this.CustomUserName = this.integrationTestUserName;
+    public void Reset() => this.CustomUserName = this.IntegrationTestUserName;
 
-    public string GetUserName() => this.CustomUserName ?? this.integrationTestUserName;
+    public string GetUserName() => this.CustomUserName ?? this.IntegrationTestUserName;
 
     public async Task<T> WithImpersonateAsync<T>(string customUserName, Func<Task<T>> func)
     {

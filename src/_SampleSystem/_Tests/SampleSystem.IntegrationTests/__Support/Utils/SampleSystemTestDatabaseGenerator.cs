@@ -9,20 +9,13 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.Support.Utils;
 
-public class SampleSystemTestDatabaseGenerator : TestDatabaseGenerator
+public class SampleSystemTestDatabaseGenerator(
+    IDatabaseContext databaseContext,
+    ConfigUtil configUtil,
+    TestDataInitializer testDataInitializer)
+    : TestDatabaseGenerator(databaseContext, configUtil)
 {
     public override IEnumerable<string> TestServers => new List<string> { "." };
-
-    private readonly IServiceProvider serviceProvider;
-
-    public SampleSystemTestDatabaseGenerator(
-            IDatabaseContext databaseContext,
-            ConfigUtil configUtil,
-            IServiceProvider serviceProvider)
-            : base(databaseContext, configUtil)
-    {
-        this.serviceProvider = serviceProvider;
-    }
 
     public override void GenerateDatabases()
     {
@@ -43,7 +36,7 @@ public class SampleSystemTestDatabaseGenerator : TestDatabaseGenerator
         }
     }
 
-    public override void GenerateTestData() => new TestDataInitialize(this.serviceProvider).TestData();
+    public override void GenerateTestData() => testDataInitializer.Initialize();
 
     public override void ExecuteInsertsForDatabases()
     {

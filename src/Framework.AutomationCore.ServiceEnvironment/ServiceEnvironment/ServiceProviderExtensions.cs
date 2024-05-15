@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using Automation.ServiceEnvironment.Services;
+using Automation.Settings;
 
 using Framework.Core.Services;
 using Framework.DependencyInjection;
@@ -8,6 +9,7 @@ using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
@@ -37,7 +39,7 @@ public static class ServiceProviderExtensions
         return services;
     }
 
-    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services) =>
+    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services, IConfiguration configuration) =>
 
         services.AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
@@ -53,5 +55,7 @@ public static class ServiceProviderExtensions
 
                 .AddSingleton(typeof(ControllerEvaluator<>))
 
-                .AddScoped<AuthManager>();
+                .AddScoped<AuthManager>()
+
+                .Configure<AutomationFrameworkSettings>(nameof(AutomationFrameworkSettings), configuration);
 }

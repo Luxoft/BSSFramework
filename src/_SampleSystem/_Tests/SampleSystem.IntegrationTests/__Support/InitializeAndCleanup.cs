@@ -17,6 +17,7 @@ using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.WebApiCore;
 using SampleSystem.IntegrationTests.__Support.Utils;
+using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.__Support;
 
@@ -46,20 +47,24 @@ public class InitializeAndCleanup
         return services
                .RegisterGeneralDependencyInjection(configuration)
 
-               .ApplyIntegrationTestServices()
+               .AddSingleton<SampleSystemInitializer>()
+
+               .ApplyIntegrationTestServices(configuration)
 
                .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
 
                .AddSingleton<ICapSubscribe, CapIntegrationController>()
                .ReplaceSingleton<IConsumerServiceSelector, TestConsumerServiceSelector>()
+
                //.ReplaceSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
                //.ReplaceSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
 
-               .AddSingleton<SampleSystemInitializer>()
 
                .RegisterControllers([typeof(EmployeeController).Assembly])
 
                .AddSingleton<DataHelper>()
-               .AddSingleton<AuthHelper>();
+               .AddSingleton<AuthHelper>()
+
+               .AddSingleton<TestDataInitializer>();
     }
 }

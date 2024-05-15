@@ -11,5 +11,5 @@ public class IntegrationWebApi : IntegrationWebApiBase
     {
     }
 
-    protected override string IntegrationUserName { get; } = DefaultConstants.INTEGRATION_USER;
+    protected override string IntegrationUserName { get; } = DefaultConstants.INTEGRATION_BUS;
 }

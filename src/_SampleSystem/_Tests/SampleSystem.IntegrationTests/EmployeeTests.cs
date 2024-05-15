@@ -247,7 +247,7 @@ public class EmployeeTests : TestBase
 
         // Act
         var processedModCount = restFacade
-                                .WithImpersonate(DefaultConstants.INTEGRATION_USER)
+                                .WithImpersonate(DefaultConstants.INTEGRATION_BUS)
                                 .Evaluate(c => c.ProcessModifications(1000));
 
         // Assert
@@ -279,7 +279,7 @@ public class EmployeeTests : TestBase
         var preProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
         var preProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
 
-        restFacade.WithImpersonate(DefaultConstants.INTEGRATION_USER).Evaluate(c => c.ProcessModifications(1000));
+        restFacade.WithImpersonate(DefaultConstants.INTEGRATION_BUS).Evaluate(c => c.ProcessModifications(1000));
 
         var postProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
         var postProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());

@@ -61,10 +61,6 @@ public partial class DataHelper
         {
             login = $"{Environment.MachineName}\\{nameEng.FirstName}";
         }
-        else if (login.Equals(DefaultConstants.EMPLOYEE_MY_LOGIN))
-        {
-            login = this.AuthHelper.GetCurrentUserLogin();
-        }
 
         var hrDepartmentId = hrDepartment != null
                                      ? ((HRDepartmentIdentityDTO)hrDepartment).Id

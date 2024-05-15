@@ -50,9 +50,9 @@ public class AuthHelperBase : RootServiceProviderContainer
         await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manger => await manger.AddUserRoleAsync(principalName, permissions, cancellationToken));
     }
 
-    public void SetCurrentUserRole(params TestPermission[] permissions)
+    public virtual void AddUserToAdmin(string principalName)
     {
-        this.SetUserRole(default, permissions);
+        this.SetUserRole(principalName, SecurityRole.Administrator, SecurityRole.SystemIntegration);
     }
 
     public void SetUserRole(string principalName, params TestPermission[] permissions)
@@ -67,9 +67,15 @@ public class AuthHelperBase : RootServiceProviderContainer
         this.AddUserRole(principalName, permissions);
     }
 
+
     public virtual void AddCurrentUserToAdmin()
     {
-        this.SetCurrentUserRole(SecurityRole.Administrator, SecurityRole.SystemIntegration);
+        this.AddUserToAdmin(null);
+    }
+
+    public void SetCurrentUserRole(params TestPermission[] permissions)
+    {
+        this.SetUserRole(default, permissions);
     }
 
     public void RemovePermissions(string principalName)

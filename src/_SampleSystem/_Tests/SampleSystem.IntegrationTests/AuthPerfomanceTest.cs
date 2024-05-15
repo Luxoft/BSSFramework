@@ -45,7 +45,7 @@ public class AuthPerformanceTest : TestBase
         this.employeeSource =
             new[] { default(EmployeeIdentityDTO?), (EmployeeIdentityDTO?)this.DataHelper.SaveEmployee() }.ToList();
 
-        this.AuthHelper.SavePrincipal(PrincipalName, true);
+        this.AuthHelper.SavePrincipal(PrincipalName);
 
         this.GeneratePermission();
     }

@@ -635,8 +635,6 @@ namespace Framework.Authorization.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-            target.Active = source.Active;
-            target.ExternalId = source.ExternalId;
             target.Name = source.Name;
         }
         
@@ -2601,8 +2599,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionFullDTO : Framework.Authorization.Generated.DTO.PermissionSimpleDTO
     {
         
-        private Framework.Authorization.Generated.DTO.PrincipalSimpleDTO _delegatedFromPrincipal;
-        
         private Framework.Authorization.Generated.DTO.PrincipalSimpleDTO _principal;
         
         private Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO _role;
@@ -2615,19 +2611,6 @@ namespace Framework.Authorization.Generated.DTO
                 base(mappingService, domainObject)
         {
             mappingService.MapPermission(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PrincipalSimpleDTO DelegatedFromPrincipal
-        {
-            get
-            {
-                return this._delegatedFromPrincipal;
-            }
-            set
-            {
-                this._delegatedFromPrincipal = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -2945,8 +2928,6 @@ namespace Framework.Authorization.Generated.DTO
         
         private string _createdBy;
         
-        private Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO _delegatedFromPrincipal;
-        
         private System.Guid _id;
         
         private string _modifiedBy;
@@ -3006,19 +2987,6 @@ namespace Framework.Authorization.Generated.DTO
             set
             {
                 this._createdBy = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO DelegatedFromPrincipal
-        {
-            get
-            {
-                return this._delegatedFromPrincipal;
-            }
-            set
-            {
-                this._delegatedFromPrincipal = value;
             }
         }
         
@@ -4196,10 +4164,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
     {
         
-        private bool _active;
-        
-        private System.Guid? _externalId;
-        
         private string _name;
         
         public PrincipalSimpleDTO()
@@ -4215,32 +4179,6 @@ namespace Framework.Authorization.Generated.DTO
         public PrincipalSimpleDTO(string id)
         {
             this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid? ExternalId
-        {
-            get
-            {
-                return this._externalId;
-            }
-            set
-            {
-                this._externalId = value;
-            }
         }
         
         public Framework.Authorization.Generated.DTO.PrincipalIdentityDTO Identity
@@ -4348,10 +4286,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Principal, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Principal>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
     {
         
-        private bool _active = true;
-        
-        private System.Guid? _externalId;
-        
         private System.Guid _id;
         
         private string _name;
@@ -4436,32 +4370,6 @@ namespace Framework.Authorization.Generated.DTO
         private PrincipalStrictDTO(Framework.Authorization.Generated.DTO.BasePersistentDTO source) : 
                 this(source, Framework.Authorization.Generated.DTO.AuthorizationClientPrimitiveDTOMappingService.Default)
         {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid? ExternalId
-        {
-            get
-            {
-                return this._externalId;
-            }
-            set
-            {
-                this._externalId = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -4589,13 +4497,9 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalEventRichDTO
     {
         
-        private bool _active;
-        
         private System.DateTime? _createDate;
         
         private string _createdBy;
-        
-        private System.Guid? _externalId;
         
         private System.Guid _id;
         
@@ -4616,19 +4520,6 @@ namespace Framework.Authorization.Generated.DTO
         public PrincipalEventRichDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.Principal domainObject)
         {
             mappingService.MapPrincipal(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -4654,19 +4545,6 @@ namespace Framework.Authorization.Generated.DTO
             set
             {
                 this._createdBy = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid? ExternalId
-        {
-            get
-            {
-                return this._externalId;
-            }
-            set
-            {
-                this._externalId = value;
             }
         }
         
@@ -4754,13 +4632,9 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalEventSimpleDTO
     {
         
-        private bool _active;
-        
         private System.DateTime? _createDate;
         
         private string _createdBy;
-        
-        private System.Guid? _externalId;
         
         private System.Guid _id;
         
@@ -4777,19 +4651,6 @@ namespace Framework.Authorization.Generated.DTO
         public PrincipalEventSimpleDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.Principal domainObject)
         {
             mappingService.MapPrincipal(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -4815,19 +4676,6 @@ namespace Framework.Authorization.Generated.DTO
             set
             {
                 this._createdBy = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid? ExternalId
-        {
-            get
-            {
-                return this._externalId;
-            }
-            set
-            {
-                this._externalId = value;
             }
         }
         
@@ -7063,14 +6911,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPermission(Framework.Authorization.Domain.Permission domainObject, Framework.Authorization.Generated.DTO.PermissionFullDTO mappingObject)
         {
-            if (!object.ReferenceEquals(domainObject.DelegatedFromPrincipal, null))
-            {
-                mappingObject.DelegatedFromPrincipal = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.DelegatedFromPrincipal, this);
-            }
-            else
-            {
-                mappingObject.DelegatedFromPrincipal = null;
-            }
             if (!object.ReferenceEquals(domainObject.Principal, null))
             {
                 mappingObject.Principal = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.Principal, this);
@@ -7118,14 +6958,6 @@ namespace Framework.Authorization.Generated.DTO
             mappingObject.Comment = domainObject.Comment;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
-            if (!object.ReferenceEquals(domainObject.DelegatedFromPrincipal, null))
-            {
-                mappingObject.DelegatedFromPrincipal = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.DelegatedFromPrincipal, this);
-            }
-            else
-            {
-                mappingObject.DelegatedFromPrincipal = null;
-            }
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7306,8 +7138,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPrincipal(Framework.Authorization.Domain.Principal domainObject, Framework.Authorization.Generated.DTO.PrincipalSimpleDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
-            mappingObject.ExternalId = domainObject.ExternalId;
             mappingObject.Name = domainObject.Name;
         }
         
@@ -7330,8 +7160,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPrincipal(Framework.Authorization.Generated.DTO.PrincipalStrictDTO mappingObject, Framework.Authorization.Domain.Principal domainObject)
         {
-            domainObject.Active = mappingObject.Active;
-            domainObject.ExternalId = mappingObject.ExternalId;
             domainObject.Name = mappingObject.Name;
             if (!object.ReferenceEquals(mappingObject.Permissions, null))
             {
@@ -7349,10 +7177,8 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPrincipal(Framework.Authorization.Domain.Principal domainObject, Framework.Authorization.Generated.DTO.PrincipalEventRichDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.ExternalId = domainObject.ExternalId;
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7370,10 +7196,8 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPrincipal(Framework.Authorization.Domain.Principal domainObject, Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.ExternalId = domainObject.ExternalId;
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;

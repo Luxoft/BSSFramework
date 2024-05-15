@@ -15,39 +15,39 @@ public class AuthHelperBase : RootServiceProviderContainer
     {
     }
 
-    protected TResult EvaluateManager<TResult>(DBSessionMode dbSessionMode, Func<AuthManager, TResult> getResult)
-    {
-        return this.RootServiceProvider.GetRequiredService<IServiceEvaluator<AuthManager>>().Evaluate(dbSessionMode, getResult);
-    }
+    protected IServiceEvaluator<AuthManager> ManagerEvaluator => this.RootServiceProvider.GetRequiredService<IServiceEvaluator<AuthManager>>();
 
-    protected void EvaluateManager(DBSessionMode dbSessionMode, Action<AuthManager> action)
-    {
-        this.EvaluateManager<object>(dbSessionMode,
-            manager =>
-            {
-                action(manager);
-                return default;
-            });
-    }
+    protected IIntegrationTestUserAuthenticationService UserAuthenticationService => this.RootServiceProvider.GetRequiredService<IIntegrationTestUserAuthenticationService>();
 
     public string GetCurrentUserLogin()
     {
-        return this.EvaluateManager(DBSessionMode.Read, manager => manager.GetCurrentUserLogin());
+        return this.ManagerEvaluator.Evaluate(DBSessionMode.Read, manager => manager.GetCurrentUserLogin());
     }
 
     public void LoginAs(string principalName = null)
     {
-        this.RootServiceProvider.GetRequiredService<IIntegrationTestUserAuthenticationService>().SetUserName(principalName);
+        this.UserAuthenticationService.SetUserName(principalName);
     }
 
-    public Guid SavePrincipal(string name, bool active, Guid? externalId = null)
+
+    public Guid SavePrincipal(string name)
     {
-        return this.EvaluateManager(DBSessionMode.Write, manger => manger.SavePrincipal(name, active, externalId));
+        return this.SavePrincipalAsync(name).GetAwaiter().GetResult();
+    }
+
+    public async Task<Guid> SavePrincipalAsync(string name, CancellationToken cancellationToken = default)
+    {
+        return await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manger => await manger.SavePrincipalAsync(name, cancellationToken));
     }
 
     public void AddUserRole(string principalName, params TestPermission[] permissions)
     {
-        this.EvaluateManager(DBSessionMode.Write, manger => manger.AddUserRole(principalName, permissions));
+        this.AddUserRoleAsync(principalName, permissions).GetAwaiter().GetResult();
+    }
+
+    public async Task AddUserRoleAsync(string principalName, TestPermission[] permissions, CancellationToken cancellationToken = default)
+    {
+        await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manger => await manger.AddUserRoleAsync(principalName, permissions, cancellationToken));
     }
 
     public void SetCurrentUserRole(params TestPermission[] permissions)
@@ -74,6 +74,11 @@ public class AuthHelperBase : RootServiceProviderContainer
 
     public void RemovePermissions(string principalName)
     {
-        this.EvaluateManager(DBSessionMode.Write, manager => manager.RemovePermissions(principalName));
+        this.RemovePermissionsAsync(principalName).GetAwaiter().GetResult();
+    }
+
+    public async Task RemovePermissionsAsync(string principalName, CancellationToken cancellationToken = default)
+    {
+        await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manager => await manager.RemovePermissionsAsync(principalName, cancellationToken));
     }
 }

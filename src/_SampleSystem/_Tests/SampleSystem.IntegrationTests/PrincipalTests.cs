@@ -23,10 +23,10 @@ public class PrincipalTests : TestBase
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
         // Act
-        var principalId = this.AuthHelper.SavePrincipal(name, true);
+        var principalId = this.AuthHelper.SavePrincipal(name);
 
         // Assert
-        this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
+        this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
     }
 
     [TestMethod]
@@ -35,7 +35,7 @@ public class PrincipalTests : TestBase
         // Arrange
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
-        var principalId = this.AuthHelper.SavePrincipal(name, true);
+        var principalId = this.AuthHelper.SavePrincipal(name);
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
@@ -56,7 +56,7 @@ public class PrincipalTests : TestBase
                                                           }));
 
         // Assert
-        this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
+        this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
     }
 
     [TestMethod]
@@ -65,7 +65,7 @@ public class PrincipalTests : TestBase
         // Arrange
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
-        var principalId = this.AuthHelper.SavePrincipal(name, true);
+        var principalId = this.AuthHelper.SavePrincipal(name);
 
         var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(SecurityRole.Administrator.Name)).Identity;
 
@@ -95,8 +95,8 @@ public class PrincipalTests : TestBase
                                                           }));
 
         // Assert
-        this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PermissionSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Permission.Id == permissionIdentity.Id);
-        this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
+        this.GetIntegrationEvents<PermissionSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Permission.Id == permissionIdentity.Id);
+        this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
     }
 
     [TestMethod]
@@ -105,29 +105,13 @@ public class PrincipalTests : TestBase
         // Arrange
         const string Name = @"luxoft\principaltest";
 
-        this.AuthHelper.SavePrincipal(Name, true);
+        this.AuthHelper.SavePrincipal(Name);
 
         // Act
-        Action call = () => this.AuthHelper.SavePrincipal(Name, true);
+        Action call = () => this.AuthHelper.SavePrincipal(Name);
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage("Active principal with name '*' already exists.");
-    }
-
-    [TestMethod]
-    public void SaveWithExternalId_ExternalIdSaved()
-    {
-        // Arrange
-        var expected = Guid.NewGuid();
-        const string Name = @"luxoft\principaltest";
-
-        // Act
-        var principalId = this.AuthHelper.SavePrincipal(Name, true, expected);
-
-        var principal = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(new PrincipalIdentityDTO(principalId)));
-
-        // Assert
-        principal.ExternalId.Should().Be(expected);
+        call.Should().Throw<ValidationException>().WithMessage("Principal with name '*' already exists.");
     }
 
     /// <summary>

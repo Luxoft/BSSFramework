@@ -1,5 +1,4 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Configurator.Interfaces;
 using Framework.Core;

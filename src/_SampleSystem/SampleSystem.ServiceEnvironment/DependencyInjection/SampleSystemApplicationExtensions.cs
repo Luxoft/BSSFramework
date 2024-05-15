@@ -1,5 +1,4 @@
-﻿using Framework.Authorization.BLL;
-using Framework.Cap;
+﻿using Framework.Cap;
 using Framework.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
@@ -29,8 +28,6 @@ public static class SampleSystemApplicationExtensions
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
-
-        services.ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
 
         return services;
     }

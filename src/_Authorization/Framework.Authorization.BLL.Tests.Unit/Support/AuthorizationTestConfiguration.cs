@@ -101,6 +101,8 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
             throw new NotImplementedException();
         }
 
+        public bool IsExists(Guid securityEntityId) => throw new NotImplementedException();
+
         private IEnumerable<SecurityEntity> GetChildren(SecurityEntity[] all, Guid parentId)
         {
             yield return all.First(x => x.Id == parentId);

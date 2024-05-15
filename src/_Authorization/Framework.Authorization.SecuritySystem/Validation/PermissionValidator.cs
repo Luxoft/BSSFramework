@@ -31,9 +31,14 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
         this.externalSource = externalSource;
         this.securityContextInfoService = securityContextInfoService;
         this.securityRoleSource = securityRoleSource;
+
+        this.RuleFor(permission => permission.DelegatedFrom)
+            .Must((permission, delegatedFrom) => delegatedFrom?.Principal != permission.Principal)
+            .WithMessage("Permission cannot be delegated to the original user");
+
         this.RuleFor(permission => permission.DelegatedFrom)
             .Must(
-                (permission, _, context) =>
+                (permission, delegatedFrom, context) =>
                 {
                     try
                     {

@@ -11,11 +11,9 @@ public class PrincipalGeneralValidator : AbstractValidator<Principal>, IPrincipa
     //public const string Key = "General";
 
     public PrincipalGeneralValidator(
-        [FromKeyedServices(PrincipalNameValidator.Key)] IValidator<Principal> principalNameValidator,
         [FromKeyedServices(PrincipalUniquePermissionValidator.Key)] IValidator<Principal> uniquePermissionValidator,
         [FromKeyedServices(PermissionGeneralValidator.Key)] IValidator<Permission> permissionGeneralValidator)
     {
-        this.Include(principalNameValidator);
         this.Include(uniquePermissionValidator);
         this.RuleForEach(principal => principal.Permissions).SetValidator(permissionGeneralValidator);
     }

@@ -111,15 +111,6 @@ public class Permission : AuditPersistentDomainObjectBase,
     }
 
     /// <summary>
-    /// Вычисляемый принципал, который делегировал пермиссию
-    /// </summary>
-    [ExpandPath("DelegatedFrom.Principal")]
-    public virtual Principal DelegatedFromPrincipal
-    {
-        get { return this.DelegatedFrom.Maybe(v => v.Principal); }
-    }
-
-    /// <summary>
     /// Приниципал, к которому относится данная пермиссия
     /// </summary>
     public virtual Principal Principal

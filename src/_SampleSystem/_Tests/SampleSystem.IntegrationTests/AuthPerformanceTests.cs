@@ -13,6 +13,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBase;
+using Principal = Framework.Authorization.Domain.Principal;
 
 namespace SampleSystem.IntegrationTests.Workflow;
 
@@ -56,10 +57,9 @@ public class AuthPerformanceTests : TestBase
 
                                                 ctx.Logics.TestPerformanceObject.Save(genObjects);
 
-                                                var testPrincipal = ctx.Authorization.Logics.Principal.GetByNameOrCreate(TestUser);
+                                                var testPrincipal = new Principal { Name = TestUser };
 
-
-                                                var adminRole = ctx.Authorization.Logics.BusinessRole.GetAdminRole();
+                                                var adminRole = ctx.Authorization.Logics.BusinessRole.GetByName(SecurityRole.Administrator.Name);
 
                                                 foreach (var genObjectSubEnumerable in genObjects.Split(SplitBy))
                                                 {

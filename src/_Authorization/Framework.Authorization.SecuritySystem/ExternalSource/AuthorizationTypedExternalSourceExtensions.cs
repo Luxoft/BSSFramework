@@ -14,44 +14,37 @@ public static class AuthorizationTypedExternalSourceExtensions
         return new AuthorizationTypedExternalSource(source);
     }
 
-
-    private class AuthorizationTypedExternalSource : IAuthorizationTypedExternalSource
+    private class AuthorizationTypedExternalSource(IAuthorizationTypedExternalSource baseSource) : IAuthorizationTypedExternalSource
     {
-        private readonly IAuthorizationTypedExternalSource _baseSource;
+        private readonly Lazy<ReadOnlyCollection<SecurityEntity>> lazySecurityEntities = LazyHelper.Create(() => baseSource.GetSecurityEntities().ToReadOnlyCollection());
 
-        private readonly Lazy<ReadOnlyCollection<SecurityEntity>> _lazySecurityEntities;
+        private readonly IDictionaryCache<Guid[], SecurityEntity[]> securityEntitiesByIdentsCache = new DictionaryCache<Guid[], SecurityEntity[]>(
+                securityEntityIdents => baseSource.GetSecurityEntitiesByIdents(securityEntityIdents).ToArray(),
+                ArrayComparer<Guid>.Value);
 
-        private readonly IDictionaryCache<Guid[], SecurityEntity[]> _securityEntitiesByIdentsCache;
+        private readonly IDictionaryCache<Guid, SecurityEntity[]> securityEntitiesWithMasterExpandCache = new DictionaryCache<Guid, SecurityEntity[]>(
+                startSecurityEntityId => baseSource.GetSecurityEntitiesWithMasterExpand(startSecurityEntityId).ToArray());
 
-        private readonly IDictionaryCache<Guid, SecurityEntity[]> _securityEntitiesWithMasterExpandCache;
-
-
-        public AuthorizationTypedExternalSource(IAuthorizationTypedExternalSource baseSource)
-        {
-            if (baseSource == null) throw new ArgumentNullException(nameof(baseSource));
-
-            this._baseSource = baseSource;
-
-            this._lazySecurityEntities = LazyHelper.Create(() => this._baseSource.GetSecurityEntities().ToReadOnlyCollection());
-
-            this._securityEntitiesByIdentsCache = new DictionaryCache<Guid[], SecurityEntity[]>(securityEntityIdents => this._baseSource.GetSecurityEntitiesByIdents(securityEntityIdents).ToArray(), ArrayComparer<Guid>.Value);
-
-            this._securityEntitiesWithMasterExpandCache = new DictionaryCache<Guid, SecurityEntity[]>(startSecurityEntityId => this._baseSource.GetSecurityEntitiesWithMasterExpand(startSecurityEntityId).ToArray());
-        }
+        private readonly IDictionaryCache<Guid, bool> existsCache = new DictionaryCache<Guid, bool>(baseSource.IsExists);
 
         public IEnumerable<SecurityEntity> GetSecurityEntities()
         {
-            return this._lazySecurityEntities.Value;
+            return this.lazySecurityEntities.Value;
         }
 
         public IEnumerable<SecurityEntity> GetSecurityEntitiesByIdents(IEnumerable<Guid> securityEntityIdents)
         {
-            return this._securityEntitiesByIdentsCache[securityEntityIdents.ToArray()];
+            return this.securityEntitiesByIdentsCache[securityEntityIdents.ToArray()];
         }
 
         public IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId)
         {
-            return this._securityEntitiesWithMasterExpandCache[startSecurityEntityId];
+            return this.securityEntitiesWithMasterExpandCache[startSecurityEntityId];
+        }
+
+        public bool IsExists(Guid securityEntityId)
+        {
+            return this.existsCache[securityEntityId];
         }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System.ComponentModel;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 
 namespace Framework.Authorization.Domain;

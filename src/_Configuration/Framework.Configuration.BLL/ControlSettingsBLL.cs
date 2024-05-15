@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Authorization.SecuritySystem;
 using Framework.Core;
 using Framework.Persistent;
 using Framework.Configuration.Domain;

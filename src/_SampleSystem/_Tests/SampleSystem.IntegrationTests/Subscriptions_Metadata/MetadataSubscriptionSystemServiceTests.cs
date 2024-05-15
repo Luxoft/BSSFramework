@@ -4,7 +4,6 @@ using Automation.ServiceEnvironment;
 
 using FluentAssertions;
 
-using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Notification.DTO;
@@ -202,22 +201,6 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
 
         var expectedNotifications = this.GetNotifications()
                                         .Where(n => n.From == "DateModelCreateSampleSystem@luxoft.com");
-
-        // Assert
-        expectedNotifications.Should().HaveCount(1);
-    }
-
-    [TestMethod]
-    [Ignore]
-    public void PrincipalCreateModelSubscriptionTest()
-    {
-        // Arrange
-
-        // Act
-        this.DataHelper.ProcessChangedObjectUntyped(typeof(PrincipalCreateModel), null, new PrincipalCreateModel());
-
-        var expectedNotifications = this.GetNotifications()
-                                        .Where(n => n.From == "PrincipalCreateModelCreateSampleSystem@luxoft.com");
 
         // Assert
         expectedNotifications.Should().HaveCount(1);

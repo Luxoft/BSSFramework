@@ -79,15 +79,12 @@ namespace Framework.Authorization.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
             {
                 return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.Permission>(
-                    fetchRootRule => fetchRootRule.SelectNested(permission => permission.DelegatedFrom).SelectNested(permission => permission.Principal),
                     fetchRootRule => fetchRootRule.SelectNested(permission => permission.Principal),
                     fetchRootRule => fetchRootRule.SelectNested(permission => permission.Role));
             }
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
                 return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.Permission>(
-                    fetchRootRule => fetchRootRule.SelectNested(permission => permission.DelegatedFrom).SelectNested(permission => permission.Principal),
-                    fetchRootRule => fetchRootRule.SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.DelegatedFrom).SelectNested(permission => permission.Principal),
                     fetchRootRule => fetchRootRule.SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.Principal),
                     fetchRootRule => fetchRootRule.SelectMany(permission => permission.DelegatedTo).SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
                     fetchRootRule => fetchRootRule.SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.Role),
@@ -146,7 +143,6 @@ namespace Framework.Authorization.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
                 return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.Principal>(
-                    fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.DelegatedFrom).SelectNested(permission => permission.Principal),
                     fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.Principal),
                     fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.DelegatedTo).SelectMany(permission => permission.Restrictions).SelectNested(permissionRestriction => permissionRestriction.SecurityContextType),
                     fetchRootRule => fetchRootRule.SelectMany(principal => principal.Permissions).SelectMany(permission => permission.DelegatedTo).SelectNested(permission => permission.Role),

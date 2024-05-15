@@ -35,11 +35,9 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
             .Must(
                 (permissionRestriction, securityContextId) =>
                 {
-                    var securityContextInfo = this.GetSecurityContextInfo(permissionRestriction.SecurityContextType);
-
                     var authorizationTypedExternalSource = authorizationExternalSource.GetTyped(permissionRestriction.SecurityContextType);
 
-                    return authorizationTypedExternalSource.GetSecurityEntities() allowedSecurityContexts == null || allowedSecurityContexts.Contains(securityContextInfo.Type);
+                    return authorizationTypedExternalSource.IsExists(securityContextId);
                 })
             .WithMessage(permissionRestriction => $"{permissionRestriction.SecurityContextType.Name} with id '{permissionRestriction.SecurityContextType.Name}' not exists");
     }

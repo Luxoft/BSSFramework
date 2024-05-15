@@ -18,34 +18,29 @@ public class AuthManager(
     [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
     [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> securityContextTypeRepository,
     ISecurityRoleSource securityRoleSource,
-    IPrincipalGeneralValidator principalGeneralValidator)
+    IPrincipalManageService principalManageService)
 {
     public string GetCurrentUserLogin()
     {
         return userAuthenticationService.GetUserName();
     }
 
-    public Guid SavePrincipal(string name, bool active, Guid? externalId = null)
+    public async Task<Guid> SavePrincipalAsync(string name, CancellationToken cancellationToken = default)
     {
-        var principal = new Framework.Authorization.Domain.Principal { Name = name, Active = active, ExternalId = externalId };
-
-        principalRepository.SaveAsync(principal).GetAwaiter().GetResult();
+        var principal = await principalManageService.GetOrCreateAsync(name, cancellationToken);
 
         return principal.Id;
     }
 
-    public void AddUserRole(string principalName, params TestPermission[] testPermissions)
+    public async Task AddUserRoleAsync(string principalName, TestPermission[] testPermissions, CancellationToken cancellationToken = default)
     {
-        var actualPrincipalName = principalName ?? this.GetCurrentUserLogin();
-
-        var principal = principalRepository.GetQueryable().SingleOrDefault(p => p.Name == actualPrincipalName)
-                                    ?? new Principal { Name = actualPrincipalName };
+        var principal = await principalManageService.GetOrCreateAsync(principalName ?? this.GetCurrentUserLogin(), cancellationToken);
 
         foreach (var testPermission in testPermissions)
         {
             var securityRole = securityRoleSource.GetFullRole(testPermission.SecurityRole);
 
-            var businessRole = businessRoleRepository.Load(securityRole.Id);
+            var businessRole = await businessRoleRepository.LoadAsync(securityRole.Id, cancellationToken);
 
             var permission = new Permission(principal) { Role = businessRole, Period = testPermission.Period };
 
@@ -54,7 +49,7 @@ public class AuthManager(
                 var securityContextInfo = (ISecurityContextInfo<Guid>)securityContextInfoService
                     .GetSecurityContextInfo(restrictionInfo.Key);
 
-                var domainSecurityContextType = securityContextTypeRepository.Load(securityContextInfo.Id);
+                var domainSecurityContextType = await securityContextTypeRepository.LoadAsync(securityContextInfo.Id, cancellationToken);
 
                 foreach (var securityContextId in restrictionInfo.Value)
                 {
@@ -63,12 +58,10 @@ public class AuthManager(
             }
         }
 
-        principalGeneralValidator.Validate(principal);
-
-        principalRepository.SaveAsync(principal).GetAwaiter().GetResult();
+        await principalManageService.SaveAsync(principal, cancellationToken);
     }
 
-    public void RemovePermissions(string principalName)
+    public async Task RemovePermissionsAsync(string principalName, CancellationToken cancellationToken = default)
     {
         var actualPrincipalName = principalName ?? this.GetCurrentUserLogin();
 
@@ -76,9 +69,7 @@ public class AuthManager(
 
         if (principal != null)
         {
-            principal.ClearDetails<Principal, Permission>();
-
-            principalRepository.SaveAsync(principal).GetAwaiter().GetResult();
+            await principalManageService.RemoveAsync(principal, true, cancellationToken);
         }
     }
 }

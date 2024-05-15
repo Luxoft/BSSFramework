@@ -1,5 +1,8 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.SecuritySystem;
 using Framework.Exceptions;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.BLL;
 
@@ -22,5 +25,12 @@ public partial class PrincipalBLL
         this.Context.PrincipalValidator.Validate(domainObject);
 
         base.Validate(domainObject, operationContext);
+    }
+
+    public override void Remove(Principal domainObject)
+    {
+        this.Context.ServiceProvider.GetRequiredService<IPrincipalDomainService>().RemoveAsync(domainObject).GetAwaiter().GetResult();
+
+        base.Remove(domainObject);
     }
 }

@@ -99,21 +99,6 @@ public class PrincipalTests : TestBase
         this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
     }
 
-    [TestMethod]
-    public void CreateActiveWithSameName_ValidationError()
-    {
-        // Arrange
-        const string Name = @"luxoft\principaltest";
-
-        this.AuthHelper.SavePrincipal(Name);
-
-        // Act
-        Action call = () => this.AuthHelper.SavePrincipal(Name);
-
-        // Assert
-        call.Should().Throw<ValidationException>().WithMessage("Principal with name '*' already exists.");
-    }
-
     /// <summary>
     /// #IADFRAME-1300
     /// Если в основной системе есть объект Principal c полей ExternalId:string

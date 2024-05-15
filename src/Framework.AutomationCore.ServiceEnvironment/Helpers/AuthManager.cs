@@ -17,7 +17,7 @@ public class AuthManager(
     [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
     [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> securityContextTypeRepository,
     ISecurityRoleSource securityRoleSource,
-    IPrincipalManageService principalManageService)
+    IPrincipalDomainService principalDomainService)
 {
     public string GetCurrentUserLogin()
     {
@@ -26,14 +26,14 @@ public class AuthManager(
 
     public async Task<Guid> SavePrincipalAsync(string name, CancellationToken cancellationToken = default)
     {
-        var principal = await principalManageService.GetOrCreateAsync(name, cancellationToken);
+        var principal = await principalDomainService.GetOrCreateAsync(name, cancellationToken);
 
         return principal.Id;
     }
 
     public async Task AddUserRoleAsync(string principalName, TestPermission[] testPermissions, CancellationToken cancellationToken = default)
     {
-        var principal = await principalManageService.GetOrCreateAsync(principalName ?? this.GetCurrentUserLogin(), cancellationToken);
+        var principal = await principalDomainService.GetOrCreateAsync(principalName ?? this.GetCurrentUserLogin(), cancellationToken);
 
         foreach (var testPermission in testPermissions)
         {
@@ -57,7 +57,7 @@ public class AuthManager(
             }
         }
 
-        await principalManageService.SaveAsync(principal, cancellationToken);
+        await principalDomainService.SaveAsync(principal, cancellationToken);
     }
 
     public async Task RemovePermissionsAsync(string principalName, CancellationToken cancellationToken = default)
@@ -68,7 +68,7 @@ public class AuthManager(
 
         if (principal != null)
         {
-            await principalManageService.RemoveAsync(principal, true, cancellationToken);
+            await principalDomainService.RemoveAsync(principal, true, cancellationToken);
         }
     }
 }

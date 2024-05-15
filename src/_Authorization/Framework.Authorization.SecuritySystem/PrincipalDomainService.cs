@@ -10,10 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class PrincipalManageService(
+public class PrincipalDomainService(
     [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
     IPrincipalGeneralValidator principalGeneralValidator,
-    IPrincipalIdentitySource? principalIdentitySource = null) : IPrincipalManageService
+    IPrincipalIdentitySource? principalIdentitySource = null) : IPrincipalDomainService
 {
     public async Task<Principal> GetOrCreateAsync(string name, CancellationToken cancellationToken)
     {

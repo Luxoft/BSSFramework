@@ -15,6 +15,7 @@ public class PrincipalGeneralValidator : AbstractValidator<Principal>, IPrincipa
         [FromKeyedServices(PermissionGeneralValidator.Key)] IValidator<Permission> permissionGeneralValidator)
     {
         this.Include(uniquePermissionValidator);
+
         this.RuleForEach(principal => principal.Permissions).SetValidator(permissionGeneralValidator);
     }
 }

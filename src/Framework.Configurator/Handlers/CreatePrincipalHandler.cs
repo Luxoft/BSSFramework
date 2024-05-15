@@ -10,7 +10,7 @@ namespace Framework.Configurator.Handlers;
 
 public record CreatePrincipalHandler(
     IAuthorizationSystem AuthorizationSystem,
-    IPrincipalManageService PrincipalManageService,
+    IPrincipalDomainService PrincipalDomainService,
     IRepositoryFactory<Principal> RepoFactory,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
     : BaseWriteHandler, ICreatePrincipalHandler
@@ -21,7 +21,7 @@ public record CreatePrincipalHandler(
 
         var name = await this.ParseRequestBodyAsync<string>(context);
 
-        var principal = await this.PrincipalManageService.GetOrCreateAsync(name, cancellationToken);
+        var principal = await this.PrincipalDomainService.GetOrCreateAsync(name, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
             await this.ConfiguratorIntegrationEvents.PrincipalCreatedAsync(principal, cancellationToken);

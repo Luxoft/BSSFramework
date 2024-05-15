@@ -15,21 +15,25 @@ public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>
     {
         var duplicatesVar = "Duplicates";
 
-        var comparer = new EqualityComparerImpl<Permission>(this.IsDuplicate);
-
         this.externalSource = externalSource;
 
-        this.RuleForEach(principal => principal.Permissions.GroupBy(permission => permission, comparer))
-            .Must(
-                (principal, g, context) =>
-                {
-                    context.MessageFormatter.AppendArgument(
-                        duplicatesVar,
-                        $"Principal \"{principal}\" has duplicate permissions ({this.GetFormattedPermission(g.Key)})");
+        this.RuleFor(principal => principal.Permissions)
+            .Must((_, permissions, context) =>
+                  {
+                      var duplicates = this.GetDuplicates(permissions).ToList();
 
-                    return g.Count() == 1;
-                })
-            .WithMessage(principal => $"Principal {principal.Name} has duplicate permissions {{{duplicatesVar}}}");
+                      context.MessageFormatter.AppendArgument(duplicatesVar, duplicates.Join(",", g => this.GetFormattedPermission(g.Key)));
+
+                      return !duplicates.Any();
+                  })
+            .WithMessage(principal => $"Principal {principal.Name} has duplicate permissions: {duplicatesVar}");
+    }
+
+    protected virtual IEnumerable<IGrouping<Permission, Permission>> GetDuplicates(IEnumerable<Permission> permissions)
+    {
+        var comparer = new EqualityComparerImpl<Permission>(this.IsDuplicate);
+
+        return permissions.GroupBy(permission => permission, comparer).Where(g => g.Count() > 1);
     }
 
     protected virtual bool IsDuplicate(Permission permission, Permission otherPermission)

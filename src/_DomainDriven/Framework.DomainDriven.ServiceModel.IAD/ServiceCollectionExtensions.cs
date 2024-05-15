@@ -164,6 +164,8 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>()
 
+                       .AddScoped<IPrincipalManageService, PrincipalManageService>()
+
                        .AddScoped<IPrincipalGeneralValidator, PrincipalGeneralValidator>()
                        .AddKeyedScoped<IValidator<Principal>, PrincipalUniquePermissionValidator>(PrincipalUniquePermissionValidator.Key)
                        .AddKeyedScoped<IValidator<Permission>, PermissionGeneralValidator>(PermissionGeneralValidator.Key)

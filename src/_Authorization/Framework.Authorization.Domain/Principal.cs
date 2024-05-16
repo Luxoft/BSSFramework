@@ -12,6 +12,7 @@ namespace Framework.Authorization.Domain;
 /// </summary>
 [DomainType("{fa27cd64-c5e6-4356-9efa-a35b00ff69dd}")]
 [BLLViewRole]
+[BLLSaveRole]
 [BLLRemoveRole]
 [DebuggerDisplay("{Name}, RunAs={RunAs}")]
 [UniqueGroup]

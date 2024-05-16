@@ -13,17 +13,15 @@ namespace SampleSystem.ServiceEnvironment;
 public static class SampleSystemApplicationExtensions
 {
     public static IServiceCollection RegisterGeneralApplicationServices(
-            this IServiceCollection services,
-            IConfiguration configuration)
-    {
-        return services.AddHttpContextAccessor()
-                       .AddLogging()
-                       .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
-                       .RegisterSmtpNotification(configuration)
-                       .RegisterApplicationServices()
-                       .AddCapBss(configuration.GetConnectionString("DefaultConnection"))
-                       .RegisterJobs();
-    }
+        this IServiceCollection services,
+        IConfiguration configuration) =>
+        services.AddHttpContextAccessor()
+                .AddLogging()
+                .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
+                .RegisterSmtpNotification(configuration)
+                .RegisterApplicationServices()
+                .AddCapBss(configuration.GetConnectionString("DefaultConnection"))
+                .RegisterJobs();
 
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
     {
@@ -41,10 +39,6 @@ public static class SampleSystemApplicationExtensions
         return services;
     }
 
-    private static IServiceCollection RegisterJobs(this IServiceCollection services)
-    {
+    private static IServiceCollection RegisterJobs(this IServiceCollection services) =>
         services.AddScoped<ISampleJob, SampleJob>();
-
-        return services;
-    }
 }

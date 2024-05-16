@@ -4,8 +4,7 @@
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.ApiVersionAttribute("1.0")]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("integrationApi/v{version:apiVersion}/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("integrationApi/[controller]")]
     public partial class TestImmutableObjController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         

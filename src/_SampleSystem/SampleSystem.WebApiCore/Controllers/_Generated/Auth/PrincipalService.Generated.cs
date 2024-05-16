@@ -4,8 +4,7 @@
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.ApiVersionAttribute("1.0")]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("authApi/v{version:apiVersion}/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("authApi/[controller]")]
     public partial class PrincipalController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService>
     {
         

@@ -4,8 +4,7 @@
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.ApiVersionAttribute("1.0")]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/v{version:apiVersion}/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
     public partial class Location1676Controller : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         

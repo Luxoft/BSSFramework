@@ -75,7 +75,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public IBssFrameworkSettings SetPrincipalIdentitySource<TDomainObject>(Expression<Func<TDomainObject, string>> namePath)
         where TDomainObject : IIdentityObject<Guid>
     {
-        this.RegisterActions.Add(sc => sc.AddScoped<PrincipalIdentitySource<TDomainObject>>());
+        this.RegisterActions.Add(sc => sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TDomainObject>>());
         this.RegisterActions.Add(sc => sc.AddSingleton(new PrincipalIdentitySourcePathInfo<TDomainObject>(namePath)));
 
         return this;

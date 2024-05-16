@@ -1,4 +1,6 @@
-﻿using Framework.Authorization.Domain;
+﻿using FluentValidation;
+
+using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Configurator.Interfaces;
 using Framework.Core;
@@ -45,7 +47,7 @@ public record UpdatePermissionsHandler(
         await this.UpdatePermissionsAsync(mergeResult.CombineItems, cancellationToken);
         principal.RemoveDetails(mergeResult.RemovingItems);
 
-        await this.PrincipalValidator.ValidateAsync(principal, cancellationToken);
+        await this.PrincipalValidator.ValidateAndThrowAsync(principal, cancellationToken);
         await this.PrincipalRepository.SaveAsync(principal, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)

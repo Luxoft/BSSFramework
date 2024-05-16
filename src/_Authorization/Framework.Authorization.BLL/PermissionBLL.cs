@@ -1,4 +1,6 @@
-﻿using Framework.Authorization.Domain;
+﻿using FluentValidation;
+
+using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
@@ -23,7 +25,7 @@ public partial class PermissionBLL
 
     protected override void Validate(Permission permission, AuthorizationOperationContext operationContext)
     {
-        this.Context.PrincipalValidator.Validate(permission.Principal);
+        this.Context.PrincipalValidator.ValidateAndThrow(permission.Principal);
 
         base.Validate(permission, operationContext);
     }

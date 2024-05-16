@@ -22,11 +22,13 @@ public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>
                   {
                       var duplicates = this.GetDuplicates(permissions).ToList();
 
-                      context.MessageFormatter.AppendArgument(duplicatesVar, duplicates.Join(",", g => this.GetFormattedPermission(g.Key)));
+                      context.MessageFormatter.AppendArgument(
+                          duplicatesVar,
+                          duplicates.Join(",", g => $"({this.GetFormattedPermission(g.Key)})"));
 
                       return !duplicates.Any();
                   })
-            .WithMessage(principal => $"Principal {principal.Name} has duplicate permissions: {duplicatesVar}");
+            .WithMessage(principal => $"Principal \"{principal.Name}\" has duplicate permissions: {{{duplicatesVar}}}");
     }
 
     protected virtual IEnumerable<IGrouping<Permission, Permission>> GetDuplicates(IEnumerable<Permission> permissions)

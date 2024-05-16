@@ -1,4 +1,5 @@
-﻿using Framework.Authorization.Domain;
+﻿using FluentValidation;
+using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem;
 using Framework.Exceptions;
 
@@ -22,7 +23,7 @@ public partial class PrincipalBLL
 
     protected override void Validate(Principal domainObject, AuthorizationOperationContext operationContext)
     {
-        this.Context.PrincipalValidator.Validate(domainObject);
+        this.Context.PrincipalValidator.ValidateAndThrow(domainObject);
 
         base.Validate(domainObject, operationContext);
     }

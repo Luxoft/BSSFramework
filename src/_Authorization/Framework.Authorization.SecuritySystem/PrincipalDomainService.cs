@@ -1,4 +1,5 @@
-﻿using Framework.Authorization.Domain;
+﻿using FluentValidation;
+using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
@@ -62,6 +63,6 @@ public class PrincipalDomainService(
 
     public async Task ValidateAsync(Principal principal, CancellationToken cancellationToken)
     {
-        await principalGeneralValidator.ValidateAsync(principal, cancellationToken);
+        await principalGeneralValidator.ValidateAndThrowAsync(principal, cancellationToken);
     }
 }

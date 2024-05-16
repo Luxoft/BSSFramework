@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 
+using FluentValidation;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
@@ -7,7 +9,6 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.Validation;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.Security;
@@ -94,6 +95,7 @@ public class TestRestrictionRoleTests : TestBase
                                  location: location));
 
         // Assert
-        action.Should().Throw<ValidationException>($"Invalid permission restriction types: {nameof(Location)}");
+        action.Should().Throw<ValidationException>()
+              .And.Message.Should().Contain($"Invalid SecurityContextType: {nameof(Location)}.");
     }
 }

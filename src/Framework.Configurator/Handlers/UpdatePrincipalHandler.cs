@@ -1,4 +1,5 @@
-﻿using Framework.Authorization.Domain;
+﻿using FluentValidation;
+using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
@@ -11,7 +12,7 @@ namespace Framework.Configurator.Handlers;
 
 public record UpdatePrincipalHandler(
     [FromKeyedServices(nameof(SecurityRole.Administrator))] IRepository<Principal> PrincipalRepository,
-    IPrincipalGeneralValidator PrincipalValidator,
+    //IPrincipalGeneralValidator PrincipalValidator,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
     : BaseWriteHandler, IUpdatePrincipalHandler
 {
@@ -28,7 +29,7 @@ public record UpdatePrincipalHandler(
         var domainObject = await this.PrincipalRepository.LoadAsync(id, cancellationToken);
         domainObject.Name = newName;
 
-        await this.PrincipalValidator.ValidateAsync(domainObject, cancellationToken);
+        //await this.PrincipalValidator.ValidateAndThrowAsync(domainObject, cancellationToken);
         await this.PrincipalRepository.SaveAsync(domainObject, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)

@@ -29,7 +29,7 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
 
                     return allowedSecurityContexts == null || allowedSecurityContexts.Contains(securityContextInfo.Type);
                 })
-            .WithMessage(permissionRestriction => $"Invalid SecurityContextType: {permissionRestriction.SecurityContextType.Name}");
+            .WithMessage(permissionRestriction => $"Invalid SecurityContextType: {permissionRestriction.SecurityContextType.Name}.");
 
         this.RuleFor(permissionRestriction => permissionRestriction.SecurityContextId)
             .Must(
@@ -39,7 +39,7 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
 
                     return authorizationTypedExternalSource.IsExists(securityContextId);
                 })
-            .WithMessage(permissionRestriction => $"{permissionRestriction.SecurityContextType.Name} with id '{permissionRestriction.SecurityContextType.Name}' not exists");
+            .WithMessage(permissionRestriction => $"{permissionRestriction.SecurityContextType.Name} with id '{permissionRestriction.SecurityContextType.Name}' not exists.");
     }
 
     private ISecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)

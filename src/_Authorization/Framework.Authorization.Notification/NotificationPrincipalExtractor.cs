@@ -6,6 +6,7 @@ using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.Notification;
@@ -24,37 +25,31 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 
     private readonly IRepository<Permission> permissionRepository;
 
-    private readonly IRepository<BusinessRole> businessRoleRepository;
-
     public NotificationPrincipalExtractor(
         IServiceProvider serviceProvider,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         INotificationBasePermissionFilterSource notificationBasePermissionFilterSource,
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Permission> permissionRepository,
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository)
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Permission> permissionRepository)
     {
         this.serviceProvider = serviceProvider;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.notificationBasePermissionFilterSource = notificationBasePermissionFilterSource;
         this.permissionRepository = permissionRepository;
-        this.businessRoleRepository = businessRoleRepository;
     }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(
-        SecurityRole[] securityRole,
+        SecurityRole[] securityRoles,
         IEnumerable<NotificationFilterGroup> preNotificationFilterGroups)
     {
         var notificationFilterGroups = preNotificationFilterGroups.ToArray();
 
         var startPermissionQ = this.permissionRepository.GetQueryable()
-                                   .Where(this.notificationBasePermissionFilterSource.GetBasePermissionFilter(securityRole))
+                                   .Where(this.notificationBasePermissionFilterSource.GetBasePermissionFilter(securityRoles))
                                    .Select(p => new PermissionLevelInfo { Permission = p, LevelInfo = "" });
 
         var principalInfoResult = notificationFilterGroups.Aggregate(startPermissionQ, this.ApplyNotificationFilter)
                                                           .Select(pair => new { pair.Permission.Principal, pair.LevelInfo })
                                                           .ToList();
-
-
 
         var typeDict = notificationFilterGroups.Select(g => g.SecurityContextType).ToDictionary(g => g.Name);
 

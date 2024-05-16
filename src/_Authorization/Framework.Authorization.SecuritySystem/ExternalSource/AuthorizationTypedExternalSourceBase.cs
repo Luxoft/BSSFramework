@@ -2,6 +2,7 @@
 using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
@@ -37,6 +38,11 @@ public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext> : I
         var securityObject = this.securityContextRepository.GetQueryable().Single(obj => obj.Id == startSecurityEntityId);
 
         return this.GetSecurityEntitiesWithMasterExpand(securityObject).Select(this.CreateSecurityEntity);
+    }
+
+    public bool IsExists(Guid securityEntityId)
+    {
+        return this.securityContextRepository.GetQueryable().Any(sc => sc.Id == securityEntityId);
     }
 
     protected abstract IEnumerable<TSecurityContext> GetSecurityEntitiesWithMasterExpand(TSecurityContext startSecurityObject);

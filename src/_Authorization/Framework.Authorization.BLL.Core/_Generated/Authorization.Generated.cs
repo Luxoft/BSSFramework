@@ -137,8 +137,6 @@ namespace Framework.Authorization.BLL
     
     public partial interface IPrincipalBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Principal, System.Guid>
     {
-        
-        Framework.Authorization.Domain.Principal Create(Framework.Authorization.Domain.PrincipalCreateModel createModel);
     }
     
     public partial interface IPrincipalBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPrincipalBLL, Framework.Authorization.Domain.Principal>

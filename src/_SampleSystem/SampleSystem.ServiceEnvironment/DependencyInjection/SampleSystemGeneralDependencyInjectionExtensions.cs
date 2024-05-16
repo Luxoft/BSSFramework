@@ -32,6 +32,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 
+                           .SetPrincipalIdentitySource((Employee employee) => employee.Login)
+
                            .AddListener<SubscriptionDALListener>()
 
                            .AddListener<ExampleFaultDALListener>(true);

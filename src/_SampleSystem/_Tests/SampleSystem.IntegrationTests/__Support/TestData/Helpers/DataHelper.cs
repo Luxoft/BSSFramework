@@ -398,6 +398,8 @@ public partial class DataHelper
                                            ? ((CompanyLegalEntityIdentityDTO)companyLegalEntity).Id
                                            : DefaultConstants.COMPANY_LEGAL_ENTITY_ID;
 
+        var employeeId = employee?.Id ?? DefaultConstants.HRDepartment_DEFAULT_HEAD_EMPLOYEE_ID;
+
         return this.EvaluateWrite(
                                   context =>
                                   {
@@ -405,9 +407,7 @@ public partial class DataHelper
 
                                       if (department == null)
                                       {
-                                          var head = employee != null
-                                                             ? context.Logics.Employee.GetById(((EmployeeIdentityDTO)employee).Id)
-                                                             : context.Logics.Employee.GetObjectBy(e => e.Login == this.AuthHelper.GetCurrentUserLogin());
+                                          var head = context.Logics.Employee.GetById(employeeId, true);
 
                                           department = new HRDepartment
                                                        {

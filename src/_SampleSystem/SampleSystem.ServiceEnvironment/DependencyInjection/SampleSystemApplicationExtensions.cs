@@ -1,5 +1,4 @@
-﻿using Framework.Authorization.BLL;
-using Framework.Cap;
+﻿using Framework.Cap;
 using Framework.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
@@ -24,10 +23,12 @@ public static class SampleSystemApplicationExtensions
                 .AddCapBss(configuration.GetConnectionString("DefaultConnection"))
                 .RegisterJobs();
 
-    private static IServiceCollection RegisterApplicationServices(this IServiceCollection services) =>
-        services
-            .AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
-            .ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
+    private static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
+    {
+        services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
+
+        return services;
+    }
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {

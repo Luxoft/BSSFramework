@@ -4,15 +4,8 @@ using Framework.Core;
 
 namespace Framework.Authorization.Domain;
 
-public class AvailablePermissionFilter
+public class AvailablePermissionFilter(DateTime today)
 {
-    private readonly DateTime today;
-
-    public AvailablePermissionFilter(DateTime today)
-    {
-        this.today = today;
-    }
-
     public string? PrincipalName { get; set; }
 
     public List<Guid>? SecurityRoleIdents { get; set; }
@@ -24,7 +17,7 @@ public class AvailablePermissionFilter
 
     public IEnumerable<Expression<Func<Permission, bool>>> GetFilterExpressionElements()
     {
-        yield return permission => permission.Period.Contains(this.today);
+        yield return permission => permission.Period.Contains(today);
 
         if (this.PrincipalName != null)
         {

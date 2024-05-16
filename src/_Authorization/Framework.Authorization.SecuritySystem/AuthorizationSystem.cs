@@ -41,7 +41,6 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IUserAuthenticationService userAuthenticationService,
         IOperationAccessorFactory operationAccessorFactory,
         [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
-        ISecurityRuleExpander securityRuleExpander,
         TimeProvider timeProvider,
         ISecurityRolesIdentsResolver securityRolesIdentsResolver)
     {

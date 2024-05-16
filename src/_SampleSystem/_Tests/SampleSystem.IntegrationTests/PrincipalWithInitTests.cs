@@ -1,11 +1,12 @@
 ﻿using FluentAssertions;
 
+using FluentValidation;
+
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.SecuritySystem;
-using Framework.Validation;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -56,39 +57,52 @@ public class PrincipalWithInitTests : TestBase
     public void CreateDuplicatePermission_ValidationError()
     {
         // Arrange
-        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions (Role: {BusinessRole.AdminRoleName} | Period: {this.testPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
+        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions: (Role: {SecurityRole.Administrator} | Period: {this.testPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
 
         // Act
-        Action call = () =>
-                      {
-                          this.Evaluate(
-                                        DBSessionMode.Write,
-                                        context =>
-                                        {
-                                            var authContext = context.Authorization;
+        var call = () =>
+                   {
+                       this.Evaluate(
+                           DBSessionMode.Write,
+                           context =>
+                           {
+                               var authContext = context.Authorization;
 
-                                            var principalBll = authContext.Logics.Principal;
-                                            var principal = principalBll.GetByName(TestPrincipalName, true);
+                               var principalBll = authContext.Logics.Principal;
+                               var principal = principalBll.GetByName(TestPrincipalName, true);
 
-                                            var existsPermission = principal.Permissions.Single();
+                               var existsPermission = principal.Permissions.Single();
 
-                                            var newPermission = new Permission(principal);
-                                            newPermission.Role = existsPermission.Role;
-                                            newPermission.Period = this.testPeriod;
+                               var newPermission = new Permission(principal)
+                               {
+                                   Role = existsPermission.Role,
+                                   Period = this.testPeriod
+                               };
 
-                                            var restriction = existsPermission.Restrictions.Single();
+                               foreach (var restriction in existsPermission.Restrictions)
+                               {
+                                   new PermissionRestriction(newPermission)
+                                   {
+                                       SecurityContextId = restriction.SecurityContextId,
+                                       SecurityContextType = restriction.SecurityContextType
+                                   };
+                               }
 
-                                            new PermissionRestriction(newPermission)
-                                            {
-                                                SecurityContextId = restriction.SecurityContextId,
-                                                SecurityContextType = restriction.SecurityContextType
-                                            };
+                               try
+                               {
+                                   principalBll.Save(principal);
+                               }
+                               catch (Exception e)
+                               {
+                                   var m = e.Message;
+                                   Console.WriteLine(e);
+                                   throw;
+                               }
 
-                                            principalBll.Save(principal);
-                                        });
-                      };
+                           });
+                   };
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage(expectedErrorMessage);
+        call.Should().Throw<ValidationException>().And.Message.Should().Contain(expectedErrorMessage);
     }
 }

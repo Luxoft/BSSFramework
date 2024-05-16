@@ -8,8 +8,7 @@ public partial class AuthSLJsonController
     [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetCurrentPrincipal))]
     public PrincipalFullDTO GetCurrentPrincipal()
     {
-        return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                         evaluateData.Context.Logics.Principal.GetCurrent().ToFullDTO(evaluateData.MappingService));
+        return this.Evaluate(DBSessionMode.Read, evaluateData => evaluateData.Context.CurrentPrincipal.ToFullDTO(evaluateData.MappingService));
     }
 
     [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetVisualPrincipalsWithoutSecurity))]

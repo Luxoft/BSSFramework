@@ -1,4 +1,6 @@
-﻿using Framework.Authorization.Domain;
+﻿using FluentValidation;
+
+using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
@@ -9,13 +11,6 @@ namespace Framework.Authorization.BLL;
 
 public partial class PermissionBLL
 {
-    public new void Save(Permission permission, bool withValidate)
-    {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-        base.Save(permission, withValidate);
-    }
-
     public override void Save(Permission permission)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
@@ -26,26 +21,14 @@ public partial class PermissionBLL
         }
 
         base.Save(permission);
-
-        permission.DelegatedTo.Foreach(delegatedPermission => this.Context.Logics.Permission.Save(delegatedPermission, false));
     }
 
-    protected override void PreRecalculate(Permission permission)
+    protected override void Validate(Permission permission, AuthorizationOperationContext operationContext)
     {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
+        this.Context.PrincipalValidator.ValidateAndThrow(permission.Principal);
 
-        permission.IsDelegatedTo = permission.DelegatedTo.Any();
-
-        base.PreRecalculate(permission);
+        base.Validate(permission, operationContext);
     }
-
-    protected override void PostValidate(Permission permission, AuthorizationOperationContext operationContext)
-    {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-        this.Context.PermissionValidator.Validate(permission);
-    }
-
 
     public void ChangeDelegatePermissions(ChangePermissionDelegatesModel changePermissionDelegatesModel)
     {

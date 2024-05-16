@@ -1,9 +1,13 @@
-﻿using Framework.Authorization.Notification;
+﻿using System.Linq.Expressions;
+
+using Framework.Authorization.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
+using Framework.Authorization.SecuritySystem;
+using Framework.Persistent;
 
 namespace Framework.DomainDriven.Setup;
 
@@ -64,6 +68,15 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         where T : IDomainObjectEventMetadata
     {
         this.DomainObjectEventMetadataType = typeof(T);
+
+        return this;
+    }
+
+    public IBssFrameworkSettings SetPrincipalIdentitySource<TDomainObject>(Expression<Func<TDomainObject, string>> namePath)
+        where TDomainObject : IIdentityObject<Guid>
+    {
+        this.RegisterActions.Add(sc => sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TDomainObject>>());
+        this.RegisterActions.Add(sc => sc.AddSingleton(new PrincipalIdentitySourcePathInfo<TDomainObject>(namePath)));
 
         return this;
     }

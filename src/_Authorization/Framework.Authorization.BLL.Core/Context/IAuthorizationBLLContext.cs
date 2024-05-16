@@ -2,6 +2,7 @@
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
+using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
@@ -17,11 +18,15 @@ public partial interface IAuthorizationBLLContext :
 
     ITypeResolverContainer<string>
 {
-    string CurrentPrincipalName => this.AuthorizationSystem.CurrentPrincipalName;
+    IPrincipalGeneralValidator PrincipalValidator { get; }
 
-    IPermissionValidator PermissionValidator { get; }
+    ICurrentPrincipalSource CurrentPrincipalSource { get; }
 
     IActualPrincipalSource ActualPrincipalSource { get; }
+
+    Principal CurrentPrincipal => this.CurrentPrincipalSource.CurrentPrincipal;
+
+    string CurrentPrincipalName => this.CurrentPrincipal.Name;
 
     IRunAsManager RunAsManager { get; }
 
@@ -37,20 +42,9 @@ public partial interface IAuthorizationBLLContext :
 
     INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
-    Principal CurrentPrincipal { get; }
-
     SecurityContextType GetSecurityContextType(Type type);
 
     SecurityContextType GetSecurityContextType(string domainTypeName);
 
     SecurityContextType GetSecurityContextType(Guid domainTypeId);
-
-
-    /// <summary>
-    /// Получение форматированного вида пермиссии
-    /// </summary>
-    /// <param name="permission">Пермиссия</param>
-    /// <param name="separator">Разделитель</param>
-    /// <returns></returns>
-    string GetFormattedPermission(Permission permission, string separator = " | ");
 }

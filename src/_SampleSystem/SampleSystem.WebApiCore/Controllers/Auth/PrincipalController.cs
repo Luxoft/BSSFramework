@@ -9,6 +9,6 @@ public partial class PrincipalController
     public PrincipalFullDTO GetCurrentPrincipal()
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                         evaluateData.Context.Logics.Principal.GetCurrent().ToFullDTO(evaluateData.MappingService));
+                                                         evaluateData.Context.Authorization.CurrentPrincipal.ToFullDTO(evaluateData.MappingService));
     }
 }

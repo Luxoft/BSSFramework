@@ -19,7 +19,7 @@ public static class DependencyInjection
         Action<AutomationFrameworkSettings> options) =>
         services.Configure(options)
                 .AddSingleton<ITestInitializeAndCleanup, TestInitializeAndCleanup>()
-                .AddSingleton<IIntegrationTestUserAuthenticationService, DiIntegrationTestUserAuthenticationService>()
+                .AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IUserAuthenticationService, IIntegrationTestUserAuthenticationService>()

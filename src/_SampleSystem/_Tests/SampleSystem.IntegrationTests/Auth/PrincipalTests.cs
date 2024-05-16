@@ -35,7 +35,6 @@ public class PrincipalTests : TestBase
 
         // Assert
         var permissionSimple = authorizationController.Evaluate(c => c.GetSimplePermission(permissionIdentity));
-        permissionSimple.Active.Should().BeTrue();
         permissionSimple.CreatedBy.Should().Be(currentUser.Login.ToString());
         permissionSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
     }
@@ -65,7 +64,6 @@ public class PrincipalTests : TestBase
         var principalRich = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichPrincipal(principalIdentity));
 
         principalRich.Name.Should().Be(Name);
-        principalRich.Active.Should().BeTrue();
         principalRich.CreatedBy.Should().Be(currentUser.Login.ToString());
         principalRich.ModifiedBy.Should().Be(currentUser.Login.ToString());
         principalRich.Permissions.First().Role.Identity.Should().Be(businessRoleIdentity);
@@ -91,7 +89,6 @@ public class PrincipalTests : TestBase
         var principalSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalStrict.Identity));
 
         principalSimple.Name.Should().Be(NewName);
-        principalSimple.Active.Should().BeTrue();
         principalSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
     }
 
@@ -134,14 +131,11 @@ public class PrincipalTests : TestBase
                                                                                      .Single(x => x.Principal.Identity == newPrincipalIdentity)).Identity;
 
         var newPermissionFull = this.GetAuthControllerEvaluator().Evaluate(c => c.GetFullPermission(newPermissionIdentity));
-        newPermissionFull.IsDelegatedFrom.Should().BeTrue();
-        newPermissionFull.DelegatedFromPrincipal.Identity.Should().Be(principalIdentity);
-        newPermissionFull.Active.Should().BeTrue();
         newPermissionFull.CreatedBy.Should().Be(currentUser.Login.ToString());
         newPermissionFull.ModifiedBy.Should().Be(currentUser.Login.ToString());
 
-        var permissionSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePermission(permissionIdentity));
-        permissionSimple.IsDelegatedTo.Should().BeTrue();
+        var permissionSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichPermission(permissionIdentity));
+        permissionSimple.DelegatedTo.Any().Should().BeTrue();
     }
 
     [TestMethod]

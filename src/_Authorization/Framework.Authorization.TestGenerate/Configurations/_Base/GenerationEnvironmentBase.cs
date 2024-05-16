@@ -10,7 +10,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
 
 
     protected GenerationEnvironmentBase()
-            : base(v => v.Id, typeof(DomainObjectFilterModel<>).Assembly)
+            : base(v => v.Id, typeof(DomainObjectChangeModel<>).Assembly)
     {
     }
 

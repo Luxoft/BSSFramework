@@ -31,11 +31,3 @@ public abstract class RootServiceProviderContainer : IRootServiceProviderContain
         return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
     }
 }
-
-public abstract class RootServiceProviderContainer<TBLLContext> : RootServiceProviderContainer, IRootServiceProviderContainer<TBLLContext>
-{
-    protected RootServiceProviderContainer(IServiceProvider rootServiceProvider)
-            : base(rootServiceProvider)
-    {
-    }
-}

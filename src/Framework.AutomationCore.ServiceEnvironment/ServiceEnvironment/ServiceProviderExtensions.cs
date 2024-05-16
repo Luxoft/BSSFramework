@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using Automation.ServiceEnvironment.Services;
+using Automation.Settings;
 
 using Framework.Core.Services;
 using Framework.DependencyInjection;
@@ -8,6 +9,7 @@ using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
@@ -32,14 +34,12 @@ public static class ServiceProviderExtensions
                      .Where(t => !t.IsAbstract && typeof(ControllerBase).IsAssignableFrom(t)))
         {
             services.AddScoped(controllerType);
-
-            services.AddSingleton(typeof(ControllerEvaluator<>).MakeGenericType(controllerType));
         }
 
         return services;
     }
 
-    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services) =>
+    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services, IConfiguration configuration) =>
 
         services.AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
@@ -51,5 +51,11 @@ public static class ServiceProviderExtensions
                 .AddScoped<TestWebApiCurrentMethodResolver>()
                 .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
 
-                .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();
+                .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
+
+                .AddSingleton(typeof(ControllerEvaluator<>))
+
+                .AddScoped<AuthManager>()
+
+                .Configure<AutomationFrameworkSettings>(nameof(AutomationFrameworkSettings), configuration);
 }

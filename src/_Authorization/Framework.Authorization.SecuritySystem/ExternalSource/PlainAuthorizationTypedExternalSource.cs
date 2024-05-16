@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
 public class PlainAuthorizationTypedExternalSource<TSecurityContext> : AuthorizationTypedExternalSourceBase<TSecurityContext>
-    where TSecurityContext : class, IIdentityObject<Guid>, IActiveObject, ISecurityContext
+    where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext
 {
     private readonly ISecurityContextDisplayService<TSecurityContext> displayService;
 
@@ -23,7 +23,6 @@ public class PlainAuthorizationTypedExternalSource<TSecurityContext> : Authoriza
 
         new SecurityEntity
         {
-            Active = securityContext.Active,
             Name = this.displayService.ToString(securityContext),
             Id = securityContext.Id
         };

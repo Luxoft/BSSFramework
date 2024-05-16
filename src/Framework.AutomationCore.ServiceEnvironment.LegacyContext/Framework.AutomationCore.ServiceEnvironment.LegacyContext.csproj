@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.AutomationCore.ServiceEnvironment.LegacyContext</PackageId>
+    <RootNamespace>Automation.ServiceEnvironmen</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\_Authorization\Framework.Authorization.WebApi\Framework.Authorization.WebApi.csproj" />
+
+    <ProjectReference Include="..\Framework.AutomationCore.ServiceEnvironment\Framework.AutomationCore.ServiceEnvironment.csproj" />
+  </ItemGroup>
+
+</Project>

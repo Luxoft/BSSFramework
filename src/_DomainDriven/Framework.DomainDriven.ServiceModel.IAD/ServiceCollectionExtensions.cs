@@ -1,11 +1,13 @@
-﻿using Framework.Authorization.Domain;
+﻿using FluentValidation;
+
+using Framework.Authorization.Domain;
 using Framework.Authorization.Environment;
 using Framework.Authorization.SecuritySystem;
-using Framework.Authorization.SecuritySystem.DomainServices;
 using Framework.Authorization.SecuritySystem.ExternalSource;
 
 using Framework.Authorization.SecuritySystem.Initialize;
 using Framework.Authorization.SecuritySystem.PermissionOptimization;
+using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Configuration.Domain;
 using Framework.Configuration.NamedLocks;
 using Framework.Core.Services;
@@ -73,6 +75,7 @@ public static class ServiceCollectionExtensions
         services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Disabled), typeof(Repository<>));
         services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.View), typeof(ViewRepository<>));
         services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Edit), typeof(EditRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRole.Administrator), typeof(AdministratorRepository<>));
 
         services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
@@ -150,18 +153,24 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IActualPrincipalSource, ActualPrincipalSource>()
                        .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
                        .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
-                       .AddScoped<IPermissionValidator, PermissionValidator>()
 
                        .AddScoped<IOperationAccessorFactory, OperationAccessorFactory>()
 
-                       .AddScoped<IBusinessRoleDomainService, BusinessRoleDomainService>()
                        .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
 
                        .AddSingleton<InitializerSettings>()
                        .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
-                       .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>();
+                       .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>()
+
+                       .AddScoped<IPrincipalDomainService, PrincipalDomainService>()
+
+                       .AddScoped<IPrincipalGeneralValidator, PrincipalGeneralValidator>()
+                       .AddKeyedScoped<IValidator<Principal>, PrincipalUniquePermissionValidator>(PrincipalUniquePermissionValidator.Key)
+                       .AddKeyedScoped<IValidator<Permission>, PermissionGeneralValidator>(PermissionGeneralValidator.Key)
+                       .AddKeyedScoped<IValidator<Permission>, PermissionDelegateValidator>(PermissionDelegateValidator.Key)
+                       .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>();
     }
 
 

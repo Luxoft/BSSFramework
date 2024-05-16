@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.AutomationCore.Xunit</PackageId>
-    <RootNamespace>Automation.Xunit</RootNamespace>    
+    <RootNamespace>Automation.Xunit</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />

@@ -12,6 +12,7 @@ using Framework.SecuritySystem;
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
+using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Events;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +23,6 @@ public partial class AuthorizationBLLContext
 {
     private readonly IAuthorizationBLLFactoryContainer logics;
 
-    private readonly Lazy<Principal> lazyCurrentPrincipal;
     private readonly IDictionaryCache<string, SecurityContextType> securityContextTypeByNameCache;
 
     private readonly IDictionaryCache<Guid, SecurityContextType> securityContextTypeByIdCache;
@@ -46,8 +46,9 @@ public partial class AuthorizationBLLContext
             IRunAsManager runAsManager,
             IAvailablePermissionSource availablePermissionSource,
             IAvailableSecurityRoleSource availableSecurityRoleSource,
-            IActualPrincipalSource actualPrincipalSource,
-            IPermissionValidator permissionValidator)
+            ICurrentPrincipalSource currentPrincipalSource,
+            IPrincipalGeneralValidator principalValidator,
+            IActualPrincipalSource actualPrincipalSource)
             : base(
                    serviceProvider,
                    operationSender,
@@ -63,15 +64,14 @@ public partial class AuthorizationBLLContext
         this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
         this.AvailablePermissionSource = availablePermissionSource;
         this.AvailableSecurityRoleSource = availableSecurityRoleSource;
+        this.CurrentPrincipalSource = currentPrincipalSource;
+        this.PrincipalValidator = principalValidator;
         this.ActualPrincipalSource = actualPrincipalSource;
-        this.PermissionValidator = permissionValidator;
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
         this.AuthorizationSystem = authorizationSystem;
         this.RunAsManager = runAsManager;
 
         this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
-
-        this.lazyCurrentPrincipal = LazyHelper.Create(() => this.Logics.Principal.GetCurrent());
 
         this.securityContextTypeByNameCache = new DictionaryCache<string, SecurityContextType>(
                                                                              domainTypeName => this.Logics.SecurityContextType.GetByName(domainTypeName, true),
@@ -91,7 +91,9 @@ public partial class AuthorizationBLLContext
 
     public IAuthorizationSystem<Guid> AuthorizationSystem { get; }
 
-    public IPermissionValidator PermissionValidator { get; }
+    public IPrincipalGeneralValidator PrincipalValidator { get; }
+
+    public ICurrentPrincipalSource CurrentPrincipalSource { get; }
 
     public IActualPrincipalSource ActualPrincipalSource { get; }
 
@@ -106,9 +108,6 @@ public partial class AuthorizationBLLContext
     public override IAuthorizationBLLFactoryContainer Logics => this.logics;
 
     public IAuthorizationExternalSource ExternalSource { get; }
-
-    public Principal CurrentPrincipal => this.lazyCurrentPrincipal.Value;
-
 
     public TimeProvider TimeProvider { get; }
 
@@ -132,30 +131,6 @@ public partial class AuthorizationBLLContext
         if (domainTypeId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainTypeId));
 
         return this.securityContextTypeByIdCache[domainTypeId];
-    }
-
-    /// <inheritdoc />
-    public string GetFormattedPermission(Permission permission, string separator = " | ")
-    {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-        return this.GetPermissionVisualParts(permission).Join(separator);
-    }
-
-    private IEnumerable<string> GetPermissionVisualParts(Permission permission)
-    {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-        yield return $"Role: {permission.Role}";
-
-        yield return $"Period: {permission.Period}";
-
-        foreach (var securityContextTypeGroup in permission.Restrictions.GroupBy(fi => fi.SecurityContextType, fi => fi.SecurityContextId))
-        {
-            var securityEntities = this.ExternalSource.GetTyped(securityContextTypeGroup.Key).GetSecurityEntitiesByIdents(securityContextTypeGroup);
-
-            yield return $"{securityContextTypeGroup.Key.Name.ToPluralize()}: {securityEntities.Join(", ")}";
-        }
     }
 
     IAuthorizationBLLContext IAuthorizationBLLContextContainer<IAuthorizationBLLContext>.Authorization => this;

@@ -1,7 +1,5 @@
 ﻿using MediatR;
 
-using SampleSystem.BLL.Core.IntegrationEvens;
-
 namespace SampleSystem.BLL._Command.ProcessIntegrationEvent;
 
 public class ProcessIntegrationEventHandler(ICountryBLLFactory countryBllFactory) : INotificationHandler<TestIntegrationEvent>

@@ -2,7 +2,7 @@
 
 using MediatR;
 
-using SampleSystem.BLL.Core.IntegrationEvens;
+using SampleSystem.BLL._Command.ProcessIntegrationEvent;
 using SampleSystem.Domain;
 
 namespace SampleSystem.BLL._Command.CreateIntegrationEvent;

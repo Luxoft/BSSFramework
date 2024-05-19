@@ -1,12 +1,10 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 using Framework.SecuritySystem.ExternalSystem;
-using Framework.Transfering;
 
 namespace Framework.Authorization.Domain;
 
@@ -18,8 +16,6 @@ namespace Framework.Authorization.Domain;
 /// </remarks>
 /// <seealso cref="SecurityContextType"/>
 [DomainType("{5d774041-bc69-4841-b64e-a2ee0131e632}")]
-[BLLViewRole(MaxCollection = MainDTOType.RichDTO)]
-[BLLRemoveRole]
 [System.Diagnostics.DebuggerDisplay("Principal={Principal.Name}, Role={Role.Name}")]
 public class Permission : AuditPersistentDomainObjectBase,
 

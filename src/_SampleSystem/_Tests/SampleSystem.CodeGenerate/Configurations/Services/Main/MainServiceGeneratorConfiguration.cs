@@ -10,11 +10,12 @@ namespace SampleSystem.CodeGenerate;
 public class MainServiceGeneratorConfiguration : MainGeneratorConfigurationBase<ServerGenerationEnvironment>
 {
     public MainServiceGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
+        : base(environment)
     {
+        this.GeneratePolicy = new CustomServiceGeneratePolicy(this);
     }
 
-    public override IGeneratePolicy<MethodIdentity> GeneratePolicy { get; } = new CustomServiceGeneratePolicy();
+    public override IGeneratePolicy<MethodIdentity> GeneratePolicy { get; }
 
 
     public override IEnumerable<IServiceMethodGenerator> GetMethodGenerators(Type domainType)
@@ -26,7 +27,9 @@ public class MainServiceGeneratorConfiguration : MainGeneratorConfigurationBase<
 
         if (!domainType.IsProjection())
         {
-            foreach (var complexChangeModelType in this.Environment.GetModelTypes(domainType, this.Environment.BLLCore.ComplexChangeModelType))
+            foreach (var complexChangeModelType in this.Environment.GetModelTypes(
+                         domainType,
+                         this.Environment.BLLCore.ComplexChangeModelType))
             {
                 yield return new ComplexChangeMethodGenerator(this, domainType, complexChangeModelType);
             }

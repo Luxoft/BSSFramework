@@ -8,8 +8,4 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework.Security.LegacyAttributes\Framework.Security.LegacyAttributes.csproj" />
-  </ItemGroup>
-
 </Project>

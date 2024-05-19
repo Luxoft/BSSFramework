@@ -2,6 +2,8 @@
 using Automation;
 using Automation.ServiceEnvironment;
 
+using Bss.Platform.Events.Abstractions;
+
 using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DependencyInjection;
@@ -47,6 +49,7 @@ public class InitializeAndCleanup
                .ApplyIntegrationTestServices(configuration)
 
                .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
+               .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
 
                .RegisterControllers([typeof(EmployeeController).Assembly])
 

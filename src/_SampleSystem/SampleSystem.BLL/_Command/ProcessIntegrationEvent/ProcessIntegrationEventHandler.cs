@@ -4,19 +4,14 @@ using SampleSystem.BLL.Core.IntegrationEvens;
 
 namespace SampleSystem.BLL._Command.ProcessIntegrationEvent;
 
-public class ProcessIntegrationEventHandler : IRequestHandler<TestIntegrationEvent>
+public class ProcessIntegrationEventHandler(ICountryBLLFactory countryBllFactory) : INotificationHandler<TestIntegrationEvent>
 {
-    private readonly ICountryBLLFactory countryBllFactory;
-
-    public ProcessIntegrationEventHandler(ICountryBLLFactory countryBllFactory) => this.countryBllFactory = countryBllFactory;
-
-    public async Task Handle(TestIntegrationEvent request, CancellationToken cancellationToken)
+    public Task Handle(TestIntegrationEvent request, CancellationToken cancellationToken)
     {
-        var countryBll = this.countryBllFactory.Create();
+        var countryBll = countryBllFactory.Create();
         var c = countryBll.GetById(request.CountryId);
-        if (c != null)
-        {
-            countryBll.Remove(c);
-        }
+        if (c != null) countryBll.Remove(c);
+
+        return Task.CompletedTask;
     }
 }

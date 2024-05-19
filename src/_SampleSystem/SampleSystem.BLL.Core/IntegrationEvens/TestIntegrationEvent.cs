@@ -1,5 +1,5 @@
-﻿using Framework.Cap.Abstractions;
+﻿using Bss.Platform.Events.Abstractions;
 
 namespace SampleSystem.BLL.Core.IntegrationEvens;
 
-public record TestIntegrationEvent(Guid CountryId) : IntegrationEvent;
+public record TestIntegrationEvent(Guid CountryId) : IIntegrationEvent;

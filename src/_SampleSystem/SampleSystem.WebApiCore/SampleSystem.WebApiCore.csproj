@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Luxoft.Bss.Platform.Api.Documentation" />
     <PackageReference Include="Luxoft.Bss.Platform.Api.Middlewares" />
+    <PackageReference Include="Luxoft.Bss.Platform.Events" />
     <PackageReference Include="Luxoft.Bss.Platform.Logging" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" />
     <PackageReference Include="nuSpec.NHibernate" />

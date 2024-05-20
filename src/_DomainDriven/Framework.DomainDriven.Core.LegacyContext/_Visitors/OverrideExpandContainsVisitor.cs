@@ -4,7 +4,7 @@ using System.Reflection;
 using Framework.Core;
 using Framework.HierarchicalExpand;
 
-namespace Framework.DomainDriven.BLL;
+namespace Framework.DomainDriven._Visitors;
 
 internal class OverrideExpandContainsVisitor<TBLLContext, TIdent> : ExpressionVisitor
 

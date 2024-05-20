@@ -1,8 +1,9 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 using Framework.Configuration.Domain;
-
+using Framework.DomainDriven.BLL;
 using Framework.Persistent;
+using Framework.Projection.Environment;
 
 namespace Framework.Configuration.TestGenerate;
 
@@ -59,6 +60,61 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     {
         return new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), dbName, dbAuditName);
     }
+
+    public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =
+
+        new DomainTypeRootExtendedMetadataBuilder()
+
+            .Add<CodeFirstSubscription>(
+                tb =>
+                    tb.AddAttribute(new BLLViewRoleAttribute())
+                      .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
+
+            .Add<DomainObjectEvent>(
+                tb =>
+                    tb.AddAttribute(new BLLRoleAttribute()))
+
+            .Add<DomainObjectModification>(
+                tb =>
+                    tb.AddAttribute(new BLLRoleAttribute()))
+
+            .Add<ExceptionMessage>(
+                tb =>
+                    tb.AddAttribute(new BLLViewRoleAttribute())
+                      .AddAttribute(new BLLSaveRoleAttribute { CustomImplementation = true }))
+
+            .Add<SentMessage>(
+                tb =>
+                    tb.AddAttribute(new BLLRoleAttribute()))
+
+            .Add<Sequence>(
+                tb =>
+                    tb.AddAttribute(new BLLViewRoleAttribute())
+                      .AddAttribute(new BLLSaveRoleAttribute())
+                      .AddAttribute(new BLLRemoveRoleAttribute()))
+
+            .Add<SystemConstant>(
+                tb =>
+                    tb.AddAttribute(new BLLViewRoleAttribute())
+                      .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
+
+
+            .Add<TargetSystem>(
+                tb =>
+                    tb.AddAttribute(new BLLViewRoleAttribute())
+                      .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
+
+            .Add<DomainType>(
+                tb =>
+                    tb.AddAttribute(new BLLViewRoleAttribute()))
+
+            .Add<DomainObjectNotification>(
+                tb =>
+                    tb.AddAttribute(new BLLRoleAttribute()))
+
+            .Add<GenericNamedLock>(
+                tb =>
+                    tb.AddAttribute(new BLLRoleAttribute()));
 
     public static readonly ServerGenerationEnvironment Default = new ServerGenerationEnvironment();
 }

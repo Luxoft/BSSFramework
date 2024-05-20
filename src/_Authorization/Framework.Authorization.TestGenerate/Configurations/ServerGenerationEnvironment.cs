@@ -4,7 +4,6 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
 using Framework.Persistent;
 using Framework.Projection.Environment;
-using Framework.Restriction;
 using Framework.Transfering;
 
 namespace Framework.Authorization.TestGenerate;

@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.DomainDriven.BLL;
+namespace Framework.DomainDriven._Visitors;
 //public class OverrideAsQueryableConstVisitor : ExpressionVisitor
 //{
 //    private OverrideAsQueryableConstVisitor()

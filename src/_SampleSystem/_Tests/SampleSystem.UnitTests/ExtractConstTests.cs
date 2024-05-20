@@ -3,7 +3,7 @@
 using FluentAssertions;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven._Visitors;
 
 using Xunit;
 

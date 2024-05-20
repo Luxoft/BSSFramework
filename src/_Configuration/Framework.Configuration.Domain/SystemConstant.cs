@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
@@ -10,7 +9,6 @@ namespace Framework.Configuration.Domain;
 /// <summary>
 /// Константа системы
 /// </summary>
-[BLLViewRole, BLLSaveRole(AllowCreate = false)]
 [UniqueGroup]
 [NotAuditedClass]
 [DomainType("{42C47133-A8C5-4E8E-9D46-385038BFE2B9}")]

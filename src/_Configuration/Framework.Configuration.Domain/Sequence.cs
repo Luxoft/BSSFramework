@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 using Framework.Validation;
@@ -10,7 +9,6 @@ namespace Framework.Configuration.Domain;
 /// Уникальный номер элемента системы
 /// </summary>
 [UniqueGroup]
-[BLLViewRole, BLLSaveRole, BLLRemoveRole]
 [NotAuditedClass]
 public class Sequence : BaseDirectory, INumberObject<long>
 {

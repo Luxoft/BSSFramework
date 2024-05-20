@@ -11,7 +11,8 @@ using NHibernate.Linq;
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationBusinessRoleInitializer(
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
+    [FromKeyedServices(nameof(SecurityRule.Disabled))]
+    IRepository<BusinessRole> businessRoleRepository,
     ISecurityRoleSource securityRoleSource,
     ILogger<AuthorizationBusinessRoleInitializer> logger,
     InitializerSettings settings)
@@ -26,23 +27,21 @@ public class AuthorizationBusinessRoleInitializer(
     {
         var dbRoles = await businessRoleRepository.GetQueryable().ToListAsync(cancellationToken);
 
-        var mergeRoleResult = dbRoles.GetMergeResult(GetOrderedRoles(securityRoles), br => br.Id, sr => sr.Id);
+        var mergeResult = dbRoles.GetMergeResult(securityRoles, br => br.Id, sr => sr.Id);
 
-        var mappingDict = new Dictionary<SecurityRole, BusinessRole>();
-
-        if (mergeRoleResult.RemovingItems.Any())
+        if (mergeResult.RemovingItems.Any())
         {
             switch (settings.UnexpectedAuthElementMode)
             {
                 case UnexpectedAuthElementMode.RaiseError:
                     throw new InvalidOperationException(
-                        $"Unexpected roles in database: {mergeRoleResult.RemovingItems.Join(", ")}");
+                        $"Unexpected roles in database: {mergeResult.RemovingItems.Join(", ")}");
 
                 case UnexpectedAuthElementMode.Remove:
                 {
-                    foreach (var removingItem in mergeRoleResult.RemovingItems)
+                    foreach (var removingItem in mergeResult.RemovingItems)
                     {
-                        logger.LogDebug("Remove Role: {RemovingItemName} {RemovingItemId}", removingItem.Name, removingItem.Id);
+                        logger.LogDebug("Role removed: {Name} {Id}", removingItem.Name, removingItem.Id);
 
                         await businessRoleRepository.RemoveAsync(removingItem, cancellationToken);
                     }
@@ -52,59 +51,34 @@ public class AuthorizationBusinessRoleInitializer(
             }
         }
 
-        foreach (var securityRole in mergeRoleResult.AddingItems)
+        foreach (var securityRole in mergeResult.AddingItems)
         {
-            var businessRole = new BusinessRole
-            {
-                Name = securityRole.Information.CustomName ?? securityRole.Name,
-                Description = securityRole.Information.Description
-            };
+            var businessRole = new BusinessRole { Name = GetActualName(securityRole), Description = securityRole.Information.Description };
 
-            logger.LogDebug("Create Role: {BusinessRole} {SecurityRole}", businessRole.Name, securityRole.Id);
+            logger.LogDebug("Role created: {Name} {Id}", businessRole.Name, securityRole.Id);
 
             await businessRoleRepository.InsertAsync(businessRole, securityRole.Id, cancellationToken);
-
-            mappingDict.Add(securityRole, businessRole);
         }
 
-        foreach (var combinePair in mergeRoleResult.CombineItems)
+        foreach (var (businessRole, securityRole) in mergeResult.CombineItems)
         {
-            var businessRole = combinePair.Item1;
-            var securityRole = combinePair.Item2;
+            var newName = GetActualName(securityRole);
+            var newDescription = securityRole.Information.Description;
 
-            businessRole.Description = securityRole.Information.Description;
+            if (newName != businessRole.Name || newDescription != businessRole.Description)
+            {
+                businessRole.Name = newName;
+                businessRole.Description = newDescription;
 
-            await businessRoleRepository.SaveAsync(businessRole, cancellationToken);
+                logger.LogDebug("Role updated: {Name} {Description} {Id}", businessRole.Name, businessRole.Description, securityRole.Id);
 
-            mappingDict.Add(securityRole, businessRole);
+                await businessRoleRepository.SaveAsync(businessRole, cancellationToken);
+            }
         }
     }
 
-    private static IEnumerable<FullSecurityRole> GetOrderedRoles(IEnumerable<FullSecurityRole> securityRoles)
+    private static string GetActualName(FullSecurityRole securityRole)
     {
-        var startParts = securityRoles.Partial(sr => sr.Information.Children.Any(), (rootRoles, leafRoles) => new { rootRoles, leafRoles });
-
-        var orderedResult = startParts.leafRoles.ToList();
-
-        var processed = startParts.leafRoles.ToHashSet();
-
-        var unprocessed = new Queue<FullSecurityRole>(startParts.rootRoles);
-
-        while (unprocessed.Any())
-        {
-            var currentRole = unprocessed.Dequeue();
-
-            if (currentRole.Information.Children.All(processed.Contains))
-            {
-                processed.Add(currentRole);
-                orderedResult.Add(currentRole);
-            }
-            else
-            {
-                unprocessed.Enqueue(currentRole);
-            }
-        }
-
-        return orderedResult;
+        return securityRole.Information.CustomName ?? securityRole.Name;
     }
 }

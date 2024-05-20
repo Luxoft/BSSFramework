@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Luxoft.Bss.Platform.Api.Documentation" />
     <PackageReference Include="Luxoft.Bss.Platform.Api.Middlewares" />
+    <PackageReference Include="Luxoft.Bss.Platform.Events" />
     <PackageReference Include="Luxoft.Bss.Platform.Logging" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" />
     <PackageReference Include="nuSpec.NHibernate" />
@@ -15,8 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />
-
-    <ProjectReference Include="..\..\Framework.Cap\Framework.Cap.csproj" />
     <ProjectReference Include="..\..\Framework.Configurator\Framework.Configurator.csproj" />
     <ProjectReference Include="..\..\Framework.HangfireCore\Framework.HangfireCore.csproj" />
     <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />

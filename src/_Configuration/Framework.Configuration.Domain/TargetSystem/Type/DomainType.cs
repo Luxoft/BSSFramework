@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
@@ -10,7 +9,6 @@ namespace Framework.Configuration.Domain;
 /// <summary>
 /// Описание доменного типа целевой системы
 /// </summary>
-[BLLViewRole]
 [NotAuditedClass]
 public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDetail<TargetSystem>, IMaster<DomainTypeEventOperation>, IDomainType
 {

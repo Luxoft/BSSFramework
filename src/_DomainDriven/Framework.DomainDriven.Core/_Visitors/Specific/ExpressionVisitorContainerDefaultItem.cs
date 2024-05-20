@@ -1,10 +1,9 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 
-namespace Framework.DomainDriven;
+namespace Framework.DomainDriven._Visitors;
 
 public class ExpressionVisitorContainerDefaultItem : IExpressionVisitorContainerItem
 {

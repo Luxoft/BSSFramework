@@ -3,7 +3,7 @@ using System.Reflection;
 
 using Framework.Core;
 
-namespace Framework.DomainDriven.BLL;
+namespace Framework.DomainDriven._Visitors;
 
 internal class OverrideIdEqualsMethodVisitor<TIdent> : ExpressionVisitor
 {

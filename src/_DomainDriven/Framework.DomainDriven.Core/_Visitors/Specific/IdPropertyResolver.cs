@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.DomainDriven;
+namespace Framework.DomainDriven._Visitors;
 
 public class IdPropertyResolver : IIdPropertyResolver
 {

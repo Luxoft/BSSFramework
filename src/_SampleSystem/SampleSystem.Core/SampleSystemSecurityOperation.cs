@@ -1,7 +1,4 @@
-﻿using Framework.HierarchicalExpand;
-using Framework.SecuritySystem;
-
-namespace SampleSystem;
+﻿namespace SampleSystem;
 
 public static class SampleSystemSecurityOperation
 {

@@ -1,8 +1,9 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+
 using Framework.Core;
 
-namespace Framework.DomainDriven.BLL;
+namespace Framework.DomainDriven._Visitors;
 
 internal class OptimizeWhereAndConcatVisitor : ExpressionVisitor
 {

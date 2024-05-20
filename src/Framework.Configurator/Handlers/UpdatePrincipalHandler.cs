@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem.Validation;
+﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;

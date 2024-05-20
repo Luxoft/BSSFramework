@@ -4,7 +4,6 @@ using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.Events;
 using Framework.SecuritySystem;
-using Framework.Validation;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

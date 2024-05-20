@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.Persistent.Mapping;
+﻿using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -7,7 +6,6 @@ namespace Framework.Configuration.Domain;
 /// <summary>
 /// Событие над объектом (Save, Remove etc), сохраняемое в базу.
 /// </summary>
-[BLLRole]
 [NotAuditedClass]
 public class DomainObjectEvent : AuditPersistentDomainObjectBase
 {

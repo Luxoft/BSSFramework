@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
@@ -12,8 +11,6 @@ namespace Framework.Configuration.Domain;
 /// Предназначен для управления активностью таких подписок во время исполнения.
 /// </summary>
 /// <seealso cref="DomainObjectBase" />
-[BLLViewRole]
-[BLLSaveRole(AllowCreate = false)]
 [UniqueGroup]
 [NotAuditedClass]
 public class CodeFirstSubscription : AuditPersistentDomainObjectBase, ICodeObject<string>

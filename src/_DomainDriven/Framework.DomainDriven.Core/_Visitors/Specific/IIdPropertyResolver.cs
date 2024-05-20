@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Framework.DomainDriven;
+namespace Framework.DomainDriven._Visitors;
 
 public interface IIdPropertyResolver
 {

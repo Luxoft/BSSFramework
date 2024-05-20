@@ -1,10 +1,11 @@
 ﻿using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;
+
 using Framework.Core;
 using Framework.Persistent;
 
-namespace Framework.DomainDriven.BLL;
+namespace Framework.DomainDriven._Visitors;
 
 public class OverrideEqualsDomainObjectVisitor<TIdent> : ExpressionVisitor
 {

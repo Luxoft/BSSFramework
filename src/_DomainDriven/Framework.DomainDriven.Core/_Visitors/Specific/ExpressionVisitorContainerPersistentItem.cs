@@ -3,7 +3,7 @@
 using Framework.Core;
 using Framework.Persistent;
 
-namespace Framework.DomainDriven;
+namespace Framework.DomainDriven._Visitors;
 
 public class ExpressionVisitorContainerPersistentItem : IExpressionVisitorContainerItem
 {

@@ -2,6 +2,7 @@
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Core;
 using Framework.DomainDriven;
+using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.IAD;
 

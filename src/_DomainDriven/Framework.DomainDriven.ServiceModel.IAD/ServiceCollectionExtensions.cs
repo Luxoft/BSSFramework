@@ -12,6 +12,7 @@ using Framework.Configuration.Domain;
 using Framework.Configuration.NamedLocks;
 using Framework.Core.Services;
 using Framework.DependencyInjection;
+using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ImpersonateService;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;

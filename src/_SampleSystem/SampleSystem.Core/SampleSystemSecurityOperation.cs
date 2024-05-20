@@ -1,4 +1,7 @@
-﻿namespace SampleSystem;
+﻿using Framework.HierarchicalExpand;
+using Framework.SecuritySystem;
+
+namespace SampleSystem;
 
 public static class SampleSystemSecurityOperation
 {

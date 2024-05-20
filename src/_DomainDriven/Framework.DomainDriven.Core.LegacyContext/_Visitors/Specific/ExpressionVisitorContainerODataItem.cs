@@ -1,9 +1,8 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.BLL;
 
-namespace Framework.DomainDriven;
+namespace Framework.DomainDriven._Visitors;
 
 public class ExpressionVisitorContainerODataItem<TBLLContext, TPersistentDomainObjectBase, TIdent> : IExpressionVisitorContainerItem
         where TBLLContext : class, IHierarchicalObjectExpanderFactoryContainer<TIdent>

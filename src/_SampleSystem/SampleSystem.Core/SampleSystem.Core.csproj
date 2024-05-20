@@ -8,5 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.Core\Framework.App.Core.csproj" />
     <ProjectReference Include="..\..\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
   </ItemGroup>
 </Project>

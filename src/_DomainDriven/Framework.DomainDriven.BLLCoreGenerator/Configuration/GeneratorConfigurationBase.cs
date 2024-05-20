@@ -272,7 +272,10 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
                               from type in projectionEnvironment.Assembly.GetTypes()
 
-                              where this.IsPersistentObject(type) && type.HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default)
+                              where this.IsPersistentObject(type)
+                                    && this.Environment.ExtendedMetadata.HasAttribute<ProjectionAttribute>(
+                                        type,
+                                        attr => attr.Role == ProjectionRole.Default)
 
                               select type;
 
@@ -281,11 +284,11 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected virtual IEnumerable<Type> GetBLLDomainTypes()
     {
-        return from type in this.DomainTypes
+        return from domainType in this.DomainTypes
 
-               where type.HasAttribute<BLLRoleAttribute>()
+               where this.Environment.ExtendedMetadata.HasAttribute<BLLRoleAttribute>(domainType)
 
-               select type;
+               select domainType;
     }
 
     protected virtual IEnumerable<Type> GetSecurityServiceDomainTypes()

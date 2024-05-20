@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
+﻿using Framework.DomainDriven.Serialization;
 using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.Domain;
@@ -13,7 +12,6 @@ namespace Framework.Authorization.Domain;
 /// <seealso cref="PermissionRestriction"/>
 /// Типы, в контексте которых выдаются права пользователю, записываются вручную на уровне SQL в базу конкретной системы
 /// </remarks>
-[BLLViewRole]
 public class SecurityContextType : BaseDirectory, ISecurityContextType<Guid>
 {
     /// <summary>

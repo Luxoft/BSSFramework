@@ -1,5 +1,6 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.BLLCoreGenerator;
+using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.ServiceModelGenerator;
 using Framework.Transfering;
 
@@ -10,7 +11,7 @@ namespace SampleSystem.CodeGenerate;
 /// <summary>
 /// Кастомная политика для управления генерацией фасадных методов (пример для обработки генерируемых методов по ComplexChange-модели)
 /// </summary>
-public class CustomServiceGeneratePolicy : DefaultServiceGeneratePolicy
+public class CustomServiceGeneratePolicy(IGeneratorConfiguration<IGenerationEnvironment> configuration) : DefaultServiceGeneratePolicy(configuration)
 {
     public override bool Used(Type domainType, MethodIdentity identity)
     {

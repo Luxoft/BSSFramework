@@ -16,5 +16,7 @@
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModelGenerator\Framework.DomainDriven.ServiceModelGenerator.csproj" />
 
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
+
+    <ProjectReference Include="..\Framework.Authorization.LegacyAttributes\Framework.Authorization.LegacyAttributes.csproj" />
   </ItemGroup>
 </Project>

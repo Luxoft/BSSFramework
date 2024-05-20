@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 
-using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
 using Framework.SecuritySystem.ExternalSystem;
@@ -11,9 +10,6 @@ namespace Framework.Authorization.Domain;
 ///     Идентификатор (логин) пользователя в системе
 /// </summary>
 [DomainType("{fa27cd64-c5e6-4356-9efa-a35b00ff69dd}")]
-[BLLViewRole]
-[BLLSaveRole]
-[BLLRemoveRole]
 [DebuggerDisplay("{Name}, RunAs={RunAs}")]
 [UniqueGroup]
 public class Principal : BaseDirectory, IMaster<Permission>, IPrincipal<Guid>

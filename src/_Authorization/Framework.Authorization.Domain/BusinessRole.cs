@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
@@ -11,7 +10,6 @@ namespace Framework.Authorization.Domain;
 /// </summary>
 [DomainType("{3823172C-B703-46FD-A82F-B55833EBCD38}")]
 [UniqueGroup]
-[BLLViewRole]
 public class BusinessRole : BaseDirectory
 {
     private readonly ICollection<Permission> permissions = new List<Permission>();

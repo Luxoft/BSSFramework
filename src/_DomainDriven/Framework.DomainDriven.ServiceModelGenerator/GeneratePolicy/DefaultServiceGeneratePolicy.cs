@@ -11,17 +11,21 @@ namespace Framework.DomainDriven.ServiceModelGenerator;
 /// <summary>
 /// Стандартная политика для управления генерацией фасадных методов
 /// </summary>
-public class DefaultServiceGeneratePolicy : IGeneratePolicy<MethodIdentity>
+public class DefaultServiceGeneratePolicy(IGeneratorConfiguration<IGenerationEnvironment> configuration) : IGeneratePolicy<MethodIdentity>
 {
+    private readonly IGeneratorConfiguration<IGenerationEnvironment> configuration = configuration;
+
     public virtual bool Used(Type domainType, MethodIdentity identity)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (identity == null) throw new ArgumentNullException(nameof(identity));
 
-        Func<bool> allowedSingleDTO = () => domainType.HasAttribute<BLLViewRoleAttribute>(attr => attr.Single.Contains((MainDTOType)identity.DTOType.Value));
-        Func<bool> allowedCollectionDTO = () => domainType.HasAttribute<BLLViewRoleAttribute>(attr => attr.Collection.Contains((MainDTOType)identity.DTOType.Value));
+        var extendedMetadata = this.configuration.Environment.ExtendedMetadata;
 
-        Func<ProjectionFilterTargets, bool> allowedProjectionFilter = target => domainType.HasAttribute<ProjectionFilterAttribute>(filterAttr => filterAttr.FilterType == identity.ModelType && filterAttr.Target.HasFlag(target));
+        var allowedSingleDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Single.Contains((MainDTOType)identity.DTOType.Value));
+        var allowedCollectionDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr =>attr.Collection.Contains((MainDTOType)identity.DTOType.Value));
+
+        Func<ProjectionFilterTargets, bool> allowedProjectionFilter = target => extendedMetadata.HasAttribute<ProjectionFilterAttribute>(domainType, attr => attr.FilterType == identity.ModelType && attr.Target.HasFlag(target));
 
         if (identity.DTOType == ViewDTOType.VisualDTO && !domainType.HasVisualIdentityProperties())
         {
@@ -29,15 +33,15 @@ public class DefaultServiceGeneratePolicy : IGeneratePolicy<MethodIdentity>
         }
         else if (identity == MethodIdentityType.Save)
         {
-            return domainType.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Single));
+            return extendedMetadata.HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.SaveMany)
         {
-            return domainType.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Many));
+            return extendedMetadata.HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.Update)
         {
-            return domainType.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Update) && attr.CountType.HasFlag(CountType.Single));
+            return extendedMetadata.HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Update) && attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.GetWithExtended)
         {
@@ -49,17 +53,17 @@ public class DefaultServiceGeneratePolicy : IGeneratePolicy<MethodIdentity>
         }
         else if (identity == MethodIdentityType.Remove)
         {
-            return domainType.HasAttribute<BLLRemoveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Single));
+            return extendedMetadata.HasAttribute<BLLRemoveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.RemoveMany)
         {
-            return domainType.HasAttribute<BLLRemoveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Many));
+            return extendedMetadata.HasAttribute<BLLRemoveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.GetPropertyRevisions
                  || identity == MethodIdentityType.GetPropertyRevisionByDateRange
                  || identity == MethodIdentityType.GetRevisions)
         {
-            return domainType.HasAttribute<BLLViewRoleAttribute>();
+            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
         }
         else if (identity == MethodIdentityType.GetRevision)
         {
@@ -69,19 +73,19 @@ public class DefaultServiceGeneratePolicy : IGeneratePolicy<MethodIdentity>
                  || identity == MethodIdentityType.GetAttachment
                  || identity == MethodIdentityType.RemoveAttachment)
         {
-            return domainType.HasAttribute<BLLViewRoleAttribute>();
+            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
         }
         else if (identity == MethodIdentityType.GetFileContainer)
         {
-            return domainType.HasAttribute<BLLViewRoleAttribute>();
+            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
         }
         else if (identity == MethodIdentityType.IntegrationSave)
         {
-            return domainType.HasAttribute<BLLIntegrationSaveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Single));
+            return extendedMetadata.HasAttribute<BLLIntegrationSaveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.IntegrationSaveMany)
         {
-            return domainType.HasAttribute<BLLIntegrationSaveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Many));
+            return extendedMetadata.HasAttribute<BLLIntegrationSaveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.IntegrationSaveByModel)
         {
@@ -89,7 +93,7 @@ public class DefaultServiceGeneratePolicy : IGeneratePolicy<MethodIdentity>
         }
         else if (identity == MethodIdentityType.IntegrationRemove)
         {
-            return domainType.HasAttribute<BLLIntegrationRemoveRoleAttribute>();
+            return extendedMetadata.HasAttribute<BLLIntegrationRemoveRoleAttribute>(domainType);
         }
         else if (identity == MethodIdentityType.GetChangeModel || identity == MethodIdentityType.GetMassChangeModel)
         {
@@ -102,7 +106,7 @@ public class DefaultServiceGeneratePolicy : IGeneratePolicy<MethodIdentity>
         else if (identity == MethodIdentityType.HasAccess
                  || identity == MethodIdentityType.CheckAccess)
         {
-            return domainType.HasAttribute<BLLViewRoleAttribute>();
+            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
         }
         else if (identity == MethodIdentityType.Create)
         {
@@ -205,6 +209,4 @@ public class DefaultServiceGeneratePolicy : IGeneratePolicy<MethodIdentity>
             return false;
         }
     }
-
-    public static readonly DefaultServiceGeneratePolicy Value = new DefaultServiceGeneratePolicy();
 }

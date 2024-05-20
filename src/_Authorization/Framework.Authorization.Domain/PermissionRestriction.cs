@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
+﻿using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Restriction;
@@ -11,7 +10,6 @@ namespace Framework.Authorization.Domain;
 /// Связь между пермиссией и контекстом
 /// </summary>
 [DomainType("{48880DB2-1BC0-4130-BC87-F0E8E0D246CC}")]
-[BLLRole]
 public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Permission>, IPermissionRestriction<Guid>
 {
     private readonly Permission permission;

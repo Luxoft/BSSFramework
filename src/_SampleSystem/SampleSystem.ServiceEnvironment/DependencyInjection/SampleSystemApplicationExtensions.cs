@@ -1,5 +1,4 @@
-﻿using Framework.Cap;
-using Framework.DependencyInjection;
+﻿using Framework.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,15 +19,10 @@ public static class SampleSystemApplicationExtensions
                 .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
                 .RegisterSmtpNotification(configuration)
                 .RegisterApplicationServices()
-                .AddCapBss(configuration.GetConnectionString("DefaultConnection"))
                 .RegisterJobs();
 
-    private static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
-    {
+    private static IServiceCollection RegisterApplicationServices(this IServiceCollection services) =>
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
-
-        return services;
-    }
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {

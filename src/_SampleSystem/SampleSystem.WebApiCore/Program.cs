@@ -1,5 +1,6 @@
 ﻿using Bss.Platform.Api.Documentation;
 using Bss.Platform.Api.Middlewares;
+using Bss.Platform.Events;
 using Bss.Platform.Logging;
 
 using Framework.Configurator;
@@ -13,6 +14,7 @@ using Framework.SecuritySystem;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Http.Json;
 
+using SampleSystem.BLL._Command.CreateClassA.Intergation;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
 using SampleSystem.WebApiCore.Extensions;
@@ -40,6 +42,13 @@ builder.Services
        .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
        .Configure<JsonOptions>(x => x.SerializerOptions.Converters.Add(new UtcDateTimeJsonConverter()))
        .AddSwaggerOld(builder.Environment)
+       .AddPlatformIntegrationEvents<IntegrationEventProcessor>(
+           typeof(ClassACreatedEvent).Assembly,
+           x =>
+           {
+               x.SqlServer.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
+               x.MessageQueue.Enable = false;
+           })
        .AddConfigurator()
        .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
        .AddNegotiate();
@@ -54,17 +63,17 @@ builder.Services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));
 var app = builder.Build();
 
 app
-   .UsePlatformErrorsMiddleware()
-   .UseHttpsRedirection()
-   .UseHsts()
-   .UseRouting()
-   .UseTryProcessDbSession()
-   .UseWebApiExceptionExpander()
-   .UseAuthentication()
-   .UseAuthorization()
-   .UseConfigurator()
-   .UsePlatformApiDocumentation(builder.Environment)
-   .UseEndpoints(x => x.MapControllers());
+    .UsePlatformErrorsMiddleware()
+    .UseHttpsRedirection()
+    .UseHsts()
+    .UseRouting()
+    .UseTryProcessDbSession()
+    .UseWebApiExceptionExpander()
+    .UseAuthentication()
+    .UseAuthorization()
+    .UseConfigurator()
+    .UsePlatformApiDocumentation(builder.Environment)
+    .UseEndpoints(x => x.MapControllers());
 
 if (builder.Environment.IsProduction())
 {

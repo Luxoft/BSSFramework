@@ -2,8 +2,7 @@
 using Automation;
 using Automation.ServiceEnvironment;
 
-using DotNetCore.CAP;
-using DotNetCore.CAP.Internal;
+using Bss.Platform.Events.Abstractions;
 
 using Framework.Configuration.BLL;
 using Framework.Core;
@@ -15,8 +14,6 @@ using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.Support.Utils;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Main;
-using SampleSystem.WebApiCore;
-using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.__Support;
@@ -52,13 +49,7 @@ public class InitializeAndCleanup
                .ApplyIntegrationTestServices(configuration)
 
                .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
-
-               .AddSingleton<ICapSubscribe, CapIntegrationController>()
-               .ReplaceSingleton<IConsumerServiceSelector, TestConsumerServiceSelector>()
-
-               //.ReplaceSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
-               //.ReplaceSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
-
+               .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
 
                .RegisterControllers([typeof(EmployeeController).Assembly])
 

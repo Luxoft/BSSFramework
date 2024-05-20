@@ -1,8 +1,6 @@
 ﻿using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 
-using DotNetCore.CAP;
-
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.Options;
@@ -16,7 +14,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData;
 
 public class TestDataInitializer(
     SampleSystemInitializer mainInitializer,
-    IBootstrapper bootstrapper,
     AuthHelper authHelper,
     DataHelper dataHelper,
     IOptions<AutomationFrameworkSettings> settings,
@@ -34,8 +31,6 @@ public class TestDataInitializer(
     private async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         mainInitializer.Initialize();
-
-        await bootstrapper.BootstrapAsync(cancellationToken);
 
         authHelper.AddUserToAdmin(nameof(TestDataInitializer));
         authHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, SecurityRole.SystemIntegration);

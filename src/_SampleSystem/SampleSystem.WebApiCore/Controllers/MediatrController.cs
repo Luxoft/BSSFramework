@@ -16,34 +16,29 @@ namespace SampleSystem.WebApiCore.Controllers;
 
 [ApiController]
 [Route("authApi/[controller]/[action]")]
-public class MediatrController : ApiControllerBase<ISampleSystemBLLContext, ISampleSystemDTOMappingService>
+public class MediatrController(IMediator mediator) : ApiControllerBase<ISampleSystemBLLContext, ISampleSystemDTOMappingService>
 {
-    private readonly IMediator mediator;
-
-    public MediatrController(IMediator mediator) =>
-            this.mediator = mediator;
-
     [HttpGet]
     public GetEmployeesResponse[] GetEmployees() =>
-            this.Evaluate(
-                          DBSessionMode.Read,
-                          _ => this.mediator.Send(new GetEmployeesQuery()).GetAwaiter().GetResult());
+        this.Evaluate(
+            DBSessionMode.Read,
+            _ => mediator.Send(new GetEmployeesQuery()).GetAwaiter().GetResult());
 
     [HttpGet]
     public GetManagementUnitFluentMappingsResponse[] GetManagementUnitFluentMappings() =>
-            this.Evaluate(
-                          DBSessionMode.Read,
-                          _ => this.mediator.Send(new GetManagementUnitFluentMappingsQuery()).GetAwaiter().GetResult());
+        this.Evaluate(
+            DBSessionMode.Read,
+            _ => mediator.Send(new GetManagementUnitFluentMappingsQuery()).GetAwaiter().GetResult());
 
     [HttpPost]
     public Guid CreateManagementUnitFluentMappings([FromBody] CreateManagementUnitFluentMappingCommand command) =>
-            this.Evaluate(
-                          DBSessionMode.Write,
-                          _ => this.mediator.Send(command).GetAwaiter().GetResult());
+        this.Evaluate(
+            DBSessionMode.Write,
+            _ => mediator.Send(command).GetAwaiter().GetResult());
 
     [HttpPost]
     public void CreateIntegrationEvent() =>
-            this.Evaluate(
-                          DBSessionMode.Write,
-                          _ => this.mediator.Send(new CreateIntegrationEventCommand()).GetAwaiter().GetResult());
+        this.Evaluate(
+            DBSessionMode.Write,
+            _ => mediator.Send(new CreateIntegrationEventCommand()).GetAwaiter().GetResult());
 }

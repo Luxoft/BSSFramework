@@ -16,7 +16,7 @@ public class AvailableSecurityRoleSource : IAvailableSecurityRoleSource
         this.securityRoleSource = securityRoleSource;
     }
 
-    public async Task<List<FullSecurityRole>> GetAvailableSecurityRole (CancellationToken cancellationToken)
+    public async Task<List<FullSecurityRole>> GetAvailableSecurityRoles (CancellationToken cancellationToken)
     {
         var dbRequest = from permission in this.availablePermissionSource.GetAvailablePermissionsQueryable()
 

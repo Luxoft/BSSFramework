@@ -18,7 +18,7 @@ public class OperationController : ControllerBase
     [HttpPost(nameof(GetSecurityOperations))]
     public async Task<IEnumerable<string>> GetSecurityOperations(CancellationToken cancellationToken)
     {
-        var roles = await this.availableSecurityRoleSource.GetAvailableSecurityRole(cancellationToken);
+        var roles = await this.availableSecurityRoleSource.GetAvailableSecurityRoles(cancellationToken);
 
         return roles.SelectMany(sr => sr.Information.Operations).Distinct().Select(op => op.Name);
     }

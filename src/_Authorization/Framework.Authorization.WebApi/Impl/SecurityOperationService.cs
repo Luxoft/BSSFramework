@@ -9,7 +9,7 @@ public partial class AuthSLJsonController
     {
         return this.EvaluateC(DBSessionMode.Read,
                               context => context.AvailableSecurityRoleSource
-                                                .GetAvailableSecurityRole()
+                                                .GetAvailableSecurityRoles()
                                                 .GetAwaiter()
                                                 .GetResult()
                                                 .SelectMany(sr => sr.Information.Operations)

@@ -69,7 +69,7 @@ public abstract record SecurityRule
     {
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
-                                                 : $"{nameof(this.SecurityRoles)}: {this.SecurityRoles.Join(", ", sr => sr.Name)}";
+                                                 : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";
     }
 
     /// <summary>
@@ -80,7 +80,7 @@ public abstract record SecurityRule
     {
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
-                                                 : $"{nameof(this.SecurityRoles)}: {this.SecurityRoles.Join(", ", sr => sr.Name)}";
+                                                 : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";
     }
 
     /// <summary>
@@ -91,6 +91,6 @@ public abstract record SecurityRule
     {
         public override string ToString() => this.Children.Count == 1
                                                  ? this.Children.Single().ToString()
-                                                 : $"{nameof(this.Children)}: {this.Children.Join(", ")}";
+                                                 : $"[{this.Children.Join(", ")}]";
     }
 }

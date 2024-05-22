@@ -32,7 +32,6 @@ public class WrongSecurityMessageTests : TestBase
         this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule.Edit);
     }
 
-
     [TestMethod]
     public void UseWrongSecurityOperation_ErrorMessageCorrected()
     {

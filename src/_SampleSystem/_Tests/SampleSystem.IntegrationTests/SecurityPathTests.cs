@@ -32,7 +32,6 @@ public class SecurityPathTests : TestBase
                                            securityPath,
                                            SampleSystemSecurityOperation.EmployeeView);
 
-
                                        var employeeBll = context.Logics.EmployeeFactory.Create(securityProvider);
 
                                        return employeeBll.GetById(employeeIdentity.Id).ToIdentityDTO();

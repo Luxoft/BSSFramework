@@ -6,6 +6,11 @@ namespace Framework.SecuritySystem
 {
     public static class SecurityProviderExtensions
     {
+        public static ISecurityProvider<TDomainObject> ApplySourceRuleDeclaration<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, SecurityRule securityRule)
+        {
+            return new ApplySourceRuleDeclarationSecurityProvider<TDomainObject>(securityProvider, securityRule);
+        }
+
         public static ISecurityProvider<TDomainObject> And<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, UnboundedList<string>> getAccessorsFunc = null, LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
         {
             if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
@@ -98,6 +103,28 @@ namespace Framework.SecuritySystem
                 var comparer = StringComparer.CurrentCultureIgnoreCase;
 
                 return this.orAnd ? first.Union(second, comparer) : first.Concat(second).Distinct(comparer);
+            }
+        }
+
+        private class ApplySourceRuleDeclarationSecurityProvider<TDomainObject>(ISecurityProvider<TDomainObject> baseProvider, SecurityRule securityRule)
+            : ISecurityProvider<TDomainObject>
+        {
+            public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable) => baseProvider.InjectFilter(queryable);
+
+            public bool HasAccess(TDomainObject domainObject) => baseProvider.HasAccess(domainObject);
+
+            public UnboundedList<string> GetAccessors(TDomainObject domainObject) => baseProvider.GetAccessors(domainObject);
+
+            public AccessResult GetAccessResult(TDomainObject domainObject)
+            {
+                var accessResult = baseProvider.GetAccessResult(domainObject);
+
+                if (accessResult is AccessResult.AccessDeniedResult accessDeniedResult)
+                {
+                    return accessDeniedResult with { SecurityRule = securityRule };
+                }
+
+                return accessResult;
             }
         }
     }

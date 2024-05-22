@@ -1,11 +1,16 @@
-﻿using Automation.Utils.DatabaseUtils.Interfaces;
+﻿using Automation.Settings;
+using Automation.Utils.DatabaseUtils.Interfaces;
+
+using Microsoft.Extensions.Options;
 
 namespace Automation.Utils.DatabaseUtils;
 
 public abstract class TestDatabaseGenerator : BaseTestDatabaseGenerator, ITestDatabaseGenerator
 {
-    protected TestDatabaseGenerator(IDatabaseContext databaseContext, ConfigUtil configUtil)
-        : base(databaseContext, configUtil)
+    protected TestDatabaseGenerator(
+        IDatabaseContext databaseContext,
+        IOptions<AutomationFrameworkSettings> settings)
+        : base(databaseContext, settings)
     {
     }
 

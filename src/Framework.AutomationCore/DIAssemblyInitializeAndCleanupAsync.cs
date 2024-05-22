@@ -1,27 +1,29 @@
 ﻿using Automation.Enums;
 using Automation.Interfaces;
-using Automation.Utils;
+using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
+
+using Microsoft.Extensions.Options;
 
 namespace Automation;
 
 public class DiAssemblyInitializeAndCleanupAsync : IAssemblyInitializeAndCleanupAsync
 {
-    private readonly ConfigUtil configUtil;
+    private readonly AutomationFrameworkSettings settings;
     private readonly ITestDatabaseGeneratorAsync databaseGenerator;
 
     public DiAssemblyInitializeAndCleanupAsync(
-        ConfigUtil configUtil,
+        IOptions<AutomationFrameworkSettings> settings,
         ITestDatabaseGeneratorAsync databaseGenerator)
     {
-        this.configUtil = configUtil;
+        this.settings = settings.Value;
         this.databaseGenerator = databaseGenerator;
     }
 
     public async Task EnvironmentInitializeAsync()
     {
-        switch (this.configUtil.TestRunMode)
+        switch (this.settings.TestRunMode)
         {
             case TestRunMode.RestoreDatabaseUsingAttach:
                 this.databaseGenerator.CreateLocalDb();
@@ -47,7 +49,7 @@ public class DiAssemblyInitializeAndCleanupAsync : IAssemblyInitializeAndCleanup
 
     public async Task EnvironmentCleanupAsync()
     {
-        switch (this.configUtil.TestRunMode)
+        switch (this.settings.TestRunMode)
         {
             case TestRunMode.DefaultRunModeOnEmptyDatabase:
                 await this.databaseGenerator.CheckTestDatabaseAsync();

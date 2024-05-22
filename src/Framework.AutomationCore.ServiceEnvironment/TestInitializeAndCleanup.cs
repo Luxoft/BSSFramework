@@ -1,15 +1,17 @@
 ﻿using Automation.Enums;
 using Automation.Interfaces;
 using Automation.ServiceEnvironment.Services;
-using Automation.Utils;
+using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
+
+using Microsoft.Extensions.Options;
 
 namespace Automation.ServiceEnvironment;
 
 public class TestInitializeAndCleanup : ITestInitializeAndCleanup
 {
-    private readonly ConfigUtil configUtil;
+    private readonly AutomationFrameworkSettings settings;
 
     private readonly IDatabaseContext databaseContext;
 
@@ -18,12 +20,12 @@ public class TestInitializeAndCleanup : ITestInitializeAndCleanup
     private readonly IIntegrationTestUserAuthenticationService userAuthenticationService;
 
     public TestInitializeAndCleanup(
-        ConfigUtil configUtil,
+        IOptions<AutomationFrameworkSettings> settings,
         IDatabaseContext databaseContext,
         IntegrationTestTimeProvider timeProvider,
         IIntegrationTestUserAuthenticationService userAuthenticationService)
     {
-        this.configUtil = configUtil;
+        this.settings = settings.Value;
         this.databaseContext = databaseContext;
         this.timeProvider = timeProvider;
         this.userAuthenticationService = userAuthenticationService;
@@ -49,20 +51,20 @@ public class TestInitializeAndCleanup : ITestInitializeAndCleanup
 
     protected virtual void DropDatabaseAfterTest()
     {
-        if (this.configUtil.UseLocalDb || this.configUtil.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase || this.configUtil.TestsParallelize)
+        if (this.settings.UseLocalDb || this.settings.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase || this.settings.TestsParallelize)
         {
-            AssemblyInitializeAndCleanup.RunAction("Drop Database", this.databaseContext.Drop);
+            AssemblyInitializeAndCleanupBase.RunAction("Drop Database", this.databaseContext.Drop);
         }
     }
 
     protected virtual void ReattachDatabase()
     {
-        switch (this.configUtil.TestRunMode)
+        switch (this.settings.TestRunMode)
         {
             case TestRunMode.DefaultRunModeOnEmptyDatabase:
             case TestRunMode.RestoreDatabaseUsingAttach:
-                AssemblyInitializeAndCleanup.RunAction("Drop Database", this.databaseContext.Drop);
-                AssemblyInitializeAndCleanup.RunAction("Restore Databases", this.databaseContext.AttachDatabase);
+                AssemblyInitializeAndCleanupBase.RunAction("Drop Database", this.databaseContext.Drop);
+                AssemblyInitializeAndCleanupBase.RunAction("Restore Databases", this.databaseContext.AttachDatabase);
                 break;
         }
     }

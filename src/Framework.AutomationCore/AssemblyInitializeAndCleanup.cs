@@ -1,8 +1,9 @@
 ﻿using Automation.Interfaces;
-using Automation.Utils;
+using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Automation;
 
@@ -49,21 +50,21 @@ public class AssemblyInitializeAndCleanup : AssemblyInitializeAndCleanupBase, IA
 
     protected void Cleanup(IServiceProvider serviceProvider)
     {
-        var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
+        var settings = serviceProvider.GetRequiredService<IOptions<AutomationFrameworkSettings>>();
         var databaseGenerator = serviceProvider.GetRequiredService<ITestDatabaseGenerator>();
 
-        this.Cleanup(configUtil, databaseGenerator);
+        this.Cleanup(settings.Value, databaseGenerator);
     }
 
     protected void Initialize(IServiceProvider serviceProvider)
     {
-        var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
+        var settings = serviceProvider.GetRequiredService<IOptions<AutomationFrameworkSettings>>();
         var databaseGenerator = serviceProvider.GetRequiredService<ITestDatabaseGenerator>();
 
         // if (!configUtil.UseLocalDb)
         // {
         //     RunAction("Check Server Name in allowed list", databaseGenerator.CheckServerAllowed);
         // }
-        this.Initialize(configUtil, databaseGenerator);
+        this.Initialize(settings.Value, databaseGenerator);
     }
 }

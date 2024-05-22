@@ -1,4 +1,7 @@
-﻿using Automation.Utils.DatabaseUtils.Interfaces;
+﻿using Automation.Settings;
+using Automation.Utils.DatabaseUtils.Interfaces;
+
+using Microsoft.Extensions.Options;
 using Microsoft.SqlServer.Management.Smo;
 
 namespace Automation.Utils.DatabaseUtils;
@@ -9,17 +12,19 @@ public abstract class BaseTestDatabaseGenerator
 
     public IDatabaseContext DatabaseContext { get; }
 
-    private readonly ConfigUtil configUtil;
+    private readonly AutomationFrameworkSettings settings;
 
-    protected BaseTestDatabaseGenerator(IDatabaseContext databaseContext, ConfigUtil configUtil)
+    protected BaseTestDatabaseGenerator(
+        IDatabaseContext databaseContext,
+        IOptions<AutomationFrameworkSettings> settings)
     {
         this.DatabaseContext = databaseContext;
-        this.configUtil = configUtil;
+        this.settings = settings.Value;
     }
 
     public void CreateLocalDb()
     {
-        if (this.configUtil.UseLocalDb && !CoreDatabaseUtil.LocalDbInstanceExists(this.DatabaseContext.Main.InstanceName))
+        if (this.settings.UseLocalDb && !CoreDatabaseUtil.LocalDbInstanceExists(this.DatabaseContext.Main.InstanceName))
         {
             CoreDatabaseUtil.CreateLocalDb(this.DatabaseContext.Main.InstanceName);
         }
@@ -27,7 +32,7 @@ public abstract class BaseTestDatabaseGenerator
 
     public virtual void DeleteLocalDb()
     {
-        if (this.configUtil.UseLocalDb)
+        if (this.settings.UseLocalDb)
         {
             CoreDatabaseUtil.DeleteLocalDb(this.DatabaseContext.Main.InstanceName);
         }
@@ -45,15 +50,22 @@ public abstract class BaseTestDatabaseGenerator
             @"__Support\Scripts",
             this.DatabaseContext.Main.DatabaseName);
 
-    public void DeleteDetachedFiles() =>
-        Directory.GetFiles(this.configUtil.DbDataDirectory)
-            .Where(i => i.Contains(this.DatabaseContext.Main.InstanceName))
-            .ToList()
-            .ForEach(File.Delete);
+    public void DeleteDetachedFiles()
+    {
+        if (!Directory.Exists(this.settings.DbDataDirectory))
+        {
+            return;
+        }
+
+        Directory.GetFiles(this.settings.DbDataDirectory)
+                 .Where(i => i.Contains(this.DatabaseContext.Main.InstanceName))
+                 .ToList()
+                 .ForEach(File.Delete);
+    }
 
     public virtual void CheckServerAllowed()
     {
-        if (this.DatabaseContext.Server.NetName.Equals(this.configUtil.ComputerName, StringComparison.InvariantCultureIgnoreCase))
+        if (this.DatabaseContext.Server.NetName.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
         {
             return;
         }

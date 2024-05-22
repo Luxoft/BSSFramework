@@ -1,23 +1,25 @@
 ﻿using Automation.Interfaces;
-using Automation.Utils;
+using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
+
+using Microsoft.Extensions.Options;
 
 namespace Automation;
 
 public class DiAssemblyInitializeAndCleanup : AssemblyInitializeAndCleanupBase, IAssemblyInitializeAndCleanup
 {
-    private readonly ConfigUtil configUtil;
+    private readonly AutomationFrameworkSettings settings;
     private readonly ITestDatabaseGenerator databaseGenerator;
 
     public DiAssemblyInitializeAndCleanup(
-        ConfigUtil configUtil,
+        IOptions<AutomationFrameworkSettings> settings,
         ITestDatabaseGenerator databaseGenerator)
     {
-        this.configUtil = configUtil;
+        this.settings = settings.Value;
         this.databaseGenerator = databaseGenerator;
     }
 
-    public void EnvironmentInitialize() => this.Initialize(this.configUtil, this.databaseGenerator);
+    public void EnvironmentInitialize() => this.Initialize(this.settings, this.databaseGenerator);
 
-    public void EnvironmentCleanup() => this.Cleanup(this.configUtil, this.databaseGenerator);
+    public void EnvironmentCleanup() => this.Cleanup(this.settings, this.databaseGenerator);
 }

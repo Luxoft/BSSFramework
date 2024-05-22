@@ -55,7 +55,5 @@ public static class ServiceProviderExtensions
 
                 .AddSingleton(typeof(ControllerEvaluator<>))
 
-                .AddScoped<AuthManager>()
-
-                .Configure<AutomationFrameworkSettings>(nameof(AutomationFrameworkSettings), configuration);
+                .AddScoped<AuthManager>();
 }

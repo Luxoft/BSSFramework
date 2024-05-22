@@ -45,7 +45,7 @@ public abstract class IntegrationTestBase : RootServiceProviderContainer
 
     protected virtual void DropDatabaseAfterTest()
     {
-        if (this.ConfigUtil.UseLocalDb || this.ConfigUtil.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase)
+        if (this.AutomationFrameworkSettings.UseLocalDb || this.AutomationFrameworkSettings.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase)
         {
             AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
         }
@@ -56,7 +56,7 @@ public abstract class IntegrationTestBase : RootServiceProviderContainer
 
     protected virtual void ReattachDatabase()
     {
-        switch (this.ConfigUtil.TestRunMode)
+        switch (this.AutomationFrameworkSettings.TestRunMode)
         {
             case TestRunMode.DefaultRunModeOnEmptyDatabase:
             case TestRunMode.RestoreDatabaseUsingAttach:

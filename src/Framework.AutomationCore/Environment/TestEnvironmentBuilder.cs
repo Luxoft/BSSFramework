@@ -1,5 +1,5 @@
 ﻿using Automation.Extensions;
-using Automation.Utils;
+using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
@@ -17,9 +17,8 @@ public class TestEnvironmentBuilder
     private IConfiguration withConfiguration;
     private Func<IConfiguration, IServiceCollection, IServiceCollection> withServiceProviderBuildFunc;
     private Action<IServiceProvider> withServiceProvAfterBuildAction;
+    private Action<AutomationFrameworkSettings> withAutomationFrameworkSettings;
     private Type withDatabaseGenerator;
-    private string withConnectionStringName;
-    private string[] withSecondaryDatabases;
 
     public TestEnvironmentBuilder WithConfiguration(IConfiguration rootConfiguration)
     {
@@ -42,16 +41,9 @@ public class TestEnvironmentBuilder
         return this;
     }
 
-    public TestEnvironmentBuilder WithSecondaryDatabases(string[] databaseNames)
+    public TestEnvironmentBuilder WithAutomationFrameworkSettings(Action<AutomationFrameworkSettings> settings)
     {
-        this.withSecondaryDatabases = databaseNames;
-
-        return this;
-    }
-
-    public TestEnvironmentBuilder WithConnectionStringName(string name)
-    {
-        this.withConnectionStringName = name;
+        this.withAutomationFrameworkSettings = settings;
 
         return this;
     }
@@ -99,8 +91,7 @@ public class TestEnvironmentBuilder
             this.withServiceProviderBuildFunc,
             this.withServiceProvAfterBuildAction,
             this.withDatabaseGenerator,
-            this.withConnectionStringName ?? "DefaultConnection",
-            this.withSecondaryDatabases);
+            this.withAutomationFrameworkSettings);
 
         return new TestEnvironment(
             serviceProviderPool,
@@ -128,16 +119,14 @@ public class TestEnvironmentBuilder
         Func<IConfiguration, IServiceCollection, IServiceCollection> serviceProviderBuildFunc,
         Action<IServiceProvider> serviceProviderAfterBuildAction,
         Type databaseGenerator,
-        string connectionStringName,
-        string[] secondaryDatabases) =>
+        Action<AutomationFrameworkSettings> settingsAction) =>
             new ServiceProviderPool(
                 () => this.ServiceProviderGenerationFunc(
                     serviceProviderBuildFunc,
                     serviceProviderAfterBuildAction,
                     rootConfiguration,
                     databaseGenerator,
-                    connectionStringName,
-                    secondaryDatabases),
+                    settingsAction),
                 rootConfiguration.GetValue<bool>("TestsParallelize"),
                 rootConfiguration.GetValue<bool>("DisableServiceProviderPoolLimiter"));
 
@@ -146,26 +135,18 @@ public class TestEnvironmentBuilder
             Action<IServiceProvider> serviceProviderAfterBuildAction,
             IConfiguration rootConfiguration,
             Type databaseGenerator,
-            string connectionStringName,
-            string[] secondaryDatabases)
+            Action<AutomationFrameworkSettings> settingsAction)
     {
-        var configUtil = new ConfigUtil(rootConfiguration);
-        var databaseContextSettings = new DatabaseContextSettings(
-            connectionStringName,
-            secondaryDatabases);
-
-        var databaseContext = new DatabaseContext(
-            configUtil,
-            Options.Create(databaseContextSettings));
+        var settings = GetSettings(rootConfiguration, settingsAction);
+        var databaseContext = new DatabaseContext(rootConfiguration, settings);
 
         var cfg = rootConfiguration.BuildFromRootWithConnectionStrings(databaseContext);
 
         var environmentServices = new ServiceCollection();
         serviceProviderBuildFunc.Invoke(cfg, environmentServices);
-        environmentServices.TryAddSingleton(databaseContextSettings);
+        environmentServices.TryAddSingleton(settings);
         environmentServices.TryAddSingleton<IDatabaseContext>(databaseContext);
         environmentServices.AddSingleton<IConfiguration>(cfg)
-                           .AddSingleton<ConfigUtil>()
                            .AddSingleton(typeof(ITestDatabaseGenerator), databaseGenerator);
 
         var environmentServiceProvider = this.BuildServiceProvider(environmentServices);
@@ -173,5 +154,14 @@ public class TestEnvironmentBuilder
         serviceProviderAfterBuildAction?.Invoke(environmentServiceProvider);
 
         return environmentServiceProvider;
+    }
+
+    private static IOptions<AutomationFrameworkSettings> GetSettings(IConfiguration configuration, Action<AutomationFrameworkSettings> action)
+    {
+        var settings = new AutomationFrameworkSettings();
+        configuration.GetSection(nameof(AutomationFrameworkSettings)).Bind(settings);
+        action?.Invoke(settings);
+
+        return Options.Create(settings);
     }
 }

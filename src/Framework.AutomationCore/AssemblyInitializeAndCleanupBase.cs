@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 
 using Automation.Enums;
+using Automation.Settings;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
 
@@ -23,9 +24,9 @@ public class AssemblyInitializeAndCleanupBase
         Console.WriteLine();
     }
 
-    protected virtual void Cleanup(ConfigUtil configUtil, ITestDatabaseGenerator databaseGenerator)
+    protected virtual void Cleanup(AutomationFrameworkSettings settings, ITestDatabaseGenerator databaseGenerator)
     {
-        switch (configUtil.TestRunMode)
+        switch (settings.TestRunMode)
         {
             case TestRunMode.DefaultRunModeOnEmptyDatabase:
                 RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
@@ -40,9 +41,9 @@ public class AssemblyInitializeAndCleanupBase
         }
     }
 
-    protected virtual void Initialize(ConfigUtil configUtil, ITestDatabaseGenerator databaseGenerator)
+    protected virtual void Initialize(AutomationFrameworkSettings settings, ITestDatabaseGenerator databaseGenerator)
     {
-        switch (configUtil.TestRunMode)
+        switch (settings.TestRunMode)
         {
             case TestRunMode.RestoreDatabaseUsingAttach:
                 RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);

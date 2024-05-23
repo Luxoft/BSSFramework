@@ -8,7 +8,7 @@ public sealed class ConfiguratorMiddleware(RequestDelegate next, string route)
 
     public async Task Invoke(HttpContext context)
     {
-        var path = context.Request.Path.Value!;
+        var path = context.Request.PathBase + context.Request.Path.Value!;
         if (this.IsStartPageRequested(path))
         {
             var content = await GetStartPageContentAsync();
@@ -22,8 +22,8 @@ public sealed class ConfiguratorMiddleware(RequestDelegate next, string route)
     }
 
     private bool IsStartPageRequested(string path) =>
-            new[] { route, $"{route}/", $"{route}/{StartPage}" }
-                    .Any(x => path.EndsWith(x, StringComparison.OrdinalIgnoreCase));
+        new[] { route, $"{route}/", $"{route}/{StartPage}" }
+            .Any(x => path.EndsWith(x, StringComparison.OrdinalIgnoreCase));
 
     private static async Task<string> GetStartPageContentAsync()
     {
@@ -39,8 +39,8 @@ public sealed class ConfiguratorMiddleware(RequestDelegate next, string route)
     }
 
     private string ChangeStaticLocation(string content) =>
-            content
-                    .Replace("href=\"", $"href=\"{route}/")
-                    .Replace("src=\"", $"src=\"{route}/")
-                    .Replace("//", "/");
+        content
+            .Replace("href=\"", $"href=\"{route}/")
+            .Replace("src=\"", $"src=\"{route}/")
+            .Replace("//", "/");
 }

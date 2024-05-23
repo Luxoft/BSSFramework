@@ -16,7 +16,8 @@ public abstract class DomainSecurityServiceBase<TDomainObject> : IDomainSecurity
             }
             else
             {
-                return this.CreateSecurityProvider(securityRule);
+                return this.CreateSecurityProvider(securityRule)
+                           .ApplySourceRuleDeclaration(securityRule);
             }
         }).WithLock();
     }

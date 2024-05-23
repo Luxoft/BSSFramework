@@ -50,8 +50,8 @@
     <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="170.23.0" />
     <PackageVersion Include="MSTest.TestAdapter" Version="3.1.1" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.1.1" />
-    <PackageVersion Include="NHibernate" Version="5.5.0" />
-    <PackageVersion Include="NHibernate.Envers" Version="5.5.0" />
+    <PackageVersion Include="NHibernate" Version="5.5.1" />
+    <PackageVersion Include="NHibernate.Envers" Version="5.5.1" />
     <PackageVersion Include="NSubstitute" Version="5.1.0" />
     <PackageVersion Include="NUnit" Version="4.0.1" />
     <PackageVersion Include="NUnit.ConsoleRunner" Version="3.16.3" />

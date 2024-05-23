@@ -20,6 +20,29 @@ public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity> : Abstra
         this.verCfg = auditConfiguration;
     }
 
+    public override async Task<IEnumerable<IIdentityRevisionEntityInfo<TRevisionEntity, TIdentity>>> ResultsAsync(CancellationToken cancellationToken = default)
+    {
+        var auditEntitiesConfiguration = this.AuditConfiguration.AuditEntCfg;
+
+        this.SetIncludeDeletationClause();
+        this.AddCriterions();
+        this.AddOrders();
+        this.QueryBuilder.AddFrom(auditEntitiesConfiguration.RevisionInfoEntityFullClassName(), QueryConstants.RevisionAlias, true);
+        this.QueryBuilder.RootParameters.AddWhere(auditEntitiesConfiguration.RevisionNumberPath, true, "=", QueryConstants.RevisionAlias + ".id", false);
+
+        var revisionTypePropertyName = auditEntitiesConfiguration.RevisionTypePropName;
+
+        return from resultRow in await this.BuildAndExecuteQueryAsync<object[]>(cancellationToken)
+               let versionsEntity = (IDictionary)resultRow[0]
+               let revisionData = (TRevisionEntity)resultRow[1]
+               let revision = this.GetRevisionNumberFromDynamicEntity(versionsEntity)
+               let identityObject = this.GetIdentityValue(this.EntityName, versionsEntity)
+               select new IdentityRevisionEntityInfo<TRevisionEntity, TIdentity>(
+                   revisionData,
+                   (TIdentity)identityObject,
+                   (RevisionType)versionsEntity[revisionTypePropertyName]);
+    }
+
     public override IEnumerable<IIdentityRevisionEntityInfo<TRevisionEntity, TIdentity>> Results()
     {
         var auditEntitiesConfiguration = this.AuditConfiguration.AuditEntCfg;

@@ -1,7 +1,9 @@
-﻿using Automation.Utils;
+﻿using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 using Framework.DomainDriven.DBGenerator;
+
+using Microsoft.Extensions.Options;
 
 using SampleSystem.DbGenerate;
 using SampleSystem.IntegrationTests.__Support;
@@ -11,9 +13,9 @@ namespace SampleSystem.IntegrationTests.Support.Utils;
 
 public class SampleSystemTestDatabaseGenerator(
     IDatabaseContext databaseContext,
-    ConfigUtil configUtil,
+    IOptions<AutomationFrameworkSettings> settings,
     TestDataInitializer testDataInitializer)
-    : TestDatabaseGenerator(databaseContext, configUtil)
+    : TestDatabaseGenerator(databaseContext, settings)
 {
     public override IEnumerable<string> TestServers => new List<string> { "." };
 

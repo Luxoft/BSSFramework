@@ -192,6 +192,8 @@ public static partial class CoreDatabaseUtil
             db.Collation = database.DatabaseCollation;
         }
 
+        CheckDirectoryAndCreateIfNotExists(database.DbDataDirectory);
+
         var fileGroup = new FileGroup(db, "PRIMARY");
 
         var dataFile = new DataFile(
@@ -230,6 +232,7 @@ public static partial class CoreDatabaseUtil
     private static void CopyDetachedFiles(Server server, DatabaseItem database)
     {
         server.DetachDatabase(database.DatabaseName);
+        CheckDirectoryAndCreateIfNotExists(database.DbDataDirectory);
 
         new FileInfo(database.SourceDataPath).MoveTo(database.CopyDataPath, true);
         new FileInfo(database.SourceLogPath).MoveTo(database.CopyLogPath, true);
@@ -297,6 +300,14 @@ public static partial class CoreDatabaseUtil
             var instanceInfo = localDbApi.GetInstanceInfo(instanceName);
 
             return instanceInfo.Exists;
+        }
+    }
+
+    private static void CheckDirectoryAndCreateIfNotExists(string path)
+    {
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path!);
         }
     }
 }

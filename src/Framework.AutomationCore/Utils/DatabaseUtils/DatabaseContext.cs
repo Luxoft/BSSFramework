@@ -1,5 +1,9 @@
+using System.Text.RegularExpressions;
+
+using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
@@ -9,6 +13,11 @@ namespace Automation.Utils.DatabaseUtils;
 
 public class DatabaseContext : IDatabaseContext
 {
+    static DatabaseContext() =>
+        LocalDbInstanceName = $"Test_{TextRandomizer.RandomString(10)}";
+
+    private static readonly string LocalDbInstanceName;
+
     public DatabaseItem Main { get; }
 
     private readonly Server server;
@@ -16,23 +25,24 @@ public class DatabaseContext : IDatabaseContext
     public Dictionary<string, DatabaseItem> Secondary { get; }
 
     public DatabaseContext(
-        ConfigUtil configUtil,
-        IOptions<DatabaseContextSettings> settings)
-    : this(configUtil, settings.Value)
+        IConfiguration configuration,
+        IOptions<AutomationFrameworkSettings> settings)
+    : this(configuration, settings.Value)
     {
     }
 
     private DatabaseContext(
-        ConfigUtil configUtil,
-        DatabaseContextSettings settings)
+        IConfiguration configuration,
+        AutomationFrameworkSettings settings)
     {
-        var connectionString = configUtil.GetConnectionString(settings.ConnectionStringName);
+        var connectionString = this.GetConnectionString(configuration, settings);
+
         this.Main = new DatabaseItem(
             connectionString,
-            configUtil.DatabaseCollation,
-            configUtil.DbDataDirectory,
+            settings.DatabaseCollation,
+            settings.DbDataDirectory,
             null,
-            configUtil.TestsParallelize);
+            settings.TestsParallelize);
 
         if (settings.SecondaryDatabases != null)
         {
@@ -43,10 +53,10 @@ public class DatabaseContext : IDatabaseContext
                     database,
                     new DatabaseItem(
                         connectionString,
-                        configUtil.DatabaseCollation,
-                        configUtil.DbDataDirectory,
+                        settings.DatabaseCollation,
+                        settings.DbDataDirectory,
                         database,
-                        configUtil.TestsParallelize));
+                        settings.TestsParallelize));
             }
         }
 
@@ -62,6 +72,25 @@ public class DatabaseContext : IDatabaseContext
             return this.server;
         }
     }
+
+    private string GetConnectionString(
+        IConfiguration configuration,
+        AutomationFrameworkSettings settings)
+    {
+        var connectionString = configuration.GetConnectionString(settings.ConnectionStringName);
+
+        if (settings.UseLocalDb)
+        {
+            connectionString = this.GetLocalDbConnectionString(connectionString, LocalDbInstanceName);
+        }
+
+        return connectionString;
+    }
+
+    private string GetLocalDbConnectionString(string connectionString, string instanceName)
+        => DataSourceRegex.Replace(connectionString, $"Data Source=(localdb)\\{instanceName}");
+
+    private static readonly Regex DataSourceRegex = new Regex("Data Source=([^;]*)", RegexOptions.Compiled | RegexOptions.NonBacktracking);
 }
 
 

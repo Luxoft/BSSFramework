@@ -7,8 +7,6 @@ public class DatabaseItem : IDatabaseItem
 {
     private readonly SqlConnectionStringBuilder builder;
 
-    private readonly string dbDataDirectory;
-
     public DatabaseItem(
         string connectionString,
         string databaseCollation,
@@ -16,7 +14,7 @@ public class DatabaseItem : IDatabaseItem
         string initialCatalog = null,
         bool randomizeDatabaseName = false)
     {
-        this.dbDataDirectory = dbDataDirectory;
+        this.DbDataDirectory = dbDataDirectory;
         this.builder = new SqlConnectionStringBuilder(connectionString);
         initialCatalog ??= this.builder.InitialCatalog;
         this.DatabaseName = randomizeDatabaseName
@@ -48,6 +46,7 @@ public class DatabaseItem : IDatabaseItem
     public string InstanceName => this.builder.DataSource.Split('\\').LastOrDefault();
 
     public string DatabaseName { get; }
+    public string DbDataDirectory { get; }
     public string CopyDataPath { get; }
     public string CopyLogPath { get; }
     public string SourceDataPath { get; }
@@ -70,5 +69,5 @@ public class DatabaseItem : IDatabaseItem
 
     private static string SourceLogFile(string fileName) => $"{fileName}_log.ldf";
 
-    private string ToWorkPath(string fileName) => Path.Combine(this.dbDataDirectory, fileName);
+    private string ToWorkPath(string fileName) => Path.Combine(this.DbDataDirectory, fileName);
 }

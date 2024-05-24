@@ -1,4 +1,5 @@
-﻿using Automation.Utils;
+﻿using Automation.Settings;
+using Automation.Utils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
 using Framework.FinancialYear;
@@ -17,7 +18,7 @@ public abstract class RootServiceProviderContainer : IRootServiceProviderContain
 
     public virtual IServiceProvider RootServiceProvider { get; }
 
-    public ConfigUtil ConfigUtil => this.GetConfigUtil();
+    public AutomationFrameworkSettings AutomationFrameworkSettings => this.GetAutomationFrameworkSettings();
 
     public TimeProvider TimeProvider => this.GetTimeProvider();
 

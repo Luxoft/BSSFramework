@@ -90,7 +90,7 @@ public class DatabaseContext : IDatabaseContext
     private string GetLocalDbConnectionString(string connectionString, string instanceName)
         => DataSourceRegex.Replace(connectionString, $"Data Source=(localdb)\\{instanceName}");
 
-    private static readonly Regex DataSourceRegex = new Regex("Data Source=([^;]*)", RegexOptions.Compiled);
+    private static readonly Regex DataSourceRegex = new Regex("Data Source=([^;]*)", RegexOptions.Compiled | RegexOptions.NonBacktracking);
 }
 
 

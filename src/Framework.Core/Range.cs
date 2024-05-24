@@ -10,22 +10,11 @@ public interface ISizeContainer<T>
     int Size { get; }
 }
 
-
-
-
-public class Range<T>
+public class Range<T>(T min, T max)
 {
-    public readonly T Min;
+    public T Min { get; } = min;
 
-    public readonly T Max;
-
-    public Range(T min, T max)
-    {
-        this.Max = max;
-        this.Min = min;
-    }
-
-
+    public T Max { get; } = max;
 
     public static Range<T> Infinity => RangeHelper.RangeValue;
 

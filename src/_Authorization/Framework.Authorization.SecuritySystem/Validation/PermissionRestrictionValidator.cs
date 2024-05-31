@@ -39,7 +39,7 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
 
                     return authorizationTypedExternalSource.IsExists(securityContextId);
                 })
-            .WithMessage(permissionRestriction => $"{permissionRestriction.SecurityContextType.Name} with id '{permissionRestriction.SecurityContextType.Name}' not exists.");
+            .WithMessage(permissionRestriction => $"{permissionRestriction.SecurityContextType.Name} with id '{permissionRestriction.SecurityContextId}' not exists.");
     }
 
     private ISecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)

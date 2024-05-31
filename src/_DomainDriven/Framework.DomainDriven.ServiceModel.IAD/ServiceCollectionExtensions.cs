@@ -164,6 +164,7 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
                        .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>()
+                       .AddScoped(typeof(LocalStorage<>))
 
                        .AddScoped<IPrincipalDomainService, PrincipalDomainService>()
 

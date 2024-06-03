@@ -4,28 +4,23 @@ using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
-public class HierarchicalAuthorizationTypedExternalSource<TSecurityContext> : AuthorizationTypedExternalSourceBase<TSecurityContext>
+public class HierarchicalAuthorizationTypedExternalSource<TSecurityContext>(
+    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<TSecurityContext> securityContextRepository,
+    LocalStorage<TSecurityContext> localStorage,
+    ISecurityContextDisplayService<TSecurityContext> displayService)
+    : AuthorizationTypedExternalSourceBase<TSecurityContext>(securityContextRepository, localStorage)
     where TSecurityContext : class, IIdentityObject<Guid>, IParentSource<TSecurityContext>, ISecurityContext
 {
-    private readonly ISecurityContextDisplayService<TSecurityContext> displayService;
-
-    public HierarchicalAuthorizationTypedExternalSource(
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<TSecurityContext> securityContextRepository,
-        ISecurityContextDisplayService<TSecurityContext> displayService)
-        : base(securityContextRepository)
-    {
-        this.displayService = displayService;
-    }
-
     protected override SecurityEntity CreateSecurityEntity(TSecurityContext securityContext) =>
 
         new SecurityEntity
         {
-            Name = this.displayService.ToString(securityContext),
+            Name = displayService.ToString(securityContext),
             Id = securityContext.Id,
             ParentId = securityContext.Parent.Maybe(v => v.Id)
         };

@@ -16,11 +16,11 @@
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
     <PackageVersion Include="Dapper" Version="2.1.35" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.4.0" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.4.0" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.4.0" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Events.Abstractions" Version="1.4.0" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Logging" Version="1.4.0" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.5.2" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.5.2" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.5.2" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Events.Abstractions" Version="1.5.2" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Logging" Version="1.5.2" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageVersion Include="FluentValidation" Version="11.9.1" />
     <PackageVersion Include="Fare" Version="2.2.1" />

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetOperationsHandler(IOperationAccessor operationAccessor, ISecurityRoleSource roleSource)
+public class GetOperationsHandler(IOperationAccessor operationAccessor, ISecurityRoleSource roleSource, ISecurityOperationInfoSource operationInfoSource)
     : BaseReadHandler, IGetOperationsHandler
 {
     protected override Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
@@ -15,7 +15,7 @@ public class GetOperationsHandler(IOperationAccessor operationAccessor, ISecurit
 
         var operations = roleSource.SecurityRoles
                                    .SelectMany(x => x.Information.Operations)
-                                   .Select(o => new OperationDto { Name = o.Name, Description = o.Description })
+                                   .Select(o => new OperationDto { Name = o.Name, Description = operationInfoSource.GetSecurityOperationInfo(o).Description })
                                    .OrderBy(x => x.Name)
                                    .DistinctBy(x => x.Name)
                                    .ToList();

@@ -6,9 +6,9 @@ namespace Framework.SecuritySystem;
 
 public static class SecurityRuleExtensions
 {
-    public static SecurityRule.OperationSecurityRule ToSecurityRule(this SecurityOperation securityOperation)
+    public static SecurityRule.OperationSecurityRule ToSecurityRule(this SecurityOperation securityOperation, HierarchicalExpandType? customExpandType = null)
     {
-        return new SecurityRule.OperationSecurityRule(securityOperation);
+        return new SecurityRule.OperationSecurityRule(securityOperation) { CustomExpandType = customExpandType };
     }
 
     public static SecurityRule.NonExpandedRolesSecurityRule ToSecurityRule(this IEnumerable<SecurityRole> securityRoles, HierarchicalExpandType? customExpandType = null)

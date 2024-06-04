@@ -6,17 +6,14 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.Security.Metadata;
 
-public class SampleSystemEmployeeDomainSecurityServiceMetadata : IDomainSecurityServiceMetadata<Employee>
+public class SampleSystemEmployeeDomainSecurityServiceMetadata(IActualPrincipalSource actualPrincipalSource)
+    : IDomainSecurityServiceMetadata<Employee>
 {
-    private readonly IActualPrincipalSource actualPrincipalSource;
-
-    public SampleSystemEmployeeDomainSecurityServiceMetadata(IActualPrincipalSource actualPrincipalSource) => this.actualPrincipalSource = actualPrincipalSource;
-
     public ISecurityProvider<Employee> OverrideSecurityProvider(ISecurityProvider<Employee> baseProvider, SecurityRule.OperationSecurityRule securityRule)
     {
         if (securityRule == SampleSystemSecurityOperation.EmployeeView)
         {
-            return baseProvider.Or(employee => employee.Login == this.actualPrincipalSource.ActualPrincipal.Name);
+            return baseProvider.Or(employee => employee.Login == actualPrincipalSource.ActualPrincipal.Name);
         }
         else
         {

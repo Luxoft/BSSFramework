@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Http.Json;
 using SampleSystem.BLL._Command.CreateClassA.Intergation;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
-using SampleSystem.WebApiCore.Extensions;
 using SampleSystem.WebApiCore.Json;
 using SampleSystem.WebApiCore.Services;
 
@@ -41,7 +40,7 @@ builder.Services
        .RegisterGeneralDependencyInjection(builder.Configuration)
        .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
        .Configure<JsonOptions>(x => x.SerializerOptions.Converters.Add(new UtcDateTimeJsonConverter()))
-       .AddSwaggerOld(builder.Environment)
+       .AddPlatformApiDocumentation(builder.Environment, "SampleSystem API", x => x.CustomSchemaIds(t => t.FullName))
        .AddPlatformIntegrationEvents<IntegrationEventProcessor>(
            typeof(ClassACreatedEvent).Assembly,
            x =>

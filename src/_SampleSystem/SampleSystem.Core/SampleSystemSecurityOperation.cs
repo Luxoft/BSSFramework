@@ -15,7 +15,7 @@ public static class SampleSystemSecurityOperation
 
     #region BusinessUnit
 
-    public static SecurityOperation BusinessUnitView { get; } = new(nameof(BusinessUnitView)) { ExpandType = HierarchicalExpandType.All };
+    public static SecurityOperation BusinessUnitView { get; } = new(nameof(BusinessUnitView));
 
     public static SecurityOperation BusinessUnitEdit { get; } = new(nameof(BusinessUnitEdit));
 
@@ -49,7 +49,7 @@ public static class SampleSystemSecurityOperation
 
     #region Management Unit
 
-    public static SecurityOperation ManagementUnitView { get; } = new(nameof(ManagementUnitView)) { ExpandType = HierarchicalExpandType.All };
+    public static SecurityOperation ManagementUnitView { get; } = new(nameof(ManagementUnitView));
 
     public static SecurityOperation ManagementUnitEdit { get; } = new(nameof(ManagementUnitEdit));
 

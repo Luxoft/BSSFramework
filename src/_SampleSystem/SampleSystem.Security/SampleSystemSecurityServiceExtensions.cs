@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
@@ -93,7 +94,7 @@ public static class SampleSystemSecurityServiceExtensions
 
                 rb.AddMetadata<SampleSystemEmployeeDomainSecurityServiceMetadata>()
 
-                  .Add(new[] { SecurityRole.Administrator, SampleSystemSecurityRole.SeManager },
+                  .Add(SampleSystemSecurityOperation.BusinessUnitView.ToSecurityRule(HierarchicalExpandType.All),
                        SampleSystemSecurityOperation.BusinessUnitEdit,
                        SecurityPath<BusinessUnit>.Create(fbu => fbu))
 
@@ -112,7 +113,7 @@ public static class SampleSystemSecurityServiceExtensions
                       SecurityPath<BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).And(v => v.HRDepartment.Location))
 
                   .Add<ManagementUnit>(
-                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitView)
+                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitView.ToSecurityRule(HierarchicalExpandType.All))
                             .SetEdit(SampleSystemSecurityOperation.ManagementUnitEdit)
                             .SetPath(SecurityPath<ManagementUnit>.Create(mbu => mbu)))
 
@@ -184,7 +185,7 @@ public static class SampleSystemSecurityServiceExtensions
                                                                       ManySecurityPathMode.Any))))
 
                   .Add<AuthPerformanceObject>(
-                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView)
+                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView.ToSecurityRule(HierarchicalExpandType.All))
                             .SetPath(
                                 SecurityPath<AuthPerformanceObject>.Create(v => v.BusinessUnit)
                                                                    .And(v => v.ManagementUnit)
@@ -198,8 +199,7 @@ public static class SampleSystemSecurityServiceExtensions
                   .Add<EmployeeCellPhone>(b => b.SetDependency(v => v.Employee))
 
                   .Add<ManagementUnitFluentMapping>(
-                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitView)
-                            .SetEdit(SampleSystemSecurityOperation.ManagementUnitEdit))
+                      b => b.SetUntypedDependency<ManagementUnit>())
 
                   .Add<Example1>(
                       b => b.SetView(SampleSystemSecurityOperation.LocationView)

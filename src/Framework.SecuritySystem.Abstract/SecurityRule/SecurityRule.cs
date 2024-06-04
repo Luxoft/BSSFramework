@@ -58,6 +58,11 @@ public abstract record SecurityRule
 
     public record OperationSecurityRule(SecurityOperation SecurityOperation) : DomainObjectSecurityRule
     {
+        public static implicit operator OperationSecurityRule(SecurityOperation securityOperation)
+        {
+            return securityOperation.ToSecurityRule();
+        }
+
         public override string ToString() => this.SecurityOperation.Name;
     }
 

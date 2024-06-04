@@ -38,6 +38,13 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
+    public ISecuritySystemSettings AddSecurityOperation(SecurityOperation securityOperation, SecurityOperationInfo info)
+    {
+        this.RegisterActions.Add(sc => sc.AddSingleton(new FullSecurityOperation(securityOperation, info)));
+
+        return this;
+    }
+
     public ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions)
     {
         this.RegisterActions.Add(extensions.AddServices);

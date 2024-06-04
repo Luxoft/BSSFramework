@@ -31,11 +31,11 @@ public class SecurityPathProviderFactory(
 
                let securityRoleInfo = securityRoleSource.GetFullRole(securityRole).Information
 
-               let actualExpandType = rootSecurityRule.CustomExpandType ?? expandedSecurityRule.CustomExpandType ?? securityRoleInfo.ExpandType
+               let actualCustomExpandType = rootSecurityRule.CustomExpandType ?? expandedSecurityRule.CustomExpandType ?? securityRoleInfo.CustomExpandType
 
-               group securityRole by new { actualExpandType, securityRoleInfo.Restriction } into g
+               group securityRole by new { actualCustomExpandType, securityRoleInfo.Restriction } into g
 
-               let rule = new SecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(g)) { CustomExpandType = g.Key.actualExpandType }
+               let rule = new SecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(g)) { CustomExpandType = g.Key.actualCustomExpandType }
 
                select (rule, g.Key.Restriction);
     }

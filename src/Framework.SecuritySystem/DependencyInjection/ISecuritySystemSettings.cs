@@ -17,5 +17,7 @@ public interface ISecuritySystemSettings
 
     ISecuritySystemSettings AddSecurityRole(SecurityRole securityRole, SecurityRoleInfo info);
 
+    ISecuritySystemSettings AddSecurityOperation(SecurityOperation securityOperation, SecurityOperationInfo info);
+
     ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions);
 }

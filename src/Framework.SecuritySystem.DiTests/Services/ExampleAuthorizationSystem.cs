@@ -26,7 +26,7 @@ public class ExampleAuthorizationSystem(
         IEnumerable<Type> securityTypes)
     {
         return principalPermissionSource.GetPermissions()
-                   .ToList(permission => this.TryExpandPermission(permission, securityRule.CustomExpandType!.Value));
+                   .ToList(permission => this.TryExpandPermission(permission, securityRule.SafeExpandType));
     }
 
     public IQueryable<IPermission<Guid>> GetPermissionQuery(

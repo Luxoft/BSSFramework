@@ -13,7 +13,8 @@ namespace Framework.Configurator.Handlers;
 public class GetBusinessRoleHandler(
     IRepositoryFactory<Permission> repoFactory,
     IOperationAccessor operationAccessor,
-    ISecurityRoleSource roleSource)
+    ISecurityRoleSource roleSource,
+    ISecurityOperationInfoSource operationInfoSource)
     : BaseReadHandler, IGetBusinessRoleHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
@@ -26,7 +27,7 @@ public class GetBusinessRoleHandler(
                                    .Single(x => x.Id == roleId)
                                    .Information
                                    .Operations
-                                   .Select(x => new OperationDto { Name = x.Name, Description = x.Description })
+                                   .Select(o => new OperationDto { Name = o.Name, Description = operationInfoSource.GetSecurityOperationInfo(o).Description })
                                    .OrderBy(x => x.Name)
                                    .ToList();
 

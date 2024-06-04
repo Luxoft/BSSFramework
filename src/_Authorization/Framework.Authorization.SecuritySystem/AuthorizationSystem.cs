@@ -96,7 +96,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         return permissions
                .Select(permission => permission.ToDictionary(this.realTypeResolver, securityTypes))
                .Pipe(this.runtimePermissionOptimizationService.Optimize)
-               .ToList(permission => this.TryExpandPermission(permission, securityRule.CustomExpandType!.Value));
+               .ToList(permission => this.TryExpandPermission(permission, securityRule.SafeExpandType));
     }
 
     public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityRule.DomainObjectSecurityRule securityRule)

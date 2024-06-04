@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 
 using Framework.DependencyInjection;
+using Framework.HierarchicalExpand;
 using Framework.HierarchicalExpand.DependencyInjection;
 using Framework.QueryableSource;
 using Framework.SecuritySystem.DependencyInjection;
@@ -123,9 +124,19 @@ public partial class MainTests
                                    ExampleSecurityRole.TestRole2,
                                    new SecurityRoleInfo(Guid.NewGuid()) { Children = [ExampleSecurityRole.TestRole3] })
 
-                               .AddSecurityRole(ExampleSecurityRole.TestRole3, new SecurityRoleInfo(Guid.NewGuid()))
+                               .AddSecurityRole(
+                                   ExampleSecurityRole.TestRole3,
+                                   new SecurityRoleInfo(Guid.NewGuid()))
+
+                               .AddSecurityRole(
+                                   ExampleSecurityRole.TestRole4,
+                                   new SecurityRoleInfo(Guid.NewGuid()) { Operations = [ExampleSecurityOperation.BusinessUnitView] })
 
                                .AddSecurityRole(SecurityRole.Administrator, new SecurityRoleInfo(Guid.NewGuid()))
+
+                               .AddSecurityOperation(
+                                   ExampleSecurityOperation.BusinessUnitView,
+                                   new SecurityOperationInfo { CustomExpandType = HierarchicalExpandType.None })
 
                    )
 

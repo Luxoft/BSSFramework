@@ -44,6 +44,8 @@ public abstract record SecurityRule
         /// </summary>
         public HierarchicalExpandType? CustomExpandType { get; init; } = null;
 
+        public HierarchicalExpandType SafeExpandType => this.CustomExpandType ?? HierarchicalExpandType.Children;
+
 
         public static implicit operator DomainObjectSecurityRule(SecurityOperation securityOperation)
         {

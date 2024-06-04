@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
 using Framework.Core;
+using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.SecuritySystem.ExternalSystem;
 
@@ -36,7 +37,7 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
             () => FuncHelper.Create(
                 (TDomainObject domainObject) =>
                 {
-                    var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityRule.CustomExpandType!.Value);
+                    var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityRule.SafeExpandType);
 
                     var filter = baseFilter.OverrideInput((IPrincipal<TIdent> principal) => principal.Permissions);
 

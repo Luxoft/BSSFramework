@@ -52,8 +52,7 @@ builder.Services
        .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
        .AddNegotiate();
 
-builder.Services
-       .AddMvc(x => x.EnableEndpointRouting = false);
+builder.Services.AddControllers(x => x.EnableEndpointRouting = false);
 
 if (builder.Environment.IsProduction()) builder.Services.AddHangfireBss(builder.Configuration.GetConnectionString("DefaultConnection"));
 

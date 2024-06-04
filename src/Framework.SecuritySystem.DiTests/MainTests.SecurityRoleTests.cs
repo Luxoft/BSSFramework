@@ -54,7 +54,7 @@ public partial class MainTests
     }
 
     [Fact]
-    public void SecurityRoleExpander_ExpandWithCustomExpandType_RoleResolved()
+    public void SecurityRoleExpander_ExpandWithCustomExpandType_SecurityRuleCorrected()
     {
         // Arrange
         var expander = this.rootServiceProvider.GetRequiredService<SecurityOperationExpander>();
@@ -67,7 +67,7 @@ public partial class MainTests
     }
 
     [Fact]
-    public void SecurityRoleExpander_FullExpandWithCustomExpandType_RoleResolved()
+    public void SecurityRoleExpander_FullExpandWithCustomExpandType_SecurityRuleCorrected()
     {
         // Arrange
         var expander = this.rootServiceProvider.GetRequiredService<ISecurityRuleExpander>();
@@ -82,5 +82,23 @@ public partial class MainTests
                     .Should()
                     .BeEquivalentTo(
                         new[] { SecurityRole.Administrator, ExampleSecurityRole.TestRole }.ToSecurityRule(HierarchicalExpandType.All));
+    }
+
+    [Fact]
+    public void SecurityRoleExpander_FullExpandWithCustomExpandTypeFromOperations_SecurityRuleCorrected()
+    {
+        // Arrange
+        var expander = this.rootServiceProvider.GetRequiredService<ISecurityRuleExpander>();
+
+        // Act
+        var expandResult = expander.FullExpand(ExampleSecurityOperation.BusinessUnitView);
+
+        // Assert
+        expandResult.Should()
+                    .ContainSingle()
+                    .Subject
+                    .Should()
+                    .BeEquivalentTo(
+                        new[] { SecurityRole.Administrator, ExampleSecurityRole.TestRole4 }.ToSecurityRule(HierarchicalExpandType.None));
     }
 }

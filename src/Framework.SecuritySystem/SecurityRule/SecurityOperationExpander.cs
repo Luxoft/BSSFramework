@@ -8,7 +8,7 @@ public class SecurityOperationExpander
 {
     private readonly IDictionaryCache<SecurityRule.OperationSecurityRule, SecurityRule.NonExpandedRolesSecurityRule> expandCache;
 
-    public SecurityOperationExpander(ISecurityRoleSource securityRoleSource)
+    public SecurityOperationExpander(ISecurityRoleSource securityRoleSource, ISecurityOperationInfoSource securityOperationInfoSource)
     {
         this.expandCache = new DictionaryCache<SecurityRule.OperationSecurityRule, SecurityRule.NonExpandedRolesSecurityRule>(
             securityRule =>
@@ -23,7 +23,10 @@ public class SecurityOperationExpander
                     throw new Exception($"No security roles found for operation \"{securityRule.SecurityOperation}\"");
                 }
 
-                return securityRoles.ToSecurityRule(securityRule.CustomExpandType);
+                return securityRoles.ToSecurityRule(
+                    securityRule.CustomExpandType
+                    ?? securityOperationInfoSource.GetSecurityOperationInfo(securityRule.SecurityOperation).CustomExpandType);
+
             }).WithLock();
     }
 

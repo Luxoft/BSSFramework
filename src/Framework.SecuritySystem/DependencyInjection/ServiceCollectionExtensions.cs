@@ -17,6 +17,8 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
 
+                       .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
+
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
 
                        .AddScoped<ISecurityPathProviderFactory, SecurityPathProviderFactory>()

@@ -6,7 +6,7 @@ namespace Framework.SecuritySystem;
 
 public record SecurityRoleInfo(Guid Id)
 {
-    public HierarchicalExpandType ExpandType { get; init; } = HierarchicalExpandType.Children;
+    public HierarchicalExpandType? CustomExpandType { get; init; } = null;
 
     public SecurityPathRestriction Restriction { get; init; } = SecurityPathRestriction.Empty;
 

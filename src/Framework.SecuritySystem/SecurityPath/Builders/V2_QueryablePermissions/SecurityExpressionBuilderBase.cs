@@ -29,7 +29,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
 
     public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        var filterExpression = this.GetSecurityFilterExpression(securityRule.CustomExpandType!.Value).ExpandConst().InlineEval();
+        var filterExpression = this.GetSecurityFilterExpression(securityRule.SafeExpandType).ExpandConst().InlineEval();
 
         var baseQuery = this.Factory.AuthorizationSystem.GetPermissionQuery(securityRule);
 

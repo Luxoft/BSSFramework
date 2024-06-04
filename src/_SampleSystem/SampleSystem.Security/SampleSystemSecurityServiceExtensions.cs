@@ -72,7 +72,11 @@ public static class SampleSystemSecurityServiceExtensions
                    new SecurityRoleInfo(new Guid("d9c1d2f0-0c2f-49ab-bb0b-de13a456169e"))
                    {
                        Operations = typeof(SampleSystemSecurityOperation).GetStaticPropertyValueList<SecurityOperation>().ToList()
-                   });
+                   })
+
+               .AddSecurityOperation(SampleSystemSecurityOperation.BusinessUnitView, new SecurityOperationInfo { CustomExpandType = HierarchicalExpandType.All })
+
+               .AddSecurityOperation(SampleSystemSecurityOperation.ManagementUnitView, new SecurityOperationInfo { CustomExpandType = HierarchicalExpandType.All });
     }
 
 
@@ -94,7 +98,7 @@ public static class SampleSystemSecurityServiceExtensions
 
                 rb.AddMetadata<SampleSystemEmployeeDomainSecurityServiceMetadata>()
 
-                  .Add(SampleSystemSecurityOperation.BusinessUnitView.ToSecurityRule(HierarchicalExpandType.All),
+                  .Add(SampleSystemSecurityOperation.BusinessUnitView,
                        SampleSystemSecurityOperation.BusinessUnitEdit,
                        SecurityPath<BusinessUnit>.Create(fbu => fbu))
 
@@ -113,7 +117,7 @@ public static class SampleSystemSecurityServiceExtensions
                       SecurityPath<BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).And(v => v.HRDepartment.Location))
 
                   .Add<ManagementUnit>(
-                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitView.ToSecurityRule(HierarchicalExpandType.All))
+                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitView)
                             .SetEdit(SampleSystemSecurityOperation.ManagementUnitEdit)
                             .SetPath(SecurityPath<ManagementUnit>.Create(mbu => mbu)))
 
@@ -185,7 +189,7 @@ public static class SampleSystemSecurityServiceExtensions
                                                                       ManySecurityPathMode.Any))))
 
                   .Add<AuthPerformanceObject>(
-                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView.ToSecurityRule(HierarchicalExpandType.All))
+                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView)
                             .SetPath(
                                 SecurityPath<AuthPerformanceObject>.Create(v => v.BusinessUnit)
                                                                    .And(v => v.ManagementUnit)

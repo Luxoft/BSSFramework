@@ -17,7 +17,7 @@ public abstract class DomainSecurityServiceBase<TDomainObject> : IDomainSecurity
             else
             {
                 return this.CreateSecurityProvider(securityRule)
-                           .ApplySourceRuleDeclaration(securityRule);
+                           .OverrideAccessDeniedResult(accessDeniedResult => accessDeniedResult with { SecurityRule = securityRule });
             }
         }).WithLock();
     }

@@ -15,9 +15,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRoleDegreePropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeRoleDegreePropertyRevisionByDateRange(GetEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest getEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest.employeeRoleDegreeIdentity;
+            Framework.Core.Period? period = getEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest.EmployeeRoleDegreeIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeRoleDegreePropertyRevisionByDateRangeInternal(employeeRoleDegreeIdentity, propertyName, period, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRoleDegreePropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeRoleDegreePropertyRevisions(GetEmployeeRoleDegreePropertyRevisionsAutoRequest getEmployeeRoleDegreePropertyRevisionsAutoRequest)
         {
-            string propertyName = getEmployeeRoleDegreePropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getEmployeeRoleDegreePropertyRevisionsAutoRequest.employeeRoleDegreeIdentity;
+            string propertyName = getEmployeeRoleDegreePropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getEmployeeRoleDegreePropertyRevisionsAutoRequest.EmployeeRoleDegreeIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeRoleDegreePropertyRevisionsInternal(employeeRoleDegreeIdentity, propertyName, evaluateData));
         }
         
@@ -68,8 +68,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeRoleDegreeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeFullDTO GetFullEmployeeRoleDegreeWithRevision(GetFullEmployeeRoleDegreeWithRevisionAutoRequest getFullEmployeeRoleDegreeWithRevisionAutoRequest)
         {
-            long revision = getFullEmployeeRoleDegreeWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getFullEmployeeRoleDegreeWithRevisionAutoRequest.employeeRoleDegreeIdentity;
+            long revision = getFullEmployeeRoleDegreeWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getFullEmployeeRoleDegreeWithRevisionAutoRequest.EmployeeRoleDegreeIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRoleDegreeWithRevisionInternal(employeeRoleDegreeIdentity, revision, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeRoleDegreeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeRichDTO GetRichEmployeeRoleDegreeWithRevision(GetRichEmployeeRoleDegreeWithRevisionAutoRequest getRichEmployeeRoleDegreeWithRevisionAutoRequest)
         {
-            long revision = getRichEmployeeRoleDegreeWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getRichEmployeeRoleDegreeWithRevisionAutoRequest.employeeRoleDegreeIdentity;
+            long revision = getRichEmployeeRoleDegreeWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getRichEmployeeRoleDegreeWithRevisionAutoRequest.EmployeeRoleDegreeIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeeRoleDegreeWithRevisionInternal(employeeRoleDegreeIdentity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeRoleDegreeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeSimpleDTO GetSimpleEmployeeRoleDegreeWithRevision(GetSimpleEmployeeRoleDegreeWithRevisionAutoRequest getSimpleEmployeeRoleDegreeWithRevisionAutoRequest)
         {
-            long revision = getSimpleEmployeeRoleDegreeWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getSimpleEmployeeRoleDegreeWithRevisionAutoRequest.employeeRoleDegreeIdentity;
+            long revision = getSimpleEmployeeRoleDegreeWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getSimpleEmployeeRoleDegreeWithRevisionAutoRequest.EmployeeRoleDegreeIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRoleDegreeWithRevisionInternal(employeeRoleDegreeIdentity, revision, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeRoleDegreeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeVisualDTO GetVisualEmployeeRoleDegreeWithRevision(GetVisualEmployeeRoleDegreeWithRevisionAutoRequest getVisualEmployeeRoleDegreeWithRevisionAutoRequest)
         {
-            long revision = getVisualEmployeeRoleDegreeWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getVisualEmployeeRoleDegreeWithRevisionAutoRequest.employeeRoleDegreeIdentity;
+            long revision = getVisualEmployeeRoleDegreeWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity = getVisualEmployeeRoleDegreeWithRevisionAutoRequest.EmployeeRoleDegreeIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRoleDegreeWithRevisionInternal(employeeRoleDegreeIdentity, revision, evaluateData));
         }
         
@@ -143,17 +143,53 @@
     public partial class GetEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO EmployeeRoleDegreeIdentity
+        {
+            get
+            {
+                return this.employeeRoleDegreeIdentity;
+            }
+            set
+            {
+                this.employeeRoleDegreeIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -161,13 +197,37 @@
     public partial class GetEmployeeRoleDegreePropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO EmployeeRoleDegreeIdentity
+        {
+            get
+            {
+                return this.employeeRoleDegreeIdentity;
+            }
+            set
+            {
+                this.employeeRoleDegreeIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -175,13 +235,37 @@
     public partial class GetFullEmployeeRoleDegreeWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO EmployeeRoleDegreeIdentity
+        {
+            get
+            {
+                return this.employeeRoleDegreeIdentity;
+            }
+            set
+            {
+                this.employeeRoleDegreeIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -189,13 +273,37 @@
     public partial class GetRichEmployeeRoleDegreeWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO EmployeeRoleDegreeIdentity
+        {
+            get
+            {
+                return this.employeeRoleDegreeIdentity;
+            }
+            set
+            {
+                this.employeeRoleDegreeIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetSimpleEmployeeRoleDegreeWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO EmployeeRoleDegreeIdentity
+        {
+            get
+            {
+                return this.employeeRoleDegreeIdentity;
+            }
+            set
+            {
+                this.employeeRoleDegreeIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualEmployeeRoleDegreeWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO EmployeeRoleDegreeIdentity
+        {
+            get
+            {
+                return this.employeeRoleDegreeIdentity;
+            }
+            set
+            {
+                this.employeeRoleDegreeIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

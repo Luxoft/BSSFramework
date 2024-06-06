@@ -6,8 +6,8 @@ namespace Framework.Notification.DTO;
 public class NotificationMessage
 {
     [DataMember]
-    public bool IsBodyHtml;
+    public bool IsBodyHtml { get; set; }
 
     [DataMember]
-    public string Message;
+    public string Message { get; set; }
 }

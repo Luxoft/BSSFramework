@@ -21,6 +21,7 @@ public abstract class Maybe<T> : IMaybe<T>, IEquatable<Maybe<T>>
     {
     }
 
+    [IgnoreDataMember]
     public bool HasValue => !(this is Nothing<T>);
 
     public static IEnumerable<Type> GetKnownTypes()

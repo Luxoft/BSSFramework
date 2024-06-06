@@ -15,9 +15,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePositionPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePositionPropertyRevisionByDateRange(GetEmployeePositionPropertyRevisionByDateRangeAutoRequest getEmployeePositionPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getEmployeePositionPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getEmployeePositionPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getEmployeePositionPropertyRevisionByDateRangeAutoRequest.employeePositionIdentity;
+            Framework.Core.Period? period = getEmployeePositionPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getEmployeePositionPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getEmployeePositionPropertyRevisionByDateRangeAutoRequest.EmployeePositionIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeePositionPropertyRevisionByDateRangeInternal(employeePositionIdentity, propertyName, period, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePositionPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePositionPropertyRevisions(GetEmployeePositionPropertyRevisionsAutoRequest getEmployeePositionPropertyRevisionsAutoRequest)
         {
-            string propertyName = getEmployeePositionPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getEmployeePositionPropertyRevisionsAutoRequest.employeePositionIdentity;
+            string propertyName = getEmployeePositionPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getEmployeePositionPropertyRevisionsAutoRequest.EmployeePositionIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeePositionPropertyRevisionsInternal(employeePositionIdentity, propertyName, evaluateData));
         }
         
@@ -68,8 +68,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeePositionWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionWithRevision(GetFullEmployeePositionWithRevisionAutoRequest getFullEmployeePositionWithRevisionAutoRequest)
         {
-            long revision = getFullEmployeePositionWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getFullEmployeePositionWithRevisionAutoRequest.employeePositionIdentity;
+            long revision = getFullEmployeePositionWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getFullEmployeePositionWithRevisionAutoRequest.EmployeePositionIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeePositionWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionWithRevision(GetRichEmployeePositionWithRevisionAutoRequest getRichEmployeePositionWithRevisionAutoRequest)
         {
-            long revision = getRichEmployeePositionWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getRichEmployeePositionWithRevisionAutoRequest.employeePositionIdentity;
+            long revision = getRichEmployeePositionWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getRichEmployeePositionWithRevisionAutoRequest.EmployeePositionIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeePositionWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionWithRevision(GetSimpleEmployeePositionWithRevisionAutoRequest getSimpleEmployeePositionWithRevisionAutoRequest)
         {
-            long revision = getSimpleEmployeePositionWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getSimpleEmployeePositionWithRevisionAutoRequest.employeePositionIdentity;
+            long revision = getSimpleEmployeePositionWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getSimpleEmployeePositionWithRevisionAutoRequest.EmployeePositionIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeePositionWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionWithRevision(GetVisualEmployeePositionWithRevisionAutoRequest getVisualEmployeePositionWithRevisionAutoRequest)
         {
-            long revision = getVisualEmployeePositionWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getVisualEmployeePositionWithRevisionAutoRequest.employeePositionIdentity;
+            long revision = getVisualEmployeePositionWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getVisualEmployeePositionWithRevisionAutoRequest.EmployeePositionIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
         }
         
@@ -143,17 +143,53 @@
     public partial class GetEmployeePositionPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePositionIdentityDTO EmployeePositionIdentity
+        {
+            get
+            {
+                return this.employeePositionIdentity;
+            }
+            set
+            {
+                this.employeePositionIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -161,13 +197,37 @@
     public partial class GetEmployeePositionPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePositionIdentityDTO EmployeePositionIdentity
+        {
+            get
+            {
+                return this.employeePositionIdentity;
+            }
+            set
+            {
+                this.employeePositionIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -175,13 +235,37 @@
     public partial class GetFullEmployeePositionWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePositionIdentityDTO EmployeePositionIdentity
+        {
+            get
+            {
+                return this.employeePositionIdentity;
+            }
+            set
+            {
+                this.employeePositionIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -189,13 +273,37 @@
     public partial class GetRichEmployeePositionWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePositionIdentityDTO EmployeePositionIdentity
+        {
+            get
+            {
+                return this.employeePositionIdentity;
+            }
+            set
+            {
+                this.employeePositionIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetSimpleEmployeePositionWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePositionIdentityDTO EmployeePositionIdentity
+        {
+            get
+            {
+                return this.employeePositionIdentity;
+            }
+            set
+            {
+                this.employeePositionIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualEmployeePositionWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePositionIdentityDTO EmployeePositionIdentity
+        {
+            get
+            {
+                return this.employeePositionIdentity;
+            }
+            set
+            {
+                this.employeePositionIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestPlainAuthObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectFullDTO GetFullTestPlainAuthObjectWithRevision(GetFullTestPlainAuthObjectWithRevisionAutoRequest getFullTestPlainAuthObjectWithRevisionAutoRequest)
         {
-            long revision = getFullTestPlainAuthObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getFullTestPlainAuthObjectWithRevisionAutoRequest.testPlainAuthObjectIdentity;
+            long revision = getFullTestPlainAuthObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getFullTestPlainAuthObjectWithRevisionAutoRequest.TestPlainAuthObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestPlainAuthObjectWithRevisionInternal(testPlainAuthObjectIdentity, revision, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestPlainAuthObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectRichDTO GetRichTestPlainAuthObjectWithRevision(GetRichTestPlainAuthObjectWithRevisionAutoRequest getRichTestPlainAuthObjectWithRevisionAutoRequest)
         {
-            long revision = getRichTestPlainAuthObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getRichTestPlainAuthObjectWithRevisionAutoRequest.testPlainAuthObjectIdentity;
+            long revision = getRichTestPlainAuthObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getRichTestPlainAuthObjectWithRevisionAutoRequest.TestPlainAuthObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestPlainAuthObjectWithRevisionInternal(testPlainAuthObjectIdentity, revision, evaluateData));
         }
         
@@ -53,8 +53,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestPlainAuthObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO GetSimpleTestPlainAuthObjectWithRevision(GetSimpleTestPlainAuthObjectWithRevisionAutoRequest getSimpleTestPlainAuthObjectWithRevisionAutoRequest)
         {
-            long revision = getSimpleTestPlainAuthObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getSimpleTestPlainAuthObjectWithRevisionAutoRequest.testPlainAuthObjectIdentity;
+            long revision = getSimpleTestPlainAuthObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getSimpleTestPlainAuthObjectWithRevisionAutoRequest.TestPlainAuthObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestPlainAuthObjectWithRevisionInternal(testPlainAuthObjectIdentity, revision, evaluateData));
         }
         
@@ -72,9 +72,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestPlainAuthObjectPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestPlainAuthObjectPropertyRevisionByDateRange(GetTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest getTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest.testPlainAuthObjectIdentity;
+            Framework.Core.Period? period = getTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest.TestPlainAuthObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestPlainAuthObjectPropertyRevisionByDateRangeInternal(testPlainAuthObjectIdentity, propertyName, period, evaluateData));
         }
         
@@ -91,8 +91,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestPlainAuthObjectPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestPlainAuthObjectPropertyRevisions(GetTestPlainAuthObjectPropertyRevisionsAutoRequest getTestPlainAuthObjectPropertyRevisionsAutoRequest)
         {
-            string propertyName = getTestPlainAuthObjectPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getTestPlainAuthObjectPropertyRevisionsAutoRequest.testPlainAuthObjectIdentity;
+            string propertyName = getTestPlainAuthObjectPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getTestPlainAuthObjectPropertyRevisionsAutoRequest.TestPlainAuthObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestPlainAuthObjectPropertyRevisionsInternal(testPlainAuthObjectIdentity, propertyName, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestPlainAuthObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectVisualDTO GetVisualTestPlainAuthObjectWithRevision(GetVisualTestPlainAuthObjectWithRevisionAutoRequest getVisualTestPlainAuthObjectWithRevisionAutoRequest)
         {
-            long revision = getVisualTestPlainAuthObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getVisualTestPlainAuthObjectWithRevisionAutoRequest.testPlainAuthObjectIdentity;
+            long revision = getVisualTestPlainAuthObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity = getVisualTestPlainAuthObjectWithRevisionAutoRequest.TestPlainAuthObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestPlainAuthObjectWithRevisionInternal(testPlainAuthObjectIdentity, revision, evaluateData));
         }
         
@@ -143,13 +143,37 @@
     public partial class GetFullTestPlainAuthObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO TestPlainAuthObjectIdentity
+        {
+            get
+            {
+                return this.testPlainAuthObjectIdentity;
+            }
+            set
+            {
+                this.testPlainAuthObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -157,13 +181,37 @@
     public partial class GetRichTestPlainAuthObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO TestPlainAuthObjectIdentity
+        {
+            get
+            {
+                return this.testPlainAuthObjectIdentity;
+            }
+            set
+            {
+                this.testPlainAuthObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -171,13 +219,37 @@
     public partial class GetSimpleTestPlainAuthObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO TestPlainAuthObjectIdentity
+        {
+            get
+            {
+                return this.testPlainAuthObjectIdentity;
+            }
+            set
+            {
+                this.testPlainAuthObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -185,17 +257,53 @@
     public partial class GetTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO TestPlainAuthObjectIdentity
+        {
+            get
+            {
+                return this.testPlainAuthObjectIdentity;
+            }
+            set
+            {
+                this.testPlainAuthObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetTestPlainAuthObjectPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO TestPlainAuthObjectIdentity
+        {
+            get
+            {
+                return this.testPlainAuthObjectIdentity;
+            }
+            set
+            {
+                this.testPlainAuthObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualTestPlainAuthObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO TestPlainAuthObjectIdentity
+        {
+            get
+            {
+                return this.testPlainAuthObjectIdentity;
+            }
+            set
+            {
+                this.testPlainAuthObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullManagementUnitAndHRDepartmentLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO GetFullManagementUnitAndHRDepartmentLinkWithRevision(GetFullManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest getFullManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest)
         {
-            long revision = getFullManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getFullManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.managementUnitAndHRDepartmentLinkIdentity;
+            long revision = getFullManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getFullManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.ManagementUnitAndHRDepartmentLinkIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullManagementUnitAndHRDepartmentLinkWithRevisionInternal(managementUnitAndHRDepartmentLinkIdentity, revision, evaluateData));
         }
         
@@ -34,9 +34,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRange(GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.managementUnitAndHRDepartmentLinkIdentity;
+            Framework.Core.Period? period = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.ManagementUnitAndHRDepartmentLinkIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeInternal(managementUnitAndHRDepartmentLinkIdentity, propertyName, period, evaluateData));
         }
         
@@ -53,8 +53,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitAndHRDepartmentLinkPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitAndHRDepartmentLinkPropertyRevisions(GetManagementUnitAndHRDepartmentLinkPropertyRevisionsAutoRequest getManagementUnitAndHRDepartmentLinkPropertyRevisionsAutoRequest)
         {
-            string propertyName = getManagementUnitAndHRDepartmentLinkPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getManagementUnitAndHRDepartmentLinkPropertyRevisionsAutoRequest.managementUnitAndHRDepartmentLinkIdentity;
+            string propertyName = getManagementUnitAndHRDepartmentLinkPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getManagementUnitAndHRDepartmentLinkPropertyRevisionsAutoRequest.ManagementUnitAndHRDepartmentLinkIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetManagementUnitAndHRDepartmentLinkPropertyRevisionsInternal(managementUnitAndHRDepartmentLinkIdentity, propertyName, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichManagementUnitAndHRDepartmentLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkRichDTO GetRichManagementUnitAndHRDepartmentLinkWithRevision(GetRichManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest getRichManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest)
         {
-            long revision = getRichManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getRichManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.managementUnitAndHRDepartmentLinkIdentity;
+            long revision = getRichManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getRichManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.ManagementUnitAndHRDepartmentLinkIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichManagementUnitAndHRDepartmentLinkWithRevisionInternal(managementUnitAndHRDepartmentLinkIdentity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleManagementUnitAndHRDepartmentLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO GetSimpleManagementUnitAndHRDepartmentLinkWithRevision(GetSimpleManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest getSimpleManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest)
         {
-            long revision = getSimpleManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getSimpleManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.managementUnitAndHRDepartmentLinkIdentity;
+            long revision = getSimpleManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getSimpleManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.ManagementUnitAndHRDepartmentLinkIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleManagementUnitAndHRDepartmentLinkWithRevisionInternal(managementUnitAndHRDepartmentLinkIdentity, revision, evaluateData));
         }
         
@@ -124,13 +124,37 @@
     public partial class GetFullManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity;
+        public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO ManagementUnitAndHRDepartmentLinkIdentity
+        {
+            get
+            {
+                return this.managementUnitAndHRDepartmentLinkIdentity;
+            }
+            set
+            {
+                this.managementUnitAndHRDepartmentLinkIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -138,17 +162,53 @@
     public partial class GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity;
+        public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO ManagementUnitAndHRDepartmentLinkIdentity
+        {
+            get
+            {
+                return this.managementUnitAndHRDepartmentLinkIdentity;
+            }
+            set
+            {
+                this.managementUnitAndHRDepartmentLinkIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -156,13 +216,37 @@
     public partial class GetManagementUnitAndHRDepartmentLinkPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity;
+        public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO ManagementUnitAndHRDepartmentLinkIdentity
+        {
+            get
+            {
+                return this.managementUnitAndHRDepartmentLinkIdentity;
+            }
+            set
+            {
+                this.managementUnitAndHRDepartmentLinkIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -170,13 +254,37 @@
     public partial class GetRichManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity;
+        public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO ManagementUnitAndHRDepartmentLinkIdentity
+        {
+            get
+            {
+                return this.managementUnitAndHRDepartmentLinkIdentity;
+            }
+            set
+            {
+                this.managementUnitAndHRDepartmentLinkIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -184,12 +292,36 @@
     public partial class GetSimpleManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity;
+        public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO ManagementUnitAndHRDepartmentLinkIdentity
+        {
+            get
+            {
+                return this.managementUnitAndHRDepartmentLinkIdentity;
+            }
+            set
+            {
+                this.managementUnitAndHRDepartmentLinkIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

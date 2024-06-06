@@ -26,9 +26,4 @@ public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<
     {
         return new DTORoleGeneratePolicy(DTORole.Client);
     }
-
-    public override bool ForceGenerateProperties(Type domainType, DTOFileType fileType)
-    {
-        return true;
-    }
 }

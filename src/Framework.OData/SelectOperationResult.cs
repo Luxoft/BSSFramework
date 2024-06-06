@@ -28,6 +28,7 @@ public class SelectOperationResult<T> : ISelectOperationResult<T>
     [DataMember]
     public int TotalCount { get; private set; }
 
+    [IgnoreDataMember]
     public Type ElementType
     {
         get { return typeof(T); }

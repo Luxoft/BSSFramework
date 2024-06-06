@@ -1,5 +1,4 @@
 ﻿using Automation.Settings;
-using Automation.Utils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
 using Framework.FinancialYear;

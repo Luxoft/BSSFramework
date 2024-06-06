@@ -15,9 +15,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeSpecializationPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeSpecializationPropertyRevisionByDateRange(GetEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest.employeeSpecializationIdentity;
+            Framework.Core.Period? period = getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest.EmployeeSpecializationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeSpecializationPropertyRevisionByDateRangeInternal(employeeSpecializationIdentity, propertyName, period, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeSpecializationPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeSpecializationPropertyRevisions(GetEmployeeSpecializationPropertyRevisionsAutoRequest getEmployeeSpecializationPropertyRevisionsAutoRequest)
         {
-            string propertyName = getEmployeeSpecializationPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getEmployeeSpecializationPropertyRevisionsAutoRequest.employeeSpecializationIdentity;
+            string propertyName = getEmployeeSpecializationPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getEmployeeSpecializationPropertyRevisionsAutoRequest.EmployeeSpecializationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeSpecializationPropertyRevisionsInternal(employeeSpecializationIdentity, propertyName, evaluateData));
         }
         
@@ -68,8 +68,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeSpecializationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationFullDTO GetFullEmployeeSpecializationWithRevision(GetFullEmployeeSpecializationWithRevisionAutoRequest getFullEmployeeSpecializationWithRevisionAutoRequest)
         {
-            long revision = getFullEmployeeSpecializationWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getFullEmployeeSpecializationWithRevisionAutoRequest.employeeSpecializationIdentity;
+            long revision = getFullEmployeeSpecializationWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getFullEmployeeSpecializationWithRevisionAutoRequest.EmployeeSpecializationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeSpecializationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationRichDTO GetRichEmployeeSpecializationWithRevision(GetRichEmployeeSpecializationWithRevisionAutoRequest getRichEmployeeSpecializationWithRevisionAutoRequest)
         {
-            long revision = getRichEmployeeSpecializationWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getRichEmployeeSpecializationWithRevisionAutoRequest.employeeSpecializationIdentity;
+            long revision = getRichEmployeeSpecializationWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getRichEmployeeSpecializationWithRevisionAutoRequest.EmployeeSpecializationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeSpecializationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO GetSimpleEmployeeSpecializationWithRevision(GetSimpleEmployeeSpecializationWithRevisionAutoRequest getSimpleEmployeeSpecializationWithRevisionAutoRequest)
         {
-            long revision = getSimpleEmployeeSpecializationWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getSimpleEmployeeSpecializationWithRevisionAutoRequest.employeeSpecializationIdentity;
+            long revision = getSimpleEmployeeSpecializationWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getSimpleEmployeeSpecializationWithRevisionAutoRequest.EmployeeSpecializationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeSpecializationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationVisualDTO GetVisualEmployeeSpecializationWithRevision(GetVisualEmployeeSpecializationWithRevisionAutoRequest getVisualEmployeeSpecializationWithRevisionAutoRequest)
         {
-            long revision = getVisualEmployeeSpecializationWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getVisualEmployeeSpecializationWithRevisionAutoRequest.employeeSpecializationIdentity;
+            long revision = getVisualEmployeeSpecializationWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getVisualEmployeeSpecializationWithRevisionAutoRequest.EmployeeSpecializationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
         }
         
@@ -143,17 +143,53 @@
     public partial class GetEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO EmployeeSpecializationIdentity
+        {
+            get
+            {
+                return this.employeeSpecializationIdentity;
+            }
+            set
+            {
+                this.employeeSpecializationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -161,13 +197,37 @@
     public partial class GetEmployeeSpecializationPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO EmployeeSpecializationIdentity
+        {
+            get
+            {
+                return this.employeeSpecializationIdentity;
+            }
+            set
+            {
+                this.employeeSpecializationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -175,13 +235,37 @@
     public partial class GetFullEmployeeSpecializationWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO EmployeeSpecializationIdentity
+        {
+            get
+            {
+                return this.employeeSpecializationIdentity;
+            }
+            set
+            {
+                this.employeeSpecializationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -189,13 +273,37 @@
     public partial class GetRichEmployeeSpecializationWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO EmployeeSpecializationIdentity
+        {
+            get
+            {
+                return this.employeeSpecializationIdentity;
+            }
+            set
+            {
+                this.employeeSpecializationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetSimpleEmployeeSpecializationWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO EmployeeSpecializationIdentity
+        {
+            get
+            {
+                return this.employeeSpecializationIdentity;
+            }
+            set
+            {
+                this.employeeSpecializationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualEmployeeSpecializationWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO EmployeeSpecializationIdentity
+        {
+            get
+            {
+                return this.employeeSpecializationIdentity;
+            }
+            set
+            {
+                this.employeeSpecializationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

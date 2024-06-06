@@ -15,9 +15,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetExample1PropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetExample1PropertyRevisionByDateRange(GetExample1PropertyRevisionByDateRangeAutoRequest getExample1PropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getExample1PropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getExample1PropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getExample1PropertyRevisionByDateRangeAutoRequest.example1Identity;
+            Framework.Core.Period? period = getExample1PropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getExample1PropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getExample1PropertyRevisionByDateRangeAutoRequest.Example1Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetExample1PropertyRevisionByDateRangeInternal(example1Identity, propertyName, period, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetExample1PropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetExample1PropertyRevisions(GetExample1PropertyRevisionsAutoRequest getExample1PropertyRevisionsAutoRequest)
         {
-            string propertyName = getExample1PropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getExample1PropertyRevisionsAutoRequest.example1Identity;
+            string propertyName = getExample1PropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getExample1PropertyRevisionsAutoRequest.Example1Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetExample1PropertyRevisionsInternal(example1Identity, propertyName, evaluateData));
         }
         
@@ -68,8 +68,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullExample1WithRevision")]
         public virtual SampleSystem.Generated.DTO.Example1FullDTO GetFullExample1WithRevision(GetFullExample1WithRevisionAutoRequest getFullExample1WithRevisionAutoRequest)
         {
-            long revision = getFullExample1WithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getFullExample1WithRevisionAutoRequest.example1Identity;
+            long revision = getFullExample1WithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getFullExample1WithRevisionAutoRequest.Example1Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExample1WithRevisionInternal(example1Identity, revision, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichExample1WithRevision")]
         public virtual SampleSystem.Generated.DTO.Example1RichDTO GetRichExample1WithRevision(GetRichExample1WithRevisionAutoRequest getRichExample1WithRevisionAutoRequest)
         {
-            long revision = getRichExample1WithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getRichExample1WithRevisionAutoRequest.example1Identity;
+            long revision = getRichExample1WithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getRichExample1WithRevisionAutoRequest.Example1Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichExample1WithRevisionInternal(example1Identity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleExample1WithRevision")]
         public virtual SampleSystem.Generated.DTO.Example1SimpleDTO GetSimpleExample1WithRevision(GetSimpleExample1WithRevisionAutoRequest getSimpleExample1WithRevisionAutoRequest)
         {
-            long revision = getSimpleExample1WithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getSimpleExample1WithRevisionAutoRequest.example1Identity;
+            long revision = getSimpleExample1WithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getSimpleExample1WithRevisionAutoRequest.Example1Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExample1WithRevisionInternal(example1Identity, revision, evaluateData));
         }
         
@@ -124,17 +124,53 @@
     public partial class GetExample1PropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity;
+        public virtual SampleSystem.Generated.DTO.Example1IdentityDTO Example1Identity
+        {
+            get
+            {
+                return this.example1Identity;
+            }
+            set
+            {
+                this.example1Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -142,13 +178,37 @@
     public partial class GetExample1PropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity;
+        public virtual SampleSystem.Generated.DTO.Example1IdentityDTO Example1Identity
+        {
+            get
+            {
+                return this.example1Identity;
+            }
+            set
+            {
+                this.example1Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -156,13 +216,37 @@
     public partial class GetFullExample1WithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity;
+        public virtual SampleSystem.Generated.DTO.Example1IdentityDTO Example1Identity
+        {
+            get
+            {
+                return this.example1Identity;
+            }
+            set
+            {
+                this.example1Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -170,13 +254,37 @@
     public partial class GetRichExample1WithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity;
+        public virtual SampleSystem.Generated.DTO.Example1IdentityDTO Example1Identity
+        {
+            get
+            {
+                return this.example1Identity;
+            }
+            set
+            {
+                this.example1Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -184,12 +292,36 @@
     public partial class GetSimpleExample1WithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity;
+        public virtual SampleSystem.Generated.DTO.Example1IdentityDTO Example1Identity
+        {
+            get
+            {
+                return this.example1Identity;
+            }
+            set
+            {
+                this.example1Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

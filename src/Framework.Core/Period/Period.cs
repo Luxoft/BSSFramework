@@ -50,21 +50,25 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
         this.EndDate = endDate.MaybeToNullable(DateTime.Parse);
     }
 
+    [IgnoreDataMember]
     public TimeSpan Duration
     {
         get { return this.EndDateValue - this.StartDate; }
     }
 
+    [IgnoreDataMember]
     public bool IsEmpty
     {
         get { return this.StartDate > this.EndDateValue; }
     }
 
+    [IgnoreDataMember]
     public bool IsWithinOneMonth
     {
         get { return this.StartDate.Month == this.EndDateValue.Month && this.StartDate.Year == this.EndDateValue.Year; }
     }
 
+    [IgnoreDataMember]
     public bool IsMonth
     {
         get { return this.StartDate.ToStartMonthDate() == this.StartDate && this.EndDateValue == this.StartDate.ToEndMonthDate(); }
@@ -365,6 +369,7 @@ public partial struct Period : IDeserializationCallback
     /// <summary>
     /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода с учетом ограничей sql базы данных
     /// </summary>
+    [IgnoreDataMember]
     public DateTime EndDateValue
     {
         get { return this.endDate == null ? Eternity.EndDateValue : this.endDate.Value.ToSqlDateTime(); }
@@ -373,6 +378,7 @@ public partial struct Period : IDeserializationCallback
     /// <summary>
     /// Дата начала периода
     /// </summary>
+    [IgnoreDataMember]
     public DateTime NativeStartDate
     {
         get { return this.startDate; }
@@ -381,6 +387,7 @@ public partial struct Period : IDeserializationCallback
     /// <summary>
     /// Дата окончания периода
     /// </summary>
+    [IgnoreDataMember]
     public DateTime? NativeEndDate
     {
         get { return this.endDate; }
@@ -389,6 +396,7 @@ public partial struct Period : IDeserializationCallback
     /// <summary>
     /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода
     /// </summary>
+    [IgnoreDataMember]
     public DateTime NativeEndDateValue
     {
         get { return this.endDate == null ? Eternity.NativeEndDateValue : this.endDate.Value; }

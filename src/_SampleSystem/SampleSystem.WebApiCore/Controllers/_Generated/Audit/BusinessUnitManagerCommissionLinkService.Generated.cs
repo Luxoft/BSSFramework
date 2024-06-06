@@ -15,9 +15,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitManagerCommissionLinkPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitManagerCommissionLinkPropertyRevisionByDateRange(GetBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest getBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity = getBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest.businessUnitManagerCommissionLinkIdentity;
+            Framework.Core.Period? period = getBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity = getBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest.BusinessUnitManagerCommissionLinkIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeInternal(businessUnitManagerCommissionLinkIdentity, propertyName, period, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitManagerCommissionLinkPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitManagerCommissionLinkPropertyRevisions(GetBusinessUnitManagerCommissionLinkPropertyRevisionsAutoRequest getBusinessUnitManagerCommissionLinkPropertyRevisionsAutoRequest)
         {
-            string propertyName = getBusinessUnitManagerCommissionLinkPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity = getBusinessUnitManagerCommissionLinkPropertyRevisionsAutoRequest.businessUnitManagerCommissionLinkIdentity;
+            string propertyName = getBusinessUnitManagerCommissionLinkPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity = getBusinessUnitManagerCommissionLinkPropertyRevisionsAutoRequest.BusinessUnitManagerCommissionLinkIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitManagerCommissionLinkPropertyRevisionsInternal(businessUnitManagerCommissionLinkIdentity, propertyName, evaluateData));
         }
         
@@ -68,8 +68,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessUnitManagerCommissionLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkFullDTO GetFullBusinessUnitManagerCommissionLinkWithRevision(GetFullBusinessUnitManagerCommissionLinkWithRevisionAutoRequest getFullBusinessUnitManagerCommissionLinkWithRevisionAutoRequest)
         {
-            long revision = getFullBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity = getFullBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.businessUnitManagerCommissionLinkIdentity;
+            long revision = getFullBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity = getFullBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.BusinessUnitManagerCommissionLinkIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessUnitManagerCommissionLinkWithRevisionInternal(businessUnitManagerCommissionLinkIdentity, revision, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichBusinessUnitManagerCommissionLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkRichDTO GetRichBusinessUnitManagerCommissionLinkWithRevision(GetRichBusinessUnitManagerCommissionLinkWithRevisionAutoRequest getRichBusinessUnitManagerCommissionLinkWithRevisionAutoRequest)
         {
-            long revision = getRichBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity = getRichBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.businessUnitManagerCommissionLinkIdentity;
+            long revision = getRichBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity = getRichBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.BusinessUnitManagerCommissionLinkIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichBusinessUnitManagerCommissionLinkWithRevisionInternal(businessUnitManagerCommissionLinkIdentity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessUnitManagerCommissionLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkSimpleDTO GetSimpleBusinessUnitManagerCommissionLinkWithRevision(GetSimpleBusinessUnitManagerCommissionLinkWithRevisionAutoRequest getSimpleBusinessUnitManagerCommissionLinkWithRevisionAutoRequest)
         {
-            long revision = getSimpleBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity = getSimpleBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.businessUnitManagerCommissionLinkIdentity;
+            long revision = getSimpleBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity = getSimpleBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.BusinessUnitManagerCommissionLinkIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessUnitManagerCommissionLinkWithRevisionInternal(businessUnitManagerCommissionLinkIdentity, revision, evaluateData));
         }
         
@@ -124,17 +124,53 @@
     public partial class GetBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity;
+        public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO BusinessUnitManagerCommissionLinkIdentity
+        {
+            get
+            {
+                return this.businessUnitManagerCommissionLinkIdentity;
+            }
+            set
+            {
+                this.businessUnitManagerCommissionLinkIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -142,13 +178,37 @@
     public partial class GetBusinessUnitManagerCommissionLinkPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity;
+        public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO BusinessUnitManagerCommissionLinkIdentity
+        {
+            get
+            {
+                return this.businessUnitManagerCommissionLinkIdentity;
+            }
+            set
+            {
+                this.businessUnitManagerCommissionLinkIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -156,13 +216,37 @@
     public partial class GetFullBusinessUnitManagerCommissionLinkWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity;
+        public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO BusinessUnitManagerCommissionLinkIdentity
+        {
+            get
+            {
+                return this.businessUnitManagerCommissionLinkIdentity;
+            }
+            set
+            {
+                this.businessUnitManagerCommissionLinkIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -170,13 +254,37 @@
     public partial class GetRichBusinessUnitManagerCommissionLinkWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity;
+        public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO BusinessUnitManagerCommissionLinkIdentity
+        {
+            get
+            {
+                return this.businessUnitManagerCommissionLinkIdentity;
+            }
+            set
+            {
+                this.businessUnitManagerCommissionLinkIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -184,12 +292,36 @@
     public partial class GetSimpleBusinessUnitManagerCommissionLinkWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity;
+        public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO BusinessUnitManagerCommissionLinkIdentity
+        {
+            get
+            {
+                return this.businessUnitManagerCommissionLinkIdentity;
+            }
+            set
+            {
+                this.businessUnitManagerCommissionLinkIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

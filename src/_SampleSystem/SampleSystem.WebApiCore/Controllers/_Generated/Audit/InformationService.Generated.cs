@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.InformationFullDTO GetFullInformationWithRevision(GetFullInformationWithRevisionAutoRequest getFullInformationWithRevisionAutoRequest)
         {
-            long revision = getFullInformationWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getFullInformationWithRevisionAutoRequest.informationIdentity;
+            long revision = getFullInformationWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getFullInformationWithRevisionAutoRequest.InformationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
@@ -34,9 +34,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetInformationPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetInformationPropertyRevisionByDateRange(GetInformationPropertyRevisionByDateRangeAutoRequest getInformationPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getInformationPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getInformationPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getInformationPropertyRevisionByDateRangeAutoRequest.informationIdentity;
+            Framework.Core.Period? period = getInformationPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getInformationPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getInformationPropertyRevisionByDateRangeAutoRequest.InformationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetInformationPropertyRevisionByDateRangeInternal(informationIdentity, propertyName, period, evaluateData));
         }
         
@@ -53,8 +53,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetInformationPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetInformationPropertyRevisions(GetInformationPropertyRevisionsAutoRequest getInformationPropertyRevisionsAutoRequest)
         {
-            string propertyName = getInformationPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getInformationPropertyRevisionsAutoRequest.informationIdentity;
+            string propertyName = getInformationPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getInformationPropertyRevisionsAutoRequest.InformationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetInformationPropertyRevisionsInternal(informationIdentity, propertyName, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.InformationRichDTO GetRichInformationWithRevision(GetRichInformationWithRevisionAutoRequest getRichInformationWithRevisionAutoRequest)
         {
-            long revision = getRichInformationWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getRichInformationWithRevisionAutoRequest.informationIdentity;
+            long revision = getRichInformationWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getRichInformationWithRevisionAutoRequest.InformationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.InformationSimpleDTO GetSimpleInformationWithRevision(GetSimpleInformationWithRevisionAutoRequest getSimpleInformationWithRevisionAutoRequest)
         {
-            long revision = getSimpleInformationWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getSimpleInformationWithRevisionAutoRequest.informationIdentity;
+            long revision = getSimpleInformationWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getSimpleInformationWithRevisionAutoRequest.InformationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.InformationVisualDTO GetVisualInformationWithRevision(GetVisualInformationWithRevisionAutoRequest getVisualInformationWithRevisionAutoRequest)
         {
-            long revision = getVisualInformationWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getVisualInformationWithRevisionAutoRequest.informationIdentity;
+            long revision = getVisualInformationWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getVisualInformationWithRevisionAutoRequest.InformationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
@@ -143,13 +143,37 @@
     public partial class GetFullInformationWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        public virtual SampleSystem.Generated.DTO.InformationIdentityDTO InformationIdentity
+        {
+            get
+            {
+                return this.informationIdentity;
+            }
+            set
+            {
+                this.informationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -157,17 +181,53 @@
     public partial class GetInformationPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        public virtual SampleSystem.Generated.DTO.InformationIdentityDTO InformationIdentity
+        {
+            get
+            {
+                return this.informationIdentity;
+            }
+            set
+            {
+                this.informationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -175,13 +235,37 @@
     public partial class GetInformationPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        public virtual SampleSystem.Generated.DTO.InformationIdentityDTO InformationIdentity
+        {
+            get
+            {
+                return this.informationIdentity;
+            }
+            set
+            {
+                this.informationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -189,13 +273,37 @@
     public partial class GetRichInformationWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        public virtual SampleSystem.Generated.DTO.InformationIdentityDTO InformationIdentity
+        {
+            get
+            {
+                return this.informationIdentity;
+            }
+            set
+            {
+                this.informationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetSimpleInformationWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        public virtual SampleSystem.Generated.DTO.InformationIdentityDTO InformationIdentity
+        {
+            get
+            {
+                return this.informationIdentity;
+            }
+            set
+            {
+                this.informationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualInformationWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity;
+        public virtual SampleSystem.Generated.DTO.InformationIdentityDTO InformationIdentity
+        {
+            get
+            {
+                return this.informationIdentity;
+            }
+            set
+            {
+                this.informationIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

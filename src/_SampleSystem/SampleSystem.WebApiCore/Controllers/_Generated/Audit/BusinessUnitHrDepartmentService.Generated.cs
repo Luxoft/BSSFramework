@@ -15,9 +15,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitHrDepartmentPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitHrDepartmentPropertyRevisionByDateRange(GetBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest.businessUnitHrDepartmentIdentity;
+            Framework.Core.Period? period = getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest.BusinessUnitHrDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitHrDepartmentPropertyRevisionByDateRangeInternal(businessUnitHrDepartmentIdentity, propertyName, period, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitHrDepartmentPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitHrDepartmentPropertyRevisions(GetBusinessUnitHrDepartmentPropertyRevisionsAutoRequest getBusinessUnitHrDepartmentPropertyRevisionsAutoRequest)
         {
-            string propertyName = getBusinessUnitHrDepartmentPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getBusinessUnitHrDepartmentPropertyRevisionsAutoRequest.businessUnitHrDepartmentIdentity;
+            string propertyName = getBusinessUnitHrDepartmentPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getBusinessUnitHrDepartmentPropertyRevisionsAutoRequest.BusinessUnitHrDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitHrDepartmentPropertyRevisionsInternal(businessUnitHrDepartmentIdentity, propertyName, evaluateData));
         }
         
@@ -68,8 +68,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessUnitHrDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentFullDTO GetFullBusinessUnitHrDepartmentWithRevision(GetFullBusinessUnitHrDepartmentWithRevisionAutoRequest getFullBusinessUnitHrDepartmentWithRevisionAutoRequest)
         {
-            long revision = getFullBusinessUnitHrDepartmentWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getFullBusinessUnitHrDepartmentWithRevisionAutoRequest.businessUnitHrDepartmentIdentity;
+            long revision = getFullBusinessUnitHrDepartmentWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getFullBusinessUnitHrDepartmentWithRevisionAutoRequest.BusinessUnitHrDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessUnitHrDepartmentWithRevisionInternal(businessUnitHrDepartmentIdentity, revision, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichBusinessUnitHrDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentRichDTO GetRichBusinessUnitHrDepartmentWithRevision(GetRichBusinessUnitHrDepartmentWithRevisionAutoRequest getRichBusinessUnitHrDepartmentWithRevisionAutoRequest)
         {
-            long revision = getRichBusinessUnitHrDepartmentWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getRichBusinessUnitHrDepartmentWithRevisionAutoRequest.businessUnitHrDepartmentIdentity;
+            long revision = getRichBusinessUnitHrDepartmentWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getRichBusinessUnitHrDepartmentWithRevisionAutoRequest.BusinessUnitHrDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichBusinessUnitHrDepartmentWithRevisionInternal(businessUnitHrDepartmentIdentity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessUnitHrDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentSimpleDTO GetSimpleBusinessUnitHrDepartmentWithRevision(GetSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest getSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest)
         {
-            long revision = getSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest.businessUnitHrDepartmentIdentity;
+            long revision = getSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest.BusinessUnitHrDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessUnitHrDepartmentWithRevisionInternal(businessUnitHrDepartmentIdentity, revision, evaluateData));
         }
         
@@ -124,17 +124,53 @@
     public partial class GetBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO BusinessUnitHrDepartmentIdentity
+        {
+            get
+            {
+                return this.businessUnitHrDepartmentIdentity;
+            }
+            set
+            {
+                this.businessUnitHrDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -142,13 +178,37 @@
     public partial class GetBusinessUnitHrDepartmentPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO BusinessUnitHrDepartmentIdentity
+        {
+            get
+            {
+                return this.businessUnitHrDepartmentIdentity;
+            }
+            set
+            {
+                this.businessUnitHrDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -156,13 +216,37 @@
     public partial class GetFullBusinessUnitHrDepartmentWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO BusinessUnitHrDepartmentIdentity
+        {
+            get
+            {
+                return this.businessUnitHrDepartmentIdentity;
+            }
+            set
+            {
+                this.businessUnitHrDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -170,13 +254,37 @@
     public partial class GetRichBusinessUnitHrDepartmentWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO BusinessUnitHrDepartmentIdentity
+        {
+            get
+            {
+                return this.businessUnitHrDepartmentIdentity;
+            }
+            set
+            {
+                this.businessUnitHrDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -184,12 +292,36 @@
     public partial class GetSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO BusinessUnitHrDepartmentIdentity
+        {
+            get
+            {
+                return this.businessUnitHrDepartmentIdentity;
+            }
+            set
+            {
+                this.businessUnitHrDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

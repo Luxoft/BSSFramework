@@ -91,8 +91,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestEmployeesByODataQueryStringWithFilter")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestEmployeeProjectionDTO> GetTestEmployeesByODataQueryStringWithFilter(GetTestEmployeesByODataQueryStringWithFilterAutoRequest getTestEmployeesByODataQueryStringWithFilterAutoRequest)
         {
-            SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO filter = getTestEmployeesByODataQueryStringWithFilterAutoRequest.filter;
-            string odataQueryString = getTestEmployeesByODataQueryStringWithFilterAutoRequest.odataQueryString;
+            SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO filter = getTestEmployeesByODataQueryStringWithFilterAutoRequest.Filter;
+            string odataQueryString = getTestEmployeesByODataQueryStringWithFilterAutoRequest.OdataQueryString;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestEmployeesByODataQueryStringWithFilterInternal(odataQueryString, filter, evaluateData));
         }
         
@@ -131,12 +131,36 @@
     public partial class GetTestEmployeesByODataQueryStringWithFilterAutoRequest
     {
         
+        private string odataQueryString;
+        
+        private SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO filter;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public string odataQueryString;
+        public virtual string OdataQueryString
+        {
+            get
+            {
+                return this.odataQueryString;
+            }
+            set
+            {
+                this.odataQueryString = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO filter;
+        public virtual SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO Filter
+        {
+            get
+            {
+                return this.filter;
+            }
+            set
+            {
+                this.filter = value;
+            }
+        }
     }
 }

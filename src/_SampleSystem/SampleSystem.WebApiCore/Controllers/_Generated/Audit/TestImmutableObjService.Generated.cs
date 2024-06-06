@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestImmutableObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestImmutableObjFullDTO GetFullTestImmutableObjWithRevision(GetFullTestImmutableObjWithRevisionAutoRequest getFullTestImmutableObjWithRevisionAutoRequest)
         {
-            long revision = getFullTestImmutableObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity = getFullTestImmutableObjWithRevisionAutoRequest.testImmutableObjIdentity;
+            long revision = getFullTestImmutableObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity = getFullTestImmutableObjWithRevisionAutoRequest.TestImmutableObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestImmutableObjWithRevisionInternal(testImmutableObjIdentity, revision, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestImmutableObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestImmutableObjRichDTO GetRichTestImmutableObjWithRevision(GetRichTestImmutableObjWithRevisionAutoRequest getRichTestImmutableObjWithRevisionAutoRequest)
         {
-            long revision = getRichTestImmutableObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity = getRichTestImmutableObjWithRevisionAutoRequest.testImmutableObjIdentity;
+            long revision = getRichTestImmutableObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity = getRichTestImmutableObjWithRevisionAutoRequest.TestImmutableObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestImmutableObjWithRevisionInternal(testImmutableObjIdentity, revision, evaluateData));
         }
         
@@ -53,8 +53,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestImmutableObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO GetSimpleTestImmutableObjWithRevision(GetSimpleTestImmutableObjWithRevisionAutoRequest getSimpleTestImmutableObjWithRevisionAutoRequest)
         {
-            long revision = getSimpleTestImmutableObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity = getSimpleTestImmutableObjWithRevisionAutoRequest.testImmutableObjIdentity;
+            long revision = getSimpleTestImmutableObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity = getSimpleTestImmutableObjWithRevisionAutoRequest.TestImmutableObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestImmutableObjWithRevisionInternal(testImmutableObjIdentity, revision, evaluateData));
         }
         
@@ -72,9 +72,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestImmutableObjPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestImmutableObjPropertyRevisionByDateRange(GetTestImmutableObjPropertyRevisionByDateRangeAutoRequest getTestImmutableObjPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getTestImmutableObjPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getTestImmutableObjPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity = getTestImmutableObjPropertyRevisionByDateRangeAutoRequest.testImmutableObjIdentity;
+            Framework.Core.Period? period = getTestImmutableObjPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getTestImmutableObjPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity = getTestImmutableObjPropertyRevisionByDateRangeAutoRequest.TestImmutableObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestImmutableObjPropertyRevisionByDateRangeInternal(testImmutableObjIdentity, propertyName, period, evaluateData));
         }
         
@@ -91,8 +91,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestImmutableObjPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestImmutableObjPropertyRevisions(GetTestImmutableObjPropertyRevisionsAutoRequest getTestImmutableObjPropertyRevisionsAutoRequest)
         {
-            string propertyName = getTestImmutableObjPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity = getTestImmutableObjPropertyRevisionsAutoRequest.testImmutableObjIdentity;
+            string propertyName = getTestImmutableObjPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity = getTestImmutableObjPropertyRevisionsAutoRequest.TestImmutableObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestImmutableObjPropertyRevisionsInternal(testImmutableObjIdentity, propertyName, evaluateData));
         }
         
@@ -124,13 +124,37 @@
     public partial class GetFullTestImmutableObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO TestImmutableObjIdentity
+        {
+            get
+            {
+                return this.testImmutableObjIdentity;
+            }
+            set
+            {
+                this.testImmutableObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -138,13 +162,37 @@
     public partial class GetRichTestImmutableObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO TestImmutableObjIdentity
+        {
+            get
+            {
+                return this.testImmutableObjIdentity;
+            }
+            set
+            {
+                this.testImmutableObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -152,13 +200,37 @@
     public partial class GetSimpleTestImmutableObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO TestImmutableObjIdentity
+        {
+            get
+            {
+                return this.testImmutableObjIdentity;
+            }
+            set
+            {
+                this.testImmutableObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -166,17 +238,53 @@
     public partial class GetTestImmutableObjPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO TestImmutableObjIdentity
+        {
+            get
+            {
+                return this.testImmutableObjIdentity;
+            }
+            set
+            {
+                this.testImmutableObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -184,12 +292,36 @@
     public partial class GetTestImmutableObjPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO TestImmutableObjIdentity
+        {
+            get
+            {
+                return this.testImmutableObjIdentity;
+            }
+            set
+            {
+                this.testImmutableObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
 }

@@ -1275,6 +1275,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public bool IsNew
         {
             get
@@ -1403,6 +1404,7 @@ namespace Framework.Authorization.Generated.DTO
             mappingService.MapBusinessRole(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO Identity
         {
             get
@@ -1464,6 +1466,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO Identity
         {
             get
@@ -1642,6 +1645,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO Identity
         {
             get
@@ -1684,8 +1688,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class BusinessRoleSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO BusinessRole;
+        private Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO businessRole;
         
         public BusinessRoleSaveEventDTO()
         {
@@ -1693,7 +1696,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public BusinessRoleSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.BusinessRole domainObject)
         {
-            this.BusinessRole = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessRole = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO BusinessRole
+        {
+            get
+            {
+                return this.businessRole;
+            }
+            set
+            {
+                this.businessRole = value;
+            }
         }
     }
     
@@ -1702,8 +1718,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class BusinessRoleRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO BusinessRole;
+        private Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO businessRole;
         
         public BusinessRoleRemoveEventDTO()
         {
@@ -1711,7 +1726,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public BusinessRoleRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.BusinessRole domainObject)
         {
-            this.BusinessRole = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessRole = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO BusinessRole
+        {
+            get
+            {
+                return this.businessRole;
+            }
+            set
+            {
+                this.businessRole = value;
+            }
         }
     }
     
@@ -2150,8 +2178,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class ChangePermissionDelegatesModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelEventRichDTO ChangePermissionDelegatesModel;
+        private Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelEventRichDTO changePermissionDelegatesModel;
         
         public ChangePermissionDelegatesModelSaveEventDTO()
         {
@@ -2159,7 +2186,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public ChangePermissionDelegatesModelSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel domainObject)
         {
-            this.ChangePermissionDelegatesModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.changePermissionDelegatesModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelEventRichDTO ChangePermissionDelegatesModel
+        {
+            get
+            {
+                return this.changePermissionDelegatesModel;
+            }
+            set
+            {
+                this.changePermissionDelegatesModel = value;
+            }
         }
     }
     
@@ -2168,8 +2208,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class ChangePermissionDelegatesModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelEventRichDTO ChangePermissionDelegatesModel;
+        private Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelEventRichDTO changePermissionDelegatesModel;
         
         public ChangePermissionDelegatesModelRemoveEventDTO()
         {
@@ -2177,7 +2216,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public ChangePermissionDelegatesModelRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel domainObject)
         {
-            this.ChangePermissionDelegatesModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.changePermissionDelegatesModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelEventRichDTO ChangePermissionDelegatesModel
+        {
+            get
+            {
+                return this.changePermissionDelegatesModel;
+            }
+            set
+            {
+                this.changePermissionDelegatesModel = value;
+            }
         }
     }
     
@@ -2436,8 +2488,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class DelegateToItemModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO DelegateToItemModel;
+        private Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO delegateToItemModel;
         
         public DelegateToItemModelSaveEventDTO()
         {
@@ -2445,7 +2496,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public DelegateToItemModelSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.DelegateToItemModel domainObject)
         {
-            this.DelegateToItemModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.delegateToItemModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO DelegateToItemModel
+        {
+            get
+            {
+                return this.delegateToItemModel;
+            }
+            set
+            {
+                this.delegateToItemModel = value;
+            }
         }
     }
     
@@ -2454,8 +2518,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class DelegateToItemModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO DelegateToItemModel;
+        private Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO delegateToItemModel;
         
         public DelegateToItemModelRemoveEventDTO()
         {
@@ -2463,7 +2526,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public DelegateToItemModelRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.DelegateToItemModel domainObject)
         {
-            this.DelegateToItemModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.delegateToItemModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO DelegateToItemModel
+        {
+            get
+            {
+                return this.delegateToItemModel;
+            }
+            set
+            {
+                this.delegateToItemModel = value;
+            }
         }
     }
     
@@ -2566,6 +2642,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.PermissionIdentityDTO Identity
         {
             get
@@ -2823,6 +2900,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.PermissionIdentityDTO Identity
         {
             get
@@ -2886,8 +2964,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PermissionEventRichDTO Permission;
+        private Framework.Authorization.Generated.DTO.PermissionEventRichDTO permission;
         
         public PermissionSaveEventDTO()
         {
@@ -2895,7 +2972,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public PermissionSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.Permission domainObject)
         {
-            this.Permission = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.permission = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.PermissionEventRichDTO Permission
+        {
+            get
+            {
+                return this.permission;
+            }
+            set
+            {
+                this.permission = value;
+            }
         }
     }
     
@@ -2904,8 +2994,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PermissionEventRichDTO Permission;
+        private Framework.Authorization.Generated.DTO.PermissionEventRichDTO permission;
         
         public PermissionRemoveEventDTO()
         {
@@ -2913,7 +3002,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public PermissionRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.Permission domainObject)
         {
-            this.Permission = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.permission = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.PermissionEventRichDTO Permission
+        {
+            get
+            {
+                return this.permission;
+            }
+            set
+            {
+                this.permission = value;
+            }
         }
     }
     
@@ -3427,8 +3529,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionDirectFilterModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO PermissionDirectFilterModel;
+        private Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO permissionDirectFilterModel;
         
         public PermissionDirectFilterModelSaveEventDTO()
         {
@@ -3436,7 +3537,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public PermissionDirectFilterModelSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionDirectFilterModel domainObject)
         {
-            this.PermissionDirectFilterModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.permissionDirectFilterModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO PermissionDirectFilterModel
+        {
+            get
+            {
+                return this.permissionDirectFilterModel;
+            }
+            set
+            {
+                this.permissionDirectFilterModel = value;
+            }
         }
     }
     
@@ -3445,8 +3559,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionDirectFilterModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO PermissionDirectFilterModel;
+        private Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO permissionDirectFilterModel;
         
         public PermissionDirectFilterModelRemoveEventDTO()
         {
@@ -3454,7 +3567,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public PermissionDirectFilterModelRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionDirectFilterModel domainObject)
         {
-            this.PermissionDirectFilterModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.permissionDirectFilterModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO PermissionDirectFilterModel
+        {
+            get
+            {
+                return this.permissionDirectFilterModel;
+            }
+            set
+            {
+                this.permissionDirectFilterModel = value;
+            }
         }
     }
     
@@ -3587,6 +3713,7 @@ namespace Framework.Authorization.Generated.DTO
             this.Id = new System.Guid(id);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO Identity
         {
             get
@@ -3797,6 +3924,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO Identity
         {
             get
@@ -3847,8 +3975,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionRestrictionSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO PermissionRestriction;
+        private Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO permissionRestriction;
         
         public PermissionRestrictionSaveEventDTO()
         {
@@ -3856,7 +3983,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public PermissionRestrictionSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
-            this.PermissionRestriction = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.permissionRestriction = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO PermissionRestriction
+        {
+            get
+            {
+                return this.permissionRestriction;
+            }
+            set
+            {
+                this.permissionRestriction = value;
+            }
         }
     }
     
@@ -3865,8 +4005,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionRestrictionRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO PermissionRestriction;
+        private Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO permissionRestriction;
         
         public PermissionRestrictionRemoveEventDTO()
         {
@@ -3874,7 +4013,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public PermissionRestrictionRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.PermissionRestriction domainObject)
         {
-            this.PermissionRestriction = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.permissionRestriction = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO PermissionRestriction
+        {
+            get
+            {
+                return this.permissionRestriction;
+            }
+            set
+            {
+                this.permissionRestriction = value;
+            }
         }
     }
     
@@ -4135,6 +4287,7 @@ namespace Framework.Authorization.Generated.DTO
             mappingService.MapPrincipal(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.PrincipalIdentityDTO Identity
         {
             get
@@ -4181,6 +4334,7 @@ namespace Framework.Authorization.Generated.DTO
             this.Id = new System.Guid(id);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.PrincipalIdentityDTO Identity
         {
             get
@@ -4393,6 +4547,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.PrincipalIdentityDTO Identity
         {
             get
@@ -4461,8 +4616,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PrincipalEventRichDTO Principal;
+        private Framework.Authorization.Generated.DTO.PrincipalEventRichDTO principal;
         
         public PrincipalSaveEventDTO()
         {
@@ -4470,7 +4624,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public PrincipalSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.Principal domainObject)
         {
-            this.Principal = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.principal = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.PrincipalEventRichDTO Principal
+        {
+            get
+            {
+                return this.principal;
+            }
+            set
+            {
+                this.principal = value;
+            }
         }
     }
     
@@ -4479,8 +4646,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PrincipalEventRichDTO Principal;
+        private Framework.Authorization.Generated.DTO.PrincipalEventRichDTO principal;
         
         public PrincipalRemoveEventDTO()
         {
@@ -4488,7 +4654,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public PrincipalRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.Principal domainObject)
         {
-            this.Principal = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.principal = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.PrincipalEventRichDTO Principal
+        {
+            get
+            {
+                return this.principal;
+            }
+            set
+            {
+                this.principal = value;
+            }
         }
     }
     
@@ -4749,6 +4928,7 @@ namespace Framework.Authorization.Generated.DTO
             mappingService.MapSecurityContextType(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO Identity
         {
             get
@@ -4795,6 +4975,7 @@ namespace Framework.Authorization.Generated.DTO
             this.Id = new System.Guid(id);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO Identity
         {
             get
@@ -4971,6 +5152,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO Identity
         {
             get
@@ -5000,8 +5182,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityContextTypeSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO SecurityContextType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO securityContextType;
         
         public SecurityContextTypeSaveEventDTO()
         {
@@ -5009,7 +5190,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public SecurityContextTypeSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject)
         {
-            this.SecurityContextType = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.securityContextType = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO SecurityContextType
+        {
+            get
+            {
+                return this.securityContextType;
+            }
+            set
+            {
+                this.securityContextType = value;
+            }
         }
     }
     
@@ -5018,8 +5212,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityContextTypeRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO SecurityContextType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO securityContextType;
         
         public SecurityContextTypeRemoveEventDTO()
         {
@@ -5027,7 +5220,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public SecurityContextTypeRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityContextType domainObject)
         {
-            this.SecurityContextType = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.securityContextType = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO SecurityContextType
+        {
+            get
+            {
+                return this.securityContextType;
+            }
+            set
+            {
+                this.securityContextType = value;
+            }
         }
     }
     
@@ -5466,8 +5672,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityEntitySaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.SecurityEntityEventRichDTO SecurityEntity;
+        private Framework.Authorization.Generated.DTO.SecurityEntityEventRichDTO securityEntity;
         
         public SecurityEntitySaveEventDTO()
         {
@@ -5475,7 +5680,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public SecurityEntitySaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityEntity domainObject)
         {
-            this.SecurityEntity = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.securityEntity = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.SecurityEntityEventRichDTO SecurityEntity
+        {
+            get
+            {
+                return this.securityEntity;
+            }
+            set
+            {
+                this.securityEntity = value;
+            }
         }
     }
     
@@ -5484,8 +5702,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityEntityRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.SecurityEntityEventRichDTO SecurityEntity;
+        private Framework.Authorization.Generated.DTO.SecurityEntityEventRichDTO securityEntity;
         
         public SecurityEntityRemoveEventDTO()
         {
@@ -5493,7 +5710,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public SecurityEntityRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.SecurityEntity domainObject)
         {
-            this.SecurityEntity = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.securityEntity = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.SecurityEntityEventRichDTO SecurityEntity
+        {
+            get
+            {
+                return this.securityEntity;
+            }
+            set
+            {
+                this.securityEntity = value;
+            }
         }
     }
     
@@ -5842,8 +6072,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class UpdatePermissionDelegatesModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelEventRichDTO UpdatePermissionDelegatesModel;
+        private Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelEventRichDTO updatePermissionDelegatesModel;
         
         public UpdatePermissionDelegatesModelSaveEventDTO()
         {
@@ -5851,7 +6080,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public UpdatePermissionDelegatesModelSaveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.UpdatePermissionDelegatesModel domainObject)
         {
-            this.UpdatePermissionDelegatesModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.updatePermissionDelegatesModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelEventRichDTO UpdatePermissionDelegatesModel
+        {
+            get
+            {
+                return this.updatePermissionDelegatesModel;
+            }
+            set
+            {
+                this.updatePermissionDelegatesModel = value;
+            }
         }
     }
     
@@ -5860,8 +6102,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class UpdatePermissionDelegatesModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelEventRichDTO UpdatePermissionDelegatesModel;
+        private Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelEventRichDTO updatePermissionDelegatesModel;
         
         public UpdatePermissionDelegatesModelRemoveEventDTO()
         {
@@ -5869,7 +6110,20 @@ namespace Framework.Authorization.Generated.DTO
         
         public UpdatePermissionDelegatesModelRemoveEventDTO(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, Framework.Authorization.Domain.UpdatePermissionDelegatesModel domainObject)
         {
-            this.UpdatePermissionDelegatesModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.updatePermissionDelegatesModel = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelEventRichDTO UpdatePermissionDelegatesModel
+        {
+            get
+            {
+                return this.updatePermissionDelegatesModel;
+            }
+            set
+            {
+                this.updatePermissionDelegatesModel = value;
+            }
         }
     }
     

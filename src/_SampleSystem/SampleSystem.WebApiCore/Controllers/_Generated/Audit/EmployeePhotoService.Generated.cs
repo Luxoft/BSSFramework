@@ -15,9 +15,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePhotoPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePhotoPropertyRevisionByDateRange(GetEmployeePhotoPropertyRevisionByDateRangeAutoRequest getEmployeePhotoPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getEmployeePhotoPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getEmployeePhotoPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity = getEmployeePhotoPropertyRevisionByDateRangeAutoRequest.employeePhotoIdentity;
+            Framework.Core.Period? period = getEmployeePhotoPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getEmployeePhotoPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity = getEmployeePhotoPropertyRevisionByDateRangeAutoRequest.EmployeePhotoIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeePhotoPropertyRevisionByDateRangeInternal(employeePhotoIdentity, propertyName, period, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePhotoPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePhotoPropertyRevisions(GetEmployeePhotoPropertyRevisionsAutoRequest getEmployeePhotoPropertyRevisionsAutoRequest)
         {
-            string propertyName = getEmployeePhotoPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity = getEmployeePhotoPropertyRevisionsAutoRequest.employeePhotoIdentity;
+            string propertyName = getEmployeePhotoPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity = getEmployeePhotoPropertyRevisionsAutoRequest.EmployeePhotoIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeePhotoPropertyRevisionsInternal(employeePhotoIdentity, propertyName, evaluateData));
         }
         
@@ -68,8 +68,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeePhotoWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePhotoFullDTO GetFullEmployeePhotoWithRevision(GetFullEmployeePhotoWithRevisionAutoRequest getFullEmployeePhotoWithRevisionAutoRequest)
         {
-            long revision = getFullEmployeePhotoWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity = getFullEmployeePhotoWithRevisionAutoRequest.employeePhotoIdentity;
+            long revision = getFullEmployeePhotoWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity = getFullEmployeePhotoWithRevisionAutoRequest.EmployeePhotoIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePhotoWithRevisionInternal(employeePhotoIdentity, revision, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeePhotoWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePhotoRichDTO GetRichEmployeePhotoWithRevision(GetRichEmployeePhotoWithRevisionAutoRequest getRichEmployeePhotoWithRevisionAutoRequest)
         {
-            long revision = getRichEmployeePhotoWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity = getRichEmployeePhotoWithRevisionAutoRequest.employeePhotoIdentity;
+            long revision = getRichEmployeePhotoWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity = getRichEmployeePhotoWithRevisionAutoRequest.EmployeePhotoIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeePhotoWithRevisionInternal(employeePhotoIdentity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeePhotoWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePhotoSimpleDTO GetSimpleEmployeePhotoWithRevision(GetSimpleEmployeePhotoWithRevisionAutoRequest getSimpleEmployeePhotoWithRevisionAutoRequest)
         {
-            long revision = getSimpleEmployeePhotoWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity = getSimpleEmployeePhotoWithRevisionAutoRequest.employeePhotoIdentity;
+            long revision = getSimpleEmployeePhotoWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity = getSimpleEmployeePhotoWithRevisionAutoRequest.EmployeePhotoIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePhotoWithRevisionInternal(employeePhotoIdentity, revision, evaluateData));
         }
         
@@ -124,17 +124,53 @@
     public partial class GetEmployeePhotoPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO EmployeePhotoIdentity
+        {
+            get
+            {
+                return this.employeePhotoIdentity;
+            }
+            set
+            {
+                this.employeePhotoIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -142,13 +178,37 @@
     public partial class GetEmployeePhotoPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO EmployeePhotoIdentity
+        {
+            get
+            {
+                return this.employeePhotoIdentity;
+            }
+            set
+            {
+                this.employeePhotoIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -156,13 +216,37 @@
     public partial class GetFullEmployeePhotoWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO EmployeePhotoIdentity
+        {
+            get
+            {
+                return this.employeePhotoIdentity;
+            }
+            set
+            {
+                this.employeePhotoIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -170,13 +254,37 @@
     public partial class GetRichEmployeePhotoWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO EmployeePhotoIdentity
+        {
+            get
+            {
+                return this.employeePhotoIdentity;
+            }
+            set
+            {
+                this.employeePhotoIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -184,12 +292,36 @@
     public partial class GetSimpleEmployeePhotoWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity;
+        public virtual SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO EmployeePhotoIdentity
+        {
+            get
+            {
+                return this.employeePhotoIdentity;
+            }
+            set
+            {
+                this.employeePhotoIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

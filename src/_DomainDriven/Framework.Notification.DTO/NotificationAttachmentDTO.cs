@@ -6,17 +6,17 @@ namespace Framework.Notification.DTO;
 public class NotificationAttachmentDTO
 {
     [DataMember]
-    public byte[] Content;
+    public byte[] Content { get; set; }
 
     [DataMember]
-    public string Name;
+    public string Name { get; set; }
 
     [DataMember]
-    public string Extension;
+    public string Extension { get; set; }
 
     [DataMember]
-    public string ContentId;
+    public string ContentId { get; set; }
 
     [DataMember]
-    public bool IsInline;
+    public bool IsInline { get; set; }
 }

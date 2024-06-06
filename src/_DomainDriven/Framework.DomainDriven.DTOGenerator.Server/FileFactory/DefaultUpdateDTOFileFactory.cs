@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 using System.ComponentModel;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 using Framework.CodeDom;
 using Framework.Core;
@@ -175,8 +176,9 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
                                      checkProperties.ToArray(this.GetPropertyIsEmptyCondition)
                                                     .Pipe(items => items.Any() ? new CodeBooleanAndOperatorExpression(items) : true.ToPrimitiveExpression())
                                                     .ToMethodReturnStatement()
-                             }
-                     };
+                             },
+                             CustomAttributes = { new CodeAttributeDeclaration(typeof(IgnoreDataMemberAttribute).ToTypeReference()) }
+        };
 
         yield return new CodeMemberMethod
                      {

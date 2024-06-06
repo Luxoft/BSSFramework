@@ -15,9 +15,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetCompanyLegalEntityPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetCompanyLegalEntityPropertyRevisionByDateRange(GetCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest getCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest.companyLegalEntityIdentity;
+            Framework.Core.Period? period = getCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest.CompanyLegalEntityIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetCompanyLegalEntityPropertyRevisionByDateRangeInternal(companyLegalEntityIdentity, propertyName, period, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetCompanyLegalEntityPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetCompanyLegalEntityPropertyRevisions(GetCompanyLegalEntityPropertyRevisionsAutoRequest getCompanyLegalEntityPropertyRevisionsAutoRequest)
         {
-            string propertyName = getCompanyLegalEntityPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getCompanyLegalEntityPropertyRevisionsAutoRequest.companyLegalEntityIdentity;
+            string propertyName = getCompanyLegalEntityPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getCompanyLegalEntityPropertyRevisionsAutoRequest.CompanyLegalEntityIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetCompanyLegalEntityPropertyRevisionsInternal(companyLegalEntityIdentity, propertyName, evaluateData));
         }
         
@@ -68,8 +68,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCompanyLegalEntityWithRevision")]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntityWithRevision(GetFullCompanyLegalEntityWithRevisionAutoRequest getFullCompanyLegalEntityWithRevisionAutoRequest)
         {
-            long revision = getFullCompanyLegalEntityWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getFullCompanyLegalEntityWithRevisionAutoRequest.companyLegalEntityIdentity;
+            long revision = getFullCompanyLegalEntityWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getFullCompanyLegalEntityWithRevisionAutoRequest.CompanyLegalEntityIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntityWithRevisionInternal(companyLegalEntityIdentity, revision, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCompanyLegalEntityWithRevision")]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntityWithRevision(GetRichCompanyLegalEntityWithRevisionAutoRequest getRichCompanyLegalEntityWithRevisionAutoRequest)
         {
-            long revision = getRichCompanyLegalEntityWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getRichCompanyLegalEntityWithRevisionAutoRequest.companyLegalEntityIdentity;
+            long revision = getRichCompanyLegalEntityWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getRichCompanyLegalEntityWithRevisionAutoRequest.CompanyLegalEntityIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCompanyLegalEntityWithRevisionInternal(companyLegalEntityIdentity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCompanyLegalEntityWithRevision")]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntityWithRevision(GetSimpleCompanyLegalEntityWithRevisionAutoRequest getSimpleCompanyLegalEntityWithRevisionAutoRequest)
         {
-            long revision = getSimpleCompanyLegalEntityWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getSimpleCompanyLegalEntityWithRevisionAutoRequest.companyLegalEntityIdentity;
+            long revision = getSimpleCompanyLegalEntityWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getSimpleCompanyLegalEntityWithRevisionAutoRequest.CompanyLegalEntityIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntityWithRevisionInternal(companyLegalEntityIdentity, revision, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCompanyLegalEntityWithRevision")]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntityWithRevision(GetVisualCompanyLegalEntityWithRevisionAutoRequest getVisualCompanyLegalEntityWithRevisionAutoRequest)
         {
-            long revision = getVisualCompanyLegalEntityWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getVisualCompanyLegalEntityWithRevisionAutoRequest.companyLegalEntityIdentity;
+            long revision = getVisualCompanyLegalEntityWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity = getVisualCompanyLegalEntityWithRevisionAutoRequest.CompanyLegalEntityIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntityWithRevisionInternal(companyLegalEntityIdentity, revision, evaluateData));
         }
         
@@ -143,17 +143,53 @@
     public partial class GetCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        public virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO CompanyLegalEntityIdentity
+        {
+            get
+            {
+                return this.companyLegalEntityIdentity;
+            }
+            set
+            {
+                this.companyLegalEntityIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -161,13 +197,37 @@
     public partial class GetCompanyLegalEntityPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        public virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO CompanyLegalEntityIdentity
+        {
+            get
+            {
+                return this.companyLegalEntityIdentity;
+            }
+            set
+            {
+                this.companyLegalEntityIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -175,13 +235,37 @@
     public partial class GetFullCompanyLegalEntityWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        public virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO CompanyLegalEntityIdentity
+        {
+            get
+            {
+                return this.companyLegalEntityIdentity;
+            }
+            set
+            {
+                this.companyLegalEntityIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -189,13 +273,37 @@
     public partial class GetRichCompanyLegalEntityWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        public virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO CompanyLegalEntityIdentity
+        {
+            get
+            {
+                return this.companyLegalEntityIdentity;
+            }
+            set
+            {
+                this.companyLegalEntityIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetSimpleCompanyLegalEntityWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        public virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO CompanyLegalEntityIdentity
+        {
+            get
+            {
+                return this.companyLegalEntityIdentity;
+            }
+            set
+            {
+                this.companyLegalEntityIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualCompanyLegalEntityWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity;
+        public virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO CompanyLegalEntityIdentity
+        {
+            get
+            {
+                return this.companyLegalEntityIdentity;
+            }
+            set
+            {
+                this.companyLegalEntityIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

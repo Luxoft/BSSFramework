@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullHRDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.HRDepartmentFullDTO GetFullHRDepartmentWithRevision(GetFullHRDepartmentWithRevisionAutoRequest getFullHRDepartmentWithRevisionAutoRequest)
         {
-            long revision = getFullHRDepartmentWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getFullHRDepartmentWithRevisionAutoRequest.hRDepartmentIdentity;
+            long revision = getFullHRDepartmentWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getFullHRDepartmentWithRevisionAutoRequest.HRDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
         }
         
@@ -34,9 +34,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetHRDepartmentPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetHRDepartmentPropertyRevisionByDateRange(GetHRDepartmentPropertyRevisionByDateRangeAutoRequest getHRDepartmentPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.hRDepartmentIdentity;
+            Framework.Core.Period? period = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.HRDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetHRDepartmentPropertyRevisionByDateRangeInternal(hRDepartmentIdentity, propertyName, period, evaluateData));
         }
         
@@ -53,8 +53,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetHRDepartmentPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetHRDepartmentPropertyRevisions(GetHRDepartmentPropertyRevisionsAutoRequest getHRDepartmentPropertyRevisionsAutoRequest)
         {
-            string propertyName = getHRDepartmentPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getHRDepartmentPropertyRevisionsAutoRequest.hRDepartmentIdentity;
+            string propertyName = getHRDepartmentPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getHRDepartmentPropertyRevisionsAutoRequest.HRDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetHRDepartmentPropertyRevisionsInternal(hRDepartmentIdentity, propertyName, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichHRDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.HRDepartmentRichDTO GetRichHRDepartmentWithRevision(GetRichHRDepartmentWithRevisionAutoRequest getRichHRDepartmentWithRevisionAutoRequest)
         {
-            long revision = getRichHRDepartmentWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getRichHRDepartmentWithRevisionAutoRequest.hRDepartmentIdentity;
+            long revision = getRichHRDepartmentWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getRichHRDepartmentWithRevisionAutoRequest.HRDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleHRDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.HRDepartmentSimpleDTO GetSimpleHRDepartmentWithRevision(GetSimpleHRDepartmentWithRevisionAutoRequest getSimpleHRDepartmentWithRevisionAutoRequest)
         {
-            long revision = getSimpleHRDepartmentWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getSimpleHRDepartmentWithRevisionAutoRequest.hRDepartmentIdentity;
+            long revision = getSimpleHRDepartmentWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getSimpleHRDepartmentWithRevisionAutoRequest.HRDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualHRDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.HRDepartmentVisualDTO GetVisualHRDepartmentWithRevision(GetVisualHRDepartmentWithRevisionAutoRequest getVisualHRDepartmentWithRevisionAutoRequest)
         {
-            long revision = getVisualHRDepartmentWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getVisualHRDepartmentWithRevisionAutoRequest.hRDepartmentIdentity;
+            long revision = getVisualHRDepartmentWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getVisualHRDepartmentWithRevisionAutoRequest.HRDepartmentIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
         }
         
@@ -143,13 +143,37 @@
     public partial class GetFullHRDepartmentWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
+        {
+            get
+            {
+                return this.hRDepartmentIdentity;
+            }
+            set
+            {
+                this.hRDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -157,17 +181,53 @@
     public partial class GetHRDepartmentPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
+        {
+            get
+            {
+                return this.hRDepartmentIdentity;
+            }
+            set
+            {
+                this.hRDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -175,13 +235,37 @@
     public partial class GetHRDepartmentPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
+        {
+            get
+            {
+                return this.hRDepartmentIdentity;
+            }
+            set
+            {
+                this.hRDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -189,13 +273,37 @@
     public partial class GetRichHRDepartmentWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
+        {
+            get
+            {
+                return this.hRDepartmentIdentity;
+            }
+            set
+            {
+                this.hRDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetSimpleHRDepartmentWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
+        {
+            get
+            {
+                return this.hRDepartmentIdentity;
+            }
+            set
+            {
+                this.hRDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualHRDepartmentWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity;
+        public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
+        {
+            get
+            {
+                return this.hRDepartmentIdentity;
+            }
+            set
+            {
+                this.hRDepartmentIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

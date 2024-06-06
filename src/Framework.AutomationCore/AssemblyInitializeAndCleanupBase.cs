@@ -2,7 +2,6 @@
 
 using Automation.Enums;
 using Automation.Settings;
-using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
 
 namespace Automation;

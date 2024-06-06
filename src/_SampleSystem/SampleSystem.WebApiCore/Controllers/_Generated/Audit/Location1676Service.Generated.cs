@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullLocation1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676WithRevision(GetFullLocation1676WithRevisionAutoRequest getFullLocation1676WithRevisionAutoRequest)
         {
-            long revision = getFullLocation1676WithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getFullLocation1676WithRevisionAutoRequest.location1676Identity;
+            long revision = getFullLocation1676WithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getFullLocation1676WithRevisionAutoRequest.Location1676Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
@@ -34,9 +34,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetLocation1676PropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionByDateRange(GetLocation1676PropertyRevisionByDateRangeAutoRequest getLocation1676PropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getLocation1676PropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getLocation1676PropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getLocation1676PropertyRevisionByDateRangeAutoRequest.location1676Identity;
+            Framework.Core.Period? period = getLocation1676PropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getLocation1676PropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getLocation1676PropertyRevisionByDateRangeAutoRequest.Location1676Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetLocation1676PropertyRevisionByDateRangeInternal(location1676Identity, propertyName, period, evaluateData));
         }
         
@@ -53,8 +53,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetLocation1676PropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisions(GetLocation1676PropertyRevisionsAutoRequest getLocation1676PropertyRevisionsAutoRequest)
         {
-            string propertyName = getLocation1676PropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getLocation1676PropertyRevisionsAutoRequest.location1676Identity;
+            string propertyName = getLocation1676PropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getLocation1676PropertyRevisionsAutoRequest.Location1676Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetLocation1676PropertyRevisionsInternal(location1676Identity, propertyName, evaluateData));
         }
         
@@ -87,8 +87,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichLocation1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676WithRevision(GetRichLocation1676WithRevisionAutoRequest getRichLocation1676WithRevisionAutoRequest)
         {
-            long revision = getRichLocation1676WithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getRichLocation1676WithRevisionAutoRequest.location1676Identity;
+            long revision = getRichLocation1676WithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getRichLocation1676WithRevisionAutoRequest.Location1676Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
@@ -106,8 +106,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleLocation1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676WithRevision(GetSimpleLocation1676WithRevisionAutoRequest getSimpleLocation1676WithRevisionAutoRequest)
         {
-            long revision = getSimpleLocation1676WithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getSimpleLocation1676WithRevisionAutoRequest.location1676Identity;
+            long revision = getSimpleLocation1676WithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getSimpleLocation1676WithRevisionAutoRequest.Location1676Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualLocation1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676WithRevision(GetVisualLocation1676WithRevisionAutoRequest getVisualLocation1676WithRevisionAutoRequest)
         {
-            long revision = getVisualLocation1676WithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getVisualLocation1676WithRevisionAutoRequest.location1676Identity;
+            long revision = getVisualLocation1676WithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getVisualLocation1676WithRevisionAutoRequest.Location1676Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
@@ -143,13 +143,37 @@
     public partial class GetFullLocation1676WithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        public virtual SampleSystem.Generated.DTO.Location1676IdentityDTO Location1676Identity
+        {
+            get
+            {
+                return this.location1676Identity;
+            }
+            set
+            {
+                this.location1676Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -157,17 +181,53 @@
     public partial class GetLocation1676PropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        public virtual SampleSystem.Generated.DTO.Location1676IdentityDTO Location1676Identity
+        {
+            get
+            {
+                return this.location1676Identity;
+            }
+            set
+            {
+                this.location1676Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -175,13 +235,37 @@
     public partial class GetLocation1676PropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        public virtual SampleSystem.Generated.DTO.Location1676IdentityDTO Location1676Identity
+        {
+            get
+            {
+                return this.location1676Identity;
+            }
+            set
+            {
+                this.location1676Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -189,13 +273,37 @@
     public partial class GetRichLocation1676WithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        public virtual SampleSystem.Generated.DTO.Location1676IdentityDTO Location1676Identity
+        {
+            get
+            {
+                return this.location1676Identity;
+            }
+            set
+            {
+                this.location1676Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetSimpleLocation1676WithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        public virtual SampleSystem.Generated.DTO.Location1676IdentityDTO Location1676Identity
+        {
+            get
+            {
+                return this.location1676Identity;
+            }
+            set
+            {
+                this.location1676Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualLocation1676WithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity;
+        public virtual SampleSystem.Generated.DTO.Location1676IdentityDTO Location1676Identity
+        {
+            get
+            {
+                return this.location1676Identity;
+            }
+            set
+            {
+                this.location1676Identity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

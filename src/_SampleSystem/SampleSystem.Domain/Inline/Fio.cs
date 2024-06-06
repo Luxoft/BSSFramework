@@ -20,6 +20,7 @@ public class Fio : FioShort, ICloneable<Fio>
         set { this.middleName = value.TrimNull(); }
     }
 
+    [DataMember]
     public override string FullName
     {
         get { return $"{base.FullName} {this.MiddleName}"; }

@@ -112,7 +112,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        return false;
+        return true;
     }
 
 

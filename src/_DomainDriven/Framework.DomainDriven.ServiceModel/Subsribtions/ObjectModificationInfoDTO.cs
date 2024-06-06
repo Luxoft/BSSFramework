@@ -8,16 +8,16 @@ namespace Framework.DomainDriven.ServiceModel.Subscriptions;
 public class ObjectModificationInfoDTO<TIdent>
 {
     [DataMember]
-    public ModificationType ModificationType;
+    public ModificationType ModificationType { get; set; }
 
     [DataMember]
-    public TIdent Identity;
+    public TIdent Identity { get; set; }
 
     [DataMember]
-    public TypeInfoDescriptionDTO TypeInfoDescription;
+    public TypeInfoDescriptionDTO TypeInfoDescription { get; set; }
 
     [DataMember]
-    public long Revision;
+    public long Revision { get; set; }
 
 
     public ObjectModificationInfoDTO(ObjectModificationInfo<TIdent> source)

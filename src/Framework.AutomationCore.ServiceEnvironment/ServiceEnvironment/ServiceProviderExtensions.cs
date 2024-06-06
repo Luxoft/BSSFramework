@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 
 using Automation.ServiceEnvironment.Services;
-using Automation.Settings;
 
 using Framework.Core.Services;
 using Framework.DependencyInjection;

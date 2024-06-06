@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 
 using Framework.CodeDom;
+using Framework.Core;
 using Framework.Events;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
@@ -52,11 +53,22 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
 
         var field = new CodeMemberField
                     {
-                            Type = fieldTypeRef,
-                            Name = this.DomainType.Name,
-                            Attributes = MemberAttributes.Public,
-                            CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) }
+                        Type = fieldTypeRef,
+                        Name = this.DomainType.Name.ToStartLowerCase(),
+                        Attributes = MemberAttributes.Private,
                     };
+
+        var fieldMemberRef = new CodeThisReferenceExpression().ToFieldReference(field);
+
+        var property = new CodeMemberProperty
+                       {
+                           Type = fieldTypeRef,
+                           Name = this.DomainType.Name,
+                           Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                           CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) },
+                           GetStatements = { fieldMemberRef.ToMethodReturnStatement() },
+                           SetStatements = { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldMemberRef) }
+                       };
 
         var mappingServiceParameter = this.GetMappingServiceParameter();
         var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
@@ -66,6 +78,7 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
 
 
         yield return field;
+        yield return property;
         yield return this.GenerateDefaultConstructor();
 
         yield return new CodeConstructor

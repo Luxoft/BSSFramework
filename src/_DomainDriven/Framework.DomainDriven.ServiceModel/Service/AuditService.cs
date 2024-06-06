@@ -128,7 +128,7 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
 
         var result = (TPropertyRevisionDTO)Activator.CreateInstance(genericType, propertyRevisionInfo);
 
-        genericType.GetField("Value", BindingFlags.Public | BindingFlags.Instance).SetValue(result, value);
+        genericType.GetProperty("Value", BindingFlags.Public | BindingFlags.Instance).SetValue(result, value);
 
         return result;
     }

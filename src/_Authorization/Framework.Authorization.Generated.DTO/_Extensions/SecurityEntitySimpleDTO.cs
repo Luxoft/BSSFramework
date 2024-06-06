@@ -1,10 +1,13 @@
-﻿using Framework.Core;
+﻿using System.Runtime.Serialization;
+
+using Framework.Core;
 using Framework.Persistent;
 
 namespace Framework.Authorization.Generated.DTO;
 
 public partial class SecurityEntitySimpleDTO : IIdentityObjectContainer<SecurityEntityIdentityDTO>, IEquatable<SecurityEntitySimpleDTO>
 {
+    [IgnoreDataMember]
     public SecurityEntityIdentityDTO Identity => new SecurityEntityIdentityDTO(this.Id);
 
     public override bool Equals(object obj)

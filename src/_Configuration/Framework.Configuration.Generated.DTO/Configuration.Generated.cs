@@ -3219,6 +3219,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public bool IsNew
         {
             get
@@ -3356,6 +3357,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO Identity
         {
             get
@@ -3576,6 +3578,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO Identity
         {
             get
@@ -3764,6 +3767,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapControlSettings(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO Identity
         {
             get
@@ -3832,6 +3836,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO Identity
         {
             get
@@ -4129,6 +4134,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO Identity
         {
             get
@@ -4211,6 +4217,7 @@ namespace Framework.Configuration.Generated.DTO
             this.Id = new System.Guid(id);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO Identity
         {
             get
@@ -4461,6 +4468,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO Identity
         {
             get
@@ -4534,6 +4542,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO Identity
         {
             get
@@ -4784,6 +4793,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO Identity
         {
             get
@@ -4895,6 +4905,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO Identity
         {
             get
@@ -5223,6 +5234,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO Identity
         {
             get
@@ -5370,6 +5382,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO Identity
         {
             get
@@ -5670,6 +5683,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO Identity
         {
             get
@@ -5791,6 +5805,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO Identity
         {
             get
@@ -6042,6 +6057,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO Identity
         {
             get
@@ -6109,6 +6125,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainType(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO Identity
         {
             get
@@ -6177,6 +6194,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO Identity
         {
             get
@@ -6423,6 +6441,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO Identity
         {
             get
@@ -6701,6 +6720,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainTypeEventOperation(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO Identity
         {
             get
@@ -6752,6 +6772,7 @@ namespace Framework.Configuration.Generated.DTO
             this.Id = new System.Guid(id);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO Identity
         {
             get
@@ -6972,6 +6993,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO Identity
         {
             get
@@ -7218,6 +7240,7 @@ namespace Framework.Configuration.Generated.DTO
             this.Id = new System.Guid(id);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO Identity
         {
             get
@@ -7501,6 +7524,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO Identity
         {
             get
@@ -7806,6 +7830,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapGenericNamedLock(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO Identity
         {
             get
@@ -7857,6 +7882,7 @@ namespace Framework.Configuration.Generated.DTO
             this.Id = new System.Guid(id);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO Identity
         {
             get
@@ -8067,6 +8093,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.GenericNamedLockIdentityDTO Identity
         {
             get
@@ -8423,6 +8450,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.SentMessageIdentityDTO Identity
         {
             get
@@ -8678,6 +8706,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.SentMessageIdentityDTO Identity
         {
             get
@@ -8714,6 +8743,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapSequence(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.SequenceIdentityDTO Identity
         {
             get
@@ -8767,6 +8797,7 @@ namespace Framework.Configuration.Generated.DTO
             this.Id = new System.Guid(id);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.SequenceIdentityDTO Identity
         {
             get
@@ -8992,6 +9023,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.SequenceIdentityDTO Identity
         {
             get
@@ -9376,6 +9408,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO Identity
         {
             get
@@ -9446,6 +9479,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO Identity
         {
             get
@@ -9699,6 +9733,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO Identity
         {
             get
@@ -9905,6 +9940,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapTargetSystem(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO Identity
         {
             get
@@ -9964,6 +10000,7 @@ namespace Framework.Configuration.Generated.DTO
             this.Id = new System.Guid(id);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO Identity
         {
             get
@@ -10238,6 +10275,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO Identity
         {
             get

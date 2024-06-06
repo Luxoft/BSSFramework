@@ -91,8 +91,8 @@ public class AuditTests : TestBase
 
         var lastEmployeeState = employeeAuditController.Evaluate(c => c.GetFullEmployeeWithRevision( new GetFullEmployeeWithRevisionAutoRequest
                                                                      {
-                                                                             employeeIdentity = employeeIdentity,
-                                                                             revision = lastRevision.RevisionNumber
+                                                                             EmployeeIdentity = employeeIdentity,
+                                                                             Revision = lastRevision.RevisionNumber
                                                                      }));
 
         var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
@@ -119,8 +119,8 @@ public class AuditTests : TestBase
         // Assert
         var propertyRevisions = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
                                                                      {
-                                                                             employeeIdentity = employeeIdentity,
-                                                                             propertyName = $"{nameof(Employee.CoreBusinessUnit)}"
+                                                                             EmployeeIdentity = employeeIdentity,
+                                                                             PropertyName = $"{nameof(Employee.CoreBusinessUnit)}"
                                                                      }));
 
         propertyRevisions.RevisionInfos.Count().Should().Be(1);
@@ -158,8 +158,8 @@ public class AuditTests : TestBase
         var skip = 3;
         var checkPropertyRevision = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
                                                                          {
-                                                                                 employeeIdentity = employeeIdentity,
-                                                                                 propertyName = $"{nameof(Employee.Email)}"
+                                                                                 EmployeeIdentity = employeeIdentity,
+                                                                                 PropertyName = $"{nameof(Employee.Email)}"
                                                                          }))
                                                            .RevisionInfos
                                                            .EmptyIfNull()
@@ -204,8 +204,8 @@ public class AuditTests : TestBase
 
         var firstRevision = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
                                                                  {
-                                                                         employeeIdentity = employeeIdentity,
-                                                                         propertyName = $"{nameof(Employee.Email)}"
+                                                                         EmployeeIdentity = employeeIdentity,
+                                                                         PropertyName = $"{nameof(Employee.Email)}"
                                                                  }))
                                                    .RevisionInfos
                                                    .EmptyIfNull()
@@ -247,8 +247,8 @@ public class AuditTests : TestBase
         // Assert
         var afterFirstRevisions = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
                                                                        {
-                                                                               employeeIdentity = employeeIdentity,
-                                                                               propertyName = $"{nameof(Employee.Email)}"
+                                                                               EmployeeIdentity = employeeIdentity,
+                                                                               PropertyName = $"{nameof(Employee.Email)}"
                                                                        }))
                                                          .RevisionInfos
                                                          .EmptyIfNull()

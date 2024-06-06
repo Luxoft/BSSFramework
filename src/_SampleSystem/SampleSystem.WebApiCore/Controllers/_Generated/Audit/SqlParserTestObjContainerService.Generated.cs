@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSqlParserTestObjContainerWithRevision")]
         public virtual SampleSystem.Generated.DTO.SqlParserTestObjContainerFullDTO GetFullSqlParserTestObjContainerWithRevision(GetFullSqlParserTestObjContainerWithRevisionAutoRequest getFullSqlParserTestObjContainerWithRevisionAutoRequest)
         {
-            long revision = getFullSqlParserTestObjContainerWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity = getFullSqlParserTestObjContainerWithRevisionAutoRequest.sqlParserTestObjContainerIdentity;
+            long revision = getFullSqlParserTestObjContainerWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity = getFullSqlParserTestObjContainerWithRevisionAutoRequest.SqlParserTestObjContainerIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSqlParserTestObjContainerWithRevisionInternal(sqlParserTestObjContainerIdentity, revision, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSqlParserTestObjContainerWithRevision")]
         public virtual SampleSystem.Generated.DTO.SqlParserTestObjContainerSimpleDTO GetSimpleSqlParserTestObjContainerWithRevision(GetSimpleSqlParserTestObjContainerWithRevisionAutoRequest getSimpleSqlParserTestObjContainerWithRevisionAutoRequest)
         {
-            long revision = getSimpleSqlParserTestObjContainerWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity = getSimpleSqlParserTestObjContainerWithRevisionAutoRequest.sqlParserTestObjContainerIdentity;
+            long revision = getSimpleSqlParserTestObjContainerWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity = getSimpleSqlParserTestObjContainerWithRevisionAutoRequest.SqlParserTestObjContainerIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSqlParserTestObjContainerWithRevisionInternal(sqlParserTestObjContainerIdentity, revision, evaluateData));
         }
         
@@ -53,9 +53,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSqlParserTestObjContainerPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetSqlParserTestObjContainerPropertyRevisionByDateRange(GetSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest getSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity = getSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest.sqlParserTestObjContainerIdentity;
+            Framework.Core.Period? period = getSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity = getSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest.SqlParserTestObjContainerIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSqlParserTestObjContainerPropertyRevisionByDateRangeInternal(sqlParserTestObjContainerIdentity, propertyName, period, evaluateData));
         }
         
@@ -72,8 +72,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSqlParserTestObjContainerPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetSqlParserTestObjContainerPropertyRevisions(GetSqlParserTestObjContainerPropertyRevisionsAutoRequest getSqlParserTestObjContainerPropertyRevisionsAutoRequest)
         {
-            string propertyName = getSqlParserTestObjContainerPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity = getSqlParserTestObjContainerPropertyRevisionsAutoRequest.sqlParserTestObjContainerIdentity;
+            string propertyName = getSqlParserTestObjContainerPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity = getSqlParserTestObjContainerPropertyRevisionsAutoRequest.SqlParserTestObjContainerIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSqlParserTestObjContainerPropertyRevisionsInternal(sqlParserTestObjContainerIdentity, propertyName, evaluateData));
         }
         
@@ -105,13 +105,37 @@
     public partial class GetFullSqlParserTestObjContainerWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity;
+        public virtual SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO SqlParserTestObjContainerIdentity
+        {
+            get
+            {
+                return this.sqlParserTestObjContainerIdentity;
+            }
+            set
+            {
+                this.sqlParserTestObjContainerIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -119,13 +143,37 @@
     public partial class GetSimpleSqlParserTestObjContainerWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity;
+        public virtual SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO SqlParserTestObjContainerIdentity
+        {
+            get
+            {
+                return this.sqlParserTestObjContainerIdentity;
+            }
+            set
+            {
+                this.sqlParserTestObjContainerIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -133,17 +181,53 @@
     public partial class GetSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity;
+        public virtual SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO SqlParserTestObjContainerIdentity
+        {
+            get
+            {
+                return this.sqlParserTestObjContainerIdentity;
+            }
+            set
+            {
+                this.sqlParserTestObjContainerIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -151,12 +235,36 @@
     public partial class GetSqlParserTestObjContainerPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity;
+        public virtual SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO SqlParserTestObjContainerIdentity
+        {
+            get
+            {
+                return this.sqlParserTestObjContainerIdentity;
+            }
+            set
+            {
+                this.sqlParserTestObjContainerIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
 }

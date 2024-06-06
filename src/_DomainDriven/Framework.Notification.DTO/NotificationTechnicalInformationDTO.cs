@@ -6,13 +6,13 @@ namespace Framework.Notification.DTO;
 public class NotificationTechnicalInformationDTO
 {
     [DataMember]
-    public string MessageTemplateCode;
+    public string MessageTemplateCode { get; set; }
 
     [DataMember]
-    public string ContextObjectType;
+    public string ContextObjectType { get; set; }
 
     [DataMember]
-    public Guid? ContextObjectId;
+    public Guid? ContextObjectId { get; set; }
 
     public NotificationTechnicalInformationDTO()
     {

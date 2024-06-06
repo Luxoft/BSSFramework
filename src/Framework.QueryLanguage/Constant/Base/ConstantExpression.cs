@@ -12,7 +12,7 @@ public abstract class ConstantExpression : Expression
 
     }
 
-
+    [IgnoreDataMember]
     public abstract object UntypedValue { get; }
 
     //public abstract Type ValueType { get; }
@@ -32,6 +32,7 @@ public class NullConstantExpression : ConstantExpression
 
     }
 
+    [IgnoreDataMember]
     public override object UntypedValue
     {
         get { return null; }
@@ -70,6 +71,7 @@ public abstract class ConstantExpression<TValue> : ConstantExpression
     [DataMember]
     public TValue Value { get; private set; }
 
+    [IgnoreDataMember]
     public override object UntypedValue
     {
         get { return this.Value; }

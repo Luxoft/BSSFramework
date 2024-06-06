@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestPerformanceObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO GetFullTestPerformanceObjectWithRevision(GetFullTestPerformanceObjectWithRevisionAutoRequest getFullTestPerformanceObjectWithRevisionAutoRequest)
         {
-            long revision = getFullTestPerformanceObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getFullTestPerformanceObjectWithRevisionAutoRequest.testPerformanceObjectIdentity;
+            long revision = getFullTestPerformanceObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getFullTestPerformanceObjectWithRevisionAutoRequest.TestPerformanceObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestPerformanceObjectWithRevisionInternal(testPerformanceObjectIdentity, revision, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestPerformanceObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO GetRichTestPerformanceObjectWithRevision(GetRichTestPerformanceObjectWithRevisionAutoRequest getRichTestPerformanceObjectWithRevisionAutoRequest)
         {
-            long revision = getRichTestPerformanceObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getRichTestPerformanceObjectWithRevisionAutoRequest.testPerformanceObjectIdentity;
+            long revision = getRichTestPerformanceObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getRichTestPerformanceObjectWithRevisionAutoRequest.TestPerformanceObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestPerformanceObjectWithRevisionInternal(testPerformanceObjectIdentity, revision, evaluateData));
         }
         
@@ -53,8 +53,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestPerformanceObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO GetSimpleTestPerformanceObjectWithRevision(GetSimpleTestPerformanceObjectWithRevisionAutoRequest getSimpleTestPerformanceObjectWithRevisionAutoRequest)
         {
-            long revision = getSimpleTestPerformanceObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getSimpleTestPerformanceObjectWithRevisionAutoRequest.testPerformanceObjectIdentity;
+            long revision = getSimpleTestPerformanceObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getSimpleTestPerformanceObjectWithRevisionAutoRequest.TestPerformanceObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestPerformanceObjectWithRevisionInternal(testPerformanceObjectIdentity, revision, evaluateData));
         }
         
@@ -72,9 +72,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestPerformanceObjectPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestPerformanceObjectPropertyRevisionByDateRange(GetTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest getTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest.testPerformanceObjectIdentity;
+            Framework.Core.Period? period = getTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest.TestPerformanceObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestPerformanceObjectPropertyRevisionByDateRangeInternal(testPerformanceObjectIdentity, propertyName, period, evaluateData));
         }
         
@@ -91,8 +91,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestPerformanceObjectPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestPerformanceObjectPropertyRevisions(GetTestPerformanceObjectPropertyRevisionsAutoRequest getTestPerformanceObjectPropertyRevisionsAutoRequest)
         {
-            string propertyName = getTestPerformanceObjectPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getTestPerformanceObjectPropertyRevisionsAutoRequest.testPerformanceObjectIdentity;
+            string propertyName = getTestPerformanceObjectPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getTestPerformanceObjectPropertyRevisionsAutoRequest.TestPerformanceObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestPerformanceObjectPropertyRevisionsInternal(testPerformanceObjectIdentity, propertyName, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestPerformanceObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPerformanceObjectVisualDTO GetVisualTestPerformanceObjectWithRevision(GetVisualTestPerformanceObjectWithRevisionAutoRequest getVisualTestPerformanceObjectWithRevisionAutoRequest)
         {
-            long revision = getVisualTestPerformanceObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getVisualTestPerformanceObjectWithRevisionAutoRequest.testPerformanceObjectIdentity;
+            long revision = getVisualTestPerformanceObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity = getVisualTestPerformanceObjectWithRevisionAutoRequest.TestPerformanceObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestPerformanceObjectWithRevisionInternal(testPerformanceObjectIdentity, revision, evaluateData));
         }
         
@@ -143,13 +143,37 @@
     public partial class GetFullTestPerformanceObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO TestPerformanceObjectIdentity
+        {
+            get
+            {
+                return this.testPerformanceObjectIdentity;
+            }
+            set
+            {
+                this.testPerformanceObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -157,13 +181,37 @@
     public partial class GetRichTestPerformanceObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO TestPerformanceObjectIdentity
+        {
+            get
+            {
+                return this.testPerformanceObjectIdentity;
+            }
+            set
+            {
+                this.testPerformanceObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -171,13 +219,37 @@
     public partial class GetSimpleTestPerformanceObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO TestPerformanceObjectIdentity
+        {
+            get
+            {
+                return this.testPerformanceObjectIdentity;
+            }
+            set
+            {
+                this.testPerformanceObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -185,17 +257,53 @@
     public partial class GetTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO TestPerformanceObjectIdentity
+        {
+            get
+            {
+                return this.testPerformanceObjectIdentity;
+            }
+            set
+            {
+                this.testPerformanceObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetTestPerformanceObjectPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO TestPerformanceObjectIdentity
+        {
+            get
+            {
+                return this.testPerformanceObjectIdentity;
+            }
+            set
+            {
+                this.testPerformanceObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualTestPerformanceObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO TestPerformanceObjectIdentity
+        {
+            get
+            {
+                return this.testPerformanceObjectIdentity;
+            }
+            set
+            {
+                this.testPerformanceObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

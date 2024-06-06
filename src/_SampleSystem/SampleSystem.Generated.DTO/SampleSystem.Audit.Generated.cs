@@ -20,8 +20,7 @@ namespace SampleSystem.Generated.DTO
     public class SampleSystemPropertyRevisionDTO<TValue> : SampleSystemPropertyRevisionDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public TValue Value;
+        private TValue value;
         
         public SampleSystemPropertyRevisionDTO(Framework.DomainDriven.DAL.Revisions.RevisionInfoBase info) : 
                 base(info)
@@ -30,6 +29,19 @@ namespace SampleSystem.Generated.DTO
         
         public SampleSystemPropertyRevisionDTO()
         {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public virtual TValue Value
+        {
+            get
+            {
+                return this.value;
+            }
+            set
+            {
+                this.value = value;
+            }
         }
     }
     

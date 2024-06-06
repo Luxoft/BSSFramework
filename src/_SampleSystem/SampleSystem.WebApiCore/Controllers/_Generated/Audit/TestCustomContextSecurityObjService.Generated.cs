@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestCustomContextSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjFullDTO GetFullTestCustomContextSecurityObjWithRevision(GetFullTestCustomContextSecurityObjWithRevisionAutoRequest getFullTestCustomContextSecurityObjWithRevisionAutoRequest)
         {
-            long revision = getFullTestCustomContextSecurityObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getFullTestCustomContextSecurityObjWithRevisionAutoRequest.testCustomContextSecurityObjIdentity;
+            long revision = getFullTestCustomContextSecurityObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getFullTestCustomContextSecurityObjWithRevisionAutoRequest.TestCustomContextSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestCustomContextSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjRichDTO GetRichTestCustomContextSecurityObjWithRevision(GetRichTestCustomContextSecurityObjWithRevisionAutoRequest getRichTestCustomContextSecurityObjWithRevisionAutoRequest)
         {
-            long revision = getRichTestCustomContextSecurityObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getRichTestCustomContextSecurityObjWithRevisionAutoRequest.testCustomContextSecurityObjIdentity;
+            long revision = getRichTestCustomContextSecurityObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getRichTestCustomContextSecurityObjWithRevisionAutoRequest.TestCustomContextSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
         }
         
@@ -53,8 +53,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestCustomContextSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjSimpleDTO GetSimpleTestCustomContextSecurityObjWithRevision(GetSimpleTestCustomContextSecurityObjWithRevisionAutoRequest getSimpleTestCustomContextSecurityObjWithRevisionAutoRequest)
         {
-            long revision = getSimpleTestCustomContextSecurityObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getSimpleTestCustomContextSecurityObjWithRevisionAutoRequest.testCustomContextSecurityObjIdentity;
+            long revision = getSimpleTestCustomContextSecurityObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getSimpleTestCustomContextSecurityObjWithRevisionAutoRequest.TestCustomContextSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
         }
         
@@ -72,9 +72,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestCustomContextSecurityObjPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestCustomContextSecurityObjPropertyRevisionByDateRange(GetTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest.testCustomContextSecurityObjIdentity;
+            Framework.Core.Period? period = getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest.TestCustomContextSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjPropertyRevisionByDateRangeInternal(testCustomContextSecurityObjIdentity, propertyName, period, evaluateData));
         }
         
@@ -91,8 +91,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestCustomContextSecurityObjPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestCustomContextSecurityObjPropertyRevisions(GetTestCustomContextSecurityObjPropertyRevisionsAutoRequest getTestCustomContextSecurityObjPropertyRevisionsAutoRequest)
         {
-            string propertyName = getTestCustomContextSecurityObjPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getTestCustomContextSecurityObjPropertyRevisionsAutoRequest.testCustomContextSecurityObjIdentity;
+            string propertyName = getTestCustomContextSecurityObjPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getTestCustomContextSecurityObjPropertyRevisionsAutoRequest.TestCustomContextSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjPropertyRevisionsInternal(testCustomContextSecurityObjIdentity, propertyName, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestCustomContextSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO GetVisualTestCustomContextSecurityObjWithRevision(GetVisualTestCustomContextSecurityObjWithRevisionAutoRequest getVisualTestCustomContextSecurityObjWithRevisionAutoRequest)
         {
-            long revision = getVisualTestCustomContextSecurityObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getVisualTestCustomContextSecurityObjWithRevisionAutoRequest.testCustomContextSecurityObjIdentity;
+            long revision = getVisualTestCustomContextSecurityObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getVisualTestCustomContextSecurityObjWithRevisionAutoRequest.TestCustomContextSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
         }
         
@@ -143,13 +143,37 @@
     public partial class GetFullTestCustomContextSecurityObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO TestCustomContextSecurityObjIdentity
+        {
+            get
+            {
+                return this.testCustomContextSecurityObjIdentity;
+            }
+            set
+            {
+                this.testCustomContextSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -157,13 +181,37 @@
     public partial class GetRichTestCustomContextSecurityObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO TestCustomContextSecurityObjIdentity
+        {
+            get
+            {
+                return this.testCustomContextSecurityObjIdentity;
+            }
+            set
+            {
+                this.testCustomContextSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -171,13 +219,37 @@
     public partial class GetSimpleTestCustomContextSecurityObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO TestCustomContextSecurityObjIdentity
+        {
+            get
+            {
+                return this.testCustomContextSecurityObjIdentity;
+            }
+            set
+            {
+                this.testCustomContextSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -185,17 +257,53 @@
     public partial class GetTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO TestCustomContextSecurityObjIdentity
+        {
+            get
+            {
+                return this.testCustomContextSecurityObjIdentity;
+            }
+            set
+            {
+                this.testCustomContextSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetTestCustomContextSecurityObjPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO TestCustomContextSecurityObjIdentity
+        {
+            get
+            {
+                return this.testCustomContextSecurityObjIdentity;
+            }
+            set
+            {
+                this.testCustomContextSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualTestCustomContextSecurityObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO TestCustomContextSecurityObjIdentity
+        {
+            get
+            {
+                return this.testCustomContextSecurityObjIdentity;
+            }
+            set
+            {
+                this.testCustomContextSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

@@ -6,26 +6,25 @@ namespace Framework.Notification.DTO;
 public class NotificationEventDTO
 {
     [DataMember]
-    public IList<NotificationTargetDTO> Targets;
+    public IList<NotificationTargetDTO> Targets { get; set; }
 
     [DataMember]
-    public IList<NotificationAttachmentDTO> Attachments;
+    public IList<NotificationAttachmentDTO> Attachments { get; set; }
 
     [DataMember]
-    public string From;
+    public string From { get; set; }
 
     [DataMember]
-    public string FromName;
+    public string FromName { get; set; }
 
     [DataMember]
-    public string Subject;
+    public string Subject { get; set; }
 
     [DataMember]
-    public NotificationMessage Message;
-
+    public NotificationMessage Message { get; set; }
 
     [DataMember]
-    public NotificationTechnicalInformationDTO TechnicalInformation;
+    public NotificationTechnicalInformationDTO TechnicalInformation { get; set; }
 
     public NotificationEventDTO()
     {

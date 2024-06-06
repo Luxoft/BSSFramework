@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+using System.Runtime.Serialization;
 
 using Framework.CodeDom;
 using Framework.DomainDriven.Generation.Domain;
@@ -48,6 +49,10 @@ public class DefaultBasePersistentDTOFileFactory<TConfiguration> : MainDTOFileFa
                                      new CodeValueEqualityOperatorExpression(
                                                                              this.Configuration.Environment.GetIdentityType().ToTypeReference().ToDefaultValueExpression(),
                                                                              this.Configuration.GetIdentityPropertyCodeExpression()).ToMethodReturnStatement()
+                             },
+                             CustomAttributes =
+                             {
+                                 new CodeAttributeDeclaration(new CodeTypeReference(typeof(IgnoreDataMemberAttribute))),
                              }
                      };
 

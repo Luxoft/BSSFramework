@@ -59,8 +59,8 @@ public class BusinessUnitTests : TestBase
         // Act
         var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
                                                                         {
-                                                                                odataQueryString = string.Empty,
-                                                                                securityRuleCode = SampleSystemBusinessUnitSecurityRuleCode.EmployeeEdit
+                                                                                OdataQueryString = string.Empty,
+                                                                                SecurityRuleCode = SampleSystemBusinessUnitSecurityRuleCode.EmployeeEdit
                                                                         }));
 
         // Assert
@@ -80,8 +80,8 @@ public class BusinessUnitTests : TestBase
         // Act
         var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
                                                                         {
-                                                                                odataQueryString = "$filter=Name eq 'test'",
-                                                                                securityRuleCode = SampleSystemBusinessUnitSecurityRuleCode.EmployeeEdit
+                                                                                OdataQueryString = "$filter=Name eq 'test'",
+                                                                                SecurityRuleCode = SampleSystemBusinessUnitSecurityRuleCode.EmployeeEdit
                                                                         }));
 
         // Assert

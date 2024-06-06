@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+using System.Runtime.Serialization;
 
 using Framework.CodeDom;
 using Framework.Core;
@@ -249,7 +250,8 @@ public static class BaseCodeDomHelper
                        GetStatements =
                        {
                                identityRef.ToObjectCreateExpression(fileFactory.Configuration.GetIdentityPropertyCodeExpression()).ToMethodReturnStatement()
-                       }
+                       },
+                       CustomAttributes = { new CodeAttributeDeclaration(typeof(IgnoreDataMemberAttribute).ToTypeReference()) } 
                };
     }
 

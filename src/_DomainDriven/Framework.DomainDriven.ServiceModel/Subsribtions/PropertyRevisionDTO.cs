@@ -6,10 +6,13 @@ namespace Framework.DomainDriven.ServiceModel.Subscriptions;
 [DataContract]
 public class PropertyRevisionDTOBase
 {
-    [DataMember] public AuditRevisionType RevisionType;
-    [DataMember] public string Author;
-    [DataMember] public DateTime Date;
-    [DataMember] public long RevisionNumber;
+    [DataMember] public AuditRevisionType RevisionType { get; set; }
+
+    [DataMember] public string Author { get; set; }
+
+    [DataMember] public DateTime Date { get; set; }
+
+    [DataMember] public long RevisionNumber { get; set; }
 
     public PropertyRevisionDTOBase(RevisionInfoBase source)
     {
@@ -29,9 +32,9 @@ public class PropertyRevisionDTOBase
 public class PropertyRevisionDTO<TIdent> : PropertyRevisionDTOBase
 {
     [DataMember]
-    public string Value;
+    public string Value { get; set; }
 
-    public PropertyRevisionDTO() : base()
+    public PropertyRevisionDTO() 
     {
 
     }
@@ -47,7 +50,7 @@ public class PropertyRevisionDTO<TIdent> : PropertyRevisionDTOBase
 public class PropertyRevisionDTO<TValue, TIdent> : PropertyRevisionDTOBase
 {
     [DataMember]
-    public TValue Value;
+    public TValue Value { get; set; }
 
     public PropertyRevisionDTO()
             : base()

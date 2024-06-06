@@ -7,9 +7,10 @@ namespace Framework.DomainDriven.ServiceModel.Subscriptions;
 public class DomainObjectRevisionDTO<TIdent>
 {
     [DataMember]
-    public TIdent Identity;
+    public TIdent Identity { get; set; }
+
     [DataMember]
-    public IEnumerable<DomainObjectRevisionInfoDTO<TIdent>> RevisionInfos;
+    public IEnumerable<DomainObjectRevisionInfoDTO<TIdent>> RevisionInfos { get; set; }
 
     public DomainObjectRevisionDTO()
     {

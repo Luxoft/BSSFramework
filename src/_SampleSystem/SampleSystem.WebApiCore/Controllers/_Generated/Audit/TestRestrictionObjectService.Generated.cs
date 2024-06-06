@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestRestrictionObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO GetFullTestRestrictionObjectWithRevision(GetFullTestRestrictionObjectWithRevisionAutoRequest getFullTestRestrictionObjectWithRevisionAutoRequest)
         {
-            long revision = getFullTestRestrictionObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity = getFullTestRestrictionObjectWithRevisionAutoRequest.testRestrictionObjectIdentity;
+            long revision = getFullTestRestrictionObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity = getFullTestRestrictionObjectWithRevisionAutoRequest.TestRestrictionObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestRestrictionObjectWithRevisionInternal(testRestrictionObjectIdentity, revision, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestRestrictionObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO GetRichTestRestrictionObjectWithRevision(GetRichTestRestrictionObjectWithRevisionAutoRequest getRichTestRestrictionObjectWithRevisionAutoRequest)
         {
-            long revision = getRichTestRestrictionObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity = getRichTestRestrictionObjectWithRevisionAutoRequest.testRestrictionObjectIdentity;
+            long revision = getRichTestRestrictionObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity = getRichTestRestrictionObjectWithRevisionAutoRequest.TestRestrictionObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestRestrictionObjectWithRevisionInternal(testRestrictionObjectIdentity, revision, evaluateData));
         }
         
@@ -53,8 +53,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestRestrictionObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO GetSimpleTestRestrictionObjectWithRevision(GetSimpleTestRestrictionObjectWithRevisionAutoRequest getSimpleTestRestrictionObjectWithRevisionAutoRequest)
         {
-            long revision = getSimpleTestRestrictionObjectWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity = getSimpleTestRestrictionObjectWithRevisionAutoRequest.testRestrictionObjectIdentity;
+            long revision = getSimpleTestRestrictionObjectWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity = getSimpleTestRestrictionObjectWithRevisionAutoRequest.TestRestrictionObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestRestrictionObjectWithRevisionInternal(testRestrictionObjectIdentity, revision, evaluateData));
         }
         
@@ -72,9 +72,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestRestrictionObjectPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestRestrictionObjectPropertyRevisionByDateRange(GetTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest getTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity = getTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest.testRestrictionObjectIdentity;
+            Framework.Core.Period? period = getTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity = getTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest.TestRestrictionObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestRestrictionObjectPropertyRevisionByDateRangeInternal(testRestrictionObjectIdentity, propertyName, period, evaluateData));
         }
         
@@ -91,8 +91,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestRestrictionObjectPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestRestrictionObjectPropertyRevisions(GetTestRestrictionObjectPropertyRevisionsAutoRequest getTestRestrictionObjectPropertyRevisionsAutoRequest)
         {
-            string propertyName = getTestRestrictionObjectPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity = getTestRestrictionObjectPropertyRevisionsAutoRequest.testRestrictionObjectIdentity;
+            string propertyName = getTestRestrictionObjectPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity = getTestRestrictionObjectPropertyRevisionsAutoRequest.TestRestrictionObjectIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestRestrictionObjectPropertyRevisionsInternal(testRestrictionObjectIdentity, propertyName, evaluateData));
         }
         
@@ -124,13 +124,37 @@
     public partial class GetFullTestRestrictionObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO TestRestrictionObjectIdentity
+        {
+            get
+            {
+                return this.testRestrictionObjectIdentity;
+            }
+            set
+            {
+                this.testRestrictionObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -138,13 +162,37 @@
     public partial class GetRichTestRestrictionObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO TestRestrictionObjectIdentity
+        {
+            get
+            {
+                return this.testRestrictionObjectIdentity;
+            }
+            set
+            {
+                this.testRestrictionObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -152,13 +200,37 @@
     public partial class GetSimpleTestRestrictionObjectWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO TestRestrictionObjectIdentity
+        {
+            get
+            {
+                return this.testRestrictionObjectIdentity;
+            }
+            set
+            {
+                this.testRestrictionObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -166,17 +238,53 @@
     public partial class GetTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO TestRestrictionObjectIdentity
+        {
+            get
+            {
+                return this.testRestrictionObjectIdentity;
+            }
+            set
+            {
+                this.testRestrictionObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -184,12 +292,36 @@
     public partial class GetTestRestrictionObjectPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO TestRestrictionObjectIdentity
+        {
+            get
+            {
+                return this.testRestrictionObjectIdentity;
+            }
+            set
+            {
+                this.testRestrictionObjectIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
 }

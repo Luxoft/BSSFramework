@@ -15,8 +15,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestRootSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestRootSecurityObjFullDTO GetFullTestRootSecurityObjWithRevision(GetFullTestRootSecurityObjWithRevisionAutoRequest getFullTestRootSecurityObjWithRevisionAutoRequest)
         {
-            long revision = getFullTestRootSecurityObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getFullTestRootSecurityObjWithRevisionAutoRequest.testRootSecurityObjIdentity;
+            long revision = getFullTestRootSecurityObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getFullTestRootSecurityObjWithRevisionAutoRequest.TestRootSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestRootSecurityObjWithRevisionInternal(testRootSecurityObjIdentity, revision, evaluateData));
         }
         
@@ -34,8 +34,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestRootSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestRootSecurityObjRichDTO GetRichTestRootSecurityObjWithRevision(GetRichTestRootSecurityObjWithRevisionAutoRequest getRichTestRootSecurityObjWithRevisionAutoRequest)
         {
-            long revision = getRichTestRootSecurityObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getRichTestRootSecurityObjWithRevisionAutoRequest.testRootSecurityObjIdentity;
+            long revision = getRichTestRootSecurityObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getRichTestRootSecurityObjWithRevisionAutoRequest.TestRootSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestRootSecurityObjWithRevisionInternal(testRootSecurityObjIdentity, revision, evaluateData));
         }
         
@@ -53,8 +53,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestRootSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO GetSimpleTestRootSecurityObjWithRevision(GetSimpleTestRootSecurityObjWithRevisionAutoRequest getSimpleTestRootSecurityObjWithRevisionAutoRequest)
         {
-            long revision = getSimpleTestRootSecurityObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getSimpleTestRootSecurityObjWithRevisionAutoRequest.testRootSecurityObjIdentity;
+            long revision = getSimpleTestRootSecurityObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getSimpleTestRootSecurityObjWithRevisionAutoRequest.TestRootSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestRootSecurityObjWithRevisionInternal(testRootSecurityObjIdentity, revision, evaluateData));
         }
         
@@ -72,9 +72,9 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestRootSecurityObjPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestRootSecurityObjPropertyRevisionByDateRange(GetTestRootSecurityObjPropertyRevisionByDateRangeAutoRequest getTestRootSecurityObjPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getTestRootSecurityObjPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getTestRootSecurityObjPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getTestRootSecurityObjPropertyRevisionByDateRangeAutoRequest.testRootSecurityObjIdentity;
+            Framework.Core.Period? period = getTestRootSecurityObjPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getTestRootSecurityObjPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getTestRootSecurityObjPropertyRevisionByDateRangeAutoRequest.TestRootSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestRootSecurityObjPropertyRevisionByDateRangeInternal(testRootSecurityObjIdentity, propertyName, period, evaluateData));
         }
         
@@ -91,8 +91,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestRootSecurityObjPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestRootSecurityObjPropertyRevisions(GetTestRootSecurityObjPropertyRevisionsAutoRequest getTestRootSecurityObjPropertyRevisionsAutoRequest)
         {
-            string propertyName = getTestRootSecurityObjPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getTestRootSecurityObjPropertyRevisionsAutoRequest.testRootSecurityObjIdentity;
+            string propertyName = getTestRootSecurityObjPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getTestRootSecurityObjPropertyRevisionsAutoRequest.TestRootSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestRootSecurityObjPropertyRevisionsInternal(testRootSecurityObjIdentity, propertyName, evaluateData));
         }
         
@@ -125,8 +125,8 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestRootSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestRootSecurityObjVisualDTO GetVisualTestRootSecurityObjWithRevision(GetVisualTestRootSecurityObjWithRevisionAutoRequest getVisualTestRootSecurityObjWithRevisionAutoRequest)
         {
-            long revision = getVisualTestRootSecurityObjWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getVisualTestRootSecurityObjWithRevisionAutoRequest.testRootSecurityObjIdentity;
+            long revision = getVisualTestRootSecurityObjWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity = getVisualTestRootSecurityObjWithRevisionAutoRequest.TestRootSecurityObjIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestRootSecurityObjWithRevisionInternal(testRootSecurityObjIdentity, revision, evaluateData));
         }
         
@@ -143,13 +143,37 @@
     public partial class GetFullTestRootSecurityObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO TestRootSecurityObjIdentity
+        {
+            get
+            {
+                return this.testRootSecurityObjIdentity;
+            }
+            set
+            {
+                this.testRootSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -157,13 +181,37 @@
     public partial class GetRichTestRootSecurityObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO TestRootSecurityObjIdentity
+        {
+            get
+            {
+                return this.testRootSecurityObjIdentity;
+            }
+            set
+            {
+                this.testRootSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -171,13 +219,37 @@
     public partial class GetSimpleTestRootSecurityObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO TestRootSecurityObjIdentity
+        {
+            get
+            {
+                return this.testRootSecurityObjIdentity;
+            }
+            set
+            {
+                this.testRootSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -185,17 +257,53 @@
     public partial class GetTestRootSecurityObjPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO TestRootSecurityObjIdentity
+        {
+            get
+            {
+                return this.testRootSecurityObjIdentity;
+            }
+            set
+            {
+                this.testRootSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -203,13 +311,37 @@
     public partial class GetTestRootSecurityObjPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO TestRootSecurityObjIdentity
+        {
+            get
+            {
+                return this.testRootSecurityObjIdentity;
+            }
+            set
+            {
+                this.testRootSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -217,12 +349,36 @@
     public partial class GetVisualTestRootSecurityObjWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentity;
+        public virtual SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO TestRootSecurityObjIdentity
+        {
+            get
+            {
+                return this.testRootSecurityObjIdentity;
+            }
+            set
+            {
+                this.testRootSecurityObjIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

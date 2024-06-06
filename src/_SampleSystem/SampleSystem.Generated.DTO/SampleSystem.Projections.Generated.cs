@@ -16,8 +16,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestManualEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Login;
+        private string _login;
         
         public TestManualEmployeeProjectionDTO()
         {
@@ -29,11 +28,25 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestManualEmployeeProjection(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.EmployeeIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.EmployeeIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login
+        {
+            get
+            {
+                return this._login;
+            }
+            set
+            {
+                this._login = value;
             }
         }
     }
@@ -53,6 +66,7 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapBusinessUnitIdentity(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.BusinessUnitIdentityDTO Identity
         {
             get
@@ -67,17 +81,13 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitProgramClassProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsNewBusiness;
+        private bool _isNewBusiness;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string VirtualName;
+        private string _virtualName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string VirtualValue;
+        private string _virtualValue;
         
         public BusinessUnitProgramClassProjectionDTO()
         {
@@ -89,11 +99,64 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapBusinessUnitProgramClass(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.BusinessUnitIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.BusinessUnitIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsNewBusiness
+        {
+            get
+            {
+                return this._isNewBusiness;
+            }
+            set
+            {
+                this._isNewBusiness = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VirtualName
+        {
+            get
+            {
+                return this._virtualName;
+            }
+            set
+            {
+                this._virtualName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VirtualValue
+        {
+            get
+            {
+                return this._virtualValue;
+            }
+            set
+            {
+                this._virtualValue = value;
             }
         }
     }
@@ -103,26 +166,19 @@ namespace SampleSystem.Generated.DTO
     public partial class CustomCompanyLegalEntityProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AribaStatusDescription;
+        private string _aribaStatusDescription;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.AribaStatusType AribaStatusType;
+        private SampleSystem.Domain.AribaStatusType _aribaStatusType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO BaseObj;
+        private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO _baseObj;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Maybe<string> Code;
+        private Framework.Core.Maybe<string> _code;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO CurrentObj;
+        private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO _currentObj;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameEnglish;
+        private string _nameEnglish;
         
         public CustomCompanyLegalEntityProjectionDTO()
         {
@@ -134,11 +190,103 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapCustomCompanyLegalEntity(domainObject, this);
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AribaStatusDescription
+        {
+            get
+            {
+                return this._aribaStatusDescription;
+            }
+            set
+            {
+                this._aribaStatusDescription = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.AribaStatusType AribaStatusType
+        {
+            get
+            {
+                return this._aribaStatusType;
+            }
+            set
+            {
+                this._aribaStatusType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO BaseObj
+        {
+            get
+            {
+                return this._baseObj;
+            }
+            set
+            {
+                this._baseObj = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Maybe<string> Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO CurrentObj
+        {
+            get
+            {
+                return this._currentObj;
+            }
+            set
+            {
+                this._currentObj = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameEnglish
+        {
+            get
+            {
+                return this._nameEnglish;
+            }
+            set
+            {
+                this._nameEnglish = value;
             }
         }
     }
@@ -148,11 +296,9 @@ namespace SampleSystem.Generated.DTO
     public partial class CustomTestObjForNestedProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime PeriodStartDateXXX;
+        private System.DateTime _periodStartDateXXX;
         
         public CustomTestObjForNestedProjectionDTO()
         {
@@ -164,11 +310,38 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapCustomTestObjForNested(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime PeriodStartDateXXX
+        {
+            get
+            {
+                return this._periodStartDateXXX;
+            }
+            set
+            {
+                this._periodStartDateXXX = value;
             }
         }
     }
@@ -178,11 +351,9 @@ namespace SampleSystem.Generated.DTO
     public partial class HerBusinessUnitProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HerBusinessUnitProjectionDTO Parent;
+        private SampleSystem.Generated.DTO.HerBusinessUnitProjectionDTO _parent;
         
         public HerBusinessUnitProjectionDTO()
         {
@@ -194,11 +365,38 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapHerBusinessUnit(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.BusinessUnitIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.BusinessUnitIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HerBusinessUnitProjectionDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
             }
         }
     }
@@ -208,8 +406,7 @@ namespace SampleSystem.Generated.DTO
     public partial class MiniBusinessUnitEmployeeRoleProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO Employee;
+        private SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO _employee;
         
         public MiniBusinessUnitEmployeeRoleProjectionDTO()
         {
@@ -221,6 +418,20 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapMiniBusinessUnitEmployeeRole(domainObject, this);
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO Identity
         {
             get
@@ -235,29 +446,21 @@ namespace SampleSystem.Generated.DTO
     public partial class TestBusinessUnitProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[][] CalcMatrix;
+        private string[][] _calcMatrix;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestBusinessUnitTypeProjectionDTO CalcProjectionProp;
+        private SampleSystem.Generated.DTO.TestBusinessUnitTypeProjectionDTO _calcProjectionProp;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CalcProp;
+        private string _calcProp;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Employees;
+        private string _employees;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string HerBusinessUnit_Full;
+        private string _herBusinessUnit_Full;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ParentPeriodStartDate;
+        private System.DateTime? _parentPeriodStartDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? PeriodEndDate;
+        private System.DateTime? _periodEndDate;
         
         public TestBusinessUnitProjectionDTO()
         {
@@ -269,11 +472,116 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestBusinessUnit(domainObject, this);
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[][] CalcMatrix
+        {
+            get
+            {
+                return this._calcMatrix;
+            }
+            set
+            {
+                this._calcMatrix = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestBusinessUnitTypeProjectionDTO CalcProjectionProp
+        {
+            get
+            {
+                return this._calcProjectionProp;
+            }
+            set
+            {
+                this._calcProjectionProp = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CalcProp
+        {
+            get
+            {
+                return this._calcProp;
+            }
+            set
+            {
+                this._calcProp = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Employees
+        {
+            get
+            {
+                return this._employees;
+            }
+            set
+            {
+                this._employees = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string HerBusinessUnit_Full
+        {
+            get
+            {
+                return this._herBusinessUnit_Full;
+            }
+            set
+            {
+                this._herBusinessUnit_Full = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.BusinessUnitIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.BusinessUnitIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ParentPeriodStartDate
+        {
+            get
+            {
+                return this._parentPeriodStartDate;
+            }
+            set
+            {
+                this._parentPeriodStartDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? PeriodEndDate
+        {
+            get
+            {
+                return this._periodEndDate;
+            }
+            set
+            {
+                this._periodEndDate = value;
             }
         }
     }
@@ -283,8 +591,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestBusinessUnitTypeProjectionDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
         public TestBusinessUnitTypeProjectionDTO()
         {
@@ -295,6 +602,19 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestBusinessUnitType(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
@@ -302,8 +622,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCustomContextSecurityObjProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
         public TestCustomContextSecurityObjProjectionDTO()
         {
@@ -315,11 +634,25 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestCustomContextSecurityObjProjection(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
             }
         }
     }
@@ -329,14 +662,11 @@ namespace SampleSystem.Generated.DTO
     public partial class TestDepartmentProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestLocationProjectionDTO Location;
+        private SampleSystem.Generated.DTO.TestLocationProjectionDTO _location;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] LocationBinaryData;
+        private byte[] _locationBinaryData;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
         public TestDepartmentProjectionDTO()
         {
@@ -348,11 +678,51 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestDepartment(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.HRDepartmentIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.HRDepartmentIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestLocationProjectionDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] LocationBinaryData
+        {
+            get
+            {
+                return this._locationBinaryData;
+            }
+            set
+            {
+                this._locationBinaryData = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
             }
         }
     }
@@ -362,35 +732,25 @@ namespace SampleSystem.Generated.DTO
     public partial class TestEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? BuEndDate;
+        private System.DateTime? _buEndDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitIdentityProjectionDTO CoreBusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitIdentityProjectionDTO _coreBusinessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CoreBusinessUnitName;
+        private string _coreBusinessUnitName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.VisualProjectProjectionDTO> CoreBusinessUnitProjects;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.VisualProjectProjectionDTO> _coreBusinessUnitProjects;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Maybe<string> Login;
+        private Framework.Core.Maybe<string> _login;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameEngFirstName;
+        private string _nameEngFirstName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Maybe<string> PositionName;
+        private Framework.Core.Maybe<string> _positionName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PpmNameNativeMiddleName;
+        private string _ppmNameNativeMiddleName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid? RoleId;
+        private System.Guid? _roleId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RoleName;
+        private string _roleName;
         
         public TestEmployeeProjectionDTO()
         {
@@ -402,11 +762,142 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestEmployee(domainObject, this);
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? BuEndDate
+        {
+            get
+            {
+                return this._buEndDate;
+            }
+            set
+            {
+                this._buEndDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitIdentityProjectionDTO CoreBusinessUnit
+        {
+            get
+            {
+                return this._coreBusinessUnit;
+            }
+            set
+            {
+                this._coreBusinessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CoreBusinessUnitName
+        {
+            get
+            {
+                return this._coreBusinessUnitName;
+            }
+            set
+            {
+                this._coreBusinessUnitName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.VisualProjectProjectionDTO> CoreBusinessUnitProjects
+        {
+            get
+            {
+                return this._coreBusinessUnitProjects;
+            }
+            set
+            {
+                this._coreBusinessUnitProjects = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.EmployeeIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.EmployeeIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Maybe<string> Login
+        {
+            get
+            {
+                return this._login;
+            }
+            set
+            {
+                this._login = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameEngFirstName
+        {
+            get
+            {
+                return this._nameEngFirstName;
+            }
+            set
+            {
+                this._nameEngFirstName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Maybe<string> PositionName
+        {
+            get
+            {
+                return this._positionName;
+            }
+            set
+            {
+                this._positionName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PpmNameNativeMiddleName
+        {
+            get
+            {
+                return this._ppmNameNativeMiddleName;
+            }
+            set
+            {
+                this._ppmNameNativeMiddleName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid? RoleId
+        {
+            get
+            {
+                return this._roleId;
+            }
+            set
+            {
+                this._roleId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RoleName
+        {
+            get
+            {
+                return this._roleName;
+            }
+            set
+            {
+                this._roleName = value;
             }
         }
     }
@@ -416,11 +907,9 @@ namespace SampleSystem.Generated.DTO
     public partial class TestIMRequestProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message;
+        private string _message;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestIMRequestDetailProjectionDTO OneToOneDetail;
+        private SampleSystem.Generated.DTO.TestIMRequestDetailProjectionDTO _oneToOneDetail;
         
         public TestIMRequestProjectionDTO()
         {
@@ -432,11 +921,38 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestIMRequest(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.IMRequestIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.IMRequestIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message
+        {
+            get
+            {
+                return this._message;
+            }
+            set
+            {
+                this._message = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestIMRequestDetailProjectionDTO OneToOneDetail
+        {
+            get
+            {
+                return this._oneToOneDetail;
+            }
+            set
+            {
+                this._oneToOneDetail = value;
             }
         }
     }
@@ -456,6 +972,7 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestIMRequestDetail(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO Identity
         {
             get
@@ -470,14 +987,11 @@ namespace SampleSystem.Generated.DTO
     public partial class TestLegacyEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Maybe<string> Login;
+        private Framework.Core.Maybe<string> _login;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid? RoleId;
+        private System.Guid? _roleId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RoleName;
+        private string _roleName;
         
         public TestLegacyEmployeeProjectionDTO()
         {
@@ -489,11 +1003,51 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestLegacyEmployee(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.EmployeeIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.EmployeeIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Maybe<string> Login
+        {
+            get
+            {
+                return this._login;
+            }
+            set
+            {
+                this._login = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid? RoleId
+        {
+            get
+            {
+                return this._roleId;
+            }
+            set
+            {
+                this._roleId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RoleName
+        {
+            get
+            {
+                return this._roleName;
+            }
+            set
+            {
+                this._roleName = value;
             }
         }
     }
@@ -503,8 +1057,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestLocationProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
         public TestLocationProjectionDTO()
         {
@@ -516,11 +1069,25 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestLocation(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.LocationIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.LocationIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
             }
         }
     }
@@ -530,23 +1097,17 @@ namespace SampleSystem.Generated.DTO
     public partial class TestLocationCollectionPropertiesProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid[] Child_Identities;
+        private System.Guid[] _child_Identities;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] Child_Periods;
+        private Framework.Core.Period[] _child_Periods;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> Children;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _children;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime[] Date_Intervals;
+        private System.DateTime[] _date_Intervals;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[] Security_Codes;
+        private string[] _security_Codes;
         
         public TestLocationCollectionPropertiesProjectionDTO()
         {
@@ -558,11 +1119,90 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestLocationCollectionProperties(domainObject, this);
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid[] Child_Identities
+        {
+            get
+            {
+                return this._child_Identities;
+            }
+            set
+            {
+                this._child_Identities = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period[] Child_Periods
+        {
+            get
+            {
+                return this._child_Periods;
+            }
+            set
+            {
+                this._child_Periods = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> Children
+        {
+            get
+            {
+                return this._children;
+            }
+            set
+            {
+                this._children = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime[] Date_Intervals
+        {
+            get
+            {
+                return this._date_Intervals;
+            }
+            set
+            {
+                this._date_Intervals = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.LocationIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.LocationIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[] Security_Codes
+        {
+            get
+            {
+                return this._security_Codes;
+            }
+            set
+            {
+                this._security_Codes = value;
             }
         }
     }
@@ -572,8 +1212,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
         public TestSecurityObjItemProjectionDTO()
         {
@@ -585,11 +1224,25 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapTestSecurityObjItemProjection(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
             }
         }
     }
@@ -599,17 +1252,13 @@ namespace SampleSystem.Generated.DTO
     public partial class UnpersitentContainerProjectionDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> Locations;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _locations;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] PeriodArray;
+        private Framework.Core.Period[] _periodArray;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO TestBU;
+        private SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO _testBU;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TestString;
+        private string _testString;
         
         public UnpersitentContainerProjectionDTO()
         {
@@ -620,6 +1269,58 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapUnpersitentContainer(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> Locations
+        {
+            get
+            {
+                return this._locations;
+            }
+            set
+            {
+                this._locations = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period[] PeriodArray
+        {
+            get
+            {
+                return this._periodArray;
+            }
+            set
+            {
+                this._periodArray = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO TestBU
+        {
+            get
+            {
+                return this._testBU;
+            }
+            set
+            {
+                this._testBU = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TestString
+        {
+            get
+            {
+                return this._testString;
+            }
+            set
+            {
+                this._testString = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.VisualEmployee), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
@@ -627,8 +1328,7 @@ namespace SampleSystem.Generated.DTO
     public partial class VisualEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameEngFirstName;
+        private string _nameEngFirstName;
         
         public VisualEmployeeProjectionDTO()
         {
@@ -640,11 +1340,25 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapVisualEmployee(domainObject, this);
         }
         
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.EmployeeIdentityDTO Identity
         {
             get
             {
                 return new SampleSystem.Generated.DTO.EmployeeIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameEngFirstName
+        {
+            get
+            {
+                return this._nameEngFirstName;
+            }
+            set
+            {
+                this._nameEngFirstName = value;
             }
         }
     }
@@ -654,8 +1368,7 @@ namespace SampleSystem.Generated.DTO
     public partial class VisualProjectProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.ProjectIdentityDTO>
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code;
+        private string _code;
         
         public VisualProjectProjectionDTO()
         {
@@ -667,6 +1380,20 @@ namespace SampleSystem.Generated.DTO
             mappingService.MapVisualProject(domainObject, this);
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
         public SampleSystem.Generated.DTO.ProjectIdentityDTO Identity
         {
             get

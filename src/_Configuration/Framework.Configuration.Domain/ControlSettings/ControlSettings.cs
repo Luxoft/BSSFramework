@@ -27,7 +27,6 @@ public class ControlSettings : BaseDirectory,
 
     protected ControlSettings()
     {
-
     }
 
     /// <summary>

@@ -44,13 +44,8 @@ namespace Framework.Configuration.BLL
         where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
     {
         
-        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, specificationEvaluator)
-        {
-        }
-        
-        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
+        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
+                base(context, securityProvider)
         {
         }
     }
@@ -64,6 +59,16 @@ namespace Framework.Configuration.BLL
         }
         
         Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory CodeFirstSubscriptionFactory
+        {
+            get;
+        }
+        
+        Framework.Configuration.BLL.IControlSettingsBLL ControlSettings
+        {
+            get;
+        }
+        
+        Framework.Configuration.BLL.IControlSettingsBLLFactory ControlSettingsFactory
         {
             get;
         }
@@ -174,6 +179,14 @@ namespace Framework.Configuration.BLL
     }
     
     public partial interface ICodeFirstSubscriptionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ICodeFirstSubscriptionBLL, Framework.Configuration.Domain.CodeFirstSubscription>
+    {
+    }
+    
+    public partial interface IControlSettingsBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.ControlSettings, System.Guid>
+    {
+    }
+    
+    public partial interface IControlSettingsBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IControlSettingsBLL, Framework.Configuration.Domain.ControlSettings>
     {
     }
     

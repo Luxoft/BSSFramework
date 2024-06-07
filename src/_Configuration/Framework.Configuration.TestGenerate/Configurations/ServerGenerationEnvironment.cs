@@ -114,6 +114,10 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
             .Add<GenericNamedLock>(
                 tb =>
+                    tb.AddAttribute(new BLLRoleAttribute()))
+
+            .Add<ControlSettings>(
+                tb =>
                     tb.AddAttribute(new BLLRoleAttribute()));
 
     public static readonly ServerGenerationEnvironment Default = new ServerGenerationEnvironment();

@@ -15,7 +15,7 @@ public class AccessDeniedExceptionServiceTests
 
         // Act
         var result = service.GetAccessDeniedException(
-            new AccessResult.AccessDeniedResult { DomainObjectInfo = (employee, typeof(Employee)) });
+            AccessResult.AccessDeniedResult.Create(employee));
 
         // Assert
         result.Message.Should().Be($"You have no permissions to create object with type = '{nameof(Employee)}'");
@@ -30,7 +30,7 @@ public class AccessDeniedExceptionServiceTests
 
         // Act
         var result = service.GetAccessDeniedException(
-            new AccessResult.AccessDeniedResult { DomainObjectInfo = (employee, typeof(Employee)) });
+            AccessResult.AccessDeniedResult.Create(employee));
 
         // Assert
         result.Message.Should().Be($"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{employee.Id}')");
@@ -46,7 +46,7 @@ public class AccessDeniedExceptionServiceTests
 
         // Act
         var result = service.GetAccessDeniedException(
-            new AccessResult.AccessDeniedResult { DomainObjectInfo = (employee, typeof(Employee)), SecurityRule = securityRule });
+            AccessResult.AccessDeniedResult.Create(employee, securityRule));
 
         // Assert
         result.Message.Should().Be($"You have no permissions to create object with type = '{nameof(Employee)}' (securityRule = '{securityRule.Name}')");
@@ -62,7 +62,7 @@ public class AccessDeniedExceptionServiceTests
 
         // Act
         var result = service.GetAccessDeniedException(
-            new AccessResult.AccessDeniedResult { DomainObjectInfo = (employee, typeof(Employee)), SecurityRule = securityRule });
+            AccessResult.AccessDeniedResult.Create(employee, securityRule));
 
         // Assert
         result.Message.Should().Be($"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{employee.Id}', securityRule = '{securityRule.Name}')");

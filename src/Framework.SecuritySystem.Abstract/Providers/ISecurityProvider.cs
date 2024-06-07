@@ -24,7 +24,7 @@ namespace Framework.SecuritySystem
         {
             return this.HasAccess(domainObject)
                        ? AccessResult.AccessGrantedResult.Default
-                       : new AccessResult.AccessDeniedResult { DomainObjectInfo = (domainObject, typeof(TDomainObject)) };
+                       : AccessResult.AccessDeniedResult.Create(domainObject);
         }
 
         /// <summary>

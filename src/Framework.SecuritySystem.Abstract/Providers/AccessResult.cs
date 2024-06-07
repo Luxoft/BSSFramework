@@ -26,6 +26,9 @@ public abstract record AccessResult
         public override AccessResult And(AccessResult otherAccessResult) => this;
 
 
+        public static AccessDeniedResult Create<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule = null) =>
+            new() { DomainObjectInfo = (domainObject, typeof(TDomainObject)), SecurityRule = securityRule };
+
         public static readonly AccessDeniedResult Default = new();
     }
 

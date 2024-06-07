@@ -53,10 +53,7 @@ namespace Framework.SecuritySystem.Providers.Operation
             }
             else
             {
-                return new AccessResult.AccessDeniedResult
-                       {
-                           SecurityRule = this.securityRule, DomainObjectInfo = (domainObject, typeof(TDomainObject))
-                       };
+                return AccessResult.AccessDeniedResult.Create(domainObject, this.securityRule);
             }
         }
 

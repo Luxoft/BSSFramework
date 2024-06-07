@@ -32,10 +32,6 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
         var securityProviderParameter = this.GetSecurityProviderParameter(genericDomainObjectParameter);
         var securityProviderParameterRefExpr = securityProviderParameter.ToVariableReferenceExpression();
 
-        var specificationEvaluatorParameterTypeRef = typeof(ISpecificationEvaluator).ToTypeReference();
-        var specificationEvaluatorParameter = specificationEvaluatorParameterTypeRef.ToParameterDeclarationExpression("specificationEvaluator = null");
-        var specificationEvaluatorParameterArg = specificationEvaluatorParameterTypeRef.ToParameterDeclarationExpression("specificationEvaluator").ToVariableReferenceExpression();
-
         return new CodeTypeDeclaration
                {
                        TypeParameters =
@@ -59,14 +55,8 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
                                new CodeConstructor
                                {
                                        Attributes = MemberAttributes.Public,
-                                       Parameters = { contextParameter, specificationEvaluatorParameter },
-                                       BaseConstructorArgs = { contextParameterRefExpr, specificationEvaluatorParameterArg }
-                               },
-                               new CodeConstructor
-                               {
-                                       Attributes = MemberAttributes.Public,
-                                       Parameters = { contextParameter, securityProviderParameter, specificationEvaluatorParameter },
-                                       BaseConstructorArgs = { contextParameterRefExpr, securityProviderParameterRefExpr, specificationEvaluatorParameterArg }
+                                       Parameters = { contextParameter, securityProviderParameter },
+                                       BaseConstructorArgs = { contextParameterRefExpr, securityProviderParameterRefExpr }
                                }
                        }
                };

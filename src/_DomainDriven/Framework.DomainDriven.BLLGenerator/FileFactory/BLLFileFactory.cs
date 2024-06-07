@@ -45,11 +45,6 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
                                                Type = this.Configuration.BLLContextTypeReference,
                                                Name = "context"
                                        };
-
-                var specificationEvaluatorParameterTypeRef = typeof(ISpecificationEvaluator).ToTypeReference();
-                var specificationEvaluatorParameter = specificationEvaluatorParameterTypeRef.ToParameterDeclarationExpression("specificationEvaluator = null");
-                var specificationEvaluatorParameterArg = specificationEvaluatorParameterTypeRef.ToParameterDeclarationExpression("specificationEvaluator").ToVariableReferenceExpression();
-
                 var contextParameterExpr = contextParameter.ToVariableReferenceExpression();
 
                 var securityProviderParameterTypeRef = typeof(ISecurityProvider<>).ToTypeReference(this.DomainType.ToTypeReference());
@@ -61,14 +56,12 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
                                                            Parameters =
                                                            {
                                                                    contextParameter,
-                                                                   securityProviderParameter,
-                                                                   specificationEvaluatorParameter
+                                                                   securityProviderParameter
                                                            },
                                                            BaseConstructorArgs =
                                                            {
                                                                    contextParameterExpr,
-                                                                   securityProviderParameter.ToVariableReferenceExpression(),
-                                                                   specificationEvaluatorParameterArg
+                                                                   securityProviderParameter.ToVariableReferenceExpression()
                                                            }
                                                    };
 

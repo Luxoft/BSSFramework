@@ -44,13 +44,8 @@ namespace SampleSystem.BLL
         where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, specificationEvaluator)
-        {
-        }
-        
-        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
+        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
+                base(context, securityProvider)
         {
         }
     }

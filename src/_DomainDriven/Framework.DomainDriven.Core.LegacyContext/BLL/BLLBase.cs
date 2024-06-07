@@ -23,11 +23,11 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
 {
     private readonly IDAL<TDomainObject, TIdent> dal;
 
-    protected BLLBase(TBLLContext context, ISpecificationEvaluator specificationEvaluator = null)
+    protected BLLBase(TBLLContext context)
         : base(context)
     {
-        this.SpecificationEvaluator = specificationEvaluator;
         this.dal = this.Context.ServiceProvider.GetRequiredService<IDAL<TDomainObject, TIdent>>();
+        this.SpecificationEvaluator = this.Context.ServiceProvider.GetService<ISpecificationEvaluator>();
     }
 
     protected ISpecificationEvaluator SpecificationEvaluator { get; }

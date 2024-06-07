@@ -8,26 +8,19 @@ using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.Persistent;
 
-using nuSpec.Abstraction;
-
 #nullable enable
 
 namespace Framework.DomainDriven.BLL;
 
-public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent> :
-        BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>,
-        IDefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>, IBLLBaseContext
+public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>(TBLLContext context) :
+    BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>(context),
+    IDefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TDomainObject : class, TPersistentDomainObjectBase
+    where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>,
+    IBLLBaseContext
 {
     private const int MaxItemsInSql = 2000;
-
-    protected DefaultDomainBLLBase(TBLLContext context, ISpecificationEvaluator? specificationEvaluator = null)
-            : base(context, specificationEvaluator)
-    {
-    }
-
 
     public TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None) =>
             idCheckMode switch

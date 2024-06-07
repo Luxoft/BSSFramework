@@ -114,9 +114,8 @@ public class SequenceBllTests : TestBase
 
         public SequenceBllMock(
             AutoResetEvent resetEvent,
-            IConfigurationBLLContext context,
-            ISpecificationEvaluator specificationEvaluator = null)
-            : base(context, context.Logics.Sequence.SecurityProvider, specificationEvaluator) =>
+            IConfigurationBLLContext context)
+            : base(context, context.Logics.Sequence.SecurityProvider) =>
             this.resetEvent = resetEvent;
 
         protected override void LockSequence()

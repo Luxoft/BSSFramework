@@ -14,9 +14,9 @@ public partial class ConfigSLJsonController
     public ControlSettingsRichDTO GetControlSettings(string name)
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                         new ControlSettingsBLL(evaluateData.Context)
-                                                                 .GetRootControlSettingsForCurrentPrincipal(name)
-                                                                 .Maybe(controlSettings => controlSettings.ToRichDTO(evaluateData.MappingService)));
+                                                     evaluateData.Context.Logics.ControlSettings
+                                                                                 .GetRootControlSettingsForCurrentPrincipal(name)
+                                                                                 .Maybe(controlSettings => controlSettings.ToRichDTO(evaluateData.MappingService)));
     }
 
     [Microsoft.AspNetCore.Mvc.HttpPost(nameof(SaveControlSettingsList))]
@@ -26,7 +26,7 @@ public partial class ConfigSLJsonController
                                            {
                                                var customMappingService = new DontCheckIdConfigurationPrimitiveDTOMappingService(evaluateData.Context);
 
-                                               var bll = new ControlSettingsBLL(evaluateData.Context);
+                                               var bll = evaluateData.Context.Logics.ControlSettings;
 
                                                var ids = settings.Select(z => z.Id).ToList();
 
@@ -112,7 +112,7 @@ public partial class ConfigSLJsonController
     {
         this.Evaluate(DBSessionMode.Write, evaluateData =>
                                            {
-                                               var bll = new ControlSettingsBLL(evaluateData.Context);
+                                               var bll = evaluateData.Context.Logics.ControlSettings;
                                                var removedDomainObjects = controlSettingsIdCollection.Select(z => bll.GetById(z.Id, true)).ToList();
                                                foreach (var removedDomainObject in removedDomainObjects)
                                                {

@@ -169,9 +169,17 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
             new CodeFileFactoryHeader<FileType>(FileType.Validator, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.Validator}");
 
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorInterfaceFileFactoryHeader =>
+
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}{FileType.Validator}");
+
     protected virtual ICodeFileFactoryHeader<FileType> ValidatorBaseFileFactoryHeader =>
 
             new CodeFileFactoryHeader<FileType>(FileType.ValidatorBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidatorBase}");
+
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorCompileCacheFileFactoryHeader =>
+
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorCompileCache, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidatorCompileCache}");
 
     protected virtual ICodeFileFactoryHeader<FileType> MainFetchServiceFileFactoryHeader =>
 
@@ -344,8 +352,11 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                        this.ValidationMapBaseFileFactoryHeader,
                        this.ValidationMapFileFactoryHeader,
 
+                       this.ValidatorCompileCacheFileFactoryHeader,
+
                        this.ValidatorBaseFileFactoryHeader,
                        this.ValidatorFileFactoryHeader,
+                       this.ValidatorInterfaceFileFactoryHeader,
 
                        this.MainFetchServiceBaseFileFactoryHeader,
                        this.MainFetchServiceFileFactoryHeader

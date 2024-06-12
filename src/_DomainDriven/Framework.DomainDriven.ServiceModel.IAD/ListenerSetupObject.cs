@@ -32,9 +32,9 @@ public class ListenerSetupObject : IListenerSetupObject
             typeof(IAfterTransactionCompletedDALListener),
             typeof(IBeforeTransactionCompletedDALListener),
             typeof(IFlushedDALListener)
-        }.ToArray(interfaceType => this.TryCastService<TListener>(services, interfaceType, registerSelf));
+        }.ToArray(interfaceType => this.TryAddCastService<TListener>(services, interfaceType, registerSelf));
 
-        this.TryCastService<TListener>(services, typeof(IEventOperationReceiver), registerSelf);
+        this.TryAddCastService<TListener>(services, typeof(IEventOperationReceiver), registerSelf);
 
         if (!result.Any(v => v))
         {
@@ -42,7 +42,7 @@ public class ListenerSetupObject : IListenerSetupObject
         }
     }
 
-    private bool TryCastService<TCurrentListener>(IServiceCollection services, Type targetServiceType, bool registerSelf)
+    private bool TryAddCastService<TCurrentListener>(IServiceCollection services, Type targetServiceType, bool registerSelf)
         where TCurrentListener : class, IDALListener
     {
         if (registerSelf)

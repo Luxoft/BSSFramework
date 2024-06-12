@@ -23,6 +23,7 @@ using Framework.Authorization.Generated.DTO;
 using Framework.Configuration.Generated.DTO;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
+using Framework.DomainDriven.Setup;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -76,46 +77,16 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)
     {
-        return services
-
-               .AddSingleton<AuthorizationValidationMap>()
-               .AddSingleton<AuthorizationValidatorCompileCache>()
-               .AddScoped<IAuthorizationValidator, AuthorizationValidator>()
-
-               .AddSingleton(
-                   new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(
-                       FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData))
-
-               .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
-               .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
-
-               .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()
-
-               .Self(AuthorizationBLLFactoryContainer.RegisterBLLFactory);
+        return services.RegisterBLLSystem<IAuthorizationBLLContext, AuthorizationBLLContext>();
     }
 
     public static IServiceCollection RegisterConfigurationBLL(this IServiceCollection services)
     {
         return services
-
-               .AddSingleton<ConfigurationValidationMap>()
-               .AddSingleton<ConfigurationValidatorCompileCache>()
-               .AddScoped<IConfigurationValidator, ConfigurationValidator>()
-
-               .AddSingleton(
-                   new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(
-                       FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData))
-               .AddScoped<IConfigurationBLLFactoryContainer, ConfigurationBLLFactoryContainer>()
-
+               .RegisterBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
                .AddScopedFrom<ICurrentRevisionService, IDBSession>()
-
                .AddScoped<IMessageSender<Framework.Notification.MessageTemplateNotification>, TemplateMessageSender>()
-               .AddScoped<IMessageSender<Framework.Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
-
-               .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
-               .AddScopedFromLazyInterfaceImplement<IConfigurationBLLContext, ConfigurationBLLContext>()
-
-               .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);
+               .AddScoped<IMessageSender<Framework.Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
     }
 
     public static IServiceCollection RegisterProjectionDomainSecurityServices(this IServiceCollection services, Assembly assembly)

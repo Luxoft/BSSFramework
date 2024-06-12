@@ -40,10 +40,14 @@ public enum FileType
 
     ValidationMap,
 
+    ValidatorCompileCache,
+
 
     ValidatorBase,
 
     Validator,
+
+    ValidatorInterface,
 
 
 

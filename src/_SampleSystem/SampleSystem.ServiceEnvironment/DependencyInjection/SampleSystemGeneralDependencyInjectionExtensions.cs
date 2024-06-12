@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.Setup;
+﻿using Framework.DomainDriven.Setup;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,10 +20,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                        rootSettings.AddSecuritySystem(
                            securitySettings =>
                                securitySettings
-                                   .AddSecurityContext<BusinessUnit>(new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"))
-                                   .AddSecurityContext<Location>(new Guid("4641395B-9079-448E-9CB8-A083015235A3"))
-                                   .AddSecurityContext<ManagementUnit>(new Guid("77E78AEF-9512-46E0-A33D-AAE58DC7E18C"))
-                                   .AddSecurityContext<Employee>(new Guid("B3F2536E-27C4-4B91-AE0B-0EE2FFD4465F"), displayFunc: employee => employee.Login)
+                                   .AddSecurityContexts()
                                    .AddDomainSecurityServices()
                                    .AddSecurityRoles())
 
@@ -34,9 +30,14 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .SetPrincipalIdentitySource((Employee employee) => employee.Login)
 
-                           .AddListener<SubscriptionDALListener>()
+                           .AddListeners()
 
-                           .AddListener<ExampleFaultDALListener>(true);
+                           // Legacy
+
+                           .AddSubscriptionManagers()
+                           .AddLegacyGenericServices()
+                           .AddContextEvaluators()
+                           .AddBLLSystem();
                    })
 
                .RegisterLegacyGeneralBssFramework()

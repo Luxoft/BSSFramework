@@ -11,6 +11,15 @@ namespace Framework.Authorization.BLL
 {
     
     
+    public partial class AuthorizationValidatorCompileCache : Framework.Validation.ValidatorCompileCache
+    {
+        
+        public AuthorizationValidatorCompileCache(Framework.Authorization.BLL.AuthorizationValidationMap validationMap) : 
+                base(validationMap)
+        {
+        }
+    }
+    
     public partial class AuthorizationValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.AuthorizationOperationContext>
     {
         
@@ -83,9 +92,13 @@ namespace Framework.Authorization.BLL
     public partial class AuthorizationValidator : Framework.Authorization.BLL.AuthorizationValidatorBase
     {
         
-        public AuthorizationValidator(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
+        public AuthorizationValidator(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.Authorization.BLL.AuthorizationValidatorCompileCache cache) : 
                 base(context, cache)
         {
         }
+    }
+    
+    public partial interface IAuthorizationValidator : Framework.Validation.IValidator
+    {
     }
 }

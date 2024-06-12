@@ -11,6 +11,15 @@ namespace SampleSystem.BLL
 {
     
     
+    public partial class SampleSystemValidatorCompileCache : Framework.Validation.ValidatorCompileCache
+    {
+        
+        public SampleSystemValidatorCompileCache(SampleSystem.BLL.SampleSystemValidationMap validationMap) : 
+                base(validationMap)
+        {
+        }
+    }
+    
     public partial class SampleSystemValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.SampleSystemOperationContext>
     {
         
@@ -605,9 +614,13 @@ namespace SampleSystem.BLL
     public partial class SampleSystemValidator : SampleSystem.BLL.SampleSystemValidatorBase
     {
         
-        public SampleSystemValidator(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
+        public SampleSystemValidator(SampleSystem.BLL.ISampleSystemBLLContext context, SampleSystem.BLL.SampleSystemValidatorCompileCache cache) : 
                 base(context, cache)
         {
         }
+    }
+    
+    public partial interface ISampleSystemValidator : Framework.Validation.IValidator
+    {
     }
 }

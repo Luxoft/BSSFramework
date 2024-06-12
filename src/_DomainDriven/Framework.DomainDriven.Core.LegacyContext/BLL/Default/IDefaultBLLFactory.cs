@@ -15,3 +15,8 @@ public interface IBLLFactoryContainer<out TFactory>
 
     TFactory Implemented { get; }
 }
+
+public interface IBLLFactoryInitializer
+{
+    static abstract void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection);
+}

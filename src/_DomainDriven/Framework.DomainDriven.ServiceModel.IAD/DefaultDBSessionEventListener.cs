@@ -2,33 +2,22 @@
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class DefaultDBSessionEventListener : IDBSessionEventListener
+public class DefaultDBSessionEventListener(
+    IInitializeManager initializeManager,
+    IEnumerable<IFlushedDALListener> flushedDalListener,
+    IEnumerable<IBeforeTransactionCompletedDALListener> beforeTransactionCompletedDalListener,
+    IEnumerable<IAfterTransactionCompletedDALListener> afterTransactionCompletedDalListener)
+    : IDBSessionEventListener
 {
-    private readonly IInitializeManager initializeManager;
+    private readonly IReadOnlyCollection<IFlushedDALListener> flushedDalListener = flushedDalListener.ToArray();
 
-    private readonly IReadOnlyCollection<IFlushedDALListener> flushedDalListener;
+    private readonly IReadOnlyCollection<IBeforeTransactionCompletedDALListener> beforeTransactionCompletedDalListener = beforeTransactionCompletedDalListener.ToArray();
 
-    private readonly IReadOnlyCollection<IBeforeTransactionCompletedDALListener> beforeTransactionCompletedDalListener;
-
-    private readonly IReadOnlyCollection<IAfterTransactionCompletedDALListener> afterTransactionCompletedDalListener;
-
-
-    public DefaultDBSessionEventListener(
-            IInitializeManager initializeManager,
-            IEnumerable<IFlushedDALListener> flushedDalListener,
-            IEnumerable<IBeforeTransactionCompletedDALListener> beforeTransactionCompletedDalListener,
-            IEnumerable<IAfterTransactionCompletedDALListener> afterTransactionCompletedDalListener)
-    {
-        this.initializeManager = initializeManager;
-
-        this.flushedDalListener = flushedDalListener.ToArray();
-        this.beforeTransactionCompletedDalListener = beforeTransactionCompletedDalListener.ToArray();
-        this.afterTransactionCompletedDalListener = afterTransactionCompletedDalListener.ToArray();
-    }
+    private readonly IReadOnlyCollection<IAfterTransactionCompletedDALListener> afterTransactionCompletedDalListener = afterTransactionCompletedDalListener.ToArray();
 
     public void OnFlushed(DALChangesEventArgs eventArgs)
     {
-        if (this.initializeManager.IsInitialize)
+        if (initializeManager.IsInitialize)
         {
             return;
         }
@@ -38,7 +27,7 @@ public class DefaultDBSessionEventListener : IDBSessionEventListener
 
     public void OnBeforeTransactionCompleted(DALChangesEventArgs eventArgs)
     {
-        if (this.initializeManager.IsInitialize)
+        if (initializeManager.IsInitialize)
         {
             return;
         }
@@ -48,7 +37,7 @@ public class DefaultDBSessionEventListener : IDBSessionEventListener
 
     public void OnAfterTransactionCompleted(DALChangesEventArgs eventArgs)
     {
-        if (this.initializeManager.IsInitialize)
+        if (initializeManager.IsInitialize)
         {
             return;
         }

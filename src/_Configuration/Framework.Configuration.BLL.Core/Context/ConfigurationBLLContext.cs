@@ -48,8 +48,8 @@ public partial class ConfigurationBLLContext
             IDomainObjectEventMetadata eventOperationSource,
             INamedLockService namedLockService,
             IEnumerable<ITargetSystemService> targetSystemServices,
-            IConfigurationBLLContextSettings settings,
-            ICurrentRevisionService currentRevisionService)
+            ICurrentRevisionService currentRevisionService,
+            ConfigurationBLLContextSettings settings)
             : base(serviceProvider, operationSender, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
         this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));

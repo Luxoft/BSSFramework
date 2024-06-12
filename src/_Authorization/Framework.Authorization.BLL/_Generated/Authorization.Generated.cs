@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.DomainDriven.BLL;
+
 namespace Framework.Authorization.BLL
 {
     
@@ -101,7 +103,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class AuthorizationBLLFactoryContainer : Framework.DomainDriven.BLL.BLLContextContainer<Framework.Authorization.BLL.IAuthorizationBLLContext>, Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer
+    public partial class AuthorizationBLLFactoryContainer : Framework.DomainDriven.BLL.BLLContextContainer<Framework.Authorization.BLL.IAuthorizationBLLContext>, Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer, IBLLFactoryInitializer
     {
         
         private Framework.Authorization.BLL.IBusinessRoleBLL businessRoleBLL;

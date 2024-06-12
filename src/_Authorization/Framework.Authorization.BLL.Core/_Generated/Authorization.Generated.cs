@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.DomainDriven.BLL;
+
 namespace Framework.Authorization.BLL
 {
     

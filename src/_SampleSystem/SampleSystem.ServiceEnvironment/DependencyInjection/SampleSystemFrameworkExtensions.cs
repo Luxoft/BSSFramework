@@ -6,7 +6,7 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.WebApiNetCore;
+using Framework.DomainDriven.Setup;
 using Framework.Events.Legacy;
 using Framework.Notification;
 
@@ -18,41 +18,34 @@ using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
 using SampleSystem.Subscriptions.Metadata.Employee.Update;
 
-using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBase;
-
 namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemFrameworkExtensions
 {
-    public static IServiceCollection RegisterLegacyGeneralBssFramework(this IServiceCollection services)
+    public static IBssFrameworkSettings AddListeners(this IBssFrameworkSettings settings)
     {
-        return services.RegisterListeners()
-                       .RegisterSupportServices()
-
-                       // Legacy
-                       .RegisterLegacyGenericServices()
-                       .RegisterContextEvaluators()
-
-                       .RegisterMainBLLContext()
-                       .RegisterConfigurationTargetSystems();
+        return settings.AddListener<SubscriptionDALListener>()
+                       .AddListener<ExampleFaultDALListener>(true)
+                       .AddListener<FixDomainObjectEventRevisionNumberDALListener>()
+                       .AddListener<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
     }
 
-    private static IServiceCollection RegisterMainBLLContext(this IServiceCollection services)
+    public static IBssFrameworkSettings AddSubscriptionManagers(this IBssFrameworkSettings settings)
     {
-        return services
-               .AddSingleton<SampleSystemValidationMap>()
-               .AddSingleton<SampleSystemValidatorCompileCache>()
+        return settings.AddSubscriptionManager<ExampleSampleSystemEventsSubscriptionManager>()
+                       .AddSubscriptionManager<ExampleSampleSystemAribaEventsSubscriptionManager>();
+    }
 
-               .AddScoped<ISampleSystemValidator, SampleSystemValidator>()
+    public static IBssFrameworkSettings AddBLLSystem(this IBssFrameworkSettings settings)
+    {
+        return settings.AddBLLSystem<ISampleSystemBLLContext, SampleSystemBLLContext>();
+    }
 
-               .AddSingleton(new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData))
-               .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
-               .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
-               .AddScopedFromLazyInterfaceImplement<ISampleSystemBLLContext, SampleSystemBLLContext>()
+    public static IServiceCollection RegisterLegacyGeneralBssFramework(this IServiceCollection services)
+    {
+        return services.RegisterSupportServices()
 
-                //.AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, SampleSystemSecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
-
-               .Self(SampleSystemBLLFactoryContainer.RegisterBLLFactory);
+                       .RegisterConfigurationTargetSystems();
     }
 
     private static IServiceCollection RegisterConfigurationTargetSystems(this IServiceCollection services)
@@ -62,19 +55,6 @@ public static class SampleSystemFrameworkExtensions
         services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(TargetSystemHelper.AuthorizationName));
         services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(TargetSystemHelper.ConfigurationName));
         services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<ISampleSystemBLLContext, PersistentDomainObjectBase>(tss => tss.IsMain));
-
-        return services;
-    }
-
-    private static IServiceCollection RegisterListeners(this IServiceCollection services)
-    {
-        services.RegisterListeners(
-            s => s.Add<FixDomainObjectEventRevisionNumberDALListener>()
-                  .Add<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>());
-
-        services.RegisterSubscriptionManagers(
-            s => s.Add<ExampleSampleSystemEventsSubscriptionManager>()
-                  .Add<ExampleSampleSystemAribaEventsSubscriptionManager>());
 
         return services;
     }

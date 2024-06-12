@@ -7,7 +7,7 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class SyncDenormolizedValuesService<TDomainObject,
+public class SyncDenormalizedValuesService<TDomainObject,
                                            TDomainObjectAncestorLink,
                                            TSourceToAncestorOrChildLink, TIdent>
     where TDomainObjectAncestorLink : class, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, TIdent>, new()
@@ -27,7 +27,7 @@ public class SyncDenormolizedValuesService<TDomainObject,
     private MemberExpression identityPropertyExpression;
 
 
-    public SyncDenormolizedValuesService(
+    public SyncDenormalizedValuesService(
         IAsyncDal<TDomainObject, Guid> domainObjectDal,
         IAsyncDal<TDomainObjectAncestorLink, Guid> domainObjectAncestorLinkDal,
         INamedLockSource namedLockSource,
@@ -184,7 +184,7 @@ public class SyncDenormolizedValuesService<TDomainObject,
     /// The domain object.
     /// </param>
     /// <returns>
-    /// The <see cref="SyncDenormolizedValuesService"/>.
+    /// The <see cref="SyncDenormalizedValuesService"/>.
     /// </returns>
     private DiffAncestorLinks GetAncestorDiffirence(TDomainObject domainObject)
     {
@@ -316,7 +316,7 @@ public class SyncDenormolizedValuesService<TDomainObject,
         /// The other.
         /// </param>
         /// <returns>
-        /// The <see cref="SyncDenormolizedValuesService"/>.
+        /// The <see cref="SyncDenormalizedValuesService"/>.
         /// </returns>
         public SyncResult Union(SyncResult other)
         {

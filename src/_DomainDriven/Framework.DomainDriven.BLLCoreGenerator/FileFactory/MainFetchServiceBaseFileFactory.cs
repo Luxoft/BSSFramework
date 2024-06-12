@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+using System.Reflection;
 
 using Framework.CodeDom;
 using Framework.Core;
@@ -22,7 +23,7 @@ public class MainFetchServiceBaseFileFactory<TConfiguration> : FileFactory<TConf
         return new CodeTypeDeclaration
                {
                        Name = this.Name,
-                       Attributes = MemberAttributes.Public | MemberAttributes.Abstract,
+                       TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract,
                        IsPartial = true,
                };
     }

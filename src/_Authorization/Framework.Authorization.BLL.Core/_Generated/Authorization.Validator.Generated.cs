@@ -11,7 +11,16 @@ namespace Framework.Authorization.BLL
 {
     
     
-    public partial class AuthorizationValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.AuthorizationOperationContext>
+    public partial class AuthorizationValidatorCompileCache : Framework.Validation.ValidatorCompileCache
+    {
+        
+        public AuthorizationValidatorCompileCache(Framework.Authorization.BLL.AuthorizationValidationMap validationMap) : 
+                base(validationMap)
+        {
+        }
+    }
+    
+    public abstract partial class AuthorizationValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.AuthorizationOperationContext>
     {
         
         public AuthorizationValidatorBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
@@ -80,12 +89,16 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class AuthorizationValidator : Framework.Authorization.BLL.AuthorizationValidatorBase
+    public partial class AuthorizationValidator : Framework.Authorization.BLL.AuthorizationValidatorBase, Framework.Authorization.BLL.IAuthorizationValidator
     {
         
-        public AuthorizationValidator(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
+        public AuthorizationValidator(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.Authorization.BLL.AuthorizationValidatorCompileCache cache) : 
                 base(context, cache)
         {
         }
+    }
+    
+    public partial interface IAuthorizationValidator : Framework.Validation.IValidator
+    {
     }
 }

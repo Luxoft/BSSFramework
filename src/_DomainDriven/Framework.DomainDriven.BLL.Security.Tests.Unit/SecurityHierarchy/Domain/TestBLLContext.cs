@@ -20,7 +20,7 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer
 {
-    private readonly Lazy<SyncDenormolizedValuesService<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid>> syncHierarchyService;
+    private readonly Lazy<SyncDenormalizedValuesService<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid>> syncHierarchyService;
 
     private readonly IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> defaultFactoryContainer;
 
@@ -39,8 +39,8 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
         var namedLockService = Substitute.For<INamedLockService>();
 
         this.syncHierarchyService =
-                new Lazy<SyncDenormolizedValuesService<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid>>(() =>
-                        new SyncDenormolizedValuesService<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid>(
+                new Lazy<SyncDenormalizedValuesService<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid>>(() =>
+                        new SyncDenormalizedValuesService<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid>(
                          this.HierarchyDomainDal,
                          this.DomainAncestorLinkDal,
                          namedLockSource,
@@ -89,7 +89,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
 
     public IValidator Validator => ValidatorBase.Success;
 
-    public SyncDenormolizedValuesService<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid> SyncHierarchyService => this.syncHierarchyService.Value;
+    public SyncDenormalizedValuesService<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid> SyncHierarchyService => this.syncHierarchyService.Value;
 
     public bool AllowVirtualPropertyInOdata(Type domainType) => false;
 

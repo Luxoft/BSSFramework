@@ -2,6 +2,8 @@
 
 public enum FileType
 {
+    BLLContext,
+
     BLL,
 
     BLLFactory,

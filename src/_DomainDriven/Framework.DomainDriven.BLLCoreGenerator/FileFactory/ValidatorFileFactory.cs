@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.Validation;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
@@ -28,6 +27,7 @@ public class ValidatorFileFactory<TConfiguration> : FileFactory<TConfiguration>
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         yield return this.Configuration.GetCodeTypeReference(this.DomainType, FileType.ValidatorBase);
+        yield return this.Configuration.GetCodeTypeReference(this.DomainType, FileType.ValidatorInterface);
     }
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
@@ -39,7 +39,7 @@ public class ValidatorFileFactory<TConfiguration> : FileFactory<TConfiguration>
 
         {
             var contextParameter = this.Configuration.BLLContextInterfaceTypeReference.ToParameterDeclarationExpression("context");
-            var cacheParameter = typeof(ValidatorCompileCache).ToTypeReference().ToParameterDeclarationExpression("cache");
+            var cacheParameter = this.Configuration.GetCodeTypeReference(null, FileType.ValidatorCompileCache).ToParameterDeclarationExpression("cache");
 
             yield return new CodeConstructor
                          {

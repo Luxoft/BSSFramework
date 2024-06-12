@@ -100,10 +100,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public virtual string IntegrationSaveMethodName { get; } = "IntegrationSave";
 
-    protected virtual ICodeFileFactoryHeader<FileType> BLLContextFileFactoryHeader =>
-
-            FileType.BLLContext.ToHeader(this.Environment.TargetSystemName);
-
     protected virtual ICodeFileFactoryHeader<FileType> BLLContextInterfaceFileFactoryHeader =>
 
             new CodeFileFactoryHeader<FileType>(FileType.BLLContextInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}{FileType.BLLContext}");
@@ -169,9 +165,17 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
             new CodeFileFactoryHeader<FileType>(FileType.Validator, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.Validator}");
 
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorInterfaceFileFactoryHeader =>
+
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}{FileType.Validator}");
+
     protected virtual ICodeFileFactoryHeader<FileType> ValidatorBaseFileFactoryHeader =>
 
             new CodeFileFactoryHeader<FileType>(FileType.ValidatorBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidatorBase}");
+
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorCompileCacheFileFactoryHeader =>
+
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorCompileCache, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidatorCompileCache}");
 
     protected virtual ICodeFileFactoryHeader<FileType> MainFetchServiceFileFactoryHeader =>
 
@@ -322,7 +326,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                {
                       this.SecurityRuleHelperFactoryHeader,
 
-                       this.BLLContextFileFactoryHeader,
                        this.BLLContextInterfaceFileFactoryHeader,
                        this.RootSecurityServiceFileFactoryHeader,
                        this.RootSecurityServiceBaseFileFactoryHeader,
@@ -344,8 +347,11 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                        this.ValidationMapBaseFileFactoryHeader,
                        this.ValidationMapFileFactoryHeader,
 
+                       this.ValidatorCompileCacheFileFactoryHeader,
+
                        this.ValidatorBaseFileFactoryHeader,
                        this.ValidatorFileFactoryHeader,
+                       this.ValidatorInterfaceFileFactoryHeader,
 
                        this.MainFetchServiceBaseFileFactoryHeader,
                        this.MainFetchServiceFileFactoryHeader

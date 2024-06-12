@@ -1,10 +1,8 @@
 ﻿using Framework.Core;
 
-using Framework.Authorization.Domain;
+namespace Framework.DomainDriven;
 
-namespace Framework.Authorization.BLL;
-
-public class AuthorizationBLLContextSettings : IAuthorizationBLLContextSettings
+public class BLLContextSettings<PersistentDomainObjectBase> : ITypeResolverContainer<string>
 {
     public ITypeResolver<string> TypeResolver { get; init; } = TypeSource.FromSample<PersistentDomainObjectBase>().ToDefaultTypeResolver();
 }

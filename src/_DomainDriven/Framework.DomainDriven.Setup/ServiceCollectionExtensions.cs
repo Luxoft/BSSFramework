@@ -28,13 +28,12 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped(typeof(IDomainObjectEventMetadata), settings.DomainObjectEventMetadataType);
 
-        settings.RegisterActions.ForEach(a => a(services));
-
-        settings.Extensions.ForEach(ex => ex.AddServices(services));
-
         services.RegisterGenericServices();
 
         services.RegisterWebApiGenericServices();
+        settings.RegisterActions.ForEach(a => a(services));
+
+        settings.Extensions.ForEach(ex => ex.AddServices(services));
 
         return services;
     }

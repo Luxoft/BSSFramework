@@ -11,7 +11,7 @@ namespace SampleSystem.BLL
 {
     
     
-    public partial class SampleSystemMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<SampleSystem.Domain.PersistentDomainObjectBase>
+    public abstract partial class SampleSystemMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<SampleSystem.Domain.PersistentDomainObjectBase>
     {
         
         protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Address> GetAddressContainer(Framework.Transfering.ViewDTOType rule)

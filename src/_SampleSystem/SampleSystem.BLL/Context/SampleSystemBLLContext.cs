@@ -30,7 +30,7 @@ public partial class SampleSystemBLLContext
             ISampleSystemBLLFactoryContainer logics,
             IAuthorizationBLLContext authorization,
             Framework.Configuration.BLL.IConfigurationBLLContext configuration,
-            ISampleSystemBLLContextSettings settings,
+            BLLContextSettings<PersistentDomainObjectBase> settings,
             ISecurityRuleParser securityRuleParser)
             : base(serviceProvider, operationSender, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {

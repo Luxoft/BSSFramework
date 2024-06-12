@@ -11,7 +11,7 @@ namespace SampleSystem.BLL
 {
     
     
-    public partial class SampleSystemValidationMapBase : Framework.Validation.ValidationMapBase
+    public abstract partial class SampleSystemValidationMapBase : Framework.Validation.ValidationMapBase
     {
         
         private Framework.Validation.IValidationMap _defaultValidatorMap;

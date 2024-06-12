@@ -11,6 +11,26 @@ namespace SampleSystem.BLL
 {
     
     
+    public partial class SampleSystemBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid, SampleSystem.BLL.ISampleSystemBLLFactoryContainer>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>>>, SampleSystem.BLL.ISampleSystemBLLContext
+    {
+        
+        Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.IDefaultBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>> Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.IDefaultBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>>>.Logics
+        {
+            get
+            {
+                return this.Logics;
+            }
+        }
+        
+        Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>> Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>>>.Logics
+        {
+            get
+            {
+                return this.Logics;
+            }
+        }
+    }
+    
     public partial class BusinessUnitBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.BusinessUnit>, SampleSystem.BLL.IBusinessUnitBLL
     {
         
@@ -960,7 +980,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class SampleSystemBLLFactoryContainer : Framework.DomainDriven.BLL.BLLContextContainer<SampleSystem.BLL.ISampleSystemBLLContext>, SampleSystem.BLL.ISampleSystemBLLFactoryContainer
+    public partial class SampleSystemBLLFactoryContainer : Framework.DomainDriven.BLL.BLLContextContainer<SampleSystem.BLL.ISampleSystemBLLContext>, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.IBLLFactoryInitializer
     {
         
         private SampleSystem.BLL.IBusinessUnitBLL businessUnitBLL;

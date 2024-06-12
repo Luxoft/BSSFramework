@@ -5,6 +5,7 @@ using Framework.CodeDom;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.DomainDriven.BLL;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
@@ -20,6 +21,11 @@ public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContaine
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
         return this.Configuration.Environment.BLLCore.GetBLLContextContainerCodeTypeDeclaration(this.Name, false);
+    }
+
+    protected override IEnumerable<CodeTypeReference> GetBaseTypes()
+    {
+        return base.GetBaseTypes().Concat([typeof(IBLLFactoryInitializer).ToTypeReference()]);
     }
 
     protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
@@ -113,7 +119,7 @@ public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContaine
 
     private CodeMemberMethod GetRegisterBLLFactoryDependencyInjectionMethod()
     {
-        var methodName = "RegisterBLLFactory";
+        var methodName = nameof(IBLLFactoryInitializer.RegisterBLLFactory);
 
         var serviceCollectionParameter = new CodeParameterDeclarationExpression(typeof(Microsoft.Extensions.DependencyInjection.IServiceCollection), "serviceCollection");
 

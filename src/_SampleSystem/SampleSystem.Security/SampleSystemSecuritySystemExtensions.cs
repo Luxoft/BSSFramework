@@ -14,8 +14,16 @@ using SampleSystem.Security.Services;
 
 namespace SampleSystem.Security;
 
-public static class SampleSystemSecurityServiceExtensions
+public static class SampleSystemSecuritySystemExtensions
 {
+    public static ISecuritySystemSettings AddSecurityContexts(this ISecuritySystemSettings settings)
+    {
+        return settings.AddSecurityContext<BusinessUnit>(new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"))
+                       .AddSecurityContext<Location>(new Guid("4641395B-9079-448E-9CB8-A083015235A3"))
+                       .AddSecurityContext<ManagementUnit>(new Guid("77E78AEF-9512-46E0-A33D-AAE58DC7E18C"))
+                       .AddSecurityContext<Employee>(new Guid("B3F2536E-27C4-4B91-AE0B-0EE2FFD4465F"), displayFunc: employee => employee.Login);
+    }
+
     public static ISecuritySystemSettings AddSecurityRoles(this ISecuritySystemSettings settings)
     {
         return settings

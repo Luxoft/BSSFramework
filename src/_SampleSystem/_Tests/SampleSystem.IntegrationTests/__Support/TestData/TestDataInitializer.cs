@@ -36,7 +36,7 @@ public class TestDataInitializer(
         authHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, SecurityRole.SystemIntegration);
         authHelper.SetUserRole(DefaultConstants.INTEGRATION_BUS, SecurityRole.SystemIntegration);
 
-        this.FullMainData();
+        this.FillMainData();
 
         var integrationTestUserName = settings.Value.IntegrationTestUserName;
 
@@ -48,7 +48,7 @@ public class TestDataInitializer(
         authHelper.AddUserToAdmin(integrationTestUserName);
     }
 
-    private void FullMainData()
+    private void FillMainData()
     {
         dataHelper.SaveCountry(
             id: DefaultConstants.COUNTRY_RUSSIA_ID,

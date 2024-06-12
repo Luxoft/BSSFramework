@@ -11,7 +11,16 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public partial class ConfigurationValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.ConfigurationOperationContext>
+    public partial class ConfigurationValidatorCompileCache : Framework.Validation.ValidatorCompileCache
+    {
+        
+        public ConfigurationValidatorCompileCache(Framework.Configuration.BLL.ConfigurationValidationMap validationMap) : 
+                base(validationMap)
+        {
+        }
+    }
+    
+    public abstract partial class ConfigurationValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.ConfigurationOperationContext>
     {
         
         public ConfigurationValidatorBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
@@ -164,12 +173,16 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class ConfigurationValidator : Framework.Configuration.BLL.ConfigurationValidatorBase
+    public partial class ConfigurationValidator : Framework.Configuration.BLL.ConfigurationValidatorBase, Framework.Configuration.BLL.IConfigurationValidator
     {
         
-        public ConfigurationValidator(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
+        public ConfigurationValidator(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Configuration.BLL.ConfigurationValidatorCompileCache cache) : 
                 base(context, cache)
         {
         }
+    }
+    
+    public partial interface IConfigurationValidator : Framework.Validation.IValidator
+    {
     }
 }

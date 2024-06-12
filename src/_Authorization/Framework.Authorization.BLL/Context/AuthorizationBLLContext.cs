@@ -41,14 +41,14 @@ public partial class AuthorizationBLLContext
             IAuthorizationBLLFactoryContainer logics,
             IAuthorizationExternalSource externalSource,
             INotificationPrincipalExtractor notificationPrincipalExtractor,
-            IAuthorizationBLLContextSettings settings,
             IAuthorizationSystem<Guid> authorizationSystem,
             IRunAsManager runAsManager,
             IAvailablePermissionSource availablePermissionSource,
             IAvailableSecurityRoleSource availableSecurityRoleSource,
             ICurrentPrincipalSource currentPrincipalSource,
             IPrincipalGeneralValidator principalValidator,
-            IActualPrincipalSource actualPrincipalSource)
+            IActualPrincipalSource actualPrincipalSource,
+            BLLContextSettings<PersistentDomainObjectBase> settings)
             : base(
                    serviceProvider,
                    operationSender,

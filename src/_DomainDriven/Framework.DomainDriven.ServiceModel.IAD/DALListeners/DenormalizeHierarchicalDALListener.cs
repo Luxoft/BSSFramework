@@ -7,15 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class DenormalizeHierarchicalDALListener : IBeforeTransactionCompletedDALListener
+public class DenormalizeHierarchicalDALListener(IServiceProvider serviceProvider) : IBeforeTransactionCompletedDALListener
 {
-    private readonly IServiceProvider serviceProvider;
-
-    public DenormalizeHierarchicalDALListener(IServiceProvider serviceProvider)
-    {
-        this.serviceProvider = serviceProvider;
-    }
-
     public void Process(DALChangesEventArgs eventArgs)
     {
         if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
@@ -43,8 +36,8 @@ public class DenormalizeHierarchicalDALListener : IBeforeTransactionCompletedDAL
     {
         var service = ActivatorUtilities
             .CreateInstance<
-                SyncDenormolizedValuesService<TDomainObject, TAncestorChildLink,
-                TSourceToAncestorOrChildLink, Guid>>(this.serviceProvider);
+                SyncDenormalizedValuesService<TDomainObject, TAncestorChildLink,
+                TSourceToAncestorOrChildLink, Guid>>(serviceProvider);
 
         service.Sync(modified, removing);
     }

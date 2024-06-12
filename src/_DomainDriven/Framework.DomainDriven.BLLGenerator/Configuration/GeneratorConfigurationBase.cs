@@ -44,6 +44,8 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
     {
+        yield return new CodeFileFactoryHeader<FileType>(FileType.BLLContext, "", _ => this.Environment.TargetSystemName + FileType.BLLContext);
+
         yield return new CodeFileFactoryHeader<FileType>(FileType.BLL, "", domainType => domainType.Name + FileType.BLL);
 
         yield return new CodeFileFactoryHeader<FileType>(FileType.BLLFactory, "", domainType => domainType.Name + FileType.BLLFactory);

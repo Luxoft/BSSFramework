@@ -27,7 +27,6 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
 
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
-        yield return new BLLContextFileFactory<TConfiguration>(this.Configuration);
         yield return new BLLContextInterfaceFileFactory<TConfiguration>(this.Configuration);
 
         yield return new SecurityDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
@@ -65,12 +64,16 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
         {
             yield return new ValidationMapBaseFileFactory<TConfiguration>(this.Configuration);
             yield return new ValidationMapFileFactory<TConfiguration>(this.Configuration);
+
+            yield return new ValidatorCompileCacheFileFactory<TConfiguration>(this.Configuration);
         }
 
         if (this.Configuration.GenerateValidator)
         {
             yield return new ValidatorBaseFileFactory<TConfiguration>(this.Configuration);
             yield return new ValidatorFileFactory<TConfiguration>(this.Configuration);
+
+            yield return new ValidatorInterfaceFileFactory<TConfiguration>(this.Configuration);
         }
 
         if (this.Configuration.GenerateFetchService)

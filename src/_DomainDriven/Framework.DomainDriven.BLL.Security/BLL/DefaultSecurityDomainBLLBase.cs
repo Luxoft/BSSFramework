@@ -2,8 +2,6 @@
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-using nuSpec.Abstraction;
-
 namespace Framework.DomainDriven.BLL.Security
 {
     public interface IDefaultSecurityDomainBLLBase<in TPersistentDomainObjectBase, TDomainObject, TIdent> : IDefaultDomainBLLBase<

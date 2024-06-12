@@ -39,7 +39,7 @@ public static class ServiceCollectionExtensions
                .Invoke<IServiceCollection>(null, [services]);
     }
 
-    internal static IServiceCollection RegisterBLLSystemInternal<
+    private static IServiceCollection RegisterBLLSystemInternal<
         TBLLContextDecl,
         TBLLContextImpl,
         TPersistentDomainObjectBase,
@@ -59,7 +59,7 @@ public static class ServiceCollectionExtensions
         where TMainFetchService : MainFetchServiceBase<TPersistentDomainObjectBase>, new()
         where TBLLFactoryContainerDecl : class
         where TBLLFactoryContainerImpl : class, TBLLFactoryContainerDecl, IBLLFactoryInitializer
-        where TBLLContextSettings : BLLContextSettings<TPersistentDomainObjectBase>
+        where TBLLContextSettings : class
         where TBLLContextDecl : class
     {
         return services

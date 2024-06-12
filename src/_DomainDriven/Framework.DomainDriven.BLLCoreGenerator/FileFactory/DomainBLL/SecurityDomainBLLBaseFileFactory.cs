@@ -4,8 +4,6 @@ using Framework.CodeDom;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
 
-using nuSpec.Abstraction;
-
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
 public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TConfiguration>

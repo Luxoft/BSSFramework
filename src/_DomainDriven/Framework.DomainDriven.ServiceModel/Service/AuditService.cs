@@ -10,6 +10,8 @@ using Framework.Security;
 using Framework.Transfering;
 using Framework.Validation;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.DomainDriven.ServiceModel.Service;
 
 public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecurityService, TPersistentObjectBase,
@@ -18,9 +20,7 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
     where TPropertyRevisionDto : PropertyRevisionDTOBase
     where TPersistentObjectBase : class, IIdentityObject<TIdent>
     where TBllFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentObjectBase, TIdent>>
-    where TBllContext : IBLLFactoryContainerContext<TBllFactoryContainer>,
-    ITypeResolverContainer<string>,
-    ISecurityServiceContainer<TRootSecurityService>
+    where TBllContext : IBLLFactoryContainerContext<TBllFactoryContainer>, ISecurityServiceContainer<TRootSecurityService>, IServiceProviderContainer
     where TRootSecurityService : IRootSecurityService<TPersistentObjectBase>
 {
     private static readonly Lazy<Type> GenericTPropertyRevisionDtoType = new Lazy<Type>(
@@ -73,7 +73,9 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
 
         if (typeof(TPersistentObjectBase).IsAssignableFrom(typeof(TProperty)))
         {
-            var dtoType = bllContext.TypeResolver.Resolve(typeof(TProperty).Name + MainDTOType.SimpleDTO.ToString(), true);
+            var typeResolver = bllContext.ServiceProvider.GetRequiredKeyedService<ITypeResolver<string>>("DTO");
+
+            var dtoType = typeResolver.Resolve(typeof(TProperty).Name + MainDTOType.SimpleDTO, true);
 
             var method =
                     ((Func<PropertyRevision<TIdent, TProperty>, TPropertyRevisionDto>)

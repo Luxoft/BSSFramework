@@ -2,7 +2,6 @@
 
 using Framework.CodeDom;
 using Framework.SecuritySystem;
-using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLLGenerator;
 

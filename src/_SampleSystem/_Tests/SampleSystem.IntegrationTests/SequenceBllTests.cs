@@ -5,8 +5,6 @@ using Framework.DomainDriven;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using nuSpec.Abstraction;
-
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;

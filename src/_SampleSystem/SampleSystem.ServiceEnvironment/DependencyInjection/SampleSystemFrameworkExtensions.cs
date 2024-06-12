@@ -80,6 +80,10 @@ public static class SampleSystemFrameworkExtensions
 
         // For subscription
         services.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(typeof(EmployeeUpdateSubscription).Assembly));
+
+        // For legacy audit
+        services.AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both));
+
         return services;
     }
 }

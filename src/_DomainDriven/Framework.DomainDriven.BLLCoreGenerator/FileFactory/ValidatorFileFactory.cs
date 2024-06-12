@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.Validation;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

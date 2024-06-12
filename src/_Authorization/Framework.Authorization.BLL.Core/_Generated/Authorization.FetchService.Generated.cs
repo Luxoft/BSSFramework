@@ -11,7 +11,7 @@ namespace Framework.Authorization.BLL
 {
     
     
-    public partial class AuthorizationMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<Framework.Authorization.Domain.PersistentDomainObjectBase>
+    public abstract partial class AuthorizationMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<Framework.Authorization.Domain.PersistentDomainObjectBase>
     {
         
         protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.BusinessRole> GetBusinessRoleContainer(Framework.Transfering.ViewDTOType rule)

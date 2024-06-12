@@ -100,10 +100,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public virtual string IntegrationSaveMethodName { get; } = "IntegrationSave";
 
-    protected virtual ICodeFileFactoryHeader<FileType> BLLContextFileFactoryHeader =>
-
-            FileType.BLLContext.ToHeader(this.Environment.TargetSystemName);
-
     protected virtual ICodeFileFactoryHeader<FileType> BLLContextInterfaceFileFactoryHeader =>
 
             new CodeFileFactoryHeader<FileType>(FileType.BLLContextInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}{FileType.BLLContext}");
@@ -330,7 +326,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                {
                       this.SecurityRuleHelperFactoryHeader,
 
-                       this.BLLContextFileFactoryHeader,
                        this.BLLContextInterfaceFileFactoryHeader,
                        this.RootSecurityServiceFileFactoryHeader,
                        this.RootSecurityServiceBaseFileFactoryHeader,

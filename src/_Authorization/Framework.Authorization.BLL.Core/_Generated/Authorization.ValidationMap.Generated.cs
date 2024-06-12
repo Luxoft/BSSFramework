@@ -11,7 +11,7 @@ namespace Framework.Authorization.BLL
 {
     
     
-    public partial class AuthorizationValidationMapBase : Framework.Validation.ValidationMapBase
+    public abstract partial class AuthorizationValidationMapBase : Framework.Validation.ValidationMapBase
     {
         
         private Framework.Validation.IValidationMap _defaultValidatorMap;

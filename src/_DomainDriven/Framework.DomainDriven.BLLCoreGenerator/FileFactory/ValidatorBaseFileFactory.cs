@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+using System.Reflection;
 
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
@@ -21,7 +22,7 @@ public class ValidatorBaseFileFactory<TConfiguration> : FileFactory<TConfigurati
         return new CodeTypeDeclaration
                {
                        Name = this.Name,
-                       Attributes = MemberAttributes.Public | MemberAttributes.Abstract,
+                       TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract,
                        IsPartial = true,
                };
     }

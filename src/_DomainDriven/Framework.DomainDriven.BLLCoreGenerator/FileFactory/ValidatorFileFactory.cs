@@ -28,6 +28,7 @@ public class ValidatorFileFactory<TConfiguration> : FileFactory<TConfiguration>
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         yield return this.Configuration.GetCodeTypeReference(this.DomainType, FileType.ValidatorBase);
+        yield return this.Configuration.GetCodeTypeReference(this.DomainType, FileType.ValidatorInterface);
     }
 
     protected override IEnumerable<CodeTypeMember> GetMembers()

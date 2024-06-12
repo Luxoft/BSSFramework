@@ -11,7 +11,7 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public partial class ConfigurationMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<Framework.Configuration.Domain.PersistentDomainObjectBase>
+    public abstract partial class ConfigurationMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<Framework.Configuration.Domain.PersistentDomainObjectBase>
     {
         
         protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.CodeFirstSubscription> GetCodeFirstSubscriptionContainer(Framework.Transfering.ViewDTOType rule)

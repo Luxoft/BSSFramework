@@ -11,7 +11,7 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public partial class ConfigurationValidationMapBase : Framework.Validation.ValidationMapBase
+    public abstract partial class ConfigurationValidationMapBase : Framework.Validation.ValidationMapBase
     {
         
         private Framework.Validation.IValidationMap _defaultValidatorMap;

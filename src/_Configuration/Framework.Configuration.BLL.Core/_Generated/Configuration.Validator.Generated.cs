@@ -20,7 +20,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class ConfigurationValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.ConfigurationOperationContext>
+    public abstract partial class ConfigurationValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.ConfigurationOperationContext>
     {
         
         public ConfigurationValidatorBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
@@ -173,7 +173,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class ConfigurationValidator : Framework.Configuration.BLL.ConfigurationValidatorBase
+    public partial class ConfigurationValidator : Framework.Configuration.BLL.ConfigurationValidatorBase, Framework.Configuration.BLL.IConfigurationValidator
     {
         
         public ConfigurationValidator(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Configuration.BLL.ConfigurationValidatorCompileCache cache) : 

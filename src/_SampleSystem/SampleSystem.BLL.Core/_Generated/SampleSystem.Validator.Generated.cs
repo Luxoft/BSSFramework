@@ -20,7 +20,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class SampleSystemValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.SampleSystemOperationContext>
+    public abstract partial class SampleSystemValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.SampleSystemOperationContext>
     {
         
         public SampleSystemValidatorBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
@@ -611,7 +611,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class SampleSystemValidator : SampleSystem.BLL.SampleSystemValidatorBase
+    public partial class SampleSystemValidator : SampleSystem.BLL.SampleSystemValidatorBase, SampleSystem.BLL.ISampleSystemValidator
     {
         
         public SampleSystemValidator(SampleSystem.BLL.ISampleSystemBLLContext context, SampleSystem.BLL.SampleSystemValidatorCompileCache cache) : 

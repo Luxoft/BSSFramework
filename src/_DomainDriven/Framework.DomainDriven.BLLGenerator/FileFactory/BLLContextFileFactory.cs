@@ -5,7 +5,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
 
-namespace Framework.DomainDriven.BLLCoreGenerator;
+namespace Framework.DomainDriven.BLLGenerator;
 
 public class BLLContextFileFactory<TConfiguration> : FileFactory<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
@@ -33,16 +33,16 @@ public class BLLContextFileFactory<TConfiguration> : FileFactory<TConfiguration>
         yield return typeof(SecurityBLLBaseContext<,,>).ToTypeReference(
             this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
             this.Configuration.Environment.GetIdentityType().ToTypeReference(),
-            this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface));
+            this.Configuration.Environment.BLLCore.GetCodeTypeReference(null, BLLCoreGenerator.FileType.BLLFactoryContainerInterface));
 
-        yield return typeof(IBLLFactoryContainerContext<>).ToTypeReference(this.Configuration.SecurityBLLFactoryContainerType);
+        yield return typeof(IBLLFactoryContainerContext<>).ToTypeReference(this.Configuration.Environment.BLLCore.SecurityBLLFactoryContainerType);
 
-        yield return this.Configuration.BLLContextInterfaceTypeReference;
+        yield return this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference;
     }
 
     protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
     {
-        var pairs = new[] { this.Configuration.DefaultBLLFactoryContainerType, this.Configuration.SecurityBLLFactoryContainerType }
+        var pairs = new[] { this.Configuration.Environment.BLLCore.DefaultBLLFactoryContainerType, this.Configuration.Environment.BLLCore.SecurityBLLFactoryContainerType }
                 .Select(z => new
                              {
                                      BLLFactoryContextType = z,

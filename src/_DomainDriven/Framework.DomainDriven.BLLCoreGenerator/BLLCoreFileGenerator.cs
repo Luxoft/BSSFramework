@@ -60,19 +60,15 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
             }
         }
 
-        if (this.Configuration.GenerateValidationMap)
+        if (this.Configuration.GenerateValidation)
         {
             yield return new ValidationMapBaseFileFactory<TConfiguration>(this.Configuration);
             yield return new ValidationMapFileFactory<TConfiguration>(this.Configuration);
 
             yield return new ValidatorCompileCacheFileFactory<TConfiguration>(this.Configuration);
-        }
 
-        if (this.Configuration.GenerateValidator)
-        {
             yield return new ValidatorBaseFileFactory<TConfiguration>(this.Configuration);
             yield return new ValidatorFileFactory<TConfiguration>(this.Configuration);
-
             yield return new ValidatorInterfaceFileFactory<TConfiguration>(this.Configuration);
         }
 

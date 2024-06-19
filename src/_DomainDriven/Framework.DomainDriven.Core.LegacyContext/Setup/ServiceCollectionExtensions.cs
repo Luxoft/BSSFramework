@@ -27,11 +27,11 @@ public static class ServiceCollectionExtensions
                    typeof(TBLLContextDecl),
                    typeof(TBLLContextImpl),
                    settings.GetSafe(v => v.PersistentDomainObjectBaseType),
-                   settings.GetSafe(v => v.ValidationMapType),
-                   settings.GetSafe(v => v.ValidatorCompileCacheType),
+                   settings.GetSafe(v => v.ValidationMapType, typeof(IValidationMap)),
+                   settings.GetSafe(v => v.ValidatorCompileCacheType, typeof(ValidatorCompileCache)),
                    settings.GetSafe(v => v.ValidatorDeclType),
-                   settings.GetSafe(v => v.ValidatorImplType),
-                   settings.GetSafe(v => v.FetchServiceType),
+                   settings.GetSafe(v => v.ValidatorImplType, typeof(SuccessValidator)),
+                   settings.GetSafe(v => v.FetchServiceType, typeof(EmptyFetchService<,>).MakeGenericType(settings.PersistentDomainObjectBaseType, typeof(FetchBuildRule.DTOFetchBuildRule))),
                    settings.GetSafe(v => v.FactoryContainerDeclType),
                    settings.GetSafe(v => v.FactoryContainerImplType),
                    settings.GetSafe(v => v.SettingsType)
@@ -47,35 +47,46 @@ public static class ServiceCollectionExtensions
         TValidatorCompileCache,
         TValidatorDecl,
         TValidatorImpl,
-        TMainFetchService,
+        TFetchService,
         TBLLFactoryContainerDecl,
         TBLLFactoryContainerImpl,
         TBLLContextSettings>(this IServiceCollection services)
         where TBLLContextImpl : class, TBLLContextDecl
-        where TValidationMap : class
+
+        where TValidationMap : class, IValidationMap
         where TValidatorCompileCache : ValidatorCompileCache
         where TValidatorImpl : class, TValidatorDecl
         where TValidatorDecl : class
-        where TMainFetchService : MainFetchServiceBase<TPersistentDomainObjectBase>, new()
+
+        where TFetchService : IFetchService<TPersistentDomainObjectBase, FetchBuildRule.DTOFetchBuildRule>, new()
+
         where TBLLFactoryContainerDecl : class
         where TBLLFactoryContainerImpl : class, TBLLFactoryContainerDecl, IBLLFactoryInitializer
         where TBLLContextSettings : class
         where TBLLContextDecl : class
     {
-        return services
-               .AddSingleton<TValidationMap>()
-               .AddSingleton<TValidatorCompileCache>()
+        if (typeof(TValidationMap) != typeof(IValidationMap))
+        {
+            services.AddSingleton<TValidationMap>();
+        }
 
-               .AddScoped<TValidatorDecl, TValidatorImpl>()
+        if (typeof(TValidatorCompileCache) != typeof(ValidatorCompileCache))
+        {
+            services.AddSingleton<TValidatorCompileCache>();
+        }
 
-               .AddSingleton(
-                   new TMainFetchService().WithCompress().WithCache().WithLock()
-                                          .Add(FetchService<TPersistentDomainObjectBase>.OData))
-               .AddScoped<TBLLFactoryContainerDecl, TBLLFactoryContainerImpl>()
-               .AddSingleton<TBLLContextSettings>()
-               .AddScopedFromLazyInterfaceImplement<TBLLContextDecl, TBLLContextImpl>()
+        services.AddScoped<TValidatorDecl, TValidatorImpl>()
 
-               .Self(TBLLFactoryContainerImpl.RegisterBLLFactory);
+                .AddSingleton(
+                    new TFetchService().WithCompress().WithCache().WithLock()
+                                       .Add(FetchService<TPersistentDomainObjectBase>.OData))
+                .AddScoped<TBLLFactoryContainerDecl, TBLLFactoryContainerImpl>()
+                .AddSingleton<TBLLContextSettings>()
+                .AddScopedFromLazyInterfaceImplement<TBLLContextDecl, TBLLContextImpl>()
+
+                .Self(TBLLFactoryContainerImpl.RegisterBLLFactory);
+
+        return services;
     }
 
     private static BLLSystemSettings ExtractSettings<TBLLContextDecl, TBLLContextImpl>()
@@ -87,20 +98,19 @@ public static class ServiceCollectionExtensions
 
         var validatorDeclType = typeof(TBLLContextImpl).GetSingleCtorParameterTypeImpl(typeof(IValidator));
 
-        var validatorImplType = GetImplType(validatorDeclType);
+        var validatorImplType = GetImplType(validatorDeclType, false);
 
-        var validatorCompileCacheType = validatorImplType.GetSingleCtorParameterTypeImpl(typeof(ValidatorCompileCache));
+        var validatorCompileCacheType = validatorImplType?.GetSingleCtorParameterTypeImpl(typeof(ValidatorCompileCache));
 
-        var validationMapType = validatorCompileCacheType.GetSingleCtorParameterTypeImpl(typeof(ValidationMapBase));
+        var validationMapType = validatorCompileCacheType?.GetSingleCtorParameterTypeImpl(typeof(IValidationMap));
 
-        var persistentDomainObjectBaseType = typeof(TBLLContextDecl)
-                                             .GetInterfaceImplementationArguments(typeof(IFetchServiceContainer<,>)).First();
+        var persistentDomainObjectBaseType = typeof(TBLLContextDecl).GetInterfaceImplementationArguments(typeof(IFetchServiceContainer<,>)).First();
 
         var baseBllSettingType = typeof(BLLContextSettings<>).MakeGenericType(persistentDomainObjectBaseType);
 
         var factoryContainerDeclType = typeof(TBLLContextImpl).GetSingleCtorParameterTypeImpl(typeof(IBLLFactoryContainer<object>));
 
-        var fetchServiceImpl = GetImplType(typeof(MainFetchServiceBase<>).MakeGenericType(persistentDomainObjectBaseType));
+        var fetchServiceImpl = GetImplType(typeof(MainFetchServiceBase<>).MakeGenericType(persistentDomainObjectBaseType), false);
 
         return new BLLSystemSettings
                {
@@ -112,10 +122,10 @@ public static class ServiceCollectionExtensions
                    FetchServiceType = fetchServiceImpl,
                    SettingsType = GetImplType(baseBllSettingType, false) ?? baseBllSettingType,
                    FactoryContainerDeclType = factoryContainerDeclType,
-                   FactoryContainerImplType = GetImplType(factoryContainerDeclType)
+                   FactoryContainerImplType = GetImplType(factoryContainerDeclType, true)
                };
 
-        Type GetImplType(Type baseType, bool required = true)
+        Type GetImplType(Type baseType, bool required)
         {
             return asmTypes.SingleOrDefault(t => t.IsClass && !t.IsAbstract && baseType.IsAssignableFrom(t))
                            .Pipe(required, res => res ?? throw new Exception($"Implement type for '{baseType}' not found"));

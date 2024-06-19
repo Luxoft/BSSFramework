@@ -1,5 +1,7 @@
 ﻿#nullable enable
 
+using Framework.HierarchicalExpand;
+
 namespace Framework.SecuritySystem;
 
 public interface ISecurityRuleExpander
@@ -11,4 +13,6 @@ public interface ISecurityRuleExpander
     SecurityRule.ExpandedRolesSecurityRule Expand(SecurityRule.NonExpandedRolesSecurityRule securityRule);
 
     IEnumerable<SecurityRule.ExpandedRolesSecurityRule> FullExpand(SecurityRule.DomainObjectSecurityRule securityRule);
+
+    HierarchicalExpandType? TryGetCustomExpandType<TDomainObject>(SecurityRule.SpecialSecurityRule securityRule);
 }

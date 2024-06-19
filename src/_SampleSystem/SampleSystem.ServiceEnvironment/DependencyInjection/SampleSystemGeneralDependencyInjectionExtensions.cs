@@ -22,7 +22,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                securitySettings
                                    .AddSecurityContexts()
                                    .AddDomainSecurityServices()
-                                   .AddSecurityRoles())
+                                   .AddSecurityRoles()
+                                   .AddCustomSecurityOperations())
 
                            .AddNamedLockType(typeof(SampleSystemNamedLock))
 

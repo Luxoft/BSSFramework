@@ -315,7 +315,6 @@ public partial class DataHelper
                                                           Rank = rank,
                                                           IsProduction = isProduction,
                                                           BusinessUnitType = context.Logics.BusinessUnitType.GetById(typeId),
-                                                          Parent = context.Logics.BusinessUnit.GetById(parentId),
                                                           Period = period.Value
                                                   };
 

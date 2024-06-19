@@ -37,14 +37,14 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
         return this.ServiceProvider.GetRequiredService<ISecurityProvider<TDomainObject>>();
     }
 
-    public virtual ISecurityRuleExpander SecurityRuleExpanders => this.ServiceProvider.GetRequiredService<ISecurityRuleExpander>();
+    public virtual ISecurityRuleExpander SecurityRuleExpander => this.ServiceProvider.GetRequiredService<ISecurityRuleExpander>();
 
     /// <inheritdoc />
     public override bool AllowedExpandTreeParents<TDomainObject>()
     {
-        if (this.SecurityRuleExpanders.TryExpand<TDomainObject>(SecurityRule.View) is SecurityRule.DomainObjectSecurityRule viewSecurityRule)
+        if (this.SecurityRuleExpander.TryGetCustomExpandType<TDomainObject>(SecurityRule.View) is { } customExpandType)
         {
-            return viewSecurityRule.SafeExpandType.HasFlag(HierarchicalExpandType.Parents);
+            return customExpandType.HasFlag(HierarchicalExpandType.Parents);
         }
         else
         {

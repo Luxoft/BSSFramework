@@ -13,6 +13,8 @@ public interface IRevisionBLL<TDomainObject, TIdent>
 
     TDomainObject GetObjectByRevision(TIdent id, long revision);
 
+    IEnumerable<TDomainObject> GetObjectsByRevision(IEnumerable<TIdent> idCollection, long revision);
+
     DomainObjectRevision<TIdent> GetObjectRevisions(TIdent identity, Period? period = null);
 
     DomainObjectPropertyRevisions<TIdent, TProperty> GetPropertyChanges<TProperty>(TIdent id, Expression<Func<TDomainObject, TProperty>> propertyExpression, Period? period = null);

@@ -120,12 +120,12 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         return startProjections.Select(item => new { Item = item, OnlyView = false })
                                .Concat(parents.Select(item => new { Item = item, OnlyView = true }))
                                .ToList(
-                                       pair => new HierarchicalNode<TDomainObject, TIdent>
-                                               {
-                                                       Item = pair.Item,
-                                                       OnlyView = pair.OnlyView,
-                                                       ParentId = allIdentDict[pair.Item.Id]
-                                               });
+                                   pair => new HierarchicalNode<TDomainObject, TIdent>(
+
+                                       Item: pair.Item,
+                                       OnlyView: pair.OnlyView,
+                                       ParentId: allIdentDict[pair.Item.Id]
+                                       ));
     }
 
     private Dictionary<TIdent, TIdent> ExpandEnumerableWithParents(IEnumerable<TIdent> projectionsIdents, HierarchicalExpandType parentExpandMode)

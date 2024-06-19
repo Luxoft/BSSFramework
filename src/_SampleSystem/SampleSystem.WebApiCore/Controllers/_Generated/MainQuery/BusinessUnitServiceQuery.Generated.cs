@@ -145,7 +145,7 @@
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.BusinessUnitProgramClass>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
             var odataTree = bll.GetTreeByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.BusinessUnitProgramClass>(Framework.Transfering.ViewDTOType.ProjectionDTO));
-            return Framework.OData.SelectOperationResultExtensions.SelectN(odataTree, businessUnitProgramClass => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(businessUnitProgramClass, evaluateData.MappingService));
+            return Framework.OData.SelectOperationResultExtensions.ChangeItem(odataTree, businessUnitProgramClass => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(businessUnitProgramClass, evaluateData.MappingService));
         }
         
         /// <summary>
@@ -207,7 +207,7 @@
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.TestBusinessUnit>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
             var odataTree = bll.GetTreeByOData(typedSelectOperation, typedFilter, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestBusinessUnit>(Framework.Transfering.ViewDTOType.ProjectionDTO));
-            return Framework.OData.SelectOperationResultExtensions.SelectN(odataTree, testBusinessUnit => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(testBusinessUnit, evaluateData.MappingService));
+            return Framework.OData.SelectOperationResultExtensions.ChangeItem(odataTree, testBusinessUnit => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(testBusinessUnit, evaluateData.MappingService));
         }
         
         /// <summary>
@@ -228,7 +228,7 @@
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.TestBusinessUnit>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
             var odataTree = bll.GetTreeByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestBusinessUnit>(Framework.Transfering.ViewDTOType.ProjectionDTO));
-            return Framework.OData.SelectOperationResultExtensions.SelectN(odataTree, testBusinessUnit => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(testBusinessUnit, evaluateData.MappingService));
+            return Framework.OData.SelectOperationResultExtensions.ChangeItem(odataTree, testBusinessUnit => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(testBusinessUnit, evaluateData.MappingService));
         }
     }
     

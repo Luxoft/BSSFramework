@@ -51,7 +51,7 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        var selectMethod = typeof(HierarchicalNodeExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(HierarchicalNodeExtensions.ToList));
+        var selectMethod = typeof(HierarchicalNodeExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(HierarchicalNodeExtensions.ChangeItem));
 
         var selectLambda = new CodeParameterDeclarationExpression { Name = this.DomainType.Name.ToStartLowerCase() }.Pipe(param => new CodeLambdaExpression
             {

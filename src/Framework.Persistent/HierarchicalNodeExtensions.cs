@@ -2,9 +2,7 @@
 
 public static class HierarchicalNodeExtensions
 {
-    public static List<HierarchicalNode<TResult, TIdent>> ToList<TSource, TResult, TIdent>(this IEnumerable<HierarchicalNode<TSource, TIdent>> source, Func<TSource, TResult> selector)
-            where TResult : IIdentityObject<TIdent>
-            where TSource : IIdentityObject<TIdent>
+    public static List<HierarchicalNode<TResult, TIdent>> ChangeItem<TSource, TResult, TIdent>(this IEnumerable<HierarchicalNode<TSource, TIdent>> source, Func<TSource, TResult> selector)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (selector == null) throw new ArgumentNullException(nameof(selector));

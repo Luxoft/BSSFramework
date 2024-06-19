@@ -4,6 +4,9 @@ using Automation.Utils;
 using FluentAssertions;
 
 using Framework.Core;
+using Framework.DomainDriven;
+using Framework.Persistent;
+using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -99,6 +102,31 @@ public class BusinessUnitTests : TestBase
         this.TestGetFullBusinessUnitsTreeByOData();
 
         this.TestGetFullBusinessUnitsTree();
+    }
+
+    [TestMethod]
+    public void LoadTreeWithMiddlePermission_RootParentLoadedWithViewMode()
+    {
+        // Arrange
+        var parentBu = this.DataHelper.SaveBusinessUnit(parentIsNeeded: false);
+        var childBu = this.DataHelper.SaveBusinessUnit(parent: parentBu);
+
+        var testUser = TextRandomizer.RandomString(10);
+        this.AuthHelper.SetUserRole(testUser, new SampleSystemTestPermission(SecurityRole.Administrator, childBu));
+
+        // Act
+        var result = this.Evaluate(DBSessionMode.Read, testUser,
+            ctx =>
+            {
+                var buTree = ctx.Logics.BusinessUnitFactory.Create(SecurityRule.Edit).GetTree();
+
+                return buTree.ChangeItem(bu => bu.Id);
+            });
+
+        // Assert
+        result.Count.Should().Be(2);
+        result.Should().Contain(node => node.Item == parentBu.Id && node.OnlyView);
+        result.Should().Contain(node => node.Item == childBu.Id && !node.OnlyView);
     }
 
     private void TestGetFullBusinessUnitsTreeByOData()

@@ -43,9 +43,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     bool UseRemoveMappingExtension { get; }
 
-    bool GenerateValidationMap { get; }
-
-    bool GenerateValidator { get; }
+    bool GenerateValidation { get; }
 
     bool GenerateFetchService { get; }
 

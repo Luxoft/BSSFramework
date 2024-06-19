@@ -71,9 +71,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public virtual IBLLFactoryContainerInterfaceGeneratorConfiguration Logics { get; }
 
-    public virtual bool GenerateValidationMap => true;
-
-    public virtual bool GenerateValidator => true;
+    public virtual bool GenerateValidation => true;
 
     public virtual bool GenerateFetchService => true;
 

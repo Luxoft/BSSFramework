@@ -13,15 +13,6 @@ public abstract class ValidatorBase : IValidator
 
 
     public static readonly IValidator Success = new SuccessValidator();
-
-
-    private class SuccessValidator : ValidatorBase
-    {
-        public override ValidationResult GetValidationResult<TSource>(TSource source, int operationContext = int.MaxValue, IValidationState ownerState = null)
-        {
-            return ValidationResult.Success;
-        }
-    }
 }
 
 public class Validator : ValidatorBase

@@ -10,8 +10,6 @@
     <PackageReference Include="NUnit" />
     <PackageReference Include="NUnit.ConsoleRunner" />
     <PackageReference Include="NUnit3TestAdapter" />
-    <PackageReference Include="OpenCover" />
-    <PackageReference Include="ReportGenerator" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,8 +9,6 @@ namespace SampleSystem.Domain;
 
 [DomainType("0BE31997-C4CD-449E-9394-A311016CB715")]
 [BLLViewRole, BLLSaveRole(AllowCreate = false), BLLRemoveRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.HRDepartmentView, SampleSystemSecurityOperationCode.EmployeeEdit)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.HRDepartmentEdit)]
 public partial class HRDepartment :
         HRDepartmentBase,
         IDefaultHierarchicalPersistentDomainObjectBase<HRDepartment>,
@@ -60,8 +58,6 @@ public partial class HRDepartment :
     }
 
     [Framework.Restriction.Required]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.CompanyLegalEntityView)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.CompanyLegalEntityEdit)]
     public override CompanyLegalEntity CompanyLegalEntity
     {
         get { return base.CompanyLegalEntity; }

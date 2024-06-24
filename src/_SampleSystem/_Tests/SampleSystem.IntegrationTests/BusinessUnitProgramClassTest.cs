@@ -43,8 +43,8 @@ public class BusinessUnitProgramClassTest : TestBase
         // Act
         var actualResult = businessUnitQueryController.Evaluate(c => c.GetBusinessUnitProgramClassesByODataQueryStringWithFilter(new GetBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest
                                                                     {
-                                                                            odataQueryString = "$top=70&$orderby=VirtualValue",
-                                                                            filter = filter
+                                                                            OdataQueryString = "$top=70&$orderby=VirtualValue",
+                                                                            Filter = filter
                                                                     })).Items;
 
         // Assert
@@ -70,8 +70,8 @@ public class BusinessUnitProgramClassTest : TestBase
         // Act
         var actualResult = businessUnitQueryController.Evaluate(c => c.GetBusinessUnitProgramClassesByODataQueryStringWithFilter(new GetBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest
                                                                     {
-                                                                            odataQueryString = "$top=70&$orderby=VirtualValue",
-                                                                            filter = filter
+                                                                            OdataQueryString = "$top=70&$orderby=VirtualValue",
+                                                                            Filter = filter
                                                                     })).Items;
 
         // Assert

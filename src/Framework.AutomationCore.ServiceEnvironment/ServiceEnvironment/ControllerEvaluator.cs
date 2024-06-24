@@ -6,8 +6,6 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
 
-using JetBrains.Annotations;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,12 +19,12 @@ public class ControllerEvaluator<TController>
 
     private readonly string customPrincipalName;
 
-    public ControllerEvaluator([NotNull] IServiceProvider rootServiceProvider)
+    public ControllerEvaluator(IServiceProvider rootServiceProvider)
             : this(rootServiceProvider, null)
     {
     }
 
-    private ControllerEvaluator([NotNull] IServiceProvider rootServiceProvider, string customPrincipalName)
+    private ControllerEvaluator(IServiceProvider rootServiceProvider, string customPrincipalName)
     {
         this.rootServiceProvider = rootServiceProvider ?? throw new ArgumentNullException(nameof(rootServiceProvider));
         this.customPrincipalName = customPrincipalName;
@@ -43,7 +41,12 @@ public class ControllerEvaluator<TController>
 
     public T Evaluate<T>(Expression<Func<TController, T>> funcExpr)
     {
-        return this.InternalEvaluateAsync(funcExpr, c => Task.FromResult(funcExpr.Eval(c))).GetAwaiter().GetResult();
+        if (TaskResultHelper<T>.IsTask)
+        {
+            throw new Exception($"For Task result use {nameof(EvaluateAsync)} method");
+        }
+
+        return this.InternalEvaluateAsync(funcExpr, async c => funcExpr.Eval(c)).GetAwaiter().GetResult();
     }
 
     public async Task EvaluateAsync(Expression<Func<TController, Task>> actionExpr)
@@ -68,7 +71,7 @@ public class ControllerEvaluator<TController>
 
         await new WebApiInvoker(c, context => InvokeController(context, func))
               .WithMiddleware(next => new ImpersonateMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, this.customPrincipalName))
-              .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>(), httpContext.RequestServices.GetRequiredService<IDBSessionManager>()))
+              .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IDBSessionManager>(), httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>()))
               .WithMiddleware(next => new InitCurrentMethodMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, invokeExpr))
               .WithMiddleware(next => new WebApiExceptionExpanderMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiExceptionExpander>()))
               .Invoke();
@@ -87,7 +90,7 @@ public class ControllerEvaluator<TController>
         context.Items["Result"] = res;
     }
 
-    public ControllerEvaluator<TController> WithImpersonate([CanBeNull] string newCustomPrincipalName)
+    public ControllerEvaluator<TController> WithImpersonate(string newCustomPrincipalName)
     {
         return new ControllerEvaluator<TController>(this.rootServiceProvider, newCustomPrincipalName);
     }
@@ -109,7 +112,7 @@ public class ControllerEvaluator<TController>
             }
             else
             {
-                await context.RequestServices.GetRequiredService<IntegrationTestUserAuthenticationService>().WithImpersonateAsync(customPrincipalName, async () =>
+                await context.RequestServices.GetRequiredService<IIntegrationTestUserAuthenticationService>().WithImpersonateAsync(customPrincipalName, async () =>
                 {
                     await this.next(context);
                     return default(object);
@@ -133,18 +136,9 @@ public class ControllerEvaluator<TController>
                                           .TryGetStartMethodInfo()
                                           .FromMaybe("Current controller method can't be extracted");
 
-            var testWebApiCurrentMethodResolver = context.RequestServices.GetRequiredService<TestWebApiCurrentMethodResolver>();
+            context.RequestServices.GetRequiredService<TestWebApiCurrentMethodResolver>().SetCurrentMethod(currentMethod);
 
-            testWebApiCurrentMethodResolver.SetCurrentMethod(currentMethod);
-
-            try
-            {
-                await this.next(context);
-            }
-            finally
-            {
-                testWebApiCurrentMethodResolver.ClearCurrentMethod();
-            }
+            await this.next(context);
         }
     }
 
@@ -169,5 +163,10 @@ public class ControllerEvaluator<TController>
         {
             await this.next(this.context);
         }
+    }
+
+    private static class TaskResultHelper<TResult>
+    {
+        public static readonly bool IsTask = typeof(Task).IsAssignableFrom(typeof(TResult));
     }
 }

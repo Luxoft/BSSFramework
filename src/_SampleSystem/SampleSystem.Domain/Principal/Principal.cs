@@ -13,8 +13,6 @@ namespace SampleSystem.Domain;
 [BLLViewRole]
 [BLLSaveRole]
 [DomainType("DB66670A-6A1A-4F0E-BDAE-20ED291B2ACC")]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.Disabled)]
 public class Principal : AuditPersistentDomainObjectBase
 {
     private string externalId;

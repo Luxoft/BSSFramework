@@ -3,6 +3,7 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem;
 using Framework.Transfering;
 
@@ -34,7 +35,7 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
         return $"Check {this.DomainType.Name} access";
     }
 
-    private CodeParameterDeclarationExpression SecurityOperationCodeParameter => this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference().ToParameterDeclarationExpression("securityOperationCode");
+    private CodeParameterDeclarationExpression SecurityRuleCodeParameter => typeof(string).ToTypeReference().ToParameterDeclarationExpression("securityRuleName");
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {
@@ -42,22 +43,23 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
                          .GetCodeTypeReference(this.DomainType, DTOType.IdentityDTO)
                          .ToParameterDeclarationExpression(this.DomainType.Name.ToStartLowerCase() + "Ident");
 
-        yield return this.SecurityOperationCodeParameter;
+        yield return this.SecurityRuleCodeParameter;
     }
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        yield return this.GetCheckSecurityOperationCodeParameterStatement(1);
+        var operationVarStatement = new CodeVariableDeclarationStatement(typeof(SecurityRule), "operation", this.GetConvertToSecurityRuleCodeParameterExpression(evaluateDataExpr, 1));
+
+        yield return operationVarStatement;
 
         var domainObjectVarDecl = this.ToDomainObjectVarDeclById(bllRefExpr);
-        var method = typeof(SecurityProviderExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SecurityProviderExtensions.CheckAccess));
+        var method = typeof(SecurityProviderBaseExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SecurityProviderBaseExtensions.CheckAccess));
 
         yield return domainObjectVarDecl;
 
         yield return this.Configuration.Environment.BLLCore.GetGetSecurityProviderMethodReferenceExpression(evaluateDataExpr.GetContext(), this.DomainType)
-                         .ToMethodInvokeExpression(this.SecurityOperationCodeParameter.ToVariableReferenceExpression())
-                         //.ToMethodInvokeExpression("CheckAccess", domainObjectVarDecl.ToVariableReferenceExpression())
-                         .ToStaticMethodInvokeExpression(method, domainObjectVarDecl.ToVariableReferenceExpression())
+                         .ToMethodInvokeExpression(operationVarStatement.ToVariableReferenceExpression())
+                         .ToStaticMethodInvokeExpression(method, domainObjectVarDecl.ToVariableReferenceExpression(), evaluateDataExpr.GetContext().ToPropertyReference((IAccessDeniedExceptionServiceContainer c) => c.AccessDeniedExceptionService))
                          .ToExpressionStatement();
     }
 }

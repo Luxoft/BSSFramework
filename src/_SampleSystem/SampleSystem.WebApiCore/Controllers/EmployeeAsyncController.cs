@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using Framework.Core.Services;
+﻿using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
@@ -13,8 +11,7 @@ using NHibernate.Linq;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class EmployeeAsyncController : ControllerBase
 {
@@ -40,7 +37,7 @@ public class EmployeeAsyncController : ControllerBase
     {
         var userName = this.userAuthenticationService.GetUserName();
 
-        var repository = this.employeeRepositoryFactory.Create(BLLSecurityMode.Disabled);
+        var repository = this.employeeRepositoryFactory.Create(SecurityRule.Disabled);
 
         var employees = await repository
                               .GetQueryable()

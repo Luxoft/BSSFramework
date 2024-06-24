@@ -23,6 +23,8 @@ public class BLLFileGenerator<TConfiguration> : CodeFileGenerator<TConfiguration
 
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
+        yield return new BLLContextFileFactory<TConfiguration>(this.Configuration);
+
         foreach (var fileFactory in this.Configuration.Logics.GetFileFactories())
         {
             yield return fileFactory;

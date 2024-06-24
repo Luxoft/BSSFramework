@@ -12,7 +12,6 @@ namespace SampleSystem.Domain;
 public class Project :
         AuditPersistentDomainObjectBase,
         ICodeObject,
-        ISecurityVisualIdentityObject,
         IVisualIdentityObject,
         IDetail<BusinessUnit>
 {
@@ -75,11 +74,6 @@ public class Project :
     {
         get { return this.plannedEndDate; }
         set { this.plannedEndDate = value; }
-    }
-
-    string ISecurityVisualIdentityObject.Name
-    {
-        get { return this.Code; }
     }
 
     string IVisualIdentityObject.Name

@@ -1,10 +1,11 @@
-﻿using Framework.DomainDriven.BLL.Security.Lock;
+﻿using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy;
 
-public enum NamedLockOperation
+public static class TestNamedLock
 {
-    [GlobalLock(typeof(HierarchyObjectAncestorLink))]
-    HierarchyObjectAncestorLinkLock = 6
+    public static NamedLock HierarchyObjectAncestorLinkLock { get; } = new(
+        nameof(HierarchyObjectAncestorLinkLock),
+        typeof(HierarchyObjectAncestorLink));
 }

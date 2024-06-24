@@ -6,8 +6,6 @@ using Framework.Persistent;
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLRemoveRole, BLLSaveRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkEdit)]
 public class ManagementUnitAndBusinessUnitLink :
         AuditPersistentDomainObjectBase,
         IDetail<ManagementUnit>,

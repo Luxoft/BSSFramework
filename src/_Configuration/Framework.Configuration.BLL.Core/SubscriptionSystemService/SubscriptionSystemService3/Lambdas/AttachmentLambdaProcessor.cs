@@ -1,7 +1,7 @@
 ﻿using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 
-using JetBrains.Annotations;
+
 
 using NativeAttachment = System.Net.Mail.Attachment;
 
@@ -14,7 +14,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 public class AttachmentLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContext>
         where TBLLContext : class
 {
-    public AttachmentLambdaProcessor([NotNull] TBLLContext bllContext)
+    public AttachmentLambdaProcessor(TBLLContext bllContext)
             : base(bllContext)
     {
     }
@@ -22,8 +22,8 @@ public class AttachmentLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContex
     protected override string LambdaName => "Attachment";
 
     public virtual IEnumerable<NativeAttachment> Invoke<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (versions == null)
@@ -48,7 +48,6 @@ public class AttachmentLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContex
     /// <param name="subscription">Подписка.</param>
     /// <param name="versions">Версии доменного объекта.</param>
     /// <returns>Результат вызова лямбда-выражения.</returns>
-    [UsedImplicitly]
     protected IEnumerable<NativeAttachment> InvokeWithTypedContext<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)

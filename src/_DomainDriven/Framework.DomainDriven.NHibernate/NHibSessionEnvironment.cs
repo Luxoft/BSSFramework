@@ -1,11 +1,12 @@
 ﻿using System.Data;
 
 using Framework.Core;
+using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 using Framework.Exceptions;
 
-using JetBrains.Annotations;
+
 
 using NHibernate;
 using NHibernate.Cfg;
@@ -32,10 +33,11 @@ public class NHibSessionEnvironment : IDisposable
     /// <exception cref="System.ArgumentException">All mapping settings has equal database with schema. Utilities, Workflow has domain object with same names</exception>
     /// <exception cref="ApplicationException">Could not initialize ServiceFactory.</exception>
     public NHibSessionEnvironment(
-            [NotNull] NHibConnectionSettings connectionSettings,
-            [NotNull] IEnumerable<IMappingSettings> mappingSettings,
+            NHibConnectionSettings connectionSettings,
+            IEnumerable<IMappingSettings> mappingSettings,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
-            INHibSessionEnvironmentSettings settings)
+            INHibSessionEnvironmentSettings settings,
+            IDalValidationIdentitySource dalValidationIdentitySource)
     {
         this.ConnectionSettings = connectionSettings ?? throw new ArgumentNullException(nameof(connectionSettings));
 
@@ -69,7 +71,7 @@ public class NHibSessionEnvironment : IDisposable
 
             this.InternalSessionFactory = this.cfg.BuildSessionFactory();
 
-            this.ExceptionProcessor = new SqlExceptionProcessorInterceptor(this.InternalSessionFactory, this.cfg);
+            this.ExceptionProcessor = new SqlExceptionProcessorInterceptor(this.InternalSessionFactory, this.cfg, dalValidationIdentitySource);
         }
         catch (Exception ex)
         {
@@ -77,7 +79,7 @@ public class NHibSessionEnvironment : IDisposable
         }
     }
 
-    [NotNull]
+
     public NHibConnectionSettings ConnectionSettings { get; }
 
     internal TimeSpan TransactionTimeout { get; }

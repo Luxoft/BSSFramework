@@ -1,7 +1,6 @@
-﻿using Framework.DomainDriven.BLL.Tracking;
-using Framework.DomainDriven.DAL.Revisions;
+﻿using System.Data;
 
-using JetBrains.Annotations;
+using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate;
 using NHibernate.Envers.Patch;
@@ -14,7 +13,7 @@ public class NHibSession : INHibSession
 
     private readonly Lazy<INHibSession> lazyInnerSession;
 
-    public NHibSession([NotNull] NHibSessionEnvironment environment, INHibSessionSetup settings, IEnumerable<IDBSessionEventListener> eventListeners)
+    public NHibSession(NHibSessionEnvironment environment, INHibSessionSetup settings, IEnumerable<IDBSessionEventListener> eventListeners)
     {
         if (environment == null) throw new ArgumentNullException(nameof(environment));
 
@@ -42,14 +41,11 @@ public class NHibSession : INHibSession
 
     public DBSessionMode SessionMode => this.InnerSession.SessionMode;
 
+    public IDbTransaction Transaction => this.InnerSession.Transaction;
+
     public void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType)
     {
         this.lazyInnerSession.Value.RegisterModified(domainObject, modificationType);
-    }
-
-    public IObjectStateService GetObjectStateService()
-    {
-        return this.InnerSession.GetObjectStateService();
     }
 
     public async Task FlushAsync(CancellationToken cancellationToken = default)

@@ -251,6 +251,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.TestPlainAuthObjectFullDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO ToFullDTO(this SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.TestRootSecurityObjFullDTO ToFullDTO(this SampleSystem.Domain.TestRootSecurityObj domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.TestRootSecurityObjFullDTO(mappingService, domainObject);
@@ -511,6 +516,11 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRestrictionObject> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+        }
+        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRootSecurityObjFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRootSecurityObj> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
@@ -546,9 +556,9 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.AnotherSqlParserTestObjIdentityDTO(domainObject);
         }
         
-        public static SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO ToIdentityDTO(this SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject)
+        public static SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO ToIdentityDTO(this SampleSystem.Domain.AuthPerformanceObject domainObject)
         {
-            return new SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO(domainObject);
+            return new SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO(domainObject);
         }
         
         public static SampleSystem.Generated.DTO.BusinessUnitIdentityDTO ToIdentityDTO(this SampleSystem.Domain.BusinessUnit domainObject)
@@ -796,11 +806,6 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewIdentityDTO(domainObject);
         }
         
-        public static SampleSystem.Generated.DTO.NamedLockIdentityDTO ToIdentityDTO(this SampleSystem.Domain.NamedLock domainObject)
-        {
-            return new SampleSystem.Generated.DTO.NamedLockIdentityDTO(domainObject);
-        }
-        
         public static SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO ToIdentityDTO(this SampleSystem.Domain.NoSecurityObject domainObject)
         {
             return new SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO(domainObject);
@@ -881,6 +886,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO(domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO ToIdentityDTO(this SampleSystem.Domain.TestRestrictionObject domainObject)
+        {
+            return new SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO(domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO ToIdentityDTO(this SampleSystem.Domain.TestRootSecurityObj domainObject)
         {
             return new SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO(domainObject);
@@ -916,16 +926,6 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ChildEntityIdentityDTO(domainObject);
         }
         
-        public static SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO ToIdentityDTO(this SampleSystem.Domain.WorkflowCoreExecutionError domainObject)
-        {
-            return new SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO(domainObject);
-        }
-        
-        public static SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO ToIdentityDTO(this SampleSystem.Domain.WorkflowCoreInstance domainObject)
-        {
-            return new SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO(domainObject);
-        }
-        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Address> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
@@ -936,7 +936,7 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject> domainObjects)
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.AuthPerformanceObject> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -1186,11 +1186,6 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.NamedLockIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.NamedLock> domainObjects)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.NoSecurityObject> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
@@ -1271,6 +1266,11 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRestrictionObject> domainObjects)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRootSecurityObj> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
@@ -1302,16 +1302,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ChildEntityIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.UniqueByParent.ChildEntity> domainObjects)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.WorkflowCoreExecutionError> domainObjects)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.WorkflowCoreInstance> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -1751,6 +1741,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.TestPlainAuthObjectRichDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO ToRichDTO(this SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.TestRootSecurityObjRichDTO ToRichDTO(this SampleSystem.Domain.TestRootSecurityObj domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.TestRootSecurityObjRichDTO(mappingService, domainObject);
@@ -2001,6 +1996,11 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRestrictionObject> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+        }
+        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRootSecurityObjRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRootSecurityObj> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
@@ -2036,9 +2036,9 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO(mappingService, domainObject);
         }
         
-        public static SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO ToRichEventDTO(this SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public static SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO ToRichEventDTO(this SampleSystem.Domain.AuthPerformanceObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
-            return new SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO(mappingService, domainObject);
+            return new SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO(mappingService, domainObject);
         }
         
         public static SampleSystem.Generated.DTO.BusinessUnitEventRichDTO ToRichEventDTO(this SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
@@ -2361,11 +2361,6 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO(mappingService, domainObject);
         }
         
-        public static SampleSystem.Generated.DTO.NamedLockEventRichDTO ToRichEventDTO(this SampleSystem.Domain.NamedLock domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return new SampleSystem.Generated.DTO.NamedLockEventRichDTO(mappingService, domainObject);
-        }
-        
         public static SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO ToRichEventDTO(this SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO(mappingService, domainObject);
@@ -2461,6 +2456,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO ToRichEventDTO(this SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO ToRichEventDTO(this SampleSystem.Domain.TestRootSecurityObj domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO(mappingService, domainObject);
@@ -2501,16 +2501,6 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ChildEntityEventRichDTO(mappingService, domainObject);
         }
         
-        public static SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO ToRichEventDTO(this SampleSystem.Domain.WorkflowCoreExecutionError domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return new SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO(mappingService, domainObject);
-        }
-        
-        public static SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO ToRichEventDTO(this SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return new SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO(mappingService, domainObject);
-        }
-        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Address> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
@@ -2521,7 +2511,7 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.AuthPerformanceObject> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
@@ -2846,11 +2836,6 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.NamedLockEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.NamedLock> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.NoSecurityObject> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
@@ -2946,6 +2931,11 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
         
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRestrictionObject> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRootSecurityObj> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
@@ -2982,16 +2972,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ChildEntityEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.UniqueByParent.ChildEntity> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.WorkflowCoreExecutionError> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.WorkflowCoreInstance> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
@@ -3291,6 +3271,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ManagementUnitFluentMappingSimpleDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO ToSimpleDTO(this SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.PrincipalSimpleDTO ToSimpleDTO(this SampleSystem.Domain.Principal domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.PrincipalSimpleDTO(mappingService, domainObject);
@@ -3339,6 +3324,11 @@ namespace SampleSystem.Generated.DTO
         public static SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO ToSimpleDTO(this SampleSystem.Domain.TestPlainAuthObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO ToSimpleDTO(this SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO(mappingService, domainObject);
         }
         
         public static SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO ToSimpleDTO(this SampleSystem.Domain.TestRootSecurityObj domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
@@ -3571,6 +3561,11 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.NoSecurityObject> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+        }
+        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.PrincipalSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Principal> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
@@ -3617,6 +3612,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestPlainAuthObject> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRestrictionObject> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
@@ -3781,11 +3781,6 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO(mappingService, domainObject);
         }
         
-        public static SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO ToSimpleEventDTO(this SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return new SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO(mappingService, domainObject);
-        }
-        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.BusinessUnit> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
@@ -3917,11 +3912,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.UniqueByMaster.ParentEntity> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.WorkflowCoreInstance> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
         }

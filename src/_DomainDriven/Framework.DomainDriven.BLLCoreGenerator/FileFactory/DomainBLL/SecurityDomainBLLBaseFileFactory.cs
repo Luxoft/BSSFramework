@@ -4,8 +4,6 @@ using Framework.CodeDom;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
 
-using nuSpec.Abstraction;
-
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
 public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TConfiguration>
@@ -26,52 +24,37 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
         var genericDomainObjectParameter = this.GetDomainObjectCodeTypeParameter();
         var genericDomainObjectParameterTypeRef = genericDomainObjectParameter.ToTypeReference();
 
-        var genericOperationParameter = this.GetOperationCodeTypeParameter();
-        var genericOperationParameterTypeRef = genericOperationParameter.ToTypeReference();
-
         var contextParameter = this.GetContextParameter();
         var contextParameterRefExpr = contextParameter.ToVariableReferenceExpression();
 
         var securityProviderParameter = this.GetSecurityProviderParameter(genericDomainObjectParameter);
         var securityProviderParameterRefExpr = securityProviderParameter.ToVariableReferenceExpression();
 
-        var specificationEvaluatorParameterTypeRef = typeof(ISpecificationEvaluator).ToTypeReference();
-        var specificationEvaluatorParameter = specificationEvaluatorParameterTypeRef.ToParameterDeclarationExpression("specificationEvaluator = null");
-        var specificationEvaluatorParameterArg = specificationEvaluatorParameterTypeRef.ToParameterDeclarationExpression("specificationEvaluator").ToVariableReferenceExpression();
-
         return new CodeTypeDeclaration
                {
                        TypeParameters =
                        {
-                               genericDomainObjectParameter, genericOperationParameter
+                               genericDomainObjectParameter
                        },
 
-                       TypeAttributes = TypeAttributes.Abstract | TypeAttributes.Public,
+                       TypeAttributes = TypeAttributes.Public,
                        Name = this.Name,
                        IsClass = true,
                        IsPartial = true,
                        BaseTypes =
                        {
-                               typeof(DefaultSecurityDomainBLLBase<,,,,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference,
+                               typeof(DefaultSecurityDomainBLLBase<,,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference,
                                    this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
-                                   this.Configuration.Environment.DomainObjectBaseType.ToTypeReference(),
                                    genericDomainObjectParameterTypeRef,
-                                   this.Configuration.Environment.GetIdentityType().ToTypeReference(),
-                                   genericOperationParameterTypeRef)
+                                   this.Configuration.Environment.GetIdentityType().ToTypeReference())
                        },
                        Members =
                        {
                                new CodeConstructor
                                {
-                                       Attributes = MemberAttributes.Family,
-                                       Parameters = { contextParameter, specificationEvaluatorParameter },
-                                       BaseConstructorArgs = { contextParameterRefExpr, specificationEvaluatorParameterArg }
-                               },
-                               new CodeConstructor
-                               {
-                                       Attributes = MemberAttributes.Family,
-                                       Parameters = { contextParameter, securityProviderParameter, specificationEvaluatorParameter },
-                                       BaseConstructorArgs = { contextParameterRefExpr, securityProviderParameterRefExpr, specificationEvaluatorParameterArg }
+                                       Attributes = MemberAttributes.Public,
+                                       Parameters = { contextParameter, securityProviderParameter },
+                                       BaseConstructorArgs = { contextParameterRefExpr, securityProviderParameterRefExpr }
                                }
                        }
                };

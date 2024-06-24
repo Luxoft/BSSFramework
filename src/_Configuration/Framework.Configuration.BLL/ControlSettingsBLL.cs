@@ -6,17 +6,11 @@ using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.BLL;
 
-public class ControlSettingsBLL : DomainBLLBase<ControlSettings>
+public partial class ControlSettingsBLL
 {
-    public ControlSettingsBLL(IConfigurationBLLContext context)
-            : base(context)
-    {
-
-    }
-
     public ControlSettings GetRootControlSettingsForCurrentPrincipal(string name)
     {
-        var currentPrincipalName = this.Context.Authorization.RunAsManager.PrincipalName;
+        var currentPrincipalName = this.Context.Authorization.ActualPrincipalSource.ActualPrincipal.Name;
 
         return this.GetRootControlSettings(name, currentPrincipalName);
     }

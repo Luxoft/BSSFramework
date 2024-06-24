@@ -5,56 +5,38 @@ using System.Linq.Expressions;
 
 using Framework.Authorization.Notification;
 using Framework.DomainDriven.BLL;
-
-using JetBrains.Annotations;
+using Framework.SecuritySystem;
 
 namespace Framework.Authorization.BLL;
 
-public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthorizationBLLContext>, INotificationPrincipalExtractor, INotificationBasePermissionFilterSource
+public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthorizationBLLContext>, INotificationPrincipalExtractor
 {
-    public LegacyNotificationPrincipalExtractor([NotNull] IAuthorizationBLLContext context)
+    private readonly INotificationBasePermissionFilterSource notificationBasePermissionFilterSource;
+
+    public LegacyNotificationPrincipalExtractor(
+        IAuthorizationBLLContext context,
+        INotificationBasePermissionFilterSource notificationBasePermissionFilterSource)
         : base(context)
     {
+        this.notificationBasePermissionFilterSource = notificationBasePermissionFilterSource;
     }
 
-    public Expression<Func<Permission, bool>> GetBasePermissionFilter(Guid[] roleIdents)
+    public IEnumerable<Principal> GetNotificationPrincipalsByRoles(
+        SecurityRole[] securityRoles,
+        IEnumerable<NotificationFilterGroup> notificationFilterGroups)
     {
-        if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
-
-        var roles = this.Context.Logics.BusinessRole.GetListByIdents(roleIdents);
-        var expandedRoles = this.Context.Logics.BusinessRole.GetParents(roles).ToArray();
-
-        return new AvailablePermissionFilter(this.Context.DateTimeService, null).ToFilterExpression()
-                                                                                .BuildAnd(permission => expandedRoles.Contains(permission.Role));
-    }
-
-    public IEnumerable<Principal> GetNotificationPrincipalsByOperations(Guid[] operationsIds, IEnumerable<NotificationFilterGroup> notificationFilterGroups)
-    {
-        if (operationsIds == null) throw new ArgumentNullException(nameof(operationsIds));
+        if (securityRoles == null) throw new ArgumentNullException(nameof(securityRoles));
         if (notificationFilterGroups == null) throw new ArgumentNullException(nameof(notificationFilterGroups));
 
-        var operations = this.Context.Logics.Operation.GetListByIdents(operationsIds).ToArray();
-
-        var roleIdents = this.Context.Logics.BusinessRole.GetListBy(role => role.BusinessRoleOperationLinks.Any(link => operations.Contains(link.Operation))).ToArray(role => role.Id);
-
-        return this.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
+        return this.GetInternalNotificationPrincipals(securityRoles, notificationFilterGroups).SelectMany(v => v).Distinct();
     }
 
-
-    public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups)
+    private IEnumerable<Principal[]> GetInternalNotificationPrincipals(SecurityRole[] securityRoles, IEnumerable<NotificationFilterGroup> baseNotificationFilterGroups)
     {
-        if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
-        if (notificationFilterGroups == null) throw new ArgumentNullException(nameof(notificationFilterGroups));
-
-        return this.GetInternalNotificationPrincipals(roleIdents, notificationFilterGroups).SelectMany(v => v).Distinct();
-    }
-
-    private IEnumerable<Principal[]> GetInternalNotificationPrincipals(Guid[] roleIdents, [NotNull] IEnumerable<NotificationFilterGroup> baseNotificationFilterGroups)
-    {
-        if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
+        if (securityRoles == null) throw new ArgumentNullException(nameof(securityRoles));
         if (baseNotificationFilterGroups == null) throw new ArgumentNullException(nameof(baseNotificationFilterGroups));
 
-        var baseNotificationFilter = this.GetBasePermissionFilter(roleIdents);
+        var baseNotificationFilter = this.notificationBasePermissionFilterSource.GetBasePermissionFilter(securityRoles);
 
         foreach (var notificationFilterGroups in baseNotificationFilterGroups.PermuteByExpand())
         {
@@ -64,17 +46,17 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
             {
                 var tailGroups = notificationFilterGroups.Skip(1).ToArray();
 
-                var firstGroupEntityType = this.Context.GetEntityType(firstGroup.EntityType);
+                var firstGroupSecurityContextType = this.Context.GetSecurityContextType(firstGroup.SecurityContextType);
 
-                var firstGroupExternalSource = this.Context.ExternalSource.GetTyped(firstGroupEntityType);
+                var firstGroupExternalSource = this.Context.ExternalSource.GetTyped(firstGroupSecurityContextType);
 
                 foreach (var preExpandedIdent in firstGroup.Idents)
                 {
                     var withExpandPrincipalsRequest = from expandedIdent in firstGroupExternalSource.GetSecurityEntitiesWithMasterExpand(preExpandedIdent)
 
-                                                      let newFirtstGroup = new NotificationFilterGroup(firstGroup.EntityType, new[] { expandedIdent.Id }, firstGroup.ExpandType.WithoutHierarchical())
+                                                      let newFirstGroup = new NotificationFilterGroup(firstGroup.SecurityContextType, [expandedIdent.Id], firstGroup.ExpandType.WithoutHierarchical())
 
-                                                      let principals = this.GetDirectNotificationPrincipals(baseNotificationFilter, new[] { newFirtstGroup }.Concat(tailGroups)).ToArray()
+                                                      let principals = this.GetDirectNotificationPrincipals(baseNotificationFilter, new[] { newFirstGroup }.Concat(tailGroups)).ToArray()
 
                                                       where principals.Any()
 
@@ -113,23 +95,23 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
 
         var totalFilter = notificationFilterGroups.Aggregate(baseNotificationFilter, (accumFilter, group) =>
         {
-            var entityType = this.Context.GetEntityType(group.EntityType);
+            var securityContextType = this.Context.GetSecurityContextType(group.SecurityContextType);
 
-            var entityTypeFilter = this.GetDirectPermissionFilter(entityType, group.Idents, group.ExpandType.AllowEmpty());
+            var securityContextTypeFilter = this.GetDirectPermissionFilter(securityContextType, group.Idents, group.ExpandType.AllowEmpty());
 
-            return accumFilter.BuildAnd(entityTypeFilter);
+            return accumFilter.BuildAnd(securityContextTypeFilter);
         });
 
         return this.GetNotificationPrincipalsByRoles(totalFilter);
     }
 
-    private Expression<Func<Permission, bool>> GetDirectPermissionFilter(EntityType entityType, IEnumerable<Guid> idetns, bool allowEmpty)
+    private Expression<Func<Permission, bool>> GetDirectPermissionFilter(SecurityContextType securityContextType, IEnumerable<Guid> idetns, bool allowEmpty)
     {
-        if (entityType == null) throw new ArgumentNullException(nameof(entityType));
+        if (securityContextType == null) throw new ArgumentNullException(nameof(securityContextType));
         if (idetns == null) throw new ArgumentNullException(nameof(idetns));
 
-        return permission => permission.FilterItems.Any(fi => fi.EntityType == entityType && idetns.Contains(fi.Entity.EntityId))
-                             || (allowEmpty && permission.FilterItems.All(fi => fi.EntityType != entityType));
+        return permission => permission.Restrictions.Any(fi => fi.SecurityContextType == securityContextType && idetns.Contains(fi.SecurityContextId))
+                             || (allowEmpty && permission.Restrictions.All(fi => fi.SecurityContextType != securityContextType));
     }
 
     private IEnumerable<Principal> GetNotificationPrincipalsByRoles(Expression<Func<Permission, bool>> filter)

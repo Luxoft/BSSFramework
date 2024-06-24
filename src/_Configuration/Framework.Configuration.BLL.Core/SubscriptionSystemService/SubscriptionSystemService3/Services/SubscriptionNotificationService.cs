@@ -5,9 +5,8 @@ using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Notification;
 
-using JetBrains.Annotations;
-
-using Serilog;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 
@@ -20,7 +19,8 @@ public class SubscriptionNotificationService<TBLLContext>
     private readonly SubscriptionResolver subscriptionsResolver;
     private readonly MessageTemplateFactory<TBLLContext> templateFactory;
     private readonly IMessageSender<MessageTemplateNotification> templateSender;
-    private readonly ILogger logger;
+
+    private readonly ConfigurationContextFacade _configurationContextFacade;
 
     /// <summary>Создаёт экземпляр класса <see cref="SubscriptionNotificationService"/>.</summary>
     /// <param name="subscriptionsResolver">Компонент, выполняющий поиск подписок.</param>
@@ -39,36 +39,15 @@ public class SubscriptionNotificationService<TBLLContext>
     /// равен null.
     /// </exception>
     public SubscriptionNotificationService(
-            [NotNull] SubscriptionResolver subscriptionsResolver,
-            [NotNull] MessageTemplateFactory<TBLLContext> templateFactory,
-            [NotNull] IMessageSender<MessageTemplateNotification> sender,
-            [NotNull] ConfigurationContextFacade configurationContextFacade)
+            SubscriptionResolver subscriptionsResolver,
+            MessageTemplateFactory<TBLLContext> templateFactory,
+            IMessageSender<MessageTemplateNotification> sender,
+            ConfigurationContextFacade configurationContextFacade)
     {
-        if (subscriptionsResolver == null)
-        {
-            throw new ArgumentNullException(nameof(subscriptionsResolver));
-        }
-
-        if (templateFactory == null)
-        {
-            throw new ArgumentNullException(nameof(templateFactory));
-        }
-
-        if (sender == null)
-        {
-            throw new ArgumentNullException(nameof(sender));
-        }
-
-        if (configurationContextFacade == null)
-        {
-            throw new ArgumentNullException(nameof(configurationContextFacade));
-        }
-
-        this.subscriptionsResolver = subscriptionsResolver;
-        this.templateFactory = templateFactory;
-        this.templateSender = sender;
-
-        this.logger = Log.Logger.ForContext(this.GetType());
+        this.subscriptionsResolver = subscriptionsResolver ?? throw new ArgumentNullException(nameof(subscriptionsResolver));
+        this.templateFactory = templateFactory ?? throw new ArgumentNullException(nameof(templateFactory));
+        this.templateSender = sender ?? throw new ArgumentNullException(nameof(sender));
+        this._configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
     }
 
     /// <summary>Выполняет рассылку уведомлений об изменениях доменного объекта.</summary>
@@ -80,7 +59,7 @@ public class SubscriptionNotificationService<TBLLContext>
     /// </returns>
     /// <exception cref="ArgumentNullException">Аргумент versions равен null.</exception>
     public virtual IList<ITryResult<Subscription>> NotifyDomainObjectChanged<T>(
-            [NotNull] DomainObjectVersions<T> versions)
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (versions == null)
@@ -98,8 +77,8 @@ public class SubscriptionNotificationService<TBLLContext>
     /// <param name="versions">Версии доменного объекта.</param>
     /// <exception cref="ArgumentNullException">Аргумент subscription или versions равен null.</exception>
     public virtual void NotifyDomainObjectChanged<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)
@@ -118,7 +97,8 @@ public class SubscriptionNotificationService<TBLLContext>
     private IEnumerable<ITryResult<Subscription>> NotifyInternal<T>(DomainObjectVersions<T> versions)
             where T : class
     {
-        this.logger.Information("Send notifications for domain object '{versions}' changes.", versions);
+        var logger = this.GetLogger();
+        logger.LogDebug("Send notifications for domain object '{versions}' changes.", versions);
 
         var findSubscriptionsResult = this.TryFindSubscriptions(versions);
         var createTemplatesResult = this.TryCreateTemplates(findSubscriptionsResult, versions);
@@ -133,11 +113,11 @@ public class SubscriptionNotificationService<TBLLContext>
 
         if (result.Count == 0)
         {
-            this.logger.Information(logMessage, versions, result.Count);
+            logger.LogDebug(logMessage, versions, result.Count);
         }
         else
         {
-            this.logger.Warning(logMessage, versions, result.Count);
+            logger.LogWarning(logMessage, versions, result.Count);
         }
 
         return result;
@@ -146,12 +126,13 @@ public class SubscriptionNotificationService<TBLLContext>
     private void NotifyInternal<T>(Subscription subscription, DomainObjectVersions<T> versions)
             where T : class
     {
-        this.logger.Information("Send notifications for subscription '{subscription}' and domain object '{versions}' changes.", subscription, versions);
+        var logger = this.GetLogger();
+        logger.LogDebug("Send notifications for subscription '{subscription}' and domain object '{versions}' changes.", subscription, versions);
 
         var templates = this.CreateTemplates(subscription, versions);
         this.SendTemplates(templates);
 
-        this.logger.Information("Notifications for subscription '{subscription}' and domain object '{versions}' changes has been sent successfully.", subscription, versions);
+        logger.LogDebug("Notifications for subscription '{subscription}' and domain object '{versions}' changes has been sent successfully.", subscription, versions);
     }
 
     private ITryResult<IEnumerable<Subscription>> TryFindSubscriptions<T>(DomainObjectVersions<T> versions)
@@ -249,4 +230,7 @@ public class SubscriptionNotificationService<TBLLContext>
     {
         return this.GetFaults(new[] { tryResult });
     }
+
+    private ILogger<SubscriptionNotificationService<TBLLContext>> GetLogger() =>
+        this._configurationContextFacade.ServiceProvider.GetRequiredService<ILogger<SubscriptionNotificationService<TBLLContext>>>();
 }

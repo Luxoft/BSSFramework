@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 public interface IClassValidationContext<out TSource> : IValidationContext<TSource, IClassValidationMap>
 {
@@ -72,7 +70,7 @@ public static class ClassValidationContextExtensions
             this.OperationContext = baseContext.OperationContext;
             this.Source = convertSource(baseContext.Source);
             this.Map = baseContext.Map;
-            this.ExtendedValidationData = baseContext.ExtendedValidationData;
+            this.ServiceProvider = baseContext.ServiceProvider;
             this.ParentState = baseContext.ParentState;
         }
 
@@ -87,6 +85,6 @@ public static class ClassValidationContextExtensions
 
         public IClassValidationMap Map { get; }
 
-        public IDynamicSource ExtendedValidationData { get; }
+        public IServiceProvider ServiceProvider { get; }
     }
 }

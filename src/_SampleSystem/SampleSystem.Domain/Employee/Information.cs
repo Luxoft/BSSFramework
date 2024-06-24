@@ -6,7 +6,6 @@ namespace SampleSystem.Domain;
 
 [BLLViewRole]
 [BLLEventRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
 public class Information : BaseDirectory
 {
     private string email;

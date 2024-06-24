@@ -4,7 +4,6 @@ using Framework.Persistent;
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
 public class TestRootSecurityObj : BaseDirectory, IMaster<TestSecurityObjItem>
 {
     private BusinessUnit businessUnit;

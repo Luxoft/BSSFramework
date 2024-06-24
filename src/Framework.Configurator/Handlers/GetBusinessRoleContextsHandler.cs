@@ -1,23 +1,29 @@
-﻿using Framework.Authorization.BLL;
+﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class GetBusinessRoleContextsHandler : BaseReadHandler, IGetBusinessRoleContextsHandler
+public class GetBusinessRoleContextsHandler(
+    IRepositoryFactory<SecurityContextType> contextTypeRepoFactory,
+    IOperationAccessor operationAccessor)
+    : BaseReadHandler, IGetBusinessRoleContextsHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
+    {
+        if (!operationAccessor.IsAdministrator()) return new List<EntityDto>();
 
-    public GetBusinessRoleContextsHandler(IAuthorizationBLLContext authorizationBllContext) =>
-            this.authorizationBllContext = authorizationBllContext;
-
-    protected override object GetData(HttpContext context) =>
-            this.authorizationBllContext.Logics.EntityTypeFactory.Create(BLLSecurityMode.View)
-                .GetSecureQueryable()
-                .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
-                .OrderBy(r => r.Name)
-                .ToList();
+        return await contextTypeRepoFactory
+                     .Create()
+                     .GetQueryable()
+                     .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
+                     .OrderBy(x => x.Name)
+                     .ToListAsync(cancellationToken);
+    }
 }

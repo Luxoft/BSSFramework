@@ -1,49 +1,23 @@
-﻿using Framework.Core;
-
-namespace Framework.SecuritySystem;
-
-public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode> : OnlyDisabledDomainSecurityService<TDomainObject>, IDomainSecurityService<TDomainObject, TSecurityOperationCode>
-        where TSecurityOperationCode : struct, Enum
-        where TDomainObject : class
-{
-    public OnlyDisabledDomainSecurityService(ILegacyGenericDisabledSecurityProviderFactory legacyGenericDisabledSecurityProviderFactory)
-        :base(legacyGenericDisabledSecurityProviderFactory)
-    {
-    }
-
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(TSecurityOperationCode securityOperationCode)
-    {
-        return this.GetSecurityProviderInternal(securityOperationCode);
-    }
-
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
-    {
-        return this.GetSecurityProviderInternal(securityOperation.Code);
-    }
-}
+﻿namespace Framework.SecuritySystem;
 
 public class OnlyDisabledDomainSecurityService<TDomainObject> : IDomainSecurityService<TDomainObject>
-    where TDomainObject : class
 {
-    private readonly ILegacyGenericDisabledSecurityProviderFactory legacyGenericDisabledSecurityProviderFactory;
+    private readonly ISecurityProvider<TDomainObject> disabledSecurityProvider;
 
-    public OnlyDisabledDomainSecurityService(ILegacyGenericDisabledSecurityProviderFactory legacyGenericDisabledSecurityProviderFactory)
+    public OnlyDisabledDomainSecurityService(ISecurityProvider<TDomainObject> disabledSecurityProvider)
     {
-        this.legacyGenericDisabledSecurityProviderFactory = legacyGenericDisabledSecurityProviderFactory;
+        this.disabledSecurityProvider = disabledSecurityProvider;
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(BLLSecurityMode securityMode)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityRule securityRule)
     {
-        return this.GetSecurityProviderInternal(securityMode);
-    }
-
-    protected ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityMode)
-    {
-        if (!securityMode.IsDefault())
+        if (securityRule == SecurityRule.Disabled)
         {
-            throw new InvalidOperationException($"Security mode \"{securityMode}\" not allowed");
+            return this.disabledSecurityProvider;
         }
-
-        return this.legacyGenericDisabledSecurityProviderFactory.GetDisabledSecurityProvider<TDomainObject>();
+        else
+        {
+            throw new InvalidOperationException($"Security mode \"{securityRule}\" not allowed");
+        }
     }
 }

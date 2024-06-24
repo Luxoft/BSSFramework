@@ -2,15 +2,7 @@
 
 public class OperationDetailsDto
 {
-    public List<string> BusinessRoles
-    {
-        get;
-        set;
-    }
+    public List<string> BusinessRoles { get; set; }
 
-    public List<string> Principals
-    {
-        get;
-        set;
-    }
+    public List<string> Principals { get; set; }
 }

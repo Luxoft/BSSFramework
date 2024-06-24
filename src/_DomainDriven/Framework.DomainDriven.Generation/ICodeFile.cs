@@ -2,8 +2,6 @@
 
 using Framework.CodeDom;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.Generation;
 
 public interface ICodeFile : IRenderingFile<CodeNamespace>
@@ -13,7 +11,7 @@ public interface ICodeFile : IRenderingFile<CodeNamespace>
 
 public static class CodeFileExtensions
 {
-    public static ICodeFile WithVisitor([NotNull] this ICodeFile codeFile, [NotNull] CodeDomVisitor visitor)
+    public static ICodeFile WithVisitor(this ICodeFile codeFile, CodeDomVisitor visitor)
     {
         if (codeFile == null) throw new ArgumentNullException(nameof(codeFile));
         if (visitor == null) throw new ArgumentNullException(nameof(visitor));
@@ -29,7 +27,7 @@ public static class CodeFileExtensions
         private readonly CodeDomVisitor _visitor;
 
 
-        public VisitedCodeFile([NotNull] ICodeFile baseCodeFile, [NotNull] CodeDomVisitor visitor)
+        public VisitedCodeFile(ICodeFile baseCodeFile, CodeDomVisitor visitor)
         {
             if (baseCodeFile == null) throw new ArgumentNullException(nameof(baseCodeFile));
             if (visitor == null) throw new ArgumentNullException(nameof(visitor));

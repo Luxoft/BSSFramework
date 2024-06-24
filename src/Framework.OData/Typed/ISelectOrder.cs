@@ -1,7 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using JetBrains.Annotations;
-
 namespace Framework.OData;
 
 public interface ISelectOrder<TDomainObject>
@@ -11,10 +9,10 @@ public interface ISelectOrder<TDomainObject>
     OrderType OrderType { get; }
 
 
-    IQueryable<TDomainObject> Process([NotNull] IQueryable<TDomainObject> queryable, bool compile);
+    IQueryable<TDomainObject> Process(IQueryable<TDomainObject> queryable, bool compile);
 
     ISelectOrder<TOutput> Covariance<TOutput>()
             where TOutput : TDomainObject;
 
-    ISelectOrder<TDomainObject> Visit([NotNull] ExpressionVisitor visitor);
+    ISelectOrder<TDomainObject> Visit(ExpressionVisitor visitor);
 }

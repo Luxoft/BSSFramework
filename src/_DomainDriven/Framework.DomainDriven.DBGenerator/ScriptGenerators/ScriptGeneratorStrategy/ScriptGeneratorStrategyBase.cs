@@ -8,7 +8,7 @@ namespace Framework.DomainDriven.DBGenerator.ScriptGenerators.ScriptGeneratorStr
 /// <summary>
 /// Базовый класс для генерации части скрипта модификации базы данных
 /// </summary>
-internal abstract class ScriptGeneratorStrategyBase
+public abstract class ScriptGeneratorStrategyBase
 {
     protected readonly DatabaseScriptGeneratorStrategyInfo Parameter;
     protected readonly Server Server;

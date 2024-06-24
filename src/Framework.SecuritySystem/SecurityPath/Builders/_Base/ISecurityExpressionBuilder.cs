@@ -1,11 +1,6 @@
-﻿using Framework.Persistent;
+﻿namespace Framework.SecuritySystem.Rules.Builders;
 
-namespace Framework.SecuritySystem.Rules.Builders;
-
-public interface ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
+public interface ISecurityExpressionBuilder<TDomainObject>
 {
-    ISecurityExpressionFilter<TDomainObject> GetFilter<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityOperationCode : struct, Enum;
+    ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.DomainObjectSecurityRule securityRule, IEnumerable<Type> securityTypes);
 }

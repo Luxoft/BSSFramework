@@ -1,5 +1,6 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.BLL.Tracking;
+﻿using System.Data;
+
+using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate;
@@ -22,6 +23,8 @@ public abstract class NHibSessionBase : INHibSession
     public abstract bool Closed { get; }
 
     public DBSessionMode SessionMode { get; }
+
+    public abstract IDbTransaction Transaction { get; }
 
     public IAuditReaderPatched AuditReader => this.lazyAuditReader.Value;
 
@@ -56,11 +59,6 @@ public abstract class NHibSessionBase : INHibSession
 
     /// <inheritdoc />
     public abstract void AsWritable();
-
-    public IObjectStateService GetObjectStateService()
-    {
-        return new NHibObjectStatesService(this.NativeSession);
-    }
 
     public abstract Task CloseAsync(CancellationToken cancellationToken = default);
 

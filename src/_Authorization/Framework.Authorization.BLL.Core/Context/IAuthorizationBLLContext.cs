@@ -1,68 +1,50 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
+using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystem.ExternalSource;
+using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.BLL;
 
 public partial interface IAuthorizationBLLContext :
 
-        IAuthorizationBLLContext<Guid>,
+    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
 
-        ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
+    ITrackingServiceContainer<PersistentDomainObjectBase>,
 
-        ITrackingServiceContainer<PersistentDomainObjectBase>,
-
-        ITypeResolverContainer<string>,
-
-        IConfigurationBLLContextContainer<IConfigurationBLLContext>
+    ITypeResolverContainer<string>
 {
-    IDateTimeService DateTimeService { get; }
+    IPrincipalGeneralValidator PrincipalValidator { get; }
+
+    ICurrentPrincipalSource CurrentPrincipalSource { get; }
+
+    IActualPrincipalSource ActualPrincipalSource { get; }
+
+    Principal CurrentPrincipal => this.CurrentPrincipalSource.CurrentPrincipal;
+
+    string CurrentPrincipalName => this.CurrentPrincipal.Name;
+
+    IRunAsManager RunAsManager { get; }
+
+    IAuthorizationSystem<Guid> AuthorizationSystem { get; }
+
+    IAvailablePermissionSource AvailablePermissionSource { get; }
+
+    IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
+
+    TimeProvider TimeProvider { get; }
 
     IAuthorizationExternalSource ExternalSource { get; }
 
     INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
-    Principal CurrentPrincipal { get; }
+    SecurityContextType GetSecurityContextType(Type type);
 
-    Settings Settings { get; }
+    SecurityContextType GetSecurityContextType(string domainTypeName);
 
-
-    ISecurityProvider<TDomainObject> GetPrincipalSecurityProvider<TDomainObject>(Expression<Func<TDomainObject, Principal>> principalSecurityPath)
-            where TDomainObject : PersistentDomainObjectBase;
-
-    ISecurityProvider<TDomainObject> GetBusinessRoleSecurityProvider<TDomainObject>(Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath)
-            where TDomainObject : PersistentDomainObjectBase;
-
-    ISecurityProvider<Operation> GetOperationSecurityProvider();
-
-
-    bool HasAccess(Operation operation);
-
-    IEnumerable<string> GetAccessors(Operation operation, Expression<Func<Principal, bool>> principalFilter);
-
-
-    ITypeResolver<EntityType> SecurityTypeResolver { get; }
-
-
-    EntityType GetEntityType(Type type);
-
-    EntityType GetEntityType(string domainTypeName);
-
-    EntityType GetEntityType(Guid domainTypeId);
-
-
-    /// <summary>
-    /// Получение форматированного вида пермиссии
-    /// </summary>
-    /// <param name="permission">Пермиссия</param>
-    /// <param name="separator">Разделитель</param>
-    /// <returns></returns>
-    string GetFormattedPermission(Permission permission, string separator = " | ");
+    SecurityContextType GetSecurityContextType(Guid domainTypeId);
 }

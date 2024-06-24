@@ -3,7 +3,6 @@
 namespace SampleSystem.Domain.EnversBug1676;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
 public class WorkingCalendar1676 : BaseDirectory
 {
     private readonly Location1676 location;

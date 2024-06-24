@@ -16,8 +16,14 @@ public static class ServiceCollectionValidationExtensions
         {
             var message = filteredWrongMultiUsage.Join(
                 Environment.NewLine,
-                pair => $"The service {pair.ServiceType} has been registered many times. There are services that use it in the constructor in a single instance: "
-                        + pair.UsedFor.Join(", ", usedService => usedService.ImplementationType));
+                pair =>
+                {
+                    var keyedParts = pair.IsKeyedService ? $" (ServiceKey: {pair.ServiceKey})" : null;
+
+                    return
+                        $"The service {pair.ServiceType}{keyedParts} has been registered many times. There are services that use it in the constructor in a single instance: "
+                        + pair.UsedFor.Join(", ", usedService => usedService.ImplementationType);
+                });
 
             throw new InvalidOperationException(message);
         }
@@ -25,15 +31,21 @@ public static class ServiceCollectionValidationExtensions
         return serviceCollection;
     }
 
-    private static List<(Type ServiceType, List<ServiceDescriptor> UsedFor)> GetWrongMultiUsage(this IServiceCollection serviceCollection)
+    private static List<(Type ServiceType, bool IsKeyedService, object ServiceKey, List<ServiceDescriptor> UsedFor)> GetWrongMultiUsage(this IServiceCollection serviceCollection)
     {
         var usedParametersRequest =
 
                 from service in serviceCollection
 
-                where service.ImplementationType != null && service.ImplementationFactory == null
+                let actualImplementationType = service.IsKeyedService ? service.KeyedImplementationType : service.ImplementationType
 
-                let ctors = service.ImplementationType!.GetConstructors()
+                let actualImplementationFactory = service.IsKeyedService ? (object)service.KeyedImplementationFactory : service.ImplementationFactory
+
+                let serviceKey = service.IsKeyedService ? service.ServiceKey : null
+
+                where actualImplementationType != null && actualImplementationFactory == null
+
+                let ctors = actualImplementationType!.GetConstructors()
 
                 let actualCtor = ctors.Length == 1
                                          ? ctors[0]
@@ -45,7 +57,7 @@ public static class ServiceCollectionValidationExtensions
 
                 from parameterType in actualCtor.GetParameters().Select(p => p.ParameterType).Distinct()
 
-                group service by parameterType;
+                group service by (parameterType, service.IsKeyedService, serviceKey);
 
         var usedParametersDict = usedParametersRequest.ToDictionary(g => g.Key, g => g.ToList());
 
@@ -55,7 +67,9 @@ public static class ServiceCollectionValidationExtensions
 
                 from service in serviceCollection
 
-                group service by service.ServiceType into serviceTypeGroup
+                let serviceKey = service.IsKeyedService ? service.ServiceKey : null
+
+                group service by (service.ServiceType, service.IsKeyedService, serviceKey) into serviceTypeGroup
 
                 where serviceTypeGroup.Count() > 1
 
@@ -63,7 +77,7 @@ public static class ServiceCollectionValidationExtensions
 
                 where servicesWithSimpleUsage != null
 
-                select (ServiceType: serviceTypeGroup.Key, UsedFor: servicesWithSimpleUsage);
+                select (serviceTypeGroup.Key.ServiceType, serviceTypeGroup.Key.IsKeyedService, serviceTypeGroup.Key.serviceKey, servicesWithSimpleUsage);
 
         return wrongMultiUsageRequest.ToList();
     }

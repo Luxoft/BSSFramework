@@ -1,32 +1,23 @@
-﻿using Automation.Utils;
+﻿using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 using Framework.DomainDriven.DBGenerator;
 
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+
 using SampleSystem.DbGenerate;
 using SampleSystem.IntegrationTests.__Support;
 using SampleSystem.IntegrationTests.__Support.TestData;
-using SampleSystem.ServiceEnvironment;
-
-using WorkflowCore.Interface;
 
 namespace SampleSystem.IntegrationTests.Support.Utils;
 
-public class SampleSystemTestDatabaseGenerator : TestDatabaseGenerator
+public class SampleSystemTestDatabaseGenerator(
+    IDatabaseContext databaseContext,
+    IOptions<AutomationFrameworkSettings> settings,
+    TestDataInitializer testDataInitializer)
+    : TestDatabaseGenerator(databaseContext, settings)
 {
-    protected override IEnumerable<string> TestServers => new List<string> { "." };
-
-    private readonly IServiceProvider serviceProvider;
-
-    public SampleSystemTestDatabaseGenerator(
-            IDatabaseContext databaseContext,
-            ConfigUtil configUtil,
-            IServiceProvider serviceProvider)
-            : base(databaseContext, configUtil)
-    {
-        this.serviceProvider = serviceProvider;
-    }
+    public override IEnumerable<string> TestServers => new List<string> { "." };
 
     public override void GenerateDatabases()
     {
@@ -47,7 +38,7 @@ public class SampleSystemTestDatabaseGenerator : TestDatabaseGenerator
         }
     }
 
-    public override void GenerateTestData() => new TestDataInitialize(this.serviceProvider).TestData();
+    public override void GenerateTestData() => testDataInitializer.Initialize();
 
     public override void ExecuteInsertsForDatabases()
     {
@@ -56,22 +47,8 @@ public class SampleSystemTestDatabaseGenerator : TestDatabaseGenerator
         CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.Main.ConnectionString, @"__Support/Scripts/Authorization", this.DatabaseContext.Main.DatabaseName);
         CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.Main.ConnectionString,@"__Support/Scripts/Configuration", this.DatabaseContext.Main.DatabaseName);
 
-        this.GenerateWorkflowCoreDataBase();
-
         CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.Main.ConnectionString,@"__Support/Scripts/SampleSystem", this.DatabaseContext.Main.DatabaseName);
 
         new BssFluentMigrator(this.DatabaseContext.Main.ConnectionString, typeof(InitNumberInDomainObjectEventMigration).Assembly).Migrate();
-    }
-
-    private void GenerateWorkflowCoreDataBase()
-    {
-        var serviceProvider = new ServiceCollection()
-                              .RegisterPureWorkflowCore(this.DatabaseContext.Main.ConnectionString)
-                              .BuildServiceProvider();
-
-        var workflowHost = serviceProvider.GetRequiredService<IWorkflowHost>();
-
-        workflowHost.Start();
-        workflowHost.Stop();
     }
 }

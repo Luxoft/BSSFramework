@@ -1,12 +1,8 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.Domain;
 
@@ -15,10 +11,6 @@ namespace Framework.Configuration.Domain;
 /// Предназначен для управления активностью таких подписок во время исполнения.
 /// </summary>
 /// <seealso cref="DomainObjectBase" />
-[BLLViewRole]
-[BLLSaveRole(AllowCreate = false)]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.SubscriptionView)]
-[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.SubscriptionEdit)]
 [UniqueGroup]
 [NotAuditedClass]
 public class CodeFirstSubscription : AuditPersistentDomainObjectBase, ICodeObject<string>
@@ -32,7 +24,7 @@ public class CodeFirstSubscription : AuditPersistentDomainObjectBase, ICodeObjec
     {
     }
 
-    public CodeFirstSubscription([NotNull] string code, [NotNull] DomainType domainType)
+    public CodeFirstSubscription(string code, DomainType domainType)
     {
         if (string.IsNullOrWhiteSpace(code))
         {

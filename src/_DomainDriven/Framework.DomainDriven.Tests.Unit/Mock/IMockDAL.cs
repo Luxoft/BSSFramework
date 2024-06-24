@@ -6,6 +6,6 @@ public interface IMockDAL
     void Flush();
 }
 
-public interface IMockDAL<TDomainObject, TIdent> : IMockDAL, IDAL<TDomainObject, TIdent>
+public interface IMockDAL<TDomainObject, TIdent> : IMockDAL, IDAL<TDomainObject, TIdent>, IAsyncDal<TDomainObject, TIdent>
 {
 }

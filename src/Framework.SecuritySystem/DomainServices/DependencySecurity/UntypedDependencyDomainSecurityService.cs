@@ -1,37 +1,32 @@
 ﻿using Framework.Persistent;
 using Framework.QueryableSource;
 
-using JetBrains.Annotations;
-
 namespace Framework.SecuritySystem;
 
-public class UntypedDependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent, TSecurityOperationCode> :
+public class UntypedDependencyDomainSecurityService<TDomainObject, TBaseDomainObject, TIdent> :
 
-        DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent, TSecurityOperationCode>
+    DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject>
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TSecurityOperationCode : struct, Enum
-        where TBaseDomainObject : class, TPersistentDomainObjectBase
+    where TDomainObject : IIdentityObject<TIdent>
+    where TBaseDomainObject : class, IIdentityObject<TIdent>
 {
-    private readonly IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService;
-
-    private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+    private readonly IQueryableSource queryableSource;
 
     public UntypedDependencyDomainSecurityService(
-            [NotNull] IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
-            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
-            [NotNull] IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+        ISecurityProvider<TDomainObject> disabledSecurityProvider,
+        ISecurityRuleExpander securityRuleExpander,
+        IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
+        IQueryableSource queryableSource)
 
-            : base(disabledSecurityProviderContainer, baseDomainSecurityService)
+        : base(disabledSecurityProvider, securityRuleExpander, baseDomainSecurityService)
     {
-        this.accessDeniedExceptionService = accessDeniedExceptionService ?? throw new ArgumentNullException(nameof(accessDeniedExceptionService));
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }
 
     protected override ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider)
     {
-        return new UntypedDependencySecurityProvider<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent>(this.accessDeniedExceptionService, baseProvider, this.queryableSource);
+        return new UntypedDependencySecurityProvider<TDomainObject, TBaseDomainObject, TIdent>(
+            baseProvider,
+            this.queryableSource);
     }
 }

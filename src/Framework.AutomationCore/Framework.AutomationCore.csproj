@@ -19,4 +19,7 @@
     <PackageReference Include="Microsoft.Extensions.Options" />
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
+  </ItemGroup>
 </Project>

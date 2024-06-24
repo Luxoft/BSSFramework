@@ -2,12 +2,10 @@
 
 using Framework.CodeDom;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Persistent;
 using Framework.Projection;
-using Framework.Security;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
@@ -40,7 +38,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
 
                        BaseTypes =
                        {
-                               (this.DomainType.IsSecurity() ? typeof(IDefaultSecurityDomainBLLBase<,,,>) : typeof(IDefaultDomainBLLBase<,,,>))
+                               typeof(IDefaultSecurityDomainBLLBase<,,,>)
                                .ToTypeReference(
 
                                                 this.Configuration.BLLContextInterfaceTypeReference,

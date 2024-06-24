@@ -15,10 +15,12 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         this.EvaluateDataTypeReference =
                 typeof(EvaluatedData<,>).ToTypeReference(this.Environment.BLLCore.BLLContextInterfaceTypeReference,
                                                          this.Environment.ServerDTO.GetCodeTypeReference(null, DTOGenerator.Server.ServerFileType.ServerDTOMappingServiceInterface));
+
+        this.GeneratePolicy = new DefaultServiceGeneratePolicy(this);
     }
 
 
-    public virtual IGeneratePolicy<MethodIdentity> GeneratePolicy { get; } = DefaultServiceGeneratePolicy.Value;
+    public virtual IGeneratePolicy<MethodIdentity> GeneratePolicy { get; }
 
     public abstract string ImplementClassName { get; }
 

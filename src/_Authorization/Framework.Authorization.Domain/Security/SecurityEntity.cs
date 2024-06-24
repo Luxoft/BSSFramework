@@ -6,7 +6,7 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 /// Контексты, в разрезе которых выдаются права
 /// </summary>
-public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, ISecurityVisualIdentityObject, IVisualIdentityObject, IActiveObject, IEquatable<SecurityEntity>
+public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, IVisualIdentityObject, IEquatable<SecurityEntity>
 {
     /// <summary>
     /// Конструктор
@@ -16,8 +16,6 @@ public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, ISecurit
     }
 
     public Guid Id { get; set; }
-
-    public bool Active { get; set; }
 
     public string Name { get; set; }
 
@@ -32,49 +30,6 @@ public class SecurityEntity : DomainObjectBase, IDefaultIdentityObject, ISecurit
     public static bool operator !=(SecurityEntity v1, SecurityEntity v2)
     {
         return !(v1 == v2);
-    }
-
-    /// <summary>
-    /// Метод создает элемент плоского списка объектов для неиерархических сущностей
-    /// </summary>
-    /// <typeparam name="TDomainObject">Тип доменного объекта</typeparam>
-    /// <param name="domainObject">Доменный объект</param>
-    /// <param name="getSecurityNameFunc">Функция (переимоновывает объект)</param>
-    /// <returns>Элемент плоского списка</returns>
-    public static SecurityEntity CreatePlain<TDomainObject>(TDomainObject domainObject, Func<TDomainObject, string> getSecurityNameFunc)
-            where TDomainObject : class, IDefaultAuditPersistentDomainObjectBase
-    {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-        if (getSecurityNameFunc == null) throw new ArgumentNullException(nameof(getSecurityNameFunc));
-
-        return new SecurityEntity
-               {
-                       Active = domainObject.Active,
-                       Name = getSecurityNameFunc(domainObject),
-                       Id = domainObject.Id
-               };
-    }
-
-    /// <summary>
-    /// Метод создает элемент дерева для иерархических сущностей
-    /// </summary>
-    /// <typeparam name="TDomainObject">Тип доменного объекта</typeparam>
-    /// <param name="domainObject">Доменный объект</param>
-    /// <param name="getSecurityNameFunc">Функция (переимоновывает объект)</param>
-    /// <returns>Элемент дерева</returns>
-    public static SecurityEntity CreateHierarchical<TDomainObject>(TDomainObject domainObject, Func<TDomainObject, string> getSecurityNameFunc)
-            where TDomainObject : class, IDefaultAuditPersistentDomainObjectBase, IDefaultHierarchicalPersistentDomainObjectBase<TDomainObject>
-    {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-        if (getSecurityNameFunc == null) throw new ArgumentNullException(nameof(getSecurityNameFunc));
-
-        return new SecurityEntity
-               {
-                       Active = domainObject.Active,
-                       Name = getSecurityNameFunc(domainObject),
-                       Id = domainObject.Id,
-                       ParentId = domainObject.Parent.Maybe(v => v.Id)
-               };
     }
 
     public override string ToString()

@@ -3,12 +3,12 @@ using System.Runtime.Serialization;
 
 using Framework.CodeDom;
 using Framework.Core;
-using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
+using Framework.Persistent.Mapping;
 using Framework.Projection;
 
 namespace Framework.DomainDriven.DTOGenerator.Audit;
@@ -164,9 +164,23 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
 
     private CodeTypeDeclaration GetPropertyRevisionDTO()
     {
-        var field = new CodeMemberField("TValue", "Value")
-                    .Self(q => q.Attributes = MemberAttributes.Public)
-                    .Self(q => q.CustomAttributes.Add(new CodeAttributeDeclaration(typeof(DataMemberAttribute).FullName)));
+        var field = new CodeMemberField("TValue", "value")
+                    {
+                        Attributes = MemberAttributes.Private,
+                    };
+
+        var fieldExpr = new CodeThisReferenceExpression().ToFieldReference(field);
+
+        var property = new CodeMemberProperty
+                       {
+                           Name = "Value",
+                           Type = new CodeTypeReference("TValue"),
+                           Attributes = MemberAttributes.Public,
+                           CustomAttributes = { new CodeAttributeDeclaration(typeof(DataMemberAttribute).FullName) },
+                           GetStatements = { fieldExpr.ToMethodReturnStatement() },
+                           SetStatements = { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldExpr) }
+                       };
+
         return new CodeTypeDeclaration(this.Configuration.PropertyRevisionTypeName)
                {
                        CustomAttributes = new CodeAttributeDeclarationCollection(new[]
@@ -177,7 +191,8 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
                .Self(z => z.BaseTypes.Add(this.Configuration.PropertyRevisionTypeName))
                .Self(z => z.TypeParameters.Add("TValue"))
                .Self(z => z.Members.AddRange(GetPropertyRevisionsCodeConstructor().ToArray()))
-               .Self(z => z.Members.Add(field));
+               .Self(z => z.Members.Add(field))
+               .Self(z => z.Members.Add(property));
     }
 
     private static IEnumerable<CodeConstructor> GetPropertyRevisionsCodeConstructor()

@@ -10,8 +10,6 @@ using FluentNHibernate.Conventions.Instances;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 
-using JetBrains.Annotations;
-
 using NHibernate.Cfg;
 
 using SampleSystem.Domain;
@@ -35,7 +33,7 @@ public class SampleSystemMappingSettings : MappingSettings<PersistentDomainObjec
             IEnumerable<XDocument> mappingXmls,
             DatabaseName databaseName,
             AuditDatabaseName auditDatabaseName,
-            [NotNull] string connectionString,
+            string connectionString,
             IEnumerable<Type> types = null)
             : base(mappingXmls, databaseName, auditDatabaseName, types)
     {

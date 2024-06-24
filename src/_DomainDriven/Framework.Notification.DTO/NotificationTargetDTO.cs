@@ -6,8 +6,8 @@ namespace Framework.Notification.DTO;
 public class NotificationTargetDTO
 {
     [DataMember]
-    public NotificationTargetTypes Type;
+    public NotificationTargetTypes Type { get; set; }
 
     [DataMember]
-    public string Name;
+    public string Name { get; set; }
 }

@@ -3,7 +3,6 @@
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.Security;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
@@ -27,25 +26,9 @@ public class BLLFactoryFileFactory<TConfiguration> : FileFactory<TConfiguration>
     public CodeTypeReference BLLFactoryInterfaceRef => this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.BLLFactoryInterface);
 
 
-    private Type SecurityCodeType => this.Configuration.Environment.SecurityOperationCodeType;
-
     private CodeTypeReference GetBaseReference()
     {
-        if (this.DomainType.IsSecurity())
-        {
-            if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
-            {
-                return typeof(SecurityBLLFactory<,,,,>).ToTypeReference(this.Configuration.BLLContextTypeReference, this.BLLInterfaceRef, this.BLLRef, this.DomainType.ToTypeReference(), this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference());
-            }
-            else
-            {
-                return typeof(SecurityBLLFactoryBase<,,,>).ToTypeReference(this.Configuration.BLLContextTypeReference, this.BLLInterfaceRef, this.BLLRef, this.DomainType.ToTypeReference());
-            }
-        }
-        else
-        {
-            return typeof(BLLFactoryBase<,,,>).ToTypeReference(this.Configuration.BLLContextTypeReference, this.BLLInterfaceRef, this.BLLRef, this.DomainType.ToTypeReference());
-        }
+        return typeof(SecurityBLLFactory<,,,>).ToTypeReference(this.Configuration.BLLContextTypeReference, this.BLLInterfaceRef, this.BLLRef, this.DomainType.ToTypeReference());
     }
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()

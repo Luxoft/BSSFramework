@@ -10,8 +10,7 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class TestAsyncController : ControllerBase
 {
@@ -30,7 +29,7 @@ public class TestAsyncController : ControllerBase
     [HttpPost(nameof(AsyncGetLocations))]
     public async Task<List<LocationSimpleDTO>> AsyncGetLocations(CancellationToken cancellationToken = default)
     {
-        var bll = this.buFactory.Create(BLLSecurityMode.View);
+        var bll = this.buFactory.Create(SecurityRule.View);
 
         var list = await bll.GetSecureQueryable().ToListAsync(cancellationToken);
 
@@ -38,21 +37,29 @@ public class TestAsyncController : ControllerBase
     }
 
     [HttpPost(nameof(AsyncSaveLocation))]
-    public Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
+    public async Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
     {
-        var bll = this.buFactory.Create(BLLSecurityMode.Edit);
+        var bll = this.buFactory.Create(SecurityRule.Edit);
 
         var bu = businessUnitStrictDTO.ToDomainObject(this.mappingService, true);
 
         bll.Save(bu);
 
-        return Task.FromResult(bu.ToIdentityDTO());
+        return bu.ToIdentityDTO();
     }
 
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost(nameof(AsyncSaveLocationWithWriteException))]
-    public Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
+    public async Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
     {
-        return this.AsyncSaveLocation(businessUnitStrictDTO, cancellationToken);
+        return await this.AsyncSaveLocation(businessUnitStrictDTO, cancellationToken);
+    }
+
+    [HttpGet(nameof(TestDelay))]
+    public async Task<int> TestDelay(CancellationToken cancellationToken = default)
+    {
+        await Task.Delay(new TimeSpan(0, 1, 0), cancellationToken);
+
+        return 123;
     }
 }

@@ -11,7 +11,7 @@ public class SignValidatorAttribute : PropertyValidatorAttribute
 
     public SignType ExpectedPropertyValueSignType { get; }
 
-    public override IPropertyValidator CreateValidator()
+    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
     {
         return new SignValidator(this.ExpectedPropertyValueSignType);
     }

@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public class LazyImplementDictionaryCache<TKey, TValue> : IDictionaryCache<TKey, TValue>
 {
@@ -11,7 +9,7 @@ public class LazyImplementDictionaryCache<TKey, TValue> : IDictionaryCache<TKey,
     private readonly Func<TKey, Type> _getProxyType;
 
 
-    public LazyImplementDictionaryCache([NotNull] Func<TKey, TValue> getGetNewValueFunc, Func<TKey, Type> getProxyType = null, IEqualityComparer<TKey> comparer = null)
+    public LazyImplementDictionaryCache(Func<TKey, TValue> getGetNewValueFunc, Func<TKey, Type> getProxyType = null, IEqualityComparer<TKey> comparer = null)
     {
         if (getGetNewValueFunc == null) throw new ArgumentNullException(nameof(getGetNewValueFunc));
 

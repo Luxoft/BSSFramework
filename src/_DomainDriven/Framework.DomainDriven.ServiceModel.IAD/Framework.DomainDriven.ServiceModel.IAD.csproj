@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.ServiceModel.IAD</PackageId>
@@ -13,12 +13,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
-    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.BLL\Framework.Configuration.BLL.csproj" />
-    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL\Framework.Authorization.BLL.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.SecuritySystem\Framework.Authorization.SecuritySystem.csproj" />
+    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
+    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.NamedLocks\Framework.Configuration.NamedLocks.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
+    <ProjectReference Include="..\Framework.FinancialYear\Framework.FinancialYear.csproj" />
   </ItemGroup>
 
 </Project>

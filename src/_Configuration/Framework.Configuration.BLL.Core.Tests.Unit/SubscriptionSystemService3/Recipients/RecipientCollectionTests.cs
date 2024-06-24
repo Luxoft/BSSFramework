@@ -4,6 +4,7 @@ using FluentAssertions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.UnitTesting;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Recipients;
 
@@ -19,7 +20,7 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         // Act
 
         // Assert
-        Assert.IsNotNull(collection.GetEnumerator());
+        ClassicAssert.IsNotNull(collection.GetEnumerator());
     }
 
     [Test]

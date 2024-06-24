@@ -7,7 +7,6 @@ using Framework.Restriction;
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
 public class IMRequest : Information
 {
     private string message;

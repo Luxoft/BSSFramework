@@ -1,12 +1,10 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq.Expressions;
 using System.Reflection;
 
 using Framework.Core;
 using Framework.Persistent;
 using Framework.QueryLanguage;
 
-using Expression = System.Linq.Expressions.Expression;
 using LambdaExpression = Framework.QueryLanguage.LambdaExpression;
 using ParameterExpression = Framework.QueryLanguage.ParameterExpression;
 
@@ -30,107 +28,6 @@ public static class ExpressionExtensions
     }
 }
 
-
-
-internal static class StandartExpressionExtensions
-{
-    /// <summary>
-    /// Попытка извлечь фильтр, которым можно хотябы частично профильтровать данные из бд
-    /// </summary>
-    /// <typeparam name="TDomainObject"></typeparam>
-    /// <param name="filterExpression"></param>
-    /// <returns></returns>
-    public static Expression<Func<TDomainObject, bool>> ToRealFilter<TDomainObject>(this Expression<Func<TDomainObject, bool>> filterExpression)
-    {
-        if (filterExpression == null) throw new ArgumentNullException(nameof(filterExpression));
-
-        var tree = filterExpression.ToNode();
-
-        var virtualNodes = filterExpression.GetVirtualChains().SelectMany().ToHashSet();
-
-        var virtualTree1 = tree.Select(expr => new
-                                               {
-                                                       Expr = expr,
-                                                       IsVirtual = (expr as System.Linq.Expressions.MemberExpression).Maybe(q => virtualNodes.Contains(q))
-                                               });
-
-        var virtualTree2 = virtualTree1.Select((pair, nextChildPairs) =>
-                                               {
-                                                   if (pair.Expr is System.Linq.Expressions.LambdaExpression)
-                                                   {
-                                                       return new
-                                                              {
-                                                                      Expr = pair.Expr,
-                                                                      IsVirtual = false
-                                                              };
-                                                   }
-                                                   else if (pair.Expr.Type == typeof(bool) && (pair.Expr as System.Linq.Expressions.BinaryExpression).Maybe(binExpr => binExpr.NodeType == System.Linq.Expressions.ExpressionType.AndAlso))
-                                                   {
-                                                       return new
-                                                              {
-                                                                      Expr = pair.Expr,
-                                                                      IsVirtual = false
-                                                              };
-                                                   }
-
-                                                   return new
-                                                          {
-                                                                  Expr = pair.Expr,
-                                                                  IsVirtual = pair.IsVirtual || nextChildPairs.Any(c => c.IsVirtual)
-                                                          };
-                                               });
-
-        var dict = virtualTree2.Distinct(pair => pair.Expr).ToDictionary(pair => pair.Expr, pair => pair.IsVirtual);
-
-        var visitor = new OverrideExpressionVisitor(e => e != null && dict[e], System.Linq.Expressions.Expression.Constant(true));
-
-        return filterExpression.UpdateBody(visitor);
-    }
-
-    public static bool HasVirtualProperty<T>(this ISelectOrder<T> source)
-    {
-        return source.Path.HasVirtualProperty();
-    }
-
-    public static bool HasVirtualProperty(this System.Linq.Expressions.LambdaExpression expression)
-    {
-        return expression.GetVirtualChains().Any();
-    }
-
-    public static IEnumerable<Stack<MemberExpression>> GetVirtualChains(this System.Linq.Expressions.LambdaExpression expression)
-    {
-        var visitor = new HasVirtualPropertyVisitor();
-
-        var rootArg = expression.Parameters.Single();
-        visitor.Visit(expression.Body);
-
-        return visitor.VirtualChainCalls.Where(chain => chain.First().Expression == rootArg);
-    }
-
-
-    private class HasVirtualPropertyVisitor : ExpressionVisitor
-    {
-        public readonly List<Stack<MemberExpression>> VirtualChainCalls = new ();
-
-        protected override Expression VisitMember(MemberExpression node)
-        {
-            if (node.Member is PropertyInfo prop && !prop.HasSystemOrPrivateField())
-            {
-                this.VirtualChainCalls.Add(new[] { node }.ToStack());
-            }
-            else
-            {
-                foreach (var chain in this.VirtualChainCalls.Where(chain => chain.First().Expression == node))
-                {
-                    chain.Push(node);
-                }
-            }
-
-            return base.VisitMember(node);
-        }
-    }
-}
-
 internal static class PropertyInfoExtensions
 {
     private static readonly ReadOnlyCollection<PropertyInfo> SystemVirtualProperties =
@@ -140,7 +37,7 @@ internal static class PropertyInfoExtensions
 
     private static readonly IDictionaryCache<PropertyInfo, bool> HasSystemOrPrivateFieldCache =
 
-            new DictionaryCache<PropertyInfo, bool>(property => property.IsSystemVirtualProperty() || property.HasPrivateField() || property.HasAttribute<ExpandPathAttribute>()).WithLock();
+            new DictionaryCache<PropertyInfo, bool>(property => property.IsSystemVirtualProperty() || property.HasPrivateField(true) || property.HasAttribute<ExpandPathAttribute>()).WithLock();
 
     private static readonly IDictionaryCache<Type, IEnumerable<Type>> BaseTypesCache = new DictionaryCache<Type, IEnumerable<Type>>(type => type.GetAllElements(q => q.BaseType).TakeWhile(q => typeof(object) != q).ToHashSet(x => x)).WithLock();
 

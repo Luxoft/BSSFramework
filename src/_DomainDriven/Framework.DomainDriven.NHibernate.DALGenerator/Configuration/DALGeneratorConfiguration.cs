@@ -2,8 +2,6 @@
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Metadata;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.NHibernate.DALGenerator;
 
 public class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment>, IGeneratorConfigurationBase<TEnvironment>
@@ -14,6 +12,8 @@ public class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<T
     {
         this.DatabaseName = new DatabaseName(this.Environment.TargetSystemName);
     }
+
+    public virtual IEscapeWordService EscapeWordService { get; } = new EmptyEscapeWordService();
 
     public virtual DatabaseName DatabaseName { get; }
 
@@ -44,11 +44,15 @@ public class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<T
         }
     }
 
-    protected virtual MappingGenerator CreateMappingGenerator(IAssemblyInfo assembly, AssemblyMetadata metadata) => new MappingGenerator(assembly.ToGroup(metadata.DomainTypes), this.DatabaseName, this.UseSmartUpdate);
+    protected virtual MappingGenerator CreateMappingGenerator(IAssemblyInfo assembly, AssemblyMetadata metadata) => new MappingGenerator(
+        assembly.ToGroup(metadata.DomainTypes),
+        this.EscapeWordService,
+        this.DatabaseName,
+        this.UseSmartUpdate);
 
     protected virtual AssemblyMetadata CreateAssemblyMetadata(IAssemblyInfo assembly) => MetadataReader.GetAssemblyMetadata(this.Environment.PersistentDomainObjectBaseType, assembly);
 
-    private IMappingGenerator GetMappingGenerator([NotNull] IAssemblyInfo assembly)
+    private IMappingGenerator GetMappingGenerator(IAssemblyInfo assembly)
     {
         if (assembly == null) throw new ArgumentNullException(nameof(assembly));
 

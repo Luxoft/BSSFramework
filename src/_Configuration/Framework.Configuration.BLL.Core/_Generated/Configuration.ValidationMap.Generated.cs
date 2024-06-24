@@ -11,133 +11,15 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public partial class ConfigurationValidationMapBase : Framework.Validation.ValidationMapBase
+    public abstract partial class ConfigurationValidationMapBase : Framework.Validation.ValidationMapBase
     {
         
         private Framework.Validation.IValidationMap _defaultValidatorMap;
         
-        protected ConfigurationValidationMapBase(Framework.Core.IDynamicSource extendedValidationData) : 
-                base(extendedValidationData)
+        protected ConfigurationValidationMapBase(System.IServiceProvider serviceProvider) : 
+                base(serviceProvider)
         {
-            this._defaultValidatorMap = new Framework.Validation.ValidationMap(extendedValidationData);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, System.DateTime?>> GetAccessableBusinessRoleReportRight_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, string>> GetAccessableBusinessRoleReportRight_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, string>> GetAccessableBusinessRoleReportRight_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, System.DateTime?>> GetAccessableBusinessRoleReportRight_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, System.Guid>> GetAccessableBusinessRoleReportRight_ValueValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, System.Guid>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>> GetAccessableBusinessRoleReportRightProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, System.DateTime?>(source => source.CreateDate, currentClass, this.GetAccessableBusinessRoleReportRight_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, string>(source => source.CreatedBy, currentClass, this.GetAccessableBusinessRoleReportRight_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, string>(source => source.ModifiedBy, currentClass, this.GetAccessableBusinessRoleReportRight_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetAccessableBusinessRoleReportRight_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, System.Guid>(source => source.Value, currentClass, this.GetAccessableBusinessRoleReportRight_ValueValidators(), this.GetClassMap<System.Guid>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight> GetAccessableBusinessRoleReportRightValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(this.GetAccessableBusinessRoleReportRightProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, System.DateTime?>> GetAccessableOperationReportRight_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, string>> GetAccessableOperationReportRight_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, string>> GetAccessableOperationReportRight_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, System.DateTime?>> GetAccessableOperationReportRight_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, System.Guid>> GetAccessableOperationReportRight_ValueValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, System.Guid>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>> GetAccessableOperationReportRightProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.AccessableOperationReportRight> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, System.DateTime?>(source => source.CreateDate, currentClass, this.GetAccessableOperationReportRight_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, string>(source => source.CreatedBy, currentClass, this.GetAccessableOperationReportRight_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, string>(source => source.ModifiedBy, currentClass, this.GetAccessableOperationReportRight_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetAccessableOperationReportRight_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessableOperationReportRight, System.Guid>(source => source.Value, currentClass, this.GetAccessableOperationReportRight_ValueValidators(), this.GetClassMap<System.Guid>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.AccessableOperationReportRight> GetAccessableOperationReportRightValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(this.GetAccessableOperationReportRightProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, System.DateTime?>> GetAccessablePrincipalReportRight_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, string>> GetAccessablePrincipalReportRight_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, string>> GetAccessablePrincipalReportRight_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, System.DateTime?>> GetAccessablePrincipalReportRight_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, string>> GetAccessablePrincipalReportRight_ValueValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>> GetAccessablePrincipalReportRightProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, System.DateTime?>(source => source.CreateDate, currentClass, this.GetAccessablePrincipalReportRight_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, string>(source => source.CreatedBy, currentClass, this.GetAccessablePrincipalReportRight_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, string>(source => source.ModifiedBy, currentClass, this.GetAccessablePrincipalReportRight_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetAccessablePrincipalReportRight_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight, string>(source => source.Value, currentClass, this.GetAccessablePrincipalReportRight_ValueValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight> GetAccessablePrincipalReportRightValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(this.GetAccessablePrincipalReportRightProperties);
+            this._defaultValidatorMap = new Framework.Validation.ValidationMap(serviceProvider);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.CodeFirstSubscription, string>> GetCodeFirstSubscription_CodeValidators()
@@ -228,7 +110,7 @@ namespace Framework.Configuration.BLL
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings>> GetControlSettings_ParentValidators()
         {
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings, System.Guid>(source => source.Parent);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings, System.Guid, Framework.Configuration.Domain.PersistentDomainObjectBase>(source => source.Parent);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParam, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue>>> GetControlSettingsParam_ControlSettingsParamValuesValidators()
@@ -699,6 +581,46 @@ namespace Framework.Configuration.BLL
             return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.ExceptionMessage>(this.GetExceptionMessageProperties);
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.GenericNamedLock, System.DateTime?>> GetGenericNamedLock_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.GenericNamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.GenericNamedLock, string>> GetGenericNamedLock_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.GenericNamedLock>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.GenericNamedLock, string>> GetGenericNamedLock_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.GenericNamedLock>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.GenericNamedLock, System.DateTime?>> GetGenericNamedLock_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.GenericNamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.GenericNamedLock, string>> GetGenericNamedLock_NameValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.GenericNamedLock>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.GenericNamedLock, string>(Framework.Restriction.RequiredMode.Default);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock>> GetGenericNamedLockProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.GenericNamedLock> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock, System.DateTime?>(source => source.CreateDate, currentClass, this.GetGenericNamedLock_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock, string>(source => source.CreatedBy, currentClass, this.GetGenericNamedLock_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock, string>(source => source.ModifiedBy, currentClass, this.GetGenericNamedLock_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetGenericNamedLock_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock, string>(source => source.Name, currentClass, this.GetGenericNamedLock_NameValidators(), this.GetClassMap<string>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.GenericNamedLock> GetGenericNamedLockValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.GenericNamedLock>(this.GetGenericNamedLockProperties);
+        }
+        
         protected override Framework.Validation.IClassValidationMap<TSource> GetInternalClassMap<TSource>()
         {
             if ((typeof(TSource) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
@@ -757,61 +679,13 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetExceptionMessageRootFilterModelValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.LogMessage)))
+            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.GenericNamedLock)))
             {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetLogMessageValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportGenerationModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportGenerationRequestModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportGenerationValueValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportParameterValueValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.NamedLock)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetNamedLockValidationMap()));
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetGenericNamedLockValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.QueueProcessingState)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetQueueProcessingStateValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAccessableBusinessRoleReportRightValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Reports.AccessableOperationReportRight)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAccessableOperationReportRightValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAccessablePrincipalReportRightValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Reports.Report)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Reports.ReportFilter)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportFilterValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Reports.ReportParameter)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportParameterValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Reports.ReportProperty)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportPropertyValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.SentMessage)))
             {
@@ -851,102 +725,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_ActionValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(512);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, System.DateTime?>> GetLogMessage_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.LogMessage>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_InputMessageValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, System.DateTime?>> GetLogMessage_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.LogMessage>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_OutputMessageValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, Framework.Core.Period>> GetLogMessage_PeriodValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<Framework.Configuration.Domain.LogMessage>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.LogMessage, string>> GetLogMessage_UserNameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.LogMessage>(512);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.LogMessage>> GetLogMessageProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.LogMessage> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.Action, currentClass, this.GetLogMessage_ActionValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, System.DateTime?>(source => source.CreateDate, currentClass, this.GetLogMessage_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.CreatedBy, currentClass, this.GetLogMessage_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.InputMessage, currentClass, this.GetLogMessage_InputMessageValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.ModifiedBy, currentClass, this.GetLogMessage_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetLogMessage_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.OutputMessage, currentClass, this.GetLogMessage_OutputMessageValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, Framework.Core.Period>(source => source.Period, currentClass, this.GetLogMessage_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.LogMessage, string>(source => source.UserName, currentClass, this.GetLogMessage_UserNameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.LogMessage> GetLogMessageValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.LogMessage>(this.GetLogMessageProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.NamedLock, System.DateTime?>> GetNamedLock_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.NamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.NamedLock, string>> GetNamedLock_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.NamedLock>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.NamedLock, string>> GetNamedLock_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.NamedLock>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.NamedLock, System.DateTime?>> GetNamedLock_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.NamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.NamedLock>> GetNamedLockProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.NamedLock> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.NamedLock, System.DateTime?>(source => source.CreateDate, currentClass, this.GetNamedLock_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.NamedLock, string>(source => source.CreatedBy, currentClass, this.GetNamedLock_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.NamedLock, string>(source => source.ModifiedBy, currentClass, this.GetNamedLock_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.NamedLock, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetNamedLock_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.NamedLock> GetNamedLockValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.NamedLock>(this.GetNamedLockProperties);
-        }
-        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.QueueProcessingState, System.DateTime?>> GetQueueProcessingState_LastProcessedItemDateTimeValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.QueueProcessingState>(this.AvailableValues.GetAvailableRange<System.DateTime>());
@@ -960,363 +738,6 @@ namespace Framework.Configuration.BLL
         protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.QueueProcessingState> GetQueueProcessingStateValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.QueueProcessingState>(this.GetQueueProcessingStateProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>>> GetReport_AccessableBusinessRolesValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>, Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>>> GetReport_AccessableOperationsValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>, Framework.Configuration.Domain.Reports.AccessableOperationReportRight>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>>> GetReport_AccessablePrincipalsValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>, Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, System.DateTime?>> GetReport_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.Report>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, string>> GetReport_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.Report>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, string>> GetReport_DescriptionValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.Report>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, string>> GetReport_DomainTypeNameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.Report>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportFilter>>> GetReport_FiltersValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportFilter>, Framework.Configuration.Domain.Reports.ReportFilter>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, string>> GetReport_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.Report>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, System.DateTime?>> GetReport_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.Report>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, string>> GetReport_NameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.Report>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.Report, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, string>> GetReport_OwnerValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.Report>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportParameter>>> GetReport_ParametersValidators()
-        {
-            yield return new Framework.Validation.UniqueCollectionValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportParameter>, Framework.Configuration.Domain.Reports.ReportParameter, System.Tuple<Framework.Configuration.Domain.Reports.Report, string>>(source => new System.Tuple<Framework.Configuration.Domain.Reports.Report, string>(source.Report, Framework.Core.StringExtensions.TrimNull(source.Name).ToLower()), "Report, Name");
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportParameter>, Framework.Configuration.Domain.Reports.ReportParameter>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportProperty>>> GetReport_PropertiesValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportProperty>, Framework.Configuration.Domain.Reports.ReportProperty>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportFilter, System.DateTime?>> GetReportFilter_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.ReportFilter>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportFilter, string>> GetReportFilter_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportFilter>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportFilter, string>> GetReportFilter_FilterOperatorValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportFilter>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.ReportFilter, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportFilter, string>> GetReportFilter_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportFilter>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportFilter, System.DateTime?>> GetReportFilter_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.ReportFilter>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportFilter, string>> GetReportFilter_PropertyValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportFilter>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.ReportFilter, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportFilter, Framework.Configuration.Domain.Reports.Report>> GetReportFilter_ReportValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.ReportFilter, Framework.Configuration.Domain.Reports.Report>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportFilter, string>> GetReportFilter_ValueValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportFilter>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.ReportFilter, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Reports.ReportFilter>> GetReportFilterProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.ReportFilter> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportFilter, System.DateTime?>(source => source.CreateDate, currentClass, this.GetReportFilter_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportFilter, string>(source => source.CreatedBy, currentClass, this.GetReportFilter_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportFilter, string>(source => source.FilterOperator, currentClass, this.GetReportFilter_FilterOperatorValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportFilter, string>(source => source.ModifiedBy, currentClass, this.GetReportFilter_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportFilter, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetReportFilter_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportFilter, string>(source => source.Property, currentClass, this.GetReportFilter_PropertyValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportFilter, Framework.Configuration.Domain.Reports.Report>(source => source.Report, currentClass, this.GetReportFilter_ReportValidators(), this.GetClassMap<Framework.Configuration.Domain.Reports.Report>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportFilter, string>(source => source.Value, currentClass, this.GetReportFilter_ValueValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.ReportFilter> GetReportFilterValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Reports.ReportFilter>(this.GetReportFilterProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>>> GetReportGenerationModel_ItemsValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>, Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationPredefineValue>>> GetReportGenerationModel_PredefineGenerationValuesValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationPredefineValue>, Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationPredefineValue>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel>> GetReportGenerationModelProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel> currentClass)
-        {
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>, Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>(source => source.Items, currentClass, this.GetReportGenerationModel_ItemsValidators(), this.GetClassMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationPredefineValue>, Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationPredefineValue>(source => source.PredefineGenerationValues, currentClass, this.GetReportGenerationModel_PredefineGenerationValuesValidators(), this.GetClassMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationPredefineValue>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel> GetReportGenerationModelValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel>(this.GetReportGenerationModelProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel, System.Collections.Generic.List<Framework.Configuration.Domain.Reports.ReportParameter>>> GetReportGenerationRequestModel_ParametersValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel, System.Collections.Generic.List<Framework.Configuration.Domain.Reports.ReportParameter>, Framework.Configuration.Domain.Reports.ReportParameter>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel, System.Collections.Generic.List<Framework.DomainDriven.SerializeMetadata.TypeMetadata>>> GetReportGenerationRequestModel_TypeMetadatasValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel, System.Collections.Generic.List<Framework.DomainDriven.SerializeMetadata.TypeMetadata>, Framework.DomainDriven.SerializeMetadata.TypeMetadata>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel>> GetReportGenerationRequestModelProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel> currentClass)
-        {
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel, System.Collections.Generic.List<Framework.Configuration.Domain.Reports.ReportParameter>, Framework.Configuration.Domain.Reports.ReportParameter>(source => source.Parameters, currentClass, this.GetReportGenerationRequestModel_ParametersValidators(), this.GetClassMap<Framework.Configuration.Domain.Reports.ReportParameter>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel, System.Collections.Generic.List<Framework.DomainDriven.SerializeMetadata.TypeMetadata>, Framework.DomainDriven.SerializeMetadata.TypeMetadata>(source => source.TypeMetadatas, currentClass, this.GetReportGenerationRequestModel_TypeMetadatasValidators(), this.GetClassMap<Framework.DomainDriven.SerializeMetadata.TypeMetadata>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel> GetReportGenerationRequestModelValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel>(this.GetReportGenerationRequestModelProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue, string>> GetReportGenerationValue_DesignValueValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue, string>> GetReportGenerationValue_ValueValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>> GetReportGenerationValueProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue, string>(source => source.DesignValue, currentClass, this.GetReportGenerationValue_DesignValueValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue, string>(source => source.Value, currentClass, this.GetReportGenerationValue_ValueValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue> GetReportGenerationValueValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>(this.GetReportGenerationValueProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportParameter, System.DateTime?>> GetReportParameter_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.ReportParameter>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportParameter, string>> GetReportParameter_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportParameter>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportParameter, string>> GetReportParameter_DisplayValuePropertyValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportParameter>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportParameter, string>> GetReportParameter_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportParameter>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportParameter, System.DateTime?>> GetReportParameter_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.ReportParameter>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportParameter, string>> GetReportParameter_NameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportParameter>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportParameter, string>> GetReportParameter_TypeNameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportParameter>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Reports.ReportParameter>> GetReportParameterProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.ReportParameter> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportParameter, System.DateTime?>(source => source.CreateDate, currentClass, this.GetReportParameter_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportParameter, string>(source => source.CreatedBy, currentClass, this.GetReportParameter_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportParameter, string>(source => source.DisplayValueProperty, currentClass, this.GetReportParameter_DisplayValuePropertyValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportParameter, string>(source => source.ModifiedBy, currentClass, this.GetReportParameter_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportParameter, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetReportParameter_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportParameter, string>(source => source.Name, currentClass, this.GetReportParameter_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportParameter, string>(source => source.TypeName, currentClass, this.GetReportParameter_TypeNameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.ReportParameter> GetReportParameterValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Reports.ReportParameter>(this.GetReportParameterProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue, string>> GetReportParameterValue_DesignValueValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue, Framework.Configuration.Domain.Reports.ReportParameter>> GetReportParameterValue_ReportParameterValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue, Framework.Configuration.Domain.Reports.ReportParameter>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue, string>> GetReportParameterValue_ValueValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue>> GetReportParameterValueProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue, string>(source => source.DesignValue, currentClass, this.GetReportParameterValue_DesignValueValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue, Framework.Configuration.Domain.Reports.ReportParameter>(source => source.ReportParameter, currentClass, this.GetReportParameterValue_ReportParameterValidators(), this.GetClassMap<Framework.Configuration.Domain.Reports.ReportParameter>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue, string>(source => source.Value, currentClass, this.GetReportParameterValue_ValueValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue> GetReportParameterValueValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue>(this.GetReportParameterValueProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Reports.Report>> GetReportProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.Report> currentClass)
-        {
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>, Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(source => source.AccessableBusinessRoles, currentClass, this.GetReport_AccessableBusinessRolesValidators(), this.GetClassMap<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>, Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(source => source.AccessableOperations, currentClass, this.GetReport_AccessableOperationsValidators(), this.GetClassMap<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>, Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(source => source.AccessablePrincipals, currentClass, this.GetReport_AccessablePrincipalsValidators(), this.GetClassMap<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.Report, System.DateTime?>(source => source.CreateDate, currentClass, this.GetReport_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.Report, string>(source => source.CreatedBy, currentClass, this.GetReport_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.Report, string>(source => source.Description, currentClass, this.GetReport_DescriptionValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.Report, string>(source => source.DomainTypeName, currentClass, this.GetReport_DomainTypeNameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportFilter>, Framework.Configuration.Domain.Reports.ReportFilter>(source => source.Filters, currentClass, this.GetReport_FiltersValidators(), this.GetClassMap<Framework.Configuration.Domain.Reports.ReportFilter>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.Report, string>(source => source.ModifiedBy, currentClass, this.GetReport_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.Report, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetReport_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.Report, string>(source => source.Name, currentClass, this.GetReport_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.Report, string>(source => source.Owner, currentClass, this.GetReport_OwnerValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportParameter>, Framework.Configuration.Domain.Reports.ReportParameter>(source => source.Parameters, currentClass, this.GetReport_ParametersValidators(), this.GetClassMap<Framework.Configuration.Domain.Reports.ReportParameter>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportProperty>, Framework.Configuration.Domain.Reports.ReportProperty>(source => source.Properties, currentClass, this.GetReport_PropertiesValidators(), this.GetClassMap<Framework.Configuration.Domain.Reports.ReportProperty>(true));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportProperty, string>> GetReportProperty_AliasValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportProperty>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.ReportProperty, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportProperty, System.DateTime?>> GetReportProperty_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.ReportProperty>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportProperty, string>> GetReportProperty_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportProperty>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportProperty, string>> GetReportProperty_FormulaValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportProperty>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportProperty, string>> GetReportProperty_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportProperty>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportProperty, System.DateTime?>> GetReportProperty_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.Reports.ReportProperty>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportProperty, string>> GetReportProperty_PropertyPathValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Reports.ReportProperty>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.ReportProperty, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.ReportProperty, Framework.Configuration.Domain.Reports.Report>> GetReportProperty_ReportValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Reports.ReportProperty, Framework.Configuration.Domain.Reports.Report>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Reports.ReportProperty>> GetReportPropertyProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.ReportProperty> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportProperty, string>(source => source.Alias, currentClass, this.GetReportProperty_AliasValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportProperty, System.DateTime?>(source => source.CreateDate, currentClass, this.GetReportProperty_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportProperty, string>(source => source.CreatedBy, currentClass, this.GetReportProperty_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportProperty, string>(source => source.Formula, currentClass, this.GetReportProperty_FormulaValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportProperty, string>(source => source.ModifiedBy, currentClass, this.GetReportProperty_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportProperty, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetReportProperty_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportProperty, string>(source => source.PropertyPath, currentClass, this.GetReportProperty_PropertyPathValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Reports.ReportProperty, Framework.Configuration.Domain.Reports.Report>(source => source.Report, currentClass, this.GetReportProperty_ReportValidators(), this.GetClassMap<Framework.Configuration.Domain.Reports.Report>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.ReportProperty> GetReportPropertyValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Reports.ReportProperty>(this.GetReportPropertyProperties);
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.Report> GetReportValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Reports.Report>(this.GetReportProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.SentMessage, string>> GetSentMessage_CommentValidators()
@@ -1581,8 +1002,8 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationValidationMap : Framework.Configuration.BLL.ConfigurationValidationMapBase
     {
         
-        public ConfigurationValidationMap(Framework.Core.IDynamicSource extendedValidationData) : 
-                base(extendedValidationData)
+        public ConfigurationValidationMap(System.IServiceProvider serviceProvider) : 
+                base(serviceProvider)
         {
         }
     }

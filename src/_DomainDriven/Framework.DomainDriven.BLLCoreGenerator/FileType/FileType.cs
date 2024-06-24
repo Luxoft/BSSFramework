@@ -6,7 +6,7 @@ public enum FileType
 
     BLLContextInterface,
 
-    SecurityOperation,
+    SecurityRuleHelper,
 
     RootSecurityServicePathContainerInterface,
 
@@ -21,22 +21,7 @@ public enum FileType
     DomainSecurityService,
 
 
-
-
-    SecurityPath,
-
-
-    DomainBLLBase,
-
     SecurityDomainBLLBase,
-
-
-
-    DefaultOperationDomainBLLBase,
-
-    DefaultOperationSecurityDomainBLLBase,
-
-
 
 
     BLLInterface,
@@ -55,10 +40,14 @@ public enum FileType
 
     ValidationMap,
 
+    ValidatorCompileCache,
+
 
     ValidatorBase,
 
     Validator,
+
+    ValidatorInterface,
 
 
 

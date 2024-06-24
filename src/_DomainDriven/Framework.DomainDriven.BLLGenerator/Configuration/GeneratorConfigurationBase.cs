@@ -3,8 +3,6 @@
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.BLLGenerator;
 
 public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, FileType>, IGeneratorConfigurationBase<TEnvironment>
@@ -26,7 +24,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     protected override string NamespacePostfix { get; } = "BLL";
 
 
-    public virtual bool GenerateBllConstructor([NotNull] Type domainType)
+    public virtual bool GenerateBllConstructor(Type domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
@@ -46,6 +44,8 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
     {
+        yield return new CodeFileFactoryHeader<FileType>(FileType.BLLContext, "", _ => this.Environment.TargetSystemName + FileType.BLLContext);
+
         yield return new CodeFileFactoryHeader<FileType>(FileType.BLL, "", domainType => domainType.Name + FileType.BLL);
 
         yield return new CodeFileFactoryHeader<FileType>(FileType.BLLFactory, "", domainType => domainType.Name + FileType.BLLFactory);

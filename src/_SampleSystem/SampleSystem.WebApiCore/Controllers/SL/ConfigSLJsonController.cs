@@ -16,11 +16,11 @@ public class ConfigSLJsonController : Framework.Configuration.WebApi.ConfigSLJso
             throw new ArgumentNullException(nameof(notification));
         }
 
-        this.EvaluateC(DBSessionMode.Write, context =>
-                                            {
-                                                var bll = new SentMessageBLL(context);
-
-                                                bll.Save(notification.ToSentMessage());
-                                            });
+        this.EvaluateC(
+            DBSessionMode.Write,
+            context =>
+            {
+                context.Logics.SentMessage.Save(notification.ToSentMessage());
+            });
     }
 }

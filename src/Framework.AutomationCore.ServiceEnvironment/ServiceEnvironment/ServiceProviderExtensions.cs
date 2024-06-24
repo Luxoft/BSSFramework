@@ -4,11 +4,11 @@ using Automation.ServiceEnvironment.Services;
 
 using Framework.Core.Services;
 using Framework.DependencyInjection;
-using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
@@ -33,25 +33,26 @@ public static class ServiceProviderExtensions
                      .Where(t => !t.IsAbstract && typeof(ControllerBase).IsAssignableFrom(t)))
         {
             services.AddScoped(controllerType);
-
-            services.AddSingleton(typeof(ControllerEvaluator<>).MakeGenericType(controllerType));
         }
 
         return services;
     }
 
-    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services)
-    {
-        return services.AddSingleton<IntegrationTestUserAuthenticationService>()
-                       .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IntegrationTestUserAuthenticationService>()
-                       .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services, IConfiguration configuration) =>
 
-                       .AddSingleton<IntegrationTestDateTimeService>()
-                       .ReplaceSingletonFrom<IDateTimeService, IntegrationTestDateTimeService>()
+        services.AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+                .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
+                .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
-                       .AddScoped<TestWebApiCurrentMethodResolver>()
-                       .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+                .AddSingleton<IntegrationTestTimeProvider>()
+                .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
-                       .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();;
-    }
+                .AddScoped<TestWebApiCurrentMethodResolver>()
+                .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+
+                .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
+
+                .AddSingleton(typeof(ControllerEvaluator<>))
+
+                .AddScoped<AuthManager>();
 }

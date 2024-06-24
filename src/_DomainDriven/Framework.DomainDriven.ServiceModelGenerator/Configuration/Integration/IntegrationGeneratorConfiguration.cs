@@ -1,11 +1,10 @@
 ﻿using System.CodeDom;
 
-using Framework.CodeDom;
 using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.Integration.Remove;
 using Framework.Projection;
-using Framework.Security;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -26,10 +25,8 @@ public abstract class IntegrationGeneratorConfigurationBase<TEnvironment> : Gene
 
     public virtual string SaveMethodName { get; } = "Save";
 
-
-    public virtual CodeExpression IntegrationSecurityOperation => this.Environment.BLLCore.SecurityOperationTypeReference
-                                                                      .ToTypeReferenceExpression()
-                                                                      .ToPropertyReference(SecurityOperationCode.SystemIntegration.ToString());
+    public virtual CodeExpression IntegrationSecurityRule =>
+        this.Environment.BLLCore.GetSecurityCodeExpression(SecurityRole.SystemIntegration);
 
     protected override IEnumerable<Type> GetDomainTypes()
     {

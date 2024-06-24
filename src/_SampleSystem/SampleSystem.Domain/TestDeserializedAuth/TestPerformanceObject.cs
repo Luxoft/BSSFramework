@@ -3,7 +3,6 @@
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
 public class TestPerformanceObject : BaseDirectory
 {
     private Location location;

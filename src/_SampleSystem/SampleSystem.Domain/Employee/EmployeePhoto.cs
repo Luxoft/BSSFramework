@@ -7,8 +7,6 @@ using Framework.Restriction;
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeeEdit)]
 public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>, ITypeObject<EmployeePhotoType>
 {
     private readonly Employee employee;

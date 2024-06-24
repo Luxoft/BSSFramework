@@ -10,9 +10,12 @@ namespace Framework.DomainDriven.DTOGenerator.Server;
 public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration> : MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    protected UpdateToDomainObjectPropertyAssignerBase(IPropertyAssigner<TConfiguration> innerAssigner)
+    private readonly IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration;
+
+    protected UpdateToDomainObjectPropertyAssignerBase(IPropertyAssigner<TConfiguration> innerAssigner, IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
             : base(innerAssigner)
     {
+        this.configuration = configuration;
     }
 
 
@@ -30,7 +33,7 @@ public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration> :
         if (justValueRefExpr == null) throw new ArgumentNullException(nameof(justValueRefExpr));
         if (innerAssignStatement == null) throw new ArgumentNullException(nameof(innerAssignStatement));
 
-        var editAttr = property.GetEditDomainObjectAttribute();
+        var editAttr = this.configuration.Environment.ExtendedMetadata.GetProperty(property).GetEditDomainObjectAttribute();
 
         return new CodeNotNullConditionStatement(justValueRefExpr)
                {

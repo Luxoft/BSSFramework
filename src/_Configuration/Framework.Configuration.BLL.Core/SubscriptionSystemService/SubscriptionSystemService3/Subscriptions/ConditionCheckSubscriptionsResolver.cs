@@ -2,9 +2,8 @@
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 
-using JetBrains.Annotations;
-
-using Serilog;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 
@@ -17,7 +16,9 @@ public sealed class ConditionCheckSubscriptionsResolver<TBLLContext> : Subscript
         where TBLLContext : class
 {
     private readonly SubscriptionResolver wrappedResolver;
-    private readonly ILogger logger;
+
+    private readonly ConfigurationContextFacade _configurationContextFacade;
+
     private readonly ConditionLambdaProcessor<TBLLContext> conditionProcessor;
 
     /// <summary>Создаёт экземпляр класса <see cref="ConditionCheckSubscriptionsResolver" />.</summary>
@@ -33,27 +34,17 @@ public sealed class ConditionCheckSubscriptionsResolver<TBLLContext> : Subscript
     ///     lambdaProcessorFactory равен null.
     /// </exception>
     public ConditionCheckSubscriptionsResolver(
-            [NotNull] SubscriptionResolver resolver,
-            [NotNull] LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory,
-            [NotNull] ConfigurationContextFacade configurationContextFacade)
+            SubscriptionResolver resolver,
+            LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory,
+            ConfigurationContextFacade configurationContextFacade)
     {
-        if (resolver == null)
-        {
-            throw new ArgumentNullException(nameof(resolver));
-        }
-
         if (lambdaProcessorFactory == null)
         {
             throw new ArgumentNullException(nameof(lambdaProcessorFactory));
         }
 
-        if (configurationContextFacade == null)
-        {
-            throw new ArgumentNullException(nameof(configurationContextFacade));
-        }
-
-        this.wrappedResolver = resolver;
-        this.logger = Log.Logger.ForContext(this.GetType());
+        this.wrappedResolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
+        this._configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
         this.conditionProcessor = lambdaProcessorFactory.Create<ConditionLambdaProcessor<TBLLContext>>();
     }
 
@@ -67,7 +58,7 @@ public sealed class ConditionCheckSubscriptionsResolver<TBLLContext> : Subscript
     ///     Если выражение возвращает <c>true</c>, подписка включается в результирующий список;
     ///     в противном случае подписка не включается в результирующий список.
     /// </remarks>
-    public override IEnumerable<Subscription> Resolve<T>([NotNull] DomainObjectVersions<T> versions)
+    public override IEnumerable<Subscription> Resolve<T>(DomainObjectVersions<T> versions)
     {
         if (versions == null)
         {
@@ -87,8 +78,8 @@ public sealed class ConditionCheckSubscriptionsResolver<TBLLContext> : Subscript
 
     /// <inheritdoc />
     public override Subscription Resolve<T>(
-            [NotNull] string subscriptionCode,
-            [NotNull] DomainObjectVersions<T> versions)
+            string subscriptionCode,
+            DomainObjectVersions<T> versions)
     {
         if (subscriptionCode == null)
         {
@@ -105,7 +96,7 @@ public sealed class ConditionCheckSubscriptionsResolver<TBLLContext> : Subscript
     }
 
     /// <inheritdoc />
-    public override bool IsActiveSubscriptionForTypeExists([NotNull] Type domainObjectType)
+    public override bool IsActiveSubscriptionForTypeExists(Type domainObjectType)
     {
         if (domainObjectType == null)
         {
@@ -128,7 +119,7 @@ public sealed class ConditionCheckSubscriptionsResolver<TBLLContext> : Subscript
         }
         catch (Exception e)
         {
-            this.logger.Error(e, "Subscription {subscription} condition lambda throws an exception: '{exception}'.", subscription, e);
+            this.GetLogger().LogError(e, "Subscription {subscription} condition lambda throws an exception: '{exception}'.", subscription, e);
         }
     }
 
@@ -138,15 +129,19 @@ public sealed class ConditionCheckSubscriptionsResolver<TBLLContext> : Subscript
             ICollection<Subscription> result)
             where T : class
     {
+        var logger = this.GetLogger();
         if (this.conditionProcessor.Invoke(subscription, versions))
         {
-            this.logger.Information("Subscription '{subscription}' satisfies condition lambda '{Condition}'.", subscription, subscription.Condition);
+            logger.LogDebug("Subscription '{subscription}' satisfies condition lambda '{Condition}'.", subscription, subscription.Condition);
 
             result.Add(subscription);
         }
         else
         {
-            this.logger.Information("Subscription '{subscription} 'not satisfies condition lambda '{Condition}' and excluded from process.", subscription, subscription.Condition);
+            logger.LogDebug("Subscription '{subscription} 'not satisfies condition lambda '{Condition}' and excluded from process.", subscription, subscription.Condition);
         }
     }
+
+    private ILogger<ConditionCheckSubscriptionsResolver<TBLLContext>> GetLogger() =>
+        this._configurationContextFacade.ServiceProvider.GetRequiredService<ILogger<ConditionCheckSubscriptionsResolver<TBLLContext>>>();
 }

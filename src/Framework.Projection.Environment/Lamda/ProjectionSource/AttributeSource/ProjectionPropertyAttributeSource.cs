@@ -4,8 +4,6 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Security;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Lambda;
 
 /// <summary>
@@ -18,7 +16,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     /// </summary>
     /// <param name="environment">Окружение</param>
     /// <param name="projectionProperty">Свойство проекции</param>
-    public ProjectionPropertyAttributeSource([NotNull] ProjectionLambdaEnvironment environment, [NotNull] IProjectionProperty projectionProperty)
+    public ProjectionPropertyAttributeSource(ProjectionLambdaEnvironment environment, IProjectionProperty projectionProperty)
             : base(environment, projectionProperty)
     {
         this.ExpandPathHead = this.ProjectionValue.Path.TakeWhile(prop => this.Environment.IsPersistent(prop.PropertyType)).ToPropertyPath();
@@ -132,7 +130,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     {
         return this.ProjectionValue
                    .Path
-                   .SelectMany(prop => prop.GetDomainObjectAccessAttributes())
+                   .SelectMany(prop => this.Environment.ExtendedMetadata.GetProperty(prop).GetDomainObjectAccessAttributes())
                    .Where(attr => !(attr is EditDomainObjectAttribute))
                    .SingleMaybe()
                    .GetValueOrDefault();

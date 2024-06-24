@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.Security;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
@@ -296,10 +295,10 @@ public class DefaultIdentityDTOFileFactory<TConfiguration> : FileFactory<TConfig
     {
         yield return this.GetDataContractCodeAttributeDeclaration();
 
-        foreach (var attr in new[] { true, false }.Select(flag => this.DomainType.GetDomainObjectAccessAttribute(flag)).Where(attr => attr != null))
-        {
-            yield return attr.ToCodeAttributeDeclaration();
-        }
+        //foreach (var attr in new[] { true, false }.Select(flag => this.DomainType.GetDomainObjectAccessAttribute(flag)).Where(attr => attr != null))
+        //{
+        //    yield return attr.ToCodeAttributeDeclaration();
+        //}
     }
 
     protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()

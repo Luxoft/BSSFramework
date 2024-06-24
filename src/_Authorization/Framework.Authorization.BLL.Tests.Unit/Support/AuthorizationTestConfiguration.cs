@@ -1,11 +1,13 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.UnitTest.Mock;
 using Framework.DomainDriven.UnitTest.Mock.StubProxy;
+using Framework.Events;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -44,7 +46,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
     private AuthorizationTestConfiguration WithExternalSourceMock(AuthorizationTypedExternalSourceStub stub)
     {
         var authorizationExternalSourceMock = Substitute.For<IAuthorizationExternalSource>();
-        authorizationExternalSourceMock.GetTyped(Arg.Any<EntityType>()).Returns(stub);
+        authorizationExternalSourceMock.GetTyped(Arg.Any<SecurityContextType>()).Returns(stub);
 
         this.Context.ExternalSource.Returns(authorizationExternalSourceMock);
         return this;
@@ -53,7 +55,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
     public AuthorizationTestConfiguration WithTrackingChange(IObjectStateService objectStateService = null)
     {
         this.Context.TrackingService
-            .Returns(new TrackingService<PersistentDomainObjectBase>(objectStateService ?? Substitute.For<IObjectStateService>()))
+            .Returns(new TrackingService<PersistentDomainObjectBase>(objectStateService ?? Substitute.For<IObjectStateService>(), Substitute.For<IPersistentInfoService>()))
                 ;
 
         return this;
@@ -99,6 +101,8 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
             throw new NotImplementedException();
         }
 
+        public bool IsExists(Guid securityEntityId) => throw new NotImplementedException();
+
         private IEnumerable<SecurityEntity> GetChildren(SecurityEntity[] all, Guid parentId)
         {
             yield return all.First(x => x.Id == parentId);
@@ -117,11 +121,6 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
                 }
             }
         }
-
-        public PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     protected override void Initialize<T>(T result)
@@ -132,8 +131,8 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
 
         ((IBLLFactoryContainerContext<IAuthorizationBLLFactoryContainer>)result).Logics.Returns(bllFactoryContainer);
 
-        result.SecurityService.Returns(new AuthorizationSecurityService(result));
-        result.OperationSenders.Returns(new OperationEventSenderContainer<DomainObjectBase>(new List<IOperationEventListener<DomainObjectBase>>()));
+        result.SecurityService.Returns(new RootSecurityService<PersistentDomainObjectBase>(result.ServiceProvider));
+        result.OperationSender.Returns(new EmptyEventOperationSender());
 
         var authContext = this.AuthorizationBLLContext;
 
@@ -153,11 +152,11 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
         get
         {
             var result = Substitute.For<IAuthorizationBLLContext>();
-            var runAsManager = Substitute.For<IRunAsManager>();
+            var actualPrincipalSource = Substitute.For<IActualPrincipalSource>();
 
-            runAsManager.PrincipalName.Returns("testUser");
+            actualPrincipalSource.ActualPrincipal.Returns(new Principal { Name = "testUser" });
 
-            result.RunAsManager.Returns(runAsManager);
+            result.ActualPrincipalSource.Returns(actualPrincipalSource);
 
             return result;
         }

@@ -1,8 +1,7 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -13,8 +12,6 @@ namespace Framework.Configuration.Domain;
 /// <remarks>
 /// Механизм Framework-а сохраняет все ошибки по всем системам, записывает их в базу и высылает на почту
 /// </remarks>
-[BLLViewRole, BLLSaveRole(CustomImplementation = true)]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.ExceptionMessageView)]
 [NotAuditedClass]
 public class ExceptionMessage : AuditPersistentDomainObjectBase
 {

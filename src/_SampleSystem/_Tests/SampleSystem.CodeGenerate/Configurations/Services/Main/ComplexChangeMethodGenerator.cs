@@ -77,15 +77,15 @@ public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGene
                                .ToMethodReturnStatement();
     }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this.ModelType.GetEditDomainObjectAttribute();
 
         if (null == modelSecurityAttribute)
         {
-            return base.GetBLLSecurityParameter();
+            return base.GetBLLSecurityParameter(evaluateDataExpr);
         }
 
-        return modelSecurityAttribute.SecurityOperationCode;
+        return modelSecurityAttribute.SecurityRule;
     }
 }

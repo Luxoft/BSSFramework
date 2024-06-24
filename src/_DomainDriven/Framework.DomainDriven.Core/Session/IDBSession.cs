@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.BLL.Tracking;
+﻿using System.Data;
 
 namespace Framework.DomainDriven;
 
@@ -6,7 +6,7 @@ public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDispos
 {
     DBSessionMode SessionMode { get; }
 
-    IObjectStateService GetObjectStateService();
+    IDbTransaction Transaction { get; }
 
     /// <summary>
     /// Мануальный флаш сессии, при его вызове срабатывают только Flushed-евенты, TransactionCompleted-евенты вызываются только при закрытие сессии

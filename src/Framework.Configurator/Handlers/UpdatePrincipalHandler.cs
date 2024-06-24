@@ -4,35 +4,33 @@ using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
-
-using NHibernate.Linq;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePrincipalHandler(
-        IRepositoryFactory<Principal> PrincipalRepositoryFactory,
-        IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePrincipalHandler
+    [FromKeyedServices(nameof(SecurityRole.Administrator))] IRepository<Principal> PrincipalRepository,
+    //IPrincipalGeneralValidator PrincipalValidator,
+    IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
+    : BaseWriteHandler, IUpdatePrincipalHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var principalId = (string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var principalId = (string?)context.Request.RouteValues["id"]!;
         var name = await this.ParseRequestBodyAsync<string>(context);
 
-        await this.Update(new Guid(principalId), name, cancellationToken);
+        await this.UpdateAsync(new Guid(principalId), name, cancellationToken);
     }
 
-    private async Task Update(Guid id, string newName, CancellationToken cancellationToken)
+    private async Task UpdateAsync(Guid id, string newName, CancellationToken cancellationToken)
     {
-        var principalBll = this.PrincipalRepositoryFactory.Create(BLLSecurityMode.Edit);
-        var domainObject = await principalBll.GetQueryable()
-                                             .Where(x => x.Id == id)
-                                             .SingleAsync(cancellationToken);
+        var domainObject = await this.PrincipalRepository.LoadAsync(id, cancellationToken);
         domainObject.Name = newName;
-        await principalBll.SaveAsync(domainObject, cancellationToken);
+
+        //await this.PrincipalValidator.ValidateAndThrowAsync(domainObject, cancellationToken);
+        await this.PrincipalRepository.SaveAsync(domainObject, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
-        {
             await this.ConfiguratorIntegrationEvents.PrincipalChangedAsync(domainObject, cancellationToken);
-        }
     }
 }

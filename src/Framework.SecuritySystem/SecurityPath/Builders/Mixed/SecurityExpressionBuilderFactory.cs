@@ -1,31 +1,24 @@
-﻿using Framework.Persistent;
+﻿namespace Framework.SecuritySystem.Rules.Builders.Mixed;
 
-using JetBrains.Annotations;
-
-namespace Framework.SecuritySystem.Rules.Builders.Mixed;
-
-public class SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> : ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+public class SecurityExpressionBuilderFactory : ISecurityExpressionBuilderFactory
 {
-    private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> hasAccessFactory;
+    private readonly ISecurityExpressionBuilderFactory hasAccessFactory;
 
-    private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> queryFactory;
+    private readonly ISecurityExpressionBuilderFactory queryFactory;
 
     public SecurityExpressionBuilderFactory(
-            [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> hasAccessFactory,
-            [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> queryFactory)
+        ISecurityExpressionBuilderFactory hasAccessFactory,
+        ISecurityExpressionBuilderFactory queryFactory)
     {
         this.hasAccessFactory = hasAccessFactory ?? throw new ArgumentNullException(nameof(hasAccessFactory));
         this.queryFactory = queryFactory ?? throw new ArgumentNullException(nameof(queryFactory));
     }
 
-    public ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> path)
-            where TDomainObject : class, TPersistentDomainObjectBase
+    public ISecurityExpressionBuilder<TDomainObject> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject> path)
     {
         var hasAccessBuilder = this.hasAccessFactory.CreateBuilder(path);
         var queryBuilder = this.queryFactory.CreateBuilder(path);
 
-        return new SecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>(hasAccessBuilder, queryBuilder);
+        return new SecurityExpressionBuilder<TDomainObject>(hasAccessBuilder, queryBuilder);
     }
 }

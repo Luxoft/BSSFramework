@@ -26,11 +26,9 @@ public class ValidationMapBaseFileFactory<TConfiguration> : FileFactory<TConfigu
     {
         return new CodeTypeDeclaration
                {
-                       Name = this.Name,
-#pragma warning disable S3265 // Non-flags enums should not be used in bitwise operations
-                       Attributes = MemberAttributes.Public | MemberAttributes.Abstract,
-#pragma warning restore S3265 // Non-flags enums should not be used in bitwise operations
-                       IsPartial = true,
+                   Name = this.Name,
+                   TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract,
+                   IsPartial = true,
                };
     }
 
@@ -51,7 +49,7 @@ public class ValidationMapBaseFileFactory<TConfiguration> : FileFactory<TConfigu
         yield return defaultValidatorMapField;
 
         {
-            var extendedValidationDataParam = typeof(IDynamicSource).ToTypeReference().ToParameterDeclarationExpression("extendedValidationData");
+            var extendedValidationDataParam = typeof(IServiceProvider).ToTypeReference().ToParameterDeclarationExpression("serviceProvider");
 
             yield return new CodeConstructor
                          {

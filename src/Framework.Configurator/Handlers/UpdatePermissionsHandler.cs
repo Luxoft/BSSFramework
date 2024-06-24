@@ -1,4 +1,7 @@
-﻿using Framework.Authorization.Domain;
+﻿using FluentValidation;
+
+using Framework.Authorization.Domain;
+using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Configurator.Interfaces;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
@@ -6,204 +9,138 @@ using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
-using NHibernate.Linq;
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePermissionsHandler(
-        IRepositoryFactory<Principal> PrincipalRepositoryFactory,
-        IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
-        IRepositoryFactory<Permission> PermissionRepositoryFactory,
-        IRepositoryFactory<PermissionFilterItem> PermissionFilterItemRepositoryFactory,
-        IRepositoryFactory<PermissionFilterEntity> PermissionFilterEntityRepositoryFactory,
-        IRepositoryFactory<EntityType> EntityTypeRepositoryFactory,
-        IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
+    [FromKeyedServices(nameof(SecurityRole.Administrator))] IRepository<Principal> PrincipalRepository,
+    [FromKeyedServices(nameof(SecurityRole.Administrator))] IRepository<Permission> PermissionRepository,
+    IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+    IRepositoryFactory<PermissionRestriction> PermissionRestrictionRepositoryFactory,
+    IRepositoryFactory<SecurityContextType> SecurityContextTypeRepositoryFactory,
+    IPrincipalGeneralValidator PrincipalValidator,
+    IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var principalId = (string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var principalId = (string)context.Request.RouteValues["id"]!;
         var permissions = await this.ParseRequestBodyAsync<List<RequestBodyDto>>(context);
 
-        await this.Update(new Guid(principalId), permissions, cancellationToken);
+        await this.UpdateAsync(new Guid(principalId), permissions, cancellationToken);
     }
 
-    private async Task Update(Guid id, IEnumerable<RequestBodyDto> permissions, CancellationToken cancellationToken)
+    private async Task UpdateAsync(Guid id, IEnumerable<RequestBodyDto> permissions, CancellationToken cancellationToken)
     {
-        var cache = new HashSet<PermissionFilterEntity>();
-        var principalRepository = this.PrincipalRepositoryFactory.Create(BLLSecurityMode.Edit);
-        var principal = await principalRepository
-                              .GetQueryable()
-                              .Where(x => x.Id == id)
-                              .SingleAsync(cancellationToken);
+        var principal = await this.PrincipalRepository.LoadAsync(id, cancellationToken);
 
-        var mergeResult = principal.Permissions.GetMergeResult(
-                                                               permissions,
-                                                               p => p.Id,
-                                                               p => string.IsNullOrWhiteSpace(p.PermissionId)
-                                                                            ? Guid.NewGuid()
-                                                                            : new Guid(p.PermissionId));
+        var mergeResult = principal.Permissions
+                                   .GetMergeResult(
+                                       permissions,
+                                       x => x.Id,
+                                       x => string.IsNullOrWhiteSpace(x.PermissionId) ? Guid.NewGuid() : new Guid(x.PermissionId));
 
-        await this.CreatePermissions(principal, mergeResult.AddingItems, cache, cancellationToken);
-        await this.UpdatePermissions(mergeResult.CombineItems, cache, cancellationToken);
+        await this.CreatePermissionsAsync(principal, mergeResult.AddingItems, cancellationToken);
+        await this.UpdatePermissionsAsync(mergeResult.CombineItems, cancellationToken);
         principal.RemoveDetails(mergeResult.RemovingItems);
 
-        await principalRepository.SaveAsync(principal, cancellationToken);
+        await this.PrincipalValidator.ValidateAndThrowAsync(principal, cancellationToken);
+        await this.PrincipalRepository.SaveAsync(principal, cancellationToken);
+
         if (this.ConfiguratorIntegrationEvents != null)
-        {
             foreach (var removingItem in mergeResult.RemovingItems)
-            {
                 await this.ConfiguratorIntegrationEvents.PermissionRemovedAsync(removingItem, cancellationToken);
-            }
-        }
     }
 
-    private async Task CreatePermissions(
-            Principal principal,
-            IEnumerable<RequestBodyDto> dtoModels,
-            ISet<PermissionFilterEntity> cache,
-            CancellationToken cancellationToken)
+    private async Task CreatePermissionsAsync(Principal principal, IEnumerable<RequestBodyDto> dtoModels, CancellationToken token)
     {
         foreach (var dto in dtoModels)
         {
             var permission = new Permission(principal)
                              {
-                                     Role =
-                                             await this.BusinessRoleRepositoryFactory.Create()
-                                                       .GetQueryable()
-                                                       .Where(x => x.Id == new Guid(dto.RoleId))
-                                                       .SingleAsync(cancellationToken),
-                                     Comment = dto.Comment,
-                                     Status = PermissionStatus.Approved,
-                                     Period = dto.StartDate.ToPeriod(dto.EndDate),
-                                     Active = true
+                                 Role = await this.BusinessRoleRepositoryFactory.Create().LoadAsync(new Guid(dto.RoleId), token),
+                                 Comment = dto.Comment,
+                                 Period = dto.StartDate.ToPeriod(dto.EndDate)
                              };
 
-            await this.PermissionRepositoryFactory.Create(BLLSecurityMode.Edit).SaveAsync(permission, cancellationToken);
+            await this.PermissionRepository.SaveAsync(permission, token);
 
             foreach (var context in dto.Contexts)
             {
                 foreach (var contextEntity in context.Entities)
-                {
-                    var filterEntity = await this.GetOrCreatePermissionFilterEntity(
-                                                                                    (TypeId: new Guid(context.Id),
-                                                                                        ObjectId: new Guid(contextEntity)),
-                                                                                    cache,
-                                                                                    cancellationToken);
-
-                    await this.PermissionFilterItemRepositoryFactory
+                    await this.PermissionRestrictionRepositoryFactory
                               .Create()
-                              .SaveAsync(new PermissionFilterItem(permission, filterEntity), cancellationToken);
-                }
+                              .SaveAsync(
+                                  await this.CreatePermissionRestrictionAsync(
+                                      permission,
+                                      new Guid(context.Id),
+                                      new Guid(contextEntity),
+                                      token),
+                                  token);
             }
 
             if (this.ConfiguratorIntegrationEvents != null)
-            {
-                await this.ConfiguratorIntegrationEvents.PermissionCreatedAsync(permission, cancellationToken);
-            }
+                await this.ConfiguratorIntegrationEvents.PermissionCreatedAsync(permission, token);
         }
     }
 
-    private async Task UpdatePermissions(
-            IList<TupleStruct<Permission, RequestBodyDto>> updatedItems,
-            ISet<PermissionFilterEntity> cache,
-            CancellationToken cancellationToken)
+    private async Task UpdatePermissionsAsync(IEnumerable<(Permission, RequestBodyDto)> updatedItems, CancellationToken token)
     {
         foreach (var item in updatedItems)
         {
             item.Item1.Comment = item.Item2.Comment;
             item.Item1.Period = item.Item2.StartDate.ToPeriod(item.Item2.EndDate);
 
-            var mergeResult = item.Item1.FilterItems
+            var mergeResult = item.Item1.Restrictions
                                   .GetMergeResult(
                                       item.Item2.Contexts.SelectMany(
                                           x => x.Entities.Select(
-                                              e => new
-                                                   {
-                                                       TypeId = new Guid(x.Id),
-                                                       ObjectId = new Guid(e)
-                                                   })),
-                                      x => new { TypeId = x.EntityType.Id, ObjectId = x.Entity.EntityId },
+                                              e => new { TypeId = new Guid(x.Id), ObjectId = new Guid(e) })),
+                                      x => new { TypeId = x.SecurityContextType.Id, ObjectId = x.SecurityContextId },
                                       x => new { x.TypeId, x.ObjectId });
 
-            foreach (var filterEntityItem in mergeResult.AddingItems)
-            {
-                var filterEntity = await this.GetOrCreatePermissionFilterEntity(
-                                                                                (filterEntityItem.TypeId,
-                                                                                    filterEntityItem.ObjectId),
-                                                                                cache,
-                                                                                cancellationToken);
-                await this.PermissionFilterItemRepositoryFactory.Create()
+            foreach (var permissionRestriction in mergeResult.AddingItems)
+                await this.PermissionRestrictionRepositoryFactory.Create()
                           .SaveAsync(
-                                     new PermissionFilterItem(item.Item1, filterEntity),
-                                     cancellationToken);
-            }
+                              await this.CreatePermissionRestrictionAsync(
+                                  item.Item1,
+                                  permissionRestriction.TypeId,
+                                  permissionRestriction.ObjectId,
+                                  token),
+                              token);
 
             item.Item1.RemoveDetails(mergeResult.RemovingItems);
 
-            await this.PermissionRepositoryFactory.Create(BLLSecurityMode.Edit).SaveAsync(item.Item1, cancellationToken);
+            await this.PermissionRepository.SaveAsync(item.Item1, token);
 
             if (this.ConfiguratorIntegrationEvents != null)
-            {
-                await this.ConfiguratorIntegrationEvents.PermissionChangedAsync(item.Item1, cancellationToken);
-            }
+                await this.ConfiguratorIntegrationEvents.PermissionChangedAsync(item.Item1, token);
         }
     }
 
-    private async Task<PermissionFilterEntity> GetOrCreatePermissionFilterEntity(
-            (Guid TypeId, Guid ObjectId) key,
-            ISet<PermissionFilterEntity> cache,
-            CancellationToken cancellationToken)
-    {
-        var result = cache.SingleOrDefault(x => x.EntityType.Id == key.TypeId && x.EntityId == key.ObjectId)
-                     ?? await this.PermissionFilterEntityRepositoryFactory.Create()
-                                  .GetQueryable()
-                                  .SingleOrDefaultAsync(
-                                                        x => x.EntityType.Id == key.TypeId && x.EntityId == key.ObjectId,
-                                                        cancellationToken);
-        if (result != null)
+    private async Task<PermissionRestriction> CreatePermissionRestrictionAsync(
+        Permission permission,
+        Guid securityContextTypeId,
+        Guid securityContextId,
+        CancellationToken token) =>
+        new(permission)
         {
-            return result;
-        }
-
-        var entityType = await this.EntityTypeRepositoryFactory
-                                   .Create()
-                                   .GetQueryable()
-                                   .Where(x => x.Id == key.TypeId)
-                                   .SingleAsync(cancellationToken);
-        var filterEntity = new PermissionFilterEntity { EntityType = entityType, EntityId = key.ObjectId, Active = true };
-
-        await this.PermissionFilterEntityRepositoryFactory.Create().SaveAsync(filterEntity, cancellationToken);
-        cache.Add(filterEntity);
-
-        return filterEntity;
-    }
+            SecurityContextId = securityContextId,
+            SecurityContextType = await this.SecurityContextTypeRepositoryFactory.Create().LoadAsync(securityContextTypeId, token)
+        };
 
     private class RequestBodyDto
     {
-        public string PermissionId
-        {
-            get;
-            set;
-        } = default!;
+        public string PermissionId { get; set; } = default!;
 
-        public string RoleId
-        {
-            get;
-            set;
-        } = default!;
+        public string RoleId { get; set; } = default!;
 
-        public string Comment
-        {
-            get;
-            set;
-        } = default!;
+        public string Comment { get; set; } = default!;
 
-        public List<ContextDto> Contexts
-        {
-            get;
-            set;
-        } = default!;
+        public List<ContextDto> Contexts { get; set; } = default!;
 
         public DateTime? EndDate { get; set; }
 
@@ -211,17 +148,9 @@ public record UpdatePermissionsHandler(
 
         public class ContextDto
         {
-            public string Id
-            {
-                get;
-                set;
-            } = default!;
+            public string Id { get; set; } = default!;
 
-            public List<string> Entities
-            {
-                get;
-                set;
-            } = default!;
+            public List<string> Entities { get; set; } = default!;
         }
     }
 }

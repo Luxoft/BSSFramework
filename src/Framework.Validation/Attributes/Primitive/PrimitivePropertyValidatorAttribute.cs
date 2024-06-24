@@ -1,27 +1,22 @@
-﻿using Framework.Core;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class PrimitivePropertyValidatorAttribute : PropertyValidatorAttribute
 {
-    private static readonly IDictionaryCache<Type, IPropertyValidator> Cache = new DictionaryCache<Type, IPropertyValidator>(
-     type => (IPropertyValidator)Activator.CreateInstance(type)).WithLock();
+    private readonly Type validatorType;
 
-
-    private readonly Type _validatatorType;
-
-
-    public PrimitivePropertyValidatorAttribute(Type validatatorType)
+    public PrimitivePropertyValidatorAttribute(Type validatorType)
     {
-        if (validatatorType == null) throw new ArgumentNullException(nameof(validatatorType));
+        if (validatorType == null) throw new ArgumentNullException(nameof(validatorType));
 
-        this._validatatorType = validatatorType;
+        this.validatorType = validatorType;
     }
 
 
-    public override IPropertyValidator CreateValidator()
+    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
     {
-        return Cache[this._validatatorType];
+        return (IPropertyValidator)ActivatorUtilities.CreateInstance(serviceProvider, this.validatorType);
     }
 }

@@ -12,8 +12,6 @@ namespace SampleSystem.Domain;
 
 [DomainType("5C326B10-B4B4-402C-BCCE-A311016CB715")]
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.BusinessUnitView, SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView, SourceTypes = new[] { typeof(Employee), typeof(BusinessUnitHrDepartment) })]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.BusinessUnitEdit)]
 public partial class BusinessUnit :
         CommonUnitBase,
         IDenormalizedHierarchicalPersistentSource<BusinessUnitAncestorLink, BusinessUnitToAncestorChildView, BusinessUnit, Guid>,
@@ -53,6 +51,8 @@ public partial class BusinessUnit :
 
     private int deepLevel;
 
+    //private int order;
+
     public BusinessUnit()
     {
     }
@@ -74,6 +74,11 @@ public partial class BusinessUnit :
         get { return this.deepLevel; }
         protected set { this.deepLevel = value; }
     }
+    //public virtual int Order
+    //{
+    //    get { return this.order; }
+    //    protected set { this.order = value; }
+    //}
 
     public virtual DateTime? LastBusinessUnitHasNoLinkedProjectsWarningCheckDate
     {
@@ -87,10 +92,11 @@ public partial class BusinessUnit :
         protected internal set { this.needSendBusinessUnitHasNoLinkedProjectsWarning = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual BusinessUnitType BusinessUnitType
     {
         get { return this.businessUnitType; }
-        protected internal set { this.businessUnitType = value; }
+        set { this.businessUnitType = value; }
     }
 
     public virtual decimal Commission
@@ -176,10 +182,11 @@ public partial class BusinessUnit :
         set { this.leastProjectStartDate = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Period Period
     {
         get { return this.period; }
-        protected internal set { this.period = value; }
+        set { this.period = value; }
     }
 
     public virtual int Rank
@@ -387,10 +394,11 @@ public partial class BusinessUnit :
     /// Supposed to be set from dto only.
     /// </summary>
     [IsMaster]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual BusinessUnit Parent
     {
         get { return this.parent; }
-        protected internal set { this.parent = value; }
+        set { this.parent = value; }
     }
 
     BusinessUnit IUnit<BusinessUnit>.CurrentObject

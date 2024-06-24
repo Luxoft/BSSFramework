@@ -4,9 +4,8 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.Persistent;
-
-using JetBrains.Annotations;
+using Framework.Notification;
+using Framework.SecuritySystem;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -14,8 +13,8 @@ internal class ByRolesRecipientsResolverBase<TBLLContext>
         where TBLLContext : class
 {
     public ByRolesRecipientsResolverBase(
-            [NotNull] ConfigurationContextFacade configurationContextFacade,
-            [NotNull] LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
+            ConfigurationContextFacade configurationContextFacade,
+            LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
     {
         if (configurationContextFacade == null)
         {
@@ -48,9 +47,9 @@ internal class ByRolesRecipientsResolverBase<TBLLContext>
         return new Recipient(employee.Login, employee.Email);
     }
 
-    protected Guid[] GetBusinessRolesIds(Subscription subscription)
+    protected SecurityRole[] GetBusinessRoles(Subscription subscription)
     {
-        var result = subscription.SubBusinessRoles.ToArray(r => r.BusinessRoleId);
+        var result = subscription.SubBusinessRoles.ToArray(r => r.SecurityRole);
         return result;
     }
 }

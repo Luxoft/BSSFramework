@@ -10,7 +10,7 @@ namespace Framework.DomainDriven.DBGenerator.ScriptGenerators.ScriptGeneratorStr
 /// <summary>
 /// Проинициализирует все соданные колонки, из коллекции AddedColumns, с атрибутом <code>VersionAttribute</code> значением по умолчанию
 /// </summary>
-internal class ChangeDefaultInitializedValueStrategy : ScriptGeneratorStrategyBase
+public class ChangeDefaultInitializedValueStrategy : ScriptGeneratorStrategyBase
 {
     public ChangeDefaultInitializedValueStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : base(parameter)
     {

@@ -1,10 +1,17 @@
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public class ServerAttributeGeneratePolicy : AttributeGeneratePolicy
 {
+    private readonly IServerGeneratorConfigurationBase configuration;
+
+    public ServerAttributeGeneratePolicy(IServerGeneratorConfigurationBase configuration)
+    {
+        this.configuration = configuration;
+    }
+
     public override bool Used(Type domainType, RoleFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
@@ -12,9 +19,9 @@ public class ServerAttributeGeneratePolicy : AttributeGeneratePolicy
 
         if (fileType is DomainOperationEventDTOFileType)
         {
-            var operation = (fileType as DomainOperationEventDTOFileType).Operation;
+            var operation = (fileType as DomainOperationEventDTOFileType).EventOperation;
 
-            return domainType.GetEventOperations().Contains(operation);
+            return this.configuration.DomainObjectEventMetadata.GetEventOperations(domainType).Contains(operation);
         }
         else if (fileType == ServerFileType.RichEventDTO)
         {

@@ -11,7 +11,7 @@ namespace SampleSystem.BLL
 {
     
     
-    public partial class SampleSystemMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<SampleSystem.Domain.PersistentDomainObjectBase>
+    public abstract partial class SampleSystemMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<SampleSystem.Domain.PersistentDomainObjectBase>
     {
         
         protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Address> GetAddressContainer(Framework.Transfering.ViewDTOType rule)
@@ -66,23 +66,33 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject> GetApprovePermissionWorkflowDomainObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>.Empty;
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.AuthPerformanceObject>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>.Empty;
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.AuthPerformanceObject>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>.Empty;
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.AuthPerformanceObject>(
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.BusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Employee).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Location).SelectMany(location => location.Children),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.ManagementUnit));
             }
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>.Empty;
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.AuthPerformanceObject>(
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.BusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Employee).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Location).SelectMany(location => location.Children),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.ManagementUnit));
             }
             else
             {
@@ -600,9 +610,9 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAnotherSqlParserTestObjContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.AuthPerformanceObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetApprovePermissionWorkflowDomainObjectContainer(rule)));
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAuthPerformanceObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
             {
@@ -804,10 +814,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestManualEmployeeProjectionContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetNamedLockContainer(rule)));
-            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NoSecurityObject)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetNoSecurityObjectContainer(rule)));
@@ -948,6 +954,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestPlainAuthObjectContainer(rule)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRestrictionObject)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRestrictionObjectContainer(rule)));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRootSecurityObjContainer(rule)));
@@ -975,14 +985,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.UniqueByParent.ChildEntity)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetChildEntityContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetWorkflowCoreExecutionErrorContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetWorkflowCoreInstanceContainer(rule)));
             }
             else
             {
@@ -2112,30 +2114,6 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.NamedLock> GetNamedLockContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.NamedLock>.Empty;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
         protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.NoSecurityObject> GetNoSecurityObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
@@ -2841,6 +2819,30 @@ namespace SampleSystem.BLL
             }
         }
         
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestRestrictionObject> GetTestRestrictionObjectContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestRestrictionObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestRestrictionObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestRestrictionObject>(fetchRootRule => fetchRootRule.SelectNested(testRestrictionObject => testRestrictionObject.BusinessUnit));
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestRestrictionObject>(fetchRootRule => fetchRootRule.SelectNested(testRestrictionObject => testRestrictionObject.BusinessUnit));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
         protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
@@ -3051,54 +3053,6 @@ namespace SampleSystem.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.ProjectionDTO))
             {
                 return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Projections.VisualProject>.Empty;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.WorkflowCoreExecutionError> GetWorkflowCoreExecutionErrorContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.WorkflowCoreExecutionError>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.WorkflowCoreExecutionError>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.WorkflowCoreExecutionError>(fetchRootRule => fetchRootRule.SelectNested(workflowCoreExecutionError => workflowCoreExecutionError.WorkflowInstance));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.WorkflowCoreExecutionError>(fetchRootRule => fetchRootRule.SelectNested(workflowCoreExecutionError => workflowCoreExecutionError.WorkflowInstance));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.WorkflowCoreInstance> GetWorkflowCoreInstanceContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.WorkflowCoreInstance>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.WorkflowCoreInstance>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.WorkflowCoreInstance>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.WorkflowCoreInstance>.Empty;
             }
             else
             {

@@ -7,8 +7,6 @@ using Framework.Persistent.Mapping;
 using Framework.Security;
 using Framework.Validation;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Contract;
 
 internal class GeneratedType : BaseTypeImpl
@@ -32,7 +30,7 @@ internal class GeneratedType : BaseTypeImpl
     private readonly Attribute[] customAttributes;
 
 
-    public GeneratedType(ProjectionContractEnvironment environment, [NotNull] Type contractType, Dictionary<Type, GeneratedType> preGenerateTypes)
+    public GeneratedType(ProjectionContractEnvironment environment, Type contractType, Dictionary<Type, GeneratedType> preGenerateTypes)
     {
         if (contractType == null) throw new ArgumentNullException(nameof(contractType));
 
@@ -65,7 +63,6 @@ internal class GeneratedType : BaseTypeImpl
 
     public override Type UnderlyingSystemType => this.BaseType;
 
-    [NotNull]
     public override Type BaseType => this.isPersistent ? this.environment.PersistentDomainObjectBaseType : this.environment.DomainObjectBaseType;
 
     public override Assembly Assembly { get; } = null;
@@ -145,7 +142,7 @@ internal class GeneratedType : BaseTypeImpl
 
     private IEnumerable<Attribute> GetSecurityAttributes()
     {
-        if (this.SourceType.IsSecurity())
+        if (this.isPersistent)
         {
             yield return new DependencySecurityAttribute(this.SourceType);
         }

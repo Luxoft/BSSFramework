@@ -8,8 +8,6 @@ namespace SampleSystem.Domain;
 
 [DomainType("77E78AEF-9512-46E0-A33D-AAE58DC7E18C")]
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.ManagementUnitView, SampleSystemSecurityOperationCode.EmployeeEdit)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.ManagementUnitEdit)]
 public class ManagementUnit :
         CommonUnitBase,
         IDenormalizedHierarchicalPersistentSource<ManagementUnitAncestorLink, ManagementUnitToAncestorChildView, ManagementUnit, Guid>,
@@ -66,10 +64,11 @@ public class ManagementUnit :
     /// <summary>
     ///  Supposed to be set from dto only.
     /// </summary>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual ManagementUnit Parent
     {
         get { return this.parent; }
-        protected internal set { this.parent = value; }
+        set { this.parent = value; }
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client | DTORole.Report)]

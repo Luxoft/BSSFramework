@@ -5,8 +5,6 @@ using Framework.DomainDriven;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using nuSpec.Abstraction;
-
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
@@ -114,9 +112,8 @@ public class SequenceBllTests : TestBase
 
         public SequenceBllMock(
             AutoResetEvent resetEvent,
-            IConfigurationBLLContext context,
-            ISpecificationEvaluator specificationEvaluator = null)
-            : base(context, context.Logics.Sequence.SecurityProvider, specificationEvaluator) =>
+            IConfigurationBLLContext context)
+            : base(context, context.Logics.Sequence.SecurityProvider) =>
             this.resetEvent = resetEvent;
 
         protected override void LockSequence()

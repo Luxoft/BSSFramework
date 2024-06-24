@@ -1,16 +1,17 @@
 ﻿using Framework.DomainDriven.Serialization;
+using Framework.Events;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public class DomainOperationEventDTOFileType : DTOFileType, IEquatable<DomainOperationEventDTOFileType>
 {
-    public readonly Enum Operation;
+    public readonly EventOperation EventOperation;
 
 
-    public DomainOperationEventDTOFileType(Enum operation)
-            : base("OperationEventDTO", DTORole.Event)
+    public DomainOperationEventDTOFileType(EventOperation domainObjectEvent)
+        : base("OperationEventDTO", DTORole.Event)
     {
-        this.Operation = operation ?? throw new ArgumentNullException(nameof(operation));
+        this.EventOperation = domainObjectEvent ?? throw new ArgumentNullException(nameof(domainObjectEvent));
     }
 
 
@@ -21,11 +22,11 @@ public class DomainOperationEventDTOFileType : DTOFileType, IEquatable<DomainOpe
 
     public virtual bool Equals(DomainOperationEventDTOFileType other)
     {
-        return base.Equals(other) && this.Operation.Equals(other.Operation);
+        return base.Equals(other) && this.EventOperation == other.EventOperation;
     }
 
     public override string ToString()
     {
-        return $"{this.Name} ({this.Operation})";
+        return $"{this.Name} ({this.EventOperation.Name})";
     }
 }

@@ -10,7 +10,7 @@
       rights: rights$ | async,
       filter: filter$ | async
     } as obj">
-    <div class="row tw-p-3 tw-mx-4 tw-gap-4 tw-w-fit tw-sticky tw-top-0 tw-bg-white tw-z-10">
+    <div class="row tw-p-3 tw-w-full tw-gap-4 tw-sticky tw-top-0 tw-bg-white tw-z-10">
       <div></div>
       <app-search-header
         [label]="'Role'"
@@ -55,8 +55,12 @@
           <span>Delete</span>
         </button>
       </mat-menu>
-      <div [appHighlight]="obj.filter?.role" [text]="element.Role"></div>
-      <div [appHighlight]="obj.filter?.comment" [text]="element.Comment"></div>
+      <div
+        class="tw-break-all"
+        [appHighlight]="obj.filter?.role" [text]="element.Role"></div>
+      <div
+        class="tw-overflow-scroll tw-max-h-[80px]"
+        [appHighlight]="obj.filter?.comment" [text]="element.Comment"></div>
       <div class="tw-flex tw-items-center">
         <div class="tw-flex tw-gap-4 tw-my-1">
           <app-select-context

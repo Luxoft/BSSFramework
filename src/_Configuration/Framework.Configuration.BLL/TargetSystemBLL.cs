@@ -2,12 +2,10 @@
 
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 using Framework.Transfering;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL;
 
@@ -22,7 +20,7 @@ public partial class TargetSystemBLL
     /// <inheritdoc />
     public TargetSystem Register<TPersistentDomainObjectBase>(bool isMain, bool isRevision, IEnumerable<Assembly> assemblies = null, IReadOnlyDictionary<Guid, Type> extTypes = null)
     {
-        this.Context.Logics.NamedLock.Lock(NamedLockOperation.UpdateDomainTypeLock, LockRole.Update);
+        this.Context.NamedLockService.LockAsync(ConfigurationNamedLock.UpdateDomainTypeLock, LockRole.Update).GetAwaiter().GetResult();
 
         var request = from type in (assemblies ?? new[] { typeof(TPersistentDomainObjectBase).Assembly }).SelectMany(z => z.GetTypes())
 
@@ -37,7 +35,7 @@ public partial class TargetSystemBLL
         return this.Register(typeof(TPersistentDomainObjectBase).GetTargetSystemName(), false, isMain, isRevision, typeof(TPersistentDomainObjectBase).GetTargetSystemId(), request.ToDictionary().Concat(extTypes ?? new Dictionary<Guid, Type>()));
     }
 
-    private TargetSystem Register([NotNull] string targetSystemName, bool isBase, bool isMain, bool isRevision, Guid id, [NotNull] IReadOnlyDictionary<Guid, Type> domainTypes)
+    private TargetSystem Register(string targetSystemName, bool isBase, bool isMain, bool isRevision, Guid id, IReadOnlyDictionary<Guid, Type> domainTypes)
     {
         if (targetSystemName == null) throw new ArgumentNullException(nameof(targetSystemName));
         if (domainTypes == null) throw new ArgumentNullException(nameof(domainTypes));
@@ -49,15 +47,15 @@ public partial class TargetSystemBLL
         foreach (var newItem in mergeResult.AddingItems)
         {
             var newDomainType = new DomainType(targetSystem)
-                                {
-                                        Id = newItem.Key,
-                                        Name = newItem.Value.Name,
-                                        NameSpace = newItem.Value.Namespace
-                                };
+            {
+                Id = newItem.Key,
+                Name = newItem.Value.Name,
+                NameSpace = newItem.Value.Namespace
+            };
 
             if (!isBase)
             {
-                newItem.Value.GetEventOperations(true).Foreach(value => new DomainTypeEventOperation(newDomainType, value));
+                this.Context.EventOperationSource.GetEventOperations(newItem.Value).Foreach(value => new DomainTypeEventOperation(newDomainType, value));
             }
 
             this.Context.Logics.DomainType.Insert(newDomainType);
@@ -71,7 +69,8 @@ public partial class TargetSystemBLL
 
             var changedName = domainType.Name != type.Name || domainType.NameSpace != type.Namespace;
 
-            var mergeEventResult = domainType.EventOperations.GetMergeResult(type.GetEventOperations(true), operation => operation.Name, value => value.ToString());
+            var mergeEventResult = domainType.EventOperations.GetMergeResult(
+                this.Context.EventOperationSource.GetEventOperations(type), operation => operation.Name, value => value.ToString());
 
             if (changedName || (!isBase && !mergeEventResult.IsEmpty))
             {

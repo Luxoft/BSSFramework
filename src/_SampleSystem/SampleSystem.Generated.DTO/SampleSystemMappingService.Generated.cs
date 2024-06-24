@@ -26,9 +26,9 @@ namespace SampleSystem.Generated.DTO
         
         void MapAnotherSqlParserTestObj(SampleSystem.Domain.AnotherSqlParserTestObj domainObject, SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO mappingObject);
         
-        void MapApprovePermissionWorkflowDomainObject(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject, SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO mappingObject);
-        
         void MapAuditPersistentDomainObjectBase(SampleSystem.Domain.AuditPersistentDomainObjectBase domainObject, SampleSystem.Generated.DTO.BaseAuditPersistentDTO mappingObject);
+        
+        void MapAuthPerformanceObject(SampleSystem.Domain.AuthPerformanceObject domainObject, SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO mappingObject);
         
         void MapBusinessUnit(SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.BusinessUnitVisualDTO mappingObject);
         
@@ -634,7 +634,9 @@ namespace SampleSystem.Generated.DTO
         
         void MapMiniBusinessUnitEmployeeRole(SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole domainObject, SampleSystem.Generated.DTO.MiniBusinessUnitEmployeeRoleProjectionDTO mappingObject);
         
-        void MapNamedLock(SampleSystem.Domain.NamedLock domainObject, SampleSystem.Generated.DTO.NamedLockEventRichDTO mappingObject);
+        void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO mappingObject);
+        
+        void MapNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO mappingObject, SampleSystem.Domain.NoSecurityObject domainObject);
         
         void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO mappingObject);
         
@@ -776,6 +778,14 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestPlainAuthObject(SampleSystem.Domain.TestPlainAuthObject domainObject, SampleSystem.Generated.DTO.TestPlainAuthObjectEventSimpleDTO mappingObject);
         
+        void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO mappingObject);
+        
+        void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO mappingObject);
+        
+        void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO mappingObject);
+        
+        void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO mappingObject);
+        
         void MapTestRootSecurityObj(SampleSystem.Domain.TestRootSecurityObj domainObject, SampleSystem.Generated.DTO.TestRootSecurityObjVisualDTO mappingObject);
         
         void MapTestRootSecurityObj(SampleSystem.Domain.TestRootSecurityObj domainObject, SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO mappingObject);
@@ -840,12 +850,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapVisualProject(SampleSystem.Domain.Projections.VisualProject domainObject, SampleSystem.Generated.DTO.VisualProjectProjectionDTO mappingObject);
         
-        void MapWorkflowCoreExecutionError(SampleSystem.Domain.WorkflowCoreExecutionError domainObject, SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO mappingObject);
-        
-        void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO mappingObject);
-        
-        void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO mappingObject);
-        
         void MapWorkingCalendar1676(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject, SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO mappingObject);
         
         void MapWorkingCalendar1676(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject, SampleSystem.Generated.DTO.WorkingCalendar1676SimpleDTO mappingObject);
@@ -866,7 +870,7 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.AnotherSqlParserTestObj ToAnotherSqlParserTestObj(SampleSystem.Generated.DTO.AnotherSqlParserTestObjIdentityDTO anotherSqlParserTestObjIdentityDTO);
         
-        SampleSystem.Domain.ApprovePermissionWorkflowDomainObject ToApprovePermissionWorkflowDomainObject(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO approvePermissionWorkflowDomainObjectIdentityDTO);
+        SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO);
         
         SampleSystem.Domain.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdentityDTO);
         
@@ -1178,9 +1182,11 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.ManagementUnitToAncestorChildView ToManagementUnitToAncestorChildView(SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewIdentityDTO managementUnitToAncestorChildViewIdentityDTO);
         
-        SampleSystem.Domain.NamedLock ToNamedLock(SampleSystem.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO);
-        
         SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO noSecurityObjectIdentityDTO);
+        
+        SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO noSecurityObjectStrictDTO);
+        
+        SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO noSecurityObjectStrictDTO, bool allowCreate);
         
         SampleSystem.Domain.UniqueByMaster.ParentEntity ToParentEntity(SampleSystem.Generated.DTO.ParentEntityIdentityDTO parentEntityIdentityDTO);
         
@@ -1234,6 +1240,8 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.TestPlainAuthObject ToTestPlainAuthObject(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentityDTO);
         
+        SampleSystem.Domain.TestRestrictionObject ToTestRestrictionObject(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentityDTO);
+        
         SampleSystem.Domain.TestRootSecurityObj ToTestRootSecurityObj(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentityDTO);
         
         SampleSystem.Domain.TestSecurityObjItem ToTestSecurityObjItem(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentityDTO);
@@ -1243,10 +1251,6 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.TestSecuritySubObjItem2 ToTestSecuritySubObjItem2(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO testSecuritySubObjItem2IdentityDTO);
         
         SampleSystem.Domain.TestSecuritySubObjItem3 ToTestSecuritySubObjItem3(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3IdentityDTO);
-        
-        SampleSystem.Domain.WorkflowCoreExecutionError ToWorkflowCoreExecutionError(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO workflowCoreExecutionErrorIdentityDTO);
-        
-        SampleSystem.Domain.WorkflowCoreInstance ToWorkflowCoreInstance(SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO workflowCoreInstanceIdentityDTO);
         
         SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 ToWorkingCalendar1676(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676IdentityDTO);
     }
@@ -1355,24 +1359,54 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
-        public virtual void MapApprovePermissionWorkflowDomainObject(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject, SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO mappingObject)
-        {
-            mappingObject.Active = domainObject.Active;
-            mappingObject.CreateDate = domainObject.CreateDate;
-            mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.ModifiedBy = domainObject.ModifiedBy;
-            mappingObject.ModifyDate = domainObject.ModifyDate;
-            mappingObject.PermissionId = domainObject.PermissionId;
-            mappingObject.Version = domainObject.Version;
-            mappingObject.WorkflowInstanceId = domainObject.WorkflowInstanceId;
-        }
-        
         public virtual void MapAuditPersistentDomainObjectBase(SampleSystem.Domain.AuditPersistentDomainObjectBase domainObject, SampleSystem.Generated.DTO.BaseAuditPersistentDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapAuthPerformanceObject(SampleSystem.Domain.AuthPerformanceObject domainObject, SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
+            {
+                mappingObject.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.BusinessUnit, this);
+            }
+            else
+            {
+                mappingObject.BusinessUnit = null;
+            }
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.Employee, null))
+            {
+                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Employee, this);
+            }
+            else
+            {
+                mappingObject.Employee = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            if (!object.ReferenceEquals(domainObject.Location, null))
+            {
+                mappingObject.Location = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Location, this);
+            }
+            else
+            {
+                mappingObject.Location = null;
+            }
+            if (!object.ReferenceEquals(domainObject.ManagementUnit, null))
+            {
+                mappingObject.ManagementUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ManagementUnit, this);
+            }
+            else
+            {
+                mappingObject.ManagementUnit = null;
+            }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
             mappingObject.Version = domainObject.Version;
@@ -2660,7 +2694,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.BaseObj = null;
             }
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(SampleSystem.SampleSystemSecurityOperation.CompanyLegalEntityView).HasAccess(domainObject))
             {
                 string resultCode;
                 resultCode = domainObject.Code;
@@ -2718,7 +2752,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Landlinephone = domainObject.Landlinephone;
             mappingObject.LastActionDate = domainObject.LastActionDate;
             mappingObject.LocationCode = domainObject.LocationCode;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeeView).HasAccess(domainObject))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
@@ -2733,7 +2767,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NameNative = domainObject.NameNative;
             mappingObject.NameRussian = domainObject.NameRussian;
             mappingObject.NonValidateVirtualProp = domainObject.NonValidateVirtualProp;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView).HasAccess(domainObject))
             {
                 string resultPersonalCellPhone;
                 resultPersonalCellPhone = domainObject.PersonalCellPhone;
@@ -2791,7 +2825,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.PersonalAssistant = null;
             }
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionView).HasAccess(domainObject))
             {
                 SampleSystem.Generated.DTO.EmployeePositionSimpleDTO resultPosition;
                 if (!object.ReferenceEquals(domainObject.Position, null))
@@ -2854,7 +2888,7 @@ namespace SampleSystem.Generated.DTO
         {
             mappingObject.CellPhones = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.CellPhones, this);
             mappingObject.EmployeeToEmployeeLinks = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.EmployeeToEmployeeLinks, this);
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView).HasAccess(domainObject))
             {
                 System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO> resultPersonalCellPhones;
                 resultPersonalCellPhones = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.PersonalCellPhones, this);
@@ -2943,7 +2977,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<string> justLogin = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<string>>(mappingObject.Login);
             if (!object.ReferenceEquals(justLogin, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeeEdit).HasAccess(domainObject))
                 {
                     domainObject.Login = justLogin.Value;
                 }
@@ -2955,7 +2989,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>> justPersonalCellPhones = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>>(mappingObject.PersonalCellPhones);
             if (!object.ReferenceEquals(justPersonalCellPhones, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit).HasAccess(domainObject))
                 {
                     if (!object.ReferenceEquals(justPersonalCellPhones.Value, null))
                     {
@@ -2970,7 +3004,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> justPosition = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>>(mappingObject.Position);
             if (!object.ReferenceEquals(justPosition, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionEdit).HasAccess(domainObject))
                 {
                     if (!object.Equals(justPosition.Value, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
                     {
@@ -3060,7 +3094,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<string> justLogin = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<string>>(mappingObject.Login);
             if (!object.ReferenceEquals(justLogin, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeeEdit).HasAccess(domainObject))
                 {
                     domainObject.Login = justLogin.Value;
                 }
@@ -3102,7 +3136,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> justPosition = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>>(mappingObject.Position);
             if (!object.ReferenceEquals(justPosition, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionEdit).HasAccess(domainObject))
                 {
                     if (!object.Equals(justPosition.Value, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
                     {
@@ -4705,7 +4739,7 @@ namespace SampleSystem.Generated.DTO
         {
             mappingObject.Field1 = domainObject.Field1;
             mappingObject.Field2 = domainObject.Field2;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.LocationView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperation.LocationView).HasAccess(domainObject))
             {
                 System.Guid resultField3;
                 resultField3 = domainObject.Field3;
@@ -4738,7 +4772,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<System.Guid> justField3 = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Guid>>(mappingObject.Field3);
             if (!object.ReferenceEquals(justField3, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.LocationEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperation.LocationEdit).HasAccess(domainObject))
                 {
                     domainObject.Field3 = justField3.Value;
                 }
@@ -4769,7 +4803,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<System.Guid> justField3 = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Guid>>(mappingObject.Field3);
             if (!object.ReferenceEquals(justField3, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.LocationEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperation.LocationEdit).HasAccess(domainObject))
                 {
                     domainObject.Field3 = justField3.Value;
                 }
@@ -4931,7 +4965,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.ApprovedBy = null;
             }
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(SampleSystem.SampleSystemSecurityOperation.CompanyLegalEntityView).HasAccess(domainObject))
             {
                 SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO resultCompanyLegalEntity;
                 if (!object.ReferenceEquals(domainObject.CompanyLegalEntity, null))
@@ -5037,7 +5071,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO> justCompanyLegalEntity = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>>(mappingObject.CompanyLegalEntity);
             if (!object.ReferenceEquals(justCompanyLegalEntity, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(SampleSystem.SampleSystemSecurityOperation.CompanyLegalEntityEdit).HasAccess(domainObject))
                 {
                     if (!object.Equals(justCompanyLegalEntity.Value, default(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO)))
                     {
@@ -6324,21 +6358,24 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapNamedLock(SampleSystem.Domain.NamedLock domainObject, SampleSystem.Generated.DTO.NamedLockEventRichDTO mappingObject)
+        public virtual void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO mappingObject, SampleSystem.Domain.NoSecurityObject domainObject)
+        {
+            domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
+        }
+        
+        public virtual void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Id = domainObject.Id;
-            mappingObject.LockOperation = domainObject.LockOperation;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
             mappingObject.Version = domainObject.Version;
-        }
-        
-        public virtual void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO mappingObject)
-        {
-            mappingObject.Id = domainObject.Id;
         }
         
         public virtual void MapParentEntity(SampleSystem.Domain.UniqueByMaster.ParentEntity domainObject, SampleSystem.Generated.DTO.ParentEntityEventRichDTO mappingObject)
@@ -6664,7 +6701,7 @@ namespace SampleSystem.Generated.DTO
             }
             mappingObject.CoreBusinessUnitName = domainObject.CoreBusinessUnitName;
             mappingObject.CoreBusinessUnitProjects = SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(domainObject.CoreBusinessUnitProjects, this);
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperation.EmployeeView).HasAccess(domainObject))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
@@ -6675,7 +6712,7 @@ namespace SampleSystem.Generated.DTO
                 mappingObject.Login = Framework.Core.Maybe<string>.Nothing;
             }
             mappingObject.NameEngFirstName = domainObject.NameEngFirstName;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionView).HasAccess(domainObject))
             {
                 string resultPositionName;
                 resultPositionName = domainObject.PositionName;
@@ -6895,7 +6932,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual void MapTestLegacyEmployee(SampleSystem.Domain.Projections.TestLegacyEmployee domainObject, SampleSystem.Generated.DTO.TestLegacyEmployeeProjectionDTO mappingObject)
         {
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>(SampleSystem.SampleSystemSecurityOperation.EmployeeView).HasAccess(domainObject))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
@@ -7146,6 +7183,47 @@ namespace SampleSystem.Generated.DTO
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
             mappingObject.Name = domainObject.Name;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO mappingObject)
+        {
+            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
+        }
+        
+        public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO mappingObject)
+        {
+            if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
+            {
+                mappingObject.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.BusinessUnit, this);
+            }
+            else
+            {
+                mappingObject.BusinessUnit = null;
+            }
+        }
+        
+        public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
+            {
+                mappingObject.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.BusinessUnit, this);
+            }
+            else
+            {
+                mappingObject.BusinessUnit = null;
+            }
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
             mappingObject.Version = domainObject.Version;
         }
         
@@ -7510,37 +7588,6 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Code = domainObject.Code;
         }
         
-        public virtual void MapWorkflowCoreExecutionError(SampleSystem.Domain.WorkflowCoreExecutionError domainObject, SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO mappingObject)
-        {
-            mappingObject.ErrorTime = domainObject.ErrorTime;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.Message = domainObject.Message;
-            if (!object.ReferenceEquals(domainObject.WorkflowInstance, null))
-            {
-                mappingObject.WorkflowInstance = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.WorkflowInstance, this);
-            }
-            else
-            {
-                mappingObject.WorkflowInstance = null;
-            }
-        }
-        
-        public virtual void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO mappingObject)
-        {
-            mappingObject.Data = domainObject.Data;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.Status = domainObject.Status;
-            mappingObject.WorkflowDefinitionId = domainObject.WorkflowDefinitionId;
-        }
-        
-        public virtual void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO mappingObject)
-        {
-            mappingObject.Data = domainObject.Data;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.Status = domainObject.Status;
-            mappingObject.WorkflowDefinitionId = domainObject.WorkflowDefinitionId;
-        }
-        
         public virtual void MapWorkingCalendar1676(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject, SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
@@ -7612,9 +7659,9 @@ namespace SampleSystem.Generated.DTO
             return this.GetById<SampleSystem.Domain.AnotherSqlParserTestObj>(anotherSqlParserTestObjIdentityDTO.Id);
         }
         
-        public virtual SampleSystem.Domain.ApprovePermissionWorkflowDomainObject ToApprovePermissionWorkflowDomainObject(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO approvePermissionWorkflowDomainObjectIdentityDTO)
+        public virtual SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(approvePermissionWorkflowDomainObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.AuthPerformanceObject>(authPerformanceObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdentityDTO)
@@ -8405,7 +8452,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 ToIntegrationVersionContainer1(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO integrationVersionContainer1SimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.DomainDriven.IdCheckMode.SkipEmpty, Framework.DomainDriven.LockRole.Update);
+            return this.GetById<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.DomainDriven.IdCheckMode.SkipEmpty, Framework.DomainDriven.Lock.LockRole.Update);
         }
         
         public virtual SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel ToIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO)
@@ -8588,14 +8635,26 @@ namespace SampleSystem.Generated.DTO
             return this.GetById<SampleSystem.Domain.ManagementUnitToAncestorChildView>(managementUnitToAncestorChildViewIdentityDTO.Id);
         }
         
-        public virtual SampleSystem.Domain.NamedLock ToNamedLock(SampleSystem.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.NamedLock>(namedLockIdentityDTO.Id);
-        }
-        
         public virtual SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO noSecurityObjectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.NoSecurityObject>(noSecurityObjectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO noSecurityObjectStrictDTO)
+        {
+            return this.ToDomainObject<SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO, SampleSystem.Domain.NoSecurityObject>(noSecurityObjectStrictDTO);
+        }
+        
+        public virtual SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO noSecurityObjectStrictDTO, bool allowCreate)
+        {
+            if (allowCreate)
+            {
+                return this.ToDomainObject(noSecurityObjectStrictDTO, () => new SampleSystem.Domain.NoSecurityObject());
+            }
+            else
+            {
+                return this.ToNoSecurityObject(noSecurityObjectStrictDTO);
+            }
         }
         
         public virtual SampleSystem.Domain.UniqueByMaster.ParentEntity ToParentEntity(SampleSystem.Generated.DTO.ParentEntityIdentityDTO parentEntityIdentityDTO)
@@ -8763,6 +8822,11 @@ namespace SampleSystem.Generated.DTO
             return this.GetById<SampleSystem.Domain.TestPlainAuthObject>(testPlainAuthObjectIdentityDTO.Id);
         }
         
+        public virtual SampleSystem.Domain.TestRestrictionObject ToTestRestrictionObject(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestRestrictionObject>(testRestrictionObjectIdentityDTO.Id);
+        }
+        
         public virtual SampleSystem.Domain.TestRootSecurityObj ToTestRootSecurityObj(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestRootSecurityObj>(testRootSecurityObjIdentityDTO.Id);
@@ -8786,16 +8850,6 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.TestSecuritySubObjItem3 ToTestSecuritySubObjItem3(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3IdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestSecuritySubObjItem3>(testSecuritySubObjItem3IdentityDTO.Id);
-        }
-        
-        public virtual SampleSystem.Domain.WorkflowCoreExecutionError ToWorkflowCoreExecutionError(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO workflowCoreExecutionErrorIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.WorkflowCoreExecutionError>(workflowCoreExecutionErrorIdentityDTO.Id);
-        }
-        
-        public virtual SampleSystem.Domain.WorkflowCoreInstance ToWorkflowCoreInstance(SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO workflowCoreInstanceIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.WorkflowCoreInstance>(workflowCoreInstanceIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 ToWorkingCalendar1676(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676IdentityDTO)

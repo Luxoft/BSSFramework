@@ -63,12 +63,12 @@ public class CreateMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfi
                                      .ToMethodReturnStatement();
     }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this.ModelType.GetEditDomainObjectAttribute();
 
         return null == modelSecurityAttribute
-                       ? base.GetBLLSecurityParameter()
-                       : modelSecurityAttribute.SecurityOperationCode;
+                       ? base.GetBLLSecurityParameter(evaluateDataExpr)
+                       : modelSecurityAttribute.SecurityRule;
     }
 }

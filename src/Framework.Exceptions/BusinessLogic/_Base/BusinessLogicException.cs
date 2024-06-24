@@ -2,19 +2,16 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Exceptions;
 
 public class BusinessLogicException : ServiceFacadeException
 {
-    public static BusinessLogicException Create<T>([NotNull] string format, Expression<Func<T, object>> expression)
+    public static BusinessLogicException Create<T>(string format, Expression<Func<T, object>> expression)
     {
         return new BusinessLogicException(format, expression.ToPath());
     }
 
-    [StringFormatMethod("format")]
-    public BusinessLogicException([NotNull] Exception innerException, string format, params object[] args)
+    public BusinessLogicException(Exception innerException, string format, params object[] args)
             : base(innerException, format, args)
     {
 
@@ -26,7 +23,6 @@ public class BusinessLogicException : ServiceFacadeException
 
     }
 
-    [StringFormatMethod("format")]
     public BusinessLogicException(string format, params object[] args)
             : base(format, args)
     {
@@ -53,7 +49,6 @@ public class BusinessLogicException<TDetail> : BusinessLogicException, IDetailEx
         this.Detail = detail;
     }
 
-    [StringFormatMethod("format")]
     public BusinessLogicException(TDetail detail, string format, params object[] args)
             : base(format, args)
     {

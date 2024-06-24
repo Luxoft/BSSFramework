@@ -1,23 +1,32 @@
-﻿using Framework.Authorization.BLL;
+﻿using FluentValidation;
+
 using Framework.Authorization.Domain;
-using Framework.Authorization.Notification;
-using Framework.Configuration.BLL;
-using Framework.Configuration.BLL.Notification;
-using Framework.Core;
+using Framework.Authorization.Environment;
+using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystem.ExternalSource;
+
+using Framework.Authorization.SecuritySystem.Initialize;
+using Framework.Authorization.SecuritySystem.PermissionOptimization;
+using Framework.Authorization.SecuritySystem.Validation;
+using Framework.Configuration.Domain;
+using Framework.Configuration.NamedLocks;
+using Framework.Core.Services;
 using Framework.DependencyInjection;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
+using Framework.DomainDriven._Visitors;
+using Framework.DomainDriven.ImpersonateService;
+using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
-using Framework.HierarchicalExpand;
-using Framework.Notification;
-using Framework.Persistent;
+using Framework.Events;
+using Framework.Exceptions;
+using Framework.FinancialYear;
+using Framework.HierarchicalExpand.DependencyInjection;
 using Framework.QueryableSource;
-using Framework.QueryLanguage;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Rules.Builders;
+using Framework.SecuritySystem.DependencyInjection;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -25,42 +34,93 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IOperationEventSenderContainer<>), typeof(OperationEventSenderContainer<>));
-
-        services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
-        services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
-
-        services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
-        services.AddScoped(typeof(IRepositoryFactory<,>), typeof(RepositoryFactory<,>));
-        services.AddScoped(typeof(IGenericRepositoryFactory<,,>), typeof(GenericRepositoryFactory<,,>));
+        services.TryAddSingleton(TimeProvider.System);
 
         services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
-        services.AddScopedFrom((IDBSession session) => session.GetObjectStateService());
-
-        services.AddSingleton<IStandartExpressionBuilder, StandartExpressionBuilder>();
-
-        services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
-
-        services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
-
+        services.RegisterFinancialYearServices();
+        services.RegisterRepository();
+        services.RegisterAuthenticationServices();
+        services.RegisterEvaluators();
         services.RegisterAuthorizationSystem();
+        services.RegisterAuthorizationSecurity();
+        services.RegisterConfigurationSecurity();
+        services.RegisterNamedLocks();
+        services.RegisterHierarchicalObjectExpander();
+        services.RegistryGenericDatabaseVisitors();
 
-        services.AddSingleton(AvailableValuesHelper.AvailableValues.ToValidation());
-
-        services.AddSingleton<IDateTimeService>(DateTimeService.Default);
-
-        services.RegisterAuthorizationBLL();
-        services.RegisterConfigurationBLL();
-
-        services.AddScoped<ILegacyGenericDisabledSecurityProviderFactory, LegacyGenericDisabledSecurityProviderFactory>();
-        services.AddScoped<INotImplementedDomainSecurityServiceContainer, OnlyDisabledDomainSecurityServiceContainer>();
+        services.AddSingleton<IInitializeManager, InitializeManager>();
+        services.AddScoped<IEventOperationSender, EventOperationSender>();
 
         return services;
     }
 
-    public static IServiceCollection RegistryGenericDatabaseVisitors(this IServiceCollection services)
+    public static IServiceCollection RegisterListeners(this IServiceCollection services, Action<IListenerSetupObject> setup)
     {
+        var setupObject = new ListenerSetupObject();
+
+        setup(setupObject);
+
+        foreach (var setupObjectInitAction in setupObject.InitActions)
+        {
+            setupObjectInitAction(services);
+        }
+
+        return services;
+    }
+
+    private static IServiceCollection RegisterRepository(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
+
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Disabled), typeof(Repository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.View), typeof(ViewRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Edit), typeof(EditRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRole.Administrator), typeof(AdministratorRepository<>));
+
+        services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+
+        services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
+        services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
+
+        return services;
+    }
+
+    private static IServiceCollection RegisterFinancialYearServices(this IServiceCollection services)
+    {
+        services.AddSingleton<IFinancialYearCalculator, FinancialYearCalculator>();
+        services.AddSingleton<FinancialYearServiceSettings>();
+        services.AddSingleton<IFinancialYearService, FinancialYearService>();
+
+        return services;
+    }
+
+    private static IServiceCollection RegisterEvaluators(this IServiceCollection services)
+    {
+        services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
+        services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
+
+        return services;
+    }
+
+    private static IServiceCollection RegisterAuthenticationServices(this IServiceCollection services)
+    {
+        services.AddScoped<ApplicationUserAuthenticationService>();
+        services.AddScopedFrom<IUserAuthenticationService, ApplicationUserAuthenticationService>();
+        services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
+
+        return services;
+    }
+
+    private static IServiceCollection RegistryGenericDatabaseVisitors(this IServiceCollection services)
+    {
+        services
+            .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
+                Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>();
+        services
+            .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
+                Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
+
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
@@ -68,84 +128,99 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IIdPropertyResolver, IdPropertyResolver>();
 
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>();
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
-
         services.AddScoped<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
 
         return services;
     }
 
-    public static IServiceCollection RegisterHierarchicalObjectExpander<TPersistentDomainObjectBase>(this IServiceCollection services)
-            where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+    private static IServiceCollection RegisterNamedLocks(this IServiceCollection services)
     {
-        return services.AddSingleton<IHierarchicalRealTypeResolver, ProjectionHierarchicalRealTypeResolver>()
-                       .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, Guid>>();
+        return services
+               .AddScoped<INamedLockService, NamedLockService>()
+               .AddScoped<INamedLockInitializer, NamedLockInitializer>()
+               .AddSingleton<INamedLockSource, NamedLockSource>();
     }
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScopedFrom<IAuthorizationSystem<Guid>, IAuthorizationBLLContext>();
+        return services.AddScoped<IQueryableSource, RepositoryQueryableSource>()
+                       .AddScoped<IAuthorizationSystem<Guid>, AuthorizationSystem>()
+
+                       .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
+
+                       .AddScoped<IRunAsManager, RunAsManger>()
+                       .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
+
+                       .AddScoped<IActualPrincipalSource, ActualPrincipalSource>()
+                       .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
+                       .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
+
+                       .AddScoped<IOperationAccessorFactory, OperationAccessorFactory>()
+
+                       .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
+
+                       .AddSingleton<InitializerSettings>()
+                       .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
+                       .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
+
+                       .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>()
+                       .AddScoped(typeof(LocalStorage<>))
+
+                       .AddScoped<IPrincipalDomainService, PrincipalDomainService>()
+
+                       .AddScoped<IPrincipalGeneralValidator, PrincipalGeneralValidator>()
+                       .AddKeyedScoped<IValidator<Principal>, PrincipalUniquePermissionValidator>(PrincipalUniquePermissionValidator.Key)
+                       .AddKeyedScoped<IValidator<Permission>, PermissionGeneralValidator>(PermissionGeneralValidator.Key)
+                       .AddKeyedScoped<IValidator<Permission>, PermissionDelegateValidator>(PermissionDelegateValidator.Key)
+                       .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>();
     }
 
-    public static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)
+
+    public static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)
     {
-        return services
+        return services.RegisterDomainSecurityServices<Guid>(
+                           rb => rb.Add<Principal>(
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator)
+                                             .SetCustomService<AuthorizationPrincipalSecurityService>())
 
-               .AddSingleton<AuthorizationValidatorCompileCache>()
-               .AddScoped<IAuthorizationValidator, AuthorizationValidator>()
+                                   .Add<Permission>(
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator)
+                                             .SetCustomService<AuthorizationPermissionSecurityService>())
 
-               .AddSingleton(new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData))
-               .AddScoped<IAuthorizationSecurityService, AuthorizationSecurityService>()
-               .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
-               .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
-               .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
-               //.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>()
-               .AddScoped<INotificationBasePermissionFilterSource, LegacyNotificationPrincipalExtractor>()
-               .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
+                                   .Add<BusinessRole>(
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator)
+                                             .SetCustomService<AuthorizationBusinessRoleSecurityService>())
 
-               .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()
-
-               .AddScopedFrom<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>, IAuthorizationBLLContext>()
-               .AddScopedFrom<IDisabledSecurityProviderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, IAuthorizationSecurityService>()
-               .AddScopedFrom<IAuthorizationSecurityPathContainer, IAuthorizationSecurityService>()
-               .AddScoped<IQueryableSource<Framework.Authorization.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, Guid>>()
-               .AddScoped<ISecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
-               .AddScoped<IAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
-
-               .Self(AuthorizationSecurityServiceBase.Register)
-               .Self(AuthorizationBLLFactoryContainer.RegisterBLLFactory);
+                                   .Add<SecurityContextType>(
+                                       b => b.SetView(SecurityRule.Disabled)));
     }
 
-    public static IServiceCollection RegisterConfigurationBLL(this IServiceCollection services)
+    public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
     {
-        return services
+        return services.RegisterDomainSecurityServices<Guid>(
+                           rb => rb.Add<ExceptionMessage>(
+                                       b => b.SetView(SecurityRole.Administrator))
 
-               .AddSingleton<ConfigurationValidatorCompileCache>()
-               .AddScoped<IConfigurationValidator, ConfigurationValidator>()
+                                   .Add<Sequence>(
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
-               .AddSingleton(new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData))
-               .AddScoped<IConfigurationSecurityService, ConfigurationSecurityService>()
-               .AddScoped<IConfigurationBLLFactoryContainer, ConfigurationBLLFactoryContainer>()
+                                   .Add<SystemConstant>(
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
-               .AddScopedFrom<ICurrentRevisionService, IDBSession>()
+                                   .Add<CodeFirstSubscription>(
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
-               .AddScoped<IMessageSender<Framework.Notification.MessageTemplateNotification>, TemplateMessageSender>()
-               .AddScoped<IMessageSender<Framework.Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
+                                   .Add<TargetSystem>(
+                                       b => b.SetView(SecurityRole.Administrator)
+                                             .SetEdit(SecurityRole.Administrator))
 
-               .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
-               .AddScopedFromLazyInterfaceImplement<IConfigurationBLLContext, ConfigurationBLLContext>()
-
-               .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
-
-               .AddScopedFrom<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode>, IConfigurationBLLContext>()
-               .AddScopedFrom<IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, IConfigurationSecurityService>()
-               .AddScopedFrom<IConfigurationSecurityPathContainer, IConfigurationSecurityService>()
-               .AddScoped<IQueryableSource<Framework.Configuration.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, Guid>>()
-               .AddScoped<ISecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
-               .AddScoped<IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
-
-               .Self(ConfigurationSecurityServiceBase.Register)
-               .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);
+                                   .Add<DomainType>(
+                                       b => b.SetView(SecurityRule.Disabled)));
     }
 }

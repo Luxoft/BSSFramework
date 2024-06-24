@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.DomainDriven.ServiceModel.IAD.LegacyContext</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL\Framework.Authorization.BLL.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Events\Framework.Authorization.Events.csproj" />
+    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.BLL\Framework.Configuration.BLL.csproj" />
+    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Generated.DTO\Framework.Configuration.Generated.DTO.csproj" />
+
+    <ProjectReference Include="..\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
+
+    <ProjectReference Include="..\Framework.DomainDriven.NHibernate.LegacyContext\Framework.DomainDriven.NHibernate.LegacyContext.csproj" />
+
+    <ProjectReference Include="..\Framework.DomainDriven.ServiceModel.IAD\Framework.DomainDriven.ServiceModel.IAD.csproj" />
+
+    <ProjectReference Include="..\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
+
+    <ProjectReference Include="..\Framework.Events\Framework.Events.csproj" />
+  </ItemGroup>
+
+</Project>

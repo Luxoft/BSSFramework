@@ -9,9 +9,8 @@ using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Projection;
 using Framework.Security;
+using Framework.SecuritySystem;
 using Framework.Transfering;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
@@ -29,13 +28,13 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
         this.DefaultCodeTypeReferenceService = new ConfigurationCodeTypeReferenceService<GeneratorConfigurationBase<TEnvironment>>(this);
 
-        this.DomainObjectSecurityOperationCodeFileFactoryHeader = new CodeFileFactoryHeader<RoleFileType>(FileType.DomainObjectSecurityOperationCode, string.Empty, domainType => $"{this.Environment.TargetSystemName}{domainType.Name}{typeof(SecurityOperationCode).Name}");
+        this.DomainObjectSecurityRuleCodeFileFactoryHeader = new CodeFileFactoryHeader<RoleFileType>(FileType.DomainObjectSecurityRuleCode, string.Empty, domainType => $"{this.Environment.TargetSystemName}{domainType.Name}SecurityRuleCode");
 
         this.ProjectionTypes = LazyInterfaceImplementHelper.CreateProxy(() => this.GetProjectionTypes().ToReadOnlyCollectionI());
 
         this.GeneratePolicy = LazyInterfaceImplementHelper.CreateProxy(this.CreateGeneratePolicy);
 
-        this.TypesWithSecondarySecurityOperations = LazyInterfaceImplementHelper.CreateProxy(() => this.GetTypesWithSecondarySecurityOperations().ToReadOnlyDictionaryI());
+        this.TypesWithSecondarySecurityRules = LazyInterfaceImplementHelper.CreateProxy(() => this.GetTypesWithSecondarySecurityRules().ToReadOnlyDictionaryI());
 
 
         this.ClientDTOMappingServiceInterfaceFileFactoryHeader = FileType.ClientDTOMappingServiceInterface.ToHeader("", _ => $"I{this.Environment.TargetSystemName}ClientDTOMappingService");
@@ -49,7 +48,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public IReadOnlyCollection<Type> ProjectionTypes { get; }
 
-    public IReadOnlyDictionary<Type, ReadOnlyCollection<Enum>> TypesWithSecondarySecurityOperations { get; }
+    public IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityRule>> TypesWithSecondarySecurityRules { get; }
 
     public virtual bool ExpandStrictMaybeToDefault { get; } = false;
 
@@ -99,7 +98,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> RichDTOFileFactoryHeader { get; } = FileType.RichDTO.ToHeader();
 
-    protected virtual ICodeFileFactoryHeader<RoleFileType> DomainObjectSecurityOperationCodeFileFactoryHeader { get; }
+    protected virtual ICodeFileFactoryHeader<RoleFileType> DomainObjectSecurityRuleCodeFileFactoryHeader { get; }
 
     protected virtual ICodeFileFactoryHeader<FileType> ClientDTOMappingServiceInterfaceFileFactoryHeader { get; }
 
@@ -113,37 +112,38 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        return false;
+        return true;
     }
 
-    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<Enum>>> GetTypesWithSecondarySecurityOperations()
+
+    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>> GetMainTypesWithSecondarySecurityRules()
     {
-        if (this.Environment.SecurityOperationCodeType.IsEnum)
-        {
-            var mainResult = this.DomainTypes.GetTypesWithSecondarySecurityOperations();
-
-            var dependencyRequest = from domainType in this.GetDomainTypes()
-
-                                    where !mainResult.ContainsKey(domainType)
-
-                                    let rootSourceType = domainType.GetDependencySecuritySourceType(true)
-
-                                    where rootSourceType != null
-
-                                    let mainPair = mainResult.GetValueOrDefault(rootSourceType)
-
-                                    where mainPair != null
-
-                                    select domainType.ToKeyValuePair(mainPair);
-
-
-            return mainResult.Concat(dependencyRequest);
-        }
-
-        return new Dictionary<Type, ReadOnlyCollection<Enum>>();
+        return this.DomainTypes.GetTypesWithSecondarySecurityRules();
     }
 
-    public IEnumerable<PropertyInfo> GetDomainTypeProperties([NotNull] Type domainType, [NotNull] DTOFileType fileType)
+    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>> GetTypesWithSecondarySecurityRules()
+    {
+        var mainResult = this.GetMainTypesWithSecondarySecurityRules().ToDictionary();
+
+        var dependencyRequest = from domainType in this.GetDomainTypes()
+
+                                where !mainResult.ContainsKey(domainType)
+
+                                let rootSourceType = domainType.GetDependencySecuritySourceType(true)
+
+                                where rootSourceType != null
+
+                                let mainPair = mainResult.GetValueOrDefault(rootSourceType)
+
+                                where mainPair != null
+
+                                select domainType.ToKeyValuePair(mainPair);
+
+
+        return mainResult.Concat(dependencyRequest);
+    }
+
+    public IEnumerable<PropertyInfo> GetDomainTypeProperties(Type domainType, DTOFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
@@ -443,7 +443,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
         yield return this.ProjectionDTOFileFactoryHeader;
 
-        yield return this.DomainObjectSecurityOperationCodeFileFactoryHeader;
+        yield return this.DomainObjectSecurityRuleCodeFileFactoryHeader;
 
         yield return this.ClientDTOMappingServiceInterfaceFileFactoryHeader;
 

@@ -1,9 +1,8 @@
 ﻿using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 
-using JetBrains.Annotations;
-
-using Serilog;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 
@@ -14,39 +13,24 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 public sealed class DomainObjectSubscriptionsResolver : SubscriptionResolver
 {
     private readonly ConfigurationContextFacade configurationContextFacade;
-    private readonly ILogger logger;
 
     /// <summary>Создает экземпляр класса <see cref="DomainObjectSubscriptionsResolver"/>.</summary>
     /// <param name="configurationContextFacade">Фасад контекста конфигурации.</param>
     /// <exception cref="ArgumentNullException">Аргумент configurationContextFacade равен null.</exception>
-    public DomainObjectSubscriptionsResolver([NotNull] ConfigurationContextFacade configurationContextFacade)
-    {
-        if (configurationContextFacade == null)
-        {
-            throw new ArgumentNullException(nameof(configurationContextFacade));
-        }
-
-        this.configurationContextFacade = configurationContextFacade;
-
-        this.logger = Log.ForContext(this.GetType());
-    }
+    public DomainObjectSubscriptionsResolver(ConfigurationContextFacade configurationContextFacade) =>
+        this.configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
 
     /// <inheritdoc/>
-    public override IEnumerable<Subscription> Resolve<T>([NotNull] DomainObjectVersions<T> versions)
+    public override IEnumerable<Subscription> Resolve<T>(DomainObjectVersions<T> versions)
     {
         yield break;
     }
 
     /// <inheritdoc/>
-    public override bool IsActiveSubscriptionForTypeExists([NotNull] Type domainObjectType)
-    {
-        return false;
-    }
+    public override bool IsActiveSubscriptionForTypeExists(Type domainObjectType) => false;
 
     /// <inheritdoc/>
-    public override Subscription Resolve<T>(
-            [NotNull] string subscriptionCode,
-            [NotNull] DomainObjectVersions<T> versions)
+    public override Subscription Resolve<T>(string subscriptionCode, DomainObjectVersions<T> versions)
     {
         if (subscriptionCode == null)
         {
@@ -58,7 +42,9 @@ public sealed class DomainObjectSubscriptionsResolver : SubscriptionResolver
             throw new ArgumentNullException(nameof(versions));
         }
 
-        this.logger.Verbose("Search active subscription for code '{subscriptionCode}' and domain object type '{DomainObjectType}'.", subscriptionCode, versions.DomainObjectType);
+        var logger = this.GetLogger();
+
+        logger.LogDebug("Search active subscription for code '{subscriptionCode}' and domain object type '{DomainObjectType}'.", subscriptionCode, versions.DomainObjectType);
 
         var result = this
                      .Resolve(versions)
@@ -67,12 +53,15 @@ public sealed class DomainObjectSubscriptionsResolver : SubscriptionResolver
         if (result == null)
         {
             var ex = new SubscriptionServicesException($"Subscription for code {subscriptionCode} not found.");
-            this.logger.Error(ex, "Error");
+            logger.LogError(ex, "Error");
             throw ex;
         }
 
-        this.logger.Verbose("Active subscription for code '{subscriptionCode}' and domain object type '{DomainObjectType}' has been found.", subscriptionCode, versions.DomainObjectType);
+        logger.LogDebug("Active subscription for code '{subscriptionCode}' and domain object type '{DomainObjectType}' has been found.", subscriptionCode, versions.DomainObjectType);
 
         return result;
     }
+
+    private ILogger<DomainObjectSubscriptionsResolver> GetLogger() =>
+        this.configurationContextFacade.ServiceProvider.GetRequiredService<ILogger<DomainObjectSubscriptionsResolver>>();
 }

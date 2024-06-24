@@ -1,5 +1,4 @@
-﻿using Automation.ServiceEnvironment;
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
@@ -37,7 +36,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
 
         this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(TestBusinessRole.Administrator, this.bu2Ident, null, null));
+        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SecurityRole.Administrator, this.bu2Ident, null, null));
 
         this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident);
 
@@ -81,7 +80,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
         // Act
         var items = this.Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
                                                                          {
-                                                                             var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(BLLSecurityMode.View);
+                                                                             var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(SecurityRule.View);
 
                                                                              return bll.GetListBy(v => v.BusinessUnit_Security != null).ToDictionary(v => v.Id, bll.SecurityProvider.GetAccessors);
                                                                          });

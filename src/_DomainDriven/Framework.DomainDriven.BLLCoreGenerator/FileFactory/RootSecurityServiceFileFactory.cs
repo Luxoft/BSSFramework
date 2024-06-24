@@ -19,16 +19,14 @@ public class RootSecurityServiceFileFactory<TConfiguration> : FileFactory<TConfi
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
-        var contextTypeRef = this.Configuration.BLLContextInterfaceTypeReference;
-
-        var contextParameter = contextTypeRef.ToParameterDeclarationExpression("context");
-        var contextParameterRefExpr = contextParameter.ToVariableReferenceExpression();
+        var serviceProviderParameter = typeof(IServiceProvider).ToTypeReference().ToParameterDeclarationExpression("serviceProvider");
+        var serviceProviderParameterRefExpr = serviceProviderParameter.ToVariableReferenceExpression();
 
         var ctor = new CodeConstructor
                    {
                            Attributes = MemberAttributes.Public,
-                           Parameters = { contextParameter },
-                           BaseConstructorArgs = { contextParameterRefExpr }
+                           Parameters = { serviceProviderParameter },
+                           BaseConstructorArgs = { serviceProviderParameterRefExpr }
                    };
 
         return new CodeTypeDeclaration

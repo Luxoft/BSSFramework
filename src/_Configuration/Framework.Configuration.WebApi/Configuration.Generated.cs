@@ -15,23 +15,6 @@ namespace Framework.Configuration.WebApi
     {
         
         /// <summary>
-        /// Check CodeFirstSubscription access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckCodeFirstSubscriptionAccess))]
-        public virtual void CheckCodeFirstSubscriptionAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual void CheckCodeFirstSubscriptionAccessInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscription;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.CodeFirstSubscription domainObject = bll.GetById(codeFirstSubscriptionIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription>(securityOperationCode), domainObject);
-        }
-        
-        /// <summary>
         /// Get CodeFirstSubscription (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullCodeFirstSubscription))]
@@ -51,14 +34,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO GetFullCodeFirstSubscriptionByCodeInternal(string codeFirstSubscriptionCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.CodeFirstSubscription domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, codeFirstSubscriptionCode, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO GetFullCodeFirstSubscriptionInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.CodeFirstSubscription domainObject = bll.GetById(codeFirstSubscriptionIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -83,7 +66,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByIdentsInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO[] codeFirstSubscriptionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(codeFirstSubscriptionIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -98,14 +81,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByRootFilterInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -129,14 +112,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO GetRichCodeFirstSubscriptionByCodeInternal(string codeFirstSubscriptionCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.CodeFirstSubscription domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, codeFirstSubscriptionCode, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO GetRichCodeFirstSubscriptionInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.CodeFirstSubscription domainObject = bll.GetById(codeFirstSubscriptionIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -161,14 +144,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO GetSimpleCodeFirstSubscriptionByCodeInternal(string codeFirstSubscriptionCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.CodeFirstSubscription domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, codeFirstSubscriptionCode, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO GetSimpleCodeFirstSubscriptionInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.CodeFirstSubscription domainObject = bll.GetById(codeFirstSubscriptionIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -193,7 +176,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByIdentsInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO[] codeFirstSubscriptionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(codeFirstSubscriptionIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -208,32 +191,15 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByRootFilterInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Check access for CodeFirstSubscription
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasCodeFirstSubscriptionAccess))]
-        public virtual bool HasCodeFirstSubscriptionAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual bool HasCodeFirstSubscriptionAccessInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscription;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.CodeFirstSubscription domainObject = bll.GetById(codeFirstSubscriptionIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription>(securityOperationCode).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -247,7 +213,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO SaveCodeFirstSubscriptionInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO codeFirstSubscriptionStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.BLLSecurityMode.Edit);
+            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.Edit);
             return this.SaveCodeFirstSubscriptionInternal(codeFirstSubscriptionStrict, evaluateData, bll);
         }
         
@@ -262,23 +228,6 @@ namespace Framework.Configuration.WebApi
     
     public partial class ConfigSLJsonController
     {
-        
-        /// <summary>
-        /// Check DomainType access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckDomainTypeAccess))]
-        public virtual void CheckDomainTypeAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckDomainTypeAccessInternal(domainTypeIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual void CheckDomainTypeAccessInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainType;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.DomainType domainObject = bll.GetById(domainTypeIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.DomainType>(securityOperationCode), domainObject);
-        }
         
         /// <summary>
         /// Get DomainType (FullDTO) by identity
@@ -300,14 +249,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeFullDTO GetFullDomainTypeByNameInternal(string domainTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, domainTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeFullDTO GetFullDomainTypeInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainType domainObject = bll.GetById(domainTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -332,7 +281,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypesByIdentsInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(domainTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -347,14 +296,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypesByRootFilterInternal(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainTypeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -378,14 +327,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeRichDTO GetRichDomainTypeByNameInternal(string domainTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, domainTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeRichDTO GetRichDomainTypeInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainType domainObject = bll.GetById(domainTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -410,14 +359,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO GetSimpleDomainTypeByNameInternal(string domainTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, domainTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO GetSimpleDomainTypeInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainType domainObject = bll.GetById(domainTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -442,7 +391,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypesByIdentsInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(domainTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -457,14 +406,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypesByRootFilterInternal(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainTypeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -488,14 +437,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeVisualDTO GetVisualDomainTypeByNameInternal(string domainTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, domainTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeVisualDTO GetVisualDomainTypeInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainType domainObject = bll.GetById(domainTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
@@ -520,7 +469,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypesByIdentsInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(domainTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
@@ -535,54 +484,20 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypesByRootFilterInternal(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.DomainTypeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainTypeFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.DomainType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Check access for DomainType
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasDomainTypeAccess))]
-        public virtual bool HasDomainTypeAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasDomainTypeAccessInternal(domainTypeIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual bool HasDomainTypeAccessInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IDomainTypeBLL bll = evaluateData.Context.Logics.DomainType;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.DomainType domainObject = bll.GetById(domainTypeIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.DomainType>(securityOperationCode).HasAccess(domainObject);
         }
     }
     
     public partial class ConfigSLJsonController
     {
-        
-        /// <summary>
-        /// Check ExceptionMessage access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckExceptionMessageAccess))]
-        public virtual void CheckExceptionMessageAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckExceptionMessageAccessInternal(exceptionMessageIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual void CheckExceptionMessageAccessInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessage;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.ExceptionMessage domainObject = bll.GetById(exceptionMessageIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.ExceptionMessage>(securityOperationCode), domainObject);
-        }
         
         /// <summary>
         /// Get ExceptionMessage (FullDTO) by identity
@@ -595,7 +510,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO GetFullExceptionMessageInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.ExceptionMessage domainObject = bll.GetById(exceptionMessageIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -620,7 +535,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesByIdentsInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO[] exceptionMessageIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(exceptionMessageIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -635,14 +550,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesByRootFilterInternal(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.ExceptionMessageRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -657,7 +572,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO GetRichExceptionMessageInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.ExceptionMessage domainObject = bll.GetById(exceptionMessageIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -673,7 +588,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO GetSimpleExceptionMessageInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.ExceptionMessage domainObject = bll.GetById(exceptionMessageIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -698,7 +613,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesByIdentsInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO[] exceptionMessageIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(exceptionMessageIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -713,32 +628,15 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesByRootFilterInternal(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.ExceptionMessageRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Check access for ExceptionMessage
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasExceptionMessageAccess))]
-        public virtual bool HasExceptionMessageAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasExceptionMessageAccessInternal(exceptionMessageIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual bool HasExceptionMessageAccessInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessage;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.ExceptionMessage domainObject = bll.GetById(exceptionMessageIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.ExceptionMessage>(securityOperationCode).HasAccess(domainObject);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO SaveExceptionMessageInternal(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO exceptionMessageStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData, Framework.Configuration.BLL.IExceptionMessageBLL bll)
@@ -754,651 +652,6 @@ namespace Framework.Configuration.WebApi
     {
         
         /// <summary>
-        /// Check Report access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckReportAccess))]
-        public virtual void CheckReportAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportAccessInternal(reportIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual void CheckReportAccessInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.Report;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.Reports.Report domainObject = bll.GetById(reportIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.Report>(securityOperationCode), domainObject);
-        }
-        
-        /// <summary>
-        /// Get Report (FullDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReport))]
-        public virtual Framework.Configuration.Generated.DTO.ReportFullDTO GetFullReport([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportInternal(reportIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportFullDTO GetFullReportInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.ReportFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.Report domainObject = bll.GetById(reportIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.Report>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get full list of Reports (FullDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReports))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFullDTO> GetFullReports()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportsInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get Reports (FullDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportsByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFullDTO> GetFullReportsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO[] reportIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportsByIdentsInternal(reportIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFullDTO> GetFullReportsByIdentsInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO[] reportIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.ReportFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(reportIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.Report>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFullDTO> GetFullReportsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.ReportFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.Report>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get Report (RichDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichReport))]
-        public virtual Framework.Configuration.Generated.DTO.ReportRichDTO GetRichReport([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichReportInternal(reportIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportRichDTO GetRichReportInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.ReportFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.Report domainObject = bll.GetById(reportIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.Report>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get Report (SimpleDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReport))]
-        public virtual Framework.Configuration.Generated.DTO.ReportSimpleDTO GetSimpleReport([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportInternal(reportIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportSimpleDTO GetSimpleReportInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.ReportFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.Report domainObject = bll.GetById(reportIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.Report>(Framework.Transfering.ViewDTOType.SimpleDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get full list of Reports (SimpleDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReports))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportSimpleDTO> GetSimpleReports()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportsInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get Reports (SimpleDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportsByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportSimpleDTO> GetSimpleReportsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO[] reportIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportsByIdentsInternal(reportIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportSimpleDTO> GetSimpleReportsByIdentsInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO[] reportIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.ReportFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(reportIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.Report>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportSimpleDTO> GetSimpleReportsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.ReportFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.Report>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Check access for Report
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasReportAccess))]
-        public virtual bool HasReportAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportAccessInternal(reportIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual bool HasReportAccessInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.Report;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.Reports.Report domainObject = bll.GetById(reportIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.Report>(securityOperationCode).HasAccess(domainObject);
-        }
-        
-        /// <summary>
-        /// Remove Report
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(RemoveReport))]
-        public virtual void RemoveReport([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemoveReportInternal(reportIdent, evaluateData));
-        }
-        
-        protected virtual void RemoveReportInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.ReportFactory.Create(Framework.SecuritySystem.BLLSecurityMode.Edit);
-            this.RemoveReportInternal(reportIdent, evaluateData, bll);
-        }
-        
-        protected virtual void RemoveReportInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData, Framework.Configuration.BLL.IReportBLL bll)
-        {
-            Framework.Configuration.Domain.Reports.Report domainObject = bll.GetById(reportIdent.Id, true);
-            bll.Remove(domainObject);
-        }
-        
-        /// <summary>
-        /// Save Reports
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(SaveReport))]
-        public virtual Framework.Configuration.Generated.DTO.ReportIdentityDTO SaveReport([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportStrictDTO reportStrict)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveReportInternal(reportStrict, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportIdentityDTO SaveReportInternal(Framework.Configuration.Generated.DTO.ReportStrictDTO reportStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportBLL bll = evaluateData.Context.Logics.ReportFactory.Create(Framework.SecuritySystem.BLLSecurityMode.Edit);
-            return this.SaveReportInternal(reportStrict, evaluateData, bll);
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportIdentityDTO SaveReportInternal(Framework.Configuration.Generated.DTO.ReportStrictDTO reportStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData, Framework.Configuration.BLL.IReportBLL bll)
-        {
-            Framework.Configuration.Domain.Reports.Report domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, reportStrict.Id);
-            reportStrict.MapToDomainObject(evaluateData.MappingService, domainObject);
-            bll.Save(domainObject);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
-        }
-    }
-    
-    public partial class ConfigSLJsonController
-    {
-        
-        /// <summary>
-        /// Check ReportFilter access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckReportFilterAccess))]
-        public virtual void CheckReportFilterAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportFilterAccessInternal(reportFilterIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual void CheckReportFilterAccessInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilter;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.Reports.ReportFilter domainObject = bll.GetById(reportFilterIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportFilter>(securityOperationCode), domainObject);
-        }
-        
-        /// <summary>
-        /// Get ReportFilter (FullDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportFilter))]
-        public virtual Framework.Configuration.Generated.DTO.ReportFilterFullDTO GetFullReportFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportFilterInternal(reportFilterIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportFilterFullDTO GetFullReportFilterInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.ReportFilter domainObject = bll.GetById(reportFilterIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportFilter>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get full list of ReportFilters (FullDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportFilters))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterFullDTO> GetFullReportFilters()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportFiltersInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get ReportFilters (FullDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportFiltersByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterFullDTO> GetFullReportFiltersByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO[] reportFilterIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportFiltersByIdentsInternal(reportFilterIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterFullDTO> GetFullReportFiltersByIdentsInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO[] reportFilterIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(reportFilterIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportFilter>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterFullDTO> GetFullReportFiltersInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportFilter>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get ReportFilter (RichDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichReportFilter))]
-        public virtual Framework.Configuration.Generated.DTO.ReportFilterRichDTO GetRichReportFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichReportFilterInternal(reportFilterIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportFilterRichDTO GetRichReportFilterInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.ReportFilter domainObject = bll.GetById(reportFilterIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportFilter>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get ReportFilter (SimpleDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportFilter))]
-        public virtual Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO GetSimpleReportFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportFilterInternal(reportFilterIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO GetSimpleReportFilterInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.ReportFilter domainObject = bll.GetById(reportFilterIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportFilter>(Framework.Transfering.ViewDTOType.SimpleDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get full list of ReportFilters (SimpleDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportFilters))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO> GetSimpleReportFilters()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportFiltersInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get ReportFilters (SimpleDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportFiltersByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO> GetSimpleReportFiltersByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO[] reportFilterIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportFiltersByIdentsInternal(reportFilterIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO> GetSimpleReportFiltersByIdentsInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO[] reportFilterIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(reportFilterIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportFilter>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO> GetSimpleReportFiltersInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportFilter>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Check access for ReportFilter
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasReportFilterAccess))]
-        public virtual bool HasReportFilterAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportFilterAccessInternal(reportFilterIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual bool HasReportFilterAccessInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilter;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.Reports.ReportFilter domainObject = bll.GetById(reportFilterIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportFilter>(securityOperationCode).HasAccess(domainObject);
-        }
-    }
-    
-    public partial class ConfigSLJsonController
-    {
-        
-        /// <summary>
-        /// Check ReportParameter access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckReportParameterAccess))]
-        public virtual void CheckReportParameterAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportParameterAccessInternal(reportParameterIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual void CheckReportParameterAccessInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportParameterBLL bll = evaluateData.Context.Logics.ReportParameter;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.Reports.ReportParameter domainObject = bll.GetById(reportParameterIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportParameter>(securityOperationCode), domainObject);
-        }
-        
-        /// <summary>
-        /// Get ReportParameter (FullDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportParameter))]
-        public virtual Framework.Configuration.Generated.DTO.ReportParameterFullDTO GetFullReportParameter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportParameterInternal(reportParameterIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportParameterFullDTO GetFullReportParameterInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportParameterBLL bll = evaluateData.Context.Logics.ReportParameterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.ReportParameter domainObject = bll.GetById(reportParameterIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportParameter>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get full list of ReportParameters (FullDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportParameters))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterFullDTO> GetFullReportParameters()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportParametersInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get ReportParameters (FullDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportParametersByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterFullDTO> GetFullReportParametersByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO[] reportParameterIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportParametersByIdentsInternal(reportParameterIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterFullDTO> GetFullReportParametersByIdentsInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO[] reportParameterIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportParameterBLL bll = evaluateData.Context.Logics.ReportParameterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(reportParameterIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportParameter>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterFullDTO> GetFullReportParametersInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportParameterBLL bll = evaluateData.Context.Logics.ReportParameterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportParameter>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get ReportParameter (RichDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichReportParameter))]
-        public virtual Framework.Configuration.Generated.DTO.ReportParameterRichDTO GetRichReportParameter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichReportParameterInternal(reportParameterIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportParameterRichDTO GetRichReportParameterInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportParameterBLL bll = evaluateData.Context.Logics.ReportParameterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.ReportParameter domainObject = bll.GetById(reportParameterIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportParameter>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get ReportParameter (SimpleDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportParameter))]
-        public virtual Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO GetSimpleReportParameter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportParameterInternal(reportParameterIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO GetSimpleReportParameterInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportParameterBLL bll = evaluateData.Context.Logics.ReportParameterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.ReportParameter domainObject = bll.GetById(reportParameterIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportParameter>(Framework.Transfering.ViewDTOType.SimpleDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get full list of ReportParameters (SimpleDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportParameters))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO> GetSimpleReportParameters()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportParametersInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get ReportParameters (SimpleDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportParametersByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO> GetSimpleReportParametersByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO[] reportParameterIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportParametersByIdentsInternal(reportParameterIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO> GetSimpleReportParametersByIdentsInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO[] reportParameterIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportParameterBLL bll = evaluateData.Context.Logics.ReportParameterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(reportParameterIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportParameter>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO> GetSimpleReportParametersInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportParameterBLL bll = evaluateData.Context.Logics.ReportParameterFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportParameter>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Check access for ReportParameter
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasReportParameterAccess))]
-        public virtual bool HasReportParameterAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportParameterAccessInternal(reportParameterIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual bool HasReportParameterAccessInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportParameterBLL bll = evaluateData.Context.Logics.ReportParameter;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.Reports.ReportParameter domainObject = bll.GetById(reportParameterIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportParameter>(securityOperationCode).HasAccess(domainObject);
-        }
-    }
-    
-    public partial class ConfigSLJsonController
-    {
-        
-        /// <summary>
-        /// Check ReportProperty access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckReportPropertyAccess))]
-        public virtual void CheckReportPropertyAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual void CheckReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportProperty;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(securityOperationCode), domainObject);
-        }
-        
-        /// <summary>
-        /// Get full list of ReportProperties (FullDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportProperties))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> GetFullReportProperties()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportPropertiesInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get ReportProperties (FullDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportPropertiesByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> GetFullReportPropertiesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportPropertiesByIdentsInternal(reportPropertyIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> GetFullReportPropertiesByIdentsInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportPropertyFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(reportPropertyIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportProperty>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> GetFullReportPropertiesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportPropertyFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportProperty>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get ReportProperty (FullDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportProperty))]
-        public virtual Framework.Configuration.Generated.DTO.ReportPropertyFullDTO GetFullReportProperty([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportPropertyInternal(reportPropertyIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportPropertyFullDTO GetFullReportPropertyInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportPropertyFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportProperty>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get ReportProperty (RichDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichReportProperty))]
-        public virtual Framework.Configuration.Generated.DTO.ReportPropertyRichDTO GetRichReportProperty([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichReportPropertyInternal(reportPropertyIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportPropertyRichDTO GetRichReportPropertyInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportPropertyFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportProperty>(Framework.Transfering.ViewDTOType.FullDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get full list of ReportProperties (SimpleDTO)
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportProperties))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> GetSimpleReportProperties()
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertiesInternal(evaluateData));
-        }
-        
-        /// <summary>
-        /// Get ReportProperties (SimpleDTO) by idents
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportPropertiesByIdents))]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> GetSimpleReportPropertiesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertiesByIdentsInternal(reportPropertyIdents, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> GetSimpleReportPropertiesByIdentsInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportPropertyFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(reportPropertyIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportProperty>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> GetSimpleReportPropertiesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportPropertyFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportProperty>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get ReportProperty (SimpleDTO) by identity
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportProperty))]
-        public virtual Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO GetSimpleReportProperty([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertyInternal(reportPropertyIdentity, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO GetSimpleReportPropertyInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportPropertyFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Reports.ReportProperty>(Framework.Transfering.ViewDTOType.SimpleDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Check access for ReportProperty
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasReportPropertyAccess))]
-        public virtual bool HasReportPropertyAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual bool HasReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportProperty;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(securityOperationCode).HasAccess(domainObject);
-        }
-    }
-    
-    public partial class ConfigSLJsonController
-    {
-        
-        /// <summary>
-        /// Check Sequence access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckSequenceAccess))]
-        public virtual void CheckSequenceAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckSequenceAccessInternal(sequenceIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual void CheckSequenceAccessInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.Sequence;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Sequence>(securityOperationCode), domainObject);
-        }
-        
-        /// <summary>
         /// Create Sequence by model (SequenceCreateModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CreateSequence))]
@@ -1409,7 +662,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO CreateSequenceInternal(Framework.Configuration.Generated.DTO.SequenceCreateModelStrictDTO sequenceCreateModel, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.Edit);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.Edit);
             Framework.Configuration.Domain.SequenceCreateModel createModel = sequenceCreateModel.ToDomainObject(evaluateData.MappingService);
             Framework.Configuration.Domain.Sequence domainObject = bll.Create(createModel);
             bll.CheckAccess(domainObject);
@@ -1436,14 +689,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, sequenceName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -1468,7 +721,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(sequenceIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -1483,14 +736,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SequenceRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -1514,14 +767,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, sequenceName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -1546,14 +799,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, sequenceName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -1578,7 +831,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(sequenceIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -1593,14 +846,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SequenceRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -1624,14 +877,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, sequenceName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
@@ -1656,7 +909,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(sequenceIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
@@ -1671,32 +924,15 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SequenceRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Check access for Sequence
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasSequenceAccess))]
-        public virtual bool HasSequenceAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasSequenceAccessInternal(sequenceIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual bool HasSequenceAccessInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.Sequence;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Sequence>(securityOperationCode).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -1710,7 +946,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual void RemoveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.Edit);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.Edit);
             this.RemoveSequenceInternal(sequenceIdent, evaluateData, bll);
         }
         
@@ -1731,7 +967,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceIdentityDTO SaveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.BLLSecurityMode.Edit);
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.Edit);
             return this.SaveSequenceInternal(sequenceStrict, evaluateData, bll);
         }
         
@@ -1746,23 +982,6 @@ namespace Framework.Configuration.WebApi
     
     public partial class ConfigSLJsonController
     {
-        
-        /// <summary>
-        /// Check SystemConstant access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckSystemConstantAccess))]
-        public virtual void CheckSystemConstantAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckSystemConstantAccessInternal(systemConstantIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual void CheckSystemConstantAccessInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstant;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.SystemConstant>(securityOperationCode), domainObject);
-        }
         
         /// <summary>
         /// Get SystemConstant (FullDTO) by identity
@@ -1784,14 +1003,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstantByCodeInternal(string systemConstantCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, systemConstantCode, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -1816,7 +1035,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(systemConstantIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -1831,14 +1050,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstantRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -1862,14 +1081,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstantByCodeInternal(string systemConstantCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, systemConstantCode, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -1894,14 +1113,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstantByCodeInternal(string systemConstantCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, systemConstantCode, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -1926,7 +1145,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(systemConstantIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -1941,14 +1160,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstantRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -1972,14 +1191,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstantByCodeInternal(string systemConstantCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, systemConstantCode, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
@@ -2004,7 +1223,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(systemConstantIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
@@ -2019,32 +1238,15 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstantRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.SystemConstant>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Check access for SystemConstant
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasSystemConstantAccess))]
-        public virtual bool HasSystemConstantAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasSystemConstantAccessInternal(systemConstantIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual bool HasSystemConstantAccessInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstant;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.SystemConstant>(securityOperationCode).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -2058,7 +1260,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO SaveSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantStrictDTO systemConstantStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.BLLSecurityMode.Edit);
+            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Framework.SecuritySystem.SecurityRule.Edit);
             return this.SaveSystemConstantInternal(systemConstantStrict, evaluateData, bll);
         }
         
@@ -2073,23 +1275,6 @@ namespace Framework.Configuration.WebApi
     
     public partial class ConfigSLJsonController
     {
-        
-        /// <summary>
-        /// Check TargetSystem access
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckTargetSystemAccess))]
-        public virtual void CheckTargetSystemAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckTargetSystemAccessInternal(targetSystemIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual void CheckTargetSystemAccessInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystem;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.TargetSystem domainObject = bll.GetById(targetSystemIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.TargetSystem>(securityOperationCode), domainObject);
-        }
         
         /// <summary>
         /// Get TargetSystem (FullDTO) by identity
@@ -2111,14 +1296,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemFullDTO GetFullTargetSystemByNameInternal(string targetSystemName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystem domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, targetSystemName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemFullDTO GetFullTargetSystemInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystem domainObject = bll.GetById(targetSystemIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -2143,7 +1328,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemFullDTO> GetFullTargetSystemsByIdentsInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO[] targetSystemIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(targetSystemIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -2158,14 +1343,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemFullDTO> GetFullTargetSystemsByRootFilterInternal(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystemRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemFullDTO> GetFullTargetSystemsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -2189,14 +1374,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemRichDTO GetRichTargetSystemByNameInternal(string targetSystemName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystem domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, targetSystemName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemRichDTO GetRichTargetSystemInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystem domainObject = bll.GetById(targetSystemIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -2221,14 +1406,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO GetSimpleTargetSystemByNameInternal(string targetSystemName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystem domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, targetSystemName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO GetSimpleTargetSystemInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystem domainObject = bll.GetById(targetSystemIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -2253,7 +1438,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO> GetSimpleTargetSystemsByIdentsInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO[] targetSystemIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(targetSystemIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -2268,14 +1453,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO> GetSimpleTargetSystemsByRootFilterInternal(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystemRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO> GetSimpleTargetSystemsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -2299,14 +1484,14 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemVisualDTO GetVisualTargetSystemByNameInternal(string targetSystemName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystem domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, targetSystemName, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemVisualDTO GetVisualTargetSystemInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystem domainObject = bll.GetById(targetSystemIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
@@ -2331,7 +1516,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemVisualDTO> GetVisualTargetSystemsByIdentsInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO[] targetSystemIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(targetSystemIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
@@ -2346,32 +1531,15 @@ namespace Framework.Configuration.WebApi
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemVisualDTO> GetVisualTargetSystemsByRootFilterInternal(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.TargetSystemRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemVisualDTO> GetVisualTargetSystemsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.TargetSystem>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Check access for TargetSystem
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasTargetSystemAccess))]
-        public virtual bool HasTargetSystemAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasTargetSystemAccessInternal(targetSystemIdent, securityOperationCode, evaluateData));
-        }
-        
-        protected virtual bool HasTargetSystemAccessInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystem;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
-            Framework.Configuration.Domain.TargetSystem domainObject = bll.GetById(targetSystemIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.TargetSystem>(securityOperationCode).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -2385,7 +1553,7 @@ namespace Framework.Configuration.WebApi
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO SaveTargetSystemInternal(Framework.Configuration.Generated.DTO.TargetSystemStrictDTO targetSystemStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
-            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.Edit);
+            Framework.Configuration.BLL.ITargetSystemBLL bll = evaluateData.Context.Logics.TargetSystemFactory.Create(Framework.SecuritySystem.SecurityRule.Edit);
             return this.SaveTargetSystemInternal(targetSystemStrict, evaluateData, bll);
         }
         

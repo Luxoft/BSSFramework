@@ -6,8 +6,6 @@ using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Security;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.DTOGenerator;
 
 public interface IPropertyCodeTypeReferenceService : ICodeTypeReferenceService
@@ -32,7 +30,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration> : CodeTypeReferenc
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        return property.IsSecurity();
+        return this.Configuration.Environment.ExtendedMetadata.GetProperty(property).IsSecurity();
     }
 
     public virtual bool IsCollection(PropertyInfo property)
@@ -49,7 +47,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration> : CodeTypeReferenc
         return withOptional && this.IsOptional(property) ? typeRef.ToMaybeReference() : typeRef;
     }
 
-    protected virtual bool IsDomainType([NotNull] Type type)
+    protected virtual bool IsDomainType(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

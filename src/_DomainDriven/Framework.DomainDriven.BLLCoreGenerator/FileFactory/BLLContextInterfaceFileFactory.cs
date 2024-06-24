@@ -31,9 +31,9 @@ public class BLLContextInterfaceFileFactory<TConfiguration> : FileFactory<TConfi
 
     protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        var securityServiceFieldTypeRef = this.Configuration.GetCodeTypeReference(null, FileType.RootSecurityServiceInterface);
+        var securityServiceFieldTypeRef = this.Configuration.ActualRootSecurityServiceInterfaceType;
 
-        yield return new CodeTypeReference(typeof(IAccessDeniedExceptionServiceContainer<>)) { TypeArguments = { this.Configuration.Environment.PersistentDomainObjectBaseType } };
+        yield return new CodeTypeReference(typeof(IAccessDeniedExceptionServiceContainer));
 
         yield return new CodeTypeReference(typeof(ISecurityServiceContainer<>)) { TypeArguments = { securityServiceFieldTypeRef } };
         yield return typeof(IBLLFactoryContainerContext<>).ToTypeReference(this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface));
@@ -58,14 +58,4 @@ public class BLLContextInterfaceFileFactory<TConfiguration> : FileFactory<TConfi
                              HasGet = true
                      };
     }
-
-    //SecurityOperation<ConfigurationSecurityOperationCode> ISecurityOperationResolver<PersistentDomainObjectBase, ConfigurationSecurityOperationCode>.GetSecurityOperation(ConfigurationSecurityOperationCode securityOperationCode)
-    //{
-    //    return ConfigurationSecurityOperation.GetByCode(securityOperationCode);
-    //}
-
-    //SecurityOperation<ConfigurationSecurityOperationCode> ISecurityOperationResolver<PersistentDomainObjectBase, ConfigurationSecurityOperationCode>.GetSecurityOperation<TDomainObject>(BLLSecurityMode securityMode)
-    //{
-    //    return ConfigurationSecurityOperation.GetByCode<TDomainObject>(securityMode);
-    //}
 }

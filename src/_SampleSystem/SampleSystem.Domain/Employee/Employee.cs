@@ -2,6 +2,7 @@
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
+using Framework.Notification;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
@@ -19,9 +20,6 @@ namespace SampleSystem.Domain;
 [UniqueGroup(UseDbEvaluation = true)]
 [BLLViewRole(Max = MainDTOType.FullDTO)]
 [BLLSaveRole(SaveType = BLLSaveType.Both)]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeeEdit)]
-[BLLEventRole(Mode = EventRoleMode.Save)]
 [BLLIntegrationSaveRole]
 [DomainType("{AA46DA53-9B21-4DEC-9C70-720BDA1CB198}")]
 public partial class Employee :
@@ -32,8 +30,7 @@ public partial class Employee :
         IMaster<EmployeeAndEmployeeSpecializationLink>,
         IMaster<EmployeePhoto>,
         ISecurityContext,
-        IEmployee,
-        ISecurityVisualIdentityObject
+        IEmployee
 {
     private readonly ICollection<EmployeePhoto> employeePhotos = new List<EmployeePhoto>();
 
@@ -89,6 +86,8 @@ public partial class Employee :
     [NotPersistentField]
     private DateTime validateVirtualField = DateTime.Now;
 
+
+
     public virtual DateTime NonValidateVirtualProp
     {
         get { return this.nonValidateVirtualField; }
@@ -128,8 +127,6 @@ public partial class Employee :
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit)]
     public virtual IEnumerable<EmployeePersonalCellPhone> PersonalCellPhones
     {
         get { return this.personalCellPhones; }
@@ -202,8 +199,6 @@ public partial class Employee :
 
     [MaxLength(30)]
     [UniqueElement]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeeEdit)]
     public virtual string Login
     {
         get { return this.login.TrimNull(); }
@@ -218,10 +213,11 @@ public partial class Employee :
     }
 
     [PropertyValidationMode(false)]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual string CellPhone
     {
         get { return this.cellPhone.TrimNull(); }
-        protected internal set { this.cellPhone = value.TrimNull(); }
+        set { this.cellPhone = value.TrimNull(); }
     }
 
     [MaxLength(40)]
@@ -232,11 +228,11 @@ public partial class Employee :
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView)]
+    [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client)]
     public virtual string PersonalCellPhone
     {
         get { return this.personalCellPhone.TrimNull(); }
-        protected internal set { this.personalCellPhone = value.TrimNull(); }
+        set { this.personalCellPhone = value.TrimNull(); }
     }
 
     public virtual bool IsCandidate
@@ -268,10 +264,11 @@ public partial class Employee :
         set { this.nameRussian = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual DateTime? DismissDate
     {
         get { return this.dismissDate; }
-        protected internal set { this.dismissDate = value; }
+        set { this.dismissDate = value; }
     }
 
     public virtual DateTime? BirthDate
@@ -280,10 +277,11 @@ public partial class Employee :
         set { this.birthDate = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual DateTime? HireDate
     {
         get { return this.hireDate; }
-        protected internal set { this.hireDate = value; }
+        set { this.hireDate = value; }
     }
 
     ////public virtual WorkplaceOfficeAddress Address
@@ -305,10 +303,11 @@ public partial class Employee :
         get { return this.Location?.Code; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual BusinessUnit CoreBusinessUnit
     {
         get { return this.coreBusinessUnit; }
-        protected internal set { this.coreBusinessUnit = value; }
+        set { this.coreBusinessUnit = value; }
     }
 
     [ExpandPath("CoreBusinessUnit.Period")]
@@ -317,16 +316,18 @@ public partial class Employee :
         get { return this.CoreBusinessUnit?.Period; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual ManagementUnit ManagementUnit
     {
         get { return this.managementUnit; }
-        protected internal set { this.managementUnit = value; }
+        set { this.managementUnit = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual HRDepartment HRDepartment
     {
         get { return this.hRDepartment; }
-        protected internal set { this.hRDepartment = value; }
+        set { this.hRDepartment = value; }
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Event | DTORole.Integration)]
@@ -344,8 +345,6 @@ public partial class Employee :
         set { this.lastActionDate = value; }
     }
 
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeePositionEdit)]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeePositionView)]
     public virtual EmployeePosition Position
     {
         get { return this.position; }
@@ -437,8 +436,6 @@ public partial class Employee :
     {
         get { return this.employeePhotos; }
     }
-
-    string ISecurityVisualIdentityObject.Name => this.Login;
 
     public virtual int Age
     {

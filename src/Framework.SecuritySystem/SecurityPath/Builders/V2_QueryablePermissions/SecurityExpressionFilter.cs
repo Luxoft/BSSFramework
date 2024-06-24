@@ -1,17 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.Persistent;
-
+using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Rules.Builders.QueryablePermissions;
 
-public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TSecurityOperationCode, TIdent> : ISecurityExpressionFilter<TDomainObject>
+public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressionFilter<TDomainObject>
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TSecurityOperationCode : struct, Enum
+    where TDomainObject : class, IIdentityObject<TIdent>
 {
     private readonly Lazy<Func<TDomainObject, IEnumerable<string>>> getAccessorsFunc;
 
@@ -22,27 +19,29 @@ public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject
     private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
 
     public SecurityExpressionFilter(
-            SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent> builder,
-            ContextSecurityOperation<TSecurityOperationCode> securityOperation)
+        SecurityExpressionBuilderBase<TDomainObject, TIdent> builder,
+        SecurityRule.DomainObjectSecurityRule securityRule)
     {
         if (builder == null) throw new ArgumentNullException(nameof(builder));
-        if (securityOperation == null) throw new
-                ArgumentNullException(nameof(securityOperation));
+        if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
 
-        var filterExpression = builder.GetSecurityFilterExpression(securityOperation).ExpandConst().InlineEval();
+        var filterExpression = builder.GetSecurityFilterExpression(securityRule).ExpandConst().InlineEval();
 
         this.InjectFunc = q => q.Where(filterExpression);
 
-        this.lazyHasAccessFunc = LazyHelper.Create(() => filterExpression.UpdateBody(OptimizeContainsCallVisitor<TIdent>.Value).Compile(LambdaCompileCache));
+        this.lazyHasAccessFunc = LazyHelper.Create(
+            () => filterExpression.UpdateBody(OptimizeContainsCallVisitor<TIdent>.Value).Compile(LambdaCompileCache));
 
-        this.getAccessorsFunc = LazyHelper.Create(() => FuncHelper.Create((TDomainObject domainObject) =>
-                                                                          {
-                                                                              var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityOperation.SecurityExpandType);
+        this.getAccessorsFunc = LazyHelper.Create(
+            () => FuncHelper.Create(
+                (TDomainObject domainObject) =>
+                {
+                    var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityRule.SafeExpandType);
 
-                                                                              var filter = baseFilter.OverrideInput((IPrincipal<TIdent> principal) => principal.Permissions);
+                    var filter = baseFilter.OverrideInput((IPrincipal<TIdent> principal) => principal.Permissions);
 
-                                                                              return builder.Factory.AuthorizationSystem.GetAccessors(securityOperation.Code, filter);
-                                                                          }));
+                    return builder.Factory.AuthorizationSystem.GetNonContextAccessors(securityRule, filter);
+                }));
     }
 
     public Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>> InjectFunc { get; }

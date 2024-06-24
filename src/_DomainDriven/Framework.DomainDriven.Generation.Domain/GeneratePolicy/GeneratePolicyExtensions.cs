@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.DomainDriven.Generation.Domain;
+﻿namespace Framework.DomainDriven.Generation.Domain;
 
 /// <summary>
 /// Расширения для работы с политиками генерации
@@ -60,7 +58,7 @@ public static class GeneratePolicyExtensions
     /// <param name="firstType">Первый доменный тип</param>
     /// <param name="otherTypes">Прочие доменные типы</param>
     /// <returns></returns>
-    public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, Type firstType, [NotNull] params Type[] otherTypes)
+    public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, Type firstType, params Type[] otherTypes)
     {
         if (policy == null) throw new ArgumentNullException(nameof(policy));
         if (firstType == null) throw new ArgumentNullException(nameof(firstType));
@@ -173,7 +171,7 @@ public static class GeneratePolicyExtensions
     /// <param name="firstType">Первый доменный тип</param>
     /// <param name="otherTypes">Прочие доменные типы</param>
     /// <returns></returns>
-    public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, Type firstType, [NotNull] params Type[] otherTypes)
+    public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, Type firstType, params Type[] otherTypes)
     {
         if (policy == null) throw new ArgumentNullException(nameof(policy));
         if (firstType == null) throw new ArgumentNullException(nameof(firstType));

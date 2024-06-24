@@ -1,18 +1,15 @@
 ﻿using System.Data;
-using System.Transactions;
 
 using Framework.Core;
 using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 
-using JetBrains.Annotations;
+
 
 using NHibernate;
 using NHibernate.Event;
 using NHibernate.Impl;
-
-using IsolationLevel = System.Transactions.IsolationLevel;
 
 namespace Framework.DomainDriven.NHibernate;
 
@@ -20,17 +17,17 @@ public class WriteNHibSession : NHibSessionBase
 {
     private readonly IDBSessionEventListener[] eventListeners;
 
-    [NotNull]
+
     private readonly AuditPropertyPair modifyAuditProperties;
 
-    [NotNull]
+
     private readonly AuditPropertyPair createAuditProperties;
 
     private readonly ISet<ObjectModification> modifiedObjectsFromLogic = new HashSet<ObjectModification>();
 
     private readonly CollectChangesEventListener collectChangedEventListener;
 
-    private readonly ITransaction transaction;
+    private readonly ITransaction nhibTransaction;
 
     private bool manualFault;
 
@@ -49,9 +46,9 @@ public class WriteNHibSession : NHibSessionBase
         this.NativeSession = this.Environment.InternalSessionFactory.OpenSession();
         this.NativeSession.FlushMode = FlushMode.Manual;
 
-        this.transaction = this.NativeSession.BeginTransaction();
+        this.nhibTransaction = this.NativeSession.BeginTransaction();
 
-        this.Environment.ProcessTransaction(GetDbTransaction(this.transaction, this.NativeSession));
+        this.Transaction = GetDbTransaction(this.nhibTransaction, this.NativeSession);
 
         this.ConfigureEventListeners();
     }
@@ -59,6 +56,8 @@ public class WriteNHibSession : NHibSessionBase
     public override bool Closed => this.closed;
 
     public sealed override ISession NativeSession { get; }
+
+    public override IDbTransaction Transaction { get; }
 
     private void ConfigureEventListeners()
     {
@@ -139,20 +138,20 @@ public class WriteNHibSession : NHibSessionBase
 
         using (this.NativeSession)
         {
-            using (this.transaction)
+            using (this.nhibTransaction)
             {
                 if (this.manualFault)
                 {
-                    if (!this.transaction.WasRolledBack)
+                    if (!this.nhibTransaction.WasRolledBack)
                     {
-                        await this.transaction.RollbackAsync(cancellationToken);
+                        await this.nhibTransaction.RollbackAsync(cancellationToken);
                     }
                 }
                 else
                 {
                     await this.FlushAsync(true, cancellationToken);
 
-                    await this.transaction.CommitAsync(cancellationToken);
+                    await this.nhibTransaction.CommitAsync(cancellationToken);
                 }
             }
         }
@@ -168,15 +167,6 @@ public class WriteNHibSession : NHibSessionBase
 
         return dbCommand.Transaction;
     }
-
-    private TransactionScope CreateTransactionScope() =>
-            new(
-                TransactionScopeOption.Required,
-                new TransactionOptions
-                {
-                        Timeout = this.Environment.TransactionTimeout,
-                        IsolationLevel = IsolationLevel.Serializable
-                });
 
     public override async Task FlushAsync(CancellationToken cancellationToken = default)
     {

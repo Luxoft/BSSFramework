@@ -5,8 +5,6 @@ using Framework.Restriction;
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeePositionView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeePositionEdit)]
 [UniqueGroup]
 public class EmployeePosition : BaseDirectory, IExternalSynchronizable
 {

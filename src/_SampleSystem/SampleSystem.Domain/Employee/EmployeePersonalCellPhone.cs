@@ -2,8 +2,6 @@
 
 namespace SampleSystem.Domain;
 
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit)]
 public class EmployeePersonalCellPhone : EmployeeCellPhoneBase
 {
     public EmployeePersonalCellPhone(Employee employee)

@@ -21,10 +21,11 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IDefaultIde
     /// <summary>
     /// ID доменного объекта
     /// </summary>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Guid Id
     {
         get { return this.id; }
-        protected internal set { this.id = value; }
+        set { this.id = value; }
     }
 
     /// <summary>
@@ -45,7 +46,13 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IDefaultIde
 
     public virtual bool Equals(PersistentDomainObjectBase obj)
     {
-        return object.ReferenceEquals(this, obj) || (!object.ReferenceEquals(obj, null) && this.Id == obj.Id && this.Id != Guid.Empty);
+        return object.ReferenceEquals(this, obj)
+               || (!object.ReferenceEquals(obj, null)
+                   && this.Id == obj.Id
+                   && this.Id != Guid.Empty
+
+                   && (obj.GetType().IsAssignableFrom(this.GetType()) || this.GetType().IsAssignableFrom(obj.GetType()))
+                   );
     }
 
     public override bool Equals(object obj)

@@ -1,13 +1,25 @@
-﻿using Framework.Authorization.BLL;
-using Framework.DomainDriven;
+﻿using Framework.Authorization.SecuritySystem;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace Authorization.WebApi.Controllers;
 
-public partial class OperationController
+[ApiController]
+[Route("authApi/[controller]")]
+public class OperationController : ControllerBase
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetSecurityOperations))]
-    public IEnumerable<string> GetSecurityOperations()
+    private readonly IAvailableSecurityRoleSource availableSecurityRoleSource;
+
+    public OperationController(IAvailableSecurityRoleSource availableSecurityRoleSource)
     {
-        return this.EvaluateC(DBSessionMode.Read, context => context.Logics.Operation.GetAvailableOperationCodes().ToList());
+        this.availableSecurityRoleSource = availableSecurityRoleSource;
+    }
+
+    [HttpPost(nameof(GetSecurityOperations))]
+    public async Task<IEnumerable<string>> GetSecurityOperations(CancellationToken cancellationToken)
+    {
+        var roles = await this.availableSecurityRoleSource.GetAvailableSecurityRoles(cancellationToken);
+
+        return roles.SelectMany(sr => sr.Information.Operations).Distinct().Select(op => op.Name);
     }
 }

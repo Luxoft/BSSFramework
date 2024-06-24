@@ -17,8 +17,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AnotherSqlParserTestObjSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AnotherSqlParserTestObjRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AuthPerformanceObjectSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AuthPerformanceObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitAncestorLinkSaveEventDTO))]
@@ -146,8 +146,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SingleEmployeeFilterModelSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SingleEmployeeFilterModelRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.NamedLockSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.NamedLockRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.NoSecurityObjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.NoSecurityObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalSaveEventDTO))]
@@ -186,6 +184,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRootSecurityObjSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRootSecurityObjRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecurityObjItemSaveEventDTO))]
@@ -202,10 +202,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ParentEntityRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ChildEntitySaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ChildEntityRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreInstanceSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreInstanceRemoveEventDTO))]
     public abstract partial class EventDTOBase
     {
     }
@@ -215,8 +211,7 @@ namespace SampleSystem.Generated.DTO
     public partial class AddressSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.AddressEventRichDTO Address;
+        private SampleSystem.Generated.DTO.AddressEventRichDTO address;
         
         public AddressSaveEventDTO()
         {
@@ -224,7 +219,20 @@ namespace SampleSystem.Generated.DTO
         
         public AddressSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Address domainObject)
         {
-            this.Address = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.address = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.AddressEventRichDTO Address
+        {
+            get
+            {
+                return this.address;
+            }
+            set
+            {
+                this.address = value;
+            }
         }
     }
     
@@ -233,8 +241,7 @@ namespace SampleSystem.Generated.DTO
     public partial class AddressRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.AddressEventRichDTO Address;
+        private SampleSystem.Generated.DTO.AddressEventRichDTO address;
         
         public AddressRemoveEventDTO()
         {
@@ -242,7 +249,20 @@ namespace SampleSystem.Generated.DTO
         
         public AddressRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Address domainObject)
         {
-            this.Address = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.address = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.AddressEventRichDTO Address
+        {
+            get
+            {
+                return this.address;
+            }
+            set
+            {
+                this.address = value;
+            }
         }
     }
     
@@ -251,47 +271,33 @@ namespace SampleSystem.Generated.DTO
     public partial class AddressEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.AddressType AddressType;
+        private SampleSystem.Domain.AddressType _addressType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CityName;
+        private string _cityName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CountryEventSimpleDTO CountryName;
+        private SampleSystem.Generated.DTO.CountryEventSimpleDTO _countryName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LegalEntityBaseEventSimpleDTO LegalEntity;
+        private SampleSystem.Generated.DTO.LegalEntityBaseEventSimpleDTO _legalEntity;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RegionName;
+        private string _regionName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Street;
+        private string _street;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Zip;
+        private string _zip;
         
         public AddressEventRichDTO()
         {
@@ -301,6 +307,188 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapAddress(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.AddressType AddressType
+        {
+            get
+            {
+                return this._addressType;
+            }
+            set
+            {
+                this._addressType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CityName
+        {
+            get
+            {
+                return this._cityName;
+            }
+            set
+            {
+                this._cityName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CountryEventSimpleDTO CountryName
+        {
+            get
+            {
+                return this._countryName;
+            }
+            set
+            {
+                this._countryName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LegalEntityBaseEventSimpleDTO LegalEntity
+        {
+            get
+            {
+                return this._legalEntity;
+            }
+            set
+            {
+                this._legalEntity = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RegionName
+        {
+            get
+            {
+                return this._regionName;
+            }
+            set
+            {
+                this._regionName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Street
+        {
+            get
+            {
+                return this._street;
+            }
+            set
+            {
+                this._street = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Zip
+        {
+            get
+            {
+                return this._zip;
+            }
+            set
+            {
+                this._zip = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.AnotherSqlParserTestObj), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -308,8 +496,7 @@ namespace SampleSystem.Generated.DTO
     public partial class AnotherSqlParserTestObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO AnotherSqlParserTestObj;
+        private SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO anotherSqlParserTestObj;
         
         public AnotherSqlParserTestObjSaveEventDTO()
         {
@@ -317,7 +504,20 @@ namespace SampleSystem.Generated.DTO
         
         public AnotherSqlParserTestObjSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.AnotherSqlParserTestObj domainObject)
         {
-            this.AnotherSqlParserTestObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.anotherSqlParserTestObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO AnotherSqlParserTestObj
+        {
+            get
+            {
+                return this.anotherSqlParserTestObj;
+            }
+            set
+            {
+                this.anotherSqlParserTestObj = value;
+            }
         }
     }
     
@@ -326,8 +526,7 @@ namespace SampleSystem.Generated.DTO
     public partial class AnotherSqlParserTestObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO AnotherSqlParserTestObj;
+        private SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO anotherSqlParserTestObj;
         
         public AnotherSqlParserTestObjRemoveEventDTO()
         {
@@ -335,7 +534,20 @@ namespace SampleSystem.Generated.DTO
         
         public AnotherSqlParserTestObjRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.AnotherSqlParserTestObj domainObject)
         {
-            this.AnotherSqlParserTestObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.anotherSqlParserTestObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO AnotherSqlParserTestObj
+        {
+            get
+            {
+                return this.anotherSqlParserTestObj;
+            }
+            set
+            {
+                this.anotherSqlParserTestObj = value;
+            }
         }
     }
     
@@ -344,32 +556,23 @@ namespace SampleSystem.Generated.DTO
     public partial class AnotherSqlParserTestObjEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NotNullColumn;
+        private string _notNullColumn;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UniqueColumn;
+        private string _uniqueColumn;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public AnotherSqlParserTestObjEventRichDTO()
         {
@@ -379,83 +582,362 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapAnotherSqlParserTestObj(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NotNullColumn
+        {
+            get
+            {
+                return this._notNullColumn;
+            }
+            set
+            {
+                this._notNullColumn = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UniqueColumn
+        {
+            get
+            {
+                return this._uniqueColumn;
+            }
+            set
+            {
+                this._uniqueColumn = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.AuthPerformanceObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class ApprovePermissionWorkflowDomainObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    public partial class AuthPerformanceObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO ApprovePermissionWorkflowDomainObject;
+        private SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO authPerformanceObject;
         
-        public ApprovePermissionWorkflowDomainObjectSaveEventDTO()
+        public AuthPerformanceObjectSaveEventDTO()
         {
         }
         
-        public ApprovePermissionWorkflowDomainObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject)
+        public AuthPerformanceObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.AuthPerformanceObject domainObject)
         {
-            this.ApprovePermissionWorkflowDomainObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.authPerformanceObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO AuthPerformanceObject
+        {
+            get
+            {
+                return this.authPerformanceObject;
+            }
+            set
+            {
+                this.authPerformanceObject = value;
+            }
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.AuthPerformanceObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class ApprovePermissionWorkflowDomainObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    public partial class AuthPerformanceObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO ApprovePermissionWorkflowDomainObject;
+        private SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO authPerformanceObject;
         
-        public ApprovePermissionWorkflowDomainObjectRemoveEventDTO()
+        public AuthPerformanceObjectRemoveEventDTO()
         {
         }
         
-        public ApprovePermissionWorkflowDomainObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject)
+        public AuthPerformanceObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.AuthPerformanceObject domainObject)
         {
-            this.ApprovePermissionWorkflowDomainObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.authPerformanceObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO AuthPerformanceObject
+        {
+            get
+            {
+                return this.authPerformanceObject;
+            }
+            set
+            {
+                this.authPerformanceObject = value;
+            }
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.AuthPerformanceObject), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class ApprovePermissionWorkflowDomainObjectEventRichDTO
+    public partial class AuthPerformanceObjectEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid PermissionId;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid? WorkflowInstanceId;
+        private string _modifiedBy;
         
-        public ApprovePermissionWorkflowDomainObjectEventRichDTO()
+        private System.DateTime? _modifyDate;
+        
+        private long _version;
+        
+        public AuthPerformanceObjectEventRichDTO()
         {
         }
         
-        public ApprovePermissionWorkflowDomainObjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject)
+        public AuthPerformanceObjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.AuthPerformanceObject domainObject)
         {
-            mappingService.MapApprovePermissionWorkflowDomainObject(domainObject, this);
+            mappingService.MapAuthPerformanceObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit
+        {
+            get
+            {
+                return this._managementUnit;
+            }
+            set
+            {
+                this._managementUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
         }
     }
     
@@ -464,8 +946,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventRichDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventRichDTO businessUnit;
         
         public BusinessUnitSaveEventDTO()
         {
@@ -473,7 +954,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnit domainObject)
         {
-            this.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventRichDTO BusinessUnit
+        {
+            get
+            {
+                return this.businessUnit;
+            }
+            set
+            {
+                this.businessUnit = value;
+            }
         }
     }
     
@@ -482,8 +976,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventRichDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventRichDTO businessUnit;
         
         public BusinessUnitRemoveEventDTO()
         {
@@ -491,7 +984,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnit domainObject)
         {
-            this.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventRichDTO BusinessUnit
+        {
+            get
+            {
+                return this.businessUnit;
+            }
+            set
+            {
+                this.businessUnit = value;
+            }
         }
     }
     
@@ -500,143 +1006,97 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Account;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _account;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid AccountId;
+        private System.Guid _accountId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountName;
+        private string _accountName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO AccountOrDivision;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _accountOrDivision;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid AccountOrDivisionId;
+        private System.Guid _accountOrDivisionId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountOrDivisionName;
+        private string _accountOrDivisionName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO> BusinessUnitEmployeeRoles;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO> _businessUnitEmployeeRoles;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnitForRent;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnitForRent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus;
+        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO BusinessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string BusinessUnitTypeName;
+        private string _businessUnitTypeName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Commission;
+        private decimal _commission;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int DeepLevel;
+        private int _deepLevel;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? FirstNewBusinessStatusMonth;
+        private System.DateTime? _firstNewBusinessStatusMonth;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsNewBusiness;
+        private bool _isNewBusiness;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsPool;
+        private bool _isPool;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsProduction;
+        private bool _isProduction;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsSpecialCommission;
+        private bool _isSpecialCommission;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? LastBusinessUnitHasNoLinkedProjectsWarningCheckDate;
+        private System.DateTime? _lastBusinessUnitHasNoLinkedProjectsWarningCheckDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? LastNewBusinessStatusMonth;
+        private System.DateTime? _lastNewBusinessStatusMonth;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? LeastProjectStartDate;
+        private System.DateTime? _leastProjectStartDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Lob;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _lob;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid LobId;
+        private System.Guid _lobId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LobName;
+        private string _lobName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO LobOrService;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _lobOrService;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid LobOrServiceId;
+        private System.Guid _lobOrServiceId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LobOrServiceName;
+        private string _lobOrServiceName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO> ManagementUnits;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO> _managementUnits;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO> ManagerCommissions;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO> _managerCommissions;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool NeedSendBusinessUnitHasNoLinkedProjectsWarning;
+        private bool _needSendBusinessUnitHasNoLinkedProjectsWarning;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int NewBusinessStatusLeft;
+        private int _newBusinessStatusLeft;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitOptions Options;
+        private SampleSystem.Domain.BusinessUnitOptions _options;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Parent;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _parent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period;
+        private Framework.Core.Period _period;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Program;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _program;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProgramName;
+        private string _programName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProjectStartMailList;
+        private string _projectStartMailList;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Rank;
+        private int _rank;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitEventRichDTO()
         {
@@ -646,6 +1106,604 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnit(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Account
+        {
+            get
+            {
+                return this._account;
+            }
+            set
+            {
+                this._account = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid AccountId
+        {
+            get
+            {
+                return this._accountId;
+            }
+            set
+            {
+                this._accountId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AccountName
+        {
+            get
+            {
+                return this._accountName;
+            }
+            set
+            {
+                this._accountName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO AccountOrDivision
+        {
+            get
+            {
+                return this._accountOrDivision;
+            }
+            set
+            {
+                this._accountOrDivision = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid AccountOrDivisionId
+        {
+            get
+            {
+                return this._accountOrDivisionId;
+            }
+            set
+            {
+                this._accountOrDivisionId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AccountOrDivisionName
+        {
+            get
+            {
+                return this._accountOrDivisionName;
+            }
+            set
+            {
+                this._accountOrDivisionName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO> BusinessUnitEmployeeRoles
+        {
+            get
+            {
+                return this._businessUnitEmployeeRoles;
+            }
+            set
+            {
+                this._businessUnitEmployeeRoles = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnitForRent
+        {
+            get
+            {
+                return this._businessUnitForRent;
+            }
+            set
+            {
+                this._businessUnitForRent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        {
+            get
+            {
+                return this._businessUnitStatus;
+            }
+            set
+            {
+                this._businessUnitStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO BusinessUnitType
+        {
+            get
+            {
+                return this._businessUnitType;
+            }
+            set
+            {
+                this._businessUnitType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BusinessUnitTypeName
+        {
+            get
+            {
+                return this._businessUnitTypeName;
+            }
+            set
+            {
+                this._businessUnitTypeName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Commission
+        {
+            get
+            {
+                return this._commission;
+            }
+            set
+            {
+                this._commission = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel
+        {
+            get
+            {
+                return this._deepLevel;
+            }
+            set
+            {
+                this._deepLevel = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? FirstNewBusinessStatusMonth
+        {
+            get
+            {
+                return this._firstNewBusinessStatusMonth;
+            }
+            set
+            {
+                this._firstNewBusinessStatusMonth = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsNewBusiness
+        {
+            get
+            {
+                return this._isNewBusiness;
+            }
+            set
+            {
+                this._isNewBusiness = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPool
+        {
+            get
+            {
+                return this._isPool;
+            }
+            set
+            {
+                this._isPool = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsProduction
+        {
+            get
+            {
+                return this._isProduction;
+            }
+            set
+            {
+                this._isProduction = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSpecialCommission
+        {
+            get
+            {
+                return this._isSpecialCommission;
+            }
+            set
+            {
+                this._isSpecialCommission = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? LastBusinessUnitHasNoLinkedProjectsWarningCheckDate
+        {
+            get
+            {
+                return this._lastBusinessUnitHasNoLinkedProjectsWarningCheckDate;
+            }
+            set
+            {
+                this._lastBusinessUnitHasNoLinkedProjectsWarningCheckDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? LastNewBusinessStatusMonth
+        {
+            get
+            {
+                return this._lastNewBusinessStatusMonth;
+            }
+            set
+            {
+                this._lastNewBusinessStatusMonth = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? LeastProjectStartDate
+        {
+            get
+            {
+                return this._leastProjectStartDate;
+            }
+            set
+            {
+                this._leastProjectStartDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Lob
+        {
+            get
+            {
+                return this._lob;
+            }
+            set
+            {
+                this._lob = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid LobId
+        {
+            get
+            {
+                return this._lobId;
+            }
+            set
+            {
+                this._lobId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LobName
+        {
+            get
+            {
+                return this._lobName;
+            }
+            set
+            {
+                this._lobName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO LobOrService
+        {
+            get
+            {
+                return this._lobOrService;
+            }
+            set
+            {
+                this._lobOrService = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid LobOrServiceId
+        {
+            get
+            {
+                return this._lobOrServiceId;
+            }
+            set
+            {
+                this._lobOrServiceId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LobOrServiceName
+        {
+            get
+            {
+                return this._lobOrServiceName;
+            }
+            set
+            {
+                this._lobOrServiceName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO> ManagementUnits
+        {
+            get
+            {
+                return this._managementUnits;
+            }
+            set
+            {
+                this._managementUnits = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO> ManagerCommissions
+        {
+            get
+            {
+                return this._managerCommissions;
+            }
+            set
+            {
+                this._managerCommissions = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool NeedSendBusinessUnitHasNoLinkedProjectsWarning
+        {
+            get
+            {
+                return this._needSendBusinessUnitHasNoLinkedProjectsWarning;
+            }
+            set
+            {
+                this._needSendBusinessUnitHasNoLinkedProjectsWarning = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NewBusinessStatusLeft
+        {
+            get
+            {
+                return this._newBusinessStatusLeft;
+            }
+            set
+            {
+                this._newBusinessStatusLeft = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.BusinessUnitOptions Options
+        {
+            get
+            {
+                return this._options;
+            }
+            set
+            {
+                this._options = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Program
+        {
+            get
+            {
+                return this._program;
+            }
+            set
+            {
+                this._program = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ProgramName
+        {
+            get
+            {
+                return this._programName;
+            }
+            set
+            {
+                this._programName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ProjectStartMailList
+        {
+            get
+            {
+                return this._projectStartMailList;
+            }
+            set
+            {
+                this._projectStartMailList = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Rank
+        {
+            get
+            {
+                return this._rank;
+            }
+            set
+            {
+                this._rank = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -653,110 +1711,75 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid AccountId;
+        private System.Guid _accountId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountName;
+        private string _accountName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid AccountOrDivisionId;
+        private System.Guid _accountOrDivisionId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountOrDivisionName;
+        private string _accountOrDivisionName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus;
+        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string BusinessUnitTypeName;
+        private string _businessUnitTypeName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Commission;
+        private decimal _commission;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int DeepLevel;
+        private int _deepLevel;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? FirstNewBusinessStatusMonth;
+        private System.DateTime? _firstNewBusinessStatusMonth;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsNewBusiness;
+        private bool _isNewBusiness;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsPool;
+        private bool _isPool;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsProduction;
+        private bool _isProduction;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsSpecialCommission;
+        private bool _isSpecialCommission;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? LastBusinessUnitHasNoLinkedProjectsWarningCheckDate;
+        private System.DateTime? _lastBusinessUnitHasNoLinkedProjectsWarningCheckDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? LastNewBusinessStatusMonth;
+        private System.DateTime? _lastNewBusinessStatusMonth;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? LeastProjectStartDate;
+        private System.DateTime? _leastProjectStartDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid LobId;
+        private System.Guid _lobId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LobName;
+        private string _lobName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid LobOrServiceId;
+        private System.Guid _lobOrServiceId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LobOrServiceName;
+        private string _lobOrServiceName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool NeedSendBusinessUnitHasNoLinkedProjectsWarning;
+        private bool _needSendBusinessUnitHasNoLinkedProjectsWarning;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int NewBusinessStatusLeft;
+        private int _newBusinessStatusLeft;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitOptions Options;
+        private SampleSystem.Domain.BusinessUnitOptions _options;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period;
+        private Framework.Core.Period _period;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProgramName;
+        private string _programName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProjectStartMailList;
+        private string _projectStartMailList;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Rank;
+        private int _rank;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitEventSimpleDTO()
         {
@@ -766,6 +1789,461 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnit(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid AccountId
+        {
+            get
+            {
+                return this._accountId;
+            }
+            set
+            {
+                this._accountId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AccountName
+        {
+            get
+            {
+                return this._accountName;
+            }
+            set
+            {
+                this._accountName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid AccountOrDivisionId
+        {
+            get
+            {
+                return this._accountOrDivisionId;
+            }
+            set
+            {
+                this._accountOrDivisionId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AccountOrDivisionName
+        {
+            get
+            {
+                return this._accountOrDivisionName;
+            }
+            set
+            {
+                this._accountOrDivisionName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        {
+            get
+            {
+                return this._businessUnitStatus;
+            }
+            set
+            {
+                this._businessUnitStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BusinessUnitTypeName
+        {
+            get
+            {
+                return this._businessUnitTypeName;
+            }
+            set
+            {
+                this._businessUnitTypeName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Commission
+        {
+            get
+            {
+                return this._commission;
+            }
+            set
+            {
+                this._commission = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel
+        {
+            get
+            {
+                return this._deepLevel;
+            }
+            set
+            {
+                this._deepLevel = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? FirstNewBusinessStatusMonth
+        {
+            get
+            {
+                return this._firstNewBusinessStatusMonth;
+            }
+            set
+            {
+                this._firstNewBusinessStatusMonth = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsNewBusiness
+        {
+            get
+            {
+                return this._isNewBusiness;
+            }
+            set
+            {
+                this._isNewBusiness = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPool
+        {
+            get
+            {
+                return this._isPool;
+            }
+            set
+            {
+                this._isPool = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsProduction
+        {
+            get
+            {
+                return this._isProduction;
+            }
+            set
+            {
+                this._isProduction = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSpecialCommission
+        {
+            get
+            {
+                return this._isSpecialCommission;
+            }
+            set
+            {
+                this._isSpecialCommission = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? LastBusinessUnitHasNoLinkedProjectsWarningCheckDate
+        {
+            get
+            {
+                return this._lastBusinessUnitHasNoLinkedProjectsWarningCheckDate;
+            }
+            set
+            {
+                this._lastBusinessUnitHasNoLinkedProjectsWarningCheckDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? LastNewBusinessStatusMonth
+        {
+            get
+            {
+                return this._lastNewBusinessStatusMonth;
+            }
+            set
+            {
+                this._lastNewBusinessStatusMonth = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? LeastProjectStartDate
+        {
+            get
+            {
+                return this._leastProjectStartDate;
+            }
+            set
+            {
+                this._leastProjectStartDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid LobId
+        {
+            get
+            {
+                return this._lobId;
+            }
+            set
+            {
+                this._lobId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LobName
+        {
+            get
+            {
+                return this._lobName;
+            }
+            set
+            {
+                this._lobName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid LobOrServiceId
+        {
+            get
+            {
+                return this._lobOrServiceId;
+            }
+            set
+            {
+                this._lobOrServiceId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LobOrServiceName
+        {
+            get
+            {
+                return this._lobOrServiceName;
+            }
+            set
+            {
+                this._lobOrServiceName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool NeedSendBusinessUnitHasNoLinkedProjectsWarning
+        {
+            get
+            {
+                return this._needSendBusinessUnitHasNoLinkedProjectsWarning;
+            }
+            set
+            {
+                this._needSendBusinessUnitHasNoLinkedProjectsWarning = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NewBusinessStatusLeft
+        {
+            get
+            {
+                return this._newBusinessStatusLeft;
+            }
+            set
+            {
+                this._newBusinessStatusLeft = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.BusinessUnitOptions Options
+        {
+            get
+            {
+                return this._options;
+            }
+            set
+            {
+                this._options = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ProgramName
+        {
+            get
+            {
+                return this._programName;
+            }
+            set
+            {
+                this._programName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ProjectStartMailList
+        {
+            get
+            {
+                return this._projectStartMailList;
+            }
+            set
+            {
+                this._projectStartMailList = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Rank
+        {
+            get
+            {
+                return this._rank;
+            }
+            set
+            {
+                this._rank = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitAncestorLink), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -773,8 +2251,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitAncestorLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitAncestorLinkEventRichDTO BusinessUnitAncestorLink;
+        private SampleSystem.Generated.DTO.BusinessUnitAncestorLinkEventRichDTO businessUnitAncestorLink;
         
         public BusinessUnitAncestorLinkSaveEventDTO()
         {
@@ -782,7 +2259,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitAncestorLinkSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitAncestorLink domainObject)
         {
-            this.BusinessUnitAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitAncestorLinkEventRichDTO BusinessUnitAncestorLink
+        {
+            get
+            {
+                return this.businessUnitAncestorLink;
+            }
+            set
+            {
+                this.businessUnitAncestorLink = value;
+            }
         }
     }
     
@@ -791,8 +2281,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitAncestorLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitAncestorLinkEventRichDTO BusinessUnitAncestorLink;
+        private SampleSystem.Generated.DTO.BusinessUnitAncestorLinkEventRichDTO businessUnitAncestorLink;
         
         public BusinessUnitAncestorLinkRemoveEventDTO()
         {
@@ -800,7 +2289,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitAncestorLinkRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitAncestorLink domainObject)
         {
-            this.BusinessUnitAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitAncestorLinkEventRichDTO BusinessUnitAncestorLink
+        {
+            get
+            {
+                return this.businessUnitAncestorLink;
+            }
+            set
+            {
+                this.businessUnitAncestorLink = value;
+            }
         }
     }
     
@@ -809,32 +2311,23 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitAncestorLinkEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Ancestor;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _ancestor;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Child;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _child;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitAncestorLinkEventRichDTO()
         {
@@ -844,6 +2337,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitAncestorLink(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Ancestor
+        {
+            get
+            {
+                return this._ancestor;
+            }
+            set
+            {
+                this._ancestor = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Child
+        {
+            get
+            {
+                return this._child;
+            }
+            set
+            {
+                this._child = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -851,8 +2461,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitEmployeeRoleSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO BusinessUnitEmployeeRole;
+        private SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO businessUnitEmployeeRole;
         
         public BusinessUnitEmployeeRoleSaveEventDTO()
         {
@@ -860,7 +2469,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitEmployeeRoleSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitEmployeeRole domainObject)
         {
-            this.BusinessUnitEmployeeRole = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitEmployeeRole = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO BusinessUnitEmployeeRole
+        {
+            get
+            {
+                return this.businessUnitEmployeeRole;
+            }
+            set
+            {
+                this.businessUnitEmployeeRole = value;
+            }
         }
     }
     
@@ -869,8 +2491,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitEmployeeRoleRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO BusinessUnitEmployeeRole;
+        private SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO businessUnitEmployeeRole;
         
         public BusinessUnitEmployeeRoleRemoveEventDTO()
         {
@@ -878,7 +2499,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitEmployeeRoleRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitEmployeeRole domainObject)
         {
-            this.BusinessUnitEmployeeRole = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitEmployeeRole = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO BusinessUnitEmployeeRole
+        {
+            get
+            {
+                return this.businessUnitEmployeeRole;
+            }
+            set
+            {
+                this.businessUnitEmployeeRole = value;
+            }
         }
     }
     
@@ -887,35 +2521,25 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitEmployeeRoleEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitEmployeeRoleType Role;
+        private SampleSystem.Domain.BusinessUnitEmployeeRoleType _role;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitEmployeeRoleEventRichDTO()
         {
@@ -925,6 +2549,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitEmployeeRole(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.BusinessUnitEmployeeRoleType Role
+        {
+            get
+            {
+                return this._role;
+            }
+            set
+            {
+                this._role = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitHrDepartment), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -932,8 +2686,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitHrDepartmentSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO BusinessUnitHrDepartment;
+        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO businessUnitHrDepartment;
         
         public BusinessUnitHrDepartmentSaveEventDTO()
         {
@@ -941,7 +2694,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitHrDepartmentSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitHrDepartment domainObject)
         {
-            this.BusinessUnitHrDepartment = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitHrDepartment = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO BusinessUnitHrDepartment
+        {
+            get
+            {
+                return this.businessUnitHrDepartment;
+            }
+            set
+            {
+                this.businessUnitHrDepartment = value;
+            }
         }
     }
     
@@ -950,8 +2716,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitHrDepartmentRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO BusinessUnitHrDepartment;
+        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO businessUnitHrDepartment;
         
         public BusinessUnitHrDepartmentRemoveEventDTO()
         {
@@ -959,7 +2724,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitHrDepartmentRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitHrDepartment domainObject)
         {
-            this.BusinessUnitHrDepartment = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitHrDepartment = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO BusinessUnitHrDepartment
+        {
+            get
+            {
+                return this.businessUnitHrDepartment;
+            }
+            set
+            {
+                this.businessUnitHrDepartment = value;
+            }
         }
     }
     
@@ -968,32 +2746,23 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitHrDepartmentEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitHrDepartmentEventRichDTO()
         {
@@ -1003,6 +2772,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitHrDepartment(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HRDepartment
+        {
+            get
+            {
+                return this._hRDepartment;
+            }
+            set
+            {
+                this._hRDepartment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -1010,8 +2896,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitManagerCommissionLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO BusinessUnitManagerCommissionLink;
+        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO businessUnitManagerCommissionLink;
         
         public BusinessUnitManagerCommissionLinkSaveEventDTO()
         {
@@ -1019,7 +2904,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitManagerCommissionLinkSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink domainObject)
         {
-            this.BusinessUnitManagerCommissionLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitManagerCommissionLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO BusinessUnitManagerCommissionLink
+        {
+            get
+            {
+                return this.businessUnitManagerCommissionLink;
+            }
+            set
+            {
+                this.businessUnitManagerCommissionLink = value;
+            }
         }
     }
     
@@ -1028,8 +2926,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitManagerCommissionLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO BusinessUnitManagerCommissionLink;
+        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO businessUnitManagerCommissionLink;
         
         public BusinessUnitManagerCommissionLinkRemoveEventDTO()
         {
@@ -1037,7 +2934,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitManagerCommissionLinkRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink domainObject)
         {
-            this.BusinessUnitManagerCommissionLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitManagerCommissionLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO BusinessUnitManagerCommissionLink
+        {
+            get
+            {
+                return this.businessUnitManagerCommissionLink;
+            }
+            set
+            {
+                this.businessUnitManagerCommissionLink = value;
+            }
         }
     }
     
@@ -1046,38 +2956,27 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitManagerCommissionLinkEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Commission;
+        private decimal _commission;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Manager;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _manager;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period;
+        private Framework.Core.Period _period;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitManagerCommissionLinkEventRichDTO()
         {
@@ -1087,6 +2986,149 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitManagerCommissionLink(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Commission
+        {
+            get
+            {
+                return this._commission;
+            }
+            set
+            {
+                this._commission = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Manager
+        {
+            get
+            {
+                return this._manager;
+            }
+            set
+            {
+                this._manager = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitRootFilterModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -1094,8 +3136,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitRootFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO BusinessUnitRootFilterModel;
+        private SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO businessUnitRootFilterModel;
         
         public BusinessUnitRootFilterModelSaveEventDTO()
         {
@@ -1103,7 +3144,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitRootFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitRootFilterModel domainObject)
         {
-            this.BusinessUnitRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO BusinessUnitRootFilterModel
+        {
+            get
+            {
+                return this.businessUnitRootFilterModel;
+            }
+            set
+            {
+                this.businessUnitRootFilterModel = value;
+            }
         }
     }
     
@@ -1112,8 +3166,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitRootFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO BusinessUnitRootFilterModel;
+        private SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO businessUnitRootFilterModel;
         
         public BusinessUnitRootFilterModelRemoveEventDTO()
         {
@@ -1121,7 +3174,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitRootFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitRootFilterModel domainObject)
         {
-            this.BusinessUnitRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO BusinessUnitRootFilterModel
+        {
+            get
+            {
+                return this.businessUnitRootFilterModel;
+            }
+            set
+            {
+                this.businessUnitRootFilterModel = value;
+            }
         }
     }
     
@@ -1130,20 +3196,15 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitRootFilterModelEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime[] ArrayDays;
+        private System.DateTime[] _arrayDays;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] ArrayPeriods;
+        private Framework.Core.Period[] _arrayPeriods;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<System.DateTime> ListDays;
+        private System.Collections.Generic.List<System.DateTime> _listDays;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods;
+        private System.Collections.Generic.List<Framework.Core.Period> _listPeriods;
         
         public BusinessUnitRootFilterModelEventRichDTO()
         {
@@ -1153,6 +3214,71 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitRootFilterModel(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime[] ArrayDays
+        {
+            get
+            {
+                return this._arrayDays;
+            }
+            set
+            {
+                this._arrayDays = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period[] ArrayPeriods
+        {
+            get
+            {
+                return this._arrayPeriods;
+            }
+            set
+            {
+                this._arrayPeriods = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<System.DateTime> ListDays
+        {
+            get
+            {
+                return this._listDays;
+            }
+            set
+            {
+                this._listDays = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods
+        {
+            get
+            {
+                return this._listPeriods;
+            }
+            set
+            {
+                this._listPeriods = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitToAncestorChildView), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -1160,8 +3286,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitToAncestorChildViewSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO BusinessUnitToAncestorChildView;
+        private SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO businessUnitToAncestorChildView;
         
         public BusinessUnitToAncestorChildViewSaveEventDTO()
         {
@@ -1169,7 +3294,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitToAncestorChildViewSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitToAncestorChildView domainObject)
         {
-            this.BusinessUnitToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO BusinessUnitToAncestorChildView
+        {
+            get
+            {
+                return this.businessUnitToAncestorChildView;
+            }
+            set
+            {
+                this.businessUnitToAncestorChildView = value;
+            }
         }
     }
     
@@ -1178,8 +3316,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitToAncestorChildViewRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO BusinessUnitToAncestorChildView;
+        private SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO businessUnitToAncestorChildView;
         
         public BusinessUnitToAncestorChildViewRemoveEventDTO()
         {
@@ -1187,7 +3324,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitToAncestorChildViewRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitToAncestorChildView domainObject)
         {
-            this.BusinessUnitToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO BusinessUnitToAncestorChildView
+        {
+            get
+            {
+                return this.businessUnitToAncestorChildView;
+            }
+            set
+            {
+                this.businessUnitToAncestorChildView = value;
+            }
         }
     }
     
@@ -1196,32 +3346,23 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitToAncestorChildViewEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO ChildOrAncestor;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _childOrAncestor;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Source;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _source;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitToAncestorChildViewEventRichDTO()
         {
@@ -1231,6 +3372,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitToAncestorChildView(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO ChildOrAncestor
+        {
+            get
+            {
+                return this._childOrAncestor;
+            }
+            set
+            {
+                this._childOrAncestor = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Source
+        {
+            get
+            {
+                return this._source;
+            }
+            set
+            {
+                this._source = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -1238,8 +3496,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeEventRichDTO BusinessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventRichDTO businessUnitType;
         
         public BusinessUnitTypeSaveEventDTO()
         {
@@ -1247,7 +3504,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitTypeSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitType domainObject)
         {
-            this.BusinessUnitType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeEventRichDTO BusinessUnitType
+        {
+            get
+            {
+                return this.businessUnitType;
+            }
+            set
+            {
+                this.businessUnitType = value;
+            }
         }
     }
     
@@ -1256,8 +3526,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeEventRichDTO BusinessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventRichDTO businessUnitType;
         
         public BusinessUnitTypeRemoveEventDTO()
         {
@@ -1265,7 +3534,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitTypeRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitType domainObject)
         {
-            this.BusinessUnitType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeEventRichDTO BusinessUnitType
+        {
+            get
+            {
+                return this.businessUnitType;
+            }
+            set
+            {
+                this.businessUnitType = value;
+            }
         }
     }
     
@@ -1274,86 +3556,59 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool AdditionalStartConfirm;
+        private bool _additionalStartConfirm;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool AdditionalTransferConfirm;
+        private bool _additionalTransferConfirm;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BillingProjectAreNotAllowed;
+        private bool _billingProjectAreNotAllowed;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBeIsSpecialCommission;
+        private bool _canBeIsSpecialCommission;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBeLinkedToClient;
+        private bool _canBeLinkedToClient;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBeLinkedToDepartment;
+        private bool _canBeLinkedToDepartment;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBeNewBusiness;
+        private bool _canBeNewBusiness;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBeResourcePool;
+        private bool _canBeResourcePool;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsAdministrative;
+        private bool _isAdministrative;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool NeedVertical;
+        private bool _needVertical;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO> PossibleFinancialProjectTypes;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO> _possibleFinancialProjectTypes;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO> PossibleParents;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO> _possibleParents;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.PossibleStartDate? PossibleStartDate;
+        private SampleSystem.Domain.PossibleStartDate? _possibleStartDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.PossibleStartDate? PossibleTransferDate;
+        private SampleSystem.Domain.PossibleStartDate? _possibleTransferDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool PracticeAllowed;
+        private bool _practiceAllowed;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool ProjectStartAllowed;
+        private bool _projectStartAllowed;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool StartBOConfirm;
+        private bool _startBOConfirm;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool TransferBOConfirm;
+        private bool _transferBOConfirm;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO> TransferTo;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO> _transferTo;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitTypeEventRichDTO()
         {
@@ -1363,6 +3618,357 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitType(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool AdditionalStartConfirm
+        {
+            get
+            {
+                return this._additionalStartConfirm;
+            }
+            set
+            {
+                this._additionalStartConfirm = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool AdditionalTransferConfirm
+        {
+            get
+            {
+                return this._additionalTransferConfirm;
+            }
+            set
+            {
+                this._additionalTransferConfirm = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool BillingProjectAreNotAllowed
+        {
+            get
+            {
+                return this._billingProjectAreNotAllowed;
+            }
+            set
+            {
+                this._billingProjectAreNotAllowed = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBeIsSpecialCommission
+        {
+            get
+            {
+                return this._canBeIsSpecialCommission;
+            }
+            set
+            {
+                this._canBeIsSpecialCommission = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBeLinkedToClient
+        {
+            get
+            {
+                return this._canBeLinkedToClient;
+            }
+            set
+            {
+                this._canBeLinkedToClient = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBeLinkedToDepartment
+        {
+            get
+            {
+                return this._canBeLinkedToDepartment;
+            }
+            set
+            {
+                this._canBeLinkedToDepartment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBeNewBusiness
+        {
+            get
+            {
+                return this._canBeNewBusiness;
+            }
+            set
+            {
+                this._canBeNewBusiness = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBeResourcePool
+        {
+            get
+            {
+                return this._canBeResourcePool;
+            }
+            set
+            {
+                this._canBeResourcePool = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsAdministrative
+        {
+            get
+            {
+                return this._isAdministrative;
+            }
+            set
+            {
+                this._isAdministrative = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool NeedVertical
+        {
+            get
+            {
+                return this._needVertical;
+            }
+            set
+            {
+                this._needVertical = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO> PossibleFinancialProjectTypes
+        {
+            get
+            {
+                return this._possibleFinancialProjectTypes;
+            }
+            set
+            {
+                this._possibleFinancialProjectTypes = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO> PossibleParents
+        {
+            get
+            {
+                return this._possibleParents;
+            }
+            set
+            {
+                this._possibleParents = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.PossibleStartDate? PossibleStartDate
+        {
+            get
+            {
+                return this._possibleStartDate;
+            }
+            set
+            {
+                this._possibleStartDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.PossibleStartDate? PossibleTransferDate
+        {
+            get
+            {
+                return this._possibleTransferDate;
+            }
+            set
+            {
+                this._possibleTransferDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool PracticeAllowed
+        {
+            get
+            {
+                return this._practiceAllowed;
+            }
+            set
+            {
+                this._practiceAllowed = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ProjectStartAllowed
+        {
+            get
+            {
+                return this._projectStartAllowed;
+            }
+            set
+            {
+                this._projectStartAllowed = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool StartBOConfirm
+        {
+            get
+            {
+                return this._startBOConfirm;
+            }
+            set
+            {
+                this._startBOConfirm = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool TransferBOConfirm
+        {
+            get
+            {
+                return this._transferBOConfirm;
+            }
+            set
+            {
+                this._transferBOConfirm = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO> TransferTo
+        {
+            get
+            {
+                return this._transferTo;
+            }
+            set
+            {
+                this._transferTo = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitType), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -1370,77 +3976,53 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool AdditionalStartConfirm;
+        private bool _additionalStartConfirm;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool AdditionalTransferConfirm;
+        private bool _additionalTransferConfirm;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BillingProjectAreNotAllowed;
+        private bool _billingProjectAreNotAllowed;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBeIsSpecialCommission;
+        private bool _canBeIsSpecialCommission;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBeLinkedToClient;
+        private bool _canBeLinkedToClient;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBeLinkedToDepartment;
+        private bool _canBeLinkedToDepartment;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBeNewBusiness;
+        private bool _canBeNewBusiness;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBeResourcePool;
+        private bool _canBeResourcePool;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsAdministrative;
+        private bool _isAdministrative;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool NeedVertical;
+        private bool _needVertical;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.PossibleStartDate? PossibleStartDate;
+        private SampleSystem.Domain.PossibleStartDate? _possibleStartDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.PossibleStartDate? PossibleTransferDate;
+        private SampleSystem.Domain.PossibleStartDate? _possibleTransferDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool PracticeAllowed;
+        private bool _practiceAllowed;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool ProjectStartAllowed;
+        private bool _projectStartAllowed;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool StartBOConfirm;
+        private bool _startBOConfirm;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool TransferBOConfirm;
+        private bool _transferBOConfirm;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitTypeEventSimpleDTO()
         {
@@ -1450,6 +4032,318 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitType(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool AdditionalStartConfirm
+        {
+            get
+            {
+                return this._additionalStartConfirm;
+            }
+            set
+            {
+                this._additionalStartConfirm = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool AdditionalTransferConfirm
+        {
+            get
+            {
+                return this._additionalTransferConfirm;
+            }
+            set
+            {
+                this._additionalTransferConfirm = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool BillingProjectAreNotAllowed
+        {
+            get
+            {
+                return this._billingProjectAreNotAllowed;
+            }
+            set
+            {
+                this._billingProjectAreNotAllowed = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBeIsSpecialCommission
+        {
+            get
+            {
+                return this._canBeIsSpecialCommission;
+            }
+            set
+            {
+                this._canBeIsSpecialCommission = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBeLinkedToClient
+        {
+            get
+            {
+                return this._canBeLinkedToClient;
+            }
+            set
+            {
+                this._canBeLinkedToClient = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBeLinkedToDepartment
+        {
+            get
+            {
+                return this._canBeLinkedToDepartment;
+            }
+            set
+            {
+                this._canBeLinkedToDepartment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBeNewBusiness
+        {
+            get
+            {
+                return this._canBeNewBusiness;
+            }
+            set
+            {
+                this._canBeNewBusiness = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBeResourcePool
+        {
+            get
+            {
+                return this._canBeResourcePool;
+            }
+            set
+            {
+                this._canBeResourcePool = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsAdministrative
+        {
+            get
+            {
+                return this._isAdministrative;
+            }
+            set
+            {
+                this._isAdministrative = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool NeedVertical
+        {
+            get
+            {
+                return this._needVertical;
+            }
+            set
+            {
+                this._needVertical = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.PossibleStartDate? PossibleStartDate
+        {
+            get
+            {
+                return this._possibleStartDate;
+            }
+            set
+            {
+                this._possibleStartDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.PossibleStartDate? PossibleTransferDate
+        {
+            get
+            {
+                return this._possibleTransferDate;
+            }
+            set
+            {
+                this._possibleTransferDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool PracticeAllowed
+        {
+            get
+            {
+                return this._practiceAllowed;
+            }
+            set
+            {
+                this._practiceAllowed = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ProjectStartAllowed
+        {
+            get
+            {
+                return this._projectStartAllowed;
+            }
+            set
+            {
+                this._projectStartAllowed = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool StartBOConfirm
+        {
+            get
+            {
+                return this._startBOConfirm;
+            }
+            set
+            {
+                this._startBOConfirm = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool TransferBOConfirm
+        {
+            get
+            {
+                return this._transferBOConfirm;
+            }
+            set
+            {
+                this._transferBOConfirm = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -1457,8 +4351,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO BusinessUnitTypeLinkWithPossibleFinancialProjectType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO businessUnitTypeLinkWithPossibleFinancialProjectType;
         
         public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSaveEventDTO()
         {
@@ -1466,7 +4359,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject)
         {
-            this.BusinessUnitTypeLinkWithPossibleFinancialProjectType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitTypeLinkWithPossibleFinancialProjectType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO BusinessUnitTypeLinkWithPossibleFinancialProjectType
+        {
+            get
+            {
+                return this.businessUnitTypeLinkWithPossibleFinancialProjectType;
+            }
+            set
+            {
+                this.businessUnitTypeLinkWithPossibleFinancialProjectType = value;
+            }
         }
     }
     
@@ -1475,8 +4381,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO BusinessUnitTypeLinkWithPossibleFinancialProjectType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO businessUnitTypeLinkWithPossibleFinancialProjectType;
         
         public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeRemoveEventDTO()
         {
@@ -1484,7 +4389,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject)
         {
-            this.BusinessUnitTypeLinkWithPossibleFinancialProjectType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitTypeLinkWithPossibleFinancialProjectType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO BusinessUnitTypeLinkWithPossibleFinancialProjectType
+        {
+            get
+            {
+                return this.businessUnitTypeLinkWithPossibleFinancialProjectType;
+            }
+            set
+            {
+                this.businessUnitTypeLinkWithPossibleFinancialProjectType = value;
+            }
         }
     }
     
@@ -1493,32 +4411,23 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO BusinessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.FinancialProjectType FinancialProjectType;
+        private SampleSystem.Domain.FinancialProjectType _financialProjectType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO()
         {
@@ -1528,6 +4437,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitTypeLinkWithPossibleFinancialProjectType(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO BusinessUnitType
+        {
+            get
+            {
+                return this._businessUnitType;
+            }
+            set
+            {
+                this._businessUnitType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.FinancialProjectType FinancialProjectType
+        {
+            get
+            {
+                return this._financialProjectType;
+            }
+            set
+            {
+                this._financialProjectType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -1535,8 +4561,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleParentSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO BusinessUnitTypeLinkWithPossibleParent;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO businessUnitTypeLinkWithPossibleParent;
         
         public BusinessUnitTypeLinkWithPossibleParentSaveEventDTO()
         {
@@ -1544,7 +4569,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitTypeLinkWithPossibleParentSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent domainObject)
         {
-            this.BusinessUnitTypeLinkWithPossibleParent = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitTypeLinkWithPossibleParent = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO BusinessUnitTypeLinkWithPossibleParent
+        {
+            get
+            {
+                return this.businessUnitTypeLinkWithPossibleParent;
+            }
+            set
+            {
+                this.businessUnitTypeLinkWithPossibleParent = value;
+            }
         }
     }
     
@@ -1553,8 +4591,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleParentRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO BusinessUnitTypeLinkWithPossibleParent;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO businessUnitTypeLinkWithPossibleParent;
         
         public BusinessUnitTypeLinkWithPossibleParentRemoveEventDTO()
         {
@@ -1562,7 +4599,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitTypeLinkWithPossibleParentRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent domainObject)
         {
-            this.BusinessUnitTypeLinkWithPossibleParent = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitTypeLinkWithPossibleParent = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO BusinessUnitTypeLinkWithPossibleParent
+        {
+            get
+            {
+                return this.businessUnitTypeLinkWithPossibleParent;
+            }
+            set
+            {
+                this.businessUnitTypeLinkWithPossibleParent = value;
+            }
         }
     }
     
@@ -1571,32 +4621,23 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleParentEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO BusinessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO PossibleParent;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _possibleParent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitTypeLinkWithPossibleParentEventRichDTO()
         {
@@ -1606,6 +4647,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitTypeLinkWithPossibleParent(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO BusinessUnitType
+        {
+            get
+            {
+                return this._businessUnitType;
+            }
+            set
+            {
+                this._businessUnitType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO PossibleParent
+        {
+            get
+            {
+                return this._possibleParent;
+            }
+            set
+            {
+                this._possibleParent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -1613,8 +4771,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithTransferToSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO BusinessUnitTypeLinkWithTransferTo;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO businessUnitTypeLinkWithTransferTo;
         
         public BusinessUnitTypeLinkWithTransferToSaveEventDTO()
         {
@@ -1622,7 +4779,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitTypeLinkWithTransferToSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo domainObject)
         {
-            this.BusinessUnitTypeLinkWithTransferTo = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitTypeLinkWithTransferTo = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO BusinessUnitTypeLinkWithTransferTo
+        {
+            get
+            {
+                return this.businessUnitTypeLinkWithTransferTo;
+            }
+            set
+            {
+                this.businessUnitTypeLinkWithTransferTo = value;
+            }
         }
     }
     
@@ -1631,8 +4801,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithTransferToRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO BusinessUnitTypeLinkWithTransferTo;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO businessUnitTypeLinkWithTransferTo;
         
         public BusinessUnitTypeLinkWithTransferToRemoveEventDTO()
         {
@@ -1640,7 +4809,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitTypeLinkWithTransferToRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo domainObject)
         {
-            this.BusinessUnitTypeLinkWithTransferTo = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitTypeLinkWithTransferTo = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO BusinessUnitTypeLinkWithTransferTo
+        {
+            get
+            {
+                return this.businessUnitTypeLinkWithTransferTo;
+            }
+            set
+            {
+                this.businessUnitTypeLinkWithTransferTo = value;
+            }
         }
     }
     
@@ -1649,32 +4831,23 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithTransferToEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO BusinessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO TransferTo;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _transferTo;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public BusinessUnitTypeLinkWithTransferToEventRichDTO()
         {
@@ -1684,6 +4857,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitTypeLinkWithTransferTo(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO BusinessUnitType
+        {
+            get
+            {
+                return this._businessUnitType;
+            }
+            set
+            {
+                this._businessUnitType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO TransferTo
+        {
+            get
+            {
+                return this._transferTo;
+            }
+            set
+            {
+                this._transferTo = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -1691,8 +4981,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CompanyLegalEntitySaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityEventRichDTO CompanyLegalEntity;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityEventRichDTO companyLegalEntity;
         
         public CompanyLegalEntitySaveEventDTO()
         {
@@ -1700,7 +4989,20 @@ namespace SampleSystem.Generated.DTO
         
         public CompanyLegalEntitySaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.CompanyLegalEntity domainObject)
         {
-            this.CompanyLegalEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.companyLegalEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CompanyLegalEntityEventRichDTO CompanyLegalEntity
+        {
+            get
+            {
+                return this.companyLegalEntity;
+            }
+            set
+            {
+                this.companyLegalEntity = value;
+            }
         }
     }
     
@@ -1709,8 +5011,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CompanyLegalEntityRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityEventRichDTO CompanyLegalEntity;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityEventRichDTO companyLegalEntity;
         
         public CompanyLegalEntityRemoveEventDTO()
         {
@@ -1718,7 +5019,20 @@ namespace SampleSystem.Generated.DTO
         
         public CompanyLegalEntityRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.CompanyLegalEntity domainObject)
         {
-            this.CompanyLegalEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.companyLegalEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CompanyLegalEntityEventRichDTO CompanyLegalEntity
+        {
+            get
+            {
+                return this.companyLegalEntity;
+            }
+            set
+            {
+                this.companyLegalEntity = value;
+            }
         }
     }
     
@@ -1727,53 +5041,37 @@ namespace SampleSystem.Generated.DTO
     public partial class CompanyLegalEntityEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> Addresses;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> _addresses;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.RevenueDocumentAribaStatus AribaStatus;
+        private SampleSystem.Domain.RevenueDocumentAribaStatus _aribaStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO BaseObj;
+        private SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO _baseObj;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code;
+        private string _code;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO CurrentObj;
+        private SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO _currentObj;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameEnglish;
+        private string _nameEnglish;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO Parent;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO _parent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.CompanyLegalEntityType Type;
+        private SampleSystem.Domain.CompanyLegalEntityType _type;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public CompanyLegalEntityEventRichDTO()
         {
@@ -1783,6 +5081,214 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapCompanyLegalEntity(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> Addresses
+        {
+            get
+            {
+                return this._addresses;
+            }
+            set
+            {
+                this._addresses = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.RevenueDocumentAribaStatus AribaStatus
+        {
+            get
+            {
+                return this._aribaStatus;
+            }
+            set
+            {
+                this._aribaStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO BaseObj
+        {
+            get
+            {
+                return this._baseObj;
+            }
+            set
+            {
+                this._baseObj = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO CurrentObj
+        {
+            get
+            {
+                return this._currentObj;
+            }
+            set
+            {
+                this._currentObj = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameEnglish
+        {
+            get
+            {
+                return this._nameEnglish;
+            }
+            set
+            {
+                this._nameEnglish = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.CompanyLegalEntityType Type
+        {
+            get
+            {
+                return this._type;
+            }
+            set
+            {
+                this._type = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -1790,41 +5296,29 @@ namespace SampleSystem.Generated.DTO
     public partial class CompanyLegalEntityEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.RevenueDocumentAribaStatus AribaStatus;
+        private SampleSystem.Domain.RevenueDocumentAribaStatus _aribaStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code;
+        private string _code;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameEnglish;
+        private string _nameEnglish;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.CompanyLegalEntityType Type;
+        private SampleSystem.Domain.CompanyLegalEntityType _type;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public CompanyLegalEntityEventSimpleDTO()
         {
@@ -1834,6 +5328,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapCompanyLegalEntity(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.RevenueDocumentAribaStatus AribaStatus
+        {
+            get
+            {
+                return this._aribaStatus;
+            }
+            set
+            {
+                this._aribaStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameEnglish
+        {
+            get
+            {
+                return this._nameEnglish;
+            }
+            set
+            {
+                this._nameEnglish = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.CompanyLegalEntityType Type
+        {
+            get
+            {
+                return this._type;
+            }
+            set
+            {
+                this._type = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Country), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -1841,8 +5491,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CountrySaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CountryEventRichDTO Country;
+        private SampleSystem.Generated.DTO.CountryEventRichDTO country;
         
         public CountrySaveEventDTO()
         {
@@ -1850,7 +5499,20 @@ namespace SampleSystem.Generated.DTO
         
         public CountrySaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Country domainObject)
         {
-            this.Country = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.country = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CountryEventRichDTO Country
+        {
+            get
+            {
+                return this.country;
+            }
+            set
+            {
+                this.country = value;
+            }
         }
     }
     
@@ -1859,8 +5521,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CountryRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CountryEventRichDTO Country;
+        private SampleSystem.Generated.DTO.CountryEventRichDTO country;
         
         public CountryRemoveEventDTO()
         {
@@ -1868,7 +5529,20 @@ namespace SampleSystem.Generated.DTO
         
         public CountryRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Country domainObject)
         {
-            this.Country = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.country = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CountryEventRichDTO Country
+        {
+            get
+            {
+                return this.country;
+            }
+            set
+            {
+                this.country = value;
+            }
         }
     }
     
@@ -1877,38 +5551,27 @@ namespace SampleSystem.Generated.DTO
     public partial class CountryEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code;
+        private string _code;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Culture;
+        private string _culture;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameNative;
+        private string _nameNative;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public CountryEventRichDTO()
         {
@@ -1918,6 +5581,149 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapCountry(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Culture
+        {
+            get
+            {
+                return this._culture;
+            }
+            set
+            {
+                this._culture = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameNative
+        {
+            get
+            {
+                return this._nameNative;
+            }
+            set
+            {
+                this._nameNative = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Country), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -1925,38 +5731,27 @@ namespace SampleSystem.Generated.DTO
     public partial class CountryEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code;
+        private string _code;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Culture;
+        private string _culture;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameNative;
+        private string _nameNative;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public CountryEventSimpleDTO()
         {
@@ -1966,6 +5761,149 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapCountry(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Culture
+        {
+            get
+            {
+                return this._culture;
+            }
+            set
+            {
+                this._culture = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameNative
+        {
+            get
+            {
+                return this._nameNative;
+            }
+            set
+            {
+                this._nameNative = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -1973,8 +5911,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventRichDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventRichDTO employee;
         
         public EmployeeSaveEventDTO()
         {
@@ -1982,7 +5919,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee domainObject)
         {
-            this.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employee = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventRichDTO Employee
+        {
+            get
+            {
+                return this.employee;
+            }
+            set
+            {
+                this.employee = value;
+            }
         }
     }
     
@@ -1991,155 +5941,105 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountName;
+        private string _accountName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Age;
+        private int _age;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? BirthDate;
+        private System.DateTime? _birthDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBePPM;
+        private bool _canBePPM;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CellPhone;
+        private string _cellPhone;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO> CellPhones;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO> _cellPhones;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO CompanyLegalEntity;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO _companyLegalEntity;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO CoreBusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _coreBusinessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period? CoreBusinessUnitPeriod;
+        private Framework.Core.Period? _coreBusinessUnitPeriod;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? DismissDate;
+        private System.DateTime? _dismissDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period EducationDuration;
+        private Framework.Core.Period _educationDuration;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email;
+        private string _email;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO> EmployeeToEmployeeLinks;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO> _employeeToEmployeeLinks;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long ExternalId;
+        private long _externalId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.Enums.Gender Gender;
+        private SampleSystem.Domain.Enums.Gender _gender;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? HireDate;
+        private System.DateTime? _hireDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Interphone;
+        private string _interphone;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsCandidate;
+        private bool _isCandidate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Landlinephone;
+        private string _landlinephone;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? LastActionDate;
+        private System.DateTime? _lastActionDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int? LocationCode;
+        private int? _locationCode;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Login;
+        private string _login;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LogonName;
+        private string _logonName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MailAccountName;
+        private string _mailAccountName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.Inline.FioShort NameEng;
+        private SampleSystem.Domain.Inline.FioShort _nameEng;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.Inline.Fio NameNative;
+        private SampleSystem.Domain.Inline.Fio _nameNative;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.Inline.Fio NameRussian;
+        private SampleSystem.Domain.Inline.Fio _nameRussian;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime NonValidateVirtualProp;
+        private System.DateTime _nonValidateVirtualProp;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO PersonalAssistant;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _personalAssistant;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int? Pin;
+        private int? _pin;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? PlannedHireDate;
+        private System.DateTime? _plannedHireDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO Position;
+        private SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO _position;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Ppm;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _ppm;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventSimpleDTO RegistrationType;
+        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventSimpleDTO _registrationType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO Role;
+        private SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO _role;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO RoleDegree;
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO _roleDegree;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO> Specializations;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO> _specializations;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO VacationApprover;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _vacationApprover;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime ValidateVirtualProp;
+        private System.DateTime _validateVirtualProp;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period WorkPeriod;
+        private Framework.Core.Period _workPeriod;
         
         public EmployeeEventRichDTO()
         {
@@ -2149,6 +6049,656 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployee(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AccountName
+        {
+            get
+            {
+                return this._accountName;
+            }
+            set
+            {
+                this._accountName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Age
+        {
+            get
+            {
+                return this._age;
+            }
+            set
+            {
+                this._age = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? BirthDate
+        {
+            get
+            {
+                return this._birthDate;
+            }
+            set
+            {
+                this._birthDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBePPM
+        {
+            get
+            {
+                return this._canBePPM;
+            }
+            set
+            {
+                this._canBePPM = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CellPhone
+        {
+            get
+            {
+                return this._cellPhone;
+            }
+            set
+            {
+                this._cellPhone = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO> CellPhones
+        {
+            get
+            {
+                return this._cellPhones;
+            }
+            set
+            {
+                this._cellPhones = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO CompanyLegalEntity
+        {
+            get
+            {
+                return this._companyLegalEntity;
+            }
+            set
+            {
+                this._companyLegalEntity = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO CoreBusinessUnit
+        {
+            get
+            {
+                return this._coreBusinessUnit;
+            }
+            set
+            {
+                this._coreBusinessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period? CoreBusinessUnitPeriod
+        {
+            get
+            {
+                return this._coreBusinessUnitPeriod;
+            }
+            set
+            {
+                this._coreBusinessUnitPeriod = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? DismissDate
+        {
+            get
+            {
+                return this._dismissDate;
+            }
+            set
+            {
+                this._dismissDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period EducationDuration
+        {
+            get
+            {
+                return this._educationDuration;
+            }
+            set
+            {
+                this._educationDuration = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO> EmployeeToEmployeeLinks
+        {
+            get
+            {
+                return this._employeeToEmployeeLinks;
+            }
+            set
+            {
+                this._employeeToEmployeeLinks = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Enums.Gender Gender
+        {
+            get
+            {
+                return this._gender;
+            }
+            set
+            {
+                this._gender = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? HireDate
+        {
+            get
+            {
+                return this._hireDate;
+            }
+            set
+            {
+                this._hireDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HRDepartment
+        {
+            get
+            {
+                return this._hRDepartment;
+            }
+            set
+            {
+                this._hRDepartment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Interphone
+        {
+            get
+            {
+                return this._interphone;
+            }
+            set
+            {
+                this._interphone = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsCandidate
+        {
+            get
+            {
+                return this._isCandidate;
+            }
+            set
+            {
+                this._isCandidate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Landlinephone
+        {
+            get
+            {
+                return this._landlinephone;
+            }
+            set
+            {
+                this._landlinephone = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? LastActionDate
+        {
+            get
+            {
+                return this._lastActionDate;
+            }
+            set
+            {
+                this._lastActionDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int? LocationCode
+        {
+            get
+            {
+                return this._locationCode;
+            }
+            set
+            {
+                this._locationCode = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login
+        {
+            get
+            {
+                return this._login;
+            }
+            set
+            {
+                this._login = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LogonName
+        {
+            get
+            {
+                return this._logonName;
+            }
+            set
+            {
+                this._logonName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MailAccountName
+        {
+            get
+            {
+                return this._mailAccountName;
+            }
+            set
+            {
+                this._mailAccountName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit
+        {
+            get
+            {
+                return this._managementUnit;
+            }
+            set
+            {
+                this._managementUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Inline.FioShort NameEng
+        {
+            get
+            {
+                return this._nameEng;
+            }
+            set
+            {
+                this._nameEng = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Inline.Fio NameNative
+        {
+            get
+            {
+                return this._nameNative;
+            }
+            set
+            {
+                this._nameNative = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Inline.Fio NameRussian
+        {
+            get
+            {
+                return this._nameRussian;
+            }
+            set
+            {
+                this._nameRussian = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime NonValidateVirtualProp
+        {
+            get
+            {
+                return this._nonValidateVirtualProp;
+            }
+            set
+            {
+                this._nonValidateVirtualProp = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO PersonalAssistant
+        {
+            get
+            {
+                return this._personalAssistant;
+            }
+            set
+            {
+                this._personalAssistant = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int? Pin
+        {
+            get
+            {
+                return this._pin;
+            }
+            set
+            {
+                this._pin = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? PlannedHireDate
+        {
+            get
+            {
+                return this._plannedHireDate;
+            }
+            set
+            {
+                this._plannedHireDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO Position
+        {
+            get
+            {
+                return this._position;
+            }
+            set
+            {
+                this._position = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Ppm
+        {
+            get
+            {
+                return this._ppm;
+            }
+            set
+            {
+                this._ppm = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventSimpleDTO RegistrationType
+        {
+            get
+            {
+                return this._registrationType;
+            }
+            set
+            {
+                this._registrationType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO Role
+        {
+            get
+            {
+                return this._role;
+            }
+            set
+            {
+                this._role = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO RoleDegree
+        {
+            get
+            {
+                return this._roleDegree;
+            }
+            set
+            {
+                this._roleDegree = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO> Specializations
+        {
+            get
+            {
+                return this._specializations;
+            }
+            set
+            {
+                this._specializations = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO VacationApprover
+        {
+            get
+            {
+                return this._vacationApprover;
+            }
+            set
+            {
+                this._vacationApprover = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ValidateVirtualProp
+        {
+            get
+            {
+                return this._validateVirtualProp;
+            }
+            set
+            {
+                this._validateVirtualProp = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period WorkPeriod
+        {
+            get
+            {
+                return this._workPeriod;
+            }
+            set
+            {
+                this._workPeriod = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -2156,110 +6706,75 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountName;
+        private string _accountName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Age;
+        private int _age;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? BirthDate;
+        private System.DateTime? _birthDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool CanBePPM;
+        private bool _canBePPM;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CellPhone;
+        private string _cellPhone;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period? CoreBusinessUnitPeriod;
+        private Framework.Core.Period? _coreBusinessUnitPeriod;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? DismissDate;
+        private System.DateTime? _dismissDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period EducationDuration;
+        private Framework.Core.Period _educationDuration;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email;
+        private string _email;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long ExternalId;
+        private long _externalId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.Enums.Gender Gender;
+        private SampleSystem.Domain.Enums.Gender _gender;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? HireDate;
+        private System.DateTime? _hireDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Interphone;
+        private string _interphone;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsCandidate;
+        private bool _isCandidate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Landlinephone;
+        private string _landlinephone;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? LastActionDate;
+        private System.DateTime? _lastActionDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int? LocationCode;
+        private int? _locationCode;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Login;
+        private string _login;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LogonName;
+        private string _logonName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MailAccountName;
+        private string _mailAccountName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.Inline.FioShort NameEng;
+        private SampleSystem.Domain.Inline.FioShort _nameEng;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.Inline.Fio NameNative;
+        private SampleSystem.Domain.Inline.Fio _nameNative;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.Inline.Fio NameRussian;
+        private SampleSystem.Domain.Inline.Fio _nameRussian;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime NonValidateVirtualProp;
+        private System.DateTime _nonValidateVirtualProp;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int? Pin;
+        private int? _pin;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? PlannedHireDate;
+        private System.DateTime? _plannedHireDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime ValidateVirtualProp;
+        private System.DateTime _validateVirtualProp;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period WorkPeriod;
+        private Framework.Core.Period _workPeriod;
         
         public EmployeeEventSimpleDTO()
         {
@@ -2269,6 +6784,461 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployee(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AccountName
+        {
+            get
+            {
+                return this._accountName;
+            }
+            set
+            {
+                this._accountName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Age
+        {
+            get
+            {
+                return this._age;
+            }
+            set
+            {
+                this._age = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? BirthDate
+        {
+            get
+            {
+                return this._birthDate;
+            }
+            set
+            {
+                this._birthDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanBePPM
+        {
+            get
+            {
+                return this._canBePPM;
+            }
+            set
+            {
+                this._canBePPM = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CellPhone
+        {
+            get
+            {
+                return this._cellPhone;
+            }
+            set
+            {
+                this._cellPhone = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period? CoreBusinessUnitPeriod
+        {
+            get
+            {
+                return this._coreBusinessUnitPeriod;
+            }
+            set
+            {
+                this._coreBusinessUnitPeriod = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? DismissDate
+        {
+            get
+            {
+                return this._dismissDate;
+            }
+            set
+            {
+                this._dismissDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period EducationDuration
+        {
+            get
+            {
+                return this._educationDuration;
+            }
+            set
+            {
+                this._educationDuration = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Enums.Gender Gender
+        {
+            get
+            {
+                return this._gender;
+            }
+            set
+            {
+                this._gender = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? HireDate
+        {
+            get
+            {
+                return this._hireDate;
+            }
+            set
+            {
+                this._hireDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Interphone
+        {
+            get
+            {
+                return this._interphone;
+            }
+            set
+            {
+                this._interphone = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsCandidate
+        {
+            get
+            {
+                return this._isCandidate;
+            }
+            set
+            {
+                this._isCandidate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Landlinephone
+        {
+            get
+            {
+                return this._landlinephone;
+            }
+            set
+            {
+                this._landlinephone = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? LastActionDate
+        {
+            get
+            {
+                return this._lastActionDate;
+            }
+            set
+            {
+                this._lastActionDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int? LocationCode
+        {
+            get
+            {
+                return this._locationCode;
+            }
+            set
+            {
+                this._locationCode = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login
+        {
+            get
+            {
+                return this._login;
+            }
+            set
+            {
+                this._login = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LogonName
+        {
+            get
+            {
+                return this._logonName;
+            }
+            set
+            {
+                this._logonName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MailAccountName
+        {
+            get
+            {
+                return this._mailAccountName;
+            }
+            set
+            {
+                this._mailAccountName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Inline.FioShort NameEng
+        {
+            get
+            {
+                return this._nameEng;
+            }
+            set
+            {
+                this._nameEng = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Inline.Fio NameNative
+        {
+            get
+            {
+                return this._nameNative;
+            }
+            set
+            {
+                this._nameNative = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Inline.Fio NameRussian
+        {
+            get
+            {
+                return this._nameRussian;
+            }
+            set
+            {
+                this._nameRussian = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime NonValidateVirtualProp
+        {
+            get
+            {
+                return this._nonValidateVirtualProp;
+            }
+            set
+            {
+                this._nonValidateVirtualProp = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int? Pin
+        {
+            get
+            {
+                return this._pin;
+            }
+            set
+            {
+                this._pin = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? PlannedHireDate
+        {
+            get
+            {
+                return this._plannedHireDate;
+            }
+            set
+            {
+                this._plannedHireDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ValidateVirtualProp
+        {
+            get
+            {
+                return this._validateVirtualProp;
+            }
+            set
+            {
+                this._validateVirtualProp = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period WorkPeriod
+        {
+            get
+            {
+                return this._workPeriod;
+            }
+            set
+            {
+                this._workPeriod = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2276,8 +7246,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeAndEmployeeSpecializationLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO EmployeeAndEmployeeSpecializationLink;
+        private SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO employeeAndEmployeeSpecializationLink;
         
         public EmployeeAndEmployeeSpecializationLinkSaveEventDTO()
         {
@@ -2285,7 +7254,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeAndEmployeeSpecializationLinkSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink domainObject)
         {
-            this.EmployeeAndEmployeeSpecializationLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeAndEmployeeSpecializationLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO EmployeeAndEmployeeSpecializationLink
+        {
+            get
+            {
+                return this.employeeAndEmployeeSpecializationLink;
+            }
+            set
+            {
+                this.employeeAndEmployeeSpecializationLink = value;
+            }
         }
     }
     
@@ -2294,8 +7276,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeAndEmployeeSpecializationLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO EmployeeAndEmployeeSpecializationLink;
+        private SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO employeeAndEmployeeSpecializationLink;
         
         public EmployeeAndEmployeeSpecializationLinkRemoveEventDTO()
         {
@@ -2303,7 +7284,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeAndEmployeeSpecializationLinkRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink domainObject)
         {
-            this.EmployeeAndEmployeeSpecializationLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeAndEmployeeSpecializationLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO EmployeeAndEmployeeSpecializationLink
+        {
+            get
+            {
+                return this.employeeAndEmployeeSpecializationLink;
+            }
+            set
+            {
+                this.employeeAndEmployeeSpecializationLink = value;
+            }
         }
     }
     
@@ -2312,32 +7306,23 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeAndEmployeeSpecializationLinkEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationEventSimpleDTO Specialization;
+        private SampleSystem.Generated.DTO.EmployeeSpecializationEventSimpleDTO _specialization;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeAndEmployeeSpecializationLinkEventRichDTO()
         {
@@ -2347,6 +7332,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeAndEmployeeSpecializationLink(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSpecializationEventSimpleDTO Specialization
+        {
+            get
+            {
+                return this._specialization;
+            }
+            set
+            {
+                this._specialization = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2354,8 +7456,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO EmployeeCellPhone;
+        private SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO employeeCellPhone;
         
         public EmployeeCellPhoneSaveEventDTO()
         {
@@ -2363,7 +7464,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeCellPhoneSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCellPhone domainObject)
         {
-            this.EmployeeCellPhone = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeCellPhone = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO EmployeeCellPhone
+        {
+            get
+            {
+                return this.employeeCellPhone;
+            }
+            set
+            {
+                this.employeeCellPhone = value;
+            }
         }
     }
     
@@ -2372,8 +7486,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO EmployeeCellPhone;
+        private SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO employeeCellPhone;
         
         public EmployeeCellPhoneRemoveEventDTO()
         {
@@ -2381,7 +7494,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeCellPhoneRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCellPhone domainObject)
         {
-            this.EmployeeCellPhone = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeCellPhone = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO EmployeeCellPhone
+        {
+            get
+            {
+                return this.employeeCellPhone;
+            }
+            set
+            {
+                this.employeeCellPhone = value;
+            }
         }
     }
     
@@ -2390,41 +7516,29 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CityCode;
+        private string _cityCode;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CountryCode;
+        private string _countryCode;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FullNumber;
+        private string _fullNumber;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Number;
+        private string _number;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeCellPhoneEventRichDTO()
         {
@@ -2434,6 +7548,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeCellPhone(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CityCode
+        {
+            get
+            {
+                return this._cityCode;
+            }
+            set
+            {
+                this._cityCode = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CountryCode
+        {
+            get
+            {
+                return this._countryCode;
+            }
+            set
+            {
+                this._countryCode = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullNumber
+        {
+            get
+            {
+                return this._fullNumber;
+            }
+            set
+            {
+                this._fullNumber = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Number
+        {
+            get
+            {
+                return this._number;
+            }
+            set
+            {
+                this._number = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhoneBase), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2441,8 +7711,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneBaseSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO EmployeeCellPhoneBase;
+        private SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO employeeCellPhoneBase;
         
         public EmployeeCellPhoneBaseSaveEventDTO()
         {
@@ -2450,7 +7719,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeCellPhoneBaseSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCellPhoneBase domainObject)
         {
-            this.EmployeeCellPhoneBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeCellPhoneBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO EmployeeCellPhoneBase
+        {
+            get
+            {
+                return this.employeeCellPhoneBase;
+            }
+            set
+            {
+                this.employeeCellPhoneBase = value;
+            }
         }
     }
     
@@ -2459,8 +7741,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneBaseRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO EmployeeCellPhoneBase;
+        private SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO employeeCellPhoneBase;
         
         public EmployeeCellPhoneBaseRemoveEventDTO()
         {
@@ -2468,7 +7749,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeCellPhoneBaseRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCellPhoneBase domainObject)
         {
-            this.EmployeeCellPhoneBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeCellPhoneBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO EmployeeCellPhoneBase
+        {
+            get
+            {
+                return this.employeeCellPhoneBase;
+            }
+            set
+            {
+                this.employeeCellPhoneBase = value;
+            }
         }
     }
     
@@ -2477,41 +7771,29 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneBaseEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CityCode;
+        private string _cityCode;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CountryCode;
+        private string _countryCode;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FullNumber;
+        private string _fullNumber;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Number;
+        private string _number;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeCellPhoneBaseEventRichDTO()
         {
@@ -2521,6 +7803,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeCellPhoneBase(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CityCode
+        {
+            get
+            {
+                return this._cityCode;
+            }
+            set
+            {
+                this._cityCode = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CountryCode
+        {
+            get
+            {
+                return this._countryCode;
+            }
+            set
+            {
+                this._countryCode = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullNumber
+        {
+            get
+            {
+                return this._fullNumber;
+            }
+            set
+            {
+                this._fullNumber = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Number
+        {
+            get
+            {
+                return this._number;
+            }
+            set
+            {
+                this._number = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeComplexChangeModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2528,8 +7966,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeComplexChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO EmployeeComplexChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO employeeComplexChangeModel;
         
         public EmployeeComplexChangeModelSaveEventDTO()
         {
@@ -2537,7 +7974,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeComplexChangeModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeComplexChangeModel domainObject)
         {
-            this.EmployeeComplexChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeComplexChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO EmployeeComplexChangeModel
+        {
+            get
+            {
+                return this.employeeComplexChangeModel;
+            }
+            set
+            {
+                this.employeeComplexChangeModel = value;
+            }
         }
     }
     
@@ -2546,8 +7996,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeComplexChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO EmployeeComplexChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO employeeComplexChangeModel;
         
         public EmployeeComplexChangeModelRemoveEventDTO()
         {
@@ -2555,7 +8004,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeComplexChangeModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeComplexChangeModel domainObject)
         {
-            this.EmployeeComplexChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeComplexChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO EmployeeComplexChangeModel
+        {
+            get
+            {
+                return this.employeeComplexChangeModel;
+            }
+            set
+            {
+                this.employeeComplexChangeModel = value;
+            }
         }
     }
     
@@ -2564,14 +8026,11 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeComplexChangeModelEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email;
+        private string _email;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO PrimaryChangingObject;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _primaryChangingObject;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> SecondaryChangingObjects;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> _secondaryChangingObjects;
         
         public EmployeeComplexChangeModelEventRichDTO()
         {
@@ -2581,6 +8040,45 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeComplexChangeModel(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO PrimaryChangingObject
+        {
+            get
+            {
+                return this._primaryChangingObject;
+            }
+            set
+            {
+                this._primaryChangingObject = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> SecondaryChangingObjects
+        {
+            get
+            {
+                return this._secondaryChangingObjects;
+            }
+            set
+            {
+                this._secondaryChangingObjects = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomEventModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2588,8 +8086,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomEventModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO EmployeeCustomEventModel;
+        private SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO employeeCustomEventModel;
         
         public EmployeeCustomEventModelSaveEventDTO()
         {
@@ -2597,7 +8094,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeCustomEventModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomEventModel domainObject)
         {
-            this.EmployeeCustomEventModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeCustomEventModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO EmployeeCustomEventModel
+        {
+            get
+            {
+                return this.employeeCustomEventModel;
+            }
+            set
+            {
+                this.employeeCustomEventModel = value;
+            }
         }
     }
     
@@ -2606,8 +8116,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomEventModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO EmployeeCustomEventModel;
+        private SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO employeeCustomEventModel;
         
         public EmployeeCustomEventModelRemoveEventDTO()
         {
@@ -2615,7 +8124,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeCustomEventModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomEventModel domainObject)
         {
-            this.EmployeeCustomEventModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeCustomEventModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO EmployeeCustomEventModel
+        {
+            get
+            {
+                return this.employeeCustomEventModel;
+            }
+            set
+            {
+                this.employeeCustomEventModel = value;
+            }
         }
     }
     
@@ -2624,11 +8146,9 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomEventModelEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Login;
+        private string _login;
         
         public EmployeeCustomEventModelEventRichDTO()
         {
@@ -2638,6 +8158,32 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeCustomEventModel(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login
+        {
+            get
+            {
+                return this._login;
+            }
+            set
+            {
+                this._login = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2645,8 +8191,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomIntegrationSaveModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO EmployeeCustomIntegrationSaveModel;
+        private SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO employeeCustomIntegrationSaveModel;
         
         public EmployeeCustomIntegrationSaveModelSaveEventDTO()
         {
@@ -2654,7 +8199,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeCustomIntegrationSaveModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject)
         {
-            this.EmployeeCustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeCustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO EmployeeCustomIntegrationSaveModel
+        {
+            get
+            {
+                return this.employeeCustomIntegrationSaveModel;
+            }
+            set
+            {
+                this.employeeCustomIntegrationSaveModel = value;
+            }
         }
     }
     
@@ -2663,8 +8221,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomIntegrationSaveModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO EmployeeCustomIntegrationSaveModel;
+        private SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO employeeCustomIntegrationSaveModel;
         
         public EmployeeCustomIntegrationSaveModelRemoveEventDTO()
         {
@@ -2672,7 +8229,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeCustomIntegrationSaveModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject)
         {
-            this.EmployeeCustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeCustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO EmployeeCustomIntegrationSaveModel
+        {
+            get
+            {
+                return this.employeeCustomIntegrationSaveModel;
+            }
+            set
+            {
+                this.employeeCustomIntegrationSaveModel = value;
+            }
         }
     }
     
@@ -2681,8 +8251,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomIntegrationSaveModelEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventRichDTO SavingObject;
+        private SampleSystem.Generated.DTO.EmployeeEventRichDTO _savingObject;
         
         public EmployeeCustomIntegrationSaveModelEventRichDTO()
         {
@@ -2692,6 +8261,19 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeCustomIntegrationSaveModel(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventRichDTO SavingObject
+        {
+            get
+            {
+                return this._savingObject;
+            }
+            set
+            {
+                this._savingObject = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2699,8 +8281,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO EmployeeEmailChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO employeeEmailChangeModel;
         
         public EmployeeEmailChangeModelSaveEventDTO()
         {
@@ -2708,7 +8289,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeEmailChangeModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject)
         {
-            this.EmployeeEmailChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeEmailChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO EmployeeEmailChangeModel
+        {
+            get
+            {
+                return this.employeeEmailChangeModel;
+            }
+            set
+            {
+                this.employeeEmailChangeModel = value;
+            }
         }
     }
     
@@ -2717,8 +8311,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO EmployeeEmailChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO employeeEmailChangeModel;
         
         public EmployeeEmailChangeModelRemoveEventDTO()
         {
@@ -2726,7 +8319,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeEmailChangeModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject)
         {
-            this.EmployeeEmailChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeEmailChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO EmployeeEmailChangeModel
+        {
+            get
+            {
+                return this.employeeEmailChangeModel;
+            }
+            set
+            {
+                this.employeeEmailChangeModel = value;
+            }
         }
     }
     
@@ -2735,11 +8341,9 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailChangeModelEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO ChangingObject;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _changingObject;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email;
+        private string _email;
         
         public EmployeeEmailChangeModelEventRichDTO()
         {
@@ -2749,6 +8353,32 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeEmailChangeModel(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO ChangingObject
+        {
+            get
+            {
+                return this._changingObject;
+            }
+            set
+            {
+                this._changingObject = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2756,8 +8386,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailMassChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO EmployeeEmailMassChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO employeeEmailMassChangeModel;
         
         public EmployeeEmailMassChangeModelSaveEventDTO()
         {
@@ -2765,7 +8394,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeEmailMassChangeModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject)
         {
-            this.EmployeeEmailMassChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeEmailMassChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO EmployeeEmailMassChangeModel
+        {
+            get
+            {
+                return this.employeeEmailMassChangeModel;
+            }
+            set
+            {
+                this.employeeEmailMassChangeModel = value;
+            }
         }
     }
     
@@ -2774,8 +8416,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailMassChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO EmployeeEmailMassChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO employeeEmailMassChangeModel;
         
         public EmployeeEmailMassChangeModelRemoveEventDTO()
         {
@@ -2783,7 +8424,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeEmailMassChangeModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject)
         {
-            this.EmployeeEmailMassChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeEmailMassChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO EmployeeEmailMassChangeModel
+        {
+            get
+            {
+                return this.employeeEmailMassChangeModel;
+            }
+            set
+            {
+                this.employeeEmailMassChangeModel = value;
+            }
         }
     }
     
@@ -2792,11 +8446,9 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailMassChangeModelEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> ChangingObjects;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> _changingObjects;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email;
+        private string _email;
         
         public EmployeeEmailMassChangeModelEventRichDTO()
         {
@@ -2806,6 +8458,32 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> ChangingObjects
+        {
+            get
+            {
+                return this._changingObjects;
+            }
+            set
+            {
+                this._changingObjects = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeInformation), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2813,8 +8491,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeInformationSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO EmployeeInformation;
+        private SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO employeeInformation;
         
         public EmployeeInformationSaveEventDTO()
         {
@@ -2822,7 +8499,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeInformationSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeInformation domainObject)
         {
-            this.EmployeeInformation = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeInformation = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO EmployeeInformation
+        {
+            get
+            {
+                return this.employeeInformation;
+            }
+            set
+            {
+                this.employeeInformation = value;
+            }
         }
     }
     
@@ -2831,8 +8521,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeInformationRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO EmployeeInformation;
+        private SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO employeeInformation;
         
         public EmployeeInformationRemoveEventDTO()
         {
@@ -2840,7 +8529,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeInformationRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeInformation domainObject)
         {
-            this.EmployeeInformation = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeInformation = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO EmployeeInformation
+        {
+            get
+            {
+                return this.employeeInformation;
+            }
+            set
+            {
+                this.employeeInformation = value;
+            }
         }
     }
     
@@ -2849,35 +8551,25 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeInformationEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email;
+        private string _email;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PersonalEmail;
+        private string _personalEmail;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeInformationEventRichDTO()
         {
@@ -2887,6 +8579,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeInformation(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PersonalEmail
+        {
+            get
+            {
+                return this._personalEmail;
+            }
+            set
+            {
+                this._personalEmail = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2894,8 +8716,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePersonalCellPhoneSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePersonalCellPhoneEventRichDTO EmployeePersonalCellPhone;
+        private SampleSystem.Generated.DTO.EmployeePersonalCellPhoneEventRichDTO employeePersonalCellPhone;
         
         public EmployeePersonalCellPhoneSaveEventDTO()
         {
@@ -2903,7 +8724,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeePersonalCellPhoneSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePersonalCellPhone domainObject)
         {
-            this.EmployeePersonalCellPhone = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeePersonalCellPhone = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeePersonalCellPhoneEventRichDTO EmployeePersonalCellPhone
+        {
+            get
+            {
+                return this.employeePersonalCellPhone;
+            }
+            set
+            {
+                this.employeePersonalCellPhone = value;
+            }
         }
     }
     
@@ -2912,8 +8746,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePersonalCellPhoneRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePersonalCellPhoneEventRichDTO EmployeePersonalCellPhone;
+        private SampleSystem.Generated.DTO.EmployeePersonalCellPhoneEventRichDTO employeePersonalCellPhone;
         
         public EmployeePersonalCellPhoneRemoveEventDTO()
         {
@@ -2921,7 +8754,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeePersonalCellPhoneRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePersonalCellPhone domainObject)
         {
-            this.EmployeePersonalCellPhone = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeePersonalCellPhone = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeePersonalCellPhoneEventRichDTO EmployeePersonalCellPhone
+        {
+            get
+            {
+                return this.employeePersonalCellPhone;
+            }
+            set
+            {
+                this.employeePersonalCellPhone = value;
+            }
         }
     }
     
@@ -2930,41 +8776,29 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePersonalCellPhoneEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CityCode;
+        private string _cityCode;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CountryCode;
+        private string _countryCode;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FullNumber;
+        private string _fullNumber;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Number;
+        private string _number;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeePersonalCellPhoneEventRichDTO()
         {
@@ -2974,6 +8808,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeePersonalCellPhone(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CityCode
+        {
+            get
+            {
+                return this._cityCode;
+            }
+            set
+            {
+                this._cityCode = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CountryCode
+        {
+            get
+            {
+                return this._countryCode;
+            }
+            set
+            {
+                this._countryCode = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullNumber
+        {
+            get
+            {
+                return this._fullNumber;
+            }
+            set
+            {
+                this._fullNumber = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Number
+        {
+            get
+            {
+                return this._number;
+            }
+            set
+            {
+                this._number = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePhoto), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -2981,8 +8971,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePhotoSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePhotoEventRichDTO EmployeePhoto;
+        private SampleSystem.Generated.DTO.EmployeePhotoEventRichDTO employeePhoto;
         
         public EmployeePhotoSaveEventDTO()
         {
@@ -2990,7 +8979,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeePhotoSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePhoto domainObject)
         {
-            this.EmployeePhoto = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeePhoto = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeePhotoEventRichDTO EmployeePhoto
+        {
+            get
+            {
+                return this.employeePhoto;
+            }
+            set
+            {
+                this.employeePhoto = value;
+            }
         }
     }
     
@@ -2999,8 +9001,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePhotoRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePhotoEventRichDTO EmployeePhoto;
+        private SampleSystem.Generated.DTO.EmployeePhotoEventRichDTO employeePhoto;
         
         public EmployeePhotoRemoveEventDTO()
         {
@@ -3008,7 +9009,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeePhotoRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePhoto domainObject)
         {
-            this.EmployeePhoto = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeePhoto = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeePhotoEventRichDTO EmployeePhoto
+        {
+            get
+            {
+                return this.employeePhoto;
+            }
+            set
+            {
+                this.employeePhoto = value;
+            }
         }
     }
     
@@ -3017,41 +9031,29 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePhotoEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ContentType;
+        private string _contentType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] Data;
+        private byte[] _data;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsDefault;
+        private bool _isDefault;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.EmployeePhotoType Type;
+        private SampleSystem.Domain.EmployeePhotoType _type;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeePhotoEventRichDTO()
         {
@@ -3061,6 +9063,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeePhoto(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ContentType
+        {
+            get
+            {
+                return this._contentType;
+            }
+            set
+            {
+                this._contentType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Data
+        {
+            get
+            {
+                return this._data;
+            }
+            set
+            {
+                this._data = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDefault
+        {
+            get
+            {
+                return this._isDefault;
+            }
+            set
+            {
+                this._isDefault = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.EmployeePhotoType Type
+        {
+            get
+            {
+                return this._type;
+            }
+            set
+            {
+                this._type = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePosition), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -3068,8 +9226,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePositionSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePositionEventRichDTO EmployeePosition;
+        private SampleSystem.Generated.DTO.EmployeePositionEventRichDTO employeePosition;
         
         public EmployeePositionSaveEventDTO()
         {
@@ -3077,7 +9234,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeePositionSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePosition domainObject)
         {
-            this.EmployeePosition = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeePosition = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeePositionEventRichDTO EmployeePosition
+        {
+            get
+            {
+                return this.employeePosition;
+            }
+            set
+            {
+                this.employeePosition = value;
+            }
         }
     }
     
@@ -3086,8 +9256,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePositionRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePositionEventRichDTO EmployeePosition;
+        private SampleSystem.Generated.DTO.EmployeePositionEventRichDTO employeePosition;
         
         public EmployeePositionRemoveEventDTO()
         {
@@ -3095,7 +9264,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeePositionRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePosition domainObject)
         {
-            this.EmployeePosition = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeePosition = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeePositionEventRichDTO EmployeePosition
+        {
+            get
+            {
+                return this.employeePosition;
+            }
+            set
+            {
+                this.employeePosition = value;
+            }
         }
     }
     
@@ -3104,38 +9286,27 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePositionEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string EnglishName;
+        private string _englishName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long ExternalId;
+        private long _externalId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeePositionEventRichDTO()
         {
@@ -3145,6 +9316,149 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeePosition(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EnglishName
+        {
+            get
+            {
+                return this._englishName;
+            }
+            set
+            {
+                this._englishName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePosition), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -3152,35 +9466,25 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePositionEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string EnglishName;
+        private string _englishName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long ExternalId;
+        private long _externalId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeePositionEventSimpleDTO()
         {
@@ -3190,6 +9494,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeePosition(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EnglishName
+        {
+            get
+            {
+                return this._englishName;
+            }
+            set
+            {
+                this._englishName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRegistrationType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -3197,8 +9631,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRegistrationTypeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventRichDTO EmployeeRegistrationType;
+        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventRichDTO employeeRegistrationType;
         
         public EmployeeRegistrationTypeSaveEventDTO()
         {
@@ -3206,7 +9639,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeRegistrationTypeSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRegistrationType domainObject)
         {
-            this.EmployeeRegistrationType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeRegistrationType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventRichDTO EmployeeRegistrationType
+        {
+            get
+            {
+                return this.employeeRegistrationType;
+            }
+            set
+            {
+                this.employeeRegistrationType = value;
+            }
         }
     }
     
@@ -3215,8 +9661,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRegistrationTypeRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventRichDTO EmployeeRegistrationType;
+        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventRichDTO employeeRegistrationType;
         
         public EmployeeRegistrationTypeRemoveEventDTO()
         {
@@ -3224,7 +9669,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeRegistrationTypeRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRegistrationType domainObject)
         {
-            this.EmployeeRegistrationType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeRegistrationType = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventRichDTO EmployeeRegistrationType
+        {
+            get
+            {
+                return this.employeeRegistrationType;
+            }
+            set
+            {
+                this.employeeRegistrationType = value;
+            }
         }
     }
     
@@ -3233,32 +9691,23 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRegistrationTypeEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long ExternalId;
+        private long _externalId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeRegistrationTypeEventRichDTO()
         {
@@ -3268,6 +9717,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeRegistrationType(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRegistrationType), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -3275,32 +9841,23 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRegistrationTypeEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long ExternalId;
+        private long _externalId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeRegistrationTypeEventSimpleDTO()
         {
@@ -3310,6 +9867,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeRegistrationType(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRole), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -3317,8 +9991,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleEventRichDTO EmployeeRole;
+        private SampleSystem.Generated.DTO.EmployeeRoleEventRichDTO employeeRole;
         
         public EmployeeRoleSaveEventDTO()
         {
@@ -3326,7 +9999,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeRoleSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRole domainObject)
         {
-            this.EmployeeRole = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeRole = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRoleEventRichDTO EmployeeRole
+        {
+            get
+            {
+                return this.employeeRole;
+            }
+            set
+            {
+                this.employeeRole = value;
+            }
         }
     }
     
@@ -3335,8 +10021,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleEventRichDTO EmployeeRole;
+        private SampleSystem.Generated.DTO.EmployeeRoleEventRichDTO employeeRole;
         
         public EmployeeRoleRemoveEventDTO()
         {
@@ -3344,7 +10029,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeRoleRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRole domainObject)
         {
-            this.EmployeeRole = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeRole = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRoleEventRichDTO EmployeeRole
+        {
+            get
+            {
+                return this.employeeRole;
+            }
+            set
+            {
+                this.employeeRole = value;
+            }
         }
     }
     
@@ -3353,29 +10051,21 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeRoleEventRichDTO()
         {
@@ -3385,6 +10075,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeRole(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRole), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -3392,29 +10186,21 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeRoleEventSimpleDTO()
         {
@@ -3424,6 +10210,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeRole(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRoleDegree), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -3431,8 +10321,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleDegreeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeEventRichDTO EmployeeRoleDegree;
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventRichDTO employeeRoleDegree;
         
         public EmployeeRoleDegreeSaveEventDTO()
         {
@@ -3440,7 +10329,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeRoleDegreeSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRoleDegree domainObject)
         {
-            this.EmployeeRoleDegree = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeRoleDegree = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRoleDegreeEventRichDTO EmployeeRoleDegree
+        {
+            get
+            {
+                return this.employeeRoleDegree;
+            }
+            set
+            {
+                this.employeeRoleDegree = value;
+            }
         }
     }
     
@@ -3449,8 +10351,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleDegreeRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeEventRichDTO EmployeeRoleDegree;
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventRichDTO employeeRoleDegree;
         
         public EmployeeRoleDegreeRemoveEventDTO()
         {
@@ -3458,7 +10359,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeRoleDegreeRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRoleDegree domainObject)
         {
-            this.EmployeeRoleDegree = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeRoleDegree = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRoleDegreeEventRichDTO EmployeeRoleDegree
+        {
+            get
+            {
+                return this.employeeRoleDegree;
+            }
+            set
+            {
+                this.employeeRoleDegree = value;
+            }
         }
     }
     
@@ -3467,29 +10381,21 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleDegreeEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeRoleDegreeEventRichDTO()
         {
@@ -3499,6 +10405,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeRoleDegree(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRoleDegree), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -3506,29 +10516,21 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleDegreeEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeRoleDegreeEventSimpleDTO()
         {
@@ -3538,6 +10540,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeRoleDegree(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRootFilterModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -3545,8 +10651,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRootFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO EmployeeRootFilterModel;
+        private SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO employeeRootFilterModel;
         
         public EmployeeRootFilterModelSaveEventDTO()
         {
@@ -3554,7 +10659,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeRootFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRootFilterModel domainObject)
         {
-            this.EmployeeRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO EmployeeRootFilterModel
+        {
+            get
+            {
+                return this.employeeRootFilterModel;
+            }
+            set
+            {
+                this.employeeRootFilterModel = value;
+            }
         }
     }
     
@@ -3563,8 +10681,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRootFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO EmployeeRootFilterModel;
+        private SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO employeeRootFilterModel;
         
         public EmployeeRootFilterModelRemoveEventDTO()
         {
@@ -3572,7 +10689,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeRootFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRootFilterModel domainObject)
         {
-            this.EmployeeRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO EmployeeRootFilterModel
+        {
+            get
+            {
+                return this.employeeRootFilterModel;
+            }
+            set
+            {
+                this.employeeRootFilterModel = value;
+            }
         }
     }
     
@@ -3596,8 +10726,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSpecializationSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationEventRichDTO EmployeeSpecialization;
+        private SampleSystem.Generated.DTO.EmployeeSpecializationEventRichDTO employeeSpecialization;
         
         public EmployeeSpecializationSaveEventDTO()
         {
@@ -3605,7 +10734,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeSpecializationSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeSpecialization domainObject)
         {
-            this.EmployeeSpecialization = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeSpecialization = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSpecializationEventRichDTO EmployeeSpecialization
+        {
+            get
+            {
+                return this.employeeSpecialization;
+            }
+            set
+            {
+                this.employeeSpecialization = value;
+            }
         }
     }
     
@@ -3614,8 +10756,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSpecializationRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationEventRichDTO EmployeeSpecialization;
+        private SampleSystem.Generated.DTO.EmployeeSpecializationEventRichDTO employeeSpecialization;
         
         public EmployeeSpecializationRemoveEventDTO()
         {
@@ -3623,7 +10764,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeSpecializationRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeSpecialization domainObject)
         {
-            this.EmployeeSpecialization = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeSpecialization = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSpecializationEventRichDTO EmployeeSpecialization
+        {
+            get
+            {
+                return this.employeeSpecialization;
+            }
+            set
+            {
+                this.employeeSpecialization = value;
+            }
         }
     }
     
@@ -3632,29 +10786,21 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSpecializationEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeSpecializationEventRichDTO()
         {
@@ -3664,6 +10810,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeSpecialization(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeSpecialization), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -3671,29 +10921,21 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSpecializationEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeSpecializationEventSimpleDTO()
         {
@@ -3703,6 +10945,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeSpecialization(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -3710,8 +11056,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeToEmployeeLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO EmployeeToEmployeeLink;
+        private SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO employeeToEmployeeLink;
         
         public EmployeeToEmployeeLinkSaveEventDTO()
         {
@@ -3719,7 +11064,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeToEmployeeLinkSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeToEmployeeLink domainObject)
         {
-            this.EmployeeToEmployeeLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeToEmployeeLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO EmployeeToEmployeeLink
+        {
+            get
+            {
+                return this.employeeToEmployeeLink;
+            }
+            set
+            {
+                this.employeeToEmployeeLink = value;
+            }
         }
     }
     
@@ -3728,8 +11086,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeToEmployeeLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO EmployeeToEmployeeLink;
+        private SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO employeeToEmployeeLink;
         
         public EmployeeToEmployeeLinkRemoveEventDTO()
         {
@@ -3737,7 +11094,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeToEmployeeLinkRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeToEmployeeLink domainObject)
         {
-            this.EmployeeToEmployeeLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeToEmployeeLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO EmployeeToEmployeeLink
+        {
+            get
+            {
+                return this.employeeToEmployeeLink;
+            }
+            set
+            {
+                this.employeeToEmployeeLink = value;
+            }
         }
     }
     
@@ -3746,35 +11116,25 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeToEmployeeLinkEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.EmployeeLinkType EmployeeLinkType;
+        private SampleSystem.Domain.EmployeeLinkType _employeeLinkType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO LinkedEmployee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _linkedEmployee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Owner;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _owner;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public EmployeeToEmployeeLinkEventRichDTO()
         {
@@ -3784,6 +11144,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapEmployeeToEmployeeLink(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.EmployeeLinkType EmployeeLinkType
+        {
+            get
+            {
+                return this._employeeLinkType;
+            }
+            set
+            {
+                this._employeeLinkType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO LinkedEmployee
+        {
+            get
+            {
+                return this._linkedEmployee;
+            }
+            set
+            {
+                this._linkedEmployee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Owner
+        {
+            get
+            {
+                return this._owner;
+            }
+            set
+            {
+                this._owner = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EnversBug1676.Coefficient1676), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -3791,8 +11281,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Coefficient1676SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Coefficient1676EventRichDTO Coefficient1676;
+        private SampleSystem.Generated.DTO.Coefficient1676EventRichDTO coefficient1676;
         
         public Coefficient1676SaveEventDTO()
         {
@@ -3800,7 +11289,20 @@ namespace SampleSystem.Generated.DTO
         
         public Coefficient1676SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EnversBug1676.Coefficient1676 domainObject)
         {
-            this.Coefficient1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.coefficient1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Coefficient1676EventRichDTO Coefficient1676
+        {
+            get
+            {
+                return this.coefficient1676;
+            }
+            set
+            {
+                this.coefficient1676 = value;
+            }
         }
     }
     
@@ -3809,8 +11311,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Coefficient1676RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Coefficient1676EventRichDTO Coefficient1676;
+        private SampleSystem.Generated.DTO.Coefficient1676EventRichDTO coefficient1676;
         
         public Coefficient1676RemoveEventDTO()
         {
@@ -3818,7 +11319,20 @@ namespace SampleSystem.Generated.DTO
         
         public Coefficient1676RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EnversBug1676.Coefficient1676 domainObject)
         {
-            this.Coefficient1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.coefficient1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Coefficient1676EventRichDTO Coefficient1676
+        {
+            get
+            {
+                return this.coefficient1676;
+            }
+            set
+            {
+                this.coefficient1676 = value;
+            }
         }
     }
     
@@ -3827,32 +11341,23 @@ namespace SampleSystem.Generated.DTO
     public partial class Coefficient1676EventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Location1676EventSimpleDTO Location;
+        private SampleSystem.Generated.DTO.Location1676EventSimpleDTO _location;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal NormCoefficient;
+        private decimal _normCoefficient;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public Coefficient1676EventRichDTO()
         {
@@ -3862,6 +11367,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapCoefficient1676(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Location1676EventSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal NormCoefficient
+        {
+            get
+            {
+                return this._normCoefficient;
+            }
+            set
+            {
+                this._normCoefficient = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EnversBug1676.Location1676), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -3869,8 +11491,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Location1676SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Location1676EventRichDTO Location1676;
+        private SampleSystem.Generated.DTO.Location1676EventRichDTO location1676;
         
         public Location1676SaveEventDTO()
         {
@@ -3878,7 +11499,20 @@ namespace SampleSystem.Generated.DTO
         
         public Location1676SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EnversBug1676.Location1676 domainObject)
         {
-            this.Location1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.location1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Location1676EventRichDTO Location1676
+        {
+            get
+            {
+                return this.location1676;
+            }
+            set
+            {
+                this.location1676 = value;
+            }
         }
     }
     
@@ -3887,8 +11521,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Location1676RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Location1676EventRichDTO Location1676;
+        private SampleSystem.Generated.DTO.Location1676EventRichDTO location1676;
         
         public Location1676RemoveEventDTO()
         {
@@ -3896,7 +11529,20 @@ namespace SampleSystem.Generated.DTO
         
         public Location1676RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EnversBug1676.Location1676 domainObject)
         {
-            this.Location1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.location1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Location1676EventRichDTO Location1676
+        {
+            get
+            {
+                return this.location1676;
+            }
+            set
+            {
+                this.location1676 = value;
+            }
         }
     }
     
@@ -3905,32 +11551,23 @@ namespace SampleSystem.Generated.DTO
     public partial class Location1676EventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO> Calendar;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO> _calendar;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public Location1676EventRichDTO()
         {
@@ -3940,6 +11577,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapLocation1676(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO> Calendar
+        {
+            get
+            {
+                return this._calendar;
+            }
+            set
+            {
+                this._calendar = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EnversBug1676.Location1676), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -3947,29 +11701,21 @@ namespace SampleSystem.Generated.DTO
     public partial class Location1676EventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public Location1676EventSimpleDTO()
         {
@@ -3979,6 +11725,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapLocation1676(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -3986,8 +11836,7 @@ namespace SampleSystem.Generated.DTO
     public partial class WorkingCalendar1676SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO WorkingCalendar1676;
+        private SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO workingCalendar1676;
         
         public WorkingCalendar1676SaveEventDTO()
         {
@@ -3995,7 +11844,20 @@ namespace SampleSystem.Generated.DTO
         
         public WorkingCalendar1676SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject)
         {
-            this.WorkingCalendar1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.workingCalendar1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO WorkingCalendar1676
+        {
+            get
+            {
+                return this.workingCalendar1676;
+            }
+            set
+            {
+                this.workingCalendar1676 = value;
+            }
         }
     }
     
@@ -4004,8 +11866,7 @@ namespace SampleSystem.Generated.DTO
     public partial class WorkingCalendar1676RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO WorkingCalendar1676;
+        private SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO workingCalendar1676;
         
         public WorkingCalendar1676RemoveEventDTO()
         {
@@ -4013,7 +11874,20 @@ namespace SampleSystem.Generated.DTO
         
         public WorkingCalendar1676RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject)
         {
-            this.WorkingCalendar1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.workingCalendar1676 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO WorkingCalendar1676
+        {
+            get
+            {
+                return this.workingCalendar1676;
+            }
+            set
+            {
+                this.workingCalendar1676 = value;
+            }
         }
     }
     
@@ -4022,32 +11896,23 @@ namespace SampleSystem.Generated.DTO
     public partial class WorkingCalendar1676EventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Location1676EventSimpleDTO Location;
+        private SampleSystem.Generated.DTO.Location1676EventSimpleDTO _location;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public WorkingCalendar1676EventRichDTO()
         {
@@ -4057,6 +11922,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapWorkingCalendar1676(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Location1676EventSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -4064,8 +12046,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Example1SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Example1EventRichDTO Example1;
+        private SampleSystem.Generated.DTO.Example1EventRichDTO example1;
         
         public Example1SaveEventDTO()
         {
@@ -4073,7 +12054,20 @@ namespace SampleSystem.Generated.DTO
         
         public Example1SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example1 domainObject)
         {
-            this.Example1 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.example1 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Example1EventRichDTO Example1
+        {
+            get
+            {
+                return this.example1;
+            }
+            set
+            {
+                this.example1 = value;
+            }
         }
     }
     
@@ -4082,8 +12076,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Example1RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Example1EventRichDTO Example1;
+        private SampleSystem.Generated.DTO.Example1EventRichDTO example1;
         
         public Example1RemoveEventDTO()
         {
@@ -4091,7 +12084,20 @@ namespace SampleSystem.Generated.DTO
         
         public Example1RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example1 domainObject)
         {
-            this.Example1 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.example1 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Example1EventRichDTO Example1
+        {
+            get
+            {
+                return this.example1;
+            }
+            set
+            {
+                this.example1 = value;
+            }
         }
     }
     
@@ -4100,38 +12106,27 @@ namespace SampleSystem.Generated.DTO
     public partial class Example1EventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Field1;
+        private System.Guid _field1;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Field2;
+        private System.Guid _field2;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Field3;
+        private System.Guid _field3;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.Example2EventRichDTO> Items2;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.Example2EventRichDTO> _items2;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public Example1EventRichDTO()
         {
@@ -4141,6 +12136,149 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapExample1(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Field1
+        {
+            get
+            {
+                return this._field1;
+            }
+            set
+            {
+                this._field1 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Field2
+        {
+            get
+            {
+                return this._field2;
+            }
+            set
+            {
+                this._field2 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Field3
+        {
+            get
+            {
+                return this._field3;
+            }
+            set
+            {
+                this._field3 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.Example2EventRichDTO> Items2
+        {
+            get
+            {
+                return this._items2;
+            }
+            set
+            {
+                this._items2 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -4148,35 +12286,25 @@ namespace SampleSystem.Generated.DTO
     public partial class Example1EventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Field1;
+        private System.Guid _field1;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Field2;
+        private System.Guid _field2;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Field3;
+        private System.Guid _field3;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public Example1EventSimpleDTO()
         {
@@ -4186,6 +12314,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapExample1(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Field1
+        {
+            get
+            {
+                return this._field1;
+            }
+            set
+            {
+                this._field1 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Field2
+        {
+            get
+            {
+                return this._field2;
+            }
+            set
+            {
+                this._field2 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Field3
+        {
+            get
+            {
+                return this._field3;
+            }
+            set
+            {
+                this._field3 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example2), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -4193,8 +12451,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Example2SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Example2EventRichDTO Example2;
+        private SampleSystem.Generated.DTO.Example2EventRichDTO example2;
         
         public Example2SaveEventDTO()
         {
@@ -4202,7 +12459,20 @@ namespace SampleSystem.Generated.DTO
         
         public Example2SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example2 domainObject)
         {
-            this.Example2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.example2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Example2EventRichDTO Example2
+        {
+            get
+            {
+                return this.example2;
+            }
+            set
+            {
+                this.example2 = value;
+            }
         }
     }
     
@@ -4211,8 +12481,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Example2RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Example2EventRichDTO Example2;
+        private SampleSystem.Generated.DTO.Example2EventRichDTO example2;
         
         public Example2RemoveEventDTO()
         {
@@ -4220,7 +12489,20 @@ namespace SampleSystem.Generated.DTO
         
         public Example2RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example2 domainObject)
         {
-            this.Example2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.example2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Example2EventRichDTO Example2
+        {
+            get
+            {
+                return this.example2;
+            }
+            set
+            {
+                this.example2 = value;
+            }
         }
     }
     
@@ -4229,35 +12511,25 @@ namespace SampleSystem.Generated.DTO
     public partial class Example2EventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Field1;
+        private System.Guid _field1;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Field2;
+        private System.Guid _field2;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.Example1EventSimpleDTO Parent;
+        private SampleSystem.Generated.DTO.Example1EventSimpleDTO _parent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public Example2EventRichDTO()
         {
@@ -4267,6 +12539,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapExample2(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Field1
+        {
+            get
+            {
+                return this._field1;
+            }
+            set
+            {
+                this._field1 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Field2
+        {
+            get
+            {
+                return this._field2;
+            }
+            set
+            {
+                this._field2 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.Example1EventSimpleDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -4274,8 +12676,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEventRichDTO HRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventRichDTO hRDepartment;
         
         public HRDepartmentSaveEventDTO()
         {
@@ -4283,7 +12684,20 @@ namespace SampleSystem.Generated.DTO
         
         public HRDepartmentSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment domainObject)
         {
-            this.HRDepartment = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.hRDepartment = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentEventRichDTO HRDepartment
+        {
+            get
+            {
+                return this.hRDepartment;
+            }
+            set
+            {
+                this.hRDepartment = value;
+            }
         }
     }
     
@@ -4292,8 +12706,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEventRichDTO HRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventRichDTO hRDepartment;
         
         public HRDepartmentRemoveEventDTO()
         {
@@ -4301,7 +12714,20 @@ namespace SampleSystem.Generated.DTO
         
         public HRDepartmentRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment domainObject)
         {
-            this.HRDepartment = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.hRDepartment = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentEventRichDTO HRDepartment
+        {
+            get
+            {
+                return this.hRDepartment;
+            }
+            set
+            {
+                this.hRDepartment = value;
+            }
         }
     }
     
@@ -4310,80 +12736,55 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO ApprovedBy;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _approvedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO> BusinessUnitHrDepartments;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO> _businessUnitHrDepartments;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code;
+        private string _code;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CodeNative;
+        private string _codeNative;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO CompanyLegalEntity;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO _companyLegalEntity;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CompanyLegalEntityName;
+        private string _companyLegalEntityName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO> EmployeePositions;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO> _employeePositions;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long ExternalId;
+        private long _externalId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Head;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _head;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO> HrDepartmentRoleEmployees;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO> _hrDepartmentRoleEmployees;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsLegal;
+        private bool _isLegal;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsProduction;
+        private bool _isProduction;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LocationName;
+        private string _locationName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> ManagementUnits;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> _managementUnits;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameNative;
+        private string _nameNative;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO Parent;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _parent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public HRDepartmentEventRichDTO()
         {
@@ -4393,6 +12794,331 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapHRDepartment(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO ApprovedBy
+        {
+            get
+            {
+                return this._approvedBy;
+            }
+            set
+            {
+                this._approvedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO> BusinessUnitHrDepartments
+        {
+            get
+            {
+                return this._businessUnitHrDepartments;
+            }
+            set
+            {
+                this._businessUnitHrDepartments = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CodeNative
+        {
+            get
+            {
+                return this._codeNative;
+            }
+            set
+            {
+                this._codeNative = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO CompanyLegalEntity
+        {
+            get
+            {
+                return this._companyLegalEntity;
+            }
+            set
+            {
+                this._companyLegalEntity = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CompanyLegalEntityName
+        {
+            get
+            {
+                return this._companyLegalEntityName;
+            }
+            set
+            {
+                this._companyLegalEntityName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO> EmployeePositions
+        {
+            get
+            {
+                return this._employeePositions;
+            }
+            set
+            {
+                this._employeePositions = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Head
+        {
+            get
+            {
+                return this._head;
+            }
+            set
+            {
+                this._head = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO> HrDepartmentRoleEmployees
+        {
+            get
+            {
+                return this._hrDepartmentRoleEmployees;
+            }
+            set
+            {
+                this._hrDepartmentRoleEmployees = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsLegal
+        {
+            get
+            {
+                return this._isLegal;
+            }
+            set
+            {
+                this._isLegal = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsProduction
+        {
+            get
+            {
+                return this._isProduction;
+            }
+            set
+            {
+                this._isProduction = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LocationName
+        {
+            get
+            {
+                return this._locationName;
+            }
+            set
+            {
+                this._locationName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> ManagementUnits
+        {
+            get
+            {
+                return this._managementUnits;
+            }
+            set
+            {
+                this._managementUnits = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameNative
+        {
+            get
+            {
+                return this._nameNative;
+            }
+            set
+            {
+                this._nameNative = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -4400,53 +13126,37 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code;
+        private string _code;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CodeNative;
+        private string _codeNative;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CompanyLegalEntityName;
+        private string _companyLegalEntityName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long ExternalId;
+        private long _externalId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsLegal;
+        private bool _isLegal;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsProduction;
+        private bool _isProduction;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LocationName;
+        private string _locationName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameNative;
+        private string _nameNative;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public HRDepartmentEventSimpleDTO()
         {
@@ -4456,6 +13166,214 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapHRDepartment(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CodeNative
+        {
+            get
+            {
+                return this._codeNative;
+            }
+            set
+            {
+                this._codeNative = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CompanyLegalEntityName
+        {
+            get
+            {
+                return this._companyLegalEntityName;
+            }
+            set
+            {
+                this._companyLegalEntityName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsLegal
+        {
+            get
+            {
+                return this._isLegal;
+            }
+            set
+            {
+                this._isLegal = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsProduction
+        {
+            get
+            {
+                return this._isProduction;
+            }
+            set
+            {
+                this._isProduction = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LocationName
+        {
+            get
+            {
+                return this._locationName;
+            }
+            set
+            {
+                this._locationName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameNative
+        {
+            get
+            {
+                return this._nameNative;
+            }
+            set
+            {
+                this._nameNative = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentEmployeePosition), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -4463,8 +13381,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentEmployeePositionSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO HRDepartmentEmployeePosition;
+        private SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO hRDepartmentEmployeePosition;
         
         public HRDepartmentEmployeePositionSaveEventDTO()
         {
@@ -4472,7 +13389,20 @@ namespace SampleSystem.Generated.DTO
         
         public HRDepartmentEmployeePositionSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentEmployeePosition domainObject)
         {
-            this.HRDepartmentEmployeePosition = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.hRDepartmentEmployeePosition = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO HRDepartmentEmployeePosition
+        {
+            get
+            {
+                return this.hRDepartmentEmployeePosition;
+            }
+            set
+            {
+                this.hRDepartmentEmployeePosition = value;
+            }
         }
     }
     
@@ -4481,8 +13411,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentEmployeePositionRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO HRDepartmentEmployeePosition;
+        private SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO hRDepartmentEmployeePosition;
         
         public HRDepartmentEmployeePositionRemoveEventDTO()
         {
@@ -4490,7 +13419,20 @@ namespace SampleSystem.Generated.DTO
         
         public HRDepartmentEmployeePositionRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentEmployeePosition domainObject)
         {
-            this.HRDepartmentEmployeePosition = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.hRDepartmentEmployeePosition = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO HRDepartmentEmployeePosition
+        {
+            get
+            {
+                return this.hRDepartmentEmployeePosition;
+            }
+            set
+            {
+                this.hRDepartmentEmployeePosition = value;
+            }
         }
     }
     
@@ -4499,32 +13441,23 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentEmployeePositionEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO EmployeePosition;
+        private SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO _employeePosition;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HrDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hrDepartment;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public HRDepartmentEmployeePositionEventRichDTO()
         {
@@ -4534,6 +13467,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapHRDepartmentEmployeePosition(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO EmployeePosition
+        {
+            get
+            {
+                return this._employeePosition;
+            }
+            set
+            {
+                this._employeePosition = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HrDepartment
+        {
+            get
+            {
+                return this._hrDepartment;
+            }
+            set
+            {
+                this._hrDepartment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentRoleEmployee), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -4541,8 +13591,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentRoleEmployeeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO HRDepartmentRoleEmployee;
+        private SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO hRDepartmentRoleEmployee;
         
         public HRDepartmentRoleEmployeeSaveEventDTO()
         {
@@ -4550,7 +13599,20 @@ namespace SampleSystem.Generated.DTO
         
         public HRDepartmentRoleEmployeeSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentRoleEmployee domainObject)
         {
-            this.HRDepartmentRoleEmployee = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.hRDepartmentRoleEmployee = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO HRDepartmentRoleEmployee
+        {
+            get
+            {
+                return this.hRDepartmentRoleEmployee;
+            }
+            set
+            {
+                this.hRDepartmentRoleEmployee = value;
+            }
         }
     }
     
@@ -4559,8 +13621,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentRoleEmployeeRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO HRDepartmentRoleEmployee;
+        private SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO hRDepartmentRoleEmployee;
         
         public HRDepartmentRoleEmployeeRemoveEventDTO()
         {
@@ -4568,7 +13629,20 @@ namespace SampleSystem.Generated.DTO
         
         public HRDepartmentRoleEmployeeRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentRoleEmployee domainObject)
         {
-            this.HRDepartmentRoleEmployee = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.hRDepartmentRoleEmployee = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO HRDepartmentRoleEmployee
+        {
+            get
+            {
+                return this.hRDepartmentRoleEmployee;
+            }
+            set
+            {
+                this.hRDepartmentRoleEmployee = value;
+            }
         }
     }
     
@@ -4577,35 +13651,25 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentRoleEmployeeEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.HRDepartmentEmployeeRoleType HRDepartmentEmployeeRoleType;
+        private SampleSystem.Domain.HRDepartmentEmployeeRoleType _hRDepartmentEmployeeRoleType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public HRDepartmentRoleEmployeeEventRichDTO()
         {
@@ -4615,6 +13679,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapHRDepartmentRoleEmployee(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HRDepartment
+        {
+            get
+            {
+                return this._hRDepartment;
+            }
+            set
+            {
+                this._hRDepartment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.HRDepartmentEmployeeRoleType HRDepartmentEmployeeRoleType
+        {
+            get
+            {
+                return this._hRDepartmentEmployeeRoleType;
+            }
+            set
+            {
+                this._hRDepartmentEmployeeRoleType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequest), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -4622,8 +13816,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestEventRichDTO IMRequest;
+        private SampleSystem.Generated.DTO.IMRequestEventRichDTO iMRequest;
         
         public IMRequestSaveEventDTO()
         {
@@ -4631,7 +13824,20 @@ namespace SampleSystem.Generated.DTO
         
         public IMRequestSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequest domainObject)
         {
-            this.IMRequest = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.iMRequest = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestEventRichDTO IMRequest
+        {
+            get
+            {
+                return this.iMRequest;
+            }
+            set
+            {
+                this.iMRequest = value;
+            }
         }
     }
     
@@ -4640,8 +13846,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestEventRichDTO IMRequest;
+        private SampleSystem.Generated.DTO.IMRequestEventRichDTO iMRequest;
         
         public IMRequestRemoveEventDTO()
         {
@@ -4649,7 +13854,20 @@ namespace SampleSystem.Generated.DTO
         
         public IMRequestRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequest domainObject)
         {
-            this.IMRequest = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.iMRequest = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestEventRichDTO IMRequest
+        {
+            get
+            {
+                return this.iMRequest;
+            }
+            set
+            {
+                this.iMRequest = value;
+            }
         }
     }
     
@@ -4658,38 +13876,27 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email;
+        private string _email;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message;
+        private string _message;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO OneToOneDetail;
+        private SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO _oneToOneDetail;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public IMRequestEventRichDTO()
         {
@@ -4699,6 +13906,149 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapIMRequest(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message
+        {
+            get
+            {
+                return this._message;
+            }
+            set
+            {
+                this._message = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO OneToOneDetail
+        {
+            get
+            {
+                return this._oneToOneDetail;
+            }
+            set
+            {
+                this._oneToOneDetail = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequest), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -4706,35 +14056,25 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email;
+        private string _email;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message;
+        private string _message;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public IMRequestEventSimpleDTO()
         {
@@ -4744,6 +14084,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapIMRequest(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message
+        {
+            get
+            {
+                return this._message;
+            }
+            set
+            {
+                this._message = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequestDetail), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -4751,8 +14221,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestDetailSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO IMRequestDetail;
+        private SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO iMRequestDetail;
         
         public IMRequestDetailSaveEventDTO()
         {
@@ -4760,7 +14229,20 @@ namespace SampleSystem.Generated.DTO
         
         public IMRequestDetailSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequestDetail domainObject)
         {
-            this.IMRequestDetail = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.iMRequestDetail = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO IMRequestDetail
+        {
+            get
+            {
+                return this.iMRequestDetail;
+            }
+            set
+            {
+                this.iMRequestDetail = value;
+            }
         }
     }
     
@@ -4769,8 +14251,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestDetailRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO IMRequestDetail;
+        private SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO iMRequestDetail;
         
         public IMRequestDetailRemoveEventDTO()
         {
@@ -4778,7 +14259,20 @@ namespace SampleSystem.Generated.DTO
         
         public IMRequestDetailRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequestDetail domainObject)
         {
-            this.IMRequestDetail = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.iMRequestDetail = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO IMRequestDetail
+        {
+            get
+            {
+                return this.iMRequestDetail;
+            }
+            set
+            {
+                this.iMRequestDetail = value;
+            }
         }
     }
     
@@ -4787,29 +14281,21 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestDetailEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestEventSimpleDTO Request;
+        private SampleSystem.Generated.DTO.IMRequestEventSimpleDTO _request;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public IMRequestDetailEventRichDTO()
         {
@@ -4819,6 +14305,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapIMRequestDetail(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestEventSimpleDTO Request
+        {
+            get
+            {
+                return this._request;
+            }
+            set
+            {
+                this._request = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Information), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -4826,8 +14416,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InformationSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InformationEventRichDTO Information;
+        private SampleSystem.Generated.DTO.InformationEventRichDTO information;
         
         public InformationSaveEventDTO()
         {
@@ -4835,7 +14424,20 @@ namespace SampleSystem.Generated.DTO
         
         public InformationSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Information domainObject)
         {
-            this.Information = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.information = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.InformationEventRichDTO Information
+        {
+            get
+            {
+                return this.information;
+            }
+            set
+            {
+                this.information = value;
+            }
         }
     }
     
@@ -4844,8 +14446,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InformationRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InformationEventRichDTO Information;
+        private SampleSystem.Generated.DTO.InformationEventRichDTO information;
         
         public InformationRemoveEventDTO()
         {
@@ -4853,7 +14454,20 @@ namespace SampleSystem.Generated.DTO
         
         public InformationRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Information domainObject)
         {
-            this.Information = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.information = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.InformationEventRichDTO Information
+        {
+            get
+            {
+                return this.information;
+            }
+            set
+            {
+                this.information = value;
+            }
         }
     }
     
@@ -4862,32 +14476,23 @@ namespace SampleSystem.Generated.DTO
     public partial class InformationEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email;
+        private string _email;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public InformationEventRichDTO()
         {
@@ -4897,6 +14502,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapInformation(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Insurance), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -4904,8 +14626,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InsuranceEventRichDTO Insurance;
+        private SampleSystem.Generated.DTO.InsuranceEventRichDTO insurance;
         
         public InsuranceSaveEventDTO()
         {
@@ -4913,7 +14634,20 @@ namespace SampleSystem.Generated.DTO
         
         public InsuranceSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Insurance domainObject)
         {
-            this.Insurance = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.insurance = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.InsuranceEventRichDTO Insurance
+        {
+            get
+            {
+                return this.insurance;
+            }
+            set
+            {
+                this.insurance = value;
+            }
         }
     }
     
@@ -4922,8 +14656,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InsuranceEventRichDTO Insurance;
+        private SampleSystem.Generated.DTO.InsuranceEventRichDTO insurance;
         
         public InsuranceRemoveEventDTO()
         {
@@ -4931,7 +14664,20 @@ namespace SampleSystem.Generated.DTO
         
         public InsuranceRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Insurance domainObject)
         {
-            this.Insurance = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.insurance = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.InsuranceEventRichDTO Insurance
+        {
+            get
+            {
+                return this.insurance;
+            }
+            set
+            {
+                this.insurance = value;
+            }
         }
     }
     
@@ -4940,26 +14686,19 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO Details;
+        private SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO _details;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int DurationMonths;
+        private int _durationMonths;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InsuranceEventSimpleDTO Self;
+        private SampleSystem.Generated.DTO.InsuranceEventSimpleDTO _self;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal TotalIncome;
+        private decimal _totalIncome;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool UseFullAnnualRemainder;
+        private bool _useFullAnnualRemainder;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int WorkExperience;
+        private int _workExperience;
         
         public InsuranceEventRichDTO()
         {
@@ -4969,6 +14708,97 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapInsurance(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO Details
+        {
+            get
+            {
+                return this._details;
+            }
+            set
+            {
+                this._details = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DurationMonths
+        {
+            get
+            {
+                return this._durationMonths;
+            }
+            set
+            {
+                this._durationMonths = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.InsuranceEventSimpleDTO Self
+        {
+            get
+            {
+                return this._self;
+            }
+            set
+            {
+                this._self = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal TotalIncome
+        {
+            get
+            {
+                return this._totalIncome;
+            }
+            set
+            {
+                this._totalIncome = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool UseFullAnnualRemainder
+        {
+            get
+            {
+                return this._useFullAnnualRemainder;
+            }
+            set
+            {
+                this._useFullAnnualRemainder = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int WorkExperience
+        {
+            get
+            {
+                return this._workExperience;
+            }
+            set
+            {
+                this._workExperience = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Insurance), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -4976,17 +14806,13 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int DurationMonths;
+        private int _durationMonths;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal TotalIncome;
+        private decimal _totalIncome;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool UseFullAnnualRemainder;
+        private bool _useFullAnnualRemainder;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int WorkExperience;
+        private int _workExperience;
         
         public InsuranceEventSimpleDTO()
         {
@@ -4996,6 +14822,58 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapInsurance(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DurationMonths
+        {
+            get
+            {
+                return this._durationMonths;
+            }
+            set
+            {
+                this._durationMonths = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal TotalIncome
+        {
+            get
+            {
+                return this._totalIncome;
+            }
+            set
+            {
+                this._totalIncome = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool UseFullAnnualRemainder
+        {
+            get
+            {
+                return this._useFullAnnualRemainder;
+            }
+            set
+            {
+                this._useFullAnnualRemainder = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int WorkExperience
+        {
+            get
+            {
+                return this._workExperience;
+            }
+            set
+            {
+                this._workExperience = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.InsuranceDetail), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -5003,8 +14881,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceDetailSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO InsuranceDetail;
+        private SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO insuranceDetail;
         
         public InsuranceDetailSaveEventDTO()
         {
@@ -5012,7 +14889,20 @@ namespace SampleSystem.Generated.DTO
         
         public InsuranceDetailSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.InsuranceDetail domainObject)
         {
-            this.InsuranceDetail = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.insuranceDetail = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO InsuranceDetail
+        {
+            get
+            {
+                return this.insuranceDetail;
+            }
+            set
+            {
+                this.insuranceDetail = value;
+            }
         }
     }
     
@@ -5021,8 +14911,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceDetailRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO InsuranceDetail;
+        private SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO insuranceDetail;
         
         public InsuranceDetailRemoveEventDTO()
         {
@@ -5030,7 +14919,20 @@ namespace SampleSystem.Generated.DTO
         
         public InsuranceDetailRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.InsuranceDetail domainObject)
         {
-            this.InsuranceDetail = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.insuranceDetail = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO InsuranceDetail
+        {
+            get
+            {
+                return this.insuranceDetail;
+            }
+            set
+            {
+                this.insuranceDetail = value;
+            }
         }
     }
     
@@ -5039,50 +14941,35 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceDetailEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Age;
+        private int _age;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? BirthDate;
+        private System.DateTime? _birthDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CellPhone;
+        private string _cellPhone;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Cost;
+        private decimal _cost;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.Inline.Fio Fio;
+        private SampleSystem.Domain.Inline.Fio _fio;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LandlinePhone;
+        private string _landlinePhone;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RegistrationAddress;
+        private string _registrationAddress;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ResidentalAddress;
+        private string _residentalAddress;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public InsuranceDetailEventRichDTO()
         {
@@ -5092,6 +14979,201 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapInsuranceDetail(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Age
+        {
+            get
+            {
+                return this._age;
+            }
+            set
+            {
+                this._age = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? BirthDate
+        {
+            get
+            {
+                return this._birthDate;
+            }
+            set
+            {
+                this._birthDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CellPhone
+        {
+            get
+            {
+                return this._cellPhone;
+            }
+            set
+            {
+                this._cellPhone = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Cost
+        {
+            get
+            {
+                return this._cost;
+            }
+            set
+            {
+                this._cost = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Inline.Fio Fio
+        {
+            get
+            {
+                return this._fio;
+            }
+            set
+            {
+                this._fio = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LandlinePhone
+        {
+            get
+            {
+                return this._landlinePhone;
+            }
+            set
+            {
+                this._landlinePhone = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RegistrationAddress
+        {
+            get
+            {
+                return this._registrationAddress;
+            }
+            set
+            {
+                this._registrationAddress = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ResidentalAddress
+        {
+            get
+            {
+                return this._residentalAddress;
+            }
+            set
+            {
+                this._residentalAddress = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -5099,8 +15181,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO IntegrationVersionContainer1CustomIntegrationSaveModel;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO integrationVersionContainer1CustomIntegrationSaveModel;
         
         public IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO()
         {
@@ -5108,7 +15189,20 @@ namespace SampleSystem.Generated.DTO
         
         public IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
         {
-            this.IntegrationVersionContainer1CustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.integrationVersionContainer1CustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO IntegrationVersionContainer1CustomIntegrationSaveModel
+        {
+            get
+            {
+                return this.integrationVersionContainer1CustomIntegrationSaveModel;
+            }
+            set
+            {
+                this.integrationVersionContainer1CustomIntegrationSaveModel = value;
+            }
         }
     }
     
@@ -5117,8 +15211,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO IntegrationVersionContainer1CustomIntegrationSaveModel;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO integrationVersionContainer1CustomIntegrationSaveModel;
         
         public IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO()
         {
@@ -5126,7 +15219,20 @@ namespace SampleSystem.Generated.DTO
         
         public IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
         {
-            this.IntegrationVersionContainer1CustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.integrationVersionContainer1CustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO IntegrationVersionContainer1CustomIntegrationSaveModel
+        {
+            get
+            {
+                return this.integrationVersionContainer1CustomIntegrationSaveModel;
+            }
+            set
+            {
+                this.integrationVersionContainer1CustomIntegrationSaveModel = value;
+            }
         }
     }
     
@@ -5135,11 +15241,9 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CustomName;
+        private string _customName;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer1EventSimpleDTO SavingObject;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventSimpleDTO _savingObject;
         
         public IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO()
         {
@@ -5149,6 +15253,32 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapIntegrationVersionContainer1CustomIntegrationSaveModel(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CustomName
+        {
+            get
+            {
+                return this._customName;
+            }
+            set
+            {
+                this._customName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer1EventSimpleDTO SavingObject
+        {
+            get
+            {
+                return this._savingObject;
+            }
+            set
+            {
+                this._savingObject = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -5156,8 +15286,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer1EventRichDTO IntegrationVersionContainer1;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventRichDTO integrationVersionContainer1;
         
         public IntegrationVersionContainer1SaveEventDTO()
         {
@@ -5165,7 +15294,20 @@ namespace SampleSystem.Generated.DTO
         
         public IntegrationVersionContainer1SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
         {
-            this.IntegrationVersionContainer1 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.integrationVersionContainer1 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer1EventRichDTO IntegrationVersionContainer1
+        {
+            get
+            {
+                return this.integrationVersionContainer1;
+            }
+            set
+            {
+                this.integrationVersionContainer1 = value;
+            }
         }
     }
     
@@ -5174,8 +15316,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer1EventRichDTO IntegrationVersionContainer1;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventRichDTO integrationVersionContainer1;
         
         public IntegrationVersionContainer1RemoveEventDTO()
         {
@@ -5183,7 +15324,20 @@ namespace SampleSystem.Generated.DTO
         
         public IntegrationVersionContainer1RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
         {
-            this.IntegrationVersionContainer1 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.integrationVersionContainer1 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer1EventRichDTO IntegrationVersionContainer1
+        {
+            get
+            {
+                return this.integrationVersionContainer1;
+            }
+            set
+            {
+                this.integrationVersionContainer1 = value;
+            }
         }
     }
     
@@ -5192,29 +15346,21 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1EventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public IntegrationVersionContainer1EventRichDTO()
         {
@@ -5224,6 +15370,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapIntegrationVersionContainer1(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -5231,29 +15481,21 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1EventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public IntegrationVersionContainer1EventSimpleDTO()
         {
@@ -5263,6 +15505,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapIntegrationVersionContainer1(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -5270,8 +15616,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer2SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer2EventRichDTO IntegrationVersionContainer2;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer2EventRichDTO integrationVersionContainer2;
         
         public IntegrationVersionContainer2SaveEventDTO()
         {
@@ -5279,7 +15624,20 @@ namespace SampleSystem.Generated.DTO
         
         public IntegrationVersionContainer2SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 domainObject)
         {
-            this.IntegrationVersionContainer2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.integrationVersionContainer2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer2EventRichDTO IntegrationVersionContainer2
+        {
+            get
+            {
+                return this.integrationVersionContainer2;
+            }
+            set
+            {
+                this.integrationVersionContainer2 = value;
+            }
         }
     }
     
@@ -5288,8 +15646,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer2RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer2EventRichDTO IntegrationVersionContainer2;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer2EventRichDTO integrationVersionContainer2;
         
         public IntegrationVersionContainer2RemoveEventDTO()
         {
@@ -5297,7 +15654,20 @@ namespace SampleSystem.Generated.DTO
         
         public IntegrationVersionContainer2RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 domainObject)
         {
-            this.IntegrationVersionContainer2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.integrationVersionContainer2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer2EventRichDTO IntegrationVersionContainer2
+        {
+            get
+            {
+                return this.integrationVersionContainer2;
+            }
+            set
+            {
+                this.integrationVersionContainer2 = value;
+            }
         }
     }
     
@@ -5306,29 +15676,21 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer2EventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public IntegrationVersionContainer2EventRichDTO()
         {
@@ -5338,6 +15700,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapIntegrationVersionContainer2(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.LegalEntityBase), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -5345,8 +15811,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LegalEntityBaseSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LegalEntityBaseEventRichDTO LegalEntityBase;
+        private SampleSystem.Generated.DTO.LegalEntityBaseEventRichDTO legalEntityBase;
         
         public LegalEntityBaseSaveEventDTO()
         {
@@ -5354,7 +15819,20 @@ namespace SampleSystem.Generated.DTO
         
         public LegalEntityBaseSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.LegalEntityBase domainObject)
         {
-            this.LegalEntityBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.legalEntityBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LegalEntityBaseEventRichDTO LegalEntityBase
+        {
+            get
+            {
+                return this.legalEntityBase;
+            }
+            set
+            {
+                this.legalEntityBase = value;
+            }
         }
     }
     
@@ -5363,8 +15841,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LegalEntityBaseRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LegalEntityBaseEventRichDTO LegalEntityBase;
+        private SampleSystem.Generated.DTO.LegalEntityBaseEventRichDTO legalEntityBase;
         
         public LegalEntityBaseRemoveEventDTO()
         {
@@ -5372,7 +15849,20 @@ namespace SampleSystem.Generated.DTO
         
         public LegalEntityBaseRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.LegalEntityBase domainObject)
         {
-            this.LegalEntityBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.legalEntityBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LegalEntityBaseEventRichDTO LegalEntityBase
+        {
+            get
+            {
+                return this.legalEntityBase;
+            }
+            set
+            {
+                this.legalEntityBase = value;
+            }
         }
     }
     
@@ -5381,41 +15871,29 @@ namespace SampleSystem.Generated.DTO
     public partial class LegalEntityBaseEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> Addresses;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> _addresses;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.RevenueDocumentAribaStatus AribaStatus;
+        private SampleSystem.Domain.RevenueDocumentAribaStatus _aribaStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO BaseObj;
+        private SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO _baseObj;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameEnglish;
+        private string _nameEnglish;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public LegalEntityBaseEventRichDTO()
         {
@@ -5425,6 +15903,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapLegalEntityBase(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> Addresses
+        {
+            get
+            {
+                return this._addresses;
+            }
+            set
+            {
+                this._addresses = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.RevenueDocumentAribaStatus AribaStatus
+        {
+            get
+            {
+                return this._aribaStatus;
+            }
+            set
+            {
+                this._aribaStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO BaseObj
+        {
+            get
+            {
+                return this._baseObj;
+            }
+            set
+            {
+                this._baseObj = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameEnglish
+        {
+            get
+            {
+                return this._nameEnglish;
+            }
+            set
+            {
+                this._nameEnglish = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.LegalEntityBase), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -5432,35 +16066,25 @@ namespace SampleSystem.Generated.DTO
     public partial class LegalEntityBaseEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.RevenueDocumentAribaStatus AribaStatus;
+        private SampleSystem.Domain.RevenueDocumentAribaStatus _aribaStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameEnglish;
+        private string _nameEnglish;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public LegalEntityBaseEventSimpleDTO()
         {
@@ -5470,6 +16094,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapLegalEntityBase(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.RevenueDocumentAribaStatus AribaStatus
+        {
+            get
+            {
+                return this._aribaStatus;
+            }
+            set
+            {
+                this._aribaStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameEnglish
+        {
+            get
+            {
+                return this._nameEnglish;
+            }
+            set
+            {
+                this._nameEnglish = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -5477,8 +16231,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventRichDTO Location;
+        private SampleSystem.Generated.DTO.LocationEventRichDTO location;
         
         public LocationSaveEventDTO()
         {
@@ -5486,7 +16239,20 @@ namespace SampleSystem.Generated.DTO
         
         public LocationSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Location domainObject)
         {
-            this.Location = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.location = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventRichDTO Location
+        {
+            get
+            {
+                return this.location;
+            }
+            set
+            {
+                this.location = value;
+            }
         }
     }
     
@@ -5495,8 +16261,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventRichDTO Location;
+        private SampleSystem.Generated.DTO.LocationEventRichDTO location;
         
         public LocationRemoveEventDTO()
         {
@@ -5504,7 +16269,20 @@ namespace SampleSystem.Generated.DTO
         
         public LocationRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Location domainObject)
         {
-            this.Location = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.location = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventRichDTO Location
+        {
+            get
+            {
+                return this.location;
+            }
+            set
+            {
+                this.location = value;
+            }
         }
     }
     
@@ -5513,62 +16291,43 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] BinaryData;
+        private byte[] _binaryData;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationEventRichDTO> Children;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationEventRichDTO> _children;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CloseDate;
+        private int _closeDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Code;
+        private int _code;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool ContainsOnlyInactiveChildren;
+        private bool _containsOnlyInactiveChildren;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CountryEventSimpleDTO Country;
+        private SampleSystem.Generated.DTO.CountryEventSimpleDTO _country;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int DeepLevel;
+        private int _deepLevel;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsFinancial;
+        private bool _isFinancial;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsLeaf;
+        private bool _isLeaf;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.LocationType LocationType;
+        private SampleSystem.Domain.LocationType _locationType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Parent;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _parent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public LocationEventRichDTO()
         {
@@ -5578,6 +16337,253 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapLocation(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] BinaryData
+        {
+            get
+            {
+                return this._binaryData;
+            }
+            set
+            {
+                this._binaryData = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationEventRichDTO> Children
+        {
+            get
+            {
+                return this._children;
+            }
+            set
+            {
+                this._children = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CloseDate
+        {
+            get
+            {
+                return this._closeDate;
+            }
+            set
+            {
+                this._closeDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ContainsOnlyInactiveChildren
+        {
+            get
+            {
+                return this._containsOnlyInactiveChildren;
+            }
+            set
+            {
+                this._containsOnlyInactiveChildren = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CountryEventSimpleDTO Country
+        {
+            get
+            {
+                return this._country;
+            }
+            set
+            {
+                this._country = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel
+        {
+            get
+            {
+                return this._deepLevel;
+            }
+            set
+            {
+                this._deepLevel = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsFinancial
+        {
+            get
+            {
+                return this._isFinancial;
+            }
+            set
+            {
+                this._isFinancial = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsLeaf
+        {
+            get
+            {
+                return this._isLeaf;
+            }
+            set
+            {
+                this._isLeaf = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.LocationType LocationType
+        {
+            get
+            {
+                return this._locationType;
+            }
+            set
+            {
+                this._locationType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -5585,50 +16591,35 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CloseDate;
+        private int _closeDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Code;
+        private int _code;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool ContainsOnlyInactiveChildren;
+        private bool _containsOnlyInactiveChildren;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int DeepLevel;
+        private int _deepLevel;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsFinancial;
+        private bool _isFinancial;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsLeaf;
+        private bool _isLeaf;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.LocationType LocationType;
+        private SampleSystem.Domain.LocationType _locationType;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public LocationEventSimpleDTO()
         {
@@ -5638,6 +16629,201 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapLocation(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CloseDate
+        {
+            get
+            {
+                return this._closeDate;
+            }
+            set
+            {
+                this._closeDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ContainsOnlyInactiveChildren
+        {
+            get
+            {
+                return this._containsOnlyInactiveChildren;
+            }
+            set
+            {
+                this._containsOnlyInactiveChildren = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel
+        {
+            get
+            {
+                return this._deepLevel;
+            }
+            set
+            {
+                this._deepLevel = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsFinancial
+        {
+            get
+            {
+                return this._isFinancial;
+            }
+            set
+            {
+                this._isFinancial = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsLeaf
+        {
+            get
+            {
+                return this._isLeaf;
+            }
+            set
+            {
+                this._isLeaf = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.LocationType LocationType
+        {
+            get
+            {
+                return this._locationType;
+            }
+            set
+            {
+                this._locationType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.LocationAncestorLink), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -5645,8 +16831,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationAncestorLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO LocationAncestorLink;
+        private SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO locationAncestorLink;
         
         public LocationAncestorLinkSaveEventDTO()
         {
@@ -5654,7 +16839,20 @@ namespace SampleSystem.Generated.DTO
         
         public LocationAncestorLinkSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.LocationAncestorLink domainObject)
         {
-            this.LocationAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.locationAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO LocationAncestorLink
+        {
+            get
+            {
+                return this.locationAncestorLink;
+            }
+            set
+            {
+                this.locationAncestorLink = value;
+            }
         }
     }
     
@@ -5663,8 +16861,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationAncestorLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO LocationAncestorLink;
+        private SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO locationAncestorLink;
         
         public LocationAncestorLinkRemoveEventDTO()
         {
@@ -5672,7 +16869,20 @@ namespace SampleSystem.Generated.DTO
         
         public LocationAncestorLinkRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.LocationAncestorLink domainObject)
         {
-            this.LocationAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.locationAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO LocationAncestorLink
+        {
+            get
+            {
+                return this.locationAncestorLink;
+            }
+            set
+            {
+                this.locationAncestorLink = value;
+            }
         }
     }
     
@@ -5681,32 +16891,23 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationAncestorLinkEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Ancestor;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _ancestor;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Child;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _child;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public LocationAncestorLinkEventRichDTO()
         {
@@ -5716,6 +16917,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapLocationAncestorLink(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Ancestor
+        {
+            get
+            {
+                return this._ancestor;
+            }
+            set
+            {
+                this._ancestor = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Child
+        {
+            get
+            {
+                return this._child;
+            }
+            set
+            {
+                this._child = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.LocationToAncestorChildView), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -5723,8 +17041,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationToAncestorChildViewSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO LocationToAncestorChildView;
+        private SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO locationToAncestorChildView;
         
         public LocationToAncestorChildViewSaveEventDTO()
         {
@@ -5732,7 +17049,20 @@ namespace SampleSystem.Generated.DTO
         
         public LocationToAncestorChildViewSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.LocationToAncestorChildView domainObject)
         {
-            this.LocationToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.locationToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO LocationToAncestorChildView
+        {
+            get
+            {
+                return this.locationToAncestorChildView;
+            }
+            set
+            {
+                this.locationToAncestorChildView = value;
+            }
         }
     }
     
@@ -5741,8 +17071,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationToAncestorChildViewRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO LocationToAncestorChildView;
+        private SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO locationToAncestorChildView;
         
         public LocationToAncestorChildViewRemoveEventDTO()
         {
@@ -5750,7 +17079,20 @@ namespace SampleSystem.Generated.DTO
         
         public LocationToAncestorChildViewRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.LocationToAncestorChildView domainObject)
         {
-            this.LocationToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.locationToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO LocationToAncestorChildView
+        {
+            get
+            {
+                return this.locationToAncestorChildView;
+            }
+            set
+            {
+                this.locationToAncestorChildView = value;
+            }
         }
     }
     
@@ -5759,32 +17101,23 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationToAncestorChildViewEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO ChildOrAncestor;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _childOrAncestor;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Source;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _source;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public LocationToAncestorChildViewEventRichDTO()
         {
@@ -5794,6 +17127,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapLocationToAncestorChildView(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO ChildOrAncestor
+        {
+            get
+            {
+                return this._childOrAncestor;
+            }
+            set
+            {
+                this._childOrAncestor = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Source
+        {
+            get
+            {
+                return this._source;
+            }
+            set
+            {
+                this._source = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -5801,8 +17251,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventRichDTO ManagementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventRichDTO managementUnit;
         
         public ManagementUnitSaveEventDTO()
         {
@@ -5810,7 +17259,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnit domainObject)
         {
-            this.ManagementUnit = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnit = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventRichDTO ManagementUnit
+        {
+            get
+            {
+                return this.managementUnit;
+            }
+            set
+            {
+                this.managementUnit = value;
+            }
         }
     }
     
@@ -5819,8 +17281,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventRichDTO ManagementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventRichDTO managementUnit;
         
         public ManagementUnitRemoveEventDTO()
         {
@@ -5828,7 +17289,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnit domainObject)
         {
-            this.ManagementUnit = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnit = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventRichDTO ManagementUnit
+        {
+            get
+            {
+                return this.managementUnit;
+            }
+            set
+            {
+                this.managementUnit = value;
+            }
         }
     }
     
@@ -5837,50 +17311,35 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO> BusinessUnits;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO> _businessUnits;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus;
+        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int DeepLevel;
+        private int _deepLevel;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> HRDepartments;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> _hRDepartments;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsProduction;
+        private bool _isProduction;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO Parent;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _parent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period;
+        private Framework.Core.Period _period;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ManagementUnitEventRichDTO()
         {
@@ -5890,6 +17349,201 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapManagementUnit(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO> BusinessUnits
+        {
+            get
+            {
+                return this._businessUnits;
+            }
+            set
+            {
+                this._businessUnits = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        {
+            get
+            {
+                return this._businessUnitStatus;
+            }
+            set
+            {
+                this._businessUnitStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel
+        {
+            get
+            {
+                return this._deepLevel;
+            }
+            set
+            {
+                this._deepLevel = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> HRDepartments
+        {
+            get
+            {
+                return this._hRDepartments;
+            }
+            set
+            {
+                this._hRDepartments = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsProduction
+        {
+            get
+            {
+                return this._isProduction;
+            }
+            set
+            {
+                this._isProduction = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -5897,41 +17551,29 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus;
+        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int DeepLevel;
+        private int _deepLevel;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsProduction;
+        private bool _isProduction;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period;
+        private Framework.Core.Period _period;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ManagementUnitEventSimpleDTO()
         {
@@ -5941,6 +17583,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapManagementUnit(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        {
+            get
+            {
+                return this._businessUnitStatus;
+            }
+            set
+            {
+                this._businessUnitStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel
+        {
+            get
+            {
+                return this._deepLevel;
+            }
+            set
+            {
+                this._deepLevel = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsProduction
+        {
+            get
+            {
+                return this._isProduction;
+            }
+            set
+            {
+                this._isProduction = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAncestorLink), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -5948,8 +17746,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAncestorLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitAncestorLinkEventRichDTO ManagementUnitAncestorLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAncestorLinkEventRichDTO managementUnitAncestorLink;
         
         public ManagementUnitAncestorLinkSaveEventDTO()
         {
@@ -5957,7 +17754,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitAncestorLinkSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAncestorLink domainObject)
         {
-            this.ManagementUnitAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnitAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitAncestorLinkEventRichDTO ManagementUnitAncestorLink
+        {
+            get
+            {
+                return this.managementUnitAncestorLink;
+            }
+            set
+            {
+                this.managementUnitAncestorLink = value;
+            }
         }
     }
     
@@ -5966,8 +17776,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAncestorLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitAncestorLinkEventRichDTO ManagementUnitAncestorLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAncestorLinkEventRichDTO managementUnitAncestorLink;
         
         public ManagementUnitAncestorLinkRemoveEventDTO()
         {
@@ -5975,7 +17784,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitAncestorLinkRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAncestorLink domainObject)
         {
-            this.ManagementUnitAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnitAncestorLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitAncestorLinkEventRichDTO ManagementUnitAncestorLink
+        {
+            get
+            {
+                return this.managementUnitAncestorLink;
+            }
+            set
+            {
+                this.managementUnitAncestorLink = value;
+            }
         }
     }
     
@@ -5984,32 +17806,23 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAncestorLinkEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO Ancestor;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _ancestor;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO Child;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _child;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ManagementUnitAncestorLinkEventRichDTO()
         {
@@ -6019,6 +17832,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapManagementUnitAncestorLink(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO Ancestor
+        {
+            get
+            {
+                return this._ancestor;
+            }
+            set
+            {
+                this._ancestor = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO Child
+        {
+            get
+            {
+                return this._child;
+            }
+            set
+            {
+                this._child = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -6026,8 +17956,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndBusinessUnitLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO ManagementUnitAndBusinessUnitLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO managementUnitAndBusinessUnitLink;
         
         public ManagementUnitAndBusinessUnitLinkSaveEventDTO()
         {
@@ -6035,7 +17964,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitAndBusinessUnitLinkSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink domainObject)
         {
-            this.ManagementUnitAndBusinessUnitLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnitAndBusinessUnitLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO ManagementUnitAndBusinessUnitLink
+        {
+            get
+            {
+                return this.managementUnitAndBusinessUnitLink;
+            }
+            set
+            {
+                this.managementUnitAndBusinessUnitLink = value;
+            }
         }
     }
     
@@ -6044,8 +17986,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndBusinessUnitLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO ManagementUnitAndBusinessUnitLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO managementUnitAndBusinessUnitLink;
         
         public ManagementUnitAndBusinessUnitLinkRemoveEventDTO()
         {
@@ -6053,7 +17994,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitAndBusinessUnitLinkRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink domainObject)
         {
-            this.ManagementUnitAndBusinessUnitLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnitAndBusinessUnitLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO ManagementUnitAndBusinessUnitLink
+        {
+            get
+            {
+                return this.managementUnitAndBusinessUnitLink;
+            }
+            set
+            {
+                this.managementUnitAndBusinessUnitLink = value;
+            }
         }
     }
     
@@ -6062,38 +18016,27 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndBusinessUnitLinkEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool EqualBU;
+        private bool _equalBU;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO> LinkedHRDepartments;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO> _linkedHRDepartments;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ManagementUnitAndBusinessUnitLinkEventRichDTO()
         {
@@ -6103,6 +18046,149 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapManagementUnitAndBusinessUnitLink(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool EqualBU
+        {
+            get
+            {
+                return this._equalBU;
+            }
+            set
+            {
+                this._equalBU = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO> LinkedHRDepartments
+        {
+            get
+            {
+                return this._linkedHRDepartments;
+            }
+            set
+            {
+                this._linkedHRDepartments = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit
+        {
+            get
+            {
+                return this._managementUnit;
+            }
+            set
+            {
+                this._managementUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -6110,8 +18196,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndHRDepartmentLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO ManagementUnitAndHRDepartmentLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO managementUnitAndHRDepartmentLink;
         
         public ManagementUnitAndHRDepartmentLinkSaveEventDTO()
         {
@@ -6119,7 +18204,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitAndHRDepartmentLinkSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject)
         {
-            this.ManagementUnitAndHRDepartmentLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnitAndHRDepartmentLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO ManagementUnitAndHRDepartmentLink
+        {
+            get
+            {
+                return this.managementUnitAndHRDepartmentLink;
+            }
+            set
+            {
+                this.managementUnitAndHRDepartmentLink = value;
+            }
         }
     }
     
@@ -6128,8 +18226,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndHRDepartmentLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO ManagementUnitAndHRDepartmentLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO managementUnitAndHRDepartmentLink;
         
         public ManagementUnitAndHRDepartmentLinkRemoveEventDTO()
         {
@@ -6137,7 +18234,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitAndHRDepartmentLinkRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject)
         {
-            this.ManagementUnitAndHRDepartmentLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnitAndHRDepartmentLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO ManagementUnitAndHRDepartmentLink
+        {
+            get
+            {
+                return this.managementUnitAndHRDepartmentLink;
+            }
+            set
+            {
+                this.managementUnitAndHRDepartmentLink = value;
+            }
         }
     }
     
@@ -6146,35 +18256,25 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndHRDepartmentLinkEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO> LinkedBusinessUnits;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO> _linkedBusinessUnits;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ManagementUnitAndHRDepartmentLinkEventRichDTO()
         {
@@ -6184,6 +18284,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapManagementUnitAndHRDepartmentLink(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HRDepartment
+        {
+            get
+            {
+                return this._hRDepartment;
+            }
+            set
+            {
+                this._hRDepartment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO> LinkedBusinessUnits
+        {
+            get
+            {
+                return this._linkedBusinessUnits;
+            }
+            set
+            {
+                this._linkedBusinessUnits = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit
+        {
+            get
+            {
+                return this._managementUnit;
+            }
+            set
+            {
+                this._managementUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitFluentMapping), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -6191,8 +18421,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitFluentMappingSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventRichDTO ManagementUnitFluentMapping;
+        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventRichDTO managementUnitFluentMapping;
         
         public ManagementUnitFluentMappingSaveEventDTO()
         {
@@ -6200,7 +18429,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitFluentMappingSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitFluentMapping domainObject)
         {
-            this.ManagementUnitFluentMapping = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnitFluentMapping = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventRichDTO ManagementUnitFluentMapping
+        {
+            get
+            {
+                return this.managementUnitFluentMapping;
+            }
+            set
+            {
+                this.managementUnitFluentMapping = value;
+            }
         }
     }
     
@@ -6209,8 +18451,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitFluentMappingRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventRichDTO ManagementUnitFluentMapping;
+        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventRichDTO managementUnitFluentMapping;
         
         public ManagementUnitFluentMappingRemoveEventDTO()
         {
@@ -6218,7 +18459,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitFluentMappingRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitFluentMapping domainObject)
         {
-            this.ManagementUnitFluentMapping = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnitFluentMapping = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventRichDTO ManagementUnitFluentMapping
+        {
+            get
+            {
+                return this.managementUnitFluentMapping;
+            }
+            set
+            {
+                this.managementUnitFluentMapping = value;
+            }
         }
     }
     
@@ -6227,44 +18481,31 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitFluentMappingEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus;
+        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsProduction;
+        private bool _isProduction;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.MuComponent MuComponent;
+        private SampleSystem.Domain.MuComponent _muComponent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO Parent;
+        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO _parent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period;
+        private Framework.Core.Period _period;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ManagementUnitFluentMappingEventRichDTO()
         {
@@ -6274,6 +18515,175 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapManagementUnitFluentMapping(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        {
+            get
+            {
+                return this._businessUnitStatus;
+            }
+            set
+            {
+                this._businessUnitStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsProduction
+        {
+            get
+            {
+                return this._isProduction;
+            }
+            set
+            {
+                this._isProduction = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.MuComponent MuComponent
+        {
+            get
+            {
+                return this._muComponent;
+            }
+            set
+            {
+                this._muComponent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitFluentMapping), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -6281,41 +18691,29 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitFluentMappingEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus;
+        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsProduction;
+        private bool _isProduction;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.MuComponent MuComponent;
+        private SampleSystem.Domain.MuComponent _muComponent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period;
+        private Framework.Core.Period _period;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ManagementUnitFluentMappingEventSimpleDTO()
         {
@@ -6325,6 +18723,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapManagementUnitFluentMapping(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        {
+            get
+            {
+                return this._businessUnitStatus;
+            }
+            set
+            {
+                this._businessUnitStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsProduction
+        {
+            get
+            {
+                return this._isProduction;
+            }
+            set
+            {
+                this._isProduction = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.MuComponent MuComponent
+        {
+            get
+            {
+                return this._muComponent;
+            }
+            set
+            {
+                this._muComponent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitToAncestorChildView), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -6332,8 +18886,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitToAncestorChildViewSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO ManagementUnitToAncestorChildView;
+        private SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO managementUnitToAncestorChildView;
         
         public ManagementUnitToAncestorChildViewSaveEventDTO()
         {
@@ -6341,7 +18894,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitToAncestorChildViewSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitToAncestorChildView domainObject)
         {
-            this.ManagementUnitToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnitToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO ManagementUnitToAncestorChildView
+        {
+            get
+            {
+                return this.managementUnitToAncestorChildView;
+            }
+            set
+            {
+                this.managementUnitToAncestorChildView = value;
+            }
         }
     }
     
@@ -6350,8 +18916,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitToAncestorChildViewRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO ManagementUnitToAncestorChildView;
+        private SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO managementUnitToAncestorChildView;
         
         public ManagementUnitToAncestorChildViewRemoveEventDTO()
         {
@@ -6359,7 +18924,20 @@ namespace SampleSystem.Generated.DTO
         
         public ManagementUnitToAncestorChildViewRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitToAncestorChildView domainObject)
         {
-            this.ManagementUnitToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.managementUnitToAncestorChildView = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO ManagementUnitToAncestorChildView
+        {
+            get
+            {
+                return this.managementUnitToAncestorChildView;
+            }
+            set
+            {
+                this.managementUnitToAncestorChildView = value;
+            }
         }
     }
     
@@ -6368,32 +18946,23 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitToAncestorChildViewEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ChildOrAncestor;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _childOrAncestor;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO Source;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _source;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ManagementUnitToAncestorChildViewEventRichDTO()
         {
@@ -6403,6 +18972,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapManagementUnitToAncestorChildView(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ChildOrAncestor
+        {
+            get
+            {
+                return this._childOrAncestor;
+            }
+            set
+            {
+                this._childOrAncestor = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO Source
+        {
+            get
+            {
+                return this._source;
+            }
+            set
+            {
+                this._source = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Custom.DateModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -6410,8 +19096,7 @@ namespace SampleSystem.Generated.DTO
     public partial class DateModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.DateModelEventRichDTO DateModel;
+        private SampleSystem.Generated.DTO.DateModelEventRichDTO dateModel;
         
         public DateModelSaveEventDTO()
         {
@@ -6419,7 +19104,20 @@ namespace SampleSystem.Generated.DTO
         
         public DateModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Custom.DateModel domainObject)
         {
-            this.DateModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.dateModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.DateModelEventRichDTO DateModel
+        {
+            get
+            {
+                return this.dateModel;
+            }
+            set
+            {
+                this.dateModel = value;
+            }
         }
     }
     
@@ -6428,8 +19126,7 @@ namespace SampleSystem.Generated.DTO
     public partial class DateModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.DateModelEventRichDTO DateModel;
+        private SampleSystem.Generated.DTO.DateModelEventRichDTO dateModel;
         
         public DateModelRemoveEventDTO()
         {
@@ -6437,7 +19134,20 @@ namespace SampleSystem.Generated.DTO
         
         public DateModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Custom.DateModel domainObject)
         {
-            this.DateModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.dateModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.DateModelEventRichDTO DateModel
+        {
+            get
+            {
+                return this.dateModel;
+            }
+            set
+            {
+                this.dateModel = value;
+            }
         }
     }
     
@@ -6446,14 +19156,11 @@ namespace SampleSystem.Generated.DTO
     public partial class DateModelEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int? Day;
+        private int? _day;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int? Month;
+        private int? _month;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Year;
+        private int _year;
         
         public DateModelEventRichDTO()
         {
@@ -6463,6 +19170,45 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapDateModel(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int? Day
+        {
+            get
+            {
+                return this._day;
+            }
+            set
+            {
+                this._day = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int? Month
+        {
+            get
+            {
+                return this._month;
+            }
+            set
+            {
+                this._month = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Year
+        {
+            get
+            {
+                return this._year;
+            }
+            set
+            {
+                this._year = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -6470,8 +19216,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitProgramClassFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO BusinessUnitProgramClassFilterModel;
+        private SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO businessUnitProgramClassFilterModel;
         
         public BusinessUnitProgramClassFilterModelSaveEventDTO()
         {
@@ -6479,7 +19224,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitProgramClassFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel domainObject)
         {
-            this.BusinessUnitProgramClassFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitProgramClassFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO BusinessUnitProgramClassFilterModel
+        {
+            get
+            {
+                return this.businessUnitProgramClassFilterModel;
+            }
+            set
+            {
+                this.businessUnitProgramClassFilterModel = value;
+            }
         }
     }
     
@@ -6488,8 +19246,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitProgramClassFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO BusinessUnitProgramClassFilterModel;
+        private SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO businessUnitProgramClassFilterModel;
         
         public BusinessUnitProgramClassFilterModelRemoveEventDTO()
         {
@@ -6497,7 +19254,20 @@ namespace SampleSystem.Generated.DTO
         
         public BusinessUnitProgramClassFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel domainObject)
         {
-            this.BusinessUnitProgramClassFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.businessUnitProgramClassFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO BusinessUnitProgramClassFilterModel
+        {
+            get
+            {
+                return this.businessUnitProgramClassFilterModel;
+            }
+            set
+            {
+                this.businessUnitProgramClassFilterModel = value;
+            }
         }
     }
     
@@ -6506,11 +19276,9 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitProgramClassFilterModelEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid? AncestorIdent;
+        private System.Guid? _ancestorIdent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FilterVirtualName;
+        private string _filterVirtualName;
         
         public BusinessUnitProgramClassFilterModelEventRichDTO()
         {
@@ -6520,6 +19288,32 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapBusinessUnitProgramClassFilterModel(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid? AncestorIdent
+        {
+            get
+            {
+                return this._ancestorIdent;
+            }
+            set
+            {
+                this._ancestorIdent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FilterVirtualName
+        {
+            get
+            {
+                return this._filterVirtualName;
+            }
+            set
+            {
+                this._filterVirtualName = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.EmployeeFilterModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -6527,8 +19321,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeFilterModelEventRichDTO EmployeeFilterModel;
+        private SampleSystem.Generated.DTO.EmployeeFilterModelEventRichDTO employeeFilterModel;
         
         public EmployeeFilterModelSaveEventDTO()
         {
@@ -6536,7 +19329,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.EmployeeFilterModel domainObject)
         {
-            this.EmployeeFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeFilterModelEventRichDTO EmployeeFilterModel
+        {
+            get
+            {
+                return this.employeeFilterModel;
+            }
+            set
+            {
+                this.employeeFilterModel = value;
+            }
         }
     }
     
@@ -6545,8 +19351,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeFilterModelEventRichDTO EmployeeFilterModel;
+        private SampleSystem.Generated.DTO.EmployeeFilterModelEventRichDTO employeeFilterModel;
         
         public EmployeeFilterModelRemoveEventDTO()
         {
@@ -6554,7 +19359,20 @@ namespace SampleSystem.Generated.DTO
         
         public EmployeeFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.EmployeeFilterModel domainObject)
         {
-            this.EmployeeFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.employeeFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeFilterModelEventRichDTO EmployeeFilterModel
+        {
+            get
+            {
+                return this.employeeFilterModel;
+            }
+            set
+            {
+                this.employeeFilterModel = value;
+            }
         }
     }
     
@@ -6578,8 +19396,7 @@ namespace SampleSystem.Generated.DTO
     public partial class GuidBasedFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO GuidBasedFilterModel;
+        private SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO guidBasedFilterModel;
         
         public GuidBasedFilterModelSaveEventDTO()
         {
@@ -6587,7 +19404,20 @@ namespace SampleSystem.Generated.DTO
         
         public GuidBasedFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.GuidBasedFilterModel domainObject)
         {
-            this.GuidBasedFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.guidBasedFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO GuidBasedFilterModel
+        {
+            get
+            {
+                return this.guidBasedFilterModel;
+            }
+            set
+            {
+                this.guidBasedFilterModel = value;
+            }
         }
     }
     
@@ -6596,8 +19426,7 @@ namespace SampleSystem.Generated.DTO
     public partial class GuidBasedFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO GuidBasedFilterModel;
+        private SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO guidBasedFilterModel;
         
         public GuidBasedFilterModelRemoveEventDTO()
         {
@@ -6605,7 +19434,20 @@ namespace SampleSystem.Generated.DTO
         
         public GuidBasedFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.GuidBasedFilterModel domainObject)
         {
-            this.GuidBasedFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.guidBasedFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO GuidBasedFilterModel
+        {
+            get
+            {
+                return this.guidBasedFilterModel;
+            }
+            set
+            {
+                this.guidBasedFilterModel = value;
+            }
         }
     }
     
@@ -6614,17 +19456,13 @@ namespace SampleSystem.Generated.DTO
     public partial class GuidBasedFilterModelEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<System.Guid> BusinessUnits;
+        private System.Collections.Generic.List<System.Guid> _businessUnits;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid? EmployeeIdent;
+        private System.Guid? _employeeIdent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<System.Guid> EmployeeLocations;
+        private System.Collections.Generic.List<System.Guid> _employeeLocations;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string SearchFilter;
+        private string _searchFilter;
         
         public GuidBasedFilterModelEventRichDTO()
         {
@@ -6634,6 +19472,58 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapGuidBasedFilterModel(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<System.Guid> BusinessUnits
+        {
+            get
+            {
+                return this._businessUnits;
+            }
+            set
+            {
+                this._businessUnits = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid? EmployeeIdent
+        {
+            get
+            {
+                return this._employeeIdent;
+            }
+            set
+            {
+                this._employeeIdent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<System.Guid> EmployeeLocations
+        {
+            get
+            {
+                return this._employeeLocations;
+            }
+            set
+            {
+                this._employeeLocations = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SearchFilter
+        {
+            get
+            {
+                return this._searchFilter;
+            }
+            set
+            {
+                this._searchFilter = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -6641,8 +19531,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HierarchicalBusinessUnitFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelEventRichDTO HierarchicalBusinessUnitFilterModel;
+        private SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelEventRichDTO hierarchicalBusinessUnitFilterModel;
         
         public HierarchicalBusinessUnitFilterModelSaveEventDTO()
         {
@@ -6650,7 +19539,20 @@ namespace SampleSystem.Generated.DTO
         
         public HierarchicalBusinessUnitFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel domainObject)
         {
-            this.HierarchicalBusinessUnitFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.hierarchicalBusinessUnitFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelEventRichDTO HierarchicalBusinessUnitFilterModel
+        {
+            get
+            {
+                return this.hierarchicalBusinessUnitFilterModel;
+            }
+            set
+            {
+                this.hierarchicalBusinessUnitFilterModel = value;
+            }
         }
     }
     
@@ -6659,8 +19561,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HierarchicalBusinessUnitFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelEventRichDTO HierarchicalBusinessUnitFilterModel;
+        private SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelEventRichDTO hierarchicalBusinessUnitFilterModel;
         
         public HierarchicalBusinessUnitFilterModelRemoveEventDTO()
         {
@@ -6668,7 +19569,20 @@ namespace SampleSystem.Generated.DTO
         
         public HierarchicalBusinessUnitFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel domainObject)
         {
-            this.HierarchicalBusinessUnitFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.hierarchicalBusinessUnitFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelEventRichDTO HierarchicalBusinessUnitFilterModel
+        {
+            get
+            {
+                return this.hierarchicalBusinessUnitFilterModel;
+            }
+            set
+            {
+                this.hierarchicalBusinessUnitFilterModel = value;
+            }
         }
     }
     
@@ -6692,8 +19606,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SingleEmployeeFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO SingleEmployeeFilterModel;
+        private SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO singleEmployeeFilterModel;
         
         public SingleEmployeeFilterModelSaveEventDTO()
         {
@@ -6701,7 +19614,20 @@ namespace SampleSystem.Generated.DTO
         
         public SingleEmployeeFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel domainObject)
         {
-            this.SingleEmployeeFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.singleEmployeeFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO SingleEmployeeFilterModel
+        {
+            get
+            {
+                return this.singleEmployeeFilterModel;
+            }
+            set
+            {
+                this.singleEmployeeFilterModel = value;
+            }
         }
     }
     
@@ -6710,8 +19636,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SingleEmployeeFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO SingleEmployeeFilterModel;
+        private SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO singleEmployeeFilterModel;
         
         public SingleEmployeeFilterModelRemoveEventDTO()
         {
@@ -6719,7 +19644,20 @@ namespace SampleSystem.Generated.DTO
         
         public SingleEmployeeFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel domainObject)
         {
-            this.SingleEmployeeFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.singleEmployeeFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO SingleEmployeeFilterModel
+        {
+            get
+            {
+                return this.singleEmployeeFilterModel;
+            }
+            set
+            {
+                this.singleEmployeeFilterModel = value;
+            }
         }
     }
     
@@ -6738,88 +19676,12 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NamedLock), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class NamedLockSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.NamedLockEventRichDTO NamedLock;
-        
-        public NamedLockSaveEventDTO()
-        {
-        }
-        
-        public NamedLockSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NamedLock domainObject)
-        {
-            this.NamedLock = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NamedLock), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class NamedLockRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.NamedLockEventRichDTO NamedLock;
-        
-        public NamedLockRemoveEventDTO()
-        {
-        }
-        
-        public NamedLockRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NamedLock domainObject)
-        {
-            this.NamedLock = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NamedLock), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class NamedLockEventRichDTO
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.NamedLockOperation LockOperation;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
-        
-        public NamedLockEventRichDTO()
-        {
-        }
-        
-        public NamedLockEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NamedLock domainObject)
-        {
-            mappingService.MapNamedLock(domainObject, this);
-        }
-    }
-    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NoSecurityObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class NoSecurityObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO NoSecurityObject;
+        private SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO noSecurityObject;
         
         public NoSecurityObjectSaveEventDTO()
         {
@@ -6827,7 +19689,20 @@ namespace SampleSystem.Generated.DTO
         
         public NoSecurityObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NoSecurityObject domainObject)
         {
-            this.NoSecurityObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.noSecurityObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO NoSecurityObject
+        {
+            get
+            {
+                return this.noSecurityObject;
+            }
+            set
+            {
+                this.noSecurityObject = value;
+            }
         }
     }
     
@@ -6836,8 +19711,7 @@ namespace SampleSystem.Generated.DTO
     public partial class NoSecurityObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO NoSecurityObject;
+        private SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO noSecurityObject;
         
         public NoSecurityObjectRemoveEventDTO()
         {
@@ -6845,7 +19719,20 @@ namespace SampleSystem.Generated.DTO
         
         public NoSecurityObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NoSecurityObject domainObject)
         {
-            this.NoSecurityObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.noSecurityObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO NoSecurityObject
+        {
+            get
+            {
+                return this.noSecurityObject;
+            }
+            set
+            {
+                this.noSecurityObject = value;
+            }
         }
     }
     
@@ -6854,8 +19741,19 @@ namespace SampleSystem.Generated.DTO
     public partial class NoSecurityObjectEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private long _version;
         
         public NoSecurityObjectEventRichDTO()
         {
@@ -6865,6 +19763,97 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapNoSecurityObject(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -6872,8 +19861,7 @@ namespace SampleSystem.Generated.DTO
     public partial class PrincipalSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.PrincipalEventRichDTO Principal;
+        private SampleSystem.Generated.DTO.PrincipalEventRichDTO principal;
         
         public PrincipalSaveEventDTO()
         {
@@ -6881,7 +19869,20 @@ namespace SampleSystem.Generated.DTO
         
         public PrincipalSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject)
         {
-            this.Principal = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.principal = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.PrincipalEventRichDTO Principal
+        {
+            get
+            {
+                return this.principal;
+            }
+            set
+            {
+                this.principal = value;
+            }
         }
     }
     
@@ -6890,8 +19891,7 @@ namespace SampleSystem.Generated.DTO
     public partial class PrincipalRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.PrincipalEventRichDTO Principal;
+        private SampleSystem.Generated.DTO.PrincipalEventRichDTO principal;
         
         public PrincipalRemoveEventDTO()
         {
@@ -6899,7 +19899,20 @@ namespace SampleSystem.Generated.DTO
         
         public PrincipalRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject)
         {
-            this.Principal = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.principal = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.PrincipalEventRichDTO Principal
+        {
+            get
+            {
+                return this.principal;
+            }
+            set
+            {
+                this.principal = value;
+            }
         }
     }
     
@@ -6908,29 +19921,21 @@ namespace SampleSystem.Generated.DTO
     public partial class PrincipalEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ExternalId;
+        private string _externalId;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public PrincipalEventRichDTO()
         {
@@ -6940,6 +19945,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapPrincipal(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Project), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -6947,8 +20056,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ProjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ProjectEventRichDTO Project;
+        private SampleSystem.Generated.DTO.ProjectEventRichDTO project;
         
         public ProjectSaveEventDTO()
         {
@@ -6956,7 +20064,20 @@ namespace SampleSystem.Generated.DTO
         
         public ProjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Project domainObject)
         {
-            this.Project = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.project = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ProjectEventRichDTO Project
+        {
+            get
+            {
+                return this.project;
+            }
+            set
+            {
+                this.project = value;
+            }
         }
     }
     
@@ -6965,8 +20086,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ProjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ProjectEventRichDTO Project;
+        private SampleSystem.Generated.DTO.ProjectEventRichDTO project;
         
         public ProjectRemoveEventDTO()
         {
@@ -6974,7 +20094,20 @@ namespace SampleSystem.Generated.DTO
         
         public ProjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Project domainObject)
         {
-            this.Project = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.project = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ProjectEventRichDTO Project
+        {
+            get
+            {
+                return this.project;
+            }
+            set
+            {
+                this.project = value;
+            }
         }
     }
     
@@ -6983,44 +20116,31 @@ namespace SampleSystem.Generated.DTO
     public partial class ProjectEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code;
+        private string _code;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? EndDate;
+        private System.DateTime? _endDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? PlannedEndDate;
+        private System.DateTime? _plannedEndDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.ProjectStatus ProjectStatus;
+        private SampleSystem.Domain.ProjectStatus _projectStatus;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? StartDate;
+        private System.DateTime? _startDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ProjectEventRichDTO()
         {
@@ -7030,6 +20150,175 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapProject(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? EndDate
+        {
+            get
+            {
+                return this._endDate;
+            }
+            set
+            {
+                this._endDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? PlannedEndDate
+        {
+            get
+            {
+                return this._plannedEndDate;
+            }
+            set
+            {
+                this._plannedEndDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.ProjectStatus ProjectStatus
+        {
+            get
+            {
+                return this._projectStatus;
+            }
+            set
+            {
+                this._projectStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? StartDate
+        {
+            get
+            {
+                return this._startDate;
+            }
+            set
+            {
+                this._startDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.RoleRoleDegreeLink), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7037,8 +20326,7 @@ namespace SampleSystem.Generated.DTO
     public partial class RoleRoleDegreeLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO RoleRoleDegreeLink;
+        private SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO roleRoleDegreeLink;
         
         public RoleRoleDegreeLinkSaveEventDTO()
         {
@@ -7046,7 +20334,20 @@ namespace SampleSystem.Generated.DTO
         
         public RoleRoleDegreeLinkSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.RoleRoleDegreeLink domainObject)
         {
-            this.RoleRoleDegreeLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.roleRoleDegreeLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO RoleRoleDegreeLink
+        {
+            get
+            {
+                return this.roleRoleDegreeLink;
+            }
+            set
+            {
+                this.roleRoleDegreeLink = value;
+            }
         }
     }
     
@@ -7055,8 +20356,7 @@ namespace SampleSystem.Generated.DTO
     public partial class RoleRoleDegreeLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO RoleRoleDegreeLink;
+        private SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO roleRoleDegreeLink;
         
         public RoleRoleDegreeLinkRemoveEventDTO()
         {
@@ -7064,7 +20364,20 @@ namespace SampleSystem.Generated.DTO
         
         public RoleRoleDegreeLinkRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.RoleRoleDegreeLink domainObject)
         {
-            this.RoleRoleDegreeLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.roleRoleDegreeLink = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO RoleRoleDegreeLink
+        {
+            get
+            {
+                return this.roleRoleDegreeLink;
+            }
+            set
+            {
+                this.roleRoleDegreeLink = value;
+            }
         }
     }
     
@@ -7073,35 +20386,25 @@ namespace SampleSystem.Generated.DTO
     public partial class RoleRoleDegreeLinkEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO AnotherRole;
+        private SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO _anotherRole;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO Role;
+        private SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO _role;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO RoleDegree;
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO _roleDegree;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public RoleRoleDegreeLinkEventRichDTO()
         {
@@ -7111,6 +20414,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapRoleRoleDegreeLink(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO AnotherRole
+        {
+            get
+            {
+                return this._anotherRole;
+            }
+            set
+            {
+                this._anotherRole = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO Role
+        {
+            get
+            {
+                return this._role;
+            }
+            set
+            {
+                this._role = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO RoleDegree
+        {
+            get
+            {
+                return this._roleDegree;
+            }
+            set
+            {
+                this._roleDegree = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SqlParserTestObj), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7118,8 +20551,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SqlParserTestObjEventRichDTO SqlParserTestObj;
+        private SampleSystem.Generated.DTO.SqlParserTestObjEventRichDTO sqlParserTestObj;
         
         public SqlParserTestObjSaveEventDTO()
         {
@@ -7127,7 +20559,20 @@ namespace SampleSystem.Generated.DTO
         
         public SqlParserTestObjSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.SqlParserTestObj domainObject)
         {
-            this.SqlParserTestObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.sqlParserTestObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.SqlParserTestObjEventRichDTO SqlParserTestObj
+        {
+            get
+            {
+                return this.sqlParserTestObj;
+            }
+            set
+            {
+                this.sqlParserTestObj = value;
+            }
         }
     }
     
@@ -7136,8 +20581,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SqlParserTestObjEventRichDTO SqlParserTestObj;
+        private SampleSystem.Generated.DTO.SqlParserTestObjEventRichDTO sqlParserTestObj;
         
         public SqlParserTestObjRemoveEventDTO()
         {
@@ -7145,7 +20589,20 @@ namespace SampleSystem.Generated.DTO
         
         public SqlParserTestObjRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.SqlParserTestObj domainObject)
         {
-            this.SqlParserTestObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.sqlParserTestObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.SqlParserTestObjEventRichDTO SqlParserTestObj
+        {
+            get
+            {
+                return this.sqlParserTestObj;
+            }
+            set
+            {
+                this.sqlParserTestObj = value;
+            }
         }
     }
     
@@ -7154,32 +20611,23 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NotNullColumn;
+        private string _notNullColumn;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UniqueColumn;
+        private string _uniqueColumn;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public SqlParserTestObjEventRichDTO()
         {
@@ -7189,6 +20637,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapSqlParserTestObj(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NotNullColumn
+        {
+            get
+            {
+                return this._notNullColumn;
+            }
+            set
+            {
+                this._notNullColumn = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UniqueColumn
+        {
+            get
+            {
+                return this._uniqueColumn;
+            }
+            set
+            {
+                this._uniqueColumn = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SqlParserTestObj), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -7196,32 +20761,23 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NotNullColumn;
+        private string _notNullColumn;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UniqueColumn;
+        private string _uniqueColumn;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public SqlParserTestObjEventSimpleDTO()
         {
@@ -7231,6 +20787,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapSqlParserTestObj(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NotNullColumn
+        {
+            get
+            {
+                return this._notNullColumn;
+            }
+            set
+            {
+                this._notNullColumn = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UniqueColumn
+        {
+            get
+            {
+                return this._uniqueColumn;
+            }
+            set
+            {
+                this._uniqueColumn = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SqlParserTestObjContainer), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7238,8 +20911,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjContainerSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SqlParserTestObjContainerEventRichDTO SqlParserTestObjContainer;
+        private SampleSystem.Generated.DTO.SqlParserTestObjContainerEventRichDTO sqlParserTestObjContainer;
         
         public SqlParserTestObjContainerSaveEventDTO()
         {
@@ -7247,7 +20919,20 @@ namespace SampleSystem.Generated.DTO
         
         public SqlParserTestObjContainerSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.SqlParserTestObjContainer domainObject)
         {
-            this.SqlParserTestObjContainer = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.sqlParserTestObjContainer = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.SqlParserTestObjContainerEventRichDTO SqlParserTestObjContainer
+        {
+            get
+            {
+                return this.sqlParserTestObjContainer;
+            }
+            set
+            {
+                this.sqlParserTestObjContainer = value;
+            }
         }
     }
     
@@ -7256,8 +20941,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjContainerRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SqlParserTestObjContainerEventRichDTO SqlParserTestObjContainer;
+        private SampleSystem.Generated.DTO.SqlParserTestObjContainerEventRichDTO sqlParserTestObjContainer;
         
         public SqlParserTestObjContainerRemoveEventDTO()
         {
@@ -7265,7 +20949,20 @@ namespace SampleSystem.Generated.DTO
         
         public SqlParserTestObjContainerRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.SqlParserTestObjContainer domainObject)
         {
-            this.SqlParserTestObjContainer = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.sqlParserTestObjContainer = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.SqlParserTestObjContainerEventRichDTO SqlParserTestObjContainer
+        {
+            get
+            {
+                return this.sqlParserTestObjContainer;
+            }
+            set
+            {
+                this.sqlParserTestObjContainer = value;
+            }
         }
     }
     
@@ -7274,29 +20971,21 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjContainerEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SqlParserTestObjEventSimpleDTO IncludedObject;
+        private SampleSystem.Generated.DTO.SqlParserTestObjEventSimpleDTO _includedObject;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public SqlParserTestObjContainerEventRichDTO()
         {
@@ -7306,6 +20995,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapSqlParserTestObjContainer(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.SqlParserTestObjEventSimpleDTO IncludedObject
+        {
+            get
+            {
+                return this._includedObject;
+            }
+            set
+            {
+                this._includedObject = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestCustomContextSecurityObj), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7313,8 +21106,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCustomContextSecurityObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestCustomContextSecurityObjEventRichDTO TestCustomContextSecurityObj;
+        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjEventRichDTO testCustomContextSecurityObj;
         
         public TestCustomContextSecurityObjSaveEventDTO()
         {
@@ -7322,7 +21114,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestCustomContextSecurityObjSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestCustomContextSecurityObj domainObject)
         {
-            this.TestCustomContextSecurityObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testCustomContextSecurityObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestCustomContextSecurityObjEventRichDTO TestCustomContextSecurityObj
+        {
+            get
+            {
+                return this.testCustomContextSecurityObj;
+            }
+            set
+            {
+                this.testCustomContextSecurityObj = value;
+            }
         }
     }
     
@@ -7331,8 +21136,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCustomContextSecurityObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestCustomContextSecurityObjEventRichDTO TestCustomContextSecurityObj;
+        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjEventRichDTO testCustomContextSecurityObj;
         
         public TestCustomContextSecurityObjRemoveEventDTO()
         {
@@ -7340,7 +21144,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestCustomContextSecurityObjRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestCustomContextSecurityObj domainObject)
         {
-            this.TestCustomContextSecurityObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testCustomContextSecurityObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestCustomContextSecurityObjEventRichDTO TestCustomContextSecurityObj
+        {
+            get
+            {
+                return this.testCustomContextSecurityObj;
+            }
+            set
+            {
+                this.testCustomContextSecurityObj = value;
+            }
         }
     }
     
@@ -7349,29 +21166,21 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCustomContextSecurityObjEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestCustomContextSecurityObjEventRichDTO()
         {
@@ -7381,6 +21190,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestCustomContextSecurityObj(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDefaultFieldsMappingObj), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7388,8 +21301,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestDefaultFieldsMappingObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjEventRichDTO TestDefaultFieldsMappingObj;
+        private SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjEventRichDTO testDefaultFieldsMappingObj;
         
         public TestDefaultFieldsMappingObjSaveEventDTO()
         {
@@ -7397,7 +21309,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestDefaultFieldsMappingObjSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDefaultFieldsMappingObj domainObject)
         {
-            this.TestDefaultFieldsMappingObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testDefaultFieldsMappingObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjEventRichDTO TestDefaultFieldsMappingObj
+        {
+            get
+            {
+                return this.testDefaultFieldsMappingObj;
+            }
+            set
+            {
+                this.testDefaultFieldsMappingObj = value;
+            }
         }
     }
     
@@ -7406,8 +21331,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestDefaultFieldsMappingObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjEventRichDTO TestDefaultFieldsMappingObj;
+        private SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjEventRichDTO testDefaultFieldsMappingObj;
         
         public TestDefaultFieldsMappingObjRemoveEventDTO()
         {
@@ -7415,7 +21339,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestDefaultFieldsMappingObjRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDefaultFieldsMappingObj domainObject)
         {
-            this.TestDefaultFieldsMappingObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testDefaultFieldsMappingObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjEventRichDTO TestDefaultFieldsMappingObj
+        {
+            get
+            {
+                return this.testDefaultFieldsMappingObj;
+            }
+            set
+            {
+                this.testDefaultFieldsMappingObj = value;
+            }
         }
     }
     
@@ -7424,14 +21361,11 @@ namespace SampleSystem.Generated.DTO
     public partial class TestDefaultFieldsMappingObjEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DayOfWeek EnumVal;
+        private System.DayOfWeek _enumVal;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IntVal;
+        private int _intVal;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StrVal;
+        private string _strVal;
         
         public TestDefaultFieldsMappingObjEventRichDTO()
         {
@@ -7441,6 +21375,45 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestDefaultFieldsMappingObj(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DayOfWeek EnumVal
+        {
+            get
+            {
+                return this._enumVal;
+            }
+            set
+            {
+                this._enumVal = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntVal
+        {
+            get
+            {
+                return this._intVal;
+            }
+            set
+            {
+                this._intVal = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StrVal
+        {
+            get
+            {
+                return this._strVal;
+            }
+            set
+            {
+                this._strVal = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestEmployeeFilter), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7448,8 +21421,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestEmployeeFilterSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO TestEmployeeFilter;
+        private SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO testEmployeeFilter;
         
         public TestEmployeeFilterSaveEventDTO()
         {
@@ -7457,7 +21429,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestEmployeeFilterSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestEmployeeFilter domainObject)
         {
-            this.TestEmployeeFilter = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testEmployeeFilter = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO TestEmployeeFilter
+        {
+            get
+            {
+                return this.testEmployeeFilter;
+            }
+            set
+            {
+                this.testEmployeeFilter = value;
+            }
         }
     }
     
@@ -7466,8 +21451,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestEmployeeFilterRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO TestEmployeeFilter;
+        private SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO testEmployeeFilter;
         
         public TestEmployeeFilterRemoveEventDTO()
         {
@@ -7475,7 +21459,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestEmployeeFilterRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestEmployeeFilter domainObject)
         {
-            this.TestEmployeeFilter = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testEmployeeFilter = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO TestEmployeeFilter
+        {
+            get
+            {
+                return this.testEmployeeFilter;
+            }
+            set
+            {
+                this.testEmployeeFilter = value;
+            }
         }
     }
     
@@ -7484,14 +21481,11 @@ namespace SampleSystem.Generated.DTO
     public partial class TestEmployeeFilterEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.SampleStruct SampleStruct;
+        private SampleSystem.Domain.SampleStruct _sampleStruct;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool TestValue;
+        private bool _testValue;
         
         public TestEmployeeFilterEventRichDTO()
         {
@@ -7501,6 +21495,45 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestEmployeeFilter(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.SampleStruct SampleStruct
+        {
+            get
+            {
+                return this._sampleStruct;
+            }
+            set
+            {
+                this._sampleStruct = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool TestValue
+        {
+            get
+            {
+                return this._testValue;
+            }
+            set
+            {
+                this._testValue = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestForceAbstract.ClassA), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7508,8 +21541,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassASaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ClassAEventRichDTO ClassA;
+        private SampleSystem.Generated.DTO.ClassAEventRichDTO classA;
         
         public ClassASaveEventDTO()
         {
@@ -7517,7 +21549,20 @@ namespace SampleSystem.Generated.DTO
         
         public ClassASaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestForceAbstract.ClassA domainObject)
         {
-            this.ClassA = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.classA = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ClassAEventRichDTO ClassA
+        {
+            get
+            {
+                return this.classA;
+            }
+            set
+            {
+                this.classA = value;
+            }
         }
     }
     
@@ -7526,8 +21571,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassARemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ClassAEventRichDTO ClassA;
+        private SampleSystem.Generated.DTO.ClassAEventRichDTO classA;
         
         public ClassARemoveEventDTO()
         {
@@ -7535,7 +21579,20 @@ namespace SampleSystem.Generated.DTO
         
         public ClassARemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestForceAbstract.ClassA domainObject)
         {
-            this.ClassA = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.classA = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ClassAEventRichDTO ClassA
+        {
+            get
+            {
+                return this.classA;
+            }
+            set
+            {
+                this.classA = value;
+            }
         }
     }
     
@@ -7544,14 +21601,11 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassAEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAChildEventRichDTO> Child;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAChildEventRichDTO> _child;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Value;
+        private int _value;
         
         public ClassAEventRichDTO()
         {
@@ -7561,6 +21615,45 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapClassA(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAChildEventRichDTO> Child
+        {
+            get
+            {
+                return this._child;
+            }
+            set
+            {
+                this._child = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Value
+        {
+            get
+            {
+                return this._value;
+            }
+            set
+            {
+                this._value = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestForceAbstract.ClassA), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -7568,11 +21661,9 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassAEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Value;
+        private int _value;
         
         public ClassAEventSimpleDTO()
         {
@@ -7582,6 +21673,32 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapClassA(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Value
+        {
+            get
+            {
+                return this._value;
+            }
+            set
+            {
+                this._value = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestForceAbstract.ClassAChild), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7589,8 +21706,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassAChildSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ClassAChildEventRichDTO ClassAChild;
+        private SampleSystem.Generated.DTO.ClassAChildEventRichDTO classAChild;
         
         public ClassAChildSaveEventDTO()
         {
@@ -7598,7 +21714,20 @@ namespace SampleSystem.Generated.DTO
         
         public ClassAChildSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestForceAbstract.ClassAChild domainObject)
         {
-            this.ClassAChild = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.classAChild = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ClassAChildEventRichDTO ClassAChild
+        {
+            get
+            {
+                return this.classAChild;
+            }
+            set
+            {
+                this.classAChild = value;
+            }
         }
     }
     
@@ -7607,8 +21736,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassAChildRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ClassAChildEventRichDTO ClassAChild;
+        private SampleSystem.Generated.DTO.ClassAChildEventRichDTO classAChild;
         
         public ClassAChildRemoveEventDTO()
         {
@@ -7616,7 +21744,20 @@ namespace SampleSystem.Generated.DTO
         
         public ClassAChildRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestForceAbstract.ClassAChild domainObject)
         {
-            this.ClassAChild = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.classAChild = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ClassAChildEventRichDTO ClassAChild
+        {
+            get
+            {
+                return this.classAChild;
+            }
+            set
+            {
+                this.classAChild = value;
+            }
         }
     }
     
@@ -7625,14 +21766,11 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassAChildEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsFake;
+        private bool _isFake;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ClassAEventSimpleDTO Parent;
+        private SampleSystem.Generated.DTO.ClassAEventSimpleDTO _parent;
         
         public ClassAChildEventRichDTO()
         {
@@ -7642,6 +21780,45 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapClassAChild(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsFake
+        {
+            get
+            {
+                return this._isFake;
+            }
+            set
+            {
+                this._isFake = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ClassAEventSimpleDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestForceAbstract.ConcreteClassA), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7649,8 +21826,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ConcreteClassASaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO ConcreteClassA;
+        private SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO concreteClassA;
         
         public ConcreteClassASaveEventDTO()
         {
@@ -7658,7 +21834,20 @@ namespace SampleSystem.Generated.DTO
         
         public ConcreteClassASaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestForceAbstract.ConcreteClassA domainObject)
         {
-            this.ConcreteClassA = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.concreteClassA = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO ConcreteClassA
+        {
+            get
+            {
+                return this.concreteClassA;
+            }
+            set
+            {
+                this.concreteClassA = value;
+            }
         }
     }
     
@@ -7667,8 +21856,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ConcreteClassARemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO ConcreteClassA;
+        private SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO concreteClassA;
         
         public ConcreteClassARemoveEventDTO()
         {
@@ -7676,7 +21864,20 @@ namespace SampleSystem.Generated.DTO
         
         public ConcreteClassARemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestForceAbstract.ConcreteClassA domainObject)
         {
-            this.ConcreteClassA = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.concreteClassA = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO ConcreteClassA
+        {
+            get
+            {
+                return this.concreteClassA;
+            }
+            set
+            {
+                this.concreteClassA = value;
+            }
         }
     }
     
@@ -7685,17 +21886,13 @@ namespace SampleSystem.Generated.DTO
     public partial class ConcreteClassAEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Age;
+        private int _age;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAChildEventRichDTO> Child;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAChildEventRichDTO> _child;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Value;
+        private int _value;
         
         public ConcreteClassAEventRichDTO()
         {
@@ -7705,6 +21902,58 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapConcreteClassA(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Age
+        {
+            get
+            {
+                return this._age;
+            }
+            set
+            {
+                this._age = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAChildEventRichDTO> Child
+        {
+            get
+            {
+                return this._child;
+            }
+            set
+            {
+                this._child = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Value
+        {
+            get
+            {
+                return this._value;
+            }
+            set
+            {
+                this._value = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestImmutableObj), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7712,8 +21961,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestImmutableObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO TestImmutableObj;
+        private SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO testImmutableObj;
         
         public TestImmutableObjSaveEventDTO()
         {
@@ -7721,7 +21969,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestImmutableObjSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestImmutableObj domainObject)
         {
-            this.TestImmutableObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testImmutableObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO TestImmutableObj
+        {
+            get
+            {
+                return this.testImmutableObj;
+            }
+            set
+            {
+                this.testImmutableObj = value;
+            }
         }
     }
     
@@ -7730,8 +21991,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestImmutableObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO TestImmutableObj;
+        private SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO testImmutableObj;
         
         public TestImmutableObjRemoveEventDTO()
         {
@@ -7739,7 +21999,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestImmutableObjRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestImmutableObj domainObject)
         {
-            this.TestImmutableObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testImmutableObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO TestImmutableObj
+        {
+            get
+            {
+                return this.testImmutableObj;
+            }
+            set
+            {
+                this.testImmutableObj = value;
+            }
         }
     }
     
@@ -7748,32 +22021,23 @@ namespace SampleSystem.Generated.DTO
     public partial class TestImmutableObjEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TestImmutablePrimitiveProperty;
+        private string _testImmutablePrimitiveProperty;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO TestImmutableRefProperty;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _testImmutableRefProperty;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestImmutableObjEventRichDTO()
         {
@@ -7783,6 +22047,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestImmutableObj(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TestImmutablePrimitiveProperty
+        {
+            get
+            {
+                return this._testImmutablePrimitiveProperty;
+            }
+            set
+            {
+                this._testImmutablePrimitiveProperty = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO TestImmutableRefProperty
+        {
+            get
+            {
+                return this._testImmutableRefProperty;
+            }
+            set
+            {
+                this._testImmutableRefProperty = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestItemAuthObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7790,8 +22171,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestItemAuthObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO TestItemAuthObject;
+        private SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO testItemAuthObject;
         
         public TestItemAuthObjectSaveEventDTO()
         {
@@ -7799,7 +22179,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestItemAuthObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestItemAuthObject domainObject)
         {
-            this.TestItemAuthObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testItemAuthObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO TestItemAuthObject
+        {
+            get
+            {
+                return this.testItemAuthObject;
+            }
+            set
+            {
+                this.testItemAuthObject = value;
+            }
         }
     }
     
@@ -7808,8 +22201,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestItemAuthObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO TestItemAuthObject;
+        private SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO testItemAuthObject;
         
         public TestItemAuthObjectRemoveEventDTO()
         {
@@ -7817,7 +22209,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestItemAuthObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestItemAuthObject domainObject)
         {
-            this.TestItemAuthObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testItemAuthObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO TestItemAuthObject
+        {
+            get
+            {
+                return this.testItemAuthObject;
+            }
+            set
+            {
+                this.testItemAuthObject = value;
+            }
         }
     }
     
@@ -7826,35 +22231,25 @@ namespace SampleSystem.Generated.DTO
     public partial class TestItemAuthObjectEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectEventSimpleDTO Master;
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectEventSimpleDTO _master;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestItemAuthObjectEventRichDTO()
         {
@@ -7864,6 +22259,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestItemAuthObject(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit
+        {
+            get
+            {
+                return this._managementUnit;
+            }
+            set
+            {
+                this._managementUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPlainAuthObjectEventSimpleDTO Master
+        {
+            get
+            {
+                return this._master;
+            }
+            set
+            {
+                this._master = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestObj), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7871,8 +22396,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjEventRichDTO TestObj;
+        private SampleSystem.Generated.DTO.TestObjEventRichDTO testObj;
         
         public TestObjSaveEventDTO()
         {
@@ -7880,7 +22404,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestObjSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestObj domainObject)
         {
-            this.TestObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestObjEventRichDTO TestObj
+        {
+            get
+            {
+                return this.testObj;
+            }
+            set
+            {
+                this.testObj = value;
+            }
         }
     }
     
@@ -7889,8 +22426,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjEventRichDTO TestObj;
+        private SampleSystem.Generated.DTO.TestObjEventRichDTO testObj;
         
         public TestObjRemoveEventDTO()
         {
@@ -7898,7 +22434,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestObjRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestObj domainObject)
         {
-            this.TestObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestObjEventRichDTO TestObj
+        {
+            get
+            {
+                return this.testObj;
+            }
+            set
+            {
+                this.testObj = value;
+            }
         }
     }
     
@@ -7907,8 +22456,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.Inline.Fio FS;
+        private SampleSystem.Domain.Inline.Fio _fS;
         
         public TestObjEventRichDTO()
         {
@@ -7918,6 +22466,19 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestObj(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Inline.Fio FS
+        {
+            get
+            {
+                return this._fS;
+            }
+            set
+            {
+                this._fS = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestObjForNested), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -7925,8 +22486,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedEventRichDTO TestObjForNested;
+        private SampleSystem.Generated.DTO.TestObjForNestedEventRichDTO testObjForNested;
         
         public TestObjForNestedSaveEventDTO()
         {
@@ -7934,7 +22494,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestObjForNestedSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestObjForNested domainObject)
         {
-            this.TestObjForNested = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testObjForNested = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestObjForNestedEventRichDTO TestObjForNested
+        {
+            get
+            {
+                return this.testObjForNested;
+            }
+            set
+            {
+                this.testObjForNested = value;
+            }
         }
     }
     
@@ -7943,8 +22516,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedEventRichDTO TestObjForNested;
+        private SampleSystem.Generated.DTO.TestObjForNestedEventRichDTO testObjForNested;
         
         public TestObjForNestedRemoveEventDTO()
         {
@@ -7952,7 +22524,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestObjForNestedRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestObjForNested domainObject)
         {
-            this.TestObjForNested = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testObjForNested = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestObjForNestedEventRichDTO TestObjForNested
+        {
+            get
+            {
+                return this.testObjForNested;
+            }
+            set
+            {
+                this.testObjForNested = value;
+            }
         }
     }
     
@@ -7961,32 +22546,23 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period;
+        private Framework.Core.Period _period;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestObjForNestedEventRichDTO()
         {
@@ -7996,6 +22572,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestObjForNested(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestObjForNested), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -8003,32 +22696,23 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period;
+        private Framework.Core.Period _period;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestObjForNestedEventSimpleDTO()
         {
@@ -8038,6 +22722,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestObjForNested(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestObjForNestedBase), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8045,8 +22846,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedBaseSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO TestObjForNestedBase;
+        private SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO testObjForNestedBase;
         
         public TestObjForNestedBaseSaveEventDTO()
         {
@@ -8054,7 +22854,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestObjForNestedBaseSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestObjForNestedBase domainObject)
         {
-            this.TestObjForNestedBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testObjForNestedBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO TestObjForNestedBase
+        {
+            get
+            {
+                return this.testObjForNestedBase;
+            }
+            set
+            {
+                this.testObjForNestedBase = value;
+            }
         }
     }
     
@@ -8063,8 +22876,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedBaseRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO TestObjForNestedBase;
+        private SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO testObjForNestedBase;
         
         public TestObjForNestedBaseRemoveEventDTO()
         {
@@ -8072,7 +22884,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestObjForNestedBaseRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestObjForNestedBase domainObject)
         {
-            this.TestObjForNestedBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testObjForNestedBase = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO TestObjForNestedBase
+        {
+            get
+            {
+                return this.testObjForNestedBase;
+            }
+            set
+            {
+                this.testObjForNestedBase = value;
+            }
         }
     }
     
@@ -8081,32 +22906,23 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedBaseEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period;
+        private Framework.Core.Period _period;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestObjForNestedBaseEventRichDTO()
         {
@@ -8116,6 +22932,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestObjForNestedBase(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8123,8 +23056,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPerformanceObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO TestPerformanceObject;
+        private SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO testPerformanceObject;
         
         public TestPerformanceObjectSaveEventDTO()
         {
@@ -8132,7 +23064,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestPerformanceObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject)
         {
-            this.TestPerformanceObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testPerformanceObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO TestPerformanceObject
+        {
+            get
+            {
+                return this.testPerformanceObject;
+            }
+            set
+            {
+                this.testPerformanceObject = value;
+            }
         }
     }
     
@@ -8141,8 +23086,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPerformanceObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO TestPerformanceObject;
+        private SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO testPerformanceObject;
         
         public TestPerformanceObjectRemoveEventDTO()
         {
@@ -8150,7 +23094,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestPerformanceObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject)
         {
-            this.TestPerformanceObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testPerformanceObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO TestPerformanceObject
+        {
+            get
+            {
+                return this.testPerformanceObject;
+            }
+            set
+            {
+                this.testPerformanceObject = value;
+            }
         }
     }
     
@@ -8159,41 +23116,29 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPerformanceObjectEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestPerformanceObjectEventRichDTO()
         {
@@ -8203,6 +23148,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestPerformanceObject(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit
+        {
+            get
+            {
+                return this._managementUnit;
+            }
+            set
+            {
+                this._managementUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8210,8 +23311,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPlainAuthObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO TestPlainAuthObject;
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO testPlainAuthObject;
         
         public TestPlainAuthObjectSaveEventDTO()
         {
@@ -8219,7 +23319,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestPlainAuthObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPlainAuthObject domainObject)
         {
-            this.TestPlainAuthObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testPlainAuthObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO TestPlainAuthObject
+        {
+            get
+            {
+                return this.testPlainAuthObject;
+            }
+            set
+            {
+                this.testPlainAuthObject = value;
+            }
         }
     }
     
@@ -8228,8 +23341,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPlainAuthObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO TestPlainAuthObject;
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO testPlainAuthObject;
         
         public TestPlainAuthObjectRemoveEventDTO()
         {
@@ -8237,7 +23349,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestPlainAuthObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPlainAuthObject domainObject)
         {
-            this.TestPlainAuthObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testPlainAuthObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO TestPlainAuthObject
+        {
+            get
+            {
+                return this.testPlainAuthObject;
+            }
+            set
+            {
+                this.testPlainAuthObject = value;
+            }
         }
     }
     
@@ -8246,38 +23371,27 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPlainAuthObjectEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO> Items;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO> _items;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestPlainAuthObjectEventRichDTO()
         {
@@ -8287,6 +23401,149 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestPlainAuthObject(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO> Items
+        {
+            get
+            {
+                return this._items;
+            }
+            set
+            {
+                this._items = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -8294,29 +23551,21 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPlainAuthObjectEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestPlainAuthObjectEventSimpleDTO()
         {
@@ -8326,6 +23575,320 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestPlainAuthObject(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestRestrictionObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO testRestrictionObject;
+        
+        public TestRestrictionObjectSaveEventDTO()
+        {
+        }
+        
+        public TestRestrictionObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRestrictionObject domainObject)
+        {
+            this.testRestrictionObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO TestRestrictionObject
+        {
+            get
+            {
+                return this.testRestrictionObject;
+            }
+            set
+            {
+                this.testRestrictionObject = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestRestrictionObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO testRestrictionObject;
+        
+        public TestRestrictionObjectRemoveEventDTO()
+        {
+        }
+        
+        public TestRestrictionObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRestrictionObject domainObject)
+        {
+            this.testRestrictionObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO TestRestrictionObject
+        {
+            get
+            {
+                return this.testRestrictionObject;
+            }
+            set
+            {
+                this.testRestrictionObject = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestRestrictionObjectEventRichDTO
+    {
+        
+        private bool _active;
+        
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private bool _restrictionHandler;
+        
+        private long _version;
+        
+        public TestRestrictionObjectEventRichDTO()
+        {
+        }
+        
+        public TestRestrictionObjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRestrictionObject domainObject)
+        {
+            mappingService.MapTestRestrictionObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool RestrictionHandler
+        {
+            get
+            {
+                return this._restrictionHandler;
+            }
+            set
+            {
+                this._restrictionHandler = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRootSecurityObj), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8333,8 +23896,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRootSecurityObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO TestRootSecurityObj;
+        private SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO testRootSecurityObj;
         
         public TestRootSecurityObjSaveEventDTO()
         {
@@ -8342,7 +23904,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestRootSecurityObjSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRootSecurityObj domainObject)
         {
-            this.TestRootSecurityObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testRootSecurityObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO TestRootSecurityObj
+        {
+            get
+            {
+                return this.testRootSecurityObj;
+            }
+            set
+            {
+                this.testRootSecurityObj = value;
+            }
         }
     }
     
@@ -8351,8 +23926,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRootSecurityObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO TestRootSecurityObj;
+        private SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO testRootSecurityObj;
         
         public TestRootSecurityObjRemoveEventDTO()
         {
@@ -8360,7 +23934,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestRootSecurityObjRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRootSecurityObj domainObject)
         {
-            this.TestRootSecurityObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testRootSecurityObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO TestRootSecurityObj
+        {
+            get
+            {
+                return this.testRootSecurityObj;
+            }
+            set
+            {
+                this.testRootSecurityObj = value;
+            }
         }
     }
     
@@ -8369,41 +23956,29 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRootSecurityObjEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO> Items;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO> _items;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO ManagementUnitFluentMapping;
+        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO _managementUnitFluentMapping;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestRootSecurityObjEventRichDTO()
         {
@@ -8413,6 +23988,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestRootSecurityObj(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO> Items
+        {
+            get
+            {
+                return this._items;
+            }
+            set
+            {
+                this._items = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO ManagementUnitFluentMapping
+        {
+            get
+            {
+                return this._managementUnitFluentMapping;
+            }
+            set
+            {
+                this._managementUnitFluentMapping = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRootSecurityObj), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -8420,29 +24151,21 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRootSecurityObjEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestRootSecurityObjEventSimpleDTO()
         {
@@ -8452,6 +24175,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestRootSecurityObj(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8459,8 +24286,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO TestSecurityObjItem;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO testSecurityObjItem;
         
         public TestSecurityObjItemSaveEventDTO()
         {
@@ -8468,7 +24294,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestSecurityObjItemSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecurityObjItem domainObject)
         {
-            this.TestSecurityObjItem = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testSecurityObjItem = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO TestSecurityObjItem
+        {
+            get
+            {
+                return this.testSecurityObjItem;
+            }
+            set
+            {
+                this.testSecurityObjItem = value;
+            }
         }
     }
     
@@ -8477,8 +24316,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO TestSecurityObjItem;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO testSecurityObjItem;
         
         public TestSecurityObjItemRemoveEventDTO()
         {
@@ -8486,7 +24324,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestSecurityObjItemRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecurityObjItem domainObject)
         {
-            this.TestSecurityObjItem = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testSecurityObjItem = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO TestSecurityObjItem
+        {
+            get
+            {
+                return this.testSecurityObjItem;
+            }
+            set
+            {
+                this.testSecurityObjItem = value;
+            }
         }
     }
     
@@ -8495,41 +24346,29 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjEventSimpleDTO FirstMaster;
+        private SampleSystem.Generated.DTO.TestRootSecurityObjEventSimpleDTO _firstMaster;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO> Items;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO> _items;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO> Items2;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO> _items2;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO> Items3;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO> _items3;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestSecurityObjItemEventRichDTO()
         {
@@ -8539,6 +24378,162 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestSecurityObjItem(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRootSecurityObjEventSimpleDTO FirstMaster
+        {
+            get
+            {
+                return this._firstMaster;
+            }
+            set
+            {
+                this._firstMaster = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO> Items
+        {
+            get
+            {
+                return this._items;
+            }
+            set
+            {
+                this._items = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO> Items2
+        {
+            get
+            {
+                return this._items2;
+            }
+            set
+            {
+                this._items2 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO> Items3
+        {
+            get
+            {
+                return this._items3;
+            }
+            set
+            {
+                this._items3 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -8546,29 +24541,21 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestSecurityObjItemEventSimpleDTO()
         {
@@ -8578,6 +24565,110 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestSecurityObjItem(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8585,8 +24676,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItemSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO TestSecuritySubObjItem;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO testSecuritySubObjItem;
         
         public TestSecuritySubObjItemSaveEventDTO()
         {
@@ -8594,7 +24684,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestSecuritySubObjItemSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem domainObject)
         {
-            this.TestSecuritySubObjItem = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testSecuritySubObjItem = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO TestSecuritySubObjItem
+        {
+            get
+            {
+                return this.testSecuritySubObjItem;
+            }
+            set
+            {
+                this.testSecuritySubObjItem = value;
+            }
         }
     }
     
@@ -8603,8 +24706,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItemRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO TestSecuritySubObjItem;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO testSecuritySubObjItem;
         
         public TestSecuritySubObjItemRemoveEventDTO()
         {
@@ -8612,7 +24714,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestSecuritySubObjItemRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem domainObject)
         {
-            this.TestSecuritySubObjItem = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testSecuritySubObjItem = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO TestSecuritySubObjItem
+        {
+            get
+            {
+                return this.testSecuritySubObjItem;
+            }
+            set
+            {
+                this.testSecuritySubObjItem = value;
+            }
         }
     }
     
@@ -8621,32 +24736,23 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItemEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO InnerMaster;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO _innerMaster;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestSecuritySubObjItemEventRichDTO()
         {
@@ -8656,6 +24762,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestSecuritySubObjItem(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO InnerMaster
+        {
+            get
+            {
+                return this._innerMaster;
+            }
+            set
+            {
+                this._innerMaster = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem2), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8663,8 +24886,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem2SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO TestSecuritySubObjItem2;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO testSecuritySubObjItem2;
         
         public TestSecuritySubObjItem2SaveEventDTO()
         {
@@ -8672,7 +24894,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestSecuritySubObjItem2SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem2 domainObject)
         {
-            this.TestSecuritySubObjItem2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testSecuritySubObjItem2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO TestSecuritySubObjItem2
+        {
+            get
+            {
+                return this.testSecuritySubObjItem2;
+            }
+            set
+            {
+                this.testSecuritySubObjItem2 = value;
+            }
         }
     }
     
@@ -8681,8 +24916,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem2RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO TestSecuritySubObjItem2;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO testSecuritySubObjItem2;
         
         public TestSecuritySubObjItem2RemoveEventDTO()
         {
@@ -8690,7 +24924,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestSecuritySubObjItem2RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem2 domainObject)
         {
-            this.TestSecuritySubObjItem2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testSecuritySubObjItem2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO TestSecuritySubObjItem2
+        {
+            get
+            {
+                return this.testSecuritySubObjItem2;
+            }
+            set
+            {
+                this.testSecuritySubObjItem2 = value;
+            }
         }
     }
     
@@ -8699,35 +24946,25 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem2EventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO InnerMaster;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO _innerMaster;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjEventSimpleDTO RootSecurityObj;
+        private SampleSystem.Generated.DTO.TestRootSecurityObjEventSimpleDTO _rootSecurityObj;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestSecuritySubObjItem2EventRichDTO()
         {
@@ -8737,6 +24974,136 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestSecuritySubObjItem2(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO InnerMaster
+        {
+            get
+            {
+                return this._innerMaster;
+            }
+            set
+            {
+                this._innerMaster = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRootSecurityObjEventSimpleDTO RootSecurityObj
+        {
+            get
+            {
+                return this._rootSecurityObj;
+            }
+            set
+            {
+                this._rootSecurityObj = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem3), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8744,8 +25111,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem3SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO TestSecuritySubObjItem3;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO testSecuritySubObjItem3;
         
         public TestSecuritySubObjItem3SaveEventDTO()
         {
@@ -8753,7 +25119,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestSecuritySubObjItem3SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem3 domainObject)
         {
-            this.TestSecuritySubObjItem3 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testSecuritySubObjItem3 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO TestSecuritySubObjItem3
+        {
+            get
+            {
+                return this.testSecuritySubObjItem3;
+            }
+            set
+            {
+                this.testSecuritySubObjItem3 = value;
+            }
         }
     }
     
@@ -8762,8 +25141,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem3RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO TestSecuritySubObjItem3;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO testSecuritySubObjItem3;
         
         public TestSecuritySubObjItem3RemoveEventDTO()
         {
@@ -8771,7 +25149,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestSecuritySubObjItem3RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem3 domainObject)
         {
-            this.TestSecuritySubObjItem3 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testSecuritySubObjItem3 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO TestSecuritySubObjItem3
+        {
+            get
+            {
+                return this.testSecuritySubObjItem3;
+            }
+            set
+            {
+                this.testSecuritySubObjItem3 = value;
+            }
         }
     }
     
@@ -8780,32 +25171,23 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem3EventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO InnerMaster;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO _innerMaster;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name;
+        private string _name;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public TestSecuritySubObjItem3EventRichDTO()
         {
@@ -8815,6 +25197,123 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestSecuritySubObjItem3(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO InnerMaster
+        {
+            get
+            {
+                return this._innerMaster;
+            }
+            set
+            {
+                this._innerMaster = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestUnpersistentObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8822,8 +25321,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestUnpersistentObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO TestUnpersistentObject;
+        private SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO testUnpersistentObject;
         
         public TestUnpersistentObjectSaveEventDTO()
         {
@@ -8831,7 +25329,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestUnpersistentObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestUnpersistentObject domainObject)
         {
-            this.TestUnpersistentObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testUnpersistentObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO TestUnpersistentObject
+        {
+            get
+            {
+                return this.testUnpersistentObject;
+            }
+            set
+            {
+                this.testUnpersistentObject = value;
+            }
         }
     }
     
@@ -8840,8 +25351,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestUnpersistentObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO TestUnpersistentObject;
+        private SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO testUnpersistentObject;
         
         public TestUnpersistentObjectRemoveEventDTO()
         {
@@ -8849,7 +25359,20 @@ namespace SampleSystem.Generated.DTO
         
         public TestUnpersistentObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestUnpersistentObject domainObject)
         {
-            this.TestUnpersistentObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.testUnpersistentObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO TestUnpersistentObject
+        {
+            get
+            {
+                return this.testUnpersistentObject;
+            }
+            set
+            {
+                this.testUnpersistentObject = value;
+            }
         }
     }
     
@@ -8858,14 +25381,11 @@ namespace SampleSystem.Generated.DTO
     public partial class TestUnpersistentObjectEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Value1;
+        private string _value1;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Value2;
+        private int _value2;
         
         public TestUnpersistentObjectEventRichDTO()
         {
@@ -8875,6 +25395,45 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapTestUnpersistentObject(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Value1
+        {
+            get
+            {
+                return this._value1;
+            }
+            set
+            {
+                this._value1 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Value2
+        {
+            get
+            {
+                return this._value2;
+            }
+            set
+            {
+                this._value2 = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.UniqueByMaster.ParentEntity), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8882,8 +25441,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ParentEntitySaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ParentEntityEventRichDTO ParentEntity;
+        private SampleSystem.Generated.DTO.ParentEntityEventRichDTO parentEntity;
         
         public ParentEntitySaveEventDTO()
         {
@@ -8891,7 +25449,20 @@ namespace SampleSystem.Generated.DTO
         
         public ParentEntitySaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.UniqueByMaster.ParentEntity domainObject)
         {
-            this.ParentEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.parentEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ParentEntityEventRichDTO ParentEntity
+        {
+            get
+            {
+                return this.parentEntity;
+            }
+            set
+            {
+                this.parentEntity = value;
+            }
         }
     }
     
@@ -8900,8 +25471,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ParentEntityRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ParentEntityEventRichDTO ParentEntity;
+        private SampleSystem.Generated.DTO.ParentEntityEventRichDTO parentEntity;
         
         public ParentEntityRemoveEventDTO()
         {
@@ -8909,7 +25479,20 @@ namespace SampleSystem.Generated.DTO
         
         public ParentEntityRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.UniqueByMaster.ParentEntity domainObject)
         {
-            this.ParentEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.parentEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ParentEntityEventRichDTO ParentEntity
+        {
+            get
+            {
+                return this.parentEntity;
+            }
+            set
+            {
+                this.parentEntity = value;
+            }
         }
     }
     
@@ -8918,26 +25501,19 @@ namespace SampleSystem.Generated.DTO
     public partial class ParentEntityEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ParentEntityEventRichDTO()
         {
@@ -8947,6 +25523,97 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapParentEntity(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.UniqueByMaster.ParentEntity), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
@@ -8954,26 +25621,19 @@ namespace SampleSystem.Generated.DTO
     public partial class ParentEntityEventSimpleDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ParentEntityEventSimpleDTO()
         {
@@ -8983,6 +25643,97 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapParentEntity(domainObject, this);
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.UniqueByParent.ChildEntity), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -8990,8 +25741,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ChildEntitySaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ChildEntityEventRichDTO ChildEntity;
+        private SampleSystem.Generated.DTO.ChildEntityEventRichDTO childEntity;
         
         public ChildEntitySaveEventDTO()
         {
@@ -8999,7 +25749,20 @@ namespace SampleSystem.Generated.DTO
         
         public ChildEntitySaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.UniqueByParent.ChildEntity domainObject)
         {
-            this.ChildEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.childEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ChildEntityEventRichDTO ChildEntity
+        {
+            get
+            {
+                return this.childEntity;
+            }
+            set
+            {
+                this.childEntity = value;
+            }
         }
     }
     
@@ -9008,8 +25771,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ChildEntityRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ChildEntityEventRichDTO ChildEntity;
+        private SampleSystem.Generated.DTO.ChildEntityEventRichDTO childEntity;
         
         public ChildEntityRemoveEventDTO()
         {
@@ -9017,7 +25779,20 @@ namespace SampleSystem.Generated.DTO
         
         public ChildEntityRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.UniqueByParent.ChildEntity domainObject)
         {
-            this.ChildEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+            this.childEntity = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ChildEntityEventRichDTO ChildEntity
+        {
+            get
+            {
+                return this.childEntity;
+            }
+            set
+            {
+                this.childEntity = value;
+            }
         }
     }
     
@@ -9026,29 +25801,21 @@ namespace SampleSystem.Generated.DTO
     public partial class ChildEntityEventRichDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
+        private bool _active;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
+        private System.DateTime? _createDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
+        private string _createdBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
+        private System.Guid _id;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
+        private string _modifiedBy;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
+        private System.DateTime? _modifyDate;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO Parent;
+        private SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO _parent;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
+        private long _version;
         
         public ChildEntityEventRichDTO()
         {
@@ -9058,158 +25825,109 @@ namespace SampleSystem.Generated.DTO
         {
             mappingService.MapChildEntity(domainObject, this);
         }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreExecutionError), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class WorkflowCoreExecutionErrorSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO WorkflowCoreExecutionError;
-        
-        public WorkflowCoreExecutionErrorSaveEventDTO()
+        public bool Active
         {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
         }
         
-        public WorkflowCoreExecutionErrorSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreExecutionError domainObject)
-        {
-            this.WorkflowCoreExecutionError = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreExecutionError), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class WorkflowCoreExecutionErrorRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO WorkflowCoreExecutionError;
-        
-        public WorkflowCoreExecutionErrorRemoveEventDTO()
+        public System.DateTime? CreateDate
         {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
         }
         
-        public WorkflowCoreExecutionErrorRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreExecutionError domainObject)
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
         {
-            this.WorkflowCoreExecutionError = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreExecutionError), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class WorkflowCoreExecutionErrorEventRichDTO
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime ErrorTime;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO WorkflowInstance;
-        
-        public WorkflowCoreExecutionErrorEventRichDTO()
-        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
         }
         
-        public WorkflowCoreExecutionErrorEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreExecutionError domainObject)
-        {
-            mappingService.MapWorkflowCoreExecutionError(domainObject, this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreInstance), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class WorkflowCoreInstanceSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO WorkflowCoreInstance;
-        
-        public WorkflowCoreInstanceSaveEventDTO()
+        public System.Guid Id
         {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
         }
         
-        public WorkflowCoreInstanceSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreInstance domainObject)
-        {
-            this.WorkflowCoreInstance = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreInstance), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class WorkflowCoreInstanceRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO WorkflowCoreInstance;
-        
-        public WorkflowCoreInstanceRemoveEventDTO()
+        public string ModifiedBy
         {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
         }
         
-        public WorkflowCoreInstanceRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreInstance domainObject)
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
         {
-            this.WorkflowCoreInstance = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreInstance), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class WorkflowCoreInstanceEventRichDTO
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Data;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public WorkflowCore.Models.WorkflowStatus Status;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string WorkflowDefinitionId;
-        
-        public WorkflowCoreInstanceEventRichDTO()
-        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
         }
         
-        public WorkflowCoreInstanceEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreInstance domainObject)
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO Parent
         {
-            mappingService.MapWorkflowCoreInstance(domainObject, this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreInstance), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class WorkflowCoreInstanceEventSimpleDTO
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Data;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public WorkflowCore.Models.WorkflowStatus Status;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string WorkflowDefinitionId;
-        
-        public WorkflowCoreInstanceEventSimpleDTO()
-        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
         }
         
-        public WorkflowCoreInstanceEventSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreInstance domainObject)
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
         {
-            mappingService.MapWorkflowCoreInstance(domainObject, this);
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
         }
     }
 }

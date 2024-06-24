@@ -77,7 +77,7 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
     public virtual string SenderEmail { get; protected set; }
 
     /// <inheritdoc />
-    public virtual IEnumerable<Guid> SubBusinessRoleIds { get; protected set; }
+    public virtual IEnumerable<SecurityRole> SubBusinessRoles { get; protected set; } = new List<SecurityRole>();
 
     /// <inheritdoc />
     public virtual RecepientsSelectorMode RecepientsSelectorMode { get; protected set; } = RecepientsSelectorMode.Union;

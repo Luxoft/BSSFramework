@@ -14,7 +14,8 @@ public class SampleSystemExtGeneratePolicy : IGeneratePolicy<RoleFileType>
             return true;
         }
 
-        if ((fileType == FileType.StrictDTO || fileType == FileType.SimpleDTO) && domainType == typeof(TestDefaultFieldsMappingObj))
+        if ((fileType == FileType.StrictDTO || fileType == FileType.SimpleDTO)
+            && new[] { typeof(TestDefaultFieldsMappingObj), typeof(NoSecurityObject) }.Contains(domainType))
         {
             return true;
         }

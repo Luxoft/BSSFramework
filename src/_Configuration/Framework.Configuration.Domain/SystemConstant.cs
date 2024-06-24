@@ -1,19 +1,14 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.Domain;
 
 /// <summary>
 /// Константа системы
 /// </summary>
-[BLLViewRole, BLLSaveRole(AllowCreate = false)]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.SystemConstantView)]
-[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.SystemConstantEdit)]
 [UniqueGroup]
 [NotAuditedClass]
 [DomainType("{42C47133-A8C5-4E8E-9D46-385038BFE2B9}")]
@@ -44,7 +39,7 @@ public class SystemConstant :
     /// </summary>
     /// <param name="code">Код</param>
     /// <param name="type">Тип</param>
-    public SystemConstant([NotNull] string code, [NotNull] DomainType type)
+    public SystemConstant(string code, DomainType type)
     {
         if (code == null) throw new ArgumentNullException(nameof(code));
         if (type == null) throw new ArgumentNullException(nameof(type));
@@ -57,10 +52,11 @@ public class SystemConstant :
     /// Тип константы
     /// </summary>
     [Required]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual DomainType Type
     {
         get { return this.type; }
-        internal protected set { this.type = value; }
+        set { this.type = value; }
     }
 
     /// <summary>
@@ -69,10 +65,11 @@ public class SystemConstant :
     [UniqueElement]
     [VisualIdentity]
     [Required]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual string Code
     {
         get { return this.code.TrimNull(); }
-        internal protected set { this.code = value.TrimNull(); }
+        set { this.code = value.TrimNull(); }
     }
 
     /// <summary>
@@ -98,10 +95,11 @@ public class SystemConstant :
     /// <summary>
     /// Признак изменения константы вручную
     /// </summary>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual bool IsManual
     {
         get { return this.isManual; }
-        internal protected set { this.isManual = value; }
+        set { this.isManual = value; }
     }
 
     public override string ToString()

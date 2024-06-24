@@ -1,9 +1,11 @@
-﻿namespace Framework.Validation;
+﻿using Framework.Core;
+
+namespace Framework.Validation;
 
 /// <summary>
 /// Контекст валидации
 /// </summary>
-public interface IValidationContext : IValidationContextBase, IExtendedValidationDataContainer
+public interface IValidationContext : IValidationContextBase, IServiceProviderContainer
 {
 }
 

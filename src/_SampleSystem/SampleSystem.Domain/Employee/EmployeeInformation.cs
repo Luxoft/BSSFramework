@@ -5,7 +5,6 @@ using Framework.Restriction;
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
 public class EmployeeInformation : Information
 {
     private string personalEmail;

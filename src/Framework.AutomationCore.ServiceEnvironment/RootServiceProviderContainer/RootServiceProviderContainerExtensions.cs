@@ -1,13 +1,12 @@
 ﻿using System.Linq.Expressions;
 
 using Automation.ServiceEnvironment.Services;
-using Automation.Utils;
+using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
-
-using Framework.DomainDriven;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Automation.ServiceEnvironment;
 
@@ -18,19 +17,19 @@ public static class RootServiceProviderContainerExtensions
         return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IDatabaseContext>();
     }
 
-    public static ConfigUtil GetConfigUtil(this IRootServiceProviderContainer rootServiceProviderContainer)
+    public static AutomationFrameworkSettings GetAutomationFrameworkSettings(this IRootServiceProviderContainer rootServiceProviderContainer)
     {
-        return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<ConfigUtil>();
+        return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IOptions<AutomationFrameworkSettings>>().Value;
     }
 
-    public static IDateTimeService GetDateTimeService(this IRootServiceProviderContainer rootServiceProviderContainer)
+    public static TimeProvider GetTimeProvider(this IRootServiceProviderContainer rootServiceProviderContainer)
     {
-        return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IDateTimeService>();
+        return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<TimeProvider>();
     }
 
     public static void SetCurrentDateTime(this IRootServiceProviderContainer rootServiceProviderContainer, DateTime newDateTime)
     {
-        rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IntegrationTestDateTimeService>().SetCurrentDateTime(newDateTime);
+        rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IntegrationTestTimeProvider>().SetCurrentDateTime(newDateTime);
     }
 
     public static TResult EvaluateController<TController, TResult>(

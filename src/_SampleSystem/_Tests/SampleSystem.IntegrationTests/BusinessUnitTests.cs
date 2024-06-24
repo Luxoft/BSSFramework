@@ -1,21 +1,19 @@
-﻿using System.Linq.Expressions;
-
-using Automation.ServiceEnvironment;
+﻿using Automation.ServiceEnvironment;
 using Automation.Utils;
 
 using FluentAssertions;
 
-using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
+using Framework.Persistent;
+using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
@@ -25,8 +23,6 @@ namespace SampleSystem.IntegrationTests;
 public class BusinessUnitTests : TestBase
 {
     private const string EmployeeName = "TestSecondaryAccessEmployee";
-
-    private const string EditEmployeeRoleName = "EditEmployeeRole";
 
     private const int ParentsCount = 2200;
 
@@ -54,51 +50,7 @@ public class BusinessUnitTests : TestBase
                                          type: buTypeId,
                                          parent: luxoftBuId);
 
-        this.Evaluate(
-                      DBSessionMode.Write,
-                      context =>
-                      {
-                          var authContext = context.Authorization;
-
-                          var principalBll = authContext.Logics.Principal;
-                          var principal = principalBll.GetByNameOrCreate(EmployeeName, true);
-
-                          var entityType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
-
-                          Expression<Func<PermissionFilterEntity, bool>> entitySearchFilter =
-                                  entity =>
-                                          entity.EntityType == entityType
-                                          && entity.EntityId == DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID;
-
-                          var filterEntity = authContext.Logics.PermissionFilterEntity.GetObjectBy(entitySearchFilter) ??
-                                             new PermissionFilterEntity
-                                             {
-                                                     EntityType = entityType,
-                                                     EntityId = DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID
-                                             }.Self(bu => authContext.Logics.PermissionFilterEntity.Save(bu));
-
-                          var permission = new Permission(principal);
-
-                          permission.Role = authContext.Logics.BusinessRole.GetByName(EditEmployeeRoleName) ??
-                                            this.CreateEditEmployeeRole(authContext);
-
-                          new PermissionFilterItem(permission) { Entity = filterEntity };
-
-                          principalBll.Save(principal);
-                      });
-    }
-
-    private BusinessRole CreateEditEmployeeRole(IAuthorizationBLLContext authContext)
-    {
-        var role = new BusinessRole { Name = EditEmployeeRoleName };
-
-        var operation = authContext.Logics.Operation.GetByName(SampleSystemBusinessUnitSecurityOperationCode.EmployeeEdit.ToString());
-
-        var link = new BusinessRoleOperationLink(role) { Operation = operation };
-
-        authContext.Logics.BusinessRole.Save(role);
-
-        return role;
+        this.AuthHelper.SetUserRole(EmployeeName, new SampleSystemTestPermission(SampleSystemSecurityRole.TestRole3, new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
     }
 
     [TestMethod]
@@ -110,8 +62,8 @@ public class BusinessUnitTests : TestBase
         // Act
         var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
                                                                         {
-                                                                                odataQueryString = string.Empty,
-                                                                                securityOperationCode = SampleSystemBusinessUnitSecurityOperationCode.EmployeeEdit
+                                                                                OdataQueryString = string.Empty,
+                                                                                SecurityRuleCode = SampleSystemBusinessUnitSecurityRuleCode.EmployeeEdit
                                                                         }));
 
         // Assert
@@ -131,8 +83,8 @@ public class BusinessUnitTests : TestBase
         // Act
         var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
                                                                         {
-                                                                                odataQueryString = "$filter=Name eq 'test'",
-                                                                                securityOperationCode = SampleSystemBusinessUnitSecurityOperationCode.EmployeeEdit
+                                                                                OdataQueryString = "$filter=Name eq 'test'",
+                                                                                SecurityRuleCode = SampleSystemBusinessUnitSecurityRuleCode.EmployeeEdit
                                                                         }));
 
         // Assert
@@ -150,6 +102,31 @@ public class BusinessUnitTests : TestBase
         this.TestGetFullBusinessUnitsTreeByOData();
 
         this.TestGetFullBusinessUnitsTree();
+    }
+
+    [TestMethod]
+    public void LoadTreeWithMiddlePermission_RootParentLoadedWithViewMode()
+    {
+        // Arrange
+        var parentBu = this.DataHelper.SaveBusinessUnit(parentIsNeeded: false);
+        var childBu = this.DataHelper.SaveBusinessUnit(parent: parentBu);
+
+        var testUser = TextRandomizer.RandomString(10);
+        this.AuthHelper.SetUserRole(testUser, new SampleSystemTestPermission(SecurityRole.Administrator, childBu));
+
+        // Act
+        var result = this.Evaluate(DBSessionMode.Read, testUser,
+            ctx =>
+            {
+                var buTree = ctx.Logics.BusinessUnitFactory.Create(SecurityRule.Edit).GetTree();
+
+                return buTree.ChangeItem(bu => bu.Id);
+            });
+
+        // Assert
+        result.Count.Should().Be(2);
+        result.Should().Contain(node => node.Item == parentBu.Id && node.OnlyView);
+        result.Should().Contain(node => node.Item == childBu.Id && !node.OnlyView);
     }
 
     private void TestGetFullBusinessUnitsTreeByOData()
@@ -181,7 +158,7 @@ public class BusinessUnitTests : TestBase
             .EvaluateWrite(
                            context =>
                            {
-                               var period = new Period(this.DateTimeService.CurrentFinancialYear.StartDate
+                               var period = new Period(this.FinancialYearService.GetCurrentFinancialYear().StartDate
                                                            .AddYears(-1));
                                var accountType = context.Logics.BusinessUnitType.GetById(buAccountId.Id);
 

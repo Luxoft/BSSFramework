@@ -1,33 +1,55 @@
-﻿using Framework.Core;
+﻿namespace Framework.SecuritySystem;
 
-namespace Framework.SecuritySystem;
-
-public abstract class DomainSecurityService<TDomainObject> : IDomainSecurityService<TDomainObject>
-        where TDomainObject : class
+public abstract class DomainSecurityService<TDomainObject>(
+    ISecurityProvider<TDomainObject> disabledSecurityProvider,
+    ISecurityRuleExpander securityRuleExpander)
+    : DomainSecurityServiceBase<TDomainObject>(disabledSecurityProvider)
 {
-    private readonly IDictionaryCache<BLLSecurityMode, ISecurityProvider<TDomainObject>> providersCache;
-
-
-    protected DomainSecurityService(IDisabledSecurityProviderContainer<TDomainObject> disabledSecurityProviderContainer)
+    protected sealed override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {
-        this.providersCache = new DictionaryCache<BLLSecurityMode, ISecurityProvider<TDomainObject>>(securityMode =>
+        switch (securityRule)
         {
-            if (securityMode == BLLSecurityMode.Disabled)
-            {
-                return disabledSecurityProviderContainer.GetDisabledSecurityProvider<TDomainObject>();
-            }
-            else
-            {
-                return this.CreateSecurityProvider(securityMode);
-            }
-        }).WithLock();
+            case SecurityRule.SpecialSecurityRule specialSecurityRule:
+                return this.CreateSecurityProvider(specialSecurityRule);
+
+            case SecurityRule.OperationSecurityRule operationSecurityRule:
+                return this.CreateSecurityProvider(operationSecurityRule);
+
+            case SecurityRule.NonExpandedRolesSecurityRule nonExpandedRolesSecurityRule:
+                return this.CreateSecurityProvider(nonExpandedRolesSecurityRule);
+
+            case SecurityRule.ExpandedRolesSecurityRule expandedRolesSecurityRule:
+                return this.CreateSecurityProvider(expandedRolesSecurityRule);
+
+            case SecurityRule.CompositeSecurityRule compositeSecurityRule:
+                return this.CreateSecurityProvider(compositeSecurityRule);
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(securityRule));
+        }
     }
 
-    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode);
-
-
-    ISecurityProvider<TDomainObject> IDomainSecurityService<TDomainObject>.GetSecurityProvider(BLLSecurityMode securityMode)
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
     {
-        return this.providersCache[securityMode];
+        return this.GetSecurityProvider(
+                   securityRuleExpander.TryExpand<TDomainObject>(securityRule))
+               ?? throw new Exception($"SecurityRule with mode '{securityRule}' not found for type '{typeof(TDomainObject).Name}'");
     }
+
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.OperationSecurityRule securityRule)
+    {
+        return this.GetSecurityProvider(securityRuleExpander.Expand(securityRule));
+    }
+
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.NonExpandedRolesSecurityRule securityRule)
+    {
+        return this.GetSecurityProvider(securityRuleExpander.Expand(securityRule));
+    }
+
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.CompositeSecurityRule securityRule)
+    {
+        return securityRule.Children.Select(this.GetSecurityProvider).Or();
+    }
+
+    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule);
 }

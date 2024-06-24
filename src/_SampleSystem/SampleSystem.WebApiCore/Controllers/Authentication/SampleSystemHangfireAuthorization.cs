@@ -1,10 +1,9 @@
 ﻿using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.NotificationCore.Monitoring;
+using Framework.SecuritySystem;
 
 using Hangfire.Dashboard;
-
-using SampleSystem.BLL;
 
 namespace SampleSystem.WebApiCore;
 
@@ -14,25 +13,24 @@ namespace SampleSystem.WebApiCore;
 /// </summary>
 public class SampleSystemHangfireAuthorization : IDashboardAuthorizationFilter
 {
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<IAuthorizationSystem> authorizationSystemEvaluator;
 
     private readonly IDashboardAuthorizationFilter baseFilter;
 
-    public SampleSystemHangfireAuthorization(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
+    public SampleSystemHangfireAuthorization(IServiceEvaluator<IAuthorizationSystem> authorizationSystemEvaluator)
     {
-        this.baseFilter = new AdminHangfireAuthorization<ISampleSystemBLLContext>(contextEvaluator);
-
-        this.contextEvaluator = contextEvaluator;
+        this.authorizationSystemEvaluator = authorizationSystemEvaluator;
+        this.baseFilter = new AdminHangfireAuthorization(authorizationSystemEvaluator);
     }
 
     public bool Authorize(DashboardContext context)
     {
-        return this.contextEvaluator.Evaluate(
-                                              DBSessionMode.Read,
-                                              z =>
-                                              {
-                                                  return this.baseFilter.Authorize(context)
-                                                         || string.Compare(z.Authorization.CurrentPrincipalName, new DomainDefaultUserAuthenticationService().GetUserName(), StringComparison.InvariantCultureIgnoreCase) == 0;
-                                              });
+        return this.authorizationSystemEvaluator.Evaluate(
+            DBSessionMode.Read,
+            authSystem => this.baseFilter.Authorize(context)
+                          || string.Compare(
+                              authSystem.CurrentPrincipalName,
+                              new DomainDefaultUserAuthenticationService().GetUserName(),
+                              StringComparison.InvariantCultureIgnoreCase) == 0);
     }
 }

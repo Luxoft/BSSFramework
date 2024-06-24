@@ -1,7 +1,6 @@
 ﻿using Framework.Core.StringParse;
+using Framework.DomainDriven.DALExceptions;
 using Framework.Exceptions;
-
-using JetBrains.Annotations;
 
 using NHibernate;
 using NHibernate.Cfg;
@@ -14,17 +13,20 @@ internal class SqlExceptionProcessorInterceptor : IExceptionProcessor
 {
     private readonly Configuration _cfg;
 
+    private readonly IDalValidationIdentitySource dalValidationIdentitySource;
+
     private readonly Dictionary<int, ISqlExceptionProcessor> _processors;
     private readonly ExceptionProcessingContext _context;
 
 
-    internal SqlExceptionProcessorInterceptor([NotNull] ISessionFactory factory, [NotNull] Configuration cfg)
+    internal SqlExceptionProcessorInterceptor(ISessionFactory factory, Configuration cfg, IDalValidationIdentitySource dalValidationIdentitySource)
     {
         if (factory == null) throw new ArgumentNullException(nameof(factory));
         if (cfg == null) throw new ArgumentNullException(nameof(cfg));
 
 
         this._cfg = cfg;
+        this.dalValidationIdentitySource = dalValidationIdentitySource;
         var connectionString = ((SessionFactoryImpl)factory).ConnectionProvider.GetConnection().ConnectionString;
 
         var parser = new StringParser();
@@ -52,12 +54,12 @@ internal class SqlExceptionProcessorInterceptor : IExceptionProcessor
     {
         yield return new RemoveLinkedObjectSqlProcessor();
         yield return new ArifmeticOverflowSqlProcessor();
-        yield return new UniqueIndexSqlProcessor();
+        yield return new UniqueIndexSqlProcessor(this.dalValidationIdentitySource);
         yield return new RequiredFieldSqlProcessor();
     }
 
 
-    public Exception Process([NotNull] Exception exception)
+    public Exception Process(Exception exception)
     {
         if (exception == null) throw new ArgumentNullException(nameof(exception));
 

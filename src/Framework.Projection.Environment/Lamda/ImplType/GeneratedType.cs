@@ -4,7 +4,7 @@ using Framework.Core;
 using Framework.Persistent;
 using Framework.Security;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Projection.Lambda;
 
@@ -33,7 +33,7 @@ internal class GeneratedType : BaseTypeImpl
     private readonly Attribute[] customAttributes;
 
 
-    public GeneratedType(ProjectionLambdaEnvironment environment, [NotNull] IProjection projection, Dictionary<IProjection, GeneratedType> preGenerateTypes)
+    public GeneratedType(ProjectionLambdaEnvironment environment, IProjection projection, Dictionary<IProjection, GeneratedType> preGenerateTypes)
     {
         if (projection == null) throw new ArgumentNullException(nameof(projection));
 
@@ -76,7 +76,7 @@ internal class GeneratedType : BaseTypeImpl
                                         && !this.environment.UseDependencySecurity
                                         && this.Projection.SourceType.HasSecurityNodeInterfaces();
 
-    [NotNull]
+    
     public override Type BaseType =>
 
             this.isPersistent ? this.HasBaseSecurityType ? this.environment.GetSecurityProjectionType(this.SourceType) : this.environment.PersistentDomainObjectBaseType
@@ -259,7 +259,7 @@ internal class GeneratedType : BaseTypeImpl
                ?? this.BaseType.GetProperty(name, bindingAttr);
     }
 
-    public override InterfaceMapping GetInterfaceMap([NotNull] Type interfaceType)
+    public override InterfaceMapping GetInterfaceMap(Type interfaceType)
     {
         if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
 

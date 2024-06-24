@@ -1,8 +1,10 @@
-﻿using Automation.Utils;
+﻿using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
-using Framework.DomainDriven;
+using Framework.FinancialYear;
+
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
 
@@ -15,9 +17,11 @@ public abstract class RootServiceProviderContainer : IRootServiceProviderContain
 
     public virtual IServiceProvider RootServiceProvider { get; }
 
-    public ConfigUtil ConfigUtil => this.GetConfigUtil();
+    public AutomationFrameworkSettings AutomationFrameworkSettings => this.GetAutomationFrameworkSettings();
 
-    public IDateTimeService DateTimeService => this.GetDateTimeService();
+    public TimeProvider TimeProvider => this.GetTimeProvider();
+
+    public IFinancialYearService FinancialYearService => this.RootServiceProvider.GetRequiredService<IFinancialYearService>();
 
     public IDatabaseContext DatabaseContext => this.GetDatabaseContext();
 
@@ -25,13 +29,5 @@ public abstract class RootServiceProviderContainer : IRootServiceProviderContain
             where TController : ControllerBase
     {
         return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
-    }
-}
-
-public abstract class RootServiceProviderContainer<TBLLContext> : RootServiceProviderContainer, IRootServiceProviderContainer<TBLLContext>
-{
-    protected RootServiceProviderContainer(IServiceProvider rootServiceProvider)
-            : base(rootServiceProvider)
-    {
     }
 }

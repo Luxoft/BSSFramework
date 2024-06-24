@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
+using Framework.Projection.Environment;
 
 namespace Framework.Projection.Lambda;
 
@@ -17,7 +16,8 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     /// Конструктор
     /// </summary>
     /// <param name="projectionSource">Источник проекций</param>
-    protected ProjectionLambdaEnvironment([NotNull] IProjectionSource projectionSource)
+    protected ProjectionLambdaEnvironment(IDomainTypeRootExtendedMetadata extendedMetadata, IProjectionSource projectionSource)
+        : base(extendedMetadata)
     {
         if (projectionSource == null) throw new ArgumentNullException(nameof(projectionSource));
 
@@ -35,7 +35,10 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 
         this.projections = projectionSource.Pipe(v => new LinkAllProjectionSource(v))
                                            .Pipe(v => new VerifyUniqueProjectionSource(v))
-                                           .Pipe(v => this.UseDependencySecurity ? (IProjectionSource)v : new CreateSecurityNodesProjectionSource(v, this))
+                                           .Pipe(
+                                               v => this.UseDependencySecurity
+                                                        ? (IProjectionSource)v
+                                                        : new CreateSecurityNodesProjectionSource(v, this))
                                            .Pipe(v => new CreateAutoNodesProjectionSource(v, this))
                                            .Pipe(v => new InjectMissedParentsProjectionSource(v))
                                            .Pipe(v => new InjectAttributesProjectionSource(v, this))
@@ -48,7 +51,8 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     public Type GetProjectionTypeByRole(Type sourceType, ProjectionRole role)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
-        if (!Enum.IsDefined(typeof(ProjectionRole), role)) throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ProjectionRole));
+        if (!Enum.IsDefined(typeof(ProjectionRole), role))
+            throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ProjectionRole));
 
         return this.ProjectionTypeResolver.Resolve(this.projections.GetProjectionByRole(sourceType, role));
     }
@@ -65,9 +69,12 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     /// </summary>
     /// <param name="typeReferenceBase">Ссылка на тип</param>
     /// <returns></returns>
-    public Type BuildPropertyType([NotNull] TypeReferenceBase typeReferenceBase)
+    public Type BuildPropertyType(TypeReferenceBase typeReferenceBase)
     {
-        if (typeReferenceBase == null) { throw new ArgumentNullException(nameof(typeReferenceBase)); }
+        if (typeReferenceBase == null)
+        {
+            throw new ArgumentNullException(nameof(typeReferenceBase));
+        }
 
         switch (typeReferenceBase)
         {
@@ -88,11 +95,14 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
                     throw new PropertyProjectionNotInitializedException(buildTypeRef.ElementType);
                 }
 
-                var elementProjectionType = (GeneratedType)buildTypeRef.ElementProjection.Maybe(v => this.ProjectionTypeResolver.Resolve(v, true));
+                var elementProjectionType =
+                    (GeneratedType)buildTypeRef.ElementProjection.Maybe(v => this.ProjectionTypeResolver.Resolve(v, true));
 
                 var elementType = elementProjectionType ?? buildTypeRef.ElementType;
 
-                return buildTypeRef.IsNullable ? typeof(Nullable<>).CachedMakeGenericType(elementType) : buildTypeRef.CollectionType.SafeMakeProjectionCollectionType(elementType);
+                return buildTypeRef.IsNullable
+                           ? typeof(Nullable<>).CachedMakeGenericType(elementType)
+                           : buildTypeRef.CollectionType.SafeMakeProjectionCollectionType(elementType);
             }
 
             default:
@@ -100,7 +110,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         }
     }
 
-    internal Type BuildPropertyType([NotNull] TypeReferenceBase typeReferenceBase, GeneratedType generatedProjection, string propertyName)
+    internal Type BuildPropertyType(TypeReferenceBase typeReferenceBase, GeneratedType generatedProjection, string propertyName)
     {
         if (typeReferenceBase == null) throw new ArgumentNullException(nameof(typeReferenceBase));
         if (generatedProjection == null) throw new ArgumentNullException(nameof(generatedProjection));
@@ -121,9 +131,12 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     /// </summary>
     /// <param name="projection">Проекция</param>
     /// <returns></returns>
-    protected internal virtual IAttributeSource GetProjectionTypeAttributeSource([NotNull] IProjection projection)
+    protected internal virtual IAttributeSource GetProjectionTypeAttributeSource(IProjection projection)
     {
-        if (projection == null) { throw new ArgumentNullException(nameof(projection)); }
+        if (projection == null)
+        {
+            throw new ArgumentNullException(nameof(projection));
+        }
 
         return new ProjectionTypeAttributeSource(this, projection);
     }
@@ -133,9 +146,12 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     /// </summary>
     /// <param name="projectionProperty">Свойство проекции</param>
     /// <returns></returns>
-    protected internal virtual IAttributeSource GetProjectionPropertyAttributeSource([NotNull] IProjectionProperty projectionProperty)
+    protected internal virtual IAttributeSource GetProjectionPropertyAttributeSource(IProjectionProperty projectionProperty)
     {
-        if (projectionProperty == null) { throw new ArgumentNullException(nameof(projectionProperty)); }
+        if (projectionProperty == null)
+        {
+            throw new ArgumentNullException(nameof(projectionProperty));
+        }
 
         return new ProjectionPropertyAttributeSource(this, projectionProperty);
     }
@@ -145,29 +161,35 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     /// </summary>
     /// <param name="projectionCustomProperty">Кастомное проекционное свойство</param>
     /// <returns></returns>
-    protected internal virtual IAttributeSource GetProjectionCustomPropertyAttributeSource([NotNull] IProjectionCustomProperty projectionCustomProperty)
+    protected internal virtual IAttributeSource GetProjectionCustomPropertyAttributeSource(
+        IProjectionCustomProperty projectionCustomProperty)
     {
-        if (projectionCustomProperty == null) { throw new ArgumentNullException(nameof(projectionCustomProperty)); }
+        if (projectionCustomProperty == null)
+        {
+            throw new ArgumentNullException(nameof(projectionCustomProperty));
+        }
 
         return new ProjectionCustomPropertyAttributeSource(this, projectionCustomProperty);
     }
 
     public static ProjectionLambdaEnvironment Create(
-            [NotNull] IProjectionSource projectionSource,
-            [NotNull] string assemblyName,
-            [NotNull] string assemblyFullName,
-            [NotNull] Type domainObjectBaseType,
-            [NotNull] Type persistentDomainObjectBaseType,
-            [NotNull] string @namespace,
-            bool useDependencySecurity = true)
+        IDomainTypeRootExtendedMetadata extendedMetadata,
+        IProjectionSource projectionSource,
+        string assemblyName,
+        string assemblyFullName,
+        Type domainObjectBaseType,
+        Type persistentDomainObjectBaseType,
+        string @namespace,
+        bool useDependencySecurity = true)
     {
         return new DefaultProjectionLambdaEnvironment(
-                                                      projectionSource,
-                                                      assemblyName,
-                                                      assemblyFullName,
-                                                      domainObjectBaseType,
-                                                      persistentDomainObjectBaseType,
-                                                      @namespace,
-                                                      useDependencySecurity);
+            extendedMetadata,
+            projectionSource,
+            assemblyName,
+            assemblyFullName,
+            domainObjectBaseType,
+            persistentDomainObjectBaseType,
+            @namespace,
+            useDependencySecurity);
     }
 }

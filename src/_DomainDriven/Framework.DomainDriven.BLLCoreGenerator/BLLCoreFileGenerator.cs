@@ -27,40 +27,9 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
 
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
-        if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
-        {
-            yield return new SecurityOperationFileFactory<TConfiguration>(this.Configuration);
-
-            yield return new SecurityPathFileFactory<TConfiguration>(this.Configuration);
-        }
-
-        yield return new BLLContextFileFactory<TConfiguration>(this.Configuration);
         yield return new BLLContextInterfaceFileFactory<TConfiguration>(this.Configuration);
 
-        yield return new DomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
         yield return new SecurityDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
-
-        yield return new DefaultOperationDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
-        yield return new DefaultOperationSecurityDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
-
-
-        yield return new RootSecurityServiceFileFactory<TConfiguration>(this.Configuration);
-        yield return new RootSecurityServiceBaseFileFactory<TConfiguration>(this.Configuration);
-        yield return new RootSecurityServiceInterfaceFileFactory<TConfiguration>(this.Configuration);
-
-        yield return new RootSecurityPathContainerFileFactory<TConfiguration>(this.Configuration);
-
-        foreach (var domainType in this.Configuration.SecurityServiceDomainTypes)
-        {
-            var useDependencySecurity = this.Configuration.Environment.GetProjectionEnvironment(domainType).Maybe(v => v.UseDependencySecurity);
-
-            var isGenericProjection = !useDependencySecurity && domainType.HasSecurityNodeInterfaces() && domainType.IsProjection();
-
-            if (!isGenericProjection)
-            {
-                yield return new DomainSecurityServiceFileFactory<TConfiguration>(this.Configuration, domainType);
-            }
-        }
 
         foreach (var fileFactory in this.Configuration.Logics.GetFileFactories())
         {
@@ -68,16 +37,39 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
         }
 
 
-        if (this.Configuration.GenerateValidationMap)
+        if (this.Configuration.GenerateAuthServices)
+        {
+            yield return new SecurityRuleHelperFileFactory<TConfiguration>(this.Configuration);
+
+            yield return new RootSecurityServiceFileFactory<TConfiguration>(this.Configuration);
+            yield return new RootSecurityServiceBaseFileFactory<TConfiguration>(this.Configuration);
+            yield return new RootSecurityServiceInterfaceFileFactory<TConfiguration>(this.Configuration);
+
+            yield return new RootSecurityPathContainerFileFactory<TConfiguration>(this.Configuration);
+
+            foreach (var domainType in this.Configuration.SecurityServiceDomainTypes)
+            {
+                var useDependencySecurity = this.Configuration.Environment.GetProjectionEnvironment(domainType).Maybe(v => v.UseDependencySecurity);
+
+                var isGenericProjection = !useDependencySecurity && domainType.HasSecurityNodeInterfaces() && domainType.IsProjection();
+
+                if (!isGenericProjection)
+                {
+                    yield return new DomainSecurityServiceFileFactory<TConfiguration>(this.Configuration, domainType);
+                }
+            }
+        }
+
+        if (this.Configuration.GenerateValidation)
         {
             yield return new ValidationMapBaseFileFactory<TConfiguration>(this.Configuration);
             yield return new ValidationMapFileFactory<TConfiguration>(this.Configuration);
-        }
 
-        if (this.Configuration.GenerateValidator)
-        {
+            yield return new ValidatorCompileCacheFileFactory<TConfiguration>(this.Configuration);
+
             yield return new ValidatorBaseFileFactory<TConfiguration>(this.Configuration);
             yield return new ValidatorFileFactory<TConfiguration>(this.Configuration);
+            yield return new ValidatorInterfaceFileFactory<TConfiguration>(this.Configuration);
         }
 
         if (this.Configuration.GenerateFetchService)

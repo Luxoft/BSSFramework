@@ -1,21 +1,14 @@
-﻿using Framework.Persistent;
+﻿namespace Framework.SecuritySystem.Rules.Builders.Mixed;
 
-using JetBrains.Annotations;
-
-namespace Framework.SecuritySystem.Rules.Builders.Mixed;
-
-public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent> : ISecurityExpressionFilter<TDomainObject>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
+public class SecurityExpressionFilter<TDomainObject> : ISecurityExpressionFilter<TDomainObject>
 {
     private readonly ISecurityExpressionFilter<TDomainObject> hasAccessFilter;
 
     private readonly ISecurityExpressionFilter<TDomainObject> queryFilter;
 
     public SecurityExpressionFilter(
-            [NotNull] ISecurityExpressionFilter<TDomainObject> hasAccessFilter,
-            [NotNull] ISecurityExpressionFilter<TDomainObject> queryFilter)
+            ISecurityExpressionFilter<TDomainObject> hasAccessFilter,
+            ISecurityExpressionFilter<TDomainObject> queryFilter)
     {
         this.hasAccessFilter = hasAccessFilter ?? throw new ArgumentNullException(nameof(hasAccessFilter));
         this.queryFilter = queryFilter ?? throw new ArgumentNullException(nameof(queryFilter));

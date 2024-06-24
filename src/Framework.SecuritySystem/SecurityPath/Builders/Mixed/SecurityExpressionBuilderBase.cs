@@ -1,34 +1,26 @@
-﻿using Framework.Persistent;
+﻿namespace Framework.SecuritySystem.Rules.Builders.Mixed;
 
-using JetBrains.Annotations;
-
-namespace Framework.SecuritySystem.Rules.Builders.Mixed;
-
-public class SecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>
-        : ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-
+public class SecurityExpressionBuilder<TDomainObject> : ISecurityExpressionBuilder<TDomainObject>
 {
-    private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> hasAccessBuilder;
+    private readonly ISecurityExpressionBuilder<TDomainObject> hasAccessBuilder;
 
-    private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> queryBuilder;
+    private readonly ISecurityExpressionBuilder<TDomainObject> queryBuilder;
 
     public SecurityExpressionBuilder(
-            [NotNull] ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> hasAccessBuilder,
-            [NotNull] ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> queryBuilder)
+        ISecurityExpressionBuilder<TDomainObject> hasAccessBuilder,
+        ISecurityExpressionBuilder<TDomainObject> queryBuilder)
     {
         this.hasAccessBuilder = hasAccessBuilder ?? throw new ArgumentNullException(nameof(hasAccessBuilder));
         this.queryBuilder = queryBuilder ?? throw new ArgumentNullException(nameof(queryBuilder));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityOperationCode : struct, Enum
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.DomainObjectSecurityRule securityRule, IEnumerable<Type> securityTypes)
     {
-        var hasAccessFilter = this.hasAccessBuilder.GetFilter(securityOperation);
-        var queryFilter = this.queryBuilder.GetFilter(securityOperation);
+        var cachedSecurityTypes = securityTypes.ToList();
 
-        return new SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent>(hasAccessFilter, queryFilter);
+        var hasAccessFilter = this.hasAccessBuilder.GetFilter(securityRule, cachedSecurityTypes);
+        var queryFilter = this.queryBuilder.GetFilter(securityRule, cachedSecurityTypes);
+
+        return new SecurityExpressionFilter<TDomainObject>(hasAccessFilter, queryFilter);
     }
 }

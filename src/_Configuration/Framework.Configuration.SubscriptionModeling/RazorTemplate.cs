@@ -33,7 +33,7 @@ public abstract class RazorTemplate<TDomainObject> : IRazorTemplate
     /// <summary>
     /// Контекст системы
     /// </summary>
-    public object Context { get; set; }
+    public IServiceProvider ServiceProvider { get; set; }
 
     protected TextWriter Output
     {

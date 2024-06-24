@@ -2,12 +2,14 @@
 
 using Framework.Core;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.Validation;
 
 public class ValidationMap : ValidationMapBase
 {
-    public ValidationMap(IDynamicSource extendedValidationData)
-            : base(extendedValidationData)
+    public ValidationMap(IServiceProvider serviceProvider)
+            : base(serviceProvider)
     {
     }
 
@@ -91,7 +93,7 @@ public class ValidationMap : ValidationMapBase
 
                               where pair.Key is IClassValidator<TSource> || pair.Key is IDynamicClassValidator
 
-                              let baseClassValidator = pair.Key.GetLastClassValidator(typeof(TSource), this.ExtendedValidationData)
+                              let baseClassValidator = pair.Key.GetLastClassValidator(typeof(TSource), this.ServiceProvider)
 
                               let classValidator = (IClassValidator<TSource>)baseClassValidator
 
@@ -99,7 +101,7 @@ public class ValidationMap : ValidationMapBase
 
 
         var selfClassValidator = typeof(IClassValidator<TSource>).IsAssignableFrom(typeof(TSource))
-                                         ? (IClassValidator<TSource>)Activator.CreateInstance(typeof(SelfClassValidator<>).MakeGenericType(typeof(TSource)))
+                                         ? (IClassValidator<TSource>)ActivatorUtilities.CreateInstance(this.ServiceProvider, typeof(SelfClassValidator<>).MakeGenericType(typeof(TSource)))
                                          : null;
 
         return classValidators.Concat(selfClassValidator.MaybeYield());
@@ -112,7 +114,7 @@ public class ValidationMap : ValidationMapBase
 
         return this.GetClassValidatorDict<TSource, IManyPropertyDynamicClassValidator>().Select(pair =>
         {
-            var basePropertyValidator = pair.Key.GetLastPropertyValidator(property, this.ExtendedValidationData);
+            var basePropertyValidator = pair.Key.GetLastPropertyValidator(property, this.ServiceProvider);
 
             try
             {
@@ -131,7 +133,7 @@ public class ValidationMap : ValidationMapBase
 
         return this.GetPropertyValidatorDict(property).Select(pair =>
                                                               {
-                                                                  var basePropertyValidator = pair.Key.GetLastPropertyValidator(property, this.ExtendedValidationData);
+                                                                  var basePropertyValidator = pair.Key.GetLastPropertyValidator(property, this.ServiceProvider);
 
                                                                   try
                                                                   {
@@ -148,7 +150,7 @@ public class ValidationMap : ValidationMapBase
     {
         return from attribute in typeof(TSource).GetCustomAttributes<ClassValidatorAttribute>()
 
-               select attribute.CreateValidator().ToKeyValuePair((IValidationData)attribute);
+               select attribute.CreateValidator(this.ServiceProvider).ToKeyValuePair((IValidationData)attribute);
     }
 
     private IEnumerable<KeyValuePair<TFilterValidator, IValidationData>> GetClassValidatorDict<TSource, TFilterValidator>()
@@ -179,9 +181,9 @@ public class ValidationMap : ValidationMapBase
 
         return from attribute in this.GetPropertyValidatorAttributes(property)
 
-               select attribute.CreateValidator().ToKeyValuePair((IValidationData)attribute);
+               select attribute.CreateValidator(this.ServiceProvider).ToKeyValuePair((IValidationData)attribute);
     }
 
 
-    public static readonly ValidationMap Default = new ValidationMap(DynamicSource.Empty);
+    public static readonly ValidationMap Default = new ValidationMap(new ServiceCollection().BuildServiceProvider());
 }

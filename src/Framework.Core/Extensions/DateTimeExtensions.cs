@@ -90,12 +90,6 @@ public static class DateTimeExtensions
         return dateTime.Day == 1;
     }
 
-    [Obsolete("v10 This is application logic, not a framework")]
-    public static bool IsStartFinancialYearDate(this DateTime dateTime)
-    {
-        return dateTime.Day == 1 && dateTime.Month == Period.FinancialYearStartMonth;
-    }
-
     public static bool IsLastMonthDate(this DateTime dateTime)
     {
         return dateTime.AddDay().Month != dateTime.Month;
@@ -114,29 +108,6 @@ public static class DateTimeExtensions
     public static Period ToYear(this DateTime dateTime)
     {
         return Period.FromYear(dateTime.Year);
-    }
-
-    [Obsolete("v10 This is application logic, not a framework")]
-    public static Period ToFinancialYearPeriod(this DateTime date)
-    {
-        var currentYearFinDate = new DateTime(date.Year, Period.FinancialYearStartMonth, 1);
-
-        return date >= currentYearFinDate
-                       ? new Period(currentYearFinDate, currentYearFinDate.AddYear().SubtractDay())
-                       : new Period(currentYearFinDate.SubtractYear(), currentYearFinDate.SubtractDay());
-    }
-
-    [Obsolete("v10 This is application logic, not a framework")]
-    public static Period ToNextFinancialYearPeriod(this DateTime date)
-    {
-        var currentYearFinDate = new DateTime(date.Year, Period.FinancialYearStartMonth, 1);
-
-        if (date >= currentYearFinDate)
-        {
-            return new Period(currentYearFinDate.AddYear(), currentYearFinDate.AddYear().AddYear().SubtractDay());
-        }
-
-        return new Period(currentYearFinDate, currentYearFinDate.AddYear().SubtractDay());
     }
 
     public static bool LessOrEqualIgnoreTime(this DateTime? _this, DateTime date)

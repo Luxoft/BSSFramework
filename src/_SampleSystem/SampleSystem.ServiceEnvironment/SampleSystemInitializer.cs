@@ -1,7 +1,10 @@
-﻿using Framework.Authorization.BLL;
+﻿using Framework.Authorization.SecuritySystem.Initialize;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.NamedLocks;
 using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.IAD;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 
@@ -9,13 +12,13 @@ namespace SampleSystem.ServiceEnvironment;
 
 public class SampleSystemInitializer
 {
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    private readonly IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
     private readonly SubscriptionMetadataStore subscriptionMetadataStore;
 
     private readonly IInitializeManager initializeManager;
 
-    public SampleSystemInitializer(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator, SubscriptionMetadataStore subscriptionMetadataStore, IInitializeManager initializeManager)
+    public SampleSystemInitializer(IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator, SubscriptionMetadataStore subscriptionMetadataStore, IInitializeManager initializeManager)
     {
         this.contextEvaluator = contextEvaluator;
         this.subscriptionMetadataStore = subscriptionMetadataStore;
@@ -30,25 +33,16 @@ public class SampleSystemInitializer
     private void InternalInitialize()
     {
         this.contextEvaluator.Evaluate(
-                                       DBSessionMode.Write,
-                                       context =>
-                                       {
-                                           context.Configuration.Logics.NamedLock.CheckInit();
-                                       });
+            DBSessionMode.Write,
+            context => context.ServiceProvider.GetRequiredService<INamedLockInitializer>().Initialize().GetAwaiter().GetResult());
+
+        this.InitSecurity<IAuthorizationSecurityContextInitializer>();
+        this.InitSecurity<IAuthorizationBusinessRoleInitializer>();
 
         this.contextEvaluator.Evaluate(
                                        DBSessionMode.Write,
                                        context =>
                                        {
-                                           context.Logics.NamedLock.CheckInit();
-                                       });
-
-        this.contextEvaluator.Evaluate(
-                                       DBSessionMode.Write,
-                                       context =>
-                                       {
-                                           context.Authorization.InitSecurityOperations();
-
                                            context.Configuration.Logics.TargetSystem.RegisterBase();
                                            context.Configuration.Logics.TargetSystem.Register<SampleSystem.Domain.PersistentDomainObjectBase>(true, true);
 
@@ -71,5 +65,20 @@ public class SampleSystemInitializer
         this.contextEvaluator.Evaluate(
                                        DBSessionMode.Write,
                                        context => this.subscriptionMetadataStore.RegisterCodeFirstSubscriptions(context.Configuration.Logics.CodeFirstSubscription, context.Configuration));
+    }
+
+    private void InitSecurity<TSecurityInitializer>()
+        where TSecurityInitializer : ISecurityInitializer
+    {
+        this.contextEvaluator.Evaluate(
+            DBSessionMode.Write,
+            context =>
+            {
+                context.ServiceProvider
+                       .GetRequiredService<TSecurityInitializer>()
+                       .Init()
+                       .GetAwaiter()
+                       .GetResult();
+            });
     }
 }

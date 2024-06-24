@@ -5,7 +5,6 @@ namespace SampleSystem.Domain;
 
 [BLLViewRole]
 [UniqueGroup]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
 public class EmployeeRegistrationType : BaseDirectory, IExternalSynchronizable
 {
     private long externalId;

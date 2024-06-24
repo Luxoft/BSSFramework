@@ -1,7 +1,4 @@
-﻿using System.Data;
-
-using Framework.Cap.Abstractions;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.NHibernate.Audit;
 
@@ -50,7 +47,6 @@ public class UseSchemeUpdateTest
         services.AddDatabaseSettings(connectionString, false);
 
         services.AddSingleton(_ => LazyInterfaceImplementHelper.CreateNotImplemented<IAuditRevisionUserAuthenticationService>());
-        services.AddSingleton(_ => LazyInterfaceImplementHelper.CreateNotImplemented<ICapTransactionManager>());
         var provider = services.BuildServiceProvider(false);
 
         var dbSessionFactory = provider.GetService<NHibSessionEnvironment>();

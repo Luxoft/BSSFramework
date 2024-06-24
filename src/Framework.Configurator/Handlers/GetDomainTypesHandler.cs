@@ -1,33 +1,37 @@
-﻿using Framework.Configuration.BLL;
+﻿using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class GetDomainTypesHandler : BaseReadHandler, IGetDomainTypesHandler
+public class GetDomainTypesHandler(IRepositoryFactory<DomainType> repoFactory, IOperationAccessor operationAccessor)
+    : BaseReadHandler, IGetDomainTypesHandler
 {
-    private readonly IDomainTypeBLLFactory domainTypeBllFactory;
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
+    {
+        if (!operationAccessor.IsAdministrator()) return new List<DomainTypeDto>();
 
-    public GetDomainTypesHandler(IDomainTypeBLLFactory domainTypeBllFactory) => this.domainTypeBllFactory = domainTypeBllFactory;
-
-    protected override object GetData(HttpContext context) =>
-            this.domainTypeBllFactory.Create(BLLSecurityMode.View)
-                .GetSecureQueryable()
-                .Where(d => d.TargetSystem.IsRevision)
-                .OrderBy(d => d.Name)
-                .Select(
-                        d => new DomainTypeDto
-                             {
-                                     Id = d.Id,
-                                     Name = d.Name,
-                                     Namespace = d.NameSpace,
-                                     Operations = d.EventOperations
-                                                   .OrderBy(o => o.Name)
-                                                   .Select(o => new EntityDto { Id = o.Id, Name = o.Name })
-                                                   .ToList()
-                             })
-                .ToList();
+        return await repoFactory.Create()
+                                .GetQueryable()
+                                .Where(x => x.TargetSystem.IsRevision)
+                                .OrderBy(x => x.Name)
+                                .Select(
+                                    x => new DomainTypeDto
+                                         {
+                                             Id = x.Id,
+                                             Name = x.Name,
+                                             Namespace = x.NameSpace,
+                                             Operations = x.EventOperations
+                                                           .OrderBy(o => o.Name)
+                                                           .Select(o => new EntityDto { Id = o.Id, Name = o.Name })
+                                                           .ToList()
+                                         })
+                                .ToListAsync(cancellationToken);
+    }
 }

@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+﻿namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 
 /// <summary>
 /// Фабрика процессоров лямбда-выражений.
@@ -28,7 +26,7 @@ public class LambdaProcessorFactory<TBLLContext>
     /// или
     /// parserFactory равен null.
     /// </exception>
-    public LambdaProcessorFactory([NotNull] TBLLContext bllContext)
+    public LambdaProcessorFactory(TBLLContext bllContext)
     {
         if (bllContext == null)
         {

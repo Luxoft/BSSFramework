@@ -1,13 +1,13 @@
-﻿using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
+using Framework.Notification;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem;
 
-using JetBrains.Annotations;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3;
 
@@ -23,7 +23,7 @@ public class ConfigurationContextFacade
     /// </summary>
     /// <param name="context">Контекст конфигурации.</param>
     /// <exception cref="ArgumentNullException">Аргумент context равен null.</exception>
-    public ConfigurationContextFacade([NotNull] IConfigurationBLLContext context)
+    public ConfigurationContextFacade(IConfigurationBLLContext context)
     {
         if (context == null)
         {
@@ -33,13 +33,15 @@ public class ConfigurationContextFacade
         this.context = context;
     }
 
+    public IServiceProvider ServiceProvider => this.context.ServiceProvider;
+
     /// <summary>
     ///     Преобразует список экземпляров <see cref="IPrincipal{Guid}" /> в список экземпляров <see cref="IEmployee" />.
     /// </summary>
     /// <param name="principals">Cписок экземпляров <see cref="IPrincipal{Guid}" />.</param>
     /// <returns>Экземпляр <see cref="IEnumerable{IEmployee}" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент principals равен null.</exception>
-    public virtual IEnumerable<IEmployee> ConvertPrincipals([NotNull] IEnumerable<IPrincipal<Guid>> principals)
+    public virtual IEnumerable<IEmployee> ConvertPrincipals(IEnumerable<IPrincipal<Guid>> principals)
     {
         if (principals == null)
         {
@@ -48,8 +50,9 @@ public class ConfigurationContextFacade
 
         var principalNames = principals.ToList(principal => principal.Name);
 
-        var employees = this.context.GetEmployeeSource()
-                            .GetUnsecureQueryable()
+        var employees = this.context
+                            .EmployeeSource
+                            .GetQueryable()
                             .Where(employee => principalNames.Contains(employee.Login))
                             .ToList();
 
@@ -65,14 +68,14 @@ public class ConfigurationContextFacade
     /// </returns>
     public virtual Type GetSecurityType(Guid authDomainTypeId)
     {
-        var entityType = this.context.Authorization.Logics.EntityType.GetById(authDomainTypeId);
+        var securityContextType = this.context.Authorization.Logics.SecurityContextType.GetById(authDomainTypeId);
 
-        if (entityType == null)
+        if (securityContextType == null)
         {
             return null;
         }
 
-        var result = this.GetSecurityType(entityType);
+        var result = this.GetSecurityType(securityContextType);
 
         return result;
     }
@@ -80,17 +83,17 @@ public class ConfigurationContextFacade
     /// <summary>
     ///     Возращает тип контекста безопасности доменного типа.
     /// </summary>
-    /// <param name="entityType">Описатель доменного типа.</param>
+    /// <param name="securityContextType">Описатель доменного типа.</param>
     /// <returns>Экземпляр <see cref="Type" />.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент entityType равен null.</exception>
-    public virtual Type GetSecurityType([NotNull] EntityType entityType)
+    /// <exception cref="ArgumentNullException">Аргумент securityContextType равен null.</exception>
+    public virtual Type GetSecurityType(SecurityContextType securityContextType)
     {
-        if (entityType == null)
+        if (securityContextType == null)
         {
-            throw new ArgumentNullException(nameof(entityType));
+            throw new ArgumentNullException(nameof(securityContextType));
         }
 
-        var result = this.context.Authorization.SecurityTypeResolver.Resolve(entityType, true);
+        var result = this.context.ServiceProvider.GetRequiredService<ISecurityContextInfoService>().GetSecurityContextInfo(securityContextType.Name).Type;
         return result;
     }
 
@@ -98,16 +101,16 @@ public class ConfigurationContextFacade
     ///     Возвращает описатель сущности в котексте которой выдаются права пользователю.
     /// </summary>
     /// <param name="domainTypeName">Имя доменного типа.</param>
-    /// <returns>Экземпляр <see cref="EntityType" />.</returns>
+    /// <returns>Экземпляр <see cref="SecurityContextType" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент domainTypeName равен null.</exception>
-    public virtual EntityType GetEntityType([NotNull] string domainTypeName)
+    public virtual SecurityContextType GetSecurityContextType(string domainTypeName)
     {
         if (domainTypeName == null)
         {
             throw new ArgumentNullException(nameof(domainTypeName));
         }
 
-        var result = this.context.Authorization.GetEntityType(domainTypeName);
+        var result = this.context.Authorization.GetSecurityContextType(domainTypeName);
         return result;
     }
 
@@ -117,7 +120,7 @@ public class ConfigurationContextFacade
     /// <param name="domainObjectType">Тип для которого будет произведен поиск описателя доменного объекта.</param>
     /// <returns>Экземпляр <see cref="DomainType" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент domainObjectType равен null.</exception>
-    public virtual DomainType GetDomainType([NotNull] Type domainObjectType)
+    public virtual DomainType GetDomainType(Type domainObjectType)
     {
         if (domainObjectType == null)
         {
@@ -136,7 +139,7 @@ public class ConfigurationContextFacade
     /// <exception cref="SubscriptionServicesException">
     ///     Реальный тип, соответствующий описанию доменного типа, не найден.
     /// </exception>
-    public virtual Type GetDomainObjectType([NotNull] TypeInfoDescription description)
+    public virtual Type GetDomainObjectType(TypeInfoDescription description)
     {
         if (description == null)
         {
@@ -158,7 +161,7 @@ public class ConfigurationContextFacade
     /// <exception cref="SubscriptionServicesException">
     ///     Реальный тип, соответствующий описанию доменного типа, не найден.
     /// </exception>
-    public virtual Type GetDomainObjectType([NotNull] DomainType domainType)
+    public virtual Type GetDomainObjectType(DomainType domainType)
     {
         if (domainType == null)
         {
@@ -178,7 +181,7 @@ public class ConfigurationContextFacade
     /// <summary>
     ///     Возвращает список получателей уведомлений.
     /// </summary>
-    /// <param name="roleIdents">Идентификаторы ролей получателей.</param>
+    /// <param name="securityRoles"></param>
     /// <param name="notificationFilterGroups">Список фильтров получателей.</param>
     /// <returns>Экземпляр <see cref="IEnumerable{Principal}" />.</returns>
     /// <exception cref="ArgumentNullException">
@@ -188,12 +191,12 @@ public class ConfigurationContextFacade
     ///     notificationFilterGroups равен null.
     /// </exception>
     public virtual IEnumerable<Principal> GetNotificationPrincipals(
-            [NotNull] Guid[] roleIdents,
-            [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups)
+        SecurityRole[] securityRoles,
+        IEnumerable<NotificationFilterGroup> notificationFilterGroups)
     {
-        if (roleIdents == null)
+        if (securityRoles == null)
         {
-            throw new ArgumentNullException(nameof(roleIdents));
+            throw new ArgumentNullException(nameof(securityRoles));
         }
 
         if (notificationFilterGroups == null)
@@ -201,7 +204,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(notificationFilterGroups));
         }
 
-        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(securityRoles, notificationFilterGroups);
 
         return result;
     }
@@ -209,17 +212,17 @@ public class ConfigurationContextFacade
     /// <summary>
     ///     Возвращает список получателей уведомлений.
     /// </summary>
-    /// <param name="roleIdents">Идентификаторы ролей получателей.</param>
+    /// <param name="securityRoles"></param>
     /// <returns>Экземпляр <see cref="IEnumerable{Principal}" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент roleIdents равен null.</exception>
-    public virtual IEnumerable<Principal> GetNotificationPrincipals([NotNull] Guid[] roleIdents)
+    public virtual IEnumerable<Principal> GetNotificationPrincipals(SecurityRole[] securityRoles)
     {
-        if (roleIdents == null)
+        if (securityRoles == null)
         {
-            throw new ArgumentNullException(nameof(roleIdents));
+            throw new ArgumentNullException(nameof(securityRoles));
         }
 
-        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(roleIdents, Array.Empty<NotificationFilterGroup>());
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(securityRoles, Array.Empty<NotificationFilterGroup>());
 
         return result;
     }

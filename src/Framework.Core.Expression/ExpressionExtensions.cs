@@ -1,8 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public static class ExpressionExtensions
@@ -927,6 +925,11 @@ public static class ExpressionExtensions
                                     constValue,
                                     (prevValue, memberInfo) => ValueTuple.Create(memberInfo.GetValue(prevValue.Item1), memberInfo.GetMemberType()));
 
+        if (finalValue.Item1 == null && finalValue.Item2.IsValueType)
+        {
+            return null;
+        }
+
         return Expression.Constant(finalValue.Item1, finalValue.Item2);
     }
 
@@ -960,7 +963,7 @@ public static class ExpressionExtensions
         return (source as PropertyInfo).PropertyType;
     }
 
-    public static PropertyInfo GetProperty([NotNull] this Expression source)
+    public static PropertyInfo GetProperty(this Expression source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -973,7 +976,7 @@ public static class ExpressionExtensions
         return request.GetValue(() => "Invalid expression");
     }
 
-    public static IEnumerable<PropertyInfo> GetReverseProperties([NotNull] this LambdaExpression source)
+    public static IEnumerable<PropertyInfo> GetReverseProperties(this LambdaExpression source)
     {
         var parameter = source.Parameters.Single();
 

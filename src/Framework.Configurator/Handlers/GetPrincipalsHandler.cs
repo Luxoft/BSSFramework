@@ -1,34 +1,31 @@
-﻿using Framework.Authorization.BLL;
+﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class GetPrincipalsHandler : BaseReadHandler, IGetPrincipalsHandler
+public class GetPrincipalsHandler(IRepositoryFactory<Principal> repoFactory, IOperationAccessor operationAccessor)
+    : BaseReadHandler, IGetPrincipalsHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public GetPrincipalsHandler(IAuthorizationBLLContext authorizationBllContext) =>
-            this.authorizationBllContext = authorizationBllContext;
-
-    protected override object GetData(HttpContext context)
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
+        if (!operationAccessor.IsAdministrator()) return new List<EntityDto>();
+
         var searchToken = context.Request.Query["searchToken"];
 
-        var query = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.View)
-                        .GetSecureQueryable();
-        if (!string.IsNullOrWhiteSpace(searchToken))
-        {
-            query = query.Where(p => p.Name.Contains(searchToken));
-        }
+        var query = repoFactory.Create().GetQueryable();
+        if (!string.IsNullOrWhiteSpace(searchToken)) query = query.Where(p => p.Name.Contains(searchToken!));
 
-        return query
-               .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
-               .OrderBy(r => r.Name)
-               .Take(70)
-               .ToList();
+        return await query
+                     .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
+                     .OrderBy(x => x.Name)
+                     .Take(70)
+                     .ToListAsync(cancellationToken);
     }
 }

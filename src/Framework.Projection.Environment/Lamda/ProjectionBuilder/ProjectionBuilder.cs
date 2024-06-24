@@ -1,10 +1,8 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Projection.Lambda;
+﻿namespace Framework.Projection.Lambda;
 
 internal class ProjectionBuilder : IProjection
 {
-    public ProjectionBuilder([NotNull] IProjection sourceProjection)
+    public ProjectionBuilder(IProjection sourceProjection)
     {
         if (sourceProjection == null) throw new ArgumentNullException(nameof(sourceProjection));
 
@@ -16,7 +14,7 @@ internal class ProjectionBuilder : IProjection
         this.FilterAttributes = sourceProjection.FilterAttributes.ToList();
     }
 
-    public ProjectionBuilder([NotNull] Type sourceType)
+    public ProjectionBuilder(Type sourceType)
     {
         this.SourceType = sourceType ?? throw new ArgumentNullException(nameof(sourceType));
     }

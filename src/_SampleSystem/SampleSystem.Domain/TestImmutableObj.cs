@@ -1,12 +1,11 @@
 ﻿using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Tracking.LegacyValidators;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
 [BLLSaveRole]
 [BLLIntegrationSaveRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.Disabled)]
 public class TestImmutableObj : AuditPersistentDomainObjectBase
 {
     private string testImmutablePrimitiveProperty;

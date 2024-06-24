@@ -1,7 +1,6 @@
-﻿using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.DAL.Revisions;
+﻿using Framework.DomainDriven.DAL.Revisions;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -9,7 +8,6 @@ namespace Framework.Configuration.Domain;
 /// <summary>
 /// Модификация объекта хранимая в бд
 /// </summary>
-[BLLRole]
 [UniqueGroup]
 [NotAuditedClass]
 public class DomainObjectModification : AuditPersistentDomainObjectBase, ITypeObject<ModificationType>, IVersionObject<long>

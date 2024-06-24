@@ -6,8 +6,6 @@ using Framework.Restriction;
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.CompanyLegalEntityView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.CompanyLegalEntityEdit)]
 [UniqueGroup]
 public class CompanyLegalEntity :
         LegalEntityBase,

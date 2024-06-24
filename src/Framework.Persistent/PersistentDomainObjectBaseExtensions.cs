@@ -4,8 +4,6 @@ using System.Reflection;
 using Framework.Core;
 using Framework.Exceptions;
 
-using JetBrains.Annotations;
-
 namespace Framework.Persistent;
 
 public static class PersistentDomainObjectBaseExtensions
@@ -120,7 +118,7 @@ public static class PersistentDomainObjectBaseExtensions
         }
     }
 
-    private static ICollection<TProperty> GetCollectionValue<TSource, TProperty>([NotNull] this TSource source, Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr)
+    private static ICollection<TProperty> GetCollectionValue<TSource, TProperty>(this TSource source, Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr)
     {
         if (propertyExpr == null) throw new ArgumentNullException(nameof(propertyExpr));
 

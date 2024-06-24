@@ -2,6 +2,7 @@
 
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStore;
 
@@ -17,39 +18,35 @@ public abstract class FileStoreMethodGeneratorBase<TConfiguration> : MethodGener
     protected override bool IsEdit { get; } = false;
 
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.Configuration.TryGetSecurityAttribute(this.DomainType, this.IsEdit) ?? base.GetBLLSecurityParameter();
+        return this.Configuration.TryGetSecurityAttribute(this.DomainType, this.IsEdit) ?? base.GetBLLSecurityParameter(evaluateDataExpr);
     }
-
-
 
     protected IEnumerable<CodeStatement> GetCheckAccessMethods(
             CodeExpression evaluateDataExpr,
             Type targetDomainType,
             CodeVariableReferenceExpression domainIdentRefExpression)
     {
-        if (null != this.Configuration.Environment.BLLCore.GetBLLSecurityModeType(targetDomainType))
-        {
-            var targetBLLDecl = this.GetTargetBLLVariableDeclaration(evaluateDataExpr, targetDomainType);
 
-            yield return targetBLLDecl;
+        var targetBLLDecl = this.GetTargetBLLVariableDeclaration(evaluateDataExpr, targetDomainType);
 
-            var bllReference = targetDomainType.ToTypeReference();
+        yield return targetBLLDecl;
 
-            var bllExpression = targetBLLDecl.ToVariableReferenceExpression();
+        var bllReference = targetDomainType.ToTypeReference();
 
-            var byIdExprByIdentityRef = this.Configuration.GetByIdExprByIdentityRef(bllExpression, domainIdentRefExpression);
+        var bllExpression = targetBLLDecl.ToVariableReferenceExpression();
 
-            var targetDomainDecl = bllReference.ToVariableDeclarationStatement("targetDomainObject", byIdExprByIdentityRef);
+        var byIdExprByIdentityRef = this.Configuration.GetByIdExprByIdentityRef(bllExpression, domainIdentRefExpression);
 
-            yield return targetDomainDecl;
+        var targetDomainDecl = bllReference.ToVariableDeclarationStatement("targetDomainObject", byIdExprByIdentityRef);
+
+        yield return targetDomainDecl;
 
 
-            yield return bllExpression
-                         .ToMethodInvokeExpression("CheckAccess", targetDomainDecl.ToVariableReferenceExpression())
-                         .ToExpressionStatement();
-        }
+        yield return bllExpression
+                     .ToMethodInvokeExpression("CheckAccess", targetDomainDecl.ToVariableReferenceExpression())
+                     .ToExpressionStatement();
     }
 
     private CodeVariableDeclarationStatement GetTargetBLLVariableDeclaration(CodeExpression evaluateDataExpr, Type targetDomainType)
@@ -63,10 +60,7 @@ public abstract class FileStoreMethodGeneratorBase<TConfiguration> : MethodGener
 
         if (null == attr)
         {
-            attr =
-                    this.Configuration.Environment.BLLCore.GetBLLSecurityModeType(targetDomainType)
-                        .GetField("View")
-                        .GetValue(null) as Enum;
+            attr = SecurityRule.View;
         }
 
         var bllRef = this.Configuration.Environment.BLLCore.GetCodeTypeReference(

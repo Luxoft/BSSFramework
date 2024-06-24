@@ -1,40 +1,44 @@
-﻿using Framework.Authorization.BLL;
+﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class GetBusinessRoleHandler : BaseReadHandler, IGetBusinessRoleHandler
-
+public class GetBusinessRoleHandler(
+    IRepositoryFactory<Permission> repoFactory,
+    IOperationAccessor operationAccessor,
+    ISecurityRoleSource roleSource,
+    ISecurityOperationInfoSource operationInfoSource)
+    : BaseReadHandler, IGetBusinessRoleHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public GetBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) =>
-            this.authorizationBllContext = authorizationBllContext;
-
-    protected override object GetData(HttpContext context)
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        var roleId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
+        if (!operationAccessor.IsAdministrator()) return new BusinessRoleDetailsDto { Operations = [], Principals = [] };
 
-        var operationDtos = this.authorizationBllContext.Authorization.Logics.OperationFactory.Create(BLLSecurityMode.View)
-                                .GetSecureQueryable()
-                                .Where(z => z.Links.Any(o => o.BusinessRole.Id == roleId))
-                                .Select(o => new OperationDto { Id = o.Id, Name = o.Name, Description = o.Description })
-                                .OrderBy(o => o.Name)
-                                .Distinct()
-                                .ToList();
+        var roleId = new Guid((string)context.Request.RouteValues["id"]!);
 
-        var principals = this.authorizationBllContext.Authorization.Logics.PermissionFactory.Create(BLLSecurityMode.View)
-                             .GetSecureQueryable()
-                             .Where(p => p.Role.Id == roleId)
-                             .Select(p => p.Principal.Name)
-                             .OrderBy(p => p)
-                             .Distinct()
-                             .ToList();
+        var operations = roleSource.SecurityRoles
+                                   .Single(x => x.Id == roleId)
+                                   .Information
+                                   .Operations
+                                   .Select(o => new OperationDto { Name = o.Name, Description = operationInfoSource.GetSecurityOperationInfo(o).Description })
+                                   .OrderBy(x => x.Name)
+                                   .ToList();
 
-        return new BusinessRoleDetailsDto { Operations = operationDtos, Principals = principals };
+        var principals = await repoFactory.Create()
+                                          .GetQueryable()
+                                          .Where(x => x.Role.Id == roleId)
+                                          .Select(x => x.Principal.Name)
+                                          .OrderBy(x => x)
+                                          .Distinct()
+                                          .ToListAsync(cancellationToken);
+
+        return new BusinessRoleDetailsDto { Operations = operations, Principals = principals };
     }
 }

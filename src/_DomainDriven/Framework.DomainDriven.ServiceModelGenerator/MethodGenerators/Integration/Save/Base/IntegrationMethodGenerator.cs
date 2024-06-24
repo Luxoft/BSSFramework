@@ -2,16 +2,15 @@
 
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public abstract class IntegrationMethodGenerator<TConfiguration, TBLLRoleAttribute> : MethodGenerator<TConfiguration, TBLLRoleAttribute>
-        where TConfiguration : class, IIntegrationGeneratorConfigurationBase<IGenerationEnvironmentBase>
-        where TBLLRoleAttribute : BLLServiceRoleAttribute
+    where TConfiguration : class, IIntegrationGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TBLLRoleAttribute : BLLServiceRoleAttribute
 {
     protected IntegrationMethodGenerator(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
+        : base(configuration, domainType)
     {
     }
 
@@ -23,10 +22,10 @@ public abstract class IntegrationMethodGenerator<TConfiguration, TBLLRoleAttribu
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        var checkAccessMethod = typeof(AuthorizationBLLContextExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression("CheckAccess");
-
-        yield return evaluateDataExpr.GetContext().ToPropertyReference("Authorization")
-                                     .ToStaticMethodInvokeExpression(checkAccessMethod, this.Configuration.IntegrationSecurityOperation)
+        yield return evaluateDataExpr.GetContext()
+                                     .ToPropertyReference("Authorization")
+                                     .ToPropertyReference("AuthorizationSystem")
+                                     .ToMethodInvokeExpression("CheckAccess", this.Configuration.IntegrationSecurityRule)
                                      .ToExpressionStatement();
     }
 }

@@ -11,915 +11,7 @@ namespace SampleSystem.BLL
 {
     
     
-    #region 
-	static
-    public class SampleSystemSecurityOperation
-    {
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _approveWorkflowOperation = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ApproveWorkflowOperation);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _approvingWorkflowOperation = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ApprovingWorkflowOperation);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _authorizationImpersonate = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.AuthorizationImpersonate);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _businessUnitEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _businessUnitHrDepartmentEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _businessUnitHrDepartmentView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _businessUnitManagerCommissionLinkEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _businessUnitManagerCommissionLinkView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _businessUnitTypeEdit = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitTypeEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _businessUnitTypeView = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitTypeView);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _businessUnitView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView, Framework.HierarchicalExpand.HierarchicalExpandType.All);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _companyLegalEntityEdit = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _companyLegalEntityView = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityView);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _countryEdit = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.CountryEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _countryView = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.CountryView);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _createManagementUnitStart = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.CreateManagementUnitStart, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.DisabledSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _disabled = new Framework.SecuritySystem.DisabledSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>();
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _employeeEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _employeePersonalCellPhoneEdit = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _employeePersonalCellPhoneView = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _employeePositionEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _employeePositionView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _employeeRoleDegreeView = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeRoleDegreeView);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _employeeRoleView = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeRoleView);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _employeeSpecializationView = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeSpecializationView);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _employeeView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _hRDepartmentAdvancedEdit = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentAdvancedEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _hRDepartmentEdit = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _hRDepartmentView = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentView);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _locationEdit = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.LocationEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _locationOpenModule = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.LocationOpenModule);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _locationView = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.LocationView);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitAndBusinessUnitLinkEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitAndBusinessUnitLinkView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitAndHRDepartmentLinkEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitAndHRDepartmentLinkView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitChangeEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitChangeEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitChangeView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitChangeView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView, Framework.HierarchicalExpand.HierarchicalExpandType.All);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _searchNotificationOperation = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.SearchNotificationOperation);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _systemIntegration = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration);
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ApproveWorkflowOperation
-        {
-            get
-            {
-                return _approveWorkflowOperation;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ApprovingWorkflowOperation
-        {
-            get
-            {
-                return _approvingWorkflowOperation;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> AuthorizationImpersonate
-        {
-            get
-            {
-                return _authorizationImpersonate;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> BusinessUnitEdit
-        {
-            get
-            {
-                return _businessUnitEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> BusinessUnitHrDepartmentEdit
-        {
-            get
-            {
-                return _businessUnitHrDepartmentEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> BusinessUnitHrDepartmentView
-        {
-            get
-            {
-                return _businessUnitHrDepartmentView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> BusinessUnitManagerCommissionLinkEdit
-        {
-            get
-            {
-                return _businessUnitManagerCommissionLinkEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> BusinessUnitManagerCommissionLinkView
-        {
-            get
-            {
-                return _businessUnitManagerCommissionLinkView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> BusinessUnitTypeEdit
-        {
-            get
-            {
-                return _businessUnitTypeEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> BusinessUnitTypeView
-        {
-            get
-            {
-                return _businessUnitTypeView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> BusinessUnitView
-        {
-            get
-            {
-                return _businessUnitView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> CompanyLegalEntityEdit
-        {
-            get
-            {
-                return _companyLegalEntityEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> CompanyLegalEntityView
-        {
-            get
-            {
-                return _companyLegalEntityView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> CountryEdit
-        {
-            get
-            {
-                return _countryEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> CountryView
-        {
-            get
-            {
-                return _countryView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> CreateManagementUnitStart
-        {
-            get
-            {
-                return _createManagementUnitStart;
-            }
-        }
-        
-        public static Framework.SecuritySystem.DisabledSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> Disabled
-        {
-            get
-            {
-                return _disabled;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> EmployeeEdit
-        {
-            get
-            {
-                return _employeeEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> EmployeePersonalCellPhoneEdit
-        {
-            get
-            {
-                return _employeePersonalCellPhoneEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> EmployeePersonalCellPhoneView
-        {
-            get
-            {
-                return _employeePersonalCellPhoneView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> EmployeePositionEdit
-        {
-            get
-            {
-                return _employeePositionEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> EmployeePositionView
-        {
-            get
-            {
-                return _employeePositionView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> EmployeeRoleDegreeView
-        {
-            get
-            {
-                return _employeeRoleDegreeView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> EmployeeRoleView
-        {
-            get
-            {
-                return _employeeRoleView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> EmployeeSpecializationView
-        {
-            get
-            {
-                return _employeeSpecializationView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> EmployeeView
-        {
-            get
-            {
-                return _employeeView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> HRDepartmentAdvancedEdit
-        {
-            get
-            {
-                return _hRDepartmentAdvancedEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> HRDepartmentEdit
-        {
-            get
-            {
-                return _hRDepartmentEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> HRDepartmentView
-        {
-            get
-            {
-                return _hRDepartmentView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> LocationEdit
-        {
-            get
-            {
-                return _locationEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> LocationOpenModule
-        {
-            get
-            {
-                return _locationOpenModule;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> LocationView
-        {
-            get
-            {
-                return _locationView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ManagementUnitAndBusinessUnitLinkEdit
-        {
-            get
-            {
-                return _managementUnitAndBusinessUnitLinkEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ManagementUnitAndBusinessUnitLinkView
-        {
-            get
-            {
-                return _managementUnitAndBusinessUnitLinkView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ManagementUnitAndHRDepartmentLinkEdit
-        {
-            get
-            {
-                return _managementUnitAndHRDepartmentLinkEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ManagementUnitAndHRDepartmentLinkView
-        {
-            get
-            {
-                return _managementUnitAndHRDepartmentLinkView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ManagementUnitChangeEdit
-        {
-            get
-            {
-                return _managementUnitChangeEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ManagementUnitChangeView
-        {
-            get
-            {
-                return _managementUnitChangeView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ManagementUnitEdit
-        {
-            get
-            {
-                return _managementUnitEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ManagementUnitView
-        {
-            get
-            {
-                return _managementUnitView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> SearchNotificationOperation
-        {
-            get
-            {
-                return _searchNotificationOperation;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> SystemIntegration
-        {
-            get
-            {
-                return _systemIntegration;
-            }
-        }
-        
-        public static Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> GetByCode(SampleSystem.SampleSystemSecurityOperationCode code)
-        {
-            if ((code == SampleSystem.SampleSystemSecurityOperationCode.Disabled))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.EmployeeView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeeView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeeEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.BusinessUnitView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.BusinessUnitEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitTypeView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.BusinessUnitTypeView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitTypeEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.BusinessUnitTypeEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.BusinessUnitHrDepartmentView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.BusinessUnitHrDepartmentEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.ManagementUnitView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.ManagementUnitEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitChangeEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.ManagementUnitChangeEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitChangeView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.ManagementUnitChangeView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.CreateManagementUnitStart))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.CreateManagementUnitStart;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.EmployeeSpecializationView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeeSpecializationView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.EmployeeRoleView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeeRoleView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.EmployeeRoleDegreeView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeeRoleDegreeView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.HRDepartmentView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.HRDepartmentEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentAdvancedEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.HRDepartmentAdvancedEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.LocationOpenModule))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.LocationOpenModule;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.LocationView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.LocationView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.LocationEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.LocationEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.CountryView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.CountryView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.CountryEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.CountryEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.CompanyLegalEntityView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.CompanyLegalEntityEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeePositionView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeePositionEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.SearchNotificationOperation))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.SearchNotificationOperation;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.AuthorizationImpersonate))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.AuthorizationImpersonate;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.SystemIntegration;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ApproveWorkflowOperation))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.ApproveWorkflowOperation;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ApprovingWorkflowOperation))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.ApprovingWorkflowOperation;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("code");
-            }
-        }
-        
-        public static Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> GetByMode<TDomainObject>(Framework.SecuritySystem.BLLSecurityMode mode)
-            where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-        {
-            SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = SampleSystem.BLL.SampleSystemSecurityOperation.GetCodeByMode<TDomainObject>(mode);
-            if ((securityOperationCode == SampleSystem.SampleSystemSecurityOperationCode.Disabled))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.Disabled;
-            }
-            else
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.GetByCode(securityOperationCode);
-            }
-        }
-        
-        public static SampleSystem.SampleSystemSecurityOperationCode GetCodeByMode(System.Type domainType, Framework.SecuritySystem.BLLSecurityMode mode)
-        {
-            if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnit) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.BusinessUnit) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnitHrDepartment) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.BusinessUnitHrDepartment) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnitType) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitTypeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.BusinessUnitType) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitTypeEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.CompanyLegalEntity) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.CompanyLegalEntity) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Country) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.CountryView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Country) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.CountryEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Employee) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Employee) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeCellPhone) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeInformation) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeePersonalCellPhone) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.EmployeePersonalCellPhone) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeePhoto) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.EmployeePhoto) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeePosition) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.EmployeePosition) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeRegistrationType) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeRole) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeRoleView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeRoleDegree) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeRoleDegreeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeSpecialization) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeSpecializationView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EnversBug1676.Location1676) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Example1) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.LocationView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Example1) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.LocationEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.HRDepartment) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.HRDepartment) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.IMRequest) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Information) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Location) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.LocationView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Location) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.LocationEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.ManagementUnit) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.ManagementUnit) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.ManagementUnitFluentMapping) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.ManagementUnitFluentMapping) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Principal) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Principal) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.AuthorizationImpersonate;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Projections.TestLegacyEmployee) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Projections.TestLegacyEmployee) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.SqlParserTestObj) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.SqlParserTestObj) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.SqlParserTestObjContainer) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.SqlParserTestObjContainer) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.TestImmutableObj) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.TestImmutableObj) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.TestPerformanceObject) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.TestPlainAuthObject) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.TestRootSecurityObj) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeView;
-            }
-            else
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-        }
-        
-        private static SampleSystem.SampleSystemSecurityOperationCode GetCodeByMode<TDomainObject>(Framework.SecuritySystem.BLLSecurityMode mode)
-            where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-        {
-            return SampleSystem.BLL.SampleSystemSecurityOperation.GetCodeByMode(typeof(TDomainObject), mode);
-        }
-    }
-    #endregion
-    
-    public partial class SampleSystemSecurityPath<TDomainObject> : Framework.SecuritySystem.SecurityPathWrapper<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-    {
-        
-        private SampleSystemSecurityPath(Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath) : 
-                base(securityPath)
-        {
-        }
-        
-        public static implicit operator SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject> (Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath)
-        {
-            return new SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject>(securityPath);
-        }
-    }
-    
-    public partial class SampleSystemBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.DomainObjectBase, System.Guid, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode, System.Guid>>>, SampleSystem.BLL.ISampleSystemBLLContext
-    {
-        
-        Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.IDefaultBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>> Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.IDefaultBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>>>.Logics
-        {
-            get
-            {
-                return this.Logics;
-            }
-        }
-        
-        Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode, System.Guid>> Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode, System.Guid>>>.Logics
-        {
-            get
-            {
-                return this.Logics;
-            }
-        }
-        
-        public override Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> GetSecurityOperation(SampleSystem.SampleSystemSecurityOperationCode securityOperationCode)
-        {
-            return SampleSystem.BLL.SampleSystemSecurityOperation.GetByCode(securityOperationCode);
-        }
-        
-        public override Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> GetSecurityOperation<TDomainObject>(Framework.SecuritySystem.BLLSecurityMode securitMode)
-        {
-            return SampleSystem.BLL.SampleSystemSecurityOperation.GetByMode<TDomainObject>(securitMode);
-        }
-    }
-    
-    public partial interface ISampleSystemBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer<SampleSystem.Domain.PersistentDomainObjectBase>, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<SampleSystem.BLL.ISampleSystemSecurityService>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<SampleSystem.BLL.ISampleSystemBLLFactoryContainer>, Framework.DomainDriven.IFetchServiceContainer<SampleSystem.Domain.PersistentDomainObjectBase, Framework.DomainDriven.FetchBuildRule>, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode>
+    public partial interface ISampleSystemBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.Domain.PersistentDomainObjectBase>>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<SampleSystem.BLL.ISampleSystemBLLFactoryContainer>, Framework.DomainDriven.IFetchServiceContainer<SampleSystem.Domain.PersistentDomainObjectBase, Framework.DomainDriven.FetchBuildRule>
     {
         
         new SampleSystem.BLL.ISampleSystemBLLFactoryContainer Logics
@@ -928,905 +20,18 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class DomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.DefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.DomainObjectBase, TDomainObject, System.Guid, TOperation>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-        where TOperation :  struct, System.Enum
-    {
-        
-        public DomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, specificationEvaluator)
-        {
-        }
-    }
-    
-    public abstract partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.DomainObjectBase, TDomainObject, System.Guid, TOperation>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-        where TOperation :  struct, System.Enum
-    {
-        
-        protected SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, specificationEvaluator)
-        {
-        }
-        
-        protected SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityOperation, specificationEvaluator)
-        {
-        }
-    }
-    
-    public partial class DomainBLLBase<TDomainObject> : SampleSystem.BLL.DomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.BLLBaseOperation>
+    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
         where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        public DomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context) : 
-                base(context)
+        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
+                base(context, securityProvider)
         {
         }
     }
     
-    public partial class SecurityDomainBLLBase<TDomainObject> : SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.BLLBaseOperation>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
+    public partial interface ISampleSystemBLLFactoryContainer : Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>>
     {
-        
-        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context) : 
-                base(context)
-        {
-        }
-        
-        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation) : 
-                base(context, securityOperation)
-        {
-        }
-    }
-    
-    public partial class SampleSystemSecurityService : SampleSystem.BLL.SampleSystemSecurityServiceBase, SampleSystem.BLL.ISampleSystemSecurityService
-    {
-        
-        public SampleSystemSecurityService(SampleSystem.BLL.ISampleSystemBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
-    public abstract partial class SampleSystemSecurityServiceBase : Framework.DomainDriven.BLL.Security.RootSecurityService<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        protected SampleSystemSecurityServiceBase(SampleSystem.BLL.ISampleSystemBLLContext context) : 
-                base(context)
-        {
-        }
-        
-        public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
-        {
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitHrDepartmentSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitManagerCommissionLink, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitManagerCommissionLinkSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitManagerCommissionLink>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitManagerCommissionLink, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitTypeSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemCompanyLegalEntitySecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Country, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemCountrySecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Country>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Country, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeSecurityService<SampleSystem.Domain.Employee, SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.HRDepartment, SampleSystem.Domain.Location, SampleSystem.Domain.Employee>>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeCellPhone, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeCellPhoneSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeCellPhone>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeCellPhone, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeInformation, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeInformationSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeInformation>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeInformation, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePersonalCellPhone, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeePersonalCellPhoneSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePersonalCellPhone>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePersonalCellPhone, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePhoto, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeePhotoSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePhoto>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePhoto, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePosition, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeePositionSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePosition>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePosition, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRegistrationType, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeRegistrationTypeSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRegistrationType>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRegistrationType, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRole, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeRoleSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRole>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRole, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRoleDegree, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeRoleDegreeSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRoleDegree>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRoleDegree, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeSpecialization, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeSpecializationSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeSpecialization>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeSpecialization, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.Location1676, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemLocation1676SecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.Location1676>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.Location1676, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemWorkingCalendar1676SecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Example1, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemExample1SecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Example1>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Example1, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemHRDepartmentSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemIMRequestSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Information, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemInformationSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Information>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Information, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemLocationSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnit, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemManagementUnitSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnit>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnit, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemManagementUnitAndBusinessUnitLinkSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemManagementUnitAndHRDepartmentLinkSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitFluentMapping, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemManagementUnitFluentMappingSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitFluentMapping>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitFluentMapping, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestManualEmployeeProjectionSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Principal, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemPrincipalSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Principal>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Principal, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitIdentity, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitIdentitySecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitIdentity>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitIdentity, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitProgramClass, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitProgramClassSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitProgramClass>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitProgramClass, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.CustomCompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemCustomCompanyLegalEntitySecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.CustomCompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.HerBusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemHerBusinessUnitSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.HerBusinessUnit>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.HerBusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestBusinessUnitSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnit>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestBusinessUnitTypeSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnitType>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjProjectionSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestDepartment, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestDepartmentSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestDepartment>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestDepartment, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestEmployee, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestEmployeeSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestEmployee>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestEmployee, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestIMRequest, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestIMRequestSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestIMRequest>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestIMRequest, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation, SampleSystem.Domain.Projections.SecurityEmployee>>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocation, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestLocationSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocation>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocation, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocationCollectionProperties, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestLocationCollectionPropertiesSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocationCollectionProperties>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocationCollectionProperties, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecurityObjItemProjectionSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemVisualEmployeeSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemSqlParserTestObjSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObj>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObj, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemSqlParserTestObjContainerSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestImmutableObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestImmutableObjSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestImmutableObj>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestImmutableObj, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestPerformanceObjectSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPerformanceObject>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPlainAuthObject, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestPlainAuthObjectSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPlainAuthObject>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPlainAuthObject, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestRootSecurityObjSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecurityObjItemSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItemSecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItem2SecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem2>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItem3SecurityService>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
-        }
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnit> GetBusinessUnitSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePosition> GetEmployeePositionSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
-            where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<TBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<TDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee, TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee>
-            where TBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
-            where TDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<TLocation>
-            where TLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
-            where TEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, Framework.SecuritySystem.ISecurityContext;
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
-        
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
-    }
-    
-    public partial interface ISampleSystemSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.ISampleSystemSecurityPathContainer
-    {
-    }
-    
-    public partial interface ISampleSystemSecurityPathContainer
-    {
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnit> GetBusinessUnitSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePosition> GetEmployeePositionSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
-            where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<TBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<TDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee, TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee>
-            where TBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
-            where TDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<TLocation>
-            where TLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
-            where TEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, Framework.SecuritySystem.ISecurityContext;
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
-        
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
-    }
-    
-    public partial class SampleSystemBusinessUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemBusinessUnitSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetBusinessUnitSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemBusinessUnitHrDepartmentSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemBusinessUnitHrDepartmentSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetBusinessUnitHrDepartmentSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemBusinessUnitManagerCommissionLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemBusinessUnitManagerCommissionLinkSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetBusinessUnitManagerCommissionLinkSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemBusinessUnitTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitType, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemBusinessUnitTypeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemCompanyLegalEntitySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.CompanyLegalEntity, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemCompanyLegalEntitySecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemCountrySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Country, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemCountrySecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee> : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<TBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<TDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee, TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee>
-        where TBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
-        where TDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<TLocation>
-        where TLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
-        where TEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, Framework.SecuritySystem.ISecurityContext
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>();
-        }
-    }
-    
-    public partial class SampleSystemEmployeeCellPhoneSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeCellPhone, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemEmployeeCellPhoneSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeCellPhone, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetEmployeeCellPhoneSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemEmployeeInformationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeInformation, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemEmployeeInformationSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemEmployeePersonalCellPhoneSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePersonalCellPhone, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemEmployeePersonalCellPhoneSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemEmployeePhotoSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePhoto, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemEmployeePhotoSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePhoto, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetEmployeePhotoSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemEmployeePositionSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePosition, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemEmployeePositionSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePosition, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetEmployeePositionSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemEmployeeRegistrationTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRegistrationType, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemEmployeeRegistrationTypeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemEmployeeRoleSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRole, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemEmployeeRoleSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemEmployeeRoleDegreeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRoleDegree, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemEmployeeRoleDegreeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemEmployeeSpecializationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeSpecialization, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemEmployeeSpecializationSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemLocation1676SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.Location1676, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemLocation1676SecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemWorkingCalendar1676SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemWorkingCalendar1676SecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemExample1SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Example1, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemExample1SecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemHRDepartmentSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.HRDepartment, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemHRDepartmentSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemIMRequestSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IMRequest, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemIMRequestSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemInformationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Information, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemInformationSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemLocationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Location, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemLocationSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemManagementUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemManagementUnitSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnit, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetManagementUnitSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemManagementUnitAndBusinessUnitLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemManagementUnitAndBusinessUnitLinkSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetManagementUnitAndBusinessUnitLinkSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemManagementUnitAndHRDepartmentLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemManagementUnitAndHRDepartmentLinkSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetManagementUnitAndHRDepartmentLinkSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemManagementUnitFluentMappingSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemManagementUnitFluentMappingSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetManagementUnitFluentMappingSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemTestManualEmployeeProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, SampleSystem.Domain.Employee, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestManualEmployeeProjectionSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemPrincipalSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Principal, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemPrincipalSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemBusinessUnitIdentitySecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitIdentity, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemBusinessUnitIdentitySecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemBusinessUnitProgramClassSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitProgramClass, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemBusinessUnitProgramClassSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemCustomCompanyLegalEntitySecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.CustomCompanyLegalEntity, SampleSystem.Domain.CompanyLegalEntity, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemCustomCompanyLegalEntitySecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemHerBusinessUnitSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.HerBusinessUnit, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemHerBusinessUnitSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestBusinessUnitSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnit, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestBusinessUnitSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestBusinessUnitTypeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnitType, SampleSystem.Domain.BusinessUnitType, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestBusinessUnitTypeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestCustomContextSecurityObjProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestCustomContextSecurityObjProjectionSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestDepartmentSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestDepartment, SampleSystem.Domain.HRDepartment, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestDepartmentSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestEmployeeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestEmployee, SampleSystem.Domain.Employee, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestEmployeeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestIMRequestSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestIMRequest, SampleSystem.Domain.IMRequest, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestIMRequestSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestLocationSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocation, SampleSystem.Domain.Location, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestLocationSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestLocationCollectionPropertiesSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocationCollectionProperties, SampleSystem.Domain.Location, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestLocationCollectionPropertiesSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestSecurityObjItemProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestSecurityObjItemProjection, SampleSystem.Domain.TestSecurityObjItem, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestSecurityObjItemProjectionSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemVisualEmployeeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.VisualEmployee, SampleSystem.Domain.Employee, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemVisualEmployeeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-    }
-    
-    public partial class SampleSystemSqlParserTestObjSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemSqlParserTestObjSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemSqlParserTestObjContainerSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObjContainer, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemSqlParserTestObjContainerSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestCustomContextSecurityObjSecurityService : Framework.SecuritySystem.ContextDomainSecurityServiceBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestCustomContextSecurityObjSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestImmutableObjSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestImmutableObjSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemTestPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemTestPerformanceObjectSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetTestPerformanceObjectSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemTestPlainAuthObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemTestPlainAuthObjectSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetTestPlainAuthObjectSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemTestRootSecurityObjSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        public SampleSystemTestRootSecurityObjSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetTestRootSecurityObjSecurityPath();
-        }
-    }
-    
-    public partial class SampleSystemTestSecurityObjItemSecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecurityObjItem, SampleSystem.Domain.TestRootSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestSecurityObjItemSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-        
-        protected override System.Linq.Expressions.Expression<System.Func<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.Domain.TestRootSecurityObj>> Selector
-        {
-            get
-            {
-                return domainObject => domainObject.FirstMaster;
-            }
-        }
-    }
-    
-    public partial class SampleSystemTestSecuritySubObjItemSecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.Domain.TestSecurityObjItem, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestSecuritySubObjItemSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-        
-        protected override System.Linq.Expressions.Expression<System.Func<SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.Domain.TestSecurityObjItem>> Selector
-        {
-            get
-            {
-                return domainObject => domainObject.InnerMaster;
-            }
-        }
-    }
-    
-    public partial class SampleSystemTestSecuritySubObjItem2SecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.Domain.TestRootSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestSecuritySubObjItem2SecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-        
-        protected override System.Linq.Expressions.Expression<System.Func<SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.Domain.TestRootSecurityObj>> Selector
-        {
-            get
-            {
-                return domainObject => domainObject.RootSecurityObj;
-            }
-        }
-    }
-    
-    public partial class SampleSystemTestSecuritySubObjItem3SecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.Domain.TestRootSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemTestSecuritySubObjItem3SecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
-        {
-        }
-        
-        protected override System.Linq.Expressions.Expression<System.Func<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.Domain.TestRootSecurityObj>> Selector
-        {
-            get
-            {
-                return domainObject => domainObject.InnerMaster.FirstMaster;
-            }
-        }
-    }
-    
-    public partial interface ISampleSystemBLLFactoryContainer : Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode, System.Guid>>
-    {
-        
-        SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL ApprovePermissionWorkflowDomainObject
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLLFactory ApprovePermissionWorkflowDomainObjectFactory
-        {
-            get;
-        }
         
         SampleSystem.BLL.IBusinessUnitBLL BusinessUnit
         {
@@ -2108,16 +313,6 @@ namespace SampleSystem.BLL
             get;
         }
         
-        SampleSystem.BLL.INamedLockBLL NamedLock
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.INamedLockBLLFactory NamedLockFactory
-        {
-            get;
-        }
-        
         SampleSystem.BLL.IPrincipalBLL Principal
         {
             get;
@@ -2288,6 +483,16 @@ namespace SampleSystem.BLL
             get;
         }
         
+        SampleSystem.BLL.ITestRestrictionObjectBLL TestRestrictionObject
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.ITestRestrictionObjectBLLFactory TestRestrictionObjectFactory
+        {
+            get;
+        }
+        
         SampleSystem.BLL.ITestRootSecurityObjBLL TestRootSecurityObj
         {
             get;
@@ -2348,26 +553,6 @@ namespace SampleSystem.BLL
             get;
         }
         
-        SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL WorkflowCoreExecutionError
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.IWorkflowCoreExecutionErrorBLLFactory WorkflowCoreExecutionErrorFactory
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.IWorkflowCoreInstanceBLL WorkflowCoreInstance
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.IWorkflowCoreInstanceBLLFactory WorkflowCoreInstanceFactory
-        {
-            get;
-        }
-        
         SampleSystem.BLL.IWorkingCalendar1676BLL WorkingCalendar1676
         {
             get;
@@ -2379,19 +564,11 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial interface IApprovePermissionWorkflowDomainObjectBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.Guid>
-    {
-    }
-    
-    public partial interface IApprovePermissionWorkflowDomainObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>>
-    {
-    }
-    
     public partial interface IBusinessUnitBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid>
     {
     }
     
-    public partial interface IBusinessUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnit>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IBusinessUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, SampleSystem.Domain.BusinessUnit>
     {
     }
     
@@ -2399,7 +576,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IBusinessUnitHrDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitHrDepartment>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IBusinessUnitHrDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, SampleSystem.Domain.BusinessUnitHrDepartment>
     {
     }
     
@@ -2407,7 +584,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IBusinessUnitManagerCommissionLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitManagerCommissionLink>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IBusinessUnitManagerCommissionLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, SampleSystem.Domain.BusinessUnitManagerCommissionLink>
     {
     }
     
@@ -2415,7 +592,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IBusinessUnitTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitType>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IBusinessUnitTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, SampleSystem.Domain.BusinessUnitType>
     {
     }
     
@@ -2423,7 +600,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ICompanyLegalEntityBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.CompanyLegalEntity>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ICompanyLegalEntityBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, SampleSystem.Domain.CompanyLegalEntity>
     {
     }
     
@@ -2431,7 +608,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ICountryBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Country>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ICountryBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, SampleSystem.Domain.Country>
     {
     }
     
@@ -2453,7 +630,7 @@ namespace SampleSystem.BLL
         System.Collections.Generic.List<SampleSystem.Domain.Employee> MassChangeByEmail(SampleSystem.Domain.EmployeeEmailMassChangeModel changeModel);
     }
     
-    public partial interface IEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Employee>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, SampleSystem.Domain.Employee>
     {
     }
     
@@ -2461,7 +638,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeeInformationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeInformation>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeInformationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, SampleSystem.Domain.EmployeeInformation>
     {
     }
     
@@ -2469,7 +646,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeePhotoBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeePhoto>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeePhotoBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, SampleSystem.Domain.EmployeePhoto>
     {
     }
     
@@ -2477,7 +654,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeePositionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeePosition>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeePositionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, SampleSystem.Domain.EmployeePosition>
     {
     }
     
@@ -2485,7 +662,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeeRegistrationTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRegistrationType>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeRegistrationTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, SampleSystem.Domain.EmployeeRegistrationType>
     {
     }
     
@@ -2493,7 +670,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeeRoleBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRole>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeRoleBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, SampleSystem.Domain.EmployeeRole>
     {
     }
     
@@ -2501,7 +678,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeeRoleDegreeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRoleDegree>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeRoleDegreeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, SampleSystem.Domain.EmployeeRoleDegree>
     {
     }
     
@@ -2509,7 +686,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IEmployeeSpecializationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeSpecialization>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IEmployeeSpecializationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, SampleSystem.Domain.EmployeeSpecialization>
     {
     }
     
@@ -2517,7 +694,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ILocation1676BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocation1676BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EnversBug1676.Location1676>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocation1676BLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocation1676BLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocation1676BLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ILocation1676BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocation1676BLL, SampleSystem.Domain.EnversBug1676.Location1676>
     {
     }
     
@@ -2525,7 +702,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IWorkingCalendar1676BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkingCalendar1676BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkingCalendar1676BLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkingCalendar1676BLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkingCalendar1676BLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IWorkingCalendar1676BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkingCalendar1676BLL, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>
     {
     }
     
@@ -2533,7 +710,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IExample1BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Example1>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IExample1BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, SampleSystem.Domain.Example1>
     {
     }
     
@@ -2541,7 +718,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IHRDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.HRDepartment>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IHRDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, SampleSystem.Domain.HRDepartment>
     {
     }
     
@@ -2549,7 +726,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IIMRequestBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IMRequest>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IIMRequestBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, SampleSystem.Domain.IMRequest>
     {
     }
     
@@ -2557,25 +734,25 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IInformationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Information>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IInformationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, SampleSystem.Domain.Information>
     {
     }
     
-    public partial interface IIntegrationVersionContainer1BLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.Guid>
+    public partial interface IIntegrationVersionContainer1BLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.Guid>
     {
         
         SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 IntegrationSave(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel integrationSaveModel);
     }
     
-    public partial interface IIntegrationVersionContainer1BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer1BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>>
+    public partial interface IIntegrationVersionContainer1BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer1BLL, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>
     {
     }
     
-    public partial interface IIntegrationVersionContainer2BLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.Guid>
+    public partial interface IIntegrationVersionContainer2BLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.Guid>
     {
     }
     
-    public partial interface IIntegrationVersionContainer2BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer2BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>>
+    public partial interface IIntegrationVersionContainer2BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer2BLL, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>
     {
     }
     
@@ -2583,7 +760,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ILocationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Location>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ILocationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, SampleSystem.Domain.Location>
     {
     }
     
@@ -2591,7 +768,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IManagementUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnit>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IManagementUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, SampleSystem.Domain.ManagementUnit>
     {
     }
     
@@ -2599,7 +776,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IManagementUnitAndBusinessUnitLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IManagementUnitAndBusinessUnitLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>
     {
     }
     
@@ -2607,7 +784,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IManagementUnitAndHRDepartmentLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IManagementUnitAndHRDepartmentLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>
     {
     }
     
@@ -2615,7 +792,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IManagementUnitFluentMappingBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitFluentMapping>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IManagementUnitFluentMappingBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, SampleSystem.Domain.ManagementUnitFluentMapping>
     {
     }
     
@@ -2623,15 +800,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestManualEmployeeProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, Framework.SecuritySystem.BLLSecurityMode>
-    {
-    }
-    
-    public partial interface INamedLockBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.NamedLock, System.Guid>
-    {
-    }
-    
-    public partial interface INamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.INamedLockBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.NamedLock>>
+    public partial interface ITestManualEmployeeProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>
     {
     }
     
@@ -2639,7 +808,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IPrincipalBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Principal>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IPrincipalBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, SampleSystem.Domain.Principal>
     {
     }
     
@@ -2649,7 +818,7 @@ namespace SampleSystem.BLL
         Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.BusinessUnitProgramClass> GetObjectsByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> selectOperation, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel filter, Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.BusinessUnitProgramClass> fetchs);
     }
     
-    public partial interface IBusinessUnitProgramClassBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.BusinessUnitProgramClass>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IBusinessUnitProgramClassBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, SampleSystem.Domain.Projections.BusinessUnitProgramClass>
     {
     }
     
@@ -2657,7 +826,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ICustomCompanyLegalEntityBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICustomCompanyLegalEntityBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICustomCompanyLegalEntityBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICustomCompanyLegalEntityBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICustomCompanyLegalEntityBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ICustomCompanyLegalEntityBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ICustomCompanyLegalEntityBLL, SampleSystem.Domain.Projections.CustomCompanyLegalEntity>
     {
     }
     
@@ -2667,7 +836,7 @@ namespace SampleSystem.BLL
         Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>> GetTreeByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> selectOperation, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel filter, Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestBusinessUnit> fetchs);
     }
     
-    public partial interface ITestBusinessUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestBusinessUnit>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestBusinessUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, SampleSystem.Domain.Projections.TestBusinessUnit>
     {
     }
     
@@ -2675,7 +844,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestCustomContextSecurityObjProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestCustomContextSecurityObjProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>
     {
     }
     
@@ -2683,7 +852,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestDepartmentBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestDepartment>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestDepartmentBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestDepartmentBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestDepartmentBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestDepartmentBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestDepartmentBLL, SampleSystem.Domain.Projections.TestDepartment>
     {
     }
     
@@ -2699,7 +868,7 @@ namespace SampleSystem.BLL
         Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.TestEmployee> GetObjectsByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestEmployee> selectOperation, SampleSystem.Domain.TestEmployeeFilter filter, Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestEmployee> fetchs);
     }
     
-    public partial interface ITestEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestEmployee>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, SampleSystem.Domain.Projections.TestEmployee>
     {
     }
     
@@ -2707,7 +876,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestIMRequestBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestIMRequestBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestIMRequest>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestIMRequestBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestIMRequestBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestIMRequestBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestIMRequestBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestIMRequestBLL, SampleSystem.Domain.Projections.TestIMRequest>
     {
     }
     
@@ -2717,7 +886,7 @@ namespace SampleSystem.BLL
         System.Collections.Generic.List<SampleSystem.Domain.Projections.TestLegacyEmployee> GetListBy(SampleSystem.Domain.Models.Filters.EmployeeFilterModel filter, Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestLegacyEmployee> fetchs);
     }
     
-    public partial interface ITestLegacyEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLegacyEmployeeBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLegacyEmployeeBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLegacyEmployeeBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLegacyEmployeeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestLegacyEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLegacyEmployeeBLL, SampleSystem.Domain.Projections.TestLegacyEmployee>
     {
     }
     
@@ -2725,7 +894,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestLocationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLocation>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestLocationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationBLL, SampleSystem.Domain.Projections.TestLocation>
     {
     }
     
@@ -2733,7 +902,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestLocationCollectionPropertiesBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationCollectionPropertiesBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLocationCollectionProperties>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationCollectionPropertiesBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationCollectionPropertiesBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationCollectionPropertiesBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestLocationCollectionPropertiesBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLocationCollectionPropertiesBLL, SampleSystem.Domain.Projections.TestLocationCollectionProperties>
     {
     }
     
@@ -2741,15 +910,15 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestSecurityObjItemProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestSecurityObjItemProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, SampleSystem.Domain.Projections.TestSecurityObjItemProjection>
     {
     }
     
-    public partial interface IRoleRoleDegreeLinkBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.RoleRoleDegreeLink, System.Guid>
+    public partial interface IRoleRoleDegreeLinkBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.RoleRoleDegreeLink, System.Guid>
     {
     }
     
-    public partial interface IRoleRoleDegreeLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IRoleRoleDegreeLinkBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.RoleRoleDegreeLink>>
+    public partial interface IRoleRoleDegreeLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IRoleRoleDegreeLinkBLL, SampleSystem.Domain.RoleRoleDegreeLink>
     {
     }
     
@@ -2757,7 +926,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ISqlParserTestObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SqlParserTestObj>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ISqlParserTestObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjBLL, SampleSystem.Domain.SqlParserTestObj>
     {
     }
     
@@ -2765,7 +934,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ISqlParserTestObjContainerBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjContainerBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SqlParserTestObjContainer>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjContainerBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjContainerBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjContainerBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ISqlParserTestObjContainerBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISqlParserTestObjContainerBLL, SampleSystem.Domain.SqlParserTestObjContainer>
     {
     }
     
@@ -2773,7 +942,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestCustomContextSecurityObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestCustomContextSecurityObj>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestCustomContextSecurityObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestCustomContextSecurityObjBLL, SampleSystem.Domain.TestCustomContextSecurityObj>
     {
     }
     
@@ -2781,7 +950,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestImmutableObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestImmutableObj>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestImmutableObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, SampleSystem.Domain.TestImmutableObj>
     {
     }
     
@@ -2789,7 +958,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestPerformanceObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPerformanceObject>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestPerformanceObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, SampleSystem.Domain.TestPerformanceObject>
     {
     }
     
@@ -2797,7 +966,15 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestPlainAuthObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPlainAuthObject>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestPlainAuthObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, SampleSystem.Domain.TestPlainAuthObject>
+    {
+    }
+    
+    public partial interface ITestRestrictionObjectBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRestrictionObject, System.Guid>
+    {
+    }
+    
+    public partial interface ITestRestrictionObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRestrictionObjectBLL, SampleSystem.Domain.TestRestrictionObject>
     {
     }
     
@@ -2805,7 +982,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestRootSecurityObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestRootSecurityObj>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestRootSecurityObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, SampleSystem.Domain.TestRootSecurityObj>
     {
     }
     
@@ -2813,7 +990,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestSecurityObjItemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecurityObjItem>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestSecurityObjItemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, SampleSystem.Domain.TestSecurityObjItem>
     {
     }
     
@@ -2821,7 +998,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestSecuritySubObjItemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestSecuritySubObjItemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, SampleSystem.Domain.TestSecuritySubObjItem>
     {
     }
     
@@ -2829,7 +1006,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestSecuritySubObjItem2BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem2>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestSecuritySubObjItem2BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, SampleSystem.Domain.TestSecuritySubObjItem2>
     {
     }
     
@@ -2837,23 +1014,7 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestSecuritySubObjItem3BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.BLLSecurityMode>
-    {
-    }
-    
-    public partial interface IWorkflowCoreExecutionErrorBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreExecutionError, System.Guid>
-    {
-    }
-    
-    public partial interface IWorkflowCoreExecutionErrorBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreExecutionError>>
-    {
-    }
-    
-    public partial interface IWorkflowCoreInstanceBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreInstance, System.Guid>
-    {
-    }
-    
-    public partial interface IWorkflowCoreInstanceBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkflowCoreInstanceBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreInstance>>
+    public partial interface ITestSecuritySubObjItem3BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, SampleSystem.Domain.TestSecuritySubObjItem3>
     {
     }
 }

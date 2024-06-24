@@ -16,7 +16,7 @@ public class ExpandPathTests : TestBase
     public void LiftToNullableContainsExt_ShouldNotThrowException()
     {
         // Arrange
-        var period = this.DateTimeService.CurrentMonth;
+        var period = this.TimeProvider.GetCurrentMonth();
 
         // Act
         var action = new Action(() =>
@@ -55,7 +55,11 @@ public class ExpandPathTests : TestBase
         // Act
         var action = new Action(() =>
                                 {
-                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.IsIntersected(this.DateTimeService.CurrentMonth)));
+                                    var res = this.Evaluate(
+                                        DBSessionMode.Read,
+                                        context => context.Logics.Employee.GetListBy(
+                                            employee => employee.CoreBusinessUnitPeriod.IsIntersected(
+                                                this.TimeProvider.GetCurrentMonth())));
 
                                     return;
                                 });
@@ -73,7 +77,7 @@ public class ExpandPathTests : TestBase
         // Act
         var action = new Action(() =>
                                 {
-                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.Contains((DateTime?)this.DateTimeService.Today)));
+                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.Contains(this.TimeProvider.GetToday())));
 
                                     return;
                                 });

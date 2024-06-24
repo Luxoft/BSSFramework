@@ -1,15 +1,16 @@
-﻿using System.Linq.Expressions;
-using FluentAssertions;
+﻿using FluentAssertions;
+
+using FluentValidation;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.Validation;
+using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.Domain;
+using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
@@ -19,11 +20,13 @@ public class PrincipalWithInitTests : TestBase
 {
     private const string TestPrincipalName = "Duplicate Permission Tester";
 
-    private static readonly Period TestPeriod = Framework.DomainDriven.DateTimeService.Default.CurrentMonth;
+    private Period testPeriod;
 
     [TestInitialize]
     public void SetUp()
     {
+        this.testPeriod = this.TimeProvider.GetCurrentMonth();
+
         var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
         var luxoftBuId = this.DataHelper.SaveBusinessUnit(
@@ -43,69 +46,63 @@ public class PrincipalWithInitTests : TestBase
                                                           type: buTypeId,
                                                           parent: luxoftBuId);
 
-        this.Evaluate(
-                      DBSessionMode.Write,
-                      context =>
-                      {
-                          var authContext = context.Authorization;
-
-                          var principalBll = authContext.Logics.Principal;
-                          var principal = principalBll.GetByNameOrCreate(TestPrincipalName, true);
-
-                          var entityType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
-
-                          Expression<Func<PermissionFilterEntity, bool>> entitySearchFilter =
-                                  entity =>
-                                          entity.EntityType == entityType
-                                          && entity.EntityId == DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID;
-
-                          var filterEntity = authContext.Logics.PermissionFilterEntity.GetObjectBy(entitySearchFilter) ?? new PermissionFilterEntity
-                                                 {
-                                                         EntityType = entityType,
-                                                         EntityId = DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID
-                                                 }.Self(bu => authContext.Logics.PermissionFilterEntity.Save(bu));
-
-                          var permission = new Permission(principal);
-                          permission.Role = authContext.Logics.BusinessRole.GetOrCreateAdminRole();
-                          permission.Period = TestPeriod;
-
-                          new PermissionFilterItem(permission) { Entity = filterEntity };
-
-                          principalBll.Save(principal);
-                      });
+        this.AuthHelper.SetUserRole(
+            TestPrincipalName,
+            new SampleSystemTestPermission(
+                SecurityRole.Administrator,
+                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = this.testPeriod });
     }
 
     [TestMethod]
     public void CreateDuplicatePermission_ValidationError()
     {
         // Arrange
-        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions (Role: {BusinessRole.AdminRoleName} | Period: {TestPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
+        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions: (Role: {SecurityRole.Administrator} | Period: {this.testPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
 
         // Act
-        Action call = () =>
-                      {
-                          this.Evaluate(
-                                        DBSessionMode.Write,
-                                        context =>
-                                        {
-                                            var authContext = context.Authorization;
+        var call = () =>
+                   {
+                       this.Evaluate(
+                           DBSessionMode.Write,
+                           context =>
+                           {
+                               var authContext = context.Authorization;
 
-                                            var principalBll = authContext.Logics.Principal;
-                                            var principal = principalBll.GetByName(TestPrincipalName, true);
+                               var principalBll = authContext.Logics.Principal;
+                               var principal = principalBll.GetByName(TestPrincipalName, true);
 
-                                            var existsPermission = principal.Permissions.Single();
+                               var existsPermission = principal.Permissions.Single();
 
-                                            var newPermission = new Permission(principal);
-                                            newPermission.Role = existsPermission.Role;
-                                            newPermission.Period = TestPeriod;
+                               var newPermission = new Permission(principal)
+                               {
+                                   Role = existsPermission.Role,
+                                   Period = this.testPeriod
+                               };
 
-                                            new PermissionFilterItem(newPermission) { Entity = existsPermission.FilterItems.Single().Entity };
+                               foreach (var restriction in existsPermission.Restrictions)
+                               {
+                                   new PermissionRestriction(newPermission)
+                                   {
+                                       SecurityContextId = restriction.SecurityContextId,
+                                       SecurityContextType = restriction.SecurityContextType
+                                   };
+                               }
 
-                                            principalBll.Save(principal);
-                                        });
-                      };
+                               try
+                               {
+                                   principalBll.Save(principal);
+                               }
+                               catch (Exception e)
+                               {
+                                   var m = e.Message;
+                                   Console.WriteLine(e);
+                                   throw;
+                               }
+
+                           });
+                   };
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage(expectedErrorMessage);
+        call.Should().Throw<ValidationException>().And.Message.Should().Contain(expectedErrorMessage);
     }
 }

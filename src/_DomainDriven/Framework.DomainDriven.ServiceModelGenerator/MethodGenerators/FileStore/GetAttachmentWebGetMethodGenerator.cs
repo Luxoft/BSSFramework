@@ -54,7 +54,7 @@ public class GetAttachmentWebGetMethodGenerator<TConfiguration> : MethodGenerato
         return baseResult;
     }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var opearationCode = this.Configuration.TryGetSecurityAttribute(this.DomainType, this.IsEdit);
         if (null != opearationCode)
@@ -62,7 +62,7 @@ public class GetAttachmentWebGetMethodGenerator<TConfiguration> : MethodGenerato
             return opearationCode;
         }
 
-        return base.GetBLLSecurityParameter();
+        return base.GetBLLSecurityParameter(evaluateDataExpr);
     }
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
@@ -79,7 +79,6 @@ public class GetAttachmentWebGetMethodGenerator<TConfiguration> : MethodGenerato
 
         yield return fileItemDecl;
 
-        if (null != this.Configuration.Environment.BLLCore.GetBLLSecurityModeType(this.DomainType))
         {
             var fileItemContainerLinkBLLDecl = this.GetCreateDefaultBLLVariableDeclaration(evaluateDataExpr, "fileItemContainerLinkBLL", this.Configuration.FileItemContainerLinkType);
 

@@ -1,29 +1,29 @@
 ﻿using Framework.Core.Services;
 using Framework.DomainDriven.Audit;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.DomainDriven.NHibernate;
 
 public class NHibSessionSettings : INHibSessionSetup
 {
-    [NotNull]
+    
     private readonly IUserAuthenticationService userAuthenticationService;
 
-    [NotNull]
-    private readonly IDateTimeService dateTimeService;
+    
+    private readonly TimeProvider timeProvider;
 
     public NHibSessionSettings(
-            [NotNull] IUserAuthenticationService userAuthenticationService,
-            [NotNull] IDateTimeService dateTimeService)
+            IUserAuthenticationService userAuthenticationService,
+            TimeProvider timeProvider)
     {
         this.userAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
-        this.dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
+        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
     }
 
     public DBSessionMode DefaultSessionMode { get; } = DBSessionMode.Write;
 
-    public AuditPropertyPair GetCreateAuditProperty() => AuditPropertyPair.GetCreateAuditProperty(this.userAuthenticationService, this.dateTimeService);
+    public AuditPropertyPair GetCreateAuditProperty() => AuditPropertyPair.GetCreateAuditProperty(this.userAuthenticationService, this.timeProvider);
 
-    public AuditPropertyPair GetModifyAuditProperty() => AuditPropertyPair.GetModifyAuditProperty(this.userAuthenticationService, this.dateTimeService);
+    public AuditPropertyPair GetModifyAuditProperty() => AuditPropertyPair.GetModifyAuditProperty(this.userAuthenticationService, this.timeProvider);
 }

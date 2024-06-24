@@ -1,10 +1,6 @@
-﻿using Framework.Persistent;
+﻿namespace Framework.SecuritySystem.Rules.Builders;
 
-namespace Framework.SecuritySystem.Rules.Builders;
-
-public interface ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+public interface ISecurityExpressionBuilderFactory
 {
-    ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> path)
-            where TDomainObject : class, TPersistentDomainObjectBase;
+    ISecurityExpressionBuilder<TDomainObject> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject> path);
 }

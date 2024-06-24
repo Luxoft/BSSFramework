@@ -4,9 +4,8 @@
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.ApiVersionAttribute("1.0")]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/v{version:apiVersion}/[controller]")]
-    public partial class TestSecurityObjItemController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>>
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    public partial class TestSecurityObjItemController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
         /// <summary>
@@ -16,14 +15,14 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestSecurityObjItemWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO GetFullTestSecurityObjItemWithRevision(GetFullTestSecurityObjItemWithRevisionAutoRequest getFullTestSecurityObjItemWithRevisionAutoRequest)
         {
-            long revision = getFullTestSecurityObjItemWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getFullTestSecurityObjItemWithRevisionAutoRequest.testSecurityObjItemIdentity;
+            long revision = getFullTestSecurityObjItemWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getFullTestSecurityObjItemWithRevisionAutoRequest.TestSecurityObjItemIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestSecurityObjItemWithRevisionInternal(testSecurityObjItemIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO GetFullTestSecurityObjItemWithRevisionInternal(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.TestSecurityObjItem domainObject = bll.GetObjectByRevision(testSecurityObjItemIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -35,14 +34,14 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestSecurityObjItemWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO GetRichTestSecurityObjItemWithRevision(GetRichTestSecurityObjItemWithRevisionAutoRequest getRichTestSecurityObjItemWithRevisionAutoRequest)
         {
-            long revision = getRichTestSecurityObjItemWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getRichTestSecurityObjItemWithRevisionAutoRequest.testSecurityObjItemIdentity;
+            long revision = getRichTestSecurityObjItemWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getRichTestSecurityObjItemWithRevisionAutoRequest.TestSecurityObjItemIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestSecurityObjItemWithRevisionInternal(testSecurityObjItemIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO GetRichTestSecurityObjItemWithRevisionInternal(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.TestSecurityObjItem domainObject = bll.GetObjectByRevision(testSecurityObjItemIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -54,14 +53,14 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestSecurityObjItemWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO GetSimpleTestSecurityObjItemWithRevision(GetSimpleTestSecurityObjItemWithRevisionAutoRequest getSimpleTestSecurityObjItemWithRevisionAutoRequest)
         {
-            long revision = getSimpleTestSecurityObjItemWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getSimpleTestSecurityObjItemWithRevisionAutoRequest.testSecurityObjItemIdentity;
+            long revision = getSimpleTestSecurityObjItemWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getSimpleTestSecurityObjItemWithRevisionAutoRequest.TestSecurityObjItemIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestSecurityObjItemWithRevisionInternal(testSecurityObjItemIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO GetSimpleTestSecurityObjItemWithRevisionInternal(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.TestSecurityObjItem domainObject = bll.GetObjectByRevision(testSecurityObjItemIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -73,16 +72,16 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestSecurityObjItemPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecurityObjItemPropertyRevisionByDateRange(GetTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest getTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest.period;
-            string propertyName = getTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest.testSecurityObjItemIdentity;
+            Framework.Core.Period? period = getTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest.Period;
+            string propertyName = getTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest.TestSecurityObjItemIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestSecurityObjItemPropertyRevisionByDateRangeInternal(testSecurityObjItemIdentity, propertyName, period, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecurityObjItemPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, SampleSystem.BLL.ISampleSystemSecurityService, SampleSystem.SampleSystemSecurityOperationCode, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestSecurityObjItem>(testSecurityObjItemIdentity.Id, propertyName, period);
+            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.Domain.PersistentDomainObjectBase>, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestSecurityObjItem>(testSecurityObjItemIdentity.Id, propertyName, period);
         }
         
         /// <summary>
@@ -92,15 +91,15 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestSecurityObjItemPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecurityObjItemPropertyRevisions(GetTestSecurityObjItemPropertyRevisionsAutoRequest getTestSecurityObjItemPropertyRevisionsAutoRequest)
         {
-            string propertyName = getTestSecurityObjItemPropertyRevisionsAutoRequest.propertyName;
-            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getTestSecurityObjItemPropertyRevisionsAutoRequest.testSecurityObjItemIdentity;
+            string propertyName = getTestSecurityObjItemPropertyRevisionsAutoRequest.PropertyName;
+            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getTestSecurityObjItemPropertyRevisionsAutoRequest.TestSecurityObjItemIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestSecurityObjItemPropertyRevisionsInternal(testSecurityObjItemIdentity, propertyName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecurityObjItemPropertyRevisionsInternal(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
-            return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, SampleSystem.BLL.ISampleSystemSecurityService, SampleSystem.SampleSystemSecurityOperationCode, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestSecurityObjItem>(testSecurityObjItemIdentity.Id, propertyName);
+            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
+            return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.Domain.PersistentDomainObjectBase>, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestSecurityObjItem>(testSecurityObjItemIdentity.Id, propertyName);
         }
         
         /// <summary>
@@ -115,7 +114,7 @@
         
         protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestSecurityObjItemRevisionsInternal(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return new Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO(bll.GetObjectRevisions(testSecurityObjItemIdentity.Id));
         }
         
@@ -126,14 +125,14 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestSecurityObjItemWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemVisualDTO GetVisualTestSecurityObjItemWithRevision(GetVisualTestSecurityObjItemWithRevisionAutoRequest getVisualTestSecurityObjItemWithRevisionAutoRequest)
         {
-            long revision = getVisualTestSecurityObjItemWithRevisionAutoRequest.revision;
-            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getVisualTestSecurityObjItemWithRevisionAutoRequest.testSecurityObjItemIdentity;
+            long revision = getVisualTestSecurityObjItemWithRevisionAutoRequest.Revision;
+            SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity = getVisualTestSecurityObjItemWithRevisionAutoRequest.TestSecurityObjItemIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestSecurityObjItemWithRevisionInternal(testSecurityObjItemIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.TestSecurityObjItemVisualDTO GetVisualTestSecurityObjItemWithRevisionInternal(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.BLLSecurityMode.View);
+            SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.TestSecurityObjItem domainObject = bll.GetObjectByRevision(testSecurityObjItemIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
@@ -144,13 +143,37 @@
     public partial class GetFullTestSecurityObjItemWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        public virtual SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO TestSecurityObjItemIdentity
+        {
+            get
+            {
+                return this.testSecurityObjItemIdentity;
+            }
+            set
+            {
+                this.testSecurityObjItemIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -158,13 +181,37 @@
     public partial class GetRichTestSecurityObjItemWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        public virtual SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO TestSecurityObjItemIdentity
+        {
+            get
+            {
+                return this.testSecurityObjItemIdentity;
+            }
+            set
+            {
+                this.testSecurityObjItemIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -172,13 +219,37 @@
     public partial class GetSimpleTestSecurityObjItemWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        public virtual SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO TestSecurityObjItemIdentity
+        {
+            get
+            {
+                return this.testSecurityObjItemIdentity;
+            }
+            set
+            {
+                this.testSecurityObjItemIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -186,17 +257,53 @@
     public partial class GetTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        
+        private string propertyName;
+        
+        private Framework.Core.Period? period;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        public virtual SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO TestSecurityObjItemIdentity
+        {
+            get
+            {
+                return this.testSecurityObjItemIdentity;
+            }
+            set
+            {
+                this.testSecurityObjItemIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public Framework.Core.Period? period;
+        public virtual Framework.Core.Period? Period
+        {
+            get
+            {
+                return this.period;
+            }
+            set
+            {
+                this.period = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -204,13 +311,37 @@
     public partial class GetTestSecurityObjItemPropertyRevisionsAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        
+        private string propertyName;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        public virtual SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO TestSecurityObjItemIdentity
+        {
+            get
+            {
+                return this.testSecurityObjItemIdentity;
+            }
+            set
+            {
+                this.testSecurityObjItemIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public string propertyName;
+        public virtual string PropertyName
+        {
+            get
+            {
+                return this.propertyName;
+            }
+            set
+            {
+                this.propertyName = value;
+            }
+        }
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -218,12 +349,36 @@
     public partial class GetVisualTestSecurityObjItemWithRevisionAutoRequest
     {
         
+        private SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        
+        private long revision;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity;
+        public virtual SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO TestSecurityObjItemIdentity
+        {
+            get
+            {
+                return this.testSecurityObjItemIdentity;
+            }
+            set
+            {
+                this.testSecurityObjItemIdentity = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public long revision;
+        public virtual long Revision
+        {
+            get
+            {
+                return this.revision;
+            }
+            set
+            {
+                this.revision = value;
+            }
+        }
     }
 }

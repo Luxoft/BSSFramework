@@ -1,8 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Audit;
 
-using JetBrains.Annotations;
-
 using NHibernate.Event;
 using NHibernate.Persister.Entity;
 
@@ -15,7 +13,7 @@ public abstract class AuditEventListenerBase
     private readonly IDictionaryCache<IEntityPersister, Action<AbstractPreDatabaseOperationEvent, object[]>> _setCache;
 
 
-    protected AuditEventListenerBase([NotNull] IEnumerable<IAuditProperty> auditProperties)
+    protected AuditEventListenerBase(IEnumerable<IAuditProperty> auditProperties)
     {
         if (auditProperties == null) throw new ArgumentNullException(nameof(auditProperties));
 
@@ -25,9 +23,9 @@ public abstract class AuditEventListenerBase
 
         this._setCache = new DictionaryCache<IEntityPersister, Action<AbstractPreDatabaseOperationEvent, object[]>>(entityPersister =>
         {
-            var entityType = entityPersister.EntityMetamodel.Type;
+            var securityContextType = entityPersister.EntityMetamodel.Type;
 
-            if (entityType == null)
+            if (securityContextType == null)
             {
                 return (_, __) => { };
             }
@@ -39,9 +37,9 @@ public abstract class AuditEventListenerBase
 
                               let propertyType = auditProperty.PropertyExpr.ReturnType
 
-                              where propertyDomainObjectType.IsAssignableFrom(entityType)
+                              where propertyDomainObjectType.IsAssignableFrom(securityContextType)
 
-                              select getSetAuditActionMethod.MakeGenericMethod(entityType, propertyDomainObjectType, propertyType)
+                              select getSetAuditActionMethod.MakeGenericMethod(securityContextType, propertyDomainObjectType, propertyType)
                                                             .Invoke<Action<AbstractPreDatabaseOperationEvent, object[]>>(this, entityPersister, auditProperty);
 
                 return request.Composite();

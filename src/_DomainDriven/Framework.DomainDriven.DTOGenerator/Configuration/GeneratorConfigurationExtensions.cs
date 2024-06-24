@@ -8,8 +8,6 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.Persistent;
 using Framework.Transfering;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.DTOGenerator;
 
 public static class GeneratorConfigurationExtensions
@@ -44,7 +42,7 @@ public static class GeneratorConfigurationExtensions
                select configuration.GetCodeTypeReference(domainType, parentType).ToKnownTypeCodeAttributeDeclaration();
     }
 
-    public static bool IsIdentityOrVersionProperty(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration, [NotNull] PropertyInfo property)
+    public static bool IsIdentityOrVersionProperty(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration, PropertyInfo property)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
         if (property == null) throw new ArgumentNullException(nameof(property));

@@ -32,14 +32,14 @@ public class GetListByOperationMethodGenerator<TConfiguration> : ViewCollectionM
     {
         yield return new CodeParameterDeclarationExpression
                      {
-                             Name = "securityOperationCode",
-                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), Framework.DomainDriven.DTOGenerator.FileType.DomainObjectSecurityOperationCode)
+                             Name = "securityRuleCode",
+                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), Framework.DomainDriven.DTOGenerator.FileType.DomainObjectSecurityRuleCode)
                      };
     }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.GetConvertSecurityOperationCodeParameterExpression(0);
+        return this.GetConvertToSecurityRuleCodeParameterExpression(evaluateDataExpr, 0);
     }
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)

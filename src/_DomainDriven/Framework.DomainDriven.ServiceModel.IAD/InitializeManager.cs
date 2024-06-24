@@ -7,7 +7,7 @@ public class InitializeManager : IInitializeManager
     /// </summary>
     public bool IsInitialize { get; private set; }
 
-    public void InitializeOperation(Action operation)
+    public async Task InitializeOperationAsync(Func<Task> operation)
     {
         if (operation == null) throw new ArgumentNullException(nameof(operation));
 
@@ -21,7 +21,7 @@ public class InitializeManager : IInitializeManager
 
             try
             {
-                operation();
+                await operation();
             }
             finally
             {

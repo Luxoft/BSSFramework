@@ -3,47 +3,32 @@ using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TSecurityOperationCode, TIdent> : BLLContextContainer<TBLLContext>,
+public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TIdent> : BLLContextContainer<TBLLContext>,
 
-    IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TSecurityOperationCode, TIdent>
+    IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TIdent>
 
-        where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
-        where TDomainObjectBase : class
-        where TSecurityOperationCode : struct, Enum
+    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     protected DefaultSecurityBLLFactory(TBLLContext context)
-            : base(context)
+        : base(context)
     {
     }
 
     public virtual IDefaultDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>()
-            where TDomainObject : class, TPersistentDomainObjectBase
+        where TDomainObject : class, TPersistentDomainObjectBase
     {
-        throw new NotImplementedException();
+        return this.Create<TDomainObject>(SecurityRule.Disabled);
     }
 
-    public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(BLLSecurityMode securityMode)
-            where TDomainObject : class, TPersistentDomainObjectBase
+    public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(
+        SecurityRule securityRule)
+        where TDomainObject : class, TPersistentDomainObjectBase
     {
-        throw new NotImplementedException();
+        return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityRule));
     }
 
-    public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(ISecurityProvider<TDomainObject> securityProvider)
-            where TDomainObject : class, TPersistentDomainObjectBase
-    {
-        throw new NotImplementedException();
-    }
-
-    public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(TSecurityOperationCode securityOperationCode)
-            where TDomainObject : class, TPersistentDomainObjectBase
-    {
-        throw new NotImplementedException();
-    }
-
-    public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(SecurityOperation<TSecurityOperationCode> securityOperation)
-            where TDomainObject : class, TPersistentDomainObjectBase
-    {
-        throw new NotImplementedException();
-    }
+    public abstract IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(
+        ISecurityProvider<TDomainObject> securityProvider)
+        where TDomainObject : class, TPersistentDomainObjectBase;
 }

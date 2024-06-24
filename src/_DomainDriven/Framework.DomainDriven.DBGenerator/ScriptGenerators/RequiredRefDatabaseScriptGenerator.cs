@@ -5,8 +5,6 @@ using Framework.DomainDriven.DBGenerator.ScriptGenerators;
 using Framework.DomainDriven.Metadata;
 using Framework.Restriction;
 
-using JetBrains.Annotations;
-
 using Microsoft.SqlServer.Management.Smo;
 
 using NHibernate.Util;
@@ -19,7 +17,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 {
     private readonly HashSet<IgnoreLink> _ignoreDomainTypeLinksHash;
 
-    public RequiredRefDatabaseScriptGenerator([NotNull] IEnumerable<IgnoreLink> ignoreDomainTypeLinks)
+    public RequiredRefDatabaseScriptGenerator(IEnumerable<IgnoreLink> ignoreDomainTypeLinks)
     {
         if (ignoreDomainTypeLinks == null) throw new ArgumentNullException(nameof(ignoreDomainTypeLinks));
 

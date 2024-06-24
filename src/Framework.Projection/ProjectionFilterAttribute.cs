@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Projection;
+﻿namespace Framework.Projection;
 
 /// <summary>
 /// Атрибут указывающий, что данный тип является фильтром для проекции
@@ -13,7 +11,7 @@ public class ProjectionFilterAttribute : Attribute
     /// </summary>
     /// <param name="filterType">Тип фильтра</param>
     /// <param name="target">Применимость фильтра</param>
-    public ProjectionFilterAttribute([NotNull] Type filterType, ProjectionFilterTargets target)
+    public ProjectionFilterAttribute(Type filterType, ProjectionFilterTargets target)
     {
         this.FilterType = filterType ?? throw new ArgumentNullException(nameof(filterType));
         this.Target = target;

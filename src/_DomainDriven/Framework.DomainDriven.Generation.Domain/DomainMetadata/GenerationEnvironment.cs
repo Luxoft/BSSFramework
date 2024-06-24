@@ -6,9 +6,8 @@ using Framework.Core;
 using Framework.Persistent;
 using Framework.Projection;
 using Framework.Projection.Contract;
+using Framework.Projection.Environment;
 using Framework.Projection.Lambda;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.Generation.Domain;
 
@@ -51,11 +50,13 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
     protected virtual string ProjectionNamespace => $"{this.PersistentDomainObjectBaseType.GetNamespacePrefix()}.Domain.Projections";
 
-    public abstract Type SecurityOperationCodeType { get; }
+    public virtual IReadOnlyList<Type> SecurityRuleTypeList { get; } = new List<Type>();
 
     public abstract Type OperationContextType { get; }
 
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
+
+    public virtual IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } = new DomainTypeRootExtendedMetadataBuilder();
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this._domainObjectAssemblies.Value;
 
@@ -103,7 +104,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
         var fullAssemblyName = assemblyName + fullAssemblyNamePostfix;
 
-        return ProjectionContractEnvironment.Create(
+        return ProjectionContractEnvironment.Create(this.ExtendedMetadata,
                                                     new TypeSource(this.GetDomainObjectAssemblies()),
                                                     assemblyName,
                                                     fullAssemblyName,
@@ -117,13 +118,12 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
     /// </summary>
     /// <param name="projectionSource"></param>
     /// <returns></returns>
-    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment([NotNull] IProjectionSource projectionSource, CreateProjectionLambdaSetupParams createParams)
+    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, CreateProjectionLambdaSetupParams createParams)
     {
         if (projectionSource == null) throw new ArgumentNullException(nameof(projectionSource));
         if (createParams == null) throw new ArgumentNullException(nameof(createParams));
 
-        return ProjectionLambdaEnvironment.Create(
-
+        return ProjectionLambdaEnvironment.Create(this.ExtendedMetadata,
                                                   projectionSource,
                                                   createParams.AssemblyName,
                                                   createParams.FullAssemblyName,
@@ -138,7 +138,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
     /// </summary>
     /// <param name="projectionSource"></param>
     /// <returns></returns>
-    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment([NotNull] IProjectionSource projectionSource, Action<CreateProjectionLambdaSetupParams> setupAction = null)
+    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, Action<CreateProjectionLambdaSetupParams> setupAction = null)
     {
         if (projectionSource == null) { throw new ArgumentNullException(nameof(projectionSource)); }
 

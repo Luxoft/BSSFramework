@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]/[Action]")]
+[Route("api/[controller]/[Action]")]
 [ApiController]
 public class TestSequenceController : ControllerBase
 {

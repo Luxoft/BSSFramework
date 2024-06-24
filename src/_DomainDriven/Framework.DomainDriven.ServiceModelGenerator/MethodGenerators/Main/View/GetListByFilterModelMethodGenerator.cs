@@ -55,15 +55,15 @@ public class GetListByFilterModelMethodGenerator<TConfiguration> : ViewCollectio
 
     }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this._filterType.GetViewDomainObjectAttribute();
 
         if (null == modelSecurityAttribute)
         {
-            return base.GetBLLSecurityParameter();
+            return base.GetBLLSecurityParameter(evaluateDataExpr);
         }
 
-        return modelSecurityAttribute.SecurityOperationCode;
+        return modelSecurityAttribute.SecurityRule;
     }
 }

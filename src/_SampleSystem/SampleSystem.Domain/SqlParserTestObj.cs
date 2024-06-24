@@ -10,8 +10,6 @@ namespace SampleSystem.Domain;
 [BLLSaveRole]
 [BLLRemoveRole]
 [UniqueGroup]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.Disabled)]
 public class SqlParserTestObj : AuditPersistentDomainObjectBase
 {
     private string notNullColumn;

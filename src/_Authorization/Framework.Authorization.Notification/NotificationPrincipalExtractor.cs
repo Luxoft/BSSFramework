@@ -6,6 +6,7 @@ using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.Notification;
@@ -22,52 +23,35 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 
     private readonly INotificationBasePermissionFilterSource notificationBasePermissionFilterSource;
 
-    private readonly IRepositoryFactory<Permission> permissionRepositoryFactory;
-
-    private readonly IRepositoryFactory<BusinessRole> businessRoleRepositoryFactory;
+    private readonly IRepository<Permission> permissionRepository;
 
     public NotificationPrincipalExtractor(
         IServiceProvider serviceProvider,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         INotificationBasePermissionFilterSource notificationBasePermissionFilterSource,
-        IRepositoryFactory<Permission> permissionRepositoryFactory,
-        IRepositoryFactory<BusinessRole> businessRoleRepositoryFactory)
+        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Permission> permissionRepository)
     {
         this.serviceProvider = serviceProvider;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.notificationBasePermissionFilterSource = notificationBasePermissionFilterSource;
-        this.permissionRepositoryFactory = permissionRepositoryFactory;
-        this.businessRoleRepositoryFactory = businessRoleRepositoryFactory;
-    }
-
-    public IEnumerable<Principal> GetNotificationPrincipalsByOperations(
-        Guid[] operationsIds,
-        IEnumerable<NotificationFilterGroup> notificationFilterGroups)
-    {
-        var roleIdents = this.businessRoleRepositoryFactory.Create().GetQueryable()
-                             .Where(role => role.BusinessRoleOperationLinks.Any(link => operationsIds.Contains(link.Operation.Id)))
-                             .ToArray(role => role.Id);
-
-        return this.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
+        this.permissionRepository = permissionRepository;
     }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(
-        Guid[] roleIdents,
+        SecurityRole[] securityRoles,
         IEnumerable<NotificationFilterGroup> preNotificationFilterGroups)
     {
         var notificationFilterGroups = preNotificationFilterGroups.ToArray();
 
-        var startPermissionQ = this.permissionRepositoryFactory.Create().GetQueryable()
-                                   .Where(this.notificationBasePermissionFilterSource.GetBasePermissionFilter(roleIdents))
+        var startPermissionQ = this.permissionRepository.GetQueryable()
+                                   .Where(this.notificationBasePermissionFilterSource.GetBasePermissionFilter(securityRoles))
                                    .Select(p => new PermissionLevelInfo { Permission = p, LevelInfo = "" });
 
         var principalInfoResult = notificationFilterGroups.Aggregate(startPermissionQ, this.ApplyNotificationFilter)
                                                           .Select(pair => new { pair.Permission.Principal, pair.LevelInfo })
                                                           .ToList();
 
-
-
-        var typeDict = notificationFilterGroups.Select(g => g.EntityType).ToDictionary(g => g.Name);
+        var typeDict = notificationFilterGroups.Select(g => g.SecurityContextType).ToDictionary(g => g.Name);
 
         var parsedLevelInfoResult =
             principalInfoResult
@@ -96,7 +80,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
                 {
                     var request = from pair in state
 
-                                  group pair by pair.LevelInfo[notificationFilterGroup.EntityType] into levelGroup
+                                  group pair by pair.LevelInfo[notificationFilterGroup.SecurityContextType] into levelGroup
 
                                   orderby levelGroup.Key descending
 
@@ -117,12 +101,12 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
     {
         var genericMethod =
 
-            notificationFilterGroup.EntityType.IsHierarchical()
+            notificationFilterGroup.SecurityContextType.IsHierarchical()
 
                 ? this.GetType().GetMethod(nameof(this.ApplyNotificationFilterTypedHierarchical), BindingFlags.Instance | BindingFlags.NonPublic)
                 : this.GetType().GetMethod(nameof(this.ApplyNotificationFilterTypedPlain), BindingFlags.Instance | BindingFlags.NonPublic);
 
-        var method = genericMethod.MakeGenericMethod(notificationFilterGroup.EntityType);
+        var method = genericMethod.MakeGenericMethod(notificationFilterGroup.SecurityContextType);
 
         return method.Invoke<IQueryable<PermissionLevelInfo>>(this, source, notificationFilterGroup);
     }
@@ -133,31 +117,31 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
         where TSecurityContext : IIdentityObject<Guid>, ISecurityContext, IHierarchicalLevelObject
     {
         var expandedSecIdents = notificationFilterGroup.ExpandType.IsHierarchical()
-                                    ? this.hierarchicalObjectExpanderFactory.Create(notificationFilterGroup.EntityType).Expand(
+                                    ? this.hierarchicalObjectExpanderFactory.Create(notificationFilterGroup.SecurityContextType).Expand(
                                         notificationFilterGroup.Idents,
                                         HierarchicalExpandType.Parents)
                                     : notificationFilterGroup.Idents;
 
         var grandAccess = notificationFilterGroup.ExpandType.AllowEmpty();
 
-        var securityContextQ = this.serviceProvider.GetRequiredService<IRepositoryFactory<TSecurityContext>>().Create().GetQueryable();
+        var securityContextQ = this.serviceProvider.GetRequiredKeyedService<IRepository<TSecurityContext>>(nameof(SecurityRule.Disabled)).GetQueryable();
 
         return from permissionInfo in source
 
                let permission = permissionInfo.Permission
 
                let permissionSecurityContextItems = securityContextQ.Where(
-                   securityContext => permission.FilterItems
+                   securityContext => permission.Restrictions
                                                 .Any(
-                                                    fi => fi.EntityType.Name == typeof(TSecurityContext).Name
-                                                          && fi.ContextEntityId == securityContext.Id))
+                                                    fi => fi.SecurityContextType.Name == typeof(TSecurityContext).Name
+                                                          && fi.SecurityContextId == securityContext.Id))
 
 
                let directLevel = permissionSecurityContextItems.Where(securityContext => expandedSecIdents.Contains(securityContext.Id))
                                                                .Select(secItem => (int?)secItem.DeepLevel).Max()
                                  ?? PriorityLevels.Access_Denied
 
-               let grandLevel = grandAccess && permission.FilterItems.All(fi => fi.EntityType.Name != typeof(TSecurityContext).Name)
+               let grandLevel = grandAccess && permission.Restrictions.All(fi => fi.SecurityContextType.Name != typeof(TSecurityContext).Name)
                                     ? PriorityLevels.Grand_Access
                                     : PriorityLevels.Access_Denied
 
@@ -182,22 +166,22 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 
         var grandAccess = notificationFilterGroup.ExpandType.AllowEmpty();
 
-        var securityContextQ = this.serviceProvider.GetRequiredService<IRepositoryFactory<TSecurityContext>>().Create().GetQueryable();
+        var securityContextQ = this.serviceProvider.GetRequiredKeyedService<IRepository<TSecurityContext>>(nameof(SecurityRule.Disabled)).GetQueryable();
 
         return from permissionInfo in source
 
                let permission = permissionInfo.Permission
 
                let permissionSecurityContextItems = securityContextQ.Where(
-                   securityContext => permission.FilterItems
+                   securityContext => permission.Restrictions
                                                 .Any(
-                                                    fi => fi.EntityType.Name == typeof(TSecurityContext).Name
-                                                          && fi.ContextEntityId == securityContext.Id))
+                                                    fi => fi.SecurityContextType.Name == typeof(TSecurityContext).Name
+                                                          && fi.SecurityContextId == securityContext.Id))
 
 
                let directLevel = permissionSecurityContextItems.Any(securityContext => expandedSecIdents.Contains(securityContext.Id)) ? 0 : PriorityLevels.Access_Denied
 
-               let grandLevel = grandAccess && permission.FilterItems.All(fi => fi.EntityType.Name != typeof(TSecurityContext).Name)
+               let grandLevel = grandAccess && permission.Restrictions.All(fi => fi.SecurityContextType.Name != typeof(TSecurityContext).Name)
                                     ? PriorityLevels.Grand_Access
                                     : PriorityLevels.Access_Denied
 

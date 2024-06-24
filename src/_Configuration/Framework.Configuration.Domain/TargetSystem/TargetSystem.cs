@@ -1,7 +1,6 @@
-﻿using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
+﻿using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -12,10 +11,7 @@ namespace Framework.Configuration.Domain;
 /// <remarks>
 /// Целевая сиcтема может содержать подсистемы
 /// </remarks>
-[BLLViewRole, BLLSaveRole(AllowCreate = false)]
 [UniqueGroup]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.TargetSystemView)]
-[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.TargetSystemEdit)]
 [NotAuditedClass]
 public class TargetSystem : BaseDirectory, IMaster<DomainType>
 {

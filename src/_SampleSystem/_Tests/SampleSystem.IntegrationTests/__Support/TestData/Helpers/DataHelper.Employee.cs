@@ -61,10 +61,6 @@ public partial class DataHelper
         {
             login = $"{Environment.MachineName}\\{nameEng.FirstName}";
         }
-        else if (login.Equals(DefaultConstants.EMPLOYEE_MY_LOGIN))
-        {
-            login = this.AuthHelper.GetCurrentUserLogin();
-        }
 
         var hrDepartmentId = hrDepartment != null
                                      ? ((HRDepartmentIdentityDTO)hrDepartment).Id
@@ -101,7 +97,7 @@ public partial class DataHelper
                                   {
                                       if (!saveEmployeeWithNullHireDate)
                                       {
-                                          hireDate = hireDate ?? this.DateTimeService.CurrentMonth.StartDate;
+                                          hireDate = hireDate ?? this.TimeProvider.GetCurrentMonth().StartDate;
                                       }
 
                                       employee = new Employee
@@ -133,7 +129,7 @@ public partial class DataHelper
                                                          NonValidateVirtualProp = nonValidateVirtualProp ?? DateTime.Now,
                                                          ValidateVirtualProp = validateVirtualProp ?? DateTime.Now,
                                                          Age = age
-                                                 };
+                                      };
 
                                       if (coreBusinessUnit != null)
                                       {

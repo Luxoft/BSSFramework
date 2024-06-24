@@ -1,7 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public static class ExpressionVisitorExtensions
@@ -14,7 +12,7 @@ public static class ExpressionVisitorExtensions
         return new[] { visitor }.Concat(otherVisitors).ToComposite();
     }
 
-    public static ExpressionVisitor ToComposite([NotNull] this IEnumerable<ExpressionVisitor> visitors)
+    public static ExpressionVisitor ToComposite(this IEnumerable<ExpressionVisitor> visitors)
     {
         if (visitors == null) throw new ArgumentNullException(nameof(visitors));
 

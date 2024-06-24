@@ -6,20 +6,22 @@ using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class GetSystemConstantsHandler : BaseReadHandler, IGetSystemConstantsHandler
+public class GetSystemConstantsHandler(IRepositoryFactory<SystemConstant> repoFactory, IOperationAccessor operationAccessor)
+    : BaseReadHandler, IGetSystemConstantsHandler
 {
-    private readonly IRepositoryFactory<SystemConstant> systemConstantRepositoryFactory;
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
+    {
+        if (!operationAccessor.IsAdministrator()) return new List<SystemConstantDto>();
 
-    public GetSystemConstantsHandler(IRepositoryFactory<SystemConstant> systemConstantRepositoryFactory) =>
-        this.systemConstantRepositoryFactory = systemConstantRepositoryFactory;
-
-    protected override object GetData(HttpContext context) =>
-        this.systemConstantRepositoryFactory.Create(BLLSecurityMode.View)
-            .GetQueryable()
-            .Select(
-                s => new SystemConstantDto { Id = s.Id, Name = s.Code, Description = s.Description, Value = s.Value })
-            .OrderBy(s => s.Name)
-            .ToList();
+        return await repoFactory
+                     .Create()
+                     .GetQueryable()
+                     .Select(x => new SystemConstantDto { Id = x.Id, Name = x.Code, Description = x.Description, Value = x.Value })
+                     .OrderBy(x => x.Name)
+                     .ToListAsync(cancellationToken);
+    }
 }

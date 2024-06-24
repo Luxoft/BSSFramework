@@ -5,7 +5,6 @@ using Framework.Persistent.Mapping;
 namespace SampleSystem.Domain.EnversBug1676;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
 public class Location1676 : BaseDirectory
 {
     private readonly ICollection<WorkingCalendar1676> calendar = new List<WorkingCalendar1676>();

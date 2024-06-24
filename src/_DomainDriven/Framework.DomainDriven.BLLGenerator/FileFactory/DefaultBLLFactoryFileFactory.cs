@@ -1,9 +1,9 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
@@ -29,11 +29,9 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
 
         var contextFieldRefExpr = new CodeThisReferenceExpression().ToFieldReference("Context");
 
-        var baseTypeRef = typeof(DefaultSecurityBLLFactory<,,,,>)
+        var baseTypeRef = typeof(DefaultSecurityBLLFactory<,,>)
                 .ToTypeReference(this.Configuration.BLLContextTypeReference,
                                  this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
-                                 this.Configuration.Environment.DomainObjectBaseType.ToTypeReference(),
-                                 this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference(),
                                  this.Configuration.Environment.GetIdentityType().ToTypeReference());
 
 
@@ -41,25 +39,28 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
         var genericDomainObjectParameter = new CodeTypeParameter("TDomainObject");
         var genericDomainObjectParameterTypeRef = genericDomainObjectParameter.ToTypeReference();
 
-        var interfaceBase = typeof(IDefaultSecurityBLLFactory<,,>).
+        var interfaceBase = typeof(IDefaultSecurityBLLFactory<,>).
                 ToTypeReference(
                                 this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
-                                this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference(),
                                 this.Configuration.Environment.GetIdentityType().ToTypeReference());
+
+
+        var parameter = typeof(ISecurityProvider<>).ToTypeReference(genericDomainObjectParameterTypeRef).ToParameterDeclarationExpression("securityProvider");
 
 
         var implMethod = new CodeMemberMethod
                          {
                                  Attributes = MemberAttributes.Public | MemberAttributes.Override,
-                                 ReturnType = typeof(IDefaultDomainBLLBase<,,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), genericDomainObjectParameterTypeRef, this.Configuration.Environment.GetIdentityType().ToTypeReference()),
+                                 ReturnType = typeof(IDefaultSecurityDomainBLLBase<,,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), genericDomainObjectParameterTypeRef, this.Configuration.Environment.GetIdentityType().ToTypeReference()),
                                  Name = "Create",
+                                 Parameters = { parameter },
                                  TypeParameters = { genericDomainObjectParameter },
                                  Statements =
                                  {
                                          this.Configuration.Environment.BLLCore
-                                             .DefaultOperationDomainBLLBaseTypeReference
+                                             .SecurityDomainBLLBaseTypeReference
                                              .ToTypeReference(genericDomainObjectParameterTypeRef)
-                                             .ToObjectCreateExpression(contextFieldRefExpr)
+                                             .ToObjectCreateExpression(contextFieldRefExpr, parameter.ToVariableReferenceExpression())
                                              .ToMethodReturnStatement()
                                  }
                          };
@@ -124,7 +125,7 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
 
     ////    var securityOperationModeTypeRef = this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference();
 
-    ////    var securityOperationModeParamName = "securityOperation";
+    ////    var securityOperationModeParamName = "securityRule";
 
 
     ////    var genericDomainTypeRefExpr = genericDomainTypeRef.ToTypeReference();
@@ -152,7 +153,7 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
     ////{
     ////    var genericDomainTypeRef = new CodeTypeParameter("TDomainObject");
 
-    ////    var bllSecurityModeTypeRef = typeof(BLLSecurityMode).ToTypeReference();
+    ////    var bllSecurityModeTypeRef = typeof(SecurityRule).ToTypeReference();
 
     ////    var bllSecurityModeParamName = "bllSecurityMode";
 

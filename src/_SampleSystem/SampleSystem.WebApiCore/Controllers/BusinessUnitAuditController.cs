@@ -1,7 +1,4 @@
 ﻿using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
-using Framework.Security;
-using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +7,7 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class BusinessUnitAuditController : ControllerBase
 {

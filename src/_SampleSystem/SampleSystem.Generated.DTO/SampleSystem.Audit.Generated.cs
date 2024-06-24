@@ -20,8 +20,7 @@ namespace SampleSystem.Generated.DTO
     public class SampleSystemPropertyRevisionDTO<TValue> : SampleSystemPropertyRevisionDTO
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public TValue Value;
+        private TValue value;
         
         public SampleSystemPropertyRevisionDTO(Framework.DomainDriven.DAL.Revisions.RevisionInfoBase info) : 
                 base(info)
@@ -30,6 +29,19 @@ namespace SampleSystem.Generated.DTO
         
         public SampleSystemPropertyRevisionDTO()
         {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public virtual TValue Value
+        {
+            get
+            {
+                return this.value;
+            }
+            set
+            {
+                this.value = value;
+            }
         }
     }
     
@@ -154,15 +166,9 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Domain.MuComponent>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Nothing<SampleSystem.Domain.MuComponent>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Just<SampleSystem.Domain.MuComponent>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Domain.NamedLockOperation>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Nothing<SampleSystem.Domain.NamedLockOperation>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Just<SampleSystem.Domain.NamedLockOperation>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<System.DateTime>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Nothing<System.Nullable<System.DateTime>>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Just<System.Nullable<System.DateTime>>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<System.Guid>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Nothing<System.Nullable<System.Guid>>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Just<System.Nullable<System.Guid>>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<SampleSystem.Domain.PossibleStartDate>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Nothing<System.Nullable<SampleSystem.Domain.PossibleStartDate>>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Just<System.Nullable<SampleSystem.Domain.PossibleStartDate>>>))]
@@ -199,9 +205,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Nothing<SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Just<SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<WorkflowCore.Models.WorkflowStatus>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Nothing<WorkflowCore.Models.WorkflowStatus>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Just<WorkflowCore.Models.WorkflowStatus>>))]
     public class SampleSystemPropertyRevisionDTO : Framework.DomainDriven.ServiceModel.Subscriptions.PropertyRevisionDTOBase
     {
         

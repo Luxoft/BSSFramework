@@ -1,8 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Lambda;
 
 internal static class TypeExtensions
@@ -11,7 +9,7 @@ internal static class TypeExtensions
      collectionType => new DictionaryCache<Type, Type>(collectionType.MakeProjectionCollectionType).WithLock()).WithLock();
 
 
-    public static Type GetProjectionCollectionType([NotNull] this Type type)
+    public static Type GetProjectionCollectionType(this Type type)
     {
         if (type == null) { throw new ArgumentNullException(nameof(type)); }
 

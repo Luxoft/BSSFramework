@@ -2,17 +2,18 @@
 
 using Framework.Core;
 using Framework.Restriction;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 
 public class DefaultStringMaxLengthValidator : IManyPropertyDynamicClassValidator
 {
-    public IPropertyValidator GetValidator(PropertyInfo property, IDynamicSource extendedValidationData)
+    public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
-        if (extendedValidationData == null) throw new ArgumentNullException(nameof(extendedValidationData));
+        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        var availableValues = extendedValidationData.GetValue<IAvailableValues>(true);
+        var availableValues = serviceProvider.GetRequiredService<IAvailableValues>();
 
         if (property.PropertyType != typeof(string) || property.HasAttribute<MaxLengthAttribute>()
                                                     || property.HasAttribute<MaxLengthValidatorAttribute>())

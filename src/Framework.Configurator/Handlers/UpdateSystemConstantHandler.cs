@@ -1,27 +1,27 @@
-﻿using Framework.Configuration.BLL;
+﻿using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public record UpdateSystemConstantHandler(ISystemConstantBLLFactory SystemConstantBllFactory) : BaseWriteHandler,
-    IUpdateSystemConstantHandler
+public record UpdateSystemConstantHandler(IRepositoryFactory<SystemConstant> RepoFactory)
+    : BaseWriteHandler, IUpdateSystemConstantHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var constantId = (string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var constantId = (string?)context.Request.RouteValues["id"]!;
         var newValue = await this.ParseRequestBodyAsync<string>(context);
 
-        this.Update(new Guid(constantId), newValue);
+        await this.UpdateAsync(new Guid(constantId), newValue, cancellationToken);
     }
 
-    private void Update(Guid id, string newValue)
+    private async Task UpdateAsync(Guid id, string newValue, CancellationToken token)
     {
-        var systemConstantBll = this.SystemConstantBllFactory.Create(BLLSecurityMode.Edit);
-        var systemConstant = systemConstantBll.GetById(id, true);
+        var systemConstant = await this.RepoFactory.Create().LoadAsync(id, token);
         systemConstant.Value = newValue;
-        systemConstantBll.Save(systemConstant);
+        await this.RepoFactory.Create(SecurityRole.Administrator).SaveAsync(systemConstant, token);
     }
 }

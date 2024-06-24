@@ -1,8 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
-using SExpressions = System.Linq.Expressions;
-
 using Framework.Core;
 
 namespace Framework.QueryLanguage;

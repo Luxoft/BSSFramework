@@ -11,8 +11,7 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class NoSecurityController : ControllerBase
 {
@@ -28,7 +27,7 @@ public class NoSecurityController : ControllerBase
     [HttpPost(nameof(TestFaultSave))]
     public async Task<NoSecurityObjectIdentityDTO> TestFaultSave(CancellationToken cancellationToken = default)
     {
-        var repository = this.repositoryFactory.Create(BLLSecurityMode.Edit);
+        var repository = this.repositoryFactory.Create(SecurityRule.Edit);
 
         var obj = new NoSecurityObject();
 
@@ -41,7 +40,7 @@ public class NoSecurityController : ControllerBase
     [HttpPost(nameof(TestSave))]
     public async Task<NoSecurityObjectIdentityDTO> TestSave(CancellationToken cancellationToken = default)
     {
-        var repository = this.repositoryFactory.Create(BLLSecurityMode.Disabled);
+        var repository = this.repositoryFactory.Create(SecurityRule.Disabled);
 
         var obj = new NoSecurityObject();
 
@@ -54,7 +53,7 @@ public class NoSecurityController : ControllerBase
     [HttpPost(nameof(GetFullList))]
     public async Task<List<NoSecurityObjectIdentityDTO>> GetFullList(CancellationToken cancellationToken = default)
     {
-        var repository = this.repositoryFactory.Create(BLLSecurityMode.Disabled);
+        var repository = this.repositoryFactory.Create(SecurityRule.Disabled);
 
         var result = await repository.GetQueryable().ToListAsync(cancellationToken);
 

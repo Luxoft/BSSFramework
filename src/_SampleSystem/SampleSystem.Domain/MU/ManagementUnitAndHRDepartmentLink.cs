@@ -7,8 +7,6 @@ using Framework.Restriction;
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkEdit)]
 public class ManagementUnitAndHRDepartmentLink :
         AuditPersistentDomainObjectBase,
         IDetail<ManagementUnit>,

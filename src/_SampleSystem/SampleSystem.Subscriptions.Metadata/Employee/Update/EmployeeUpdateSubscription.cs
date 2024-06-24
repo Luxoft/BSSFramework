@@ -18,7 +18,6 @@ public sealed class EmployeeUpdateSubscription
         this.CopyGenerationLambda = new CopyGenerationLambda();
         this.SecurityItemSourceLambdas = new[] { new SecurityItemSourceLambda() };
         this.RecepientsSelectorMode = Framework.Configuration.RecepientsSelectorMode.Union;
-        this.SubBusinessRoleIds = Enumerable.Empty<Guid>();
         this.SendIndividualLetters = true;
         this.ExcludeCurrentUser = true;
         this.IncludeAttachments = false;

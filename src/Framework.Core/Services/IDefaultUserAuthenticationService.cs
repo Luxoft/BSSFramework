@@ -1,5 +1,6 @@
 ﻿namespace Framework.Core.Services;
 
-public interface IDefaultUserAuthenticationService : IUserAuthenticationService
+public interface IDefaultUserAuthenticationService
 {
+    string GetUserName();
 }

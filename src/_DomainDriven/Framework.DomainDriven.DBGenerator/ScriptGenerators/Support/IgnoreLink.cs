@@ -1,8 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.DBGenerator;
 
 public class IgnoreLink
@@ -44,7 +42,7 @@ public class IgnoreLink
         return new IgnoreLink((PropertyInfo)member);
     }
 
-    private IgnoreLink([NotNull] PropertyInfo propertyInfo) : this(propertyInfo.DeclaringType)
+    private IgnoreLink(PropertyInfo propertyInfo) : this(propertyInfo.DeclaringType)
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
 

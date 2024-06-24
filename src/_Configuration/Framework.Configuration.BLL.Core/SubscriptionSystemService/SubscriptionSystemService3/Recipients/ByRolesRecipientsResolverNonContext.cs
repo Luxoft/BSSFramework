@@ -22,7 +22,7 @@ internal sealed class ByRolesRecipientsResolverNonContext<TBLLContext> : ByRoles
             return new RecipientCollection();
         }
 
-        var principals = this.ConfigurationContextFacade.GetNotificationPrincipals(this.GetBusinessRolesIds(subscription));
+        var principals = this.ConfigurationContextFacade.GetNotificationPrincipals(this.GetBusinessRoles(subscription));
         var recipients = this.ConfigurationContextFacade.ConvertPrincipals(principals).Select(this.CreateRecipient);
 
         return new RecipientCollection(recipients);

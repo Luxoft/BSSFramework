@@ -2,9 +2,6 @@
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Notification;
-using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -19,7 +16,7 @@ public class GenerationRecipientsResolver<TBLLContext>
     /// <summary>Создаёт экземпляр класса <see cref="GenerationRecipientsResolver" />.</summary>
     /// <param name="lambdaProcessorFactory">Фабрика процессоров лямбда-выражений.</param>
     /// <exception cref="System.ArgumentNullException">Аргумент lambdaProcessorFactory равен null.</exception>
-    public GenerationRecipientsResolver([NotNull] LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
+    public GenerationRecipientsResolver(LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
     {
         if (lambdaProcessorFactory == null)
         {
@@ -41,8 +38,8 @@ public class GenerationRecipientsResolver<TBLLContext>
     ///     versions равен null.
     /// </exception>
     public virtual IEnumerable<RecipientsResolverResult> Resolve<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)
@@ -59,11 +56,11 @@ public class GenerationRecipientsResolver<TBLLContext>
         var ccProcessor = this.lambdaProcessorFactory.Create<GenerationLambdaProcessorCc<TBLLContext>>();
         var replyToProcessor = this.lambdaProcessorFactory.Create<GenerationLambdaProcessorReplyTo<TBLLContext>>();
 
-        var toInfos = toProcessor.Invoke(subscription, versions).ToList();
-        var ccInfos = ccProcessor.Invoke(subscription, versions).ToList();
-        var replyToInfos = replyToProcessor.Invoke(subscription, versions).ToList();
+        var toInfoList = toProcessor.Invoke(subscription, versions).ToList();
+        var ccInfoList = ccProcessor.Invoke(subscription, versions).ToList();
+        var replyToInfoList = replyToProcessor.Invoke(subscription, versions).ToList();
 
-        var results = this.CreateResults(toInfos, ccInfos, replyToInfos);
+        var results = this.CreateResults(toInfoList, ccInfoList, replyToInfoList);
 
         return results;
     }
@@ -90,13 +87,13 @@ public class GenerationRecipientsResolver<TBLLContext>
     }
 
     private IEnumerable<RecipientsResolverResult> CreateResults(
-            IEnumerable<NotificationMessageGenerationInfo> toInfos,
-            IEnumerable<NotificationMessageGenerationInfo> ccInfos,
+            IEnumerable<NotificationMessageGenerationInfo> toInfoList,
+            IEnumerable<NotificationMessageGenerationInfo> ccInfoList,
             IEnumerable<NotificationMessageGenerationInfo> replyTo)
     {
-        var intermediateResults = toInfos
+        var intermediateResults = toInfoList
                                   .Select(this.CreateToResult)
-                                  .Concat(ccInfos.Select(this.CreateCcResult))
+                                  .Concat(ccInfoList.Select(this.CreateCcResult))
                                   .Concat(replyTo.Select(this.CreateReplyToResult))
                                   .ToList();
 

@@ -30,7 +30,7 @@ public class QueryServiceMethodGeneratorCollection<TConfiguration> : GeneratorCo
     {
         yield return new GetODataListByQueryStringMethodGenerator<TConfiguration>(this.Configuration, this._domainType, this._dtoType);
 
-        if (this.Configuration.Environment.ServerDTO.TypesWithSecondarySecurityOperations.ContainsKey(this._domainType))
+        if (this.Configuration.Environment.ServerDTO.TypesWithSecondarySecurityRules.ContainsKey(this._domainType))
         {
             yield return new GetODataListByQueryStringWithOperationMethodGenerator<TConfiguration>(this.Configuration, this._domainType, this._dtoType);
 

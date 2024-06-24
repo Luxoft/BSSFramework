@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+﻿namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
 /// <summary>
 /// Контейнер списков получателей уведомлений по подписке.
@@ -17,7 +15,7 @@ public sealed class RecipientsBag
     /// to
     /// или
     /// cc равен null.</exception>
-    public RecipientsBag([NotNull] RecipientCollection to, [NotNull] RecipientCollection cc, [NotNull] RecipientCollection replyTo)
+    public RecipientsBag(RecipientCollection to, RecipientCollection cc, RecipientCollection replyTo)
     {
         if (to == null)
         {

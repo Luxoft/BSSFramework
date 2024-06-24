@@ -20,11 +20,11 @@ public class AuthSLJsonController : Framework.Authorization.WebApi.AuthSLJsonCon
     {
         return this.Evaluate(DBSessionMode.Write, evaluateData =>
                                                   {
-                                                      var principalIdent = savePermissionAutoRequest.principalIdent;
-                                                      var permissionDTO = savePermissionAutoRequest.permissionDTO;
+                                                      var principalIdent = savePermissionAutoRequest.PrincipalIdent;
+                                                      var permissionDTO = savePermissionAutoRequest.PermissionDTO;
 
-                                                      var principalBLL = evaluateData.Context.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit);
-                                                      var permissionBLL = evaluateData.Context.Logics.PermissionFactory.Create(BLLSecurityMode.Edit);
+                                                      var principalBLL = evaluateData.Context.Logics.PrincipalFactory.Create(SecurityRule.Edit);
+                                                      var permissionBLL = evaluateData.Context.Logics.PermissionFactory.Create(SecurityRule.Edit);
 
                                                       var principal = principalBLL.GetById(principalIdent.Id, true);
 
@@ -51,16 +51,16 @@ public class AuthSLJsonController : Framework.Authorization.WebApi.AuthSLJsonCon
 
         public SavePermissionAutoRequest(PrincipalIdentityDTO principalIdent, PermissionStrictDTO permissionDTO)
         {
-            this.principalIdent = principalIdent;
-            this.permissionDTO = permissionDTO;
+            this.PrincipalIdent = principalIdent;
+            this.PermissionDTO = permissionDTO;
         }
 
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex = 0)]
-        public PrincipalIdentityDTO principalIdent;
+        public PrincipalIdentityDTO PrincipalIdent { get; set; }
 
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex = 1)]
-        public PermissionStrictDTO permissionDTO;
+        public PermissionStrictDTO PermissionDTO { get; set; }
     }
 }

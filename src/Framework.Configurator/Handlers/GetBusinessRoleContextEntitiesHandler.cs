@@ -1,41 +1,38 @@
-﻿using Framework.Authorization.BLL;
+﻿using Framework.Authorization.Domain;
+using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetBusinessRoleContextEntitiesHandler : BaseReadHandler, IGetBusinessRoleContextEntitiesHandler
+public class GetBusinessRoleContextEntitiesHandler(
+    IRepositoryFactory<SecurityContextType> contextTypeRepositoryFactory,
+    IAuthorizationExternalSource externalSource,
+    IOperationAccessor operationAccessor)
+    : BaseReadHandler, IGetBusinessRoleContextEntitiesHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public GetBusinessRoleContextEntitiesHandler(IAuthorizationBLLContext authorizationBllContext) => 
-        this.authorizationBllContext = authorizationBllContext;
-
-    protected override object GetData(HttpContext context)
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        var entityTypeId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
+        if (!operationAccessor.IsAdministrator()) return new List<EntityDto>();
+
+        var securityContextTypeId = new Guid((string)context.Request.RouteValues["id"]!);
         var searchToken = context.Request.Query["searchToken"];
 
-        var entityType = this.authorizationBllContext.Authorization.Logics.EntityTypeFactory
-            .Create(BLLSecurityMode.View)
-            .GetById(entityTypeId, true);
-
-        var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(entityType)
-            .GetSecurityEntities();
+        var contextType = await contextTypeRepositoryFactory.Create().LoadAsync(securityContextTypeId, cancellationToken);
+        var entities = externalSource.GetTyped(contextType).GetSecurityEntities();
 
         if (!string.IsNullOrWhiteSpace(searchToken))
-        {
-            entities = entities.Where(p => p.Name.Contains(searchToken, StringComparison.OrdinalIgnoreCase));
-        }
+            entities = entities.Where(p => p.Name.Contains(searchToken!, StringComparison.OrdinalIgnoreCase));
 
         return entities
-            .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
-            .OrderByDescending(r => r.Name.Equals(searchToken, StringComparison.OrdinalIgnoreCase))
-            .ThenBy(r => r.Name)
-            .Take(70)
-            .ToList();
+               .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
+               .OrderByDescending(x => x.Name.Equals(searchToken, StringComparison.OrdinalIgnoreCase))
+               .ThenBy(x => x.Name)
+               .Take(70)
+               .ToList();
     }
 }

@@ -1,8 +1,7 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -10,11 +9,7 @@ namespace Framework.Configuration.Domain;
 /// <summary>
 /// Описание доменного типа целевой системы
 /// </summary>
-[BLLViewRole]
-//[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.TargetSystemView)]
-//[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.TargetSystemEdit)]
 [NotAuditedClass]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.Disabled)]
 public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDetail<TargetSystem>, IMaster<DomainTypeEventOperation>, IDomainType
 {
     private readonly ICollection<DomainTypeEventOperation> eventOperations = new List<DomainTypeEventOperation>();

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 
 using NSubstitute;
 
@@ -15,11 +15,13 @@ public class TrackingServiceTests
 
     private TrackingService<PersistentDomainObject> trackingService;
 
+    private IPersistentInfoService persistentInfoService = new PersistentInfoService();
+
     [SetUp]
     public void Initialize()
     {
         this.objectStateService = Substitute.For<IObjectStateService>();
-        this.trackingService = new TrackingService<PersistentDomainObject>(this.objectStateService);
+        this.trackingService = new TrackingService<PersistentDomainObject>(this.objectStateService, this.persistentInfoService);
     }
 
     [Test]

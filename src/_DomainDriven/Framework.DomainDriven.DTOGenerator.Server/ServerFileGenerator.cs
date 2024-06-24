@@ -1,8 +1,8 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Generation;
+﻿using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
 using Framework.Projection;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
@@ -28,12 +28,12 @@ public class ServerFileGenerator<TConfiguration> : FileGenerator<TConfiguration>
         return new DefaultServerIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }
 
-    protected override ICodeFileFactory<RoleFileType> GetDomainObjectSecurityOperationCodeFileFactory(Type domainType, IEnumerable<Enum> securityOperations)
+    protected override ICodeFileFactory<RoleFileType> GetDomainObjectSecurityRuleCodeFileFactory(Type domainType, IEnumerable<SecurityRule> securityRules)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (securityOperations == null) throw new ArgumentNullException(nameof(securityOperations));
+        if (securityRules == null) throw new ArgumentNullException(nameof(securityRules));
 
-        return new DefaultServerDomainObjectSecurityOperationCodeFileFactory<TConfiguration>(this.Configuration, domainType, securityOperations);
+        return new DefaultServerDomainObjectSecurityRuleCodeFileFactory<TConfiguration>(this.Configuration, domainType, securityRules);
     }
 
     protected virtual ICodeFileFactory<DTOFileType> GetVisualDTOFileFactory(Type domainType)
@@ -127,9 +127,9 @@ public class ServerFileGenerator<TConfiguration> : FileGenerator<TConfiguration>
                 yield return new DefaultRichIntegrationDTOFileFactory<TConfiguration>(this.Configuration, domainType);
                 yield return new DefaultSimpleIntegrationDTOFileFactory<TConfiguration>(this.Configuration, domainType);
 
-                foreach (var eventOperationCode in domainType.GetEventOperations(true))
+                foreach (var domainObjectEvent in this.Configuration.DomainObjectEventMetadata.GetEventOperations(domainType))
                 {
-                    yield return new DefaultDomainOperationEventDTOFileFactory<TConfiguration>(this.Configuration, domainType, eventOperationCode);
+                    yield return new DefaultDomainOperationEventDTOFileFactory<TConfiguration>(this.Configuration, domainType, domainObjectEvent);
                 }
 
                 yield return new DefaultRichEventDTOFileFactory<TConfiguration>(this.Configuration, domainType);

@@ -1,5 +1,7 @@
 ﻿using Framework.Core;
+using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
 using NHibernate;
@@ -71,6 +73,13 @@ public class NHibAsyncDal<TDomainObject, TIdent> : IAsyncDal<TDomainObject, TIde
         this.session.RegisterModified(domainObject, ModificationType.Remove);
 
         await this.NativeSession.DeleteAsync(domainObject, cancellationToken);
+    }
+
+    public virtual async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)
+    {
+        this.CheckWrite();
+
+        await this.NativeSession.LockAsync(domainObject, lockRole.ToLockMode(), cancellationToken);
     }
 
     private void CheckWrite()

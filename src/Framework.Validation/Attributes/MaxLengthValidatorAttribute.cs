@@ -6,7 +6,7 @@ public class MaxLengthValidatorAttribute : PropertyValidatorAttribute
     public int MaxLength { get; set; } = int.MaxValue;
 
 
-    public override IPropertyValidator CreateValidator()
+    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
     {
         return new MaxLengthValidator(this.MaxLength);
     }

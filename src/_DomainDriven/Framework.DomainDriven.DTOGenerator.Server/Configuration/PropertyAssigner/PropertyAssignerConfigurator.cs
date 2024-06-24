@@ -22,12 +22,12 @@ public class PropertyAssignerConfigurator<TConfiguration> : PropertyAssignerConf
 
         var attr = this.GetDomainObjectAttribute(propertyAssigner, property, isEdit);
 
-        if ((attr as ViewDomainObjectAttribute).Maybe(viewAttr => viewAttr.SecondaryOperations.Any()))
+        if ((attr as ViewDomainObjectAttribute).Maybe(viewAttr => viewAttr.SecondaryRules.Any()))
         {
-            throw new Exception("Secondary operations not allowed for column security");
+            throw new Exception("Secondary rules not allowed for column security");
         }
 
-        return this.Configuration.ToHasAccessMethod(propertyAssigner.ContextRef, attr.SecurityOperationCode, propertyAssigner.DomainType, propertyAssigner.DomainParameter);
+        return this.Configuration.ToHasAccessMethod(propertyAssigner.ContextRef, attr.SecurityRule, propertyAssigner.DomainType, propertyAssigner.DomainParameter);
     }
 
     private DomainObjectAccessAttribute GetDomainObjectAttribute(IServerPropertyAssigner propertyAssigner, PropertyInfo property, bool isEdit)
@@ -37,13 +37,14 @@ public class PropertyAssignerConfigurator<TConfiguration> : PropertyAssignerConf
 
         if (isEdit)
         {
-            return property.GetEditDomainObjectAttribute().FromMaybe(() => $"Edit operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
+            return this.Configuration.Environment.ExtendedMetadata.GetProperty(property).GetEditDomainObjectAttribute().FromMaybe(() => $"Edit operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
         }
         else
         {
-            return (property.GetViewDomainObjectAttribute() ?? propertyAssigner.DomainType.GetViewDomainObjectAttribute())
+            return (this.Configuration.Environment.ExtendedMetadata.GetProperty(property).GetViewDomainObjectAttribute()
+                 ?? this.Configuration.Environment.ExtendedMetadata.GetType(propertyAssigner.DomainType).GetViewDomainObjectAttribute())
 
-                    .FromMaybe(() => $"View operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
+                        .FromMaybe(() => $"View operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
         }
     }
 }

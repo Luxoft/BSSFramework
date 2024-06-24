@@ -4,15 +4,13 @@ using Framework.Core;
 using Framework.Persistent;
 using Framework.QueryLanguage;
 
-using JetBrains.Annotations;
-
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Framework.OData;
 
 public static class StandartExpressionBuilderExtensions
 {
-    public static SelectOperation<TDomainObject> ToTyped<TDomainObject>([NotNull] this IStandartExpressionBuilder expressionBuilder, [NotNull] SelectOperation selectOperation)
+    public static SelectOperation<TDomainObject> ToTyped<TDomainObject>(this IStandartExpressionBuilder expressionBuilder, SelectOperation selectOperation)
     {
         if (expressionBuilder == null) throw new ArgumentNullException(nameof(expressionBuilder));
         if (selectOperation == null) throw new ArgumentNullException(nameof(selectOperation));
@@ -24,7 +22,7 @@ public static class StandartExpressionBuilderExtensions
         return new SelectOperation<TDomainObject>(filter, orders, selectOperation.Expands, selectOperation.Selects, selectOperation.SkipCount, selectOperation.TakeCount);
     }
 
-    public static SelectOperation<TDomainObject> ToTyped<TDomainObject, TProjection>([NotNull] this IStandartExpressionBuilder expressionBuilder, [NotNull] SelectOperation selectOperation)
+    public static SelectOperation<TDomainObject> ToTyped<TDomainObject, TProjection>(this IStandartExpressionBuilder expressionBuilder, SelectOperation selectOperation)
             where TDomainObject : TProjection
     {
         if (expressionBuilder == null) throw new ArgumentNullException(nameof(expressionBuilder));
@@ -65,7 +63,7 @@ public sealed class ExpandProjectionVisitor : ExpressionVisitor
     private readonly Type _projectionType;
 
 
-    public ExpandProjectionVisitor([NotNull] Type projectionType)
+    public ExpandProjectionVisitor(Type projectionType)
     {
         if (projectionType == null) throw new ArgumentNullException(nameof(projectionType));
 

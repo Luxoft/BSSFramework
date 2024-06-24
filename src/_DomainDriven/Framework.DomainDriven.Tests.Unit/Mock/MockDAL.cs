@@ -1,12 +1,15 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.UnitTest.Mock;
 
-public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent> where TDomain : IIdentityObject<TIdent>
+public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent>
+    where TDomain : IIdentityObject<TIdent>
 {
     private readonly HashSet<TDomain> _collection = new HashSet<TDomain>();
 
@@ -126,9 +129,41 @@ public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent> where TDomain 
         return this._collection.FirstOrDefault(z => EqualityComparer<TIdent>.Default.Equals(z.Id, id));
     }
 
+    public IQueryable<TDomain> GetQueryable() => this.GetQueryable(LockRole.None);
+
     public TDomain Load(TIdent id)
     {
         return this.GetById(id, LockRole.None);
+    }
+
+    public async Task<TDomain> LoadAsync(TIdent id, CancellationToken cancellationToken = default)
+    {
+        return this.Load(id);
+    }
+
+    public async Task RefreshAsync(TDomain domainObject, CancellationToken cancellationToken = default)
+    {
+        this.Refresh(domainObject);
+    }
+
+    public async Task SaveAsync(TDomain domainObject, CancellationToken cancellationToken = default)
+    {
+        this.Save(domainObject);
+    }
+
+    public async Task InsertAsync(TDomain domainObject, TIdent id, CancellationToken cancellationToken = default)
+    {
+        this.Insert(domainObject, id);
+    }
+
+    public async Task RemoveAsync(TDomain domainObject, CancellationToken cancellationToken = default)
+    {
+        this.Remove(domainObject);
+    }
+
+    public async Task LockAsync(TDomain domainObject, LockRole lockRole, CancellationToken cancellationToken = default)
+    {
+        this.Lock(domainObject, lockRole);
     }
 
     public virtual void Save(TDomain domainObject)

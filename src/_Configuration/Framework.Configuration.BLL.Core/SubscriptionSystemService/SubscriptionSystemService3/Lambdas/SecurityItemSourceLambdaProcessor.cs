@@ -2,7 +2,7 @@
 using Framework.Configuration.Domain;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 
@@ -40,8 +40,8 @@ public class SecurityItemSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TB
     /// или
     /// versions равен null.</exception>
     public virtual IEnumerable<TSecurityItem> Invoke<T, TSecurityItem>(
-            [NotNull] SubscriptionSecurityItem securityItem,
-            [NotNull] DomainObjectVersions<T> versions)
+            SubscriptionSecurityItem securityItem,
+            DomainObjectVersions<T> versions)
             where T : class
             where TSecurityItem : IIdentityObject<Guid>
     {
@@ -81,7 +81,6 @@ public class SecurityItemSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TB
         return result;
     }
 
-    [UsedImplicitly]
     private IEnumerable<TSecurityItem> InvokeWithTypedContext<T, TSecurityItem>(
             SubscriptionSecurityItem securityItem,
             DomainObjectVersions<T> versions)

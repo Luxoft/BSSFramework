@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
+using Framework.Events;
+
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public interface IServerGeneratorConfigurationBase<out TEnvironmentBase> : IServerGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironmentBase>
@@ -14,6 +16,7 @@ public interface IServerGeneratorConfigurationBase : IGeneratorConfigurationBase
     IPropertyAssignerConfigurator PropertyAssignerConfigurator { get; }
 
 
+    IDomainObjectEventMetadata DomainObjectEventMetadata { get; }
 
     Type ExceptionType { get; }
 

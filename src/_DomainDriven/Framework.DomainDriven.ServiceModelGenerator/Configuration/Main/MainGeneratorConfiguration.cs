@@ -82,7 +82,7 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
                 }
             }
 
-            if (this.Environment.ServerDTO.TypesWithSecondarySecurityOperations.ContainsKey(domainType))
+            if (this.Environment.ServerDTO.TypesWithSecondarySecurityRules.ContainsKey(domainType))
             {
                 yield return new GetListByOperationMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType);
 
@@ -96,7 +96,7 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
 
         if (!domainType.IsProjection())
         {
-            if (this.Environment.SecurityOperationCodeType.IsEnum && domainType.HasAttribute<DomainObjectAccessAttribute>())
+            if (this.GenerateAccessMethodFor(domainType))
             {
                 yield return new HasAccessMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType);
                 yield return new CheckAccessMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType);
@@ -165,5 +165,11 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
                 }
             }
         }
+    }
+
+
+    protected virtual bool GenerateAccessMethodFor(Type domainType)
+    {
+        return domainType.HasAttribute<DomainObjectAccessAttribute>();
     }
 }

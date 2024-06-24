@@ -6,19 +6,14 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.BLL._Command.CreateManagementUnitFluentMapping;
 
-public class CreateManagementUnitFluentMappingHandler : IRequestHandler<CreateManagementUnitFluentMappingCommand, Guid>
+public class CreateManagementUnitFluentMappingHandler(IManagementUnitFluentMappingBLLFactory managementUnitFluentMappingBllFactory)
+    : IRequestHandler<CreateManagementUnitFluentMappingCommand, Guid>
 {
-    private readonly IManagementUnitFluentMappingBLL managementUnitFluentMappingBll;
-
-    public CreateManagementUnitFluentMappingHandler(
-            IManagementUnitFluentMappingBLLFactory managementUnitFluentMappingBllFactory) =>
-            this.managementUnitFluentMappingBll = managementUnitFluentMappingBllFactory.Create(BLLSecurityMode.Disabled);
-
-    public Task<Guid> Handle(CreateManagementUnitFluentMappingCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateManagementUnitFluentMappingCommand request, CancellationToken cancellationToken)
     {
         var mu = new ManagementUnitFluentMapping { Name = request.Name, Period = request.Period };
-        this.managementUnitFluentMappingBll.Save(mu);
+        managementUnitFluentMappingBllFactory.Create(SecurityRule.Disabled).Save(mu);
 
-        return Task.FromResult(mu.Id);
+        return mu.Id;
     }
 }

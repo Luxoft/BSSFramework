@@ -2,49 +2,59 @@
 using Framework.Persistent;
 using Framework.QueryableSource;
 
-namespace Framework.SecuritySystem;
-
-public class UntypedDependencySecurityProvider<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> : SecurityProviderBase<TDomainObject>
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TBaseDomainObject : class, TPersistentDomainObjectBase
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+namespace Framework.SecuritySystem
 {
-    private readonly ISecurityProvider<TBaseDomainObject> baseSecurityProvider;
-
-    private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
-
-    private readonly Lazy<HashSet<TIdent>> lazyAvailableIdents;
-
-    public UntypedDependencySecurityProvider(IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService, ISecurityProvider<TBaseDomainObject> baseSecurityProvider, IQueryableSource<TPersistentDomainObjectBase> queryableSource)
-            : base(accessDeniedExceptionService)
+    public class UntypedDependencySecurityProvider<TDomainObject, TBaseDomainObject, TIdent> : ISecurityProvider<TDomainObject>
+        where TDomainObject : IIdentityObject<TIdent>
+        where TBaseDomainObject : class, IIdentityObject<TIdent>
     {
-        this.baseSecurityProvider = baseSecurityProvider;
-        this.queryableSource = queryableSource;
+        private readonly ISecurityProvider<TBaseDomainObject> baseSecurityProvider;
 
-        this.lazyAvailableIdents = LazyHelper.Create(() => this.GetAvailableIdents().ToHashSet());
-    }
+        private readonly IQueryableSource queryableSource;
 
-    public override IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
-    {
-        var availableIdents = this.GetAvailableIdents();
+        private readonly Lazy<HashSet<TIdent>> lazyAvailableIdents;
 
-        return queryable.Where(domainObj => availableIdents.Contains(domainObj.Id));
-    }
+        public UntypedDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseSecurityProvider, IQueryableSource queryableSource)
+        {
+            this.baseSecurityProvider = baseSecurityProvider;
+            this.queryableSource = queryableSource;
 
-    public override bool HasAccess(TDomainObject domainObject)
-    {
-        return this.lazyAvailableIdents.Value.Contains(domainObject.Id);
-    }
+            this.lazyAvailableIdents = LazyHelper.Create(() => this.GetAvailableIdents().ToHashSet());
+        }
 
-    public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
-    {
-        var baseDomainObj = this.queryableSource.GetQueryable<TBaseDomainObject>().SingleOrDefault(v => v.Id.Equals(domainObject.Id)).FromMaybe(() => $"Object with id = '{domainObject.Id}' not found");
+        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
+        {
+            var availableIdents = this.GetAvailableIdents();
 
-        return this.baseSecurityProvider.GetAccessors(baseDomainObj);
-    }
+            return queryable.Where(domainObj => availableIdents.Contains(domainObj.Id));
+        }
 
-    protected virtual IQueryable<TIdent> GetAvailableIdents()
-    {
-        return this.queryableSource.GetQueryable<TBaseDomainObject>().Pipe(this.baseSecurityProvider.InjectFilter).Select(v => v.Id);
+        public AccessResult GetAccessResult(TDomainObject domainObject)
+        {
+            return this.baseSecurityProvider.GetAccessResult(this.GetBaseObject(domainObject)).TryOverrideDomainObject(domainObject);
+        }
+
+        public bool HasAccess(TDomainObject domainObject)
+        {
+            return this.lazyAvailableIdents.Value.Contains(domainObject.Id);
+        }
+
+        public UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        {
+            return this.baseSecurityProvider.GetAccessors(this.GetBaseObject(domainObject));
+        }
+
+        private TBaseDomainObject GetBaseObject(TDomainObject domainObject)
+        {
+            return this.queryableSource
+                       .GetQueryable<TBaseDomainObject>()
+                       .SingleOrDefault(v => v.Id.Equals(domainObject.Id))
+                       .FromMaybe(() => $"Object with id = '{domainObject.Id}' not found");
+        }
+
+        protected virtual IQueryable<TIdent> GetAvailableIdents()
+        {
+            return this.queryableSource.GetQueryable<TBaseDomainObject>().Pipe(this.baseSecurityProvider.InjectFilter).Select(v => v.Id);
+        }
     }
 }

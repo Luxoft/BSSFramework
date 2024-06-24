@@ -11,7 +11,16 @@ namespace SampleSystem.BLL
 {
     
     
-    public partial class SampleSystemValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.SampleSystemOperationContext>
+    public partial class SampleSystemValidatorCompileCache : Framework.Validation.ValidatorCompileCache
+    {
+        
+        public SampleSystemValidatorCompileCache(SampleSystem.BLL.SampleSystemValidationMap validationMap) : 
+                base(validationMap)
+        {
+        }
+    }
+    
+    public abstract partial class SampleSystemValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.SampleSystemOperationContext>
     {
         
         public SampleSystemValidatorBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
@@ -19,7 +28,7 @@ namespace SampleSystem.BLL
         {
             base.RegisterHandler<SampleSystem.Domain.Address>(this.GetAddressValidationResult);
             base.RegisterHandler<SampleSystem.Domain.AnotherSqlParserTestObj>(this.GetAnotherSqlParserTestObjValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.GetApprovePermissionWorkflowDomainObjectValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.AuthPerformanceObject>(this.GetAuthPerformanceObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BusinessUnit>(this.GetBusinessUnitValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BusinessUnitAncestorLink>(this.GetBusinessUnitAncestorLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BusinessUnitEmployeeRole>(this.GetBusinessUnitEmployeeRoleValidationResult);
@@ -84,7 +93,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.GuidBasedFilterModel>(this.GetGuidBasedFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel>(this.GetHierarchicalBusinessUnitFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel>(this.GetSingleEmployeeFilterModelValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.NamedLock>(this.GetNamedLockValidationResult);
             base.RegisterHandler<SampleSystem.Domain.NoSecurityObject>(this.GetNoSecurityObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Principal>(this.GetPrincipalValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Project>(this.GetProjectValidationResult);
@@ -104,6 +112,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestObjForNestedBase>(this.GetTestObjForNestedBaseValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestPerformanceObject>(this.GetTestPerformanceObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestPlainAuthObject>(this.GetTestPlainAuthObjectValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TestRestrictionObject>(this.GetTestRestrictionObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestRootSecurityObj>(this.GetTestRootSecurityObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestSecurityObjItem>(this.GetTestSecurityObjItemValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestSecuritySubObjItem>(this.GetTestSecuritySubObjItemValidationResult);
@@ -112,8 +121,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestUnpersistentObject>(this.GetTestUnpersistentObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.UniqueByMaster.ParentEntity>(this.GetParentEntityValidationResult);
             base.RegisterHandler<SampleSystem.Domain.UniqueByParent.ChildEntity>(this.GetChildEntityValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.WorkflowCoreExecutionError>(this.GetWorkflowCoreExecutionErrorValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.WorkflowCoreInstance>(this.GetWorkflowCoreInstanceValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Inline.Fio>(this.GetFioValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Inline.FioShort>(this.GetFioShortValidationResult);
         }
@@ -128,7 +135,7 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetApprovePermissionWorkflowDomainObjectValidationResult(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetAuthPerformanceObjectValidationResult(SampleSystem.Domain.AuthPerformanceObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -473,11 +480,6 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetNamedLockValidationResult(SampleSystem.Domain.NamedLock source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
         protected virtual Framework.Validation.ValidationResult GetNoSecurityObjectValidationResult(SampleSystem.Domain.NoSecurityObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
@@ -568,6 +570,11 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
+        protected virtual Framework.Validation.ValidationResult GetTestRestrictionObjectValidationResult(SampleSystem.Domain.TestRestrictionObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
         protected virtual Framework.Validation.ValidationResult GetTestRootSecurityObjValidationResult(SampleSystem.Domain.TestRootSecurityObj source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
@@ -598,28 +605,22 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetWorkflowCoreExecutionErrorValidationResult(SampleSystem.Domain.WorkflowCoreExecutionError source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetWorkflowCoreInstanceValidationResult(SampleSystem.Domain.WorkflowCoreInstance source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
         protected virtual Framework.Validation.ValidationResult GetWorkingCalendar1676ValidationResult(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
     }
     
-    public partial class SampleSystemValidator : SampleSystem.BLL.SampleSystemValidatorBase
+    public partial class SampleSystemValidator : SampleSystem.BLL.SampleSystemValidatorBase, SampleSystem.BLL.ISampleSystemValidator
     {
         
-        public SampleSystemValidator(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
+        public SampleSystemValidator(SampleSystem.BLL.ISampleSystemBLLContext context, SampleSystem.BLL.SampleSystemValidatorCompileCache cache) : 
                 base(context, cache)
         {
         }
+    }
+    
+    public partial interface ISampleSystemValidator : Framework.Validation.IValidator
+    {
     }
 }

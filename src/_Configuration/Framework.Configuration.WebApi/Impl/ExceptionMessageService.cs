@@ -18,7 +18,7 @@ public partial class ConfigSLJsonController
                              DBSessionMode.Write,
                              evaluateData =>
                              {
-                                 var emptyMessage = new ExceptionMessage { IsRoot = true, IsClient = true };
+                                 var emptyMessage = new ExceptionMessage { IsRoot = true };
 
                                  var mappedMessage = emptyMessage.WithMap(exceptionMessageStrict, evaluateData.MappingService);
 

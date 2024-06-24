@@ -15,10 +15,4 @@ public interface IConfiguratorIntegrationEvents
     Task PermissionCreatedAsync(Permission permission, CancellationToken cancellationToken);
 
     Task PermissionChangedAsync(Permission permission, CancellationToken cancellationToken);
-
-    Task BusinessRoleCreatedAsync(BusinessRole businessRole, CancellationToken cancellationToken);
-
-    Task BusinessRoleChangedAsync(BusinessRole businessRole, CancellationToken cancellationToken);
-
-    Task BusinessRoleRemovedAsync(BusinessRole businessRole, CancellationToken cancellationToken);
 }

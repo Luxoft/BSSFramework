@@ -11,19 +11,18 @@ using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class FaultDALListenerController : ControllerBase
 {
-    private readonly FaultDALListener listener;
+    private readonly ExampleFaultDALListener listener;
 
     private readonly IRepository<NoSecurityObject> repository;
 
-    public FaultDALListenerController(FaultDALListener listener, IRepositoryFactory<NoSecurityObject> repositoryFactory)
+    public FaultDALListenerController(ExampleFaultDALListener listener, IRepositoryFactory<NoSecurityObject> repositoryFactory)
     {
         this.listener = listener;
-        this.repository = repositoryFactory.Create(BLLSecurityMode.Disabled);
+        this.repository = repositoryFactory.Create(SecurityRule.Disabled);
     }
 
     [HttpPost(nameof(TestFault))]

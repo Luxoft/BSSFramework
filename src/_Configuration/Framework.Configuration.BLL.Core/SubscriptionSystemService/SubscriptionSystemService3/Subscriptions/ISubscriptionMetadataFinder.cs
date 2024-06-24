@@ -7,9 +7,5 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 /// </summary>
 public interface ISubscriptionMetadataFinder
 {
-    /// <summary>
-    /// Производит поиск Code first моделей подписок. По умолчанию собираются подписки только с пустым конструктором
-    /// </summary>
-    /// <returns>Найденные модели подписок</returns>
     IEnumerable<ISubscriptionMetadata> Find();
 }

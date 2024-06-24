@@ -4,9 +4,8 @@ using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
 
-using JetBrains.Annotations;
-
-using Serilog;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 
@@ -17,8 +16,10 @@ public class RecipientService<TBLLContext>
         where TBLLContext : class
 {
     private readonly SubscriptionResolver subscriptionResolver;
+
     private readonly RecipientsResolver<TBLLContext> recipientsResolver;
-    private readonly ILogger logger;
+
+    private readonly ConfigurationContextFacade _configurationContextFacade;
 
     /// <summary>Создаёт экземпляр класса <see cref="RecipientService"/>.</summary>
     /// <param name="subscriptionResolver">Компонент, выполняющий поиск подписок.</param>
@@ -33,29 +34,13 @@ public class RecipientService<TBLLContext>
     /// равен null.
     /// </exception>
     public RecipientService(
-            [NotNull] SubscriptionResolver subscriptionResolver,
-            [NotNull] RecipientsResolver<TBLLContext> recipientsResolver,
-            [NotNull] ConfigurationContextFacade configurationContextFacade)
+            SubscriptionResolver subscriptionResolver,
+            RecipientsResolver<TBLLContext> recipientsResolver,
+            ConfigurationContextFacade configurationContextFacade)
     {
-        if (subscriptionResolver == null)
-        {
-            throw new ArgumentNullException(nameof(subscriptionResolver));
-        }
-
-        if (recipientsResolver == null)
-        {
-            throw new ArgumentNullException(nameof(recipientsResolver));
-        }
-
-        if (configurationContextFacade == null)
-        {
-            throw new ArgumentNullException(nameof(configurationContextFacade));
-        }
-
-        this.subscriptionResolver = subscriptionResolver;
-        this.recipientsResolver = recipientsResolver;
-
-        this.logger = Log.Logger.ForContext(this.GetType());
+        this.subscriptionResolver = subscriptionResolver ?? throw new ArgumentNullException(nameof(subscriptionResolver));
+        this.recipientsResolver = recipientsResolver ?? throw new ArgumentNullException(nameof(recipientsResolver));
+        this._configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
     }
 
     /// <summary>Выполняет поиск подписки и получателей уведомлений по подписке.</summary>
@@ -69,8 +54,8 @@ public class RecipientService<TBLLContext>
     /// versions равен null.
     /// </exception>
     public virtual SubscriptionRecipientInfo GetSubscriptionRecipientInfo<T>(
-            [NotNull] string subscriptionCode,
-            [NotNull] DomainObjectVersions<T> versions)
+            string subscriptionCode,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscriptionCode == null)
@@ -83,19 +68,20 @@ public class RecipientService<TBLLContext>
             throw new ArgumentNullException(nameof(versions));
         }
 
-        this.logger.Information("Get recipients for subscription code '{subscriptionCode}' and domain object type '{DomainObjectType}'.", subscriptionCode, versions.DomainObjectType);
+        var logger = this.GetLogger();
+        logger.LogDebug("Get recipients for subscription code '{subscriptionCode}' and domain object type '{DomainObjectType}'.", subscriptionCode, versions.DomainObjectType);
 
         var subscription = this.GetSubscription(subscriptionCode, versions);
 
         if (subscription == null)
         {
-            this.logger.Information("Active subscription for code '{subscriptionCode}' and domain object type '{DomainObjectType}' not found.", subscriptionCode, versions.DomainObjectType);
+            logger.LogDebug("Active subscription for code '{subscriptionCode}' and domain object type '{DomainObjectType}' not found.", subscriptionCode, versions.DomainObjectType);
             return null;
         }
 
         var recipients = this.GetRecipients(versions, subscription);
 
-        this.logger.Information("For subscription '{subscription}' '{recipients.Count}' recipients has been found. Recipients: {recipients}.", subscription, recipients.Join(", "));
+        logger.LogDebug("For subscription '{subscription}' '{recipients.Count}' recipients has been found. Recipients: {recipients}.", subscription, recipients.Join(", "));
 
         var result = new SubscriptionRecipientInfo
                      {
@@ -129,8 +115,11 @@ public class RecipientService<TBLLContext>
         }
         catch (SubscriptionServicesException ex)
         {
-            this.logger.Error(ex, "GetSubscription");
+            this.GetLogger().LogError(ex, "GetSubscription");
             return null;
         }
     }
+
+    private ILogger<RecipientService<TBLLContext>> GetLogger() =>
+        this._configurationContextFacade.ServiceProvider.GetRequiredService<ILogger<RecipientService<TBLLContext>>>();
 }

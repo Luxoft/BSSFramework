@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.BLL;
+﻿using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -7,7 +6,6 @@ namespace Framework.Configuration.Domain;
 /// <summary>
 /// Нотификация хранимая в бд
 /// </summary>
-[BLLRole]
 [NotAuditedClass]
 public class DomainObjectNotification : AuditPersistentDomainObjectBase
 {

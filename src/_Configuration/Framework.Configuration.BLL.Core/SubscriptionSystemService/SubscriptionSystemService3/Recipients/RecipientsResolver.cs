@@ -2,9 +2,8 @@
 using Framework.Configuration.Domain;
 using Framework.Core;
 
-using JetBrains.Annotations;
-
-using Serilog;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -17,7 +16,8 @@ public class RecipientsResolver<TBLLContext>
 {
     private readonly GenerationRecipientsResolver<TBLLContext> generationResolver;
     private readonly ByRolesRecipientsResolver<TBLLContext> rolesResolver;
-    private readonly ILogger logger;
+
+    private readonly ConfigurationContextFacade _configurationContextFacade;
 
     /// <summary>Создаёт экземпляр класса <see cref="RecipientsResolver"/>.</summary>
     /// <param name="generationResolver">
@@ -35,29 +35,13 @@ public class RecipientsResolver<TBLLContext>
     /// configurationContextFacade равен null.
     /// </exception>
     public RecipientsResolver(
-            [NotNull] GenerationRecipientsResolver<TBLLContext> generationResolver,
-            [NotNull] ByRolesRecipientsResolver<TBLLContext> rolesResolver,
-            [NotNull] ConfigurationContextFacade configurationContextFacade)
+            GenerationRecipientsResolver<TBLLContext> generationResolver,
+            ByRolesRecipientsResolver<TBLLContext> rolesResolver,
+            ConfigurationContextFacade configurationContextFacade)
     {
-        if (generationResolver == null)
-        {
-            throw new ArgumentNullException(nameof(generationResolver));
-        }
-
-        if (rolesResolver == null)
-        {
-            throw new ArgumentNullException(nameof(rolesResolver));
-        }
-
-        if (configurationContextFacade == null)
-        {
-            throw new ArgumentNullException(nameof(configurationContextFacade));
-        }
-
-        this.generationResolver = generationResolver;
-        this.rolesResolver = rolesResolver;
-
-        this.logger = Log.Logger.ForContext(this.GetType());
+        this.generationResolver = generationResolver ?? throw new ArgumentNullException(nameof(generationResolver));
+        this.rolesResolver = rolesResolver ?? throw new ArgumentNullException(nameof(rolesResolver));
+        this._configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
     }
 
     /// <summary>Выполняет поиск всех возможных получателей уведомлений по подписке.</summary>
@@ -72,8 +56,8 @@ public class RecipientsResolver<TBLLContext>
     ///     versions равен null.
     /// </exception>
     public virtual IEnumerable<RecipientsResolverResult> Resolve<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)
@@ -86,7 +70,8 @@ public class RecipientsResolver<TBLLContext>
             throw new ArgumentNullException(nameof(versions));
         }
 
-        this.logger.Information("Search recipients for subscription '{subscription}'", subscription);
+        var logger = this.GetLogger();
+        logger.LogDebug("Search recipients for subscription '{subscription}'", subscription);
 
         var generationResults = this.generationResolver.Resolve(subscription, versions);
         var rolesRecipients = this.rolesResolver.Resolve(subscription, versions);
@@ -101,23 +86,21 @@ public class RecipientsResolver<TBLLContext>
                                                      rolesRecipients,
                                                      new DomainObjectVersions<object>(versions.Previous, versions.Current));
 
-        this.logger.Information(
-                                "For subscription '{subscription}' '{generationRecipientsCount}' recipients by generation and '{rolesRecipients.Count()}' "
-                                + "recipients by roles has been found. Recipients by generation: {generationRecipients}. Recipients by roles: {rolesRecipients}.",
-                                subscription,
-                                generationRecipients.Count,
-                                rolesRecipients.Count(),
-                                generationRecipients.Select(r => r.Email).Join(","),
-                                rolesRecipients.Select(r => r.Email).Join(","));
+        logger.LogDebug(
+            "For subscription '{subscription}' '{generationRecipientsCount}' recipients by generation and '{rolesRecipients.Count()}' "
+            + "recipients by roles has been found. Recipients by generation: {generationRecipients}. Recipients by roles: {rolesRecipients}.",
+            subscription,
+            generationRecipients.Count,
+            rolesRecipients.Count(),
+            generationRecipients.Select(r => r.Email).Join(","),
+            rolesRecipients.Select(r => r.Email).Join(","));
 
         return results;
     }
 
     private static string TryGetUserEmail<T>(T domainObject)
-            where T : class
-    {
-        return (domainObject as ICurrentUserEmailContainer)?.CurrentUserEmail ?? string.Empty;
-    }
+            where T : class =>
+        (domainObject as ICurrentUserEmailContainer)?.CurrentUserEmail ?? string.Empty;
 
     private RecipientsResolverResult CreateResult(
             Subscription subscription,
@@ -192,4 +175,7 @@ public class RecipientsResolver<TBLLContext>
 
         return new RecipientCollection(filteredRecipients);
     }
+
+    private ILogger<RecipientsResolver<TBLLContext>> GetLogger() =>
+        this._configurationContextFacade.ServiceProvider.GetRequiredService<ILogger<RecipientsResolver<TBLLContext>>>();
 }

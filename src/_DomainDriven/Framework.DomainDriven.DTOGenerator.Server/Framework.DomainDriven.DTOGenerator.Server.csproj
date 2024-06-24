@@ -2,11 +2,14 @@
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.DTOGenerator.Server</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Framework.DomainDriven.BLLCoreGenerator\Framework.DomainDriven.BLLCoreGenerator.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.DTOGenerator\Framework.DomainDriven.DTOGenerator.csproj" />
   </ItemGroup>
+
 </Project>

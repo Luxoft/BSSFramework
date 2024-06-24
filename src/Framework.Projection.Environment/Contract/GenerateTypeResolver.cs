@@ -1,7 +1,5 @@
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Contract;
 
 internal class GenerateTypeResolver : ITypeResolver<Type>
@@ -13,7 +11,7 @@ internal class GenerateTypeResolver : ITypeResolver<Type>
     private readonly Dictionary<Type, GeneratedType> generateTypes = new Dictionary<Type, GeneratedType>();
 
 
-    public GenerateTypeResolver([NotNull] ProjectionContractEnvironment environment, [NotNull] ITypeSource typeSource)
+    public GenerateTypeResolver(ProjectionContractEnvironment environment, ITypeSource typeSource)
     {
         if (environment == null) throw new ArgumentNullException(nameof(environment));
         if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
@@ -23,7 +21,7 @@ internal class GenerateTypeResolver : ITypeResolver<Type>
         this.projectionContracts = typeSource.GetTypes().Where(type => type.HasAttribute<ProjectionContractAttribute>()).ToHashSet();
     }
 
-    public Type Resolve([NotNull] Type contractType)
+    public Type Resolve(Type contractType)
     {
         if (contractType == null) throw new ArgumentNullException(nameof(contractType));
 

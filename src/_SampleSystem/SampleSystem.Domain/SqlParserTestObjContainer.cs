@@ -9,8 +9,6 @@ namespace SampleSystem.Domain;
 [BLLViewRole(Max = MainDTOType.FullDTO)]
 [BLLSaveRole]
 [UniqueGroup]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.Disabled)]
 public class SqlParserTestObjContainer : AuditPersistentDomainObjectBase
 {
     private SqlParserTestObj includedObject;

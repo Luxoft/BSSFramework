@@ -11,11 +11,9 @@ using Framework.Persistent;
 using Framework.Projection;
 using Framework.Restriction;
 using Framework.Security;
-using Framework.SecuritySystem;
 using Framework.Transfering;
 using Framework.Validation;
-
-using JetBrains.Annotations;
+using Microsoft.Extensions.DependencyInjection;
 
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.DomainDriven.BLLCoreGenerator;
@@ -56,6 +54,16 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     /// <inheritdoc />
     public virtual bool GenerateExternalPropertyValidators { get; } = false;
 
+    public virtual bool GenerateAuthServices { get; } = true;
+
+    public virtual IServiceProvider ServiceProvider { get; } =  new ServiceCollection().BuildServiceProvider();
+
+    public CodeTypeReference ActualRootSecurityServiceInterfaceType =>
+
+        this.GenerateAuthServices
+            ? this.GetCodeTypeReference(null, FileType.RootSecurityServiceInterface)
+            : typeof(IRootSecurityService<>).MakeGenericType(this.Environment.PersistentDomainObjectBaseType).ToTypeReference();
+
     /// <inheritdoc />
     public virtual bool GenerateExternalClassValidators { get; } = false;
 
@@ -63,9 +71,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public virtual IBLLFactoryContainerInterfaceGeneratorConfiguration Logics { get; }
 
-    public virtual bool GenerateValidationMap => true;
-
-    public virtual bool GenerateValidator => true;
+    public virtual bool GenerateValidation => true;
 
     public virtual bool GenerateFetchService => true;
 
@@ -73,15 +79,13 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public Type DefaultBLLFactoryContainerType => typeof(IBLLFactoryContainer<>).MakeGenericType(this.DefaultBLLFactoryType);
 
-    public virtual Type SecurityBLLFactoryType => typeof(IDefaultSecurityBLLFactory<,,>).MakeGenericType(this.Environment.PersistentDomainObjectBaseType, this.Environment.SecurityOperationCodeType, this.Environment.GetIdentityType());
+    public virtual Type SecurityBLLFactoryType => typeof(IDefaultSecurityBLLFactory<,>).MakeGenericType(this.Environment.PersistentDomainObjectBaseType, this.Environment.GetIdentityType());
 
     public Type SecurityBLLFactoryContainerType => typeof(IBLLFactoryContainer<>).MakeGenericType(this.SecurityBLLFactoryType);
 
     protected override string NamespacePostfix { get; } = "BLL";
 
-    public virtual string GetOperationByCodeMethodName { get; } = "GetByCode";
-
-    public virtual string GetOperationByModeMethodName { get; } = "GetByMode";
+    public virtual string GetOperationByModeMethodName { get; } = "GetSecurityRule";
 
     public ReadOnlyCollection<Type> SecurityServiceDomainTypes => this.lazySecurityServiceDomainTypes.Value;
 
@@ -93,10 +97,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     public virtual bool UseDbUniquenessEvaluation { get; } = false;
 
     public virtual string IntegrationSaveMethodName { get; } = "IntegrationSave";
-
-    protected virtual ICodeFileFactoryHeader<FileType> BLLContextFileFactoryHeader =>
-
-            FileType.BLLContext.ToHeader(this.Environment.TargetSystemName);
 
     protected virtual ICodeFileFactoryHeader<FileType> BLLContextInterfaceFileFactoryHeader =>
 
@@ -119,25 +119,17 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
             new CodeFileFactoryHeader<FileType>(FileType.RootSecurityService, string.Empty, _ => $"{this.Environment.TargetSystemName}SecurityService");
 
+    protected virtual ICodeFileFactoryHeader<FileType> SecurityRuleHelperFactoryHeader =>
+
+            new CodeFileFactoryHeader<FileType>(FileType.SecurityRuleHelper, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.SecurityRuleHelper}");
+
     protected virtual ICodeFileFactoryHeader<FileType> RootSecurityServiceBaseFileFactoryHeader =>
 
-            new CodeFileFactoryHeader<FileType>(FileType.RootSecurityServiceBase, string.Empty, _ => $"{this.Environment.TargetSystemName}SecurityServiceBase");
-
-    protected virtual ICodeFileFactoryHeader<FileType> SecurityOperationFileFactoryHeader =>
-
-            FileType.SecurityOperation.ToHeader(this.Environment.TargetSystemName);
+        new CodeFileFactoryHeader<FileType>(FileType.RootSecurityServiceBase, string.Empty, _ => $"{this.Environment.TargetSystemName}SecurityServiceBase");
 
     protected virtual ICodeFileFactoryHeader<FileType> DomainSecurityServiceFileFactoryHeader =>
 
             new CodeFileFactoryHeader<FileType>(FileType.DomainSecurityService, string.Empty, domainType => $"{this.Environment.TargetSystemName}{domainType.Name}SecurityService");
-
-    protected virtual ICodeFileFactoryHeader<FileType> DomainBLLBaseFileFactoryHeader { get; } =
-
-        new CodeFileFactoryHeader<FileType>(FileType.DomainBLLBase, string.Empty, _ => FileType.DomainBLLBase.ToString());
-
-    protected virtual ICodeFileFactoryHeader<FileType> DefaultOperationDomainBLLBaseFileFactoryHeader { get; } =
-
-        new CodeFileFactoryHeader<FileType>(FileType.DefaultOperationDomainBLLBase, string.Empty, _ => FileType.DomainBLLBase.ToString());
 
     protected virtual ICodeFileFactoryHeader<FileType> SecurityDomainBLLBaseFileFactoryHeader { get; } =
 
@@ -146,14 +138,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     protected virtual ICodeFileFactoryHeader<FileType> SecurityHierarchyDomainBLLBaseFileFactoryHeader { get; } =
 
         new CodeFileFactoryHeader<FileType>(FileType.SecurityHierarchyDomainBLLBase, string.Empty, _ => FileType.SecurityHierarchyDomainBLLBase.ToString());
-
-    protected virtual ICodeFileFactoryHeader<FileType> DefaultOperationSecurityDomainBLLBaseFileFactoryHeader { get; } =
-
-        new CodeFileFactoryHeader<FileType>(FileType.DefaultOperationSecurityDomainBLLBase, string.Empty, _ => FileType.SecurityDomainBLLBase.ToString());
-
-    protected virtual ICodeFileFactoryHeader<FileType> SecurityPathFileFactoryHeader =>
-
-            FileType.SecurityPath.ToHeader(this.Environment.TargetSystemName);
 
     protected virtual ICodeFileFactoryHeader<FileType> BLLInterfaceFileFactoryHeader { get; } =
 
@@ -179,9 +163,17 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
             new CodeFileFactoryHeader<FileType>(FileType.Validator, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.Validator}");
 
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorInterfaceFileFactoryHeader =>
+
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}{FileType.Validator}");
+
     protected virtual ICodeFileFactoryHeader<FileType> ValidatorBaseFileFactoryHeader =>
 
             new CodeFileFactoryHeader<FileType>(FileType.ValidatorBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidatorBase}");
+
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorCompileCacheFileFactoryHeader =>
+
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorCompileCache, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidatorCompileCache}");
 
     protected virtual ICodeFileFactoryHeader<FileType> MainFetchServiceFileFactoryHeader =>
 
@@ -282,7 +274,10 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
                               from type in projectionEnvironment.Assembly.GetTypes()
 
-                              where this.IsPersistentObject(type) && type.HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default)
+                              where this.IsPersistentObject(type)
+                                    && this.Environment.ExtendedMetadata.HasAttribute<ProjectionAttribute>(
+                                        type,
+                                        attr => attr.Role == ProjectionRole.Default)
 
                               select type;
 
@@ -291,11 +286,11 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected virtual IEnumerable<Type> GetBLLDomainTypes()
     {
-        return from type in this.DomainTypes
+        return from domainType in this.DomainTypes
 
-               where type.HasAttribute<BLLRoleAttribute>()
+               where this.Environment.ExtendedMetadata.HasAttribute<BLLRoleAttribute>(domainType)
 
-               select type;
+               select domainType;
     }
 
     protected virtual IEnumerable<Type> GetSecurityServiceDomainTypes()
@@ -303,22 +298,9 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return this.RootSecurityServerGenerator.GetSecurityServiceDomainTypes();
     }
 
-    protected internal virtual CodeExpression GetSecurityOperationFieldReference(Enum securityOperationCode)
-    {
-        if (securityOperationCode == null) throw new ArgumentNullException(nameof(securityOperationCode));
-
-        return new CodeThisReferenceExpression()
-                .ToMethodInvokeExpression(
-                                          "GetSecurityProvider",
-                                          this.GetCodeTypeReference(null, FileType.SecurityOperation).ToTypeReferenceExpression()
-                                              .ToFieldReference(securityOperationCode.ToString()));
-    }
-
     protected virtual IRootSecurityServiceGenerator GetRootSecurityServerGenerator()
     {
-        return this.Environment.SecurityOperationCodeType.IsEnum
-                       ? (IRootSecurityServiceGenerator)new EnumRootSecurityServiceGenerator<GeneratorConfigurationBase<TEnvironment>>(this)
-                       : new FixedRootSecurityServiceGenerator<GeneratorConfigurationBase<TEnvironment>>(this);
+        return new EnumRootSecurityServiceGenerator<GeneratorConfigurationBase<TEnvironment>>(this);
     }
 
     public virtual IRootSecurityServiceGenerator RootSecurityServerGenerator => this.lazyRootSecurityServerGenerator.Value;
@@ -340,19 +322,14 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     {
         return new[]
                {
-                       this.BLLContextFileFactoryHeader,
+                      this.SecurityRuleHelperFactoryHeader,
+
                        this.BLLContextInterfaceFileFactoryHeader,
                        this.RootSecurityServiceFileFactoryHeader,
                        this.RootSecurityServiceBaseFileFactoryHeader,
-                       this.SecurityOperationFileFactoryHeader,
                        this.DomainSecurityServiceFileFactoryHeader,
 
-                       this.DomainBLLBaseFileFactoryHeader,
-                       this.DefaultOperationDomainBLLBaseFileFactoryHeader,
                        this.SecurityDomainBLLBaseFileFactoryHeader,
-                       this.DefaultOperationSecurityDomainBLLBaseFileFactoryHeader,
-
-                       this.SecurityPathFileFactoryHeader,
 
                        this.BLLInterfaceFileFactoryHeader,
                        this.BLLFactoryInterfaceFileFactoryHeader,
@@ -368,8 +345,11 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                        this.ValidationMapBaseFileFactoryHeader,
                        this.ValidationMapFileFactoryHeader,
 
+                       this.ValidatorCompileCacheFileFactoryHeader,
+
                        this.ValidatorBaseFileFactoryHeader,
                        this.ValidatorFileFactoryHeader,
+                       this.ValidatorInterfaceFileFactoryHeader,
 
                        this.MainFetchServiceBaseFileFactoryHeader,
                        this.MainFetchServiceFileFactoryHeader
@@ -379,12 +359,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     public CodeTypeReference BLLContextInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.BLLContextInterface);
 
     public CodeTypeReference BLLFactoryInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface);
-
-    public CodeTypeReference SecurityOperationTypeReference => this.GetCodeTypeReference(null, FileType.SecurityOperation);
-
-    public CodeTypeReference RootSecurityServiceInterface => this.GetCodeTypeReference(null, FileType.RootSecurityServiceInterface);
-
-    public CodeTypeReference DomainBLLBaseTypeReference => this.GetCodeTypeReference(null, FileType.DomainBLLBase);
 
     public CodeTypeReference SecurityDomainBLLBaseTypeReference => this.GetSecurityDomainBLLBaseTypeReference(null);
 
@@ -397,10 +371,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     {
         return this.GetCodeTypeReference(type, FileType.SecurityHierarchyDomainBLLBase);
     }
-
-    public CodeTypeReference DefaultOperationDomainBLLBaseTypeReference => this.GetCodeTypeReference(null, FileType.DefaultOperationDomainBLLBase);
-
-    public CodeTypeReference DefaultOperationSecurityDomainBLLBaseTypeReference => this.GetCodeTypeReference(null, FileType.DefaultOperationSecurityDomainBLLBase);
 
     public virtual Type FilterModelType { get; }
 
@@ -458,72 +428,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return contextExpression.ToPropertyReference((IBLLFactoryContainerContext<object> context) => context.Logics)
                                 .ToPropertyReference((IBLLFactoryContainer<Ignore> container) => container.Default)
                                 .ToMethodReferenceExpression("Create", genericType).ToMethodInvokeExpression();
-    }
-
-    public Type GetBLLSecurityModeType(Type domainType)
-    {
-        return typeof(BLLSecurityMode);
-
-        //if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        //var depSecAttr = domainType.GetCustomAttribute<DependencySecurityAttribute>();
-
-        //if (depSecAttr != null)
-        //{
-        //    return this.GetBLLSecurityModeType(depSecAttr.SourceType) ?? typeof(BLLSecurityMode);
-        //}
-
-        //var hasViewEditAttr = domainType.GetViewDomainObjectAttribute() != null || domainType.GetEditDomainObjectAttribute() != null;
-
-        //if (!this.SecurityMode.HasFlag(SecurityModeGenerate.Domain) && hasViewEditAttr)
-        //{
-        //    return typeof(BLLSecurityMode);
-        //}
-        //else
-        //{
-        //    if (!hasViewEditAttr && domainType.HasAttribute<CustomContextSecurityAttribute>())
-        //    {
-        //        return typeof(BLLSecurityMode);
-        //    }
-
-        //    return null;
-        //}
-    }
-
-    public bool HasSecurityContext(Type domainType)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        if (!this.Environment.SecurityOperationCodeType.IsEnum)
-        {
-            return false;
-        }
-
-        var viewCode = domainType.GetViewDomainObjectCode();
-        var editCode = domainType.GetEditDomainObjectCode();
-
-        var membersRequest = from securityOperationCode in this.Environment.GetSecurityOperationCodes()
-
-                             let fieldInfo = securityOperationCode.ToFieldInfo()
-
-                             let securityOperationAttribute = securityOperationCode.GetSecurityOperationAttribute()
-
-                             where securityOperationAttribute != null
-
-                                   && !securityOperationAttribute.IsClient
-
-                                   && domainType.Name.Equals(securityOperationAttribute.DomainType, StringComparison.CurrentCultureIgnoreCase)
-
-                             let isContext = securityOperationAttribute.IsContext
-
-                             select new
-                                    {
-                                            IsContext = isContext
-                                    };
-
-        return viewCode.Maybe(v => v.GetSecurityOperationAttribute().IsContext)
-               || editCode.Maybe(v => v.GetSecurityOperationAttribute().IsContext)
-               || membersRequest.Any(info => info.IsContext);
     }
 
     private IEnumerable<CodeTypeParameter> GetDomainTypeGenericSecurityParameters(Type domainType)
@@ -631,11 +535,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     {
         var baseRef = base.GetCodeTypeReference(domainType, fileType);
 
-        if (domainType?.Name == "TestSecurityObjItem")
-        {
-
-        }
-
         if (fileType == FileType.DomainSecurityService && !this.Environment.GetProjectionEnvironment(domainType).Maybe(v => v.UseDependencySecurity))
         {
             var arguments = this.GetDomainTypeSecurityParameters(domainType).ToArray(genParam => (Type)genParam.UserData["SourceType"]);
@@ -677,7 +576,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return true;
     }
 
-    public virtual bool GenerateDomainServiceConstructor([NotNull] Type domainType)
+    public virtual bool GenerateDomainServiceConstructor(Type domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 

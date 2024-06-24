@@ -1,25 +1,20 @@
 ﻿using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.Repository;
 
-public class GenericRepositoryFactory<TDomainObject, TIdent, TSecurityOperationCode> : TemplateRepositoryFactory<
+public class GenericRepositoryFactory<TDomainObject, TIdent> : TemplateRepositoryFactory<
     IGenericRepository<TDomainObject, TIdent>,
     GenericRepository<TDomainObject, TIdent>,
-    TDomainObject,
-    TSecurityOperationCode>,
+    TDomainObject>,
 
-    IGenericRepositoryFactory<TDomainObject, TIdent, TSecurityOperationCode>
+    IGenericRepositoryFactory<TDomainObject, TIdent>
 
     where TDomainObject : class
-    where TSecurityOperationCode : struct, Enum
 {
     public GenericRepositoryFactory(
         IServiceProvider serviceProvider,
-        INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
-        [CanBeNull] IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService = null)
-        : base(serviceProvider, notImplementedDomainSecurityServiceContainer, domainSecurityService)
+        IDomainSecurityService<TDomainObject> domainSecurityService )
+        : base(serviceProvider, domainSecurityService)
     {
     }
 }

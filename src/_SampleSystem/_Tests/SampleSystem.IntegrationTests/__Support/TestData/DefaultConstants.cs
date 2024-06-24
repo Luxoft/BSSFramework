@@ -66,8 +66,6 @@ public static class DefaultConstants
     // Legal Entity name
     public const string COMPANY_LEGAL_ENTITY_NAME = "Legal Entity";
 
-    // My Employee
-    public const string EMPLOYEE_MY_LOGIN = "MyLogin";
 
     public const string EMPLOYEE_MY_NAME = "Admin";
 
@@ -140,9 +138,14 @@ public static class DefaultConstants
     // My Employee Id
     public static readonly Guid EMPLOYEE_MY_ID = new Guid("1A1A1A1A-0000-0000-0007-000000000001");
 
+    /// <summary>
+    /// Default Employee Id for head of HrDepartment
+    /// </summary>
+    public static readonly Guid HRDepartment_DEFAULT_HEAD_EMPLOYEE_ID = new Guid("2B2B2B2B-0000-0000-0007-000000000002");
+
 
 
     public const string NOTIFICATION_ADMIN = "NotificationAdmin";
 
-    public const string INTEGRATION_USER = "IntegrationBus";
+    public const string INTEGRATION_BUS = "IntegrationBus";
 }

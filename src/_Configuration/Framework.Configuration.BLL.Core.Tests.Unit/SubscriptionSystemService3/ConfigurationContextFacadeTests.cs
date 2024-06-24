@@ -9,13 +9,13 @@ using Framework.Configuration.BLL.SubscriptionSystemService3;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
+using Framework.Notification;
 using Framework.UnitTesting;
 using NUnit.Framework;
 
 using NSubstitute;
+using Framework.SecuritySystem;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3;
 
@@ -23,24 +23,22 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 public sealed class ConfigurationContextFacadeTests : TestFixtureBase
 {
     private IConfigurationBLLContext context;
-    private IBLLSimpleQueryBase<IEmployee> simpleQuery;
+    private IEmployeeSource employeeSource;
     private INotificationPrincipalExtractor notificationPrincipalExtractor;
-    private ITypeResolver<EntityType> securityTypeResolver;
     private IAuthorizationBLLContext authorizationContext;
     private ITypeResolver<DomainType> domainTypeResolver;
     private IDomainTypeBLL domainTypeBll;
-    private IEntityTypeBLL entityTypeBll;
+    private ISecurityContextTypeBLL securityContextTypeBll;
     private ICodeFirstSubscriptionBLL codeFirstSubscriptionBLL;
 
     [SetUp]
     public void SetUp()
     {
-        this.simpleQuery = this.CreateStub<IBLLSimpleQueryBase<IEmployee>>();
+        this.employeeSource = this.CreateStub<IEmployeeSource>();
         this.notificationPrincipalExtractor = this.CreateStub<INotificationPrincipalExtractor>();
-        this.securityTypeResolver = this.CreateStub<ITypeResolver<EntityType>>();
         this.domainTypeResolver = this.CreateStub<ITypeResolver<DomainType>>();
         this.domainTypeBll = this.CreateStub<IDomainTypeBLL>();
-        this.entityTypeBll = this.CreateStub<IEntityTypeBLL>();
+        this.securityContextTypeBll = this.CreateStub<ISecurityContextTypeBLL>();
         this.codeFirstSubscriptionBLL = this.CreateStub<ICodeFirstSubscriptionBLL>();
 
         var configurationLogics = this.CreateStub<IConfigurationBLLFactoryContainer>();
@@ -48,15 +46,14 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         configurationLogics.CodeFirstSubscription.Returns(this.codeFirstSubscriptionBLL);
 
         var authorizationLogics = this.CreateStub<IAuthorizationBLLFactoryContainer>();
-        authorizationLogics.EntityType.Returns(this.entityTypeBll);
+        authorizationLogics.SecurityContextType.Returns(this.securityContextTypeBll);
 
         this.authorizationContext = this.CreateStub<IAuthorizationBLLContext>();
         this.authorizationContext.Logics.Returns(authorizationLogics);
         this.authorizationContext.NotificationPrincipalExtractor.Returns(this.notificationPrincipalExtractor);
-        this.authorizationContext.SecurityTypeResolver.Returns(this.securityTypeResolver);
 
         this.context = this.Fixture.RegisterStub<IConfigurationBLLContext>();
-        this.context.GetEmployeeSource().Returns(this.simpleQuery);
+        this.context.EmployeeSource.Returns(this.employeeSource);
         this.context.Logics.Returns(configurationLogics);
         this.context.Authorization.Returns(this.authorizationContext);
         this.context.ComplexDomainTypeResolver.Returns(this.domainTypeResolver);
@@ -82,7 +79,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         var employees = new RecipientCollection(new[] { new Recipient("ivanov", "ivanov@ya.ru") });
         var principals = new[] { new Principal { Name = "ivanov" }, new Principal { Name = "petrov" } };
 
-        this.simpleQuery.GetUnsecureQueryable().Returns(employees.AsQueryable());
+        this.employeeSource.GetQueryable().Returns(employees.AsQueryable());
 
         // Act
         var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
@@ -97,16 +94,16 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     public void GetNotificationPrincipals_Call_CollectionOfPrincipals()
     {
         // Arrange
-        var idents = this.Fixture.CreateMany<Guid>().ToArray();
+        var securityRoles = this.Fixture.CreateMany<SecurityRole>().ToArray();
         var principals = this.Fixture.CreateMany<Principal>();
 
         this.notificationPrincipalExtractor
-            .GetNotificationPrincipalsByRoles(idents, Array.Empty<NotificationFilterGroup>())
+            .GetNotificationPrincipalsByRoles(securityRoles, Array.Empty<NotificationFilterGroup>())
             .Returns(principals);
 
         // Act
         var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-        var result = configurationContextFacade.GetNotificationPrincipals(idents);
+        var result = configurationContextFacade.GetNotificationPrincipals(securityRoles);
 
         // Assert
         result.Should().BeEquivalentTo(principals);
@@ -116,39 +113,39 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     public void GetNotificationPrincipals2_Call_CollectionOfPrincipals()
     {
         // Arrange
-        var idents = this.Fixture.CreateMany<Guid>().ToArray();
+        var securityRoles = this.Fixture.CreateMany<SecurityRole>().ToArray();
         var notificationFilterGroups = this.Fixture.CreateMany<NotificationFilterGroup>();
         var principals = this.Fixture.CreateMany<Principal>();
 
         this.notificationPrincipalExtractor
-            .GetNotificationPrincipalsByRoles(idents, notificationFilterGroups)
+            .GetNotificationPrincipalsByRoles(securityRoles, notificationFilterGroups)
             .Returns(principals);
 
         // Act
         var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-        var result = configurationContextFacade.GetNotificationPrincipals(idents, notificationFilterGroups);
+        var result = configurationContextFacade.GetNotificationPrincipals(securityRoles, notificationFilterGroups);
 
         // Assert
         result.Should().BeEquivalentTo(principals);
     }
 
     [Test]
-    public void GetEntityType_Call_FoundEntityType()
+    public void GetSecurityContextType_Call_FoundSecurityContextType()
     {
         //Arrange
         var domainTypeName = this.Fixture.Create<string>();
-        var entityType = this.Fixture.Create<EntityType>();
+        var securityContextType = this.Fixture.Create<SecurityContextType>();
 
         this.authorizationContext
-            .GetEntityType(domainTypeName)
-            .Returns(entityType);
+            .GetSecurityContextType(domainTypeName)
+            .Returns(securityContextType);
 
         // Act
         var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-        var result = configurationContextFacade.GetEntityType(domainTypeName);
+        var result = configurationContextFacade.GetSecurityContextType(domainTypeName);
 
         // Assert
-        result.Should().Be(entityType);
+        result.Should().Be(securityContextType);
     }
 
     [Test]

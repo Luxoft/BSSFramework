@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 
-using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers;
 
 namespace SampleSystem.IntegrationTests.Auth;
@@ -20,11 +20,10 @@ public class PrincipalTests : TestBase
     public void AddPermission_CheckAddition()
     {
         // Arrange
-        var employeeController = this.MainWebApi.Employee;
         var authorizationController = this.GetAuthControllerEvaluator();
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
-        var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
+        var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
         var principalIdentity = authorizationController.Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
@@ -36,21 +35,18 @@ public class PrincipalTests : TestBase
 
         // Assert
         var permissionSimple = authorizationController.Evaluate(c => c.GetSimplePermission(permissionIdentity));
-        permissionSimple.Active.Should().BeTrue();
         permissionSimple.CreatedBy.Should().Be(currentUser.Login.ToString());
         permissionSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
-        permissionSimple.Status.Should().Be(PermissionStatus.Approved);
     }
 
     [TestMethod]
     public void SavePrincipal_CheckCreateon()
     {
         // Arrange
-        var employeeController = this.MainWebApi.Employee;
         var authorizationController = this.GetAuthControllerEvaluator();
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
-        var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
+        var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
         var principalStrict = new PrincipalStrictDTO
                               {
@@ -68,7 +64,6 @@ public class PrincipalTests : TestBase
         var principalRich = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichPrincipal(principalIdentity));
 
         principalRich.Name.Should().Be(Name);
-        principalRich.Active.Should().BeTrue();
         principalRich.CreatedBy.Should().Be(currentUser.Login.ToString());
         principalRich.ModifiedBy.Should().Be(currentUser.Login.ToString());
         principalRich.Permissions.First().Role.Identity.Should().Be(businessRoleIdentity);
@@ -78,7 +73,6 @@ public class PrincipalTests : TestBase
     public void SavePrincipal_CheckPrincipalChanges()
     {
         // Arrange
-        var employeeController = this.MainWebApi.Employee;
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
         var principalStrict = new PrincipalStrictDTO { Name = Name };
@@ -92,11 +86,10 @@ public class PrincipalTests : TestBase
         this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(principalStrict));
 
         // Assert
-        var principalSiple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalStrict.Identity));
+        var principalSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalStrict.Identity));
 
-        principalSiple.Name.Should().Be(NewName);
-        principalSiple.Active.Should().BeTrue();
-        principalSiple.ModifiedBy.Should().Be(currentUser.Login.ToString());
+        principalSimple.Name.Should().Be(NewName);
+        principalSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
     }
 
     [TestMethod]
@@ -105,7 +98,7 @@ public class PrincipalTests : TestBase
         // Arrange
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
-        var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
+        var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
         var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
@@ -114,8 +107,8 @@ public class PrincipalTests : TestBase
         var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
         var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
-        var newprincipalStrict = new PrincipalStrictDTO { Name = Name };
-        var newPrincipalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(newprincipalStrict));
+        var newPrincipalStrict = new PrincipalStrictDTO { Name = Name };
+        var newPrincipalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(newPrincipalStrict));
 
         var changePermissionDelegate = new ChangePermissionDelegatesModelStrictDTO
                                        {
@@ -138,21 +131,18 @@ public class PrincipalTests : TestBase
                                                                                      .Single(x => x.Principal.Identity == newPrincipalIdentity)).Identity;
 
         var newPermissionFull = this.GetAuthControllerEvaluator().Evaluate(c => c.GetFullPermission(newPermissionIdentity));
-        newPermissionFull.IsDelegatedFrom.Should().BeTrue();
-        newPermissionFull.DelegatedFromPrincipal.Identity.Should().Be(principalIdentity);
-        newPermissionFull.Active.Should().BeTrue();
         newPermissionFull.CreatedBy.Should().Be(currentUser.Login.ToString());
         newPermissionFull.ModifiedBy.Should().Be(currentUser.Login.ToString());
 
-        var permissionSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePermission(permissionIdentity));
-        permissionSimple.IsDelegatedTo.Should().BeTrue();
+        var permissionSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichPermission(permissionIdentity));
+        permissionSimple.DelegatedTo.Any().Should().BeTrue();
     }
 
     [TestMethod]
     public void RemovePermission_CheckRemoval()
     {
         // Arrange
-        var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
+        var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
         var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
@@ -170,13 +160,13 @@ public class PrincipalTests : TestBase
     }
 
     [TestMethod]
-    public void RemovePrinchipaWithRole_CheckException()
+    public void RemovePrincipalWithRole_CheckException()
     {
         // Arrange
         var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
         // Act
-        Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
+        var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
 
         // Assert
         call.Should().Throw<Exception>().WithMessage("Removing principal \"*\" must be empty");
@@ -192,7 +182,7 @@ public class PrincipalTests : TestBase
 
         // Act
         this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
-        Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalIdentity));
+        var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalIdentity));
 
         // Assert
         call.Should().Throw<Exception>().WithMessage("Principal with id = \"*\" not found");

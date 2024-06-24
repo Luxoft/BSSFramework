@@ -9,16 +9,14 @@ using Framework.Events;
 using Framework.Notification;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL;
 
 public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : TargetSystemService<TBLLContext>, IPersistentTargetSystemService
 
-        where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>, IBLLOperationEventContext<TPersistentDomainObjectBase>
+        where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
-    private readonly IEnumerable<IManualEventDALListener<TPersistentDomainObjectBase>> eventDalListeners;
+    private readonly IEventOperationSender eventOperationSender;
 
     private readonly IRevisionSubscriptionSystemService subscriptionService;
 
@@ -30,18 +28,17 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
     /// <param name="targetSystemContext">Контекст целевой системы.</param>
     /// <param name="targetSystem">Целевая система.</param>
     /// <param name="subscriptionMetadataStore">Хранилище описаний подписок.</param>
-    /// <param name="eventDalListeners">DAL-подписчики для пробразсывания евентов</param>
     public TargetSystemService(
             IConfigurationBLLContext context,
             TBLLContext targetSystemContext,
             TargetSystem targetSystem,
-            IEnumerable<IManualEventDALListener<TPersistentDomainObjectBase>> eventDalListeners,
-            SubscriptionMetadataStore subscriptionMetadataStore = null)
+            IEventOperationSender eventOperationSender,
+            SubscriptionMetadataStore subscriptionMetadataStore)
             : base(context, targetSystemContext, targetSystem, targetSystemContext.FromMaybe(() => new ArgumentNullException(nameof(targetSystemContext))).TypeResolver)
     {
-        this.eventDalListeners = (eventDalListeners ?? throw new ArgumentNullException(nameof(eventDalListeners)));
+        this.eventOperationSender = eventOperationSender;
 
-        this.subscriptionService = this.GetSubscriptionService(subscriptionMetadataStore ?? new SubscriptionMetadataStore(new SubscriptionMetadataFinder()));
+        this.subscriptionService = this.GetSubscriptionService(subscriptionMetadataStore);
     }
 
 
@@ -54,38 +51,29 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
         return this.subscriptionService;
     }
 
-    public void ForceEvent([NotNull] DomainTypeEventOperation operation, long? revision, Guid domainObjectId)
+    public void ForceEvent(DomainTypeEventOperation operation, long? revision, Guid domainObjectId)
     {
         if (operation == null) throw new ArgumentNullException(nameof(operation));
         if (domainObjectId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainObjectId));
 
         var domainType = this.TypeResolver.Resolve(operation.DomainType);
 
-        var operationType = domainType.GetEventOperationType(true);
-
-        new Action<string, long?, Guid>(this.ForceEvent<TPersistentDomainObjectBase, TypeCode>)
-                .CreateGenericMethod(domainType, operationType)
-                .Invoke(this, new object[] { operation.Name, revision, domainObjectId });
+        new Action<string, long?, Guid>(this.ForceEvent<TPersistentDomainObjectBase>)
+            .CreateGenericMethod(domainType)
+            .Invoke(this, new object[] { operation.Name, revision, domainObjectId });
     }
 
-    private void ForceEvent<TDomainObject, TOperation>(string operationName, long? revision, Guid domainObjectId)
+    private void ForceEvent<TDomainObject>(string operationName, long? revision, Guid domainObjectId)
             where TDomainObject : class, TPersistentDomainObjectBase
-            where TOperation : struct, Enum
     {
         var bll = this.TargetSystemContext.Logics.Default.Create<TDomainObject>();
 
         var domainObject = revision == null ? bll.GetById(domainObjectId, true)
                                    : bll.GetObjectByRevision(domainObjectId, revision.Value);
 
-        var operation = EnumHelper.Parse<TOperation>(operationName);
+        var domainObjectEvent = new EventOperation(operationName);
 
-        var listener = this.TargetSystemContext.OperationSenders.GetEventSender<TDomainObject, TOperation>();
-
-        listener.SendEvent(domainObject, operation);
-
-        operation.ToOperationMaybe<TOperation, EventOperation>().Match(
-                                                                       eventOperation =>
-                                                                               this.eventDalListeners.Foreach(dalListener => dalListener.GetForceEventContainer<TDomainObject>().SendEvent(domainObject, eventOperation)));
+        this.eventOperationSender.Send(domainObject, domainObjectEvent);
     }
 
     public override bool IsAssignable(Type domainType)
@@ -96,16 +84,11 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
     private IRevisionSubscriptionSystemService GetSubscriptionService(
             SubscriptionMetadataStore subscriptionMetadataStore)
     {
-        if (subscriptionMetadataStore == null)
-        {
-            throw new InvalidOperationException("SubscriptionMetadataStore instance can not be null for use new subscription services.");
-        }
-
         var subscriptionServicesFactory = new SubscriptionServicesFactory<TBLLContext, TPersistentDomainObjectBase>(
-         this.Context,
-         this.TargetSystemContext.Logics.Default,
-         this.TargetSystemContext,
-         subscriptionMetadataStore);
+            this.Context,
+            this.TargetSystemContext.Logics.Default,
+            this.TargetSystemContext,
+            subscriptionMetadataStore);
 
         return new RevisionSubscriptionSystemService<TBLLContext, TPersistentDomainObjectBase>(subscriptionServicesFactory);
     }

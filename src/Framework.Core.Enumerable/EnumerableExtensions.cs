@@ -1,11 +1,19 @@
 ﻿using System.Collections.ObjectModel;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public static class EnumerableExtensions
 {
+    public static IEnumerable<T> GetAllElements<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getChildFunc)
+    {
+        if (null == getChildFunc)
+        {
+            throw new ArgumentNullException(nameof(getChildFunc));
+        }
+
+        return source.SelectMany(child => child.GetAllElements(getChildFunc));
+    }
+
     public static IEnumerable<T> SelectMany<T>(this IEnumerable<IEnumerable<T>> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
@@ -312,7 +320,7 @@ public static class EnumerableExtensions
         return source.Select(selector).ToReadOnlyCollection();
     }
 
-    public static IEnumerable<TResult> EmptyIfNull<TResult>([CanBeNull] this IEnumerable<TResult> source)
+    public static IEnumerable<TResult> EmptyIfNull<TResult>(this IEnumerable<TResult> source)
     {
         return source ?? Enumerable.Empty<TResult>();
     }

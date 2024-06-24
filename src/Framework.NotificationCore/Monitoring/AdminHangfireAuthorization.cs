@@ -1,17 +1,15 @@
-﻿using Framework.Authorization.BLL;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Security;
+﻿using Framework.DomainDriven;
+using Framework.SecuritySystem;
 
 using Hangfire.Dashboard;
 
 namespace Framework.NotificationCore.Monitoring;
 
-public class AdminHangfireAuthorization<TBllContext> : IDashboardAuthorizationFilter
-        where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+public class AdminHangfireAuthorization : IDashboardAuthorizationFilter
 {
-    private readonly IContextEvaluator<TBllContext> contextEvaluator;
+    private readonly IServiceEvaluator<IAuthorizationSystem> authorizationSystemEvaluator;
 
-    public AdminHangfireAuthorization(IContextEvaluator<TBllContext> contextEvaluator) => this.contextEvaluator = contextEvaluator;
+    public AdminHangfireAuthorization(IServiceEvaluator<IAuthorizationSystem> authorizationSystemEvaluator) => this.authorizationSystemEvaluator = authorizationSystemEvaluator;
 
     public bool Authorize(DashboardContext context)
     {
@@ -22,6 +20,6 @@ public class AdminHangfireAuthorization<TBllContext> : IDashboardAuthorizationFi
             return false;
         }
 
-        return this.contextEvaluator.Evaluate(DBSessionMode.Read, z => z.Authorization.Logics.BusinessRole.HasAdminRole());
+        return this.authorizationSystemEvaluator.Evaluate(DBSessionMode.Read, service => service.IsAdministrator());
     }
 }

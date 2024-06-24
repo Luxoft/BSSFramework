@@ -19,7 +19,6 @@ public sealed class AttachmentTemplateEvaluatorSubscription
         this.CopyGenerationLambda = new CopyGenerationLambda();
         this.SecurityItemSourceLambdas = new[] { new SecurityItemSourceLambda() };
         this.RecepientsSelectorMode = Framework.Configuration.RecepientsSelectorMode.Union;
-        this.SubBusinessRoleIds = Enumerable.Empty<Guid>();
         this.IncludeAttachments = true;
         this.AttachmentLambda = new AttachmentLambdaTemplateEvaluator();
     }

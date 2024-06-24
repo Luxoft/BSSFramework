@@ -5,8 +5,6 @@ using System.Reflection;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Transfering;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
 public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfigurationBase, IGeneratorConfiguration<TEnvironment, FileType>
@@ -17,6 +15,12 @@ public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfi
 #pragma warning disable S100 // Methods and properties should be named in camel case
 public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
+    IServiceProvider ServiceProvider { get; }
+
+    CodeTypeReference ActualRootSecurityServiceInterfaceType { get; }
+
+    bool GenerateAuthServices { get; }
+
     /// <summary>
     /// Добавление глобальных валидаторов для классов
     /// </summary>
@@ -39,9 +43,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     bool UseRemoveMappingExtension { get; }
 
-    bool GenerateValidationMap { get; }
-
-    bool GenerateValidator { get; }
+    bool GenerateValidation { get; }
 
     bool GenerateFetchService { get; }
 
@@ -49,25 +51,13 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     ReadOnlyCollection<Type> SecurityServiceDomainTypes { get; }
 
-    string GetOperationByCodeMethodName { get; }
-
     string GetOperationByModeMethodName { get; }
 
     CodeTypeReference BLLContextInterfaceTypeReference { get; }
 
     CodeTypeReference BLLFactoryInterfaceTypeReference { get; }
 
-    CodeTypeReference SecurityOperationTypeReference { get; }
-
-    CodeTypeReference RootSecurityServiceInterface { get; }
-
-    CodeTypeReference DomainBLLBaseTypeReference { get; }
-
     CodeTypeReference SecurityDomainBLLBaseTypeReference { get; }
-
-    CodeTypeReference DefaultOperationDomainBLLBaseTypeReference { get; }
-
-    CodeTypeReference DefaultOperationSecurityDomainBLLBaseTypeReference { get; }
 
     Type FilterModelType { get; }
 
@@ -117,11 +107,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     CodeExpression GetCreateDefaultBLLExpression(CodeExpression contextExpression, CodeTypeReference genericType);
 
-    Type GetBLLSecurityModeType(Type domainType);
-
     IEnumerable<PropertyInfo> GetMappingProperties(Type domainType, MainDTOType fileType);
-
-    bool HasSecurityContext(Type domainType);
 
     CodeMethodReferenceExpression GetGetSecurityProviderMethodReferenceExpression(CodeExpression contextExpression, Type domainType);
 
@@ -130,7 +116,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     /// </summary>
     /// <param name="domainType"></param>
     /// <returns></returns>
-    IEnumerable<CodeTypeParameter> GetDomainTypeSecurityParameters([NotNull] Type domainType);
+    IEnumerable<CodeTypeParameter> GetDomainTypeSecurityParameters(Type domainType);
 
     /// <summary>
     /// Валидация виртуальных свойств (свойства, без одноимённого поля). По умолчанию включена только для свойств с хотя бы одним явно указаным атрибутом валидации "PropertyValidatorAttribute" или "IRestrictionAttribute"

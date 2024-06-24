@@ -1,10 +1,10 @@
-﻿using JetBrains.Annotations;
+﻿
 
 namespace Framework.DomainDriven.Generation;
 
 public interface ICheckOutService
 {
-    void CheckOutFile([NotNull]string fileName);
+    void CheckOutFile(string fileName);
 }
 
 public abstract class CheckOutService : ICheckOutService

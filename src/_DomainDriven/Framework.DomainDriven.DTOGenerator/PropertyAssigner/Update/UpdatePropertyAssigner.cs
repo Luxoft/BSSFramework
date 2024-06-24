@@ -25,15 +25,17 @@ public class UpdatePropertyAssigner<TConfiguration> : PropertyAssigner<TConfigur
         if (sourcePropertyRef == null) throw new ArgumentNullException(nameof(sourcePropertyRef));
         if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
+        var isSecurity = this.Configuration.Environment.ExtendedMetadata.GetProperty(property).IsSecurity();
+
         if (this.Configuration.IsCollectionProperty(property))
         {
             return this.GetCollectionAssignStatement(
                                                      property,
                                                      sourcePropertyRef,
                                                      targetPropertyRef,
-                                                     property.IsSecurity() ? "ExtractSecurityUpdateDataFromSingle" : "ExtractUpdateDataFromSingle");
+                                                     isSecurity ? "ExtractSecurityUpdateDataFromSingle" : "ExtractUpdateDataFromSingle");
         }
-        else if (this.Configuration.IsIdentityOrVersionProperty(property) || property.IsSecurity())
+        else if (this.Configuration.IsIdentityOrVersionProperty(property) || isSecurity)
         {
             return sourcePropertyRef.ToAssignStatement(targetPropertyRef);
         }

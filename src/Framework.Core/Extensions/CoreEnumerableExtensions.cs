@@ -1,8 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public static class CoreEnumerableExtensions
@@ -113,16 +111,6 @@ public static class CoreEnumerableExtensions
         source.Clear();
 
         newItems.Foreach(source.Add);
-    }
-
-    public static IEnumerable<T> GetAllElements<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getChildFunc)
-    {
-        if (null == getChildFunc)
-        {
-            throw new ArgumentNullException(nameof(getChildFunc));
-        }
-
-        return source.SelectMany(child => child.GetAllElements(getChildFunc));
     }
 
     public static IEnumerable<T> Skip<T>(this IEnumerable<T> source, T expectedElement, bool raiseIfNotEquals = false)
@@ -699,7 +687,7 @@ public static class CoreEnumerableExtensions
         items.Foreach(item => source.Remove(item));
     }
 
-    public static IEnumerable<TupleStruct<T1, T2>> GetCombineItems<T1, T2, TKey>([NotNull] this IEnumerable<T1> source1, [NotNull] IEnumerable<T2> source2, [NotNull] Func<T1, TKey> key1Selector, [NotNull] Func<T2, TKey> key2Selector, [NotNull] Func<MergeResult<T1, T2>, Exception> getNonCombineItemsException)
+    public static IEnumerable<ValueTuple<T1, T2>> GetCombineItems<T1, T2, TKey>(this IEnumerable<T1> source1, IEnumerable<T2> source2, Func<T1, TKey> key1Selector, Func<T2, TKey> key2Selector, Func<MergeResult<T1, T2>, Exception> getNonCombineItemsException)
     {
         if (source1 == null) throw new ArgumentNullException(nameof(source1));
         if (source2 == null) throw new ArgumentNullException(nameof(source2));
@@ -719,7 +707,7 @@ public static class CoreEnumerableExtensions
         }
     }
 
-    public static MergeResult<T, T> GetMergeResult<T>([NotNull] this IEnumerable<T> source, [NotNull] IEnumerable<T> target, [NotNull] Func<T, T, bool> equalsFunc)
+    public static MergeResult<T, T> GetMergeResult<T>(this IEnumerable<T> source, IEnumerable<T> target, Func<T, T, bool> equalsFunc)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (target == null) throw new ArgumentNullException(nameof(target));
@@ -728,18 +716,18 @@ public static class CoreEnumerableExtensions
     }
 
     public static MergeResult<TSource, TTarget> GetMergeResult<TSource, TTarget, TKey>(
-            [NotNull] this IEnumerable<TSource> source,
-            [NotNull] IEnumerable<TTarget> target,
-            [NotNull] Func<TSource, TKey> sourceKeySelector,
-            [NotNull] Func<TTarget, TKey> targetKeySelector,
-            [NotNull] Func<TKey, TKey, bool> equalsFunc)
+            this IEnumerable<TSource> source,
+            IEnumerable<TTarget> target,
+            Func<TSource, TKey> sourceKeySelector,
+            Func<TTarget, TKey> targetKeySelector,
+            Func<TKey, TKey, bool> equalsFunc)
     {
         if (equalsFunc == null) throw new ArgumentNullException(nameof(equalsFunc));
 
         return source.GetMergeResult(target, sourceKeySelector, targetKeySelector, new EqualityComparerImpl<TKey>(equalsFunc, _ => 0));
     }
 
-    public static MergeResult<T, T> GetMergeResult<T>([NotNull] this IEnumerable<T> source, [NotNull] IEnumerable<T> target, IEqualityComparer<T> comparer = null)
+    public static MergeResult<T, T> GetMergeResult<T>(this IEnumerable<T> source, IEnumerable<T> target, IEqualityComparer<T> comparer = null)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (target == null) throw new ArgumentNullException(nameof(target));
@@ -748,10 +736,10 @@ public static class CoreEnumerableExtensions
     }
 
     public static MergeResult<TSource, TTarget> GetMergeResult<TSource, TTarget, TKey>(
-            [NotNull] this IEnumerable<TSource> source,
-            [NotNull] IEnumerable<TTarget> target,
-            [NotNull] Func<TSource, TKey> sourceKeySelector,
-            [NotNull] Func<TTarget, TKey> targetKeySelector,
+            this IEnumerable<TSource> source,
+            IEnumerable<TTarget> target,
+            Func<TSource, TKey> sourceKeySelector,
+            Func<TTarget, TKey> targetKeySelector,
             IEqualityComparer<TKey> comparer = null)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
@@ -763,7 +751,7 @@ public static class CoreEnumerableExtensions
 
         var removingItems = new List<TSource>();
 
-        var combineItems = new List<TupleStruct<TSource, TTarget>>();
+        var combineItems = new List<ValueTuple<TSource, TTarget>>();
 
         foreach (var sourceItem in source)
         {
@@ -773,7 +761,7 @@ public static class CoreEnumerableExtensions
 
             if (targetMap.TryGetValue(sourceKey, out targetItem))
             {
-                combineItems.Add(TupleStruct.Create(sourceItem, targetItem));
+                combineItems.Add(ValueTuple.Create(sourceItem, targetItem));
                 targetMap.Remove(sourceKey);
             }
             else
@@ -787,9 +775,9 @@ public static class CoreEnumerableExtensions
         return new MergeResult<TSource, TTarget>(addingItems, combineItems, removingItems);
     }
 
-    public static IEnumerable<TupleStruct<T, K>> UnionByIndex<T, K>(this IEnumerable<T> source, IEnumerable<K> other)
+    public static IEnumerable<ValueTuple<T, K>> UnionByIndex<T, K>(this IEnumerable<T> source, IEnumerable<K> other)
     {
-        return source.Zip(other, TupleStruct.Create);
+        return source.Zip(other, ValueTuple.Create);
     }
 
     public static IEnumerable<T> CheckNotNull<T>(this IEnumerable<T> source)
@@ -973,7 +961,7 @@ public static class CoreEnumerableExtensions
         return source.Sum(selector).GetValueOrDefault();
     }
 
-    public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this TKey key, [NotNull] IEnumerable<TElement> values)
+    public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this TKey key, IEnumerable<TElement> values)
     {
         if (values == null) throw new ArgumentNullException(nameof(values));
 
@@ -985,7 +973,7 @@ public static class CoreEnumerableExtensions
         return new PairGrouping<TKey, TElement>(pair.Value.ToList(), pair.Key);
     }
 
-    public static IGrouping<TNewKey, TElement> ChangeKey<TOldKey, TNewKey, TElement>([NotNull] this IGrouping<TOldKey, TElement> source, [NotNull] Func<TOldKey, TNewKey> selector)
+    public static IGrouping<TNewKey, TElement> ChangeKey<TOldKey, TNewKey, TElement>(this IGrouping<TOldKey, TElement> source, Func<TOldKey, TNewKey> selector)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -993,7 +981,7 @@ public static class CoreEnumerableExtensions
         return new PairGrouping<TNewKey, TElement>(source.ToList(), selector(source.Key));
     }
 
-    public static IGrouping<TKey, TNewElement> ChangeValues<TKey, TOldElement, TNewElement>([NotNull] this IGrouping<TKey, TOldElement> source, [NotNull] Func<TOldElement, TNewElement> selector)
+    public static IGrouping<TKey, TNewElement> ChangeValues<TKey, TOldElement, TNewElement>(this IGrouping<TKey, TOldElement> source, Func<TOldElement, TNewElement> selector)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -1012,14 +1000,14 @@ public static class CoreEnumerableExtensions
         public TKey Key { get; private set; }
     }
 
-    public static decimal Mul([NotNull] this IEnumerable<decimal> source)
+    public static decimal Mul(this IEnumerable<decimal> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
         return source.Aggregate((v1, v2) => v1 * v2);
     }
 
-    public static decimal Sum([NotNull] this IEnumerable<decimal> values, Func<decimal, decimal, decimal> sumFunc)
+    public static decimal Sum(this IEnumerable<decimal> values, Func<decimal, decimal, decimal> sumFunc)
     {
         if (values == null) throw new ArgumentNullException(nameof(values));
 

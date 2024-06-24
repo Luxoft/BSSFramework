@@ -2,8 +2,6 @@
 using Framework.Persistent;
 using Framework.Restriction;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.Domain;
 
 /// <summary>
@@ -19,7 +17,7 @@ public class SubscriptionSecurityItem : IIdentityObject<Guid>
     {
     }
 
-    public SubscriptionSecurityItem([NotNull] Subscription subscription)
+    public SubscriptionSecurityItem(Subscription subscription)
     {
         this.Subscription = subscription ?? throw new ArgumentNullException(nameof(subscription));
         ((ICollection<SubscriptionSecurityItem>)this.Subscription.SecurityItems).Add(this);

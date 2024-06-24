@@ -1,12 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.Events</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD\Framework.DomainDriven.ServiceModel.IAD.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.Events.Legacy\Framework.Events.Legacy.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.Events\Framework.Events.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Generated.DTO\Framework.Authorization.Generated.DTO.csproj" />
   </ItemGroup>
+
 </Project>

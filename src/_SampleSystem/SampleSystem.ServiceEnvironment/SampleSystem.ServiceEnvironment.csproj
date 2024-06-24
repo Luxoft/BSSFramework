@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
@@ -10,20 +10,21 @@
 
   <ItemGroup>
     <PackageReference Include="nuSpec.NHibernate" />
-    <PackageReference Include="WorkflowCore" />
-    <PackageReference Include="WorkflowCore.Persistence.SqlServer" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.ServiceEnvironment\Framework.App.ServiceEnvironment.csproj" />
-    <ProjectReference Include="..\..\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />
-    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.ApproveWorkflow\Framework.Authorization.ApproveWorkflow.csproj" />
+    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.NamedLocks\Framework.Configuration.NamedLocks.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup.Legacy\Framework.DomainDriven.Setup.Legacy.csproj" />
+
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Notification\Framework.Authorization.Notification.csproj" />
 
     <ProjectReference Include="..\SampleSystem.BLL\SampleSystem.BLL.csproj" />
     <ProjectReference Include="..\SampleSystem.Events\SampleSystem.Events.csproj" />
     <ProjectReference Include="..\SampleSystem.Generated.DAL.NHibernate\SampleSystem.Generated.DAL.NHibernate.csproj" />
     <ProjectReference Include="..\SampleSystem.AuditDAL.NHibernate\SampleSystem.AuditDAL.NHibernate.csproj" />
+    <ProjectReference Include="..\SampleSystem.Security\SampleSystem.Security.csproj" />
     <ProjectReference Include="..\SampleSystem.Subscriptions.Metadata\SampleSystem.Subscriptions.Metadata.csproj" />
 
     <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />

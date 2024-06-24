@@ -7,13 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
-using System;
-
-public interface ITestBLLContext : IBLLBaseContextBase<PersistentDomainObjectBase, Guid>, ITrackingServiceContainer<PersistentDomainObjectBase>
+public interface ITestBLLContext : IBLLBaseContext, ITrackingServiceContainer<PersistentDomainObjectBase>
 {
 
 }

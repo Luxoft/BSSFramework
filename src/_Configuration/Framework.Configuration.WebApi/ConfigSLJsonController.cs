@@ -1,6 +1,5 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.Configuration.Generated.DTO;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.WebApi.Utils.SL;
 
@@ -13,6 +12,6 @@ namespace Framework.Configuration.WebApi;
 [ApiController]
 [Route("ConfigSLJsonFacade.svc")]
 [ApiExplorerSettings(IgnoreApi = true)]
-public abstract partial class ConfigSLJsonController : ApiControllerBase<IConfigurationBLLContext, EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>
+public abstract partial class ConfigSLJsonController : ApiControllerBase<IConfigurationBLLContext, IConfigurationDTOMappingService>
 {
 }

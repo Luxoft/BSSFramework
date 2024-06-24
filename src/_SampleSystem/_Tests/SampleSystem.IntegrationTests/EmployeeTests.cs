@@ -17,6 +17,8 @@ using Framework.DomainDriven.NHibernate;
 using Framework.Events;
 using Framework.OData;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using NHibernate.Impl;
 
 using SampleSystem.Generated.DTO;
@@ -210,7 +212,7 @@ public class EmployeeTests : TestBase
 
         var domainType = configFacade.Evaluate(c => c.GetRichDomainTypeByName(nameof(Employee)));
 
-        var operation = domainType.EventOperations.Single(op => op.Name == nameof(EventOperation.Save));
+        var operation = domainType.EventOperations.Single(op => op.Name == EventOperation.Save.Name);
 
         this.ClearIntegrationEvents();
 
@@ -245,7 +247,7 @@ public class EmployeeTests : TestBase
 
         // Act
         var processedModCount = restFacade
-                                .WithImpersonate(DefaultConstants.INTEGRATION_USER)
+                                .WithImpersonate(DefaultConstants.INTEGRATION_BUS)
                                 .Evaluate(c => c.ProcessModifications(1000));
 
         // Assert
@@ -277,7 +279,7 @@ public class EmployeeTests : TestBase
         var preProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
         var preProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
 
-        restFacade.WithImpersonate(DefaultConstants.INTEGRATION_USER).Evaluate(c => c.ProcessModifications(1000));
+        restFacade.WithImpersonate(DefaultConstants.INTEGRATION_BUS).Evaluate(c => c.ProcessModifications(1000));
 
         var postProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
         var postProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
@@ -312,9 +314,10 @@ public class EmployeeTests : TestBase
     public void EventListenerTest()
     {
         this.Evaluate(DBSessionMode.Write,
-                      (_, dbContext) =>
+                      bllContext =>
                       {
-                          var writeNhibSession = dbContext as WriteNHibSession;
+                          var dbSession = bllContext.ServiceProvider.GetRequiredService<IDBSession>();
+                          var writeNhibSession = dbSession as WriteNHibSession;
                           var impl = writeNhibSession.NativeSession as SessionImpl;
                           return;
                       });
@@ -357,27 +360,5 @@ public class EmployeeTests : TestBase
 
         // Assert
         isVirtualResult.Should().Be(false);
-    }
-}
-
-[TestClass]
-public class DomainEmployeeTests
-{
-    [TestMethod]
-    public void CreateEmployeeFilter_IsNotVirtual()
-    {
-        // Arrange
-
-        // Act
-        var filter = new TestEmployeeFilter
-                     {
-                             BusinessUnit = new BusinessUnit()
-                     };
-
-        var operation = SelectOperation<Employee>.Default.AddFilter(e => e.CoreBusinessUnit.Id == filter.BusinessUnit.Id);
-        var result = operation.IsVirtual;
-
-        // Assert
-        result.Should().Be(false);
     }
 }

@@ -1,13 +1,10 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
+using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
-using Framework.SecuritySystem;
-using Framework.Transfering;
-
-using JetBrains.Annotations;
+using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.Domain;
 
@@ -17,18 +14,14 @@ namespace Framework.Authorization.Domain;
 /// <remarks>
 /// Пермиссии могут выдаваться в рамках контекстов
 /// </remarks>
-/// <seealso cref="EntityType"/>
+/// <seealso cref="SecurityContextType"/>
 [DomainType("{5d774041-bc69-4841-b64e-a2ee0131e632}")]
-[AuthorizationViewDomainObject(typeof(Principal))]
-[AuthorizationEditDomainObject(typeof(Principal))]
-[BLLViewRole(MaxCollection = MainDTOType.RichDTO)]
-[BLLRemoveRole]
 [System.Diagnostics.DebuggerDisplay("Principal={Principal.Name}, Role={Role.Name}")]
-public partial class Permission : AuditPersistentDomainObjectBase,
+public class Permission : AuditPersistentDomainObjectBase,
 
                                   IDetail<Principal>,
 
-                                  IMaster<PermissionFilterItem>,
+                                  IMaster<PermissionRestriction>,
 
                                   IMaster<Permission>,
 
@@ -38,11 +31,9 @@ public partial class Permission : AuditPersistentDomainObjectBase,
 
                                   IPeriodObject,
 
-                                  IPermission<Guid>,
-
-                                  IStatusObject<PermissionStatus>
+                                  IPermission<Guid>
 {
-    private readonly ICollection<PermissionFilterItem> filterItems = new List<PermissionFilterItem>();
+    private readonly ICollection<PermissionRestriction> restrictions = new List<PermissionRestriction>();
 
     private readonly ICollection<Permission> delegatedTo = new List<Permission>();
 
@@ -50,15 +41,9 @@ public partial class Permission : AuditPersistentDomainObjectBase,
 
     private readonly Permission delegatedFrom;
 
-    private readonly bool isDelegatedFrom;
-
     private BusinessRole role;
 
-    private bool isDelegatedTo;
-
     private Period period = Period.Eternity;
-
-    private PermissionStatus status = PermissionStatus.Approved;
 
     private string comment;
 
@@ -90,15 +75,13 @@ public partial class Permission : AuditPersistentDomainObjectBase,
 
         this.delegatedFrom = delegatedFrom;
         this.delegatedFrom.AddDetail(this);
-
-        this.isDelegatedFrom = true;
     }
 
     /// <summary>
     /// Коллекция контекстов пермиссии
     /// </summary>
     [UniqueGroup]
-    public virtual IEnumerable<PermissionFilterItem> FilterItems => this.filterItems;
+    public virtual IEnumerable<PermissionRestriction> Restrictions => this.restrictions;
 
     /// <summary>
     /// Коллекция пермиссий, которым данная пермиссия была делегирована
@@ -121,39 +104,6 @@ public partial class Permission : AuditPersistentDomainObjectBase,
     {
         get { return this.period.Round(); }
         set { this.period = value.Round(); }
-    }
-
-    /// <summary>
-    /// Статус пермиссии
-    /// </summary>
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual PermissionStatus Status
-    {
-        get { return this.status; }
-        set { this.status = value; }
-    }
-
-    /// <summary>
-    /// Признак того, что даннная пермиссия была делегирована кому-либо
-    /// </summary>
-    public virtual bool IsDelegatedTo
-    {
-        get { return this.isDelegatedTo; }
-        internal protected set { this.isDelegatedTo = value; }
-    }
-
-    /// <summary>
-    /// Признак того, что данная пермиссия была делегирована от кого-то
-    /// </summary>
-    public virtual bool IsDelegatedFrom => this.isDelegatedFrom;
-
-    /// <summary>
-    /// Вычисляемый принципал, который делегировал пермиссию
-    /// </summary>
-    [ExpandPath("DelegatedFrom.Principal")]
-    public virtual Principal DelegatedFromPrincipal
-    {
-        get { return this.DelegatedFrom.Maybe(v => v.Principal); }
     }
 
     /// <summary>
@@ -185,7 +135,7 @@ public partial class Permission : AuditPersistentDomainObjectBase,
         set { this.comment = value.TrimNull(); }
     }
 
-    ICollection<PermissionFilterItem> IMaster<PermissionFilterItem>.Details => (ICollection<PermissionFilterItem>)this.FilterItems;
+    ICollection<PermissionRestriction> IMaster<PermissionRestriction>.Details => (ICollection<PermissionRestriction>)this.Restrictions;
 
     Principal IDetail<Principal>.Master => this.Principal;
 
@@ -197,19 +147,5 @@ public partial class Permission : AuditPersistentDomainObjectBase,
 
     IEnumerable<Permission> IChildrenSource<Permission>.Children => this.DelegatedTo;
 
-    IEnumerable<IPermissionFilterItem<Guid>> IPermission<Guid>.FilterItems => this.FilterItems;
-
-    /// <summary>
-    /// Проверка на уникальноть
-    /// </summary>
-    /// <param name="otherPermission">Другая пермиссия</param>
-    /// <returns></returns>
-    public virtual bool IsDuplicate([NotNull] Permission otherPermission)
-    {
-        if (otherPermission == null) throw new ArgumentNullException(nameof(otherPermission));
-
-        return otherPermission.Role == this.Role
-               && otherPermission.Period.IsIntersected(this.Period)
-               && otherPermission.GetOrderedEntityIdents().SequenceEqual(this.GetOrderedEntityIdents());
-    }
+    IEnumerable<IPermissionRestriction<Guid>> IPermission<Guid>.Restrictions => this.Restrictions;
 }

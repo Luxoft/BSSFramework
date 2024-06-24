@@ -20,7 +20,7 @@ public static class SelectOperationResultExtensions
         return source.Items.Select(selector).ToSelectOperationResult(source.TotalCount);
     }
 
-    public static SelectOperationResult<HierarchicalNode<TResult, TIdent>> SelectN<TSource, TResult, TIdent>(this SelectOperationResult<HierarchicalNode<TSource, TIdent>> source, Func<TSource, TResult> selector)
+    public static SelectOperationResult<HierarchicalNode<TResult, TIdent>> ChangeItem<TSource, TResult, TIdent>(this SelectOperationResult<HierarchicalNode<TSource, TIdent>> source, Func<TSource, TResult> selector)
             where TSource : IIdentityObject<TIdent>
             where TResult : IIdentityObject<TIdent>
     {

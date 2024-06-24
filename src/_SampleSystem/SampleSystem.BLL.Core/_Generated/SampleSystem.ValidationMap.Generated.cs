@@ -11,15 +11,15 @@ namespace SampleSystem.BLL
 {
     
     
-    public partial class SampleSystemValidationMapBase : Framework.Validation.ValidationMapBase
+    public abstract partial class SampleSystemValidationMapBase : Framework.Validation.ValidationMapBase
     {
         
         private Framework.Validation.IValidationMap _defaultValidatorMap;
         
-        protected SampleSystemValidationMapBase(Framework.Core.IDynamicSource extendedValidationData) : 
-                base(extendedValidationData)
+        protected SampleSystemValidationMapBase(System.IServiceProvider serviceProvider) : 
+                base(serviceProvider)
         {
-            this._defaultValidatorMap = new Framework.Validation.ValidationMap(extendedValidationData);
+            this._defaultValidatorMap = new Framework.Validation.ValidationMap(serviceProvider);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Address, string>> GetAddress_CityNameValidators()
@@ -130,37 +130,37 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.AnotherSqlParserTestObj>(this.GetAnotherSqlParserTestObjProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.DateTime?>> GetApprovePermissionWorkflowDomainObject_CreateDateValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.AuthPerformanceObject, System.DateTime?>> GetAuthPerformanceObject_CreateDateValidators()
         {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.AuthPerformanceObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, string>> GetApprovePermissionWorkflowDomainObject_CreatedByValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.AuthPerformanceObject, string>> GetAuthPerformanceObject_CreatedByValidators()
         {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.AuthPerformanceObject>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, string>> GetApprovePermissionWorkflowDomainObject_ModifiedByValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.AuthPerformanceObject, string>> GetAuthPerformanceObject_ModifiedByValidators()
         {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.AuthPerformanceObject>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.DateTime?>> GetApprovePermissionWorkflowDomainObject_ModifyDateValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.AuthPerformanceObject, System.DateTime?>> GetAuthPerformanceObject_ModifyDateValidators()
         {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.AuthPerformanceObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>> GetApprovePermissionWorkflowDomainObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.AuthPerformanceObject>> GetAuthPerformanceObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.AuthPerformanceObject> currentClass)
         {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetApprovePermissionWorkflowDomainObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, string>(source => source.CreatedBy, currentClass, this.GetApprovePermissionWorkflowDomainObject_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, string>(source => source.ModifiedBy, currentClass, this.GetApprovePermissionWorkflowDomainObject_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetApprovePermissionWorkflowDomainObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.AuthPerformanceObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetAuthPerformanceObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.AuthPerformanceObject, string>(source => source.CreatedBy, currentClass, this.GetAuthPerformanceObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.AuthPerformanceObject, string>(source => source.ModifiedBy, currentClass, this.GetAuthPerformanceObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.AuthPerformanceObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetAuthPerformanceObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
         }
         
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject> GetApprovePermissionWorkflowDomainObjectValidationMap()
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectValidationMap()
         {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.GetApprovePermissionWorkflowDomainObjectProperties);
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.AuthPerformanceObject>(this.GetAuthPerformanceObjectProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.BusinessUnit, System.Collections.Generic.IEnumerable<SampleSystem.Domain.BusinessUnitEmployeeRole>>> GetBusinessUnit_BusinessUnitEmployeeRolesValidators()
@@ -2475,9 +2475,9 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAnotherSqlParserTestObjValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.AuthPerformanceObject)))
             {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetApprovePermissionWorkflowDomainObjectValidationMap()));
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAuthPerformanceObjectValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.BusinessUnit)))
             {
@@ -2735,10 +2735,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSingleEmployeeFilterModelValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.NamedLock)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetNamedLockValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.NoSecurityObject)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetNoSecurityObjectValidationMap()));
@@ -2815,6 +2811,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestPlainAuthObjectValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestRestrictionObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestRestrictionObjectValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestRootSecurityObjValidationMap()));
@@ -2846,14 +2846,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.UniqueByParent.ChildEntity)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetChildEntityValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetWorkflowCoreExecutionErrorValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetWorkflowCoreInstanceValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.Inline.Fio)))
             {
@@ -3354,42 +3346,37 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.ManagementUnit>(this.GetManagementUnitProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NamedLock, System.DateTime?>> GetNamedLock_CreateDateValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NoSecurityObject, System.DateTime?>> GetNoSecurityObject_CreateDateValidators()
         {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.NamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.NoSecurityObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NamedLock, string>> GetNamedLock_CreatedByValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NoSecurityObject, string>> GetNoSecurityObject_CreatedByValidators()
         {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.NamedLock>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.NoSecurityObject>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NamedLock, string>> GetNamedLock_ModifiedByValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NoSecurityObject, string>> GetNoSecurityObject_ModifiedByValidators()
         {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.NamedLock>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.NoSecurityObject>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NamedLock, System.DateTime?>> GetNamedLock_ModifyDateValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NoSecurityObject, System.DateTime?>> GetNoSecurityObject_ModifyDateValidators()
         {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.NamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.NoSecurityObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.NamedLock>> GetNamedLockProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.NamedLock> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.NoSecurityObject>> GetNoSecurityObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.NoSecurityObject> currentClass)
         {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NamedLock, System.DateTime?>(source => source.CreateDate, currentClass, this.GetNamedLock_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NamedLock, string>(source => source.CreatedBy, currentClass, this.GetNamedLock_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NamedLock, string>(source => source.ModifiedBy, currentClass, this.GetNamedLock_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NamedLock, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetNamedLock_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.NamedLock> GetNamedLockValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.NamedLock>(this.GetNamedLockProperties);
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NoSecurityObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetNoSecurityObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NoSecurityObject, string>(source => source.CreatedBy, currentClass, this.GetNoSecurityObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NoSecurityObject, string>(source => source.ModifiedBy, currentClass, this.GetNoSecurityObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.NoSecurityObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetNoSecurityObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.NoSecurityObject> GetNoSecurityObjectValidationMap()
         {
-            return Framework.Validation.ClassValidationMap<SampleSystem.Domain.NoSecurityObject>.Empty;
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.NoSecurityObject>(this.GetNoSecurityObjectProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.UniqueByMaster.ParentEntity, System.DateTime?>> GetParentEntity_CreateDateValidators()
@@ -3729,12 +3716,12 @@ namespace SampleSystem.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestImmutableObj, string>> GetTestImmutableObj_TestImmutablePrimitivePropertyValidators()
         {
             yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestImmutableObj>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, string, System.Guid>(source => source.TestImmutablePrimitiveProperty);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, string, System.Guid, SampleSystem.Domain.PersistentDomainObjectBase>(source => source.TestImmutablePrimitiveProperty);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestImmutableObj, SampleSystem.Domain.Employee>> GetTestImmutableObj_TestImmutableRefPropertyValidators()
         {
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, SampleSystem.Domain.Employee, System.Guid>(source => source.TestImmutableRefProperty);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, SampleSystem.Domain.Employee, System.Guid, SampleSystem.Domain.PersistentDomainObjectBase>(source => source.TestImmutableRefProperty);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TestImmutableObj>> GetTestImmutableObjProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestImmutableObj> currentClass)
@@ -3979,6 +3966,39 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestPlainAuthObject>(this.GetTestPlainAuthObjectProperties);
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRestrictionObject, System.DateTime?>> GetTestRestrictionObject_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestRestrictionObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRestrictionObject, string>> GetTestRestrictionObject_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestRestrictionObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRestrictionObject, string>> GetTestRestrictionObject_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestRestrictionObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRestrictionObject, System.DateTime?>> GetTestRestrictionObject_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestRestrictionObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TestRestrictionObject>> GetTestRestrictionObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestRestrictionObject> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRestrictionObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetTestRestrictionObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRestrictionObject, string>(source => source.CreatedBy, currentClass, this.GetTestRestrictionObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRestrictionObject, string>(source => source.ModifiedBy, currentClass, this.GetTestRestrictionObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRestrictionObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestRestrictionObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestRestrictionObject> GetTestRestrictionObjectValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestRestrictionObject>(this.GetTestRestrictionObjectProperties);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRootSecurityObj, System.DateTime?>> GetTestRootSecurityObj_CreateDateValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestRootSecurityObj>(this.AvailableValues.GetAvailableRange<System.DateTime>());
@@ -4218,48 +4238,6 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestUnpersistentObject>(this.GetTestUnpersistentObjectProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreExecutionError, System.DateTime>> GetWorkflowCoreExecutionError_ErrorTimeValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.Create<SampleSystem.Domain.WorkflowCoreExecutionError>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreExecutionError, string>> GetWorkflowCoreExecutionError_MessageValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.WorkflowCoreExecutionError>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError>> GetWorkflowCoreExecutionErrorProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError, System.DateTime>(source => source.ErrorTime, currentClass, this.GetWorkflowCoreExecutionError_ErrorTimeValidators(), this.GetClassMap<System.DateTime>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError, string>(source => source.Message, currentClass, this.GetWorkflowCoreExecutionError_MessageValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError> GetWorkflowCoreExecutionErrorValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError>(this.GetWorkflowCoreExecutionErrorProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreInstance, string>> GetWorkflowCoreInstance_DataValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.WorkflowCoreInstance>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreInstance, string>> GetWorkflowCoreInstance_WorkflowDefinitionIdValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.WorkflowCoreInstance>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.WorkflowCoreInstance>> GetWorkflowCoreInstanceProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.WorkflowCoreInstance> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.WorkflowCoreInstance, string>(source => source.Data, currentClass, this.GetWorkflowCoreInstance_DataValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.WorkflowCoreInstance, string>(source => source.WorkflowDefinitionId, currentClass, this.GetWorkflowCoreInstance_WorkflowDefinitionIdValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.WorkflowCoreInstance> GetWorkflowCoreInstanceValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.WorkflowCoreInstance>(this.GetWorkflowCoreInstanceProperties);
-        }
-        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, System.DateTime?>> GetWorkingCalendar1676_CreateDateValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(this.AvailableValues.GetAvailableRange<System.DateTime>());
@@ -4304,8 +4282,8 @@ namespace SampleSystem.BLL
     public partial class SampleSystemValidationMap : SampleSystem.BLL.SampleSystemValidationMapBase
     {
         
-        public SampleSystemValidationMap(Framework.Core.IDynamicSource extendedValidationData) : 
-                base(extendedValidationData)
+        public SampleSystemValidationMap(System.IServiceProvider serviceProvider) : 
+                base(serviceProvider)
         {
         }
     }

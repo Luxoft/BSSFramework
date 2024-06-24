@@ -1,25 +1,31 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using Framework.Core;
 using Framework.DomainDriven.ServiceModel.Service;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel;
 
-public class ContextEvaluator<TBLLContext, TDTOMappingService> : IContextEvaluator<TBLLContext, TDTOMappingService>
+public class ContextEvaluator<TBLLContext, TMappingService> : IContextEvaluator<TBLLContext, TMappingService>
     where TBLLContext : IServiceProviderContainer
 {
-    private readonly IContextEvaluator<TBLLContext> baseContextEvaluator;
+    private readonly IServiceEvaluator<TBLLContext> baseContextEvaluator;
 
-    public ContextEvaluator(IContextEvaluator<TBLLContext> baseContextEvaluator)
+    public ContextEvaluator(IServiceEvaluator<TBLLContext> baseContextEvaluator)
     {
         this.baseContextEvaluator = baseContextEvaluator;
     }
 
-    public Task<TResult> EvaluateAsync<TResult>(
+    public async Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
         string customPrincipalName,
-        Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task<TResult>> getResult)
+        Func<EvaluatedData<TBLLContext, TMappingService>, Task<TResult>> getResult)
     {
-        return this.baseContextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, (ctx, session) => getResult(new EvaluatedData<TBLLContext, TDTOMappingService>(session, ctx, ctx.ServiceProvider.GetRequiredService<TDTOMappingService>())));
+        return await this.baseContextEvaluator.EvaluateAsync(
+            sessionMode,
+            customPrincipalName,
+            context => getResult(
+                new EvaluatedData<TBLLContext, TMappingService>(
+                    context,
+                    context.ServiceProvider.GetRequiredService<TMappingService>())));
     }
 }

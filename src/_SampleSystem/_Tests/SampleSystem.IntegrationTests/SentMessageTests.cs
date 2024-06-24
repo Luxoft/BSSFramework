@@ -2,7 +2,6 @@
 
 using FluentAssertions;
 
-using Framework.Configuration.BLL;
 using Framework.Notification.DTO;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,7 +31,7 @@ public class SentMessageTests : TestBase
         // Act
         this.GetConfigurationControllerEvaluator().Evaluate(c => c.SaveSendedNotification(notification));
 
-        var sentMessage = this.EvaluateRead(c => new SentMessageBLL(c.Configuration).GetFullList().Single());
+        var sentMessage = this.EvaluateRead(c => c.Configuration.Logics.SentMessage.GetFullList().Single());
 
         // Assert
         sentMessage.Copy.Should().Be(expected);

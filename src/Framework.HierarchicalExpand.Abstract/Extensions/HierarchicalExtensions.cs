@@ -1,8 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.HierarchicalExpand;
 
 public static class HierarchicalExtensions
@@ -37,7 +35,7 @@ public static class HierarchicalExtensions
         return source.SelectMany(el => el.GetAllChildren(skipFirstElement));
     }
 
-    public static IEnumerable<TSource> Expand<TSource>([NotNull] this TSource source, HierarchicalExpandType expandType)
+    public static IEnumerable<TSource> Expand<TSource>(this TSource source, HierarchicalExpandType expandType)
             where TSource : class, IHierarchicalSource<TSource>
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
@@ -58,7 +56,7 @@ public static class HierarchicalExtensions
     /// <param name="id"></param>
     /// <param name="expandType">Direction of expand path</param>
     /// <returns></returns>
-    public static bool IsExpandableBy<TSource, TIdent>([NotNull] this TSource source, TIdent id, HierarchicalExpandType expandType)
+    public static bool IsExpandableBy<TSource, TIdent>(this TSource source, TIdent id, HierarchicalExpandType expandType)
             where TSource : class, IHierarchicalSource<TSource>, IIdentityObject<TIdent>
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

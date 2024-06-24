@@ -2,7 +2,6 @@
 using Automation.Utils;
 
 using Framework.Configuration.Domain;
-using Framework.Configuration.Domain.Reports;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -295,7 +294,7 @@ public partial class DataHelper
         return this.EvaluateWrite(
                                   context =>
                                   {
-                                      period = period ?? new Period(this.DateTimeService.CurrentFinancialYear.StartDate.AddYears(-1));
+                                      period = period ?? new Period(this.FinancialYearService.GetCurrentFinancialYear().StartDate.AddYears(-1));
                                       businessUnit = context.Logics.BusinessUnit.GetById(this.GetGuid(id));
 
                                       if (businessUnit == null)
@@ -316,7 +315,6 @@ public partial class DataHelper
                                                           Rank = rank,
                                                           IsProduction = isProduction,
                                                           BusinessUnitType = context.Logics.BusinessUnitType.GetById(typeId),
-                                                          Parent = context.Logics.BusinessUnit.GetById(parentId),
                                                           Period = period.Value
                                                   };
 
@@ -347,7 +345,7 @@ public partial class DataHelper
                                   context =>
                                   {
                                       unit = context.Logics.ManagementUnit.GetById(this.GetGuid(id));
-                                      period = period ?? new Period(this.DateTimeService.CurrentFinancialYear.StartDate);
+                                      period = period ?? new Period(this.FinancialYearService.GetCurrentFinancialYear().StartDate);
                                       if (unit == null)
                                       {
                                           unit = new ManagementUnit
@@ -399,6 +397,8 @@ public partial class DataHelper
                                            ? ((CompanyLegalEntityIdentityDTO)companyLegalEntity).Id
                                            : DefaultConstants.COMPANY_LEGAL_ENTITY_ID;
 
+        var employeeId = employee?.Id ?? DefaultConstants.HRDepartment_DEFAULT_HEAD_EMPLOYEE_ID;
+
         return this.EvaluateWrite(
                                   context =>
                                   {
@@ -406,9 +406,7 @@ public partial class DataHelper
 
                                       if (department == null)
                                       {
-                                          var head = employee != null
-                                                             ? context.Logics.Employee.GetById(((EmployeeIdentityDTO)employee).Id)
-                                                             : context.Logics.Employee.GetObjectBy(e => e.Login == this.AuthHelper.GetCurrentUserLogin());
+                                          var head = context.Logics.Employee.GetById(employeeId, true);
 
                                           department = new HRDepartment
                                                        {
@@ -497,106 +495,5 @@ public partial class DataHelper
                                         });
 
         return result;
-    }
-
-    public ReportIdentityDTO SaveReport(
-            Guid? id = null,
-            string name = null,
-            string description = "",
-            string domainTypeName = nameof(Employee),
-            string owner = "")
-    {
-        return this.EvaluateWrite(
-                                  eval =>
-                                  {
-                                      var report = new Report()
-                                                   {
-                                                           Name = name ?? TextRandomizer.UniqueString(nameof(Report)),
-                                                           Description = description,
-                                                           DomainTypeName = domainTypeName,
-                                                           Owner = owner
-                                                   };
-                                      eval.Configuration.Logics.Report.Insert(report, id ?? Guid.NewGuid());
-
-                                      return report.ToIdentityDTO();
-                                  });
-    }
-
-    public ReportParameterIdentityDTO SaveReportParameter(
-            ReportIdentityDTO reportIdentity,
-            Guid? id = null,
-            string name = null,
-            string typeName = nameof(Location),
-            string displayValueProperty = nameof(Location.Name))
-    {
-        return this.EvaluateWrite(
-                                  eval =>
-                                  {
-                                      var report = eval.Configuration.Logics.Report.GetById(reportIdentity.Id, true);
-
-                                      var parameter = new ReportParameter(report)
-                                                      {
-                                                              Name = name ?? TextRandomizer.UniqueString(nameof(ReportParameter)),
-                                                              TypeName = typeName,
-                                                              DisplayValueProperty = displayValueProperty
-                                                      };
-
-                                      eval.Configuration.Logics.ReportParameter.Insert(parameter, id ?? Guid.NewGuid());
-
-                                      return parameter.ToIdentityDTO();
-                                  });
-    }
-
-    public void SaveReportProperty(
-            ReportIdentityDTO reportIdentity,
-            string propertyPath,
-            Guid? id = null,
-            string alias = null,
-            string formula = null,
-            int order = 0,
-            int sortOrdered = 0,
-            int sortType = 0)
-    {
-        this.EvaluateWrite(
-                           eval =>
-                           {
-                               var report = eval.Configuration.Logics.Report.GetById(reportIdentity.Id, true);
-
-                               var property = new ReportProperty(report)
-                                              {
-                                                      PropertyPath = propertyPath,
-                                                      Alias = alias ?? propertyPath,
-                                                      Formula = formula,
-                                                      Order = order,
-                                                      SortOrdered = sortOrdered,
-                                                      SortType = sortType
-                                              };
-
-                               eval.Configuration.Logics.ReportProperty.Insert(property, id ?? Guid.NewGuid());
-                           });
-    }
-
-    public void SaveReportFilter(
-            ReportIdentityDTO reportIdentity,
-            ReportParameterIdentityDTO parameterIdentity,
-            Guid? id = null,
-            string property = nameof(Employee.Location),
-            string filterOperator = "eq")
-    {
-        this.EvaluateWrite(
-                           eval =>
-                           {
-                               var report = eval.Configuration.Logics.Report.GetById(reportIdentity.Id, true);
-                               var parameter = eval.Configuration.Logics.ReportParameter.GetById(parameterIdentity.Id, true);
-
-                               eval.Configuration.Logics.ReportFilter.Save(new ReportFilter(report)
-                                                                           {
-                                                                                   IsValueFromParameters = true,
-                                                                                   Value = parameter.Name,
-                                                                                   Property = property,
-                                                                                   FilterOperator = filterOperator
-                                                                           });
-                           });
-
     }
 }

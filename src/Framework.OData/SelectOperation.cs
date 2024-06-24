@@ -4,8 +4,6 @@ using System.Runtime.Serialization;
 using Framework.Core;
 using Framework.QueryLanguage;
 
-using JetBrains.Annotations;
-
 namespace Framework.OData;
 
 [DataContract]
@@ -75,14 +73,14 @@ public class SelectOperation : IDynamicSelectOperation, IEquatable<SelectOperati
 
 
 
-    public static SelectOperation CreateFilter<TSource>([NotNull] System.Linq.Expressions.Expression<Func<TSource, bool>> filter)
+    public static SelectOperation CreateFilter<TSource>(System.Linq.Expressions.Expression<Func<TSource, bool>> filter)
     {
         if (filter == null) throw new ArgumentNullException(nameof(filter));
 
         return CreateFilter((System.Linq.Expressions.LambdaExpression)filter);
     }
 
-    public static SelectOperation CreateFilter([NotNull] System.Linq.Expressions.LambdaExpression filter)
+    public static SelectOperation CreateFilter(System.Linq.Expressions.LambdaExpression filter)
     {
         if (filter == null) throw new ArgumentNullException(nameof(filter));
 

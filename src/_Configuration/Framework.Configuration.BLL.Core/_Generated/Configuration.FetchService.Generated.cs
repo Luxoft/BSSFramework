@@ -11,80 +11,8 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public partial class ConfigurationMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<Framework.Configuration.Domain.PersistentDomainObjectBase>
+    public abstract partial class ConfigurationMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<Framework.Configuration.Domain.PersistentDomainObjectBase>
     {
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight> GetAccessableBusinessRoleReportRightContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(fetchRootRule => fetchRootRule.SelectNested(accessableBusinessRoleReportRight => accessableBusinessRoleReportRight.Report));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(fetchRootRule => fetchRootRule.SelectNested(accessableBusinessRoleReportRight => accessableBusinessRoleReportRight.Report));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.Reports.AccessableOperationReportRight> GetAccessableOperationReportRightContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(fetchRootRule => fetchRootRule.SelectNested(accessableOperationReportRight => accessableOperationReportRight.Report));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(fetchRootRule => fetchRootRule.SelectNested(accessableOperationReportRight => accessableOperationReportRight.Report));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight> GetAccessablePrincipalReportRightContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(fetchRootRule => fetchRootRule.SelectNested(accessablePrincipalReportRight => accessablePrincipalReportRight.Report));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(fetchRootRule => fetchRootRule.SelectNested(accessablePrincipalReportRight => accessablePrincipalReportRight.Report));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
         
         protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.CodeFirstSubscription> GetCodeFirstSubscriptionContainer(Framework.Transfering.ViewDTOType rule)
         {
@@ -152,41 +80,9 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetExceptionMessageContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.LogMessage)))
+            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.GenericNamedLock)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLogMessageContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetNamedLockContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAccessableBusinessRoleReportRightContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.AccessableOperationReportRight)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAccessableOperationReportRightContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAccessablePrincipalReportRightContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.Report)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetReportContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportFilter)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetReportFilterContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportParameter)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetReportParameterContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportProperty)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetReportPropertyContainer(rule)));
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetGenericNamedLockContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
             {
@@ -433,149 +329,23 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.LogMessage> GetLogMessageContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.GenericNamedLock> GetGenericNamedLockContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.LogMessage>.Empty;
+                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
             {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.LogMessage>.Empty;
+                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
             {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.LogMessage>.Empty;
+                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.LogMessage>.Empty;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.NamedLock> GetNamedLockContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.NamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.NamedLock>.Empty;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.Reports.Report> GetReportContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.Report>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.Report>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.Report>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.Report>(
-                    fetchRootRule => fetchRootRule.SelectMany(report => report.AccessableBusinessRoles),
-                    fetchRootRule => fetchRootRule.SelectMany(report => report.AccessableOperations),
-                    fetchRootRule => fetchRootRule.SelectMany(report => report.AccessablePrincipals),
-                    fetchRootRule => fetchRootRule.SelectMany(report => report.Filters),
-                    fetchRootRule => fetchRootRule.SelectMany(report => report.Parameters),
-                    fetchRootRule => fetchRootRule.SelectMany(report => report.Properties));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.Reports.ReportFilter> GetReportFilterContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.ReportFilter>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.ReportFilter>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.ReportFilter>(fetchRootRule => fetchRootRule.SelectNested(reportFilter => reportFilter.Report));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.ReportFilter>(fetchRootRule => fetchRootRule.SelectNested(reportFilter => reportFilter.Report));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.Reports.ReportParameter> GetReportParameterContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.ReportParameter>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.ReportParameter>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.ReportParameter>(fetchRootRule => fetchRootRule.SelectNested(reportParameter => reportParameter.Report));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.ReportParameter>(fetchRootRule => fetchRootRule.SelectNested(reportParameter => reportParameter.Report));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.Reports.ReportProperty> GetReportPropertyContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.ReportProperty>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Reports.ReportProperty>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.ReportProperty>(fetchRootRule => fetchRootRule.SelectNested(reportProperty => reportProperty.Report));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Reports.ReportProperty>(fetchRootRule => fetchRootRule.SelectNested(reportProperty => reportProperty.Report));
+                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
             }
             else
             {

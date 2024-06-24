@@ -1,8 +1,10 @@
-﻿using NHibernate;
+﻿using Framework.DomainDriven.Lock;
+
+using NHibernate;
 
 namespace Framework.DomainDriven.NHibernate;
 
-internal static class LockRoleExtensions
+public static class LockRoleExtensions
 {
     public static LockMode ToLockMode(this LockRole source)
     {

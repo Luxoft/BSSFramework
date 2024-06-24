@@ -1,16 +1,18 @@
 ﻿#nullable enable
 
+using Framework.DomainDriven.Lock;
+
 using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Repository;
 
 public interface IRepository<TDomainObject>
 {
-    Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken);
+    Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default);
 
-    Task InsertAsync(TDomainObject domainObject, Guid id, CancellationToken cancellationToken);
+    Task InsertAsync(TDomainObject domainObject, Guid id, CancellationToken cancellationToken = default);
 
-    Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken);
+    Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default);
 
     IQueryable<TDomainObject> GetQueryable();
 
@@ -41,35 +43,35 @@ public interface IRepository<TDomainObject>
     /// </summary>
     Task<TProjection?> SingleOrDefaultAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get Single by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     Task<TProjection> SingleAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get First or default by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     Task<TProjection?> FirstOrDefaultAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get First by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     Task<TProjection> FirstAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get Count by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     Task<int> CountAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get Future query by Specification https://github.com/NikitaEgorov/nuSpec
@@ -91,5 +93,7 @@ public interface IRepository<TDomainObject>
     /// </summary>
     Task<List<TProjection>> GetListAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
+
+    Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken = default);
 }

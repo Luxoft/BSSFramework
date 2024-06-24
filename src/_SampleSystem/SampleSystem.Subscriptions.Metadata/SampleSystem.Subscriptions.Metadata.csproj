@@ -44,11 +44,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MessageTemplate.cshtml</DependentUpon>
     </Compile>
-    <Compile Update="PrincipalCreateModel\Create\MessageTemplate.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MessageTemplate.cshtml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.Subscriptions\Framework.App.Subscriptions.csproj" />
@@ -84,10 +79,6 @@
       <Generator>RazorGenerator</Generator>
     </None>
     <None Update="Examples\RazerInheritance\MessageTemplate.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>MessageTemplate.generated.cs</LastGenOutput>
-    </None>
-    <None Update="PrincipalCreateModel\Create\MessageTemplate.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>MessageTemplate.generated.cs</LastGenOutput>
     </None>

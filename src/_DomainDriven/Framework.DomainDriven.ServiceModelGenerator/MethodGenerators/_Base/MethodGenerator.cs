@@ -6,9 +6,8 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.Security;
-
-using JetBrains.Annotations;
+using Framework.Projection;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -37,7 +36,8 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected abstract bool IsEdit { get; }
 
-    protected virtual TBLLRoleAttribute Attribute => this.DomainType.GetCustomAttribute<TBLLRoleAttribute>().FromMaybe(() => $"Attr {typeof(TBLLRoleAttribute)} not found for type {this.DomainType?.FullName}");// ?? this.GetDefaultAttribute();
+    protected virtual TBLLRoleAttribute Attribute => this.Configuration.Environment.ExtendedMetadata.GetCustomAttribute<TBLLRoleAttribute>(this.DomainType)
+                                                         .FromMaybe(() => $"Attr {typeof(TBLLRoleAttribute)} not found for type {this.DomainType?.FullName}");// ?? this.GetDefaultAttribute();
 
     protected virtual DBSessionMode DefaultSessionMode => this.IsEdit ? DBSessionMode.Write : DBSessionMode.Read;
 
@@ -111,31 +111,11 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected abstract IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr);
 
-    protected virtual object GetBLLSecurityParameter()
+    protected virtual object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         if (this.RequiredSecurity)
         {
-            var securityOperationAttr = this.DomainType.GetDomainObjectAccessAttribute(this.IsEdit);
-
-            var altSecurityAttr = this.DomainType.HasAttribute<DependencySecurityAttribute>()
-                                  || this.DomainType.HasAttribute<CustomContextSecurityAttribute>();
-
-            if (securityOperationAttr != null && altSecurityAttr)
-            {
-                return securityOperationAttr.SecurityOperationCode;
-            }
-            else if (securityOperationAttr != null || altSecurityAttr)
-            {
-                // Тут конкретная операция атрибута securityOperationAttr игнорируется, так как она опосредованно будет применяться через BLLSecurityMode.View/Edit
-                return this.Configuration.Environment.BLLCore.GetBLLSecurityModeType(this.DomainType)
-                           .Maybe(securityModeType => securityModeType.GetField(this.IsEdit ? "Edit" : "View").GetValue(null) as Enum);
-            }
-            else
-            {
-                var mode = this.IsEdit ? "edit" : "view";
-
-                throw new Exception($"Required security for {this.DomainType} ({mode} mode)");
-            }
+            return this.IsEdit ? SecurityRule.Edit : SecurityRule.View;
         }
         else
         {
@@ -143,7 +123,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         }
     }
 
-    protected CodeVariableDeclarationStatement GetCreateDefaultBLLVariableDeclaration([NotNull] CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
+    protected CodeVariableDeclarationStatement GetCreateDefaultBLLVariableDeclaration(CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
     {
         var bllRef = new CodeTypeReference("var");
 
@@ -198,19 +178,19 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
                 .WithStatements(this.GetFacadeMethodInternalStatements(evaluateDataExpr, bllDecl.Maybe(v => v.ToVariableReferenceExpression())));
     }
 
-    protected CodeVariableDeclarationStatement GetBLLVariableDeclaration([NotNull] CodeExpression evaluateDataExpr, CodeParameterDeclarationExpression bllParameterExpr, bool isEdit)
+    protected CodeVariableDeclarationStatement GetBLLVariableDeclaration(CodeExpression evaluateDataExpr, CodeParameterDeclarationExpression bllParameterExpr, bool isEdit)
     {
         if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
 
         var bllCreateExpr = this.Configuration.Environment.BLLCore.Logics.GetCreateSecurityBLLExpr(
          evaluateDataExpr.GetContext().ToPropertyReference((IBLLFactoryContainerContext<object> context) => context.Logics),
          this.DomainType,
-         this.GetBLLSecurityParameter());
+         this.GetBLLSecurityParameter(evaluateDataExpr));
 
         return bllParameterExpr.Type.ToVariableDeclarationStatement(bllParameterExpr.Name, bllCreateExpr);
     }
 
-    protected CodeVariableDeclarationStatement GetDefaultBLLVariableDeclaration([NotNull] CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
+    protected CodeVariableDeclarationStatement GetDefaultBLLVariableDeclaration(CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
     {
         var bllRef = this.Configuration.Environment.BLLCore.GetCodeTypeReference(objectType, BLLCoreGenerator.FileType.BLLInterface);
 
@@ -219,20 +199,15 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         return bllRef.ToVariableDeclarationStatement(varName, bllCreateExpr);
     }
 
-    protected CodeStatement GetCheckSecurityOperationCodeParameterStatement(int parameterIndex)
+    protected CodeExpression GetConvertToSecurityRuleCodeParameterExpression(CodeExpression evaluateDataExpr, int parameterIndex)
     {
-        return typeof(TransferEnumHelper).ToTypeReferenceExpression()
-                                         .ToMethodReferenceExpression(nameof(TransferEnumHelper.Check))
-                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression())
-                                         .ToExpressionStatement();
-    }
-
-    protected CodeExpression GetConvertSecurityOperationCodeParameterExpression(int parameterIndex, Type targetSecurityOperationType = null)
-    {
-        var realTargetSecurityOperationType = targetSecurityOperationType ?? this.Configuration.Environment.SecurityOperationCodeType;
-
-        return typeof(TransferEnumHelper).ToTypeReferenceExpression()
-                                         .ToMethodReferenceExpression(nameof(TransferEnumHelper.Convert), this.Parameters[parameterIndex].Type, realTargetSecurityOperationType.ToTypeReference())
-                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression());
+        return evaluateDataExpr.GetContext()
+                               .ToPropertyReference("SecurityRuleParser")
+                               .ToMethodReferenceExpression("Parse", this.DomainType.GetProjectionSourceTypeOrSelf().ToTypeReference())
+                               .ToMethodInvokeExpression(
+                                   this.Parameters[parameterIndex]
+                                       .Pipe(v => v.Type.BaseType == nameof(String)
+                                                      ? (CodeExpression)v.ToVariableReferenceExpression()
+                                                      : v.ToVariableReferenceExpression().ToMethodInvokeExpression("ToString")));
     }
 }

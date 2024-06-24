@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.NotificationCore.Jobs;
 using Framework.NotificationCore.Senders;
 using Framework.NotificationCore.Services;
@@ -8,16 +7,13 @@ using Framework.NotificationCore.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
-
 namespace Framework.DependencyInjection;
 
 public static class NotificationSenderExtensions
 {
-    public static void RegisterNotificationJob<TBLLContext>(this IServiceCollection services)
-            where TBLLContext : IConfigurationBLLContextContainer<IConfigurationBLLContext>
+    public static void RegisterNotificationJob(this IServiceCollection services)
     {
-        services.AddScoped<ISendNotificationsJob, SendNotificationsJob<TBLLContext>>();
+        services.AddScoped<ISendNotificationsJob, SendNotificationsJob>();
     }
 
     public static void RegisterNotificationSmtp(this IServiceCollection services, IConfiguration configuration)

@@ -2,8 +2,6 @@
 
 using Framework.Authorization.Notification;
 using Framework.Core;
-using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Notification;
 using Framework.Persistent;
@@ -19,9 +17,6 @@ namespace Framework.Configuration.Domain;
 [RequiredGroupValidator(RequiredGroupValidatorMode.AllOrNothing, GroupKey = "DynamicSourceMode")]
 [RequiredGroupValidator(RequiredGroupValidatorMode.AllOrNothing, GroupKey = "Sender")]
 [UniqueGroup]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.SubscriptionView)]
-[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.SubscriptionEdit)]
-[BLLViewRole, BLLSaveRole, BLLRemoveRole]
 [NotAuditedClass]
 public class Subscription : ISubscription
 {

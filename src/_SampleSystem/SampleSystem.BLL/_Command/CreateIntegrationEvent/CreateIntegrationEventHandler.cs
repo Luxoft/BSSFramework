@@ -1,34 +1,20 @@
-﻿using Framework.Cap.Abstractions;
+﻿using Bss.Platform.Events.Abstractions;
 
 using MediatR;
 
-using SampleSystem.BLL.Core.IntegrationEvens;
+using SampleSystem.BLL._Command.ProcessIntegrationEvent;
 using SampleSystem.Domain;
 
 namespace SampleSystem.BLL._Command.CreateIntegrationEvent;
 
-public class CreateIntegrationEventHandler : IRequestHandler<CreateIntegrationEventCommand>
+public class CreateIntegrationEventHandler(IIntegrationEventPublisher eventPublisher, ICountryBLLFactory countryBllFactory)
+    : IRequestHandler<CreateIntegrationEventCommand>
 {
-    private readonly IIntegrationEventBus integrationEventBus;
-
-    private readonly ICountryBLLFactory countryBllFactory;
-
-    public CreateIntegrationEventHandler(
-            IIntegrationEventBus integrationEventBus,
-            ICountryBLLFactory countryBllFactory)
-    {
-        this.integrationEventBus = integrationEventBus;
-        this.countryBllFactory = countryBllFactory;
-    }
-
-    public Task Handle(CreateIntegrationEventCommand request, CancellationToken cancellationToken)
+    public async Task Handle(CreateIntegrationEventCommand request, CancellationToken cancellationToken)
     {
         var country = new Country { Code = "test11", Name = "test11", Culture = "test11", NameNative = "test11" };
-        this.countryBllFactory.Create()
-            .Save(country);
+        countryBllFactory.Create().Save(country);
 
-        this.integrationEventBus.Publish(new TestIntegrationEvent(country.Id));
-
-        return Task.FromResult(Unit.Value);
+        await eventPublisher.PublishAsync(new TestIntegrationEvent(country.Id), cancellationToken);
     }
 }

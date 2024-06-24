@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using Framework.OData.Tests.Unit.DomainModel;
+
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Framework.OData.Tests.Unit;
 
@@ -14,7 +16,7 @@ public class HasVirtualPropertyTest
 
         Expression<Func<Employee, bool>> expression = z => z.Department.Location == filterModel.Location;
 
-        Assert.IsFalse(expression.HasVirtualProperty());
+        ClassicAssert.IsFalse(expression.HasVirtualProperty());
     }
 
     [Test]
@@ -22,7 +24,7 @@ public class HasVirtualPropertyTest
     {
         Expression<Func<Employee, bool>> expression = z => z.NameEng.FullName == "fff" && z.Department.Name == "sdf";
 
-        Assert.IsTrue(expression.HasVirtualProperty());
+        ClassicAssert.IsTrue(expression.HasVirtualProperty());
     }
 
     [Test]
@@ -30,7 +32,7 @@ public class HasVirtualPropertyTest
     {
         Expression<Func<Employee, bool>> expression = z => z.Department.Name == "sdf" && z.NameEng.FullName == "fff";
 
-        Assert.IsTrue(expression.HasVirtualProperty());
+        ClassicAssert.IsTrue(expression.HasVirtualProperty());
     }
 
 
@@ -39,7 +41,7 @@ public class HasVirtualPropertyTest
     {
         Expression<Func<Employee, bool>> expression = z => z.NameEng.FirstName == "fff";
 
-        Assert.IsFalse(expression.HasVirtualProperty());
+        ClassicAssert.IsFalse(expression.HasVirtualProperty());
     }
 
     [Test]
@@ -47,7 +49,7 @@ public class HasVirtualPropertyTest
     {
         Expression<Func<Employee, bool>> expression = z => z.Location == new Location();
 
-        Assert.IsTrue(expression.HasVirtualProperty());
+        ClassicAssert.IsTrue(expression.HasVirtualProperty());
     }
 
     [Test]
@@ -55,7 +57,7 @@ public class HasVirtualPropertyTest
     {
         Expression<Func<Employee, bool>> expression = z => z.VirtualProperty == 5;
 
-        Assert.IsTrue(expression.HasVirtualProperty());
+        ClassicAssert.IsTrue(expression.HasVirtualProperty());
     }
 
     [Test]
@@ -63,6 +65,14 @@ public class HasVirtualPropertyTest
     {
         Expression<Func<SubEmployee, bool>> expression = z => z.VirtualProperty == 5;
 
-        Assert.IsTrue(expression.HasVirtualProperty());
+        ClassicAssert.IsTrue(expression.HasVirtualProperty());
+    }
+
+    [Test]
+    public void HasNotVirtualProperty_True()
+    {
+        Expression<Func<Employee, bool>> expression = z => z.NonVirtualProperty == 5;
+
+        ClassicAssert.IsFalse(expression.HasVirtualProperty());
     }
 }

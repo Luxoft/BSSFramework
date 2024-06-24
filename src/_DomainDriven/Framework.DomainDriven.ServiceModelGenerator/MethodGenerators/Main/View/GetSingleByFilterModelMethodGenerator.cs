@@ -50,15 +50,15 @@ public class GetSingleByFilterModelMethodGenerator<TConfiguration> : ViewMethodG
 
     }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this.filterType.GetViewDomainObjectAttribute();
 
         if (null == modelSecurityAttribute)
         {
-            return base.GetBLLSecurityParameter();
+            return base.GetBLLSecurityParameter(evaluateDataExpr);
         }
 
-        return modelSecurityAttribute.SecurityOperationCode;
+        return modelSecurityAttribute.SecurityRule;
     }
 }

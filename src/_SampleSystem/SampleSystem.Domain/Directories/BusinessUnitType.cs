@@ -2,13 +2,9 @@
 using Framework.Persistent;
 using Framework.Restriction;
 
-using JetBrains.Annotations;
-
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.BusinessUnitTypeView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.BusinessUnitTypeEdit)]
 [UniqueGroup]
 public partial class BusinessUnitType :
         BaseDirectory,
@@ -53,7 +49,7 @@ public partial class BusinessUnitType :
     {
     }
 
-    public BusinessUnitType([NotNull] string name)
+    public BusinessUnitType(string name)
     {
         if (name == null)
         {

@@ -1,8 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.DomainDriven.BLL;
-
-namespace Framework.DomainDriven;
+namespace Framework.DomainDriven._Visitors;
 
 public class ExpressionVisitorContainerDomainIdentItem<TPersistentDomainObjectBase, TIdent> : IExpressionVisitorContainerItem
 {

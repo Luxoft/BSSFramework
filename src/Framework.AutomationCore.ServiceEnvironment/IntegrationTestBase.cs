@@ -1,17 +1,12 @@
 ﻿using Automation.Enums;
+using Automation.ServiceEnvironment.Services;
 using Automation.Utils.DatabaseUtils;
 
-using Framework.Core;
-using Framework.DomainDriven.BLL.Configuration;
-using Framework.DomainDriven.ServiceModel.Subscriptions;
-using Framework.Notification.DTO;
-
-using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
 
-public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderContainer<TBLLContext>
-    where TBLLContext : IConfigurationBLLContextContainer<IConfigurationBLLContext>
+public abstract class IntegrationTestBase : RootServiceProviderContainer
 {
     private readonly IServiceProviderPool rootServiceProviderPool;
 
@@ -26,6 +21,7 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
         this.ReattachDatabase();
         this.ClearNotifications();
         this.ClearIntegrationEvents();
+        this.ResetServices();
     }
 
     public virtual void Cleanup()
@@ -41,9 +37,15 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
         }
     }
 
+    protected virtual void ResetServices()
+    {
+        this.RootServiceProvider.GetService<IIntegrationTestUserAuthenticationService>()?.Reset();
+        this.RootServiceProvider.GetService<IntegrationTestTimeProvider>()?.Reset();
+    }
+
     protected virtual void DropDatabaseAfterTest()
     {
-        if (this.ConfigUtil.UseLocalDb || this.ConfigUtil.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase)
+        if (this.AutomationFrameworkSettings.UseLocalDb || this.AutomationFrameworkSettings.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase)
         {
             AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
         }
@@ -54,7 +56,7 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
 
     protected virtual void ReattachDatabase()
     {
-        switch (this.ConfigUtil.TestRunMode)
+        switch (this.AutomationFrameworkSettings.TestRunMode)
         {
             case TestRunMode.DefaultRunModeOnEmptyDatabase:
             case TestRunMode.RestoreDatabaseUsingAttach:
@@ -73,27 +75,6 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
     /// </summary>
     public virtual void ClearNotifications()
     {
-        this.EvaluateWrite(context => context.Configuration.Logics.DomainObjectNotification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
-    }
-
-    /// <summary>
-    /// Получение списка модификаций
-    /// </summary>
-    /// <returns></returns>
-    protected virtual List<ObjectModificationInfoDTO<Guid>> GetModifications()
-    {
-        return this.EvaluateRead(context =>
-
-            context.Configuration.Logics.DomainObjectModification.GetFullList()
-                .ToList(mod => new ObjectModificationInfoDTO<Guid> { Identity = mod.DomainObjectId, ModificationType = mod.Type, Revision = mod.Revision, TypeInfoDescription = new TypeInfoDescriptionDTO(mod.DomainType) }));
-    }
-
-    /// <summary>
-    /// Отчистка списка модификаций
-    /// </summary>
-    protected virtual void ClearModifications()
-    {
-        this.EvaluateWrite(context => context.Configuration.Logics.DomainObjectModification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
     }
 
     /// <summary>
@@ -101,38 +82,5 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
     /// </summary>
     public virtual void ClearIntegrationEvents()
     {
-        this.ClearModifications();
-
-        this.EvaluateWrite(context =>
-        {
-            var bll = context.Configuration.Logics.Default.Create<Framework.Configuration.Domain.DomainObjectEvent>();
-
-            bll.GetFullList().ForEach(bll.Remove);
-        });
-    }
-
-    /// <summary>
-    /// Получение интегационных евентов
-    /// </summary>
-    /// <returns></returns>
-    protected virtual List<T> GetIntegrationEvents<T>(string queueTag = "default")
-    {
-        var serializeType = typeof(T).FullName;
-
-        return this.EvaluateRead(
-            context => context.Configuration.Logics.DomainObjectEvent
-                .GetListBy(v => v.SerializeType == serializeType && v.QueueTag == queueTag)
-                .ToList(obj => DataContractSerializerHelper.Deserialize<T>(obj.SerializeData)));
-    }
-
-    /// <summary>
-    /// Получение списка нотификаций
-    /// </summary>
-    /// <returns></returns>
-    protected virtual List<NotificationEventDTO> GetNotifications()
-    {
-        return this.EvaluateRead(
-            context => context.Configuration.Logics.DomainObjectNotification.GetFullList()
-                .ToList(obj => DataContractSerializerHelper.Deserialize<NotificationEventDTO>(obj.SerializeData)));
     }
 }

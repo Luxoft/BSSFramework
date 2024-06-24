@@ -1,10 +1,7 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.DomainDriven.BLL;
 using Framework.SecuritySystem;
-
-using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
@@ -16,21 +13,13 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
     {
     }
 
-    private Type EventOperationType => this.DomainType.GetEventOperationType(true);
-
     public override FileType FileType => FileType.BLL;
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
         var baseBLLType = this.Configuration.Environment.BLLCore.GetSecurityDomainBLLBaseTypeReference(this.DomainType)
-                              .ToTypeReference(this.DomainType.ToTypeReference(), this.EventOperationType.ToTypeReference());
-
-
-        var initializeMethodName = "Initialize";
-        var initializeSnippet = new CodeSnippetTypeMember("\t\t" + $"partial void {initializeMethodName}();");
-        var invoikeInitializeStatement = new CodeThisReferenceExpression().ToMethodInvokeExpression(initializeMethodName).ToExpressionStatement();
-
+                              .ToTypeReference(this.DomainType.ToTypeReference());
 
         var codeTypeDeclaration = new CodeTypeDeclaration
                                   {
@@ -44,10 +33,6 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
                                                   baseBLLType,
 
                                                   this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.BLLInterface)
-                                          },
-                                          Members =
-                                          {
-                                                  initializeSnippet
                                           }
                                   };
 
@@ -59,11 +44,6 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
                                                Type = this.Configuration.BLLContextTypeReference,
                                                Name = "context"
                                        };
-
-                var specificationEvaluatorParameterTypeRef = typeof(ISpecificationEvaluator).ToTypeReference();
-                var specificationEvaluatorParameter = specificationEvaluatorParameterTypeRef.ToParameterDeclarationExpression("specificationEvaluator = null");
-                var specificationEvaluatorParameterArg = specificationEvaluatorParameterTypeRef.ToParameterDeclarationExpression("specificationEvaluator").ToVariableReferenceExpression();
-
                 var contextParameterExpr = contextParameter.ToVariableReferenceExpression();
 
                 var securityProviderParameterTypeRef = typeof(ISecurityProvider<>).ToTypeReference(this.DomainType.ToTypeReference());
@@ -75,16 +55,13 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
                                                            Parameters =
                                                            {
                                                                    contextParameter,
-                                                                   securityProviderParameter,
-                                                                   specificationEvaluatorParameter
+                                                                   securityProviderParameter
                                                            },
                                                            BaseConstructorArgs =
                                                            {
                                                                    contextParameterExpr,
-                                                                   securityProviderParameter.ToVariableReferenceExpression(),
-                                                                   specificationEvaluatorParameterArg
-                                                           },
-                                                           Statements = { invoikeInitializeStatement }
+                                                                   securityProviderParameter.ToVariableReferenceExpression()
+                                                           }
                                                    };
 
                 codeTypeDeclaration.Members.Add(securityOperationConstructor);

@@ -9,10 +9,6 @@ namespace SampleSystem.Domain;
 
 [DomainType("11E78AEF-9512-46E0-A33D-AAE58DC7E18C")]
 [BLLRole]
-[SampleSystemViewDomainObject(
-                                 SampleSystemSecurityOperationCode.ManagementUnitView,
-                                 SampleSystemSecurityOperationCode.EmployeeEdit)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.ManagementUnitEdit)]
 [IgnoreHbmMapping]
 public class ManagementUnitFluentMapping :
         CommonUnitBase,

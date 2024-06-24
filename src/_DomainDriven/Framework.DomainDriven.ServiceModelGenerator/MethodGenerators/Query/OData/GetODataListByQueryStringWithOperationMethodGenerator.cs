@@ -29,9 +29,9 @@ public class GetODataListByQueryStringWithOperationMethodGenerator<TConfiguratio
 
     protected sealed override CodeTypeReference ReturnType { get; }
 
-    protected override object GetBLLSecurityParameter()
+    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.GetConvertSecurityOperationCodeParameterExpression(1);
+        return this.GetConvertToSecurityRuleCodeParameterExpression(evaluateDataExpr, 1);
     }
 
     protected override string GetComment()
@@ -45,8 +45,8 @@ public class GetODataListByQueryStringWithOperationMethodGenerator<TConfiguratio
 
         yield return new CodeParameterDeclarationExpression
                      {
-                             Name = "securityOperationCode",
-                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), Framework.DomainDriven.DTOGenerator.FileType.DomainObjectSecurityOperationCode)
+                             Name = "securityRuleCode",
+                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), Framework.DomainDriven.DTOGenerator.FileType.DomainObjectSecurityRuleCode)
                      };
     }
 

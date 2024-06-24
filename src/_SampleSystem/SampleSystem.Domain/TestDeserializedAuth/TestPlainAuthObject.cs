@@ -4,7 +4,6 @@ using Framework.Persistent;
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
 public class TestPlainAuthObject : BaseDirectory, IMaster<TestItemAuthObject>
 {
     private readonly ICollection<TestItemAuthObject> items = new List<TestItemAuthObject>();

@@ -3,6 +3,7 @@
 using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
@@ -10,11 +11,17 @@ using NHibernate.Linq;
 
 namespace Framework.Configurator.Handlers;
 
-public record DownloadPermissionTemplateHandler
-    (IRepositoryFactory<EntityType> RepositoryFactory) : IDownloadPermissionTemplateHandler
+public record DownloadPermissionTemplateHandler(
+    IRepositoryFactory<SecurityContextType> RepositoryFactory,
+    IOperationAccessor OperationAccessor)
+    : IDownloadPermissionTemplateHandler
 {
+    private const int FirstContentColumnIndex = 4;
+
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
+        this.OperationAccessor.CheckAccess(SecurityRole.Administrator);
+
         var contexts = await this.RepositoryFactory
                                  .Create()
                                  .GetQueryable()
@@ -28,8 +35,8 @@ public record DownloadPermissionTemplateHandler
         for (var i = 0; i < contexts.Count; i++)
         {
             var contextName = contexts[i];
-            const int firstContentColumnIndex = 4;
-            worksheet.Cell(1, firstContentColumnIndex + i).Value = contextName;
+
+            worksheet.Cell(1, FirstContentColumnIndex + i).Value = contextName;
         }
 
         var ms = new MemoryStream();

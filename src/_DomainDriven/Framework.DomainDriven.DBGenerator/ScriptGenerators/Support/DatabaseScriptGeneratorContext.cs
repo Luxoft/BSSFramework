@@ -1,7 +1,7 @@
 ﻿using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.Metadata;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.DomainDriven.DBGenerator;
 
@@ -10,7 +10,7 @@ namespace Framework.DomainDriven.DBGenerator;
 /// </summary>
 public class DatabaseScriptGeneratorContext : IDatabaseScriptGeneratorContext
 {
-    public DatabaseScriptGeneratorContext([NotNull]DatabaseName databaseName, [NotNull]ISqlDatabaseFactory sqlDatabaseFactory, [NotNull]AssemblyMetadata assemblyMetadata)
+    public DatabaseScriptGeneratorContext(DatabaseName databaseName, ISqlDatabaseFactory sqlDatabaseFactory, AssemblyMetadata assemblyMetadata)
     {
         if (databaseName == null)
         {

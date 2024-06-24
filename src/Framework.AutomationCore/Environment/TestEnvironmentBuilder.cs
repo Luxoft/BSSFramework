@@ -1,9 +1,14 @@
-﻿using Automation.Utils;
+﻿using Automation.Extensions;
+using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
+
+using Framework.DependencyInjection;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace Automation;
 
@@ -12,9 +17,8 @@ public class TestEnvironmentBuilder
     private IConfiguration withConfiguration;
     private Func<IConfiguration, IServiceCollection, IServiceCollection> withServiceProviderBuildFunc;
     private Action<IServiceProvider> withServiceProvAfterBuildAction;
+    private Action<AutomationFrameworkSettings> withAutomationFrameworkSettings;
     private Type withDatabaseGenerator;
-    private string withConnectionStringName;
-    private string[] withSecondaryDatabases;
 
     public TestEnvironmentBuilder WithConfiguration(IConfiguration rootConfiguration)
     {
@@ -37,16 +41,9 @@ public class TestEnvironmentBuilder
         return this;
     }
 
-    public TestEnvironmentBuilder WithSecondaryDatabases(string[] databaseNames)
+    public TestEnvironmentBuilder WithAutomationFrameworkSettings(Action<AutomationFrameworkSettings> settings)
     {
-        this.withSecondaryDatabases = databaseNames;
-
-        return this;
-    }
-
-    public TestEnvironmentBuilder WithConnectionStringName(string name)
-    {
-        this.withConnectionStringName = name;
+        this.withAutomationFrameworkSettings = settings;
 
         return this;
     }
@@ -65,7 +62,7 @@ public class TestEnvironmentBuilder
         return this;
     }
 
-    public TestEnvironmentBuilder WithDatabaseGenerator<T>() where T: TestDatabaseGenerator
+    public TestEnvironmentBuilder WithDatabaseGenerator<T>() where T: ITestDatabaseGenerator
     {
         this.withDatabaseGenerator = typeof(T);
 
@@ -94,8 +91,7 @@ public class TestEnvironmentBuilder
             this.withServiceProviderBuildFunc,
             this.withServiceProvAfterBuildAction,
             this.withDatabaseGenerator,
-            this.withConnectionStringName ?? "DefaultConnection",
-            this.withSecondaryDatabases);
+            this.withAutomationFrameworkSettings);
 
         return new TestEnvironment(
             serviceProviderPool,
@@ -109,7 +105,9 @@ public class TestEnvironmentBuilder
             serviceProviderPool.Release);
 
     protected virtual IServiceProvider BuildServiceProvider(IServiceCollection serviceCollection) =>
-        serviceCollection.BuildServiceProvider(
+        serviceCollection
+            .ValidateDuplicateDeclaration()
+            .BuildServiceProvider(
             new ServiceProviderOptions
             {
                 ValidateOnBuild = true,
@@ -121,16 +119,14 @@ public class TestEnvironmentBuilder
         Func<IConfiguration, IServiceCollection, IServiceCollection> serviceProviderBuildFunc,
         Action<IServiceProvider> serviceProviderAfterBuildAction,
         Type databaseGenerator,
-        string connectionStringName,
-        string[] secondaryDatabases) =>
+        Action<AutomationFrameworkSettings> settingsAction) =>
             new ServiceProviderPool(
                 () => this.ServiceProviderGenerationFunc(
                     serviceProviderBuildFunc,
                     serviceProviderAfterBuildAction,
                     rootConfiguration,
                     databaseGenerator,
-                    connectionStringName,
-                    secondaryDatabases),
+                    settingsAction),
                 rootConfiguration.GetValue<bool>("TestsParallelize"),
                 rootConfiguration.GetValue<bool>("DisableServiceProviderPoolLimiter"));
 
@@ -139,35 +135,33 @@ public class TestEnvironmentBuilder
             Action<IServiceProvider> serviceProviderAfterBuildAction,
             IConfiguration rootConfiguration,
             Type databaseGenerator,
-            string connectionStringName,
-            string[] secondaryDatabases)
+            Action<AutomationFrameworkSettings> settingsAction)
     {
-        var configUtil = new ConfigUtil(rootConfiguration);
-        var databaseContextSettings =
-                new DatabaseContextSettings(configUtil.GetConnectionString(connectionStringName), secondaryDatabases);
-        var databaseContext = new DatabaseContext(configUtil, databaseContextSettings);
-        var cfg = new ConfigurationBuilder()
-            .AddConfiguration(rootConfiguration)
-            .AddInMemoryCollection(
-                rootConfiguration.GetSection("ConnectionStrings")
-                    .GetChildren()
-                    .ToDictionary(
-                        x => $"ConnectionStrings:{x.Key}",
-                        _ => databaseContext.Main.ConnectionString))
-            .Build();
+        var settings = GetSettings(rootConfiguration, settingsAction);
+        var databaseContext = new DatabaseContext(rootConfiguration, settings);
+
+        var cfg = rootConfiguration.BuildFromRootWithConnectionStrings(databaseContext);
 
         var environmentServices = new ServiceCollection();
         serviceProviderBuildFunc.Invoke(cfg, environmentServices);
-        environmentServices.TryAddSingleton(databaseContextSettings);
+        environmentServices.TryAddSingleton(settings);
         environmentServices.TryAddSingleton<IDatabaseContext>(databaseContext);
         environmentServices.AddSingleton<IConfiguration>(cfg)
-                           .AddSingleton<ConfigUtil>()
-                           .AddSingleton(typeof(TestDatabaseGenerator), databaseGenerator);
+                           .AddSingleton(typeof(ITestDatabaseGenerator), databaseGenerator);
 
         var environmentServiceProvider = this.BuildServiceProvider(environmentServices);
 
         serviceProviderAfterBuildAction?.Invoke(environmentServiceProvider);
 
         return environmentServiceProvider;
+    }
+
+    private static IOptions<AutomationFrameworkSettings> GetSettings(IConfiguration configuration, Action<AutomationFrameworkSettings> action)
+    {
+        var settings = new AutomationFrameworkSettings();
+        configuration.GetSection(nameof(AutomationFrameworkSettings)).Bind(settings);
+        action?.Invoke(settings);
+
+        return Options.Create(settings);
     }
 }

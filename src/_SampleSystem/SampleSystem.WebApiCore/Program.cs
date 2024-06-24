@@ -1,46 +1,95 @@
-﻿using Framework.WebApi.Utils;
+﻿using Bss.Platform.Api.Documentation;
+using Bss.Platform.Api.Middlewares;
+using Bss.Platform.Events;
+using Bss.Platform.Logging;
 
-using Microsoft.AspNetCore;
+using Framework.Configurator;
+using Framework.Configurator.Interfaces;
+using Framework.Core;
+using Framework.DependencyInjection;
+using Framework.DomainDriven;
+using Framework.DomainDriven.WebApiNetCore;
+using Framework.SecuritySystem;
 
-using Serilog;
+using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Http.Json;
 
-namespace SampleSystem.WebApiCore;
+using SampleSystem.BLL._Command.CreateClassA.Intergation;
+using SampleSystem.ServiceEnvironment;
+using SampleSystem.WebApiCore;
+using SampleSystem.WebApiCore.Json;
+using SampleSystem.WebApiCore.Services;
 
-public class Program
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.Sources.Clear();
+builder.Configuration
+       .AddJsonFile("appsettings.json", false, true)
+       .AddEnvironmentVariables();
+
+builder.Host
+       .UseDefaultServiceProvider(
+           x =>
+           {
+               x.ValidateScopes = true;
+               x.ValidateOnBuild = true;
+           })
+       .AddPlatformLogging();
+
+builder.Services
+       .RegisterGeneralDependencyInjection(builder.Configuration)
+       .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
+       .Configure<JsonOptions>(x => x.SerializerOptions.Converters.Add(new UtcDateTimeJsonConverter()))
+       .AddPlatformApiDocumentation(builder.Environment, "SampleSystem API", x => x.CustomSchemaIds(t => t.FullName))
+       .AddPlatformIntegrationEvents<IntegrationEventProcessor>(
+           typeof(ClassACreatedEvent).Assembly,
+           x =>
+           {
+               x.SqlServer.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
+               x.MessageQueue.Enable = false;
+           })
+       .AddConfigurator()
+       .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+       .AddNegotiate();
+
+builder.Services.AddControllers(x => x.EnableEndpointRouting = false);
+
+if (builder.Environment.IsProduction()) builder.Services.AddHangfireBss(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+builder.Services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));
+
+var app = builder.Build();
+
+app
+    .UsePlatformErrorsMiddleware()
+    .UseHttpsRedirection()
+    .UseHsts()
+    .UseRouting()
+    .UseTryProcessDbSession()
+    .UseWebApiExceptionExpander()
+    .UseAuthentication()
+    .UseAuthorization()
+    .UseConfigurator()
+    .UsePlatformApiDocumentation(builder.Environment)
+    .UseEndpoints(x => x.MapControllers());
+
+if (builder.Environment.IsProduction())
 {
-    public static void Main(string[] args)
-    {
-        Log.Logger = Configuration.CreateLoggerBss();
-
-        try
+    var contextEvaluator = LazyInterfaceImplementHelper.CreateProxy(
+        () =>
         {
-            CreateWebHostBuilder(args).Build().Run();
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "Host terminated unexpectedly");
-        }
-        finally
-        {
-            Log.CloseAndFlush();
-        }
-    }
+            var serviceProvider = new ServiceCollection()
+                                  .RegisterGeneralDependencyInjection(builder.Configuration)
+                                  .ValidateDuplicateDeclaration()
+                                  .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                   .UseDefaultServiceProvider(o =>
-                                              {
-                                                  o.ValidateScopes = true;
-                                                  o.ValidateOnBuild = true;
-                                              })
-                   .UseConfiguration(Configuration)
-                   .UseSerilogBss()
-                   .UseStartup<Startup>();
+            return serviceProvider.GetRequiredService<IServiceEvaluator<IAuthorizationSystem>>();
+        });
 
-    private static IConfiguration Configuration =>
-            new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", false, true)
-                    .AddEnvironmentVariables()
-                    .Build();
+    app.UseHangfireBss(
+        builder.Configuration,
+        JobList.RunAll,
+        authorizationFilter: new SampleSystemHangfireAuthorization(contextEvaluator));
 }
+
+app.Run();

@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Automation;
 using Automation.ServiceEnvironment;
-using Automation.ServiceEnvironment.Services;
-using Framework.Authorization.ApproveWorkflow;
-using Framework.Cap.Abstractions;
+
+using Bss.Platform.Events.Abstractions;
+
 using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DependencyInjection;
@@ -14,6 +14,7 @@ using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.Support.Utils;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Main;
+using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.__Support;
 
@@ -24,7 +25,6 @@ public class InitializeAndCleanup
                                                              .WithDefaultConfiguration($"{nameof(SampleSystem)}_")
                                                              .WithDatabaseGenerator<SampleSystemTestDatabaseGenerator>()
                                                              .WithServiceProviderBuildFunc(GetServices)
-                                                             .WithServiceProviderAfterBuildAction(z => z.RegisterAuthWorkflow())
                                                              .Build();
 
     [AssemblyInitialize]
@@ -44,18 +44,18 @@ public class InitializeAndCleanup
         return services
                .RegisterGeneralDependencyInjection(configuration)
 
-               .ApplyIntegrationTestServices()
-
-               .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
-
-               .ReplaceSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
-               .ReplaceSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
-
                .AddSingleton<SampleSystemInitializer>()
 
-               .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
+               .ApplyIntegrationTestServices(configuration)
+
+               .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
+               .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
+
+               .RegisterControllers([typeof(EmployeeController).Assembly])
 
                .AddSingleton<DataHelper>()
-               .AddSingleton<AuthHelper>();
+               .AddSingleton<AuthHelper>()
+
+               .AddSingleton<TestDataInitializer>();
     }
 }

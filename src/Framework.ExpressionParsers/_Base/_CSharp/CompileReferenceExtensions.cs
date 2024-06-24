@@ -93,7 +93,7 @@ internal static class CompileReferenceExtensions
     }
 
 
-    ////private static Assembly TryLoad(this AppDomain appDomain, [NotNull] AssemblyName assemblyName)
+    ////private static Assembly TryLoad(this AppDomain appDomain, AssemblyName assemblyName)
     ////{
     ////    try
     ////    {

@@ -48,6 +48,7 @@
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="171.30.0" />
+    <PackageVersion Include="MediatR" Version="12.1.1" />
     <PackageVersion Include="MSTest.TestAdapter" Version="3.4.0" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.4.0" />
     <PackageVersion Include="NHibernate" Version="5.5.1" />
@@ -61,7 +62,6 @@
     <PackageVersion Include="OpenCover" Version="4.7.1221" />
     <PackageVersion Include="ReportGenerator" Version="5.3.0" />
     <PackageVersion Include="System.CodeDom" Version="8.0.0" />
-    <PackageVersion Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageVersion Include="System.Runtime.Loader" Version="4.3.0" />
     <PackageVersion Include="Unity" Version="5.11.10" />

@@ -1,4 +1,6 @@
-﻿using Serilog;
+﻿using Microsoft.Extensions.Logging;
+
+using Serilog;
 
 namespace Framework.HangfireCore.JobBase;
 

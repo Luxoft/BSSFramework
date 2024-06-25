@@ -54,4 +54,13 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
             originalSecurityProvider,
             (provider, functor) => functor.OverrideSecurityProvider(provider, securityRule));
     }
+
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.CompositeSecurityRule securityRule)
+    {
+        var originalSecurityProvider = this.originalDomainSecurityService.GetSecurityProvider(securityRule);
+
+        return this.functorList.Aggregate(
+            originalSecurityProvider,
+            (provider, functor) => functor.OverrideSecurityProvider(provider, securityRule));
+    }
 }

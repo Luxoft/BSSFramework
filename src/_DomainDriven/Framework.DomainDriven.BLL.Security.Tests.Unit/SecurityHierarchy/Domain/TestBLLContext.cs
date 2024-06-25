@@ -30,8 +30,6 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
 
         this.DomainAncestorLinkDal = new MockDAL<HierarchyObjectAncestorLink, Guid>(hierarchicalObjects.ToAncestorLinks<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink>().ToList());
 
-        //this.NamedLockDal = new MockDAL<NamedLockObject, Guid>(new NamedLockObject() { LockOperation = NamedLockOperation.HierarchyObjectAncestorLinkLock });
-
         this.defaultFactoryContainer = Substitute.For<IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>>>();
 
         var namedLockSource = Substitute.For<INamedLockSource>();
@@ -53,7 +51,6 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
         this.ServiceProvider = new ServiceCollection()
                                .AddSingleton<IDAL<HierarchyObject, Guid>>(this.HierarchyDomainDal)
                                .AddSingleton<IDAL<HierarchyObjectAncestorLink, Guid>>(this.DomainAncestorLinkDal)
-                               //.AddSingleton<IDAL<NamedLockObject, Guid>>(this.NamedLockDal)
                                .BuildServiceProvider();
 
         //var namedLockLogic = new NamedLockLogic(this); // MAGIC

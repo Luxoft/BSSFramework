@@ -9,9 +9,9 @@ namespace SampleSystem.Security.Metadata;
 public class SampleSystemEmployeeDomainSecurityServiceMetadata(IActualPrincipalSource actualPrincipalSource)
     : IDomainSecurityServiceMetadata<Employee>
 {
-    public ISecurityProvider<Employee> OverrideSecurityProvider(ISecurityProvider<Employee> baseProvider, SecurityRule.OperationSecurityRule securityRule)
+    public ISecurityProvider<Employee> OverrideSecurityProvider(ISecurityProvider<Employee> baseProvider, SecurityRule.SpecialSecurityRule securityRule)
     {
-        if (securityRule.SecurityOperation == SampleSystemSecurityOperation.EmployeeView)
+        if (securityRule == SecurityRule.View)
         {
             return baseProvider.Or(employee => employee.Login == actualPrincipalSource.ActualPrincipal.Name);
         }

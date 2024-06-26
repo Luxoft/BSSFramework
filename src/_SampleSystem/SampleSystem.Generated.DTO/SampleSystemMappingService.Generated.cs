@@ -2752,7 +2752,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Landlinephone = domainObject.Landlinephone;
             mappingObject.LastActionDate = domainObject.LastActionDate;
             mappingObject.LocationCode = domainObject.LocationCode;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeeView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(Framework.SecuritySystem.SecurityRule.View).HasAccess(domainObject))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
@@ -6701,7 +6701,7 @@ namespace SampleSystem.Generated.DTO
             }
             mappingObject.CoreBusinessUnitName = domainObject.CoreBusinessUnitName;
             mappingObject.CoreBusinessUnitProjects = SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(domainObject.CoreBusinessUnitProjects, this);
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperation.EmployeeView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(Framework.SecuritySystem.SecurityRule.View).HasAccess(domainObject))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
@@ -6932,7 +6932,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual void MapTestLegacyEmployee(SampleSystem.Domain.Projections.TestLegacyEmployee domainObject, SampleSystem.Generated.DTO.TestLegacyEmployeeProjectionDTO mappingObject)
         {
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>(SampleSystem.SampleSystemSecurityOperation.EmployeeView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>(Framework.SecuritySystem.SecurityRule.View).HasAccess(domainObject))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;

@@ -32,8 +32,8 @@ public abstract class DomainSecurityService<TDomainObject>(
     protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
     {
         return this.GetSecurityProvider(
-                   securityRuleExpander.TryExpand<TDomainObject>(securityRule))
-               ?? throw new Exception($"SecurityRule with mode '{securityRule}' not found for type '{typeof(TDomainObject).Name}'");
+            securityRuleExpander.TryExpand<TDomainObject>(securityRule)
+            ?? throw new Exception($"{nameof(SecurityRule)} with mode '{securityRule}' not found for type '{typeof(TDomainObject).Name}'"));
     }
 
     protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.OperationSecurityRule securityRule)

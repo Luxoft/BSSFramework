@@ -4,6 +4,7 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
 using Framework.Projection.Environment;
 using Framework.Security;
+using Framework.SecuritySystem;
 
 using SampleSystem.Domain;
 
@@ -58,7 +59,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
                                   .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit)))
                       .AddProperty(
                           e => e.Login,
-                          pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeeView))
+                          pb => pb.AddAttribute(new ViewDomainObjectAttribute(SecurityRule.View))
                                   .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeeEdit)))
                       .AddProperty(
                           e => e.PersonalCellPhone,

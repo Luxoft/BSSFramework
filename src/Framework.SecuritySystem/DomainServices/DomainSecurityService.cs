@@ -46,10 +46,7 @@ public abstract class DomainSecurityService<TDomainObject>(
         return this.GetSecurityProvider(securityRuleExpander.Expand(securityRule));
     }
 
-    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.CompositeSecurityRule securityRule)
-    {
-        return securityRule.Children.Select(this.GetSecurityProvider).Or();
-    }
+    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.CompositeSecurityRule securityRule);
 
     protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule);
 }

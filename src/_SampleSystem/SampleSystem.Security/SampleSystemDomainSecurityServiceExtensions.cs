@@ -32,6 +32,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
             rb =>
 
                 rb.AddMetadata<SampleSystemEmployeeDomainSecurityServiceMetadata>()
+                  .AddMetadata<SampleSystemEmployeeCellPhoneDomainSecurityServiceMetadata>()
 
                   .Add(SampleSystemSecurityOperation.BusinessUnitView,
                        SampleSystemSecurityOperation.BusinessUnitEdit,
@@ -134,8 +135,6 @@ public static class SampleSystemDomainSecurityServiceExtensions
                   .Add<EmployeePhoto>(
                       b => b.SetView(SampleSystemSecurityOperation.EmployeeView)
                             .SetPath(SecurityPath<EmployeePhoto>.Create(employeePhoto => employeePhoto.Employee.CoreBusinessUnit)))
-
-                  .Add<EmployeeCellPhone>(b => b.SetDependency(v => v.Employee))
 
                   .Add<ManagementUnitFluentMapping>(
                       b => b.SetUntypedDependency<ManagementUnit>())

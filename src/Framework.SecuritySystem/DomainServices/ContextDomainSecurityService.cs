@@ -35,4 +35,9 @@ public class ContextDomainSecurityService<TDomainObject>(
     {
         return this.Create(securityPath, securityRule);
     }
+
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.CompositeSecurityRule securityRule)
+    {
+        return this.Create(securityPath, securityRule);
+    }
 }

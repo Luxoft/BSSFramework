@@ -10,18 +10,13 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
 {
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
     {
-        if (securityRuleExpander.TryExpand<TDomainObject>(securityRule) is { } customSecurityRule)
-        {
-            return this.GetSecurityProvider(customSecurityRule);
-        }
-        else
-        {
-            var originalSecurityProvider = originalDomainSecurityService.GetSecurityProvider(securityRule);
+        var actualSecurityRule = securityRuleExpander.TryExpand<TDomainObject>(securityRule) ?? securityRule;
 
-            return functorList.Aggregate(
-                originalSecurityProvider,
-                (provider, functor) => functor.OverrideSecurityProvider(provider, securityRule));
-        }
+        var originalSecurityProvider = originalDomainSecurityService.GetSecurityProvider(actualSecurityRule);
+
+        return functorList.Aggregate(
+            originalSecurityProvider,
+            (provider, functor) => functor.OverrideSecurityProvider(provider, securityRule));
     }
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.OperationSecurityRule securityRule)

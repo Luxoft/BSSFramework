@@ -47,6 +47,7 @@ public static class GeneratorConfigurationExtensions
         {
             SecurityOperation securityOperation => securityOperation,
             SecurityRole securityRole => securityRole,
+            SecurityRule.SpecialSecurityRule securityRule => securityRule,
             _ => null
         };
     }

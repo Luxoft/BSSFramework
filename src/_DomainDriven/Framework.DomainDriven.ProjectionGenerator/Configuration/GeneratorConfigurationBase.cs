@@ -86,12 +86,9 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         }
 
         {
-            foreach (var securityRuleType in this.Environment.SecurityRuleTypeList)
+            foreach (var securityAttribute in this.Environment.ExtendedMetadata.GetType(domainType).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
             {
-                foreach (var securityAttribute in this.Environment.ExtendedMetadata.GetType(domainType).GetSecurityAttributes(securityRuleType))
-                {
-                    yield return securityAttribute;
-                }
+                yield return securityAttribute;
             }
         }
 
@@ -118,12 +115,9 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        foreach (var securityRuleType in this.Environment.SecurityRuleTypeList)
+        foreach (var securityAttribute in this.Environment.ExtendedMetadata.GetProperty(property).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
         {
-            foreach (var securityAttribute in this.Environment.ExtendedMetadata.GetProperty(property).GetSecurityAttributes(securityRuleType))
-            {
-                yield return securityAttribute;
-            }
+            yield return securityAttribute;
         }
 
         if (property.GetCustomAttribute<CustomSerializationAttribute>(attr => attr.Role.HasFlag(DTORole.Client)) is var customSerializationAttr && customSerializationAttr != null)

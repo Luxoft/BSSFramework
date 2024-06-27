@@ -9,13 +9,14 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Projection;
 using Framework.Security;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ProjectionGenerator;
 
 internal static class CodeDomExtensions
 {
-    public static IEnumerable<CodeAttributeDeclaration> GetSecurityAttributes(this ICustomAttributeProvider source, Type securityOperationType)
+    public static IEnumerable<CodeAttributeDeclaration> GetSecurityAttributes(this ICustomAttributeProvider source, IEnumerable<Type> securityRuleTypeList)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -23,15 +24,29 @@ internal static class CodeDomExtensions
 
         if (viewAttr != null)
         {
+            var securityRuleType = securityRuleTypeList.First(t =>
+                                                              {
+
+                                                                  var values =
+                                                                      new[]
+                                                                      {
+                                                                          t.GetStaticPropertyValueList<SecurityOperation>().Select(v => (SecurityRule)v),
+                                                                          t.GetStaticPropertyValueList<SecurityRole>().Select(v => (SecurityRule)v),
+                                                                          t.GetStaticPropertyValueList<SecurityRule>()
+                                                                      }.SelectMany();
+
+                                                                  return values.Contains(viewAttr.SecurityRule);
+                                                              });
+
             yield return viewAttr.GetType().ToTypeReference().ToAttributeDeclaration(
 
-                viewAttr.GetViewSecurityAttributesArguments(securityOperationType).ToArray());
+                viewAttr.GetViewSecurityAttributesArguments(securityRuleType).ToArray());
         }
     }
 
-    private static IEnumerable<CodeAttributeArgument> GetViewSecurityAttributesArguments(this ViewDomainObjectAttribute viewAttr, Type securityOperationType)
+    private static IEnumerable<CodeAttributeArgument> GetViewSecurityAttributesArguments(this ViewDomainObjectAttribute viewAttr, Type securityRuleType)
     {
-        yield return new CodeAttributeArgument { Value = securityOperationType.ToTypeOfExpression() };
+        yield return new CodeAttributeArgument { Value = securityRuleType.ToTypeOfExpression() };
 
         foreach (var operation in viewAttr.AllRules)
         {

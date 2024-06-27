@@ -30,7 +30,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
     }
 
 
-    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SampleSystemSecurityOperation) };
+    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SampleSystemSecurityOperation), typeof(SecurityRule) };
 
     public override Type OperationContextType { get; } = typeof(SampleSystemOperationContext);
 

@@ -747,7 +747,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "View")]
+        [Framework.Security.ViewDomainObjectAttribute(typeof(Framework.SecuritySystem.SecurityRule), "View")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Persistent.Mapping.MappingAttribute(ColumnName="login")]
         [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]

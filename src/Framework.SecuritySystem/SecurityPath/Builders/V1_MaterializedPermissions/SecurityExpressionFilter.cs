@@ -35,9 +35,7 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
             () => FuncHelper.Create(
                 (TDomainObject domainObject) =>
                 {
-                    var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityRule.SafeExpandType);
-
-                    var filter = baseFilter.OverrideInput((IPrincipal<TIdent> principal) => principal.Permissions);
+                    var filter = builder.GetAccessorsFilter(domainObject, securityRule.SafeExpandType);
 
                     return builder.Factory.AuthorizationSystem.GetNonContextAccessors(securityRule, filter);
                 }));

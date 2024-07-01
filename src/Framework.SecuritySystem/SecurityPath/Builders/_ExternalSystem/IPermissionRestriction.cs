@@ -2,7 +2,7 @@
 
 public interface IPermissionRestriction<out TIdent>
 {
-    ISecurityContextType<TIdent> SecurityContextType { get; }
+    TIdent SecurityContextTypeId { get; }
 
     TIdent SecurityContextId { get; }
 }

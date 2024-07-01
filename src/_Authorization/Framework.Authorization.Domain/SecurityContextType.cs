@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven.Serialization;
-using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.Domain;
 
@@ -12,7 +11,7 @@ namespace Framework.Authorization.Domain;
 /// <seealso cref="PermissionRestriction"/>
 /// Типы, в контексте которых выдаются права пользователю, записываются вручную на уровне SQL в базу конкретной системы
 /// </remarks>
-public class SecurityContextType : BaseDirectory, ISecurityContextType<Guid>
+public class SecurityContextType : BaseDirectory
 {
     /// <summary>
     /// Вычисляемое название доменного типа

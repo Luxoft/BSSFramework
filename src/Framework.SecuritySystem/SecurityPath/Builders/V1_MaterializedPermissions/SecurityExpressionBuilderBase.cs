@@ -40,15 +40,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
 
         return permissions.BuildOr(this.GetSecurityFilterExpression);
     }
-
-    public Expression<Func<IEnumerable<IPermission<TIdent>>, bool>> GetAccessorsFilterMany(
-        TDomainObject domainObject,
-        HierarchicalExpandType expandType)
-    {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
-        return this.GetAccessorsFilter(domainObject, expandType).ToEnumerableAny();
-    }
 }
 
 public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath>
@@ -75,12 +66,13 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
         }
     }
 
-    public abstract class SecurityByIdentsExpressionBuilderBase<TSecurityContext, TInnerPath> : SecurityPathExpressionBuilderBase<TInnerPath>
-            where TSecurityContext : class, ISecurityContext, IIdentityObject<TIdent>
-            where TInnerPath : SecurityPath<TDomainObject>
+    public abstract class
+        SecurityByIdentsExpressionBuilderBase<TSecurityContext, TInnerPath> : SecurityPathExpressionBuilderBase<TInnerPath>
+        where TSecurityContext : class, ISecurityContext, IIdentityObject<TIdent>
+        where TInnerPath : SecurityPath<TDomainObject>
     {
         protected SecurityByIdentsExpressionBuilderBase(SecurityExpressionBuilderFactory<TIdent> factory, TInnerPath path)
-                : base(factory, path)
+            : base(factory, path)
         {
 
         }
@@ -90,7 +82,8 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
 
 
-        public sealed override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission)
+        public sealed override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(
+            Dictionary<Type, IEnumerable<TIdent>> permission)
         {
             if (permission.TryGetValue(typeof(TSecurityContext), out var securityIdents))
             {
@@ -104,15 +97,19 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
         protected abstract IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject);
 
-        public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType)
+        public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(
+            TDomainObject domainObject,
+            HierarchicalExpandType expandType)
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
             var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-            var securityContextTypeName = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Name;
+            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo<TIdent>(typeof(TSecurityContext)).Id;
 
-            var fullAccessFilter = ExpressionHelper.Create((IPermission<TIdent> permission) => permission.Restrictions.All(restriction => restriction.SecurityContextType.Name != securityContextTypeName));
+            var fullAccessFilter = ExpressionHelper.Create(
+                (IPermission<TIdent> permission) => !permission.Restrictions.Select(restriction => restriction.SecurityContextTypeId)
+                                                               .Contains(securityContextTypeId));
 
             if (securityObjects.Any())
             {
@@ -120,10 +117,13 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                                          .Create(typeof(TSecurityContext))
                                          .Expand(securityObjects.Select(securityObject => securityObject.Id), expandType.Reverse());
 
-                return fullAccessFilter.BuildOr(permission =>
+                return fullAccessFilter.BuildOr(
+                    permission =>
 
-                                                        permission.Restrictions.Any(restriction => restriction.SecurityContextType.Name == securityContextTypeName
-                                                                                       && securityIdents.Contains(restriction.SecurityContextId)));
+                        permission.Restrictions
+                                  .Where(restriction => securityIdents.Contains(restriction.SecurityContextId))
+                                  .Select(restriction => restriction.SecurityContextTypeId)
+                                  .Contains(securityContextTypeId));
             }
             else
             {

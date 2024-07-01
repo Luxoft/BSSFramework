@@ -40,13 +40,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
     public abstract Expression<Func<TDomainObject, IPermission<TIdent>, bool>> GetSecurityFilterExpression(HierarchicalExpandType expandType);
 
     public abstract Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType);
-
-    public Expression<Func<IEnumerable<IPermission<TIdent>>, bool>> GetAccessorsFilterMany(TDomainObject domainObject, HierarchicalExpandType expandType)
-    {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
-        return this.GetAccessorsFilter(domainObject, expandType).ToEnumerableAny();
-    }
 }
 
 public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath>
@@ -90,9 +83,11 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
             var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-            var securityContextTypeName = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Name;
+            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo<TIdent>(typeof(TSecurityContext)).Id;
 
-            var fullAccessFilter = ExpressionHelper.Create((IPermission<TIdent> permission) => permission.Restrictions.All(restriction => restriction.SecurityContextType.Name != securityContextTypeName));
+            var fullAccessFilter = ExpressionHelper.Create(
+                (IPermission<TIdent> permission) => !permission.Restrictions.Select(restriction => restriction.SecurityContextTypeId)
+                                                               .Contains(securityContextTypeId));
 
             if (securityObjects.Any())
             {
@@ -100,10 +95,13 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                                          .Create(typeof(TSecurityContext))
                                          .Expand(securityObjects.Select(securityObject => securityObject.Id), expandType.Reverse());
 
-                return fullAccessFilter.BuildOr(permission =>
+                return fullAccessFilter.BuildOr(
+                    permission =>
 
-                                                        permission.Restrictions.Any(restriction => restriction.SecurityContextType.Name == securityContextTypeName
-                                                                                       && securityIdents.Contains(restriction.SecurityContextId)));
+                        permission.Restrictions
+                                  .Where(restriction => securityIdents.Contains(restriction.SecurityContextId))
+                                  .Select(restriction => restriction.SecurityContextTypeId)
+                                  .Contains(securityContextTypeId));
             }
             else
             {
@@ -156,7 +154,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
             var getIdents = ExpressionHelper.Create((IPermission<TIdent> permission) =>
                                                             permission.Restrictions
-                                                                      .Where(item => eqIdentsExpr.Eval(item.SecurityContextType.Id, securityContextTypeId))
+                                                                      .Where(item => eqIdentsExpr.Eval(item.SecurityContextTypeId, securityContextTypeId))
                                                                       .Select(fi => fi.SecurityContextId))
                                             .ExpandConst()
                                             .InlineEval();
@@ -229,7 +227,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
             var getIdents = ExpressionHelper.Create((IPermission<TIdent> permission) =>
                                                             permission.Restrictions
-                                                                      .Where(item => eqIdentsExpr.Eval(item.SecurityContextType.Id, securityContextTypeId))
+                                                                      .Where(item => eqIdentsExpr.Eval(item.SecurityContextTypeId, securityContextTypeId))
                                                                       .Select(fi => fi.SecurityContextId))
                                             .ExpandConst()
                                             .InlineEval();

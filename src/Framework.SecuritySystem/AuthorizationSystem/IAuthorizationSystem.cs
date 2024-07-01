@@ -8,7 +8,7 @@ public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
 {
     IEnumerable<string> GetNonContextAccessors(
         SecurityRule.DomainObjectSecurityRule securityRule,
-        Expression<Func<IPrincipal<TIdent>, bool>> principalFilter);
+        Expression<Func<IPermission<TIdent>, bool>> permissionFilter);
 
     List<Dictionary<Type, IEnumerable<TIdent>>> GetPermissions(
         SecurityRule.DomainObjectSecurityRule securityRule,

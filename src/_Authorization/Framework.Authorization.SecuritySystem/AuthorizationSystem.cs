@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem.PermissionOptimization;
@@ -15,93 +16,64 @@ using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class AuthorizationSystem : IAuthorizationSystem<Guid>
+public class AuthorizationSystem(
+    IAvailablePermissionSource availablePermissionSource,
+    IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
+    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+    IRealTypeResolver realTypeResolver,
+    IUserAuthenticationService userAuthenticationService,
+    IOperationAccessorFactory operationAccessorFactory,
+    [FromKeyedServices(nameof(SecurityRule.Disabled))]
+    IRepository<Permission> permissionRepository,
+    TimeProvider timeProvider,
+    ISecurityRolesIdentsResolver securityRolesIdentsResolver,
+    ISecurityContextInfoService securityContextInfoService)
+    : IAuthorizationSystem<Guid>
 {
-    private readonly IAvailablePermissionSource availablePermissionSource;
+    public string CurrentPrincipalName { get; } = userAuthenticationService.GetUserName();
 
-    private readonly IRuntimePermissionOptimizationService runtimePermissionOptimizationService;
-
-    private readonly IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory;
-
-    private readonly IRealTypeResolver realTypeResolver;
-
-    private readonly IOperationAccessorFactory operationAccessorFactory;
-
-    private readonly IRepository<Principal> principalRepository;
-
-    private readonly TimeProvider timeProvider;
-
-    private readonly ISecurityRolesIdentsResolver securityRolesIdentsResolver;
-
-    public AuthorizationSystem(
-        IAvailablePermissionSource availablePermissionSource,
-        IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
-        IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-        IRealTypeResolver realTypeResolver,
-        IUserAuthenticationService userAuthenticationService,
-        IOperationAccessorFactory operationAccessorFactory,
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
-        TimeProvider timeProvider,
-        ISecurityRolesIdentsResolver securityRolesIdentsResolver)
+    private IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionExprFilter, AvailablePermissionFilter availablePermissionFilter)
     {
-        this.availablePermissionSource = availablePermissionSource;
-        this.runtimePermissionOptimizationService = runtimePermissionOptimizationService;
-        this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
-        this.realTypeResolver = realTypeResolver;
-        this.operationAccessorFactory = operationAccessorFactory;
-        this.principalRepository = principalRepository;
-        this.timeProvider = timeProvider;
-        this.securityRolesIdentsResolver = securityRolesIdentsResolver;
+        if (permissionExprFilter == null) throw new ArgumentNullException(nameof(permissionExprFilter));
+        if (availablePermissionFilter == null) throw new ArgumentNullException(nameof(availablePermissionFilter));
 
-        this.CurrentPrincipalName = userAuthenticationService.GetUserName();
-    }
-
-    public string CurrentPrincipalName { get; }
-
-    private IEnumerable<string> GetAccessors(Expression<Func<Principal, bool>> principalFilter, AvailablePermissionFilter permissionFilter)
-    {
-        if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
-        if (permissionFilter == null) throw new ArgumentNullException(nameof(permissionFilter));
-
-        var extraPrincipalFilter =
-            principalFilter.UpdateBody(
-                new OverridePropertyInfoVisitor<Principal, IEnumerable<Permission>>(
-                    principal => principal.Permissions, permissionFilter.ToFilterExpression().ToCollectionFilter()));
-
-        var principals = this.principalRepository.GetQueryable().Where(extraPrincipalFilter).ToList();
-
-        return principals.Select(principal => principal.Name);
+        return permissionRepository.GetQueryable()
+                                   .Where(availablePermissionFilter.ToFilterExpression())
+                                   .Where(permissionExprFilter)
+                                   .Select(permission => permission.Principal.Name).ToList();
     }
 
     public IEnumerable<string> GetNonContextAccessors(
-        SecurityRule.DomainObjectSecurityRule securityRule, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
+        SecurityRule.DomainObjectSecurityRule securityRule, Expression<Func<IPermission<Guid>, bool>> permissionFilter)
     {
-        if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
+        if (permissionFilter == null) throw new ArgumentNullException(nameof(permissionFilter));
 
-        var securityRoleIdents = this.securityRolesIdentsResolver.Resolve(securityRule);
+        var securityRoleIdents = securityRolesIdentsResolver.Resolve(securityRule);
+
+        var visitedFilter = (Expression<Func<Permission, bool>>)AuthVisitor.Visit(permissionFilter);
 
         return this.GetAccessors(
-            (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
-            new AvailablePermissionFilter(this.timeProvider.GetToday()) { SecurityRoleIdents = securityRoleIdents.ToList() });
+            visitedFilter,
+            new AvailablePermissionFilter(timeProvider.GetToday()) { SecurityRoleIdents = securityRoleIdents.ToList() });
     }
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
         SecurityRule.DomainObjectSecurityRule securityRule,
         IEnumerable<Type> securityTypes)
     {
-        var permissions = this.availablePermissionSource.GetAvailablePermissionsQueryable(true, securityRule)
+        var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(true, securityRule)
                               .FetchMany(q => q.Restrictions)
                               .ThenFetch(q => q.SecurityContextType)
                               .ToList();
         return permissions
-               .Select(permission => permission.ToDictionary(this.realTypeResolver, securityTypes))
-               .Pipe(this.runtimePermissionOptimizationService.Optimize)
+               .Select(permission => permission.ToDictionary(realTypeResolver, securityContextInfoService, securityTypes))
+               .Pipe(runtimePermissionOptimizationService.Optimize)
                .ToList(permission => this.TryExpandPermission(permission, securityRule.SafeExpandType));
     }
 
     public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityRule: securityRule);
+        return availablePermissionSource.GetAvailablePermissionsQueryable(securityRule: securityRule);
     }
 
     private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(
@@ -112,19 +84,17 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
         return permission.ToDictionary(
             pair => pair.Key,
-            pair => this.hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
+            pair => hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
     }
 
-    public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule) => this.operationAccessorFactory.Create(true).HasAccess(securityRule);
+    public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule) => operationAccessorFactory.Create(true).HasAccess(securityRule);
 
-    public void CheckAccess(SecurityRule.DomainObjectSecurityRule securityRule) => this.operationAccessorFactory.Create(true).CheckAccess(securityRule);
+    public void CheckAccess(SecurityRule.DomainObjectSecurityRule securityRule) => operationAccessorFactory.Create(true).CheckAccess(securityRule);
 
     private static readonly ExpressionVisitor AuthVisitor = new OverrideParameterTypeVisitor(
         new Dictionary<Type, Type>
         {
-            { typeof(IPrincipal<Guid>), typeof(Principal) },
             { typeof(IPermission<Guid>), typeof(Permission) },
             { typeof(IPermissionRestriction<Guid>), typeof(PermissionRestriction) },
-            { typeof(ISecurityContextType<Guid>), typeof(SecurityContextType) },
         });
 }

@@ -19,7 +19,7 @@ public class ExampleAuthorizationSystem(
 
     public IEnumerable<string> GetNonContextAccessors(
         SecurityRule.DomainObjectSecurityRule securityRule,
-        Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();
+        Expression<Func<IPermission<Guid>, bool>> permissionFilter) => throw new NotImplementedException();
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
         SecurityRule.DomainObjectSecurityRule securityRule,

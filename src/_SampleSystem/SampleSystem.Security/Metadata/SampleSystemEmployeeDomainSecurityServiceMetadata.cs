@@ -10,8 +10,7 @@ public class SampleSystemEmployeeDomainSecurityServiceMetadata
     : IDomainSecurityServiceMetadata<Employee>
 {
     public static void Setup(IDomainSecurityServiceBuilder<Employee> builder) =>
-        builder.SetView(
-                   SampleSystemSecurityOperation.EmployeeView.ToSecurityRule().Or<CurrentEmployeeSecurityProvider<Employee>>())
+        builder.SetView(SampleSystemSecurityOperation.EmployeeView.ToSecurityRule().Or<CurrentEmployeeSecurityProvider<Employee>>())
                .SetEdit(SampleSystemSecurityOperation.EmployeeEdit)
                .SetPath(
                    SecurityPath<Employee>.Create(employee => employee).And(employee => employee.CoreBusinessUnit)

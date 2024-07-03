@@ -39,11 +39,6 @@ public abstract record SecurityRule
         public override string ToString() => this.Name;
     }
 
-    public record DisabledSecurityRule : SecurityRule
-    {
-        public override string ToString() => nameof(SecurityRule.Disabled);
-    }
-
     public abstract record DomainObjectSecurityRule : SecurityRule
     {
         /// <summary>

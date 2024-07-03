@@ -10,7 +10,11 @@ namespace Framework.Authorization.Environment
         ISecurityPathProviderFactory securityPathProviderFactory,
         SecurityPath<Principal> securityPath,
         IActualPrincipalSource actualPrincipalSource)
-        : ContextDomainSecurityService<Principal>(disabledSecurityProvider, securityRuleExpander, securityPathProviderFactory, securityPath)
+        : ContextDomainSecurityService<Principal>(
+            disabledSecurityProvider,
+            securityRuleExpander,
+            securityPathProviderFactory,
+            securityPath)
     {
         protected override ISecurityProvider<Principal> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
         {

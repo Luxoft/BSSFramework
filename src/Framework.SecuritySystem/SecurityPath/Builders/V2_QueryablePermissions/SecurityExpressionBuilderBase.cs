@@ -8,11 +8,8 @@ using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Rules.Builders.QueryablePermissions;
 
-public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
-        : ISecurityExpressionBuilder<TDomainObject>
-
-        where TDomainObject : class, IIdentityObject<TIdent>
-
+public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>: ISecurityExpressionBuilder<TDomainObject>
+    where TDomainObject : class, IIdentityObject<TIdent>
 {
     internal readonly SecurityExpressionBuilderFactory<TIdent> Factory;
 
@@ -21,13 +18,13 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.DomainObjectSecurityRule securityRule, IEnumerable<Type> securityTypes)
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.ExpandableSecurityRule securityRule, IEnumerable<Type> securityTypes)
     {
         return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule);
     }
 
 
-    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(SecurityRule.DomainObjectSecurityRule securityRule)
+    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(SecurityRule.ExpandableSecurityRule securityRule)
     {
         var filterExpression = this.GetSecurityFilterExpression(securityRule.SafeExpandType).ExpandConst().InlineEval();
 

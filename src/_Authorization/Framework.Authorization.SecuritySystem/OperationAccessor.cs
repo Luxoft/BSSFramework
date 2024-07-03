@@ -20,12 +20,12 @@ public class OperationAccessor : IOperationAccessor
         this.withRunAs = withRunAs;
     }
 
-    public bool HasAccess(SecurityRule.DomainObjectSecurityRule securityRule)
+    public bool HasAccess(SecurityRule.ExpandableSecurityRule securityRule)
     {
         return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityRule: securityRule, withRunAs: this.withRunAs).Any();
     }
 
-    public void CheckAccess(SecurityRule.DomainObjectSecurityRule securityRule)
+    public void CheckAccess(SecurityRule.ExpandableSecurityRule securityRule)
     {
         if (!this.HasAccess(securityRule))
         {

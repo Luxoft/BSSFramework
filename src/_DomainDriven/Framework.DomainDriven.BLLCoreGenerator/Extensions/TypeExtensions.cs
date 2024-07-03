@@ -62,6 +62,6 @@ public static class TypeExtensions
 
         return interfaceType.GetGenericArguments().ZipStrong(
                                                              type.GetInterfaceImplementationArguments(interfaceType),
-                                                             (genericArg, implArg) => genericArg.ToKeyValuePair(implArg)).ToDictionary();
+                                                             (genericArg, implArg) => (genericArg, implArg)).ToDictionary();
     }
 }

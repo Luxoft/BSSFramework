@@ -7,7 +7,7 @@ public class SecurityRolesIdentsResolver(
     ISecurityRoleSource securityRoleSource)
     : ISecurityRolesIdentsResolver
 {
-    public IEnumerable<Guid> Resolve(SecurityRule.DomainObjectSecurityRule securityRule)
+    public IEnumerable<Guid> Resolve(SecurityRule.ExpandableSecurityRule securityRule)
     {
         return securityRuleExpander.FullExpand(securityRule)
                                    .SelectMany(rule => rule.SecurityRoles)

@@ -91,10 +91,6 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
         return false;
     }
 
-    /// <inheritdoc />
-    public abstract bool AllowedExpandTreeParents<TDomainObject>()
-            where TDomainObject : TPersistentDomainObjectBase;
-
     IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>> IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>>.Logics => this.BaseLogics;
 }
 

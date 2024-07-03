@@ -1,17 +1,14 @@
 ﻿#nullable enable
 
-using Framework.HierarchicalExpand;
-
 namespace Framework.SecuritySystem;
 
 public class SecurityRuleExpander(
     SecurityModeExpander securityModeExpander,
     SecurityOperationExpander securityOperationExpander,
-    SecurityRoleExpander securityRoleExpander,
-    ISecurityRoleSource securityRoleSource)
+    SecurityRoleExpander securityRoleExpander)
     : ISecurityRuleExpander
 {
-    public SecurityRule? TryExpand<TDomainObject>(SecurityRule.SpecialSecurityRule securityRule)
+    public SecurityRule.DomainObjectSecurityRule? TryExpand<TDomainObject>(SecurityRule.SpecialSecurityRule securityRule)
     {
         return securityModeExpander.TryExpand<TDomainObject>(securityRule);
     }
@@ -26,7 +23,7 @@ public class SecurityRuleExpander(
         return securityRoleExpander.Expand(securityRule);
     }
 
-    public IEnumerable<SecurityRule.ExpandedRolesSecurityRule> FullExpand(SecurityRule.DomainObjectSecurityRule securityRule)
+    public IEnumerable<SecurityRule.ExpandedRolesSecurityRule> FullExpand(SecurityRule.ExpandableSecurityRule securityRule)
     {
         switch (securityRule)
         {
@@ -39,30 +36,8 @@ public class SecurityRuleExpander(
             case SecurityRule.ExpandedRolesSecurityRule expandedRolesSecurityRule:
                 return [expandedRolesSecurityRule];
 
-            case SecurityRule.CompositeSecurityRule compositeSecurityRule:
-                return compositeSecurityRule.Children.SelectMany(this.FullExpand).Distinct();
-
             default:
                 throw new ArgumentOutOfRangeException(nameof(securityRule));
-        }
-    }
-
-    public HierarchicalExpandType? TryGetCustomExpandType<TDomainObject>(SecurityRule.SpecialSecurityRule securityRule)
-    {
-        switch (this.TryExpand<TDomainObject>(securityRule))
-        {
-            case SecurityRule.OperationSecurityRule operationSecurityRule:
-                return operationSecurityRule.CustomExpandType ?? securityOperationExpander.Expand(operationSecurityRule).CustomExpandType;
-
-            case SecurityRule.NonExpandedRolesSecurityRule { SecurityRoles: [var securityRole] } nonExpandedRolesSecurityRule:
-                return nonExpandedRolesSecurityRule.CustomExpandType
-                       ?? securityRoleSource.GetFullRole(securityRole).Information.CustomExpandType;
-
-            case SecurityRule.DomainObjectSecurityRule domainObjectSecurityRule:
-                return domainObjectSecurityRule.CustomExpandType;
-
-            default:
-                return null;
         }
     }
 }

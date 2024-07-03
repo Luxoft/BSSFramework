@@ -14,7 +14,7 @@ public class SecurityExpressionBuilder<TDomainObject> : ISecurityExpressionBuild
         this.queryBuilder = queryBuilder ?? throw new ArgumentNullException(nameof(queryBuilder));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.DomainObjectSecurityRule securityRule, IEnumerable<Type> securityTypes)
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.ExpandableSecurityRule securityRule, IEnumerable<Type> securityTypes)
     {
         var cachedSecurityTypes = securityTypes.ToList();
 

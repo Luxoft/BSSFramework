@@ -20,4 +20,24 @@ public static class SecurityRuleExtensions
     {
         return new[] { securityRole }.ToSecurityRule(customExpandType);
     }
+
+    public static SecurityRule.OrSecurityRule Or(this SecurityRule.DomainObjectSecurityRule securityRule, SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+    {
+        return new SecurityRule.OrSecurityRule(securityRule, otherSecurityRule);
+    }
+
+    public static SecurityRule.OrSecurityRule Or<TSecurityProvider>(this SecurityRule.DomainObjectSecurityRule securityRule)
+    {
+        return securityRule.Or(new SecurityRule.CustomProviderSecurityRule(typeof(TSecurityProvider)));
+    }
+
+    public static SecurityRule.AndSecurityRule And(this SecurityRule.DomainObjectSecurityRule securityRule, SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+    {
+        return new SecurityRule.AndSecurityRule(securityRule, otherSecurityRule);
+    }
+
+    public static SecurityRule.AndSecurityRule And<TSecurityProvider>(this SecurityRule.DomainObjectSecurityRule securityRule)
+    {
+        return securityRule.And(new SecurityRule.CustomProviderSecurityRule(typeof(TSecurityProvider)));
+    }
 }

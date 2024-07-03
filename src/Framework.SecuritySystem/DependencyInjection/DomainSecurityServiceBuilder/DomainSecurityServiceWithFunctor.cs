@@ -5,12 +5,12 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
     ISecurityRuleExpander securityRuleExpander,
     TOriginalDomainSecurityService originalDomainSecurityService,
     IEnumerable<IOverrideSecurityProviderFunctor<TDomainObject>> functorList)
-    : DomainSecurityService<TDomainObject>(disabledSecurityProvider, securityRuleExpander)
+    : DomainSecurityService<TDomainObject>( disabledSecurityProvider, securityRuleExpander)
     where TOriginalDomainSecurityService : IDomainSecurityService<TDomainObject>
 {
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
     {
-        var actualSecurityRule = securityRuleExpander.TryExpand<TDomainObject>(securityRule) ?? securityRule;
+        var actualSecurityRule = (SecurityRule)securityRuleExpander.TryExpand<TDomainObject>(securityRule) ?? securityRule;
 
         var originalSecurityProvider = originalDomainSecurityService.GetSecurityProvider(actualSecurityRule);
 
@@ -46,12 +46,8 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
             (provider, functor) => functor.OverrideSecurityProvider(provider, securityRule));
     }
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.CompositeSecurityRule securityRule)
+    protected override ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        var originalSecurityProvider = originalDomainSecurityService.GetSecurityProvider(securityRule);
-
-        return functorList.Aggregate(
-            originalSecurityProvider,
-            (provider, functor) => functor.OverrideSecurityProvider(provider, securityRule));
+        return originalDomainSecurityService.GetSecurityProvider(securityRule);
     }
 }

@@ -101,7 +101,7 @@ public static class ServiceCollectionExtensions
                                         {
                                             DomainType = type,
                                             SourceType = projectionAttr.SourceType,
-                                            CustomViewSecurityRule = type.GetViewSecurityRule()
+                                            CustomViewSecurityRule = (SecurityRule.DomainObjectSecurityRule)type.GetViewSecurityRule()
                                         };
 
         foreach (var pair in projectionsRequest)

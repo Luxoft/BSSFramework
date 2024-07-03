@@ -1,4 +1,6 @@
-﻿namespace Framework.SecuritySystem;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Framework.SecuritySystem;
 
 public abstract class DomainSecurityService<TDomainObject>(
     ISecurityProvider<TDomainObject> disabledSecurityProvider,
@@ -21,8 +23,8 @@ public abstract class DomainSecurityService<TDomainObject>(
             case SecurityRule.ExpandedRolesSecurityRule expandedRolesSecurityRule:
                 return this.CreateSecurityProvider(expandedRolesSecurityRule);
 
-            case SecurityRule.CompositeSecurityRule compositeSecurityRule:
-                return this.CreateSecurityProvider(compositeSecurityRule);
+            case SecurityRule.DomainObjectSecurityRule domainObjectSecurityRule:
+                return this.CreateFinalSecurityProvider(domainObjectSecurityRule);
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(securityRule));
@@ -46,7 +48,10 @@ public abstract class DomainSecurityService<TDomainObject>(
         return this.GetSecurityProvider(securityRuleExpander.Expand(securityRule));
     }
 
-    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.CompositeSecurityRule securityRule);
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule)
+    {
+        return this.CreateFinalSecurityProvider(securityRule);
+    }
 
-    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule);
+    protected abstract ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule);
 }

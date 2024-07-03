@@ -4,14 +4,10 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.Security.Services;
 
-public class SampleSystemTestCustomContextSecurityObjSecurityService : DomainSecurityServiceBase<TestCustomContextSecurityObj>
+public class SampleSystemTestCustomContextSecurityObjSecurityService(
+    ISecurityProvider<TestCustomContextSecurityObj> disabledSecurityProvider)
+    : DomainSecurityServiceBase<TestCustomContextSecurityObj>(disabledSecurityProvider)
 {
-    public SampleSystemTestCustomContextSecurityObjSecurityService(
-        ISecurityProvider<TestCustomContextSecurityObj> disabledSecurityProvider)
-        : base(disabledSecurityProvider)
-    {
-    }
-
     protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityRule securityRule)
     {
         return new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();

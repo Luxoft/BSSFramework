@@ -7,11 +7,8 @@ using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
-public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
-    : ISecurityExpressionBuilder<TDomainObject>
-
+public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent> : ISecurityExpressionBuilder<TDomainObject>
     where TDomainObject : class, IIdentityObject<TIdent>
-
 {
     internal readonly SecurityExpressionBuilderFactory<TIdent> Factory;
 
@@ -21,7 +18,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.DomainObjectSecurityRule securityRule, IEnumerable<Type> securityTypes)
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.ExpandableSecurityRule securityRule, IEnumerable<Type> securityTypes)
     {
         return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule, securityTypes);
     }

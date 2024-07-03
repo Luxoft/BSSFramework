@@ -1,13 +1,12 @@
 ﻿#nullable enable
-using Framework.Core;
 
 namespace Framework.SecuritySystem;
 
 public class SecurityModeExpander
 {
-    private readonly IReadOnlyDictionary<Type, SecurityRule> viewDict;
+    private readonly IReadOnlyDictionary<Type, SecurityRule.DomainObjectSecurityRule> viewDict;
 
-    private readonly IReadOnlyDictionary<Type, SecurityRule> editDict;
+    private readonly IReadOnlyDictionary<Type, SecurityRule.DomainObjectSecurityRule> editDict;
 
     public SecurityModeExpander(
         IEnumerable<DomainObjectSecurityModeInfo> infos)
@@ -18,7 +17,7 @@ public class SecurityModeExpander
         this.editDict = GetDict(cached, info => info.EditRule);
     }
 
-    public SecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
+    public SecurityRule.DomainObjectSecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
     {
         if (securityRule == SecurityRule.View)
         {
@@ -32,7 +31,9 @@ public class SecurityModeExpander
         return null;
     }
 
-    private static Dictionary<Type, SecurityRule> GetDict(IEnumerable<DomainObjectSecurityModeInfo> infos, Func<DomainObjectSecurityModeInfo, SecurityRule?> selector)
+    private static Dictionary<Type, SecurityRule.DomainObjectSecurityRule> GetDict(
+        IEnumerable<DomainObjectSecurityModeInfo> infos,
+        Func<DomainObjectSecurityModeInfo, SecurityRule.DomainObjectSecurityRule?> selector)
     {
         var request = from info in infos
 
@@ -40,7 +41,7 @@ public class SecurityModeExpander
 
                       where securityRule != null
 
-                      select info.DomainType.ToKeyValuePair(securityRule);
+                      select (info.DomainType, securityRule);
 
         return request.ToDictionary();
     }

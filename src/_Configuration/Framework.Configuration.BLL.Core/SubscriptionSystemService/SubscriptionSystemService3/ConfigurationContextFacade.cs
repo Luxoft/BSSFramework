@@ -5,7 +5,6 @@ using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.ExternalSystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

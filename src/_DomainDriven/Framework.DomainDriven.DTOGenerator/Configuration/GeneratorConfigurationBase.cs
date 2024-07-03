@@ -137,7 +137,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
                                 where mainPair != null
 
-                                select domainType.ToKeyValuePair(mainPair);
+                                select new KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>(domainType, mainPair);
 
 
         return mainResult.Concat(dependencyRequest);

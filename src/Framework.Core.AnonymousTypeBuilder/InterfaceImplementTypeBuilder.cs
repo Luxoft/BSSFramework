@@ -88,7 +88,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
 
                                                                                         if (method.ContainsGenericParameters)
                                                                                         {
-                                                                                            var genericMap = method.GetGenericArguments().ZipStrong(methodBuilder.DefineGenericParameters(method.GetGenericArguments().ToArray(arg => arg.Name + "Impl")), (key, value) => key.ToKeyValuePair(value)).ToDictionary();
+                                                                                            var genericMap = method.GetGenericArguments().ZipStrong(methodBuilder.DefineGenericParameters(method.GetGenericArguments().ToArray(arg => arg.Name + "Impl")), (key, value) => (key, value)).ToDictionary();
 
                                                                                             Func<Type, Type> fixGenericType = null;
                                                                                             fixGenericType = t =>

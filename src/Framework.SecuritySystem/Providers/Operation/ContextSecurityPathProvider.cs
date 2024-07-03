@@ -20,7 +20,7 @@ namespace Framework.SecuritySystem.Providers.Operation
 
         public ContextSecurityPathProvider(
             SecurityPath<TDomainObject> securityPath,
-            SecurityRule.DomainObjectSecurityRule securityRule,
+            SecurityRule.ExpandableSecurityRule securityRule,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
         {
             if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));

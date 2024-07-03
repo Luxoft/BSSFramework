@@ -5,14 +5,12 @@ using Framework.SecuritySystem;
 namespace Framework.Authorization.Environment
 {
     public class AuthorizationPrincipalSecurityService(
-        IServiceProvider serviceProvider,
         ISecurityProvider<Principal> disabledSecurityProvider,
         ISecurityRuleExpander securityRuleExpander,
         ISecurityPathProviderFactory securityPathProviderFactory,
         SecurityPath<Principal> securityPath,
         IActualPrincipalSource actualPrincipalSource)
         : ContextDomainSecurityService<Principal>(
-            serviceProvider,
             disabledSecurityProvider,
             securityRuleExpander,
             securityPathProviderFactory,

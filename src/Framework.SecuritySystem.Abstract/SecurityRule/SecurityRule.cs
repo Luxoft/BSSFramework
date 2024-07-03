@@ -14,7 +14,7 @@ public abstract record SecurityRule
     /// <summary>
     /// Специальная правило доступа для отключения безопасности
     /// </summary>
-    public static SpecialSecurityRule Disabled { get; } = new (nameof(Disabled));
+    public static DisabledSecurityRule Disabled { get; } = new ();
 
 
     public static implicit operator SecurityRule(SecurityOperation securityOperation)
@@ -32,8 +32,6 @@ public abstract record SecurityRule
         return securityRoles.ToSecurityRule();
     }
 
-    public record CustomProviderSecurityRule(Type SecurityProviderType) : SecurityRule;
-
     public record SpecialSecurityRule(string Name) : SecurityRule
     {
         public override string ToString() => this.Name;
@@ -41,14 +39,6 @@ public abstract record SecurityRule
 
     public abstract record DomainObjectSecurityRule : SecurityRule
     {
-        /// <summary>
-        /// Тип разворачивания деревьев (как правило для просмотра самого дерева выбирается HierarchicalExpandType.All)
-        /// </summary>
-        public HierarchicalExpandType? CustomExpandType { get; init; } = null;
-
-        public HierarchicalExpandType SafeExpandType => this.CustomExpandType ?? HierarchicalExpandType.Children;
-
-
         public static implicit operator DomainObjectSecurityRule(SecurityOperation securityOperation)
         {
             return securityOperation.ToSecurityRule();
@@ -60,7 +50,34 @@ public abstract record SecurityRule
         }
     }
 
-    public record OperationSecurityRule(SecurityOperation SecurityOperation) : DomainObjectSecurityRule
+    public record DisabledSecurityRule : DomainObjectSecurityRule
+    {
+        public override string ToString() => nameof(Disabled);
+    }
+
+    public record CustomProviderSecurityRule(Type SecurityProviderType) : DomainObjectSecurityRule;
+
+    public abstract record ExpandableSecurityRule : DomainObjectSecurityRule
+    {
+        public static implicit operator ExpandableSecurityRule(SecurityOperation securityOperation)
+        {
+            return securityOperation.ToSecurityRule();
+        }
+
+        public static implicit operator ExpandableSecurityRule(SecurityRole securityRole)
+        {
+            return securityRole.ToSecurityRule();
+        }
+
+        /// <summary>
+        /// Тип разворачивания деревьев (как правило для просмотра самого дерева выбирается HierarchicalExpandType.All)
+        /// </summary>
+        public HierarchicalExpandType? CustomExpandType { get; init; } = null;
+
+        public HierarchicalExpandType SafeExpandType => this.CustomExpandType ?? HierarchicalExpandType.Children;
+    }
+
+    public record OperationSecurityRule(SecurityOperation SecurityOperation) : ExpandableSecurityRule
     {
         public static implicit operator OperationSecurityRule(SecurityOperation securityOperation)
         {
@@ -74,7 +91,7 @@ public abstract record SecurityRule
     /// Список ролей ДО разворачиния дерева ролей вверх
     /// </summary>
     /// <param name="SecurityRoles">Список неразвёрнутых ролей</param>
-    public record NonExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : DomainObjectSecurityRule
+    public record NonExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : ExpandableSecurityRule
     {
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
@@ -85,21 +102,14 @@ public abstract record SecurityRule
     /// Список ролей ПОСЛЕ разворачиния дерева ролей вверх
     /// </summary>
     /// <param name="SecurityRoles">Список развёрнутых ролей</param>
-    public record ExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : DomainObjectSecurityRule
+    public record ExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : ExpandableSecurityRule
     {
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
                                                  : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";
     }
 
-    /// <summary>
-    /// Композитное правило
-    /// </summary>
-    /// <param name="Children"></param>
-    public record CompositeSecurityRule(DeepEqualsCollection<DomainObjectSecurityRule> Children) : DomainObjectSecurityRule
-    {
-        public override string ToString() => this.Children.Count == 1
-                                                 ? this.Children.Single().ToString()
-                                                 : $"[{this.Children.Join(", ")}]";
-    }
+    public record AndSecurityRule(DomainObjectSecurityRule Left, DomainObjectSecurityRule Right) : DomainObjectSecurityRule;
+
+    public record OrSecurityRule(DomainObjectSecurityRule Left, DomainObjectSecurityRule Right) : DomainObjectSecurityRule;
 }

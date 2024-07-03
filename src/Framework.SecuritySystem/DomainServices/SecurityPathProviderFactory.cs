@@ -2,9 +2,12 @@
 using Framework.SecuritySystem.Providers.Operation;
 using Framework.SecuritySystem.Rules.Builders;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.SecuritySystem;
 
 public class SecurityPathProviderFactory(
+    IServiceProvider serviceProvider,
     ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
     ISecurityRuleExpander securityRuleExpander,
     ISecurityRoleSource securityRoleSource,
@@ -12,10 +15,28 @@ public class SecurityPathProviderFactory(
 {
     public ISecurityProvider<TDomainObject> Create<TDomainObject>(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainObjectSecurityRule rootSecurityRule)
     {
-        return this.GetRegroupedRoles(rootSecurityRule).Select(g => this.Create(securityPath, g.SecurityRule, g.Restriction)).Or();
+        switch (rootSecurityRule)
+        {
+            case SecurityRule.ExpandableSecurityRule expandedRolesSecurityRule:
+                return this.GetRegroupedRoles(expandedRolesSecurityRule)
+                           .Select(g => this.Create(securityPath, g.SecurityRule, g.Restriction)).Or();
+
+            case SecurityRule.CustomProviderSecurityRule customProviderSecurityRule:
+                return (ISecurityProvider<TDomainObject>)serviceProvider.GetRequiredService(customProviderSecurityRule.SecurityProviderType);
+
+            case SecurityRule.OrSecurityRule orSecurityRule:
+                return this.Create(securityPath, orSecurityRule.Left).Or(this.Create(securityPath, orSecurityRule.Right));
+
+            case SecurityRule.AndSecurityRule andSecurityRule:
+                return this.Create(securityPath, andSecurityRule.Left).And(this.Create(securityPath, andSecurityRule.Right));
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(rootSecurityRule));
+
+        }
     }
 
-    private ISecurityProvider<TDomainObject> Create<TDomainObject>(SecurityPath<TDomainObject> securityPath, SecurityRule.ExpandedRolesSecurityRule securityRule, SecurityPathRestriction restriction)
+    private ISecurityProvider<TDomainObject> Create<TDomainObject>(SecurityPath<TDomainObject> securityPath, SecurityRule.ExpandableSecurityRule securityRule, SecurityPathRestriction restriction)
     {
         return new ContextSecurityPathProvider<TDomainObject>(
             securityPathRestrictionService.ApplyRestriction(securityPath, restriction),
@@ -23,7 +44,7 @@ public class SecurityPathProviderFactory(
             securityExpressionBuilderFactory);
     }
 
-    private IEnumerable<(SecurityRule.ExpandedRolesSecurityRule SecurityRule, SecurityPathRestriction Restriction)> GetRegroupedRoles(SecurityRule.DomainObjectSecurityRule rootSecurityRule)
+    private IEnumerable<(SecurityRule.ExpandedRolesSecurityRule SecurityRule, SecurityPathRestriction Restriction)> GetRegroupedRoles(SecurityRule.ExpandableSecurityRule rootSecurityRule)
     {
         return from expandedSecurityRule in securityRuleExpander.FullExpand(rootSecurityRule)
 

@@ -15,7 +15,7 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
 
     public SecurityExpressionFilter(
         SecurityExpressionBuilderBase<TDomainObject, TIdent> builder,
-        SecurityRule.DomainObjectSecurityRule securityRule,
+        SecurityRule.ExpandableSecurityRule securityRule,
         IEnumerable<Type> securityTypes)
     {
         if (builder == null) throw new ArgumentNullException(nameof(builder));

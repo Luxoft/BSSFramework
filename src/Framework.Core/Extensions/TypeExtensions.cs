@@ -30,7 +30,7 @@ public static class TypeExtensions
 
         var interfaceMap = type.GetInterfaceMap(interfaceType);
 
-        return interfaceMap.InterfaceMethods.ZipStrong(interfaceMap.TargetMethods, (m1, m2) => m1.ToKeyValuePair(m2)).ToDictionary();
+        return interfaceMap.InterfaceMethods.ZipStrong(interfaceMap.TargetMethods, (m1, m2) => (m1, m2)).ToDictionary();
     }
 
     public static IEnumerable<MemberInfo> GetMemberAccessors(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public)

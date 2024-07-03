@@ -3,7 +3,6 @@
 namespace Framework.SecuritySystem;
 
 public abstract class DomainSecurityService<TDomainObject>(
-    IServiceProvider serviceProvider,
     ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander)
     : DomainSecurityServiceBase<TDomainObject>(disabledSecurityProvider)
@@ -24,12 +23,8 @@ public abstract class DomainSecurityService<TDomainObject>(
             case SecurityRule.ExpandedRolesSecurityRule expandedRolesSecurityRule:
                 return this.CreateSecurityProvider(expandedRolesSecurityRule);
 
-            case SecurityRule.CompositeSecurityRule compositeSecurityRule:
-                return this.CreateSecurityProvider(compositeSecurityRule);
-
-            case SecurityRule.CustomProviderSecurityRule customProviderSecurityRule:
-                return (ISecurityProvider<TDomainObject>)serviceProvider.GetRequiredService(
-                    customProviderSecurityRule.SecurityProviderType);
+            case SecurityRule.DomainObjectSecurityRule domainObjectSecurityRule:
+                return this.CreateFinalSecurityProvider(domainObjectSecurityRule);
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(securityRule));
@@ -38,14 +33,9 @@ public abstract class DomainSecurityService<TDomainObject>(
 
     protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
     {
-        var actualSecurityRules = securityRuleExpander.TryExpand<TDomainObject>(securityRule);
-
-        if (!actualSecurityRules.Any())
-        {
-            throw new Exception($"{nameof(SecurityRule)} with mode '{securityRule}' not found for type '{typeof(TDomainObject).Name}'");
-        }
-
-        return actualSecurityRules.Select(this.GetSecurityProvider).Or();
+        return this.GetSecurityProvider(
+            securityRuleExpander.TryExpand<TDomainObject>(securityRule)
+            ?? throw new Exception($"{nameof(SecurityRule)} with mode '{securityRule}' not found for type '{typeof(TDomainObject).Name}'"));
     }
 
     protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.OperationSecurityRule securityRule)
@@ -58,7 +48,10 @@ public abstract class DomainSecurityService<TDomainObject>(
         return this.GetSecurityProvider(securityRuleExpander.Expand(securityRule));
     }
 
-    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.CompositeSecurityRule securityRule);
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule)
+    {
+        return this.CreateFinalSecurityProvider(securityRule);
+    }
 
-    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule);
+    protected abstract ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule);
 }

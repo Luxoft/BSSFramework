@@ -8,7 +8,7 @@ public class SecurityRuleExpander(
     SecurityRoleExpander securityRoleExpander)
     : ISecurityRuleExpander
 {
-    public IReadOnlyList<SecurityRule> TryExpand<TDomainObject>(SecurityRule.SpecialSecurityRule securityRule)
+    public SecurityRule.DomainObjectSecurityRule? TryExpand<TDomainObject>(SecurityRule.SpecialSecurityRule securityRule)
     {
         return securityModeExpander.TryExpand<TDomainObject>(securityRule);
     }
@@ -23,7 +23,7 @@ public class SecurityRuleExpander(
         return securityRoleExpander.Expand(securityRule);
     }
 
-    public IEnumerable<SecurityRule.ExpandedRolesSecurityRule> FullExpand(SecurityRule.DomainObjectSecurityRule securityRule)
+    public IEnumerable<SecurityRule.ExpandedRolesSecurityRule> FullExpand(SecurityRule.ExpandableSecurityRule securityRule)
     {
         switch (securityRule)
         {
@@ -35,9 +35,6 @@ public class SecurityRuleExpander(
 
             case SecurityRule.ExpandedRolesSecurityRule expandedRolesSecurityRule:
                 return [expandedRolesSecurityRule];
-
-            case SecurityRule.CompositeSecurityRule compositeSecurityRule:
-                return compositeSecurityRule.Children.SelectMany(this.FullExpand).Distinct();
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(securityRule));

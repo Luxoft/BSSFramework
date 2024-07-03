@@ -11,9 +11,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 {
     private readonly List<Type> securityFunctorTypes = new ();
 
-    public List<SecurityRule> ViewRules { get; } = new();
+    public SecurityRule.DomainObjectSecurityRule ViewRule { get; private set; }
 
-    public List<SecurityRule> EditRules { get; } = new();
+    public SecurityRule.DomainObjectSecurityRule EditRule { get; private set; }
 
     public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
 
@@ -28,10 +28,10 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
     public void Register(IServiceCollection services)
     {
-        if (this.ViewRules.Any() || this.EditRules.Any())
+        if (this.ViewRule != null || this.EditRule != null)
         {
             services.AddSingleton(
-                new DomainObjectSecurityModeInfo(typeof(TDomainObject), this.ViewRules, this.EditRules));
+                new DomainObjectSecurityModeInfo(typeof(TDomainObject), this.ViewRule, this.EditRule));
         }
 
         services.AddSingleton(this.SecurityPath);
@@ -79,32 +79,16 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
         }
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityRule securityRule)
+    public IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        this.ViewRules.Add(securityRule);
+        this.ViewRule = securityRule;
 
         return this;
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject> SetView<TSecurityProvider>()
-        where TSecurityProvider : ISecurityProvider<TDomainObject>
+    public IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        this.ViewRules.Add(new SecurityRule.CustomProviderSecurityRule(typeof(TSecurityProvider)));
-
-        return this;
-    }
-
-    public IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityRule securityRule)
-    {
-        this.EditRules.Add(securityRule);
-
-        return this;
-    }
-
-    public IDomainSecurityServiceBuilder<TDomainObject> SetEdit<TSecurityProvider>()
-        where TSecurityProvider : ISecurityProvider<TDomainObject>
-    {
-        this.EditRules.Add(new SecurityRule.CustomProviderSecurityRule(typeof(TSecurityProvider)));
+        this.EditRule = securityRule;
 
         return this;
     }

@@ -9,10 +9,9 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {
         if (securityRule is SecurityRule.SpecialSecurityRule specialSecurityRule
-            && securityRuleExpander.TryExpand<TDomainObject>(specialSecurityRule) is { } customSecurityRules
-            && customSecurityRules.Any())
+            && securityRuleExpander.TryExpand<TDomainObject>(specialSecurityRule) is { } customSecurityRule)
         {
-            return customSecurityRules.Select(this.CreateSecurityProvider).Or();
+            return this.CreateSecurityProvider(customSecurityRule);
         }
         else
         {

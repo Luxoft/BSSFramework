@@ -37,7 +37,8 @@ public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<
             yield return baseData;
         }
 
-        yield return typeof(BusinessUnit).ToKeyValuePair(
+        yield return new(
+            typeof(BusinessUnit),
             new SecurityRule[]
             {
                 SampleSystemSecurityOperation.BusinessUnitView,
@@ -45,7 +46,6 @@ public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<
                 SampleSystemSecurityOperation.EmployeeEdit,
                 SampleSystemSecurityOperation.BusinessUnitHrDepartmentEdit
             }.ToReadOnlyCollection());
-        ;
     }
 
     public override IEnumerable<GenerateTypeMap> GetTypeMaps()

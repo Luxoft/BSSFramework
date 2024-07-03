@@ -6,15 +6,9 @@ namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuil
 
 public interface IDomainSecurityServiceBuilder<TDomainObject>
 {
-    IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityRule securityRule);
+    IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityRule.DomainObjectSecurityRule securityRule);
 
-    IDomainSecurityServiceBuilder<TDomainObject> SetView<TSecurityProvider>()
-        where TSecurityProvider : ISecurityProvider<TDomainObject>;
-
-    IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityRule securityRule);
-
-    IDomainSecurityServiceBuilder<TDomainObject> SetEdit<TSecurityProvider>()
-        where TSecurityProvider : ISecurityProvider<TDomainObject>;
+    IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityRule.DomainObjectSecurityRule securityRule);
 
     IDomainSecurityServiceBuilder<TDomainObject> SetPath(SecurityPath<TDomainObject> securityPath);
 

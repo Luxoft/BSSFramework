@@ -4,12 +4,12 @@ public class InitializedSecurityRoleSource(IEnumerable<PreInitializerFullSecurit
 {
     public IEnumerable<FullSecurityRole> GetSecurityRoles()
     {
-        return securityRoles.Select(sr => this.GetInitializerRole(sr.FullSecurityRole));
+        return securityRoles.Select(sr => this.GetInitializedRole(sr.FullSecurityRole));
     }
 
     protected virtual IReadOnlyList<SecurityRole> ExceptChildren { get; } = [SecurityRole.Administrator, SecurityRole.SystemIntegration];
 
-    private FullSecurityRole GetInitializerRole(FullSecurityRole securityRole)
+    private FullSecurityRole GetInitializedRole(FullSecurityRole securityRole)
     {
         if (securityRole == SecurityRole.Administrator)
         {

@@ -5,15 +5,12 @@
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
 public abstract class ContextDomainSecurityServiceBase<TDomainObject>(
-    IServiceProvider serviceProvider,
     ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
     ISecurityPathProviderFactory securityPathProviderFactory)
-    : DomainSecurityService<TDomainObject>(serviceProvider, disabledSecurityProvider, securityRuleExpander)
+    : DomainSecurityService<TDomainObject>( disabledSecurityProvider, securityRuleExpander)
 {
-    protected virtual ISecurityProvider<TDomainObject> Create(
-        SecurityPath<TDomainObject> securityPath,
-        SecurityRule.DomainObjectSecurityRule securityRule)
+    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainObjectSecurityRule securityRule)
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
         if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
@@ -23,23 +20,16 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject>(
 }
 
 public class ContextDomainSecurityService<TDomainObject>(
-    IServiceProvider serviceProvider,
     ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
     ISecurityPathProviderFactory securityPathProviderFactory,
     SecurityPath<TDomainObject> securityPath)
     : ContextDomainSecurityServiceBase<TDomainObject>(
-        serviceProvider,
         disabledSecurityProvider,
         securityRuleExpander,
         securityPathProviderFactory)
 {
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ExpandedRolesSecurityRule securityRule)
-    {
-        return this.Create(securityPath, securityRule);
-    }
-
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.CompositeSecurityRule securityRule)
+    protected override ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule)
     {
         return this.Create(securityPath, securityRule);
     }

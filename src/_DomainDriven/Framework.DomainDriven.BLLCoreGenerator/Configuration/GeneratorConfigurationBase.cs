@@ -446,11 +446,11 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
                               let genericName = argGroup.Select(genArg => genArg.Name).Distinct().SingleMaybe().GetValueOrDefault(() => $"T{argGroup.Key.Name}")
 
-                              select new CodeTypeParameter(genericName).Self(param => param.UserData["SourceType"] = argGroup.Key).ToKeyValuePair(argGroup.ToReadOnlyCollectionI());
+                              select (new CodeTypeParameter(genericName).Self(param => param.UserData["SourceType"] = argGroup.Key), argGroup.ToReadOnlyCollectionI());
 
         var genericDict = genericsRequest.ToDictionary();
 
-        var reverseDict = genericDict.SelectMany(pair => pair.Value.Select(genArg => genArg.ToKeyValuePair(pair.Key))).ToDictionary();
+        var reverseDict = genericDict.SelectMany(pair => pair.Value.Select(genArg => (genArg, pair.Key))).ToDictionary();
 
         {
             var mainGeneric = new CodeTypeParameter("TDomainObject") { Constraints = { this.Environment.PersistentDomainObjectBaseType } };

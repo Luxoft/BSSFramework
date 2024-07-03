@@ -11,9 +11,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 {
     private readonly List<Type> securityFunctorTypes = new ();
 
-    public List<SecurityRule> ViewRules { get; private set; }
+    public List<SecurityRule> ViewRules { get; } = new();
 
-    public List<SecurityRule> EditRules { get; private set; }
+    public List<SecurityRule> EditRules { get; } = new();
 
     public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
 

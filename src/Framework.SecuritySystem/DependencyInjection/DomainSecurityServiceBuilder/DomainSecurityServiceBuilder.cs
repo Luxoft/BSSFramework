@@ -17,7 +17,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
     public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
 
-    public object DependencySourcePath { get; private set; }
+    public object DependencySourcePathInfo { get; private set; }
+
+    public Type DependencySourcePathType { get; private set; }
 
     public Type CustomServiceType { get; private set; }
 
@@ -34,9 +36,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
         services.AddSingleton(this.SecurityPath);
 
-        if (this.DependencySourcePath != null)
+        if (this.DependencySourcePathInfo != null)
         {
-            services.AddSingleton(this.DependencySourcePath);
+            services.AddSingleton(this.DependencySourcePathType, this.DependencySourcePathInfo);
         }
 
         var originalDomainServiceType = this.GetOriginalDomainServiceType();
@@ -117,7 +119,8 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
     public IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> dependencyPath)
     {
         this.DependencyServiceType = typeof(DependencyDomainSecurityService<TDomainObject, TSource>);
-        this.DependencySourcePath = new DependencyDomainSecurityServicePathInfo<TDomainObject, TSource>(dependencyPath);
+        this.DependencySourcePathInfo = new RelativeDomainPathInfo<TDomainObject, TSource>(dependencyPath);
+        this.DependencySourcePathType = typeof(IRelativeDomainPathInfo<TDomainObject, TSource>);
 
         return this;
     }

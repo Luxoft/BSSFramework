@@ -1,4 +1,5 @@
 ﻿using Framework.DependencyInjection;
+using Framework.SecuritySystem;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +28,7 @@ public static class SampleSystemApplicationExtensions
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
 
                 .AddScoped(typeof(CurrentEmployeeSecurityProvider<>))
-                .AddSingleton(new ToEmployeePathInfo<Employee>(employee => employee));
+                .AddSingleton<IRelativeDomainPathInfo<Employee, Employee>>(new RelativeDomainPathInfo<Employee, Employee>(employee => employee));
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {

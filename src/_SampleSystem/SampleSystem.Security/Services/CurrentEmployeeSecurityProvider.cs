@@ -4,11 +4,13 @@ using Framework.Authorization.SecuritySystem;
 using Framework.Core;
 using Framework.SecuritySystem;
 
+using SampleSystem.Domain;
+
 namespace SampleSystem.Security.Services;
 
 public class CurrentEmployeeSecurityProvider<TDomainObject>(
     IActualPrincipalSource actualPrincipalSource,
-    ToEmployeePathInfo<TDomainObject> toEmployeePathInfo) : SecurityProvider<TDomainObject>
+    IRelativeDomainPathInfo<TDomainObject, Employee> toEmployeePathInfo) : SecurityProvider<TDomainObject>
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
         toEmployeePathInfo.Path.Select(employee => employee.Login == actualPrincipalSource.ActualPrincipal.Name);

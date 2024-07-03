@@ -7,7 +7,7 @@ public class DependencyDomainSecurityService<TDomainObject, TBaseDomainObject>(
     ISecurityRuleExpander securityRuleExpander,
     IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
     IQueryableSource queryableSource,
-    DependencyDomainSecurityServicePathInfo<TDomainObject, TBaseDomainObject> pathInfo)
+    IRelativeDomainPathInfo<TDomainObject, TBaseDomainObject> pathInfo)
     : DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject>(
         disabledSecurityProvider,
         securityRuleExpander,

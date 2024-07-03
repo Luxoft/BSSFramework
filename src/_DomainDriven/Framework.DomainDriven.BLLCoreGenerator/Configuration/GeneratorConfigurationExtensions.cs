@@ -26,16 +26,13 @@ public static class GeneratorConfigurationExtensions
         }
         else
         {
-            var realSecurityRuleTypes = configuration.Environment.SecurityRuleTypeList;
+            var request = from securityRuleType in configuration.Environment.SecurityRuleTypeList
 
-            var request = from realSecurityRuleType in realSecurityRuleTypes
-
-                          from prop in realSecurityRuleType.GetProperties()
+                          from prop in securityRuleType.GetProperties(BindingFlags.Static | BindingFlags.Public)
 
                           where GetSecurityRule(prop) == securityRule
 
-                          select realSecurityRuleType.ToTypeReferenceExpression().ToPropertyReference(prop);
-
+                          select securityRuleType.ToTypeReferenceExpression().ToPropertyReference(prop);
 
             return request.Single(() => new Exception($"Security rule '{securityRule}' not found"));
         }
@@ -47,7 +44,7 @@ public static class GeneratorConfigurationExtensions
         {
             SecurityOperation securityOperation => securityOperation,
             SecurityRole securityRole => securityRole,
-            SecurityRule.SpecialSecurityRule securityRule => securityRule,
+            SecurityRule securityRule => securityRule,
             _ => null
         };
     }

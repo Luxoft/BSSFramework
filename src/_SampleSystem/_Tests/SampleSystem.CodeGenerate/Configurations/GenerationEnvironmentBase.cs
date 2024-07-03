@@ -29,14 +29,13 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
                 useDependencySecurity: false));
     }
 
-
-    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SampleSystemSecurityOperation), typeof(SecurityRule) };
+    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = [typeof(SampleSystemSecurityOperation), typeof(SecurityRule)];
 
     public override Type OperationContextType { get; } = typeof(SampleSystemOperationContext);
 
     protected override IEnumerable<Assembly> GetDomainObjectAssemblies()
     {
-        return base.GetDomainObjectAssemblies().Concat(new[] { typeof(Employee).Assembly });
+        return base.GetDomainObjectAssemblies().Concat([typeof(Employee).Assembly]);
     }
 
     protected override IEnumerable<IProjectionEnvironment> GetProjectionEnvironments()

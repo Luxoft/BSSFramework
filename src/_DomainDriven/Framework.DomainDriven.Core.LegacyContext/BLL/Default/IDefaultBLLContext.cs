@@ -11,14 +11,4 @@ public interface IDefaultBLLContext<in TPersistentDomainObjectBase, TIdent> : IB
 
     IValidatorContainer
 
-    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-{
-    /// <summary>
-    /// Разрешение разворачивания доменного объекта вверх
-    /// </summary>
-    /// <typeparam name="TDomainObject">Доменный тип</typeparam>
-    /// <returns></returns>
-    bool AllowedExpandTreeParents<TDomainObject>()
-        where TDomainObject : TPersistentDomainObjectBase;
-
-}
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>;

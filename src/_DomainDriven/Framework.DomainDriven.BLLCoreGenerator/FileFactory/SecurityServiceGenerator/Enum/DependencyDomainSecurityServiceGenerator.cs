@@ -55,7 +55,7 @@ namespace Framework.DomainDriven.BLLCoreGenerator
                     });
 
 
-            return typeof(DependencyDomainSecurityServicePath<,>).MakeGenericType(this.DomainType, this.dependencySecurityAttr.SourceType)
+            return typeof(DependencyDomainSecurityServicePathInfo<,>).MakeGenericType(this.DomainType, this.dependencySecurityAttr.SourceType)
                                                                  .ToTypeReference()
                                                                  .ToObjectCreateExpression(lambdaExpr);
         }

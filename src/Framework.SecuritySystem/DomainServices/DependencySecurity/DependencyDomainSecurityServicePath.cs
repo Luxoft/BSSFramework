@@ -2,5 +2,5 @@
 
 namespace Framework.SecuritySystem;
 
-public record DependencyDomainSecurityServicePath<TDomainObject, TBaseDomainObject>(
-    Expression<Func<TDomainObject, TBaseDomainObject>> Selector);
+public record DependencyDomainSecurityServicePathInfo<TDomainObject, TBaseDomainObject>(
+    Expression<Func<TDomainObject, TBaseDomainObject>> Path);

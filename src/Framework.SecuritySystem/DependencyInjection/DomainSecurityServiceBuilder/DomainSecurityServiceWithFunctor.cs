@@ -1,18 +1,21 @@
 ﻿namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TDomainObject>(
+    IServiceProvider serviceProvider,
     ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
     TOriginalDomainSecurityService originalDomainSecurityService,
     IEnumerable<IOverrideSecurityProviderFunctor<TDomainObject>> functorList)
-    : DomainSecurityService<TDomainObject>(disabledSecurityProvider, securityRuleExpander)
+    : DomainSecurityService<TDomainObject>(serviceProvider, disabledSecurityProvider, securityRuleExpander)
     where TOriginalDomainSecurityService : IDomainSecurityService<TDomainObject>
 {
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
     {
-        var actualSecurityRule = securityRuleExpander.TryExpand<TDomainObject>(securityRule) ?? securityRule;
+        var expandedSpecialRules = securityRuleExpander.TryExpand<TDomainObject>(securityRule);
 
-        var originalSecurityProvider = originalDomainSecurityService.GetSecurityProvider(actualSecurityRule);
+        var actualSecurityRules = expandedSpecialRules.Any() ? expandedSpecialRules : [securityRule];
+
+        var originalSecurityProvider = actualSecurityRules.Select(originalDomainSecurityService.GetSecurityProvider).Or();
 
         return functorList.Aggregate(
             originalSecurityProvider,

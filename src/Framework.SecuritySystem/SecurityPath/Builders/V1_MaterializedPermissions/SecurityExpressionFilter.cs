@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
-using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 

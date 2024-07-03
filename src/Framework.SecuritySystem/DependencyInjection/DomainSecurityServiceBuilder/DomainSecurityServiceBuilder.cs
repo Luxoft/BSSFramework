@@ -11,9 +11,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 {
     private readonly List<Type> securityFunctorTypes = new ();
 
-    public SecurityRule ViewRule { get; private set; }
+    public List<SecurityRule> ViewRules { get; private set; }
 
-    public SecurityRule EditRule { get; private set; }
+    public List<SecurityRule> EditRules { get; private set; }
 
     public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
 
@@ -26,17 +26,17 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
     public void Register(IServiceCollection services)
     {
-        if (this.ViewRule != null || this.EditRule != null)
+        if (this.ViewRules.Any() || this.EditRules.Any())
         {
             services.AddSingleton(
-                new DomainObjectSecurityModeInfo(typeof(TDomainObject), this.ViewRule, this.EditRule));
+                new DomainObjectSecurityModeInfo(typeof(TDomainObject), this.ViewRules, this.EditRules));
         }
 
         services.AddSingleton(this.SecurityPath);
 
         if (this.DependencySourcePath != null)
         {
-            services.AddSingleton(this.DependencySourcePath.GetType(), this.DependencySourcePath);
+            services.AddSingleton(this.DependencySourcePath);
         }
 
         var originalDomainServiceType = this.GetOriginalDomainServiceType();
@@ -79,14 +79,30 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
     public IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityRule securityRule)
     {
-        this.ViewRule = securityRule;
+        this.ViewRules.Add(securityRule);
+
+        return this;
+    }
+
+    public IDomainSecurityServiceBuilder<TDomainObject> SetView<TSecurityProvider>()
+        where TSecurityProvider : ISecurityProvider<TDomainObject>
+    {
+        this.ViewRules.Add(new SecurityRule.CustomProviderSecurityRule(typeof(TSecurityProvider)));
 
         return this;
     }
 
     public IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityRule securityRule)
     {
-        this.EditRule = securityRule;
+        this.EditRules.Add(securityRule);
+
+        return this;
+    }
+
+    public IDomainSecurityServiceBuilder<TDomainObject> SetEdit<TSecurityProvider>()
+        where TSecurityProvider : ISecurityProvider<TDomainObject>
+    {
+        this.EditRules.Add(new SecurityRule.CustomProviderSecurityRule(typeof(TSecurityProvider)));
 
         return this;
     }
@@ -101,7 +117,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
     public IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> dependencyPath)
     {
         this.DependencyServiceType = typeof(DependencyDomainSecurityService<TDomainObject, TSource>);
-        this.DependencySourcePath = new DependencyDomainSecurityServicePath<TDomainObject, TSource>(dependencyPath);
+        this.DependencySourcePath = new DependencyDomainSecurityServicePathInfo<TDomainObject, TSource>(dependencyPath);
 
         return this;
     }

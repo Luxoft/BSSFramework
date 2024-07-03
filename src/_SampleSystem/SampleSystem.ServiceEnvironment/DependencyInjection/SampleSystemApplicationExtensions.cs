@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.BLL;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
+using SampleSystem.Domain;
+using SampleSystem.Security.Services;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -22,7 +24,10 @@ public static class SampleSystemApplicationExtensions
                 .RegisterJobs();
 
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services) =>
-        services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
+        services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
+
+                .AddScoped(typeof(CurrentEmployeeSecurityProvider<>))
+                .AddSingleton(new ToEmployeePathInfo<Employee>(employee => employee));
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {

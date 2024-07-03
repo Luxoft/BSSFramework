@@ -2,4 +2,4 @@
 
 namespace Framework.SecuritySystem;
 
-public record DomainObjectSecurityModeInfo(Type DomainType, SecurityRule? ViewRule, SecurityRule? EditRule);
+public record DomainObjectSecurityModeInfo(Type DomainType, IEnumerable<SecurityRule> ViewRules, IEnumerable<SecurityRule> EditRules);

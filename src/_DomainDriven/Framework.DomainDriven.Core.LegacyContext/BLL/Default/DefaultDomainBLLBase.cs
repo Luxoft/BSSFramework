@@ -8,6 +8,8 @@ using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.Persistent;
 
+using Microsoft.Extensions.DependencyInjection;
+
 #nullable enable
 
 namespace Framework.DomainDriven.BLL;
@@ -109,7 +111,9 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
         var projectionsIdents = identsSelector(startProjections);
 
-        var parentExpandMode = this.Context.AllowedExpandTreeParents<TDomainObject>() ? HierarchicalExpandType.Parents : HierarchicalExpandType.None;
+        var allowedExpandTreeParents = this.Context.ServiceProvider.GetService<ExpandTreeInfo<TDomainObject>>()?.ParentsExpandAllowed ?? true;
+
+        var parentExpandMode = allowedExpandTreeParents ? HierarchicalExpandType.Parents : HierarchicalExpandType.None;
 
         var allIdentDict = parentsExpander(projectionsIdents, parentExpandMode);
 

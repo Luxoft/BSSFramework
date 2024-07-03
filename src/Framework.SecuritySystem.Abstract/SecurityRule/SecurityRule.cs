@@ -32,9 +32,16 @@ public abstract record SecurityRule
         return securityRoles.ToSecurityRule();
     }
 
+    public record CustomProviderSecurityRule(Type SecurityProviderType) : SecurityRule;
+
     public record SpecialSecurityRule(string Name) : SecurityRule
     {
         public override string ToString() => this.Name;
+    }
+
+    public record DisabledSecurityRule : SecurityRule
+    {
+        public override string ToString() => nameof(SecurityRule.Disabled);
     }
 
     public abstract record DomainObjectSecurityRule : SecurityRule

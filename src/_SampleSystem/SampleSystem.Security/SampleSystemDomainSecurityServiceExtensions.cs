@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;

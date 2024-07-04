@@ -15,6 +15,8 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
     public SecurityRule.DomainObjectSecurityRule EditRule { get; private set; }
 
+    public SecurityRule.DomainObjectSecurityRule RemoveRule { get; private set; }
+
     public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
 
     public object DependencySourcePathInfo { get; private set; }
@@ -31,7 +33,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
         if (this.ViewRule != null || this.EditRule != null)
         {
             services.AddSingleton(
-                new DomainObjectSecurityModeInfo(typeof(TDomainObject), this.ViewRule, this.EditRule));
+                new DomainObjectSecurityModeInfo(typeof(TDomainObject), this.ViewRule, this.EditRule, this.RemoveRule));
         }
 
         services.AddSingleton(this.SecurityPath);
@@ -89,6 +91,13 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
     public IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityRule.DomainObjectSecurityRule securityRule)
     {
         this.EditRule = securityRule;
+
+        return this;
+    }
+
+    public IDomainSecurityServiceBuilder<TDomainObject> SetRemove(SecurityRule.DomainObjectSecurityRule securityRule)
+    {
+        this.RemoveRule = securityRule;
 
         return this;
     }

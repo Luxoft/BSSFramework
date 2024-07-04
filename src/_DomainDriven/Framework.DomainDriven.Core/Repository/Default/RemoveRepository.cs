@@ -5,7 +5,7 @@ using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Repository;
 
-public class ViewRepository<TDomainObject>(
+public class RemoveRepository<TDomainObject>(
     IAsyncDal<TDomainObject, Guid> dal,
     ISpecificationEvaluator specificationEvaluator,
     IAccessDeniedExceptionService accessDeniedExceptionService,
@@ -14,5 +14,5 @@ public class ViewRepository<TDomainObject>(
         dal,
         specificationEvaluator,
         accessDeniedExceptionService,
-        domainSecurityService.GetSecurityProvider(SecurityRule.View))
+        domainSecurityService.GetSecurityProvider(SecurityRule.Edit))
     where TDomainObject : class;

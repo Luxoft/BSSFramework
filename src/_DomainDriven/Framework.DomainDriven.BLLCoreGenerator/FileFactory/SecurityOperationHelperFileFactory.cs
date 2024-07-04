@@ -58,12 +58,14 @@ public class SecurityRuleHelperFileFactory<TConfiguration> : FileFactory<TConfig
                    Parameters = { serviceCollectionParameter }
                }.Self(v => v.Statements.AddRange(domainObjectSecurityRuleInfoRequest.ToArray()));
     }
-    private CodeExpressionStatement GetRegisterStatement(CodeExpression serviceCollectionExpr, Type domainType, SecurityRule viewSecurityRule, SecurityRule editSecurityRule)
+
+    private CodeExpressionStatement GetRegisterStatement(CodeExpression serviceCollectionExpr, Type domainType, SecurityRule viewSecurityRule, SecurityRule editSecurityRule, SecurityRule removeSecurityRule)
     {
         var createExpr = typeof(DomainObjectSecurityModeInfo).ToTypeReference().ToObjectCreateExpression(
             domainType.ToTypeOfExpression(),
-            viewSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression(),
-            editSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression());
+            viewSecurityRule.Maybe(this.Configuration.GetSecurityCodeExpression) ?? new CodePrimitiveExpression(),
+            editSecurityRule.Maybe(this.Configuration.GetSecurityCodeExpression) ?? new CodePrimitiveExpression(),
+            removeSecurityRule.Maybe(this.Configuration.GetSecurityCodeExpression) ?? new CodePrimitiveExpression());
 
         var addSingletonMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
                                                                         .ToMethodReferenceExpression(

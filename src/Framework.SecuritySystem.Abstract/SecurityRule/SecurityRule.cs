@@ -11,6 +11,8 @@ public abstract record SecurityRule
 
     public static SpecialSecurityRule Edit { get; } = new(nameof(Edit));
 
+    public static SpecialSecurityRule Remove { get; } = new(nameof(Remove));
+
     /// <summary>
     /// Специальная правило доступа для отключения безопасности
     /// </summary>

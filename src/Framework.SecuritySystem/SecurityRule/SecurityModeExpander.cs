@@ -8,6 +8,8 @@ public class SecurityModeExpander
 
     private readonly IReadOnlyDictionary<Type, SecurityRule.DomainObjectSecurityRule> editDict;
 
+    private readonly IReadOnlyDictionary<Type, SecurityRule.DomainObjectSecurityRule> removeDict;
+
     public SecurityModeExpander(
         IEnumerable<DomainObjectSecurityModeInfo> infos)
     {
@@ -15,9 +17,10 @@ public class SecurityModeExpander
 
         this.viewDict = GetDict(cached, info => info.ViewRule);
         this.editDict = GetDict(cached, info => info.EditRule);
+        this.removeDict = GetDict(cached, info => info.RemoveRule);
     }
 
-    public SecurityRule.DomainObjectSecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
+    public SecurityRule.DomainObjectSecurityRule? TryExpand<TDomainObject>(SecurityRule.SpecialSecurityRule securityRule)
     {
         if (securityRule == SecurityRule.View)
         {
@@ -26,6 +29,11 @@ public class SecurityModeExpander
         else if (securityRule == SecurityRule.Edit)
         {
             return this.editDict.GetValueOrDefault(typeof(TDomainObject));
+        }
+        else if (securityRule == SecurityRule.Remove)
+        {
+            return this.removeDict.GetValueOrDefault(typeof(TDomainObject))
+                   ?? this.TryExpand<TDomainObject>(SecurityRule.Edit);
         }
 
         return null;

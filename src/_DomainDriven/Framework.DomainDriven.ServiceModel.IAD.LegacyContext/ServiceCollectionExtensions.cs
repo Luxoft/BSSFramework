@@ -112,7 +112,7 @@ public static class ServiceCollectionExtensions
 
             if (pair.CustomViewSecurityRule != null)
             {
-                services.AddSingleton(new DomainObjectSecurityModeInfo(pair.DomainType, pair.CustomViewSecurityRule, null));
+                services.AddSingleton(new DomainObjectSecurityModeInfo(pair.DomainType, pair.CustomViewSecurityRule, null, null));
             }
         }
 

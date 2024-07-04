@@ -39,6 +39,11 @@ public class AuthManager(
         {
             var securityRole = securityRoleSource.GetFullRole(testPermission.SecurityRole);
 
+            if (securityRole.IsVirtual)
+            {
+                throw new Exception($"Assigned {nameof(SecurityRole)} {securityRole} can't be virtual");
+            }
+
             var businessRole = await businessRoleRepository.LoadAsync(securityRole.Id, cancellationToken);
 
             var permission = new Permission(principal) { Role = businessRole, Period = testPermission.Period };

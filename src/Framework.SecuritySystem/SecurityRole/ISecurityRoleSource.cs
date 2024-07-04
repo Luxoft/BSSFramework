@@ -9,4 +9,6 @@ public interface ISecurityRoleSource
     FullSecurityRole GetSecurityRole(string name);
 
     FullSecurityRole GetSecurityRole(Guid id);
+
+    IEnumerable<FullSecurityRole> GetRealRoles() => this.SecurityRoles.Where(sr => !sr.IsVirtual);
 }

@@ -17,4 +17,6 @@ public static class SampleSystemSecurityRole
     public static SecurityRole SearchTestBusinessRole { get; } = new(nameof(SearchTestBusinessRole));
 
     public static SecurityRole RestrictionRole { get; } = new(nameof(RestrictionRole));
+
+    public static SecurityRole TestVirtualRole { get; } = new(nameof(TestVirtualRole));
 }

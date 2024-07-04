@@ -20,7 +20,7 @@ public class AuthorizationBusinessRoleInitializer(
 {
     public async Task Init(CancellationToken cancellationToken)
     {
-        await this.Init(securityRoleSource.SecurityRoles, cancellationToken);
+        await this.Init(securityRoleSource.GetRealRoles(), cancellationToken);
     }
 
     public async Task Init(IEnumerable<FullSecurityRole> securityRoles, CancellationToken cancellationToken)

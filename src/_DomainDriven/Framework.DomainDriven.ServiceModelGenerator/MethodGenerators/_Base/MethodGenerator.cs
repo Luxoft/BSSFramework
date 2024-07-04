@@ -34,16 +34,17 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected abstract CodeTypeReference ReturnType { get; }
 
-    protected abstract bool IsEdit { get; }
+    protected abstract SecurityRule SecurityRule { get; }
 
     protected virtual TBLLRoleAttribute Attribute => this.Configuration.Environment.ExtendedMetadata.GetCustomAttribute<TBLLRoleAttribute>(this.DomainType)
                                                          .FromMaybe(() => $"Attr {typeof(TBLLRoleAttribute)} not found for type {this.DomainType?.FullName}");// ?? this.GetDefaultAttribute();
 
-    protected virtual DBSessionMode DefaultSessionMode => this.IsEdit ? DBSessionMode.Write : DBSessionMode.Read;
+    protected virtual DBSessionMode DefaultSessionMode =>
+        new[] { SecurityRule.Edit, SecurityRule.Remove }.Contains(this.SecurityRule)
+            ? DBSessionMode.Write
+            : DBSessionMode.Read;
 
     protected virtual DBSessionMode SessionMode => this.DefaultSessionMode;
-
-    protected virtual bool RequiredSecurity { get; } = true;
 
     protected virtual bool UseBLL { get; } = true;
 
@@ -113,14 +114,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected virtual object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        if (this.RequiredSecurity)
-        {
-            return this.IsEdit ? SecurityRule.Edit : SecurityRule.View;
-        }
-        else
-        {
-            return null;
-        }
+        return this.SecurityRule;
     }
 
     protected CodeVariableDeclarationStatement GetCreateDefaultBLLVariableDeclaration(CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
@@ -166,7 +160,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
         var evaluateDataExpr = evaluateDataParameterExpr.ToVariableReferenceExpression();
 
-        var bllDecl = this.UseBLL ? this.GetBLLVariableDeclaration(evaluateDataExpr, bllParameterExpr, this.IsEdit) : null;
+        var bllDecl = this.UseBLL ? this.GetBLLVariableDeclaration(evaluateDataExpr, bllParameterExpr) : null;
 
         return new CodeMemberMethod
                {
@@ -178,7 +172,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
                 .WithStatements(this.GetFacadeMethodInternalStatements(evaluateDataExpr, bllDecl.Maybe(v => v.ToVariableReferenceExpression())));
     }
 
-    protected CodeVariableDeclarationStatement GetBLLVariableDeclaration(CodeExpression evaluateDataExpr, CodeParameterDeclarationExpression bllParameterExpr, bool isEdit)
+    protected CodeVariableDeclarationStatement GetBLLVariableDeclaration(CodeExpression evaluateDataExpr, CodeParameterDeclarationExpression bllParameterExpr)
     {
         if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
 

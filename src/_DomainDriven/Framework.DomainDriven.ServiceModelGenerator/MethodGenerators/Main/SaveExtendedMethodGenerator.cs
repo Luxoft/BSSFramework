@@ -4,6 +4,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLLCoreGenerator;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -25,7 +26,7 @@ public class SaveExtendedMethodGenerator<TConfiguration> : ModelMethodGenerator<
 
     protected override CodeTypeReference ReturnType => this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType, DTOType.IdentityDTO);
 
-    protected override bool IsEdit { get; } = true;
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.Edit;
 
 
     protected override string GetComment()

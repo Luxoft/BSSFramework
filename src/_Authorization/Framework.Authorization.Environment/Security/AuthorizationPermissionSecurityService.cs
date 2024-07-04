@@ -28,7 +28,7 @@ namespace Framework.Authorization.Environment
                 return withDelegatedFrom.Or(
                     new PrincipalSecurityProvider<Permission>(actualPrincipalSource, permission => permission.Principal));
             }
-            else if (securityRule == SecurityRule.Edit)
+            else if (securityRule == SecurityRule.Edit || securityRule == SecurityRule.Remove)
             {
                 return withDelegatedFrom;
             }

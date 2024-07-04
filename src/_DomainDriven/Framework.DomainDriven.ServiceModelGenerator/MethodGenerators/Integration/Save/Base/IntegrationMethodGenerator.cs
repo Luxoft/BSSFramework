@@ -2,6 +2,7 @@
 
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -14,10 +15,7 @@ public abstract class IntegrationMethodGenerator<TConfiguration, TBLLRoleAttribu
     {
     }
 
-
-    protected sealed override bool RequiredSecurity { get; } = false;
-
-    protected override bool IsEdit { get; } = true;
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.Disabled;
 
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)

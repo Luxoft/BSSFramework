@@ -24,4 +24,6 @@ public abstract class IntegrationBaseSaveMethodGenerator<TConfiguration> : Integ
                                           .Environment.ServerDTO
                                           .GetCodeTypeReference(this.DomainType, DTOGenerator.Server.ServerFileType.RichIntegrationDTO);
     }
+
+    protected override DBSessionMode DefaultSessionMode => this.SessionMode;
 }

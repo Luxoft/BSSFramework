@@ -24,9 +24,7 @@ public class HasAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfigu
 
     protected override CodeTypeReference ReturnType { get; } = typeof(bool).ToTypeReference();
 
-    protected override bool IsEdit { get; } = false;
-
-    protected override bool RequiredSecurity { get; } = false;
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.Disabled;
 
 
     protected override string GetComment()

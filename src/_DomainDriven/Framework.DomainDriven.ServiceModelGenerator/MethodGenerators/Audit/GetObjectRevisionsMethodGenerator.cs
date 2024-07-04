@@ -4,6 +4,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 
@@ -20,11 +21,11 @@ public class GetObjectRevisionsMethodGenerator<TConfiguration> : MethodGenerator
 
     public override MethodIdentity Identity { get; } = MethodIdentityType.GetRevisions;
 
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.View;
+
     protected override string Name => $"Get{this.DomainType.Name}Revisions";
 
     protected override CodeTypeReference ReturnType => typeof(DefaultDomainObjectRevisionDTO).ToTypeReference();
-
-    protected override bool IsEdit { get; } = false;
 
 
     protected override string GetComment()

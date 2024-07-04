@@ -4,6 +4,7 @@ using Framework.Core;
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
 using Framework.Transfering;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -20,7 +21,7 @@ public abstract class ViewMethodGenerator<TConfiguration> : MethodGenerator<TCon
     }
 
 
-    protected sealed override bool IsEdit { get; } = false;
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.View;
 
     protected ViewDTOType MaxFetchLevel => this.DTOType.Min(((IMaxFetchContainer)this.Attribute).MaxFetch);
 

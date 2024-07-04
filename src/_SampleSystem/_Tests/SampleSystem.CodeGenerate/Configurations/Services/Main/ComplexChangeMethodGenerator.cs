@@ -7,6 +7,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.ServiceModelGenerator;
 using Framework.Security;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 using SampleSystem.Domain;
@@ -32,7 +33,7 @@ public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGene
 
     protected override CodeTypeReference ReturnType => this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType, DTOType.IdentityDTO);
 
-    protected override bool IsEdit { get; } = true;
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.Edit;
 
 
     protected override string GetComment()

@@ -47,7 +47,7 @@ public class SecurityRuleHelperFileFactory<TConfiguration> : FileFactory<TConfig
 
             where viewSecurityRule != null || editSecurityRule != null
 
-            select this.GetRegisterStatement(serviceCollectionParameter.ToVariableReferenceExpression(), domainType, viewSecurityRule, editSecurityRule);
+            select this.GetRegisterStatement(serviceCollectionParameter.ToVariableReferenceExpression(), domainType, viewSecurityRule, editSecurityRule, null);
 
         return new CodeMemberMethod
                {

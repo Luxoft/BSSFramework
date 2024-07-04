@@ -4,6 +4,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLLCoreGenerator;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -22,6 +23,7 @@ public class FormatMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfi
 
 
     public override MethodIdentity Identity { get; }
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.View;
 
 
     protected override string Name =>
@@ -33,8 +35,6 @@ public class FormatMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfi
     }
 
     protected override CodeTypeReference ReturnType => this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType, this._resultDToType);
-
-    protected override bool IsEdit { get; } = false;
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {

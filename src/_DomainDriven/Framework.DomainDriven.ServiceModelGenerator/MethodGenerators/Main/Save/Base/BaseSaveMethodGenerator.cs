@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 
 using Framework.DomainDriven.BLL;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -32,10 +33,5 @@ public abstract class BaseSaveMethodGenerator<TConfiguration> : MethodGenerator<
     }
 
 
-    protected sealed override bool IsEdit { get; } = true;
-
-    //protected override BLLSaveRoleAttribute GetDefaultAttribute()
-    //{
-    //    return new BLLSaveRoleAttribute { AllowCreate = this.DomainType.HasDefaultConstructor() };
-    //}
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.Edit;
 }

@@ -25,10 +25,7 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
 
     protected override CodeTypeReference ReturnType { get; } = typeof(void).ToTypeReference();
 
-    protected override bool IsEdit { get; } = false;
-
-    protected override bool RequiredSecurity { get; } = false;
-
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.Disabled;
 
     protected override string GetComment()
     {

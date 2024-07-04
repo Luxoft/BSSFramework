@@ -6,6 +6,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DTOGenerator.Audit;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.ServiceModel.Service;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -24,8 +25,7 @@ public abstract class GetObjectPropertyRevisionsMethodGeneratorBase<TConfigurati
 
     protected override CodeTypeReference ReturnType => new CodeTypeReference(this.dtoConfiguration.DomainObjectPropertiesRevisionDTOFullTypeName);
 
-    protected override bool IsEdit { get; } = false;
-
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.View;
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {

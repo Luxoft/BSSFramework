@@ -5,6 +5,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.Security;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -25,7 +26,7 @@ public class GetExtendedModelMethodGenerator<TConfiguration> : ModelMethodGenera
 
     protected override CodeTypeReference ReturnType => this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.ModelType, DTOType.RichDTO);
 
-    protected override bool IsEdit { get; } = false;
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.View;
 
 
     protected override string GetComment()

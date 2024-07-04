@@ -2,6 +2,7 @@
 
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -23,5 +24,5 @@ public abstract class BaseRemoveMethodGenerator<TConfiguration> : MethodGenerato
 
     protected sealed override CodeTypeReference ReturnType { get; } = typeof(void).ToTypeReference();
 
-    protected sealed override bool IsEdit { get; } = true;
+    protected override SecurityRule SecurityRule { get; } = SecurityRule.Remove;
 }

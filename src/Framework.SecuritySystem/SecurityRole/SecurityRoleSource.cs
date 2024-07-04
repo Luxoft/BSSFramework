@@ -17,7 +17,7 @@ public class SecurityRoleSource : ISecurityRoleSource
 
         this.Validate();
 
-        this.securityRoleByIdDict = this.SecurityRoles.ToDictionary(v => v.Id);
+        this.securityRoleByIdDict = this.SecurityRoles.Where(sr => !sr.IsVirtual).ToDictionary(v => v.Id);
 
         this.securityRoleByNameDict = this.SecurityRoles.ToDictionary(v => v.Name);
 

@@ -7,14 +7,14 @@ namespace Framework.SecuritySystem;
 
 public abstract record SecurityRule
 {
-    public static SpecialSecurityRule View { get; } = new (nameof(View));
+    public static SpecialSecurityRule View { get; } = new(nameof(View));
 
-    public static SpecialSecurityRule Edit { get; } = new (nameof(Edit));
+    public static SpecialSecurityRule Edit { get; } = new(nameof(Edit));
 
     /// <summary>
     /// Специальная правило доступа для отключения безопасности
     /// </summary>
-    public static DisabledSecurityRule Disabled { get; } = new ();
+    public static DisabledSecurityRule Disabled { get; } = new();
 
 
     public static implicit operator SecurityRule(SecurityOperation securityOperation)
@@ -48,6 +48,11 @@ public abstract record SecurityRule
         {
             return securityRole.ToSecurityRule();
         }
+
+        public static implicit operator DomainObjectSecurityRule(SecurityRole[] securityRoles)
+        {
+            return securityRoles.ToSecurityRule();
+        }
     }
 
     public record DisabledSecurityRule : DomainObjectSecurityRule
@@ -67,6 +72,11 @@ public abstract record SecurityRule
         public static implicit operator ExpandableSecurityRule(SecurityRole securityRole)
         {
             return securityRole.ToSecurityRule();
+        }
+
+        public static implicit operator ExpandableSecurityRule(SecurityRole[] securityRoles)
+        {
+            return securityRoles.ToSecurityRule();
         }
 
         /// <summary>

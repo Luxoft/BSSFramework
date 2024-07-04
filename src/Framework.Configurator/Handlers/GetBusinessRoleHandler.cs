@@ -23,7 +23,7 @@ public class GetBusinessRoleHandler(
 
         var roleId = new Guid((string)context.Request.RouteValues["id"]!);
 
-        var operations = roleSource.SecurityRoles
+        var operations = roleSource.GetRealRoles()
                                    .Single(x => x.Id == roleId)
                                    .Information
                                    .Operations

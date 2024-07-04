@@ -28,14 +28,14 @@ public static class SampleSystemSecuritySystemExtensions
                    SampleSystemSecurityRole.SeManager,
                    new SecurityRoleInfo(new Guid("dbf3556d-7106-4175-b5e4-a32d00bd857a"))
                    {
-                       Operations = [SampleSystemSecurityOperation.EmployeeView]
+                       Children = [SampleSystemSecurityRole.TestVirtualRole]
                    })
 
                .AddSecurityRole(
                    SampleSystemSecurityRole.TestRole1,
                    new SecurityRoleInfo(new Guid("{597AAB2A-76F7-42CF-B606-3D4550062596}"))
                    {
-                       Operations = [SampleSystemSecurityOperation.EmployeeView]
+                       Children = [SampleSystemSecurityRole.TestVirtualRole]
                    })
 
                .AddSecurityRole(
@@ -62,6 +62,13 @@ public static class SampleSystemSecuritySystemExtensions
                    {
                        Restriction = SecurityPathRestriction.Create<BusinessUnit>()
                                                             .Add((TestRestrictionObject v) => v.RestrictionHandler)
+                   })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.TestVirtualRole,
+                   new SecurityRoleInfo(default)
+                   {
+                       Operations = [SampleSystemSecurityOperation.EmployeeView]
                    })
 
                .AddSecurityRole(

@@ -29,7 +29,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 
-                           .SetPrincipalIdentitySource((Employee employee) => employee.Login)
+                           .SetPrincipalIdentitySource<Employee>(employee => employee.Active, employee => employee.Login)
 
                            .AddListeners()
 

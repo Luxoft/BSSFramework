@@ -15,6 +15,6 @@ public class PrincipalIdentitySource<TDomainObject>(
 {
     public Guid? TryGetId(string name)
     {
-        return domainRepository.GetQueryable().SingleOrDefault(namePathInfo.Path.Select(v => v == name))?.Id;
+        return domainRepository.GetQueryable().Where(namePathInfo.Filter).SingleOrDefault(namePathInfo.Path.Select(v => v == name))?.Id;
     }
 }

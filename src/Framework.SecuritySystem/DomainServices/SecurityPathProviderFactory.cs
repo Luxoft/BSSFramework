@@ -23,10 +23,10 @@ public class SecurityPathProviderFactory(
 
             case SecurityRule.CustomProviderSecurityRule customProviderSecurityRule:
             {
-                var securityProviderFactoryType =
-                    customProviderSecurityRule.SecurityProviderFactoryType.MakeGenericType(typeof(TDomainObject));
+                var securityProviderType =
+                    customProviderSecurityRule.GenericSecurityProviderType.MakeGenericType(typeof(TDomainObject));
 
-                return (ISecurityProvider<TDomainObject>)serviceProvider.GetRequiredService(securityProviderFactoryType);
+                return (ISecurityProvider<TDomainObject>)serviceProvider.GetRequiredService(securityProviderType);
             }
 
             case SecurityRule.OrSecurityRule orSecurityRule:

@@ -60,7 +60,7 @@ public abstract record SecurityRule
         public override string ToString() => nameof(Disabled);
     }
 
-    public record CustomProviderSecurityRule(Type SecurityProviderFactoryType) : DomainObjectSecurityRule;
+    public record CustomProviderSecurityRule(Type GenericSecurityProviderType) : DomainObjectSecurityRule;
 
     public abstract record ExpandableSecurityRule : DomainObjectSecurityRule
     {

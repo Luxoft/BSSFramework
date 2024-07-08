@@ -22,7 +22,7 @@ public partial class MainTests
 
         var baseSecurityPath = SecurityPath<Employee>.Create(buExpr).And(locationExpr);
 
-        var restriction = SecurityPathRestriction.Create<BusinessUnit>().Add(conditionExpr);
+        var restriction = SecurityPathRestriction.Create<BusinessUnit>().AddCondition(typeof(TestCheckboxConditionFactory<>));
 
         var expectedNewSecurityPath = SecurityPath<Employee>.Create(buExpr).And(conditionExpr);
 

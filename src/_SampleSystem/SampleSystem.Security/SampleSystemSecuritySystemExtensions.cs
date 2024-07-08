@@ -4,6 +4,7 @@ using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 
 using SampleSystem.Domain;
+using SampleSystem.Security.Services;
 
 namespace SampleSystem.Security;
 
@@ -61,7 +62,7 @@ public static class SampleSystemSecuritySystemExtensions
                    new SecurityRoleInfo(new Guid("{ACAA7B42-09AA-438A-B6EC-058506E0C103}"))
                    {
                        Restriction = SecurityPathRestriction.Create<BusinessUnit>()
-                                                            .Add((TestRestrictionObject v) => v.RestrictionHandler)
+                                                            .AddCondition(typeof(TestRestrictionObjectConditionFactory<>))
                    })
 
                .AddSecurityRole(

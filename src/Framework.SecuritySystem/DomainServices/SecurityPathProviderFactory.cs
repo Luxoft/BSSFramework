@@ -22,7 +22,12 @@ public class SecurityPathProviderFactory(
                            .Select(g => this.Create(securityPath, g.SecurityRule, g.Restriction)).Or();
 
             case SecurityRule.CustomProviderSecurityRule customProviderSecurityRule:
-                return (ISecurityProvider<TDomainObject>)serviceProvider.GetRequiredService(customProviderSecurityRule.SecurityProviderType);
+            {
+                var securityProviderType =
+                    customProviderSecurityRule.GenericSecurityProviderType.MakeGenericType(typeof(TDomainObject));
+
+                return (ISecurityProvider<TDomainObject>)serviceProvider.GetRequiredService(securityProviderType);
+            }
 
             case SecurityRule.OrSecurityRule orSecurityRule:
                 return this.Create(securityPath, orSecurityRule.Left).Or(this.Create(securityPath, orSecurityRule.Right));

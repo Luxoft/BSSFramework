@@ -13,7 +13,8 @@ public class SampleSystemEmployeeDomainSecurityServiceMetadata
         builder.SetView(
                    SampleSystemSecurityOperation.EmployeeView
                                                 .ToSecurityRule()
-                                                .Or(new SecurityRule.CustomProviderSecurityRule(typeof(CurrentEmployeeSecurityProvider<>))))
+                                                .OrCustomProvider(typeof(CurrentEmployeeSecurityProvider<>)))
+
                .SetEdit(SampleSystemSecurityOperation.EmployeeEdit)
                .SetPath(
                    SecurityPath<Employee>.Create(employee => employee)

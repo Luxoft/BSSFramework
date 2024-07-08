@@ -35,10 +35,24 @@ public static class SecurityRuleExtensions
         return new SecurityRule.OrSecurityRule(securityRule, otherSecurityRule);
     }
 
+    public static SecurityRule.OrSecurityRule OrCustomProvider(
+        this SecurityRule.DomainObjectSecurityRule securityRule,
+        Type genericCustomProviderType)
+    {
+        return securityRule.Or(new SecurityRule.CustomProviderSecurityRule(genericCustomProviderType));
+    }
+
     public static SecurityRule.AndSecurityRule And(
         this SecurityRule.DomainObjectSecurityRule securityRule,
         SecurityRule.DomainObjectSecurityRule otherSecurityRule)
     {
         return new SecurityRule.AndSecurityRule(securityRule, otherSecurityRule);
+    }
+
+    public static SecurityRule.AndSecurityRule AndCustomProvider(
+        this SecurityRule.DomainObjectSecurityRule securityRule,
+        Type genericCustomProviderType)
+    {
+        return securityRule.And(new SecurityRule.CustomProviderSecurityRule(genericCustomProviderType));
     }
 }

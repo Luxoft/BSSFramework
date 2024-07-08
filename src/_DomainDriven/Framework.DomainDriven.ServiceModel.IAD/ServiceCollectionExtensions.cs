@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 
 using Framework.Authorization.Domain;
-using Framework.Authorization.Environment;
+using Framework.Authorization.Environment.Security;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
 
@@ -178,24 +178,41 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)
     {
-        return services.RegisterDomainSecurityServices<Guid>(
-                           rb => rb.Add<Principal>(
-                                       b => b.SetView(SecurityRole.Administrator)
-                                             .SetEdit(SecurityRole.Administrator)
-                                             .SetCustomService<AuthorizationPrincipalSecurityService>())
+        var principalViewSecurityRule = SecurityRole.Administrator
+                                                    .ToSecurityRule()
+                                                    .OrCustomProvider(typeof(PrincipalSecurityProvider<>));
 
-                                   .Add<Permission>(
-                                       b => b.SetView(SecurityRole.Administrator)
-                                             .SetEdit(SecurityRole.Administrator)
-                                             .SetCustomService<AuthorizationPermissionSecurityService>())
+        return services
 
-                                   .Add<BusinessRole>(
-                                       b => b.SetView(SecurityRole.Administrator)
-                                             .SetEdit(SecurityRole.Administrator)
-                                             .SetCustomService<AuthorizationBusinessRoleSecurityService>())
+               .AddRelativeDomainPath((Principal principal) => principal)
+               .AddRelativeDomainPath((Permission permission) => permission.Principal)
+               .AddScoped(typeof(PrincipalSecurityProvider<>))
 
-                                   .Add<SecurityContextType>(
-                                       b => b.SetView(SecurityRule.Disabled)));
+               .AddRelativeDomainPath((BusinessRole businessRole) => businessRole)
+               .AddScoped(typeof(BusinessRoleSecurityProvider<>))
+
+               .AddRelativeDomainPath((Permission permission) => permission.DelegatedFrom, nameof(Permission.DelegatedFrom))
+               .AddScoped(typeof(DelegatedFromSecurityProvider<>))
+
+               .RegisterDomainSecurityServices<Guid>(
+                   rb => rb
+                         .Add<Principal>(
+                             b => b.SetView(principalViewSecurityRule)
+                                   .SetEdit(SecurityRole.Administrator))
+
+                         .Add<Permission>(
+                             b => b.SetView(principalViewSecurityRule.OrCustomProvider(typeof(DelegatedFromSecurityProvider<>)))
+                                   .SetEdit(SecurityRole.Administrator.ToSecurityRule().OrCustomProvider(typeof(DelegatedFromSecurityProvider<>))))
+
+                         .Add<BusinessRole>(
+                             b => b.SetView(
+                                       SecurityRole.Administrator
+                                                   .ToSecurityRule()
+                                                   .OrCustomProvider(typeof(BusinessRoleSecurityProvider<>)))
+                                   .SetEdit(SecurityRole.Administrator))
+
+                         .Add<SecurityContextType>(
+                             b => b.SetView(SecurityRule.Disabled)));
     }
 
     public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)

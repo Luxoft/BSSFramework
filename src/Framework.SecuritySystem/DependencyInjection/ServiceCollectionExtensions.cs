@@ -1,4 +1,6 @@
-﻿using Framework.DependencyInjection;
+﻿using System.Linq.Expressions;
+
+using Framework.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -80,5 +82,22 @@ public static class ServiceCollectionExtensions
         services.RegisterGeneralSecuritySystem();
 
         return services;
+    }
+
+    public static IServiceCollection AddRelativeDomainPath<TFrom, TTo>(
+        this IServiceCollection services,
+        Expression<Func<TFrom, TTo>> path,
+        string key = null)
+    {
+        var info = new RelativeDomainPathInfo<TFrom, TTo>(path);
+
+        if (key == null)
+        {
+            return services.AddSingleton<IRelativeDomainPathInfo<TFrom, TTo>>(info);
+        }
+        else
+        {
+            return services.AddKeyedSingleton<IRelativeDomainPathInfo<TFrom, TTo>>(key, info);
+        }
     }
 }

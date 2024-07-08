@@ -13,7 +13,7 @@ public class SecurityPathProviderFactory(
     ISecurityRoleSource securityRoleSource,
     ISecurityPathRestrictionService securityPathRestrictionService) : ISecurityPathProviderFactory
 {
-    public ISecurityProvider<TDomainObject> Create<TDomainObject>(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainObjectSecurityRule rootSecurityRule)
+    public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainObjectSecurityRule rootSecurityRule)
     {
         switch (rootSecurityRule)
         {

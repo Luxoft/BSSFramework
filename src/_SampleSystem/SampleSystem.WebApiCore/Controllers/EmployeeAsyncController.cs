@@ -37,7 +37,7 @@ public class EmployeeAsyncController : ControllerBase
     {
         var userName = this.userAuthenticationService.GetUserName();
 
-        var repository = this.employeeRepositoryFactory.Create(SecurityRule.Disabled);
+        var repository = this.employeeRepositoryFactory.Create();
 
         var employees = await repository
                               .GetQueryable()

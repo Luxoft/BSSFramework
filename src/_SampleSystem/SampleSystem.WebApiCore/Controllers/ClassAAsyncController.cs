@@ -37,7 +37,7 @@ public class ClassAAsyncController : ControllerBase
     {
         if (withSession)
         {
-            var repository = this.classARepositoryFactory.Create(SecurityRule.Disabled);
+            var repository = this.classARepositoryFactory.Create();
 
             var classA = await repository.GetQueryable().Where(x => x.Value == value).SingleOrDefaultAsync(cancellationToken);
 

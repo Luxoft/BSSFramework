@@ -49,14 +49,6 @@ public static class GeneratorConfigurationExtensions
         };
     }
 
-    public static CodeExpression GetDisabledSecurityCodeExpression(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-    {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-
-        return configuration.GetSecurityCodeExpression(SecurityRule.Disabled);
-    }
-
-
     public static CodeTypeDeclaration GetBLLContextContainerCodeTypeDeclaration(this IGeneratorConfigurationBase configuration, string typeName, bool asAbstract, CodeTypeReference containerType = null)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));

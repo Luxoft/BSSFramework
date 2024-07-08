@@ -10,8 +10,7 @@ using NHibernate.Linq;
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationBusinessRoleInitializer(
-    [DisabledSecurity]
-    IRepository<BusinessRole> businessRoleRepository,
+    [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
     ISecurityRoleSource securityRoleSource,
     ILogger<AuthorizationBusinessRoleInitializer> logger,
     InitializerSettings settings)

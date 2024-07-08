@@ -28,7 +28,6 @@ public static class SampleSystemApplicationExtensions
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
 
                 .AddRelativeDomainPath((Employee employee) => employee)
-                .AddScoped(typeof(CurrentEmployeeSecurityProvider<>))
 
                 .AddRelativeDomainPath((TestRestrictionObject v) => v)
                 .AddSingleton(typeof(TestRestrictionObjectConditionFactory<>));

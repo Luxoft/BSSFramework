@@ -52,6 +52,13 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
+    public ISecuritySystemSettings SetCurrentUserSecurityProvider(Type type)
+    {
+        this.RegisterActions.Add(sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(SecurityRule.CurrentUser), type));
+
+        return this;
+    }
+
     private void AddSecurityRole(IServiceCollection serviceCollection, FullSecurityRole fullSecurityRole)
     {
         if (this.InitializeAdministratorRole)

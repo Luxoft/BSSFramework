@@ -16,6 +16,12 @@ public abstract record SecurityRule
     /// </summary>
     public static DisabledSecurityRule Disabled { get; } = new();
 
+    /// <summary>
+    /// Доступ текущего пользователя
+    /// </summary>
+    public static DomainObjectSecurityRule CurrentUser { get; } =
+        new CustomProviderSecurityRule(typeof(ISecurityProvider<>), nameof(CurrentUser));
+
 
     public static implicit operator SecurityRule(SecurityOperation securityOperation)
     {
@@ -60,7 +66,7 @@ public abstract record SecurityRule
         public override string ToString() => nameof(Disabled);
     }
 
-    public record CustomProviderSecurityRule(Type GenericSecurityProviderType) : DomainObjectSecurityRule;
+    public record CustomProviderSecurityRule(Type GenericSecurityProviderType, string? Key = null) : DomainObjectSecurityRule;
 
     public abstract record ExpandableSecurityRule : DomainObjectSecurityRule
     {

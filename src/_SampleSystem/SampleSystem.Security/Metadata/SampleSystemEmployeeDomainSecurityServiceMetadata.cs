@@ -2,7 +2,6 @@
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using SampleSystem.Domain;
-using SampleSystem.Security.Services;
 
 namespace SampleSystem.Security.Metadata;
 
@@ -13,7 +12,7 @@ public class SampleSystemEmployeeDomainSecurityServiceMetadata
         builder.SetView(
                    SampleSystemSecurityOperation.EmployeeView
                                                 .ToSecurityRule()
-                                                .OrCustomProvider(typeof(CurrentEmployeeSecurityProvider<>)))
+                                                .Or(SecurityRule.CurrentUser))
 
                .SetEdit(SampleSystemSecurityOperation.EmployeeEdit)
                .SetPath(

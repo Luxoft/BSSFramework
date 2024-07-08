@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 
 using Framework.Authorization.Domain;
+using Framework.Authorization.Environment;
 using Framework.Authorization.Environment.Security;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
@@ -179,8 +180,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)
     {
         var principalViewSecurityRule = SecurityRole.Administrator
-                                                    .ToSecurityRule()
-                                                    .OrCustomProvider(typeof(PrincipalSecurityProvider<>));
+                                                    .Or(AuthorizationSecurityRule.CurrentPrincipal);
 
         return services
 
@@ -189,7 +189,7 @@ public static class ServiceCollectionExtensions
                .AddScoped(typeof(PrincipalSecurityProvider<>))
 
                .AddRelativeDomainPath((BusinessRole businessRole) => businessRole)
-               .AddScoped(typeof(BusinessRoleSecurityProvider<>))
+               .AddScoped(typeof(AvailableBusinessRoleSecurityProvider<>))
 
                .AddRelativeDomainPath((Permission permission) => permission.DelegatedFrom, nameof(Permission.DelegatedFrom))
                .AddScoped(typeof(DelegatedFromSecurityProvider<>))
@@ -201,14 +201,13 @@ public static class ServiceCollectionExtensions
                                    .SetEdit(SecurityRole.Administrator))
 
                          .Add<Permission>(
-                             b => b.SetView(principalViewSecurityRule.OrCustomProvider(typeof(DelegatedFromSecurityProvider<>)))
-                                   .SetEdit(SecurityRole.Administrator.ToSecurityRule().OrCustomProvider(typeof(DelegatedFromSecurityProvider<>))))
+                             b => b.SetView(principalViewSecurityRule.Or(AuthorizationSecurityRule.DelegatedFrom))
+                                   .SetEdit(SecurityRole.Administrator.Or(AuthorizationSecurityRule.DelegatedFrom)))
 
                          .Add<BusinessRole>(
                              b => b.SetView(
                                        SecurityRole.Administrator
-                                                   .ToSecurityRule()
-                                                   .OrCustomProvider(typeof(BusinessRoleSecurityProvider<>)))
+                                                   .Or(AuthorizationSecurityRule.AvailableBusinessRole))
                                    .SetEdit(SecurityRole.Administrator))
 
                          .Add<SecurityContextType>(

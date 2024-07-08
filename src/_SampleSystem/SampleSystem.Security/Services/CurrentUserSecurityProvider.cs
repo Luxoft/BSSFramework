@@ -8,7 +8,7 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.Security.Services;
 
-public class CurrentEmployeeSecurityProvider<TDomainObject>(
+public class CurrentUserSecurityProvider<TDomainObject>(
     IActualPrincipalSource actualPrincipalSource,
     IRelativeDomainPathInfo<TDomainObject, Employee> toEmployeePathInfo) : SecurityProvider<TDomainObject>
 {

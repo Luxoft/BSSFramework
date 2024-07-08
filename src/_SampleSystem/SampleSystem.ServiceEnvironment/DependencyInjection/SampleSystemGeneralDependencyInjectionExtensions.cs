@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Security;
+using SampleSystem.Security.Services;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -23,7 +24,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                    .AddSecurityContexts()
                                    .AddDomainSecurityServices()
                                    .AddSecurityRoles()
-                                   .AddCustomSecurityOperations())
+                                   .AddCustomSecurityOperations()
+                                   .SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>)))
 
                            .AddNamedLockType(typeof(SampleSystemNamedLock))
 

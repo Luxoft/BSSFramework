@@ -109,6 +109,16 @@ public abstract record SecurityRule
     /// <param name="SecurityRoles">Список неразвёрнутых ролей</param>
     public record NonExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : ExpandableSecurityRule
     {
+        public static implicit operator NonExpandedRolesSecurityRule(SecurityRole securityRole)
+        {
+            return securityRole.ToSecurityRule();
+        }
+
+        public static implicit operator NonExpandedRolesSecurityRule(SecurityRole[] securityRoles)
+        {
+            return securityRoles.ToSecurityRule();
+        }
+
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
                                                  : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";

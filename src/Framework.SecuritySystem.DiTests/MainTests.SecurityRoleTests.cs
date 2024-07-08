@@ -30,7 +30,7 @@ public partial class MainTests
         var expander = this.rootServiceProvider.GetRequiredService<SecurityRoleExpander>();
 
         // Act
-        var expandResult = expander.Expand(ExampleSecurityRole.TestRole3.ToSecurityRule());
+        var expandResult = expander.Expand(ExampleSecurityRole.TestRole3);
 
         // Assert
         expandResult.SecurityRoles.Should().BeEquivalentTo(

@@ -19,9 +19,7 @@ public abstract record SecurityRule
     /// <summary>
     /// Доступ текущего пользователя
     /// </summary>
-    public static DomainObjectSecurityRule CurrentUser { get; } =
-
-        new CustomProviderSecurityRule(typeof(ISecurityProvider<>), nameof(CurrentUser));
+    public static CustomProviderSecurityRule CurrentUser { get; } = new(typeof(ISecurityProvider<>), nameof(CurrentUser));
 
 
     public static implicit operator SecurityRule(SecurityOperation securityOperation)

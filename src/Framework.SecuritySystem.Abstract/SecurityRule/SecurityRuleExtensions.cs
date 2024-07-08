@@ -35,13 +35,6 @@ public static class SecurityRuleExtensions
         return new SecurityRule.OrSecurityRule(securityRule, otherSecurityRule);
     }
 
-    public static SecurityRule.OrSecurityRule OrCustomProvider(
-        this SecurityRule.DomainObjectSecurityRule securityRule,
-        Type genericCustomProviderType)
-    {
-        return securityRule.Or(new SecurityRule.CustomProviderSecurityRule(genericCustomProviderType));
-    }
-
     public static SecurityRule.AndSecurityRule And(
         this SecurityRule.DomainObjectSecurityRule securityRule,
         SecurityRule.DomainObjectSecurityRule otherSecurityRule)
@@ -49,10 +42,45 @@ public static class SecurityRuleExtensions
         return new SecurityRule.AndSecurityRule(securityRule, otherSecurityRule);
     }
 
-    public static SecurityRule.AndSecurityRule AndCustomProvider(
-        this SecurityRule.DomainObjectSecurityRule securityRule,
-        Type genericCustomProviderType)
+    public static SecurityRule.OrSecurityRule Or(
+        this SecurityRole securityRule,
+        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
     {
-        return securityRule.And(new SecurityRule.CustomProviderSecurityRule(genericCustomProviderType));
+        return securityRule.ToSecurityRule().Or(otherSecurityRule);
+    }
+
+    public static SecurityRule.AndSecurityRule And(
+        this SecurityRole securityRule,
+        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+    {
+        return securityRule.ToSecurityRule().And(otherSecurityRule);
+    }
+
+    public static SecurityRule.OrSecurityRule Or(
+        this SecurityOperation securityOperation,
+        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+    {
+        return securityOperation.ToSecurityRule().Or(otherSecurityRule);
+    }
+
+    public static SecurityRule.AndSecurityRule And(
+        this SecurityOperation securityOperation,
+        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+    {
+        return securityOperation.ToSecurityRule().And(otherSecurityRule);
+    }
+
+    public static SecurityRule.OrSecurityRule Or(
+        this IEnumerable<SecurityRole> securityRoles,
+        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+    {
+        return securityRoles.ToSecurityRule().Or(otherSecurityRule);
+    }
+
+    public static SecurityRule.AndSecurityRule And(
+        this IEnumerable<SecurityRole> securityRoles,
+        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+    {
+        return securityRoles.ToSecurityRule().And(otherSecurityRule);
     }
 }

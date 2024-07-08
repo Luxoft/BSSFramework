@@ -26,7 +26,11 @@ public class SecurityPathProviderFactory(
                 var securityProviderType =
                     customProviderSecurityRule.GenericSecurityProviderType.MakeGenericType(typeof(TDomainObject));
 
-                return (ISecurityProvider<TDomainObject>)serviceProvider.GetRequiredService(securityProviderType);
+                var securityProvider = customProviderSecurityRule.Key == null
+                                           ? serviceProvider.GetRequiredService(securityProviderType)
+                                           : serviceProvider.GetRequiredKeyedService(securityProviderType, customProviderSecurityRule.Key);
+
+                return (ISecurityProvider<TDomainObject>)securityProvider;
             }
 
             case SecurityRule.OrSecurityRule orSecurityRule:

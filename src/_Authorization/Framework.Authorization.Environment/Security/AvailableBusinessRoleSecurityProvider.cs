@@ -8,7 +8,7 @@ using Framework.SecuritySystem;
 
 namespace Framework.Authorization.Environment.Security;
 
-public class BusinessRoleSecurityProvider<TDomainObject> : SecurityProvider<TDomainObject>
+public class AvailableBusinessRoleSecurityProvider<TDomainObject> : SecurityProvider<TDomainObject>
 
     where TDomainObject : PersistentDomainObjectBase, IIdentityObject<Guid>
 {
@@ -18,7 +18,7 @@ public class BusinessRoleSecurityProvider<TDomainObject> : SecurityProvider<TDom
 
     private readonly Lazy<Expression<Func<TDomainObject, bool>>> lazySecurityFilter;
 
-    public BusinessRoleSecurityProvider(
+    public AvailableBusinessRoleSecurityProvider(
         IAvailablePermissionSource availablePermissionSource,
         IRelativeDomainPathInfo<TDomainObject, BusinessRole> toBusinessRolePathInfo)
     {

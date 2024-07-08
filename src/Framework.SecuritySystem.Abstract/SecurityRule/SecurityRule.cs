@@ -16,6 +16,11 @@ public abstract record SecurityRule
     /// </summary>
     public static DisabledSecurityRule Disabled { get; } = new();
 
+    /// <summary>
+    /// Доступ текущего пользователя
+    /// </summary>
+    public static CustomProviderSecurityRule CurrentUser { get; } = new(typeof(ISecurityProvider<>), nameof(CurrentUser));
+
 
     public static implicit operator SecurityRule(SecurityOperation securityOperation)
     {
@@ -60,7 +65,7 @@ public abstract record SecurityRule
         public override string ToString() => nameof(Disabled);
     }
 
-    public record CustomProviderSecurityRule(Type GenericSecurityProviderType) : DomainObjectSecurityRule;
+    public record CustomProviderSecurityRule(Type GenericSecurityProviderType, string? Key = null) : DomainObjectSecurityRule;
 
     public abstract record ExpandableSecurityRule : DomainObjectSecurityRule
     {
@@ -103,6 +108,16 @@ public abstract record SecurityRule
     /// <param name="SecurityRoles">Список неразвёрнутых ролей</param>
     public record NonExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : ExpandableSecurityRule
     {
+        public static implicit operator NonExpandedRolesSecurityRule(SecurityRole securityRole)
+        {
+            return securityRole.ToSecurityRule();
+        }
+
+        public static implicit operator NonExpandedRolesSecurityRule(SecurityRole[] securityRoles)
+        {
+            return securityRoles.ToSecurityRule();
+        }
+
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
                                                  : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";

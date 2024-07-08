@@ -20,4 +20,6 @@ public interface ISecuritySystemSettings
     ISecuritySystemSettings AddSecurityOperation(SecurityOperation securityOperation, SecurityOperationInfo info);
 
     ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions);
+
+    ISecuritySystemSettings SetCurrentUserSecurityProvider(Type type);
 }

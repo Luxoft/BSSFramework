@@ -32,6 +32,7 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
 
+                       .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
                        .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>))
 

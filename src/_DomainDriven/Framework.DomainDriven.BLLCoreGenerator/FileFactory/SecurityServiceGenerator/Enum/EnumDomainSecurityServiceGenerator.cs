@@ -38,7 +38,6 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
     public override IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters()
     {
-        yield return (typeof(ISecurityProvider<>).ToTypeReference(this.DomainType), "disabledSecurityProvider", null);
         yield return (typeof(ISecurityRuleExpander).ToTypeReference(), "securityRuleExpander", null);
 
         {

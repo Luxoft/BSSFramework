@@ -4,12 +4,10 @@ using Framework.QueryableSource;
 namespace Framework.SecuritySystem;
 
 public class UntypedDependencyDomainSecurityService<TDomainObject, TBaseDomainObject, TIdent>(
-    ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
     IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
     IQueryableSource queryableSource)
     : DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject>(
-        disabledSecurityProvider,
         securityRuleExpander,
         baseDomainSecurityService)
     where TDomainObject : IIdentityObject<TIdent>

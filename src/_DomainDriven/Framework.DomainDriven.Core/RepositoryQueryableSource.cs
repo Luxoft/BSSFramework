@@ -6,17 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;
 
-public class RepositoryQueryableSource : IQueryableSource
+public class RepositoryQueryableSource(IServiceProvider serviceProvider) : IQueryableSource
 {
-    private readonly IServiceProvider serviceProvider;
-
-    public RepositoryQueryableSource(IServiceProvider serviceProvider)
-    {
-        this.serviceProvider = serviceProvider;
-    }
-
     public IQueryable<TDomainObject> GetQueryable<TDomainObject>()
     {
-        return this.serviceProvider.GetRequiredKeyedService<IRepository<TDomainObject>>(nameof(SecurityRule.Disabled)).GetQueryable();
+        return serviceProvider.GetRequiredKeyedService<IRepository<TDomainObject>>(nameof(SecurityRule.Disabled)).GetQueryable();
     }
 }

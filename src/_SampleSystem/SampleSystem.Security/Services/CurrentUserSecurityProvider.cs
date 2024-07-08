@@ -13,7 +13,7 @@ public class CurrentUserSecurityProvider<TDomainObject>(
     IRelativeDomainPathInfo<TDomainObject, Employee> toEmployeePathInfo) : SecurityProvider<TDomainObject>
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
-        toEmployeePathInfo.Path.Select(employee => employee.Login == actualPrincipalSource.ActualPrincipal.Name);
+        toEmployeePathInfo.Path.Select(employee => employee.Active && employee.Login == actualPrincipalSource.ActualPrincipal.Name);
 
     public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
     {

@@ -5,10 +5,9 @@
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
 public abstract class ContextDomainSecurityServiceBase<TDomainObject>(
-    ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
     ISecurityPathProviderFactory securityPathProviderFactory)
-    : DomainSecurityService<TDomainObject>( disabledSecurityProvider, securityRuleExpander)
+    : DomainSecurityService<TDomainObject>(securityRuleExpander)
 {
     protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainObjectSecurityRule securityRule)
     {
@@ -20,12 +19,10 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject>(
 }
 
 public class ContextDomainSecurityService<TDomainObject>(
-    ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
     ISecurityPathProviderFactory securityPathProviderFactory,
     SecurityPath<TDomainObject> securityPath)
     : ContextDomainSecurityServiceBase<TDomainObject>(
-        disabledSecurityProvider,
         securityRuleExpander,
         securityPathProviderFactory)
 {

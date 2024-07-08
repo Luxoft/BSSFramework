@@ -3,13 +3,11 @@
 namespace Framework.SecuritySystem;
 
 public class DependencyDomainSecurityService<TDomainObject, TBaseDomainObject>(
-    ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
     IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
     IQueryableSource queryableSource,
     IRelativeDomainPathInfo<TDomainObject, TBaseDomainObject> pathInfo)
     : DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject>(
-        disabledSecurityProvider,
         securityRuleExpander,
         baseDomainSecurityService)
 {

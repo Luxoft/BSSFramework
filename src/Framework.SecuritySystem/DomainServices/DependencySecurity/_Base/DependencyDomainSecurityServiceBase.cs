@@ -1,10 +1,9 @@
 ﻿namespace Framework.SecuritySystem;
 
 public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject>(
-    ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
     IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
-    : DomainSecurityServiceBase<TDomainObject>(disabledSecurityProvider)
+    : DomainSecurityServiceBase<TDomainObject>
 {
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {

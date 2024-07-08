@@ -6,53 +6,51 @@ using Framework.Core;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-namespace Framework.Authorization.Environment
+namespace Framework.Authorization.Environment.Security;
+
+public class BusinessRoleSecurityProvider<TDomainObject> : SecurityProvider<TDomainObject>
+
+    where TDomainObject : PersistentDomainObjectBase, IIdentityObject<Guid>
 {
-    public class BusinessRoleSecurityProvider<TDomainObject> : SecurityProvider<TDomainObject>
+    private readonly IAvailablePermissionSource availablePermissionSource;
 
-        where TDomainObject : PersistentDomainObjectBase, IIdentityObject<Guid>
+    private readonly Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath;
+
+    private readonly Lazy<Expression<Func<TDomainObject, bool>>> lazySecurityFilter;
+
+    public BusinessRoleSecurityProvider(
+        IAvailablePermissionSource availablePermissionSource,
+        IRelativeDomainPathInfo<TDomainObject, BusinessRole> toBusinessRolePathInfo)
     {
-        private readonly IAvailablePermissionSource availablePermissionSource;
+        this.availablePermissionSource = availablePermissionSource;
+        this.businessRoleSecurityPath = toBusinessRolePathInfo.Path;
 
-        private readonly Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath;
+        this.lazySecurityFilter = LazyHelper.Create(
+            () =>
+            {
+                var permissionQ = availablePermissionSource.GetAvailablePermissionsQueryable();
 
-        private readonly Lazy<Expression<Func<TDomainObject, bool>>> lazySecurityFilter;
+                Expression<Func<BusinessRole, bool>> filter = businessRole => permissionQ.Select(p => p.Role).Contains(businessRole);
 
+                return filter.OverrideInput(this.businessRoleSecurityPath);
+            });
+    }
 
-        public BusinessRoleSecurityProvider(
-            IAvailablePermissionSource availablePermissionSource,
-            Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath)
-        {
-            this.availablePermissionSource = availablePermissionSource;
-            this.businessRoleSecurityPath = businessRoleSecurityPath;
+    protected override LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.All;
 
-            this.lazySecurityFilter = LazyHelper.Create(
-                () =>
-                {
-                    var permissionQ = availablePermissionSource.GetAvailablePermissionsQueryable();
+    public override Expression<Func<TDomainObject, bool>> SecurityFilter => this.lazySecurityFilter.Value;
 
-                    Expression<Func<BusinessRole, bool>> filter = businessRole => permissionQ.Select(p => p.Role).Contains(businessRole);
+    public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
+    {
+        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-                    return filter.OverrideInput(this.businessRoleSecurityPath);
-                });
-        }
+        var role = this.businessRoleSecurityPath.Eval(domainObject);
 
-        protected override LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.All;
-
-        public override Expression<Func<TDomainObject, bool>> SecurityFilter { get { return this.lazySecurityFilter.Value; } }
-
-        public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
-        {
-            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
-            var role = this.businessRoleSecurityPath.Eval(domainObject);
-
-            return this.availablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false)
-                       .Where(permission => permission.Role == role)
-                       .Select(permission => permission.Principal)
-                       .Distinct()
-                       .Select(principal => principal.Name)
-                       .ToUnboundedList();
-        }
+        return this.availablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false)
+                   .Where(permission => permission.Role == role)
+                   .Select(permission => permission.Principal)
+                   .Distinct()
+                   .Select(principal => principal.Name)
+                   .ToUnboundedList();
     }
 }

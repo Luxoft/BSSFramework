@@ -1,5 +1,5 @@
 ﻿using Framework.DependencyInjection;
-using Framework.SecuritySystem;
+using Framework.SecuritySystem.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,13 +27,11 @@ public static class SampleSystemApplicationExtensions
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services) =>
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
 
+                .AddRelativeDomainPath((Employee employee) => employee)
                 .AddScoped(typeof(CurrentEmployeeSecurityProvider<>))
-                .AddSingleton<IRelativeDomainPathInfo<Employee, Employee>>(
-                    new RelativeDomainPathInfo<Employee, Employee>(employee => employee))
 
-                .AddSingleton(typeof(TestRestrictionObjectConditionFactory<>))
-                .AddSingleton<IRelativeDomainPathInfo<TestRestrictionObject, TestRestrictionObject>>(
-                    new RelativeDomainPathInfo<TestRestrictionObject, TestRestrictionObject>(v => v));
+                .AddRelativeDomainPath((TestRestrictionObject v) => v)
+                .AddSingleton(typeof(TestRestrictionObjectConditionFactory<>));
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {

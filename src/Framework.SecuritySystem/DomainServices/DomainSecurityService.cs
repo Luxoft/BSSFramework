@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 public abstract class DomainSecurityService<TDomainObject>(
     ISecurityProvider<TDomainObject> disabledSecurityProvider,

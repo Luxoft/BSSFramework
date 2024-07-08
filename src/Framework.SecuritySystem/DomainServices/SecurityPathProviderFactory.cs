@@ -30,7 +30,7 @@ public class SecurityPathProviderFactory(
                                            ? serviceProvider.GetRequiredService(securityProviderType)
                                            : serviceProvider.GetRequiredKeyedService(securityProviderType, customProviderSecurityRule.Key);
 
-                return (ISecurityProvider<TDomainObject>)serviceProvider;
+                return (ISecurityProvider<TDomainObject>)securityProvider;
             }
 
             case SecurityRule.OrSecurityRule orSecurityRule:

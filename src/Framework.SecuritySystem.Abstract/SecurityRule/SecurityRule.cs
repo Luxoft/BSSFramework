@@ -20,6 +20,7 @@ public abstract record SecurityRule
     /// Доступ текущего пользователя
     /// </summary>
     public static DomainObjectSecurityRule CurrentUser { get; } =
+
         new CustomProviderSecurityRule(typeof(ISecurityProvider<>), nameof(CurrentUser));
 
 

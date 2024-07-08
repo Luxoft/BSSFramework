@@ -7,12 +7,10 @@ using Framework.Exceptions;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.Authorization.SecuritySystem;
 
 public class PrincipalDomainService(
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
+    [DisabledSecurity] IRepository<Principal> principalRepository,
     IPrincipalGeneralValidator principalGeneralValidator,
     IPrincipalIdentitySource? principalIdentitySource = null) : IPrincipalDomainService
 {

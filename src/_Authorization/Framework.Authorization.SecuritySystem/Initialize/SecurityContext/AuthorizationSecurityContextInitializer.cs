@@ -3,7 +3,6 @@ using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using NHibernate.Linq;
@@ -11,8 +10,7 @@ using NHibernate.Linq;
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationSecurityContextInitializer(
-    [FromKeyedServices(nameof(SecurityRule.Disabled))]
-    IRepository<SecurityContextType> securityContextTypeRepository,
+    [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
     IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
     ILogger<AuthorizationSecurityContextInitializer> logger,
     InitializerSettings settings)

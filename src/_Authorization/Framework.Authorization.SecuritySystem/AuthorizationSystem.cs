@@ -9,8 +9,6 @@ using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem;
@@ -22,8 +20,7 @@ public class AuthorizationSystem(
     IRealTypeResolver realTypeResolver,
     IUserAuthenticationService userAuthenticationService,
     IOperationAccessorFactory operationAccessorFactory,
-    [FromKeyedServices(nameof(SecurityRule.Disabled))]
-    IRepository<Permission> permissionRepository,
+    [DisabledSecurity] IRepository<Permission> permissionRepository,
     TimeProvider timeProvider,
     ISecurityRolesIdentsResolver securityRolesIdentsResolver,
     ISecurityContextInfoService securityContextInfoService)

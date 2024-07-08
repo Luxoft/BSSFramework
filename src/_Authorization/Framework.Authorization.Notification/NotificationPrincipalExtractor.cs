@@ -29,7 +29,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
         IServiceProvider serviceProvider,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         INotificationBasePermissionFilterSource notificationBasePermissionFilterSource,
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Permission> permissionRepository)
+        [DisabledSecurity] IRepository<Permission> permissionRepository)
     {
         this.serviceProvider = serviceProvider;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;

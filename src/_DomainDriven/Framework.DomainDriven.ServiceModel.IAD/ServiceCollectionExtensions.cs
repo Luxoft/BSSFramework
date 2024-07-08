@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 
 using Framework.Authorization.Domain;
-using Framework.Authorization.Environment;
 using Framework.Authorization.Environment.Security;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;

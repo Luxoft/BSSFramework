@@ -3,12 +3,10 @@ using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
 public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext>(
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<TSecurityContext> securityContextRepository,
+    [DisabledSecurity] IRepository<TSecurityContext> securityContextRepository,
     LocalStorage<TSecurityContext> localStorage)
     : IAuthorizationTypedExternalSource
     where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext

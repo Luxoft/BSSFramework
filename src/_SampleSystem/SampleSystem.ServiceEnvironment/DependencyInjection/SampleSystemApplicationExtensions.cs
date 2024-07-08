@@ -28,7 +28,12 @@ public static class SampleSystemApplicationExtensions
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
 
                 .AddScoped(typeof(CurrentEmployeeSecurityProvider<>))
-                .AddSingleton<IRelativeDomainPathInfo<Employee, Employee>>(new RelativeDomainPathInfo<Employee, Employee>(employee => employee));
+                .AddSingleton<IRelativeDomainPathInfo<Employee, Employee>>(
+                    new RelativeDomainPathInfo<Employee, Employee>(employee => employee))
+
+                .AddSingleton(typeof(TestRestrictionObjectConditionFactory<>))
+                .AddSingleton<IRelativeDomainPathInfo<TestRestrictionObject, TestRestrictionObject>>(
+                    new RelativeDomainPathInfo<TestRestrictionObject, TestRestrictionObject>(v => v));
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {

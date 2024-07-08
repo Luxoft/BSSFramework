@@ -25,7 +25,7 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
 
                     var securityContextInfo = this.GetSecurityContextInfo(securityContextType);
 
-                    var allowedSecurityContexts = securityRole.Information.Restriction.SecurityContexts;
+                    var allowedSecurityContexts = securityRole.Information.Restriction.SecurityContextTypes;
 
                     return allowedSecurityContexts == null || allowedSecurityContexts.Contains(securityContextInfo.Type);
                 })

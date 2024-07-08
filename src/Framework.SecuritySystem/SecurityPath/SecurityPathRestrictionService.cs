@@ -6,7 +6,7 @@ using Framework.Core;
 
 namespace Framework.SecuritySystem;
 
-public class SecurityPathRestrictionService(SecurityPathRestrictionServiceSettings? settings = null) : ISecurityPathRestrictionService
+public class SecurityPathRestrictionService(IServiceProvider serviceProvider, SecurityPathRestrictionServiceSettings? settings = null) : ISecurityPathRestrictionService
 {
     public SecurityPath<TDomainObject> ApplyRestriction<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
@@ -14,7 +14,7 @@ public class SecurityPathRestrictionService(SecurityPathRestrictionServiceSettin
     {
         var visitedSecurityPath = this.VisitSecurityContexts(securityPath, restriction);
 
-        var result = restriction.Conditions.Aggregate(visitedSecurityPath, this.TryAddCondition);
+        var result = restriction.ConditionFactoryTypes.Aggregate(visitedSecurityPath, this.TryAddCondition);
 
         return result;
     }
@@ -23,7 +23,7 @@ public class SecurityPathRestrictionService(SecurityPathRestrictionServiceSettin
         SecurityPath<TDomainObject> securityPath,
         SecurityPathRestriction restriction)
     {
-        if (restriction.SecurityContexts == null)
+        if (restriction.SecurityContextTypes == null)
         {
             return securityPath;
         }
@@ -33,7 +33,7 @@ public class SecurityPathRestrictionService(SecurityPathRestrictionServiceSettin
             {
                 var usedTypes = securityPath.GetUsedTypes().ToList();
 
-                var invalidTypes = restriction.SecurityContexts.Except(usedTypes).ToList();
+                var invalidTypes = restriction.SecurityContextTypes.Except(usedTypes).ToList();
 
                 if (invalidTypes.Any())
                 {
@@ -41,39 +41,26 @@ public class SecurityPathRestrictionService(SecurityPathRestrictionServiceSettin
                 }
             }
 
-            return this.Visit(securityPath, [.. restriction.SecurityContexts]);
+            return this.Visit(securityPath, [.. restriction.SecurityContextTypes]);
         }
     }
 
-    private SecurityPath<TDomainObject> TryAddCondition<TDomainObject>(SecurityPath<TDomainObject> securityPath, LambdaExpression condition)
+    private SecurityPath<TDomainObject> TryAddCondition<TDomainObject>(SecurityPath<TDomainObject> securityPath, Type conditionFactoryType)
     {
-        var conditionType = condition.Parameters.Single().Type;
+        var conditionFactory =
+            (IFactory<Expression<Func<TDomainObject, bool>>>?)serviceProvider.GetService(
+                conditionFactoryType.MakeGenericType(typeof(TDomainObject)));
 
-        if (condition is Expression<Func<TDomainObject, bool>> typedCondition)
+        var condition = conditionFactory?.Create();
+
+        if (condition != null)
         {
-            return securityPath.And(typedCondition);
-        }
-        else if (conditionType.IsAssignableFrom(typeof(TDomainObject)))
-        {
-            return new Func<SecurityPath<TDomainObject>, Expression<Func<TDomainObject, bool>>, SecurityPath<TDomainObject>>(
-                       this.AddCondition)
-                   .CreateGenericMethod(typeof(TDomainObject), conditionType)
-                   .Invoke<SecurityPath<TDomainObject>>(this, securityPath, condition);
+            return securityPath.And(condition);
         }
         else
         {
             return securityPath;
         }
-    }
-
-    private SecurityPath<TDomainObject> AddCondition<TDomainObject, TConditionSource>(
-        SecurityPath<TDomainObject> securityPath,
-        Expression<Func<TConditionSource, bool>> condition)
-        where TDomainObject : TConditionSource
-    {
-        var castedExpr = condition.OverrideInput((TDomainObject source) => source);
-
-        return securityPath.And(castedExpr);
     }
 
     private SecurityPath<TDomainObject> Visit<TDomainObject>(

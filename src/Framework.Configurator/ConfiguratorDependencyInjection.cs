@@ -48,6 +48,7 @@ public static class ConfiguratorDependencyInjection
                         typeof(ConfiguratorDependencyInjection).GetTypeInfo().Assembly,
                         EmbeddedFileNamespace)
                 })
+            .UseRouting() // needed for IIS
             .UseEndpoints(x => x.MapApi(route));
 
     private static void MapApi(this IEndpointRouteBuilder endpointsBuilder, string route) =>

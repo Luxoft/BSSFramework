@@ -76,7 +76,6 @@ public static class ServiceCollectionExtensions
         services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Disabled), typeof(Repository<>));
         services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.View), typeof(ViewRepository<>));
         services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Edit), typeof(EditRepository<>));
-        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRole.Administrator), typeof(AdministratorRepository<>));
 
         services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 

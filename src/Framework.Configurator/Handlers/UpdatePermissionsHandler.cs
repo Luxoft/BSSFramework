@@ -9,7 +9,6 @@ using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
@@ -17,8 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePermissionsHandler(
-    [FromKeyedServices(nameof(SecurityRole.Administrator))] IRepository<Principal> PrincipalRepository,
-    [FromKeyedServices(nameof(SecurityRole.Administrator))] IRepository<Permission> PermissionRepository,
+    [EditSecurity] IRepository<Principal> PrincipalRepository,
+    [EditSecurity] IRepository<Permission> PermissionRepository,
     IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
     IRepositoryFactory<PermissionRestriction> PermissionRestrictionRepositoryFactory,
     IRepositoryFactory<SecurityContextType> SecurityContextTypeRepositoryFactory,

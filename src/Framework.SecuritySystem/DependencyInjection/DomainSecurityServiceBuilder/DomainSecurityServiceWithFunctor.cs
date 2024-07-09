@@ -1,11 +1,10 @@
 ﻿namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TDomainObject>(
-    ISecurityProvider<TDomainObject> disabledSecurityProvider,
     ISecurityRuleExpander securityRuleExpander,
     TOriginalDomainSecurityService originalDomainSecurityService,
     IEnumerable<IOverrideSecurityProviderFunctor<TDomainObject>> functorList)
-    : DomainSecurityService<TDomainObject>( disabledSecurityProvider, securityRuleExpander)
+    : DomainSecurityService<TDomainObject>(securityRuleExpander)
     where TOriginalDomainSecurityService : IDomainSecurityService<TDomainObject>
 {
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)

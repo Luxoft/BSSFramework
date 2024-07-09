@@ -5,12 +5,10 @@ using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.Authorization.SecuritySystem.ExternalSource;
 
 public class HierarchicalAuthorizationTypedExternalSource<TSecurityContext>(
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<TSecurityContext> securityContextRepository,
+    [DisabledSecurity] IRepository<TSecurityContext> securityContextRepository,
     LocalStorage<TSecurityContext> localStorage,
     ISecurityContextDisplayService<TSecurityContext> displayService)
     : AuthorizationTypedExternalSourceBase<TSecurityContext>(securityContextRepository, localStorage)

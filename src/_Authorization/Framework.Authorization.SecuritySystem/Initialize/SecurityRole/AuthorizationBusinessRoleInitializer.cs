@@ -3,7 +3,6 @@ using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using NHibernate.Linq;
@@ -11,8 +10,7 @@ using NHibernate.Linq;
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationBusinessRoleInitializer(
-    [FromKeyedServices(nameof(SecurityRule.Disabled))]
-    IRepository<BusinessRole> businessRoleRepository,
+    [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
     ISecurityRoleSource securityRoleSource,
     ILogger<AuthorizationBusinessRoleInitializer> logger,
     InitializerSettings settings)

@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
 
 using NHibernate.Linq;
 
@@ -17,7 +16,7 @@ public class ExampleServiceForRepository : IExampleServiceForRepository
             IRepositoryFactory<Employee> employeeRepositoryFactory,
             IRepositoryFactory<BusinessUnit> businessUnitRepository)
     {
-        this.employeeRepository = employeeRepositoryFactory.Create(SecurityRule.Disabled);
+        this.employeeRepository = employeeRepositoryFactory.Create();
 
         this.businessUnitRepository = businessUnitRepository.Create(SampleSystemSecurityOperation.BusinessUnitView);
     }

@@ -136,7 +136,8 @@ public static class SampleSystemDomainSecurityServiceExtensions
                             .SetPath(SecurityPath<EmployeePhoto>.Create(employeePhoto => employeePhoto.Employee.CoreBusinessUnit)))
 
                   .Add<ManagementUnitFluentMapping>(
-                      b => b.SetUntypedDependency<ManagementUnit>())
+                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitView)
+                            .SetEdit(SampleSystemSecurityOperation.ManagementUnitEdit))
 
                   .Add<Example1>(
                       b => b.SetView(SampleSystemSecurityOperation.LocationView)

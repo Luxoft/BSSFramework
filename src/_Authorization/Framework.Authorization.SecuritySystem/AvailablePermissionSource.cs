@@ -4,12 +4,10 @@ using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.Authorization.SecuritySystem;
 
 public class AvailablePermissionSource(
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Permission> permissionRepository,
+    [DisabledSecurity] IRepository<Permission> permissionRepository,
     TimeProvider timeProvider,
     IActualPrincipalSource actualPrincipalSource,
     IUserAuthenticationService userAuthenticationService,

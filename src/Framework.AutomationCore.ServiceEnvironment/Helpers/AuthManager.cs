@@ -6,16 +6,14 @@ using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Automation.ServiceEnvironment;
 
 public class AuthManager(
     IUserAuthenticationService userAuthenticationService,
     ISecurityContextInfoService securityContextInfoService,
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> securityContextTypeRepository,
+    [DisabledSecurity] IRepository<Principal> principalRepository,
+    [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
+    [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
     ISecurityRoleSource securityRoleSource,
     IPrincipalDomainService principalDomainService)
 {

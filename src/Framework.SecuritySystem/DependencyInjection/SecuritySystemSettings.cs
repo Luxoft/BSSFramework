@@ -52,9 +52,9 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
-    public ISecuritySystemSettings SetCurrentUserSecurityProvider(Type type)
+    public ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType)
     {
-        this.RegisterActions.Add(sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(SecurityRule.CurrentUser), type));
+        this.RegisterActions.Add(sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(SecurityRule.CurrentUser), genericSecurityProviderType));
 
         return this;
     }

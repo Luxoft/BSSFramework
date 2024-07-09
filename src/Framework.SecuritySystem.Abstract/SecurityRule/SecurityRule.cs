@@ -7,17 +7,23 @@ namespace Framework.SecuritySystem;
 
 public abstract record SecurityRule
 {
+    /// <summary>
+    /// Правило доступа для просмотра объекта
+    /// </summary>
     public static SpecialSecurityRule View { get; } = new(nameof(View));
 
+    /// <summary>
+    /// Правило доступа для редактирования объекта
+    /// </summary>
     public static SpecialSecurityRule Edit { get; } = new(nameof(Edit));
 
     /// <summary>
-    /// Специальная правило доступа для отключения безопасности
+    /// Правило доступа для отключения безопасности
     /// </summary>
-    public static DisabledSecurityRule Disabled { get; } = new();
+    public static CustomProviderSecurityRule Disabled { get; } = new(typeof(ISecurityProvider<>), nameof(Disabled));
 
     /// <summary>
-    /// Доступ текущего пользователя
+    /// Правило доступа для доменных объектов привязанных к текущему пользователю
     /// </summary>
     public static CustomProviderSecurityRule CurrentUser { get; } = new(typeof(ISecurityProvider<>), nameof(CurrentUser));
 
@@ -60,12 +66,10 @@ public abstract record SecurityRule
         }
     }
 
-    public record DisabledSecurityRule : DomainObjectSecurityRule
+    public record CustomProviderSecurityRule(Type GenericSecurityProviderType, string? Key = null) : DomainObjectSecurityRule
     {
-        public override string ToString() => nameof(Disabled);
+        public override string ToString() => this.Key ?? base.ToString();
     }
-
-    public record CustomProviderSecurityRule(Type GenericSecurityProviderType, string? Key = null) : DomainObjectSecurityRule;
 
     public abstract record ExpandableSecurityRule : DomainObjectSecurityRule
     {

@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 
 using Framework.Authorization.Domain;
-using Framework.Authorization.Environment;
 using Framework.Authorization.Environment.Security;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
@@ -179,8 +178,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)
     {
-        var principalViewSecurityRule = SecurityRole.Administrator
-                                                    .Or(AuthorizationSecurityRule.CurrentPrincipal);
+        var principalViewSecurityRule = SecurityRole.Administrator.Or(AuthorizationSecurityRule.CurrentPrincipal);
 
         return services
 
@@ -205,9 +203,7 @@ public static class ServiceCollectionExtensions
                                    .SetEdit(SecurityRole.Administrator.Or(AuthorizationSecurityRule.DelegatedFrom)))
 
                          .Add<BusinessRole>(
-                             b => b.SetView(
-                                       SecurityRole.Administrator
-                                                   .Or(AuthorizationSecurityRule.AvailableBusinessRole))
+                             b => b.SetView(SecurityRole.Administrator.Or(AuthorizationSecurityRule.AvailableBusinessRole))
                                    .SetEdit(SecurityRole.Administrator))
 
                          .Add<SecurityContextType>(

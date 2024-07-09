@@ -1,19 +1,13 @@
 ﻿namespace Framework.SecuritySystem;
 
-public class OnlyDisabledDomainSecurityService<TDomainObject> : IDomainSecurityService<TDomainObject>
+public class OnlyDisabledDomainSecurityService<TDomainObject>(ISecurityProvider<TDomainObject> disabledSecurityProvider)
+    : IDomainSecurityService<TDomainObject>
 {
-    private readonly ISecurityProvider<TDomainObject> disabledSecurityProvider;
-
-    public OnlyDisabledDomainSecurityService(ISecurityProvider<TDomainObject> disabledSecurityProvider)
-    {
-        this.disabledSecurityProvider = disabledSecurityProvider;
-    }
-
     public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityRule securityRule)
     {
         if (securityRule == SecurityRule.Disabled)
         {
-            return this.disabledSecurityProvider;
+            return disabledSecurityProvider;
         }
         else
         {

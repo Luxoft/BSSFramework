@@ -40,7 +40,6 @@ namespace Framework.DomainDriven.BLLCoreGenerator
 
         public override IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters()
         {
-            yield return (typeof(ISecurityProvider<>).ToTypeReference(this.DomainType), "disabledSecurityProvider", null);
             yield return (typeof(ISecurityRuleExpander).ToTypeReference(), "securityRuleResolver", null);
             yield return (typeof(ISecurityPathProviderFactory).ToTypeReference(), "securityPathProviderFactory", null);
         }

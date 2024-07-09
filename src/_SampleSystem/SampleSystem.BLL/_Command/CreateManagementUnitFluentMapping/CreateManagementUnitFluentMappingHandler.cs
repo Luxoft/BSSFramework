@@ -1,6 +1,4 @@
-﻿using Framework.SecuritySystem;
-
-using MediatR;
+﻿using MediatR;
 
 using SampleSystem.Domain;
 

@@ -12,7 +12,14 @@ public interface IDomainSecurityServiceBuilder<TDomainObject>
 
     IDomainSecurityServiceBuilder<TDomainObject> SetPath(SecurityPath<TDomainObject> securityPath);
 
-    IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> securityPath);
+    /// <summary>
+    /// RelativeDomainPathInfo must be registered
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>();
+
+    IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> relativeDomainPath);
 
     /// <summary>
     /// For projection

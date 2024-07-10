@@ -15,7 +15,7 @@ public class NotificationBasePermissionFilterSource(
     {
         if (securityRoles == null) throw new ArgumentNullException(nameof(securityRoles));
 
-        var businessRoleIdents = securityRoles.Select(securityRoleSource.GetFullRole).Where(sr => !sr.IsVirtual).Select(sr => sr.Id).ToList();
+        var businessRoleIdents = securityRoles.Select(securityRoleSource.GetSecurityRole).Where(sr => !sr.IsVirtual).Select(sr => sr.Id).ToList();
 
         var permissionQ = availablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false);
 

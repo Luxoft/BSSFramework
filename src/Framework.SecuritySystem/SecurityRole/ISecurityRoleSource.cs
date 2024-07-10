@@ -4,7 +4,7 @@ public interface ISecurityRoleSource
 {
     IReadOnlyList<FullSecurityRole> SecurityRoles { get; }
 
-    FullSecurityRole GetFullRole(SecurityRole securityRole);
+    FullSecurityRole GetSecurityRole(SecurityRole securityRole);
 
     FullSecurityRole GetSecurityRole(string name);
 

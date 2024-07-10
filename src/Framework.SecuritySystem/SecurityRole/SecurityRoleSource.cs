@@ -8,7 +8,6 @@ public class SecurityRoleSource : ISecurityRoleSource
 
     private readonly IReadOnlyDictionary<string, FullSecurityRole> securityRoleByNameDict;
 
-
     private readonly IReadOnlyDictionary<string, FullSecurityRole> securityRoleByCustomNameDict;
 
     public SecurityRoleSource(IEnumerable<FullSecurityRole> securityRoles)
@@ -27,7 +26,7 @@ public class SecurityRoleSource : ISecurityRoleSource
 
     public IReadOnlyList<FullSecurityRole> SecurityRoles { get; }
 
-    public FullSecurityRole GetFullRole(SecurityRole securityRole) => this.SecurityRoles.Single(sr => sr == securityRole);
+    public FullSecurityRole GetSecurityRole(SecurityRole securityRole) => this.GetSecurityRole(securityRole.Name);
 
     public FullSecurityRole GetSecurityRole(string name)
     {
@@ -44,10 +43,10 @@ public class SecurityRoleSource : ISecurityRoleSource
     private void Validate()
     {
         var idDuplicates = this.SecurityRoles
-                           .GetDuplicates(
-                               new EqualityComparerImpl<FullSecurityRole>(
-                                   (sr1, sr2) => sr1.Id == sr2.Id,
-                                   sr => sr.Id.GetHashCode())).ToList();
+                               .GetDuplicates(
+                                   new EqualityComparerImpl<FullSecurityRole>(
+                                       (sr1, sr2) => sr1.Id == sr2.Id,
+                                       sr => sr.Id.GetHashCode())).ToList();
 
         if (idDuplicates.Any())
         {
@@ -55,10 +54,10 @@ public class SecurityRoleSource : ISecurityRoleSource
         }
 
         var nameDuplicates = this.SecurityRoles
-                             .GetDuplicates(
-                                 new EqualityComparerImpl<FullSecurityRole>(
-                                     (sr1, sr2) => sr1.Name == sr2.Name,
-                                     sr => sr.Name.GetHashCode())).ToList();
+                                 .GetDuplicates(
+                                     new EqualityComparerImpl<FullSecurityRole>(
+                                         (sr1, sr2) => sr1.Name == sr2.Name,
+                                         sr => sr.Name.GetHashCode())).ToList();
 
         if (nameDuplicates.Any())
         {

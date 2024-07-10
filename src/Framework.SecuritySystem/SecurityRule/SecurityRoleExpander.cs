@@ -21,7 +21,7 @@ public class SecurityRoleExpander
                 var securityRoles = securityRoleSource.SecurityRoles
                                                       .Where(
                                                           sr => sr.GetAllElements(
-                                                                      c => c.Information.Children.Select(securityRoleSource.GetFullRole))
+                                                                      c => c.Information.Children.Select(securityRoleSource.GetSecurityRole))
                                                                   .IsIntersected(securityRule.SecurityRoles))
                                                       .Concat(securityRule.SecurityRoles)
                                                       .Distinct()

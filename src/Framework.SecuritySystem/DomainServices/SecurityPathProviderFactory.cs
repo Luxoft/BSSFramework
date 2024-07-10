@@ -59,7 +59,7 @@ public class SecurityPathProviderFactory(
 
                from securityRole in expandedSecurityRule.SecurityRoles
 
-               let securityRoleInfo = securityRoleSource.GetFullRole(securityRole).Information
+               let securityRoleInfo = securityRoleSource.GetSecurityRole(securityRole).Information
 
                let actualCustomExpandType = rootSecurityRule.CustomExpandType ?? expandedSecurityRule.CustomExpandType ?? securityRoleInfo.CustomExpandType
 

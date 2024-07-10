@@ -124,7 +124,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
         return this.securityRoleSource
                    .GetSecurityRole(delegatedFrom.Role.Id)
-                   .GetAllElements(role => role.Information.Children.Select(subRole => this.securityRoleSource.GetFullRole(subRole)))
+                   .GetAllElements(role => role.Information.Children.Select(subRole => this.securityRoleSource.GetSecurityRole(subRole)))
                    .Contains(this.securityRoleSource.GetSecurityRole(subPermission.Role.Id));
     }
 

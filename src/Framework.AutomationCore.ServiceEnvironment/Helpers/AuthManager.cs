@@ -35,7 +35,7 @@ public class AuthManager(
 
         foreach (var testPermission in testPermissions)
         {
-            var securityRole = securityRoleSource.GetFullRole(testPermission.SecurityRole);
+            var securityRole = securityRoleSource.GetSecurityRole(testPermission.SecurityRole);
 
             if (securityRole.IsVirtual)
             {

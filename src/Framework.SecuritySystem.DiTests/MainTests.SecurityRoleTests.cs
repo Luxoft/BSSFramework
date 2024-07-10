@@ -15,7 +15,7 @@ public partial class MainTests
         var securityRoleSource = this.rootServiceProvider.GetRequiredService<ISecurityRoleSource>();
 
         // Act
-        var adminRole = securityRoleSource.GetFullRole(SecurityRole.Administrator);
+        var adminRole = securityRoleSource.GetSecurityRole(SecurityRole.Administrator);
 
         // Assert
         adminRole.Information.Children.Contains(SecurityRole.SystemIntegration).Should().BeFalse();

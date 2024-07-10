@@ -918,6 +918,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestCustomContextSecurityObjContainer(rule)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestExceptObject)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestExceptObjectContainer(rule)));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestForceAbstract.ClassA)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetClassAContainer(rule)));
@@ -2472,6 +2476,34 @@ namespace SampleSystem.BLL
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.Position_Auto),
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.Ppm_Auto),
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.Role_Auto));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestExceptObject> GetTestExceptObjectContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestExceptObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestExceptObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestExceptObject>(
+                    fetchRootRule => fetchRootRule.SelectNested(testExceptObject => testExceptObject.Employee).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(testExceptObject => testExceptObject.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location));
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestExceptObject>(
+                    fetchRootRule => fetchRootRule.SelectNested(testExceptObject => testExceptObject.Employee).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(testExceptObject => testExceptObject.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location));
             }
             else
             {

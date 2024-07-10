@@ -29,7 +29,10 @@ public static class SampleSystemApplicationExtensions
 
                 .AddRelativeDomainPath((Employee employee) => employee)
 
+                .AddRelativeDomainPath((TestExceptObject v) => v.Employee)
+
                 .AddRelativeDomainPath((TestRestrictionObject v) => v)
+
                 .AddSingleton(typeof(TestRestrictionObjectConditionFactory<>));
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)

@@ -9,13 +9,15 @@ internal class OptimizeWhereAndConcatVisitor : ExpressionVisitor
 {
     private static readonly MethodInfo GenericConcatMethod = new Func<IQueryable<object>, IEnumerable<object>, IQueryable<object>>(Queryable.Concat).Method.GetGenericMethodDefinition();
 
+    private static readonly MethodInfo GenericExceptMethod = new Func<IQueryable<object>, IEnumerable<object>, IQueryable<object>>(Queryable.Except).Method.GetGenericMethodDefinition();
+
     private static readonly MethodInfo GenericWhereMethod = new Func<IQueryable<object>, Expression<Func<object, bool>>, IQueryable<object>>(Queryable.Where).Method.GetGenericMethodDefinition();
 
     private static readonly MethodInfo GenericBuildOrMethod = new Func<Expression<Func<object, bool>>, Expression<Func<object, bool>>, Expression<Func<object, bool>>>(ExpressionExtensions.BuildOr).Method.GetGenericMethodDefinition();
 
     private static readonly MethodInfo GenericBuildAndMethod = new Func<Expression<Func<object, bool>>, Expression<Func<object, bool>>, Expression<Func<object, bool>>>(ExpressionExtensions.BuildAnd).Method.GetGenericMethodDefinition();
 
-
+    private static readonly MethodInfo GenericBuildExceptMethod = new Func<Expression<Func<object, bool>>, Expression<Func<object, bool>>, Expression<Func<object, bool>>>(BuildExcept).Method.GetGenericMethodDefinition();
 
     private OptimizeWhereAndConcatVisitor()
     {
@@ -24,15 +26,43 @@ internal class OptimizeWhereAndConcatVisitor : ExpressionVisitor
 
     protected override Expression VisitMethodCall(MethodCallExpression node)
     {
-        return this.TryOptimizeWhere(node).Or(() => this.TryOptimizeConcat(node))
+        return this.TryOptimizeWhere(node)
+                   .Or(() => this.TryOptimizeConcat(node))
+                   .Or(() => this.TryOptimizeExcept(node))
                    .GetValueOrDefault(() => base.VisitMethodCall(node));
     }
 
     private Maybe<Expression> TryOptimizeConcat(MethodCallExpression node)
     {
+        return this.TrySquashWhereFilterMethods(
+            node,
+            GenericConcatMethod,
+            (elementType, left, right) =>
+            {
+                var buildOrMethod = GenericBuildOrMethod.MakeGenericMethod(elementType);
+
+                return (Expression)buildOrMethod.Invoke(null, [left, right]);
+            });
+    }
+
+    private Maybe<Expression> TryOptimizeExcept(MethodCallExpression node)
+    {
+        return this.TrySquashWhereFilterMethods(
+            node,
+            GenericExceptMethod,
+            (elementType, left, right) =>
+            {
+                var buildExceptMethod = GenericBuildExceptMethod.MakeGenericMethod(elementType);
+
+                return (Expression)buildExceptMethod.Invoke(null, [left, right]);
+            });
+    }
+
+    private Maybe<Expression> TrySquashWhereFilterMethods(MethodCallExpression node, MethodInfo genericMethod, Func<Type, Expression, Expression, Expression> getNewFilter)
+    {
         return from method in node.Method.ToMaybe()
 
-               where method.IsGenericMethodImplementation(GenericConcatMethod)
+               where method.IsGenericMethodImplementation(genericMethod)
 
                let elementType = method.GetGenericArguments().Single()
 
@@ -52,12 +82,11 @@ internal class OptimizeWhereAndConcatVisitor : ExpressionVisitor
 
                where q1FilterQuote.NodeType == ExpressionType.Quote && q2FilterQuote.NodeType == ExpressionType.Quote
 
-               let buildOrMethod = GenericBuildOrMethod.MakeGenericMethod(elementType)
-
-               let newFilter = (Expression)buildOrMethod.Invoke(null, new object[] { q1FilterQuote.Operand, q2FilterQuote.Operand })
+               let newFilter = getNewFilter(elementType, q1FilterQuote.Operand, q2FilterQuote.Operand)
 
                select (Expression)Expression.Call(whereMethod, q1.Arguments[0], Expression.Quote(newFilter));
     }
+
 
     private Maybe<Expression> TryOptimizeWhere(MethodCallExpression node)
     {
@@ -83,4 +112,15 @@ internal class OptimizeWhereAndConcatVisitor : ExpressionVisitor
     }
 
     public static readonly OptimizeWhereAndConcatVisitor Value = new OptimizeWhereAndConcatVisitor();
+
+
+    private static Expression<Func<T, bool>> BuildExcept<T>(Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2)
+    {
+        if (expr1 == null) throw new ArgumentNullException(nameof(expr1));
+        if (expr2 == null) throw new ArgumentNullException(nameof(expr2));
+
+        return from v1 in expr1
+               from v2 in expr2
+               select v1 && !v2;
+    }
 }

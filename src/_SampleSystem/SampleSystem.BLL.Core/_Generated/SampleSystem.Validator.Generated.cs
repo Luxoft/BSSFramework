@@ -102,6 +102,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestCustomContextSecurityObj>(this.GetTestCustomContextSecurityObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestDefaultFieldsMappingObj>(this.GetTestDefaultFieldsMappingObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestEmployeeFilter>(this.GetTestEmployeeFilterValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TestExceptObject>(this.GetTestExceptObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ClassA>(this.GetClassAValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ClassAChild>(this.GetClassAChildValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ConcreteClassA>(this.GetConcreteClassAValidationResult);
@@ -531,6 +532,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetTestEmployeeFilterValidationResult(SampleSystem.Domain.TestEmployeeFilter source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTestExceptObjectValidationResult(SampleSystem.Domain.TestExceptObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

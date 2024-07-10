@@ -712,6 +712,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestEmployeeFilter(SampleSystem.Domain.TestEmployeeFilter domainObject, SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO mappingObject);
         
+        void MapTestExceptObject(SampleSystem.Domain.TestExceptObject domainObject, SampleSystem.Generated.DTO.TestExceptObjectEventRichDTO mappingObject);
+        
         void MapTestImmutableObj(SampleSystem.Domain.TestImmutableObj domainObject, SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO mappingObject);
         
         void MapTestImmutableObj(SampleSystem.Domain.TestImmutableObj domainObject, SampleSystem.Generated.DTO.TestImmutableObjFullDTO mappingObject);
@@ -1219,6 +1221,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.TestDefaultFieldsMappingObj ToTestDefaultFieldsMappingObj(SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjStrictDTO testDefaultFieldsMappingObjStrictDTO);
         
         SampleSystem.Domain.TestEmployeeFilter ToTestEmployeeFilter(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO testEmployeeFilterStrictDTO);
+        
+        SampleSystem.Domain.TestExceptObject ToTestExceptObject(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO testExceptObjectIdentityDTO);
         
         SampleSystem.Domain.TestImmutableObj ToTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentityDTO);
         
@@ -6755,6 +6759,25 @@ namespace SampleSystem.Generated.DTO
             mappingObject.TestValue = domainObject.TestValue;
         }
         
+        public virtual void MapTestExceptObject(SampleSystem.Domain.TestExceptObject domainObject, SampleSystem.Generated.DTO.TestExceptObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.Employee, null))
+            {
+                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Employee, this);
+            }
+            else
+            {
+                mappingObject.Employee = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapTestImmutableObj(SampleSystem.Domain.TestImmutableObj domainObject, SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO mappingObject)
         {
             mappingObject.TestImmutablePrimitiveProperty = domainObject.TestImmutablePrimitiveProperty;
@@ -8756,6 +8779,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.TestEmployeeFilter ToTestEmployeeFilter(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO testEmployeeFilterStrictDTO)
         {
             return this.ToDomainObjectBase<SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO, SampleSystem.Domain.TestEmployeeFilter>(testEmployeeFilterStrictDTO);
+        }
+        
+        public virtual SampleSystem.Domain.TestExceptObject ToTestExceptObject(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO testExceptObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestExceptObject>(testExceptObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.TestImmutableObj ToTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentityDTO)

@@ -2771,6 +2771,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestEmployeeFilterValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestExceptObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestExceptObjectValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestForceAbstract.ClassA)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetClassAValidationMap()));
@@ -3691,6 +3695,39 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestEmployeeFilter> GetTestEmployeeFilterValidationMap()
         {
             return Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestEmployeeFilter>.Empty;
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestExceptObject, System.DateTime?>> GetTestExceptObject_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestExceptObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestExceptObject, string>> GetTestExceptObject_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestExceptObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestExceptObject, string>> GetTestExceptObject_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestExceptObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestExceptObject, System.DateTime?>> GetTestExceptObject_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestExceptObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TestExceptObject>> GetTestExceptObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestExceptObject> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestExceptObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetTestExceptObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestExceptObject, string>(source => source.CreatedBy, currentClass, this.GetTestExceptObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestExceptObject, string>(source => source.ModifiedBy, currentClass, this.GetTestExceptObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestExceptObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestExceptObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestExceptObject> GetTestExceptObjectValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestExceptObject>(this.GetTestExceptObjectProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestImmutableObj, System.DateTime?>> GetTestImmutableObj_CreateDateValidators()

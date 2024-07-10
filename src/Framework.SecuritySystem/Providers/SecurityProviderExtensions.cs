@@ -75,56 +75,105 @@ public static class SecurityProviderExtensions
             many => many.Aggregate((v1, v2) => v1.Or(v2)));
     }
 
-    private class CompositeSecurityProvider<TDomainObject> : ISecurityProvider<TDomainObject>
+    public static ISecurityProvider<TDomainObject> Except<TDomainObject>(
+        this ISecurityProvider<TDomainObject> securityProvider,
+        ISecurityProvider<TDomainObject> otherSecurityProvider)
     {
-        private readonly ISecurityProvider<TDomainObject> securityProvider;
+        if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
+        if (otherSecurityProvider == null) throw new ArgumentNullException(nameof(otherSecurityProvider));
 
-        private readonly ISecurityProvider<TDomainObject> otherSecurityProvider;
+        return new ExceptSecurityProvider<TDomainObject>(securityProvider, otherSecurityProvider);
+    }
 
-        private readonly bool orAnd;
-
-
-        public CompositeSecurityProvider(
-            ISecurityProvider<TDomainObject> securityProvider,
-            ISecurityProvider<TDomainObject> otherSecurityProvider,
-            bool orAnd)
-        {
-            this.securityProvider = securityProvider;
-            this.otherSecurityProvider = otherSecurityProvider;
-            this.orAnd = orAnd;
-        }
-
-
+    private class CompositeSecurityProvider<TDomainObject>(
+        ISecurityProvider<TDomainObject> securityProvider,
+        ISecurityProvider<TDomainObject> otherSecurityProvider,
+        bool orAnd)
+        : ISecurityProvider<TDomainObject>
+    {
         public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
         {
-            return this.orAnd
-                       ? this.securityProvider.InjectFilter(queryable).Pipe(q => this.otherSecurityProvider.InjectFilter(q))
-                       : this.securityProvider.InjectFilter(queryable).Concat(this.otherSecurityProvider.InjectFilter(queryable));
+            return orAnd
+                       ? securityProvider.InjectFilter(queryable).Pipe(q => otherSecurityProvider.InjectFilter(q))
+                       : securityProvider.InjectFilter(queryable).Concat(otherSecurityProvider.InjectFilter(queryable));
         }
 
         public AccessResult GetAccessResult(TDomainObject domainObject)
         {
-            return this.orAnd
-                       ? this.securityProvider.GetAccessResult(domainObject).And(this.otherSecurityProvider.GetAccessResult(domainObject))
-                       : this.securityProvider.GetAccessResult(domainObject).Or(this.otherSecurityProvider.GetAccessResult(domainObject));
+            return orAnd
+                       ? securityProvider.GetAccessResult(domainObject).And(otherSecurityProvider.GetAccessResult(domainObject))
+                       : securityProvider.GetAccessResult(domainObject).Or(otherSecurityProvider.GetAccessResult(domainObject));
         }
 
         public bool HasAccess(TDomainObject domainObject)
         {
-            return this.orAnd
-                       ? this.securityProvider.HasAccess(domainObject) && this.otherSecurityProvider.HasAccess(domainObject)
-                       : this.securityProvider.HasAccess(domainObject) || this.otherSecurityProvider.HasAccess(domainObject);
+            return orAnd
+                       ? securityProvider.HasAccess(domainObject) && otherSecurityProvider.HasAccess(domainObject)
+                       : securityProvider.HasAccess(domainObject) || otherSecurityProvider.HasAccess(domainObject);
         }
 
         public UnboundedList<string> GetAccessors(TDomainObject domainObject)
         {
-            var first = this.securityProvider.GetAccessors(domainObject);
+            var first = securityProvider.GetAccessors(domainObject);
 
-            var second = this.otherSecurityProvider.GetAccessors(domainObject);
+            var second = otherSecurityProvider.GetAccessors(domainObject);
 
             var comparer = StringComparer.CurrentCultureIgnoreCase;
 
-            return this.orAnd ? first.Union(second, comparer) : first.Concat(second).Distinct(comparer);
+            return orAnd ? first.Union(second, comparer) : first.Concat(second).Distinct(comparer);
+        }
+    }
+
+    private class ExceptSecurityProvider<TDomainObject>(
+        ISecurityProvider<TDomainObject> securityProvider,
+        ISecurityProvider<TDomainObject> otherSecurityProvider)
+        : ISecurityProvider<TDomainObject>
+    {
+        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
+        {
+            return securityProvider.InjectFilter(queryable).Except(otherSecurityProvider.InjectFilter(queryable));
+        }
+
+        public AccessResult GetAccessResult(TDomainObject domainObject)
+        {
+            switch (securityProvider.GetAccessResult(domainObject))
+            {
+                case AccessResult.AccessDeniedResult accessResult:
+                    return accessResult;
+
+                case AccessResult.AccessGrantedResult:
+
+                    switch (securityProvider.GetAccessResult(domainObject))
+                    {
+                        case AccessResult.AccessDeniedResult:
+                            return AccessResult.AccessGrantedResult.Default;
+
+                        case AccessResult.AccessGrantedResult:
+                            return AccessResult.AccessDeniedResult.Create(domainObject);
+
+                        default:
+                            throw new InvalidOperationException("unknown access result");
+                    }
+
+                default:
+                    throw new InvalidOperationException("unknown access result");
+            }
+        }
+
+        public bool HasAccess(TDomainObject domainObject)
+        {
+            return securityProvider.HasAccess(domainObject) && !otherSecurityProvider.HasAccess(domainObject);
+        }
+
+        public UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        {
+            var first = securityProvider.GetAccessors(domainObject);
+
+            var second = otherSecurityProvider.GetAccessors(domainObject);
+
+            var comparer = StringComparer.CurrentCultureIgnoreCase;
+
+            return first.Except(second, comparer).ToUnboundedList(); // TODO: Wrong! Need rework `GetAccessors`
         }
     }
 }

@@ -39,6 +39,9 @@ public class SecurityPathProviderFactory(
             case SecurityRule.AndSecurityRule andSecurityRule:
                 return this.Create(securityPath, andSecurityRule.Left).And(this.Create(securityPath, andSecurityRule.Right));
 
+            case SecurityRule.ExceptSecurityRule exceptSecurityRule:
+                return this.Create(securityPath, exceptSecurityRule.Left).Except(this.Create(securityPath, exceptSecurityRule.Right));
+
             default:
                 throw new ArgumentOutOfRangeException(nameof(rootSecurityRule));
 

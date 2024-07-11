@@ -41,9 +41,6 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
             services.AddSingleton(this.DependencySourcePathType, this.DependencySourcePathInfo);
         }
 
-        var originalDomainServiceType = this.GetOriginalDomainServiceType();
-        Type registerDomainServiceType;
-
         if (this.securityFunctorTypes.Any())
         {
             foreach (var securityFunctorType in this.securityFunctorTypes)
@@ -51,16 +48,14 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
                 services.AddScoped(typeof(IOverrideSecurityProviderFunctor<TDomainObject>), securityFunctorType);
             }
 
+            var originalDomainServiceType = this.GetOriginalDomainServiceType();
+
             services.AddScoped(originalDomainServiceType);
 
-            registerDomainServiceType = typeof(DomainSecurityServiceWithFunctor<,>).MakeGenericType(originalDomainServiceType, typeof(TDomainObject));
-        }
-        else
-        {
-            registerDomainServiceType = originalDomainServiceType;
-        }
+            var registerDomainServiceType = typeof(DomainSecurityServiceWithFunctor<,>).MakeGenericType(originalDomainServiceType, typeof(TDomainObject));
 
-        services.AddScoped(typeof(IDomainSecurityService<TDomainObject>), registerDomainServiceType);
+            services.AddScoped(typeof(IDomainSecurityService<TDomainObject>), registerDomainServiceType);
+        }
     }
 
     private Type GetOriginalDomainServiceType()

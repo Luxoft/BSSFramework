@@ -3,7 +3,7 @@
 using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
@@ -37,6 +37,6 @@ public class RepositoryWithoutSecurityTests : TestBase
         Func<Task> saveAction = () => controllerEvaluator.EvaluateAsync(c => c.TestFaultSave(default));
 
         // Assert
-        await saveAction.Should().ThrowAsync<InvalidOperationException>($"Security mode \"{SecurityRule.Edit}\" not allowed");
+        await saveAction.Should().ThrowAsync<ArgumentOutOfRangeException>($"{nameof(SecurityRule)} with mode '{SecurityRule.Edit}' not found for type '{nameof(NoSecurityObject)}'");
     }
 }

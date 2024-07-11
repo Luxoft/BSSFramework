@@ -21,13 +21,13 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject>(
 public class ContextDomainSecurityService<TDomainObject>(
     ISecurityRuleExpander securityRuleExpander,
     ISecurityPathProviderFactory securityPathProviderFactory,
-    SecurityPath<TDomainObject> securityPath)
+    SecurityPath<TDomainObject> securityPath = null)
     : ContextDomainSecurityServiceBase<TDomainObject>(
         securityRuleExpander,
         securityPathProviderFactory)
 {
     protected override ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        return this.Create(securityPath, securityRule);
+        return this.Create(securityPath ?? SecurityPath<TDomainObject>.Empty, securityRule);
     }
 }

@@ -30,7 +30,7 @@ public abstract class DomainSecurityService<TDomainObject>(ISecurityRuleExpander
     {
         return this.GetSecurityProvider(
             securityRuleExpander.TryExpand<TDomainObject>(securityRule)
-            ?? throw new Exception($"{nameof(SecurityRule)} with mode '{securityRule}' not found for type '{typeof(TDomainObject).Name}'"));
+            ?? throw new ArgumentOutOfRangeException(nameof(securityRule), $"{nameof(SecurityRule)} with mode '{securityRule}' not found for type '{typeof(TDomainObject).Name}'"));
     }
 
     protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.OperationSecurityRule securityRule)

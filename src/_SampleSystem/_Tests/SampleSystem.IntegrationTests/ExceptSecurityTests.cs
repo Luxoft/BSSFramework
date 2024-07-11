@@ -45,7 +45,7 @@ public class ExceptSecurityTests : TestBase
             DBSessionMode.Read,
             ctx => ctx.Logics
                       .Default
-                      .Create<TestExceptObject>(SecurityRule.View)
+                      .Create<TestExceptObject>(SecurityRole.Administrator.Except(SecurityRule.CurrentUser))
                       .GetSecureQueryable()
                       .Select(obj => obj.Id).ToList());
 

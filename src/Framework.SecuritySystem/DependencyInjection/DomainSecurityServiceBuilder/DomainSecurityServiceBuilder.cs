@@ -60,11 +60,6 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
         var actualCustomServiceType = this.CustomServiceType ?? this.DependencyServiceType;
 
-        if (actualCustomServiceType != null)
-        {
-            yield return (baseServiceType, actualCustomServiceType);
-        }
-
         if (this.securityFunctorTypes.Any())
         {
             foreach (var securityFunctorType in this.securityFunctorTypes)
@@ -81,6 +76,10 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
                 typeof(TDomainObject));
 
             yield return (baseServiceType, wrappedFunctorType);
+        }
+        else if (actualCustomServiceType != null)
+        {
+            yield return (baseServiceType, actualCustomServiceType);
         }
     }
 

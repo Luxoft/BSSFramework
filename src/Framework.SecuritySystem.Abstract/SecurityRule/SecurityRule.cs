@@ -71,6 +71,13 @@ public abstract record SecurityRule
         public override string ToString() => this.Key ?? base.ToString();
     }
 
+    public record CustomProviderFactorySecurityRule(Type GenericSecurityProviderFactoryType, string? Key = null) : DomainObjectSecurityRule
+    {
+        public override string ToString() => this.Key ?? base.ToString();
+    }
+
+    public record ConditionSecurityRule(Type GenericConditionFactoryType) : DomainObjectSecurityRule;
+
     public abstract record ExpandableSecurityRule : DomainObjectSecurityRule
     {
         public static implicit operator ExpandableSecurityRule(SecurityOperation securityOperation)

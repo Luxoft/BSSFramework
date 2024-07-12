@@ -9,6 +9,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.SecuritySystem;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.Security;
@@ -97,5 +98,39 @@ public class TestRestrictionRoleTests : TestBase
         // Assert
         action.Should().Throw<ValidationException>()
               .And.Message.Should().Contain($"Invalid SecurityContextType: {nameof(Location)}.");
+    }
+
+    [TestMethod]
+    public void GetRestrictionObjectsWithConditionRule_RestrictionApplied()
+    {
+        // Arrange
+        var testObjects = this.Evaluate(
+            DBSessionMode.Write,
+            ctx =>
+            {
+                var objList = new TestRestrictionObject[]
+                              {
+                                  new() { RestrictionHandler = true },
+                                  new() { RestrictionHandler = false },
+                                  new() { RestrictionHandler = true }
+                              };
+
+                ctx.Logics.Default.Create<TestRestrictionObject>().Save(objList);
+
+                return objList.ToIdentityDTOList();
+            });
+
+        // Act
+        var result = this.Evaluate(
+            DBSessionMode.Read,
+            ctx =>
+            {
+                var bll = ctx.Logics.Default.Create<TestRestrictionObject>(SampleSystemSecurityRule.TestRestriction);
+
+                return bll.GetFullList().ToIdentityDTOList();
+            });
+
+        // Assert
+        result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
     }
 }

@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using System.Linq.Expressions;
+
+using Framework.Core;
 using Framework.SecuritySystem.Providers.Operation;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -13,9 +15,9 @@ public class SecurityPathProviderFactory(
     ISecurityRoleSource securityRoleSource,
     ISecurityPathRestrictionService securityPathRestrictionService) : ISecurityPathProviderFactory
 {
-    public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainObjectSecurityRule rootSecurityRule)
+    public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainObjectSecurityRule securityRule)
     {
-        switch (rootSecurityRule)
+        switch (securityRule)
         {
             case SecurityRule.ExpandableSecurityRule expandedRolesSecurityRule:
                 return this.GetRegroupedRoles(expandedRolesSecurityRule)
@@ -33,6 +35,30 @@ public class SecurityPathProviderFactory(
                 return (ISecurityProvider<TDomainObject>)securityProvider;
             }
 
+            case SecurityRule.CustomProviderFactorySecurityRule customProviderFactorySecurityRule:
+            {
+                var securityProviderFactoryType =
+                    customProviderFactorySecurityRule.GenericSecurityProviderFactoryType.MakeGenericType(typeof(TDomainObject));
+
+                var securityProviderFactory = customProviderFactorySecurityRule.Key == null
+                                           ? serviceProvider.GetRequiredService(securityProviderFactoryType)
+                                           : serviceProvider.GetRequiredKeyedService(securityProviderFactoryType, customProviderFactorySecurityRule.Key);
+
+                return ((IFactory<ISecurityProvider<TDomainObject>>)securityProviderFactory).Create();
+            }
+
+            case SecurityRule.ConditionSecurityRule conditionSecurityRule:
+            {
+                var conditionFactoryType =
+                    conditionSecurityRule.GenericConditionFactoryType.MakeGenericType(typeof(TDomainObject));
+
+                var conditionFactory = (IFactory<Expression<Func<TDomainObject, bool>>>)serviceProvider.GetRequiredService(conditionFactoryType);
+
+                var condition = conditionFactory.Create();
+
+                return SecurityProvider<TDomainObject>.Create(condition);
+            }
+
             case SecurityRule.OrSecurityRule orSecurityRule:
                 return this.Create(securityPath, orSecurityRule.Left).Or(this.Create(securityPath, orSecurityRule.Right));
 
@@ -43,7 +69,7 @@ public class SecurityPathProviderFactory(
                 return this.Create(securityPath, negateSecurityRule.InnerRule).Negate();
 
             default:
-                throw new ArgumentOutOfRangeException(nameof(rootSecurityRule));
+                throw new ArgumentOutOfRangeException(nameof(securityRule));
 
         }
     }

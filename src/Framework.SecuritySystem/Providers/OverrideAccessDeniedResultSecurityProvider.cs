@@ -11,7 +11,7 @@ public class OverrideAccessDeniedResultSecurityProvider<TDomainObject>(
 
     public bool HasAccess(TDomainObject domainObject) => baseProvider.HasAccess(domainObject);
 
-    public UnboundedList<string> GetAccessors(TDomainObject domainObject) => baseProvider.GetAccessors(domainObject);
+    public SecurityAccessorResult GetAccessors(TDomainObject domainObject) => baseProvider.GetAccessors(domainObject);
 
     public AccessResult GetAccessResult(TDomainObject domainObject)
     {

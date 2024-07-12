@@ -16,7 +16,7 @@ public static class SecurityProviderExtensions
     public static ISecurityProvider<TDomainObject> And<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
         Expression<Func<TDomainObject, bool>> securityFilter,
-        Func<TDomainObject, UnboundedList<string>> getAccessorsFunc = null,
+        Func<TDomainObject, SecurityAccessorResult> getAccessorsFunc = null,
         LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
     {
         if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
@@ -27,7 +27,7 @@ public static class SecurityProviderExtensions
     public static ISecurityProvider<TDomainObject> Or<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
         Expression<Func<TDomainObject, bool>> securityFilter,
-        Func<TDomainObject, UnboundedList<string>> getAccessorsFunc = null,
+        Func<TDomainObject, SecurityAccessorResult> getAccessorsFunc = null,
         LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
     {
         if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
@@ -74,6 +74,12 @@ public static class SecurityProviderExtensions
             single => single,
             many => many.Aggregate((v1, v2) => v1.Or(v2)));
     }
+    public static ISecurityProvider<TDomainObject> Negate<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider)
+    {
+        if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
+
+        return new NegateSecurityProvider<TDomainObject>(securityProvider);
+    }
 
     public static ISecurityProvider<TDomainObject> Except<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
@@ -82,7 +88,7 @@ public static class SecurityProviderExtensions
         if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
         if (otherSecurityProvider == null) throw new ArgumentNullException(nameof(otherSecurityProvider));
 
-        return new ExceptSecurityProvider<TDomainObject>(securityProvider, otherSecurityProvider);
+        return securityProvider.And(otherSecurityProvider.Negate());
     }
 
     private class CompositeSecurityProvider<TDomainObject>(
@@ -112,26 +118,24 @@ public static class SecurityProviderExtensions
                        : securityProvider.HasAccess(domainObject) || otherSecurityProvider.HasAccess(domainObject);
         }
 
-        public UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorResult GetAccessors(TDomainObject domainObject)
         {
-            var first = securityProvider.GetAccessors(domainObject);
+            var left = securityProvider.GetAccessors(domainObject);
 
-            var second = otherSecurityProvider.GetAccessors(domainObject);
+            var right = otherSecurityProvider.GetAccessors(domainObject);
 
-            var comparer = StringComparer.CurrentCultureIgnoreCase;
-
-            return orAnd ? first.Union(second, comparer) : first.Concat(second).Distinct(comparer);
+            return orAnd
+                       ? new SecurityAccessorResult.AndSecurityAccessorResult(left, right)
+                       : new SecurityAccessorResult.OrSecurityAccessorResult(left, right);
         }
     }
 
-    private class ExceptSecurityProvider<TDomainObject>(
-        ISecurityProvider<TDomainObject> securityProvider,
-        ISecurityProvider<TDomainObject> otherSecurityProvider)
+    private class NegateSecurityProvider<TDomainObject>(ISecurityProvider<TDomainObject> securityProvider)
         : ISecurityProvider<TDomainObject>
     {
         public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
         {
-            return securityProvider.InjectFilter(queryable).Except(otherSecurityProvider.InjectFilter(queryable));
+            return queryable.Except(securityProvider.InjectFilter(queryable));
         }
 
         public AccessResult GetAccessResult(TDomainObject domainObject)
@@ -162,18 +166,14 @@ public static class SecurityProviderExtensions
 
         public bool HasAccess(TDomainObject domainObject)
         {
-            return securityProvider.HasAccess(domainObject) && !otherSecurityProvider.HasAccess(domainObject);
+            return !securityProvider.HasAccess(domainObject);
         }
 
-        public UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorResult GetAccessors(TDomainObject domainObject)
         {
-            var first = securityProvider.GetAccessors(domainObject);
+            var baseResult = securityProvider.GetAccessors(domainObject);
 
-            var second = otherSecurityProvider.GetAccessors(domainObject);
-
-            var comparer = StringComparer.CurrentCultureIgnoreCase;
-
-            return first.Except(second, comparer).ToUnboundedList(); // TODO: Wrong! Need rework `GetAccessors`
+            return new SecurityAccessorResult.NegateSecurityAccessorResult(baseResult);
         }
     }
 }

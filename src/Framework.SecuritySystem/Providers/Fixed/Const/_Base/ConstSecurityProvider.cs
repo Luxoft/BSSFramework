@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-namespace Framework.SecuritySystem
+﻿namespace Framework.SecuritySystem
 {
     public class ConstSecurityProvider<TDomainObject>(bool hasAccess) : FixedSecurityProvider<TDomainObject>
     {
@@ -9,9 +7,9 @@ namespace Framework.SecuritySystem
             return hasAccess;
         }
 
-        public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        public override SecurityAccessorResult GetAccessors(TDomainObject domainObject)
         {
-            return hasAccess ? UnboundedList<string>.Infinity : UnboundedList<string>.Empty;
+            return hasAccess ? SecurityAccessorResult.Infinity : SecurityAccessorResult.Empty;
         }
     }
 }

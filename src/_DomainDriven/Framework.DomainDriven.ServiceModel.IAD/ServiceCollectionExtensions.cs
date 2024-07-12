@@ -171,7 +171,11 @@ public static class ServiceCollectionExtensions
                        .AddKeyedScoped<IValidator<Principal>, PrincipalUniquePermissionValidator>(PrincipalUniquePermissionValidator.Key)
                        .AddKeyedScoped<IValidator<Permission>, PermissionGeneralValidator>(PermissionGeneralValidator.Key)
                        .AddKeyedScoped<IValidator<Permission>, PermissionDelegateValidator>(PermissionDelegateValidator.Key)
-                       .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>();
+                       .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>()
+
+                       .AddSingleton<ISecurityAccessorResultOptimizer, SecurityAccessorResultOptimizer>()
+                       .AddScoped<ISecurityAccessorInfinityStorage, AuthorizationAccessorInfinityStorage>()
+                       .AddScoped<ISecurityAccessorResultEvaluator, SecurityAccessorResultEvaluator>();
     }
 
 

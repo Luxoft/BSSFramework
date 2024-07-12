@@ -38,6 +38,6 @@ public class PrincipalSecurityProvider<TDomainObject> : SecurityProvider<TDomain
 
     protected override LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.All;
 
-    public override UnboundedList<string> GetAccessors(TDomainObject domainObject) =>
-        UnboundedList.Yeild(this.actualPrincipalSource.ActualPrincipal.Name);
+    public override SecurityAccessorResult GetAccessors(TDomainObject domainObject) =>
+        SecurityAccessorResult.Return(this.actualPrincipalSource.ActualPrincipal.Name);
 }

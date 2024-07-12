@@ -39,7 +39,7 @@ namespace Framework.SecuritySystem
             return this.lazyAvailableIdents.Value.Contains(domainObject.Id);
         }
 
-        public UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorResult GetAccessors(TDomainObject domainObject)
         {
             return this.baseSecurityProvider.GetAccessors(this.GetBaseObject(domainObject));
         }

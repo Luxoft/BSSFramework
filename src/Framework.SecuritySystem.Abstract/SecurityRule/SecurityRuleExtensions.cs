@@ -42,11 +42,16 @@ public static class SecurityRuleExtensions
         return new SecurityRule.AndSecurityRule(securityRule, otherSecurityRule);
     }
 
+    public static SecurityRule.DomainObjectSecurityRule Negate(this SecurityRule.DomainObjectSecurityRule securityRule)
+    {
+        return new SecurityRule.NegateSecurityRule(securityRule);
+    }
+
     public static SecurityRule.DomainObjectSecurityRule Except(
         this SecurityRule.DomainObjectSecurityRule securityRule,
         SecurityRule.DomainObjectSecurityRule otherSecurityRule)
     {
-        return new SecurityRule.ExceptSecurityRule(securityRule, otherSecurityRule);
+        return securityRule.And(otherSecurityRule.Negate());
     }
 
     public static SecurityRule.DomainObjectSecurityRule Or(
@@ -61,6 +66,11 @@ public static class SecurityRuleExtensions
         SecurityRule.DomainObjectSecurityRule otherSecurityRule)
     {
         return securityRule.ToSecurityRule().And(otherSecurityRule);
+    }
+
+    public static SecurityRule.DomainObjectSecurityRule Negate(this SecurityRole securityRule)
+    {
+        return securityRule.ToSecurityRule().Negate();
     }
 
     public static SecurityRule.DomainObjectSecurityRule Except(
@@ -84,6 +94,11 @@ public static class SecurityRuleExtensions
         return securityOperation.ToSecurityRule().And(otherSecurityRule);
     }
 
+    public static SecurityRule.DomainObjectSecurityRule Negate(this SecurityOperation securityOperation)
+    {
+        return securityOperation.ToSecurityRule().Negate();
+    }
+
     public static SecurityRule.DomainObjectSecurityRule Except(
         this SecurityOperation securityOperation,
         SecurityRule.DomainObjectSecurityRule otherSecurityRule)
@@ -103,6 +118,11 @@ public static class SecurityRuleExtensions
         SecurityRule.DomainObjectSecurityRule otherSecurityRule)
     {
         return securityRoles.ToSecurityRule().And(otherSecurityRule);
+    }
+
+    public static SecurityRule.DomainObjectSecurityRule Negate(this IEnumerable<SecurityRole> securityRoles)
+    {
+        return securityRoles.ToSecurityRule().Negate();
     }
 
     public static SecurityRule.DomainObjectSecurityRule Except(

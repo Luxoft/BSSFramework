@@ -37,13 +37,13 @@ namespace Framework.SecuritySystem
             return this.lazyHasAccessFunc.Value(domainObject);
         }
 
-        public abstract UnboundedList<string> GetAccessors(TDomainObject domainObject);
+        public abstract SecurityAccessorResult GetAccessors(TDomainObject domainObject);
 
         private static readonly IDictionaryCache<LambdaCompileMode, LambdaCompileCache> Caches =
             new DictionaryCache<LambdaCompileMode, LambdaCompileCache>(mode => new LambdaCompileCache(mode)).WithLock();
 
 
-        public static SecurityProvider<TDomainObject> Create(Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, UnboundedList<string>> getAccessorsFunc = null, LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
+        public static SecurityProvider<TDomainObject> Create(Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, SecurityAccessorResult> getAccessorsFunc = null, LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
         {
             return new DefaultSecurityProvider(securityFilter, getAccessorsFunc, securityFilterCompileMode);
         }
@@ -51,14 +51,14 @@ namespace Framework.SecuritySystem
         private class DefaultSecurityProvider : SecurityProvider<TDomainObject>
         {
             private readonly Expression<Func<TDomainObject, bool>> securityFilter;
-            private readonly Func<TDomainObject, UnboundedList<string>> getAccessorsFunc;
+            private readonly Func<TDomainObject, SecurityAccessorResult> getAccessorsFunc;
             private readonly LambdaCompileMode securityFilterCompileMode;
 
-            public DefaultSecurityProvider(Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, UnboundedList<string>> getAccessorsFunc, LambdaCompileMode securityFilterCompileMode)
+            public DefaultSecurityProvider(Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, SecurityAccessorResult> getAccessorsFunc, LambdaCompileMode securityFilterCompileMode)
                 : base()
             {
                 this.securityFilter = securityFilter ?? throw new ArgumentNullException(nameof(securityFilter));
-                this.getAccessorsFunc = getAccessorsFunc ?? (domainObject => this.HasAccess(domainObject) ? UnboundedList<string>.Infinity : UnboundedList<string>.Empty);
+                this.getAccessorsFunc = getAccessorsFunc ?? (domainObject => this.HasAccess(domainObject) ? SecurityAccessorResult.Infinity : SecurityAccessorResult.Empty);
                 this.securityFilterCompileMode = securityFilterCompileMode;
             }
 
@@ -73,7 +73,7 @@ namespace Framework.SecuritySystem
                 get { return this.securityFilterCompileMode; }
             }
 
-            public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
+            public override SecurityAccessorResult GetAccessors(TDomainObject domainObject)
             {
                 return this.getAccessorsFunc(domainObject);
             }

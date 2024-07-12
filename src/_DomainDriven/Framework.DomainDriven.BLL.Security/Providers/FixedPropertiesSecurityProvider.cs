@@ -36,7 +36,7 @@ namespace Framework.DomainDriven.BLL.Security
                    && !this.Context.TrackingService.GetChanges(domainObject).GetUnexpectedChangedProprties(this.allowedPropertiesForChangingExpressions).Any();
         }
 
-        public UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorResult GetAccessors(TDomainObject domainObject)
         {
             return this.baseSecurityProvider.GetAccessors(domainObject);
         }

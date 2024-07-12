@@ -57,11 +57,11 @@ namespace Framework.SecuritySystem.Providers.Operation
             }
         }
 
-        public UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorResult GetAccessors(TDomainObject domainObject)
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            return this.lazyFilter.Value.GetAccessors(domainObject).ToUnboundedList();
+            return new SecurityAccessorResult.FixedSecurityAccessorResult(this.lazyFilter.Value.GetAccessors(domainObject).ToList());
         }
     }
 }

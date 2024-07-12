@@ -40,7 +40,7 @@ public class SecurityPathProviderFactory(
                 return this.Create(securityPath, andSecurityRule.Left).And(this.Create(securityPath, andSecurityRule.Right));
 
             case SecurityRule.NegateSecurityRule negateSecurityRule:
-                return this.Create(securityPath, negateSecurityRule).Negate();
+                return this.Create(securityPath, negateSecurityRule.InnerRule).Negate();
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(rootSecurityRule));

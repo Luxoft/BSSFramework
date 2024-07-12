@@ -142,5 +142,5 @@ public abstract record SecurityRule
 
     public record OrSecurityRule(DomainObjectSecurityRule Left, DomainObjectSecurityRule Right) : DomainObjectSecurityRule;
 
-    public record NegateSecurityRule(DomainObjectSecurityRule Rule) : DomainObjectSecurityRule;
+    public record NegateSecurityRule(DomainObjectSecurityRule InnerRule) : DomainObjectSecurityRule;
 }

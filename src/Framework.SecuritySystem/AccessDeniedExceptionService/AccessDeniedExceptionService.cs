@@ -42,8 +42,6 @@ public class AccessDeniedExceptionService<TIdent> : IAccessDeniedExceptionServic
 
     protected virtual string GetAccessDeniedExceptionMessage(object domainObject, Type domainObjectType, SecurityRule? securityRule)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
         var elements = this.GetAccessDeniedExceptionMessageElements(domainObject, domainObjectType, securityRule).ToDictionary();
 
         return elements.GetByFirst((first, other) =>

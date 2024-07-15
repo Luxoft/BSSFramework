@@ -13,11 +13,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>(Secur
 {
     internal readonly SecurityExpressionBuilderFactory<TIdent> Factory = factory;
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.RoleBaseSecurityRule securityRule, IEnumerable<Type> securityTypes)
-    {
-        return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule, securityTypes);
-    }
-
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.RoleBaseSecurityRule securityRule, IEnumerable<Type> securityTypes) => new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule, securityTypes);
 
     public abstract Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission);
 
@@ -26,12 +22,8 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>(Secur
         HierarchicalExpandType expandType);
 
     public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(
-        List<Dictionary<Type, IEnumerable<TIdent>>> permissions)
-    {
-        if (permissions == null) throw new ArgumentNullException(nameof(permissions));
-
-        return permissions.BuildOr(this.GetSecurityFilterExpression);
-    }
+        List<Dictionary<Type, IEnumerable<TIdent>>> permissions) =>
+        permissions.BuildOr(this.GetSecurityFilterExpression);
 }
 
 public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath>(
@@ -41,7 +33,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
     where TDomainObject : class, IIdentityObject<TIdent>
     where TPath : SecurityPath<TDomainObject>
 {
-    protected readonly TPath Path = path ?? throw new ArgumentNullException(nameof(path));
+    protected readonly TPath Path = path;
 
     public abstract class SecurityPathExpressionBuilderBase<TInnerPath>(SecurityExpressionBuilderFactory<TIdent> factory, TInnerPath path)
         : SecurityExpressionBuilderBase<TDomainObject, TIdent, TInnerPath>(factory, path)
@@ -77,8 +69,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
             TDomainObject domainObject,
             HierarchicalExpandType expandType)
         {
-            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
             var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
             var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo<TIdent>(typeof(TSecurityContext)).Id;
@@ -113,12 +103,12 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
         SecurityPath<TDomainObject>.ConditionPath path)
         : SecurityPathExpressionBuilderBase<SecurityPath<TDomainObject>.ConditionPath>(factory, path)
     {
-        public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> _)
-        {
-            return this.Path.SecurityFilter;
-        }
+        public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> _) =>
+            this.Path.SecurityFilter;
 
-        public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType)
+        public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(
+            TDomainObject domainObject,
+            HierarchicalExpandType expandType)
         {
             var hasAccess = this.Path.SecurityFilter.Eval(domainObject, LambdaCompileCache);
 
@@ -162,8 +152,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
 
         protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject)
         {
-            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
             var securityObject = this.Path.SecurityPath.Eval(domainObject, LambdaCompileCache);
 
             if (securityObject != null)
@@ -211,13 +199,15 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
                         {
                             return securityIdents => from securityObjects in this.Path.SecurityPathQ
 
-                                                     select !securityObjects.Any() || securityObjects.Any(item => securityIdents.Contains(item.Id));
+                                                     select !securityObjects.Any()
+                                                            || securityObjects.Any(item => securityIdents.Contains(item.Id));
                         }
                         else
                         {
                             return securityIdents => from securityObjects in this.Path.SecurityPath
 
-                                                     select !securityObjects.Any() || securityObjects.Any(item => securityIdents.Contains(item.Id));
+                                                     select !securityObjects.Any()
+                                                            || securityObjects.Any(item => securityIdents.Contains(item.Id));
                         }
                     }
 
@@ -228,29 +218,27 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
             }
         }
 
-        protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject)
-        {
-            return this.Path.SecurityPath.Eval(domainObject, LambdaCompileCache).EmptyIfNull();
-        }
+        protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject) =>
+            this.Path.SecurityPath.Eval(domainObject, LambdaCompileCache).EmptyIfNull();
 
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
     }
 
 
-    public class NestedManySecurityExpressionBuilder<TNestedObject> : SecurityPathExpressionBuilderBase<SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject>>
-            where TNestedObject : class, IIdentityObject<TIdent>
+    public class NestedManySecurityExpressionBuilder<TNestedObject> : SecurityPathExpressionBuilderBase<
+        SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject>>
+        where TNestedObject : class, IIdentityObject<TIdent>
     {
         private readonly SecurityExpressionBuilderBase<TNestedObject, TIdent> nestedBuilder;
 
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
 
         public NestedManySecurityExpressionBuilder(
-                SecurityExpressionBuilderFactory<TIdent> factory,
-                SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> path)
-                : base(factory, path)
-        {
-            this.nestedBuilder = (SecurityExpressionBuilderBase<TNestedObject, TIdent>)this.Factory.CreateBuilder(this.Path.NestedSecurityPath);
-        }
+            SecurityExpressionBuilderFactory<TIdent> factory,
+            SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> path)
+            : base(factory, path) =>
+            this.nestedBuilder =
+                (SecurityExpressionBuilderBase<TNestedObject, TIdent>)this.Factory.CreateBuilder(this.Path.NestedSecurityPath);
 
         public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission)
         {
@@ -278,49 +266,47 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
             }
         }
 
-        public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType)
-        {
-            if (domainObject == null)
-            {
-                throw new ArgumentNullException(nameof(domainObject));
-            }
-
-            return this.Path.NestedObjectsPath.Eval(domainObject, LambdaCompileCache)
-                       .BuildOr(item => this.nestedBuilder.GetAccessorsFilter(item, expandType));
-        }
+        public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(
+            TDomainObject domainObject,
+            HierarchicalExpandType expandType) =>
+            this.Path.NestedObjectsPath.Eval(domainObject, LambdaCompileCache)
+                .BuildOr(item => this.nestedBuilder.GetAccessorsFilter(item, expandType));
     }
 
     public abstract class SecurityBinaryExpressionBuilder<TBinaryPath> : SecurityExpressionBuilderBase<TDomainObject, TIdent, TBinaryPath>
-            where TBinaryPath : SecurityPath<TDomainObject>.BinarySecurityPath
+        where TBinaryPath : SecurityPath<TDomainObject>.BinarySecurityPath
     {
         protected readonly SecurityExpressionBuilderBase<TDomainObject, TIdent> LeftBuilder;
+
         protected readonly SecurityExpressionBuilderBase<TDomainObject, TIdent> RightBuilder;
 
         protected SecurityBinaryExpressionBuilder(SecurityExpressionBuilderFactory<TIdent> factory, TBinaryPath path)
-                : base(factory, path)
+            : base(factory, path)
         {
-            this.LeftBuilder = (SecurityExpressionBuilderBase<TDomainObject, TIdent>)this.Path.Left.Pipe(v => this.Factory.CreateBuilder(v));
-            this.RightBuilder = (SecurityExpressionBuilderBase<TDomainObject, TIdent>)this.Path.Right.Pipe(v => this.Factory.CreateBuilder(v));
+            this.LeftBuilder =
+                (SecurityExpressionBuilderBase<TDomainObject, TIdent>)this.Path.Left.Pipe(v => this.Factory.CreateBuilder(v));
+            this.RightBuilder =
+                (SecurityExpressionBuilderBase<TDomainObject, TIdent>)this.Path.Right.Pipe(v => this.Factory.CreateBuilder(v));
         }
 
 
-        protected abstract Expression<Func<TArg, bool>> BuildOperation<TArg>(Expression<Func<TArg, bool>> arg1, Expression<Func<TArg, bool>> arg2);
+        protected abstract Expression<Func<TArg, bool>> BuildOperation<TArg>(
+            Expression<Func<TArg, bool>> arg1,
+            Expression<Func<TArg, bool>> arg2);
 
 
         public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission)
         {
-            if (permission == null) throw new ArgumentNullException(nameof(permission));
-
             var leftFilter = this.LeftBuilder.GetSecurityFilterExpression(permission);
             var rightFilter = this.RightBuilder.GetSecurityFilterExpression(permission);
 
             return this.BuildOperation(leftFilter, rightFilter);
         }
 
-        public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType)
+        public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(
+            TDomainObject domainObject,
+            HierarchicalExpandType expandType)
         {
-            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
             var leftFilter = this.LeftBuilder.GetAccessorsFilter(domainObject, expandType);
             var rightFilter = this.RightBuilder.GetAccessorsFilter(domainObject, expandType);
 
@@ -333,10 +319,9 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
         SecurityPath<TDomainObject>.AndSecurityPath path)
         : SecurityBinaryExpressionBuilder<SecurityPath<TDomainObject>.AndSecurityPath>(factory, path)
     {
-        protected override Expression<Func<TArg, bool>> BuildOperation<TArg>(Expression<Func<TArg, bool>> arg1, Expression<Func<TArg, bool>> arg2)
-        {
-            return arg1.BuildAnd(arg2);
-        }
+        protected override Expression<Func<TArg, bool>> BuildOperation<TArg>(
+            Expression<Func<TArg, bool>> arg1,
+            Expression<Func<TArg, bool>> arg2) => arg1.BuildAnd(arg2);
     }
 
     public class OrBinarySecurityPathExpressionBuilder(
@@ -344,9 +329,8 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
         SecurityPath<TDomainObject>.OrSecurityPath path)
         : SecurityBinaryExpressionBuilder<SecurityPath<TDomainObject>.OrSecurityPath>(factory, path)
     {
-        protected override Expression<Func<TArg, bool>> BuildOperation<TArg>(Expression<Func<TArg, bool>> arg1, Expression<Func<TArg, bool>> arg2)
-        {
-            return arg1.BuildOr(arg2);
-        }
+        protected override Expression<Func<TArg, bool>> BuildOperation<TArg>(
+            Expression<Func<TArg, bool>> arg1,
+            Expression<Func<TArg, bool>> arg2) => arg1.BuildOr(arg2);
     }
 }

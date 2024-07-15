@@ -8,86 +8,52 @@ public static class SecurityProviderExtensions
 {
     public static ISecurityProvider<TDomainObject> OverrideAccessDeniedResult<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
-        Func<AccessResult.AccessDeniedResult, AccessResult.AccessDeniedResult> selector)
-    {
-        return new OverrideAccessDeniedResultSecurityProvider<TDomainObject>(securityProvider, selector);
-    }
+        Func<AccessResult.AccessDeniedResult, AccessResult.AccessDeniedResult> selector) =>
+        new OverrideAccessDeniedResultSecurityProvider<TDomainObject>(securityProvider, selector);
 
     public static ISecurityProvider<TDomainObject> And<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
         Expression<Func<TDomainObject, bool>> securityFilter,
-        LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
-    {
-        if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
-
-        return securityProvider.And(SecurityProvider<TDomainObject>.Create(securityFilter, securityFilterCompileMode));
-    }
+        LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All) =>
+        securityProvider.And(SecurityProvider<TDomainObject>.Create(securityFilter, securityFilterCompileMode));
 
     public static ISecurityProvider<TDomainObject> Or<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
         Expression<Func<TDomainObject, bool>> securityFilter,
-        LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
-    {
-        if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
-
-        return securityProvider.Or(SecurityProvider<TDomainObject>.Create(securityFilter, securityFilterCompileMode));
-    }
+        LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All) =>
+        securityProvider.Or(SecurityProvider<TDomainObject>.Create(securityFilter, securityFilterCompileMode));
 
     public static ISecurityProvider<TDomainObject> And<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
-        ISecurityProvider<TDomainObject> otherSecurityProvider)
-    {
-        if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
-        if (otherSecurityProvider == null) throw new ArgumentNullException(nameof(otherSecurityProvider));
-
-        return new CompositeSecurityProvider<TDomainObject>(securityProvider, otherSecurityProvider, true);
-    }
+        ISecurityProvider<TDomainObject> otherSecurityProvider) =>
+        new CompositeSecurityProvider<TDomainObject>(securityProvider, otherSecurityProvider, true);
 
     public static ISecurityProvider<TDomainObject> Or<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
-        ISecurityProvider<TDomainObject> otherSecurityProvider)
-    {
-        if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
-        if (otherSecurityProvider == null) throw new ArgumentNullException(nameof(otherSecurityProvider));
+        ISecurityProvider<TDomainObject> otherSecurityProvider) =>
+        new CompositeSecurityProvider<TDomainObject>(securityProvider, otherSecurityProvider, false);
 
-        return new CompositeSecurityProvider<TDomainObject>(securityProvider, otherSecurityProvider, false);
-    }
-
-    public static ISecurityProvider<TDomainObject> And<TDomainObject>(this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders)
-    {
-        if (securityProviders == null) throw new ArgumentNullException(nameof(securityProviders));
-
-        return securityProviders.Match(
+    public static ISecurityProvider<TDomainObject> And<TDomainObject>(
+        this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders) =>
+        securityProviders.Match(
             () => new DisabledSecurityProvider<TDomainObject>(),
             single => single,
             many => many.Aggregate((v1, v2) => v1.And(v2)));
-    }
 
-    public static ISecurityProvider<TDomainObject> Or<TDomainObject>(this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders)
-    {
-        if (securityProviders == null) throw new ArgumentNullException(nameof(securityProviders));
-
-        return securityProviders.Match(
+    public static ISecurityProvider<TDomainObject> Or<TDomainObject>(
+        this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders) =>
+        securityProviders.Match(
             () => new AccessDeniedSecurityProvider<TDomainObject>(),
             single => single,
             many => many.Aggregate((v1, v2) => v1.Or(v2)));
-    }
-    public static ISecurityProvider<TDomainObject> Negate<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider)
-    {
-        if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
 
-        return new NegateSecurityProvider<TDomainObject>(securityProvider);
-    }
+    public static ISecurityProvider<TDomainObject> Negate<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider) =>
+        new NegateSecurityProvider<TDomainObject>(securityProvider);
 
     public static ISecurityProvider<TDomainObject> Except<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
-        ISecurityProvider<TDomainObject> otherSecurityProvider)
-    {
-        if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
-        if (otherSecurityProvider == null) throw new ArgumentNullException(nameof(otherSecurityProvider));
-
-        return securityProvider.And(otherSecurityProvider.Negate());
-    }
+        ISecurityProvider<TDomainObject> otherSecurityProvider) =>
+        securityProvider.And(otherSecurityProvider.Negate());
 
     private class CompositeSecurityProvider<TDomainObject>(
         ISecurityProvider<TDomainObject> securityProvider,
@@ -95,26 +61,20 @@ public static class SecurityProviderExtensions
         bool orAnd)
         : ISecurityProvider<TDomainObject>
     {
-        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
-        {
-            return orAnd
-                       ? securityProvider.InjectFilter(queryable).Pipe(q => otherSecurityProvider.InjectFilter(q))
-                       : securityProvider.InjectFilter(queryable).Concat(otherSecurityProvider.InjectFilter(queryable));
-        }
+        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable) =>
+            orAnd
+                ? securityProvider.InjectFilter(queryable).Pipe(q => otherSecurityProvider.InjectFilter(q))
+                : securityProvider.InjectFilter(queryable).Concat(otherSecurityProvider.InjectFilter(queryable));
 
-        public AccessResult GetAccessResult(TDomainObject domainObject)
-        {
-            return orAnd
-                       ? securityProvider.GetAccessResult(domainObject).And(otherSecurityProvider.GetAccessResult(domainObject))
-                       : securityProvider.GetAccessResult(domainObject).Or(otherSecurityProvider.GetAccessResult(domainObject));
-        }
+        public AccessResult GetAccessResult(TDomainObject domainObject) =>
+            orAnd
+                ? securityProvider.GetAccessResult(domainObject).And(otherSecurityProvider.GetAccessResult(domainObject))
+                : securityProvider.GetAccessResult(domainObject).Or(otherSecurityProvider.GetAccessResult(domainObject));
 
-        public bool HasAccess(TDomainObject domainObject)
-        {
-            return orAnd
-                       ? securityProvider.HasAccess(domainObject) && otherSecurityProvider.HasAccess(domainObject)
-                       : securityProvider.HasAccess(domainObject) || otherSecurityProvider.HasAccess(domainObject);
-        }
+        public bool HasAccess(TDomainObject domainObject) =>
+            orAnd
+                ? securityProvider.HasAccess(domainObject) && otherSecurityProvider.HasAccess(domainObject)
+                : securityProvider.HasAccess(domainObject) || otherSecurityProvider.HasAccess(domainObject);
 
         public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
         {
@@ -131,10 +91,8 @@ public static class SecurityProviderExtensions
     private class NegateSecurityProvider<TDomainObject>(ISecurityProvider<TDomainObject> securityProvider)
         : ISecurityProvider<TDomainObject>
     {
-        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
-        {
-            return queryable.Except(securityProvider.InjectFilter(queryable));
-        }
+        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable) =>
+            queryable.Except(securityProvider.InjectFilter(queryable));
 
         public AccessResult GetAccessResult(TDomainObject domainObject)
         {
@@ -162,10 +120,7 @@ public static class SecurityProviderExtensions
             }
         }
 
-        public bool HasAccess(TDomainObject domainObject)
-        {
-            return !securityProvider.HasAccess(domainObject);
-        }
+        public bool HasAccess(TDomainObject domainObject) => !securityProvider.HasAccess(domainObject);
 
         public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
         {

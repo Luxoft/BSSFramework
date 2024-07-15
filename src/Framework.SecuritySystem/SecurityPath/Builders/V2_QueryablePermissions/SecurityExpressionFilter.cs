@@ -21,9 +21,6 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
         SecurityExpressionBuilderBase<TDomainObject, TIdent> builder,
         SecurityRule.RoleBaseSecurityRule securityRule)
     {
-        if (builder == null) throw new ArgumentNullException(nameof(builder));
-        if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
-
         var filterExpression = builder.GetSecurityFilterExpression(securityRule).ExpandConst().InlineEval();
 
         this.InjectFunc = q => q.Where(filterExpression);

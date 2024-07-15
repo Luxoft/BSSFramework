@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem;
 
-public class SecurityPathProviderFactory(
+public class DomainSecurityProviderFactory(
     IServiceProvider serviceProvider,
-    IRoleBaseSecurityProviderFactory roleBaseSecurityProviderFactory) : ISecurityPathProviderFactory
+    IRoleBaseSecurityProviderFactory roleBaseSecurityProviderFactory) : IDomainSecurityProviderFactory
 {
     public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,

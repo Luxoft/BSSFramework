@@ -8,7 +8,7 @@ public class RoleBaseSecurityProviderFactory(
     ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
     ISecurityRuleExpander securityRuleExpander,
     ISecurityRoleSource securityRoleSource,
-    ISecurityPathRestrictionService securityPathRestrictionService)
+    ISecurityPathRestrictionService securityPathRestrictionService) : IRoleBaseSecurityProviderFactory
 {
     public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,

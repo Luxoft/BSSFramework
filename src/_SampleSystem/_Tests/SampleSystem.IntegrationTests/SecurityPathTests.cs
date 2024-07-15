@@ -28,7 +28,7 @@ public class SecurityPathTests : TestBase
                                    {
                                        var securityPath = SecurityPath<Employee>.Create(x => x.Location).Or(_ => false);
 
-                                       var securityProvider = context.ServiceProvider.GetRequiredService<ISecurityPathProviderFactory>().Create(
+                                       var securityProvider = context.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory>().Create(
                                            securityPath,
                                            SampleSystemSecurityOperation.EmployeeView);
 

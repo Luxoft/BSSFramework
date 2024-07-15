@@ -136,8 +136,7 @@ internal class GeneratedType : BaseTypeImpl
                                                                    && !(attr is ClassValidatorAttribute)
                                                                    && !(attr is DomainTypeAttribute)
                                                                    && !(attr is DomainObjectAccessAttribute)
-                                                                   && !(attr is DependencySecurityAttribute)
-                                                                   && !(attr is CustomContextSecurityAttribute));
+                                                                   && !(attr is DependencySecurityAttribute));
     }
 
     private IEnumerable<Attribute> GetSecurityAttributes()

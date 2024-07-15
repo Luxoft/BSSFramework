@@ -23,9 +23,9 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
 
-                       .AddScoped<ISecurityPathProviderFactory, SecurityPathProviderFactory>()
+                       .AddScoped<IDomainSecurityProviderFactory, DomainSecurityProviderFactory>()
 
-                       .AddScoped<ISecurityPathProviderFactory, SecurityPathProviderFactory>()
+                       .AddScoped<IRoleBaseSecurityProviderFactory, RoleBaseSecurityProviderFactory>()
 
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
 

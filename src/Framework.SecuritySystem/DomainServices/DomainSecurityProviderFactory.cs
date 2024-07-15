@@ -36,11 +36,10 @@ public class DomainSecurityProviderFactory(
                 var securityProviderFactoryType =
                     providerFactorySecurityRule.GenericSecurityProviderFactoryType.MakeGenericType(typeof(TDomainObject));
 
-                var securityProviderFactoryUntyped = providerFactorySecurityRule.Key == null
-                                                         ? serviceProvider.GetRequiredService(securityProviderFactoryType)
-                                                         : serviceProvider.GetRequiredKeyedService(
-                                                             securityProviderFactoryType,
-                                                             providerFactorySecurityRule.Key);
+                var securityProviderFactoryUntyped =
+                    providerFactorySecurityRule.Key == null
+                        ? serviceProvider.GetRequiredService(securityProviderFactoryType)
+                        : serviceProvider.GetRequiredKeyedService(securityProviderFactoryType, providerFactorySecurityRule.Key);
 
                 var securityProviderFactory = (IFactory<ISecurityProvider<TDomainObject>>)securityProviderFactoryUntyped;
 

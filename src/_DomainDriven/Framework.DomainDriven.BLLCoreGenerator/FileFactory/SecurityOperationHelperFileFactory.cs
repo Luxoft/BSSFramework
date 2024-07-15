@@ -62,8 +62,8 @@ public class SecurityRuleHelperFileFactory<TConfiguration> : FileFactory<TConfig
     {
         var createExpr = typeof(DomainObjectSecurityModeInfo).ToTypeReference().ToObjectCreateExpression(
             domainType.ToTypeOfExpression(),
-            viewSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression(),
-            editSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression());
+            viewSecurityRule.Maybe(this.Configuration.GetSecurityCodeExpression) ?? new CodePrimitiveExpression(),
+            editSecurityRule.Maybe(this.Configuration.GetSecurityCodeExpression) ?? new CodePrimitiveExpression());
 
         var addSingletonMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
                                                                         .ToMethodReferenceExpression(

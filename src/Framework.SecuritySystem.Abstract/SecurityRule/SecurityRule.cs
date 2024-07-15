@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.HierarchicalExpand;
 
 namespace Framework.SecuritySystem;
@@ -28,20 +26,11 @@ public abstract record SecurityRule
     public static ProviderSecurityRule CurrentUser { get; } = new(typeof(ISecurityProvider<>), nameof(CurrentUser));
 
 
-    public static implicit operator SecurityRule(SecurityOperation securityOperation)
-    {
-        return securityOperation.ToSecurityRule();
-    }
+    public static implicit operator SecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();
 
-    public static implicit operator SecurityRule(SecurityRole securityRole)
-    {
-        return securityRole.ToSecurityRule();
-    }
+    public static implicit operator SecurityRule(SecurityRole securityRole) => securityRole.ToSecurityRule();
 
-    public static implicit operator SecurityRule(SecurityRole[] securityRoles)
-    {
-        return securityRoles.ToSecurityRule();
-    }
+    public static implicit operator SecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
     public record ModeSecurityRule(string Name) : SecurityRule
     {
@@ -50,20 +39,11 @@ public abstract record SecurityRule
 
     public abstract record DomainSecurityRule : SecurityRule
     {
-        public static implicit operator DomainSecurityRule(SecurityOperation securityOperation)
-        {
-            return securityOperation.ToSecurityRule();
-        }
+        public static implicit operator DomainSecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();
 
-        public static implicit operator DomainSecurityRule(SecurityRole securityRole)
-        {
-            return securityRole.ToSecurityRule();
-        }
+        public static implicit operator DomainSecurityRule(SecurityRole securityRole) => securityRole.ToSecurityRule();
 
-        public static implicit operator DomainSecurityRule(SecurityRole[] securityRoles)
-        {
-            return securityRoles.ToSecurityRule();
-        }
+        public static implicit operator DomainSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
     }
 
     public record ProviderSecurityRule(Type GenericSecurityProviderType, string? Key = null) : DomainSecurityRule
@@ -80,20 +60,11 @@ public abstract record SecurityRule
 
     public abstract record RoleBaseSecurityRule : DomainSecurityRule
     {
-        public static implicit operator RoleBaseSecurityRule(SecurityOperation securityOperation)
-        {
-            return securityOperation.ToSecurityRule();
-        }
+        public static implicit operator RoleBaseSecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();
 
-        public static implicit operator RoleBaseSecurityRule(SecurityRole securityRole)
-        {
-            return securityRole.ToSecurityRule();
-        }
+        public static implicit operator RoleBaseSecurityRule(SecurityRole securityRole) => securityRole.ToSecurityRule();
 
-        public static implicit operator RoleBaseSecurityRule(SecurityRole[] securityRoles)
-        {
-            return securityRoles.ToSecurityRule();
-        }
+        public static implicit operator RoleBaseSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
         /// <summary>
         /// Тип разворачивания деревьев (как правило для просмотра самого дерева выбирается HierarchicalExpandType.All)
@@ -105,10 +76,7 @@ public abstract record SecurityRule
 
     public record OperationSecurityRule(SecurityOperation SecurityOperation) : RoleBaseSecurityRule
     {
-        public static implicit operator OperationSecurityRule(SecurityOperation securityOperation)
-        {
-            return securityOperation.ToSecurityRule();
-        }
+        public static implicit operator OperationSecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();
 
         public override string ToString() => this.SecurityOperation.Name;
     }
@@ -119,15 +87,9 @@ public abstract record SecurityRule
     /// <param name="SecurityRoles">Список неразвёрнутых ролей</param>
     public record NonExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : RoleBaseSecurityRule
     {
-        public static implicit operator NonExpandedRolesSecurityRule(SecurityRole securityRole)
-        {
-            return securityRole.ToSecurityRule();
-        }
+        public static implicit operator NonExpandedRolesSecurityRule(SecurityRole securityRole) => securityRole.ToSecurityRule();
 
-        public static implicit operator NonExpandedRolesSecurityRule(SecurityRole[] securityRoles)
-        {
-            return securityRoles.ToSecurityRule();
-        }
+        public static implicit operator NonExpandedRolesSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name

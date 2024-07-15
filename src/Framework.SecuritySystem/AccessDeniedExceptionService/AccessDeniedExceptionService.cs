@@ -40,10 +40,8 @@ public class AccessDeniedExceptionService<TIdent> : IAccessDeniedExceptionServic
         }
     }
 
-    protected virtual string GetAccessDeniedExceptionMessage(object domainObject, Type domainObjectType, SecurityRule securityRule)
+    protected virtual string GetAccessDeniedExceptionMessage(object domainObject, Type domainObjectType, SecurityRule? securityRule)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
         var elements = this.GetAccessDeniedExceptionMessageElements(domainObject, domainObjectType, securityRule).ToDictionary();
 
         return elements.GetByFirst((first, other) =>
@@ -65,7 +63,7 @@ public class AccessDeniedExceptionService<TIdent> : IAccessDeniedExceptionServic
         return $"{key} = '{value}'";
     }
 
-    protected virtual IEnumerable<KeyValuePair<string, object>> GetAccessDeniedExceptionMessageElements(object domainObject, Type domainObjectType, SecurityRule securityRule)
+    protected virtual IEnumerable<KeyValuePair<string, object>> GetAccessDeniedExceptionMessageElements(object domainObject, Type domainObjectType, SecurityRule? securityRule)
     {
         if (domainObject is IVisualIdentityObject visualIdentityObject)
         {

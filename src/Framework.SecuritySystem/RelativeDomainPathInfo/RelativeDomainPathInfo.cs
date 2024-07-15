@@ -2,5 +2,4 @@
 
 namespace Framework.SecuritySystem;
 
-public record RelativeDomainPathInfo<TFrom, TTo>(
-    Expression<Func<TFrom, TTo>> Path) : IRelativeDomainPathInfo<TFrom, TTo>;
+public record RelativeDomainPathInfo<TFrom, TTo>(Expression<Func<TFrom, TTo>> Path) : IRelativeDomainPathInfo<TFrom, TTo>;

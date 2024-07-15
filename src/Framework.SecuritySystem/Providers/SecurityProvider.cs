@@ -17,12 +17,7 @@ namespace Framework.SecuritySystem
 
         protected virtual LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.None;
 
-        public virtual IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
-        {
-            if (queryable == null) throw new ArgumentNullException(nameof(queryable));
-
-            return queryable.Where(this.SecurityFilter);
-        }
+        public virtual IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable) => queryable.Where(this.SecurityFilter);
 
         public virtual bool HasAccess(TDomainObject domainObject) => this.lazyHasAccessFunc.Value(domainObject);
 

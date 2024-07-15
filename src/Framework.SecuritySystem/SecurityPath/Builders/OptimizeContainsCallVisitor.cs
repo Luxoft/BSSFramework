@@ -13,20 +13,20 @@ internal class OptimizeContainsCallVisitor<TIdent> : ExpressionVisitor
     }
 
 
-    public override Expression Visit(Expression node)
+    public override Expression Visit(Expression? node)
     {
         return node.UpdateBase(new InternalStateVisitor());
     }
 
     private class InternalStateVisitor : ExpressionVisitor
     {
-        private static readonly MethodInfo EnumerableConstainsMethod = new Func<IEnumerable<TIdent>, TIdent, bool>(Enumerable.Contains).Method;
+        private static readonly MethodInfo EnumerableContainsMethod = new Func<IEnumerable<TIdent>, TIdent, bool>(Enumerable.Contains).Method;
 
-        private static readonly MethodInfo HashSetConstainsMethod = new Func<TIdent, bool>(new HashSet<TIdent>().Contains).Method;
+        private static readonly MethodInfo HashSetContainsMethod = new Func<TIdent, bool>(new HashSet<TIdent>().Contains).Method;
 
 
 
-        private readonly IDictionaryCache<IEnumerable<TIdent>, Expression> _constCache =
+        private readonly IDictionaryCache<IEnumerable<TIdent>, Expression> constCache =
 
                 new DictionaryCache<IEnumerable<TIdent>, Expression>(source => Expression.Constant(source.ToHashSet()));
 
@@ -35,11 +35,11 @@ internal class OptimizeContainsCallVisitor<TIdent> : ExpressionVisitor
         {
             var request = from _ in Maybe.Return()
 
-                          where node.Method == EnumerableConstainsMethod
+                          where node.Method == EnumerableContainsMethod
 
                           from hashSet in this.GetSource(node.Arguments[0])
 
-                          select Expression.Call(this._constCache[hashSet], HashSetConstainsMethod, node.Arguments[1]);
+                          select Expression.Call(this.constCache[hashSet], HashSetContainsMethod, node.Arguments[1]);
 
 
             return request.GetValueOrDefault(() => base.VisitMethodCall(node));

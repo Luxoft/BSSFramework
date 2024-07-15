@@ -17,6 +17,7 @@ public class RoleBaseSecurityProviderFactory(
         return this.GetRegroupedRoles(securityRule)
                    .Select(g => this.Create(securityPath, g.SecurityRule, g.Restriction)).Or();
     }
+
     private ISecurityProvider<TDomainObject> Create<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
         SecurityRule.RoleBaseSecurityRule securityRule,

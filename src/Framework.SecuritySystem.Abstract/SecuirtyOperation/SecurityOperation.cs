@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 /// <summary>
 /// Операция доступа

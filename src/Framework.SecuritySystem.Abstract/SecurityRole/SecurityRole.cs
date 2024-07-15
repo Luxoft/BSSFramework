@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 public class SecurityRole(string name)
 {
@@ -15,16 +13,9 @@ public class SecurityRole(string name)
     public override int GetHashCode() => this.Name.GetHashCode();
 
 
-    public static bool operator ==(SecurityRole sr1, SecurityRole sr2)
-    {
-        return sr1.Equals(sr2);
-    }
+    public static bool operator ==(SecurityRole sr1, SecurityRole sr2) => sr1.Equals(sr2);
 
-    public static bool operator !=(SecurityRole sr1, SecurityRole sr2)
-    {
-        return !sr1.Equals(sr2);
-    }
-
+    public static bool operator !=(SecurityRole sr1, SecurityRole sr2) => !sr1.Equals(sr2);
 
     /// <summary>
     /// Администраторская роль

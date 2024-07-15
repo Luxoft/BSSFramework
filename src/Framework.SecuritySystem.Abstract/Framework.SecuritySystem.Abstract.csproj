@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageId>Luxoft.Framework.SecuritySystem.Abstract</PackageId>
     <RootNamespace>Framework.SecuritySystem</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

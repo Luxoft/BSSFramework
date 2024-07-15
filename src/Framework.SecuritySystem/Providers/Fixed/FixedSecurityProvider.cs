@@ -1,44 +1,27 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.SecuritySystem
+namespace Framework.SecuritySystem;
+
+/// <summary>
+/// Провайдер доступа с фиксированным ответом для одного типа
+/// </summary>
+/// <typeparam name="TDomainObject"></typeparam>
+public abstract class FixedSecurityProvider<TDomainObject> : SecurityProvider<TDomainObject>
 {
-    /// <summary>
-    /// Провайдер доступа с фиксированным ответом для одного типа
-    /// </summary>
-    /// <typeparam name="TDomainObject"></typeparam>
-    public abstract class FixedSecurityProvider<TDomainObject> : SecurityProvider<TDomainObject>
+    private readonly Lazy<bool> hasAccessLazy;
+
+    private readonly Lazy<Expression<Func<TDomainObject, bool>>> securityFilterLazy;
+
+    protected FixedSecurityProvider()
     {
-        private readonly Lazy<bool> hasAccessLazy;
+        this.hasAccessLazy = new Lazy<bool>(this.HasAccess);
 
-        private readonly Lazy<Expression<Func<TDomainObject, bool>>> securityFilterLazy;
-
-
-        protected FixedSecurityProvider()
-        {
-            this.hasAccessLazy = new Lazy<bool>(this.HasAccess);
-
-            this.securityFilterLazy = new Lazy<Expression<Func<TDomainObject, bool>>>(() =>
-            {
-                var hasAccess = this.hasAccessLazy.Value;
-
-                // For hibernate
-                if (hasAccess) { return _ => true; }
-                else { return _ => false; }
-            });
-        }
-
-
-        protected abstract bool HasAccess();
-
-
-        public override bool HasAccess(TDomainObject _)
-        {
-            return this.hasAccessLazy.Value;
-        }
-
-        public override Expression<Func<TDomainObject, bool>> SecurityFilter
-        {
-            get { return this.securityFilterLazy.Value; }
-        }
+        this.securityFilterLazy = new Lazy<Expression<Func<TDomainObject, bool>>>(() => _ => this.hasAccessLazy.Value);
     }
+
+    protected abstract bool HasAccess();
+
+    public override bool HasAccess(TDomainObject _) => this.hasAccessLazy.Value;
+
+    public override Expression<Func<TDomainObject, bool>> SecurityFilter => this.securityFilterLazy.Value;
 }

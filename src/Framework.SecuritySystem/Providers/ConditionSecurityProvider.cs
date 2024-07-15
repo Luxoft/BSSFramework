@@ -13,8 +13,6 @@ public class ConditionSecurityProvider<TDomainObject>(
 
     protected override LambdaCompileMode SecurityFilterCompileMode => securityFilterCompileMode;
 
-    public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
-    {
-        return this.HasAccess(domainObject) ? SecurityAccessorData.Infinity : SecurityAccessorData.Empty;
-    }
+    public override SecurityAccessorData GetAccessorData(TDomainObject domainObject) =>
+        this.HasAccess(domainObject) ? SecurityAccessorData.Infinity : SecurityAccessorData.Empty;
 }

@@ -10,8 +10,8 @@ public class SecurityContextInfoBuilder<TIdent> : ISecurityContextInfoBuilder<TI
 
     public ISecurityContextInfoBuilder<TIdent> Add<TSecurityContext>(
         TIdent ident,
-        string customName = null,
-        Func<TSecurityContext, string> customDisplayFunc = null)
+        string? customName = null,
+        Func<TSecurityContext, string>? customDisplayFunc = null)
         where TSecurityContext : ISecurityContext, IIdentityObject<TIdent>
     {
         this.registerActions.Add(

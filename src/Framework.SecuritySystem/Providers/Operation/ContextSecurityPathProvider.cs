@@ -23,9 +23,7 @@ namespace Framework.SecuritySystem.Providers.Operation
             SecurityRule.RoleBaseSecurityRule securityRule,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
         {
-            if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
-
-            this.securityRule = securityRule ?? throw new ArgumentNullException(nameof(securityRule));
+            this.securityRule = securityRule;
 
             this.securityExpressionBuilder = securityExpressionBuilderFactory.CreateBuilder(securityPath);
 
@@ -33,17 +31,9 @@ namespace Framework.SecuritySystem.Providers.Operation
             this.injectFilterFunc = LazyHelper.Create(() => this.lazyFilter.Value.InjectFunc);
         }
 
-        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
-        {
-            if (queryable == null) throw new ArgumentNullException(nameof(queryable));
+        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable) => this.injectFilterFunc.Value(queryable);
 
-            return this.injectFilterFunc.Value(queryable);
-        }
-
-        public bool HasAccess(TDomainObject domainObject)
-        {
-            return this.lazyFilter.Value.HasAccessFunc(domainObject);
-        }
+        public bool HasAccess(TDomainObject domainObject) => this.lazyFilter.Value.HasAccessFunc(domainObject);
 
         public AccessResult GetAccessResult(TDomainObject domainObject)
         {
@@ -57,11 +47,7 @@ namespace Framework.SecuritySystem.Providers.Operation
             }
         }
 
-        public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
-        {
-            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
-            return new SecurityAccessorData.FixedSecurityAccessorData(this.lazyFilter.Value.GetAccessors(domainObject).ToList());
-        }
+        public SecurityAccessorData GetAccessorData(TDomainObject domainObject) =>
+            new SecurityAccessorData.FixedSecurityAccessorData(this.lazyFilter.Value.GetAccessors(domainObject).ToList());
     }
 }

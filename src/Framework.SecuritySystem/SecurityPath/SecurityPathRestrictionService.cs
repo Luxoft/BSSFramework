@@ -1,12 +1,11 @@
-﻿#nullable enable
-
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Core;
 
 namespace Framework.SecuritySystem;
 
-public class SecurityPathRestrictionService(IServiceProvider serviceProvider, SecurityPathRestrictionServiceSettings? settings = null) : ISecurityPathRestrictionService
+public class SecurityPathRestrictionService(IServiceProvider serviceProvider, SecurityPathRestrictionServiceSettings? settings = null)
+    : ISecurityPathRestrictionService
 {
     public SecurityPath<TDomainObject> ApplyRestriction<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,

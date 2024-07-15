@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 public interface ISecurityPathRestrictionService
 {

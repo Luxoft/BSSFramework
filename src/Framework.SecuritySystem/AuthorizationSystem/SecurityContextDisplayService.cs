@@ -1,16 +1,7 @@
 ﻿namespace Framework.SecuritySystem;
 
-public class SecurityContextDisplayService<TSecurityContext> : ISecurityContextDisplayService<TSecurityContext>
+public class SecurityContextDisplayService<TSecurityContext>(Func<TSecurityContext, string> toStringFunc)
+    : ISecurityContextDisplayService<TSecurityContext>
 {
-    private readonly Func<TSecurityContext, string> toStringFunc;
-
-    public SecurityContextDisplayService(Func<TSecurityContext, string> toStringFunc)
-    {
-        this.toStringFunc = toStringFunc;
-    }
-
-    public string ToString(TSecurityContext securityContext)
-    {
-        return this.toStringFunc(securityContext);
-    }
+    public string ToString(TSecurityContext securityContext) => toStringFunc(securityContext);
 }

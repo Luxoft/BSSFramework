@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 public class OverrideAccessDeniedResultSecurityProvider<TDomainObject>(
     ISecurityProvider<TDomainObject> baseProvider,
@@ -13,17 +11,5 @@ public class OverrideAccessDeniedResultSecurityProvider<TDomainObject>(
 
     public SecurityAccessorData GetAccessorData(TDomainObject domainObject) => baseProvider.GetAccessorData(domainObject);
 
-    public AccessResult GetAccessResult(TDomainObject domainObject)
-    {
-        var accessResult = baseProvider.GetAccessResult(domainObject);
-
-        if (accessResult is AccessResult.AccessDeniedResult accessDeniedResult)
-        {
-            return selector(accessDeniedResult);
-        }
-        else
-        {
-            return accessResult;
-        }
-    }
+    public AccessResult GetAccessResult(TDomainObject domainObject) => baseProvider.GetAccessResult(domainObject).TryOverrideAccessDeniedResult(selector);
 }

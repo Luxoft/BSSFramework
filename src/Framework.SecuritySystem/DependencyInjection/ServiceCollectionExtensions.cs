@@ -29,8 +29,7 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
 
-                       .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.
-                           SecurityExpressionBuilderFactory<Guid>>()
+                       .AddScoped<ISecurityExpressionBuilderFactory, Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Guid>>()
 
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
 
@@ -90,7 +89,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddRelativeDomainPath<TFrom, TTo>(
         this IServiceCollection services,
         Expression<Func<TFrom, TTo>> path,
-        string key = null)
+        string? key = null)
     {
         var info = new RelativeDomainPathInfo<TFrom, TTo>(path);
 

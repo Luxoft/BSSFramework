@@ -64,8 +64,7 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
                                                                    && !(attr is ClassValidatorAttribute)
                                                                    && !(attr is DomainTypeAttribute)
                                                                    && !(attr is DomainObjectAccessAttribute)
-                                                                   && !(attr is DependencySecurityAttribute)
-                                                                   && !(attr is CustomContextSecurityAttribute));
+                                                                   && !(attr is DependencySecurityAttribute));
     }
 
     private IEnumerable<Attribute> GetDomainObjectAccessAttributes()

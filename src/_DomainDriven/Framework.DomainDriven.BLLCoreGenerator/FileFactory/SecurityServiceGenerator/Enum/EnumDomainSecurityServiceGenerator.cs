@@ -41,7 +41,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
         yield return (typeof(ISecurityRuleExpander).ToTypeReference(), "securityRuleExpander", null);
 
         {
-            yield return (typeof(ISecurityPathProviderFactory).ToTypeReference(), "securityPathProviderFactory", null);
+            yield return (typeof(IDomainSecurityProviderFactory).ToTypeReference(), "domainSecurityProviderFactory", null);
 
             var securityPathContainerParam = new CodeParameterDeclarationExpression(this.Configuration.GetCodeTypeReference(null, FileType.RootSecurityServicePathContainerInterface), "securityPathContainer");
 

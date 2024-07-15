@@ -8,7 +8,7 @@ public class SecurityRuleExpander(
     SecurityRoleExpander securityRoleExpander)
     : ISecurityRuleExpander
 {
-    public SecurityRule.DomainObjectSecurityRule? TryExpand<TDomainObject>(SecurityRule.SpecialSecurityRule securityRule)
+    public SecurityRule.DomainSecurityRule? TryExpand<TDomainObject>(SecurityRule.ModeSecurityRule securityRule)
     {
         return securityModeExpander.TryExpand<TDomainObject>(securityRule);
     }
@@ -23,7 +23,7 @@ public class SecurityRuleExpander(
         return securityRoleExpander.Expand(securityRule);
     }
 
-    public IEnumerable<SecurityRule.ExpandedRolesSecurityRule> FullExpand(SecurityRule.ExpandableSecurityRule securityRule)
+    public IEnumerable<SecurityRule.ExpandedRolesSecurityRule> FullExpand(SecurityRule.RoleBaseSecurityRule securityRule)
     {
         switch (securityRule)
         {

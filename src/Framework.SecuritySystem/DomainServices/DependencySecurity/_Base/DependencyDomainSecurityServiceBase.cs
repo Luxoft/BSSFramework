@@ -7,7 +7,7 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
 {
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
     {
-        if (securityRule is SecurityRule.SpecialSecurityRule specialSecurityRule
+        if (securityRule is SecurityRule.ModeSecurityRule specialSecurityRule
             && securityRuleExpander.TryExpand<TDomainObject>(specialSecurityRule) is { } customSecurityRule)
         {
             return this.CreateSecurityProvider(customSecurityRule);

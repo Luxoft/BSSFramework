@@ -4,5 +4,5 @@ namespace Framework.Authorization.SecuritySystem;
 
 public interface ISecurityRolesIdentsResolver
 {
-    IEnumerable<Guid> Resolve(SecurityRule.ExpandableSecurityRule securityRule);
+    IEnumerable<Guid> Resolve(SecurityRule.RoleBaseSecurityRule securityRule);
 }

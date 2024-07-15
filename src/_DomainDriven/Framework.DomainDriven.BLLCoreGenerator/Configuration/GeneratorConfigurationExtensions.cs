@@ -16,7 +16,7 @@ public static class GeneratorConfigurationExtensions
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        if (securityRule is SecurityRule.SpecialSecurityRule)
+        if (securityRule is SecurityRule.ModeSecurityRule)
         {
             return typeof(SecurityRule).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
         }

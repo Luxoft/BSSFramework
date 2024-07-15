@@ -7,9 +7,9 @@
             return hasAccess;
         }
 
-        public override SecurityAccessorResult GetAccessors(TDomainObject domainObject)
+        public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
         {
-            return hasAccess ? SecurityAccessorResult.Infinity : SecurityAccessorResult.Empty;
+            return hasAccess ? SecurityAccessorData.Infinity : SecurityAccessorData.Empty;
         }
     }
 }

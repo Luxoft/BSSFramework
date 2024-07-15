@@ -88,15 +88,11 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
             {
                 var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(SecurityRule.View);
 
-                var securityAccessorResultOptimizer = ctx.ServiceProvider.GetRequiredService<ISecurityAccessorResultOptimizer>();
-
-                var securityAccessorResultEvaluator = ctx.ServiceProvider.GetRequiredService<ISecurityAccessorResultEvaluator>();
-
+                var securityAccessorResolver = ctx.ServiceProvider.GetRequiredService<ISecurityAccessorResolver>();
 
                 return bll.GetListBy(v => v.BusinessUnit_Security != null)
-                          .ToDictionary(v => v.Id, bll.SecurityProvider.GetAccessors)
-                          .ChangeValue(securityAccessorResultOptimizer.Optimize)
-                          .ChangeValue(securityAccessorResultEvaluator.GetAccessors);
+                          .ToDictionary(v => v.Id, bll.SecurityProvider.GetAccessorData)
+                          .ChangeValue(securityAccessorResolver.Resolve);
             });
 
         // Assert

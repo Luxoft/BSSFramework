@@ -39,9 +39,9 @@ namespace Framework.SecuritySystem
             return this.lazyAvailableIdents.Value.Contains(domainObject.Id);
         }
 
-        public SecurityAccessorResult GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
         {
-            return this.baseSecurityProvider.GetAccessors(this.GetBaseObject(domainObject));
+            return this.baseSecurityProvider.GetAccessorData(this.GetBaseObject(domainObject));
         }
 
         private TBaseDomainObject GetBaseObject(TDomainObject domainObject)

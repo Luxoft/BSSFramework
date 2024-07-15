@@ -4,9 +4,9 @@ namespace Framework.SecuritySystem;
 
 public class SecurityModeExpander
 {
-    private readonly IReadOnlyDictionary<Type, SecurityRule.DomainObjectSecurityRule> viewDict;
+    private readonly IReadOnlyDictionary<Type, SecurityRule.DomainSecurityRule> viewDict;
 
-    private readonly IReadOnlyDictionary<Type, SecurityRule.DomainObjectSecurityRule> editDict;
+    private readonly IReadOnlyDictionary<Type, SecurityRule.DomainSecurityRule> editDict;
 
     public SecurityModeExpander(
         IEnumerable<DomainObjectSecurityModeInfo> infos)
@@ -17,7 +17,7 @@ public class SecurityModeExpander
         this.editDict = GetDict(cached, info => info.EditRule);
     }
 
-    public SecurityRule.DomainObjectSecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
+    public SecurityRule.DomainSecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
     {
         if (securityRule == SecurityRule.View)
         {
@@ -31,9 +31,9 @@ public class SecurityModeExpander
         return null;
     }
 
-    private static Dictionary<Type, SecurityRule.DomainObjectSecurityRule> GetDict(
+    private static Dictionary<Type, SecurityRule.DomainSecurityRule> GetDict(
         IEnumerable<DomainObjectSecurityModeInfo> infos,
-        Func<DomainObjectSecurityModeInfo, SecurityRule.DomainObjectSecurityRule?> selector)
+        Func<DomainObjectSecurityModeInfo, SecurityRule.DomainSecurityRule?> selector)
     {
         var request = from info in infos
 

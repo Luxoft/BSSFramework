@@ -173,9 +173,10 @@ public static class ServiceCollectionExtensions
                        .AddKeyedScoped<IValidator<Permission>, PermissionDelegateValidator>(PermissionDelegateValidator.Key)
                        .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>()
 
-                       .AddSingleton<ISecurityAccessorResultOptimizer, SecurityAccessorResultOptimizer>()
+                       .AddSingleton<ISecurityAccessorDataOptimizer, SecurityAccessorDataOptimizer>()
                        .AddScoped<ISecurityAccessorInfinityStorage, AuthorizationAccessorInfinityStorage>()
-                       .AddScoped<ISecurityAccessorResultEvaluator, SecurityAccessorResultEvaluator>();
+                       .AddScoped<ISecurityAccessorDataEvaluator, SecurityAccessorDataEvaluator>()
+                       .AddScoped<ISecurityAccessorResolver, SecurityAccessorResolver>();
     }
 
 

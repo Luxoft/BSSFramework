@@ -9,17 +9,9 @@ namespace Framework.SecuritySystem
         private readonly Lazy<Func<TDomainObject, bool>> lazyHasAccessFunc;
 
 
-        protected SecurityProvider()
-            : base()
-        {
-            this.lazyHasAccessFunc = LazyHelper.Create(() => this.SecurityFilter.Compile(this.CompileCache));
-        }
+        protected SecurityProvider() => this.lazyHasAccessFunc = LazyHelper.Create(() => this.SecurityFilter.Compile(this.CompileCache));
 
-
-        protected LambdaCompileCache CompileCache
-        {
-            get { return Caches[this.SecurityFilterCompileMode]; }
-        }
+        protected LambdaCompileCache CompileCache => Caches[this.SecurityFilterCompileMode];
 
         public abstract Expression<Func<TDomainObject, bool>> SecurityFilter { get; }
 
@@ -32,51 +24,17 @@ namespace Framework.SecuritySystem
             return queryable.Where(this.SecurityFilter);
         }
 
-        public virtual bool HasAccess(TDomainObject domainObject)
-        {
-            return this.lazyHasAccessFunc.Value(domainObject);
-        }
+        public virtual bool HasAccess(TDomainObject domainObject) => this.lazyHasAccessFunc.Value(domainObject);
 
-        public abstract SecurityAccessorResult GetAccessors(TDomainObject domainObject);
+        public abstract SecurityAccessorData GetAccessorData(TDomainObject domainObject);
 
         private static readonly IDictionaryCache<LambdaCompileMode, LambdaCompileCache> Caches =
             new DictionaryCache<LambdaCompileMode, LambdaCompileCache>(mode => new LambdaCompileCache(mode)).WithLock();
 
 
-        public static SecurityProvider<TDomainObject> Create(Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, SecurityAccessorResult> getAccessorsFunc = null, LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
-        {
-            return new DefaultSecurityProvider(securityFilter, getAccessorsFunc, securityFilterCompileMode);
-        }
-
-        private class DefaultSecurityProvider : SecurityProvider<TDomainObject>
-        {
-            private readonly Expression<Func<TDomainObject, bool>> securityFilter;
-            private readonly Func<TDomainObject, SecurityAccessorResult> getAccessorsFunc;
-            private readonly LambdaCompileMode securityFilterCompileMode;
-
-            public DefaultSecurityProvider(Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, SecurityAccessorResult> getAccessorsFunc, LambdaCompileMode securityFilterCompileMode)
-                : base()
-            {
-                this.securityFilter = securityFilter ?? throw new ArgumentNullException(nameof(securityFilter));
-                this.getAccessorsFunc = getAccessorsFunc ?? (domainObject => this.HasAccess(domainObject) ? SecurityAccessorResult.Infinity : SecurityAccessorResult.Empty);
-                this.securityFilterCompileMode = securityFilterCompileMode;
-            }
-
-
-            public override Expression<Func<TDomainObject, bool>> SecurityFilter
-            {
-                get { return this.securityFilter; }
-            }
-
-            protected override LambdaCompileMode SecurityFilterCompileMode
-            {
-                get { return this.securityFilterCompileMode; }
-            }
-
-            public override SecurityAccessorResult GetAccessors(TDomainObject domainObject)
-            {
-                return this.getAccessorsFunc(domainObject);
-            }
-        }
+        public static ISecurityProvider<TDomainObject> Create(
+            Expression<Func<TDomainObject, bool>> securityFilter,
+            LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All) =>
+            new ConditionSecurityProvider<TDomainObject>(securityFilter, securityFilterCompileMode);
     }
 }

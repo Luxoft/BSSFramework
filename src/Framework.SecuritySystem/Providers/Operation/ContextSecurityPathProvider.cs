@@ -9,7 +9,7 @@ namespace Framework.SecuritySystem.Providers.Operation
     /// <typeparam name="TDomainObject"></typeparam>
     public class ContextSecurityPathProvider<TDomainObject> : ISecurityProvider<TDomainObject>
     {
-        private readonly SecurityRule.DomainObjectSecurityRule securityRule;
+        private readonly SecurityRule.DomainSecurityRule securityRule;
 
         private readonly Lazy<Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>>> injectFilterFunc;
 
@@ -20,7 +20,7 @@ namespace Framework.SecuritySystem.Providers.Operation
 
         public ContextSecurityPathProvider(
             SecurityPath<TDomainObject> securityPath,
-            SecurityRule.ExpandableSecurityRule securityRule,
+            SecurityRule.RoleBaseSecurityRule securityRule,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
         {
             if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
@@ -57,11 +57,11 @@ namespace Framework.SecuritySystem.Providers.Operation
             }
         }
 
-        public SecurityAccessorResult GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            return new SecurityAccessorResult.FixedSecurityAccessorResult(this.lazyFilter.Value.GetAccessors(domainObject).ToList());
+            return new SecurityAccessorData.FixedSecurityAccessorData(this.lazyFilter.Value.GetAccessors(domainObject).ToList());
         }
     }
 }

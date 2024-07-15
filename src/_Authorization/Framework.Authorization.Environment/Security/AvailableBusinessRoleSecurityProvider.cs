@@ -40,13 +40,13 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject> : SecurityProv
 
     public override Expression<Func<TDomainObject, bool>> SecurityFilter => this.lazySecurityFilter.Value;
 
-    public override SecurityAccessorResult GetAccessors(TDomainObject domainObject)
+    public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
         var role = this.businessRoleSecurityPath.Eval(domainObject);
 
-        return SecurityAccessorResult.Return(
+        return SecurityAccessorData.Return(
             this.availablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false)
                 .Where(permission => permission.Role == role)
                 .Select(permission => permission.Principal)

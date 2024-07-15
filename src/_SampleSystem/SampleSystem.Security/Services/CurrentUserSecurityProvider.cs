@@ -15,8 +15,8 @@ public class CurrentUserSecurityProvider<TDomainObject>(
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
         toEmployeePathInfo.Path.Select(employee => employee.Active && employee.Login == actualPrincipalSource.ActualPrincipal.Name);
 
-    public override SecurityAccessorResult GetAccessors(TDomainObject domainObject)
+    public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {
-        return SecurityAccessorResult.Return(toEmployeePathInfo.Path.Eval(domainObject).Login);
+        return SecurityAccessorData.Return(toEmployeePathInfo.Path.Eval(domainObject).Login);
     }
 }

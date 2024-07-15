@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace SampleSystem.IntegrationTests;
 
 [TestClass]
-public class ExceptSecurityTests : TestBase
+public class SecurityRuleTests : TestBase
 {
     [TestMethod]
     public void TryApplyExceptRule_CurrentUserExcepted()

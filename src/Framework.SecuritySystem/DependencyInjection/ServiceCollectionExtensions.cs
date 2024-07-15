@@ -2,8 +2,10 @@
 
 using Framework.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.Rules.Builders;
-
+using Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
+using Framework.SecuritySystem.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection;
@@ -15,28 +17,19 @@ public static class ServiceCollectionExtensions
         return services.AddSingleton<SecurityModeExpander>()
                        .AddSingleton<SecurityOperationExpander>()
                        .AddSingleton<SecurityRoleExpander>()
-
                        .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
-
                        .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
-
                        .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
-
                        .AddScoped<IDomainSecurityProviderFactory, DomainSecurityProviderFactory>()
-
+                       .AddSingleton<ISecurityRuleOptimizer, SecurityRuleOptimizer>()
                        .AddScoped<IRoleBaseSecurityProviderFactory, RoleBaseSecurityProviderFactory>()
-
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
-
-                       .AddScoped<ISecurityExpressionBuilderFactory, Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Guid>>()
-
+                       .AddScoped<ISecurityExpressionBuilderFactory, SecurityExpressionBuilderFactory<Guid>>()
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
-
                        .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
                        .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))
-
                        .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
                        .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>();
     }

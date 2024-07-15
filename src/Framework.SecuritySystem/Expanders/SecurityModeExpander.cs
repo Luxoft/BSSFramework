@@ -1,4 +1,4 @@
-﻿namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem.Expanders;
 
 public class SecurityModeExpander
 {

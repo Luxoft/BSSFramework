@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.SecuritySystem;
+namespace Framework.SecuritySystem.Expanders;
 
 public class SecurityRoleExpander
 {

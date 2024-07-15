@@ -17,8 +17,7 @@ public class SecurityAccessorDataOptimizer : SecurityAccessorDataVisitor, ISecur
         {
             return data.Left;
         }
-        else if (data.Left is SecurityAccessorData.FixedSecurityAccessorData left
-                 && data.Right is SecurityAccessorData.FixedSecurityAccessorData right)
+        else if (data is { Left: SecurityAccessorData.FixedSecurityAccessorData left, Right: SecurityAccessorData.FixedSecurityAccessorData right })
         {
             return SecurityAccessorData.Return(left.Items.Intersect(right.Items, StringComparer.CurrentCultureIgnoreCase));
         }
@@ -38,8 +37,7 @@ public class SecurityAccessorDataOptimizer : SecurityAccessorDataVisitor, ISecur
         {
             return data.Right;
         }
-        else if (data.Left is SecurityAccessorData.FixedSecurityAccessorData left
-                 && data.Right is SecurityAccessorData.FixedSecurityAccessorData right)
+        else if (data is { Left: SecurityAccessorData.FixedSecurityAccessorData left, Right: SecurityAccessorData.FixedSecurityAccessorData right })
         {
             return SecurityAccessorData.Return(left.Items.Union(right.Items, StringComparer.CurrentCultureIgnoreCase));
         }

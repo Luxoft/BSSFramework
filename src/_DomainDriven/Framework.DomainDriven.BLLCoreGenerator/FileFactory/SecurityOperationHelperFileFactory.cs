@@ -4,7 +4,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.Security;
 using Framework.SecuritySystem;
-
+using Framework.SecuritySystem.Expanders;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
@@ -62,8 +62,8 @@ public class SecurityRuleHelperFileFactory<TConfiguration> : FileFactory<TConfig
     {
         var createExpr = typeof(DomainObjectSecurityModeInfo).ToTypeReference().ToObjectCreateExpression(
             domainType.ToTypeOfExpression(),
-            viewSecurityRule.Maybe(this.Configuration.GetSecurityCodeExpression) ?? new CodePrimitiveExpression(),
-            editSecurityRule.Maybe(this.Configuration.GetSecurityCodeExpression) ?? new CodePrimitiveExpression());
+            viewSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression(),
+            editSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression());
 
         var addSingletonMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
                                                                         .ToMethodReferenceExpression(

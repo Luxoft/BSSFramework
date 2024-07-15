@@ -2,7 +2,7 @@
 
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
-
+using Framework.SecuritySystem.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

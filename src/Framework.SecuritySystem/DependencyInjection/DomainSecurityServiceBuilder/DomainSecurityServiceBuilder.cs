@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Persistent;
+using Framework.SecuritySystem.Expanders;
 
 using Microsoft.Extensions.DependencyInjection;
 

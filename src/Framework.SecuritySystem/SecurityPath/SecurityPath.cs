@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.Core.ExpressionComparers;
@@ -159,7 +157,7 @@ public abstract record SecurityPath<TDomainObject>
         public virtual bool Equals(ConditionPath? other)
         {
             return object.ReferenceEquals(this, other)
-                   || (!object.ReferenceEquals(other, null) && ExpressionComparer.Value.Equals(this.SecurityFilter, other.SecurityFilter));
+                   || (other is not null && ExpressionComparer.Value.Equals(this.SecurityFilter, other.SecurityFilter));
         }
 
         public override int GetHashCode() => 0;
@@ -199,10 +197,7 @@ public abstract record SecurityPath<TDomainObject>
         SingleSecurityMode Mode) : SecurityPath<TDomainObject>
         where TSecurityContext : class, ISecurityContext
     {
-        protected internal override IEnumerable<Type> GetInternalUsedTypes()
-        {
-            return [typeof(TSecurityContext)];
-        }
+        protected internal override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
             Expression<Func<TNewDomainObject, TDomainObject>> selector)
@@ -215,7 +210,7 @@ public abstract record SecurityPath<TDomainObject>
         public virtual bool Equals(SingleSecurityPath<TSecurityContext>? other)
         {
             return object.ReferenceEquals(this, other)
-                   || (!object.ReferenceEquals(other, null)
+                   || (other is not null
                        && this.Mode == other.Mode
                        && ExpressionComparer.Value.Equals(this.SecurityPath, other.SecurityPath));
         }
@@ -234,16 +229,13 @@ public abstract record SecurityPath<TDomainObject>
 
         public ManySecurityPath(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
         {
-            this.SecurityPath = securityPath ?? throw new ArgumentNullException(nameof(securityPath));
+            this.SecurityPath = securityPath;
             this.Mode = mode;
 
             this.SecurityPathQ = this.TryExtractSecurityPathQ();
         }
 
-        protected internal override IEnumerable<Type> GetInternalUsedTypes()
-        {
-            return [typeof(TSecurityContext)];
-        }
+        protected internal override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
 
         private Expression<Func<TDomainObject, IQueryable<TSecurityContext>>>? TryExtractSecurityPathQ()
         {
@@ -268,7 +260,7 @@ public abstract record SecurityPath<TDomainObject>
         public virtual bool Equals(ManySecurityPath<TSecurityContext>? other)
         {
             return object.ReferenceEquals(this, other)
-                   || (!object.ReferenceEquals(other, null)
+                   || (other is not null
                        && this.Mode == other.Mode
                        && ExpressionComparer.Value.Equals(this.SecurityPath, other.SecurityPath));
         }
@@ -298,7 +290,7 @@ public abstract record SecurityPath<TDomainObject>
         public virtual bool Equals(NestedManySecurityPath<TNestedObject>? other)
         {
             return object.ReferenceEquals(this, other)
-                   || (!object.ReferenceEquals(other, null)
+                   || (other is not null
                        && this.Mode == other.Mode
                        && this.NestedSecurityPath == other.NestedSecurityPath
                        && ExpressionComparer.Value.Equals(this.NestedObjectsPath, other.NestedObjectsPath));

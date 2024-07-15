@@ -2,23 +2,17 @@
 
 namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
-public class SecurityExpressionBuilderFactory<TIdent> : SecurityExpressionBuilderFactoryBase<TIdent>
+public class SecurityExpressionBuilderFactory<TIdent>(
+    IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
+    IAuthorizationSystem<TIdent> authorizationSystem,
+    ISecurityContextInfoService securityContextInfoService)
+    : SecurityExpressionBuilderFactoryBase<TIdent>
 {
-    public SecurityExpressionBuilderFactory(
-        IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
-        IAuthorizationSystem<TIdent> authorizationSystem,
-        ISecurityContextInfoService securityContextInfoService)
-    {
-        this.HierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
-        this.AuthorizationSystem = authorizationSystem;
-        this.SecurityContextInfoService = securityContextInfoService;
-    }
+    public IHierarchicalObjectExpanderFactory<TIdent> HierarchicalObjectExpanderFactory { get; } = hierarchicalObjectExpanderFactory;
 
-    public IHierarchicalObjectExpanderFactory<TIdent> HierarchicalObjectExpanderFactory { get; }
+    public IAuthorizationSystem<TIdent> AuthorizationSystem { get; } = authorizationSystem;
 
-    public IAuthorizationSystem<TIdent> AuthorizationSystem { get; }
-
-    public ISecurityContextInfoService SecurityContextInfoService { get; }
+    public ISecurityContextInfoService SecurityContextInfoService { get; } = securityContextInfoService;
 
     protected override ISecurityExpressionBuilder<TDomainObject> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.ConditionPath securityPath)
     {

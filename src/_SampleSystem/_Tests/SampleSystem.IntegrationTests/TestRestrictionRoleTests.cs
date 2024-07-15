@@ -9,7 +9,6 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.Security;

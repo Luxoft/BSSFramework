@@ -11,19 +11,17 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 {
     private readonly List<Type> securityFunctorTypes = new();
 
-    public SecurityRule.DomainSecurityRule ViewRule { get; private set; }
+    public SecurityRule.DomainSecurityRule? ViewRule { get; private set; }
 
-    public SecurityRule.DomainSecurityRule EditRule { get; private set; }
+    public SecurityRule.DomainSecurityRule? EditRule { get; private set; }
 
     public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
 
-    public object DependencySourcePathInfo { get; private set; }
+    public (Type Type, object Instance)? DependencySourcePathData { get; private set; }
 
-    public Type DependencySourcePathType { get; private set; }
+    public Type? CustomServiceType { get; private set; }
 
-    public Type CustomServiceType { get; private set; }
-
-    public Type DependencyServiceType { get; private set; }
+    public Type? DependencyServiceType { get; private set; }
 
 
     public void Register(IServiceCollection services)
@@ -36,25 +34,25 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
         services.AddSingleton(this.SecurityPath);
 
-        if (this.DependencySourcePathType != null)
+        if (this.DependencySourcePathData is { } pair)
         {
-            services.AddSingleton(this.DependencySourcePathType, this.DependencySourcePathInfo);
+            services.AddSingleton(pair.Type, pair.Instance);
         }
 
-        foreach (var servicePair in this.GetRegisterDomainSecurityService())
+        foreach (var (decl, impl) in this.GetRegisterDomainSecurityService())
         {
-            if (servicePair.Decl == null)
+            if (decl == null)
             {
-                services.AddScoped(servicePair.Impl);
+                services.AddScoped(impl);
             }
             else
             {
-                services.AddScoped(servicePair.Decl, servicePair.Impl);
+                services.AddScoped(decl, impl);
             }
         }
     }
 
-    private IEnumerable<(Type Decl, Type Impl)> GetRegisterDomainSecurityService()
+    private IEnumerable<(Type? Decl, Type Impl)> GetRegisterDomainSecurityService()
     {
         var baseServiceType = typeof(IDomainSecurityService<TDomainObject>);
 
@@ -115,8 +113,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
     {
         this.SetDependency<TSource>();
 
-        this.DependencySourcePathType = typeof(IRelativeDomainPathInfo<TDomainObject, TSource>);
-        this.DependencySourcePathInfo = new RelativeDomainPathInfo<TDomainObject, TSource>(relativeDomainPath);
+        this.DependencySourcePathData =
+            (typeof(IRelativeDomainPathInfo<TDomainObject, TSource>),
+                new RelativeDomainPathInfo<TDomainObject, TSource>(relativeDomainPath));
 
         return this;
     }

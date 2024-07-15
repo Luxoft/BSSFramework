@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Framework.Core;
+﻿using Framework.Core;
 
 namespace Framework.SecuritySystem;
 

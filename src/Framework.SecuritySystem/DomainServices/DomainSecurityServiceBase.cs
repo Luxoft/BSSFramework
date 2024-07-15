@@ -15,8 +15,5 @@ public abstract class DomainSecurityServiceBase<TDomainObject> : IDomainSecurity
 
     protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule);
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityRule securityRule)
-    {
-        return this.providersCache[securityRule];
-    }
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityRule securityRule) => this.providersCache[securityRule];
 }

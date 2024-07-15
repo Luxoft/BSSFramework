@@ -18,12 +18,10 @@ public interface ISecurityProvider<TDomainObject>
     /// </summary>
     /// <param name="domainObject"></param>
     /// <returns></returns>
-    AccessResult GetAccessResult(TDomainObject domainObject)
-    {
-        return this.HasAccess(domainObject)
-                   ? AccessResult.AccessGrantedResult.Default
-                   : AccessResult.AccessDeniedResult.Create(domainObject);
-    }
+    AccessResult GetAccessResult(TDomainObject domainObject) =>
+        this.HasAccess(domainObject)
+            ? AccessResult.AccessGrantedResult.Default
+            : AccessResult.AccessDeniedResult.Create(domainObject);
 
     /// <summary>
     /// Проверка наличия доступа на объект для текущего пользователя

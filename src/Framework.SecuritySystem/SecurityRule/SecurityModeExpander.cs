@@ -1,48 +1,24 @@
-﻿#nullable enable
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 public class SecurityModeExpander
 {
-    private readonly IReadOnlyDictionary<Type, SecurityRule.DomainSecurityRule> viewDict;
+    private readonly IReadOnlyDictionary<(Type, SecurityRule.ModeSecurityRule), SecurityRule.DomainSecurityRule> dict;
 
-    private readonly IReadOnlyDictionary<Type, SecurityRule.DomainSecurityRule> editDict;
-
-    public SecurityModeExpander(
-        IEnumerable<DomainObjectSecurityModeInfo> infos)
-    {
-        var cached = infos.ToList();
-
-        this.viewDict = GetDict(cached, info => info.ViewRule);
-        this.editDict = GetDict(cached, info => info.EditRule);
-    }
-
-    public SecurityRule.DomainSecurityRule? TryExpand<TDomainObject>(SecurityRule securityRule)
-    {
-        if (securityRule == SecurityRule.View)
-        {
-            return this.viewDict.GetValueOrDefault(typeof(TDomainObject));
-        }
-        else if (securityRule == SecurityRule.Edit)
-        {
-            return this.editDict.GetValueOrDefault(typeof(TDomainObject));
-        }
-
-        return null;
-    }
-
-    private static Dictionary<Type, SecurityRule.DomainSecurityRule> GetDict(
-        IEnumerable<DomainObjectSecurityModeInfo> infos,
-        Func<DomainObjectSecurityModeInfo, SecurityRule.DomainSecurityRule?> selector)
+    public SecurityModeExpander(IEnumerable<DomainObjectSecurityModeInfo> infos)
     {
         var request = from info in infos
 
-                      let securityRule = selector(info)
+                      from pair in new[] { (Mode: SecurityRule.View, TargetRule: info.ViewRule), (Mode: SecurityRule.Edit, TargetRule: info.EditRule) }
 
-                      where securityRule != null
+                      where pair.TargetRule != null
 
-                      select (info.DomainType, securityRule);
+                      select ((info.DomainType, pair.Mode), pair.TargetRule);
 
-        return request.ToDictionary();
+        this.dict = request.ToDictionary();
+    }
+
+    public SecurityRule.DomainSecurityRule? TryExpand<TDomainObject>(SecurityRule.ModeSecurityRule securityRule)
+    {
+        return this.dict.GetValueOrDefault((typeof(TDomainObject), securityRule));
     }
 }

@@ -13,7 +13,7 @@ public static class DomainSecurityServiceRootBuilderExtensions
     public static IDomainSecurityServiceRootBuilder Add<TDomainObject>(
         this IDomainSecurityServiceRootBuilder rootBuilder,
         SecurityRule.DomainSecurityRule viewSecurityRule,
-        SecurityRule.DomainSecurityRule editRule = null,
+        SecurityRule.DomainSecurityRule editSecurityRule = null,
         SecurityPath<TDomainObject> securityPath = null)
     {
         return rootBuilder.Add<TDomainObject>(
@@ -21,9 +21,9 @@ public static class DomainSecurityServiceRootBuilderExtensions
             {
                 b.SetView(viewSecurityRule);
 
-                if (editRule != null)
+                if (editSecurityRule != null)
                 {
-                    b.SetEdit(editRule);
+                    b.SetEdit(editSecurityRule);
                 }
 
                 if (securityPath != null)

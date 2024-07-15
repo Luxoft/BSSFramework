@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using System.Linq.Expressions;
+
+using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -34,13 +36,27 @@ public class DomainSecurityProviderFactory(
                 var securityProviderFactoryType =
                     providerFactorySecurityRule.GenericSecurityProviderFactoryType.MakeGenericType(typeof(TDomainObject));
 
-                var securityProviderFactory = providerFactorySecurityRule.Key == null
-                                                  ? serviceProvider.GetRequiredService(securityProviderFactoryType)
-                                                  : serviceProvider.GetRequiredKeyedService(
-                                                      securityProviderFactoryType,
-                                                      providerFactorySecurityRule.Key);
+                var securityProviderFactoryUntyped = providerFactorySecurityRule.Key == null
+                                                         ? serviceProvider.GetRequiredService(securityProviderFactoryType)
+                                                         : serviceProvider.GetRequiredKeyedService(
+                                                             securityProviderFactoryType,
+                                                             providerFactorySecurityRule.Key);
 
-                return ((IFactory<ISecurityProvider<TDomainObject>>)securityProviderFactory).Create();
+                var securityProviderFactory = (IFactory<ISecurityProvider<TDomainObject>>)securityProviderFactoryUntyped;
+
+                return securityProviderFactory.Create();
+            }
+
+            case SecurityRule.ConditionSecurityRule conditionSecurityRule:
+            {
+                var conditionFactoryType =
+                    conditionSecurityRule.GenericConditionFactoryType.MakeGenericType(typeof(TDomainObject));
+
+                var conditionFactoryUntyped = serviceProvider.GetRequiredService(conditionFactoryType);
+
+                var conditionFactory = (IFactory<Expression<Func<TDomainObject, bool>>>)conditionFactoryUntyped;
+
+                return SecurityProvider<TDomainObject>.Create(conditionFactory.Create());
             }
 
             case SecurityRule.OrSecurityRule orSecurityRule:

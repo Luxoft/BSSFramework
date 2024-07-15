@@ -10,22 +10,22 @@ public abstract record SecurityRule
     /// <summary>
     /// Правило доступа для просмотра объекта
     /// </summary>
-    public static SpecialSecurityRule View { get; } = new(nameof(View));
+    public static ModeSecurityRule View { get; } = new(nameof(View));
 
     /// <summary>
     /// Правило доступа для редактирования объекта
     /// </summary>
-    public static SpecialSecurityRule Edit { get; } = new(nameof(Edit));
+    public static ModeSecurityRule Edit { get; } = new(nameof(Edit));
 
     /// <summary>
     /// Правило доступа для отключения безопасности
     /// </summary>
-    public static CustomProviderSecurityRule Disabled { get; } = new(typeof(ISecurityProvider<>), nameof(Disabled));
+    public static ProviderSecurityRule Disabled { get; } = new(typeof(ISecurityProvider<>), nameof(Disabled));
 
     /// <summary>
     /// Правило доступа для доменных объектов привязанных к текущему пользователю
     /// </summary>
-    public static CustomProviderSecurityRule CurrentUser { get; } = new(typeof(ISecurityProvider<>), nameof(CurrentUser));
+    public static ProviderSecurityRule CurrentUser { get; } = new(typeof(ISecurityProvider<>), nameof(CurrentUser));
 
 
     public static implicit operator SecurityRule(SecurityOperation securityOperation)
@@ -43,54 +43,54 @@ public abstract record SecurityRule
         return securityRoles.ToSecurityRule();
     }
 
-    public record SpecialSecurityRule(string Name) : SecurityRule
+    public record ModeSecurityRule(string Name) : SecurityRule
     {
         public override string ToString() => this.Name;
     }
 
-    public abstract record DomainObjectSecurityRule : SecurityRule
+    public abstract record DomainSecurityRule : SecurityRule
     {
-        public static implicit operator DomainObjectSecurityRule(SecurityOperation securityOperation)
+        public static implicit operator DomainSecurityRule(SecurityOperation securityOperation)
         {
             return securityOperation.ToSecurityRule();
         }
 
-        public static implicit operator DomainObjectSecurityRule(SecurityRole securityRole)
+        public static implicit operator DomainSecurityRule(SecurityRole securityRole)
         {
             return securityRole.ToSecurityRule();
         }
 
-        public static implicit operator DomainObjectSecurityRule(SecurityRole[] securityRoles)
+        public static implicit operator DomainSecurityRule(SecurityRole[] securityRoles)
         {
             return securityRoles.ToSecurityRule();
         }
     }
 
-    public record CustomProviderSecurityRule(Type GenericSecurityProviderType, string? Key = null) : DomainObjectSecurityRule
+    public record ProviderSecurityRule(Type GenericSecurityProviderType, string? Key = null) : DomainSecurityRule
     {
         public override string ToString() => this.Key ?? base.ToString();
     }
 
-    public record CustomProviderFactorySecurityRule(Type GenericSecurityProviderFactoryType, string? Key = null) : DomainObjectSecurityRule
+    public record ProviderFactorySecurityRule(Type GenericSecurityProviderFactoryType, string? Key = null) : DomainSecurityRule
     {
         public override string ToString() => this.Key ?? base.ToString();
     }
 
-    public record ConditionSecurityRule(Type GenericConditionFactoryType) : DomainObjectSecurityRule;
+    public record ConditionSecurityRule(Type GenericConditionFactoryType) : DomainSecurityRule;
 
-    public abstract record ExpandableSecurityRule : DomainObjectSecurityRule
+    public abstract record RoleBaseSecurityRule : DomainSecurityRule
     {
-        public static implicit operator ExpandableSecurityRule(SecurityOperation securityOperation)
+        public static implicit operator RoleBaseSecurityRule(SecurityOperation securityOperation)
         {
             return securityOperation.ToSecurityRule();
         }
 
-        public static implicit operator ExpandableSecurityRule(SecurityRole securityRole)
+        public static implicit operator RoleBaseSecurityRule(SecurityRole securityRole)
         {
             return securityRole.ToSecurityRule();
         }
 
-        public static implicit operator ExpandableSecurityRule(SecurityRole[] securityRoles)
+        public static implicit operator RoleBaseSecurityRule(SecurityRole[] securityRoles)
         {
             return securityRoles.ToSecurityRule();
         }
@@ -103,7 +103,7 @@ public abstract record SecurityRule
         public HierarchicalExpandType SafeExpandType => this.CustomExpandType ?? HierarchicalExpandType.Children;
     }
 
-    public record OperationSecurityRule(SecurityOperation SecurityOperation) : ExpandableSecurityRule
+    public record OperationSecurityRule(SecurityOperation SecurityOperation) : RoleBaseSecurityRule
     {
         public static implicit operator OperationSecurityRule(SecurityOperation securityOperation)
         {
@@ -117,7 +117,7 @@ public abstract record SecurityRule
     /// Список ролей ДО разворачиния дерева ролей вверх
     /// </summary>
     /// <param name="SecurityRoles">Список неразвёрнутых ролей</param>
-    public record NonExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : ExpandableSecurityRule
+    public record NonExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : RoleBaseSecurityRule
     {
         public static implicit operator NonExpandedRolesSecurityRule(SecurityRole securityRole)
         {
@@ -138,16 +138,16 @@ public abstract record SecurityRule
     /// Список ролей ПОСЛЕ разворачиния дерева ролей вверх
     /// </summary>
     /// <param name="SecurityRoles">Список развёрнутых ролей</param>
-    public record ExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : ExpandableSecurityRule
+    public record ExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : RoleBaseSecurityRule
     {
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
                                                  : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";
     }
 
-    public record AndSecurityRule(DomainObjectSecurityRule Left, DomainObjectSecurityRule Right) : DomainObjectSecurityRule;
+    public record AndSecurityRule(DomainSecurityRule Left, DomainSecurityRule Right) : DomainSecurityRule;
 
-    public record OrSecurityRule(DomainObjectSecurityRule Left, DomainObjectSecurityRule Right) : DomainObjectSecurityRule;
+    public record OrSecurityRule(DomainSecurityRule Left, DomainSecurityRule Right) : DomainSecurityRule;
 
-    public record NegateSecurityRule(DomainObjectSecurityRule InnerRule) : DomainObjectSecurityRule;
+    public record NegateSecurityRule(DomainSecurityRule InnerRule) : DomainSecurityRule;
 }

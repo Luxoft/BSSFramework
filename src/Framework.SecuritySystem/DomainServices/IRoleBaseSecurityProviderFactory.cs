@@ -1,8 +1,8 @@
 ﻿namespace Framework.SecuritySystem;
 
-public interface ISecurityPathProviderFactory
+public interface IRoleBaseSecurityProviderFactory
 {
     ISecurityProvider<TDomainObject> Create<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
-        SecurityRule.DomainSecurityRule securityRule);
+        SecurityRule.RoleBaseSecurityRule securityRule);
 }

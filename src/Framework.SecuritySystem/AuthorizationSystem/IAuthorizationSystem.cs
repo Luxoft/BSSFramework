@@ -7,12 +7,12 @@ namespace Framework.SecuritySystem;
 public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
 {
     IEnumerable<string> GetNonContextAccessors(
-        SecurityRule.ExpandableSecurityRule securityRule,
+        SecurityRule.RoleBaseSecurityRule securityRule,
         Expression<Func<IPermission<TIdent>, bool>> permissionFilter);
 
     List<Dictionary<Type, IEnumerable<TIdent>>> GetPermissions(
-        SecurityRule.ExpandableSecurityRule securityRule,
+        SecurityRule.RoleBaseSecurityRule securityRule,
         IEnumerable<Type> securityTypes);
 
-    IQueryable<IPermission<TIdent>> GetPermissionQuery(SecurityRule.ExpandableSecurityRule securityRule);
+    IQueryable<IPermission<TIdent>> GetPermissionQuery(SecurityRule.RoleBaseSecurityRule securityRule);
 }

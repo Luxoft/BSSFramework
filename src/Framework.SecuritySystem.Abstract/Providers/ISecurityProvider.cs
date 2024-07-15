@@ -37,5 +37,5 @@ public interface ISecurityProvider<TDomainObject>
     /// </summary>
     /// <param name="domainObject"></param>
     /// <returns></returns>
-    SecurityAccessorResult GetAccessors(TDomainObject domainObject);
+    SecurityAccessorData GetAccessorData(TDomainObject domainObject);
 }

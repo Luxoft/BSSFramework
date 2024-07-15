@@ -28,9 +28,9 @@ namespace Framework.SecuritySystem
             return baseSecurityProvider.HasAccess(selector.Eval(domainObject));
         }
 
-        public SecurityAccessorResult GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
         {
-            return baseSecurityProvider.GetAccessors(selector.Eval(domainObject));
+            return baseSecurityProvider.GetAccessorData(selector.Eval(domainObject));
         }
     }
 }

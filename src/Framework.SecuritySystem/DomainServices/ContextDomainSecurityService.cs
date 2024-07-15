@@ -9,7 +9,7 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject>(
     ISecurityPathProviderFactory securityPathProviderFactory)
     : DomainSecurityService<TDomainObject>(securityRuleExpander)
 {
-    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainObjectSecurityRule securityRule)
+    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainSecurityRule securityRule)
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
         if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
@@ -26,7 +26,7 @@ public class ContextDomainSecurityService<TDomainObject>(
         securityRuleExpander,
         securityPathProviderFactory)
 {
-    protected override ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule)
+    protected override ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(SecurityRule.DomainSecurityRule securityRule)
     {
         return this.Create(securityPath ?? SecurityPath<TDomainObject>.Empty, securityRule);
     }

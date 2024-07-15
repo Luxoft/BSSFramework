@@ -6,7 +6,7 @@ public abstract class DomainSecurityService<TDomainObject>(ISecurityRuleExpander
     {
         switch (securityRule)
         {
-            case SecurityRule.SpecialSecurityRule specialSecurityRule:
+            case SecurityRule.ModeSecurityRule specialSecurityRule:
                 return this.CreateSecurityProvider(specialSecurityRule);
 
             case SecurityRule.OperationSecurityRule operationSecurityRule:
@@ -18,7 +18,7 @@ public abstract class DomainSecurityService<TDomainObject>(ISecurityRuleExpander
             case SecurityRule.ExpandedRolesSecurityRule expandedRolesSecurityRule:
                 return this.CreateSecurityProvider(expandedRolesSecurityRule);
 
-            case SecurityRule.DomainObjectSecurityRule domainObjectSecurityRule:
+            case SecurityRule.DomainSecurityRule domainObjectSecurityRule:
                 return this.CreateFinalSecurityProvider(domainObjectSecurityRule);
 
             default:
@@ -26,7 +26,7 @@ public abstract class DomainSecurityService<TDomainObject>(ISecurityRuleExpander
         }
     }
 
-    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.SpecialSecurityRule securityRule)
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ModeSecurityRule securityRule)
     {
         return this.GetSecurityProvider(
             securityRuleExpander.TryExpand<TDomainObject>(securityRule)
@@ -48,5 +48,5 @@ public abstract class DomainSecurityService<TDomainObject>(ISecurityRuleExpander
         return this.CreateFinalSecurityProvider(securityRule);
     }
 
-    protected abstract ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(SecurityRule.DomainObjectSecurityRule securityRule);
+    protected abstract ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(SecurityRule.DomainSecurityRule securityRule);
 }

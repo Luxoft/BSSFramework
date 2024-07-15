@@ -25,6 +25,8 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<ISecurityPathProviderFactory, SecurityPathProviderFactory>()
 
+                       .AddScoped<ISecurityPathProviderFactory, SecurityPathProviderFactory>()
+
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
 
                        .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.

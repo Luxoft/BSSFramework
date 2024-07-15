@@ -18,13 +18,13 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>: ISec
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.ExpandableSecurityRule securityRule, IEnumerable<Type> securityTypes)
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.RoleBaseSecurityRule securityRule, IEnumerable<Type> securityTypes)
     {
         return new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule);
     }
 
 
-    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(SecurityRule.ExpandableSecurityRule securityRule)
+    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(SecurityRule.RoleBaseSecurityRule securityRule)
     {
         var filterExpression = this.GetSecurityFilterExpression(securityRule.SafeExpandType).ExpandConst().InlineEval();
 

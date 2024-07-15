@@ -16,23 +16,21 @@ public static class SecurityProviderExtensions
     public static ISecurityProvider<TDomainObject> And<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
         Expression<Func<TDomainObject, bool>> securityFilter,
-        Func<TDomainObject, SecurityAccessorResult> getAccessorsFunc = null,
         LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
     {
         if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
 
-        return securityProvider.And(SecurityProvider<TDomainObject>.Create(securityFilter, getAccessorsFunc, securityFilterCompileMode));
+        return securityProvider.And(SecurityProvider<TDomainObject>.Create(securityFilter, securityFilterCompileMode));
     }
 
     public static ISecurityProvider<TDomainObject> Or<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,
         Expression<Func<TDomainObject, bool>> securityFilter,
-        Func<TDomainObject, SecurityAccessorResult> getAccessorsFunc = null,
         LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
     {
         if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
 
-        return securityProvider.Or(SecurityProvider<TDomainObject>.Create(securityFilter, getAccessorsFunc, securityFilterCompileMode));
+        return securityProvider.Or(SecurityProvider<TDomainObject>.Create(securityFilter, securityFilterCompileMode));
     }
 
     public static ISecurityProvider<TDomainObject> And<TDomainObject>(
@@ -118,15 +116,15 @@ public static class SecurityProviderExtensions
                        : securityProvider.HasAccess(domainObject) || otherSecurityProvider.HasAccess(domainObject);
         }
 
-        public SecurityAccessorResult GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
         {
-            var left = securityProvider.GetAccessors(domainObject);
+            var left = securityProvider.GetAccessorData(domainObject);
 
-            var right = otherSecurityProvider.GetAccessors(domainObject);
+            var right = otherSecurityProvider.GetAccessorData(domainObject);
 
             return orAnd
-                       ? new SecurityAccessorResult.AndSecurityAccessorResult(left, right)
-                       : new SecurityAccessorResult.OrSecurityAccessorResult(left, right);
+                       ? new SecurityAccessorData.AndSecurityAccessorData(left, right)
+                       : new SecurityAccessorData.OrSecurityAccessorData(left, right);
         }
     }
 
@@ -169,11 +167,11 @@ public static class SecurityProviderExtensions
             return !securityProvider.HasAccess(domainObject);
         }
 
-        public SecurityAccessorResult GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
         {
-            var baseResult = securityProvider.GetAccessors(domainObject);
+            var baseResult = securityProvider.GetAccessorData(domainObject);
 
-            return new SecurityAccessorResult.NegateSecurityAccessorResult(baseResult);
+            return new SecurityAccessorData.NegateSecurityAccessorData(baseResult);
         }
     }
 }

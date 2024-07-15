@@ -28,106 +28,106 @@ public static class SecurityRuleExtensions
         return new[] { securityRole }.ToSecurityRule(customExpandType);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Or(
-        this SecurityRule.DomainObjectSecurityRule securityRule,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+    public static SecurityRule.DomainSecurityRule Or(
+        this SecurityRule.DomainSecurityRule securityRule,
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return new SecurityRule.OrSecurityRule(securityRule, otherSecurityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule And(
-        this SecurityRule.DomainObjectSecurityRule securityRule,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+    public static SecurityRule.DomainSecurityRule And(
+        this SecurityRule.DomainSecurityRule securityRule,
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return new SecurityRule.AndSecurityRule(securityRule, otherSecurityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Negate(this SecurityRule.DomainObjectSecurityRule securityRule)
+    public static SecurityRule.DomainSecurityRule Negate(this SecurityRule.DomainSecurityRule securityRule)
     {
         return new SecurityRule.NegateSecurityRule(securityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Except(
-        this SecurityRule.DomainObjectSecurityRule securityRule,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+    public static SecurityRule.DomainSecurityRule Except(
+        this SecurityRule.DomainSecurityRule securityRule,
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return securityRule.And(otherSecurityRule.Negate());
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Or(
+    public static SecurityRule.DomainSecurityRule Or(
         this SecurityRole securityRule,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return securityRule.ToSecurityRule().Or(otherSecurityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule And(
+    public static SecurityRule.DomainSecurityRule And(
         this SecurityRole securityRule,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return securityRule.ToSecurityRule().And(otherSecurityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Negate(this SecurityRole securityRule)
+    public static SecurityRule.DomainSecurityRule Negate(this SecurityRole securityRule)
     {
         return securityRule.ToSecurityRule().Negate();
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Except(
+    public static SecurityRule.DomainSecurityRule Except(
         this SecurityRole securityRule,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return securityRule.ToSecurityRule().Except(otherSecurityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Or(
+    public static SecurityRule.DomainSecurityRule Or(
         this SecurityOperation securityOperation,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return securityOperation.ToSecurityRule().Or(otherSecurityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule And(
+    public static SecurityRule.DomainSecurityRule And(
         this SecurityOperation securityOperation,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return securityOperation.ToSecurityRule().And(otherSecurityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Negate(this SecurityOperation securityOperation)
+    public static SecurityRule.DomainSecurityRule Negate(this SecurityOperation securityOperation)
     {
         return securityOperation.ToSecurityRule().Negate();
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Except(
+    public static SecurityRule.DomainSecurityRule Except(
         this SecurityOperation securityOperation,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return securityOperation.ToSecurityRule().Except(otherSecurityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Or(
+    public static SecurityRule.DomainSecurityRule Or(
         this IEnumerable<SecurityRole> securityRoles,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return securityRoles.ToSecurityRule().Or(otherSecurityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule And(
+    public static SecurityRule.DomainSecurityRule And(
         this IEnumerable<SecurityRole> securityRoles,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return securityRoles.ToSecurityRule().And(otherSecurityRule);
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Negate(this IEnumerable<SecurityRole> securityRoles)
+    public static SecurityRule.DomainSecurityRule Negate(this IEnumerable<SecurityRole> securityRoles)
     {
         return securityRoles.ToSecurityRule().Negate();
     }
 
-    public static SecurityRule.DomainObjectSecurityRule Except(
+    public static SecurityRule.DomainSecurityRule Except(
         this IEnumerable<SecurityRole> securityRoles,
-        SecurityRule.DomainObjectSecurityRule otherSecurityRule)
+        SecurityRule.DomainSecurityRule otherSecurityRule)
     {
         return securityRoles.ToSecurityRule().Except(otherSecurityRule);
     }

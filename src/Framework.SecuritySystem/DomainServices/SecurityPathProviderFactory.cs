@@ -1,8 +1,4 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Core;
-using Framework.SecuritySystem.Providers.Operation;
-using Framework.SecuritySystem.Rules.Builders;
+﻿using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,53 +6,41 @@ namespace Framework.SecuritySystem;
 
 public class SecurityPathProviderFactory(
     IServiceProvider serviceProvider,
-    ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
-    ISecurityRuleExpander securityRuleExpander,
-    ISecurityRoleSource securityRoleSource,
-    ISecurityPathRestrictionService securityPathRestrictionService) : ISecurityPathProviderFactory
+    IRoleBaseSecurityProviderFactory roleBaseSecurityProviderFactory) : ISecurityPathProviderFactory
 {
-    public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(SecurityPath<TDomainObject> securityPath, SecurityRule.DomainObjectSecurityRule securityRule)
+    public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(
+        SecurityPath<TDomainObject> securityPath,
+        SecurityRule.DomainSecurityRule securityRule)
     {
         switch (securityRule)
         {
-            case SecurityRule.ExpandableSecurityRule expandedRolesSecurityRule:
-                return this.GetRegroupedRoles(expandedRolesSecurityRule)
-                           .Select(g => this.Create(securityPath, g.SecurityRule, g.Restriction)).Or();
+            case SecurityRule.RoleBaseSecurityRule expandedRolesSecurityRule:
+                return roleBaseSecurityProviderFactory.Create(securityPath, expandedRolesSecurityRule);
 
-            case SecurityRule.CustomProviderSecurityRule customProviderSecurityRule:
+            case SecurityRule.ProviderSecurityRule providerSecurityRule:
             {
                 var securityProviderType =
-                    customProviderSecurityRule.GenericSecurityProviderType.MakeGenericType(typeof(TDomainObject));
+                    providerSecurityRule.GenericSecurityProviderType.MakeGenericType(typeof(TDomainObject));
 
-                var securityProvider = customProviderSecurityRule.Key == null
+                var securityProvider = providerSecurityRule.Key == null
                                            ? serviceProvider.GetRequiredService(securityProviderType)
-                                           : serviceProvider.GetRequiredKeyedService(securityProviderType, customProviderSecurityRule.Key);
+                                           : serviceProvider.GetRequiredKeyedService(securityProviderType, providerSecurityRule.Key);
 
                 return (ISecurityProvider<TDomainObject>)securityProvider;
             }
 
-            case SecurityRule.CustomProviderFactorySecurityRule customProviderFactorySecurityRule:
+            case SecurityRule.ProviderFactorySecurityRule providerFactorySecurityRule:
             {
                 var securityProviderFactoryType =
-                    customProviderFactorySecurityRule.GenericSecurityProviderFactoryType.MakeGenericType(typeof(TDomainObject));
+                    providerFactorySecurityRule.GenericSecurityProviderFactoryType.MakeGenericType(typeof(TDomainObject));
 
-                var securityProviderFactory = customProviderFactorySecurityRule.Key == null
-                                           ? serviceProvider.GetRequiredService(securityProviderFactoryType)
-                                           : serviceProvider.GetRequiredKeyedService(securityProviderFactoryType, customProviderFactorySecurityRule.Key);
+                var securityProviderFactory = providerFactorySecurityRule.Key == null
+                                                  ? serviceProvider.GetRequiredService(securityProviderFactoryType)
+                                                  : serviceProvider.GetRequiredKeyedService(
+                                                      securityProviderFactoryType,
+                                                      providerFactorySecurityRule.Key);
 
                 return ((IFactory<ISecurityProvider<TDomainObject>>)securityProviderFactory).Create();
-            }
-
-            case SecurityRule.ConditionSecurityRule conditionSecurityRule:
-            {
-                var conditionFactoryType =
-                    conditionSecurityRule.GenericConditionFactoryType.MakeGenericType(typeof(TDomainObject));
-
-                var conditionFactory = (IFactory<Expression<Func<TDomainObject, bool>>>)serviceProvider.GetRequiredService(conditionFactoryType);
-
-                var condition = conditionFactory.Create();
-
-                return SecurityProvider<TDomainObject>.Create(condition);
             }
 
             case SecurityRule.OrSecurityRule orSecurityRule:
@@ -72,30 +56,5 @@ public class SecurityPathProviderFactory(
                 throw new ArgumentOutOfRangeException(nameof(securityRule));
 
         }
-    }
-
-    private ISecurityProvider<TDomainObject> Create<TDomainObject>(SecurityPath<TDomainObject> securityPath, SecurityRule.ExpandableSecurityRule securityRule, SecurityPathRestriction restriction)
-    {
-        return new ContextSecurityPathProvider<TDomainObject>(
-            securityPathRestrictionService.ApplyRestriction(securityPath, restriction),
-            securityRule,
-            securityExpressionBuilderFactory);
-    }
-
-    private IEnumerable<(SecurityRule.ExpandedRolesSecurityRule SecurityRule, SecurityPathRestriction Restriction)> GetRegroupedRoles(SecurityRule.ExpandableSecurityRule rootSecurityRule)
-    {
-        return from expandedSecurityRule in securityRuleExpander.FullExpand(rootSecurityRule)
-
-               from securityRole in expandedSecurityRule.SecurityRoles
-
-               let securityRoleInfo = securityRoleSource.GetSecurityRole(securityRole).Information
-
-               let actualCustomExpandType = rootSecurityRule.CustomExpandType ?? expandedSecurityRule.CustomExpandType ?? securityRoleInfo.CustomExpandType
-
-               group securityRole by new { actualCustomExpandType, securityRoleInfo.Restriction } into g
-
-               let rule = new SecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(g)) { CustomExpandType = g.Key.actualCustomExpandType }
-
-               select (rule, g.Key.Restriction);
     }
 }

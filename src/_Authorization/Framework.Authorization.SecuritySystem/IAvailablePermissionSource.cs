@@ -5,7 +5,7 @@ namespace Framework.Authorization.SecuritySystem;
 
 public interface IAvailablePermissionSource
 {
-    IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, SecurityRule.ExpandableSecurityRule? securityRule = null, bool applyCurrentUser = true);
+    IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, SecurityRule.RoleBaseSecurityRule? securityRule = null, bool applyCurrentUser = true);
 
     IQueryable<Permission> GetAvailablePermissionsQueryable(AvailablePermissionFilter filter);
 }

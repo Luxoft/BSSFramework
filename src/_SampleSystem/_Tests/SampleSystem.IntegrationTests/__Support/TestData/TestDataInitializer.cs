@@ -19,18 +19,13 @@ public class TestDataInitializer(
     IOptions<AutomationFrameworkSettings> settings,
     IIntegrationTestUserAuthenticationService integrationTestUserAuthenticationServices)
 {
+    public async Task InitializeAsync(CancellationToken cancellationToken) =>
+        await integrationTestUserAuthenticationServices
+            .WithImpersonateAsync(nameof(TestDataInitializer), async () => await this.InitializeAsyncInternal(cancellationToken));
 
-    public void Initialize()
+    public async Task InitializeAsyncInternal(CancellationToken cancellationToken)
     {
-        integrationTestUserAuthenticationServices
-            .WithImpersonateAsync(nameof(TestDataInitializer), async () => await this.InitializeAsync())
-            .GetAwaiter()
-            .GetResult();
-    }
-
-    private async Task InitializeAsync(CancellationToken cancellationToken = default)
-    {
-        mainInitializer.Initialize();
+        await mainInitializer.InitializeAsync(cancellationToken);
 
         authHelper.AddUserToAdmin(nameof(TestDataInitializer));
         authHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, SecurityRole.SystemIntegration);

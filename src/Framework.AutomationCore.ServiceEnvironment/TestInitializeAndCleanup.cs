@@ -31,13 +31,13 @@ public class TestInitializeAndCleanup : ITestInitializeAndCleanup
         this.userAuthenticationService = userAuthenticationService;
     }
 
-    public virtual void Initialize()
+    public virtual async Task InitializeAsync()
     {
         this.ReattachDatabase();
         this.ResetServices();
     }
 
-    public virtual void Cleanup()
+    public virtual async Task CleanupAsync()
     {
         this.DropDatabaseAfterTest();
         this.CleanupTestEnvironment();

@@ -16,15 +16,15 @@ public interface ITestDatabaseGenerator
 
     void ExecuteInsertsForDatabases();
 
-    void GenerateDatabases();
+    Task GenerateDatabasesAsync();
 
     void DeleteDetachedFiles();
 
-    void CheckAndCreateDetachedFiles();
+    Task CheckAndCreateDetachedFilesAsync();
 
-    void CheckTestDatabase();
+    Task CheckTestDatabaseAsync();
 
     void CheckServerAllowed();
 
-    void GenerateTestData();
+    Task GenerateTestDataAsync();
 }

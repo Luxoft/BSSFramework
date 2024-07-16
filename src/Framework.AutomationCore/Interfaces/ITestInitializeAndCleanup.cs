@@ -2,7 +2,7 @@
 
 public interface ITestInitializeAndCleanup
 {
-    public void Initialize();
+    Task InitializeAsync();
 
-    public void Cleanup();
+    Task CleanupAsync();
 }

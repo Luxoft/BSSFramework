@@ -17,12 +17,7 @@ public static class TestInitializationUtil
 
         if (testEnvServiceProvider.GetService<ITestInitializeAndCleanup>() is {} initialization)
         {
-            aggregator.Run(initialization.Initialize);
-        }
-
-        if (testEnvServiceProvider.GetService<ITestInitializeAndCleanupAsync>() is {} initializationAsync)
-        {
-            await aggregator.RunAsync(initializationAsync.InitializeAsync);
+            await aggregator.RunAsync(initialization.InitializeAsync);
         }
     }
 
@@ -35,12 +30,7 @@ public static class TestInitializationUtil
 
         if (testEnvServiceProvider.GetService<ITestInitializeAndCleanup>() is {} initialization)
         {
-            aggregator.Run(initialization.Cleanup);
-        }
-
-        if (testEnvServiceProvider.GetService<ITestInitializeAndCleanupAsync>() is {} initializationAsync)
-        {
-            await aggregator.RunAsync(initializationAsync.CleanupAsync);
+            await aggregator.RunAsync(initialization.CleanupAsync);
         }
     }
 }

@@ -269,12 +269,7 @@ public class AutomationCoreAssemblyRunner : TestAssemblyRunner<IXunitTestCase>
 
         if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanup>() is { } initialization)
         {
-            this.Aggregator.Run(initialization.EnvironmentInitialize);
-        }
-
-        if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanupAsync>() is { } initializationAsync)
-        {
-            await this.Aggregator.RunAsync(initializationAsync.EnvironmentInitializeAsync);
+            await this.Aggregator.RunAsync(initialization.EnvironmentInitializeAsync);
         }
     }
 
@@ -287,12 +282,7 @@ public class AutomationCoreAssemblyRunner : TestAssemblyRunner<IXunitTestCase>
 
         if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanup>() is { } initialization)
         {
-            this.Aggregator.Run(initialization.EnvironmentCleanup);
-        }
-
-        if (this.fwServiceProvider.GetService<IAssemblyInitializeAndCleanupAsync>() is { } initializationAsync)
-        {
-            await this.Aggregator.RunAsync(initializationAsync.EnvironmentCleanupAsync);
+            await this.Aggregator.RunAsync(initialization.EnvironmentCleanupAsync);
         }
     }
 

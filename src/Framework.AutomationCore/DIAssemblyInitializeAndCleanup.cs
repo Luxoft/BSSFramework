@@ -1,4 +1,4 @@
-﻿using Automation.Interfaces;
+using Automation.Interfaces;
 using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 
@@ -19,7 +19,7 @@ public class DiAssemblyInitializeAndCleanup : AssemblyInitializeAndCleanupBase, 
         this.databaseGenerator = databaseGenerator;
     }
 
-    public void EnvironmentInitialize() => this.Initialize(this.settings, this.databaseGenerator);
+    public async Task EnvironmentInitializeAsync() => await this.InitializeAsync(this.settings, this.databaseGenerator);
 
-    public void EnvironmentCleanup() => this.Cleanup(this.settings, this.databaseGenerator);
+    public async Task EnvironmentCleanupAsync() => await this.CleanupAsync(this.settings, this.databaseGenerator);
 }

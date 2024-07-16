@@ -14,27 +14,21 @@ public abstract class TestDatabaseGenerator : BaseTestDatabaseGenerator, ITestDa
     {
     }
 
-    public virtual void GenerateDatabases()
-    {
-    }
-
-    public void CheckAndCreateDetachedFiles()
+    public async Task CheckAndCreateDetachedFilesAsync()
     {
         if (!new FileInfo(this.DatabaseContext.Main.CopyDataPath).Exists)
         {
             this.DatabaseContext.ReCreate();
-            this.GenerateDatabases();
+            await this.GenerateDatabasesAsync();
             this.ExecuteInsertsForDatabases();
-            this.GenerateTestData();
+            await this.GenerateTestDataAsync();
             this.DatabaseContext.CopyDetachedFiles();
         }
     }
 
-    public virtual void CheckTestDatabase()
-    {
-    }
+    public abstract Task GenerateDatabasesAsync();
 
-    public virtual void GenerateTestData()
-    {
-    }
+    public abstract Task GenerateTestDataAsync();
+
+    public virtual Task CheckTestDatabaseAsync() => Task.CompletedTask;
 }

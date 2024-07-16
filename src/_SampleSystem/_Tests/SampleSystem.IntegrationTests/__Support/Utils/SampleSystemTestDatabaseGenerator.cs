@@ -16,19 +16,18 @@ public class SampleSystemTestDatabaseGenerator(
     IDatabaseContext databaseContext,
     IOptions<AutomationFrameworkSettings> settings,
     TestDataInitializer testDataInitializer)
-    : AsyncTestDatabaseGenerator(databaseContext, settings)
+    : TestDatabaseGenerator(databaseContext, settings)
 {
     public override IEnumerable<string> TestServers => new List<string> { "." };
 
     public async override Task GenerateDatabasesAsync()
     {
         new DbGeneratorTest().GenerateAllDB(
-                                            this.DatabaseContext.Main.DataSource,
-                                            mainDatabaseName: this.DatabaseContext.Main.DatabaseName,
-                                            credential: UserCredential.Create(
-                                                                              this.DatabaseContext.Main.UserId,
-                                                                              this.DatabaseContext.Main.Password));
-
+            this.DatabaseContext.Main.DataSource,
+            mainDatabaseName: this.DatabaseContext.Main.DatabaseName,
+            credential: UserCredential.Create(
+                this.DatabaseContext.Main.UserId,
+                this.DatabaseContext.Main.Password));
     }
 
     public override async Task CheckTestDatabaseAsync()
@@ -36,7 +35,7 @@ public class SampleSystemTestDatabaseGenerator(
         if (this.DatabaseContext.Server.TableRowCount(this.DatabaseContext.Main.DatabaseName, "Location") > 100)
         {
             throw new Exception(
-                                "Location row count more than 100. Please ensure that you run tests in Test Environment. If you want to run tests in the environment, please delete all Location rows (Location table) manually and rerun tests.");
+                "Location row count more than 100. Please ensure that you run tests in Test Environment. If you want to run tests in the environment, please delete all Location rows (Location table) manually and rerun tests.");
         }
     }
 

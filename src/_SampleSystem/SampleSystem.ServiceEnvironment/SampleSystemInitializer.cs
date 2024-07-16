@@ -59,7 +59,7 @@ public class SampleSystemInitializer(
 
     private async Task InitSecurityAsync<TSecurityInitializer>(CancellationToken cancellationToken)
         where TSecurityInitializer : ISecurityInitializer =>
-        await contextEvaluator.Evaluate(
+        await contextEvaluator.EvaluateAsync(
             DBSessionMode.Write,
             async context =>
                 await context.ServiceProvider

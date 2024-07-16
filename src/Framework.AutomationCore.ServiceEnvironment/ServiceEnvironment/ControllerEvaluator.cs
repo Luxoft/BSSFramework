@@ -2,6 +2,8 @@
 
 using Automation.ServiceEnvironment.Services;
 
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
@@ -41,10 +43,7 @@ public class ControllerEvaluator<TController>
 
     public T Evaluate<T>(Expression<Func<TController, T>> funcExpr)
     {
-        if (TaskResultHelper<T>.IsTask)
-        {
-            throw new Exception($"For Task result use {nameof(EvaluateAsync)} method");
-        }
+        TaskResultHelper<T>.TypeIsNotTaskValidate();
 
         return this.InternalEvaluateAsync(funcExpr, async c => funcExpr.Eval(c)).GetAwaiter().GetResult();
     }
@@ -163,10 +162,5 @@ public class ControllerEvaluator<TController>
         {
             await this.next(this.context);
         }
-    }
-
-    private static class TaskResultHelper<TResult>
-    {
-        public static readonly bool IsTask = typeof(Task).IsAssignableFrom(typeof(TResult));
     }
 }

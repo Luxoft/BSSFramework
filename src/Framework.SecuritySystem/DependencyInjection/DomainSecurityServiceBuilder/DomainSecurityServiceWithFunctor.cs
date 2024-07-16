@@ -1,4 +1,6 @@
-﻿namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+﻿using Framework.SecuritySystem.Expanders;
+
+namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TDomainObject>(
     ISecurityRuleExpander securityRuleExpander,

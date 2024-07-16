@@ -3,6 +3,8 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Expanders;
+using Framework.SecuritySystem.Services;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

@@ -1,4 +1,7 @@
-﻿namespace Framework.SecuritySystem;
+﻿using Framework.SecuritySystem.Expanders;
+using Framework.SecuritySystem.Services;
+
+namespace Framework.SecuritySystem;
 
 public class ContextDomainSecurityService<TDomainObject>(
     ISecurityRuleExpander securityRuleExpander,

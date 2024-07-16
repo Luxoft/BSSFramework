@@ -1,8 +1,9 @@
 ﻿using Framework.Core;
+using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.Providers.Operation;
 using Framework.SecuritySystem.Rules.Builders;
 
-namespace Framework.SecuritySystem;
+namespace Framework.SecuritySystem.Services;
 
 public class RoleBaseSecurityProviderFactory(
     ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
@@ -44,9 +45,9 @@ public class RoleBaseSecurityProviderFactory(
                group securityRole by new { actualCustomExpandType, securityRoleInfo.Restriction } into g
 
                let rule = new SecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(g))
-                          {
-                              CustomExpandType = g.Key.actualCustomExpandType
-                          }
+               {
+                   CustomExpandType = g.Key.actualCustomExpandType
+               }
 
                select (rule, g.Key.Restriction);
     }

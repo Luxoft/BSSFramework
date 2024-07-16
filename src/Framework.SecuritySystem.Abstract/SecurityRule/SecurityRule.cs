@@ -94,6 +94,20 @@ public abstract record SecurityRule
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
                                                  : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";
+        public static NonExpandedRolesSecurityRule operator +(NonExpandedRolesSecurityRule rule1, NonExpandedRolesSecurityRule rule2)
+        {
+            if (rule1.CustomExpandType != rule2.CustomExpandType)
+            {
+                throw new InvalidOperationException($"Diff {nameof(CustomExpandType)}");
+            }
+            else
+            {
+                return new NonExpandedRolesSecurityRule(DeepEqualsCollection.Create(rule1.SecurityRoles.Union(rule2.SecurityRoles)))
+                       {
+                           CustomExpandType = rule1.CustomExpandType
+                       };
+            }
+        }
     }
 
     /// <summary>
@@ -105,6 +119,21 @@ public abstract record SecurityRule
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
                                                  : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";
+
+        public static ExpandedRolesSecurityRule operator +(ExpandedRolesSecurityRule rule1, ExpandedRolesSecurityRule rule2)
+        {
+            if (rule1.CustomExpandType != rule2.CustomExpandType)
+            {
+                throw new InvalidOperationException($"Diff {nameof(CustomExpandType)}");
+            }
+            else
+            {
+                return new ExpandedRolesSecurityRule(DeepEqualsCollection.Create(rule1.SecurityRoles.Union(rule2.SecurityRoles)))
+                       {
+                           CustomExpandType = rule1.CustomExpandType
+                       };
+            }
+        }
     }
 
     public record AndSecurityRule(DomainSecurityRule Left, DomainSecurityRule Right) : DomainSecurityRule;

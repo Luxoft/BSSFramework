@@ -1,4 +1,6 @@
-﻿namespace Framework.SecuritySystem;
+﻿using Framework.SecuritySystem.Expanders;
+
+namespace Framework.SecuritySystem;
 
 public abstract class DomainSecurityService<TDomainObject>(ISecurityRuleExpander securityRuleExpander) : DomainSecurityServiceBase<TDomainObject>
 {

@@ -5,6 +5,7 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.QueryableSource;
 using Framework.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Expanders;
 
 namespace Framework.DomainDriven.BLLCoreGenerator
 {

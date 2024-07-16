@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using Framework.HierarchicalExpand;
+using Framework.SecuritySystem.Expanders;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using Xunit;

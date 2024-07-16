@@ -5,15 +5,11 @@ using Microsoft.Extensions.Options;
 
 namespace Automation.Utils.DatabaseUtils;
 
-public abstract class TestDatabaseGeneratorAsync : BaseTestDatabaseGenerator, ITestDatabaseGeneratorAsync
+public abstract class AsyncTestDatabaseGenerator(
+    IDatabaseContext databaseContext,
+    IOptions<AutomationFrameworkSettings> settings)
+    : BaseTestDatabaseGenerator(databaseContext, settings), ITestDatabaseGeneratorAsync
 {
-    protected TestDatabaseGeneratorAsync(
-        IDatabaseContext databaseContext,
-        IOptions<AutomationFrameworkSettings> settings)
-        : base(databaseContext, settings)
-    {
-    }
-
     public abstract Task GenerateDatabasesAsync();
 
     public async Task CheckAndCreateDetachedFilesAsync()

@@ -6,21 +6,15 @@ using Microsoft.SqlServer.Management.Smo;
 
 namespace Automation.Utils.DatabaseUtils;
 
-public abstract class BaseTestDatabaseGenerator
+public abstract class BaseTestDatabaseGenerator(
+    IDatabaseContext databaseContext,
+    IOptions<AutomationFrameworkSettings> settings)
 {
-    public virtual IEnumerable<string> TestServers => Enumerable.Empty<string>();
+    public virtual IEnumerable<string> TestServers => [];
 
-    public IDatabaseContext DatabaseContext { get; }
+    public IDatabaseContext DatabaseContext { get; } = databaseContext;
 
-    private readonly AutomationFrameworkSettings settings;
-
-    protected BaseTestDatabaseGenerator(
-        IDatabaseContext databaseContext,
-        IOptions<AutomationFrameworkSettings> settings)
-    {
-        this.DatabaseContext = databaseContext;
-        this.settings = settings.Value;
-    }
+    private readonly AutomationFrameworkSettings settings = settings.Value;
 
     public void CreateLocalDb()
     {

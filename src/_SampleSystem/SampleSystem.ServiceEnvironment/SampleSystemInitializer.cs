@@ -10,75 +10,59 @@ using SampleSystem.BLL;
 
 namespace SampleSystem.ServiceEnvironment;
 
-public class SampleSystemInitializer
+public class SampleSystemInitializer(
+    IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator,
+    SubscriptionMetadataStore subscriptionMetadataStore,
+    IInitializeManager initializeManager)
 {
-    private readonly IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    public async Task InitializeAsync(CancellationToken cancellationToken) =>
+        await initializeManager.InitializeOperationAsync(async () => await this.InternalInitialize(cancellationToken));
 
-    private readonly SubscriptionMetadataStore subscriptionMetadataStore;
-
-    private readonly IInitializeManager initializeManager;
-
-    public SampleSystemInitializer(IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator, SubscriptionMetadataStore subscriptionMetadataStore, IInitializeManager initializeManager)
+    private async Task InternalInitialize(CancellationToken cancellationToken)
     {
-        this.contextEvaluator = contextEvaluator;
-        this.subscriptionMetadataStore = subscriptionMetadataStore;
-        this.initializeManager = initializeManager;
-    }
-
-    public void Initialize()
-    {
-        this.initializeManager.InitializeOperation(this.InternalInitialize);
-    }
-
-    private void InternalInitialize()
-    {
-        this.contextEvaluator.Evaluate(
+        await contextEvaluator.EvaluateAsync(
             DBSessionMode.Write,
-            context => context.ServiceProvider.GetRequiredService<INamedLockInitializer>().Initialize().GetAwaiter().GetResult());
+            async context => await context.ServiceProvider.GetRequiredService<INamedLockInitializer>().Initialize(cancellationToken));
 
-        this.InitSecurity<IAuthorizationSecurityContextInitializer>();
-        this.InitSecurity<IAuthorizationBusinessRoleInitializer>();
+        await this.InitSecurityAsync<IAuthorizationSecurityContextInitializer>(cancellationToken);
+        await this.InitSecurityAsync<IAuthorizationBusinessRoleInitializer>(cancellationToken);
 
-        this.contextEvaluator.Evaluate(
-                                       DBSessionMode.Write,
-                                       context =>
-                                       {
-                                           context.Configuration.Logics.TargetSystem.RegisterBase();
-                                           context.Configuration.Logics.TargetSystem.Register<SampleSystem.Domain.PersistentDomainObjectBase>(true, true);
-
-                                           var extTypes = new Dictionary<Guid, Type>
-                                                          {
-                                                                  { new Guid("{79AF1049-3EC0-46A7-A769-62A24AD4F74E}"), typeof(Framework.Configuration.Domain.Sequence) }
-                                                          };
-
-                                           context.Configuration.Logics.TargetSystem.Register<Framework.Configuration.Domain.PersistentDomainObjectBase>(false, true, extTypes: extTypes);
-                                           context.Configuration.Logics.TargetSystem.Register<Framework.Authorization.Domain.PersistentDomainObjectBase>(false, true);
-                                       });
-
-        this.contextEvaluator.Evaluate(
-                                       DBSessionMode.Write,
-                                       context =>
-                                       {
-                                           context.Configuration.Logics.SystemConstant.Initialize(typeof(SampleSystemSystemConstant));
-                                       });
-
-        this.contextEvaluator.Evaluate(
-                                       DBSessionMode.Write,
-                                       context => this.subscriptionMetadataStore.RegisterCodeFirstSubscriptions(context.Configuration.Logics.CodeFirstSubscription, context.Configuration));
-    }
-
-    private void InitSecurity<TSecurityInitializer>()
-        where TSecurityInitializer : ISecurityInitializer
-    {
-        this.contextEvaluator.Evaluate(
+        contextEvaluator.Evaluate(
             DBSessionMode.Write,
             context =>
             {
-                context.ServiceProvider
-                       .GetRequiredService<TSecurityInitializer>()
-                       .Init()
-                       .GetAwaiter()
-                       .GetResult();
+                context.Configuration.Logics.TargetSystem.RegisterBase();
+                context.Configuration.Logics.TargetSystem.Register<SampleSystem.Domain.PersistentDomainObjectBase>(true, true);
+
+                var extTypes = new Dictionary<Guid, Type>
+                               {
+                                   { new Guid("{79AF1049-3EC0-46A7-A769-62A24AD4F74E}"), typeof(Framework.Configuration.Domain.Sequence) }
+                               };
+
+                context.Configuration.Logics.TargetSystem.Register<Framework.Configuration.Domain.PersistentDomainObjectBase>(
+                    false,
+                    true,
+                    extTypes: extTypes);
+                context.Configuration.Logics.TargetSystem.Register<Framework.Authorization.Domain.PersistentDomainObjectBase>(false, true);
             });
+
+        contextEvaluator.Evaluate(
+            DBSessionMode.Write,
+            context => { context.Configuration.Logics.SystemConstant.Initialize(typeof(SampleSystemSystemConstant)); });
+
+        contextEvaluator.Evaluate(
+            DBSessionMode.Write,
+            context => subscriptionMetadataStore.RegisterCodeFirstSubscriptions(
+                context.Configuration.Logics.CodeFirstSubscription,
+                context.Configuration));
     }
+
+    private async Task InitSecurityAsync<TSecurityInitializer>(CancellationToken cancellationToken)
+        where TSecurityInitializer : ISecurityInitializer =>
+        await contextEvaluator.Evaluate(
+            DBSessionMode.Write,
+            async context =>
+                await context.ServiceProvider
+                             .GetRequiredService<TSecurityInitializer>()
+                             .Init(cancellationToken));
 }

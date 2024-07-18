@@ -10,6 +10,8 @@ public class DynamicRoleSecurityRuleExpander(IServiceProvider serviceProvider)
     {
         var factory = (IFactory<SecurityRule.RoleBaseSecurityRule>)serviceProvider.GetRequiredService(securityRule.DynamicRoleFactoryType);
 
-        return factory.Create();
+        var resultRule = factory.Create();
+
+        return securityRule.CustomExpandType == null ? resultRule : resultRule with { CustomExpandType = securityRule.CustomExpandType };
     }
 }

@@ -17,6 +17,11 @@ public abstract class SecurityRuleVisitor
         return securityRule;
     }
 
+    protected virtual SecurityRule.DomainSecurityRule Visit(SecurityRule.DynamicRoleSecurityRule securityRule)
+    {
+        return securityRule;
+    }
+
     protected virtual SecurityRule.DomainSecurityRule Visit(SecurityRule.ProviderSecurityRule securityRule)
     {
         return securityRule;
@@ -83,10 +88,11 @@ public abstract class SecurityRuleVisitor
         SecurityRule.ExpandedRolesSecurityRule securityRule => this.Visit(securityRule),
         SecurityRule.NonExpandedRolesSecurityRule securityRule => this.Visit(securityRule),
         SecurityRule.OperationSecurityRule securityRule => this.Visit(securityRule),
+        SecurityRule.DynamicRoleSecurityRule securityRule => this.Visit(securityRule),
         _ => throw new ArgumentOutOfRangeException(nameof(baseSecurityRule))
     };
 
-    public SecurityRule.DomainSecurityRule Visit(SecurityRule.DomainSecurityRule baseSecurityRule) => baseSecurityRule switch
+    public virtual SecurityRule.DomainSecurityRule Visit(SecurityRule.DomainSecurityRule baseSecurityRule) => baseSecurityRule switch
     {
         SecurityRule.RoleBaseSecurityRule securityRule => this.Visit(securityRule),
         SecurityRule.ProviderSecurityRule securityRule => this.Visit(securityRule),

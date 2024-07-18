@@ -9,4 +9,6 @@ public static class AuthorizationSecurityRule
     public static SecurityRule.ProviderSecurityRule DelegatedFrom { get; } = new(typeof(DelegatedFromSecurityProvider<>));
 
     public static SecurityRule.ProviderSecurityRule AvailableBusinessRole { get; } = new(typeof(AvailableBusinessRoleSecurityProvider<>));
+
+    public static SecurityRule.DynamicRoleSecurityRule SecurityAdministrator { get; } = new(typeof(SecurityAdministratorRuleFactory));
 }

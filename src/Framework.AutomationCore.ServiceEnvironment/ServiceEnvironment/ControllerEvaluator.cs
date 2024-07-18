@@ -2,8 +2,6 @@
 
 using Automation.ServiceEnvironment.Services;
 
-using DocumentFormat.OpenXml.Drawing.Diagrams;
-
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;

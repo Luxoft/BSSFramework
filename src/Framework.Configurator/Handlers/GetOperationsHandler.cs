@@ -1,4 +1,5 @@
-﻿using Framework.Configurator.Interfaces;
+﻿using Framework.Authorization.Environment.Security;
+using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.SecuritySystem;
 
@@ -11,7 +12,7 @@ public class GetOperationsHandler(IOperationAccessor operationAccessor, ISecurit
 {
     protected override Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdministrator()) return Task.FromResult<object>(new List<string>());
+        if (!operationAccessor.IsSecurityAdministrator()) return Task.FromResult<object>(new List<string>());
 
         var operations = roleSource.SecurityRoles
                                    .SelectMany(x => x.Information.Operations)

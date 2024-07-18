@@ -188,6 +188,8 @@ public static class ServiceCollectionExtensions
 
         return services
 
+               .AddSingleton<SecurityAdministratorRuleFactory>()
+
                .AddRelativeDomainPath((Principal principal) => principal)
                .AddRelativeDomainPath((Permission permission) => permission.Principal)
                .AddScoped(typeof(PrincipalSecurityProvider<>))

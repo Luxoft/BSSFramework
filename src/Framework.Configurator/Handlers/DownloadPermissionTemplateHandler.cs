@@ -1,6 +1,7 @@
 ﻿using ClosedXML.Excel;
 
 using Framework.Authorization.Domain;
+using Framework.Authorization.Environment.Security;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
@@ -20,7 +21,7 @@ public record DownloadPermissionTemplateHandler(
 
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.OperationAccessor.CheckAccess(SecurityRole.Administrator);
+        this.OperationAccessor.CheckAccess(AuthorizationSecurityRule.SecurityAdministrator);
 
         var contexts = await this.RepositoryFactory
                                  .Create()

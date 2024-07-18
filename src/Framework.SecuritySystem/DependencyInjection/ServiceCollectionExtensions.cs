@@ -17,6 +17,7 @@ public static class ServiceCollectionExtensions
         return services.AddSingleton<SecurityModeExpander>()
                        .AddSingleton<SecurityOperationExpander>()
                        .AddSingleton<SecurityRoleExpander>()
+                       .AddSingleton<DynamicRoleSecurityRuleExpander>()
                        .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
                        .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()

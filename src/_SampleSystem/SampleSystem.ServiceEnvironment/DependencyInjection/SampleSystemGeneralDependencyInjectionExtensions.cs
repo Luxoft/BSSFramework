@@ -18,14 +18,17 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                .AddBssFramework(
                    rootSettings =>
                    {
-                       rootSettings.AddSecuritySystem(
-                           securitySettings =>
-                               securitySettings
-                                   .AddSecurityContexts()
-                                   .AddDomainSecurityServices()
-                                   .AddSecurityRoles()
-                                   .AddCustomSecurityOperations()
-                                   .SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>)))
+                       rootSettings
+                           .AddSecuritySystem(
+                               securitySettings =>
+                                   securitySettings
+                                       .AddSecurityContexts()
+                                       .AddDomainSecurityServices()
+                                       .AddSecurityRoles()
+                                       .AddCustomSecurityOperations()
+                                       .SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>)))
+
+                           .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
                            .AddNamedLockType(typeof(SampleSystemNamedLock))
 

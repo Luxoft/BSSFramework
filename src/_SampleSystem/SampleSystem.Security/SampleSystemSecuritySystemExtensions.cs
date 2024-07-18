@@ -73,6 +73,10 @@ public static class SampleSystemSecuritySystemExtensions
                    })
 
                .AddSecurityRole(
+                   SampleSystemSecurityRole.PermissionAdministrator,
+                   new SecurityRoleInfo(new Guid("{1E101597-E722-4650-BED1-5A1025540897}")))
+
+               .AddSecurityRole(
                    SecurityRole.SystemIntegration,
                    new SecurityRoleInfo(new Guid("df74d544-5945-4380-944e-a3a9001252be")))
 

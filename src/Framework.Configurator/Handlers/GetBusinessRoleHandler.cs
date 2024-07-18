@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.Environment.Security;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.DomainDriven.Repository;
@@ -19,7 +20,7 @@ public class GetBusinessRoleHandler(
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdministrator()) return new BusinessRoleDetailsDto { Operations = [], Principals = [] };
+        if (!operationAccessor.IsSecurityAdministrator()) return new BusinessRoleDetailsDto { Operations = [], Principals = [] };
 
         var roleId = new Guid((string)context.Request.RouteValues["id"]!);
 

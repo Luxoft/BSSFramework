@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.Environment.Security;
 using Framework.Authorization.SecuritySystem;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
@@ -24,7 +25,7 @@ public record DeletePrincipalHandler(
 
     private async Task Delete(Guid id, CancellationToken cancellationToken)
     {
-        this.AuthorizationSystem.CheckAccess(SecurityRole.Administrator);
+        this.AuthorizationSystem.CheckAccess(AuthorizationSecurityRule.SecurityAdministrator);
 
         var principal = await this.RepoFactory.Create().LoadAsync(id, cancellationToken);
 

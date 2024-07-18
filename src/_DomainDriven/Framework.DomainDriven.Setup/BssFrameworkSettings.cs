@@ -8,6 +8,7 @@ using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.Authorization.SecuritySystem;
 using Framework.Persistent;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.Setup;
 
@@ -26,6 +27,8 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public Type NotificationPrincipalExtractorType { get; private set; }
 
     public Type DomainObjectEventMetadataType { get; private set; }
+
+    public SecurityRule.RoleBaseSecurityRule SecurityAdministratorRule { get; private set; } = SecurityRole.Administrator;
 
     public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> settings)
     {
@@ -77,6 +80,13 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     {
         this.RegisterActions.Add(sc => sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TDomainObject>>());
         this.RegisterActions.Add(sc => sc.AddSingleton(new PrincipalIdentitySourcePathInfo<TDomainObject>(filter, namePath)));
+
+        return this;
+    }
+
+    public IBssFrameworkSettings SetSecurityAdministratorRule(SecurityRule.RoleBaseSecurityRule rule)
+    {
+        this.SecurityAdministratorRule = rule;
 
         return this;
     }

@@ -1,4 +1,5 @@
-﻿using Framework.Authorization.Notification;
+﻿using Framework.Authorization.Environment.Security;
+using Framework.Authorization.Notification;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
@@ -17,6 +18,8 @@ public static class ServiceCollectionExtensions
 
         setupAction?.Invoke(settings);
         settings.InitSettings();
+
+        services.AddSingleton(new SecurityAdministratorRuleInfo(settings.SecurityAdministratorRule));
 
         foreach (var namedLockType in settings.NamedLockTypes)
         {

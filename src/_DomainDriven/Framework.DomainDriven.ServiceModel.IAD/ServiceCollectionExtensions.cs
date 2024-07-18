@@ -182,7 +182,9 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)
     {
-        var principalViewSecurityRule = SecurityRole.Administrator.Or(AuthorizationSecurityRule.CurrentPrincipal);
+        var securityAdministratorRule = AuthorizationSecurityRule.SecurityAdministrator;
+
+        var principalViewSecurityRule = securityAdministratorRule.Or(AuthorizationSecurityRule.CurrentPrincipal);
 
         return services
 
@@ -200,15 +202,15 @@ public static class ServiceCollectionExtensions
                    rb => rb
                          .Add<Principal>(
                              b => b.SetView(principalViewSecurityRule)
-                                   .SetEdit(SecurityRole.Administrator))
+                                   .SetEdit(securityAdministratorRule))
 
                          .Add<Permission>(
                              b => b.SetView(principalViewSecurityRule.Or(AuthorizationSecurityRule.DelegatedFrom))
-                                   .SetEdit(SecurityRole.Administrator.Or(AuthorizationSecurityRule.DelegatedFrom)))
+                                   .SetEdit(securityAdministratorRule.Or(AuthorizationSecurityRule.DelegatedFrom)))
 
                          .Add<BusinessRole>(
-                             b => b.SetView(SecurityRole.Administrator.Or(AuthorizationSecurityRule.AvailableBusinessRole))
-                                   .SetEdit(SecurityRole.Administrator))
+                             b => b.SetView(securityAdministratorRule.Or(AuthorizationSecurityRule.AvailableBusinessRole))
+                                   .SetEdit(securityAdministratorRule))
 
                          .Add<SecurityContextType>(
                              b => b.SetView(SecurityRule.Disabled)));

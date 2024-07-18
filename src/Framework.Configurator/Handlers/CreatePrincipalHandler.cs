@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.Environment.Security;
 using Framework.Authorization.SecuritySystem;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.Repository;
@@ -17,7 +18,7 @@ public record CreatePrincipalHandler(
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.AuthorizationSystem.CheckAccess(SecurityRole.Administrator);
+        this.AuthorizationSystem.CheckAccess(AuthorizationSecurityRule.SecurityAdministrator);
 
         var name = await this.ParseRequestBodyAsync<string>(context);
 

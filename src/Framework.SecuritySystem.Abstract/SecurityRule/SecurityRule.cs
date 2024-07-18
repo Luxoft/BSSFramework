@@ -74,6 +74,8 @@ public abstract record SecurityRule
         public HierarchicalExpandType SafeExpandType => this.CustomExpandType ?? HierarchicalExpandType.Children;
     }
 
+    public record DynamicRoleSecurityRule(Type DynamicRoleFactoryType) : RoleBaseSecurityRule;
+
     public record OperationSecurityRule(SecurityOperation SecurityOperation) : RoleBaseSecurityRule
     {
         public static implicit operator OperationSecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();

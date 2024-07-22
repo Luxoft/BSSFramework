@@ -100,7 +100,7 @@ public class SecurityRuleOptimizer : SecurityRuleVisitor, ISecurityRuleOptimizer
 
         return visitedBase switch
         {
-            NegateSecurityRule { InnerRule: NegateSecurityRule deepNegateRule } => deepNegateRule,
+            NegateSecurityRule { InnerRule: NegateSecurityRule deepNegateRule } => deepNegateRule.InnerRule,
             _ => visitedBase
         };
     }

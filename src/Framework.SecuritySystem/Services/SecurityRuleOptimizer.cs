@@ -1,9 +1,18 @@
-﻿using static Framework.SecuritySystem.SecurityRule;
+﻿using Framework.Core;
+
+using static Framework.SecuritySystem.SecurityRule;
 
 namespace Framework.SecuritySystem.Services;
 
 public class SecurityRuleOptimizer : SecurityRuleVisitor, ISecurityRuleOptimizer
 {
+    private readonly IDictionaryCache<DomainSecurityRule, DomainSecurityRule> cache;
+
+    public SecurityRuleOptimizer()
+    {
+        this.cache = new DictionaryCache<DomainSecurityRule, DomainSecurityRule>(this.Visit).WithLock();
+    }
+
     protected override DomainSecurityRule Visit(OrSecurityRule baseSecurityRule)
     {
         var visitedBase = base.Visit(baseSecurityRule);
@@ -106,5 +115,5 @@ public class SecurityRuleOptimizer : SecurityRuleVisitor, ISecurityRuleOptimizer
     }
 
     DomainSecurityRule ISecurityRuleOptimizer.Optimize(DomainSecurityRule securityRule) =>
-        this.Visit(securityRule);
+        this.cache[securityRule];
 }

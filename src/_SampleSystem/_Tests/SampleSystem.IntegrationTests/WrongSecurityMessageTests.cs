@@ -57,6 +57,6 @@ public class WrongSecurityMessageTests : TestBase
         // Assert
         action.Should()
               .Throw<AccessDeniedException>()
-              .WithMessage($"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{TestPrincipalId}', securityRule = '{securityRule}'");
+              .WithMessage($"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{TestPrincipalId}', securityRule = '{securityRule}')");
     }
 }

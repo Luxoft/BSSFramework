@@ -4,11 +4,11 @@ namespace Framework.SecuritySystem.Expanders;
 
 public class SecurityRoleExpander
 {
-    private readonly IDictionaryCache<SecurityRule.NonExpandedRolesSecurityRule, SecurityRule.ExpandedRolesSecurityRule> expandCache;
+    private readonly IDictionaryCache<DomainSecurityRule.NonExpandedRolesSecurityRule, DomainSecurityRule.ExpandedRolesSecurityRule> expandCache;
 
     public SecurityRoleExpander(ISecurityRoleSource securityRoleSource)
     {
-        this.expandCache = new DictionaryCache<SecurityRule.NonExpandedRolesSecurityRule, SecurityRule.ExpandedRolesSecurityRule>(
+        this.expandCache = new DictionaryCache<DomainSecurityRule.NonExpandedRolesSecurityRule, DomainSecurityRule.ExpandedRolesSecurityRule>(
             securityRule =>
             {
                 if (securityRule.SecurityRoles.Count == 0)
@@ -26,14 +26,14 @@ public class SecurityRoleExpander
                                                       .OrderBy(sr => sr.Name)
                                                       .ToArray();
 
-                return new SecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles))
+                return new DomainSecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles))
                        {
                            CustomExpandType = securityRule.CustomExpandType
                        };
             }).WithLock();
     }
 
-    public SecurityRule.ExpandedRolesSecurityRule Expand(SecurityRule.NonExpandedRolesSecurityRule securityRule)
+    public DomainSecurityRule.ExpandedRolesSecurityRule Expand(DomainSecurityRule.NonExpandedRolesSecurityRule securityRule)
     {
         return this.expandCache[securityRule];
     }

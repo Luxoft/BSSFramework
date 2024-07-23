@@ -14,7 +14,7 @@ public class AvailablePermissionSource(
     ISecurityRolesIdentsResolver securityRolesIdentsResolver)
     : IAvailablePermissionSource
 {
-    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, SecurityRule.RoleBaseSecurityRule? securityRule = null, bool applyCurrentUser = true)
+    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, DomainSecurityRule.RoleBaseSecurityRule? securityRule = null, bool applyCurrentUser = true)
     {
         var securityRoleIdents =
             securityRule == null

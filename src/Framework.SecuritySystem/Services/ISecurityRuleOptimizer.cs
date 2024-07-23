@@ -2,5 +2,5 @@
 
 public interface ISecurityRuleOptimizer
 {
-    SecurityRule.DomainSecurityRule Optimize(SecurityRule.DomainSecurityRule securityRule);
+    DomainSecurityRule Optimize(DomainSecurityRule securityRule);
 }

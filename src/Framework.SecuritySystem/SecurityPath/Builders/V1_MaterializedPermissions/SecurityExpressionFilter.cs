@@ -15,7 +15,7 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
 
     public SecurityExpressionFilter(
         SecurityExpressionBuilderBase<TDomainObject, TIdent> builder,
-        SecurityRule.RoleBaseSecurityRule securityRule,
+        DomainSecurityRule.RoleBaseSecurityRule securityRule,
         IEnumerable<Type> securityTypes)
     {
         var permissions = builder.Factory.AuthorizationSystem.GetPermissions(securityRule, securityTypes);

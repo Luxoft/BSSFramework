@@ -54,7 +54,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType)
     {
-        this.RegisterActions.Add(sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(SecurityRule.CurrentUser), genericSecurityProviderType));
+        this.RegisterActions.Add(sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(DomainSecurityRule.CurrentUser), genericSecurityProviderType));
 
         return this;
     }

@@ -102,7 +102,7 @@ public static class ServiceCollectionExtensions
                                         {
                                             DomainType = type,
                                             SourceType = projectionAttr.SourceType,
-                                            CustomViewSecurityRule = (SecurityRule.DomainSecurityRule)type.GetViewSecurityRule()
+                                            CustomViewSecurityRule = (DomainSecurityRule)type.GetViewSecurityRule()
                                         };
 
         foreach (var pair in projectionsRequest)

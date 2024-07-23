@@ -2,13 +2,13 @@
 
 public interface ISecurityRuleExpander
 {
-    SecurityRule.DomainSecurityRule? TryExpand<TDomainObject>(SecurityRule.ModeSecurityRule securityRule);
+    DomainSecurityRule? TryExpand<TDomainObject>(SecurityRule.ModeSecurityRule securityRule);
 
-    SecurityRule.NonExpandedRolesSecurityRule Expand(SecurityRule.OperationSecurityRule securityRule);
+    DomainSecurityRule.NonExpandedRolesSecurityRule Expand(DomainSecurityRule.OperationSecurityRule securityRule);
 
-    SecurityRule.ExpandedRolesSecurityRule Expand(SecurityRule.NonExpandedRolesSecurityRule securityRule);
+    DomainSecurityRule.ExpandedRolesSecurityRule Expand(DomainSecurityRule.NonExpandedRolesSecurityRule securityRule);
 
-    SecurityRule.RoleBaseSecurityRule Expand(SecurityRule.DynamicRoleSecurityRule securityRule);
+    DomainSecurityRule.RoleBaseSecurityRule Expand(DomainSecurityRule.RoleFactorySecurityRule securityRule);
 
-    IEnumerable<SecurityRule.ExpandedRolesSecurityRule> FullExpand(SecurityRule.RoleBaseSecurityRule securityRule);
+    IEnumerable<DomainSecurityRule.ExpandedRolesSecurityRule> FullExpand(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 }

@@ -4,11 +4,11 @@ namespace Framework.Authorization.Environment.Security;
 
 public static class AuthorizationSecurityRule
 {
-    public static SecurityRule.ProviderSecurityRule CurrentPrincipal { get; } = new(typeof(PrincipalSecurityProvider<>));
+    public static DomainSecurityRule.ProviderSecurityRule CurrentPrincipal { get; } = new(typeof(PrincipalSecurityProvider<>));
 
-    public static SecurityRule.ProviderSecurityRule DelegatedFrom { get; } = new(typeof(DelegatedFromSecurityProvider<>));
+    public static DomainSecurityRule.ProviderSecurityRule DelegatedFrom { get; } = new(typeof(DelegatedFromSecurityProvider<>));
 
-    public static SecurityRule.ProviderSecurityRule AvailableBusinessRole { get; } = new(typeof(AvailableBusinessRoleSecurityProvider<>));
+    public static DomainSecurityRule.ProviderSecurityRule AvailableBusinessRole { get; } = new(typeof(AvailableBusinessRoleSecurityProvider<>));
 
-    public static SecurityRule.DynamicRoleSecurityRule SecurityAdministrator { get; } = new(typeof(SecurityAdministratorRuleFactory));
+    public static DomainSecurityRule.RoleFactorySecurityRule SecurityAdministrator { get; } = new(typeof(SecurityAdministratorRuleFactory));
 }

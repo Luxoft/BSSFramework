@@ -13,7 +13,7 @@ public class RoleBaseSecurityProviderFactory(
 {
     public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
-        SecurityRule.RoleBaseSecurityRule securityRule)
+        DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         return this.GetRegroupedRoles(securityRule)
                    .Select(g => this.Create(securityPath, g.SecurityRule, g.Restriction)).Or();
@@ -21,7 +21,7 @@ public class RoleBaseSecurityProviderFactory(
 
     private ISecurityProvider<TDomainObject> Create<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
-        SecurityRule.RoleBaseSecurityRule securityRule,
+        DomainSecurityRule.RoleBaseSecurityRule securityRule,
         SecurityPathRestriction restriction)
     {
         return new ContextSecurityPathProvider<TDomainObject>(
@@ -30,8 +30,8 @@ public class RoleBaseSecurityProviderFactory(
             securityExpressionBuilderFactory);
     }
 
-    private IEnumerable<(SecurityRule.ExpandedRolesSecurityRule SecurityRule, SecurityPathRestriction Restriction)> GetRegroupedRoles(
-        SecurityRule.RoleBaseSecurityRule securityRule)
+    private IEnumerable<(DomainSecurityRule.ExpandedRolesSecurityRule SecurityRule, SecurityPathRestriction Restriction)> GetRegroupedRoles(
+        DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         return from expandedSecurityRule in securityRuleExpander.FullExpand(securityRule)
 
@@ -44,7 +44,7 @@ public class RoleBaseSecurityProviderFactory(
 
                group securityRole by new { actualCustomExpandType, securityRoleInfo.Restriction } into g
 
-               let rule = new SecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(g))
+               let rule = new DomainSecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(g))
                {
                    CustomExpandType = g.Key.actualCustomExpandType
                }

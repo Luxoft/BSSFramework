@@ -4,7 +4,7 @@ public interface IOperationAccessor
 {
     bool IsAdministrator() => this.HasAccess(SecurityRole.Administrator);
 
-    bool HasAccess(SecurityRule.RoleBaseSecurityRule securityRule);
+    bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 
-    void CheckAccess(SecurityRule.RoleBaseSecurityRule securityRule);
+    void CheckAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 }

@@ -19,7 +19,7 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
 
     public SecurityExpressionFilter(
         SecurityExpressionBuilderBase<TDomainObject, TIdent> builder,
-        SecurityRule.RoleBaseSecurityRule securityRule)
+        DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         var filterExpression = builder.GetSecurityFilterExpression(securityRule).ExpandConst().InlineEval();
 

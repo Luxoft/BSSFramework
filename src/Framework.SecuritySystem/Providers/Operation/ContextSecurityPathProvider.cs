@@ -9,7 +9,7 @@ namespace Framework.SecuritySystem.Providers.Operation
     /// <typeparam name="TDomainObject"></typeparam>
     public class ContextSecurityPathProvider<TDomainObject> : ISecurityProvider<TDomainObject>
     {
-        private readonly SecurityRule.DomainSecurityRule securityRule;
+        private readonly DomainSecurityRule securityRule;
 
         private readonly Lazy<Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>>> injectFilterFunc;
 
@@ -20,7 +20,7 @@ namespace Framework.SecuritySystem.Providers.Operation
 
         public ContextSecurityPathProvider(
             SecurityPath<TDomainObject> securityPath,
-            SecurityRule.RoleBaseSecurityRule securityRule,
+            DomainSecurityRule.RoleBaseSecurityRule securityRule,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
         {
             this.securityRule = securityRule;

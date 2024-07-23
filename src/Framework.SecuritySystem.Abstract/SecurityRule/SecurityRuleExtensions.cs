@@ -1,7 +1,7 @@
 ﻿using Framework.Core;
 using Framework.HierarchicalExpand;
 
-using static Framework.SecuritySystem.SecurityRule;
+using static Framework.SecuritySystem.DomainSecurityRule;
 
 namespace Framework.SecuritySystem;
 

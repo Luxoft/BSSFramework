@@ -40,7 +40,7 @@ public class AuthorizationSystem(
     }
 
     public IEnumerable<string> GetNonContextAccessors(
-        SecurityRule.RoleBaseSecurityRule securityRule, Expression<Func<IPermission<Guid>, bool>> permissionFilter)
+        DomainSecurityRule.RoleBaseSecurityRule securityRule, Expression<Func<IPermission<Guid>, bool>> permissionFilter)
     {
         if (permissionFilter == null) throw new ArgumentNullException(nameof(permissionFilter));
 
@@ -54,7 +54,7 @@ public class AuthorizationSystem(
     }
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
-        SecurityRule.RoleBaseSecurityRule securityRule,
+        DomainSecurityRule.RoleBaseSecurityRule securityRule,
         IEnumerable<Type> securityTypes)
     {
         var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(true, securityRule)
@@ -67,7 +67,7 @@ public class AuthorizationSystem(
                .ToList(permission => this.TryExpandPermission(permission, securityRule.SafeExpandType));
     }
 
-    public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityRule.RoleBaseSecurityRule securityRule)
+    public IQueryable<IPermission<Guid>> GetPermissionQuery(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         return availablePermissionSource.GetAvailablePermissionsQueryable(securityRule: securityRule);
     }
@@ -83,9 +83,9 @@ public class AuthorizationSystem(
             pair => hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
     }
 
-    public bool HasAccess(SecurityRule.RoleBaseSecurityRule securityRule) => operationAccessorFactory.Create(true).HasAccess(securityRule);
+    public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => operationAccessorFactory.Create(true).HasAccess(securityRule);
 
-    public void CheckAccess(SecurityRule.RoleBaseSecurityRule securityRule) => operationAccessorFactory.Create(true).CheckAccess(securityRule);
+    public void CheckAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => operationAccessorFactory.Create(true).CheckAccess(securityRule);
 
     private static readonly ExpressionVisitor AuthVisitor = new OverrideParameterTypeVisitor(
         new Dictionary<Type, Type>

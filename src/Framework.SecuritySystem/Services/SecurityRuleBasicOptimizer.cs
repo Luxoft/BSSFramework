@@ -1,14 +1,15 @@
 ﻿using Framework.Core;
 
 using static Framework.SecuritySystem.SecurityRule;
+using static Framework.SecuritySystem.DomainSecurityRule;
 
 namespace Framework.SecuritySystem.Services;
 
-public class SecurityRuleOptimizer : SecurityRuleVisitor, ISecurityRuleOptimizer
+public class SecurityRuleBasicOptimizer : SecurityRuleVisitor, ISecurityRuleBasicOptimizer
 {
     private readonly IDictionaryCache<DomainSecurityRule, DomainSecurityRule> cache;
 
-    public SecurityRuleOptimizer()
+    public SecurityRuleBasicOptimizer()
     {
         this.cache = new DictionaryCache<DomainSecurityRule, DomainSecurityRule>(this.Visit).WithLock();
     }

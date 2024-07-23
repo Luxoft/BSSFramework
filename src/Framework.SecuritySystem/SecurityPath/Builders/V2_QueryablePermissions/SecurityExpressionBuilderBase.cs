@@ -14,9 +14,9 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>(Secur
 {
     internal readonly SecurityExpressionBuilderFactory<TIdent> Factory = factory;
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.RoleBaseSecurityRule securityRule, IEnumerable<Type> securityTypes) => new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule);
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(DomainSecurityRule.RoleBaseSecurityRule securityRule, IEnumerable<Type> securityTypes) => new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule);
 
-    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(SecurityRule.RoleBaseSecurityRule securityRule)
+    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         var filterExpression = this.GetSecurityFilterExpression(securityRule.SafeExpandType).ExpandConst().InlineEval();
 

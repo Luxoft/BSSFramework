@@ -47,7 +47,7 @@ public partial class MainTests
         var expander = this.rootServiceProvider.GetRequiredService<SecurityOperationExpander>();
 
         // Act
-        var expandResult = expander.Expand(new SecurityRule.OperationSecurityRule(ExampleSecurityOperation.EmployeeView));
+        var expandResult = expander.Expand(new DomainSecurityRule.OperationSecurityRule(ExampleSecurityOperation.EmployeeView));
 
         // Assert
         expandResult.SecurityRoles.Should().BeEquivalentTo(new[] { ExampleSecurityRole.TestRole });

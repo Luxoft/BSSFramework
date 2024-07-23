@@ -6,5 +6,5 @@ namespace SampleSystem.Security;
 
 public static class SampleSystemSecurityRule
 {
-    public static SecurityRule.ConditionSecurityRule TestRestriction { get; } = new(typeof(TestRestrictionObjectConditionFactory<>));
+    public static DomainSecurityRule.ConditionSecurityRule TestRestriction { get; } = new(typeof(TestRestrictionObjectConditionFactory<>));
 }

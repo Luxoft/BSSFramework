@@ -2,7 +2,7 @@
 
 public class SecurityModeExpander
 {
-    private readonly IReadOnlyDictionary<(Type, SecurityRule.ModeSecurityRule), SecurityRule.DomainSecurityRule> dict;
+    private readonly IReadOnlyDictionary<(Type, SecurityRule.ModeSecurityRule), DomainSecurityRule> dict;
 
     public SecurityModeExpander(IEnumerable<DomainObjectSecurityModeInfo> infos)
     {
@@ -17,7 +17,7 @@ public class SecurityModeExpander
         this.dict = request.ToDictionary();
     }
 
-    public SecurityRule.DomainSecurityRule? TryExpand<TDomainObject>(SecurityRule.ModeSecurityRule securityRule)
+    public DomainSecurityRule? TryExpand<TDomainObject>(SecurityRule.ModeSecurityRule securityRule)
     {
         return this.dict.GetValueOrDefault((typeof(TDomainObject), securityRule));
     }

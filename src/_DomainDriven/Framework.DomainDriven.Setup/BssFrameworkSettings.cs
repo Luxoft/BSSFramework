@@ -28,7 +28,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public Type DomainObjectEventMetadataType { get; private set; }
 
-    public SecurityRule.RoleBaseSecurityRule SecurityAdministratorRule { get; private set; } = SecurityRole.Administrator;
+    public DomainSecurityRule.RoleBaseSecurityRule SecurityAdministratorRule { get; private set; } = SecurityRole.Administrator;
 
     public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> settings)
     {
@@ -84,7 +84,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         return this;
     }
 
-    public IBssFrameworkSettings SetSecurityAdministratorRule(SecurityRule.RoleBaseSecurityRule rule)
+    public IBssFrameworkSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule)
     {
         this.SecurityAdministratorRule = rule;
 

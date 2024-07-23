@@ -2,7 +2,7 @@
 using Framework.Core;
 using Microsoft.Extensions.DependencyInjection;
 
-using static Framework.SecuritySystem.SecurityRule;
+using static Framework.SecuritySystem.DomainSecurityRule;
 
 namespace Framework.SecuritySystem.Services;
 
@@ -66,13 +66,20 @@ public class DomainSecurityProviderFactory(
                 return SecurityProvider<TDomainObject>.Create(conditionFactory.Create());
             }
 
-            case DynamicSecurityRule securityRule:
+            case FactorySecurityRule securityRule:
             {
-                var dynamicRoleFactoryUntyped = serviceProvider.GetRequiredService(securityRule.DynamicRoleFactoryType);
+                var dynamicRoleFactoryUntyped = serviceProvider.GetRequiredService(securityRule.RuleFactoryType);
 
                 var dynamicRoleFactory = (IFactory<DomainSecurityRule>)dynamicRoleFactoryUntyped;
 
                 return this.CreateInternal(securityPath, dynamicRoleFactory.Create());
+            }
+
+            case OverrideAccessDeniedMessageSecurityRule securityRule:
+            {
+                return this.CreateInternal(securityPath, securityRule.BaseSecurityRule)
+                           .OverrideAccessDeniedResult(
+                               accessDeniedResult => accessDeniedResult with { CustomMessage = securityRule.CustomMessage });
             }
 
             case OverrideAccessDeniedMessageSecurityRule securityRule:

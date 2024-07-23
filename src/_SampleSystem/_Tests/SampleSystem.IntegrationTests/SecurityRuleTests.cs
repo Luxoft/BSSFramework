@@ -21,7 +21,7 @@ public class SecurityRuleTests : TestBase
     public void ApplyExceptRule_CurrentUserExcepted()
     {
         // Arrange
-        var testSecurityRule = SecurityRole.Administrator.Except(SecurityRule.CurrentUser);
+        var testSecurityRule = SecurityRole.Administrator.Except(DomainSecurityRule.CurrentUser);
 
         var testOtherEmployeeId = this.DataHelper.SaveEmployee().Id;
 
@@ -61,8 +61,7 @@ public class SecurityRuleTests : TestBase
         // Arrange
         var faultMessage = "TestFaultMessage";
 
-        var testSecurityRule = SecurityRule.CurrentUser.Except(SecurityRule.CurrentUser)
-                                           .WithOverrideAccessDeniedMessage(faultMessage);
+        var testSecurityRule = DomainSecurityRule.AccessDenied.WithOverrideAccessDeniedMessage(faultMessage);
 
         // Act
         var action = () => this.Evaluate(

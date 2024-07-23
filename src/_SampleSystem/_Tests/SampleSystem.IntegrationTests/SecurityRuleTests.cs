@@ -74,6 +74,8 @@ public class SecurityRuleTests : TestBase
                          });
 
         // Assert
-        action.Should().Throw<Exception>(faultMessage);
+        action.Should()
+              .Throw<Exception>()
+              .WithMessage(faultMessage);
     }
 }

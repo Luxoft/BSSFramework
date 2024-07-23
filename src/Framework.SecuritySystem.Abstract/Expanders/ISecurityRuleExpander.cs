@@ -10,5 +10,5 @@ public interface ISecurityRuleExpander
 
     DomainSecurityRule.RoleBaseSecurityRule Expand(DomainSecurityRule.RoleFactorySecurityRule securityRule);
 
-    IEnumerable<DomainSecurityRule.ExpandedRolesSecurityRule> FullExpand(DomainSecurityRule.RoleBaseSecurityRule securityRule);
+    DomainSecurityRule.ExpandedRolesSecurityRule FullExpand(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 }

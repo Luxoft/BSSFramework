@@ -10,6 +10,7 @@ using Framework.Events;
 using Framework.SecuritySystem;
 
 using SampleSystem.Domain;
+using SampleSystem.Security;
 
 using ServiceModelGenerator = Framework.DomainDriven.ServiceModelGenerator;
 

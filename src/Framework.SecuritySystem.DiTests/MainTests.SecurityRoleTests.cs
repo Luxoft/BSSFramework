@@ -77,7 +77,6 @@ public partial class MainTests
 
         // Assert
         expandResult.Should()
-                    .ContainSingle()
                     .Subject
                     .Should()
                     .BeEquivalentTo(
@@ -95,7 +94,6 @@ public partial class MainTests
 
         // Assert
         expandResult.Should()
-                    .ContainSingle()
                     .Subject
                     .Should()
                     .BeEquivalentTo(

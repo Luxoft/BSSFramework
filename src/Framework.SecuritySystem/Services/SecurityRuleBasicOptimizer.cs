@@ -115,6 +115,6 @@ public class SecurityRuleBasicOptimizer : SecurityRuleVisitor, ISecurityRuleBasi
         };
     }
 
-    DomainSecurityRule ISecurityRuleOptimizer.Optimize(DomainSecurityRule securityRule) =>
+    DomainSecurityRule ISecurityRuleBasicOptimizer.Optimize(DomainSecurityRule securityRule) =>
         this.cache[securityRule];
 }

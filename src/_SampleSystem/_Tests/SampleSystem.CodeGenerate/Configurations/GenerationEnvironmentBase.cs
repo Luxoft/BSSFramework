@@ -7,6 +7,7 @@ using Framework.Security;
 using Framework.SecuritySystem;
 
 using SampleSystem.Domain;
+using SampleSystem.Security;
 
 namespace SampleSystem.CodeGenerate;
 

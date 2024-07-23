@@ -9,13 +9,15 @@ public interface ISecuritySystemSettings
 
     ISecuritySystemSettings AddSecurityContext<TSecurityContext>(
         Guid ident,
-        string name = null,
-        Func<TSecurityContext, string> displayFunc = null)
+        string? name = null,
+        Func<TSecurityContext, string>? displayFunc = null)
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>;
 
     ISecuritySystemSettings AddDomainSecurityServices(Action<IDomainSecurityServiceRootBuilder> setup);
 
     ISecuritySystemSettings AddSecurityRole(SecurityRole securityRole, SecurityRoleInfo info);
+
+    ISecuritySystemSettings AddSecurityRule(DomainSecurityRule.SecurityRuleHeader header, DomainSecurityRule implementation);
 
     ISecuritySystemSettings AddSecurityOperation(SecurityOperation securityOperation, SecurityOperationInfo info);
 

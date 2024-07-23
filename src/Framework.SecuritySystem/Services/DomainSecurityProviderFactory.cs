@@ -8,14 +8,15 @@ namespace Framework.SecuritySystem.Services;
 
 public class DomainSecurityProviderFactory(
     IServiceProvider serviceProvider,
-    ISecurityRuleOptimizer optimizer,
+    ISecurityRuleDeepOptimizer deepOptimizer,
+    ISecurityRuleImplementationResolver implementationResolver,
     IRoleBaseSecurityProviderFactory roleBaseSecurityProviderFactory) : IDomainSecurityProviderFactory
 {
     public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
         DomainSecurityRule securityRule)
     {
-        return this.CreateInternal(securityPath, optimizer.Optimize(securityRule));
+        return this.CreateInternal(securityPath, deepOptimizer.Optimize(securityRule));
     }
 
     protected virtual ISecurityProvider<TDomainObject> CreateInternal<TDomainObject>(
@@ -82,12 +83,8 @@ public class DomainSecurityProviderFactory(
                                accessDeniedResult => accessDeniedResult with { CustomMessage = securityRule.CustomMessage });
             }
 
-            case OverrideAccessDeniedMessageSecurityRule securityRule:
-            {
-                return this.CreateInternal(securityPath, securityRule.BaseSecurityRule)
-                           .OverrideAccessDeniedResult(
-                               accessDeniedResult => accessDeniedResult with { CustomMessage = securityRule.CustomMessage });
-            }
+            case SecurityRuleHeader securityRuleHeader:
+                return this.CreateInternal(securityPath, implementationResolver.Resolve(securityRuleHeader));
 
             case OrSecurityRule securityRule:
                 return this.CreateInternal(securityPath, securityRule.Left).Or(this.CreateInternal(securityPath, securityRule.Right));

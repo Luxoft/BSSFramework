@@ -1,3 +1,6 @@
 ﻿namespace Framework.SecuritySystem.Services;
 
-public interface ISecurityRuleBasicOptimizer : ISecurityRuleOptimizer;
+public interface ISecurityRuleBasicOptimizer
+{
+    DomainSecurityRule Optimize(DomainSecurityRule securityRule);
+}

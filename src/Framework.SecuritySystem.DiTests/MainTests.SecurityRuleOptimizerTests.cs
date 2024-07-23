@@ -16,7 +16,7 @@ public partial class MainTests
     public void OptimizeSecurityRule_RuleOptimized(DomainSecurityRule securityRule, DomainSecurityRule expectedOptimizedSecurityRule)
     {
         //Arrange
-        var service = this.rootServiceProvider.GetRequiredService<ISecurityRuleOptimizer>();
+        var service = this.rootServiceProvider.GetRequiredService<ISecurityRuleBasicOptimizer>();
 
         //Act
         var optimizedSecurityPath = service.Optimize(securityRule);

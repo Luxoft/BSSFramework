@@ -1,6 +1,8 @@
 ﻿using Framework.DomainDriven;
 using Framework.SecuritySystem;
 
+using SampleSystem.Security;
+
 namespace SampleSystem.BLL;
 
 public class SampleSystemSecurityRuleParser : ISecurityRuleParser

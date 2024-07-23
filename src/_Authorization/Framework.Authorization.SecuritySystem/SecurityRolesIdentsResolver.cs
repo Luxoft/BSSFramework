@@ -11,7 +11,7 @@ public class SecurityRolesIdentsResolver(
     public IEnumerable<Guid> Resolve(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         return securityRuleExpander.FullExpand(securityRule)
-                                   .SelectMany(rule => rule.SecurityRoles)
+                                   .SecurityRoles
                                    .Distinct()
                                    .Select(securityRoleSource.GetSecurityRole)
                                    .Where(sr => !sr.IsVirtual)

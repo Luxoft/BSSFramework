@@ -1,5 +1,6 @@
 ﻿using Framework.Persistent;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+using Framework.SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +12,10 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public bool InitializeAdministratorRole { get; set; } = true;
 
-    public ISecuritySystemSettings AddSecurityContext<TSecurityContext>(Guid ident, string name = null, Func<TSecurityContext, string> displayFunc = null)
+    public ISecuritySystemSettings AddSecurityContext<TSecurityContext>(
+        Guid ident,
+        string? name,
+        Func<TSecurityContext, string>? displayFunc)
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
         return this.AddSecurityContext(b => b.Add(ident, name, displayFunc));
@@ -38,6 +42,13 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
+    public ISecuritySystemSettings AddSecurityRule(DomainSecurityRule.SecurityRuleHeader header, DomainSecurityRule implementation)
+    {
+        this.RegisterActions.Add(sc => sc.AddSingleton(new SecurityRuleFullInfo(header, implementation)));
+
+        return this;
+    }
+
     public ISecuritySystemSettings AddSecurityOperation(SecurityOperation securityOperation, SecurityOperationInfo info)
     {
         this.RegisterActions.Add(sc => sc.AddSingleton(new FullSecurityOperation(securityOperation, info)));
@@ -54,7 +65,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType)
     {
-        this.RegisterActions.Add(sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(DomainSecurityRule.CurrentUser), genericSecurityProviderType));
+        this.RegisterActions.Add(
+            sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(DomainSecurityRule.CurrentUser), genericSecurityProviderType));
 
         return this;
     }

@@ -37,7 +37,10 @@ public abstract record DomainSecurityRule : SecurityRule
 
     public record FactorySecurityRule(Type RuleFactoryType) : DomainSecurityRule;
 
-    public record SecurityRuleHeader(string Name) : DomainSecurityRule;
+    public record SecurityRuleHeader(string Name) : DomainSecurityRule
+    {
+        public override string ToString() => this.Name;
+    }
 
     public record OverrideAccessDeniedMessageSecurityRule(DomainSecurityRule BaseSecurityRule, string CustomMessage) : DomainSecurityRule;
 

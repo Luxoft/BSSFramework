@@ -27,18 +27,18 @@ public class SecurityRuleExpander(
         return dynamicRoleSecurityRuleExpander.Expand(securityRule);
     }
 
-    public IEnumerable<DomainSecurityRule.ExpandedRolesSecurityRule> FullExpand(DomainSecurityRule.RoleBaseSecurityRule securityRule)
+    public DomainSecurityRule.ExpandedRolesSecurityRule FullExpand(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         switch (securityRule)
         {
             case DomainSecurityRule.OperationSecurityRule operationSecurityRule:
-                return [this.Expand(this.Expand(operationSecurityRule))];
+                return this.Expand(this.Expand(operationSecurityRule));
 
             case DomainSecurityRule.NonExpandedRolesSecurityRule nonExpandedRolesSecurityRule:
-                return [this.Expand(nonExpandedRolesSecurityRule)];
+                return this.Expand(nonExpandedRolesSecurityRule);
 
             case DomainSecurityRule.ExpandedRolesSecurityRule expandedRolesSecurityRule:
-                return [expandedRolesSecurityRule];
+                return expandedRolesSecurityRule;
 
             case DomainSecurityRule.RoleFactorySecurityRule dynamicRoleSecurityRule:
                 return this.FullExpand(this.Expand(dynamicRoleSecurityRule));

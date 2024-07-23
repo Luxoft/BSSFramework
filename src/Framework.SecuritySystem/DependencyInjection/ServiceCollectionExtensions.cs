@@ -25,6 +25,7 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IDomainSecurityProviderFactory, DomainSecurityProviderFactory>()
                        .AddSingleton<ISecurityRuleBasicOptimizer, SecurityRuleBasicOptimizer>()
                        .AddSingleton<ISecurityRuleDeepOptimizer, SecurityRuleDeepOptimizer>()
+                       .AddSingleton<ISecurityRuleImplementationResolver, SecurityRuleImplementationResolver>()
                        .AddScoped<IRoleBaseSecurityProviderFactory, RoleBaseSecurityProviderFactory>()
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
                        .AddScoped<ISecurityExpressionBuilderFactory, SecurityExpressionBuilderFactory<Guid>>()

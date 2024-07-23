@@ -144,7 +144,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
                             .SetEdit(SampleSystemSecurityOperation.LocationEdit))
 
                   .Add<TestRestrictionObject>(new[] { SampleSystemSecurityRole.RestrictionRole}, SecurityPath<TestRestrictionObject>.Create(v => v.BusinessUnit))
-                  
+
                   .Add<TestCustomContextSecurityObj>(b => b.SetCustomService<SampleSystemTestCustomContextSecurityObjSecurityService>())
 
                   .Add<TestSecurityObjItem>(b => b.SetDependency(v => v.FirstMaster))

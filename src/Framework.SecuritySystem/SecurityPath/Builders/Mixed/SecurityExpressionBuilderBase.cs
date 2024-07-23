@@ -6,7 +6,7 @@ public class SecurityExpressionBuilder<TDomainObject>(
     : ISecurityExpressionBuilder<TDomainObject>
 {
     public ISecurityExpressionFilter<TDomainObject> GetFilter(
-        SecurityRule.RoleBaseSecurityRule securityRule,
+        DomainSecurityRule.RoleBaseSecurityRule securityRule,
         IEnumerable<Type> securityTypes)
     {
         var cachedSecurityTypes = securityTypes.ToList();

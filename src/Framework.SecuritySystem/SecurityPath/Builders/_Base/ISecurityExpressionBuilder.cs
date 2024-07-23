@@ -2,5 +2,5 @@
 
 public interface ISecurityExpressionBuilder<TDomainObject>
 {
-    ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.RoleBaseSecurityRule securityRule, IEnumerable<Type> securityTypes);
+    ISecurityExpressionFilter<TDomainObject> GetFilter(DomainSecurityRule.RoleBaseSecurityRule securityRule, IEnumerable<Type> securityTypes);
 }

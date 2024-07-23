@@ -4,11 +4,11 @@ namespace Framework.SecuritySystem.Expanders;
 
 public class SecurityOperationExpander
 {
-    private readonly IDictionaryCache<SecurityRule.OperationSecurityRule, SecurityRule.NonExpandedRolesSecurityRule> expandCache;
+    private readonly IDictionaryCache<DomainSecurityRule.OperationSecurityRule, DomainSecurityRule.NonExpandedRolesSecurityRule> expandCache;
 
     public SecurityOperationExpander(ISecurityRoleSource securityRoleSource, ISecurityOperationInfoSource securityOperationInfoSource)
     {
-        this.expandCache = new DictionaryCache<SecurityRule.OperationSecurityRule, SecurityRule.NonExpandedRolesSecurityRule>(
+        this.expandCache = new DictionaryCache<DomainSecurityRule.OperationSecurityRule, DomainSecurityRule.NonExpandedRolesSecurityRule>(
             securityRule =>
             {
                 var securityRoles = securityRoleSource.SecurityRoles
@@ -28,7 +28,7 @@ public class SecurityOperationExpander
             }).WithLock();
     }
 
-    public SecurityRule.NonExpandedRolesSecurityRule Expand(SecurityRule.OperationSecurityRule securityRule)
+    public DomainSecurityRule.NonExpandedRolesSecurityRule Expand(DomainSecurityRule.OperationSecurityRule securityRule)
     {
         return this.expandCache[securityRule];
     }

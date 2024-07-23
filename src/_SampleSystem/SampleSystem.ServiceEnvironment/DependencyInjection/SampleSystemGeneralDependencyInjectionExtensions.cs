@@ -25,6 +25,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                        .AddSecurityContexts()
                                        .AddDomainSecurityServices()
                                        .AddSecurityRoles()
+                                       .AddSecurityRules()
                                        .AddCustomSecurityOperations()
                                        .SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>)))
 

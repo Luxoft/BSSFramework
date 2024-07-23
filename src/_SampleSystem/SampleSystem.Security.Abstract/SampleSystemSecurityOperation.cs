@@ -1,6 +1,6 @@
 ﻿using Framework.SecuritySystem;
 
-namespace SampleSystem;
+namespace SampleSystem.Security;
 
 public static class SampleSystemSecurityOperation
 {

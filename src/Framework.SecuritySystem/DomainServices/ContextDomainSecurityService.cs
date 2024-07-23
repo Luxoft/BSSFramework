@@ -11,8 +11,8 @@ public class ContextDomainSecurityService<TDomainObject>(
 {
     protected virtual ISecurityProvider<TDomainObject> Create(
         SecurityPath<TDomainObject> customSecurityPath,
-        SecurityRule.DomainSecurityRule securityRule) => domainSecurityProviderFactory.Create(customSecurityPath, securityRule);
+        DomainSecurityRule securityRule) => domainSecurityProviderFactory.Create(customSecurityPath, securityRule);
 
-    protected override ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(SecurityRule.DomainSecurityRule securityRule) =>
+    protected override ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(DomainSecurityRule securityRule) =>
         this.Create(securityPath ?? SecurityPath<TDomainObject>.Empty, securityRule);
 }

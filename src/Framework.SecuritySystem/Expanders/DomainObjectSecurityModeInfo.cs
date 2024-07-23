@@ -1,3 +1,3 @@
 ﻿namespace Framework.SecuritySystem.Expanders;
 
-public record DomainObjectSecurityModeInfo(Type DomainType, SecurityRule.DomainSecurityRule? ViewRule, SecurityRule.DomainSecurityRule? EditRule);
+public record DomainObjectSecurityModeInfo(Type DomainType, DomainSecurityRule? ViewRule, DomainSecurityRule? EditRule);

@@ -88,6 +88,13 @@ public static class SampleSystemSecuritySystemExtensions
                    });
     }
 
+    public static ISecuritySystemSettings AddSecurityRules(this ISecuritySystemSettings settings)
+    {
+        return settings.AddSecurityRule(
+            SampleSystemSecurityRule.TestRestriction,
+            new DomainSecurityRule.ConditionSecurityRule(typeof(TestRestrictionObjectConditionFactory<>)));
+    }
+
     public static ISecuritySystemSettings AddCustomSecurityOperations(this ISecuritySystemSettings settings)
     {
         return settings.AddSecurityOperation(

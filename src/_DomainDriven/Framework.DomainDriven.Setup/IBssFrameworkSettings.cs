@@ -32,5 +32,5 @@ public interface IBssFrameworkSettings
     IBssFrameworkSettings SetPrincipalIdentitySource<TDomainObject>(Expression<Func<TDomainObject, bool>> filter, Expression<Func<TDomainObject, string>> namePath)
         where TDomainObject : IIdentityObject<Guid>;
 
-    IBssFrameworkSettings SetSecurityAdministratorRule(SecurityRule.RoleBaseSecurityRule rule);
+    IBssFrameworkSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule);
 }

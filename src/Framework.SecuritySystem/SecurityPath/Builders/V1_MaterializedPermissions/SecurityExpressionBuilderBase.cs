@@ -13,7 +13,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent>(Secur
 {
     internal readonly SecurityExpressionBuilderFactory<TIdent> Factory = factory;
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter(SecurityRule.RoleBaseSecurityRule securityRule, IEnumerable<Type> securityTypes) => new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule, securityTypes);
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(DomainSecurityRule.RoleBaseSecurityRule securityRule, IEnumerable<Type> securityTypes) => new SecurityExpressionFilter<TDomainObject, TIdent>(this, securityRule, securityTypes);
 
     public abstract Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission);
 

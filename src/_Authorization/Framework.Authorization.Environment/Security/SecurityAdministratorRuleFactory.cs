@@ -4,7 +4,7 @@ using Framework.SecuritySystem;
 namespace Framework.Authorization.Environment.Security;
 
 public class SecurityAdministratorRuleFactory(SecurityAdministratorRuleInfo securityAdministratorRuleInfo)
-    : IFactory<SecurityRule.RoleBaseSecurityRule>
+    : IFactory<DomainSecurityRule.RoleBaseSecurityRule>
 {
-    public SecurityRule.RoleBaseSecurityRule Create() => securityAdministratorRuleInfo.SecurityRole;
+    public DomainSecurityRule.RoleBaseSecurityRule Create() => securityAdministratorRuleInfo.SecurityRole;
 }

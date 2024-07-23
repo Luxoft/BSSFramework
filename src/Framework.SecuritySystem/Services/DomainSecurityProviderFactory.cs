@@ -2,79 +2,101 @@
 using Framework.Core;
 using Microsoft.Extensions.DependencyInjection;
 
+using static Framework.SecuritySystem.DomainSecurityRule;
+
 namespace Framework.SecuritySystem.Services;
 
 public class DomainSecurityProviderFactory(
     IServiceProvider serviceProvider,
-    ISecurityRuleOptimizer optimizer,
+    ISecurityRuleDeepOptimizer deepOptimizer,
+    ISecurityRuleImplementationResolver implementationResolver,
     IRoleBaseSecurityProviderFactory roleBaseSecurityProviderFactory) : IDomainSecurityProviderFactory
 {
     public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
-        SecurityRule.DomainSecurityRule securityRule)
+        DomainSecurityRule securityRule)
     {
-        return this.CreateInternal(securityPath, optimizer.Optimize(securityRule));
+        return this.CreateInternal(securityPath, deepOptimizer.Optimize(securityRule));
     }
 
     protected virtual ISecurityProvider<TDomainObject> CreateInternal<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
-        SecurityRule.DomainSecurityRule securityRule)
+        DomainSecurityRule baseSecurityRule)
     {
-        switch (securityRule)
+        switch (baseSecurityRule)
         {
-            case SecurityRule.RoleBaseSecurityRule expandedRolesSecurityRule:
-                return roleBaseSecurityProviderFactory.Create(securityPath, expandedRolesSecurityRule);
+            case RoleBaseSecurityRule securityRule:
+                return roleBaseSecurityProviderFactory.Create(securityPath, securityRule);
 
-            case SecurityRule.ProviderSecurityRule providerSecurityRule:
-                {
-                    var securityProviderType =
-                        providerSecurityRule.GenericSecurityProviderType.MakeGenericType(typeof(TDomainObject));
+            case ProviderSecurityRule securityRule:
+            {
+                var securityProviderType =
+                    securityRule.GenericSecurityProviderType.MakeGenericType(typeof(TDomainObject));
 
-                    var securityProvider = providerSecurityRule.Key == null
-                                               ? serviceProvider.GetRequiredService(securityProviderType)
-                                               : serviceProvider.GetRequiredKeyedService(securityProviderType, providerSecurityRule.Key);
+                var securityProvider = securityRule.Key == null
+                                           ? serviceProvider.GetRequiredService(securityProviderType)
+                                           : serviceProvider.GetRequiredKeyedService(securityProviderType, securityRule.Key);
 
-                    return (ISecurityProvider<TDomainObject>)securityProvider;
-                }
+                return (ISecurityProvider<TDomainObject>)securityProvider;
+            }
 
-            case SecurityRule.ProviderFactorySecurityRule providerFactorySecurityRule:
-                {
-                    var securityProviderFactoryType =
-                        providerFactorySecurityRule.GenericSecurityProviderFactoryType.MakeGenericType(typeof(TDomainObject));
+            case ProviderFactorySecurityRule securityRule:
+            {
+                var securityProviderFactoryType =
+                    securityRule.GenericSecurityProviderFactoryType.MakeGenericType(typeof(TDomainObject));
 
-                    var securityProviderFactoryUntyped =
-                        providerFactorySecurityRule.Key == null
-                            ? serviceProvider.GetRequiredService(securityProviderFactoryType)
-                            : serviceProvider.GetRequiredKeyedService(securityProviderFactoryType, providerFactorySecurityRule.Key);
+                var securityProviderFactoryUntyped =
+                    securityRule.Key == null
+                        ? serviceProvider.GetRequiredService(securityProviderFactoryType)
+                        : serviceProvider.GetRequiredKeyedService(securityProviderFactoryType, securityRule.Key);
 
-                    var securityProviderFactory = (IFactory<ISecurityProvider<TDomainObject>>)securityProviderFactoryUntyped;
+                var securityProviderFactory = (IFactory<ISecurityProvider<TDomainObject>>)securityProviderFactoryUntyped;
 
-                    return securityProviderFactory.Create();
-                }
+                return securityProviderFactory.Create();
+            }
 
-            case SecurityRule.ConditionSecurityRule conditionSecurityRule:
-                {
-                    var conditionFactoryType =
-                        conditionSecurityRule.GenericConditionFactoryType.MakeGenericType(typeof(TDomainObject));
+            case ConditionSecurityRule securityRule:
+            {
+                var conditionFactoryType =
+                    securityRule.GenericConditionFactoryType.MakeGenericType(typeof(TDomainObject));
 
-                    var conditionFactoryUntyped = serviceProvider.GetRequiredService(conditionFactoryType);
+                var conditionFactoryUntyped = serviceProvider.GetRequiredService(conditionFactoryType);
 
-                    var conditionFactory = (IFactory<Expression<Func<TDomainObject, bool>>>)conditionFactoryUntyped;
+                var conditionFactory = (IFactory<Expression<Func<TDomainObject, bool>>>)conditionFactoryUntyped;
 
-                    return SecurityProvider<TDomainObject>.Create(conditionFactory.Create());
-                }
+                return SecurityProvider<TDomainObject>.Create(conditionFactory.Create());
+            }
 
-            case SecurityRule.OrSecurityRule orSecurityRule:
-                return this.CreateInternal(securityPath, orSecurityRule.Left).Or(this.CreateInternal(securityPath, orSecurityRule.Right));
+            case FactorySecurityRule securityRule:
+            {
+                var dynamicRoleFactoryUntyped = serviceProvider.GetRequiredService(securityRule.RuleFactoryType);
 
-            case SecurityRule.AndSecurityRule andSecurityRule:
-                return this.CreateInternal(securityPath, andSecurityRule.Left).And(this.CreateInternal(securityPath, andSecurityRule.Right));
+                var dynamicRoleFactory = (IFactory<DomainSecurityRule>)dynamicRoleFactoryUntyped;
 
-            case SecurityRule.NegateSecurityRule negateSecurityRule:
-                return this.CreateInternal(securityPath, negateSecurityRule.InnerRule).Negate();
+                return this.CreateInternal(securityPath, dynamicRoleFactory.Create());
+            }
+
+            case OverrideAccessDeniedMessageSecurityRule securityRule:
+            {
+                return this.CreateInternal(securityPath, securityRule.BaseSecurityRule)
+                           .OverrideAccessDeniedResult(
+                               accessDeniedResult => accessDeniedResult with { CustomMessage = securityRule.CustomMessage });
+            }
+
+            case SecurityRuleHeader securityRuleHeader:
+                return this.CreateInternal(securityPath, implementationResolver.Resolve(securityRuleHeader));
+
+            case OrSecurityRule securityRule:
+                return this.CreateInternal(securityPath, securityRule.Left).Or(this.CreateInternal(securityPath, securityRule.Right));
+
+            case AndSecurityRule securityRule:
+                return this.CreateInternal(securityPath, securityRule.Left).And(this.CreateInternal(securityPath, securityRule.Right));
+
+            case NegateSecurityRule securityRule:
+                return this.CreateInternal(securityPath, securityRule.InnerRule).Negate();
 
             default:
-                throw new ArgumentOutOfRangeException(nameof(securityRule));
+                throw new ArgumentOutOfRangeException(nameof(baseSecurityRule));
         }
     }
 }

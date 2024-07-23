@@ -12,9 +12,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 {
     private readonly List<Type> securityFunctorTypes = new();
 
-    public SecurityRule.DomainSecurityRule? ViewRule { get; private set; }
+    public DomainSecurityRule? ViewRule { get; private set; }
 
-    public SecurityRule.DomainSecurityRule? EditRule { get; private set; }
+    public DomainSecurityRule? EditRule { get; private set; }
 
     public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
 
@@ -82,14 +82,14 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
         }
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityRule.DomainSecurityRule securityRule)
+    public IDomainSecurityServiceBuilder<TDomainObject> SetView(DomainSecurityRule securityRule)
     {
         this.ViewRule = securityRule;
 
         return this;
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityRule.DomainSecurityRule securityRule)
+    public IDomainSecurityServiceBuilder<TDomainObject> SetEdit(DomainSecurityRule securityRule)
     {
         this.EditRule = securityRule;
 

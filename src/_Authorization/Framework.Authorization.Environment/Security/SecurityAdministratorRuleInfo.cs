@@ -2,4 +2,4 @@
 
 namespace Framework.Authorization.Environment.Security;
 
-public record SecurityAdministratorRuleInfo(SecurityRule.RoleBaseSecurityRule SecurityRole);
+public record SecurityAdministratorRuleInfo(DomainSecurityRule.RoleBaseSecurityRule SecurityRole);

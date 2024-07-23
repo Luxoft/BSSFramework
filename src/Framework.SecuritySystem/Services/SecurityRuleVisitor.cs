@@ -17,26 +17,6 @@ public abstract class SecurityRuleVisitor
         return securityRule;
     }
 
-    protected virtual SecurityRule.DomainSecurityRule Visit(SecurityRule.DynamicRoleSecurityRule securityRule)
-    {
-        return securityRule;
-    }
-
-    protected virtual SecurityRule.DomainSecurityRule Visit(SecurityRule.ProviderSecurityRule securityRule)
-    {
-        return securityRule;
-    }
-
-    protected virtual SecurityRule.DomainSecurityRule Visit(SecurityRule.ProviderFactorySecurityRule securityRule)
-    {
-        return securityRule;
-    }
-
-    protected virtual SecurityRule.DomainSecurityRule Visit(SecurityRule.ConditionSecurityRule securityRule)
-    {
-        return securityRule;
-    }
-
     protected virtual SecurityRule.DomainSecurityRule Visit(SecurityRule.OrSecurityRule baseSecurityRule)
     {
         var visitedLeft = this.Visit(baseSecurityRule.Left);
@@ -88,19 +68,15 @@ public abstract class SecurityRuleVisitor
         SecurityRule.ExpandedRolesSecurityRule securityRule => this.Visit(securityRule),
         SecurityRule.NonExpandedRolesSecurityRule securityRule => this.Visit(securityRule),
         SecurityRule.OperationSecurityRule securityRule => this.Visit(securityRule),
-        SecurityRule.DynamicRoleSecurityRule securityRule => this.Visit(securityRule),
-        _ => throw new ArgumentOutOfRangeException(nameof(baseSecurityRule))
+        _ => baseSecurityRule
     };
 
     public virtual SecurityRule.DomainSecurityRule Visit(SecurityRule.DomainSecurityRule baseSecurityRule) => baseSecurityRule switch
     {
         SecurityRule.RoleBaseSecurityRule securityRule => this.Visit(securityRule),
-        SecurityRule.ProviderSecurityRule securityRule => this.Visit(securityRule),
-        SecurityRule.ProviderFactorySecurityRule securityRule => this.Visit(securityRule),
-        SecurityRule.ConditionSecurityRule securityRule => this.Visit(securityRule),
         SecurityRule.OrSecurityRule securityRule => this.Visit(securityRule),
         SecurityRule.AndSecurityRule securityRule => this.Visit(securityRule),
         SecurityRule.NegateSecurityRule securityRule => this.Visit(securityRule),
-        _ => throw new ArgumentOutOfRangeException(nameof(baseSecurityRule))
+        _ => baseSecurityRule
     };
 }

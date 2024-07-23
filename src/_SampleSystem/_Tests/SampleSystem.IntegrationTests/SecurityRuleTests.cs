@@ -18,9 +18,11 @@ namespace SampleSystem.IntegrationTests;
 public class SecurityRuleTests : TestBase
 {
     [TestMethod]
-    public void TryApplyExceptRule_CurrentUserExcepted()
+    public void ApplyExceptRule_CurrentUserExcepted()
     {
         // Arrange
+        var testSecurityRule = SecurityRole.Administrator.Except(SecurityRule.CurrentUser);
+
         var testOtherEmployeeId = this.DataHelper.SaveEmployee().Id;
 
         var currentEmployeeId = this.DataHelper.GetCurrentEmployee().Id;
@@ -45,11 +47,34 @@ public class SecurityRuleTests : TestBase
             DBSessionMode.Read,
             ctx => ctx.Logics
                       .Default
-                      .Create<TestExceptObject>(SecurityRole.Administrator.Except(SecurityRule.CurrentUser))
+                      .Create<TestExceptObject>(testSecurityRule)
                       .GetSecureQueryable()
                       .Select(obj => obj.Id).ToList());
 
         // Assert
         loadedObjects.Should().BeEquivalentTo(new[] { testObjectIdents[0] });
+    }
+
+    [TestMethod]
+    public void ApplyOverrideFaultMessageRule_FaultMessageChanged()
+    {
+        // Arrange
+        var faultMessage = "TestFaultMessage";
+
+        var testSecurityRule = SecurityRule.CurrentUser.Except(SecurityRule.CurrentUser)
+                                           .WithOverrideAccessDeniedMessage(faultMessage);
+
+        // Act
+        var action = () => this.Evaluate(
+                         DBSessionMode.Read,
+                         ctx =>
+                         {
+                             var bll = ctx.Logics.EmployeeFactory.Create(testSecurityRule);
+
+                             bll.CheckAccess(ctx.Logics.Employee.GetCurrent());
+                         });
+
+        // Assert
+        action.Should().Throw<Exception>(faultMessage);
     }
 }

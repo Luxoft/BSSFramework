@@ -58,6 +58,10 @@ public abstract record SecurityRule
 
     public record ConditionSecurityRule(Type GenericConditionFactoryType) : DomainSecurityRule;
 
+    public record DynamicSecurityRule(Type DynamicRoleFactoryType) : DomainSecurityRule;
+
+    public record OverrideAccessDeniedMessageSecurityRule(DomainSecurityRule BaseSecurityRule, string CustomMessage) : DomainSecurityRule;
+
     public abstract record RoleBaseSecurityRule : DomainSecurityRule
     {
         public static implicit operator RoleBaseSecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();
@@ -96,6 +100,7 @@ public abstract record SecurityRule
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
                                                  : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";
+
         public static NonExpandedRolesSecurityRule operator +(NonExpandedRolesSecurityRule rule1, NonExpandedRolesSecurityRule rule2)
         {
             if (rule1.CustomExpandType != rule2.CustomExpandType)

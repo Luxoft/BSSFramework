@@ -91,4 +91,9 @@ public static class SecurityRuleExtensions
         this IEnumerable<SecurityRole> securityRoles,
         SecurityRule.DomainSecurityRule otherSecurityRule) =>
         securityRoles.ToSecurityRule().Except(otherSecurityRule);
+
+    public static SecurityRule.DomainSecurityRule WithOverrideAccessDeniedMessage(
+        this SecurityRule.DomainSecurityRule securityRule,
+        string customMessage) =>
+        new SecurityRule.OverrideAccessDeniedMessageSecurityRule(securityRule, customMessage);
 }

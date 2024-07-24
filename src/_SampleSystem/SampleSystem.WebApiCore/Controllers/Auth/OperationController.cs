@@ -6,20 +6,13 @@ namespace Authorization.WebApi.Controllers;
 
 [ApiController]
 [Route("authApi/[controller]")]
-public class OperationController : ControllerBase
+public class OperationController(IAvailableSecurityOperationSource availableSecurityOperationSource) : ControllerBase
 {
-    private readonly IAvailableSecurityRoleSource availableSecurityRoleSource;
-
-    public OperationController(IAvailableSecurityRoleSource availableSecurityRoleSource)
-    {
-        this.availableSecurityRoleSource = availableSecurityRoleSource;
-    }
-
     [HttpPost(nameof(GetSecurityOperations))]
     public async Task<IEnumerable<string>> GetSecurityOperations(CancellationToken cancellationToken)
     {
-        var roles = await this.availableSecurityRoleSource.GetAvailableSecurityRoles(cancellationToken);
+        var operations = await availableSecurityOperationSource.GetAvailableSecurityOperations(cancellationToken);
 
-        return roles.SelectMany(sr => sr.Information.Operations).Distinct().Select(op => op.Name);
+        return operations.Select(op => op.Name);
     }
 }

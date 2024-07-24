@@ -1,4 +1,5 @@
-﻿using Framework.SecuritySystem;
+﻿using Framework.Core;
+using Framework.SecuritySystem;
 
 using NHibernate.Linq;
 
@@ -15,6 +16,10 @@ public class AvailableSecurityRoleSource(IAvailablePermissionSource availablePer
 
         var dbRolesIdents = await dbRequest.Distinct().ToListAsync(cancellationToken);
 
-        return dbRolesIdents.Select(securityRoleSource.GetSecurityRole).ToList();
+        var dbRoles = dbRolesIdents.Select(securityRoleSource.GetSecurityRole);
+
+        return dbRoles.GetAllElements(sr => sr.Information.Children.Select(securityRoleSource.GetSecurityRole))
+                      .Distinct()
+                      .ToList();
     }
 }

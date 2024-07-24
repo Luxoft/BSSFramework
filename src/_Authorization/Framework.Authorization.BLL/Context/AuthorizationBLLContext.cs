@@ -48,7 +48,8 @@ public partial class AuthorizationBLLContext
             ICurrentPrincipalSource currentPrincipalSource,
             IPrincipalGeneralValidator principalValidator,
             IActualPrincipalSource actualPrincipalSource,
-            BLLContextSettings<PersistentDomainObjectBase> settings)
+            BLLContextSettings<PersistentDomainObjectBase> settings,
+            IAvailableSecurityOperationSource availableSecurityOperationSource)
             : base(
                    serviceProvider,
                    operationSender,
@@ -67,6 +68,7 @@ public partial class AuthorizationBLLContext
         this.CurrentPrincipalSource = currentPrincipalSource;
         this.PrincipalValidator = principalValidator;
         this.ActualPrincipalSource = actualPrincipalSource;
+        this.AvailableSecurityOperationSource = availableSecurityOperationSource;
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
         this.AuthorizationSystem = authorizationSystem;
         this.RunAsManager = runAsManager;
@@ -102,6 +104,8 @@ public partial class AuthorizationBLLContext
     public IAvailablePermissionSource AvailablePermissionSource { get; }
 
     public IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
+
+    public IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
 
     public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
 

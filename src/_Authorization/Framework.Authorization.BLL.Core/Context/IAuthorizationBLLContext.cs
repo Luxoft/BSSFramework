@@ -36,6 +36,8 @@ public partial interface IAuthorizationBLLContext :
 
     IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
 
+    IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
+
     TimeProvider TimeProvider { get; }
 
     IAuthorizationExternalSource ExternalSource { get; }

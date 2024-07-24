@@ -157,6 +157,7 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IOperationAccessorFactory, OperationAccessorFactory>()
 
                        .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
+                       .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
 
                        .AddSingleton<InitializerSettings>()
                        .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()

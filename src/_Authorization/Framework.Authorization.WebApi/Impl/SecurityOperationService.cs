@@ -1,20 +1,16 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.Authorization.SecuritySystem;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.Authorization.WebApi;
 
-public partial class AuthSLJsonController
+public partial class AuthSLJsonController(IAvailableSecurityOperationSource availableSecurityOperationSource)
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetSecurityOperations))]
-    public virtual IEnumerable<string> GetSecurityOperations()
+    [HttpPost(nameof(GetSecurityOperations))]
+    public virtual async Task<IEnumerable<string>> GetSecurityOperations(CancellationToken cancellationToken = default)
     {
-        return this.EvaluateC(DBSessionMode.Read,
-                              context => context.AvailableSecurityRoleSource
-                                                .GetAvailableSecurityRoles()
-                                                .GetAwaiter()
-                                                .GetResult()
-                                                .SelectMany(sr => sr.Information.Operations)
-                                                .Distinct()
-                                                .Select(op => op.Name)
-                                                .ToList());
+        var operations = await availableSecurityOperationSource.GetAvailableSecurityOperations(cancellationToken);
+
+        return operations.Select(op => op.Name);
     }
 }

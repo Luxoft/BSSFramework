@@ -98,22 +98,11 @@ public static class SecurityProviderExtensions
         {
             switch (securityProvider.GetAccessResult(domainObject))
             {
-                case AccessResult.AccessDeniedResult accessResult:
-                    return accessResult;
+                case AccessResult.AccessDeniedResult:
+                    return AccessResult.AccessGrantedResult.Default;
 
                 case AccessResult.AccessGrantedResult:
-
-                    switch (securityProvider.GetAccessResult(domainObject))
-                    {
-                        case AccessResult.AccessDeniedResult:
-                            return AccessResult.AccessGrantedResult.Default;
-
-                        case AccessResult.AccessGrantedResult:
-                            return AccessResult.AccessDeniedResult.Create(domainObject);
-
-                        default:
-                            throw new InvalidOperationException("unknown access result");
-                    }
+                    return AccessResult.AccessDeniedResult.Create(domainObject);
 
                 default:
                     throw new InvalidOperationException("unknown access result");

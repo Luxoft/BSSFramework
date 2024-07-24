@@ -2,36 +2,41 @@
 
 namespace Framework.DomainDriven.DBGenerator;
 
-public class DataTypeComparer
+public class DataTypeComparer : IDataTypeComparer
 {
-    enum EqualMode
+    protected enum EqualMode
     {
         AllAspects,
         SqlDataType
     }
-    private readonly Func<DataType, DataType, bool> _sqlDataTypeCompareFunc = (left, right) => left.SqlDataType == right.SqlDataType;
 
-    public bool Equals(DataType x, DataType y)
+    protected readonly Func<DataType, DataType, bool> SqlDataTypeCompareFunc = (left, right) => left.SqlDataType == right.SqlDataType;
+
+    public virtual bool Equals(DataType x, DataType y)
     {
-        var leftEqualMode = this.GetEqualMode(x);
-        var rightEqualMode = this.GetEqualMode(y);
+        var leftEqualMode = GetEqualMode(x);
+        var rightEqualMode = GetEqualMode(y);
 
         if (leftEqualMode != rightEqualMode)
         {
             return false;
         }
+
         if (EqualMode.SqlDataType == leftEqualMode)
         {
-            return this._sqlDataTypeCompareFunc(x, y);
+            return this.SqlDataTypeCompareFunc(x, y);
         }
-        return x.SqlDataType == y.SqlDataType && (x.Name == y.Name && x.Schema == y.Schema)
-                                              && (x.NumericPrecision == y.NumericPrecision && x.NumericScale == y.NumericScale);
+
+        return x.SqlDataType == y.SqlDataType
+               && x.Name == y.Name
+               && x.Schema == y.Schema
+               && x.NumericPrecision == y.NumericPrecision
+               && x.NumericScale == y.NumericScale;
     }
 
-    private EqualMode GetEqualMode(DataType dataType)
+    protected static EqualMode GetEqualMode(DataType dataType)
     {
         var sqlDataType = dataType.SqlDataType;
-        //copy past from dataType source
         switch (sqlDataType)
         {
             case SqlDataType.BigInt:
@@ -70,5 +75,4 @@ public class DataTypeComparer
                 return EqualMode.AllAspects;
         }
     }
-
 }

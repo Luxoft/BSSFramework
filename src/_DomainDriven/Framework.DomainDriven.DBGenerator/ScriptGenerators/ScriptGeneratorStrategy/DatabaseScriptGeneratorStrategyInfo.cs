@@ -15,7 +15,7 @@ public struct DatabaseScriptGeneratorStrategyInfo
 
     public readonly DatabaseScriptGeneratorMode DatabaseGeneratorMode;
 
-    public readonly DataTypeComparer DataTypeComparer;
+    public readonly IDataTypeComparer DataTypeComparer;
 
     public readonly string PreviusPostfix;
 
@@ -28,12 +28,12 @@ public struct DatabaseScriptGeneratorStrategyInfo
     public readonly ICollection<string> IgnoredIndexes;
 
     public DatabaseScriptGeneratorStrategyInfo(
-            IDatabaseScriptGeneratorContext context,
-            IEnumerable<DomainTypeMetadata> domainTypesLocal,
-            DatabaseScriptGeneratorMode databaseGeneratorMode,
-            DataTypeComparer dataTypeComparer,
-            string previusPostfix,
-            ICollection<string> ignoredIndexes)
+        IDatabaseScriptGeneratorContext context,
+        IEnumerable<DomainTypeMetadata> domainTypesLocal,
+        DatabaseScriptGeneratorMode databaseGeneratorMode,
+        IDataTypeComparer dataTypeComparer,
+        string previusPostfix,
+        ICollection<string> ignoredIndexes)
     {
         this.DomainTypesLocal = domainTypesLocal;
         this.Context = context;

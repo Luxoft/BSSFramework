@@ -8,13 +8,15 @@ public interface IMainDBScriptGeneratorBuilder : IConfigurable
     /// Setups generator with selected <paramref name="mode"/>
     /// </summary>
     /// <param name="mode">Generation mode</param>
-    /// <param name="previusColumnPostfix">Postfix to add to removed or changed columns</param>
+    /// <param name="previousColumnPostfix">Postfix to add to removed or changed columns</param>
     /// <param name="ignoredIndexes">List of index name that would be not generated</param>
+    /// <param name="dataTypeComparer">Custom data type comparer</param>
     /// <returns></returns>
     IMainDBScriptGeneratorBuilder WithMain(
-            DatabaseScriptGeneratorMode mode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
-            string previusColumnPostfix = "_previusVersion",
-            ICollection<string> ignoredIndexes = null);
+        DatabaseScriptGeneratorMode mode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
+        string previousColumnPostfix = "_previousVersion",
+        ICollection<string> ignoredIndexes = null,
+        IDataTypeComparer dataTypeComparer = null);
 
     IMainDBScriptGeneratorBuilder WithUniqueGroup(params IgnoreLink[] ignore);
 

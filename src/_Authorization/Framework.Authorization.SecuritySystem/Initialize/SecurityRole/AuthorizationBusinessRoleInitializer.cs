@@ -16,12 +16,14 @@ public class AuthorizationBusinessRoleInitializer(
     InitializerSettings settings)
     : IAuthorizationBusinessRoleInitializer
 {
-    public async Task Init(CancellationToken cancellationToken)
+    public async Task<MergeResult<BusinessRole, FullSecurityRole>> Init(CancellationToken cancellationToken)
     {
-        await this.Init(securityRoleSource.GetRealRoles(), cancellationToken);
+        return await this.Init(securityRoleSource.GetRealRoles(), cancellationToken);
     }
 
-    public async Task Init(IEnumerable<FullSecurityRole> securityRoles, CancellationToken cancellationToken)
+    public async Task<MergeResult<BusinessRole, FullSecurityRole>> Init(
+        IEnumerable<FullSecurityRole> securityRoles,
+        CancellationToken cancellationToken)
     {
         var dbRoles = await businessRoleRepository.GetQueryable().ToListAsync(cancellationToken);
 
@@ -73,10 +75,14 @@ public class AuthorizationBusinessRoleInitializer(
                 await businessRoleRepository.SaveAsync(businessRole, cancellationToken);
             }
         }
+
+        return mergeResult;
     }
 
     private static string GetActualName(FullSecurityRole securityRole)
     {
         return securityRole.Information.CustomName ?? securityRole.Name;
     }
+
+    async Task ISecurityInitializer.Init(CancellationToken cancellationToken) => await this.Init(cancellationToken);
 }

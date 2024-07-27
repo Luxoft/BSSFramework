@@ -3,22 +3,22 @@
 @import 'variables.scss';
 
 @function get-primary-color($number: 500) {
-  @return mat.get-color-from-palette($primary-palette, $number);
+  @return mat.m2-get-color-from-palette($primary-palette, $number);
 }
 
 @function get-accent-color($number: 500) {
-  @return mat.get-color-from-palette($accent-palette, $number);
+  @return mat.m2-get-color-from-palette($accent-palette, $number);
 }
 
 @function get-warn-color($number: 500) {
-  @return mat.get-color-from-palette($warn-palette, $number);
+  @return mat.m2-get-color-from-palette($warn-palette, $number);
 }
 
 @mixin table-row {
   height: 70px;
 
   .mat-caption {
-    color: mat.get-color-from-palette(mat.$grey-palette, 500);
+    color: mat.m2-get-color-from-palette(mat.$m2-grey-palette, 500);
   }
 }
 

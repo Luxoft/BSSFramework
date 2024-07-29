@@ -42,6 +42,7 @@ public class UseSchemeUpdateTest
         CheckDataBaseAndSchemeExists(connectionString);
 
         var provider = new ServiceCollection()
+                       .AddHttpContextAccessor()
                        .AddBssFramework(rootSetup => rootSetup.AddDatabaseSettings(connectionString, false))
                        .BuildServiceProvider(false);
 

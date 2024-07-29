@@ -42,17 +42,30 @@ public static class BssFrameworkSettingsExtensions
     {
         return settings.AddServices(sc =>
                                     {
-                                        var tsSettings = new TargetSystemRootSettings(sc);
+                                        var tsSettings = new TargetSystemRootSettings();
 
                                         setupAction.Invoke(tsSettings);
 
                                         if (tsSettings.RegisterBase)
                                         {
-                                            tsSettings.AddTargetSystem<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(false, TargetSystemHelper.AuthorizationName);
-                                            tsSettings.AddTargetSystem<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(false, TargetSystemHelper.ConfigurationName);
+                                            tsSettings
+                                                .AddTargetSystem<IAuthorizationBLLContext,
+                                                    Framework.Authorization.Domain.PersistentDomainObjectBase>(
+                                                    new Guid("{f065289e-4dc5-48c9-be44-a2ee0131e631}"),
+                                                    false,
+                                                    true,
+                                                    nameof(Authorization));
+
+                                            tsSettings
+                                                .AddTargetSystem<IConfigurationBLLContext,
+                                                    Framework.Configuration.Domain.PersistentDomainObjectBase>(
+                                                    new Guid("{50465868-4B49-42CF-A702-A39400E6C317}"),
+                                                    false,
+                                                    false,
+                                                    nameof(Configuration));
                                         }
 
-                                        tsSettings.Initialize();
+                                        tsSettings.Initialize(sc);
                                     });
     }
 
@@ -66,37 +79,46 @@ public interface ITargetSystemRootSettings
 {
     bool RegisterBase { get; set; }
 
-    ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(bool isMain, bool isRevision, string name = null)
+    ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(Guid id, bool isMain, bool isRevision, string name = null)
         where TBLLContext : class, ITypeResolverContainer<string>,
         ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>;
 }
 
-public class TargetSystemRootSettings(IServiceCollection services) : ITargetSystemRootSettings
+public class TargetSystemRootSettings : ITargetSystemRootSettings
 {
+    private readonly List<Action<IServiceCollection>> registerActions = new();
+
     public bool RegisterBase { get; set; }
 
-    public ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(bool isMain, bool isRevision, string name = null)
+    public ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(Guid id, bool isMain, bool isRevision, string name = null, IReadOnlyDictionary<Guid, Type> domainTypes = null)
         where TBLLContext : class, ITypeResolverContainer<string>,
         ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {
-        var info = new TargetSystemInfo<TPersistentDomainObjectBase>(isMain, isRevision, name ?? typeof(TPersistentDomainObjectBase).GetTargetSystemName() );
+        var info = new TargetSystemInfo<TPersistentDomainObjectBase>(
+            id,
+            isMain,
+            isRevision,
+            name ?? typeof(TPersistentDomainObjectBase).ExtractSystemName(),
+            );
 
-        services.AddSingleton<>()
-        services.AddScoped<ITargetSystemService, TargetSystemService<TBLLContext, TPersistentDomainObjectBase>>();
+        this.registerActions.Add(
+            sc =>
+            {
+                sc.AddSingleton(info);
+                sc.AddSingleton<TargetSystemInfo>(info);
+
+                sc.AddScoped<ITargetSystemService, TargetSystemService<TBLLContext, TPersistentDomainObjectBase>>();
+            });
 
         return this;
     }
 
-    public void Initialize()
+    public void Initialize(IServiceCollection services)
     {
+        services.AddScoped<ITargetSystemInitializer, TargetSystemInitializer>();
 
+        this.registerActions.Foreach(action => action(services));
     }
-}
-
-
-public interface ITargetSystemInitializer
-{
-    void Init();
 }

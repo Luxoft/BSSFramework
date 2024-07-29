@@ -1,6 +1,7 @@
 ﻿using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
+
 using Framework.DomainDriven.DBGenerator;
 
 using Microsoft.Extensions.Options;
@@ -19,26 +20,26 @@ public class SampleSystemTestDatabaseGenerator(
 {
     public override IEnumerable<string> TestServers => new List<string> { "." };
 
-    public override void GenerateDatabases()
+    public async override Task GenerateDatabasesAsync()
     {
         new DbGeneratorTest().GenerateAllDB(
-                                            this.DatabaseContext.Main.DataSource,
-                                            mainDatabaseName: this.DatabaseContext.Main.DatabaseName,
-                                            credential: UserCredential.Create(
-                                                                              this.DatabaseContext.Main.UserId,
-                                                                              this.DatabaseContext.Main.Password));
+            this.DatabaseContext.Main.DataSource,
+            mainDatabaseName: this.DatabaseContext.Main.DatabaseName,
+            credential: UserCredential.Create(
+                this.DatabaseContext.Main.UserId,
+                this.DatabaseContext.Main.Password));
     }
 
-    public override void CheckTestDatabase()
+    public override async Task CheckTestDatabaseAsync()
     {
         if (this.DatabaseContext.Server.TableRowCount(this.DatabaseContext.Main.DatabaseName, "Location") > 100)
         {
             throw new Exception(
-                                "Location row count more than 100. Please ensure that you run tests in Test Environment. If you want to run tests in the environment, please delete all Location rows (Location table) manually and rerun tests.");
+                "Location row count more than 100. Please ensure that you run tests in Test Environment. If you want to run tests in the environment, please delete all Location rows (Location table) manually and rerun tests.");
         }
     }
 
-    public override void GenerateTestData() => testDataInitializer.Initialize();
+    public override async Task GenerateTestDataAsync() => await testDataInitializer.InitializeAsync(default);
 
     public override void ExecuteInsertsForDatabases()
     {

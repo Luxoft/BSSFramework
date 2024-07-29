@@ -5,24 +5,16 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject> :
-    BLLContextContainer<TBLLContext>,
+public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject>(TBLLContext context) :
+    BLLContextContainer<TBLLContext>(context),
     ISecurityBLLFactory<TBLL, TDomainObject>
-
     where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject>>, IServiceProviderContainer
     where TDomainObject : class
     where TBLLImpl : TBLL
 {
-    protected SecurityBLLFactory(TBLLContext context)
-        : base(context)
-    {
-    }
-
     public TBLL Create()
     {
-        var disabledProvider = this.Context.SecurityService.GetSecurityProvider<TDomainObject>(SecurityRule.Disabled);
-
-        return this.Create(disabledProvider);
+        return this.Create(SecurityRule.Disabled);
     }
 
     public TBLL Create(SecurityRule securityRule)

@@ -89,7 +89,6 @@ public static class CustomAttributeProviderExtensions
         return source.GetViewDomainObjectAttribute() != null
                || source.GetEditDomainObjectAttribute() != null
                || source.GetDomainObjectAccessAttribute() != null
-               || source.HasAttribute<CustomContextSecurityAttribute>()
                || source.HasAttribute<DependencySecurityAttribute>();
     }
 }

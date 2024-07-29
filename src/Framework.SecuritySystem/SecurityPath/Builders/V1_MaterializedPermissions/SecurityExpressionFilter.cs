@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
-using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
@@ -16,12 +15,9 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
 
     public SecurityExpressionFilter(
         SecurityExpressionBuilderBase<TDomainObject, TIdent> builder,
-        SecurityRule.DomainObjectSecurityRule securityRule,
+        DomainSecurityRule.RoleBaseSecurityRule securityRule,
         IEnumerable<Type> securityTypes)
     {
-        if (builder == null) throw new ArgumentNullException(nameof(builder));
-        if (securityRule == null) throw new ArgumentNullException(nameof(securityRule));
-
         var permissions = builder.Factory.AuthorizationSystem.GetPermissions(securityRule, securityTypes);
 
         var filterExpression = builder.GetSecurityFilterExpression(permissions);
@@ -35,9 +31,7 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
             () => FuncHelper.Create(
                 (TDomainObject domainObject) =>
                 {
-                    var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityRule.SafeExpandType);
-
-                    var filter = baseFilter.OverrideInput((IPrincipal<TIdent> principal) => principal.Permissions);
+                    var filter = builder.GetAccessorsFilter(domainObject, securityRule.SafeExpandType);
 
                     return builder.Factory.AuthorizationSystem.GetNonContextAccessors(securityRule, filter);
                 }));

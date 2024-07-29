@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
@@ -32,6 +31,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
             rb =>
 
                 rb.AddMetadata<SampleSystemEmployeeDomainSecurityServiceMetadata>()
+                  .AddMetadata<SampleSystemEmployeeCellPhoneDomainSecurityServiceMetadata>()
 
                   .Add(SampleSystemSecurityOperation.BusinessUnitView,
                        SampleSystemSecurityOperation.BusinessUnitEdit,
@@ -135,16 +135,15 @@ public static class SampleSystemDomainSecurityServiceExtensions
                       b => b.SetView(SampleSystemSecurityOperation.EmployeeView)
                             .SetPath(SecurityPath<EmployeePhoto>.Create(employeePhoto => employeePhoto.Employee.CoreBusinessUnit)))
 
-                  .Add<EmployeeCellPhone>(b => b.SetDependency(v => v.Employee))
-
                   .Add<ManagementUnitFluentMapping>(
-                      b => b.SetUntypedDependency<ManagementUnit>())
+                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitView)
+                            .SetEdit(SampleSystemSecurityOperation.ManagementUnitEdit))
 
                   .Add<Example1>(
                       b => b.SetView(SampleSystemSecurityOperation.LocationView)
                             .SetEdit(SampleSystemSecurityOperation.LocationEdit))
 
-                  .Add<TestRestrictionObject>(SampleSystemSecurityRole.RestrictionRole, SecurityPath<TestRestrictionObject>.Create(v => v.BusinessUnit))
+                  .Add<TestRestrictionObject>(new[] { SampleSystemSecurityRole.RestrictionRole}, SecurityPath<TestRestrictionObject>.Create(v => v.BusinessUnit))
 
                   .Add<TestCustomContextSecurityObj>(b => b.SetCustomService<SampleSystemTestCustomContextSecurityObjSecurityService>())
 

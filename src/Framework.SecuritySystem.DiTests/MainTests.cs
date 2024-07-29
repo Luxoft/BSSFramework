@@ -140,6 +140,9 @@ public partial class MainTests
 
                    )
 
+               .AddRelativeDomainPath((Employee employee) => employee)
+               .AddSingleton(typeof(TestCheckboxConditionFactory<>))
+
                .AddSingleton(new SecurityPathRestrictionServiceSettings { ValidateSecurityPath = true })
 
                .AddScoped<BusinessUnitAncestorLinkSourceExecuteCounter>()

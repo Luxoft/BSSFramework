@@ -28,16 +28,12 @@ public class InitializeAndCleanup
                                                              .Build();
 
     [AssemblyInitialize]
-    public static void EnvironmentInitialize(TestContext testContext)
-    {
-        TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentInitialize();
-    }
+    public static async Task EnvironmentInitialize(TestContext testContext) =>
+        await TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentInitializeAsync();
 
     [AssemblyCleanup]
-    public static void EnvironmentCleanup()
-    {
-        TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentCleanup();
-    }
+    public static async Task EnvironmentCleanup() =>
+        await TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentCleanupAsync();
 
     private static IServiceCollection GetServices(IConfiguration configuration, IServiceCollection services)
     {

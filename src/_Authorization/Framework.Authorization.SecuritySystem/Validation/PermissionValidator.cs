@@ -124,7 +124,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
         return this.securityRoleSource
                    .GetSecurityRole(delegatedFrom.Role.Id)
-                   .GetAllElements(role => role.Information.Children.Select(subRole => this.securityRoleSource.GetFullRole(subRole)))
+                   .GetAllElements(role => role.Information.Children.Select(subRole => this.securityRoleSource.GetSecurityRole(subRole)))
                    .Contains(this.securityRoleSource.GetSecurityRole(subPermission.Role.Id));
     }
 
@@ -193,7 +193,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
                               let value = (IEnumerable<SecurityEntity>)g
 
-                              select key.ToKeyValuePair(value);
+                              select (key, value);
 
         var invalidRequest2 = from securityContextType in allowedEntitiesDict.Keys
 
@@ -205,7 +205,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
                               let value = (IEnumerable<SecurityEntity>)new[] { new SecurityEntity { Name = "[Not Selected Element]" } }
 
-                              select key.ToKeyValuePair(value);
+                              select (key, value);
 
         return invalidRequest1.Concat(invalidRequest2).ToDictionary();
     }

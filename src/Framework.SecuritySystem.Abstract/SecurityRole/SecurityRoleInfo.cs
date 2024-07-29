@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Framework.HierarchicalExpand;
+﻿using Framework.HierarchicalExpand;
 
 namespace Framework.SecuritySystem;
 

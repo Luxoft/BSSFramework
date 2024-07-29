@@ -311,13 +311,6 @@ public static class PipeObjectExtensions
     }
 
     [Obsolete("v10 This method will be protected in future")]
-    public static bool IsNullOrDefault<T>(T? value)
-            where T : struct, IEquatable<T>
-    {
-        return value.GetValueOrDefault().Equals(default(T));
-    }
-
-    [Obsolete("v10 This method will be protected in future")]
     public static KeyValuePair<TKey, TValue> ToKeyValuePair<TKey, TValue>(this TKey key, TValue value)
     {
         return new KeyValuePair<TKey, TValue>(key, value);

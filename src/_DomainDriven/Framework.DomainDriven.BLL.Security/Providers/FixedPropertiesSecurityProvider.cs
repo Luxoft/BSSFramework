@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Core;
 using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
 
@@ -36,9 +35,9 @@ namespace Framework.DomainDriven.BLL.Security
                    && !this.Context.TrackingService.GetChanges(domainObject).GetUnexpectedChangedProprties(this.allowedPropertiesForChangingExpressions).Any();
         }
 
-        public UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
         {
-            return this.baseSecurityProvider.GetAccessors(domainObject);
+            return this.baseSecurityProvider.GetAccessorData(domainObject);
         }
     }
 }

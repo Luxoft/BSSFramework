@@ -5,6 +5,7 @@ using Framework.Security;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
+using SampleSystem.Security;
 
 namespace SampleSystem.CodeGenerate;
 

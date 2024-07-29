@@ -3,43 +3,33 @@
 using Framework.Core;
 using Framework.QueryableSource;
 
-namespace Framework.SecuritySystem
+namespace Framework.SecuritySystem;
+
+public class DependencySecurityProvider<TDomainObject, TBaseDomainObject>(
+    ISecurityProvider<TBaseDomainObject> baseSecurityProvider,
+    Expression<Func<TDomainObject, TBaseDomainObject>> selector,
+    IQueryableSource queryableSource)
+    : ISecurityProvider<TDomainObject>
 {
-    public class DependencySecurityProvider<TDomainObject, TBaseDomainObject> : ISecurityProvider<TDomainObject>
+    public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
     {
-        private readonly Expression<Func<TDomainObject, TBaseDomainObject>> selector;
+        var baseDomainObjSecurityQ = queryableSource.GetQueryable<TBaseDomainObject>().Pipe(baseSecurityProvider.InjectFilter);
 
-        private readonly IQueryableSource queryableSource;
+        return queryable.Where(selector.Select(domainObj => baseDomainObjSecurityQ.Contains(domainObj)));
+    }
 
-        private readonly ISecurityProvider<TBaseDomainObject> baseSecurityProvider;
+    public AccessResult GetAccessResult(TDomainObject domainObject)
+    {
+        return baseSecurityProvider.GetAccessResult(selector.Eval(domainObject)).TryOverrideDomainObject(domainObject);
+    }
 
-        public DependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseSecurityProvider, Expression<Func<TDomainObject, TBaseDomainObject>> selector, IQueryableSource queryableSource)
-        {
-            this.baseSecurityProvider = baseSecurityProvider ?? throw new ArgumentNullException(nameof(baseSecurityProvider));
-            this.selector = selector ?? throw new ArgumentNullException(nameof(selector));
-            this.queryableSource = queryableSource;
-        }
+    public bool HasAccess(TDomainObject domainObject)
+    {
+        return baseSecurityProvider.HasAccess(selector.Eval(domainObject));
+    }
 
-        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
-        {
-            var baseDomainObjSecurityQ = this.queryableSource.GetQueryable<TBaseDomainObject>().Pipe(this.baseSecurityProvider.InjectFilter);
-
-            return queryable.Where(this.selector.Select(domainObj => baseDomainObjSecurityQ.Contains(domainObj)));
-        }
-
-        public AccessResult GetAccessResult(TDomainObject domainObject)
-        {
-            return this.baseSecurityProvider.GetAccessResult(this.selector.Eval(domainObject)).TryOverrideDomainObject(domainObject);
-        }
-
-        public bool HasAccess(TDomainObject domainObject)
-        {
-            return this.baseSecurityProvider.HasAccess(this.selector.Eval(domainObject));
-        }
-
-        public UnboundedList<string> GetAccessors(TDomainObject domainObject)
-        {
-            return this.baseSecurityProvider.GetAccessors(this.selector.Eval(domainObject));
-        }
+    public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
+    {
+        return baseSecurityProvider.GetAccessorData(selector.Eval(domainObject));
     }
 }

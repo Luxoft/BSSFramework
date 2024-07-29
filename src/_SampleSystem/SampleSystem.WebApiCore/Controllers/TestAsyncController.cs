@@ -1,58 +1,48 @@
 ﻿using Framework.DomainDriven;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
 using NHibernate.Linq;
 
-using SampleSystem.BLL;
+using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]")]
 [ApiController]
-public class TestAsyncController : ControllerBase
+public class TestAsyncController(
+    [ViewSecurity] IRepository<Location> locationViewRepository,
+    [EditSecurity] IRepository<Location> locationEditRepository,
+    ISampleSystemDTOMappingService mappingService)
+    : ControllerBase
 {
-    private readonly ILocationBLLFactory buFactory;
-
-
-    private readonly ISampleSystemDTOMappingService mappingService;
-
-    public TestAsyncController(ILocationBLLFactory buFactory, ISampleSystemDTOMappingService mappingService)
-    {
-        this.buFactory = buFactory;
-        this.mappingService = mappingService;
-    }
-
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost(nameof(AsyncGetLocations))]
     public async Task<List<LocationSimpleDTO>> AsyncGetLocations(CancellationToken cancellationToken = default)
     {
-        var bll = this.buFactory.Create(SecurityRule.View);
+        var list = await locationViewRepository.GetQueryable().ToListAsync(cancellationToken);
 
-        var list = await bll.GetSecureQueryable().ToListAsync(cancellationToken);
-
-        return list.ToSimpleDTOList(this.mappingService);
+        return list.ToSimpleDTOList(mappingService);
     }
 
     [HttpPost(nameof(AsyncSaveLocation))]
-    public async Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
+    public async Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO locationStrictDTO, CancellationToken cancellationToken = default)
     {
-        var bll = this.buFactory.Create(SecurityRule.Edit);
+        var location = locationStrictDTO.ToDomainObject(mappingService, true);
 
-        var bu = businessUnitStrictDTO.ToDomainObject(this.mappingService, true);
+        await locationEditRepository.SaveAsync(location, cancellationToken);
 
-        bll.Save(bu);
-
-        return bu.ToIdentityDTO();
+        return location.ToIdentityDTO();
     }
 
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost(nameof(AsyncSaveLocationWithWriteException))]
-    public async Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
+    public async Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO locationStrictDTO, CancellationToken cancellationToken = default)
     {
-        return await this.AsyncSaveLocation(businessUnitStrictDTO, cancellationToken);
+        return await this.AsyncSaveLocation(locationStrictDTO, cancellationToken);
     }
 
     [HttpGet(nameof(TestDelay))]

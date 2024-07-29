@@ -16,26 +16,23 @@ public static class GeneratorConfigurationExtensions
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        if (securityRule is SecurityRule.SpecialSecurityRule)
+        if (securityRule is SecurityRule.ModeSecurityRule)
         {
             return typeof(SecurityRule).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
         }
-        else if (securityRule is SecurityRule.NonExpandedRolesSecurityRule)
+        else if (securityRule is DomainSecurityRule.NonExpandedRolesSecurityRule)
         {
             return typeof(SecurityRole).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
         }
         else
         {
-            var realSecurityRuleTypes = configuration.Environment.SecurityRuleTypeList;
+            var request = from securityRuleType in configuration.Environment.SecurityRuleTypeList
 
-            var request = from realSecurityRuleType in realSecurityRuleTypes
-
-                          from prop in realSecurityRuleType.GetProperties()
+                          from prop in securityRuleType.GetProperties(BindingFlags.Static | BindingFlags.Public)
 
                           where GetSecurityRule(prop) == securityRule
 
-                          select realSecurityRuleType.ToTypeReferenceExpression().ToPropertyReference(prop);
-
+                          select securityRuleType.ToTypeReferenceExpression().ToPropertyReference(prop);
 
             return request.Single(() => new Exception($"Security rule '{securityRule}' not found"));
         }
@@ -47,17 +44,10 @@ public static class GeneratorConfigurationExtensions
         {
             SecurityOperation securityOperation => securityOperation,
             SecurityRole securityRole => securityRole,
+            SecurityRule securityRule => securityRule,
             _ => null
         };
     }
-
-    public static CodeExpression GetDisabledSecurityCodeExpression(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-    {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-
-        return configuration.GetSecurityCodeExpression(SecurityRule.Disabled);
-    }
-
 
     public static CodeTypeDeclaration GetBLLContextContainerCodeTypeDeclaration(this IGeneratorConfigurationBase configuration, string typeName, bool asAbstract, CodeTypeReference containerType = null)
     {

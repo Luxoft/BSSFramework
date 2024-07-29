@@ -4,8 +4,6 @@ using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.Authorization.SecuritySystem;
 
 public class CurrentPrincipalSource : ICurrentPrincipalSource
@@ -17,7 +15,7 @@ public class CurrentPrincipalSource : ICurrentPrincipalSource
     private readonly Lazy<Principal> currentPrincipalLazy;
 
     public CurrentPrincipalSource(
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
+        [DisabledSecurity] IRepository<Principal> principalRepository,
         IUserAuthenticationService userAuthenticationService)
     {
         this.principalRepository = principalRepository;

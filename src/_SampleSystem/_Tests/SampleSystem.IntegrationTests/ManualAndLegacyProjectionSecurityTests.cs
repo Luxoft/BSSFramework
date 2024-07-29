@@ -1,8 +1,11 @@
 ﻿using FluentAssertions;
 
+using Framework.Authorization.SecuritySystem;
+using Framework.Core;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain.Projections;
@@ -78,12 +81,19 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
         // Arrange
 
         // Act
-        var items = this.Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
-                                                                         {
-                                                                             var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(SecurityRule.View);
+        var items = this.Evaluate(
+            DBSessionMode.Read,
+            TestEmployeeLogin,
+            ctx =>
+            {
+                var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(SecurityRule.View);
 
-                                                                             return bll.GetListBy(v => v.BusinessUnit_Security != null).ToDictionary(v => v.Id, bll.SecurityProvider.GetAccessors);
-                                                                         });
+                var securityAccessorResolver = ctx.ServiceProvider.GetRequiredService<ISecurityAccessorResolver>();
+
+                return bll.GetListBy(v => v.BusinessUnit_Security != null)
+                          .ToDictionary(v => v.Id, bll.SecurityProvider.GetAccessorData)
+                          .ChangeValue(securityAccessorResolver.Resolve);
+            });
 
         // Assert
         items.Count().Should().Be(1);

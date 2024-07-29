@@ -2,13 +2,14 @@
 
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
-
+using Framework.SecuritySystem.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -28,7 +29,7 @@ public class SecurityPathTests : TestBase
                                    {
                                        var securityPath = SecurityPath<Employee>.Create(x => x.Location).Or(_ => false);
 
-                                       var securityProvider = context.ServiceProvider.GetRequiredService<ISecurityPathProviderFactory>().Create(
+                                       var securityProvider = context.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory>().Create(
                                            securityPath,
                                            SampleSystemSecurityOperation.EmployeeView);
 

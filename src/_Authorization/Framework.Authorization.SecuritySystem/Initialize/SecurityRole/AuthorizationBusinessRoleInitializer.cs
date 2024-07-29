@@ -3,7 +3,6 @@ using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using NHibernate.Linq;
@@ -11,19 +10,20 @@ using NHibernate.Linq;
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationBusinessRoleInitializer(
-    [FromKeyedServices(nameof(SecurityRule.Disabled))]
-    IRepository<BusinessRole> businessRoleRepository,
+    [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
     ISecurityRoleSource securityRoleSource,
     ILogger<AuthorizationBusinessRoleInitializer> logger,
     InitializerSettings settings)
     : IAuthorizationBusinessRoleInitializer
 {
-    public async Task Init(CancellationToken cancellationToken)
+    public async Task<MergeResult<BusinessRole, FullSecurityRole>> Init(CancellationToken cancellationToken)
     {
-        await this.Init(securityRoleSource.SecurityRoles, cancellationToken);
+        return await this.Init(securityRoleSource.GetRealRoles(), cancellationToken);
     }
 
-    public async Task Init(IEnumerable<FullSecurityRole> securityRoles, CancellationToken cancellationToken)
+    public async Task<MergeResult<BusinessRole, FullSecurityRole>> Init(
+        IEnumerable<FullSecurityRole> securityRoles,
+        CancellationToken cancellationToken)
     {
         var dbRoles = await businessRoleRepository.GetQueryable().ToListAsync(cancellationToken);
 
@@ -75,10 +75,14 @@ public class AuthorizationBusinessRoleInitializer(
                 await businessRoleRepository.SaveAsync(businessRole, cancellationToken);
             }
         }
+
+        return mergeResult;
     }
 
     private static string GetActualName(FullSecurityRole securityRole)
     {
         return securityRole.Information.CustomName ?? securityRole.Name;
     }
+
+    async Task ISecurityInitializer.Init(CancellationToken cancellationToken) => await this.Init(cancellationToken);
 }

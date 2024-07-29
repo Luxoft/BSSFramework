@@ -21,13 +21,13 @@ public class AssemblyInitializeAndCleanup : AssemblyInitializeAndCleanupBase, IA
         this.releaseServiceProviderAction = releaseServiceProviderAction;
     }
 
-    public void EnvironmentInitialize()
+    public async Task EnvironmentInitializeAsync()
     {
         var serviceProvider = this.getServiceProviderAction.Invoke();
 
         try
         {
-            this.Initialize(serviceProvider);
+            await this.InitializeAsync(serviceProvider);
         }
         finally
         {
@@ -35,12 +35,12 @@ public class AssemblyInitializeAndCleanup : AssemblyInitializeAndCleanupBase, IA
         }
     }
 
-    public void EnvironmentCleanup()
+    public async Task EnvironmentCleanupAsync()
     {
         var serviceProvider = this.getServiceProviderAction.Invoke();
         try
         {
-            this.Cleanup(serviceProvider);
+            await this.CleanupAsync(serviceProvider);
         }
         finally
         {
@@ -48,23 +48,19 @@ public class AssemblyInitializeAndCleanup : AssemblyInitializeAndCleanupBase, IA
         }
     }
 
-    protected void Cleanup(IServiceProvider serviceProvider)
+    protected async Task CleanupAsync(IServiceProvider serviceProvider)
     {
         var settings = serviceProvider.GetRequiredService<IOptions<AutomationFrameworkSettings>>();
         var databaseGenerator = serviceProvider.GetRequiredService<ITestDatabaseGenerator>();
 
-        this.Cleanup(settings.Value, databaseGenerator);
+        await this.CleanupAsync(settings.Value, databaseGenerator);
     }
 
-    protected void Initialize(IServiceProvider serviceProvider)
+    protected async Task InitializeAsync(IServiceProvider serviceProvider)
     {
         var settings = serviceProvider.GetRequiredService<IOptions<AutomationFrameworkSettings>>();
         var databaseGenerator = serviceProvider.GetRequiredService<ITestDatabaseGenerator>();
 
-        // if (!configUtil.UseLocalDb)
-        // {
-        //     RunAction("Check Server Name in allowed list", databaseGenerator.CheckServerAllowed);
-        // }
-        this.Initialize(settings.Value, databaseGenerator);
+        await this.InitializeAsync(settings.Value, databaseGenerator);
     }
 }

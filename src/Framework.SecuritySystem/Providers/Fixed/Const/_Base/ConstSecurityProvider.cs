@@ -1,25 +1,9 @@
-﻿using Framework.Core;
+﻿namespace Framework.SecuritySystem;
 
-namespace Framework.SecuritySystem
+public class ConstSecurityProvider<TDomainObject>(bool hasAccess) : FixedSecurityProvider<TDomainObject>
 {
-    public class ConstSecurityProvider<TDomainObject> : FixedSecurityProvider<TDomainObject>
-    {
-        private readonly bool hasAccess;
+    protected sealed override bool HasAccess() => hasAccess;
 
-        public ConstSecurityProvider(bool hasAccess)
-        {
-            this.hasAccess = hasAccess;
-        }
-
-
-        protected sealed override bool HasAccess()
-        {
-            return this.hasAccess;
-        }
-
-        public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
-        {
-            return this.hasAccess ? UnboundedList<string>.Infinity : UnboundedList<string>.Empty;
-        }
-    }
+    public override SecurityAccessorData GetAccessorData(TDomainObject domainObject) =>
+        hasAccess ? SecurityAccessorData.Infinity : SecurityAccessorData.Empty;
 }

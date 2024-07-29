@@ -105,7 +105,7 @@ internal class GeneratedType : BaseTypeImpl
 
                 var implementedArgs = securityNodeInterface.GetGenericArguments();
 
-                var argDict = genericArgs.ZipStrong(implementedArgs, (genArg, implArg) => genArg.ToKeyValuePair(implArg)).ToDictionary();
+                var argDict = genericArgs.ZipStrong(implementedArgs, (genArg, implArg) => (genArg, implArg)).ToDictionary();
 
                 var wrappedSubInterfaces = genericDefinition.GetAllInterfaces(false).ToArray();
 

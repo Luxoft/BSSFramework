@@ -14,7 +14,5 @@
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.Notification.Abstract\Framework.Notification.Abstract.csproj" />
-
-    <ProjectReference Include="..\SampleSystem.Core\SampleSystem.Core.csproj" />
   </ItemGroup>
 </Project>

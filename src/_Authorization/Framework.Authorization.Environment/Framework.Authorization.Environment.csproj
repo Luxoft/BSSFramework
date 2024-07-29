@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
     <ProjectReference Include="..\Framework.Authorization.SecuritySystem\Framework.Authorization.SecuritySystem.csproj" />
   </ItemGroup>
 

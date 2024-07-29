@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-
 using Framework.HierarchicalExpand;
+using Framework.SecuritySystem.Expanders;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,7 +17,7 @@ public partial class MainTests
         var securityRoleSource = this.rootServiceProvider.GetRequiredService<ISecurityRoleSource>();
 
         // Act
-        var adminRole = securityRoleSource.GetFullRole(SecurityRole.Administrator);
+        var adminRole = securityRoleSource.GetSecurityRole(SecurityRole.Administrator);
 
         // Assert
         adminRole.Information.Children.Contains(SecurityRole.SystemIntegration).Should().BeFalse();
@@ -30,7 +30,7 @@ public partial class MainTests
         var expander = this.rootServiceProvider.GetRequiredService<SecurityRoleExpander>();
 
         // Act
-        var expandResult = expander.Expand(ExampleSecurityRole.TestRole3.ToSecurityRule());
+        var expandResult = expander.Expand(ExampleSecurityRole.TestRole3);
 
         // Assert
         expandResult.SecurityRoles.Should().BeEquivalentTo(
@@ -47,7 +47,7 @@ public partial class MainTests
         var expander = this.rootServiceProvider.GetRequiredService<SecurityOperationExpander>();
 
         // Act
-        var expandResult = expander.Expand(new SecurityRule.OperationSecurityRule(ExampleSecurityOperation.EmployeeView));
+        var expandResult = expander.Expand(new DomainSecurityRule.OperationSecurityRule(ExampleSecurityOperation.EmployeeView));
 
         // Assert
         expandResult.SecurityRoles.Should().BeEquivalentTo(new[] { ExampleSecurityRole.TestRole });
@@ -77,7 +77,6 @@ public partial class MainTests
 
         // Assert
         expandResult.Should()
-                    .ContainSingle()
                     .Subject
                     .Should()
                     .BeEquivalentTo(
@@ -95,7 +94,6 @@ public partial class MainTests
 
         // Assert
         expandResult.Should()
-                    .ContainSingle()
                     .Subject
                     .Should()
                     .BeEquivalentTo(

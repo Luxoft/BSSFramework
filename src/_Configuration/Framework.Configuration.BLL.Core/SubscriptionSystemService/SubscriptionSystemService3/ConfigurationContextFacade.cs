@@ -5,7 +5,6 @@ using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.ExternalSystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,12 +35,12 @@ public class ConfigurationContextFacade
     public IServiceProvider ServiceProvider => this.context.ServiceProvider;
 
     /// <summary>
-    ///     Преобразует список экземпляров <see cref="IPrincipal{Guid}" /> в список экземпляров <see cref="IEmployee" />.
+    ///     Преобразует список экземпляров <see cref="Principal" /> в список экземпляров <see cref="IEmployee" />.
     /// </summary>
-    /// <param name="principals">Cписок экземпляров <see cref="IPrincipal{Guid}" />.</param>
+    /// <param name="principals">Cписок экземпляров <see cref="Principal" />.</param>
     /// <returns>Экземпляр <see cref="IEnumerable{IEmployee}" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент principals равен null.</exception>
-    public virtual IEnumerable<IEmployee> ConvertPrincipals(IEnumerable<IPrincipal<Guid>> principals)
+    public virtual IEnumerable<IEmployee> ConvertPrincipals(IEnumerable<Principal> principals)
     {
         if (principals == null)
         {

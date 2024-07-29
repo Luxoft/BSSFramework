@@ -4,8 +4,6 @@ using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using NHibernate.Linq;
 
 namespace Framework.Configuration.NamedLocks;
@@ -17,7 +15,7 @@ public class NamedLockInitializer : INamedLockInitializer
     private readonly INamedLockSource namedLockSource;
 
     public NamedLockInitializer(
-        [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<GenericNamedLock> namedLockRepository,
+        [DisabledSecurity] IRepository<GenericNamedLock> namedLockRepository,
         INamedLockSource namedLockSource)
     {
         this.namedLockRepository = namedLockRepository;

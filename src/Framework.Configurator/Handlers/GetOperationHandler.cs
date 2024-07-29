@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.Environment.Security;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.DomainDriven.Repository;
@@ -18,11 +19,11 @@ public class GetOperationHandler(
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdministrator()) return new OperationDetailsDto { BusinessRoles = [], Principals = [] };
+        if (!operationAccessor.IsSecurityAdministrator()) return new OperationDetailsDto { BusinessRoles = [], Principals = [] };
 
         var operationName = (string)context.Request.RouteValues["name"]!;
 
-        var roles = roleSource.SecurityRoles
+        var roles = roleSource.GetRealRoles()
                               .Where(x => x.Information.Operations.Any(o => o.Name == operationName))
                               .ToList();
 

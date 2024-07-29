@@ -3,6 +3,7 @@
 using Framework.Authorization.Notification;
 using Framework.Events;
 using Framework.Persistent;
+using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 
 namespace Framework.DomainDriven.Setup;
@@ -28,6 +29,8 @@ public interface IBssFrameworkSettings
     IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
 
-    IBssFrameworkSettings SetPrincipalIdentitySource<TDomainObject>(Expression<Func<TDomainObject, string>> namePath)
+    IBssFrameworkSettings SetPrincipalIdentitySource<TDomainObject>(Expression<Func<TDomainObject, bool>> filter, Expression<Func<TDomainObject, string>> namePath)
         where TDomainObject : IIdentityObject<Guid>;
+
+    IBssFrameworkSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule);
 }

@@ -30,7 +30,7 @@ public partial class TargetSystemBLL
 
                       where !id.IsDefault()
 
-                      select id.ToKeyValuePair(type);
+                      select (id, type);
 
         return this.Register(typeof(TPersistentDomainObjectBase).GetTargetSystemName(), false, isMain, isRevision, typeof(TPersistentDomainObjectBase).GetTargetSystemId(), request.ToDictionary().Concat(extTypes ?? new Dictionary<Guid, Type>()));
     }

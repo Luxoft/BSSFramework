@@ -16,6 +16,7 @@ using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate;
 using Framework.Events;
 using Framework.OData;
+using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -39,12 +40,13 @@ public class EmployeeTests : TestBase
         // Arrange
         this.DataHelper.SaveEmployee(Guid.NewGuid(), age: 10);
         CoreDatabaseUtil.ExecuteSql(
-                                    this.DatabaseContext.Main.ConnectionString,
-                                    "INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
+            this.DatabaseContext.Main.ConnectionString,
+            "INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
 
         // Act, IntegrationNamespace
-        var actual = this.Evaluate(DBSessionMode.Read,
-                                   ctx => ctx.Logics.Employee.GetUnsecureQueryable().Where(q => q.Age == 10).ToList());
+        var actual = this.Evaluate(
+            DBSessionMode.Read,
+            ctx => ctx.Logics.Employee.GetUnsecureQueryable().Where(q => q.Age == 10).ToList());
 
         // Assert
         actual.Count().Should().Be(1);
@@ -97,11 +99,7 @@ public class EmployeeTests : TestBase
         var employeeController = this.MainWebApi.Employee;
         var employeeQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
-        var idToPinMap = new Dictionary<Guid, int>
-                         {
-                                 { Guid.NewGuid(), 123 },
-                                 { Guid.NewGuid(), 456 }
-                         };
+        var idToPinMap = new Dictionary<Guid, int> { { Guid.NewGuid(), 123 }, { Guid.NewGuid(), 456 } };
 
         /*
          https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/comparing-guid-and-uniqueidentifier-values
@@ -120,7 +118,8 @@ public class EmployeeTests : TestBase
         }
 
         // Act
-        var result = employeeQueryController.Evaluate(c => c.GetSimpleEmployeesByODataQueryString("$top=1&$filter=Pin eq 123 or Pin eq 456"));
+        var result = employeeQueryController.Evaluate(
+            c => c.GetSimpleEmployeesByODataQueryString("$top=1&$filter=Pin eq 123 or Pin eq 456"));
 
         // Assert
         var minId = sqlGuids[0].Value;
@@ -141,11 +140,7 @@ public class EmployeeTests : TestBase
         var employeeController = this.MainWebApi.Employee;
         var employeeQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
-        var idToPinMap = new Dictionary<Guid, int>
-                         {
-                                 { Guid.NewGuid(), 123 },
-                                 { Guid.NewGuid(), 456 }
-                         };
+        var idToPinMap = new Dictionary<Guid, int> { { Guid.NewGuid(), 123 }, { Guid.NewGuid(), 456 } };
 
         /*
          https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/comparing-guid-and-uniqueidentifier-values
@@ -164,7 +159,8 @@ public class EmployeeTests : TestBase
         }
 
         // Act
-        var result = employeeQueryController.Evaluate(c => c.GetSimpleEmployeesByODataQueryString("$top=1&$skip=1&$filter=Pin eq 123 or Pin eq 456"));
+        var result = employeeQueryController.Evaluate(
+            c => c.GetSimpleEmployeesByODataQueryString("$top=1&$skip=1&$filter=Pin eq 123 or Pin eq 456"));
 
         // Assert
         var minId = sqlGuids[0].Value;
@@ -194,7 +190,8 @@ public class EmployeeTests : TestBase
         }
 
         // Act
-        var result = employeeQueryController.Evaluate(c => c.GetSimpleEmployeesByODataQueryString("$top=1&$skip=1&$filter=Pin eq 123 or Pin eq 456&$orderby=Pin desc"));
+        var result = employeeQueryController.Evaluate(
+            c => c.GetSimpleEmployeesByODataQueryString("$top=1&$skip=1&$filter=Pin eq 123 or Pin eq 456&$orderby=Pin desc"));
 
         // Assert
         var pins = result.Items.Select(x => x.Pin).ToArray();
@@ -217,16 +214,17 @@ public class EmployeeTests : TestBase
         this.ClearIntegrationEvents();
 
         // Act
-        configFacade.Evaluate(c => c.ForceDomainTypeEvent(new DomainTypeEventModelStrictDTO
-                                                          {
-                                                                  Operation = operation.Identity,
-
-                                                                  DomainObjectIdents = new List<Guid> { employeeIdentity.Id }
-                                                          }));
+        configFacade.Evaluate(
+            c => c.ForceDomainTypeEvent(
+                new DomainTypeEventModelStrictDTO
+                {
+                    Operation = operation.Identity, DomainObjectIdents = new List<Guid> { employeeIdentity.Id }
+                }));
 
         // Assert
         this.GetIntegrationEvents<EmployeeSaveEventDTO>().Should().ContainSingle(dto => dto.Employee.Id == employeeIdentity.Id);
-        this.GetIntegrationEvents<EmployeeCustomEventModelSaveEventDTO>().Should().ContainSingle(dto => dto.EmployeeCustomEventModel.Id == employeeIdentity.Id);
+        this.GetIntegrationEvents<EmployeeCustomEventModelSaveEventDTO>().Should()
+            .ContainSingle(dto => dto.EmployeeCustomEventModel.Id == employeeIdentity.Id);
     }
 
     [TestMethod]
@@ -241,7 +239,9 @@ public class EmployeeTests : TestBase
         this.ClearNotifications();
         this.ClearModifications();
 
-        employeeController.Evaluate(c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
+        employeeController.Evaluate(
+            c => c.UpdateEmployee(
+                new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
 
         var restFacade = this.GetConfigurationControllerEvaluator();
 
@@ -257,7 +257,10 @@ public class EmployeeTests : TestBase
         processedModCount.Should().BeGreaterThan(0);
 
         modifications.Should().ContainSingle(dto => dto.ModificationType == ModificationType.Save && dto.Identity == employeeIdentity.Id);
-        notifications.Should().ContainSingle(dto => dto.From=="SampleSystem@luxoft.com" && dto.Message.Message.Contains("Hi there!!!") && dto.TechnicalInformation.ContextObjectId == employeeIdentity.Id);
+        notifications.Should().ContainSingle(
+            dto => dto.From == "SampleSystem@luxoft.com"
+                   && dto.Message.Message.Contains("Hi there!!!")
+                   && dto.TechnicalInformation.ContextObjectId == employeeIdentity.Id);
     }
 
     [TestMethod]
@@ -271,7 +274,9 @@ public class EmployeeTests : TestBase
         this.ClearNotifications();
         this.ClearModifications();
 
-        employeeController.Evaluate(c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
+        employeeController.Evaluate(
+            c => c.UpdateEmployee(
+                new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
 
         var restFacade = this.GetConfigurationControllerEvaluator();
 
@@ -303,7 +308,9 @@ public class EmployeeTests : TestBase
         this.ClearIntegrationEvents();
 
         // Act
-        employeeController.Evaluate(c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
+        employeeController.Evaluate(
+            c => c.UpdateEmployee(
+                new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
 
         // Assert
         this.GetIntegrationEvents<EmployeeSaveEventDTO>("ariba").Should().ContainSingle(dto => dto.Employee.Id == employeeIdentity.Id);
@@ -313,14 +320,15 @@ public class EmployeeTests : TestBase
     [Ignore]
     public void EventListenerTest()
     {
-        this.Evaluate(DBSessionMode.Write,
-                      bllContext =>
-                      {
-                          var dbSession = bllContext.ServiceProvider.GetRequiredService<IDBSession>();
-                          var writeNhibSession = dbSession as WriteNHibSession;
-                          var impl = writeNhibSession.NativeSession as SessionImpl;
-                          return;
-                      });
+        this.Evaluate(
+            DBSessionMode.Write,
+            bllContext =>
+            {
+                var dbSession = bllContext.ServiceProvider.GetRequiredService<IDBSession>();
+                var writeNhibSession = dbSession as WriteNHibSession;
+                var impl = writeNhibSession.NativeSession as SessionImpl;
+                return;
+            });
     }
 
 
@@ -333,7 +341,9 @@ public class EmployeeTests : TestBase
         var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
 
         // Act
-        var call = new Action(() => employeeController.Evaluate(c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234") })));
+        var call = new Action(
+            () => employeeController.Evaluate(
+                c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234") })));
 
         // Assert
         call.Should().Throw<Exception>().WithMessage($"Object '{nameof(Employee)}' was updated or deleted by another transaction");
@@ -346,19 +356,37 @@ public class EmployeeTests : TestBase
         var buIdentity = this.DataHelper.SaveBusinessUnit();
 
         // Act
-        var isVirtualResult = this.Evaluate(DBSessionMode.Read, ctx =>
-                                                                {
-                                                                    var filter = new TestEmployeeFilter
-                                                                                 {
-                                                                                         BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdentity.Id, true)
-                                                                                 };
+        var isVirtualResult = this.Evaluate(
+            DBSessionMode.Read,
+            ctx =>
+            {
+                var filter = new TestEmployeeFilter { BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdentity.Id, true) };
 
-                                                                    var operation = SelectOperation<Employee>.Default.AddFilter(e => e.CoreBusinessUnit.Id == filter.BusinessUnit.Id);
+                var operation = SelectOperation<Employee>.Default.AddFilter(e => e.CoreBusinessUnit.Id == filter.BusinessUnit.Id);
 
-                                                                    return operation.IsVirtual;
-                                                                });
+                return operation.IsVirtual;
+            });
 
         // Assert
         isVirtualResult.Should().Be(false);
+    }
+
+    [TestMethod]
+    public void LoadEmployeeCellPhoneByDependencySecurity_ObjectLoaded()
+    {
+        // Arrange
+
+        // Act
+        var notNull = this.Evaluate(
+            DBSessionMode.Read,
+            ctx =>
+            {
+                var objects = ctx.Logics.Default.Create<EmployeeCellPhone>(SecurityRule.View).GetFullList();
+
+                return objects != null;
+            });
+
+        // Assert
+        notNull.Should().Be(true);
     }
 }

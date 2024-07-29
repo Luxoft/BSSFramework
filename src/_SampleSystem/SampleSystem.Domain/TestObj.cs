@@ -11,3 +11,4 @@ public class TestObj : DomainObjectBase
     [RestrictionExtension(typeof(RequiredAttribute), CustomError = "aaaa", OperationContext = (int)SampleSystemOperationContext.Save )]
     public Fio FS { get; set; }
 }
+

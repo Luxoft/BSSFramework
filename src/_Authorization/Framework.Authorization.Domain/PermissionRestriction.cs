@@ -61,7 +61,9 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
         set { this.securityContextId = value; }
     }
 
-    Permission IDetail<Permission>.Master => this.Permission;
+    [ExpandPath("SecurityContextType.Id")]
+    [CustomSerialization(CustomSerializationMode.Ignore)]
+    public virtual Guid SecurityContextTypeId => this.SecurityContextType.Id;
 
-    ISecurityContextType<Guid> IPermissionRestriction<Guid>.SecurityContextType => this.SecurityContextType;
+    Permission IDetail<Permission>.Master => this.Permission;
 }

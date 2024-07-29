@@ -6,13 +6,20 @@ namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuil
 
 public interface IDomainSecurityServiceBuilder<TDomainObject>
 {
-    IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityRule securityRule);
+    IDomainSecurityServiceBuilder<TDomainObject> SetView(DomainSecurityRule securityRule);
 
-    IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityRule securityRule);
+    IDomainSecurityServiceBuilder<TDomainObject> SetEdit(DomainSecurityRule securityRule);
 
     IDomainSecurityServiceBuilder<TDomainObject> SetPath(SecurityPath<TDomainObject> securityPath);
 
-    IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> securityPath);
+    /// <summary>
+    /// RelativeDomainPathInfo must be registered
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>();
+
+    IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> relativeDomainPath);
 
     /// <summary>
     /// For projection

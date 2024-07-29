@@ -5,6 +5,7 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.QueryableSource;
 using Framework.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Expanders;
 
 namespace Framework.DomainDriven.BLLCoreGenerator
 {
@@ -38,7 +39,6 @@ namespace Framework.DomainDriven.BLLCoreGenerator
 
         public override IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters()
         {
-            yield return (typeof(ISecurityProvider<>).ToTypeReference(this.DomainType), "disabledSecurityProvider", null);
             yield return (typeof(ISecurityRuleExpander).ToTypeReference(), "securityRuleExpander", null);
             yield return (typeof(IDomainSecurityService<>).ToTypeReference(this.dependencySecurityAttr.SourceType), "baseDomainSecurityService", null);
             yield return (typeof(IQueryableSource).ToTypeReference(), "queryableSource", null);

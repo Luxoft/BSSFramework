@@ -7,5 +7,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />
+    <ProjectReference Include="..\SampleSystem.Security.Abstract\SampleSystem.Security.Abstract.csproj" />
   </ItemGroup>
 </Project>

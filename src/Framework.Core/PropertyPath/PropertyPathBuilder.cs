@@ -147,7 +147,7 @@ public static class PropertyPathBuilder
 
             var member = (MemberExpression)propLambda.Body;
 
-            yield return callExpression.Method.ToKeyValuePair((PropertyInfo)member.Member);
+            yield return new (callExpression.Method, (PropertyInfo)member.Member);
         }
     }
 }

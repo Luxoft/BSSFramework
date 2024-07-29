@@ -4,7 +4,7 @@ using Framework.Core;
 using Framework.DomainDriven;
 
 using Framework.SecuritySystem;
-
+using Framework.SecuritySystem.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,6 +12,7 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -69,7 +70,7 @@ public class ExtraQueryableSecurityPathTests : TestBase
                                                                .And(e => e.Location, SingleSecurityMode.Strictly)
                                                                .And(e => extraQueryableSecurity.Where(l => l == e.Location && e.Location.Id == this.loc1Ident.Id), ManySecurityPathMode.AnyStrictly);
 
-                                                       return context.ServiceProvider.GetRequiredService<ISecurityPathProviderFactory>().Create(
+                                                       return context.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory>().Create(
                                                            extraSecurityPath,
                                                            SampleSystemSecurityOperation.EmployeeView);
                                                    });

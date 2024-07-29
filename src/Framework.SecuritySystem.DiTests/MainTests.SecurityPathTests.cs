@@ -22,7 +22,7 @@ public partial class MainTests
 
         var baseSecurityPath = SecurityPath<Employee>.Create(buExpr).And(locationExpr);
 
-        var restriction = SecurityPathRestriction.Create<BusinessUnit>().Add(conditionExpr);
+        var restriction = SecurityPathRestriction.Create<BusinessUnit>().AddCondition(typeof(TestCheckboxConditionFactory<>));
 
         var expectedNewSecurityPath = SecurityPath<Employee>.Create(buExpr).And(conditionExpr);
 
@@ -47,6 +47,8 @@ public partial class MainTests
         var getResult = () => service.ApplyRestriction(baseSecurityPath, restriction);
 
         //Assert
-        getResult.Should().Throw<Exception>($"Can't apply restriction. Invalid types: {nameof(Location)}");
+        getResult.Should()
+                 .Throw<Exception>()
+                 .WithMessage($"Can't apply restriction. Invalid types: {nameof(Location)}");
     }
 }

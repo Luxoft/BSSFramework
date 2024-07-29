@@ -135,6 +135,10 @@ public class Permission : AuditPersistentDomainObjectBase,
         set { this.comment = value.TrimNull(); }
     }
 
+    [ExpandPath("Principal.Name")]
+    [CustomSerialization(CustomSerializationMode.Ignore)]
+    public virtual string PrincipalName => this.Principal.Name;
+
     ICollection<PermissionRestriction> IMaster<PermissionRestriction>.Details => (ICollection<PermissionRestriction>)this.Restrictions;
 
     Principal IDetail<Principal>.Master => this.Principal;

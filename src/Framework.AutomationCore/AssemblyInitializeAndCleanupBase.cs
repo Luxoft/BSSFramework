@@ -23,45 +23,46 @@ public class AssemblyInitializeAndCleanupBase
         Console.WriteLine();
     }
 
-    protected virtual void Cleanup(AutomationFrameworkSettings settings, ITestDatabaseGenerator databaseGenerator)
+    protected virtual async Task CleanupAsync(AutomationFrameworkSettings settings, ITestDatabaseGenerator databaseGenerator)
     {
         switch (settings.TestRunMode)
         {
             case TestRunMode.DefaultRunModeOnEmptyDatabase:
-                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                RunAction("Drop Databases", databaseGenerator.DatabaseContext.Drop);
-                RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
-                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
+                await databaseGenerator.CheckTestDatabaseAsync();
+                databaseGenerator.DatabaseContext.Drop();
+                databaseGenerator.DeleteDetachedFiles();
+                databaseGenerator.DeleteLocalDb();
                 break;
 
             default:
-                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
+                databaseGenerator.DeleteLocalDb();
                 break;
         }
     }
 
-    protected virtual void Initialize(AutomationFrameworkSettings settings, ITestDatabaseGenerator databaseGenerator)
+
+    protected virtual async Task InitializeAsync(AutomationFrameworkSettings settings, ITestDatabaseGenerator databaseGenerator)
     {
         switch (settings.TestRunMode)
         {
             case TestRunMode.RestoreDatabaseUsingAttach:
-                RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
-                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                databaseGenerator.CheckAndCreateDetachedFiles();
+                databaseGenerator.CreateLocalDb();
+                await databaseGenerator.CheckTestDatabaseAsync();
+                await databaseGenerator.CheckAndCreateDetachedFilesAsync();
                 databaseGenerator.DatabaseContext.Drop();
                 break;
             case TestRunMode.GenerateTestDataOnExistingDatabase:
                 break;
             default:
-                RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
-                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
-                RunAction("Drop and Create Databases", databaseGenerator.DatabaseContext.ReCreate);
-                RunAction("Generate All Databases", databaseGenerator.GenerateDatabases);
-                RunAction("Insert Statements", databaseGenerator.ExecuteInsertsForDatabases);
-                RunAction("Test Data Initialize", databaseGenerator.GenerateTestData);
-                RunAction("Backup Databases", databaseGenerator.DatabaseContext.CopyDetachedFiles);
-                RunAction("Drop Database", databaseGenerator.DatabaseContext.Drop);
+                databaseGenerator.CreateLocalDb();
+                await databaseGenerator.CheckTestDatabaseAsync();
+                databaseGenerator.DeleteDetachedFiles();
+                databaseGenerator.DatabaseContext.ReCreate();
+                await databaseGenerator.GenerateDatabasesAsync();
+                databaseGenerator.ExecuteInsertsForDatabases();
+                await databaseGenerator.GenerateTestDataAsync();
+                databaseGenerator.DatabaseContext.CopyDetachedFiles();
+                databaseGenerator.DatabaseContext.Drop();
                 break;
         }
     }

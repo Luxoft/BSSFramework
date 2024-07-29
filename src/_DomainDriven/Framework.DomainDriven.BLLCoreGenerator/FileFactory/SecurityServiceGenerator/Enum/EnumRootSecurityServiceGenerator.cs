@@ -25,14 +25,7 @@ public class EnumRootSecurityServiceGenerator<TConfiguration> : RootSecurityServ
 
         if (dependencySecurityAttr == null)
         {
-            if (domainType.HasAttribute<CustomContextSecurityAttribute>())
-            {
-                return new CustomContextDomainSecurityServiceGenerator<TConfiguration>(this.Configuration, domainType);
-            }
-            else
-            {
-                return new EnumDomainSecurityServiceGenerator<TConfiguration>(this.Configuration, domainType);
-            }
+            return new EnumDomainSecurityServiceGenerator<TConfiguration>(this.Configuration, domainType);
         }
         else
         {
@@ -53,7 +46,7 @@ public class EnumRootSecurityServiceGenerator<TConfiguration> : RootSecurityServ
 
                where !domainType.IsProjection()
 
-               where !domainType.HasAttribute<CustomContextSecurityAttribute>() && !domainType.HasAttribute<DependencySecurityAttribute>()
+               where !domainType.HasAttribute<DependencySecurityAttribute>()
 
                let typeParameters = this.Configuration.GetDomainTypeSecurityParameters(domainType).ToArray()
 

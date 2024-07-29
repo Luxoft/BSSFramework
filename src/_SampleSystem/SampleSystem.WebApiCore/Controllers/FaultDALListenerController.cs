@@ -2,7 +2,6 @@
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +21,7 @@ public class FaultDALListenerController : ControllerBase
     public FaultDALListenerController(ExampleFaultDALListener listener, IRepositoryFactory<NoSecurityObject> repositoryFactory)
     {
         this.listener = listener;
-        this.repository = repositoryFactory.Create(SecurityRule.Disabled);
+        this.repository = repositoryFactory.Create();
     }
 
     [HttpPost(nameof(TestFault))]

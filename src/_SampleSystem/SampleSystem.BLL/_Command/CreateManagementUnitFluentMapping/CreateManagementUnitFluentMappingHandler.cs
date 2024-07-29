@@ -1,6 +1,4 @@
-﻿using Framework.SecuritySystem;
-
-using MediatR;
+﻿using MediatR;
 
 using SampleSystem.Domain;
 
@@ -12,7 +10,7 @@ public class CreateManagementUnitFluentMappingHandler(IManagementUnitFluentMappi
     public async Task<Guid> Handle(CreateManagementUnitFluentMappingCommand request, CancellationToken cancellationToken)
     {
         var mu = new ManagementUnitFluentMapping { Name = request.Name, Period = request.Period };
-        managementUnitFluentMappingBllFactory.Create(SecurityRule.Disabled).Save(mu);
+        managementUnitFluentMappingBllFactory.Create().Save(mu);
 
         return mu.Id;
     }

@@ -6,16 +6,14 @@ using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Automation.ServiceEnvironment;
 
 public class AuthManager(
     IUserAuthenticationService userAuthenticationService,
     ISecurityContextInfoService securityContextInfoService,
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<Principal> principalRepository,
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<BusinessRole> businessRoleRepository,
-    [FromKeyedServices(nameof(SecurityRule.Disabled))] IRepository<SecurityContextType> securityContextTypeRepository,
+    [DisabledSecurity] IRepository<Principal> principalRepository,
+    [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
+    [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
     ISecurityRoleSource securityRoleSource,
     IPrincipalDomainService principalDomainService)
 {
@@ -37,7 +35,12 @@ public class AuthManager(
 
         foreach (var testPermission in testPermissions)
         {
-            var securityRole = securityRoleSource.GetFullRole(testPermission.SecurityRole);
+            var securityRole = securityRoleSource.GetSecurityRole(testPermission.SecurityRole);
+
+            if (securityRole.IsVirtual)
+            {
+                throw new Exception($"Assigned {nameof(SecurityRole)} {securityRole} can't be virtual");
+            }
 
             var businessRole = await businessRoleRepository.LoadAsync(securityRole.Id, cancellationToken);
 

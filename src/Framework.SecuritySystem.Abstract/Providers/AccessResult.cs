@@ -14,9 +14,9 @@ public abstract record AccessResult
 
     public record AccessDeniedResult : AccessResult
     {
-        public SecurityRule SecurityRule { get; init; }
+        public SecurityRule? SecurityRule { get; init; }
 
-        public string CustomMessage { get; init; }
+        public string? CustomMessage { get; init; }
 
         public (object DomainObject, Type DomainObjectType)? DomainObjectInfo { get; init; }
 
@@ -26,8 +26,8 @@ public abstract record AccessResult
         public override AccessResult And(AccessResult otherAccessResult) => this;
 
 
-        public static AccessDeniedResult Create<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule = null) =>
-            new() { DomainObjectInfo = (domainObject, typeof(TDomainObject)), SecurityRule = securityRule };
+        public static AccessDeniedResult Create<TDomainObject>(TDomainObject domainObject, SecurityRule? securityRule = null) =>
+            new() { DomainObjectInfo = (domainObject, typeof(TDomainObject))!, SecurityRule = securityRule };
 
         public static readonly AccessDeniedResult Default = new();
     }

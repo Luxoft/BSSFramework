@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.Repository;
+﻿using System.Collections.ObjectModel;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using NHibernate.Linq;
@@ -7,20 +8,14 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.BLL;
 
-public class ExampleServiceForRepository : IExampleServiceForRepository
+public class ExampleServiceForRepository(
+    IRepositoryFactory<Employee> employeeRepositoryFactory,
+    IRepositoryFactory<BusinessUnit> businessUnitRepository)
+    : IExampleServiceForRepository
 {
-    private readonly IRepository<Employee> employeeRepository;
+    private readonly IRepository<Employee> employeeRepository = employeeRepositoryFactory.Create();
 
-    private readonly IRepository<BusinessUnit> businessUnitRepository;
-
-    public ExampleServiceForRepository(
-            IRepositoryFactory<Employee> employeeRepositoryFactory,
-            IRepositoryFactory<BusinessUnit> businessUnitRepository)
-    {
-        this.employeeRepository = employeeRepositoryFactory.Create(SecurityRule.Disabled);
-
-        this.businessUnitRepository = businessUnitRepository.Create(SampleSystemSecurityOperation.BusinessUnitView);
-    }
+    private readonly IRepository<BusinessUnit> businessUnitRepository = businessUnitRepository.Create(SecurityRule.View);
 
     public async Task<(List<Employee> Employees, List<BusinessUnit> BusinessUnits)> LoadPair(CancellationToken cancellationToken = default)
     {

@@ -2,7 +2,7 @@
 
 public interface IAssemblyInitializeAndCleanup
 {
-    public void EnvironmentInitialize();
+    Task EnvironmentInitializeAsync();
 
-    public void EnvironmentCleanup();
+    Task EnvironmentCleanupAsync();
 }

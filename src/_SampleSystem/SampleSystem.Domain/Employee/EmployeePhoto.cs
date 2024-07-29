@@ -9,6 +9,8 @@ namespace SampleSystem.Domain;
 [BLLViewRole]
 public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>, ITypeObject<EmployeePhotoType>
 {
+    public const int DEFAULT_PHOTO_MAX_SIZE = 1024 * 1024;
+
     private readonly Employee employee;
 
     private string contentType;
@@ -56,7 +58,7 @@ public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>,
     }
 
     [Mapping(ColumnName = "Photo")]
-    [MaxLength(SampleSystemSystemConstant.DEFAULT_PHOTO_MAX_SIZE)]
+    [MaxLength(DEFAULT_PHOTO_MAX_SIZE)]
     [Framework.Restriction.Required]
     public virtual byte[] Data
     {

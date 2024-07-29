@@ -4,7 +4,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.Security;
 using Framework.SecuritySystem;
-
+using Framework.SecuritySystem.Expanders;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;

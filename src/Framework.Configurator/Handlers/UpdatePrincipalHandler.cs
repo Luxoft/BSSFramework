@@ -4,12 +4,11 @@ using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePrincipalHandler(
-    [FromKeyedServices(nameof(SecurityRole.Administrator))] IRepository<Principal> PrincipalRepository,
+    [EditSecurity] IRepository<Principal> PrincipalRepository,
     //IPrincipalGeneralValidator PrincipalValidator,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
     : BaseWriteHandler, IUpdatePrincipalHandler

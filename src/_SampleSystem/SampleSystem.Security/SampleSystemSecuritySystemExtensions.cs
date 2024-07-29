@@ -4,6 +4,7 @@ using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 
 using SampleSystem.Domain;
+using SampleSystem.Security.Services;
 
 namespace SampleSystem.Security;
 
@@ -28,14 +29,14 @@ public static class SampleSystemSecuritySystemExtensions
                    SampleSystemSecurityRole.SeManager,
                    new SecurityRoleInfo(new Guid("dbf3556d-7106-4175-b5e4-a32d00bd857a"))
                    {
-                       Operations = [SampleSystemSecurityOperation.EmployeeView]
+                       Children = [SampleSystemSecurityRole.TestVirtualRole]
                    })
 
                .AddSecurityRole(
                    SampleSystemSecurityRole.TestRole1,
                    new SecurityRoleInfo(new Guid("{597AAB2A-76F7-42CF-B606-3D4550062596}"))
                    {
-                       Operations = [SampleSystemSecurityOperation.EmployeeView]
+                       Children = [SampleSystemSecurityRole.TestVirtualRole]
                    })
 
                .AddSecurityRole(
@@ -61,8 +62,19 @@ public static class SampleSystemSecuritySystemExtensions
                    new SecurityRoleInfo(new Guid("{ACAA7B42-09AA-438A-B6EC-058506E0C103}"))
                    {
                        Restriction = SecurityPathRestriction.Create<BusinessUnit>()
-                                                            .Add((TestRestrictionObject v) => v.RestrictionHandler)
+                                                            .AddCondition(typeof(TestRestrictionObjectConditionFactory<>))
                    })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.TestVirtualRole,
+                   new SecurityRoleInfo(default)
+                   {
+                       Operations = [SampleSystemSecurityOperation.EmployeeView]
+                   })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.PermissionAdministrator,
+                   new SecurityRoleInfo(new Guid("{1E101597-E722-4650-BED1-5A1025540897}")))
 
                .AddSecurityRole(
                    SecurityRole.SystemIntegration,
@@ -74,6 +86,13 @@ public static class SampleSystemSecuritySystemExtensions
                    {
                        Operations = typeof(SampleSystemSecurityOperation).GetStaticPropertyValueList<SecurityOperation>().ToList()
                    });
+    }
+
+    public static ISecuritySystemSettings AddSecurityRules(this ISecuritySystemSettings settings)
+    {
+        return settings.AddSecurityRule(
+            SampleSystemSecurityRule.TestRestriction,
+            new DomainSecurityRule.ConditionSecurityRule(typeof(TestRestrictionObjectConditionFactory<>)));
     }
 
     public static ISecuritySystemSettings AddCustomSecurityOperations(this ISecuritySystemSettings settings)

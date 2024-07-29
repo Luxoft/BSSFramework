@@ -24,6 +24,7 @@ using Framework.Configuration.Generated.DTO;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.Setup;
+using Framework.SecuritySystem.Expanders;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -101,7 +102,7 @@ public static class ServiceCollectionExtensions
                                         {
                                             DomainType = type,
                                             SourceType = projectionAttr.SourceType,
-                                            CustomViewSecurityRule = type.GetViewSecurityRule()
+                                            CustomViewSecurityRule = (DomainSecurityRule)type.GetViewSecurityRule()
                                         };
 
         foreach (var pair in projectionsRequest)

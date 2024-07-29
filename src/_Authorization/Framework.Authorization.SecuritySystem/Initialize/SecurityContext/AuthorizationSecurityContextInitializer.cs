@@ -3,7 +3,6 @@ using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using NHibernate.Linq;
@@ -11,20 +10,17 @@ using NHibernate.Linq;
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationSecurityContextInitializer(
-    [FromKeyedServices(nameof(SecurityRule.Disabled))]
-    IRepository<SecurityContextType> securityContextTypeRepository,
+    [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
     IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
     ILogger<AuthorizationSecurityContextInitializer> logger,
     InitializerSettings settings)
     : IAuthorizationSecurityContextInitializer
 {
-    private readonly List<ISecurityContextInfo<Guid>> securityContextInfoList = securityContextInfoList.ToList();
-
-    public async Task Init(CancellationToken cancellationToken)
+    public async Task<MergeResult<SecurityContextType, ISecurityContextInfo<Guid>>> Init(CancellationToken cancellationToken)
     {
         var dbSecurityContextTypes = await securityContextTypeRepository.GetQueryable().ToListAsync(cancellationToken);
 
-        var mergeResult = dbSecurityContextTypes.GetMergeResult(this.securityContextInfoList, et => et.Id, sc => sc.Id);
+        var mergeResult = dbSecurityContextTypes.GetMergeResult(securityContextInfoList, et => et.Id, sc => sc.Id);
 
         if (mergeResult.RemovingItems.Any())
         {
@@ -68,5 +64,9 @@ public class AuthorizationSecurityContextInitializer(
                 await securityContextTypeRepository.SaveAsync(securityContextType, cancellationToken);
             }
         }
+
+        return mergeResult;
     }
+
+    async Task ISecurityInitializer.Init(CancellationToken cancellationToken) => await this.Init(cancellationToken);
 }

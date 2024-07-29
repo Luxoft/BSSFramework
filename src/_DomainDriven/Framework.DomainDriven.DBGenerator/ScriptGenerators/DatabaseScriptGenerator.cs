@@ -8,24 +8,14 @@ namespace Framework.DomainDriven.DBGenerator;
 /// <summary>
 /// Генерирует коллекцию скриптов для модификации основной базы данных, таких, чтобы она соответсвовала доменной медели
 /// </summary>
-public class DatabaseScriptGenerator : IDatabaseScriptGenerator
+public class DatabaseScriptGenerator(
+    DatabaseScriptGeneratorMode databaseGeneratorMode = DatabaseScriptGeneratorMode.None,
+    string previusPostfix = "_previousVersion",
+    ICollection<string> ignoredIndexes = null,
+    IDataTypeComparer dataTypeComparer = null)
+    : IDatabaseScriptGenerator
 {
-    private readonly DataTypeComparer dataTypeComparer;
-    private readonly string previusPostfix;
-    private readonly DatabaseScriptGeneratorMode databaseGeneratorMode;
-    private readonly ICollection<string> ignoredIndexes;
-
-    public DatabaseScriptGenerator(
-            DatabaseScriptGeneratorMode databaseGeneratorMode = DatabaseScriptGeneratorMode.None,
-            string previusPostfix = "_previusVersion",
-            ICollection<string> ignoredIndexes = null)
-    {
-        this.databaseGeneratorMode = databaseGeneratorMode;
-        this.previusPostfix = previusPostfix;
-        this.ignoredIndexes = ignoredIndexes;
-
-        this.dataTypeComparer = new DataTypeComparer();
-    }
+    private readonly IDataTypeComparer _dataTypeComparer = dataTypeComparer ?? new DataTypeComparer();
 
     /// <summary>
     /// Генерирует sql скрипт, который создает и обновляет таблицы и добавляет или удаляет колонки в этих таблицах, а так же создает индексы в этих таблицах
@@ -42,22 +32,22 @@ public class DatabaseScriptGenerator : IDatabaseScriptGenerator
                                        .ToList();
 
         var databaseScriptGeneratorInfo = new DatabaseScriptGeneratorStrategyInfo(
-                                                                                  context,
-                                                                                  domainTypesLocal,
-                                                                                  this.databaseGeneratorMode,
-                                                                                  this.dataTypeComparer,
-                                                                                  this.previusPostfix,
-                                                                                  this.ignoredIndexes);
+            context,
+            domainTypesLocal,
+            databaseGeneratorMode,
+            this._dataTypeComparer,
+            previusPostfix,
+            ignoredIndexes);
 
-        var dictionary = this.GetScriptGeneratorStrategies(databaseScriptGeneratorInfo)
+        var dictionary = GetScriptGeneratorStrategies(databaseScriptGeneratorInfo)
                              .ToDictionary(
-                                           scriptGeneratorStrategy => scriptGeneratorStrategy.ApplyMigrationDbScriptMode,
-                                           scriptGeneratorStrategy => scriptGeneratorStrategy.Execute().ToLazy());
+                                 scriptGeneratorStrategy => scriptGeneratorStrategy.ApplyMigrationDbScriptMode,
+                                 scriptGeneratorStrategy => scriptGeneratorStrategy.Execute().ToLazy());
 
         return DatabaseScriptResultFactory.Create(dictionary);
     }
 
-    private IEnumerable<ScriptGeneratorStrategyBase> GetScriptGeneratorStrategies(DatabaseScriptGeneratorStrategyInfo parameter)
+    private static IEnumerable<ScriptGeneratorStrategyBase> GetScriptGeneratorStrategies(DatabaseScriptGeneratorStrategyInfo parameter)
     {
         yield return new AddOrUpdateStrategy(parameter);
         yield return new ChangeIndexesStrategy(parameter);

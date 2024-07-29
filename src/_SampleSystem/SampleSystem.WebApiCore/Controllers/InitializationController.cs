@@ -11,30 +11,17 @@ namespace SampleSystem.WebApiCore.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class InitializationController : ControllerBase
+public class InitializationController(
+    IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator,
+    SubscriptionMetadataStore subscriptionMetadataStore,
+    IInitializeManager initializeManager)
+    : ControllerBase
 {
-    private readonly IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator;
-
-    private readonly SubscriptionMetadataStore subscriptionMetadataStore;
-
-    private readonly IInitializeManager initializeManager;
-
-    public InitializationController(
-            IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator,
-            SubscriptionMetadataStore
-                    subscriptionMetadataStore,
-            IInitializeManager initializeManager)
-    {
-        this.contextEvaluator = contextEvaluator;
-        this.subscriptionMetadataStore = subscriptionMetadataStore;
-        this.initializeManager = initializeManager;
-    }
-
     [HttpGet]
-    public void SampleSystemInitializer()
+    public async Task SampleSystemInitializer(CancellationToken cancellationToken)
     {
-        var service = new SampleSystemInitializer(this.contextEvaluator, this.subscriptionMetadataStore, this.initializeManager);
+        var service = new SampleSystemInitializer(contextEvaluator, subscriptionMetadataStore, initializeManager);
 
-        service.Initialize();
+        await service.InitializeAsync(cancellationToken);
     }
 }

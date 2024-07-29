@@ -4,8 +4,10 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
 using Framework.Projection.Environment;
 using Framework.Security;
+using Framework.SecuritySystem;
 
 using SampleSystem.Domain;
+using SampleSystem.Security;
 
 namespace SampleSystem.CodeGenerate;
 
@@ -28,14 +30,13 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
                 useDependencySecurity: false));
     }
 
-
-    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SampleSystemSecurityOperation) };
+    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = [typeof(SampleSystemSecurityOperation), typeof(SecurityRule)];
 
     public override Type OperationContextType { get; } = typeof(SampleSystemOperationContext);
 
     protected override IEnumerable<Assembly> GetDomainObjectAssemblies()
     {
-        return base.GetDomainObjectAssemblies().Concat(new[] { typeof(Employee).Assembly });
+        return base.GetDomainObjectAssemblies().Concat([typeof(Employee).Assembly]);
     }
 
     protected override IEnumerable<IProjectionEnvironment> GetProjectionEnvironments()
@@ -58,7 +59,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
                                   .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit)))
                       .AddProperty(
                           e => e.Login,
-                          pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeeView))
+                          pb => pb.AddAttribute(new ViewDomainObjectAttribute(SecurityRule.View))
                                   .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeeEdit)))
                       .AddProperty(
                           e => e.PersonalCellPhone,

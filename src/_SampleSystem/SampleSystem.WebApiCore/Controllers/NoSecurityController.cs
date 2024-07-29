@@ -40,7 +40,7 @@ public class NoSecurityController : ControllerBase
     [HttpPost(nameof(TestSave))]
     public async Task<NoSecurityObjectIdentityDTO> TestSave(CancellationToken cancellationToken = default)
     {
-        var repository = this.repositoryFactory.Create(SecurityRule.Disabled);
+        var repository = this.repositoryFactory.Create();
 
         var obj = new NoSecurityObject();
 
@@ -53,7 +53,7 @@ public class NoSecurityController : ControllerBase
     [HttpPost(nameof(GetFullList))]
     public async Task<List<NoSecurityObjectIdentityDTO>> GetFullList(CancellationToken cancellationToken = default)
     {
-        var repository = this.repositoryFactory.Create(SecurityRule.Disabled);
+        var repository = this.repositoryFactory.Create();
 
         var result = await repository.GetQueryable().ToListAsync(cancellationToken);
 

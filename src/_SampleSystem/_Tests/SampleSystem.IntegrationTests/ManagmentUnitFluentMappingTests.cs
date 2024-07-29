@@ -26,7 +26,7 @@ public class ManagmentUnitFluentMappingTests : TestBase
 
         this.Evaluate(
                       DBSessionMode.Write,
-                      (c) =>
+                      c =>
                       {
                           var employee = c.Logics.Employee.GetById(employeeId.Id);
                           var mu = new ManagementUnitFluentMapping

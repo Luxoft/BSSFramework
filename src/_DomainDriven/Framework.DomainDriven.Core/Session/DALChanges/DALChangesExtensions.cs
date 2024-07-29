@@ -52,7 +52,7 @@ public static class DALChangesExtensions
 
                       from pair in dalChanges.ToChangeTypeDict()
 
-                      group pair.Key.ToKeyValuePair(pair.Value) by (pair.Key.Object, pair.Key.Type) into changeGroup
+                      group (pair.Key, pair.Value) by (pair.Key.Object, pair.Key.Type) into changeGroup
 
                       let finalState = changeGroup.ToDictionary().ToFinalState()
 

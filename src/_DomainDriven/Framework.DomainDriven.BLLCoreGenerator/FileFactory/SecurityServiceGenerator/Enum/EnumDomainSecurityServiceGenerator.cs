@@ -3,6 +3,8 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Expanders;
+using Framework.SecuritySystem.Services;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
@@ -38,11 +40,10 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
     public override IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters()
     {
-        yield return (typeof(ISecurityProvider<>).ToTypeReference(this.DomainType), "disabledSecurityProvider", null);
         yield return (typeof(ISecurityRuleExpander).ToTypeReference(), "securityRuleExpander", null);
 
         {
-            yield return (typeof(ISecurityPathProviderFactory).ToTypeReference(), "securityPathProviderFactory", null);
+            yield return (typeof(IDomainSecurityProviderFactory).ToTypeReference(), "domainSecurityProviderFactory", null);
 
             var securityPathContainerParam = new CodeParameterDeclarationExpression(this.Configuration.GetCodeTypeReference(null, FileType.RootSecurityServicePathContainerInterface), "securityPathContainer");
 

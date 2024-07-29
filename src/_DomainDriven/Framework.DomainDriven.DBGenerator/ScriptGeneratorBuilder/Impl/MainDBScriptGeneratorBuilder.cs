@@ -5,16 +5,17 @@ namespace Framework.DomainDriven.DBGenerator;
 
 class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBScriptGeneratorBuilder
 {
-    private bool removeSchemaDatabase = true;
+    private bool _removeSchemaDatabase = true;
 
     public IMainDBScriptGeneratorBuilder WithMain(
-            DatabaseScriptGeneratorMode mode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
-            string previusColumnPostfix = "_previusVersion",
-            ICollection<string> ignoredIndexes = null)
+        DatabaseScriptGeneratorMode mode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
+        string previousColumnPostfix = "_previousVersion",
+        ICollection<string> ignoredIndexes = null,
+        IDataTypeComparer dataTypeComparer = null)
     {
         this.ValidateConfigurate();
 
-        this.Register(new DatabaseScriptGenerator(mode, previusColumnPostfix, ignoredIndexes));
+        this.Register(new DatabaseScriptGenerator(mode, previousColumnPostfix, ignoredIndexes, dataTypeComparer));
 
         return this;
     }
@@ -48,7 +49,7 @@ class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBSc
 
     public IMainDBScriptGeneratorBuilder WithPreserveSchemaDatabase()
     {
-        this.removeSchemaDatabase = false;
+        this._removeSchemaDatabase = false;
         return this;
     }
 
@@ -59,11 +60,11 @@ class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBSc
         {
             case DBGenerateScriptMode.AppliedOnCopySchemeDatabase:
             {
-                return combined.Unsafe(false, this.removeSchemaDatabase, new[] { this._migrationDbScriptGeneratorBuilder.TableName });
+                return combined.Unsafe(false, this._removeSchemaDatabase, new[] { this._migrationDbScriptGeneratorBuilder.TableName });
             }
             case DBGenerateScriptMode.AppliedOnCopySchemeAndDataDatabase:
             {
-                return combined.Unsafe(true, this.removeSchemaDatabase, new[] { this._migrationDbScriptGeneratorBuilder.TableName });
+                return combined.Unsafe(true, this._removeSchemaDatabase, new[] { this._migrationDbScriptGeneratorBuilder.TableName });
             }
 
             default:

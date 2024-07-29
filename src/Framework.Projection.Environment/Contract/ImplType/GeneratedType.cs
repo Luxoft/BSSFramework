@@ -136,8 +136,7 @@ internal class GeneratedType : BaseTypeImpl
                                                                    && !(attr is ClassValidatorAttribute)
                                                                    && !(attr is DomainTypeAttribute)
                                                                    && !(attr is DomainObjectAccessAttribute)
-                                                                   && !(attr is DependencySecurityAttribute)
-                                                                   && !(attr is CustomContextSecurityAttribute));
+                                                                   && !(attr is DependencySecurityAttribute));
     }
 
     private IEnumerable<Attribute> GetSecurityAttributes()
@@ -283,7 +282,7 @@ internal class GeneratedType : BaseTypeImpl
 
                       where generateProp.Name != generateProp.ContractProperty.Name || generateProp.PropertyType != generateProp.ContractProperty.PropertyType
 
-                      select generateProp.ToKeyValuePair(new ExplicitProperty(generateProp.ContractProperty, generateProp.ReflectedType, generateProp.Name, generateProp.ContractProperty.PropertyType));
+                      select (generateProp, new ExplicitProperty(generateProp.ContractProperty, generateProp.ReflectedType, generateProp.Name, generateProp.ContractProperty.PropertyType));
 
         return request.ToDictionary();
     }

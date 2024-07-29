@@ -3657,9 +3657,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer1IntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class IntegrationVersionContainer1IntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>, Framework.Persistent.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -3682,7 +3682,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public IntegrationVersionContainer1IntegrationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
+        public IntegrationVersionContainer1IntegrationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject)
         {
             mappingService.MapIntegrationVersionContainer1(domainObject, this);
         }
@@ -3808,25 +3808,25 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject)
         {
             mappingService.MapIntegrationVersionContainer1(this, domainObject);
         }
         
-        public SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToIntegrationVersionContainer1(this);
         }
         
-        public SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToIntegrationVersionContainer1(this, allowCreate);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer1IntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class IntegrationVersionContainer1IntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>, Framework.Persistent.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -3849,7 +3849,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public IntegrationVersionContainer1IntegrationSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
+        public IntegrationVersionContainer1IntegrationSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject)
         {
             mappingService.MapIntegrationVersionContainer1(domainObject, this);
         }
@@ -3975,20 +3975,20 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject)
         {
             mappingService.MapIntegrationVersionContainer1(this, domainObject);
         }
         
-        public SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToIntegrationVersionContainer1(this);
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer2IntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class IntegrationVersionContainer2IntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>, Framework.Persistent.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -4011,7 +4011,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public IntegrationVersionContainer2IntegrationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 domainObject)
+        public IntegrationVersionContainer2IntegrationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 domainObject)
         {
             mappingService.MapIntegrationVersionContainer2(domainObject, this);
         }
@@ -4137,17 +4137,17 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 domainObject)
         {
             mappingService.MapIntegrationVersionContainer2(this, domainObject);
         }
         
-        public SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToIntegrationVersionContainer2(this);
         }
         
-        public SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToIntegrationVersionContainer2(this, allowCreate);
         }

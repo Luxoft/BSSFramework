@@ -1,10 +1,10 @@
 ﻿namespace Framework.Configuration.BLL;
 
-public abstract record TargetSystemInfo(Guid Id, bool IsMain, bool IsRevision, string Name, IReadOnlyList<DomainTypeInfo> DomainTypes);
+public abstract record TargetSystemInfo(string Name, Guid Id, bool IsMain, bool IsRevision, IReadOnlyList<DomainTypeInfo> DomainTypes);
 
 public record TargetSystemInfo<TPersistentDomainObjectBase>(
+    string Name,
     Guid Id,
     bool IsMain,
     bool IsRevision,
-    string Name,
-    IReadOnlyList<DomainTypeInfo> DomainTypes) : TargetSystemInfo(Id, IsMain, IsRevision, Name, DomainTypes);
+    IReadOnlyList<DomainTypeInfo> DomainTypes) : TargetSystemInfo(Name, Id, IsMain, IsRevision, DomainTypes);

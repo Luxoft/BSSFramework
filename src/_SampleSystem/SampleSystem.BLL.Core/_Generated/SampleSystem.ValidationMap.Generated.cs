@@ -2366,29 +2366,29 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.Insurance>(this.GetInsuranceProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.DateTime?>> GetIntegrationVersionContainer1_CreateDateValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, System.DateTime?>> GetIntegrationVersionContainer1_CreateDateValidators()
         {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, string>> GetIntegrationVersionContainer1_CreatedByValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, string>> GetIntegrationVersionContainer1_CreatedByValidators()
         {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, string>> GetIntegrationVersionContainer1_ModifiedByValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, string>> GetIntegrationVersionContainer1_ModifiedByValidators()
         {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.DateTime?>> GetIntegrationVersionContainer1_ModifyDateValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, System.DateTime?>> GetIntegrationVersionContainer1_ModifyDateValidators()
         {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, string>> GetIntegrationVersionContainer1_NameValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, string>> GetIntegrationVersionContainer1_NameValidators()
         {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableSize<string>());
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, string>> GetIntegrationVersionContainer1CustomIntegrationSaveModel_CustomNameValidators()
@@ -2396,15 +2396,15 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>> GetIntegrationVersionContainer1CustomIntegrationSaveModel_SavingObjectValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>> GetIntegrationVersionContainer1CustomIntegrationSaveModel_SavingObjectValidators()
         {
-            yield return new Framework.Validation.RequiredValidator<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.Validation.RequiredValidator<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(Framework.Restriction.RequiredMode.Default);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>> GetIntegrationVersionContainer1CustomIntegrationSaveModelProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel> currentClass)
         {
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, string>(source => source.CustomName, currentClass, this.GetIntegrationVersionContainer1CustomIntegrationSaveModel_CustomNameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(source => source.SavingObject, currentClass, this.GetIntegrationVersionContainer1CustomIntegrationSaveModel_SavingObjectValidators(), this.GetClassMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(source => source.SavingObject, currentClass, this.GetIntegrationVersionContainer1CustomIntegrationSaveModel_SavingObjectValidators(), this.GetClassMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel> GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationMap()
@@ -2412,57 +2412,57 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>(this.GetIntegrationVersionContainer1CustomIntegrationSaveModelProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>> GetIntegrationVersionContainer1Properties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>> GetIntegrationVersionContainer1Properties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1> currentClass)
         {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.DateTime?>(source => source.CreateDate, currentClass, this.GetIntegrationVersionContainer1_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, string>(source => source.CreatedBy, currentClass, this.GetIntegrationVersionContainer1_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, string>(source => source.ModifiedBy, currentClass, this.GetIntegrationVersionContainer1_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetIntegrationVersionContainer1_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, string>(source => source.Name, currentClass, this.GetIntegrationVersionContainer1_NameValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, System.DateTime?>(source => source.CreateDate, currentClass, this.GetIntegrationVersionContainer1_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, string>(source => source.CreatedBy, currentClass, this.GetIntegrationVersionContainer1_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, string>(source => source.ModifiedBy, currentClass, this.GetIntegrationVersionContainer1_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetIntegrationVersionContainer1_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, string>(source => source.Name, currentClass, this.GetIntegrationVersionContainer1_NameValidators(), this.GetClassMap<string>(true));
         }
         
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1> GetIntegrationVersionContainer1ValidationMap()
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1> GetIntegrationVersionContainer1ValidationMap()
         {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(this.GetIntegrationVersionContainer1Properties);
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(this.GetIntegrationVersionContainer1Properties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.DateTime?>> GetIntegrationVersionContainer2_CreateDateValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, System.DateTime?>> GetIntegrationVersionContainer2_CreateDateValidators()
         {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, string>> GetIntegrationVersionContainer2_CreatedByValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, string>> GetIntegrationVersionContainer2_CreatedByValidators()
         {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, string>> GetIntegrationVersionContainer2_ModifiedByValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, string>> GetIntegrationVersionContainer2_ModifiedByValidators()
         {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.DateTime?>> GetIntegrationVersionContainer2_ModifyDateValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, System.DateTime?>> GetIntegrationVersionContainer2_ModifyDateValidators()
         {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, string>> GetIntegrationVersionContainer2_NameValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, string>> GetIntegrationVersionContainer2_NameValidators()
         {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>> GetIntegrationVersionContainer2Properties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>> GetIntegrationVersionContainer2Properties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2> currentClass)
         {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.DateTime?>(source => source.CreateDate, currentClass, this.GetIntegrationVersionContainer2_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, string>(source => source.CreatedBy, currentClass, this.GetIntegrationVersionContainer2_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, string>(source => source.ModifiedBy, currentClass, this.GetIntegrationVersionContainer2_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetIntegrationVersionContainer2_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, string>(source => source.Name, currentClass, this.GetIntegrationVersionContainer2_NameValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, System.DateTime?>(source => source.CreateDate, currentClass, this.GetIntegrationVersionContainer2_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, string>(source => source.CreatedBy, currentClass, this.GetIntegrationVersionContainer2_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, string>(source => source.ModifiedBy, currentClass, this.GetIntegrationVersionContainer2_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetIntegrationVersionContainer2_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, string>(source => source.Name, currentClass, this.GetIntegrationVersionContainer2_NameValidators(), this.GetClassMap<string>(true));
         }
         
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2> GetIntegrationVersionContainer2ValidationMap()
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2> GetIntegrationVersionContainer2ValidationMap()
         {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>(this.GetIntegrationVersionContainer2Properties);
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>(this.GetIntegrationVersionContainer2Properties);
         }
         
         protected override Framework.Validation.IClassValidationMap<TSource> GetInternalClassMap<TSource>()
@@ -2663,11 +2663,11 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1)))
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetIntegrationVersionContainer1ValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2)))
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetIntegrationVersionContainer2ValidationMap()));
             }

@@ -14,7 +14,7 @@ using Framework.SecuritySystem;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Http.Json;
 
-using SampleSystem.BLL._Command.CreateClassA.Intergation;
+using SampleSystem.BLL._Command.CreateClassA.Integration;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
 using SampleSystem.WebApiCore.Json;

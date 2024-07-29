@@ -13,7 +13,6 @@ using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using nuSpec.Abstraction;
-using NHibernate.Mapping;
 
 namespace Framework.DomainDriven.Setup;
 

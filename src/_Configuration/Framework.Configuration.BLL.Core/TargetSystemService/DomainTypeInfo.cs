@@ -1,3 +1,3 @@
 ﻿namespace Framework.Configuration.BLL;
 
-public record DomainTypeInfo(Guid Id, Type Type);
+public record DomainTypeInfo(Type Type, Guid Id);

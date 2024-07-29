@@ -1,7 +1,6 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Configuration.BLL;
 using Framework.Core;
-using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.ServiceModel.IAD;
@@ -48,21 +47,23 @@ public static class BssFrameworkSettingsExtensions
 
                                         if (tsSettings.RegisterBase)
                                         {
+                                            tsSettings.AddTargetSystem(TargetSystemInfoHelper.Base);
+                                        }
+
+                                        if (tsSettings.RegisterAuthorization)
+                                        {
                                             tsSettings
                                                 .AddTargetSystem<IAuthorizationBLLContext,
                                                     Framework.Authorization.Domain.PersistentDomainObjectBase>(
-                                                    new Guid("{f065289e-4dc5-48c9-be44-a2ee0131e631}"),
-                                                    false,
-                                                    true,
-                                                    nameof(Authorization));
+                                                    TargetSystemInfoHelper.Authorization);
+                                        }
 
+                                        if (tsSettings.RegisterConfiguration)
+                                        {
                                             tsSettings
                                                 .AddTargetSystem<IConfigurationBLLContext,
                                                     Framework.Configuration.Domain.PersistentDomainObjectBase>(
-                                                    new Guid("{50465868-4B49-42CF-A702-A39400E6C317}"),
-                                                    false,
-                                                    false,
-                                                    nameof(Configuration));
+                                                    TargetSystemInfoHelper.Configuration);
                                         }
 
                                         tsSettings.Initialize(sc);
@@ -79,7 +80,11 @@ public interface ITargetSystemRootSettings
 {
     bool RegisterBase { get; set; }
 
-    ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(Guid id, bool isMain, bool isRevision, string name = null)
+    bool RegisterAuthorization { get; set; }
+
+    bool RegisterConfiguration { get; set; }
+
+    ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(string name, Guid id, bool isMain, bool isRevision, IEnumerable<DomainTypeInfo> domainTypes)
         where TBLLContext : class, ITypeResolverContainer<string>,
         ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>;
@@ -91,25 +96,49 @@ public class TargetSystemRootSettings : ITargetSystemRootSettings
 
     public bool RegisterBase { get; set; }
 
-    public ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(Guid id, bool isMain, bool isRevision, string name = null, IReadOnlyDictionary<Guid, Type> domainTypes = null)
+    public bool RegisterAuthorization { get; set; }
+
+    public bool RegisterConfiguration { get; set; }
+
+    public ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(
+        string name,
+        Guid id,
+        bool isMain,
+        bool isRevision,
+        IEnumerable<DomainTypeInfo> domainTypes)
         where TBLLContext : class, ITypeResolverContainer<string>,
         ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {
         var info = new TargetSystemInfo<TPersistentDomainObjectBase>(
+            name,
             id,
             isMain,
             isRevision,
-            name ?? typeof(TPersistentDomainObjectBase).ExtractSystemName(),
-            );
+            domainTypes.ToList());
 
+        return this.AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(info);
+    }
+
+    public ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(TargetSystemInfo<TPersistentDomainObjectBase> info)
+        where TBLLContext : class, ITypeResolverContainer<string>,
+        ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
+        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+    {
+        this.AddTargetSystem(info);
+
+        this.registerActions.Add(sc => sc.AddScoped<ITargetSystemService, TargetSystemService<TBLLContext, TPersistentDomainObjectBase>>());
+
+        return this;
+    }
+
+    public ITargetSystemRootSettings AddTargetSystem<TPersistentDomainObjectBase>(TargetSystemInfo<TPersistentDomainObjectBase> info)
+    {
         this.registerActions.Add(
             sc =>
             {
                 sc.AddSingleton(info);
                 sc.AddSingleton<TargetSystemInfo>(info);
-
-                sc.AddScoped<ITargetSystemService, TargetSystemService<TBLLContext, TPersistentDomainObjectBase>>();
             });
 
         return this;

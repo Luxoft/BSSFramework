@@ -10,7 +10,6 @@ using Framework.Validation;
 
 namespace SampleSystem.Domain;
 
-[DomainType("5C326B10-B4B4-402C-BCCE-A311016CB715")]
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
 public partial class BusinessUnit :
         CommonUnitBase,

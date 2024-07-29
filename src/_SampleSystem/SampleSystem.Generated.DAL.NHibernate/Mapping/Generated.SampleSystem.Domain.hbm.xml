@@ -737,7 +737,7 @@
       <property name="MiddleName" column="fiomiddleName" access="field.camelcase" length="50" />
     </component>
   </class>
-  <class name="SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1" table="IntegrationVersionContainer1">
+  <class name="SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1" table="IntegrationVersionContainer1">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -752,7 +752,7 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2" table="IntegrationVersionContainer2">
+  <class name="SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2" table="IntegrationVersionContainer2">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>

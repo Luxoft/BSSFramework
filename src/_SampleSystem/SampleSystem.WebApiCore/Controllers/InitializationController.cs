@@ -13,14 +13,13 @@ namespace SampleSystem.WebApiCore.Controllers;
 [ApiController]
 public class InitializationController(
     IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator,
-    SubscriptionMetadataStore subscriptionMetadataStore,
     IInitializeManager initializeManager)
     : ControllerBase
 {
     [HttpGet]
     public async Task SampleSystemInitializer(CancellationToken cancellationToken)
     {
-        var service = new SampleSystemInitializer(contextEvaluator, subscriptionMetadataStore, initializeManager);
+        var service = new SampleSystemInitializer(contextEvaluator, initializeManager);
 
         await service.InitializeAsync(cancellationToken);
     }

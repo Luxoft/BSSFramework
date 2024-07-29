@@ -22,7 +22,7 @@
         {
             SampleSystem.BLL.IIntegrationVersionContainer1BLL bll = evaluateData.Context.Logics.IntegrationVersionContainer1;
             evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(Framework.SecuritySystem.SecurityRole.SystemIntegration);
-            SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject = bll.GetById(integrationVersionContainer1Ident.Id, true);
+            SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject = bll.GetById(integrationVersionContainer1Ident.Id, true);
             bll.Remove(domainObject);
         }
         
@@ -51,7 +51,7 @@
             SampleSystem.BLL.IIntegrationVersionContainer1BLL bll = evaluateData.Context.Logics.IntegrationVersionContainer1;
             evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(Framework.SecuritySystem.SecurityRole.SystemIntegration);
             SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel integrationSaveModel = integrationVersionContainer1IntegrationSaveModel.ToDomainObject(evaluateData.MappingService);
-            SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject = integrationSaveModel.SavingObject;
+            SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject = integrationSaveModel.SavingObject;
             if ((domainObject.IntegrationVersion < integrationVersionContainer1IntegrationSaveModel.SavingObject.IntegrationVersion))
             {
                 domainObject.IntegrationVersion = integrationVersionContainer1IntegrationSaveModel.SavingObject.IntegrationVersion;
@@ -69,10 +69,10 @@
         
         protected virtual SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO SaveIntegrationVersionContainer1Internal(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationRichDTO integrationVersionContainer1, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IIntegrationVersionContainer1BLL bll)
         {
-            SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject = bll.GetById(integrationVersionContainer1.Id, false, null, Framework.DomainDriven.Lock.LockRole.Update);
+            SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject = bll.GetById(integrationVersionContainer1.Id, false, null, Framework.DomainDriven.Lock.LockRole.Update);
             if (object.ReferenceEquals(domainObject, null))
             {
-                domainObject = new SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1();
+                domainObject = new SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1();
             }
             if ((domainObject.IntegrationVersion < integrationVersionContainer1.IntegrationVersion))
             {

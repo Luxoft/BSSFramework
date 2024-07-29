@@ -58,7 +58,7 @@ public partial class DomainTypeBLL
             throw new BusinessLogicException($"Target system \"{targetSystem.Name}\" must be revision");
         }
 
-        var targetSystemService = this.Context.GetPersistentTargetSystemService(targetSystem);
+        var targetSystemService = this.Context.GetTargetSystemService(targetSystem);
 
         foreach (var domainObjectId in eventModel.DomainObjectIdents)
         {

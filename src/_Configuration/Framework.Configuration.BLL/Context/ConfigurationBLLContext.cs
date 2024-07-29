@@ -142,20 +142,6 @@ public partial class ConfigurationBLLContext
         return this.currentRevisionService.GetCurrentRevision();
     }
 
-    public IPersistentTargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem)
-    {
-        if (targetSystem == null) throw new ArgumentNullException(nameof(targetSystem));
-
-        return (this.GetTargetSystemService(targetSystem) as IPersistentTargetSystemService)
-                .FromMaybe(() => new ArgumentException($"Target System {targetSystem.Name} is not persistent", nameof(targetSystem)));
-    }
-
-    public IEnumerable<IPersistentTargetSystemService> GetPersistentTargetSystemServices()
-    {
-        return this.lazyTargetSystemServiceCache.Value.Values.OfType<IPersistentTargetSystemService>();
-    }
-
-
     public ITargetSystemService GetTargetSystemService(TargetSystem targetSystem)
     {
         if (targetSystem == null) throw new ArgumentNullException(nameof(targetSystem));

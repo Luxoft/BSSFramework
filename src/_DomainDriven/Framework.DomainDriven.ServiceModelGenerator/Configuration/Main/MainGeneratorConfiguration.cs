@@ -32,7 +32,7 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
 
         foreach (var dtoType in domainType.GetViewDTOTypes())
         {
-            if (domainType.IsVisualIdentityObject())
+            if (domainType.IsInterfaceImplementation(typeof(IVisualIdentityObject)))
             {
                 yield return new GetSingleByNameMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType);
             }

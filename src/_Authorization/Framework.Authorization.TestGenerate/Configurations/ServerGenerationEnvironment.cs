@@ -2,7 +2,6 @@
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
-using Framework.Persistent;
 using Framework.Projection.Environment;
 using Framework.Transfering;
 
@@ -23,7 +22,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     public readonly DALGeneratorConfiguration DAL;
 
     public ServerGenerationEnvironment()
-            : this(new DatabaseName(typeof(PersistentDomainObjectBase).GetTargetSystemName()))
+            : this(new DatabaseName(nameof(Authorization)))
     {
     }
 

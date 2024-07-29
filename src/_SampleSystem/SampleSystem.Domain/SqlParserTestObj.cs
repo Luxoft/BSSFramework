@@ -1,11 +1,9 @@
 ﻿using Framework.DomainDriven.BLL;
-using Framework.Persistent;
 using Framework.Restriction;
 using Framework.Transfering;
 
 namespace SampleSystem.Domain;
 
-[DomainType("{4963D86E-5650-41E0-BDBA-0274FF2CF375}")]
 [BLLViewRole(Max = MainDTOType.FullDTO)]
 [BLLSaveRole]
 [BLLRemoveRole]

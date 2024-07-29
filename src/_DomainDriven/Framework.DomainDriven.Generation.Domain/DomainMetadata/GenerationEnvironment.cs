@@ -46,7 +46,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
     public Type AuditPersistentDomainObjectBaseType { get; }
 
-    public virtual string TargetSystemName => this.PersistentDomainObjectBaseType.GetTargetSystemName();
+    public virtual string TargetSystemName => this.PersistentDomainObjectBaseType.ExtractSystemName();
 
     protected virtual string ProjectionNamespace => $"{this.PersistentDomainObjectBaseType.GetNamespacePrefix()}.Domain.Projections";
 

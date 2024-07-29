@@ -1,6 +1,5 @@
 ﻿namespace Framework.SecuritySystem.Services;
 
-using static Framework.SecuritySystem.SecurityRule;
 using static Framework.SecuritySystem.DomainSecurityRule;
 
 public abstract class SecurityRuleVisitor

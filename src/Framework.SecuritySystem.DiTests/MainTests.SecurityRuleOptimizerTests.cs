@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 
-using Framework.Core;
 using Framework.SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;

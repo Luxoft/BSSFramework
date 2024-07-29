@@ -738,21 +738,21 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IIntegrationVersionContainer1BLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1, System.Guid>
+    public partial interface IIntegrationVersionContainer1BLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, System.Guid>
     {
         
-        SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 IntegrationSave(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel integrationSaveModel);
+        SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 IntegrationSave(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel integrationSaveModel);
     }
     
-    public partial interface IIntegrationVersionContainer1BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer1BLL, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>
+    public partial interface IIntegrationVersionContainer1BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer1BLL, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>
     {
     }
     
-    public partial interface IIntegrationVersionContainer2BLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2, System.Guid>
+    public partial interface IIntegrationVersionContainer2BLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, System.Guid>
     {
     }
     
-    public partial interface IIntegrationVersionContainer2BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer2BLL, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>
+    public partial interface IIntegrationVersionContainer2BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IIntegrationVersionContainer2BLL, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>
     {
     }
     

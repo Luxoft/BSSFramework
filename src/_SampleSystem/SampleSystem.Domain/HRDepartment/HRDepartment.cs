@@ -7,7 +7,6 @@ using Framework.Persistent;
 
 namespace SampleSystem.Domain;
 
-[DomainType("0BE31997-C4CD-449E-9394-A311016CB715")]
 [BLLViewRole, BLLSaveRole(AllowCreate = false), BLLRemoveRole]
 public partial class HRDepartment :
         HRDepartmentBase,

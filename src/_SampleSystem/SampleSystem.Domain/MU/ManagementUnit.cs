@@ -6,7 +6,6 @@ using Framework.SecuritySystem;
 
 namespace SampleSystem.Domain;
 
-[DomainType("77E78AEF-9512-46E0-A33D-AAE58DC7E18C")]
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
 public class ManagementUnit :
         CommonUnitBase,

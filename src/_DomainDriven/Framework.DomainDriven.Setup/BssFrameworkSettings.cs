@@ -7,8 +7,12 @@ using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.Authorization.SecuritySystem;
+using Framework.DomainDriven._Visitors;
+using Framework.DomainDriven.NHibernate;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+
+using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Setup;
 
@@ -30,9 +34,9 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public DomainSecurityRule.RoleBaseSecurityRule SecurityAdministratorRule { get; private set; } = SecurityRole.Administrator;
 
-    public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> settings)
+    public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> setupAction)
     {
-        this.RegisterActions.Add(sc => sc.AddSecuritySystem(settings));
+        this.RegisterActions.Add(sc => sc.AddSecuritySystem(setupAction));
 
         return this;
     }
@@ -87,6 +91,40 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public IBssFrameworkSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule)
     {
         this.SecurityAdministratorRule = rule;
+
+        return this;
+    }
+
+    public IBssFrameworkSettings SetSpecificationEvaluator<TSpecificationEvaluator>()
+        where TSpecificationEvaluator : class, ISpecificationEvaluator
+    {
+        this.RegisterActions.Add(sc => sc.AddSingleton<ISpecificationEvaluator, TSpecificationEvaluator>());
+
+        return this;
+    }
+
+    public IBssFrameworkSettings AddDatabaseVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
+        where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem
+    {
+        this.RegisterActions.Add(
+            sc =>
+            {
+                if (scoped)
+                {
+                    sc.AddScoped<IExpressionVisitorContainerItem, TExpressionVisitorContainerItem>();
+                }
+                else
+                {
+                    sc.AddSingleton<IExpressionVisitorContainerItem, TExpressionVisitorContainerItem>();
+                }
+            });
+
+        return this;
+    }
+
+    public IBssFrameworkSettings AddDatabaseSettings(Action<INHibernateSetupObject> setup)
+    {
+        this.RegisterActions.Add(sc => sc.AddDatabaseSettings(setup));
 
         return this;
     }

@@ -1,7 +1,7 @@
 ﻿using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 
-namespace SampleSystem.Domain.IntergrationVersions;
+namespace SampleSystem.Domain.IntegrationVersions;
 
 public abstract class ExternalDomainObject : AuditPersistentDomainObjectBase
 {

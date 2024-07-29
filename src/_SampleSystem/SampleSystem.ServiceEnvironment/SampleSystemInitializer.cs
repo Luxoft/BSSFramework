@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.SecuritySystem.Initialize;
+using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.NamedLocks;
 using Framework.DomainDriven;
@@ -12,7 +13,6 @@ namespace SampleSystem.ServiceEnvironment;
 
 public class SampleSystemInitializer(
     IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator,
-    SubscriptionMetadataStore subscriptionMetadataStore,
     IInitializeManager initializeManager)
 {
     public async Task InitializeAsync(CancellationToken cancellationToken) =>
@@ -27,34 +27,17 @@ public class SampleSystemInitializer(
         await this.InitSecurityAsync<IAuthorizationSecurityContextInitializer>(cancellationToken);
         await this.InitSecurityAsync<IAuthorizationBusinessRoleInitializer>(cancellationToken);
 
-        contextEvaluator.Evaluate(
+        await contextEvaluator.EvaluateAsync(
             DBSessionMode.Write,
-            context =>
-            {
-                context.Configuration.Logics.TargetSystem.RegisterBase();
-                context.Configuration.Logics.TargetSystem.Register<SampleSystem.Domain.PersistentDomainObjectBase>(true, true);
-
-                var extTypes = new Dictionary<Guid, Type>
-                               {
-                                   { new Guid("{79AF1049-3EC0-46A7-A769-62A24AD4F74E}"), typeof(Framework.Configuration.Domain.Sequence) }
-                               };
-
-                context.Configuration.Logics.TargetSystem.Register<Framework.Configuration.Domain.PersistentDomainObjectBase>(
-                    false,
-                    true,
-                    extTypes: extTypes);
-                context.Configuration.Logics.TargetSystem.Register<Framework.Authorization.Domain.PersistentDomainObjectBase>(false, true);
-            });
+            async context => await context.ServiceProvider.GetRequiredService<ITargetSystemInitializer>().Initialize(cancellationToken));
 
         contextEvaluator.Evaluate(
             DBSessionMode.Write,
-            context => { context.Configuration.Logics.SystemConstant.Initialize(typeof(SampleSystemSystemConstant)); });
+            context => context.Configuration.Logics.SystemConstant.Initialize(typeof(SampleSystemSystemConstant)));
 
-        contextEvaluator.Evaluate(
+        await contextEvaluator.EvaluateAsync(
             DBSessionMode.Write,
-            context => subscriptionMetadataStore.RegisterCodeFirstSubscriptions(
-                context.Configuration.Logics.CodeFirstSubscription,
-                context.Configuration));
+            async context => await context.ServiceProvider.GetRequiredService<ISubscriptionInitializer>().Initialize(cancellationToken));
     }
 
     private async Task InitSecurityAsync<TSecurityInitializer>(CancellationToken cancellationToken)

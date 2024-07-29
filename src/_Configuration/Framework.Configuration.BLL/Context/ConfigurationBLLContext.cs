@@ -31,6 +31,10 @@ public partial class ConfigurationBLLContext
 
     private readonly ICurrentRevisionService currentRevisionService;
 
+    private readonly IReadOnlyDictionary<Type, TargetSystemInfo> targetSystemInfoDict;
+
+    private readonly IReadOnlyDictionary<Type, DomainTypeInfo> domainTypeInfoDict;
+
     public ConfigurationBLLContext(
             IServiceProvider serviceProvider,
             [FromKeyedServices("BLL")] IEventOperationSender operationSender,
@@ -48,6 +52,7 @@ public partial class ConfigurationBLLContext
             IDomainObjectEventMetadata eventOperationSource,
             INamedLockService namedLockService,
             IEnumerable<ITargetSystemService> targetSystemServices,
+            IEnumerable<TargetSystemInfo> targetSystemInfoList,
             ICurrentRevisionService currentRevisionService,
             ConfigurationBLLContextSettings settings)
             : base(serviceProvider, operationSender, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
@@ -90,6 +95,23 @@ public partial class ConfigurationBLLContext
                                                                    () => this.GetTargetSystemServices().SelectMany(tss => tss.TypeResolver.GetTypes()).Concat(TypeResolverHelper.Base.GetTypes())).WithCache().WithLock();
 
         this.TypeResolver = settings.TypeResolver;
+
+        var targetSystemInfoDictRequest = from targetSystemInfo in targetSystemInfoList
+
+                                          from domainType in targetSystemInfo.DomainTypes
+
+                                          select (domainType.Type, targetSystemInfo);
+
+        this.targetSystemInfoDict = targetSystemInfoDictRequest.ToDictionary();
+
+
+        var domainTypeInfoDictRequest = from targetSystemInfo in targetSystemInfoList
+
+                                        from domainType in targetSystemInfo.DomainTypes
+
+                                        select (domainType.Type, domainType);
+
+        this.domainTypeInfoDict = domainTypeInfoDictRequest.ToDictionary();
     }
 
     public IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
@@ -119,20 +141,6 @@ public partial class ConfigurationBLLContext
     {
         return this.currentRevisionService.GetCurrentRevision();
     }
-
-    public IPersistentTargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem)
-    {
-        if (targetSystem == null) throw new ArgumentNullException(nameof(targetSystem));
-
-        return (this.GetTargetSystemService(targetSystem) as IPersistentTargetSystemService)
-                .FromMaybe(() => new ArgumentException($"Target System {targetSystem.Name} is not persistent", nameof(targetSystem)));
-    }
-
-    public IEnumerable<IPersistentTargetSystemService> GetPersistentTargetSystemServices()
-    {
-        return this.lazyTargetSystemServiceCache.Value.Values.OfType<IPersistentTargetSystemService>();
-    }
-
 
     public ITargetSystemService GetTargetSystemService(TargetSystem targetSystem)
     {
@@ -173,6 +181,16 @@ public partial class ConfigurationBLLContext
         if (name == null) throw new ArgumentNullException(nameof(name));
 
         return this.lazyTargetSystemServiceCache.Value.Values.GetByName(name);
+    }
+
+    public TargetSystemInfo GetTargetSystemInfo(Type domainType)
+    {
+        return this.targetSystemInfoDict[domainType];
+    }
+
+    public DomainTypeInfo GetDomainTypeInfo(Type domainType)
+    {
+        return this.domainTypeInfoDict[domainType];
     }
 
     public IEnumerable<ITargetSystemService> GetTargetSystemServices()

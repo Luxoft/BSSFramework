@@ -2,7 +2,6 @@
 using Framework.DomainDriven.NHibernate;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.BLL;
-using Framework.Persistent;
 using Framework.Projection.Environment;
 
 namespace Framework.Configuration.TestGenerate;
@@ -27,7 +26,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     public readonly ServerDTOGeneratorConfiguration ServerDTO;
 
     public ServerGenerationEnvironment()
-            :this(new DatabaseName(typeof(PersistentDomainObjectBase).GetTargetSystemName()))
+            :this(new DatabaseName(nameof(Configuration)))
     {
     }
 

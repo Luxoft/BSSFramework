@@ -64,11 +64,11 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddSecuritySystem(this IServiceCollection services, Action<ISecuritySystemSettings> setup)
+    public static IServiceCollection AddSecuritySystem(this IServiceCollection services, Action<ISecuritySystemSettings> setupAction)
     {
         var settings = new SecuritySystemSettings();
 
-        setup(settings);
+        setupAction(settings);
 
         settings.RegisterActions.ForEach(v => v(services));
 

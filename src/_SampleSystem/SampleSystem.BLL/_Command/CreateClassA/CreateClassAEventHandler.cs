@@ -4,7 +4,7 @@ using Framework.DomainDriven.Repository;
 
 using MediatR;
 
-using SampleSystem.BLL._Command.CreateClassA.Intergation;
+using SampleSystem.BLL._Command.CreateClassA.Integration;
 using SampleSystem.Domain.TestForceAbstract;
 
 namespace SampleSystem.BLL._Command.CreateClassA;

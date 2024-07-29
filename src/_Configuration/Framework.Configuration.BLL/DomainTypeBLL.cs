@@ -11,12 +11,9 @@ public partial class DomainTypeBLL
     {
         if (domainObjectType == null) throw new ArgumentNullException(nameof(domainObjectType));
 
-        var targetSystem = this.Context.GetTargetSystemService(domainObjectType, false).Maybe(targetSystemService => targetSystemService.TargetSystem)
-                           ?? this.Context.Logics.TargetSystem.GetObjectBy(ts => ts.IsBase, true);
+        var domainTypeInfo = this.Context.GetDomainTypeInfo(domainObjectType);
 
-        return this.GetObjectBy(
-                                parameterType => parameterType.TargetSystem == targetSystem && parameterType.NameSpace == domainObjectType.Namespace && parameterType.Name == domainObjectType.Name,
-                                () => new Exception($"DomainType for {domainObjectType.FullName} not found."));
+        return this.GetById(domainTypeInfo.Id);
     }
 
     public DomainType GetByPath(string path)

@@ -2,5 +2,5 @@
 
 public interface ISubscriptionInitializer
 {
-    void Init();
+    Task Initialize(CancellationToken cancellationToken);
 }

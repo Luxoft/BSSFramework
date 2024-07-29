@@ -27,17 +27,17 @@ public class SampleSystemInitializer(
         await this.InitSecurityAsync<IAuthorizationSecurityContextInitializer>(cancellationToken);
         await this.InitSecurityAsync<IAuthorizationBusinessRoleInitializer>(cancellationToken);
 
-        contextEvaluator.Evaluate(
+        await contextEvaluator.EvaluateAsync(
             DBSessionMode.Write,
-            context => context.ServiceProvider.GetRequiredService<ITargetSystemInitializer>().Init());
+            async context => await context.ServiceProvider.GetRequiredService<ITargetSystemInitializer>().Initialize(cancellationToken));
 
         contextEvaluator.Evaluate(
             DBSessionMode.Write,
-            context => { context.Configuration.Logics.SystemConstant.Initialize(typeof(SampleSystemSystemConstant)); });
+            context => context.Configuration.Logics.SystemConstant.Initialize(typeof(SampleSystemSystemConstant)));
 
-        contextEvaluator.Evaluate(
+        await contextEvaluator.EvaluateAsync(
             DBSessionMode.Write,
-            context => context.ServiceProvider.GetRequiredService<ISubscriptionInitializer>().Init());
+            async context => await context.ServiceProvider.GetRequiredService<ISubscriptionInitializer>().Initialize(cancellationToken));
     }
 
     private async Task InitSecurityAsync<TSecurityInitializer>(CancellationToken cancellationToken)

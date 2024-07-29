@@ -47,6 +47,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            // Legacy
 
+                           .AddLegacyDatabaseSettings()
                            .AddConfigurationTargetSystems()
 
                            .AddSubscriptionManagers()

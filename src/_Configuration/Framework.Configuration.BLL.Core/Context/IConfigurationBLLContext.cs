@@ -50,6 +50,10 @@ public partial interface IConfigurationBLLContext :
 
     ITargetSystemService GetTargetSystemService(string name);
 
+    TargetSystemInfo GetTargetSystemInfo(Type domainType);
+
+    DomainTypeInfo GetDomainTypeInfo(Type domainType);
+
     ITargetSystemService GetMainTargetSystemService();
 
     IEnumerable<ITargetSystemService> GetTargetSystemServices();

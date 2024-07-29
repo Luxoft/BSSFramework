@@ -2,5 +2,5 @@
 
 public interface ITargetSystemInitializer
 {
-    void Init();
+    Task Initialize(CancellationToken cancellationToken);
 }

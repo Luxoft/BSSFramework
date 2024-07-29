@@ -36,7 +36,7 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<SubscriptionMetadataStore>();
         services.AddSingleton<ISubscriptionMetadataFinder, SubscriptionMetadataFinder>();
-        services.AddSingleton<ISubscriptionInitializer, SubscriptionInitializer>();
+        services.AddScoped<ISubscriptionInitializer, SubscriptionInitializer>();
 
         services.AddSingleton(AuthDALListenerSettings.DefaultSettings);
 

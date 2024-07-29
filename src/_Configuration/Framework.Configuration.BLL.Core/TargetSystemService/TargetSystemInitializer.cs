@@ -2,12 +2,9 @@
 
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Lock;
-using Framework.DomainDriven.Repository;
 using Framework.Persistent;
-using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.Configuration.BLL;
@@ -16,9 +13,9 @@ public class TargetSystemInitializer(
     IConfigurationBLLContext context,
     IEnumerable<TargetSystemInfo> targetSystemInfoList) : ITargetSystemInitializer
 {
-    public void Init()
+    public async Task Initialize(CancellationToken cancellationToken)
     {
-        context.NamedLockService.LockAsync(ConfigurationNamedLock.UpdateDomainTypeLock, LockRole.Update).GetAwaiter().GetResult();
+        await context.NamedLockService.LockAsync(ConfigurationNamedLock.UpdateDomainTypeLock, LockRole.Update, cancellationToken);
 
         foreach (var targetSystemInfo in targetSystemInfoList)
         {

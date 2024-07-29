@@ -3,6 +3,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using nuSpec.NHibernate;
+
 using SampleSystem.Domain;
 using SampleSystem.Security;
 using SampleSystem.Security.Services;
@@ -39,7 +41,13 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .AddListeners()
 
+                           .SetSpecificationEvaluator<NhSpecificationEvaluator>()
+                           .AddDatabaseSettings(configuration)
+                           .AddDatabaseVisitors()
+
                            // Legacy
+
+                           .AddConfigurationTargetSystems()
 
                            .AddSubscriptionManagers()
                            .AddLegacyGenericServices()
@@ -47,8 +55,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                            .AddBLLSystem();
                    })
 
-               .RegisterLegacyGeneralBssFramework()
-               .RegisterGeneralDatabaseSettings(configuration)
+               .RegisterSupportLegacyServices()
                .RegisterGeneralApplicationServices(configuration);
     }
 }

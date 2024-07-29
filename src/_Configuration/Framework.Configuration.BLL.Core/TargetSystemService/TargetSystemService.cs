@@ -26,15 +26,14 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
     /// </summary>
     /// <param name="context">Контекст конфигурации.</param>
     /// <param name="targetSystemContext">Контекст целевой системы.</param>
-    /// <param name="targetSystem">Целевая система.</param>
     /// <param name="subscriptionMetadataStore">Хранилище описаний подписок.</param>
     public TargetSystemService(
             IConfigurationBLLContext context,
             TBLLContext targetSystemContext,
-            TargetSystem targetSystem,
+            TargetSystemInfo<TPersistentDomainObjectBase> targetSystemInfo,
             IEventOperationSender eventOperationSender,
             SubscriptionMetadataStore subscriptionMetadataStore)
-            : base(context, targetSystemContext, targetSystem, targetSystemContext.FromMaybe(() => new ArgumentNullException(nameof(targetSystemContext))).TypeResolver)
+            : base(context, targetSystemContext, targetSystemInfo, targetSystemContext.FromMaybe(() => new ArgumentNullException(nameof(targetSystemContext))).TypeResolver)
     {
         this.eventOperationSender = eventOperationSender;
 
@@ -105,15 +104,21 @@ public abstract class TargetSystemService<TBLLContext> : BLLContextContainer<ICo
 
         where TBLLContext : class
 {
+    private readonly TargetSystemInfo targetSystemInfo;
+
+    private readonly Lazy<TargetSystem> lazyTargetSystem;
+
     protected TargetSystemService(
             IConfigurationBLLContext context,
             TBLLContext targetSystemContext,
-            TargetSystem targetSystem,
+            TargetSystemInfo targetSystemInfo,
             ITypeResolver<string> typeResolver)
             : base(context)
     {
+        this.targetSystemInfo = targetSystemInfo;
         this.TargetSystemContext = targetSystemContext ?? throw new ArgumentNullException(nameof(targetSystemContext));
-        this.TargetSystem = targetSystem ?? throw new ArgumentNullException(nameof(targetSystem));
+
+        this.lazyTargetSystem = LazyHelper.Create(() => context.Logics.TargetSystem.GetByName(this.Name, true));
 
         this.TypeResolverS = typeResolver ?? throw new ArgumentNullException(nameof(typeResolver));
         this.TypeResolver = typeResolver.OverrideInput((DomainType domainType) => domainType.FullTypeName).WithCache().WithLock();
@@ -121,18 +126,15 @@ public abstract class TargetSystemService<TBLLContext> : BLLContextContainer<ICo
 
 
 
-    public string Name
-    {
-        get { return this.TargetSystem.Name; }
-    }
+    public string Name => this.targetSystemInfo.Name;
 
-    public TBLLContext TargetSystemContext { get; private set; }
+    public TargetSystem TargetSystem => this.lazyTargetSystem.Value;
 
-    public TargetSystem TargetSystem { get; private set; }
+    public TBLLContext TargetSystemContext { get; }
 
-    public ITypeResolver<string> TypeResolverS { get; private set; }
+    public ITypeResolver<string> TypeResolverS { get; }
 
-    public ITypeResolver<DomainType> TypeResolver { get; private set; }
+    public ITypeResolver<DomainType> TypeResolver { get; }
 
     public abstract ISubscriptionSystemService SubscriptionService { get; }
 

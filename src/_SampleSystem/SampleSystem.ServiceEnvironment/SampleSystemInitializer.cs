@@ -3,6 +3,7 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.NamedLocks;
 using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.DomainDriven.Setup;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,7 +13,6 @@ namespace SampleSystem.ServiceEnvironment;
 
 public class SampleSystemInitializer(
     IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator,
-    SubscriptionMetadataStore subscriptionMetadataStore,
     IInitializeManager initializeManager)
 {
     public async Task InitializeAsync(CancellationToken cancellationToken) =>
@@ -29,22 +29,7 @@ public class SampleSystemInitializer(
 
         contextEvaluator.Evaluate(
             DBSessionMode.Write,
-            context =>
-            {
-                context.Configuration.Logics.TargetSystem.RegisterBase();
-                context.Configuration.Logics.TargetSystem.Register<SampleSystem.Domain.PersistentDomainObjectBase>(true, true);
-
-                var extTypes = new Dictionary<Guid, Type>
-                               {
-                                   { new Guid("{79AF1049-3EC0-46A7-A769-62A24AD4F74E}"), typeof(Framework.Configuration.Domain.Sequence) }
-                               };
-
-                context.Configuration.Logics.TargetSystem.Register<Framework.Configuration.Domain.PersistentDomainObjectBase>(
-                    false,
-                    true,
-                    extTypes: extTypes);
-                context.Configuration.Logics.TargetSystem.Register<Framework.Authorization.Domain.PersistentDomainObjectBase>(false, true);
-            });
+            context => context.ServiceProvider.GetRequiredService<ITargetSystemInitializer>().Init());
 
         contextEvaluator.Evaluate(
             DBSessionMode.Write,
@@ -52,9 +37,7 @@ public class SampleSystemInitializer(
 
         contextEvaluator.Evaluate(
             DBSessionMode.Write,
-            context => subscriptionMetadataStore.RegisterCodeFirstSubscriptions(
-                context.Configuration.Logics.CodeFirstSubscription,
-                context.Configuration));
+            context => context.ServiceProvider.GetRequiredService<ISubscriptionInitializer>().Init());
     }
 
     private async Task InitSecurityAsync<TSecurityInitializer>(CancellationToken cancellationToken)

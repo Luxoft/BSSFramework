@@ -1,4 +1,5 @@
 ﻿using Framework.Configuration.Domain;
+using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
@@ -6,7 +7,7 @@ using Framework.SecuritySystem;
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 
 public class SubscriptionInitializer(
-    [DisabledSecurity] IRepository<CodeFirstSubscription> targetSystemTargetSystem,
+    [DisabledSecurity] IRepository<CodeFirstSubscription> subscriptionRepository,
     IConfigurationBLLContext context,
     SubscriptionMetadataStore metadataStore,
     IPersistentInfoService persistentInfoService) : ISubscriptionInitializer
@@ -25,9 +26,16 @@ public class SubscriptionInitializer(
                                     ?? this.CreateRuntime(m.DomainObjectType)))
                             .ToArray();
 
-        foreach (var subscription in subscriptions)
+        var mergeResult = subscriptionRepository.GetQueryable().GetMergeResult(subscriptions, s => s.Code, s => s.Code);
+
+        foreach (var subscription in mergeResult.AddingItems)
         {
-            await targetSystemTargetSystem.SaveAsync(subscription, cancellationToken);
+            await subscriptionRepository.SaveAsync(subscription, cancellationToken);
+        }
+
+        foreach (var subscription in mergeResult.RemovingItems)
+        {
+            await subscriptionRepository.RemoveAsync(subscription, cancellationToken);
         }
     }
 

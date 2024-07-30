@@ -15,8 +15,8 @@ public class InitializationController(
     IInitializeManager initializeManager)
     : ControllerBase
 {
-    [HttpGet]
-    public async Task SampleSystemInitializer(CancellationToken cancellationToken)
+    [HttpPost]
+    public async Task RunInitialize(CancellationToken cancellationToken)
     {
         var service = new SampleSystemInitializer(contextEvaluator, initializeManager);
 

@@ -7,6 +7,7 @@ using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.Setup;
 using Framework.Events.Legacy;
 using Framework.Notification;
+using Framework.WebApi.Utils.SL;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -85,13 +86,16 @@ public static class SampleSystemFrameworkExtensions
 
         // For notification
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
-        services.AddScoped<IEmployeeSource, Framework.Configuration.BLL.EmployeeSource<Employee>>();
+        services.AddScoped<IEmployeeSource, EmployeeSource<Employee>>();
 
         // For subscription
         services.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(typeof(EmployeeUpdateSubscription).Assembly));
 
         // For legacy audit
         services.AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both));
+
+        // For SL
+        services.AddSingleton<ISlJsonCompatibilitySerializer, SlJsonCompatibilitySerializer>();
 
         return services;
     }

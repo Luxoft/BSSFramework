@@ -10,7 +10,7 @@ namespace Framework.Configuration.WebApi;
 [SLJsonCompatibilityActionFilter]
 [TypeFilter(typeof(SLJsonCompatibilityResourceFilter))]
 [ApiController]
-[Route("ConfigSLJsonFacade.svc")]
+[Route("api/ConfigSLJsonFacade.svc")]
 [ApiExplorerSettings(IgnoreApi = true)]
 public abstract partial class ConfigSLJsonController : ApiControllerBase<IConfigurationBLLContext, IConfigurationDTOMappingService>
 {

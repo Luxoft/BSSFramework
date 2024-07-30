@@ -16,17 +16,23 @@ public class SubscriptionInitializer(
         var subscriptions = metadataStore
                             .store
                             .SelectMany(g => g)
-                            .Select(m => new CodeFirstSubscription(
-                                        m.Code,
-                                        context.GetDomainType(
-                                            m.DomainObjectType,
-                                            persistentInfoService.IsPersistent(m.DomainObjectType))
-                                        ?? new DomainType(new TargetSystem(false, false, false))))
+                            .Select(
+                                m => new CodeFirstSubscription(
+                                    m.Code,
+                                    context.GetDomainType(
+                                        m.DomainObjectType,
+                                        persistentInfoService.IsPersistent(m.DomainObjectType))
+                                    ?? this.CreateRuntime(m.DomainObjectType)))
                             .ToArray();
 
         foreach (var subscription in subscriptions)
         {
             await targetSystemTargetSystem.SaveAsync(subscription, cancellationToken);
         }
+    }
+
+    private DomainType CreateRuntime(Type type)
+    {
+        return new DomainType(new TargetSystem(false, false, false) { Name = "Runtime TargetSystem" }) { Name = type.Name };
     }
 }

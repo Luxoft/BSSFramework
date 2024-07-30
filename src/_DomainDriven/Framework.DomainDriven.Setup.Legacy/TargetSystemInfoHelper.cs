@@ -12,14 +12,7 @@ public static class TargetSystemInfoHelper
         PersistentHelper.BaseTargetSystemId,
         false,
         false,
-        [
-            new(typeof(string), PersistentHelper.StringDomainTypeId),
-            new(typeof(bool), PersistentHelper.BooleanDomainTypeId),
-            new(typeof(DateTime), PersistentHelper.DateTimeTypeId),
-            new(typeof(decimal), PersistentHelper.DecimalTypeId),
-            new(typeof(Guid), PersistentHelper.GuidDomainTypeId),
-            new(typeof(int), PersistentHelper.Int32DomainTypeId),
-        ]);
+        PersistentHelper.BaseTypes.Select(pair => new DomainTypeInfo(pair.Key, pair.Value)).ToList());
 
     public static TargetSystemInfo<Framework.Authorization.Domain.PersistentDomainObjectBase> Authorization { get; } = new(
         nameof(Authorization),
@@ -29,7 +22,6 @@ public static class TargetSystemInfoHelper
         [
             new (typeof(BusinessRole), new Guid("{3823172C-B703-46FD-A82F-B55833EBCD38}")),
             new (typeof(Permission), new Guid("{5d774041-bc69-4841-b64e-a2ee0131e632}")),
-            new (typeof(PermissionRestriction), new Guid("{48880DB2-1BC0-4130-BC87-F0E8E0D246CC}")),
             new (typeof(Principal), new Guid("{fa27cd64-c5e6-4356-9efa-a35b00ff69dd}"))
         ]);
 

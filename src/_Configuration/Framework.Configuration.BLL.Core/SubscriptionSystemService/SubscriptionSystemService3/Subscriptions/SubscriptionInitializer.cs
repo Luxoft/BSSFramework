@@ -33,6 +33,9 @@ public class SubscriptionInitializer(
 
     private DomainType CreateRuntime(Type type)
     {
-        return new DomainType(new TargetSystem(false, false, false) { Name = "Runtime TargetSystem" }) { Name = type.Name };
+        return new DomainType(new TargetSystem(false, false, false) { Name = "Runtime TargetSystem" })
+               {
+                   Name = type.Name, NameSpace = type.Namespace
+               };
     }
 }

@@ -23,5 +23,5 @@ public interface ISecuritySystemSettings
 
     ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions);
 
-    ISecuritySystemSettings SetCurrentUserSecurityProvider(Type type);
+    ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType);
 }

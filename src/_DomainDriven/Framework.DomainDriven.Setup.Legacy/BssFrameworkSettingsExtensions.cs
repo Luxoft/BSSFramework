@@ -40,35 +40,32 @@ public static class BssFrameworkSettingsExtensions
 
     public static IBssFrameworkSettings AddConfigurationTargetSystems(this IBssFrameworkSettings settings, Action<ITargetSystemRootSettings> setupAction)
     {
-        return settings.AddServices(sc =>
-                                    {
-                                        var tsSettings = new TargetSystemRootSettings();
+        return settings.AddServices(
+            sc =>
+            {
+                var tsSettings = new TargetSystemRootSettings();
 
-                                        setupAction.Invoke(tsSettings);
+                setupAction.Invoke(tsSettings);
 
-                                        if (tsSettings.RegisterBase)
-                                        {
-                                            tsSettings.AddTargetSystem(TargetSystemInfoHelper.Base);
-                                        }
+                if (tsSettings.RegisterBase)
+                {
+                    tsSettings.AddTargetSystem(TargetSystemInfoHelper.Base);
+                }
 
-                                        if (tsSettings.RegisterAuthorization)
-                                        {
-                                            tsSettings
-                                                .AddTargetSystem<IAuthorizationBLLContext,
-                                                    Framework.Authorization.Domain.PersistentDomainObjectBase>(
-                                                    TargetSystemInfoHelper.Authorization);
-                                        }
+                if (tsSettings.RegisterAuthorization)
+                {
+                    tsSettings.AddTargetSystem<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(
+                            TargetSystemInfoHelper.Authorization);
+                }
 
-                                        if (tsSettings.RegisterConfiguration)
-                                        {
-                                            tsSettings
-                                                .AddTargetSystem<IConfigurationBLLContext,
-                                                    Framework.Configuration.Domain.PersistentDomainObjectBase>(
-                                                    TargetSystemInfoHelper.Configuration);
-                                        }
+                if (tsSettings.RegisterConfiguration)
+                {
+                    tsSettings.AddTargetSystem<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(
+                        TargetSystemInfoHelper.Configuration);
+                }
 
-                                        tsSettings.Initialize(sc);
-                                    });
+                tsSettings.Initialize(sc);
+            });
     }
 
     private static IBssFrameworkSettings AddServices(this IBssFrameworkSettings settings, Action<IServiceCollection> setupAction)

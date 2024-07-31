@@ -5,6 +5,34 @@ namespace Framework.Core;
 
 public static class TypeExtensions
 {
+    public static bool HasInterfaceMethodOverride(this Type sourceType, Type interfaceType)
+    {
+        if (!interfaceType.IsInterface)
+        {
+            throw new ArgumentException("Parameter 'interfaceType' must be an interface type.");
+        }
+
+        if (!interfaceType.IsAssignableFrom(sourceType))
+        {
+            throw new ArgumentException("The 'sourceType' does not implement the 'interfaceType'.");
+        }
+
+        var map = sourceType.GetInterfaceMap(interfaceType);
+
+        for (var i = 0; i < map.InterfaceMethods.Length; i++)
+        {
+            var interfaceMethod = map.InterfaceMethods[i];
+            var targetMethod = map.TargetMethods[i];
+
+            if (interfaceMethod != targetMethod)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static IEnumerable<T> GetStaticPropertyValueList<T>(this Type type, Func<string, bool> filter = null)
     {
         return from prop in type.GetProperties(BindingFlags.Static | BindingFlags.Public)

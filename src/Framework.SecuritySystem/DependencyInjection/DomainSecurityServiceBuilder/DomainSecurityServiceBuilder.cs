@@ -7,7 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
-internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecurityServiceBuilder<TDomainObject>, IDomainSecurityServiceBuilder
+public abstract class DomainSecurityServiceBuilder : IDomainSecurityServiceBuilder
+{
+    public abstract Type DomainType { get; }
+
+    public abstract void Register(IServiceCollection services);
+}
+
+internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : DomainSecurityServiceBuilder, IDomainSecurityServiceBuilder<TDomainObject>
     where TDomainObject : IIdentityObject<TIdent>
 {
     private readonly List<Type> securityFunctorTypes = new();
@@ -24,8 +31,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
     public Type? DependencyServiceType { get; private set; }
 
+    public override Type DomainType { get; } = typeof(TDomainObject);
 
-    public void Register(IServiceCollection services)
+    public override void Register(IServiceCollection services)
     {
         if (this.ViewRule != null || this.EditRule != null)
         {

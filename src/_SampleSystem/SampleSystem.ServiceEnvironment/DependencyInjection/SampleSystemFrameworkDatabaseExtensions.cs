@@ -16,19 +16,19 @@ namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemFrameworkDatabaseExtensions
 {
-    public static IBssFrameworkSettings AddDatabaseSettings(this IBssFrameworkSettings services, IConfiguration configuration)
+    public static IBssFrameworkSettings AddDatabaseSettings(this IBssFrameworkSettings settings, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-        return services.AddDatabaseSettings(connectionString);
+        return settings.AddDatabaseSettings(connectionString);
     }
 
     public static IBssFrameworkSettings AddDatabaseSettings(
-        this IBssFrameworkSettings services,
+        this IBssFrameworkSettings settings,
         string connectionString,
         bool includeTypedAudit = true)
     {
-        return services.AddDatabaseSettings(
+        return settings.AddDatabaseSettings(
             setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
 
                                 .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
@@ -45,8 +45,8 @@ public static class SampleSystemFrameworkDatabaseExtensions
                                 .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));
     }
 
-    public static IBssFrameworkSettings AddDatabaseVisitors(this IBssFrameworkSettings services)
+    public static IBssFrameworkSettings AddDatabaseVisitors(this IBssFrameworkSettings settings)
     {
-        return services.AddDatabaseVisitors<ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
+        return settings.AddDatabaseVisitors<ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
     }
 }

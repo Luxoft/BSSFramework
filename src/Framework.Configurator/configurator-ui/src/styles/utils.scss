@@ -1,48 +1,12 @@
 @import 'variables.scss';
 
-.mat-headline-1 {
-  @include mat.typography-level($typography, 'headline-1');
-}
 
-.mat-headline-2 {
-  @include mat.typography-level($typography, 'headline-2');
-}
-
-.mat-headline-3 {
-  @include mat.typography-level($typography, 'headline-3');
-}
-
-.mat-headline-4 {
-  @include mat.typography-level($typography, 'headline-4');
-}
-
-.mat-headline-5 {
-  @include mat.typography-level($typography, 'headline-5');
-}
-
-.mat-headline-6 {
-  @include mat.typography-level($typography, 'headline-6');
-}
+@include mat.typography-hierarchy($typography);
 
 .mat-subtitle-1 {
-  @include mat.typography-level($typography, 'subtitle-1');
+  margin: 0;
 }
 
-.mat-subtitle-2 {
-  @include mat.typography-level($typography, 'subtitle-2');
-}
-
-.mat-body-1 {
-  @include mat.typography-level($typography, 'body-1');
-}
-
-.mat-body-2 {
-  @include mat.typography-level($typography, 'body-2');
-}
-
-.mat-caption {
-  @include mat.typography-level($typography, 'caption');
-}
 
 .text-break {
   white-space: break-spaces !important;

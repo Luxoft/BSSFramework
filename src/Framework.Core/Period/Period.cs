@@ -4,69 +4,82 @@ using System.Runtime.Serialization;
 namespace Framework.Core;
 
 [DataContract(Namespace = "")]
-public record struct Period(DateTime StartDate, DateTime? EndDate = null) : IAdditionOperators<Period, Period, Period>, IParsable<Period>
+public record struct Period : IAdditionOperators<Period, Period, Period>, IParsable<Period>, IComparable<Period>, IComparable
 {
+    private readonly DateTime startDate;
+
+    private readonly DateTime? endDate;
+
+    public Period(DateTime startDate, DateTime? endDate = null)
+    {
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public Period(int startYear, int startMonth, int startDay, int endYear, int endMonth, int endDay)
-            : this(new DateTime(startYear, startMonth, startDay), new DateTime(endYear, endMonth, endDay))
+        : this(new DateTime(startYear, startMonth, startDay), new DateTime(endYear, endMonth, endDay))
     {
     }
 
     public Period(int startYear, int startMonth, int startDay)
-            : this(new DateTime(startYear, startMonth, startDay))
+        : this(new DateTime(startYear, startMonth, startDay))
     {
     }
 
     public Period(int startYear, int startMonth, int startDay, int endMonth, int endDay)
-            : this(new DateTime(startYear, startMonth, startDay), new DateTime(startYear, endMonth, endDay))
+        : this(new DateTime(startYear, startMonth, startDay), new DateTime(startYear, endMonth, endDay))
     {
     }
 
     public Period(int startMonth, int startDay, int endMonth, int endDay)
-            : this(new DateTime(DateTime.Today.Year, startMonth, startDay), new DateTime(DateTime.Today.Year, endMonth, endDay))
+        : this(new DateTime(DateTime.Today.Year, startMonth, startDay), new DateTime(DateTime.Today.Year, endMonth, endDay))
     {
     }
 
     public Period(int year, int month)
-            : this(new DateTime(year, month, 1), new DateTime(year, month, 1).ToEndMonthDate())
+        : this(new DateTime(year, month, 1), new DateTime(year, month, 1).ToEndMonthDate())
     {
     }
+
+    [DataMember]
+    public DateTime StartDate => this.startDate;
+
+    [DataMember]
+    public DateTime? EndDate => this.endDate;
 
     /// <summary>
     /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода с учетом ограничей sql базы данных
     /// </summary>
     [IgnoreDataMember]
-    public DateTime EndDateValue
-    {
-        get { return this.EndDate ?? Eternity.EndDateValue; }
-    }
+    public DateTime EndDateValue => this.EndDate ?? Eternity.EndDateValue;
 
     [IgnoreDataMember]
-    public TimeSpan Duration
-    {
-        get { return this.EndDateValue - this.StartDate; }
-    }
+    public TimeSpan Duration => this.EndDateValue - this.StartDate;
 
     [IgnoreDataMember]
-    public bool IsEmpty
-    {
-        get { return this.StartDate > this.EndDateValue; }
-    }
+    public bool IsEmpty => this.StartDate > this.EndDateValue;
 
     [IgnoreDataMember]
-    public bool IsWithinOneMonth
-    {
-        get { return this.StartDate.Month == this.EndDateValue.Month && this.StartDate.Year == this.EndDateValue.Year; }
-    }
+    public bool IsWithinOneMonth => this.StartDate.Month == this.EndDateValue.Month && this.StartDate.Year == this.EndDateValue.Year;
 
     [IgnoreDataMember]
-    public bool IsMonth
-    {
-        get { return this.StartDate.ToStartMonthDate() == this.StartDate && this.EndDateValue == this.StartDate.ToEndMonthDate(); }
-    }
+    public bool IsMonth => this.StartDate.ToStartMonthDate() == this.StartDate && this.EndDateValue == this.StartDate.ToEndMonthDate();
 
     public override string ToString()
     {
         return this.ToDisplayName(true);
+    }
+
+    public int CompareTo(object other)
+    {
+        return this.CompareTo((Period)other);
+    }
+
+    public int CompareTo(Period other)
+    {
+        var startDateCompare = this.StartDate.CompareTo(other.startDate);
+
+        return startDateCompare == 0 ? this.EndDateValue.CompareTo(other.EndDateValue) : startDateCompare;
     }
 
     /// <summary>
@@ -136,10 +149,10 @@ public record struct Period(DateTime StartDate, DateTime? EndDate = null) : IAdd
     /// <summary>
     /// Предоставляет экземпляр бесконечного периода
     /// </summary>
-    public static readonly Period Eternity = new (DateTime.MinValue, DateTime.MaxValue);
+    public static readonly Period Eternity = new(DateTime.MinValue, DateTime.MaxValue);
 
     /// <summary>
     /// Предоставляет экземпляр пустого периода
     /// </summary>
-    public static readonly Period Empty = new (DateTime.MaxValue, DateTime.MinValue);
+    public static readonly Period Empty = new(DateTime.MaxValue, DateTime.MinValue);
 }

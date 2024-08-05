@@ -15,6 +15,7 @@ public static class PropertyInfoExtensions
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
 
-        return propertyInfo.GetPrivateField().Maybe(field => !field.HasAttribute<NotPersistentFieldAttribute>());
+        return propertyInfo.HasPrivateField(true)
+               || propertyInfo.GetPrivateField().Maybe(field => !field.HasAttribute<NotPersistentFieldAttribute>());
     }
 }

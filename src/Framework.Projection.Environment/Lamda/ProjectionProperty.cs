@@ -36,7 +36,11 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
 
         this.lazyElementProjection = getPropProjection.Maybe(v => LazyHelper.Create(v));
 
-        this.Path.Where(prop => !prop.IsPersistent()).Foreach(prop => throw new Exception($"Projection property \"{prop.Name}\" of path \"{this.Expression}\" must be persistent"));
+        foreach (var prop in this.Path.Where(prop => !prop.IsPersistent()))
+        {
+            throw new Exception($"Projection property \"{prop.Name}\" of path \"{this.Expression}\" must be persistent");
+        }
+
         this.Attributes = (attributes ?? throw new ArgumentNullException(nameof(attributes))).ToReadOnlyCollection();
     }
 

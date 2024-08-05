@@ -3,12 +3,8 @@
 namespace Framework.Core;
 
 [DataContract(Namespace = "")]
-public partial struct Period : IEquatable<Period>, IComparable<Period>, IComparable
+public partial record struct Period(DateTime StartDate, DateTime? EndDate = null)
 {
-    private DateTime startDate;
-
-    private DateTime? endDate;
-
     public Period(int startYear, int startMonth, int startDay, int endYear, int endMonth, int endDay)
             : this(new DateTime(startYear, startMonth, startDay), new DateTime(endYear, endMonth, endDay))
     {
@@ -29,25 +25,18 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     {
     }
 
-    public Period(DateTime startDate, DateTime? endDate = null)
-            : this()
-    {
-        this.StartDate = startDate;
-        this.EndDate = endDate;
-    }
-
     public Period(int year, int month)
-            : this()
+            : this(new DateTime(year, month, 1), new DateTime(year, month, 1).ToEndMonthDate())
     {
-        this.StartDate = new DateTime(year, month, 1);
-        this.EndDate = this.startDate.ToEndMonthDate();
     }
 
-    public Period(string startDate, string endDate = null)
-            : this()
+    /// <summary>
+    /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода с учетом ограничей sql базы данных
+    /// </summary>
+    [IgnoreDataMember]
+    public DateTime EndDateValue
     {
-        this.StartDate = DateTime.Parse(startDate);
-        this.EndDate = endDate.MaybeToNullable(DateTime.Parse);
+        get { return this.EndDate ?? Eternity.EndDateValue; }
     }
 
     [IgnoreDataMember]
@@ -72,35 +61,6 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     public bool IsMonth
     {
         get { return this.StartDate.ToStartMonthDate() == this.StartDate && this.EndDateValue == this.StartDate.ToEndMonthDate(); }
-    }
-
-    #region Public.Method
-
-    public bool Equals(Period other)
-    {
-        return this.StartDate == other.StartDate && this.EndDate == other.EndDate;
-    }
-
-    public int CompareTo(object other)
-    {
-        return this.CompareTo((Period)other);
-    }
-
-    public int CompareTo(Period other)
-    {
-        var startDateCompare = this.StartDate.CompareTo(other.startDate);
-
-        return startDateCompare == 0 ? this.EndDateValue.CompareTo(other.EndDateValue) : startDateCompare;
-    }
-
-    public override bool Equals(object obj)
-    {
-        return obj is Period && this.Equals((Period)obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return this.StartDate.GetHashCode() ^ this.EndDate.GetHashCode();
     }
 
     public override string ToString()
@@ -215,10 +175,6 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
         return intersect.Duration != TimeSpan.Zero;
     }
 
-    #endregion
-
-    #region Public.Static.Method
-
     /// <summary>
     /// Parse string
     /// Ex:
@@ -256,16 +212,6 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
         return new Period(p1.StartDate.Min(p2.StartDate), p1.EndDateValue.Max(p2.EndDateValue));
     }
 
-    public static bool operator ==(Period p1, Period p2)
-    {
-        return p1.Equals(p2);
-    }
-
-    public static bool operator !=(Period p1, Period p2)
-    {
-        return !p1.Equals(p2);
-    }
-
 
     public static Period FromYear(int year)
     {
@@ -273,10 +219,6 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
 
         return start.ToPeriod(start.ToEndYearDate());
     }
-
-    #endregion
-
-    #region Private methods
 
     private IEnumerable<Period> SplitToWeeksInternal(DayOfWeek firstDay = DayOfWeek.Monday)
     {
@@ -299,60 +241,6 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
         }
     }
 
-    #endregion
-}
-
-/// <summary>
-/// Интервал времени выраженный двумя датами
-/// </summary>
-[Serializable]
-public partial struct Period : IDeserializationCallback
-{
-    #region Interface
-
-    void IDeserializationCallback.OnDeserialization(object _)
-    {
-        this.startDate = this.startDate.ToSqlDateTime();
-        this.endDate = this.endDate.ToSqlDateTime();
-    }
-
-    #endregion
-
-    #region Public.Property
-
-    /// <summary>
-    /// Дата начала периода с учетом ограничей sql базы данных
-    /// </summary>
-    [DataMember]
-    public DateTime StartDate
-    {
-        get { return this.startDate.ToSqlDateTime(); }
-        set { this.startDate = value.ToSqlDateTime(); }
-    }
-
-    /// <summary>
-    /// Дата окончания периода с учетом ограничей sql базы данных
-    /// </summary>
-    [DataMember]
-    public DateTime? EndDate
-    {
-        get { return this.endDate.ToSqlDateTime(); }
-        set { this.endDate = value.ToSqlDateTime(); }
-    }
-
-    /// <summary>
-    /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода с учетом ограничей sql базы данных
-    /// </summary>
-    [IgnoreDataMember]
-    public DateTime EndDateValue
-    {
-        get { return this.endDate == null ? Eternity.EndDateValue : this.endDate.Value.ToSqlDateTime(); }
-    }
-
-    #endregion
-
-    #region Public.Static.Property
-
     /// <summary>
     /// Предоставляет экземпляр бесконечного периода
     /// </summary>
@@ -362,6 +250,4 @@ public partial struct Period : IDeserializationCallback
     /// Предоставляет экземпляр пустого периода
     /// </summary>
     public static readonly Period Empty = new (DateTime.MaxValue, DateTime.MinValue);
-
-    #endregion
 }

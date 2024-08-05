@@ -2,7 +2,7 @@
 
 namespace Framework.Core;
 
-public partial struct Period
+public partial record struct Period
 {
     /// <summary>
     /// Преобразует дату начала периода в строковое представление месяца и года в предложном падеже для Российского стандарта

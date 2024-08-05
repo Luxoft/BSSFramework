@@ -24,7 +24,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : DomainSecur
 
     public DomainSecurityRule? EditRule { get; private set; }
 
-    public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
+    public SecurityPath<TDomainObject>? SecurityPath { get; private set; }
 
     public (Type Type, object Instance)? RelativePathData { get; private set; }
 
@@ -42,7 +42,10 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : DomainSecur
                 new DomainObjectSecurityModeInfo(typeof(TDomainObject), this.ViewRule, this.EditRule));
         }
 
-        services.AddSingleton(this.SecurityPath);
+        if (this.SecurityPath != null)
+        {
+            services.AddSingleton(this.SecurityPath);
+        }
 
         if (this.RelativePathData is { } pair)
         {

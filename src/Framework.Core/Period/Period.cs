@@ -1,9 +1,10 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Numerics;
+using System.Runtime.Serialization;
 
 namespace Framework.Core;
 
 [DataContract(Namespace = "")]
-public partial record struct Period(DateTime StartDate, DateTime? EndDate = null)
+public record struct Period(DateTime StartDate, DateTime? EndDate = null) : IAdditionOperators<Period, Period, Period>, IParsable<Period>
 {
     public Period(int startYear, int startMonth, int startDay, int endYear, int endMonth, int endDay)
             : this(new DateTime(startYear, startMonth, startDay), new DateTime(endYear, endMonth, endDay))
@@ -69,113 +70,6 @@ public partial record struct Period(DateTime StartDate, DateTime? EndDate = null
     }
 
     /// <summary>
-    /// Используя текущий период возвращает новый период, который начинается с первого дня начального месяца периода и заканчивается последним днем конечного месяца периода
-    /// </summary>
-    /// <returns>Новый период, который начинается и заканчивается в первом и последнем дне граничных месяцев</returns>
-    public Period RoundByMouths()
-    {
-        return new Period(this.StartDate.ToStartMonthDate(), this.EndDate.MaybeNullableToNullable(d => d.ToEndMonthDate()));
-    }
-
-    /// <summary>
-    /// Используя текущий период возвращает новый период, дата начала и конца (при возможности) которого имеет значение времени 00:00:00
-    /// </summary>
-    /// <returns></returns>
-    public Period Round()
-    {
-        return new Period(this.StartDate.Date, this.EndDate.MaybeNullableToNullable(d => d.Date));
-    }
-
-    /// <summary>
-    /// Для всех дней содержащихся в периоде создается новый период длинною в один этот день
-    /// </summary>
-    /// <returns>Перечисление всех периодов длинною в один день, которые находятся в переданном временном интервале</returns>
-    public IEnumerable<Period> SplitToDays()
-    {
-        for (var date = this.StartDate.Date; date <= this.EndDateValue; date = date.AddDay())
-        {
-            yield return new Period(date, date);
-        }
-    }
-
-    /// <summary>
-    /// Для всех недель содержащихся в периоде создается новый период длинною в одину эту неделю, последняя неделя может быть не полной
-    /// </summary>
-    /// <returns>Перечисление всех периодов длинною в одину неделю, которые находятся в переданном временном интервале</returns>
-    public IEnumerable<Period> SplitToWeeks(DayOfWeek firstDay = DayOfWeek.Monday)
-    {
-        return this.SplitToWeeksInternal(firstDay).OrderBy(v => v);
-    }
-
-    /// <summary>
-    /// Для всех месяцев содержащихся в периоде создается новый период длинною в одинин этот месяц, последний месяц может быть не полном
-    /// </summary>
-    /// <returns>Перечисление всех периодов длинною в один месяц, которые находятся в переданном временном интервале</returns>
-    public IEnumerable<Period> SplitToMonths()
-    {
-        if (this.IsEmpty)
-        {
-            yield break;
-        }
-
-        if (!this.StartDate.IsFirstMonthDate())
-        {
-            if (this.StartDate.ToEndMonthDate() < this.EndDateValue)
-            {
-                yield return new Period(this.StartDate, this.StartDate.ToEndMonthDate());
-            }
-            else
-            {
-                yield return new Period(this.StartDate, this.EndDateValue);
-                yield break;
-            }
-        }
-
-        for (var currentDate = this.StartDate.IsFirstMonthDate() ? this.StartDate : this.StartDate.ToStartMonthDate().AddMonths(1);
-             currentDate.ToEndMonthDate() <= this.EndDateValue;
-             currentDate = currentDate.AddMonths(1))
-        {
-            yield return new Period(currentDate, currentDate.ToEndMonthDate());
-        }
-
-        if (!this.EndDateValue.IsLastMonthDate())
-        {
-            yield return new Period(this.EndDateValue.ToStartMonthDate(), this.EndDateValue);
-        }
-    }
-
-    /// <summary>
-    /// Возвращает новый период, который является пересечением текущего периода с переданным в качестве параметра периода <see cref="otherPeriod"/>
-    /// </summary>
-    /// <remarks>
-    /// Сравнение происходит с учетом ограничения sql базы данных
-    /// </remarks>
-    /// <param name="otherPeriod">Период, из которого извлекаются даты, входящие также в указанный период</param>
-    /// <returns>Новый период представляющий собой пересечение дат заданных двух периодов. Если пересечение дат нету, то период будет пустым</returns>
-    public Period Intersect(Period otherPeriod)
-    {
-        return new Period(this.StartDate.Max(otherPeriod.StartDate), this.EndDate.UnsafeOperation(otherPeriod.EndDate, (d1, d2) => d1.Min(d2)));
-    }
-
-    /// <summary>
-    /// Возвращает значение, указывающее, пересекает ли текущий период значение периода <see cref="target"/> переданного в качестве параметра
-    /// Если полученный при вычислении период имеет нулевую продолжительность, то читается, что периоды не пересекаются
-    /// </summary>
-    /// <param name="target"></param>
-    /// <returns></returns>
-    public bool IsIntersectedExcludeZeroDuration(Period target)
-    {
-        var intersect = this.Intersect(target);
-
-        if (intersect.IsEmpty)
-        {
-            return false;
-        }
-
-        return intersect.Duration != TimeSpan.Zero;
-    }
-
-    /// <summary>
     /// Parse string
     /// Ex:
     /// 2014-01-01@2014-05-04
@@ -183,28 +77,48 @@ public partial record struct Period(DateTime StartDate, DateTime? EndDate = null
     /// Pass NullOrWhiteSpace - result <see cref="Period.Empty"/>
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
-    public static Period Parse(string periodAsString)
+    public static Period Parse(string periodAsString, IFormatProvider provider = null)
+    {
+        return TryParse(periodAsString, provider).GetValue();
+    }
+
+    public static bool TryParse(string periodAsString, IFormatProvider provider, out Period result)
+    {
+        if (TryParse(periodAsString, provider) is ISuccessResult<Period> successResult)
+        {
+            result = successResult.Result;
+            return true;
+        }
+        else
+        {
+            result = Period.Empty;
+            return false;
+        }
+    }
+
+    private static ITryResult<Period> TryParse(string periodAsString, IFormatProvider provider)
     {
         if (string.IsNullOrWhiteSpace(periodAsString))
         {
-            return Empty;
+            return TryResult.Return(Empty);
         }
 
         if (!periodAsString.Contains("@"))
         {
-            return DateTime.Parse(periodAsString).ToPeriod();
+            return TryResult.Return(DateTime.Parse(periodAsString, provider).ToPeriod());
         }
-
 
         var dates = periodAsString.Split('@');
         if (dates.Length > 2)
         {
-            throw new ArgumentException($"Incorrect period string: '{periodAsString}'");
+            return TryResult.CreateFault<Period>(new ArgumentException($"Incorrect period string: '{periodAsString}'"));
         }
 
-        var startDate = DateTime.Parse(dates[0]);
-        var endDate = DateTime.Parse(dates[1]);
-        return new Period(startDate, endDate);
+        var startDate = DateTime.Parse(dates[0], provider);
+
+        var endDate = DateTime.Parse(dates[1], provider);
+
+        return TryResult.Return(new Period(startDate, endDate));
     }
 
     public static Period operator +(Period p1, Period p2)
@@ -212,33 +126,11 @@ public partial record struct Period(DateTime StartDate, DateTime? EndDate = null
         return new Period(p1.StartDate.Min(p2.StartDate), p1.EndDateValue.Max(p2.EndDateValue));
     }
 
-
     public static Period FromYear(int year)
     {
         var start = new DateTime(year, 1, 1);
 
         return start.ToPeriod(start.ToEndYearDate());
-    }
-
-    private IEnumerable<Period> SplitToWeeksInternal(DayOfWeek firstDay = DayOfWeek.Monday)
-    {
-        var weekStartDate = this.StartDate.Date;
-
-        var weekEndDate =
-                weekStartDate.AddDays(
-                                      (14 - (int)weekStartDate.DayOfWeek - (int)DayOfWeek.Monday + (int)firstDay) % 7);
-
-        while (weekEndDate < this.EndDate)
-        {
-            yield return new Period(weekStartDate, weekEndDate);
-            weekStartDate = weekEndDate.AddDay();
-            weekEndDate = weekEndDate.AddWeek();
-        }
-
-        if (weekStartDate <= this.EndDate)
-        {
-            yield return new Period(weekStartDate, this.EndDate);
-        }
     }
 
     /// <summary>

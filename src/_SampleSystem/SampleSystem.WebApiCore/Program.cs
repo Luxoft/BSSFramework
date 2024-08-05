@@ -39,7 +39,6 @@ builder.Host
 builder.Services
        .RegisterGeneralDependencyInjection(builder.Configuration)
        .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
-       .Configure<JsonOptions>(x => x.SerializerOptions.Converters.Add(new UtcDateTimeJsonConverter()))
        .AddPlatformApiDocumentation(builder.Environment, "SampleSystem API", x => x.CustomSchemaIds(t => t.FullName))
        .AddPlatformIntegrationEvents<IntegrationEventProcessor>(
            typeof(ClassACreatedEvent).Assembly,
@@ -52,7 +51,12 @@ builder.Services
        .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
        .AddNegotiate();
 
-builder.Services.AddControllers(x => x.EnableEndpointRouting = false);
+builder.Services.AddControllers(x => x.EnableEndpointRouting = false)
+       .AddJsonOptions(x =>
+                       {
+                           x.JsonSerializerOptions.Converters.Add(new UtcDateTimeJsonConverter());
+                           x.JsonSerializerOptions.Converters.Add(new PeriodJsonConverter());
+                       });
 
 if (builder.Environment.IsProduction()) builder.Services.AddHangfireBss(builder.Configuration.GetConnectionString("DefaultConnection"));
 

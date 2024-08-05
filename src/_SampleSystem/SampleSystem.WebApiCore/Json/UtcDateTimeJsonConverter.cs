@@ -5,17 +5,14 @@ namespace SampleSystem.WebApiCore.Json;
 
 public class UtcDateTimeJsonConverter : JsonConverter<DateTime>
 {
-    public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-        DateTime.Parse(reader.GetString() ?? string.Empty);
+    public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        return reader.GetDateTime();
+    }
 
     public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
     {
-        if (value.Kind != DateTimeKind.Utc)
-        {
-            writer.WriteStringValue(DateTime.SpecifyKind(value, DateTimeKind.Utc));
-            return;
-        }
-
-        writer.WriteStringValue(value);
+        var actualDateTime = value.Kind != DateTimeKind.Utc ? DateTime.SpecifyKind(value, DateTimeKind.Utc) : value;
+        writer.WriteStringValue(actualDateTime);
     }
 }

@@ -2,10 +2,10 @@
 
 using MediatR;
 
-using SampleSystem.BLL._Command.CreateClassA.Intergation;
+using SampleSystem.BLL._Command.CreateClassA.Integration;
 using SampleSystem.Domain.TestForceAbstract;
 
-namespace SampleSystem.BLL._Command.EmployeeAssistantLinked.Intergation;
+namespace SampleSystem.BLL._Command.EmployeeAssistantLinked.Integration;
 
 public record ClassACreatedEventHandler(IRepositoryFactory<ClassA> Repository) : INotificationHandler<ClassACreatedEvent>
 {

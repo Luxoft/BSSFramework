@@ -1,6 +1,6 @@
 ﻿using Framework.DomainDriven.BLL;
 
-using SampleSystem.Domain.IntergrationVersions;
+using SampleSystem.Domain.IntegrationVersions;
 
 namespace SampleSystem.Domain;
 

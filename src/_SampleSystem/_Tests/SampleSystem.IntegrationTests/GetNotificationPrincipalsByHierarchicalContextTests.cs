@@ -33,9 +33,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
 
     private EmployeeIdentityDTO rootEmployee;
 
-    private BusinessRoleIdentityDTO searchNotificationRole;
-
     private string searchNotificationEmployeeLogin1 = nameof(searchNotificationEmployeeLogin1);
+
     private string searchNotificationEmployeeLogin2 = nameof(searchNotificationEmployeeLogin2);
 
     [TestInitialize]

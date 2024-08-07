@@ -23,7 +23,7 @@ public partial class SubscriptionBLL
                 throw new InvalidOperationException($"{nameof(SubscriptionBLL)}::{nameof(this.Process)}: For {nameof(DomainType)} \'{domainType.Name}\' in {nameof(TargetSystem)} \'{domainType.TargetSystem.Name}\' {nameof(TargetSystem.IsRevision)} false but must be true.");
             }
 
-            var subscriptionService = this.Context.GetPersistentTargetSystemService(domainType.TargetSystem).SubscriptionService;
+            var subscriptionService = this.Context.GetTargetSystemService(domainType.TargetSystem).SubscriptionService;
 
             return subscriptionService.Process(changedObjectInfo);
         }

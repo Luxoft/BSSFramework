@@ -1,11 +1,6 @@
-﻿using System.Dynamic;
-using System.Text.Json;
-
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-
-using JsonSerializer = System.Text.Json.JsonSerializer;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.WebApi.Utils.SL;
 
@@ -15,14 +10,9 @@ public class SLJsonCompatibilityActionFilterAttribute : ActionFilterAttribute
     {
         if (context.ActionDescriptor.Parameters.Any())
         {
-            var jsonDoc = (JsonDocument)context.HttpContext.Items[nameof(JsonDocument)];
+            var service = context.HttpContext.RequestServices.GetRequiredService<ISlJsonCompatibilitySerializer>();
 
-            foreach (var parameter in context.ActionDescriptor.Parameters)
-            {
-                var jsonPropValue = jsonDoc.RootElement.GetProperty(parameter.Name);
-
-                context.ActionArguments[parameter.Name] = JsonSerializer.Deserialize(jsonPropValue.GetRawText(), parameter.ParameterType);
-            }
+            await service.DeserializeParameters(context);
         }
 
         await base.OnActionExecutionAsync(context, next);
@@ -30,35 +20,23 @@ public class SLJsonCompatibilityActionFilterAttribute : ActionFilterAttribute
 
     public override void OnActionExecuted(ActionExecutedContext context)
     {
+        var service = context.HttpContext.RequestServices.GetRequiredService<ISlJsonCompatibilitySerializer>();
+
         if (context.Exception != null)
         {
             context.Result = new JsonResult(new { FaultData = context.Exception.Message });
-
             context.Exception = null;
-        }
-        else if (context.Result is ObjectResult objectResult)
-        {
-            context.Result = CreateJsonResult(context, objectResult.Value);
-        }
-        else if (context.Result is EmptyResult)
-        {
-            context.Result = CreateJsonResult(context, new object());
         }
         else
         {
-            throw new NotImplementedException();
+            context.Result = context.Result switch
+            {
+                ObjectResult objectResult => service.CreateJsonResult(context, objectResult.Value),
+                EmptyResult => service.CreateJsonResult(context, new object()),
+                _ => throw new NotSupportedException()
+            };
         }
 
         base.OnActionExecuted(context);
-    }
-
-    private static JsonResult CreateJsonResult(ActionExecutedContext context, object value)
-    {
-        var actionDescriptor = (ControllerActionDescriptor)context.ActionDescriptor;
-
-        IDictionary<string, object> e = new ExpandoObject();
-        e.Add(actionDescriptor.ActionName + "Result", value);
-
-        return new JsonResult(e);
     }
 }

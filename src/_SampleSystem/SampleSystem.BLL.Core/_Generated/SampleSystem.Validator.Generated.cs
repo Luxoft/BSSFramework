@@ -75,8 +75,8 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.Insurance>(this.GetInsuranceValidationResult);
             base.RegisterHandler<SampleSystem.Domain.InsuranceDetail>(this.GetInsuranceDetailValidationResult);
             base.RegisterHandler<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>(this.GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(this.GetIntegrationVersionContainer1ValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>(this.GetIntegrationVersionContainer2ValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(this.GetIntegrationVersionContainer1ValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>(this.GetIntegrationVersionContainer2ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.LegalEntityBase>(this.GetLegalEntityBaseValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Location>(this.GetLocationValidationResult);
             base.RegisterHandler<SampleSystem.Domain.LocationAncestorLink>(this.GetLocationAncestorLinkValidationResult);
@@ -416,12 +416,12 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer1ValidationResult(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer1ValidationResult(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer2ValidationResult(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer2ValidationResult(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

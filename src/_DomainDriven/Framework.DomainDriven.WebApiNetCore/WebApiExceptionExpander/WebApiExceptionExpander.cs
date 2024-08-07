@@ -41,7 +41,7 @@ public class WebApiExceptionExpander : IWebApiExceptionExpander
         var expectedExceptions = new[]
                                  {
                                          typeof(BusinessLogicException),
-                                         typeof(IntergationException),
+                                         typeof(IntegrationException),
                                          typeof(SecurityException),
                                          typeof(ValidationException),
                                          typeof(DALException),

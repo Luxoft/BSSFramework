@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.Persistent;
 
 namespace SampleSystem.Domain;
 
@@ -12,7 +11,6 @@ namespace SampleSystem.Domain;
 /// </summary>
 [BLLViewRole]
 [BLLSaveRole]
-[DomainType("DB66670A-6A1A-4F0E-BDAE-20ED291B2ACC")]
 public class Principal : AuditPersistentDomainObjectBase
 {
     private string externalId;

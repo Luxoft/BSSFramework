@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 
 using Framework.DomainDriven.BLL;
-using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Security;
 using Framework.Validation;
@@ -62,7 +61,6 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
                                                                    !(attr is TableAttribute)
                                                                    && !(attr is BLLRoleAttribute)
                                                                    && !(attr is ClassValidatorAttribute)
-                                                                   && !(attr is DomainTypeAttribute)
                                                                    && !(attr is DomainObjectAccessAttribute)
                                                                    && !(attr is DependencySecurityAttribute));
     }

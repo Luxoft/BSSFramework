@@ -1,10 +1,8 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.Persistent;
 
-namespace SampleSystem.Domain.IntergrationVersions;
+namespace SampleSystem.Domain.IntegrationVersions;
 
-[DomainType("D1972415-C65B-42D7-ADBB-561B03935E70")]
 [BLLIntegrationSaveRole(CountType = CountType.Both)]
 [BLLIntegrationRemoveRole]
 public class IntegrationVersionContainer1 : ExternalDomainObject

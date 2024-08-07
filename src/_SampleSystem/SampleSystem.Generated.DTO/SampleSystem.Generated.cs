@@ -4046,7 +4046,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct IntegrationVersionContainer1IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -4060,7 +4060,7 @@ namespace SampleSystem.Generated.DTO
             this._id = id;
         }
         
-        public IntegrationVersionContainer1IdentityDTO(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
+        public IntegrationVersionContainer1IdentityDTO(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -4128,7 +4128,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToIntegrationVersionContainer1(this);
         }
@@ -4139,7 +4139,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct IntegrationVersionContainer2IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.IntegrationVersionContainer2IdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -4153,7 +4153,7 @@ namespace SampleSystem.Generated.DTO
             this._id = id;
         }
         
-        public IntegrationVersionContainer2IdentityDTO(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 domainObject)
+        public IntegrationVersionContainer2IdentityDTO(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -4221,7 +4221,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToIntegrationVersionContainer2(this);
         }

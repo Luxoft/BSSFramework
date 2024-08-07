@@ -17,6 +17,6 @@ public class CurrentUserSecurityProvider<TDomainObject>(
 
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {
-        return SecurityAccessorData.Return(toEmployeePathInfo.Path.Eval(domainObject).Login);
+        return SecurityAccessorData.TryReturn(toEmployeePathInfo.Path.Eval(domainObject).Login);
     }
 }

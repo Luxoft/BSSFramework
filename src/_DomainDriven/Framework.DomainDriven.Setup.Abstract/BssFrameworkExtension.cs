@@ -2,7 +2,7 @@
 
 namespace Framework.DomainDriven.Setup;
 
-public class BssFrameworkExtension(Action<IServiceCollection> addServicesAction) : IBssFrameworkExtension
+public class BssFrameworkExtension(Action<IServiceCollection> setupAction) : IBssFrameworkExtension
 {
-    public void AddServices(IServiceCollection services) => addServicesAction(services);
+    public void AddServices(IServiceCollection services) => setupAction(services);
 }

@@ -9,7 +9,6 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 /// Связь между пермиссией и контекстом
 /// </summary>
-[DomainType("{48880DB2-1BC0-4130-BC87-F0E8E0D246CC}")]
 public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Permission>, IPermissionRestriction<Guid>
 {
     private readonly Permission permission;

@@ -8,7 +8,6 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 /// Набор секьюрных операций, который выдается принципалу вместе с контекcтом их применения
 /// </summary>
-[DomainType("{3823172C-B703-46FD-A82F-B55833EBCD38}")]
 [UniqueGroup]
 public class BusinessRole : BaseDirectory
 {

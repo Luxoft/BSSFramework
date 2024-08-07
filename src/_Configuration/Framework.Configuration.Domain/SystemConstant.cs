@@ -11,7 +11,6 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
-[DomainType("{42C47133-A8C5-4E8E-9D46-385038BFE2B9}")]
 public class SystemConstant :
         AuditPersistentDomainObjectBase,
         ICodeObject,

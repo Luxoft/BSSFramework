@@ -40,15 +40,15 @@ public partial interface IConfigurationBLLContext :
 
     ISubscriptionSystemService GetSubscriptionSystemService(Type domainType);
 
-    IPersistentTargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem);
-
-    IEnumerable<IPersistentTargetSystemService> GetPersistentTargetSystemServices();
-
     ITargetSystemService GetTargetSystemService(TargetSystem targetSystem);
 
     ITargetSystemService GetTargetSystemService(Type domainType, bool throwOnNotFound);
 
     ITargetSystemService GetTargetSystemService(string name);
+
+    TargetSystemInfo GetTargetSystemInfo(Type domainType);
+
+    DomainTypeInfo GetDomainTypeInfo(Type domainType);
 
     ITargetSystemService GetMainTargetSystemService();
 

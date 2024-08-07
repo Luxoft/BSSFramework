@@ -134,7 +134,6 @@ internal class GeneratedType : BaseTypeImpl
                                                                    !(attr is TableAttribute)
                                                                    && !(attr is BLLRoleAttribute)
                                                                    && !(attr is ClassValidatorAttribute)
-                                                                   && !(attr is DomainTypeAttribute)
                                                                    && !(attr is DomainObjectAccessAttribute)
                                                                    && !(attr is DependencySecurityAttribute));
     }

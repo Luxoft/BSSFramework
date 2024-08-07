@@ -19,6 +19,12 @@ public interface IDomainSecurityServiceBuilder<TDomainObject>
     /// <returns></returns>
     IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>();
 
+    /// <summary>
+    /// RelativeDomainPathInfo will be automatically registered
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="relativeDomainPath"></param>
+    /// <returns></returns>
     IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> relativeDomainPath);
 
     /// <summary>

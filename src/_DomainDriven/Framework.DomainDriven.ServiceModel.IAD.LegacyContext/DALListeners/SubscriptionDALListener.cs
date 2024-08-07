@@ -19,7 +19,7 @@ public class SubscriptionDALListener : IBeforeTransactionCompletedDALListener
 
     public void Process(DALChangesEventArgs eventArgs)
     {
-        foreach (var targetSystemService in this.configurationBllContext.GetPersistentTargetSystemServices())
+        foreach (var targetSystemService in this.configurationBllContext.GetTargetSystemServices())
         {
             if (targetSystemService.TargetSystem.SubscriptionEnabled)
             {

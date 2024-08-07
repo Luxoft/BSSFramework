@@ -4,7 +4,6 @@ using Framework.Persistent;
 
 namespace Framework.Authorization.Domain;
 
-[TargetSystem("{f065289e-4dc5-48c9-be44-a2ee0131e631}")]
 public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<PersistentDomainObjectBase>, IIdentityObject<Guid>
 {
     private Guid id;

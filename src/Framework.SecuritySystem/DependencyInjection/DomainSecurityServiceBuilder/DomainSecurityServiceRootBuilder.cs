@@ -9,7 +9,9 @@ namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuil
 
 internal class DomainSecurityServiceRootBuilder<TIdent> : IDomainSecurityServiceRootBuilder
 {
-    private readonly List<IDomainSecurityServiceBuilder> domainBuilders = new();
+    private readonly List<DomainSecurityServiceBuilder> domainBuilders = new();
+
+    public bool AutoAddSelfRelativePath { get; set; } = true;
 
     public IDomainSecurityServiceRootBuilder Add<TDomainObject>(Action<IDomainSecurityServiceBuilder<TDomainObject>> setup)
     {
@@ -34,7 +36,7 @@ internal class DomainSecurityServiceRootBuilder<TIdent> : IDomainSecurityService
     }
 
     private IDomainSecurityServiceRootBuilder AddInternal<TDomainObject>(Action<IDomainSecurityServiceBuilder<TDomainObject>> setup)
-        where TDomainObject: IIdentityObject<TIdent>
+        where TDomainObject : IIdentityObject<TIdent>
     {
         var builder = new DomainSecurityServiceBuilder<TDomainObject, TIdent>();
 
@@ -47,6 +49,16 @@ internal class DomainSecurityServiceRootBuilder<TIdent> : IDomainSecurityService
 
     public void Register(IServiceCollection services)
     {
-        this.domainBuilders.ForEach(b => b.Register(services));
+        foreach (var domainBuilder in this.domainBuilders)
+        {
+            domainBuilder.Register(services);
+
+            if (this.AutoAddSelfRelativePath)
+            {
+                services.AddSingleton(
+                    typeof(IRelativeDomainPathInfo<,>).MakeGenericType(domainBuilder.DomainType, domainBuilder.DomainType),
+                    typeof(SelfRelativeDomainPathInfo<>).MakeGenericType(domainBuilder.DomainType));
+            }
+        }
     }
 }

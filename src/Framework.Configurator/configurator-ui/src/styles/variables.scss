@@ -1,21 +1,21 @@
 @use '@angular/material' as mat;
 
-$primary-palette: mat.$deep-purple-palette;
-$accent-palette: mat.$pink-palette;
-$warn-palette: mat.$deep-orange-palette;
+$primary-palette: mat.$m2-deep-purple-palette;
+$accent-palette: mat.$m2-pink-palette;
+$warn-palette: mat.$m2-deep-orange-palette;
 
-$typography: mat.define-typography-config(
-  $headline-1: mat.define-typography-level(96px, 96px, 300, $letter-spacing: -0.015625em),
-  $headline-2: mat.define-typography-level(60, 60, 300, $letter-spacing: -0.0083333333em),
-  $headline-3: mat.define-typography-level(48px, 50px, 400),
-  $headline-4: mat.define-typography-level(34px, 40px, 400, $letter-spacing: 0.0073529412em),
-  $headline-5: mat.define-typography-level(24px, 32px, 400),
-  $headline-6: mat.define-typography-level(20px, 32px, 500, $letter-spacing: 0.0125em),
-  $subtitle-1: mat.define-typography-level(16px, 28px, 400, $letter-spacing: 0.009375em),
-  $subtitle-2: mat.define-typography-level(14px, 22px, 500, $letter-spacing: 0.0071428571em),
-  $body-1: mat.define-typography-level(14px, 20px, 400, $letter-spacing: 0.0178571429em),
-  $body-2: mat.define-typography-level(14px, 20px, 400, $letter-spacing: 0.0178571429em),
-  $caption: mat.define-typography-level(12px, 20px, 400, $letter-spacing: 0.0333333333em),
+$typography: mat.m2-define-typography-config(
+  $headline-1: mat.m2-define-typography-level(96px, 96px, 300, $letter-spacing: -0.015625em),
+  $headline-2: mat.m2-define-typography-level(60, 60, 300, $letter-spacing: -0.0083333333em),
+  $headline-3: mat.m2-define-typography-level(48px, 50px, 400),
+  $headline-4: mat.m2-define-typography-level(34px, 40px, 400, $letter-spacing: 0.0073529412em),
+  $headline-5: mat.m2-define-typography-level(24px, 32px, 400),
+  $headline-6: mat.m2-define-typography-level(20px, 32px, 500, $letter-spacing: 0.0125em),
+  $subtitle-1: mat.m2-define-typography-level(16px, 28px, 400, $letter-spacing: 0.009375em),
+  $subtitle-2: mat.m2-define-typography-level(14px, 22px, 500, $letter-spacing: 0.0071428571em),
+  $body-1: mat.m2-define-typography-level(14px, 20px, 400, $letter-spacing: 0.0178571429em),
+  $body-2: mat.m2-define-typography-level(14px, 20px, 400, $letter-spacing: 0.0178571429em),
+  $caption: mat.m2-define-typography-level(12px, 20px, 400, $letter-spacing: 0.0333333333em),
 );
 
 $header-height: 64px;

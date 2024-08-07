@@ -15,7 +15,7 @@ export class HttpRequestsInterceptor implements HttpInterceptor {
       catchError((z: Error) => {
         if (z instanceof HttpErrorResponse) {
           return from(this.getErrorMessage(z)).pipe(
-            tap((x) => this.snackBar.open(x, undefined, { panelClass: 'error-message' })),
+            tap((x) => this.snackBar.open(x, undefined, { panelClass: 'error-message', duration: 15000 })),
             switchMap(() => throwError(() => z))
           );
         }

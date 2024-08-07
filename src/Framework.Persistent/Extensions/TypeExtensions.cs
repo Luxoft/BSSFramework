@@ -38,21 +38,10 @@ public static class TypeExtensions
                select propertyGroup.Count() == 1 ? propertyGroup.Single() : propertyGroup.Single(property => property.HasPrivateField());
     }
 
-    public static Guid GetTargetSystemId(this Type type)
+    public static string ExtractSystemName(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
-        return type.Assembly == typeof(void).Assembly
-                   ? PersistentHelper.BaseTargetSystemId
-                   : type.GetCustomAttribute<TargetSystemAttribute>().Maybe(attr => attr.Id);
-    }
-
-    public static string GetTargetSystemName(this Type type)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        return type.Assembly == typeof(void).Assembly
-                   ? PersistentHelper.BaseTargetSystemName
-                   : type.GetCustomAttribute<TargetSystemAttribute>().Maybe(attr => attr.Name) ?? type.Namespace.Split('.').Skip("Framework", false).First();
+        return type.Namespace.Split('.').Skip("Framework", false).First();
     }
 }

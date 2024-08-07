@@ -8,7 +8,6 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 ///     Идентификатор (логин) пользователя в системе
 /// </summary>
-[DomainType("{fa27cd64-c5e6-4356-9efa-a35b00ff69dd}")]
 [DebuggerDisplay("{Name}, RunAs={RunAs}")]
 [UniqueGroup]
 public class Principal : BaseDirectory, IMaster<Permission>

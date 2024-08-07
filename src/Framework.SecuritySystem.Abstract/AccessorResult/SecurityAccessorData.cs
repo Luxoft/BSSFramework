@@ -10,6 +10,8 @@ public abstract record SecurityAccessorData
 
     public static SecurityAccessorData Return(IEnumerable<string> items) => Return(items.ToArray());
 
+    public static SecurityAccessorData TryReturn(string? item) => string.IsNullOrWhiteSpace(item) ? Empty : Return(item);
+
     public record FixedSecurityAccessorData(IReadOnlyList<string> Items) : SecurityAccessorData;
 
     public record InfinitySecurityAccessorData : SecurityAccessorData;

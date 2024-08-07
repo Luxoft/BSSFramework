@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 
+using Framework.Core;
 using Framework.Persistent;
 using Framework.SecuritySystem.Expanders;
 
@@ -7,25 +8,33 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
-internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecurityServiceBuilder<TDomainObject>, IDomainSecurityServiceBuilder
+public abstract class DomainSecurityServiceBuilder : IDomainSecurityServiceBuilder
+{
+    public abstract Type DomainType { get; }
+
+    public abstract void Register(IServiceCollection services);
+}
+
+internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : DomainSecurityServiceBuilder, IDomainSecurityServiceBuilder<TDomainObject>
     where TDomainObject : IIdentityObject<TIdent>
 {
-    private readonly List<Type> securityFunctorTypes = new();
+    private readonly List<Type> functorTypes = new();
 
     public DomainSecurityRule? ViewRule { get; private set; }
 
     public DomainSecurityRule? EditRule { get; private set; }
 
-    public SecurityPath<TDomainObject> SecurityPath { get; private set; } = SecurityPath<TDomainObject>.Empty;
+    public SecurityPath<TDomainObject>? SecurityPath { get; private set; }
 
-    public (Type Type, object Instance)? DependencySourcePathData { get; private set; }
+    public (Type Type, object Instance)? RelativePathData { get; private set; }
 
     public Type? CustomServiceType { get; private set; }
 
     public Type? DependencyServiceType { get; private set; }
 
+    public override Type DomainType { get; } = typeof(TDomainObject);
 
-    public void Register(IServiceCollection services)
+    public override void Register(IServiceCollection services)
     {
         if (this.ViewRule != null || this.EditRule != null)
         {
@@ -33,9 +42,12 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
                 new DomainObjectSecurityModeInfo(typeof(TDomainObject), this.ViewRule, this.EditRule));
         }
 
-        services.AddSingleton(this.SecurityPath);
+        if (this.SecurityPath != null)
+        {
+            services.AddSingleton(this.SecurityPath);
+        }
 
-        if (this.DependencySourcePathData is { } pair)
+        if (this.RelativePathData is { } pair)
         {
             services.AddSingleton(pair.Type, pair.Instance);
         }
@@ -59,22 +71,26 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
 
         var actualCustomServiceType = this.CustomServiceType ?? this.DependencyServiceType;
 
-        if (this.securityFunctorTypes.Any())
+        var functorTypeDecl = typeof(IOverrideSecurityProviderFunctor<TDomainObject>);
+
+        var realFunctorTypes = this.functorTypes.Where(f => f.HasInterfaceMethodOverride(functorTypeDecl)).ToList();
+
+        if (realFunctorTypes.Any())
         {
-            foreach (var securityFunctorType in this.securityFunctorTypes)
+            foreach (var functorType in realFunctorTypes)
             {
-                yield return (typeof(IOverrideSecurityProviderFunctor<TDomainObject>), securityFunctorType);
+                yield return (functorTypeDecl, functorType);
             }
 
-            var actualCustomServiceTypeWithFunctor = actualCustomServiceType ?? typeof(ContextDomainSecurityService<TDomainObject>);
+            var withFunctorActualCustomServiceType = actualCustomServiceType ?? typeof(ContextDomainSecurityService<TDomainObject>);
 
-            yield return (null, actualCustomServiceTypeWithFunctor);
+            yield return (null, withFunctorActualCustomServiceType);
 
-            var wrappedFunctorType = typeof(DomainSecurityServiceWithFunctor<,>).MakeGenericType(
-                actualCustomServiceTypeWithFunctor,
+            var withWrappedFunctorServiceType = typeof(DomainSecurityServiceWithFunctor<,>).MakeGenericType(
+                withFunctorActualCustomServiceType,
                 typeof(TDomainObject));
 
-            yield return (baseServiceType, wrappedFunctorType);
+            yield return (baseServiceType, withWrappedFunctorServiceType);
         }
         else if (actualCustomServiceType != null)
         {
@@ -114,7 +130,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
     {
         this.SetDependency<TSource>();
 
-        this.DependencySourcePathData =
+        this.RelativePathData =
             (typeof(IRelativeDomainPathInfo<TDomainObject, TSource>),
                 new RelativeDomainPathInfo<TDomainObject, TSource>(relativeDomainPath));
 
@@ -139,7 +155,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
     public IDomainSecurityServiceBuilder<TDomainObject> Override<TSecurityFunctor>()
         where TSecurityFunctor : IOverrideSecurityProviderFunctor<TDomainObject>
     {
-        this.securityFunctorTypes.Add(typeof(TSecurityFunctor));
+        this.functorTypes.Add(typeof(TSecurityFunctor));
 
         return this;
     }

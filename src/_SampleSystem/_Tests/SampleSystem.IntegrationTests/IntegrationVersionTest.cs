@@ -6,7 +6,7 @@ using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.Domain.IntergrationVersions;
+using SampleSystem.Domain.IntegrationVersions;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Integration;

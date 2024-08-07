@@ -1,5 +1,4 @@
-﻿using Framework.Configuration.Domain;
-using Framework.Configuration.SubscriptionModeling;
+﻿using Framework.Configuration.SubscriptionModeling;
 using Framework.Core;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
@@ -9,7 +8,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 /// </summary>
 public class SubscriptionMetadataStore
 {
-    private readonly ILookup<Type, ISubscriptionMetadata> store;
+    internal readonly ILookup<Type, ISubscriptionMetadata> store;
 
     /// <summary>
     ///     Создаёт экземпляр класса <see cref="SubscriptionMetadataStore" />.
@@ -52,27 +51,5 @@ public class SubscriptionMetadataStore
 
         var result = this.store[domainObjectType];
         return result;
-    }
-
-    public virtual void RegisterCodeFirstSubscriptions(
-            ICodeFirstSubscriptionBLL bll,
-            IConfigurationBLLContext context)
-    {
-        if (bll == null)
-        {
-            throw new ArgumentNullException(nameof(bll));
-        }
-
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-
-        var subscriptions = this.store
-                                .SelectMany(g => g)
-                                .Select(m => new CodeFirstSubscription (m.Code, context.GetDomainType(m.DomainObjectType, true)))
-                                .ToArray();
-
-        bll.Save(subscriptions);
     }
 }

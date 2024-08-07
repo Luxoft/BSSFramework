@@ -7,7 +7,6 @@ using Framework.Validation;
 
 namespace SampleSystem.Domain;
 
-[DomainType("{D79C7F5B-2968-4ACA-91FA-E12B36F121E2}")]
 [System.Diagnostics.DebuggerDisplay("{Code}-{GetProjectTypeName()}")]
 public class Project :
         AuditPersistentDomainObjectBase,

@@ -11,7 +11,7 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
 {
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ModeSecurityRule securityRule)
     {
-        var actualSecurityRule = (SecurityRule)securityRuleExpander.TryExpand<TDomainObject>(securityRule) ?? securityRule;
+        var actualSecurityRule = (SecurityRule?)securityRuleExpander.TryExpand<TDomainObject>(securityRule) ?? securityRule;
 
         var originalSecurityProvider = originalDomainSecurityService.GetSecurityProvider(actualSecurityRule);
 

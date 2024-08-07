@@ -13,8 +13,8 @@ public static class DomainSecurityServiceRootBuilderExtensions
     public static IDomainSecurityServiceRootBuilder Add<TDomainObject>(
         this IDomainSecurityServiceRootBuilder rootBuilder,
         DomainSecurityRule viewSecurityRule,
-        DomainSecurityRule editSecurityRule = null,
-        SecurityPath<TDomainObject> securityPath = null)
+        DomainSecurityRule? editSecurityRule = null,
+        SecurityPath<TDomainObject>? securityPath = null)
     {
         return rootBuilder.Add<TDomainObject>(
             b =>

@@ -10,7 +10,7 @@ namespace Framework.DomainDriven.NHibernate;
 public class MappingSettings<TPersistentDomainObjectBase> : MappingSettings
 {
     public MappingSettings(Assembly mappingAssembly, IEnumerable<Type> types = null)
-            : this(mappingAssembly, new DatabaseName(typeof(TPersistentDomainObjectBase).GetTargetSystemName()), types)
+            : this(mappingAssembly, new DatabaseName(typeof(TPersistentDomainObjectBase).ExtractSystemName()), types)
     {
     }
 
@@ -35,8 +35,8 @@ public class MappingSettings<TPersistentDomainObjectBase> : MappingSettings
     }
 
     public MappingSettings(IEnumerable<XDocument> mappingXmls, bool isAudit)
-            : this(mappingXmls, new DatabaseName(typeof(TPersistentDomainObjectBase).GetTargetSystemName()),
-                   isAudit ? new DatabaseName(typeof(TPersistentDomainObjectBase).GetTargetSystemName()).ToDefaultAudit() : null)
+            : this(mappingXmls, new DatabaseName(typeof(TPersistentDomainObjectBase).ExtractSystemName()),
+                   isAudit ? new DatabaseName(typeof(TPersistentDomainObjectBase).ExtractSystemName()).ToDefaultAudit() : null)
     {
     }
 

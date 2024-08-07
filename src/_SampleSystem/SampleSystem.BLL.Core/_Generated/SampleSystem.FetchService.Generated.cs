@@ -762,11 +762,11 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetInsuranceDetailContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1)))
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetIntegrationVersionContainer1Container(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2)))
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetIntegrationVersionContainer2Container(rule)));
             }
@@ -1738,23 +1738,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1> GetIntegrationVersionContainer1Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1> GetIntegrationVersionContainer1Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>.Empty;
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>.Empty;
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>.Empty;
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>.Empty;
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
             }
             else
             {
@@ -1762,23 +1762,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2> GetIntegrationVersionContainer2Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2> GetIntegrationVersionContainer2Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>.Empty;
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>.Empty;
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>.Empty;
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
             }
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>.Empty;
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
             }
             else
             {

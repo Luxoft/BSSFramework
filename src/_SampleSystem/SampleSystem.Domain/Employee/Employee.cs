@@ -21,7 +21,6 @@ namespace SampleSystem.Domain;
 [BLLViewRole(Max = MainDTOType.FullDTO)]
 [BLLSaveRole(SaveType = BLLSaveType.Both)]
 [BLLIntegrationSaveRole]
-[DomainType("{AA46DA53-9B21-4DEC-9C70-720BDA1CB198}")]
 public partial class Employee :
         AuditPersistentDomainObjectBase,
         IMaster<EmployeePersonalCellPhone>,

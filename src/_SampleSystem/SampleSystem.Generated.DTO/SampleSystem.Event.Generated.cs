@@ -15283,7 +15283,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class IntegrationVersionContainer1SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
@@ -15294,7 +15294,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public IntegrationVersionContainer1SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
+        public IntegrationVersionContainer1SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject)
         {
             this.integrationVersionContainer1 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
         }
@@ -15313,7 +15313,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class IntegrationVersionContainer1RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
@@ -15324,7 +15324,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public IntegrationVersionContainer1RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
+        public IntegrationVersionContainer1RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject)
         {
             this.integrationVersionContainer1 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
         }
@@ -15343,7 +15343,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class IntegrationVersionContainer1EventRichDTO
     {
@@ -15368,7 +15368,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public IntegrationVersionContainer1EventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
+        public IntegrationVersionContainer1EventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject)
         {
             mappingService.MapIntegrationVersionContainer1(domainObject, this);
         }
@@ -15478,7 +15478,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class IntegrationVersionContainer1EventSimpleDTO
     {
@@ -15503,7 +15503,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public IntegrationVersionContainer1EventSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 domainObject)
+        public IntegrationVersionContainer1EventSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject)
         {
             mappingService.MapIntegrationVersionContainer1(domainObject, this);
         }
@@ -15613,7 +15613,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class IntegrationVersionContainer2SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
@@ -15624,7 +15624,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public IntegrationVersionContainer2SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 domainObject)
+        public IntegrationVersionContainer2SaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 domainObject)
         {
             this.integrationVersionContainer2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
         }
@@ -15643,7 +15643,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class IntegrationVersionContainer2RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
@@ -15654,7 +15654,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public IntegrationVersionContainer2RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 domainObject)
+        public IntegrationVersionContainer2RemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 domainObject)
         {
             this.integrationVersionContainer2 = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
         }
@@ -15673,7 +15673,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class IntegrationVersionContainer2EventRichDTO
     {
@@ -15698,7 +15698,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public IntegrationVersionContainer2EventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 domainObject)
+        public IntegrationVersionContainer2EventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 domainObject)
         {
             mappingService.MapIntegrationVersionContainer2(domainObject, this);
         }

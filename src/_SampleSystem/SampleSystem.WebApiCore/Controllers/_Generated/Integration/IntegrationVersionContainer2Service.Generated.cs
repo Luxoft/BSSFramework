@@ -27,10 +27,10 @@
         
         protected virtual SampleSystem.Generated.DTO.IntegrationVersionContainer2IdentityDTO SaveIntegrationVersionContainer2Internal(SampleSystem.Generated.DTO.IntegrationVersionContainer2IntegrationRichDTO integrationVersionContainer2, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IIntegrationVersionContainer2BLL bll)
         {
-            SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2 domainObject = bll.GetById(integrationVersionContainer2.Id, false, null, Framework.DomainDriven.Lock.LockRole.Update);
+            SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 domainObject = bll.GetById(integrationVersionContainer2.Id, false, null, Framework.DomainDriven.Lock.LockRole.Update);
             if (object.ReferenceEquals(domainObject, null))
             {
-                domainObject = new SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2();
+                domainObject = new SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2();
             }
             if ((domainObject.IntegrationVersion <= integrationVersionContainer2.IntegrationVersion))
             {

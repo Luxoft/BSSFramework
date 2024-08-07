@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using Framework.DomainDriven.Repository;
+﻿using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using NHibernate.Linq;

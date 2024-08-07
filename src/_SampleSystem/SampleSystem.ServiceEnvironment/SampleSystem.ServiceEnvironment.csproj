@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.ServiceEnvironment\Framework.App.ServiceEnvironment.csproj" />
+    <ProjectReference Include="..\..\Framework.WebApi.Utils\Framework.WebApi.Utils.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.NamedLocks\Framework.Configuration.NamedLocks.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup.Legacy\Framework.DomainDriven.Setup.Legacy.csproj" />
 

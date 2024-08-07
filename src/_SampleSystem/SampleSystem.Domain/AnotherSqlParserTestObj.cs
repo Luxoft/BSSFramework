@@ -1,10 +1,8 @@
-﻿using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
 
-[DomainType("{2328B905-DD6F-4304-A406-09A8D56A365F}")]
 [UniqueGroup]
 [Table(Name = "SqlParserTestObj")]
 [NotAuditedClass]

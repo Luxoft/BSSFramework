@@ -2,9 +2,8 @@
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 
-namespace SampleSystem.Domain.IntergrationVersions;
+namespace SampleSystem.Domain.IntegrationVersions;
 
-[DomainType("4FAB2A8D-600F-42E4-A72C-5B675BD60BAC")]
 [BLLIntegrationSaveRole]
 public class IntegrationVersionContainer2 : ExternalDomainObject
 {

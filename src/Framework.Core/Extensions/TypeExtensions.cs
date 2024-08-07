@@ -5,6 +5,34 @@ namespace Framework.Core;
 
 public static class TypeExtensions
 {
+    public static bool HasInterfaceMethodOverride(this Type sourceType, Type interfaceType)
+    {
+        if (!interfaceType.IsInterface)
+        {
+            throw new ArgumentException("Parameter 'interfaceType' must be an interface type.");
+        }
+
+        if (!interfaceType.IsAssignableFrom(sourceType))
+        {
+            throw new ArgumentException("The 'sourceType' does not implement the 'interfaceType'.");
+        }
+
+        var map = sourceType.GetInterfaceMap(interfaceType);
+
+        for (var i = 0; i < map.InterfaceMethods.Length; i++)
+        {
+            var interfaceMethod = map.InterfaceMethods[i];
+            var targetMethod = map.TargetMethods[i];
+
+            if (interfaceMethod != targetMethod)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static IEnumerable<T> GetStaticPropertyValueList<T>(this Type type, Func<string, bool> filter = null)
     {
         return from prop in type.GetProperties(BindingFlags.Static | BindingFlags.Public)
@@ -380,25 +408,6 @@ public static class TypeExtensions
         return nameSelector(type);
     }
 
-
-    public static Type ExtractEnumType(this Type type)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        if (type.IsEnum)
-        {
-            return type;
-        }
-
-
-        var genericType = type.GetArrayGenericType()
-                          ?? type.GetNullableElementType()
-                          ?? type.GetCollectionElementType();
-
-        return genericType.Maybe(t => t.ExtractEnumType());
-    }
-
-
     public static bool HasDefaultConstructor(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
@@ -422,20 +431,12 @@ public static class TypeExtensions
         return baseType.IsAssignableFrom(type);
     }
 
-    public static bool IsAssignableToAll(this Type type, params Type[] baseTypes)
+    public static bool IsAssignableToAll(this Type type, IEnumerable<Type> baseTypes)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (baseTypes == null) throw new ArgumentNullException(nameof(baseTypes));
 
         return baseTypes.All(type.IsAssignableTo);
-    }
-
-    public static bool IsAssignableToAny(this Type type, params Type[] baseTypes)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (baseTypes == null) throw new ArgumentNullException(nameof(baseTypes));
-
-        return type.IsAssignableToAny((IEnumerable<Type>)baseTypes);
     }
 
     public static bool IsAssignableToAny(this Type type, IEnumerable<Type> baseTypes)
@@ -446,14 +447,6 @@ public static class TypeExtensions
         return baseTypes.Any(type.IsAssignableTo);
     }
 
-    public static bool IsAssignableFromAny(this Type type, params Type[] baseTypes)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (baseTypes == null) throw new ArgumentNullException(nameof(baseTypes));
-
-        return type.IsAssignableFromAny((IEnumerable<Type>)baseTypes);
-    }
-
     public static bool IsAssignableFromAny(this Type type, IEnumerable<Type> baseTypes)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
@@ -461,29 +454,6 @@ public static class TypeExtensions
 
         return baseTypes.Any(type.IsAssignableFrom);
     }
-
-    public static bool IsPropertyImplement(this Type type, Type interfaceType, bool publicImplement = true)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
-
-        return interfaceType.IsAssignableFrom(type)
-               && (!publicImplement || interfaceType.GetProperties().All(interfaceProp =>
-
-                                                                                 type.GetProperties().Any(prop => prop.Name == interfaceProp.Name && prop.PropertyType == interfaceProp.PropertyType)));
-    }
-
-
-    public static MethodInfo GetDelegateInvokeMethod(this Type delegateType)
-    {
-        if (delegateType == null) throw new ArgumentNullException(nameof(delegateType));
-
-        if (!typeof(Delegate).IsAssignableFrom(delegateType))
-            throw new InvalidOperationException($"Type:{delegateType} is not Delegate");
-
-        return delegateType.GetMethod("Invoke");
-    }
-
 
     public static Type ToDelegateType(this IEnumerable<Type> preParameterTypes, Type resultType)
     {

@@ -4,7 +4,6 @@ using Framework.Core;
 
 namespace Framework.Configuration.Domain;
 
-[TargetSystem("{50465868-4B49-42CF-A702-A39400E6C317}", "Configuration")]
 public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<PersistentDomainObjectBase>, IIdentityObject<Guid>
 {
     private Guid id;

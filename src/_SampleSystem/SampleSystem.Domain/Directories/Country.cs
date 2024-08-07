@@ -7,7 +7,6 @@ namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
 [UniqueGroup]
-[DomainType("{C6030B2D-16F1-4854-9FAB-8A69B7FFAC6C}")]
 public class Country : BaseDirectory, ICodeObject
 {
     private string code;

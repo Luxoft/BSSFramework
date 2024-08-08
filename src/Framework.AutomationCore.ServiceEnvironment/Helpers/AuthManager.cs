@@ -10,7 +10,7 @@ namespace Automation.ServiceEnvironment;
 
 public class AuthManager(
     IUserAuthenticationService userAuthenticationService,
-    ISecurityContextInfoService securityContextInfoService,
+    ISecurityContextInfoService<Guid> securityContextInfoService,
     [DisabledSecurity] IRepository<Principal> principalRepository,
     [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
     [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
@@ -48,8 +48,7 @@ public class AuthManager(
 
             foreach (var restrictionInfo in testPermission.Restrictions)
             {
-                var securityContextInfo = (ISecurityContextInfo<Guid>)securityContextInfoService
-                    .GetSecurityContextInfo(restrictionInfo.Key);
+                var securityContextInfo = securityContextInfoService.GetSecurityContextInfo(restrictionInfo.Key);
 
                 var domainSecurityContextType = await securityContextTypeRepository.LoadAsync(securityContextInfo.Id, cancellationToken);
 

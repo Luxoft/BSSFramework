@@ -132,4 +132,21 @@ public class TestRestrictionRoleTests : TestBase
         // Assert
         result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
     }
+
+
+    [TestMethod]
+    public void TryCreatePermissionWithoutRequiredSecurityContext_ExceptionRaised()
+    {
+        // Arrange
+        var location = this.DataHelper.SaveLocation();
+
+        // Act
+        var action = () => this.AuthHelper.SetCurrentUserRole(
+                         new SampleSystemTestPermission(SampleSystemSecurityRole.RequiredRestrictionRole, location: location));
+
+        // Assert
+        action.Should().Throw<ValidationException>()
+              .And.Message.Should().Contain(
+                  $"{nameof(Framework.Authorization.Domain.Permission)} must contain the required contexts: {nameof(BusinessUnit)}");
+    }
 }

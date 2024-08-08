@@ -5,14 +5,14 @@ namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 public class SecurityExpressionBuilderFactory<TIdent>(
     IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
     IAuthorizationSystem<TIdent> authorizationSystem,
-    ISecurityContextInfoService securityContextInfoService)
+    ISecurityContextInfoService<TIdent> securityContextInfoService)
     : SecurityExpressionBuilderFactoryBase<TIdent>
 {
     public IHierarchicalObjectExpanderFactory<TIdent> HierarchicalObjectExpanderFactory { get; } = hierarchicalObjectExpanderFactory;
 
     public IAuthorizationSystem<TIdent> AuthorizationSystem { get; } = authorizationSystem;
 
-    public ISecurityContextInfoService SecurityContextInfoService { get; } = securityContextInfoService;
+    public ISecurityContextInfoService<TIdent> SecurityContextInfoService { get; } = securityContextInfoService;
 
     protected override ISecurityExpressionBuilder<TDomainObject> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.ConditionPath securityPath)
     {

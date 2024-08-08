@@ -66,6 +66,15 @@ public static class SampleSystemSecuritySystemExtensions
                    })
 
                .AddSecurityRole(
+                   SampleSystemSecurityRole.RequiredRestrictionRole,
+                   new SecurityRoleInfo(new Guid("{D2E95D39-D6E7-41E1-81B0-2EB0E50110FD}"))
+                   {
+                       Restriction = SecurityPathRestriction.Create<BusinessUnit>(true)
+                                                            .Add<Location>(true)
+                                                            .Add<ManagementUnit>()
+                   })
+
+               .AddSecurityRole(
                    SampleSystemSecurityRole.TestVirtualRole,
                    new SecurityRoleInfo(default)
                    {

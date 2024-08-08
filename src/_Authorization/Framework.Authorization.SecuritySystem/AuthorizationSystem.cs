@@ -23,7 +23,7 @@ public class AuthorizationSystem(
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     TimeProvider timeProvider,
     ISecurityRolesIdentsResolver securityRolesIdentsResolver,
-    ISecurityContextInfoService securityContextInfoService)
+    ISecurityContextInfoService<Guid> securityContextInfoService)
     : IAuthorizationSystem<Guid>
 {
     public string CurrentPrincipalName { get; } = userAuthenticationService.GetUserName();

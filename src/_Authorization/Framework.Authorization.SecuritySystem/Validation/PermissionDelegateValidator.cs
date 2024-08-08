@@ -17,14 +17,14 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     private readonly IAuthorizationExternalSource externalSource;
 
-    private readonly ISecurityContextInfoService securityContextInfoService;
+    private readonly ISecurityContextInfoService<Guid> securityContextInfoService;
 
     private readonly ISecurityRoleSource securityRoleSource;
 
     public PermissionDelegateValidator(
         TimeProvider timeProvider,
         IAuthorizationExternalSource externalSource,
-        ISecurityContextInfoService securityContextInfoService,
+        ISecurityContextInfoService<Guid> securityContextInfoService,
         ISecurityRoleSource securityRoleSource)
     {
         this.timeProvider = timeProvider;
@@ -53,7 +53,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
                         return false;
                     }
                 })
-            .WithMessage("{{{ExceptionMessage}}}");
+            .WithMessage("{ExceptionMessage}");
     }
 
     private void Validate(Permission permission, ValidatePermissionDelegateMode mode)
@@ -212,7 +212,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     private ISecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)
     {
-        return this.securityContextInfoService.GetSecurityContextInfo(securityContextType.Name);
+        return this.securityContextInfoService.GetSecurityContextInfo(securityContextType.Id);
     }
 
     private bool IsExpandable(SecurityContextType securityContextType)

@@ -11,7 +11,7 @@ public static class PermissionExtensions
     public static DPermission ToDictionary(
         this IPermission<Guid> permission,
         IRealTypeResolver realTypeResolver,
-        ISecurityContextInfoService securityContextInfoService,
+        ISecurityContextInfoService<Guid> securityContextInfoService,
         IEnumerable<Type> securityTypes)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
@@ -19,7 +19,7 @@ public static class PermissionExtensions
         var request = from restriction in permission.Restrictions
 
                       join securityType in securityTypes on restriction.SecurityContextTypeId equals securityContextInfoService
-                          .GetSecurityContextInfo<Guid>(realTypeResolver.Resolve(securityType)).Id
+                          .GetSecurityContextInfo(realTypeResolver.Resolve(securityType)).Id
 
                       group restriction.SecurityContextId by securityType;
 

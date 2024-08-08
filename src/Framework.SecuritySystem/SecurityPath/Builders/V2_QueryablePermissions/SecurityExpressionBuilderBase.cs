@@ -58,7 +58,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TIdent, TPath
         {
             var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo<TIdent>(typeof(TSecurityContext)).Id;
+            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
 
             var fullAccessFilter = ExpressionHelper.Create(
                 (IPermission<TIdent> permission) => !permission.Restrictions.Select(restriction => restriction.SecurityContextTypeId)

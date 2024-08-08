@@ -21,7 +21,8 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
                        .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
-                       .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
+                       .AddSingletonFrom<ISecurityContextInfoService, ISecurityContextInfoService<Guid>>()
+                       .AddSingleton<ISecurityContextInfoService<Guid>, SecurityContextInfoService<Guid>>()
                        .AddScoped<IDomainSecurityProviderFactory, DomainSecurityProviderFactory>()
                        .AddSingleton<ISecurityRuleBasicOptimizer, SecurityRuleBasicOptimizer>()
                        .AddSingleton<ISecurityRuleDeepOptimizer, SecurityRuleDeepOptimizer>()
@@ -30,7 +31,10 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
                        .AddScoped<ISecurityExpressionBuilderFactory, SecurityExpressionBuilderFactory<Guid>>()
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
-                       .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(DomainSecurityRule.AccessDenied), typeof(AccessDeniedSecurityProvider<>))
+                       .AddKeyedSingleton(
+                           typeof(ISecurityProvider<>),
+                           nameof(DomainSecurityRule.AccessDenied),
+                           typeof(AccessDeniedSecurityProvider<>))
                        .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
                        .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))

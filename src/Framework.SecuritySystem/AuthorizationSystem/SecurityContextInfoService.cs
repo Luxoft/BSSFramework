@@ -1,22 +1,25 @@
 ﻿namespace Framework.SecuritySystem;
 
-public class SecurityContextInfoService : ISecurityContextInfoService
+public class SecurityContextInfoService<TIdent> : ISecurityContextInfoService<TIdent>
+    where TIdent : notnull
 {
-    private readonly IReadOnlyDictionary<Type, ISecurityContextInfo> byTypeSecurityContextInfoDict;
+    private readonly IReadOnlyDictionary<Type, ISecurityContextInfo<TIdent>> byTypeSecurityContextInfoDict;
 
-    private readonly IReadOnlyDictionary<string, ISecurityContextInfo> byNameSecurityContextInfoDict;
+    private readonly IReadOnlyDictionary<TIdent, ISecurityContextInfo<TIdent>> byIdentSecurityContextInfoDict;
 
-    public SecurityContextInfoService(IEnumerable<ISecurityContextInfo> securityContextInfoList)
+    public SecurityContextInfoService(IEnumerable<ISecurityContextInfo<TIdent>> securityContextInfoList)
     {
         this.byTypeSecurityContextInfoDict = securityContextInfoList.ToDictionary(v => v.Type);
-        this.byNameSecurityContextInfoDict = this.byTypeSecurityContextInfoDict.Values.ToDictionary(v => v.Name);
+        this.byIdentSecurityContextInfoDict = this.byTypeSecurityContextInfoDict.Values.ToDictionary(v => v.Id);
 
         this.SecurityContextTypes = this.byTypeSecurityContextInfoDict.Keys.ToList();
     }
 
     public IReadOnlyList<Type> SecurityContextTypes { get; }
 
-    public virtual ISecurityContextInfo GetSecurityContextInfo(Type type) => this.byTypeSecurityContextInfoDict[type];
+    public virtual ISecurityContextInfo<TIdent> GetSecurityContextInfo(Type type) => this.byTypeSecurityContextInfoDict[type];
 
-    public ISecurityContextInfo GetSecurityContextInfo(string name) => this.byNameSecurityContextInfoDict[name];
+    ISecurityContextInfo ISecurityContextInfoService.GetSecurityContextInfo(Type type) => this.GetSecurityContextInfo(type);
+
+    public ISecurityContextInfo<TIdent> GetSecurityContextInfo(TIdent ident) => this.byIdentSecurityContextInfoDict[ident];
 }

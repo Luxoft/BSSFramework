@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -17,9 +16,11 @@ public class SlJsonCompatibilitySerializer : ISlJsonCompatibilitySerializer
         {
             if (parameter.ParameterType != typeof(CancellationToken))
             {
-                var jsonPropValue = jsonDoc.RootElement.GetProperty(parameter.Name);
+                var actualElement = jsonDoc.RootElement.TryGetProperty(parameter.Name, out var jsonPropValue) ? jsonPropValue : jsonDoc.RootElement;
 
-                context.ActionArguments[parameter.Name] = JsonSerializer.Deserialize(jsonPropValue.GetRawText(), parameter.ParameterType);
+                var rawText = actualElement.GetRawText();
+
+                context.ActionArguments[parameter.Name] = this.DeserializeParameter(rawText, parameter.ParameterType);
             }
         }
     }
@@ -28,9 +29,19 @@ public class SlJsonCompatibilitySerializer : ISlJsonCompatibilitySerializer
     {
         var actionDescriptor = (ControllerActionDescriptor)context.ActionDescriptor;
 
-        IDictionary<string, object> e = new ExpandoObject();
+        IDictionary<string, object> e = new System.Dynamic.ExpandoObject();
         e.Add(actionDescriptor.ActionName + "Result", value);
 
-        return new JsonResult(e);
+        return this.SerializeResult(e);
+    }
+
+    protected virtual object DeserializeParameter(string rawText, Type parameterType)
+    {
+        return JsonSerializer.Deserialize(rawText, parameterType);
+    }
+
+    protected virtual JsonResult SerializeResult(IDictionary<string, object> obj)
+    {
+        return new JsonResult(obj);
     }
 }

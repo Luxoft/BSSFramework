@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 
-using Framework.Authorization.Generated.DTO;
 using Framework.Authorization.Notification;
 using Framework.Core;
 using Framework.DomainDriven;

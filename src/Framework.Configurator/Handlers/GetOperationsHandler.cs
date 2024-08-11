@@ -10,17 +10,21 @@ namespace Framework.Configurator.Handlers;
 public class GetOperationsHandler(IOperationAccessor operationAccessor, ISecurityRoleSource roleSource, ISecurityOperationInfoSource operationInfoSource)
     : BaseReadHandler, IGetOperationsHandler
 {
-    protected override Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsSecurityAdministrator()) return Task.FromResult<object>(new List<string>());
+        if (!operationAccessor.IsSecurityAdministrator()) return new List<string>();
 
         var operations = roleSource.SecurityRoles
                                    .SelectMany(x => x.Information.Operations)
-                                   .Select(o => new OperationDto { Name = o.Name, Description = operationInfoSource.GetSecurityOperationInfo(o).Description })
+                                   .Select(
+                                       o => new OperationDto
+                                            {
+                                                Name = o.Name, Description = operationInfoSource.GetSecurityOperationInfo(o).Description
+                                            })
                                    .OrderBy(x => x.Name)
                                    .DistinctBy(x => x.Name)
                                    .ToList();
 
-        return Task.FromResult<object>(operations);
+        return operations;
     }
 }

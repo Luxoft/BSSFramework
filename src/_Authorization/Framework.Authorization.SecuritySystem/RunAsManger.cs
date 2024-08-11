@@ -4,35 +4,21 @@ using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class RunAsManger : IRunAsManager
+public class RunAsManger(
+    [DisabledSecurity] IRepository<Principal> principalRepository,
+    ICurrentPrincipalSource currentPrincipalSource,
+    IOperationAccessorFactory operationAccessorFactory)
+    : IRunAsManager
 {
-    private readonly IOperationAccessorFactory operationAccessorFactory;
-
-    private readonly IRepository<Principal> principalRepository;
-
-    private readonly ICurrentPrincipalSource currentPrincipalSource;
-
-    public RunAsManger(
-        [DisabledSecurity] IRepository<Principal> principalRepository,
-        ICurrentPrincipalSource currentPrincipalSource,
-        IOperationAccessorFactory operationAccessorFactory)
-    {
-        this.operationAccessorFactory = operationAccessorFactory;
-        this.principalRepository = principalRepository;
-        this.currentPrincipalSource = currentPrincipalSource;
-    }
-
-    private Principal CurrentPrincipal => this.currentPrincipalSource.CurrentPrincipal;
-
+    private Principal CurrentPrincipal => currentPrincipalSource.CurrentPrincipal;
 
     public bool IsRunningAs => this.CurrentPrincipal.RunAs != null;
-
 
     public async Task StartRunAsUserAsync(string principalName, CancellationToken cancellationToken)
     {
         if (principalName == null) throw new ArgumentNullException(nameof(principalName));
 
-        this.operationAccessorFactory.Create(false).CheckAccess(SecurityRole.Administrator);
+        operationAccessorFactory.Create(false).CheckAccess(SecurityRole.Administrator);
 
         if (string.Equals(principalName, this.CurrentPrincipal.RunAs?.Name, StringComparison.CurrentCultureIgnoreCase))
         {
@@ -44,10 +30,10 @@ public class RunAsManger : IRunAsManager
         }
         else
         {
-            this.CurrentPrincipal.RunAs = this.principalRepository.GetQueryable().SingleOrDefault(p => p.Name == principalName)
+            this.CurrentPrincipal.RunAs = principalRepository.GetQueryable().SingleOrDefault(p => p.Name == principalName)
                                           ?? throw new Exception($"Principal with name '{principalName}' not found");
 
-            await this.principalRepository.SaveAsync(this.CurrentPrincipal, cancellationToken);
+            await principalRepository.SaveAsync(this.CurrentPrincipal, cancellationToken);
         }
     }
 
@@ -55,6 +41,6 @@ public class RunAsManger : IRunAsManager
     {
         this.CurrentPrincipal.RunAs = null;
 
-        await this.principalRepository.SaveAsync(this.CurrentPrincipal, cancellationToken);
+        await principalRepository.SaveAsync(this.CurrentPrincipal, cancellationToken);
     }
 }

@@ -6,31 +6,19 @@ using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class CurrentPrincipalSource : ICurrentPrincipalSource
+public class CurrentPrincipalSource(
+    [DisabledSecurity] IRepository<Principal> principalRepository,
+    IUserAuthenticationService userAuthenticationService) : ICurrentPrincipalSource
 {
-    private readonly IRepository<Principal> principalRepository;
+    private readonly Lazy<Principal> currentPrincipalLazy = LazyHelper.Create(
+        () =>
+        {
+            var userName = userAuthenticationService.GetUserName();
 
-    private readonly IUserAuthenticationService userAuthenticationService;
-
-    private readonly Lazy<Principal> currentPrincipalLazy;
-
-    public CurrentPrincipalSource(
-        [DisabledSecurity] IRepository<Principal> principalRepository,
-        IUserAuthenticationService userAuthenticationService)
-    {
-        this.principalRepository = principalRepository;
-        this.userAuthenticationService = userAuthenticationService;
-
-        this.currentPrincipalLazy = LazyHelper.Create(
-            () =>
-            {
-                var userName = this.userAuthenticationService.GetUserName();
-
-                return this.principalRepository
-                           .GetQueryable().SingleOrDefault(principal => principal.Name == userName)
-                       ?? new Principal { Name = userName };
-            });
-    }
+            return principalRepository
+                   .GetQueryable().SingleOrDefault(principal => principal.Name == userName)
+                   ?? new Principal { Name = userName };
+        });
 
     public Principal CurrentPrincipal => this.currentPrincipalLazy.Value;
 }

@@ -28,8 +28,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                        .AddDomainSecurityServices()
                                        .AddSecurityRoles()
                                        .AddSecurityRules()
-                                       .AddCustomSecurityOperations()
-                                       .SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>)))
+                                       .AddCustomSecurityOperations())
 
                            .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
@@ -37,7 +36,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 
-                           .SetPrincipalIdentitySource<Employee>(employee => employee.Active, employee => employee.Login)
+                           .SetUserSource<Employee>(employee => employee.Active, employee => employee.Login, employee => employee.Id)
 
                            .AddListeners()
 

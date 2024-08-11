@@ -9,15 +9,17 @@ using Framework.SecuritySystem.DependencyInjection;
 using Framework.Authorization.SecuritySystem;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
-using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using nuSpec.Abstraction;
+using Framework.Authorization.SecuritySystem.UserSource;
 
 namespace Framework.DomainDriven.Setup;
 
 public class BssFrameworkSettings : IBssFrameworkSettings
 {
+    private readonly List<Action<ISecuritySystemSettings>> additionalSecuritySystemSettingsActions = new();
+
     public List<Type> NamedLockTypes { get; set; } = new();
 
     public bool RegisterBaseNamedLockTypes { get; set; } = true;
@@ -36,7 +38,13 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> setupAction)
     {
-        this.RegisterActions.Add(sc => sc.AddSecuritySystem(setupAction));
+        this.RegisterActions.Add(
+            sc => sc.AddSecuritySystem(
+                sss =>
+                {
+                    setupAction(sss);
+                    this.additionalSecuritySystemSettingsActions.ForEach(a => a(sss));
+                }));
 
         return this;
     }
@@ -78,12 +86,23 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
         return this;
     }
-
-    public IBssFrameworkSettings SetPrincipalIdentitySource<TDomainObject>(Expression<Func<TDomainObject, bool>> filter, Expression<Func<TDomainObject, string>> namePath)
-        where TDomainObject : IIdentityObject<Guid>
+    public IBssFrameworkSettings SetUserSource<TUserDomainObject>(
+        Expression<Func<TUserDomainObject, bool>> filter,
+        Expression<Func<TUserDomainObject, string>> namePath,
+        Expression<Func<TUserDomainObject, Guid>> idPath)
     {
-        this.RegisterActions.Add(sc => sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TDomainObject>>());
-        this.RegisterActions.Add(sc => sc.AddSingleton(new PrincipalIdentitySourcePathInfo<TDomainObject>(filter, namePath)));
+        this.RegisterActions.Add(sc => sc.AddSingleton(new UserPathInfo<TUserDomainObject>(filter, namePath, idPath)));
+
+        this.RegisterActions.Add(sc => sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TUserDomainObject>>());
+        this.RegisterActions.Add(sc => sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>());
+
+        this.RegisterActions.Add(sc => sc.AddScoped(CurrentUserSource<TUserDomainObject>.CurrentUserSecurityProviderGenericType));
+
+        this.additionalSecuritySystemSettingsActions.Add(
+            securitySystemBuilder =>
+            {
+                securitySystemBuilder.SetCurrentUserSecurityProvider(CurrentUserSource<TUserDomainObject>.CurrentUserSecurityProviderGenericType);
+            });
 
         return this;
     }

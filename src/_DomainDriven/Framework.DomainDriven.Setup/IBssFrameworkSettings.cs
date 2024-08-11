@@ -33,8 +33,10 @@ public interface IBssFrameworkSettings
     IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
 
-    IBssFrameworkSettings SetPrincipalIdentitySource<TDomainObject>(Expression<Func<TDomainObject, bool>> filter, Expression<Func<TDomainObject, string>> namePath)
-        where TDomainObject : IIdentityObject<Guid>;
+    IBssFrameworkSettings SetUserSource<TUserDomainObject>(
+        Expression<Func<TUserDomainObject, bool>> filter,
+        Expression<Func<TUserDomainObject, string>> namePath,
+        Expression<Func<TUserDomainObject, Guid>> idPath);
 
     IBssFrameworkSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule);
 

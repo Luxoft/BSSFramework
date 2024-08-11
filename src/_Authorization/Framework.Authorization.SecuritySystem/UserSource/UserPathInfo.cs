@@ -3,6 +3,6 @@
 namespace Framework.Authorization.SecuritySystem;
 
 public record UserPathInfo<TDomainObject>(
-    Expression<Func<TDomainObject, bool>> Filter,
+    Expression<Func<TDomainObject, Guid>> IdPath,
     Expression<Func<TDomainObject, string>> NamePath,
-    Expression<Func<TDomainObject, Guid>> IdPath);
+    Expression<Func<TDomainObject, bool>> Filter);

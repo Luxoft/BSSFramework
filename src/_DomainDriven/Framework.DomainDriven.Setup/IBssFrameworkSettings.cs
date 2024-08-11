@@ -34,9 +34,9 @@ public interface IBssFrameworkSettings
         where T : IDomainObjectEventMetadata;
 
     IBssFrameworkSettings SetUserSource<TUserDomainObject>(
-        Expression<Func<TUserDomainObject, bool>> filter,
+        Expression<Func<TUserDomainObject, Guid>> idPath,
         Expression<Func<TUserDomainObject, string>> namePath,
-        Expression<Func<TUserDomainObject, Guid>> idPath);
+        Expression<Func<TUserDomainObject, bool>> filter);
 
     IBssFrameworkSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule);
 

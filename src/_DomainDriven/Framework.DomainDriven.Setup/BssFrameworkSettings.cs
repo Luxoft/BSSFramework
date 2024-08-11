@@ -89,14 +89,14 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     }
 
     public IBssFrameworkSettings SetUserSource<TUserDomainObject>(
-        Expression<Func<TUserDomainObject, bool>> filter,
+        Expression<Func<TUserDomainObject, Guid>> idPath,
         Expression<Func<TUserDomainObject, string>> namePath,
-        Expression<Func<TUserDomainObject, Guid>> idPath)
+        Expression<Func<TUserDomainObject, bool>> filter)
     {
         this.RegisterActions.Add(
             sc =>
             {
-                sc.AddSingleton(new UserPathInfo<TUserDomainObject>(filter, namePath, idPath));
+                sc.AddSingleton(new UserPathInfo<TUserDomainObject>(idPath, namePath, filter));
 
                 sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
                 sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();

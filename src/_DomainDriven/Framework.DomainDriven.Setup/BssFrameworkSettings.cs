@@ -13,6 +13,7 @@ using Framework.SecuritySystem;
 
 using nuSpec.Abstraction;
 using Framework.Authorization.SecuritySystem.UserSource;
+using Framework.DependencyInjection;
 
 namespace Framework.DomainDriven.Setup;
 
@@ -91,17 +92,23 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         Expression<Func<TUserDomainObject, string>> namePath,
         Expression<Func<TUserDomainObject, Guid>> idPath)
     {
-        this.RegisterActions.Add(sc => sc.AddSingleton(new UserPathInfo<TUserDomainObject>(filter, namePath, idPath)));
+        this.RegisterActions.Add(sc =>
+                                 {
+                                     sc.AddSingleton(new UserPathInfo<TUserDomainObject>(filter, namePath, idPath));
 
-        this.RegisterActions.Add(sc => sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TUserDomainObject>>());
-        this.RegisterActions.Add(sc => sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>());
+                                     sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
+                                     sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();
 
-        this.RegisterActions.Add(sc => sc.AddScoped(CurrentUserSource<TUserDomainObject>.CurrentUserSecurityProviderGenericType));
+                                     sc.AddScoped<IUserPathInfoRelativeService, UserPathInfoRelativeService<TUserDomainObject>>();
+                                     sc.AddScoped(typeof(CurrentUserSecurityProvider<>));
+
+                                     sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TUserDomainObject>>();
+                                 });
 
         this.additionalSecuritySystemSettingsActions.Add(
             securitySystemBuilder =>
             {
-                securitySystemBuilder.SetCurrentUserSecurityProvider(CurrentUserSource<TUserDomainObject>.CurrentUserSecurityProviderGenericType);
+                securitySystemBuilder.SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>));
             });
 
         return this;

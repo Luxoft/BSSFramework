@@ -5,17 +5,14 @@ using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem.UserSource;
 
-public class CurrentUserSecurityProvider<TDomainObject, TUserDomainObject>(
-    ICurrentUserSource<TUserDomainObject> currentUserSource,
-    IRelativeDomainPathInfo<TDomainObject, TUserDomainObject> toUserPathInfo,
-    UserPathInfo<TUserDomainObject> userPathInfo) : SecurityProvider<TDomainObject>
+public class CurrentUserSecurityProvider<TDomainObject>(
+    ICurrentUserSource currentUserSource,
+    IUserPathInfoRelativeService userPathInfoRelativeService) : SecurityProvider<TDomainObject>
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
-        userPathInfo.IdPath.Eval(currentUserSource.CurrentUser).Pipe(
-            currentUserId =>
-                toUserPathInfo.Path.Select(userPathInfo.IdPath).Select(userId => userId == currentUserId));
+        userPathInfoRelativeService.GetId<TDomainObject>().Select(id => id == currentUserSource.CurrentUserId);
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {
-        return SecurityAccessorData.TryReturn(toUserPathInfo.Select(userPathInfo.NamePath).Path.Eval(domainObject));
+        return SecurityAccessorData.TryReturn(userPathInfoRelativeService.GetName<TDomainObject>().Eval(domainObject));
     }
 }

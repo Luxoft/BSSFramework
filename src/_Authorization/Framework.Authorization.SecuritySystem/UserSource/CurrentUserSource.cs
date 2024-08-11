@@ -1,40 +1,36 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem.UserSource;
 
-public class CurrentUserSource<TUserDomainObject>(
-    [DisabledSecurity] IRepository<TUserDomainObject> userRepository,
-    UserPathInfo<TUserDomainObject> userPathInfo,
-    IActualPrincipalSource actualPrincipalSource)
-    : ICurrentUserSource<TUserDomainObject>
+public class CurrentUserSource<TUserDomainObject> : ICurrentUserSource<TUserDomainObject>
 {
-    private readonly Lazy<TUserDomainObject> lazyCurrentUser =
-        LazyHelper.Create(
+    private readonly Lazy<TUserDomainObject> lazyCurrentUser;
+
+    private readonly Lazy<Guid> lazyCurrentUserId;
+
+    private readonly Lazy<string> lazyCurrentUserName;
+
+    public CurrentUserSource(
+        [DisabledSecurity] IRepository<TUserDomainObject> userRepository,
+        UserPathInfo<TUserDomainObject> userPathInfo,
+        IActualPrincipalSource actualPrincipalSource)
+    {
+        this.lazyCurrentUser = LazyHelper.Create(
             () => userRepository.GetQueryable()
                                 .Where(userPathInfo.Filter)
                                 .Where(userPathInfo.NamePath.Select(name => name == actualPrincipalSource.ActualPrincipal.Name))
                                 .Single());
 
-    public TUserDomainObject CurrentUser => this.lazyCurrentUser.Value;
+        this.lazyCurrentUserId = LazyHelper.Create(() => userPathInfo.IdPath.Eval(this.CurrentUser));
 
-    public class CurrentUserSecurityProvider<TDomainObject>(
-        ICurrentUserSource<TUserDomainObject> currentUserSource,
-        IRelativeDomainPathInfo<TDomainObject, TUserDomainObject> toUserPathInfo,
-        UserPathInfo<TUserDomainObject> userPathInfo) : SecurityProvider<TDomainObject>
-    {
-        public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
-            userPathInfo.IdPath.Eval(currentUserSource.CurrentUser).Pipe(
-                currentUserId =>
-                    toUserPathInfo.Path.Select(userPathInfo.IdPath).Select(userId => userId == currentUserId));
-        public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
-        {
-            return SecurityAccessorData.TryReturn(toUserPathInfo.Select(userPathInfo.NamePath).Path.Eval(domainObject));
-        }
+        this.lazyCurrentUserName = LazyHelper.Create(() => userPathInfo.NamePath.Eval(this.CurrentUser));
     }
 
-    public static Type CurrentUserSecurityProviderGenericType { get; } = typeof(CurrentUserSecurityProvider<>);
+    public TUserDomainObject CurrentUser => this.lazyCurrentUser.Value;
+
+    public Guid CurrentUserId => this.lazyCurrentUserId.Value;
+
+    public string CurrentUserName => this.lazyCurrentUserName.Value;
 }

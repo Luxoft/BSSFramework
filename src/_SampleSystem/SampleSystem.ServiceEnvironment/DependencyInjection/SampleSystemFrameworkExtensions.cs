@@ -51,7 +51,7 @@ public static class SampleSystemFrameworkExtensions
         return settings.SetSecurityRuleParser<SampleSystemSecurityRuleParser>()
                        .SetSubscriptionAssembly(typeof(EmployeeUpdateSubscription).Assembly)
                        .SetNotificationDefaultMailSenderContainer<SampleSystemDefaultMailSenderContainer>()
-                       .SetNotificationEmployeeSource<EmployeeSource<Employee>>()
+                       .SetNotificationEmployee<Employee>()
                        .SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();
     }
 }

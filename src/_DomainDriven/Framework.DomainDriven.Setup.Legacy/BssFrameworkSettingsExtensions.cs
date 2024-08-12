@@ -83,7 +83,7 @@ public static class BssFrameworkSettingsExtensions
 
     public static IBssFrameworkSettings SetNotificationEmployeeSource<TUserSource>(this IBssFrameworkSettings settings)
         where TUserSource : class, IEmployeeSource =>
-        settings.AddServices(sc => sc.AddSingleton<IEmployeeSource, TUserSource>());
+        settings.AddServices(sc => sc.AddScoped<IEmployeeSource, TUserSource>());
 
     public static IBssFrameworkSettings SetNotificationDefaultMailSenderContainer(this IBssFrameworkSettings settings, IDefaultMailSenderContainer defaultMailSenderContainer) =>
         settings.AddServices(sc => sc.AddSingleton(defaultMailSenderContainer));

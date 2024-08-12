@@ -7,7 +7,6 @@ using nuSpec.NHibernate;
 
 using SampleSystem.Domain;
 using SampleSystem.Security;
-using SampleSystem.Security.Services;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -52,10 +51,11 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                            .AddSubscriptionManagers()
                            .AddLegacyGenericServices()
                            .AddContextEvaluators()
-                           .AddBLLSystem();
+                           .AddBLLSystem()
+
+                           .RegisterSupportLegacyServices();
                    })
 
-               .RegisterSupportLegacyServices()
                .RegisterGeneralApplicationServices(configuration);
     }
 }

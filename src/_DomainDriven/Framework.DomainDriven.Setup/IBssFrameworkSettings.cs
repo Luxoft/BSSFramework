@@ -4,7 +4,6 @@ using Framework.Authorization.Notification;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
 using Framework.Events;
-using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 

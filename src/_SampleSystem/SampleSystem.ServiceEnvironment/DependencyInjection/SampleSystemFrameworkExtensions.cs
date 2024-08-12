@@ -1,15 +1,8 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.Setup;
 using Framework.Events.Legacy;
-using Framework.Notification;
-using Framework.WebApi.Utils.SL;
-
-using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
@@ -53,34 +46,12 @@ public static class SampleSystemFrameworkExtensions
                         new(typeof(Employee), new Guid("{AA46DA53-9B21-4DEC-9C70-720BDA1CB198}")),
                     ]));
 
-    public static IServiceCollection RegisterSupportLegacyServices(this IServiceCollection services)
+    public static IBssFrameworkSettings RegisterSupportLegacyServices(this IBssFrameworkSettings settings)
     {
-        services.AddSingleton<ISecurityRuleParser, SampleSystemSecurityRuleParser>();
-
-        //Custom ariba sender
-        services.AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>();
-
-        //For dto mapping
-        services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
-
-        //For mapping domain objects to dto events
-        services
-            .AddScoped<IDomainEventDTOMapper<PersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<PersistentDomainObjectBase,
-                ISampleSystemDTOMappingService, EventDTOBase>>();
-
-        // For notification
-        services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
-        services.AddScoped<IEmployeeSource, EmployeeSource<Employee>>();
-
-        // For subscription
-        services.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(typeof(EmployeeUpdateSubscription).Assembly));
-
-        // For legacy audit
-        services.AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both));
-
-        // For SL
-        services.AddSingleton<ISlJsonCompatibilitySerializer, SlJsonCompatibilitySerializer>();
-
-        return services;
+        return settings.SetSecurityRuleParser<SampleSystemSecurityRuleParser>()
+                       .SetSubscriptionAssembly(typeof(EmployeeUpdateSubscription).Assembly)
+                       .SetNotificationDefaultMailSenderContainer(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"))
+                       .SetNotificationEmployeeSource<EmployeeSource<Employee>>()
+                       .SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();
     }
 }

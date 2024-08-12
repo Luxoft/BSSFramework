@@ -1,5 +1,8 @@
 ﻿using System.Linq.Expressions;
 
+using FluentValidation;
+
+using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +19,9 @@ using Framework.Authorization.SecuritySystem.UserSource;
 using Framework.DependencyInjection;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Authorization.SecuritySystem.Validation;
+
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.DomainDriven.Setup;
 
@@ -128,6 +134,15 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         where TSpecificationEvaluator : class, ISpecificationEvaluator
     {
         this.SpecificationEvaluatorType = typeof(TSpecificationEvaluator);
+
+        return this;
+    }
+
+    public IBssFrameworkSettings SetUniquePermissionValidator<TValidator>()
+        where TValidator : class, IValidator<Principal>
+    {
+        this.RegisterActions.Add(
+            sc => sc.Replace(ServiceDescriptor.KeyedScoped<IValidator<Principal>, TValidator>(PrincipalUniquePermissionValidator.Key)));
 
         return this;
     }

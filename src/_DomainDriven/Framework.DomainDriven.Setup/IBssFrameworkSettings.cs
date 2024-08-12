@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
-
+using FluentValidation;
+using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
@@ -41,6 +42,9 @@ public interface IBssFrameworkSettings
 
     IBssFrameworkSettings SetSpecificationEvaluator<TSpecificationEvaluator>()
         where TSpecificationEvaluator : class, ISpecificationEvaluator;
+
+    IBssFrameworkSettings SetUniquePermissionValidator<TValidator>()
+        where TValidator : class, IValidator<Principal>;
 
     IBssFrameworkSettings AddDatabaseVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
         where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem;

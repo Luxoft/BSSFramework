@@ -14,6 +14,8 @@ using Framework.SecuritySystem;
 using nuSpec.Abstraction;
 using Framework.Authorization.SecuritySystem.UserSource;
 using Framework.DependencyInjection;
+using Framework.Configuration.Domain;
+using Framework.Core;
 
 namespace Framework.DomainDriven.Setup;
 
@@ -34,6 +36,8 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public Type NotificationPrincipalExtractorType { get; private set; }
 
     public Type DomainObjectEventMetadataType { get; private set; }
+
+    public Type SpecificationEvaluatorType { get; private set; }
 
     public DomainSecurityRule.RoleBaseSecurityRule SecurityAdministratorRule { get; private set; } = SecurityRole.Administrator;
 
@@ -123,7 +127,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public IBssFrameworkSettings SetSpecificationEvaluator<TSpecificationEvaluator>()
         where TSpecificationEvaluator : class, ISpecificationEvaluator
     {
-        this.RegisterActions.Add(sc => sc.AddSingleton<ISpecificationEvaluator, TSpecificationEvaluator>());
+        this.SpecificationEvaluatorType = typeof(TSpecificationEvaluator);
 
         return this;
     }
@@ -152,5 +156,40 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         this.RegisterActions.Add(sc => sc.AddDatabaseSettings(setup));
 
         return this;
+    }
+
+    public void TryInitDefault()
+    {
+        if (this.RegisterBaseNamedLockTypes)
+        {
+            this.NamedLockTypes.Add(typeof(ConfigurationNamedLock));
+        }
+
+        if (this.RegisterDenormalizeHierarchicalDALListener)
+        {
+            this.AddListener<DenormalizeHierarchicalDALListener>();
+        }
+
+        if (this.NotificationPrincipalExtractorType == null)
+        {
+            this.SetNotificationPrincipalExtractor<NotificationPrincipalExtractor>();
+        }
+
+        if (this.DomainObjectEventMetadataType == null)
+        {
+            this.SetDomainObjectEventMetadata<DomainObjectEventMetadata>();
+        }
+    }
+
+    public void Init()
+    {
+        if (this.SpecificationEvaluatorType == null)
+        {
+            this.RegisterActions.Add(sc => sc.AddSingleton(LazyInterfaceImplementHelper.CreateNotImplemented<ISpecificationEvaluator>()));
+        }
+        else
+        {
+            this.RegisterActions.Add(sc => sc.AddScoped(typeof(ISpecificationEvaluator), this.SpecificationEvaluatorType));
+        }
     }
 }

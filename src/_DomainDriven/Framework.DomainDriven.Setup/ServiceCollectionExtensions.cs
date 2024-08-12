@@ -17,7 +17,8 @@ public static class ServiceCollectionExtensions
         var settings = new BssFrameworkSettings();
 
         setupAction?.Invoke(settings);
-        settings.InitSettings();
+        settings.TryInitDefault();
+        settings.Init();
 
         services.AddSingleton(new SecurityAdministratorRuleInfo(settings.SecurityAdministratorRule));
 
@@ -39,28 +40,5 @@ public static class ServiceCollectionExtensions
         settings.Extensions.ForEach(ex => ex.AddServices(services));
 
         return services;
-    }
-
-    private static void InitSettings(this BssFrameworkSettings settings)
-    {
-        if (settings.RegisterBaseNamedLockTypes)
-        {
-            settings.NamedLockTypes.Add(typeof(ConfigurationNamedLock));
-        }
-
-        if (settings.RegisterDenormalizeHierarchicalDALListener)
-        {
-            settings.AddListener<DenormalizeHierarchicalDALListener>();
-        }
-
-        if (settings.NotificationPrincipalExtractorType == null)
-        {
-            settings.SetNotificationPrincipalExtractor<NotificationPrincipalExtractor>();
-        }
-
-        if (settings.DomainObjectEventMetadataType == null)
-        {
-            settings.SetDomainObjectEventMetadata<DomainObjectEventMetadata>();
-        }
     }
 }

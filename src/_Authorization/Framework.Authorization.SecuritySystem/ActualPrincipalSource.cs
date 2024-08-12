@@ -3,14 +3,7 @@ using Framework.Core;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class ActualPrincipalSource : IActualPrincipalSource
+public class ActualPrincipalSource(ICurrentPrincipalSource currentPrincipalSource) : IActualPrincipalSource
 {
-    private readonly ICurrentPrincipalSource currentPrincipalSource;
-
-    public ActualPrincipalSource(ICurrentPrincipalSource currentPrincipalSource)
-    {
-        this.currentPrincipalSource = currentPrincipalSource;
-    }
-
-    public Principal ActualPrincipal => this.currentPrincipalSource.CurrentPrincipal.Pipe(v => v.RunAs ?? v);
+    public Principal ActualPrincipal => currentPrincipalSource.CurrentPrincipal.Pipe(v => v.RunAs ?? v);
 }

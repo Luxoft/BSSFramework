@@ -1,5 +1,7 @@
-﻿using Framework.DependencyInjection;
+﻿using Framework.Core;
+using Framework.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection;
+using Framework.WebApi.Utils.SL;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +10,8 @@ using SampleSystem.BLL;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
 using SampleSystem.Domain;
+using SampleSystem.Events;
+using SampleSystem.Generated.DTO;
 using SampleSystem.Security.Services;
 
 namespace SampleSystem.ServiceEnvironment;
@@ -29,7 +33,13 @@ public static class SampleSystemApplicationExtensions
 
                 .AddRelativeDomainPath((TestExceptObject v) => v.Employee)
 
-                .AddSingleton(typeof(TestRestrictionObjectConditionFactory<>));
+                .AddSingleton(typeof(TestRestrictionObjectConditionFactory<>))
+
+                .AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>()
+
+                .AddSingleton<ISlJsonCompatibilitySerializer, SlJsonCompatibilitySerializer>() // For SL
+
+                .AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both)); // For legacy audit
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {

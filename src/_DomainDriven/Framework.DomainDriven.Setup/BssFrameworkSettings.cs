@@ -9,15 +9,20 @@ using Framework.SecuritySystem.DependencyInjection;
 using Framework.Authorization.SecuritySystem;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
-using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using nuSpec.Abstraction;
+using Framework.Authorization.SecuritySystem.UserSource;
+using Framework.DependencyInjection;
+using Framework.Configuration.Domain;
+using Framework.Core;
 
 namespace Framework.DomainDriven.Setup;
 
 public class BssFrameworkSettings : IBssFrameworkSettings
 {
+    private readonly List<Action<ISecuritySystemSettings>> additionalSecuritySystemSettingsActions = new();
+
     public List<Type> NamedLockTypes { get; set; } = new();
 
     public bool RegisterBaseNamedLockTypes { get; set; } = true;
@@ -32,11 +37,19 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public Type DomainObjectEventMetadataType { get; private set; }
 
+    public Type SpecificationEvaluatorType { get; private set; }
+
     public DomainSecurityRule.RoleBaseSecurityRule SecurityAdministratorRule { get; private set; } = SecurityRole.Administrator;
 
     public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> setupAction)
     {
-        this.RegisterActions.Add(sc => sc.AddSecuritySystem(setupAction));
+        this.RegisterActions.Add(
+            sc => sc.AddSecuritySystem(
+                sss =>
+                {
+                    setupAction(sss);
+                    this.additionalSecuritySystemSettingsActions.ForEach(a => a(sss));
+                }));
 
         return this;
     }
@@ -79,11 +92,27 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         return this;
     }
 
-    public IBssFrameworkSettings SetPrincipalIdentitySource<TDomainObject>(Expression<Func<TDomainObject, bool>> filter, Expression<Func<TDomainObject, string>> namePath)
-        where TDomainObject : IIdentityObject<Guid>
+    public IBssFrameworkSettings SetUserSource<TUserDomainObject>(
+        Expression<Func<TUserDomainObject, Guid>> idPath,
+        Expression<Func<TUserDomainObject, string>> namePath,
+        Expression<Func<TUserDomainObject, bool>> filter)
     {
-        this.RegisterActions.Add(sc => sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TDomainObject>>());
-        this.RegisterActions.Add(sc => sc.AddSingleton(new PrincipalIdentitySourcePathInfo<TDomainObject>(filter, namePath)));
+        this.RegisterActions.Add(
+            sc =>
+            {
+                sc.AddSingleton(new UserPathInfo<TUserDomainObject>(idPath, namePath, filter));
+
+                sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
+                sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();
+
+                sc.AddScoped<IUserPathInfoRelativeService, UserPathInfoRelativeService<TUserDomainObject>>();
+                sc.AddScoped(typeof(CurrentUserSecurityProvider<>));
+
+                sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TUserDomainObject>>();
+            });
+
+        this.additionalSecuritySystemSettingsActions.Add(
+            securitySystemBuilder => { securitySystemBuilder.SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>)); });
 
         return this;
     }
@@ -98,7 +127,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public IBssFrameworkSettings SetSpecificationEvaluator<TSpecificationEvaluator>()
         where TSpecificationEvaluator : class, ISpecificationEvaluator
     {
-        this.RegisterActions.Add(sc => sc.AddSingleton<ISpecificationEvaluator, TSpecificationEvaluator>());
+        this.SpecificationEvaluatorType = typeof(TSpecificationEvaluator);
 
         return this;
     }
@@ -127,5 +156,40 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         this.RegisterActions.Add(sc => sc.AddDatabaseSettings(setup));
 
         return this;
+    }
+
+    public void TryInitDefault()
+    {
+        if (this.RegisterBaseNamedLockTypes)
+        {
+            this.NamedLockTypes.Add(typeof(ConfigurationNamedLock));
+        }
+
+        if (this.RegisterDenormalizeHierarchicalDALListener)
+        {
+            this.AddListener<DenormalizeHierarchicalDALListener>();
+        }
+
+        if (this.NotificationPrincipalExtractorType == null)
+        {
+            this.SetNotificationPrincipalExtractor<NotificationPrincipalExtractor>();
+        }
+
+        if (this.DomainObjectEventMetadataType == null)
+        {
+            this.SetDomainObjectEventMetadata<DomainObjectEventMetadata>();
+        }
+    }
+
+    public void Init()
+    {
+        if (this.SpecificationEvaluatorType == null)
+        {
+            this.RegisterActions.Add(sc => sc.AddSingleton(LazyInterfaceImplementHelper.CreateNotImplemented<ISpecificationEvaluator>()));
+        }
+        else
+        {
+            this.RegisterActions.Add(sc => sc.AddScoped(typeof(ISpecificationEvaluator), this.SpecificationEvaluatorType));
+        }
     }
 }

@@ -7,7 +7,6 @@ using nuSpec.NHibernate;
 
 using SampleSystem.Domain;
 using SampleSystem.Security;
-using SampleSystem.Security.Services;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -28,8 +27,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                        .AddDomainSecurityServices()
                                        .AddSecurityRoles()
                                        .AddSecurityRules()
-                                       .AddCustomSecurityOperations()
-                                       .SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>)))
+                                       .AddCustomSecurityOperations())
 
                            .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
@@ -37,7 +35,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 
-                           .SetPrincipalIdentitySource<Employee>(employee => employee.Active, employee => employee.Login)
+                           .SetUserSource<Employee>(employee => employee.Id, employee => employee.Login, employee => employee.Active)
 
                            .AddListeners()
 
@@ -53,10 +51,11 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                            .AddSubscriptionManagers()
                            .AddLegacyGenericServices()
                            .AddContextEvaluators()
-                           .AddBLLSystem();
+                           .AddBLLSystem()
+
+                           .RegisterSupportLegacyServices();
                    })
 
-               .RegisterSupportLegacyServices()
                .RegisterGeneralApplicationServices(configuration);
     }
 }

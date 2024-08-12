@@ -50,7 +50,7 @@ public static class SampleSystemFrameworkExtensions
     {
         return settings.SetSecurityRuleParser<SampleSystemSecurityRuleParser>()
                        .SetSubscriptionAssembly(typeof(EmployeeUpdateSubscription).Assembly)
-                       .SetNotificationDefaultMailSenderContainer(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"))
+                       .SetNotificationDefaultMailSenderContainer<SampleSystemDefaultMailSenderContainer>()
                        .SetNotificationEmployeeSource<EmployeeSource<Employee>>()
                        .SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();
     }

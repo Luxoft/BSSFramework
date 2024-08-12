@@ -3,6 +3,8 @@ using Automation.Utils;
 
 using Framework.Core;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
@@ -258,18 +260,13 @@ public partial class DataHelper
                                   });
     }
 
-    public EmployeeIdentityDTO GetEmployeeByLogin(string login)
-    {
-        return this.EvaluateRead(context =>
-                                 {
-                                     return context.Logics.Employee.GetObjectBy(e => e.Login == login).ToIdentityDTO();
-                                 });
-    }
 
     public EmployeeSimpleDTO GetCurrentEmployee()
     {
-        return this.EvaluateRead(context =>
-                                         context.Logics.Employee.GetObjectBy(e => e.Login == context.Authorization.CurrentPrincipalName).ToSimpleDTO(new SampleSystemServerPrimitiveDTOMappingService(context)));
+        return this.EvaluateRead(
+            context =>
+                context.Logics.Employee.GetObjectBy(e => e.Login == context.Authorization.CurrentPrincipalName)
+                       .ToSimpleDTO(context.ServiceProvider.GetRequiredService<ISampleSystemDTOMappingService>()));
     }
 
     public EmployeeSpecializationIdentityDTO SaveSpecialization(Guid? id = null, string name = null)

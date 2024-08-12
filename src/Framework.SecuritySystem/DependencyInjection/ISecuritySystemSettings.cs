@@ -24,4 +24,7 @@ public interface ISecuritySystemSettings
     ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions);
 
     ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType);
+
+    ISecuritySystemSettings SetAccessDeniedExceptionService<TAccessDeniedExceptionService>()
+        where TAccessDeniedExceptionService : class, IAccessDeniedExceptionService;
 }

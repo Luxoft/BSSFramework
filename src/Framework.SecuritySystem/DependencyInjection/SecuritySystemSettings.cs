@@ -10,7 +10,9 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 {
     public List<Action<IServiceCollection>> RegisterActions { get; set; } = new();
 
-    public bool InitializeAdministratorRole { get; set; } = true;
+    public bool InitializeAdministratorRole { get;  set; } = true;
+
+    public Type AccessDeniedExceptionServiceType { get; private set; } = typeof(AccessDeniedExceptionService<Guid>);
 
     public ISecuritySystemSettings AddSecurityContext<TSecurityContext>(
         Guid ident,
@@ -67,6 +69,14 @@ public class SecuritySystemSettings : ISecuritySystemSettings
     {
         this.RegisterActions.Add(
             sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(DomainSecurityRule.CurrentUser), genericSecurityProviderType));
+
+        return this;
+    }
+
+    public ISecuritySystemSettings SetAccessDeniedExceptionService<TAccessDeniedExceptionService>()
+        where TAccessDeniedExceptionService : class, IAccessDeniedExceptionService
+    {
+        this.AccessDeniedExceptionServiceType = typeof(TAccessDeniedExceptionService);
 
         return this;
     }

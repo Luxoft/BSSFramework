@@ -85,9 +85,9 @@ public static class BssFrameworkSettingsExtensions
         where TUserSource : class, IEmployeeSource =>
         settings.AddServices(sc => sc.AddScoped<IEmployeeSource, TUserSource>());
 
-    public static IBssFrameworkSettings SetNotificationDefaultMailSenderContainer(this IBssFrameworkSettings settings, IDefaultMailSenderContainer defaultMailSenderContainer) =>
-        settings.AddServices(sc => sc.AddSingleton(defaultMailSenderContainer));
-
+    public static IBssFrameworkSettings SetNotificationDefaultMailSenderContainer<TDefaultMailSenderContainer>(this IBssFrameworkSettings settings)
+        where TDefaultMailSenderContainer : class, IDefaultMailSenderContainer =>
+        settings.AddServices(sc => sc.AddSingleton<IDefaultMailSenderContainer, TDefaultMailSenderContainer>());
 
     public static IBssFrameworkSettings SetDTOMapping<TDTOMappingService, TDTOMappingServiceImpl, TPersistentDomainObjectBase, TEventDTOBase>(this IBssFrameworkSettings settings)
         where TDTOMappingService : class

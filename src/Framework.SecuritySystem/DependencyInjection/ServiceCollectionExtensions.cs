@@ -12,36 +12,6 @@ namespace Framework.SecuritySystem.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterGeneralSecuritySystem(this IServiceCollection services)
-    {
-        return services.AddSingleton<SecurityModeExpander>()
-                       .AddSingleton<SecurityOperationExpander>()
-                       .AddSingleton<SecurityRoleExpander>()
-                       .AddSingleton<RoleFactorySecurityRuleExpander>()
-                       .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
-                       .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
-                       .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
-                       .AddSingletonFrom<ISecurityContextInfoService, ISecurityContextInfoService<Guid>>()
-                       .AddSingleton<ISecurityContextInfoService<Guid>, SecurityContextInfoService<Guid>>()
-                       .AddScoped<IDomainSecurityProviderFactory, DomainSecurityProviderFactory>()
-                       .AddSingleton<ISecurityRuleBasicOptimizer, SecurityRuleBasicOptimizer>()
-                       .AddSingleton<ISecurityRuleDeepOptimizer, SecurityRuleDeepOptimizer>()
-                       .AddSingleton<ISecurityRuleImplementationResolver, SecurityRuleImplementationResolver>()
-                       .AddScoped<IRoleBaseSecurityProviderFactory, RoleBaseSecurityProviderFactory>()
-                       .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
-                       .AddScoped<ISecurityExpressionBuilderFactory, SecurityExpressionBuilderFactory<Guid>>()
-                       .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService<Guid>>()
-                       .AddKeyedSingleton(
-                           typeof(ISecurityProvider<>),
-                           nameof(DomainSecurityRule.AccessDenied),
-                           typeof(AccessDeniedSecurityProvider<>))
-                       .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
-                       .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
-                       .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))
-                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
-                       .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>();
-    }
-
     public static IServiceCollection RegisterDomainSecurityServices<TIdent>(
         this IServiceCollection services,
         Action<IDomainSecurityServiceRootBuilder> setupAction)
@@ -82,6 +52,8 @@ public static class ServiceCollectionExtensions
             services.AddSingletonFrom((IInitializedSecurityRoleSource source) => source.GetSecurityRoles());
         }
 
+        services.AddSingleton(typeof(IAccessDeniedExceptionService), settings.AccessDeniedExceptionServiceType);
+
         services.RegisterGeneralSecuritySystem();
 
         return services;
@@ -102,5 +74,34 @@ public static class ServiceCollectionExtensions
         {
             return services.AddKeyedSingleton<IRelativeDomainPathInfo<TFrom, TTo>>(key, info);
         }
+    }
+
+    private static IServiceCollection RegisterGeneralSecuritySystem(this IServiceCollection services)
+    {
+        return services.AddSingleton<SecurityModeExpander>()
+                       .AddSingleton<SecurityOperationExpander>()
+                       .AddSingleton<SecurityRoleExpander>()
+                       .AddSingleton<RoleFactorySecurityRuleExpander>()
+                       .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
+                       .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
+                       .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
+                       .AddSingletonFrom<ISecurityContextInfoService, ISecurityContextInfoService<Guid>>()
+                       .AddSingleton<ISecurityContextInfoService<Guid>, SecurityContextInfoService<Guid>>()
+                       .AddScoped<IDomainSecurityProviderFactory, DomainSecurityProviderFactory>()
+                       .AddSingleton<ISecurityRuleBasicOptimizer, SecurityRuleBasicOptimizer>()
+                       .AddSingleton<ISecurityRuleDeepOptimizer, SecurityRuleDeepOptimizer>()
+                       .AddSingleton<ISecurityRuleImplementationResolver, SecurityRuleImplementationResolver>()
+                       .AddScoped<IRoleBaseSecurityProviderFactory, RoleBaseSecurityProviderFactory>()
+                       .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
+                       .AddScoped<ISecurityExpressionBuilderFactory, SecurityExpressionBuilderFactory<Guid>>()
+                       .AddKeyedSingleton(
+                           typeof(ISecurityProvider<>),
+                           nameof(DomainSecurityRule.AccessDenied),
+                           typeof(AccessDeniedSecurityProvider<>))
+                       .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
+                       .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
+                       .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))
+                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
+                       .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>();
     }
 }

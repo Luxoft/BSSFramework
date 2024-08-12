@@ -114,7 +114,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
                 sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
                 sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();
 
-                sc.AddScoped(typeof(CurrentUserSecurityProvider<>));
+                sc.AddScoped(typeof(CurrentUserSecurityProvider<>)); // can't define partial generics
                 sc.AddScoped(typeof(CurrentUserSecurityProvider<,>));
 
                 sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TUserDomainObject>>();

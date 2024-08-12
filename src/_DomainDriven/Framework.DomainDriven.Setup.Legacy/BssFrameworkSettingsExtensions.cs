@@ -81,9 +81,9 @@ public static class BssFrameworkSettingsExtensions
     public static IBssFrameworkSettings SetSubscriptionAssembly(this IBssFrameworkSettings settings, Assembly assembly) =>
         settings.AddServices(sc => sc.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(assembly)));
 
-    public static IBssFrameworkSettings SetNotificationEmployeeSource<TUserSource>(this IBssFrameworkSettings settings)
-        where TUserSource : class, IEmployeeSource =>
-        settings.AddServices(sc => sc.AddScoped<IEmployeeSource, TUserSource>());
+    public static IBssFrameworkSettings SetNotificationEmployee<TEmployee>(this IBssFrameworkSettings settings)
+        where TEmployee : class, IEmployee =>
+        settings.AddServices(sc => sc.AddScoped<IEmployeeSource, EmployeeSource<TEmployee>>());
 
     public static IBssFrameworkSettings SetNotificationDefaultMailSenderContainer<TDefaultMailSenderContainer>(this IBssFrameworkSettings settings)
         where TDefaultMailSenderContainer : class, IDefaultMailSenderContainer =>

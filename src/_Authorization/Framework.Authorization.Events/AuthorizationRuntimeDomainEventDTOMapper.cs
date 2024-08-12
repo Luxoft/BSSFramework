@@ -5,24 +5,17 @@ using Framework.Events.Legacy;
 
 namespace Framework.Authorization.Events;
 
-public class AuthorizationRuntimeDomainEventDTOMapper : RuntimeDomainEventDTOMapper<PersistentDomainObjectBase, IAuthorizationDTOMappingService, EventDTOBase>
+public class AuthorizationRuntimeDomainEventDTOMapper(
+    IAuthorizationDTOMappingService mappingService,
+    RuntimeDomainEventDTOConverter<PersistentDomainObjectBase, IAuthorizationDTOMappingService, EventDTOBase> converter,
+    bool shrinkDto = true)
+    : RuntimeDomainEventDTOMapper<PersistentDomainObjectBase, IAuthorizationDTOMappingService, EventDTOBase>(mappingService, converter)
 {
-    private readonly bool shrinkDto;
-
-    public AuthorizationRuntimeDomainEventDTOMapper(
-        IAuthorizationDTOMappingService mappingService,
-        RuntimeDomainEventDTOConverter<PersistentDomainObjectBase, IAuthorizationDTOMappingService, EventDTOBase> converter,
-        bool shrinkDto = true)
-        : base(mappingService, converter)
-    {
-        this.shrinkDto = shrinkDto;
-    }
-
     public override object Convert<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
     {
         var dto = base.Convert(domainObject, domainObjectEvent);
 
-        if (this.shrinkDto)
+        if (shrinkDto)
         {
             switch (dto)
             {

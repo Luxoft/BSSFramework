@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystem.UserSource;
 
 public record UserPathInfo<TDomainObject>(
     Expression<Func<TDomainObject, Guid>> IdPath,

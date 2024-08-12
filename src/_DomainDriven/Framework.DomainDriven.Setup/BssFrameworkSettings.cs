@@ -108,6 +108,8 @@ public class BssFrameworkSettings : IBssFrameworkSettings
             {
                 sc.AddSingleton(new UserPathInfo<TUserDomainObject>(idPath, namePath, filter));
 
+                sc.AddScoped<IUserSource<TUserDomainObject>, UserSource<TUserDomainObject>>();
+
                 sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
                 sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();
 

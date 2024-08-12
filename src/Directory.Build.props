@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Copyright>Luxoft 2009-2023</Copyright>
+    <Copyright>Luxoft 2009-2024</Copyright>
     <Authors>Luxoft BSS</Authors>
     <RepositoryUrl>https://github.com/Luxoft/BSSFramework</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
-using Framework.Authorization.SecuritySystem;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
 using Framework.SecuritySystem;
@@ -106,13 +105,17 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         this.RegisterActions.Add(
             sc =>
             {
-                sc.AddSingleton(new UserPathInfo<TUserDomainObject>(idPath, namePath, filter));
+                var info = new UserPathInfo<TUserDomainObject>(idPath, namePath, filter);
+                sc.AddSingleton(info);
+                sc.AddSingleton<IUserPathInfo>(info);
+
+                sc.AddScoped<IUserSource<TUserDomainObject>, UserSource<TUserDomainObject>>();
 
                 sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
                 sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();
 
-                sc.AddScoped<IUserPathInfoRelativeService, UserPathInfoRelativeService<TUserDomainObject>>();
-                sc.AddScoped(typeof(CurrentUserSecurityProvider<>));
+                sc.AddScoped(typeof(CurrentUserSecurityProvider<>)); // can't define partial generics
+                sc.AddScoped(typeof(CurrentUserSecurityProvider<,>));
 
                 sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TUserDomainObject>>();
             });

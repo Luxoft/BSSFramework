@@ -17,7 +17,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 namespace SampleSystem.IntegrationTests;
 
 [TestClass]
-public class TestRestrictionRoleTests : TestBase
+public class RestrictionRoleTests : TestBase
 {
     [TestMethod]
     public void GetRestrictionObjectsWithRestrictionRole_RestrictionApplied()

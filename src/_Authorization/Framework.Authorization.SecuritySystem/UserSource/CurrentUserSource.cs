@@ -1,6 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem.UserSource;
 
@@ -13,15 +11,14 @@ public class CurrentUserSource<TUserDomainObject> : ICurrentUserSource<TUserDoma
     private readonly Lazy<string> lazyCurrentUserName;
 
     public CurrentUserSource(
-        [DisabledSecurity] IRepository<TUserDomainObject> userRepository,
+        IUserSource<TUserDomainObject> userSource,
         UserPathInfo<TUserDomainObject> userPathInfo,
         IActualPrincipalSource actualPrincipalSource)
     {
         this.lazyCurrentUser = LazyHelper.Create(
-            () => userRepository.GetQueryable()
-                                .Where(userPathInfo.Filter)
-                                .Where(userPathInfo.NamePath.Select(name => name == actualPrincipalSource.ActualPrincipal.Name))
-                                .Single());
+            () => userSource.TryGetByName(actualPrincipalSource.ActualPrincipal.Name)
+                  ?? throw new Exception(
+                      $"{typeof(TUserDomainObject).Name} with {userPathInfo.NamePath.GetProperty().Name} ({actualPrincipalSource.ActualPrincipal.Name}) not found"));
 
         this.lazyCurrentUserId = LazyHelper.Create(() => userPathInfo.IdPath.Eval(this.CurrentUser));
 

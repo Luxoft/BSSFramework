@@ -1,8 +1,11 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystem.UserSource;
 
-public record UserPathInfo<TDomainObject>(
-    Expression<Func<TDomainObject, Guid>> IdPath,
-    Expression<Func<TDomainObject, string>> NamePath,
-    Expression<Func<TDomainObject, bool>> Filter);
+public record UserPathInfo<TUserDomainObject>(
+    Expression<Func<TUserDomainObject, Guid>> IdPath,
+    Expression<Func<TUserDomainObject, string>> NamePath,
+    Expression<Func<TUserDomainObject, bool>> Filter) : IUserPathInfo
+{
+    public Type UserDomainObjectType { get; } = typeof(TUserDomainObject);
+};

@@ -1,6 +1,5 @@
 ﻿using Framework.Authorization.Environment.Security;
 using Framework.Authorization.Notification;
-using Framework.Configuration.Domain;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;

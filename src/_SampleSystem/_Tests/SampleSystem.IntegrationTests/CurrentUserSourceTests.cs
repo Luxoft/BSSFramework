@@ -2,8 +2,6 @@
 
 using FluentAssertions;
 
-using FluentValidation;
-
 using Framework.Authorization.SecuritySystem.UserSource;
 using Framework.DomainDriven;
 

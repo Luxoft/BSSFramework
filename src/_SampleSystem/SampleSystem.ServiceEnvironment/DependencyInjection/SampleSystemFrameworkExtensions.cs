@@ -1,6 +1,4 @@
-﻿using Framework.Configuration.BLL;
-using Framework.Configuration.BLL.Notification;
-using Framework.DomainDriven.ServiceModel.IAD;
+﻿using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.Setup;
 using Framework.Events.Legacy;
 

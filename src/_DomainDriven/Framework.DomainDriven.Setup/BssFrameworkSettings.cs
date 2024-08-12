@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
-using Framework.Authorization.SecuritySystem;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
 using Framework.SecuritySystem;

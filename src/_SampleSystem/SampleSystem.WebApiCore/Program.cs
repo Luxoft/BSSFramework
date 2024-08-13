@@ -9,6 +9,7 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
+using Framework.DomainDriven.WebApiNetCore.JsonConverter;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Authentication.Negotiate;
@@ -16,7 +17,6 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 using SampleSystem.BLL._Command.CreateClassA.Integration;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
-using SampleSystem.WebApiCore.Json;
 using SampleSystem.WebApiCore.Services;
 
 var builder = WebApplication.CreateBuilder(args);

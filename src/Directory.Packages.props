@@ -44,8 +44,8 @@
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="171.30.0" />
-    <PackageVersion Include="MSTest.TestAdapter" Version="3.5.0" />
-    <PackageVersion Include="MSTest.TestFramework" Version="3.5.0" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="3.5.1" />
+    <PackageVersion Include="MSTest.TestFramework" Version="3.5.1" />
     <PackageVersion Include="NHibernate" Version="5.5.2" />
     <PackageVersion Include="NHibernate.Envers" Version="5.5.2" />
     <PackageVersion Include="NSubstitute" Version="5.1.0" />

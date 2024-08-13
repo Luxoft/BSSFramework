@@ -2,6 +2,8 @@
 
 using Framework.Core;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.SecuritySystem;
 
 public class SecurityPathRestrictionService(IServiceProvider serviceProvider, SecurityPathRestrictionServiceSettings? settings = null)
@@ -13,9 +15,11 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider, Se
     {
         var visitedSecurityPath = this.VisitSecurityContexts(securityPath, restriction);
 
-        var result = restriction.ConditionFactoryTypes.Aggregate(visitedSecurityPath, this.TryAddCondition);
+        var addConditionFactoryResult = restriction.ConditionFactoryTypes.Aggregate(visitedSecurityPath, this.TryAddConditionFactory);
 
-        return result;
+        var addRelativeConditionResult = restriction.RelativeConditions.Aggregate(addConditionFactoryResult, this.TryAddRelativeCondition);
+
+        return addRelativeConditionResult;
     }
 
     private SecurityPath<TDomainObject> VisitSecurityContexts<TDomainObject>(
@@ -44,7 +48,7 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider, Se
         }
     }
 
-    private SecurityPath<TDomainObject> TryAddCondition<TDomainObject>(SecurityPath<TDomainObject> securityPath, Type conditionFactoryType)
+    private SecurityPath<TDomainObject> TryAddConditionFactory<TDomainObject>(SecurityPath<TDomainObject> securityPath, Type conditionFactoryType)
     {
         var conditionFactory =
             (IFactory<Expression<Func<TDomainObject, bool>>>?)serviceProvider.GetService(
@@ -60,6 +64,20 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider, Se
         {
             return securityPath;
         }
+    }
+
+    private SecurityPath<TDomainObject> TryAddRelativeCondition<TDomainObject>(
+        SecurityPath<TDomainObject> securityPath,
+        SecurityPathRestrictionConditionInfo conditionInfo)
+    {
+        var untypedFactory = ActivatorUtilities.CreateInstance(
+            serviceProvider,
+            typeof(RelativeConditionFactory<,>).MakeGenericType(typeof(TDomainObject), conditionInfo.RelativeTargetDomainObjectType),
+            conditionInfo);
+
+        var factory = (IFactory<Expression<Func<TDomainObject, bool>>>)untypedFactory;
+
+        return securityPath.And(factory.Create());
     }
 
     private SecurityPath<TDomainObject> Visit<TDomainObject>(

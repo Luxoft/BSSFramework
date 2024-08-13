@@ -70,14 +70,24 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider, Se
         SecurityPath<TDomainObject> securityPath,
         SecurityPathRestrictionConditionInfo conditionInfo)
     {
-        var untypedFactory = ActivatorUtilities.CreateInstance(
-            serviceProvider,
-            typeof(RelativeConditionFactory<,>).MakeGenericType(typeof(TDomainObject), conditionInfo.RelativeTargetDomainObjectType),
-            conditionInfo);
+        var factoryType = typeof(RelativeConditionFactory<,>).MakeGenericType(
+            typeof(TDomainObject),
+            conditionInfo.RelativeTargetDomainObjectType);
 
-        var factory = (IFactory<Expression<Func<TDomainObject, bool>>>)untypedFactory;
+        var untypedConditionFactory = ActivatorUtilities.CreateInstance(serviceProvider, factoryType, conditionInfo);
 
-        return securityPath.And(factory.Create());
+        var conditionFactory = (IFactory<Expression<Func<TDomainObject, bool>>>?)untypedConditionFactory;
+
+        var condition = conditionFactory?.Create();
+
+        if (condition != null)
+        {
+            return securityPath.And(condition);
+        }
+        else
+        {
+            return securityPath;
+        }
     }
 
     private SecurityPath<TDomainObject> Visit<TDomainObject>(

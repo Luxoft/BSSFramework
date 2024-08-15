@@ -7,12 +7,12 @@ namespace Framework.SecuritySystem;
 public record SecurityPathRestriction(
     DeepEqualsCollection<SecurityContextRestriction>? SecurityContextRestrictions,
     DeepEqualsCollection<Type> ConditionFactoryTypes,
-    DeepEqualsCollection<SecurityPathRestrictionConditionInfo> RelativeConditions)
+    DeepEqualsCollection<RelativeConditionInfo> RelativeConditions)
 {
     public SecurityPathRestriction(
         IEnumerable<SecurityContextRestriction>? securityContexts,
         IEnumerable<Type> conditionFactoryTypes,
-        IEnumerable<SecurityPathRestrictionConditionInfo> relativeConditions)
+        IEnumerable<RelativeConditionInfo> relativeConditions)
         : this(
             securityContexts == null ? null : DeepEqualsCollection.Create(securityContexts),
             DeepEqualsCollection.Create(conditionFactoryTypes),
@@ -37,7 +37,7 @@ public record SecurityPathRestriction(
         new(
             this.SecurityContextRestrictions,
             this.ConditionFactoryTypes,
-            this.RelativeConditions.Concat([new SecurityPathRestrictionConditionInfo<TDomainObject>(condition)]));
+            this.RelativeConditions.Concat([new RelativeConditionInfo<TDomainObject>(condition)]));
 
     public SecurityPathRestriction AddConditionFactory(Type conditionFactoryType) =>
         new(this.SecurityContextRestrictions, this.ConditionFactoryTypes.Concat([conditionFactoryType]), this.RelativeConditions);

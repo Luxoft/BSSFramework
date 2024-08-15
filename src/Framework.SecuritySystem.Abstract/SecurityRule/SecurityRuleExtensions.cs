@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using System.Linq.Expressions;
+
+using Framework.Core;
 using Framework.HierarchicalExpand;
 
 using static Framework.SecuritySystem.DomainSecurityRule;
@@ -33,6 +35,21 @@ public static class SecurityRuleExtensions
         DomainSecurityRule otherSecurityRule) =>
         new AndSecurityRule(securityRule, otherSecurityRule);
 
+    public static DomainSecurityRule Or<TRelativeDomainObject>(
+        this DomainSecurityRule securityRule,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRule.Or(new RelativeConditionSecurityRule(condition.ToInfo()));
+
+    public static DomainSecurityRule And<TRelativeDomainObject>(
+        this DomainSecurityRule securityRule,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRule.And(new RelativeConditionSecurityRule(condition.ToInfo()));
+
+    public static DomainSecurityRule Except<TRelativeDomainObject>(
+        this DomainSecurityRule securityRule,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRule.And(condition.Not());
+
     public static DomainSecurityRule Negate(this DomainSecurityRule securityRule) =>
         new NegateSecurityRule(securityRule);
 
@@ -51,6 +68,21 @@ public static class SecurityRuleExtensions
         DomainSecurityRule otherSecurityRule) =>
         securityRule.ToSecurityRule().And(otherSecurityRule);
 
+    public static DomainSecurityRule Or<TRelativeDomainObject>(
+        this SecurityRole securityRule,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRule.ToSecurityRule().Or(condition);
+
+    public static DomainSecurityRule And<TRelativeDomainObject>(
+        this SecurityRole securityRule,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRule.ToSecurityRule().And(condition);
+
+    public static DomainSecurityRule Except<TRelativeDomainObject>(
+        this SecurityRole securityRule,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRule.ToSecurityRule().Except(condition);
+
     public static DomainSecurityRule Negate(this SecurityRole securityRule) => securityRule.ToSecurityRule().Negate();
 
     public static DomainSecurityRule Except(
@@ -67,6 +99,21 @@ public static class SecurityRuleExtensions
         this SecurityOperation securityOperation,
         DomainSecurityRule otherSecurityRule) =>
         securityOperation.ToSecurityRule().And(otherSecurityRule);
+
+    public static DomainSecurityRule Or<TRelativeDomainObject>(
+        this SecurityOperation securityRule,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRule.ToSecurityRule().Or(condition);
+
+    public static DomainSecurityRule And<TRelativeDomainObject>(
+        this SecurityOperation securityRule,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRule.ToSecurityRule().And(condition);
+
+    public static DomainSecurityRule Except<TRelativeDomainObject>(
+        this SecurityOperation securityRule,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRule.ToSecurityRule().Except(condition);
 
     public static DomainSecurityRule Negate(this SecurityOperation securityOperation) =>
         securityOperation.ToSecurityRule().Negate();
@@ -85,6 +132,21 @@ public static class SecurityRuleExtensions
         this IEnumerable<SecurityRole> securityRoles,
         DomainSecurityRule otherSecurityRule) =>
         securityRoles.ToSecurityRule().And(otherSecurityRule);
+
+    public static DomainSecurityRule Or<TRelativeDomainObject>(
+        this IEnumerable<SecurityRole> securityRoles,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRoles.ToSecurityRule().Or(condition);
+
+    public static DomainSecurityRule And<TRelativeDomainObject>(
+        this IEnumerable<SecurityRole> securityRoles,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRoles.ToSecurityRule().And(condition);
+
+    public static DomainSecurityRule Except<TRelativeDomainObject>(
+        this IEnumerable<SecurityRole> securityRoles,
+        Expression<Func<TRelativeDomainObject, bool>> condition) =>
+        securityRoles.ToSecurityRule().Except(condition);
 
     public static DomainSecurityRule Negate(this IEnumerable<SecurityRole> securityRoles) =>
         securityRoles.ToSecurityRule().Negate();

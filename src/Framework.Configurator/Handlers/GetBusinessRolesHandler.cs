@@ -1,27 +1,39 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Authorization.Environment.Security;
+﻿using Framework.Authorization.Environment.Security;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
-using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-using NHibernate.Linq;
-
 namespace Framework.Configurator.Handlers;
 
-public class GetBusinessRolesHandler(IRepositoryFactory<BusinessRole> roleRepoFactory, IOperationAccessor operationAccessor)
+public class GetBusinessRolesHandler(
+    ISecurityRoleSource securityRoleSource,
+    ISecurityContextInfoService securityContextInfoService,
+    IOperationAccessor operationAccessor)
     : BaseReadHandler, IGetBusinessRolesHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
         if (!operationAccessor.IsSecurityAdministrator()) return new List<EntityDto>();
 
-        return await roleRepoFactory.Create()
-                                    .GetQueryable()
-                                    .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
-                                    .OrderBy(x => x.Name)
-                                    .ToListAsync(cancellationToken);
+        var defaultContexts = securityContextInfoService.SecurityContextTypes.Select(securityContextInfoService.GetSecurityContextInfo)
+                                                        .Select(v => new RoleContextDto(v.Name, false))
+                                                        .ToList();
+
+        return securityRoleSource
+               .GetRealRoles()
+               .Select(
+                   x => new FullRoleDto
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            Contexts =
+                                x.Information.Restriction.SecurityContextRestrictions?.Select(
+                                    v => new RoleContextDto(securityContextInfoService.GetSecurityContextInfo(v.Type).Name, v.Required)).ToList()
+                                ?? defaultContexts
+                        })
+               .OrderBy(x => x.Name)
+               .ToList();
     }
 }

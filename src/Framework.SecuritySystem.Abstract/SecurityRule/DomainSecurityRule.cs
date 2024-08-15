@@ -33,7 +33,9 @@ public abstract record DomainSecurityRule : SecurityRule
         public override string ToString() => this.Key ?? base.ToString();
     }
 
-    public record ConditionSecurityRule(Type GenericConditionFactoryType) : DomainSecurityRule;
+    public record ConditionFactorySecurityRule(Type GenericConditionFactoryType) : DomainSecurityRule;
+
+    public record RelativeConditionSecurityRule(RelativeConditionInfo RelativeConditionInfo) : DomainSecurityRule;
 
     public record FactorySecurityRule(Type RuleFactoryType) : DomainSecurityRule;
 

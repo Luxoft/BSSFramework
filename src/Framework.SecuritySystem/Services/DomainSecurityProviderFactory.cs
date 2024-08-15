@@ -55,7 +55,7 @@ public class DomainSecurityProviderFactory(
                 return securityProviderFactory.Create();
             }
 
-            case ConditionSecurityRule securityRule:
+            case ConditionFactorySecurityRule securityRule:
             {
                 var conditionFactoryType =
                     securityRule.GenericConditionFactoryType.MakeGenericType(typeof(TDomainObject));
@@ -65,6 +65,23 @@ public class DomainSecurityProviderFactory(
                 var conditionFactory = (IFactory<Expression<Func<TDomainObject, bool>>>)conditionFactoryUntyped;
 
                 return SecurityProvider<TDomainObject>.Create(conditionFactory.Create());
+            }
+
+            case RelativeConditionSecurityRule securityRule:
+            {
+                var conditionInfo = securityRule.RelativeConditionInfo;
+
+                var factoryType = typeof(RequiredRelativeConditionFactory<,>).MakeGenericType(
+                    typeof(TDomainObject),
+                    conditionInfo.RelativeDomainObjectType);
+
+                var untypedConditionFactory = ActivatorUtilities.CreateInstance(serviceProvider, factoryType, conditionInfo);
+
+                var conditionFactory = (IFactory<Expression<Func<TDomainObject, bool>>>)untypedConditionFactory;
+
+                var condition = conditionFactory.Create();
+
+                return SecurityProvider<TDomainObject>.Create(condition);
             }
 
             case FactorySecurityRule securityRule:

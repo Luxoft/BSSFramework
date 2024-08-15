@@ -33,8 +33,6 @@ public static class SampleSystemApplicationExtensions
 
                 .AddRelativeDomainPath((TestExceptObject v) => v.Employee)
 
-                .AddSingleton(typeof(TestRestrictionObjectConditionFactory<>))
-
                 .AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>()
 
                 .AddSingleton<ISlJsonCompatibilitySerializer, SlJsonCompatibilitySerializer>() // For SL

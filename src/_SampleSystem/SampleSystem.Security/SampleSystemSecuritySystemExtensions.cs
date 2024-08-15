@@ -101,7 +101,7 @@ public static class SampleSystemSecuritySystemExtensions
     {
         return settings.AddSecurityRule(
             SampleSystemSecurityRule.TestRestriction,
-            new DomainSecurityRule.ConditionSecurityRule(typeof(TestRestrictionObjectConditionFactory<>)));
+            SecurityRule.Disabled.And((TestRestrictionObject v) => v.RestrictionHandler));
     }
 
     public static ISecuritySystemSettings AddCustomSecurityOperations(this ISecuritySystemSettings settings)

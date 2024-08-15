@@ -6,7 +6,7 @@
 
 [assembly: AssemblyVersion("21.6.1.0")]
 [assembly: AssemblyFileVersion("21.6.1.0")]
-[assembly: AssemblyInformationalVersion("21.6.10.0")]
+[assembly: AssemblyInformationalVersion("21.6.1.0")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]

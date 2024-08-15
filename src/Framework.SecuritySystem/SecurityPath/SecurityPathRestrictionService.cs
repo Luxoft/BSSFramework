@@ -68,11 +68,11 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider, Se
 
     private SecurityPath<TDomainObject> TryAddRelativeCondition<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
-        SecurityPathRestrictionConditionInfo conditionInfo)
+        RelativeConditionInfo conditionInfo)
     {
         var factoryType = typeof(RelativeConditionFactory<,>).MakeGenericType(
             typeof(TDomainObject),
-            conditionInfo.RelativeTargetDomainObjectType);
+            conditionInfo.RelativeDomainObjectType);
 
         var untypedConditionFactory = ActivatorUtilities.CreateInstance(serviceProvider, factoryType, conditionInfo);
 

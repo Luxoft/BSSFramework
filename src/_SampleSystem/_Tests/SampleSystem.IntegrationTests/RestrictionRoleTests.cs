@@ -13,6 +13,7 @@ using Framework.DomainDriven.BLL;
 using SampleSystem.Generated.DTO;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
+using Framework.SecuritySystem;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -100,7 +101,7 @@ public class RestrictionRoleTests : TestBase
     }
 
     [TestMethod]
-    public void GetRestrictionObjectsWithConditionRule_RestrictionApplied()
+    public void GetRestrictionFromHeaderObjectsWithConditionRule_RestrictionApplied()
     {
         // Arrange
         var testObjects = this.Evaluate(
@@ -133,6 +134,39 @@ public class RestrictionRoleTests : TestBase
         result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
     }
 
+    [TestMethod]
+    public void GetRestrictionObjectsWithConditionRule_RestrictionApplied()
+    {
+        // Arrange
+        var testObjects = this.Evaluate(
+            DBSessionMode.Write,
+            ctx =>
+            {
+                var objList = new TestRestrictionObject[]
+                              {
+                                  new() { RestrictionHandler = true },
+                                  new() { RestrictionHandler = false },
+                                  new() { RestrictionHandler = true }
+                              };
+
+                ctx.Logics.Default.Create<TestRestrictionObject>().Save(objList);
+
+                return objList.ToIdentityDTOList();
+            });
+
+        // Act
+        var result = this.Evaluate(
+            DBSessionMode.Read,
+            ctx =>
+            {
+                var bll = ctx.Logics.Default.Create<TestRestrictionObject>(SecurityRule.Disabled.And((TestRestrictionObject v) => v.RestrictionHandler));
+
+                return bll.GetFullList().ToIdentityDTOList();
+            });
+
+        // Assert
+        result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
+    }
 
     [TestMethod]
     public void TryCreatePermissionWithoutRequiredSecurityContext_ExceptionRaised()

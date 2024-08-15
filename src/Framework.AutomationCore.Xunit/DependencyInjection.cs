@@ -29,6 +29,9 @@ public static class DependencyInjection
 
                 .AddScoped<TestWebApiCurrentMethodResolver>()
                 .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+                .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
 
-                .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();
+                .AddSingleton(typeof(ControllerEvaluator<>))
+
+                .AddScoped<AuthManager>();
 }

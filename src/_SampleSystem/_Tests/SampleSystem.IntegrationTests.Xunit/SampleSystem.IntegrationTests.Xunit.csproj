@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.NET.Test.Sdk" />
+      <PackageReference Include="xunit.runner.visualstudio">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Framework.AutomationCore.Xunit\Framework.AutomationCore.Xunit.csproj" />
+      <ProjectReference Include="..\..\..\_DomainDriven\Framework.DomainDriven.DBGenerator\Framework.DomainDriven.DBGenerator.csproj" />
+      <ProjectReference Include="..\SampleSystem.IntegrationTests\SampleSystem.IntegrationTests.csproj" />
+      <ProjectReference Include="..\SampleSystem.DbGenerate\SampleSystem.DbGenerate.csproj" />
+    </ItemGroup>
+
+</Project>

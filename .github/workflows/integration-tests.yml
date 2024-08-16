@@ -42,3 +42,8 @@ jobs:
       - name: Integration Tests
         run: |
           dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests --no-build --verbosity normal;
+      
+      - name: Integration Tests Xunit
+        run: |
+          dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.Xunit --no-build --verbosity normal;
+      

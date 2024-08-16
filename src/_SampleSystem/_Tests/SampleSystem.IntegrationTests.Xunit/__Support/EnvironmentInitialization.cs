@@ -15,10 +15,10 @@ using Framework.Notification.DTO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.Support.Utils;
 using SampleSystem.IntegrationTests.Xunit.__Support.Database;
+using SampleSystem.IntegrationTests.Xunit.__Support.TestData;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Main;
 

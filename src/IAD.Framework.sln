@@ -377,7 +377,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.Setu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSystem.Security.Abstract", "_SampleSystem\SampleSystem.Security.Abstract\SampleSystem.Security.Abstract.csproj", "{5A341E27-7150-480D-8E6C-9E8DCA111178}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleSystem.IntegrationTests.Xunit", "SampleSystem.IntegrationTests.Xunit\SampleSystem.IntegrationTests.Xunit.csproj", "{30DC6008-68D1-4D82-8BB6-B757823ECA1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleSystem.IntegrationTests.Xunit", "_SampleSystem\_Tests\SampleSystem.IntegrationTests.Xunit\SampleSystem.IntegrationTests.Xunit.csproj", "{30DC6008-68D1-4D82-8BB6-B757823ECA1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

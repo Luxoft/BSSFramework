@@ -57,7 +57,10 @@ builder.Services.AddControllers(x => x.EnableEndpointRouting = false)
                            x.JsonSerializerOptions.Converters.Add(new PeriodJsonConverter());
                        });
 
-if (builder.Environment.IsProduction()) builder.Services.AddHangfireBss(builder.Configuration.GetConnectionString("DefaultConnection"));
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddHangfireBss(builder.Configuration.GetConnectionString("DefaultConnection"));
+}
 
 builder.Services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));
 
@@ -78,21 +81,10 @@ app
 
 if (builder.Environment.IsProduction())
 {
-    var contextEvaluator = LazyInterfaceImplementHelper.CreateProxy(
-        () =>
-        {
-            var serviceProvider = new ServiceCollection()
-                                  .RegisterGeneralDependencyInjection(builder.Configuration)
-                                  .ValidateDuplicateDeclaration()
-                                  .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
-
-            return serviceProvider.GetRequiredService<IServiceEvaluator<IAuthorizationSystem>>();
-        });
-
     app.UseHangfireBss(
         builder.Configuration,
         JobList.RunAll,
-        authorizationFilter: new SampleSystemHangfireAuthorization(contextEvaluator));
+        authorizationFilter: new SampleSystemHangfireAuthorization());
 }
 
 app.Run();

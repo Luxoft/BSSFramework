@@ -1,5 +1,4 @@
 ﻿using Framework.Core.Services;
-using Framework.DomainDriven;
 using Framework.NotificationCore.Monitoring;
 using Framework.SecuritySystem;
 
@@ -13,24 +12,13 @@ namespace SampleSystem.WebApiCore;
 /// </summary>
 public class SampleSystemHangfireAuthorization : IDashboardAuthorizationFilter
 {
-    private readonly IServiceEvaluator<IAuthorizationSystem> authorizationSystemEvaluator;
-
-    private readonly IDashboardAuthorizationFilter baseFilter;
-
-    public SampleSystemHangfireAuthorization(IServiceEvaluator<IAuthorizationSystem> authorizationSystemEvaluator)
-    {
-        this.authorizationSystemEvaluator = authorizationSystemEvaluator;
-        this.baseFilter = new AdminHangfireAuthorization(authorizationSystemEvaluator);
-    }
-
     public bool Authorize(DashboardContext context)
     {
-        return this.authorizationSystemEvaluator.Evaluate(
-            DBSessionMode.Read,
-            authSystem => this.baseFilter.Authorize(context)
-                          || string.Compare(
-                              authSystem.CurrentPrincipalName,
-                              new DomainDefaultUserAuthenticationService().GetUserName(),
-                              StringComparison.InvariantCultureIgnoreCase) == 0);
+        var httpContext = context.GetHttpContext();
+
+        return new AdminHangfireAuthorization().Authorize(context)
+               || new DomainDefaultUserAuthenticationService().GetUserName().Equals(
+                   httpContext.RequestServices.GetRequiredService<IAuthorizationSystem>().CurrentPrincipalName,
+                   StringComparison.InvariantCultureIgnoreCase);
     }
 }

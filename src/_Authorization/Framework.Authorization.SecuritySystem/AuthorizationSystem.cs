@@ -3,7 +3,6 @@
 using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem.PermissionOptimization;
 using Framework.Core;
-using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
@@ -18,7 +17,6 @@ public class AuthorizationSystem(
     IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     IRealTypeResolver realTypeResolver,
-    IUserAuthenticationService userAuthenticationService,
     IOperationAccessorFactory operationAccessorFactory,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     TimeProvider timeProvider,
@@ -26,8 +24,6 @@ public class AuthorizationSystem(
     ISecurityContextInfoService<Guid> securityContextInfoService)
     : IAuthorizationSystem<Guid>
 {
-    public string CurrentPrincipalName { get; } = userAuthenticationService.GetUserName();
-
     private IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionExprFilter, AvailablePermissionFilter availablePermissionFilter)
     {
         if (permissionExprFilter == null) throw new ArgumentNullException(nameof(permissionExprFilter));
@@ -57,7 +53,7 @@ public class AuthorizationSystem(
         DomainSecurityRule.RoleBaseSecurityRule securityRule,
         IEnumerable<Type> securityTypes)
     {
-        var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(true, securityRule)
+        var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(securityRule)
                               .FetchMany(q => q.Restrictions)
                               .ThenFetch(q => q.SecurityContextType)
                               .ToList();

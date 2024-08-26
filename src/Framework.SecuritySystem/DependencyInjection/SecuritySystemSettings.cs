@@ -1,6 +1,10 @@
-﻿using Framework.Persistent;
+﻿using System.Linq.Expressions;
+
+using Framework.DependencyInjection;
+using Framework.Persistent;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Services;
+using Framework.SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +17,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
     public bool InitializeAdministratorRole { get;  set; } = true;
 
     public Type AccessDeniedExceptionServiceType { get; private set; } = typeof(AccessDeniedExceptionService<Guid>);
+
+    public Type CurrentUserType { get; private set; } = typeof(CurrentUser);
 
     public ISecuritySystemSettings AddSecurityContext<TSecurityContext>(
         Guid ident,
@@ -65,18 +71,54 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
-    public ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType)
-    {
-        this.RegisterActions.Add(
-            sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(DomainSecurityRule.CurrentUser), genericSecurityProviderType));
-
-        return this;
-    }
-
     public ISecuritySystemSettings SetAccessDeniedExceptionService<TAccessDeniedExceptionService>()
         where TAccessDeniedExceptionService : class, IAccessDeniedExceptionService
     {
         this.AccessDeniedExceptionServiceType = typeof(TAccessDeniedExceptionService);
+
+        return this;
+    }
+
+    public ISecuritySystemSettings SetCurrentUser<TCurrentUser>()
+        where TCurrentUser : ICurrentUser
+    {
+        this.CurrentUserType = typeof(TCurrentUser);
+
+        return this;
+    }
+
+    public ISecuritySystemSettings SetUserSource<TUserDomainObject>(
+        Expression<Func<TUserDomainObject, Guid>> idPath,
+        Expression<Func<TUserDomainObject, string>> namePath,
+        Expression<Func<TUserDomainObject, bool>> filter)
+    {
+        this.RegisterActions.Add(
+            sc =>
+            {
+                var info = new UserPathInfo<TUserDomainObject>(idPath, namePath, filter);
+                sc.AddSingleton(info);
+                sc.AddSingleton<IUserPathInfo>(info);
+
+                sc.AddScoped<IUserSource<TUserDomainObject>, UserSource<TUserDomainObject>>();
+
+                sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
+                sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();
+
+                sc.AddScoped(typeof(CurrentUserSecurityProvider<>)); // can't define partial generics
+                sc.AddScoped(typeof(CurrentUserSecurityProvider<,>));
+
+                sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUserDomainObject>>();
+            });
+
+        this.SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>));
+
+        return this;
+    }
+
+    public ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType)
+    {
+        this.RegisterActions.Add(
+            sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(DomainSecurityRule.CurrentUser), genericSecurityProviderType));
 
         return this;
     }

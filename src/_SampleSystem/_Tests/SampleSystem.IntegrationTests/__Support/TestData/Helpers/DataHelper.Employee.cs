@@ -2,6 +2,7 @@
 using Automation.Utils;
 
 using Framework.Core;
+using Framework.SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -265,7 +266,7 @@ public partial class DataHelper
     {
         return this.EvaluateRead(
             context =>
-                context.Logics.Employee.GetObjectBy(e => e.Login == context.Authorization.CurrentPrincipalName)
+                context.ServiceProvider.GetRequiredService<ICurrentUserSource<Employee>>().CurrentUser
                        .ToSimpleDTO(context.ServiceProvider.GetRequiredService<ISampleSystemDTOMappingService>()));
     }
 

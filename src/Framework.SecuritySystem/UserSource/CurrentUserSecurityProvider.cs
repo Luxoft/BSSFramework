@@ -1,11 +1,10 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Authorization.SecuritySystem.UserSource;
+namespace Framework.SecuritySystem.UserSource;
 
 public class CurrentUserSecurityProvider<TDomainObject>(IServiceProvider serviceProvider, IUserPathInfo userPathInfo) : ISecurityProvider<TDomainObject>
 {

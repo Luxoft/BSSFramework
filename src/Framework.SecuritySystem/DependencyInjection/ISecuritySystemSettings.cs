@@ -1,5 +1,7 @@
-﻿using Framework.Persistent;
+﻿using System.Linq.Expressions;
+using Framework.Persistent;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+using Framework.SecuritySystem.UserSource;
 
 namespace Framework.SecuritySystem.DependencyInjection;
 
@@ -23,8 +25,16 @@ public interface ISecuritySystemSettings
 
     ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions);
 
-    ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType);
-
     ISecuritySystemSettings SetAccessDeniedExceptionService<TAccessDeniedExceptionService>()
         where TAccessDeniedExceptionService : class, IAccessDeniedExceptionService;
+
+    ISecuritySystemSettings SetCurrentUser<TCurrentUser>()
+        where TCurrentUser : ICurrentUser;
+
+    ISecuritySystemSettings SetUserSource<TUserDomainObject>(
+        Expression<Func<TUserDomainObject, Guid>> idPath,
+        Expression<Func<TUserDomainObject, string>> namePath,
+        Expression<Func<TUserDomainObject, bool>> filter);
+
+    ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType);
 }

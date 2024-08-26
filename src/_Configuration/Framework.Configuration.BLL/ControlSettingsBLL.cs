@@ -10,7 +10,7 @@ public partial class ControlSettingsBLL
 {
     public ControlSettings GetRootControlSettingsForCurrentPrincipal(string name)
     {
-        var currentPrincipalName = this.Context.Authorization.ActualPrincipalSource.ActualPrincipal.Name;
+        var currentPrincipalName = this.Context.Authorization.CurrentUser.Name;
 
         return this.GetRootControlSettings(name, currentPrincipalName);
     }

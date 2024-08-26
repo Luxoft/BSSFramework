@@ -6,6 +6,7 @@ using AutoFixture.Idioms;
 using FluentAssertions;
 
 using Framework.Authorization.BLL;
+using Framework.Authorization.Domain;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.Notification.New;
@@ -87,9 +88,7 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
         var exception = this.Fixture.Create<ArgumentOutOfRangeException>();
         var sender = this.Fixture.Create<ExceptionMessageSender>();
 
-        this.authorizationBLLContext
-            .CurrentPrincipalName
-            .Returns(@"luxoft\John");
+        this.authorizationBLLContext.CurrentPrincipal.Returns(new Principal { Name = @"luxoft\John" });
 
         Message sendedMessage = null;
 
@@ -157,9 +156,7 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
     private void TestMessageWasSent(string login)
     {
         // Arrange
-        this.authorizationBLLContext
-            .CurrentPrincipalName
-            .Returns(login);
+        this.authorizationBLLContext.CurrentPrincipal.Returns(new Principal { Name = login });
 
         var sender = this.Fixture.Create<ExceptionMessageSender>();
 

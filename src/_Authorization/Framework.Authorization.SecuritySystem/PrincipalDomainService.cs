@@ -1,19 +1,20 @@
 ﻿using FluentValidation;
+
 using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem.UserSource;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.Exceptions;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.UserSource;
 
 namespace Framework.Authorization.SecuritySystem;
 
 public class PrincipalDomainService(
     [DisabledSecurity] IRepository<Principal> principalRepository,
     IPrincipalGeneralValidator principalGeneralValidator,
-    IPrincipalIdentitySource? principalIdentitySource = null) : IPrincipalDomainService
+    IUserIdentitySource? userIdentitySource = null) : IPrincipalDomainService
 {
     public async Task<Principal> GetOrCreateAsync(string name, CancellationToken cancellationToken)
     {
@@ -23,7 +24,7 @@ public class PrincipalDomainService(
         {
             principal = new Principal { Name = name };
 
-            var principalId = principalIdentitySource?.TryGetId(name);
+            var principalId = userIdentitySource?.TryGetId(name);
 
             if (principalId == null)
             {

@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using FluentValidation;
+﻿using FluentValidation;
 using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
 using Framework.DomainDriven._Visitors;
@@ -32,11 +31,6 @@ public interface IBssFrameworkSettings
 
     IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
-
-    IBssFrameworkSettings SetUserSource<TUserDomainObject>(
-        Expression<Func<TUserDomainObject, Guid>> idPath,
-        Expression<Func<TUserDomainObject, string>> namePath,
-        Expression<Func<TUserDomainObject, bool>> filter);
 
     IBssFrameworkSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule);
 

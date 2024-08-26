@@ -1,4 +1,4 @@
-﻿namespace Framework.Authorization.SecuritySystem.UserSource;
+﻿namespace Framework.SecuritySystem.UserSource;
 
 public interface IUserSource<out TUserDomainObject>
 {

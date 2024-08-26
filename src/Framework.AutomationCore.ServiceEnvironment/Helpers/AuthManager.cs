@@ -64,9 +64,9 @@ public class AuthManager(
 
     public async Task RemovePermissionsAsync(string principalName, CancellationToken cancellationToken = default)
     {
-        var actualPrincipalName = principalName ?? this.GetCurrentUserLogin();
+        var currentUserName = principalName ?? this.GetCurrentUserLogin();
 
-        var principal = principalRepository.GetQueryable().SingleOrDefault(p => p.Name == actualPrincipalName);
+        var principal = principalRepository.GetQueryable().SingleOrDefault(p => p.Name == currentUserName);
 
         if (principal != null)
         {

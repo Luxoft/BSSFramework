@@ -1,5 +1,4 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -8,6 +7,7 @@ using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.UnitTest.Mock;
 using Framework.DomainDriven.UnitTest.Mock.StubProxy;
 using Framework.Events;
+using Framework.SecuritySystem.UserSource;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -152,11 +152,11 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
         get
         {
             var result = Substitute.For<IAuthorizationBLLContext>();
-            var actualPrincipalSource = Substitute.For<IActualPrincipalSource>();
+            var currentUser = Substitute.For<ICurrentUser>();
 
-            actualPrincipalSource.ActualPrincipal.Returns(new Principal { Name = "testUser" });
+            currentUser.Name.Returns("testUser");
 
-            result.ActualPrincipalSource.Returns(actualPrincipalSource);
+            result.CurrentUser.Returns(currentUser);
 
             return result;
         }

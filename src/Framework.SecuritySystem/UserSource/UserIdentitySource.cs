@@ -1,12 +1,12 @@
 ﻿
 using Framework.Core;
 
-namespace Framework.Authorization.SecuritySystem.UserSource;
+namespace Framework.SecuritySystem.UserSource;
 
-public class PrincipalIdentitySource<TUserDomainObject>(
+public class UserIdentitySource<TUserDomainObject>(
     IUserSource<TUserDomainObject> userSource,
     UserPathInfo<TUserDomainObject> userPathInfo)
-    : IPrincipalIdentitySource
+    : IUserIdentitySource
 {
     public Guid? TryGetId(string name)
     {

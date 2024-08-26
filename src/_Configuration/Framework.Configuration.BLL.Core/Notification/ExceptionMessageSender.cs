@@ -79,7 +79,7 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
             return;
         }
 
-        var userLogin = this.Context.Authorization.CurrentPrincipalName?.Split('\\').Last() ?? string.Empty;
+        var userLogin = this.Context.Authorization.CurrentPrincipal.Name?.Split('\\').Last() ?? string.Empty;
         var baseType = exception.GetBaseException().GetType();
         var exceptionName = baseType.Name;
         var messagePart = exception.Message;

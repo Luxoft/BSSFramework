@@ -7,6 +7,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.UserSource;
 
 namespace Framework.Authorization.BLL;
 
@@ -22,11 +23,9 @@ public partial interface IAuthorizationBLLContext :
 
     ICurrentPrincipalSource CurrentPrincipalSource { get; }
 
-    IActualPrincipalSource ActualPrincipalSource { get; }
+    ICurrentUser CurrentUser { get; }
 
     Principal CurrentPrincipal => this.CurrentPrincipalSource.CurrentPrincipal;
-
-    string CurrentPrincipalName => this.CurrentPrincipal.Name;
 
     IRunAsManager RunAsManager { get; }
 

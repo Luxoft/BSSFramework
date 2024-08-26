@@ -5,12 +5,9 @@ using Bss.Platform.Logging;
 
 using Framework.Configurator;
 using Framework.Configurator.Interfaces;
-using Framework.Core;
 using Framework.DependencyInjection;
-using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.DomainDriven.WebApiNetCore.JsonConverter;
-using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Authentication.Negotiate;
 

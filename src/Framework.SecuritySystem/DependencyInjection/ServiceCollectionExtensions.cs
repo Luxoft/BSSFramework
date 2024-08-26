@@ -6,6 +6,8 @@ using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 using Framework.SecuritySystem.Services;
+using Framework.SecuritySystem.UserSource;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection;
@@ -53,6 +55,8 @@ public static class ServiceCollectionExtensions
         }
 
         services.AddSingleton(typeof(IAccessDeniedExceptionService), settings.AccessDeniedExceptionServiceType);
+
+        services.AddScoped(typeof(ICurrentUser), settings.CurrentUserType);
 
         services.RegisterGeneralSecuritySystem();
 

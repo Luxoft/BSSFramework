@@ -12,7 +12,6 @@ using SampleSystem.BLL.Jobs;
 using SampleSystem.Domain;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
-using SampleSystem.Security.Services;
 
 namespace SampleSystem.ServiceEnvironment;
 

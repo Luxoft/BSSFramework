@@ -14,6 +14,7 @@ using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Events;
+using Framework.SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -47,7 +48,7 @@ public partial class AuthorizationBLLContext
             IAvailableSecurityRoleSource availableSecurityRoleSource,
             ICurrentPrincipalSource currentPrincipalSource,
             IPrincipalGeneralValidator principalValidator,
-            IActualPrincipalSource actualPrincipalSource,
+            ICurrentUser currentUser,
             BLLContextSettings<PersistentDomainObjectBase> settings,
             IAvailableSecurityOperationSource availableSecurityOperationSource)
             : base(
@@ -67,7 +68,7 @@ public partial class AuthorizationBLLContext
         this.AvailableSecurityRoleSource = availableSecurityRoleSource;
         this.CurrentPrincipalSource = currentPrincipalSource;
         this.PrincipalValidator = principalValidator;
-        this.ActualPrincipalSource = actualPrincipalSource;
+        this.CurrentUser = currentUser;
         this.AvailableSecurityOperationSource = availableSecurityOperationSource;
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
         this.AuthorizationSystem = authorizationSystem;
@@ -97,7 +98,7 @@ public partial class AuthorizationBLLContext
 
     public ICurrentPrincipalSource CurrentPrincipalSource { get; }
 
-    public IActualPrincipalSource ActualPrincipalSource { get; }
+    public ICurrentUser CurrentUser { get; }
 
     public IRunAsManager RunAsManager { get; }
 

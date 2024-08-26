@@ -66,7 +66,7 @@ public partial class ConfigSLJsonController
                                                                                        w =>
                                                                                        {
                                                                                            var dto = w.DTO;
-                                                                                           var domain = new ControlSettings(null, evaluateData.Context.Authorization.ActualPrincipalSource.ActualPrincipal.Name);
+                                                                                           var domain = new ControlSettings(null, evaluateData.Context.Authorization.CurrentUser.Name);
                                                                                            dto.MapToDomainObject(customMappingService, domain);
                                                                                            //if (string.IsNullOrWhiteSpace(domain.AccountName))
                                                                                            //{

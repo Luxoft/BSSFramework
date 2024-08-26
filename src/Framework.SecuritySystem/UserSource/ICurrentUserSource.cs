@@ -1,4 +1,4 @@
-﻿namespace Framework.Authorization.SecuritySystem.UserSource;
+﻿namespace Framework.SecuritySystem.UserSource;
 
 public interface ICurrentUserSource<out TUserDomainObject> : ICurrentUserSource
 {
@@ -8,6 +8,4 @@ public interface ICurrentUserSource<out TUserDomainObject> : ICurrentUserSource
 public interface ICurrentUserSource
 {
     Guid CurrentUserId { get; }
-
-    string CurrentUserName { get; }
 }

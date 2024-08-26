@@ -1,17 +1,17 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.Environment.Security;
 
 public class DelegatedFromSecurityProvider<TDomainObject>(
-    IActualPrincipalSource actualPrincipalSource,
+    ICurrentUser currentUser,
     [FromKeyedServices(nameof(Permission.DelegatedFrom))] IRelativeDomainPathInfo<TDomainObject, Permission> toPermissionPathInfo)
     : PrincipalSecurityProvider<TDomainObject>(
-        actualPrincipalSource,
+        currentUser,
         toPermissionPathInfo.Select(permission => permission.Principal))
 
     where TDomainObject : PersistentDomainObjectBase, IIdentityObject<Guid>;

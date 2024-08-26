@@ -27,15 +27,14 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                        .AddDomainSecurityServices()
                                        .AddSecurityRoles()
                                        .AddSecurityRules()
-                                       .AddCustomSecurityOperations())
+                                       .AddCustomSecurityOperations()
+                                       .SetUserSource<Employee>(employee => employee.Id, employee => employee.Login, employee => employee.Active))
 
                            .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
                            .AddNamedLockType(typeof(SampleSystemNamedLock))
 
                            .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
-
-                           .SetUserSource<Employee>(employee => employee.Id, employee => employee.Login, employee => employee.Active)
 
                            .AddListeners()
 

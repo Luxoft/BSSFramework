@@ -10,7 +10,7 @@ public partial class EmployeeBLL
 {
     public Employee GetCurrent()
     {
-        return this.GetObjectBy(employee => employee.Login == this.Context.Authorization.ActualPrincipalSource.ActualPrincipal.Name);
+        return this.GetObjectBy(employee => employee.Login == this.Context.Authorization.CurrentUser.Name);
     }
 
     public Employee ChangeByEmail(EmployeeEmailChangeModel changeModel)

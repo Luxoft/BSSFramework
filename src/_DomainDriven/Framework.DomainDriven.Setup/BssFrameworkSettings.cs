@@ -1,9 +1,8 @@
-﻿using System.Linq.Expressions;
-
-using FluentValidation;
+﻿using FluentValidation;
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
+using Framework.Authorization.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 using Framework.DomainDriven.ServiceModel.IAD;
@@ -14,8 +13,7 @@ using Framework.DomainDriven.NHibernate;
 using Framework.SecuritySystem;
 
 using nuSpec.Abstraction;
-using Framework.Authorization.SecuritySystem.UserSource;
-using Framework.DependencyInjection;
+
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Authorization.SecuritySystem.Validation;
@@ -26,8 +24,6 @@ namespace Framework.DomainDriven.Setup;
 
 public class BssFrameworkSettings : IBssFrameworkSettings
 {
-    private readonly List<Action<ISecuritySystemSettings>> additionalSecuritySystemSettingsActions = new();
-
     public List<Type> NamedLockTypes { get; set; } = new();
 
     public bool RegisterBaseNamedLockTypes { get; set; } = true;
@@ -38,11 +34,11 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public List<IBssFrameworkExtension> Extensions = new();
 
-    public Type NotificationPrincipalExtractorType { get; private set; }
+    public Type NotificationPrincipalExtractorType { get; private set; } = typeof(NotificationPrincipalExtractor);
 
-    public Type DomainObjectEventMetadataType { get; private set; }
+    public Type DomainObjectEventMetadataType { get; private set; } = typeof(DomainObjectEventMetadata);
 
-    public Type SpecificationEvaluatorType { get; private set; }
+    public Type? SpecificationEvaluatorType { get; private set; }
 
     public DomainSecurityRule.RoleBaseSecurityRule SecurityAdministratorRule { get; private set; } = SecurityRole.Administrator;
 
@@ -52,8 +48,9 @@ public class BssFrameworkSettings : IBssFrameworkSettings
             sc => sc.AddSecuritySystem(
                 sss =>
                 {
+                    sss.SetCurrentUser<AuthorizationCurrentUser>();
+
                     setupAction(sss);
-                    this.additionalSecuritySystemSettingsActions.ForEach(a => a(sss));
                 }));
 
         return this;
@@ -93,35 +90,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         where T : IDomainObjectEventMetadata
     {
         this.DomainObjectEventMetadataType = typeof(T);
-
-        return this;
-    }
-
-    public IBssFrameworkSettings SetUserSource<TUserDomainObject>(
-        Expression<Func<TUserDomainObject, Guid>> idPath,
-        Expression<Func<TUserDomainObject, string>> namePath,
-        Expression<Func<TUserDomainObject, bool>> filter)
-    {
-        this.RegisterActions.Add(
-            sc =>
-            {
-                var info = new UserPathInfo<TUserDomainObject>(idPath, namePath, filter);
-                sc.AddSingleton(info);
-                sc.AddSingleton<IUserPathInfo>(info);
-
-                sc.AddScoped<IUserSource<TUserDomainObject>, UserSource<TUserDomainObject>>();
-
-                sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
-                sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();
-
-                sc.AddScoped(typeof(CurrentUserSecurityProvider<>)); // can't define partial generics
-                sc.AddScoped(typeof(CurrentUserSecurityProvider<,>));
-
-                sc.AddScoped<IPrincipalIdentitySource, PrincipalIdentitySource<TUserDomainObject>>();
-            });
-
-        this.additionalSecuritySystemSettingsActions.Add(
-            securitySystemBuilder => { securitySystemBuilder.SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>)); });
 
         return this;
     }
@@ -186,16 +154,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         if (this.RegisterDenormalizeHierarchicalDALListener)
         {
             this.AddListener<DenormalizeHierarchicalDALListener>();
-        }
-
-        if (this.NotificationPrincipalExtractorType == null)
-        {
-            this.SetNotificationPrincipalExtractor<NotificationPrincipalExtractor>();
-        }
-
-        if (this.DomainObjectEventMetadataType == null)
-        {
-            this.SetDomainObjectEventMetadata<DomainObjectEventMetadata>();
         }
     }
 

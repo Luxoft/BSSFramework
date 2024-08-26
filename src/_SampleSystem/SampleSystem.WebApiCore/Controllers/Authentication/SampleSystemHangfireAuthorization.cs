@@ -1,6 +1,6 @@
 ﻿using Framework.Core.Services;
 using Framework.NotificationCore.Monitoring;
-using Framework.SecuritySystem;
+using Framework.SecuritySystem.UserSource;
 
 using Hangfire.Dashboard;
 
@@ -18,7 +18,7 @@ public class SampleSystemHangfireAuthorization : IDashboardAuthorizationFilter
 
         return new AdminHangfireAuthorization().Authorize(context)
                || new DomainDefaultUserAuthenticationService().GetUserName().Equals(
-                   httpContext.RequestServices.GetRequiredService<IAuthorizationSystem>().CurrentPrincipalName,
+                   httpContext.RequestServices.GetRequiredService<ICurrentUser>().Name,
                    StringComparison.InvariantCultureIgnoreCase);
     }
 }

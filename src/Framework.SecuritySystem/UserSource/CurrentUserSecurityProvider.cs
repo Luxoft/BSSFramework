@@ -6,8 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.UserSource;
 
-public class CurrentUserSecurityProvider<TDomainObject>(IServiceProvider serviceProvider, IUserPathInfo userPathInfo,
-                                                         string? relativePathKey = null) : ISecurityProvider<TDomainObject>
+public class CurrentUserSecurityProvider<TDomainObject>(
+    IServiceProvider serviceProvider,
+    IUserPathInfo userPathInfo,
+    CurrentUserSecurityProviderRelativeKey? key = null) : ISecurityProvider<TDomainObject>
 {
     private readonly Lazy<ISecurityProvider<TDomainObject>> lazyInnerProvider = LazyHelper.Create(
         () =>
@@ -15,6 +17,8 @@ public class CurrentUserSecurityProvider<TDomainObject>(IServiceProvider service
             var generics = new[] { typeof(TDomainObject), userPathInfo.UserDomainObjectType };
 
             var relativeDomainPathInfoType = typeof(IRelativeDomainPathInfo<,>).MakeGenericType(generics);
+
+            var relativePathKey = key?.Name;
 
             var relativeDomainPathInfo = relativePathKey == null
                                              ? serviceProvider.GetRequiredService(relativeDomainPathInfoType)
@@ -44,7 +48,8 @@ public class CurrentUserSecurityProvider<TDomainObject, TUserDomainObject>(
     ICurrentUserSource<TUserDomainObject> currentUserSource) : SecurityProvider<TDomainObject>
     where TUserDomainObject : class
 {
-    public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } = relativeDomainPathInfo.Path.Select(user => currentUserSource.CurrentUser == user);
+    public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
+        relativeDomainPathInfo.Path.Select(user => currentUserSource.CurrentUser == user);
 
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {

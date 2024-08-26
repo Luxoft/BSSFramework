@@ -31,7 +31,13 @@ public class DomainSecurityProviderFactory(
                 return roleBaseSecurityProviderFactory.Create(securityPath, securityRule);
 
             case CurrentUserSecurityRule securityRule:
-                return ActivatorUtilities.CreateInstance<CurrentUserSecurityProvider<TDomainObject>>(serviceProvider, securityRule.RelativePathKey);
+            {
+                var args = securityRule.RelativePathKey == null
+                              ? []
+                              : new object[] { new CurrentUserSecurityProviderRelativeKey(securityRule.RelativePathKey) };
+
+                return ActivatorUtilities.CreateInstance<CurrentUserSecurityProvider<TDomainObject>>(serviceProvider, args);
+            }
 
             case ProviderSecurityRule securityRule:
             {

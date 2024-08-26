@@ -6887,6 +6887,99 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRelativeEmployeeObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestRelativeEmployeeObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestRelativeEmployeeObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestRelativeEmployeeObjectIdentityDTO(SampleSystem.Domain.TestRelativeEmployeeObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestRelativeEmployeeObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestRelativeEmployeeObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestRelativeEmployeeObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct TestRestrictionObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>

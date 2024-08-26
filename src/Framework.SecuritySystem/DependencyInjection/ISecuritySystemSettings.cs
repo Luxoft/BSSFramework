@@ -35,6 +35,4 @@ public interface ISecuritySystemSettings
         Expression<Func<TUserDomainObject, Guid>> idPath,
         Expression<Func<TUserDomainObject, string>> namePath,
         Expression<Func<TUserDomainObject, bool>> filter);
-
-    ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType);
 }

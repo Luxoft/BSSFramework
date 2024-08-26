@@ -12,7 +12,9 @@ namespace Framework.SecuritySystem.DependencyInjection;
 
 public class SecuritySystemSettings : ISecuritySystemSettings
 {
-    public List<Action<IServiceCollection>> RegisterActions { get; set; } = new();
+    public List<Action<IServiceCollection>> RegisterActions { get; private set; } = new();
+
+    public Action<IServiceCollection> RegisterUserSourceAction { get; private set; } = _ => { };
 
     public bool InitializeAdministratorRole { get;  set; } = true;
 
@@ -92,33 +94,19 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         Expression<Func<TUserDomainObject, string>> namePath,
         Expression<Func<TUserDomainObject, bool>> filter)
     {
-        this.RegisterActions.Add(
-            sc =>
-            {
-                var info = new UserPathInfo<TUserDomainObject>(idPath, namePath, filter);
-                sc.AddSingleton(info);
-                sc.AddSingleton<IUserPathInfo>(info);
+        this.RegisterUserSourceAction = sc =>
+                                        {
+                                            var info = new UserPathInfo<TUserDomainObject>(idPath, namePath, filter);
+                                            sc.AddSingleton(info);
+                                            sc.AddSingleton<IUserPathInfo>(info);
 
-                sc.AddScoped<IUserSource<TUserDomainObject>, UserSource<TUserDomainObject>>();
+                                            sc.AddScoped<IUserSource<TUserDomainObject>, UserSource<TUserDomainObject>>();
 
-                sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
-                sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();
+                                            sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
+                                            sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();
 
-                sc.AddScoped(typeof(CurrentUserSecurityProvider<>)); // can't define partial generics
-                sc.AddScoped(typeof(CurrentUserSecurityProvider<,>));
-
-                sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUserDomainObject>>();
-            });
-
-        this.SetCurrentUserSecurityProvider(typeof(CurrentUserSecurityProvider<>));
-
-        return this;
-    }
-
-    public ISecuritySystemSettings SetCurrentUserSecurityProvider(Type genericSecurityProviderType)
-    {
-        this.RegisterActions.Add(
-            sc => sc.AddKeyedScoped(typeof(ISecurityProvider<>), nameof(DomainSecurityRule.CurrentUser), genericSecurityProviderType));
+                                            sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUserDomainObject>>();
+                                        };
 
         return this;
     }

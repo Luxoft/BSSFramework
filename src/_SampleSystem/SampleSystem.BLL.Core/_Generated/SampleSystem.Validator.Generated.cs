@@ -113,6 +113,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestObjForNestedBase>(this.GetTestObjForNestedBaseValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestPerformanceObject>(this.GetTestPerformanceObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestPlainAuthObject>(this.GetTestPlainAuthObjectValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TestRelativeEmployeeObject>(this.GetTestRelativeEmployeeObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestRestrictionObject>(this.GetTestRestrictionObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestRootSecurityObj>(this.GetTestRootSecurityObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestSecurityObjItem>(this.GetTestSecurityObjItemValidationResult);
@@ -572,6 +573,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetTestPlainAuthObjectValidationResult(SampleSystem.Domain.TestPlainAuthObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTestRelativeEmployeeObjectValidationResult(SampleSystem.Domain.TestRelativeEmployeeObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

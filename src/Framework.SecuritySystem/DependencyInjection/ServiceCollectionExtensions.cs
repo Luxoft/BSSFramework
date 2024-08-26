@@ -47,6 +47,7 @@ public static class ServiceCollectionExtensions
         setupAction(settings);
 
         settings.RegisterActions.ForEach(v => v(services));
+        settings.RegisterUserSourceAction(services);
 
         if (settings.InitializeAdministratorRole)
         {
@@ -98,6 +99,10 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IRoleBaseSecurityProviderFactory, RoleBaseSecurityProviderFactory>()
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
                        .AddScoped<ISecurityExpressionBuilderFactory, SecurityExpressionBuilderFactory<Guid>>()
+                       .AddKeyedScoped(
+                           typeof(ISecurityProvider<>),
+                           nameof(DomainSecurityRule.CurrentUser),
+                           typeof(CurrentUserSecurityProvider<>))
                        .AddKeyedSingleton(
                            typeof(ISecurityProvider<>),
                            nameof(DomainSecurityRule.AccessDenied),

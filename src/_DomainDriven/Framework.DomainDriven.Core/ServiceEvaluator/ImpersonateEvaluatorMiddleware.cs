@@ -1,5 +1,5 @@
 ﻿using Framework.Core.Services;
-using Framework.DomainDriven.ImpersonateService;
+using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.ScopedEvaluate;
 
 using Microsoft.Extensions.DependencyInjection;

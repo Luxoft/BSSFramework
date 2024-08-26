@@ -1,4 +1,4 @@
-﻿namespace Framework.Core.Services;
+﻿namespace Framework.DomainDriven.Auth;
 
 public interface IDefaultUserAuthenticationService
 {

@@ -5,6 +5,7 @@ using Automation.Settings;
 
 using Framework.Core.Services;
 using Framework.DependencyInjection;
+using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 

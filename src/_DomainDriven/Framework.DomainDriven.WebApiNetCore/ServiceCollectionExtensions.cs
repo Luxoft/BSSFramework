@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.WebApiNetCore.Integration;
+﻿using Framework.DomainDriven.WebApiNetCore.Auth;
+using Framework.DomainDriven.WebApiNetCore.Integration;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,7 +9,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterWebApiGenericServices(this IServiceCollection services) =>
         services.RegisterMiddlewareServices()
-                .RegisterUserAuthenticationServices()
+                .RegisterDefaultUserAuthenticationServices()
                 .RegisterXsdExport();
 
     private static IServiceCollection RegisterXsdExport(this IServiceCollection services) =>

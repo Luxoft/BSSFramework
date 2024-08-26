@@ -5,7 +5,7 @@ namespace Framework.SecuritySystem.UserSource;
 
 public class CurrentUser(IUserAuthenticationService userAuthenticationService) : ICurrentUser
 {
-    private readonly Lazy<string> lazyCurrentUserIdentity = LazyHelper.Create(userAuthenticationService.GetUserName);
+    private readonly Lazy<string> lazyName = LazyHelper.Create(userAuthenticationService.GetUserName);
 
-    public string Name => this.lazyCurrentUserIdentity.Value;
+    public string Name => this.lazyName.Value;
 }

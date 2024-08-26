@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.ImpersonateService;
+﻿namespace Framework.DomainDriven.Auth;
 
 public interface IImpersonateService
 {

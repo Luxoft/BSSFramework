@@ -42,7 +42,7 @@ public class InitializeAndCleanup
 
                .AddSingleton<SampleSystemInitializer>()
 
-               .ApplyIntegrationTestServices(configuration)
+               .ApplyIntegrationTestServices()
 
                .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
                .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()

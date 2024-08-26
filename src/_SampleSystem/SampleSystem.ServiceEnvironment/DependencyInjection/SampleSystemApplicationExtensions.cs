@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DependencyInjection;
+using Framework.DomainDriven.WebApiNetCore.Auth;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.WebApi.Utils.SL;
 
@@ -30,19 +31,15 @@ public static class SampleSystemApplicationExtensions
 
     private static IServiceCollection AddRelativePaths(this IServiceCollection services) =>
         services.AddRelativeDomainPath((TestExceptObject v) => v.Employee)
-
                 .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef1, nameof(TestRelativeEmployeeObject.EmployeeRef1))
-
                 .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef2, nameof(TestRelativeEmployeeObject.EmployeeRef2));
 
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services) =>
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
-
                 .AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>()
-
                 .AddSingleton<ISlJsonCompatibilitySerializer, SlJsonCompatibilitySerializer>() // For SL
-
-                .AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both)); // For legacy audit
+                .AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both)) // For legacy audit
+                .ReplaceSingleton<IApplicationDefaultUserAuthenticationServiceSettings, EnvironmentDefaultUserAuthenticationServiceSettings>(); // Windows auth
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {

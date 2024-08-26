@@ -1,4 +1,5 @@
 ﻿using Framework.Core.Services;
+using Framework.DomainDriven.WebApiNetCore.Auth;
 using Framework.NotificationCore.Monitoring;
 using Framework.SecuritySystem.UserSource;
 
@@ -17,8 +18,7 @@ public class SampleSystemHangfireAuthorization : IDashboardAuthorizationFilter
         var httpContext = context.GetHttpContext();
 
         return new AdminHangfireAuthorization().Authorize(context)
-               || new DomainDefaultUserAuthenticationService().GetUserName().Equals(
-                   httpContext.RequestServices.GetRequiredService<ICurrentUser>().Name,
-                   StringComparison.InvariantCultureIgnoreCase);
+               || new EnvironmentDefaultUserAuthenticationServiceSettings().DefaultValue
+               == httpContext.RequestServices.GetRequiredService<ICurrentUser>().Name;
     }
 }

@@ -24,13 +24,19 @@ public static class SampleSystemApplicationExtensions
                 .AddLogging()
                 .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
                 .RegisterSmtpNotification(configuration)
+                .AddRelativePaths()
                 .RegisterApplicationServices()
                 .RegisterJobs();
 
+    private static IServiceCollection AddRelativePaths(this IServiceCollection services) =>
+        services.AddRelativeDomainPath((TestExceptObject v) => v.Employee)
+
+                .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef1, nameof(TestRelativeEmployeeObject.EmployeeRef1))
+
+                .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef2, nameof(TestRelativeEmployeeObject.EmployeeRef2));
+
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services) =>
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
-
-                .AddRelativeDomainPath((TestExceptObject v) => v.Employee)
 
                 .AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>()
 

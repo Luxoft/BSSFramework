@@ -4,15 +4,9 @@ using Framework.DomainDriven.BLLCoreGenerator;
 
 namespace Framework.Configuration.TestGenerate;
 
-public partial class BLLCoreGeneratorConfiguration : GeneratorConfigurationBase<ServerGenerationEnvironment>
+public partial class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment)
+    : GeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    public BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-
-    public override bool GenerateAuthServices { get; } = false;
-
     public override Type FilterModelType { get; } = typeof(DomainObjectFilterModel<>);
 
     public override Type CreateModelType { get; } = typeof(DomainObjectCreateModel<>);

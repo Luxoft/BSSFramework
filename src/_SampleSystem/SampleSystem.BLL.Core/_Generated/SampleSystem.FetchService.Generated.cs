@@ -958,6 +958,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestPlainAuthObjectContainer(rule)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRelativeEmployeeObject)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRelativeEmployeeObjectContainer(rule)));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRestrictionObject)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRestrictionObjectContainer(rule)));
@@ -2844,6 +2848,38 @@ namespace SampleSystem.BLL
                     fetchRootRule => fetchRootRule.SelectMany(testPlainAuthObject => testPlainAuthObject.Items).SelectNested(testItemAuthObject => testItemAuthObject.BusinessUnit),
                     fetchRootRule => fetchRootRule.SelectMany(testPlainAuthObject => testPlainAuthObject.Items).SelectNested(testItemAuthObject => testItemAuthObject.ManagementUnit),
                     fetchRootRule => fetchRootRule.SelectNested(testPlainAuthObject => testPlainAuthObject.Location).SelectMany(location => location.Children));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestRelativeEmployeeObject> GetTestRelativeEmployeeObjectContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestRelativeEmployeeObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestRelativeEmployeeObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestRelativeEmployeeObject>(
+                    fetchRootRule => fetchRootRule.SelectNested(testRelativeEmployeeObject => testRelativeEmployeeObject.EmployeeRef1).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(testRelativeEmployeeObject => testRelativeEmployeeObject.EmployeeRef1).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
+                    fetchRootRule => fetchRootRule.SelectNested(testRelativeEmployeeObject => testRelativeEmployeeObject.EmployeeRef2).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(testRelativeEmployeeObject => testRelativeEmployeeObject.EmployeeRef2).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location));
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestRelativeEmployeeObject>(
+                    fetchRootRule => fetchRootRule.SelectNested(testRelativeEmployeeObject => testRelativeEmployeeObject.EmployeeRef1).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(testRelativeEmployeeObject => testRelativeEmployeeObject.EmployeeRef1).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
+                    fetchRootRule => fetchRootRule.SelectNested(testRelativeEmployeeObject => testRelativeEmployeeObject.EmployeeRef2).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(testRelativeEmployeeObject => testRelativeEmployeeObject.EmployeeRef2).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location));
             }
             else
             {

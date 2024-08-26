@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Framework.Core;
+using Framework.SecuritySystem.UserSource;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using static Framework.SecuritySystem.DomainSecurityRule;
@@ -27,6 +29,15 @@ public class DomainSecurityProviderFactory(
         {
             case RoleBaseSecurityRule securityRule:
                 return roleBaseSecurityProviderFactory.Create(securityPath, securityRule);
+
+            case CurrentUserSecurityRule securityRule:
+            {
+                var args = securityRule.RelativePathKey == null
+                              ? []
+                              : new object[] { new CurrentUserSecurityProviderRelativeKey(securityRule.RelativePathKey) };
+
+                return ActivatorUtilities.CreateInstance<CurrentUserSecurityProvider<TDomainObject>>(serviceProvider, args);
+            }
 
             case ProviderSecurityRule securityRule:
             {

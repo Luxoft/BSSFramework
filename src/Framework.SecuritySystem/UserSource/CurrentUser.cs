@@ -7,7 +7,5 @@ public class CurrentUser(IUserAuthenticationService userAuthenticationService) :
 {
     private readonly Lazy<string> lazyCurrentUserIdentity = LazyHelper.Create(userAuthenticationService.GetUserName);
 
-    public string CurrentUserIdentity => this.lazyCurrentUserIdentity.Value;
-
     public string Name => this.lazyCurrentUserIdentity.Value;
 }

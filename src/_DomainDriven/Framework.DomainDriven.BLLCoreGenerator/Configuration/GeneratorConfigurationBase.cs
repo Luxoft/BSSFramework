@@ -54,7 +54,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     /// <inheritdoc />
     public virtual bool GenerateExternalPropertyValidators { get; } = false;
 
-    public virtual bool GenerateAuthServices { get; } = true;
+    public virtual bool GenerateAuthServices { get; } = false;
 
     public virtual IServiceProvider ServiceProvider { get; } =  new ServiceCollection().BuildServiceProvider();
 

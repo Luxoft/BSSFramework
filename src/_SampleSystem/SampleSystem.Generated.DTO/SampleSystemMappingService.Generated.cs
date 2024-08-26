@@ -780,6 +780,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestPlainAuthObject(SampleSystem.Domain.TestPlainAuthObject domainObject, SampleSystem.Generated.DTO.TestPlainAuthObjectEventSimpleDTO mappingObject);
         
+        void MapTestRelativeEmployeeObject(SampleSystem.Domain.TestRelativeEmployeeObject domainObject, SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO mappingObject);
+        
         void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO mappingObject);
         
         void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO mappingObject);
@@ -1243,6 +1245,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.TestPerformanceObject ToTestPerformanceObject(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentityDTO);
         
         SampleSystem.Domain.TestPlainAuthObject ToTestPlainAuthObject(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentityDTO);
+        
+        SampleSystem.Domain.TestRelativeEmployeeObject ToTestRelativeEmployeeObject(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO testRelativeEmployeeObjectIdentityDTO);
         
         SampleSystem.Domain.TestRestrictionObject ToTestRestrictionObject(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentityDTO);
         
@@ -7209,6 +7213,33 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapTestRelativeEmployeeObject(SampleSystem.Domain.TestRelativeEmployeeObject domainObject, SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.EmployeeRef1, null))
+            {
+                mappingObject.EmployeeRef1 = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.EmployeeRef1, this);
+            }
+            else
+            {
+                mappingObject.EmployeeRef1 = null;
+            }
+            if (!object.ReferenceEquals(domainObject.EmployeeRef2, null))
+            {
+                mappingObject.EmployeeRef2 = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.EmployeeRef2, this);
+            }
+            else
+            {
+                mappingObject.EmployeeRef2 = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO mappingObject)
         {
             mappingObject.RestrictionHandler = domainObject.RestrictionHandler;
@@ -8848,6 +8879,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.TestPlainAuthObject ToTestPlainAuthObject(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestPlainAuthObject>(testPlainAuthObjectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TestRelativeEmployeeObject ToTestRelativeEmployeeObject(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO testRelativeEmployeeObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestRelativeEmployeeObject>(testRelativeEmployeeObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.TestRestrictionObject ToTestRestrictionObject(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentityDTO)

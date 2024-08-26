@@ -8,7 +8,7 @@ namespace Framework.Authorization.SecuritySystem;
 public class AvailableSecurityRoleSource(IAvailablePermissionSource availablePermissionSource, ISecurityRoleSource securityRoleSource)
     : IAvailableSecurityRoleSource
 {
-    public async Task<List<FullSecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken)
+    public async Task<List<FullSecurityRole>> GetAvailableSecurityRoles(bool expandChildren, CancellationToken cancellationToken)
     {
         var dbRequest = from permission in availablePermissionSource.GetAvailablePermissionsQueryable()
 
@@ -16,10 +16,14 @@ public class AvailableSecurityRoleSource(IAvailablePermissionSource availablePer
 
         var dbRolesIdents = await dbRequest.Distinct().ToListAsync(cancellationToken);
 
-        var dbRoles = dbRolesIdents.Select(securityRoleSource.GetSecurityRole);
+        var roles = dbRolesIdents.Select(securityRoleSource.GetSecurityRole);
 
-        return dbRoles.GetAllElements(sr => sr.Information.Children.Select(securityRoleSource.GetSecurityRole))
-                      .Distinct()
-                      .ToList();
+        var rolesWithExpand = expandChildren
+                                  ? roles.GetAllElements(sr => sr.Information.Children.Select(securityRoleSource.GetSecurityRole))
+                                         .Distinct()
+
+                                  : roles;
+
+        return rolesWithExpand.ToList();
     }
 }

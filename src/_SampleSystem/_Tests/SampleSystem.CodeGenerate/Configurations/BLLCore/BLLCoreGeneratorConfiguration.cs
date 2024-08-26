@@ -4,21 +4,14 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.CodeGenerate;
 
-public class BLLCoreGeneratorConfiguration : Framework.DomainDriven.BLLCoreGenerator.GeneratorConfigurationBase<ServerGenerationEnvironment>
+public class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment)
+    : Framework.DomainDriven.BLLCoreGenerator.GeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    public BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-
-    public override bool GenerateAuthServices { get; } = false;
-
     public override Type FilterModelType { get; } = typeof(DomainObjectFilterModel<>);
 
     public override Type ODataFilterModelType { get; } = typeof(DomainObjectODataFilterModel<>);
 
     public override Type ODataContextFilterModelType { get; } = typeof(DomainObjectODataContextFilterModel<>);
-
 
     public override Type ContextFilterModelType { get; } = typeof(DomainObjectContextFilterModel<>);
 

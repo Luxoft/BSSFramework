@@ -8,7 +8,7 @@ public abstract record DomainSecurityRule : SecurityRule
     /// <summary>
     /// Правило доступа для доменных объектов привязанных к текущему пользователю
     /// </summary>
-    public static ProviderSecurityRule CurrentUser { get; } = new(typeof(ISecurityProvider<>), nameof(CurrentUser));
+    public static CurrentUserSecurityRule CurrentUser { get; } = new ();
 
     /// <summary>
     /// Правило доступа для блокирования доступа
@@ -22,6 +22,10 @@ public abstract record DomainSecurityRule : SecurityRule
 
     public static implicit operator DomainSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
+    public record CurrentUserSecurityRule(string? RelativePathKey = null) : DomainSecurityRule
+    {
+        public override string ToString() => this.RelativePathKey ?? nameof(CurrentUser);
+    }
 
     public record ProviderSecurityRule(Type GenericSecurityProviderType, string? Key = null) : DomainSecurityRule
     {

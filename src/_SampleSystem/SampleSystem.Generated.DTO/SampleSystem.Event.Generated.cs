@@ -186,6 +186,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRootSecurityObjSaveEventDTO))]
@@ -23861,6 +23863,216 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRelativeEmployeeObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestRelativeEmployeeObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO testRelativeEmployeeObject;
+        
+        public TestRelativeEmployeeObjectSaveEventDTO()
+        {
+        }
+        
+        public TestRelativeEmployeeObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRelativeEmployeeObject domainObject)
+        {
+            this.testRelativeEmployeeObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO TestRelativeEmployeeObject
+        {
+            get
+            {
+                return this.testRelativeEmployeeObject;
+            }
+            set
+            {
+                this.testRelativeEmployeeObject = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRelativeEmployeeObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestRelativeEmployeeObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO testRelativeEmployeeObject;
+        
+        public TestRelativeEmployeeObjectRemoveEventDTO()
+        {
+        }
+        
+        public TestRelativeEmployeeObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRelativeEmployeeObject domainObject)
+        {
+            this.testRelativeEmployeeObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO TestRelativeEmployeeObject
+        {
+            get
+            {
+                return this.testRelativeEmployeeObject;
+            }
+            set
+            {
+                this.testRelativeEmployeeObject = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRelativeEmployeeObject), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestRelativeEmployeeObjectEventRichDTO
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employeeRef1;
+        
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employeeRef2;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private long _version;
+        
+        public TestRelativeEmployeeObjectEventRichDTO()
+        {
+        }
+        
+        public TestRelativeEmployeeObjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRelativeEmployeeObject domainObject)
+        {
+            mappingService.MapTestRelativeEmployeeObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO EmployeeRef1
+        {
+            get
+            {
+                return this._employeeRef1;
+            }
+            set
+            {
+                this._employeeRef1 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO EmployeeRef2
+        {
+            get
+            {
+                return this._employeeRef2;
+            }
+            set
+            {
+                this._employeeRef2 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
             }
         }
         

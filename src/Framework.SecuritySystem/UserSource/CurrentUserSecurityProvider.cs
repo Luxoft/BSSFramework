@@ -6,11 +6,26 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.UserSource;
 
-public class CurrentUserSecurityProvider<TDomainObject>(IServiceProvider serviceProvider, IUserPathInfo userPathInfo) : ISecurityProvider<TDomainObject>
+public class CurrentUserSecurityProvider<TDomainObject>(IServiceProvider serviceProvider, IUserPathInfo userPathInfo,
+                                                         string? relativePathKey = null) : ISecurityProvider<TDomainObject>
 {
     private readonly Lazy<ISecurityProvider<TDomainObject>> lazyInnerProvider = LazyHelper.Create(
-        () => (ISecurityProvider<TDomainObject>)serviceProvider.GetRequiredService(
-            typeof(CurrentUserSecurityProvider<,>).MakeGenericType(typeof(TDomainObject), userPathInfo.UserDomainObjectType)));
+        () =>
+        {
+            var generics = new[] { typeof(TDomainObject), userPathInfo.UserDomainObjectType };
+
+            var relativeDomainPathInfoType = typeof(IRelativeDomainPathInfo<,>).MakeGenericType(generics);
+
+            var relativeDomainPathInfo = relativePathKey == null
+                                             ? serviceProvider.GetRequiredService(relativeDomainPathInfoType)
+                                             : serviceProvider.GetRequiredKeyedService(relativeDomainPathInfoType, relativePathKey);
+
+            return (ISecurityProvider<TDomainObject>)
+                ActivatorUtilities.CreateInstance(
+                    serviceProvider,
+                    typeof(CurrentUserSecurityProvider<,>).MakeGenericType(generics),
+                    relativeDomainPathInfo);
+        });
 
     private ISecurityProvider<TDomainObject> InnerProvider => this.lazyInnerProvider.Value;
 

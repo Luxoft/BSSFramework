@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetOperationsHandler(IOperationAccessor operationAccessor, ISecurityRoleSource roleSource, ISecurityOperationInfoSource operationInfoSource)
+public class GetOperationsHandler(IAuthorizationSystem authorizationSystem, ISecurityRoleSource roleSource, ISecurityOperationInfoSource operationInfoSource)
     : BaseReadHandler, IGetOperationsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsSecurityAdministrator()) return new List<string>();
+        if (!authorizationSystem.IsSecurityAdministrator()) return new List<string>();
 
         var operations = roleSource.SecurityRoles
                                    .SelectMany(x => x.Information.Operations)

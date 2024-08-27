@@ -2,14 +2,12 @@
 
 using Automation.ServiceEnvironment.Services;
 
-using Framework.Core.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;

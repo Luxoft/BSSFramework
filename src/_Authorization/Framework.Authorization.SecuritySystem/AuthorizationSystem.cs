@@ -14,28 +14,17 @@ namespace Framework.Authorization.SecuritySystem;
 
 public class AuthorizationSystem(
     IAvailablePermissionSource availablePermissionSource,
+    IAccessDeniedExceptionService accessDeniedExceptionService,
     IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     IRealTypeResolver realTypeResolver,
-    IOperationAccessorFactory operationAccessorFactory,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     TimeProvider timeProvider,
     ISecurityRolesIdentsResolver securityRolesIdentsResolver,
     ISecurityContextInfoService<Guid> securityContextInfoService)
-    : IAuthorizationSystem<Guid>
+    : AuthorizationSystemBase(availablePermissionSource, accessDeniedExceptionService, true), IAuthorizationSystem<Guid>
 {
-    private IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionExprFilter, AvailablePermissionFilter availablePermissionFilter)
-    {
-        if (permissionExprFilter == null) throw new ArgumentNullException(nameof(permissionExprFilter));
-        if (availablePermissionFilter == null) throw new ArgumentNullException(nameof(availablePermissionFilter));
-
-        return permissionRepository.GetQueryable()
-                                   .Where(availablePermissionFilter.ToFilterExpression())
-                                   .Where(permissionExprFilter)
-                                   .Select(permission => permission.Principal.Name).ToList();
-    }
-
-    public IEnumerable<string> GetNonContextAccessors(
+    public IEnumerable<string> GetAccessors(
         DomainSecurityRule.RoleBaseSecurityRule securityRule, Expression<Func<IPermission<Guid>, bool>> permissionFilter)
     {
         if (permissionFilter == null) throw new ArgumentNullException(nameof(permissionFilter));
@@ -67,6 +56,16 @@ public class AuthorizationSystem(
     {
         return availablePermissionSource.GetAvailablePermissionsQueryable(securityRule: securityRule);
     }
+    private IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionExprFilter, AvailablePermissionFilter availablePermissionFilter)
+    {
+        if (permissionExprFilter == null) throw new ArgumentNullException(nameof(permissionExprFilter));
+        if (availablePermissionFilter == null) throw new ArgumentNullException(nameof(availablePermissionFilter));
+
+        return permissionRepository.GetQueryable()
+                                   .Where(availablePermissionFilter.ToFilterExpression())
+                                   .Where(permissionExprFilter)
+                                   .Select(permission => permission.Principal.Name).ToList();
+    }
 
     private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(
         Dictionary<Type, List<Guid>> permission,
@@ -78,10 +77,6 @@ public class AuthorizationSystem(
             pair => pair.Key,
             pair => hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
     }
-
-    public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => operationAccessorFactory.Create(true).HasAccess(securityRule);
-
-    public void CheckAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => operationAccessorFactory.Create(true).CheckAccess(securityRule);
 
     private static readonly ExpressionVisitor AuthVisitor = new OverrideParameterTypeVisitor(
         new Dictionary<Type, Type>

@@ -17,7 +17,7 @@ public class ExampleAuthorizationSystem(
 
     public void CheckAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => throw new NotImplementedException();
 
-    public IEnumerable<string> GetNonContextAccessors(
+    public IEnumerable<string> GetAccessors(
         DomainSecurityRule.RoleBaseSecurityRule securityRule,
         Expression<Func<IPermission<Guid>, bool>> permissionFilter) => throw new NotImplementedException();
 

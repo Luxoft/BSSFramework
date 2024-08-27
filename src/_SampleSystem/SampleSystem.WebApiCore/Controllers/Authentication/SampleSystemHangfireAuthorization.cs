@@ -1,5 +1,4 @@
-﻿using Framework.Core.Services;
-using Framework.DomainDriven.WebApiNetCore.Auth;
+﻿using Framework.DomainDriven.WebApiNetCore.Auth;
 using Framework.NotificationCore.Monitoring;
 using Framework.SecuritySystem.UserSource;
 

@@ -16,11 +16,11 @@ public class GetPrincipalHandler(
     IRepositoryFactory<Permission> permissionRepoFactory,
     IRepositoryFactory<SecurityContextType> contextTypeRepoFactory,
     IAuthorizationExternalSource externalSource,
-    IOperationAccessor operationAccessor) : BaseReadHandler, IGetPrincipalHandler
+    IAuthorizationSystem authorizationSystem) : BaseReadHandler, IGetPrincipalHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsSecurityAdministrator()) return new PrincipalDetailsDto();
+        if (!authorizationSystem.IsSecurityAdministrator()) return new PrincipalDetailsDto();
 
         var principalId = new Guid((string)context.Request.RouteValues["id"]!);
 

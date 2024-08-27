@@ -13,13 +13,13 @@ namespace Framework.Configurator.Handlers;
 
 public class GetOperationHandler(
     IRepositoryFactory<Principal> principalRepoFactory,
-    IOperationAccessor operationAccessor,
+    IAuthorizationSystem authorizationSystem,
     ISecurityRoleSource roleSource)
     : BaseReadHandler, IGetOperationHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsSecurityAdministrator()) return new OperationDetailsDto { BusinessRoles = [], Principals = [] };
+        if (!authorizationSystem.IsSecurityAdministrator()) return new OperationDetailsDto { BusinessRoles = [], Principals = [] };
 
         var operationName = (string)context.Request.RouteValues["name"]!;
 

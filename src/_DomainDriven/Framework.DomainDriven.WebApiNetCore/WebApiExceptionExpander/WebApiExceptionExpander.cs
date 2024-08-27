@@ -2,22 +2,14 @@
 using Framework.DomainDriven.DALExceptions;
 using Framework.Exceptions;
 using Framework.SecuritySystem;
-using Framework.Validation;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
-public class WebApiExceptionExpander : IWebApiExceptionExpander
+public class WebApiExceptionExpander(IExceptionExpander exceptionExpander) : IWebApiExceptionExpander
 {
-    private readonly IExceptionExpander exceptionExpander;
-
-    public WebApiExceptionExpander(IExceptionExpander exceptionExpander)
-    {
-        this.exceptionExpander = exceptionExpander;
-    }
-
     public Exception Process(Exception baseException)
     {
-        var exception = this.exceptionExpander.Process(baseException);
+        var exception = exceptionExpander.Process(baseException);
 
         return this.IsHandledException(exception)
                        ? exception
@@ -43,10 +35,12 @@ public class WebApiExceptionExpander : IWebApiExceptionExpander
                                          typeof(BusinessLogicException),
                                          typeof(IntegrationException),
                                          typeof(SecurityException),
-                                         typeof(ValidationException),
+                                         typeof(Framework.Validation.ValidationException),
                                          typeof(DALException),
                                          typeof(StaleDomainObjectStateException),
-                                         typeof(AccessDeniedException)
+                                         typeof(AccessDeniedException),
+                                         typeof(FluentValidation.ValidationException)
+
                                  };
 
         return exceptionType.IsAssignableToAny(expectedExceptions);

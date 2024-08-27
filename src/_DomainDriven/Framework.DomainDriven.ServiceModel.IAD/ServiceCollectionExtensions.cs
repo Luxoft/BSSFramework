@@ -153,7 +153,7 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
                        .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
 
-                       .AddScoped<IOperationAccessorFactory, OperationAccessorFactory>()
+                       .AddScoped<IAuthorizationSystemFactory, AuthorizationSystemFactory>()
 
                        .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
                        .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()

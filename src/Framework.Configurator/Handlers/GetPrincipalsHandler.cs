@@ -11,12 +11,12 @@ using NHibernate.Linq;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetPrincipalsHandler(IRepositoryFactory<Principal> repoFactory, IOperationAccessor operationAccessor)
+public class GetPrincipalsHandler(IRepositoryFactory<Principal> repoFactory, IAuthorizationSystem authorizationSystem)
     : BaseReadHandler, IGetPrincipalsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsSecurityAdministrator()) return new List<EntityDto>();
+        if (!authorizationSystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
         var searchToken = context.Request.Query["searchToken"];
 

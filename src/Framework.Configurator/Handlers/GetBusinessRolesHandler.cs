@@ -10,12 +10,12 @@ namespace Framework.Configurator.Handlers;
 public class GetBusinessRolesHandler(
     ISecurityRoleSource securityRoleSource,
     ISecurityContextInfoService securityContextInfoService,
-    IOperationAccessor operationAccessor)
+    IAuthorizationSystem authorizationSystem)
     : BaseReadHandler, IGetBusinessRolesHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsSecurityAdministrator()) return new List<EntityDto>();
+        if (!authorizationSystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
         var defaultContexts = securityContextInfoService.SecurityContextTypes.Select(securityContextInfoService.GetSecurityContextInfo)
                                                         .Select(v => new RoleContextDto(v.Name, false))

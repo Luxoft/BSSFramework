@@ -34,7 +34,7 @@ public class SecurityExpressionFilter<TDomainObject, TIdent> : ISecurityExpressi
                 {
                     var filter = builder.GetAccessorsFilter(domainObject, securityRule.SafeExpandType);
 
-                    return builder.Factory.AuthorizationSystem.GetNonContextAccessors(securityRule, filter);
+                    return builder.Factory.AuthorizationSystem.GetAccessors(securityRule, filter);
                 }));
     }
 

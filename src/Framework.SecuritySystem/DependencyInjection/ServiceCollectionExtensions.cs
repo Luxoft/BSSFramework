@@ -110,7 +110,6 @@ public static class ServiceCollectionExtensions
                        .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
                        .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))
-                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
-                       .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>();
+                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>();
     }
 }

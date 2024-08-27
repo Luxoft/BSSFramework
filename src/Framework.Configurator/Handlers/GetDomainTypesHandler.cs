@@ -10,12 +10,12 @@ using NHibernate.Linq;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetDomainTypesHandler(IRepositoryFactory<DomainType> repoFactory, IOperationAccessor operationAccessor)
+public class GetDomainTypesHandler(IRepositoryFactory<DomainType> repoFactory, IAuthorizationSystem authorizationSystem)
     : BaseReadHandler, IGetDomainTypesHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsAdministrator()) return new List<DomainTypeDto>();
+        if (!authorizationSystem.IsAdministrator()) return new List<DomainTypeDto>();
 
         return await repoFactory.Create()
                                 .GetQueryable()

@@ -13,12 +13,12 @@ namespace Framework.Configurator.Handlers;
 public class GetBusinessRoleContextEntitiesHandler(
     IRepositoryFactory<SecurityContextType> contextTypeRepositoryFactory,
     IAuthorizationExternalSource externalSource,
-    IOperationAccessor operationAccessor)
+    IAuthorizationSystem authorizationSystem)
     : BaseReadHandler, IGetBusinessRoleContextEntitiesHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!operationAccessor.IsSecurityAdministrator()) return new List<EntityDto>();
+        if (!authorizationSystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
         var securityContextTypeId = new Guid((string)context.Request.RouteValues["id"]!);
         var searchToken = context.Request.Query["searchToken"];

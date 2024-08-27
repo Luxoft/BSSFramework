@@ -7,7 +7,7 @@ namespace Framework.Authorization.SecuritySystem;
 public class RunAsManger(
     [DisabledSecurity] IRepository<Principal> principalRepository,
     ICurrentPrincipalSource currentPrincipalSource,
-    IOperationAccessorFactory operationAccessorFactory)
+    IAuthorizationSystemFactory authorizationSystemFactory)
     : IRunAsManager
 {
     private Principal CurrentPrincipal => currentPrincipalSource.CurrentPrincipal;
@@ -16,13 +16,10 @@ public class RunAsManger(
 
     public async Task StartRunAsUserAsync(string principalName, CancellationToken cancellationToken)
     {
-        if (principalName == null) throw new ArgumentNullException(nameof(principalName));
-
-        operationAccessorFactory.Create(false).CheckAccess(SecurityRole.Administrator);
+        this.CheckAccess();
 
         if (string.Equals(principalName, this.CurrentPrincipal.RunAs?.Name, StringComparison.CurrentCultureIgnoreCase))
         {
-
         }
         else if (string.Equals(principalName, this.CurrentPrincipal.Name, StringComparison.CurrentCultureIgnoreCase))
         {
@@ -39,8 +36,12 @@ public class RunAsManger(
 
     public async Task FinishRunAsUserAsync(CancellationToken cancellationToken)
     {
+        this.CheckAccess();
+
         this.CurrentPrincipal.RunAs = null;
 
         await principalRepository.SaveAsync(this.CurrentPrincipal, cancellationToken);
     }
+
+    private void CheckAccess() => authorizationSystemFactory.Create(false).CheckAccess(SecurityRole.Administrator);
 }

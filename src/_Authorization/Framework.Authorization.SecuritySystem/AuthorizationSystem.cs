@@ -56,6 +56,7 @@ public class AuthorizationSystem(
     {
         return availablePermissionSource.GetAvailablePermissionsQueryable(securityRule: securityRule);
     }
+
     private IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionExprFilter, AvailablePermissionFilter availablePermissionFilter)
     {
         if (permissionExprFilter == null) throw new ArgumentNullException(nameof(permissionExprFilter));

@@ -3,51 +3,31 @@
 using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem;
 using Framework.Core;
-using Framework.Persistent;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.Environment.Security;
 
-public class AvailableBusinessRoleSecurityProvider<TDomainObject> : SecurityProvider<TDomainObject>
-
-    where TDomainObject : PersistentDomainObjectBase, IIdentityObject<Guid>
+public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
+    IAvailablePermissionSource availablePermissionSource,
+    IRelativeDomainPathInfo<TDomainObject, BusinessRole> toBusinessRolePathInfo)
+    : SecurityProvider<TDomainObject>
 {
-    private readonly IAvailablePermissionSource availablePermissionSource;
-
-    private readonly Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath;
-
-    private readonly Lazy<Expression<Func<TDomainObject, bool>>> lazySecurityFilter;
-
-    public AvailableBusinessRoleSecurityProvider(
-        IAvailablePermissionSource availablePermissionSource,
-        IRelativeDomainPathInfo<TDomainObject, BusinessRole> toBusinessRolePathInfo)
-    {
-        this.availablePermissionSource = availablePermissionSource;
-        this.businessRoleSecurityPath = toBusinessRolePathInfo.Path;
-
-        this.lazySecurityFilter = LazyHelper.Create(
-            () =>
-            {
-                var permissionQ = availablePermissionSource.GetAvailablePermissionsQueryable();
-
-                Expression<Func<BusinessRole, bool>> filter = businessRole => permissionQ.Select(p => p.Role).Contains(businessRole);
-
-                return filter.OverrideInput(this.businessRoleSecurityPath);
-            });
-    }
+    public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
+        availablePermissionSource
+            .GetAvailablePermissionsQueryable()
+            .Pipe(permissionQ => ExpressionHelper.Create((BusinessRole businessRole) => permissionQ.Select(p => p.Role).Contains(businessRole)))
+            .OverrideInput(toBusinessRolePathInfo.Path);
 
     protected override LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.All;
-
-    public override Expression<Func<TDomainObject, bool>> SecurityFilter => this.lazySecurityFilter.Value;
 
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        var role = this.businessRoleSecurityPath.Eval(domainObject);
+        var role = toBusinessRolePathInfo.Path.Eval(domainObject);
 
         return SecurityAccessorData.Return(
-            this.availablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false)
+            availablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false)
                 .Where(permission => permission.Role == role)
                 .Select(permission => permission.Principal)
                 .Distinct()

@@ -180,7 +180,6 @@ public static class ServiceCollectionExtensions
                        .AddScoped<ISecurityAccessorResolver, SecurityAccessorResolver>();
     }
 
-
     public static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)
     {
         var securityAdministratorRule = AuthorizationSecurityRule.SecurityAdministrator;
@@ -191,9 +190,8 @@ public static class ServiceCollectionExtensions
 
                .AddSingleton<SecurityAdministratorRuleFactory>()
 
-               .AddRelativeDomainPath((Principal principal) => principal)
                .AddRelativeDomainPath((Permission permission) => permission.Principal)
-               .AddScoped(typeof(PrincipalSecurityProvider<>))
+               .AddScoped(typeof(CurrentPrincipalSecurityProvider<>))
 
                .AddRelativeDomainPath((BusinessRole businessRole) => businessRole)
                .AddScoped(typeof(AvailableBusinessRoleSecurityProvider<>))
@@ -222,6 +220,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
     {
         return services.RegisterDomainSecurityServices<Guid>(
+
                            rb => rb.Add<ExceptionMessage>(
                                        b => b.SetView(SecurityRole.Administrator))
 

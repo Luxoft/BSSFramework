@@ -11,19 +11,17 @@ namespace Framework.SecuritySystem;
 /// <typeparam name="TDomainObject"></typeparam>
 public abstract record SecurityPath<TDomainObject>
 {
+    public IEnumerable<Type> GetUsedTypes() => this.GetInternalUsedTypes().Distinct();
+
     public abstract SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
         Expression<Func<TNewDomainObject, TDomainObject>> selector)
         where TNewDomainObject : class;
 
-
-    public IEnumerable<Type> GetUsedTypes() => this.GetInternalUsedTypes().Distinct();
-
     public static SecurityPath<TDomainObject> Empty { get; } = SecurityPath<TDomainObject>.Condition(_ => true);
 
-    protected internal abstract IEnumerable<Type> GetInternalUsedTypes();
+    protected abstract IEnumerable<Type> GetInternalUsedTypes();
 
     #region Create
-
 
     public SecurityPath<TDomainObject> And<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
         where TSecurityContext : class, ISecurityContext =>
@@ -101,13 +99,9 @@ public abstract record SecurityPath<TDomainObject>
 
     #endregion
 
-
     public record ConditionPath(Expression<Func<TDomainObject, bool>> SecurityFilter) : SecurityPath<TDomainObject>
     {
-        protected internal override IEnumerable<Type> GetInternalUsedTypes()
-        {
-            yield break;
-        }
+        protected override IEnumerable<Type> GetInternalUsedTypes() => [];
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
             Expression<Func<TNewDomainObject, TDomainObject>> selector) =>
@@ -123,8 +117,8 @@ public abstract record SecurityPath<TDomainObject>
     public abstract record BinarySecurityPath(SecurityPath<TDomainObject> Left, SecurityPath<TDomainObject> Right)
         : SecurityPath<TDomainObject>
     {
-        protected internal override IEnumerable<Type> GetInternalUsedTypes() =>
-            this.Left.GetInternalUsedTypes().Concat(this.Right.GetInternalUsedTypes());
+        protected override IEnumerable<Type> GetInternalUsedTypes() =>
+            this.Left.GetUsedTypes().Concat(this.Right.GetUsedTypes());
     }
 
     public record OrSecurityPath(SecurityPath<TDomainObject> Left, SecurityPath<TDomainObject> Right) : BinarySecurityPath(Left, Right)
@@ -148,7 +142,7 @@ public abstract record SecurityPath<TDomainObject>
         SingleSecurityMode Mode) : SecurityPath<TDomainObject>
         where TSecurityContext : class, ISecurityContext
     {
-        protected internal override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
+        protected override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
             Expression<Func<TNewDomainObject, TDomainObject>> selector) =>
@@ -182,7 +176,7 @@ public abstract record SecurityPath<TDomainObject>
             this.SecurityPathQ = this.TryExtractSecurityPathQ();
         }
 
-        protected internal override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
+        protected override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
 
         private Expression<Func<TDomainObject, IQueryable<TSecurityContext>>>? TryExtractSecurityPathQ()
         {
@@ -216,7 +210,7 @@ public abstract record SecurityPath<TDomainObject>
         SecurityPath<TNestedObject> NestedSecurityPath,
         ManySecurityPathMode Mode) : SecurityPath<TDomainObject>
     {
-        protected internal override IEnumerable<Type> GetInternalUsedTypes() => this.NestedSecurityPath.GetInternalUsedTypes();
+        protected override IEnumerable<Type> GetInternalUsedTypes() => this.NestedSecurityPath.GetUsedTypes();
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
             Expression<Func<TNewDomainObject, TDomainObject>> selector) =>

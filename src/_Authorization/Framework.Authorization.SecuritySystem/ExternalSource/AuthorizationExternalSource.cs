@@ -11,12 +11,12 @@ public class AuthorizationExternalSource : IAuthorizationExternalSource
 {
     private readonly IServiceProvider serviceProvider;
 
-    private readonly ISecurityContextInfoService<Guid> securityContextInfoService;
+    private readonly ISecurityContextInfoService securityContextInfoService;
 
     private readonly IDictionaryCache<SecurityContextType, IAuthorizationTypedExternalSource> typedCache;
 
 
-    public AuthorizationExternalSource(IServiceProvider serviceProvider, ISecurityContextInfoService<Guid> securityContextInfoService)
+    public AuthorizationExternalSource(IServiceProvider serviceProvider, ISecurityContextInfoService securityContextInfoService)
     {
         this.serviceProvider = serviceProvider;
         this.securityContextInfoService = securityContextInfoService;

@@ -2,8 +2,8 @@
 
 namespace Framework.SecuritySystem.DependencyInjection;
 
-public interface ISecurityContextInfoBuilder<in TIdent>
+public interface ISecurityContextInfoBuilder
 {
-    ISecurityContextInfoBuilder<TIdent> Add<TSecurityContext>(TIdent ident, string? name = null, Func<TSecurityContext, string>? displayFunc = null)
-        where TSecurityContext : ISecurityContext, IIdentityObject<TIdent>;
+    ISecurityContextInfoBuilder Add<TSecurityContext>(Guid id, string? name = null, Func<TSecurityContext, string>? displayFunc = null)
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>;
 }

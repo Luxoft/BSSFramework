@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Core.Pipe</PackageId>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Framework.Core</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

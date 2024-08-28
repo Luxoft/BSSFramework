@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
-internal class DomainSecurityServiceRootBuilder<TIdent> : IDomainSecurityServiceRootBuilder
+internal class DomainSecurityServiceRootBuilder : IDomainSecurityServiceRootBuilder
 {
     private readonly List<DomainSecurityServiceBuilder> domainBuilders = new();
 
@@ -15,7 +15,7 @@ internal class DomainSecurityServiceRootBuilder<TIdent> : IDomainSecurityService
 
     public IDomainSecurityServiceRootBuilder Add<TDomainObject>(Action<IDomainSecurityServiceBuilder<TDomainObject>> setup)
     {
-        return new Func<Action<IDomainSecurityServiceBuilder<IIdentityObject<TIdent>>>, IDomainSecurityServiceRootBuilder>(this.AddInternal)
+        return new Func<Action<IDomainSecurityServiceBuilder<IIdentityObject<Guid>>>, IDomainSecurityServiceRootBuilder>(this.AddInternal)
                .CreateGenericMethod(typeof(TDomainObject))
                .Invoke<IDomainSecurityServiceRootBuilder>(this, setup);
     }
@@ -30,15 +30,15 @@ internal class DomainSecurityServiceRootBuilder<TIdent> : IDomainSecurityService
 
     private IDomainSecurityServiceRootBuilder AddMetadataInternal<TMetadata, TDomainObject>()
         where TMetadata : IDomainSecurityServiceMetadata<TDomainObject>
-        where TDomainObject : IIdentityObject<TIdent>
+        where TDomainObject : IIdentityObject<Guid>
     {
         return this.AddInternal<TDomainObject>(b => b.Override<TMetadata>().Pipe(TMetadata.Setup));
     }
 
     private IDomainSecurityServiceRootBuilder AddInternal<TDomainObject>(Action<IDomainSecurityServiceBuilder<TDomainObject>> setup)
-        where TDomainObject : IIdentityObject<TIdent>
+        where TDomainObject : IIdentityObject<Guid>
     {
-        var builder = new DomainSecurityServiceBuilder<TDomainObject, TIdent>();
+        var builder = new DomainSecurityServiceBuilder<TDomainObject>();
 
         setup(builder);
 

@@ -64,7 +64,7 @@ public static class ServiceCollectionExtensions
         services.RegisterConfigurationBLL();
 
         services.ReplaceSingleton<IRealTypeResolver, ProjectionRealTypeResolver>();
-        services.ReplaceSingleton<ISecurityContextInfoService<Guid>, ProjectionSecurityContextInfoService>();
+        services.ReplaceSingleton<ISecurityContextInfoService, ProjectionSecurityContextInfoService>();
 
         services.AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationRuntimeDomainEventDTOMapper>();
 
@@ -102,7 +102,7 @@ public static class ServiceCollectionExtensions
                                  select new
                                         {
                                             DomainType = type,
-                                            SourceType = projectionAttr.SourceType,
+                                            projectionAttr.SourceType,
                                             CustomViewSecurityRule = (DomainSecurityRule)type.GetViewSecurityRule()
                                         };
 
@@ -110,7 +110,7 @@ public static class ServiceCollectionExtensions
         {
             services.AddScoped(
                 typeof(IDomainSecurityService<>).MakeGenericType(pair.DomainType),
-                typeof(UntypedDependencyDomainSecurityService<,,>).MakeGenericType(pair.DomainType, pair.SourceType, typeof(Guid)));
+                typeof(UntypedDependencyDomainSecurityService<,>).MakeGenericType(pair.DomainType, pair.SourceType));
 
             if (pair.CustomViewSecurityRule != null)
             {

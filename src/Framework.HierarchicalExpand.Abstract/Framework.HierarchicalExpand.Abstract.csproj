@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.HierarchicalExpand.Abstract</PackageId>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

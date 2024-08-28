@@ -1,7 +1,6 @@
 ﻿using Framework.Core;
+using Framework.SecuritySystem.Builders._Factory;
 using Framework.SecuritySystem.Expanders;
-using Framework.SecuritySystem.Providers.Operation;
-using Framework.SecuritySystem.Rules.Builders;
 
 namespace Framework.SecuritySystem.Services;
 
@@ -24,7 +23,7 @@ public class RoleBaseSecurityProviderFactory(
         DomainSecurityRule.RoleBaseSecurityRule securityRule,
         SecurityPathRestriction restriction)
     {
-        return new ContextSecurityPathProvider<TDomainObject>(
+        return new RoleBaseSecurityPathProvider<TDomainObject>(
             securityPathRestrictionService.ApplyRestriction(securityPath, restriction),
             securityRule,
             securityExpressionBuilderFactory);

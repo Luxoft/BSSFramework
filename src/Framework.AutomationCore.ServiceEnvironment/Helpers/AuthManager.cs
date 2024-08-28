@@ -10,7 +10,7 @@ namespace Automation.ServiceEnvironment;
 
 public class AuthManager(
     IUserAuthenticationService userAuthenticationService,
-    ISecurityContextInfoService<Guid> securityContextInfoService,
+    ISecurityContextInfoService securityContextInfoService,
     [DisabledSecurity] IRepository<Principal> principalRepository,
     [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
     [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,

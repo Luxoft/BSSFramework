@@ -3,6 +3,7 @@
 using Framework.DependencyInjection;
 using Framework.Persistent;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.Services;
 using Framework.SecuritySystem.UserSource;
 
@@ -18,7 +19,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public bool InitializeAdministratorRole { get;  set; } = true;
 
-    public Type AccessDeniedExceptionServiceType { get; private set; } = typeof(AccessDeniedExceptionService<Guid>);
+    public Type AccessDeniedExceptionServiceType { get; private set; } = typeof(AccessDeniedExceptionService);
 
     public Type CurrentUserType { get; private set; } = typeof(CurrentUser);
 
@@ -31,7 +32,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this.AddSecurityContext(b => b.Add(ident, name, displayFunc));
     }
 
-    public ISecuritySystemSettings AddSecurityContext(Action<ISecurityContextInfoBuilder<Guid>> setup)
+    public ISecuritySystemSettings AddSecurityContext(Action<ISecurityContextInfoBuilder> setup)
     {
         this.RegisterActions.Add(sc => sc.RegisterSecurityContextInfoService(setup));
 
@@ -40,7 +41,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public ISecuritySystemSettings AddDomainSecurityServices(Action<IDomainSecurityServiceRootBuilder> setup)
     {
-        this.RegisterActions.Add(sc => sc.RegisterDomainSecurityServices<Guid>(setup));
+        this.RegisterActions.Add(sc => sc.RegisterDomainSecurityServices(setup));
 
         return this;
     }
@@ -62,6 +63,14 @@ public class SecuritySystemSettings : ISecuritySystemSettings
     public ISecuritySystemSettings AddSecurityOperation(SecurityOperation securityOperation, SecurityOperationInfo info)
     {
         this.RegisterActions.Add(sc => sc.AddSingleton(new FullSecurityOperation(securityOperation, info)));
+
+        return this;
+    }
+
+    public ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>()
+        where TPermissionSystem : class, IPermissionSystem
+    {
+        this.RegisterActions.Add(sc => sc.AddScoped<IPermissionSystem, TPermissionSystem>());
 
         return this;
     }

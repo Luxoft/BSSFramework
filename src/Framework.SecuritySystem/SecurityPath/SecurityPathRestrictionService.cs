@@ -34,9 +34,7 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider, Se
         {
             if (settings?.ValidateSecurityPath == true)
             {
-                var usedTypes = securityPath.GetUsedTypes().ToList();
-
-                var invalidTypes = restriction.SecurityContextTypes.Except(usedTypes).ToList();
+                var invalidTypes = restriction.SecurityContextTypes.Except(securityPath.GetUsedTypes()).ToList();
 
                 if (invalidTypes.Any())
                 {

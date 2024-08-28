@@ -15,8 +15,8 @@ public abstract class DomainSecurityServiceBuilder : IDomainSecurityServiceBuild
     public abstract void Register(IServiceCollection services);
 }
 
-internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : DomainSecurityServiceBuilder, IDomainSecurityServiceBuilder<TDomainObject>
-    where TDomainObject : IIdentityObject<TIdent>
+internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServiceBuilder, IDomainSecurityServiceBuilder<TDomainObject>
+    where TDomainObject : IIdentityObject<Guid>
 {
     private readonly List<Type> functorTypes = new();
 
@@ -139,7 +139,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : DomainSecur
 
     public IDomainSecurityServiceBuilder<TDomainObject> SetUntypedDependency<TSource>()
     {
-        this.DependencyServiceType = typeof(UntypedDependencyDomainSecurityService<,,>).MakeGenericType(typeof(TDomainObject), typeof(TSource), typeof(TIdent));
+        this.DependencyServiceType = typeof(UntypedDependencyDomainSecurityService<,>).MakeGenericType(typeof(TDomainObject), typeof(TSource));
 
         return this;
     }

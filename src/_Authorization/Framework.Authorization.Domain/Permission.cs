@@ -30,7 +30,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
                                   IPeriodObject,
 
-                                  IPermission<Guid>
+                                  IPermission
 {
     private readonly ICollection<PermissionRestriction> restrictions = new List<PermissionRestriction>();
 
@@ -150,5 +150,5 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     IEnumerable<Permission> IChildrenSource<Permission>.Children => this.DelegatedTo;
 
-    IEnumerable<IPermissionRestriction<Guid>> IPermission<Guid>.Restrictions => this.Restrictions;
+    IEnumerable<IPermissionRestriction> IPermission.Restrictions => this.Restrictions;
 }

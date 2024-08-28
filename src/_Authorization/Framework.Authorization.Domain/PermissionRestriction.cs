@@ -9,7 +9,7 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 /// Связь между пермиссией и контекстом
 /// </summary>
-public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Permission>, IPermissionRestriction<Guid>
+public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Permission>, IPermissionRestriction
 {
     private readonly Permission permission;
 

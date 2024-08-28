@@ -1,10 +1,11 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.DependencyInjection;
+using Framework.SecuritySystem.Builders._Factory;
+using Framework.SecuritySystem.Builders.V1_MaterializedPermissions;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Expanders;
-using Framework.SecuritySystem.Rules.Builders;
-using Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
+using Framework.SecuritySystem.PermissionOptimization;
 using Framework.SecuritySystem.Services;
 using Framework.SecuritySystem.UserSource;
 
@@ -14,11 +15,11 @@ namespace Framework.SecuritySystem.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterDomainSecurityServices<TIdent>(
+    public static IServiceCollection RegisterDomainSecurityServices(
         this IServiceCollection services,
         Action<IDomainSecurityServiceRootBuilder> setupAction)
     {
-        var builder = new DomainSecurityServiceRootBuilder<TIdent>();
+        var builder = new DomainSecurityServiceRootBuilder();
 
         setupAction(builder);
 
@@ -27,11 +28,11 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection RegisterSecurityContextInfoService<TIdent>(
+    public static IServiceCollection RegisterSecurityContextInfoService(
         this IServiceCollection services,
-        Action<ISecurityContextInfoBuilder<TIdent>> setup)
+        Action<ISecurityContextInfoBuilder> setup)
     {
-        var builder = new SecurityContextInfoBuilder<TIdent>();
+        var builder = new SecurityContextInfoBuilder();
 
         setup(builder);
 
@@ -90,15 +91,14 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
                        .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
-                       .AddSingletonFrom<ISecurityContextInfoService, ISecurityContextInfoService<Guid>>()
-                       .AddSingleton<ISecurityContextInfoService<Guid>, SecurityContextInfoService<Guid>>()
+                       .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
                        .AddScoped<IDomainSecurityProviderFactory, DomainSecurityProviderFactory>()
                        .AddSingleton<ISecurityRuleBasicOptimizer, SecurityRuleBasicOptimizer>()
                        .AddSingleton<ISecurityRuleDeepOptimizer, SecurityRuleDeepOptimizer>()
                        .AddSingleton<ISecurityRuleImplementationResolver, SecurityRuleImplementationResolver>()
                        .AddScoped<IRoleBaseSecurityProviderFactory, RoleBaseSecurityProviderFactory>()
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
-                       .AddScoped<ISecurityExpressionBuilderFactory, SecurityExpressionBuilderFactory<Guid>>()
+                       .AddScoped<ISecurityExpressionBuilderFactory, SecurityExpressionBuilderFactory>()
                        .AddKeyedScoped(
                            typeof(ISecurityProvider<>),
                            nameof(DomainSecurityRule.CurrentUser),
@@ -110,6 +110,8 @@ public static class ServiceCollectionExtensions
                        .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
                        .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))
-                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>();
+                       .AddScoped<IAuthorizationSystem, RootAuthorizationSystem>()
+
+                       .AddSingleton<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>();
     }
 }

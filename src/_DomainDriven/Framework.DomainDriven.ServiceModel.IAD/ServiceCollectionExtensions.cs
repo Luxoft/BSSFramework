@@ -6,7 +6,6 @@ using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
 
 using Framework.Authorization.SecuritySystem.Initialize;
-using Framework.Authorization.SecuritySystem.PermissionOptimization;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Configuration.Domain;
 using Framework.Configuration.NamedLocks;
@@ -143,12 +142,10 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
         return services.AddScoped<IQueryableSource, RepositoryQueryableSource>()
-                       .AddScoped<IAuthorizationSystem<Guid>, AuthorizationSystem>()
 
                        .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
 
                        .AddScoped<IRunAsManager, RunAsManger>()
-                       .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
 
                        .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
                        .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
@@ -199,7 +196,7 @@ public static class ServiceCollectionExtensions
                .AddRelativeDomainPath((Permission permission) => permission.DelegatedFrom, nameof(Permission.DelegatedFrom))
                .AddScoped(typeof(DelegatedFromSecurityProvider<>))
 
-               .RegisterDomainSecurityServices<Guid>(
+               .RegisterDomainSecurityServices(
                    rb => rb
                          .Add<Principal>(
                              b => b.SetView(principalViewSecurityRule)
@@ -219,7 +216,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
     {
-        return services.RegisterDomainSecurityServices<Guid>(
+        return services.RegisterDomainSecurityServices(
 
                            rb => rb.Add<ExceptionMessage>(
                                        b => b.SetView(SecurityRole.Administrator))

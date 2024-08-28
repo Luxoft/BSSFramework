@@ -2,22 +2,11 @@
 
 namespace Framework.SecuritySystem.DiTests;
 
-public class ExamplePrincipalPermissionSource : IPrincipalPermissionSource<Guid>
+public class ExamplePermissionSystem (ExamplePermissionSystemData data) : IPermissionSystem
 {
-    private readonly List<Dictionary<Type, List<Guid>>> permissions;
+    public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => throw new NotImplementedException();
 
-    public ExamplePrincipalPermissionSource(List<Dictionary<Type, List<Guid>>> permissions)
-    {
-        this.permissions = permissions;
-    }
+    public void CheckAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => throw new NotImplementedException();
 
-    public List<Dictionary<Type, List<Guid>>> GetPermissions()
-    {
-        return this.permissions;
-    }
-
-    public IQueryable<IPermission<Guid>> GetPermissionQuery(SecurityRule securityRule)
-    {
-        throw new NotImplementedException();
-    }
+    public IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule) => new ExamplePermissionSource(data);
 }

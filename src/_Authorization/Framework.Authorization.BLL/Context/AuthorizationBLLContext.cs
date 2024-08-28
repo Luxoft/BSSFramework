@@ -42,7 +42,7 @@ public partial class AuthorizationBLLContext
             IAuthorizationBLLFactoryContainer logics,
             IAuthorizationExternalSource externalSource,
             INotificationPrincipalExtractor notificationPrincipalExtractor,
-            IAuthorizationSystem<Guid> authorizationSystem,
+            IAuthorizationSystem authorizationSystem,
             IRunAsManager runAsManager,
             IAvailablePermissionSource availablePermissionSource,
             IAvailableSecurityRoleSource availableSecurityRoleSource,
@@ -92,7 +92,7 @@ public partial class AuthorizationBLLContext
 
     public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
-    public IAuthorizationSystem<Guid> AuthorizationSystem { get; }
+    public IAuthorizationSystem AuthorizationSystem { get; }
 
     public IPrincipalGeneralValidator PrincipalValidator { get; }
 

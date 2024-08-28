@@ -3,7 +3,7 @@ using Framework.Persistent;
 
 namespace Framework.SecuritySystem;
 
-public class AccessDeniedExceptionService<TIdent> : IAccessDeniedExceptionService
+public class AccessDeniedExceptionService : IAccessDeniedExceptionService
 {
     public Exception GetAccessDeniedException(AccessResult.AccessDeniedResult accessDeniedResult)
     {
@@ -46,7 +46,7 @@ public class AccessDeniedExceptionService<TIdent> : IAccessDeniedExceptionServic
 
         return elements.GetByFirst((first, other) =>
                                    {
-                                       var messagePrefix = (domainObject as IIdentityObject<TIdent>).Maybe(v => v.Id.IsDefault())
+                                       var messagePrefix = (domainObject as IIdentityObject<Guid>).Maybe(v => v.Id.IsDefault())
                                                                ? "You have no permissions to create object"
                                                                : "You have no permissions to access object";
 
@@ -74,7 +74,7 @@ public class AccessDeniedExceptionService<TIdent> : IAccessDeniedExceptionServic
 
         yield return new KeyValuePair<string, object>("type", domainObjectType.Name);
 
-        if (domainObject is IIdentityObject<TIdent> identityObject && !identityObject.Id.IsDefault())
+        if (domainObject is IIdentityObject<Guid> identityObject && !identityObject.Id.IsDefault())
         {
             yield return new KeyValuePair<string, object>("id", identityObject.Id);
         }

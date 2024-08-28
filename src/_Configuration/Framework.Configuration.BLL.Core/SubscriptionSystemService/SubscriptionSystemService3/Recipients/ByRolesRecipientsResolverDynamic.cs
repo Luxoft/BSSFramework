@@ -67,7 +67,7 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRec
     }
     private bool IsExpandable(SecurityContextType securityContextType)
     {
-        return this.ConfigurationContextFacade.ServiceProvider.GetRequiredService<ISecurityContextInfoService<Guid>>()
+        return this.ConfigurationContextFacade.ServiceProvider.GetRequiredService<ISecurityContextInfoService>()
                    .GetSecurityContextInfo(securityContextType.Id).Type.IsHierarchical();
     }
 }

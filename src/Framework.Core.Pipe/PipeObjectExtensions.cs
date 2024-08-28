@@ -2,28 +2,8 @@
 
 public static class PipeObjectExtensions
 {
-    [Obsolete("v10 This method will be protected in future")]
-    public static void Case<T>(this T source, T condition, Action action)
-    {
-        if (source.Equals(condition))
-        {
-            action();
-        }
-    }
-
-    [Obsolete("v10 This method will be protected in future")]
-    public static void Case<T>(this T source, Func<T, bool> condition, Action action)
-    {
-        if (condition(source))
-        {
-            action();
-        }
-    }
-
     public static TSource Self<TSource>(this TSource source, bool condition, Action<TSource> evaluate)
     {
-        if (evaluate == null) throw new ArgumentNullException(nameof(evaluate));
-
         if (condition)
         {
             evaluate(source);
@@ -34,8 +14,6 @@ public static class PipeObjectExtensions
 
     public static TSource Self<TSource>(this TSource source, Action<TSource> evaluate)
     {
-        if (evaluate == null) throw new ArgumentNullException(nameof(evaluate));
-
         evaluate(source);
 
         return source;
@@ -43,51 +21,37 @@ public static class PipeObjectExtensions
 
     public static void Pipe<T1, T2>(this Tuple<T1, T2> source, Action<T1, T2> evaluate)
     {
-        if (evaluate == null) throw new ArgumentNullException(nameof(evaluate));
-
         evaluate(source.Item1, source.Item2);
     }
 
     public static TResult Pipe<T1, T2, TResult>(this Tuple<T1, T2> source, Func<T1, T2, TResult> evaluate)
     {
-        if (evaluate == null) throw new ArgumentNullException(nameof(evaluate));
-
         return evaluate(source.Item1, source.Item2);
     }
 
     public static void Pipe<T1, T2, T3>(this Tuple<T1, T2, T3> source, Action<T1, T2, T3> evaluate)
     {
-        if (evaluate == null) throw new ArgumentNullException(nameof(evaluate));
-
         evaluate(source.Item1, source.Item2, source.Item3);
     }
 
     public static TResult Pipe<T1, T2, T3, TResult>(this Tuple<T1, T2, T3> source, Func<T1, T2, T3, TResult> evaluate)
     {
-        if (evaluate == null) throw new ArgumentNullException(nameof(evaluate));
-
         return evaluate(source.Item1, source.Item2, source.Item3);
     }
 
     public static void Pipe<TSource>(this TSource source, Action<TSource> evaluate)
     {
-        if (evaluate == null) throw new ArgumentNullException(nameof(evaluate));
-
         evaluate(source);
     }
 
     public static TResult Pipe<TSource, TResult>(this TSource source, Func<TSource, TResult> evaluate)
     {
-        if (evaluate == null) throw new ArgumentNullException(nameof(evaluate));
-
         return evaluate(source);
     }
 
     public static TResult Pipe<TSource, TResult>(this TSource source, bool condition, Func<TSource, TResult> evaluate)
             where TSource : TResult
     {
-        if (evaluate == null) throw new ArgumentNullException(nameof(evaluate));
-
         return condition ? evaluate(source) : source;
     }
 
@@ -99,17 +63,15 @@ public static class PipeObjectExtensions
     }
 
     [Obsolete("v10 This method will be protected in future")]
-    public static TResult AsCast<TResult>(this object source)
+    public static TResult? AsCast<TResult>(this object source)
             where TResult : class
     {
         return source as TResult;
     }
 
-    public static TSource FromMaybe<TSource>(this TSource source, Func<Exception> getNothingException)
+    public static TSource FromMaybe<TSource>(this TSource? source, Func<Exception> getNothingException)
             where TSource : class
     {
-        if (getNothingException == null) throw new ArgumentNullException(nameof(getNothingException));
-
         if (null == source)
         {
             throw getNothingException();
@@ -121,8 +83,6 @@ public static class PipeObjectExtensions
     public static TSource FromMaybe<TSource>(this TSource? source, Func<Exception> getNothingException)
             where TSource : struct
     {
-        if (getNothingException == null) throw new ArgumentNullException(nameof(getNothingException));
-
         if (null == source)
         {
             throw getNothingException();
@@ -131,11 +91,9 @@ public static class PipeObjectExtensions
         return source.Value;
     }
 
-    public static TSource FromMaybe<TSource>(this TSource source, Func<string> getNothingExceptionMessage)
+    public static TSource FromMaybe<TSource>(this TSource? source, Func<string> getNothingExceptionMessage)
             where TSource : class
     {
-        if (getNothingExceptionMessage == null) throw new ArgumentNullException(nameof(getNothingExceptionMessage));
-
         return source.FromMaybe(() => new Exception(getNothingExceptionMessage()));
     }
 
@@ -184,18 +142,7 @@ public static class PipeObjectExtensions
         return source.FromMaybe(condition, () => nothingExceptionMessage);
     }
 
-    [Obsolete("v10 This method will be protected in future")]
-    public static string FromString(this string source, Func<Exception> getNothingException)
-    {
-        if (string.IsNullOrWhiteSpace(source))
-        {
-            throw getNothingException();
-        }
-
-        return source;
-    }
-
-    public static TResult MaybeString<TResult>(this string source, Func<string, TResult> evaluate)
+    public static TResult? MaybeString<TResult>(this string source, Func<string, TResult> evaluate)
     {
         if (string.IsNullOrWhiteSpace(source))
         {
@@ -224,65 +171,9 @@ public static class PipeObjectExtensions
         return source;
     }
 
-    [Obsolete("Странный метод с WHERE, но при этом работает с одним объектом")]
-    public static TSource MaybeWhere<TSource>(this TSource source, Func<TSource, bool> filter)
-            where TSource : class
-    {
-        if (filter == null)
-        {
-            throw new ArgumentNullException(nameof(filter));
-        }
-
-        return source.Maybe(v => filter(v) ? source : null);
-    }
-
-    [Obsolete("v10 This method will be protected in future")]
-    public static TObject Do<TObject>(this TObject source, Action<TObject> action)
-            where TObject : class
-    {
-        source.Maybe(action);
-        return source;
-    }
-
-    [Obsolete("v10 This method will be protected in future")]
-    public static TResult When<TResult>(this TResult source, Func<TResult, bool> condition, TResult elseResult)
-    {
-        return (condition(source)) ? source : elseResult;
-    }
-
-    [Obsolete("v10 This method will be protected in future")]
-    public static TResult When<TSource, TResult>(this TSource source, Func<TSource, bool> condition, Func<TSource, TResult> selector, TResult elseResult)
-    {
-        return (condition(source)) ? selector(source) : elseResult;
-    }
-
-    [Obsolete("v10 Use ?.")]
-    public static TResult IfNull<TResult>(this TResult source, TResult otherResult)
-            where TResult : class
-    {
-        return source.IfDefault(otherResult);
-    }
-
     public static TResult IfDefault<TResult>(this TResult source, TResult otherResult)
     {
         return source.IsDefault() ? otherResult : source;
-    }
-
-    [Obsolete("v10 Use ?.")]
-    public static void IfNotNull<T>(this T? source, Action<T> action) where T : struct
-    {
-        if (source.HasValue)
-        {
-            action(source.Value);
-        }
-    }
-    [Obsolete("v10 Use ?.")]
-    public static void IfNotNull<T>(this T source, Action<T> action) where T : class
-    {
-        if (null != source)
-        {
-            action(source);
-        }
     }
 
     [Obsolete("v10 This method will be protected in future")]

@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.DomainDriven.Generation.Domain;
 using Framework.QueryableSource;
 using Framework.Security;
 using Framework.SecuritySystem;
@@ -19,10 +18,9 @@ namespace Framework.DomainDriven.BLLCoreGenerator
         {
             this.dependencySecurityAttr = dependencySecurityAttr ?? throw new ArgumentNullException(nameof(dependencySecurityAttr));
 
-            this.BaseServiceType = typeof(UntypedDependencyDomainSecurityService<,,>).MakeGenericType(
+            this.BaseServiceType = typeof(UntypedDependencyDomainSecurityService<,>).MakeGenericType(
                     this.DomainType,
-                    this.dependencySecurityAttr.SourceType,
-                    this.Configuration.Environment.GetIdentityType()).ToTypeReference();
+                    this.dependencySecurityAttr.SourceType).ToTypeReference();
         }
 
         public override CodeTypeReference BaseServiceType { get; }

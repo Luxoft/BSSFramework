@@ -129,8 +129,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Restriction", "Framework.Restriction\Framework.Restriction.csproj", "{ACABEF1F-83F5-4BEC-858E-BA639E7504F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.ReferencesManager", "Framework.ReferencesManager\Framework.ReferencesManager.csproj", "{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Authorization.BLL.Tests.Unit", "_Authorization\Framework.Authorization.BLL.Tests.Unit\Framework.Authorization.BLL.Tests.Unit.csproj", "{A485EDD7-0755-422F-9B7B-AF7E386FDEEF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1DC4D960-CEFB-4274-8147-DD2C5EDE131E}"
@@ -377,7 +375,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.Setu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSystem.Security.Abstract", "_SampleSystem\SampleSystem.Security.Abstract\SampleSystem.Security.Abstract.csproj", "{5A341E27-7150-480D-8E6C-9E8DCA111178}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleSystem.IntegrationTests.Xunit", "_SampleSystem\_Tests\SampleSystem.IntegrationTests.Xunit\SampleSystem.IntegrationTests.Xunit.csproj", "{30DC6008-68D1-4D82-8BB6-B757823ECA1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSystem.IntegrationTests.Xunit", "_SampleSystem\_Tests\SampleSystem.IntegrationTests.Xunit\SampleSystem.IntegrationTests.Xunit.csproj", "{30DC6008-68D1-4D82-8BB6-B757823ECA1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1257,24 +1255,6 @@ Global
 		{ACABEF1F-83F5-4BEC-858E-BA639E7504F6}.Release|x64.ActiveCfg = Release|Any CPU
 		{ACABEF1F-83F5-4BEC-858E-BA639E7504F6}.Release|x64.Build.0 = Release|Any CPU
 		{ACABEF1F-83F5-4BEC-858E-BA639E7504F6}.Release|x86.ActiveCfg = Release|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Debug|ARM.Build.0 = Debug|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Debug|x64.Build.0 = Debug|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Release|ARM.ActiveCfg = Release|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Release|ARM.Build.0 = Release|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Release|x64.ActiveCfg = Release|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Release|x64.Build.0 = Release|Any CPU
-		{3EC04AC6-4CE2-44BC-9804-C15EED6E05A7}.Release|x86.ActiveCfg = Release|Any CPU
 		{A485EDD7-0755-422F-9B7B-AF7E386FDEEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A485EDD7-0755-422F-9B7B-AF7E386FDEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A485EDD7-0755-422F-9B7B-AF7E386FDEEF}.Debug|ARM.ActiveCfg = Debug|Any CPU

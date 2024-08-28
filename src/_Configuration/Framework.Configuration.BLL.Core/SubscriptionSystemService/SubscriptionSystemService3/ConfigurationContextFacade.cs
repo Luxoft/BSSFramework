@@ -92,7 +92,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(securityContextType));
         }
 
-        var result = this.context.ServiceProvider.GetRequiredService<ISecurityContextInfoService<Guid>>().GetSecurityContextInfo(securityContextType.Id).Type;
+        var result = this.context.ServiceProvider.GetRequiredService<ISecurityContextInfoService>().GetSecurityContextInfo(securityContextType.Id).Type;
         return result;
     }
 

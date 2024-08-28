@@ -10,7 +10,7 @@ public class PermissionRequiredContextValidator : AbstractValidator<Permission>
 {
     public const string Key = "RequiredContext";
 
-    public PermissionRequiredContextValidator(ISecurityContextInfoService<Guid> securityContextInfoService, ISecurityRoleSource securityRoleSource)
+    public PermissionRequiredContextValidator(ISecurityContextInfoService securityContextInfoService, ISecurityRoleSource securityRoleSource)
     {
         this.RuleFor(permission => permission.Restrictions)
             .Must(

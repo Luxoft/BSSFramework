@@ -17,14 +17,14 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     private readonly IAuthorizationExternalSource externalSource;
 
-    private readonly ISecurityContextInfoService<Guid> securityContextInfoService;
+    private readonly ISecurityContextInfoService securityContextInfoService;
 
     private readonly ISecurityRoleSource securityRoleSource;
 
     public PermissionDelegateValidator(
         TimeProvider timeProvider,
         IAuthorizationExternalSource externalSource,
-        ISecurityContextInfoService<Guid> securityContextInfoService,
+        ISecurityContextInfoService securityContextInfoService,
         ISecurityRoleSource securityRoleSource)
     {
         this.timeProvider = timeProvider;

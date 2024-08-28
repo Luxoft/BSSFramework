@@ -29,7 +29,7 @@ public partial interface IAuthorizationBLLContext :
 
     IRunAsManager RunAsManager { get; }
 
-    IAuthorizationSystem<Guid> AuthorizationSystem { get; }
+    IAuthorizationSystem AuthorizationSystem { get; }
 
     IAvailablePermissionSource AvailablePermissionSource { get; }
 

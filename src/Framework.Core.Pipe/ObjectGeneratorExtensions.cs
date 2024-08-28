@@ -11,8 +11,6 @@ public static class ObjectGeneratorExtensions
 
     public static IEnumerable<T> GetAllElements<T>(this T source, Func<T, IEnumerable<T>> getChildFunc)
     {
-        if (null == getChildFunc) throw new ArgumentNullException(nameof(getChildFunc));
-
         yield return source;
 
         foreach (var element in getChildFunc(source).SelectMany(child => child.GetAllElements(getChildFunc)))
@@ -21,7 +19,7 @@ public static class ObjectGeneratorExtensions
         }
     }
 
-    public static IEnumerable<T> GetAllElements<T>(this T source, Func<T, T> getNextFunc, bool skipFirstElement)
+    public static IEnumerable<T> GetAllElements<T>(this T? source, Func<T?, T> getNextFunc, bool skipFirstElement)
             where T : class
     {
         var baseElements = source.GetAllElements(getNextFunc);
@@ -29,7 +27,7 @@ public static class ObjectGeneratorExtensions
         return skipFirstElement ? baseElements.Skip(1) : baseElements;
     }
 
-    public static IEnumerable<T> GetAllElements<T>(this T source, Func<T, T> getNextFunc)
+    public static IEnumerable<T> GetAllElements<T>(this T? source, Func<T, T?> getNextFunc)
             where T : class
     {
         if (null == getNextFunc) throw new ArgumentNullException(nameof(getNextFunc));

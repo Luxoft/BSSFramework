@@ -10,7 +10,7 @@ public class AccessDeniedExceptionServiceTests
     public void CreateNewObject_AccessDeniedMessage_IsValid()
     {
         // Arrange
-        var service = new AccessDeniedExceptionService<Guid>();
+        var service = new AccessDeniedExceptionService();
         var employee = new Employee();
 
         // Act
@@ -25,7 +25,7 @@ public class AccessDeniedExceptionServiceTests
     public void ChangeExistObject_AccessDeniedMessage_IsValid()
     {
         // Arrange
-        var service = new AccessDeniedExceptionService<Guid>();
+        var service = new AccessDeniedExceptionService();
         var employee = new Employee() { Id = Guid.NewGuid() };
 
         // Act
@@ -40,7 +40,7 @@ public class AccessDeniedExceptionServiceTests
     public void CreateNewObjectWithOperation_AccessDeniedMessage_IsValid()
     {
         // Arrange
-        var service = new AccessDeniedExceptionService<Guid>();
+        var service = new AccessDeniedExceptionService();
         var employee = new Employee();
         var securityRule = ExampleSecurityOperation.EmployeeView;
 
@@ -56,7 +56,7 @@ public class AccessDeniedExceptionServiceTests
     public void ChangeExistObjectWithOperation_AccessDeniedMessage_IsValid()
     {
         // Arrange
-        var service = new AccessDeniedExceptionService<Guid>();
+        var service = new AccessDeniedExceptionService();
         var employee = new Employee() { Id = Guid.NewGuid() };
         var securityRule = ExampleSecurityOperation.EmployeeView;
 

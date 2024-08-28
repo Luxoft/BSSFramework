@@ -8,10 +8,10 @@ namespace Framework.Authorization.SecuritySystem.Validation;
 
 public class PermissionRestrictionValidator : AbstractValidator<PermissionRestriction>
 {
-    private readonly ISecurityContextInfoService<Guid> securityContextInfoService;
+    private readonly ISecurityContextInfoService securityContextInfoService;
 
     public PermissionRestrictionValidator(
-        ISecurityContextInfoService<Guid> securityContextInfoService,
+        ISecurityContextInfoService securityContextInfoService,
         ISecurityRoleSource securityRoleSource,
         IAuthorizationExternalSource authorizationExternalSource)
     {

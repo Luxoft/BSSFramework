@@ -4,15 +4,15 @@ using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem;
 
-public class UntypedDependencySecurityProvider<TDomainObject, TBaseDomainObject, TIdent> : ISecurityProvider<TDomainObject>
-    where TDomainObject : IIdentityObject<TIdent>
-    where TBaseDomainObject : class, IIdentityObject<TIdent>
+public class UntypedDependencySecurityProvider<TDomainObject, TBaseDomainObject> : ISecurityProvider<TDomainObject>
+    where TDomainObject : IIdentityObject<Guid>
+    where TBaseDomainObject : class, IIdentityObject<Guid>
 {
     private readonly ISecurityProvider<TBaseDomainObject> baseSecurityProvider;
 
     private readonly IQueryableSource queryableSource;
 
-    private readonly Lazy<HashSet<TIdent>> lazyAvailableIdents;
+    private readonly Lazy<HashSet<Guid>> lazyAvailableIdents;
 
     public UntypedDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseSecurityProvider, IQueryableSource queryableSource)
     {
@@ -52,7 +52,7 @@ public class UntypedDependencySecurityProvider<TDomainObject, TBaseDomainObject,
                    .FromMaybe(() => $"Object with id = '{domainObject.Id}' not found");
     }
 
-    protected virtual IQueryable<TIdent> GetAvailableIdents()
+    protected virtual IQueryable<Guid> GetAvailableIdents()
     {
         return this.queryableSource.GetQueryable<TBaseDomainObject>().Pipe(this.baseSecurityProvider.InjectFilter).Select(v => v.Id);
     }

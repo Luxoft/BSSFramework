@@ -2,16 +2,14 @@
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
 
-using DPermission = System.Collections.Generic.Dictionary<System.Type, System.Collections.Generic.List<System.Guid>>;
-
 namespace Framework.Authorization.SecuritySystem;
 
 public static class PermissionExtensions
 {
-    public static DPermission ToDictionary(
-        this IPermission<Guid> permission,
+    public static Dictionary<Type, List<Guid>> ToDictionary(
+        this IPermission permission,
         IRealTypeResolver realTypeResolver,
-        ISecurityContextInfoService<Guid> securityContextInfoService,
+        ISecurityContextInfoService securityContextInfoService,
         IEnumerable<Type> securityTypes)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));

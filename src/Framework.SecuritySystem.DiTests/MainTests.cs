@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 
+using Framework.Core;
+using Framework.Core.Services;
 using Framework.DependencyInjection;
 using Framework.HierarchicalExpand;
 using Framework.HierarchicalExpand.DependencyInjection;
@@ -97,12 +99,14 @@ public partial class MainTests
 
                .RegisterHierarchicalObjectExpander()
                .AddScoped(this.BuildQueryableSource)
-               .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()
 
                .AddSecuritySystem(
                    settings =>
 
-                       settings.AddDomainSecurityServices(
+                       settings
+                           .AddPermissionSystem<ExamplePermissionSystem>()
+
+                           .AddDomainSecurityServices(
                                    rb =>
                                        rb.Add<Employee>(
                                            b => b.SetView(ExampleSecurityOperation.EmployeeView)
@@ -143,10 +147,12 @@ public partial class MainTests
                .AddRelativeDomainPath((Employee employee) => employee)
                .AddSingleton(typeof(TestCheckboxConditionFactory<>))
 
+               .AddScoped(_ => LazyInterfaceImplementHelper.CreateNotImplemented<IUserAuthenticationService>())
+
                .AddSingleton(new SecurityPathRestrictionServiceSettings { ValidateSecurityPath = true })
 
                .AddScoped<BusinessUnitAncestorLinkSourceExecuteCounter>()
-               .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
+               .AddSingleton(new ExamplePermissionSystemData(this.permissions))
 
                .ValidateDuplicateDeclaration()
                .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });

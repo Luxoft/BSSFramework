@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class GetBusinessRoleContextsHandler(
-    ISecurityContextInfoService<Guid> securityContextInfoService,
+    ISecurityContextInfoService securityContextInfoService,
     IAuthorizationSystem authorizationSystem)
     : BaseReadHandler, IGetBusinessRoleContextsHandler
 {

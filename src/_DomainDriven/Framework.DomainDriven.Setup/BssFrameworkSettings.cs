@@ -32,6 +32,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public List<Action<IServiceCollection>> RegisterActions { get; set; } = new();
 
+
     public List<IBssFrameworkExtension> Extensions = new();
 
     public Type NotificationPrincipalExtractorType { get; private set; } = typeof(NotificationPrincipalExtractor);
@@ -49,6 +50,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
                 sss =>
                 {
                     sss.SetCurrentUser<AuthorizationCurrentUser>();
+                    sss.AddPermissionSystem<AuthorizationPermissionsSystem>();
 
                     setupAction(sss);
                 }));

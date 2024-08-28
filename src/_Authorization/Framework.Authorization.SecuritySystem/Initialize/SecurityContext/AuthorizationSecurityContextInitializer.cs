@@ -11,12 +11,12 @@ namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationSecurityContextInitializer(
     [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
-    IEnumerable<ISecurityContextInfo<Guid>> securityContextInfoList,
+    IEnumerable<ISecurityContextInfo> securityContextInfoList,
     ILogger<AuthorizationSecurityContextInitializer> logger,
     InitializerSettings settings)
     : IAuthorizationSecurityContextInitializer
 {
-    public async Task<MergeResult<SecurityContextType, ISecurityContextInfo<Guid>>> Init(CancellationToken cancellationToken)
+    public async Task<MergeResult<SecurityContextType, ISecurityContextInfo>> Init(CancellationToken cancellationToken)
     {
         var dbSecurityContextTypes = await securityContextTypeRepository.GetQueryable().ToListAsync(cancellationToken);
 

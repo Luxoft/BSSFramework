@@ -4,26 +4,25 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection;
 
-public class SecurityContextInfoBuilder<TIdent> : ISecurityContextInfoBuilder<TIdent>
+public class SecurityContextInfoBuilder : ISecurityContextInfoBuilder
 {
     private readonly List<Action<IServiceCollection>> registerActions = new();
 
-    public ISecurityContextInfoBuilder<TIdent> Add<TSecurityContext>(
-        TIdent ident,
+    public ISecurityContextInfoBuilder Add<TSecurityContext>(
+        Guid id,
         string? customName = null,
         Func<TSecurityContext, string>? customDisplayFunc = null)
-        where TSecurityContext : ISecurityContext, IIdentityObject<TIdent>
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
         this.registerActions.Add(
             services =>
             {
-                var securityContextInfo = new SecurityContextInfo<TSecurityContext, TIdent>(
-                    ident,
+                var securityContextInfo = new SecurityContextInfo<TSecurityContext>(
+                    id,
                     customName ?? typeof(TSecurityContext).Name);
 
                 services.AddSingleton(securityContextInfo);
                 services.AddSingleton<ISecurityContextInfo>(securityContextInfo);
-                services.AddSingleton<ISecurityContextInfo<TIdent>>(securityContextInfo);
 
                 services.AddSingleton<ISecurityContextDisplayService<TSecurityContext>>(
                     new SecurityContextDisplayService<TSecurityContext>(

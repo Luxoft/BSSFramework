@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class AuthorizationPermissionsSystem(
+public class AuthorizationPermissionSystem(
     IAvailablePermissionSource availablePermissionSource,
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IServiceProvider serviceProvider)

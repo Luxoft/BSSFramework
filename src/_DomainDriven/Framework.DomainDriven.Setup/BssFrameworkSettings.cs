@@ -50,7 +50,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
                 sss =>
                 {
                     sss.SetCurrentUser<AuthorizationCurrentUser>();
-                    sss.AddPermissionSystem<AuthorizationPermissionsSystem>();
+                    sss.AddPermissionSystem<AuthorizationPermissionSystem>();
 
                     setupAction(sss);
                 }));

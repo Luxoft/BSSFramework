@@ -26,7 +26,7 @@ public static class ServiceCollectionExtensions
         services.RegisterGeneralAuthorizationSystem()
                 .RegisterAuthorizationSecurity()
                 .RegistryGenericDatabaseVisitors()
-                .CustomizeAuthorizationSystem();
+                .UpdateSecuritySystem();
 
         var settings = new AuthorizationSystemSettings();
 
@@ -108,7 +108,7 @@ public static class ServiceCollectionExtensions
         return services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
     }
 
-    private static IServiceCollection CustomizeAuthorizationSystem(this IServiceCollection services)
+    private static IServiceCollection UpdateSecuritySystem(this IServiceCollection services)
     {
         return services.ReplaceScoped<ICurrentUser, AuthorizationCurrentUser>()
                        .AddScoped<IPermissionSystem, AuthorizationPermissionSystem>();

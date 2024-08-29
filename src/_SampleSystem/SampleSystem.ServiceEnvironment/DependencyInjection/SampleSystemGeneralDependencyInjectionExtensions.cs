@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Environment;
 using Framework.DomainDriven.Setup;
+using Framework.DomainDriven.VirtualPermission;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +30,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                        .AddSecurityRoles()
                                        .AddSecurityRules()
                                        .AddCustomSecurityOperations()
-                                       .SetUserSource<Employee>(employee => employee.Id, employee => employee.Login, employee => employee.Active))
+                                       .SetUserSource<Employee>(employee => employee.Id, employee => employee.Login, employee => employee.Active)
+                                       .AddVirtualPermissions())
 
                            .AddAuthorizationSystem()
 

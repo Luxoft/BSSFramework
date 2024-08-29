@@ -3,6 +3,8 @@
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.DomainDriven.VirtualPermission;
 
 public static class SecuritySystemSettingsExtensions
@@ -11,7 +13,8 @@ public static class SecuritySystemSettingsExtensions
         this ISecuritySystemSettings securitySystemSettings,
         VirtualPermissionBindingInfo<TDomainObject> bindingInfo)
     {
-        return securitySystemSettings.AddPermissionSystem(_ => new VirtualPermissionSystem<TDomainObject>(bindingInfo));
+        return securitySystemSettings.AddPermissionSystem(
+            sp => ActivatorUtilities.CreateInstance<VirtualPermissionSystem<TDomainObject>>(sp, bindingInfo));
     }
 
     public static ISecuritySystemSettings AddVirtualPermission<TDomainObject>(

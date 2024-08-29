@@ -8,7 +8,7 @@ public class SecuritySystem(
 {
     public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        return permissionSystems.Any(v => v.HasAccess(securityRule));
+        return permissionSystems.Any(v => v.GetPermissionSource(securityRule).GetPermissionQuery().Any());
     }
 
     public void CheckAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule)

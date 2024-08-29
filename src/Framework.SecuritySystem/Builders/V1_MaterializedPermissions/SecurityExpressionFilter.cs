@@ -23,6 +23,7 @@ public class SecurityExpressionFilter<TDomainObject> : ISecurityExpressionFilter
         IEnumerable<Type> securityTypes)
     {
         this.builder = builder;
+
         var rawPermissions =
             builder.Factory
                    .PermissionSystems

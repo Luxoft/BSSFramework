@@ -48,9 +48,6 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IAuthorizationSystemFactory, AuthorizationSystemFactory>()
 
-                       .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
-                       .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
-
                        .AddSingleton<InitializerSettings>()
                        .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()

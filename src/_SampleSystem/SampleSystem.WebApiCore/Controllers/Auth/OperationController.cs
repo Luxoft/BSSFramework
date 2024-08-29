@@ -1,4 +1,4 @@
-﻿using Framework.Authorization.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 

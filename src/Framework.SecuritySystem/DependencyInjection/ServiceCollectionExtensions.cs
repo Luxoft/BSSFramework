@@ -6,6 +6,7 @@ using Framework.SecuritySystem.Builders.V1_MaterializedPermissions;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.PermissionOptimization;
+using Framework.SecuritySystem.SecurityAccessor;
 using Framework.SecuritySystem.Services;
 using Framework.SecuritySystem.UserSource;
 
@@ -43,6 +44,8 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddSecuritySystem(this IServiceCollection services, Action<ISecuritySystemSettings> setupAction)
     {
+        services.RegisterGeneralSecuritySystem();
+
         var settings = new SecuritySystemSettings();
 
         setupAction(settings);
@@ -60,7 +63,14 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped(typeof(ICurrentUser), settings.CurrentUserType);
 
-        services.RegisterGeneralSecuritySystem();
+        if (settings.SecurityAccessorInfinityStorageType == null)
+        {
+            services.AddNotImplemented<ISecurityAccessorInfinityStorage>("Use 'SetSecurityAccessorInfinityStorage' for initialize infinity storage");
+        }
+        else
+        {
+            services.AddScoped(typeof(ISecurityAccessorInfinityStorage), settings.SecurityAccessorInfinityStorageType);
+        }
 
         return services;
     }
@@ -112,6 +122,15 @@ public static class ServiceCollectionExtensions
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))
                        .AddScoped<IAuthorizationSystem, RootAuthorizationSystem>()
 
-                       .AddSingleton<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>();
+                       .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
+
+                       .AddSingleton<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
+
+                       .AddSingleton<ISecurityAccessorDataOptimizer, SecurityAccessorDataOptimizer>()
+                       .AddScoped<ISecurityAccessorDataEvaluator, SecurityAccessorDataEvaluator>()
+                       .AddScoped<ISecurityAccessorResolver, SecurityAccessorResolver>()
+
+                       .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
+                       .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>();
     }
 }

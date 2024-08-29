@@ -1,24 +1,15 @@
-﻿using FluentValidation;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-using Framework.Authorization.Domain;
-using Framework.Authorization.Notification;
-using Framework.Authorization.SecuritySystem;
-
-using Microsoft.Extensions.DependencyInjection;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
 using Framework.SecuritySystem;
+using Framework.Configuration.Domain;
+using Framework.DependencyInjection;
 
 using nuSpec.Abstraction;
-
-using Framework.Configuration.Domain;
-using Framework.Core;
-using Framework.Authorization.SecuritySystem.Validation;
-
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.DomainDriven.Setup;
 
@@ -32,10 +23,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public List<Action<IServiceCollection>> RegisterActions { get; set; } = new();
 
-
     public List<IBssFrameworkExtension> Extensions = new();
-
-    public Type NotificationPrincipalExtractorType { get; private set; } = typeof(NotificationPrincipalExtractor);
 
     public Type DomainObjectEventMetadataType { get; private set; } = typeof(DomainObjectEventMetadata);
 
@@ -45,15 +33,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> setupAction)
     {
-        this.RegisterActions.Add(
-            sc => sc.AddSecuritySystem(
-                sss =>
-                {
-                    sss.SetCurrentUser<AuthorizationCurrentUser>();
-                    sss.AddPermissionSystem<AuthorizationPermissionSystem>();
-
-                    setupAction(sss);
-                }));
+        this.RegisterActions.Add(sc => sc.AddSecuritySystem(setupAction));
 
         return this;
     }
@@ -80,14 +60,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         return this;
     }
 
-    public IBssFrameworkSettings SetNotificationPrincipalExtractor<T>()
-        where T : INotificationPrincipalExtractor
-    {
-        this.NotificationPrincipalExtractorType = typeof(T);
-
-        return this;
-    }
-
     public IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata
     {
@@ -107,15 +79,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         where TSpecificationEvaluator : class, ISpecificationEvaluator
     {
         this.SpecificationEvaluatorType = typeof(TSpecificationEvaluator);
-
-        return this;
-    }
-
-    public IBssFrameworkSettings SetUniquePermissionValidator<TValidator>()
-        where TValidator : class, IValidator<Principal>
-    {
-        this.RegisterActions.Add(
-            sc => sc.Replace(ServiceDescriptor.KeyedScoped<IValidator<Principal>, TValidator>(PrincipalUniquePermissionValidator.Key)));
 
         return this;
     }
@@ -161,13 +124,17 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public void Init()
     {
-        if (this.SpecificationEvaluatorType == null)
-        {
-            this.RegisterActions.Add(sc => sc.AddSingleton(LazyInterfaceImplementHelper.CreateNotImplemented<ISpecificationEvaluator>()));
-        }
-        else
-        {
-            this.RegisterActions.Add(sc => sc.AddScoped(typeof(ISpecificationEvaluator), this.SpecificationEvaluatorType));
-        }
+        this.RegisterActions.Add(
+            sc =>
+            {
+                if (this.SpecificationEvaluatorType == null)
+                {
+                    sc.AddNotImplemented<ISpecificationEvaluator>("Use 'SetSpecificationEvaluator'");
+                }
+                else
+                {
+                    sc.AddScoped(typeof(ISpecificationEvaluator), this.SpecificationEvaluatorType);
+                }
+            });
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.Environment.Security;
 using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.ApplicationCore;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 

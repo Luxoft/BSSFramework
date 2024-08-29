@@ -1,8 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.DomainDriven.Setup.Abstract</PackageId>
-    <RootNamespace>Framework.DomainDriven.Setup</RootNamespace>
+    <PackageId>Framework.DomainDriven.ApplicationCore</PackageId>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -11,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <ProjectReference Include="..\..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,6 +3,7 @@
 using Framework.Persistent;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
+using Framework.SecuritySystem.SecurityAccessor;
 using Framework.SecuritySystem.UserSource;
 
 namespace Framework.SecuritySystem.DependencyInjection;
@@ -34,10 +35,14 @@ public interface ISecuritySystemSettings
         where TAccessDeniedExceptionService : class, IAccessDeniedExceptionService;
 
     ISecuritySystemSettings SetCurrentUser<TCurrentUser>()
-        where TCurrentUser : ICurrentUser;
+        where TCurrentUser : class, ICurrentUser;
 
     ISecuritySystemSettings SetUserSource<TUserDomainObject>(
         Expression<Func<TUserDomainObject, Guid>> idPath,
         Expression<Func<TUserDomainObject, string>> namePath,
         Expression<Func<TUserDomainObject, bool>> filter);
+
+    ISecuritySystemSettings SetSecurityAccessorInfinityStorage<TStorage>()
+        where TStorage : class, ISecurityAccessorInfinityStorage;
+
 }

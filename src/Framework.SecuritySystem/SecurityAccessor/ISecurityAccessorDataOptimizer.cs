@@ -1,4 +1,4 @@
-﻿namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem.SecurityAccessor;
 
 public interface ISecurityAccessorDataOptimizer
 {

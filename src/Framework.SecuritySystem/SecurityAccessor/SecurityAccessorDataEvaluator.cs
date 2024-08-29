@@ -1,7 +1,4 @@
-﻿using Framework.SecuritySystem;
-
-namespace Framework.Authorization.SecuritySystem;
-
+﻿namespace Framework.SecuritySystem.SecurityAccessor;
 public class SecurityAccessorDataEvaluator(ISecurityAccessorInfinityStorage infinityStorage)
     : ISecurityAccessorDataEvaluator
 {

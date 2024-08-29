@@ -10,6 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ApplicationCore\Framework.DomainDriven.ApplicationCore.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup.Abstract\Framework.DomainDriven.Setup.Abstract.csproj" />
+
+    <ProjectReference Include="..\Framework.Authorization.Notification\Framework.Authorization.Notification.csproj" />
     <ProjectReference Include="..\Framework.Authorization.SecuritySystem\Framework.Authorization.SecuritySystem.csproj" />
   </ItemGroup>
 

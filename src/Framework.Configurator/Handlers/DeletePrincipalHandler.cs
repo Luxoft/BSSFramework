@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public record DeletePrincipalHandler(
-    IAuthorizationSystem AuthorizationSystem,
+    ISecuritySystem SecuritySystem,
     IRepositoryFactory<Principal> RepoFactory,
     IPrincipalDomainService PrincipalDomainService,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
@@ -25,7 +25,7 @@ public record DeletePrincipalHandler(
 
     private async Task Delete(Guid id, CancellationToken cancellationToken)
     {
-        this.AuthorizationSystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
+        this.SecuritySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
 
         var principal = await this.RepoFactory.Create().LoadAsync(id, cancellationToken);
 

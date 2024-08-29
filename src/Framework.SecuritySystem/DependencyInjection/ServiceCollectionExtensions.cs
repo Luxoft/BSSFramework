@@ -101,7 +101,7 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
                        .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
-                       .AddSingleton<ISecurityContextInfoService, SecurityContextInfoService>()
+                       .AddSingleton<ISecurityContextSource, SecurityContextSource>()
                        .AddScoped<IDomainSecurityProviderFactory, DomainSecurityProviderFactory>()
                        .AddSingleton<ISecurityRuleBasicOptimizer, SecurityRuleBasicOptimizer>()
                        .AddSingleton<ISecurityRuleDeepOptimizer, SecurityRuleDeepOptimizer>()
@@ -120,7 +120,7 @@ public static class ServiceCollectionExtensions
                        .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
                        .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))
-                       .AddScoped<IAuthorizationSystem, RootAuthorizationSystem>()
+                       .AddScoped<ISecuritySystem, SecuritySystem>()
 
                        .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
 

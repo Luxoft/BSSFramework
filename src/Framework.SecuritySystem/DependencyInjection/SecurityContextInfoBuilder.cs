@@ -22,7 +22,7 @@ public class SecurityContextInfoBuilder : ISecurityContextInfoBuilder
                     customName ?? typeof(TSecurityContext).Name);
 
                 services.AddSingleton(securityContextInfo);
-                services.AddSingleton<ISecurityContextInfo>(securityContextInfo);
+                services.AddSingleton<SecurityContextInfo>(securityContextInfo);
 
                 services.AddSingleton<ISecurityContextDisplayService<TSecurityContext>>(
                     new SecurityContextDisplayService<TSecurityContext>(

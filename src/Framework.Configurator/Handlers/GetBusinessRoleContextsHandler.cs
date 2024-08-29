@@ -8,17 +8,17 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class GetBusinessRoleContextsHandler(
-    ISecurityContextInfoService securityContextInfoService,
-    IAuthorizationSystem authorizationSystem)
+    ISecurityContextSource securityContextSource,
+    ISecuritySystem securitySystem)
     : BaseReadHandler, IGetBusinessRoleContextsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!authorizationSystem.IsSecurityAdministrator()) return new List<EntityDto>();
+        if (!securitySystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
-        return securityContextInfoService
+        return securityContextSource
                .SecurityContextTypes
-               .Select(securityContextInfoService.GetSecurityContextInfo)
+               .Select(securityContextSource.GetSecurityContextInfo)
                .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
                .OrderBy(x => x.Name)
                .ToList();

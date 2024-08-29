@@ -22,7 +22,7 @@ public partial class ConfigSLJsonController
 
         this.Evaluate(DBSessionMode.Write, evaluateData =>
                                            {
-                                               evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.Administrator);
+                                               evaluateData.Context.Authorization.SecuritySystem.CheckAccess(SecurityRole.Administrator);
 
                                                evaluateData.Context.Logics.DomainType.ForceEvent(domainTypeEventModel.ToDomainObject(evaluateData.MappingService));
                                            });

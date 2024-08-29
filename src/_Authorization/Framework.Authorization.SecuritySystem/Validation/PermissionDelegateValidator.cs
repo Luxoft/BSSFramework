@@ -17,19 +17,19 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     private readonly IAuthorizationExternalSource externalSource;
 
-    private readonly ISecurityContextInfoService securityContextInfoService;
+    private readonly ISecurityContextSource securityContextSource;
 
     private readonly ISecurityRoleSource securityRoleSource;
 
     public PermissionDelegateValidator(
         TimeProvider timeProvider,
         IAuthorizationExternalSource externalSource,
-        ISecurityContextInfoService securityContextInfoService,
+        ISecurityContextSource securityContextSource,
         ISecurityRoleSource securityRoleSource)
     {
         this.timeProvider = timeProvider;
         this.externalSource = externalSource;
-        this.securityContextInfoService = securityContextInfoService;
+        this.securityContextSource = securityContextSource;
         this.securityRoleSource = securityRoleSource;
 
         this.RuleFor(permission => permission.DelegatedFrom)
@@ -210,9 +210,9 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
         return invalidRequest1.Concat(invalidRequest2).ToDictionary();
     }
 
-    private ISecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)
+    private SecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)
     {
-        return this.securityContextInfoService.GetSecurityContextInfo(securityContextType.Id);
+        return this.securityContextSource.GetSecurityContextInfo(securityContextType.Id);
     }
 
     private bool IsExpandable(SecurityContextType securityContextType)

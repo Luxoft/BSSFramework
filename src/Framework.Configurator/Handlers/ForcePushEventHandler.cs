@@ -12,12 +12,12 @@ namespace Framework.Configurator.Handlers;
 
 public record ForcePushEventHandler(
     IRepositoryFactory<DomainTypeEventOperation> EventOperationRepoFactory,
-    IAuthorizationSystem AuthorizationSystem,
+    ISecuritySystem SecuritySystem,
     ILegacyForceEventSystem? LegacyForceEventSystem = null) : BaseWriteHandler, IForcePushEventHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.AuthorizationSystem.CheckAccess(SecurityRole.Administrator);
+        this.SecuritySystem.CheckAccess(SecurityRole.Administrator);
 
         var operationId = (string)context.Request.RouteValues["operationId"]!;
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);

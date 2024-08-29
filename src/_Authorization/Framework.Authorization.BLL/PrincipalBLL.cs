@@ -13,7 +13,7 @@ public partial class PrincipalBLL
     {
         if (principal == null) throw new ArgumentNullException(nameof(principal));
 
-        if (this.Context.CurrentPrincipal.RunAs != null)
+        if (this.Context.CurrentPrincipalSource.CurrentPrincipal.RunAs != null)
         {
             throw new BusinessLogicException("RunAs mode must be disabled");
         }

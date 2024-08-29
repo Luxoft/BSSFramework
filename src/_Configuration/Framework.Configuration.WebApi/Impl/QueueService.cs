@@ -12,7 +12,7 @@ public partial class ConfigSLJsonController
     {
         var result = this.EvaluateC(DBSessionMode.Write, context =>
                                                          {
-                                                             context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
+                                                             context.Authorization.SecuritySystem.CheckAccess(SecurityRole.SystemIntegration);
                                                              return context.Logics.DomainObjectModification.Process(limit == default(int) ? 1000 : limit);
                                                          });
 
@@ -23,7 +23,7 @@ public partial class ConfigSLJsonController
     public QueueProcessingStateSimpleDTO GetEventQueueProcessingState() =>
         this.Evaluate(DBSessionMode.Read, evaluateData =>
                                           {
-                                              evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
+                                              evaluateData.Context.Authorization.SecuritySystem.CheckAccess(SecurityRole.SystemIntegration);
 
                                               return evaluateData.Context.Logics.DomainObjectEvent.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                           });
@@ -32,7 +32,7 @@ public partial class ConfigSLJsonController
     public QueueProcessingStateSimpleDTO GetModificationQueueProcessingState() =>
         this.Evaluate(DBSessionMode.Read, evaluateData =>
                                           {
-                                              evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
+                                              evaluateData.Context.Authorization.SecuritySystem.CheckAccess(SecurityRole.SystemIntegration);
 
                                               return evaluateData.Context.Logics.DomainObjectModification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                           });
@@ -41,7 +41,7 @@ public partial class ConfigSLJsonController
     public QueueProcessingStateSimpleDTO GetNotificationQueueProcessingState() =>
         this.Evaluate(DBSessionMode.Read, evaluateData =>
                                           {
-                                              evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(SecurityRole.SystemIntegration);
+                                              evaluateData.Context.Authorization.SecuritySystem.CheckAccess(SecurityRole.SystemIntegration);
 
                                               return evaluateData.Context.Logics.DomainObjectNotification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                           });

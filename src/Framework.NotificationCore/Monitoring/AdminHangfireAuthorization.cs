@@ -13,6 +13,6 @@ public class AdminHangfireAuthorization : IDashboardAuthorizationFilter
         var httpContext = context.GetHttpContext();
 
         return httpContext.User.Identity is { IsAuthenticated: true }
-               && httpContext.RequestServices.GetRequiredService<IAuthorizationSystem>().IsAdministrator();
+               && httpContext.RequestServices.GetRequiredService<ISecuritySystem>().IsAdministrator();
     }
 }

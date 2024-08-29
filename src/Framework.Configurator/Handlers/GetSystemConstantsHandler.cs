@@ -10,12 +10,12 @@ using NHibernate.Linq;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetSystemConstantsHandler(IRepositoryFactory<SystemConstant> repoFactory, IAuthorizationSystem authorizationSystem)
+public class GetSystemConstantsHandler(IRepositoryFactory<SystemConstant> repoFactory, ISecuritySystem securitySystem)
     : BaseReadHandler, IGetSystemConstantsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!authorizationSystem.IsAdministrator()) return new List<SystemConstantDto>();
+        if (!securitySystem.IsAdministrator()) return new List<SystemConstantDto>();
 
         return await repoFactory
                      .Create()

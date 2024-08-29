@@ -1,6 +1,5 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
-using Framework.Authorization.SecuritySystem;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
 

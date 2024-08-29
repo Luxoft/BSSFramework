@@ -11,15 +11,15 @@ public class AuthorizationExternalSource : IAuthorizationExternalSource
 {
     private readonly IServiceProvider serviceProvider;
 
-    private readonly ISecurityContextInfoService securityContextInfoService;
+    private readonly ISecurityContextSource securityContextSource;
 
     private readonly IDictionaryCache<SecurityContextType, IAuthorizationTypedExternalSource> typedCache;
 
 
-    public AuthorizationExternalSource(IServiceProvider serviceProvider, ISecurityContextInfoService securityContextInfoService)
+    public AuthorizationExternalSource(IServiceProvider serviceProvider, ISecurityContextSource securityContextSource)
     {
         this.serviceProvider = serviceProvider;
-        this.securityContextInfoService = securityContextInfoService;
+        this.securityContextSource = securityContextSource;
 
         this.typedCache = new DictionaryCache<SecurityContextType, IAuthorizationTypedExternalSource>(securityContextType => this.GetTypedInternal(securityContextType, true));
     }
@@ -35,7 +35,7 @@ public class AuthorizationExternalSource : IAuthorizationExternalSource
     {
         if (securityContextType == null) throw new ArgumentNullException(nameof(securityContextType));
 
-        var securityContextInfo = this.securityContextInfoService.GetSecurityContextInfo(securityContextType.Id);
+        var securityContextInfo = this.securityContextSource.GetSecurityContextInfo(securityContextType.Id);
 
         var authorizationTypedExternalSourceType = securityContextInfo.Type.IsHierarchical()
                                                            ? typeof(HierarchicalAuthorizationTypedExternalSource<>)

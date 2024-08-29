@@ -4,11 +4,11 @@ using Framework.SecuritySystem;
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public class ProjectionSecurityContextInfoService(
-    IEnumerable<ISecurityContextInfo> securityContextInfoList,
+    IEnumerable<SecurityContextInfo> securityContextInfoList,
     IRealTypeResolver realTypeResolver)
-    : SecurityContextInfoService(securityContextInfoList)
+    : SecurityContextSource(securityContextInfoList)
 {
-    public override ISecurityContextInfo GetSecurityContextInfo(Type type)
+    public override SecurityContextInfo GetSecurityContextInfo(Type type)
     {
         return base.GetSecurityContextInfo(realTypeResolver.Resolve(type));
     }

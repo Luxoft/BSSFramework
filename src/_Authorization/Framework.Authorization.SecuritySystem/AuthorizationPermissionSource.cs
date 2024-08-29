@@ -17,7 +17,7 @@ public class AuthorizationPermissionSource(
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     TimeProvider timeProvider,
     ISecurityRolesIdentsResolver securityRolesIdentsResolver,
-    ISecurityContextInfoService securityContextInfoService,
+    ISecurityContextSource securityContextSource,
     DomainSecurityRule.RoleBaseSecurityRule securityRule) : IPermissionSource
 {
     public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
@@ -28,7 +28,7 @@ public class AuthorizationPermissionSource(
                                                    .ToList();
 
         return permissions
-               .Select(permission => permission.ToDictionary(realTypeResolver, securityContextInfoService, securityTypes))
+               .Select(permission => permission.ToDictionary(realTypeResolver, securityContextSource, securityTypes))
                .ToList();
     }
 

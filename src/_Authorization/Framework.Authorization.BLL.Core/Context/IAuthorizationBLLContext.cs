@@ -25,11 +25,9 @@ public partial interface IAuthorizationBLLContext :
 
     ICurrentUser CurrentUser { get; }
 
-    Principal CurrentPrincipal => this.CurrentPrincipalSource.CurrentPrincipal;
-
     IRunAsManager RunAsManager { get; }
 
-    IAuthorizationSystem AuthorizationSystem { get; }
+    ISecuritySystem SecuritySystem { get; }
 
     IAvailablePermissionSource AvailablePermissionSource { get; }
 

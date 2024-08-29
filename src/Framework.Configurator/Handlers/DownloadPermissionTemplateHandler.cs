@@ -14,14 +14,14 @@ namespace Framework.Configurator.Handlers;
 
 public record DownloadPermissionTemplateHandler(
     IRepositoryFactory<SecurityContextType> RepositoryFactory,
-    IAuthorizationSystem AuthorizationSystem)
+    ISecuritySystem SecuritySystem)
     : IDownloadPermissionTemplateHandler
 {
     private const int FirstContentColumnIndex = 4;
 
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.AuthorizationSystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
+        this.SecuritySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
 
         var contexts = await this.RepositoryFactory
                                  .Create()

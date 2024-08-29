@@ -42,7 +42,7 @@ public partial class AuthorizationBLLContext
             IAuthorizationBLLFactoryContainer logics,
             IAuthorizationExternalSource externalSource,
             INotificationPrincipalExtractor notificationPrincipalExtractor,
-            IAuthorizationSystem authorizationSystem,
+            ISecuritySystem securitySystem,
             IRunAsManager runAsManager,
             IAvailablePermissionSource availablePermissionSource,
             IAvailableSecurityRoleSource availableSecurityRoleSource,
@@ -71,7 +71,7 @@ public partial class AuthorizationBLLContext
         this.CurrentUser = currentUser;
         this.AvailableSecurityOperationSource = availableSecurityOperationSource;
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
-        this.AuthorizationSystem = authorizationSystem;
+        this.SecuritySystem = securitySystem;
         this.RunAsManager = runAsManager;
 
         this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
@@ -92,7 +92,7 @@ public partial class AuthorizationBLLContext
 
     public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
-    public IAuthorizationSystem AuthorizationSystem { get; }
+    public ISecuritySystem SecuritySystem { get; }
 
     public IPrincipalGeneralValidator PrincipalValidator { get; }
 

@@ -24,7 +24,7 @@ public abstract class IntegrationMethodGenerator<TConfiguration, TBLLRoleAttribu
     {
         yield return evaluateDataExpr.GetContext()
                                      .ToPropertyReference("Authorization")
-                                     .ToPropertyReference("AuthorizationSystem")
+                                     .ToPropertyReference("SecuritySystem")
                                      .ToMethodInvokeExpression("CheckAccess", this.Configuration.IntegrationSecurityRule)
                                      .ToExpressionStatement();
     }

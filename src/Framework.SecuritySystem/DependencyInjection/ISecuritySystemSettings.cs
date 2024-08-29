@@ -29,6 +29,9 @@ public interface ISecuritySystemSettings
     ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>()
         where TPermissionSystem : class, IPermissionSystem;
 
+    ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>(Func<IServiceProvider, TPermissionSystem> factory)
+        where TPermissionSystem : class, IPermissionSystem;
+
     ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions);
 
     ISecuritySystemSettings SetAccessDeniedExceptionService<TAccessDeniedExceptionService>()

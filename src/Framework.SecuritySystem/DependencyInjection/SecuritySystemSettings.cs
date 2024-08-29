@@ -78,6 +78,14 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
+    public ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>(Func<IServiceProvider, TPermissionSystem> factory)
+        where TPermissionSystem : class, IPermissionSystem
+    {
+        this.RegisterActions.Add(sc => sc.AddScoped<IPermissionSystem>(factory));
+
+        return this;
+    }
+
     public ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions)
     {
         this.RegisterActions.Add(extensions.AddServices);

@@ -9,15 +9,15 @@ namespace Framework.Configurator.Handlers;
 
 public class GetBusinessRolesHandler(
     ISecurityRoleSource securityRoleSource,
-    ISecurityContextInfoService securityContextInfoService,
-    IAuthorizationSystem authorizationSystem)
+    ISecurityContextSource securityContextSource,
+    ISecuritySystem securitySystem)
     : BaseReadHandler, IGetBusinessRolesHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!authorizationSystem.IsSecurityAdministrator()) return new List<EntityDto>();
+        if (!securitySystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
-        var defaultContexts = securityContextInfoService.SecurityContextTypes.Select(securityContextInfoService.GetSecurityContextInfo)
+        var defaultContexts = securityContextSource.SecurityContextTypes.Select(securityContextSource.GetSecurityContextInfo)
                                                         .Select(v => new RoleContextDto(v.Name, false))
                                                         .ToList();
 
@@ -30,7 +30,7 @@ public class GetBusinessRolesHandler(
                             Name = x.Name,
                             Contexts =
                                 x.Information.Restriction.SecurityContextRestrictions?.Select(
-                                    v => new RoleContextDto(securityContextInfoService.GetSecurityContextInfo(v.Type).Name, v.Required)).ToList()
+                                    v => new RoleContextDto(securityContextSource.GetSecurityContextInfo(v.Type).Name, v.Required)).ToList()
                                 ?? defaultContexts
                         })
                .OrderBy(x => x.Name)

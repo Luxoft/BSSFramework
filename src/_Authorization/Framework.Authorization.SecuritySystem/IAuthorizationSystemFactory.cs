@@ -4,5 +4,5 @@ namespace Framework.Authorization.SecuritySystem;
 
 public interface IAuthorizationSystemFactory
 {
-    IAuthorizationSystem Create(bool withRunAs);
+    ISecuritySystem Create(bool withRunAs);
 }

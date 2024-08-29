@@ -8,14 +8,14 @@ namespace Framework.SecuritySystem.Builders.V2_QueryablePermissions;
 public class SecurityExpressionBuilderFactory(
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     IEnumerable<IPermissionSystem> permissionSystems,
-    ISecurityContextInfoService securityContextInfoService)
+    ISecurityContextSource securityContextSource)
     : SecurityExpressionBuilderFactoryBase
 {
     public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory { get; } = hierarchicalObjectExpanderFactory;
 
     public IEnumerable<IPermissionSystem> PermissionSystems { get; } = permissionSystems;
 
-    public ISecurityContextInfoService SecurityContextInfoService { get; } = securityContextInfoService;
+    public ISecurityContextSource SecurityContextInfoService { get; } = securityContextSource;
 
     protected override ISecurityExpressionBuilder<TDomainObject> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.ConditionPath securityPath)
     {

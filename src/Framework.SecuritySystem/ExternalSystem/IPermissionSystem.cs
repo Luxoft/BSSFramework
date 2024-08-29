@@ -1,6 +1,6 @@
 ﻿namespace Framework.SecuritySystem.ExternalSystem;
 
-public interface IPermissionSystem : IAuthorizationSystem
+public interface IPermissionSystem : ISecuritySystemBase
 {
     IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 

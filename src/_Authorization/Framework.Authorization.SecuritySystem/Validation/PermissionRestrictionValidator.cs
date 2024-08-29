@@ -8,14 +8,14 @@ namespace Framework.Authorization.SecuritySystem.Validation;
 
 public class PermissionRestrictionValidator : AbstractValidator<PermissionRestriction>
 {
-    private readonly ISecurityContextInfoService securityContextInfoService;
+    private readonly ISecurityContextSource securityContextSource;
 
     public PermissionRestrictionValidator(
-        ISecurityContextInfoService securityContextInfoService,
+        ISecurityContextSource securityContextSource,
         ISecurityRoleSource securityRoleSource,
         IAuthorizationExternalSource authorizationExternalSource)
     {
-        this.securityContextInfoService = securityContextInfoService;
+        this.securityContextSource = securityContextSource;
 
         this.RuleFor(permissionRestriction => permissionRestriction.SecurityContextType)
             .Must(
@@ -42,8 +42,8 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
             .WithMessage(permissionRestriction => $"{permissionRestriction.SecurityContextType.Name} with id '{permissionRestriction.SecurityContextId}' not exists.");
     }
 
-    private ISecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)
+    private SecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)
     {
-        return this.securityContextInfoService.GetSecurityContextInfo(securityContextType.Id);
+        return this.securityContextSource.GetSecurityContextInfo(securityContextType.Id);
     }
 }

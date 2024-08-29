@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public record CreatePrincipalHandler(
-    IAuthorizationSystem AuthorizationSystem,
+    ISecuritySystem SecuritySystem,
     IPrincipalDomainService PrincipalDomainService,
     IRepositoryFactory<Principal> RepoFactory,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
@@ -18,7 +18,7 @@ public record CreatePrincipalHandler(
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.AuthorizationSystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
+        this.SecuritySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
 
         var name = await this.ParseRequestBodyAsync<string>(context);
 

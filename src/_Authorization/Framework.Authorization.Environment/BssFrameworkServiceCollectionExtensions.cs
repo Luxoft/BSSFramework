@@ -5,7 +5,7 @@ namespace Framework.Authorization.Environment;
 public static class BssFrameworkServiceCollectionExtensions
 {
     /// <summary>
-    /// Must be called AFTER 'AddSecuritySystem'
+    /// Must be called AFTER 'AddAuthorizationSystem'
     /// </summary>
     /// <typeparam name="TSelf"></typeparam>
     /// <param name="settings"></param>

@@ -9,7 +9,7 @@ namespace Framework.SecuritySystem.Builders.V1_MaterializedPermissions;
 public class SecurityExpressionBuilderFactory(
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     IEnumerable<IPermissionSystem> permissionSystems,
-    ISecurityContextInfoService securityContextInfoService,
+    ISecurityContextSource securityContextSource,
     IRuntimePermissionOptimizationService permissionOptimizationService)
     : SecurityExpressionBuilderFactoryBase
 {
@@ -17,7 +17,7 @@ public class SecurityExpressionBuilderFactory(
 
     public IEnumerable<IPermissionSystem> PermissionSystems { get; } = permissionSystems;
 
-    public ISecurityContextInfoService SecurityContextInfoService { get; } = securityContextInfoService;
+    public ISecurityContextSource SecurityContextInfoService { get; } = securityContextSource;
 
     public IRuntimePermissionOptimizationService PermissionOptimizationService { get; } = permissionOptimizationService;
 

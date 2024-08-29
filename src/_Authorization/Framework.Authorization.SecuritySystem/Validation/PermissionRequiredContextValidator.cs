@@ -10,7 +10,7 @@ public class PermissionRequiredContextValidator : AbstractValidator<Permission>
 {
     public const string Key = "RequiredContext";
 
-    public PermissionRequiredContextValidator(ISecurityContextInfoService securityContextInfoService, ISecurityRoleSource securityRoleSource)
+    public PermissionRequiredContextValidator(ISecurityContextSource securityContextSource, ISecurityRoleSource securityRoleSource)
     {
         this.RuleFor(permission => permission.Restrictions)
             .Must(
@@ -25,11 +25,11 @@ public class PermissionRequiredContextValidator : AbstractValidator<Permission>
                                                                .Select(pair => pair.Type);
 
                         var usedTypes = permission.Restrictions.Select(r => r.SecurityContextType).Distinct()
-                                                  .Select(sct => securityContextInfoService.GetSecurityContextInfo(sct.Id).Type);
+                                                  .Select(sct => securityContextSource.GetSecurityContextInfo(sct.Id).Type);
 
                         var missedTypeInfoList = requiredSecurityContextTypes
                                                  .Except(usedTypes)
-                                                 .Select(securityContextInfoService.GetSecurityContextInfo)
+                                                 .Select(securityContextSource.GetSecurityContextInfo)
                                                  .Select(info => info.Name)
                                                  .ToList();
 

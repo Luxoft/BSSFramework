@@ -2,8 +2,8 @@
 
 namespace Framework.DomainDriven.ApplicationCore;
 
-public static class AuthorizationSystemExtensions
+public static class SecuritySystemExtensions
 {
-    public static bool IsSecurityAdministrator(this IAuthorizationSystem authorizationSystem) =>
-        authorizationSystem.HasAccess(ApplicationSecurityRule.SecurityAdministrator);
+    public static bool IsSecurityAdministrator(this ISecuritySystem securitySystem) =>
+        securitySystem.HasAccess(ApplicationSecurityRule.SecurityAdministrator);
 }

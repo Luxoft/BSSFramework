@@ -1,16 +1,14 @@
-﻿using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem.ExternalSystem;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.SecuritySystem;
 
-public class AuthorizationSystemBase(
-    IAvailablePermissionSource availablePermissionSource,
+public class SecuritySystem(
     IAccessDeniedExceptionService accessDeniedExceptionService,
-    bool withRunAs)
-    : ISecuritySystem
+    IEnumerable<IPermissionSystem> permissionSystems) : ISecuritySystem
 {
     public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        return availablePermissionSource.GetAvailablePermissionsQueryable(securityRule: securityRule, withRunAs: withRunAs).Any();
+        return permissionSystems.Any(v => v.HasAccess(securityRule));
     }
 
     public void CheckAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule)

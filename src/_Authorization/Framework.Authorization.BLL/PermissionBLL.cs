@@ -15,7 +15,7 @@ public partial class PermissionBLL
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
-        if (this.Context.CurrentPrincipal.RunAs != null)
+        if (this.Context.CurrentPrincipalSource.CurrentPrincipal.RunAs != null)
         {
             throw new BusinessLogicException("RunAs mode must be disabled");
         }

@@ -13,14 +13,14 @@ namespace Framework.Configurator.Handlers;
 
 public class GetBusinessRoleHandler(
     IRepositoryFactory<Permission> repoFactory,
-    IAuthorizationSystem authorizationSystem,
+    ISecuritySystem securitySystem,
     ISecurityRoleSource roleSource,
     ISecurityOperationInfoSource operationInfoSource)
     : BaseReadHandler, IGetBusinessRoleHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!authorizationSystem.IsSecurityAdministrator()) return new BusinessRoleDetailsDto { Operations = [], Principals = [] };
+        if (!securitySystem.IsSecurityAdministrator()) return new BusinessRoleDetailsDto { Operations = [], Principals = [] };
 
         var roleId = new Guid((string)context.Request.RouteValues["id"]!);
 

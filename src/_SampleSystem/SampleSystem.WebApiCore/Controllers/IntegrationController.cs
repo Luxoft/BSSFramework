@@ -14,10 +14,10 @@ namespace SampleSystem.WebApiCore.Controllers;
 public class IntegrationController : IntegrationSchemaControllerBase
 {
     public IntegrationController(
-        IAuthorizationSystem authorizationSystem,
+        ISecuritySystem securitySystem,
         TimeProvider timeProvider,
         IEventXsdExporter2 eventXsdExporter)
-        : base(authorizationSystem, timeProvider, eventXsdExporter)
+        : base(securitySystem, timeProvider, eventXsdExporter)
     {
     }
 

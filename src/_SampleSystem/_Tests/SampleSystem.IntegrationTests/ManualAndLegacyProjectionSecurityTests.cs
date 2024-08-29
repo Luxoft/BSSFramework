@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 
-using Framework.Authorization.SecuritySystem;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.SecurityAccessor;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

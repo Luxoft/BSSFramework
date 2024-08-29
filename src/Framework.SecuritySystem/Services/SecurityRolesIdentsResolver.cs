@@ -1,7 +1,6 @@
-﻿using Framework.SecuritySystem;
-using Framework.SecuritySystem.Expanders;
+﻿using Framework.SecuritySystem.Expanders;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.SecuritySystem;
 
 public class SecurityRolesIdentsResolver(
     ISecurityRuleExpander securityRuleExpander,

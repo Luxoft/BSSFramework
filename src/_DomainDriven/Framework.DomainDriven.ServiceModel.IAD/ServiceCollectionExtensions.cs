@@ -1,13 +1,4 @@
-﻿using FluentValidation;
-
-using Framework.Authorization.Domain;
-using Framework.Authorization.Environment.Security;
-using Framework.Authorization.SecuritySystem;
-using Framework.Authorization.SecuritySystem.ExternalSource;
-
-using Framework.Authorization.SecuritySystem.Initialize;
-using Framework.Authorization.SecuritySystem.Validation;
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.Configuration.NamedLocks;
 using Framework.Core.Services;
 using Framework.DependencyInjection;
@@ -41,8 +32,6 @@ public static class ServiceCollectionExtensions
         services.RegisterRepository();
         services.RegisterAuthenticationServices();
         services.RegisterEvaluators();
-        services.RegisterAuthorizationSystem();
-        services.RegisterAuthorizationSecurity();
         services.RegisterConfigurationSecurity();
         services.RegisterNamedLocks();
         services.RegisterHierarchicalObjectExpander();
@@ -50,6 +39,8 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IInitializeManager, InitializeManager>();
         services.AddScoped<IEventOperationSender, EventOperationSender>();
+
+        services.AddScoped<IQueryableSource, RepositoryQueryableSource>();
 
         return services;
     }
@@ -114,9 +105,6 @@ public static class ServiceCollectionExtensions
     {
         services
             .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
-                Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>();
-        services
-            .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
                 Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
 
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
@@ -137,81 +125,6 @@ public static class ServiceCollectionExtensions
                .AddScoped<INamedLockService, NamedLockService>()
                .AddScoped<INamedLockInitializer, NamedLockInitializer>()
                .AddSingleton<INamedLockSource, NamedLockSource>();
-    }
-
-    private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
-    {
-        return services.AddScoped<IQueryableSource, RepositoryQueryableSource>()
-
-                       .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
-
-                       .AddScoped<IRunAsManager, RunAsManger>()
-
-                       .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
-                       .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
-
-                       .AddScoped<IAuthorizationSystemFactory, AuthorizationSystemFactory>()
-
-                       .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
-                       .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
-
-                       .AddSingleton<InitializerSettings>()
-                       .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
-                       .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
-
-                       .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>()
-                       .AddScoped(typeof(LocalStorage<>))
-
-                       .AddScoped<IPrincipalDomainService, PrincipalDomainService>()
-
-                       .AddScoped<IPrincipalGeneralValidator, PrincipalGeneralValidator>()
-                       .AddKeyedScoped<IValidator<Principal>, PrincipalUniquePermissionValidator>(PrincipalUniquePermissionValidator.Key)
-                       .AddKeyedScoped<IValidator<Permission>, PermissionGeneralValidator>(PermissionGeneralValidator.Key)
-                       .AddKeyedScoped<IValidator<Permission>, PermissionDelegateValidator>(PermissionDelegateValidator.Key)
-                       .AddKeyedScoped<IValidator<Permission>, PermissionRequiredContextValidator>(PermissionRequiredContextValidator.Key)
-                       .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>()
-
-                       .AddSingleton<ISecurityAccessorDataOptimizer, SecurityAccessorDataOptimizer>()
-                       .AddScoped<ISecurityAccessorInfinityStorage, AuthorizationAccessorInfinityStorage>()
-                       .AddScoped<ISecurityAccessorDataEvaluator, SecurityAccessorDataEvaluator>()
-                       .AddScoped<ISecurityAccessorResolver, SecurityAccessorResolver>();
-    }
-
-    public static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)
-    {
-        var securityAdministratorRule = AuthorizationSecurityRule.SecurityAdministrator;
-
-        var principalViewSecurityRule = securityAdministratorRule.Or(AuthorizationSecurityRule.CurrentPrincipal);
-
-        return services
-
-               .AddSingleton<SecurityAdministratorRuleFactory>()
-
-               .AddRelativeDomainPath((Permission permission) => permission.Principal)
-               .AddScoped(typeof(CurrentPrincipalSecurityProvider<>))
-
-               .AddRelativeDomainPath((BusinessRole businessRole) => businessRole)
-               .AddScoped(typeof(AvailableBusinessRoleSecurityProvider<>))
-
-               .AddRelativeDomainPath((Permission permission) => permission.DelegatedFrom, nameof(Permission.DelegatedFrom))
-               .AddScoped(typeof(DelegatedFromSecurityProvider<>))
-
-               .RegisterDomainSecurityServices(
-                   rb => rb
-                         .Add<Principal>(
-                             b => b.SetView(principalViewSecurityRule)
-                                   .SetEdit(securityAdministratorRule))
-
-                         .Add<Permission>(
-                             b => b.SetView(principalViewSecurityRule.Or(AuthorizationSecurityRule.DelegatedFrom))
-                                   .SetEdit(securityAdministratorRule.Or(AuthorizationSecurityRule.DelegatedFrom)))
-
-                         .Add<BusinessRole>(
-                             b => b.SetView(securityAdministratorRule.Or(AuthorizationSecurityRule.AvailableBusinessRole))
-                                   .SetEdit(securityAdministratorRule))
-
-                         .Add<SecurityContextType>(
-                             b => b.SetView(SecurityRule.Disabled)));
     }
 
     public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)

@@ -8,34 +8,25 @@ using NHibernate.Linq;
 
 namespace Framework.Configuration.NamedLocks;
 
-public class NamedLockInitializer : INamedLockInitializer
+public class NamedLockInitializer(
+    [DisabledSecurity] IRepository<GenericNamedLock> namedLockRepository,
+    INamedLockSource namedLockSource)
+    : INamedLockInitializer
 {
-    private readonly IRepository<GenericNamedLock> namedLockRepository;
-
-    private readonly INamedLockSource namedLockSource;
-
-    public NamedLockInitializer(
-        [DisabledSecurity] IRepository<GenericNamedLock> namedLockRepository,
-        INamedLockSource namedLockSource)
-    {
-        this.namedLockRepository = namedLockRepository;
-        this.namedLockSource = namedLockSource;
-    }
-
     public async Task Initialize(CancellationToken cancellationToken)
     {
-        var dbValues = await this.namedLockRepository.GetQueryable().ToListAsync(cancellationToken);
+        var dbValues = await namedLockRepository.GetQueryable().ToListAsync(cancellationToken);
 
-        var mergeResult = dbValues.GetMergeResult(this.namedLockSource.NamedLocks, v => v.Name, v => v.Name);
+        var mergeResult = dbValues.GetMergeResult(namedLockSource.NamedLocks, v => v.Name, v => v.Name);
 
         foreach (var addingItem in mergeResult.AddingItems)
         {
-            await this.namedLockRepository.SaveAsync(new GenericNamedLock { Name = addingItem.Name }, cancellationToken);
+            await namedLockRepository.SaveAsync(new GenericNamedLock { Name = addingItem.Name }, cancellationToken);
         }
 
         foreach (var removingItem in mergeResult.RemovingItems)
         {
-            await this.namedLockRepository.RemoveAsync(removingItem, cancellationToken);
+            await namedLockRepository.RemoveAsync(removingItem, cancellationToken);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Framework.SecuritySystem;
 
-namespace Framework.Authorization.Environment.Security;
+namespace Framework.DomainDriven.ApplicationCore;
 
 public record SecurityAdministratorRuleInfo(DomainSecurityRule.RoleBaseSecurityRule SecurityRole);

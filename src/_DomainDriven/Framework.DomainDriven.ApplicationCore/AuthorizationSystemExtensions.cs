@@ -1,9 +1,9 @@
 ﻿using Framework.SecuritySystem;
 
-namespace Framework.Authorization.Environment.Security;
+namespace Framework.DomainDriven.ApplicationCore;
 
 public static class AuthorizationSystemExtensions
 {
     public static bool IsSecurityAdministrator(this IAuthorizationSystem authorizationSystem) =>
-        authorizationSystem.HasAccess(AuthorizationSecurityRule.SecurityAdministrator);
+        authorizationSystem.HasAccess(ApplicationSecurityRule.SecurityAdministrator);
 }

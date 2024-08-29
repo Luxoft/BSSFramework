@@ -5,10 +5,9 @@ using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class AvailableSecurityRoleSource(IAvailablePermissionSource availablePermissionSource, ISecurityRoleSource securityRoleSource)
-    : IAvailableSecurityRoleSource
+public class AuthorizationAvailableSecurityRoleSource(IAvailablePermissionSource availablePermissionSource, ISecurityRoleSource securityRoleSource)
 {
-    public async Task<List<FullSecurityRole>> GetAvailableSecurityRoles(bool expandChildren, CancellationToken cancellationToken)
+    public async Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken)
     {
         var dbRequest = from permission in availablePermissionSource.GetAvailablePermissionsQueryable()
 
@@ -16,14 +15,6 @@ public class AvailableSecurityRoleSource(IAvailablePermissionSource availablePer
 
         var dbRolesIdents = await dbRequest.Distinct().ToListAsync(cancellationToken);
 
-        var roles = dbRolesIdents.Select(securityRoleSource.GetSecurityRole);
-
-        var rolesWithExpand = expandChildren
-                                  ? roles.GetAllElements(sr => sr.Information.Children.Select(securityRoleSource.GetSecurityRole))
-                                         .Distinct()
-
-                                  : roles;
-
-        return rolesWithExpand.ToList();
+        return dbRolesIdents.Select(securityRoleSource.GetSecurityRole);
     }
 }

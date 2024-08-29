@@ -1,6 +1,6 @@
-﻿using Framework.Authorization.Environment.Security;
-using Framework.Configurator.Interfaces;
+﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.ApplicationCore;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;

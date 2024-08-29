@@ -4,6 +4,7 @@ using Framework.DependencyInjection;
 using Framework.Persistent;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
+using Framework.SecuritySystem.SecurityAccessor;
 using Framework.SecuritySystem.Services;
 using Framework.SecuritySystem.UserSource;
 
@@ -13,7 +14,7 @@ namespace Framework.SecuritySystem.DependencyInjection;
 
 public class SecuritySystemSettings : ISecuritySystemSettings
 {
-    public List<Action<IServiceCollection>> RegisterActions { get; private set; } = new();
+    public List<Action<IServiceCollection>> RegisterActions { get; } = new();
 
     public Action<IServiceCollection> RegisterUserSourceAction { get; private set; } = _ => { };
 
@@ -22,6 +23,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
     public Type AccessDeniedExceptionServiceType { get; private set; } = typeof(AccessDeniedExceptionService);
 
     public Type CurrentUserType { get; private set; } = typeof(CurrentUser);
+
+    public Type? SecurityAccessorInfinityStorageType { get; private set; }
 
     public ISecuritySystemSettings AddSecurityContext<TSecurityContext>(
         Guid ident,
@@ -91,7 +94,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
     }
 
     public ISecuritySystemSettings SetCurrentUser<TCurrentUser>()
-        where TCurrentUser : ICurrentUser
+        where TCurrentUser : class, ICurrentUser
     {
         this.CurrentUserType = typeof(TCurrentUser);
 
@@ -116,6 +119,14 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
                                             sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUserDomainObject>>();
                                         };
+
+        return this;
+    }
+
+    public ISecuritySystemSettings SetSecurityAccessorInfinityStorage<TStorage>()
+        where TStorage : class, ISecurityAccessorInfinityStorage
+    {
+        this.SecurityAccessorInfinityStorageType = typeof(TStorage);
 
         return this;
     }

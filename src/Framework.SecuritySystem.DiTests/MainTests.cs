@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 
-using Framework.Core;
 using Framework.Core.Services;
 using Framework.DependencyInjection;
 using Framework.HierarchicalExpand;
@@ -147,7 +146,7 @@ public partial class MainTests
                .AddRelativeDomainPath((Employee employee) => employee)
                .AddSingleton(typeof(TestCheckboxConditionFactory<>))
 
-               .AddScoped(_ => LazyInterfaceImplementHelper.CreateNotImplemented<IUserAuthenticationService>())
+               .AddNotImplemented<IUserAuthenticationService>()
 
                .AddSingleton(new SecurityPathRestrictionServiceSettings { ValidateSecurityPath = true })
 

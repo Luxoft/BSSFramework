@@ -15,4 +15,10 @@ public class AuthorizationPermissionSystem(
     {
         return ActivatorUtilities.CreateInstance<AuthorizationPermissionSource>(serviceProvider, securityRule);
     }
+
+    public Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default)
+    {
+        return ActivatorUtilities.CreateInstance<AuthorizationAvailableSecurityRoleSource>(serviceProvider)
+                                 .GetAvailableSecurityRoles(cancellationToken);
+    }
 }

@@ -1,16 +1,14 @@
 ﻿using Framework.Core.Services;
 using Framework.DomainDriven.Audit;
 
-
-
 namespace Framework.DomainDriven.NHibernate;
 
 public class NHibSessionSettings : INHibSessionSetup
 {
-    
+
     private readonly IUserAuthenticationService userAuthenticationService;
 
-    
+
     private readonly TimeProvider timeProvider;
 
     public NHibSessionSettings(

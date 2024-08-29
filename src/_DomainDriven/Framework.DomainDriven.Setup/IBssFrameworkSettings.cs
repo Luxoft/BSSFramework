@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using Framework.Authorization.Domain;
-using Framework.Authorization.Notification;
-using Framework.DomainDriven._Visitors;
+﻿using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
 using Framework.Events;
 using Framework.SecuritySystem;
@@ -11,7 +8,7 @@ using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Setup;
 
-public interface IBssFrameworkSettings
+public interface IBssFrameworkSettings : IBssFrameworkSettingsBase<IBssFrameworkSettings>
 {
     bool RegisterBaseNamedLockTypes { get; set; }
 
@@ -24,11 +21,6 @@ public interface IBssFrameworkSettings
     IBssFrameworkSettings AddListener<TListener>(bool registerSelf = false)
         where TListener : class, IDALListener;
 
-    IBssFrameworkSettings AddExtensions(IBssFrameworkExtension extension);
-
-    IBssFrameworkSettings SetNotificationPrincipalExtractor<T>()
-        where T : INotificationPrincipalExtractor;
-
     IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
 
@@ -36,9 +28,6 @@ public interface IBssFrameworkSettings
 
     IBssFrameworkSettings SetSpecificationEvaluator<TSpecificationEvaluator>()
         where TSpecificationEvaluator : class, ISpecificationEvaluator;
-
-    IBssFrameworkSettings SetUniquePermissionValidator<TValidator>()
-        where TValidator : class, IValidator<Principal>;
 
     IBssFrameworkSettings AddDatabaseVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
         where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem;

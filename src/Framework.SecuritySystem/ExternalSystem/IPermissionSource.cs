@@ -8,5 +8,8 @@ public interface IPermissionSource
 
     IQueryable<IPermission> GetPermissionQuery();
 
+    Expression<Func<IPermission, IEnumerable<Guid>>> GetPermissionRestrictionExpression<TSecurityContext>()
+        where TSecurityContext : ISecurityContext;
+
     IEnumerable<string> GetAccessors(Expression<Func<IPermission, bool>> permissionFilter);
 }

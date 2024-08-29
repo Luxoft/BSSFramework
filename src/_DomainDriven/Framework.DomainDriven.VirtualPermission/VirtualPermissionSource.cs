@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.QueryableSource;
@@ -28,7 +29,7 @@ public class VirtualPermissionSource<TDomainObject>(
     {
         var baseQueryable = queryableSource.GetQueryable<TDomainObject>().Where(bindingInfo.Filter);
 
-        throw new NotImplementedException();
+        return baseQueryable.Select(domainObject => new VirtualPermission<TDomainObject>(domainObject, bindingInfo));
     }
 
     public IEnumerable<string> GetAccessors(Expression<Func<IPermission, bool>> permissionFilter) =>
@@ -40,4 +41,55 @@ public class VirtualPermissionSource<TDomainObject>(
             .GroupBy(p => p.SecurityContextTypeId)
             .Select(g => (securityContextSource.GetSecurityContextInfo(g.Key).Type, g.Select(v => v.SecurityContextId).ToList()))
             .ToDictionary();
+}
+
+public class VirtualPermission<TDomainObject>(
+    TDomainObject domainObject,
+    VirtualPermissionBindingInfo<TDomainObject> bindingInfo) : IPermission
+{
+    public IEnumerable<IPermissionRestriction> Restrictions { get; } =
+        bindingInfo.SecurityContextPaths.SelectMany(v => CreateRestriction(v, domainObject));
+
+    public string PrincipalName { get; } = bindingInfo.PrincipalNamePath.Eval(domainObject);
+
+    private static IEnumerable<IPermissionRestriction> CreateRestriction(LambdaExpression securityContextPath, TDomainObject domainObject)
+    {
+    }
+
+    private static IEnumerable<IPermissionRestriction> CreateRestriction<TSecurityContext>(
+        Expression<Func<TDomainObject, TSecurityContext>> securityContextPath,
+        TDomainObject domainObject)
+    {
+    }
+
+    private static IEnumerable<IPermissionRestriction> CreateRestriction<TSecurityContext>(
+        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityContextPath,
+        TDomainObject domainObject)
+    {
+        return securityContextPath.Eval(domainObject).Select()
+    }
+}
+
+public record VirtualPermissionRestriction(Guid SecurityContextTypeId, Guid SecurityContextId) : IPermissionRestriction;
+
+public class VirtualPermissionRestrictionFactory<TDomainObject>(
+    TDomainObject domainObject,
+    VirtualPermissionBindingInfo<TDomainObject> bindingInfo) : IPermission
+{
+    private static IEnumerable<IPermissionRestriction> CreateRestriction(LambdaExpression securityContextPath, TDomainObject domainObject)
+    {
+    }
+
+    private static IEnumerable<IPermissionRestriction> CreateRestriction<TSecurityContext>(
+        Expression<Func<TDomainObject, TSecurityContext>> securityContextPath,
+        TDomainObject domainObject)
+    {
+    }
+
+    private static IEnumerable<IPermissionRestriction> CreateRestriction<TSecurityContext>(
+        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityContextPath,
+        TDomainObject domainObject)
+    {
+        return securityContextPath.Eval(domainObject).Select()
+    }
 }

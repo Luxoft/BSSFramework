@@ -130,24 +130,18 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
         {
             var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
 
-            var eqIdentsExpr = ExpressionHelper.GetEquality<Guid>();
-
-            var getIdents = ExpressionHelper.Create(
-                                                (IPermission permission) =>
-                                                    permission.Restrictions
-                                                              .Where(
-                                                                  item => eqIdentsExpr.Eval(
-                                                                      item.SecurityContextTypeId,
-                                                                      securityContextTypeId))
-                                                              .Select(fi => fi.SecurityContextId))
-                                            .ExpandConst()
-                                            .InlineEval();
+            var getIdentsExpr = ExpressionHelper.Create(
+                (IPermission permission) =>
+                    permission.Restrictions
+                              .Where(item => item.SecurityContextTypeId == securityContextTypeId)
+                              .Select(fi => fi.SecurityContextId));
 
             var expander = this.Factory.HierarchicalObjectExpanderFactory.CreateQuery(typeof(TSecurityContext));
 
             var expandExpression = expander.GetExpandExpression(expandType);
 
-            var expandExpressionQ = from idents in getIdents
+            var expandExpressionQ = from idents in getIdentsExpr
+
                                     select expandExpression.Eval(idents);
 
             switch (this.Path.Mode)
@@ -156,7 +150,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
 
                     return (domainObject, permission) =>
 
-                               !getIdents.Eval(permission).Any()
+                               !getIdentsExpr.Eval(permission).Any()
 
                                || this.Path.SecurityPath.Eval(domainObject) == null
 
@@ -166,7 +160,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
 
                     return (domainObject, permission) =>
 
-                               !getIdents.Eval(permission).Any()
+                               !getIdentsExpr.Eval(permission).Any()
 
                                || expandExpressionQ.Eval(permission).Contains(this.Path.SecurityPath.Eval(domainObject).Id);
 
@@ -203,18 +197,11 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
         {
             var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
 
-            var eqIdentsExpr = ExpressionHelper.GetEquality<Guid>();
-
-            var getIdents = ExpressionHelper.Create(
-                                                (IPermission permission) =>
-                                                    permission.Restrictions
-                                                              .Where(
-                                                                  item => eqIdentsExpr.Eval(
-                                                                      item.SecurityContextTypeId,
-                                                                      securityContextTypeId))
-                                                              .Select(fi => fi.SecurityContextId))
-                                            .ExpandConst()
-                                            .InlineEval();
+            var getIdentsExpr = ExpressionHelper.Create(
+                (IPermission permission) =>
+                    permission.Restrictions
+                              .Where(item => item.SecurityContextTypeId == securityContextTypeId)
+                              .Select(fi => fi.SecurityContextId));
 
             var expander =
                 (IHierarchicalObjectQueryableExpander<Guid>)this.Factory.HierarchicalObjectExpanderFactory.Create(
@@ -222,7 +209,8 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
 
             var expandExpression = expander.GetExpandExpression(expandType);
 
-            var expandExpressionQ = from idents in getIdents
+            var expandExpressionQ = from idents in getIdentsExpr
+
                                     select expandExpression.Eval(idents);
 
             switch (this.Path.Mode)
@@ -233,7 +221,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
                         {
                             return (domainObject, permission) =>
 
-                                       !getIdents.Eval(permission).Any()
+                                       !getIdentsExpr.Eval(permission).Any()
 
                                        || this.Path.SecurityPathQ.Eval(domainObject)
                                               .Any(item => expandExpressionQ.Eval(permission).Contains(item.Id));
@@ -242,7 +230,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
                         {
                             return (domainObject, permission) =>
 
-                                       !getIdents.Eval(permission).Any()
+                                       !getIdentsExpr.Eval(permission).Any()
 
                                        || this.Path.SecurityPath.Eval(domainObject)
                                               .Any(item => expandExpressionQ.Eval(permission).Contains(item.Id));
@@ -255,21 +243,21 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
                         {
                             return (domainObject, permission) =>
 
-                                       !getIdents.Eval(permission).Any()
+                                       !getIdentsExpr.Eval(permission).Any()
 
                                        || !this.Path.SecurityPathQ.Eval(domainObject).Any()
 
-                                       || this.Path.SecurityPathQ.Eval(domainObject).Any(item => getIdents.Eval(permission).Contains(item.Id));
+                                       || this.Path.SecurityPathQ.Eval(domainObject).Any(item => getIdentsExpr.Eval(permission).Contains(item.Id));
                         }
                         else
                         {
                             return (domainObject, permission) =>
 
-                                       !getIdents.Eval(permission).Any()
+                                       !getIdentsExpr.Eval(permission).Any()
 
                                        || !this.Path.SecurityPath.Eval(domainObject).Any()
 
-                                       || this.Path.SecurityPath.Eval(domainObject).Any(item => getIdents.Eval(permission).Contains(item.Id));
+                                       || this.Path.SecurityPath.Eval(domainObject).Any(item => getIdentsExpr.Eval(permission).Contains(item.Id));
                         }
                     }
 

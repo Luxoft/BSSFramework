@@ -69,9 +69,13 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
 
             var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
 
-            var fullAccessFilter = ExpressionHelper.Create(
-                (IPermission permission) => !permission.Restrictions.Select(restriction => restriction.SecurityContextTypeId)
-                                                               .Contains(securityContextTypeId));
+            var getIdentsExpr = ExpressionHelper.Create(
+                (IPermission permission) =>
+                    permission.Restrictions
+                              .Where(item => item.SecurityContextTypeId == securityContextTypeId)
+                              .Select(fi => fi.SecurityContextId));
+
+            var fullAccessFilter = getIdentsExpr.Select(idents => !idents.Any());
 
             if (securityObjects.Any())
             {
@@ -79,13 +83,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
                                          .Create(typeof(TSecurityContext))
                                          .Expand(securityObjects.Select(securityObject => securityObject.Id), expandType.Reverse());
 
-                return fullAccessFilter.BuildOr(
-                    permission =>
-
-                        permission.Restrictions
-                                  .Where(restriction => securityIdents.Contains(restriction.SecurityContextId))
-                                  .Select(restriction => restriction.SecurityContextTypeId)
-                                  .Contains(securityContextTypeId));
+                return fullAccessFilter.BuildOr(getIdentsExpr.Select(idents => idents.Any(securityIdents.Contains)));
             }
             else
             {

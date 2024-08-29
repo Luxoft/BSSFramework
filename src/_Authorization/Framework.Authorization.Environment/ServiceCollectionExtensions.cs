@@ -12,6 +12,7 @@ using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
+using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -110,6 +111,6 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection CustomizeSecuritySystem(this IServiceCollection services)
     {
         return services.ReplaceScoped<ICurrentUser, AuthorizationCurrentUser>()
-                       .AddScoped<AuthorizationPermissionSystem>();
+                       .AddScoped<IPermissionSystem, AuthorizationPermissionSystem>();
     }
 }

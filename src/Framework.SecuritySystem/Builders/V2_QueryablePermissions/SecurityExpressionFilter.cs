@@ -1,14 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
 using Framework.Core;
-using Framework.Persistent;
 using Framework.SecuritySystem.Builders._Filter;
 
 namespace Framework.SecuritySystem.Builders.V2_QueryablePermissions;
 
 public class SecurityExpressionFilter<TDomainObject> : ISecurityExpressionFilter<TDomainObject>
-
-    where TDomainObject : class, IIdentityObject<Guid>
 {
     private readonly Lazy<Func<TDomainObject, IEnumerable<string>>> getAccessorsFunc;
 

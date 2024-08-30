@@ -11,7 +11,6 @@ namespace Framework.SecuritySystem.Builders.V1_MaterializedPermissions;
 
 public abstract class SecurityExpressionBuilderBase<TDomainObject>(SecurityExpressionBuilderFactory factory)
     : ISecurityExpressionBuilder<TDomainObject>
-    where TDomainObject : class, IIdentityObject<Guid>
 {
     internal readonly SecurityExpressionBuilderFactory Factory = factory;
 
@@ -28,7 +27,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
     SecurityExpressionBuilderFactory factory,
     TSecurityPath path)
     : SecurityExpressionBuilderBase<TDomainObject>(factory)
-    where TDomainObject : class, IIdentityObject<Guid>
     where TSecurityPath : SecurityPath<TDomainObject>
 {
     protected readonly TSecurityPath Path = path;
@@ -37,8 +35,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
         : SecurityExpressionBuilderBase<TDomainObject, TInnerPath>(factory, path)
         where TInnerPath : SecurityPath<TDomainObject>;
 
-    public abstract class
-        SecurityByIdentsExpressionBuilderBase<TSecurityContext, TInnerPath>(
+    public abstract class SecurityByIdentsExpressionBuilderBase<TSecurityContext, TInnerPath>(
         SecurityExpressionBuilderFactory factory,
         TInnerPath path) : SecurityPathExpressionBuilderBase<TInnerPath>(factory, path)
         where TSecurityContext : class, ISecurityContext, IIdentityObject<Guid>
@@ -67,11 +64,8 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
         {
             var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
-
-            var fullAccessFilter = ExpressionHelper.Create(
-                (IPermission permission) => !permission.Restrictions.Select(restriction => restriction.SecurityContextTypeId)
-                                                               .Contains(securityContextTypeId));
+            var fullAccessFilter =
+                ExpressionHelper.Create((IPermission permission) => !permission.GetRestrictions(typeof(TSecurityContext)).Any());
 
             if (securityObjects.Any())
             {
@@ -80,12 +74,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
                                          .Expand(securityObjects.Select(securityObject => securityObject.Id), expandType.Reverse());
 
                 return fullAccessFilter.BuildOr(
-                    permission =>
-
-                        permission.Restrictions
-                                  .Where(restriction => securityIdents.Contains(restriction.SecurityContextId))
-                                  .Select(restriction => restriction.SecurityContextTypeId)
-                                  .Contains(securityContextTypeId));
+                    permission => permission.GetRestrictions(typeof(TSecurityContext)).Any(securityIdents.Contains));
             }
             else
             {
@@ -118,9 +107,8 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
     public class SingleSecurityExpressionBuilder<TSecurityContext>(
         SecurityExpressionBuilderFactory factory,
         SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> path)
-        : SecurityByIdentsExpressionBuilderBase<TSecurityContext, SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext>>(
-            factory,
-            path)
+        : SecurityByIdentsExpressionBuilderBase<TSecurityContext, SecurityPath<TDomainObject>
+            .SingleSecurityPath<TSecurityContext>>(factory, path)
         where TSecurityContext : class, ISecurityContext, IIdentityObject<Guid>
     {
         protected override Func<IEnumerable<Guid>, Expression<Func<TDomainObject, bool>>> SecurityFilter
@@ -162,9 +150,8 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
     public class ManySecurityExpressionBuilder<TSecurityContext>(
         SecurityExpressionBuilderFactory factory,
         SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> path)
-        : SecurityByIdentsExpressionBuilderBase<TSecurityContext, SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext>>(
-            factory,
-            path)
+        : SecurityByIdentsExpressionBuilderBase<TSecurityContext, SecurityPath<TDomainObject>
+            .ManySecurityPath<TSecurityContext>>(factory, path)
         where TSecurityContext : class, ISecurityContext, IIdentityObject<Guid>
     {
         protected override Func<IEnumerable<Guid>, Expression<Func<TDomainObject, bool>>> SecurityFilter
@@ -174,38 +161,38 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
                 switch (this.Path.Mode)
                 {
                     case ManySecurityPathMode.AnyStrictly:
+                    {
+                        if (this.Path.SecurityPathQ != null)
                         {
-                            if (this.Path.SecurityPathQ != null)
-                            {
-                                return securityIdents => from securityObjects in this.Path.SecurityPathQ
+                            return securityIdents => from securityObjects in this.Path.SecurityPathQ
 
-                                                         select securityObjects.Any(item => securityIdents.Contains(item.Id));
-                            }
-                            else
-                            {
-                                return securityIdents => from securityObjects in this.Path.SecurityPath
-
-                                                         select securityObjects.Any(item => securityIdents.Contains(item.Id));
-                            }
+                                                     select securityObjects.Any(item => securityIdents.Contains(item.Id));
                         }
+                        else
+                        {
+                            return securityIdents => from securityObjects in this.Path.SecurityPath
+
+                                                     select securityObjects.Any(item => securityIdents.Contains(item.Id));
+                        }
+                    }
 
                     case ManySecurityPathMode.Any:
+                    {
+                        if (this.Path.SecurityPathQ != null)
                         {
-                            if (this.Path.SecurityPathQ != null)
-                            {
-                                return securityIdents => from securityObjects in this.Path.SecurityPathQ
+                            return securityIdents => from securityObjects in this.Path.SecurityPathQ
 
-                                                         select !securityObjects.Any()
-                                                                || securityObjects.Any(item => securityIdents.Contains(item.Id));
-                            }
-                            else
-                            {
-                                return securityIdents => from securityObjects in this.Path.SecurityPath
-
-                                                         select !securityObjects.Any()
-                                                                || securityObjects.Any(item => securityIdents.Contains(item.Id));
-                            }
+                                                     select !securityObjects.Any()
+                                                            || securityObjects.Any(item => securityIdents.Contains(item.Id));
                         }
+                        else
+                        {
+                            return securityIdents => from securityObjects in this.Path.SecurityPath
+
+                                                     select !securityObjects.Any()
+                                                            || securityObjects.Any(item => securityIdents.Contains(item.Id));
+                        }
+                    }
 
                     default:
 

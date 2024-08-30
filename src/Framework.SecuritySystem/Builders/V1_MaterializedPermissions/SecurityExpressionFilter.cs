@@ -1,13 +1,10 @@
 ﻿using Framework.Core;
 using Framework.HierarchicalExpand;
-using Framework.Persistent;
 using Framework.SecuritySystem.Builders._Filter;
 
 namespace Framework.SecuritySystem.Builders.V1_MaterializedPermissions;
 
 public class SecurityExpressionFilter<TDomainObject> : ISecurityExpressionFilter<TDomainObject>
-
-    where TDomainObject : class, IIdentityObject<Guid>
 {
     private readonly SecurityExpressionBuilderBase<TDomainObject> builder;
 

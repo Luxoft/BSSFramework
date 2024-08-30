@@ -1,6 +1,7 @@
 ﻿namespace Framework.HierarchicalExpand;
 
 public interface IHierarchicalObjectExpander<TIdent>
+    where TIdent : notnull
 {
     /// <summary>
     /// Получение полного списка связанных идентефикаторов

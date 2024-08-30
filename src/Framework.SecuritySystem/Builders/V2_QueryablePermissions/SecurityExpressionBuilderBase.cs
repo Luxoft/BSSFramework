@@ -12,7 +12,6 @@ namespace Framework.SecuritySystem.Builders.V2_QueryablePermissions;
 
 public abstract class SecurityExpressionBuilderBase<TDomainObject>(SecurityExpressionBuilderFactory factory)
     : ISecurityExpressionBuilder<TDomainObject>
-    where TDomainObject : class, IIdentityObject<Guid>
 {
     internal readonly SecurityExpressionBuilderFactory Factory = factory;
 
@@ -41,7 +40,6 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
     SecurityExpressionBuilderFactory factory,
     TSecurityPath path)
     : SecurityExpressionBuilderBase<TDomainObject>(factory)
-    where TDomainObject : class, IIdentityObject<Guid>
     where TSecurityPath : SecurityPath<TDomainObject>
 {
     protected readonly TSecurityPath Path = path;
@@ -64,11 +62,8 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
         {
             var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
-
-            var fullAccessFilter = ExpressionHelper.Create(
-                (IPermission permission) => !permission.Restrictions.Select(restriction => restriction.SecurityContextTypeId)
-                                                               .Contains(securityContextTypeId));
+            var fullAccessFilter =
+                ExpressionHelper.Create((IPermission permission) => !permission.GetRestrictions(typeof(TSecurityContext)).Any());
 
             if (securityObjects.Any())
             {
@@ -79,10 +74,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
                 return fullAccessFilter.BuildOr(
                     permission =>
 
-                        permission.Restrictions
-                                  .Where(restriction => securityIdents.Contains(restriction.SecurityContextId))
-                                  .Select(restriction => restriction.SecurityContextTypeId)
-                                  .Contains(securityContextTypeId));
+                        permission.GetRestrictions(typeof(TSecurityContext)).Any(securityIdents.Contains));
             }
             else
             {
@@ -128,20 +120,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
         public override Expression<Func<TDomainObject, IPermission, bool>> GetSecurityFilterExpression(
             HierarchicalExpandType expandType)
         {
-            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
-
-            var eqIdentsExpr = ExpressionHelper.GetEquality<Guid>();
-
-            var getIdents = ExpressionHelper.Create(
-                                                (IPermission permission) =>
-                                                    permission.Restrictions
-                                                              .Where(
-                                                                  item => eqIdentsExpr.Eval(
-                                                                      item.SecurityContextTypeId,
-                                                                      securityContextTypeId))
-                                                              .Select(fi => fi.SecurityContextId))
-                                            .ExpandConst()
-                                            .InlineEval();
+            var getIdents = ExpressionHelper.Create((IPermission permission) => permission.GetRestrictions(typeof(TSecurityContext)));
 
             var expander = this.Factory.HierarchicalObjectExpanderFactory.CreateQuery(typeof(TSecurityContext));
 
@@ -201,20 +180,7 @@ public abstract class SecurityExpressionBuilderBase<TDomainObject, TSecurityPath
         public override Expression<Func<TDomainObject, IPermission, bool>> GetSecurityFilterExpression(
             HierarchicalExpandType expandType)
         {
-            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
-
-            var eqIdentsExpr = ExpressionHelper.GetEquality<Guid>();
-
-            var getIdents = ExpressionHelper.Create(
-                                                (IPermission permission) =>
-                                                    permission.Restrictions
-                                                              .Where(
-                                                                  item => eqIdentsExpr.Eval(
-                                                                      item.SecurityContextTypeId,
-                                                                      securityContextTypeId))
-                                                              .Select(fi => fi.SecurityContextId))
-                                            .ExpandConst()
-                                            .InlineEval();
+            var getIdents = ExpressionHelper.Create((IPermission permission) => permission.GetRestrictions(typeof(TSecurityContext)));
 
             var expander =
                 (IHierarchicalObjectQueryableExpander<Guid>)this.Factory.HierarchicalObjectExpanderFactory.Create(

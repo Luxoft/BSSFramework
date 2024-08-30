@@ -2,7 +2,7 @@
 
 public interface IPermission
 {
-    IEnumerable<IPermissionRestriction> Restrictions { get; }
+    IEnumerable<Guid> GetRestrictions(Type securityContextType);
 
     string PrincipalName { get; }
 }

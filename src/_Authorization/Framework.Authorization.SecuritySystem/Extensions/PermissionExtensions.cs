@@ -1,13 +1,13 @@
-﻿using Framework.HierarchicalExpand;
+﻿using Framework.Authorization.Domain;
+using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.SecuritySystem;
 
 public static class PermissionExtensions
 {
     public static Dictionary<Type, List<Guid>> ToDictionary(
-        this IPermission permission,
+        this Permission permission,
         IRealTypeResolver realTypeResolver,
         ISecurityContextSource securityContextSource,
         IEnumerable<Type> securityTypes)
@@ -16,7 +16,7 @@ public static class PermissionExtensions
 
         var request = from restriction in permission.Restrictions
 
-                      join securityType in securityTypes on restriction.SecurityContextTypeId equals securityContextSource
+                      join securityType in securityTypes on restriction.SecurityContextType.Id equals securityContextSource
                           .GetSecurityContextInfo(realTypeResolver.Resolve(securityType)).Id
 
                       group restriction.SecurityContextId by securityType;

@@ -63,7 +63,9 @@ public static class ServiceCollectionExtensions
                        .AddKeyedScoped<IValidator<Permission>, PermissionGeneralValidator>(PermissionGeneralValidator.Key)
                        .AddKeyedScoped<IValidator<Permission>, PermissionDelegateValidator>(PermissionDelegateValidator.Key)
                        .AddKeyedScoped<IValidator<Permission>, PermissionRequiredContextValidator>(PermissionRequiredContextValidator.Key)
-                       .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>();
+                       .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>()
+
+                       .AddSingleton<IExpressionVisitorContainerItem, AuthorizationExpressionVisitorContainerItem>();
     }
 
     private static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)

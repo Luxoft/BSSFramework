@@ -18,7 +18,7 @@ public class VirtualPermissionSystem<TDomainObject>(
 {
     public Type PermissionType { get; } = typeof(TDomainObject);
 
-    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetPermissionRestrictions(Type securityContextType)
+    public Expression<Func<TDomainObject, IEnumerable<Guid>>>? GetPermissionRestrictions(Type securityContextType)
     {
         return bindingInfo.GetPermissionRestrictions(securityContextType);
     }

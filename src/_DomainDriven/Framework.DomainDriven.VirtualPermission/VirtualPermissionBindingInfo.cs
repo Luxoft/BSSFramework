@@ -39,20 +39,20 @@ public record VirtualPermissionBindingInfo<TDomainObject>(
 
 
 
-    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetPermissionRestrictions(Type securityContextType)
+    public Expression<Func<TDomainObject, IEnumerable<Guid>>>? GetPermissionRestrictions(Type securityContextType)
     {
         return this.GetType().GetMethod(nameof(this.GetTypedPermissionRestrictions), BindingFlags.Instance | BindingFlags.NonPublic, true)
                    .MakeGenericMethod(securityContextType)
                    .Invoke<Expression<Func<TDomainObject, IEnumerable<Guid>>>>(this);
     }
 
-    private Expression<Func<TDomainObject, IEnumerable<Guid>>> GetTypedPermissionRestrictions<TSecurityContext>()
+    private Expression<Func<TDomainObject, IEnumerable<Guid>>>? GetTypedPermissionRestrictions<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
         var expressions = this.GetTypedPermissionRestrictionsInternal<TSecurityContext>();
 
         return expressions.Match(
-            () => _ => new Guid[0],
+            () => null,
             single => single,
             many => many.Aggregate(
                 (state, expr) => from ids1 in state

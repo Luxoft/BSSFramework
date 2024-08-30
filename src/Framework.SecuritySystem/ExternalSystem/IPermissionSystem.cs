@@ -13,7 +13,7 @@ public interface IPermissionSystem : ISecuritySystemBase
 
 public interface IPermissionSystem<TPermission> : IPermissionSystem
 {
-    Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictions(Type securityContextType);
+    Expression<Func<TPermission, IEnumerable<Guid>>>? GetPermissionRestrictions(Type securityContextType);
 
     new IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 }

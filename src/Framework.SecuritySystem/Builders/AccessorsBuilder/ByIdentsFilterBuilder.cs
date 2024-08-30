@@ -20,20 +20,27 @@ public abstract class ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurit
 
         var getIdents = permissionSystem.GetPermissionRestrictions(typeof(TSecurityContext));
 
-        var fullAccessFilter = getIdents.Select(ident => !ident.Any());
-
-        if (securityObjects.Any())
+        if (getIdents == null)
         {
-            var securityIdents = hierarchicalObjectExpanderFactory
-                                 .Create(typeof(TSecurityContext))
-                                 .Expand(securityObjects.Select(securityObject => securityObject.Id), expandType.Reverse());
-
-            return fullAccessFilter.BuildOr(
-                getIdents.Select(restrictionIdents => restrictionIdents.Any(restrictionIdent => securityIdents.Contains(restrictionIdent))));
+            return _ => true;
         }
         else
         {
-            return fullAccessFilter;
+            var fullAccessFilter = getIdents.Select(ident => !ident.Any());
+
+            if (securityObjects.Any())
+            {
+                var securityIdents = hierarchicalObjectExpanderFactory
+                                     .Create(typeof(TSecurityContext))
+                                     .Expand(securityObjects.Select(securityObject => securityObject.Id), expandType.Reverse());
+
+                return fullAccessFilter.BuildOr(
+                    getIdents.Select(restrictionIdents => restrictionIdents.Any(restrictionIdent => securityIdents.Contains(restrictionIdent))));
+            }
+            else
+            {
+                return fullAccessFilter;
+            }
         }
     }
 

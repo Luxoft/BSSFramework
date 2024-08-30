@@ -64,7 +64,7 @@ public static class ServiceCollectionExtensions
         services.RegisterConfigurationBLL();
 
         services.ReplaceSingleton<IRealTypeResolver, ProjectionRealTypeResolver>();
-        services.ReplaceSingleton<ISecurityContextSource, ProjectionSecurityContextInfoService>();
+        services.ReplaceSingleton<ISecurityContextSource, ProjectionSecurityContextSource>();
 
         services.AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationRuntimeDomainEventDTOMapper>();
 

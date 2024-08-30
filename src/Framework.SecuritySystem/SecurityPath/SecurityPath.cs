@@ -14,8 +14,7 @@ public abstract record SecurityPath<TDomainObject>
     public IEnumerable<Type> GetUsedTypes() => this.GetInternalUsedTypes().Distinct();
 
     public abstract SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
-        Expression<Func<TNewDomainObject, TDomainObject>> selector)
-        where TNewDomainObject : class;
+        Expression<Func<TNewDomainObject, TDomainObject>> selector);
 
     public static SecurityPath<TDomainObject> Empty { get; } = SecurityPath<TDomainObject>.Condition(_ => true);
 
@@ -24,27 +23,27 @@ public abstract record SecurityPath<TDomainObject>
     #region Create
 
     public SecurityPath<TDomainObject> And<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
-        where TSecurityContext : class, ISecurityContext =>
+        where TSecurityContext : ISecurityContext =>
         this.And(securityPath, ManySecurityPathMode.Any);
 
     public SecurityPath<TDomainObject> And<TSecurityContext>(
         Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath,
         ManySecurityPathMode mode)
-        where TSecurityContext : class, ISecurityContext =>
+        where TSecurityContext : ISecurityContext =>
         this.And(Create(securityPath, mode));
 
     public SecurityPath<TDomainObject> Or<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath)
-        where TSecurityContext : class, ISecurityContext =>
+        where TSecurityContext : ISecurityContext =>
         this.Or(Create(securityPath));
 
     public SecurityPath<TDomainObject> Or<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
-        where TSecurityContext : class, ISecurityContext =>
+        where TSecurityContext : ISecurityContext =>
         this.Or(securityPath, ManySecurityPathMode.Any);
 
     public SecurityPath<TDomainObject> Or<TSecurityContext>(
         Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath,
         ManySecurityPathMode mode)
-        where TSecurityContext : class, ISecurityContext =>
+        where TSecurityContext : ISecurityContext =>
         this.Or(Create(securityPath, mode));
 
     public SecurityPath<TDomainObject> Or(SecurityPath<TDomainObject> other) => new OrSecurityPath(this, other);
@@ -52,7 +51,7 @@ public abstract record SecurityPath<TDomainObject>
     public SecurityPath<TDomainObject> And<TSecurityContext>(
         Expression<Func<TDomainObject, TSecurityContext>> securityPath,
         SingleSecurityMode mode = SingleSecurityMode.AllowNull)
-        where TSecurityContext : class, ISecurityContext =>
+        where TSecurityContext : ISecurityContext =>
         this.And(Create(securityPath, mode));
 
     public SecurityPath<TDomainObject> And(SecurityPath<TDomainObject> other) => new AndSecurityPath(this, other);
@@ -74,18 +73,18 @@ public abstract record SecurityPath<TDomainObject>
     public static SecurityPath<TDomainObject> Create<TSecurityContext>(
         Expression<Func<TDomainObject, TSecurityContext>> securityPath,
         SingleSecurityMode mode = SingleSecurityMode.AllowNull)
-        where TSecurityContext : class, ISecurityContext =>
+        where TSecurityContext : ISecurityContext =>
         new SingleSecurityPath<TSecurityContext>(securityPath, mode);
 
     public static SecurityPath<TDomainObject> Create<TSecurityContext>(
         Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
-        where TSecurityContext : class, ISecurityContext =>
+        where TSecurityContext : ISecurityContext =>
         Create(securityPath, ManySecurityPathMode.Any);
 
     public static SecurityPath<TDomainObject> Create<TSecurityContext>(
         Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath,
         ManySecurityPathMode mode)
-        where TSecurityContext : class, ISecurityContext =>
+        where TSecurityContext : ISecurityContext =>
         new ManySecurityPath<TSecurityContext>(securityPath, mode);
 
     public static SecurityPath<TDomainObject> CreateNested<TNestedObject>(
@@ -140,7 +139,7 @@ public abstract record SecurityPath<TDomainObject>
     public record SingleSecurityPath<TSecurityContext>(
         Expression<Func<TDomainObject, TSecurityContext>> SecurityPath,
         SingleSecurityMode Mode) : SecurityPath<TDomainObject>
-        where TSecurityContext : class, ISecurityContext
+        where TSecurityContext : ISecurityContext
     {
         protected override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
 
@@ -160,7 +159,7 @@ public abstract record SecurityPath<TDomainObject>
     }
 
     public record ManySecurityPath<TSecurityContext> : SecurityPath<TDomainObject>
-        where TSecurityContext : class, ISecurityContext
+        where TSecurityContext : ISecurityContext
     {
         public readonly Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> SecurityPath;
 

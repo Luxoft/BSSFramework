@@ -1,34 +1,35 @@
 ﻿using System.Linq.Expressions;
-using Framework.Core;
-using Framework.SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using Framework.Core;
+using Framework.SecuritySystem.UserSource;
 
 using static Framework.SecuritySystem.DomainSecurityRule;
 
 namespace Framework.SecuritySystem.Services;
 
-public class DomainSecurityProviderFactory(
+public class DomainSecurityProviderFactory<TDomainObject>(
     IServiceProvider serviceProvider,
     ISecurityRuleDeepOptimizer deepOptimizer,
     ISecurityRuleImplementationResolver implementationResolver,
-    IRoleBaseSecurityProviderFactory roleBaseSecurityProviderFactory) : IDomainSecurityProviderFactory
+    IRoleBaseSecurityProviderFactory<TDomainObject> roleBaseSecurityProviderFactory) : IDomainSecurityProviderFactory<TDomainObject>
 {
-    public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(
-        SecurityPath<TDomainObject> securityPath,
-        DomainSecurityRule securityRule)
+    public virtual ISecurityProvider<TDomainObject> Create(
+        DomainSecurityRule securityRule,
+        SecurityPath<TDomainObject> securityPath)
     {
-        return this.CreateInternal(securityPath, deepOptimizer.Optimize(securityRule));
+        return this.CreateInternal(deepOptimizer.Optimize(securityRule), securityPath);
     }
 
-    protected virtual ISecurityProvider<TDomainObject> CreateInternal<TDomainObject>(
-        SecurityPath<TDomainObject> securityPath,
-        DomainSecurityRule baseSecurityRule)
+    protected virtual ISecurityProvider<TDomainObject> CreateInternal(
+        DomainSecurityRule baseSecurityRule,
+        SecurityPath<TDomainObject> securityPath)
     {
         switch (baseSecurityRule)
         {
             case RoleBaseSecurityRule securityRule:
-                return roleBaseSecurityProviderFactory.Create(securityPath, securityRule);
+                return roleBaseSecurityProviderFactory.Create(securityRule, securityPath);
 
             case CurrentUserSecurityRule securityRule:
             {
@@ -101,27 +102,27 @@ public class DomainSecurityProviderFactory(
 
                 var dynamicRoleFactory = (IFactory<DomainSecurityRule>)dynamicRoleFactoryUntyped;
 
-                return this.CreateInternal(securityPath, dynamicRoleFactory.Create());
+                return this.CreateInternal(dynamicRoleFactory.Create(), securityPath);
             }
 
             case OverrideAccessDeniedMessageSecurityRule securityRule:
             {
-                return this.CreateInternal(securityPath, securityRule.BaseSecurityRule)
+                return this.CreateInternal(securityRule.BaseSecurityRule, securityPath)
                            .OverrideAccessDeniedResult(
                                accessDeniedResult => accessDeniedResult with { CustomMessage = securityRule.CustomMessage });
             }
 
             case SecurityRuleHeader securityRuleHeader:
-                return this.CreateInternal(securityPath, implementationResolver.Resolve(securityRuleHeader));
+                return this.CreateInternal(implementationResolver.Resolve(securityRuleHeader), securityPath);
 
             case OrSecurityRule securityRule:
-                return this.CreateInternal(securityPath, securityRule.Left).Or(this.CreateInternal(securityPath, securityRule.Right));
+                return this.CreateInternal(securityRule.Left, securityPath).Or(this.CreateInternal(securityRule.Right, securityPath));
 
             case AndSecurityRule securityRule:
-                return this.CreateInternal(securityPath, securityRule.Left).And(this.CreateInternal(securityPath, securityRule.Right));
+                return this.CreateInternal(securityRule.Left, securityPath).And(this.CreateInternal(securityRule.Right, securityPath));
 
             case NegateSecurityRule securityRule:
-                return this.CreateInternal(securityPath, securityRule.InnerRule).Negate();
+                return this.CreateInternal(securityRule.InnerRule, securityPath).Negate();
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(baseSecurityRule));

@@ -7,22 +7,20 @@ using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 
-public abstract class ByIdentsFilterBuilder<TDomainObject, TSecurityContext>(
-    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-    ISecurityContextSource securityContextSource) : AccessorsFilterBuilder<TDomainObject>
+public abstract class ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
+    IPermissionSystem<TPermission> permissionSystem,
+    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory) : AccessorsFilterBuilder<TPermission, TDomainObject>
     where TSecurityContext : class, ISecurityContext, IIdentityObject<Guid>
 {
-    public override Expression<Func<IPermission, bool>> GetAccessorsFilter(
+    public override Expression<Func<TPermission, bool>> GetAccessorsFilter(
         TDomainObject domainObject,
         HierarchicalExpandType expandType)
     {
         var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-        var securityContextTypeId = securityContextSource.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
+        var getIdents = permissionSystem.GetPermissionRestrictions(typeof(TSecurityContext));
 
-        var fullAccessFilter = ExpressionHelper.Create(
-            (IPermission permission) => !permission.GetRestrictions(typeof(TSecurityContext))
-                                                   .Contains(securityContextTypeId));
+        var fullAccessFilter = getIdents.Select(ident => !ident.Any());
 
         if (securityObjects.Any())
         {
@@ -31,10 +29,7 @@ public abstract class ByIdentsFilterBuilder<TDomainObject, TSecurityContext>(
                                  .Expand(securityObjects.Select(securityObject => securityObject.Id), expandType.Reverse());
 
             return fullAccessFilter.BuildOr(
-                permission =>
-
-                    permission.GetRestrictions(typeof(TSecurityContext))
-                              .Any(restrictionId => securityIdents.Contains(restrictionId)));
+                getIdents.Select(restrictionIdents => restrictionIdents.Any(restrictionIdent => securityIdents.Contains(restrictionIdent))));
         }
         else
         {

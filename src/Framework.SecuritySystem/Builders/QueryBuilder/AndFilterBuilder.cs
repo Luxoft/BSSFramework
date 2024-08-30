@@ -4,10 +4,10 @@ using Framework.Core;
 
 namespace Framework.SecuritySystem.Builders.QueryBuilder;
 
-public class AndFilterBuilder<TDomainObject>(
-    SecurityFilterBuilderFactory<TDomainObject> builderFactory,
+public class AndFilterBuilder<TPermission, TDomainObject>(
+    SecurityFilterBuilderFactory<TPermission, TDomainObject> builderFactory,
     SecurityPath<TDomainObject>.AndSecurityPath securityPath)
-    : BinaryFilterBuilder<TDomainObject, SecurityPath<TDomainObject>.AndSecurityPath>(builderFactory, securityPath)
+    : BinaryFilterBuilder<TPermission, TDomainObject, SecurityPath<TDomainObject>.AndSecurityPath>(builderFactory, securityPath)
 {
     protected override Expression<Func<TArg1, TArg2, bool>> BuildOperation<TArg1, TArg2>(
         Expression<Func<TArg1, TArg2, bool>> arg1,

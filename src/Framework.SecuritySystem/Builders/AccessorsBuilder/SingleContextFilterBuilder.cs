@@ -1,14 +1,15 @@
 ﻿using Framework.Core;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
+using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 
-public class SingleContextFilterBuilder<TDomainObject, TSecurityContext>(
+public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
+    IPermissionSystem<TPermission> permissionSystem,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-    ISecurityContextSource securityContextSource,
     SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath)
-    : ByIdentsFilterBuilder<TDomainObject, TSecurityContext>(hierarchicalObjectExpanderFactory, securityContextSource)
+    : ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(permissionSystem, hierarchicalObjectExpanderFactory)
     where TSecurityContext : class, ISecurityContext, IIdentityObject<Guid>
 {
     protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject)

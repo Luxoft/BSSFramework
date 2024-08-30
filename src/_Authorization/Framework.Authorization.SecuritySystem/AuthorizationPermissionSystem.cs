@@ -1,4 +1,7 @@
-﻿using Framework.SecuritySystem;
+﻿using System.Linq.Expressions;
+
+using Framework.Authorization.Domain;
+using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -8,10 +11,22 @@ namespace Framework.Authorization.SecuritySystem;
 public class AuthorizationPermissionSystem(
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IAvailablePermissionSource availablePermissionSource,
+    ISecurityContextSource securityContextSource,
     IServiceProvider serviceProvider)
-    : AuthorizationSystemBase(accessDeniedExceptionService, availablePermissionSource, true), IPermissionSystem
+    : AuthorizationSystemBase(accessDeniedExceptionService, availablePermissionSource, true), IPermissionSystem<Permission>
 {
-    public IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
+    public Type PermissionType { get; } = typeof(Permission);
+
+    public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictions(Type securityContextType)
+    {
+        var securityContextTypeId = securityContextSource.GetSecurityContextInfo(securityContextType).Id;
+
+        return permission => permission.Restrictions
+                                       .Where(restriction => restriction.SecurityContextType.Id == securityContextTypeId)
+                                       .Select(restriction => restriction.SecurityContextId);
+    }
+
+    public IPermissionSource<Permission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         return ActivatorUtilities.CreateInstance<AuthorizationPermissionSource>(serviceProvider, securityRule);
     }
@@ -20,5 +35,9 @@ public class AuthorizationPermissionSystem(
     {
         return ActivatorUtilities.CreateInstance<AuthorizationAvailableSecurityRoleSource>(serviceProvider)
                                  .GetAvailableSecurityRoles(cancellationToken);
+    }
+    IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
+    {
+        return this.GetPermissionSource(securityRule);
     }
 }

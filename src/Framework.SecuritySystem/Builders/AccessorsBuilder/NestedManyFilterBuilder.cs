@@ -2,17 +2,16 @@
 
 using Framework.Core;
 using Framework.HierarchicalExpand;
-using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 
-public class NestedManyFilterBuilder<TDomainObject, TNestedObject>(
-    AccessorsFilterBuilderFactory<TNestedObject> nestedBuilderFactory,
-    SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath) : AccessorsFilterBuilder<TDomainObject>
+public class NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(
+    AccessorsFilterBuilderFactory<TPermission, TNestedObject> nestedBuilderFactory,
+    SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath) : AccessorsFilterBuilder<TPermission, TDomainObject>
 {
-    private AccessorsFilterBuilder<TNestedObject> NestedBuilder { get; } = nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath);
+    private AccessorsFilterBuilder<TPermission, TNestedObject> NestedBuilder { get; } = nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath);
 
-    public override Expression<Func<IPermission, bool>> GetAccessorsFilter(
+    public override Expression<Func<TPermission, bool>> GetAccessorsFilter(
         TDomainObject domainObject,
         HierarchicalExpandType expandType) =>
         securityPath.NestedObjectsPath.Eval(domainObject, LambdaCompileCache)

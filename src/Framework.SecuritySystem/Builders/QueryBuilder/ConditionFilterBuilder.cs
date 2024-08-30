@@ -2,15 +2,14 @@
 
 using Framework.Core;
 using Framework.HierarchicalExpand;
-using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Builders.QueryBuilder;
 
-public class ConditionFilterBuilder<TDomainObject>(
+public class ConditionFilterBuilder<TPermission, TDomainObject>(
     SecurityPath<TDomainObject>.ConditionPath securityPath)
-    : SecurityFilterBuilder<TDomainObject>
+    : SecurityFilterBuilder<TPermission, TDomainObject>
 {
-    public override Expression<Func<TDomainObject, IPermission, bool>> GetSecurityFilterExpression(
+    public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
         HierarchicalExpandType expandType)
     {
         var securityFilter = securityPath.SecurityFilter;

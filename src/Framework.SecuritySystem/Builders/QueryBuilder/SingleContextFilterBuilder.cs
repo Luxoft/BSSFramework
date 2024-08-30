@@ -7,16 +7,17 @@ using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Builders.QueryBuilder;
 
-public class SingleContextFilterBuilder<TDomainObject, TSecurityContext>(
+public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
+    IPermissionSystem<TPermission> permissionSystem,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath)
-    : SecurityFilterBuilder<TDomainObject>
+    : SecurityFilterBuilder<TPermission, TDomainObject>
     where TSecurityContext : class, ISecurityContext, IIdentityObject<Guid>
 {
-    public override Expression<Func<TDomainObject, IPermission, bool>> GetSecurityFilterExpression(
+    public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
             HierarchicalExpandType expandType)
     {
-        var getIdents = ExpressionHelper.Create((IPermission permission) => permission.GetRestrictions(typeof(TSecurityContext)));
+        var getIdents = permissionSystem.GetPermissionRestrictions(typeof(TSecurityContext));
 
         var expander = hierarchicalObjectExpanderFactory.CreateQuery(typeof(TSecurityContext));
 

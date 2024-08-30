@@ -15,7 +15,7 @@ public class AuthorizationPermissionSource(
     IRealTypeResolver realTypeResolver,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     ISecurityContextSource securityContextSource,
-    DomainSecurityRule.RoleBaseSecurityRule securityRule) : IPermissionSource
+    DomainSecurityRule.RoleBaseSecurityRule securityRule) : IPermissionSource<Permission>
 {
     public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
     {
@@ -29,22 +29,21 @@ public class AuthorizationPermissionSource(
                .ToList();
     }
 
-    public IQueryable<IPermission> GetPermissionQuery()
+    public IQueryable<Permission> GetPermissionQuery()
     {
         return this.GetSecurityPermissions(availablePermissionSource.CreateFilter(securityRule: securityRule));
     }
 
-    public IEnumerable<string> GetAccessors(Expression<Func<IPermission, bool>> permissionFilter)
+    public IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionFilter)
     {
         return this.GetSecurityPermissions(availablePermissionSource.CreateFilter(securityRule, applyCurrentUser: false))
                    .Where(permissionFilter)
-                   .Select(permission => permission.PrincipalName);
+                   .Select(permission => permission.Principal.Name);
     }
 
-    private IQueryable<IPermission> GetSecurityPermissions(AvailablePermissionFilter availablePermissionFilter)
+    private IQueryable<Permission> GetSecurityPermissions(AvailablePermissionFilter availablePermissionFilter)
     {
         return permissionRepository.GetQueryable()
-                                   .Where(availablePermissionFilter.ToFilterExpression())
-                                   .Select(permission => permission.ConvertPermission(securityContextSource));
+                                   .Where(availablePermissionFilter.ToFilterExpression());
     }
 }

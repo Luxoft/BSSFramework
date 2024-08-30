@@ -4,29 +4,31 @@ using Framework.SecuritySystem.Expanders;
 
 namespace Framework.SecuritySystem.Services;
 
-public class RoleBaseSecurityProviderFactory(
-    ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
+public class RoleBaseSecurityProviderFactory<TDomainObject>(
+    ISecurityFilterFactory<TDomainObject> securityFilterFactory,
+    IAccessorsFilterFactory<TDomainObject> accessorsFilterFactory,
     ISecurityRuleExpander securityRuleExpander,
     ISecurityRoleSource securityRoleSource,
-    ISecurityPathRestrictionService securityPathRestrictionService) : IRoleBaseSecurityProviderFactory
+    ISecurityPathRestrictionService securityPathRestrictionService) : IRoleBaseSecurityProviderFactory<TDomainObject>
 {
-    public virtual ISecurityProvider<TDomainObject> Create<TDomainObject>(
-        SecurityPath<TDomainObject> securityPath,
-        DomainSecurityRule.RoleBaseSecurityRule securityRule)
+    public virtual ISecurityProvider<TDomainObject> Create(
+        DomainSecurityRule.RoleBaseSecurityRule securityRule,
+        SecurityPath<TDomainObject> securityPath)
     {
         return this.GetRegroupedRoles(securityRule)
-                   .Select(g => this.Create(securityPath, g.SecurityRule, g.Restriction)).Or();
+                   .Select(g => this.Create(g.SecurityRule, securityPath, g.Restriction)).Or();
     }
 
-    private ISecurityProvider<TDomainObject> Create<TDomainObject>(
-        SecurityPath<TDomainObject> securityPath,
+    private ISecurityProvider<TDomainObject> Create(
         DomainSecurityRule.RoleBaseSecurityRule securityRule,
+        SecurityPath<TDomainObject> securityPath,
         SecurityPathRestriction restriction)
     {
         return new RoleBaseSecurityPathProvider<TDomainObject>(
-            securityPathRestrictionService.ApplyRestriction(securityPath, restriction),
+            securityFilterFactory,
+            accessorsFilterFactory,
             securityRule,
-            securityExpressionBuilderFactory);
+            securityPathRestrictionService.ApplyRestriction(securityPath, restriction));
     }
 
     private IEnumerable<(DomainSecurityRule.ExpandedRolesSecurityRule SecurityRule, SecurityPathRestriction Restriction)> GetRegroupedRoles(

@@ -5,14 +5,14 @@ namespace Framework.SecuritySystem;
 
 public class ContextDomainSecurityService<TDomainObject>(
     ISecurityRuleExpander securityRuleExpander,
-    IDomainSecurityProviderFactory domainSecurityProviderFactory,
+    IDomainSecurityProviderFactory<TDomainObject> domainSecurityProviderFactory,
     SecurityPath<TDomainObject>? securityPath = null)
     : DomainSecurityService<TDomainObject>(securityRuleExpander)
 {
     protected virtual ISecurityProvider<TDomainObject> Create(
-        SecurityPath<TDomainObject> customSecurityPath,
-        DomainSecurityRule securityRule) => domainSecurityProviderFactory.Create(customSecurityPath, securityRule);
+        DomainSecurityRule securityRule,
+        SecurityPath<TDomainObject> customSecurityPath) => domainSecurityProviderFactory.Create(securityRule, customSecurityPath);
 
     protected override ISecurityProvider<TDomainObject> CreateFinalSecurityProvider(DomainSecurityRule securityRule) =>
-        this.Create(securityPath ?? SecurityPath<TDomainObject>.Empty, securityRule);
+        this.Create(securityRule, securityPath ?? SecurityPath<TDomainObject>.Empty);
 }

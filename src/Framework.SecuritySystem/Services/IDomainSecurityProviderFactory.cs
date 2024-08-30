@@ -1,8 +1,8 @@
 ﻿namespace Framework.SecuritySystem.Services;
 
-public interface IDomainSecurityProviderFactory
+public interface IDomainSecurityProviderFactory<TDomainObject>
 {
-    ISecurityProvider<TDomainObject> Create<TDomainObject>(
-        SecurityPath<TDomainObject> securityPath,
-        DomainSecurityRule securityRule);
+    ISecurityProvider<TDomainObject> Create(
+        DomainSecurityRule securityRule,
+        SecurityPath<TDomainObject> securityPath);
 }

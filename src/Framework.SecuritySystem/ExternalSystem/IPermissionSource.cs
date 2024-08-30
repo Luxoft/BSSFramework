@@ -5,11 +5,11 @@ namespace Framework.SecuritySystem.ExternalSystem;
 public interface IPermissionSource
 {
     List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes);
+}
 
-    IQueryable<IPermission> GetPermissionQuery();
+public interface IPermissionSource<TPermission> : IPermissionSource
+{
+    IQueryable<TPermission> GetPermissionQuery();
 
-    Expression<Func<IPermission, IEnumerable<Guid>>> GetPermissionRestrictionExpression<TSecurityContext>()
-        where TSecurityContext : ISecurityContext;
-
-    IEnumerable<string> GetAccessors(Expression<Func<IPermission, bool>> permissionFilter);
+    IEnumerable<string> GetAccessors(Expression<Func<TPermission, bool>> permissionFilter);
 }

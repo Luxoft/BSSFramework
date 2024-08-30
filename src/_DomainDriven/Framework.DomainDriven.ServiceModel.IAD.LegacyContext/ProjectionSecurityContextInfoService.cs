@@ -3,7 +3,7 @@ using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class ProjectionSecurityContextInfoService(
+public class ProjectionSecurityContextSource(
     IEnumerable<SecurityContextInfo> securityContextInfoList,
     IRealTypeResolver realTypeResolver)
     : SecurityContextSource(securityContextInfoList)

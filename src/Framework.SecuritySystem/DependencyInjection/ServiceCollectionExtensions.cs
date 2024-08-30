@@ -2,7 +2,10 @@
 
 using Framework.DependencyInjection;
 using Framework.SecuritySystem.Builders._Factory;
-using Framework.SecuritySystem.Builders.V1_MaterializedPermissions;
+
+using Framework.SecuritySystem.Builders.AccessorsBuilder;
+using Framework.SecuritySystem.Builders.MaterializedBuilder;
+
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.PermissionOptimization;
@@ -29,7 +32,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection RegisterSecurityContextInfoService(
+    public static IServiceCollection RegisterSecurityContextSource(
         this IServiceCollection services,
         Action<ISecurityContextInfoBuilder> setup)
     {
@@ -102,13 +105,14 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
                        .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
                        .AddSingleton<ISecurityContextSource, SecurityContextSource>()
-                       .AddScoped<IDomainSecurityProviderFactory, DomainSecurityProviderFactory>()
                        .AddSingleton<ISecurityRuleBasicOptimizer, SecurityRuleBasicOptimizer>()
                        .AddSingleton<ISecurityRuleDeepOptimizer, SecurityRuleDeepOptimizer>()
                        .AddSingleton<ISecurityRuleImplementationResolver, SecurityRuleImplementationResolver>()
-                       .AddScoped<IRoleBaseSecurityProviderFactory, RoleBaseSecurityProviderFactory>()
+                       .AddScoped(typeof(IRoleBaseSecurityProviderFactory<>), typeof(RoleBaseSecurityProviderFactory<>))
+                       .AddScoped(typeof(IDomainSecurityProviderFactory<>), typeof(DomainSecurityProviderFactory<>))
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
-                       .AddScoped<ISecurityExpressionBuilderFactory, SecurityExpressionBuilderFactory>()
+                       .AddScoped(typeof(ISecurityFilterFactory<>), typeof(SecurityFilterBuilderFactory<>))
+                       .AddScoped(typeof(IAccessorsFilterFactory<>), typeof(AccessorsFilterBuilderFactory<>))
                        .AddKeyedScoped(
                            typeof(ISecurityProvider<>),
                            nameof(DomainSecurityRule.CurrentUser),
@@ -120,7 +124,7 @@ public static class ServiceCollectionExtensions
                        .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
                        .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))
-                       .AddScoped<ISecuritySystem, SecuritySystem>()
+                       .AddScoped<ISecuritySystem, RootSecuritySystem>()
 
                        .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
 

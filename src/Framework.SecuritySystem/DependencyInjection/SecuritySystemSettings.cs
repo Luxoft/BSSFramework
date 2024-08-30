@@ -37,7 +37,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public ISecuritySystemSettings AddSecurityContext(Action<ISecurityContextInfoBuilder> setup)
     {
-        this.RegisterActions.Add(sc => sc.RegisterSecurityContextInfoService(setup));
+        this.RegisterActions.Add(sc => sc.RegisterSecurityContextSource(setup));
 
         return this;
     }

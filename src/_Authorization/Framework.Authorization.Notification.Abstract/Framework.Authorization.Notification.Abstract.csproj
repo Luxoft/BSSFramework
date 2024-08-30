@@ -3,6 +3,7 @@
     <PackageId>Luxoft.Framework.Authorization.Notification.Abstract</PackageId>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
   </ItemGroup>
 </Project>

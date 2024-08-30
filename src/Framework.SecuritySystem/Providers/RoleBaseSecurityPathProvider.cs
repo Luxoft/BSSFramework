@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 using Framework.SecuritySystem.Builders._Factory;
-using Framework.SecuritySystem.Builders._Filter;
 
 namespace Framework.SecuritySystem;
 
@@ -8,30 +7,23 @@ namespace Framework.SecuritySystem;
 /// Контекстный провайдер доступа
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
-public class RoleBaseSecurityPathProvider<TDomainObject> : ISecurityProvider<TDomainObject>
+public class RoleBaseSecurityPathProvider<TDomainObject>(
+    ISecurityFilterFactory<TDomainObject> securityFilterFactory,
+    IAccessorsFilterFactory<TDomainObject> accessorsFilterFactory,
+    DomainSecurityRule.RoleBaseSecurityRule securityRule,
+    SecurityPath<TDomainObject> securityPath)
+    : ISecurityProvider<TDomainObject>
 {
-    private readonly DomainSecurityRule securityRule;
+    private readonly Lazy<SecurityFilterInfo<TDomainObject>> lazySecurityFilter =
+        LazyHelper.Create(() => securityFilterFactory.CreateFilter(securityRule, securityPath));
 
-    private readonly Lazy<Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>>> injectFilterFunc;
+    private readonly Lazy<AccessorsFilterInfo<TDomainObject>> lazyAccessorsFilter =
+        LazyHelper.Create(() => accessorsFilterFactory.CreateFilter(securityRule, securityPath));
 
-    private readonly Lazy<ISecurityExpressionFilter<TDomainObject>> lazyFilter;
+    public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable) =>
+        this.lazySecurityFilter.Value.InjectFunc(queryable);
 
-    public RoleBaseSecurityPathProvider(
-        SecurityPath<TDomainObject> securityPath,
-        DomainSecurityRule.RoleBaseSecurityRule securityRule,
-        ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
-    {
-        this.securityRule = securityRule;
-
-        var securityExpressionBuilder = securityExpressionBuilderFactory.CreateBuilder(securityPath);
-
-        this.lazyFilter = LazyHelper.Create(() => securityExpressionBuilder.GetFilter(securityRule, securityPath.GetUsedTypes()));
-        this.injectFilterFunc = LazyHelper.Create(() => this.lazyFilter.Value.InjectFunc);
-    }
-
-    public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable) => this.injectFilterFunc.Value(queryable);
-
-    public bool HasAccess(TDomainObject domainObject) => this.lazyFilter.Value.HasAccessFunc(domainObject);
+    public bool HasAccess(TDomainObject domainObject) => this.lazySecurityFilter.Value.HasAccessFunc(domainObject);
 
     public AccessResult GetAccessResult(TDomainObject domainObject)
     {
@@ -41,10 +33,10 @@ public class RoleBaseSecurityPathProvider<TDomainObject> : ISecurityProvider<TDo
         }
         else
         {
-            return AccessResult.AccessDeniedResult.Create(domainObject, this.securityRule);
+            return AccessResult.AccessDeniedResult.Create(domainObject, securityRule);
         }
     }
 
     public SecurityAccessorData GetAccessorData(TDomainObject domainObject) =>
-        new SecurityAccessorData.FixedSecurityAccessorData(this.lazyFilter.Value.GetAccessors(domainObject).ToList());
+        new SecurityAccessorData.FixedSecurityAccessorData(this.lazyAccessorsFilter.Value.GetAccessorsFunc(domainObject).ToList());
 }

@@ -4,7 +4,6 @@ using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
-using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.Domain;
 
@@ -18,19 +17,17 @@ namespace Framework.Authorization.Domain;
 [System.Diagnostics.DebuggerDisplay("Principal={Principal.Name}, Role={Role.Name}")]
 public class Permission : AuditPersistentDomainObjectBase,
 
-                                  IDetail<Principal>,
+                          IDetail<Principal>,
 
-                                  IMaster<PermissionRestriction>,
+                          IMaster<PermissionRestriction>,
 
-                                  IMaster<Permission>,
+                          IMaster<Permission>,
 
-                                  IDetail<Permission>,
+                          IDetail<Permission>,
 
-                                  IDefaultHierarchicalPersistentDomainObjectBase<Permission>,
+                          IDefaultHierarchicalPersistentDomainObjectBase<Permission>,
 
-                                  IPeriodObject,
-
-                                  IPermission
+                          IPeriodObject
 {
     private readonly ICollection<PermissionRestriction> restrictions = new List<PermissionRestriction>();
 
@@ -68,7 +65,7 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// <param name="principal">Принципал</param>
     /// <param name="delegatedFrom">Пермиссия, от которой происходит делегирование</param>
     public Permission(Principal principal, Permission delegatedFrom)
-            : this(principal)
+        : this(principal)
     {
         if (delegatedFrom == null) throw new ArgumentNullException(nameof(delegatedFrom));
 
@@ -99,44 +96,25 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// <summary>
     /// Период действия пермиссии
     /// </summary>
-    public virtual Period Period
-    {
-        get { return this.period.Round(); }
-        set { this.period = value.Round(); }
-    }
+    public virtual Period Period { get => this.period.Round(); set => this.period = value.Round(); }
 
     /// <summary>
     /// Приниципал, к которому относится данная пермиссия
     /// </summary>
-    public virtual Principal Principal
-    {
-        get { return this.principal; }
-    }
+    public virtual Principal Principal => this.principal;
 
     /// <summary>
     /// Бизнес-роль, которую содержит пермиссия
     /// </summary>
     [Required]
     [FixedPropertyValidator]
-    public virtual BusinessRole Role
-    {
-        get { return this.role; }
-        set { this.role = value; }
-    }
+    public virtual BusinessRole Role { get => this.role; set => this.role = value; }
 
     /// <summary>
     /// Комментарий к пермиссии
     /// </summary>
     [MaxLength]
-    public virtual string Comment
-    {
-        get { return this.comment.TrimNull(); }
-        set { this.comment = value.TrimNull(); }
-    }
-
-    [ExpandPath("Principal.Name")]
-    [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual string PrincipalName => this.Principal.Name;
+    public virtual string Comment { get => this.comment.TrimNull(); set => this.comment = value.TrimNull(); }
 
     ICollection<PermissionRestriction> IMaster<PermissionRestriction>.Details => (ICollection<PermissionRestriction>)this.Restrictions;
 
@@ -149,6 +127,4 @@ public class Permission : AuditPersistentDomainObjectBase,
     Permission IParentSource<Permission>.Parent => this.DelegatedFrom;
 
     IEnumerable<Permission> IChildrenSource<Permission>.Children => this.DelegatedTo;
-
-    IEnumerable<IPermissionRestriction> IPermission.Restrictions => this.Restrictions;
 }

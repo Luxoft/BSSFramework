@@ -1,4 +1,9 @@
-﻿using Framework.QueryableSource;
+﻿using System.Linq.Expressions;
+using System.Reflection;
+
+using Framework.Core;
+using Framework.Persistent;
+using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.ExternalSystem;
@@ -10,20 +15,26 @@ namespace Framework.DomainDriven.VirtualPermission;
 
 public class VirtualPermissionSystem<TDomainObject>(
     ISecurityRuleExpander securityRuleExpander,
-    ISecurityContextSource securityContextSource,
     ICurrentUser currentUser,
     IQueryableSource queryableSource,
-    VirtualPermissionBindingInfo<TDomainObject> bindingInfo) : IPermissionSystem
+    VirtualPermissionBindingInfo<TDomainObject> bindingInfo) : IPermissionSystem<TDomainObject>
 {
-    public IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
+    public Type PermissionType { get; } = typeof(TDomainObject);
+
+    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetPermissionRestrictions(Type securityContextType)
+    {
+        return bindingInfo.GetPermissionRestrictions(securityContextType);
+    }
+
+    public IPermissionSource<TDomainObject> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         if (securityRuleExpander.FullExpand(securityRule).SecurityRoles.Contains(bindingInfo.SecurityRole))
         {
-            return new VirtualPermissionSource<TDomainObject>(securityContextSource, currentUser, queryableSource, bindingInfo);
+            return new VirtualPermissionSource<TDomainObject>(currentUser, queryableSource, bindingInfo);
         }
         else
         {
-            return new EmptyPermissionSource();
+            return new EmptyPermissionSource<TDomainObject>();
         }
     }
 
@@ -31,4 +42,14 @@ public class VirtualPermissionSystem<TDomainObject>(
         await this.GetPermissionSource(bindingInfo.SecurityRole).GetPermissionQuery().AnyAsync(cancellationToken)
             ? [bindingInfo.SecurityRole]
             : [];
+
+    public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule)
+    {
+        return this.GetPermissionSource(securityRule).GetPermissionQuery().Any();
+    }
+
+    IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
+    {
+        return this.GetPermissionSource(securityRule);
+    }
 }

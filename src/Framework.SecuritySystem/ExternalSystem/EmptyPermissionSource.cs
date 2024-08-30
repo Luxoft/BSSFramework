@@ -2,11 +2,11 @@
 
 namespace Framework.SecuritySystem.ExternalSystem;
 
-public class EmptyPermissionSource : IPermissionSource
+public class EmptyPermissionSource<TPermission> : IPermissionSource<TPermission>
 {
-    public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes) => [];
+    public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> _) => [];
 
-    public IQueryable<IPermission> GetPermissionQuery() => Enumerable.Empty<IPermission>().AsQueryable();
+    public IQueryable<TPermission> GetPermissionQuery() => Enumerable.Empty<TPermission>().AsQueryable();
 
-    public IEnumerable<string> GetAccessors(Expression<Func<IPermission, bool>> permissionFilter) => [];
+    public IEnumerable<string> GetAccessors(Expression<Func<TPermission, bool>> _) => [];
 }

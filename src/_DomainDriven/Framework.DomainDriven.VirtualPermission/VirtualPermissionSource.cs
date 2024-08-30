@@ -10,86 +10,36 @@ using Framework.SecuritySystem.UserSource;
 namespace Framework.DomainDriven.VirtualPermission;
 
 public class VirtualPermissionSource<TDomainObject>(
-    ISecurityContextSource securityContextSource,
     ICurrentUser currentUser,
     IQueryableSource queryableSource,
-    VirtualPermissionBindingInfo<TDomainObject> bindingInfo) : IPermissionSource
+    VirtualPermissionBindingInfo<TDomainObject> bindingInfo) : IPermissionSource<TDomainObject>
 {
     public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
     {
-        var permissions = this.GetPermissionQuery().ToList();
+        var permissions = this.GetPermissionQuery(true).ToList();
 
-        return permissions.Select(this.ConvertPermission).ToList();
+        return permissions.Select(permission => this.ConvertPermission(permission, securityTypes)).ToList();
     }
 
-    public IQueryable<IPermission> GetPermissionQuery(bool applyCurrentUser) =>
-        this.GetPermissionQuery().Pipe(applyCurrentUser, q => q.Where(p => p.PrincipalName == currentUser.Name));
-
-    public IQueryable<IPermission> GetPermissionQuery()
+    public IQueryable<TDomainObject> GetPermissionQuery()
     {
-        var baseQueryable = queryableSource.GetQueryable<TDomainObject>().Where(bindingInfo.Filter);
-
-        return baseQueryable.Select(domainObject => new VirtualPermission<TDomainObject>(domainObject, bindingInfo));
+        return this.GetPermissionQuery(false);
     }
 
-    public IEnumerable<string> GetAccessors(Expression<Func<IPermission, bool>> permissionFilter) =>
-        this.GetPermissionQuery().Where(permissionFilter).Select(p => p.PrincipalName);
-
-    private Dictionary<Type, List<Guid>> ConvertPermission(IPermission permission) =>
-        permission
-            .Restrictions
-            .GroupBy(p => p.SecurityContextTypeId)
-            .Select(g => (securityContextSource.GetSecurityContextInfo(g.Key).Type, g.Select(v => v.SecurityContextId).ToList()))
-            .ToDictionary();
-}
-
-public class VirtualPermission<TDomainObject>(
-    TDomainObject domainObject,
-    VirtualPermissionBindingInfo<TDomainObject> bindingInfo) : IPermission
-{
-    public IEnumerable<IPermissionRestriction> Restrictions { get; } =
-        bindingInfo.SecurityContextPaths.SelectMany(v => CreateRestriction(v, domainObject));
-
-    public string PrincipalName { get; } = bindingInfo.PrincipalNamePath.Eval(domainObject);
-
-    private static IEnumerable<IPermissionRestriction> CreateRestriction(LambdaExpression securityContextPath, TDomainObject domainObject)
+    private IQueryable<TDomainObject> GetPermissionQuery(bool applyCurrentUser)
     {
+        return queryableSource.GetQueryable<TDomainObject>().Where(bindingInfo.Filter).Pipe(
+            applyCurrentUser,
+            q => q.Where(bindingInfo.PrincipalNamePath.Select(name => name == currentUser.Name)));
     }
 
-    private static IEnumerable<IPermissionRestriction> CreateRestriction<TSecurityContext>(
-        Expression<Func<TDomainObject, TSecurityContext>> securityContextPath,
-        TDomainObject domainObject)
-    {
-    }
+    public IEnumerable<string> GetAccessors(Expression<Func<TDomainObject, bool>> permissionFilter) =>
+        this.GetPermissionQuery().Where(permissionFilter).Select(bindingInfo.PrincipalNamePath);
 
-    private static IEnumerable<IPermissionRestriction> CreateRestriction<TSecurityContext>(
-        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityContextPath,
-        TDomainObject domainObject)
+    private Dictionary<Type, List<Guid>> ConvertPermission(TDomainObject permission, IEnumerable<Type> securityTypes)
     {
-        return securityContextPath.Eval(domainObject).Select()
-    }
-}
-
-public record VirtualPermissionRestriction(Guid SecurityContextTypeId, Guid SecurityContextId) : IPermissionRestriction;
-
-public class VirtualPermissionRestrictionFactory<TDomainObject>(
-    TDomainObject domainObject,
-    VirtualPermissionBindingInfo<TDomainObject> bindingInfo) : IPermission
-{
-    private static IEnumerable<IPermissionRestriction> CreateRestriction(LambdaExpression securityContextPath, TDomainObject domainObject)
-    {
-    }
-
-    private static IEnumerable<IPermissionRestriction> CreateRestriction<TSecurityContext>(
-        Expression<Func<TDomainObject, TSecurityContext>> securityContextPath,
-        TDomainObject domainObject)
-    {
-    }
-
-    private static IEnumerable<IPermissionRestriction> CreateRestriction<TSecurityContext>(
-        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityContextPath,
-        TDomainObject domainObject)
-    {
-        return securityContextPath.Eval(domainObject).Select()
+        return securityTypes.ToDictionary(
+            securityContextType => securityContextType,
+            securityContextType => bindingInfo.GetPermissionRestrictions(securityContextType).Eval(permission).ToList());
     }
 }

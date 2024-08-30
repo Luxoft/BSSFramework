@@ -2,7 +2,7 @@
 
 namespace Framework.SecuritySystem.ExternalSystem;
 
-public interface IPermissionSystem
+public interface IPermissionSystem : ISecuritySystemBase
 {
     Type PermissionType { get; }
 

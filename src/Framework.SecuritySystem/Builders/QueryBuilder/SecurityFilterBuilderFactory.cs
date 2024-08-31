@@ -29,7 +29,9 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
                 return factory.CreateFilter(securityRule, securityPath);
             });
 
-        throw new NotImplementedException();
+        return new SecurityFilterInfo<TDomainObject>(
+            q => securityFilterInfoList.Aggregate(q, (state, filter) => state.Concat(filter.InjectFunc(q))),
+            domainObject => securityFilterInfoList.Any(filter => filter.HasAccessFunc(domainObject)));
     }
 }
 

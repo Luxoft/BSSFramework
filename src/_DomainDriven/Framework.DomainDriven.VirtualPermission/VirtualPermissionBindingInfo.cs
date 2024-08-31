@@ -38,7 +38,7 @@ public record VirtualPermissionBindingInfo<TDomainObject>(
 
     public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetPermissionRestrictionsExpr(Type securityContextType)
     {
-        return this.GetType().GetMethod(nameof(this.GetPermissionRestrictionsExpr), BindingFlags.Instance | BindingFlags.NonPublic, Type.EmptyTypes)!
+        return this.GetType().GetMethod(nameof(this.GetPermissionRestrictionsExpr), BindingFlags.Instance | BindingFlags.Public, Type.EmptyTypes)!
                    .MakeGenericMethod(securityContextType)
                    .Invoke<Expression<Func<TDomainObject, IEnumerable<Guid>>>>(this);
     }

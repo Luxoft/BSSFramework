@@ -27,10 +27,15 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
                     permissionSystem);
 
                 return factory.CreateFilter(securityRule, securityPath);
-            });
+            }).ToList();
 
         return new SecurityFilterInfo<TDomainObject>(
-            q => securityFilterInfoList.Aggregate(q, (state, filter) => state.Union(filter.InjectFunc(q))),
+            q => securityFilterInfoList
+                 .Match(
+                     () => q.Where(_ => false),
+                     filter => filter.InjectFunc(q),
+                     filters => filters.Aggregate(q, (state, filter) => state.Union(filter.InjectFunc(q)))),
+
             domainObject => securityFilterInfoList.Any(filter => filter.HasAccessFunc(domainObject)));
     }
 }

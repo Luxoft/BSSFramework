@@ -7,30 +7,17 @@ using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Builders.QueryBuilder;
 
-public class SingleContextFilterBuilder<TDomainObject, TSecurityContext>(
+public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
+    IPermissionSystem<TPermission> permissionSystem,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-    ISecurityContextSource securityContextSource,
     SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath)
-    : SecurityFilterBuilder<TDomainObject>
+    : SecurityFilterBuilder<TPermission, TDomainObject>
     where TSecurityContext : class, ISecurityContext, IIdentityObject<Guid>
 {
-    public override Expression<Func<TDomainObject, IPermission, bool>> GetSecurityFilterExpression(
+    public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
             HierarchicalExpandType expandType)
     {
-        var securityContextTypeId = securityContextSource.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
-
-        var eqIdentsExpr = ExpressionHelper.GetEquality<Guid>();
-
-        var getIdents = ExpressionHelper.Create(
-                                            (IPermission permission) =>
-                                                permission.Restrictions
-                                                          .Where(
-                                                              item => eqIdentsExpr.Eval(
-                                                                  item.SecurityContextTypeId,
-                                                                  securityContextTypeId))
-                                                          .Select(fi => fi.SecurityContextId))
-                                        .ExpandConst()
-                                        .InlineEval();
+        var getIdents = permissionSystem.GetPermissionRestrictions(typeof(TSecurityContext));
 
         var expander = hierarchicalObjectExpanderFactory.CreateQuery(typeof(TSecurityContext));
 

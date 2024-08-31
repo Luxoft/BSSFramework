@@ -6,11 +6,7 @@ public class OptimizeBooleanLogicVisitor : ExpressionVisitor
 {
     private OptimizeBooleanLogicVisitor()
     {
-
     }
-
-
-
 
     protected override Expression VisitConditional(ConditionalExpression node)
     {

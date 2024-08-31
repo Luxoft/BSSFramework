@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
-using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
@@ -15,10 +14,8 @@ public class AuthorizationPermissionSource(
     IAvailablePermissionSource availablePermissionSource,
     IRealTypeResolver realTypeResolver,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
-    TimeProvider timeProvider,
-    ISecurityRolesIdentsResolver securityRolesIdentsResolver,
     ISecurityContextSource securityContextSource,
-    DomainSecurityRule.RoleBaseSecurityRule securityRule) : IPermissionSource
+    DomainSecurityRule.RoleBaseSecurityRule securityRule) : IPermissionSource<Permission>
 {
     public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
     {
@@ -32,39 +29,21 @@ public class AuthorizationPermissionSource(
                .ToList();
     }
 
-    public IQueryable<IPermission> GetPermissionQuery()
+    public IQueryable<Permission> GetPermissionQuery()
     {
-        return availablePermissionSource.GetAvailablePermissionsQueryable(securityRule: securityRule);
+        return this.GetSecurityPermissions(availablePermissionSource.CreateFilter(securityRule: securityRule));
     }
 
-    public IEnumerable<string> GetAccessors(Expression<Func<IPermission, bool>> permissionFilter)
+    public IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionFilter)
     {
-        var securityRoleIdents = securityRolesIdentsResolver.Resolve(securityRule);
-
-        var visitedFilter = (Expression<Func<Permission, bool>>)AuthVisitor.Visit(permissionFilter);
-
-        return this.GetAccessors(
-            visitedFilter,
-            new AvailablePermissionFilter(timeProvider.GetToday()) { SecurityRoleIdents = securityRoleIdents.ToList() });
+        return this.GetSecurityPermissions(availablePermissionSource.CreateFilter(securityRule, applyCurrentUser: false))
+                   .Where(permissionFilter)
+                   .Select(permission => permission.Principal.Name);
     }
 
-
-
-    private IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionExprFilter, AvailablePermissionFilter availablePermissionFilter)
+    private IQueryable<Permission> GetSecurityPermissions(AvailablePermissionFilter availablePermissionFilter)
     {
-        if (permissionExprFilter == null) throw new ArgumentNullException(nameof(permissionExprFilter));
-        if (availablePermissionFilter == null) throw new ArgumentNullException(nameof(availablePermissionFilter));
-
         return permissionRepository.GetQueryable()
-                                   .Where(availablePermissionFilter.ToFilterExpression())
-                                   .Where(permissionExprFilter)
-                                   .Select(permission => permission.Principal.Name).ToList();
+                                   .Where(availablePermissionFilter.ToFilterExpression());
     }
-
-    private static readonly ExpressionVisitor AuthVisitor = new OverrideParameterTypeVisitor(
-        new Dictionary<Type, Type>
-        {
-            { typeof(IPermission), typeof(Permission) },
-            { typeof(IPermissionRestriction), typeof(PermissionRestriction) },
-        });
 }

@@ -2,14 +2,13 @@
 using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.Authorization.Domain;
 
 /// <summary>
 /// Связь между пермиссией и контекстом
 /// </summary>
-public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Permission>, IPermissionRestriction
+public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Permission>
 {
     private readonly Permission permission;
 
@@ -47,22 +46,14 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     [UniqueElement]
     public virtual SecurityContextType SecurityContextType
     {
-        get { return this.securityContextType; }
-        set { this.securityContextType = value; }
+        get => this.securityContextType;
+        set => this.securityContextType = value;
     }
 
     [FixedPropertyValidator]
     [Required]
     [UniqueElement]
-    public virtual Guid SecurityContextId
-    {
-        get { return this.securityContextId; }
-        set { this.securityContextId = value; }
-    }
-
-    [ExpandPath("SecurityContextType.Id")]
-    [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual Guid SecurityContextTypeId => this.SecurityContextType.Id;
+    public virtual Guid SecurityContextId { get => this.securityContextId; set => this.securityContextId = value; }
 
     Permission IDetail<Permission>.Master => this.Permission;
 }

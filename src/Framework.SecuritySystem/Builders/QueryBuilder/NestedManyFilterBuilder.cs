@@ -2,17 +2,16 @@
 
 using Framework.Core;
 using Framework.HierarchicalExpand;
-using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Builders.QueryBuilder;
 
-public class NestedManyFilterBuilder<TDomainObject, TNestedObject>(
-    SecurityFilterBuilderFactory<TNestedObject> nestedBuilderFactory,
-    SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath) : SecurityFilterBuilder<TDomainObject>
+public class NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(
+    SecurityFilterBuilderFactory<TPermission, TNestedObject> nestedBuilderFactory,
+    SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath) : SecurityFilterBuilder<TPermission, TDomainObject>
 {
-    private SecurityFilterBuilder<TNestedObject> NestedBuilder { get; } = nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath);
+    private SecurityFilterBuilder<TPermission, TNestedObject> NestedBuilder { get; } = nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath);
 
-    public override Expression<Func<TDomainObject, IPermission, bool>> GetSecurityFilterExpression(
+    public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
         HierarchicalExpandType expandType)
     {
         var baseFilter = this.NestedBuilder.GetSecurityFilterExpression(expandType).ExpandConst().InlineEval();

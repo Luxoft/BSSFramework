@@ -2,15 +2,14 @@
 
 using Framework.Core;
 using Framework.HierarchicalExpand;
-using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 
-public class ConditionFilterBuilder<TDomainObject>(
+public class ConditionFilterBuilder<TPermission, TDomainObject>(
     SecurityPath<TDomainObject>.ConditionPath securityPath)
-    : AccessorsFilterBuilder<TDomainObject>
+    : AccessorsFilterBuilder<TPermission, TDomainObject>
 {
-    public override Expression<Func<IPermission, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType)
+    public override Expression<Func<TPermission, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType)
     {
         var hasAccess = securityPath.SecurityFilter.Eval(domainObject, LambdaCompileCache);
 

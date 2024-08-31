@@ -3,16 +3,11 @@ using Framework.QueryableSource;
 
 namespace Framework.HierarchicalExpand;
 
-public class HierarchicalObjectLayerExpander<TDomainObject, TIdent> : IHierarchicalObjectExpander<TIdent>
-        where TDomainObject : class, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
-        where TIdent : struct
+public class HierarchicalObjectLayerExpander<TDomainObject, TIdent>(IQueryableSource queryableSource) : IHierarchicalObjectExpander<TIdent>
+    where TDomainObject : class, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
+    where TIdent : struct
 {
-    private readonly IQueryableSource queryableSource;
-
-    public HierarchicalObjectLayerExpander(IQueryableSource queryableSource)
-    {
-        this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
-    }
+    private readonly IQueryableSource queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
 
     public IEnumerable<TIdent> Expand(IEnumerable<TIdent> idents, HierarchicalExpandType expandType)
     {

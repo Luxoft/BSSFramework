@@ -6,7 +6,7 @@ public class ExamplePermissionSystem (ExamplePermissionSystemData data) : IPermi
 {
     public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => throw new NotImplementedException();
 
-    public void CheckAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => throw new NotImplementedException();
+    public Type PermissionType => throw new NotImplementedException();
 
     public IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule) => new ExamplePermissionSource(data);
 

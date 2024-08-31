@@ -12,16 +12,21 @@ public class AvailablePermissionSource(
     ISecurityRolesIdentsResolver securityRolesIdentsResolver)
     : IAvailablePermissionSource
 {
+    public AvailablePermissionFilter CreateFilter(DomainSecurityRule.RoleBaseSecurityRule? securityRule = null, bool applyCurrentUser = true, bool withRunAs = true)
+    {
+        return new AvailablePermissionFilter(timeProvider.GetToday())
+               {
+                   PrincipalName = this.GetPrincipalName(applyCurrentUser, withRunAs),
+                   SecurityRoleIdents = securityRule == null ? null : securityRolesIdentsResolver.Resolve(securityRule).ToList()
+               };
+    }
+
     public IQueryable<Permission> GetAvailablePermissionsQueryable(
         DomainSecurityRule.RoleBaseSecurityRule? securityRule = null,
         bool applyCurrentUser = true,
         bool withRunAs = true)
     {
-        var filter = new AvailablePermissionFilter(timeProvider.GetToday())
-                     {
-                         PrincipalName = this.GetPrincipalName(applyCurrentUser, withRunAs),
-                         SecurityRoleIdents = securityRule == null ? null : securityRolesIdentsResolver.Resolve(securityRule).ToList()
-                     };
+        var filter = this.CreateFilter(securityRule, applyCurrentUser, withRunAs);
 
         return this.GetAvailablePermissionsQueryable(filter);
     }

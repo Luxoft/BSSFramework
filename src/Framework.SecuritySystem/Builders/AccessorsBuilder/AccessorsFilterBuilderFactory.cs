@@ -22,7 +22,8 @@ public class AccessorsFilterBuilderFactory<TDomainObject>(IServiceProvider servi
         }).ToList();
 
         return new AccessorsFilterInfo<TDomainObject>(
-            domainObject => accessorsFilterInfoList.SelectMany(accessorsFilterInfo => accessorsFilterInfo.GetAccessorsFunc(domainObject)));
+            domainObject => accessorsFilterInfoList.SelectMany(accessorsFilterInfo => accessorsFilterInfo.GetAccessorsFunc(domainObject))
+                                                   .Distinct(StringComparer.CurrentCultureIgnoreCase));
     }
 }
 

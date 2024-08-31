@@ -1,6 +1,6 @@
 ﻿namespace Framework.SecuritySystem;
 
-public static class SecurityProviderBaseExtensions
+public static class SecurityProviderExtensions
 {
     public static void CheckAccess<TDomainObject>(
         this ISecurityProvider<TDomainObject> securityProvider,

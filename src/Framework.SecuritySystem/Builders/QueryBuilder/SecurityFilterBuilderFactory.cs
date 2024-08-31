@@ -30,7 +30,7 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
             });
 
         return new SecurityFilterInfo<TDomainObject>(
-            q => securityFilterInfoList.Aggregate(q, (state, filter) => state.Concat(filter.InjectFunc(q))),
+            q => securityFilterInfoList.Aggregate(q, (state, filter) => state.Union(filter.InjectFunc(q))),
             domainObject => securityFilterInfoList.Any(filter => filter.HasAccessFunc(domainObject)));
     }
 }

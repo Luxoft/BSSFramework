@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using Framework.Core;
+using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Expanders;
@@ -18,9 +20,22 @@ public class VirtualPermissionSystem<TDomainObject>(
 {
     public Type PermissionType { get; } = typeof(TDomainObject);
 
-    public Expression<Func<TDomainObject, IEnumerable<Guid>>>? GetPermissionRestrictions(Type securityContextType)
+    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
-        return bindingInfo.GetPermissionRestrictions(securityContextType);
+        return bindingInfo.GetPermissionRestrictionsExpr<TSecurityContext>();
+    }
+
+    public Expression<Func<TDomainObject, bool>> GetGrandAccessExpr<TSecurityContext>()
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+    {
+        return this.GetManyGrandAccessExpr<TSecurityContext>().BuildOr();
+    }
+
+    public Expression<Func<TDomainObject, bool>> GetContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+    {
+        return this.GetManyContainsIdentsExpr<TSecurityContext>(idents).BuildOr();
     }
 
     public IPermissionSource<TDomainObject> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
@@ -44,6 +59,43 @@ public class VirtualPermissionSystem<TDomainObject>(
     {
         return this.GetPermissionSource(securityRule).GetPermissionQuery().Any();
     }
+
+
+    private IEnumerable<Expression<Func<TDomainObject, bool>>> GetManyGrandAccessExpr<TSecurityContext>()
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+    {
+        foreach (var securityContextPath in bindingInfo.SecurityContextPaths)
+        {
+            if (securityContextPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
+            {
+                yield return singlePath.Select(
+                    securityContext => securityContext == null);
+            }
+            else if (securityContextPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
+            {
+                yield return manyPath.Select(securityContexts => !securityContexts.Any());
+            }
+        }
+    }
+
+    private IEnumerable<Expression<Func<TDomainObject, bool>>> GetManyContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+    {
+        foreach (var securityContextPath in bindingInfo.SecurityContextPaths)
+        {
+            if (securityContextPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
+            {
+                yield return singlePath.Select(
+                    securityContext => idents.Contains(securityContext.Id));
+            }
+            else if (securityContextPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
+            {
+                yield return manyPath.Select(securityContexts => securityContexts.Any(securityContext => idents.Contains(securityContext.Id)));
+            }
+        }
+    }
+
+
 
     IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {

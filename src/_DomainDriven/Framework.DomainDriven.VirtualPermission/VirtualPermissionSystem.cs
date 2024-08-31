@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using Framework.Core;
+using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Expanders;
@@ -18,9 +20,16 @@ public class VirtualPermissionSystem<TDomainObject>(
 {
     public Type PermissionType { get; } = typeof(TDomainObject);
 
-    public Expression<Func<TDomainObject, IEnumerable<Guid>>>? GetPermissionRestrictions(Type securityContextType)
+    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
-        return bindingInfo.GetPermissionRestrictions(securityContextType);
+        return bindingInfo.GetPermissionRestrictionsExpr<TSecurityContext>();
+    }
+
+    public Expression<Func<TDomainObject, bool>> GetGrandAccessExpr<TSecurityContext>()
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+    {
+        return bindingInfo.GetGrandAccessExpr<TSecurityContext>();
     }
 
     public IPermissionSource<TDomainObject> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)

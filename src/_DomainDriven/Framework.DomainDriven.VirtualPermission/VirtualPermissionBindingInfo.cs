@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
-
 using Framework.Core;
 using Framework.Persistent;
 using Framework.SecuritySystem;
@@ -37,22 +36,44 @@ public record VirtualPermissionBindingInfo<TDomainObject>(
 
         this with { Filter = this.Filter.BuildAnd(filter) };
 
-
-
-    public Expression<Func<TDomainObject, IEnumerable<Guid>>>? GetPermissionRestrictions(Type securityContextType)
+    public Expression<Func<TDomainObject, bool>> GetGrandAccessExpr<TSecurityContext>()
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
-        return this.GetType().GetMethod(nameof(this.GetTypedPermissionRestrictions), BindingFlags.Instance | BindingFlags.NonPublic, true)
+        return this.GetManyGrandAccessExpr<TSecurityContext>().BuildOr();
+    }
+
+    private IEnumerable<Expression<Func<TDomainObject, bool>>> GetManyGrandAccessExpr<TSecurityContext>()
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+    {
+        foreach (var securityContextPath in this.SecurityContextPaths)
+        {
+            if (securityContextPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
+            {
+                yield return singlePath.Select(
+                    securityContext => securityContext == null);
+            }
+            else if (securityContextPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
+            {
+                yield return manyPath.Select(securityContexts => !securityContexts.Any());
+            }
+        }
+    }
+
+
+    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetPermissionRestrictionsExpr(Type securityContextType)
+    {
+        return this.GetType().GetMethod(nameof(this.GetPermissionRestrictionsExpr), BindingFlags.Instance | BindingFlags.NonPublic, Type.EmptyTypes)!
                    .MakeGenericMethod(securityContextType)
                    .Invoke<Expression<Func<TDomainObject, IEnumerable<Guid>>>>(this);
     }
 
-    private Expression<Func<TDomainObject, IEnumerable<Guid>>>? GetTypedPermissionRestrictions<TSecurityContext>()
+    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
-        var expressions = this.GetTypedPermissionRestrictionsInternal<TSecurityContext>();
+        var expressions = this.GetManyPermissionRestrictionsExpr<TSecurityContext>();
 
         return expressions.Match(
-            () => null,
+            () => _ => new Guid[0],
             single => single,
             many => many.Aggregate(
                 (state, expr) => from ids1 in state
@@ -60,14 +81,15 @@ public record VirtualPermissionBindingInfo<TDomainObject>(
                                  select ids1.Concat(ide2)));
     }
 
-    private IEnumerable<Expression<Func<TDomainObject, IEnumerable<Guid>>>> GetTypedPermissionRestrictionsInternal<TSecurityContext>()
+    private IEnumerable<Expression<Func<TDomainObject, IEnumerable<Guid>>>> GetManyPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
         foreach (var securityContextPath in this.SecurityContextPaths)
         {
             if (securityContextPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
             {
-                yield return singlePath.Select(securityContext => (IEnumerable<Guid>)new[] { securityContext.Id });
+                yield return singlePath.Select(
+                    securityContext => securityContext != null ? (IEnumerable<Guid>)new[] { securityContext.Id } : new Guid[0]);
             }
             else if (securityContextPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
             {

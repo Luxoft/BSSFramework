@@ -38,6 +38,6 @@ public class VirtualPermissionSource<TDomainObject>(
     {
         return securityTypes.ToDictionary(
             securityContextType => securityContextType,
-            securityContextType => bindingInfo.GetPermissionRestrictions(securityContextType).Eval(permission).EmptyIfNull().ToList());
+            securityContextType => bindingInfo.GetPermissionRestrictionsExpr(securityContextType).Eval(permission).ToList());
     }
 }

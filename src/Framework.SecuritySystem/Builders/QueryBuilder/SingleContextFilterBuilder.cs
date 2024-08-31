@@ -17,13 +17,16 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
     public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
             HierarchicalExpandType expandType)
     {
-        var getIdents = permissionSystem.GetPermissionRestrictions(typeof(TSecurityContext));
+        var grandAccessExpr = permissionSystem.GetGrandAccessExpr<TSecurityContext>();
+
+        var getIdents = permissionSystem.GetPermissionRestrictionsExpr<TSecurityContext>();
 
         var expander = hierarchicalObjectExpanderFactory.CreateQuery(typeof(TSecurityContext));
 
         var expandExpression = expander.GetExpandExpression(expandType);
 
         var expandExpressionQ = from idents in getIdents
+
                                 select expandExpression.Eval(idents);
 
         switch (securityPath.Mode)
@@ -32,7 +35,7 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
 
                 return (domainObject, permission) =>
 
-                           !getIdents.Eval(permission).Any()
+                           grandAccessExpr.Eval(permission)
 
                            || securityPath.SecurityPath.Eval(domainObject) == null
 
@@ -42,7 +45,7 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
 
                 return (domainObject, permission) =>
 
-                           !getIdents.Eval(permission).Any()
+                           grandAccessExpr.Eval(permission)
 
                            || expandExpressionQ.Eval(permission).Contains(securityPath.SecurityPath.Eval(domainObject).Id);
 

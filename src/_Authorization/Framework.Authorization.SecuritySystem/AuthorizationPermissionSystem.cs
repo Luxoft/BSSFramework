@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
+using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
 
@@ -17,9 +18,10 @@ public class AuthorizationPermissionSystem(
 {
     public Type PermissionType { get; } = typeof(Permission);
 
-    public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictions(Type securityContextType)
+    public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
-        var securityContextTypeId = securityContextSource.GetSecurityContextInfo(securityContextType).Id;
+        var securityContextTypeId = securityContextSource.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
 
         return permission => permission.Restrictions
                                        .Where(restriction => restriction.SecurityContextType.Id == securityContextTypeId)

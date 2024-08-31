@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Framework.DomainDriven.VirtualPermission</PackageId>
+    <PackageId>>Luxoft.Framework.DomainDriven.VirtualPermission</PackageId>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

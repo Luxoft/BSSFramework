@@ -56,15 +56,19 @@ public record VirtualPermissionBindingInfo<TDomainObject>(
     }
 
     private IEnumerable<Expression<Func<TDomainObject, IEnumerable<Guid>>>> GetManyRestrictionsExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
-        this.RestrictionPaths.Select(restrictionPath => restrictionPath switch
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+    {
+        foreach (var restrictionPath in this.RestrictionPaths)
         {
-            Expression<Func<TDomainObject, TSecurityContext>> singlePath => singlePath.Select(
-                securityContext => securityContext != null ? (IEnumerable<Guid>)new[] { securityContext.Id } : new Guid[0]),
-
-            Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath => manyPath.Select(
-                securityContexts => securityContexts.Select(securityContext => securityContext.Id)),
-
-            _ => throw new InvalidOperationException("invalid path")
-        });
+            if (restrictionPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
+            {
+                yield return singlePath.Select(
+                    securityContext => securityContext != null ? (IEnumerable<Guid>)new[] { securityContext.Id } : new Guid[0]);
+            }
+            else if (restrictionPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
+            {
+                yield return manyPath.Select(securityContexts => securityContexts.Select(securityContext => securityContext.Id));
+            }
+        }
+    }
 }

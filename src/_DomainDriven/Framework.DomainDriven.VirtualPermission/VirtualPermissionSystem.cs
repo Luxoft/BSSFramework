@@ -52,32 +52,38 @@ public class VirtualPermissionSystem<TDomainObject>(
     public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => this.GetPermissionSource(securityRule).GetPermissionQuery().Any();
 
     private IEnumerable<Expression<Func<TDomainObject, bool>>> GetManyGrandAccessExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
-
-        bindingInfo.RestrictionPaths.Select(restrictionPath => restrictionPath switch
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+    {
+        foreach (var restrictionPath in bindingInfo.RestrictionPaths)
         {
-            Expression<Func<TDomainObject, TSecurityContext>> singlePath => singlePath.Select(
-                securityContext => securityContext == null),
-
-            Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath => manyPath.Select(
-                securityContexts => !securityContexts.Any()),
-
-            _ => throw new InvalidOperationException("invalid path")
-        });
+            if (restrictionPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
+            {
+                yield return singlePath.Select(
+                    securityContext => securityContext == null);
+            }
+            else if (restrictionPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
+            {
+                yield return manyPath.Select(securityContexts => !securityContexts.Any());
+            }
+        }
+    }
 
     private IEnumerable<Expression<Func<TDomainObject, bool>>> GetManyContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
-
-        bindingInfo.RestrictionPaths.Select(restrictionPath => restrictionPath switch
+        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+    {
+        foreach (var restrictionPath in bindingInfo.RestrictionPaths)
         {
-            Expression<Func<TDomainObject, TSecurityContext>> singlePath => singlePath.Select(
-                securityContext => idents.Contains(securityContext.Id)),
-
-            Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath => manyPath.Select(
-                securityContexts => securityContexts.Any(securityContext => idents.Contains(securityContext.Id))),
-
-            _ => throw new InvalidOperationException("invalid path")
-        });
+            if (restrictionPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
+            {
+                yield return singlePath.Select(
+                    securityContext => idents.Contains(securityContext.Id));
+            }
+            else if (restrictionPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
+            {
+                yield return manyPath.Select(securityContexts => securityContexts.Any(securityContext => idents.Contains(securityContext.Id)));
+            }
+        }
+    }
 
     IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule) => this.GetPermissionSource(securityRule);
 }

@@ -41,7 +41,6 @@ public class VirtualPermissionTests : TestBase
                        .Default
                        .Create<BusinessUnitEmployeeRole>()
                        .Save(new BusinessUnitEmployeeRole(bu) { Employee = employee, Role = BusinessUnitEmployeeRoleType.Manager });
-                context.Logics.BusinessUnit.Save(bu);
             });
     }
 

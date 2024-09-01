@@ -19,25 +19,18 @@ public class VirtualPermissionSource<TDomainObject>(
         return permissions.Select(permission => this.ConvertPermission(permission, securityTypes)).ToList();
     }
 
-    public IQueryable<TDomainObject> GetPermissionQuery()
-    {
-        return this.GetPermissionQuery(false);
-    }
+    public IQueryable<TDomainObject> GetPermissionQuery() => this.GetPermissionQuery(false);
 
-    private IQueryable<TDomainObject> GetPermissionQuery(bool applyCurrentUser)
-    {
-        return queryableSource.GetQueryable<TDomainObject>().Where(bindingInfo.Filter).Pipe(
+    private IQueryable<TDomainObject> GetPermissionQuery(bool applyCurrentUser) =>
+        queryableSource.GetQueryable<TDomainObject>().Where(bindingInfo.Filter).Pipe(
             applyCurrentUser,
             q => q.Where(bindingInfo.PrincipalNamePath.Select(name => name == currentUser.Name)));
-    }
 
     public IEnumerable<string> GetAccessors(Expression<Func<TDomainObject, bool>> permissionFilter) =>
         this.GetPermissionQuery().Where(permissionFilter).Select(bindingInfo.PrincipalNamePath);
 
-    private Dictionary<Type, List<Guid>> ConvertPermission(TDomainObject permission, IEnumerable<Type> securityTypes)
-    {
-        return securityTypes.ToDictionary(
+    private Dictionary<Type, List<Guid>> ConvertPermission(TDomainObject permission, IEnumerable<Type> securityTypes) =>
+        securityTypes.ToDictionary(
             securityContextType => securityContextType,
-            securityContextType => bindingInfo.GetPermissionRestrictionsExpr(securityContextType).Eval(permission).ToList());
-    }
+            securityContextType => bindingInfo.GetRestrictionsExpr(securityContextType).Eval(permission).ToList());
 }

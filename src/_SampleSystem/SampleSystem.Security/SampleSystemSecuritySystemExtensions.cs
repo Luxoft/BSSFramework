@@ -119,7 +119,7 @@ public static class SampleSystemSecuritySystemExtensions
         return settings.AddVirtualPermission<BusinessUnitEmployeeRole>(
             SampleSystemSecurityRole.SeManager,
             link => link.Employee.Login,
-            v => v.AddSecurityContext(link => link.BusinessUnit)
+            v => v.AddRestriction(link => link.BusinessUnit)
                   .AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager));
     }
 }

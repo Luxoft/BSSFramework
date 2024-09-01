@@ -11,19 +11,15 @@ public static class SecuritySystemSettingsExtensions
 {
     public static ISecuritySystemSettings AddVirtualPermission<TDomainObject>(
         this ISecuritySystemSettings securitySystemSettings,
-        VirtualPermissionBindingInfo<TDomainObject> bindingInfo)
-    {
-        return securitySystemSettings.AddPermissionSystem(
+        VirtualPermissionBindingInfo<TDomainObject> bindingInfo) =>
+        securitySystemSettings.AddPermissionSystem(
             sp => ActivatorUtilities.CreateInstance<VirtualPermissionSystem<TDomainObject>>(sp, bindingInfo));
-    }
 
     public static ISecuritySystemSettings AddVirtualPermission<TDomainObject>(
         this ISecuritySystemSettings securitySystemSettings,
         SecurityRole securityRole,
         Expression<Func<TDomainObject, string>> principalNamePath,
-        Func<VirtualPermissionBindingInfo<TDomainObject>, VirtualPermissionBindingInfo<TDomainObject>> initFunc)
-    {
-        return securitySystemSettings.AddVirtualPermission(
+        Func<VirtualPermissionBindingInfo<TDomainObject>, VirtualPermissionBindingInfo<TDomainObject>> initFunc) =>
+        securitySystemSettings.AddVirtualPermission(
             initFunc(new VirtualPermissionBindingInfo<TDomainObject>(securityRole, principalNamePath)));
-    }
 }

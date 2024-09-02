@@ -4,7 +4,7 @@ using Hangfire.Dashboard;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.NotificationCore.Monitoring;
+namespace Framework.HangfireCore;
 
 public class AdminHangfireAuthorization(DomainSecurityRule.RoleBaseSecurityRule securityRule) : IDashboardAuthorizationFilter
 {

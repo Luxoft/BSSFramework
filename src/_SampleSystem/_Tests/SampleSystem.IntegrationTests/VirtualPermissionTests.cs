@@ -15,33 +15,44 @@ namespace SampleSystem.IntegrationTests;
 [TestClass]
 public class VirtualPermissionTests : TestBase
 {
-    private readonly string testEmployeeLogin = "testEmployeeLogin";
-
-    private Guid testBuId;
-
-    private Guid testEmployeeId;
+    private (string UserLogin, Guid BuId, Guid EmployeeId)[] Datas;
 
 
     [TestInitialize]
     public void SetUp()
     {
-        this.testBuId = this.DataHelper.SaveBusinessUnit().Id;
+        this.Datas = new[] { "testEmployeeLogin", "otherTestEmployeeLogin" }
+                     .Select(
+                         userLogin =>
+                         {
+                             var buId = this.DataHelper.SaveBusinessUnit().Id;
 
-        this.testEmployeeId = this.DataHelper.SaveEmployee(login: this.testEmployeeLogin).Id;
+                             var employeeId = this.DataHelper.SaveEmployee(login: userLogin).Id;
 
-        this.Evaluate(
-            DBSessionMode.Write,
-            context =>
-            {
-                var bu = context.Logics.BusinessUnit.GetById(this.testBuId, true);
+                             this.Evaluate(
+                                 DBSessionMode.Write,
+                                 context =>
+                                 {
+                                     var bu = context.Logics.BusinessUnit.GetById(buId, true);
 
-                var employee = context.Logics.Employee.GetById(this.testEmployeeId, true);
+                                     var employee = context.Logics.Employee.GetById(employeeId, true);
 
-                context.Logics
-                       .Default
-                       .Create<BusinessUnitEmployeeRole>()
-                       .Save(new BusinessUnitEmployeeRole(bu) { Employee = employee, Role = BusinessUnitEmployeeRoleType.Manager });
-            });
+                                     context.Logics
+                                            .Default
+                                            .Create<BusinessUnitEmployeeRole>()
+                                            .Save(
+                                                new BusinessUnitEmployeeRole(bu)
+                                                {
+                                                    Employee = employee,
+                                                    Role = BusinessUnitEmployeeRoleType.Manager
+                                                });
+                                 });
+
+                             return (userLogin, buId, employeeId);
+                         })
+                     .ToArray();
+
+
     }
 
     [TestMethod]
@@ -54,14 +65,14 @@ public class VirtualPermissionTests : TestBase
 
             this.Evaluate(
                 DBSessionMode.Read,
-                this.testEmployeeLogin,
+                this.Datas[0].UserLogin,
                 ctx =>
                     ctx.Logics.BusinessUnitFactory.Create(SampleSystemSecurityRole.SeManager)
                        .GetSecureQueryable().Select(bu => bu.Id).ToList());
 
         // Assert
         accessToBuList.Should().ContainSingle();
-        accessToBuList[0].Should().Be(this.testBuId);
+        accessToBuList[0].Should().Be(this.Datas[0].BuId);
     }
 
     [TestMethod]
@@ -74,10 +85,10 @@ public class VirtualPermissionTests : TestBase
 
             this.Evaluate(
                 DBSessionMode.Read,
-                this.testEmployeeLogin,
+                this.Datas[0].UserLogin,
                 ctx =>
                 {
-                    var bu = ctx.Logics.BusinessUnit.GetById(this.testBuId);
+                    var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[0].BuId);
 
                     var accessorData = ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
                                           .GetAccessorData(bu);
@@ -88,6 +99,72 @@ public class VirtualPermissionTests : TestBase
                 });
 
         // Assert
-        accessorList.Should().Contain(this.testEmployeeLogin);
+        accessorList.Should().Contain(this.Datas[0].UserLogin);
+    }
+
+    [TestMethod]
+    public void VirtualPermission_EmployeeWithMyLink_AccessGranted()
+    {
+        // Arrange
+
+        // Act
+        var hasAccess =
+
+            this.Evaluate(
+                DBSessionMode.Read,
+                this.Datas[1].UserLogin,
+                ctx =>
+                {
+                    var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[1].BuId);
+
+                    return ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
+                              .HasAccess(bu);
+                });
+
+        // Assert
+        hasAccess.Should().Be(true);
+    }
+
+    [TestMethod]
+    public void VirtualPermission_EmployeeWithNotMyLink_AccessDenied()
+    {
+        // Arrange
+
+        // Act
+        var hasAccess =
+
+            this.Evaluate(
+                DBSessionMode.Read,
+                this.Datas[1].UserLogin,
+                ctx =>
+                {
+                    var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[0].BuId);
+
+                    return ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
+                              .HasAccess(bu);
+                });
+
+        // Assert
+        hasAccess.Should().Be(false);
+    }
+
+    [TestMethod]
+    public void VirtualPermission_NoNameWithoutLink_AccessDenied()
+    {
+        // Arrange
+
+        // Act
+        var hasAccess =
+
+            this.Evaluate(
+                DBSessionMode.Read,
+                "Noname",
+                ctx =>
+                {
+                    return ctx.Authorization.SecuritySystem.HasAccess(SampleSystemSecurityRole.SeManager);
+                });
+
+        // Assert
+        hasAccess.Should().Be(false);
     }
 }

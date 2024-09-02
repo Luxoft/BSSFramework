@@ -6,13 +6,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.NotificationCore.Monitoring;
 
-public class AdminHangfireAuthorization : IDashboardAuthorizationFilter
+public class AdminHangfireAuthorization(DomainSecurityRule.RoleBaseSecurityRule securityRule) : IDashboardAuthorizationFilter
 {
+    public AdminHangfireAuthorization()
+        : this(SecurityRole.Administrator)
+    {
+    }
+
     public bool Authorize(DashboardContext context)
     {
         var httpContext = context.GetHttpContext();
 
         return httpContext.User.Identity is { IsAuthenticated: true }
-               && httpContext.RequestServices.GetRequiredService<ISecuritySystem>().IsAdministrator();
+               && httpContext.RequestServices.GetRequiredService<ISecuritySystem>().HasAccess(securityRule);
     }
 }

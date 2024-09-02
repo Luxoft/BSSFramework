@@ -19,7 +19,7 @@ public static class SecuritySystemSettingsExtensions
         this ISecuritySystemSettings securitySystemSettings,
         SecurityRole securityRole,
         Expression<Func<TDomainObject, string>> principalNamePath,
-        Func<VirtualPermissionBindingInfo<TDomainObject>, VirtualPermissionBindingInfo<TDomainObject>> initFunc) =>
+        Func<VirtualPermissionBindingInfo<TDomainObject>, VirtualPermissionBindingInfo<TDomainObject>>? initFunc = null) =>
         securitySystemSettings.AddVirtualPermission(
-            _ => initFunc(new VirtualPermissionBindingInfo<TDomainObject>(securityRole, principalNamePath)));
+            _ => (initFunc ?? (v => v)).Invoke(new VirtualPermissionBindingInfo<TDomainObject>(securityRole, principalNamePath)));
 }

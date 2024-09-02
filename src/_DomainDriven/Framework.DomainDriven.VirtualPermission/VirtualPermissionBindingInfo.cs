@@ -37,12 +37,20 @@ public record VirtualPermissionBindingInfo<TDomainObject>(
 
         this with { Filter = this.Filter.BuildAnd(filter) };
 
+
+    public IEnumerable<Type> GetSecurityContextTypes()
+    {
+        return this.RestrictionPaths
+                   .Select(restrictionPath => restrictionPath.ReturnType.GetCollectionElementTypeOrSelf())
+                   .Distinct();
+    }
+
     public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetRestrictionsExpr(Type securityContextType) =>
-        this.GetType().GetMethod(nameof(this.GeRestrictionsExpr), BindingFlags.Instance | BindingFlags.Public, Type.EmptyTypes)!
+        this.GetType().GetMethod(nameof(this.GetRestrictionsExpr), BindingFlags.Instance | BindingFlags.Public, Type.EmptyTypes)!
             .MakeGenericMethod(securityContextType)
             .Invoke<Expression<Func<TDomainObject, IEnumerable<Guid>>>>(this);
 
-    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GeRestrictionsExpr<TSecurityContext>()
+    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
         var expressions = this.GetManyRestrictionsExpr<TSecurityContext>();

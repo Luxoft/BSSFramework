@@ -21,6 +21,7 @@
   <ItemGroup>
     <!-- TODO Upgrade after fix https://github.com/ClosedXML/ClosedXML.Report/issues/303-->
     <PackageReference Include="ClosedXML" />
+    <PackageReference Include="ClosedXML.Report" />
   </ItemGroup>
 
   <ItemGroup>

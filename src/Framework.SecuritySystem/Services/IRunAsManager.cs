@@ -1,8 +1,8 @@
-﻿namespace Framework.Authorization.SecuritySystem;
+﻿namespace Framework.SecuritySystem.Services;
 
 public interface IRunAsManager
 {
-    bool IsRunningAs { get; }
+    string? RunAsName { get; }
 
     Task StartRunAsUserAsync(string principalName, CancellationToken cancellationToken = default);
 

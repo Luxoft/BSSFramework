@@ -18,6 +18,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public Action<IServiceCollection> RegisterUserSourceAction { get; private set; } = _ => { };
 
+    public Action<IServiceCollection> RegisterRunAsManagerAction { get; private set; } = _ => { };
+
     public bool InitializeAdministratorRole { get;  set; } = true;
 
     public Type AccessDeniedExceptionServiceType { get; private set; } = typeof(AccessDeniedExceptionService);
@@ -101,14 +103,6 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
-    public ISecuritySystemSettings SetCurrentUser<TCurrentUser>()
-        where TCurrentUser : class, ICurrentUser
-    {
-        this.CurrentUserType = typeof(TCurrentUser);
-
-        return this;
-    }
-
     public ISecuritySystemSettings SetUserSource<TUserDomainObject>(
         Expression<Func<TUserDomainObject, Guid>> idPath,
         Expression<Func<TUserDomainObject, string>> namePath,
@@ -127,6 +121,14 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
                                             sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUserDomainObject>>();
                                         };
+
+        return this;
+    }
+
+    public ISecuritySystemSettings SetRunAsManager<TRunAsManager>()
+        where TRunAsManager : class, IRunAsManager
+    {
+        this.RegisterRunAsManagerAction = sc => sc.AddScoped<IRunAsManager, TRunAsManager>();
 
         return this;
     }

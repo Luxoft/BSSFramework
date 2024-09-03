@@ -37,12 +37,51 @@ public record VirtualPermissionBindingInfo<TDomainObject>(
 
         this with { Filter = this.Filter.BuildAnd(filter) };
 
+    public void Validate(ISecurityRoleSource securityRoleSource)
+    {
+        var securityContextRestrictions = securityRoleSource
+                                              .GetSecurityRole(this.SecurityRole)
+                                              .Information
+                                              .Restriction
+                                              .SecurityContextRestrictions;
+
+        if (securityContextRestrictions != null)
+        {
+            var bindingContextTypes = this.GetSecurityContextTypes().ToList();
+
+            var invalidTypes = bindingContextTypes.Except(securityContextRestrictions.Select(r => r.Type)).ToList();
+
+            if (invalidTypes.Any())
+            {
+                throw new Exception($"Invalid restriction types: {invalidTypes.Join(", ", t => t.Name)}");
+            }
+
+            var missedTypes = securityContextRestrictions
+                              .Where(r => r.Required)
+                              .Select(r => r.Type)
+                              .Except(bindingContextTypes)
+                              .ToList();
+
+            if (missedTypes.Any())
+            {
+                throw new Exception($"Missed required restriction types: {missedTypes.Join(", ", t => t.Name)}");
+            }
+        }
+    }
+
+    public IEnumerable<Type> GetSecurityContextTypes()
+    {
+        return this.RestrictionPaths
+                   .Select(restrictionPath => restrictionPath.ReturnType.GetCollectionElementTypeOrSelf())
+                   .Distinct();
+    }
+
     public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetRestrictionsExpr(Type securityContextType) =>
-        this.GetType().GetMethod(nameof(this.GeRestrictionsExpr), BindingFlags.Instance | BindingFlags.Public, Type.EmptyTypes)!
+        this.GetType().GetMethod(nameof(this.GetRestrictionsExpr), BindingFlags.Instance | BindingFlags.Public, Type.EmptyTypes)!
             .MakeGenericMethod(securityContextType)
             .Invoke<Expression<Func<TDomainObject, IEnumerable<Guid>>>>(this);
 
-    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GeRestrictionsExpr<TSecurityContext>()
+    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
         var expressions = this.GetManyRestrictionsExpr<TSecurityContext>();

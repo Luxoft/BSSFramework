@@ -72,23 +72,13 @@ public static class PipeObjectExtensions
     public static TSource FromMaybe<TSource>(this TSource? source, Func<Exception> getNothingException)
             where TSource : class
     {
-        if (null == source)
-        {
-            throw getNothingException();
-        }
-
-        return source;
+        return source ?? throw getNothingException();
     }
 
     public static TSource FromMaybe<TSource>(this TSource? source, Func<Exception> getNothingException)
             where TSource : struct
     {
-        if (null == source)
-        {
-            throw getNothingException();
-        }
-
-        return source.Value;
+        return source ?? throw getNothingException();
     }
 
     public static TSource FromMaybe<TSource>(this TSource? source, Func<string> getNothingExceptionMessage)
@@ -100,54 +90,40 @@ public static class PipeObjectExtensions
     public static TSource FromMaybe<TSource>(this TSource? source, Func<string> getNothingExceptionMessage)
             where TSource : struct
     {
-        if (getNothingExceptionMessage == null) throw new ArgumentNullException(nameof(getNothingExceptionMessage));
-
         return source.FromMaybe(() => new Exception(getNothingExceptionMessage()));
     }
 
     public static TSource FromMaybe<TSource>(this TSource source, string nothingExceptionMessage)
             where TSource : class
     {
-        if (nothingExceptionMessage == null) throw new ArgumentNullException(nameof(nothingExceptionMessage));
-
         return source.FromMaybe(() => nothingExceptionMessage);
     }
 
-    public static TSource FromMaybe<TSource>(this TSource source, bool condition, Func<Exception> getNothingException)
+    public static TSource? FromMaybe<TSource>(this TSource? source, bool condition, Func<Exception> getNothingException)
             where TSource : class
     {
-        if (getNothingException == null) throw new ArgumentNullException(nameof(getNothingException));
-
-        if (condition && null == source)
-        {
-            throw getNothingException();
-        }
-
-        return source;
+        return condition && null == source ? throw getNothingException() : source;
     }
 
-    public static TSource FromMaybe<TSource>(this TSource source, bool condition, Func<string> getNothingExceptionMessage)
+    public static TSource? FromMaybe<TSource>(this TSource? source, bool condition, Func<string> getNothingExceptionMessage)
             where TSource : class
     {
-        if (getNothingExceptionMessage == null) throw new ArgumentNullException(nameof(getNothingExceptionMessage));
-
         return source.FromMaybe(condition, () => new Exception(getNothingExceptionMessage()));
     }
 
-    public static TSource FromMaybe<TSource>(this TSource source, bool condition, string nothingExceptionMessage)
+    public static TSource? FromMaybe<TSource>(this TSource? source, bool condition, string nothingExceptionMessage)
             where TSource : class
     {
-        if (nothingExceptionMessage == null) throw new ArgumentNullException(nameof(nothingExceptionMessage));
-
         return source.FromMaybe(condition, () => nothingExceptionMessage);
     }
 
-    public static TResult? MaybeString<TResult>(this string source, Func<string, TResult> evaluate)
+    public static TResult? MaybeString<TResult>(this string? source, Func<string, TResult> evaluate)
     {
         if (string.IsNullOrWhiteSpace(source))
         {
-            return default(TResult);
+            return default;
         }
+
         return evaluate(source);
     }
 

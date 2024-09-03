@@ -12,17 +12,36 @@ using NHibernate.Linq;
 
 namespace Framework.DomainDriven.VirtualPermission;
 
-public class VirtualPermissionSystem<TDomainObject>(
-    ISecurityRuleExpander securityRuleExpander,
-    ICurrentUser currentUser,
-    IQueryableSource queryableSource,
-    VirtualPermissionBindingInfo<TDomainObject> bindingInfo) : IPermissionSystem<TDomainObject>
+public class VirtualPermissionSystem<TDomainObject> : IPermissionSystem<TDomainObject>
 {
+    private readonly ISecurityRuleExpander securityRuleExpander;
+
+    private readonly ICurrentUser currentUser;
+
+    private readonly IQueryableSource queryableSource;
+
+    private readonly VirtualPermissionBindingInfo<TDomainObject> bindingInfo;
+
+    public VirtualPermissionSystem(
+        ISecurityRuleExpander securityRuleExpander,
+        ICurrentUser currentUser,
+        IQueryableSource queryableSource,
+        ISecurityRoleSource securityRoleSource,
+        VirtualPermissionBindingInfo<TDomainObject> bindingInfo)
+    {
+        this.securityRuleExpander = securityRuleExpander;
+        this.currentUser = currentUser;
+        this.queryableSource = queryableSource;
+        this.bindingInfo = bindingInfo;
+
+        this.bindingInfo.Validate(securityRoleSource);
+    }
+
     public Type PermissionType { get; } = typeof(TDomainObject);
 
     public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
-        bindingInfo.GeRestrictionsExpr<TSecurityContext>();
+        this.bindingInfo.GetRestrictionsExpr<TSecurityContext>();
 
     public Expression<Func<TDomainObject, bool>> GetGrandAccessExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
@@ -34,9 +53,9 @@ public class VirtualPermissionSystem<TDomainObject>(
 
     public IPermissionSource<TDomainObject> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        if (securityRuleExpander.FullExpand(securityRule).SecurityRoles.Contains(bindingInfo.SecurityRole))
+        if (this.securityRuleExpander.FullExpand(securityRule).SecurityRoles.Contains(this.bindingInfo.SecurityRole))
         {
-            return new VirtualPermissionSource<TDomainObject>(currentUser, queryableSource, bindingInfo);
+            return new VirtualPermissionSource<TDomainObject>(this.currentUser, this.queryableSource, this.bindingInfo);
         }
         else
         {
@@ -45,8 +64,8 @@ public class VirtualPermissionSystem<TDomainObject>(
     }
 
     public async Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default) =>
-        await this.GetPermissionSource(bindingInfo.SecurityRole).GetPermissionQuery().AnyAsync(cancellationToken)
-            ? [bindingInfo.SecurityRole]
+        await this.GetPermissionSource(this.bindingInfo.SecurityRole).GetPermissionQuery().AnyAsync(cancellationToken)
+            ? [this.bindingInfo.SecurityRole]
             : [];
 
     public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => this.GetPermissionSource(securityRule).GetPermissionQuery().Any();
@@ -54,7 +73,7 @@ public class VirtualPermissionSystem<TDomainObject>(
     private IEnumerable<Expression<Func<TDomainObject, bool>>> GetManyGrandAccessExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
-        foreach (var restrictionPath in bindingInfo.RestrictionPaths)
+        foreach (var restrictionPath in this.bindingInfo.RestrictionPaths)
         {
             if (restrictionPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
             {
@@ -71,7 +90,7 @@ public class VirtualPermissionSystem<TDomainObject>(
     private IEnumerable<Expression<Func<TDomainObject, bool>>> GetManyContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
-        foreach (var restrictionPath in bindingInfo.RestrictionPaths)
+        foreach (var restrictionPath in this.bindingInfo.RestrictionPaths)
         {
             if (restrictionPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
             {

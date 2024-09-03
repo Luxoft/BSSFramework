@@ -5,7 +5,6 @@ using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.SecurityAccessor;
 using Framework.SecuritySystem.Services;
-using Framework.SecuritySystem.UserSource;
 
 namespace Framework.SecuritySystem.DependencyInjection;
 
@@ -45,7 +44,6 @@ public interface ISecuritySystemSettings
         Expression<Func<TUserDomainObject, Guid>> idPath,
         Expression<Func<TUserDomainObject, string>> namePath,
         Expression<Func<TUserDomainObject, bool>> filter);
-
 
     ISecuritySystemSettings SetSecurityAccessorInfinityStorage<TStorage>()
         where TStorage : class, ISecurityAccessorInfinityStorage;

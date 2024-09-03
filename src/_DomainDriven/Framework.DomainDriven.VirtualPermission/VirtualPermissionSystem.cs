@@ -20,8 +20,6 @@ public class VirtualPermissionSystem<TDomainObject> : IPermissionSystem<TDomainO
 
     private readonly IQueryableSource queryableSource;
 
-    private readonly ISecurityRoleSource securityRoleSource;
-
     private readonly VirtualPermissionBindingInfo<TDomainObject> bindingInfo;
 
     public VirtualPermissionSystem(
@@ -34,10 +32,9 @@ public class VirtualPermissionSystem<TDomainObject> : IPermissionSystem<TDomainO
         this.securityRuleExpander = securityRuleExpander;
         this.currentUser = currentUser;
         this.queryableSource = queryableSource;
-        this.securityRoleSource = securityRoleSource;
         this.bindingInfo = bindingInfo;
 
-        this.Validate();
+        this.bindingInfo.Validate(securityRoleSource);
     }
 
     public Type PermissionType { get; } = typeof(TDomainObject);
@@ -103,38 +100,6 @@ public class VirtualPermissionSystem<TDomainObject> : IPermissionSystem<TDomainO
             else if (restrictionPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
             {
                 yield return manyPath.Select(securityContexts => securityContexts.Any(securityContext => idents.Contains(securityContext.Id)));
-            }
-        }
-    }
-
-    private void Validate()
-    {
-        var securityContextRestrictions = this.securityRoleSource
-                                              .GetSecurityRole(this.bindingInfo.SecurityRole)
-                                              .Information
-                                              .Restriction
-                                              .SecurityContextRestrictions;
-
-        if (securityContextRestrictions != null)
-        {
-            var bindingContextTypes = this.bindingInfo.GetSecurityContextTypes().ToList();
-
-            var invalidTypes = bindingContextTypes.Except(securityContextRestrictions.Select(r => r.Type)).ToList();
-
-            if (invalidTypes.Any())
-            {
-                throw new Exception($"Invalid restriction types: {invalidTypes.Join(", ", t => t.Name)}");
-            }
-
-            var missedTypes = securityContextRestrictions
-                              .Where(r => r.Required)
-                              .Select(r => r.Type)
-                              .Except(bindingContextTypes)
-                              .ToList();
-
-            if (missedTypes.Any())
-            {
-                throw new Exception($"Missed required restriction types: {missedTypes.Join(", ", t => t.Name)}");
             }
         }
     }

@@ -109,10 +109,11 @@ public class VirtualPermissionSystem<TDomainObject> : IPermissionSystem<TDomainO
 
     private void Validate()
     {
-        var securityContextRestrictions = this.securityRoleSource.GetSecurityRole(this.bindingInfo.SecurityRole)
-                                                            .Information
-                                                            .Restriction
-                                                            .SecurityContextRestrictions;
+        var securityContextRestrictions = this.securityRoleSource
+                                              .GetSecurityRole(this.bindingInfo.SecurityRole)
+                                              .Information
+                                              .Restriction
+                                              .SecurityContextRestrictions;
 
         if (securityContextRestrictions != null)
         {
@@ -122,7 +123,7 @@ public class VirtualPermissionSystem<TDomainObject> : IPermissionSystem<TDomainO
 
             if (invalidTypes.Any())
             {
-                throw
+                throw new Exception($"Invalid restriction types: {invalidTypes.Join(", ", t => t.Name)}");
             }
 
             var missedTypes = securityContextRestrictions
@@ -130,6 +131,11 @@ public class VirtualPermissionSystem<TDomainObject> : IPermissionSystem<TDomainO
                               .Select(r => r.Type)
                               .Except(bindingContextTypes)
                               .ToList();
+
+            if (missedTypes.Any())
+            {
+                throw new Exception($"Missed required restriction types: {missedTypes.Join(", ", t => t.Name)}");
+            }
         }
     }
 

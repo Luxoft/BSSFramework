@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable, of, filter, switchMap, tap, startWith, debounceTime } from 'rxjs';
 import { IEntity } from '../../view-principal-dialog/view-principal-dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ContextsApiService } from 'src/app/shared/api.services';
+import { ContextsApiService } from 'src/app/shared/api-services/context.api.serivce';
 
 @Component({
   selector: 'app-select-entity[control][unitId]',

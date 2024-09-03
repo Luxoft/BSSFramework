@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { IPrincipal } from '../../principals.component';
-import { PrincipalApiService } from 'src/app/shared/api.services';
+import { PrincipalApiService } from 'src/app/shared/api-services/principal.api.service';
 import { DestroyService } from 'src/app/shared/destroy.service';
 import { takeUntil } from 'rxjs';
 

@@ -6,7 +6,8 @@ import { IPermission, IPrincipalDetails } from '../view-principal-dialog/view-pr
 import { AddRoleDialogComponent } from './components/add-role-dialog/add-role-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { PermissionEditDialogComponent } from '../permission-edit-dialog/permission-edit-dialog.component';
-import { ContextsApiService, PrincipalApiService } from 'src/app/shared/api.services';
+import { PrincipalApiService } from 'src/app/shared/api-services/principal.api.service';
+import { ContextsApiService } from 'src/app/shared/api-services/context.api.serivce';
 import { DestroyService } from 'src/app/shared/destroy.service';
 import { IGrantedRight, IRoleContext } from './grant-rights-dialog.models';
 import { HttpClient } from '@angular/common/http';

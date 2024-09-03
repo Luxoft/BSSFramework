@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { IContext, IEntity, IPermission } from '../view-principal-dialog/view-principal-dialog.component';
+import { IContextDto, IEntity, IPermissionDto } from '../principal.models';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -41,7 +41,7 @@ import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker
 })
 export class PermissionEditDialogComponent implements OnInit {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { permission: IPermission; units: IRoleContext[] },
+    @Inject(MAT_DIALOG_DATA) public data: { permission: IPermissionDto; units: IRoleContext[] },
     public dialogRef: MatDialogRef<PermissionEditDialogComponent>,
     public permissionEditDialogService: PermissionEditDialogService,
     public cdr: ChangeDetectorRef
@@ -72,7 +72,7 @@ export class PermissionEditDialogComponent implements OnInit {
       this.cdr.markForCheck();
       return;
     }
-    const Contexts: IContext[] = this.permissionEditDialogService.forms
+    const Contexts: IContextDto[] = this.permissionEditDialogService.forms
       .map((f) => f.value)
       .map((v) => ({
         Id: v.unit?.Id || '',
@@ -80,7 +80,7 @@ export class PermissionEditDialogComponent implements OnInit {
         Entities: ((v.entities as IEntity[]) || []).filter((entity, index, arr) => arr.findIndex((x) => x.Id === entity.Id) === index),
       }));
 
-    const permission: IPermission = {
+    const permission: IPermissionDto = {
       ...this.data.permission,
       StartDate: this.dateToLocalString(dates.start),
       EndDate: dates.end ? this.dateToLocalString(dates.end) : null,

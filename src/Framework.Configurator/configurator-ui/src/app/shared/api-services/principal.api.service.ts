@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IPrincipalDetails } from '../../rights/components/principals/components/view-principal-dialog/view-principal-dialog.component';
+import { IPrincipalDetails } from '../../rights/components/principals/components/principal.models';
 import { Observable } from 'rxjs';
 import { IGrantedRight } from '../../rights/components/principals/components/grant-rights-dialog/grant-rights-dialog.models';
 

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Inject, Injectable, Self } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { IEntity, IPermission } from '../view-principal-dialog/view-principal-dialog.component';
+import { IEntity, IPermissionDto } from '../principal.models';
 import { filter, takeUntil, tap } from 'rxjs';
 import { MassInsertDialogComponent } from './mass-insert-dialog/mass-insert-dialog.component';
 import { DestroyService } from 'src/app/shared/destroy.service';
@@ -23,7 +23,7 @@ export class PermissionEditDialogService {
   }>[] = [];
   validators = [Validators.required, forbiddenContextValidator()];
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { permission: IPermission; units: IRoleContext[] },
+    @Inject(MAT_DIALOG_DATA) public data: { permission: IPermissionDto; units: IRoleContext[] },
     private readonly dialog: MatDialog,
     @Self() private destroy$: DestroyService,
     private readonly cdr: ChangeDetectorRef
@@ -42,7 +42,7 @@ export class PermissionEditDialogService {
     );
   }
 
-  public getEntities(permission: IPermission, context: IRoleContext): IEntity[] {
+  public getEntities(permission: IPermissionDto, context: IRoleContext): IEntity[] {
     return permission.Contexts.find((x) => x.Id === context.Id)?.Entities ?? [];
   }
 

@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable, of, filter, switchMap, tap, startWith, debounceTime, Subject, BehaviorSubject } from 'rxjs';
-import { IEntity } from '../../view-principal-dialog/view-principal-dialog.component';
+import { IEntity } from '../../principal.models';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ContextsApiService } from 'src/app/shared/api-services/context.api.serivce';
 import { MatFormFieldModule } from '@angular/material/form-field';

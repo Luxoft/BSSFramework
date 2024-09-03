@@ -1,8 +1,8 @@
-import { Injectable, Self } from '@angular/core';
+import { Injectable, Injector, Self } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, finalize, firstValueFrom, forkJoin, map, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, finalize, firstValueFrom, forkJoin, map, Observable, takeUntil, tap } from 'rxjs';
 import { IRole } from '../../../roles/roles.component';
-import { IPermission, IPrincipalDetails } from '../view-principal-dialog/view-principal-dialog.component';
+import { IPermission, IPermissionDto, IPrincipalDetails } from '../principal.models';
 import { AddRoleDialogComponent } from './components/add-role-dialog/add-role-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { PermissionEditDialogComponent } from '../permission-edit-dialog/permission-edit-dialog.component';
@@ -10,13 +10,17 @@ import { PrincipalApiService } from 'src/app/shared/api-services/principal.api.s
 import { ContextsApiService } from 'src/app/shared/api-services/context.api.serivce';
 import { DestroyService } from 'src/app/shared/destroy.service';
 import { IGrantedRight, IRoleContext } from './grant-rights-dialog.models';
-import { HttpClient } from '@angular/common/http';
+import { IRoleInfo, RolesApiService } from 'src/app/shared/api-services/role.api.service';
 
 @Injectable()
 export class GrantRightsDialogService {
-  public rightsSubject = new BehaviorSubject<IPrincipalDetails>({ Permissions: [] });
-  public loadedSubject = new BehaviorSubject<boolean>(true);
+  public rights$: Observable<IPermission[]>;
+  public loadedSubject = new BehaviorSubject<boolean>(false);
   public allContextsSubject = new BehaviorSubject<IRoleContext[]>([]);
+  public rolesSubject = new BehaviorSubject<IRoleInfo[]>([]);
+
+  public rightsInternalSubject = new BehaviorSubject<IPrincipalDetails>({ Permissions: [] });
+
   public filter = new BehaviorSubject<{
     contexts?: { contextId: string; search: string }[];
     role?: string;
@@ -29,21 +33,25 @@ export class GrantRightsDialogService {
     private readonly principalApiService: PrincipalApiService,
     private readonly contextsApiService: ContextsApiService,
 
-    private readonly http: HttpClient
-  ) {}
+    private readonly rolesApiService: RolesApiService,
+    private readonly injector: Injector
+  ) {
+    this.rights$ = this.buildPermissionsWithContextRestrictions();
+  }
 
   public init(principalId: string): void {
     this.loadedSubject.next(false);
-    forkJoin([this.principalApiService.getPrincipal(principalId), this.contextsApiService.getContexts()])
+    forkJoin([this.principalApiService.getPrincipal(principalId), this.contextsApiService.getContexts(), this.rolesApiService.getRoles()])
       .pipe(takeUntil(this.destroy$))
-      .subscribe(([rights, contexts]) => {
+      .subscribe(([rights, contexts, roles]) => {
         this.loadedSubject.next(true);
-        this.rightsSubject.next(rights);
+        this.rightsInternalSubject.next(rights);
+        this.rolesSubject.next(roles);
         this.allContextsSubject.next(contexts);
       });
   }
 
-  public remove(permission: IPermission): void {
+  public remove(permission: IPermissionDto): void {
     this.dialog
       .open(ConfirmDialogComponent, {
         data: { title: 'Are you sure you want to delete this role?', button: 'Yes, delete' },
@@ -56,16 +64,16 @@ export class GrantRightsDialogService {
           if (!x) {
             return;
           }
-          const rights = this.rightsSubject.value;
+          const rights = this.rightsInternalSubject.value;
           rights.Permissions = rights.Permissions.filter((x) => x.Id != permission.Id);
-          this.rightsSubject.next(rights);
+          this.rightsInternalSubject.next(rights);
         }),
         takeUntil(this.destroy$)
       )
       .subscribe();
   }
 
-  public edit(permission: IPermission, units: IRoleContext[]): void {
+  public edit(permission: IPermissionDto, units: IRoleContext[]): void {
     this.dialog
       .open(PermissionEditDialogComponent, {
         maxHeight: '90vh',
@@ -76,11 +84,11 @@ export class GrantRightsDialogService {
       .pipe(
         tap((result) => {
           if (result) {
-            const rights = this.rightsSubject.value;
+            const rights = this.rightsInternalSubject.value;
             const findIndex = rights.Permissions.findIndex((x) => x.Id === result.Id);
             if (findIndex > -1) {
               rights.Permissions[findIndex] = result;
-              this.rightsSubject.next(rights);
+              this.rightsInternalSubject.next(rights);
             }
           }
           // TODO: fix next three lines
@@ -95,7 +103,7 @@ export class GrantRightsDialogService {
 
   public addPermission(): void {
     this.dialog
-      .open(AddRoleDialogComponent, { height: '250px', width: '400px' })
+      .open(AddRoleDialogComponent, { injector: this.injector, height: '250px', width: '400px' })
       .afterClosed()
       .pipe(
         tap((x: IRole | string) => {
@@ -103,11 +111,11 @@ export class GrantRightsDialogService {
             return;
           }
 
-          const permission: IPermission = { Id: '', RoleId: x.Id ?? '', Role: x.Name ?? '', Comment: '', Contexts: [] };
-          const rights = this.rightsSubject.value;
+          const permission: IPermissionDto = { Id: '', RoleId: x.Id ?? '', Role: x.Name ?? '', Comment: '', Contexts: [] };
+          const rights = this.rightsInternalSubject.value;
           rights.Permissions.unshift(permission);
           this.edit(permission, this.allContextsSubject.value);
-          this.rightsSubject.next(rights);
+          this.rightsInternalSubject.next(rights);
         }),
         takeUntil(this.destroy$)
       )
@@ -146,7 +154,7 @@ export class GrantRightsDialogService {
   }
 
   private getResult(): IGrantedRight[] {
-    const rights = this.rightsSubject.value;
+    const rights = this.rightsInternalSubject.value;
     return rights.Permissions.map((x) => ({
       PermissionId: x.Id,
       RoleId: x.RoleId ?? '',
@@ -155,5 +163,30 @@ export class GrantRightsDialogService {
       StartDate: x.StartDate ? x.StartDate : null,
       EndDate: x.EndDate ? x.EndDate : null,
     }));
+  }
+
+  private buildPermissionsWithContextRestrictions(): Observable<IPermission[]> {
+    const permissions$ = this.rightsInternalSubject.pipe(map((x) => x.Permissions));
+
+    return combineLatest([permissions$, this.rolesSubject, this.allContextsSubject]).pipe(
+      map(([permissions, roles, contexts]) => permissions.map((permission) => this.mapPermission(permission, roles, contexts)))
+    );
+  }
+
+  private mapPermission(permission: IPermissionDto, roles: IRoleInfo[], contexts: IRoleContext[]): IPermission {
+    const currentRoleContexts = roles.find((r) => r.Name === permission.Role)?.Contexts ?? [];
+
+    const Contexts = contexts.map((context) => {
+      const permissionContext = permission.Contexts.find((c) => c.Id === context.Id);
+      const roleContext = currentRoleContexts.find((c) => c.Name === context.Name);
+      return {
+        ...context,
+        Entities: permissionContext?.Entities ?? [],
+        required: roleContext?.Required ?? false,
+        available: roleContext !== undefined,
+      };
+    });
+
+    return { ...permission, Contexts };
   }
 }

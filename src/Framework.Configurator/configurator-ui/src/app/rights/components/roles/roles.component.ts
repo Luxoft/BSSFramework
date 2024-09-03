@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 
 import { ViewRoleDialogComponent } from './components/view-role-dialog/view-role-dialog.component';
+import { RolesApiService } from 'src/app/shared/api-services/role.api.service';
 
 export interface IRole {
   Id: string | undefined;
@@ -25,10 +25,10 @@ export class RolesComponent implements OnInit {
   public displayedColumns: string[] = ['Name', 'action'];
   private roles$ = new BehaviorSubject<IRole[]>([]);
 
-  constructor(private readonly http: HttpClient, private readonly dialog: MatDialog) {}
+  constructor(private readonly roleApi: RolesApiService, private readonly dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.http.get<IRole[]>('api/roles').subscribe((x) => this.roles$.next(x));
+    firstValueFrom(this.roleApi.getRoles()).then((x) => this.roles$.next(x));
   }
 
   public get dataSource(): Observable<IRole[]> {

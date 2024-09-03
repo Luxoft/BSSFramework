@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IEntity, IPermission } from '../view-principal-dialog/view-principal-dialog.component';
+import { IContextWithRoleRestrictions, IPermission } from '../principal.models';
 import { IRoleContext } from './grant-rights-dialog.models';
 
 @Pipe({
@@ -7,7 +7,7 @@ import { IRoleContext } from './grant-rights-dialog.models';
   standalone: true,
 })
 export class ContextFilterPipe implements PipeTransform {
-  transform(permission: IPermission, context: IRoleContext): IEntity[] {
-    return permission.Contexts.find((x) => x.Id === context.Id)?.Entities ?? [];
+  transform(permission: IPermission, context: IRoleContext): IContextWithRoleRestrictions | undefined {
+    return permission.Contexts.find((x) => x.Id === context.Id);
   }
 }

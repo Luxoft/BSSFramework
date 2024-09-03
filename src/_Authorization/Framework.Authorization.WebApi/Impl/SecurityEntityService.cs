@@ -12,9 +12,7 @@ public partial class AuthSLJsonController
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
                                                  {
-                                                     var securityContextType = evaluateData.Context.Logics.SecurityContextType.GetById(securityContextTypeIdentity.Id, true);
-
-                                                     return evaluateData.Context.ExternalSource.GetTyped(securityContextType).GetSecurityEntities().ToFullDTOList(evaluateData.MappingService);
+                                                     return evaluateData.Context.ExternalSource.GetTyped(securityContextTypeIdentity.Id).GetSecurityEntities().ToFullDTOList(evaluateData.MappingService);
                                                  });
     }
 
@@ -23,9 +21,7 @@ public partial class AuthSLJsonController
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
                                                  {
-                                                     var securityContextType = evaluateData.Context.Logics.SecurityContextType.GetById(request.SecurityContextType.Id, true);
-
-                                                     return evaluateData.Context.ExternalSource.GetTyped(securityContextType).GetSecurityEntitiesByIdents(request.SecurityEntities.Select(v => v.Id)).ToFullDTOList(evaluateData.MappingService);
+                                                     return evaluateData.Context.ExternalSource.GetTyped(request.SecurityContextType.Id).GetSecurityEntitiesByIdents(request.SecurityEntities.Select(v => v.Id)).ToFullDTOList(evaluateData.MappingService);
                                                  });
     }
 }

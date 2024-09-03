@@ -1,14 +1,13 @@
-﻿using Framework.Authorization.Domain;
-using Framework.DomainDriven.Repository;
+﻿using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-namespace Framework.Authorization.SecuritySystem.ExternalSource;
+namespace Framework.DomainDriven.ApplicationCore.ExternalSource;
 
-public abstract class AuthorizationTypedExternalSourceBase<TSecurityContext>(
+public abstract class TypedSecurityEntitySourceBase<TSecurityContext>(
     [DisabledSecurity] IRepository<TSecurityContext> securityContextRepository,
     LocalStorage<TSecurityContext> localStorage)
-    : IAuthorizationTypedExternalSource
+    : ITypedSecurityEntitySource
     where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext
 {
     protected abstract SecurityEntity CreateSecurityEntity(TSecurityContext securityContext);

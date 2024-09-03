@@ -34,7 +34,6 @@ namespace Framework.Authorization.BLL
             base.RegisterHandler<Framework.Authorization.Domain.PermissionRestriction>(this.GetPermissionRestrictionValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.Principal>(this.GetPrincipalValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.SecurityContextType>(this.GetSecurityContextTypeValidationResult);
-            base.RegisterHandler<Framework.Authorization.Domain.SecurityEntity>(this.GetSecurityEntityValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.UpdatePermissionDelegatesModel>(this.GetUpdatePermissionDelegatesModelValidationResult);
         }
         
@@ -74,11 +73,6 @@ namespace Framework.Authorization.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetSecurityContextTypeValidationResult(Framework.Authorization.Domain.SecurityContextType source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSecurityEntityValidationResult(Framework.Authorization.Domain.SecurityEntity source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

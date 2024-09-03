@@ -1,19 +1,16 @@
 ﻿using ClosedXML.Excel;
 
-using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
-using Framework.DomainDriven.ApplicationCore;
-using Framework.DomainDriven.Repository;
+using Framework.Core;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-using NHibernate.Linq;
-
 namespace Framework.Configurator.Handlers;
 
 public record DownloadPermissionTemplateHandler(
-    IRepositoryFactory<SecurityContextType> RepositoryFactory,
+    ISecurityContextSource SecurityContextSource,
     ISecuritySystem SecuritySystem)
     : IDownloadPermissionTemplateHandler
 {
@@ -23,24 +20,16 @@ public record DownloadPermissionTemplateHandler(
     {
         this.SecuritySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
 
-        var contexts = await this.RepositoryFactory
-                                 .Create()
-                                 .GetQueryable()
-                                 .Select(x => x.Name)
-                                 .ToListAsync(cancellationToken);
-
         var assembly = this.GetType().Assembly;
         var resourceStream = assembly.GetManifestResourceStream("Framework.Configurator.Templates.Permissions.xlsx");
         using var workbook = new XLWorkbook(resourceStream);
         var worksheet = workbook.Worksheet(1);
-        for (var i = 0; i < contexts.Count; i++)
-        {
-            var contextName = contexts[i];
 
-            worksheet.Cell(1, FirstContentColumnIndex + i).Value = contextName;
-        }
+        this.SecurityContextSource.SecurityContextTypes.Foreach(
+            (securityContextType, index) =>
+                worksheet.Cell(1, FirstContentColumnIndex + index).Value = securityContextType.Name);
 
-        var ms = new MemoryStream();
+        await using var ms = new MemoryStream();
         workbook.SaveAs(ms);
         ms.Position = 0;
         context.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";

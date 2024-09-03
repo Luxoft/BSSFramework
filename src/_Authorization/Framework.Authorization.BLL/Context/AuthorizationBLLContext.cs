@@ -11,8 +11,8 @@ using Framework.SecuritySystem;
 
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
-using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Authorization.SecuritySystem.Validation;
+using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.Events;
 using Framework.SecuritySystem.Services;
 using Framework.SecuritySystem.UserSource;
@@ -24,6 +24,8 @@ namespace Framework.Authorization.BLL;
 public partial class AuthorizationBLLContext
 {
     private readonly IAuthorizationBLLFactoryContainer logics;
+
+    private readonly ISecurityContextSource securityContextSource;
 
     private readonly IDictionaryCache<string, SecurityContextType> securityContextTypeByNameCache;
 
@@ -41,7 +43,7 @@ public partial class AuthorizationBLLContext
             TimeProvider timeProvider,
             IRootSecurityService<PersistentDomainObjectBase> securityService,
             IAuthorizationBLLFactoryContainer logics,
-            IAuthorizationExternalSource externalSource,
+            ISecurityEntitySource externalSource,
             INotificationPrincipalExtractor notificationPrincipalExtractor,
             ISecuritySystem securitySystem,
             IRunAsManager runAsManager,
@@ -50,6 +52,7 @@ public partial class AuthorizationBLLContext
             ICurrentPrincipalSource currentPrincipalSource,
             IPrincipalGeneralValidator principalValidator,
             ICurrentUser currentUser,
+            ISecurityContextSource securityContextSource,
             BLLContextSettings<PersistentDomainObjectBase> settings,
             IAvailableSecurityOperationSource availableSecurityOperationSource)
             : base(
@@ -65,6 +68,7 @@ public partial class AuthorizationBLLContext
         this.TimeProvider = timeProvider;
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
         this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
+        this.securityContextSource = securityContextSource;
         this.AvailablePermissionSource = availablePermissionSource;
         this.AvailableSecurityRoleSource = availableSecurityRoleSource;
         this.CurrentPrincipalSource = currentPrincipalSource;
@@ -113,7 +117,7 @@ public partial class AuthorizationBLLContext
 
     public override IAuthorizationBLLFactoryContainer Logics => this.logics;
 
-    public IAuthorizationExternalSource ExternalSource { get; }
+    public ISecurityEntitySource ExternalSource { get; }
 
     public TimeProvider TimeProvider { get; }
 

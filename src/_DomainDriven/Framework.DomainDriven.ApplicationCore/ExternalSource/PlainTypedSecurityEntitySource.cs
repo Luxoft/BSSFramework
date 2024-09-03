@@ -1,24 +1,19 @@
-﻿using Framework.Authorization.Domain;
-using Framework.DomainDriven.Repository;
+﻿using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-namespace Framework.Authorization.SecuritySystem.ExternalSource;
+namespace Framework.DomainDriven.ApplicationCore.ExternalSource;
 
-public class PlainAuthorizationTypedExternalSource<TSecurityContext>(
+public class PlainTypedSecurityEntitySource<TSecurityContext>(
     [DisabledSecurity] IRepository<TSecurityContext> securityContextRepository,
     LocalStorage<TSecurityContext> localStorage,
     ISecurityContextDisplayService<TSecurityContext> displayService)
-    : AuthorizationTypedExternalSourceBase<TSecurityContext>(securityContextRepository, localStorage)
+    : TypedSecurityEntitySourceBase<TSecurityContext>(securityContextRepository, localStorage)
     where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext
 {
     protected override SecurityEntity CreateSecurityEntity(TSecurityContext securityContext) =>
 
-        new SecurityEntity
-        {
-            Name = displayService.ToString(securityContext),
-            Id = securityContext.Id
-        };
+        new (securityContext.Id, displayService.ToString(securityContext), Guid.Empty);
 
     protected override IEnumerable<TSecurityContext> GetSecurityEntitiesWithMasterExpand(TSecurityContext startSecurityObject)
     {

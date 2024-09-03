@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 
 using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Core;
+using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
@@ -15,7 +15,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     private readonly TimeProvider timeProvider;
 
-    private readonly IAuthorizationExternalSource externalSource;
+    private readonly ISecurityEntitySource externalSource;
 
     private readonly ISecurityContextSource securityContextSource;
 
@@ -23,7 +23,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     public PermissionDelegateValidator(
         TimeProvider timeProvider,
-        IAuthorizationExternalSource externalSource,
+        ISecurityEntitySource externalSource,
         ISecurityContextSource securityContextSource,
         ISecurityRoleSource securityRoleSource)
     {
@@ -155,7 +155,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
         var invalidRequest1 = from requiredGroup in requiredEntitiesRequest
 
-                              let allSecurityEntities = this.externalSource.GetTyped(requiredGroup.Key).GetSecurityEntities()
+                              let allSecurityEntities = this.externalSource.GetTyped(requiredGroup.Key.Id).GetSecurityEntities()
 
                               let securityContextType = requiredGroup.Key
 
@@ -197,13 +197,13 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
         var invalidRequest2 = from securityContextType in allowedEntitiesDict.Keys
 
-                              join requeredGroup in requiredEntitiesRequest on securityContextType equals requeredGroup.Key into g
+                              join requiredGroup in requiredEntitiesRequest on securityContextType equals requiredGroup.Key into g
 
                               where !g.Any()
 
                               let key = securityContextType
 
-                              let value = (IEnumerable<SecurityEntity>)new[] { new SecurityEntity { Name = "[Not Selected Element]" } }
+                              let value = (IEnumerable<SecurityEntity>)new[] { new SecurityEntity(Guid.Empty, "[Not Selected Element]", Guid.Empty) }
 
                               select (key, value);
 

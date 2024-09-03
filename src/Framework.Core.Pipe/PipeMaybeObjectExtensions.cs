@@ -17,12 +17,10 @@ public static class PipeMaybeObjectExtensions
     }
 
     [DebuggerStepThrough]
-    public static TResult? Maybe<TSource, TResult>(this TSource? source, Func<TSource, TResult> selector)
-            where TSource : class
+    public static TResult Maybe<TSource, TResult>(this TSource? source, Func<TSource, TResult> selector)
     {
-        return null == source ? default(TResult) : selector(source);
+        return null == source ? default : selector(source);
     }
-
 
     public static void MaybeNullable<TSource>(this TSource? source, Action<TSource> evaluate)
             where TSource : struct

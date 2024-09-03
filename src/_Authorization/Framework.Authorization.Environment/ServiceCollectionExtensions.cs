@@ -4,11 +4,10 @@ using Framework.Authorization.Domain;
 using Framework.Authorization.Environment.Security;
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
-using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Authorization.SecuritySystem.Initialize;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.DomainDriven._Visitors;
-using Framework.DomainDriven.ApplicationCore;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.ExternalSystem;
@@ -54,9 +53,6 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<InitializerSettings>()
                        .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
-
-                       .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource>()
-                       .AddScoped(typeof(LocalStorage<>))
 
                        .AddScoped<IPrincipalDomainService, PrincipalDomainService>()
 

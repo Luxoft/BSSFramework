@@ -1,12 +1,12 @@
-﻿using Framework.Authorization.SecuritySystem;
-using Framework.Configurator.Interfaces;
+﻿using Framework.Configurator.Interfaces;
+using Framework.SecuritySystem.Services;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetRunAsHandler(ICurrentPrincipalSource principalSource) : BaseReadHandler, IGetRunAsHandler
+public class GetRunAsHandler(IRunAsManager? runAsManager = null) : BaseReadHandler, IGetRunAsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken) =>
-        principalSource.CurrentPrincipal.RunAs?.Name ?? string.Empty;
+        runAsManager?.RunAsName ?? string.Empty;
 }

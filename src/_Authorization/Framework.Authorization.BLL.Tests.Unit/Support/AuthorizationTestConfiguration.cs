@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Core;
+using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
@@ -35,20 +35,21 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
 
     public AuthorizationTestConfiguration WithExternalSourceMock(Guid[] result)
     {
-        return this.WithExternalSourceMock(new AuthorizationTypedExternalSourceStub(result));
+        return this.WithExternalSourceMock(new TypedSecurityEntitySourceStub(result));
     }
 
     public AuthorizationTestConfiguration WithExternalSourceMock(SecurityEntity[] result)
     {
-        return this.WithExternalSourceMock(new AuthorizationTypedExternalSourceStub(result));
+        return this.WithExternalSourceMock(new TypedSecurityEntitySourceStub(result));
     }
 
-    private AuthorizationTestConfiguration WithExternalSourceMock(AuthorizationTypedExternalSourceStub stub)
+    private AuthorizationTestConfiguration WithExternalSourceMock(TypedSecurityEntitySourceStub stub)
     {
-        var authorizationExternalSourceMock = Substitute.For<IAuthorizationExternalSource>();
-        authorizationExternalSourceMock.GetTyped(Arg.Any<SecurityContextType>()).Returns(stub);
+        var securityEntitySourceMock = Substitute.For<ISecurityEntitySource>();
+        securityEntitySourceMock.GetTyped(Arg.Any<Type>()).Returns(stub);
+        securityEntitySourceMock.GetTyped(Arg.Any<Guid>()).Returns(stub);
 
-        this.Context.ExternalSource.Returns(authorizationExternalSourceMock);
+        this.Context.ExternalSource.Returns(securityEntitySourceMock);
         return this;
     }
 
@@ -61,17 +62,17 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
         return this;
     }
 
-    private class AuthorizationTypedExternalSourceStub : IAuthorizationTypedExternalSource
+    private class TypedSecurityEntitySourceStub : ITypedSecurityEntitySource
     {
         private readonly Guid[] result;
         private readonly SecurityEntity[] result2;
 
-        public AuthorizationTypedExternalSourceStub(Guid[] result)
+        public TypedSecurityEntitySourceStub(Guid[] result)
         {
             this.result = result;
         }
 
-        public AuthorizationTypedExternalSourceStub(SecurityEntity[] result2)
+        public TypedSecurityEntitySourceStub(SecurityEntity[] result2)
         {
             this.result2 = result2;
         }

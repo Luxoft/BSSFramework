@@ -1,20 +1,19 @@
 ﻿using System.Collections.ObjectModel;
 
-using Framework.Authorization.Domain;
 using Framework.Core;
 
-namespace Framework.Authorization.SecuritySystem.ExternalSource;
+namespace Framework.DomainDriven.ApplicationCore.ExternalSource;
 
-public static class AuthorizationTypedExternalSourceExtensions
+public static class TypedSecurityEntitySourceExtensions
 {
-    public static IAuthorizationTypedExternalSource WithCache(this IAuthorizationTypedExternalSource source)
+    public static ITypedSecurityEntitySource WithCache(this ITypedSecurityEntitySource source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        return new AuthorizationTypedExternalSource(source);
+        return new TypedSecurityEntitySource(source);
     }
 
-    private class AuthorizationTypedExternalSource(IAuthorizationTypedExternalSource baseSource) : IAuthorizationTypedExternalSource
+    private class TypedSecurityEntitySource(ITypedSecurityEntitySource baseSource) : ITypedSecurityEntitySource
     {
         private readonly Lazy<ReadOnlyCollection<SecurityEntity>> lazySecurityEntities = LazyHelper.Create(() => baseSource.GetSecurityEntities().ToReadOnlyCollection());
 

@@ -18,9 +18,7 @@ public abstract class ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurit
     {
         var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-        var getIdents = permissionSystem.GetPermissionRestrictions(typeof(TSecurityContext));
-
-        var fullAccessFilter = getIdents.Select(ident => !ident.Any());
+        var grandAccessExpr = permissionSystem.GetGrandAccessExpr<TSecurityContext>();
 
         if (securityObjects.Any())
         {
@@ -28,12 +26,11 @@ public abstract class ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurit
                                  .Create(typeof(TSecurityContext))
                                  .Expand(securityObjects.Select(securityObject => securityObject.Id), expandType.Reverse());
 
-            return fullAccessFilter.BuildOr(
-                getIdents.Select(restrictionIdents => restrictionIdents.Any(restrictionIdent => securityIdents.Contains(restrictionIdent))));
+            return grandAccessExpr.BuildOr(permissionSystem.GetContainsIdentsExpr<TSecurityContext>(securityIdents));
         }
         else
         {
-            return fullAccessFilter;
+            return grandAccessExpr;
         }
     }
 

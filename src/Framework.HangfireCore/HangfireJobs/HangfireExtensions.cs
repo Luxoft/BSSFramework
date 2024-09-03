@@ -64,7 +64,7 @@ public static class HangfireExtensions
             dashboardUrl,
             new DashboardOptions
             {
-                DashboardTitle = "Regular jobs", Authorization = new[] { authorizationFilter ?? new BaseHangfireAuthorization() }
+                DashboardTitle = "Regular jobs", Authorization = new[] { authorizationFilter ?? new AdminHangfireAuthorization() }
             });
 
         var settings = new HangfireSettings();

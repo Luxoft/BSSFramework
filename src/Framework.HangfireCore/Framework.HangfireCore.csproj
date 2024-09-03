@@ -13,4 +13,8 @@
     <PackageReference Include="Microsoft.Data.SqlClient" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -4,7 +4,7 @@ using Framework.Persistent;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.SecurityAccessor;
-using Framework.SecuritySystem.UserSource;
+using Framework.SecuritySystem.Services;
 
 namespace Framework.SecuritySystem.DependencyInjection;
 
@@ -29,13 +29,16 @@ public interface ISecuritySystemSettings
     ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>()
         where TPermissionSystem : class, IPermissionSystem;
 
+    ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>(Func<IServiceProvider, TPermissionSystem> factory)
+        where TPermissionSystem : class, IPermissionSystem;
+
     ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions);
 
     ISecuritySystemSettings SetAccessDeniedExceptionService<TAccessDeniedExceptionService>()
         where TAccessDeniedExceptionService : class, IAccessDeniedExceptionService;
 
-    ISecuritySystemSettings SetCurrentUser<TCurrentUser>()
-        where TCurrentUser : class, ICurrentUser;
+    ISecuritySystemSettings SetRunAsManager<TRunAsManager>()
+        where TRunAsManager : class, IRunAsManager;
 
     ISecuritySystemSettings SetUserSource<TUserDomainObject>(
         Expression<Func<TUserDomainObject, Guid>> idPath,

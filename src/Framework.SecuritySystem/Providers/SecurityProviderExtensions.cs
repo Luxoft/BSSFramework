@@ -63,8 +63,8 @@ public static class SecurityProviderExtensions
     {
         public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable) =>
             orAnd
-                ? securityProvider.InjectFilter(queryable).Pipe(q => otherSecurityProvider.InjectFilter(q))
-                : securityProvider.InjectFilter(queryable).Concat(otherSecurityProvider.InjectFilter(queryable));
+                ? securityProvider.InjectFilter(queryable).Pipe(otherSecurityProvider.InjectFilter)
+                : securityProvider.InjectFilter(queryable).Union(otherSecurityProvider.InjectFilter(queryable));
 
         public AccessResult GetAccessResult(TDomainObject domainObject) =>
             orAnd

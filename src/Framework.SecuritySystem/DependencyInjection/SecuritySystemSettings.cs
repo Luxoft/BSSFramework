@@ -18,6 +18,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public Action<IServiceCollection> RegisterUserSourceAction { get; private set; } = _ => { };
 
+    public Action<IServiceCollection> RegisterRunAsManagerAction { get; private set; } = _ => { };
+
     public bool InitializeAdministratorRole { get;  set; } = true;
 
     public Type AccessDeniedExceptionServiceType { get; private set; } = typeof(AccessDeniedExceptionService);
@@ -78,6 +80,14 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
+    public ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>(Func<IServiceProvider, TPermissionSystem> factory)
+        where TPermissionSystem : class, IPermissionSystem
+    {
+        this.RegisterActions.Add(sc => sc.AddScoped<IPermissionSystem>(factory));
+
+        return this;
+    }
+
     public ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions)
     {
         this.RegisterActions.Add(extensions.AddServices);
@@ -89,14 +99,6 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         where TAccessDeniedExceptionService : class, IAccessDeniedExceptionService
     {
         this.AccessDeniedExceptionServiceType = typeof(TAccessDeniedExceptionService);
-
-        return this;
-    }
-
-    public ISecuritySystemSettings SetCurrentUser<TCurrentUser>()
-        where TCurrentUser : class, ICurrentUser
-    {
-        this.CurrentUserType = typeof(TCurrentUser);
 
         return this;
     }
@@ -119,6 +121,14 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
                                             sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUserDomainObject>>();
                                         };
+
+        return this;
+    }
+
+    public ISecuritySystemSettings SetRunAsManager<TRunAsManager>()
+        where TRunAsManager : class, IRunAsManager
+    {
+        this.RegisterRunAsManagerAction = sc => sc.AddScoped<IRunAsManager, TRunAsManager>();
 
         return this;
     }

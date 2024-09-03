@@ -1,5 +1,5 @@
 ﻿using Framework.DomainDriven.WebApiNetCore.Auth;
-using Framework.NotificationCore.Monitoring;
+using Framework.HangfireCore;
 using Framework.SecuritySystem.UserSource;
 
 using Hangfire.Dashboard;

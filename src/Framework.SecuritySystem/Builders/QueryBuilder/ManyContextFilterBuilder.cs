@@ -17,7 +17,9 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
     public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
             HierarchicalExpandType expandType)
     {
-        var getIdents = permissionSystem.GetPermissionRestrictions(typeof(TSecurityContext));
+        var grandAccessExpr = permissionSystem.GetGrandAccessExpr<TSecurityContext>();
+
+        var getIdents = permissionSystem.GetPermissionRestrictionsExpr<TSecurityContext>();
 
         var expander =
             (IHierarchicalObjectQueryableExpander<Guid>)hierarchicalObjectExpanderFactory.Create(
@@ -26,6 +28,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
         var expandExpression = expander.GetExpandExpression(expandType);
 
         var expandExpressionQ = from idents in getIdents
+
                                 select expandExpression.Eval(idents);
 
         switch (securityPath.Mode)
@@ -36,7 +39,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
                     {
                         return (domainObject, permission) =>
 
-                                   !getIdents.Eval(permission).Any()
+                                   grandAccessExpr.Eval(permission)
 
                                    || securityPath.SecurityPathQ.Eval(domainObject)
                                           .Any(item => expandExpressionQ.Eval(permission).Contains(item.Id));
@@ -45,7 +48,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
                     {
                         return (domainObject, permission) =>
 
-                                   !getIdents.Eval(permission).Any()
+                                   grandAccessExpr.Eval(permission)
 
                                    || securityPath.SecurityPath.Eval(domainObject)
                                           .Any(item => expandExpressionQ.Eval(permission).Contains(item.Id));
@@ -58,7 +61,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
                     {
                         return (domainObject, permission) =>
 
-                                   !getIdents.Eval(permission).Any()
+                                   grandAccessExpr.Eval(permission)
 
                                    || !securityPath.SecurityPathQ.Eval(domainObject).Any()
 
@@ -68,7 +71,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
                     {
                         return (domainObject, permission) =>
 
-                                   !getIdents.Eval(permission).Any()
+                                   grandAccessExpr.Eval(permission)
 
                                    || !securityPath.SecurityPath.Eval(domainObject).Any()
 

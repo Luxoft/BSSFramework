@@ -19,10 +19,11 @@ public class AccessorsFilterBuilderFactory<TDomainObject>(IServiceProvider servi
             var factory = (IAccessorsFilterFactory<TDomainObject>)ActivatorUtilities.CreateInstance(serviceProvider, factoryType, permissionSystem);
 
             return factory.CreateFilter(securityRule, securityPath);
-        });
+        }).ToList();
 
         return new AccessorsFilterInfo<TDomainObject>(
-            domainObject => accessorsFilterInfoList.SelectMany(accessorsFilterInfo => accessorsFilterInfo.GetAccessorsFunc(domainObject)));
+            domainObject => accessorsFilterInfoList.SelectMany(accessorsFilterInfo => accessorsFilterInfo.GetAccessorsFunc(domainObject))
+                                                   .Distinct(StringComparer.CurrentCultureIgnoreCase));
     }
 }
 

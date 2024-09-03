@@ -15,6 +15,7 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
 
     public List<Action<IServiceCollection>> RegisterActions { get; set; } = new();
 
+    public bool RegisterRunAsManager { get; set; } = true;
 
     public IAuthorizationSystemSettings SetNotificationPrincipalExtractor<T>()
         where T : INotificationPrincipalExtractor

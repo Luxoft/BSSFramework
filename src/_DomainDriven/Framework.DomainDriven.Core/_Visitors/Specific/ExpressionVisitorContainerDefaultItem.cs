@@ -10,7 +10,7 @@ public class ExpressionVisitorContainerDefaultItem : IExpressionVisitorContainer
     public IEnumerable<ExpressionVisitor> GetVisitors()
     {
         yield return OptimizeBooleanLogicVisitor.Value;
-        yield return OptimizeWhereAndConcatVisitor.Value;
+        yield return SquashWhereQueryableVisitor.Value;
 
         yield return RestoreQueryableCallsVisitor.Value;
 

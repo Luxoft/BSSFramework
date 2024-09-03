@@ -55,12 +55,8 @@
           <span>Delete</span>
         </button>
       </mat-menu>
-      <div
-        class="tw-break-all"
-        [appHighlight]="obj.filter?.role" [text]="element.Role"></div>
-      <div
-        class="tw-overflow-scroll tw-max-h-[80px]"
-        [appHighlight]="obj.filter?.comment" [text]="element.Comment"></div>
+      <div class="tw-break-all" [appHighlight]="obj.filter?.role" [text]="element.Role"></div>
+      <div class="tw-overflow-scroll tw-max-h-[80px]" [appHighlight]="obj.filter?.comment" [text]="element.Comment"></div>
       <div class="tw-flex tw-items-center">
         <div class="tw-flex tw-gap-4 tw-my-1">
           <app-select-context
@@ -77,7 +73,7 @@
 
 <div mat-dialog-actions class="tw-flex tw-justify-end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="grantRightsDialogService.getResult()" cdkFocusInitial>Save</button>
+  <button mat-raised-button color="primary" [disabled]="(loaded$ | async) !== true" (click)="save()" cdkFocusInitial>Save</button>
 </div>
 
 <ng-template #loading>

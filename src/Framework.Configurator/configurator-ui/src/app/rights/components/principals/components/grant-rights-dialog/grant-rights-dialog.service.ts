@@ -1,6 +1,6 @@
 import { Injectable, Self } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, forkJoin, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, finalize, firstValueFrom, forkJoin, map, takeUntil, tap } from 'rxjs';
 import { IRole } from '../../../roles/roles.component';
 import { IPermission, IPrincipalDetails } from '../view-principal-dialog/view-principal-dialog.component';
 import { AddRoleDialogComponent } from './components/add-role-dialog/add-role-dialog.component';
@@ -9,6 +9,7 @@ import { PermissionEditDialogComponent } from '../permission-edit-dialog/permiss
 import { ContextsApiService, PrincipalApiService } from 'src/app/shared/api.services';
 import { DestroyService } from 'src/app/shared/destroy.service';
 import { IGrantedRight, IRoleContext } from './grant-rights-dialog.models';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class GrantRightsDialogService {
@@ -25,7 +26,9 @@ export class GrantRightsDialogService {
     @Self() private destroy$: DestroyService,
     private readonly dialog: MatDialog,
     private readonly principalApiService: PrincipalApiService,
-    private readonly contextsApiService: ContextsApiService
+    private readonly contextsApiService: ContextsApiService,
+
+    private readonly http: HttpClient
   ) {}
 
   public init(principalId: string): void {
@@ -110,18 +113,6 @@ export class GrantRightsDialogService {
       .subscribe();
   }
 
-  public getResult(): IGrantedRight[] {
-    const rights = this.rightsSubject.value;
-    return rights.Permissions.map((x) => ({
-      PermissionId: x.Id,
-      RoleId: x.RoleId ?? '',
-      Comment: x.Comment ?? '',
-      Contexts: x.Contexts.map((c) => ({ Id: c.Id, Entities: c.Entities.map((e) => e.Id) })),
-      StartDate: x.StartDate ? x.StartDate : null,
-      EndDate: x.EndDate ? x.EndDate : null,
-    }));
-  }
-
   public searchContext(contextId: string, search: string) {
     const contextFilter = this.filter.value.contexts || [];
     const index = contextFilter.findIndex((conext) => conext.contextId === contextId);
@@ -138,7 +129,30 @@ export class GrantRightsDialogService {
     this.filter.next({ ...this.filter.value, role: search });
   }
 
-  searchComment(search: string) {
+  public searchComment(search: string) {
     this.filter.next({ ...this.filter.value, comment: search });
+  }
+
+  public savePermissions(principalId: string): Promise<boolean> {
+    const permissions = this.getResult();
+    this.loadedSubject.next(false);
+    return firstValueFrom(
+      this.principalApiService.savePermissions(principalId, permissions).pipe(
+        map(() => true),
+        finalize(() => this.loadedSubject.next(true))
+      )
+    );
+  }
+
+  private getResult(): IGrantedRight[] {
+    const rights = this.rightsSubject.value;
+    return rights.Permissions.map((x) => ({
+      PermissionId: x.Id,
+      RoleId: x.RoleId ?? '',
+      Comment: x.Comment ?? '',
+      Contexts: x.Contexts.map((c) => ({ Id: c.Id, Entities: c.Entities.map((e) => e.Id) })),
+      StartDate: x.StartDate ? x.StartDate : null,
+      EndDate: x.EndDate ? x.EndDate : null,
+    }));
   }
 }

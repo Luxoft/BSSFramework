@@ -14,7 +14,6 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-di
 
 import { EditPrincipalDialogComponent } from './components/edit-principal-dialog/edit-principal-dialog.component';
 import { GrantRightsDialogComponent } from './components/grant-rights-dialog/grant-rights-dialog.component';
-import { IGrantedRight } from './components/grant-rights-dialog/grant-rights-dialog.models';
 import { ViewPrincipalDialogComponent } from './components/view-principal-dialog/view-principal-dialog.component';
 
 export interface IPrincipal {
@@ -113,12 +112,12 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
     this.dialog
       .open(GrantRightsDialogComponent, { data: principal, height: '90vh', maxWidth: '90vw', minWidth: '1000px' })
       .beforeClosed()
-      .subscribe((x: IGrantedRight) => {
+      .subscribe((x: boolean) => {
         if (!x) {
           return;
         }
 
-        this.http.post(`api/principal/${principal.Id}/permissions`, x).subscribe(() => this.reload('Rights has been granted'));
+        this.reload('Rights has been granted');
       });
   }
 

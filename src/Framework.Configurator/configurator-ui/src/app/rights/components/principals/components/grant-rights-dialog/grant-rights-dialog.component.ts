@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { IPrincipal } from '../../principals.component';
 import { SelectContextComponent } from './components/select-context/select-context.component';
@@ -48,11 +48,23 @@ export class GrantRightsDialogComponent implements OnInit {
 
   public displayedColumns = ['actions', 'Role', 'Comment', 'Contexts'];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IPrincipal, public readonly grantRightsDialogService: GrantRightsDialogService) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: IPrincipal,
+    public readonly grantRightsDialogService: GrantRightsDialogService,
+    private readonly dialog: MatDialogRef<GrantRightsDialogComponent>
+  ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     if (this.data.Id) {
       this.grantRightsDialogService.init(this.data.Id);
     }
+  }
+
+  public save(): void {
+    if (this.data.Id === undefined) {
+      throw new Error("Can't save permissions for empty principal");
+    }
+
+    this.grantRightsDialogService.savePermissions(this.data.Id).then(() => this.dialog.close(true));
   }
 }

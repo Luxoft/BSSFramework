@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Inject, Injectable, Self } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { IEntity, IPermissionDto } from '../principal.models';
+import { IContextWithRoleRestrictions, IEntity, IPermission, IPermissionDto } from '../principal.models';
 import { filter, takeUntil, tap } from 'rxjs';
 import { MassInsertDialogComponent } from './mass-insert-dialog/mass-insert-dialog.component';
 import { DestroyService } from 'src/app/shared/destroy.service';
@@ -18,20 +18,20 @@ export function forbiddenContextValidator(): ValidatorFn {
 @Injectable()
 export class PermissionEditDialogService {
   public forms: FormGroup<{
-    unit: FormControl<IRoleContext>;
+    unit: FormControl<IContextWithRoleRestrictions>;
     entities: FormArray<FormControl<IEntity | null>>;
   }>[] = [];
   validators = [Validators.required, forbiddenContextValidator()];
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { permission: IPermissionDto; units: IRoleContext[] },
+    @Inject(MAT_DIALOG_DATA) public data: { permission: IPermission; units: IRoleContext[] },
     private readonly dialog: MatDialog,
     @Self() private destroy$: DestroyService,
     private readonly cdr: ChangeDetectorRef
   ) {
-    this.data.units.forEach((unit) =>
+    this.data.permission.Contexts.filter((x) => x.available).forEach((unit) =>
       this.forms.push(
         new FormGroup({
-          unit: new FormControl<IRoleContext>(unit, { nonNullable: true }),
+          unit: new FormControl<IContextWithRoleRestrictions>(unit, { nonNullable: true }),
           entities: new FormArray<FormControl<IEntity | null>>(
             this.getEntities(data.permission, unit).map(
               (entity) => new FormControl<IEntity>({ ...entity, recentlySavedValue: true }, this.validators)

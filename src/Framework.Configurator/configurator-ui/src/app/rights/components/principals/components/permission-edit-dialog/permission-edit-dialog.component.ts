@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { IContextDto, IEntity, IPermissionDto } from '../principal.models';
+import { IContextDto, IEntity, IPermission, IPermissionDto } from '../principal.models';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -41,7 +41,7 @@ import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker
 })
 export class PermissionEditDialogComponent implements OnInit {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { permission: IPermissionDto; units: IRoleContext[] },
+    @Inject(MAT_DIALOG_DATA) public data: { permission: IPermission; units: IRoleContext[] },
     public dialogRef: MatDialogRef<PermissionEditDialogComponent>,
     public permissionEditDialogService: PermissionEditDialogService,
     public cdr: ChangeDetectorRef

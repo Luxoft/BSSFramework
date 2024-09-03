@@ -73,7 +73,9 @@ export class GrantRightsDialogService {
       .subscribe();
   }
 
-  public edit(permission: IPermissionDto, units: IRoleContext[]): void {
+  public edit(permissionDto: IPermissionDto, units: IRoleContext[]): void {
+    const permission = this.mapPermission(permissionDto, this.rolesSubject.value, this.allContextsSubject.value);
+
     this.dialog
       .open(PermissionEditDialogComponent, {
         maxHeight: '90vh',

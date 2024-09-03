@@ -88,8 +88,10 @@ export class GrantRightsDialogService {
             const findIndex = rights.Permissions.findIndex((x) => x.Id === result.Id);
             if (findIndex > -1) {
               rights.Permissions[findIndex] = result;
-              this.rightsInternalSubject.next(rights);
+            } else {
+              rights.Permissions.unshift(result);
             }
+            this.rightsInternalSubject.next(rights);
           }
           // TODO: fix next three lines
           const filterValue = this.filter.value;
@@ -112,10 +114,7 @@ export class GrantRightsDialogService {
           }
 
           const permission: IPermissionDto = { Id: '', RoleId: x.Id ?? '', Role: x.Name ?? '', Comment: '', Contexts: [] };
-          const rights = this.rightsInternalSubject.value;
-          rights.Permissions.unshift(permission);
           this.edit(permission, this.allContextsSubject.value);
-          this.rightsInternalSubject.next(rights);
         }),
         takeUntil(this.destroy$)
       )

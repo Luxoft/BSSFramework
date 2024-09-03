@@ -55,6 +55,7 @@ public static class ServiceCollectionExtensions
 
         settings.RegisterActions.ForEach(v => v(services));
         settings.RegisterUserSourceAction(services);
+        settings.RegisterRunAsManagerAction(services);
 
         if (settings.InitializeAdministratorRole)
         {

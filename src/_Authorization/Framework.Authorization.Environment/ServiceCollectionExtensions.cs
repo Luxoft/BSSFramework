@@ -7,13 +7,12 @@ using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Authorization.SecuritySystem.Initialize;
 using Framework.Authorization.SecuritySystem.Validation;
-using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.ExternalSystem;
-using Framework.SecuritySystem.UserSource;
+using Framework.SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -37,14 +36,17 @@ public static class ServiceCollectionExtensions
         services.AddScoped<INotificationBasePermissionFilterSource, NotificationBasePermissionFilterSource>();
         services.AddScoped(typeof(INotificationPrincipalExtractor), settings.NotificationPrincipalExtractorType);
 
+        if (settings.RegisterRunAsManager)
+        {
+            services.AddScoped<IRunAsManager, AuthorizationRunAsManager>();
+        }
+
         return services;
     }
 
     private static IServiceCollection RegisterGeneralAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScoped<IRunAsManager, RunAsManger>()
-
-                       .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
+        return services.AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
                        .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
 
                        .AddScoped<IAuthorizationSystemFactory, AuthorizationSystemFactory>()
@@ -110,7 +112,6 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection UpdateSecuritySystem(this IServiceCollection services)
     {
-        return services.ReplaceScoped<ICurrentUser, AuthorizationCurrentUser>()
-                       .AddScoped<IPermissionSystem, AuthorizationPermissionSystem>();
+        return services.AddScoped<IPermissionSystem, AuthorizationPermissionSystem>();
     }
 }

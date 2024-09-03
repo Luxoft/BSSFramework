@@ -7,6 +7,8 @@ namespace Framework.Authorization.Environment;
 
 public interface IAuthorizationSystemSettings
 {
+    bool RegisterRunAsManager { get; set; }
+
     IAuthorizationSystemSettings SetNotificationPrincipalExtractor<T>()
         where T : INotificationPrincipalExtractor;
 

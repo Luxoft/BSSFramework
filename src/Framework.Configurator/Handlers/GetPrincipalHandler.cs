@@ -1,8 +1,8 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
-using Framework.DomainDriven.ApplicationCore;
+using Framework.DomainDriven.ApplicationCore.ExternalSource;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
@@ -15,7 +15,7 @@ namespace Framework.Configurator.Handlers;
 public class GetPrincipalHandler(
     IRepositoryFactory<Permission> permissionRepoFactory,
     IRepositoryFactory<SecurityContextType> contextTypeRepoFactory,
-    IAuthorizationExternalSource externalSource,
+    ISecurityEntitySource externalSource,
     ISecuritySystem securitySystem) : BaseReadHandler, IGetPrincipalHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
@@ -56,7 +56,7 @@ public class GetPrincipalHandler(
         foreach (var group in permissions.SelectMany(x => x.Contexts).GroupBy(x => x.Key, x => x.Value))
         {
             var contextType = await contextTypeRepoFactory.Create().LoadAsync(group.Key, token);
-            var entities = externalSource.GetTyped(contextType)
+            var entities = externalSource.GetTyped(group.Key)
                                          .GetSecurityEntitiesByIdents(group.Distinct().ToList())
                                          .ToDictionary(e => e.Id, e => e.Name);
 

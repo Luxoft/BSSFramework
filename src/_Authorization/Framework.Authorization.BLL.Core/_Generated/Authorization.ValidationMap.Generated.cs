@@ -146,10 +146,6 @@ namespace Framework.Authorization.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSecurityContextTypeValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.SecurityEntity)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSecurityEntityValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetUpdatePermissionDelegatesModelValidationMap()));
@@ -377,21 +373,6 @@ namespace Framework.Authorization.BLL
         protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SecurityContextType> GetSecurityContextTypeValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.SecurityContextType>(this.GetSecurityContextTypeProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.SecurityEntity, string>> GetSecurityEntity_NameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.SecurityEntity>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.SecurityEntity>> GetSecurityEntityProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SecurityEntity> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.SecurityEntity, string>(source => source.Name, currentClass, this.GetSecurityEntity_NameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SecurityEntity> GetSecurityEntityValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.SecurityEntity>(this.GetSecurityEntityProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.DelegateToItemModel>>> GetUpdatePermissionDelegatesModel_AddItemsValidators()

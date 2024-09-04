@@ -1,6 +1,6 @@
 ﻿using Framework.SecuritySystem;
 
-namespace Framework.DomainDriven.ApplicationCore;
+namespace Framework.DomainDriven.ApplicationCore.Security;
 
 public static class SecuritySystemExtensions
 {

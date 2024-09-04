@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.ApplicationCore;
+﻿using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
@@ -10,7 +10,7 @@ namespace Framework.DomainDriven.Setup;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddBssFramework(this IServiceCollection services, Action<IBssFrameworkSettings> setupAction)
+    public static IServiceCollection AddBssFramework(this IServiceCollection services, Action<IBssFrameworkSettings>? setupAction)
     {
         services.RegisterGenericServices();
         services.RegisterWebApiGenericServices();

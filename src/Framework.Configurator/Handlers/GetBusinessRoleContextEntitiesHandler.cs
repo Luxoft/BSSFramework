@@ -1,9 +1,7 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem.ExternalSource;
-using Framework.Configurator.Interfaces;
+﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
-using Framework.DomainDriven.ApplicationCore;
-using Framework.DomainDriven.Repository;
+using Framework.DomainDriven.ApplicationCore.ExternalSource;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
@@ -11,8 +9,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class GetBusinessRoleContextEntitiesHandler(
-    IRepositoryFactory<SecurityContextType> contextTypeRepositoryFactory,
-    IAuthorizationExternalSource externalSource,
+    ISecurityEntitySource externalSource,
     ISecuritySystem securitySystem)
     : BaseReadHandler, IGetBusinessRoleContextEntitiesHandler
 {
@@ -23,8 +20,7 @@ public class GetBusinessRoleContextEntitiesHandler(
         var securityContextTypeId = new Guid((string)context.Request.RouteValues["id"]!);
         var searchToken = context.Request.Query["searchToken"];
 
-        var contextType = await contextTypeRepositoryFactory.Create().LoadAsync(securityContextTypeId, cancellationToken);
-        var entities = externalSource.GetTyped(contextType).GetSecurityEntities();
+        var entities = externalSource.GetTyped(securityContextTypeId).GetSecurityEntities();
 
         if (!string.IsNullOrWhiteSpace(searchToken))
             entities = entities.Where(p => p.Name.Contains(searchToken!, StringComparison.OrdinalIgnoreCase));

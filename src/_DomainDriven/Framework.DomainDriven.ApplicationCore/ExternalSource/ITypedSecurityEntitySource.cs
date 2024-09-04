@@ -1,8 +1,6 @@
-﻿using Framework.Authorization.Domain;
+﻿namespace Framework.DomainDriven.ApplicationCore.ExternalSource;
 
-namespace Framework.Authorization.SecuritySystem.ExternalSource;
-
-public interface IAuthorizationTypedExternalSource
+public interface ITypedSecurityEntitySource
 {
     IEnumerable<SecurityEntity> GetSecurityEntities();
 

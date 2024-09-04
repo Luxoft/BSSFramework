@@ -17,7 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ApplicationCore\Framework.DomainDriven.ApplicationCore.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
   </ItemGroup>
 

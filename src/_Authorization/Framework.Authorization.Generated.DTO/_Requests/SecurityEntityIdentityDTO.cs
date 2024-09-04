@@ -4,11 +4,11 @@ using Framework.Persistent;
 
 namespace Framework.Authorization.Generated.DTO;
 
-[DataContractAttribute(Namespace = "Auth")]
-public partial struct SecurityEntityIdentityDTO : IIdentityObject<Guid>
+[DataContract(Namespace = "Auth")]
+public struct SecurityEntityIdentityDTO : IIdentityObject<Guid>
 {
     public SecurityEntityIdentityDTO(Guid id)
-            : this()
+        : this()
     {
         this.Id = id;
     }

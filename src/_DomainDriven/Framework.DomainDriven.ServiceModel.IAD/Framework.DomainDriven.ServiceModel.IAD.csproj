@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
     <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.NamedLocks\Framework.Configuration.NamedLocks.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.ApplicationCore\Framework.DomainDriven.ApplicationCore.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
     <ProjectReference Include="..\Framework.FinancialYear\Framework.FinancialYear.csproj" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
+using Framework.DomainDriven.ApplicationCore.ExternalSource;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,25 +8,31 @@ namespace Framework.Authorization.WebApi;
 
 public partial class AuthSLJsonController
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetFullSecurityEntities))]
-    public IEnumerable<SecurityEntityFullDTO> GetFullSecurityEntities([FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity)
+    [HttpPost(nameof(GetFullSecurityEntities))]
+    public IEnumerable<SecurityEntity> GetFullSecurityEntities([FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity)
     {
-        return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                 {
-                                                     var securityContextType = evaluateData.Context.Logics.SecurityContextType.GetById(securityContextTypeIdentity.Id, true);
-
-                                                     return evaluateData.Context.ExternalSource.GetTyped(securityContextType).GetSecurityEntities().ToFullDTOList(evaluateData.MappingService);
-                                                 });
+        return this.Evaluate(
+            DBSessionMode.Read,
+            evaluateData =>
+            {
+                return evaluateData.Context
+                                   .ExternalSource
+                                   .GetTyped(securityContextTypeIdentity.Id)
+                                   .GetSecurityEntities()
+                                   .ToList();
+            });
     }
 
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetFullSecurityEntitiesByIdents))]
-    public IEnumerable<SecurityEntityFullDTO> GetFullSecurityEntitiesByIdents([FromForm] GetFullSecurityEntitiesByIdentsRequest request)
+    [HttpPost(nameof(GetFullSecurityEntitiesByIdents))]
+    public IEnumerable<SecurityEntity> GetFullSecurityEntitiesByIdents([FromForm] GetFullSecurityEntitiesByIdentsRequest request)
     {
-        return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                 {
-                                                     var securityContextType = evaluateData.Context.Logics.SecurityContextType.GetById(request.SecurityContextType.Id, true);
-
-                                                     return evaluateData.Context.ExternalSource.GetTyped(securityContextType).GetSecurityEntitiesByIdents(request.SecurityEntities.Select(v => v.Id)).ToFullDTOList(evaluateData.MappingService);
-                                                 });
+        return this.Evaluate(
+            DBSessionMode.Read,
+            evaluateData =>
+            {
+                return evaluateData.Context.ExternalSource.GetTyped(request.SecurityContextType.Id)
+                                   .GetSecurityEntitiesByIdents(request.SecurityEntities.Select(v => v.Id))
+                                   .ToList();
+            });
     }
 }

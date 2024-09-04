@@ -1,9 +1,9 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
-using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Core;
+using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
@@ -38,13 +38,9 @@ public partial interface IAuthorizationBLLContext :
 
     TimeProvider TimeProvider { get; }
 
-    IAuthorizationExternalSource ExternalSource { get; }
+    ISecurityEntitySource ExternalSource { get; }
 
     INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
     SecurityContextType GetSecurityContextType(Type type);
-
-    SecurityContextType GetSecurityContextType(string domainTypeName);
-
-    SecurityContextType GetSecurityContextType(Guid domainTypeId);
 }

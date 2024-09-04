@@ -1,14 +1,10 @@
 ﻿#pragma warning disable SA1600 // ElementsMustBeDocumented. Internal type does not require inline documentation by convention.
-using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
 using Framework.Persistent;
-using Framework.SecuritySystem;
-
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -56,19 +52,13 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRec
             NotificationExpandType expandType)
     {
         var result =
-                from item in fids.GroupBy(fid => fid.SecurityContextTypeName)
-                let securityContextType = this.ConfigurationContextFacade.GetSecurityContextType(item.Key.ToLowerInvariant())
-                let securityType = this.ConfigurationContextFacade.GetSecurityType(securityContextType)
-                let ids = item.Select(i => i.SecurityContextId)
-                let et = this.IsExpandable(securityContextType) ? expandType : expandType.WithoutHierarchical()
-                select new NotificationFilterGroup(securityType, ids, et);
+                from item in fids.GroupBy(fid => fid.Type)
+                let securityContextType = item.Key
+                let ids = item.Select(i => i.Id)
+                let et = securityContextType.IsHierarchical() ? expandType : expandType.WithoutHierarchical()
+                select new NotificationFilterGroup(securityContextType, ids, et);
 
         return result;
-    }
-    private bool IsExpandable(SecurityContextType securityContextType)
-    {
-        return this.ConfigurationContextFacade.ServiceProvider.GetRequiredService<ISecurityContextSource>()
-                   .GetSecurityContextInfo(securityContextType.Id).Type.IsHierarchical();
     }
 }
 #pragma warning restore SA1600 // ElementsMustBeDocumented

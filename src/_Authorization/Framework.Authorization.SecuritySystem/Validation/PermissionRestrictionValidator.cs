@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 
 using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem.ExternalSource;
+using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
@@ -13,7 +13,7 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
     public PermissionRestrictionValidator(
         ISecurityContextSource securityContextSource,
         ISecurityRoleSource securityRoleSource,
-        IAuthorizationExternalSource authorizationExternalSource)
+        ISecurityEntitySource securityEntitySource)
     {
         this.securityContextSource = securityContextSource;
 
@@ -35,7 +35,7 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
             .Must(
                 (permissionRestriction, securityContextId) =>
                 {
-                    var authorizationTypedExternalSource = authorizationExternalSource.GetTyped(permissionRestriction.SecurityContextType);
+                    var authorizationTypedExternalSource = securityEntitySource.GetTyped(permissionRestriction.SecurityContextType.Id);
 
                     return authorizationTypedExternalSource.IsExists(securityContextId);
                 })

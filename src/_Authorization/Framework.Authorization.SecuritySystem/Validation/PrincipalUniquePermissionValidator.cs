@@ -1,17 +1,18 @@
 ﻿using FluentValidation;
+
 using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem.ExternalSource;
 using Framework.Core;
+using Framework.DomainDriven.ApplicationCore.ExternalSource;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
 
 public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>
 {
-    private readonly IAuthorizationExternalSource externalSource;
+    private readonly ISecurityEntitySource externalSource;
 
     public const string Key = "UniquePermission";
 
-    public PrincipalUniquePermissionValidator(IAuthorizationExternalSource externalSource)
+    public PrincipalUniquePermissionValidator(ISecurityEntitySource externalSource)
     {
         var duplicatesVar = "Duplicates";
 
@@ -62,9 +63,9 @@ public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>
 
         foreach (var securityContextTypeGroup in permission.Restrictions.GroupBy(fi => fi.SecurityContextType, fi => fi.SecurityContextId))
         {
-            var securityEntities = this.externalSource.GetTyped(securityContextTypeGroup.Key).GetSecurityEntitiesByIdents(securityContextTypeGroup);
+            var securityEntities = this.externalSource.GetTyped(securityContextTypeGroup.Key.Id).GetSecurityEntitiesByIdents(securityContextTypeGroup);
 
-            yield return $"{securityContextTypeGroup.Key.Name.ToPluralize()}: {securityEntities.Join(", ")}";
+            yield return $"{securityContextTypeGroup.Key.Name.ToPluralize()}: {securityEntities.Select(v => v.Name).Join(", ")}";
         }
     }
 }

@@ -130,25 +130,6 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     }
 
     [Test]
-    public void GetSecurityContextType_Call_FoundSecurityContextType()
-    {
-        //Arrange
-        var domainTypeName = this.Fixture.Create<string>();
-        var securityContextType = this.Fixture.Create<SecurityContextType>();
-
-        this.authorizationContext
-            .GetSecurityContextType(domainTypeName)
-            .Returns(securityContextType);
-
-        // Act
-        var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-        var result = configurationContextFacade.GetSecurityContextType(domainTypeName);
-
-        // Assert
-        result.Should().Be(securityContextType);
-    }
-
-    [Test]
     public void GetDomainType_Call_FoundDomainType()
     {
         // Arrange

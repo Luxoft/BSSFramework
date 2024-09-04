@@ -1,8 +1,6 @@
 ﻿using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 
-
-
 using NativeAttachment = System.Net.Mail.Attachment;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;

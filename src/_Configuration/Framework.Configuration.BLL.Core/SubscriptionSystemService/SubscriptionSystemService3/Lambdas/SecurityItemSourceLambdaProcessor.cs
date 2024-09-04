@@ -2,8 +2,6 @@
 using Framework.Configuration.Domain;
 using Framework.Persistent;
 
-
-
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 
 /// <summary>

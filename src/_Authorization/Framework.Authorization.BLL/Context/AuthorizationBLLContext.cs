@@ -1,7 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 
@@ -21,126 +20,78 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.BLL;
 
-public partial class AuthorizationBLLContext
+public partial class AuthorizationBLLContext(
+    IServiceProvider serviceProvider,
+    [FromKeyedServices("BLL")] IEventOperationSender operationSender,
+    ITrackingService<PersistentDomainObjectBase> trackingService,
+    IAccessDeniedExceptionService accessDeniedExceptionService,
+    IStandartExpressionBuilder standartExpressionBuilder,
+    IAuthorizationValidator validator,
+    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+    IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
+    TimeProvider timeProvider,
+    IRootSecurityService<PersistentDomainObjectBase> securityService,
+    IAuthorizationBLLFactoryContainer logics,
+    ISecurityEntitySource externalSource,
+    INotificationPrincipalExtractor notificationPrincipalExtractor,
+    ISecuritySystem securitySystem,
+    IRunAsManager runAsManager,
+    IAvailablePermissionSource availablePermissionSource,
+    IAvailableSecurityRoleSource availableSecurityRoleSource,
+    ICurrentPrincipalSource currentPrincipalSource,
+    IPrincipalGeneralValidator principalValidator,
+    ICurrentUser currentUser,
+    ISecurityContextSource securityContextSource,
+    BLLContextSettings<PersistentDomainObjectBase> settings,
+    IAvailableSecurityOperationSource availableSecurityOperationSource)
+    : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, IAuthorizationBLLFactoryContainer>(
+        serviceProvider,
+        operationSender,
+        trackingService,
+        accessDeniedExceptionService,
+        standartExpressionBuilder,
+        validator,
+        hierarchicalObjectExpanderFactory,
+        fetchService)
 {
-    private readonly IAuthorizationBLLFactoryContainer logics;
+    private readonly IDictionaryCache<Type, SecurityContextType> securityContextTypeCache = new DictionaryCache<Type, SecurityContextType>(
+        securityContextType => logics.SecurityContextType.GetById(
+            securityContextSource.GetSecurityContextInfo(securityContextType).Id,
+            true)).WithLock();
 
-    private readonly ISecurityContextSource securityContextSource;
+    public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
 
-    private readonly IDictionaryCache<string, SecurityContextType> securityContextTypeByNameCache;
+    public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; } = notificationPrincipalExtractor;
 
-    private readonly IDictionaryCache<Guid, SecurityContextType> securityContextTypeByIdCache;
+    public ISecuritySystem SecuritySystem { get; } = securitySystem;
 
-    public AuthorizationBLLContext(
-            IServiceProvider serviceProvider,
-            [FromKeyedServices("BLL")] IEventOperationSender operationSender,
-            ITrackingService<PersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService accessDeniedExceptionService,
-            IStandartExpressionBuilder standartExpressionBuilder,
-            IAuthorizationValidator validator,
-            IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-            IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            TimeProvider timeProvider,
-            IRootSecurityService<PersistentDomainObjectBase> securityService,
-            IAuthorizationBLLFactoryContainer logics,
-            ISecurityEntitySource externalSource,
-            INotificationPrincipalExtractor notificationPrincipalExtractor,
-            ISecuritySystem securitySystem,
-            IRunAsManager runAsManager,
-            IAvailablePermissionSource availablePermissionSource,
-            IAvailableSecurityRoleSource availableSecurityRoleSource,
-            ICurrentPrincipalSource currentPrincipalSource,
-            IPrincipalGeneralValidator principalValidator,
-            ICurrentUser currentUser,
-            ISecurityContextSource securityContextSource,
-            BLLContextSettings<PersistentDomainObjectBase> settings,
-            IAvailableSecurityOperationSource availableSecurityOperationSource)
-            : base(
-                   serviceProvider,
-                   operationSender,
-                   trackingService,
-                   accessDeniedExceptionService,
-                   standartExpressionBuilder,
-                   validator,
-                   hierarchicalObjectExpanderFactory,
-                   fetchService)
-    {
-        this.TimeProvider = timeProvider;
-        this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
-        this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
-        this.securityContextSource = securityContextSource;
-        this.AvailablePermissionSource = availablePermissionSource;
-        this.AvailableSecurityRoleSource = availableSecurityRoleSource;
-        this.CurrentPrincipalSource = currentPrincipalSource;
-        this.PrincipalValidator = principalValidator;
-        this.CurrentUser = currentUser;
-        this.AvailableSecurityOperationSource = availableSecurityOperationSource;
-        this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
-        this.SecuritySystem = securitySystem;
-        this.RunAsManager = runAsManager;
+    public IPrincipalGeneralValidator PrincipalValidator { get; } = principalValidator;
 
-        this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
+    public ICurrentPrincipalSource CurrentPrincipalSource { get; } = currentPrincipalSource;
 
-        this.securityContextTypeByNameCache = new DictionaryCache<string, SecurityContextType>(
-                                                                             domainTypeName => this.Logics.SecurityContextType.GetByName(domainTypeName, true),
-                                                                             StringComparer.CurrentCultureIgnoreCase)
-                .WithLock();
+    public ICurrentUser CurrentUser { get; } = currentUser;
 
-        this.securityContextTypeByIdCache = new DictionaryCache<Guid, SecurityContextType>(
-                                                                         domainTypeId => this.Logics.SecurityContextType.GetById(domainTypeId, true))
-                .WithLock();
+    public IRunAsManager RunAsManager { get; } = runAsManager;
 
-        this.TypeResolver = settings.TypeResolver;
-    }
+    public IAvailablePermissionSource AvailablePermissionSource { get; } = availablePermissionSource;
 
-    public ITypeResolver<string> TypeResolver { get; }
+    public IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; } = availableSecurityRoleSource;
 
-    public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
+    public IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; } = availableSecurityOperationSource;
 
-    public ISecuritySystem SecuritySystem { get; }
+    public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; } = securityService;
 
-    public IPrincipalGeneralValidator PrincipalValidator { get; }
+    public override IAuthorizationBLLFactoryContainer Logics { get; } = logics;
 
-    public ICurrentPrincipalSource CurrentPrincipalSource { get; }
+    public ISecurityEntitySource ExternalSource { get; } = externalSource;
 
-    public ICurrentUser CurrentUser { get; }
-
-    public IRunAsManager RunAsManager { get; }
-
-    public IAvailablePermissionSource AvailablePermissionSource { get; }
-
-    public IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
-
-    public IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
-
-    public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
-
-    public override IAuthorizationBLLFactoryContainer Logics => this.logics;
-
-    public ISecurityEntitySource ExternalSource { get; }
-
-    public TimeProvider TimeProvider { get; }
-
+    public TimeProvider TimeProvider { get; } = timeProvider;
 
     public SecurityContextType GetSecurityContextType(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
-        return this.GetSecurityContextType(type.Name);
-    }
-
-    public SecurityContextType GetSecurityContextType(string domainTypeName)
-    {
-        if (domainTypeName == null) throw new ArgumentNullException(nameof(domainTypeName));
-
-        return this.securityContextTypeByNameCache[domainTypeName];
-    }
-
-    public SecurityContextType GetSecurityContextType(Guid domainTypeId)
-    {
-        if (domainTypeId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainTypeId));
-
-        return this.securityContextTypeByIdCache[domainTypeId];
+        return this.securityContextTypeCache[type];
     }
 
     IAuthorizationBLLContext IAuthorizationBLLContextContainer<IAuthorizationBLLContext>.Authorization => this;

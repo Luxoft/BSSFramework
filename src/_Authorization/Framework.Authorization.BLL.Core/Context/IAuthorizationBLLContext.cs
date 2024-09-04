@@ -43,8 +43,4 @@ public partial interface IAuthorizationBLLContext :
     INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
     SecurityContextType GetSecurityContextType(Type type);
-
-    SecurityContextType GetSecurityContextType(string domainTypeName);
-
-    SecurityContextType GetSecurityContextType(Guid domainTypeId);
 }

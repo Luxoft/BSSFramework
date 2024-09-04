@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.ApplicationCore;
+﻿using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;

@@ -91,7 +91,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
         {
             if (this.result != null)
             {
-                return this.result.Select(x => new SecurityEntity { Id = x });
+                return this.result.Select(x => new SecurityEntity(x, "", default));
             }
 
             if (this.result2 != null)

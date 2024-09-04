@@ -91,7 +91,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
         var businessRoleIds = new[] { businessRole.SecurityRole };
 
         var versions = this.Fixture.Create<DomainObjectVersions<string>>();
-        var fid = new FilterItemIdentity("name", Guid.NewGuid());
+        var fid = new FilterItemIdentity(typeof(object), Guid.NewGuid());
         var securityContextType = this.Fixture.Create<SecurityContextType>();
         var securityType = typeof(object);
 
@@ -117,10 +117,6 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
         this.dynamicSourceLambdaProcessor
             .Invoke(subscription, versions)
             .Returns(new[] { fid });
-
-        this.configurationContextFacade
-            .GetSecurityContextType(fid.SecurityContextTypeName.ToLowerInvariant())
-            .Returns(securityContextType);
 
         this.configurationContextFacade
             .GetSecurityType(securityContextType)

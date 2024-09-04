@@ -58,27 +58,6 @@ public class ConfigurationContextFacade
         return employees;
     }
 
-    /// <summary>Возращает тип контекста безопасности доменного типа.</summary>
-    /// <param name="authDomainTypeId">Идентификатор доменного типа контекста безопасности.</param>
-    /// <returns>
-    ///     Экземпляр <see cref="Type" />, тип контекста безопасности доменного типа.
-    ///     Или null, если тип по предоставленому <paramref name="authDomainTypeId" />
-    ///     тип контекста безопасности доменного типа не найден.
-    /// </returns>
-    public virtual Type GetSecurityType(Guid authDomainTypeId)
-    {
-        var securityContextType = this.context.Authorization.Logics.SecurityContextType.GetById(authDomainTypeId);
-
-        if (securityContextType == null)
-        {
-            return null;
-        }
-
-        var result = this.GetSecurityType(securityContextType);
-
-        return result;
-    }
-
     /// <summary>
     ///     Возращает тип контекста безопасности доменного типа.
     /// </summary>
@@ -93,23 +72,6 @@ public class ConfigurationContextFacade
         }
 
         var result = this.context.ServiceProvider.GetRequiredService<ISecurityContextSource>().GetSecurityContextInfo(securityContextType.Id).Type;
-        return result;
-    }
-
-    /// <summary>
-    ///     Возвращает описатель сущности в котексте которой выдаются права пользователю.
-    /// </summary>
-    /// <param name="domainTypeName">Имя доменного типа.</param>
-    /// <returns>Экземпляр <see cref="SecurityContextType" />.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент domainTypeName равен null.</exception>
-    public virtual SecurityContextType GetSecurityContextType(string domainTypeName)
-    {
-        if (domainTypeName == null)
-        {
-            throw new ArgumentNullException(nameof(domainTypeName));
-        }
-
-        var result = this.context.Authorization.GetSecurityContextType(domainTypeName);
         return result;
     }
 

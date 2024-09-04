@@ -3,6 +3,7 @@ using Framework.Configuration.NamedLocks;
 using Framework.Core.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
+using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
@@ -41,6 +42,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEventOperationSender, EventOperationSender>();
 
         services.AddScoped<IQueryableSource, RepositoryQueryableSource>();
+
+        services.AddExternalSource();
 
         return services;
     }

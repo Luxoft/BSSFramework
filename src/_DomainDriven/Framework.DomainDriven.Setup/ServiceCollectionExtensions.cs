@@ -10,7 +10,7 @@ namespace Framework.DomainDriven.Setup;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddBssFramework(this IServiceCollection services, Action<IBssFrameworkSettings> setupAction)
+    public static IServiceCollection AddBssFramework(this IServiceCollection services, Action<IBssFrameworkSettings>? setupAction)
     {
         services.RegisterGenericServices();
         services.RegisterWebApiGenericServices();

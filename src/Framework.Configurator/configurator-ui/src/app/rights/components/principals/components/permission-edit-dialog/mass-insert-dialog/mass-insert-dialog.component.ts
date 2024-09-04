@@ -7,7 +7,7 @@ import { BehaviorSubject, forkJoin, map, takeUntil, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DestroyService } from 'src/app/shared/destroy.service';
-import { ContextsApiService } from 'src/app/shared/api.services';
+import { ContextsApiService } from 'src/app/shared/api-services/context.api.serivce';
 import { IRoleContext } from '../../grant-rights-dialog/grant-rights-dialog.models';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({

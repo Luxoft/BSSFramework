@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Injector, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -14,8 +14,6 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-di
 
 import { EditPrincipalDialogComponent } from './components/edit-principal-dialog/edit-principal-dialog.component';
 import { GrantRightsDialogComponent } from './components/grant-rights-dialog/grant-rights-dialog.component';
-import { IGrantedRight } from './components/grant-rights-dialog/grant-rights-dialog.models';
-import { ViewPrincipalDialogComponent } from './components/view-principal-dialog/view-principal-dialog.component';
 
 export interface IPrincipal {
   Id: string | undefined;
@@ -53,7 +51,12 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
     switchMap((x) => this.refresh(x || ''))
   );
 
-  constructor(private readonly http: HttpClient, private readonly dialog: MatDialog, private readonly snackBar: MatSnackBar) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly dialog: MatDialog,
+    private readonly snackBar: MatSnackBar,
+    private readonly injector: Injector
+  ) {}
 
   ngOnInit(): void {
     this.refreshRunAs();
@@ -66,10 +69,6 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
 
   public get runAsSource(): Observable<string> {
     return this.runAs$;
-  }
-
-  public viewDetails(principal: IPrincipal): void {
-    this.dialog.open(ViewPrincipalDialogComponent, { data: principal, maxHeight: '90vh', width: '1000px' });
   }
 
   public add(): void {
@@ -111,14 +110,14 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
 
   public grant(principal: IPrincipal): void {
     this.dialog
-      .open(GrantRightsDialogComponent, { data: principal, height: '90vh', maxWidth: '90vw', minWidth: '1000px' })
+      .open(GrantRightsDialogComponent, { injector: this.injector, data: principal, height: '90vh', maxWidth: '90vw', minWidth: '1000px' })
       .beforeClosed()
-      .subscribe((x: IGrantedRight) => {
+      .subscribe((x: boolean) => {
         if (!x) {
           return;
         }
 
-        this.http.post(`api/principal/${principal.Id}/permissions`, x).subscribe(() => this.reload('Rights has been granted'));
+        this.reload('Rights has been granted');
       });
   }
 

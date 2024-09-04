@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IEntity } from '../rights/components/principals/components/view-principal-dialog/view-principal-dialog.component';
+import { IEntity } from '../rights/components/principals/components/principal.models';
 import { FormControl } from '@angular/forms';
 
 @Pipe({

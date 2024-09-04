@@ -35,7 +35,8 @@ public static class ConfiguratorDependencyInjection
            .AddScoped<IDeletePrincipalHandler, DeletePrincipalHandler>()
            .AddScoped<IRunAsHandler, RunAsHandler>()
            .AddScoped<IStopRunAsHandler, StopRunAsHandler>()
-           .AddScoped<IDownloadPermissionTemplateHandler, DownloadPermissionTemplateHandler>();
+           .AddScoped<IDownloadPermissionHandler, DownloadPermissionHandler>()
+           .AddScoped<IUploadPermissionHandler, UploadPermissionHandler>();
 
     public static IApplicationBuilder UseConfigurator(this IApplicationBuilder app, string route = "/admin/configurator") =>
         app
@@ -64,7 +65,8 @@ public static class ConfiguratorDependencyInjection
             .Get<IGetPrincipalHandler>(route + "/api/principal/{id}")
             .Get<IGetBusinessRoleContextEntitiesHandler>(route + "/api/context/{id}/entities")
             .Get<IGetRunAsHandler>($"{route}/api/principal/current/runAs")
-            .Get<IDownloadPermissionTemplateHandler>($"{route}/api/permissions/template")
+            .Get<IDownloadPermissionHandler>($"{route}/api/permissions")
+            .Post<IUploadPermissionHandler>($"{route}/api/permissions")
             .Post<ICreatePrincipalHandler>($"{route}/api/principals")
             .Post<IUpdateSystemConstantHandler>(route + "/api/constant/{id}")
             .Post<IUpdatePrincipalHandler>(route + "/api/principal/{id}")

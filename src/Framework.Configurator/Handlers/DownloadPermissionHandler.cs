@@ -15,11 +15,11 @@ using NHibernate.Linq;
 
 namespace Framework.Configurator.Handlers;
 
-public record DownloadPermissionTemplateHandler(
+public record DownloadPermissionHandler(
     ISecurityContextSource SecurityContextSource,
     [DisabledSecurity] IRepository<Permission> PermissionRepository,
     ISecurityEntitySource SecurityEntitySource,
-    ISecuritySystem SecuritySystem) : IDownloadPermissionTemplateHandler
+    ISecuritySystem SecuritySystem) : IDownloadPermissionHandler
 {
     private const int FirstContentColumnIndex = 6;
     private const string PermissionTableVariable = "PermissionsData";

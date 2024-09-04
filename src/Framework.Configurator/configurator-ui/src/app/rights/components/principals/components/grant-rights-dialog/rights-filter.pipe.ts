@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IPermission } from '../view-principal-dialog/view-principal-dialog.component';
+import { IPermission } from '../principal.models';
 
 @Pipe({
   name: 'rightsFilter',

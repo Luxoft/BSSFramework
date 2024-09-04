@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IEntity } from '../../../view-principal-dialog/view-principal-dialog.component';
+import { IEntity } from '../../../principal.models';
 import { MatIconModule } from '@angular/material/icon';
 import { HighlightDirective } from 'src/app/shared/highlight.derective';
 

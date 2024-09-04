@@ -65,7 +65,7 @@ public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>
         {
             var securityEntities = this.externalSource.GetTyped(securityContextTypeGroup.Key.Id).GetSecurityEntitiesByIdents(securityContextTypeGroup);
 
-            yield return $"{securityContextTypeGroup.Key.Name.ToPluralize()}: {securityEntities.Join(", ")}";
+            yield return $"{securityContextTypeGroup.Key.Name.ToPluralize()}: {securityEntities.Select(v => v.Name).Join(", ")}";
         }
     }
 }

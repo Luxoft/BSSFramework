@@ -38,7 +38,7 @@ public partial interface IAuthorizationBLLContext :
 
     TimeProvider TimeProvider { get; }
 
-    ISecurityEntitySource ExternalSource { get; }
+    ISecurityEntitySource SecurityEntitySource { get; }
 
     INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 

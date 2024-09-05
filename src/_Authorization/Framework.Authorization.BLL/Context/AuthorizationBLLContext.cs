@@ -32,7 +32,7 @@ public partial class AuthorizationBLLContext(
     TimeProvider timeProvider,
     IRootSecurityService<PersistentDomainObjectBase> securityService,
     IAuthorizationBLLFactoryContainer logics,
-    ISecurityEntitySource externalSource,
+    ISecurityEntitySource securityEntitySource,
     INotificationPrincipalExtractor notificationPrincipalExtractor,
     ISecuritySystem securitySystem,
     IRunAsManager runAsManager,
@@ -83,7 +83,7 @@ public partial class AuthorizationBLLContext(
 
     public override IAuthorizationBLLFactoryContainer Logics { get; } = logics;
 
-    public ISecurityEntitySource ExternalSource { get; } = externalSource;
+    public ISecurityEntitySource SecurityEntitySource { get; } = securityEntitySource;
 
     public TimeProvider TimeProvider { get; } = timeProvider;
 

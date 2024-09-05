@@ -2,9 +2,9 @@
 
 public interface ISecurityContextSource
 {
-    IReadOnlyList<Type> SecurityContextTypes { get; }
+    IReadOnlyList<SecurityContextInfo> SecurityContextInfoList { get; }
 
-    SecurityContextInfo GetSecurityContextInfo(Type type);
+    SecurityContextInfo GetSecurityContextInfo(Type securityContextType);
 
-    SecurityContextInfo GetSecurityContextInfo(Guid ident);
+    SecurityContextInfo GetSecurityContextInfo(Guid securityContextTypeId);
 }

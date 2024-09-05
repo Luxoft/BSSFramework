@@ -17,9 +17,9 @@ public class GetBusinessRolesHandler(
     {
         if (!securitySystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
-        var defaultContexts = securityContextSource.SecurityContextTypes.Select(securityContextSource.GetSecurityContextInfo)
-                                                        .Select(v => new RoleContextDto(v.Name, false))
-                                                        .ToList();
+        var defaultContexts = securityContextSource.SecurityContextInfoList
+                                                   .Select(v => new RoleContextDto(v.Name, false))
+                                                   .ToList();
 
         return securityRoleSource
                .GetRealRoles()

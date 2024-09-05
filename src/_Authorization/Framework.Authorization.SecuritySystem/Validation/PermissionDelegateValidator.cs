@@ -15,7 +15,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     private readonly TimeProvider timeProvider;
 
-    private readonly ISecurityEntitySource externalSource;
+    private readonly ISecurityEntitySource securityEntitySource;
 
     private readonly ISecurityContextSource securityContextSource;
 
@@ -23,12 +23,12 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     public PermissionDelegateValidator(
         TimeProvider timeProvider,
-        ISecurityEntitySource externalSource,
+        ISecurityEntitySource securityEntitySource,
         ISecurityContextSource securityContextSource,
         ISecurityRoleSource securityRoleSource)
     {
         this.timeProvider = timeProvider;
-        this.externalSource = externalSource;
+        this.securityEntitySource = securityEntitySource;
         this.securityContextSource = securityContextSource;
         this.securityRoleSource = securityRoleSource;
 
@@ -155,7 +155,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
         var invalidRequest1 = from requiredGroup in requiredEntitiesRequest
 
-                              let allSecurityEntities = this.externalSource.GetTyped(requiredGroup.Key.Id).GetSecurityEntities()
+                              let allSecurityEntities = this.securityEntitySource.GetTyped(requiredGroup.Key.Id).GetSecurityEntities()
 
                               let securityContextType = requiredGroup.Key
 

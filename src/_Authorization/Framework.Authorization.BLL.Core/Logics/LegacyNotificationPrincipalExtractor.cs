@@ -40,7 +40,7 @@ public class LegacyNotificationPrincipalExtractor(
             {
                 var tailGroups = notificationFilterGroups.Skip(1).ToArray();
 
-                var firstGroupExternalSource = this.Context.ExternalSource.GetTyped(firstGroup.SecurityContextType);
+                var firstGroupExternalSource = this.Context.SecurityEntitySource.GetTyped(firstGroup.SecurityContextType);
 
                 foreach (var preExpandedIdent in firstGroup.Idents)
                 {

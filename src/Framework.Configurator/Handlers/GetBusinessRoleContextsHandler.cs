@@ -17,8 +17,7 @@ public class GetBusinessRoleContextsHandler(
         if (!securitySystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
         return securityContextSource
-               .SecurityContextTypes
-               .Select(securityContextSource.GetSecurityContextInfo)
+               .SecurityContextInfoList
                .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
                .OrderBy(x => x.Name)
                .ToList();

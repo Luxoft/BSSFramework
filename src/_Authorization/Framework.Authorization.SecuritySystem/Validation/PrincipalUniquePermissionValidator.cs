@@ -8,15 +8,15 @@ namespace Framework.Authorization.SecuritySystem.Validation;
 
 public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>
 {
-    private readonly ISecurityEntitySource externalSource;
+    private readonly ISecurityEntitySource securityEntitySource;
 
     public const string Key = "UniquePermission";
 
-    public PrincipalUniquePermissionValidator(ISecurityEntitySource externalSource)
+    public PrincipalUniquePermissionValidator(ISecurityEntitySource securityEntitySource)
     {
         var duplicatesVar = "Duplicates";
 
-        this.externalSource = externalSource;
+        this.securityEntitySource = securityEntitySource;
 
         this.RuleFor(principal => principal.Permissions)
             .Must((_, permissions, context) =>
@@ -63,7 +63,7 @@ public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>
 
         foreach (var securityContextTypeGroup in permission.Restrictions.GroupBy(fi => fi.SecurityContextType, fi => fi.SecurityContextId))
         {
-            var securityEntities = this.externalSource.GetTyped(securityContextTypeGroup.Key.Id).GetSecurityEntitiesByIdents(securityContextTypeGroup);
+            var securityEntities = this.securityEntitySource.GetTyped(securityContextTypeGroup.Key.Id).GetSecurityEntitiesByIdents(securityContextTypeGroup);
 
             yield return $"{securityContextTypeGroup.Key.Name.ToPluralize()}: {securityEntities.Select(v => v.Name).Join(", ")}";
         }

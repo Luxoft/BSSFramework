@@ -21,7 +21,7 @@ public class AuthorizationPermissionSystem(
     public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
-        var securityContextTypeId = securityContextSource.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
+        var securityContextTypeId = securityContextSource.GetSecurityContextInfo<TSecurityContext>().Id;
 
         return permission => permission.Restrictions
                                        .Where(restriction => restriction.SecurityContextType.Id == securityContextTypeId)

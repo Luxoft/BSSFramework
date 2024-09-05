@@ -16,7 +16,7 @@ public partial class AuthSLJsonController
             evaluateData =>
             {
                 return evaluateData.Context
-                                   .ExternalSource
+                                   .SecurityEntitySource
                                    .GetTyped(securityContextTypeIdentity.Id)
                                    .GetSecurityEntities()
                                    .ToList();
@@ -30,7 +30,7 @@ public partial class AuthSLJsonController
             DBSessionMode.Read,
             evaluateData =>
             {
-                return evaluateData.Context.ExternalSource.GetTyped(request.SecurityContextType.Id)
+                return evaluateData.Context.SecurityEntitySource.GetTyped(request.SecurityContextType.Id)
                                    .GetSecurityEntitiesByIdents(request.SecurityEntities.Select(v => v.Id))
                                    .ToList();
             });

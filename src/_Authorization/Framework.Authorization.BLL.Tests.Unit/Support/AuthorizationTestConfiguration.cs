@@ -49,7 +49,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
         securityEntitySourceMock.GetTyped(Arg.Any<Type>()).Returns(stub);
         securityEntitySourceMock.GetTyped(Arg.Any<Guid>()).Returns(stub);
 
-        this.Context.ExternalSource.Returns(securityEntitySourceMock);
+        this.Context.SecurityEntitySource.Returns(securityEntitySourceMock);
         return this;
     }
 

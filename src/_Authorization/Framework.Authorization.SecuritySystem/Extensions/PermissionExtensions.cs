@@ -10,16 +10,16 @@ public static class PermissionExtensions
         this Permission permission,
         IRealTypeResolver realTypeResolver,
         ISecurityContextSource securityContextSource,
-        IEnumerable<Type> securityTypes)
+        IEnumerable<Type> securityContextTypes)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
         var request = from restriction in permission.Restrictions
 
-                      join securityType in securityTypes on restriction.SecurityContextType.Id equals securityContextSource
-                          .GetSecurityContextInfo(realTypeResolver.Resolve(securityType)).Id
+                      join securityContextType in securityContextTypes on restriction.SecurityContextType.Id equals securityContextSource
+                          .GetSecurityContextInfo(realTypeResolver.Resolve(securityContextType)).Id
 
-                      group restriction.SecurityContextId by securityType;
+                      group restriction.SecurityContextId by securityContextType;
 
         return request.ToDictionary(g => g.Key, g => g.ToList());
     }

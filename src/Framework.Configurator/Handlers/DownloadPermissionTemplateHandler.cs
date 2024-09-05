@@ -25,7 +25,7 @@ public record DownloadPermissionTemplateHandler(
         using var workbook = new XLWorkbook(resourceStream);
         var worksheet = workbook.Worksheet(1);
 
-        this.SecurityContextSource.SecurityContextTypes.Foreach(
+        this.SecurityContextSource.GetSecurityContextTypes().Foreach(
             (securityContextType, index) =>
                 worksheet.Cell(1, FirstContentColumnIndex + index).Value = securityContextType.Name);
 

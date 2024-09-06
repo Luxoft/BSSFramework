@@ -22,5 +22,7 @@ public class AutomationFrameworkSettings
 
     public string ConnectionStringName { get; set; } = "DefaultConnection";
 
-    public string[] SecondaryDatabases { get; set; } = Array.Empty<string>();
+    public string[] SecondaryDatabases { get; set; } = [];
+
+    public string[] LocalAdmins { get; set; } = [];
 }

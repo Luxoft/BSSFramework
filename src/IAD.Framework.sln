@@ -164,11 +164,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratedLayout", "Generate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSystem.Generated.DTO", "_SampleSystem\SampleSystem.Generated.DTO\SampleSystem.Generated.DTO.csproj", "{2772FD7D-41AB-4251-81CE-D740259441A3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Configs", "_Configs", "{621D8E83-5142-4213-96E3-769F400896E3}"
-	ProjectSection(SolutionItems) = preProject
-		_SampleSystem\_Configs\appsettings.json = _SampleSystem\_Configs\appsettings.json
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.DBGenerator.Tests.Unit", "_DomainDriven\Framework.DomainDriven.DBGenerator.Tests.Unit\Framework.DomainDriven.DBGenerator.Tests.Unit.csproj", "{98FEEA7E-E790-4193-B12A-66513EFFCCCF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Validation.Tests.Unit", "Framework.Validation.Tests.Unit\Framework.Validation.Tests.Unit.csproj", "{47648BAE-016C-42A5-BBE1-C5426EAF50EC}"
@@ -3630,7 +3625,6 @@ Global
 		{2EE5B710-74FD-49CC-8865-0D560A298D69} = {37EA9A97-A597-4549-BC2B-0EB219181532}
 		{37EA9A97-A597-4549-BC2B-0EB219181532} = {AC6F29CD-7AEC-42EC-BB72-312230C681F3}
 		{2772FD7D-41AB-4251-81CE-D740259441A3} = {37EA9A97-A597-4549-BC2B-0EB219181532}
-		{621D8E83-5142-4213-96E3-769F400896E3} = {AC6F29CD-7AEC-42EC-BB72-312230C681F3}
 		{98FEEA7E-E790-4193-B12A-66513EFFCCCF} = {556BB35C-545E-4EC7-9245-016FF2248A58}
 		{B204BB7F-D20D-405C-B051-BC86C9B65582} = {647A0A18-C3F2-4E58-B52F-6310B1F8B963}
 		{857C63C0-38C6-4EFB-8E6A-F9D1B645362A} = {BD23CE26-E161-47F1-826E-BD37F4F51C9E}

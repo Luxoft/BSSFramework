@@ -1,32 +1,26 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Configurator.Interfaces;
+﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.DomainDriven.ApplicationCore.Security;
-using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-using NHibernate.Linq;
-
 namespace Framework.Configurator.Handlers;
 
-public class GetPrincipalsHandler(IRepositoryFactory<Principal> repoFactory, ISecuritySystem securitySystem)
+public class GetPrincipalsHandler(ISecuritySystem securitySystem, IConfiguratorApi configuratorApi)
     : BaseReadHandler, IGetPrincipalsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
         if (!securitySystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
-        var searchToken = context.Request.Query["searchToken"];
+        var nameFilter = (string)context.Request.Query["searchToken"]!;
 
-        var query = repoFactory.Create().GetQueryable();
-        if (!string.IsNullOrWhiteSpace(searchToken)) query = query.Where(p => p.Name.Contains(searchToken!));
+        var principals = await configuratorApi.GetPrincipalsAsync(nameFilter, 70, cancellationToken);
 
-        return await query
-                     .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
-                     .OrderBy(x => x.Name)
-                     .Take(70)
-                     .ToListAsync(cancellationToken);
+        return principals
+               .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
+               .OrderBy(x => x.Name)
+               .ToList();
     }
 }

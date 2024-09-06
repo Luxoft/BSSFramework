@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj" />
     <ProjectReference Include="..\_Configuration\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ApplicationCore\Framework.DomainDriven.ApplicationCore.csproj" />
   </ItemGroup>
 
 </Project>

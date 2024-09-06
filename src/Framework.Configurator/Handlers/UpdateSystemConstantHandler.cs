@@ -18,10 +18,10 @@ public record UpdateSystemConstantHandler(IRepositoryFactory<SystemConstant> Rep
         await this.UpdateAsync(new Guid(constantId), newValue, cancellationToken);
     }
 
-    private async Task UpdateAsync(Guid id, string newValue, CancellationToken token)
+    private async Task UpdateAsync(Guid id, string newValue, CancellationToken cancellationToken)
     {
-        var systemConstant = await this.RepoFactory.Create().LoadAsync(id, token);
+        var systemConstant = await this.RepoFactory.Create().LoadAsync(id, cancellationToken);
         systemConstant.Value = newValue;
-        await this.RepoFactory.Create(SecurityRole.Administrator).SaveAsync(systemConstant, token);
+        await this.RepoFactory.Create(SecurityRole.Administrator).SaveAsync(systemConstant, cancellationToken);
     }
 }

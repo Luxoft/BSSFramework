@@ -1,20 +1,16 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Configurator.Interfaces;
+﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.DomainDriven.ApplicationCore.Security;
-using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-using NHibernate.Linq;
-
 namespace Framework.Configurator.Handlers;
 
 public class GetOperationHandler(
-    IRepositoryFactory<Principal> principalRepoFactory,
     ISecuritySystem securitySystem,
-    ISecurityRoleSource roleSource)
+    ISecurityRoleSource roleSource,
+    IConfiguratorApi configuratorApi)
     : BaseReadHandler, IGetOperationHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
@@ -23,20 +19,15 @@ public class GetOperationHandler(
 
         var operationName = (string)context.Request.RouteValues["name"]!;
 
-        var roles = roleSource.GetRealRoles()
-                              .Where(x => x.Information.Operations.Any(o => o.Name == operationName))
-                              .ToList();
+        var securityRoles = roleSource.SecurityRoles
+                                      .Where(x => x.Information.Operations.Any(o => o.Name == operationName))
+                                      .ToList();
 
-        var roleIds = roles.Select(x => x.Id).ToList();
-        var principals = await principalRepoFactory
-                               .Create()
-                               .GetQueryable()
-                               .Where(x => x.Permissions.Any(p => roleIds.Contains(p.Role.Id)))
-                               .Select(x => x.Name)
-                               .OrderBy(x => x)
-                               .Distinct()
-                               .ToListAsync(cancellationToken);
+        var principals = await configuratorApi.GetLinkedPrincipalsAsync(securityRoles, cancellationToken);
 
-        return new OperationDetailsDto { BusinessRoles = roles.Select(x => x.Name).Order().ToList(), Principals = principals };
+        return new OperationDetailsDto
+               {
+                   BusinessRoles = securityRoles.Select(x => x.Name).Order().ToList(), Principals = principals.ToList()
+               };
     }
 }

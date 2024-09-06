@@ -9,20 +9,21 @@ namespace Framework.DomainDriven.VirtualPermission;
 
 public static class SecuritySystemSettingsExtensions
 {
-    public static ISecuritySystemSettings AddVirtualPermission<TDomainObject>(
+    public static ISecuritySystemSettings AddVirtualPermission<TPrincipal, TPermission>(
         this ISecuritySystemSettings securitySystemSettings,
-        Func<IServiceProvider, VirtualPermissionBindingInfo<TDomainObject>> getBindingInfo) =>
+        Func<IServiceProvider, VirtualPermissionBindingInfo<TPrincipal, TPermission>> getBindingInfo) =>
         securitySystemSettings.AddPermissionSystem(
-            sp => ActivatorUtilities.CreateInstance<VirtualPermissionSystem<TDomainObject>>(sp, getBindingInfo(sp)));
+            sp => ActivatorUtilities.CreateInstance<VirtualPermissionSystem<TPrincipal, TPermission>>(sp, getBindingInfo(sp)));
 
-    public static ISecuritySystemSettings AddVirtualPermission<TDomainObject>(
+    public static ISecuritySystemSettings AddVirtualPermission<TPrincipal, TPermission>(
         this ISecuritySystemSettings securitySystemSettings,
         SecurityRole securityRole,
-        Expression<Func<TDomainObject, string>> principalNamePath,
-        Func<VirtualPermissionBindingInfo<TDomainObject>, VirtualPermissionBindingInfo<TDomainObject>>? initFunc = null)
+        Expression<Func<TPermission, TPrincipal>> principalPath,
+        Expression<Func<TPrincipal, string>> principalNamePath,
+        Func<VirtualPermissionBindingInfo<TPrincipal, TPermission>, VirtualPermissionBindingInfo<TPrincipal, TPermission>>? initFunc = null)
     {
         var bindingInfo =
-            (initFunc ?? (v => v)).Invoke(new VirtualPermissionBindingInfo<TDomainObject>(securityRole, principalNamePath));
+            (initFunc ?? (v => v)).Invoke(new VirtualPermissionBindingInfo<TPrincipal, TPermission>(securityRole, principalPath, principalNamePath));
 
         return securitySystemSettings.AddVirtualPermission(_ => bindingInfo);
     }

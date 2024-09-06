@@ -7,35 +7,43 @@ using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.VirtualPermission;
 
-public record VirtualPermissionBindingInfo<TDomainObject>(
+public record VirtualPermissionBindingInfo<TPrincipal, TPermission>(
     SecurityRole SecurityRole,
-    Expression<Func<TDomainObject, string>> PrincipalNamePath,
+    Expression<Func<TPermission, TPrincipal>> PrincipalPath,
+    Expression<Func<TPrincipal, string>> PrincipalNamePath,
     IReadOnlyList<LambdaExpression> RestrictionPaths,
-    Expression<Func<TDomainObject, bool>> Filter)
+    Expression<Func<TPermission, bool>> Filter,
+    Expression<Func<TPermission, Period>>? PeriodFilter = null)
 {
     public VirtualPermissionBindingInfo(
         SecurityRole securityRole,
-        Expression<Func<TDomainObject, string>> principalNamePath)
-        : this(securityRole, principalNamePath, [], _ => true)
+        Expression<Func<TPermission, TPrincipal>> principalPath,
+        Expression<Func<TPrincipal, string>> principalNamePath)
+        : this(securityRole, principalPath, principalNamePath, [], _ => true)
     {
     }
 
-    public VirtualPermissionBindingInfo<TDomainObject> AddRestriction<TSecurityContext>(
-        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> path)
+    public VirtualPermissionBindingInfo<TPrincipal, TPermission> AddRestriction<TSecurityContext>(
+        Expression<Func<TPermission, IEnumerable<TSecurityContext>>> path)
         where TSecurityContext : ISecurityContext =>
 
         this with { RestrictionPaths = this.RestrictionPaths.Concat([path]).ToList() };
 
-    public VirtualPermissionBindingInfo<TDomainObject> AddRestriction<TSecurityContext>(
-        Expression<Func<TDomainObject, TSecurityContext>> path)
+    public VirtualPermissionBindingInfo<TPrincipal, TPermission> AddRestriction<TSecurityContext>(
+        Expression<Func<TPermission, TSecurityContext>> path)
         where TSecurityContext : ISecurityContext =>
 
         this with { RestrictionPaths = this.RestrictionPaths.Concat([path]).ToList() };
 
-    public VirtualPermissionBindingInfo<TDomainObject> AddFilter(
-        Expression<Func<TDomainObject, bool>> filter) =>
+    public VirtualPermissionBindingInfo<TPrincipal, TPermission> AddFilter(
+        Expression<Func<TPermission, bool>> filter) =>
 
         this with { Filter = this.Filter.BuildAnd(filter) };
+
+    public VirtualPermissionBindingInfo<TPrincipal, TPermission> SetPeriodFilter(
+        Expression<Func<TPermission, Period>> periodFilter) =>
+
+        this with { PeriodFilter = periodFilter };
 
     public void Validate(ISecurityRoleSource securityRoleSource)
     {
@@ -76,12 +84,12 @@ public record VirtualPermissionBindingInfo<TDomainObject>(
                    .Distinct();
     }
 
-    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetRestrictionsExpr(Type securityContextType) =>
+    public Expression<Func<TPermission, IEnumerable<Guid>>> GetRestrictionsExpr(Type securityContextType) =>
         this.GetType().GetMethod(nameof(this.GetRestrictionsExpr), BindingFlags.Instance | BindingFlags.Public, Type.EmptyTypes)!
             .MakeGenericMethod(securityContextType)
-            .Invoke<Expression<Func<TDomainObject, IEnumerable<Guid>>>>(this);
+            .Invoke<Expression<Func<TPermission, IEnumerable<Guid>>>>(this);
 
-    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetRestrictionsExpr<TSecurityContext>()
+    public Expression<Func<TPermission, IEnumerable<Guid>>> GetRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
         var expressions = this.GetManyRestrictionsExpr<TSecurityContext>();
@@ -95,17 +103,17 @@ public record VirtualPermissionBindingInfo<TDomainObject>(
                                  select ids1.Concat(ide2)));
     }
 
-    private IEnumerable<Expression<Func<TDomainObject, IEnumerable<Guid>>>> GetManyRestrictionsExpr<TSecurityContext>()
+    private IEnumerable<Expression<Func<TPermission, IEnumerable<Guid>>>> GetManyRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
         foreach (var restrictionPath in this.RestrictionPaths)
         {
-            if (restrictionPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
+            if (restrictionPath is Expression<Func<TPermission, TSecurityContext>> singlePath)
             {
                 yield return singlePath.Select(
                     securityContext => securityContext != null ? (IEnumerable<Guid>)new[] { securityContext.Id } : new Guid[0]);
             }
-            else if (restrictionPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
+            else if (restrictionPath is Expression<Func<TPermission, IEnumerable<TSecurityContext>>> manyPath)
             {
                 yield return manyPath.Select(securityContexts => securityContexts.Select(securityContext => securityContext.Id));
             }

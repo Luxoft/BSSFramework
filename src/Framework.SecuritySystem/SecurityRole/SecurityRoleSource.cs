@@ -16,7 +16,7 @@ public class SecurityRoleSource : ISecurityRoleSource
 
         this.Validate();
 
-        this.securityRoleByIdDict = this.SecurityRoles.Where(sr => !sr.IsVirtual).ToDictionary(v => v.Id);
+        this.securityRoleByIdDict = this.SecurityRoles.ToDictionary(v => v.Id);
 
         this.securityRoleByNameDict = this.SecurityRoles.ToDictionary(v => v.Name);
 
@@ -42,12 +42,12 @@ public class SecurityRoleSource : ISecurityRoleSource
 
     public IEnumerable<FullSecurityRole> GetRealRoles()
     {
-        return this.SecurityRoles.Where(sr => !sr.IsVirtual);
+        return this.SecurityRoles.Where(sr => !sr.Information.IsVirtual);
     }
 
     private void Validate()
     {
-        var idDuplicates = this.GetRealRoles()
+        var idDuplicates = this.SecurityRoles
                                .GetDuplicates(
                                    new EqualityComparerImpl<FullSecurityRole>(
                                        (sr1, sr2) => sr1.Id == sr2.Id,

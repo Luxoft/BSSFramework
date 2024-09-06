@@ -2,20 +2,21 @@
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem;
+using Framework.Core;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.Notification;
 
 public class NotificationBasePermissionFilterSource(
     IAvailablePermissionSource availablePermissionSource,
-    ISecurityRoleSource securityRoleSource)
+    ISecurityRolesIdentsResolver securityRolesIdentsResolver)
     : INotificationBasePermissionFilterSource
 {
     public Expression<Func<Permission, bool>> GetBasePermissionFilter(SecurityRole[] securityRoles)
     {
         if (securityRoles == null) throw new ArgumentNullException(nameof(securityRoles));
 
-        var businessRoleIdents = securityRoles.Select(securityRoleSource.GetSecurityRole).Where(sr => !sr.IsVirtual).Select(sr => sr.Id).ToList();
+        var businessRoleIdents = securityRolesIdentsResolver.Resolve(DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles)).ToList();
 
         var permissionQ = availablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false);
 

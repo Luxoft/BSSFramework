@@ -22,12 +22,13 @@ public class GetBusinessRolesHandler(
                                                    .ToList();
 
         return securityRoleSource
-               .GetRealRoles()
+               .SecurityRoles
                .Select(
                    x => new FullRoleDto
                         {
                             Id = x.Id,
                             Name = x.Name,
+                            IsVirtual = x.Information.IsVirtual,
                             Contexts =
                                 x.Information.Restriction.SecurityContextRestrictions?.Select(
                                     v => new RoleContextDto(securityContextSource.GetSecurityContextInfo(v.Type).Name, v.Required)).ToList()

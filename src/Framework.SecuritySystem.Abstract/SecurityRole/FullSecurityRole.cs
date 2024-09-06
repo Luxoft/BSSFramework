@@ -5,6 +5,4 @@ public class FullSecurityRole(string name, SecurityRoleInfo information) : Secur
     public SecurityRoleInfo Information { get; } = information;
 
     public Guid Id => this.Information.Id;
-
-    public bool IsVirtual => this.Id == default;
 }

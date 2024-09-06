@@ -115,6 +115,11 @@ public abstract record DomainSecurityRule : SecurityRule
                                                  ? this.SecurityRoles.Single().Name
                                                  : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";
 
+        public static ExpandedRolesSecurityRule Create(IEnumerable<SecurityRole> securityRoles)
+        {
+            return new ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles));
+        }
+
         public static ExpandedRolesSecurityRule operator +(ExpandedRolesSecurityRule rule1, ExpandedRolesSecurityRule rule2)
         {
             if (rule1.CustomExpandType != rule2.CustomExpandType)

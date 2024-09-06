@@ -1,6 +1,7 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Http;
 
@@ -8,7 +9,7 @@ namespace Framework.Configurator.Handlers;
 
 public record UpdatePrincipalHandler(
     ISecuritySystem SecuritySystem,
-    IConfiguratorApi ConfiguratorApi,
+    IPrincipalManagementService PrincipalManagementService,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
     : BaseWriteHandler, IUpdatePrincipalHandler
 {
@@ -20,7 +21,7 @@ public record UpdatePrincipalHandler(
 
         var principalName = await this.ParseRequestBodyAsync<string>(context);
 
-        await this.ConfiguratorApi.UpdatePrincipalNameAsync(principalId, principalName, cancellationToken);
+        await this.PrincipalManagementService.UpdatePrincipalNameAsync(principalId, principalName, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
             await this.ConfiguratorIntegrationEvents.PrincipalChangedAsync(principalId, cancellationToken);

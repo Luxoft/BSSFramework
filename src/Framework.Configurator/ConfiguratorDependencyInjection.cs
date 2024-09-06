@@ -2,6 +2,8 @@
 
 using Framework.Configurator.Handlers;
 using Framework.Configurator.Interfaces;
+using Framework.Configurator.Services;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
@@ -35,7 +37,8 @@ public static class ConfiguratorDependencyInjection
            .AddScoped<IDeletePrincipalHandler, DeletePrincipalHandler>()
            .AddScoped<IRunAsHandler, RunAsHandler>()
            .AddScoped<IStopRunAsHandler, StopRunAsHandler>()
-           .AddScoped<IDownloadPermissionTemplateHandler, DownloadPermissionTemplateHandler>();
+           .AddScoped<IDownloadPermissionTemplateHandler, DownloadPermissionTemplateHandler>()
+           .AddScoped<IPrincipalManagementService, ConfiguratorPrincipalManagementService>();
 
     public static IApplicationBuilder UseConfigurator(this IApplicationBuilder app, string route = "/admin/configurator") =>
         app

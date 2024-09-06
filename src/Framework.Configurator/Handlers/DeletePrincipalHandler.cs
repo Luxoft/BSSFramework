@@ -1,6 +1,7 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Http;
 
@@ -8,7 +9,7 @@ namespace Framework.Configurator.Handlers;
 
 public record DeletePrincipalHandler(
     ISecuritySystem SecuritySystem,
-    IConfiguratorApi ConfiguratorApi,
+    IPrincipalManagementService PrincipalManagementService,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
     : BaseWriteHandler, IDeletePrincipalHandler
 {
@@ -18,7 +19,7 @@ public record DeletePrincipalHandler(
 
         var principalId = new Guid((string?)context.Request.RouteValues["id"]!);
 
-        await this.ConfiguratorApi.RemovePrincipalAsync(principalId, cancellationToken);
+        await this.PrincipalManagementService.RemovePrincipalAsync(principalId, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
             await this.ConfiguratorIntegrationEvents.PrincipalRemovedAsync(principalId, cancellationToken);

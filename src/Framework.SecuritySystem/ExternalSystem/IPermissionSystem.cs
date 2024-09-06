@@ -2,12 +2,15 @@
 
 using Framework.Core;
 using Framework.Persistent;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 namespace Framework.SecuritySystem.ExternalSystem;
 
 public interface IPermissionSystem : ISecuritySystemBase
 {
     Type PermissionType { get; }
+
+    IPrincipalService PrincipalService { get; }
 
     IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 

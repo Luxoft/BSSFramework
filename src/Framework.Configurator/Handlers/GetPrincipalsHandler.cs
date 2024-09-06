@@ -2,12 +2,13 @@
 using Framework.Configurator.Models;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetPrincipalsHandler(ISecuritySystem securitySystem, IConfiguratorApi configuratorApi)
+public class GetPrincipalsHandler(ISecuritySystem securitySystem, IPrincipalManagementService configuratorApi)
     : BaseReadHandler, IGetPrincipalsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)

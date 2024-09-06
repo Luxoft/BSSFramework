@@ -2,6 +2,7 @@
 using Framework.Configurator.Models;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Http;
 
@@ -10,7 +11,7 @@ namespace Framework.Configurator.Handlers;
 public class GetOperationHandler(
     ISecuritySystem securitySystem,
     ISecurityRoleSource roleSource,
-    IConfiguratorApi configuratorApi)
+    IPrincipalManagementService configuratorApi)
     : BaseReadHandler, IGetOperationHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)

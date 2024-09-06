@@ -2,14 +2,16 @@
 using Framework.Configurator.Models;
 using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.DomainDriven.ApplicationCore.Security;
+using Framework.Exceptions;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
 public class GetPrincipalHandler(
-    IConfiguratorApi configuratorApi,
+    IPrincipalManagementService configuratorApi,
     ISecurityEntitySource externalSource,
     ISecurityContextSource securityContextSource,
     ISecuritySystem securitySystem) : BaseReadHandler, IGetPrincipalHandler
@@ -29,7 +31,8 @@ public class GetPrincipalHandler(
 
     private async Task<List<PermissionDetails>> GetPermissionsAsync(Guid principalId, CancellationToken cancellationToken)
     {
-        var principal = await configuratorApi.GetPrincipalAsync(principalId, cancellationToken);
+        var principal = await configuratorApi.TryGetPrincipalAsync(principalId, cancellationToken)
+                        ?? throw new BusinessLogicException($"Principal with id {principalId} not found");
 
         return principal
                .Permissions

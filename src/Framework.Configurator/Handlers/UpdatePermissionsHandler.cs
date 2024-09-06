@@ -2,6 +2,7 @@
 using Framework.Core;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Http;
 
@@ -11,7 +12,7 @@ public record UpdatePermissionsHandler(
     ISecuritySystem SecuritySystem,
     ISecurityRoleSource SecurityRoleSource,
     ISecurityContextSource SecurityContextSource,
-    IConfiguratorApi ConfiguratorApi,
+    IPrincipalManagementService PrincipalManagementService,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
@@ -23,7 +24,25 @@ public record UpdatePermissionsHandler(
 
         var typedPermissions = permissions.Select(this.ToTypedPermission).ToList();
 
-        var mergeResult = await this.ConfiguratorApi.UpdatePermissionsAsync(principalId, typedPermissions, cancellationToken);
+        var mergeResult = await this.PrincipalManagementService.UpdatePermissionsAsync(principalId, typedPermissions, cancellationToken);
+
+        if (this.ConfiguratorIntegrationEvents != null)
+        {
+            foreach (var permissionId in mergeResult.AddingItems)
+            {
+                await this.ConfiguratorIntegrationEvents.PermissionCreatedAsync(permissionId, cancellationToken);
+            }
+
+            foreach (var (permissionId, _) in mergeResult.CombineItems)
+            {
+                await this.ConfiguratorIntegrationEvents.PermissionChangedAsync(permissionId, cancellationToken);
+            }
+
+            foreach (var permissionId in mergeResult.RemovingItems)
+            {
+                await this.ConfiguratorIntegrationEvents.PermissionRemovedAsync(permissionId, cancellationToken);
+            }
+        }
     }
 
     private TypedPermission ToTypedPermission(RequestBodyDto permission)

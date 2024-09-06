@@ -41,6 +41,13 @@ public class TestDataInitializer(
             login: integrationTestUserName);
 
         authHelper.AddUserToAdmin(integrationTestUserName);
+
+        foreach (var localAdmin in settings.Value.LocalAdmins)
+        {
+            dataHelper.SaveEmployee(login: localAdmin);
+
+            authHelper.AddUserToAdmin(localAdmin);
+        }
     }
 
     private void FillMainData()

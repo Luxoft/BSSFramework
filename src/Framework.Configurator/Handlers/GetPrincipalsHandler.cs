@@ -20,7 +20,7 @@ public class GetPrincipalsHandler(ISecuritySystem securitySystem, IPrincipalMana
         var principals = await configuratorApi.GetPrincipalsAsync(nameFilter, 70, cancellationToken);
 
         return principals
-               .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
+               .Select(x => new PrincipalHeaderDto { Id = x.Id, Name = x.Name, IsVirtual = x.IsVirtual })
                .OrderBy(x => x.Name)
                .ToList();
     }

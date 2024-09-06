@@ -54,7 +54,8 @@ public record UpdatePermissionsHandler(
             permission.Comment,
             permission.Contexts.ToDictionary(
                 pair => this.SecurityContextSource.GetSecurityContextInfo(new Guid(pair.Id)).Type,
-                pair => pair.Entities.ToReadOnlyListI(e => new Guid(e))));
+                pair => pair.Entities.ToReadOnlyListI(e => new Guid(e))),
+            permission.IsVirtual);
     }
 
     private class RequestBodyDto
@@ -70,6 +71,8 @@ public record UpdatePermissionsHandler(
         public string Comment { get; set; } = default!;
 
         public List<ContextDto> Contexts { get; set; } = default!;
+
+        public bool IsVirtual { get; set; }
 
         public class ContextDto
         {

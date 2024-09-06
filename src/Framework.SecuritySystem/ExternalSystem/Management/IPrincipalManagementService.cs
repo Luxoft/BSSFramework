@@ -4,8 +4,6 @@ namespace Framework.SecuritySystem.ExternalSystem.Management;
 
 public interface IPrincipalService
 {
-    bool IsReadonly { get; }
-
     Task<IEnumerable<TypedPrincipalHeader>> GetPrincipalsAsync(string nameFilter, int limit, CancellationToken cancellationToken = default);
 
     Task<TypedPrincipal?> TryGetPrincipalAsync(Guid principalId, CancellationToken cancellationToken = default);

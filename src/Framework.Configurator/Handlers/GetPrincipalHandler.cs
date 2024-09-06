@@ -41,6 +41,7 @@ public class GetPrincipalHandler(
                        new PermissionDetails
                        {
                            Id = typedPermission.Id,
+                           IsVirtual = typedPermission.IsVirtual,
                            Role = typedPermission.SecurityRole.Name,
                            Comment = typedPermission.Comment,
                            StartDate = typedPermission.Period.StartDate,
@@ -123,6 +124,8 @@ public class GetPrincipalHandler(
         public DateTime? EndDate { get; set; }
 
         public DateTime StartDate { get; set; }
+
+        public bool IsVirtual { get; set; }
     }
 
     private class ContextItem

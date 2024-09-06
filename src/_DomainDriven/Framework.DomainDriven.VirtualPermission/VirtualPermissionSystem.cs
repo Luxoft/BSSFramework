@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.Persistent;
@@ -6,6 +7,7 @@ using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.ExternalSystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 using Framework.SecuritySystem.UserSource;
 
 using NHibernate.Linq;
@@ -13,6 +15,8 @@ using NHibernate.Linq;
 namespace Framework.DomainDriven.VirtualPermission;
 
 public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSystem<TPermission>
+    where TPrincipal : IIdentityObject<Guid>
+    where TPermission : IIdentityObject<Guid>
 {
     private readonly ISecurityRuleExpander securityRuleExpander;
 
@@ -39,9 +43,13 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
         this.bindingInfo = bindingInfo;
 
         this.bindingInfo.Validate(securityRoleSource);
+
+        this.PrincipalService = new VirtualPrincipalService<TPrincipal, TPermission>(queryableSource, bindingInfo);
     }
 
     public Type PermissionType { get; } = typeof(TPermission);
+
+    public IPrincipalService PrincipalService { get; }
 
     public Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>

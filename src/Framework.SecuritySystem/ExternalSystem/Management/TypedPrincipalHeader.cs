@@ -1,3 +1,3 @@
 ﻿namespace Framework.SecuritySystem.ExternalSystem.Management;
 
-public record TypedPrincipalHeader(string Name, Guid Id);
+public record TypedPrincipalHeader(Guid Id, string Name, bool IsVirtual);

@@ -7,4 +7,5 @@ public record TypedPermission(
     SecurityRole SecurityRole,
     Period Period,
     string Comment,
-    IReadOnlyDictionary<Type, IReadOnlyList<Guid>> Restrictions);
+    IReadOnlyDictionary<Type, IReadOnlyList<Guid>> Restrictions,
+    bool IsVirtual);

@@ -5,19 +5,18 @@ namespace SampleSystem.WebApiCore.Services;
 
 public class SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger) : IConfiguratorIntegrationEvents
 {
-    public Task PrincipalCreatedAsync(Principal principal, CancellationToken cancellationToken)
+    public async Task PrincipalCreatedAsync(Guid principal, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Principal {Name} has been created", principal.Name);
-        return Task.CompletedTask;
+        logger.LogInformation("Principal {Name} has been created", principal);
     }
 
-    public Task PrincipalRemovedAsync(Principal principal, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PrincipalRemovedAsync(Guid principalId, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public Task PrincipalChangedAsync(Principal principal, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PrincipalChangedAsync(Guid principalId, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public Task PermissionRemovedAsync(Permission permission, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PermissionRemovedAsync(Guid principalId, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public Task PermissionCreatedAsync(Permission permission, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PermissionCreatedAsync(Guid principalId, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public Task PermissionChangedAsync(Permission permission, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PermissionChangedAsync(Guid principalId, CancellationToken cancellationToken) => Task.CompletedTask;
 }

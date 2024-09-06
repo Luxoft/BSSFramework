@@ -42,16 +42,15 @@ public record VirtualPermissionBindingInfo<TPrincipal, TPermission>(
 
     public VirtualPermissionBindingInfo<TPrincipal, TPermission> SetPeriodFilter(
         Expression<Func<TPermission, Period>> periodFilter) =>
-
-        this with { PeriodFilter = periodFilter };
+    this with { PeriodFilter = periodFilter };
 
     public void Validate(ISecurityRoleSource securityRoleSource)
     {
         var securityContextRestrictions = securityRoleSource
-                                              .GetSecurityRole(this.SecurityRole)
-                                              .Information
-                                              .Restriction
-                                              .SecurityContextRestrictions;
+                                          .GetSecurityRole(this.SecurityRole)
+                                          .Information
+                                          .Restriction
+                                          .SecurityContextRestrictions;
 
         if (securityContextRestrictions != null)
         {

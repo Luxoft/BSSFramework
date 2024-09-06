@@ -22,7 +22,7 @@ public class GetBusinessRolesHandler(
                                                    .ToList();
 
         return securityRoleSource
-               .GetRealRoles()
+               .SecurityRoles
                .Select(
                    x => new FullRoleDto
                         {

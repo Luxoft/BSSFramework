@@ -37,7 +37,7 @@ public class AuthManager(
         {
             var securityRole = securityRoleSource.GetSecurityRole(testPermission.SecurityRole);
 
-            if (securityRole.IsVirtual)
+            if (securityRole.Information.IsVirtual)
             {
                 throw new Exception($"Assigned {nameof(SecurityRole)} {securityRole} can't be virtual");
             }

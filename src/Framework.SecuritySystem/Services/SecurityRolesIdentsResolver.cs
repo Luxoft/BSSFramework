@@ -11,9 +11,8 @@ public class SecurityRolesIdentsResolver(
     {
         return securityRuleExpander.FullExpand(securityRule)
                                    .SecurityRoles
-                                   .Distinct()
                                    .Select(securityRoleSource.GetSecurityRole)
-                                   .Where(sr => !sr.IsVirtual)
+                                   .Where(sr => !sr.Information.IsVirtual)
                                    .Select(sr => sr.Id);
     }
 }

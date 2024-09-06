@@ -24,8 +24,7 @@ public class GetBusinessRoleHandler(
 
         var roleId = new Guid((string)context.Request.RouteValues["id"]!);
 
-        var operations = roleSource.GetRealRoles()
-                                   .Single(x => x.Id == roleId)
+        var operations = roleSource.GetSecurityRole(roleId)
                                    .Information
                                    .Operations
                                    .Select(o => new OperationDto { Name = o.Name, Description = operationInfoSource.GetSecurityOperationInfo(o).Description })

@@ -81,6 +81,10 @@ public static class SampleSystemSecuritySystemExtensions
                    new SecurityRoleInfo(default) { Operations = [SampleSystemSecurityOperation.EmployeeView] })
 
                .AddSecurityRole(
+                   SampleSystemSecurityRole.TestVirtualRole2,
+                   new SecurityRoleInfo(default))
+
+               .AddSecurityRole(
                    SampleSystemSecurityRole.PermissionAdministrator,
                    new SecurityRoleInfo(new Guid("{1E101597-E722-4650-BED1-5A1025540897}")))
 

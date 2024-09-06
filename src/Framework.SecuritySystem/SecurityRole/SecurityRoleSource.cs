@@ -40,9 +40,14 @@ public class SecurityRoleSource : ISecurityRoleSource
         return this.securityRoleByIdDict.GetValueOrDefault(id) ?? throw new Exception($"SecurityRole with id '{id}' not found");
     }
 
+    public IEnumerable<FullSecurityRole> GetRealRoles()
+    {
+        return this.SecurityRoles.Where(sr => !sr.IsVirtual);
+    }
+
     private void Validate()
     {
-        var idDuplicates = this.SecurityRoles
+        var idDuplicates = this.GetRealRoles()
                                .GetDuplicates(
                                    new EqualityComparerImpl<FullSecurityRole>(
                                        (sr1, sr2) => sr1.Id == sr2.Id,

@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 using Framework.Core;
@@ -18,22 +19,34 @@ public class VirtualPrincipalService<TPrincipal, TPermission>(
     where TPrincipal : IIdentityObject<Guid>
     where TPermission : IIdentityObject<Guid>
 {
-    private readonly Expression<Func<TPrincipal, TypedPrincipalHeader>> toPrincipalHeaderExpr = ExpressionHelper.Create(
-        (TPrincipal principal) => new TypedPrincipalHeader(principal.Id, bindingInfo.PrincipalNamePath.Eval(principal), true)).InlineEval();
-
     public async Task<IEnumerable<TypedPrincipalHeader>> GetPrincipalsAsync(
         string nameFilter,
         int limit,
         CancellationToken cancellationToken = default)
     {
-        return await queryableSource.GetQueryable<TPermission>()
-                                    .Where(bindingInfo.Filter)
-                                    .Select(bindingInfo.PrincipalPath)
-                                    .Where(string.IsNullOrWhiteSpace(nameFilter) ? _ => true : bindingInfo.PrincipalNamePath.Select(principalName => principalName.Contains(nameFilter)))
-                                    .Distinct()
-                                    .Take(limit)
-                                    .Select(this.toPrincipalHeaderExpr)
-                                    .ToListAsync(cancellationToken);
+        var principalNamePath = bindingInfo.PrincipalNamePath;
+
+        var toPrincipalAnonHeaderExpr =
+            ExpressionHelper
+                .Create((TPrincipal principal) => new { principal.Id, Name = principalNamePath.Eval(principal) })
+                .InlineEval()
+                .ExpandConst();
+
+        var anonHeaders = await queryableSource
+                                .GetQueryable<TPermission>()
+                                .Where(bindingInfo.Filter)
+                                .Select(bindingInfo.PrincipalPath)
+                                .Where(
+                                    string.IsNullOrWhiteSpace(nameFilter)
+                                        ? _ => true
+                                        : bindingInfo.PrincipalNamePath.Select(principalName => principalName.Contains(nameFilter)))
+                                .OrderBy(bindingInfo.PrincipalNamePath)
+                                .Take(limit)
+                                .Select(toPrincipalAnonHeaderExpr)
+                                .Distinct()
+                                .ToListAsync(cancellationToken);
+
+        return anonHeaders.Select(anonHeader => new TypedPrincipalHeader(anonHeader.Id, anonHeader.Name, true));
     }
 
     public async Task<TypedPrincipal?> TryGetPrincipalAsync(Guid principalId, CancellationToken cancellationToken = default)
@@ -48,7 +61,7 @@ public class VirtualPrincipalService<TPrincipal, TPermission>(
         }
         else
         {
-            var header = this.toPrincipalHeaderExpr.Eval(principal);
+            var header = new TypedPrincipalHeader(principal.Id, bindingInfo.PrincipalNamePath.Eval(principal), true);
 
             var permissions = await queryableSource.GetQueryable<TPermission>()
                                                    .Where(bindingInfo.Filter)

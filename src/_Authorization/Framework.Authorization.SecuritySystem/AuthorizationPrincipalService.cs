@@ -1,6 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
+using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
@@ -10,6 +11,8 @@ namespace Framework.Authorization.SecuritySystem;
 
 public class AuthorizationPrincipalService(
     [DisabledSecurity] IRepository<Principal> principalRepository,
+    [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
+    [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
     ISecurityRoleSource securityRoleSource,
     ISecurityContextSource securityContextSource,
     IAvailablePermissionSource availablePermissionSource,
@@ -102,6 +105,49 @@ public class AuthorizationPrincipalService(
     {
         var principal = await principalRepository.LoadAsync(principalId, cancellationToken);
 
-        throw new NotImplementedException();
+        var permissionMergeResult = principal.Permissions.GetMergeResult(typedPermissions, p => p.Id, p => p.Id);
+
+        foreach (var typedPermission in permissionMergeResult.AddingItems)
+        {
+            if (typedPermission.Id != Guid.Empty || typedPermission.IsVirtual)
+            {
+                throw new Exception("wrong typed permission");
+            }
+
+            var securityRole = securityRoleSource.GetSecurityRole(typedPermission.SecurityRole);
+
+            var dbRole = await businessRoleRepository.LoadAsync(securityRole.Id, cancellationToken);
+
+            var newDbPermission = new Permission(principal)
+                                  {
+                                      Comment = typedPermission.Comment, Period = typedPermission.Period, Role = dbRole
+                                  };
+
+            foreach (var restrictionGroup in typedPermission.Restrictions)
+            {
+                var securityContextTypeId = securityContextSource.GetSecurityContextInfo(restrictionGroup.Key).Id;
+
+                foreach (var securityContextId in restrictionGroup.Value)
+                {
+                    _ = new PermissionRestriction(newDbPermission)
+                        {
+                            SecurityContextId = securityContextId,
+                            SecurityContextType = await securityContextTypeRepository.LoadAsync(
+                                                      securityContextTypeId,
+                                                      cancellationToken)
+                        };
+                }
+            }
+        }
+
+        foreach (var oldDbPermission in permissionMergeResult.RemovingItems)
+        {
+            principal.RemoveDetail(oldDbPermission);
+        }
+
+        foreach (var (dbPermission, typedPermission) in permissionMergeResult.CombineItems)
+        {
+            var restrictionMergeResult = dbPermission.
+        }
     }
 }

@@ -15,4 +15,6 @@ public record SecurityRoleInfo(Guid Id)
     public string? Description { get; init; }
 
     public string? CustomName { get; init; }
+
+    public bool IsVirtual { get; init; }
 }

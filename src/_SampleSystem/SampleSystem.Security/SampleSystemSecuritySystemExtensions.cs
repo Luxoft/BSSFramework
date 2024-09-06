@@ -78,7 +78,14 @@ public static class SampleSystemSecuritySystemExtensions
 
                .AddSecurityRole(
                    SampleSystemSecurityRole.TestVirtualRole,
-                   new SecurityRoleInfo(default) { Operations = [SampleSystemSecurityOperation.EmployeeView] })
+                   new SecurityRoleInfo(new Guid("{D75CFAB6-A089-4CEE-924E-0F057C627320}"))
+                   {
+                       IsVirtual = true, Operations = [SampleSystemSecurityOperation.EmployeeView]
+                   })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.TestVirtualRole2,
+                   new SecurityRoleInfo(new Guid("{649DE6F3-A943-46A3-9E81-AA056D24B52D}")) { IsVirtual = true, })
 
                .AddSecurityRole(
                    SampleSystemSecurityRole.PermissionAdministrator,
@@ -116,9 +123,10 @@ public static class SampleSystemSecuritySystemExtensions
 
     public static ISecuritySystemSettings AddVirtualPermissions(this ISecuritySystemSettings settings)
     {
-        return settings.AddVirtualPermission<BusinessUnitEmployeeRole>(
+        return settings.AddVirtualPermission<Employee, BusinessUnitEmployeeRole>(
             SampleSystemSecurityRole.SeManager,
-            link => link.Employee.Login,
+            link => link.Employee,
+            employee => employee.Login,
             v => v.AddRestriction(link => link.BusinessUnit)
                   .AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager));
     }

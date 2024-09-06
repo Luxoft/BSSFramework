@@ -12,7 +12,7 @@ using NHibernate.Linq;
 
 namespace Framework.DomainDriven.VirtualPermission;
 
-public class VirtualPermissionSystem<TDomainObject> : IPermissionSystem<TDomainObject>
+public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSystem<TPermission>
 {
     private readonly ISecurityRuleExpander securityRuleExpander;
 
@@ -20,46 +20,50 @@ public class VirtualPermissionSystem<TDomainObject> : IPermissionSystem<TDomainO
 
     private readonly IQueryableSource queryableSource;
 
-    private readonly VirtualPermissionBindingInfo<TDomainObject> bindingInfo;
+    private readonly TimeProvider timeProvider;
+
+    private readonly VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo;
 
     public VirtualPermissionSystem(
         ISecurityRuleExpander securityRuleExpander,
         ICurrentUser currentUser,
         IQueryableSource queryableSource,
+        TimeProvider timeProvider,
         ISecurityRoleSource securityRoleSource,
-        VirtualPermissionBindingInfo<TDomainObject> bindingInfo)
+        VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo)
     {
         this.securityRuleExpander = securityRuleExpander;
         this.currentUser = currentUser;
         this.queryableSource = queryableSource;
+        this.timeProvider = timeProvider;
         this.bindingInfo = bindingInfo;
 
         this.bindingInfo.Validate(securityRoleSource);
     }
 
-    public Type PermissionType { get; } = typeof(TDomainObject);
+    public Type PermissionType { get; } = typeof(TPermission);
 
-    public Expression<Func<TDomainObject, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
+    public Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
         this.bindingInfo.GetRestrictionsExpr<TSecurityContext>();
 
-    public Expression<Func<TDomainObject, bool>> GetGrandAccessExpr<TSecurityContext>()
+    public Expression<Func<TPermission, bool>> GetGrandAccessExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
         this.GetManyGrandAccessExpr<TSecurityContext>().BuildOr();
 
-    public Expression<Func<TDomainObject, bool>> GetContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
+    public Expression<Func<TPermission, bool>> GetContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
         this.GetManyContainsIdentsExpr<TSecurityContext>(idents).BuildOr();
 
-    public IPermissionSource<TDomainObject> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
+    public IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         if (this.securityRuleExpander.FullExpand(securityRule).SecurityRoles.Contains(this.bindingInfo.SecurityRole))
         {
-            return new VirtualPermissionSource<TDomainObject>(this.currentUser, this.queryableSource, this.bindingInfo);
+            return new VirtualPermissionSource<TPrincipal, TPermission>(this.currentUser, this.queryableSource, this.timeProvider, this.bindingInfo);
         }
         else
         {
-            return new EmptyPermissionSource<TDomainObject>();
+            return new EmptyPermissionSource<TPermission>();
         }
     }
 
@@ -70,34 +74,34 @@ public class VirtualPermissionSystem<TDomainObject> : IPermissionSystem<TDomainO
 
     public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => this.GetPermissionSource(securityRule).GetPermissionQuery().Any();
 
-    private IEnumerable<Expression<Func<TDomainObject, bool>>> GetManyGrandAccessExpr<TSecurityContext>()
+    private IEnumerable<Expression<Func<TPermission, bool>>> GetManyGrandAccessExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
         foreach (var restrictionPath in this.bindingInfo.RestrictionPaths)
         {
-            if (restrictionPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
+            if (restrictionPath is Expression<Func<TPermission, TSecurityContext>> singlePath)
             {
                 yield return singlePath.Select(
                     securityContext => securityContext == null);
             }
-            else if (restrictionPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
+            else if (restrictionPath is Expression<Func<TPermission, IEnumerable<TSecurityContext>>> manyPath)
             {
                 yield return manyPath.Select(securityContexts => !securityContexts.Any());
             }
         }
     }
 
-    private IEnumerable<Expression<Func<TDomainObject, bool>>> GetManyContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
+    private IEnumerable<Expression<Func<TPermission, bool>>> GetManyContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
         foreach (var restrictionPath in this.bindingInfo.RestrictionPaths)
         {
-            if (restrictionPath is Expression<Func<TDomainObject, TSecurityContext>> singlePath)
+            if (restrictionPath is Expression<Func<TPermission, TSecurityContext>> singlePath)
             {
                 yield return singlePath.Select(
                     securityContext => idents.Contains(securityContext.Id));
             }
-            else if (restrictionPath is Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> manyPath)
+            else if (restrictionPath is Expression<Func<TPermission, IEnumerable<TSecurityContext>>> manyPath)
             {
                 yield return manyPath.Select(securityContexts => securityContexts.Any(securityContext => idents.Contains(securityContext.Id)));
             }

@@ -7,11 +7,14 @@ using Framework.SecuritySystem.UserSource;
 
 namespace Framework.DomainDriven.VirtualPermission;
 
-public class VirtualPermissionSource<TDomainObject>(
+public class VirtualPermissionSource<TPrincipal, TPermission>(
     ICurrentUser currentUser,
     IQueryableSource queryableSource,
-    VirtualPermissionBindingInfo<TDomainObject> bindingInfo) : IPermissionSource<TDomainObject>
+    TimeProvider timeProvider,
+    VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo) : IPermissionSource<TPermission>
 {
+    private readonly Expression<Func<TPermission, string>> fullNamePath = bindingInfo.PrincipalPath.Select(bindingInfo.PrincipalNamePath);
+
     public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
     {
         var permissions = this.GetPermissionQuery(true).ToList();
@@ -19,17 +22,26 @@ public class VirtualPermissionSource<TDomainObject>(
         return permissions.Select(permission => this.ConvertPermission(permission, securityTypes)).ToList();
     }
 
-    public IQueryable<TDomainObject> GetPermissionQuery() => this.GetPermissionQuery(true);
+    public IQueryable<TPermission> GetPermissionQuery() => this.GetPermissionQuery(true);
 
-    private IQueryable<TDomainObject> GetPermissionQuery(bool applyCurrentUser) =>
-        queryableSource.GetQueryable<TDomainObject>().Where(bindingInfo.Filter).Pipe(
-            applyCurrentUser,
-            q => q.Where(bindingInfo.PrincipalNamePath.Select(name => name == currentUser.Name)));
+    private IQueryable<TPermission> GetPermissionQuery(bool applyCurrentUser) =>
+        queryableSource
+            .GetQueryable<TPermission>()
+            .Where(bindingInfo.Filter)
+            .Pipe(
+                bindingInfo.PeriodFilter != null,
+                q =>
+                {
+                    var today = timeProvider.GetToday();
 
-    public IEnumerable<string> GetAccessors(Expression<Func<TDomainObject, bool>> permissionFilter) =>
-        this.GetPermissionQuery(false).Where(permissionFilter).Select(bindingInfo.PrincipalNamePath);
+                    return q.Where(bindingInfo.PeriodFilter.Select(period => period.Contains(today)));
+                })
+            .Pipe(applyCurrentUser, q => q.Where(this.fullNamePath.Select(name => name == currentUser.Name)));
 
-    private Dictionary<Type, List<Guid>> ConvertPermission(TDomainObject permission, IEnumerable<Type> securityTypes) =>
+    public IEnumerable<string> GetAccessors(Expression<Func<TPermission, bool>> permissionFilter) =>
+        this.GetPermissionQuery(false).Where(permissionFilter).Select(this.fullNamePath);
+
+    private Dictionary<Type, List<Guid>> ConvertPermission(TPermission permission, IEnumerable<Type> securityTypes) =>
         securityTypes.ToDictionary(
             securityContextType => securityContextType,
             securityContextType => bindingInfo.GetRestrictionsExpr(securityContextType).Eval(permission).ToList());

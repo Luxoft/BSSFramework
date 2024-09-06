@@ -7,13 +7,12 @@ public class SecurityRolesIdentsResolver(
     ISecurityRoleSource securityRoleSource)
     : ISecurityRolesIdentsResolver
 {
-    public IEnumerable<Guid> Resolve(DomainSecurityRule.RoleBaseSecurityRule securityRule)
+    public IEnumerable<Guid> Resolve(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool includeVirtual = false)
     {
         return securityRuleExpander.FullExpand(securityRule)
                                    .SecurityRoles
-                                   .Distinct()
                                    .Select(securityRoleSource.GetSecurityRole)
-                                   .Where(sr => !sr.IsVirtual)
+                                   .Where(sr => includeVirtual || !sr.Information.IsVirtual)
                                    .Select(sr => sr.Id);
     }
 }

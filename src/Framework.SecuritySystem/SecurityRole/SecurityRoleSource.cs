@@ -16,7 +16,7 @@ public class SecurityRoleSource : ISecurityRoleSource
 
         this.Validate();
 
-        this.securityRoleByIdDict = this.SecurityRoles.Where(sr => !sr.IsVirtual).ToDictionary(v => v.Id);
+        this.securityRoleByIdDict = this.SecurityRoles.ToDictionary(v => v.Id);
 
         this.securityRoleByNameDict = this.SecurityRoles.ToDictionary(v => v.Name);
 
@@ -38,6 +38,11 @@ public class SecurityRoleSource : ISecurityRoleSource
     public FullSecurityRole GetSecurityRole(Guid id)
     {
         return this.securityRoleByIdDict.GetValueOrDefault(id) ?? throw new Exception($"SecurityRole with id '{id}' not found");
+    }
+
+    public IEnumerable<FullSecurityRole> GetRealRoles()
+    {
+        return this.SecurityRoles.Where(sr => !sr.Information.IsVirtual);
     }
 
     private void Validate()

@@ -2,6 +2,7 @@
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem;
+using Framework.Core;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.Notification;
@@ -15,7 +16,7 @@ public class NotificationBasePermissionFilterSource(
     {
         if (securityRoles == null) throw new ArgumentNullException(nameof(securityRoles));
 
-        var businessRoleIdents = securityRolesIdentsResolver.Resolve(securityRoles).ToList();
+        var businessRoleIdents = securityRolesIdentsResolver.Resolve(DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles)).ToList();
 
         var permissionQ = availablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false);
 

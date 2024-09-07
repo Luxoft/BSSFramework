@@ -1,74 +1,64 @@
-﻿using System.Collections.ObjectModel;
+﻿#nullable enable
 
 namespace Framework.Core;
 
-public struct MergeResult<TSource, TTarget>
+public readonly record struct MergeResult<TSource, TTarget>(
+    IReadOnlyList<TTarget> AddingItems,
+    IReadOnlyList<ValueTuple<TSource, TTarget>> CombineItems,
+    IReadOnlyList<TSource> RemovingItems)
 {
-    public IList<TSource> RemovingItems;
-
-    public IList<TTarget> AddingItems;
-
-    public IList<ValueTuple<TSource, TTarget>> CombineItems;
-
-
-    public bool IsEmpty
+    public MergeResult(
+        IEnumerable<TTarget> addingItems,
+        IEnumerable<ValueTuple<TSource, TTarget>> combineItems,
+        IEnumerable<TSource> removingItems)
+        : this(addingItems.ToList(), combineItems.ToList(), removingItems.ToList())
     {
-        get
-        {
-            return !this.RemovingItems.Any() && !this.AddingItems.Any();
-        }
     }
 
-    public MergeResult(IEnumerable<TTarget> addingItems, IEnumerable<ValueTuple<TSource, TTarget>> combineItems, IEnumerable<TSource> removingItems) : this()
-    {
-        this.RemovingItems = removingItems.ToList();
-        this.AddingItems = addingItems.ToList();
-        this.CombineItems = combineItems.ToList();
-    }
+    public bool IsEmpty => !this.RemovingItems.Any() && !this.AddingItems.Any();
 
-
-    public static readonly MergeResult<TSource, TTarget> Empty = new MergeResult<TSource, TTarget>
-                                                                 {
-                                                                         AddingItems = new ReadOnlyCollection<TTarget>(new TTarget[0]),
-                                                                         RemovingItems = new ReadOnlyCollection<TSource>(new TSource[0]),
-                                                                         CombineItems = new ReadOnlyCollection<ValueTuple<TSource, TTarget>>(new ValueTuple<TSource, TTarget>[0])
-                                                                 };
+    public static readonly MergeResult<TSource, TTarget> Empty = new([], [], []);
 }
 
 public static class MergeResultExtensions
 {
-    public static MergeResult<TResult, TResult> Select<TSource, TResult>(this MergeResult<TSource, TSource> mergeResult, Func<TSource, TResult> selector)
-    {
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+    public static MergeResult<TResult, TResult> Select<TSource, TResult>(
+        this MergeResult<TSource, TSource> mergeResult,
+        Func<TSource, TResult> selector) =>
+        new(
+            mergeResult.AddingItems.Select(selector),
+            mergeResult.CombineItems.Select(t => (selector(t.Item1), selector(t.Item2))),
+            mergeResult.RemovingItems.Select(selector));
 
-        return new MergeResult<TResult, TResult>
-               {
-                       AddingItems = mergeResult.AddingItems.ToList(selector),
-                       RemovingItems = mergeResult.RemovingItems.ToList(selector),
-                       CombineItems = mergeResult.CombineItems.ToList(t => ValueTuple.Create(selector(t.Item1), selector(t.Item2)))
-               };
-    }
+    public static MergeResult<TSource, TSource> Where<TSource>(
+        this MergeResult<TSource, TSource> mergeResult,
+        Func<TSource, bool> filter) =>
+        new(
+            mergeResult.AddingItems.Where(filter),
+            mergeResult.CombineItems.Where(t => filter(t.Item1) && filter(t.Item2)),
+            mergeResult.RemovingItems.Where(filter));
 
-    public static MergeResult<TSource, TSource> Where<TSource>(this MergeResult<TSource, TSource> mergeResult, Func<TSource, bool> filter)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+    public static MergeResult<TSource, TTarget> Concat<TSource, TTarget>(
+        this MergeResult<TSource, TTarget> m1,
+        MergeResult<TSource, TTarget> m2) =>
+        new(
+            m1.AddingItems.Concat(m2.AddingItems),
+            m1.CombineItems.Concat(m2.CombineItems),
+            m1.RemovingItems.Concat(m2.RemovingItems));
 
-        return new MergeResult<TSource, TSource>
-               {
-                       AddingItems = mergeResult.AddingItems.Where(filter).ToList(),
-                       RemovingItems = mergeResult.RemovingItems.Where(filter).ToList(),
-                       CombineItems = mergeResult.CombineItems.Where(t => filter(t.Item1) && filter(t.Item2)).ToList()
-               };
-    }
+    public static MergeResult<TNewSource, TTarget> ChangeSource<TSource, TTarget, TNewSource>(
+        this MergeResult<TSource, TTarget> mergeResult,
+        Func<TSource, TNewSource> selector) =>
+        new(
+            mergeResult.AddingItems,
+            mergeResult.CombineItems.Select(t => (selector(t.Item1), t.Item2)),
+            mergeResult.RemovingItems.Select(selector));
 
-
-    public static MergeResult<TSource, TTarget> Concat<TSource, TTarget>(this MergeResult<TSource, TTarget> m1, MergeResult<TSource, TTarget> m2)
-    {
-        return new MergeResult<TSource, TTarget>
-               {
-                       AddingItems = m1.AddingItems.Concat(m2.AddingItems).ToList(),
-                       RemovingItems = m1.RemovingItems.Concat(m2.RemovingItems).ToList(),
-                       CombineItems = m1.CombineItems.Concat(m2.CombineItems).ToList(),
-               };
-    }
+    public static MergeResult<TSource, TNewTarget> ChangeTarget<TSource, TTarget, TNewTarget>(
+        this MergeResult<TSource, TTarget> mergeResult,
+        Func<TTarget, TNewTarget> selector) =>
+        new(
+            mergeResult.AddingItems.Select(selector),
+            mergeResult.CombineItems.Select(t => (t.Item1, selector(t.Item2))),
+            mergeResult.RemovingItems);
 }

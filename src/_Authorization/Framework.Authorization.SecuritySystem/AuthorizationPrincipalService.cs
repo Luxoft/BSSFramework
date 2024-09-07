@@ -103,9 +103,9 @@ public class AuthorizationPrincipalService(
         IEnumerable<TypedPermission> typedPermissions,
         CancellationToken cancellationToken = default)
     {
-        var principal = await principalRepository.LoadAsync(principalId, cancellationToken);
+        var dbPrincipal = await principalRepository.LoadAsync(principalId, cancellationToken);
 
-        var permissionMergeResult = principal.Permissions.GetMergeResult(typedPermissions, p => p.Id, p => p.Id);
+        var permissionMergeResult = dbPrincipal.Permissions.GetMergeResult(typedPermissions, p => p.Id, p => p.Id);
 
         foreach (var typedPermission in permissionMergeResult.AddingItems)
         {
@@ -118,7 +118,7 @@ public class AuthorizationPrincipalService(
 
             var dbRole = await businessRoleRepository.LoadAsync(securityRole.Id, cancellationToken);
 
-            var newDbPermission = new Permission(principal)
+            var newDbPermission = new Permission(dbPrincipal)
                                   {
                                       Comment = typedPermission.Comment, Period = typedPermission.Period, Role = dbRole
                                   };
@@ -142,12 +142,49 @@ public class AuthorizationPrincipalService(
 
         foreach (var oldDbPermission in permissionMergeResult.RemovingItems)
         {
-            principal.RemoveDetail(oldDbPermission);
+            dbPrincipal.RemoveDetail(oldDbPermission);
         }
+
+        var isEmpty = new HashSet<Guid>();
 
         foreach (var (dbPermission, typedPermission) in permissionMergeResult.CombineItems)
         {
-            var restrictionMergeResult = dbPermission.
+            var restrictionMergeResult = dbPermission.Restrictions.GetMergeResult(
+                typedPermission.Restrictions.ChangeKey(t => securityContextSource.GetSecurityContextInfo(t).Id)
+                               .SelectMany(pair => pair.Value.Select(securityContextId => (pair.Key, securityContextId))),
+                r => (r.SecurityContextType.Id, r.SecurityContextId),
+                pair => pair);
+
+            if (restrictionMergeResult.IsEmpty)
+            {
+                isEmpty.Add(dbPermission.Id);
+            }
+
+            foreach (var restriction in restrictionMergeResult.AddingItems)
+            {
+                _ = new PermissionRestriction(dbPermission)
+                {
+                    SecurityContextId = restriction.securityContextId,
+                    SecurityContextType = await securityContextTypeRepository.LoadAsync(restriction.Key, cancellationToken)
+                };
+            }
+
+            foreach (var dbRestriction in restrictionMergeResult.RemovingItems)
+            {
+                dbPermission.RemoveDetail(dbRestriction);
+            }
         }
+
+        await principalDomainService.SaveAsync(dbPrincipal, cancellationToken);
+
+        var preResult = permissionMergeResult.ChangeSource(dbPermission => dbPermission.Id)
+                                             .ChangeTarget(typedPermission => typedPermission.Id);
+
+        return preResult with
+               {
+                   CombineItems = preResult
+                                  .CombineItems
+                                  .Where(pair => !isEmpty.Contains(pair.Item1)).ToList()
+               };
     }
 }

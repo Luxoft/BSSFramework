@@ -19,7 +19,7 @@ public static class ValidationResultExtensions
     }
 
 
-    public static ValidationResult ToValidationResult<TSource, TResult>(this MergeResult<TSource, TResult> mergeResult, Func<IList<TResult>, ValidationResult> addedItemsValidateFunc, Func<IList<TSource>, ValidationResult> removedItemsValidateFunc)
+    public static ValidationResult ToValidationResult<TSource, TResult>(this MergeResult<TSource, TResult> mergeResult, Func<IEnumerable<TResult>, ValidationResult> addedItemsValidateFunc, Func<IEnumerable<TSource>, ValidationResult> removedItemsValidateFunc)
     {
         return addedItemsValidateFunc(mergeResult.AddingItems) + removedItemsValidateFunc(mergeResult.RemovingItems);
     }

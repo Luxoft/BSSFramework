@@ -25,9 +25,9 @@ public record ForcePushEventHandler(
         await this.ForcePushAsync(new Guid(operationId), body, cancellationToken);
     }
 
-    private async Task ForcePushAsync(Guid operationId, RequestBodyDto body, CancellationToken token)
+    private async Task ForcePushAsync(Guid operationId, RequestBodyDto body, CancellationToken cancellationToken)
     {
-        var domainTypeEventOperation = await this.EventOperationRepoFactory.Create().LoadAsync(operationId, token);
+        var domainTypeEventOperation = await this.EventOperationRepoFactory.Create().LoadAsync(operationId, cancellationToken);
 
         if (this.LegacyForceEventSystem == null)
         {

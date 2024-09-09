@@ -3,7 +3,7 @@
 <div class="tw-flex tw-justify-end tw-mr-2">
   <button mat-raised-button
           color="primary"
-          [disabled]="(loaded$ | async) !== true"
+          [disabled]="data.IsVirtual"
           (click)="grantRightsDialogService.addPermission()">
     Add permission
   </button>
@@ -41,9 +41,11 @@
         </span>
       </div>
     </div>
+
     <div class="row tw-p-2 tw-mx-4 tw-gap-4 tw-w-fit tw-border-b last:tw-border-0"
          *ngFor="let element of obj.filter | rightsFilter : obj.rights ?? []">
       <button mat-icon-button
+              [disabled]="element.IsVirtual"
               [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -88,7 +90,7 @@
           mat-dialog-close>Cancel</button>
   <button mat-raised-button
           color="primary"
-          [disabled]="(loaded$ | async) !== true"
+          [disabled]="data.IsVirtual"
           (click)="save()"
           cdkFocusInitial>Save</button>
 </div>

@@ -1,18 +1,16 @@
-﻿using Framework.Authorization.Domain;
-
-namespace Framework.Configurator.Interfaces;
+﻿namespace Framework.Configurator.Interfaces;
 
 public interface IConfiguratorIntegrationEvents
 {
-    Task PrincipalCreatedAsync(Principal principal, CancellationToken cancellationToken);
+    Task PrincipalCreatedAsync(Guid principalId, CancellationToken cancellationToken = default);
 
-    Task PrincipalRemovedAsync(Principal principal, CancellationToken cancellationToken);
+    Task PrincipalChangedAsync(Guid principalId, CancellationToken cancellationToken = default);
 
-    Task PrincipalChangedAsync(Principal principal, CancellationToken cancellationToken);
+    Task PrincipalRemovedAsync(Guid principalId, CancellationToken cancellationToken = default);
 
-    Task PermissionRemovedAsync(Permission permission, CancellationToken cancellationToken);
+    Task PermissionCreatedAsync(Guid permissionId, CancellationToken cancellationToken = default);
 
-    Task PermissionCreatedAsync(Permission permission, CancellationToken cancellationToken);
+    Task PermissionChangedAsync(Guid permissionId, CancellationToken cancellationToken = default);
 
-    Task PermissionChangedAsync(Permission permission, CancellationToken cancellationToken);
+    Task PermissionRemovedAsync(Guid permissionId, CancellationToken cancellationToken = default);
 }

@@ -7,6 +7,7 @@ export interface IPermissionDto {
   Id: string;
   Role: string;
   RoleId?: string;
+  IsVirtual: boolean;
   Comment: string | null;
   Contexts: IContextDto[];
   StartDate?: string;

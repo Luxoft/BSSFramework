@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿#nullable enable
+
+using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 
 namespace Framework.Core;
@@ -68,7 +70,7 @@ public static class CoreEnumerableExtensions
         return !source.Any();
     }
 
-    public static IEnumerable<T> GetDuplicates<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer = null)
+    public static IEnumerable<T> GetDuplicates<T>(this IEnumerable<T> source, IEqualityComparer<T>? comparer = null)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -94,7 +96,7 @@ public static class CoreEnumerableExtensions
         return -1;
     }
 
-    public static IEnumerable<T> GetGraphElements<T>(this T source, Func<T, IEnumerable<T>> getChildFunc, bool skipFirstElement = false, IEqualityComparer<T> comparer = null)
+    public static IEnumerable<T> GetGraphElements<T>(this T source, Func<T, IEnumerable<T>> getChildFunc, bool skipFirstElement = false, IEqualityComparer<T>? comparer = null)
     {
         if (null == getChildFunc) throw new ArgumentNullException(nameof(getChildFunc));
 
@@ -197,7 +199,7 @@ public static class CoreEnumerableExtensions
         return source ?? otherResultFunc();
     }
 
-    public static IEnumerable<T> Distinct<T>(this IEnumerable<T> source, Func<T, T, bool> equalsFunc, Func<T, int> getHashFunc = null)
+    public static IEnumerable<T> Distinct<T>(this IEnumerable<T> source, Func<T, T, bool> equalsFunc, Func<T, int>? getHashFunc = null)
     {
         return source.Distinct(new EqualityComparerImpl<T>(equalsFunc, getHashFunc));
     }
@@ -214,7 +216,7 @@ public static class CoreEnumerableExtensions
         return source.Where(sourceItem => !otherCache.Any(otherItem => equalsFunc(sourceItem, otherItem)));
     }
 
-    public static bool SequenceEqual<T>(this IEnumerable<T> source, IEnumerable<T> other, Func<T, T, bool> equalsFunc, Func<T, int> getHashFunc = null)
+    public static bool SequenceEqual<T>(this IEnumerable<T> source, IEnumerable<T> other, Func<T, T, bool> equalsFunc, Func<T, int>? getHashFunc = null)
     {
         return source.SequenceEqual(other, new EqualityComparerImpl<T>(equalsFunc, getHashFunc));
     }
@@ -344,7 +346,7 @@ public static class CoreEnumerableExtensions
             Func<T, TKey> getTKey,
             Func<S, T> createAndMapFunc,
             Action<IEnumerable<T>> removeAction,
-            Func<TKey, bool> isDefaultKey = null)
+            Func<TKey, bool>? isDefaultKey = null)
     {
         var isDefaultKeyF = isDefaultKey ?? (v => v.IsDefault());
 
@@ -612,7 +614,7 @@ public static class CoreEnumerableExtensions
         }
     }
 
-    public static int IndexOf<TSource>(this IEnumerable<TSource> source, TSource element, IEqualityComparer<TSource> comparer = null)
+    public static int IndexOf<TSource>(this IEnumerable<TSource> source, TSource element, IEqualityComparer<TSource>? comparer = null)
     {
         var index = 0;
 
@@ -727,7 +729,7 @@ public static class CoreEnumerableExtensions
         return source.GetMergeResult(target, sourceKeySelector, targetKeySelector, new EqualityComparerImpl<TKey>(equalsFunc, _ => 0));
     }
 
-    public static MergeResult<T, T> GetMergeResult<T>(this IEnumerable<T> source, IEnumerable<T> target, IEqualityComparer<T> comparer = null)
+    public static MergeResult<T, T> GetMergeResult<T>(this IEnumerable<T> source, IEnumerable<T> target, IEqualityComparer<T>? comparer = null)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (target == null) throw new ArgumentNullException(nameof(target));
@@ -740,7 +742,7 @@ public static class CoreEnumerableExtensions
             IEnumerable<TTarget> target,
             Func<TSource, TKey> sourceKeySelector,
             Func<TTarget, TKey> targetKeySelector,
-            IEqualityComparer<TKey> comparer = null)
+            IEqualityComparer<TKey>? comparer = null)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (target == null) throw new ArgumentNullException(nameof(target));
@@ -755,11 +757,9 @@ public static class CoreEnumerableExtensions
 
         foreach (var sourceItem in source)
         {
-            TTarget targetItem;
-
             var sourceKey = sourceKeySelector(sourceItem);
 
-            if (targetMap.TryGetValue(sourceKey, out targetItem))
+            if (targetMap.TryGetValue(sourceKey, out var targetItem))
             {
                 combineItems.Add(ValueTuple.Create(sourceItem, targetItem));
                 targetMap.Remove(sourceKey);

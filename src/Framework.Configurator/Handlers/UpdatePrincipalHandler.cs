@@ -1,35 +1,29 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Configurator.Interfaces;
-using Framework.DomainDriven.Repository;
+﻿using Framework.Configurator.Interfaces;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePrincipalHandler(
-    [EditSecurity] IRepository<Principal> PrincipalRepository,
-    //IPrincipalGeneralValidator PrincipalValidator,
+    ISecuritySystem SecuritySystem,
+    IPrincipalManagementService PrincipalManagementService,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
     : BaseWriteHandler, IUpdatePrincipalHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var principalId = (string?)context.Request.RouteValues["id"]!;
-        var name = await this.ParseRequestBodyAsync<string>(context);
+        this.SecuritySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
 
-        await this.UpdateAsync(new Guid(principalId), name, cancellationToken);
-    }
+        var principalId = new Guid((string?)context.Request.RouteValues["id"]!);
 
-    private async Task UpdateAsync(Guid id, string newName, CancellationToken cancellationToken)
-    {
-        var domainObject = await this.PrincipalRepository.LoadAsync(id, cancellationToken);
-        domainObject.Name = newName;
+        var principalName = await this.ParseRequestBodyAsync<string>(context);
 
-        //await this.PrincipalValidator.ValidateAndThrowAsync(domainObject, cancellationToken);
-        await this.PrincipalRepository.SaveAsync(domainObject, cancellationToken);
+        await this.PrincipalManagementService.UpdatePrincipalNameAsync(principalId, principalName, cancellationToken);
 
         if (this.ConfiguratorIntegrationEvents != null)
-            await this.ConfiguratorIntegrationEvents.PrincipalChangedAsync(domainObject, cancellationToken);
+            await this.ConfiguratorIntegrationEvents.PrincipalChangedAsync(principalId, cancellationToken);
     }
 }

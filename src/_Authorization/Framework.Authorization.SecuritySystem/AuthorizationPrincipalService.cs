@@ -115,6 +115,7 @@ public class AuthorizationPrincipalService(
                 throw new Exception("wrong typed permission");
             }
 
+
             var securityRole = securityRoleSource.GetSecurityRole(typedPermission.SecurityRole);
 
             var dbRole = await businessRoleRepository.LoadAsync(securityRole.Id, cancellationToken);

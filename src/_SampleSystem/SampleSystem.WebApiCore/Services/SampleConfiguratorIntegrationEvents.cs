@@ -1,5 +1,4 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Configurator.Interfaces;
+﻿using Framework.Configurator.Interfaces;
 
 namespace SampleSystem.WebApiCore.Services;
 

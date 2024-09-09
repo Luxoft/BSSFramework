@@ -14,6 +14,7 @@ public class GetPrincipalHandler(
     IPrincipalManagementService configuratorApi,
     ISecurityEntitySource externalSource,
     ISecurityContextSource securityContextSource,
+    ISecurityRoleSource securityRoleSource,
     ISecuritySystem securitySystem) : BaseReadHandler, IGetPrincipalHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
@@ -43,6 +44,7 @@ public class GetPrincipalHandler(
                            Id = typedPermission.Id,
                            IsVirtual = typedPermission.IsVirtual,
                            Role = typedPermission.SecurityRole.Name,
+                           RoleId = securityRoleSource.GetSecurityRole(typedPermission.SecurityRole).Id,
                            Comment = typedPermission.Comment,
                            StartDate = typedPermission.Period.StartDate,
                            EndDate = typedPermission.Period.EndDate,
@@ -89,9 +91,11 @@ public class GetPrincipalHandler(
                      {
                          Id = x.Id,
                          Role = x.Role,
+                         RoleId = x.RoleId,
                          Comment = x.Comment,
                          StartDate = x.StartDate,
                          EndDate = x.EndDate,
+                         IsVirtual = x.IsVirtual,
                          Contexts =
                              x.Contexts
                               .GroupBy(c => c.Key, c => c.Value)
@@ -116,6 +120,8 @@ public class GetPrincipalHandler(
         public Guid Id { get; set; }
 
         public string Role { get; set; }
+
+        public Guid RoleId { get; set; }
 
         public string Comment { get; set; }
 

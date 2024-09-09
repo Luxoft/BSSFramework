@@ -4,6 +4,7 @@ using Framework.Core.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore.ExternalSource;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
@@ -44,6 +45,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IQueryableSource, RepositoryQueryableSource>();
 
         services.AddExternalSource();
+
+        services.AddSingleton<SecurityAdministratorRuleFactory>();
 
         return services;
     }

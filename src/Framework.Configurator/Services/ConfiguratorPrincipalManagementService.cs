@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using System.Collections.Generic;
+using DocumentFormat.OpenXml.Math;
+using Framework.Core;
 using Framework.Exceptions;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
@@ -22,8 +24,7 @@ public class ConfiguratorPrincipalManagementService(IEnumerable<IPermissionSyste
         int limit,
         CancellationToken cancellationToken = default)
     {
-        var preResult =
-            await Task.WhenAll(this.principalServices.Select(ps => ps.GetPrincipalsAsync(nameFilter, limit, cancellationToken)));
+        var preResult = await this.principalServices.SyncWhenAll(ps => ps.GetPrincipalsAsync(nameFilter, limit, cancellationToken));
 
         return preResult.SelectMany()
                         .GroupBy(header => header with { IsVirtual = false })
@@ -35,7 +36,7 @@ public class ConfiguratorPrincipalManagementService(IEnumerable<IPermissionSyste
 
     public async Task<TypedPrincipal?> TryGetPrincipalAsync(Guid principalId, CancellationToken cancellationToken = default)
     {
-        var preResult = await Task.WhenAll(this.principalServices.Select(ps => ps.TryGetPrincipalAsync(principalId, cancellationToken)));
+        var preResult = await this.principalServices.SyncWhenAll(ps => ps.TryGetPrincipalAsync(principalId, cancellationToken));
 
         var request = from principal in preResult
 
@@ -56,8 +57,7 @@ public class ConfiguratorPrincipalManagementService(IEnumerable<IPermissionSyste
         IEnumerable<SecurityRole> securityRoles,
         CancellationToken cancellationToken = default)
     {
-        var preResult = await Task.WhenAll(
-                            this.principalServices.Select(ps => ps.GetLinkedPrincipalsAsync(securityRoles, cancellationToken)));
+        var preResult = await this.principalServices.SyncWhenAll(ps => ps.GetLinkedPrincipalsAsync(securityRoles, cancellationToken));
 
         return preResult.SelectMany().Distinct();
     }
@@ -76,4 +76,19 @@ public class ConfiguratorPrincipalManagementService(IEnumerable<IPermissionSyste
         IEnumerable<TypedPermission> typedPermissions,
         CancellationToken cancellationToken = default) =>
         this.PrincipalManagementService.UpdatePermissionsAsync(principalId, typedPermissions.Where(tp => !tp.IsVirtual), cancellationToken);
+}
+
+internal static class TaskExtensions
+{
+    public static async Task<TResult[]> SyncWhenAll<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, Task<TResult>> getTask)
+    {
+        var res = new List<TResult>();
+
+        foreach (var value in source)
+        {
+            res.AddRange(await getTask(value));
+        }
+
+        return res.ToArray();
+    }
 }

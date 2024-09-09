@@ -92,6 +92,7 @@ public class GetPrincipalHandler(
                          Comment = x.Comment,
                          StartDate = x.StartDate,
                          EndDate = x.EndDate,
+                         IsVirtual = x.IsVirtual,
                          Contexts =
                              x.Contexts
                               .GroupBy(c => c.Key, c => c.Value)

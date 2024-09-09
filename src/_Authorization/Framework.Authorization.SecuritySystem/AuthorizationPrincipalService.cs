@@ -1,6 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
+using Framework.Exceptions;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
@@ -149,6 +150,11 @@ public class AuthorizationPrincipalService(
 
         foreach (var (dbPermission, typedPermission) in permissionMergeResult.CombineItems)
         {
+            if (securityRoleSource.GetSecurityRole(dbPermission.Role.Id) != typedPermission.SecurityRole)
+            {
+                throw new BusinessLogicException("Permission role can't be changed");
+            }
+
             var restrictionMergeResult = dbPermission.Restrictions.GetMergeResult(
                 typedPermission.Restrictions.ChangeKey(t => securityContextSource.GetSecurityContextInfo(t).Id)
                                .SelectMany(pair => pair.Value.Select(securityContextId => (pair.Key, securityContextId))),

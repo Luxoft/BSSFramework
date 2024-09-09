@@ -13,4 +13,6 @@ public class PermissionDto
     public DateTime? EndDate { get; set; }
 
     public DateTime StartDate { get; set; }
+
+    public bool IsVirtual { get; set; }
 }

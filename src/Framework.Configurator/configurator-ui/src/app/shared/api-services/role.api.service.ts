@@ -15,6 +15,7 @@ export class RolesApiService {
 export interface IRoleInfo {
   Name: string;
   Id: string;
+  IsVirtual: boolean;
   Contexts: IContextRestriction[];
 }
 

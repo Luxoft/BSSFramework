@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { map } from 'rxjs';
 import { IRole } from 'src/app/rights/components/roles/roles.component';
 import { RolesApiService } from 'src/app/shared/api-services/role.api.service';
 import { FilterOptionsPipe } from 'src/app/shared/filter-options.pipe';
@@ -27,7 +28,9 @@ import { FilterOptionsPipe } from 'src/app/shared/filter-options.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddRoleDialogComponent {
-  public roles$ = inject(RolesApiService).getRoles();
+  public roles$ = inject(RolesApiService)
+    .getRoles()
+    .pipe(map((x) => x.filter((y) => !y.IsVirtual)));
   public control = new FormControl('');
 
   public displayFn(role: IRole): string {

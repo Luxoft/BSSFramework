@@ -18,6 +18,7 @@ import { GrantRightsDialogComponent } from './components/grant-rights-dialog/gra
 export interface IPrincipal {
   Id: string | undefined;
   Name: string | undefined;
+  IsVirtual: boolean;
 }
 
 const DEBOUNCE = 300;

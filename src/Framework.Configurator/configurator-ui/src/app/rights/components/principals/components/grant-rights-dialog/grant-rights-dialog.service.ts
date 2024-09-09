@@ -115,7 +115,14 @@ export class GrantRightsDialogService {
             return;
           }
 
-          const permission: IPermissionDto = { Id: '', RoleId: x.Id ?? '', Role: x.Name ?? '', Comment: '', Contexts: [] };
+          const permission: IPermissionDto = {
+            Id: '',
+            RoleId: x.Id ?? '',
+            IsVirtual: false,
+            Role: x.Name ?? '',
+            Comment: '',
+            Contexts: [],
+          };
           this.edit(permission, this.allContextsSubject.value);
         }),
         takeUntil(this.destroy$)
@@ -159,11 +166,12 @@ export class GrantRightsDialogService {
     return rights.Permissions.map((x) => ({
       PermissionId: x.Id,
       RoleId: x.RoleId ?? '',
+      IsVirtual: x.IsVirtual,
       Comment: x.Comment ?? '',
       Contexts: x.Contexts.map((c) => ({ Id: c.Id, Entities: c.Entities.map((e) => e.Id) })),
       StartDate: x.StartDate ? x.StartDate : null,
       EndDate: x.EndDate ? x.EndDate : null,
-    }));
+    })).filter((x) => !x.IsVirtual);
   }
 
   private buildPermissionsWithContextRestrictions(): Observable<IPermission[]> {

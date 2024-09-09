@@ -1,44 +1,67 @@
-<mat-card *ngIf="runAsSource | async as runAs" class="tw-mb-6 warning">
+<mat-card *ngIf="runAsSource | async as runAs"
+          class="tw-mb-6 warning">
   <mat-card-content class="tw-flex tw-items-center tw-gap-4">
     <div>You are logged in as {{ runAs }}.</div>
-    <button mat-raised-button color="primary" (click)="stopRunAs()">Log out</button>
+    <button mat-raised-button
+            color="primary"
+            (click)="stopRunAs()">Log out</button>
   </mat-card-content>
 </mat-card>
 
 <div class="tw-flex tw-justify-end tw-mb-3">
-  <button mat-raised-button color="primary" (click)="add()">Create new principal</button>
+  <button mat-raised-button
+          color="primary"
+          (click)="add()">Create new principal</button>
 </div>
 
 <mat-form-field class="tw-w-full">
   <mat-label>Filter</mat-label>
-  <input matInput [formControl]="control" />
+  <input matInput
+         [formControl]="control" />
 </mat-form-field>
 
-<div class="mat-elevation-z8 tw-overflow-auto" tabindex="0">
-  <table
-    *ngIf="dataSource$ | async as dataSource"
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z8"
-    aria-describedby="Principal table">
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+<div class="mat-elevation-z8 tw-overflow-auto"
+     tabindex="0">
+  <table *ngIf="dataSource$ | async as dataSource"
+         mat-table
+         [dataSource]="dataSource"
+         class="mat-elevation-z8"
+         aria-describedby="Principal table">
+    <tr mat-header-row
+        *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns"></tr>
 
     <ng-container matColumnDef="Name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element" class="tw-w-3/5">
+      <th mat-header-cell
+          *matHeaderCellDef> Name </th>
+      <td mat-cell
+          *matCellDef="let element"
+          class="tw-w-3/5">
         <div class="mat-subtitle-1">{{ element.Name }}</div>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element" class="tw-w-2/5">
+      <th mat-header-cell
+          *matHeaderCellDef></th>
+      <td mat-cell
+          *matCellDef="let element"
+          class="tw-w-2/5">
         <div class="tw-flex tw-justify-end tw-gap-2">
-          <button mat-raised-button (click)="edit(element)">Edit</button>
-          <button mat-raised-button color="warn" (click)="runAs(element)">Log in</button>
-          <button mat-raised-button color="accent" (click)="remove(element)">Delete</button>
-          <button mat-raised-button color="primary" (click)="grant(element)">View rights</button>
+          <button mat-raised-button
+                  [disabled]="element.IsVirtual"
+                  (click)="edit(element)">Edit</button>
+          <button mat-raised-button
+                  color="warn"
+                  (click)="runAs(element)">Log in</button>
+          <button mat-raised-button
+                  color="accent"
+                  [disabled]="element.IsVirtual"
+                  (click)="remove(element)">Delete</button>
+          <button mat-raised-button
+                  color="primary"
+                  (click)="grant(element)">View rights</button>
         </div>
       </td>
     </ng-container>

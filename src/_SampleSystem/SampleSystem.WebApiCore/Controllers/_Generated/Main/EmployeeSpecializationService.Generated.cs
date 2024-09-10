@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Main
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get EmployeeSpecialization (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeSpecialization")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationFullDTO GetFullEmployeeSpecialization([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeSpecializationInternal(employeeSpecializationIdentity, evaluateData));
@@ -22,7 +20,6 @@
         /// Get EmployeeSpecialization (FullDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeSpecializationByName")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationFullDTO GetFullEmployeeSpecializationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeSpecializationName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeSpecializationByNameInternal(employeeSpecializationName, evaluateData));
@@ -46,7 +43,6 @@
         /// Get full list of EmployeeSpecializations (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeSpecializations")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeSpecializationFullDTO> GetFullEmployeeSpecializations()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeSpecializationsInternal(evaluateData));
@@ -56,7 +52,6 @@
         /// Get EmployeeSpecializations (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeSpecializationsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeSpecializationFullDTO> GetFullEmployeeSpecializationsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO[] employeeSpecializationIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeSpecializationsByIdentsInternal(employeeSpecializationIdents, evaluateData));
@@ -78,7 +73,6 @@
         /// Get EmployeeSpecialization (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeSpecialization")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationRichDTO GetRichEmployeeSpecialization([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeeSpecializationInternal(employeeSpecializationIdentity, evaluateData));
@@ -88,7 +82,6 @@
         /// Get EmployeeSpecialization (RichDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeSpecializationByName")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationRichDTO GetRichEmployeeSpecializationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeSpecializationName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeeSpecializationByNameInternal(employeeSpecializationName, evaluateData));
@@ -112,7 +105,6 @@
         /// Get EmployeeSpecialization (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeSpecialization")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO GetSimpleEmployeeSpecialization([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeSpecializationInternal(employeeSpecializationIdentity, evaluateData));
@@ -122,7 +114,6 @@
         /// Get EmployeeSpecialization (SimpleDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeSpecializationByName")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO GetSimpleEmployeeSpecializationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeSpecializationName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeSpecializationByNameInternal(employeeSpecializationName, evaluateData));
@@ -146,7 +137,6 @@
         /// Get full list of EmployeeSpecializations (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeSpecializations")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO> GetSimpleEmployeeSpecializations()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeSpecializationsInternal(evaluateData));
@@ -156,7 +146,6 @@
         /// Get EmployeeSpecializations (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeSpecializationsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO> GetSimpleEmployeeSpecializationsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO[] employeeSpecializationIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeSpecializationsByIdentsInternal(employeeSpecializationIdents, evaluateData));
@@ -178,7 +167,6 @@
         /// Get EmployeeSpecialization (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeSpecialization")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationVisualDTO GetVisualEmployeeSpecialization([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeSpecializationInternal(employeeSpecializationIdentity, evaluateData));
@@ -188,7 +176,6 @@
         /// Get EmployeeSpecialization (VisualDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeSpecializationByName")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationVisualDTO GetVisualEmployeeSpecializationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeSpecializationName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeSpecializationByNameInternal(employeeSpecializationName, evaluateData));
@@ -212,7 +199,6 @@
         /// Get full list of EmployeeSpecializations (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeSpecializations")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeSpecializationVisualDTO> GetVisualEmployeeSpecializations()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeSpecializationsInternal(evaluateData));
@@ -222,7 +208,6 @@
         /// Get EmployeeSpecializations (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeSpecializationsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeSpecializationVisualDTO> GetVisualEmployeeSpecializationsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO[] employeeSpecializationIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeSpecializationsByIdentsInternal(employeeSpecializationIdents, evaluateData));

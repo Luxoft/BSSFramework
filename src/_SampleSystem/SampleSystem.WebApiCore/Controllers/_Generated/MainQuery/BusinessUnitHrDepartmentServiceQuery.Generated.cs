@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.MainQuery
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get BusinessUnitHrDepartments (FullDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessUnitHrDepartmentsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentFullDTO> GetFullBusinessUnitHrDepartmentsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessUnitHrDepartmentsByODataQueryStringInternal(odataQueryString, evaluateData));
@@ -31,7 +29,6 @@
         /// Get BusinessUnitHrDepartments (SimpleDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessUnitHrDepartmentsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentSimpleDTO> GetSimpleBusinessUnitHrDepartmentsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessUnitHrDepartmentsByODataQueryStringInternal(odataQueryString, evaluateData));

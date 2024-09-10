@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get CompanyLegalEntity Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetCompanyLegalEntityPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetCompanyLegalEntityPropertyRevisionByDateRange(GetCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest getCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getCompanyLegalEntityPropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get CompanyLegalEntity Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetCompanyLegalEntityPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetCompanyLegalEntityPropertyRevisions(GetCompanyLegalEntityPropertyRevisionsAutoRequest getCompanyLegalEntityPropertyRevisionsAutoRequest)
         {
             string propertyName = getCompanyLegalEntityPropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get CompanyLegalEntity revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetCompanyLegalEntityRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetCompanyLegalEntityRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetCompanyLegalEntityRevisionsInternal(companyLegalEntityIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get CompanyLegalEntity (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCompanyLegalEntityWithRevision")]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntityWithRevision(GetFullCompanyLegalEntityWithRevisionAutoRequest getFullCompanyLegalEntityWithRevisionAutoRequest)
         {
             long revision = getFullCompanyLegalEntityWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get CompanyLegalEntity (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCompanyLegalEntityWithRevision")]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntityWithRevision(GetRichCompanyLegalEntityWithRevisionAutoRequest getRichCompanyLegalEntityWithRevisionAutoRequest)
         {
             long revision = getRichCompanyLegalEntityWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get CompanyLegalEntity (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCompanyLegalEntityWithRevision")]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntityWithRevision(GetSimpleCompanyLegalEntityWithRevisionAutoRequest getSimpleCompanyLegalEntityWithRevisionAutoRequest)
         {
             long revision = getSimpleCompanyLegalEntityWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get CompanyLegalEntity (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCompanyLegalEntityWithRevision")]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntityWithRevision(GetVisualCompanyLegalEntityWithRevisionAutoRequest getVisualCompanyLegalEntityWithRevisionAutoRequest)
         {
             long revision = getVisualCompanyLegalEntityWithRevisionAutoRequest.Revision;

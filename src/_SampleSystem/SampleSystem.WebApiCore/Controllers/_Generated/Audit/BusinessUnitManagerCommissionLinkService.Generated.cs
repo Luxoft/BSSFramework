@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get BusinessUnitManagerCommissionLink Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitManagerCommissionLinkPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitManagerCommissionLinkPropertyRevisionByDateRange(GetBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest getBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getBusinessUnitManagerCommissionLinkPropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get BusinessUnitManagerCommissionLink Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitManagerCommissionLinkPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitManagerCommissionLinkPropertyRevisions(GetBusinessUnitManagerCommissionLinkPropertyRevisionsAutoRequest getBusinessUnitManagerCommissionLinkPropertyRevisionsAutoRequest)
         {
             string propertyName = getBusinessUnitManagerCommissionLinkPropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get BusinessUnitManagerCommissionLink revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitManagerCommissionLinkRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetBusinessUnitManagerCommissionLinkRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitManagerCommissionLinkRevisionsInternal(businessUnitManagerCommissionLinkIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get BusinessUnitManagerCommissionLink (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessUnitManagerCommissionLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkFullDTO GetFullBusinessUnitManagerCommissionLinkWithRevision(GetFullBusinessUnitManagerCommissionLinkWithRevisionAutoRequest getFullBusinessUnitManagerCommissionLinkWithRevisionAutoRequest)
         {
             long revision = getFullBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get BusinessUnitManagerCommissionLink (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichBusinessUnitManagerCommissionLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkRichDTO GetRichBusinessUnitManagerCommissionLinkWithRevision(GetRichBusinessUnitManagerCommissionLinkWithRevisionAutoRequest getRichBusinessUnitManagerCommissionLinkWithRevisionAutoRequest)
         {
             long revision = getRichBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get BusinessUnitManagerCommissionLink (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessUnitManagerCommissionLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkSimpleDTO GetSimpleBusinessUnitManagerCommissionLinkWithRevision(GetSimpleBusinessUnitManagerCommissionLinkWithRevisionAutoRequest getSimpleBusinessUnitManagerCommissionLinkWithRevisionAutoRequest)
         {
             long revision = getSimpleBusinessUnitManagerCommissionLinkWithRevisionAutoRequest.Revision;

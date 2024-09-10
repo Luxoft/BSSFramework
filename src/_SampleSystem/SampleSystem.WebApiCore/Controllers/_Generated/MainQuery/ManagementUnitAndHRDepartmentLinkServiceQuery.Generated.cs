@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.MainQuery
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get ManagementUnitAndHRDepartmentLinks (FullDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullManagementUnitAndHRDepartmentLinksByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO> GetFullManagementUnitAndHRDepartmentLinksByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullManagementUnitAndHRDepartmentLinksByODataQueryStringInternal(odataQueryString, evaluateData));
@@ -31,7 +29,6 @@
         /// Get ManagementUnitAndHRDepartmentLinks (SimpleDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleManagementUnitAndHRDepartmentLinksByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO> GetSimpleManagementUnitAndHRDepartmentLinksByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleManagementUnitAndHRDepartmentLinksByODataQueryStringInternal(odataQueryString, evaluateData));

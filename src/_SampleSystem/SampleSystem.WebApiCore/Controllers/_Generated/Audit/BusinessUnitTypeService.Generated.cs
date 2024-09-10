@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get BusinessUnitType Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitTypePropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitTypePropertyRevisionByDateRange(GetBusinessUnitTypePropertyRevisionByDateRangeAutoRequest getBusinessUnitTypePropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getBusinessUnitTypePropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get BusinessUnitType Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitTypePropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitTypePropertyRevisions(GetBusinessUnitTypePropertyRevisionsAutoRequest getBusinessUnitTypePropertyRevisionsAutoRequest)
         {
             string propertyName = getBusinessUnitTypePropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get BusinessUnitType revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitTypeRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetBusinessUnitTypeRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO businessUnitTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitTypeRevisionsInternal(businessUnitTypeIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get BusinessUnitType (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessUnitTypeWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitTypeFullDTO GetFullBusinessUnitTypeWithRevision(GetFullBusinessUnitTypeWithRevisionAutoRequest getFullBusinessUnitTypeWithRevisionAutoRequest)
         {
             long revision = getFullBusinessUnitTypeWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get BusinessUnitType (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichBusinessUnitTypeWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitTypeRichDTO GetRichBusinessUnitTypeWithRevision(GetRichBusinessUnitTypeWithRevisionAutoRequest getRichBusinessUnitTypeWithRevisionAutoRequest)
         {
             long revision = getRichBusinessUnitTypeWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get BusinessUnitType (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessUnitTypeWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO GetSimpleBusinessUnitTypeWithRevision(GetSimpleBusinessUnitTypeWithRevisionAutoRequest getSimpleBusinessUnitTypeWithRevisionAutoRequest)
         {
             long revision = getSimpleBusinessUnitTypeWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get BusinessUnitType (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessUnitTypeWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitTypeVisualDTO GetVisualBusinessUnitTypeWithRevision(GetVisualBusinessUnitTypeWithRevisionAutoRequest getVisualBusinessUnitTypeWithRevisionAutoRequest)
         {
             long revision = getVisualBusinessUnitTypeWithRevisionAutoRequest.Revision;

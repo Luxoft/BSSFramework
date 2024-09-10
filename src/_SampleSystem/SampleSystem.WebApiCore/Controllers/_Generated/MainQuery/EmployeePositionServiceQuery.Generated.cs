@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.MainQuery
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get EmployeePositions (FullDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeePositionsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.EmployeePositionFullDTO> GetFullEmployeePositionsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionsByODataQueryStringInternal(odataQueryString, evaluateData));
@@ -31,7 +29,6 @@
         /// Get EmployeePositions (SimpleDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeePositionsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> GetSimpleEmployeePositionsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionsByODataQueryStringInternal(odataQueryString, evaluateData));
@@ -50,7 +47,6 @@
         /// Get EmployeePositions (VisualDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeePositionsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.EmployeePositionVisualDTO> GetVisualEmployeePositionsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionsByODataQueryStringInternal(odataQueryString, evaluateData));

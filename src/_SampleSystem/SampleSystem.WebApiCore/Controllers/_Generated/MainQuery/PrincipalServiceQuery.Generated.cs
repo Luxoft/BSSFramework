@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.MainQuery
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get Principals (FullDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullPrincipalsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPrincipalsByODataQueryStringInternal(odataQueryString, evaluateData));
@@ -31,7 +29,6 @@
         /// Get Principals (SimpleDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimplePrincipalsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePrincipalsByODataQueryStringInternal(odataQueryString, evaluateData));

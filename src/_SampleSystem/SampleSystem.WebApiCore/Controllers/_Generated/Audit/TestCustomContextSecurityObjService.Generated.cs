@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get TestCustomContextSecurityObj (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestCustomContextSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjFullDTO GetFullTestCustomContextSecurityObjWithRevision(GetFullTestCustomContextSecurityObjWithRevisionAutoRequest getFullTestCustomContextSecurityObjWithRevisionAutoRequest)
         {
             long revision = getFullTestCustomContextSecurityObjWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get TestCustomContextSecurityObj (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestCustomContextSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjRichDTO GetRichTestCustomContextSecurityObjWithRevision(GetRichTestCustomContextSecurityObjWithRevisionAutoRequest getRichTestCustomContextSecurityObjWithRevisionAutoRequest)
         {
             long revision = getRichTestCustomContextSecurityObjWithRevisionAutoRequest.Revision;
@@ -50,7 +47,6 @@
         /// Get TestCustomContextSecurityObj (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestCustomContextSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjSimpleDTO GetSimpleTestCustomContextSecurityObjWithRevision(GetSimpleTestCustomContextSecurityObjWithRevisionAutoRequest getSimpleTestCustomContextSecurityObjWithRevisionAutoRequest)
         {
             long revision = getSimpleTestCustomContextSecurityObjWithRevisionAutoRequest.Revision;
@@ -69,7 +65,6 @@
         /// Get TestCustomContextSecurityObj Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestCustomContextSecurityObjPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestCustomContextSecurityObjPropertyRevisionByDateRange(GetTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest.Period;
@@ -88,7 +83,6 @@
         /// Get TestCustomContextSecurityObj Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestCustomContextSecurityObjPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestCustomContextSecurityObjPropertyRevisions(GetTestCustomContextSecurityObjPropertyRevisionsAutoRequest getTestCustomContextSecurityObjPropertyRevisionsAutoRequest)
         {
             string propertyName = getTestCustomContextSecurityObjPropertyRevisionsAutoRequest.PropertyName;
@@ -106,7 +100,6 @@
         /// Get TestCustomContextSecurityObj revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestCustomContextSecurityObjRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestCustomContextSecurityObjRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjRevisionsInternal(testCustomContextSecurityObjIdentity, evaluateData));
@@ -122,7 +115,6 @@
         /// Get TestCustomContextSecurityObj (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestCustomContextSecurityObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO GetVisualTestCustomContextSecurityObjWithRevision(GetVisualTestCustomContextSecurityObjWithRevisionAutoRequest getVisualTestCustomContextSecurityObjWithRevisionAutoRequest)
         {
             long revision = getVisualTestCustomContextSecurityObjWithRevisionAutoRequest.Revision;

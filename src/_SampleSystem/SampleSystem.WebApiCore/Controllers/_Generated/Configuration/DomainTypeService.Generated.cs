@@ -1,6 +1,5 @@
 ﻿namespace Configuration.WebApi.Controllers
 {
-    using Framework.Configuration.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get DomainType (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullDomainType")]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeFullDTO GetFullDomainType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullDomainTypeInternal(domainTypeIdentity, evaluateData));
@@ -22,7 +20,6 @@
         /// Get DomainType (FullDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullDomainTypeByName")]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeFullDTO GetFullDomainTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string domainTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullDomainTypeByNameInternal(domainTypeName, evaluateData));
@@ -46,7 +43,6 @@
         /// Get full list of DomainTypes (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullDomainTypes")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypes()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullDomainTypesInternal(evaluateData));
@@ -56,7 +52,6 @@
         /// Get DomainTypes (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullDomainTypesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullDomainTypesByIdentsInternal(domainTypeIdents, evaluateData));
@@ -72,7 +67,6 @@
         /// Get DomainTypes (FullDTO) by filter (Framework.Configuration.Domain.DomainTypeRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullDomainTypesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullDomainTypesByRootFilterInternal(filter, evaluateData));
@@ -95,7 +89,6 @@
         /// Get DomainType (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichDomainType")]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeRichDTO GetRichDomainType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichDomainTypeInternal(domainTypeIdentity, evaluateData));
@@ -105,7 +98,6 @@
         /// Get DomainType (RichDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichDomainTypeByName")]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeRichDTO GetRichDomainTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string domainTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichDomainTypeByNameInternal(domainTypeName, evaluateData));
@@ -129,7 +121,6 @@
         /// Get DomainType (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleDomainType")]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO GetSimpleDomainType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypeInternal(domainTypeIdentity, evaluateData));
@@ -139,7 +130,6 @@
         /// Get DomainType (SimpleDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleDomainTypeByName")]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO GetSimpleDomainTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string domainTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypeByNameInternal(domainTypeName, evaluateData));
@@ -163,7 +153,6 @@
         /// Get full list of DomainTypes (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleDomainTypes")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypes()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypesInternal(evaluateData));
@@ -173,7 +162,6 @@
         /// Get DomainTypes (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleDomainTypesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypesByIdentsInternal(domainTypeIdents, evaluateData));
@@ -189,7 +177,6 @@
         /// Get DomainTypes (SimpleDTO) by filter (Framework.Configuration.Domain.DomainTypeRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleDomainTypesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypesByRootFilterInternal(filter, evaluateData));
@@ -212,7 +199,6 @@
         /// Get DomainType (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualDomainType")]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeVisualDTO GetVisualDomainType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypeInternal(domainTypeIdentity, evaluateData));
@@ -222,7 +208,6 @@
         /// Get DomainType (VisualDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualDomainTypeByName")]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeVisualDTO GetVisualDomainTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string domainTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypeByNameInternal(domainTypeName, evaluateData));
@@ -246,7 +231,6 @@
         /// Get full list of DomainTypes (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualDomainTypes")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypes()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypesInternal(evaluateData));
@@ -256,7 +240,6 @@
         /// Get DomainTypes (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualDomainTypesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypesByIdentsInternal(domainTypeIdents, evaluateData));
@@ -272,7 +255,6 @@
         /// Get DomainTypes (VisualDTO) by filter (Framework.Configuration.Domain.DomainTypeRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualDomainTypesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypesByRootFilterInternal(filter, evaluateData));

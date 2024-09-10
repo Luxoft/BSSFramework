@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get ManagementUnit (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullManagementUnitWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitFullDTO GetFullManagementUnitWithRevision(GetFullManagementUnitWithRevisionAutoRequest getFullManagementUnitWithRevisionAutoRequest)
         {
             long revision = getFullManagementUnitWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get ManagementUnit Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitPropertyRevisionByDateRange(GetManagementUnitPropertyRevisionByDateRangeAutoRequest getManagementUnitPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getManagementUnitPropertyRevisionByDateRangeAutoRequest.Period;
@@ -50,7 +47,6 @@
         /// Get ManagementUnit Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitPropertyRevisions(GetManagementUnitPropertyRevisionsAutoRequest getManagementUnitPropertyRevisionsAutoRequest)
         {
             string propertyName = getManagementUnitPropertyRevisionsAutoRequest.PropertyName;
@@ -68,7 +64,6 @@
         /// Get ManagementUnit revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetManagementUnitRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetManagementUnitRevisionsInternal(managementUnitIdentity, evaluateData));
@@ -84,7 +79,6 @@
         /// Get ManagementUnit (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichManagementUnitWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitRichDTO GetRichManagementUnitWithRevision(GetRichManagementUnitWithRevisionAutoRequest getRichManagementUnitWithRevisionAutoRequest)
         {
             long revision = getRichManagementUnitWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get ManagementUnit (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleManagementUnitWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitSimpleDTO GetSimpleManagementUnitWithRevision(GetSimpleManagementUnitWithRevisionAutoRequest getSimpleManagementUnitWithRevisionAutoRequest)
         {
             long revision = getSimpleManagementUnitWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get ManagementUnit (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualManagementUnitWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitVisualDTO GetVisualManagementUnitWithRevision(GetVisualManagementUnitWithRevisionAutoRequest getVisualManagementUnitWithRevisionAutoRequest)
         {
             long revision = getVisualManagementUnitWithRevisionAutoRequest.Revision;

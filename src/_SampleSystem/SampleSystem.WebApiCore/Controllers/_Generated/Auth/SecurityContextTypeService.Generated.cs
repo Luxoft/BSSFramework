@@ -1,6 +1,5 @@
 ﻿namespace Authorization.WebApi.Controllers
 {
-    using Framework.Authorization.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get SecurityContextType (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSecurityContextType")]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO GetFullSecurityContextType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
@@ -22,7 +20,6 @@
         /// Get SecurityContextType (FullDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSecurityContextTypeByName")]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO GetFullSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string securityContextTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
@@ -46,7 +43,6 @@
         /// Get full list of SecurityContextTypes (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSecurityContextTypes")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypes()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypesInternal(evaluateData));
@@ -56,7 +52,6 @@
         /// Get SecurityContextTypes (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSecurityContextTypesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypesByIdentsInternal(securityContextTypeIdents, evaluateData));
@@ -78,7 +73,6 @@
         /// Get SecurityContextType (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichSecurityContextType")]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO GetRichSecurityContextType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
@@ -88,7 +82,6 @@
         /// Get SecurityContextType (RichDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichSecurityContextTypeByName")]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO GetRichSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string securityContextTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
@@ -112,7 +105,6 @@
         /// Get SecurityContextType (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSecurityContextType")]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO GetSimpleSecurityContextType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
@@ -122,7 +114,6 @@
         /// Get SecurityContextType (SimpleDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSecurityContextTypeByName")]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO GetSimpleSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string securityContextTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
@@ -146,7 +137,6 @@
         /// Get full list of SecurityContextTypes (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSecurityContextTypes")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypes()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypesInternal(evaluateData));
@@ -156,7 +146,6 @@
         /// Get SecurityContextTypes (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSecurityContextTypesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypesByIdentsInternal(securityContextTypeIdents, evaluateData));
@@ -178,7 +167,6 @@
         /// Get SecurityContextType (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSecurityContextType")]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO GetVisualSecurityContextType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
@@ -188,7 +176,6 @@
         /// Get SecurityContextType (VisualDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSecurityContextTypeByName")]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO GetVisualSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string securityContextTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
@@ -212,7 +199,6 @@
         /// Get full list of SecurityContextTypes (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSecurityContextTypes")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypes()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypesInternal(evaluateData));
@@ -222,7 +208,6 @@
         /// Get SecurityContextTypes (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSecurityContextTypesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypesByIdentsInternal(securityContextTypeIdents, evaluateData));

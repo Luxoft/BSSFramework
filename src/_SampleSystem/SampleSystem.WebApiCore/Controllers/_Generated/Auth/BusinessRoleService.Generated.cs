@@ -1,6 +1,5 @@
 ﻿namespace Authorization.WebApi.Controllers
 {
-    using Framework.Authorization.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get BusinessRole (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessRole")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRoleInternal(businessRoleIdentity, evaluateData));
@@ -22,7 +20,6 @@
         /// Get BusinessRole (FullDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessRoleByName")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string businessRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRoleByNameInternal(businessRoleName, evaluateData));
@@ -46,7 +43,6 @@
         /// Get full list of BusinessRoles (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessRoles")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRoles()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRolesInternal(evaluateData));
@@ -56,7 +52,6 @@
         /// Get BusinessRoles (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessRolesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRolesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
@@ -78,7 +73,6 @@
         /// Get BusinessRole (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichBusinessRole")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichBusinessRoleInternal(businessRoleIdentity, evaluateData));
@@ -88,7 +82,6 @@
         /// Get BusinessRole (RichDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichBusinessRoleByName")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string businessRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichBusinessRoleByNameInternal(businessRoleName, evaluateData));
@@ -112,7 +105,6 @@
         /// Get BusinessRole (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessRole")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRoleInternal(businessRoleIdentity, evaluateData));
@@ -122,7 +114,6 @@
         /// Get BusinessRole (SimpleDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessRoleByName")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string businessRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRoleByNameInternal(businessRoleName, evaluateData));
@@ -146,7 +137,6 @@
         /// Get full list of BusinessRoles (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessRoles")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRoles()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRolesInternal(evaluateData));
@@ -156,7 +146,6 @@
         /// Get BusinessRoles (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessRolesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRolesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
@@ -178,7 +167,6 @@
         /// Get BusinessRole (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessRole")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRoleInternal(businessRoleIdentity, evaluateData));
@@ -188,7 +176,6 @@
         /// Get BusinessRole (VisualDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessRoleByName")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string businessRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRoleByNameInternal(businessRoleName, evaluateData));
@@ -212,7 +199,6 @@
         /// Get full list of BusinessRoles (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessRoles")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRoles()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRolesInternal(evaluateData));
@@ -222,7 +208,6 @@
         /// Get BusinessRoles (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessRolesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRolesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));

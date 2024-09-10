@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Main
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get WorkingCalendar1676 (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullWorkingCalendar1676")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676FullDTO GetFullWorkingCalendar1676([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullWorkingCalendar1676Internal(workingCalendar1676Identity, evaluateData));
@@ -22,7 +20,6 @@
         /// Get WorkingCalendar1676 (FullDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullWorkingCalendar1676ByName")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676FullDTO GetFullWorkingCalendar1676ByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string workingCalendar1676Name)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullWorkingCalendar1676ByNameInternal(workingCalendar1676Name, evaluateData));
@@ -46,7 +43,6 @@
         /// Get full list of WorkingCalendar1676s (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullWorkingCalendar1676s")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.WorkingCalendar1676FullDTO> GetFullWorkingCalendar1676s()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullWorkingCalendar1676sInternal(evaluateData));
@@ -56,7 +52,6 @@
         /// Get WorkingCalendar1676s (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullWorkingCalendar1676sByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.WorkingCalendar1676FullDTO> GetFullWorkingCalendar1676sByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO[] workingCalendar1676Idents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullWorkingCalendar1676sByIdentsInternal(workingCalendar1676Idents, evaluateData));
@@ -78,7 +73,6 @@
         /// Get WorkingCalendar1676 (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichWorkingCalendar1676")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676RichDTO GetRichWorkingCalendar1676([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichWorkingCalendar1676Internal(workingCalendar1676Identity, evaluateData));
@@ -88,7 +82,6 @@
         /// Get WorkingCalendar1676 (RichDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichWorkingCalendar1676ByName")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676RichDTO GetRichWorkingCalendar1676ByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string workingCalendar1676Name)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichWorkingCalendar1676ByNameInternal(workingCalendar1676Name, evaluateData));
@@ -112,7 +105,6 @@
         /// Get WorkingCalendar1676 (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleWorkingCalendar1676")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676SimpleDTO GetSimpleWorkingCalendar1676([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleWorkingCalendar1676Internal(workingCalendar1676Identity, evaluateData));
@@ -122,7 +114,6 @@
         /// Get WorkingCalendar1676 (SimpleDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleWorkingCalendar1676ByName")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676SimpleDTO GetSimpleWorkingCalendar1676ByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string workingCalendar1676Name)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleWorkingCalendar1676ByNameInternal(workingCalendar1676Name, evaluateData));
@@ -146,7 +137,6 @@
         /// Get full list of WorkingCalendar1676s (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleWorkingCalendar1676s")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.WorkingCalendar1676SimpleDTO> GetSimpleWorkingCalendar1676s()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleWorkingCalendar1676sInternal(evaluateData));
@@ -156,7 +146,6 @@
         /// Get WorkingCalendar1676s (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleWorkingCalendar1676sByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.WorkingCalendar1676SimpleDTO> GetSimpleWorkingCalendar1676sByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO[] workingCalendar1676Idents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleWorkingCalendar1676sByIdentsInternal(workingCalendar1676Idents, evaluateData));
@@ -178,7 +167,6 @@
         /// Get WorkingCalendar1676 (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualWorkingCalendar1676")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO GetVisualWorkingCalendar1676([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualWorkingCalendar1676Internal(workingCalendar1676Identity, evaluateData));
@@ -188,7 +176,6 @@
         /// Get WorkingCalendar1676 (VisualDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualWorkingCalendar1676ByName")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO GetVisualWorkingCalendar1676ByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string workingCalendar1676Name)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualWorkingCalendar1676ByNameInternal(workingCalendar1676Name, evaluateData));
@@ -212,7 +199,6 @@
         /// Get full list of WorkingCalendar1676s (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualWorkingCalendar1676s")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO> GetVisualWorkingCalendar1676s()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualWorkingCalendar1676sInternal(evaluateData));
@@ -222,7 +208,6 @@
         /// Get WorkingCalendar1676s (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualWorkingCalendar1676sByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO> GetVisualWorkingCalendar1676sByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO[] workingCalendar1676Idents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualWorkingCalendar1676sByIdentsInternal(workingCalendar1676Idents, evaluateData));

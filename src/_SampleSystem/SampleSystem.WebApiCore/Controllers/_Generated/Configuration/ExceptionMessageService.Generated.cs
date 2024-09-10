@@ -1,6 +1,5 @@
 ﻿namespace Configuration.WebApi.Controllers
 {
-    using Framework.Configuration.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get ExceptionMessage (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullExceptionMessage")]
         public virtual Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO GetFullExceptionMessage([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessageInternal(exceptionMessageIdentity, evaluateData));
@@ -29,7 +27,6 @@
         /// Get full list of ExceptionMessages (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullExceptionMessages")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessages()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessagesInternal(evaluateData));
@@ -39,7 +36,6 @@
         /// Get ExceptionMessages (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullExceptionMessagesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO[] exceptionMessageIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessagesByIdentsInternal(exceptionMessageIdents, evaluateData));
@@ -55,7 +51,6 @@
         /// Get ExceptionMessages (FullDTO) by filter (Framework.Configuration.Domain.ExceptionMessageRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullExceptionMessagesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessagesByRootFilterInternal(filter, evaluateData));
@@ -78,7 +73,6 @@
         /// Get ExceptionMessage (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichExceptionMessage")]
         public virtual Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO GetRichExceptionMessage([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichExceptionMessageInternal(exceptionMessageIdentity, evaluateData));
@@ -95,7 +89,6 @@
         /// Get ExceptionMessage (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleExceptionMessage")]
         public virtual Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO GetSimpleExceptionMessage([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessageInternal(exceptionMessageIdentity, evaluateData));
@@ -112,7 +105,6 @@
         /// Get full list of ExceptionMessages (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleExceptionMessages")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessages()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessagesInternal(evaluateData));
@@ -122,7 +114,6 @@
         /// Get ExceptionMessages (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleExceptionMessagesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO[] exceptionMessageIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessagesByIdentsInternal(exceptionMessageIdents, evaluateData));
@@ -138,7 +129,6 @@
         /// Get ExceptionMessages (SimpleDTO) by filter (Framework.Configuration.Domain.ExceptionMessageRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleExceptionMessagesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessagesByRootFilterInternal(filter, evaluateData));

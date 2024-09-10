@@ -26,6 +26,8 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IGeneratorConfigurat
         this.GeneratePolicy = source.Select(z => z.GeneratePolicy).All();
 
         this.EvaluateDataTypeReference = source.Select(z => z.EvaluateDataTypeReference).First();
+
+        this.UseRouteAction = source.Select(v => v.UseRouteAction).Distinct().Single();
     }
 
     public virtual string Namespace { get; }
@@ -39,6 +41,8 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IGeneratorConfigurat
     public string ServiceContractNamespace { get; }
 
     public CodeTypeReference EvaluateDataTypeReference { get; }
+
+    public bool UseRouteAction { get; }
 
     public IGenerationEnvironmentBase Environment { get; }
 

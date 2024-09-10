@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get Employee Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePropertyRevisionByDateRange(GetEmployeePropertyRevisionByDateRangeAutoRequest getEmployeePropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getEmployeePropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get Employee Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePropertyRevisions(GetEmployeePropertyRevisionsAutoRequest getEmployeePropertyRevisionsAutoRequest)
         {
             string propertyName = getEmployeePropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get Employee revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeeRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeIdentityDTO employeeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeRevisionsInternal(employeeIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get Employee (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeFullDTO GetFullEmployeeWithRevision(GetFullEmployeeWithRevisionAutoRequest getFullEmployeeWithRevisionAutoRequest)
         {
             long revision = getFullEmployeeWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get Employee (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeSimpleDTO GetSimpleEmployeeWithRevision(GetSimpleEmployeeWithRevisionAutoRequest getSimpleEmployeeWithRevisionAutoRequest)
         {
             long revision = getSimpleEmployeeWithRevisionAutoRequest.Revision;

@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get ManagementUnitAndBusinessUnitLink (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullManagementUnitAndBusinessUnitLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkFullDTO GetFullManagementUnitAndBusinessUnitLinkWithRevision(GetFullManagementUnitAndBusinessUnitLinkWithRevisionAutoRequest getFullManagementUnitAndBusinessUnitLinkWithRevisionAutoRequest)
         {
             long revision = getFullManagementUnitAndBusinessUnitLinkWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get ManagementUnitAndBusinessUnitLink Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitAndBusinessUnitLinkPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitAndBusinessUnitLinkPropertyRevisionByDateRange(GetManagementUnitAndBusinessUnitLinkPropertyRevisionByDateRangeAutoRequest getManagementUnitAndBusinessUnitLinkPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getManagementUnitAndBusinessUnitLinkPropertyRevisionByDateRangeAutoRequest.Period;
@@ -50,7 +47,6 @@
         /// Get ManagementUnitAndBusinessUnitLink Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitAndBusinessUnitLinkPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitAndBusinessUnitLinkPropertyRevisions(GetManagementUnitAndBusinessUnitLinkPropertyRevisionsAutoRequest getManagementUnitAndBusinessUnitLinkPropertyRevisionsAutoRequest)
         {
             string propertyName = getManagementUnitAndBusinessUnitLinkPropertyRevisionsAutoRequest.PropertyName;
@@ -68,7 +64,6 @@
         /// Get ManagementUnitAndBusinessUnitLink revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitAndBusinessUnitLinkRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetManagementUnitAndBusinessUnitLinkRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkIdentityDTO managementUnitAndBusinessUnitLinkIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetManagementUnitAndBusinessUnitLinkRevisionsInternal(managementUnitAndBusinessUnitLinkIdentity, evaluateData));
@@ -84,7 +79,6 @@
         /// Get ManagementUnitAndBusinessUnitLink (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichManagementUnitAndBusinessUnitLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkRichDTO GetRichManagementUnitAndBusinessUnitLinkWithRevision(GetRichManagementUnitAndBusinessUnitLinkWithRevisionAutoRequest getRichManagementUnitAndBusinessUnitLinkWithRevisionAutoRequest)
         {
             long revision = getRichManagementUnitAndBusinessUnitLinkWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get ManagementUnitAndBusinessUnitLink (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleManagementUnitAndBusinessUnitLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkSimpleDTO GetSimpleManagementUnitAndBusinessUnitLinkWithRevision(GetSimpleManagementUnitAndBusinessUnitLinkWithRevisionAutoRequest getSimpleManagementUnitAndBusinessUnitLinkWithRevisionAutoRequest)
         {
             long revision = getSimpleManagementUnitAndBusinessUnitLinkWithRevisionAutoRequest.Revision;

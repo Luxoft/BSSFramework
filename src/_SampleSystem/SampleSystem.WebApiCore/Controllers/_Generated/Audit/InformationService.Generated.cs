@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get Information (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.InformationFullDTO GetFullInformationWithRevision(GetFullInformationWithRevisionAutoRequest getFullInformationWithRevisionAutoRequest)
         {
             long revision = getFullInformationWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get Information Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetInformationPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetInformationPropertyRevisionByDateRange(GetInformationPropertyRevisionByDateRangeAutoRequest getInformationPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getInformationPropertyRevisionByDateRangeAutoRequest.Period;
@@ -50,7 +47,6 @@
         /// Get Information Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetInformationPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetInformationPropertyRevisions(GetInformationPropertyRevisionsAutoRequest getInformationPropertyRevisionsAutoRequest)
         {
             string propertyName = getInformationPropertyRevisionsAutoRequest.PropertyName;
@@ -68,7 +64,6 @@
         /// Get Information revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetInformationRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetInformationRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetInformationRevisionsInternal(informationIdentity, evaluateData));
@@ -84,7 +79,6 @@
         /// Get Information (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.InformationRichDTO GetRichInformationWithRevision(GetRichInformationWithRevisionAutoRequest getRichInformationWithRevisionAutoRequest)
         {
             long revision = getRichInformationWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get Information (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.InformationSimpleDTO GetSimpleInformationWithRevision(GetSimpleInformationWithRevisionAutoRequest getSimpleInformationWithRevisionAutoRequest)
         {
             long revision = getSimpleInformationWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get Information (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.InformationVisualDTO GetVisualInformationWithRevision(GetVisualInformationWithRevisionAutoRequest getVisualInformationWithRevisionAutoRequest)
         {
             long revision = getVisualInformationWithRevisionAutoRequest.Revision;

@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Main
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get TestSecurityObjItem (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestSecurityObjItem")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO GetFullTestSecurityObjItem([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestSecurityObjItemInternal(testSecurityObjItemIdentity, evaluateData));
@@ -22,7 +20,6 @@
         /// Get TestSecurityObjItem (FullDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestSecurityObjItemByName")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO GetFullTestSecurityObjItemByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string testSecurityObjItemName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestSecurityObjItemByNameInternal(testSecurityObjItemName, evaluateData));
@@ -46,7 +43,6 @@
         /// Get full list of TestSecurityObjItems (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestSecurityObjItems")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO> GetFullTestSecurityObjItems()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestSecurityObjItemsInternal(evaluateData));
@@ -56,7 +52,6 @@
         /// Get TestSecurityObjItems (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestSecurityObjItemsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO> GetFullTestSecurityObjItemsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO[] testSecurityObjItemIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestSecurityObjItemsByIdentsInternal(testSecurityObjItemIdents, evaluateData));
@@ -78,7 +73,6 @@
         /// Get TestSecurityObjItem (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestSecurityObjItem")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO GetRichTestSecurityObjItem([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestSecurityObjItemInternal(testSecurityObjItemIdentity, evaluateData));
@@ -88,7 +82,6 @@
         /// Get TestSecurityObjItem (RichDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestSecurityObjItemByName")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO GetRichTestSecurityObjItemByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string testSecurityObjItemName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestSecurityObjItemByNameInternal(testSecurityObjItemName, evaluateData));
@@ -112,7 +105,6 @@
         /// Get TestSecurityObjItem (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestSecurityObjItem")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO GetSimpleTestSecurityObjItem([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestSecurityObjItemInternal(testSecurityObjItemIdentity, evaluateData));
@@ -122,7 +114,6 @@
         /// Get TestSecurityObjItem (SimpleDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestSecurityObjItemByName")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO GetSimpleTestSecurityObjItemByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string testSecurityObjItemName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestSecurityObjItemByNameInternal(testSecurityObjItemName, evaluateData));
@@ -146,7 +137,6 @@
         /// Get full list of TestSecurityObjItems (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestSecurityObjItems")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO> GetSimpleTestSecurityObjItems()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestSecurityObjItemsInternal(evaluateData));
@@ -156,7 +146,6 @@
         /// Get TestSecurityObjItems (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestSecurityObjItemsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO> GetSimpleTestSecurityObjItemsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO[] testSecurityObjItemIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestSecurityObjItemsByIdentsInternal(testSecurityObjItemIdents, evaluateData));
@@ -178,7 +167,6 @@
         /// Get TestSecurityObjItem (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestSecurityObjItem")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemVisualDTO GetVisualTestSecurityObjItem([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestSecurityObjItemInternal(testSecurityObjItemIdentity, evaluateData));
@@ -188,7 +176,6 @@
         /// Get TestSecurityObjItem (VisualDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestSecurityObjItemByName")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemVisualDTO GetVisualTestSecurityObjItemByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string testSecurityObjItemName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestSecurityObjItemByNameInternal(testSecurityObjItemName, evaluateData));
@@ -212,7 +199,6 @@
         /// Get full list of TestSecurityObjItems (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestSecurityObjItems")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecurityObjItemVisualDTO> GetVisualTestSecurityObjItems()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestSecurityObjItemsInternal(evaluateData));
@@ -222,7 +208,6 @@
         /// Get TestSecurityObjItems (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestSecurityObjItemsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecurityObjItemVisualDTO> GetVisualTestSecurityObjItemsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO[] testSecurityObjItemIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestSecurityObjItemsByIdentsInternal(testSecurityObjItemIdents, evaluateData));
@@ -244,7 +229,6 @@
         /// Get TestSecurityObjItemProjection (ProjectionDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestSecurityObjItemProjection")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemProjectionDTO GetTestSecurityObjItemProjection([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemProjectionIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestSecurityObjItemProjectionInternal(testSecurityObjItemProjectionIdentity, evaluateData));
@@ -261,7 +245,6 @@
         /// Get full list of TestSecurityObjItemProjections (ProjectionDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestSecurityObjItemProjections")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecurityObjItemProjectionDTO> GetTestSecurityObjItemProjections()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestSecurityObjItemProjectionsInternal(evaluateData));

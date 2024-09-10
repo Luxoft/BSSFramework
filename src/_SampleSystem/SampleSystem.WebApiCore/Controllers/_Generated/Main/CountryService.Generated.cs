@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Main
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get full list of Countries (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountries")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryFullDTO> GetFullCountries()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountriesInternal(evaluateData));
@@ -22,7 +20,6 @@
         /// Get Countries (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountriesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryFullDTO> GetFullCountriesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountriesByIdentsInternal(countryIdents, evaluateData));
@@ -44,7 +41,6 @@
         /// Get Country (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountry")]
         public virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountryInternal(countryIdentity, evaluateData));
@@ -54,7 +50,6 @@
         /// Get Country (FullDTO) by code
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountryByCode")]
         public virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryCode)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountryByCodeInternal(countryCode, evaluateData));
@@ -71,7 +66,6 @@
         /// Get Country (FullDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountryByName")]
         public virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountryByNameInternal(countryName, evaluateData));
@@ -95,7 +89,6 @@
         /// Get Country (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCountry")]
         public virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCountryInternal(countryIdentity, evaluateData));
@@ -105,7 +98,6 @@
         /// Get Country (RichDTO) by code
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCountryByCode")]
         public virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryCode)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCountryByCodeInternal(countryCode, evaluateData));
@@ -122,7 +114,6 @@
         /// Get Country (RichDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCountryByName")]
         public virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCountryByNameInternal(countryName, evaluateData));
@@ -146,7 +137,6 @@
         /// Get full list of Countries (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountries")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountrySimpleDTO> GetSimpleCountries()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountriesInternal(evaluateData));
@@ -156,7 +146,6 @@
         /// Get Countries (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountriesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountrySimpleDTO> GetSimpleCountriesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountriesByIdentsInternal(countryIdents, evaluateData));
@@ -178,7 +167,6 @@
         /// Get Country (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountry")]
         public virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountryInternal(countryIdentity, evaluateData));
@@ -188,7 +176,6 @@
         /// Get Country (SimpleDTO) by code
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountryByCode")]
         public virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryCode)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountryByCodeInternal(countryCode, evaluateData));
@@ -205,7 +192,6 @@
         /// Get Country (SimpleDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountryByName")]
         public virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountryByNameInternal(countryName, evaluateData));
@@ -229,7 +215,6 @@
         /// Get full list of Countries (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountries")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryVisualDTO> GetVisualCountries()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountriesInternal(evaluateData));
@@ -239,7 +224,6 @@
         /// Get Countries (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountriesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryVisualDTO> GetVisualCountriesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountriesByIdentsInternal(countryIdents, evaluateData));
@@ -261,7 +245,6 @@
         /// Get Country (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountry")]
         public virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountryInternal(countryIdentity, evaluateData));
@@ -271,7 +254,6 @@
         /// Get Country (VisualDTO) by code
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountryByCode")]
         public virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryCode)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountryByCodeInternal(countryCode, evaluateData));
@@ -288,7 +270,6 @@
         /// Get Country (VisualDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountryByName")]
         public virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountryByNameInternal(countryName, evaluateData));
@@ -312,7 +293,6 @@
         /// Remove Country
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("RemoveCountry")]
         public virtual void RemoveCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent)
         {
             this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemoveCountryInternal(countryIdent, evaluateData));
@@ -334,7 +314,6 @@
         /// Save Countries
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("SaveCountry")]
         public virtual SampleSystem.Generated.DTO.CountryIdentityDTO SaveCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryStrictDTO countryStrict)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveCountryInternal(countryStrict, evaluateData));

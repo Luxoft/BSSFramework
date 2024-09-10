@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get TestPlainAuthObject (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestPlainAuthObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectFullDTO GetFullTestPlainAuthObjectWithRevision(GetFullTestPlainAuthObjectWithRevisionAutoRequest getFullTestPlainAuthObjectWithRevisionAutoRequest)
         {
             long revision = getFullTestPlainAuthObjectWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get TestPlainAuthObject (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestPlainAuthObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectRichDTO GetRichTestPlainAuthObjectWithRevision(GetRichTestPlainAuthObjectWithRevisionAutoRequest getRichTestPlainAuthObjectWithRevisionAutoRequest)
         {
             long revision = getRichTestPlainAuthObjectWithRevisionAutoRequest.Revision;
@@ -50,7 +47,6 @@
         /// Get TestPlainAuthObject (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestPlainAuthObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO GetSimpleTestPlainAuthObjectWithRevision(GetSimpleTestPlainAuthObjectWithRevisionAutoRequest getSimpleTestPlainAuthObjectWithRevisionAutoRequest)
         {
             long revision = getSimpleTestPlainAuthObjectWithRevisionAutoRequest.Revision;
@@ -69,7 +65,6 @@
         /// Get TestPlainAuthObject Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestPlainAuthObjectPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestPlainAuthObjectPropertyRevisionByDateRange(GetTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest getTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getTestPlainAuthObjectPropertyRevisionByDateRangeAutoRequest.Period;
@@ -88,7 +83,6 @@
         /// Get TestPlainAuthObject Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestPlainAuthObjectPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestPlainAuthObjectPropertyRevisions(GetTestPlainAuthObjectPropertyRevisionsAutoRequest getTestPlainAuthObjectPropertyRevisionsAutoRequest)
         {
             string propertyName = getTestPlainAuthObjectPropertyRevisionsAutoRequest.PropertyName;
@@ -106,7 +100,6 @@
         /// Get TestPlainAuthObject revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestPlainAuthObjectRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestPlainAuthObjectRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestPlainAuthObjectRevisionsInternal(testPlainAuthObjectIdentity, evaluateData));
@@ -122,7 +115,6 @@
         /// Get TestPlainAuthObject (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestPlainAuthObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPlainAuthObjectVisualDTO GetVisualTestPlainAuthObjectWithRevision(GetVisualTestPlainAuthObjectWithRevisionAutoRequest getVisualTestPlainAuthObjectWithRevisionAutoRequest)
         {
             long revision = getVisualTestPlainAuthObjectWithRevisionAutoRequest.Revision;

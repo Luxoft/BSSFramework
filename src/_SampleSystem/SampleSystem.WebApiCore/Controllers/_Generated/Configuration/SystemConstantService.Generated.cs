@@ -1,6 +1,5 @@
 ﻿namespace Configuration.WebApi.Controllers
 {
-    using Framework.Configuration.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get SystemConstant (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSystemConstant")]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstant([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantInternal(systemConstantIdentity, evaluateData));
@@ -22,7 +20,6 @@
         /// Get SystemConstant (FullDTO) by code
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSystemConstantByCode")]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string systemConstantCode)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantByCodeInternal(systemConstantCode, evaluateData));
@@ -46,7 +43,6 @@
         /// Get full list of SystemConstants (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSystemConstants")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstants()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsInternal(evaluateData));
@@ -56,7 +52,6 @@
         /// Get SystemConstants (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSystemConstantsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
@@ -72,7 +67,6 @@
         /// Get SystemConstants (FullDTO) by filter (Framework.Configuration.Domain.SystemConstantRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSystemConstantsByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsByRootFilterInternal(filter, evaluateData));
@@ -95,7 +89,6 @@
         /// Get SystemConstant (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichSystemConstant")]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstant([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSystemConstantInternal(systemConstantIdentity, evaluateData));
@@ -105,7 +98,6 @@
         /// Get SystemConstant (RichDTO) by code
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichSystemConstantByCode")]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string systemConstantCode)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSystemConstantByCodeInternal(systemConstantCode, evaluateData));
@@ -129,7 +121,6 @@
         /// Get SystemConstant (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSystemConstant")]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstant([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantInternal(systemConstantIdentity, evaluateData));
@@ -139,7 +130,6 @@
         /// Get SystemConstant (SimpleDTO) by code
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSystemConstantByCode")]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string systemConstantCode)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantByCodeInternal(systemConstantCode, evaluateData));
@@ -163,7 +153,6 @@
         /// Get full list of SystemConstants (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSystemConstants")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstants()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsInternal(evaluateData));
@@ -173,7 +162,6 @@
         /// Get SystemConstants (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSystemConstantsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
@@ -189,7 +177,6 @@
         /// Get SystemConstants (SimpleDTO) by filter (Framework.Configuration.Domain.SystemConstantRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSystemConstantsByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsByRootFilterInternal(filter, evaluateData));
@@ -212,7 +199,6 @@
         /// Get SystemConstant (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSystemConstant")]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstant([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantInternal(systemConstantIdentity, evaluateData));
@@ -222,7 +208,6 @@
         /// Get SystemConstant (VisualDTO) by code
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSystemConstantByCode")]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string systemConstantCode)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantByCodeInternal(systemConstantCode, evaluateData));
@@ -246,7 +231,6 @@
         /// Get full list of SystemConstants (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSystemConstants")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstants()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsInternal(evaluateData));
@@ -256,7 +240,6 @@
         /// Get SystemConstants (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSystemConstantsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
@@ -272,7 +255,6 @@
         /// Get SystemConstants (VisualDTO) by filter (Framework.Configuration.Domain.SystemConstantRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSystemConstantsByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsByRootFilterInternal(filter, evaluateData));
@@ -295,7 +277,6 @@
         /// Save SystemConstants
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("SaveSystemConstant")]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO SaveSystemConstant([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantStrictDTO systemConstantStrict)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveSystemConstantInternal(systemConstantStrict, evaluateData));

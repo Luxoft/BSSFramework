@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get EmployeeInformation Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeInformationPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeInformationPropertyRevisionByDateRange(GetEmployeeInformationPropertyRevisionByDateRangeAutoRequest getEmployeeInformationPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getEmployeeInformationPropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get EmployeeInformation Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeInformationPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeInformationPropertyRevisions(GetEmployeeInformationPropertyRevisionsAutoRequest getEmployeeInformationPropertyRevisionsAutoRequest)
         {
             string propertyName = getEmployeeInformationPropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get EmployeeInformation revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeInformationRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeeInformationRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeInformationRevisionsInternal(employeeInformationIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get EmployeeInformation (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeInformationFullDTO GetFullEmployeeInformationWithRevision(GetFullEmployeeInformationWithRevisionAutoRequest getFullEmployeeInformationWithRevisionAutoRequest)
         {
             long revision = getFullEmployeeInformationWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get EmployeeInformation (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeInformationRichDTO GetRichEmployeeInformationWithRevision(GetRichEmployeeInformationWithRevisionAutoRequest getRichEmployeeInformationWithRevisionAutoRequest)
         {
             long revision = getRichEmployeeInformationWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get EmployeeInformation (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeInformationSimpleDTO GetSimpleEmployeeInformationWithRevision(GetSimpleEmployeeInformationWithRevisionAutoRequest getSimpleEmployeeInformationWithRevisionAutoRequest)
         {
             long revision = getSimpleEmployeeInformationWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get EmployeeInformation (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeInformationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeInformationVisualDTO GetVisualEmployeeInformationWithRevision(GetVisualEmployeeInformationWithRevisionAutoRequest getVisualEmployeeInformationWithRevisionAutoRequest)
         {
             long revision = getVisualEmployeeInformationWithRevisionAutoRequest.Revision;

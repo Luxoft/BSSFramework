@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get TestRestrictionObject (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestRestrictionObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO GetFullTestRestrictionObjectWithRevision(GetFullTestRestrictionObjectWithRevisionAutoRequest getFullTestRestrictionObjectWithRevisionAutoRequest)
         {
             long revision = getFullTestRestrictionObjectWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get TestRestrictionObject (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestRestrictionObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO GetRichTestRestrictionObjectWithRevision(GetRichTestRestrictionObjectWithRevisionAutoRequest getRichTestRestrictionObjectWithRevisionAutoRequest)
         {
             long revision = getRichTestRestrictionObjectWithRevisionAutoRequest.Revision;
@@ -50,7 +47,6 @@
         /// Get TestRestrictionObject (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestRestrictionObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO GetSimpleTestRestrictionObjectWithRevision(GetSimpleTestRestrictionObjectWithRevisionAutoRequest getSimpleTestRestrictionObjectWithRevisionAutoRequest)
         {
             long revision = getSimpleTestRestrictionObjectWithRevisionAutoRequest.Revision;
@@ -69,7 +65,6 @@
         /// Get TestRestrictionObject Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestRestrictionObjectPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestRestrictionObjectPropertyRevisionByDateRange(GetTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest getTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getTestRestrictionObjectPropertyRevisionByDateRangeAutoRequest.Period;
@@ -88,7 +83,6 @@
         /// Get TestRestrictionObject Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestRestrictionObjectPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestRestrictionObjectPropertyRevisions(GetTestRestrictionObjectPropertyRevisionsAutoRequest getTestRestrictionObjectPropertyRevisionsAutoRequest)
         {
             string propertyName = getTestRestrictionObjectPropertyRevisionsAutoRequest.PropertyName;
@@ -106,7 +100,6 @@
         /// Get TestRestrictionObject revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestRestrictionObjectRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestRestrictionObjectRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestRestrictionObjectRevisionsInternal(testRestrictionObjectIdentity, evaluateData));

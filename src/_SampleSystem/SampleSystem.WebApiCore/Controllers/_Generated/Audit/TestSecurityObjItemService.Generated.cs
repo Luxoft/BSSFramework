@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get TestSecurityObjItem (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestSecurityObjItemWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO GetFullTestSecurityObjItemWithRevision(GetFullTestSecurityObjItemWithRevisionAutoRequest getFullTestSecurityObjItemWithRevisionAutoRequest)
         {
             long revision = getFullTestSecurityObjItemWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get TestSecurityObjItem (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestSecurityObjItemWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO GetRichTestSecurityObjItemWithRevision(GetRichTestSecurityObjItemWithRevisionAutoRequest getRichTestSecurityObjItemWithRevisionAutoRequest)
         {
             long revision = getRichTestSecurityObjItemWithRevisionAutoRequest.Revision;
@@ -50,7 +47,6 @@
         /// Get TestSecurityObjItem (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestSecurityObjItemWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO GetSimpleTestSecurityObjItemWithRevision(GetSimpleTestSecurityObjItemWithRevisionAutoRequest getSimpleTestSecurityObjItemWithRevisionAutoRequest)
         {
             long revision = getSimpleTestSecurityObjItemWithRevisionAutoRequest.Revision;
@@ -69,7 +65,6 @@
         /// Get TestSecurityObjItem Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestSecurityObjItemPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecurityObjItemPropertyRevisionByDateRange(GetTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest getTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getTestSecurityObjItemPropertyRevisionByDateRangeAutoRequest.Period;
@@ -88,7 +83,6 @@
         /// Get TestSecurityObjItem Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestSecurityObjItemPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecurityObjItemPropertyRevisions(GetTestSecurityObjItemPropertyRevisionsAutoRequest getTestSecurityObjItemPropertyRevisionsAutoRequest)
         {
             string propertyName = getTestSecurityObjItemPropertyRevisionsAutoRequest.PropertyName;
@@ -106,7 +100,6 @@
         /// Get TestSecurityObjItem revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestSecurityObjItemRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestSecurityObjItemRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestSecurityObjItemRevisionsInternal(testSecurityObjItemIdentity, evaluateData));
@@ -122,7 +115,6 @@
         /// Get TestSecurityObjItem (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestSecurityObjItemWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestSecurityObjItemVisualDTO GetVisualTestSecurityObjItemWithRevision(GetVisualTestSecurityObjItemWithRevisionAutoRequest getVisualTestSecurityObjItemWithRevisionAutoRequest)
         {
             long revision = getVisualTestSecurityObjItemWithRevisionAutoRequest.Revision;

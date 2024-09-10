@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get EmployeeSpecialization Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeSpecializationPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeSpecializationPropertyRevisionByDateRange(GetEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get EmployeeSpecialization Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeSpecializationPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeSpecializationPropertyRevisions(GetEmployeeSpecializationPropertyRevisionsAutoRequest getEmployeeSpecializationPropertyRevisionsAutoRequest)
         {
             string propertyName = getEmployeeSpecializationPropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get EmployeeSpecialization revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeSpecializationRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeeSpecializationRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeSpecializationRevisionsInternal(employeeSpecializationIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get EmployeeSpecialization (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeSpecializationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationFullDTO GetFullEmployeeSpecializationWithRevision(GetFullEmployeeSpecializationWithRevisionAutoRequest getFullEmployeeSpecializationWithRevisionAutoRequest)
         {
             long revision = getFullEmployeeSpecializationWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get EmployeeSpecialization (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeSpecializationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationRichDTO GetRichEmployeeSpecializationWithRevision(GetRichEmployeeSpecializationWithRevisionAutoRequest getRichEmployeeSpecializationWithRevisionAutoRequest)
         {
             long revision = getRichEmployeeSpecializationWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get EmployeeSpecialization (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeSpecializationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO GetSimpleEmployeeSpecializationWithRevision(GetSimpleEmployeeSpecializationWithRevisionAutoRequest getSimpleEmployeeSpecializationWithRevisionAutoRequest)
         {
             long revision = getSimpleEmployeeSpecializationWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get EmployeeSpecialization (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeSpecializationWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeSpecializationVisualDTO GetVisualEmployeeSpecializationWithRevision(GetVisualEmployeeSpecializationWithRevisionAutoRequest getVisualEmployeeSpecializationWithRevisionAutoRequest)
         {
             long revision = getVisualEmployeeSpecializationWithRevisionAutoRequest.Revision;

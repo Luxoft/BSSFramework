@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get EmployeeRole Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRolePropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeRolePropertyRevisionByDateRange(GetEmployeeRolePropertyRevisionByDateRangeAutoRequest getEmployeeRolePropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getEmployeeRolePropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get EmployeeRole Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRolePropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeRolePropertyRevisions(GetEmployeeRolePropertyRevisionsAutoRequest getEmployeeRolePropertyRevisionsAutoRequest)
         {
             string propertyName = getEmployeeRolePropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get EmployeeRole revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRoleRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeeRoleRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeRoleRevisionsInternal(employeeRoleIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get EmployeeRole (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeRoleWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleFullDTO GetFullEmployeeRoleWithRevision(GetFullEmployeeRoleWithRevisionAutoRequest getFullEmployeeRoleWithRevisionAutoRequest)
         {
             long revision = getFullEmployeeRoleWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get EmployeeRole (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeRoleWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleRichDTO GetRichEmployeeRoleWithRevision(GetRichEmployeeRoleWithRevisionAutoRequest getRichEmployeeRoleWithRevisionAutoRequest)
         {
             long revision = getRichEmployeeRoleWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get EmployeeRole (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeRoleWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO GetSimpleEmployeeRoleWithRevision(GetSimpleEmployeeRoleWithRevisionAutoRequest getSimpleEmployeeRoleWithRevisionAutoRequest)
         {
             long revision = getSimpleEmployeeRoleWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get EmployeeRole (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeRoleWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleVisualDTO GetVisualEmployeeRoleWithRevision(GetVisualEmployeeRoleWithRevisionAutoRequest getVisualEmployeeRoleWithRevisionAutoRequest)
         {
             long revision = getVisualEmployeeRoleWithRevisionAutoRequest.Revision;

@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Main
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get IMRequest (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullIMRequest")]
         public virtual SampleSystem.Generated.DTO.IMRequestFullDTO GetFullIMRequest([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullIMRequestInternal(iMRequestIdentity, evaluateData));
@@ -22,7 +20,6 @@
         /// Get IMRequest (FullDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullIMRequestByName")]
         public virtual SampleSystem.Generated.DTO.IMRequestFullDTO GetFullIMRequestByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string iMRequestName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullIMRequestByNameInternal(iMRequestName, evaluateData));
@@ -46,7 +43,6 @@
         /// Get full list of IMRequests (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullIMRequests")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestFullDTO> GetFullIMRequests()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullIMRequestsInternal(evaluateData));
@@ -56,7 +52,6 @@
         /// Get IMRequests (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullIMRequestsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestFullDTO> GetFullIMRequestsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.IMRequestIdentityDTO[] iMRequestIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullIMRequestsByIdentsInternal(iMRequestIdents, evaluateData));
@@ -78,7 +73,6 @@
         /// Get IMRequest (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichIMRequest")]
         public virtual SampleSystem.Generated.DTO.IMRequestRichDTO GetRichIMRequest([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichIMRequestInternal(iMRequestIdentity, evaluateData));
@@ -88,7 +82,6 @@
         /// Get IMRequest (RichDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichIMRequestByName")]
         public virtual SampleSystem.Generated.DTO.IMRequestRichDTO GetRichIMRequestByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string iMRequestName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichIMRequestByNameInternal(iMRequestName, evaluateData));
@@ -112,7 +105,6 @@
         /// Get IMRequest (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleIMRequest")]
         public virtual SampleSystem.Generated.DTO.IMRequestSimpleDTO GetSimpleIMRequest([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleIMRequestInternal(iMRequestIdentity, evaluateData));
@@ -122,7 +114,6 @@
         /// Get IMRequest (SimpleDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleIMRequestByName")]
         public virtual SampleSystem.Generated.DTO.IMRequestSimpleDTO GetSimpleIMRequestByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string iMRequestName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleIMRequestByNameInternal(iMRequestName, evaluateData));
@@ -146,7 +137,6 @@
         /// Get full list of IMRequests (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleIMRequests")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestSimpleDTO> GetSimpleIMRequests()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleIMRequestsInternal(evaluateData));
@@ -156,7 +146,6 @@
         /// Get IMRequests (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleIMRequestsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestSimpleDTO> GetSimpleIMRequestsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.IMRequestIdentityDTO[] iMRequestIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleIMRequestsByIdentsInternal(iMRequestIdents, evaluateData));
@@ -178,7 +167,6 @@
         /// Get IMRequest (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualIMRequest")]
         public virtual SampleSystem.Generated.DTO.IMRequestVisualDTO GetVisualIMRequest([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualIMRequestInternal(iMRequestIdentity, evaluateData));
@@ -188,7 +176,6 @@
         /// Get IMRequest (VisualDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualIMRequestByName")]
         public virtual SampleSystem.Generated.DTO.IMRequestVisualDTO GetVisualIMRequestByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string iMRequestName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualIMRequestByNameInternal(iMRequestName, evaluateData));
@@ -212,7 +199,6 @@
         /// Get full list of IMRequests (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualIMRequests")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestVisualDTO> GetVisualIMRequests()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualIMRequestsInternal(evaluateData));
@@ -222,7 +208,6 @@
         /// Get IMRequests (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualIMRequestsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestVisualDTO> GetVisualIMRequestsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.IMRequestIdentityDTO[] iMRequestIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualIMRequestsByIdentsInternal(iMRequestIdents, evaluateData));
@@ -244,7 +229,6 @@
         /// Get TestIMRequest (ProjectionDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestIMRequest")]
         public virtual SampleSystem.Generated.DTO.TestIMRequestProjectionDTO GetTestIMRequest([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.IMRequestIdentityDTO testIMRequestIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestIMRequestInternal(testIMRequestIdentity, evaluateData));

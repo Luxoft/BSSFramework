@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Main
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get Example1 (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullExample1")]
         public virtual SampleSystem.Generated.DTO.Example1FullDTO GetFullExample1([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExample1Internal(example1Identity, evaluateData));
@@ -29,7 +27,6 @@
         /// Get full list of Example1s (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullExample1s")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Example1FullDTO> GetFullExample1s()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExample1sInternal(evaluateData));
@@ -39,7 +36,6 @@
         /// Get Example1s (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullExample1sByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Example1FullDTO> GetFullExample1sByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Example1IdentityDTO[] example1Idents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExample1sByIdentsInternal(example1Idents, evaluateData));
@@ -61,7 +57,6 @@
         /// Get Example1 (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichExample1")]
         public virtual SampleSystem.Generated.DTO.Example1RichDTO GetRichExample1([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichExample1Internal(example1Identity, evaluateData));
@@ -78,7 +73,6 @@
         /// Get Example1 (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleExample1")]
         public virtual SampleSystem.Generated.DTO.Example1SimpleDTO GetSimpleExample1([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExample1Internal(example1Identity, evaluateData));
@@ -95,7 +89,6 @@
         /// Get full list of Example1s (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleExample1s")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Example1SimpleDTO> GetSimpleExample1s()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExample1sInternal(evaluateData));
@@ -105,7 +98,6 @@
         /// Get Example1s (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleExample1sByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Example1SimpleDTO> GetSimpleExample1sByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Example1IdentityDTO[] example1Idents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExample1sByIdentsInternal(example1Idents, evaluateData));
@@ -127,7 +119,6 @@
         /// Save Example1s
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("SaveExample1")]
         public virtual SampleSystem.Generated.DTO.Example1IdentityDTO SaveExample1([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Example1StrictDTO example1Strict)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveExample1Internal(example1Strict, evaluateData));
@@ -151,7 +142,6 @@
         /// Update Example1
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("UpdateExample1")]
         public virtual SampleSystem.Generated.DTO.Example1IdentityDTO UpdateExample1([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Example1UpdateDTO example1Update)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.UpdateExample1Internal(example1Update, evaluateData));

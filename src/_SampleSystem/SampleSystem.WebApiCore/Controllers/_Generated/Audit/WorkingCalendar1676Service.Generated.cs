@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get WorkingCalendar1676 (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullWorkingCalendar1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676FullDTO GetFullWorkingCalendar1676WithRevision(GetFullWorkingCalendar1676WithRevisionAutoRequest getFullWorkingCalendar1676WithRevisionAutoRequest)
         {
             long revision = getFullWorkingCalendar1676WithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get WorkingCalendar1676 (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichWorkingCalendar1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676RichDTO GetRichWorkingCalendar1676WithRevision(GetRichWorkingCalendar1676WithRevisionAutoRequest getRichWorkingCalendar1676WithRevisionAutoRequest)
         {
             long revision = getRichWorkingCalendar1676WithRevisionAutoRequest.Revision;
@@ -50,7 +47,6 @@
         /// Get WorkingCalendar1676 (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleWorkingCalendar1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676SimpleDTO GetSimpleWorkingCalendar1676WithRevision(GetSimpleWorkingCalendar1676WithRevisionAutoRequest getSimpleWorkingCalendar1676WithRevisionAutoRequest)
         {
             long revision = getSimpleWorkingCalendar1676WithRevisionAutoRequest.Revision;
@@ -69,7 +65,6 @@
         /// Get WorkingCalendar1676 (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualWorkingCalendar1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO GetVisualWorkingCalendar1676WithRevision(GetVisualWorkingCalendar1676WithRevisionAutoRequest getVisualWorkingCalendar1676WithRevisionAutoRequest)
         {
             long revision = getVisualWorkingCalendar1676WithRevisionAutoRequest.Revision;
@@ -88,7 +83,6 @@
         /// Get WorkingCalendar1676 Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetWorkingCalendar1676PropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetWorkingCalendar1676PropertyRevisionByDateRange(GetWorkingCalendar1676PropertyRevisionByDateRangeAutoRequest getWorkingCalendar1676PropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getWorkingCalendar1676PropertyRevisionByDateRangeAutoRequest.Period;
@@ -107,7 +101,6 @@
         /// Get WorkingCalendar1676 Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetWorkingCalendar1676PropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetWorkingCalendar1676PropertyRevisions(GetWorkingCalendar1676PropertyRevisionsAutoRequest getWorkingCalendar1676PropertyRevisionsAutoRequest)
         {
             string propertyName = getWorkingCalendar1676PropertyRevisionsAutoRequest.PropertyName;
@@ -125,7 +118,6 @@
         /// Get WorkingCalendar1676 revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetWorkingCalendar1676Revisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetWorkingCalendar1676Revisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetWorkingCalendar1676RevisionsInternal(workingCalendar1676Identity, evaluateData));

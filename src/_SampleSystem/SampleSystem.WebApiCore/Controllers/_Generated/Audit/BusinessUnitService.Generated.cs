@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get BusinessUnit Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitPropertyRevisionByDateRange(GetBusinessUnitPropertyRevisionByDateRangeAutoRequest getBusinessUnitPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getBusinessUnitPropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get BusinessUnit Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitPropertyRevisions(GetBusinessUnitPropertyRevisionsAutoRequest getBusinessUnitPropertyRevisionsAutoRequest)
         {
             string propertyName = getBusinessUnitPropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get BusinessUnit revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetBusinessUnitRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitRevisionsInternal(businessUnitIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get BusinessUnit (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessUnitWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitFullDTO GetFullBusinessUnitWithRevision(GetFullBusinessUnitWithRevisionAutoRequest getFullBusinessUnitWithRevisionAutoRequest)
         {
             long revision = getFullBusinessUnitWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get BusinessUnit (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichBusinessUnitWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitRichDTO GetRichBusinessUnitWithRevision(GetRichBusinessUnitWithRevisionAutoRequest getRichBusinessUnitWithRevisionAutoRequest)
         {
             long revision = getRichBusinessUnitWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get BusinessUnit (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessUnitWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitSimpleDTO GetSimpleBusinessUnitWithRevision(GetSimpleBusinessUnitWithRevisionAutoRequest getSimpleBusinessUnitWithRevisionAutoRequest)
         {
             long revision = getSimpleBusinessUnitWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get BusinessUnit (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessUnitWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitVisualDTO GetVisualBusinessUnitWithRevision(GetVisualBusinessUnitWithRevisionAutoRequest getVisualBusinessUnitWithRevisionAutoRequest)
         {
             long revision = getVisualBusinessUnitWithRevisionAutoRequest.Revision;

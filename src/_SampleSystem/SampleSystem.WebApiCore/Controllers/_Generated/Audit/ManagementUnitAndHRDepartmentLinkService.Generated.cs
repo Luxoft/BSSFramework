@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get ManagementUnitAndHRDepartmentLink (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullManagementUnitAndHRDepartmentLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO GetFullManagementUnitAndHRDepartmentLinkWithRevision(GetFullManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest getFullManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest)
         {
             long revision = getFullManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get ManagementUnitAndHRDepartmentLink Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRange(GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.Period;
@@ -50,7 +47,6 @@
         /// Get ManagementUnitAndHRDepartmentLink Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitAndHRDepartmentLinkPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitAndHRDepartmentLinkPropertyRevisions(GetManagementUnitAndHRDepartmentLinkPropertyRevisionsAutoRequest getManagementUnitAndHRDepartmentLinkPropertyRevisionsAutoRequest)
         {
             string propertyName = getManagementUnitAndHRDepartmentLinkPropertyRevisionsAutoRequest.PropertyName;
@@ -68,7 +64,6 @@
         /// Get ManagementUnitAndHRDepartmentLink revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetManagementUnitAndHRDepartmentLinkRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetManagementUnitAndHRDepartmentLinkRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetManagementUnitAndHRDepartmentLinkRevisionsInternal(managementUnitAndHRDepartmentLinkIdentity, evaluateData));
@@ -84,7 +79,6 @@
         /// Get ManagementUnitAndHRDepartmentLink (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichManagementUnitAndHRDepartmentLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkRichDTO GetRichManagementUnitAndHRDepartmentLinkWithRevision(GetRichManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest getRichManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest)
         {
             long revision = getRichManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get ManagementUnitAndHRDepartmentLink (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleManagementUnitAndHRDepartmentLinkWithRevision")]
         public virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO GetSimpleManagementUnitAndHRDepartmentLinkWithRevision(GetSimpleManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest getSimpleManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest)
         {
             long revision = getSimpleManagementUnitAndHRDepartmentLinkWithRevisionAutoRequest.Revision;

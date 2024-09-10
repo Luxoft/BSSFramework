@@ -1,6 +1,5 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
@@ -12,7 +11,6 @@
         /// Get Principal (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullPrincipalWithRevision")]
         public virtual SampleSystem.Generated.DTO.PrincipalFullDTO GetFullPrincipalWithRevision(GetFullPrincipalWithRevisionAutoRequest getFullPrincipalWithRevisionAutoRequest)
         {
             long revision = getFullPrincipalWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get Principal Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetPrincipalPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetPrincipalPropertyRevisionByDateRange(GetPrincipalPropertyRevisionByDateRangeAutoRequest getPrincipalPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getPrincipalPropertyRevisionByDateRangeAutoRequest.Period;
@@ -50,7 +47,6 @@
         /// Get Principal Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetPrincipalPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetPrincipalPropertyRevisions(GetPrincipalPropertyRevisionsAutoRequest getPrincipalPropertyRevisionsAutoRequest)
         {
             string propertyName = getPrincipalPropertyRevisionsAutoRequest.PropertyName;
@@ -68,7 +64,6 @@
         /// Get Principal revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetPrincipalRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetPrincipalRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetPrincipalRevisionsInternal(principalIdentity, evaluateData));
@@ -84,7 +79,6 @@
         /// Get Principal (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichPrincipalWithRevision")]
         public virtual SampleSystem.Generated.DTO.PrincipalRichDTO GetRichPrincipalWithRevision(GetRichPrincipalWithRevisionAutoRequest getRichPrincipalWithRevisionAutoRequest)
         {
             long revision = getRichPrincipalWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get Principal (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimplePrincipalWithRevision")]
         public virtual SampleSystem.Generated.DTO.PrincipalSimpleDTO GetSimplePrincipalWithRevision(GetSimplePrincipalWithRevisionAutoRequest getSimplePrincipalWithRevisionAutoRequest)
         {
             long revision = getSimplePrincipalWithRevisionAutoRequest.Revision;

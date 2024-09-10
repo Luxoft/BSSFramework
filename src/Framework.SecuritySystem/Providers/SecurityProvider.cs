@@ -15,7 +15,7 @@ namespace Framework.SecuritySystem
 
         public abstract Expression<Func<TDomainObject, bool>> SecurityFilter { get; }
 
-        protected virtual LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.None;
+        protected virtual LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.All;
 
         public virtual IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable) => queryable.Where(this.SecurityFilter);
 

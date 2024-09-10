@@ -38,8 +38,7 @@ public static class SampleSystemApplicationExtensions
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
                 .AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>()
                 .AddSingleton<ISlJsonCompatibilitySerializer, SlJsonCompatibilitySerializer>() // For SL
-                .AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both)) // For legacy audit
-                .ReplaceSingleton<IApplicationDefaultUserAuthenticationServiceSettings, EnvironmentDefaultUserAuthenticationServiceSettings>(); // Windows auth
+                .AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both)); // For legacy audit
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {

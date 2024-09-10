@@ -38,7 +38,7 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : EventDTOMe
                   ?? this.eventDtoMapper.Convert(domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation);
 
         var serializedData = DataContractSerializerHelper.Serialize(dto);
-        var dbEvent = new Framework.Configuration.Domain.DomainObjectEvent
+        var dbEvent = new Configuration.Domain.DomainObjectEvent
         {
             SerializeData = serializedData,
             Size = serializedData.Length,
@@ -53,6 +53,6 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase> : EventDTOMe
             dbEvent.Operation = domainType.EventOperations.GetByName(domainObjectEventArgs.Operation.ToString());
         });
 
-        this.configurationContext.Logics.Default.Create<Framework.Configuration.Domain.DomainObjectEvent>().Save(dbEvent);
+        this.configurationContext.Logics.Default.Create<Configuration.Domain.DomainObjectEvent>().Save(dbEvent);
     }
 }

@@ -22,7 +22,7 @@ public class RoslynCSharpExpressionParser : INativeBodyExpressionParser
         if (expression == null) throw new ArgumentNullException(nameof(expression));
 
         var types = parameters.Select(parameter => parameter.Type).Concat(
-                                                                          new[] { returnType }).Concat(new[] { typeof(Enumerable), typeof(Framework.Core.EnumerableExtensions), typeof(Expression), typeof(object) })
+                                                                          new[] { returnType }).Concat(new[] { typeof(Enumerable), typeof(EnumerableExtensions), typeof(Expression), typeof(object) })
                               .GetCompileReferencedTypes()
                               .ToList();
 

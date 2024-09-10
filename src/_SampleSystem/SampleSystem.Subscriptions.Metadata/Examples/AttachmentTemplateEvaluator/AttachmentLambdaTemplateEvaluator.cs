@@ -25,6 +25,6 @@ public sealed class AttachmentLambdaTemplateEvaluator : AttachmentLambdaBase<Dom
     {
         var template = Encoding.UTF8.GetBytes($"Hello world! {versions.Current.NameNative}");
 
-        return new[] { new System.Net.Mail.Attachment(new MemoryStream(template), AttachmentLambdaTemplateEvaluator.AttachmentName) };
+        return new[] { new System.Net.Mail.Attachment(new MemoryStream(template), AttachmentName) };
     }
 }

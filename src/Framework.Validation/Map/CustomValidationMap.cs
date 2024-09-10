@@ -2,13 +2,13 @@
 
 public abstract class CustomValidationMap : ValidationMapBase
 {
-    private readonly Framework.Validation.IValidationMap _defaultValidatorMap;
+    private readonly IValidationMap _defaultValidatorMap;
 
 
     protected CustomValidationMap(IServiceProvider serviceProvider) :
             base(serviceProvider)
     {
-        this._defaultValidatorMap = new Framework.Validation.ValidationMap(serviceProvider);
+        this._defaultValidatorMap = new ValidationMap(serviceProvider);
     }
 
 

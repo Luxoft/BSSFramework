@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Main
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("api/[controller]/[action]")]
     public partial class EmployeeRoleController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get EmployeeRole (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeRole")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleFullDTO GetFullEmployeeRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRoleInternal(employeeRoleIdentity, evaluateData));
@@ -22,7 +20,6 @@
         /// Get EmployeeRole (FullDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeRoleByName")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleFullDTO GetFullEmployeeRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRoleByNameInternal(employeeRoleName, evaluateData));
@@ -46,7 +43,6 @@
         /// Get full list of EmployeeRoles (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeRoles")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleFullDTO> GetFullEmployeeRoles()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRolesInternal(evaluateData));
@@ -56,7 +52,6 @@
         /// Get EmployeeRoles (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeRolesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleFullDTO> GetFullEmployeeRolesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO[] employeeRoleIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRolesByIdentsInternal(employeeRoleIdents, evaluateData));
@@ -78,7 +73,6 @@
         /// Get EmployeeRole (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeRole")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleRichDTO GetRichEmployeeRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeeRoleInternal(employeeRoleIdentity, evaluateData));
@@ -88,7 +82,6 @@
         /// Get EmployeeRole (RichDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeRoleByName")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleRichDTO GetRichEmployeeRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeeRoleByNameInternal(employeeRoleName, evaluateData));
@@ -112,7 +105,6 @@
         /// Get EmployeeRole (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeRole")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO GetSimpleEmployeeRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRoleInternal(employeeRoleIdentity, evaluateData));
@@ -122,7 +114,6 @@
         /// Get EmployeeRole (SimpleDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeRoleByName")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO GetSimpleEmployeeRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRoleByNameInternal(employeeRoleName, evaluateData));
@@ -146,7 +137,6 @@
         /// Get full list of EmployeeRoles (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeRoles")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO> GetSimpleEmployeeRoles()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRolesInternal(evaluateData));
@@ -156,7 +146,6 @@
         /// Get EmployeeRoles (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeRolesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO> GetSimpleEmployeeRolesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO[] employeeRoleIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRolesByIdentsInternal(employeeRoleIdents, evaluateData));
@@ -178,7 +167,6 @@
         /// Get EmployeeRole (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeRole")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleVisualDTO GetVisualEmployeeRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRoleInternal(employeeRoleIdentity, evaluateData));
@@ -188,7 +176,6 @@
         /// Get EmployeeRole (VisualDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeRoleByName")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleVisualDTO GetVisualEmployeeRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRoleByNameInternal(employeeRoleName, evaluateData));
@@ -212,7 +199,6 @@
         /// Get full list of EmployeeRoles (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeRoles")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleVisualDTO> GetVisualEmployeeRoles()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRolesInternal(evaluateData));
@@ -222,7 +208,6 @@
         /// Get EmployeeRoles (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeRolesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleVisualDTO> GetVisualEmployeeRolesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO[] employeeRoleIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRolesByIdentsInternal(employeeRoleIdents, evaluateData));

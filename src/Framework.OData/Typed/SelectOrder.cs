@@ -6,7 +6,7 @@ namespace Framework.OData;
 
 public class SelectOrder<TDomainObject, TOrderKey> : ISelectOrder<TDomainObject>
 {
-    public SelectOrder(System.Linq.Expressions.Expression<Func<TDomainObject, TOrderKey>> path, OrderType orderType)
+    public SelectOrder(Expression<Func<TDomainObject, TOrderKey>> path, OrderType orderType)
     {
         if (path == null) throw new ArgumentNullException(nameof(path));
         if (!Enum.IsDefined(typeof (OrderType), orderType)) throw new ArgumentOutOfRangeException(nameof(orderType));
@@ -16,7 +16,7 @@ public class SelectOrder<TDomainObject, TOrderKey> : ISelectOrder<TDomainObject>
     }
 
 
-    public System.Linq.Expressions.Expression<Func<TDomainObject, TOrderKey>> Path { get; private set; }
+    public Expression<Func<TDomainObject, TOrderKey>> Path { get; private set; }
     public OrderType OrderType { get; private set; }
 
 

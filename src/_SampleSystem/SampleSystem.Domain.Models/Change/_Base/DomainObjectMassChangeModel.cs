@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven;
+using Framework.Restriction;
 
 namespace SampleSystem.Domain;
 
@@ -10,7 +11,7 @@ namespace SampleSystem.Domain;
 public abstract class DomainObjectMassChangeModel<TDomainObject> : DomainObjectBase, IDomainObjectMassChangeModel<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase
 {
-    [Framework.Restriction.Required]
+    [Required]
     public List<TDomainObject> ChangingObjects { get; set; }
 
     IEnumerable<TDomainObject> IDomainObjectMassChangeModel<TDomainObject>.ChangingObjects => this.ChangingObjects;

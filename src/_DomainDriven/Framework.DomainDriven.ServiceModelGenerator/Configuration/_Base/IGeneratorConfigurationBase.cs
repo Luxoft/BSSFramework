@@ -19,6 +19,8 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     IEnumerable<IServiceMethodGenerator> GetAccumMethodGenerators();
 
     CodeTypeReference EvaluateDataTypeReference { get; }
+
+    bool UseRouteAction { get; }
 }
 
 public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfigurationBase, IGeneratorConfiguration<TEnvironment, FileType>

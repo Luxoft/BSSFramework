@@ -20,6 +20,6 @@ internal class PropertyMethodInfoImpl : BaseMethodInfoImpl
 
     public override bool Equals(object obj)
     {
-        return object.ReferenceEquals(this, obj);
+        return ReferenceEquals(this, obj);
     }
 }

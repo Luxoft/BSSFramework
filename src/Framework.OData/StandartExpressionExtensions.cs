@@ -24,12 +24,12 @@ public static class StandartExpressionExtensions
         var virtualTree1 = tree.Select(expr => new
                                                {
                                                    Expr = expr,
-                                                   IsVirtual = (expr as System.Linq.Expressions.MemberExpression).Maybe(q => virtualNodes.Contains(q))
+                                                   IsVirtual = (expr as MemberExpression).Maybe(q => virtualNodes.Contains(q))
                                                });
 
         var virtualTree2 = virtualTree1.Select((pair, nextChildPairs) =>
                                                {
-                                                   if (pair.Expr is System.Linq.Expressions.LambdaExpression)
+                                                   if (pair.Expr is LambdaExpression)
                                                    {
                                                        return new
                                                               {
@@ -37,7 +37,7 @@ public static class StandartExpressionExtensions
                                                                   IsVirtual = false
                                                               };
                                                    }
-                                                   else if (pair.Expr.Type == typeof(bool) && (pair.Expr as System.Linq.Expressions.BinaryExpression).Maybe(binExpr => binExpr.NodeType == System.Linq.Expressions.ExpressionType.AndAlso))
+                                                   else if (pair.Expr.Type == typeof(bool) && (pair.Expr as BinaryExpression).Maybe(binExpr => binExpr.NodeType == ExpressionType.AndAlso))
                                                    {
                                                        return new
                                                               {
@@ -55,7 +55,7 @@ public static class StandartExpressionExtensions
 
         var dict = virtualTree2.Distinct(pair => pair.Expr).ToDictionary(pair => pair.Expr, pair => pair.IsVirtual);
 
-        var visitor = new OverrideExpressionVisitor(e => e != null && dict[e], System.Linq.Expressions.Expression.Constant(true));
+        var visitor = new OverrideExpressionVisitor(e => e != null && dict[e], Expression.Constant(true));
 
         return filterExpression.UpdateBody(visitor);
     }
@@ -65,12 +65,12 @@ public static class StandartExpressionExtensions
         return source.Path.HasVirtualProperty();
     }
 
-    public static bool HasVirtualProperty(this System.Linq.Expressions.LambdaExpression expression)
+    public static bool HasVirtualProperty(this LambdaExpression expression)
     {
         return expression.GetVirtualChains().Any();
     }
 
-    public static IEnumerable<Stack<MemberExpression>> GetVirtualChains(this System.Linq.Expressions.LambdaExpression expression)
+    public static IEnumerable<Stack<MemberExpression>> GetVirtualChains(this LambdaExpression expression)
     {
         var visitor = new HasVirtualPropertyVisitor();
 

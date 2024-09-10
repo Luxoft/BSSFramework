@@ -38,7 +38,7 @@ public partial class DomainTypeBLL
         }
         else
         {
-            throw new System.ArgumentException("invalid block count", nameof(path));
+            throw new ArgumentException("invalid block count", nameof(path));
         }
     }
 

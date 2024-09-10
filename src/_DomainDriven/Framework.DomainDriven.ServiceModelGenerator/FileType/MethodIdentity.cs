@@ -29,7 +29,7 @@ public class MethodIdentity : IEquatable<MethodIdentity>
 
     public virtual bool Equals(MethodIdentity other)
     {
-        return !object.ReferenceEquals(other, null) && this.Type == other.Type && this.ModelType == other.ModelType && this.DTOType == other.DTOType;
+        return !ReferenceEquals(other, null) && this.Type == other.Type && this.ModelType == other.ModelType && this.DTOType == other.DTOType;
     }
 
     public override bool Equals(object obj)
@@ -55,8 +55,8 @@ public class MethodIdentity : IEquatable<MethodIdentity>
 
     public static bool operator == (MethodIdentity source, MethodIdentity other)
     {
-        return object.ReferenceEquals(source, other)
-               || (!object.ReferenceEquals(source, null) && source.Equals(other));
+        return ReferenceEquals(source, other)
+               || (!ReferenceEquals(source, null) && source.Equals(other));
     }
 
     public static bool operator !=(MethodIdentity fileType, MethodIdentity other)

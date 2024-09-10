@@ -14,7 +14,7 @@ public class LambdaExpression : Expression
     {
         if (expression == null) throw new ArgumentNullException(nameof(expression));
 
-        this.Body = Expression.Create(expression.Body);
+        this.Body = Create(expression.Body);
         this.Parameters = expression.Parameters.ToReadOnlyCollection(p => new ParameterExpression(p.Name));
     }
 

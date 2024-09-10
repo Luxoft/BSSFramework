@@ -15,7 +15,7 @@ public class StrictCodeTypeReferenceService<TConfiguration> : LayerCodeTypeRefer
     }
 
 
-    public override bool IsOptional(System.Reflection.PropertyInfo property)
+    public override bool IsOptional(PropertyInfo property)
     {
         return !this.Configuration.ExpandStrictMaybeToDefault && base.IsOptional(property);
     }

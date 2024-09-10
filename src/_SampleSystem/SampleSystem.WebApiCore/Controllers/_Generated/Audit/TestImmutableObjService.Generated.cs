@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class TestImmutableObjController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get TestImmutableObj (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestImmutableObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestImmutableObjFullDTO GetFullTestImmutableObjWithRevision(GetFullTestImmutableObjWithRevisionAutoRequest getFullTestImmutableObjWithRevisionAutoRequest)
         {
             long revision = getFullTestImmutableObjWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get TestImmutableObj (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestImmutableObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestImmutableObjRichDTO GetRichTestImmutableObjWithRevision(GetRichTestImmutableObjWithRevisionAutoRequest getRichTestImmutableObjWithRevisionAutoRequest)
         {
             long revision = getRichTestImmutableObjWithRevisionAutoRequest.Revision;
@@ -50,7 +47,6 @@
         /// Get TestImmutableObj (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestImmutableObjWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO GetSimpleTestImmutableObjWithRevision(GetSimpleTestImmutableObjWithRevisionAutoRequest getSimpleTestImmutableObjWithRevisionAutoRequest)
         {
             long revision = getSimpleTestImmutableObjWithRevisionAutoRequest.Revision;
@@ -69,7 +65,6 @@
         /// Get TestImmutableObj Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestImmutableObjPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestImmutableObjPropertyRevisionByDateRange(GetTestImmutableObjPropertyRevisionByDateRangeAutoRequest getTestImmutableObjPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getTestImmutableObjPropertyRevisionByDateRangeAutoRequest.Period;
@@ -88,7 +83,6 @@
         /// Get TestImmutableObj Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestImmutableObjPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestImmutableObjPropertyRevisions(GetTestImmutableObjPropertyRevisionsAutoRequest getTestImmutableObjPropertyRevisionsAutoRequest)
         {
             string propertyName = getTestImmutableObjPropertyRevisionsAutoRequest.PropertyName;
@@ -106,7 +100,6 @@
         /// Get TestImmutableObj revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestImmutableObjRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestImmutableObjRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestImmutableObjRevisionsInternal(testImmutableObjIdentity, evaluateData));

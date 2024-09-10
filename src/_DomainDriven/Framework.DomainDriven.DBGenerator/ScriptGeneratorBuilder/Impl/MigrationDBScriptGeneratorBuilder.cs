@@ -157,7 +157,7 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
             }
             catch (Exception e)
             {
-                throw new System.ArgumentException($"Failed execute:{commandText}", e);
+                throw new ArgumentException($"Failed execute:{commandText}", e);
             }
         }
 

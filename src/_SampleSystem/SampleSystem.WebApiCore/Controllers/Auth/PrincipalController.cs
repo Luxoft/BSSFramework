@@ -1,11 +1,13 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
 
+using Microsoft.AspNetCore.Mvc;
+
 namespace Authorization.WebApi.Controllers;
 
 public partial class PrincipalController
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetCurrentPrincipal))]
+    [HttpPost]
     public PrincipalFullDTO GetCurrentPrincipal()
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>

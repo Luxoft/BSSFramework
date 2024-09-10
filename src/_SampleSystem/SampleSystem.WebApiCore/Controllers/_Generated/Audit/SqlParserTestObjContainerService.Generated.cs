@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class SqlParserTestObjContainerController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get SqlParserTestObjContainer (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSqlParserTestObjContainerWithRevision")]
         public virtual SampleSystem.Generated.DTO.SqlParserTestObjContainerFullDTO GetFullSqlParserTestObjContainerWithRevision(GetFullSqlParserTestObjContainerWithRevisionAutoRequest getFullSqlParserTestObjContainerWithRevisionAutoRequest)
         {
             long revision = getFullSqlParserTestObjContainerWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get SqlParserTestObjContainer (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSqlParserTestObjContainerWithRevision")]
         public virtual SampleSystem.Generated.DTO.SqlParserTestObjContainerSimpleDTO GetSimpleSqlParserTestObjContainerWithRevision(GetSimpleSqlParserTestObjContainerWithRevisionAutoRequest getSimpleSqlParserTestObjContainerWithRevisionAutoRequest)
         {
             long revision = getSimpleSqlParserTestObjContainerWithRevisionAutoRequest.Revision;
@@ -50,7 +47,6 @@
         /// Get SqlParserTestObjContainer Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSqlParserTestObjContainerPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetSqlParserTestObjContainerPropertyRevisionByDateRange(GetSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest getSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getSqlParserTestObjContainerPropertyRevisionByDateRangeAutoRequest.Period;
@@ -69,7 +65,6 @@
         /// Get SqlParserTestObjContainer Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSqlParserTestObjContainerPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetSqlParserTestObjContainerPropertyRevisions(GetSqlParserTestObjContainerPropertyRevisionsAutoRequest getSqlParserTestObjContainerPropertyRevisionsAutoRequest)
         {
             string propertyName = getSqlParserTestObjContainerPropertyRevisionsAutoRequest.PropertyName;
@@ -87,7 +82,6 @@
         /// Get SqlParserTestObjContainer revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSqlParserTestObjContainerRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetSqlParserTestObjContainerRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSqlParserTestObjContainerRevisionsInternal(sqlParserTestObjContainerIdentity, evaluateData));

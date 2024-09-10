@@ -2,6 +2,7 @@
 
 using Framework.DomainDriven.Serialization;
 using Framework.Core;
+using Framework.Restriction;
 using Framework.Validation;
 
 namespace SampleSystem.Domain.Inline;
@@ -22,7 +23,7 @@ public class FioShort : ICloneable<FioShort>, IEquatable<FioShort>
 
 
 
-    [Framework.Restriction.MaxLength(50)]
+    [MaxLength(50)]
     [DataMember]
     public string FirstName
     {
@@ -31,7 +32,7 @@ public class FioShort : ICloneable<FioShort>, IEquatable<FioShort>
     }
 
 
-    [Framework.Restriction.MaxLength(50)]
+    [MaxLength(50)]
     [DataMember]
     public string LastName
     {
@@ -40,7 +41,7 @@ public class FioShort : ICloneable<FioShort>, IEquatable<FioShort>
     }
 
 
-    //[Framework.Restriction.MaxLength(50)]
+    //[MaxLength(50)]
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     [DataMember]
     public virtual string FullName
@@ -87,7 +88,7 @@ public class FioShort : ICloneable<FioShort>, IEquatable<FioShort>
 
     public static bool operator ==(FioShort v1, FioShort v2)
     {
-        return object.ReferenceEquals(v1, v2) || (!object.ReferenceEquals(v1, null) && v1.Equals(v2));
+        return ReferenceEquals(v1, v2) || (!ReferenceEquals(v1, null) && v1.Equals(v2));
     }
 
     public static bool operator !=(FioShort v1, FioShort v2)

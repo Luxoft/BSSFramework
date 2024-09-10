@@ -42,14 +42,14 @@ public abstract class Maybe<T> : IMaybe<T>, IEquatable<Maybe<T>>
 
     public bool Equals(Maybe<T> other)
     {
-        return !object.ReferenceEquals(other, null)
+        return !ReferenceEquals(other, null)
                && ((!this.HasValue && !other.HasValue)
                    || this.MaybeJustValue(v1 => other.MaybeJustValue(v2 => EqualityComparer<T>.Default.Equals(v1, v2))));
     }
 
     public static bool operator == (Maybe<T> v1, Maybe<T> v2)
     {
-        return object.ReferenceEquals(v1, v2) || (!object.ReferenceEquals(v1, null) && v1.Equals(v2));
+        return ReferenceEquals(v1, v2) || (!ReferenceEquals(v1, null) && v1.Equals(v2));
     }
 
     public static bool operator !=(Maybe<T> v1, Maybe<T> v2)

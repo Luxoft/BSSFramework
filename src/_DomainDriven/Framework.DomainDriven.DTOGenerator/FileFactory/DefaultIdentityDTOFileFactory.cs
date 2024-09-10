@@ -111,7 +111,7 @@ public class DefaultIdentityDTOFileFactory<TConfiguration> : FileFactory<TConfig
         }
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
+    protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         foreach (var baseMember in base.GetMembers())
         {
@@ -291,7 +291,7 @@ public class DefaultIdentityDTOFileFactory<TConfiguration> : FileFactory<TConfig
         yield return this.GetIdentityObjectImplementation(true);
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
+    protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {
         yield return this.GetDataContractCodeAttributeDeclaration();
 
@@ -301,7 +301,7 @@ public class DefaultIdentityDTOFileFactory<TConfiguration> : FileFactory<TConfig
         //}
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
+    protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         yield return this.CurrentReference.ToEquatableReference();
         yield return this.Configuration.GetIdentityObjectCodeTypeReference();

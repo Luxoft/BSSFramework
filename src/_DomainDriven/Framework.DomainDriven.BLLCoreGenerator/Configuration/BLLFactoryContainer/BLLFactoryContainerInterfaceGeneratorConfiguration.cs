@@ -49,7 +49,7 @@ public class BLLFactoryContainerInterfaceGeneratorConfiguration<TConfiguration> 
         }
         else
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

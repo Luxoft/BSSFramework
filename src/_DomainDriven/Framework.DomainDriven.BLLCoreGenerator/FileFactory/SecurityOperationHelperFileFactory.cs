@@ -28,7 +28,7 @@ public class SecurityRuleHelperFileFactory<TConfiguration> : FileFactory<TConfig
                }.MarkAsStatic();
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
+    protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         yield return this.GetRegisterMethod();
     }

@@ -2,11 +2,11 @@
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class AuthenticationController : ControllerBase
 {
-    [HttpGet(nameof(IsAuthenticated))]
+    [HttpGet]
     public bool IsAuthenticated()
     {
         return this.HttpContext.User.Identity!.IsAuthenticated;

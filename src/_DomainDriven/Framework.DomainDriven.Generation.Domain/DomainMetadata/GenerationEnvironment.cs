@@ -25,7 +25,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
         this.IdentityProperty = (identityPropertyExpr.Body as MemberExpression)
                                 .Maybe(expr => expr.Member as PropertyInfo)
-                                .FromMaybe(() => new System.ArgumentException("invalid property expression"));
+                                .FromMaybe(() => new ArgumentException("invalid property expression"));
 
         this.DomainObjectBaseType = typeof(TDomainObjectBase);
         this.PersistentDomainObjectBaseType = typeof(TPersistentDomainObjectBase);

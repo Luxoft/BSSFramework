@@ -11,7 +11,7 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class NoSecurityController : ControllerBase
 {
@@ -24,7 +24,7 @@ public class NoSecurityController : ControllerBase
 
 
     [DBSessionMode(DBSessionMode.Write)]
-    [HttpPost(nameof(TestFaultSave))]
+    [HttpPost]
     public async Task<NoSecurityObjectIdentityDTO> TestFaultSave(CancellationToken cancellationToken = default)
     {
         var repository = this.repositoryFactory.Create(SecurityRule.Edit);
@@ -37,7 +37,7 @@ public class NoSecurityController : ControllerBase
     }
 
     [DBSessionMode(DBSessionMode.Write)]
-    [HttpPost(nameof(TestSave))]
+    [HttpPost]
     public async Task<NoSecurityObjectIdentityDTO> TestSave(CancellationToken cancellationToken = default)
     {
         var repository = this.repositoryFactory.Create();
@@ -50,7 +50,7 @@ public class NoSecurityController : ControllerBase
     }
 
     [DBSessionMode(DBSessionMode.Read)]
-    [HttpPost(nameof(GetFullList))]
+    [HttpPost]
     public async Task<List<NoSecurityObjectIdentityDTO>> GetFullList(CancellationToken cancellationToken = default)
     {
         var repository = this.repositoryFactory.Create();

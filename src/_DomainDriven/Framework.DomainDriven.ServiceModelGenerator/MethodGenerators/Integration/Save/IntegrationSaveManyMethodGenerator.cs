@@ -80,7 +80,7 @@ public class IntegrationSaveManyMethodGenerator<TConfiguration> : IntegrationBas
                          .ToVariableReferenceExpression()
                          .ToStaticMethodInvokeExpression(
 
-                                                         typeof(Framework.Core.EnumerableExtensions)
+                                                         typeof(Core.EnumerableExtensions)
                                                                  .ToTypeReferenceExpression()
                                                                  .ToMethodReferenceExpression("ToList"), convertLambda)
 

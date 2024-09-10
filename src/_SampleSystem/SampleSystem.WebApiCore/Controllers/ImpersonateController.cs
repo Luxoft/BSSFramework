@@ -10,7 +10,7 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class ImpersonateController : ControllerBase
 {
@@ -26,7 +26,7 @@ public class ImpersonateController : ControllerBase
         this.dbSessionEvaluator = dbSessionEvaluator;
     }
 
-    [HttpPost(nameof(TestSave))]
+    [HttpPost]
     public async Task<NoSecurityObjectIdentityDTO> TestSave(string impersonateLogin, CancellationToken cancellationToken = default)
     {
         return await this.serviceEvaluator.EvaluateAsync(
@@ -42,7 +42,7 @@ public class ImpersonateController : ControllerBase
                    });
     }
 
-    [HttpPost(nameof(GetFullList))]
+    [HttpPost]
     public async Task<List<NoSecurityObjectSimpleDTO>> GetFullList(CancellationToken cancellationToken = default)
     {
         return await this.dbSessionEvaluator.EvaluateAsync(

@@ -10,7 +10,7 @@ using NHibernate.Linq;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class EmployeeAsyncController : ControllerBase
 {
@@ -31,7 +31,7 @@ public class EmployeeAsyncController : ControllerBase
     }
 
     [DBSessionMode(DBSessionMode.Read)]
-    [HttpPost(nameof(GetCurrentEmployee))]
+    [HttpPost]
     public async Task<EmployeeSimpleDTO> GetCurrentEmployee(CancellationToken cancellationToken)
     {
         var userName = this.userAuthenticationService.GetUserName();

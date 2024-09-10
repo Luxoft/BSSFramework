@@ -34,7 +34,7 @@ public class ValidationMapBaseFileFactory<TConfiguration> : FileFactory<TConfigu
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        yield return typeof(Validation.ValidationMapBase).ToTypeReference();
+        yield return typeof(ValidationMapBase).ToTypeReference();
     }
 
     protected override IEnumerable<CodeTypeMember> GetMembers()

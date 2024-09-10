@@ -39,7 +39,7 @@ public class ProjectionTest
 
         var request = $"$filter=expandC('All', guid'{rootLocation.Id:D}', Location)";
 
-        var selectOperation = Framework.OData.SelectOperation.Parse(request);
+        var selectOperation = SelectOperation.Parse(request);
 
         var selectOperationBuilder = new StandartExpressionBuilder();
 

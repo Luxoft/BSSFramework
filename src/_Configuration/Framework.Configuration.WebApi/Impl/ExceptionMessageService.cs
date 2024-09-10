@@ -2,11 +2,13 @@
 using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
 
+using Microsoft.AspNetCore.Mvc;
+
 namespace Framework.Configuration.WebApi;
 
 public partial class ConfigSLJsonController
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(SaveExceptionMessage))]
+    [HttpPost]
     public virtual ExceptionMessageIdentityDTO SaveExceptionMessage(ExceptionMessageStrictDTO exceptionMessageStrict)
     {
         if (exceptionMessageStrict == null)

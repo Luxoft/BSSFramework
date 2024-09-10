@@ -65,7 +65,7 @@ public partial class BusinessUnit :
         }
     }
 
-    [Framework.Restriction.UniqueGroup]
+    [UniqueGroup]
     public virtual IEnumerable<ManagementUnitAndBusinessUnitLink> ManagementUnits { get; } = new List<ManagementUnitAndBusinessUnitLink>();
 
     public virtual int DeepLevel
@@ -449,12 +449,12 @@ public partial class BusinessUnit :
 
     public static bool operator ==(BusinessUnit left, IUnit<BusinessUnit> right)
     {
-        return object.Equals(left, right);
+        return Equals(left, right);
     }
 
     public static bool operator !=(BusinessUnit left, IUnit<BusinessUnit> right)
     {
-        return !object.Equals(left, right);
+        return !Equals(left, right);
     }
 
     ////public virtual string GetNodePath()

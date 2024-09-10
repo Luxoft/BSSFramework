@@ -31,7 +31,14 @@ public class SingleControllerCodeFileFactory<TConfiguration> : ImplementFileFact
             {
                 if (method.Attributes.HasFlag(MemberAttributes.Public))
                 {
-                    method.CustomAttributes.Add(typeof(HttpPostAttribute).ToTypeReference().ToAttributeDeclaration(new CodeNameofExpression(method.Name).ToAttributeArgument()));
+                    if (this.Configuration.UseRouteAction)
+                    {
+                        method.CustomAttributes.Add(typeof(HttpPostAttribute).ToTypeReference().ToAttributeDeclaration());
+                    }
+                    else
+                    {
+                        method.CustomAttributes.Add(typeof(HttpPostAttribute).ToTypeReference().ToAttributeDeclaration(new CodeNameofExpression(method.Name).ToAttributeArgument()));
+                    }
 
                     foreach (CodeParameterDeclarationExpression parameter in method.Parameters)
                     {

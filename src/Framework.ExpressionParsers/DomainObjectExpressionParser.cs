@@ -75,7 +75,7 @@ public abstract class DomainObjectExpressionParser<TDomainObject, TLambdaObject,
 
         var subscriptionLambda = this._getLambdaFunc(domainObject);
 
-        if (subscriptionLambda == null) throw new System.ArgumentException($"{this._membeName} not initilialized", nameof(domainObject));
+        if (subscriptionLambda == null) throw new ArgumentException($"{this._membeName} not initilialized", nameof(domainObject));
 
         try
         {

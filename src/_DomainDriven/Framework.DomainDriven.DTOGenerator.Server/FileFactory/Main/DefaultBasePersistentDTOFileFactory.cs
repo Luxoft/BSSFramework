@@ -31,7 +31,7 @@ public class DefaultBasePersistentDTOFileFactory<TConfiguration> : MainDTOFileFa
         yield return this.GetIdentityObjectTypeRef();
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
+    protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         foreach (var baseMember in base.GetMembers())
         {

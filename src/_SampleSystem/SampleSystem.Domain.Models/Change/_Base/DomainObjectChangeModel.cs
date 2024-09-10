@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven;
+using Framework.Restriction;
 
 namespace SampleSystem.Domain;
 
@@ -6,6 +7,6 @@ namespace SampleSystem.Domain;
 public abstract class DomainObjectChangeModel<TDomainObject> : DomainObjectBase, IDomainObjectChangeModel<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase
 {
-    [Framework.Restriction.Required]
+    [Required]
     public TDomainObject ChangingObject { get; set; }
 }

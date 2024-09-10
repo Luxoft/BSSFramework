@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class HRDepartmentController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get HRDepartment (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullHRDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.HRDepartmentFullDTO GetFullHRDepartmentWithRevision(GetFullHRDepartmentWithRevisionAutoRequest getFullHRDepartmentWithRevisionAutoRequest)
         {
             long revision = getFullHRDepartmentWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get HRDepartment Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetHRDepartmentPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetHRDepartmentPropertyRevisionByDateRange(GetHRDepartmentPropertyRevisionByDateRangeAutoRequest getHRDepartmentPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.Period;
@@ -50,7 +47,6 @@
         /// Get HRDepartment Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetHRDepartmentPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetHRDepartmentPropertyRevisions(GetHRDepartmentPropertyRevisionsAutoRequest getHRDepartmentPropertyRevisionsAutoRequest)
         {
             string propertyName = getHRDepartmentPropertyRevisionsAutoRequest.PropertyName;
@@ -68,7 +64,6 @@
         /// Get HRDepartment revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetHRDepartmentRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetHRDepartmentRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetHRDepartmentRevisionsInternal(hRDepartmentIdentity, evaluateData));
@@ -84,7 +79,6 @@
         /// Get HRDepartment (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichHRDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.HRDepartmentRichDTO GetRichHRDepartmentWithRevision(GetRichHRDepartmentWithRevisionAutoRequest getRichHRDepartmentWithRevisionAutoRequest)
         {
             long revision = getRichHRDepartmentWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get HRDepartment (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleHRDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.HRDepartmentSimpleDTO GetSimpleHRDepartmentWithRevision(GetSimpleHRDepartmentWithRevisionAutoRequest getSimpleHRDepartmentWithRevisionAutoRequest)
         {
             long revision = getSimpleHRDepartmentWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get HRDepartment (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualHRDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.HRDepartmentVisualDTO GetVisualHRDepartmentWithRevision(GetVisualHRDepartmentWithRevisionAutoRequest getVisualHRDepartmentWithRevisionAutoRequest)
         {
             long revision = getVisualHRDepartmentWithRevisionAutoRequest.Revision;

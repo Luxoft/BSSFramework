@@ -1,17 +1,19 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
 
+using Microsoft.AspNetCore.Mvc;
+
 namespace Framework.Authorization.WebApi;
 
 public partial class AuthSLJsonController
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetCurrentPrincipal))]
+    [HttpPost]
     public PrincipalFullDTO GetCurrentPrincipal()
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData => evaluateData.Context.CurrentPrincipalSource.CurrentPrincipal.ToFullDTO(evaluateData.MappingService));
     }
 
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetVisualPrincipalsWithoutSecurity))]
+    [HttpPost]
     public IEnumerable<PrincipalVisualDTO> GetVisualPrincipalsWithoutSecurity()
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>

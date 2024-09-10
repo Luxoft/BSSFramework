@@ -45,7 +45,7 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
         yield return new CodeParameterDeclarationExpression
                      {
                              Name = "securityRuleCode",
-                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), Framework.DomainDriven.DTOGenerator.FileType.DomainObjectSecurityRuleCode)
+                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), DTOGenerator.FileType.DomainObjectSecurityRuleCode)
                      };
     }
 

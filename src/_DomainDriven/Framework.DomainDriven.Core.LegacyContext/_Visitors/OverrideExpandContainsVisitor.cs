@@ -24,7 +24,7 @@ internal class OverrideExpandContainsVisitor<TBLLContext, TIdent> : ExpressionVi
 
     protected override Expression VisitMethodCall(MethodCallExpression node)
     {
-        if (node.Method.IsGenericMethodImplementation(Framework.QueryLanguage.MethodInfoHelper.ExpandContainsMethod))
+        if (node.Method.IsGenericMethodImplementation(QueryLanguage.MethodInfoHelper.ExpandContainsMethod))
         {
             var source = node.Arguments[0];
 

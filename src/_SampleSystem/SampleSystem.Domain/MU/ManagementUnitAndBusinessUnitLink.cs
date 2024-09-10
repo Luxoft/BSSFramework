@@ -2,6 +2,7 @@
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Restriction;
 
 namespace SampleSystem.Domain;
 
@@ -50,16 +51,16 @@ public class ManagementUnitAndBusinessUnitLink :
         set { this.equalBU = value; }
     }
 
-    [Framework.Restriction.Required]
-    [Framework.Restriction.UniqueElement]
+    [Required]
+    [UniqueElement]
     public virtual ManagementUnit ManagementUnit
     {
         get { return this.managementUnit; }
         set { this.managementUnit = value; }
     }
 
-    [Framework.Restriction.Required]
-    [Framework.Restriction.UniqueElement]
+    [Required]
+    [UniqueElement]
     public virtual BusinessUnit BusinessUnit
     {
         get { return this.businessUnit; }

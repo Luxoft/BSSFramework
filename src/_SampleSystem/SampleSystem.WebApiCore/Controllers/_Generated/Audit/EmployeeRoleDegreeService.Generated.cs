@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class EmployeeRoleDegreeController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get EmployeeRoleDegree Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRoleDegreePropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeRoleDegreePropertyRevisionByDateRange(GetEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest getEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getEmployeeRoleDegreePropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get EmployeeRoleDegree Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRoleDegreePropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeRoleDegreePropertyRevisions(GetEmployeeRoleDegreePropertyRevisionsAutoRequest getEmployeeRoleDegreePropertyRevisionsAutoRequest)
         {
             string propertyName = getEmployeeRoleDegreePropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get EmployeeRoleDegree revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRoleDegreeRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeeRoleDegreeRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeRoleDegreeRevisionsInternal(employeeRoleDegreeIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get EmployeeRoleDegree (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeRoleDegreeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeFullDTO GetFullEmployeeRoleDegreeWithRevision(GetFullEmployeeRoleDegreeWithRevisionAutoRequest getFullEmployeeRoleDegreeWithRevisionAutoRequest)
         {
             long revision = getFullEmployeeRoleDegreeWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get EmployeeRoleDegree (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeRoleDegreeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeRichDTO GetRichEmployeeRoleDegreeWithRevision(GetRichEmployeeRoleDegreeWithRevisionAutoRequest getRichEmployeeRoleDegreeWithRevisionAutoRequest)
         {
             long revision = getRichEmployeeRoleDegreeWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get EmployeeRoleDegree (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeRoleDegreeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeSimpleDTO GetSimpleEmployeeRoleDegreeWithRevision(GetSimpleEmployeeRoleDegreeWithRevisionAutoRequest getSimpleEmployeeRoleDegreeWithRevisionAutoRequest)
         {
             long revision = getSimpleEmployeeRoleDegreeWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get EmployeeRoleDegree (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeRoleDegreeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRoleDegreeVisualDTO GetVisualEmployeeRoleDegreeWithRevision(GetVisualEmployeeRoleDegreeWithRevisionAutoRequest getVisualEmployeeRoleDegreeWithRevisionAutoRequest)
         {
             long revision = getVisualEmployeeRoleDegreeWithRevisionAutoRequest.Revision;

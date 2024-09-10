@@ -5,10 +5,10 @@ namespace Framework.Authorization.Domain;
 
 public class DelegateToItemModel : DomainObjectBase
 {
-    [Framework.Restriction.Required]
+    [Restriction.Required]
     public Principal Principal { get; set; }
 
-    [Framework.Restriction.Required]
+    [Restriction.Required]
     [DetailRole(true)]
     [AutoMapping(false)]
     public Permission Permission { get; set; }

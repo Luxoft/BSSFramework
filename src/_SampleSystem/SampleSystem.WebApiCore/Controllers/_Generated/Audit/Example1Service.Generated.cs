@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class Example1Controller : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get Example1 Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetExample1PropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetExample1PropertyRevisionByDateRange(GetExample1PropertyRevisionByDateRangeAutoRequest getExample1PropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getExample1PropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get Example1 Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetExample1PropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetExample1PropertyRevisions(GetExample1PropertyRevisionsAutoRequest getExample1PropertyRevisionsAutoRequest)
         {
             string propertyName = getExample1PropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get Example1 revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetExample1Revisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetExample1Revisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetExample1RevisionsInternal(example1Identity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get Example1 (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullExample1WithRevision")]
         public virtual SampleSystem.Generated.DTO.Example1FullDTO GetFullExample1WithRevision(GetFullExample1WithRevisionAutoRequest getFullExample1WithRevisionAutoRequest)
         {
             long revision = getFullExample1WithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get Example1 (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichExample1WithRevision")]
         public virtual SampleSystem.Generated.DTO.Example1RichDTO GetRichExample1WithRevision(GetRichExample1WithRevisionAutoRequest getRichExample1WithRevisionAutoRequest)
         {
             long revision = getRichExample1WithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get Example1 (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleExample1WithRevision")]
         public virtual SampleSystem.Generated.DTO.Example1SimpleDTO GetSimpleExample1WithRevision(GetSimpleExample1WithRevisionAutoRequest getSimpleExample1WithRevisionAutoRequest)
         {
             long revision = getSimpleExample1WithRevisionAutoRequest.Revision;

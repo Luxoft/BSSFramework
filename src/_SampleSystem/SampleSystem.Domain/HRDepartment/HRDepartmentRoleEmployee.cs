@@ -1,4 +1,5 @@
 ﻿using Framework.Persistent;
+using Framework.Restriction;
 
 namespace SampleSystem.Domain;
 
@@ -18,8 +19,8 @@ public class HRDepartmentRoleEmployee : AuditPersistentDomainObjectBase, IDetail
     {
     }
 
-    [Framework.Restriction.Required]
-    [Framework.Restriction.UniqueElement]
+    [Required]
+    [UniqueElement]
     public virtual Employee Employee
     {
         get { return this.employee; }
@@ -31,8 +32,8 @@ public class HRDepartmentRoleEmployee : AuditPersistentDomainObjectBase, IDetail
         get { return this.hRDepartment; }
     }
 
-    [Framework.Restriction.UniqueElement]
-    [Framework.Restriction.Required]
+    [UniqueElement]
+    [Required]
     public virtual HRDepartmentEmployeeRoleType HRDepartmentEmployeeRoleType
     {
         get { return this.hRDepartmentEmployeeRoleType; }

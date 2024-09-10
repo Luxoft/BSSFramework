@@ -15,8 +15,6 @@ public class WebApiNetCoreFileFactoryBase<TConfiguration> : FileFactory<TConfigu
 
     public sealed override FileType FileType { get; } = FileType.Implement;
 
-    protected sealed override IEnumerable<string> GetImportedNamespaces() => base.GetImportedNamespaces().Concat(new[] { this.Configuration.Environment.ServerDTO.Namespace });
-
     protected sealed override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
         return new CodeTypeDeclaration

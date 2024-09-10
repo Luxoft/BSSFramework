@@ -8,7 +8,7 @@ namespace Framework.Authorization.WebApi;
 
 public partial class AuthSLJsonController
 {
-    [HttpPost(nameof(GetFullSecurityEntities))]
+    [HttpPost]
     public IEnumerable<SecurityEntity> GetFullSecurityEntities([FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity)
     {
         return this.Evaluate(
@@ -23,7 +23,7 @@ public partial class AuthSLJsonController
             });
     }
 
-    [HttpPost(nameof(GetFullSecurityEntitiesByIdents))]
+    [HttpPost]
     public IEnumerable<SecurityEntity> GetFullSecurityEntitiesByIdents([FromForm] GetFullSecurityEntitiesByIdentsRequest request)
     {
         return this.Evaluate(

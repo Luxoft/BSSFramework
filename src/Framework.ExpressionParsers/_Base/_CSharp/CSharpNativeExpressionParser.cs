@@ -139,7 +139,7 @@ public class CSharpNativeExpressionParser : INativeExpressionParser
 
     public static readonly INativeExpressionParser Composite = new INativeExpressionParser[]
                                                                {
-                                                                       CSharpNativeExpressionParser.Default,
-                                                                       CSharpNativeExpressionParser.Compile
+                                                                       Default,
+                                                                       Compile
                                                                }.ToSafeComposite().WithCache();
 }

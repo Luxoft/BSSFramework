@@ -16,7 +16,7 @@ public class DefaultVisualDTOFileFactory<TConfiguration> : MainDTOFileFactory<TC
     protected override bool ConvertToStrict { get; } = false;
 
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
+    protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         foreach (var baseType in base.GetBaseTypes())
         {
@@ -29,7 +29,7 @@ public class DefaultVisualDTOFileFactory<TConfiguration> : MainDTOFileFactory<TC
         }
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
+    protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         foreach (var baseMember in base.GetMembers())
         {

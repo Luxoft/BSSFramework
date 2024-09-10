@@ -12,7 +12,7 @@ using SampleSystem.Domain.TestForceAbstract;
 
 namespace SampleSystem.WebApiCore.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class ClassAAsyncController : ControllerBase
 {
@@ -31,7 +31,7 @@ public class ClassAAsyncController : ControllerBase
     }
 
     [DBSessionMode(DBSessionMode.Write)]
-    [HttpPost(nameof(CreateClassA))]
+    [HttpPost]
     public async Task CreateClassA(int value, bool withSession, CancellationToken cancellationToken)
     {
         if (withSession)

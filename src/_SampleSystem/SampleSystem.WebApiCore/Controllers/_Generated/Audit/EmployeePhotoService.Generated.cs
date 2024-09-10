@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class EmployeePhotoController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get EmployeePhoto Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePhotoPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePhotoPropertyRevisionByDateRange(GetEmployeePhotoPropertyRevisionByDateRangeAutoRequest getEmployeePhotoPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getEmployeePhotoPropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get EmployeePhoto Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePhotoPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePhotoPropertyRevisions(GetEmployeePhotoPropertyRevisionsAutoRequest getEmployeePhotoPropertyRevisionsAutoRequest)
         {
             string propertyName = getEmployeePhotoPropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get EmployeePhoto revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePhotoRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeePhotoRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeePhotoRevisionsInternal(employeePhotoIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get EmployeePhoto (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeePhotoWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePhotoFullDTO GetFullEmployeePhotoWithRevision(GetFullEmployeePhotoWithRevisionAutoRequest getFullEmployeePhotoWithRevisionAutoRequest)
         {
             long revision = getFullEmployeePhotoWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get EmployeePhoto (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeePhotoWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePhotoRichDTO GetRichEmployeePhotoWithRevision(GetRichEmployeePhotoWithRevisionAutoRequest getRichEmployeePhotoWithRevisionAutoRequest)
         {
             long revision = getRichEmployeePhotoWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get EmployeePhoto (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeePhotoWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePhotoSimpleDTO GetSimpleEmployeePhotoWithRevision(GetSimpleEmployeePhotoWithRevisionAutoRequest getSimpleEmployeePhotoWithRevisionAutoRequest)
         {
             long revision = getSimpleEmployeePhotoWithRevisionAutoRequest.Revision;

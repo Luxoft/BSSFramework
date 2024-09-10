@@ -113,7 +113,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration> : ServerPropertyA
                        {
                                TrueStatements =
                                {
-                                       typeof(Framework.Core.EnumerableExtensions).ToTypeReferenceExpression()
+                                       typeof(Core.EnumerableExtensions).ToTypeReferenceExpression()
                                                                                   .ToMethodInvokeExpression(
                                                                                    "ToList",
                                                                                    sourcePropertyRef,
@@ -236,7 +236,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration> : ServerPropertyA
         joinStatement.Parameters.Add(new CodeSnippetExpression("(domainItem, dtoItem)=>new{domainItem, dtoItem}"));
 
         var foreachStatement =
-                typeof(Framework.Core.EnumerableExtensions)
+                typeof(Core.EnumerableExtensions)
                         .ToTypeReferenceExpression()
                         .ToMethodInvokeExpression("Foreach");
 

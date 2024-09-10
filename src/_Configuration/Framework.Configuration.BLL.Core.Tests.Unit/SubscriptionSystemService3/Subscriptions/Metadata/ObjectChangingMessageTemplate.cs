@@ -8,6 +8,6 @@ internal sealed class ObjectChangingMessageTemplate : RazorTemplate<object>
 
     public override void Execute()
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }

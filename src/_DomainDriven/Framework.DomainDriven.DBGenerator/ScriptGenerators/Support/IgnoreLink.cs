@@ -26,7 +26,7 @@ public class IgnoreLink
     }
     public static IgnoreLink Create<T>(Expression<Func<T, object>> collectionExpression)
     {
-        return IgnoreLink.Create<T, object>(collectionExpression);
+        return Create<T, object>(collectionExpression);
     }
     public static IgnoreLink CreateMany<T>(Expression<Func<T, IEnumerable<object>>> collectionExpression)
     {

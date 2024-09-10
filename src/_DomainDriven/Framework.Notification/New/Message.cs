@@ -37,7 +37,7 @@ public class Message
 
         if (!this.Receivers.Any())
         {
-            throw new System.ArgumentException("Collection 'Receivers' is empty", nameof(receivers));
+            throw new ArgumentException("Collection 'Receivers' is empty", nameof(receivers));
         }
 
         this.Subject = this.CutSubjectOnRight(this.ReplaceUnsupportedCharactersForSubject(subject));

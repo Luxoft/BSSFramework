@@ -24,8 +24,8 @@ public class CompanyLegalEntity :
         set { this.currentObj = value; }
     }
 
-    [Framework.Restriction.Required]
-    [Framework.Restriction.MaxLength(100)]
+    [Required]
+    [MaxLength(100)]
     public virtual string Code
     {
         get { return this.code; }

@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class TestPerformanceObjectController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get TestPerformanceObject (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullTestPerformanceObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO GetFullTestPerformanceObjectWithRevision(GetFullTestPerformanceObjectWithRevisionAutoRequest getFullTestPerformanceObjectWithRevisionAutoRequest)
         {
             long revision = getFullTestPerformanceObjectWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get TestPerformanceObject (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichTestPerformanceObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO GetRichTestPerformanceObjectWithRevision(GetRichTestPerformanceObjectWithRevisionAutoRequest getRichTestPerformanceObjectWithRevisionAutoRequest)
         {
             long revision = getRichTestPerformanceObjectWithRevisionAutoRequest.Revision;
@@ -50,7 +47,6 @@
         /// Get TestPerformanceObject (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleTestPerformanceObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO GetSimpleTestPerformanceObjectWithRevision(GetSimpleTestPerformanceObjectWithRevisionAutoRequest getSimpleTestPerformanceObjectWithRevisionAutoRequest)
         {
             long revision = getSimpleTestPerformanceObjectWithRevisionAutoRequest.Revision;
@@ -69,7 +65,6 @@
         /// Get TestPerformanceObject Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestPerformanceObjectPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestPerformanceObjectPropertyRevisionByDateRange(GetTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest getTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getTestPerformanceObjectPropertyRevisionByDateRangeAutoRequest.Period;
@@ -88,7 +83,6 @@
         /// Get TestPerformanceObject Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestPerformanceObjectPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestPerformanceObjectPropertyRevisions(GetTestPerformanceObjectPropertyRevisionsAutoRequest getTestPerformanceObjectPropertyRevisionsAutoRequest)
         {
             string propertyName = getTestPerformanceObjectPropertyRevisionsAutoRequest.PropertyName;
@@ -106,7 +100,6 @@
         /// Get TestPerformanceObject revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestPerformanceObjectRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestPerformanceObjectRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestPerformanceObjectRevisionsInternal(testPerformanceObjectIdentity, evaluateData));
@@ -122,7 +115,6 @@
         /// Get TestPerformanceObject (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualTestPerformanceObjectWithRevision")]
         public virtual SampleSystem.Generated.DTO.TestPerformanceObjectVisualDTO GetVisualTestPerformanceObjectWithRevision(GetVisualTestPerformanceObjectWithRevisionAutoRequest getVisualTestPerformanceObjectWithRevisionAutoRequest)
         {
             long revision = getVisualTestPerformanceObjectWithRevisionAutoRequest.Revision;

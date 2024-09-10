@@ -47,7 +47,7 @@ public class NHibSessionEnvironment : IDisposable
 
         if (cachedMappingSettings.SelectMany(z => new[] { z.Database, z.AuditDatabase }).Where(z => null != z).Distinct().Count() == 1)
         {
-            throw new System.ArgumentException("All mapping settings has equal database with schema. Utilities has domain object with same names");
+            throw new ArgumentException("All mapping settings has equal database with schema. Utilities has domain object with same names");
         }
 
         try

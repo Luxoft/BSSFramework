@@ -33,7 +33,7 @@ public abstract class IntegrationGeneratorConfigurationBase<TEnvironment> : Gene
         return base.GetDomainTypes().Where(domainType => !domainType.IsProjection());
     }
 
-    public override IEnumerable<IServiceMethodGenerator> GetMethodGenerators(System.Type domainType)
+    public override IEnumerable<IServiceMethodGenerator> GetMethodGenerators(Type domainType)
     {
         {
             var singleSaveGenerator = new IntegrationSaveMethodGenerator<IntegrationGeneratorConfigurationBase<TEnvironment>>(this, domainType);

@@ -16,7 +16,7 @@ public abstract record SecurityPath<TDomainObject>
     public abstract SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
         Expression<Func<TNewDomainObject, TDomainObject>> selector);
 
-    public static SecurityPath<TDomainObject> Empty { get; } = SecurityPath<TDomainObject>.Condition(_ => true);
+    public static SecurityPath<TDomainObject> Empty { get; } = Condition(_ => true);
 
     protected abstract IEnumerable<Type> GetInternalUsedTypes();
 
@@ -107,7 +107,7 @@ public abstract record SecurityPath<TDomainObject>
             new SecurityPath<TNewDomainObject>.ConditionPath(this.SecurityFilter.OverrideInput(selector));
 
         public virtual bool Equals(ConditionPath? other) =>
-            object.ReferenceEquals(this, other)
+            ReferenceEquals(this, other)
             || (other is not null && ExpressionComparer.Value.Equals(this.SecurityFilter, other.SecurityFilter));
 
         public override int GetHashCode() => 0;
@@ -150,7 +150,7 @@ public abstract record SecurityPath<TDomainObject>
                 this.Mode);
 
         public virtual bool Equals(SingleSecurityPath<TSecurityContext>? other) =>
-            object.ReferenceEquals(this, other)
+            ReferenceEquals(this, other)
             || (other is not null
                 && this.Mode == other.Mode
                 && ExpressionComparer.Value.Equals(this.SecurityPath, other.SecurityPath));
@@ -196,7 +196,7 @@ public abstract record SecurityPath<TDomainObject>
                 this.Mode);
 
         public virtual bool Equals(ManySecurityPath<TSecurityContext>? other) =>
-            object.ReferenceEquals(this, other)
+            ReferenceEquals(this, other)
             || (other is not null
                 && this.Mode == other.Mode
                 && ExpressionComparer.Value.Equals(this.SecurityPath, other.SecurityPath));
@@ -219,7 +219,7 @@ public abstract record SecurityPath<TDomainObject>
                 this.Mode);
 
         public virtual bool Equals(NestedManySecurityPath<TNestedObject>? other) =>
-            object.ReferenceEquals(this, other)
+            ReferenceEquals(this, other)
             || (other is not null
                 && this.Mode == other.Mode
                 && this.NestedSecurityPath == other.NestedSecurityPath

@@ -7,7 +7,7 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class TestRepositoryController : ControllerBase
 {
@@ -19,7 +19,7 @@ public class TestRepositoryController : ControllerBase
     }
 
     [DBSessionMode(DBSessionMode.Read)]
-    [HttpPost(nameof(LoadPair))]
+    [HttpPost]
     public async Task<(List<EmployeeIdentityDTO> Employees, List<BusinessUnitIdentityDTO> BusinessUnits)> LoadPair(CancellationToken cancellationToken = default)
     {
         var pair = await this.exampleService.LoadPair(cancellationToken);

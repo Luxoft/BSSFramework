@@ -40,14 +40,14 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
     }
 
 
-    protected override System.Collections.Generic.IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
+    protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {
         yield return this.Configuration.GetDTOFileAttribute(this.DomainType, this.FileType);
         yield return this.GetDataContractCodeAttributeDeclaration(this.Configuration.EventDataContractNamespace);
     }
 
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
+    protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         var fieldTypeRef = this.Configuration.GetCodeTypeReference(this.DomainType, ServerFileType.RichEventDTO);
 

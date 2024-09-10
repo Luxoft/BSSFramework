@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class EmployeeRegistrationTypeController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get EmployeeRegistrationType Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRegistrationTypePropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeRegistrationTypePropertyRevisionByDateRange(GetEmployeeRegistrationTypePropertyRevisionByDateRangeAutoRequest getEmployeeRegistrationTypePropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getEmployeeRegistrationTypePropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get EmployeeRegistrationType Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRegistrationTypePropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeRegistrationTypePropertyRevisions(GetEmployeeRegistrationTypePropertyRevisionsAutoRequest getEmployeeRegistrationTypePropertyRevisionsAutoRequest)
         {
             string propertyName = getEmployeeRegistrationTypePropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get EmployeeRegistrationType revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeRegistrationTypeRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeeRegistrationTypeRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeRegistrationTypeRevisionsInternal(employeeRegistrationTypeIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get EmployeeRegistrationType (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeeRegistrationTypeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO GetFullEmployeeRegistrationTypeWithRevision(GetFullEmployeeRegistrationTypeWithRevisionAutoRequest getFullEmployeeRegistrationTypeWithRevisionAutoRequest)
         {
             long revision = getFullEmployeeRegistrationTypeWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get EmployeeRegistrationType (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeeRegistrationTypeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeRichDTO GetRichEmployeeRegistrationTypeWithRevision(GetRichEmployeeRegistrationTypeWithRevisionAutoRequest getRichEmployeeRegistrationTypeWithRevisionAutoRequest)
         {
             long revision = getRichEmployeeRegistrationTypeWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get EmployeeRegistrationType (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeeRegistrationTypeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO GetSimpleEmployeeRegistrationTypeWithRevision(GetSimpleEmployeeRegistrationTypeWithRevisionAutoRequest getSimpleEmployeeRegistrationTypeWithRevisionAutoRequest)
         {
             long revision = getSimpleEmployeeRegistrationTypeWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get EmployeeRegistrationType (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeeRegistrationTypeWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO GetVisualEmployeeRegistrationTypeWithRevision(GetVisualEmployeeRegistrationTypeWithRevisionAutoRequest getVisualEmployeeRegistrationTypeWithRevisionAutoRequest)
         {
             long revision = getVisualEmployeeRegistrationTypeWithRevisionAutoRequest.Revision;

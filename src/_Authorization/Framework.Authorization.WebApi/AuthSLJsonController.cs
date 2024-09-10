@@ -10,7 +10,7 @@ namespace Framework.Authorization.WebApi;
 [SLJsonCompatibilityActionFilter]
 [TypeFilter(typeof(SLJsonCompatibilityResourceFilter))]
 [ApiController]
-[Route("api/AuthSLJsonFacade.svc")]
+[Route("api/AuthSLJsonFacade.svc/[action]")]
 [ApiExplorerSettings(IgnoreApi = true)]
 //[Authorize(nameof(AuthenticationSchemes.NTLM))]
 public abstract partial class AuthSLJsonController : ApiControllerBase<IAuthorizationBLLContext, IAuthorizationDTOMappingService>

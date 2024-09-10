@@ -4,7 +4,7 @@ using SampleSystem.Domain.UniqueByMaster;
 
 namespace SampleSystem.Domain.UniqueByParent;
 
-[UniqueGroup(nameof(ChildEntity.Parent))]
+[UniqueGroup(nameof(Parent))]
 public class ChildEntity : AuditPersistentDomainObjectBase
 {
     private readonly ParentEntity parent;

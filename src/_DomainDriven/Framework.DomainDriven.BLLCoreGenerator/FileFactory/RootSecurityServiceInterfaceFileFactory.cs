@@ -26,7 +26,7 @@ public class RootSecurityServiceInterfaceFileFactory<TConfiguration> : FileFacto
                };
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
+    protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         yield return this.Configuration.RootSecurityServerGenerator.GetGenericRootSecurityServiceInterfaceType();
         yield return this.Configuration.GetCodeTypeReference(null, FileType.RootSecurityServicePathContainerInterface);

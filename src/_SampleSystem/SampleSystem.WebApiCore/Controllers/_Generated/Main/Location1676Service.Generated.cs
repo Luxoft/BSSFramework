@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Main
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("api/[controller]/[action]")]
     public partial class Location1676Controller : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get Location1676 (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullLocation1676")]
         public virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullLocation1676Internal(location1676Identity, evaluateData));
@@ -22,7 +20,6 @@
         /// Get Location1676 (FullDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullLocation1676ByName")]
         public virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676ByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string location1676Name)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullLocation1676ByNameInternal(location1676Name, evaluateData));
@@ -46,7 +43,6 @@
         /// Get full list of Location1676s (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullLocation1676s")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676FullDTO> GetFullLocation1676s()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullLocation1676sInternal(evaluateData));
@@ -56,7 +52,6 @@
         /// Get Location1676s (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullLocation1676sByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676FullDTO> GetFullLocation1676sByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Location1676IdentityDTO[] location1676Idents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullLocation1676sByIdentsInternal(location1676Idents, evaluateData));
@@ -78,7 +73,6 @@
         /// Get Location1676 (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichLocation1676")]
         public virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichLocation1676Internal(location1676Identity, evaluateData));
@@ -88,7 +82,6 @@
         /// Get Location1676 (RichDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichLocation1676ByName")]
         public virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676ByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string location1676Name)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichLocation1676ByNameInternal(location1676Name, evaluateData));
@@ -112,7 +105,6 @@
         /// Get Location1676 (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleLocation1676")]
         public virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676Internal(location1676Identity, evaluateData));
@@ -122,7 +114,6 @@
         /// Get Location1676 (SimpleDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleLocation1676ByName")]
         public virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676ByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string location1676Name)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676ByNameInternal(location1676Name, evaluateData));
@@ -146,7 +137,6 @@
         /// Get full list of Location1676s (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleLocation1676s")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676SimpleDTO> GetSimpleLocation1676s()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676sInternal(evaluateData));
@@ -156,7 +146,6 @@
         /// Get Location1676s (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleLocation1676sByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676SimpleDTO> GetSimpleLocation1676sByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Location1676IdentityDTO[] location1676Idents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676sByIdentsInternal(location1676Idents, evaluateData));
@@ -178,7 +167,6 @@
         /// Get Location1676 (VisualDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualLocation1676")]
         public virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676Internal(location1676Identity, evaluateData));
@@ -188,7 +176,6 @@
         /// Get Location1676 (VisualDTO) by name
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualLocation1676ByName")]
         public virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676ByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string location1676Name)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676ByNameInternal(location1676Name, evaluateData));
@@ -212,7 +199,6 @@
         /// Get full list of Location1676s (VisualDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualLocation1676s")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676VisualDTO> GetVisualLocation1676s()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676sInternal(evaluateData));
@@ -222,7 +208,6 @@
         /// Get Location1676s (VisualDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualLocation1676sByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676VisualDTO> GetVisualLocation1676sByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Location1676IdentityDTO[] location1676Idents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676sByIdentsInternal(location1676Idents, evaluateData));

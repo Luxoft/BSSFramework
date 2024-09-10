@@ -11,7 +11,7 @@ public class AnonymousTypeBuilderStorageFactory
 
     public IAnonymousTypeBuilderStorage Create(string assemblyBuilderName)
     {
-        return AnonymousTypeBuilderStorageFactory.ConcurrentDictionary.GetOrAdd(
+        return ConcurrentDictionary.GetOrAdd(
                                                                                 assemblyBuilderName,
                                                                                 builderName => new AnonymousTypeBuilderStorage(builderName));
     }

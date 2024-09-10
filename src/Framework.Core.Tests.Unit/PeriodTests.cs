@@ -14,7 +14,7 @@ public class PeriodTests
     [SetUp]
     public void Setup()
     {
-        System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("ru-ru");
+        Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("ru-ru");
     }
 
     [Test]

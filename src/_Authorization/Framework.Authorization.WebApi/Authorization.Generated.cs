@@ -17,7 +17,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRole (FullDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullBusinessRole))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRole([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRoleInternal(businessRoleIdentity, evaluateData));
@@ -26,7 +26,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRole (FullDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullBusinessRoleByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string businessRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRoleByNameInternal(businessRoleName, evaluateData));
@@ -49,7 +49,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of BusinessRoles (FullDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullBusinessRoles))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRoles()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRolesInternal(evaluateData));
@@ -58,7 +58,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRoles (FullDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullBusinessRolesByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRolesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
@@ -79,7 +79,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRole (RichDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichBusinessRole))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRole([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichBusinessRoleInternal(businessRoleIdentity, evaluateData));
@@ -88,7 +88,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRole (RichDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichBusinessRoleByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string businessRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichBusinessRoleByNameInternal(businessRoleName, evaluateData));
@@ -111,7 +111,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRole (SimpleDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleBusinessRole))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRole([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRoleInternal(businessRoleIdentity, evaluateData));
@@ -120,7 +120,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRole (SimpleDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleBusinessRoleByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string businessRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRoleByNameInternal(businessRoleName, evaluateData));
@@ -143,7 +143,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of BusinessRoles (SimpleDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleBusinessRoles))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRoles()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRolesInternal(evaluateData));
@@ -152,7 +152,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRoles (SimpleDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleBusinessRolesByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRolesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
@@ -173,7 +173,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRole (VisualDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualBusinessRole))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRole([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRoleInternal(businessRoleIdentity, evaluateData));
@@ -182,7 +182,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRole (VisualDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualBusinessRoleByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string businessRoleName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRoleByNameInternal(businessRoleName, evaluateData));
@@ -205,7 +205,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of BusinessRoles (VisualDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualBusinessRoles))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRoles()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRolesInternal(evaluateData));
@@ -214,7 +214,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get BusinessRoles (VisualDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualBusinessRolesByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRolesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
@@ -239,7 +239,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Permission (FullDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullPermission))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PermissionFullDTO GetFullPermission([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPermissionInternal(permissionIdentity, evaluateData));
@@ -255,7 +255,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of Permissions (FullDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullPermissions))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionFullDTO> GetFullPermissions()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPermissionsInternal(evaluateData));
@@ -264,7 +264,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Permissions (FullDTO) by filter (Framework.Authorization.Domain.PermissionDirectFilterModel)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullPermissionsByDirectFilter))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionFullDTO> GetFullPermissionsByDirectFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionDirectFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPermissionsByDirectFilterInternal(filter, evaluateData));
@@ -280,7 +280,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Permissions (FullDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullPermissionsByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionFullDTO> GetFullPermissionsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO[] permissionIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPermissionsByIdentsInternal(permissionIdents, evaluateData));
@@ -301,7 +301,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Permission (RichDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichPermission))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PermissionRichDTO GetRichPermission([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichPermissionInternal(permissionIdentity, evaluateData));
@@ -317,7 +317,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of Permissions (RichDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichPermissions))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionRichDTO> GetRichPermissions()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichPermissionsInternal(evaluateData));
@@ -326,7 +326,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Permissions (RichDTO) by filter (Framework.Authorization.Domain.PermissionDirectFilterModel)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichPermissionsByDirectFilter))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionRichDTO> GetRichPermissionsByDirectFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionDirectFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichPermissionsByDirectFilterInternal(filter, evaluateData));
@@ -342,7 +342,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Permissions (RichDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichPermissionsByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionRichDTO> GetRichPermissionsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO[] permissionIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichPermissionsByIdentsInternal(permissionIdents, evaluateData));
@@ -363,7 +363,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Permission (SimpleDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimplePermission))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PermissionSimpleDTO GetSimplePermission([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePermissionInternal(permissionIdentity, evaluateData));
@@ -379,7 +379,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of Permissions (SimpleDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimplePermissions))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionSimpleDTO> GetSimplePermissions()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePermissionsInternal(evaluateData));
@@ -388,7 +388,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Permissions (SimpleDTO) by filter (Framework.Authorization.Domain.PermissionDirectFilterModel)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimplePermissionsByDirectFilter))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionSimpleDTO> GetSimplePermissionsByDirectFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionDirectFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePermissionsByDirectFilterInternal(filter, evaluateData));
@@ -404,7 +404,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Permissions (SimpleDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimplePermissionsByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionSimpleDTO> GetSimplePermissionsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO[] permissionIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePermissionsByIdentsInternal(permissionIdents, evaluateData));
@@ -425,7 +425,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Remove Permission
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(RemovePermission))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual void RemovePermission([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent)
         {
             this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemovePermissionInternal(permissionIdent, evaluateData));
@@ -450,7 +450,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principal (FullDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullPrincipal))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PrincipalFullDTO GetFullPrincipal([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPrincipalInternal(principalIdentity, evaluateData));
@@ -459,7 +459,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principal (FullDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullPrincipalByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PrincipalFullDTO GetFullPrincipalByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string principalName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPrincipalByNameInternal(principalName, evaluateData));
@@ -482,7 +482,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of Principals (FullDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullPrincipals))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalFullDTO> GetFullPrincipals()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPrincipalsInternal(evaluateData));
@@ -491,7 +491,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principals (FullDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullPrincipalsByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPrincipalsByIdentsInternal(principalIdents, evaluateData));
@@ -512,7 +512,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principal (RichDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichPrincipal))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PrincipalRichDTO GetRichPrincipal([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichPrincipalInternal(principalIdentity, evaluateData));
@@ -521,7 +521,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principal (RichDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichPrincipalByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PrincipalRichDTO GetRichPrincipalByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string principalName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichPrincipalByNameInternal(principalName, evaluateData));
@@ -544,7 +544,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principal (SimpleDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimplePrincipal))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PrincipalSimpleDTO GetSimplePrincipal([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePrincipalInternal(principalIdentity, evaluateData));
@@ -553,7 +553,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principal (SimpleDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimplePrincipalByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PrincipalSimpleDTO GetSimplePrincipalByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string principalName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePrincipalByNameInternal(principalName, evaluateData));
@@ -576,7 +576,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of Principals (SimpleDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimplePrincipals))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipals()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePrincipalsInternal(evaluateData));
@@ -585,7 +585,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principals (SimpleDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimplePrincipalsByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePrincipalsByIdentsInternal(principalIdents, evaluateData));
@@ -606,7 +606,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principal (VisualDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualPrincipal))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PrincipalVisualDTO GetVisualPrincipal([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualPrincipalInternal(principalIdentity, evaluateData));
@@ -615,7 +615,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principal (VisualDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualPrincipalByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PrincipalVisualDTO GetVisualPrincipalByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string principalName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualPrincipalByNameInternal(principalName, evaluateData));
@@ -638,7 +638,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of Principals (VisualDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualPrincipals))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalVisualDTO> GetVisualPrincipals()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualPrincipalsInternal(evaluateData));
@@ -647,7 +647,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get Principals (VisualDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualPrincipalsByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalVisualDTO> GetVisualPrincipalsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualPrincipalsByIdentsInternal(principalIdents, evaluateData));
@@ -668,7 +668,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Remove Principal
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(RemovePrincipal))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual void RemovePrincipal([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent)
         {
             this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemovePrincipalInternal(principalIdent, evaluateData));
@@ -689,7 +689,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Save Principals
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(SavePrincipal))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.PrincipalIdentityDTO SavePrincipal([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalStrictDTO principalStrict)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SavePrincipalInternal(principalStrict, evaluateData));
@@ -716,7 +716,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextType (FullDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSecurityContextType))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO GetFullSecurityContextType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
@@ -725,7 +725,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextType (FullDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSecurityContextTypeByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO GetFullSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityContextTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
@@ -748,7 +748,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of SecurityContextTypes (FullDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSecurityContextTypes))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypes()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypesInternal(evaluateData));
@@ -757,7 +757,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextTypes (FullDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSecurityContextTypesByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSecurityContextTypesByIdentsInternal(securityContextTypeIdents, evaluateData));
@@ -778,7 +778,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextType (RichDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichSecurityContextType))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO GetRichSecurityContextType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
@@ -787,7 +787,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextType (RichDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichSecurityContextTypeByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO GetRichSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityContextTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
@@ -810,7 +810,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextType (SimpleDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSecurityContextType))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO GetSimpleSecurityContextType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
@@ -819,7 +819,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextType (SimpleDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSecurityContextTypeByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO GetSimpleSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityContextTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
@@ -842,7 +842,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of SecurityContextTypes (SimpleDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSecurityContextTypes))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypes()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypesInternal(evaluateData));
@@ -851,7 +851,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextTypes (SimpleDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSecurityContextTypesByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSecurityContextTypesByIdentsInternal(securityContextTypeIdents, evaluateData));
@@ -872,7 +872,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextType (VisualDTO) by identity
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSecurityContextType))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO GetVisualSecurityContextType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypeInternal(securityContextTypeIdentity, evaluateData));
@@ -881,7 +881,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextType (VisualDTO) by name
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSecurityContextTypeByName))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO GetVisualSecurityContextTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityContextTypeName)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypeByNameInternal(securityContextTypeName, evaluateData));
@@ -904,7 +904,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get full list of SecurityContextTypes (VisualDTO)
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSecurityContextTypes))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypes()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypesInternal(evaluateData));
@@ -913,7 +913,7 @@ namespace Framework.Authorization.WebApi
         /// <summary>
         /// Get SecurityContextTypes (VisualDTO) by idents
         /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSecurityContextTypesByIdents))]
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSecurityContextTypesByIdentsInternal(securityContextTypeIdents, evaluateData));

@@ -7,7 +7,7 @@ public struct TypeEvent
 {
     public static TypeEvent SaveAndRemove<T>(Func<T, bool> isSaveProcessingFunc = null, Func<T, bool> isRemoveProcessingFunc = null)
     {
-        return TypeEvent.Create(
+        return Create(
             [EventOperation.Save, EventOperation.Remove],
             isSaveProcessingFunc,
             isRemoveProcessingFunc);
@@ -15,7 +15,7 @@ public struct TypeEvent
 
     public static TypeEvent Save<T>(Func<T, bool> isSaveFunc = null)
     {
-        return TypeEvent.Create(EventOperation.Save, isSaveFunc);
+        return Create(EventOperation.Save, isSaveFunc);
     }
 
     public static TypeEvent Create<T>(

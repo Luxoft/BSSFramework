@@ -3,7 +3,7 @@
 namespace Framework.QueryLanguage;
 
 [DataContract]
-public class GuidConstantExpression : ConstantExpression<System.Guid>
+public class GuidConstantExpression : ConstantExpression<Guid>
 {
     public GuidConstantExpression(Guid value)
             : base(value)

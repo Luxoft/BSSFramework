@@ -30,7 +30,7 @@ internal static class DomainTypeMetadataExtension
 
                       select fieldMetaData;
 
-        return request.Single(() => new System.ArgumentException (
+        return request.Single(() => new ArgumentException (
                                                                   $"Domain type {source.DomainType.Name} has no identity field"));
 
 

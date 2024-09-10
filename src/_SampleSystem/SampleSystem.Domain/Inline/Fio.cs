@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 
 using Framework.Core;
+using Framework.Restriction;
 using Framework.Validation;
 
 namespace SampleSystem.Domain.Inline;
@@ -12,7 +13,7 @@ public class Fio : FioShort, ICloneable<Fio>
     private string middleName;
 
 
-    [Framework.Restriction.MaxLength(50)]
+    [MaxLength(50)]
     [DataMember]
     public string MiddleName
     {
@@ -57,7 +58,7 @@ public class Fio : FioShort, ICloneable<Fio>
 
     public static bool operator ==(Fio v1, Fio v2)
     {
-        return object.ReferenceEquals(v1, v2) || (!object.ReferenceEquals(v1, null) && v1.Equals(v2));
+        return ReferenceEquals(v1, v2) || (!ReferenceEquals(v1, null) && v1.Equals(v2));
     }
 
     public static bool operator !=(Fio v1, Fio v2)

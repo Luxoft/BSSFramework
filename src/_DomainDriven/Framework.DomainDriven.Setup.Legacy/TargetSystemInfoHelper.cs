@@ -14,7 +14,7 @@ public static class TargetSystemInfoHelper
         false,
         PersistentHelper.BaseTypes.Select(pair => new DomainTypeInfo(pair.Key, pair.Value)).ToList());
 
-    public static TargetSystemInfo<Framework.Authorization.Domain.PersistentDomainObjectBase> Authorization { get; } = new(
+    public static TargetSystemInfo<Authorization.Domain.PersistentDomainObjectBase> Authorization { get; } = new(
         nameof(Authorization),
         new Guid("{f065289e-4dc5-48c9-be44-a2ee0131e631}"),
         false,
@@ -25,7 +25,7 @@ public static class TargetSystemInfoHelper
             new (typeof(Principal), new Guid("{fa27cd64-c5e6-4356-9efa-a35b00ff69dd}"))
         ]);
 
-    public static TargetSystemInfo<Framework.Configuration.Domain.PersistentDomainObjectBase> Configuration { get; } = new(
+    public static TargetSystemInfo<Configuration.Domain.PersistentDomainObjectBase> Configuration { get; } = new(
         nameof(Configuration),
         new Guid("{50465868-4B49-42CF-A702-A39400E6C317}"),
         false,

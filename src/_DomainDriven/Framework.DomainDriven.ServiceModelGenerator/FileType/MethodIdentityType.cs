@@ -148,7 +148,7 @@ public class MethodIdentityType : IEquatable<MethodIdentityType>
 
     public virtual bool Equals(MethodIdentityType other)
     {
-        return !object.ReferenceEquals(other, null) && this.Name.Equals(other.Name, StringComparison.CurrentCultureIgnoreCase);
+        return !ReferenceEquals(other, null) && this.Name.Equals(other.Name, StringComparison.CurrentCultureIgnoreCase);
     }
 
     public override bool Equals(object obj)
@@ -185,8 +185,8 @@ public class MethodIdentityType : IEquatable<MethodIdentityType>
 
     public static bool operator ==(MethodIdentityType fileType, MethodIdentityType other)
     {
-        return object.ReferenceEquals(fileType, other)
-               || (!object.ReferenceEquals(fileType, null) && fileType.Equals(other));
+        return ReferenceEquals(fileType, other)
+               || (!ReferenceEquals(fileType, null) && fileType.Equals(other));
     }
 
     public static bool operator !=(MethodIdentityType fileType, MethodIdentityType other)

@@ -47,7 +47,7 @@ public abstract class IntegrationTestBase : RootServiceProviderContainer
     {
         if (this.AutomationFrameworkSettings.UseLocalDb || this.AutomationFrameworkSettings.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase)
         {
-            AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
+            AssemblyInitializeAndCleanupBase.RunAction("Drop Database", this.DatabaseContext.Drop);
         }
     }
 
@@ -60,8 +60,8 @@ public abstract class IntegrationTestBase : RootServiceProviderContainer
         {
             case TestRunMode.DefaultRunModeOnEmptyDatabase:
             case TestRunMode.RestoreDatabaseUsingAttach:
-                AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
-                AssemblyInitializeAndCleanup.RunAction("Restore Databases", this.DatabaseContext.AttachDatabase);
+                AssemblyInitializeAndCleanupBase.RunAction("Drop Database", this.DatabaseContext.Drop);
+                AssemblyInitializeAndCleanupBase.RunAction("Restore Databases", this.DatabaseContext.AttachDatabase);
                 break;
         }
     }

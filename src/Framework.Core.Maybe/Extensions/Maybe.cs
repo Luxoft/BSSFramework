@@ -39,7 +39,7 @@ public static class Maybe
     {
         if (getJustValue == null) throw new ArgumentNullException(nameof(getJustValue));
 
-        return OfCondition(condition, () => Maybe.Return(getJustValue()), () => Maybe<T>.Nothing);
+        return OfCondition(condition, () => Return(getJustValue()), () => Maybe<T>.Nothing);
     }
 
 

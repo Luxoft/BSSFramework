@@ -1,6 +1,6 @@
 ﻿namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
-using Framework.DomainDriven.UnitTest.Mock;
+using UnitTest.Mock;
 
 public class InvoicingTestConfiguration : BLLContextConfiguration<TestBllContext, PersistentDomainObjectBase>
 {

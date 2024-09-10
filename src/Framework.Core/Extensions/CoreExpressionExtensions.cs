@@ -62,7 +62,7 @@ public static class CoreExpressionExtensions
         if (expr == null) throw new ArgumentNullException(nameof(expr));
 
         return expr.Body.GetMember().Select(member => member.Name)
-                   .GetValue(() => new System.ArgumentException("not member expression", nameof(expr)));
+                   .GetValue(() => new ArgumentException("not member expression", nameof(expr)));
     }
 
     public static PropertyInfo GetProperty<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
@@ -75,7 +75,7 @@ public static class CoreExpressionExtensions
 
                       select property;
 
-        return request.GetValue(() => new System.ArgumentException("not property expression", nameof(expr)));
+        return request.GetValue(() => new ArgumentException("not property expression", nameof(expr)));
     }
 
     public static FieldInfo GetField<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
@@ -88,7 +88,7 @@ public static class CoreExpressionExtensions
 
                       select field;
 
-        return request.GetValue(() => new System.ArgumentException("not field expression", nameof(expr)));
+        return request.GetValue(() => new ArgumentException("not field expression", nameof(expr)));
     }
 
     /// <summary>

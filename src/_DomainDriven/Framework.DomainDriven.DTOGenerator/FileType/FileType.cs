@@ -62,7 +62,7 @@ public class FileType : IEquatable<FileType>
 
     public virtual bool Equals(FileType other)
     {
-        return !object.ReferenceEquals(other, null) && this.Name.Equals(other.Name, StringComparison.CurrentCultureIgnoreCase);
+        return !ReferenceEquals(other, null) && this.Name.Equals(other.Name, StringComparison.CurrentCultureIgnoreCase);
     }
 
     public override bool Equals(object obj)
@@ -83,8 +83,8 @@ public class FileType : IEquatable<FileType>
 
     public static bool operator ==(FileType fileType, FileType other)
     {
-        return object.ReferenceEquals(fileType, other)
-               || (!object.ReferenceEquals(fileType, null) && fileType.Equals(other));
+        return ReferenceEquals(fileType, other)
+               || (!ReferenceEquals(fileType, null) && fileType.Equals(other));
     }
 
     public static bool operator !=(FileType fileType, FileType other)
@@ -97,28 +97,28 @@ public class FileType : IEquatable<FileType>
         switch (dtoType)
         {
             case DTOType.IdentityDTO:
-                return DTOGenerator.FileType.IdentityDTO;
+                return IdentityDTO;
 
             case DTOType.VisualDTO:
-                return DTOGenerator.FileType.VisualDTO;
+                return VisualDTO;
 
             case DTOType.SimpleDTO:
-                return DTOGenerator.FileType.SimpleDTO;
+                return SimpleDTO;
 
             case DTOType.FullDTO:
-                return DTOGenerator.FileType.FullDTO;
+                return FullDTO;
 
             case DTOType.RichDTO:
-                return DTOGenerator.FileType.RichDTO;
+                return RichDTO;
 
             case DTOType.StrictDTO:
-                return DTOGenerator.FileType.StrictDTO;
+                return StrictDTO;
 
             case DTOType.UpdateDTO:
-                return DTOGenerator.FileType.UpdateDTO;
+                return UpdateDTO;
 
             case DTOType.ProjectionDTO:
-                return DTOGenerator.FileType.ProjectionDTO;
+                return ProjectionDTO;
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(dtoType));
@@ -130,16 +130,16 @@ public class FileType : IEquatable<FileType>
         switch (dtoType)
         {
             case MainDTOType.VisualDTO:
-                return DTOGenerator.FileType.VisualDTO;
+                return VisualDTO;
 
             case MainDTOType.SimpleDTO:
-                return DTOGenerator.FileType.SimpleDTO;
+                return SimpleDTO;
 
             case MainDTOType.FullDTO:
-                return DTOGenerator.FileType.FullDTO;
+                return FullDTO;
 
             case MainDTOType.RichDTO:
-                return DTOGenerator.FileType.RichDTO;
+                return RichDTO;
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(dtoType));
@@ -151,19 +151,19 @@ public class FileType : IEquatable<FileType>
         switch (dtoType)
         {
             case ViewDTOType.VisualDTO:
-                return DTOGenerator.FileType.VisualDTO;
+                return VisualDTO;
 
             case ViewDTOType.SimpleDTO:
-                return DTOGenerator.FileType.SimpleDTO;
+                return SimpleDTO;
 
             case ViewDTOType.FullDTO:
-                return DTOGenerator.FileType.FullDTO;
+                return FullDTO;
 
             case ViewDTOType.RichDTO:
-                return DTOGenerator.FileType.RichDTO;
+                return RichDTO;
 
             case ViewDTOType.ProjectionDTO:
-                return DTOGenerator.FileType.ProjectionDTO;
+                return ProjectionDTO;
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(dtoType));

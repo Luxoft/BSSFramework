@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class LocationController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get Location (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullLocationWithRevision")]
         public virtual SampleSystem.Generated.DTO.LocationFullDTO GetFullLocationWithRevision(GetFullLocationWithRevisionAutoRequest getFullLocationWithRevisionAutoRequest)
         {
             long revision = getFullLocationWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get Location Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetLocationPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocationPropertyRevisionByDateRange(GetLocationPropertyRevisionByDateRangeAutoRequest getLocationPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getLocationPropertyRevisionByDateRangeAutoRequest.Period;
@@ -50,7 +47,6 @@
         /// Get Location Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetLocationPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocationPropertyRevisions(GetLocationPropertyRevisionsAutoRequest getLocationPropertyRevisionsAutoRequest)
         {
             string propertyName = getLocationPropertyRevisionsAutoRequest.PropertyName;
@@ -68,7 +64,6 @@
         /// Get Location revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetLocationRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetLocationRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.LocationIdentityDTO locationIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetLocationRevisionsInternal(locationIdentity, evaluateData));
@@ -84,7 +79,6 @@
         /// Get Location (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichLocationWithRevision")]
         public virtual SampleSystem.Generated.DTO.LocationRichDTO GetRichLocationWithRevision(GetRichLocationWithRevisionAutoRequest getRichLocationWithRevisionAutoRequest)
         {
             long revision = getRichLocationWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get Location (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleLocationWithRevision")]
         public virtual SampleSystem.Generated.DTO.LocationSimpleDTO GetSimpleLocationWithRevision(GetSimpleLocationWithRevisionAutoRequest getSimpleLocationWithRevisionAutoRequest)
         {
             long revision = getSimpleLocationWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get Location (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualLocationWithRevision")]
         public virtual SampleSystem.Generated.DTO.LocationVisualDTO GetVisualLocationWithRevision(GetVisualLocationWithRevisionAutoRequest getVisualLocationWithRevisionAutoRequest)
         {
             long revision = getVisualLocationWithRevisionAutoRequest.Revision;

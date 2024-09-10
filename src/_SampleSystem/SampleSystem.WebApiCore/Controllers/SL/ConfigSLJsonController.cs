@@ -8,7 +8,7 @@ namespace SampleSystem.WebApiCore.Controllers;
 
 public class ConfigSLJsonController : Framework.Configuration.WebApi.ConfigSLJsonController
 {
-    [HttpPost(nameof(SaveSendedNotification))]
+    [HttpPost]
     public void SaveSendedNotification(NotificationEventDTO notification)
     {
         if (notification == null)

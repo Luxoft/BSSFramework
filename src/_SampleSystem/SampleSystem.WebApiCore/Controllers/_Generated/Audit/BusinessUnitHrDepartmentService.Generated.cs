@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class BusinessUnitHrDepartmentController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get BusinessUnitHrDepartment Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitHrDepartmentPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitHrDepartmentPropertyRevisionByDateRange(GetBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get BusinessUnitHrDepartment Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitHrDepartmentPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitHrDepartmentPropertyRevisions(GetBusinessUnitHrDepartmentPropertyRevisionsAutoRequest getBusinessUnitHrDepartmentPropertyRevisionsAutoRequest)
         {
             string propertyName = getBusinessUnitHrDepartmentPropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get BusinessUnitHrDepartment revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitHrDepartmentRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetBusinessUnitHrDepartmentRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitHrDepartmentRevisionsInternal(businessUnitHrDepartmentIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get BusinessUnitHrDepartment (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessUnitHrDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentFullDTO GetFullBusinessUnitHrDepartmentWithRevision(GetFullBusinessUnitHrDepartmentWithRevisionAutoRequest getFullBusinessUnitHrDepartmentWithRevisionAutoRequest)
         {
             long revision = getFullBusinessUnitHrDepartmentWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get BusinessUnitHrDepartment (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichBusinessUnitHrDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentRichDTO GetRichBusinessUnitHrDepartmentWithRevision(GetRichBusinessUnitHrDepartmentWithRevisionAutoRequest getRichBusinessUnitHrDepartmentWithRevisionAutoRequest)
         {
             long revision = getRichBusinessUnitHrDepartmentWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get BusinessUnitHrDepartment (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessUnitHrDepartmentWithRevision")]
         public virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentSimpleDTO GetSimpleBusinessUnitHrDepartmentWithRevision(GetSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest getSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest)
         {
             long revision = getSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest.Revision;

@@ -2,11 +2,13 @@
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
 
+using Microsoft.AspNetCore.Mvc;
+
 namespace Framework.Configuration.WebApi;
 
 public partial class ConfigSLJsonController
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetSimpleDomainTypeByPath))]
+    [HttpPost]
     public DomainTypeSimpleDTO GetSimpleDomainTypeByPath(string path)
     {
         return this.Evaluate(DBSessionMode.Read, data =>
@@ -15,7 +17,7 @@ public partial class ConfigSLJsonController
                                                              .ToSimpleDTO(data.MappingService));
     }
 
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(ForceDomainTypeEvent))]
+    [HttpPost]
     public void ForceDomainTypeEvent(DomainTypeEventModelStrictDTO domainTypeEventModel)
     {
         if (domainTypeEventModel == null) throw new ArgumentNullException(nameof(domainTypeEventModel));

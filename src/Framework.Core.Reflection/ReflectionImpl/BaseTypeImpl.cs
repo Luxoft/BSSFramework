@@ -193,7 +193,7 @@ public class BaseTypeImpl : Type
     {
         try
         {
-            return Type.GetType(this.AssemblyQualifiedName);
+            return GetType(this.AssemblyQualifiedName);
         }
         catch (Exception e)
         {

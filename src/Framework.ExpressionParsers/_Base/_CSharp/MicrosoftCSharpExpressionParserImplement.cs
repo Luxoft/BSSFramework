@@ -1152,7 +1152,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
             }
             this.ValidateToken(TokenId.CloseParen, ExpressionParsersResources.CloseParenOrCommaExpected);
             this.NextToken();
-            var type = MicrosoftCSharpExpressionParserImplement.CreateClass(properties);
+            var type = CreateClass(properties);
             var bindings = new MemberBinding[properties.Count];
             for (int i = 0; i < bindings.Length; i++)
             {

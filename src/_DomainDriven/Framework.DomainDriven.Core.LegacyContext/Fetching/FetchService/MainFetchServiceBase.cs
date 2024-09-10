@@ -14,5 +14,5 @@ public abstract class MainFetchServiceBase<TPersistentDomainObjectBase> : IFetch
         return this.GetContainer<TDomainObject>(rule.DTOType);
     }
 
-    protected abstract Framework.DomainDriven.IFetchContainer<TDomainObject> GetContainer<TDomainObject>(Framework.Transfering.ViewDTOType rule);
+    protected abstract IFetchContainer<TDomainObject> GetContainer<TDomainObject>(Transfering.ViewDTOType rule);
 }

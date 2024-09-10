@@ -1,10 +1,9 @@
 ﻿namespace Authorization.WebApi.Controllers
 {
-    using Framework.Authorization.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("authApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("authApi/[controller]/[action]")]
     public partial class PermissionController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get Permission (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullPermission")]
         public virtual Framework.Authorization.Generated.DTO.PermissionFullDTO GetFullPermission([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPermissionInternal(permissionIdentity, evaluateData));
@@ -29,7 +27,6 @@
         /// Get full list of Permissions (FullDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullPermissions")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionFullDTO> GetFullPermissions()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPermissionsInternal(evaluateData));
@@ -39,7 +36,6 @@
         /// Get Permissions (FullDTO) by filter (Framework.Authorization.Domain.PermissionDirectFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullPermissionsByDirectFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionFullDTO> GetFullPermissionsByDirectFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.PermissionDirectFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPermissionsByDirectFilterInternal(filter, evaluateData));
@@ -56,7 +52,6 @@
         /// Get Permissions (FullDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullPermissionsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionFullDTO> GetFullPermissionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO[] permissionIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullPermissionsByIdentsInternal(permissionIdents, evaluateData));
@@ -78,7 +73,6 @@
         /// Get Permission (RichDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichPermission")]
         public virtual Framework.Authorization.Generated.DTO.PermissionRichDTO GetRichPermission([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichPermissionInternal(permissionIdentity, evaluateData));
@@ -95,7 +89,6 @@
         /// Get full list of Permissions (RichDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichPermissions")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionRichDTO> GetRichPermissions()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichPermissionsInternal(evaluateData));
@@ -105,7 +98,6 @@
         /// Get Permissions (RichDTO) by filter (Framework.Authorization.Domain.PermissionDirectFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichPermissionsByDirectFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionRichDTO> GetRichPermissionsByDirectFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.PermissionDirectFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichPermissionsByDirectFilterInternal(filter, evaluateData));
@@ -122,7 +114,6 @@
         /// Get Permissions (RichDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichPermissionsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionRichDTO> GetRichPermissionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO[] permissionIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichPermissionsByIdentsInternal(permissionIdents, evaluateData));
@@ -144,7 +135,6 @@
         /// Get Permission (SimpleDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimplePermission")]
         public virtual Framework.Authorization.Generated.DTO.PermissionSimpleDTO GetSimplePermission([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePermissionInternal(permissionIdentity, evaluateData));
@@ -161,7 +151,6 @@
         /// Get full list of Permissions (SimpleDTO)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimplePermissions")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionSimpleDTO> GetSimplePermissions()
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePermissionsInternal(evaluateData));
@@ -171,7 +160,6 @@
         /// Get Permissions (SimpleDTO) by filter (Framework.Authorization.Domain.PermissionDirectFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimplePermissionsByDirectFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionSimpleDTO> GetSimplePermissionsByDirectFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.PermissionDirectFilterModelStrictDTO filter)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePermissionsByDirectFilterInternal(filter, evaluateData));
@@ -188,7 +176,6 @@
         /// Get Permissions (SimpleDTO) by idents
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimplePermissionsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionSimpleDTO> GetSimplePermissionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO[] permissionIdents)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimplePermissionsByIdentsInternal(permissionIdents, evaluateData));
@@ -210,7 +197,6 @@
         /// Remove Permission
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("RemovePermission")]
         public virtual void RemovePermission([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent)
         {
             this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemovePermissionInternal(permissionIdent, evaluateData));

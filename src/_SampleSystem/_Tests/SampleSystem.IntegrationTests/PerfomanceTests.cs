@@ -17,7 +17,7 @@ public class PerfomanceTests : TestBase
     {
         var preEvaluate = this.Evaluate(DBSessionMode.Write, context => context.Logics.Employee.GetUnsecureQueryable().First());
 
-        var task = System.Threading.Tasks.Task.Run(() =>
+        var task = Task.Run(() =>
                                                            this.Evaluate(DBSessionMode.Write, context =>
                                                                          {
                                                                              Expression<Func<Employee, bool>> filter = z => false;

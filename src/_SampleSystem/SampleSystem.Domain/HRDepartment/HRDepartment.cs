@@ -4,6 +4,7 @@ using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Restriction;
 
 namespace SampleSystem.Domain;
 
@@ -50,13 +51,13 @@ public partial class HRDepartment :
         }
     }
 
-    [Framework.Restriction.UniqueGroup]
+    [UniqueGroup]
     public virtual IEnumerable<ManagementUnitAndHRDepartmentLink> ManagementUnits
     {
         get { return this.managementUnits; }
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     public override CompanyLegalEntity CompanyLegalEntity
     {
         get { return base.CompanyLegalEntity; }
@@ -64,7 +65,7 @@ public partial class HRDepartment :
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    [Framework.Restriction.Required]
+    [Required]
     public override Location Location
     {
         get { return base.Location; }
@@ -97,20 +98,20 @@ public partial class HRDepartment :
         set { base.Active = value; }
     }
 
-    [Framework.Restriction.UniqueGroup]
+    [UniqueGroup]
     public virtual IEnumerable<HRDepartmentRoleEmployee> HrDepartmentRoleEmployees
     {
         get { return this.hrDepartmentRoleEmployees; }
     }
 
     [Obsolete("Now HRDepartment linked to ManagementBusinessUnit")]
-    [Framework.Restriction.UniqueGroup]
+    [UniqueGroup]
     public virtual IEnumerable<BusinessUnitHrDepartment> BusinessUnitHrDepartments
     {
         get { return this.businessUnitHrDepartments; }
     }
 
-    [Framework.Restriction.UniqueGroup]
+    [UniqueGroup]
     public virtual IEnumerable<HRDepartmentEmployeePosition> EmployeePositions
     {
         get { return this.employeePositions; }

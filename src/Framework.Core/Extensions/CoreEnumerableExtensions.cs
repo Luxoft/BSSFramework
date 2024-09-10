@@ -135,7 +135,7 @@ public static class CoreEnumerableExtensions
                 {
                     if (raiseIfNotEquals)
                     {
-                        throw new System.ArgumentException("Unexpected first element", nameof(source));
+                        throw new ArgumentException("Unexpected first element", nameof(source));
                     }
 
                     yield return enumerator.Current;
@@ -150,7 +150,7 @@ public static class CoreEnumerableExtensions
             {
                 if (raiseIfNotEquals)
                 {
-                    throw new System.ArgumentException("EmptyCollection", nameof(source));
+                    throw new ArgumentException("EmptyCollection", nameof(source));
                 }
             }
         }
@@ -177,7 +177,7 @@ public static class CoreEnumerableExtensions
                 {
                     if (raiseIfNotEquals)
                     {
-                        throw new System.ArgumentException("Unexpected last element", nameof(source));
+                        throw new ArgumentException("Unexpected last element", nameof(source));
                     }
 
                     yield return lastElement;
@@ -187,7 +187,7 @@ public static class CoreEnumerableExtensions
             {
                 if (raiseIfNotEquals)
                 {
-                    throw new System.ArgumentException("EmptyCollection", nameof(source));
+                    throw new ArgumentException("EmptyCollection", nameof(source));
                 }
             }
         }
@@ -391,7 +391,7 @@ public static class CoreEnumerableExtensions
 
         if (checkNullElements && Enumerable.Contains(array, null))
         {
-            throw new System.ArgumentException("Collection contains null value", nameof(source));
+            throw new ArgumentException("Collection contains null value", nameof(source));
         }
 
         return array;
@@ -785,7 +785,7 @@ public static class CoreEnumerableExtensions
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        return source.Select(v => v.FromMaybe(() => new System.ArgumentException("source contains null value", nameof(source))));
+        return source.Select(v => v.FromMaybe(() => new ArgumentException("source contains null value", nameof(source))));
     }
 
     public static bool IsIntersected<TSource>(this IEnumerable<TSource> source, IEnumerable<TSource> other)
@@ -853,7 +853,7 @@ public static class CoreEnumerableExtensions
     public static IEnumerable<IEnumerable<TSource>> Split<TSource>(this IEnumerable<TSource> source, int size)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
-        if (size < 1) throw new System.ArgumentException("count");
+        if (size < 1) throw new ArgumentException("count");
 
         using (var enumerator = source.GetEnumerator())
         {

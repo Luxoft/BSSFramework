@@ -2,19 +2,19 @@
 
 public partial class ServerGenerationEnvironment :
 
-        Framework.DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase,
+        DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase,
 
-        Framework.DomainDriven.BLLGenerator.IGenerationEnvironmentBase,
+        DomainDriven.BLLGenerator.IGenerationEnvironmentBase,
 
-        Framework.DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase,
+        DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase,
 
-        Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase,
+        DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase,
 
         Framework.DomainDriven.NHibernate.DALGenerator.IGenerationEnvironmentBase
 {
-    Framework.DomainDriven.BLLCoreGenerator.IGeneratorConfigurationBase<Framework.DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase> Framework.DomainDriven.BLLCoreGenerator.IGeneratorConfigurationContainer.BLLCore => this.BLLCore;
+    DomainDriven.BLLCoreGenerator.IGeneratorConfigurationBase<DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase> DomainDriven.BLLCoreGenerator.IGeneratorConfigurationContainer.BLLCore => this.BLLCore;
 
-    Framework.DomainDriven.BLLGenerator.IGeneratorConfigurationBase<Framework.DomainDriven.BLLGenerator.IGenerationEnvironmentBase> Framework.DomainDriven.BLLGenerator.IGeneratorConfigurationContainer.BLL => this.BLL;
+    DomainDriven.BLLGenerator.IGeneratorConfigurationBase<DomainDriven.BLLGenerator.IGenerationEnvironmentBase> DomainDriven.BLLGenerator.IGeneratorConfigurationContainer.BLL => this.BLL;
 
-    Framework.DomainDriven.DTOGenerator.Server.IServerGeneratorConfigurationBase<Framework.DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase> Framework.DomainDriven.DTOGenerator.Server.IGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
+    DomainDriven.DTOGenerator.Server.IServerGeneratorConfigurationBase<DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase> DomainDriven.DTOGenerator.Server.IGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
 }

@@ -60,13 +60,13 @@ public static class BssFrameworkSettingsExtensions
 
                 if (tsSettings.RegisterAuthorization)
                 {
-                    tsSettings.AddTargetSystem<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(
+                    tsSettings.AddTargetSystem<IAuthorizationBLLContext, Authorization.Domain.PersistentDomainObjectBase>(
                             TargetSystemInfoHelper.Authorization);
                 }
 
                 if (tsSettings.RegisterConfiguration)
                 {
-                    tsSettings.AddTargetSystem<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(
+                    tsSettings.AddTargetSystem<IConfigurationBLLContext, Configuration.Domain.PersistentDomainObjectBase>(
                         TargetSystemInfoHelper.Configuration);
                 }
 

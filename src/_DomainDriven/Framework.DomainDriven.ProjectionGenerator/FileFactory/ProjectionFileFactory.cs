@@ -188,7 +188,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                                              {
                                                  if (propertyPath.Count > 1 && property.PropertyType.IsCollection())
                                                  {
-                                                     return typeof(Framework.Core.EnumerableExtensions)
+                                                     return typeof(Core.EnumerableExtensions)
                                                             .ToTypeReferenceExpression()
                                                             .ToMethodInvokeExpression("EmptyIfNull", state.Expression);
                                                  }
@@ -278,7 +278,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                                     Statements = { elementType.ToTypeReference().ToObjectCreateExpression(param.ToVariableReferenceExpression()).ToMethodReturnStatement() }
                             });
 
-                        yield return typeof(Framework.Core.EnumerableExtensions)
+                        yield return typeof(Core.EnumerableExtensions)
                                      .ToTypeReferenceExpression()
                                      .ToMethodInvokeExpression("ToList", sourcePropExpr, lambda)
                                      .ToAssignStatement(targetMemberExpr);

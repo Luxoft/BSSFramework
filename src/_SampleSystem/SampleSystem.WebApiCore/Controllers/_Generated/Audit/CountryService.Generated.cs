@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class CountryController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get Country Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetCountryPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetCountryPropertyRevisionByDateRange(GetCountryPropertyRevisionByDateRangeAutoRequest getCountryPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getCountryPropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get Country Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetCountryPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetCountryPropertyRevisions(GetCountryPropertyRevisionsAutoRequest getCountryPropertyRevisionsAutoRequest)
         {
             string propertyName = getCountryPropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get Country revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetCountryRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetCountryRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetCountryRevisionsInternal(countryIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get Country (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountryWithRevision")]
         public virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryWithRevision(GetFullCountryWithRevisionAutoRequest getFullCountryWithRevisionAutoRequest)
         {
             long revision = getFullCountryWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get Country (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCountryWithRevision")]
         public virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryWithRevision(GetRichCountryWithRevisionAutoRequest getRichCountryWithRevisionAutoRequest)
         {
             long revision = getRichCountryWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get Country (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountryWithRevision")]
         public virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryWithRevision(GetSimpleCountryWithRevisionAutoRequest getSimpleCountryWithRevisionAutoRequest)
         {
             long revision = getSimpleCountryWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get Country (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountryWithRevision")]
         public virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryWithRevision(GetVisualCountryWithRevisionAutoRequest getVisualCountryWithRevisionAutoRequest)
         {
             long revision = getVisualCountryWithRevisionAutoRequest.Revision;

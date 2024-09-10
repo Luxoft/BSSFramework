@@ -72,7 +72,7 @@ public partial class ServerGenerators
 
         var attr = new CodeAttributeDeclaration(
             typeof(RouteAttribute).ToTypeReference(),
-            new CodeAttributeArgument(new CodePrimitiveExpression("mainQueryApi/[controller]")));
+            new CodeAttributeArgument(new CodePrimitiveExpression("mainQueryApi/[controller]/[action]")));
 
         var generator = new WebApiNetCoreFileGenerator(
             this.environment.ToWebApiNetCore(
@@ -93,7 +93,7 @@ public partial class ServerGenerators
 
         var attr = new CodeAttributeDeclaration(
             typeof(RouteAttribute).ToTypeReference(),
-            new CodeAttributeArgument(new CodePrimitiveExpression("integrationApi/[controller]")));
+            new CodeAttributeArgument(new CodePrimitiveExpression("integrationApi/[controller]/[action]")));
 
         var generator = new WebApiNetCoreFileGenerator(
             this.environment.ToWebApiNetCore(
@@ -114,7 +114,7 @@ public partial class ServerGenerators
 
         var attr = new CodeAttributeDeclaration(
             typeof(RouteAttribute).ToTypeReference(),
-            new CodeAttributeArgument(new CodePrimitiveExpression("mainAuditApi/[controller]")));
+            new CodeAttributeArgument(new CodePrimitiveExpression("mainAuditApi/[controller]/[action]")));
 
         var generator = new WebApiNetCoreFileGenerator(
             this.environment.ToWebApiNetCore(
@@ -137,7 +137,7 @@ public partial class ServerGenerators
 
         var attr = new CodeAttributeDeclaration(
             typeof(RouteAttribute).ToTypeReference(),
-            new CodeAttributeArgument(new CodePrimitiveExpression("authApi/[controller]")));
+            new CodeAttributeArgument(new CodePrimitiveExpression("authApi/[controller]/[action]")));
 
         var generator = new WebApiNetCoreFileGenerator(
             e.ToWebApiNetCore(configurators),
@@ -158,7 +158,7 @@ public partial class ServerGenerators
 
         var attr = new CodeAttributeDeclaration(
             typeof(RouteAttribute).ToTypeReference(),
-            new CodeAttributeArgument(new CodePrimitiveExpression("configApi/[controller]")));
+            new CodeAttributeArgument(new CodePrimitiveExpression("configApi/[controller]/[action]")));
 
         var generator = new WebApiNetCoreFileGenerator(
             e.ToWebApiNetCore(configurators),

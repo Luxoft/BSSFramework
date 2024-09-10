@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class IMRequestController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get IMRequest (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullIMRequestWithRevision")]
         public virtual SampleSystem.Generated.DTO.IMRequestFullDTO GetFullIMRequestWithRevision(GetFullIMRequestWithRevisionAutoRequest getFullIMRequestWithRevisionAutoRequest)
         {
             long revision = getFullIMRequestWithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get IMRequest Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetIMRequestPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetIMRequestPropertyRevisionByDateRange(GetIMRequestPropertyRevisionByDateRangeAutoRequest getIMRequestPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getIMRequestPropertyRevisionByDateRangeAutoRequest.Period;
@@ -50,7 +47,6 @@
         /// Get IMRequest Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetIMRequestPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetIMRequestPropertyRevisions(GetIMRequestPropertyRevisionsAutoRequest getIMRequestPropertyRevisionsAutoRequest)
         {
             string propertyName = getIMRequestPropertyRevisionsAutoRequest.PropertyName;
@@ -68,7 +64,6 @@
         /// Get IMRequest revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetIMRequestRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetIMRequestRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetIMRequestRevisionsInternal(iMRequestIdentity, evaluateData));
@@ -84,7 +79,6 @@
         /// Get IMRequest (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichIMRequestWithRevision")]
         public virtual SampleSystem.Generated.DTO.IMRequestRichDTO GetRichIMRequestWithRevision(GetRichIMRequestWithRevisionAutoRequest getRichIMRequestWithRevisionAutoRequest)
         {
             long revision = getRichIMRequestWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get IMRequest (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleIMRequestWithRevision")]
         public virtual SampleSystem.Generated.DTO.IMRequestSimpleDTO GetSimpleIMRequestWithRevision(GetSimpleIMRequestWithRevisionAutoRequest getSimpleIMRequestWithRevisionAutoRequest)
         {
             long revision = getSimpleIMRequestWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get IMRequest (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualIMRequestWithRevision")]
         public virtual SampleSystem.Generated.DTO.IMRequestVisualDTO GetVisualIMRequestWithRevision(GetVisualIMRequestWithRevisionAutoRequest getVisualIMRequestWithRevisionAutoRequest)
         {
             long revision = getVisualIMRequestWithRevisionAutoRequest.Revision;

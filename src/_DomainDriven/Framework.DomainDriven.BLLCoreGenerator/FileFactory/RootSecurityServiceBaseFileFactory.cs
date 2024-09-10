@@ -61,7 +61,7 @@ public class RootSecurityServiceBaseFileFactory<TConfiguration> : FileFactory<TC
         yield return serviceCollectionExpr.ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
+    protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         foreach (var securityBaseMember in this.Configuration.RootSecurityServerGenerator.GetBaseMembers())
         {

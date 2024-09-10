@@ -39,7 +39,7 @@ public abstract class CodeFileFactory<TConfiguration, TFileType> : GeneratorConf
     }
 
 
-    protected virtual System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
+    protected virtual IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         return this.BaseReference.MaybeYield();
     }

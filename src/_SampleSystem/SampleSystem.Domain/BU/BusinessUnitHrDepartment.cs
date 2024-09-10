@@ -1,6 +1,7 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
+using Framework.Restriction;
 
 namespace SampleSystem.Domain;
 
@@ -20,16 +21,16 @@ public class BusinessUnitHrDepartment : AuditPersistentDomainObjectBase, IDetail
     {
     }
 
-    [Framework.Restriction.Required]
-    [Framework.Restriction.UniqueElement]
+    [Required]
+    [UniqueElement]
     public virtual BusinessUnit BusinessUnit
     {
         get { return this.businessUnit; }
         set { this.businessUnit = value; }
     }
 
-    [Framework.Restriction.Required]
-    [Framework.Restriction.UniqueElement]
+    [Required]
+    [UniqueElement]
     public virtual HRDepartment HRDepartment
     {
         get { return this.hRDepartment; }

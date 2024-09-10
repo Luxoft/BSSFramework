@@ -33,6 +33,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public virtual CodeTypeReference EvaluateDataTypeReference { get; }
 
+    public bool UseRouteAction { get; } = true;
 
     protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
     {

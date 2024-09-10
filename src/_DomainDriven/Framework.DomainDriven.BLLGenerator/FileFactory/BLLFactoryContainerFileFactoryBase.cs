@@ -15,7 +15,7 @@ public abstract class BLLFactoryContainerFileFactoryBase<TConfiguration> : FileF
     public override FileType FileType => FileType.BLLFactoryContainer;
 
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
+    protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         yield return this.Configuration.Environment.BLLCore.GetCodeTypeReference(null, BLLCoreGenerator.FileType.BLLFactoryContainerInterface);
     }

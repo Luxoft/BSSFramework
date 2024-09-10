@@ -38,8 +38,8 @@ public class FixedPropertyValidatorTests : TestBase
     public void ReferenceImmutablePropertyChanged_RaisedValidationError()
     {
         // Arrange
-        var employeeController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Main.EmployeeController>();
-        var testImmutableObjController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Main.TestImmutableObjController>();
+        var employeeController = this.GetControllerEvaluator<EmployeeController>();
+        var testImmutableObjController = this.GetControllerEvaluator<TestImmutableObjController>();
         var identity = testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjStrictDTO { }));
 
         // Act

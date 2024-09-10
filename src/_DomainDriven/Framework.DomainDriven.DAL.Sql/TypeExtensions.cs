@@ -84,7 +84,7 @@ public static class TypeExtensions
 
 
 
-        throw new System.ArgumentException($"Type:{type.Name} have not CRLType analog");
+        throw new ArgumentException($"Type:{type.Name} have not CRLType analog");
 
         //Case Smo.SqlDataType.Real, Smo.SqlDataType.Numeric, Smo.SqlDataType.Float
         //    If col.DataType.Equals(Smo.DataType.Float) Then

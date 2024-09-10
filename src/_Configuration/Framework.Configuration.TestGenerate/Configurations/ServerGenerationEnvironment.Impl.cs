@@ -2,23 +2,23 @@
 
 public partial class ServerGenerationEnvironment :
 
-        Framework.DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase,
+        DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase,
 
-        Framework.DomainDriven.BLLGenerator.IGenerationEnvironmentBase,
+        DomainDriven.BLLGenerator.IGenerationEnvironmentBase,
 
-        Framework.DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase,
+        DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase,
 
         Framework.DomainDriven.NHibernate.DALGenerator.IGenerationEnvironmentBase,
 
-        Framework.DomainDriven.DTOGenerator.Audit.IAuditDTOGenerationEnvironmentBase,
+        DomainDriven.DTOGenerator.Audit.IAuditDTOGenerationEnvironmentBase,
 
-        Framework.DomainDriven.ServiceModelGenerator.IAuditGenerationEnvironmentBase
+        DomainDriven.ServiceModelGenerator.IAuditGenerationEnvironmentBase
 {
-    Framework.DomainDriven.BLLCoreGenerator.IGeneratorConfigurationBase<Framework.DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase> Framework.DomainDriven.BLLCoreGenerator.IGeneratorConfigurationContainer.BLLCore => this.BLLCore;
+    DomainDriven.BLLCoreGenerator.IGeneratorConfigurationBase<DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase> DomainDriven.BLLCoreGenerator.IGeneratorConfigurationContainer.BLLCore => this.BLLCore;
 
-    Framework.DomainDriven.BLLGenerator.IGeneratorConfigurationBase<Framework.DomainDriven.BLLGenerator.IGenerationEnvironmentBase> Framework.DomainDriven.BLLGenerator.IGeneratorConfigurationContainer.BLL => this.BLL;
+    DomainDriven.BLLGenerator.IGeneratorConfigurationBase<DomainDriven.BLLGenerator.IGenerationEnvironmentBase> DomainDriven.BLLGenerator.IGeneratorConfigurationContainer.BLL => this.BLL;
 
-    Framework.DomainDriven.DTOGenerator.Server.IServerGeneratorConfigurationBase<Framework.DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase> Framework.DomainDriven.DTOGenerator.Server.IGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
+    DomainDriven.DTOGenerator.Server.IServerGeneratorConfigurationBase<DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase> DomainDriven.DTOGenerator.Server.IGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
 
-    Framework.DomainDriven.DTOGenerator.Audit.IAuditDTOGeneratorConfigurationBase<Framework.DomainDriven.DTOGenerator.Audit.IAuditDTOGenerationEnvironmentBase> Framework.DomainDriven.DTOGenerator.Audit.IGeneratorConfigurationContainer.AuditDTO => this.AuditDTO;
+    DomainDriven.DTOGenerator.Audit.IAuditDTOGeneratorConfigurationBase<DomainDriven.DTOGenerator.Audit.IAuditDTOGenerationEnvironmentBase> DomainDriven.DTOGenerator.Audit.IGeneratorConfigurationContainer.AuditDTO => this.AuditDTO;
 }

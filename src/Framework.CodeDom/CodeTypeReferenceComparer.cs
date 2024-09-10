@@ -4,7 +4,7 @@ using Framework.Core;
 
 namespace Framework.CodeDom;
 
-public class CodeTypeReferenceComparer : System.Collections.Generic.IEqualityComparer<CodeTypeReference>
+public class CodeTypeReferenceComparer : IEqualityComparer<CodeTypeReference>
 {
     private CodeTypeReferenceComparer()
     {

@@ -2,6 +2,7 @@
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Restriction;
 using Framework.Validation;
 
 namespace SampleSystem.Domain;
@@ -49,7 +50,7 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
         this.period = period;
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     [CustomName("Financial Business Unit")]
     public virtual BusinessUnit BusinessUnit
     {
@@ -64,8 +65,8 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
         }
     }
 
-    [Framework.Restriction.Required]
-    [Framework.Restriction.UniqueElement]
+    [Required]
+    [UniqueElement]
     public virtual Employee Manager
     {
         get
@@ -94,7 +95,7 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
         set { this.period = value; }
     }
 
-    [Framework.Restriction.UniqueElement]
+    [UniqueElement]
     [ExpandPath("Period")]
     [CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual DateTime StartDate

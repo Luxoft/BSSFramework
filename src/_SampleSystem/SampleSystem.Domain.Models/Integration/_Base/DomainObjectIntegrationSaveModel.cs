@@ -1,10 +1,11 @@
 ﻿using Framework.DomainDriven;
+using Framework.Restriction;
 
 namespace SampleSystem.Domain;
 
 public abstract class DomainObjectIntegrationSaveModel<TDomainObject> : DomainObjectBase, IDomainObjectIntegrationSaveModel<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase
 {
-    [Framework.Restriction.Required]
+    [Required]
     public virtual TDomainObject SavingObject { get; set; }
 }

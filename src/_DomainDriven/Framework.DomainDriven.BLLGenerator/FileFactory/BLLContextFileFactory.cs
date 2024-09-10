@@ -28,7 +28,7 @@ public class BLLContextFileFactory<TConfiguration> : FileFactory<TConfiguration>
                };
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
+    protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         yield return typeof(SecurityBLLBaseContext<,,>).ToTypeReference(
             this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
@@ -40,7 +40,7 @@ public class BLLContextFileFactory<TConfiguration> : FileFactory<TConfiguration>
         yield return this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference;
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
+    protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         var pairs = new[] { this.Configuration.Environment.BLLCore.DefaultBLLFactoryContainerType, this.Configuration.Environment.BLLCore.SecurityBLLFactoryContainerType }
                 .Select(z => new

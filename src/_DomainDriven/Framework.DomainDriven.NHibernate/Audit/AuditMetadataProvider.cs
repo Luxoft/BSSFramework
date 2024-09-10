@@ -22,7 +22,7 @@ namespace Framework.DomainDriven.NHibernate.Audit;
 internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
         where TAuditRevisionEntity : AuditRevisionEntity
 {
-    private IList<System.Type> _filledTypes;
+    private IList<Type> _filledTypes;
 
     private readonly string _auditTableSuffix;
 
@@ -62,11 +62,11 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
     /// <returns>
     /// A dictionary of <see cref="IEntityMeta"/>, keyed by entity type
     /// </returns>
-    public IDictionary<System.Type, IEntityMeta> CreateMetaData(global::NHibernate.Cfg.Configuration nhConfiguration)
+    public IDictionary<Type, IEntityMeta> CreateMetaData(Configuration nhConfiguration)
     {
-        this._filledTypes = new List<System.Type>();
+        this._filledTypes = new List<Type>();
 
-        var ret = new Dictionary<System.Type, IEntityMeta>();
+        var ret = new Dictionary<Type, IEntityMeta>();
 
         nhConfiguration.AddMapping(this.CreateRevisionInfoMappingDocument());
 
@@ -180,7 +180,7 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
         this.FillMembers(typ, props, dicToFill, auditService);
     }
 
-    private void FillMembers(System.Type type, IEnumerable<Property> properties, Dictionary<System.Type, IEntityMeta> dicToFill, IAuditAttributeService auditService)
+    private void FillMembers(Type type, IEnumerable<Property> properties, Dictionary<Type, IEntityMeta> dicToFill, IAuditAttributeService auditService)
     {
         foreach (var propInfo in PropertyAndMemberInfo.PersistentInfo(type, properties))
         {

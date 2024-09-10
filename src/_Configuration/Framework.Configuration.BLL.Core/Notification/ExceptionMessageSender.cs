@@ -58,7 +58,7 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
 
         if (!this.receivers.Any())
         {
-            throw new System.ArgumentException("Collection 'Receivers' is empty", nameof(this.receivers));
+            throw new ArgumentException("Collection 'Receivers' is empty", nameof(this.receivers));
         }
     }
 

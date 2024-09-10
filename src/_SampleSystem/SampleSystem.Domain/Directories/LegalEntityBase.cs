@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
+using Framework.Restriction;
 
 namespace SampleSystem.Domain;
 
@@ -34,7 +35,7 @@ public class LegalEntityBase : BaseDirectory, IMaster<Address>
         get { return this.addresses; }
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     public virtual string NameEnglish
     {
         get { return this.nameEnglish.TrimNull(); }

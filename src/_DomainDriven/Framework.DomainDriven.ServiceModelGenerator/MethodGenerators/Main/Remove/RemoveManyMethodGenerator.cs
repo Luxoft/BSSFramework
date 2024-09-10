@@ -72,7 +72,7 @@ public class RemoveManyMethodGenerator<TConfiguration> : BaseRemoveMethodGenerat
                          .ToVariableReferenceExpression()
                          .ToStaticMethodInvokeExpression(
 
-                                                         typeof(Framework.Core.EnumerableExtensions)
+                                                         typeof(Core.EnumerableExtensions)
                                                                  .ToTypeReferenceExpression()
                                                                  .ToMethodReferenceExpression("Foreach"), convertLambda)
 

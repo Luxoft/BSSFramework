@@ -349,7 +349,7 @@ public class MappingGenerator : IMappingGenerator
 
     private XElement CreateRoot()
     {
-        var result = new XElement(RootNameNamespace + MappingGenerator.NHibernateMappingRootName)
+        var result = new XElement(RootNameNamespace + NHibernateMappingRootName)
                      .WithAttribute(AssemblyName, this.Assembly.Name)
                      .WithAttribute("auto-import", false)
                      .MaybeWithAttribute(SchemaName, this.schema);

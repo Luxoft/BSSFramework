@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class Location1676Controller : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get Location1676 (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullLocation1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676WithRevision(GetFullLocation1676WithRevisionAutoRequest getFullLocation1676WithRevisionAutoRequest)
         {
             long revision = getFullLocation1676WithRevisionAutoRequest.Revision;
@@ -31,7 +29,6 @@
         /// Get Location1676 Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetLocation1676PropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionByDateRange(GetLocation1676PropertyRevisionByDateRangeAutoRequest getLocation1676PropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getLocation1676PropertyRevisionByDateRangeAutoRequest.Period;
@@ -50,7 +47,6 @@
         /// Get Location1676 Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetLocation1676PropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisions(GetLocation1676PropertyRevisionsAutoRequest getLocation1676PropertyRevisionsAutoRequest)
         {
             string propertyName = getLocation1676PropertyRevisionsAutoRequest.PropertyName;
@@ -68,7 +64,6 @@
         /// Get Location1676 revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetLocation1676Revisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetLocation1676Revisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetLocation1676RevisionsInternal(location1676Identity, evaluateData));
@@ -84,7 +79,6 @@
         /// Get Location1676 (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichLocation1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676WithRevision(GetRichLocation1676WithRevisionAutoRequest getRichLocation1676WithRevisionAutoRequest)
         {
             long revision = getRichLocation1676WithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get Location1676 (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleLocation1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676WithRevision(GetSimpleLocation1676WithRevisionAutoRequest getSimpleLocation1676WithRevisionAutoRequest)
         {
             long revision = getSimpleLocation1676WithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get Location1676 (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualLocation1676WithRevision")]
         public virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676WithRevision(GetVisualLocation1676WithRevisionAutoRequest getVisualLocation1676WithRevisionAutoRequest)
         {
             long revision = getVisualLocation1676WithRevisionAutoRequest.Revision;

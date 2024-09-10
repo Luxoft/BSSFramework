@@ -26,11 +26,11 @@ public static class CheckOutServiceExtensions
 
             try
             {
-                global::System.Diagnostics.Trace.WriteLine($"Try check out file '{fileName}'");
+                System.Diagnostics.Trace.WriteLine($"Try check out file '{fileName}'");
 
                 this._baseCheckOutService.CheckOutFile(fileName);
 
-                global::System.Diagnostics.Trace.WriteLine("Check out done");
+                System.Diagnostics.Trace.WriteLine("Check out done");
             }
             catch (CheckOutServiceException)
             {

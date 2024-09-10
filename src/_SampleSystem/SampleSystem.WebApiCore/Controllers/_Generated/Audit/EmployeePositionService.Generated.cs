@@ -1,10 +1,9 @@
 ﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
-    using SampleSystem.Generated.DTO;
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
     public partial class EmployeePositionController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
@@ -12,7 +11,6 @@
         /// Get EmployeePosition Property Revisions by period
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePositionPropertyRevisionByDateRange")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePositionPropertyRevisionByDateRange(GetEmployeePositionPropertyRevisionByDateRangeAutoRequest getEmployeePositionPropertyRevisionByDateRangeAutoRequest)
         {
             Framework.Core.Period? period = getEmployeePositionPropertyRevisionByDateRangeAutoRequest.Period;
@@ -31,7 +29,6 @@
         /// Get EmployeePosition Property Revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePositionPropertyRevisions")]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePositionPropertyRevisions(GetEmployeePositionPropertyRevisionsAutoRequest getEmployeePositionPropertyRevisionsAutoRequest)
         {
             string propertyName = getEmployeePositionPropertyRevisionsAutoRequest.PropertyName;
@@ -49,7 +46,6 @@
         /// Get EmployeePosition revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePositionRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeePositionRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity)
         {
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeePositionRevisionsInternal(employeePositionIdentity, evaluateData));
@@ -65,7 +61,6 @@
         /// Get EmployeePosition (FullDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeePositionWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionWithRevision(GetFullEmployeePositionWithRevisionAutoRequest getFullEmployeePositionWithRevisionAutoRequest)
         {
             long revision = getFullEmployeePositionWithRevisionAutoRequest.Revision;
@@ -84,7 +79,6 @@
         /// Get EmployeePosition (RichDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeePositionWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionWithRevision(GetRichEmployeePositionWithRevisionAutoRequest getRichEmployeePositionWithRevisionAutoRequest)
         {
             long revision = getRichEmployeePositionWithRevisionAutoRequest.Revision;
@@ -103,7 +97,6 @@
         /// Get EmployeePosition (SimpleDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeePositionWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionWithRevision(GetSimpleEmployeePositionWithRevisionAutoRequest getSimpleEmployeePositionWithRevisionAutoRequest)
         {
             long revision = getSimpleEmployeePositionWithRevisionAutoRequest.Revision;
@@ -122,7 +115,6 @@
         /// Get EmployeePosition (VisualDTO) by revision
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeePositionWithRevision")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionWithRevision(GetVisualEmployeePositionWithRevisionAutoRequest getVisualEmployeePositionWithRevisionAutoRequest)
         {
             long revision = getVisualEmployeePositionWithRevisionAutoRequest.Revision;

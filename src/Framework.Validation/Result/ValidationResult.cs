@@ -49,16 +49,16 @@ public class ValidationResult
 
     public static ValidationResult FromMaybe(Maybe<string> maybeErrorMessage)
     {
-        return maybeErrorMessage.Match(str => ValidationResult.CreateError(new ValidationException(str)),
-                                       () => ValidationResult.Success);
+        return maybeErrorMessage.Match(str => CreateError(new ValidationException(str)),
+                                       () => Success);
     }
 
     public static ValidationResult FromCondition(bool isSuccess, Func<ValidationExceptionBase> getError)
     {
         if (getError == null) throw new ArgumentNullException(nameof(getError));
 
-        return isSuccess ? ValidationResult.Success
-                       : ValidationResult.CreateError(getError());
+        return isSuccess ? Success
+                       : CreateError(getError());
     }
 
     public static ValidationResult TryCatch(Action action)
@@ -126,6 +126,6 @@ public class ValidationResult
 
     internal static Func<T, ValidationResult> GetSuccessFunc<T>()
     {
-        return _ => ValidationResult.Success;
+        return _ => Success;
     }
 }

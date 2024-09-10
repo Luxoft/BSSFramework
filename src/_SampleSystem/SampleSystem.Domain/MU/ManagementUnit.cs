@@ -2,6 +2,7 @@
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Restriction;
 using Framework.SecuritySystem;
 
 namespace SampleSystem.Domain;
@@ -48,13 +49,13 @@ public class ManagementUnit :
         set { this.isProduction = value; }
     }
 
-    [Framework.Restriction.UniqueGroup]
+    [UniqueGroup]
     public virtual IEnumerable<ManagementUnitAndHRDepartmentLink> HRDepartments
     {
         get { return this.hRDepartments; }
     }
 
-    [Framework.Restriction.UniqueGroup]
+    [UniqueGroup]
     public virtual IEnumerable<ManagementUnitAndBusinessUnitLink> BusinessUnits
     {
         get { return this.businessUnits; }
@@ -84,11 +85,11 @@ public class ManagementUnit :
 
     public static bool operator ==(ManagementUnit left, IUnit<ManagementUnit> right)
     {
-        return object.Equals(left, right);
+        return Equals(left, right);
     }
 
     public static bool operator !=(ManagementUnit left, IUnit<ManagementUnit> right)
     {
-        return !object.Equals(left, right);
+        return !Equals(left, right);
     }
 }

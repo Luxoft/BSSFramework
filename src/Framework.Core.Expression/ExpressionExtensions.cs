@@ -401,11 +401,11 @@ public static class ExpressionExtensions
 
     #region Eval
 
-    public static System.Delegate Compile(this LambdaExpression lambdaExpression, ILambdaCompileCache cache)
+    public static Delegate Compile(this LambdaExpression lambdaExpression, ILambdaCompileCache cache)
     {
         if (lambdaExpression == null) throw new ArgumentNullException(nameof(lambdaExpression));
 
-        return (System.Delegate)new Func<Expression<Action>, ILambdaCompileCache, Action>(Compile).CreateGenericMethod(lambdaExpression.Type)
+        return (Delegate)new Func<Expression<Action>, ILambdaCompileCache, Action>(Compile).CreateGenericMethod(lambdaExpression.Type)
                 .Invoke(null, new object[] { lambdaExpression, cache });
     }
 
@@ -1043,10 +1043,10 @@ public static class ExpressionExtensions
         switch (type)
         {
             case ExpressionType.Equal:
-                return (v1, v2) => object.Equals(v1, v2);
+                return (v1, v2) => Equals(v1, v2);
 
             case ExpressionType.NotEqual:
-                return (v1, v2) => !object.Equals(v1, v2);
+                return (v1, v2) => !Equals(v1, v2);
 
             case ExpressionType.OrElse:
                 return (v1, v2) => ((bool)v1) || ((bool)v2);

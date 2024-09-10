@@ -67,8 +67,6 @@ public class SecurityFilterBuilderFactory<TPermission, TDomainObject>(
             v => lazyHasAccessFunc.Value(v));
     }
 
-
-
     protected override SecurityFilterBuilder<TPermission, TDomainObject> CreateBuilder(SecurityPath<TDomainObject>.ConditionPath securityPath)
     {
         return new ConditionFilterBuilder<TPermission, TDomainObject>(securityPath);
@@ -103,5 +101,5 @@ public class SecurityFilterBuilderFactory<TPermission, TDomainObject>(
         return new NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(nestedBuilderFactory, securityPath);
     }
 
-    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
+    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
 }

@@ -81,5 +81,5 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
     }
 
 
-    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
+    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
 }

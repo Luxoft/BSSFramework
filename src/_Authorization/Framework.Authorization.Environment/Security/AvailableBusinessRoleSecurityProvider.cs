@@ -18,8 +18,6 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
             .Pipe(permissionQ => ExpressionHelper.Create((BusinessRole businessRole) => permissionQ.Select(p => p.Role).Contains(businessRole)))
             .OverrideInput(toBusinessRolePathInfo.Path);
 
-    protected override LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.All;
-
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));

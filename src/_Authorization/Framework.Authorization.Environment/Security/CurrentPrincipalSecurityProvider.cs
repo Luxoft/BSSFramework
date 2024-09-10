@@ -17,8 +17,6 @@ public class CurrentPrincipalSecurityProvider<TDomainObject>(
         ExpressionHelper.Create((Principal principal) => principal == currentPrincipalSource.CurrentPrincipal)
                         .OverrideInput(toPrincipalPathInfo.Path);
 
-    protected override LambdaCompileMode SecurityFilterCompileMode { get; } = LambdaCompileMode.All;
-
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject) =>
         SecurityAccessorData.Return(currentPrincipalSource.CurrentPrincipal.Name);
 }

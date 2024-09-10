@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 using Framework.DependencyInjection;
-using Framework.DomainDriven.WebApiNetCore.Auth;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.WebApi.Utils.SL;
 

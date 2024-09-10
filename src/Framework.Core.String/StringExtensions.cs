@@ -99,7 +99,7 @@ public static class StringExtensions
         }
         else if (raiseIfNotEquals)
         {
-            throw new System.ArgumentException($"Invalid input: {input}. Expected start element: {pattern}", nameof(input));
+            throw new ArgumentException($"Invalid input: {input}. Expected start element: {pattern}", nameof(input));
         }
         else
         {
@@ -142,7 +142,7 @@ public static class StringExtensions
         }
         else if (raiseIfNotEquals)
         {
-            throw new System.ArgumentException($"Invalid input: {input}. Expected last element: {pattern}", nameof(input));
+            throw new ArgumentException($"Invalid input: {input}. Expected last element: {pattern}", nameof(input));
         }
         else
         {

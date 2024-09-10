@@ -84,11 +84,11 @@ public class ManagementUnit :
 
     public static bool operator ==(ManagementUnit left, IUnit<ManagementUnit> right)
     {
-        return object.Equals(left, right);
+        return Equals(left, right);
     }
 
     public static bool operator !=(ManagementUnit left, IUnit<ManagementUnit> right)
     {
-        return !object.Equals(left, right);
+        return !Equals(left, right);
     }
 }

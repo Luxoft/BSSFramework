@@ -121,9 +121,9 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
     {
         if (this.Configuration.IsDomainObject(propertyType))
         {
-            if (this.Configuration.Environment.ServerDTO.GeneratePolicy.Used(propertyType, DTOGenerator.FileType.SimpleDTO))
+            if (this.Configuration.Environment.ServerDTO.GeneratePolicy.Used(propertyType, FileType.SimpleDTO))
             {
-                var result = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(propertyType, DTOGenerator.FileType.SimpleDTO);
+                var result = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(propertyType, FileType.SimpleDTO);
 
                 yield return result;
 
@@ -136,9 +136,9 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
         else if (propertyType.IsCollection()
                  && this.Configuration.IsDomainObject(propertyType.GetCollectionOrArrayElementType()))
         {
-            if (this.Configuration.Environment.ServerDTO.GeneratePolicy.Used(propertyType.GetCollectionOrArrayElementType(), DTOGenerator.FileType.SimpleDTO))
+            if (this.Configuration.Environment.ServerDTO.GeneratePolicy.Used(propertyType.GetCollectionOrArrayElementType(), FileType.SimpleDTO))
             {
-                var type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(propertyType.GetCollectionOrArrayElementType(), DTOGenerator.FileType.SimpleDTO);
+                var type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(propertyType.GetCollectionOrArrayElementType(), FileType.SimpleDTO);
                 var result = new CodeTypeReference(propertyType.GetGenericTypeDefinition()).Self(z => z.TypeArguments.Add(type));
 
                 yield return result;

@@ -24,7 +24,7 @@ public static class ValidationResultExtensions
         return addedItemsValidateFunc(mergeResult.AddingItems) + removedItemsValidateFunc(mergeResult.RemovingItems);
     }
 
-    public static ValidationResult ToValidationResult<T>(this Framework.Core.ITryResult<T> tryResult)
+    public static ValidationResult ToValidationResult<T>(this ITryResult<T> tryResult)
     {
         return tryResult.Match(_ => ValidationResult.Success, ValidationResult.CreateError);
     }

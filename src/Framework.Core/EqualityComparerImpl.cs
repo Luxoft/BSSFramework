@@ -14,7 +14,7 @@ public class PropertyEqualityComparer<T, TProperty> : EqualityComparer<T>
         var xValue = this.getPropertyFunc(x);
         var yValue = this.getPropertyFunc(y);
 
-        return object.Equals(xValue, yValue);
+        return Equals(xValue, yValue);
     }
 
     public override int GetHashCode(T obj)

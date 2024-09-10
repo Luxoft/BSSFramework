@@ -35,7 +35,7 @@ public class WebApiExceptionExpander(IExceptionExpander exceptionExpander) : IWe
                                          typeof(BusinessLogicException),
                                          typeof(IntegrationException),
                                          typeof(SecurityException),
-                                         typeof(Framework.Validation.ValidationException),
+                                         typeof(Validation.ValidationException),
                                          typeof(DALException),
                                          typeof(StaleDomainObjectStateException),
                                          typeof(AccessDeniedException),

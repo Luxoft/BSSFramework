@@ -8,12 +8,12 @@ public class UpdatePermissionDelegatesModel : DomainObjectBase
         this.RemoveItems = new List<Permission>();
     }
 
-    [Framework.Restriction.Required]
+    [Restriction.Required]
     public Permission DelegateFromPermission { get; set; }
 
-    [Framework.Restriction.Required]
+    [Restriction.Required]
     public IList<DelegateToItemModel> AddItems { get; set; }
 
-    [Framework.Restriction.Required]
+    [Restriction.Required]
     public IList<Permission> RemoveItems { get; set; }
 }

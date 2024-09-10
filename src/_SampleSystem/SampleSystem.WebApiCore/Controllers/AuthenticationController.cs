@@ -6,7 +6,7 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 [ApiController]
 public class AuthenticationController : ControllerBase
 {
-    [HttpGet(nameof(IsAuthenticated))]
+    [HttpGet]
     public bool IsAuthenticated()
     {
         return this.HttpContext.User.Identity!.IsAuthenticated;

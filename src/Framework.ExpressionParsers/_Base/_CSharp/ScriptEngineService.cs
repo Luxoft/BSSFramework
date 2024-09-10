@@ -137,7 +137,7 @@ public class ScriptEngineService
 
         if (genericParameterSequencies.Count != expressionParameterNames.Count)
         {
-            throw new System.ArgumentException("Amount generic parameters not equal input parameters in expression");
+            throw new ArgumentException("Amount generic parameters not equal input parameters in expression");
         }
 
         return genericParameterSequencies.Join(expressionParameterNames, z => z.Index, z => z.Index,

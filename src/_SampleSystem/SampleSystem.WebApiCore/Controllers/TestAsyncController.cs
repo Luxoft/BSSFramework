@@ -20,7 +20,7 @@ public class TestAsyncController(
     : ControllerBase
 {
     [DBSessionMode(DBSessionMode.Read)]
-    [HttpPost(nameof(AsyncGetLocations))]
+    [HttpPost]
     public async Task<List<LocationSimpleDTO>> AsyncGetLocations(CancellationToken cancellationToken = default)
     {
         var list = await locationViewRepository.GetQueryable().ToListAsync(cancellationToken);
@@ -28,7 +28,7 @@ public class TestAsyncController(
         return list.ToSimpleDTOList(mappingService);
     }
 
-    [HttpPost(nameof(AsyncSaveLocation))]
+    [HttpPost]
     public async Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO locationStrictDTO, CancellationToken cancellationToken = default)
     {
         var location = locationStrictDTO.ToDomainObject(mappingService, true);
@@ -39,13 +39,13 @@ public class TestAsyncController(
     }
 
     [DBSessionMode(DBSessionMode.Read)]
-    [HttpPost(nameof(AsyncSaveLocationWithWriteException))]
+    [HttpPost]
     public async Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO locationStrictDTO, CancellationToken cancellationToken = default)
     {
         return await this.AsyncSaveLocation(locationStrictDTO, cancellationToken);
     }
 
-    [HttpGet(nameof(TestDelay))]
+    [HttpGet]
     public async Task<int> TestDelay(CancellationToken cancellationToken = default)
     {
         await Task.Delay(new TimeSpan(0, 1, 0), cancellationToken);

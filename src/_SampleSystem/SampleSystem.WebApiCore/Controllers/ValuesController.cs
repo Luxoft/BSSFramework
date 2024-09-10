@@ -2,7 +2,7 @@
 
 namespace SampleSystem.WebApiCore.Controllers;
 
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 [ApiController]
 public class ValuesController : ControllerBase
 {

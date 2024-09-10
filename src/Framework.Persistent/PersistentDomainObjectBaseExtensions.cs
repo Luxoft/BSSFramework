@@ -31,10 +31,10 @@ public static class PersistentDomainObjectBaseExtensions
 
         var field = (fieldExpr.Body as MemberExpression)
                     .Maybe(expr => expr.Member as FieldInfo)
-                    .FromMaybe(() => new System.ArgumentException("Invalid field expression", nameof(fieldExpr)));
+                    .FromMaybe(() => new ArgumentException("Invalid field expression", nameof(fieldExpr)));
 
 
-        if (!object.Equals(field.GetValue(source), newValue))
+        if (!Equals(field.GetValue(source), newValue))
         {
             if (!source.Id.IsDefault())
             {
@@ -65,10 +65,10 @@ public static class PersistentDomainObjectBaseExtensions
 
         var property = (propertyExpr.Body as MemberExpression)
                        .Maybe(expr => expr.Member as PropertyInfo)
-                       .FromMaybe(() => new System.ArgumentException("Invalid property expression", nameof(propertyExpr)));
+                       .FromMaybe(() => new ArgumentException("Invalid property expression", nameof(propertyExpr)));
 
 
-        if (!object.Equals(property.GetValue(source, null), newValue))
+        if (!Equals(property.GetValue(source, null), newValue))
         {
             if (!source.Id.IsDefault())
             {
@@ -130,6 +130,6 @@ public static class PersistentDomainObjectBaseExtensions
 
                                 select collection;
 
-        return collectionRequest.GetValue(() => new System.ArgumentException("Invalid property expression", nameof(propertyExpr)));
+        return collectionRequest.GetValue(() => new ArgumentException("Invalid property expression", nameof(propertyExpr)));
     }
 }

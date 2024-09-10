@@ -87,8 +87,8 @@ public static class ServiceCollectionExtensions
         return services
                .RegisterBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
                .AddScopedFrom<ICurrentRevisionService, IDBSession>()
-               .AddScoped<IMessageSender<Framework.Notification.MessageTemplateNotification>, TemplateMessageSender>()
-               .AddScoped<IMessageSender<Framework.Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
+               .AddScoped<IMessageSender<Notification.MessageTemplateNotification>, TemplateMessageSender>()
+               .AddScoped<IMessageSender<Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
     }
 
     public static IServiceCollection RegisterProjectionDomainSecurityServices(this IServiceCollection services, Assembly assembly)

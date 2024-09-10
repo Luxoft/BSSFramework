@@ -8,7 +8,7 @@ namespace Authorization.WebApi.Controllers;
 [Route("authApi/[controller]/[action]")]
 public class OperationController(IAvailableSecurityOperationSource availableSecurityOperationSource) : ControllerBase
 {
-    [HttpPost(nameof(GetSecurityOperations))]
+    [HttpPost]
     public async Task<IEnumerable<string>> GetSecurityOperations(CancellationToken cancellationToken)
     {
         var operations = await availableSecurityOperationSource.GetAvailableSecurityOperations(cancellationToken);

@@ -336,7 +336,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         var internalPropertyValidatorType = typeof(UniqueCollectionValidator<,,,>).MakeGenericType(property.ReflectedType, property.PropertyType, elementType, groupElementType);
 
 
-        var trimNullMethod = typeof(Core.StringExtensions)
+        var trimNullMethod = typeof(StringExtensions)
                              .ToTypeReferenceExpression()
                              .ToMethodReferenceExpression("TrimNull");
 
@@ -380,7 +380,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     protected virtual CodeExpression ExpandClassAttributes(ClassValidatorAttribute attribute)
     {
-        if (attribute is Framework.Validation.RequiredGroupValidatorAttribute)
+        if (attribute is RequiredGroupValidatorAttribute)
         {
             return this.GetRequiredGroupValidator(attribute as RequiredGroupValidatorAttribute);
         }

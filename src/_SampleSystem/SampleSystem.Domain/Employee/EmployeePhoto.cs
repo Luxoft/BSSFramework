@@ -38,7 +38,7 @@ public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>,
         get { return this.employee; }
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     public virtual string ContentType
     {
         get { return this.contentType.TrimNull(); }
@@ -59,7 +59,7 @@ public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>,
 
     [Mapping(ColumnName = "Photo")]
     [MaxLength(DEFAULT_PHOTO_MAX_SIZE)]
-    [Framework.Restriction.Required]
+    [Required]
     public virtual byte[] Data
     {
         get { return this.data; }

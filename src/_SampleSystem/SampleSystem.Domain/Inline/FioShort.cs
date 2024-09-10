@@ -87,7 +87,7 @@ public class FioShort : ICloneable<FioShort>, IEquatable<FioShort>
 
     public static bool operator ==(FioShort v1, FioShort v2)
     {
-        return object.ReferenceEquals(v1, v2) || (!object.ReferenceEquals(v1, null) && v1.Equals(v2));
+        return ReferenceEquals(v1, v2) || (!ReferenceEquals(v1, null) && v1.Equals(v2));
     }
 
     public static bool operator !=(FioShort v1, FioShort v2)

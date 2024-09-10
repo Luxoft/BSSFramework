@@ -7,7 +7,7 @@ public partial class TestBusinessUnit
     public override string CalcProp
     {
         get => this.Name + this.Name;
-        set => throw new System.NotImplementedException();
+        set => throw new NotImplementedException();
     }
 
     public override string[][] CalcMatrix => new string[][]

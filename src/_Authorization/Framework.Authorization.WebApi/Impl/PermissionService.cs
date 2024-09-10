@@ -8,7 +8,7 @@ namespace Framework.Authorization.WebApi;
 
 public partial class AuthSLJsonController
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(ChangeDelegatePermissions))]
+    [HttpPost]
     public void ChangeDelegatePermissions([FromForm] ChangePermissionDelegatesModelStrictDTO changePermissionDelegatesModelStrictDTO)
     {
         if (changePermissionDelegatesModelStrictDTO == null)
@@ -26,7 +26,7 @@ public partial class AuthSLJsonController
             });
     }
 
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetVisualBusinessRolesByPermission))]
+    [HttpPost]
     public IEnumerable<BusinessRoleVisualDTO> GetVisualBusinessRolesByPermission([FromForm] PermissionIdentityDTO permission)
     {
         return new[]

@@ -53,11 +53,11 @@ public class StringPattern
     {
         if (string.IsNullOrEmpty(value))
         {
-            throw new System.ArgumentException($"Setted value can't be empty. Method:{methodInfo.Name}");
+            throw new ArgumentException($"Setted value can't be empty. Method:{methodInfo.Name}");
         }
         if (!string.IsNullOrEmpty(getValue()))
         {
-            throw new System.ArgumentException($"Parameter also initialized. Method:{methodInfo.Name}");
+            throw new ArgumentException($"Parameter also initialized. Method:{methodInfo.Name}");
         }
         setValue(value);
     }

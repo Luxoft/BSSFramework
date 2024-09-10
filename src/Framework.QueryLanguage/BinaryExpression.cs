@@ -13,8 +13,8 @@ public class BinaryExpression : Expression
     {
         if (binaryExpression == null) throw new ArgumentNullException(nameof(binaryExpression));
 
-        this.Left = Expression.Create(binaryExpression.Left);
-        this.Right = Expression.Create(binaryExpression.Right);
+        this.Left = Create(binaryExpression.Left);
+        this.Right = Create(binaryExpression.Right);
         this.Operation = binaryExpression.NodeType.ToBinaryOperation();
     }
 

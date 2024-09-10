@@ -12,7 +12,7 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 
 public partial class BusinessUnitController
 {
-    [HttpPost(nameof(GetFullBusinessUnitsTree))]
+    [HttpPost]
     public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> GetFullBusinessUnitsTree()
     {
         return this.Evaluate(
@@ -25,7 +25,7 @@ public partial class BusinessUnitController
                              });
     }
 
-    [HttpPost(nameof(GetFullBusinessUnitsTreeByOData))]
+    [HttpPost]
     public SelectOperationResult<HierarchicalNode<BusinessUnitFullDTO, Guid>> GetFullBusinessUnitsTreeByOData(string odataQueryString)
     {
         return this.Evaluate(
@@ -44,7 +44,7 @@ public partial class BusinessUnitController
                              });
     }
 
-    [HttpPost(nameof(TestPeriod))]
+    [HttpPost]
     public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> TestPeriod(Framework.Core.Period period)
     {
         return null;

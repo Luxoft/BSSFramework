@@ -19,7 +19,7 @@ public class BusinessLogicSelectOperationParser : SelectOperationParser
     {
         return base.GetParsingError(input).Message.Pipe(baseMessage =>
 
-                                                                new Framework.Exceptions.BusinessLogicException(baseMessage));
+                                                                new Exceptions.BusinessLogicException(baseMessage));
     }
 
 

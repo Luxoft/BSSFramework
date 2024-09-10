@@ -7,7 +7,7 @@ namespace Framework.Authorization.WebApi;
 
 public partial class AuthSLJsonController
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(RunAsUser))]
+    [HttpPost]
     public void RunAsUser([FromForm] PrincipalIdentityDTO principal)
     {
         this.EvaluateC(DBSessionMode.Write, context =>
@@ -18,7 +18,7 @@ public partial class AuthSLJsonController
                                             });
     }
 
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(FinishRunAsUser))]
+    [HttpPost]
     public void FinishRunAsUser()
     {
         this.Evaluate(DBSessionMode.Write, evaluateData => evaluateData.Context.RunAsManager.FinishRunAsUserAsync().GetAwaiter().GetResult());

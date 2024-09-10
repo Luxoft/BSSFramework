@@ -102,7 +102,7 @@ public static class CommonPeriodExtensions
     {
         if (period.EndDate == null)
         {
-            throw new System.ArgumentException("нельзя выполнить операцию для данного объекта");
+            throw new ArgumentException("нельзя выполнить операцию для данного объекта");
         }
 
         var result = new List<DateTime?>((period.EndDateValue - period.StartDate).Days);

@@ -30,7 +30,7 @@ public class ServerPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileF
                };
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
+    protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         var contextParameter = this.Configuration.BLLContextTypeReference.ToParameterDeclarationExpression("context");
 

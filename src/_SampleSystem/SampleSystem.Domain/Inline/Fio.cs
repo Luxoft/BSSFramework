@@ -57,7 +57,7 @@ public class Fio : FioShort, ICloneable<Fio>
 
     public static bool operator ==(Fio v1, Fio v2)
     {
-        return object.ReferenceEquals(v1, v2) || (!object.ReferenceEquals(v1, null) && v1.Equals(v2));
+        return ReferenceEquals(v1, v2) || (!ReferenceEquals(v1, null) && v1.Equals(v2));
     }
 
     public static bool operator !=(Fio v1, Fio v2)

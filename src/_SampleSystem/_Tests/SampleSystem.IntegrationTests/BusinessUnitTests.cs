@@ -57,7 +57,7 @@ public class BusinessUnitTests : TestBase
     public void CheckBusinessUnitSecondaryAccess_HasAccess()
     {
         // Arrange
-        var businessUnitQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>(EmployeeName);
+        var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitQueryController>(EmployeeName);
 
         // Act
         var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest

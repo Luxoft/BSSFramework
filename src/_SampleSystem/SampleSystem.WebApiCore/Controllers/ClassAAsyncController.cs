@@ -31,7 +31,7 @@ public class ClassAAsyncController : ControllerBase
     }
 
     [DBSessionMode(DBSessionMode.Write)]
-    [HttpPost(nameof(CreateClassA))]
+    [HttpPost]
     public async Task CreateClassA(int value, bool withSession, CancellationToken cancellationToken)
     {
         if (withSession)

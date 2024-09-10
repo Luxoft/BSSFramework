@@ -72,7 +72,7 @@ public class EmployeeTests : TestBase
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
+        var employeeQueryController = this.GetControllerEvaluator<WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
         foreach (var pin in new[] { 123, 456 })
         {
@@ -97,7 +97,7 @@ public class EmployeeTests : TestBase
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
+        var employeeQueryController = this.GetControllerEvaluator<WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
         var idToPinMap = new Dictionary<Guid, int> { { Guid.NewGuid(), 123 }, { Guid.NewGuid(), 456 } };
 
@@ -138,7 +138,7 @@ public class EmployeeTests : TestBase
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
+        var employeeQueryController = this.GetControllerEvaluator<WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
         var idToPinMap = new Dictionary<Guid, int> { { Guid.NewGuid(), 123 }, { Guid.NewGuid(), 456 } };
 
@@ -179,7 +179,7 @@ public class EmployeeTests : TestBase
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
+        var employeeQueryController = this.GetControllerEvaluator<WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
         foreach (var pin in new[] { 123, 456 })
         {

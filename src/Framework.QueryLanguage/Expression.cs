@@ -184,8 +184,8 @@ public abstract class Expression : IEquatable<Expression>
 
     public bool Equals(Expression other)
     {
-        return object.ReferenceEquals(this, other)
-               || (!object.ReferenceEquals(null, other) && this.InternalEquals(other));
+        return ReferenceEquals(this, other)
+               || (!ReferenceEquals(null, other) && this.InternalEquals(other));
     }
 
 
@@ -194,8 +194,8 @@ public abstract class Expression : IEquatable<Expression>
 
     public static bool operator ==(Expression expression, Expression otherExpression)
     {
-        return object.ReferenceEquals(expression, otherExpression)
-               || (!object.ReferenceEquals(expression, null) && expression.Equals(otherExpression));
+        return ReferenceEquals(expression, otherExpression)
+               || (!ReferenceEquals(expression, null) && expression.Equals(otherExpression));
     }
 
     public static bool operator !=(Expression expression, Expression otherExpression)

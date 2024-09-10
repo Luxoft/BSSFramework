@@ -6,7 +6,7 @@ namespace Framework.Authorization.WebApi;
 
 public partial class AuthSLJsonController(IAvailableSecurityOperationSource availableSecurityOperationSource)
 {
-    [HttpPost(nameof(GetSecurityOperations))]
+    [HttpPost]
     public virtual async Task<IEnumerable<string>> GetSecurityOperations(CancellationToken cancellationToken = default)
     {
         var operations = await availableSecurityOperationSource.GetAvailableSecurityOperations(cancellationToken);

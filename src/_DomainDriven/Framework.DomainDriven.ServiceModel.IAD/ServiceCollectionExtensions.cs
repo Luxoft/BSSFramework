@@ -111,7 +111,7 @@ public static class ServiceCollectionExtensions
     {
         services
             .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
-                Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
+                PersistentDomainObjectBase, Guid>>();
 
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();

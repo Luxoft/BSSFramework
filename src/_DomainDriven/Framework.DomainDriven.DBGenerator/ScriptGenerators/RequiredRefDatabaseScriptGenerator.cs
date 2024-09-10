@@ -285,7 +285,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
         if (null == result)
         {
-            throw new System.ArgumentException("No domainTypeMetadata for {0} type", type.Name);
+            throw new ArgumentException("No domainTypeMetadata for {0} type", type.Name);
         }
 
         return result;

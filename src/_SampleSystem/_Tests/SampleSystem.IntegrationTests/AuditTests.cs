@@ -131,7 +131,7 @@ public class AuditTests : TestBase
     {
         // Act
         var employeeController = this.MainWebApi.Employee;
-        var employeeAuditController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
+        var employeeAuditController = this.GetControllerEvaluator<WebApiCore.Controllers.Audit.EmployeeController>();
         var testCount = 10;
         var emailTail = "@email.email";
 
@@ -176,7 +176,7 @@ public class AuditTests : TestBase
     {
         // Act
         var employeeController = this.MainWebApi.Employee;
-        var employeeAuditController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
+        var employeeAuditController = this.GetControllerEvaluator<WebApiCore.Controllers.Audit.EmployeeController>();
         var testCount = 10;
         var emailTail = "@email.email";
 
@@ -221,7 +221,7 @@ public class AuditTests : TestBase
     {
         // Act
         var employeeController = this.MainWebApi.Employee;
-        var employeeAuditController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
+        var employeeAuditController = this.GetControllerEvaluator<WebApiCore.Controllers.Audit.EmployeeController>();
         var testCount = 10;
         var emailTail = "@email.email";
 

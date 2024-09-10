@@ -36,7 +36,7 @@ public class BLLFactoryFileFactory<TConfiguration> : FileFactory<TConfiguration>
         return this.Configuration.Environment.BLLCore.GetBLLContextContainerCodeTypeDeclaration(this.Name, false, this.GetBaseReference());
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
+    protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         yield return this.BLLFactoryInterfaceRef;
     }

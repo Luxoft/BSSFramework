@@ -13,7 +13,7 @@ internal class ConstantComparer : ExpressionComparer<ConstantExpression>
 
     public override bool Equals(ConstantExpression x, ConstantExpression y)
     {
-        return base.Equals(x, y) && object.Equals(x.Value, y.Value);
+        return base.Equals(x, y) && Equals(x.Value, y.Value);
     }
 
     public override int GetHashCode(ConstantExpression obj)

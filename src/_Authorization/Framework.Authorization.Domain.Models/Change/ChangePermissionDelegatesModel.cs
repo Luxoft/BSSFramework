@@ -9,10 +9,10 @@ public class ChangePermissionDelegatesModel : DomainObjectBase
         this.Items = new List<DelegateToItemModel>();
     }
 
-    [Framework.Restriction.Required]
+    [Restriction.Required]
     public Permission DelegateFromPermission { get; set; }
 
-    [Framework.Restriction.Required]
+    [Restriction.Required]
     public IList<DelegateToItemModel> Items { get; set; }
 
     public void Merge(UpdatePermissionDelegatesModel updatePermissionDelegatesModel)
@@ -21,7 +21,7 @@ public class ChangePermissionDelegatesModel : DomainObjectBase
 
         if (this.DelegateFromPermission != updatePermissionDelegatesModel.DelegateFromPermission)
         {
-            throw new System.ArgumentException("Invalida delegated from principal", nameof(updatePermissionDelegatesModel));
+            throw new ArgumentException("Invalida delegated from principal", nameof(updatePermissionDelegatesModel));
         }
 
         this.Items.AddRange(updatePermissionDelegatesModel.AddItems.Where(tryAddItem => this.Items.All(item => item.Permission != tryAddItem.Permission)));

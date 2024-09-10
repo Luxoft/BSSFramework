@@ -28,7 +28,7 @@ public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContaine
         return base.GetBaseTypes().Concat([typeof(IBLLFactoryInitializer).ToTypeReference()]);
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
+    protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         var contextTypeRef = this.Configuration.BLLContextTypeReference;
         var contextField = contextTypeRef.ToMemberField("Context");
@@ -158,9 +158,9 @@ public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContaine
                 typeof(IDefaultSecurityDomainBLLBase<,,>).MakeGenericType(this.Configuration.Environment.PersistentDomainObjectBaseType, domainType, this.Configuration.Environment.GetIdentityType()).ToTypeReference(),
                 domainType.ToTypeReference());
 
-        var addScopedFromMethod = typeof(Framework.DependencyInjection.ServiceCollectionExtensions).ToTypeReferenceExpression()
+        var addScopedFromMethod = typeof(DependencyInjection.ServiceCollectionExtensions).ToTypeReferenceExpression()
             .ToMethodReferenceExpression(
-                nameof(Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom),
+                nameof(DependencyInjection.ServiceCollectionExtensions.AddScopedFrom),
                 baseFactoryDecl,
                 factoryDecl);
 

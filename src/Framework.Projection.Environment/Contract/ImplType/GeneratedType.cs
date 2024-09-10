@@ -174,7 +174,7 @@ internal class GeneratedType : BaseTypeImpl
 
     public override FieldInfo[] GetFields(BindingFlags bindingAttr)
     {
-        if (bindingAttr.HasFlag(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic))
+        if (bindingAttr.HasFlag(BindingFlags.Instance | BindingFlags.NonPublic))
         {
             return this.generatedFields;
         }
@@ -246,7 +246,7 @@ internal class GeneratedType : BaseTypeImpl
 
     public override bool Equals(Type o)
     {
-        return object.ReferenceEquals(this, o);
+        return ReferenceEquals(this, o);
     }
 
     public override int GetHashCode()

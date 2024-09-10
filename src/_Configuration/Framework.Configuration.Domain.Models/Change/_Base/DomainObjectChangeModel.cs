@@ -6,6 +6,6 @@ namespace Framework.Configuration.Domain;
 public abstract class DomainObjectChangeModel<TDomainObject> : DomainObjectBase, IDomainObjectChangeModel<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase
 {
-    [Framework.Restriction.Required]
+    [Restriction.Required]
     public TDomainObject ChangingObject { get; set; }
 }

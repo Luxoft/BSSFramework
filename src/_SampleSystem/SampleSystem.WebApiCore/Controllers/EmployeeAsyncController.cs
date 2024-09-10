@@ -31,7 +31,7 @@ public class EmployeeAsyncController : ControllerBase
     }
 
     [DBSessionMode(DBSessionMode.Read)]
-    [HttpPost(nameof(GetCurrentEmployee))]
+    [HttpPost]
     public async Task<EmployeeSimpleDTO> GetCurrentEmployee(CancellationToken cancellationToken)
     {
         var userName = this.userAuthenticationService.GetUserName();

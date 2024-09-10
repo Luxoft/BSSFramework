@@ -45,8 +45,8 @@ public class ObjectModification : IEquatable<ObjectModification>
     public bool Equals(ObjectModification other)
     {
         return other != null
-               && object.Equals(other.Object, this._object)
-               && object.Equals(other.ModificationType, this._modificationType);
+               && Equals(other.Object, this._object)
+               && Equals(other.ModificationType, this._modificationType);
     }
 
     public override bool Equals(object obj)

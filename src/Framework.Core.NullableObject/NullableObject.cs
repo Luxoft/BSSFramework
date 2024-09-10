@@ -26,7 +26,7 @@ public class NullableObject<T> : IEquatable<NullableObject<T>>
 
     public bool Equals(NullableObject<T> other)
     {
-        return !object.ReferenceEquals(other, null) && EqualityComparer<T>.Default.Equals(this.Value, other.Value);
+        return !ReferenceEquals(other, null) && EqualityComparer<T>.Default.Equals(this.Value, other.Value);
     }
 
 

@@ -10,7 +10,7 @@ namespace SampleSystem.WebApiCore.Controllers;
 public class AuthSLJsonController(IAvailableSecurityOperationSource availableSecurityOperationSource)
     : Framework.Authorization.WebApi.AuthSLJsonController(availableSecurityOperationSource)
 {
-    [HttpPost(nameof(SavePermission))]
+    [HttpPost]
     public PermissionIdentityDTO SavePermission(SavePermissionAutoRequest savePermissionAutoRequest)
     {
         return this.Evaluate(DBSessionMode.Write, evaluateData =>

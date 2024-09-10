@@ -43,7 +43,7 @@ public static class ServiceEvaluatorExtensions
 
     public static TResult Evaluate<TService, TResult>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, Func<TService, TResult> getResult)
     {
-        Core.TaskResultHelper<TResult>.TypeIsNotTaskValidate();
+        TaskResultHelper<TResult>.TypeIsNotTaskValidate();
 
         return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, async service => getResult(service)).GetAwaiter().GetResult();
     }

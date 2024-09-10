@@ -17,7 +17,7 @@ public class UpdateCodeTypeReferenceService<TConfiguration> : LayerCodeTypeRefer
     }
 
 
-    public override bool IsOptional(System.Reflection.PropertyInfo property)
+    public override bool IsOptional(PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 

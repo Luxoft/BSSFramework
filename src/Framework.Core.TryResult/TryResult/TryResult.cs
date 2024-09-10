@@ -54,7 +54,7 @@ public static class TryResult
 
     public static ITryResult<Ignore> Catch(Action tryGetResult)
     {
-        return TryResult.Catch<Ignore>(() => { tryGetResult(); return Ignore.Value; });
+        return Catch<Ignore>(() => { tryGetResult(); return Ignore.Value; });
     }
 
     public static ITryResult<TResult> Catch<TResult>(Func<TResult> tryGetResult)
@@ -71,7 +71,7 @@ public static class TryResult
 
     public static ITryResult<TArgs, TResult> Catch<TArgs, TResult>(TArgs args, Func<TArgs, TResult> tryGetResult)
     {
-        return TryResult.Catch(args, tryGetResult, z => z);
+        return Catch(args, tryGetResult, z => z);
     }
 
     public static ITryResult<TArgs, TResult> Catch<TArgs, TResult>(TArgs args, Func<TArgs, TResult> tryGetResult, Func<Exception, Exception> exceptionSelector)

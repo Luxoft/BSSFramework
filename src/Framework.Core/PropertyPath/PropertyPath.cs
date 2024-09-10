@@ -107,7 +107,7 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
 
     public static bool operator ==(PropertyPath path1, PropertyPath path2)
     {
-        return object.ReferenceEquals(path1, path2) || (!object.ReferenceEquals(path1, null) && path1.Equals(path2));
+        return ReferenceEquals(path1, path2) || (!ReferenceEquals(path1, null) && path1.Equals(path2));
     }
 
     public static bool operator !=(PropertyPath path1, PropertyPath path2)

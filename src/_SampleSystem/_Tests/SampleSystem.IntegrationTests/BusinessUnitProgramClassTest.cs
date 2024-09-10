@@ -33,7 +33,7 @@ public class BusinessUnitProgramClassTest : TestBase
     public void Get_SortByVirtualProperty_CheckOrderSuccessed()
     {
         // Arrange
-        var businessUnitQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>();
+        var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitQueryController>();
 
         var filter = new BusinessUnitProgramClassFilterModelStrictDTO
                      {
@@ -61,7 +61,7 @@ public class BusinessUnitProgramClassTest : TestBase
     {
         // Arrange
         var namePart = "gramm";
-        var businessUnitQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>();
+        var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitQueryController>();
         var filter = new BusinessUnitProgramClassFilterModelStrictDTO
                      {
                              FilterVirtualName = namePart,

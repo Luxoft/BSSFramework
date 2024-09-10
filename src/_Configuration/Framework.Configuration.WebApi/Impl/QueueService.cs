@@ -3,11 +3,13 @@ using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
 
+using Microsoft.AspNetCore.Mvc;
+
 namespace Framework.Configuration.WebApi;
 
 public partial class ConfigSLJsonController
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(ProcessModifications))]
+    [HttpPost]
     public int ProcessModifications(int limit)
     {
         var result = this.EvaluateC(DBSessionMode.Write, context =>
@@ -19,7 +21,7 @@ public partial class ConfigSLJsonController
         return result.Match(v => v, ex => throw ex);
     }
 
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetEventQueueProcessingState))]
+    [HttpPost]
     public QueueProcessingStateSimpleDTO GetEventQueueProcessingState() =>
         this.Evaluate(DBSessionMode.Read, evaluateData =>
                                           {
@@ -28,7 +30,7 @@ public partial class ConfigSLJsonController
                                               return evaluateData.Context.Logics.DomainObjectEvent.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                           });
 
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetModificationQueueProcessingState))]
+    [HttpPost]
     public QueueProcessingStateSimpleDTO GetModificationQueueProcessingState() =>
         this.Evaluate(DBSessionMode.Read, evaluateData =>
                                           {
@@ -37,7 +39,7 @@ public partial class ConfigSLJsonController
                                               return evaluateData.Context.Logics.DomainObjectModification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                           });
 
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetNotificationQueueProcessingState))]
+    [HttpPost]
     public QueueProcessingStateSimpleDTO GetNotificationQueueProcessingState() =>
         this.Evaluate(DBSessionMode.Read, evaluateData =>
                                           {

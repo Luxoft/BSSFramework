@@ -57,7 +57,7 @@ public class SelectOperation : IDynamicSelectOperation, IEquatable<SelectOperati
 
     public bool Equals(SelectOperation other)
     {
-        return !object.ReferenceEquals(other, null)
+        return !ReferenceEquals(other, null)
                && this.Filter == other.Filter
                && this.Orders.SequenceEqual(other.Orders)
                && this.Expands.SequenceEqual(other.Expands)

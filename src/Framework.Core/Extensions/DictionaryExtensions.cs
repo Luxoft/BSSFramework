@@ -102,11 +102,11 @@ public static class DictionaryExtensions
         return new ReadOnlyDictionary<TKey, TValue>(source.ToDictionary(keySelector, elementSelector));
     }
 
-    public static System.Collections.Generic.SortedDictionary<TKey, TValue> AsSorted<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> source)
+    public static SortedDictionary<TKey, TValue> AsSorted<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        return new System.Collections.Generic.SortedDictionary<TKey, TValue>(source.Clone());
+        return new SortedDictionary<TKey, TValue>(source.Clone());
     }
 
     public static Dictionary<TKey, TValue> AggregateValues<TKey, TValue>(this IEnumerable<IReadOnlyDictionary<TKey, TValue>> dicts, Func<TKey, TValue, TValue, TValue> aggregateFunc)

@@ -18,7 +18,7 @@ public class BusinessUnitAuditController : ControllerBase
         this.dal = dal;
     }
 
-    [HttpGet(nameof(LoadFromCustomAuditMapping))]
+    [HttpGet]
     public (string Author, long Revision, BusinessUnitIdentityDTO BuIdent) LoadFromCustomAuditMapping(BusinessUnitIdentityDTO bu, long revNumber)
     {
         var auditBu = this.dal.GetQueryable().Single(aBu => aBu.Identifier.Id == bu.Id && aBu.Identifier.RevNumber == revNumber);

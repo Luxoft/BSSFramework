@@ -14,6 +14,6 @@ public static class TypeExtensions
 
                       select i.GetGenericArguments().Single(() => new Exception($"Type:{type.Name} has more then one generic argument"));
 
-        return request.SingleOrDefault(() => new System.ArgumentException($"Type:{type.Name} has more then one IIdentityObject interface"));
+        return request.SingleOrDefault(() => new ArgumentException($"Type:{type.Name} has more then one IIdentityObject interface"));
     }
 }

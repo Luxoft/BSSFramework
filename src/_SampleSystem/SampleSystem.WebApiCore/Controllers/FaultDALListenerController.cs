@@ -24,7 +24,7 @@ public class FaultDALListenerController : ControllerBase
         this.repository = repositoryFactory.Create();
     }
 
-    [HttpPost(nameof(TestFault))]
+    [HttpPost]
     [DBSessionMode(DBSessionMode.Write)]
     public async Task<int> TestFault(bool raiseError, CancellationToken cancellationToken)
     {
@@ -35,7 +35,7 @@ public class FaultDALListenerController : ControllerBase
         return 123;
     }
 
-    [HttpPost(nameof(TestFault2))]
+    [HttpPost]
     [DBSessionMode(DBSessionMode.Write)]
     public async IAsyncEnumerable<int> TestFault2(bool raiseError, [EnumeratorCancellation] CancellationToken cancellationToken)
     {

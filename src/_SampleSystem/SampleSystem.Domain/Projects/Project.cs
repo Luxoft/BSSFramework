@@ -55,7 +55,7 @@ public class Project :
         }
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     public virtual DateTime? StartDate
     {
         get { return this.startDate; }
@@ -68,7 +68,7 @@ public class Project :
         set { this.endDate = value; }
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     public virtual DateTime? PlannedEndDate
     {
         get { return this.plannedEndDate; }

@@ -41,7 +41,7 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
 
     public static bool operator ==(PersistentDomainObjectBase a, PersistentDomainObjectBase b)
     {
-        return object.ReferenceEquals(a, b) || (!object.ReferenceEquals(a, null) && !object.ReferenceEquals(b, null) && a.Equals(b));
+        return ReferenceEquals(a, b) || (!ReferenceEquals(a, null) && !ReferenceEquals(b, null) && a.Equals(b));
     }
 
     public static bool operator !=(PersistentDomainObjectBase a, PersistentDomainObjectBase b)
@@ -51,7 +51,7 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
 
     public virtual bool Equals(PersistentDomainObjectBase obj)
     {
-        return object.ReferenceEquals(this, obj) || (!object.ReferenceEquals(obj, null) && this.Id == obj.Id && this.Id != Guid.Empty);
+        return ReferenceEquals(this, obj) || (!ReferenceEquals(obj, null) && this.Id == obj.Id && this.Id != Guid.Empty);
     }
 
     public override bool Equals(object obj)

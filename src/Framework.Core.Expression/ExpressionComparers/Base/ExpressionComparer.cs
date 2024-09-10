@@ -25,7 +25,7 @@ public class ExpressionComparer : IEqualityComparer<Expression>
 
     public bool Equals(Expression x, Expression y)
     {
-        if (object.ReferenceEquals(x, y))
+        if (ReferenceEquals(x, y))
         {
             return true;
         }

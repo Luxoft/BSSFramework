@@ -19,7 +19,7 @@ public static class NotificationSenderExtensions
     public static void RegisterNotificationSmtp(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
-        services.ReplaceScoped<IMessageSender<Framework.Notification.DTO.NotificationEventDTO>, SmtpNotificationMessageSender>();
+        services.ReplaceScoped<IMessageSender<Notification.DTO.NotificationEventDTO>, SmtpNotificationMessageSender>();
     }
 
     /// <summary>

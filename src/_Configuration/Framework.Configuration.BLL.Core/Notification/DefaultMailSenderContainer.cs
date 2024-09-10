@@ -12,7 +12,7 @@ public class DefaultMailSenderContainer : IDefaultMailSenderContainer
     public DefaultMailSenderContainer(MailAddress defaultSender)
     {
         if (defaultSender == null) throw new ArgumentNullException(nameof(defaultSender));
-        if (string.IsNullOrWhiteSpace(defaultSender.DisplayName)) throw new System.ArgumentException("Not initialize sender name in NotificationContext", nameof(defaultSender));
+        if (string.IsNullOrWhiteSpace(defaultSender.DisplayName)) throw new ArgumentException("Not initialize sender name in NotificationContext", nameof(defaultSender));
 
         this.DefaultSender = defaultSender;
     }

@@ -29,7 +29,7 @@ public class BLLContextInterfaceFileFactory<TConfiguration> : FileFactory<TConfi
                };
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
+    protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         var securityServiceFieldTypeRef = this.Configuration.ActualRootSecurityServiceInterfaceType;
 
@@ -48,7 +48,7 @@ public class BLLContextInterfaceFileFactory<TConfiguration> : FileFactory<TConfi
 
     }
 
-    protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
+    protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         yield return new CodeMemberProperty
                      {

@@ -4,7 +4,7 @@ using NHibernate.Event;
 
 namespace Framework.DomainDriven.NHibernate.Audit;
 
-[System.Obsolete("Use AuditInterceptor instead - #IADFRAME-693")]
+[Obsolete("Use AuditInterceptor instead - #IADFRAME-693")]
 public class CreateAuditEventListener : AuditEventListenerBase, IPreInsertEventListener
 {
     public CreateAuditEventListener(IEnumerable<IAuditProperty> auditProperties)

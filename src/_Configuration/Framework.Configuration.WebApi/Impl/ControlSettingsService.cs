@@ -6,11 +6,13 @@ using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
 using Framework.Persistent;
 
+using Microsoft.AspNetCore.Mvc;
+
 namespace Framework.Configuration.WebApi;
 
 public partial class ConfigSLJsonController
 {
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetControlSettings))]
+    [HttpPost]
     public ControlSettingsRichDTO GetControlSettings(string name)
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
@@ -19,7 +21,7 @@ public partial class ConfigSLJsonController
                                                                                  .Maybe(controlSettings => controlSettings.ToRichDTO(evaluateData.MappingService)));
     }
 
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(SaveControlSettingsList))]
+    [HttpPost]
     public void SaveControlSettingsList(List<ControlSettingsStrictDTO> settings)
     {
         this.Evaluate(DBSessionMode.Write, (DomainDriven.ServiceModel.Service.EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService> evaluateData) =>
@@ -48,8 +50,7 @@ public partial class ConfigSLJsonController
 
                                                    domain.ControlSettingsParams.Merge(dto.ControlSettingsParams, s => s.Id, t => t.Id,
                                                                                       t =>
-                                                                                              new Framework.Configuration.Domain.
-                                                                                                      ControlSettingsParam(domain),
+                                                                                              new ControlSettingsParam(domain),
                                                                                       domain.RemoveDetails,
                                                                                       (s, t) => s.MapToDomainObject(customMappingService, t));
                                                    if (dto.Parent.Id != domain.Parent.TryGetId())
@@ -75,9 +76,7 @@ public partial class ConfigSLJsonController
                                                                                            domain.ControlSettingsParams.Merge(dto.ControlSettingsParams,
                                                                                                s => s.Id, t => t.Id,
                                                                                                t =>
-                                                                                                       new Framework.Configuration.
-                                                                                                               Domain.
-                                                                                                               ControlSettingsParam(domain),
+                                                                                                       new ControlSettingsParam(domain),
                                                                                                domain.RemoveDetails,
                                                                                                (s, t) => s.MapToDomainObject(customMappingService, t));
                                                                                            return new { DTO = dto, Domain = domain };
@@ -97,7 +96,7 @@ public partial class ConfigSLJsonController
                                                    {
                                                        if (parent.Id == Guid.Empty)
                                                        {
-                                                           throw new System.ArgumentException("Incorrect sequence of ControlSettings in the list. Parents should goo first");
+                                                           throw new ArgumentException("Incorrect sequence of ControlSettings in the list. Parents should goo first");
                                                        }
                                                        bll.AddChild(parent, domain);
                                                    }
@@ -107,7 +106,7 @@ public partial class ConfigSLJsonController
                                            });
     }
 
-    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(RemoveControlSettingsCollection))]
+    [HttpPost]
     public void RemoveControlSettingsCollection(List<ControlSettingsIdentityDTO> controlSettingsIdCollection)
     {
         this.Evaluate(DBSessionMode.Write, evaluateData =>

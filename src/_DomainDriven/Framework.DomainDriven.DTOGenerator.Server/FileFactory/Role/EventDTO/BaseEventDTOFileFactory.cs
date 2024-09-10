@@ -18,7 +18,7 @@ public class DefaultBaseEventDTOFileFactory<TConfiguration> : FileFactory<IServe
 
 
 
-    protected override System.Collections.Generic.IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
+    protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {
         yield return this.GetDataContractCodeAttributeDeclaration(this.Configuration.EventDataContractNamespace);
 

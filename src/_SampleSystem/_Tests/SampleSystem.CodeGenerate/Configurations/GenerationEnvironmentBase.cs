@@ -46,7 +46,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
         yield return this.LegacyProjectionEnvironment;
 
         yield return this.CreateManualProjectionLambdaEnvironment(
-            typeof(SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection).Assembly);
+            typeof(Domain.ManualProjections.TestManualEmployeeProjection).Assembly);
     }
 
     public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =

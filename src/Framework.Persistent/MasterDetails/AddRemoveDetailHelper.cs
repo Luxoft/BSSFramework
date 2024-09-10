@@ -20,12 +20,12 @@ public static class AddRemoveDetailHelper
 
         if (!EqualityComparer<TMaster>.Default.Equals(child.Master, master))
         {
-            throw new System.ArgumentException($"child ({typeof(TChild).Name}) has other master ({typeof(TMaster).Name})", nameof(child));
+            throw new ArgumentException($"child ({typeof(TChild).Name}) has other master ({typeof(TMaster).Name})", nameof(child));
         }
 
         if (master.Details.Contains(child))
         {
-            throw new System.ArgumentException($"master ({typeof(TMaster).Name}) collection already contains child ({typeof(TChild).Name})", nameof(child));
+            throw new ArgumentException($"master ({typeof(TMaster).Name}) collection already contains child ({typeof(TChild).Name})", nameof(child));
         }
 
         master.Details.Add(child);
@@ -47,12 +47,12 @@ public static class AddRemoveDetailHelper
 
         if (!EqualityComparer<TMaster>.Default.Equals(child.Master, master))
         {
-            throw new System.ArgumentException($"child ({typeof(TChild).Name}) has other master ({typeof(TMaster).Name})", nameof(child));
+            throw new ArgumentException($"child ({typeof(TChild).Name}) has other master ({typeof(TMaster).Name})", nameof(child));
         }
 
         if (!master.Details.Remove(child))
         {
-            throw new System.ArgumentException($"master ({typeof(TMaster).Name}) collection don't contains child ({typeof(TChild).Name})", nameof(child));
+            throw new ArgumentException($"master ({typeof(TMaster).Name}) collection don't contains child ({typeof(TChild).Name})", nameof(child));
         }
     }
 
@@ -86,7 +86,7 @@ public static class AddRemoveDetailHelper
 
         if (!master.Details.Remove(child))
         {
-            throw new System.ArgumentException($"master ({typeof(TMaster).Name}) collection don't contains child ({typeof(TChild).Name})", nameof(child));
+            throw new ArgumentException($"master ({typeof(TMaster).Name}) collection don't contains child ({typeof(TChild).Name})", nameof(child));
         }
     }
 

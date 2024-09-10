@@ -62,7 +62,7 @@ public abstract class ClientDTOMappingServiceBase
 
     protected virtual T GetEqualsValue<T>(T currentValue, T baseValue, string propertyName)
     {
-        if (!object.Equals(currentValue, baseValue))
+        if (!Equals(currentValue, baseValue))
         {
             throw new BusinessLogicException($"Property \"{propertyName}\" must be equals");
         }

@@ -170,8 +170,8 @@ public class SyncDenormalizedValuesService<TDomainObject,
     private void LockChanges()
     {
         var namedLock = this.namedLockSource.NamedLocks.Where(nl => nl.DomainType == typeof(TDomainObjectAncestorLink)).Single(
-            () => new System.ArgumentException($"System must have namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "),
-            () => new System.ArgumentException(
+            () => new ArgumentException($"System must have namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "),
+            () => new ArgumentException(
                 $"System have more then one namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "));
 
         this.namedLockService.LockAsync(namedLock, LockRole.Update).GetAwaiter().GetResult();

@@ -11,7 +11,7 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class TestAsyncController(
     [ViewSecurity] IRepository<Location> locationViewRepository,

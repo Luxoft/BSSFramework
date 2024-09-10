@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Authorization.WebApi.Controllers;
 
 [ApiController]
-[Route("authApi/[controller]")]
+[Route("authApi/[controller]/[action]")]
 public class OperationController(IAvailableSecurityOperationSource availableSecurityOperationSource) : ControllerBase
 {
     [HttpPost(nameof(GetSecurityOperations))]

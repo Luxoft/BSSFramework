@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[Route("api/[controller]/[Action]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class PeriodController(TimeProvider timeProvider) : ControllerBase
 {

@@ -10,7 +10,7 @@ using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class FaultDALListenerController : ControllerBase
 {

@@ -4,7 +4,7 @@
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
-    [Microsoft.AspNetCore.Mvc.RouteAttribute("configApi/[controller]")]
+    [Microsoft.AspNetCore.Mvc.RouteAttribute("configApi/[controller]/[action]")]
     public partial class SystemConstantController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService>
     {
         

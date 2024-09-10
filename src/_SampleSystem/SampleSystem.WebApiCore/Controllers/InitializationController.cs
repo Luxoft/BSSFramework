@@ -8,7 +8,7 @@ using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class InitializationController(
     IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator,

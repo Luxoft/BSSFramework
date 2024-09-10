@@ -12,7 +12,7 @@ using SampleSystem.Domain.TestForceAbstract;
 
 namespace SampleSystem.WebApiCore.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class ClassAAsyncController : ControllerBase
 {

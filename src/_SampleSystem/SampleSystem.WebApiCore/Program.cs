@@ -10,6 +10,7 @@ using Framework.DomainDriven.WebApiNetCore;
 using Framework.DomainDriven.WebApiNetCore.JsonConverter;
 
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Authorization;
 
 using SampleSystem.BLL._Command.CreateClassA.Integration;
 using SampleSystem.ServiceEnvironment;
@@ -47,6 +48,14 @@ builder.Services
        .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
        .AddNegotiate();
 
+builder.Services.AddAuthorization(
+    options =>
+    {
+        options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+    });
+
 builder.Services.AddControllers(x => x.EnableEndpointRouting = false)
        .AddJsonOptions(x =>
                        {
@@ -78,10 +87,7 @@ app
 
 if (builder.Environment.IsProduction())
 {
-    app.UseHangfireBss(
-        builder.Configuration,
-        JobList.RunAll,
-        authorizationFilter: new SampleSystemHangfireAuthorization());
+    app.UseHangfireBss(builder.Configuration, JobList.RunAll);
 }
 
 app.Run();

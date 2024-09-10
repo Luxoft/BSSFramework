@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
+using Framework.Restriction;
 using Framework.Validation;
 
 namespace SampleSystem.Domain;
@@ -36,36 +37,36 @@ public class EmployeeCellPhoneBase :
         get { return this.employee; }
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     [NumberAlphabetValidator]
-    [Framework.Restriction.MaxLength(3)]
+    [MaxLength(3)]
     public virtual string CountryCode
     {
         get { return this.countryCode.TrimNull(); }
         set { this.countryCode = value.TrimNull(); }
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     [NumberAlphabetValidator]
-    [Framework.Restriction.MaxLength(5)]
+    [MaxLength(5)]
     public virtual string CityCode
     {
         get { return this.cityCode.TrimNull(); }
         set { this.cityCode = value.TrimNull(); }
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     [NumberAlphabetValidator]
-    [Framework.Restriction.MaxLength(7)]
+    [MaxLength(7)]
     public virtual string Number
     {
         get { return this.number.TrimNull(); }
         set { this.number = value.TrimNull(); }
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     [NumberAlphabetValidator(ExternalChars = "+()")]
-    [Framework.Restriction.MaxLength(18)]
+    [MaxLength(18)]
     public virtual string FullNumber
     {
         get { return this.fullNumber.TrimNull(); }

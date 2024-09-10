@@ -1,8 +1,10 @@
-﻿namespace SampleSystem.Domain;
+﻿using Framework.Restriction;
+
+namespace SampleSystem.Domain;
 
 public abstract class DomainObjectFormatModel<TDomainObject> : DomainObjectBase
         where TDomainObject : PersistentDomainObjectBase
 {
-    [Framework.Restriction.Required]
+    [Required]
     public TDomainObject FormatObject { get; set; }
 }

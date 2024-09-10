@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 
 using Framework.Core;
+using Framework.Restriction;
 using Framework.Validation;
 
 namespace SampleSystem.Domain.Inline;
@@ -12,7 +13,7 @@ public class Fio : FioShort, ICloneable<Fio>
     private string middleName;
 
 
-    [Framework.Restriction.MaxLength(50)]
+    [MaxLength(50)]
     [DataMember]
     public string MiddleName
     {

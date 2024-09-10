@@ -2,6 +2,7 @@
 
 using Framework.DomainDriven.Serialization;
 using Framework.Core;
+using Framework.Restriction;
 using Framework.Validation;
 
 namespace SampleSystem.Domain.Inline;
@@ -22,7 +23,7 @@ public class FioShort : ICloneable<FioShort>, IEquatable<FioShort>
 
 
 
-    [Framework.Restriction.MaxLength(50)]
+    [MaxLength(50)]
     [DataMember]
     public string FirstName
     {
@@ -31,7 +32,7 @@ public class FioShort : ICloneable<FioShort>, IEquatable<FioShort>
     }
 
 
-    [Framework.Restriction.MaxLength(50)]
+    [MaxLength(50)]
     [DataMember]
     public string LastName
     {
@@ -40,7 +41,7 @@ public class FioShort : ICloneable<FioShort>, IEquatable<FioShort>
     }
 
 
-    //[Framework.Restriction.MaxLength(50)]
+    //[MaxLength(50)]
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     [DataMember]
     public virtual string FullName

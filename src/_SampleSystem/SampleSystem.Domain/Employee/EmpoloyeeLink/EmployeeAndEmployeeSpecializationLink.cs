@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
+using Framework.Restriction;
 
 namespace SampleSystem.Domain;
 
@@ -24,16 +25,16 @@ public class EmployeeAndEmployeeSpecializationLink : AuditPersistentDomainObject
     {
     }
 
-    [Framework.Restriction.Required]
-    [Framework.Restriction.UniqueElement]
+    [Required]
+    [UniqueElement]
     public virtual EmployeeSpecialization Specialization
     {
         get { return this.specialization; }
         set { this.specialization = value; }
     }
 
-    [Framework.Restriction.Required]
-    [Framework.Restriction.UniqueElement]
+    [Required]
+    [UniqueElement]
     public virtual Employee Employee
     {
         get { return this.employee; }

@@ -1,13 +1,14 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
+using Framework.Restriction;
 using Framework.Validation;
 
 namespace SampleSystem.Domain;
 
-[Framework.Restriction.UniqueGroup("Uni_Name")]
-[Framework.Restriction.UniqueGroup("Uni_Code")]
-[Framework.Restriction.UniqueGroup("Uni_CodeNative")]
-[Framework.Restriction.UniqueGroup("Uni_NameNative")]
+[UniqueGroup("Uni_Name")]
+[UniqueGroup("Uni_Code")]
+[UniqueGroup("Uni_CodeNative")]
+[UniqueGroup("Uni_NameNative")]
 public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable, ICodeObject
 {
     private string code;
@@ -40,15 +41,15 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
 
     [RequiredValidator(OperationContext = (int)(SampleSystemOperationContext.Request | SampleSystemOperationContext.Register))]
     [CustomName("Luxoft Legal Entity")]
-    [Framework.Restriction.UniqueElement("Uni_Name")]
-    [Framework.Restriction.UniqueElement("Uni_NameNative")]
+    [UniqueElement("Uni_Name")]
+    [UniqueElement("Uni_NameNative")]
     public virtual CompanyLegalEntity CompanyLegalEntity
     {
         get { return this.companyLegalEntity; }
         set { this.companyLegalEntity = value; }
     }
 
-    [Framework.Restriction.UniqueElement("Uni_Name")]
+    [UniqueElement("Uni_Name")]
     public override string Name
     {
         get { return base.Name; }
@@ -57,8 +58,8 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
 
     [RequiredValidator(OperationContext = (int)(SampleSystemOperationContext.Request | SampleSystemOperationContext.Register))]
     [CustomName("Code in English")]
-    [Framework.Restriction.MaxLength(50)]
-    [Framework.Restriction.UniqueElement("Uni_Code")]
+    [MaxLength(50)]
+    [UniqueElement("Uni_Code")]
     public virtual string Code
     {
         get { return this.code.TrimNull(); }
@@ -67,8 +68,8 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
 
     [RequiredValidator(OperationContext = (int)(SampleSystemOperationContext.Request | SampleSystemOperationContext.Register))]
     [CustomName("Code in local language")]
-    [Framework.Restriction.MaxLength(50)]
-    [Framework.Restriction.UniqueElement("Uni_CodeNative")]
+    [MaxLength(50)]
+    [UniqueElement("Uni_CodeNative")]
     public virtual string CodeNative
     {
         get { return this.codeNative.TrimNull(); }
@@ -78,14 +79,14 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
     [RequiredValidator(OperationContext = (int)(SampleSystemOperationContext.Request | SampleSystemOperationContext.Register))]
     [CustomName("Name in local language")]
 
-    [Framework.Restriction.UniqueElement("Uni_NameNative")]
+    [UniqueElement("Uni_NameNative")]
     public virtual string NameNative
     {
         get { return this.nameNative.TrimNull(); }
         set { this.nameNative = value.TrimNull(); }
     }
 
-    [Framework.Restriction.Required]
+    [Required]
     [CustomName("Head of Department")]
     public virtual Employee Head
     {

@@ -1,7 +1,5 @@
 ﻿#nullable enable
 
-using System.Data;
-
 using Framework.Core;
 using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;

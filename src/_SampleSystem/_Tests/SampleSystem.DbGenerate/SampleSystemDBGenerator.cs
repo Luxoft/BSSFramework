@@ -5,12 +5,8 @@ using Framework.Persistent.Mapping;
 
 namespace SampleSystem.DbGenerate;
 
-public class SampleSystemDBGenerator : DBGenerator
+public class SampleSystemDBGenerator(IMappingSettings settings) : DBGenerator(settings)
 {
-    public SampleSystemDBGenerator(IMappingSettings settings) : base(settings)
-    {
-    }
-
     protected override void FilterMetadata(AssemblyMetadata metadata)
     {
         base.FilterMetadata(metadata);

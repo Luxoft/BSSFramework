@@ -25,14 +25,9 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 {
-    private readonly IList<IMappingSettings> mappingSettings;
+    private readonly IReadOnlyList<IMappingSettings> mappingSettings;
 
     private readonly string auditTablePostFix;
-
-    public AuditDatabaseScriptGenerator(IMappingSettings mappingSettings, string auditTablePostfix)
-            : this(new[] { mappingSettings }, auditTablePostfix)
-    {
-    }
 
     public AuditDatabaseScriptGenerator(IEnumerable<IMappingSettings> mappingSettings,
                                         string auditTablePostfix)
@@ -221,7 +216,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
             if (table.IsPhysicalTable && table.SchemaActions.HasFlag(SchemaAction.Update))
             {
-                sqlScript.AddRange(CreateForegnKey(context));
+                sqlScript.AddRange(CreateForeignKey(context));
                 sqlScript.AddRange(CreateIndexScript(context));
             }
 
@@ -237,9 +232,9 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
     {
         var cfg = new Configuration();
 
-        var connectionSettings = new NHibConnectionSettings(context.SqlDatabaseFactory.Server.ConnectionContext.ConnectionString, auditDbName);
+        var connectionInitializer = new NHibConnectionInitializer(context.SqlDatabaseFactory.Server.ConnectionContext.ConnectionString, auditDbName);
 
-        connectionSettings.Init(cfg);
+        connectionInitializer.Initialize(cfg);
 
         var overrideMappingSettings = this.mappingSettings.Select(z => new MappingSettingsWrapper(z, auditDbName)).ToList();
 
@@ -250,7 +245,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
         foreach (var ms in overrideMappingSettings)
         {
-            ms.InitMapping(cfg);
+            ms.Initializer.Initialize(cfg);
         }
 
         cfg.InitializeAudit(overrideMappingSettings, LazyInterfaceImplementHelper.CreateNotImplemented<IAuditRevisionUserAuthenticationService>());
@@ -262,7 +257,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
     private class MappingSettingsWrapper : IMappingSettings
     {
-        private IMappingSettings source;
+        private readonly IMappingSettings source;
 
         private readonly string overrideAuditDatabaseName;
 
@@ -280,17 +275,14 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
         public ReadOnlyCollection<Type> Types => this.source.Types;
 
-        public void InitMapping(Configuration cfg)
-        {
-            this.source.InitMapping(cfg);
-        }
+        public IConfigurationInitializer Initializer => this.source.Initializer;
 
         public IAuditTypeFilter GetAuditTypeFilter()
         {
             return this.source.GetAuditTypeFilter();
         }
     }
-    private static IEnumerable<string> CreateForegnKey(AuditTableGenerateContext context)
+    private static IEnumerable<string> CreateForeignKey(AuditTableGenerateContext context)
     {
         if (context.Dialect.SupportsForeignKeyConstraintInAlterTable)
         {

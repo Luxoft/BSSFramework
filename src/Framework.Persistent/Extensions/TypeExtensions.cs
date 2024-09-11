@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿#nullable enable
+
+using System.Reflection;
 
 using Framework.Core;
 
@@ -40,8 +42,6 @@ public static class TypeExtensions
 
     public static string ExtractSystemName(this Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        return type.Namespace.Split('.').Skip("Framework", false).First();
+        return type.Namespace!.Split('.').Skip("Framework", false).First();
     }
 }

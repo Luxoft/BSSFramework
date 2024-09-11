@@ -6,7 +6,7 @@ public interface IAuditDBScriptGeneratorBuilder : IConfigurable
 {
     IAuditDBScriptGeneratorBuilder WithAuditPostfix(string auditTablePostfix = "Audit");
 
-    IAuditDBScriptGeneratorBuilder WithMappingSettings(IMappingSettings mappingSettingss);
+    IAuditDBScriptGeneratorBuilder WithMappingSettings(IMappingSettings mappingSettings);
 
     IAuditDBScriptGeneratorBuilder WithMappingSettings(IList<IMappingSettings> mappingSettings);
 

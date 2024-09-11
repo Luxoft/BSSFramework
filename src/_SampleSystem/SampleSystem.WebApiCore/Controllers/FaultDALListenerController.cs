@@ -2,6 +2,7 @@
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,25 +13,18 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class FaultDALListenerController : ControllerBase
+public class FaultDALListenerController(
+    ExampleFaultDALListenerSettings listenerSettings,
+    [DisabledSecurity] IRepository<NoSecurityObject> repository)
+    : ControllerBase
 {
-    private readonly ExampleFaultDALListener listener;
-
-    private readonly IRepository<NoSecurityObject> repository;
-
-    public FaultDALListenerController(ExampleFaultDALListener listener, IRepositoryFactory<NoSecurityObject> repositoryFactory)
-    {
-        this.listener = listener;
-        this.repository = repositoryFactory.Create();
-    }
-
     [HttpPost]
     [DBSessionMode(DBSessionMode.Write)]
     public async Task<int> TestFault(bool raiseError, CancellationToken cancellationToken)
     {
-        await this.repository.SaveAsync(new NoSecurityObject(), cancellationToken);
+        await repository.SaveAsync(new NoSecurityObject(), cancellationToken);
 
-        this.listener.Raise = raiseError;
+        listenerSettings.Raise = raiseError;
 
         return 123;
     }
@@ -39,7 +33,7 @@ public class FaultDALListenerController : ControllerBase
     [DBSessionMode(DBSessionMode.Write)]
     public async IAsyncEnumerable<int> TestFault2(bool raiseError, [EnumeratorCancellation] CancellationToken cancellationToken)
     {
-        await this.repository.SaveAsync(new NoSecurityObject(), cancellationToken);
+        await repository.SaveAsync(new NoSecurityObject(), cancellationToken);
 
         yield return 123;
 

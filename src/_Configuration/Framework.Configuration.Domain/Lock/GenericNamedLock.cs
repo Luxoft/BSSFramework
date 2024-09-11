@@ -1,4 +1,5 @@
-﻿using Framework.Restriction;
+﻿using Framework.Persistent.Mapping;
+using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
 
@@ -6,4 +7,5 @@ namespace Framework.Configuration.Domain;
 /// Объект, с помощью которого можно реализовать пессимистическую блокировку в базе данных
 /// </summary>
 [UniqueGroup]
+[NotAuditedClass]
 public class GenericNamedLock : BaseDirectory;

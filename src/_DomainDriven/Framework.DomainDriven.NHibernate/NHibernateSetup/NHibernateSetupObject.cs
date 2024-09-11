@@ -26,7 +26,7 @@ public class NHibernateSetupObject : INHibernateSetupObject
     }
 
     public INHibernateSetupObject AddMapping<TMappingSettings>()
-            where TMappingSettings : class, IMappingSettings
+        where TMappingSettings : class, IMappingSettings
     {
         this.initActions.Add(sc => sc.AddSingleton<IMappingSettings, TMappingSettings>());
 
@@ -40,8 +40,15 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
+    public INHibernateSetupObject AddInitializer(IConfigurationInitializer configurationInitializer)
+    {
+        this.initActions.Add(sc => sc.AddSingleton(configurationInitializer));
+
+        return this;
+    }
+
     public INHibernateSetupObject AddEventListener<TEventListener>()
-            where TEventListener : class, IDBSessionEventListener
+        where TEventListener : class, IDBSessionEventListener
     {
         this.initActions.Add(sc => sc.AddScoped<IDBSessionEventListener, TEventListener>());
 

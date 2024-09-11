@@ -1,4 +1,6 @@
-﻿namespace Framework.DomainDriven;
+﻿#nullable enable
+
+namespace Framework.DomainDriven;
 
 public static class DatabaseNameExtension
 {

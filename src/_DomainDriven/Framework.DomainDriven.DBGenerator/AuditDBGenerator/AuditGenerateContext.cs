@@ -15,7 +15,7 @@ struct AuditGenerateContext
 
 
     public string AuditScheme { get; private set; }
-    public IList<PersistentClass> PersistentClasses { get; private set; }
+    public IReadOnlyList<PersistentClass> PersistentClasses { get; private set; }
     public DatabaseMetadata AuditDatabaseMetadata { get; private set; }
     public DatabaseMetadata OriginalDatabaseMetadata { get; private set; }
     public Dialect Dialect { get; private set; }
@@ -26,7 +26,7 @@ struct AuditGenerateContext
     public ManagedProviderConnectionHelper AuditConnectionHelper { get; private set; }
     public ManagedProviderConnectionHelper OriginalConnectionHelper { get; private set; }
     public DbConnection OriginalConnection { get; private set; }
-    public IList<IMappingSettings> MappingSettings { get; private set; }
+    public IReadOnlyList<IMappingSettings> MappingSettings { get; private set; }
 
     public IDatabaseScriptGeneratorContext Context
     {
@@ -34,14 +34,14 @@ struct AuditGenerateContext
     }
 
     public AuditGenerateContext(
-            IList<PersistentClass> auditClassMappings,
+            IReadOnlyList<PersistentClass> auditClassMappings,
             DatabaseMetadata auditDatabaseMetadata,
             Dialect dialect,
             IMapping mapping,
             string defaultCatalog,
             Configuration cfg,
             string auditScheme,
-            IList<IMappingSettings> metadataProviders,
+            IReadOnlyList<IMappingSettings> metadataProviders,
             IDatabaseScriptGeneratorContext context) : this()
     {
         this._context = context;

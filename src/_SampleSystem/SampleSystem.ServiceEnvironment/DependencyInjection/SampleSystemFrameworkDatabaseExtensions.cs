@@ -31,8 +31,8 @@ public static class SampleSystemFrameworkDatabaseExtensions
         return settings.AddDatabaseSettings(
             setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
 
-                                .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
-                                .AddMapping(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
+                                .AddMapping(new AuthorizationMappingSettings())
+                                .AddMapping(new ConfigurationMappingSettings())
 
                                 .Pipe(
                                     includeTypedAudit,
@@ -41,8 +41,8 @@ public static class SampleSystemFrameworkDatabaseExtensions
                                          .AddMapping(new SampleSystemSystemAuditMappingSettings(string.Empty))
                                          .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty)))
 
-
-                                .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));
+                                .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app")))
+                                .AddInitializer(new SampleSystemConfigurationInitializer(connectionString)));
     }
 
     public static IBssFrameworkSettings AddDatabaseVisitors(this IBssFrameworkSettings settings)

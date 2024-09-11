@@ -34,7 +34,8 @@ public static class SampleSystemApplicationExtensions
                 .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef2, nameof(TestRelativeEmployeeObject.EmployeeRef2));
 
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services) =>
-        services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
+        services.AddScoped<ExampleFaultDALListenerSettings>()
+                .AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
                 .AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>()
                 .AddSingleton<ISlJsonCompatibilitySerializer, SlJsonCompatibilitySerializer>() // For SL
                 .AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both)); // For legacy audit

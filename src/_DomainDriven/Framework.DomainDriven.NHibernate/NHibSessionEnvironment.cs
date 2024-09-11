@@ -1,12 +1,12 @@
-﻿using System.Data;
+﻿#nullable enable
+
+using System.Data;
 
 using Framework.Core;
 using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 using Framework.Exceptions;
-
-
 
 using NHibernate;
 using NHibernate.Cfg;
@@ -20,28 +20,14 @@ public class NHibSessionEnvironment : IDisposable
 {
     private readonly Configuration cfg;
 
-    /// <summary>
-    /// Creates new NH Session Factory
-    /// </summary>
-    /// <param name="connectionSettings">connection settings</param>
-    /// <param name="mappingSettings">mapping settings</param>
-    /// <exception cref="ArgumentNullException">
-    /// connectionSettings
-    /// or
-    /// mappingSettings
-    /// </exception>
-    /// <exception cref="System.ArgumentException">All mapping settings has equal database with schema. Utilities, Workflow has domain object with same names</exception>
-    /// <exception cref="ApplicationException">Could not initialize ServiceFactory.</exception>
     public NHibSessionEnvironment(
-            NHibConnectionSettings connectionSettings,
             IEnumerable<IMappingSettings> mappingSettings,
+            IEnumerable<IConfigurationInitializer> initializers,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
             INHibSessionEnvironmentSettings settings,
             IDalValidationIdentitySource dalValidationIdentitySource)
     {
-        this.ConnectionSettings = connectionSettings ?? throw new ArgumentNullException(nameof(connectionSettings));
-
-        var cachedMappingSettings = (mappingSettings ?? throw new ArgumentNullException(nameof(mappingSettings))).ToList();
+        var cachedMappingSettings = mappingSettings.ToList();
 
         this.TransactionTimeout = settings.TransactionTimeout;
 
@@ -56,16 +42,14 @@ public class NHibSessionEnvironment : IDisposable
 
             this.RegisteredTypes = cachedMappingSettings.ToHashSet(ms => ms.PersistentDomainObjectBaseType);
 
-            foreach (var ms in cachedMappingSettings)
+            foreach (var initializer in cachedMappingSettings.Select(ms => ms.Initializer).Concat(initializers))
             {
-                ms.InitMapping(this.cfg);
+                initializer.Initialize(this.cfg);
             }
 
             this.Configuration.SessionFactory().ParsingLinqThrough<VisitedQueryProvider>();
 
             this.cfg.InitializeAudit(cachedMappingSettings, auditRevisionUserAuthenticationService);
-
-            connectionSettings.Init(this.cfg);
 
             SchemaMetadataUpdater.QuoteTableAndColumns(this.cfg, Dialect.GetDialect(this.cfg.Properties));
 
@@ -79,9 +63,6 @@ public class NHibSessionEnvironment : IDisposable
         }
     }
 
-
-    public NHibConnectionSettings ConnectionSettings { get; }
-
     internal TimeSpan TransactionTimeout { get; }
 
     internal ISessionFactory InternalSessionFactory { get; }
@@ -91,14 +72,6 @@ public class NHibSessionEnvironment : IDisposable
     internal IExceptionProcessor ExceptionProcessor { get; }
 
     public Configuration Configuration => this.cfg;
-
-    /// <summary>
-    /// Process transaction created in Write session
-    /// </summary>
-    public virtual void ProcessTransaction(IDbTransaction dbTransaction)
-    {
-        // Do nothing
-    }
 
     /// <inheritdoc />
     public void Dispose()

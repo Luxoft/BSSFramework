@@ -3,15 +3,14 @@
 public interface INHibernateSetupObject
 {
     INHibernateSetupObject SetEnvironment<TNHibSessionEnvironment>()
-            where TNHibSessionEnvironment : NHibSessionEnvironment;
+        where TNHibSessionEnvironment : NHibSessionEnvironment;
 
     INHibernateSetupObject SetEnvironment(NHibSessionEnvironment sessionEnvironment);
 
-    INHibernateSetupObject AddMapping<TMappingSettings>()
-            where TMappingSettings : class, IMappingSettings;
-
     INHibernateSetupObject AddMapping(IMappingSettings mapping);
 
+    INHibernateSetupObject AddInitializer(IConfigurationInitializer configurationInitializer);
+
     INHibernateSetupObject AddEventListener<TEventListener>()
-            where TEventListener : class, IDBSessionEventListener;
+        where TEventListener : class, IDBSessionEventListener;
 }

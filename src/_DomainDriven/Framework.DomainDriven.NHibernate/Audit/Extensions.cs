@@ -8,7 +8,7 @@ namespace Framework.DomainDriven.NHibernate.Audit;
 
 public static class Extensions
 {
-    public static IAuditAttributeService GetAuditAttributeService(this IList<IMappingSettings> mappingSettings, IEnumerable<PersistentClass> persistentClasses)
+    public static IAuditAttributeService GetAuditAttributeService(this IReadOnlyList<IMappingSettings> mappingSettings, IEnumerable<PersistentClass> persistentClasses)
     {
         var monitoriableTypes = mappingSettings
                                 .Select(z => new { MappingSettings = z, Filter = z.GetAuditTypeFilter() })

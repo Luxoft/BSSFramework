@@ -1,18 +1,20 @@
-﻿using System.Collections.ObjectModel;
+﻿#nullable enable
 
-using NHibernate.Cfg;
+using System.Collections.ObjectModel;
 
 namespace Framework.DomainDriven.NHibernate;
 
-public interface IMappingSettings : IPersistentDomainObjectBaseTypeContainer
+public interface IMappingSettings
 {
     DatabaseName Database { get; }
 
-    AuditDatabaseName AuditDatabase { get; }
+    AuditDatabaseName? AuditDatabase { get; }
+
+    Type PersistentDomainObjectBaseType { get; }
 
     ReadOnlyCollection<Type> Types { get; }
 
-    void InitMapping(Configuration cfg);
+    IConfigurationInitializer Initializer { get; }
 
     IAuditTypeFilter GetAuditTypeFilter();
 }

@@ -21,7 +21,7 @@ public record DatabaseName()
 
     public string Schema { get; init; } = "dbo";
 
-    public override string ToString()
+    public sealed override string ToString()
     {
         if (this.Name == string.Empty)
         {

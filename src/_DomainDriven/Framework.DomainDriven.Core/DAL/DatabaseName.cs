@@ -1,49 +1,25 @@
-﻿using Framework.Core;
+﻿#nullable enable
+
+using Framework.Core;
 
 namespace Framework.DomainDriven;
 
 /// <summary>
 /// Описание базы данных
 /// </summary>
-public class DatabaseName
+public record DatabaseName()
 {
-    /// <summary>
-    /// Имя базы данных
-    /// </summary>
-    public string Name
-    {
-        get;
-    }
+    public DatabaseName(string name)
+        : this() =>
+        this.Name = name;
 
-    /// <summary>
-    /// Схема базы данных
-    /// </summary>
-    public string Schema
-    {
-        get;
-    }
-
-    public DatabaseName(string name, string schema = "dbo")
-    {
-        if (string.IsNullOrWhiteSpace(schema))
-            throw new ArgumentException("Value cannot be null or whitespace.", nameof(schema));
-
-        this.Name = name ?? string.Empty;
+    public DatabaseName(string name, string schema)
+        : this(name) =>
         this.Schema = schema;
-    }
 
-    public override bool Equals(object obj)
-    {
-        if (!(obj is DatabaseName target))
-        {
-            return false;
-        }
+    public string Name { get; set; } = "";
 
-        return string.Equals(this.Name, target.Name, StringComparison.InvariantCultureIgnoreCase)
-               && string.Equals(this.Schema, target.Schema, StringComparison.InvariantCultureIgnoreCase);
-    }
-
-    public override int GetHashCode() => this.Name.ToLower().GetHashCode() ^ this.Schema.ToLower().GetHashCode();
+    public string Schema { get; init; } = "dbo";
 
     public override string ToString()
     {
@@ -56,5 +32,5 @@ public class DatabaseName
     }
 
     [Obsolete("Use constructor", true)]
-    public static implicit operator DatabaseName(string name) => name.MaybeString(v => new DatabaseName(v));
+    public static implicit operator DatabaseName?(string? name) => name.MaybeString(v => new DatabaseName(v));
 }

@@ -8,7 +8,7 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class DefaultAuditTypeFilter : IAuditTypeFilter
 {
-    private IList<IAuditTypeFilter> _filters;
+    private IReadOnlyList<IAuditTypeFilter> _filters;
 
     public DefaultAuditTypeFilter()
     {

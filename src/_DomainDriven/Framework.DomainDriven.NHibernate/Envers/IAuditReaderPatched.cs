@@ -6,7 +6,7 @@ public interface IAuditReaderPatched : IAuditReader
 {
     IEnumerable<TIdentity> GetIdentiesBy<TDomainObject, TIdentity>(IAuditCriterion criterion);
 
-    IList<T> FindObjects<T>(IEnumerable<object> primaryKeys, long revision);
+    IReadOnlyList<T> FindObjects<T>(IEnumerable<object> primaryKeys, long revision);
 
     /// <summary>
     /// Get a list of revision numbers, at which an entity was modified.
@@ -17,7 +17,7 @@ public interface IAuditReaderPatched : IAuditReader
     /// <returns></returns>
     IEnumerable<long> GetRevisions(System.Type cls, object primaryKey, long maxRevisions);
 
-    IList<Tuple<T, long>> GetDomainObjectRevisions<T>(object primaryKey, int takeCount)
+    IReadOnlyList<Tuple<T, long>> GetDomainObjectRevisions<T>(object primaryKey, int takeCount)
             where T : class;
 
     long? GetPreviusRevision(System.Type cls, object primaryKey, long maxRevisions);

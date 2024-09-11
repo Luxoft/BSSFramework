@@ -89,7 +89,7 @@ public class DbGeneratorTest
         ICollection<string> ignoredIndexes = null,
         UserCredential credential = null)
     {
-        var generator = new SampleSystemDBGenerator(this.GetMappingSettings(databaseName, auditDatabaseName));
+        var generator = new SampleSystemDBGenerator(this.GetMappingSettings(serverName, databaseName, auditDatabaseName));
 
         var result = generator.Generate(
             serverName,
@@ -153,10 +153,13 @@ public class DbGeneratorTest
         Console.WriteLine(result);
     }
 
-    private IMappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName)
+    private MappingSettings GetMappingSettings(string serverName, DatabaseName dbName, AuditDatabaseName dbAuditName)
     {
         var mappingXmls = this.environment.DAL.GetMappingGenerators().Select(mg => mg.Generate());
 
-        return new SampleSystemMappingSettings(mappingXmls, dbName, dbAuditName);
+        var connectionString = $"Data Source={serverName};Initial Catalog={dbName.Name};Application Name=SampleSystem";
+
+        return new SampleSystemMappingSettings(mappingXmls, dbName, dbAuditName)
+            .AddInitializer(new SampleSystemConfigurationInitializer(connectionString));
     }
 }

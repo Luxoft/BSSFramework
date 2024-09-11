@@ -12,7 +12,7 @@ namespace Framework.DomainDriven.NHibernate;
 
 public static class AuditedExtension
 {
-    public static void InitializeAudit(this Configuration configuration, IEnumerable<IMappingSettings> preMappingSettings, IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
+    public static void InitializeAudit(this Configuration configuration, IEnumerable<MappingSettings> preMappingSettings, IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
     {
         if (configuration == null)
         {
@@ -54,7 +54,7 @@ public static class AuditedExtension
     }
 
     private static IMetaDataProvider GetProvider<T>(
-            IEnumerable<IGrouping<T, IMappingSettings>> auditedAssemblies,
+            IEnumerable<IGrouping<T, MappingSettings>> auditedAssemblies,
             string tablePostfix,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
     {

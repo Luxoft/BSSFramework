@@ -26,7 +26,7 @@ struct AuditGenerateContext
     public ManagedProviderConnectionHelper AuditConnectionHelper { get; private set; }
     public ManagedProviderConnectionHelper OriginalConnectionHelper { get; private set; }
     public DbConnection OriginalConnection { get; private set; }
-    public IReadOnlyList<IMappingSettings> MappingSettings { get; private set; }
+    public IReadOnlyList<MappingSettings> MappingSettings { get; private set; }
 
     public IDatabaseScriptGeneratorContext Context
     {
@@ -41,7 +41,7 @@ struct AuditGenerateContext
             string defaultCatalog,
             Configuration cfg,
             string auditScheme,
-            IReadOnlyList<IMappingSettings> metadataProviders,
+            IReadOnlyList<MappingSettings> metadataProviders,
             IDatabaseScriptGeneratorContext context) : this()
     {
         this._context = context;

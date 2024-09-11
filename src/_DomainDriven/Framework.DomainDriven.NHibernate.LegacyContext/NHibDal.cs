@@ -81,7 +81,7 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
 
     public IEnumerable<long> GetRevisions(TIdent id) => this.GetAuditReader().GetRevisions(typeof(TDomainObject), id).ToList();
 
-    public IList<Tuple<T, long>> GetDomainObjectRevisions<T>(TIdent id, int takeCount)
+    public IReadOnlyList<Tuple<T, long>> GetDomainObjectRevisions<T>(TIdent id, int takeCount)
         where T : class =>
         this.GetAuditReader().GetDomainObjectRevisions<T>(id, takeCount);
 

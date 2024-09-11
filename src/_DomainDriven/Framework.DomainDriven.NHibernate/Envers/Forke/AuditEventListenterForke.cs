@@ -40,8 +40,8 @@ public class AuditEventListenerForke : AuditEventListener
     private void generateBidirectionalCollectionChangeWorkUnits(AuditProcess auditProcess,
                                                                 IEntityPersister entityPersister,
                                                                 string entityName,
-                                                                IList<object> newState,
-                                                                IList<object> oldState,
+                                                                IReadOnlyList<object> newState,
+                                                                IReadOnlyList<object> oldState,
                                                                 ISessionImplementor session)
     {
         // Checking if this is enabled in configuration ...

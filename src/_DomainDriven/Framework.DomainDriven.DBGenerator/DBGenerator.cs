@@ -5,7 +5,7 @@ using Framework.DomainDriven.NHibernate;
 
 namespace Framework.DomainDriven.DBGenerator;
 
-public class DBGenerator(IMappingSettings settings)
+public class DBGenerator(MappingSettings settings)
 {
     protected virtual void Init(
             DatascriptGeneratorBuilder builder,

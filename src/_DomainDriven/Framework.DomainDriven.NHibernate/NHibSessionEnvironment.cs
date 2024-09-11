@@ -21,7 +21,7 @@ public class NHibSessionEnvironment : IDisposable
     private readonly Configuration cfg;
 
     public NHibSessionEnvironment(
-            IEnumerable<IMappingSettings> mappingSettings,
+            IEnumerable<MappingSettings> mappingSettings,
             IEnumerable<IConfigurationInitializer> initializers,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
             INHibSessionEnvironmentSettings settings,

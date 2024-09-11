@@ -34,7 +34,7 @@ public class Fix2100SqlClientDriver : MicrosoftDataSqlClientDriver
         base.OnBeforePrepare(command);
     }
 
-    private static void InlineIds(DbCommand sqlCommand, IList<SqlParameter> guidParameters)
+    private static void InlineIds(DbCommand sqlCommand, IReadOnlyList<SqlParameter> guidParameters)
     {
         var replacementMap = guidParameters.ToDictionary(
                                                          x => $"{x.ParameterName}",

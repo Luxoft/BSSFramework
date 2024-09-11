@@ -4,8 +4,8 @@ using Framework.DomainDriven.NHibernate;
 
 namespace Framework.Authorization.Generated.DAL.NHibernate;
 
-public class AuthorizationMappingSettings(DatabaseName databaseName, AuditDatabaseName auditDatabaseName)
-    : MappingSettings<PersistentDomainObjectBase>(typeof(AuthorizationMappingSettings).Assembly, databaseName, auditDatabaseName)
+public record AuthorizationMappingSettings(DatabaseName DatabaseName, AuditDatabaseName AuditDatabaseName)
+    : MappingSettings<PersistentDomainObjectBase>(typeof(AuthorizationMappingSettings).Assembly, DatabaseName, AuditDatabaseName)
 {
     public AuthorizationMappingSettings()
         : this(new DatabaseName("", "auth"))

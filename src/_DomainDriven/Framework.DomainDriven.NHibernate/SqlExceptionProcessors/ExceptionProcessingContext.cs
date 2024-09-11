@@ -52,8 +52,8 @@ public class ExceptionProcessingContext
 {
     private readonly ICollection<PersistentClass> _nhibernatePersistentClass;
     private readonly SchemaDescription _defaultSchemaDescription;
-    private readonly Dictionary<TableDescription, IList<PersistentClass>> _tableNameToPersistentClass;
-    private IList<string> _removingSymbols = new[] {".[dbo]", "[", "]"};
+    private readonly Dictionary<TableDescription, IReadOnlyList<PersistentClass>> _tableNameToPersistentClass;
+    private IReadOnlyList<string> _removingSymbols = new[] {".[dbo]", "[", "]"};
 
     public ExceptionProcessingContext(ICollection<PersistentClass> nhibernatePersistentClass,
                                       SchemaDescription defaultSchemaDescription)
@@ -65,7 +65,7 @@ public class ExceptionProcessingContext
         this._tableNameToPersistentClass =
             nhibernatePersistentClass
                 .GroupBy(z => createTableDescriptionFunc(z.Table))
-                .ToDictionary(z => z.Key, z => (IList<PersistentClass>)z.ToList());
+                .ToDictionary(z => z.Key, z => (IReadOnlyList<PersistentClass>)z.ToList());
     }
 
     public TableDescription CreateTableDescription(Table table)
@@ -88,7 +88,7 @@ public class ExceptionProcessingContext
 
     public IEnumerable<PersistentClass> GetPersistentClass(TableDescription tableDescription)
     {
-        IList<PersistentClass> result;
+        IReadOnlyList<PersistentClass> result;
         if(!this._tableNameToPersistentClass.TryGetValue(tableDescription, out result))
         {
             //костыль

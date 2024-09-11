@@ -23,7 +23,7 @@ public interface IAuditDAL<TDomainObject, TIdent>
 
     IEnumerable<long> GetRevisions(TIdent id);
 
-    IList<Tuple<T, long>> GetDomainObjectRevisions<T>(TIdent id, int takeCount) where T : class;
+    IReadOnlyList<Tuple<T, long>> GetDomainObjectRevisions<T>(TIdent id, int takeCount) where T : class;
 
     /// <summary>
     /// Gets the revisions.

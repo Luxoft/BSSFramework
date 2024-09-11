@@ -25,11 +25,11 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 {
-    private readonly IReadOnlyList<IMappingSettings> mappingSettings;
+    private readonly IReadOnlyList<MappingSettings> mappingSettings;
 
     private readonly string auditTablePostFix;
 
-    public AuditDatabaseScriptGenerator(IEnumerable<IMappingSettings> mappingSettings,
+    public AuditDatabaseScriptGenerator(IEnumerable<MappingSettings> mappingSettings,
                                         string auditTablePostfix)
     {
         if (mappingSettings == null) throw new ArgumentNullException(nameof(mappingSettings));
@@ -236,7 +236,8 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
         connectionInitializer.Initialize(cfg);
 
-        var overrideMappingSettings = this.mappingSettings.Select(z => new MappingSettingsWrapper(z, auditDbName)).ToList();
+        var overrideMappingSettings = this.mappingSettings
+                                          .Select(z => z with { AuditDatabase = z.AuditDatabase! with { Name = auditDbName } }).ToList();
 
         if (!overrideMappingSettings.Any())
         {
@@ -255,33 +256,6 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
         return cfg;
     }
 
-    private class MappingSettingsWrapper : IMappingSettings
-    {
-        private readonly IMappingSettings source;
-
-        private readonly string overrideAuditDatabaseName;
-
-        public MappingSettingsWrapper(IMappingSettings source, string overrideAuditDatabaseName)
-        {
-            this.source = source;
-            this.overrideAuditDatabaseName = overrideAuditDatabaseName;
-        }
-
-        public Type PersistentDomainObjectBaseType => this.source.PersistentDomainObjectBaseType;
-
-        public DatabaseName Database => this.source.Database;
-
-        public AuditDatabaseName AuditDatabase => new AuditDatabaseName(this.overrideAuditDatabaseName, this.source.AuditDatabase.Schema, this.source.AuditDatabase.RevisionEntitySchema);
-
-        public ReadOnlyCollection<Type> Types => this.source.Types;
-
-        public IConfigurationInitializer Initializer => this.source.Initializer;
-
-        public IAuditTypeFilter GetAuditTypeFilter()
-        {
-            return this.source.GetAuditTypeFilter();
-        }
-    }
     private static IEnumerable<string> CreateForeignKey(AuditTableGenerateContext context)
     {
         if (context.Dialect.SupportsForeignKeyConstraintInAlterTable)

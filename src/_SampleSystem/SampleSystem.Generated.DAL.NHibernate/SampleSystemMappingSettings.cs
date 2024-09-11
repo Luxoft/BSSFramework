@@ -7,7 +7,7 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.Generated.DAL.NHibernate;
 
-public class SampleSystemMappingSettings : MappingSettings<PersistentDomainObjectBase>
+public record SampleSystemMappingSettings : MappingSettings<PersistentDomainObjectBase>
 {
     public SampleSystemMappingSettings(DatabaseName databaseName)
         : base(typeof(SampleSystemMappingSettings).Assembly, databaseName, databaseName.ToDefaultAudit())

@@ -22,13 +22,13 @@ namespace Framework.DomainDriven.NHibernate.Audit;
 internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
         where TAuditRevisionEntity : AuditRevisionEntity
 {
-    private IList<Type> _filledTypes;
+    private IReadOnlyList<Type> _filledTypes;
 
     private readonly string _auditTableSuffix;
 
     private readonly IEntityTrackingRevisionListener _entityTrackingRevisionListener;
 
-    private readonly IList<IMappingSettings> mappingSettings;
+    private readonly IReadOnlyList<MappingSettings> mappingSettings;
 
     private readonly string auditEntityRevisionSchema;
 
@@ -41,7 +41,7 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
     /// <param name="auditTableSuffix">The audit table suffix.</param>
     /// <param name="entityTrackingRevisionListener">The entity tracking revision listener.</param>
     public AuditMetadataProvider(
-            IList<IMappingSettings> mappingSettings,
+            IReadOnlyList<MappingSettings> mappingSettings,
             string auditEntityRevisionSchema,
             string auditTableSuffix,
             IEntityTrackingRevisionListener entityTrackingRevisionListener)
@@ -76,7 +76,7 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
                                .SelectMany(
                                            z =>
                                            {
-                                               var filter = z.GetAuditTypeFilter();
+                                               var filter = z.AuditTypeFilter;
                                                return z.Types.Where(filter.IsAuditedType);
                                            });
 

@@ -5,7 +5,7 @@ using Framework.Persistent.Mapping;
 
 namespace SampleSystem.DbGenerate;
 
-public class SampleSystemDBGenerator(IMappingSettings settings) : DBGenerator(settings)
+public class SampleSystemDBGenerator(MappingSettings settings) : DBGenerator(settings)
 {
     protected override void FilterMetadata(AssemblyMetadata metadata)
     {

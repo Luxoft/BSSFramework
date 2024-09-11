@@ -48,18 +48,18 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     /// DatabaseName - Берётся из namespace'а сборки, которая сдержит тип PersistentDomainObjectBase (метод GetTargetSystemName);
     /// Types - Список доменных объектов. Это все типы наследованные от PersistentDomainObjectBase той сборки, в которой содеержится PersistentDomainObjectBase.
     /// </summary>
-    public IMappingSettings MappingSettings => new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), this.DatabaseName, true);
+    public MappingSettings MappingSettings => new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), this.DatabaseName, true);
 
 
     public DatabaseName DatabaseName { get; }
 
 
-    public IMappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName)
+    public MappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName)
     {
         return new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), dbName, dbAuditName);
     }
 
-    public IMappingSettings GetMappingSettingsWithoutAudit(DatabaseName dbName)
+    public MappingSettings GetMappingSettingsWithoutAudit(DatabaseName dbName)
     {
         return new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), dbName, false);
     }

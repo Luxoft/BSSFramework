@@ -27,7 +27,9 @@ public class DefaultConfigurationInitializer(
             .Mappings(
                 m =>
                 {
-                    assemblyInfoList.Aggregate(m.FluentMappings, (fm, ai) => fm.AddFromAssembly(ai.Assembly))
+                    assemblyInfoList.Select(assemblyInfo => assemblyInfo.Assembly)
+                                    .Distinct()
+                                    .Aggregate(m.FluentMappings, (fm, assembly) => fm.AddFromAssembly(assembly))
                                     .Conventions.AddFromAssemblyOf<EnumConvention>();
                 })
             .ExposeConfiguration(

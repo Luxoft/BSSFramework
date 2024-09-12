@@ -1,11 +1,13 @@
 ﻿using Framework.Events;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 
 namespace Framework.Configuration.Domain;
 
 /// <summary>
 ///  Операция доменного типа
 /// </summary>
+[NotAuditedClass]
 public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
 {
     private readonly DomainType domainType;

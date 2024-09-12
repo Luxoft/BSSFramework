@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+using Framework.DependencyInjection;
 using Framework.Events;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -11,30 +12,27 @@ public class ListenerSetupObject : IListenerSetupObject
 
     public IReadOnlyList<Action<IServiceCollection>> InitActions => this.initActions;
 
-    public IListenerSetupObject Add<TListener>(bool registerSelf = false)
+    public IListenerSetupObject Add<TListener>()
         where TListener : class, IDALListener
     {
-        this.initActions.Add(services => this.AddListener<TListener>(services, registerSelf));
+        this.initActions.Add(this.AddListener<TListener>);
 
         return this;
     }
 
-    private void AddListener<TListener>(IServiceCollection services, bool registerSelf)
+    private void AddListener<TListener>(IServiceCollection services)
         where TListener : class, IDALListener
     {
-        if (registerSelf)
-        {
-            services.AddScoped<TListener>();
-        }
+        services.AddScoped<TListener>();
 
         var result = new[]
-        {
-            typeof(IAfterTransactionCompletedDALListener),
-            typeof(IBeforeTransactionCompletedDALListener),
-            typeof(IFlushedDALListener)
-        }.ToArray(interfaceType => this.TryAddCastService<TListener>(services, interfaceType, registerSelf));
+                     {
+                         typeof(IAfterTransactionCompletedDALListener),
+                         typeof(IBeforeTransactionCompletedDALListener),
+                         typeof(IFlushedDALListener)
+                     }.ToArray(interfaceType => this.TryAddCastService<TListener>(services, interfaceType));
 
-        this.TryAddCastService<TListener>(services, typeof(IEventOperationReceiver), registerSelf);
+        this.TryAddCastService<TListener>(services, typeof(IEventOperationReceiver));
 
         if (!result.Any(v => v))
         {
@@ -42,28 +40,23 @@ public class ListenerSetupObject : IListenerSetupObject
         }
     }
 
-    private bool TryAddCastService<TCurrentListener>(IServiceCollection services, Type targetServiceType, bool registerSelf)
-        where TCurrentListener : class, IDALListener
+    private bool TryAddCastService<TListener>(IServiceCollection services, Type targetServiceType)
+        where TListener : class, IDALListener
     {
-        if (registerSelf)
+        if (targetServiceType.IsAssignableFrom(typeof(TListener)))
         {
-            if (targetServiceType.IsAssignableFrom(typeof(TCurrentListener)))
-            {
-                services.AddScoped(sp => (IBeforeTransactionCompletedDALListener)sp.GetRequiredService(typeof(TCurrentListener)));
+            new Action<IServiceCollection>(this.AddService<TListener, TListener>)
+                .CreateGenericMethod(targetServiceType, typeof(TListener))
+                .Invoke(this, [services]);
 
-                return true;
-            }
-        }
-        else
-        {
-            if (targetServiceType.IsAssignableFrom(typeof(TCurrentListener)))
-            {
-                services.AddScoped(targetServiceType, typeof(TCurrentListener));
-
-                return true;
-            }
+            return true;
         }
 
         return false;
     }
+
+    private void AddService<TService, TListener>(IServiceCollection services)
+        where TListener : class, IDALListener, TService
+        where TService : class =>
+        services.AddScopedFromLazyInterfaceImplement<TService, TListener>(false);
 }

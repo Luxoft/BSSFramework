@@ -15,7 +15,7 @@ public static class SampleSystemFrameworkExtensions
     public static IBssFrameworkSettings AddListeners(this IBssFrameworkSettings settings)
     {
         return settings.AddListener<SubscriptionDALListener>()
-                       .AddListener<ExampleFaultDALListener>(true)
+                       .AddListener<ExampleFaultDALListener>()
                        .AddListener<FixDomainObjectEventRevisionNumberDALListener>()
                        .AddListener<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
     }

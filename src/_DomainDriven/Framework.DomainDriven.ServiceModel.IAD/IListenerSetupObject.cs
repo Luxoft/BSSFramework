@@ -2,6 +2,6 @@
 
 public interface IListenerSetupObject
 {
-    IListenerSetupObject Add<TListener>(bool registerSelf = false)
+    IListenerSetupObject Add<TListener>()
         where TListener : class, IDALListener;
 }

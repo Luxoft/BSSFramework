@@ -58,7 +58,7 @@ public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent>
         throw new NotImplementedException();
     }
 
-    public IList<Tuple<T, long>> GetDomainObjectRevisions<T>(TIdent id, int takeCount) where T : class
+    public IReadOnlyList<Tuple<T, long>> GetDomainObjectRevisions<T>(TIdent id, int takeCount) where T : class
     {
         throw new NotImplementedException();
     }

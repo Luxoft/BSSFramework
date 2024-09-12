@@ -27,6 +27,6 @@ public static class MappingSettingsExtensions
     {
         if (mappingSettings == null) throw new ArgumentNullException(nameof(mappingSettings));
 
-        return string.Equals(mappingSettings.Database?.Name, mappingSettings.AuditDatabase?.Name);
+        return string.Equals(mappingSettings.Database.Name, mappingSettings.AuditDatabase?.Name);
     }
 }

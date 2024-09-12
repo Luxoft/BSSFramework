@@ -24,7 +24,7 @@ public class AuditReaderPatched : AuditReader, IAuditReaderPatched
 
     public bool IsEmpty => false;
 
-    public IList<T> FindObjects<T>(IEnumerable<object> primaryKeys, long revision)
+    public IReadOnlyList<T> FindObjects<T>(IEnumerable<object> primaryKeys, long revision)
     {
         return primaryKeys.Select(z => this.Find<T>(z, revision)).Where(z => null != z).ToList();
     }
@@ -74,7 +74,7 @@ public class AuditReaderPatched : AuditReader, IAuditReaderPatched
         return from object revision in resultList select Convert.ToInt64(revision);
     }
 
-    public IList<Tuple<T, long>> GetDomainObjectRevisions<T>(object primaryKey, int takeCount)
+    public IReadOnlyList<Tuple<T, long>> GetDomainObjectRevisions<T>(object primaryKey, int takeCount)
             where T : class
     {
         ArgumentsTools.CheckNotNull(primaryKey, "Primary key");

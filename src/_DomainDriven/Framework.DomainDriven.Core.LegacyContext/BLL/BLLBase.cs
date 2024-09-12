@@ -535,7 +535,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         return this.dal.GetRevisions(id);
     }
 
-    public virtual IList<Tuple<TDomainObject, long>> GetDomainObjectRevisions(TIdent id, int takeCount)
+    public virtual IReadOnlyList<Tuple<TDomainObject, long>> GetDomainObjectRevisions(TIdent id, int takeCount)
     {
         return this.dal.GetDomainObjectRevisions<TDomainObject>(id, takeCount);
     }

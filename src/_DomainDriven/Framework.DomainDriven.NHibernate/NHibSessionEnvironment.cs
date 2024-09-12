@@ -20,20 +20,9 @@ public class NHibSessionEnvironment : IDisposable
 {
     private readonly Configuration cfg;
 
-    /// <summary>
-    /// Creates new NH Session Factory
-    /// </summary>
-    /// <param name="connectionSettings">connection settings</param>
-    /// <param name="mappingSettings">mapping settings</param>
-    /// <exception cref="ArgumentNullException">
-    /// connectionSettings
-    /// or
-    /// mappingSettings
-    /// </exception>
-    /// <exception cref="System.ArgumentException">All mapping settings has equal database with schema. Utilities, Workflow has domain object with same names</exception>
-    /// <exception cref="ApplicationException">Could not initialize ServiceFactory.</exception>
     public NHibSessionEnvironment(
             IEnumerable<MappingSettings> mappingSettings,
+            IEnumerable<IConfigurationInitializer> initializers,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
             INHibSessionEnvironmentSettings settings,
             IDalValidationIdentitySource dalValidationIdentitySource)
@@ -53,9 +42,9 @@ public class NHibSessionEnvironment : IDisposable
 
             this.RegisteredTypes = cachedMappingSettings.ToHashSet(ms => ms.PersistentDomainObjectBaseType);
 
-            foreach (var ms in cachedMappingSettings)
+            foreach (var initializer in cachedMappingSettings.Select(ms => ms.Initializer).Concat(initializers))
             {
-                ms.Initializer.Initialize(this.cfg);
+                initializer.Initialize(this.cfg);
             }
 
             this.Configuration.SessionFactory().ParsingLinqThrough<VisitedQueryProvider>();

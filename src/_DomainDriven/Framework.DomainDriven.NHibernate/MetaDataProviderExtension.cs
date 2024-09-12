@@ -14,7 +14,7 @@ public static class MetaDataProviderExtension
 
     private class MetaDataProviderComposite : IMetaDataProvider
     {
-        private IList<IMetaDataProvider> _providers;
+        private IReadOnlyList<IMetaDataProvider> _providers;
 
         public MetaDataProviderComposite(IEnumerable<IMetaDataProvider> providers)
         {

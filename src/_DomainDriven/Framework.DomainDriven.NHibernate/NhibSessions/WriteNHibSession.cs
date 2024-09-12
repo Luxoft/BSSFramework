@@ -67,7 +67,7 @@ public class WriteNHibSession : NHibSessionBase
 
         sessionImpl.OverrideListeners(sessionImpl.Listeners.Clone().Self(this.InjectListeners));
 
-        sessionImpl.OverrideInterceptor(this.CreateInterceptor());
+        sessionImpl.OverrideInterceptor(new AuditInterceptor(this.createAuditProperties, this.modifyAuditProperties));
     }
 
     private void InjectListeners(EventListeners eventListeners)
@@ -76,12 +76,6 @@ public class WriteNHibSession : NHibSessionBase
         eventListeners.PostUpdateEventListeners = eventListeners.PostUpdateEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
         eventListeners.PostInsertEventListeners = eventListeners.PostInsertEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
     }
-
-    private IInterceptor CreateInterceptor()
-    {
-        return new AuditInterceptor(this.createAuditProperties, this.modifyAuditProperties);
-    }
-
 
     public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
     {

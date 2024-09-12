@@ -294,7 +294,9 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
             this._source = source;
         }
 
-        public DatabaseName DatabaseName => new DatabaseName(this._source.DatabaseName.Name + "_" + _postFix + "_GEN", this._source.DatabaseName.Schema);
+        public DatabaseName DatabaseName =>
+
+            this._source.DatabaseName with { Name = this._source.DatabaseName.Name + "_" + _postFix + "_GEN" };
 
         public DatabaseName SourceDatabaseName => this._source.DatabaseName;
 

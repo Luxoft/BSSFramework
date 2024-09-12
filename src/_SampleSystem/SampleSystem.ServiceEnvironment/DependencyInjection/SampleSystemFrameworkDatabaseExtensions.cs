@@ -42,10 +42,8 @@ public static class SampleSystemFrameworkDatabaseExtensions
                                          .AddMapping(new SampleSystemSystemAuditMappingSettings(string.Empty))
                                          .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty)))
 
-
-                                .AddMapping(
-                                    new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app")).AddInitializer(
-                                        new SampleSystemConfigurationInitializer(connectionString))));
+                                .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app")))
+                                .AddInitializer(new SampleSystemConfigurationInitializer(connectionString)));
     }
 
     public static IBssFrameworkSettings AddDatabaseVisitors(this IBssFrameworkSettings settings)

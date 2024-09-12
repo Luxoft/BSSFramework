@@ -1,19 +1,25 @@
-﻿namespace Framework.DomainDriven.NHibernate;
+﻿using System.Reflection;
+
+namespace Framework.DomainDriven.NHibernate;
 
 public interface INHibernateSetupObject
 {
-    INHibernateSetupObject SetEnvironment<TNHibSessionEnvironment>()
-        where TNHibSessionEnvironment : NHibSessionEnvironment;
+    bool AddDefaultInitializer { get; set; }
 
-    INHibernateSetupObject SetEnvironment(NHibSessionEnvironment sessionEnvironment);
+    bool AutoAddFluentMapping { get; set; }
 
     INHibernateSetupObject AddMapping<TMappingSettings>()
         where TMappingSettings : MappingSettings;
 
     INHibernateSetupObject AddMapping(MappingSettings mapping);
 
-    INHibernateSetupObject AddInitializer(IConfigurationInitializer configurationInitializer);
+    INHibernateSetupObject AddInitializer<TInitializer>()
+        where TInitializer : class, IConfigurationInitializer;
 
     INHibernateSetupObject AddEventListener<TEventListener>()
         where TEventListener : class, IDBSessionEventListener;
+
+    INHibernateSetupObject AddFluentMapping(Assembly assembly);
+
+    INHibernateSetupObject SetDefaultConnectionStringName(string connectionStringName);
 }

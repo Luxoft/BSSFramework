@@ -44,7 +44,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                            .AddListeners()
 
                            .SetSpecificationEvaluator<NhSpecificationEvaluator>()
-                           .AddDatabaseSettings(configuration)
+                           .AddDatabaseSettings()
                            .AddDatabaseVisitors()
 
                            // Legacy

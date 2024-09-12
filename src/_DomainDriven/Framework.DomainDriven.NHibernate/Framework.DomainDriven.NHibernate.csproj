@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentNHibernate" />
     <PackageReference Include="Microsoft.Data.SqlClient" />
     <PackageReference Include="NHibernate" />
     <PackageReference Include="NHibernate.Envers" />

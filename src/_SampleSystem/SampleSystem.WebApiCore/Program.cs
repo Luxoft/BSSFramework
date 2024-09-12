@@ -22,7 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.Sources.Clear();
 builder.Configuration
        .AddJsonFile("appsettings.json", false, true)
-       .AddEnvironmentVariables();
+       .AddEnvironmentVariables($"{nameof(SampleSystem)}_");
 
 builder.Host
        .UseDefaultServiceProvider(

@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
@@ -72,14 +70,6 @@ public class NHibSessionEnvironment : IDisposable
     internal IExceptionProcessor ExceptionProcessor { get; }
 
     public Configuration Configuration => this.cfg;
-
-    /// <summary>
-    /// Process transaction created in Write session
-    /// </summary>
-    public virtual void ProcessTransaction(IDbTransaction dbTransaction)
-    {
-        // Do nothing
-    }
 
     /// <inheritdoc />
     public void Dispose()

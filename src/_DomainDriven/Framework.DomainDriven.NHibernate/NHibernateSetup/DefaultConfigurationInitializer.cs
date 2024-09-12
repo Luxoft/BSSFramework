@@ -5,15 +5,15 @@ using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Inspections;
 using FluentNHibernate.Conventions.Instances;
 
-using Framework.DomainDriven.NHibernate;
-
 using NHibernate.Cfg;
 
 using Environment = NHibernate.Cfg.Environment;
 
-namespace SampleSystem.Generated.DAL.NHibernate;
+namespace Framework.DomainDriven.NHibernate;
 
-public class SampleSystemConfigurationInitializer(string connectionString) : IConfigurationInitializer
+public class DefaultConfigurationInitializer(
+    IDefaultConnectionStringSource defaultConnectionStringSource,
+    IEnumerable<FluentMappingAssemblyInfo> assemblyInfoList) : IConfigurationInitializer
 {
     public void Initialize(Configuration cfg)
     {
@@ -23,12 +23,14 @@ public class SampleSystemConfigurationInitializer(string connectionString) : ICo
                 MsSqlConfiguration.MsSql2012
                                   .Dialect<EnhancedMsSql2012Dialect>()
                                   .Driver<Fix2100SqlClientDriver>()
-                                  .ConnectionString(connectionString))
+                                  .ConnectionString(defaultConnectionStringSource.ConnectionString))
             .Mappings(
                 m =>
                 {
-                    m.FluentMappings.AddFromAssemblyOf<SampleSystemConfigurationInitializer>()
-                     .Conventions.AddFromAssemblyOf<EnumConvention>();
+                    assemblyInfoList.Select(assemblyInfo => assemblyInfo.Assembly)
+                                    .Distinct()
+                                    .Aggregate(m.FluentMappings, (fm, assembly) => fm.AddFromAssembly(assembly))
+                                    .Conventions.AddFromAssemblyOf<EnumConvention>();
                 })
             .ExposeConfiguration(
                 c =>

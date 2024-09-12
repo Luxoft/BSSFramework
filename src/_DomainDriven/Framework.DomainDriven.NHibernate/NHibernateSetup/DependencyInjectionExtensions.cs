@@ -31,13 +31,13 @@ public static class DependencyInjectionExtensions
 
         services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
 
+        services.AddSingleton<NHibSessionEnvironment>();
+
+        services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
+
         setup(setupObject);
 
-        setupObject.SetEnvironmentAction(services);
-        foreach (var action in setupObject.InitActions)
-        {
-            action(services);
-        }
+        setupObject.Initialize(services);
 
         return services;
     }

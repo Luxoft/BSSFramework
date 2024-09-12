@@ -1,4 +1,7 @@
-﻿using Framework.DomainDriven.NHibernate;
+﻿using Framework.Core;
+using Framework.DependencyInjection;
+using Framework.DomainDriven;
+using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Setup;
 
 using Microsoft.Data.SqlClient;
@@ -43,7 +46,8 @@ public class UseSchemeUpdateTest
 
         var provider = new ServiceCollection()
                        .AddHttpContextAccessor()
-                       .AddBssFramework(rootSetup => rootSetup.AddDatabaseSettings(connectionString, false))
+                       .AddBssFramework(rootSetup => rootSetup.AddDatabaseSettings(false))
+                       .ReplaceSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(connectionString))
                        .BuildServiceProvider(false);
 
         var dbSessionFactory = provider.GetService<NHibSessionEnvironment>();

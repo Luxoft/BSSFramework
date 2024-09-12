@@ -4,31 +4,16 @@ using Framework.DomainDriven.NHibernate;
 
 namespace Framework.Authorization.Generated.DAL.NHibernate;
 
-public class AuthorizationMappingSettings : MappingSettings<PersistentDomainObjectBase>
+public record AuthorizationMappingSettings(DatabaseName DatabaseName, AuditDatabaseName AuditDatabaseName)
+    : MappingSettings<PersistentDomainObjectBase>(typeof(AuthorizationMappingSettings).Assembly, DatabaseName, AuditDatabaseName)
 {
     public AuthorizationMappingSettings()
-            : base(typeof(AuthorizationMappingSettings).Assembly)
+        : this(new DatabaseName("", "auth"))
     {
     }
 
     public AuthorizationMappingSettings(DatabaseName databaseName)
-            : base(typeof(AuthorizationMappingSettings).Assembly, databaseName)
+        : this(databaseName, databaseName.ToDefaultAudit())
     {
-    }
-
-    public AuthorizationMappingSettings(DatabaseName databaseName, AuditDatabaseName auditDatabaseName)
-            : base(typeof(AuthorizationMappingSettings).Assembly, databaseName, auditDatabaseName)
-    {
-    }
-
-    /// <summary>
-    ///     Дефолтный настроки базы данных
-    ///     Аудит имеет схему auth, ревизии хранятся в схеме appAudit
-    /// </summary>
-    public static AuthorizationMappingSettings CreateDefaultAudit(string mainDatabaseName)
-    {
-        var databaseName = new DatabaseName(mainDatabaseName, "auth");
-
-        return new AuthorizationMappingSettings(databaseName, databaseName.ToDefaultAudit());
     }
 }

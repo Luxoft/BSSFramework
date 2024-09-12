@@ -33,14 +33,11 @@ public class NHibSessionEnvironment : IDisposable
     /// <exception cref="System.ArgumentException">All mapping settings has equal database with schema. Utilities, Workflow has domain object with same names</exception>
     /// <exception cref="ApplicationException">Could not initialize ServiceFactory.</exception>
     public NHibSessionEnvironment(
-            NHibConnectionSettings connectionSettings,
-            IEnumerable<IMappingSettings> mappingSettings,
+            IEnumerable<MappingSettings> mappingSettings,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
             INHibSessionEnvironmentSettings settings,
             IDalValidationIdentitySource dalValidationIdentitySource)
     {
-        this.ConnectionSettings = connectionSettings ?? throw new ArgumentNullException(nameof(connectionSettings));
-
         var cachedMappingSettings = (mappingSettings ?? throw new ArgumentNullException(nameof(mappingSettings))).ToList();
 
         this.TransactionTimeout = settings.TransactionTimeout;
@@ -58,14 +55,12 @@ public class NHibSessionEnvironment : IDisposable
 
             foreach (var ms in cachedMappingSettings)
             {
-                ms.InitMapping(this.cfg);
+                ms.Initializer.Initialize(this.cfg);
             }
 
             this.Configuration.SessionFactory().ParsingLinqThrough<VisitedQueryProvider>();
 
             this.cfg.InitializeAudit(cachedMappingSettings, auditRevisionUserAuthenticationService);
-
-            connectionSettings.Init(this.cfg);
 
             SchemaMetadataUpdater.QuoteTableAndColumns(this.cfg, Dialect.GetDialect(this.cfg.Properties));
 
@@ -78,9 +73,6 @@ public class NHibSessionEnvironment : IDisposable
             throw new ApplicationException("Could not initialize ServiceFactory.", ex);
         }
     }
-
-
-    public NHibConnectionSettings ConnectionSettings { get; }
 
     internal TimeSpan TransactionTimeout { get; }
 

@@ -8,9 +8,9 @@ public interface INHibernateSetupObject
     INHibernateSetupObject SetEnvironment(NHibSessionEnvironment sessionEnvironment);
 
     INHibernateSetupObject AddMapping<TMappingSettings>()
-            where TMappingSettings : class, IMappingSettings;
+            where TMappingSettings : MappingSettings;
 
-    INHibernateSetupObject AddMapping(IMappingSettings mapping);
+    INHibernateSetupObject AddMapping(MappingSettings mapping);
 
     INHibernateSetupObject AddEventListener<TEventListener>()
             where TEventListener : class, IDBSessionEventListener;

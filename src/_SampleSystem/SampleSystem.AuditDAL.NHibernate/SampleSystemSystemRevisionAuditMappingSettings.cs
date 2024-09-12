@@ -5,11 +5,8 @@ using SampleSystem.AuditDomain;
 
 namespace SampleSystem.AuditDAL.NHibernate
 {
-    public class SampleSystemSystemRevisionAuditMappingSettings : MappingSettings<SystemAuditRevisionPersistentDomainObjectBase>
-    {
-        public SampleSystemSystemRevisionAuditMappingSettings(string databaseName)
-                : base(typeof(SystemAuditRevisionPersistentDomainObjectBase).Assembly, new DatabaseName(databaseName, "appAudit"))
-        {
-        }
-    }
+    public record SampleSystemSystemRevisionAuditMappingSettings(string DatabaseName)
+        : MappingSettings<SystemAuditRevisionPersistentDomainObjectBase>(
+            typeof(SystemAuditRevisionPersistentDomainObjectBase).Assembly,
+            new DatabaseName(DatabaseName, "appAudit"));
 }

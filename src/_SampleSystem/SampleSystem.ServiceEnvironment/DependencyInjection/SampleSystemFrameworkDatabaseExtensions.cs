@@ -3,6 +3,7 @@ using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven._Visitors;
+using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.Setup;
 
@@ -31,8 +32,8 @@ public static class SampleSystemFrameworkDatabaseExtensions
         return settings.AddDatabaseSettings(
             setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
 
-                                .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
-                                .AddMapping(ConfigurationMappingSettings.CreateDefault(string.Empty))
+                                .AddMapping(new AuthorizationMappingSettings())
+                                .AddMapping(new ConfigurationMappingSettings())
 
                                 .Pipe(
                                     includeTypedAudit,
@@ -42,7 +43,9 @@ public static class SampleSystemFrameworkDatabaseExtensions
                                          .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty)))
 
 
-                                .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));
+                                .AddMapping(
+                                    new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app")).AddInitializer(
+                                        new SampleSystemConfigurationInitializer(connectionString))));
     }
 
     public static IBssFrameworkSettings AddDatabaseVisitors(this IBssFrameworkSettings settings)

@@ -165,6 +165,10 @@ public class DbGeneratorTest
                 initMappingAction,
                 dbName,
                 dbAuditName)
-            .AddInitializer(new DefaultConfigurationInitializer(new ManualDefaultConnectionStringSource(connectionString), []));
+
+            .AddInitializer(
+                new DefaultConfigurationInitializer(
+                    new ManualDefaultConnectionStringSource(connectionString),
+                    [new FluentMappingAssemblyInfo(typeof(SampleSystemMappingSettings).Assembly)]));
     }
 }

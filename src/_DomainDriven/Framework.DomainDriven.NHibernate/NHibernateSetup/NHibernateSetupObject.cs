@@ -33,6 +33,13 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
+    public INHibernateSetupObject AddMapping(MappingSettings mapping)
+    {
+        this.initActions.Add(sc => sc.AddSingleton(mapping));
+
+        return this;
+    }
+
     public INHibernateSetupObject AddInitializer(IConfigurationInitializer configurationInitializer)
     {
         this.initActions.Add(sc => sc.AddSingleton(configurationInitializer));

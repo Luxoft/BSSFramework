@@ -5,19 +5,11 @@ namespace Framework.DomainDriven.NHibernate;
 
 public static class ConfigurationInitializerExtensions
 {
-    public static IConfigurationInitializer Add(this IConfigurationInitializer initializer, IConfigurationInitializer otherInitializer)
-    {
-        return new CompositeConfigurationInitializer([initializer, otherInitializer]);
-    }
-
-    private class CompositeConfigurationInitializer(IEnumerable<IConfigurationInitializer> initializers) : IConfigurationInitializer
-    {
-        public void Initialize(Configuration cfg)
-        {
-            foreach (var initializer in initializers)
+    public static IConfigurationInitializer Add(this IConfigurationInitializer initializer, IConfigurationInitializer otherInitializer) =>
+        new ConfigurationInitializer(
+            cfg =>
             {
                 initializer.Initialize(cfg);
-            }
-        }
-    }
+                otherInitializer.Initialize(cfg);
+            });
 }

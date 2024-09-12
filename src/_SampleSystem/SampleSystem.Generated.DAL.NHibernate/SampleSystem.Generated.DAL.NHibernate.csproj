@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentNHibernate" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>

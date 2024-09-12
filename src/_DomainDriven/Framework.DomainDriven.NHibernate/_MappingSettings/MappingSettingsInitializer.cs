@@ -3,25 +3,23 @@
 using System.Reflection;
 using System.Xml.Linq;
 
+using Framework.Core;
+
 using NHibernate.Cfg;
 
 namespace Framework.DomainDriven.NHibernate;
 
-public class MappingSettingsInitializer : IConfigurationInitializer
+public class MappingSettingsInitializer : ConfigurationInitializer
 {
-    private readonly Action<Configuration> initAction;
-
-    public MappingSettingsInitializer(DatabaseName database, Assembly mappingAssembly) => this.initAction = GetInitAction(database, cfg => cfg.AddAssembly(mappingAssembly));
-
-    public MappingSettingsInitializer(DatabaseName database, IEnumerable<XDocument> mappingXmls)
+    public MappingSettingsInitializer(DatabaseName database, Assembly mappingAssembly)
+        : base(GetInitAction(database, cfg => cfg.AddAssembly(mappingAssembly)))
     {
-        var cachedMappingXmls = mappingXmls.ToArray();
-
-        this.initAction = GetInitAction(database, cfg => cfg.AddDocuments(cachedMappingXmls));
     }
 
-    public void Initialize(Configuration cfg) => this.initAction(cfg);
-
+    public MappingSettingsInitializer(DatabaseName database, IEnumerable<XDocument> mappingXmls)
+        : base(mappingXmls.ToArray().Pipe(cachedMappingXmls => GetInitAction(database, cfg => cfg.AddDocuments(cachedMappingXmls))))
+    {
+    }
 
     private static Action<Configuration> GetInitAction(DatabaseName database, Action<Configuration> initMapping)
     {

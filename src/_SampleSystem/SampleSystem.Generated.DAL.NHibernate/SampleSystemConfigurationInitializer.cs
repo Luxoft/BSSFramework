@@ -7,11 +7,28 @@ using FluentNHibernate.Conventions.Instances;
 
 using Framework.DomainDriven.NHibernate;
 
+using Microsoft.Extensions.Configuration;
+
 using NHibernate.Cfg;
 
 using Environment = NHibernate.Cfg.Environment;
 
 namespace SampleSystem.Generated.DAL.NHibernate;
+
+public interface IDefaultConnectionStringSource
+{
+    string ConnectionString { get; }
+}
+
+public record DefaultConnectionStringSettings(string Name);
+
+public class DefaultConnectionStringSource(IConfiguration configuration, DefaultConnectionStringSettings settings)
+    : ConnectionStringSource(configuration, settings.Name);
+
+public class ConnectionStringSource(IConfiguration configuration, string name)
+{
+    public string ConnectionString => configuration.GetConnectionString(name);
+}
 
 public class SampleSystemConfigurationInitializer(string connectionString) : IConfigurationInitializer
 {

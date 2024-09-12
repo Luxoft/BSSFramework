@@ -7,7 +7,7 @@ namespace SampleSystem.DbGenerate;
 
 public class SampleSystemDBGenerator : DBGenerator
 {
-    public SampleSystemDBGenerator(IMappingSettings settings) : base(settings)
+    public SampleSystemDBGenerator(MappingSettings settings) : base(settings)
     {
     }
 

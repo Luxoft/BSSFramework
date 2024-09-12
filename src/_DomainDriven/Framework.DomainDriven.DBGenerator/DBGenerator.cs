@@ -7,9 +7,9 @@ namespace Framework.DomainDriven.DBGenerator;
 
 public class DBGenerator
 {
-    private readonly IMappingSettings _settings;
+    private readonly MappingSettings _settings;
 
-    public DBGenerator(IMappingSettings settings) =>
+    public DBGenerator(MappingSettings settings) =>
             this._settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
     protected virtual void Init(

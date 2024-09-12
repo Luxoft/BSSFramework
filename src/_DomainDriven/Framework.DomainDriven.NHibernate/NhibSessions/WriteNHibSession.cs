@@ -75,30 +75,11 @@ public class WriteNHibSession : NHibSessionBase
         eventListeners.PostDeleteEventListeners = eventListeners.PostDeleteEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
         eventListeners.PostUpdateEventListeners = eventListeners.PostUpdateEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
         eventListeners.PostInsertEventListeners = eventListeners.PostInsertEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
-
-        if (this.Environment.ConnectionSettings.UseEventListenerInsteadOfInterceptorForAudit)
-        {
-            var modifyAuditEventListener = new ModifyAuditEventListener(this.modifyAuditProperties);
-            var createAuditEventListener = new CreateAuditEventListener(this.createAuditProperties);
-#pragma warning restore 0618
-
-            eventListeners.PreUpdateEventListeners = eventListeners.PreUpdateEventListeners.Concat(new IPreUpdateEventListener[] { modifyAuditEventListener }).ToArray();
-            eventListeners.PreInsertEventListeners = eventListeners.PreInsertEventListeners.Concat(new IPreInsertEventListener[] { modifyAuditEventListener, createAuditEventListener }).ToArray();
-
-#pragma warning disable 0618 // Obsolete
-        }
     }
 
     private IInterceptor CreateInterceptor()
     {
-        if (this.Environment.ConnectionSettings.UseEventListenerInsteadOfInterceptorForAudit)
-        {
-            return new EmptyInterceptor();
-        }
-        else
-        {
-            return new AuditInterceptor(this.createAuditProperties, this.modifyAuditProperties);
-        }
+        return new AuditInterceptor(this.createAuditProperties, this.modifyAuditProperties);
     }
 
 

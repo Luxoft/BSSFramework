@@ -28,7 +28,6 @@ public static class DependencyInjectionExtensions
         services.AddScopedFrom<IDbTransaction, IDBSession>(session => session.Transaction);
 
         services.AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>();
-        services.AddSingleton<NHibConnectionSettings>();
 
         services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
 

@@ -7,7 +7,7 @@ namespace Framework.DomainDriven.DBGenerator;
 class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
 {
     private string _auditPostfix = "Audit";
-    private IList<IMappingSettings> _mappingSettings;
+    private IList<MappingSettings> _mappingSettings;
     private readonly MigrationDBScriptGeneratorBuilder _migrationBuilder;
 
     private bool removeSchemaDatabase = true;
@@ -18,12 +18,12 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
     }
 
 
-    public IAuditDBScriptGeneratorBuilder WithAudit(IMappingSettings mappingSettings, string auditTablePostfix = "audit")
+    public IAuditDBScriptGeneratorBuilder WithAudit(MappingSettings mappingSettings, string auditTablePostfix = "audit")
     {
         return this.WithAudit(new[] { mappingSettings }, auditTablePostfix);
     }
 
-    public IAuditDBScriptGeneratorBuilder WithAudit(IEnumerable<IMappingSettings> mappingSettings, string auditPostfix = "audit")
+    public IAuditDBScriptGeneratorBuilder WithAudit(IEnumerable<MappingSettings> mappingSettings, string auditPostfix = "audit")
     {
         this.ValidateConfigurate();
 
@@ -45,12 +45,12 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
         return this;
     }
 
-    public IAuditDBScriptGeneratorBuilder WithMappingSettings(IMappingSettings mappingSettings)
+    public IAuditDBScriptGeneratorBuilder WithMappingSettings(MappingSettings mappingSettings)
     {
         return this.WithMappingSettings(new[] {mappingSettings});
     }
 
-    public IAuditDBScriptGeneratorBuilder WithMappingSettings(IList<IMappingSettings> mappingSettings)
+    public IAuditDBScriptGeneratorBuilder WithMappingSettings(IList<MappingSettings> mappingSettings)
     {
         this.ValidateConfigurate();
 

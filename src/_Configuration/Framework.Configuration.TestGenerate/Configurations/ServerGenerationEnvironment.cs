@@ -53,9 +53,9 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
     public DatabaseName DatabaseName { get; }
 
-    public IMappingSettings MappingSettings => new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), this.DatabaseName, true);
+    public MappingSettings MappingSettings => new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), this.DatabaseName, true);
 
-    public IMappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName)
+    public MappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName)
     {
         return new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), dbName, dbAuditName);
     }

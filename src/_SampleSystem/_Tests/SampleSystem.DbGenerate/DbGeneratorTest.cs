@@ -154,14 +154,17 @@ public class DbGeneratorTest
         Console.WriteLine(result);
     }
 
-    private IMappingSettings GetMappingSettings(string serverName, DatabaseName dbName, AuditDatabaseName dbAuditName)
+    private MappingSettings GetMappingSettings(string serverName, DatabaseName dbName, AuditDatabaseName dbAuditName)
     {
         var initMappingAction = this.environment.DAL.GetMappingGenerators()
                                     .Select(mg => mg.Generate());
+
+        var connectionString = $"Data Source={serverName};Initial Catalog={dbName.Name};Application Name=SampleSystem";
+
         return new SampleSystemMappingSettings(
-                                               initMappingAction,
-                                               dbName,
-                                               dbAuditName,
-                                               $"Data Source={serverName};Initial Catalog={dbName.Name};Application Name=SampleSystem");
+                initMappingAction,
+                dbName,
+                dbAuditName)
+            .AddInitializer(new SampleSystemConfigurationInitializer(connectionString));
     }
 }

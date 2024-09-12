@@ -40,13 +40,13 @@ public class ListenerSetupObject : IListenerSetupObject
         }
     }
 
-    private bool TryAddCastService<TCurrentListener>(IServiceCollection services, Type targetServiceType)
-        where TCurrentListener : class, IDALListener
+    private bool TryAddCastService<TListener>(IServiceCollection services, Type targetServiceType)
+        where TListener : class, IDALListener
     {
-        if (targetServiceType.IsAssignableFrom(typeof(TCurrentListener)))
+        if (targetServiceType.IsAssignableFrom(typeof(TListener)))
         {
-            new Action<IServiceCollection>(this.AddService<TCurrentListener, TCurrentListener>)
-                .CreateGenericMethod(targetServiceType, typeof(TCurrentListener))
+            new Action<IServiceCollection>(this.AddService<TListener, TListener>)
+                .CreateGenericMethod(targetServiceType, typeof(TListener))
                 .Invoke(this, [services]);
 
             return true;
@@ -55,8 +55,8 @@ public class ListenerSetupObject : IListenerSetupObject
         return false;
     }
 
-    private void AddService<TService, TCurrentListener>(IServiceCollection services)
-        where TCurrentListener : class, IDALListener, TService
+    private void AddService<TService, TListener>(IServiceCollection services)
+        where TListener : class, IDALListener, TService
         where TService : class =>
-        services.AddScopedFromLazyInterfaceImplement<TService, TCurrentListener>(false);
+        services.AddScopedFromLazyInterfaceImplement<TService, TListener>(false);
 }

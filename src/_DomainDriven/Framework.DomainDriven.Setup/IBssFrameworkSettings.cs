@@ -18,7 +18,7 @@ public interface IBssFrameworkSettings : IBssFrameworkSettingsBase<IBssFramework
 
     IBssFrameworkSettings AddNamedLockType(Type namedLockType);
 
-    IBssFrameworkSettings AddListener<TListener>(bool registerSelf = false)
+    IBssFrameworkSettings AddListener<TListener>()
         where TListener : class, IDALListener;
 
     IBssFrameworkSettings SetDomainObjectEventMetadata<T>()

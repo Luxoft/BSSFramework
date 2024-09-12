@@ -45,10 +45,10 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         return this;
     }
 
-    public IBssFrameworkSettings AddListener<TListener>(bool registerSelf = false)
+    public IBssFrameworkSettings AddListener<TListener>()
         where TListener : class, IDALListener
     {
-        this.RegisterActions.Add(sc => sc.RegisterListeners(s => s.Add<TListener>(registerSelf)));
+        this.RegisterActions.Add(sc => sc.RegisterListeners(s => s.Add<TListener>()));
 
         return this;
     }

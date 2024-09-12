@@ -70,6 +70,12 @@ public static class ServiceCollectionExtensions
         return services.Replace(ServiceDescriptor.Scoped<TService>(sp => sp.GetRequiredService<TServiceImplementation>()));
     }
 
+    public static IServiceCollection ReplaceSingleton<TService>(this IServiceCollection services, TService instance)
+        where TService : class
+    {
+        return services.Replace(ServiceDescriptor.Singleton(instance));
+    }
+
     public static IServiceCollection ReplaceSingleton<TService, TServiceImplementation>(this IServiceCollection services)
         where TServiceImplementation : class, TService
         where TService : class

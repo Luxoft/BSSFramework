@@ -165,6 +165,6 @@ public class DbGeneratorTest
                 initMappingAction,
                 dbName,
                 dbAuditName)
-            .AddInitializer(new SampleSystemConfigurationInitializer(connectionString));
+            .AddInitializer(new DefaultConfigurationInitializer(new ManualDefaultConnectionStringSource(connectionString), []));
     }
 }

@@ -33,12 +33,9 @@ public static class DependencyInjectionExtensions
 
         services.AddSingleton<NHibSessionEnvironment>();
 
-        services.AddSingleton<DefaultConnectionStringSettings>();
         services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
 
         setup(setupObject);
-
-        services.AddSingleton(new DefaultConnectionStringSettings(setupObject.DefaultConnectionStringName));
 
         setupObject.Initialize(services);
 

@@ -32,7 +32,7 @@ public static class SampleSystemFrameworkDatabaseExtensions
             setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
 
                                 .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
-                                .AddMapping(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
+                                .AddMapping(ConfigurationMappingSettings.CreateDefault(string.Empty))
 
                                 .Pipe(
                                     includeTypedAudit,

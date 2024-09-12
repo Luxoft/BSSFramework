@@ -7,7 +7,8 @@ public interface INHibernateSetupObject
 
     INHibernateSetupObject SetEnvironment(NHibSessionEnvironment sessionEnvironment);
 
-    INHibernateSetupObject AddMapping(MappingSettings mapping);
+    INHibernateSetupObject AddMapping<TMappingSettings>()
+            where TMappingSettings : MappingSettings;
 
     INHibernateSetupObject AddInitializer(IConfigurationInitializer configurationInitializer);
 

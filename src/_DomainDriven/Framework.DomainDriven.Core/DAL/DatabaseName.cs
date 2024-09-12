@@ -7,20 +7,8 @@ namespace Framework.DomainDriven;
 /// <summary>
 /// Описание базы данных
 /// </summary>
-public record DatabaseName()
+public record DatabaseName(string Name, string Schema = "dbo")
 {
-    public DatabaseName(string name)
-        : this() =>
-        this.Name = name;
-
-    public DatabaseName(string name, string schema)
-        : this(name) =>
-        this.Schema = schema;
-
-    public string Name { get; set; } = "";
-
-    public string Schema { get; init; } = "dbo";
-
     public sealed override string ToString()
     {
         if (this.Name == string.Empty)

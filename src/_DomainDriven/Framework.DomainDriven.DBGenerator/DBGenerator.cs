@@ -5,8 +5,13 @@ using Framework.DomainDriven.NHibernate;
 
 namespace Framework.DomainDriven.DBGenerator;
 
-public class DBGenerator(MappingSettings settings)
+public class DBGenerator
 {
+    private readonly MappingSettings _settings;
+
+    public DBGenerator(MappingSettings settings) =>
+            this._settings = settings ?? throw new ArgumentNullException(nameof(settings));
+
     protected virtual void Init(
             DatascriptGeneratorBuilder builder,
             DatabaseScriptGeneratorMode mode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
@@ -55,7 +60,7 @@ public class DBGenerator(MappingSettings settings)
         migrationScriptFolderPaths ??= new string[0];
         auditMigrationScriptFolderPaths ??= new string[0];
 
-        var dbName = settings.Database;
+        var dbName = this._settings.Database;
 
         if (null != databaseName)
         {
@@ -64,7 +69,7 @@ public class DBGenerator(MappingSettings settings)
 
         var scriptDBName = updateScriptsDB ?? dbName.Name;
 
-        var metadata = MetadataReader.GetAssemblyMetadata(settings.PersistentDomainObjectBaseType, settings.GetDomainTypeAssemblies().ToArray(a => AssemblyInfo.Create(a)));
+        var metadata = MetadataReader.GetAssemblyMetadata(this._settings.PersistentDomainObjectBaseType, this._settings.GetDomainTypeAssemblies().ToArray(a => AssemblyInfo.Create(a)));
 
         this.FilterMetadata(metadata);
 
@@ -72,10 +77,10 @@ public class DBGenerator(MappingSettings settings)
 
         this.Init(builder, generatorMode, ignoredIndexes);
 
-        if (settings.IsAudited())
+        if (this._settings.IsAudited())
         {
             builder.AuditBuilder.WithAuditPostfix();
-            builder.AuditBuilder.WithMappingSettings(settings);
+            builder.AuditBuilder.WithMappingSettings(this._settings);
             auditMigrationScriptFolderPaths.Foreach(z => builder.AuditBuilder.MigrationBuilder.WithFolder(z));
         }
 
@@ -102,12 +107,12 @@ public class DBGenerator(MappingSettings settings)
 
         builder.WithAssemblyMetadata(metadata);
 
-        if (settings.IsAudited() && settings.IsAuditInMainDatabase())
+        if (this._settings.IsAudited() && this._settings.IsAuditInMainDatabase())
         {
             builder.MainBuilder.WithPreserveSchemaDatabase();
         }
 
-        if (settings.IsAudited() && preserveSchemaDatabase)
+        if (this._settings.IsAudited() && preserveSchemaDatabase)
         {
             builder.AuditBuilder.WithPreserveSchemaDatabase();
         }

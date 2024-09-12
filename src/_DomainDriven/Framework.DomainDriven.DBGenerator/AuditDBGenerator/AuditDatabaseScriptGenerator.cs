@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.ObjectModel;
+using System.Reflection;
 
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
@@ -24,9 +25,14 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 {
-    private readonly IReadOnlyList<MappingSettings> mappingSettings;
+    private readonly IList<MappingSettings> mappingSettings;
 
     private readonly string auditTablePostFix;
+
+    public AuditDatabaseScriptGenerator(MappingSettings mappingSettings, string auditTablePostfix)
+            : this(new[] { mappingSettings }, auditTablePostfix)
+    {
+    }
 
     public AuditDatabaseScriptGenerator(IEnumerable<MappingSettings> mappingSettings,
                                         string auditTablePostfix)
@@ -215,7 +221,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
             if (table.IsPhysicalTable && table.SchemaActions.HasFlag(SchemaAction.Update))
             {
-                sqlScript.AddRange(CreateForeignKey(context));
+                sqlScript.AddRange(CreateForegnKey(context));
                 sqlScript.AddRange(CreateIndexScript(context));
             }
 
@@ -231,9 +237,10 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
     {
         var cfg = new Configuration();
 
-        var connectionInitializer = new NHibConnectionInitializer(context.SqlDatabaseFactory.Server.ConnectionContext.ConnectionString, auditDbName);
+        var connectionSettings = new NHibConnectionInitializer(context.SqlDatabaseFactory.Server.ConnectionContext.ConnectionString, auditDbName);
 
-        connectionInitializer.Initialize(cfg);
+        connectionSettings.Initialize(cfg);
+
 
         var overrideMappingSettings = this.mappingSettings
                                           .Select(z => z with { AuditDatabase = z.AuditDatabase! with { Name = auditDbName } }).ToList();
@@ -255,7 +262,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
         return cfg;
     }
 
-    private static IEnumerable<string> CreateForeignKey(AuditTableGenerateContext context)
+    private static IEnumerable<string> CreateForegnKey(AuditTableGenerateContext context)
     {
         if (context.Dialect.SupportsForeignKeyConstraintInAlterTable)
         {

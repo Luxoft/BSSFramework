@@ -26,14 +26,14 @@ public class MappingSettingsInitializer : ConfigurationInitializer
         var targetSchema = database.ToString();
 
         return cfg =>
-               {
-                   var eventHandler = new EventHandler<BindMappingEventArgs>((_, e) => { e.Mapping.schema = targetSchema; });
+        {
+            var eventHandler = new EventHandler<BindMappingEventArgs>((_, e) => { e.Mapping.schema = targetSchema; });
 
-                   cfg.BeforeBindMapping += eventHandler;
+            cfg.BeforeBindMapping += eventHandler;
 
-                   initMapping(cfg);
+            initMapping(cfg);
 
-                   cfg.BeforeBindMapping -= eventHandler;
-               };
+            cfg.BeforeBindMapping -= eventHandler;
+        };
     }
 }

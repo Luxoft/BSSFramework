@@ -25,9 +25,10 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
-    public INHibernateSetupObject AddMapping(MappingSettings mapping)
+    public INHibernateSetupObject AddMapping<TMappingSettings>()
+            where TMappingSettings : MappingSettings
     {
-        this.initActions.Add(sc => sc.AddSingleton(mapping));
+        this.initActions.Add(sc => sc.AddSingleton<MappingSettings, TMappingSettings>());
 
         return this;
     }

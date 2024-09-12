@@ -8,10 +8,10 @@ namespace Framework.DomainDriven.NHibernate.Audit;
 
 public static class Extensions
 {
-    public static IAuditAttributeService GetAuditAttributeService(this IReadOnlyList<MappingSettings> mappingSettings, IEnumerable<PersistentClass> persistentClasses)
+    public static IAuditAttributeService GetAuditAttributeService(this IList<MappingSettings> mappingSettings, IEnumerable<PersistentClass> persistentClasses)
     {
         var monitoriableTypes = mappingSettings
-                                .Select(z => new { MappingSettings = z, Filter =  z.AuditTypeFilter })
+                                .Select(z => new { MappingSettings = z, Filter = z.AuditTypeFilter })
                                 .SelectMany(z => z.MappingSettings.Types.Select(q => new { Filter = z.Filter, Type = q }))
                                 .ToList();
 

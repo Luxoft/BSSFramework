@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Data;
+using System.Reflection;
 
 namespace Framework.DomainDriven.NHibernate;
 
@@ -20,6 +21,12 @@ public interface INHibernateSetupObject
         where TEventListener : class, IDBSessionEventListener;
 
     INHibernateSetupObject AddFluentMapping(Assembly assembly);
+
+    INHibernateSetupObject SetIsolationLevel(IsolationLevel isolationLevel);
+
+    INHibernateSetupObject SetSqlTypesKeepDateTime(bool value);
+
+    INHibernateSetupObject SetCommandTimeout(int timeout);
 
     INHibernateSetupObject SetDefaultConnectionStringName(string connectionStringName);
 }

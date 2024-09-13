@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Data;
+using System.Reflection;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,6 +7,8 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class NHibernateSetupObject : INHibernateSetupObject
 {
+    private DefaultConfigurationInitializerSettings settings = new ();
+
     private readonly List<Action<IServiceCollection>> initActions = new();
 
     public string DefaultConnectionStringName { get; private set; } = "DefaultConnection";
@@ -60,6 +63,27 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
+    public INHibernateSetupObject SetIsolationLevel(IsolationLevel isolationLevel)
+    {
+        this.settings = this.settings with { IsolationLevel = isolationLevel };
+
+        return this;
+    }
+
+    public INHibernateSetupObject SetSqlTypesKeepDateTime(bool value)
+    {
+        this.settings = this.settings with { SqlTypesKeepDateTime = value };
+
+        return this;
+    }
+
+    public INHibernateSetupObject SetCommandTimeout(int timeout)
+    {
+        this.settings = this.settings with { CommandTimeout = timeout };
+
+        return this;
+    }
+
     public INHibernateSetupObject SetDefaultConnectionStringName(string connectionStringName)
     {
         this.DefaultConnectionStringName = connectionStringName;
@@ -73,6 +97,7 @@ public class NHibernateSetupObject : INHibernateSetupObject
 
         if (this.AddDefaultInitializer)
         {
+            services.AddSingleton(this.settings);
             this.AddInitializer<DefaultConfigurationInitializer>();
         }
 

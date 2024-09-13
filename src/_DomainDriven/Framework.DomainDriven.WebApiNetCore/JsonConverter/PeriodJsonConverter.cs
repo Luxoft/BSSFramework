@@ -12,6 +12,8 @@ public class PeriodJsonConverter : JsonConverter<Period>
         var startDate = DateTime.MinValue;
         DateTime? endDate = null;
 
+        var stringComparer = options.PropertyNameCaseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+
         while (reader.Read())
         {
             if (reader.TokenType == JsonTokenType.EndObject)
@@ -22,11 +24,11 @@ public class PeriodJsonConverter : JsonConverter<Period>
                 var propertyName = reader.GetString();
                 reader.Read();
 
-                if (propertyName == nameof(Period.StartDate))
+                if (stringComparer.Equals(propertyName, nameof(Period.StartDate)))
                 {
                     startDate = reader.GetDateTime();
                 }
-                else if (propertyName == nameof(Period.EndDate))
+                else if (stringComparer.Equals(propertyName, nameof(Period.EndDate)))
                 {
                     if (reader.TokenType != JsonTokenType.Null)
                     {

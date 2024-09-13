@@ -169,6 +169,7 @@ public class DbGeneratorTest
             .AddInitializer(
                 new DefaultConfigurationInitializer(
                     new ManualDefaultConnectionStringSource(connectionString),
-                    [new FluentMappingAssemblyInfo(typeof(SampleSystemMappingSettings).Assembly)]));
+                    [new FluentMappingAssemblyInfo(typeof(SampleSystemMappingSettings).Assembly)],
+                    new DefaultConfigurationInitializerSettings()));
     }
 }

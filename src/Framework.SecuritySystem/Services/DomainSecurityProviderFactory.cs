@@ -37,8 +37,7 @@ public class DomainSecurityProviderFactory<TDomainObject>(
                     {
                         securityRule.RelativePathKey == null
                             ? null
-                            : new CurrentUserSecurityProviderRelativeKey(securityRule.RelativePathKey),
-                        securityRule.CustomCredential
+                            : new CurrentUserSecurityProviderRelativeKey(securityRule.RelativePathKey)
                     }.Where(arg => arg != null)
                      .ToArray(arg => arg!);
 

@@ -9,7 +9,6 @@ namespace Framework.SecuritySystem.UserSource;
 public class CurrentUserSecurityProvider<TDomainObject>(
     IServiceProvider serviceProvider,
     IUserPathInfo userPathInfo,
-    SecurityRuleCredential securityRuleCredential,
     CurrentUserSecurityProviderRelativeKey? key = null) : ISecurityProvider<TDomainObject>
 {
     private readonly Lazy<ISecurityProvider<TDomainObject>> lazyInnerProvider = LazyHelper.Create(

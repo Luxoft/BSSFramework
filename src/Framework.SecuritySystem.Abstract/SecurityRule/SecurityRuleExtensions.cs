@@ -10,11 +10,11 @@ namespace Framework.SecuritySystem;
 public static class SecurityRuleExtensions
 {
     public static TSecurityRule TryApplyCredential<TSecurityRule>(this TSecurityRule securityRule, SecurityRuleCredential credential)
-        where TSecurityRule : DomainSecurityRule =>
+        where TSecurityRule : RoleBaseSecurityRule =>
         securityRule.CustomCredential == null ? securityRule with { CustomCredential = credential } : securityRule;
 
     public static TSecurityRule WithoutRunAs<TSecurityRule>(this TSecurityRule securityRule)
-        where TSecurityRule : DomainSecurityRule =>
+        where TSecurityRule : RoleBaseSecurityRule =>
         securityRule with { CustomCredential = SecurityRuleCredential.CurrentUserWithoutRunAs };
 
     public static OperationSecurityRule ToSecurityRule(

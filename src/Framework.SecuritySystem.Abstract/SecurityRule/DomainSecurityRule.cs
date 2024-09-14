@@ -5,8 +5,6 @@ namespace Framework.SecuritySystem;
 
 public abstract record DomainSecurityRule : SecurityRule
 {
-    public SecurityRuleCredential? CustomCredential { get; init; } = null;
-
     /// <summary>
     /// Правило доступа для доменных объектов привязанных к текущему пользователю
     /// </summary>
@@ -64,6 +62,8 @@ public abstract record DomainSecurityRule : SecurityRule
         public static implicit operator RoleBaseSecurityRule(SecurityRole securityRole) => securityRole.ToSecurityRule();
 
         public static implicit operator RoleBaseSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
+
+        public SecurityRuleCredential? CustomCredential { get; init; } = null;
 
         /// <summary>
         /// Тип разворачивания деревьев (как правило для просмотра самого дерева выбирается HierarchicalExpandType.All)

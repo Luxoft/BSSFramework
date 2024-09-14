@@ -10,7 +10,7 @@ public abstract record DomainSecurityRule : SecurityRule
     /// <summary>
     /// Правило доступа для доменных объектов привязанных к текущему пользователю
     /// </summary>
-    public static CurrentUserSecurityRule CurrentUser { get; } = new ();
+    public static CurrentUserSecurityRule CurrentUser { get; } = new();
 
     /// <summary>
     /// Правило доступа для блокирования доступа
@@ -20,7 +20,7 @@ public abstract record DomainSecurityRule : SecurityRule
     /// <summary>
     /// Любая роль
     /// </summary>
-    public static AnyRoleSecurityRule AnyRole { get; }= new AnyRoleSecurityRule();
+    public static AnyRoleSecurityRule AnyRole { get; } = new AnyRoleSecurityRule();
 
 
     public static implicit operator DomainSecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();

@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using System.Net.Http.Headers;
 
 using Framework.Authorization.Domain;
 using Framework.Persistent;

@@ -3,7 +3,6 @@
 using Framework.Configurator.Handlers;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Services;
-using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Builder;
@@ -39,10 +38,7 @@ public static class ConfiguratorDependencyInjection
            .AddScoped<IRunAsHandler, RunAsHandler>()
            .AddScoped<IStopRunAsHandler, StopRunAsHandler>()
            .AddScoped<IDownloadPermissionTemplateHandler, DownloadPermissionTemplateHandler>()
-           .AddScoped<IPrincipalManagementService, ConfiguratorPrincipalManagementService>()
-           .AddKeyedScoped(
-               nameof(Configurator),
-               (sp, _) => sp.GetRequiredService<ISecuritySystemFactory>().Create(SecurityRuleCredential.CurrentUserWithoutRunAs));
+           .AddScoped<IPrincipalManagementService, ConfiguratorPrincipalManagementService>();
 
     public static IApplicationBuilder UseConfigurator(this IApplicationBuilder app, string route = "/admin/configurator") =>
         app

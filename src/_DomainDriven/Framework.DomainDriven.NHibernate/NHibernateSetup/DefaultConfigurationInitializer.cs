@@ -45,7 +45,11 @@ public class DefaultConfigurationInitializer(
                     c.Properties.Add(Environment.LinqToHqlGeneratorsRegistry, typeof(EnhancedLinqToHqlGeneratorsRegistry).AssemblyQualifiedName);
                     c.Properties.Add(Environment.SqlExceptionConverter, typeof(SQLExceptionConverter).AssemblyQualifiedName);
                     c.Properties.Add(Environment.CommandTimeout, settings.CommandTimeout.ToString());
-                    c.Properties.Add(Environment.SqlTypesKeepDateTime, settings.SqlTypesKeepDateTime.ToString());
+
+                    if (settings.SqlTypesKeepDateTime != null)
+                    {
+                        c.Properties.Add(Environment.SqlTypesKeepDateTime, settings.SqlTypesKeepDateTime.ToString());
+                    }
                 })
             .BuildConfiguration();
     }

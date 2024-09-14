@@ -10,16 +10,14 @@ public class AvailablePermissionSource(
     TimeProvider timeProvider,
     ICurrentPrincipalSource currentPrincipalSource,
     ISecurityRolesIdentsResolver securityRolesIdentsResolver,
-    DefaultSecurityRuleCredentialInfo defaultSecurityRuleCredentialInfo)
+    SecurityRuleCredential defaultSecurityRuleCredential)
     : IAvailablePermissionSource
 {
     public AvailablePermissionFilter CreateFilter(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        var credential = securityRule.CustomCredential ?? defaultSecurityRuleCredentialInfo.Credential;
-
         return new AvailablePermissionFilter(timeProvider.GetToday())
                {
-                   PrincipalName = this.GetPrincipalName(credential),
+                   PrincipalName = this.GetPrincipalName(securityRule.CustomCredential ?? defaultSecurityRuleCredential),
                    SecurityRoleIdents = securityRolesIdentsResolver.Resolve(securityRule).ToList()
                };
     }
@@ -36,24 +34,24 @@ public class AvailablePermissionSource(
         return permissionRepository.GetQueryable().Where(filter.ToFilterExpression());
     }
 
-    private string? GetPrincipalName(SecurityRuleCredential credential)
+    private string? GetPrincipalName(SecurityRuleCredential securityRuleCredential)
     {
-        switch (credential)
+        switch (securityRuleCredential)
         {
             case SecurityRuleCredential.CustomPrincipalSecurityRuleCredential customPrincipalSecurityRuleCredential:
                 return customPrincipalSecurityRuleCredential.Name;
 
-            case { } when credential == SecurityRuleCredential.CurrentUserWithRunAs:
+            case { } when securityRuleCredential == SecurityRuleCredential.CurrentUserWithRunAs:
                 return (currentPrincipalSource.CurrentPrincipal.RunAs ?? currentPrincipalSource.CurrentPrincipal).Name;
 
-            case { } when credential == SecurityRuleCredential.CurrentUserWithoutRunAs:
+            case { } when securityRuleCredential == SecurityRuleCredential.CurrentUserWithoutRunAs:
                 return currentPrincipalSource.CurrentPrincipal.Name;
 
-            case { } when credential == SecurityRuleCredential.AnyUser:
+            case { } when securityRuleCredential == SecurityRuleCredential.AnyUser:
                 return null;
 
             default:
-                throw new ArgumentOutOfRangeException(nameof(credential));
+                throw new ArgumentOutOfRangeException(nameof(securityRuleCredential));
         }
     }
 }

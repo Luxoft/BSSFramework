@@ -15,7 +15,8 @@ public class NotificationBasePermissionFilterSource(
     {
         if (securityRoles == null) throw new ArgumentNullException(nameof(securityRoles));
 
-        var businessRoleIdents = securityRolesIdentsResolver.Resolve(DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles)).ToList();
+        var businessRoleIdents = securityRolesIdentsResolver.Resolve(DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles))
+                                                            .ToList();
 
         var permissionQ = availablePermissionSource.GetAvailablePermissionsQueryable(
             DomainSecurityRule.AnyRole with { CustomCredential = SecurityRuleCredential.AnyUser });

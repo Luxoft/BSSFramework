@@ -15,7 +15,7 @@ public class VirtualPermissionSource<TPrincipal, TPermission>(
     IQueryableSource queryableSource,
     TimeProvider timeProvider,
     VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo,
-    SecurityRuleCredential securityRuleCredential) : IPermissionSource<TPermission>
+    SecurityRuleCredential defaultSecurityRuleCredential) : IPermissionSource<TPermission>
 {
     private readonly Expression<Func<TPermission, string>> fullNamePath = bindingInfo.PrincipalPath.Select(bindingInfo.PrincipalNamePath);
 
@@ -32,7 +32,7 @@ public class VirtualPermissionSource<TPrincipal, TPermission>(
 
     private IQueryable<TPermission> GetPermissionQuery(SecurityRuleCredential? customSecurityRuleCredential)
     {
-        var principalName = this.GetFiltrationPrincipalName(customSecurityRuleCredential);
+        var principalName = this.GetFiltrationPrincipalName(customSecurityRuleCredential ?? defaultSecurityRuleCredential);
 
         return queryableSource
                .GetQueryable<TPermission>()
@@ -56,26 +56,24 @@ public class VirtualPermissionSource<TPrincipal, TPermission>(
             securityContextType => securityContextType,
             securityContextType => bindingInfo.GetRestrictionsExpr(securityContextType).Eval(permission).ToList());
 
-    private string? GetFiltrationPrincipalName(SecurityRuleCredential? customSecurityRuleCredential)
+    private string? GetFiltrationPrincipalName(SecurityRuleCredential securityRuleCredential)
     {
-        var credential = customSecurityRuleCredential ?? securityRuleCredential;
-
-        switch (credential)
+        switch (securityRuleCredential)
         {
             case SecurityRuleCredential.CustomPrincipalSecurityRuleCredential customPrincipalSecurityRuleCredential:
                 return customPrincipalSecurityRuleCredential.Name;
 
-            case { } when credential == SecurityRuleCredential.CurrentUserWithRunAs:
+            case { } when securityRuleCredential == SecurityRuleCredential.CurrentUserWithRunAs:
                 return currentUser.Name;
 
-            case { } when credential == SecurityRuleCredential.CurrentUserWithoutRunAs:
+            case { } when securityRuleCredential == SecurityRuleCredential.CurrentUserWithoutRunAs:
                 return userAuthenticationService.GetUserName();
 
-            case { } when credential == SecurityRuleCredential.AnyUser:
+            case { } when securityRuleCredential == SecurityRuleCredential.AnyUser:
                 return null;
 
             default:
-                throw new ArgumentOutOfRangeException(nameof(credential));
+                throw new ArgumentOutOfRangeException(nameof(securityRuleCredential));
         }
     }
 }

@@ -78,7 +78,7 @@ public static class ServiceCollectionExtensions
             services.AddScoped(typeof(ISecurityAccessorInfinityStorage), settings.SecurityAccessorInfinityStorageType);
         }
 
-        services.AddSingleton(new DefaultSecurityRuleCredentialInfo(settings.DefaultSecurityRuleCredential));
+        services.AddSingleton(settings.DefaultSecurityRuleCredential);
 
         return services;
     }
@@ -135,9 +135,9 @@ public static class ServiceCollectionExtensions
                            sp =>
                            {
                                var factory = sp.GetRequiredService<ISecuritySystemFactory>();
-                               var info = sp.GetRequiredService<DefaultSecurityRuleCredentialInfo>();
+                               var securityRuleCredential = sp.GetRequiredService<SecurityRuleCredential>();
 
-                               return factory.Create(info.Credential);
+                               return factory.Create(securityRuleCredential);
                            })
 
                        .AddKeyedScoped(
@@ -149,9 +149,9 @@ public static class ServiceCollectionExtensions
                            sp =>
                            {
                                var factoryList = sp.GetRequiredService<IEnumerable<IPermissionSystemFactory>>();
-                               var info = sp.GetRequiredService<DefaultSecurityRuleCredentialInfo>();
+                               var securityRuleCredential = sp.GetRequiredService<SecurityRuleCredential>();
 
-                               return factoryList.Select(factory => factory.Create(info.Credential));
+                               return factoryList.Select(factory => factory.Create(securityRuleCredential));
                            })
 
                        .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()

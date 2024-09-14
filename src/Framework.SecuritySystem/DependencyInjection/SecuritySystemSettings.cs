@@ -144,6 +144,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public ISecuritySystemSettings SetDefaultSecurityRuleCredential(SecurityRuleCredential securityRuleCredential)
     {
+        this.DefaultSecurityRuleCredential = securityRuleCredential;
 
         return this;
     }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetOperationsHandler(ISecuritySystem securitySystem, ISecurityRoleSource roleSource, ISecurityOperationInfoSource operationInfoSource)
+public class GetOperationsHandler([CurrentUserWithoutRunAs]ISecuritySystem securitySystem, ISecurityRoleSource roleSource, ISecurityOperationInfoSource operationInfoSource)
     : BaseReadHandler, IGetOperationsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)

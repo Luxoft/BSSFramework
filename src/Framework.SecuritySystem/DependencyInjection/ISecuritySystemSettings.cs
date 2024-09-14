@@ -26,11 +26,10 @@ public interface ISecuritySystemSettings
 
     ISecuritySystemSettings AddSecurityOperation(SecurityOperation securityOperation, SecurityOperationInfo info);
 
-    ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>()
-        where TPermissionSystem : class, IPermissionSystem;
+    ISecuritySystemSettings AddPermissionSystem<TPermissionSystemFactory>()
+        where TPermissionSystemFactory : class, IPermissionSystemFactory;
 
-    ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>(Func<IServiceProvider, TPermissionSystem> factory)
-        where TPermissionSystem : class, IPermissionSystem;
+    ISecuritySystemSettings AddPermissionSystem(Func<IServiceProvider, IPermissionSystemFactory> getFactory);
 
     ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions);
 
@@ -47,5 +46,7 @@ public interface ISecuritySystemSettings
 
     ISecuritySystemSettings SetSecurityAccessorInfinityStorage<TStorage>()
         where TStorage : class, ISecurityAccessorInfinityStorage;
+
+    ISecuritySystemSettings SetDefaultSecurityRuleCredential(SecurityRuleCredential securityRuleCredential);
 
 }

@@ -60,7 +60,7 @@ public class AuthorizationPrincipalService(
                                            .ToDictionary(
                                                g => securityContextSource.GetSecurityContextInfo(g.Key).Type,
                                                g => g.ToReadOnlyListI()),
-                                  false))
+                                 false))
                          .ToList());
         }
     }
@@ -70,7 +70,11 @@ public class AuthorizationPrincipalService(
         CancellationToken cancellationToken = default)
     {
         return await availablePermissionSource
-                     .GetAvailablePermissionsQueryable(DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles), false)
+                     .GetAvailablePermissionsQueryable(
+                         DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles) with
+                         {
+                             CustomCredential = SecurityRuleCredential.AnyUser
+                         })
                      .Select(permission => permission.Principal.Name)
                      .Distinct()
                      .ToListAsync(cancellationToken);
@@ -169,10 +173,10 @@ public class AuthorizationPrincipalService(
             foreach (var restriction in restrictionMergeResult.AddingItems)
             {
                 _ = new PermissionRestriction(dbPermission)
-                {
-                    SecurityContextId = restriction.securityContextId,
-                    SecurityContextType = await securityContextTypeRepository.LoadAsync(restriction.Key, cancellationToken)
-                };
+                    {
+                        SecurityContextId = restriction.securityContextId,
+                        SecurityContextType = await securityContextTypeRepository.LoadAsync(restriction.Key, cancellationToken)
+                    };
             }
 
             foreach (var dbRestriction in restrictionMergeResult.RemovingItems)

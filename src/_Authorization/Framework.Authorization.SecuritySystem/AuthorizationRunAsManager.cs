@@ -10,10 +10,10 @@ namespace Framework.Authorization.SecuritySystem;
 
 public class AuthorizationRunAsManager(
     IUserAuthenticationService userAuthenticationService,
-    [DisabledSecurity] IRepository<Principal> principalRepository,
+    ISecuritySystemFactory securitySystemFactory,
     ICurrentPrincipalSource currentPrincipalSource,
-    IAuthorizationSystemFactory authorizationSystemFactory)
-    : RunAsManager(userAuthenticationService)
+    [DisabledSecurity] IRepository<Principal> principalRepository)
+    : RunAsManager(userAuthenticationService, securitySystemFactory)
 {
     private Principal CurrentPrincipal => currentPrincipalSource.CurrentPrincipal;
 
@@ -29,6 +29,4 @@ public class AuthorizationRunAsManager(
 
         await principalRepository.SaveAsync(this.CurrentPrincipal, cancellationToken);
     }
-
-    protected override void CheckAccess() => authorizationSystemFactory.Create(false).CheckAccess(SecurityRole.Administrator);
 }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class GetOperationHandler(
-    ISecuritySystem securitySystem,
+    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
     ISecurityRoleSource roleSource,
     IPrincipalManagementService configuratorApi)
     : BaseReadHandler, IGetOperationHandler

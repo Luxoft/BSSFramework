@@ -3,13 +3,11 @@ using Framework.SecuritySystem.ExternalSystem.Management;
 
 namespace Framework.SecuritySystem.DiTests;
 
-public class ExamplePermissionSystem (ExamplePermissionSystemData data) : IPermissionSystem
+public class ExamplePermissionSystem(ExamplePermissionSystemData data) : IPermissionSystem
 {
     public Type PermissionType => throw new NotImplementedException();
 
     public IPrincipalService PrincipalService => throw new NotImplementedException();
-
-    public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => throw new NotImplementedException();
 
     public IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule) => new ExamplePermissionSource(data);
 

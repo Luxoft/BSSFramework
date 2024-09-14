@@ -10,12 +10,12 @@ public class ConfiguratorPrincipalManagementService(IEnumerable<IPermissionSyste
 {
     private readonly IReadOnlyList<IPrincipalService> principalServices = permissionSystems.Select(ps => ps.PrincipalService).ToList();
 
-    private IPrincipalManagementService PrincipalManagementService =>
+    private IPrincipalManagementService principalManagementService =>
         this.principalServices
             .OfType<IPrincipalManagementService>()
             .Single(
-                () => new BusinessLogicException($"{nameof(this.PrincipalManagementService)} not found"),
-                () => new BusinessLogicException($"More one  {nameof(this.PrincipalManagementService)}"));
+                () => new BusinessLogicException($"{nameof(principalManagementService)} not found"),
+                () => new BusinessLogicException($"More one  {nameof(principalManagementService)}"));
 
     public async Task<IEnumerable<TypedPrincipalHeader>> GetPrincipalsAsync(
         string nameFilter,
@@ -61,19 +61,19 @@ public class ConfiguratorPrincipalManagementService(IEnumerable<IPermissionSyste
     }
 
     public Task<Guid> CreatePrincipalAsync(string principalName, CancellationToken cancellationToken = default) =>
-        this.PrincipalManagementService.CreatePrincipalAsync(principalName, cancellationToken);
+        principalManagementService.CreatePrincipalAsync(principalName, cancellationToken);
 
     public Task UpdatePrincipalNameAsync(Guid principalId, string principalName, CancellationToken cancellationToken) =>
-        this.PrincipalManagementService.UpdatePrincipalNameAsync(principalId, principalName, cancellationToken);
+        principalManagementService.UpdatePrincipalNameAsync(principalId, principalName, cancellationToken);
 
     public Task RemovePrincipalAsync(Guid principalId, CancellationToken cancellationToken = default) =>
-        this.PrincipalManagementService.RemovePrincipalAsync(principalId, cancellationToken);
+        principalManagementService.RemovePrincipalAsync(principalId, cancellationToken);
 
     public Task<MergeResult<Guid, Guid>> UpdatePermissionsAsync(
         Guid principalId,
         IEnumerable<TypedPermission> typedPermissions,
         CancellationToken cancellationToken = default) =>
-        this.PrincipalManagementService.UpdatePermissionsAsync(principalId, typedPermissions.Where(tp => !tp.IsVirtual), cancellationToken);
+        principalManagementService.UpdatePermissionsAsync(principalId, typedPermissions.Where(tp => !tp.IsVirtual), cancellationToken);
 }
 
 internal static class TaskExtensions

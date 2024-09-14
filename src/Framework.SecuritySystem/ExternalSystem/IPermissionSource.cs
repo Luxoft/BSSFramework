@@ -4,6 +4,8 @@ namespace Framework.SecuritySystem.ExternalSystem;
 
 public interface IPermissionSource
 {
+    bool HasAccess();
+
     List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes);
 }
 

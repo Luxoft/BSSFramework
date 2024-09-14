@@ -9,21 +9,35 @@ namespace Framework.SecuritySystem;
 
 public static class SecurityRuleExtensions
 {
+    public static TSecurityRule TryApplyCredential<TSecurityRule>(this TSecurityRule securityRule, SecurityRuleCredential credential)
+        where TSecurityRule : RoleBaseSecurityRule =>
+        securityRule.CustomCredential == null ? securityRule with { CustomCredential = credential } : securityRule;
+
+    public static TSecurityRule WithoutRunAs<TSecurityRule>(this TSecurityRule securityRule)
+        where TSecurityRule : RoleBaseSecurityRule =>
+        securityRule with { CustomCredential = SecurityRuleCredential.CurrentUserWithoutRunAs };
+
     public static OperationSecurityRule ToSecurityRule(
         this SecurityOperation securityOperation,
-        HierarchicalExpandType? customExpandType = null) =>
-        new(securityOperation) { CustomExpandType = customExpandType };
+        HierarchicalExpandType? customExpandType = null,
+        SecurityRuleCredential? customCredential = null) =>
+        new(securityOperation) { CustomExpandType = customExpandType, CustomCredential = customCredential };
 
     public static NonExpandedRolesSecurityRule ToSecurityRule(
         this IEnumerable<SecurityRole> securityRoles,
-        HierarchicalExpandType? customExpandType = null) =>
+        HierarchicalExpandType? customExpandType = null,
+        SecurityRuleCredential? customCredential = null) =>
         new(
-        new DeepEqualsCollection<SecurityRole>(securityRoles.OrderBy(sr => sr.Name))) { CustomExpandType = customExpandType };
+        new DeepEqualsCollection<SecurityRole>(securityRoles.OrderBy(sr => sr.Name)))
+        {
+            CustomExpandType = customExpandType, CustomCredential = customCredential
+        };
 
     public static NonExpandedRolesSecurityRule ToSecurityRule(
         this SecurityRole securityRole,
-        HierarchicalExpandType? customExpandType = null) =>
-        new[] { securityRole }.ToSecurityRule(customExpandType);
+        HierarchicalExpandType? customExpandType = null,
+        SecurityRuleCredential? customCredential = null) =>
+        new[] { securityRole }.ToSecurityRule(customExpandType, customCredential);
 
     public static DomainSecurityRule Or(
         this DomainSecurityRule securityRule,

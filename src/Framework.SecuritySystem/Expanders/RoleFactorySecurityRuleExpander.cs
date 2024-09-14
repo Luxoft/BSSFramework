@@ -12,6 +12,8 @@ public class RoleFactorySecurityRuleExpander(IServiceProvider serviceProvider)
 
         var resultRule = factory.Create();
 
-        return securityRule.CustomExpandType == null ? resultRule : resultRule with { CustomExpandType = securityRule.CustomExpandType };
+        return securityRule.CustomExpandType == null
+                   ? resultRule
+                   : resultRule with { CustomExpandType = securityRule.CustomExpandType, CustomCredential = securityRule.CustomCredential };
     }
 }

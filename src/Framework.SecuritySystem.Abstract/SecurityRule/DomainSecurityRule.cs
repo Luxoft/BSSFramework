@@ -8,12 +8,17 @@ public abstract record DomainSecurityRule : SecurityRule
     /// <summary>
     /// Правило доступа для доменных объектов привязанных к текущему пользователю
     /// </summary>
-    public static CurrentUserSecurityRule CurrentUser { get; } = new ();
+    public static CurrentUserSecurityRule CurrentUser { get; } = new();
 
     /// <summary>
     /// Правило доступа для блокирования доступа
     /// </summary>
     public static ProviderSecurityRule AccessDenied { get; } = new(typeof(ISecurityProvider<>), nameof(AccessDenied));
+
+    /// <summary>
+    /// Любая роль
+    /// </summary>
+    public static AnyRoleSecurityRule AnyRole { get; } = new ();
 
 
     public static implicit operator DomainSecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();
@@ -58,6 +63,8 @@ public abstract record DomainSecurityRule : SecurityRule
 
         public static implicit operator RoleBaseSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
+        public SecurityRuleCredential? CustomCredential { get; init; } = null;
+
         /// <summary>
         /// Тип разворачивания деревьев (как правило для просмотра самого дерева выбирается HierarchicalExpandType.All)
         /// </summary>
@@ -65,6 +72,8 @@ public abstract record DomainSecurityRule : SecurityRule
 
         public HierarchicalExpandType SafeExpandType => this.CustomExpandType ?? HierarchicalExpandType.Children;
     }
+
+    public record AnyRoleSecurityRule : RoleBaseSecurityRule;
 
     public record RoleFactorySecurityRule(Type RoleFactoryType) : RoleBaseSecurityRule;
 

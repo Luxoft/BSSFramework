@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetPrincipalsHandler(ISecuritySystem securitySystem, IPrincipalManagementService configuratorApi)
+public class GetPrincipalsHandler([CurrentUserWithoutRunAs]ISecuritySystem securitySystem, IPrincipalManagementService configuratorApi)
     : BaseReadHandler, IGetPrincipalsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)

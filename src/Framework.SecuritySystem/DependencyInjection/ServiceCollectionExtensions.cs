@@ -8,6 +8,7 @@ using Framework.SecuritySystem.Builders.MaterializedBuilder;
 
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Expanders;
+using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.PermissionOptimization;
 using Framework.SecuritySystem.SecurityAccessor;
 using Framework.SecuritySystem.Services;
@@ -69,12 +70,15 @@ public static class ServiceCollectionExtensions
 
         if (settings.SecurityAccessorInfinityStorageType == null)
         {
-            services.AddNotImplemented<ISecurityAccessorInfinityStorage>("Use 'SetSecurityAccessorInfinityStorage' for initialize infinity storage");
+            services.AddNotImplemented<ISecurityAccessorInfinityStorage>(
+                "Use 'SetSecurityAccessorInfinityStorage' for initialize infinity storage");
         }
         else
         {
             services.AddScoped(typeof(ISecurityAccessorInfinityStorage), settings.SecurityAccessorInfinityStorageType);
         }
+
+        services.AddSingleton(settings.DefaultSecurityRuleCredential);
 
         return services;
     }
@@ -125,7 +129,30 @@ public static class ServiceCollectionExtensions
                        .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
                        .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))
-                       .AddScoped<ISecuritySystem, RootSecuritySystem>()
+
+                       .AddScoped<ISecuritySystemFactory, SecuritySystemFactory>()
+                       .AddScoped(
+                           sp =>
+                           {
+                               var factory = sp.GetRequiredService<ISecuritySystemFactory>();
+                               var securityRuleCredential = sp.GetRequiredService<SecurityRuleCredential>();
+
+                               return factory.Create(securityRuleCredential);
+                           })
+
+                       .AddKeyedScoped(
+                           nameof(SecurityRuleCredential.CurrentUserWithoutRunAs),
+                           (sp, _) => sp.GetRequiredService<ISecuritySystemFactory>()
+                                        .Create(SecurityRuleCredential.CurrentUserWithoutRunAs))
+
+                       .AddScoped(
+                           sp =>
+                           {
+                               var factoryList = sp.GetRequiredService<IEnumerable<IPermissionSystemFactory>>();
+                               var securityRuleCredential = sp.GetRequiredService<SecurityRuleCredential>();
+
+                               return factoryList.Select(factory => factory.Create(securityRuleCredential));
+                           })
 
                        .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
 

@@ -6,7 +6,7 @@ using Framework.SecuritySystem.ExternalSystem.Management;
 
 namespace Framework.SecuritySystem.ExternalSystem;
 
-public interface IPermissionSystem : ISecuritySystemBase
+public interface IPermissionSystem
 {
     Type PermissionType { get; }
 

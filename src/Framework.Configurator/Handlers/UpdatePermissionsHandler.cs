@@ -8,39 +8,39 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public record UpdatePermissionsHandler(
-    ISecuritySystem SecuritySystem,
-    ISecurityRoleSource SecurityRoleSource,
-    ISecurityContextSource SecurityContextSource,
-    IPrincipalManagementService PrincipalManagementService,
-    IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
+public class UpdatePermissionsHandler(
+    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
+    ISecurityRoleSource securityRoleSource,
+    ISecurityContextSource securityContextSource,
+    IPrincipalManagementService principalManagementService,
+    IConfiguratorIntegrationEvents? configuratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.SecuritySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
+        securitySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
 
         var principalId = new Guid((string)context.Request.RouteValues["id"]!);
         var permissions = await this.ParseRequestBodyAsync<List<RequestBodyDto>>(context);
 
         var typedPermissions = permissions.Select(this.ToTypedPermission).ToList();
 
-        var mergeResult = await this.PrincipalManagementService.UpdatePermissionsAsync(principalId, typedPermissions, cancellationToken);
+        var mergeResult = await principalManagementService.UpdatePermissionsAsync(principalId, typedPermissions, cancellationToken);
 
-        if (this.ConfiguratorIntegrationEvents != null)
+        if (configuratorIntegrationEvents != null)
         {
             foreach (var permissionId in mergeResult.AddingItems)
             {
-                await this.ConfiguratorIntegrationEvents.PermissionCreatedAsync(permissionId, cancellationToken);
+                await configuratorIntegrationEvents.PermissionCreatedAsync(permissionId, cancellationToken);
             }
 
             foreach (var (permissionId, _) in mergeResult.CombineItems)
             {
-                await this.ConfiguratorIntegrationEvents.PermissionChangedAsync(permissionId, cancellationToken);
+                await configuratorIntegrationEvents.PermissionChangedAsync(permissionId, cancellationToken);
             }
 
             foreach (var permissionId in mergeResult.RemovingItems)
             {
-                await this.ConfiguratorIntegrationEvents.PermissionRemovedAsync(permissionId, cancellationToken);
+                await configuratorIntegrationEvents.PermissionRemovedAsync(permissionId, cancellationToken);
             }
         }
     }
@@ -49,11 +49,11 @@ public record UpdatePermissionsHandler(
     {
         return new TypedPermission(
             string.IsNullOrWhiteSpace(permission.PermissionId) ? Guid.Empty : new Guid(permission.PermissionId),
-            this.SecurityRoleSource.GetSecurityRole(new Guid(permission.RoleId)),
+            securityRoleSource.GetSecurityRole(new Guid(permission.RoleId)),
             new Period(permission.StartDate, permission.EndDate),
             permission.Comment,
             permission.Contexts.ToDictionary(
-                pair => this.SecurityContextSource.GetSecurityContextInfo(new Guid(pair.Id)).Type,
+                pair => securityContextSource.GetSecurityContextInfo(new Guid(pair.Id)).Type,
                 pair => pair.Entities.ToReadOnlyListI(e => new Guid(e))),
             permission.IsVirtual);
     }

@@ -103,7 +103,7 @@ public partial class MainTests
                    settings =>
 
                        settings
-                           .AddPermissionSystem<ExamplePermissionSystem>()
+                           .AddPermissionSystem<ExamplePermissionSystemFactory>()
 
                            .AddDomainSecurityServices(
                                    rb =>

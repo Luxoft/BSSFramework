@@ -22,6 +22,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public bool InitializeAdministratorRole { get;  set; } = true;
 
+    public SecurityRuleCredential DefaultSecurityRuleCredential { get; private set; } = SecurityRuleCredential.CurrentUserWithRunAs;
+
     public Type AccessDeniedExceptionServiceType { get; private set; } = typeof(AccessDeniedExceptionService);
 
     public Type CurrentUserType { get; private set; } = typeof(CurrentUser);
@@ -72,18 +74,17 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
-    public ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>()
-        where TPermissionSystem : class, IPermissionSystem
+    public ISecuritySystemSettings AddPermissionSystem<TPermissionSystemFactory>()
+        where TPermissionSystemFactory : class, IPermissionSystemFactory
     {
-        this.RegisterActions.Add(sc => sc.AddScoped<IPermissionSystem, TPermissionSystem>());
+        this.RegisterActions.Add(sc => sc.AddScoped<IPermissionSystemFactory, TPermissionSystemFactory>());
 
         return this;
     }
 
-    public ISecuritySystemSettings AddPermissionSystem<TPermissionSystem>(Func<IServiceProvider, TPermissionSystem> factory)
-        where TPermissionSystem : class, IPermissionSystem
+    public ISecuritySystemSettings AddPermissionSystem(Func<IServiceProvider, IPermissionSystemFactory> getFactory)
     {
-        this.RegisterActions.Add(sc => sc.AddScoped<IPermissionSystem>(factory));
+        this.RegisterActions.Add(sc => sc.AddScoped(getFactory));
 
         return this;
     }
@@ -137,6 +138,13 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         where TStorage : class, ISecurityAccessorInfinityStorage
     {
         this.SecurityAccessorInfinityStorageType = typeof(TStorage);
+
+        return this;
+    }
+
+    public ISecuritySystemSettings SetDefaultSecurityRuleCredential(SecurityRuleCredential securityRuleCredential)
+    {
+        this.DefaultSecurityRuleCredential = securityRuleCredential;
 
         return this;
     }

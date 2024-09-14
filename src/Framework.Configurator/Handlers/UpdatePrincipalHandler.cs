@@ -7,23 +7,23 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public record UpdatePrincipalHandler(
-    ISecuritySystem SecuritySystem,
-    IPrincipalManagementService PrincipalManagementService,
-    IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
+public class UpdatePrincipalHandler(
+    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
+    IPrincipalManagementService principalManagementService,
+    IConfiguratorIntegrationEvents? configuratorIntegrationEvents = null)
     : BaseWriteHandler, IUpdatePrincipalHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.SecuritySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
+        securitySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
 
         var principalId = new Guid((string?)context.Request.RouteValues["id"]!);
 
         var principalName = await this.ParseRequestBodyAsync<string>(context);
 
-        await this.PrincipalManagementService.UpdatePrincipalNameAsync(principalId, principalName, cancellationToken);
+        await principalManagementService.UpdatePrincipalNameAsync(principalId, principalName, cancellationToken);
 
-        if (this.ConfiguratorIntegrationEvents != null)
-            await this.ConfiguratorIntegrationEvents.PrincipalChangedAsync(principalId, cancellationToken);
+        if (configuratorIntegrationEvents != null)
+            await configuratorIntegrationEvents.PrincipalChangedAsync(principalId, cancellationToken);
     }
 }

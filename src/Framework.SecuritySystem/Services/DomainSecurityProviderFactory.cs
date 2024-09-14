@@ -33,9 +33,13 @@ public class DomainSecurityProviderFactory<TDomainObject>(
 
             case CurrentUserSecurityRule securityRule:
             {
-                var args = securityRule.RelativePathKey == null
-                              ? []
-                              : new object[] { new CurrentUserSecurityProviderRelativeKey(securityRule.RelativePathKey) };
+                var args = new object?[]
+                    {
+                        securityRule.RelativePathKey == null
+                            ? null
+                            : new CurrentUserSecurityProviderRelativeKey(securityRule.RelativePathKey)
+                    }.Where(arg => arg != null)
+                     .ToArray(arg => arg!);
 
                 return ActivatorUtilities.CreateInstance<CurrentUserSecurityProvider<TDomainObject>>(serviceProvider, args);
             }

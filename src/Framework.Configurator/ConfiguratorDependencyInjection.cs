@@ -64,7 +64,7 @@ public static class ConfiguratorDependencyInjection
             .Get<IGetBusinessRoleContextsHandler>($"{route}/api/contexts")
             .Get<IGetPrincipalsHandler>($"{route}/api/principals")
             .Get<IGetBusinessRoleHandler>(route + "/api/role/{id}")
-            .Get<IGetPrincipalHandler>(route + "/api/principal/{id}")       
+            .Get<IGetPrincipalHandler>(route + "/api/principal/{id}")
             .Get<IGetBusinessRoleContextEntitiesHandler>(route + "/api/context/{id}/entities")
             .Get<IGetRunAsHandler>($"{route}/api/principal/current/runAs")
             .Get<IDownloadPermissionTemplateHandler>($"{route}/api/permissions/template")

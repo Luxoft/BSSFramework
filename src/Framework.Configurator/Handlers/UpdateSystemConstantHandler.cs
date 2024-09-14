@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public record UpdateSystemConstantHandler(IRepositoryFactory<SystemConstant> RepoFactory)
+public class UpdateSystemConstantHandler(IRepositoryFactory<SystemConstant> repoFactory)
     : BaseWriteHandler, IUpdateSystemConstantHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
@@ -20,8 +20,8 @@ public record UpdateSystemConstantHandler(IRepositoryFactory<SystemConstant> Rep
 
     private async Task UpdateAsync(Guid id, string newValue, CancellationToken cancellationToken)
     {
-        var systemConstant = await this.RepoFactory.Create().LoadAsync(id, cancellationToken);
+        var systemConstant = await repoFactory.Create().LoadAsync(id, cancellationToken);
         systemConstant.Value = newValue;
-        await this.RepoFactory.Create(SecurityRole.Administrator).SaveAsync(systemConstant, cancellationToken);
+        await repoFactory.Create(SecurityRole.Administrator.ToSecurityRule().WithoutRunAs()).SaveAsync(systemConstant, cancellationToken);
     }
 }

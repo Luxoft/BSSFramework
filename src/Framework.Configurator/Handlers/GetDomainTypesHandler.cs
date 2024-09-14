@@ -10,7 +10,7 @@ using NHibernate.Linq;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetDomainTypesHandler(IRepositoryFactory<DomainType> repoFactory, ISecuritySystem securitySystem)
+public class GetDomainTypesHandler(IRepositoryFactory<DomainType> repoFactory, [CurrentUserWithoutRunAs]ISecuritySystem securitySystem)
     : BaseReadHandler, IGetDomainTypesHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)

@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ public partial class AuthSLJsonController
     public IEnumerable<PrincipalVisualDTO> GetVisualPrincipalsWithoutSecurity()
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                         evaluateData.Context.AvailablePermissionSource.GetAvailablePermissionsQueryable().Any()
+                                                         evaluateData.Context.SecuritySystem.HasAccess(DomainSecurityRule.AnyRole)
                                                                  ? evaluateData.Context.Logics.Principal.GetFullList().ToVisualDTOList(evaluateData.MappingService)
                                                                  : Enumerable.Empty<PrincipalVisualDTO>());
     }

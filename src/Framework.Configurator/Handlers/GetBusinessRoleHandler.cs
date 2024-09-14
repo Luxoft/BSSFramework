@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class GetBusinessRoleHandler(
-    ISecuritySystem securitySystem,
+    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
     ISecurityRoleSource securityRoleSource,
     ISecurityOperationInfoSource securityOperationInfoSource,
     IPrincipalManagementService configuratorApi)

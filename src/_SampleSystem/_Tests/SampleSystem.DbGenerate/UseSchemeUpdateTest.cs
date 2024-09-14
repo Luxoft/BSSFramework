@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.DependencyInjection;
+﻿using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Setup;

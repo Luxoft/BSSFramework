@@ -10,7 +10,7 @@ namespace Framework.Configurator.Handlers;
 public class GetBusinessRolesHandler(
     ISecurityRoleSource securityRoleSource,
     ISecurityContextSource securityContextSource,
-    ISecuritySystem securitySystem)
+    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem)
     : BaseReadHandler, IGetBusinessRolesHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)

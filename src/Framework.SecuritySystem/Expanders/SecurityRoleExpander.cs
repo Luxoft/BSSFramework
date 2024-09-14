@@ -28,7 +28,8 @@ public class SecurityRoleExpander
 
                 return new DomainSecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles))
                        {
-                           CustomExpandType = securityRule.CustomExpandType
+                           CustomExpandType = securityRule.CustomExpandType,
+                           CustomCredential = securityRule.CustomCredential
                        };
             }).WithLock();
     }

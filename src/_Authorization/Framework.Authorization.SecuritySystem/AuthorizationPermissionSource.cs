@@ -17,6 +17,11 @@ public class AuthorizationPermissionSource(
     ISecurityContextSource securityContextSource,
     DomainSecurityRule.RoleBaseSecurityRule securityRule) : IPermissionSource<Permission>
 {
+    public bool HasAccess()
+    {
+        return this.GetPermissionQuery().Any();
+    }
+
     public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
     {
         var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(securityRule)
@@ -36,7 +41,8 @@ public class AuthorizationPermissionSource(
 
     public IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionFilter)
     {
-        return this.GetSecurityPermissions(availablePermissionSource.CreateFilter(securityRule, applyCurrentUser: false))
+        return this.GetSecurityPermissions(
+                       availablePermissionSource.CreateFilter(securityRule with { CustomCredential = SecurityRuleCredential.AnyUser }))
                    .Where(permissionFilter)
                    .Select(permission => permission.Principal.Name);
     }

@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public record RunAsHandler(IRunAsManager? RunAsManager = null) : BaseWriteHandler, IRunAsHandler
+public class RunAsHandler(IRunAsManager? runAsManager = null) : BaseWriteHandler, IRunAsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken) =>
-        await this.RunAsManager.FromMaybe(() => "RunAs not supported")
-                  .StartRunAsUserAsync(await this.ParseRequestBodyAsync<string>(context), cancellationToken);
+        await runAsManager.FromMaybe(() => "RunAs not supported")
+                          .StartRunAsUserAsync(await this.ParseRequestBodyAsync<string>(context), cancellationToken);
 }

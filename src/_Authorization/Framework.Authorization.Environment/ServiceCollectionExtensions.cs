@@ -6,6 +6,7 @@ using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.Initialize;
 using Framework.Authorization.SecuritySystem.Validation;
+using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
@@ -48,13 +49,12 @@ public static class ServiceCollectionExtensions
         return services.AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
                        .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
 
-                       .AddScoped<IAuthorizationSystemFactory, AuthorizationSystemFactory>()
-
                        .AddSingleton<InitializerSettings>()
                        .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
                        .AddScoped<IPrincipalDomainService, PrincipalDomainService>()
+                       .AddScoped<AuthorizationPermissionSystemFactory>()
 
                        .AddScoped<IPrincipalGeneralValidator, PrincipalGeneralValidator>()
                        .AddKeyedScoped<IValidator<Principal>, PrincipalUniquePermissionValidator>(PrincipalUniquePermissionValidator.Key)
@@ -106,6 +106,6 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection UpdateSecuritySystem(this IServiceCollection services)
     {
-        return services.AddScoped<IPermissionSystem, AuthorizationPermissionSystem>();
+        return services.AddScopedFrom<IPermissionSystemFactory, AuthorizationPermissionSystemFactory>();
     }
 }

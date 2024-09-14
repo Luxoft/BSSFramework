@@ -18,7 +18,7 @@ public partial class AuthSLJsonController
     public IEnumerable<PrincipalVisualDTO> GetVisualPrincipalsWithoutSecurity()
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                         evaluateData.Context.AvailablePermissionSource.GetAvailablePermissionsQueryable(DomainSecurityRule.AnyRole).Any()
+                                                         evaluateData.Context.SecuritySystem.HasAccess(DomainSecurityRule.AnyRole)
                                                                  ? evaluateData.Context.Logics.Principal.GetFullList().ToVisualDTOList(evaluateData.MappingService)
                                                                  : Enumerable.Empty<PrincipalVisualDTO>());
     }

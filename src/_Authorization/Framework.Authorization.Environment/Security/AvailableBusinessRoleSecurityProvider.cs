@@ -15,7 +15,9 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
         availablePermissionSource
             .GetAvailablePermissionsQueryable(DomainSecurityRule.AnyRole)
-            .Pipe(permissionQ => ExpressionHelper.Create((BusinessRole businessRole) => permissionQ.Select(p => p.Role).Contains(businessRole)))
+            .Pipe(
+                permissionQ =>
+                    ExpressionHelper.Create((BusinessRole businessRole) => permissionQ.Select(p => p.Role).Contains(businessRole)))
             .OverrideInput(toBusinessRolePathInfo.Path);
 
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
@@ -25,7 +27,8 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
         var role = toBusinessRolePathInfo.Path.Eval(domainObject);
 
         return SecurityAccessorData.Return(
-            availablePermissionSource.GetAvailablePermissionsQueryable(DomainSecurityRule.AnyRole.WithoutRunAs())
+            availablePermissionSource
+                .GetAvailablePermissionsQueryable(DomainSecurityRule.AnyRole with { CustomCredential = SecurityRuleCredential.AnyUser })
                 .Where(permission => permission.Role == role)
                 .Select(permission => permission.Principal)
                 .Distinct()

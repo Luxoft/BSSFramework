@@ -2,13 +2,12 @@
 
 namespace Framework.SecuritySystem.Services;
 
-public abstract class RunAsManager(
-    IUserAuthenticationService userAuthenticationService,
-    ISecuritySystemFactory securitySystemFactory) : IRunAsManager
+public abstract class RunAsManager(IUserAuthenticationService userAuthenticationService, ISecuritySystemFactory securitySystemFactory)
+    : IRunAsManager
 {
     public abstract string? RunAsName { get; }
 
-    private string? PureName => userAuthenticationService.GetUserName();
+    private string? PureName { get; } = userAuthenticationService.GetUserName();
 
     public async Task StartRunAsUserAsync(string principalName, CancellationToken cancellationToken)
     {

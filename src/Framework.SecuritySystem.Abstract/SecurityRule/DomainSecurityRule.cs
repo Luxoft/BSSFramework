@@ -18,7 +18,7 @@ public abstract record DomainSecurityRule : SecurityRule
     /// <summary>
     /// Любая роль
     /// </summary>
-    public static AnyRoleSecurityRule AnyRole { get; } = new AnyRoleSecurityRule();
+    public static AnyRoleSecurityRule AnyRole { get; } = new ();
 
 
     public static implicit operator DomainSecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();

@@ -41,7 +41,8 @@ public class AuthorizationPermissionSource(
 
     public IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionFilter)
     {
-        return this.GetSecurityPermissions(availablePermissionSource.CreateFilter(securityRule))
+        return this.GetSecurityPermissions(
+                       availablePermissionSource.CreateFilter(securityRule with { CustomCredential = SecurityRuleCredential.AnyUser }))
                    .Where(permissionFilter)
                    .Select(permission => permission.Principal.Name);
     }

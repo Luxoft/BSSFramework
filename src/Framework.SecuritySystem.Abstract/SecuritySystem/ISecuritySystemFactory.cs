@@ -2,5 +2,5 @@
 
 public interface ISecuritySystemFactory
 {
-    ISecuritySystem Create(bool withRunAs);
+    ISecuritySystem Create(SecurityRuleCredential securityRuleCredential);
 }

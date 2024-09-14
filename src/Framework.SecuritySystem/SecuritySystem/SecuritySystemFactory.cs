@@ -4,10 +4,10 @@ namespace Framework.SecuritySystem;
 
 public class SecuritySystemFactory(
     IAccessDeniedExceptionService accessDeniedExceptionService,
-    IEnumerable<IPermissionSystem> permissionSystems) : ISecuritySystemFactory
+    IEnumerable<IPermissionSystemFactory> permissionSystems) : ISecuritySystemFactory
 {
-    public ISecuritySystem Create(bool withRunAs)
+    public ISecuritySystem Create(SecurityRuleCredential securityRuleCredential)
     {
-        return new SecuritySystem(accessDeniedExceptionService, permissionSystems, withRunAs);
+        return new SecuritySystem(accessDeniedExceptionService, permissionSystems.Select(f => f.Create(securityRuleCredential)).ToList());
     }
 }

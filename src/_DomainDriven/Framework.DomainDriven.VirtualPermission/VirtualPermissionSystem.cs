@@ -14,50 +14,26 @@ using NHibernate.Linq;
 
 namespace Framework.DomainDriven.VirtualPermission;
 
-public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSystem<TPermission>
+public class VirtualPermissionSystem<TPrincipal, TPermission>(
+    ISecurityRuleExpander securityRuleExpander,
+    ICurrentUser currentUser,
+    IUserAuthenticationService userAuthenticationService,
+    IQueryableSource queryableSource,
+    TimeProvider timeProvider,
+    SecurityRuleCredential securityRuleCredential,
+    VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo)
+    : IPermissionSystem<TPermission>
+
     where TPrincipal : IIdentityObject<Guid>
     where TPermission : IIdentityObject<Guid>
 {
-    private readonly ISecurityRuleExpander securityRuleExpander;
-
-    private readonly ICurrentUser currentUser;
-
-    private readonly IUserAuthenticationService userAuthenticationService;
-
-    private readonly IQueryableSource queryableSource;
-
-    private readonly TimeProvider timeProvider;
-
-    private readonly VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo;
-
-    public VirtualPermissionSystem(
-        ISecurityRuleExpander securityRuleExpander,
-        ICurrentUser currentUser,
-        IUserAuthenticationService userAuthenticationService,
-        IQueryableSource queryableSource,
-        TimeProvider timeProvider,
-        ISecurityRoleSource securityRoleSource,
-        VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo)
-    {
-        this.securityRuleExpander = securityRuleExpander;
-        this.currentUser = currentUser;
-        this.userAuthenticationService = userAuthenticationService;
-        this.queryableSource = queryableSource;
-        this.timeProvider = timeProvider;
-        this.bindingInfo = bindingInfo;
-
-        this.bindingInfo.Validate(securityRoleSource);
-
-        this.PrincipalService = new VirtualPrincipalService<TPrincipal, TPermission>(queryableSource, bindingInfo);
-    }
-
     public Type PermissionType { get; } = typeof(TPermission);
 
-    public IPrincipalService PrincipalService { get; }
+    public IPrincipalService PrincipalService { get; } = new VirtualPrincipalService<TPrincipal, TPermission>(queryableSource, bindingInfo);
 
     public Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
-        this.bindingInfo.GetRestrictionsExpr<TSecurityContext>();
+        bindingInfo.GetRestrictionsExpr<TSecurityContext>();
 
     public Expression<Func<TPermission, bool>> GetGrandAccessExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
@@ -67,11 +43,17 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
         this.GetManyContainsIdentsExpr<TSecurityContext>(idents).BuildOr();
 
-    public IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs)
+    public IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        if (this.securityRuleExpander.FullExpand(securityRule).SecurityRoles.Contains(this.bindingInfo.SecurityRole))
+        if (securityRuleExpander.FullExpand(securityRule).SecurityRoles.Contains(bindingInfo.SecurityRole))
         {
-            return new VirtualPermissionSource<TPrincipal, TPermission>(this.currentUser, this.userAuthenticationService, this.queryableSource, this.timeProvider, this.bindingInfo, withRunAs);
+            return new VirtualPermissionSource<TPrincipal, TPermission>(
+                currentUser,
+                userAuthenticationService,
+                queryableSource,
+                timeProvider,
+                bindingInfo,
+                securityRuleCredential);
         }
         else
         {
@@ -80,14 +62,14 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
     }
 
     public async Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default) =>
-        await this.GetPermissionSource(this.bindingInfo.SecurityRole, true).GetPermissionQuery().AnyAsync(cancellationToken)
-            ? [this.bindingInfo.SecurityRole]
+        await this.GetPermissionSource(bindingInfo.SecurityRole).GetPermissionQuery().AnyAsync(cancellationToken)
+            ? [bindingInfo.SecurityRole]
             : [];
 
     private IEnumerable<Expression<Func<TPermission, bool>>> GetManyGrandAccessExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
-        foreach (var restrictionPath in this.bindingInfo.RestrictionPaths)
+        foreach (var restrictionPath in bindingInfo.RestrictionPaths)
         {
             if (restrictionPath is Expression<Func<TPermission, TSecurityContext>> singlePath)
             {
@@ -104,7 +86,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
     private IEnumerable<Expression<Func<TPermission, bool>>> GetManyContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
     {
-        foreach (var restrictionPath in this.bindingInfo.RestrictionPaths)
+        foreach (var restrictionPath in bindingInfo.RestrictionPaths)
         {
             if (restrictionPath is Expression<Func<TPermission, TSecurityContext>> singlePath)
             {
@@ -118,5 +100,5 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
         }
     }
 
-    IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs) => this.GetPermissionSource(securityRule, withRunAs);
+    IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule) => this.GetPermissionSource(securityRule);
 }

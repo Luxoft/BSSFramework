@@ -3,6 +3,7 @@
 using Framework.Configurator.Handlers;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Services;
+using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Builder;
@@ -38,7 +39,10 @@ public static class ConfiguratorDependencyInjection
            .AddScoped<IRunAsHandler, RunAsHandler>()
            .AddScoped<IStopRunAsHandler, StopRunAsHandler>()
            .AddScoped<IDownloadPermissionTemplateHandler, DownloadPermissionTemplateHandler>()
-           .AddScoped<IPrincipalManagementService, ConfiguratorPrincipalManagementService>();
+           .AddScoped<IPrincipalManagementService, ConfiguratorPrincipalManagementService>()
+           .AddKeyedScoped(
+               nameof(Configurator),
+               (sp, _) => sp.GetRequiredService<ISecuritySystemFactory>().Create(SecurityRuleCredential.CurrentUserWithoutRunAs));
 
     public static IApplicationBuilder UseConfigurator(this IApplicationBuilder app, string route = "/admin/configurator") =>
         app
@@ -64,7 +68,7 @@ public static class ConfiguratorDependencyInjection
             .Get<IGetBusinessRoleContextsHandler>($"{route}/api/contexts")
             .Get<IGetPrincipalsHandler>($"{route}/api/principals")
             .Get<IGetBusinessRoleHandler>(route + "/api/role/{id}")
-            .Get<IGetPrincipalHandler>(route + "/api/principal/{id}")       
+            .Get<IGetPrincipalHandler>(route + "/api/principal/{id}")
             .Get<IGetBusinessRoleContextEntitiesHandler>(route + "/api/context/{id}/entities")
             .Get<IGetRunAsHandler>($"{route}/api/principal/current/runAs")
             .Get<IDownloadPermissionTemplateHandler>($"{route}/api/permissions/template")

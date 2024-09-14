@@ -5,6 +5,8 @@ namespace Framework.SecuritySystem;
 
 public abstract record DomainSecurityRule : SecurityRule
 {
+    public SecurityRuleCredential? CustomCredential { get; init; } = null;
+
     /// <summary>
     /// Правило доступа для доменных объектов привязанных к текущему пользователю
     /// </summary>
@@ -14,6 +16,11 @@ public abstract record DomainSecurityRule : SecurityRule
     /// Правило доступа для блокирования доступа
     /// </summary>
     public static ProviderSecurityRule AccessDenied { get; } = new(typeof(ISecurityProvider<>), nameof(AccessDenied));
+
+    /// <summary>
+    /// Любая роль
+    /// </summary>
+    public static AnyRoleSecurityRule AnyRole { get; }= new AnyRoleSecurityRule();
 
 
     public static implicit operator DomainSecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();
@@ -65,6 +72,8 @@ public abstract record DomainSecurityRule : SecurityRule
 
         public HierarchicalExpandType SafeExpandType => this.CustomExpandType ?? HierarchicalExpandType.Children;
     }
+
+    public record AnyRoleSecurityRule : RoleBaseSecurityRule;
 
     public record RoleFactorySecurityRule(Type RoleFactoryType) : RoleBaseSecurityRule;
 

@@ -54,7 +54,7 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
                        .AddScoped<IPrincipalDomainService, PrincipalDomainService>()
-                       .AddScoped<AuthorizationPermissionSystem>()
+                       .AddScoped<AuthorizationPermissionSystemFactory>()
 
                        .AddScoped<IPrincipalGeneralValidator, PrincipalGeneralValidator>()
                        .AddKeyedScoped<IValidator<Principal>, PrincipalUniquePermissionValidator>(PrincipalUniquePermissionValidator.Key)
@@ -106,6 +106,6 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection UpdateSecuritySystem(this IServiceCollection services)
     {
-        return services.AddScopedFrom<IPermissionSystem, AuthorizationPermissionSystem>();
+        return services.AddScopedFrom<IPermissionSystemFactory, AuthorizationPermissionSystemFactory>();
     }
 }

@@ -4,7 +4,8 @@ public class SecurityRuleExpander(
     SecurityModeExpander securityModeExpander,
     SecurityOperationExpander securityOperationExpander,
     SecurityRoleExpander securityRoleExpander,
-    RoleFactorySecurityRuleExpander dynamicRoleSecurityRuleExpander)
+    RoleFactorySecurityRuleExpander dynamicRoleSecurityRuleExpander,
+    ISecurityRoleSource securityRoleSource)
     : ISecurityRuleExpander
 {
     public DomainSecurityRule? TryExpand<TDomainObject>(SecurityRule.ModeSecurityRule securityRule)
@@ -31,6 +32,9 @@ public class SecurityRuleExpander(
     {
         switch (securityRule)
         {
+            case DomainSecurityRule.AnyRoleSecurityRule:
+                return DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoleSource.SecurityRoles);
+
             case DomainSecurityRule.OperationSecurityRule operationSecurityRule:
                 return this.Expand(this.Expand(operationSecurityRule));
 

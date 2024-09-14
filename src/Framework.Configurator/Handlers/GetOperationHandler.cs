@@ -1,5 +1,6 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
@@ -8,14 +9,14 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class GetOperationHandler(
-    ISecuritySystemFactory securitySystemFactory,
+    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
     ISecurityRoleSource roleSource,
     IPrincipalManagementService configuratorApi)
     : BaseReadHandler, IGetOperationHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!securitySystemFactory.IsSecurityAdministrator()) return new OperationDetailsDto { BusinessRoles = [], Principals = [] };
+        if (!securitySystem.IsSecurityAdministrator()) return new OperationDetailsDto { BusinessRoles = [], Principals = [] };
 
         var operationName = (string)context.Request.RouteValues["name"]!;
 

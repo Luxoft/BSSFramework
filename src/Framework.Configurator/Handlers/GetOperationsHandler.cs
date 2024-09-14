@@ -1,17 +1,18 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetOperationsHandler(ISecuritySystemFactory securitySystemFactory, ISecurityRoleSource roleSource, ISecurityOperationInfoSource operationInfoSource)
+public class GetOperationsHandler([CurrentUserWithoutRunAs]ISecuritySystem securitySystem, ISecurityRoleSource roleSource, ISecurityOperationInfoSource operationInfoSource)
     : BaseReadHandler, IGetOperationsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!securitySystemFactory.IsSecurityAdministrator()) return new List<string>();
+        if (!securitySystem.IsSecurityAdministrator()) return new List<string>();
 
         var operations = roleSource.SecurityRoles
                                    .SelectMany(x => x.Information.Operations)

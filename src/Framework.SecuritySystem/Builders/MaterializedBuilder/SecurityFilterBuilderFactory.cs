@@ -17,7 +17,7 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
         var securityTypes = securityPath.GetUsedTypes();
 
         var rawPermissions = permissionSystems
-                             .SelectMany(ps => ps.GetPermissionSource(securityRule, true).GetPermissions(securityTypes))
+                             .SelectMany(ps => ps.GetPermissionSource(securityRule).GetPermissions(securityTypes))
                              .ToList();
 
         var optimizedPermissions = permissionOptimizationService.Optimize(rawPermissions);

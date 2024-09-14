@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Net.Http.Headers;
 
 using Framework.Authorization.Domain;
 using Framework.Persistent;
@@ -12,7 +13,8 @@ namespace Framework.Authorization.SecuritySystem;
 
 public class AuthorizationPermissionSystem(
     IServiceProvider serviceProvider,
-    ISecurityContextSource securityContextSource)
+    ISecurityContextSource securityContextSource,
+    SecurityRuleCredential securityRuleCredential)
     : IPermissionSystem<Permission>
 {
     public Type PermissionType { get; } = typeof(Permission);
@@ -29,18 +31,18 @@ public class AuthorizationPermissionSystem(
                                        .Select(restriction => restriction.SecurityContextId);
     }
 
-    public IPermissionSource<Permission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs)
+    public IPermissionSource<Permission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        return ActivatorUtilities.CreateInstance<AuthorizationPermissionSource>(serviceProvider, securityRule, withRunAs);
+        return ActivatorUtilities.CreateInstance<AuthorizationPermissionSource>(serviceProvider, securityRule.TryApplyCredential(securityRuleCredential));
     }
 
     public Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default)
     {
-        return ActivatorUtilities.CreateInstance<AuthorizationAvailableSecurityRoleSource>(serviceProvider)
+        return ActivatorUtilities.CreateInstance<AuthorizationAvailableSecurityRoleSource>(serviceProvider, securityRuleCredential)
                                  .GetAvailableSecurityRoles(cancellationToken);
     }
-    IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs)
+    IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        return this.GetPermissionSource(securityRule, withRunAs);
+        return this.GetPermissionSource(securityRule);
     }
 }

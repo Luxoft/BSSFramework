@@ -17,7 +17,8 @@ public class NotificationBasePermissionFilterSource(
 
         var businessRoleIdents = securityRolesIdentsResolver.Resolve(DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles)).ToList();
 
-        var permissionQ = availablePermissionSource.GetAvailablePermissionsQueryable(applyCurrentUser: false);
+        var permissionQ = availablePermissionSource.GetAvailablePermissionsQueryable(
+            DomainSecurityRule.AnyRole with { CustomCredential = SecurityRuleCredential.AnyUser });
 
         return permission => businessRoleIdents.Contains(permission.Role.Id) && permissionQ.Contains(permission);
     }

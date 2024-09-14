@@ -1,5 +1,6 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
@@ -8,12 +9,12 @@ namespace Framework.Configurator.Handlers;
 
 public class GetBusinessRoleContextsHandler(
     ISecurityContextSource securityContextSource,
-    ISecuritySystemFactory securitySystemFactory)
+    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem)
     : BaseReadHandler, IGetBusinessRoleContextsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!securitySystemFactory.IsSecurityAdministrator()) return new List<EntityDto>();
+        if (!securitySystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
         return securityContextSource
                .SecurityContextInfoList

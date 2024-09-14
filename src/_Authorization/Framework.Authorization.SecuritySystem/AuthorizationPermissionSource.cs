@@ -15,8 +15,7 @@ public class AuthorizationPermissionSource(
     IRealTypeResolver realTypeResolver,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     ISecurityContextSource securityContextSource,
-    DomainSecurityRule.RoleBaseSecurityRule securityRule,
-    bool withRunAs) : IPermissionSource<Permission>
+    DomainSecurityRule.RoleBaseSecurityRule securityRule) : IPermissionSource<Permission>
 {
     public bool HasAccess()
     {
@@ -25,7 +24,7 @@ public class AuthorizationPermissionSource(
 
     public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
     {
-        var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(securityRule, applyCurrentUser: true, withRunAs: withRunAs)
+        var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(securityRule)
                                                    .FetchMany(q => q.Restrictions)
                                                    .ThenFetch(q => q.SecurityContextType)
                                                    .ToList();
@@ -37,12 +36,12 @@ public class AuthorizationPermissionSource(
 
     public IQueryable<Permission> GetPermissionQuery()
     {
-        return this.GetSecurityPermissions(availablePermissionSource.CreateFilter(securityRule: securityRule, applyCurrentUser: true, withRunAs: withRunAs));
+        return this.GetSecurityPermissions(availablePermissionSource.CreateFilter(securityRule: securityRule));
     }
 
     public IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionFilter)
     {
-        return this.GetSecurityPermissions(availablePermissionSource.CreateFilter(securityRule, applyCurrentUser: false, withRunAs: withRunAs))
+        return this.GetSecurityPermissions(availablePermissionSource.CreateFilter(securityRule))
                    .Where(permissionFilter)
                    .Select(permission => permission.Principal.Name);
     }

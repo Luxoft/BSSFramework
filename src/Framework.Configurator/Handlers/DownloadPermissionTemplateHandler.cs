@@ -9,23 +9,23 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public record DownloadPermissionTemplateHandler(
-    ISecurityContextSource SecurityContextSource,
-    ISecuritySystemFactory SecuritySystemFactory)
+public class DownloadPermissionTemplateHandler(
+    ISecurityContextSource securityContextSource,
+    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem)
     : IDownloadPermissionTemplateHandler
 {
     private const int FirstContentColumnIndex = 4;
 
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.SecuritySystemFactory.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
+        securitySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
 
         var assembly = this.GetType().Assembly;
         var resourceStream = assembly.GetManifestResourceStream("Framework.Configurator.Templates.Permissions.xlsx");
         using var workbook = new XLWorkbook(resourceStream);
         var worksheet = workbook.Worksheet(1);
 
-        this.SecurityContextSource.GetSecurityContextTypes().Foreach(
+        securityContextSource.GetSecurityContextTypes().Foreach(
             (securityContextType, index) =>
                 worksheet.Cell(1, FirstContentColumnIndex + index).Value = securityContextType.Name);
 

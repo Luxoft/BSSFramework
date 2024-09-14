@@ -1,5 +1,6 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
@@ -7,12 +8,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetPrincipalsHandler(ISecuritySystemFactory securitySystemFactory, IPrincipalManagementService configuratorApi)
+public class GetPrincipalsHandler([CurrentUserWithoutRunAs]ISecuritySystem securitySystem, IPrincipalManagementService configuratorApi)
     : BaseReadHandler, IGetPrincipalsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!securitySystemFactory.IsSecurityAdministrator()) return new List<EntityDto>();
+        if (!securitySystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
         var nameFilter = (string)context.Request.Query["searchToken"]!;
 

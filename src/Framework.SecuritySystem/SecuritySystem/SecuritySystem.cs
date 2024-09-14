@@ -4,12 +4,11 @@ namespace Framework.SecuritySystem;
 
 public class SecuritySystem(
     IAccessDeniedExceptionService accessDeniedExceptionService,
-    IEnumerable<IPermissionSystem> permissionSystems,
-    bool withRunAs) : ISecuritySystem
+    IReadOnlyList<IPermissionSystem> permissionSystems) : ISecuritySystem
 {
     public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        return permissionSystems.Any(v => v.GetPermissionSource(securityRule, withRunAs).HasAccess());
+        return permissionSystems.Any(v => v.GetPermissionSource(securityRule).HasAccess());
     }
 
     public void CheckAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule)

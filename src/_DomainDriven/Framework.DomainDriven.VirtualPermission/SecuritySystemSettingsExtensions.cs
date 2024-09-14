@@ -16,7 +16,7 @@ public static class SecuritySystemSettingsExtensions
         where TPrincipal : IIdentityObject<Guid>
         where TPermission : IIdentityObject<Guid> =>
         securitySystemSettings.AddPermissionSystem(
-            sp => ActivatorUtilities.CreateInstance<VirtualPermissionSystem<TPrincipal, TPermission>>(sp, getBindingInfo(sp)));
+            sp => ActivatorUtilities.CreateInstance<VirtualPermissionSystemFactory<TPrincipal, TPermission>>(sp, getBindingInfo(sp)));
 
     public static ISecuritySystemSettings AddVirtualPermission<TPrincipal, TPermission>(
         this ISecuritySystemSettings securitySystemSettings,

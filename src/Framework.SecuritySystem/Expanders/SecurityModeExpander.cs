@@ -8,7 +8,11 @@ public class SecurityModeExpander
     {
         var request = from info in infos
 
-                      from pair in new[] { (Mode: SecurityRule.View, TargetRule: info.ViewRule), (Mode: SecurityRule.Edit, TargetRule: info.EditRule) }
+                      from pair in new[]
+                                   {
+                                       (Mode: SecurityRule.View, TargetRule: info.ViewRule),
+                                       (Mode: SecurityRule.Edit, TargetRule: info.EditRule)
+                                   }
 
                       where pair.TargetRule != null
 

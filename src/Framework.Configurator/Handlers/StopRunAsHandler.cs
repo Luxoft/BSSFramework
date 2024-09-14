@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public record StopRunAsHandler(IRunAsManager? RunAsManager = null) : BaseWriteHandler, IStopRunAsHandler
+public class StopRunAsHandler(IRunAsManager? runAsManager = null) : BaseWriteHandler, IStopRunAsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken) =>
-        await this.RunAsManager.FromMaybe(() => "RunAs not supported").FinishRunAsUserAsync(cancellationToken);
+        await runAsManager.FromMaybe(() => "RunAs not supported").FinishRunAsUserAsync(cancellationToken);
 }

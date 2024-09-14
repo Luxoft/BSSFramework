@@ -10,14 +10,14 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public record ForcePushEventHandler(
-    IRepositoryFactory<DomainTypeEventOperation> EventOperationRepoFactory,
-    ISecuritySystemFactory SecuritySystemFactory,
-    ILegacyForceEventSystem? LegacyForceEventSystem = null) : BaseWriteHandler, IForcePushEventHandler
+public class ForcePushEventHandler(
+    IRepositoryFactory<DomainTypeEventOperation> eventOperationRepoFactory,
+    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
+    ILegacyForceEventSystem? legacyForceEventSystem = null) : BaseWriteHandler, IForcePushEventHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.SecuritySystemFactory.CheckAccess(SecurityRole.Administrator);
+        securitySystem.CheckAccess(SecurityRole.Administrator);
 
         var operationId = (string)context.Request.RouteValues["operationId"]!;
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
@@ -27,20 +27,20 @@ public record ForcePushEventHandler(
 
     private async Task ForcePushAsync(Guid operationId, RequestBodyDto body, CancellationToken cancellationToken)
     {
-        var domainTypeEventOperation = await this.EventOperationRepoFactory.Create().LoadAsync(operationId, cancellationToken);
+        var domainTypeEventOperation = await eventOperationRepoFactory.Create().LoadAsync(operationId, cancellationToken);
 
-        if (this.LegacyForceEventSystem == null)
+        if (legacyForceEventSystem == null)
         {
-            throw new Exception($"{nameof(this.LegacyForceEventSystem)} not implemented");
+            throw new Exception($"{nameof(legacyForceEventSystem)} not implemented");
         }
         else
         {
-            this.LegacyForceEventSystem.ForceEvent(new DomainTypeEventModel
-                                                   {
-                                                       Operation = domainTypeEventOperation,
-                                                       Revision = body.Revision,
-                                                       DomainObjectIdents = body.Ids.Split(',').Select(i => new Guid(i)).ToList()
-                                                   });
+            legacyForceEventSystem.ForceEvent(new DomainTypeEventModel
+                                              {
+                                                  Operation = domainTypeEventOperation,
+                                                  Revision = body.Revision,
+                                                  DomainObjectIdents = body.Ids.Split(',').Select(i => new Guid(i)).ToList()
+                                              });
         }
     }
 

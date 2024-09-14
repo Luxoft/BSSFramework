@@ -1,5 +1,6 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class GetBusinessRoleHandler(
-    ISecuritySystemFactory securitySystemFactory,
+    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
     ISecurityRoleSource securityRoleSource,
     ISecurityOperationInfoSource securityOperationInfoSource,
     IPrincipalManagementService configuratorApi)
@@ -16,7 +17,7 @@ public class GetBusinessRoleHandler(
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!securitySystemFactory.IsSecurityAdministrator()) return new BusinessRoleDetailsDto { Operations = [], Principals = [] };
+        if (!securitySystem.IsSecurityAdministrator()) return new BusinessRoleDetailsDto { Operations = [], Principals = [] };
 
         var securityRoleId = new Guid((string)context.Request.RouteValues["id"]!);
 

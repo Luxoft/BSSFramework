@@ -70,7 +70,7 @@ public class AuthorizationPrincipalService(
         CancellationToken cancellationToken = default)
     {
         return await availablePermissionSource
-                     .GetAvailablePermissionsQueryable(DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles), false)
+                     .GetAvailablePermissionsQueryable(DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles) with { CustomCredential = SecurityRuleCredential.AnyUser })
                      .Select(permission => permission.Principal.Name)
                      .Distinct()
                      .ToListAsync(cancellationToken);

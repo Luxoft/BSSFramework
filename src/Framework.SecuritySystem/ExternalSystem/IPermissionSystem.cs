@@ -12,7 +12,7 @@ public interface IPermissionSystem
 
     IPrincipalService PrincipalService { get; }
 
-    IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs);
+    IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 
     Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default);
 }
@@ -31,5 +31,5 @@ public interface IPermissionSystem<TPermission> : IPermissionSystem
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
         this.GetPermissionRestrictionsExpr<TSecurityContext>().Select(restrictionIdents => restrictionIdents.Any(restrictionIdent => idents.Contains(restrictionIdent)));
 
-    new IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs);
+    new IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 }

@@ -9,10 +9,10 @@ using NHibernate.Linq;
 namespace Framework.Authorization.SecuritySystem;
 
 public class AuthorizationRunAsManager(
+    AuthorizationPermissionSystem authorizationPermissionSystem,
     IUserAuthenticationService userAuthenticationService,
     [DisabledSecurity] IRepository<Principal> principalRepository,
-    ICurrentPrincipalSource currentPrincipalSource,
-    IAuthorizationSystemFactory authorizationSystemFactory)
+    ICurrentPrincipalSource currentPrincipalSource)
     : RunAsManager(userAuthenticationService)
 {
     private Principal CurrentPrincipal => currentPrincipalSource.CurrentPrincipal;
@@ -30,5 +30,5 @@ public class AuthorizationRunAsManager(
         await principalRepository.SaveAsync(this.CurrentPrincipal, cancellationToken);
     }
 
-    protected override void CheckAccess() => authorizationSystemFactory.Create(false).CheckAccess(SecurityRole.Administrator);
+    protected override void CheckAccess() => authorizationPermissionSystem.GetPermissionSource(SecurityRole.Administrator, false).HasAccess();
 }

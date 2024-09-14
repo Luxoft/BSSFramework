@@ -8,14 +8,14 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public record CreatePrincipalHandler(
-    ISecuritySystem SecuritySystem,
+    ISecuritySystemFactory SecuritySystemFactory,
     IPrincipalManagementService PrincipalManagementService,
     IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null)
     : BaseWriteHandler, ICreatePrincipalHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.SecuritySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
+        this.SecuritySystemFactory.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
 
         var name = await this.ParseRequestBodyAsync<string>(context);
 

@@ -125,7 +125,8 @@ public static class ServiceCollectionExtensions
                        .AddKeyedSingleton(typeof(ISecurityProvider<>), nameof(SecurityRule.Disabled), typeof(DisabledSecurityProvider<>))
                        .AddSingleton(typeof(ISecurityProvider<>), typeof(DisabledSecurityProvider<>))
                        .AddScoped(typeof(IDomainSecurityService<>), typeof(ContextDomainSecurityService<>))
-                       .AddScoped<ISecuritySystem, RootSecuritySystem>()
+                       .AddScoped<ISecuritySystemFactory, SecuritySystemFactory>()
+                       .AddScopedFrom<ISecuritySystem, ISecuritySystemFactory>(factory => factory.Create(true))
 
                        .AddSingleton<ISecurityRolesIdentsResolver, SecurityRolesIdentsResolver>()
 

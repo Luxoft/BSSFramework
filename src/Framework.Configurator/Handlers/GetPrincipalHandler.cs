@@ -1,7 +1,6 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.DomainDriven.ApplicationCore.ExternalSource;
-using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.Exceptions;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
@@ -15,11 +14,11 @@ public class GetPrincipalHandler(
     ISecurityEntitySource externalSource,
     ISecurityContextSource securityContextSource,
     ISecurityRoleSource securityRoleSource,
-    ISecuritySystem securitySystem) : BaseReadHandler, IGetPrincipalHandler
+    ISecuritySystemFactory securitySystemFactory) : BaseReadHandler, IGetPrincipalHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!securitySystem.IsSecurityAdministrator()) return new PrincipalDetailsDto();
+        if (!securitySystemFactory.IsSecurityAdministrator()) return new PrincipalDetailsDto();
 
         var principalId = new Guid((string)context.Request.RouteValues["id"]!);
 

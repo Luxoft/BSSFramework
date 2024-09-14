@@ -18,6 +18,6 @@ public class AdminHangfireAuthorization(DomainSecurityRule.RoleBaseSecurityRule 
         var httpContext = context.GetHttpContext();
 
         return httpContext.User.Identity is { IsAuthenticated: true }
-               && httpContext.RequestServices.GetRequiredService<ISecuritySystem>().HasAccess(securityRule);
+               && httpContext.RequestServices.GetRequiredService<ISecuritySystemFactory>().Create(false).HasAccess(securityRule);
     }
 }

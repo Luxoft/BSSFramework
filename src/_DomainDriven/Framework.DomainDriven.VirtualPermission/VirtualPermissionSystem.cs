@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
+using Framework.Core.Services;
 using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
@@ -21,6 +22,8 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
 
     private readonly ICurrentUser currentUser;
 
+    private readonly IUserAuthenticationService userAuthenticationService;
+
     private readonly IQueryableSource queryableSource;
 
     private readonly TimeProvider timeProvider;
@@ -30,6 +33,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
     public VirtualPermissionSystem(
         ISecurityRuleExpander securityRuleExpander,
         ICurrentUser currentUser,
+        IUserAuthenticationService userAuthenticationService,
         IQueryableSource queryableSource,
         TimeProvider timeProvider,
         ISecurityRoleSource securityRoleSource,
@@ -37,6 +41,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
     {
         this.securityRuleExpander = securityRuleExpander;
         this.currentUser = currentUser;
+        this.userAuthenticationService = userAuthenticationService;
         this.queryableSource = queryableSource;
         this.timeProvider = timeProvider;
         this.bindingInfo = bindingInfo;
@@ -62,11 +67,11 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
         this.GetManyContainsIdentsExpr<TSecurityContext>(idents).BuildOr();
 
-    public IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
+    public IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs)
     {
         if (this.securityRuleExpander.FullExpand(securityRule).SecurityRoles.Contains(this.bindingInfo.SecurityRole))
         {
-            return new VirtualPermissionSource<TPrincipal, TPermission>(this.currentUser, this.queryableSource, this.timeProvider, this.bindingInfo);
+            return new VirtualPermissionSource<TPrincipal, TPermission>(this.currentUser, this.userAuthenticationService, this.queryableSource, this.timeProvider, this.bindingInfo, withRunAs);
         }
         else
         {
@@ -75,11 +80,9 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
     }
 
     public async Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default) =>
-        await this.GetPermissionSource(this.bindingInfo.SecurityRole).GetPermissionQuery().AnyAsync(cancellationToken)
+        await this.GetPermissionSource(this.bindingInfo.SecurityRole, true).GetPermissionQuery().AnyAsync(cancellationToken)
             ? [this.bindingInfo.SecurityRole]
             : [];
-
-    public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => this.GetPermissionSource(securityRule).GetPermissionQuery().Any();
 
     private IEnumerable<Expression<Func<TPermission, bool>>> GetManyGrandAccessExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
@@ -115,5 +118,5 @@ public class VirtualPermissionSystem<TPrincipal, TPermission> : IPermissionSyste
         }
     }
 
-    IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule) => this.GetPermissionSource(securityRule);
+    IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs) => this.GetPermissionSource(securityRule, withRunAs);
 }

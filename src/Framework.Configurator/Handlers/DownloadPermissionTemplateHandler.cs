@@ -11,14 +11,14 @@ namespace Framework.Configurator.Handlers;
 
 public record DownloadPermissionTemplateHandler(
     ISecurityContextSource SecurityContextSource,
-    ISecuritySystem SecuritySystem)
+    ISecuritySystemFactory SecuritySystemFactory)
     : IDownloadPermissionTemplateHandler
 {
     private const int FirstContentColumnIndex = 4;
 
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.SecuritySystem.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
+        this.SecuritySystemFactory.CheckAccess(ApplicationSecurityRule.SecurityAdministrator);
 
         var assembly = this.GetType().Assembly;
         var resourceStream = assembly.GetManifestResourceStream("Framework.Configurator.Templates.Permissions.xlsx");

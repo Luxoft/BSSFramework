@@ -51,7 +51,7 @@ public class SecurityFilterBuilderFactory<TPermission, TDomainObject>(
 
         var permissionFilterExpression = builder.GetSecurityFilterExpression(securityRule.SafeExpandType).ExpandConst().InlineEval();
 
-        var permissionQuery = permissionSystem.GetPermissionSource(securityRule).GetPermissionQuery();
+        var permissionQuery = permissionSystem.GetPermissionSource(securityRule, true).GetPermissionQuery();
 
         var filterExpression = ExpressionHelper.Create(
                                                    (TDomainObject domainObject) =>

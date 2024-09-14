@@ -9,9 +9,7 @@ public class ExamplePermissionSystem (ExamplePermissionSystemData data) : IPermi
 
     public IPrincipalService PrincipalService => throw new NotImplementedException();
 
-    public bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule) => throw new NotImplementedException();
-
-    public IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule) => new ExamplePermissionSource(data);
+    public IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs) => new ExamplePermissionSource(data);
 
     public Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default) => throw new NotImplementedException();
 }

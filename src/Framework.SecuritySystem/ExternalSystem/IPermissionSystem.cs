@@ -6,13 +6,13 @@ using Framework.SecuritySystem.ExternalSystem.Management;
 
 namespace Framework.SecuritySystem.ExternalSystem;
 
-public interface IPermissionSystem : ISecuritySystemBase
+public interface IPermissionSystem
 {
     Type PermissionType { get; }
 
     IPrincipalService PrincipalService { get; }
 
-    IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule);
+    IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs);
 
     Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default);
 }
@@ -31,5 +31,5 @@ public interface IPermissionSystem<TPermission> : IPermissionSystem
         where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
         this.GetPermissionRestrictionsExpr<TSecurityContext>().Select(restrictionIdents => restrictionIdents.Any(restrictionIdent => idents.Contains(restrictionIdent)));
 
-    new IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule);
+    new IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool withRunAs);
 }

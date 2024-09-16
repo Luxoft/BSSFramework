@@ -16,7 +16,7 @@ public class PeriodJsonConverter : JsonConverter<Period>
 
         var stringComparer = options.PropertyNameCaseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
 
-        var (startDateName, endDateName) = GetPropertyNames(options.PropertyNamingPolicy);
+        var namingPolicy = options.PropertyNamingPolicy ?? DefaultJsonNamingPolicy.Default;
 
         while (reader.Read())
         {
@@ -28,16 +28,13 @@ public class PeriodJsonConverter : JsonConverter<Period>
                 var propertyName = reader.GetString();
                 reader.Read();
 
-                if (stringComparer.Equals(propertyName, startDateName))
+                if (stringComparer.Equals(propertyName, namingPolicy.ConvertName(nameof(Period.StartDate))))
                 {
-                    startDate = reader.GetDateTime();
+                    startDate = JsonSerializer.Deserialize<DateTime>(ref reader, options);
                 }
-                else if (stringComparer.Equals(propertyName, endDateName))
+                else if (stringComparer.Equals(propertyName, namingPolicy.ConvertName(nameof(Period.EndDate))))
                 {
-                    if (reader.TokenType != JsonTokenType.Null)
-                    {
-                        endDate = reader.GetDateTime();
-                    }
+                    endDate = JsonSerializer.Deserialize<DateTime?>(ref reader, options);
                 }
             }
         }
@@ -49,24 +46,14 @@ public class PeriodJsonConverter : JsonConverter<Period>
     {
         writer.WriteStartObject();
 
-        var (startDateName, endDateName) = GetPropertyNames(options.PropertyNamingPolicy);
+        var namingPolicy = options.PropertyNamingPolicy ?? DefaultJsonNamingPolicy.Default;
 
-        writer.WriteString(startDateName, value.StartDate);
-        if (value.EndDate.HasValue)
-        {
-            writer.WriteString(endDateName, value.EndDate.Value);
-        }
-        else
-        {
-            writer.WriteNull(endDateName);
-        }
+        writer.WritePropertyName(namingPolicy.ConvertName(nameof(Period.StartDate)));
+        JsonSerializer.Serialize(writer, value.StartDate, options);
+
+        writer.WritePropertyName(namingPolicy.ConvertName(nameof(Period.EndDate)));
+        JsonSerializer.Serialize(writer, value.EndDate, options);
 
         writer.WriteEndObject();
-    }
-
-    private static (string StartPropertName, string EndPropertyName) GetPropertyNames(JsonNamingPolicy? namingPolicy)
-    {
-        return (namingPolicy?.ConvertName(nameof(Period.StartDate)) ?? nameof(Period.StartDate),
-                   namingPolicy?.ConvertName(nameof(Period.EndDate)) ?? nameof(Period.EndDate));
     }
 }

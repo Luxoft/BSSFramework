@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿#nullable enable
+
+using System.Text.Json.Serialization;
 using System.Text.Json;
 
 using Framework.Core;
@@ -14,6 +16,8 @@ public class PeriodJsonConverter : JsonConverter<Period>
 
         var stringComparer = options.PropertyNameCaseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
 
+        var (startDateName, endDateName) = GetPropertyNames(options.PropertyNamingPolicy);
+
         while (reader.Read())
         {
             if (reader.TokenType == JsonTokenType.EndObject)
@@ -24,11 +28,11 @@ public class PeriodJsonConverter : JsonConverter<Period>
                 var propertyName = reader.GetString();
                 reader.Read();
 
-                if (stringComparer.Equals(propertyName, nameof(Period.StartDate)))
+                if (stringComparer.Equals(propertyName, startDateName))
                 {
                     startDate = reader.GetDateTime();
                 }
-                else if (stringComparer.Equals(propertyName, nameof(Period.EndDate)))
+                else if (stringComparer.Equals(propertyName, endDateName))
                 {
                     if (reader.TokenType != JsonTokenType.Null)
                     {
@@ -45,16 +49,24 @@ public class PeriodJsonConverter : JsonConverter<Period>
     {
         writer.WriteStartObject();
 
-        writer.WriteString(nameof(Period.StartDate), value.StartDate);
+        var (startDateName, endDateName) = GetPropertyNames(options.PropertyNamingPolicy);
+
+        writer.WriteString(startDateName, value.StartDate);
         if (value.EndDate.HasValue)
         {
-            writer.WriteString(nameof(Period.EndDate), value.EndDate.Value);
+            writer.WriteString(endDateName, value.EndDate.Value);
         }
         else
         {
-            writer.WriteNull(nameof(Period.EndDate));
+            writer.WriteNull(endDateName);
         }
 
         writer.WriteEndObject();
+    }
+
+    private static (string StartPropertName, string EndPropertyName) GetPropertyNames(JsonNamingPolicy? namingPolicy)
+    {
+        return (namingPolicy?.ConvertName(nameof(Period.StartDate)) ?? nameof(Period.StartDate),
+                   namingPolicy?.ConvertName(nameof(Period.EndDate)) ?? nameof(Period.EndDate));
     }
 }

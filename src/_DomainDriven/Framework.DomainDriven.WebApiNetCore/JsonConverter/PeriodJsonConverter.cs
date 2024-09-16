@@ -30,14 +30,11 @@ public class PeriodJsonConverter : JsonConverter<Period>
 
                 if (stringComparer.Equals(propertyName, namingPolicy.ConvertName(nameof(Period.StartDate))))
                 {
-                    startDate = reader.GetDateTime();
+                    startDate = JsonSerializer.Deserialize<DateTime>(ref reader, options);
                 }
                 else if (stringComparer.Equals(propertyName, namingPolicy.ConvertName(nameof(Period.EndDate))))
                 {
-                    if (reader.TokenType != JsonTokenType.Null)
-                    {
-                        endDate = reader.GetDateTime();
-                    }
+                    endDate = JsonSerializer.Deserialize<DateTime?>(ref reader, options);
                 }
             }
         }
@@ -51,16 +48,11 @@ public class PeriodJsonConverter : JsonConverter<Period>
 
         var namingPolicy = options.PropertyNamingPolicy ?? DefaultJsonNamingPolicy.Default;
 
-        writer.WriteString(namingPolicy.ConvertName(nameof(Period.StartDate)), value.StartDate);
+        writer.WritePropertyName(namingPolicy.ConvertName(nameof(Period.StartDate)));
+        JsonSerializer.Serialize(writer, value.StartDate, options);
 
-        if (value.EndDate.HasValue)
-        {
-            writer.WriteString(namingPolicy.ConvertName(nameof(Period.EndDate)), value.EndDate.Value);
-        }
-        else
-        {
-            writer.WriteNull(namingPolicy.ConvertName(nameof(Period.EndDate)));
-        }
+        writer.WritePropertyName(namingPolicy.ConvertName(nameof(Period.EndDate)));
+        JsonSerializer.Serialize(writer, value.EndDate, options);
 
         writer.WriteEndObject();
     }

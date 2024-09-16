@@ -35,15 +35,31 @@ public class JsonConverterTests : TestBase
     public void PeriodConverted_ResultCorrected()
     {
         //Arrange
-        var currentMonth = this.TimeProvider.GetCurrentMonth();
+        var testPeriod = this.TimeProvider.GetCurrentMonth();
 
         var options = new JsonSerializerOptions { Converters = { new UtcDateTimeJsonConverter(), new PeriodJsonConverter() } };
 
         //Act
-        var jsonText = JsonSerializer.Serialize(currentMonth, options);
+        var jsonText = JsonSerializer.Serialize(testPeriod, options);
         var restored = JsonSerializer.Deserialize<Period>(jsonText, options);
 
         //Assert
-        currentMonth.Should().Be(restored);
+        testPeriod.Should().Be(restored);
+    }
+
+    [TestMethod]
+    public void PeriodWithNullConverted_ResultCorrected()
+    {
+        //Arrange
+        var testPeriod = new Period(this.TimeProvider.GetToday());
+
+        var options = new JsonSerializerOptions { Converters = { new UtcDateTimeJsonConverter(), new PeriodJsonConverter() } };
+
+        //Act
+        var jsonText = JsonSerializer.Serialize(testPeriod, options);
+        var restored = JsonSerializer.Deserialize<Period>(jsonText, options);
+
+        //Assert
+        testPeriod.Should().Be(restored);
     }
 }

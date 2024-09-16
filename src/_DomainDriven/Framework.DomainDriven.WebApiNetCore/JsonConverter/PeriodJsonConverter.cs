@@ -55,7 +55,7 @@ public class PeriodJsonConverter : JsonConverter<Period>
 
         if (value.EndDate.HasValue)
         {
-            writer.WriteString(namingPolicy.ConvertName(nameof(Period.EndDate)), value.StartDate);
+            writer.WriteString(namingPolicy.ConvertName(nameof(Period.EndDate)), value.EndDate.Value);
         }
         else
         {

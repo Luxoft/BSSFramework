@@ -1,21 +1,24 @@
 ﻿using Framework.Configurator.Interfaces;
+using Framework.DomainDriven;
+using Framework.Persistent;
 
 namespace SampleSystem.WebApiCore.Services;
 
-public class SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger) : IConfiguratorIntegrationEvents
+public class SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger, ICurrentRevisionService currentRevisionService) : IConfiguratorIntegrationEvents
 {
-    public async Task PrincipalCreatedAsync(Guid principal, CancellationToken cancellationToken)
+    public async Task PrincipalCreatedAsync(IIdentityObject<Guid> principal, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Principal {Name} has been created", principal);
+        var z = currentRevisionService.GetCurrentRevision();
+        logger.LogInformation("Principal with {Id} has been created", principal.Id);
     }
 
-    public Task PrincipalRemovedAsync(Guid principalId, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PrincipalRemovedAsync(IIdentityObject<Guid> principal, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public Task PrincipalChangedAsync(Guid principalId, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PrincipalChangedAsync(IIdentityObject<Guid> principal, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public Task PermissionRemovedAsync(Guid principalId, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PermissionRemovedAsync(IIdentityObject<Guid> permission, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public Task PermissionCreatedAsync(Guid principalId, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PermissionCreatedAsync(IIdentityObject<Guid> permission, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public Task PermissionChangedAsync(Guid principalId, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PermissionChangedAsync(IIdentityObject<Guid> permission, CancellationToken cancellationToken) => Task.CompletedTask;
 }

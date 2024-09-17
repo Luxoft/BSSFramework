@@ -1,16 +1,18 @@
-﻿namespace Framework.Configurator.Interfaces;
+﻿using Framework.Persistent;
+
+namespace Framework.Configurator.Interfaces;
 
 public interface IConfiguratorIntegrationEvents
 {
-    Task PrincipalCreatedAsync(Guid principalId, CancellationToken cancellationToken = default);
+    Task PrincipalCreatedAsync(IIdentityObject<Guid> principal, CancellationToken cancellationToken = default);
 
-    Task PrincipalChangedAsync(Guid principalId, CancellationToken cancellationToken = default);
+    Task PrincipalChangedAsync(IIdentityObject<Guid> principal, CancellationToken cancellationToken = default);
 
-    Task PrincipalRemovedAsync(Guid principalId, CancellationToken cancellationToken = default);
+    Task PrincipalRemovedAsync(IIdentityObject<Guid> principal, CancellationToken cancellationToken = default);
 
-    Task PermissionCreatedAsync(Guid permissionId, CancellationToken cancellationToken = default);
+    Task PermissionCreatedAsync(IIdentityObject<Guid> permission, CancellationToken cancellationToken = default);
 
-    Task PermissionChangedAsync(Guid permissionId, CancellationToken cancellationToken = default);
+    Task PermissionChangedAsync(IIdentityObject<Guid> permission, CancellationToken cancellationToken = default);
 
-    Task PermissionRemovedAsync(Guid permissionId, CancellationToken cancellationToken = default);
+    Task PermissionRemovedAsync(IIdentityObject<Guid> permission, CancellationToken cancellationToken = default);
 }

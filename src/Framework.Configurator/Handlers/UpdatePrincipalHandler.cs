@@ -21,9 +21,9 @@ public class UpdatePrincipalHandler(
 
         var principalName = await this.ParseRequestBodyAsync<string>(context);
 
-        await principalManagementService.UpdatePrincipalNameAsync(principalId, principalName, cancellationToken);
+        var principal = await principalManagementService.UpdatePrincipalNameAsync(principalId, principalName, cancellationToken);
 
         if (configuratorIntegrationEvents != null)
-            await configuratorIntegrationEvents.PrincipalChangedAsync(principalId, cancellationToken);
+            await configuratorIntegrationEvents.PrincipalChangedAsync(principal, cancellationToken);
     }
 }

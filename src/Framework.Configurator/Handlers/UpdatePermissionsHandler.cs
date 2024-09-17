@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class UpdatePermissionsHandler(
-    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
+    [CurrentUserWithoutRunAs] ISecuritySystem securitySystem,
     ISecurityRoleSource securityRoleSource,
     ISecurityContextSource securityContextSource,
     IPrincipalManagementService principalManagementService,
@@ -28,19 +28,19 @@ public class UpdatePermissionsHandler(
 
         if (configuratorIntegrationEvents != null)
         {
-            foreach (var permissionId in mergeResult.AddingItems)
+            foreach (var permission in mergeResult.AddingItems)
             {
-                await configuratorIntegrationEvents.PermissionCreatedAsync(permissionId, cancellationToken);
+                await configuratorIntegrationEvents.PermissionCreatedAsync(permission, cancellationToken);
             }
 
-            foreach (var (permissionId, _) in mergeResult.CombineItems)
+            foreach (var (permission, _) in mergeResult.CombineItems)
             {
-                await configuratorIntegrationEvents.PermissionChangedAsync(permissionId, cancellationToken);
+                await configuratorIntegrationEvents.PermissionChangedAsync(permission, cancellationToken);
             }
 
-            foreach (var permissionId in mergeResult.RemovingItems)
+            foreach (var permission in mergeResult.RemovingItems)
             {
-                await configuratorIntegrationEvents.PermissionRemovedAsync(permissionId, cancellationToken);
+                await configuratorIntegrationEvents.PermissionRemovedAsync(permission, cancellationToken);
             }
         }
     }

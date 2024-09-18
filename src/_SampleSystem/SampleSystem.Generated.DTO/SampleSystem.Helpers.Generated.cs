@@ -821,6 +821,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ProjectIdentityDTO(domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO ToIdentityDTO(this SampleSystem.Domain.PureFluentMappingObject domainObject)
+        {
+            return new SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO(domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO ToIdentityDTO(this SampleSystem.Domain.RoleRoleDegreeLink domainObject)
         {
             return new SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO(domainObject);
@@ -1207,6 +1212,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ProjectIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Project> domainObjects)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.PureFluentMappingObject> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -2396,6 +2406,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ProjectEventRichDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO ToRichEventDTO(this SampleSystem.Domain.PureFluentMappingObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO ToRichEventDTO(this SampleSystem.Domain.RoleRoleDegreeLink domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO(mappingService, domainObject);
@@ -2877,6 +2892,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ProjectEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Project> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.PureFluentMappingObject> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }

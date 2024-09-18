@@ -20,9 +20,8 @@ public record SampleSystemMappingSettings : MappingSettings<PersistentDomainObje
     public SampleSystemMappingSettings(
         IEnumerable<XDocument> mappingXmls,
         DatabaseName databaseName,
-        AuditDatabaseName auditDatabaseName,
-        IEnumerable<Type> types = null)
-        : base(mappingXmls, databaseName, auditDatabaseName, types)
+        AuditDatabaseName auditDatabaseName)
+        : base(mappingXmls, databaseName, auditDatabaseName)
     {
     }
 }

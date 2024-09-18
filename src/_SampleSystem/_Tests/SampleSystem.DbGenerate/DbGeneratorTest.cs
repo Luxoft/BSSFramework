@@ -57,7 +57,6 @@ public class DbGeneratorTest
             this.GenerateConfigurationDatabase(
                                                serverName,
                                                new DatabaseName(mainDatabaseName, "configuration"),
-                                               new DatabaseName(mainDatabaseName, "configuration").ToDefaultAudit(),
                                                mode,
                                                true,
                                                credential);
@@ -108,7 +107,6 @@ public class DbGeneratorTest
     private void GenerateConfigurationDatabase(
             string serverName,
             DatabaseName mainDatabaseName,
-            AuditDatabaseName auditDatabaseName,
             DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
             bool preserveSchemaDatabase = false,
             UserCredential credential = null)
@@ -121,7 +119,6 @@ public class DbGeneratorTest
                 .GenerateDB(
                             serverName,
                             mainDatabaseName,
-                            auditDatabaseName,
                             migrationScriptFolderPaths: migrationScriptFolderPaths,
                             mode: mode,
                             preserveSchemaDatabase: preserveSchemaDatabase,
@@ -169,7 +166,6 @@ public class DbGeneratorTest
             .AddInitializer(
                 new DefaultConfigurationInitializer(
                     new ManualDefaultConnectionStringSource(connectionString),
-                    [new FluentMappingAssemblyInfo(typeof(SampleSystemMappingSettings).Assembly)],
-                    new DefaultConfigurationInitializerSettings()));
+                    new DefaultConfigurationInitializerSettings { FluentAssemblyList = [typeof(SampleSystemMappingSettings).Assembly] }));
     }
 }

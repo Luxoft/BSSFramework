@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.DependencyInjection;
 using Framework.SecuritySystem.Builders._Factory;
 
 using Framework.SecuritySystem.Builders.AccessorsBuilder;
@@ -54,31 +53,7 @@ public static class ServiceCollectionExtensions
 
         setupAction(settings);
 
-        settings.RegisterActions.ForEach(v => v(services));
-        settings.RegisterUserSourceAction(services);
-        settings.RegisterRunAsManagerAction(services);
-
-        if (settings.InitializeAdministratorRole)
-        {
-            services.AddSingleton<IInitializedSecurityRoleSource, InitializedSecurityRoleSource>();
-            services.AddSingletonFrom((IInitializedSecurityRoleSource source) => source.GetSecurityRoles());
-        }
-
-        services.AddSingleton(typeof(IAccessDeniedExceptionService), settings.AccessDeniedExceptionServiceType);
-
-        services.AddScoped(typeof(ICurrentUser), settings.CurrentUserType);
-
-        if (settings.SecurityAccessorInfinityStorageType == null)
-        {
-            services.AddNotImplemented<ISecurityAccessorInfinityStorage>(
-                "Use 'SetSecurityAccessorInfinityStorage' for initialize infinity storage");
-        }
-        else
-        {
-            services.AddScoped(typeof(ISecurityAccessorInfinityStorage), settings.SecurityAccessorInfinityStorageType);
-        }
-
-        services.AddSingleton(settings.DefaultSecurityRuleCredential);
+        settings.Initialize(services);
 
         return services;
     }
@@ -118,6 +93,7 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()
                        .AddScoped(typeof(ISecurityFilterFactory<>), typeof(SecurityFilterBuilderFactory<>))
                        .AddScoped(typeof(IAccessorsFilterFactory<>), typeof(AccessorsFilterBuilderFactory<>))
+                       .AddScoped<ICurrentUser, CurrentUser>()
                        .AddKeyedScoped(
                            typeof(ISecurityProvider<>),
                            nameof(DomainSecurityRule.CurrentUser),

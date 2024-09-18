@@ -3,7 +3,6 @@ using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.NamedLocks;
 using Framework.DomainDriven;
-using Framework.DomainDriven.ServiceModel.IAD;
 
 using Microsoft.Extensions.DependencyInjection;
 

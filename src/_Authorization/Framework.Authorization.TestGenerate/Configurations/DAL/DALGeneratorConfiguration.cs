@@ -1,12 +1,11 @@
-﻿using Framework.DomainDriven.NHibernate.DALGenerator;
+﻿using Framework.DomainDriven;
+using Framework.DomainDriven.NHibernate.DALGenerator;
 
 namespace Framework.Authorization.TestGenerate;
 
-public class DALGeneratorConfiguration : GeneratorConfigurationBase<ServerGenerationEnvironment>
+public class DALGeneratorConfiguration(ServerGenerationEnvironment environment)
+    : GeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    public DALGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-
-    }
+    public override DatabaseName DatabaseName => this.Environment.DatabaseName;
 }
+

@@ -2,10 +2,6 @@
 
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using FluentNHibernate.Conventions;
-using FluentNHibernate.Conventions.AcceptanceCriteria;
-using FluentNHibernate.Conventions.Inspections;
-using FluentNHibernate.Conventions.Instances;
 
 using Framework.Core;
 
@@ -17,7 +13,6 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class DefaultConfigurationInitializer(
     IDefaultConnectionStringSource defaultConnectionStringSource,
-    IEnumerable<FluentMappingAssemblyInfo> assemblyInfoList,
     DefaultConfigurationInitializerSettings settings) : IConfigurationInitializer
 {
     public void Initialize(Configuration cfg)
@@ -34,10 +29,9 @@ public class DefaultConfigurationInitializer(
             .Mappings(
                 m =>
                 {
-                    assemblyInfoList.Select(assemblyInfo => assemblyInfo.Assembly)
-                                    .Distinct()
-                                    .Aggregate(m.FluentMappings, (fm, assembly) => fm.AddFromAssembly(assembly))
-                                    .Conventions.AddFromAssemblyOf<EnumConvention>();
+                    settings.FluentAssemblyList.Distinct()
+                            .Aggregate(m.FluentMappings, (fm, assembly) => fm.AddFromAssembly(assembly))
+                            .Conventions.Add(new EnumConvention(), new ComponentConvention());
                 })
             .ExposeConfiguration(
                 c =>
@@ -51,18 +45,7 @@ public class DefaultConfigurationInitializer(
                         c.Properties.Add(Environment.SqlTypesKeepDateTime, settings.SqlTypesKeepDateTime.ToString());
                     }
                 })
+            .Self(settings.FluentInitAction)
             .BuildConfiguration();
-    }
-
-    private class EnumConvention : IUserTypeConvention
-    {
-        public void Accept(IAcceptanceCriteria<IPropertyInspector> criteria) =>
-            criteria.Expect(
-                x => x.Property.PropertyType.IsEnum
-                     || (x.Property.PropertyType.IsGenericType
-                         && x.Property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
-                         && x.Property.PropertyType.GetGenericArguments()[0].IsEnum));
-
-        public void Apply(IPropertyInstance instance) => instance.CustomType(instance.Property.PropertyType);
     }
 }

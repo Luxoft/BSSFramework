@@ -14,21 +14,19 @@ namespace Framework.SecuritySystem.DependencyInjection;
 
 public class SecuritySystemSettings : ISecuritySystemSettings
 {
-    public List<Action<IServiceCollection>> RegisterActions { get; } = new();
+    private readonly List<Action<IServiceCollection>> registerActions = new();
 
-    public Action<IServiceCollection> RegisterUserSourceAction { get; private set; } = _ => { };
+    private Action<IServiceCollection> registerUserSourceAction = _ => { };
 
-    public Action<IServiceCollection> RegisterRunAsManagerAction { get; private set; } = _ => { };
+    private Action<IServiceCollection> registerRunAsManagerAction= _ => { };
 
-    public bool InitializeAdministratorRole { get;  set; } = true;
+    private SecurityRuleCredential defaultSecurityRuleCredential = SecurityRuleCredential.CurrentUserWithRunAs;
 
-    public SecurityRuleCredential DefaultSecurityRuleCredential { get; private set; } = SecurityRuleCredential.CurrentUserWithRunAs;
+    private Type accessDeniedExceptionServiceType = typeof(AccessDeniedExceptionService);
 
-    public Type AccessDeniedExceptionServiceType { get; private set; } = typeof(AccessDeniedExceptionService);
+    private Type? securityAccessorInfinityStorageType;
 
-    public Type CurrentUserType { get; private set; } = typeof(CurrentUser);
-
-    public Type? SecurityAccessorInfinityStorageType { get; private set; }
+    public bool InitializeAdministratorRole { get; set; } = true;
 
     public ISecuritySystemSettings AddSecurityContext<TSecurityContext>(
         Guid ident,
@@ -41,35 +39,35 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public ISecuritySystemSettings AddSecurityContext(Action<ISecurityContextInfoBuilder> setup)
     {
-        this.RegisterActions.Add(sc => sc.RegisterSecurityContextSource(setup));
+        this.registerActions.Add(sc => sc.RegisterSecurityContextSource(setup));
 
         return this;
     }
 
     public ISecuritySystemSettings AddDomainSecurityServices(Action<IDomainSecurityServiceRootBuilder> setup)
     {
-        this.RegisterActions.Add(sc => sc.RegisterDomainSecurityServices(setup));
+        this.registerActions.Add(sc => sc.RegisterDomainSecurityServices(setup));
 
         return this;
     }
 
     public ISecuritySystemSettings AddSecurityRole(SecurityRole securityRole, SecurityRoleInfo info)
     {
-        this.RegisterActions.Add(sc => this.AddSecurityRole(sc, new FullSecurityRole(securityRole.Name, info)));
+        this.registerActions.Add(sc => this.AddSecurityRole(sc, new FullSecurityRole(securityRole.Name, info)));
 
         return this;
     }
 
     public ISecuritySystemSettings AddSecurityRule(DomainSecurityRule.SecurityRuleHeader header, DomainSecurityRule implementation)
     {
-        this.RegisterActions.Add(sc => sc.AddSingleton(new SecurityRuleFullInfo(header, implementation)));
+        this.registerActions.Add(sc => sc.AddSingleton(new SecurityRuleFullInfo(header, implementation)));
 
         return this;
     }
 
     public ISecuritySystemSettings AddSecurityOperation(SecurityOperation securityOperation, SecurityOperationInfo info)
     {
-        this.RegisterActions.Add(sc => sc.AddSingleton(new FullSecurityOperation(securityOperation, info)));
+        this.registerActions.Add(sc => sc.AddSingleton(new FullSecurityOperation(securityOperation, info)));
 
         return this;
     }
@@ -77,21 +75,21 @@ public class SecuritySystemSettings : ISecuritySystemSettings
     public ISecuritySystemSettings AddPermissionSystem<TPermissionSystemFactory>()
         where TPermissionSystemFactory : class, IPermissionSystemFactory
     {
-        this.RegisterActions.Add(sc => sc.AddScoped<IPermissionSystemFactory, TPermissionSystemFactory>());
+        this.registerActions.Add(sc => sc.AddScoped<IPermissionSystemFactory, TPermissionSystemFactory>());
 
         return this;
     }
 
     public ISecuritySystemSettings AddPermissionSystem(Func<IServiceProvider, IPermissionSystemFactory> getFactory)
     {
-        this.RegisterActions.Add(sc => sc.AddScoped(getFactory));
+        this.registerActions.Add(sc => sc.AddScoped(getFactory));
 
         return this;
     }
 
     public ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions)
     {
-        this.RegisterActions.Add(extensions.AddServices);
+        this.registerActions.Add(extensions.AddServices);
 
         return this;
     }
@@ -99,7 +97,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
     public ISecuritySystemSettings SetAccessDeniedExceptionService<TAccessDeniedExceptionService>()
         where TAccessDeniedExceptionService : class, IAccessDeniedExceptionService
     {
-        this.AccessDeniedExceptionServiceType = typeof(TAccessDeniedExceptionService);
+        this.accessDeniedExceptionServiceType = typeof(TAccessDeniedExceptionService);
 
         return this;
     }
@@ -109,7 +107,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         Expression<Func<TUserDomainObject, string>> namePath,
         Expression<Func<TUserDomainObject, bool>> filter)
     {
-        this.RegisterUserSourceAction = sc =>
+        this.registerUserSourceAction = sc =>
                                         {
                                             var info = new UserPathInfo<TUserDomainObject>(idPath, namePath, filter);
                                             sc.AddSingleton(info);
@@ -129,7 +127,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
     public ISecuritySystemSettings SetRunAsManager<TRunAsManager>()
         where TRunAsManager : class, IRunAsManager
     {
-        this.RegisterRunAsManagerAction = sc => sc.AddScoped<IRunAsManager, TRunAsManager>();
+        this.registerRunAsManagerAction = sc => sc.AddScoped<IRunAsManager, TRunAsManager>();
 
         return this;
     }
@@ -137,16 +135,44 @@ public class SecuritySystemSettings : ISecuritySystemSettings
     public ISecuritySystemSettings SetSecurityAccessorInfinityStorage<TStorage>()
         where TStorage : class, ISecurityAccessorInfinityStorage
     {
-        this.SecurityAccessorInfinityStorageType = typeof(TStorage);
+        this.securityAccessorInfinityStorageType = typeof(TStorage);
 
         return this;
     }
 
     public ISecuritySystemSettings SetDefaultSecurityRuleCredential(SecurityRuleCredential securityRuleCredential)
     {
-        this.DefaultSecurityRuleCredential = securityRuleCredential;
+        this.defaultSecurityRuleCredential = securityRuleCredential;
 
         return this;
+    }
+
+    public void Initialize(IServiceCollection services)
+    {
+        this.registerActions.ForEach(v => v(services));
+
+        this.registerUserSourceAction(services);
+        this.registerRunAsManagerAction(services);
+
+        if (this.InitializeAdministratorRole)
+        {
+            services.AddSingleton<IInitializedSecurityRoleSource, InitializedSecurityRoleSource>();
+            services.AddSingletonFrom((IInitializedSecurityRoleSource source) => source.GetSecurityRoles());
+        }
+
+        services.AddSingleton(typeof(IAccessDeniedExceptionService), this.accessDeniedExceptionServiceType);
+
+        if (this.securityAccessorInfinityStorageType == null)
+        {
+            services.AddNotImplemented<ISecurityAccessorInfinityStorage>(
+                "Use 'SetSecurityAccessorInfinityStorage' for initialize infinity storage");
+        }
+        else
+        {
+            services.AddScoped(typeof(ISecurityAccessorInfinityStorage), this.securityAccessorInfinityStorageType);
+        }
+
+        services.AddSingleton(this.defaultSecurityRuleCredential);
     }
 
     private void AddSecurityRole(IServiceCollection serviceCollection, FullSecurityRole fullSecurityRole)

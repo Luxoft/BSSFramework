@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.DomainDriven;
 
 public class DefaultDBSessionEventListener(
     IInitializeManager initializeManager,

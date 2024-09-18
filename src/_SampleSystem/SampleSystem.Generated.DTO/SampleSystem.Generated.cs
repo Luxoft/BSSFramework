@@ -5513,6 +5513,99 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.PureFluentMappingObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct PureFluentMappingObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public PureFluentMappingObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public PureFluentMappingObjectIdentityDTO(SampleSystem.Domain.PureFluentMappingObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public PureFluentMappingObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity1, SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity1, SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.PureFluentMappingObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToPureFluentMappingObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.RoleRoleDegreeLink), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct RoleRoleDegreeLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>

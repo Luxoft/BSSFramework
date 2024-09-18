@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven;
-using Framework.DomainDriven.ServiceModel.IAD;
 
 using Microsoft.AspNetCore.Mvc;
 

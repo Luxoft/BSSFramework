@@ -152,6 +152,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ProjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ProjectRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PureFluentMappingObjectSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PureFluentMappingObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.RoleRoleDegreeLinkSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.RoleRoleDegreeLinkRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SqlParserTestObjSaveEventDTO))]
@@ -20321,6 +20323,141 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._version = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.PureFluentMappingObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class PureFluentMappingObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO pureFluentMappingObject;
+        
+        public PureFluentMappingObjectSaveEventDTO()
+        {
+        }
+        
+        public PureFluentMappingObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.PureFluentMappingObject domainObject)
+        {
+            this.pureFluentMappingObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO PureFluentMappingObject
+        {
+            get
+            {
+                return this.pureFluentMappingObject;
+            }
+            set
+            {
+                this.pureFluentMappingObject = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.PureFluentMappingObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class PureFluentMappingObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO pureFluentMappingObject;
+        
+        public PureFluentMappingObjectRemoveEventDTO()
+        {
+        }
+        
+        public PureFluentMappingObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.PureFluentMappingObject domainObject)
+        {
+            this.pureFluentMappingObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO PureFluentMappingObject
+        {
+            get
+            {
+                return this.pureFluentMappingObject;
+            }
+            set
+            {
+                this.pureFluentMappingObject = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.PureFluentMappingObject), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class PureFluentMappingObjectEventRichDTO
+    {
+        
+        private System.Guid _id;
+        
+        private Framework.Core.Period _period;
+        
+        private Framework.Core.Period _period123;
+        
+        private Framework.Core.Period _period456;
+        
+        public PureFluentMappingObjectEventRichDTO()
+        {
+        }
+        
+        public PureFluentMappingObjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.PureFluentMappingObject domainObject)
+        {
+            mappingService.MapPureFluentMappingObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period123
+        {
+            get
+            {
+                return this._period123;
+            }
+            set
+            {
+                this._period123 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period456
+        {
+            get
+            {
+                return this._period456;
+            }
+            set
+            {
+                this._period456 = value;
             }
         }
     }

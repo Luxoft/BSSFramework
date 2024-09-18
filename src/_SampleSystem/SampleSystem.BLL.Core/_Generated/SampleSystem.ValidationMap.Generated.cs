@@ -2747,6 +2747,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetProjectValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.PureFluentMappingObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetPureFluentMappingObjectValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetRoleRoleDegreeLinkValidationMap()));
@@ -3523,6 +3527,33 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.Project> GetProjectValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.Project>(this.GetProjectProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>> GetPureFluentMappingObject_Period123Validators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.PureFluentMappingObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>> GetPureFluentMappingObject_Period456Validators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.PureFluentMappingObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>> GetPureFluentMappingObject_PeriodValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.PureFluentMappingObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject>> GetPureFluentMappingObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.PureFluentMappingObject> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>(source => source.Period, currentClass, this.GetPureFluentMappingObject_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>(source => source.Period123, currentClass, this.GetPureFluentMappingObject_Period123Validators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>(source => source.Period456, currentClass, this.GetPureFluentMappingObject_Period456Validators(), this.GetClassMap<Framework.Core.Period>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.PureFluentMappingObject> GetPureFluentMappingObjectValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.PureFluentMappingObject>(this.GetPureFluentMappingObjectProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.RoleRoleDegreeLink, System.DateTime?>> GetRoleRoleDegreeLink_CreateDateValidators()

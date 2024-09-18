@@ -6,13 +6,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class ListenerSetupObject : IListenerSetupObject
+public class DALListenerSetupObject : IDALListenerSetupObject
 {
     private readonly List<Action<IServiceCollection>> initActions = new();
 
     public IReadOnlyList<Action<IServiceCollection>> InitActions => this.initActions;
 
-    public IListenerSetupObject Add<TListener>()
+    public IDALListenerSetupObject Add<TListener>()
         where TListener : class, IDALListener
     {
         this.initActions.Add(this.AddListener<TListener>);

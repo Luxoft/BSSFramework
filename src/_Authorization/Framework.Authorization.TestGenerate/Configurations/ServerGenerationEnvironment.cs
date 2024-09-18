@@ -22,7 +22,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     public readonly DALGeneratorConfiguration DAL;
 
     public ServerGenerationEnvironment()
-            : this(new DatabaseName(nameof(Authorization)))
+            : this(new DatabaseName("", "auth"))
     {
     }
 
@@ -48,7 +48,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     /// DatabaseName - Берётся из namespace'а сборки, которая сдержит тип PersistentDomainObjectBase (метод GetTargetSystemName);
     /// Types - Список доменных объектов. Это все типы наследованные от PersistentDomainObjectBase той сборки, в которой содеержится PersistentDomainObjectBase.
     /// </summary>
-    public MappingSettings MappingSettings => new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), this.DatabaseName, true);
+    public MappingSettings MappingSettings => new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), this.DatabaseName, this.DatabaseName.ToDefaultAudit());
 
 
     public DatabaseName DatabaseName { get; }
@@ -61,7 +61,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
     public MappingSettings GetMappingSettingsWithoutAudit(DatabaseName dbName)
     {
-        return new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), dbName, false);
+        return new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), dbName);
     }
 
     public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =

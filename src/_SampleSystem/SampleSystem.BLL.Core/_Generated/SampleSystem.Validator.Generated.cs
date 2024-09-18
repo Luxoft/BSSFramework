@@ -96,6 +96,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.NoSecurityObject>(this.GetNoSecurityObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Principal>(this.GetPrincipalValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Project>(this.GetProjectValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.PureFluentMappingObject>(this.GetPureFluentMappingObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.RoleRoleDegreeLink>(this.GetRoleRoleDegreeLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.SqlParserTestObj>(this.GetSqlParserTestObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.SqlParserTestObjContainer>(this.GetSqlParserTestObjContainerValidationResult);
@@ -498,6 +499,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetProjectValidationResult(SampleSystem.Domain.Project source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetPureFluentMappingObjectValidationResult(SampleSystem.Domain.PureFluentMappingObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

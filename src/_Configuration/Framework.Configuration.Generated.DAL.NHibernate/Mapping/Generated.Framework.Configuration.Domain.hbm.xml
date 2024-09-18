@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<hibernate-mapping assembly="Framework.Configuration.Domain" auto-import="false" schema="Configuration.dbo" xmlns="urn:nhibernate-mapping-2.2">
+<hibernate-mapping assembly="Framework.Configuration.Domain" auto-import="false" schema="configuration" xmlns="urn:nhibernate-mapping-2.2">
   <class name="Framework.Configuration.Domain.CodeFirstSubscription" table="CodeFirstSubscription">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

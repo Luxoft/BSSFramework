@@ -114,16 +114,21 @@ public class NHibernateSetupObject : INHibernateSetupObject
     {
         services.AddSingleton(new DefaultConnectionStringSettings(this.defaultConnectionStringName));
 
-        if (this.AutoAddFluentMapping)
+        if (this.AddDefaultListener)
         {
-            foreach (var assembly in this.autoMappingAssemblies)
-            {
-                this.AddFluentMapping(assembly);
-            }
+            this.AddEventListener<DefaultDBSessionEventListener>();
         }
 
         if (this.AddDefaultInitializer)
         {
+            if (this.AutoAddFluentMapping)
+            {
+                foreach (var assembly in this.autoMappingAssemblies)
+                {
+                    this.AddFluentMapping(assembly);
+                }
+            }
+
             services.AddSingleton(this.settings);
             this.AddInitializer<DefaultConfigurationInitializer>();
         }

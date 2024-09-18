@@ -19,9 +19,9 @@ public class DeletePrincipalHandler(
 
         var principalId = new Guid((string?)context.Request.RouteValues["id"]!);
 
-        await principalManagementService.RemovePrincipalAsync(principalId, cancellationToken);
+        var principal = await principalManagementService.RemovePrincipalAsync(principalId, cancellationToken);
 
         if (configuratorIntegrationEvents != null)
-            await configuratorIntegrationEvents.PrincipalRemovedAsync(principalId, cancellationToken);
+            await configuratorIntegrationEvents.PrincipalRemovedAsync(principal, cancellationToken);
     }
 }

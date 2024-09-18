@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Exceptions;
+using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
@@ -60,33 +61,18 @@ public class ConfiguratorPrincipalManagementService(IEnumerable<IPermissionSyste
         return preResult.SelectMany().Distinct();
     }
 
-    public Task<Guid> CreatePrincipalAsync(string principalName, CancellationToken cancellationToken = default) =>
+    public Task<IIdentityObject<Guid>> CreatePrincipalAsync(string principalName, CancellationToken cancellationToken = default) =>
         this.PrincipalManagementService.CreatePrincipalAsync(principalName, cancellationToken);
 
-    public Task UpdatePrincipalNameAsync(Guid principalId, string principalName, CancellationToken cancellationToken) =>
+    public Task<IIdentityObject<Guid>> UpdatePrincipalNameAsync(Guid principalId, string principalName, CancellationToken cancellationToken) =>
         this.PrincipalManagementService.UpdatePrincipalNameAsync(principalId, principalName, cancellationToken);
 
-    public Task RemovePrincipalAsync(Guid principalId, CancellationToken cancellationToken = default) =>
+    public Task<IIdentityObject<Guid>> RemovePrincipalAsync(Guid principalId, CancellationToken cancellationToken = default) =>
         this.PrincipalManagementService.RemovePrincipalAsync(principalId, cancellationToken);
 
-    public Task<MergeResult<Guid, Guid>> UpdatePermissionsAsync(
+    public Task<MergeResult<IIdentityObject<Guid>, IIdentityObject<Guid>>> UpdatePermissionsAsync(
         Guid principalId,
         IEnumerable<TypedPermission> typedPermissions,
         CancellationToken cancellationToken = default) =>
         this.PrincipalManagementService.UpdatePermissionsAsync(principalId, typedPermissions.Where(tp => !tp.IsVirtual), cancellationToken);
-}
-
-internal static class TaskExtensions
-{
-    public static async Task<TResult[]> SyncWhenAll<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, Task<TResult>> getTask)
-    {
-        var res = new List<TResult>();
-
-        foreach (var value in source)
-        {
-            res.AddRange(await getTask(value));
-        }
-
-        return res.ToArray();
-    }
 }

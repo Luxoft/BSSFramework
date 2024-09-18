@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
 
 namespace Framework.DomainDriven.NHibernate;
 
@@ -26,9 +27,15 @@ public interface INHibernateSetupObject
 
     INHibernateSetupObject AddFluentMapping(Assembly assembly);
 
-    INHibernateSetupObject WithInitFluent(Action<FluentConfiguration> initAction);
+    INHibernateSetupObject WithRawMapping(Action<MappingConfiguration> initAction);
+
+    INHibernateSetupObject WithRawDatabase(Action<MsSqlConfiguration> initAction);
 
     INHibernateSetupObject SetIsolationLevel(IsolationLevel isolationLevel);
+
+    INHibernateSetupObject SetBatchSize(int batchSize);
+
+    INHibernateSetupObject SetComponentConvention(bool enabled);
 
     INHibernateSetupObject SetSqlTypesKeepDateTime(bool value);
 

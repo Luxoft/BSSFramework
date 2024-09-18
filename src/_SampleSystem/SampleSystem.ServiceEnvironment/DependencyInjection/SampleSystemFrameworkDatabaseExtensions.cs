@@ -3,7 +3,6 @@ using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven._Visitors;
-using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.Setup;
 
 using SampleSystem.AuditDAL.NHibernate;
@@ -18,20 +17,20 @@ public static class SampleSystemFrameworkDatabaseExtensions
         this IBssFrameworkSettings settings,
         bool includeTypedAudit = true)
     {
-        return settings.AddDatabaseSettings(
-            setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
+        var appDatabase = new DatabaseName(string.Empty, "app");
+        var appAuditDatabase = new DatabaseName(string.Empty, "appAudit");
 
-                                .AddMapping(new AuthorizationMappingSettings())
+        return settings.AddDatabaseSettings(
+            setupObj => setupObj.AddMapping(new AuthorizationMappingSettings())
                                 .AddMapping(new ConfigurationMappingSettings())
 
                                 .Pipe(
                                     includeTypedAudit,
                                     s => s
 
-                                         .AddMapping(new SampleSystemSystemAuditMappingSettings(string.Empty))
-                                         .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty)))
-
-                                .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"))));
+                                         .AddMapping(new SampleSystemSystemAuditMappingSettings(appAuditDatabase))
+                                         .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(appAuditDatabase))
+                                         .AddMapping(new SampleSystemMappingSettings(appDatabase))));
     }
 
     public static IBssFrameworkSettings AddDatabaseVisitors(this IBssFrameworkSettings settings)

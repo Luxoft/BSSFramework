@@ -51,9 +51,9 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection RegisterListeners(this IServiceCollection services, Action<IListenerSetupObject> setup)
+    public static IServiceCollection RegisterListeners(this IServiceCollection services, Action<IDALListenerSetupObject> setup)
     {
-        var setupObject = new ListenerSetupObject();
+        var setupObject = new DALListenerSetupObject();
 
         setup(setupObject);
 

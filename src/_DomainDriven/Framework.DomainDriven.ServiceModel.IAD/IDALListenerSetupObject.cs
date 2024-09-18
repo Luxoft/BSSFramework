@@ -1,7 +1,7 @@
 ﻿namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public interface IListenerSetupObject
+public interface IDALListenerSetupObject
 {
-    IListenerSetupObject Add<TListener>()
+    IDALListenerSetupObject Add<TListener>()
         where TListener : class, IDALListener;
 }

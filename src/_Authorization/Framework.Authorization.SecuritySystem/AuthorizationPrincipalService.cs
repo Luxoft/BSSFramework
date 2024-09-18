@@ -165,11 +165,6 @@ public class AuthorizationPrincipalService(
                 r => (r.SecurityContextType.Id, r.SecurityContextId),
                 pair => pair);
 
-            if (restrictionMergeResult.IsEmpty)
-            {
-                isEmpty.Add(dbPermission.Id);
-            }
-
             foreach (var restriction in restrictionMergeResult.AddingItems)
             {
                 _ = new PermissionRestriction(dbPermission)
@@ -183,6 +178,14 @@ public class AuthorizationPrincipalService(
             {
                 dbPermission.RemoveDetail(dbRestriction);
             }
+
+            if (restrictionMergeResult.IsEmpty && dbPermission.Comment == typedPermission.Comment && dbPermission.Period == typedPermission.Period)
+            {
+                isEmpty.Add(dbPermission.Id);
+            }
+
+            dbPermission.Comment = typedPermission.Comment;
+            dbPermission.Period = typedPermission.Period;
         }
 
         await principalDomainService.SaveAsync(dbPrincipal, cancellationToken);

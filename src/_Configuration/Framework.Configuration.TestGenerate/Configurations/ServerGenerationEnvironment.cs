@@ -26,7 +26,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     public readonly ServerDTOGeneratorConfiguration ServerDTO;
 
     public ServerGenerationEnvironment()
-            :this(new DatabaseName(nameof(Configuration)))
+            :this(new DatabaseName("", "configuration"))
     {
     }
 
@@ -48,16 +48,16 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
         this.AuditDTO = new AuditDTOGeneratorConfiguration(this);
 
-        this.DatabaseName = databaseName ?? throw new ArgumentNullException(nameof(databaseName));
+        this.DatabaseName = databaseName;
     }
 
     public DatabaseName DatabaseName { get; }
 
-    public MappingSettings MappingSettings => new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), this.DatabaseName, true);
+    public MappingSettings MappingSettings => this.GetMappingSettings(this.DatabaseName);
 
-    public MappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName)
+    public MappingSettings GetMappingSettings(DatabaseName dbName)
     {
-        return new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), dbName, dbAuditName);
+        return new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), dbName);
     }
 
     public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =

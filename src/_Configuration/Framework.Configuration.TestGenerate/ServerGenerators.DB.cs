@@ -29,7 +29,6 @@ public partial class ServerGenerators
     public string GenerateDB(
             string serverName,
             DatabaseName databaseName,
-            AuditDatabaseName auditDatabaseName,
             DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
             DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
             IEnumerable<string> migrationScriptFolderPaths = null,
@@ -37,7 +36,7 @@ public partial class ServerGenerators
             bool preserveSchemaDatabase = false,
             UserCredential credentials = null)
     {
-        var generator = new DBGenerator(this.Environment.GetMappingSettings(databaseName, auditDatabaseName));
+        var generator = new DBGenerator(this.Environment.GetMappingSettings(databaseName));
         var result = generator.Generate(
                                         serverName,
                                         mode: mode,

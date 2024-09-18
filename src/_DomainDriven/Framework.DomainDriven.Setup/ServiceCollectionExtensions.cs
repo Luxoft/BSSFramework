@@ -1,8 +1,5 @@
-﻿using Framework.DomainDriven.ApplicationCore.Security;
-using Framework.DomainDriven.Lock;
-using Framework.DomainDriven.ServiceModel.IAD;
+﻿using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.Events;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,21 +15,8 @@ public static class ServiceCollectionExtensions
         var settings = new BssFrameworkSettings();
 
         setupAction?.Invoke(settings);
-        settings.TryInitDefault();
-        settings.Init();
 
-        services.AddSingleton(new SecurityAdministratorRuleInfo(settings.SecurityAdministratorRule));
-
-        foreach (var namedLockType in settings.NamedLockTypes)
-        {
-            services.AddSingleton(new NamedLockTypeInfo(namedLockType));
-        }
-
-        services.AddScoped(typeof(IDomainObjectEventMetadata), settings.DomainObjectEventMetadataType);
-
-        settings.RegisterActions.ForEach(a => a(services));
-
-        settings.Extensions.ForEach(ex => ex.AddServices(services));
+        settings.Initialize(services);
 
         return services;
     }

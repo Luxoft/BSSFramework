@@ -6,23 +6,13 @@ using Framework.DomainDriven.Generation.Domain;
 
 namespace Framework.DomainDriven.NHibernate.DALGenerator;
 
-public class DALFileGenerator : DALFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>
+public class DALFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
+    : DALFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(configuration);
+
+public class DALFileGenerator<TConfiguration>(TConfiguration configuration)
+    : GeneratorConfigurationContainer<TConfiguration>(configuration), IFileGenerator<IRenderingFile<XDocument>, XDocumentFileRenderer>
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public DALFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-            : base(configuration)
-    {
-    }
-}
-
-public class DALFileGenerator<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IFileGenerator<IRenderingFile<XDocument>, XDocumentFileRenderer>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-{
-    public DALFileGenerator(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
     public XDocumentFileRenderer Renderer => XDocumentFileRenderer.Default;
 
 

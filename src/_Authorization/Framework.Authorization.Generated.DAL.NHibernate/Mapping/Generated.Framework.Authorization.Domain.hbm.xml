@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<hibernate-mapping assembly="Framework.Authorization.Domain" auto-import="false" schema="Authorization.dbo" xmlns="urn:nhibernate-mapping-2.2">
+<hibernate-mapping assembly="Framework.Authorization.Domain" auto-import="false" schema="auth" xmlns="urn:nhibernate-mapping-2.2">
   <class name="Framework.Authorization.Domain.BusinessRole" table="BusinessRole">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

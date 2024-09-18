@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-using FluentNHibernate.Cfg;
+﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 using Framework.Core;
@@ -24,14 +22,24 @@ public class DefaultConfigurationInitializer(
                                   .Dialect<EnhancedMsSql2012Dialect>()
                                   .Driver<Fix2100SqlClientDriver>()
                                   .Pipe(settings.IsolationLevel != null, f => f.IsolationLevel(settings.IsolationLevel!.Value))
-                                  .IsolationLevel(IsolationLevel.ReadCommitted)
-                                  .ConnectionString(defaultConnectionStringSource.ConnectionString))
+                                  .Pipe(settings.BatchSize != null, f => f.AdoNetBatchSize(settings.BatchSize!.Value))
+                                  .ConnectionString(defaultConnectionStringSource.ConnectionString)
+                                  .Self(settings.RawDatabaseAction))
             .Mappings(
                 m =>
                 {
-                    settings.FluentAssemblyList.Distinct()
-                            .Aggregate(m.FluentMappings, (fm, assembly) => fm.AddFromAssembly(assembly))
-                            .Conventions.Add(new EnumConvention(), new ComponentConvention());
+                    var conventions = settings.FluentAssemblyList.Distinct()
+                                              .Aggregate(m.FluentMappings, (fm, assembly) => fm.AddFromAssembly(assembly))
+                                              .Conventions;
+
+                    conventions.Add(new EnumConvention());
+
+                    if (settings.ComponentConventionEnable)
+                    {
+                        conventions.Add(new ComponentConvention());
+                    }
+
+                    settings.RawMappingAction(m);
                 })
             .ExposeConfiguration(
                 c =>
@@ -45,7 +53,6 @@ public class DefaultConfigurationInitializer(
                         c.Properties.Add(Environment.SqlTypesKeepDateTime, settings.SqlTypesKeepDateTime.ToString());
                     }
                 })
-            .Self(settings.FluentInitAction)
             .BuildConfiguration();
     }
 }

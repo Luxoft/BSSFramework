@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +12,7 @@ public class NHibernateSetupObject : INHibernateSetupObject
 {
     private readonly List<Assembly> autoMappingAssemblies = new();
 
-    private DefaultConfigurationInitializerSettings settings = new ();
+    private DefaultConfigurationInitializerSettings settings = new();
 
     private readonly List<Action<IServiceCollection>> initActions = new();
 
@@ -65,13 +66,13 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
-    public INHibernateSetupObject WithInitFluent(Action<FluentConfiguration> initAction)
+    public INHibernateSetupObject WithRawMapping(Action<MappingConfiguration> initAction)
     {
-        var prevAction = this.settings.FluentInitAction;
+        var prevAction = this.settings.RawMappingAction;
 
         this.settings = this.settings with
                         {
-                            FluentInitAction = v =>
+                            RawMappingAction = v =>
                                                {
                                                    prevAction(v);
                                                    initAction(v);
@@ -81,9 +82,39 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
+    public INHibernateSetupObject WithRawDatabase(Action<MsSqlConfiguration> initAction)
+    {
+        var prevAction = this.settings.RawDatabaseAction;
+
+        this.settings = this.settings with
+                        {
+                            RawDatabaseAction = v =>
+                                                {
+                                                    prevAction(v);
+                                                    initAction(v);
+                                                }
+                        };
+
+        return this;
+    }
+
     public INHibernateSetupObject SetIsolationLevel(IsolationLevel isolationLevel)
     {
         this.settings = this.settings with { IsolationLevel = isolationLevel };
+
+        return this;
+    }
+
+    public INHibernateSetupObject SetBatchSize(int batchSize)
+    {
+        this.settings = this.settings with { BatchSize = batchSize };
+
+        return this;
+    }
+
+    public INHibernateSetupObject SetComponentConvention(bool enabled)
+    {
+        this.settings = this.settings with { ComponentConventionEnable = enabled };
 
         return this;
     }

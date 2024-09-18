@@ -658,6 +658,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapProject(SampleSystem.Domain.Project domainObject, SampleSystem.Generated.DTO.ProjectEventRichDTO mappingObject);
         
+        void MapPureFluentMappingObject(SampleSystem.Domain.PureFluentMappingObject domainObject, SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO mappingObject);
+        
         void MapRoleRoleDegreeLink(SampleSystem.Domain.RoleRoleDegreeLink domainObject, SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO mappingObject);
         
         void MapSingleEmployeeFilterModel(SampleSystem.Generated.DTO.SingleEmployeeFilterModelStrictDTO mappingObject, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel domainObject);
@@ -1201,6 +1203,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO, bool allowCreate);
         
         SampleSystem.Domain.Project ToProject(SampleSystem.Generated.DTO.ProjectIdentityDTO projectIdentityDTO);
+        
+        SampleSystem.Domain.PureFluentMappingObject ToPureFluentMappingObject(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO pureFluentMappingObjectIdentityDTO);
         
         SampleSystem.Domain.RoleRoleDegreeLink ToRoleRoleDegreeLink(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO roleRoleDegreeLinkIdentityDTO);
         
@@ -6468,6 +6472,14 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapPureFluentMappingObject(SampleSystem.Domain.PureFluentMappingObject domainObject, SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Id = domainObject.Id;
+            mappingObject.Period = domainObject.Period;
+            mappingObject.Period123 = domainObject.Period123;
+            mappingObject.Period456 = domainObject.Period456;
+        }
+        
         public virtual void MapRoleRoleDegreeLink(SampleSystem.Domain.RoleRoleDegreeLink domainObject, SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
@@ -8741,6 +8753,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.Project ToProject(SampleSystem.Generated.DTO.ProjectIdentityDTO projectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.Project>(projectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.PureFluentMappingObject ToPureFluentMappingObject(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO pureFluentMappingObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.PureFluentMappingObject>(pureFluentMappingObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.RoleRoleDegreeLink ToRoleRoleDegreeLink(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO roleRoleDegreeLinkIdentityDTO)

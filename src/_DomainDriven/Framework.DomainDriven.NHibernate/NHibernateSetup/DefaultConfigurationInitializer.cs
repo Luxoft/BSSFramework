@@ -29,12 +29,9 @@ public class DefaultConfigurationInitializer(
             .Mappings(
                 m =>
                 {
-                    settings.FluentInitAction(m.FluentMappings);
-
                     settings.FluentAssemblyList.Distinct()
                             .Aggregate(m.FluentMappings, (fm, assembly) => fm.AddFromAssembly(assembly))
-                            .Conventions.Add(new EnumConvention()//, new ComponentConvention()
-                                );
+                            .Conventions.Add(new EnumConvention(), new ComponentConvention());
                 })
             .ExposeConfiguration(
                 c =>
@@ -48,6 +45,7 @@ public class DefaultConfigurationInitializer(
                         c.Properties.Add(Environment.SqlTypesKeepDateTime, settings.SqlTypesKeepDateTime.ToString());
                     }
                 })
+            .Self(settings.FluentInitAction)
             .BuildConfiguration();
     }
 }

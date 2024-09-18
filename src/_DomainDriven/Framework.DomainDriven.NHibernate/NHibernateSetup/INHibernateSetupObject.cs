@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Reflection;
+
 using FluentNHibernate.Cfg;
 
 namespace Framework.DomainDriven.NHibernate;
@@ -25,7 +26,7 @@ public interface INHibernateSetupObject
 
     INHibernateSetupObject AddFluentMapping(Assembly assembly);
 
-    INHibernateSetupObject WithInitFluent(Action<FluentMappingsContainer> initAction);
+    INHibernateSetupObject WithInitFluent(Action<FluentConfiguration> initAction);
 
     INHibernateSetupObject SetIsolationLevel(IsolationLevel isolationLevel);
 

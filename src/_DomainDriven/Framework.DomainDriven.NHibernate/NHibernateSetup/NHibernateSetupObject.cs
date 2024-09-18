@@ -9,6 +9,8 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class NHibernateSetupObject : INHibernateSetupObject
 {
+    private readonly List<Assembly> autoMappingAssemblies = new();
+
     private DefaultConfigurationInitializerSettings settings = new ();
 
     private readonly List<Action<IServiceCollection>> initActions = new();
@@ -22,26 +24,20 @@ public class NHibernateSetupObject : INHibernateSetupObject
     public bool AutoAddFluentMapping { get; set; } = true;
 
     public INHibernateSetupObject AddMapping<TMappingSettings>()
-            where TMappingSettings : MappingSettings
+        where TMappingSettings : MappingSettings
     {
-        this.initActions.Add(services =>
-                             {
-                                 services.AddSingleton<MappingSettings, TMappingSettings>();
+        this.initActions.Add(services => services.AddSingleton<MappingSettings, TMappingSettings>());
 
-                                 this.TryAddFluentMapping(typeof(TMappingSettings).Assembly);
-                             });
+        this.autoMappingAssemblies.Add(typeof(TMappingSettings).Assembly);
 
         return this;
     }
 
     public INHibernateSetupObject AddMapping(MappingSettings mapping)
     {
-        this.initActions.Add(services =>
-                             {
-                                 services.AddSingleton(mapping);
+        this.initActions.Add(services => services.AddSingleton(mapping));
 
-                                 this.TryAddFluentMapping(mapping.GetType().Assembly);
-                             });
+        this.autoMappingAssemblies.Add(mapping.GetType().Assembly);
 
         return this;
     }
@@ -69,7 +65,7 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
-    public INHibernateSetupObject WithInitFluent(Action<FluentMappingsContainer> initAction)
+    public INHibernateSetupObject WithInitFluent(Action<FluentConfiguration> initAction)
     {
         var prevAction = this.settings.FluentInitAction;
 
@@ -113,9 +109,18 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
+
     public void Initialize(IServiceCollection services)
     {
         services.AddSingleton(new DefaultConnectionStringSettings(this.defaultConnectionStringName));
+
+        if (this.AutoAddFluentMapping)
+        {
+            foreach (var assembly in this.autoMappingAssemblies)
+            {
+                this.AddFluentMapping(assembly);
+            }
+        }
 
         if (this.AddDefaultInitializer)
         {
@@ -123,22 +128,9 @@ public class NHibernateSetupObject : INHibernateSetupObject
             this.AddInitializer<DefaultConfigurationInitializer>();
         }
 
-        if (this.AddDefaultListener)
-        {
-            this.AddEventListener<DefaultDBSessionEventListener>();
-        }
-
         foreach (var action in this.initActions)
         {
             action(services);
-        }
-    }
-
-    private void TryAddFluentMapping(Assembly assembly)
-    {
-        if (this.AutoAddFluentMapping)
-        {
-            this.AddFluentMapping(assembly);
         }
     }
 }

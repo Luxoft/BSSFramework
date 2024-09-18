@@ -25,15 +25,15 @@ public class ManagementUnitFluentMappingMap : ClassMap<ManagementUnitFluentMappi
                        x => x.Period,
                        m =>
                        {
-                           m.Map(x => x.EndDate).Column("periodendDate").Access.CamelCaseField().CustomType("timestamp");
-                           m.Map(x => x.StartDate).Column("periodstartDate").Access.CamelCaseField().CustomType("timestamp");
+                           m.Map(x => x.EndDate).Column("periodendDate111").Access.CamelCaseField().CustomType("timestamp");
+                           m.Map(x => x.StartDate).Column("periodstartDate111").Access.CamelCaseField().CustomType("timestamp");
                        })
             .Access.CamelCaseField();
         this.Component(
                        x => x.MuComponent,
                        m =>
                        {
-                           m.Map(x => x.LuxoftSignsFirst, "muComponentluxoftSignsFirst");
+                           m.Map(x => x.LuxoftSignsFirst, "muComponentluxoftSignsFirst222");
                            m.References(x => x.AuthorizedLuxoftSignatory).Columns("muComponentauthorizedLuxoftSignatoryId");
                        });
     }

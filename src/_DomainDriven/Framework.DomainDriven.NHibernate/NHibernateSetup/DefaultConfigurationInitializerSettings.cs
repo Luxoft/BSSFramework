@@ -17,5 +17,5 @@ public record DefaultConfigurationInitializerSettings
 
     public IReadOnlyList<Assembly> FluentAssemblyList { get; init; } = [];
 
-    public Action<FluentMappingsContainer> FluentInitAction { get; init; } = _ => { };
+    public Action<FluentConfiguration> FluentInitAction { get; init; } = _ => { };
 }

@@ -1,4 +1,6 @@
-﻿namespace Framework.Core;
+﻿#nullable enable
+
+namespace Framework.Core;
 
 public static class PipeObjectExtensions
 {
@@ -53,6 +55,18 @@ public static class PipeObjectExtensions
             where TSource : TResult
     {
         return condition ? evaluate(source) : source;
+    }
+
+    public static TSource PipeMaybe<TSource, TValue>(this TSource source, TValue? value, Func<TSource, TValue, TSource> evaluate)
+        where TValue : class
+    {
+        return value == null ? source : evaluate(source, value);
+    }
+
+    public static TSource PipeMaybe<TSource, TValue>(this TSource source, TValue? value, Func<TSource, TValue, TSource> evaluate)
+        where TValue: struct
+    {
+        return value == null ? source : evaluate(source, value.Value);
     }
 
     [Obsolete("v10 This method will be protected in future")]

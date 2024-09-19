@@ -5,9 +5,8 @@ using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 
-
-
 using NHibernate;
+using NHibernate.Envers.Patch;
 using NHibernate.Event;
 using NHibernate.Impl;
 
@@ -168,7 +167,7 @@ public class WriteNHibSession : NHibSessionBase
                 {
                     dalHistory.Add(changes);
 
-                    this.AuditReader.GetCurrentRevision(true);
+                    await this.AuditReader.SafeInitCurrentRevisionAsync(cancellationToken);
 
                     var changedEventArgs = new DALChangesEventArgs(changes);
 

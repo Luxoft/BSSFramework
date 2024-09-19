@@ -3,12 +3,12 @@ using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem.UserSource;
 
-public class UserSource<TUserDomainObject>(IQueryableSource queryableSource,
-                                           UserPathInfo<TUserDomainObject> userPathInfo) : IUserSource<TUserDomainObject>
+public class UserSource<TUser>(IQueryableSource queryableSource,
+                                           UserPathInfo<TUser> userPathInfo) : IUserSource<TUser>
 {
-    public TUserDomainObject? TryGetByName(string name)
+    public TUser? TryGetByName(string name)
     {
-        return queryableSource.GetQueryable<TUserDomainObject>()
+        return queryableSource.GetQueryable<TUser>()
                               .Where(userPathInfo.Filter)
                               .Where(userPathInfo.NamePath.Select(objName => objName == name))
                               .SingleOrDefault();

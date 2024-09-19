@@ -1,6 +1,6 @@
 ﻿namespace Framework.SecuritySystem.UserSource;
 
-public interface IUserSource<out TUserDomainObject>
+public interface IUserSource<out TUser>
 {
-    TUserDomainObject? TryGetByName(string name);
+    TUser? TryGetByName(string name);
 }

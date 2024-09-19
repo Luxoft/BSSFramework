@@ -102,23 +102,31 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
-    public ISecuritySystemSettings SetUserSource<TUserDomainObject>(
-        Expression<Func<TUserDomainObject, Guid>> idPath,
-        Expression<Func<TUserDomainObject, string>> namePath,
-        Expression<Func<TUserDomainObject, bool>> filter)
+    public ISecuritySystemSettings SetUserSource<TUser>(
+        Expression<Func<TUser, Guid>> idPath,
+        Expression<Func<TUser, string>> namePath,
+        Expression<Func<TUser, bool>> filter,
+        Expression<Func<TUser, TUser?>>? runAsPath = null)
     {
         this.registerUserSourceAction = sc =>
                                         {
-                                            var info = new UserPathInfo<TUserDomainObject>(idPath, namePath, filter);
+                                            var info = new UserPathInfo<TUser>(idPath, namePath, filter);
                                             sc.AddSingleton(info);
                                             sc.AddSingleton<IUserPathInfo>(info);
 
-                                            sc.AddScoped<IUserSource<TUserDomainObject>, UserSource<TUserDomainObject>>();
+                                            sc.AddScoped<IUserSource<TUser>, UserSource<TUser>>();
 
-                                            sc.AddScoped<ICurrentUserSource<TUserDomainObject>, CurrentUserSource<TUserDomainObject>>();
-                                            sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUserDomainObject>>();
+                                            sc.AddScoped<ICurrentUserSource<TUser>, CurrentUserSource<TUser>>();
+                                            sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUser>>();
 
-                                            sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUserDomainObject>>();
+                                            sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUser>>();
+
+                                            if (runAsPath != null)
+                                            {
+                                                sc.AddSingleton(new UserSourceRunAsAccessorData<TUser>(runAsPath));
+                                                sc.AddSingleton<IUserSourceRunAsAccessor<TUser>, UserSourceRunAsAccessor<TUser>>();
+                                                sc.AddScoped<IRunAsManager, UserSourceRunAsManager<TUser>>();
+                                            }
                                         };
 
         return this;

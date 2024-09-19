@@ -3,9 +3,9 @@ using Framework.Core;
 
 namespace Framework.SecuritySystem.UserSource;
 
-public class UserIdentitySource<TUserDomainObject>(
-    IUserSource<TUserDomainObject> userSource,
-    UserPathInfo<TUserDomainObject> userPathInfo)
+public class UserIdentitySource<TUser>(
+    IUserSource<TUser> userSource,
+    UserPathInfo<TUser> userPathInfo)
     : IUserIdentitySource
 {
     public Guid? TryGetId(string name)

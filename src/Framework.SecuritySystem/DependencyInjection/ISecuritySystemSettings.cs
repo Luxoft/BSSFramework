@@ -39,10 +39,11 @@ public interface ISecuritySystemSettings
     ISecuritySystemSettings SetRunAsManager<TRunAsManager>()
         where TRunAsManager : class, IRunAsManager;
 
-    ISecuritySystemSettings SetUserSource<TUserDomainObject>(
-        Expression<Func<TUserDomainObject, Guid>> idPath,
-        Expression<Func<TUserDomainObject, string>> namePath,
-        Expression<Func<TUserDomainObject, bool>> filter);
+    ISecuritySystemSettings SetUserSource<TUser>(
+        Expression<Func<TUser, Guid>> idPath,
+        Expression<Func<TUser, string>> namePath,
+        Expression<Func<TUser, bool>> filter,
+        Expression<Func<TUser, TUser?>>? runAsPath = null);
 
     ISecuritySystemSettings SetSecurityAccessorInfinityStorage<TStorage>()
         where TStorage : class, ISecurityAccessorInfinityStorage;

@@ -42,11 +42,11 @@ public class CurrentUserSecurityProvider<TDomainObject>(
     public SecurityAccessorData GetAccessorData(TDomainObject domainObject) => this.InnerProvider.GetAccessorData(domainObject);
 }
 
-public class CurrentUserSecurityProvider<TDomainObject, TUserDomainObject>(
-    IRelativeDomainPathInfo<TDomainObject, TUserDomainObject> relativeDomainPathInfo,
-    UserPathInfo<TUserDomainObject> userPathInfo,
-    ICurrentUserSource<TUserDomainObject> currentUserSource) : SecurityProvider<TDomainObject>
-    where TUserDomainObject : class
+public class CurrentUserSecurityProvider<TDomainObject, TUser>(
+    IRelativeDomainPathInfo<TDomainObject, TUser> relativeDomainPathInfo,
+    UserPathInfo<TUser> userPathInfo,
+    ICurrentUserSource<TUser> currentUserSource) : SecurityProvider<TDomainObject>
+    where TUser : class
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
         relativeDomainPathInfo.Path.Select(user => currentUserSource.CurrentUser == user);

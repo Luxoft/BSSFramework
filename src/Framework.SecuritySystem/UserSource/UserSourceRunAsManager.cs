@@ -23,7 +23,7 @@ public class UserSourceRunAsManager<TUser>(
                              ? default
                              : userSource.TryGetByName(principalName) ?? throw new Exception($"User \"{principalName}\" not found");
 
-        accessor.SetRunAs(this.currentUser, runAsValue);;
+        accessor.SetRunAs(this.currentUser, runAsValue);
 
         await persistStorage.SaveAsync(this.currentUser, cancellationToken);
     }

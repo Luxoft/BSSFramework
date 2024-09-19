@@ -2,10 +2,10 @@
 
 namespace Framework.SecuritySystem.UserSource;
 
-public record UserPathInfo<TUserDomainObject>(
-    Expression<Func<TUserDomainObject, Guid>> IdPath,
-    Expression<Func<TUserDomainObject, string>> NamePath,
-    Expression<Func<TUserDomainObject, bool>> Filter) : IUserPathInfo
+public record UserPathInfo<TUser>(
+    Expression<Func<TUser, Guid>> IdPath,
+    Expression<Func<TUser, string>> NamePath,
+    Expression<Func<TUser, bool>> Filter) : IUserPathInfo
 {
-    public Type UserDomainObjectType { get; } = typeof(TUserDomainObject);
+    public Type UserDomainObjectType { get; } = typeof(TUser);
 };

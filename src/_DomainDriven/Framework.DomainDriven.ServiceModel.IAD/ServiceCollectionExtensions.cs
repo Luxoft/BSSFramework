@@ -16,6 +16,7 @@ using Framework.HierarchicalExpand.DependencyInjection;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
+using Framework.SecuritySystem.PersistStorage;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -43,6 +44,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEventOperationSender, EventOperationSender>();
 
         services.AddScoped<IQueryableSource, RepositoryQueryableSource>();
+        services.AddScoped(typeof(IPersistStorage<>), typeof(PersistStorage<>));
 
         services.AddExternalSource();
 

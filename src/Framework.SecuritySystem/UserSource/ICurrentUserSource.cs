@@ -1,8 +1,8 @@
 ﻿namespace Framework.SecuritySystem.UserSource;
 
-public interface ICurrentUserSource<out TUserDomainObject> : ICurrentUserSource
+public interface ICurrentUserSource<out TUser> : ICurrentUserSource
 {
-    TUserDomainObject CurrentUser { get; }
+    TUser CurrentUser { get; }
 }
 
 public interface ICurrentUserSource

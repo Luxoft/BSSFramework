@@ -32,20 +32,17 @@ public class VirtualPermissionSource<TPrincipal, TPermission>(
 
     private IQueryable<TPermission> GetPermissionQuery(SecurityRuleCredential? customSecurityRuleCredential)
     {
-        var principalName = this.GetFiltrationPrincipalName(customSecurityRuleCredential ?? defaultSecurityRuleCredential);
-
         return queryableSource
                .GetQueryable<TPermission>()
                .Where(bindingInfo.Filter)
-               .Pipe(
-                   bindingInfo.PeriodFilter != null,
-                   q =>
+               .PipeMaybe(bindingInfo.PeriodFilter, (q, filter) =>
                    {
                        var today = timeProvider.GetToday();
 
-                       return q.Where(bindingInfo.PeriodFilter.Select(period => period.Contains(today)));
+                       return q.Where(filter.Select(period => period.Contains(today)));
                    })
-               .Pipe(principalName != null, q => q.Where(this.fullNamePath.Select(name => name == principalName)));
+               .PipeMaybe(this.GetFiltrationPrincipalName(customSecurityRuleCredential ?? defaultSecurityRuleCredential),
+                          (q, principalName) => q.Where(this.fullNamePath.Select(name => name == principalName)));
     }
 
     public IEnumerable<string> GetAccessors(Expression<Func<TPermission, bool>> permissionFilter) =>

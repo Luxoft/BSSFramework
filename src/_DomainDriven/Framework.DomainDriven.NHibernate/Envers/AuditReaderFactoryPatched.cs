@@ -7,6 +7,9 @@ namespace NHibernate.Envers.Patch;
 
 public static class AuditReaderFactoryPatched
 {
+    public static IAuditReaderPatched NotImplemented { get; } =
+        LazyInterfaceImplementHelper.CreateNotImplemented<IAuditReaderPatched>("Audit not supported");
+
     public static IAuditReaderPatched GetAuditReader(this ISession session)
     {
         var sessionImpl = session as ISessionImplementor
@@ -21,6 +24,16 @@ public static class AuditReaderFactoryPatched
             return new AuditReaderPatched(auditEventListener.VerCfg, session, sessionImpl);
         }
 
-        return LazyInterfaceImplementHelper.CreateNotImplemented<IAuditReaderPatched>();
+        return NotImplemented;
+    }
+
+    internal static async Task SafeInitCurrentRevisionAsync(this IAuditReaderPatched auditReader, CancellationToken cancellationToken)
+    {
+        if (auditReader == NotImplemented)
+        {
+            return;
+        }
+
+        await auditReader.GetCurrentRevisionAsync(true, cancellationToken);
     }
 }

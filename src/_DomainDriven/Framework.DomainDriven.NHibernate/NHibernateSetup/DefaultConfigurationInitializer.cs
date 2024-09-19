@@ -21,8 +21,8 @@ public class DefaultConfigurationInitializer(
                 MsSqlConfiguration.MsSql2012
                                   .Dialect<EnhancedMsSql2012Dialect>()
                                   .Driver<Fix2100SqlClientDriver>()
-                                  .Pipe(settings.IsolationLevel != null, f => f.IsolationLevel(settings.IsolationLevel!.Value))
-                                  .Pipe(settings.BatchSize != null, f => f.AdoNetBatchSize(settings.BatchSize!.Value))
+                                  .PipeMaybe(settings.IsolationLevel, (f, v) => f.IsolationLevel(v))
+                                  .PipeMaybe(settings.BatchSize, (f, v) => f.AdoNetBatchSize(v))
                                   .ConnectionString(defaultConnectionStringSource.ConnectionString)
                                   .Self(settings.RawDatabaseAction))
             .Mappings(

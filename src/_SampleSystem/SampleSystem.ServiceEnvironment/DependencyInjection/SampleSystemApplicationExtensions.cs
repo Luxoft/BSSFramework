@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
-using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
 using SampleSystem.Domain;
 using SampleSystem.Events;
@@ -50,5 +49,5 @@ public static class SampleSystemApplicationExtensions
     }
 
     private static IServiceCollection RegisterJobs(this IServiceCollection services) =>
-        services.AddScoped<ISampleJob, SampleJob>();
+        services.AddScoped<SampleJob>();
 }

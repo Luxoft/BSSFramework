@@ -7,6 +7,13 @@ namespace Framework.HangfireCore;
 
 public interface IBssHangfireSettings
 {
+    /// <summary>
+    /// Автоматическая регистрация job-ов в scope
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    IBssHangfireSettings SetAutoRegisterJob(bool value);
+
     IBssHangfireSettings SetConnectionString(string connectionString);
 
     IBssHangfireSettings SetConnectionStringName(string connectionStringName);
@@ -16,11 +23,13 @@ public interface IBssHangfireSettings
     IBssHangfireSettings WithSqlServerStorageOptions(Action<SqlServerStorageOptions> setupOptions);
 
     IBssHangfireSettings AddJob<TJob>(JobSettings? jobSettings = null)
-        where TJob : IJob =>
+        where TJob : class, IJob =>
         this.AddJob<TJob, CancellationToken>((job, cancellationToken) => job.ExecuteAsync(cancellationToken), jobSettings);
 
-    IBssHangfireSettings AddJob<TJob>(Func<TJob, CancellationToken, Task> executeAction, JobSettings? jobSettings = null) =>
+    IBssHangfireSettings AddJob<TJob>(Func<TJob, CancellationToken, Task> executeAction, JobSettings? jobSettings = null)
+        where TJob : class =>
         this.AddJob<TJob, CancellationToken>(executeAction, jobSettings);
 
-    IBssHangfireSettings AddJob<TJob, TArg>(Func<TJob, TArg, Task> executeAction, JobSettings? jobSettings = null);
+    IBssHangfireSettings AddJob<TJob, TArg>(Func<TJob, TArg, Task> executeAction, JobSettings? jobSettings = null)
+        where TJob : class;
 }

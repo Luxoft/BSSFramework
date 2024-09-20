@@ -18,6 +18,8 @@ public class BssHangfireSettings : IBssHangfireSettings
 
     private readonly List<Action> runJobActions = [];
 
+    private bool autoRegisterJob;
+
     private readonly SqlServerStorageOptions sqlServerStorageOptions = new()
     {
         CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
@@ -40,6 +42,13 @@ public class BssHangfireSettings : IBssHangfireSettings
     public BssHangfireSettings()
     {
         this.SetConnectionStringName("DefaultConnectionString");
+    }
+
+    public IBssHangfireSettings SetAutoRegisterJob(bool value)
+    {
+        this.autoRegisterJob = value;
+
+        return this;
     }
 
     public IBssHangfireSettings SetConnectionString(string newConnectionString)
@@ -78,14 +87,25 @@ public class BssHangfireSettings : IBssHangfireSettings
 
 
     public IBssHangfireSettings AddJob<TJob, TArg>(Func<TJob, TArg, Task> executeAction, JobSettings? jobSettings = null)
+        where TJob : class
     {
-        var jobName = jobSettings?.Name ?? typeof(TJob).Name;
+        var isInterface = typeof(TJob).IsInterface;
+
+        var jobName = jobSettings?.Name ?? typeof(TJob).Name.Pipe(isInterface, v => v.Skip("I", true));
 
         var cronTiming = jobSettings?.CronTiming
                          ?? this.JobTimings.Where(jt => jt.Name == jobName).Select(jt => jt.Schedule).SingleOrDefault()
                          ?? throw new Exception($"{nameof(JobTiming)} for job '{jobName}' not found");
 
-        this.registerActions.Add(services => services.AddSingleton(new JobInfo<TJob, TArg>(executeAction)));
+        this.registerActions.Add(services =>
+                                 {
+                                     if (!isInterface && this.autoRegisterJob)
+                                     {
+                                         services.AddScoped<TJob>();
+                                     }
+
+                                     services.AddSingleton(new JobInfo<TJob, TArg>(executeAction));
+                                 });
 
         this.runJobActions.Add(
             () => RecurringJob.AddOrUpdate<MiddlewareJob<TJob, TArg>>(jobName, job => job.ExecuteAsync(default!), cronTiming));

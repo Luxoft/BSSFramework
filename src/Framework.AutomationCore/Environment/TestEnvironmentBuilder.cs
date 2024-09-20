@@ -15,9 +15,13 @@ namespace Automation;
 public class TestEnvironmentBuilder
 {
     private IConfiguration? withConfiguration;
+
     private Func<IConfiguration, IServiceCollection, IServiceCollection>? withServiceProviderBuildFunc;
-    private Action<IServiceProvider>? withServiceProvAfterBuildAction;
-    private Action<AutomationFrameworkSettings>? withAutomationFrameworkSettings;
+
+    private Action<IServiceProvider> withServiceProvAfterBuildAction = _ => { };
+
+    private Action<AutomationFrameworkSettings> withAutomationFrameworkSettings = _ => { };
+
     private Type? withDatabaseGenerator;
 
     public TestEnvironmentBuilder WithConfiguration(IConfiguration rootConfiguration)

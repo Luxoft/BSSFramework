@@ -6,5 +6,5 @@ public record JobSettings
 
     public string? CronTiming { get; init; }
 
-    public bool RegisterInScope { get; init; } = true;
+    public bool? RegisterInScope { get; init; }
 }

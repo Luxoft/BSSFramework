@@ -2,6 +2,16 @@
 
 public static class ScopedEvaluatorMiddlewareExtensions
 {
+    public static async Task EvaluateAsync(this IScopedEvaluatorMiddleware middleware, Func<Task> action)
+    {
+        await middleware.EvaluateAsync(
+            async () =>
+            {
+                await action();
+                return default(object);
+            });
+    }
+
     public static IScopedEvaluatorMiddleware With(this IScopedEvaluatorMiddleware middleware, IScopedEvaluatorMiddleware otherMiddleware)
     {
         return new WithMiddleware(middleware, otherMiddleware);

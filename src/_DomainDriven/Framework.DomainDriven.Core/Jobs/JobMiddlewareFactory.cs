@@ -14,13 +14,13 @@ public class JobMiddlewareFactory(IServiceProvider serviceProvider) : IJobMiddle
 
     protected virtual IEnumerable<IScopedEvaluatorMiddleware> GetMiddlewares<TJob>(string? runAs)
     {
-        yield return new JobLoggingMiddleware<TJob>(serviceProvider.GetRequiredService<ILogger<TJob>>());
+        yield return new TryCloseSessionEvaluatorMiddleware(serviceProvider.GetRequiredService<IDBSessionManager>());
 
         if (runAs != null)
         {
             yield return new ImpersonateEvaluatorMiddleware(serviceProvider, runAs);
         }
 
-        yield return new TryCloseSessionEvaluatorMiddleware(serviceProvider.GetRequiredService<IDBSessionManager>());
+        yield return new JobLoggingMiddleware<TJob>(serviceProvider.GetRequiredService<ILogger<TJob>>());
     }
 }

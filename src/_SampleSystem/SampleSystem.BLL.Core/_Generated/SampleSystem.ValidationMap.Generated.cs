@@ -2799,6 +2799,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestItemAuthObjectValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestJobObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestJobObjectValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestObj)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestObjValidationMap()));
@@ -3842,6 +3846,39 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestItemAuthObject> GetTestItemAuthObjectValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestItemAuthObject>(this.GetTestItemAuthObjectProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestJobObject, System.DateTime?>> GetTestJobObject_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestJobObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestJobObject, string>> GetTestJobObject_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestJobObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestJobObject, string>> GetTestJobObject_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestJobObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestJobObject, System.DateTime?>> GetTestJobObject_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestJobObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TestJobObject>> GetTestJobObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestJobObject> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestJobObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetTestJobObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestJobObject, string>(source => source.CreatedBy, currentClass, this.GetTestJobObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestJobObject, string>(source => source.ModifiedBy, currentClass, this.GetTestJobObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestJobObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestJobObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestJobObject> GetTestJobObjectValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestJobObject>(this.GetTestJobObjectProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestObj, SampleSystem.Domain.Inline.Fio>> GetTestObj_FSValidators()

@@ -39,11 +39,11 @@ public class DALChanges<T>
 
 public class DALChanges : DALChanges<IDALObject>
 {
-    private readonly IDictionaryCache<Type, DALChanges> _subsetCache;
+    private readonly IDictionaryCache<Type, DALChanges> subsetCache;
 
-    private readonly Lazy<Dictionary<Type, DALChanges<IDALObject>>> _lazyGroupDALObjectByType;
+    private readonly Lazy<Dictionary<Type, DALChanges<IDALObject>>> lazyGroupDALObjectByType;
 
-    private readonly Lazy<Dictionary<Type, DALChanges<object>>> _lazyGroupByType;
+    private readonly Lazy<Dictionary<Type, DALChanges<object>>> lazyGroupByType;
 
 
     public DALChanges(DALChanges<IDALObject> dalChanges)
@@ -62,9 +62,9 @@ public class DALChanges : DALChanges<IDALObject>
     public DALChanges(IEnumerable<IDALObject> createdItems, IEnumerable<IDALObject> updatedItems, IEnumerable<IDALObject> removedItems)
             : base(createdItems, updatedItems, removedItems)
     {
-        this._subsetCache = new DictionaryCache<Type, DALChanges>(t => new DALChanges(this.Where(dalObject => t.IsAssignableFrom(dalObject.Type)))).WithLock();
+        this.subsetCache = new DictionaryCache<Type, DALChanges>(t => new DALChanges(this.Where(dalObject => t.IsAssignableFrom(dalObject.Type)))).WithLock();
 
-        this._lazyGroupDALObjectByType = LazyHelper.Create(() =>
+        this.lazyGroupDALObjectByType = LazyHelper.Create(() =>
                                                            {
                                                                var plainValues = this.ToPlainValues();
 
@@ -73,7 +73,7 @@ public class DALChanges : DALChanges<IDALObject>
                                                                return grouped.ToDictionary(z => z.Key, q => q.Partial(z => z.Item2 == DALObjectChangeType.Created, z => z.Item2 == DALObjectChangeType.Updated, (cr, upd, rem) => new DALChanges<IDALObject>(cr.Select(e => e.Item1), upd.Select(e => e.Item1), rem.Select(e => e.Item1))));
                                                            });
 
-        this._lazyGroupByType = LazyHelper.Create(() =>
+        this.lazyGroupByType = LazyHelper.Create(() =>
                                                   {
                                                       var request = from pair in this.ToChangeTypeDict()
 
@@ -94,17 +94,17 @@ public class DALChanges : DALChanges<IDALObject>
 
     public DALChanges GetSubset(Type type)
     {
-        return this._subsetCache[type];
+        return this.subsetCache[type];
     }
 
 
     public Dictionary<Type, DALChanges<IDALObject>> GroupDALObjectByType()
     {
-        return this._lazyGroupDALObjectByType.Value;
+        return this.lazyGroupDALObjectByType.Value;
     }
 
     public Dictionary<Type, DALChanges<object>> GroupByType()
     {
-        return this._lazyGroupByType.Value;
+        return this.lazyGroupByType.Value;
     }
 }

@@ -2,44 +2,44 @@
 
 public class LinkedObjects
 {
-    private readonly Type _source;
-    private readonly Type _target;
-    private readonly string _propertyName;
+    private readonly Type source;
+    private readonly Type target;
+    private readonly string propertyName;
 
     public LinkedObjects(Type source, Type target, string propertyName)
     {
-        this._source = source;
-        this._propertyName = propertyName;
-        this._target = target;
+        this.source = source;
+        this.propertyName = propertyName;
+        this.target = target;
     }
 
     public Type Source
     {
-        get { return this._source; }
+        get { return this.source; }
     }
 
     public Type Target
     {
-        get { return this._target; }
+        get { return this.target; }
     }
 
     public string PropertyName
     {
-        get { return this._propertyName; }
+        get { return this.propertyName; }
     }
 }
 
 public abstract class DALException<T> : DALException
 {
-    private readonly T _args;
+    private readonly T args;
 
     protected DALException(T args, string message) : base(message)
     {
-        this._args = args;
+        this.args = args;
     }
 
     public T Args
     {
-        get { return this._args; }
+        get { return this.args; }
     }
 }

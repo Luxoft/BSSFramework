@@ -10,7 +10,7 @@ public interface IRootServiceProviderContainer<out TBLLContext> : IRootServicePr
 {
     async Task<TResult> IServiceEvaluator<TBLLContext>.EvaluateAsync<TResult>(
             DBSessionMode sessionMode,
-            string customPrincipalName,
+            string? customPrincipalName,
             Func<TBLLContext, Task<TResult>> getResult)
     {
         return await this.RootServiceProvider.GetRequiredService<IServiceEvaluator<TBLLContext>>().EvaluateAsync(sessionMode, customPrincipalName, getResult);
@@ -21,7 +21,7 @@ public interface IRootServiceProviderContainer<TBLLContext, TMappingService> : I
 {
     async Task<TResult> IContextEvaluator<TBLLContext, TMappingService>.EvaluateAsync<TResult>(
             DBSessionMode sessionMode,
-            string customPrincipalName,
+            string? customPrincipalName,
             Func<EvaluatedData<TBLLContext, TMappingService>, Task<TResult>> getResult)
     {
         return await this.RootServiceProvider.GetRequiredService<IContextEvaluator<TBLLContext, TMappingService>>().EvaluateAsync(sessionMode, customPrincipalName, getResult);

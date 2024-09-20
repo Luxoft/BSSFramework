@@ -9,7 +9,7 @@ public class ServiceEvaluator<TService>(IServiceProvider rootServiceProvider) : 
 {
     public async Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
-        string customPrincipalName,
+        string? customPrincipalName,
         Func<TService, Task<TResult>> getResult)
     {
         await using var scope = rootServiceProvider.CreateAsyncScope();

@@ -109,7 +109,7 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
 
         var dtoPropertyValue =
                 (TDtoProperty)
-                Activator.CreateInstance(typeof(TDtoProperty), bllContext, propertyRevision.Value);
+                Activator.CreateInstance(typeof(TDtoProperty), bllContext, propertyRevision.Value)!;
 
         return this.CreateGenericProperptyRevisionDto(propertyRevision, dtoPropertyValue);
     }
@@ -118,9 +118,9 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
     {
         var genericType = GenericTPropertyRevisionDtoType.Value.MakeGenericType(typeof(TValue));
 
-        var result = (TPropertyRevisionDto)Activator.CreateInstance(genericType, propertyRevisionInfo);
+        var result = (TPropertyRevisionDto)Activator.CreateInstance(genericType, propertyRevisionInfo)!;
 
-        genericType.GetProperty("Value", BindingFlags.Public | BindingFlags.Instance).SetValue(result, value);
+        genericType.GetProperty("Value", BindingFlags.Public | BindingFlags.Instance)!.SetValue(result, value);
 
         return result;
     }

@@ -20,7 +20,6 @@ using SampleSystem.BLL._Command.CreateClassA.Integration;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
 using SampleSystem.ServiceEnvironment;
-using SampleSystem.WebApiCore;
 using SampleSystem.WebApiCore.Services;
 
 var builder = WebApplication.CreateBuilder(args);

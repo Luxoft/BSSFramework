@@ -1,35 +1,24 @@
 ﻿namespace Framework.DomainDriven.DAL.Revisions;
 
-public abstract class RevisionInfoBase
+public abstract class RevisionInfoBase(AuditRevisionType revisionType, string author, DateTime date, long revisionNumber)
 {
-    private readonly AuditRevisionType _revisionType;
-    private readonly string _author;
-    private readonly DateTime _date;
-    private readonly long _revisionNumber;
-
-    protected RevisionInfoBase(AuditRevisionType revisionType, string author, DateTime date, long revisionNumber)
-    {
-        this._revisionType = revisionType;
-        this._author = author;
-        this._date = date;
-        this._revisionNumber = revisionNumber;
-    }
-
     public AuditRevisionType RevisionType
     {
-        get { return this._revisionType; }
+        get { return revisionType; }
     }
+
     public string Author
     {
-        get { return this._author; }
+        get { return author; }
     }
+
     public DateTime Date
     {
-        get { return this._date; }
+        get { return date; }
     }
 
     public long RevisionNumber
     {
-        get { return this._revisionNumber; }
+        get { return revisionNumber; }
     }
 }

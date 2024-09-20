@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.Jobs;
 
-public class JobEvaluator(IServiceProvider rootServiceProvider) : IJobEvaluator
+public class JobEvaluator(IServiceProvider rootServiceProvider, JobEvaluatorSettings settings) : IJobEvaluator
 {
     public async Task RunJob<TJob>(Func<TJob, Task> executeAsync)
         where TJob : notnull
@@ -15,7 +15,7 @@ public class JobEvaluator(IServiceProvider rootServiceProvider) : IJobEvaluator
 
         var job = scope.ServiceProvider.GetRequiredService<TJob>();
         await middlewareFactory
-              .Create<TJob>(true)
+              .Create<TJob>(settings.WithRootLogging)
               .EvaluateAsync(async () => await executeAsync(job));
     }
 }

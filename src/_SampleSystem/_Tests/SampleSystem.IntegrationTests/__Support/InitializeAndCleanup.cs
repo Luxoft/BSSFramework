@@ -7,6 +7,7 @@ using Bss.Platform.Events.Abstractions;
 using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DependencyInjection;
+using Framework.DomainDriven.Jobs;
 using Framework.Notification.DTO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,6 +47,7 @@ public class InitializeAndCleanup
 
                .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
                .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
+               .AddSingleton(new JobImpersonateData("sampleSystemTestJob"))
 
                .RegisterControllers([typeof(EmployeeController).Assembly])
 

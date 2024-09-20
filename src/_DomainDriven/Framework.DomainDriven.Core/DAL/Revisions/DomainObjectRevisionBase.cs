@@ -2,35 +2,13 @@
 
 namespace Framework.DomainDriven.DAL.Revisions;
 
-public interface IDomainObjectPropertyRevisionBase<out TIdent, out TRevisionItems>
+public abstract class DomainObjectRevisionBase<TIdent, TRevisionItems>(TIdent identity) : IMaster<TRevisionItems>
 {
-    string PropertyName { get; }
-    TIdent Identity { get; }
-    IEnumerable<TRevisionItems> RevisionInfos { get; }
-}
-public abstract class DomainObjectRevisionBase<TIdent, TRevisionItems> : IMaster<TRevisionItems>
-{
-    private readonly TIdent _identity;
-    private readonly ICollection<TRevisionItems> _revisionInfos;
+    private readonly ICollection<TRevisionItems> revisionInfos = new List<TRevisionItems>();
 
-    protected DomainObjectRevisionBase(TIdent identity)
-    {
-        this._identity = identity;
-        this._revisionInfos = new List<TRevisionItems>();
-    }
+    public TIdent Identity => identity;
 
-    public TIdent Identity
-    {
-        get { return this._identity; }
-    }
+    ICollection<TRevisionItems> IMaster<TRevisionItems>.Details => this.revisionInfos;
 
-    ICollection<TRevisionItems> IMaster<TRevisionItems>.Details
-    {
-        get { return this._revisionInfos; }
-    }
-
-    public IEnumerable<TRevisionItems> RevisionInfos
-    {
-        get { return this._revisionInfos; }
-    }
+    public IEnumerable<TRevisionItems> RevisionInfos => this.revisionInfos;
 }

@@ -12,7 +12,7 @@ public class OverrideStringEqualityExpressionVisitor : ExpressionVisitor
 
     private static readonly Dictionary<MethodInfo, MethodInfo> CallMap = new Dictionary<MethodInfo, MethodInfo>
                                                                          {
-                                                                                 { new Func<string, bool>("".Contains).Method, new Func<string, string, StringComparison, bool>(StringExtensions.Contains).Method },
+                                                                                 { new Func<string, bool>("".Contains).Method, new Func<string, StringComparison, bool>("".Contains).Method },
                                                                                  { new Func<string, bool>("".StartsWith).Method, new Func<string, StringComparison, bool>("".StartsWith).Method },
                                                                                  { new Func<string, bool>("".EndsWith).Method, new Func<string, StringComparison, bool>("".EndsWith).Method }
                                                                          };

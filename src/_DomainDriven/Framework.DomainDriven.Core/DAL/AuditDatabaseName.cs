@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 /// <summary>
 /// Описание настроек хранение аудита в базе данных

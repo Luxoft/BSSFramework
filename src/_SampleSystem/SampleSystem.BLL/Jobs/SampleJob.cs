@@ -1,5 +1,4 @@
-﻿using Framework.Core.Services;
-using Framework.DomainDriven.Repository;
+﻿using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.UserSource;
 

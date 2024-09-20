@@ -21,7 +21,7 @@ public static class DBSessionManagerExtensions
 
     public static async Task EvaluateAsync(this IDBSessionManager dbSessionManager, Func<Task> action, CancellationToken cancellationToken = default)
     {
-        await dbSessionManager.EvaluateAsync<object>(
+        await dbSessionManager.EvaluateAsync<object?>(
             async () =>
             {
                 await action();

@@ -4,5 +4,5 @@ namespace Framework.DomainDriven.ServiceModel;
 
 public interface IContextEvaluator<TBLLContext, TMappingService>
 {
-    Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, string customPrincipalName, Func<EvaluatedData<TBLLContext, TMappingService>, Task<TResult>> getResult);
+    Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, string? customPrincipalName, Func<EvaluatedData<TBLLContext, TMappingService>, Task<TResult>> getResult);
 }

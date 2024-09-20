@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.ScopedEvaluate;
 
 using Hangfire;
 using Hangfire.SqlServer;

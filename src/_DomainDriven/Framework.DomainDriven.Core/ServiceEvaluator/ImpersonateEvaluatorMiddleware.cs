@@ -6,25 +6,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;
 
-public class ImpersonateEvaluatorMiddleware : IScopedEvaluatorMiddleware
+public class ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvider, string? customPrincipalName) : IScopedEvaluatorMiddleware
 {
-    private readonly IServiceProvider scopedServiceProvider;
-
-    private readonly string customPrincipalName;
-
-    public ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvider, string customPrincipalName)
-    {
-        this.scopedServiceProvider = scopedServiceProvider;
-        this.customPrincipalName = customPrincipalName;
-    }
-
     public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult)
     {
-        var userAuthenticationService = this.scopedServiceProvider.GetRequiredService<IUserAuthenticationService>();
-        var impersonateService = this.scopedServiceProvider.GetRequiredService<IImpersonateService>();
+        var userAuthenticationService = scopedServiceProvider.GetRequiredService<IUserAuthenticationService>();
+        var impersonateService = scopedServiceProvider.GetRequiredService<IImpersonateService>();
 
         var actualImpersonateService =
-            this.customPrincipalName != null && this.customPrincipalName != userAuthenticationService.GetUserName()
+            customPrincipalName != null && customPrincipalName != userAuthenticationService.GetUserName()
                 ? impersonateService
                 : null;
 
@@ -34,7 +24,7 @@ public class ImpersonateEvaluatorMiddleware : IScopedEvaluatorMiddleware
         }
         else
         {
-            return await actualImpersonateService.WithImpersonateAsync(this.customPrincipalName, getResult);
+            return await actualImpersonateService.WithImpersonateAsync(customPrincipalName, getResult);
         }
     }
 }

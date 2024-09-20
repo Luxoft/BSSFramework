@@ -29,7 +29,7 @@ public class AuthManager(
         return principal.Id;
     }
 
-    public async Task AddUserRoleAsync(string principalName, TestPermission[] testPermissions, CancellationToken cancellationToken = default)
+    public async Task AddUserRoleAsync(string? principalName, TestPermission[] testPermissions, CancellationToken cancellationToken = default)
     {
         var principal = await principalDomainService.GetOrCreateAsync(principalName ?? this.GetCurrentUserLogin(), cancellationToken);
 
@@ -62,7 +62,7 @@ public class AuthManager(
         await principalDomainService.SaveAsync(principal, cancellationToken);
     }
 
-    public async Task RemovePermissionsAsync(string principalName, CancellationToken cancellationToken = default)
+    public async Task RemovePermissionsAsync(string? principalName, CancellationToken cancellationToken = default)
     {
         var currentUserName = principalName ?? this.GetCurrentUserLogin();
 

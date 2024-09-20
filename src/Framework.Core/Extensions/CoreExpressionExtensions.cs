@@ -126,7 +126,7 @@ public static class CoreExpressionExtensions
         }
     }
 
-    private static Maybe<MemberInfo> GetMember(this Expression expr)
+    public static Maybe<MemberInfo> GetMember(this Expression expr)
     {
         if (expr == null) throw new ArgumentNullException(nameof(expr));
 

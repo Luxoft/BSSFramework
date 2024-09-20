@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Framework.DomainDriven.Lock;
+﻿using Framework.DomainDriven.Lock;
 
 using nuSpec.Abstraction;
 

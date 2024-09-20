@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 using nuSpec.Abstraction;
 

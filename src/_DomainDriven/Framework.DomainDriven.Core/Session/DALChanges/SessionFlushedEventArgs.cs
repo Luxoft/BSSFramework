@@ -1,15 +1,6 @@
 ﻿namespace Framework.DomainDriven;
 
-public class SessionFlushedEventArgs : DALChangesEventArgs
+public class SessionFlushedEventArgs(DALChanges changes, IDBSession session) : DALChangesEventArgs(changes)
 {
-    public SessionFlushedEventArgs(DALChanges changes, IDBSession session)
-            : base(changes)
-    {
-        if (session == null) throw new ArgumentNullException(nameof(session));
-
-        this.Session = session;
-    }
-
-
-    public IDBSession Session { get; private set; }
+    public IDBSession Session { get; } = session;
 }

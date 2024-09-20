@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Lock;
 using Framework.SecuritySystem;
 

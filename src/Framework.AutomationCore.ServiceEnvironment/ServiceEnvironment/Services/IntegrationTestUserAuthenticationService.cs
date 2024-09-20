@@ -8,9 +8,9 @@ public class IntegrationTestUserAuthenticationService(IOptions<AutomationFramewo
 {
     private string IntegrationTestUserName => settings.Value.IntegrationTestUserName;
 
-    public string CustomUserName { get; internal set; }
+    public string? CustomUserName { get; internal set; }
 
-    public void SetUserName(string customUserName) => this.CustomUserName = customUserName ?? this.IntegrationTestUserName;
+    public void SetUserName(string? customUserName) => this.CustomUserName = customUserName ?? this.IntegrationTestUserName;
 
     public void Reset() => this.CustomUserName = this.IntegrationTestUserName;
 

@@ -4,24 +4,22 @@ namespace Framework.DomainDriven.DAL.Revisions;
 
 public class PropertyRevision<TIdent, TProperty> : RevisionInfoBase, IDetail<DomainObjectPropertyRevisions<TIdent, TProperty>>
 {
-    private readonly TProperty _value;
-    private readonly DomainObjectPropertyRevisions<TIdent, TProperty> _master;
+    private readonly TProperty value;
+    private readonly DomainObjectPropertyRevisions<TIdent, TProperty> master;
 
     public PropertyRevision(DomainObjectPropertyRevisions<TIdent, TProperty> master, TProperty value, AuditRevisionType revisionType, string author, DateTime date, long revisionNumber)
             : base(revisionType, author, date, revisionNumber)
     {
-        if (master == null) throw new ArgumentNullException(nameof(master));
-        this._value = value;
+        this.value = value;
 
-        this._master = master;
-        this._master.AddDetail(this);
-
+        this.master = master;
+        this.master.AddDetail(this);
     }
 
     public TProperty Value
     {
-        get { return this._value; }
+        get { return this.value; }
     }
 
-    DomainObjectPropertyRevisions<TIdent, TProperty> IDetail<DomainObjectPropertyRevisions<TIdent, TProperty>>.Master { get { return this._master; } }
+    DomainObjectPropertyRevisions<TIdent, TProperty> IDetail<DomainObjectPropertyRevisions<TIdent, TProperty>>.Master { get { return this.master; } }
 }

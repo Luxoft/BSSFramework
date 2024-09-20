@@ -1,12 +1,7 @@
 ﻿namespace Framework.DomainDriven;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class DBSessionModeAttribute : Attribute
+public class DBSessionModeAttribute(DBSessionMode sessionMode) : Attribute
 {
-    public DBSessionModeAttribute(DBSessionMode sessionMode)
-    {
-        this.SessionMode = sessionMode;
-    }
-
-    public DBSessionMode SessionMode { get; }
+    public DBSessionMode SessionMode { get; } = sessionMode;
 }

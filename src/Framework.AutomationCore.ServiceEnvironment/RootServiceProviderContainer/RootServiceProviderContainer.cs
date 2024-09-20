@@ -8,14 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
 
-public abstract class RootServiceProviderContainer : IRootServiceProviderContainer
+public abstract class RootServiceProviderContainer(IServiceProvider rootServiceProvider) : IRootServiceProviderContainer
 {
-    public RootServiceProviderContainer(IServiceProvider rootServiceProvider)
-    {
-        this.RootServiceProvider = rootServiceProvider;
-    }
-
-    public virtual IServiceProvider RootServiceProvider { get; }
+    public virtual IServiceProvider RootServiceProvider { get; } = rootServiceProvider;
 
     public AutomationFrameworkSettings AutomationFrameworkSettings => this.GetAutomationFrameworkSettings();
 
@@ -25,7 +20,7 @@ public abstract class RootServiceProviderContainer : IRootServiceProviderContain
 
     public IDatabaseContext DatabaseContext => this.GetDatabaseContext();
 
-    public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
+    public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(string? principalName = null)
             where TController : ControllerBase
     {
         return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);

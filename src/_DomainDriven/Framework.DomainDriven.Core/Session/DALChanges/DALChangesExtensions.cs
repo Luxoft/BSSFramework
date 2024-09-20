@@ -22,6 +22,7 @@ public static class DALChangesExtensions
     }
 
     public static Dictionary<T, DALObjectChangeType> ToChangeTypeDict<T>(this DALChanges<T> source)
+        where T : notnull
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 

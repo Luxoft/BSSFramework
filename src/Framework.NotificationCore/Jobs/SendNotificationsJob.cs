@@ -1,34 +1,19 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.Notification;
 
 namespace Framework.NotificationCore.Jobs;
 
-public class SendNotificationsJob : ISendNotificationsJob
+public class SendNotificationsJob(IConfigurationBLLContext context, IExceptionStorage exceptionStorage = null)
+    : ISendNotificationsJob
 {
-    private readonly IServiceEvaluator<IConfigurationBLLContext> contextEvaluator;
-
-    private readonly IExceptionStorage exceptionStorage;
-
-    public SendNotificationsJob(
-            IServiceEvaluator<IConfigurationBLLContext> contextEvaluator,
-            IExceptionStorage exceptionStorage = null)
+    public async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
-        this.exceptionStorage = exceptionStorage;
-    }
+        var result = context.Logics.DomainObjectModification.Process();
 
-    public void Send()
-    {
-        var result = this.contextEvaluator.Evaluate(
-                                                    DBSessionMode.Write,
-                                                    // todo: нужен рефакторинг - хотим разделить создание и отправку нотификаций, а то сейчас всё в кучу свалено
-                                                    context => context.Logics.DomainObjectModification.Process());
-
-        if (this.exceptionStorage != null)
+        if (exceptionStorage != null)
         {
-            result.Match(_ => { }, x => this.exceptionStorage.Save(x));
+            result.Match(_ => { }, exceptionStorage.Save);
         }
     }
 }

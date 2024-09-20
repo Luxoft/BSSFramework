@@ -1,6 +1,5 @@
-﻿namespace Framework.NotificationCore.Jobs;
+﻿using Framework.DomainDriven.Jobs;
 
-public interface ISendNotificationsJob
-{
-    void Send();
-}
+namespace Framework.NotificationCore.Jobs;
+
+public interface ISendNotificationsJob : IJob;

@@ -1,6 +1,5 @@
-﻿namespace SampleSystem.BLL.Core.Jobs;
+﻿using Framework.DomainDriven.Jobs;
 
-public interface ISampleJob
-{
-    void LogExecution();
-}
+namespace SampleSystem.BLL.Core.Jobs;
+
+public interface ISampleJob : IJob;

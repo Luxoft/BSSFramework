@@ -946,6 +946,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestItemAuthObjectContainer(rule)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestJobObject)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestJobObjectContainer(rule)));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestObjForNested)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestObjForNestedContainer(rule)));
@@ -2650,6 +2654,30 @@ namespace SampleSystem.BLL
                     fetchRootRule => fetchRootRule.SelectNested(testItemAuthObject => testItemAuthObject.BusinessUnit),
                     fetchRootRule => fetchRootRule.SelectNested(testItemAuthObject => testItemAuthObject.ManagementUnit),
                     fetchRootRule => fetchRootRule.SelectNested(testItemAuthObject => testItemAuthObject.Master));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestJobObject> GetTestJobObjectContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestJobObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestJobObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestJobObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.TestJobObject>.Empty;
             }
             else
             {

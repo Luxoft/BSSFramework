@@ -21,12 +21,6 @@ public static class ServiceProviderExtensions
         await rootServiceProvider.GetRequiredService<IJobEvaluator>().RunJob<TJob>(cancellationToken);
     }
 
-    public static async Task RunJob<TJob>(this IServiceProvider rootServiceProvider, Func<TJob, Task> executeAsync)
-        where TJob : notnull
-    {
-        await rootServiceProvider.GetRequiredService<IJobEvaluator>().RunJob(executeAsync);
-    }
-
     public static ControllerEvaluator<TController> GetDefaultControllerEvaluator<TController>(
         this IServiceProvider rootServiceProvider,
         string? principalName = null)

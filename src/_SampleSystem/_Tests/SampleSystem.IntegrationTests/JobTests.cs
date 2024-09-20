@@ -5,7 +5,7 @@ using FluentAssertions;
 using Framework.DomainDriven;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.BLL.Core.Jobs;
+using SampleSystem.BLL.Jobs;
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
@@ -23,7 +23,7 @@ public class JobTests : TestBase
         var repeatCount = 10;
 
         // Act
-        await Task.WhenAll(Enumerable.Range(0, repeatCount).Select(_ => this.RootServiceProvider.RunJob<ISampleJob>()).ToArray());
+        await Task.WhenAll(Enumerable.Range(0, repeatCount).Select(_ => this.RootServiceProvider.RunJob<SampleJob>()).ToArray());
 
         // Assert
         var newCount = GetJobInstanceCount();

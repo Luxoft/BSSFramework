@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Authorization;
 
 using SampleSystem.BLL._Command.CreateClassA.Integration;
-using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Services;
@@ -70,7 +69,7 @@ builder.Services.AddControllers(x => x.EnableEndpointRouting = false)
 
 builder.Services.AddHangfireBss(
     builder.Configuration,
-    s => s.AddJob<ISampleJob>(new JobSettings { Name = nameof(SampleJob) })
+    s => s.AddJob<SampleJob>()
           .AddJob<ISendNotificationsJob>((job, ct) => job.ExecuteAsync(ct), new JobSettings { CronTiming = Cron.Never() }));
 
 builder.Services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));

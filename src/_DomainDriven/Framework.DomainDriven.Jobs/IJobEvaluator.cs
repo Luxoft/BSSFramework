@@ -4,8 +4,8 @@ public interface IJobEvaluator
 {
     Task RunJob<TJob>(CancellationToken cancellationToken = default)
         where TJob : IJob =>
-        this.RunJob<TJob>(job => job.ExecuteAsync(cancellationToken));
+        this.RunService<TJob>(job => job.ExecuteAsync(cancellationToken));
 
-    Task RunJob<TJob>(Func<TJob, Task> executeAsync)
-        where TJob : notnull;
+    Task RunService<TService>(Func<TService, Task> executeAsync)
+        where TService : notnull;
 }

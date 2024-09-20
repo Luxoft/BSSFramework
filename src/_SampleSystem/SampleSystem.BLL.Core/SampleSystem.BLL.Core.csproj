@@ -7,6 +7,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.BLLCore\Framework.App.BLLCore.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Jobs\Framework.DomainDriven.Jobs.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.LegacyProjections\SampleSystem.Domain.LegacyProjections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />

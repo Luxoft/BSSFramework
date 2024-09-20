@@ -6,9 +6,11 @@ using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.DomainDriven.Auth;
+using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
+using Framework.DomainDriven.ScopedEvaluate;
 using Framework.Events;
 using Framework.Exceptions;
 using Framework.FinancialYear;
@@ -49,6 +51,8 @@ public static class ServiceCollectionExtensions
         services.AddExternalSource();
 
         services.AddSingleton<SecurityAdministratorRuleFactory>();
+
+        services.AddScoped<IJobMiddlewareFactory, JobMiddlewareFactory>();
 
         return services;
     }

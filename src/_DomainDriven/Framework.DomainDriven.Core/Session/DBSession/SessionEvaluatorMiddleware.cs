@@ -4,23 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;
 
-public class SessionEvaluatorMiddleware : IScopedEvaluatorMiddleware
+public class SessionEvaluatorMiddleware(IServiceProvider scopedServiceProvider, DBSessionMode sessionMode) : IScopedEvaluatorMiddleware
 {
-    private readonly IServiceProvider scopedServiceProvider;
-
-    private readonly DBSessionMode sessionMode;
-
-    public SessionEvaluatorMiddleware(IServiceProvider scopedServiceProvider, DBSessionMode sessionMode)
-    {
-        this.scopedServiceProvider = scopedServiceProvider;
-        this.sessionMode = sessionMode;
-    }
-
     public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult)
     {
-        await using var session = this.scopedServiceProvider.GetRequiredService<IDBSession>();
+        await using var session = scopedServiceProvider.GetRequiredService<IDBSession>();
 
-        if (this.sessionMode == DBSessionMode.Read)
+        if (sessionMode == DBSessionMode.Read)
         {
             session.AsReadOnly();
         }

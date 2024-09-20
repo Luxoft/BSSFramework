@@ -7,9 +7,9 @@ public class ApplicationUserAuthenticationService(IDefaultUserAuthenticationServ
 {
     public string GetUserName() => this.CustomUserName ?? defaultAuthenticationService.GetUserName();
 
-    public string CustomUserName { get; private set; }
+    public string? CustomUserName { get; private set; }
 
-    public async Task<T> WithImpersonateAsync<T>(string customUserName, Func<Task<T>> func)
+    public async Task<T> WithImpersonateAsync<T>(string? customUserName, Func<Task<T>> func)
     {
         var prev = this.CustomUserName;
 

@@ -14,7 +14,7 @@ public class AutomationFrameworkSettings
 
     public string DatabaseCollation { get; set; } = "";
 
-    public string TestRunServerRootFolder { get; set; }
+    public string TestRunServerRootFolder { get; set; } = default!;
 
     public string DbDataDirectory => Path.Combine(this.TestRunServerRootFolder, "data");
 

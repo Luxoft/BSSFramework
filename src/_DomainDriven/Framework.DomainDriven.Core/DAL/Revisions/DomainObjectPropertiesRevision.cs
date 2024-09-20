@@ -1,27 +1,13 @@
 ﻿namespace Framework.DomainDriven.DAL.Revisions;
 
-public class DomainObjectPropertyRevisions<TIdent> : DomainObjectRevisionBase<TIdent, PropertyRevision<TIdent, string>>
+public class DomainObjectPropertyRevisions<TIdent>(TIdent identity, string propertyName)
+    : DomainObjectRevisionBase<TIdent, PropertyRevision<TIdent, string>>(identity)
 {
-    private readonly string _propertyName;
-
-    public DomainObjectPropertyRevisions(TIdent identity, string propertyName)
-            : base(identity)
-    {
-        this._propertyName = propertyName;
-    }
-
-    public string PropertyName
-    {
-        get { return this._propertyName; }
-    }
+    public string PropertyName => propertyName;
 }
 
-public class DomainObjectPropertyRevisionsBase<TIdent> :  DomainObjectRevisionBase<TIdent, RevisionInfoBase>, IDomainObjectPropertyRevisionBase<TIdent, RevisionInfoBase>
+public class DomainObjectPropertyRevisionsBase<TIdent>(TIdent identity, string propertyName)
+    : DomainObjectRevisionBase<TIdent, RevisionInfoBase>(identity), IDomainObjectPropertyRevisionBase<TIdent, RevisionInfoBase>
 {
-    public DomainObjectPropertyRevisionsBase(TIdent identity, string propertyName) : base(identity)
-    {
-        this.PropertyName = propertyName;
-    }
-
-    public string PropertyName { get; private set; }
+    public string PropertyName { get; private set; } = propertyName;
 }

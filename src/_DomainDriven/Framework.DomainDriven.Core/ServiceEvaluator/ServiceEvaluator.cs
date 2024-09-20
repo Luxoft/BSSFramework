@@ -4,21 +4,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;
 
-public class ServiceEvaluator<TService> : IServiceEvaluator<TService>
+public class ServiceEvaluator<TService>(IServiceProvider rootServiceProvider) : IServiceEvaluator<TService>
+    where TService : notnull
 {
-    private readonly IServiceProvider rootServiceProvider;
-
-    public ServiceEvaluator(IServiceProvider rootServiceProvider)
-    {
-        this.rootServiceProvider = rootServiceProvider;
-    }
-
     public async Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
         string customPrincipalName,
         Func<TService, Task<TResult>> getResult)
     {
-        await using var scope = this.rootServiceProvider.CreateAsyncScope();
+        await using var scope = rootServiceProvider.CreateAsyncScope();
 
         var sessionMiddleware = new SessionEvaluatorMiddleware(scope.ServiceProvider, sessionMode);
 

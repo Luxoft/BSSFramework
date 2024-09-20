@@ -8,11 +8,17 @@ using Framework.Configurator.Interfaces;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.DomainDriven.WebApiNetCore.JsonConverter;
+using Framework.HangfireCore;
+using Framework.NotificationCore.Jobs;
+
+using Hangfire;
 
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Authorization;
 
 using SampleSystem.BLL._Command.CreateClassA.Integration;
+using SampleSystem.BLL.Core.Jobs;
+using SampleSystem.BLL.Jobs;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
 using SampleSystem.WebApiCore.Services;
@@ -63,10 +69,10 @@ builder.Services.AddControllers(x => x.EnableEndpointRouting = false)
                            x.JsonSerializerOptions.Converters.Add(new PeriodJsonConverter());
                        });
 
-if (builder.Environment.IsProduction())
-{
-    builder.Services.AddHangfireBss(builder.Configuration.GetConnectionString("DefaultConnection"));
-}
+builder.Services.AddHangfireBss(
+    builder.Configuration,
+    s => s.AddJob<ISampleJob>(new JobSettings { Name = nameof(SampleJob) })
+          .AddJob<ISendNotificationsJob>((job, ct) => job.ExecuteAsync(ct), new JobSettings { CronTiming = Cron.Never() }));
 
 builder.Services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));
 
@@ -85,9 +91,6 @@ app
     .UsePlatformApiDocumentation(builder.Environment)
     .UseEndpoints(x => x.MapControllers());
 
-if (builder.Environment.IsProduction())
-{
-    app.UseHangfireBss(builder.Configuration, JobList.RunAll);
-}
+app.UseHangfireBss();
 
 app.Run();

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageId>Luxoft.Framework.AutomationCore.ServiceEnvironment</PackageId>
     <RootNamespace>Automation.ServiceEnvironment</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

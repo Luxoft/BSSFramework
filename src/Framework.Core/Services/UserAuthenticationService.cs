@@ -7,18 +7,11 @@ public static class UserAuthenticationService
         return new UserNameAuthenticationService(userName);
     }
 
-    private class UserNameAuthenticationService : IUserAuthenticationService
+    private class UserNameAuthenticationService(string userName) : IUserAuthenticationService
     {
-        private readonly string userName;
-
-        public UserNameAuthenticationService(string userName)
-        {
-            this.userName = userName;
-        }
-
         public string GetUserName()
         {
-            return this.userName;
+            return userName;
         }
     }
 }

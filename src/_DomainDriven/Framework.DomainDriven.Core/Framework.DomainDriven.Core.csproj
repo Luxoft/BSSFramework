@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.Core</PackageId>
     <RootNamespace>Framework.DomainDriven</RootNamespace>
+    <nullable>enable</nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="NHibernate" />
     <PackageReference Include="nuSpec.Abstraction" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />

@@ -14,11 +14,11 @@ namespace Automation;
 
 public class TestEnvironmentBuilder
 {
-    private IConfiguration withConfiguration;
-    private Func<IConfiguration, IServiceCollection, IServiceCollection> withServiceProviderBuildFunc;
-    private Action<IServiceProvider> withServiceProvAfterBuildAction;
-    private Action<AutomationFrameworkSettings> withAutomationFrameworkSettings;
-    private Type withDatabaseGenerator;
+    private IConfiguration? withConfiguration;
+    private Func<IConfiguration, IServiceCollection, IServiceCollection>? withServiceProviderBuildFunc;
+    private Action<IServiceProvider>? withServiceProvAfterBuildAction;
+    private Action<AutomationFrameworkSettings>? withAutomationFrameworkSettings;
+    private Type? withDatabaseGenerator;
 
     public TestEnvironmentBuilder WithConfiguration(IConfiguration rootConfiguration)
     {
@@ -87,7 +87,7 @@ public class TestEnvironmentBuilder
         }
 
         var serviceProviderPool = this.GetServiceProviderPool(
-            this.withConfiguration,
+            this.withConfiguration!,
             this.withServiceProviderBuildFunc,
             this.withServiceProvAfterBuildAction,
             this.withDatabaseGenerator,
@@ -151,7 +151,7 @@ public class TestEnvironmentBuilder
 
         var environmentServiceProvider = this.BuildServiceProvider(environmentServices);
 
-        serviceProviderAfterBuildAction?.Invoke(environmentServiceProvider);
+        serviceProviderAfterBuildAction(environmentServiceProvider);
 
         return environmentServiceProvider;
     }
@@ -160,7 +160,7 @@ public class TestEnvironmentBuilder
     {
         var settings = new AutomationFrameworkSettings();
         configuration.GetSection(nameof(AutomationFrameworkSettings)).Bind(settings);
-        action?.Invoke(settings);
+        action(settings);
 
         return Options.Create(settings);
     }

@@ -6,5 +6,8 @@ namespace SampleSystem.BLL.Jobs;
 
 public class SampleJob(ILogger<SampleJob> logger) : ISampleJob
 {
-    public void LogExecution() => logger.LogInformation("Job executed");
+    public async Task ExecuteAsync(CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Job executed");
+    }
 }

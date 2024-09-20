@@ -25,4 +25,6 @@ public class AutomationFrameworkSettings
     public string[] SecondaryDatabases { get; set; } = [];
 
     public string[] LocalAdmins { get; set; } = [];
+
+    public string? JobRunAs { get; set; } = null;
 }

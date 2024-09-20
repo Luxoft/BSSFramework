@@ -4,6 +4,7 @@ using Automation.ServiceEnvironment.Services;
 
 using Framework.DependencyInjection;
 using Framework.DomainDriven.Auth;
+using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 
@@ -14,22 +15,36 @@ namespace Automation.ServiceEnvironment;
 
 public static class ServiceProviderExtensions
 {
-    public static ControllerEvaluator<TController> GetDefaultControllerEvaluator<TController>(
-        this IServiceProvider serviceProvider,
-        string principalName = null)
-            where TController : ControllerBase
+    public static async Task RunJob<TJob>(this IServiceProvider rootServiceProvider, CancellationToken cancellationToken = default)
+        where TJob : IJob
     {
-        var controllerEvaluator = serviceProvider.GetRequiredService<ControllerEvaluator<TController>>();
+        await rootServiceProvider.GetRequiredService<IIntegrationTestJobRunner>().RunJob<TJob>(cancellationToken);
+    }
+
+    public static async Task RunJob<TJob>(this IServiceProvider rootServiceProvider, Func<TJob, Task> executeAsync)
+    {
+        await rootServiceProvider.GetRequiredService<IIntegrationTestJobRunner>().RunJob(executeAsync);
+    }
+
+    public static ControllerEvaluator<TController> GetDefaultControllerEvaluator<TController>(
+        this IServiceProvider rootServiceProvider,
+        string principalName = null)
+        where TController : ControllerBase
+    {
+        var controllerEvaluator = rootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>();
 
         return principalName == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(principalName);
     }
 
-    public static IServiceCollection RegisterControllers(this IServiceCollection services, Assembly[] assemblies, params Type[] exceptControllers)
+    public static IServiceCollection RegisterControllers(
+        this IServiceCollection services,
+        Assembly[] assemblies,
+        params Type[] exceptControllers)
     {
         foreach (var controllerType in assemblies.SelectMany(
-                     a => a.GetTypes())
-                     .Except(exceptControllers)
-                     .Where(t => !t.IsAbstract && typeof(ControllerBase).IsAssignableFrom(t)))
+                                                     a => a.GetTypes())
+                                                 .Except(exceptControllers)
+                                                 .Where(t => !t.IsAbstract && typeof(ControllerBase).IsAssignableFrom(t)))
         {
             services.AddScoped(controllerType);
         }
@@ -52,6 +67,7 @@ public static class ServiceProviderExtensions
                 .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
 
                 .AddSingleton(typeof(ControllerEvaluator<>))
+                .AddSingleton<IIntegrationTestJobRunner, IntegrationTestJobRunner>()
 
                 .AddScoped<AuthManager>();
 }

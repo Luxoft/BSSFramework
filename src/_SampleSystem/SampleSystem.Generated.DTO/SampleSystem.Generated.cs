@@ -6581,6 +6581,99 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestJobObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestJobObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestJobObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestJobObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestJobObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestJobObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestJobObjectIdentityDTO(SampleSystem.Domain.TestJobObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestJobObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestJobObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestJobObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestJobObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestJobObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestJobObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestJobObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestJobObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestJobObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestJobObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestJobObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestJobObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestObjForNested), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct TestObjForNestedIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>

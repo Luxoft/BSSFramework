@@ -1,6 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.HangfireCore</PackageId>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
   </ItemGroup>
 
 </Project>

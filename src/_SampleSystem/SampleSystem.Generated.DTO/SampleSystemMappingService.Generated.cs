@@ -742,6 +742,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestItemAuthObject(SampleSystem.Domain.TestItemAuthObject domainObject, SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO mappingObject);
         
+        void MapTestJobObject(SampleSystem.Domain.TestJobObject domainObject, SampleSystem.Generated.DTO.TestJobObjectEventRichDTO mappingObject);
+        
         void MapTestLegacyEmployee(SampleSystem.Domain.Projections.TestLegacyEmployee domainObject, SampleSystem.Generated.DTO.TestLegacyEmployeeProjectionDTO mappingObject);
         
         void MapTestLocation(SampleSystem.Domain.Projections.TestLocation domainObject, SampleSystem.Generated.DTO.TestLocationProjectionDTO mappingObject);
@@ -1241,6 +1243,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.TestImmutableObj ToTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjIntegrationRichDTO testImmutableObjRichIntegrationDTO, bool allowCreate);
         
         SampleSystem.Domain.TestItemAuthObject ToTestItemAuthObject(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO testItemAuthObjectIdentityDTO);
+        
+        SampleSystem.Domain.TestJobObject ToTestJobObject(SampleSystem.Generated.DTO.TestJobObjectIdentityDTO testJobObjectIdentityDTO);
         
         SampleSystem.Domain.TestObjForNested ToTestObjForNested(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO testObjForNestedIdentityDTO);
         
@@ -6969,6 +6973,17 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapTestJobObject(SampleSystem.Domain.TestJobObject domainObject, SampleSystem.Generated.DTO.TestJobObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapTestLegacyEmployee(SampleSystem.Domain.Projections.TestLegacyEmployee domainObject, SampleSystem.Generated.DTO.TestLegacyEmployeeProjectionDTO mappingObject)
         {
             if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>(Framework.SecuritySystem.SecurityRule.View).HasAccess(domainObject))
@@ -8876,6 +8891,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.TestItemAuthObject ToTestItemAuthObject(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO testItemAuthObjectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestItemAuthObject>(testItemAuthObjectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TestJobObject ToTestJobObject(SampleSystem.Generated.DTO.TestJobObjectIdentityDTO testJobObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestJobObject>(testJobObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.TestObjForNested ToTestObjForNested(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO testObjForNestedIdentityDTO)

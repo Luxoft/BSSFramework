@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.WebApiNetCore.Auth;
+﻿namespace Framework.DomainDriven.Auth;
 
 public interface IApplicationDefaultUserAuthenticationServiceSettings
 {

@@ -1,26 +1,27 @@
-﻿using Framework.DomainDriven.ScopedEvaluate;
+﻿using Framework.DomainDriven.Auth;
+using Framework.DomainDriven.ScopedEvaluate;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Framework.DomainDriven.Jobs;
 
-public class JobMiddlewareFactory(IServiceProvider serviceProvider) : IJobMiddlewareFactory
+public class JobMiddlewareFactory(IServiceProvider serviceProvider, IApplicationDefaultUserAuthenticationServiceSettings applicationDefaultUserAuthenticationServiceSettings, JobImpersonateData? jobImpersonateData = null) : IJobMiddlewareFactory
 {
-    public IScopedEvaluatorMiddleware Create<TJob>(string? runAs)
+    public IScopedEvaluatorMiddleware Create<TJob>(bool withRootLogging)
     {
-        return this.GetMiddlewares<TJob>(runAs).Aggregate();
+        return this.GetMiddlewares<TJob>(withRootLogging).Aggregate();
     }
 
-    protected virtual IEnumerable<IScopedEvaluatorMiddleware> GetMiddlewares<TJob>(string? runAs)
+    protected virtual IEnumerable<IScopedEvaluatorMiddleware> GetMiddlewares<TJob>(bool withRootLogging)
     {
         yield return new TryCloseSessionEvaluatorMiddleware(serviceProvider.GetRequiredService<IDBSessionManager>());
 
-        if (runAs != null)
-        {
-            yield return new ImpersonateEvaluatorMiddleware(serviceProvider, runAs);
-        }
+        yield return new ImpersonateEvaluatorMiddleware(serviceProvider, jobImpersonateData?.RunAs ?? applicationDefaultUserAuthenticationServiceSettings.DefaultValue);
 
-        yield return new JobLoggingMiddleware<TJob>(serviceProvider.GetRequiredService<ILogger<TJob>>());
+        if (withRootLogging)
+        {
+            yield return new JobLoggingMiddleware<TJob>(serviceProvider.GetRequiredService<ILogger<TJob>>());
+        }
     }
 }

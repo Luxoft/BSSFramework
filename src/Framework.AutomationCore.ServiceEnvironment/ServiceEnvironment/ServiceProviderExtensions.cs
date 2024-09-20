@@ -18,12 +18,13 @@ public static class ServiceProviderExtensions
     public static async Task RunJob<TJob>(this IServiceProvider rootServiceProvider, CancellationToken cancellationToken = default)
         where TJob : IJob
     {
-        await rootServiceProvider.GetRequiredService<IIntegrationTestJobRunner>().RunJob<TJob>(cancellationToken);
+        await rootServiceProvider.GetRequiredService<IJobEvaluator>().RunJob<TJob>(cancellationToken);
     }
 
     public static async Task RunJob<TJob>(this IServiceProvider rootServiceProvider, Func<TJob, Task> executeAsync)
+        where TJob : notnull
     {
-        await rootServiceProvider.GetRequiredService<IIntegrationTestJobRunner>().RunJob(executeAsync);
+        await rootServiceProvider.GetRequiredService<IJobEvaluator>().RunJob(executeAsync);
     }
 
     public static ControllerEvaluator<TController> GetDefaultControllerEvaluator<TController>(
@@ -67,7 +68,6 @@ public static class ServiceProviderExtensions
                 .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
 
                 .AddSingleton(typeof(ControllerEvaluator<>))
-                .AddSingleton<IIntegrationTestJobRunner, IntegrationTestJobRunner>()
 
                 .AddScoped<AuthManager>();
 }

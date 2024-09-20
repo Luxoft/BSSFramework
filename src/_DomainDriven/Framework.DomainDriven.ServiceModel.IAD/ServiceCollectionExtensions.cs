@@ -51,6 +51,7 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<SecurityAdministratorRuleFactory>();
 
+        services.AddSingleton<IJobEvaluator, JobEvaluator>();
         services.AddScoped<IJobMiddlewareFactory, JobMiddlewareFactory>();
 
         return services;

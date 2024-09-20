@@ -6,16 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
 
-public abstract class IntegrationTestBase : RootServiceProviderContainer
+public abstract class IntegrationTestBase(IServiceProviderPool rootServiceProviderPool)
+    : RootServiceProviderContainer(rootServiceProviderPool.Get())
 {
-    private readonly IServiceProviderPool rootServiceProviderPool;
-
-    protected IntegrationTestBase(IServiceProviderPool rootServiceProviderPool)
-        : base(rootServiceProviderPool.Get())
-    {
-        this.rootServiceProviderPool = rootServiceProviderPool;
-    }
-
     public virtual void Initialize()
     {
         this.ReattachDatabase();
@@ -52,7 +45,7 @@ public abstract class IntegrationTestBase : RootServiceProviderContainer
     }
 
     protected virtual void ReleaseServiceProvider()
-        => this.rootServiceProviderPool.Release(this.RootServiceProvider);
+        => rootServiceProviderPool.Release(this.RootServiceProvider);
 
     protected virtual void ReattachDatabase()
     {

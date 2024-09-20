@@ -1,3 +1,3 @@
-﻿namespace Framework.DomainDriven.WebApiNetCore.Auth;
+﻿namespace Framework.DomainDriven.Auth;
 
 public record ApplicationDefaultUserAuthenticationServiceSettings(string DefaultValue = "system") : IApplicationDefaultUserAuthenticationServiceSettings;

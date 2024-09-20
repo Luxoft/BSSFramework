@@ -376,6 +376,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.Appl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.VirtualPermission", "_DomainDriven\Framework.DomainDriven.VirtualPermission\Framework.DomainDriven.VirtualPermission.csproj", "{2A86A4C2-94FA-49C3-AB20-72226DC82274}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.Jobs", "_DomainDriven\Framework.DomainDriven.Jobs\Framework.DomainDriven.Jobs.csproj", "{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -3566,6 +3568,26 @@ Global
 		{2A86A4C2-94FA-49C3-AB20-72226DC82274}.Release|x64.Build.0 = Release|Any CPU
 		{2A86A4C2-94FA-49C3-AB20-72226DC82274}.Release|x86.ActiveCfg = Release|Any CPU
 		{2A86A4C2-94FA-49C3-AB20-72226DC82274}.Release|x86.Build.0 = Release|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Debug|ARM.Build.0 = Debug|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Debug|x64.Build.0 = Debug|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Debug|x86.Build.0 = Debug|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Release|ARM.Build.0 = Release|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Release|x64.ActiveCfg = Release|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Release|x64.Build.0 = Release|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Release|x86.ActiveCfg = Release|Any CPU
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3692,6 +3714,7 @@ Global
 		{30DC6008-68D1-4D82-8BB6-B757823ECA1D} = {647A0A18-C3F2-4E58-B52F-6310B1F8B963}
 		{F6583269-DE40-45D6-8594-C1FFCA44C04D} = {BD23CE26-E161-47F1-826E-BD37F4F51C9E}
 		{2A86A4C2-94FA-49C3-AB20-72226DC82274} = {BD23CE26-E161-47F1-826E-BD37F4F51C9E}
+		{9C8E3523-3B7D-4032-81E8-CB5A1F2C6DC8} = {BD23CE26-E161-47F1-826E-BD37F4F51C9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {68BB011C-6BAC-4558-903A-BF29D2F8046F}

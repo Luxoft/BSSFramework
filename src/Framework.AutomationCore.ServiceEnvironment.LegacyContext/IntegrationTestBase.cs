@@ -7,14 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
 
-public abstract class IntegrationTestBase<TBLLContext> : IntegrationTestBase, IRootServiceProviderContainer<TBLLContext>
+public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool rootServiceProviderPool)
+    : IntegrationTestBase(rootServiceProviderPool), IRootServiceProviderContainer<TBLLContext>
     where TBLLContext : IServiceProviderContainer
 {
-    protected IntegrationTestBase(IServiceProviderPool rootServiceProviderPool)
-        : base(rootServiceProviderPool)
-    {
-    }
-
     protected IConfigurationBLLContext GetConfigurationBLLContext(TBLLContext context)
     {
         return context.ServiceProvider.GetRequiredService<IConfigurationBLLContext>();

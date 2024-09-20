@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+using Framework.DomainDriven.Jobs;
 
 using Hangfire;
 using Hangfire.SqlServer;
@@ -84,7 +85,7 @@ public class BssHangfireSettings : IBssHangfireSettings
                          ?? this.JobTimings.Where(jt => jt.Name == jobName).Select(jt => jt.Schedule).SingleOrDefault()
                          ?? throw new Exception($"{nameof(JobTiming)} for job '{jobName}' not found");
 
-        this.registerActions.Add(services => services.AddSingleton(new JobInfo<TJob, TArg>(executeAction, this.RunAs)));
+        this.registerActions.Add(services => services.AddSingleton(new JobInfo<TJob, TArg>(executeAction)));
 
         this.runJobActions.Add(
             () => RecurringJob.AddOrUpdate<MiddlewareJob<TJob, TArg>>(jobName, job => job.ExecuteAsync(default!), cronTiming));
@@ -94,6 +95,11 @@ public class BssHangfireSettings : IBssHangfireSettings
 
     public void Initialize(IServiceCollection services, IConfiguration configuration)
     {
+        if (this.RunAs != null)
+        {
+            services.AddSingleton(new JobImpersonateData(this.RunAs));
+        }
+
         this.registerActions.ForEach(a => a(services));
 
         services.AddSingleton(this);

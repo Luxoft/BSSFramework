@@ -27,9 +27,9 @@ public static class ServiceProviderExtensions
     }
 
     public static ControllerEvaluator<TController> GetDefaultControllerEvaluator<TController>(
-        this IServiceProvider serviceProvider,
+        this IServiceProvider rootServiceProvider,
         string? principalName = null)
-            where TController : ControllerBase
+        where TController : ControllerBase
     {
         var controllerEvaluator = rootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>();
 

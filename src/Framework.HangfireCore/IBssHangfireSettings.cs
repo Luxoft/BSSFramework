@@ -7,6 +7,13 @@ namespace Framework.HangfireCore;
 
 public interface IBssHangfireSettings
 {
+    /// <summary>
+    /// Автоматическая регистрация job-ов в scope
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    IBssHangfireSettings SetAutoRegisterJob(bool value);
+
     IBssHangfireSettings SetConnectionString(string connectionString);
 
     IBssHangfireSettings SetConnectionStringName(string connectionStringName);

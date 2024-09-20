@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
+using SampleSystem.BLL.Jobs;
 using SampleSystem.Domain;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
@@ -23,7 +24,8 @@ public static class SampleSystemApplicationExtensions
                 .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
                 .RegisterSmtpNotification(configuration)
                 .AddRelativePaths()
-                .RegisterApplicationServices();
+                .RegisterApplicationServices()
+                .RegisterJobs();
 
     private static IServiceCollection AddRelativePaths(this IServiceCollection services) =>
         services.AddRelativeDomainPath((TestExceptObject v) => v.Employee)
@@ -45,4 +47,7 @@ public static class SampleSystemApplicationExtensions
 
         return services;
     }
+
+    private static IServiceCollection RegisterJobs(this IServiceCollection services) =>
+        services.AddScoped<SampleJob>();
 }

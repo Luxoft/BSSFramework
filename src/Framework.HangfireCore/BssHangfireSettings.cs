@@ -18,6 +18,8 @@ public class BssHangfireSettings : IBssHangfireSettings
 
     private readonly List<Action> runJobActions = [];
 
+    private bool autoRegisterJob;
+
     private readonly SqlServerStorageOptions sqlServerStorageOptions = new()
     {
         CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
@@ -40,6 +42,13 @@ public class BssHangfireSettings : IBssHangfireSettings
     public BssHangfireSettings()
     {
         this.SetConnectionStringName("DefaultConnectionString");
+    }
+
+    public IBssHangfireSettings SetAutoRegisterJob(bool value)
+    {
+        this.autoRegisterJob = value;
+
+        return this;
     }
 
     public IBssHangfireSettings SetConnectionString(string newConnectionString)
@@ -90,7 +99,7 @@ public class BssHangfireSettings : IBssHangfireSettings
 
         this.registerActions.Add(services =>
                                  {
-                                     if (jobSettings?.RegisterInScope ?? !isInterface)
+                                     if (!isInterface && this.autoRegisterJob)
                                      {
                                          services.AddScoped<TJob>();
                                      }

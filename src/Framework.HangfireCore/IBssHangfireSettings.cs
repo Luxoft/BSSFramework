@@ -7,6 +7,8 @@ namespace Framework.HangfireCore;
 
 public interface IBssHangfireSettings
 {
+    IBssHangfireSettings SetJobNameExtractPolicy(IJobNameExtractPolicy policy);
+
     /// <summary>
     /// Автоматическая регистрация job-ов в scope (по умолчанию уже регистрируюся)
     /// </summary>

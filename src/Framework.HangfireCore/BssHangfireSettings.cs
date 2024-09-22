@@ -2,6 +2,7 @@
 using Framework.DomainDriven.Jobs;
 
 using Hangfire;
+using Hangfire.Common;
 using Hangfire.SqlServer;
 
 using Microsoft.Data.SqlClient;
@@ -18,7 +19,7 @@ public class BssHangfireSettings : IBssHangfireSettings
 
     private readonly List<Action> runJobActions = [];
 
-    private bool autoRegisterJob;
+    private bool autoRegisterJob = true;
 
     private readonly SqlServerStorageOptions sqlServerStorageOptions = new()
     {
@@ -44,9 +45,9 @@ public class BssHangfireSettings : IBssHangfireSettings
         this.SetConnectionStringName("DefaultConnectionString");
     }
 
-    public IBssHangfireSettings SetAutoRegisterJob(bool value)
+    public IBssHangfireSettings RegisterRegisterAsServices(bool enabled)
     {
-        this.autoRegisterJob = value;
+        this.autoRegisterJob = enabled;
 
         return this;
     }
@@ -140,6 +141,9 @@ public class BssHangfireSettings : IBssHangfireSettings
 
     public void RunJobs()
     {
+        JobFilterProviders.Providers.RemoveBy(provider => provider is JobFilterAttributeFilterProvider);
+        JobFilterProviders.Providers.Add(new BssJobFilterAttributeFilterProvider());
+
         this.runJobActions.ForEach(a => a());
     }
 }

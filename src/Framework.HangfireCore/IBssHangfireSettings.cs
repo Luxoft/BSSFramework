@@ -8,11 +8,11 @@ namespace Framework.HangfireCore;
 public interface IBssHangfireSettings
 {
     /// <summary>
-    /// Автоматическая регистрация job-ов в scope
+    /// Автоматическая регистрация job-ов в scope (по умолчанию уже регистрируюся)
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="enabled"></param>
     /// <returns></returns>
-    IBssHangfireSettings SetAutoRegisterJob(bool value);
+    IBssHangfireSettings RegisterRegisterAsServices(bool enabled);
 
     IBssHangfireSettings SetConnectionString(string connectionString);
 

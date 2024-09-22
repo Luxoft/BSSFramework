@@ -18,7 +18,7 @@ public static class ServiceProviderExtensions
     public static async Task RunJob<TJob>(this IServiceProvider rootServiceProvider, CancellationToken cancellationToken = default)
         where TJob : IJob
     {
-        await rootServiceProvider.GetRequiredService<IJobEvaluator>().RunJob<TJob>(cancellationToken);
+        await rootServiceProvider.GetRequiredService<IJobServiceEvaluatorFactory>().RunJob<TJob>(cancellationToken);
     }
 
     public static ControllerEvaluator<TController> GetDefaultControllerEvaluator<TController>(
@@ -40,6 +40,19 @@ public static class ServiceProviderExtensions
                                                      a => a.GetTypes())
                                                  .Except(exceptControllers)
                                                  .Where(t => !t.IsAbstract && typeof(ControllerBase).IsAssignableFrom(t)))
+        {
+            services.AddScoped(controllerType);
+        }
+
+        return services;
+    }
+
+    public static IServiceCollection RegisterJobs(
+        this IServiceCollection services,
+        Assembly[] assemblies)
+    {
+        foreach (var controllerType in assemblies.SelectMany(a => a.GetTypes())
+                                                 .Where(t => !t.IsAbstract && typeof(IJob).IsAssignableFrom(t)))
         {
             services.AddScoped(controllerType);
         }

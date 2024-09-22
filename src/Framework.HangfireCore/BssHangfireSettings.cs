@@ -21,6 +21,8 @@ public class BssHangfireSettings : IBssHangfireSettings
 
     private bool autoRegisterJob = true;
 
+    private IJobNameExtractPolicy jobNameExtractPolicy = new JobNameExtractPolicy();
+
     private readonly SqlServerStorageOptions sqlServerStorageOptions = new()
     {
         CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
@@ -43,6 +45,13 @@ public class BssHangfireSettings : IBssHangfireSettings
     public BssHangfireSettings()
     {
         this.SetConnectionStringName("DefaultConnectionString");
+    }
+
+    public IBssHangfireSettings SetJobNameExtractPolicy(IJobNameExtractPolicy policy)
+    {
+        this.jobNameExtractPolicy = policy;
+
+        return this;
     }
 
     public IBssHangfireSettings RegisterRegisterAsServices(bool enabled)
@@ -90,17 +99,9 @@ public class BssHangfireSettings : IBssHangfireSettings
     public IBssHangfireSettings AddJob<TJob, TArg>(Func<TJob, TArg, Task> executeAction, JobSettings? jobSettings = null)
         where TJob : class
     {
-        var isInterface = typeof(TJob).IsInterface;
-
-        var jobName = jobSettings?.Name ?? typeof(TJob).Name.Pipe(isInterface, v => v.Skip("I", true));
-
-        var cronTiming = jobSettings?.CronTiming
-                         ?? this.JobTimings.Where(jt => jt.Name == jobName).Select(jt => jt.Schedule).SingleOrDefault()
-                         ?? throw new Exception($"{nameof(JobTiming)} for job '{jobName}' not found");
-
         this.registerActions.Add(services =>
                                  {
-                                     if (!isInterface && this.autoRegisterJob)
+                                     if (!typeof(TJob).IsInterface && this.autoRegisterJob)
                                      {
                                          services.AddScoped<TJob>();
                                      }
@@ -109,7 +110,16 @@ public class BssHangfireSettings : IBssHangfireSettings
                                  });
 
         this.runJobActions.Add(
-            () => RecurringJob.AddOrUpdate<MiddlewareJob<TJob, TArg>>(jobName, job => job.ExecuteAsync(default!), cronTiming));
+            () =>
+            {
+                var jobName = jobSettings?.Name ?? this.jobNameExtractPolicy.GetName(typeof(TJob));
+
+                var cronTiming = jobSettings?.CronTiming
+                                 ?? this.JobTimings.Where(jt => jt.Name == jobName).Select(jt => jt.Schedule).SingleOrDefault()
+                                 ?? throw new Exception($"{nameof(JobTiming)} for job '{jobName}' not found");
+
+                RecurringJob.AddOrUpdate<MiddlewareJob<TJob, TArg>>(jobName, job => job.ExecuteAsync(default!), cronTiming);
+            });
 
         return this;
     }

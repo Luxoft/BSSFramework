@@ -11,11 +11,13 @@ using Framework.DomainDriven.Jobs;
 using Framework.Notification.DTO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.Support.Utils;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.ServiceEnvironment.Jobs;
 
 namespace SampleSystem.IntegrationTests.__Support;
 
@@ -47,7 +49,9 @@ public class InitializeAndCleanup
 
                .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
                .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
+
                .AddSingleton(new JobImpersonateData("sampleSystemTestJob"))
+               .RegisterJobs([typeof(SampleJob).Assembly])
 
                .RegisterControllers([typeof(EmployeeController).Assembly])
 

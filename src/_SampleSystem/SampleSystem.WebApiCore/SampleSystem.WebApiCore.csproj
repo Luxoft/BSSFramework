@@ -16,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />
     <ProjectReference Include="..\..\Framework.Configurator\Framework.Configurator.csproj" />
-    <ProjectReference Include="..\..\Framework.HangfireCore\Framework.HangfireCore.csproj" />
     <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
 
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.WebApi\Framework.Authorization.WebApi.csproj" />

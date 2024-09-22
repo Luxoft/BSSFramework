@@ -4,5 +4,5 @@ namespace Framework.DomainDriven.Jobs;
 
 public interface IJobMiddlewareFactory
 {
-    IScopedEvaluatorMiddleware Create<TJob>(bool withRootLogging);
+    IScopedEvaluatorMiddleware Create<TService>(bool withRootLogging);
 }

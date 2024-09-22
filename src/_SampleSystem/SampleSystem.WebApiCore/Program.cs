@@ -17,8 +17,8 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Authorization;
 
 using SampleSystem.BLL._Command.CreateClassA.Integration;
-using SampleSystem.BLL.Jobs;
 using SampleSystem.ServiceEnvironment;
+using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.WebApiCore.Services;
 
 var builder = WebApplication.CreateBuilder(args);

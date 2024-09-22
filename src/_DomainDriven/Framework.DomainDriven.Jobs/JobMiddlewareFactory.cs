@@ -13,7 +13,7 @@ public class JobMiddlewareFactory(IServiceProvider serviceProvider, IApplication
         return this.GetMiddlewares<TJob>(withRootLogging).Aggregate();
     }
 
-    protected virtual IEnumerable<IScopedEvaluatorMiddleware> GetMiddlewares<TJob>(bool withRootLogging)
+    protected virtual IEnumerable<IScopedEvaluatorMiddleware> GetMiddlewares<TService>(bool withRootLogging)
     {
         yield return new TryCloseSessionEvaluatorMiddleware(serviceProvider.GetRequiredService<IDBSessionManager>());
 
@@ -21,7 +21,7 @@ public class JobMiddlewareFactory(IServiceProvider serviceProvider, IApplication
 
         if (withRootLogging)
         {
-            yield return new JobLoggingMiddleware<TJob>(serviceProvider.GetRequiredService<ILogger<TJob>>());
+            yield return new JobLoggingMiddleware<TService>(serviceProvider.GetRequiredService<ILogger<TService>>());
         }
     }
 }

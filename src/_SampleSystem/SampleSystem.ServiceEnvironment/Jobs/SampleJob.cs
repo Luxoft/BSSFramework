@@ -3,12 +3,15 @@ using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.UserSource;
 
+using Hangfire;
+
 using Microsoft.Extensions.Logging;
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.BLL.Jobs;
+namespace SampleSystem.ServiceEnvironment.Jobs;
 
+[DisableConcurrentExecution(timeoutInSeconds: 1000)]
 public class SampleJob([DisabledSecurity] IRepository<TestJobObject> testRepository, ILogger<SampleJob> logger, ICurrentUser currentUser) : IJob
 {
     public async Task ExecuteAsync(CancellationToken cancellationToken)

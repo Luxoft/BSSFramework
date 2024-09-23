@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.DependencyInjection;
-using Framework.Persistent;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.SecurityAccessor;
@@ -32,7 +31,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         Guid ident,
         string? name,
         Func<TSecurityContext, string>? displayFunc)
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+        where TSecurityContext : ISecurityContext
     {
         return this.AddSecurityContext(b => b.Add(ident, name, displayFunc));
     }

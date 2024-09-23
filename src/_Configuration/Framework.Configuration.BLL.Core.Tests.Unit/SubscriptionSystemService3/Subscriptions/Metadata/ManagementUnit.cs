@@ -4,4 +4,5 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 
 internal sealed class ManagementUnit : ISecurityContext
 {
+    public Guid Id => throw new NotImplementedException();
 }

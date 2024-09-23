@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Persistent;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.SecurityAccessor;
@@ -16,7 +15,7 @@ public interface ISecuritySystemSettings
         Guid ident,
         string? name = null,
         Func<TSecurityContext, string>? displayFunc = null)
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>;
+        where TSecurityContext : ISecurityContext;
 
     ISecuritySystemSettings AddDomainSecurityServices(Action<IDomainSecurityServiceRootBuilder> setup);
 

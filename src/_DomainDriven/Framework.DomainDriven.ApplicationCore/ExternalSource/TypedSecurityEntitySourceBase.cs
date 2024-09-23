@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven.Repository;
-using Framework.Persistent;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ApplicationCore.ExternalSource;
@@ -8,7 +7,7 @@ public abstract class TypedSecurityEntitySourceBase<TSecurityContext>(
     [DisabledSecurity] IRepository<TSecurityContext> securityContextRepository,
     LocalStorage<TSecurityContext> localStorage)
     : ITypedSecurityEntitySource
-    where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext
+    where TSecurityContext : class, ISecurityContext
 {
     protected abstract SecurityEntity CreateSecurityEntity(TSecurityContext securityContext);
 

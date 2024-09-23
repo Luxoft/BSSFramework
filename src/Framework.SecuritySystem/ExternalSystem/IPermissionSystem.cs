@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.Persistent;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
 namespace Framework.SecuritySystem.ExternalSystem;
@@ -20,15 +19,15 @@ public interface IPermissionSystem
 public interface IPermissionSystem<TPermission> : IPermissionSystem
 {
     Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>;
+        where TSecurityContext : ISecurityContext;
 
     Expression<Func<TPermission, bool>> GetGrandAccessExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
+        where TSecurityContext : ISecurityContext =>
 
         this.GetPermissionRestrictionsExpr<TSecurityContext>().Select(v => !v.Any());
 
     Expression<Func<TPermission, bool>> GetContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
+        where TSecurityContext : ISecurityContext =>
         this.GetPermissionRestrictionsExpr<TSecurityContext>().Select(restrictionIdents => restrictionIdents.Any(restrictionIdent => idents.Contains(restrictionIdent)));
 
     new IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule);

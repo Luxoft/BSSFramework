@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 
 using Framework.Core;
-using Framework.Persistent;
 
 namespace Framework.SecuritySystem.Builders._Factory;
 
@@ -31,15 +30,9 @@ public abstract class FilterBuilderFactoryBase<TDomainObject, TBuilder>
         }
         else if (securityPathType.BaseType.Maybe(baseType => baseType.IsGenericTypeImplementation(typeof(SecurityPath<>))))
         {
-            var genericMethod = typeof(FilterBuilderFactoryBase<TDomainObject, TBuilder>).GetMethod(
-                nameof(this.CreateSecurityContextBuilder),
-                BindingFlags.Instance | BindingFlags.NonPublic)!;
-
-            var args = securityPathType.GetGenericArguments().Skip(1).ToArray();
-
-            var method = genericMethod.GetGenericMethodDefinition().MakeGenericMethod(args);
-
-            return method.Invoke<TBuilder>(this, [baseSecurityPath]);
+            return new Func<SecurityPath<TDomainObject>, TBuilder>(this.CreateSecurityContextBuilder<ISecurityContext>)
+                   .CreateGenericMethod(securityPathType.GetGenericArguments().Skip(1).ToArray())
+                   .Invoke<TBuilder>(this, baseSecurityPath);
         }
         else
         {
@@ -51,10 +44,10 @@ public abstract class FilterBuilderFactoryBase<TDomainObject, TBuilder>
 
     protected abstract TBuilder CreateBuilder<TSecurityContext>(
         SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath)
-        where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext;
+        where TSecurityContext : class, ISecurityContext;
 
     protected abstract TBuilder CreateBuilder<TSecurityContext>(SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath)
-        where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext;
+        where TSecurityContext : class, ISecurityContext;
 
     protected abstract TBuilder CreateBuilder(SecurityPath<TDomainObject>.OrSecurityPath securityPath);
 
@@ -64,7 +57,7 @@ public abstract class FilterBuilderFactoryBase<TDomainObject, TBuilder>
         SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath);
 
     private TBuilder CreateSecurityContextBuilder<TSecurityContext>(SecurityPath<TDomainObject> securityPath)
-        where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext =>
+        where TSecurityContext : class, ISecurityContext =>
         securityPath switch
         {
             SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> singleSecurityPath => this.CreateBuilder(singleSecurityPath),

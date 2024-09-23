@@ -2,7 +2,6 @@
 
 using Framework.Core;
 using Framework.HierarchicalExpand;
-using Framework.Persistent;
 using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Builders.QueryBuilder;
@@ -12,7 +11,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath)
     : SecurityFilterBuilder<TPermission, TDomainObject>
-    where TSecurityContext : class, ISecurityContext, IIdentityObject<Guid>
+    where TSecurityContext : class, ISecurityContext
 {
     public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
             HierarchicalExpandType expandType)

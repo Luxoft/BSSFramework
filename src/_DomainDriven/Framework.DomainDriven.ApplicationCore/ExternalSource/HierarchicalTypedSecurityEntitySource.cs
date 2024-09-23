@@ -11,7 +11,7 @@ public class HierarchicalTypedSecurityEntitySource<TSecurityContext>(
     LocalStorage<TSecurityContext> localStorage,
     ISecurityContextDisplayService<TSecurityContext> displayService)
     : TypedSecurityEntitySourceBase<TSecurityContext>(securityContextRepository, localStorage)
-    where TSecurityContext : class, IIdentityObject<Guid>, IParentSource<TSecurityContext>, ISecurityContext
+    where TSecurityContext : class, ISecurityContext, IParentSource<TSecurityContext>
 {
     protected override SecurityEntity CreateSecurityEntity(TSecurityContext securityContext) =>
 

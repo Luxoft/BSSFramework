@@ -1,10 +1,9 @@
-﻿using Framework.Persistent;
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ApplicationCore.ExternalSource;
 
 public class LocalStorage<TSecurityContext>
-    where TSecurityContext : IIdentityObject<Guid>, ISecurityContext
+    where TSecurityContext : ISecurityContext
 {
     private readonly HashSet<TSecurityContext> items = new();
 

@@ -1,14 +1,13 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.Persistent;
 
 namespace Framework.SecuritySystem.Builders.MaterializedBuilder;
 
 public class ManyContextFilterBuilder<TDomainObject, TSecurityContext>(
     SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath)
     : ByIdentsFilterBuilder<TDomainObject, TSecurityContext>
-    where TSecurityContext : class, ISecurityContext, IIdentityObject<Guid>
+    where TSecurityContext : class, ISecurityContext
 {
     protected override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(IEnumerable<Guid> securityIdents)
     {

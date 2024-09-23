@@ -2,7 +2,6 @@
 using System.Reflection;
 
 using Framework.Core;
-using Framework.Persistent;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.VirtualPermission;
@@ -89,7 +88,7 @@ public record VirtualPermissionBindingInfo<TPrincipal, TPermission>(
             .Invoke<Expression<Func<TPermission, IEnumerable<Guid>>>>(this);
 
     public Expression<Func<TPermission, IEnumerable<Guid>>> GetRestrictionsExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+        where TSecurityContext : ISecurityContext
     {
         var expressions = this.GetManyRestrictionsExpr<TSecurityContext>();
 
@@ -103,7 +102,7 @@ public record VirtualPermissionBindingInfo<TPrincipal, TPermission>(
     }
 
     private IEnumerable<Expression<Func<TPermission, IEnumerable<Guid>>>> GetManyRestrictionsExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+        where TSecurityContext : ISecurityContext
     {
         foreach (var restrictionPath in this.RestrictionPaths)
         {

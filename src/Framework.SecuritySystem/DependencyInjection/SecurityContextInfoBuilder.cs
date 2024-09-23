@@ -1,6 +1,4 @@
-﻿using Framework.Persistent;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection;
 
@@ -12,7 +10,7 @@ public class SecurityContextInfoBuilder : ISecurityContextInfoBuilder
         Guid id,
         string? customName = null,
         Func<TSecurityContext, string>? customDisplayFunc = null)
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+        where TSecurityContext : ISecurityContext
     {
         this.registerActions.Add(
             services =>

@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
-using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
@@ -21,7 +20,7 @@ public class AuthorizationPermissionSystem(
     public IPrincipalService PrincipalService { get; } = ActivatorUtilities.CreateInstance<AuthorizationPrincipalService>(serviceProvider);
 
     public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+        where TSecurityContext : ISecurityContext
     {
         var securityContextTypeId = securityContextSource.GetSecurityContextInfo<TSecurityContext>().Id;
 

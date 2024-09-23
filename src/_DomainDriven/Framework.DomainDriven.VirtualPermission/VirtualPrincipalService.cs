@@ -112,7 +112,7 @@ public class VirtualPrincipalService<TPrincipal, TPermission>(
     }
 
     private IEnumerable<Guid> GetRestrictions<TSecurityContext>(TPermission permission)
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+        where TSecurityContext : ISecurityContext
     {
         foreach (var restrictionPath in bindingInfo.RestrictionPaths)
         {

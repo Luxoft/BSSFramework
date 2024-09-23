@@ -114,7 +114,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
     private IQueryable<PermissionLevelInfo> ApplyNotificationFilterTypedHierarchical<TSecurityContext>(
         IQueryable<PermissionLevelInfo> source,
         NotificationFilterGroup notificationFilterGroup)
-        where TSecurityContext : IIdentityObject<Guid>, ISecurityContext, IHierarchicalLevelObject
+        where TSecurityContext : ISecurityContext, IHierarchicalLevelObject
     {
         var expandedSecIdents = notificationFilterGroup.ExpandType.IsHierarchical()
                                     ? this.hierarchicalObjectExpanderFactory.Create(notificationFilterGroup.SecurityContextType).Expand(
@@ -160,7 +160,7 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
     private IQueryable<PermissionLevelInfo> ApplyNotificationFilterTypedPlain<TSecurityContext>(
         IQueryable<PermissionLevelInfo> source,
         NotificationFilterGroup notificationFilterGroup)
-        where TSecurityContext : IIdentityObject<Guid>, ISecurityContext
+        where TSecurityContext : ISecurityContext
     {
         var expandedSecIdents = notificationFilterGroup.Idents;
 

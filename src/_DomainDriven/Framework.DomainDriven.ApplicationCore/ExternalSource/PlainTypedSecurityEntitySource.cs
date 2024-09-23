@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven.Repository;
-using Framework.Persistent;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ApplicationCore.ExternalSource;
@@ -9,7 +8,7 @@ public class PlainTypedSecurityEntitySource<TSecurityContext>(
     LocalStorage<TSecurityContext> localStorage,
     ISecurityContextDisplayService<TSecurityContext> displayService)
     : TypedSecurityEntitySourceBase<TSecurityContext>(securityContextRepository, localStorage)
-    where TSecurityContext : class, IIdentityObject<Guid>, ISecurityContext
+    where TSecurityContext : class, ISecurityContext
 {
     protected override SecurityEntity CreateSecurityEntity(TSecurityContext securityContext) =>
 

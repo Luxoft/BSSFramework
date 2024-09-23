@@ -32,15 +32,15 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
     public IPrincipalService PrincipalService { get; } = new VirtualPrincipalService<TPrincipal, TPermission>(queryableSource, bindingInfo);
 
     public Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
+        where TSecurityContext : ISecurityContext =>
         bindingInfo.GetRestrictionsExpr<TSecurityContext>();
 
     public Expression<Func<TPermission, bool>> GetGrandAccessExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
+        where TSecurityContext : ISecurityContext =>
         this.GetManyGrandAccessExpr<TSecurityContext>().BuildOr();
 
     public Expression<Func<TPermission, bool>> GetContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid> =>
+        where TSecurityContext : ISecurityContext =>
         this.GetManyContainsIdentsExpr<TSecurityContext>(idents).BuildOr();
 
     public IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
@@ -67,7 +67,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
             : [];
 
     private IEnumerable<Expression<Func<TPermission, bool>>> GetManyGrandAccessExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+        where TSecurityContext : ISecurityContext
     {
         foreach (var restrictionPath in bindingInfo.RestrictionPaths)
         {
@@ -84,7 +84,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
     }
 
     private IEnumerable<Expression<Func<TPermission, bool>>> GetManyContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
-        where TSecurityContext : ISecurityContext, IIdentityObject<Guid>
+        where TSecurityContext : ISecurityContext
     {
         foreach (var restrictionPath in bindingInfo.RestrictionPaths)
         {

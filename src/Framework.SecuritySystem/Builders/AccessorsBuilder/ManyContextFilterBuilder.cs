@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 using Framework.HierarchicalExpand;
-using Framework.Persistent;
 using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
@@ -10,7 +9,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath)
     : ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(permissionSystem, hierarchicalObjectExpanderFactory)
-    where TSecurityContext : class, ISecurityContext, IIdentityObject<Guid>
+    where TSecurityContext : class, ISecurityContext
 {
     protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject) =>
         securityPath.SecurityPath.Eval(domainObject, LambdaCompileCache).EmptyIfNull();

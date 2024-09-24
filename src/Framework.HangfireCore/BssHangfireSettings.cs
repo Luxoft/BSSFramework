@@ -44,7 +44,7 @@ public class BssHangfireSettings : IBssHangfireSettings
 
     public BssHangfireSettings()
     {
-        this.SetConnectionStringName("DefaultConnectionString");
+        this.SetConnectionStringName("DefaultConnection");
     }
 
     public IBssHangfireSettings SetJobNameExtractPolicy(IJobNameExtractPolicy policy)
@@ -61,16 +61,16 @@ public class BssHangfireSettings : IBssHangfireSettings
         return this;
     }
 
-    public IBssHangfireSettings SetConnectionString(string newConnectionString)
+    public IBssHangfireSettings SetConnectionString(string connectionString)
     {
-        this.getConnectionStringFunc = _ => newConnectionString;
+        this.getConnectionStringFunc = _ => connectionString;
 
         return this;
     }
 
-    public IBssHangfireSettings SetConnectionStringName(string newConnectionStringName)
+    public IBssHangfireSettings SetConnectionStringName(string connectionStringName)
     {
-        this.getConnectionStringFunc = configuration => configuration.GetConnectionString("DefaultConnection")!;
+        this.getConnectionStringFunc = configuration => configuration.GetConnectionString(connectionStringName)!;
 
         return this;
     }
@@ -126,14 +126,19 @@ public class BssHangfireSettings : IBssHangfireSettings
 
     public void Initialize(IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSingleton(this);
+
+        if (!this.Enabled)
+        {
+            return;
+        }
+
         if (this.RunAs != null)
         {
             services.AddSingleton(new JobImpersonateData(this.RunAs));
         }
 
         this.registerActions.ForEach(a => a(services));
-
-        services.AddSingleton(this);
 
         services.AddHangfire(
             z =>

@@ -120,6 +120,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
                                             sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUser>>();
 
+                                            sc.AddScoped<IRunAsValidator, UserSourceRunAsValidator<TUser>>();
+
                                             if (runAsPath != null)
                                             {
                                                 sc.AddSingleton(new UserSourceRunAsAccessorData<TUser>(runAsPath));

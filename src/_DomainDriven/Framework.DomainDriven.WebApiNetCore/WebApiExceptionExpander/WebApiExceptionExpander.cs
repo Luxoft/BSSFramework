@@ -2,6 +2,7 @@
 using Framework.DomainDriven.DALExceptions;
 using Framework.Exceptions;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.UserSource;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
@@ -39,6 +40,7 @@ public class WebApiExceptionExpander(IExceptionExpander exceptionExpander) : IWe
                                          typeof(DALException),
                                          typeof(StaleDomainObjectStateException),
                                          typeof(AccessDeniedException),
+                                         typeof(UserSourceException),
                                          typeof(FluentValidation.ValidationException)
 
                                  };

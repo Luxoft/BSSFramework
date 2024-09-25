@@ -13,15 +13,13 @@ public class UserSourceRunAsManager<TUser>(
     UserPathInfo<TUser> userPathInfo,
     [DisabledSecurity] IPersistStorage<TUser> persistStorage) : RunAsManager(userAuthenticationService, securitySystemFactory)
 {
-    private readonly TUser currentUser = userSource.TryGetByName(userAuthenticationService.GetUserName())!;
+    private readonly TUser currentUser = userSource.GetByName(userAuthenticationService.GetUserName());
 
     public override string? RunAsName => accessor.GetRunAs(this.currentUser).Maybe(v => userPathInfo.NamePath.Eval(v));
 
     protected override async Task PersistRunAs(string? principalName, CancellationToken cancellationToken)
     {
-        var runAsValue = principalName == null
-                             ? default
-                             : userSource.TryGetByName(principalName) ?? throw new Exception($"User \"{principalName}\" not found");
+        var runAsValue = principalName == null ? default : userSource.GetByName(principalName);
 
         accessor.SetRunAs(this.currentUser, runAsValue);
 

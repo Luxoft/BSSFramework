@@ -73,8 +73,6 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
 
     private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(Dictionary<Type, List<Guid>> permission, HierarchicalExpandType expandType)
     {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
-
         return permission.ToDictionary(
             pair => pair.Key,
             pair => hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));

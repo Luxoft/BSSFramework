@@ -25,7 +25,9 @@ public class SingleContextFilterBuilder<TDomainObject, TSecurityContext>(
 
                        select securityIdents.Contains(securityObject.Id);
 
-            default: throw new ArgumentOutOfRangeException(securityPath.Mode.ToString());
+            default:
+
+                throw new ArgumentOutOfRangeException(securityPath.Mode.ToString());
         }
     }
 }

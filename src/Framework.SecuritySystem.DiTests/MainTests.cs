@@ -148,8 +148,6 @@ public partial class MainTests
 
                .AddNotImplemented<IUserAuthenticationService>()
 
-               .AddSingleton(new SecurityPathRestrictionServiceSettings { ValidateSecurityPath = true })
-
                .AddScoped<BusinessUnitAncestorLinkSourceExecuteCounter>()
                .AddSingleton(new ExamplePermissionSystemData(this.permissions))
 

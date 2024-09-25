@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem;
 
-public class SecurityPathRestrictionService(IServiceProvider serviceProvider, SecurityPathRestrictionServiceSettings? settings = null)
+public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
     : ISecurityPathRestrictionService
 {
     public SecurityPath<TDomainObject> ApplyRestriction<TDomainObject>(
@@ -32,16 +32,6 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider, Se
         }
         else
         {
-            if (settings?.ValidateSecurityPath == true)
-            {
-                var invalidTypes = restriction.SecurityContextTypes.Except(securityPath.GetUsedTypes()).ToList();
-
-                if (invalidTypes.Any())
-                {
-                    throw new Exception($"Can't apply restriction. Invalid types: {invalidTypes.Join(", ", t => t.Name)}");
-                }
-            }
-
             return this.Visit(securityPath, [.. restriction.SecurityContextTypes]);
         }
     }

@@ -34,7 +34,7 @@ public partial class MainTests
     }
 
     [Fact]
-    public void TryApplyInvalidRestriction_ExceptionRaised()
+    public void TryApplyOverflowRestriction_ResultPathIsEmpty()
     {
         //Arrange
         var service = this.rootServiceProvider.GetRequiredService<ISecurityPathRestrictionService>();
@@ -44,11 +44,9 @@ public partial class MainTests
         var restriction = SecurityPathRestriction.Create<Location>();
 
         //Act
-        var getResult = () => service.ApplyRestriction(baseSecurityPath, restriction);
+        var result = service.ApplyRestriction(baseSecurityPath, restriction);
 
         //Assert
-        getResult.Should()
-                 .Throw<Exception>()
-                 .WithMessage($"Can't apply restriction. Invalid types: {nameof(Location)}");
+        result.Should().Be(SecurityPath<Employee>.Empty);
     }
 }

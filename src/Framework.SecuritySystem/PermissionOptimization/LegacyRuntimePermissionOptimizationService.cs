@@ -6,8 +6,6 @@ public class LegacyRuntimePermissionOptimizationService : IRuntimePermissionOpti
 {
     public IEnumerable<Dictionary<Type, List<Guid>>> Optimize(IEnumerable<Dictionary<Type, List<Guid>>> permissions)
     {
-        if (permissions == null) throw new ArgumentNullException(nameof(permissions));
-
         var cachedPermissions = permissions.ToList();
 
         var groupedPermissionsRequest = from permission in cachedPermissions

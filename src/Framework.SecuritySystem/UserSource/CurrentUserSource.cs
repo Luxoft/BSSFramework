@@ -13,10 +13,7 @@ public class CurrentUserSource<TUser> : ICurrentUserSource<TUser>
         UserPathInfo<TUser> userPathInfo,
         ICurrentUser currentUser)
     {
-        this.lazyCurrentUser = LazyHelper.Create(
-            () => userSource.TryGetByName(currentUser.Name)
-                  ?? throw new Exception(
-                      $"{typeof(TUser).Name} with {userPathInfo.NamePath.GetProperty().Name} ({currentUser.Name}) not found"));
+        this.lazyCurrentUser = LazyHelper.Create(() => userSource.GetByName(currentUser.Name));
 
         this.lazyCurrentUserId = LazyHelper.Create(() => userPathInfo.IdPath.Eval(this.CurrentUser));
     }

@@ -3,8 +3,7 @@ using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem.UserSource;
 
-public class UserSource<TUser>(IQueryableSource queryableSource,
-                                           UserPathInfo<TUser> userPathInfo) : IUserSource<TUser>
+public class UserSource<TUser>(IQueryableSource queryableSource, UserPathInfo<TUser> userPathInfo) : IUserSource<TUser>
 {
     public TUser? TryGetByName(string name)
     {

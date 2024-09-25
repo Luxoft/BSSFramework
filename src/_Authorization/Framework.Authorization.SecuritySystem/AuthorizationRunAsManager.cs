@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Core;
 using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
@@ -12,7 +13,8 @@ public class AuthorizationRunAsManager(
     IUserAuthenticationService userAuthenticationService,
     ISecuritySystemFactory securitySystemFactory,
     ICurrentPrincipalSource currentPrincipalSource,
-    [DisabledSecurity] IRepository<Principal> principalRepository)
+    [DisabledSecurity] IRepository<Principal> principalRepository,
+    IEnumerable<IRunAsValidator> validators)
     : RunAsManager(userAuthenticationService, securitySystemFactory)
 {
     private Principal CurrentPrincipal => currentPrincipalSource.CurrentPrincipal;
@@ -21,6 +23,11 @@ public class AuthorizationRunAsManager(
 
     protected override async Task PersistRunAs(string? principalName, CancellationToken cancellationToken)
     {
+        if (principalName != null)
+        {
+            validators.Foreach(validator => validator.Validate(principalName));
+        }
+
         this.CurrentPrincipal.RunAs =
             principalName == null
                 ? null

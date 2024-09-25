@@ -1,5 +1,4 @@
 ﻿using Automation.Utils;
-
 using FluentAssertions;
 
 using Framework.DomainDriven;
@@ -24,7 +23,10 @@ public class CurrentUserSourceTests : TestBase
         var employeeId = this.DataHelper.SaveEmployee(login: randomName).Id;
 
         // Act
-        var result = this.Evaluate(DBSessionMode.Read, randomName, ctx => ctx.ServiceProvider.GetRequiredService<ICurrentUserSource>().CurrentUserId);
+        var result = this.Evaluate(
+            DBSessionMode.Read,
+            randomName,
+            ctx => ctx.ServiceProvider.GetRequiredService<ICurrentUserSource>().CurrentUserId);
 
         // Assert
         employeeId.Should().Be(result);
@@ -37,11 +39,12 @@ public class CurrentUserSourceTests : TestBase
         var randomName = TextRandomizer.RandomString(10);
 
         // Act
-        var action = () => this.Evaluate(DBSessionMode.Read, randomName, ctx => ctx.ServiceProvider.GetRequiredService<ICurrentUserSource>().CurrentUserId);
+        var action = () => this.Evaluate(
+                         DBSessionMode.Read,
+                         randomName,
+                         ctx => ctx.ServiceProvider.GetRequiredService<ICurrentUserSource>().CurrentUserId);
 
         // Assert
-        action.Should().Throw<Exception>()
-              .And.Message.Should().Contain(
-                  $"{nameof(Employee)} with {nameof(Employee.Login)} ({randomName}) not found");
+        action.Should().Throw<Exception>().And.Message.Should().Be($"{nameof(Employee)} \"{randomName}\" not found");
     }
 }

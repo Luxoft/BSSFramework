@@ -14,7 +14,6 @@ using Framework.Authorization.SecuritySystem.Validation;
 using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.Events;
 using Framework.SecuritySystem.Services;
-using Framework.SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
 

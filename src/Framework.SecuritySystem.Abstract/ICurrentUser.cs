@@ -1,4 +1,4 @@
-﻿namespace Framework.SecuritySystem.UserSource;
+﻿namespace Framework.SecuritySystem;
 
 public interface ICurrentUser
 {

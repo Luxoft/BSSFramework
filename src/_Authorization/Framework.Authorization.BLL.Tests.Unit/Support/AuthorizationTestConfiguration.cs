@@ -7,7 +7,7 @@ using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.UnitTest.Mock;
 using Framework.DomainDriven.UnitTest.Mock.StubProxy;
 using Framework.Events;
-using Framework.SecuritySystem.UserSource;
+using Framework.SecuritySystem;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;

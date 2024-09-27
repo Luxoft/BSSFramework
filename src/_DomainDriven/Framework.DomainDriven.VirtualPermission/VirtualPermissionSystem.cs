@@ -1,14 +1,12 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.Core.Services;
 using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
-using Framework.SecuritySystem.UserSource;
 
 using NHibernate.Linq;
 
@@ -16,8 +14,7 @@ namespace Framework.DomainDriven.VirtualPermission;
 
 public class VirtualPermissionSystem<TPrincipal, TPermission>(
     ISecurityRuleExpander securityRuleExpander,
-    ICurrentUser currentUser,
-    IUserAuthenticationService userAuthenticationService,
+    IUserNameResolver userNameResolver,
     IQueryableSource queryableSource,
     TimeProvider timeProvider,
     SecurityRuleCredential securityRuleCredential,
@@ -48,8 +45,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
         if (securityRuleExpander.FullExpand(securityRule).SecurityRoles.Contains(bindingInfo.SecurityRole))
         {
             return new VirtualPermissionSource<TPrincipal, TPermission>(
-                currentUser,
-                userAuthenticationService,
+                userNameResolver,
                 queryableSource,
                 timeProvider,
                 bindingInfo,

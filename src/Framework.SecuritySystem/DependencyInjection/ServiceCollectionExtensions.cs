@@ -139,6 +139,7 @@ public static class ServiceCollectionExtensions
                        .AddScoped<ISecurityAccessorResolver, SecurityAccessorResolver>()
 
                        .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
-                       .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>();
+                       .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
+                       .AddScoped<IUserNameResolver, UserNameResolver>();
     }
 }

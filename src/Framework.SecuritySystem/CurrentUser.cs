@@ -2,7 +2,7 @@
 using Framework.Core.Services;
 using Framework.SecuritySystem.Services;
 
-namespace Framework.SecuritySystem.UserSource;
+namespace Framework.SecuritySystem;
 
 public class CurrentUser(IUserAuthenticationService userAuthenticationService, IRunAsManager? runAsManager = null) : ICurrentUser
 {

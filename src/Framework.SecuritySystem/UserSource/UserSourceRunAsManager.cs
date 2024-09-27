@@ -11,7 +11,7 @@ public class UserSourceRunAsManager<TUser>(
     IUserSource<TUser> userSource,
     IUserSourceRunAsAccessor<TUser> accessor,
     UserPathInfo<TUser> userPathInfo,
-    [DisabledSecurity] IPersistStorage<TUser> persistStorage) : RunAsManager(userAuthenticationService, securitySystemFactory)
+    IPersistStorage<TUser> persistStorage) : RunAsManager(userAuthenticationService, securitySystemFactory)
 {
     private readonly TUser currentUser = userSource.GetByName(userAuthenticationService.GetUserName());
 

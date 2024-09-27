@@ -8,7 +8,7 @@ namespace Framework.Authorization.SecuritySystem;
 public class AvailablePermissionSource(
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     TimeProvider timeProvider,
-    ICurrentPrincipalSource currentPrincipalSource,
+    IUserNameResolver userNameResolver,
     ISecurityRolesIdentsResolver securityRolesIdentsResolver,
     SecurityRuleCredential defaultSecurityRuleCredential)
     : IAvailablePermissionSource
@@ -17,7 +17,7 @@ public class AvailablePermissionSource(
     {
         return new AvailablePermissionFilter(timeProvider.GetToday())
                {
-                   PrincipalName = this.GetPrincipalName(securityRule.CustomCredential ?? defaultSecurityRuleCredential),
+                   PrincipalName = userNameResolver.Resolve(securityRule.CustomCredential ?? defaultSecurityRuleCredential),
                    SecurityRoleIdents = securityRolesIdentsResolver.Resolve(securityRule).ToList()
                };
     }
@@ -32,26 +32,5 @@ public class AvailablePermissionSource(
     public IQueryable<Permission> GetAvailablePermissionsQueryable(AvailablePermissionFilter filter)
     {
         return permissionRepository.GetQueryable().Where(filter.ToFilterExpression());
-    }
-
-    private string? GetPrincipalName(SecurityRuleCredential securityRuleCredential)
-    {
-        switch (securityRuleCredential)
-        {
-            case SecurityRuleCredential.CustomPrincipalSecurityRuleCredential customPrincipalSecurityRuleCredential:
-                return customPrincipalSecurityRuleCredential.Name;
-
-            case { } when securityRuleCredential == SecurityRuleCredential.CurrentUserWithRunAs:
-                return (currentPrincipalSource.CurrentPrincipal.RunAs ?? currentPrincipalSource.CurrentPrincipal).Name;
-
-            case { } when securityRuleCredential == SecurityRuleCredential.CurrentUserWithoutRunAs:
-                return currentPrincipalSource.CurrentPrincipal.Name;
-
-            case { } when securityRuleCredential == SecurityRuleCredential.AnyUser:
-                return null;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(securityRuleCredential));
-        }
     }
 }

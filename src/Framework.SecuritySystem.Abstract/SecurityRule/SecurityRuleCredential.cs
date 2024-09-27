@@ -8,5 +8,8 @@ public record SecurityRuleCredential(string Name)
 
     public static SecurityRuleCredential AnyUser { get; } = new (nameof(AnyUser));
 
-    public record CustomPrincipalSecurityRuleCredential(string Name) : SecurityRuleCredential(Name);
+    public record CustomUserSecurityRuleCredential(string Name) : SecurityRuleCredential(Name)
+    {
+        public static implicit operator CustomUserSecurityRuleCredential(string name) => new(name);
+    }
 }

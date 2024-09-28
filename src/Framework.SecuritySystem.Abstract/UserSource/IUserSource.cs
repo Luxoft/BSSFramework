@@ -1,11 +1,15 @@
 ﻿namespace Framework.SecuritySystem.UserSource;
 
-public interface IUserSource<out TUser>
+public interface IUserSource<out TUser> : IUserSource
 {
     TUser? TryGetByName(string name);
 
-    TUser GetByName(string name)
-    {
-        return this.TryGetByName(name) ?? throw new UserSourceException($"{typeof(TUser).Name} \"{name}\" not found");
-    }
+    TUser GetByName(string name);
+}
+
+public interface IUserSource
+{
+    Guid? TryGetId(string name);
+
+    Guid GetId(string name);
 }

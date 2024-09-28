@@ -1,12 +1,31 @@
 ﻿using Framework.Core;
 using Framework.Core.Services;
 using Framework.SecuritySystem.Services;
+using Framework.SecuritySystem.UserSource;
 
 namespace Framework.SecuritySystem;
 
-public class CurrentUser(IUserAuthenticationService userAuthenticationService, IRunAsManager? runAsManager = null) : ICurrentUser
+public class CurrentUser : ICurrentUser
 {
-    private readonly Lazy<string> lazyName = LazyHelper.Create(userAuthenticationService.GetUserName);
+    private readonly IRunAsManager? runAsManager;
 
-    public string Name => runAsManager?.RunAsName ?? this.lazyName.Value;
+    private readonly Lazy<string> lazyName;
+
+    private readonly Lazy<Guid> lazyId;
+
+    public CurrentUser(
+        IUserAuthenticationService userAuthenticationService,
+        IRunAsManager? runAsManager = null,
+        IUserSource? userSource = null)
+    {
+        this.runAsManager = runAsManager;
+        this.lazyName = LazyHelper.Create(userAuthenticationService.GetUserName);
+
+        this.lazyId = LazyHelper.Create(
+            () => (userSource ?? throw new UserSourceException($"{nameof(UserSource)} not defined")).GetId(this.Name));
+    }
+
+    public Guid Id => this.lazyId.Value;
+
+    public string Name => this.runAsManager?.RunAsName ?? this.lazyName.Value;
 }

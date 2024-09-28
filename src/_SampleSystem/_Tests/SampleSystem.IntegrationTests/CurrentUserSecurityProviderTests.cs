@@ -27,7 +27,7 @@ public class CurrentUserSecurityProviderTests : TestBase
             {
                 var bll = ctx.Logics.Default.Create<TestRelativeEmployeeObject>();
 
-                var currentEmployee = ctx.ServiceProvider.GetRequiredService<ICurrentUserSource<Employee>>().CurrentUser;
+                var currentEmployee = ctx.ServiceProvider.GetRequiredService<IUserSource<Employee>>().CurrentUser;
 
                 var testObj1 = new TestRelativeEmployeeObject { EmployeeRef1 = currentEmployee };
                 var testObj2 = new TestRelativeEmployeeObject { EmployeeRef2 = currentEmployee };

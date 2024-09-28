@@ -3,27 +3,39 @@ using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem.UserSource;
 
-public class UserSource<TUser>(IQueryableSource queryableSource, UserPathInfo<TUser> userPathInfo) : IUserSource<TUser>
+public class UserSource<TUser> : IUserSource<TUser>
 {
-    public TUser? TryGetByName(string name) => this.GetQueryable(name).SingleOrDefault();
+    private readonly IQueryableSource queryableSource;
 
-    public TUser GetByName(string name)
+    private readonly UserPathInfo<TUser> userPathInfo;
+
+    private readonly Lazy<TUser> lazyCurrentUser;
+
+    public UserSource (ICurrentUser currentUser, IQueryableSource queryableSource, UserPathInfo<TUser> userPathInfo)
     {
-        return this.TryGetByName(name) ?? throw this.GetNotFoundException(name);
+        this.queryableSource = queryableSource;
+        this.userPathInfo = userPathInfo;
+
+        this.lazyCurrentUser = LazyHelper.Create(() => this.GetByName(currentUser.Name));
     }
 
-    public Guid? TryGetId(string name) =>
-        this.GetQueryable(name)
-            .Select(userPathInfo.IdPath)
-            .Select(v => (Guid?)v).SingleOrDefault();
+    public TUser CurrentUser => this.lazyCurrentUser.Value;
+
+    public TUser? TryGetByName(string name) => this.GetQueryable(name).SingleOrDefault();
+
+    public TUser GetByName(string name) => this.TryGetByName(name) ?? throw this.GetNotFoundException(name);
+
+    public Guid? TryGetId(string name) => this.GetQueryable(name).Select(this.userPathInfo.IdPath).Select(v => (Guid?)v).SingleOrDefault();
 
     public Guid GetId(string name) =>
 
         this.TryGetId(name) ?? throw this.GetNotFoundException(name);
 
-    private IQueryable<TUser> GetQueryable(string name) => queryableSource.GetQueryable<TUser>()
-                                                                          .Where(userPathInfo.Filter)
-                                                                          .Where(userPathInfo.NamePath.Select(objName => objName == name));
+    private IQueryable<TUser> GetQueryable(string name) =>
+        this.queryableSource
+            .GetQueryable<TUser>()
+            .Where(this.userPathInfo.Filter)
+            .Where(this.userPathInfo.NamePath.Select(objName => objName == name));
 
     private Exception GetNotFoundException(string name) => new UserSourceException($"{typeof(TUser).Name} \"{name}\" not found");
 }

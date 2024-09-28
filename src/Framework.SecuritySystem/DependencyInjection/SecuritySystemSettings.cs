@@ -116,8 +116,6 @@ public class SecuritySystemSettings : ISecuritySystemSettings
                                             sc.AddScoped<IUserSource<TUser>, UserSource<TUser>>();
                                             sc.AddScopedFrom<IUserSource, IUserSource<TUser>>();
 
-                                            sc.AddScoped<ICurrentUserSource<TUser>, CurrentUserSource<TUser>>();
-
                                             sc.AddScoped<IRunAsValidator, UserSourceRunAsValidator<TUser>>();
 
                                             if (runAsPath != null)

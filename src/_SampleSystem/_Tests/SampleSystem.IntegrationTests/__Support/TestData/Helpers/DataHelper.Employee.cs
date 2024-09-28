@@ -266,7 +266,7 @@ public partial class DataHelper
     {
         return this.EvaluateRead(
             context =>
-                context.ServiceProvider.GetRequiredService<ICurrentUserSource<Employee>>().CurrentUser
+                context.ServiceProvider.GetRequiredService<IUserSource<Employee>>().CurrentUser
                        .ToSimpleDTO(context.ServiceProvider.GetRequiredService<ISampleSystemDTOMappingService>()));
     }
 

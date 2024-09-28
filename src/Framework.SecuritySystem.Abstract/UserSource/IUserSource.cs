@@ -2,7 +2,9 @@
 
 public interface IUserSource<out TUser>
 {
-    TUser? TryGetByName(string name);
+    IQueryable<TUser> GetQueryable(string name);
+
+    TUser? TryGetByName(string name) => this.GetQueryable(name).SingleOrDefault();
 
     TUser GetByName(string name)
     {

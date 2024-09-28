@@ -2,9 +2,7 @@
 using FluentAssertions;
 
 using Framework.DomainDriven;
-using Framework.SecuritySystem.UserSource;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
@@ -26,7 +24,7 @@ public class CurrentUserSourceTests : TestBase
         var result = this.Evaluate(
             DBSessionMode.Read,
             randomName,
-            ctx => ctx.ServiceProvider.GetRequiredService<ICurrentUserSource>().CurrentUserId);
+            ctx => ctx.Authorization.CurrentUser.Id);
 
         // Assert
         employeeId.Should().Be(result);
@@ -42,7 +40,7 @@ public class CurrentUserSourceTests : TestBase
         var action = () => this.Evaluate(
                          DBSessionMode.Read,
                          randomName,
-                         ctx => ctx.ServiceProvider.GetRequiredService<ICurrentUserSource>().CurrentUserId);
+                         ctx => ctx.Authorization.CurrentUser.Id);
 
         // Assert
         action.Should().Throw<Exception>().And.Message.Should().Be($"{nameof(Employee)} \"{randomName}\" not found");

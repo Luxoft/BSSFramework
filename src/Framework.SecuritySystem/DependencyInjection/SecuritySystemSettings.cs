@@ -116,7 +116,6 @@ public class SecuritySystemSettings : ISecuritySystemSettings
                                             sc.AddScoped<IUserSource<TUser>, UserSource<TUser>>();
 
                                             sc.AddScoped<ICurrentUserSource<TUser>, CurrentUserSource<TUser>>();
-                                            sc.AddScopedFrom<ICurrentUserSource, ICurrentUserSource<TUser>>();
 
                                             sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUser>>();
 

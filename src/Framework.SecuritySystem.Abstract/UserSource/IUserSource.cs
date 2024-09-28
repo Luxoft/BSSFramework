@@ -2,8 +2,6 @@
 
 public interface IUserSource<out TUser> : IUserSource
 {
-    TUser CurrentUser { get; }
-
     TUser? TryGetByName(string name);
 
     TUser GetByName(string name);

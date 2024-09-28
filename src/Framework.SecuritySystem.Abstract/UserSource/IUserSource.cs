@@ -2,14 +2,9 @@
 
 public interface IUserSource<out TUser> : IUserSource
 {
-    IQueryable<TUser> GetQueryable(string name);
+    TUser? TryGetByName(string name);
 
-    TUser? TryGetByName(string name) => this.GetQueryable(name).SingleOrDefault();
-
-    TUser GetByName(string name)
-    {
-        return this.TryGetByName(name) ?? throw new UserSourceException($"{typeof(TUser).Name} \"{name}\" not found");
-    }
+    TUser GetByName(string name);
 }
 
 public interface IUserSource

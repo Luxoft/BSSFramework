@@ -6,11 +6,9 @@ using Framework.DomainDriven.ApplicationCore.ExternalSource;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
 
-public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>
+public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>, IPrincipalUniquePermissionValidator
 {
     private readonly ISecurityEntitySource securityEntitySource;
-
-    public const string Key = "UniquePermission";
 
     public PrincipalUniquePermissionValidator(ISecurityEntitySource securityEntitySource)
     {

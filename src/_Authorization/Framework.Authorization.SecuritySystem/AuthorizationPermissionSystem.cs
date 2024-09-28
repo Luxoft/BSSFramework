@@ -12,7 +12,7 @@ namespace Framework.Authorization.SecuritySystem;
 public class AuthorizationPermissionSystem(
     IServiceProvider serviceProvider,
     ISecurityContextSource securityContextSource,
-    SecurityRuleCredential defaultSecurityRuleCredential)
+    SecurityRuleCredential securityRuleCredential)
     : IPermissionSystem<Permission>
 {
     public Type PermissionType { get; } = typeof(Permission);
@@ -31,12 +31,12 @@ public class AuthorizationPermissionSystem(
 
     public IPermissionSource<Permission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        return ActivatorUtilities.CreateInstance<AuthorizationPermissionSource>(serviceProvider, securityRule.TryApplyCredential(defaultSecurityRuleCredential));
+        return ActivatorUtilities.CreateInstance<AuthorizationPermissionSource>(serviceProvider, securityRule.TryApplyCredential(securityRuleCredential));
     }
 
     public Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default)
     {
-        return ActivatorUtilities.CreateInstance<AuthorizationAvailableSecurityRoleSource>(serviceProvider, defaultSecurityRuleCredential)
+        return ActivatorUtilities.CreateInstance<AuthorizationAvailableSecurityRoleSource>(serviceProvider, securityRuleCredential)
                                  .GetAvailableSecurityRoles(cancellationToken);
     }
     IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)

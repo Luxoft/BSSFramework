@@ -114,10 +114,9 @@ public class SecuritySystemSettings : ISecuritySystemSettings
                                             sc.AddSingleton<IUserPathInfo>(info);
 
                                             sc.AddScoped<IUserSource<TUser>, UserSource<TUser>>();
+                                            sc.AddScopedFrom<IUserSource, IUserSource<TUser>>();
 
                                             sc.AddScoped<ICurrentUserSource<TUser>, CurrentUserSource<TUser>>();
-
-                                            sc.AddScoped<IUserIdentitySource, UserIdentitySource<TUser>>();
 
                                             sc.AddScoped<IRunAsValidator, UserSourceRunAsValidator<TUser>>();
 

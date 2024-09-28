@@ -16,14 +16,13 @@ public class CurrentUser : ICurrentUser
     public CurrentUser(
         IUserAuthenticationService userAuthenticationService,
         IRunAsManager? runAsManager = null,
-        IUserIdentitySource? userIdentitySource = null)
+        IUserSource? userSource = null)
     {
         this.runAsManager = runAsManager;
         this.lazyName = LazyHelper.Create(userAuthenticationService.GetUserName);
 
         this.lazyId = LazyHelper.Create(
-            () => (userIdentitySource ?? throw new UserSourceException($"{nameof(UserSource)} not defined"))
-                  .TryGetId(this.Name)!.Value);
+            () => (userSource ?? throw new UserSourceException($"{nameof(UserSource)} not defined")).GetId(this.Name));
     }
 
     public Guid Id => this.lazyId.Value;

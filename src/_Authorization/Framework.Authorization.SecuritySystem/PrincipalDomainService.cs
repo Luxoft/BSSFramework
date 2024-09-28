@@ -14,7 +14,7 @@ namespace Framework.Authorization.SecuritySystem;
 public class PrincipalDomainService(
     [DisabledSecurity] IRepository<Principal> principalRepository,
     IPrincipalGeneralValidator principalGeneralValidator,
-    IUserIdentitySource? userIdentitySource = null) : IPrincipalDomainService
+    IUserSource? userSource = null) : IPrincipalDomainService
 {
     public async Task<Principal> GetOrCreateAsync(string name, CancellationToken cancellationToken)
     {
@@ -24,15 +24,15 @@ public class PrincipalDomainService(
         {
             principal = new Principal { Name = name };
 
-            var principalId = userIdentitySource?.TryGetId(name);
+            var userId = userSource?.TryGetId(name);
 
-            if (principalId == null)
+            if (userId == null)
             {
                 await principalRepository.SaveAsync(principal, cancellationToken);
             }
             else
             {
-                await principalRepository.InsertAsync(principal, principalId.Value, cancellationToken);
+                await principalRepository.InsertAsync(principal, userId.Value, cancellationToken);
             }
         }
 

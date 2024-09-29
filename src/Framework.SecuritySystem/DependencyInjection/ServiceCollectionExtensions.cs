@@ -8,6 +8,7 @@ using Framework.SecuritySystem.Builders.MaterializedBuilder;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.ExternalSystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 using Framework.SecuritySystem.PermissionOptimization;
 using Framework.SecuritySystem.SecurityAccessor;
 using Framework.SecuritySystem.Services;
@@ -77,7 +78,9 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterGeneralSecuritySystem(this IServiceCollection services)
     {
-        return services.AddSingleton<SecurityModeExpander>()
+        return services.AddScoped<IPrincipalManagementService, RootPrincipalManagementService>()
+
+                       .AddSingleton<SecurityModeExpander>()
                        .AddSingleton<SecurityOperationExpander>()
                        .AddSingleton<SecurityRoleExpander>()
                        .AddSingleton<RoleFactorySecurityRuleExpander>()

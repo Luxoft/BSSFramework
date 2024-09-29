@@ -1,13 +1,9 @@
 ﻿using Framework.Core;
-using Framework.Exceptions;
 using Framework.Persistent;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.ExternalSystem;
-using Framework.SecuritySystem.ExternalSystem.Management;
 
-namespace Framework.Configurator.Services;
+namespace Framework.SecuritySystem.ExternalSystem.Management;
 
-public class ConfiguratorPrincipalManagementService(IEnumerable<IPermissionSystem> permissionSystems) : IPrincipalManagementService
+public class RootPrincipalManagementService(IEnumerable<IPermissionSystem> permissionSystems) : IPrincipalManagementService
 {
     private readonly IReadOnlyList<IPrincipalService> principalServices = permissionSystems.Select(ps => ps.PrincipalService).ToList();
 
@@ -15,8 +11,8 @@ public class ConfiguratorPrincipalManagementService(IEnumerable<IPermissionSyste
         this.principalServices
             .OfType<IPrincipalManagementService>()
             .Single(
-                () => new BusinessLogicException($"{nameof(this.PrincipalManagementService)} not found"),
-                () => new BusinessLogicException($"More one  {nameof(this.PrincipalManagementService)}"));
+                () => new Exception($"{nameof(this.PrincipalManagementService)} not found"),
+                () => new Exception($"More one  {nameof(this.PrincipalManagementService)}"));
 
     public async Task<IEnumerable<TypedPrincipalHeader>> GetPrincipalsAsync(
         string nameFilter,
@@ -49,7 +45,7 @@ public class ConfiguratorPrincipalManagementService(IEnumerable<IPermissionSyste
                           g.Key with { IsVirtual = g.All(p => p.Header.IsVirtual) },
                           g.SelectMany(p => p.Permissions).ToList());
 
-        return request.SingleOrDefault(() => throw new BusinessLogicException($"More one principal {principalId}"));
+        return request.SingleOrDefault(() => throw new Exception($"More one principal {principalId}"));
     }
 
     public async Task<IEnumerable<string>> GetLinkedPrincipalsAsync(

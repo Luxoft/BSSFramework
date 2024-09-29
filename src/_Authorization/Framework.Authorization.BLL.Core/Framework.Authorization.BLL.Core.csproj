@@ -1,17 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.BLL.Core</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ApplicationCore\Framework.DomainDriven.ApplicationCore.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
     <ProjectReference Include="..\Framework.Authorization.LegacyAttributes\Framework.Authorization.LegacyAttributes.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Notification.Abstract\Framework.Authorization.Notification.Abstract.csproj" />
-    <ProjectReference Include="..\Framework.Authorization.SecuritySystem\Framework.Authorization.SecuritySystem.csproj" />
+    <ProjectReference Include="..\Framework.Authorization.SecuritySystem.Abstract\Framework.Authorization.SecuritySystem.Abstract.csproj" />
   </ItemGroup>
+
 </Project>

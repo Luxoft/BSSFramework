@@ -12,7 +12,6 @@ using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.ExternalSystem;
-using Framework.SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,22 +30,16 @@ public static class ServiceCollectionExtensions
 
         setup?.Invoke(settings);
 
-        settings.RegisterActions.ForEach(action => action(services));
-
-        services.AddScoped<INotificationBasePermissionFilterSource, NotificationBasePermissionFilterSource>();
-        services.AddScoped(typeof(INotificationPrincipalExtractor), settings.NotificationPrincipalExtractorType);
-
-        if (settings.RegisterRunAsManager)
-        {
-            services.AddScoped<IRunAsManager, AuthorizationRunAsManager>();
-        }
+        settings.Initialize(services);
 
         return services;
     }
 
     private static IServiceCollection RegisterGeneralAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
+        return services.AddScoped<INotificationBasePermissionFilterSource, NotificationBasePermissionFilterSource>()
+
+                       .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
                        .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
 
                        .AddSingleton<InitializerSettings>()
@@ -57,8 +50,7 @@ public static class ServiceCollectionExtensions
                        .AddScoped<AuthorizationPermissionSystemFactory>()
 
                        .AddScoped<IPrincipalGeneralValidator, PrincipalGeneralValidator>()
-                       .AddKeyedScoped<IValidator<Principal>, PrincipalUniquePermissionValidator>(PrincipalUniquePermissionValidator.Key)
-                       .AddKeyedScoped<IValidator<Permission>, PermissionGeneralValidator>(PermissionGeneralValidator.Key)
+                       .AddScoped<IPermissionGeneralValidator, PermissionGeneralValidator>()
                        .AddKeyedScoped<IValidator<Permission>, PermissionDelegateValidator>(PermissionDelegateValidator.Key)
                        .AddKeyedScoped<IValidator<Permission>, PermissionRequiredContextValidator>(PermissionRequiredContextValidator.Key)
                        .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>();

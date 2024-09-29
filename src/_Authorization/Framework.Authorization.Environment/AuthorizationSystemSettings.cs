@@ -1,36 +1,44 @@
-﻿using FluentValidation;
-
-using Framework.Authorization.Domain;
-using Framework.Authorization.Notification;
+﻿using Framework.Authorization.Notification;
+using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.Validation;
+using Framework.SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.Authorization.Environment;
 
 public class AuthorizationSystemSettings : IAuthorizationSystemSettings
 {
-    public Type NotificationPrincipalExtractorType { get; private set; } = typeof(NotificationPrincipalExtractor);
+    private Type notificationPrincipalExtractorType = typeof(NotificationPrincipalExtractor);
 
-    public List<Action<IServiceCollection>> RegisterActions { get; set; } = new();
+    private Type principalUniquePermissionValidatorType = typeof(PrincipalUniquePermissionValidator);
 
     public bool RegisterRunAsManager { get; set; } = true;
 
     public IAuthorizationSystemSettings SetNotificationPrincipalExtractor<T>()
         where T : INotificationPrincipalExtractor
     {
-        this.NotificationPrincipalExtractorType = typeof(T);
+        this.notificationPrincipalExtractorType = typeof(T);
 
         return this;
     }
 
     public IAuthorizationSystemSettings SetUniquePermissionValidator<TValidator>()
-        where TValidator : class, IValidator<Principal>
+        where TValidator : class, IPrincipalUniquePermissionValidator
     {
-        this.RegisterActions.Add(
-            sc => sc.Replace(ServiceDescriptor.KeyedScoped<IValidator<Principal>, TValidator>(PrincipalUniquePermissionValidator.Key)));
+        this.principalUniquePermissionValidatorType = typeof(TValidator);
 
         return this;
+    }
+    public void Initialize(IServiceCollection services)
+    {
+        services.AddScoped(typeof(INotificationPrincipalExtractor), this.notificationPrincipalExtractorType);
+
+        services.AddScoped(typeof(IPrincipalUniquePermissionValidator), this.principalUniquePermissionValidatorType);
+
+        if (this.RegisterRunAsManager)
+        {
+            services.AddScoped<IRunAsManager, AuthorizationRunAsManager>();
+        }
     }
 }

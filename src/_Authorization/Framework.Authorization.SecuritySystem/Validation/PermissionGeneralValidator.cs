@@ -6,10 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
 
-public class PermissionGeneralValidator : AbstractValidator<Permission>
+public class PermissionGeneralValidator : AbstractValidator<Permission>, IPermissionGeneralValidator
 {
-    public const string Key = "General";
-
     public PermissionGeneralValidator(
         IValidator<PermissionRestriction> permissionRestrictionValidator,
         [FromKeyedServices(PermissionRequiredContextValidator.Key)] IValidator<Permission> permissionRequiredContextValidator,

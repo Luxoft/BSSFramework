@@ -1,7 +1,5 @@
-﻿using FluentValidation;
-
-using Framework.Authorization.Domain;
-using Framework.Authorization.Notification;
+﻿using Framework.Authorization.Notification;
+using Framework.Authorization.SecuritySystem.Validation;
 
 namespace Framework.Authorization.Environment;
 
@@ -13,5 +11,5 @@ public interface IAuthorizationSystemSettings
         where T : INotificationPrincipalExtractor;
 
     IAuthorizationSystemSettings SetUniquePermissionValidator<TValidator>()
-        where TValidator : class, IValidator<Principal>;
+        where TValidator : class, IPrincipalUniquePermissionValidator;
 }

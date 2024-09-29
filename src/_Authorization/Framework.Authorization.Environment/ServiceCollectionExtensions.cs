@@ -12,7 +12,6 @@ using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.ExternalSystem;
-using Framework.SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 

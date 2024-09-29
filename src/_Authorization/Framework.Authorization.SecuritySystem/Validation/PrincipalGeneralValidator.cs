@@ -7,7 +7,7 @@ namespace Framework.Authorization.SecuritySystem.Validation;
 public class PrincipalGeneralValidator : AbstractValidator<Principal>, IPrincipalGeneralValidator
 {
     public PrincipalGeneralValidator(
-        IValidator<Principal> uniquePermissionValidator,
+        IPrincipalUniquePermissionValidator uniquePermissionValidator,
         IPermissionGeneralValidator permissionGeneralValidator)
     {
         this.Include(uniquePermissionValidator);

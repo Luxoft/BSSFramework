@@ -1,4 +1,5 @@
 ﻿using Framework.Configurator.Interfaces;
+using Framework.Core;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;

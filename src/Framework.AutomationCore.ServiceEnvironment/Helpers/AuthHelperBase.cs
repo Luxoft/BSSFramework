@@ -8,13 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
 
-public class AuthHelperBase : RootServiceProviderContainer
+public class AuthHelperBase(IServiceProvider rootServiceProvider) : RootServiceProviderContainer(rootServiceProvider)
 {
-    public AuthHelperBase(IServiceProvider rootServiceProvider)
-        : base(rootServiceProvider)
-    {
-    }
-
     protected IServiceEvaluator<AuthManager> ManagerEvaluator => this.RootServiceProvider.GetRequiredService<IServiceEvaluator<AuthManager>>();
 
     protected IIntegrationTestUserAuthenticationService UserAuthenticationService => this.RootServiceProvider.GetRequiredService<IIntegrationTestUserAuthenticationService>();

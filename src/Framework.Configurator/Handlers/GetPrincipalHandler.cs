@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class GetPrincipalHandler(
-    IPrincipalManagementService configuratorApi,
+    IRootPrincipalSourceService principalSourceService,
     ISecurityEntitySource externalSource,
     ISecurityContextSource securityContextSource,
     ISecurityRoleSource securityRoleSource,
@@ -32,7 +32,7 @@ public class GetPrincipalHandler(
 
     private async Task<List<PermissionDetails>> GetPermissionsAsync(Guid principalId, CancellationToken cancellationToken)
     {
-        var principal = await configuratorApi.TryGetPrincipalAsync(principalId, cancellationToken)
+        var principal = await principalSourceService.TryGetPrincipalAsync(principalId, cancellationToken)
                         ?? throw new BusinessLogicException($"Principal with id {principalId} not found");
 
         return principal

@@ -39,6 +39,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddScopedFrom<TService, TSource>(this IServiceCollection services, Func<TSource, TService> selector)
         where TService : class
+        where TSource : notnull
     {
         return services.AddScoped(sp => selector(sp.GetRequiredService<TSource>()));
     }
@@ -52,6 +53,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddSingletonFrom<TService, TSource>(this IServiceCollection services, Func<TSource, TService> selector)
         where TService : class
+        where TSource : notnull
     {
         return services.AddSingleton(sp => selector(sp.GetRequiredService<TSource>()));
     }
@@ -90,9 +92,16 @@ public static class ServiceCollectionExtensions
         return services.Replace(ServiceDescriptor.Singleton<TService>(sp => sp.GetRequiredService<TServiceImplementation>()));
     }
 
-    public static IServiceCollection AddNotImplemented<TService>(this IServiceCollection services, string message = null)
+    public static IServiceCollection AddNotImplemented<TService>(this IServiceCollection services, string? message = null, bool isScoped = false)
         where TService : class
     {
-        return services.AddSingleton(typeof(TService), _ => LazyInterfaceImplementHelper.CreateNotImplemented<TService>(message));
+        if (isScoped)
+        {
+            return services.AddScoped(typeof(TService), _ => LazyInterfaceImplementHelper.CreateNotImplemented<TService>(message));
+        }
+        else
+        {
+            return services.AddSingleton(typeof(TService), _ => LazyInterfaceImplementHelper.CreateNotImplemented<TService>(message));
+        }
     }
 }

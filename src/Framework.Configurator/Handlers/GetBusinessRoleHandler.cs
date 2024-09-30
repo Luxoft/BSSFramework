@@ -12,7 +12,7 @@ public class GetBusinessRoleHandler(
     [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
     ISecurityRoleSource securityRoleSource,
     ISecurityOperationInfoSource securityOperationInfoSource,
-    IPrincipalManagementService configuratorApi)
+    IRootPrincipalSourceService principalSourceService)
     : BaseReadHandler, IGetBusinessRoleHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
@@ -35,7 +35,7 @@ public class GetBusinessRoleHandler(
                 .OrderBy(x => x.Name)
                 .ToList();
 
-        var principals = await configuratorApi.GetLinkedPrincipalsAsync([securityRole], cancellationToken);
+        var principals = await principalSourceService.GetLinkedPrincipalsAsync([securityRole], cancellationToken);
 
         return new BusinessRoleDetailsDto { Operations = operations, Principals = principals.ToList() };
     }

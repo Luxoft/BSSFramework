@@ -3,6 +3,7 @@
 using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,8 +16,13 @@ public static class SecuritySystemSettingsExtensions
         Func<IServiceProvider, VirtualPermissionBindingInfo<TPrincipal, TPermission>> getBindingInfo)
         where TPrincipal : IIdentityObject<Guid>
         where TPermission : IIdentityObject<Guid> =>
-        securitySystemSettings.AddPermissionSystem(
-            sp => ActivatorUtilities.CreateInstance<VirtualPermissionSystemFactory<TPrincipal, TPermission>>(sp, getBindingInfo(sp)));
+        securitySystemSettings
+            .AddPermissionSystem(
+                sp => ActivatorUtilities.CreateInstance<VirtualPermissionSystemFactory<TPrincipal, TPermission>>(sp, getBindingInfo(sp)))
+            .AddExtensions(
+                sc => sc
+                    .AddScoped<IPrincipalSourceService>(
+                    sp => ActivatorUtilities.CreateInstance<VirtualPrincipalSourceService<TPrincipal, TPermission>>(sp, getBindingInfo(sp))));
 
     public static ISecuritySystemSettings AddVirtualPermission<TPrincipal, TPermission>(
         this ISecuritySystemSettings securitySystemSettings,

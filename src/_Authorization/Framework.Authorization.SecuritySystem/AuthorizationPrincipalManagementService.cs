@@ -6,81 +6,17 @@ using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
-using NHibernate.Linq;
-
 namespace Framework.Authorization.SecuritySystem;
 
-public class AuthorizationPrincipalService(
+public class AuthorizationPrincipalManagementService(
     [DisabledSecurity] IRepository<Principal> principalRepository,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
     [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
     ISecurityRoleSource securityRoleSource,
     ISecurityContextSource securityContextSource,
-    IAvailablePermissionSource availablePermissionSource,
     IPrincipalDomainService principalDomainService) : IPrincipalManagementService
 {
-    public async Task<IEnumerable<TypedPrincipalHeader>> GetPrincipalsAsync(
-        string nameFilter,
-        int limit,
-        CancellationToken cancellationToken = default)
-    {
-        return await principalRepository.GetQueryable()
-                                        .Pipe(
-                                            !string.IsNullOrWhiteSpace(nameFilter),
-                                            q => q.Where(principal => principal.Name.Contains(nameFilter)))
-                                        .Select(principal => new TypedPrincipalHeader(principal.Id, principal.Name, false))
-                                        .ToListAsync(cancellationToken);
-    }
-
-    public async Task<TypedPrincipal?> TryGetPrincipalAsync(Guid principalId, CancellationToken cancellationToken = default)
-    {
-        var principal = await principalRepository.GetQueryable()
-                                                 .Where(principal => principal.Id == principalId)
-                                                 .FetchMany(principal => principal.Permissions)
-                                                 .ThenFetch(permission => permission.Restrictions)
-                                                 .SingleOrDefaultAsync(cancellationToken);
-
-        if (principal == null)
-        {
-            return null;
-        }
-        else
-        {
-            return new TypedPrincipal(
-                new TypedPrincipalHeader(principal.Id, principal.Name, false),
-                principal.Permissions
-                         .Select(
-                             permission => new TypedPermission(
-                                 permission.Id,
-                                 securityRoleSource.GetSecurityRole(permission.Role.Id),
-                                 permission.Period,
-                                 permission.Comment,
-                                 permission.Restrictions
-                                           .GroupBy(r => r.SecurityContextType.Id, r => r.SecurityContextId)
-                                           .ToDictionary(
-                                               g => securityContextSource.GetSecurityContextInfo(g.Key).Type,
-                                               g => g.ToReadOnlyListI()),
-                                 false))
-                         .ToList());
-        }
-    }
-
-    public async Task<IEnumerable<string>> GetLinkedPrincipalsAsync(
-        IEnumerable<SecurityRole> securityRoles,
-        CancellationToken cancellationToken = default)
-    {
-        return await availablePermissionSource
-                     .GetAvailablePermissionsQueryable(
-                         DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles) with
-                         {
-                             CustomCredential = SecurityRuleCredential.AnyUser
-                         })
-                     .Select(permission => permission.Principal.Name)
-                     .Distinct()
-                     .ToListAsync(cancellationToken);
-    }
-
     public async Task<IIdentityObject<Guid>> CreatePrincipalAsync(string principalName, CancellationToken cancellationToken = default)
     {
         var principal = await principalDomainService.GetOrCreateAsync(principalName, cancellationToken);
@@ -129,9 +65,9 @@ public class AuthorizationPrincipalService(
         }
 
         return new MergeResult<IIdentityObject<Guid>, IIdentityObject<Guid>>(
-            newPermissions.Select(dbPermission => dbPermission),
+            newPermissions,
             updatedPermissions.Select(pair => (IIdentityObject<Guid>)pair.Item1).Select(v => (v, v)),
-            permissionMergeResult.RemovingItems.Select(dbPermission => dbPermission));
+            permissionMergeResult.RemovingItems);
     }
 
     private async Task<IReadOnlyList<Permission>> CreatePermissionsAsync(

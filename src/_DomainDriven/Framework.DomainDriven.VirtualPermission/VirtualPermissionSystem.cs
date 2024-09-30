@@ -6,7 +6,6 @@ using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.ExternalSystem;
-using Framework.SecuritySystem.ExternalSystem.Management;
 
 using NHibernate.Linq;
 
@@ -25,9 +24,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
     where TPermission : IIdentityObject<Guid>
 {
     public Type PermissionType { get; } = typeof(TPermission);
-
-    public IPrincipalService PrincipalService { get; } = new VirtualPrincipalService<TPrincipal, TPermission>(queryableSource, bindingInfo);
-
+    
     public Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext =>
         bindingInfo.GetRestrictionsExpr<TSecurityContext>();

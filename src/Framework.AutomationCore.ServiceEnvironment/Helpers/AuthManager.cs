@@ -1,21 +1,13 @@
 ﻿using Automation.Utils;
 
-using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
 using Framework.Core.Services;
-using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 namespace Automation.ServiceEnvironment;
 
 public class AuthManager(
     IUserAuthenticationService userAuthenticationService,
-    ISecurityContextSource securityContextSource,
-    [DisabledSecurity] IRepository<Principal> principalRepository,
-    [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
-    [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
-    ISecurityRoleSource securityRoleSource,
-    IPrincipalDomainService principalDomainService)
+    IPrincipalManagementService principalManagementService)
 {
     public string GetCurrentUserLogin()
     {
@@ -24,53 +16,56 @@ public class AuthManager(
 
     public async Task<Guid> SavePrincipalAsync(string name, CancellationToken cancellationToken = default)
     {
-        var principal = await principalDomainService.GetOrCreateAsync(name, cancellationToken);
+        var principal = await principalManagementService.CreatePrincipalAsync(name, cancellationToken);
 
         return principal.Id;
     }
 
-    public async Task AddUserRoleAsync(string? principalName, TestPermission[] testPermissions, CancellationToken cancellationToken = default)
+    public async Task AddUserRoleAsync(
+        string? principalName,
+        TestPermission[] testPermissions,
+        CancellationToken cancellationToken = default)
     {
-        var principal = await principalDomainService.GetOrCreateAsync(principalName ?? this.GetCurrentUserLogin(), cancellationToken);
+        var usedPrincipalName = principalName ?? this.GetCurrentUserLogin();
 
-        foreach (var testPermission in testPermissions)
-        {
-            var securityRole = securityRoleSource.GetSecurityRole(testPermission.SecurityRole);
+        var principalId = (await principalManagementService.CreatePrincipalAsync(usedPrincipalName, cancellationToken)).Id;
 
-            if (securityRole.Information.IsVirtual)
-            {
-                throw new Exception($"Assigned {nameof(SecurityRole)} {securityRole} can't be virtual");
-            }
+        var existsPrincipal = await principalSourceService.TryGetPrincipalAsync(usedPrincipalName, cancellationToken);
 
-            var businessRole = await businessRoleRepository.LoadAsync(securityRole.Id, cancellationToken);
+        var preUpdatePrincipal = existsPrincipal
+                                 ?? new TypedPrincipal(
+                                     new TypedPrincipalHeader(
+                                         (,
+                                         usedPrincipalName,
+                                         false),
+                                     []);
 
-            var permission = new Permission(principal) { Role = businessRole, Period = testPermission.Period };
+        var newPermissions = testPermissions.Select(
+            testPermission => new TypedPermission(
+                Guid.Empty,
+                false,
+                testPermission.SecurityRole,
+                testPermission.Period,
+                "",
+                testPermission.Restrictions));
 
-            foreach (var restrictionInfo in testPermission.Restrictions)
-            {
-                var securityContextInfo = securityContextSource.GetSecurityContextInfo(restrictionInfo.Key);
+        var updatedPrincipal = preUpdatePrincipal with { Permissions = preUpdatePrincipal.Permissions.Concat(newPermissions).ToList() };
 
-                var domainSecurityContextType = await securityContextTypeRepository.LoadAsync(securityContextInfo.Id, cancellationToken);
-
-                foreach (var securityContextId in restrictionInfo.Value)
-                {
-                    new PermissionRestriction(permission) { SecurityContextType = domainSecurityContextType, SecurityContextId = securityContextId };
-                }
-            }
-        }
-
-        await principalDomainService.SaveAsync(principal, cancellationToken);
+        await principalManagementService.UpdatePermissionsAsync(
+            updatedPrincipal.Header.Id,
+            updatedPrincipal.Permissions,
+            cancellationToken);
     }
 
     public async Task RemovePermissionsAsync(string? principalName, CancellationToken cancellationToken = default)
     {
-        var currentUserName = principalName ?? this.GetCurrentUserLogin();
+        var principal = await principalSourceService.TryGetPrincipalAsync(
+                            principalName ?? this.GetCurrentUserLogin(),
+                            cancellationToken);
 
-        var principal = principalRepository.GetQueryable().SingleOrDefault(p => p.Name == currentUserName);
-
-        if (principal != null)
+        if (principal is { Header.IsVirtual: false })
         {
-            await principalDomainService.RemoveAsync(principal, true, cancellationToken);
+            await principalManagementService.RemovePrincipalAsync(principal.Header.Id, cancellationToken);
         }
     }
 }

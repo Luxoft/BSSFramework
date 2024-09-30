@@ -211,6 +211,9 @@ public class AuthorizationPrincipalService(
             return false;
         }
 
+        dbPermission.Comment = typedPermission.Comment;
+        dbPermission.Period = typedPermission.Period;
+
         foreach (var restriction in restrictionMergeResult.AddingItems)
         {
             _ = new PermissionRestriction(dbPermission)

@@ -45,11 +45,11 @@ public class CurrentUserSecurityProvider<TDomainObject>(
 public class CurrentUserSecurityProvider<TDomainObject, TUser>(
     IRelativeDomainPathInfo<TDomainObject, TUser> relativeDomainPathInfo,
     UserPathInfo<TUser> userPathInfo,
-    ICurrentUserSource<TUser> currentUserSource) : SecurityProvider<TDomainObject>
+    ICurrentUser currentUser) : SecurityProvider<TDomainObject>
     where TUser : class
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
-        relativeDomainPathInfo.Path.Select(user => currentUserSource.CurrentUser == user);
+        relativeDomainPathInfo.Path.Select(userPathInfo.IdPath).Select(userId => userId == currentUser.Id);
 
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {

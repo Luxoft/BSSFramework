@@ -8,6 +8,7 @@ using Framework.SecuritySystem.ExternalSystem;
 namespace Framework.DomainDriven.VirtualPermission;
 
 public class VirtualPermissionSource<TPrincipal, TPermission>(
+    IServiceProvider serviceProvider,
     IUserNameResolver userNameResolver,
     IQueryableSource queryableSource,
     TimeProvider timeProvider,
@@ -31,7 +32,7 @@ public class VirtualPermissionSource<TPrincipal, TPermission>(
     {
         return queryableSource
                .GetQueryable<TPermission>()
-               .Where(bindingInfo.Filter)
+               .Where(bindingInfo.GetFilter(serviceProvider))
                .PipeMaybe(bindingInfo.PeriodFilter, (q, filter) =>
                    {
                        var today = timeProvider.GetToday();

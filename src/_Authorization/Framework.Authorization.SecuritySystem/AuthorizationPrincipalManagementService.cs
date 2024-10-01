@@ -61,7 +61,7 @@ public class AuthorizationPrincipalManagementService(
     {
         var dbPrincipal = await principalRepository.LoadAsync(principalId, cancellationToken);
 
-        var permissionMergeResult = dbPrincipal.Permissions.GetMergeResult(typedPermissions, p => p.Id, p => p.Id);
+        var permissionMergeResult = dbPrincipal.Permissions.GetMergeResult(typedPermissions, p => p.Id, p => p.Id == Guid.Empty ? Guid.NewGuid() : p.Id);
 
         var newPermissions = await this.CreatePermissionsAsync(dbPrincipal, permissionMergeResult.AddingItems, cancellationToken);
 

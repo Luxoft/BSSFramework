@@ -16,13 +16,13 @@ public class VirtualPermissionSystemFactory<TPrincipal, TPermission> : IPermissi
 
     public VirtualPermissionSystemFactory(
         IServiceProvider serviceProvider,
-        ISecurityRoleSource securityRoleSource,
-        VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo)
+        VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo,
+        IVirtualPermissionBindingInfoValidator validator)
     {
         this.serviceProvider = serviceProvider;
         this.bindingInfo = bindingInfo;
 
-        this.bindingInfo.Validate(securityRoleSource);
+        validator.Validate(this.bindingInfo);
     }
 
     public IPermissionSystem Create(SecurityRuleCredential securityRuleCredential) =>

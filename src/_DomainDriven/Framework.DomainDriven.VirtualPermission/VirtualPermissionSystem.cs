@@ -12,6 +12,7 @@ using NHibernate.Linq;
 namespace Framework.DomainDriven.VirtualPermission;
 
 public class VirtualPermissionSystem<TPrincipal, TPermission>(
+    IServiceProvider serviceProvider,
     ISecurityRuleExpander securityRuleExpander,
     IUserNameResolver userNameResolver,
     IQueryableSource queryableSource,
@@ -24,7 +25,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
     where TPermission : IIdentityObject<Guid>
 {
     public Type PermissionType { get; } = typeof(TPermission);
-    
+
     public Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext =>
         bindingInfo.GetRestrictionsExpr<TSecurityContext>();
@@ -42,6 +43,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
         if (securityRuleExpander.FullExpand(securityRule).SecurityRoles.Contains(bindingInfo.SecurityRole))
         {
             return new VirtualPermissionSource<TPrincipal, TPermission>(
+                serviceProvider,
                 userNameResolver,
                 queryableSource,
                 timeProvider,

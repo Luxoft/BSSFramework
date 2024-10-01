@@ -11,16 +11,18 @@ public record VirtualPermissionBindingInfo<TPrincipal, TPermission>(
     Expression<Func<TPermission, TPrincipal>> PrincipalPath,
     Expression<Func<TPrincipal, string>> PrincipalNamePath,
     IReadOnlyList<LambdaExpression> RestrictionPaths,
-    Expression<Func<TPermission, bool>> Filter,
+    Func<IServiceProvider, Expression<Func<TPermission, bool>>> GetFilter,
     Expression<Func<TPermission, Period>>? PeriodFilter = null)
 {
     public VirtualPermissionBindingInfo(
         SecurityRole securityRole,
         Expression<Func<TPermission, TPrincipal>> principalPath,
         Expression<Func<TPrincipal, string>> principalNamePath)
-        : this(securityRole, principalPath, principalNamePath, [], _ => true)
+        : this(securityRole, principalPath, principalNamePath, [],  _ => _ => true)
     {
     }
+
+    public Guid Id { get; } = Guid.NewGuid();
 
     public VirtualPermissionBindingInfo<TPrincipal, TPermission> AddRestriction<TSecurityContext>(
         Expression<Func<TPermission, IEnumerable<TSecurityContext>>> path)
@@ -35,45 +37,16 @@ public record VirtualPermissionBindingInfo<TPrincipal, TPermission>(
         this with { RestrictionPaths = this.RestrictionPaths.Concat([path]).ToList() };
 
     public VirtualPermissionBindingInfo<TPrincipal, TPermission> AddFilter(
-        Expression<Func<TPermission, bool>> filter) =>
+        Expression<Func<TPermission, bool>> filter) => this.AddFilter(_ => filter);
 
-        this with { Filter = this.Filter.BuildAnd(filter) };
+    public VirtualPermissionBindingInfo<TPrincipal, TPermission> AddFilter(
+        Func<IServiceProvider, Expression<Func<TPermission, bool>>> getFilter) =>
+
+        this with { GetFilter = sp => this.GetFilter(sp).BuildAnd(getFilter(sp)) };
 
     public VirtualPermissionBindingInfo<TPrincipal, TPermission> SetPeriodFilter(
         Expression<Func<TPermission, Period>> periodFilter) =>
     this with { PeriodFilter = periodFilter };
-
-    public void Validate(ISecurityRoleSource securityRoleSource)
-    {
-        var securityContextRestrictions = securityRoleSource
-                                          .GetSecurityRole(this.SecurityRole)
-                                          .Information
-                                          .Restriction
-                                          .SecurityContextRestrictions;
-
-        if (securityContextRestrictions != null)
-        {
-            var bindingContextTypes = this.GetSecurityContextTypes().ToList();
-
-            var invalidTypes = bindingContextTypes.Except(securityContextRestrictions.Select(r => r.Type)).ToList();
-
-            if (invalidTypes.Any())
-            {
-                throw new Exception($"Invalid restriction types: {invalidTypes.Join(", ", t => t.Name)}");
-            }
-
-            var missedTypes = securityContextRestrictions
-                              .Where(r => r.Required)
-                              .Select(r => r.Type)
-                              .Except(bindingContextTypes)
-                              .ToList();
-
-            if (missedTypes.Any())
-            {
-                throw new Exception($"Missed required restriction types: {missedTypes.Join(", ", t => t.Name)}");
-            }
-        }
-    }
 
     public IEnumerable<Type> GetSecurityContextTypes()
     {

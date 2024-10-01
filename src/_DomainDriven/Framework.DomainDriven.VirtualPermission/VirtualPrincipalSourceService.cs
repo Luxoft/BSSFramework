@@ -12,6 +12,7 @@ using NHibernate.Linq;
 namespace Framework.DomainDriven.VirtualPermission;
 
 public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
+    IServiceProvider serviceProvider,
     IQueryableSource queryableSource,
     VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo) : IPrincipalSourceService
 
@@ -33,7 +34,7 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
 
         var anonHeaders = await queryableSource
                                 .GetQueryable<TPermission>()
-                                .Where(bindingInfo.Filter)
+                                .Where(bindingInfo.GetFilter(serviceProvider))
                                 .Select(bindingInfo.PrincipalPath)
                                 .Where(
                                     string.IsNullOrWhiteSpace(nameFilter)
@@ -69,7 +70,7 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
             var header = new TypedPrincipalHeader(principal.Id, bindingInfo.PrincipalNamePath.Eval(principal), true);
 
             var permissions = await queryableSource.GetQueryable<TPermission>()
-                                                   .Where(bindingInfo.Filter)
+                                                   .Where(bindingInfo.GetFilter(serviceProvider))
                                                    .Where(bindingInfo.PrincipalPath.Select(filter))
                                                    .ToListAsync(cancellationToken);
 
@@ -106,7 +107,7 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
         if (securityRoles.Contains(bindingInfo.SecurityRole))
         {
             return await queryableSource.GetQueryable<TPermission>()
-                                        .Where(bindingInfo.Filter)
+                                        .Where(bindingInfo.GetFilter(serviceProvider))
                                         .Select(bindingInfo.PrincipalPath)
                                         .Select(bindingInfo.PrincipalNamePath)
                                         .ToListAsync(cancellationToken);

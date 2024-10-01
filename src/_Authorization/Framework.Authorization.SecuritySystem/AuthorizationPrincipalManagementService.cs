@@ -26,9 +26,7 @@ public class AuthorizationPrincipalManagementService(
 {
     public async Task<IIdentityObject<Guid>> CreatePrincipalAsync(string principalName, CancellationToken cancellationToken = default)
     {
-        var principal = await principalDomainService.GetOrCreateAsync(principalName, cancellationToken);
-
-        return principal;
+        return await principalDomainService.GetOrCreateAsync(principalName, cancellationToken);
     }
 
     public async Task<IIdentityObject<Guid>> UpdatePrincipalNameAsync(

@@ -9,7 +9,7 @@ public interface IPrincipalManagementService : IPrincipalSourceService
 
     Task<IIdentityObject<Guid>> UpdatePrincipalNameAsync(Guid principalId, string principalName, CancellationToken cancellationToken);
 
-    Task<IIdentityObject<Guid>> RemovePrincipalAsync(Guid principalId, CancellationToken cancellationToken = default);
+    Task<IIdentityObject<Guid>> RemovePrincipalAsync(Guid principalId, bool force, CancellationToken cancellationToken = default);
 
     Task<MergeResult<IIdentityObject<Guid>, IIdentityObject<Guid>>> UpdatePermissionsAsync(Guid principalId, IEnumerable<TypedPermission> typedPermissions, CancellationToken cancellationToken = default);
 }

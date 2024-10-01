@@ -45,11 +45,11 @@ public class AuthorizationPrincipalManagementService(
         return principal;
     }
 
-    public async Task<IIdentityObject<Guid>> RemovePrincipalAsync(Guid principalId, CancellationToken cancellationToken = default)
+    public async Task<IIdentityObject<Guid>> RemovePrincipalAsync(Guid principalId, bool force, CancellationToken cancellationToken = default)
     {
         var principal = await principalRepository.LoadAsync(principalId, cancellationToken);
 
-        await principalDomainService.RemoveAsync(principal, cancellationToken);
+        await principalDomainService.RemoveAsync(principal, force, cancellationToken);
 
         return principal;
     }

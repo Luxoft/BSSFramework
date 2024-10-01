@@ -63,7 +63,7 @@ public class AuthManager(
 
         if (principal is { Header.IsVirtual: false })
         {
-            await principalManagementService.RemovePrincipalAsync(principal.Header.Id, cancellationToken);
+            await principalManagementService.RemovePrincipalAsync(principal.Header.Id, true, cancellationToken);
         }
     }
 }

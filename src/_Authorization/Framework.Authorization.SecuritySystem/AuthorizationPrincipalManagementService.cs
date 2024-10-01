@@ -74,6 +74,8 @@ public class AuthorizationPrincipalManagementService(
             await permissionRepository.RemoveAsync(oldDbPermission, cancellationToken);
         }
 
+        await principalDomainService.ValidateAsync(dbPrincipal, cancellationToken);
+
         return new MergeResult<IIdentityObject<Guid>, IIdentityObject<Guid>>(
             newPermissions,
             updatedPermissions.Select(pair => (IIdentityObject<Guid>)pair.Item1).Select(v => (v, v)),

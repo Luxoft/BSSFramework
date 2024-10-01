@@ -10,12 +10,19 @@ namespace Framework.Authorization.SecuritySystem;
 
 public class AuthorizationPrincipalManagementService(
     [DisabledSecurity] IRepository<Principal> principalRepository,
+    ISecurityRoleSource securityRoleSource,
+    ISecurityContextSource securityContextSource,
+    IAvailablePermissionSource availablePermissionSource,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
     [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
-    ISecurityRoleSource securityRoleSource,
-    ISecurityContextSource securityContextSource,
-    IPrincipalDomainService principalDomainService) : IPrincipalManagementService
+    IPrincipalDomainService principalDomainService)
+    : AuthorizationPrincipalSourceService(
+      principalRepository,
+      securityRoleSource,
+      securityContextSource,
+      availablePermissionSource),
+      IPrincipalManagementService
 {
     public async Task<IIdentityObject<Guid>> CreatePrincipalAsync(string principalName, CancellationToken cancellationToken = default)
     {
@@ -24,7 +31,10 @@ public class AuthorizationPrincipalManagementService(
         return principal;
     }
 
-    public async Task<IIdentityObject<Guid>> UpdatePrincipalNameAsync(Guid principalId, string principalName, CancellationToken cancellationToken)
+    public async Task<IIdentityObject<Guid>> UpdatePrincipalNameAsync(
+        Guid principalId,
+        string principalName,
+        CancellationToken cancellationToken)
     {
         var principal = await principalRepository.LoadAsync(principalId, cancellationToken);
 
@@ -79,7 +89,10 @@ public class AuthorizationPrincipalManagementService(
                    typedPermission => this.CreatePermissionAsync(dbPrincipal, typedPermission, cancellationToken));
     }
 
-    private async Task<Permission> CreatePermissionAsync(Principal dbPrincipal, TypedPermission typedPermission, CancellationToken cancellationToken = default)
+    private async Task<Permission> CreatePermissionAsync(
+        Principal dbPrincipal,
+        TypedPermission typedPermission,
+        CancellationToken cancellationToken = default)
     {
         if (typedPermission.Id != Guid.Empty || typedPermission.IsVirtual)
         {
@@ -92,9 +105,7 @@ public class AuthorizationPrincipalManagementService(
 
         var newDbPermission = new Permission(dbPrincipal)
                               {
-                                  Comment = typedPermission.Comment,
-                                  Period = typedPermission.Period,
-                                  Role = dbRole
+                                  Comment = typedPermission.Comment, Period = typedPermission.Period, Role = dbRole
                               };
 
         foreach (var restrictionGroup in typedPermission.Restrictions)
@@ -118,10 +129,19 @@ public class AuthorizationPrincipalManagementService(
         return newDbPermission;
     }
 
-    private async Task<IReadOnlyList<(Permission, TypedPermission)>> UpdatePermissionsAsync(IReadOnlyList<(Permission, TypedPermission)> permissionPairs, CancellationToken cancellationToken = default)
+    private async Task<IReadOnlyList<(Permission, TypedPermission)>> UpdatePermissionsAsync(
+        IReadOnlyList<(Permission, TypedPermission)> permissionPairs,
+        CancellationToken cancellationToken = default)
     {
         var preResult = await permissionPairs.SyncWhenAll(
-                            async permissionPair => new { permissionPair, Updated = await this.UpdatePermission(permissionPair.Item1, permissionPair.Item2, cancellationToken) });
+                            async permissionPair => new
+                                                    {
+                                                        permissionPair,
+                                                        Updated = await this.UpdatePermission(
+                                                                      permissionPair.Item1,
+                                                                      permissionPair.Item2,
+                                                                      cancellationToken)
+                                                    });
 
         return preResult
                .Where(pair => pair.Updated)
@@ -142,7 +162,9 @@ public class AuthorizationPrincipalManagementService(
             r => (r.SecurityContextType.Id, r.SecurityContextId),
             pair => pair);
 
-        if (restrictionMergeResult.IsEmpty && dbPermission.Comment == typedPermission.Comment && dbPermission.Period == typedPermission.Period)
+        if (restrictionMergeResult.IsEmpty
+            && dbPermission.Comment == typedPermission.Comment
+            && dbPermission.Period == typedPermission.Period)
         {
             return false;
         }

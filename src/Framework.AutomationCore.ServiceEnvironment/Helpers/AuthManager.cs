@@ -28,14 +28,12 @@ public class AuthManager(
     {
         var usedPrincipalName = principalName ?? this.GetCurrentUserLogin();
 
-        var principalId = (await principalManagementService.CreatePrincipalAsync(usedPrincipalName, cancellationToken)).Id;
-
-        var existsPrincipal = await principalSourceService.TryGetPrincipalAsync(usedPrincipalName, cancellationToken);
+        var existsPrincipal = await principalManagementService.TryGetPrincipalAsync(usedPrincipalName, cancellationToken);
 
         var preUpdatePrincipal = existsPrincipal
                                  ?? new TypedPrincipal(
                                      new TypedPrincipalHeader(
-                                         (,
+                                         (await principalManagementService.CreatePrincipalAsync(usedPrincipalName, cancellationToken)).Id,
                                          usedPrincipalName,
                                          false),
                                      []);
@@ -59,7 +57,7 @@ public class AuthManager(
 
     public async Task RemovePermissionsAsync(string? principalName, CancellationToken cancellationToken = default)
     {
-        var principal = await principalSourceService.TryGetPrincipalAsync(
+        var principal = await principalManagementService.TryGetPrincipalAsync(
                             principalName ?? this.GetCurrentUserLogin(),
                             cancellationToken);
 

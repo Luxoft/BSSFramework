@@ -100,7 +100,8 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection UpdateSecuritySystem(this IServiceCollection services)
     {
         return services.AddScopedFrom<IPermissionSystemFactory, AuthorizationPermissionSystemFactory>()
-                       .AddScoped<IPrincipalSourceService, AuthorizationPrincipalSourceService>()
-                       .ReplaceScoped<IPrincipalManagementService, AuthorizationPrincipalManagementService>();
+                       .AddScoped<AuthorizationPrincipalManagementService>()
+                       .AddScopedFrom<IPrincipalSourceService, AuthorizationPrincipalManagementService>()
+                       .ReplaceScopedFrom<IPrincipalManagementService, AuthorizationPrincipalManagementService>();
     }
 }

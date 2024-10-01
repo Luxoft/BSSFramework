@@ -2,8 +2,6 @@
 
 namespace Framework.SecuritySystem.ExternalSystem.Management;
 
-public interface IRootPrincipalSourceService : IPrincipalSourceService;
-
 public class RootPrincipalSourceService(IEnumerable<IPrincipalSourceService> principalSourceServices) : IRootPrincipalSourceService
 {
     public async Task<IEnumerable<TypedPrincipalHeader>> GetPrincipalsAsync(

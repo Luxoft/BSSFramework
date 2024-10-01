@@ -14,7 +14,6 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 using Framework.SecuritySystem;
-using Automation.Utils;
 
 namespace SampleSystem.IntegrationTests;
 

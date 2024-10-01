@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetPrincipalsHandler([CurrentUserWithoutRunAs]ISecuritySystem securitySystem, IPrincipalManagementService configuratorApi)
+public class GetPrincipalsHandler([CurrentUserWithoutRunAs]ISecuritySystem securitySystem, IRootPrincipalSourceService principalSourceService)
     : BaseReadHandler, IGetPrincipalsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
@@ -17,7 +17,7 @@ public class GetPrincipalsHandler([CurrentUserWithoutRunAs]ISecuritySystem secur
 
         var nameFilter = (string)context.Request.Query["searchToken"]!;
 
-        var principals = await configuratorApi.GetPrincipalsAsync(nameFilter, 70, cancellationToken);
+        var principals = await principalSourceService.GetPrincipalsAsync(nameFilter, 70, cancellationToken);
 
         return principals
                .Select(x => new PrincipalHeaderDto { Id = x.Id, Name = x.Name, IsVirtual = x.IsVirtual })

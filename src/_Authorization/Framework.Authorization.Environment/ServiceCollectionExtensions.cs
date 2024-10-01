@@ -12,6 +12,7 @@ using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.ExternalSystem;
+using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -98,6 +99,9 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection UpdateSecuritySystem(this IServiceCollection services)
     {
-        return services.AddScopedFrom<IPermissionSystemFactory, AuthorizationPermissionSystemFactory>();
+        return services.AddScopedFrom<IPermissionSystemFactory, AuthorizationPermissionSystemFactory>()
+                       .AddScoped<AuthorizationPrincipalManagementService>()
+                       .AddScopedFrom<IPrincipalSourceService, AuthorizationPrincipalManagementService>()
+                       .ReplaceScopedFrom<IPrincipalManagementService, AuthorizationPrincipalManagementService>();
     }
 }

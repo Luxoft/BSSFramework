@@ -15,7 +15,7 @@ public class TestPermissionBuilder
     {
     }
 
-    public SecurityRole SecurityRole { get; set; }
+    public SecurityRole? SecurityRole { get; set; }
 
     public Period Period { get; set; } = Period.Eternity;
 
@@ -46,7 +46,7 @@ public class TestPermissionBuilder
         return this.Restrictions.GetValueOrDefault(type).Maybe(v => map(v.Single()));
     }
 
-    protected void SetSingleIdentityC<TIdentity>(Type type, Func<TIdentity, Guid> map, TIdentity value)
+    protected void SetSingleIdentityC<TIdentity>(Type type, Func<TIdentity, Guid> map, TIdentity? value)
         where TIdentity : class
     {
         if (value == null)
@@ -60,16 +60,16 @@ public class TestPermissionBuilder
     }
 
 
-    public static implicit operator TestPermission(TestPermissionBuilder securityRole)
+    public static implicit operator TestPermission(TestPermissionBuilder testPermissionBuilder)
     {
-        if (securityRole.SecurityRole == null)
+        if (testPermissionBuilder.SecurityRole == null)
         {
-            throw new InvalidOperationException($"{nameof(securityRole.SecurityRole)} not initialized");
+            throw new InvalidOperationException($"{nameof(testPermissionBuilder.SecurityRole)} not initialized");
         }
 
         return new TestPermission(
-            securityRole.SecurityRole,
-            securityRole.Period,
-            securityRole.Restrictions.ChangeValue(v => v.ToReadOnlyListI()));
+            testPermissionBuilder.SecurityRole,
+            testPermissionBuilder.Period,
+            testPermissionBuilder.Restrictions.Where(pair => pair.Value.Any()).ToDictionary(pair => pair.Key, pair => pair.Value.ToReadOnlyListI()));
     }
 }

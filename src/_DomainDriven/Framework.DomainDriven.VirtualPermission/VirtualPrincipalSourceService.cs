@@ -11,9 +11,9 @@ using NHibernate.Linq;
 
 namespace Framework.DomainDriven.VirtualPermission;
 
-public class VirtualPrincipalService<TPrincipal, TPermission>(
+public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
     IQueryableSource queryableSource,
-    VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo) : IPrincipalService
+    VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo) : IPrincipalSourceService
 
     where TPrincipal : IIdentityObject<Guid>
     where TPermission : IIdentityObject<Guid>
@@ -48,10 +48,16 @@ public class VirtualPrincipalService<TPrincipal, TPermission>(
         return anonHeaders.Select(anonHeader => new TypedPrincipalHeader(anonHeader.Id, anonHeader.Name, true));
     }
 
-    public async Task<TypedPrincipal?> TryGetPrincipalAsync(Guid principalId, CancellationToken cancellationToken = default)
+    public Task<TypedPrincipal?> TryGetPrincipalAsync(string principalName, CancellationToken cancellationToken = default) =>
+        this.TryGetPrincipalAsync(bindingInfo.PrincipalNamePath.Select(name => principalName == name), cancellationToken);
+
+    public Task<TypedPrincipal?> TryGetPrincipalAsync(Guid principalId, CancellationToken cancellationToken = default) =>
+        this.TryGetPrincipalAsync(principal => principal.Id == principalId, cancellationToken);
+
+    public async Task<TypedPrincipal?> TryGetPrincipalAsync(Expression<Func<TPrincipal, bool>> filter, CancellationToken cancellationToken)
     {
         var principal = await queryableSource.GetQueryable<TPrincipal>()
-                                             .Where(principal => principal.Id == principalId)
+                                             .Where(filter)
                                              .SingleOrDefaultAsync(cancellationToken);
 
         if (principal == null)
@@ -64,7 +70,7 @@ public class VirtualPrincipalService<TPrincipal, TPermission>(
 
             var permissions = await queryableSource.GetQueryable<TPermission>()
                                                    .Where(bindingInfo.Filter)
-                                                   .Where(bindingInfo.PrincipalPath.Select(p => p.Id == principalId))
+                                                   .Where(bindingInfo.PrincipalPath.Select(filter))
                                                    .ToListAsync(cancellationToken);
 
             return new TypedPrincipal(header, permissions.Select(this.ToTypedPermission).ToList());
@@ -86,11 +92,11 @@ public class VirtualPrincipalService<TPrincipal, TPermission>(
 
         return new TypedPermission(
             permission.Id,
+            true,
             bindingInfo.SecurityRole,
             bindingInfo.PeriodFilter?.Eval(permission) ?? Period.Eternity,
             "",
-            restrictions,
-            true);
+            restrictions);
     }
 
     public async Task<IEnumerable<string>> GetLinkedPrincipalsAsync(

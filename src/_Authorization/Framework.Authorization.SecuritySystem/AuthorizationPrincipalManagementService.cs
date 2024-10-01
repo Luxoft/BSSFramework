@@ -6,89 +6,33 @@ using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
-using NHibernate.Linq;
-
 namespace Framework.Authorization.SecuritySystem;
 
-public class AuthorizationPrincipalService(
+public class AuthorizationPrincipalManagementService(
     [DisabledSecurity] IRepository<Principal> principalRepository,
-    [DisabledSecurity] IRepository<Permission> permissionRepository,
-    [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
-    [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
     ISecurityRoleSource securityRoleSource,
     ISecurityContextSource securityContextSource,
     IAvailablePermissionSource availablePermissionSource,
-    IPrincipalDomainService principalDomainService) : IPrincipalManagementService
+    [DisabledSecurity] IRepository<Permission> permissionRepository,
+    [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
+    [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
+    IPrincipalDomainService principalDomainService)
+    : AuthorizationPrincipalSourceService(
+      principalRepository,
+      securityRoleSource,
+      securityContextSource,
+      availablePermissionSource),
+      IPrincipalManagementService
 {
-    public async Task<IEnumerable<TypedPrincipalHeader>> GetPrincipalsAsync(
-        string nameFilter,
-        int limit,
-        CancellationToken cancellationToken = default)
-    {
-        return await principalRepository.GetQueryable()
-                                        .Pipe(
-                                            !string.IsNullOrWhiteSpace(nameFilter),
-                                            q => q.Where(principal => principal.Name.Contains(nameFilter)))
-                                        .Select(principal => new TypedPrincipalHeader(principal.Id, principal.Name, false))
-                                        .ToListAsync(cancellationToken);
-    }
-
-    public async Task<TypedPrincipal?> TryGetPrincipalAsync(Guid principalId, CancellationToken cancellationToken = default)
-    {
-        var principal = await principalRepository.GetQueryable()
-                                                 .Where(principal => principal.Id == principalId)
-                                                 .FetchMany(principal => principal.Permissions)
-                                                 .ThenFetch(permission => permission.Restrictions)
-                                                 .SingleOrDefaultAsync(cancellationToken);
-
-        if (principal == null)
-        {
-            return null;
-        }
-        else
-        {
-            return new TypedPrincipal(
-                new TypedPrincipalHeader(principal.Id, principal.Name, false),
-                principal.Permissions
-                         .Select(
-                             permission => new TypedPermission(
-                                 permission.Id,
-                                 securityRoleSource.GetSecurityRole(permission.Role.Id),
-                                 permission.Period,
-                                 permission.Comment,
-                                 permission.Restrictions
-                                           .GroupBy(r => r.SecurityContextType.Id, r => r.SecurityContextId)
-                                           .ToDictionary(
-                                               g => securityContextSource.GetSecurityContextInfo(g.Key).Type,
-                                               g => g.ToReadOnlyListI()),
-                                 false))
-                         .ToList());
-        }
-    }
-
-    public async Task<IEnumerable<string>> GetLinkedPrincipalsAsync(
-        IEnumerable<SecurityRole> securityRoles,
-        CancellationToken cancellationToken = default)
-    {
-        return await availablePermissionSource
-                     .GetAvailablePermissionsQueryable(
-                         DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles) with
-                         {
-                             CustomCredential = SecurityRuleCredential.AnyUser
-                         })
-                     .Select(permission => permission.Principal.Name)
-                     .Distinct()
-                     .ToListAsync(cancellationToken);
-    }
-
     public async Task<IIdentityObject<Guid>> CreatePrincipalAsync(string principalName, CancellationToken cancellationToken = default)
     {
-        var principal = await principalDomainService.GetOrCreateAsync(principalName, cancellationToken);
-
-        return principal;
+        return await principalDomainService.GetOrCreateAsync(principalName, cancellationToken);
     }
 
-    public async Task<IIdentityObject<Guid>> UpdatePrincipalNameAsync(Guid principalId, string principalName, CancellationToken cancellationToken)
+    public async Task<IIdentityObject<Guid>> UpdatePrincipalNameAsync(
+        Guid principalId,
+        string principalName,
+        CancellationToken cancellationToken)
     {
         var principal = await principalRepository.LoadAsync(principalId, cancellationToken);
 
@@ -99,11 +43,11 @@ public class AuthorizationPrincipalService(
         return principal;
     }
 
-    public async Task<IIdentityObject<Guid>> RemovePrincipalAsync(Guid principalId, CancellationToken cancellationToken = default)
+    public async Task<IIdentityObject<Guid>> RemovePrincipalAsync(Guid principalId, bool force, CancellationToken cancellationToken = default)
     {
         var principal = await principalRepository.LoadAsync(principalId, cancellationToken);
 
-        await principalDomainService.RemoveAsync(principal, cancellationToken);
+        await principalDomainService.RemoveAsync(principal, force, cancellationToken);
 
         return principal;
     }
@@ -115,7 +59,7 @@ public class AuthorizationPrincipalService(
     {
         var dbPrincipal = await principalRepository.LoadAsync(principalId, cancellationToken);
 
-        var permissionMergeResult = dbPrincipal.Permissions.GetMergeResult(typedPermissions, p => p.Id, p => p.Id);
+        var permissionMergeResult = dbPrincipal.Permissions.GetMergeResult(typedPermissions, p => p.Id, p => p.Id == Guid.Empty ? Guid.NewGuid() : p.Id);
 
         var newPermissions = await this.CreatePermissionsAsync(dbPrincipal, permissionMergeResult.AddingItems, cancellationToken);
 
@@ -128,10 +72,12 @@ public class AuthorizationPrincipalService(
             await permissionRepository.RemoveAsync(oldDbPermission, cancellationToken);
         }
 
+        await principalDomainService.ValidateAsync(dbPrincipal, cancellationToken);
+
         return new MergeResult<IIdentityObject<Guid>, IIdentityObject<Guid>>(
-            newPermissions.Select(dbPermission => dbPermission),
+            newPermissions,
             updatedPermissions.Select(pair => (IIdentityObject<Guid>)pair.Item1).Select(v => (v, v)),
-            permissionMergeResult.RemovingItems.Select(dbPermission => dbPermission));
+            permissionMergeResult.RemovingItems);
     }
 
     private async Task<IReadOnlyList<Permission>> CreatePermissionsAsync(
@@ -143,7 +89,10 @@ public class AuthorizationPrincipalService(
                    typedPermission => this.CreatePermissionAsync(dbPrincipal, typedPermission, cancellationToken));
     }
 
-    private async Task<Permission> CreatePermissionAsync(Principal dbPrincipal, TypedPermission typedPermission, CancellationToken cancellationToken = default)
+    private async Task<Permission> CreatePermissionAsync(
+        Principal dbPrincipal,
+        TypedPermission typedPermission,
+        CancellationToken cancellationToken = default)
     {
         if (typedPermission.Id != Guid.Empty || typedPermission.IsVirtual)
         {
@@ -156,9 +105,7 @@ public class AuthorizationPrincipalService(
 
         var newDbPermission = new Permission(dbPrincipal)
                               {
-                                  Comment = typedPermission.Comment,
-                                  Period = typedPermission.Period,
-                                  Role = dbRole
+                                  Comment = typedPermission.Comment, Period = typedPermission.Period, Role = dbRole
                               };
 
         foreach (var restrictionGroup in typedPermission.Restrictions)
@@ -182,10 +129,19 @@ public class AuthorizationPrincipalService(
         return newDbPermission;
     }
 
-    private async Task<IReadOnlyList<(Permission, TypedPermission)>> UpdatePermissionsAsync(IReadOnlyList<(Permission, TypedPermission)> permissionPairs, CancellationToken cancellationToken = default)
+    private async Task<IReadOnlyList<(Permission, TypedPermission)>> UpdatePermissionsAsync(
+        IReadOnlyList<(Permission, TypedPermission)> permissionPairs,
+        CancellationToken cancellationToken = default)
     {
         var preResult = await permissionPairs.SyncWhenAll(
-                            async permissionPair => new { permissionPair, Updated = await this.UpdatePermission(permissionPair.Item1, permissionPair.Item2, cancellationToken) });
+                            async permissionPair => new
+                                                    {
+                                                        permissionPair,
+                                                        Updated = await this.UpdatePermission(
+                                                                      permissionPair.Item1,
+                                                                      permissionPair.Item2,
+                                                                      cancellationToken)
+                                                    });
 
         return preResult
                .Where(pair => pair.Updated)
@@ -206,7 +162,9 @@ public class AuthorizationPrincipalService(
             r => (r.SecurityContextType.Id, r.SecurityContextId),
             pair => pair);
 
-        if (restrictionMergeResult.IsEmpty && dbPermission.Comment == typedPermission.Comment && dbPermission.Period == typedPermission.Period)
+        if (restrictionMergeResult.IsEmpty
+            && dbPermission.Comment == typedPermission.Comment
+            && dbPermission.Period == typedPermission.Period)
         {
             return false;
         }

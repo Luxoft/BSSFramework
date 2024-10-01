@@ -4,6 +4,7 @@ using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.SecurityAccessor;
 using Framework.SecuritySystem.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection;
 
@@ -31,6 +32,9 @@ public interface ISecuritySystemSettings
     ISecuritySystemSettings AddPermissionSystem(Func<IServiceProvider, IPermissionSystemFactory> getFactory);
 
     ISecuritySystemSettings AddExtensions(ISecuritySystemExtension extensions);
+
+    ISecuritySystemSettings AddExtensions(Action<IServiceCollection> addServicesAction) =>
+        this.AddExtensions(new SecuritySystemExtension(addServicesAction));
 
     ISecuritySystemSettings SetAccessDeniedExceptionService<TAccessDeniedExceptionService>()
         where TAccessDeniedExceptionService : class, IAccessDeniedExceptionService;

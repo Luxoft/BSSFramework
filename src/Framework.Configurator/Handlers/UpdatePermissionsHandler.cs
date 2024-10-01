@@ -49,18 +49,20 @@ public class UpdatePermissionsHandler(
     {
         return new TypedPermission(
             string.IsNullOrWhiteSpace(permission.PermissionId) ? Guid.Empty : new Guid(permission.PermissionId),
+            permission.IsVirtual,
             securityRoleSource.GetSecurityRole(new Guid(permission.RoleId)),
             new Period(permission.StartDate, permission.EndDate),
             permission.Comment,
             permission.Contexts.ToDictionary(
                 pair => securityContextSource.GetSecurityContextInfo(new Guid(pair.Id)).Type,
-                pair => pair.Entities.ToReadOnlyListI(e => new Guid(e))),
-            permission.IsVirtual);
+                pair => pair.Entities.ToReadOnlyListI(e => new Guid(e))));
     }
 
     private class RequestBodyDto
     {
         public string PermissionId { get; set; } = default!;
+
+        public bool IsVirtual { get; set; }
 
         public string RoleId { get; set; } = default!;
 
@@ -71,8 +73,6 @@ public class UpdatePermissionsHandler(
         public string Comment { get; set; } = default!;
 
         public List<ContextDto> Contexts { get; set; } = default!;
-
-        public bool IsVirtual { get; set; }
 
         public class ContextDto
         {

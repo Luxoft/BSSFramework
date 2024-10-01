@@ -1,15 +1,12 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.SecuritySystem.ExternalSystem.Management;
 
 namespace Framework.SecuritySystem.ExternalSystem;
 
 public interface IPermissionSystem
 {
     Type PermissionType { get; }
-
-    IPrincipalService PrincipalService { get; }
 
     IPermissionSource GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 

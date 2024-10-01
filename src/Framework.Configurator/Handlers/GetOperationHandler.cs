@@ -11,7 +11,7 @@ namespace Framework.Configurator.Handlers;
 public class GetOperationHandler(
     [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
     ISecurityRoleSource roleSource,
-    IPrincipalManagementService configuratorApi)
+    IRootPrincipalSourceService principalSourceService)
     : BaseReadHandler, IGetOperationHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
@@ -24,7 +24,7 @@ public class GetOperationHandler(
                                       .Where(x => x.Information.Operations.Any(o => o.Name == operationName))
                                       .ToList();
 
-        var principals = await configuratorApi.GetLinkedPrincipalsAsync(securityRoles, cancellationToken);
+        var principals = await principalSourceService.GetLinkedPrincipalsAsync(securityRoles, cancellationToken);
 
         return new OperationDetailsDto
                {

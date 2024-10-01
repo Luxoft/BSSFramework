@@ -3,7 +3,6 @@
 using Framework.Authorization.Domain;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
-using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,8 +15,6 @@ public class AuthorizationPermissionSystem(
     : IPermissionSystem<Permission>
 {
     public Type PermissionType { get; } = typeof(Permission);
-
-    public IPrincipalService PrincipalService { get; } = ActivatorUtilities.CreateInstance<AuthorizationPrincipalService>(serviceProvider);
 
     public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext

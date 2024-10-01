@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 
+using Framework.DependencyInjection;
 using Framework.SecuritySystem.Builders._Factory;
 
 using Framework.SecuritySystem.Builders.AccessorsBuilder;
@@ -78,7 +79,8 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterGeneralSecuritySystem(this IServiceCollection services)
     {
-        return services.AddScoped<IPrincipalManagementService, RootPrincipalManagementService>()
+        return services.AddScoped<IRootPrincipalSourceService, RootPrincipalSourceService>()
+                       .AddNotImplemented<IPrincipalManagementService>($"{nameof(IPrincipalManagementService)} not supported", isScoped: true)
 
                        .AddSingleton<SecurityModeExpander>()
                        .AddSingleton<SecurityOperationExpander>()

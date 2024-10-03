@@ -1,8 +1,8 @@
 ﻿namespace Framework.SecuritySystem.SecurityAccessor;
-public class SecurityAccessorDataEvaluator(ISecurityAccessorInfinityStorage infinityStorage)
-    : ISecurityAccessorDataEvaluator
+
+public class RawSecurityAccessorResolver(ISecurityAccessorInfinityStorage infinityStorage) : ISecurityAccessorResolver
 {
-    public virtual IEnumerable<string> Evaluate(SecurityAccessorData securityAccessorData)
+    public virtual IEnumerable<string> Resolve(SecurityAccessorData securityAccessorData)
     {
         switch (securityAccessorData)
         {
@@ -13,25 +13,25 @@ public class SecurityAccessorDataEvaluator(ISecurityAccessorInfinityStorage infi
             {
                 Right: SecurityAccessorData.NegateSecurityAccessorData right
             } andNegateResult:
-                return this.Evaluate(andNegateResult.Left).Except(
-                    this.Evaluate(right.InnerData),
+                return this.Resolve(andNegateResult.Left).Except(
+                    this.Resolve(right.InnerData),
                     StringComparer.CurrentCultureIgnoreCase);
 
             case SecurityAccessorData.AndSecurityAccessorData andResult:
-                return this.Evaluate(andResult.Left).Intersect(
-                    this.Evaluate(andResult.Right),
+                return this.Resolve(andResult.Left).Intersect(
+                    this.Resolve(andResult.Right),
                     StringComparer.CurrentCultureIgnoreCase);
 
             case SecurityAccessorData.OrSecurityAccessorData orResult:
-                return this.Evaluate(orResult.Left).Union(
-                    this.Evaluate(orResult.Right),
+                return this.Resolve(orResult.Left).Union(
+                    this.Resolve(orResult.Right),
                     StringComparer.CurrentCultureIgnoreCase);
 
             case SecurityAccessorData.InfinitySecurityAccessorData:
                 return infinityStorage.GetInfinityData();
 
             case SecurityAccessorData.NegateSecurityAccessorData negateResult:
-                return infinityStorage.GetInfinityData().Except(this.Evaluate(negateResult.InnerData));
+                return infinityStorage.GetInfinityData().Except(this.Resolve(negateResult.InnerData));
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(securityAccessorData));

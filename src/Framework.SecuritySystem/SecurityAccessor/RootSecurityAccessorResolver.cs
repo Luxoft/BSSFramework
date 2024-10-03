@@ -1,0 +1,13 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Framework.SecuritySystem.SecurityAccessor;
+
+public class RootSecurityAccessorResolver(
+    ISecurityAccessorDataOptimizer optimizer,
+    [FromKeyedServices("Raw")] ISecurityAccessorResolver rawSecurityAccessorResolver) : ISecurityAccessorResolver
+{
+    public IEnumerable<string> Resolve(SecurityAccessorData data)
+    {
+        return rawSecurityAccessorResolver.Resolve(optimizer.Optimize(data));
+    }
+}

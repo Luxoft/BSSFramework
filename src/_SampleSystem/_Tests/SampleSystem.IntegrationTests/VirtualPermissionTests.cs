@@ -94,8 +94,8 @@ public class VirtualPermissionTests : TestBase
                                           .GetAccessorData(bu);
 
                     return ctx.ServiceProvider
-                              .GetRequiredService<ISecurityAccessorDataEvaluator>()
-                              .Evaluate(accessorData);
+                              .GetRequiredService<ISecurityAccessorResolver>()
+                              .Resolve(accessorData);
                 });
 
         // Assert

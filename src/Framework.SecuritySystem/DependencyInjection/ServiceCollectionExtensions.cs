@@ -140,8 +140,8 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
 
                        .AddSingleton<ISecurityAccessorDataOptimizer, SecurityAccessorDataOptimizer>()
-                       .AddScoped<ISecurityAccessorDataEvaluator, SecurityAccessorDataEvaluator>()
-                       .AddScoped<ISecurityAccessorResolver, SecurityAccessorResolver>()
+                       .AddKeyedScoped<ISecurityAccessorResolver, RawSecurityAccessorResolver>(RawSecurityAccessorResolver.Key)
+                       .AddScoped<ISecurityAccessorResolver, RootSecurityAccessorResolver>()
 
                        .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
                        .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()

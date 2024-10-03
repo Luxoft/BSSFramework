@@ -2,6 +2,8 @@
 
 public class RawSecurityAccessorResolver(ISecurityAccessorInfinityStorage infinityStorage) : ISecurityAccessorResolver
 {
+    public const string Key = "Raw";
+
     public virtual IEnumerable<string> Resolve(SecurityAccessorData securityAccessorData)
     {
         switch (securityAccessorData)

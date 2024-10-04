@@ -423,6 +423,16 @@ namespace SampleSystem.BLL
             get;
         }
         
+        SampleSystem.BLL.ITestJobObjectBLL TestJobObject
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.ITestJobObjectBLLFactory TestJobObjectFactory
+        {
+            get;
+        }
+        
         SampleSystem.BLL.ITestLegacyEmployeeBLL TestLegacyEmployee
         {
             get;
@@ -951,6 +961,14 @@ namespace SampleSystem.BLL
     }
     
     public partial interface ITestImmutableObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, SampleSystem.Domain.TestImmutableObj>
+    {
+    }
+    
+    public partial interface ITestJobObjectBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestJobObject, System.Guid>
+    {
+    }
+    
+    public partial interface ITestJobObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestJobObjectBLL, SampleSystem.Domain.TestJobObject>
     {
     }
     

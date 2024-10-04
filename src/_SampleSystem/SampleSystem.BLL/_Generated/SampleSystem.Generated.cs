@@ -836,6 +836,24 @@ namespace SampleSystem.BLL
         }
     }
     
+    public partial class TestJobObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestJobObject>, SampleSystem.BLL.ITestJobObjectBLL
+    {
+        
+        public TestJobObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestJobObject> securityProvider) : 
+                base(context, securityProvider)
+        {
+        }
+    }
+    
+    public partial class TestJobObjectBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ITestJobObjectBLL, SampleSystem.BLL.TestJobObjectBLL, SampleSystem.Domain.TestJobObject>, SampleSystem.BLL.ITestJobObjectBLLFactory
+    {
+        
+        public TestJobObjectBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
+                base(context)
+        {
+        }
+    }
+    
     public partial class TestPerformanceObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestPerformanceObject>, SampleSystem.BLL.ITestPerformanceObjectBLL
     {
         
@@ -1064,6 +1082,8 @@ namespace SampleSystem.BLL
         private SampleSystem.BLL.ITestImmutableObjBLL testImmutableObjBLL;
         
         private SampleSystem.BLL.ITestIMRequestBLL testIMRequestBLL;
+        
+        private SampleSystem.BLL.ITestJobObjectBLL testJobObjectBLL;
         
         private SampleSystem.BLL.ITestLegacyEmployeeBLL testLegacyEmployeeBLL;
         
@@ -1902,6 +1922,26 @@ namespace SampleSystem.BLL
             }
         }
         
+        public SampleSystem.BLL.ITestJobObjectBLL TestJobObject
+        {
+            get
+            {
+                if (object.ReferenceEquals(this.testJobObjectBLL, null))
+                {
+                    this.testJobObjectBLL = this.TestJobObjectFactory.Create();
+                }
+                return this.testJobObjectBLL;
+            }
+        }
+        
+        public SampleSystem.BLL.ITestJobObjectBLLFactory TestJobObjectFactory
+        {
+            get
+            {
+                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.ITestJobObjectBLLFactory>(this.Context.ServiceProvider);
+            }
+        }
+        
         public SampleSystem.BLL.ITestLegacyEmployeeBLL TestLegacyEmployee
         {
             get
@@ -2274,6 +2314,8 @@ namespace SampleSystem.BLL
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid>, SampleSystem.Domain.TestCustomContextSecurityObj>, SampleSystem.BLL.ITestCustomContextSecurityObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestImmutableObjBLLFactory, SampleSystem.BLL.TestImmutableObjBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid>, SampleSystem.Domain.TestImmutableObj>, SampleSystem.BLL.ITestImmutableObjBLLFactory>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestJobObjectBLLFactory, SampleSystem.BLL.TestJobObjectBLLFactory>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestJobObject, System.Guid>, SampleSystem.Domain.TestJobObject>, SampleSystem.BLL.ITestJobObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestPerformanceObjectBLLFactory, SampleSystem.BLL.TestPerformanceObjectBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid>, SampleSystem.Domain.TestPerformanceObject>, SampleSystem.BLL.ITestPerformanceObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestPlainAuthObjectBLLFactory, SampleSystem.BLL.TestPlainAuthObjectBLLFactory>(serviceCollection);

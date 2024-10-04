@@ -74,6 +74,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapBaseAuditPersistentToStrictForTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
+        void MapBaseAuditPersistentToStrictForTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
+        
         void MapBasePersistentToStrictForAddress(SampleSystem.Generated.DTO.AddressStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
@@ -133,6 +135,8 @@ namespace SampleSystem.Generated.DTO
         void MapBasePersistentToStrictForSqlParserTestObjContainer(SampleSystem.Generated.DTO.SqlParserTestObjContainerStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
+        
+        void MapBasePersistentToStrictForTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapEmployee(SampleSystem.Generated.DTO.EmployeeUpdateDTO target, SampleSystem.Generated.DTO.EmployeeStrictDTO currentSource);
         
@@ -224,6 +228,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapFullToStrictForTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO target, SampleSystem.Generated.DTO.TestImmutableObjFullDTO currentSource);
         
+        void MapFullToStrictForTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO target, SampleSystem.Generated.DTO.TestJobObjectFullDTO currentSource);
+        
         void MapRichToStrictForAddress(SampleSystem.Generated.DTO.AddressStrictDTO target, SampleSystem.Generated.DTO.AddressRichDTO currentSource);
         
         void MapRichToStrictForBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitStrictDTO target, SampleSystem.Generated.DTO.BusinessUnitRichDTO currentSource);
@@ -281,6 +287,8 @@ namespace SampleSystem.Generated.DTO
         void MapRichToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalRichDTO currentSource);
         
         void MapRichToStrictForTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO target, SampleSystem.Generated.DTO.TestImmutableObjRichDTO currentSource);
+        
+        void MapRichToStrictForTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO target, SampleSystem.Generated.DTO.TestJobObjectRichDTO currentSource);
         
         void MapSimpleToStrictForAddress(SampleSystem.Generated.DTO.AddressStrictDTO target, SampleSystem.Generated.DTO.AddressSimpleDTO currentSource);
         
@@ -347,6 +355,8 @@ namespace SampleSystem.Generated.DTO
         void MapSimpleToStrictForTestDefaultFieldsMappingObj(SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjStrictDTO target, SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjSimpleDTO currentSource);
         
         void MapSimpleToStrictForTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO target, SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO currentSource);
+        
+        void MapSimpleToStrictForTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO target, SampleSystem.Generated.DTO.TestJobObjectSimpleDTO currentSource);
     }
     
     public abstract partial class SampleSystemClientPrimitiveDTOMappingServiceBase : Framework.Persistent.ClientDTOMappingServiceBase, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService
@@ -745,6 +755,19 @@ namespace SampleSystem.Generated.DTO
             target.Version = source.Version;
         }
         
+        public virtual void MapBaseAuditPersistentToStrictForTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            if (object.ReferenceEquals(target, null))
+            {
+                throw new System.ArgumentNullException("target");
+            }
+            target.Version = source.Version;
+        }
+        
         public virtual void MapBasePersistentToStrictForAddress(SampleSystem.Generated.DTO.AddressStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -1123,6 +1146,19 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapBasePersistentToStrictForTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            if (object.ReferenceEquals(target, null))
+            {
+                throw new System.ArgumentNullException("target");
+            }
+            target.Id = source.Id;
+        }
+        
+        public virtual void MapBasePersistentToStrictForTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -2288,6 +2324,18 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
+        public virtual void MapFullToStrictForTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO target, SampleSystem.Generated.DTO.TestJobObjectFullDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            if (object.ReferenceEquals(target, null))
+            {
+                throw new System.ArgumentNullException("target");
+            }
+        }
+        
         public virtual void MapRichToStrictForAddress(SampleSystem.Generated.DTO.AddressStrictDTO target, SampleSystem.Generated.DTO.AddressRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -2719,6 +2767,18 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapRichToStrictForTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO target, SampleSystem.Generated.DTO.TestImmutableObjRichDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            if (object.ReferenceEquals(target, null))
+            {
+                throw new System.ArgumentNullException("target");
+            }
+        }
+        
+        public virtual void MapRichToStrictForTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO target, SampleSystem.Generated.DTO.TestJobObjectRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -3249,6 +3309,18 @@ namespace SampleSystem.Generated.DTO
                 throw new System.ArgumentNullException("target");
             }
             target.TestImmutablePrimitiveProperty = source.TestImmutablePrimitiveProperty;
+        }
+        
+        public virtual void MapSimpleToStrictForTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO target, SampleSystem.Generated.DTO.TestJobObjectSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            if (object.ReferenceEquals(target, null))
+            {
+                throw new System.ArgumentNullException("target");
+            }
         }
     }
     

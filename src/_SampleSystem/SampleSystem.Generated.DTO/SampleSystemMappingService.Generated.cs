@@ -742,6 +742,14 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestItemAuthObject(SampleSystem.Domain.TestItemAuthObject domainObject, SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO mappingObject);
         
+        void MapTestJobObject(SampleSystem.Domain.TestJobObject domainObject, SampleSystem.Generated.DTO.TestJobObjectSimpleDTO mappingObject);
+        
+        void MapTestJobObject(SampleSystem.Domain.TestJobObject domainObject, SampleSystem.Generated.DTO.TestJobObjectFullDTO mappingObject);
+        
+        void MapTestJobObject(SampleSystem.Domain.TestJobObject domainObject, SampleSystem.Generated.DTO.TestJobObjectRichDTO mappingObject);
+        
+        void MapTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO mappingObject, SampleSystem.Domain.TestJobObject domainObject);
+        
         void MapTestJobObject(SampleSystem.Domain.TestJobObject domainObject, SampleSystem.Generated.DTO.TestJobObjectEventRichDTO mappingObject);
         
         void MapTestLegacyEmployee(SampleSystem.Domain.Projections.TestLegacyEmployee domainObject, SampleSystem.Generated.DTO.TestLegacyEmployeeProjectionDTO mappingObject);
@@ -1245,6 +1253,10 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.TestItemAuthObject ToTestItemAuthObject(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO testItemAuthObjectIdentityDTO);
         
         SampleSystem.Domain.TestJobObject ToTestJobObject(SampleSystem.Generated.DTO.TestJobObjectIdentityDTO testJobObjectIdentityDTO);
+        
+        SampleSystem.Domain.TestJobObject ToTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO testJobObjectStrictDTO);
+        
+        SampleSystem.Domain.TestJobObject ToTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO testJobObjectStrictDTO, bool allowCreate);
         
         SampleSystem.Domain.TestObjForNested ToTestObjForNested(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO testObjForNestedIdentityDTO);
         
@@ -6973,6 +6985,23 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapTestJobObject(SampleSystem.Domain.TestJobObject domainObject, SampleSystem.Generated.DTO.TestJobObjectSimpleDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapTestJobObject(SampleSystem.Domain.TestJobObject domainObject, SampleSystem.Generated.DTO.TestJobObjectFullDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapTestJobObject(SampleSystem.Domain.TestJobObject domainObject, SampleSystem.Generated.DTO.TestJobObjectRichDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO mappingObject, SampleSystem.Domain.TestJobObject domainObject)
+        {
+            domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
+        }
+        
         public virtual void MapTestJobObject(SampleSystem.Domain.TestJobObject domainObject, SampleSystem.Generated.DTO.TestJobObjectEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
@@ -8896,6 +8925,23 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.TestJobObject ToTestJobObject(SampleSystem.Generated.DTO.TestJobObjectIdentityDTO testJobObjectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestJobObject>(testJobObjectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TestJobObject ToTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO testJobObjectStrictDTO)
+        {
+            return this.ToDomainObject<SampleSystem.Generated.DTO.TestJobObjectStrictDTO, SampleSystem.Domain.TestJobObject>(testJobObjectStrictDTO);
+        }
+        
+        public virtual SampleSystem.Domain.TestJobObject ToTestJobObject(SampleSystem.Generated.DTO.TestJobObjectStrictDTO testJobObjectStrictDTO, bool allowCreate)
+        {
+            if (allowCreate)
+            {
+                return this.ToDomainObject(testJobObjectStrictDTO, () => new SampleSystem.Domain.TestJobObject());
+            }
+            else
+            {
+                return this.ToTestJobObject(testJobObjectStrictDTO);
+            }
         }
         
         public virtual SampleSystem.Domain.TestObjForNested ToTestObjForNested(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO testObjForNestedIdentityDTO)

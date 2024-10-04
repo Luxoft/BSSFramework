@@ -6595,6 +6595,15 @@ namespace SampleSystem.Generated.DTO
             this._id = id;
         }
         
+        public TestJobObjectIdentityDTO(SampleSystem.Generated.DTO.TestJobObjectSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
         public TestJobObjectIdentityDTO(SampleSystem.Domain.TestJobObject domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
@@ -25091,6 +25100,240 @@ namespace SampleSystem.Generated.DTO
                 base(mappingService, domainObject)
         {
             mappingService.MapTestItemAuthObject(domainObject, this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestJobObject), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestJobObjectFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestJobObjectRichDTO))]
+    public partial class TestJobObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestJobObjectIdentityDTO>
+    {
+        
+        public TestJobObjectSimpleDTO()
+        {
+        }
+        
+        public TestJobObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestJobObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestJobObject(domainObject, this);
+        }
+        
+        public TestJobObjectSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestJobObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestJobObjectIdentityDTO(this.Id);
+            }
+        }
+        
+        public virtual SampleSystem.Generated.DTO.TestJobObjectStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.TestJobObjectStrictDTO(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestJobObject), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestJobObjectRichDTO))]
+    public partial class TestJobObjectFullDTO : SampleSystem.Generated.DTO.TestJobObjectSimpleDTO
+    {
+        
+        public TestJobObjectFullDTO()
+        {
+        }
+        
+        public TestJobObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestJobObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestJobObject(domainObject, this);
+        }
+        
+        public override SampleSystem.Generated.DTO.TestJobObjectStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.TestJobObjectStrictDTO(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestJobObject), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestJobObjectRichDTO : SampleSystem.Generated.DTO.TestJobObjectFullDTO
+    {
+        
+        public TestJobObjectRichDTO()
+        {
+        }
+        
+        public TestJobObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestJobObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestJobObject(domainObject, this);
+        }
+        
+        public override SampleSystem.Generated.DTO.TestJobObjectStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.TestJobObjectStrictDTO(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestJobObject), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestJobObjectStrictDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestJobObject, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestJobObject>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestJobObjectIdentityDTO>, Framework.Persistent.IVersionObject<long>
+    {
+        
+        private System.Guid _id;
+        
+        private long _version;
+        
+        public TestJobObjectStrictDTO()
+        {
+        }
+        
+        public TestJobObjectStrictDTO(SampleSystem.Generated.DTO.TestJobObjectRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.TestJobObjectFullDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapRichToStrictForTestJobObject(this, source);
+        }
+        
+        public TestJobObjectStrictDTO(SampleSystem.Generated.DTO.TestJobObjectRichDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public TestJobObjectStrictDTO(SampleSystem.Generated.DTO.TestJobObjectFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.TestJobObjectSimpleDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapFullToStrictForTestJobObject(this, source);
+        }
+        
+        public TestJobObjectStrictDTO(SampleSystem.Generated.DTO.TestJobObjectFullDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public TestJobObjectStrictDTO(SampleSystem.Generated.DTO.TestJobObjectSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapSimpleToStrictForTestJobObject(this, source);
+        }
+        
+        public TestJobObjectStrictDTO(SampleSystem.Generated.DTO.TestJobObjectSimpleDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private TestJobObjectStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBaseAuditPersistentToStrictForTestJobObject(this, source);
+        }
+        
+        private TestJobObjectStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private TestJobObjectStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBasePersistentToStrictForTestJobObject(this, source);
+        }
+        
+        private TestJobObjectStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestJobObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestJobObjectIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+        
+        long Framework.Persistent.IVersionObject<long>.Version
+        {
+            get
+            {
+                return this.Version;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestJobObject domainObject)
+        {
+            mappingService.MapTestJobObject(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.TestJobObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestJobObject(this);
+        }
+        
+        public SampleSystem.Domain.TestJobObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        {
+            return mappingService.ToTestJobObject(this, allowCreate);
         }
     }
     

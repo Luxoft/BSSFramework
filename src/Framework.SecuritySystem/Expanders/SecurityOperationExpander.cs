@@ -24,7 +24,8 @@ public class SecurityOperationExpander
                 return securityRoles.ToSecurityRule(
                     securityRule.CustomExpandType
                     ?? securityOperationInfoSource.GetSecurityOperationInfo(securityRule.SecurityOperation).CustomExpandType,
-                    securityRule.CustomCredential);
+                    securityRule.CustomCredential,
+                    securityRule.CustomRestriction);
 
             }).WithLock();
     }

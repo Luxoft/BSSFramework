@@ -40,19 +40,21 @@ public class RoleBaseSecurityProviderFactory<TDomainObject>(
 
                let securityRoleInfo = securityRoleSource.GetSecurityRole(securityRole).Information
 
-               let actualCustomExpandType = securityRule.CustomExpandType
-                                            ?? expandedSecurityRule.CustomExpandType ?? securityRoleInfo.CustomExpandType
+               let actualCustomExpandType = expandedSecurityRule.CustomExpandType ?? securityRule.CustomExpandType ?? securityRoleInfo.CustomExpandType
 
-               let actualCredential = securityRule.CustomCredential ?? expandedSecurityRule.CustomCredential
+               let actualCredential = expandedSecurityRule.CustomCredential ?? securityRule.CustomCredential
 
-               group securityRole by new { actualCustomExpandType, actualCredential, securityRoleInfo.Restriction } into g
+               let actualRestriction = expandedSecurityRule.CustomRestriction ?? securityRule.CustomRestriction ?? securityRoleInfo.Restriction
+
+               group securityRole by new { actualCustomExpandType, actualCredential, actualRestriction } into g
 
                let rule = new DomainSecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(g))
                {
                    CustomExpandType = g.Key.actualCustomExpandType,
-                   CustomCredential = g.Key.actualCredential
+                   CustomCredential = g.Key.actualCredential,
+                   CustomRestriction = g.Key.actualRestriction
                }
 
-               select (rule, g.Key.Restriction);
+               select (rule, g.Key.actualRestriction);
     }
 }

@@ -14,6 +14,11 @@ public class RoleFactorySecurityRuleExpander(IServiceProvider serviceProvider)
 
         return securityRule.CustomExpandType == null
                    ? resultRule
-                   : resultRule with { CustomExpandType = securityRule.CustomExpandType, CustomCredential = securityRule.CustomCredential };
+                   : resultRule with
+                     {
+                         CustomExpandType = securityRule.CustomExpandType,
+                         CustomCredential = securityRule.CustomCredential,
+                         CustomRestriction = securityRule.CustomRestriction
+                     };
     }
 }

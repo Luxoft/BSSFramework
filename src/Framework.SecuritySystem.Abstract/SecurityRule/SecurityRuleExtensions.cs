@@ -20,24 +20,30 @@ public static class SecurityRuleExtensions
     public static OperationSecurityRule ToSecurityRule(
         this SecurityOperation securityOperation,
         HierarchicalExpandType? customExpandType = null,
-        SecurityRuleCredential? customCredential = null) =>
-        new(securityOperation) { CustomExpandType = customExpandType, CustomCredential = customCredential };
+        SecurityRuleCredential? customCredential = null,
+        SecurityPathRestriction? customRestriction = null) =>
+        new(securityOperation)
+        {
+            CustomExpandType = customExpandType, CustomCredential = customCredential, CustomRestriction = customRestriction
+        };
 
     public static NonExpandedRolesSecurityRule ToSecurityRule(
         this IEnumerable<SecurityRole> securityRoles,
         HierarchicalExpandType? customExpandType = null,
-        SecurityRuleCredential? customCredential = null) =>
+        SecurityRuleCredential? customCredential = null,
+        SecurityPathRestriction? customRestriction = null) =>
         new(
-        new DeepEqualsCollection<SecurityRole>(securityRoles.OrderBy(sr => sr.Name)))
+        DeepEqualsCollection.Create(securityRoles.OrderBy(sr => sr.Name)))
         {
-            CustomExpandType = customExpandType, CustomCredential = customCredential
+            CustomExpandType = customExpandType, CustomCredential = customCredential, CustomRestriction = customRestriction
         };
 
     public static NonExpandedRolesSecurityRule ToSecurityRule(
         this SecurityRole securityRole,
         HierarchicalExpandType? customExpandType = null,
-        SecurityRuleCredential? customCredential = null) =>
-        new[] { securityRole }.ToSecurityRule(customExpandType, customCredential);
+        SecurityRuleCredential? customCredential = null,
+        SecurityPathRestriction? customRestriction = null) =>
+        new[] { securityRole }.ToSecurityRule(customExpandType, customCredential, customRestriction);
 
     public static DomainSecurityRule Or(
         this DomainSecurityRule securityRule,

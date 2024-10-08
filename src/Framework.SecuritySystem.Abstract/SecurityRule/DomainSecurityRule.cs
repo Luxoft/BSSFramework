@@ -18,7 +18,7 @@ public abstract record DomainSecurityRule : SecurityRule
     /// <summary>
     /// Любая роль
     /// </summary>
-    public static AnyRoleSecurityRule AnyRole { get; } = new ();
+    public static AnyRoleSecurityRule AnyRole { get; } = new();
 
 
     public static implicit operator DomainSecurityRule(SecurityOperation securityOperation) => securityOperation.ToSecurityRule();
@@ -63,6 +63,8 @@ public abstract record DomainSecurityRule : SecurityRule
 
         public static implicit operator RoleBaseSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
+        public SecurityPathRestriction? CustomRestriction { get; init; } = null;
+
         public SecurityRuleCredential? CustomCredential { get; init; } = null;
 
         /// <summary>
@@ -71,6 +73,13 @@ public abstract record DomainSecurityRule : SecurityRule
         public HierarchicalExpandType? CustomExpandType { get; init; } = null;
 
         public HierarchicalExpandType SafeExpandType => this.CustomExpandType ?? HierarchicalExpandType.Children;
+
+        public bool EqualsCustoms(RoleBaseSecurityRule other)
+        {
+            return this.CustomExpandType == other.CustomExpandType
+                   && this.CustomCredential == other.CustomCredential
+                   && this.CustomRestriction == other.CustomRestriction;
+        }
     }
 
     public record AnyRoleSecurityRule : RoleBaseSecurityRule;
@@ -100,15 +109,17 @@ public abstract record DomainSecurityRule : SecurityRule
 
         public static NonExpandedRolesSecurityRule operator +(NonExpandedRolesSecurityRule rule1, NonExpandedRolesSecurityRule rule2)
         {
-            if (rule1.CustomExpandType != rule2.CustomExpandType)
+            if (!rule1.EqualsCustoms(rule2))
             {
-                throw new InvalidOperationException($"Diff {nameof(CustomExpandType)}");
+                throw new InvalidOperationException("Diff customs");
             }
             else
             {
                 return new NonExpandedRolesSecurityRule(DeepEqualsCollection.Create(rule1.SecurityRoles.Union(rule2.SecurityRoles)))
                        {
-                           CustomExpandType = rule1.CustomExpandType
+                           CustomExpandType = rule1.CustomExpandType,
+                           CustomCredential = rule1.CustomCredential,
+                           CustomRestriction = rule1.CustomRestriction
                        };
             }
         }
@@ -131,15 +142,17 @@ public abstract record DomainSecurityRule : SecurityRule
 
         public static ExpandedRolesSecurityRule operator +(ExpandedRolesSecurityRule rule1, ExpandedRolesSecurityRule rule2)
         {
-            if (rule1.CustomExpandType != rule2.CustomExpandType)
+            if (!rule1.EqualsCustoms(rule2))
             {
-                throw new InvalidOperationException($"Diff {nameof(CustomExpandType)}");
+                throw new InvalidOperationException("Diff customs");
             }
             else
             {
                 return new ExpandedRolesSecurityRule(DeepEqualsCollection.Create(rule1.SecurityRoles.Union(rule2.SecurityRoles)))
                        {
-                           CustomExpandType = rule1.CustomExpandType
+                           CustomExpandType = rule1.CustomExpandType,
+                           CustomCredential = rule1.CustomCredential,
+                           CustomRestriction = rule1.CustomRestriction
                        };
             }
         }

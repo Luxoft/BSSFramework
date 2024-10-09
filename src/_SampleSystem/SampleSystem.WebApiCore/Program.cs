@@ -69,7 +69,7 @@ builder.Services.AddControllers(x => x.EnableEndpointRouting = false)
 
 builder.Services.AddHangfireBss(
     builder.Configuration,
-    s => s.AddJob<SampleJob>()
+    s => s.AddJob<SampleJob>(new JobSettings { DisplayName = "SampleDisplayName" })
           .AddJob<ISendNotificationsJob>((job, ct) => job.ExecuteAsync(ct), new JobSettings { CronTiming = Cron.Never() }));
 
 builder.Services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));

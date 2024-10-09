@@ -8,4 +8,6 @@ public class JobNameExtractPolicy : IJobNameExtractPolicy
     {
         return jobType.Name.Pipe(jobType.IsInterface, v => v.Skip("I", true)).SkipLast("Job");
     }
+
+    public string GetDisplayName(Type jobType) => jobType.Name;
 }

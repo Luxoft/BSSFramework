@@ -49,10 +49,11 @@ public static class HangfireExtensions
                     Authorization =
                     [
                         authorizationFilter ?? new AdminHangfireAuthorization(dashboardAuthorizationSecurityRule ?? SecurityRole.Administrator)
-                    ]
+                    ],
+                    DisplayNameFunc = (_, job) => settings.GetDisplayName(job)
                 });
 
-            settings.RunJobs();
+            settings.RunJobs(app.ApplicationServices);
         }
 
         return app;

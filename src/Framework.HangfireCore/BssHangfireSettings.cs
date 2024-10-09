@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using System.Reflection;
+
+using Framework.Core;
 using Framework.DomainDriven.Jobs;
 
 using Hangfire;
@@ -15,23 +17,25 @@ public class BssHangfireSettings : IBssHangfireSettings
 {
     private Func<IConfiguration, string> getConnectionStringFunc = default!;
 
-    private readonly List<Action<IServiceCollection>> registerActions = [];
+    private readonly List<Action<IServiceCollection>> registerServicesActions = [];
 
-    private readonly List<Action> runJobActions = [];
+    private readonly Dictionary<Job, JobSettings> registerJobs = [];
+
+    private readonly Dictionary<MethodInfo, string> jobNames = [];
 
     private bool autoRegisterJob = true;
 
     private IJobNameExtractPolicy jobNameExtractPolicy = new JobNameExtractPolicy();
 
     private readonly SqlServerStorageOptions sqlServerStorageOptions = new()
-    {
-        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-        QueuePollInterval = TimeSpan.Zero,
-        UseRecommendedIsolationLevel = true,
-        UsePageLocksOnDequeue = true,
-        DisableGlobalLocks = true
-    };
+                                                                       {
+                                                                           CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                                                                           SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                                                                           QueuePollInterval = TimeSpan.Zero,
+                                                                           UseRecommendedIsolationLevel = true,
+                                                                           UsePageLocksOnDequeue = true,
+                                                                           DisableGlobalLocks = true,
+                                                                       };
 
     private Action<IGlobalConfiguration> globalConfigurationAction = _ => { };
 
@@ -40,6 +44,11 @@ public class BssHangfireSettings : IBssHangfireSettings
     public string? RunAs { get; set; }
 
     public JobTiming[] JobTimings { get; set; } = [];
+
+    public string GetDisplayName(Job job)
+    {
+        return this.jobNames[job.Method];
+    }
 
 
     public BssHangfireSettings()
@@ -80,10 +89,10 @@ public class BssHangfireSettings : IBssHangfireSettings
         var prevAction = this.globalConfigurationAction;
 
         this.globalConfigurationAction = cfg =>
-        {
-            prevAction(cfg);
-            newGlobalConfigurationAction(cfg);
-        };
+                                         {
+                                             prevAction(cfg);
+                                             newGlobalConfigurationAction(cfg);
+                                         };
 
         return this;
     }
@@ -99,26 +108,34 @@ public class BssHangfireSettings : IBssHangfireSettings
     public IBssHangfireSettings AddJob<TJob, TArg>(Func<TJob, TArg, Task> executeAction, JobSettings? jobSettings = null)
         where TJob : class
     {
-        this.registerActions.Add(services =>
-                                 {
-                                     if (!typeof(TJob).IsInterface && this.autoRegisterJob)
-                                     {
-                                         services.AddScoped<TJob>();
-                                     }
-
-                                     services.AddSingleton(new JobInfo<TJob, TArg>(executeAction));
-                                 });
-
-        this.runJobActions.Add(
-            () =>
+        this.registerServicesActions.Add(
+            services =>
             {
+                if (!typeof(TJob).IsInterface && this.autoRegisterJob)
+                {
+                    services.AddScoped<TJob>();
+                }
+
+                services.AddSingleton(new JobInfo<TJob, TArg>(executeAction));
+
                 var jobName = jobSettings?.Name ?? this.jobNameExtractPolicy.GetName(typeof(TJob));
 
                 var cronTiming = jobSettings?.CronTiming
                                  ?? this.JobTimings.Where(jt => jt.Name == jobName).Select(jt => jt.Schedule).SingleOrDefault()
                                  ?? throw new Exception($"{nameof(JobTiming)} for job '{jobName}' not found");
 
-                RecurringJob.AddOrUpdate<MiddlewareJob<TJob, TArg>>(jobName, job => job.ExecuteAsync(default!), cronTiming);
+                var job = Job.FromExpression(ExpressionHelper.Create((MiddlewareJob<TJob, TArg> job) => job.ExecuteAsync(default!)));
+
+                var actualSettings = new JobSettings
+                                     {
+                                         Name = jobName,
+                                         CronTiming = cronTiming,
+                                         DisplayName = jobSettings?.DisplayName ?? this.jobNameExtractPolicy.GetDisplayName(typeof(TJob))
+                                     };
+
+                this.registerJobs.Add(job, actualSettings);
+
+                this.jobNames.Add(job.Method, actualSettings.DisplayName);
             });
 
         return this;
@@ -138,7 +155,7 @@ public class BssHangfireSettings : IBssHangfireSettings
             services.AddSingleton(new JobImpersonateData(this.RunAs));
         }
 
-        this.registerActions.ForEach(a => a(services));
+        this.registerServicesActions.ForEach(a => a(services));
 
         services.AddHangfire(
             z =>
@@ -154,11 +171,16 @@ public class BssHangfireSettings : IBssHangfireSettings
         services.AddHangfireServer();
     }
 
-    public void RunJobs()
+    public void RunJobs(IServiceProvider serviceProvider)
     {
         JobFilterProviders.Providers.RemoveBy(provider => provider is JobFilterAttributeFilterProvider);
         JobFilterProviders.Providers.Add(new BssJobFilterAttributeFilterProvider());
 
-        this.runJobActions.ForEach(a => a());
+        var manager = serviceProvider.GetRequiredService<IRecurringJobManager>();
+
+        foreach (var pair in this.registerJobs)
+        {
+            manager.AddOrUpdate(pair.Value.Name, pair.Key, pair.Value.CronTiming);
+        }
     }
 }

@@ -4,5 +4,7 @@ public class ClientDomainModeSecurityRuleSource(IEnumerable<DomainModeSecurityRu
     : IClientDomainModeSecurityRuleSource
 {
     public IEnumerable<DomainSecurityRule.DomainModeSecurityRule> GetRules() =>
-        domainModeSecurityRuleInfoList.Select(info => info.SecurityRule);
+        domainModeSecurityRuleInfoList
+            .Where(info => info.Implementation != SecurityRule.Disabled)
+            .Select(info => info.SecurityRule);
 }

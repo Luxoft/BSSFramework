@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.WebApiNetCore.Swagger;
-using Framework.SecuritySystem.AvailableSecurity;
+﻿using Framework.SecuritySystem.AvailableSecurity;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +8,7 @@ namespace Authorization.WebApi.Controllers;
 [Route("authApi/[controller]/[action]")]
 public class SecurityRuleController(IAvailableClientSecurityRuleSource availableClientSecurityRuleSource) : ControllerBase
 {
-    [HttpPost]
+    [HttpGet]
     public async Task<IEnumerable<string>> GetSecurityRules(CancellationToken cancellationToken)
     {
         var clientSecurityRules = await availableClientSecurityRuleSource.GetAvailableSecurityRules(cancellationToken);

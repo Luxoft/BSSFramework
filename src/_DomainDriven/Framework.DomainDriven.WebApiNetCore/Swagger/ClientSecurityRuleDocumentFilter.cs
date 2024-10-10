@@ -1,6 +1,5 @@
 ﻿using Framework.SecuritySystem.SecurityRuleInfo;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 
@@ -16,27 +15,14 @@ public class ClientSecurityRuleDocumentFilter(IClientSecurityRuleInfoSource sour
 
         var schema = new OpenApiSchema
                      {
-                         Type = "integer"
+                         Type = "integer",
+                         Enum = Enumerable.Range(0, ruleNames.Length).Select(v => (IOpenApiAny)new OpenApiInteger(v)).ToList(),
                      };
-
-        var apiValues = new OpenApiArray();
-        apiValues.AddRange(Enumerable.Range(0, ruleNames.Length).Select(v => new OpenApiInteger(v)).ToArray());
-        schema.Extensions["enum"] = apiValues;
 
         var apiNames = new OpenApiArray();
         apiNames.AddRange(ruleNames.Select(v => new OpenApiString(v)));
         schema.Extensions["x-enumNames"] = apiNames;
 
         context.SchemaRepository.Schemas.Add(clientSecurityRuleName, schema);
-    }
-}
-
-public static class SwaggerExtensions
-{
-    public static SwaggerGenOptions AddClientSecurityRule(this SwaggerGenOptions options, string clientSecurityRuleName)
-    {
-        options.DocumentFilter<ClientSecurityRuleDocumentFilter>(clientSecurityRuleName);
-
-        return options;
     }
 }

@@ -14,6 +14,11 @@ public abstract class SecurityRuleVisitor
         return securityRule;
     }
 
+    protected virtual DomainSecurityRule Visit(DomainModeSecurityRule securityRule)
+    {
+        return securityRule;
+    }
+
     protected virtual DomainSecurityRule Visit(OperationSecurityRule securityRule)
     {
         return securityRule;
@@ -76,6 +81,7 @@ public abstract class SecurityRuleVisitor
     public virtual DomainSecurityRule Visit(DomainSecurityRule baseSecurityRule) => baseSecurityRule switch
     {
         RoleBaseSecurityRule securityRule => this.Visit(securityRule),
+        DomainModeSecurityRule securityRule => this.Visit(securityRule),
         OrSecurityRule securityRule => this.Visit(securityRule),
         AndSecurityRule securityRule => this.Visit(securityRule),
         NegateSecurityRule securityRule => this.Visit(securityRule),

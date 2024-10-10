@@ -7,6 +7,7 @@ using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.AvailableSecurity;
 using Framework.SecuritySystem.Services;
 
 namespace Framework.Authorization.BLL;

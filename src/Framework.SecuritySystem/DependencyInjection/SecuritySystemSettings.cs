@@ -4,6 +4,7 @@ using Framework.DependencyInjection;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.SecurityAccessor;
+using Framework.SecuritySystem.SecurityRuleInfo;
 using Framework.SecuritySystem.Services;
 using Framework.SecuritySystem.UserSource;
 
@@ -13,7 +14,7 @@ namespace Framework.SecuritySystem.DependencyInjection;
 
 public class SecuritySystemSettings : ISecuritySystemSettings
 {
-    private readonly List<Action<IServiceCollection>> registerActions = new();
+    private readonly List<Action<IServiceCollection>> registerActions = [];
 
     private Action<IServiceCollection> registerUserSourceAction = _ => { };
 
@@ -22,6 +23,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
     private SecurityRuleCredential defaultSecurityRuleCredential = SecurityRuleCredential.CurrentUserWithRunAs;
 
     private Type accessDeniedExceptionServiceType = typeof(AccessDeniedExceptionService);
+
+    private Type securityRuleParserType = typeof(ClientSecurityRuleParser);
 
     private Type? securityAccessorInfinityStorageType;
 
@@ -154,6 +157,32 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
+    public ISecuritySystemSettings AddClientSecurityRuleInfoSource<TClientSecurityRuleInfoSource>()
+        where TClientSecurityRuleInfoSource : class, IClientSecurityRuleInfoSource
+    {
+        this.registerActions.Add(sc => sc.AddSingleton<IClientSecurityRuleInfoSource, TClientSecurityRuleInfoSource>());
+
+        return this;
+    }
+
+
+    public ISecuritySystemSettings AddClientSecurityRuleInfoSource(Type sourceType)
+    {
+        this.registerActions.Add(
+            sc => sc.AddSingleton<IClientSecurityRuleInfoSource>(
+                sp => ActivatorUtilities.CreateInstance<SourceTypeClientSecurityRuleInfoSource>(sp, sourceType)));
+
+        return this;
+    }
+
+    public ISecuritySystemSettings SetSecurityRuleParser<TSecurityRuleParser>()
+        where TSecurityRuleParser : class, ISecurityRuleParser
+    {
+        this.securityRuleParserType = typeof(TSecurityRuleParser);
+
+        return this;
+    }
+
     public void Initialize(IServiceCollection services)
     {
         this.registerActions.ForEach(v => v(services));
@@ -180,6 +209,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         }
 
         services.AddSingleton(this.defaultSecurityRuleCredential);
+
+        services.AddSingleton(typeof(ISecurityRuleParser), this.securityRuleParserType);
     }
 
     private void AddSecurityRole(IServiceCollection serviceCollection, FullSecurityRole fullSecurityRole)

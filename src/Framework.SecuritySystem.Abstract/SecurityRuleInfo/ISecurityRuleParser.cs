@@ -1,6 +1,4 @@
-﻿using Framework.SecuritySystem;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.SecuritySystem.SecurityRuleInfo;
 
 public interface ISecurityRuleParser
 {

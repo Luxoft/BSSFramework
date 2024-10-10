@@ -16,6 +16,7 @@ using Framework.Events;
 using Framework.SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
+using Framework.SecuritySystem.AvailableSecurity;
 
 namespace Framework.Authorization.BLL;
 

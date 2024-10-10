@@ -46,8 +46,7 @@ public static class SampleSystemFrameworkExtensions
 
     public static IBssFrameworkSettings RegisterSupportLegacyServices(this IBssFrameworkSettings settings)
     {
-        return settings.SetSecurityRuleParser<SampleSystemSecurityRuleParser>()
-                       .SetSubscriptionAssembly(typeof(EmployeeUpdateSubscription).Assembly)
+        return settings.SetSubscriptionAssembly(typeof(EmployeeUpdateSubscription).Assembly)
                        .SetNotificationDefaultMailSenderContainer<SampleSystemDefaultMailSenderContainer>()
                        .SetNotificationEmployee<Employee>()
                        .SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();

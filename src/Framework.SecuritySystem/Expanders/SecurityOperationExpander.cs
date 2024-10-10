@@ -1,14 +1,14 @@
 ﻿using Framework.Core;
 
+using static Framework.SecuritySystem.DomainSecurityRule;
+
 namespace Framework.SecuritySystem.Expanders;
 
-public class SecurityOperationExpander
+public class SecurityOperationExpander(ISecurityRoleSource securityRoleSource, ISecurityOperationInfoSource securityOperationInfoSource)
+    : ISecurityOperationExpander
 {
-    private readonly IDictionaryCache<DomainSecurityRule.OperationSecurityRule, DomainSecurityRule.NonExpandedRolesSecurityRule> expandCache;
-
-    public SecurityOperationExpander(ISecurityRoleSource securityRoleSource, ISecurityOperationInfoSource securityOperationInfoSource)
-    {
-        this.expandCache = new DictionaryCache<DomainSecurityRule.OperationSecurityRule, DomainSecurityRule.NonExpandedRolesSecurityRule>(
+    private readonly IDictionaryCache<OperationSecurityRule, NonExpandedRolesSecurityRule> cache =
+        new DictionaryCache<OperationSecurityRule, NonExpandedRolesSecurityRule>(
             securityRule =>
             {
                 var securityRoles = securityRoleSource.SecurityRoles
@@ -28,10 +28,10 @@ public class SecurityOperationExpander
                     securityRule.CustomRestriction);
 
             }).WithLock();
-    }
 
-    public DomainSecurityRule.NonExpandedRolesSecurityRule Expand(DomainSecurityRule.OperationSecurityRule securityRule)
+
+    public NonExpandedRolesSecurityRule Expand(OperationSecurityRule securityRule)
     {
-        return this.expandCache[securityRule];
+        return this.cache[securityRule];
     }
 }

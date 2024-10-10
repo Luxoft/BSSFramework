@@ -1,4 +1,4 @@
-﻿namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem.AvailableSecurity;
 
 public class AvailableSecurityOperationSource(IAvailableSecurityRoleSource availableSecurityRoleSource)
     : IAvailableSecurityOperationSource

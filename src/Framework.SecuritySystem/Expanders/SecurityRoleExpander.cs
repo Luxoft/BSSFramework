@@ -2,7 +2,7 @@
 
 namespace Framework.SecuritySystem.Expanders;
 
-public class SecurityRoleExpander
+public class SecurityRoleExpander : ISecurityRoleExpander
 {
     private readonly IDictionaryCache<DomainSecurityRule.NonExpandedRolesSecurityRule, DomainSecurityRule.ExpandedRolesSecurityRule> expandCache;
 

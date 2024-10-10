@@ -43,7 +43,7 @@
     </div>
 
     <div class="row tw-p-2 tw-mx-4 tw-gap-4 tw-w-fit tw-border-b last:tw-border-0"
-         *ngFor="let element of obj.filter | rightsFilter : obj.rights ?? []; index as index">
+         *ngFor="let element of obj.filter | rightsFilter : obj.rights ?? []">
       <button mat-icon-button
               [disabled]="element.IsVirtual"
               [matMenuTriggerFor]="menu">
@@ -52,12 +52,12 @@
       <mat-menu #menu="matMenu">
         <button *ngIf="allContexts$ | async as allContexts"
                 mat-menu-item
-                (click)="grantRightsDialogService.edit(element, index)">
+                (click)="grantRightsDialogService.edit(element, allContexts)">
           <mat-icon>edit</mat-icon>
           <span>Edit</span>
         </button>
         <button mat-menu-item
-                (click)="grantRightsDialogService.remove(index)">
+                (click)="grantRightsDialogService.remove(element)">
           <mat-icon>delete</mat-icon>
           <span>Delete</span>
         </button>

@@ -51,7 +51,7 @@ export class GrantRightsDialogService {
       });
   }
 
-  public remove(elementIndex: number): void {
+  public remove(permission: IPermissionDto): void {
     this.dialog
       .open(ConfirmDialogComponent, {
         data: { title: 'Are you sure you want to delete this role?', button: 'Yes, delete' },
@@ -65,7 +65,7 @@ export class GrantRightsDialogService {
             return;
           }
           const rights = this.rightsInternalSubject.value;
-          rights.Permissions.splice(elementIndex, 1);
+          rights.Permissions = rights.Permissions.filter((x) => x.Id != permission.Id);
           this.rightsInternalSubject.next(rights);
         }),
         takeUntil(this.destroy$)
@@ -73,11 +73,36 @@ export class GrantRightsDialogService {
       .subscribe();
   }
 
-  public edit(permissionDto: IPermissionDto, elementIndex: number): void {
-    const allContexts = this.allContextsSubject.value;
-    const permission = this.mapPermission(permissionDto, this.rolesSubject.value, allContexts);
+  public edit(permissionDto: IPermissionDto, units: IRoleContext[]): void {
+    const permission = this.mapPermission(permissionDto, this.rolesSubject.value, this.allContextsSubject.value);
 
-    this.openPermissionEditDialog(permission, (permissions, permission) => (permissions[elementIndex] = permission));
+    this.dialog
+      .open(PermissionEditDialogComponent, {
+        maxHeight: '90vh',
+        maxWidth: '90vw',
+        data: { permission, units },
+      })
+      .afterClosed()
+      .pipe(
+        tap((result) => {
+          if (result) {
+            const rights = this.rightsInternalSubject.value;
+            const findIndex = rights.Permissions.findIndex((x) => x.Id === result.Id);
+            if (findIndex > -1) {
+              rights.Permissions[findIndex] = result;
+            } else {
+              rights.Permissions.unshift(result);
+            }
+            this.rightsInternalSubject.next(rights);
+          }
+          // TODO: fix next three lines
+          const filterValue = this.filter.value;
+          this.filter.next({ ...filterValue, comment: '' });
+          this.filter.next({ ...filterValue });
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   public addPermission(): void {
@@ -98,38 +123,7 @@ export class GrantRightsDialogService {
             Comment: '',
             Contexts: [],
           };
-          this.openPermissionEditDialog(permission, (permissions, permission) => permissions.push(permission));
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-  }
-
-  private openPermissionEditDialog<TPermission extends IPermissionDto>(
-    permissionDto: IPermissionDto,
-    updPermissionsAction: (existingPermissions: IPermissionDto[], newPermission: TPermission) => void
-  ): void {
-    const allContexts = this.allContextsSubject.value;
-    const permission = this.mapPermission(permissionDto, this.rolesSubject.value, allContexts);
-
-    this.dialog
-      .open(PermissionEditDialogComponent, {
-        maxHeight: '90vh',
-        maxWidth: '90vw',
-        data: { permission, allContexts },
-      })
-      .afterClosed()
-      .pipe(
-        tap((result) => {
-          if (result) {
-            const rights = this.rightsInternalSubject.value;
-            updPermissionsAction(rights.Permissions, result);
-            this.rightsInternalSubject.next(rights);
-          }
-          // TODO: fix next three lines
-          const filterValue = this.filter.value;
-          this.filter.next({ ...filterValue, comment: '' });
-          this.filter.next({ ...filterValue });
+          this.edit(permission, this.allContextsSubject.value);
         }),
         takeUntil(this.destroy$)
       )

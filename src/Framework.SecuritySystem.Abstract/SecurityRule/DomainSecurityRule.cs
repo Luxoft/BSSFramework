@@ -27,6 +27,11 @@ public abstract record DomainSecurityRule : SecurityRule
 
     public static implicit operator DomainSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
+    public record DomainModeSecurityRule(Type DomainType, ModeSecurityRule Mode) : DomainSecurityRule
+    {
+        public override string ToString() => $"{this.Mode} ({this.DomainType.Name})";
+    }
+
     public record CurrentUserSecurityRule(string? RelativePathKey = null) : DomainSecurityRule
     {
         public override string ToString() => this.RelativePathKey ?? nameof(CurrentUser);

@@ -27,7 +27,7 @@ public partial class MainTests
     public void SecurityRoleExpander_ExpandDeepChild_AllRolesExpanded()
     {
         // Arrange
-        var expander = this.rootServiceProvider.GetRequiredService<SecurityRoleExpander>();
+        var expander = this.rootServiceProvider.GetRequiredService<ISecurityRoleExpander>();
 
         // Act
         var expandResult = expander.Expand(ExampleSecurityRole.TestRole3);
@@ -44,7 +44,7 @@ public partial class MainTests
     public void SecurityRoleExpander_ExpandWithDefaultExpandType_RoleResolved()
     {
         // Arrange
-        var expander = this.rootServiceProvider.GetRequiredService<SecurityOperationExpander>();
+        var expander = this.rootServiceProvider.GetRequiredService<ISecurityOperationExpander>();
 
         // Act
         var expandResult = expander.Expand(new DomainSecurityRule.OperationSecurityRule(ExampleSecurityOperation.EmployeeView));
@@ -57,7 +57,7 @@ public partial class MainTests
     public void SecurityRoleExpander_ExpandWithCustomExpandType_SecurityRuleCorrected()
     {
         // Arrange
-        var expander = this.rootServiceProvider.GetRequiredService<SecurityOperationExpander>();
+        var expander = this.rootServiceProvider.GetRequiredService<ISecurityOperationExpander>();
 
         // Act
         var expandResult = expander.Expand(ExampleSecurityOperation.EmployeeView.ToSecurityRule(HierarchicalExpandType.None));

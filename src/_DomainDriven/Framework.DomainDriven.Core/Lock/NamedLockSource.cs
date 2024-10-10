@@ -2,12 +2,8 @@
 
 namespace Framework.DomainDriven.Lock;
 
-public class NamedLockSource : INamedLockSource
+public class NamedLockSource(IEnumerable<NamedLockTypeInfo> typeInfoList) : INamedLockSource
 {
-    public NamedLockSource(IEnumerable<NamedLockTypeInfo> typeInfoList)
-    {
-        this.NamedLocks = typeInfoList.SelectMany(typeInfo => typeInfo.NamedLockType.GetStaticPropertyValueList<NamedLock>()).ToList();
-    }
-
-    public IReadOnlyList<NamedLock> NamedLocks { get; }
+    public IReadOnlyList<NamedLock> NamedLocks { get; } =
+        typeInfoList.SelectMany(typeInfo => typeInfo.NamedLockType.GetStaticPropertyValueList<NamedLock>()).ToList();
 }

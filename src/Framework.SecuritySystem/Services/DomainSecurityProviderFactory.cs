@@ -3,6 +3,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 using Framework.Core;
+using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.UserSource;
 
 using static Framework.SecuritySystem.DomainSecurityRule;
@@ -11,6 +12,7 @@ namespace Framework.SecuritySystem.Services;
 
 public class DomainSecurityProviderFactory<TDomainObject>(
     IServiceProvider serviceProvider,
+    ISecurityModeExpander securityModeExpander,
     ISecurityRuleDeepOptimizer deepOptimizer,
     ISecurityRuleImplementationResolver implementationResolver,
     IRoleBaseSecurityProviderFactory<TDomainObject> roleBaseSecurityProviderFactory) : IDomainSecurityProviderFactory<TDomainObject>
@@ -28,6 +30,9 @@ public class DomainSecurityProviderFactory<TDomainObject>(
     {
         switch (baseSecurityRule)
         {
+            case DomainModeSecurityRule securityRule:
+                return this.Create(securityModeExpander.Expand(securityRule), securityPath);
+
             case RoleBaseSecurityRule securityRule:
                 return roleBaseSecurityProviderFactory.Create(securityRule, securityPath);
 

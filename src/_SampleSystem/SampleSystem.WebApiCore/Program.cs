@@ -8,6 +8,7 @@ using Framework.Configurator.Interfaces;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.DomainDriven.WebApiNetCore.JsonConverter;
+using Framework.DomainDriven.WebApiNetCore.Swagger;
 using Framework.HangfireCore;
 using Framework.NotificationCore.Jobs;
 
@@ -40,7 +41,11 @@ builder.Host
 builder.Services
        .RegisterGeneralDependencyInjection(builder.Configuration)
        .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
-       .AddPlatformApiDocumentation(builder.Environment, "SampleSystem API", x => x.CustomSchemaIds(t => t.FullName))
+       .AddPlatformApiDocumentation(builder.Environment, "SampleSystem API", x =>
+       {
+           x.AddClientSecurityRule("SampleSystemSecurityRule");
+           x.CustomSchemaIds(t => t.FullName);
+       })
        .AddPlatformIntegrationEvents<IntegrationEventProcessor>(
            typeof(ClassACreatedEvent).Assembly,
            x =>
@@ -62,10 +67,10 @@ builder.Services.AddAuthorization(
 
 builder.Services.AddControllers(x => x.EnableEndpointRouting = false)
        .AddJsonOptions(x =>
-                       {
-                           x.JsonSerializerOptions.Converters.Add(new UtcDateTimeJsonConverter());
-                           x.JsonSerializerOptions.Converters.Add(new PeriodJsonConverter());
-                       });
+       {
+           x.JsonSerializerOptions.Converters.Add(new UtcDateTimeJsonConverter());
+           x.JsonSerializerOptions.Converters.Add(new PeriodJsonConverter());
+       });
 
 builder.Services.AddHangfireBss(
     builder.Configuration,

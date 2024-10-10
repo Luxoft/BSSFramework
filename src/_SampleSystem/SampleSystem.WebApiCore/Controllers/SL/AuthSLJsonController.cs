@@ -2,6 +2,7 @@
 using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.AvailableSecurity;
 
 using Microsoft.AspNetCore.Mvc;
 

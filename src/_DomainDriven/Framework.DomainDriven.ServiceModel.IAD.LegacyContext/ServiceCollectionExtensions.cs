@@ -24,7 +24,7 @@ using Framework.Configuration.Generated.DTO;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.Setup;
-using Framework.SecuritySystem.Expanders;
+using Framework.SecuritySystem.SecurityRuleInfo;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -114,7 +114,7 @@ public static class ServiceCollectionExtensions
 
             if (pair.CustomViewSecurityRule != null)
             {
-                services.AddSingleton(new DomainObjectSecurityModeInfo(pair.DomainType, pair.CustomViewSecurityRule, null));
+                services.AddSingleton(new DomainModeSecurityRuleInfo(new DomainSecurityRule.DomainModeSecurityRule(pair.DomainType, SecurityRule.View), pair.CustomViewSecurityRule));
             }
         }
 

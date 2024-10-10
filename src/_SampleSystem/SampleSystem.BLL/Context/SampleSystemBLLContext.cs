@@ -7,6 +7,7 @@ using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.SecurityRuleInfo;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,46 +16,43 @@ using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.BLL;
 
-public partial class SampleSystemBLLContext
+public partial class SampleSystemBLLContext(
+    IServiceProvider serviceProvider,
+    [FromKeyedServices("BLL")] IEventOperationSender operationSender,
+    ITrackingService<PersistentDomainObjectBase> trackingService,
+    IAccessDeniedExceptionService accessDeniedExceptionService,
+    IStandartExpressionBuilder standartExpressionBuilder,
+    ISampleSystemValidator validator,
+    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+    IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
+    IRootSecurityService<PersistentDomainObjectBase> securityService,
+    ISampleSystemBLLFactoryContainer logics,
+    IAuthorizationBLLContext authorization,
+    Framework.Configuration.BLL.IConfigurationBLLContext configuration,
+    BLLContextSettings<PersistentDomainObjectBase> settings,
+    ISecurityRuleParser securityRuleParser)
+    : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid,
+        ISampleSystemBLLFactoryContainer>(
+        serviceProvider,
+        operationSender,
+        trackingService,
+        accessDeniedExceptionService,
+        standartExpressionBuilder,
+        validator,
+        hierarchicalObjectExpanderFactory,
+        fetchService)
 {
-    public SampleSystemBLLContext(
-            IServiceProvider serviceProvider,
-            [FromKeyedServices("BLL")] IEventOperationSender operationSender,
-            ITrackingService<PersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService accessDeniedExceptionService,
-            IStandartExpressionBuilder standartExpressionBuilder,
-            ISampleSystemValidator validator,
-            IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-            IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            IRootSecurityService<PersistentDomainObjectBase> securityService,
-            ISampleSystemBLLFactoryContainer logics,
-            IAuthorizationBLLContext authorization,
-            Framework.Configuration.BLL.IConfigurationBLLContext configuration,
-            BLLContextSettings<PersistentDomainObjectBase> settings,
-            ISecurityRuleParser securityRuleParser)
-            : base(serviceProvider, operationSender, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
-    {
-        this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
-        this.Logics = logics ?? throw new ArgumentNullException(nameof(logics));
+    public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; } = securityService;
 
-        this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
-        this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-        this.SecurityRuleParser = securityRuleParser;
+    public ISecurityRuleParser SecurityRuleParser { get; } = securityRuleParser;
 
-        this.TypeResolver = settings.TypeResolver;
-    }
+    public override ISampleSystemBLLFactoryContainer Logics { get; } = logics;
 
-    public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
+    public IAuthorizationBLLContext Authorization { get; } = authorization;
 
-    public ISecurityRuleParser SecurityRuleParser { get; }
+    public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; } = configuration;
 
-    public override ISampleSystemBLLFactoryContainer Logics { get; }
-
-    public IAuthorizationBLLContext Authorization { get; }
-
-    public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; }
-
-    public ITypeResolver<string> TypeResolver { get; }
+    public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
 
     public override bool AllowVirtualPropertyInOdata(Type domainType)
     {

@@ -3,6 +3,7 @@
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.SecurityAccessor;
+using Framework.SecuritySystem.SecurityRuleInfo;
 using Framework.SecuritySystem.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -53,4 +54,11 @@ public interface ISecuritySystemSettings
 
     ISecuritySystemSettings SetDefaultSecurityRuleCredential(SecurityRuleCredential securityRuleCredential);
 
+    ISecuritySystemSettings AddClientSecurityRuleInfoSource<TClientSecurityRuleInfoSource>()
+        where TClientSecurityRuleInfoSource : class, IClientSecurityRuleInfoSource;
+
+    ISecuritySystemSettings AddClientSecurityRuleInfoSource(Type sourceType);
+
+    ISecuritySystemSettings SetSecurityRuleParser<TSecurityRuleParser>()
+        where TSecurityRuleParser : class, ISecurityRuleParser;
 }

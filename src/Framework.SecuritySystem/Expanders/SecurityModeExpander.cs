@@ -1,28 +1,14 @@
-﻿namespace Framework.SecuritySystem.Expanders;
+﻿using Framework.SecuritySystem.SecurityRuleInfo;
 
-public class SecurityModeExpander
+namespace Framework.SecuritySystem.Expanders;
+
+public class SecurityModeExpander(IEnumerable<DomainModeSecurityRuleInfo> infoList) : ISecurityModeExpander
 {
-    private readonly IReadOnlyDictionary<(Type, SecurityRule.ModeSecurityRule), DomainSecurityRule> dict;
+    private readonly IReadOnlyDictionary<DomainSecurityRule.DomainModeSecurityRule, DomainSecurityRule> dict =
+        infoList.Select(info => (info.SecurityRule, info.Implementation)).ToDictionary();
 
-    public SecurityModeExpander(IEnumerable<DomainObjectSecurityModeInfo> infos)
+    public DomainSecurityRule? TryExpand(DomainSecurityRule.DomainModeSecurityRule securityRule)
     {
-        var request = from info in infos
-
-                      from pair in new[]
-                                   {
-                                       (Mode: SecurityRule.View, TargetRule: info.ViewRule),
-                                       (Mode: SecurityRule.Edit, TargetRule: info.EditRule)
-                                   }
-
-                      where pair.TargetRule != null
-
-                      select ((info.DomainType, pair.Mode), pair.TargetRule);
-
-        this.dict = request.ToDictionary();
-    }
-
-    public DomainSecurityRule? TryExpand<TDomainObject>(SecurityRule.ModeSecurityRule securityRule)
-    {
-        return this.dict.GetValueOrDefault((typeof(TDomainObject), securityRule));
+        return this.dict.GetValueOrDefault(securityRule);
     }
 }

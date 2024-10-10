@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.DependencyInjection;
+using Framework.SecuritySystem.AvailableSecurity;
 using Framework.SecuritySystem.Builders._Factory;
 
 using Framework.SecuritySystem.Builders.AccessorsBuilder;
@@ -12,6 +13,7 @@ using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
 using Framework.SecuritySystem.PermissionOptimization;
 using Framework.SecuritySystem.SecurityAccessor;
+using Framework.SecuritySystem.SecurityRuleInfo;
 using Framework.SecuritySystem.Services;
 using Framework.SecuritySystem.UserSource;
 
@@ -82,11 +84,19 @@ public static class ServiceCollectionExtensions
         return services.AddScoped<IRootPrincipalSourceService, RootPrincipalSourceService>()
                        .AddNotImplemented<IPrincipalManagementService>($"{nameof(IPrincipalManagementService)} not supported", isScoped: true)
 
-                       .AddSingleton<SecurityModeExpander>()
-                       .AddSingleton<SecurityOperationExpander>()
-                       .AddSingleton<SecurityRoleExpander>()
-                       .AddSingleton<RoleFactorySecurityRuleExpander>()
-                       .AddSingleton<ISecurityRuleExpander, SecurityRuleExpander>()
+                       .AddSingleton<IClientSecurityRuleNameExtractor, ClientSecurityRuleNameExtractor>()
+                       .AddSingleton<IClientDomainModeSecurityRuleSource, ClientDomainModeSecurityRuleSource>()
+                       .AddSingleton<IClientSecurityRuleInfoSource, RootClientSecurityRuleInfoSource>()
+                       .AddKeyedSingleton<IClientSecurityRuleInfoSource, DomainModeClientSecurityRuleInfoSource>(RootClientSecurityRuleInfoSource.ElementKey)
+                       .AddSingleton<IClientSecurityRuleResolver, ClientSecurityRuleResolver>()
+                       .AddSingleton<IDomainModeSecurityRuleResolver, DomainModeSecurityRuleResolver>()
+                       .AddSingleton<IDomainSecurityRoleExtractor, DomainSecurityRoleExtractor>()
+
+                       .AddSingleton<ISecurityModeExpander, SecurityModeExpander>()
+                       .AddSingleton<ISecurityOperationExpander, SecurityOperationExpander>()
+                       .AddSingleton<ISecurityRoleExpander, SecurityRoleExpander>()
+                       .AddSingleton<IRoleFactorySecurityRuleExpander, RoleFactorySecurityRuleExpander>()
+                       .AddSingleton<ISecurityRuleExpander, RootSecurityRuleExpander>()
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
                        .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
                        .AddSingleton<ISecurityContextSource, SecurityContextSource>()
@@ -145,6 +155,7 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IAvailableSecurityRoleSource, AvailableSecurityRoleSource>()
                        .AddScoped<IAvailableSecurityOperationSource, AvailableSecurityOperationSource>()
+                       .AddScoped<IAvailableClientSecurityRuleSource, AvailableClientSecurityRuleSource>()
                        .AddScoped<IUserNameResolver, UserNameResolver>();
     }
 }

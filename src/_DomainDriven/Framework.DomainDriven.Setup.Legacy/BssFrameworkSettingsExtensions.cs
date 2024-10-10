@@ -74,10 +74,6 @@ public static class BssFrameworkSettingsExtensions
             });
     }
 
-    public static IBssFrameworkSettings SetSecurityRuleParser<TISecurityRuleParser>(this IBssFrameworkSettings settings)
-        where TISecurityRuleParser : class, ISecurityRuleParser =>
-        settings.AddServices(sc => sc.AddSingleton<ISecurityRuleParser, TISecurityRuleParser>());
-
     public static IBssFrameworkSettings SetSubscriptionAssembly(this IBssFrameworkSettings settings, Assembly assembly) =>
         settings.AddServices(sc => sc.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(assembly)));
 

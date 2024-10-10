@@ -1,10 +1,10 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Configuration.BLL;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
+using Framework.SecuritySystem.SecurityRuleInfo;
 
 using SampleSystem.Domain;
 

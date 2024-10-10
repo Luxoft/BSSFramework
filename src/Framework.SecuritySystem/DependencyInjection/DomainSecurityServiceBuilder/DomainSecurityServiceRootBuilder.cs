@@ -9,7 +9,7 @@ namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuil
 
 internal class DomainSecurityServiceRootBuilder : IDomainSecurityServiceRootBuilder
 {
-    private readonly List<DomainSecurityServiceBuilder> domainBuilders = new();
+    private readonly List<DomainSecurityServiceBuilder> domainBuilders = [];
 
     public bool AutoAddSelfRelativePath { get; set; } = true;
 

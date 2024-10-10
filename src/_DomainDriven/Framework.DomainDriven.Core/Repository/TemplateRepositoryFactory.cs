@@ -7,8 +7,7 @@ namespace Framework.DomainDriven.Repository;
 public abstract class TemplateRepositoryFactory<TRepository, TTRepositoryImpl, TDomainObject>(
     IServiceProvider serviceProvider,
     IDomainSecurityService<TDomainObject> domainSecurityService)
-    :
-        ITemplateGenericRepositoryFactory<TRepository, TDomainObject>
+    : ITemplateGenericRepositoryFactory<TRepository, TDomainObject>
     where TDomainObject : class
     where TTRepositoryImpl : TRepository
 {

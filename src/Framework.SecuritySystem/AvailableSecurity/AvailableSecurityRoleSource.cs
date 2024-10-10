@@ -1,7 +1,7 @@
 ﻿using Framework.Core;
 using Framework.SecuritySystem.ExternalSystem;
 
-namespace Framework.SecuritySystem;
+namespace Framework.SecuritySystem.AvailableSecurity;
 
 public class AvailableSecurityRoleSource(IEnumerable<IPermissionSystem> permissionSystems, ISecurityRoleSource securityRoleSource)
     : IAvailableSecurityRoleSource

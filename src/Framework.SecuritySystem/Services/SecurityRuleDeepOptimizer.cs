@@ -35,6 +35,9 @@ public class SecurityRuleDeepOptimizer : ISecurityRuleDeepOptimizer
     {
         switch (baseSecurityRule)
         {
+            case DomainSecurityRule.DomainModeSecurityRule securityRule:
+                return this.expander.Expand(securityRule);
+
             case DomainSecurityRule.RoleBaseSecurityRule securityRule:
                 return this.expander.FullExpand(securityRule);
 

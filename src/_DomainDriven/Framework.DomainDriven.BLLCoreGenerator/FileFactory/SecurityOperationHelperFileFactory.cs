@@ -4,7 +4,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.Security;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Expanders;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
@@ -60,15 +60,27 @@ public class SecurityRuleHelperFileFactory<TConfiguration> : FileFactory<TConfig
     }
     private CodeExpressionStatement GetRegisterStatement(CodeExpression serviceCollectionExpr, Type domainType, SecurityRule viewSecurityRule, SecurityRule editSecurityRule)
     {
-        var createExpr = typeof(DomainObjectSecurityModeInfo).ToTypeReference().ToObjectCreateExpression(
-            domainType.ToTypeOfExpression(),
-            viewSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression(),
-            editSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression());
+        throw new NotImplementedException();
 
-        var addSingletonMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
-                                                                        .ToMethodReferenceExpression(
-                                                                            nameof(ServiceCollectionServiceExtensions.AddSingleton));
+        //var secPairs = new[] { new { Mode = SecurityRule.View, SecutirtRule = viewSecurityRule }, new { Mode = SecurityRule.Edit, SecutirtRule = editSecurityRule } };
 
-        return serviceCollectionExpr.ToStaticMethodInvokeExpression(addSingletonMethod, createExpr).ToExpressionStatement();
+        //var addSingletonMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
+        //                                                                   .ToMethodReferenceExpression(
+        //                                                                       nameof(ServiceCollectionServiceExtensions.AddSingleton));
+
+        //return secPairs.Aggregate(serviceCollectionExpr,
+        //                          (pair, state) =>
+        //                          {
+
+        //                              var createExpr = typeof(DomainModeSecurityRuleInfo).ToTypeReference().ToObjectCreateExpression(
+        //                                  domainType.ToTypeOfExpression(),
+        //                                  viewSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression(),
+        //                                  editSecurityRule.Maybe(v => this.Configuration.GetSecurityCodeExpression(v)) ?? new CodePrimitiveExpression());
+        //                          })
+
+
+
+
+        //return serviceCollectionExpr.ToStaticMethodInvokeExpression(addSingletonMethod, createExpr).ToExpressionStatement();
     }
 }

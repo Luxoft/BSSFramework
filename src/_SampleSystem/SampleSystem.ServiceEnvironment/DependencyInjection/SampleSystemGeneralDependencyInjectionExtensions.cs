@@ -29,6 +29,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                        .AddSecurityRoles()
                                        .AddSecurityRules()
                                        .AddCustomSecurityOperations()
+                                       .SetClientDomainModeSecurityRuleSource<SampleSystemClientDomainModeSecurityRuleSource>()
+                                       .AddClientSecurityRuleInfoSource(typeof(SampleSystemSecurityGroup))
                                        .SetUserSource<Employee>(employee => employee.Id, employee => employee.Login, employee => employee.Active)
                                        .AddVirtualPermissions()
                                    )

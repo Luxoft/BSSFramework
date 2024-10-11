@@ -12,27 +12,20 @@ public class DomainSecurityRoleExtractor(ISecurityRuleExpander expander) : IDoma
             {
                 var usedRoles = new HashSet<SecurityRole>();
 
-                new ScanVisitor(expander, usedRoles).Visit(securityRule);
+                new ScanVisitor(usedRoles).Visit(expander.FullDomainExpand(securityRule));
 
                 return usedRoles;
             }).WithLock();
 
     public IEnumerable<SecurityRole> Extract(DomainSecurityRule securityRule) => this.cache[securityRule];
 
-    private class ScanVisitor(ISecurityRuleExpander expander, ISet<SecurityRole> usedRoles) : SecurityRuleVisitor
+    private class ScanVisitor(ISet<SecurityRole> usedRoles) : SecurityRuleVisitor
     {
-        protected override DomainSecurityRule Visit(DomainSecurityRule.DomainModeSecurityRule securityRule)
+        protected override DomainSecurityRule Visit(DomainSecurityRule.ExpandedRolesSecurityRule securityRule)
         {
-            return this.Visit(expander.Expand(securityRule));
-        }
+            usedRoles.UnionWith(securityRule.SecurityRoles);
 
-        protected override DomainSecurityRule Visit(DomainSecurityRule.RoleBaseSecurityRule baseSecurityRule)
-        {
-            var expandedRule = expander.FullExpand(baseSecurityRule);
-
-            usedRoles.UnionWith(expandedRule.SecurityRoles);
-
-            return baseSecurityRule;
+            return securityRule;
         }
     }
 }

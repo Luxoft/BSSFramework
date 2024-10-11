@@ -40,7 +40,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
 
     public IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        if (securityRuleExpander.FullExpand(securityRule).SecurityRoles.Contains(bindingInfo.SecurityRole))
+        if (securityRuleExpander.FullRoleExpand(securityRule).SecurityRoles.Contains(bindingInfo.SecurityRole))
         {
             return new VirtualPermissionSource<TPrincipal, TPermission>(
                 serviceProvider,

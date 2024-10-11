@@ -31,7 +31,10 @@ public class DomainSecurityProviderFactory<TDomainObject>(
         switch (baseSecurityRule)
         {
             case DomainModeSecurityRule securityRule:
-                return this.Create(securityModeExpander.Expand(securityRule), securityPath);
+                return this.CreateInternal(securityModeExpander.Expand(securityRule), securityPath);
+
+            case SecurityRuleHeader securityRuleHeader:
+                return this.CreateInternal(implementationResolver.Resolve(securityRuleHeader), securityPath);
 
             case RoleBaseSecurityRule securityRule:
                 return roleBaseSecurityProviderFactory.Create(securityRule, securityPath);
@@ -120,9 +123,6 @@ public class DomainSecurityProviderFactory<TDomainObject>(
                            .OverrideAccessDeniedResult(
                                accessDeniedResult => accessDeniedResult with { CustomMessage = securityRule.CustomMessage });
             }
-
-            case SecurityRuleHeader securityRuleHeader:
-                return this.CreateInternal(implementationResolver.Resolve(securityRuleHeader), securityPath);
 
             case OrSecurityRule securityRule:
                 return this.CreateInternal(securityRule.Left, securityPath).Or(this.CreateInternal(securityRule.Right, securityPath));

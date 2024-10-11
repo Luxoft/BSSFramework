@@ -2,5 +2,7 @@
 
 public interface ISecurityRuleExpander : ISecurityModeExpander, ISecurityOperationExpander, ISecurityRoleExpander, IRoleFactorySecurityRuleExpander
 {
-    DomainSecurityRule.ExpandedRolesSecurityRule FullExpand(DomainSecurityRule.RoleBaseSecurityRule securityRule);
+    DomainSecurityRule.ExpandedRolesSecurityRule FullRoleExpand(DomainSecurityRule.RoleBaseSecurityRule securityRule);
+
+    DomainSecurityRule FullDomainExpand(DomainSecurityRule securityRule);
 }

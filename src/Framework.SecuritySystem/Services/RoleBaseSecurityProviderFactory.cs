@@ -34,7 +34,7 @@ public class RoleBaseSecurityProviderFactory<TDomainObject>(
     private IEnumerable<(DomainSecurityRule.ExpandedRolesSecurityRule SecurityRule, SecurityPathRestriction Restriction)> GetRegroupedRoles(
         DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        var expandedSecurityRule = securityRuleExpander.FullExpand(securityRule);
+        var expandedSecurityRule = securityRuleExpander.FullRoleExpand(securityRule);
 
         return from securityRole in expandedSecurityRule.SecurityRoles
 

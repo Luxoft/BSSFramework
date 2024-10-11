@@ -9,44 +9,22 @@ public class SecurityRuleDeepOptimizer : ISecurityRuleDeepOptimizer
 
     private readonly ISecurityRuleBasicOptimizer basicOptimizer;
 
-    private readonly ISecurityRuleImplementationResolver implementationResolver;
-
     private readonly IDictionaryCache<DomainSecurityRule, DomainSecurityRule> cache;
 
     public SecurityRuleDeepOptimizer(
         ISecurityRuleExpander expander,
-        ISecurityRuleBasicOptimizer basicOptimizer,
-        ISecurityRuleImplementationResolver implementationResolver)
+        ISecurityRuleBasicOptimizer basicOptimizer)
     {
         this.expander = expander;
         this.basicOptimizer = basicOptimizer;
-        this.implementationResolver = implementationResolver;
         this.cache = new DictionaryCache<DomainSecurityRule, DomainSecurityRule>(this.Visit).WithLock();
     }
 
     protected virtual DomainSecurityRule Visit(DomainSecurityRule baseSecurityRule)
     {
-        var visitedRule = this.InternalVisit(baseSecurityRule);
+        var visitedRule = this.basicOptimizer.Optimize(this.expander.FullDomainExpand(baseSecurityRule));
 
         return visitedRule == baseSecurityRule ? visitedRule : this.Visit(visitedRule);
-    }
-
-    protected virtual DomainSecurityRule InternalVisit(DomainSecurityRule baseSecurityRule)
-    {
-        switch (baseSecurityRule)
-        {
-            case DomainSecurityRule.DomainModeSecurityRule securityRule:
-                return this.expander.Expand(securityRule);
-
-            case DomainSecurityRule.RoleBaseSecurityRule securityRule:
-                return this.expander.FullExpand(securityRule);
-
-            case DomainSecurityRule.SecurityRuleHeader securityRuleHeader:
-                return this.implementationResolver.Resolve(securityRuleHeader);
-
-            default:
-                return this.basicOptimizer.Optimize(baseSecurityRule);
-        }
     }
 
     DomainSecurityRule ISecurityRuleDeepOptimizer.Optimize(DomainSecurityRule securityRule) =>

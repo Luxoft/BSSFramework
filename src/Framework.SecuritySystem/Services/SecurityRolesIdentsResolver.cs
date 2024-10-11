@@ -9,7 +9,7 @@ public class SecurityRolesIdentsResolver(
 {
     public IEnumerable<Guid> Resolve(DomainSecurityRule.RoleBaseSecurityRule securityRule, bool includeVirtual = false)
     {
-        return securityRuleExpander.FullExpand(securityRule)
+        return securityRuleExpander.FullRoleExpand(securityRule)
                                    .SecurityRoles
                                    .Select(securityRoleSource.GetSecurityRole)
                                    .Where(sr => includeVirtual || !sr.Information.IsVirtual)

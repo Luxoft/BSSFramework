@@ -73,7 +73,7 @@ public partial class MainTests
         var expander = this.rootServiceProvider.GetRequiredService<ISecurityRuleExpander>();
 
         // Act
-        var expandResult = expander.FullExpand(ExampleSecurityOperation.EmployeeView.ToSecurityRule(HierarchicalExpandType.All));
+        var expandResult = expander.FullRoleExpand(ExampleSecurityOperation.EmployeeView.ToSecurityRule(HierarchicalExpandType.All));
 
         // Assert
         expandResult.Should()
@@ -90,7 +90,7 @@ public partial class MainTests
         var expander = this.rootServiceProvider.GetRequiredService<ISecurityRuleExpander>();
 
         // Act
-        var expandResult = expander.FullExpand(ExampleSecurityOperation.BusinessUnitView);
+        var expandResult = expander.FullRoleExpand(ExampleSecurityOperation.BusinessUnitView);
 
         // Assert
         expandResult.Should()

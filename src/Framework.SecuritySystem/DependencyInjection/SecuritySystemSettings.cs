@@ -26,6 +26,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     private Type securityRuleParserType = typeof(ClientSecurityRuleParser);
 
+    private Type clientDomainModeSecurityRuleSource = typeof(ClientDomainModeSecurityRuleSource);
+
     private Type? securityAccessorInfinityStorageType;
 
     public bool InitializeAdministratorRole { get; set; } = true;
@@ -157,20 +159,27 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
-    public ISecuritySystemSettings AddClientSecurityRuleInfoSource<TClientSecurityRuleInfoSource>()
-        where TClientSecurityRuleInfoSource : class, IClientSecurityRuleInfoSource
+    public ISecuritySystemSettings SetClientDomainModeSecurityRuleSource<TClientDomainModeSecurityRuleSource>()
+        where TClientDomainModeSecurityRuleSource : class, IClientDomainModeSecurityRuleSource
     {
-        this.registerActions.Add(sc => sc.AddSingleton<IClientSecurityRuleInfoSource, TClientSecurityRuleInfoSource>());
+        this.clientDomainModeSecurityRuleSource = typeof(TClientDomainModeSecurityRuleSource);
 
         return this;
     }
 
+    public ISecuritySystemSettings AddClientSecurityRuleInfoSource<TClientSecurityRuleInfoSource>()
+        where TClientSecurityRuleInfoSource : class, IClientSecurityRuleInfoSource
+    {
+        this.registerActions.Add(sc => sc.AddKeyedSingleton<IClientSecurityRuleInfoSource, TClientSecurityRuleInfoSource>(RootClientSecurityRuleInfoSource.ElementKey));
+
+        return this;
+    }
 
     public ISecuritySystemSettings AddClientSecurityRuleInfoSource(Type sourceType)
     {
         this.registerActions.Add(
-            sc => sc.AddSingleton<IClientSecurityRuleInfoSource>(
-                sp => ActivatorUtilities.CreateInstance<SourceTypeClientSecurityRuleInfoSource>(sp, sourceType)));
+            sc => sc.AddKeyedSingleton<IClientSecurityRuleInfoSource>(RootClientSecurityRuleInfoSource.ElementKey,
+                (sp, _) => ActivatorUtilities.CreateInstance<SourceTypeClientSecurityRuleInfoSource>(sp, sourceType)));
 
         return this;
     }
@@ -211,6 +220,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         services.AddSingleton(this.defaultSecurityRuleCredential);
 
         services.AddSingleton(typeof(ISecurityRuleParser), this.securityRuleParserType);
+
+        services.AddSingleton(typeof(IClientDomainModeSecurityRuleSource), this.clientDomainModeSecurityRuleSource);
     }
 
     private void AddSecurityRole(IServiceCollection serviceCollection, FullSecurityRole fullSecurityRole)

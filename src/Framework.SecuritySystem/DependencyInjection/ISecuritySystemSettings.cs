@@ -54,6 +54,9 @@ public interface ISecuritySystemSettings
 
     ISecuritySystemSettings SetDefaultSecurityRuleCredential(SecurityRuleCredential securityRuleCredential);
 
+    ISecuritySystemSettings SetClientDomainModeSecurityRuleSource<TClientDomainModeSecurityRuleSource>()
+        where TClientDomainModeSecurityRuleSource : class, IClientDomainModeSecurityRuleSource;
+
     ISecuritySystemSettings AddClientSecurityRuleInfoSource<TClientSecurityRuleInfoSource>()
         where TClientSecurityRuleInfoSource : class, IClientSecurityRuleInfoSource;
 

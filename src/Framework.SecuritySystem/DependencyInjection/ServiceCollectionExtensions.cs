@@ -85,7 +85,6 @@ public static class ServiceCollectionExtensions
                        .AddNotImplemented<IPrincipalManagementService>($"{nameof(IPrincipalManagementService)} not supported", isScoped: true)
 
                        .AddSingleton<IClientSecurityRuleNameExtractor, ClientSecurityRuleNameExtractor>()
-                       .AddSingleton<IClientDomainModeSecurityRuleSource, ClientDomainModeSecurityRuleSource>()
                        .AddSingleton<IClientSecurityRuleInfoSource, RootClientSecurityRuleInfoSource>()
                        .AddKeyedSingleton<IClientSecurityRuleInfoSource, DomainModeClientSecurityRuleInfoSource>(RootClientSecurityRuleInfoSource.ElementKey)
                        .AddSingleton<IClientSecurityRuleResolver, ClientSecurityRuleResolver>()

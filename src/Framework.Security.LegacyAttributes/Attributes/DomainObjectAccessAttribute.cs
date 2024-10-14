@@ -17,8 +17,5 @@ public class DomainObjectAccessAttribute : Attribute
     }
 
 
-    public SecurityRule SecurityRule { get; private set; }
-
-
-    public bool HasContext => this.SecurityRule is SecurityRule;
+    public SecurityRule SecurityRule { get; }
 }

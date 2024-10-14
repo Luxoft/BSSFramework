@@ -2,7 +2,6 @@
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
 using Framework.Projection;
-using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
@@ -26,14 +25,6 @@ public class ServerFileGenerator<TConfiguration> : FileGenerator<TConfiguration>
     protected override ICodeFileFactory<DTOFileType> GetIdentityDTOFileFactory(Type domainType)
     {
         return new DefaultServerIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
-    }
-
-    protected override ICodeFileFactory<RoleFileType> GetDomainObjectSecurityRuleCodeFileFactory(Type domainType, IEnumerable<SecurityRule> securityRules)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (securityRules == null) throw new ArgumentNullException(nameof(securityRules));
-
-        return new DefaultServerDomainObjectSecurityRuleCodeFileFactory<TConfiguration>(this.Configuration, domainType, securityRules);
     }
 
     protected virtual ICodeFileFactory<DTOFileType> GetVisualDTOFileFactory(Type domainType)

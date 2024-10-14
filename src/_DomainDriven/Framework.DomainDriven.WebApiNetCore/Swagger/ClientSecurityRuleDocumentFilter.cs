@@ -11,7 +11,7 @@ public class ClientSecurityRuleDocumentFilter(IClientSecurityRuleInfoSource sour
 {
     public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
     {
-        var ruleNames = source.GetInfos().Select(info => info.Header.Name).OrderBy(v => v).ToArray();
+        var ruleNames = source.GetInfos().Select(info => info.Rule.Name).OrderBy(v => v).ToArray();
 
         var schema = new OpenApiSchema
                      {

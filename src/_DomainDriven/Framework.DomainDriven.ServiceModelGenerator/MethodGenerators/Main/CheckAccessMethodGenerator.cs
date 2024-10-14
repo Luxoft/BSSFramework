@@ -35,7 +35,6 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
         return $"Check {this.DomainType.Name} access";
     }
 
-    private CodeParameterDeclarationExpression SecurityRuleCodeParameter => typeof(string).ToTypeReference().ToParameterDeclarationExpression("securityRuleName");
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {
@@ -43,22 +42,18 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
                          .GetCodeTypeReference(this.DomainType, DTOType.IdentityDTO)
                          .ToParameterDeclarationExpression(this.DomainType.Name.ToStartLowerCase() + "Ident");
 
-        yield return this.SecurityRuleCodeParameter;
+        yield return this.GetSecurityRuleParameter();
     }
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        var operationVarStatement = new CodeVariableDeclarationStatement(typeof(SecurityRule), "operation", this.GetConvertToSecurityRuleCodeParameterExpression(evaluateDataExpr, 1));
-
-        yield return operationVarStatement;
-
         var domainObjectVarDecl = this.ToDomainObjectVarDeclById(bllRefExpr);
         var method = typeof(SecurityProviderBaseExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SecurityProviderBaseExtensions.CheckAccess));
 
         yield return domainObjectVarDecl;
 
         yield return this.Configuration.Environment.BLLCore.GetGetSecurityProviderMethodReferenceExpression(evaluateDataExpr.GetContext(), this.DomainType)
-                         .ToMethodInvokeExpression(operationVarStatement.ToVariableReferenceExpression())
+                         .ToMethodInvokeExpression(this.GetSecurityRuleParameter().ToVariableReferenceExpression())
                          .ToStaticMethodInvokeExpression(method, domainObjectVarDecl.ToVariableReferenceExpression(), evaluateDataExpr.GetContext().ToPropertyReference((IAccessDeniedExceptionServiceContainer c) => c.AccessDeniedExceptionService))
                          .ToExpressionStatement();
     }

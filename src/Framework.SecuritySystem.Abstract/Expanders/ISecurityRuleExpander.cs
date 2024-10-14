@@ -1,6 +1,11 @@
 ﻿namespace Framework.SecuritySystem.Expanders;
 
-public interface ISecurityRuleExpander : ISecurityModeExpander, ISecurityOperationExpander, ISecurityRoleExpander, IRoleFactorySecurityRuleExpander
+public interface ISecurityRuleExpander : ISecurityModeExpander,
+                                         ISecurityOperationExpander,
+                                         ISecurityRoleExpander,
+                                         IRoleFactorySecurityRuleExpander,
+                                         IClientSecurityRuleExpander,
+                                         ISecurityRuleHeaderExpander
 {
     DomainSecurityRule.ExpandedRolesSecurityRule FullRoleExpand(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 

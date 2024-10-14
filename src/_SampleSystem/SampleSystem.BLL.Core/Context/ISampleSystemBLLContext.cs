@@ -4,7 +4,6 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
-using Framework.SecuritySystem.SecurityRuleInfo;
 
 using SampleSystem.Domain;
 
@@ -21,6 +20,4 @@ public partial interface ISampleSystemBLLContext :
     IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>
 {
     IConfigurationBLLContext Configuration { get; }
-
-    ISecurityRuleParser SecurityRuleParser { get; }
 }

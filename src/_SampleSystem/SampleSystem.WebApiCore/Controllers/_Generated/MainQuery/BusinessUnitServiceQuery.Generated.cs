@@ -101,46 +101,6 @@
         }
         
         /// <summary>
-        /// Get hierarchical data of type BusinessUnitProgramClasses (ProjectionDTO) by operation
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitProgramClassProjectionDTO> GetBusinessUnitProgramClassesByOperation(GetBusinessUnitProgramClassesByOperationAutoRequest getBusinessUnitProgramClassesByOperationAutoRequest)
-        {
-            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode = getBusinessUnitProgramClassesByOperationAutoRequest.SecurityRuleCode;
-            string odataQueryString = getBusinessUnitProgramClassesByOperationAutoRequest.OdataQueryString;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitProgramClassesByOperationInternal(odataQueryString, securityRuleCode, evaluateData));
-        }
-        
-        protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitProgramClassProjectionDTO> GetBusinessUnitProgramClassesByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.IBusinessUnitProgramClassBLL bll = evaluateData.Context.Logics.BusinessUnitProgramClassFactory.Create(evaluateData.Context.SecurityRuleParser.Parse<SampleSystem.Domain.BusinessUnit>(securityRuleCode.ToString()));
-            Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.BusinessUnitProgramClass>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            var odataList = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.BusinessUnitProgramClass>(Framework.Transfering.ViewDTOType.ProjectionDTO));
-            return Framework.OData.SelectOperationResultExtensions.Select(odataList, businessUnitProgramClass => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(businessUnitProgramClass, evaluateData.MappingService));
-        }
-        
-        /// <summary>
-        /// Get hierarchical data of type BusinessUnitProgramClasses (ProjectionDTO) by operation
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.BusinessUnitProgramClassProjectionDTO, System.Guid>> GetBusinessUnitProgramClassTreeByOperation(GetBusinessUnitProgramClassTreeByOperationAutoRequest getBusinessUnitProgramClassTreeByOperationAutoRequest)
-        {
-            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode = getBusinessUnitProgramClassTreeByOperationAutoRequest.SecurityRuleCode;
-            string odataQueryString = getBusinessUnitProgramClassTreeByOperationAutoRequest.OdataQueryString;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitProgramClassTreeByOperationInternal(odataQueryString, securityRuleCode, evaluateData));
-        }
-        
-        protected virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.BusinessUnitProgramClassProjectionDTO, System.Guid>> GetBusinessUnitProgramClassTreeByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.IBusinessUnitProgramClassBLL bll = evaluateData.Context.Logics.BusinessUnitProgramClassFactory.Create(evaluateData.Context.SecurityRuleParser.Parse<SampleSystem.Domain.BusinessUnit>(securityRuleCode.ToString()));
-            Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.BusinessUnitProgramClass>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            var odataTree = bll.GetTreeByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.BusinessUnitProgramClass>(Framework.Transfering.ViewDTOType.ProjectionDTO));
-            return Framework.OData.SelectOperationResultExtensions.ChangeItem(odataTree, businessUnitProgramClass => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(businessUnitProgramClass, evaluateData.MappingService));
-        }
-        
-        /// <summary>
         /// Get TestBusinessUnits (ProjectionDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -156,26 +116,6 @@
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.TestBusinessUnit>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.TestBusinessUnit> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestBusinessUnit>(Framework.Transfering.ViewDTOType.ProjectionDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
-        }
-        
-        /// <summary>
-        /// Get hierarchical data of type TestBusinessUnits (ProjectionDTO) by operation
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO> GetTestBusinessUnitsByOperation(GetTestBusinessUnitsByOperationAutoRequest getTestBusinessUnitsByOperationAutoRequest)
-        {
-            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode = getTestBusinessUnitsByOperationAutoRequest.SecurityRuleCode;
-            string odataQueryString = getTestBusinessUnitsByOperationAutoRequest.OdataQueryString;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestBusinessUnitsByOperationInternal(odataQueryString, securityRuleCode, evaluateData));
-        }
-        
-        protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO> GetTestBusinessUnitsByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
-        {
-            SampleSystem.BLL.ITestBusinessUnitBLL bll = evaluateData.Context.Logics.TestBusinessUnitFactory.Create(evaluateData.Context.SecurityRuleParser.Parse<SampleSystem.Domain.BusinessUnit>(securityRuleCode.ToString()));
-            Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.TestBusinessUnit>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            var odataList = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestBusinessUnit>(Framework.Transfering.ViewDTOType.ProjectionDTO));
-            return Framework.OData.SelectOperationResultExtensions.Select(odataList, testBusinessUnit => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(testBusinessUnit, evaluateData.MappingService));
         }
         
         /// <summary>
@@ -205,14 +145,14 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO, System.Guid>> GetTestBusinessUnitTreeByOperation(GetTestBusinessUnitTreeByOperationAutoRequest getTestBusinessUnitTreeByOperationAutoRequest)
         {
-            SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode = getTestBusinessUnitTreeByOperationAutoRequest.SecurityRuleCode;
+            Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule = getTestBusinessUnitTreeByOperationAutoRequest.SecurityRule;
             string odataQueryString = getTestBusinessUnitTreeByOperationAutoRequest.OdataQueryString;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestBusinessUnitTreeByOperationInternal(odataQueryString, securityRuleCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestBusinessUnitTreeByOperationInternal(odataQueryString, securityRule, evaluateData));
         }
         
-        protected virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO, System.Guid>> GetTestBusinessUnitTreeByOperationInternal(string odataQueryString, SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO, System.Guid>> GetTestBusinessUnitTreeByOperationInternal(string odataQueryString, Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestBusinessUnitBLL bll = evaluateData.Context.Logics.TestBusinessUnitFactory.Create(evaluateData.Context.SecurityRuleParser.Parse<SampleSystem.Domain.BusinessUnit>(securityRuleCode.ToString()));
+            SampleSystem.BLL.ITestBusinessUnitBLL bll = evaluateData.Context.Logics.TestBusinessUnitFactory.Create(securityRule);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.TestBusinessUnit>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
             var odataTree = bll.GetTreeByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestBusinessUnit>(Framework.Transfering.ViewDTOType.ProjectionDTO));
@@ -254,120 +194,6 @@
             set
             {
                 this.filter = value;
-            }
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class GetBusinessUnitProgramClassesByOperationAutoRequest
-    {
-        
-        private string odataQueryString;
-        
-        private SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public virtual string OdataQueryString
-        {
-            get
-            {
-                return this.odataQueryString;
-            }
-            set
-            {
-                this.odataQueryString = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public virtual SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode SecurityRuleCode
-        {
-            get
-            {
-                return this.securityRuleCode;
-            }
-            set
-            {
-                this.securityRuleCode = value;
-            }
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class GetBusinessUnitProgramClassTreeByOperationAutoRequest
-    {
-        
-        private string odataQueryString;
-        
-        private SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public virtual string OdataQueryString
-        {
-            get
-            {
-                return this.odataQueryString;
-            }
-            set
-            {
-                this.odataQueryString = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public virtual SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode SecurityRuleCode
-        {
-            get
-            {
-                return this.securityRuleCode;
-            }
-            set
-            {
-                this.securityRuleCode = value;
-            }
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
-    public partial class GetTestBusinessUnitsByOperationAutoRequest
-    {
-        
-        private string odataQueryString;
-        
-        private SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
-        public virtual string OdataQueryString
-        {
-            get
-            {
-                return this.odataQueryString;
-            }
-            set
-            {
-                this.odataQueryString = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public virtual SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode SecurityRuleCode
-        {
-            get
-            {
-                return this.securityRuleCode;
-            }
-            set
-            {
-                this.securityRuleCode = value;
             }
         }
     }
@@ -417,7 +243,7 @@
         
         private string odataQueryString;
         
-        private SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode securityRuleCode;
+        private Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
@@ -435,15 +261,15 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public virtual SampleSystem.Generated.DTO.SampleSystemBusinessUnitSecurityRuleCode SecurityRuleCode
+        public virtual Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule SecurityRule
         {
             get
             {
-                return this.securityRuleCode;
+                return this.securityRule;
             }
             set
             {
-                this.securityRuleCode = value;
+                this.securityRule = value;
             }
         }
     }

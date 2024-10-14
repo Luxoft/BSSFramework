@@ -47,11 +47,7 @@ internal static class CodeDomExtensions
     private static IEnumerable<CodeAttributeArgument> GetViewSecurityAttributesArguments(this ViewDomainObjectAttribute viewAttr, Type securityRuleType)
     {
         yield return new CodeAttributeArgument { Value = securityRuleType.ToTypeOfExpression() };
-
-        foreach (var operation in viewAttr.AllRules)
-        {
-            yield return new CodeAttributeArgument { Value = operation.ToString().ToPrimitiveExpression() };
-        }
+        yield return new CodeAttributeArgument { Value = viewAttr.SecurityRule.ToString().ToPrimitiveExpression() };
     }
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this CustomSerializationAttribute attr)

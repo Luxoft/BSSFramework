@@ -6,8 +6,8 @@ public class ClientSecurityRuleResolver(
     IDomainSecurityRoleExtractor domainSecurityRoleExtractor,
     IClientSecurityRuleInfoSource clientSecurityRuleInfoSource) : IClientSecurityRuleResolver
 {
-    private readonly IDictionaryCache<SecurityRole, List<ClientSecurityRuleHeader>> cache =
-        new DictionaryCache<SecurityRole, List<ClientSecurityRuleHeader>>(
+    private readonly IDictionaryCache<SecurityRole, List<DomainSecurityRule.ClientSecurityRule>> cache =
+        new DictionaryCache<SecurityRole, List<DomainSecurityRule.ClientSecurityRule>>(
             securityRole =>
             {
                 var request = from clientSecurityRuleInfo in clientSecurityRuleInfoSource.GetInfos()
@@ -16,10 +16,10 @@ public class ClientSecurityRuleResolver(
 
                               where roles.Contains(securityRole)
 
-                              select clientSecurityRuleInfo.Header;
+                              select clientSecurityRuleInfo.Rule;
 
                 return request.ToList();
             }).WithLock();
 
-    public IEnumerable<ClientSecurityRuleHeader> Resolve(SecurityRole securityRole) => this.cache[securityRole];
+    public IEnumerable<DomainSecurityRule.ClientSecurityRule> Resolve(SecurityRole securityRole) => this.cache[securityRole];
 }

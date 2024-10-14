@@ -4,7 +4,6 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Persistent;
-using Framework.Projection;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -32,7 +31,7 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
 
     protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.GetConvertToSecurityRuleCodeParameterExpression(evaluateDataExpr, 0);
+        return this.GetSecurityRuleParameter().ToVariableReferenceExpression();
     }
 
     protected override string GetComment()
@@ -42,11 +41,7 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {
-        yield return new CodeParameterDeclarationExpression
-                     {
-                             Name = "securityRuleCode",
-                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), DTOGenerator.FileType.DomainObjectSecurityRuleCode)
-                     };
+        yield return this.GetSecurityRuleParameter();
     }
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)

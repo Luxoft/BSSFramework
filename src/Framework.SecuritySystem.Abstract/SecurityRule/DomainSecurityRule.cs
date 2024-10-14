@@ -27,6 +27,16 @@ public abstract record DomainSecurityRule : SecurityRule
 
     public static implicit operator DomainSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
+    public record SecurityRuleHeader(string Name) : DomainSecurityRule
+    {
+        public override string ToString() => this.Name;
+    }
+
+    public record ClientSecurityRule(string Name) : DomainSecurityRule
+    {
+        public override string ToString() => this.Name;
+    }
+
     public record DomainModeSecurityRule(Type DomainType, ModeSecurityRule Mode) : DomainSecurityRule
     {
         public override string ToString() => $"{this.Mode} ({this.DomainType.Name})";
@@ -52,11 +62,6 @@ public abstract record DomainSecurityRule : SecurityRule
     public record RelativeConditionSecurityRule(RelativeConditionInfo RelativeConditionInfo) : DomainSecurityRule;
 
     public record FactorySecurityRule(Type RuleFactoryType) : DomainSecurityRule;
-
-    public record SecurityRuleHeader(string Name) : DomainSecurityRule
-    {
-        public override string ToString() => this.Name;
-    }
 
     public record OverrideAccessDeniedMessageSecurityRule(DomainSecurityRule BaseSecurityRule, string CustomMessage) : DomainSecurityRule;
 

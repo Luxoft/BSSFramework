@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.SecuritySystem;
 
 namespace Framework.Security;
@@ -64,25 +62,5 @@ public static class TypeExtensions
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
 
         return sourceType.GetSecurityNodeInterfaces().Where(interfaceType => interfaceType.IsGenericType);
-    }
-
-    public static Dictionary<Type, ReadOnlyCollection<SecurityRule>> GetTypesWithSecondarySecurityRules(this IEnumerable<Type> source)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        var request = from type in source
-
-                      let attr = type.GetViewDomainObjectAttribute()
-
-                      where attr != null && attr.SecondaryRules.Any()
-
-                      select new
-                             {
-                                     Type = type,
-
-                                     Rules = attr.AllRules.ToReadOnlyCollection()
-                             };
-
-        return request.ToDictionary(pair => pair.Type, pair => pair.Rules);
     }
 }

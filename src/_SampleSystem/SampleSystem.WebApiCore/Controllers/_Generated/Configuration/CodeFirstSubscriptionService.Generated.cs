@@ -64,21 +64,6 @@
         }
         
         /// <summary>
-        /// Get CodeFirstSubscriptions (FullDTO) by operation
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsByOperationInternal(securityRule, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(securityRule);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
         /// Get CodeFirstSubscriptions (FullDTO) by filter (Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -186,21 +171,6 @@
         {
             Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(codeFirstSubscriptionIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
-        }
-        
-        /// <summary>
-        /// Get CodeFirstSubscriptions (SimpleDTO) by operation
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
-        {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsByOperationInternal(securityRule, evaluateData));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscriptionFactory.Create(securityRule);
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.CodeFirstSubscription>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>

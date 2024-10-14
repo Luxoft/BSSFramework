@@ -23,7 +23,7 @@ public class DefaultServiceGeneratePolicy(IGeneratorConfiguration<IGenerationEnv
         var extendedMetadata = this.configuration.Environment.ExtendedMetadata;
 
         var allowedSingleDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Single.Contains((MainDTOType)identity.DTOType.Value));
-        var allowedCollectionDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr =>attr.Collection.Contains((MainDTOType)identity.DTOType.Value));
+        var allowedCollectionDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Collection.Contains((MainDTOType)identity.DTOType.Value));
 
         Func<ProjectionFilterTargets, bool> allowedProjectionFilter = target => extendedMetadata.HasAttribute<ProjectionFilterAttribute>(domainType, attr => attr.FilterType == identity.ModelType && attr.Target.HasFlag(target));
 
@@ -146,12 +146,11 @@ public class DefaultServiceGeneratePolicy(IGeneratorConfiguration<IGenerationEnv
                 return allowedSingleDTO();
             }
         }
-        else if (identity == MethodIdentityType.GetTreeByOperation)
+        else if (identity == MethodIdentityType.GetTreeByOperation || identity == MethodIdentityType.GetListByOperation)
         {
             return false;
         }
-        else if (identity == MethodIdentityType.GetODataListByQueryString
-                 || identity == MethodIdentityType.GetListByOperation)
+        else if (identity == MethodIdentityType.GetODataListByQueryString)
         {
             if (identity.DTOType == ViewDTOType.ProjectionDTO)
             {

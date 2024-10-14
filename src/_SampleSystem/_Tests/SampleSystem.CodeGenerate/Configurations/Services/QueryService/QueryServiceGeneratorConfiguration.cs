@@ -8,9 +8,12 @@ public class QueryServiceGeneratorConfiguration : QueryGeneratorConfigurationBas
     public QueryServiceGeneratorConfiguration(ServerGenerationEnvironment environment)
         : base(environment)
     {
-        this.GeneratePolicy = base.GeneratePolicy.Add(
-            (domainType, methodIdentity) => domainType.Name == nameof(SampleSystemProjectionSource.TestBusinessUnit)
-                                            && methodIdentity.Type == MethodIdentityType.GetODataTreeByQueryStringWithOperation);
+        this.GeneratePolicy =
+            base.GeneratePolicy
+                .Add(
+                    (domainType, methodIdentity) =>
+                        domainType.Name == nameof(SampleSystemProjectionSource.TestBusinessUnit)
+                        && methodIdentity.Type == MethodIdentityType.GetODataTreeByQueryStringWithOperation);
     }
 
     public override IGeneratePolicy<MethodIdentity> GeneratePolicy { get; }

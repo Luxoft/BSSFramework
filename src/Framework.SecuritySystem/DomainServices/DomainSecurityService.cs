@@ -6,30 +6,33 @@ namespace Framework.SecuritySystem;
 
 public abstract class DomainSecurityService<TDomainObject>(ISecurityRuleExpander securityRuleExpander) : DomainSecurityServiceBase<TDomainObject>
 {
-    protected sealed override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule)
+    protected sealed override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule baseSecurityRule)
     {
-        switch (securityRule)
+        switch (baseSecurityRule)
         {
-            case SecurityRule.ModeSecurityRule modeSecurityRule:
-                return this.CreateSecurityProvider(modeSecurityRule);
+            case SecurityRule.ModeSecurityRule securityRule:
+                return this.CreateSecurityProvider(securityRule);
 
-            case DomainModeSecurityRule domainModeSecurityRule:
-                return this.CreateSecurityProvider(securityRuleExpander.Expand(domainModeSecurityRule));
+            case DomainModeSecurityRule securityRule:
+                return this.CreateSecurityProvider(securityRuleExpander.Expand(securityRule));
 
-            case OperationSecurityRule operationSecurityRule:
-                return this.CreateSecurityProvider(operationSecurityRule);
+            case ClientSecurityRule securityRule:
+                return this.CreateSecurityProvider(securityRuleExpander.Expand(securityRule));
 
-            case NonExpandedRolesSecurityRule nonExpandedRolesSecurityRule:
-                return this.CreateSecurityProvider(nonExpandedRolesSecurityRule);
+            case OperationSecurityRule securityRule:
+                return this.CreateSecurityProvider(securityRule);
 
-            case ExpandedRolesSecurityRule expandedRolesSecurityRule:
-                return this.CreateSecurityProvider(expandedRolesSecurityRule);
+            case NonExpandedRolesSecurityRule securityRule:
+                return this.CreateSecurityProvider(securityRule);
 
-            case DomainSecurityRule domainObjectSecurityRule:
-                return this.CreateFinalSecurityProvider(domainObjectSecurityRule);
+            case ExpandedRolesSecurityRule securityRule:
+                return this.CreateSecurityProvider(securityRule);
+
+            case DomainSecurityRule securityRule:
+                return this.CreateFinalSecurityProvider(securityRule);
 
             default:
-                throw new ArgumentOutOfRangeException(nameof(securityRule));
+                throw new ArgumentOutOfRangeException(nameof(baseSecurityRule));
         }
     }
 

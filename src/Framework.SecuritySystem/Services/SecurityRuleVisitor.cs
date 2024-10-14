@@ -19,6 +19,11 @@ public abstract class SecurityRuleVisitor
         return securityRule;
     }
 
+    protected virtual DomainSecurityRule Visit(ClientSecurityRule securityRule)
+    {
+        return securityRule;
+    }
+
     protected virtual DomainSecurityRule Visit(SecurityRuleHeader securityRule)
     {
         return securityRule;
@@ -87,6 +92,7 @@ public abstract class SecurityRuleVisitor
     {
         RoleBaseSecurityRule securityRule => this.Visit(securityRule),
         DomainModeSecurityRule securityRule => this.Visit(securityRule),
+        ClientSecurityRule securityRule => this.Visit(securityRule),
         SecurityRuleHeader securityRule => this.Visit(securityRule),
         OrSecurityRule securityRule => this.Visit(securityRule),
         AndSecurityRule securityRule => this.Visit(securityRule),

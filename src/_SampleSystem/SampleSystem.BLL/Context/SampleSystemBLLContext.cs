@@ -7,7 +7,6 @@ using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.SecurityRuleInfo;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,8 +28,7 @@ public partial class SampleSystemBLLContext(
     ISampleSystemBLLFactoryContainer logics,
     IAuthorizationBLLContext authorization,
     Framework.Configuration.BLL.IConfigurationBLLContext configuration,
-    BLLContextSettings<PersistentDomainObjectBase> settings,
-    ISecurityRuleParser securityRuleParser)
+    BLLContextSettings<PersistentDomainObjectBase> settings)
     : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid,
         ISampleSystemBLLFactoryContainer>(
         serviceProvider,
@@ -43,8 +41,6 @@ public partial class SampleSystemBLLContext(
         fetchService)
 {
     public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; } = securityService;
-
-    public ISecurityRuleParser SecurityRuleParser { get; } = securityRuleParser;
 
     public override ISampleSystemBLLFactoryContainer Logics { get; } = logics;
 

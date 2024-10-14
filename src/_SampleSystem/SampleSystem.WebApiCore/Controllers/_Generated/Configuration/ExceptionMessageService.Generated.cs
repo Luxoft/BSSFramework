@@ -48,6 +48,21 @@
         }
         
         /// <summary>
+        /// Get ExceptionMessages (FullDTO) by operation
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessagesByOperationInternal(securityRule, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        {
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(securityRule);
+            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
         /// Get ExceptionMessages (FullDTO) by filter (Framework.Configuration.Domain.ExceptionMessageRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -123,6 +138,21 @@
         {
             Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(exceptionMessageIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get ExceptionMessages (SimpleDTO) by operation
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessagesByOperationInternal(securityRule, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        {
+            Framework.Configuration.BLL.IExceptionMessageBLL bll = evaluateData.Context.Logics.ExceptionMessageFactory.Create(securityRule);
+            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.ExceptionMessage>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>

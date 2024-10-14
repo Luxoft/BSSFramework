@@ -2,5 +2,5 @@
 
 public interface IClientSecurityRuleResolver
 {
-    IEnumerable<ClientSecurityRuleHeader> Resolve(SecurityRole securityRole);
+    IEnumerable<DomainSecurityRule.ClientSecurityRule> Resolve(SecurityRole securityRole);
 }

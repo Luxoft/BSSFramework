@@ -1,9 +1,9 @@
 ﻿namespace Framework.SecuritySystem.SecurityRuleInfo;
 
-public record ClientSecurityRuleInfo(ClientSecurityRuleHeader Header, DomainSecurityRule Implementation)
+public record ClientSecurityRuleInfo(DomainSecurityRule.ClientSecurityRule Rule, DomainSecurityRule Implementation)
 {
     public ClientSecurityRuleInfo(string name, DomainSecurityRule implementation)
-        : this(new ClientSecurityRuleHeader(name), implementation)
+        : this(new DomainSecurityRule.ClientSecurityRule(name), implementation)
     {
     }
 }

@@ -63,10 +63,41 @@
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(managementUnitIdents, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
+        /// <summary>
+        /// Get ManagementUnits (FullDTO) by operation
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitFullDTO> GetFullManagementUnitsByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullManagementUnitsByOperationInternal(securityRule, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitFullDTO> GetFullManagementUnitsByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        {
+            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(securityRule);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitFullDTO> GetFullManagementUnitsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get hierarchical data of type ManagementUnits (FullDTO) by operation
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        public virtual System.Collections.Generic.List<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.ManagementUnitFullDTO, System.Guid>> GetFullManagementUnitTreeByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullManagementUnitTreeByOperationInternal(securityRule, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.List<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.ManagementUnitFullDTO, System.Guid>> GetFullManagementUnitTreeByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        {
+            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(securityRule);
+            var tree = bll.GetTree(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.FullDTO));
+            return Framework.Persistent.HierarchicalNodeExtensions.ChangeItem(tree, managementUnit => SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(managementUnit, evaluateData.MappingService));
         }
         
         /// <summary>
@@ -157,6 +188,21 @@
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(managementUnitIdents, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
+        /// <summary>
+        /// Get ManagementUnits (SimpleDTO) by operation
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitSimpleDTO> GetSimpleManagementUnitsByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleManagementUnitsByOperationInternal(securityRule, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitSimpleDTO> GetSimpleManagementUnitsByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        {
+            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(securityRule);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitSimpleDTO> GetSimpleManagementUnitsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.SecuritySystem.SecurityRule.View);
@@ -217,6 +263,21 @@
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(managementUnitIdents, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get ManagementUnits (VisualDTO) by operation
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitVisualDTO> GetVisualManagementUnitsByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualManagementUnitsByOperationInternal(securityRule, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitVisualDTO> GetVisualManagementUnitsByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        {
+            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(securityRule);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitVisualDTO> GetVisualManagementUnitsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

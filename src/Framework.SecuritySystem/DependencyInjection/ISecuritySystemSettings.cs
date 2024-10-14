@@ -61,7 +61,4 @@ public interface ISecuritySystemSettings
         where TClientSecurityRuleInfoSource : class, IClientSecurityRuleInfoSource;
 
     ISecuritySystemSettings AddClientSecurityRuleInfoSource(Type sourceType);
-
-    ISecuritySystemSettings SetSecurityRuleParser<TSecurityRuleParser>()
-        where TSecurityRuleParser : class, ISecurityRuleParser;
 }

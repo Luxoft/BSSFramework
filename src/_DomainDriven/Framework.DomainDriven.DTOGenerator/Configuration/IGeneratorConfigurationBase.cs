@@ -1,9 +1,7 @@
 ﻿using System.CodeDom;
-using System.Collections.ObjectModel;
 using System.Reflection;
 
 using Framework.DomainDriven.Generation.Domain;
-using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
@@ -19,8 +17,6 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     ICodeTypeReferenceService DefaultCodeTypeReferenceService { get; }
 
     IReadOnlyCollection<Type> ProjectionTypes { get; }
-
-    IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityRule>> TypesWithSecondarySecurityRules { get; }
 
     bool ExpandStrictMaybeToDefault { get; }
 

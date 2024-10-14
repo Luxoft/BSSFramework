@@ -8,8 +8,6 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Projection;
-using Framework.Security;
-using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.DTOGenerator;
@@ -28,13 +26,9 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
         this.DefaultCodeTypeReferenceService = new ConfigurationCodeTypeReferenceService<GeneratorConfigurationBase<TEnvironment>>(this);
 
-        this.DomainObjectSecurityRuleCodeFileFactoryHeader = new CodeFileFactoryHeader<RoleFileType>(FileType.DomainObjectSecurityRuleCode, string.Empty, domainType => $"{this.Environment.TargetSystemName}{domainType.Name}SecurityRuleCode");
-
         this.ProjectionTypes = LazyInterfaceImplementHelper.CreateProxy(() => this.GetProjectionTypes().ToReadOnlyCollectionI());
 
         this.GeneratePolicy = LazyInterfaceImplementHelper.CreateProxy(this.CreateGeneratePolicy);
-
-        this.TypesWithSecondarySecurityRules = LazyInterfaceImplementHelper.CreateProxy(() => this.GetTypesWithSecondarySecurityRules().ToReadOnlyDictionaryI());
 
 
         this.ClientDTOMappingServiceInterfaceFileFactoryHeader = FileType.ClientDTOMappingServiceInterface.ToHeader("", _ => $"I{this.Environment.TargetSystemName}ClientDTOMappingService");
@@ -47,8 +41,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     public IGeneratePolicy<RoleFileType> GeneratePolicy { get; }
 
     public IReadOnlyCollection<Type> ProjectionTypes { get; }
-
-    public IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityRule>> TypesWithSecondarySecurityRules { get; }
 
     public virtual bool ExpandStrictMaybeToDefault { get; } = false;
 
@@ -98,8 +90,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> RichDTOFileFactoryHeader { get; } = FileType.RichDTO.ToHeader();
 
-    protected virtual ICodeFileFactoryHeader<RoleFileType> DomainObjectSecurityRuleCodeFileFactoryHeader { get; }
-
     protected virtual ICodeFileFactoryHeader<FileType> ClientDTOMappingServiceInterfaceFileFactoryHeader { get; }
 
     protected virtual ICodeFileFactoryHeader<FileType> ClientPrimitiveDTOMappingServiceBaseFactoryHeader { get; }
@@ -113,34 +103,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
         return true;
-    }
-
-
-    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>> GetMainTypesWithSecondarySecurityRules()
-    {
-        return this.DomainTypes.GetTypesWithSecondarySecurityRules();
-    }
-
-    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>> GetTypesWithSecondarySecurityRules()
-    {
-        var mainResult = this.GetMainTypesWithSecondarySecurityRules().ToDictionary();
-
-        var dependencyRequest = from domainType in this.GetDomainTypes()
-
-                                where !mainResult.ContainsKey(domainType)
-
-                                let rootSourceType = domainType.GetDependencySecuritySourceType(true)
-
-                                where rootSourceType != null
-
-                                let mainPair = mainResult.GetValueOrDefault(rootSourceType)
-
-                                where mainPair != null
-
-                                select new KeyValuePair<Type, ReadOnlyCollection<SecurityRule>>(domainType, mainPair);
-
-
-        return mainResult.Concat(dependencyRequest);
     }
 
     public IEnumerable<PropertyInfo> GetDomainTypeProperties(Type domainType, DTOFileType fileType)
@@ -442,8 +404,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         yield return this.UpdateDTOFileFactoryHeader;
 
         yield return this.ProjectionDTOFileFactoryHeader;
-
-        yield return this.DomainObjectSecurityRuleCodeFileFactoryHeader;
 
         yield return this.ClientDTOMappingServiceInterfaceFileFactoryHeader;
 

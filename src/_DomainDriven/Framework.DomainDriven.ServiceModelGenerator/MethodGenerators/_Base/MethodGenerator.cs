@@ -6,7 +6,6 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.Projection;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -111,6 +110,10 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected abstract IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr);
 
+    protected CodeParameterDeclarationExpression GetSecurityRuleParameter() => typeof(DomainSecurityRule.ClientSecurityRule)
+                                                                               .ToTypeReference()
+                                                                               .ToParameterDeclarationExpression("securityRule");
+
     protected virtual object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         if (this.RequiredSecurity)
@@ -197,17 +200,5 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         var bllCreateExpr = evaluateDataExpr.GetContext().ToPropertyReference((IBLLFactoryContainerContext<object> context) => context.Logics).ToPropertyReference(objectType.Name);
 
         return bllRef.ToVariableDeclarationStatement(varName, bllCreateExpr);
-    }
-
-    protected CodeExpression GetConvertToSecurityRuleCodeParameterExpression(CodeExpression evaluateDataExpr, int parameterIndex)
-    {
-        return evaluateDataExpr.GetContext()
-                               .ToPropertyReference("SecurityRuleParser")
-                               .ToMethodReferenceExpression("Parse", this.DomainType.GetProjectionSourceTypeOrSelf().ToTypeReference())
-                               .ToMethodInvokeExpression(
-                                   this.Parameters[parameterIndex]
-                                       .Pipe(v => v.Type.BaseType == nameof(String)
-                                                      ? (CodeExpression)v.ToVariableReferenceExpression()
-                                                      : v.ToVariableReferenceExpression().ToMethodInvokeExpression("ToString")));
     }
 }

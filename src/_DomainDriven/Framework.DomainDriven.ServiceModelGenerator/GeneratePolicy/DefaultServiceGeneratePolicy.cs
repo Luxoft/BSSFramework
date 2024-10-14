@@ -202,7 +202,7 @@ public class DefaultServiceGeneratePolicy(IGeneratorConfiguration<IGenerationEnv
         else if (identity == MethodIdentityType.GetODataListByQueryStringWithOperation
                  || identity == MethodIdentityType.GetODataTreeByQueryStringWithOperation)
         {
-            return domainType.IsProjection();
+            return false;
         }
         else
         {

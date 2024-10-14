@@ -82,6 +82,21 @@
         }
         
         /// <summary>
+        /// Get Sequences (FullDTO) by operation
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequencesByOperationInternal(securityRule, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        {
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(securityRule);
+            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
         /// Get Sequences (FullDTO) by filter (Framework.Configuration.Domain.SequenceRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -192,6 +207,21 @@
         }
         
         /// <summary>
+        /// Get Sequences (SimpleDTO) by operation
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByOperationInternal(securityRule, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        {
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(securityRule);
+            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
         /// Get Sequences (SimpleDTO) by filter (Framework.Configuration.Domain.SequenceRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -267,6 +297,21 @@
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Framework.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(sequenceIdents, evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+        }
+        
+        /// <summary>
+        /// Get Sequences (VisualDTO) by operation
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule)
+        {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByOperationInternal(securityRule, evaluateData));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByOperationInternal(Framework.SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        {
+            Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(securityRule);
+            return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Configuration.Domain.Sequence>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         /// <summary>

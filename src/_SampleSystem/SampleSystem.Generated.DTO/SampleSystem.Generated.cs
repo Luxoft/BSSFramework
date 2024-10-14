@@ -11,24 +11,6 @@ namespace SampleSystem.Generated.DTO
 {
     
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "DomainObjectSecurityRuleCode", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemBusinessUnitSecurityRuleCode
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BusinessUnitHrDepartmentEdit,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BusinessUnitHrDepartmentView,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BusinessUnitView,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit,
-    }
-    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct AddressIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.AddressIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>

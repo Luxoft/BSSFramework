@@ -3,7 +3,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
 using Framework.Core;
-using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.UserSource;
 
 using static Framework.SecuritySystem.DomainSecurityRule;
@@ -12,9 +11,7 @@ namespace Framework.SecuritySystem.Services;
 
 public class DomainSecurityProviderFactory<TDomainObject>(
     IServiceProvider serviceProvider,
-    ISecurityModeExpander securityModeExpander,
     ISecurityRuleDeepOptimizer deepOptimizer,
-    ISecurityRuleImplementationResolver implementationResolver,
     IRoleBaseSecurityProviderFactory<TDomainObject> roleBaseSecurityProviderFactory) : IDomainSecurityProviderFactory<TDomainObject>
 {
     public virtual ISecurityProvider<TDomainObject> Create(
@@ -30,12 +27,6 @@ public class DomainSecurityProviderFactory<TDomainObject>(
     {
         switch (baseSecurityRule)
         {
-            case DomainModeSecurityRule securityRule:
-                return this.CreateInternal(securityModeExpander.Expand(securityRule), securityPath);
-
-            case SecurityRuleHeader securityRuleHeader:
-                return this.CreateInternal(implementationResolver.Resolve(securityRuleHeader), securityPath);
-
             case RoleBaseSecurityRule securityRule:
                 return roleBaseSecurityProviderFactory.Create(securityRule, securityPath);
 
@@ -132,6 +123,11 @@ public class DomainSecurityProviderFactory<TDomainObject>(
 
             case NegateSecurityRule securityRule:
                 return this.CreateInternal(securityRule.InnerRule, securityPath).Negate();
+
+            case DomainModeSecurityRule:
+            case SecurityRuleHeader:
+            case ClientSecurityRule:
+                throw new Exception("Must be optimized");
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(baseSecurityRule));

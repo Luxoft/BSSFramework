@@ -5,7 +5,6 @@ using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.DomainDriven.BLL;
 using Framework.OData;
-using Framework.Projection;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -31,7 +30,7 @@ public class GetODataListByQueryStringWithOperationMethodGenerator<TConfiguratio
 
     protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.GetConvertToSecurityRuleCodeParameterExpression(evaluateDataExpr, 1);
+        return this.GetSecurityRuleParameter().ToVariableReferenceExpression();
     }
 
     protected override string GetComment()
@@ -43,11 +42,7 @@ public class GetODataListByQueryStringWithOperationMethodGenerator<TConfiguratio
     {
         yield return typeof(string).ToTypeReference().ToParameterDeclarationExpression("odataQueryString");
 
-        yield return new CodeParameterDeclarationExpression
-                     {
-                             Name = "securityRuleCode",
-                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), DTOGenerator.FileType.DomainObjectSecurityRuleCode)
-                     };
+        yield return this.GetSecurityRuleParameter();
     }
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)

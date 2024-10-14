@@ -82,14 +82,11 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
                 }
             }
 
-            if (this.Environment.ServerDTO.TypesWithSecondarySecurityRules.ContainsKey(domainType))
-            {
-                yield return new GetListByOperationMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType);
+            yield return new GetListByOperationMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType);
 
-                if (domainType.GetProjectionSourceTypeOrSelf().IsHierarchical())
-                {
-                    yield return new GetTreeByOperationMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType);
-                }
+            if (domainType.GetProjectionSourceTypeOrSelf().IsHierarchical())
+            {
+                yield return new GetTreeByOperationMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType);
             }
         }
 

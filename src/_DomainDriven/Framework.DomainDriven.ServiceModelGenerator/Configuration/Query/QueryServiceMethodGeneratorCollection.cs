@@ -30,16 +30,12 @@ public class QueryServiceMethodGeneratorCollection<TConfiguration> : GeneratorCo
     {
         yield return new GetODataListByQueryStringMethodGenerator<TConfiguration>(this.Configuration, this._domainType, this._dtoType);
 
-        if (this.Configuration.Environment.ServerDTO.TypesWithSecondarySecurityRules.ContainsKey(this._domainType))
+        yield return new GetODataListByQueryStringWithOperationMethodGenerator<TConfiguration>(this.Configuration, this._domainType, this._dtoType);
+
+        if (this._domainType.GetProjectionSourceTypeOrSelf().IsHierarchical())
         {
-            yield return new GetODataListByQueryStringWithOperationMethodGenerator<TConfiguration>(this.Configuration, this._domainType, this._dtoType);
-
-            if (this._domainType.GetProjectionSourceTypeOrSelf().IsHierarchical())
-            {
-                yield return new GetODataTreeByQueryStringWithOperationMethodGenerator<TConfiguration>(this.Configuration, this._domainType, this._dtoType);
-            }
+            yield return new GetODataTreeByQueryStringWithOperationMethodGenerator<TConfiguration>(this.Configuration, this._domainType, this._dtoType);
         }
-
 
         foreach (var filterModelType in this.GetODataFilterTypes())
         {

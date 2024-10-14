@@ -24,8 +24,6 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     private Type accessDeniedExceptionServiceType = typeof(AccessDeniedExceptionService);
 
-    private Type securityRuleParserType = typeof(ClientSecurityRuleParser);
-
     private Type clientDomainModeSecurityRuleSource = typeof(ClientDomainModeSecurityRuleSource);
 
     private Type? securityAccessorInfinityStorageType;
@@ -64,7 +62,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public ISecuritySystemSettings AddSecurityRule(DomainSecurityRule.SecurityRuleHeader header, DomainSecurityRule implementation)
     {
-        this.registerActions.Add(sc => sc.AddSingleton(new SecurityRuleFullInfo(header, implementation)));
+        this.registerActions.Add(sc => sc.AddSingleton(new SecurityRuleHeaderInfo(header, implementation)));
 
         return this;
     }
@@ -184,14 +182,6 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         return this;
     }
 
-    public ISecuritySystemSettings SetSecurityRuleParser<TSecurityRuleParser>()
-        where TSecurityRuleParser : class, ISecurityRuleParser
-    {
-        this.securityRuleParserType = typeof(TSecurityRuleParser);
-
-        return this;
-    }
-
     public void Initialize(IServiceCollection services)
     {
         this.registerActions.ForEach(v => v(services));
@@ -218,8 +208,6 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         }
 
         services.AddSingleton(this.defaultSecurityRuleCredential);
-
-        services.AddSingleton(typeof(ISecurityRuleParser), this.securityRuleParserType);
 
         services.AddSingleton(typeof(IClientDomainModeSecurityRuleSource), this.clientDomainModeSecurityRuleSource);
     }

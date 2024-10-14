@@ -91,6 +91,8 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<IDomainModeSecurityRuleResolver, DomainModeSecurityRuleResolver>()
                        .AddSingleton<IDomainSecurityRoleExtractor, DomainSecurityRoleExtractor>()
 
+                       .AddSingleton<ISecurityRuleHeaderExpander, SecurityRuleHeaderExpander>()
+                       .AddSingleton<IClientSecurityRuleExpander, ClientSecurityRuleExpander>()
                        .AddSingleton<ISecurityModeExpander, SecurityModeExpander>()
                        .AddSingleton<ISecurityOperationExpander, SecurityOperationExpander>()
                        .AddSingleton<ISecurityRoleExpander, SecurityRoleExpander>()
@@ -101,7 +103,7 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityContextSource, SecurityContextSource>()
                        .AddSingleton<ISecurityRuleBasicOptimizer, SecurityRuleBasicOptimizer>()
                        .AddSingleton<ISecurityRuleDeepOptimizer, SecurityRuleDeepOptimizer>()
-                       .AddSingleton<ISecurityRuleImplementationResolver, SecurityRuleImplementationResolver>()
+
                        .AddScoped(typeof(IRoleBaseSecurityProviderFactory<>), typeof(RoleBaseSecurityProviderFactory<>))
                        .AddScoped(typeof(IDomainSecurityProviderFactory<>), typeof(DomainSecurityProviderFactory<>))
                        .AddSingleton<ISecurityPathRestrictionService, SecurityPathRestrictionService>()

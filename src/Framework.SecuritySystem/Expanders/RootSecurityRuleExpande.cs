@@ -10,12 +10,20 @@ public class RootSecurityRuleExpander(
     ISecurityRoleExpander securityRoleExpander,
     IRoleFactorySecurityRuleExpander roleFactorySecurityRuleExpander,
     ISecurityRoleSource securityRoleSource,
-    ISecurityRuleImplementationResolver implementationResolver)
+    IClientSecurityRuleExpander clientSecurityRuleExpander,
+    ISecurityRuleHeaderExpander securityRuleHeaderExpander)
     : ISecurityRuleExpander
 {
     public DomainSecurityRule? TryExpand(DomainModeSecurityRule securityRule)
     {
         return securityModeExpander.TryExpand(securityRule);
+    }
+
+    public DomainSecurityRule Expand(SecurityRuleHeader securityRuleHeader) => securityRuleHeaderExpander.Expand(securityRuleHeader);
+
+    public DomainSecurityRule Expand(ClientSecurityRule securityRule)
+    {
+        return clientSecurityRuleExpander.Expand(securityRule);
     }
 
     public NonExpandedRolesSecurityRule Expand(OperationSecurityRule securityRule)
@@ -59,19 +67,18 @@ public class RootSecurityRuleExpander(
 
     public DomainSecurityRule FullDomainExpand(DomainSecurityRule securityRule)
     {
-        return new FullDomainExpandVisitor(this, implementationResolver).Visit(securityRule);
+        return new FullDomainExpandVisitor(this).Visit(securityRule);
     }
 
-    private class FullDomainExpandVisitor(ISecurityRuleExpander expander, ISecurityRuleImplementationResolver implementationResolver)
+    private class FullDomainExpandVisitor(ISecurityRuleExpander expander)
         : SecurityRuleVisitor
     {
-        protected override DomainSecurityRule Visit(SecurityRuleHeader securityRule)
-        {
-            return this.Visit(implementationResolver.Resolve(securityRule));
-        }
-
         protected override DomainSecurityRule Visit(RoleBaseSecurityRule baseSecurityRule) => expander.FullRoleExpand(baseSecurityRule);
 
         protected override DomainSecurityRule Visit(DomainModeSecurityRule securityRule) => this.Visit(expander.Expand(securityRule));
+
+        protected override DomainSecurityRule Visit(SecurityRuleHeader securityRule) => this.Visit(expander.Expand(securityRule));
+
+        protected override DomainSecurityRule Visit(ClientSecurityRule securityRule) => this.Visit(expander.Expand(securityRule));
     }
 }

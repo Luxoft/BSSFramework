@@ -1,17 +1,18 @@
 ﻿using Framework.Core;
+using Framework.SecuritySystem.Services;
 
-namespace Framework.SecuritySystem.Services;
+namespace Framework.SecuritySystem.Expanders;
 
-public class SecurityRuleImplementationResolver : ISecurityRuleImplementationResolver
+public class SecurityRuleHeaderExpander : ISecurityRuleHeaderExpander
 {
     private readonly IReadOnlyDictionary<DomainSecurityRule.SecurityRuleHeader, DomainSecurityRule> dict;
 
-    public SecurityRuleImplementationResolver(IEnumerable<SecurityRuleFullInfo> securityRuleFullInfoList)
+    public SecurityRuleHeaderExpander(IEnumerable<SecurityRuleHeaderInfo> securityRuleFullInfoList)
     {
         this.dict = securityRuleFullInfoList.ToDictionary(pair => pair.Header, pair => pair.Implementation);
     }
 
-    public DomainSecurityRule Resolve(DomainSecurityRule.SecurityRuleHeader securityRuleHeader)
+    public DomainSecurityRule Expand(DomainSecurityRule.SecurityRuleHeader securityRuleHeader)
     {
         return this.dict.GetValue(
             securityRuleHeader,

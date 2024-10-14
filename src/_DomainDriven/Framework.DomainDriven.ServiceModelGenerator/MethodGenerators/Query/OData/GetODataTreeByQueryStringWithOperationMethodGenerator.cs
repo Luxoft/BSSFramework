@@ -7,7 +7,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.OData;
 using Framework.Persistent;
-using Framework.Projection;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -35,7 +35,7 @@ public class GetODataTreeByQueryStringWithOperationMethodGenerator<TConfiguratio
 
     protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
-        return this.GetConvertToSecurityRuleCodeParameterExpression(evaluateDataExpr, 1);
+        return this.GetSecurityRuleParameter().ToVariableReferenceExpression();
     }
 
     protected override string GetComment()
@@ -49,8 +49,8 @@ public class GetODataTreeByQueryStringWithOperationMethodGenerator<TConfiguratio
 
         yield return new CodeParameterDeclarationExpression
                      {
-                             Name = "securityRuleCode",
-                             Type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType.GetProjectionSourceTypeOrSelf(), DTOGenerator.FileType.DomainObjectSecurityRuleCode)
+                             Name = "securityRule",
+                             Type = typeof(DomainSecurityRule.ClientSecurityRule).ToTypeReference()
                      };
     }
 

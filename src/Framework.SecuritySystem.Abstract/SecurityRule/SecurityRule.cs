@@ -27,5 +27,9 @@ public abstract record SecurityRule
     public record ModeSecurityRule(string Name) : SecurityRule
     {
         public override string ToString() => this.Name;
+
+        public DomainSecurityRule.DomainModeSecurityRule ToDomain<TDomainObject>() => this.ToDomain(typeof(TDomainObject));
+
+        public DomainSecurityRule.DomainModeSecurityRule ToDomain(Type domainType) => new(domainType, this);
     }
 }

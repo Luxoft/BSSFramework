@@ -36,7 +36,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
     {
         foreach (var domainObjectSecurityPair in this.domainObjectSecurityDict)
         {
-            services.AddSingleton(new DomainModeSecurityRuleInfo(new DomainSecurityRule.DomainModeSecurityRule(this.DomainType, domainObjectSecurityPair.Key), domainObjectSecurityPair.Value));
+            services.AddSingleton(new DomainModeSecurityRuleInfo(domainObjectSecurityPair.Key.ToDomain(this.DomainType), domainObjectSecurityPair.Value));
         }
 
         if (this.securityPath != null)

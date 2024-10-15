@@ -38,7 +38,7 @@ public abstract class DomainSecurityService<TDomainObject>(ISecurityRuleExpander
 
     protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule.ModeSecurityRule securityRule)
     {
-        return this.GetSecurityProvider(new DomainModeSecurityRule(typeof(TDomainObject), securityRule));
+        return this.GetSecurityProvider(securityRule.ToDomain<TDomainObject>());
     }
 
     protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(OperationSecurityRule securityRule)

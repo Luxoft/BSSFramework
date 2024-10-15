@@ -92,20 +92,7 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
         }
         else if (securityPath is IContextSecurityPath contextSecurityPath)
         {
-            if (securityContextRestrictions == null)
-            {
-                if (contextSecurityPath.Key == null)
-                {
-                    return securityPath;
-                }
-                else
-                {
-                    return SecurityPath<TDomainObject>.Empty;
-                }
-            }
-            else if (securityContextRestrictions.Any(
-                    restriction => restriction.Type == contextSecurityPath.SecurityContextType
-                                   && restriction.Key == contextSecurityPath.Key))
+            if (ContainsRestrictionKey(contextSecurityPath, securityContextRestrictions))
             {
                 return securityPath;
             }
@@ -192,6 +179,33 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
         else
         {
             return securityPath with { NestedSecurityPath = visitedNestedSecurityPath };
+        }
+    }
+
+    private static bool ContainsRestrictionKey(
+        IContextSecurityPath contextSecurityPath,
+        IReadOnlyList<SecurityContextRestriction>? securityContextRestrictions)
+    {
+        if (securityContextRestrictions == null)
+        {
+            if (contextSecurityPath.Key == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (securityContextRestrictions.Any(
+                     restriction => restriction.Type == contextSecurityPath.SecurityContextType
+                                    && restriction.Key == contextSecurityPath.Key))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

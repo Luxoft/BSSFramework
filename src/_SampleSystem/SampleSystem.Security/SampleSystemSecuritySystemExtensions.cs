@@ -110,7 +110,7 @@ public static class SampleSystemSecuritySystemExtensions
                            SecurityRule.Disabled.And((TestRestrictionObject v) => v.RestrictionHandler))
                        .AddSecurityRule(
                            SampleSystemSecurityGroup.TestGroup,
-                           new DomainSecurityRule.DomainModeSecurityRule(typeof(Employee), SecurityRule.View));
+                           SecurityRule.View.ToDomain<Employee>());
     }
 
     public static ISecuritySystemSettings AddCustomSecurityOperations(this ISecuritySystemSettings settings)

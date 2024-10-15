@@ -78,7 +78,7 @@ public abstract record SecurityPath<TDomainObject>
     public static SecurityPath<TDomainObject> CreateNested<TNestedObject>(
         Expression<Func<TDomainObject, IEnumerable<TNestedObject>>> nestedObjectsPath,
         SecurityPath<TNestedObject> nestedSecurityPath,
-        ManySecurityPathMode mode) =>
+        ManySecurityPathMode mode = ManySecurityPathMode.Any) =>
         new NestedManySecurityPath<TNestedObject>(nestedObjectsPath, nestedSecurityPath, mode);
 
     #endregion

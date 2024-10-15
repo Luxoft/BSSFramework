@@ -120,8 +120,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
                             .SetPath(
                                 SecurityPath<TestPlainAuthObject>.Create(v => v.Location)
                                                                  .And(SecurityPath<TestPlainAuthObject>.CreateNested(v => v.Items,
-                                                                      SecurityPath<TestItemAuthObject>.Create(i => i.BusinessUnit).And(i => i.ManagementUnit),
-                                                                      ManySecurityPathMode.Any))))
+                                                                      SecurityPath<TestItemAuthObject>.Create(i => i.BusinessUnit).And(i => i.ManagementUnit)))))
 
                   .Add<AuthPerformanceObject>(
                       b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView)

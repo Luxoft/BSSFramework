@@ -49,4 +49,24 @@ public partial class MainTests
         //Assert
         result.Should().Be(SecurityPath<Employee>.Empty);
     }
+
+    [Fact]
+    public void TryApplyKeyedRestriction_SecurityPathCorrect()
+    {
+        //Arrange
+        var key = "Alt";
+
+        var service = this.rootServiceProvider.GetRequiredService<ISecurityPathRestrictionService>();
+
+        var altSecurityPath = SecurityPath<Employee>.Create(employee => employee.BusinessUnit, key: key);
+        var baseSecurityPath = SecurityPath<Employee>.Create(employee => employee.BusinessUnit).And(altSecurityPath);
+
+        var restriction = SecurityPathRestriction.Create<Location>().Add<BusinessUnit>(key: key);
+
+        //Act
+        var result = service.ApplyRestriction(baseSecurityPath, restriction);
+
+        //Assert
+        result.Should().Be(altSecurityPath);
+    }
 }

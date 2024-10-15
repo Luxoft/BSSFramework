@@ -26,17 +26,19 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
         SecurityPath<TDomainObject> securityPath,
         SecurityPathRestriction restriction)
     {
-        if (restriction.SecurityContextTypes == null)
+        if (restriction.SecurityContextRestrictions == null)
         {
             return securityPath;
         }
         else
         {
-            return this.Visit(securityPath, [.. restriction.SecurityContextTypes]);
+            return this.Visit(securityPath, restriction.SecurityContextRestrictions);
         }
     }
 
-    private SecurityPath<TDomainObject> TryAddConditionFactory<TDomainObject>(SecurityPath<TDomainObject> securityPath, Type conditionFactoryType)
+    private SecurityPath<TDomainObject> TryAddConditionFactory<TDomainObject>(
+        SecurityPath<TDomainObject> securityPath,
+        Type conditionFactoryType)
     {
         var conditionFactory =
             (IFactory<Expression<Func<TDomainObject, bool>>>?)serviceProvider.GetService(
@@ -80,7 +82,7 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
 
     private SecurityPath<TDomainObject> Visit<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
-        HashSet<Type> allowedSecurityContexts)
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     {
         var pathType = securityPath.GetType();
 
@@ -88,11 +90,11 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
         {
             return securityPath;
         }
-        else if (pathType.BaseType.Maybe(baseType => baseType.IsGenericTypeImplementation(typeof(SecurityPath<>))))
+        else if (securityPath is IContextSecurityPath contextSecurityPath)
         {
-            var singleSecurityContextType = pathType.GetGenericArguments().ToArray()[1];
-
-            if (allowedSecurityContexts.Contains(singleSecurityContextType))
+            if (securityContextRestrictions.Any(
+                    restriction => restriction.Type == contextSecurityPath.SecurityContextType
+                                   && restriction.Key == contextSecurityPath.Key))
             {
                 return securityPath;
             }
@@ -104,20 +106,21 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
         else if (pathType.IsGenericTypeImplementation(typeof(SecurityPath<>.NestedManySecurityPath<>)))
         {
             var func =
-                new Func<SecurityPath<TDomainObject>.NestedManySecurityPath<TDomainObject>, HashSet<Type>, SecurityPath<TDomainObject>>(
+                new Func<SecurityPath<TDomainObject>.NestedManySecurityPath<TDomainObject>, IReadOnlyList<SecurityContextRestriction>,
+                    SecurityPath<TDomainObject>>(
                     this.VisitNestedSecurityContexts);
 
             var args = pathType.GetGenericArguments().ToArray();
 
             var method = func.Method.GetGenericMethodDefinition().MakeGenericMethod(args);
 
-            return method.Invoke<SecurityPath<TDomainObject>>(this, securityPath, allowedSecurityContexts);
+            return method.Invoke<SecurityPath<TDomainObject>>(this, securityPath, securityContextRestrictions);
         }
         else if (securityPath is SecurityPath<TDomainObject>.AndSecurityPath andSecurityPath)
         {
-            var visitedLeft = this.Visit(andSecurityPath.Left, allowedSecurityContexts);
+            var visitedLeft = this.Visit(andSecurityPath.Left, securityContextRestrictions);
 
-            var visitedRight = this.Visit(andSecurityPath.Right, allowedSecurityContexts);
+            var visitedRight = this.Visit(andSecurityPath.Right, securityContextRestrictions);
 
             if (visitedLeft == SecurityPath<TDomainObject>.Empty)
             {
@@ -138,9 +141,9 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
         }
         else if (securityPath is SecurityPath<TDomainObject>.OrSecurityPath orSecurityPath)
         {
-            var visitedLeft = this.Visit(orSecurityPath.Left, allowedSecurityContexts);
+            var visitedLeft = this.Visit(orSecurityPath.Left, securityContextRestrictions);
 
-            var visitedRight = this.Visit(orSecurityPath.Right, allowedSecurityContexts);
+            var visitedRight = this.Visit(orSecurityPath.Right, securityContextRestrictions);
 
             if (visitedLeft == SecurityPath<TDomainObject>.Empty)
             {
@@ -167,9 +170,9 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
 
     private SecurityPath<TDomainObject> VisitNestedSecurityContexts<TDomainObject, TNestedObject>(
         SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath,
-        HashSet<Type> allowedSecurityContexts)
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     {
-        var visitedNestedSecurityPath = this.Visit(securityPath.NestedSecurityPath, allowedSecurityContexts);
+        var visitedNestedSecurityPath = this.Visit(securityPath.NestedSecurityPath, securityContextRestrictions);
 
         if (visitedNestedSecurityPath == securityPath.NestedSecurityPath)
         {

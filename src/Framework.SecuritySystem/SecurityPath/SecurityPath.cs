@@ -11,6 +11,8 @@ namespace Framework.SecuritySystem;
 /// <typeparam name="TDomainObject"></typeparam>
 public abstract record SecurityPath<TDomainObject>
 {
+    public abstract bool HasKey { get; }
+
     public IEnumerable<Type> GetUsedTypes() => this.GetInternalUsedTypes().Distinct();
 
     public abstract SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
@@ -22,84 +24,71 @@ public abstract record SecurityPath<TDomainObject>
 
     #region Create
 
-    public SecurityPath<TDomainObject> And<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
+    public SecurityPath<TDomainObject> And(SecurityPath<TDomainObject> other) => new AndSecurityPath(this, other);
+
+    public SecurityPath<TDomainObject> And(Expression<Func<TDomainObject, bool>> securityFilter) => this.And(Condition(securityFilter));
+
+    public SecurityPath<TDomainObject> And<TSecurityContext>(
+        Expression<Func<TDomainObject, TSecurityContext>> securityPath,
+        SingleSecurityMode mode = SingleSecurityMode.AllowNull,
+        string? key = null)
         where TSecurityContext : ISecurityContext =>
-        this.And(securityPath, ManySecurityPathMode.Any);
+        this.And(Create(securityPath, mode, key));
 
     public SecurityPath<TDomainObject> And<TSecurityContext>(
         Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath,
-        ManySecurityPathMode mode)
+        ManySecurityPathMode mode = ManySecurityPathMode.Any,
+        string? key = null)
         where TSecurityContext : ISecurityContext =>
-        this.And(Create(securityPath, mode));
-
-    public SecurityPath<TDomainObject> Or<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath)
-        where TSecurityContext : ISecurityContext =>
-        this.Or(Create(securityPath));
-
-    public SecurityPath<TDomainObject> Or<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
-        where TSecurityContext : ISecurityContext =>
-        this.Or(securityPath, ManySecurityPathMode.Any);
-
-    public SecurityPath<TDomainObject> Or<TSecurityContext>(
-        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath,
-        ManySecurityPathMode mode)
-        where TSecurityContext : ISecurityContext =>
-        this.Or(Create(securityPath, mode));
+        this.And(Create(securityPath, mode, key));
 
     public SecurityPath<TDomainObject> Or(SecurityPath<TDomainObject> other) => new OrSecurityPath(this, other);
 
-    public SecurityPath<TDomainObject> And<TSecurityContext>(
+    public SecurityPath<TDomainObject> Or(Expression<Func<TDomainObject, bool>> securityFilter) => this.Or(Condition(securityFilter));
+
+    public SecurityPath<TDomainObject> Or<TSecurityContext>(
         Expression<Func<TDomainObject, TSecurityContext>> securityPath,
-        SingleSecurityMode mode = SingleSecurityMode.AllowNull)
+        SingleSecurityMode mode = SingleSecurityMode.AllowNull,
+        string? key = null)
         where TSecurityContext : ISecurityContext =>
-        this.And(Create(securityPath, mode));
+        this.Or(Create(securityPath, mode, key));
 
-    public SecurityPath<TDomainObject> And(SecurityPath<TDomainObject> other) => new AndSecurityPath(this, other);
+    public SecurityPath<TDomainObject> Or<TSecurityContext>(
+        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath,
+        ManySecurityPathMode mode = ManySecurityPathMode.Any,
+        string? key = null)
+        where TSecurityContext : ISecurityContext =>
+        this.Or(Create(securityPath, mode, key));
 
-    public SecurityPath<TDomainObject> And(Expression<Func<TDomainObject, bool>> securityFilter)
-    {
-        var condPath = new ConditionPath(securityFilter);
-
-        return new AndSecurityPath(this, condPath);
-    }
-
-    public SecurityPath<TDomainObject> Or(Expression<Func<TDomainObject, bool>> securityFilter)
-    {
-        var condPath = new ConditionPath(securityFilter);
-
-        return new OrSecurityPath(this, condPath);
-    }
+    public static SecurityPath<TDomainObject> Condition(Expression<Func<TDomainObject, bool>> securityFilter) =>
+        new ConditionPath(securityFilter);
 
     public static SecurityPath<TDomainObject> Create<TSecurityContext>(
         Expression<Func<TDomainObject, TSecurityContext>> securityPath,
-        SingleSecurityMode mode = SingleSecurityMode.AllowNull)
+        SingleSecurityMode mode = SingleSecurityMode.AllowNull,
+        string? key = null)
         where TSecurityContext : ISecurityContext =>
-        new SingleSecurityPath<TSecurityContext>(securityPath, mode);
-
-    public static SecurityPath<TDomainObject> Create<TSecurityContext>(
-        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
-        where TSecurityContext : ISecurityContext =>
-        Create(securityPath, ManySecurityPathMode.Any);
+        new SingleSecurityPath<TSecurityContext>(securityPath, mode, key);
 
     public static SecurityPath<TDomainObject> Create<TSecurityContext>(
         Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath,
-        ManySecurityPathMode mode)
+        ManySecurityPathMode mode = ManySecurityPathMode.Any,
+        string? key = null)
         where TSecurityContext : ISecurityContext =>
-        new ManySecurityPath<TSecurityContext>(securityPath, mode);
+        new ManySecurityPath<TSecurityContext>(securityPath, mode, key);
 
     public static SecurityPath<TDomainObject> CreateNested<TNestedObject>(
         Expression<Func<TDomainObject, IEnumerable<TNestedObject>>> nestedObjectsPath,
         SecurityPath<TNestedObject> nestedSecurityPath,
-        ManySecurityPathMode mode) =>
+        ManySecurityPathMode mode = ManySecurityPathMode.Any) =>
         new NestedManySecurityPath<TNestedObject>(nestedObjectsPath, nestedSecurityPath, mode);
-
-    public static SecurityPath<TDomainObject> Condition(Expression<Func<TDomainObject, bool>> securityFilter) =>
-        new ConditionPath(securityFilter);
 
     #endregion
 
     public record ConditionPath(Expression<Func<TDomainObject, bool>> SecurityFilter) : SecurityPath<TDomainObject>
     {
+        public override bool HasKey { get; } = false;
+
         protected override IEnumerable<Type> GetInternalUsedTypes() => [];
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
@@ -116,6 +105,8 @@ public abstract record SecurityPath<TDomainObject>
     public abstract record BinarySecurityPath(SecurityPath<TDomainObject> Left, SecurityPath<TDomainObject> Right)
         : SecurityPath<TDomainObject>
     {
+        public override bool HasKey { get; } = Left.HasKey || Right.HasKey;
+
         protected override IEnumerable<Type> GetInternalUsedTypes() =>
             this.Left.GetUsedTypes().Concat(this.Right.GetUsedTypes());
     }
@@ -138,52 +129,54 @@ public abstract record SecurityPath<TDomainObject>
 
     public record SingleSecurityPath<TSecurityContext>(
         Expression<Func<TDomainObject, TSecurityContext>> SecurityPath,
-        SingleSecurityMode Mode) : SecurityPath<TDomainObject>
+        SingleSecurityMode Mode,
+        string? Key) : SecurityPath<TDomainObject>, IContextSecurityPath
         where TSecurityContext : ISecurityContext
     {
+        public override bool HasKey { get; } = Key != null;
+
+        Type IContextSecurityPath.SecurityContextType => typeof(TSecurityContext);
+
         protected override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
             Expression<Func<TNewDomainObject, TDomainObject>> selector) =>
             new SecurityPath<TNewDomainObject>.SingleSecurityPath<TSecurityContext>(
                 this.SecurityPath.OverrideInput(selector),
-                this.Mode);
+                this.Mode,
+                this.Key);
 
         public virtual bool Equals(SingleSecurityPath<TSecurityContext>? other) =>
             ReferenceEquals(this, other)
             || (other is not null
                 && this.Mode == other.Mode
+                && this.Key == other.Key
                 && ExpressionComparer.Value.Equals(this.SecurityPath, other.SecurityPath));
 
         public override int GetHashCode() => this.Mode.GetHashCode();
     }
 
-    public record ManySecurityPath<TSecurityContext> : SecurityPath<TDomainObject>
+    public record ManySecurityPath<TSecurityContext>(
+        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> SecurityPath,
+        ManySecurityPathMode Mode,
+        string? Key) : SecurityPath<TDomainObject>, IContextSecurityPath
         where TSecurityContext : ISecurityContext
     {
-        public readonly Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> SecurityPath;
+        public override bool HasKey { get; } = Key != null;
 
-        public readonly Expression<Func<TDomainObject, IQueryable<TSecurityContext>>>? SecurityPathQ;
+        Type IContextSecurityPath.SecurityContextType => typeof(TSecurityContext);
 
-        public readonly ManySecurityPathMode Mode;
-
-        public ManySecurityPath(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
-        {
-            this.SecurityPath = securityPath;
-            this.Mode = mode;
-
-            this.SecurityPathQ = this.TryExtractSecurityPathQ();
-        }
+        public Expression<Func<TDomainObject, IQueryable<TSecurityContext>>>? SecurityPathQ { get; } =
+            TryExtractSecurityPathQ(SecurityPath);
 
         protected override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
 
-        private Expression<Func<TDomainObject, IQueryable<TSecurityContext>>>? TryExtractSecurityPathQ()
+        private static Expression<Func<TDomainObject, IQueryable<TSecurityContext>>>? TryExtractSecurityPathQ(
+            Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
         {
-            if (this.SecurityPath.Body.Type == typeof(IQueryable<TSecurityContext>))
+            if (securityPath.Body.Type == typeof(IQueryable<TSecurityContext>))
             {
-                return Expression.Lambda<Func<TDomainObject, IQueryable<TSecurityContext>>>(
-                    this.SecurityPath.Body,
-                    this.SecurityPath.Parameters);
+                return Expression.Lambda<Func<TDomainObject, IQueryable<TSecurityContext>>>(securityPath.Body, securityPath.Parameters);
             }
 
             return null;
@@ -193,12 +186,14 @@ public abstract record SecurityPath<TDomainObject>
             Expression<Func<TNewDomainObject, TDomainObject>> selector) =>
             new SecurityPath<TNewDomainObject>.ManySecurityPath<TSecurityContext>(
                 this.SecurityPath.OverrideInput(selector),
-                this.Mode);
+                this.Mode,
+                this.Key);
 
         public virtual bool Equals(ManySecurityPath<TSecurityContext>? other) =>
             ReferenceEquals(this, other)
             || (other is not null
                 && this.Mode == other.Mode
+                && this.Key == other.Key
                 && ExpressionComparer.Value.Equals(this.SecurityPath, other.SecurityPath));
 
         public override int GetHashCode() => this.Mode.GetHashCode();
@@ -209,6 +204,8 @@ public abstract record SecurityPath<TDomainObject>
         SecurityPath<TNestedObject> NestedSecurityPath,
         ManySecurityPathMode Mode) : SecurityPath<TDomainObject>
     {
+        public override bool HasKey { get; } = NestedSecurityPath.HasKey;
+
         protected override IEnumerable<Type> GetInternalUsedTypes() => this.NestedSecurityPath.GetUsedTypes();
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(

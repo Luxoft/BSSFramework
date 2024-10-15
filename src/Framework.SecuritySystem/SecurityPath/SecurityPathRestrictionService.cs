@@ -184,28 +184,8 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
 
     private static bool ContainsRestrictionKey(
         IContextSecurityPath contextSecurityPath,
-        IReadOnlyList<SecurityContextRestriction>? securityContextRestrictions)
-    {
-        if (securityContextRestrictions == null)
-        {
-            if (contextSecurityPath.Key == null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else if (securityContextRestrictions.Any(
-                     restriction => restriction.Type == contextSecurityPath.SecurityContextType
-                                    && restriction.Key == contextSecurityPath.Key))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+        IReadOnlyList<SecurityContextRestriction>? securityContextRestrictions) =>
+        securityContextRestrictions?.Any(
+            restriction => restriction.Type == contextSecurityPath.SecurityContextType
+                           && restriction.Key == contextSecurityPath.Key) ?? contextSecurityPath.Key == null;
 }

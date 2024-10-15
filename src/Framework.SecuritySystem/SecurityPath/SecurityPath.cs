@@ -22,9 +22,9 @@ public abstract record SecurityPath<TDomainObject>
 
     #region Create
 
-    public SecurityPath<TDomainObject> And(Expression<Func<TDomainObject, bool>> securityFilter) => this.And(Condition(securityFilter));
-
     public SecurityPath<TDomainObject> And(SecurityPath<TDomainObject> other) => new AndSecurityPath(this, other);
+
+    public SecurityPath<TDomainObject> And(Expression<Func<TDomainObject, bool>> securityFilter) => this.And(Condition(securityFilter));
 
     public SecurityPath<TDomainObject> And<TSecurityContext>(
         Expression<Func<TDomainObject, TSecurityContext>> securityPath,
@@ -40,9 +40,9 @@ public abstract record SecurityPath<TDomainObject>
         where TSecurityContext : ISecurityContext =>
         this.And(Create(securityPath, mode, key));
 
-    public SecurityPath<TDomainObject> Or(Expression<Func<TDomainObject, bool>> securityFilter) => this.Or(Condition(securityFilter));
-
     public SecurityPath<TDomainObject> Or(SecurityPath<TDomainObject> other) => new OrSecurityPath(this, other);
+
+    public SecurityPath<TDomainObject> Or(Expression<Func<TDomainObject, bool>> securityFilter) => this.Or(Condition(securityFilter));
 
     public SecurityPath<TDomainObject> Or<TSecurityContext>(
         Expression<Func<TDomainObject, TSecurityContext>> securityPath,

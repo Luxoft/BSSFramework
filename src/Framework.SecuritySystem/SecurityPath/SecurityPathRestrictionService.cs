@@ -26,7 +26,7 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
         SecurityPath<TDomainObject> securityPath,
         SecurityPathRestriction restriction)
     {
-        if (restriction.SecurityContextRestrictions == null && !securityPath.HasKey)
+        if (restriction.SecurityContextRestrictions == null)
         {
             return securityPath;
         }
@@ -82,7 +82,7 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
 
     private SecurityPath<TDomainObject> Visit<TDomainObject>(
         SecurityPath<TDomainObject> securityPath,
-        IReadOnlyList<SecurityContextRestriction>? securityContextRestrictions)
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     {
         var pathType = securityPath.GetType();
 
@@ -92,10 +92,9 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
         }
         else if (securityPath is IContextSecurityPath contextSecurityPath)
         {
-            var containsKey = securityContextRestrictions?.Any(
+            var containsKey = securityContextRestrictions.Any(
                                   restriction => restriction.Type == contextSecurityPath.SecurityContextType
-                                                 && restriction.Key == contextSecurityPath.Key)
-                              ?? contextSecurityPath.Key == null;
+                                                 && restriction.Key == contextSecurityPath.Key);
 
             return containsKey ? securityPath : SecurityPath<TDomainObject>.Empty;
         }

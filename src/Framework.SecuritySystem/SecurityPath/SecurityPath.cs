@@ -11,8 +11,6 @@ namespace Framework.SecuritySystem;
 /// <typeparam name="TDomainObject"></typeparam>
 public abstract record SecurityPath<TDomainObject>
 {
-    public abstract bool HasKey { get; }
-
     public IEnumerable<Type> GetUsedTypes() => this.GetInternalUsedTypes().Distinct();
 
     public abstract SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
@@ -87,8 +85,6 @@ public abstract record SecurityPath<TDomainObject>
 
     public record ConditionPath(Expression<Func<TDomainObject, bool>> SecurityFilter) : SecurityPath<TDomainObject>
     {
-        public override bool HasKey { get; } = false;
-
         protected override IEnumerable<Type> GetInternalUsedTypes() => [];
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
@@ -105,8 +101,6 @@ public abstract record SecurityPath<TDomainObject>
     public abstract record BinarySecurityPath(SecurityPath<TDomainObject> Left, SecurityPath<TDomainObject> Right)
         : SecurityPath<TDomainObject>
     {
-        public override bool HasKey { get; } = Left.HasKey || Right.HasKey;
-
         protected override IEnumerable<Type> GetInternalUsedTypes() =>
             this.Left.GetUsedTypes().Concat(this.Right.GetUsedTypes());
     }
@@ -133,8 +127,6 @@ public abstract record SecurityPath<TDomainObject>
         string? Key) : SecurityPath<TDomainObject>, IContextSecurityPath
         where TSecurityContext : ISecurityContext
     {
-        public override bool HasKey { get; } = Key != null;
-
         Type IContextSecurityPath.SecurityContextType => typeof(TSecurityContext);
 
         protected override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
@@ -162,8 +154,6 @@ public abstract record SecurityPath<TDomainObject>
         string? Key) : SecurityPath<TDomainObject>, IContextSecurityPath
         where TSecurityContext : ISecurityContext
     {
-        public override bool HasKey { get; } = Key != null;
-
         Type IContextSecurityPath.SecurityContextType => typeof(TSecurityContext);
 
         public Expression<Func<TDomainObject, IQueryable<TSecurityContext>>>? SecurityPathQ { get; } =
@@ -204,8 +194,6 @@ public abstract record SecurityPath<TDomainObject>
         SecurityPath<TNestedObject> NestedSecurityPath,
         ManySecurityPathMode Mode) : SecurityPath<TDomainObject>
     {
-        public override bool HasKey { get; } = NestedSecurityPath.HasKey;
-
         protected override IEnumerable<Type> GetInternalUsedTypes() => this.NestedSecurityPath.GetUsedTypes();
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(

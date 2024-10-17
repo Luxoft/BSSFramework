@@ -4,16 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
-public class ApiControllerBaseSingleCallEvaluator<TBLLContext, TMappingService> : IApiControllerBaseEvaluator<TBLLContext, TMappingService>
+public class ApiControllerBaseSingleCallEvaluator<TBLLContext, TMappingService>(IServiceProvider serviceProvider)
+    : IApiControllerBaseEvaluator<TBLLContext, TMappingService>
 {
-    private readonly IServiceProvider serviceProvider;
-
     private bool evaluateInvoked;
-
-    public ApiControllerBaseSingleCallEvaluator(IServiceProvider serviceProvider)
-    {
-        this.serviceProvider = serviceProvider;
-    }
 
     public TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<EvaluatedData<TBLLContext, TMappingService>, TResult> getResult)
     {
@@ -26,10 +20,10 @@ public class ApiControllerBaseSingleCallEvaluator<TBLLContext, TMappingService> 
 
         if (sessionMode == DBSessionMode.Read)
         {
-            this.serviceProvider.GetRequiredService<IDBSession>().AsReadOnly();
+            serviceProvider.GetRequiredService<IDBSession>().AsReadOnly();
         }
 
-        return getResult(this.serviceProvider.GetRequiredService<EvaluatedData<TBLLContext, TMappingService>>());
+        return getResult(serviceProvider.GetRequiredService<EvaluatedData<TBLLContext, TMappingService>>());
     }
 }
 

@@ -55,7 +55,7 @@ public class DBGenerator
             bool preserveSchemaDatabase = false,
             IMigrationScriptReader customMigrationScriptReader = null,
             ICollection<string> ignoredIndexes = null,
-            UserCredential credentials = null)
+            DbUserCredential credentials = null)
     {
         migrationScriptFolderPaths ??= new string[0];
         auditMigrationScriptFolderPaths ??= new string[0];

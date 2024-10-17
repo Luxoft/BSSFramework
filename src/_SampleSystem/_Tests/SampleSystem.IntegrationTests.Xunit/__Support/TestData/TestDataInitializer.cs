@@ -1,4 +1,4 @@
-using Automation.Extensions;
+﻿using Automation.Extensions;
 using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
@@ -40,9 +40,11 @@ public class TestDataInitializer
     }
 
     public async Task InitializeAsync(CancellationToken cancellationToken) =>
-        await this.serviceProvider.GetRequiredService<IIntegrationTestUserAuthenticationService>()
-                             .WithImpersonateAsync(nameof(TestDataInitializer),
-                                                   async () => await this.InitializeAsyncInternal(cancellationToken));
+        await this.serviceProvider
+                  .GetRequiredService<IIntegrationTestUserAuthenticationService>()
+                  .WithImpersonateAsync(
+                      nameof(TestDataInitializer),
+                      async () => await this.InitializeAsyncInternal(cancellationToken));
 
     public async Task InitializeAsyncInternal(CancellationToken cancellationToken)
     {

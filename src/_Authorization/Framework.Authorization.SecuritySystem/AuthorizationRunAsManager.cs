@@ -3,9 +3,9 @@ using Framework.Core;
 using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.Services;
-
-using NHibernate.Linq;
+using Framework.SecuritySystem.UserSource;
 
 namespace Framework.Authorization.SecuritySystem;
 
@@ -14,25 +14,26 @@ public class AuthorizationRunAsManager(
     ISecuritySystemFactory securitySystemFactory,
     ICurrentPrincipalSource currentPrincipalSource,
     [DisabledSecurity] IRepository<Principal> principalRepository,
+    IPrincipalResolver principalResolver,
     IEnumerable<IRunAsValidator> validators)
     : RunAsManager(userAuthenticationService, securitySystemFactory)
 {
     private Principal CurrentPrincipal => currentPrincipalSource.CurrentPrincipal;
 
-    public override string? RunAsName => this.CurrentPrincipal.RunAs?.Name;
+    public override User? RunAsUser =>
+        this.CurrentPrincipal.RunAs.Maybe(runAsPrincipal => new User(runAsPrincipal.Id, runAsPrincipal.Name));
 
-    protected override async Task PersistRunAs(string? principalName, CancellationToken cancellationToken)
+    protected override async Task PersistRunAs(UserCredential? userCredential, CancellationToken cancellationToken)
     {
-        if (principalName != null)
+        if (userCredential != null)
         {
-            validators.Foreach(validator => validator.Validate(principalName));
+            validators.Foreach(validator => validator.Validate(userCredential));
         }
 
         this.CurrentPrincipal.RunAs =
-            principalName == null
+            userCredential == null
                 ? null
-                : await principalRepository.GetQueryable().SingleOrDefaultAsync(p => p.Name == principalName, cancellationToken)
-                  ?? throw new Exception($"Principal with name '{principalName}' not found");
+                : await principalResolver.Resolve(userCredential, cancellationToken);
 
         await principalRepository.SaveAsync(this.CurrentPrincipal, cancellationToken);
     }

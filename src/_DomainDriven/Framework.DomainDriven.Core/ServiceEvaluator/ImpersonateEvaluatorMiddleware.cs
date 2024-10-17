@@ -1,12 +1,12 @@
 ﻿using Framework.Core.Services;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.ScopedEvaluate;
-
+using Framework.SecuritySystem.Credential;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;
 
-public class ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvider, string? customPrincipalName) : IScopedEvaluatorMiddleware
+public class ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvider, UserCredential? customUserCredential) : IScopedEvaluatorMiddleware
 {
     public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult)
     {
@@ -14,7 +14,7 @@ public class ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvid
         var impersonateService = scopedServiceProvider.GetRequiredService<IImpersonateService>();
 
         var actualImpersonateService =
-            customPrincipalName != null && customPrincipalName != userAuthenticationService.GetUserName()
+            customUserCredential != null && customUserCredential != userAuthenticationService.GetUserName()
                 ? impersonateService
                 : null;
 
@@ -24,7 +24,7 @@ public class ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvid
         }
         else
         {
-            return await actualImpersonateService.WithImpersonateAsync(customPrincipalName, getResult);
+            return await actualImpersonateService.WithImpersonateAsync(customUserCredential, getResult);
         }
     }
 }

@@ -45,7 +45,7 @@ public class ChangeIndexesStrategyTests : TestBase
         generator.GenerateAllDB(
                                 this.DatabaseContext.Main.DataSource,
                                 this.DatabaseContext.Main.DatabaseName,
-                                credential: UserCredential.Create(
+                                credential: DbUserCredential.Create(
                                                                   this.DatabaseContext.Main.UserId,
                                                                   this.DatabaseContext.Main.Password),
                                 skipFrameworkDatabases: true);
@@ -77,7 +77,7 @@ public class ChangeIndexesStrategyTests : TestBase
         generator.GenerateAllDB(
                                 this.DatabaseContext.Main.DataSource,
                                 this.DatabaseContext.Main.DatabaseName,
-                                credential: UserCredential.Create(
+                                credential: DbUserCredential.Create(
                                                                   this.DatabaseContext.Main.UserId,
                                                                   this.DatabaseContext.Main.Password),
                                 ignoredIndexes: new[] { ignoredIndexName },
@@ -100,7 +100,7 @@ public class ChangeIndexesStrategyTests : TestBase
         generator.GenerateAllDB(
                                 this.DatabaseContext.Main.DataSource,
                                 this.DatabaseContext.Main.DatabaseName,
-                                credential: UserCredential.Create(
+                                credential: DbUserCredential.Create(
                                                                   this.DatabaseContext.Main.UserId,
                                                                   this.DatabaseContext.Main.Password),
                                 skipFrameworkDatabases: true);

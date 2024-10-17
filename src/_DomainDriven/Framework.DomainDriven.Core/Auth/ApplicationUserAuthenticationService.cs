@@ -1,19 +1,22 @@
 ﻿using Framework.Core.Services;
+using Framework.SecuritySystem.Credential;
 
 namespace Framework.DomainDriven.Auth;
 
-public class ApplicationUserAuthenticationService(IDefaultUserAuthenticationService defaultAuthenticationService)
+public class ApplicationUserAuthenticationService(IDefaultUserAuthenticationService defaultAuthenticationService, IUserCredentialNameResolver userCredentialNameResolver)
     : IUserAuthenticationService, IImpersonateService
 {
-    public string GetUserName() => this.CustomUserName ?? defaultAuthenticationService.GetUserName();
+    public string GetUserName() => this.CustomUserCredential == null
+                                       ? defaultAuthenticationService.GetUserName()
+                                       : userCredentialNameResolver.GetUserName(this.CustomUserCredential);
 
-    public string? CustomUserName { get; private set; }
+    public UserCredential? CustomUserCredential { get; private set; }
 
-    public async Task<T> WithImpersonateAsync<T>(string? customUserName, Func<Task<T>> func)
+    public async Task<T> WithImpersonateAsync<T>(UserCredential? customUserCredential, Func<Task<T>> func)
     {
-        var prev = this.CustomUserName;
+        var prev = this.CustomUserCredential;
 
-        this.CustomUserName = customUserName;
+        this.CustomUserCredential = customUserCredential;
 
         try
         {
@@ -21,7 +24,7 @@ public class ApplicationUserAuthenticationService(IDefaultUserAuthenticationServ
         }
         finally
         {
-            this.CustomUserName = prev;
+            this.CustomUserCredential = prev;
         }
     }
 }

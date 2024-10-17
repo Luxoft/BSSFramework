@@ -120,13 +120,14 @@ public class BusinessUnitTests : TestBase
         var parentBu = this.DataHelper.SaveBusinessUnit(parentIsNeeded: false);
         var childBu = this.DataHelper.SaveBusinessUnit(parent: parentBu);
 
-        var testUser = TextRandomizer.RandomString(10);
-        this.AuthHelper.SetUserRole(testUser, new SampleSystemTestPermission(SecurityRole.Administrator, childBu));
+        var userId = this.AuthHelper.SetUserRole(
+            TextRandomizer.RandomString(10),
+            new SampleSystemTestPermission(SecurityRole.Administrator, childBu));
 
         // Act
         var result = this.Evaluate(
             DBSessionMode.Read,
-            testUser,
+            userId,
             ctx =>
             {
                 var buTree = ctx.Logics.BusinessUnitFactory.Create(SecurityRule.Edit).GetTree();

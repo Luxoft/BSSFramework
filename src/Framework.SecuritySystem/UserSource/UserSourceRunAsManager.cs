@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Core.Services;
+using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.PersistStorage;
 using Framework.SecuritySystem.Services;
 
@@ -13,15 +14,15 @@ public class UserSourceRunAsManager<TUser>(
     UserPathInfo<TUser> userPathInfo,
     IPersistStorage<TUser> persistStorage) : RunAsManager(userAuthenticationService, securitySystemFactory)
 {
-    private readonly TUser currentUser = userSource.GetByName(userAuthenticationService.GetUserName());
+    private readonly TUser currentUser = userSource.GetUser(userAuthenticationService.GetUserName());
 
-    public override string? RunAsName => accessor.GetRunAs(this.currentUser).Maybe(v => userPathInfo.NamePath.Eval(v));
+    public override User? RunAsUser => accessor.GetRunAs(this.currentUser).Maybe(v => userPathInfo.ToDefaultUserExpr.Eval(v));
 
-    protected override async Task PersistRunAs(string? principalName, CancellationToken cancellationToken)
+    protected override async Task PersistRunAs(UserCredential? userCredential, CancellationToken cancellationToken)
     {
-        var runAsValue = principalName == null ? default : userSource.GetByName(principalName);
+        var runAsUser = userCredential == null ? default : userSource.GetUser(userCredential);
 
-        accessor.SetRunAs(this.currentUser, runAsValue);
+        accessor.SetRunAs(this.currentUser, runAsUser);
 
         await persistStorage.SaveAsync(this.currentUser, cancellationToken);
     }

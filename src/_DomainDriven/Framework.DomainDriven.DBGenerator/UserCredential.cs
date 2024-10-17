@@ -1,12 +1,12 @@
 ﻿namespace Framework.DomainDriven.DBGenerator;
 
-public class UserCredential
+public class DbUserCredential
 {
     private readonly string name;
 
     private readonly string password;
 
-    internal UserCredential(string name, string password)
+    internal DbUserCredential(string name, string password)
     {
         var parameters = new[] { name, password };
         if (parameters.Any(z => null == z) && parameters.Any(z => null != z))
@@ -25,7 +25,7 @@ public class UserCredential
 
     public virtual string Password => this.password;
 
-    public static UserCredential CreateDefault() => new UserCredential(null, null);
+    public static DbUserCredential CreateDefault() => new DbUserCredential(null, null);
 
-    public static UserCredential Create(string name, string password) => new UserCredential(name, password);
+    public static DbUserCredential Create(string name, string password) => new DbUserCredential(name, password);
 }

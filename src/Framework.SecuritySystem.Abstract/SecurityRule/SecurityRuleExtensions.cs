@@ -15,7 +15,7 @@ public static class SecurityRuleExtensions
 
     public static TSecurityRule WithoutRunAs<TSecurityRule>(this TSecurityRule securityRule)
         where TSecurityRule : RoleBaseSecurityRule =>
-        securityRule with { CustomCredential = SecurityRuleCredential.CurrentUserWithoutRunAs };
+        securityRule with { CustomCredential = new SecurityRuleCredential.CurrentUserWithoutRunAsCredential() };
 
     public static OperationSecurityRule ToSecurityRule(
         this SecurityOperation securityOperation,

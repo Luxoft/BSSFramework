@@ -7,6 +7,7 @@ using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
+using Framework.SecuritySystem.Credential;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,12 +24,12 @@ public static class ServiceProviderExtensions
 
     public static ControllerEvaluator<TController> GetDefaultControllerEvaluator<TController>(
         this IServiceProvider rootServiceProvider,
-        string? principalName = null)
+        UserCredential? userCredential = null)
         where TController : ControllerBase
     {
         var controllerEvaluator = rootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>();
 
-        return principalName == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(principalName);
+        return userCredential == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(userCredential);
     }
 
     public static IServiceCollection RegisterControllers(

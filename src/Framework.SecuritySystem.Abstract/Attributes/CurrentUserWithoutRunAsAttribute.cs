@@ -2,4 +2,4 @@
 
 namespace Framework.SecuritySystem;
 
-public class CurrentUserWithoutRunAsAttribute() : FromKeyedServicesAttribute(nameof(SecurityRuleCredential.CurrentUserWithoutRunAs));
+public class CurrentUserWithoutRunAsAttribute() : FromKeyedServicesAttribute(nameof(SecurityRuleCredential.CurrentUserWithoutRunAsCredential));

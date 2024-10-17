@@ -66,7 +66,7 @@ public class DatascriptGeneratorBuilder
     public DatascriptGeneratorBuilder WithServerName(string serverName) =>
             this.WithSqlDatabaseFactory(SqlDatabaseFactory.CreateDefault(serverName));
 
-    public DatascriptGeneratorBuilder WithServerName(string serverName, UserCredential credentials) =>
+    public DatascriptGeneratorBuilder WithServerName(string serverName, DbUserCredential credentials) =>
             this.WithSqlDatabaseFactory(SqlDatabaseFactory.Create(serverName, credentials));
 
     public DatascriptGeneratorBuilder WithAssemblyMetadata(AssemblyMetadata assemblyMetadata)

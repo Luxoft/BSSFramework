@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+using Framework.SecuritySystem.Credential;
 
 namespace Framework.SecuritySystem.ExternalSystem.Management;
 
@@ -19,18 +20,11 @@ public class RootPrincipalSourceService(IEnumerable<IPrincipalSourceService> pri
                         .Take(limit);
     }
 
-    public Task<TypedPrincipal?> TryGetPrincipalAsync(string principalName, CancellationToken cancellationToken = default)
+    public Task<TypedPrincipal?> TryGetPrincipalAsync(UserCredential userCredential, CancellationToken cancellationToken = default)
     {
         return this.TryGetPrincipalAsync(
-                ps => ps.TryGetPrincipalAsync(principalName, cancellationToken),
-                () => throw new Exception($"More one principal {principalName}"));
-    }
-
-    public Task<TypedPrincipal?> TryGetPrincipalAsync(Guid principalId, CancellationToken cancellationToken = default)
-    {
-        return this.TryGetPrincipalAsync(
-            ps => ps.TryGetPrincipalAsync(principalId, cancellationToken),
-            () => throw new Exception($"More one principal {principalId}"));
+                ps => ps.TryGetPrincipalAsync(userCredential, cancellationToken),
+                () => throw new Exception($"More one principal {userCredential}"));
     }
 
     private async Task<TypedPrincipal?> TryGetPrincipalAsync(

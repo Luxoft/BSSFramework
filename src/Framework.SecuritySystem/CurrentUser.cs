@@ -22,10 +22,10 @@ public class CurrentUser : ICurrentUser
         this.lazyName = LazyHelper.Create(userAuthenticationService.GetUserName);
 
         this.lazyId = LazyHelper.Create(
-            () => (userSource ?? throw new UserSourceException($"{nameof(UserSource)} not defined")).GetId(this.Name));
+            () => (userSource ?? throw new UserSourceException($"{nameof(UserSource)} not defined")).GetUser(this.Name).Id);
     }
 
     public Guid Id => this.lazyId.Value;
 
-    public string Name => this.runAsManager?.RunAsName ?? this.lazyName.Value;
+    public string Name => this.runAsManager?.RunAsUser?.Name ?? this.lazyName.Value;
 }

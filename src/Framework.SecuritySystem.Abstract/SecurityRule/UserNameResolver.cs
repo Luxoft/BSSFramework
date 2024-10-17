@@ -1,23 +1,27 @@
 ﻿using Framework.Core.Services;
+using Framework.SecuritySystem.Credential;
 
 namespace Framework.SecuritySystem;
 
-public class UserNameResolver(ICurrentUser currentUser, IUserAuthenticationService userAuthenticationService) : IUserNameResolver
+public class UserNameResolver(
+    ICurrentUser currentUser,
+    IUserAuthenticationService userAuthenticationService,
+    IUserCredentialNameResolver userCredentialNameResolver) : IUserNameResolver
 {
     public string? Resolve(SecurityRuleCredential credential)
     {
         switch (credential)
         {
             case SecurityRuleCredential.CustomUserSecurityRuleCredential customUserSecurityRuleCredential:
-                return customUserSecurityRuleCredential.Name;
+                return userCredentialNameResolver.GetUserName(customUserSecurityRuleCredential.UserCredential);
 
-            case not null when credential == SecurityRuleCredential.CurrentUserWithRunAs:
+            case SecurityRuleCredential.CurrentUserWithRunAsCredential:
                 return currentUser.Name;
 
-            case not null when credential == SecurityRuleCredential.CurrentUserWithoutRunAs:
+            case SecurityRuleCredential.CurrentUserWithoutRunAsCredential:
                 return userAuthenticationService.GetUserName();
 
-            case not null when credential == SecurityRuleCredential.AnyUser:
+            case SecurityRuleCredential.AnyUserCredential:
                 return null;
 
             default:

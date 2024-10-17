@@ -46,7 +46,7 @@ public class SqlDatabaseFactory : ISqlDatabaseFactory
     /// <param name="serverName">Имя экземпляра SQL сервера</param>
     /// <param name="credentials">Учетная запись используемая для подключения к экземпляру SQL сервера</param>
     /// <returns>Подключенный к SQL серверу объект</returns>
-    public static SqlDatabaseFactory Create(string serverName, UserCredential credentials) =>
+    public static SqlDatabaseFactory Create(string serverName, DbUserCredential credentials) =>
             new SqlDatabaseFactory(new SqlConnectionInfo(serverName, credentials.UserName, credentials.Password));
 
     /// <summary>

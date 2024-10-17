@@ -19,7 +19,7 @@ namespace SampleSystem.IntegrationTests;
 [TestClass]
 public class ExtraQueryableSecurityPathTests : TestBase
 {
-    private const string TestEmployeeLogin = "EQSP SecurityTester";
+    private EmployeeIdentityDTO TestEmployee;
 
     private EmployeeIdentityDTO TestEmp1;
 
@@ -46,10 +46,12 @@ public class ExtraQueryableSecurityPathTests : TestBase
 
         this.loc2Ident = this.DataHelper.SaveLocation(name: "Loc 2 (ExtraQueryableSecurityPathTests)");
 
-        this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
+        this.TestEmployee = this.DataHelper.SaveEmployee(login: "EQSP SecurityTester");
 
-        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SecurityRole.Administrator, this.bu2Ident, null, this.loc1Ident));
-        this.AuthHelper.AddUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SecurityRole.Administrator, this.bu2Ident, null, this.loc2Ident));
+        this.AuthHelper.SetUserRole(
+            this.TestEmployee.Id,
+            new SampleSystemTestPermission(SecurityRole.Administrator, this.bu2Ident, null, this.loc1Ident),
+            new SampleSystemTestPermission(SecurityRole.Administrator, this.bu2Ident, null, this.loc2Ident));
 
         this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident, location: this.loc1Ident);
 
@@ -62,26 +64,33 @@ public class ExtraQueryableSecurityPathTests : TestBase
     public void TestExtraQueryableSecurityPath_LoadedWithExtraQueryableFilter()
     {
         // Arrange
-        var createProviderFunc = FuncHelper.Create((ISampleSystemBLLContext context) =>
-                                                   {
-                                                       var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable();
+        var createProviderFunc = FuncHelper.Create(
+            (ISampleSystemBLLContext context) =>
+            {
+                var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable();
 
-                                                       var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, SingleSecurityMode.Strictly)
-                                                               .And(e => e.Location, SingleSecurityMode.Strictly)
-                                                               .And(e => extraQueryableSecurity.Where(l => l == e.Location && e.Location.Id == this.loc1Ident.Id), ManySecurityPathMode.AnyStrictly);
+                var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, SingleSecurityMode.Strictly)
+                                                              .And(e => e.Location, SingleSecurityMode.Strictly)
+                                                              .And(
+                                                                  e => extraQueryableSecurity.Where(
+                                                                      l => l == e.Location && e.Location.Id == this.loc1Ident.Id),
+                                                                  ManySecurityPathMode.AnyStrictly);
 
-                                                       return context.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>().Create(
-                                                           SampleSystemSecurityOperation.EmployeeView,
-                                                           extraSecurityPath);
-                                                   });
+                return context.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>().Create(
+                    SampleSystemSecurityOperation.EmployeeView,
+                    extraSecurityPath);
+            });
 
         // Act
-        var items = this.Evaluate (DBSessionMode.Read, TestEmployeeLogin, context =>
-                                                                          {
-                                                                              var employees = context.Logics.EmployeeFactory.Create(createProviderFunc(context)).GetSecureQueryable().ToList();
+        var items = this.Evaluate(
+            DBSessionMode.Read,
+            this.TestEmployee.Id,
+            context =>
+            {
+                var employees = context.Logics.EmployeeFactory.Create(createProviderFunc(context)).GetSecureQueryable().ToList();
 
-                                                                              return employees.ToArray(e => e.Id);
-                                                                          });
+                return employees.ToArray(e => e.Id);
+            });
 
         // Assert
         items.Count().Should().Be(1);

@@ -44,7 +44,7 @@ public class VirtualPermissionSource<TPrincipal, TPermission>(
     }
 
     public IEnumerable<string> GetAccessors(Expression<Func<TPermission, bool>> permissionFilter) =>
-        this.GetPermissionQuery(SecurityRuleCredential.AnyUser).Where(permissionFilter).Select(this.fullNamePath);
+        this.GetPermissionQuery(new SecurityRuleCredential.AnyUserCredential()).Where(permissionFilter).Select(this.fullNamePath);
 
     private Dictionary<Type, List<Guid>> ConvertPermission(TPermission permission, IEnumerable<Type> securityTypes) =>
         securityTypes.ToDictionary(

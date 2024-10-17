@@ -1,15 +1,14 @@
-﻿namespace Framework.SecuritySystem;
+﻿using Framework.SecuritySystem.Credential;
 
-public record SecurityRuleCredential(string Name)
+namespace Framework.SecuritySystem;
+
+public abstract record SecurityRuleCredential
 {
-    public static SecurityRuleCredential CurrentUserWithRunAs { get; } = new (nameof(CurrentUserWithRunAs));
+    public record CurrentUserWithRunAsCredential : SecurityRuleCredential;
 
-    public static SecurityRuleCredential CurrentUserWithoutRunAs { get; } = new (nameof(CurrentUserWithoutRunAs));
+    public record CurrentUserWithoutRunAsCredential : SecurityRuleCredential;
 
-    public static SecurityRuleCredential AnyUser { get; } = new (nameof(AnyUser));
+    public record AnyUserCredential : SecurityRuleCredential;
 
-    public record CustomUserSecurityRuleCredential(string Name) : SecurityRuleCredential(Name)
-    {
-        public static implicit operator CustomUserSecurityRuleCredential(string name) => new(name);
-    }
+    public record CustomUserSecurityRuleCredential(UserCredential UserCredential) : SecurityRuleCredential;
 }

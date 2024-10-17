@@ -5,6 +5,7 @@ using Automation.ServiceEnvironment.Services;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
+using Framework.SecuritySystem.Credential;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
 
-public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvider, string? customPrincipalName = null)
+public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvider, UserCredential? customUserCredential = null)
     where TController : ControllerBase
 {
     public void Evaluate(Expression<Action<TController>> actionExpr)
@@ -52,7 +53,7 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
         var c = new DefaultHttpContext { RequestServices = scope.ServiceProvider };
 
         await new WebApiInvoker(c, context => InvokeController(context, func))
-              .WithMiddleware(next => new ImpersonateMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, customPrincipalName))
+              .WithMiddleware(next => new ImpersonateMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, customUserCredential))
               .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IDBSessionManager>(), httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>()))
               .WithMiddleware(next => new InitCurrentMethodMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, invokeExpr))
               .WithMiddleware(next => new WebApiExceptionExpanderMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiExceptionExpander>()))
@@ -72,26 +73,24 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
         context.Items["Result"] = res;
     }
 
-    public ControllerEvaluator<TController> WithImpersonate(string newCustomPrincipalName)
+    public ControllerEvaluator<TController> WithImpersonate(UserCredential newCustomUserCredential)
     {
-        return new ControllerEvaluator<TController>(rootServiceProvider, newCustomPrincipalName);
+        return new ControllerEvaluator<TController>(rootServiceProvider, newCustomUserCredential);
     }
 
     private class ImpersonateMiddleware(RequestDelegate next)
     {
-        public async Task Invoke(HttpContext context, string? customPrincipalName)
+        public async Task Invoke(HttpContext context, UserCredential? customUserCredential)
         {
-            if (customPrincipalName == null)
+            if (customUserCredential == null)
             {
                 await next(context);
             }
             else
             {
-                await context.RequestServices.GetRequiredService<IIntegrationTestUserAuthenticationService>().WithImpersonateAsync(customPrincipalName, async () =>
-                {
-                    await next(context);
-                    return default(object);
-                });
+                await context.RequestServices
+                             .GetRequiredService<IIntegrationTestUserAuthenticationService>()
+                             .WithImpersonateAsync(customUserCredential, async () => await next(context));
             }
         }
     }

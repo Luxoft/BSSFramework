@@ -5,6 +5,7 @@ using Framework.Core;
 using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
 using NHibernate.Linq;
@@ -49,11 +50,19 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
         return anonHeaders.Select(anonHeader => new TypedPrincipalHeader(anonHeader.Id, anonHeader.Name, true));
     }
 
-    public Task<TypedPrincipal?> TryGetPrincipalAsync(string principalName, CancellationToken cancellationToken = default) =>
-        this.TryGetPrincipalAsync(bindingInfo.PrincipalNamePath.Select(name => principalName == name), cancellationToken);
+    public Task<TypedPrincipal?> TryGetPrincipalAsync(UserCredential userCredential, CancellationToken cancellationToken = default) =>
+        userCredential switch
+        {
+            UserCredential.NamedUserCredential { Name: var principalName } => this.TryGetPrincipalAsync(
+                bindingInfo.PrincipalNamePath.Select(name => principalName == name),
+                cancellationToken),
 
-    public Task<TypedPrincipal?> TryGetPrincipalAsync(Guid principalId, CancellationToken cancellationToken = default) =>
-        this.TryGetPrincipalAsync(principal => principal.Id == principalId, cancellationToken);
+            UserCredential.IdentUserCredential { Id: var principalId } => this.TryGetPrincipalAsync(
+                principal => principal.Id == principalId,
+                cancellationToken),
+
+            _ => throw new ArgumentOutOfRangeException(nameof(userCredential))
+        };
 
     public async Task<TypedPrincipal?> TryGetPrincipalAsync(Expression<Func<TPrincipal, bool>> filter, CancellationToken cancellationToken)
     {

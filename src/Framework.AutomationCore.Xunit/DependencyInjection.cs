@@ -3,7 +3,6 @@ using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 
-using Framework.Core.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.NHibernate.Audit;
@@ -23,7 +22,6 @@ public static class DependencyInjection
                 .AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
-                .ReplaceSingletonFrom<IUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
                 .AddSingleton<IntegrationTestTimeProvider>()
                 .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()

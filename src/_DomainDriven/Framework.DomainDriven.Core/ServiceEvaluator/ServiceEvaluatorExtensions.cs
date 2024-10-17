@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+using Framework.SecuritySystem.Credential;
 
 namespace Framework.DomainDriven;
 
@@ -9,9 +10,9 @@ public static class ServiceEvaluatorExtensions
         return await contextEvaluator.EvaluateAsync(sessionMode, null, getResult);
     }
 
-    public static async Task EvaluateAsync<TService>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, string? customPrincipalName, Func<TService, Task> action)
+    public static async Task EvaluateAsync<TService>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, UserCredential? customUserCredential, Func<TService, Task> action)
     {
-        await contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, async service =>
+        await contextEvaluator.EvaluateAsync(sessionMode, customUserCredential, async service =>
                                                                                 {
                                                                                     await action(service);
                                                                                     return default(object?);
@@ -31,9 +32,9 @@ public static class ServiceEvaluatorExtensions
         contextEvaluator.Evaluate(sessionMode, action.ToDefaultFunc());
     }
 
-    public static void Evaluate<TService>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, string? customPrincipalName, Action<TService> action)
+    public static void Evaluate<TService>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, UserCredential? customUserCredential, Action<TService> action)
     {
-        contextEvaluator.Evaluate(sessionMode, customPrincipalName, action.ToDefaultFunc());
+        contextEvaluator.Evaluate(sessionMode, customUserCredential, action.ToDefaultFunc());
     }
 
     public static TResult Evaluate<TService, TResult>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, Func<TService, TResult> getResult)
@@ -41,10 +42,10 @@ public static class ServiceEvaluatorExtensions
         return contextEvaluator.Evaluate(sessionMode, null, getResult);
     }
 
-    public static TResult Evaluate<TService, TResult>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, string? customPrincipalName, Func<TService, TResult> getResult)
+    public static TResult Evaluate<TService, TResult>(this IServiceEvaluator<TService> contextEvaluator, DBSessionMode sessionMode, UserCredential? customUserCredential, Func<TService, TResult> getResult)
     {
         TaskResultHelper<TResult>.TypeIsNotTaskValidate();
 
-        return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, async service => getResult(service)).GetAwaiter().GetResult();
+        return contextEvaluator.EvaluateAsync(sessionMode, customUserCredential, async service => getResult(service)).GetAwaiter().GetResult();
     }
 }

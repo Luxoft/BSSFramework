@@ -24,9 +24,7 @@ public class RestrictionRoleTests : TestBase
     public void GetRestrictionObjectsWithRestrictionRole_RestrictionApplied()
     {
         // Arrange
-        var testRestrictionPrincipal = Guid.NewGuid().ToString();
-
-        this.AuthHelper.SetUserRole(testRestrictionPrincipal, SampleSystemSecurityRole.RestrictionRole);
+        var userId = this.AuthHelper.SetUserRole(Guid.NewGuid().ToString(), SampleSystemSecurityRole.RestrictionRole);
 
         var testObjects = this.Evaluate(
             DBSessionMode.Write,
@@ -45,7 +43,7 @@ public class RestrictionRoleTests : TestBase
             });
 
         // Act
-        var result = this.GetControllerEvaluator<TestRestrictionObjectController>(testRestrictionPrincipal)
+        var result = this.GetControllerEvaluator<TestRestrictionObjectController>(userId)
                          .Evaluate(c => c.GetSimpleTestRestrictionObjects())
                          .Select(v => v.Identity);
 

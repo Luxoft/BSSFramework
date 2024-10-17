@@ -3,6 +3,7 @@ using Automation.Utils;
 
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Credential;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,44 +20,43 @@ public class AuthHelperBase(IServiceProvider rootServiceProvider) : RootServiceP
         return this.ManagerEvaluator.Evaluate(DBSessionMode.Read, manager => manager.GetCurrentUserLogin());
     }
 
-    public void LoginAs(string? principalName = null)
+    public void LoginAs(UserCredential? userCredential = null)
     {
-        this.UserAuthenticationService.SetUserName(principalName);
+        this.UserAuthenticationService.SetUser(userCredential);
     }
 
-
-    public Guid SavePrincipal(string name)
+    public Guid CreatePrincipal(string name)
     {
-        return this.SavePrincipalAsync(name).GetAwaiter().GetResult();
+        return this.CreatePrincipalAsync(name).GetAwaiter().GetResult();
     }
 
-    public async Task<Guid> SavePrincipalAsync(string name, CancellationToken cancellationToken = default)
+    public async Task<Guid> CreatePrincipalAsync(string name, CancellationToken cancellationToken = default)
     {
-        return await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manger => await manger.SavePrincipalAsync(name, cancellationToken));
+        return await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manger => await manger.CreatePrincipalAsync(name, cancellationToken));
     }
 
-    public void AddUserRole(string? principalName, params TestPermission[] permissions)
+    public Guid AddUserRole(UserCredential? userCredential, params TestPermission[] permissions) =>
+        this.AddUserRoleAsync(userCredential, permissions).GetAwaiter().GetResult();
+
+    public async Task<Guid> AddUserRoleAsync(
+        UserCredential? userCredential,
+        TestPermission[] permissions,
+        CancellationToken cancellationToken = default) =>
+        await this.ManagerEvaluator.EvaluateAsync(
+            DBSessionMode.Write,
+            async manger => await manger.AddUserRoleAsync(userCredential, permissions, cancellationToken));
+
+    public virtual Guid AddUserToAdmin(UserCredential? userCredential)
     {
-        this.AddUserRoleAsync(principalName, permissions).GetAwaiter().GetResult();
+        return this.SetUserRole(userCredential, SecurityRole.Administrator, SecurityRole.SystemIntegration);
     }
 
-    public async Task AddUserRoleAsync(string? principalName, TestPermission[] permissions, CancellationToken cancellationToken = default)
+    public Guid SetUserRole(UserCredential? userCredential, params TestPermission[] permissions)
     {
-        await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manger => await manger.AddUserRoleAsync(principalName, permissions, cancellationToken));
+        this.RemovePermissions(userCredential);
+
+        return this.AddUserRole(userCredential, permissions);
     }
-
-    public virtual void AddUserToAdmin(string? principalName)
-    {
-        this.SetUserRole(principalName, SecurityRole.Administrator, SecurityRole.SystemIntegration);
-    }
-
-    public void SetUserRole(string? principalName, params TestPermission[] permissions)
-    {
-        this.RemovePermissions(principalName);
-
-        this.AddUserRole(principalName, permissions);
-    }
-
 
     public virtual void AddCurrentUserToAdmin()
     {
@@ -68,13 +68,13 @@ public class AuthHelperBase(IServiceProvider rootServiceProvider) : RootServiceP
         this.SetUserRole(default, permissions);
     }
 
-    public void RemovePermissions(string? principalName)
+    public void RemovePermissions(UserCredential? userCredential)
     {
-        this.RemovePermissionsAsync(principalName).GetAwaiter().GetResult();
+        this.RemovePermissionsAsync(userCredential).GetAwaiter().GetResult();
     }
 
-    public async Task RemovePermissionsAsync(string? principalName, CancellationToken cancellationToken = default)
+    public async Task RemovePermissionsAsync(UserCredential? userCredential, CancellationToken cancellationToken = default)
     {
-        await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manager => await manager.RemovePermissionsAsync(principalName, cancellationToken));
+        await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manager => await manager.RemovePermissionsAsync(userCredential, cancellationToken));
     }
 }

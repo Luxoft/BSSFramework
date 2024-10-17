@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.ServiceModel.Service;
+using Framework.SecuritySystem.Credential;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,12 +12,12 @@ public class ContextEvaluator<TBLLContext, TMappingService>(IServiceEvaluator<TB
 {
     public async Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
-        string? customPrincipalName,
+        UserCredential? customUserCredential,
         Func<EvaluatedData<TBLLContext, TMappingService>, Task<TResult>> getResult)
     {
         return await baseContextEvaluator.EvaluateAsync(
                    sessionMode,
-                   customPrincipalName,
+                   customUserCredential,
                    context => getResult(
                        new EvaluatedData<TBLLContext, TMappingService>(
                            context,

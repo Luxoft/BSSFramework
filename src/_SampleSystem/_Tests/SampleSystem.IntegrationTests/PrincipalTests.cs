@@ -22,7 +22,7 @@ public class PrincipalTests : TestBase
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
         // Act
-        var principalId = this.AuthHelper.SavePrincipal(name);
+        var principalId = this.AuthHelper.CreatePrincipal(name);
 
         // Assert
         this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
@@ -34,7 +34,7 @@ public class PrincipalTests : TestBase
         // Arrange
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
-        var principalId = this.AuthHelper.SavePrincipal(name);
+        var principalId = this.AuthHelper.CreatePrincipal(name);
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
@@ -64,7 +64,7 @@ public class PrincipalTests : TestBase
         // Arrange
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
-        var principalId = this.AuthHelper.SavePrincipal(name);
+        var principalId = this.AuthHelper.CreatePrincipal(name);
 
         var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(SecurityRole.Administrator.Name)).Identity;
 

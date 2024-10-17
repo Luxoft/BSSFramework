@@ -1,10 +1,13 @@
-﻿namespace Framework.SecuritySystem.Services;
+﻿using Framework.SecuritySystem.Credential;
+using Framework.SecuritySystem.UserSource;
+
+namespace Framework.SecuritySystem.Services;
 
 public interface IRunAsManager
 {
-    string? RunAsName { get; }
+    User? RunAsUser { get; }
 
-    Task StartRunAsUserAsync(string principalName, CancellationToken cancellationToken = default);
+    Task StartRunAsUserAsync(UserCredential userCredential, CancellationToken cancellationToken = default);
 
     Task FinishRunAsUserAsync(CancellationToken cancellationToken = default);
 }

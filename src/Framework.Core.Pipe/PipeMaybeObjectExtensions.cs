@@ -17,7 +17,7 @@ public static class PipeMaybeObjectExtensions
     }
 
     [DebuggerStepThrough]
-    public static TResult Maybe<TSource, TResult>(this TSource? source, Func<TSource, TResult> selector)
+    public static TResult? Maybe<TSource, TResult>(this TSource? source, Func<TSource, TResult> selector)
     {
         return null == source ? default : selector(source);
     }

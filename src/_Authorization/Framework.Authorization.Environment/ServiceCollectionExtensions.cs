@@ -39,7 +39,8 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterGeneralAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScoped<IUserCredentialNameByIdResolver, AuthorizationUserCredentialNameByIdResolver>()
+        return services.AddScoped<IPrincipalResolver, PrincipalResolver>()
+                       .AddScoped<IUserCredentialNameByIdResolver, AuthorizationUserCredentialNameByIdResolver>()
 
                        .AddScoped<INotificationBasePermissionFilterSource, NotificationBasePermissionFilterSource>()
 

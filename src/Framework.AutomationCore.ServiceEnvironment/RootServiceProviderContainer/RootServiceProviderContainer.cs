@@ -2,6 +2,7 @@
 using Automation.Utils.DatabaseUtils.Interfaces;
 
 using Framework.FinancialYear;
+using Framework.SecuritySystem.Credential;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,9 +21,9 @@ public abstract class RootServiceProviderContainer(IServiceProvider rootServiceP
 
     public IDatabaseContext DatabaseContext => this.GetDatabaseContext();
 
-    public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(string? principalName = null)
+    public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(UserCredential? userCredential = null)
             where TController : ControllerBase
     {
-        return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
+        return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(userCredential);
     }
 }

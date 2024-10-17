@@ -24,15 +24,15 @@ public class PrincipalDomainService(
         {
             principal = new Principal { Name = name };
 
-            var userId = userSource?.TryGetId(name);
+            var user = userSource?.TryGetUser(name);
 
-            if (userId == null)
+            if (user == null)
             {
                 await principalRepository.SaveAsync(principal, cancellationToken);
             }
             else
             {
-                await principalRepository.InsertAsync(principal, userId.Value, cancellationToken);
+                await principalRepository.InsertAsync(principal, user.Id, cancellationToken);
             }
         }
 

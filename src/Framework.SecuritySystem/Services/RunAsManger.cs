@@ -1,28 +1,30 @@
 ﻿using Framework.Core.Services;
+using Framework.SecuritySystem.Credential;
+using Framework.SecuritySystem.UserSource;
 
 namespace Framework.SecuritySystem.Services;
 
 public abstract class RunAsManager(IUserAuthenticationService userAuthenticationService, ISecuritySystemFactory securitySystemFactory)
     : IRunAsManager
 {
-    public abstract string? RunAsName { get; }
+    public abstract User? RunAsUser { get; }
 
-    private string? PureName { get; } = userAuthenticationService.GetUserName();
+    private UserCredential PureCredential { get; } = userAuthenticationService.GetUserName();
 
-    public async Task StartRunAsUserAsync(string principalName, CancellationToken cancellationToken)
+    public async Task StartRunAsUserAsync(UserCredential userCredential, CancellationToken cancellationToken)
     {
         this.CheckAccess();
 
-        if (string.Equals(principalName, this.RunAsName, StringComparison.CurrentCultureIgnoreCase))
+        if (this.RunAsUser != null && userCredential.IsMatch(this.RunAsUser))
         {
         }
-        else if (string.Equals(principalName, this.PureName, StringComparison.CurrentCultureIgnoreCase))
+        else if (userCredential == this.PureCredential)
         {
             await this.FinishRunAsUserAsync(cancellationToken);
         }
         else
         {
-            await this.PersistRunAs(principalName, cancellationToken);
+            await this.PersistRunAs(userCredential, cancellationToken);
         }
     }
 
@@ -33,7 +35,7 @@ public abstract class RunAsManager(IUserAuthenticationService userAuthentication
         await this.PersistRunAs(null, cancellationToken);
     }
 
-    protected abstract Task PersistRunAs(string? principalName, CancellationToken cancellationToken);
+    protected abstract Task PersistRunAs(UserCredential? userCredential, CancellationToken cancellationToken);
 
     private void CheckAccess() =>
         securitySystemFactory.Create(new SecurityRuleCredential.CurrentUserWithoutRunAsCredential())

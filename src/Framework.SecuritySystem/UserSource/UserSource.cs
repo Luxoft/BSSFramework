@@ -1,25 +1,45 @@
-﻿using Framework.Core;
+﻿using System.Linq.Expressions;
+
+using Framework.Core;
 using Framework.QueryableSource;
+using Framework.SecuritySystem.Credential;
 
 namespace Framework.SecuritySystem.UserSource;
 
 public class UserSource<TUser>(IQueryableSource queryableSource, UserPathInfo<TUser> userPathInfo) : IUserSource<TUser>
 {
-    public TUser? TryGetByName(string name) => this.GetQueryable(name).SingleOrDefault();
+    public TUser? TryGetUser(UserCredential userCredential) => this.GetQueryable(userCredential).SingleOrDefault();
 
-    public TUser GetByName(string name) => this.TryGetByName(name) ?? throw this.GetNotFoundException(name);
+    public TUser GetUser(UserCredential userCredential) =>
+        this.TryGetUser(userCredential) ?? throw this.GetNotFoundException(userCredential);
 
-    public Guid? TryGetId(string name) => this.GetQueryable(name).Select(userPathInfo.IdPath).Select(v => (Guid?)v).SingleOrDefault();
+    User? IUserSource.TryGetUser(UserCredential userCredential) =>
+        this.GetQueryable(userCredential).Select(userPathInfo.ToDefaultUserExpr).SingleOrDefault();
 
-    public Guid GetId(string name) =>
+    User IUserSource.GetUser(UserCredential userCredential) =>
+        ((IUserSource)this).TryGetUser(userCredential) ?? throw this.GetNotFoundException(userCredential);
 
-        this.TryGetId(name) ?? throw this.GetNotFoundException(name);
-
-    private IQueryable<TUser> GetQueryable(string name) =>
+    private IQueryable<TUser> GetQueryable(UserCredential userCredential) =>
         queryableSource
             .GetQueryable<TUser>()
             .Where(userPathInfo.Filter)
-            .Where(userPathInfo.NamePath.Select(objName => objName == name));
+            .Where(this.GetCredentialFilter(userCredential));
 
-    private Exception GetNotFoundException(string name) => new UserSourceException($"{typeof(TUser).Name} \"{name}\" not found");
+    private Expression<Func<TUser, bool>> GetCredentialFilter(UserCredential userCredential)
+    {
+        switch (userCredential)
+        {
+            case UserCredential.NamedUserCredential { Name: var name }:
+                return userPathInfo.NamePath.Select(objName => objName == name);
+
+            case UserCredential.IdentUserCredential { Id: var id }:
+                return userPathInfo.IdPath.Select(objId => objId == id);
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(userCredential));
+        }
+    }
+
+    private Exception GetNotFoundException(UserCredential userCredential) =>
+        new UserSourceException($"{typeof(TUser).Name} \"{userCredential}\" not found");
 }

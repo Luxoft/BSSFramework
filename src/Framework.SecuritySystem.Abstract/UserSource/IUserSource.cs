@@ -1,15 +1,17 @@
-﻿namespace Framework.SecuritySystem.UserSource;
+﻿using Framework.SecuritySystem.Credential;
+
+namespace Framework.SecuritySystem.UserSource;
 
 public interface IUserSource<out TUser> : IUserSource
 {
-    TUser? TryGetByName(string name);
+    new TUser? TryGetUser(UserCredential userCredential);
 
-    TUser GetByName(string name);
+    new TUser GetUser(UserCredential userCredential);
 }
 
 public interface IUserSource
 {
-    Guid? TryGetId(string name);
+    User? TryGetUser(UserCredential userCredential);
 
-    Guid GetId(string name);
+    User GetUser(UserCredential userCredential);
 }

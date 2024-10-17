@@ -65,7 +65,7 @@ public class VirtualPermissionTests : TestBase
 
             this.Evaluate(
                 DBSessionMode.Read,
-                this.Datas[0].UserLogin,
+                this.Datas[0].EmployeeId,
                 ctx =>
                     ctx.Logics.BusinessUnitFactory.Create(SampleSystemSecurityRole.SeManager)
                        .GetSecureQueryable().Select(bu => bu.Id).ToList());
@@ -85,7 +85,7 @@ public class VirtualPermissionTests : TestBase
 
             this.Evaluate(
                 DBSessionMode.Read,
-                this.Datas[0].UserLogin,
+                this.Datas[0].EmployeeId,
                 ctx =>
                 {
                     var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[0].BuId);
@@ -112,7 +112,7 @@ public class VirtualPermissionTests : TestBase
 
             this.Evaluate(
                 DBSessionMode.Read,
-                this.Datas[1].UserLogin,
+                this.Datas[1].EmployeeId,
                 ctx =>
                 {
                     var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[1].BuId);
@@ -135,7 +135,7 @@ public class VirtualPermissionTests : TestBase
 
             this.Evaluate(
                 DBSessionMode.Read,
-                this.Datas[1].UserLogin,
+                this.Datas[1].EmployeeId,
                 ctx =>
                 {
                     var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[0].BuId);

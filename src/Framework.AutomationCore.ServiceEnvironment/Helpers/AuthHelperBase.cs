@@ -35,28 +35,28 @@ public class AuthHelperBase(IServiceProvider rootServiceProvider) : RootServiceP
         return await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manger => await manger.CreatePrincipalAsync(name, cancellationToken));
     }
 
-    public void AddUserRole(UserCredential? userCredential, params TestPermission[] permissions)
-    {
+    public Guid AddUserRole(UserCredential? userCredential, params TestPermission[] permissions) =>
         this.AddUserRoleAsync(userCredential, permissions).GetAwaiter().GetResult();
-    }
 
-    public async Task AddUserRoleAsync(UserCredential? userCredential, TestPermission[] permissions, CancellationToken cancellationToken = default)
+    public async Task<Guid> AddUserRoleAsync(
+        UserCredential? userCredential,
+        TestPermission[] permissions,
+        CancellationToken cancellationToken = default) =>
+        await this.ManagerEvaluator.EvaluateAsync(
+            DBSessionMode.Write,
+            async manger => await manger.AddUserRoleAsync(userCredential, permissions, cancellationToken));
+
+    public virtual Guid AddUserToAdmin(UserCredential? userCredential)
     {
-        await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manger => await manger.AddUserRoleAsync(userCredential, permissions, cancellationToken));
+        return this.SetUserRole(userCredential, SecurityRole.Administrator, SecurityRole.SystemIntegration);
     }
 
-    public virtual void AddUserToAdmin(UserCredential? userCredential)
-    {
-        this.SetUserRole(userCredential, SecurityRole.Administrator, SecurityRole.SystemIntegration);
-    }
-
-    public void SetUserRole(UserCredential? userCredential, params TestPermission[] permissions)
+    public Guid SetUserRole(UserCredential? userCredential, params TestPermission[] permissions)
     {
         this.RemovePermissions(userCredential);
 
-        this.AddUserRole(userCredential, permissions);
+        return this.AddUserRole(userCredential, permissions);
     }
-
 
     public virtual void AddCurrentUserToAdmin()
     {

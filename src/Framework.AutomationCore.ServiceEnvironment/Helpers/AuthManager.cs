@@ -23,7 +23,7 @@ public class AuthManager(
         return principal.Id;
     }
 
-    public async Task AddUserRoleAsync(
+    public async Task<Guid> AddUserRoleAsync(
         UserCredential? userCredential,
         TestPermission[] testPermissions,
         CancellationToken cancellationToken = default)
@@ -52,6 +52,8 @@ public class AuthManager(
             updatedPrincipal.Header.Id,
             updatedPrincipal.Permissions,
             cancellationToken);
+
+        return updatedPrincipal.Header.Id;
     }
 
     private async Task<TypedPrincipal> RawCreatePrincipalAsync(string usedPrincipalName, CancellationToken cancellationToken)

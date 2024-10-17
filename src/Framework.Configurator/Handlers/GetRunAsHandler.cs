@@ -8,5 +8,5 @@ namespace Framework.Configurator.Handlers;
 public class GetRunAsHandler(IRunAsManager? runAsManager = null) : BaseReadHandler, IGetRunAsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken) =>
-        runAsManager?.RunAsName ?? string.Empty;
+        runAsManager?.RunAsUser?.Name ?? string.Empty;
 }

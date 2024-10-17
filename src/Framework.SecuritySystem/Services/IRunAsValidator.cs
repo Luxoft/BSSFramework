@@ -1,6 +1,8 @@
-﻿namespace Framework.SecuritySystem.Services;
+﻿using Framework.SecuritySystem.Credential;
+
+namespace Framework.SecuritySystem.Services;
 
 public interface IRunAsValidator
 {
-    void Validate(string name);
+    void Validate(UserCredential userCredential);
 }

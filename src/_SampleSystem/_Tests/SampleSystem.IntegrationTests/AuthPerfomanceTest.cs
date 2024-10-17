@@ -33,19 +33,15 @@ public class AuthPerformanceTest : TestBase
     [TestInitialize]
     public void SetUp()
     {
-        this.fbuSource =
-            new[] { default(BusinessUnitIdentityDTO?) }.Concat(Enumerable.Range(0, Size - 1).Select(_ => (BusinessUnitIdentityDTO?)this.DataHelper.SaveBusinessUnit())).ToList();
+        this.fbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (BusinessUnitIdentityDTO?)this.DataHelper.SaveBusinessUnit())];
 
-        this.mbuSource =
-            new[] { default(ManagementUnitIdentityDTO?) }.Concat(Enumerable.Range(0, Size - 1).Select(_ => (ManagementUnitIdentityDTO?)this.DataHelper.SaveManagementUnit())).ToList();
+        this.mbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (ManagementUnitIdentityDTO?)this.DataHelper.SaveManagementUnit())];
 
-        this.locationSource =
-            new[] { default(LocationIdentityDTO?) }.Concat(Enumerable.Range(0, Size - 1).Select(_ => (LocationIdentityDTO?)this.DataHelper.SaveLocation())).ToList();
+        this.locationSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (LocationIdentityDTO?)this.DataHelper.SaveLocation())];
 
-        this.employeeSource =
-            new[] { default(EmployeeIdentityDTO?), (EmployeeIdentityDTO?)this.DataHelper.SaveEmployee() }.ToList();
+        this.employeeSource = [null, this.DataHelper.SaveEmployee()];
 
-        this.AuthHelper.CreatePrincipalAsync(PrincipalName);
+        this.AuthHelper.CreatePrincipal(PrincipalName);
 
         this.GeneratePermission();
     }

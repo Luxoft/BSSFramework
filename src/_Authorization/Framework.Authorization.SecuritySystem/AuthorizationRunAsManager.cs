@@ -7,8 +7,6 @@ using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.Services;
 using Framework.SecuritySystem.UserSource;
 
-using NHibernate.Linq;
-
 namespace Framework.Authorization.SecuritySystem;
 
 public class AuthorizationRunAsManager(

@@ -1,4 +1,4 @@
-using Automation;
+﻿using Automation;
 using Automation.Interfaces;
 using Automation.ServiceEnvironment;
 using Automation.Utils.DatabaseUtils;
@@ -39,6 +39,7 @@ public class EnvironmentInitialization : IAutomationCoreInitialization
                 new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", false)
+                    .AddEnvironmentVariables($"{nameof(SampleSystem)}_")
                     .Build());
 
     public IServiceProvider ConfigureTestEnvironment(IServiceCollection services, IConfiguration configuration) =>

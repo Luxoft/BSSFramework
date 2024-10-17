@@ -23,7 +23,6 @@ public static class DependencyInjection
                 .AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
-                .ReplaceSingletonFrom<IUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
                 .AddSingleton<IntegrationTestTimeProvider>()
                 .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()

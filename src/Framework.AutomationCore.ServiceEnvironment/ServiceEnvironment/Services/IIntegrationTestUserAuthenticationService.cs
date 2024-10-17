@@ -5,7 +5,7 @@ using Framework.SecuritySystem.Credential;
 
 namespace Automation.ServiceEnvironment.Services;
 
-public interface IIntegrationTestUserAuthenticationService : IDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService, IUserAuthenticationService
+public interface IIntegrationTestUserAuthenticationService : IDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService
 {
     void SetUser(UserCredential? customUserCredential);
 

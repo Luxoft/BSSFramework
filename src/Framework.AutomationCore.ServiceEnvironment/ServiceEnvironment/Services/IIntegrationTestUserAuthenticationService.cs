@@ -7,7 +7,7 @@ namespace Automation.ServiceEnvironment.Services;
 
 public interface IIntegrationTestUserAuthenticationService : IDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService, IUserAuthenticationService
 {
-    void SetUserName(UserCredential? customUserCredential);
+    void SetUser(UserCredential? customUserCredential);
 
     void Reset();
 

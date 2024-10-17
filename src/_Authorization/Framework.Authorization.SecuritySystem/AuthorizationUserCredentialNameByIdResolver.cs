@@ -1,11 +1,10 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
+using Framework.QueryableSource;
 using Framework.SecuritySystem.Credential;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class AuthorizationUserCredentialNameByIdResolver([DisabledSecurity] IRepository<Principal> principalRepository)
+public class AuthorizationUserCredentialNameByIdResolver(IQueryableSource queryableSource)
     : IUserCredentialNameByIdResolver
 {
     public string? TryGetUserName(Guid id)
@@ -14,6 +13,5 @@ public class AuthorizationUserCredentialNameByIdResolver([DisabledSecurity] IRep
     }
 
     private IQueryable<Principal> GetQueryable(Guid id) =>
-        principalRepository.GetQueryable()
-                           .Where(principal => principal.Id == id);
+        queryableSource.GetQueryable<Principal>().Where(principal => principal.Id == id);
 }

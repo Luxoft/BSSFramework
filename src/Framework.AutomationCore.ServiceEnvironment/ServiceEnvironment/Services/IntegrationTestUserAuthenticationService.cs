@@ -18,7 +18,8 @@ public class IntegrationTestUserAuthenticationService(
         {
             return userCredential switch
             {
-                UserCredential.NamedUserCredential v => v.Name,
+                UserCredential.NamedUserCredential { Name: var name } => name,
+
                 _ => credentialNameResolverEvaluator.Evaluate(DBSessionMode.Read, resolver => resolver.GetUserName(userCredential))
             };
         });
@@ -27,7 +28,7 @@ public class IntegrationTestUserAuthenticationService(
 
     public UserCredential? CustomUserCredential { get; internal set; }
 
-    public void SetUserName(UserCredential? customUserCredential) =>
+    public void SetUser(UserCredential? customUserCredential) =>
         this.CustomUserCredential = customUserCredential ?? this.IntegrationTestUserName;
 
     public void Reset() => this.CustomUserCredential = this.IntegrationTestUserName;

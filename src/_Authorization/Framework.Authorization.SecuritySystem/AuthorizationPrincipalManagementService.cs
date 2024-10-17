@@ -4,7 +4,10 @@ using Framework.DomainDriven.Repository;
 using Framework.Exceptions;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.ExternalSystem.Management;
+
+using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem;
 
@@ -30,11 +33,11 @@ public class AuthorizationPrincipalManagementService(
     }
 
     public async Task<IIdentityObject<Guid>> UpdatePrincipalNameAsync(
-        Guid principalId,
+        UserCredential userCredential,
         string principalName,
         CancellationToken cancellationToken)
     {
-        var principal = await principalRepository.LoadAsync(principalId, cancellationToken);
+        var principal = await this.GetPrincipal(userCredential, cancellationToken);
 
         principal.Name = principalName;
 
@@ -43,9 +46,9 @@ public class AuthorizationPrincipalManagementService(
         return principal;
     }
 
-    public async Task<IIdentityObject<Guid>> RemovePrincipalAsync(Guid principalId, bool force, CancellationToken cancellationToken = default)
+    public async Task<IIdentityObject<Guid>> RemovePrincipalAsync(UserCredential userCredential, bool force, CancellationToken cancellationToken = default)
     {
-        var principal = await principalRepository.LoadAsync(principalId, cancellationToken);
+        var principal = await this.GetPrincipal(userCredential, cancellationToken);
 
         await principalDomainService.RemoveAsync(principal, force, cancellationToken);
 
@@ -187,5 +190,20 @@ public class AuthorizationPrincipalManagementService(
         }
 
         return true;
+    }
+
+    private async Task<Principal> GetPrincipal(UserCredential userCredential, CancellationToken cancellationToken)
+    {
+        switch (userCredential)
+        {
+            case UserCredential.IdentUserCredential { Id: var id }:
+                return await principalRepository.LoadAsync(id, cancellationToken);
+
+            case UserCredential.NamedUserCredential { Name: var name }:
+                return await principalRepository.GetQueryable().SingleAsync(principal => principal.Name == name, cancellationToken);
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(userCredential));
+        }
     }
 }

@@ -4,6 +4,7 @@ using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
 using NHibernate.Linq;
@@ -29,11 +30,18 @@ public class AuthorizationPrincipalSourceService(
                                         .ToListAsync(cancellationToken);
     }
 
-    public Task<TypedPrincipal?> TryGetPrincipalAsync(string principalName, CancellationToken cancellationToken = default) =>
-        this.TryGetPrincipalAsync(principal => principal.Name == principalName, cancellationToken);
 
-    public Task<TypedPrincipal?> TryGetPrincipalAsync(Guid principalId, CancellationToken cancellationToken = default) =>
-        this.TryGetPrincipalAsync(principal => principal.Id == principalId, cancellationToken);
+    public Task<TypedPrincipal?> TryGetPrincipalAsync(UserCredential userCredential, CancellationToken cancellationToken = default) =>
+        userCredential switch
+        {
+            UserCredential.NamedUserCredential { Name: var principalName } =>
+                this.TryGetPrincipalAsync(principal => principal.Name == principalName, cancellationToken),
+
+            UserCredential.IdentUserCredential { Id: var principalId } =>
+                this.TryGetPrincipalAsync(principal => principal.Id == principalId, cancellationToken),
+
+            _ => throw new ArgumentOutOfRangeException(nameof(userCredential))
+        };
 
     private async Task<TypedPrincipal?> TryGetPrincipalAsync(Expression<Func<Principal, bool>> filter, CancellationToken cancellationToken)
     {

@@ -8,22 +8,22 @@ public class RootUserCredentialNameResolver(IEnumerable<IUserCredentialNameByIdR
     {
         switch (userCredential)
         {
-            case UserCredential.NamedUserCredential v:
-                return v.Name;
+            case UserCredential.NamedUserCredential { Name: var name }:
+                return name;
 
-            case UserCredential.IdentUserCredential v:
+            case UserCredential.IdentUserCredential { Id: var id }:
             {
                 var request = from resolver in resolvers
 
-                              let userName = resolver.TryGetUserName(v.Id)
+                              let userName = resolver.TryGetUserName(id)
 
                               where userName != null
 
                               select userName;
 
                 return request.Distinct().Single(
-                    () => new Exception($"{nameof(UserCredential)} with id {v.Id} not found"),
-                    names => new Exception($"More one {nameof(UserCredential)} with id {v.Id}: {names.Join(", ", name => $"\"{name}\"")}"));
+                    () => new Exception($"{nameof(UserCredential)} with id {id} not found"),
+                    names => new Exception($"More one {nameof(UserCredential)} with id {id}: {names.Join(", ", name => $"\"{name}\"")}"));
             }
 
             default: throw new ArgumentOutOfRangeException(nameof(userCredential));

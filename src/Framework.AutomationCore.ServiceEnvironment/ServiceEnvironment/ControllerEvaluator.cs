@@ -88,11 +88,9 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
             }
             else
             {
-                await context.RequestServices.GetRequiredService<IIntegrationTestUserAuthenticationService>().WithImpersonateAsync(customUserCredential, async () =>
-                {
-                    await next(context);
-                    return default(object);
-                });
+                await context.RequestServices
+                             .GetRequiredService<IIntegrationTestUserAuthenticationService>()
+                             .WithImpersonateAsync(customUserCredential, async () => await next(context));
             }
         }
     }

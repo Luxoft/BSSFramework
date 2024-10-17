@@ -3,7 +3,6 @@ using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 
-using Framework.Core.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.NHibernate.Audit;

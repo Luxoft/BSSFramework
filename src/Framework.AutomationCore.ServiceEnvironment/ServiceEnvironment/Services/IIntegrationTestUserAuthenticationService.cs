@@ -1,5 +1,4 @@
-﻿using Framework.Core.Services;
-using Framework.DomainDriven.Auth;
+﻿using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.SecuritySystem.Credential;
 

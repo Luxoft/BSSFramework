@@ -41,7 +41,7 @@ public class DbGeneratorTest
             DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
             ICollection<string> ignoredIndexes = null,
             bool skipFrameworkDatabases = false,
-            UserCredential credential = null,
+            DbUserCredential credential = null,
             params string[] migrationScriptFolderPaths)
     {
         if (!skipFrameworkDatabases)
@@ -86,7 +86,7 @@ public class DbGeneratorTest
             IEnumerable<string> auditMigrationScriptFolderPaths = null,
             bool preserveSchemaDatabase = false,
             ICollection<string> ignoredIndexes = null,
-            UserCredential credential = null)
+            DbUserCredential credential = null)
     {
         var generator = new SampleSystemDBGenerator(this.GetMappingSettings(serverName, databaseName, auditDatabaseName));
 
@@ -109,7 +109,7 @@ public class DbGeneratorTest
             DatabaseName mainDatabaseName,
             DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
             bool preserveSchemaDatabase = false,
-            UserCredential credential = null)
+            DbUserCredential credential = null)
     {
         string[] migrationScriptFolderPaths = null;
 
@@ -136,7 +136,7 @@ public class DbGeneratorTest
             AuditDatabaseName auditDatabaseName,
             DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
             bool preserveSchemaDatabase = false,
-            UserCredential credential = null)
+            DbUserCredential credential = null)
     {
         string[] migrationScriptFolderPaths = null;
         var result = new Framework.Authorization.TestGenerate.ServerGenerators().GenerateDB(

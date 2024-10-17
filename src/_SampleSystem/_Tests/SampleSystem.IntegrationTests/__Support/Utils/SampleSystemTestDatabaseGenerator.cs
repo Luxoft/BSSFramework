@@ -25,7 +25,7 @@ public class SampleSystemTestDatabaseGenerator(
         new DbGeneratorTest().GenerateAllDB(
             this.DatabaseContext.Main.DataSource,
             mainDatabaseName: this.DatabaseContext.Main.DatabaseName,
-            credential: UserCredential.Create(
+            credential: DbUserCredential.Create(
                 this.DatabaseContext.Main.UserId,
                 this.DatabaseContext.Main.Password));
     }

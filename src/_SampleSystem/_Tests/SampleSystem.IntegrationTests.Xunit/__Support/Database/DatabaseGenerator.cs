@@ -1,4 +1,4 @@
-using Automation.Settings;
+﻿using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
@@ -26,7 +26,7 @@ public class DatabaseGenerator(
         new DbGeneratorTest().GenerateAllDB(
             this.DatabaseContext.Main.DataSource,
             mainDatabaseName: this.DatabaseContext.Main.DatabaseName,
-            credential: UserCredential.Create(
+            credential: DbUserCredential.Create(
                 this.DatabaseContext.Main.UserId,
                 this.DatabaseContext.Main.Password));
     }

@@ -20,7 +20,7 @@ public class GenerateDBTests : TestBase
         var action = new Action(() => generator.GenerateAllDB(
                                                               this.DatabaseContext.Main.DataSource,
                                                               this.DatabaseContext.Main.DatabaseName,
-                                                              credential: UserCredential.Create(
+                                                              credential: DbUserCredential.Create(
                                                                this.DatabaseContext.Main.UserId,
                                                                this.DatabaseContext.Main.Password)));
 

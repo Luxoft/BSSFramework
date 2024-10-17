@@ -11,7 +11,7 @@ public partial class ServerGenerators
             DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
             IEnumerable<string> migrationScriptFolderPaths = null,
             IEnumerable<string> auditMigrationScriptFolderPaths = null,
-            UserCredential credentials = null)
+            DbUserCredential credentials = null)
     {
         var generator = new DBGenerator(this.Environment.MappingSettings);
         var result = generator.Generate(
@@ -35,7 +35,7 @@ public partial class ServerGenerators
             IEnumerable<string> migrationScriptFolderPaths = null,
             IEnumerable<string> auditMigrationScriptFolderPaths = null,
             bool preserveSchemaDatabase = false,
-            UserCredential credentials = null)
+            DbUserCredential credentials = null)
     {
         var generator = new DBGenerator(this.Environment.GetMappingSettings(databaseName, auditDatabaseName));
         var result = generator.Generate(

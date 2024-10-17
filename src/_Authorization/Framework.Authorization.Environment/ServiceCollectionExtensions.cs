@@ -10,6 +10,7 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
@@ -38,7 +39,9 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterGeneralAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScoped<INotificationBasePermissionFilterSource, NotificationBasePermissionFilterSource>()
+        return services.AddScoped<IUserCredentialNameByIdResolver, AuthorizationUserCredentialNameByIdResolver>()
+
+                       .AddScoped<INotificationBasePermissionFilterSource, NotificationBasePermissionFilterSource>()
 
                        .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
                        .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()

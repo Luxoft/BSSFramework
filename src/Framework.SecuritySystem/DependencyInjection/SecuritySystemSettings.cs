@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.DependencyInjection;
+using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
 using Framework.SecuritySystem.SecurityAccessor;
@@ -20,7 +21,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     private Action<IServiceCollection> registerRunAsManagerAction= _ => { };
 
-    private SecurityRuleCredential defaultSecurityRuleCredential = SecurityRuleCredential.CurrentUserWithRunAs;
+    private SecurityRuleCredential defaultSecurityRuleCredential = new SecurityRuleCredential.CurrentUserWithRunAsCredential();
 
     private Type accessDeniedExceptionServiceType = typeof(AccessDeniedExceptionService);
 
@@ -122,6 +123,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
                                             sc.AddScoped<ICurrentUserSource<TUser>, CurrentUserSource<TUser>>();
 
                                             sc.AddScoped<IRunAsValidator, UserSourceRunAsValidator<TUser>>();
+
+                                            sc.AddScoped<IUserCredentialNameByIdResolver, UserSourceCredentialNameByIdResolver<TUser>>();
 
                                             if (runAsPath != null)
                                             {

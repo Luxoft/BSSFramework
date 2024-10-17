@@ -42,7 +42,7 @@ public class AuthorizationPermissionSource(
     public IEnumerable<string> GetAccessors(Expression<Func<Permission, bool>> permissionFilter)
     {
         return this.GetSecurityPermissions(
-                       availablePermissionSource.CreateFilter(securityRule with { CustomCredential = SecurityRuleCredential.AnyUser }))
+                       availablePermissionSource.CreateFilter(securityRule with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() }))
                    .Where(permissionFilter)
                    .Select(permission => permission.Principal.Name);
     }

@@ -6,7 +6,7 @@ using Framework.SecuritySystem.Builders._Factory;
 
 using Framework.SecuritySystem.Builders.AccessorsBuilder;
 using Framework.SecuritySystem.Builders.MaterializedBuilder;
-
+using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.ExternalSystem;
@@ -81,7 +81,9 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterGeneralSecuritySystem(this IServiceCollection services)
     {
-        return services.AddScoped<IRootPrincipalSourceService, RootPrincipalSourceService>()
+        return services.AddScoped<IUserCredentialNameResolver, RootUserCredentialNameResolver>()
+
+                       .AddScoped<IRootPrincipalSourceService, RootPrincipalSourceService>()
                        .AddNotImplemented<IPrincipalManagementService>($"{nameof(IPrincipalManagementService)} not supported", isScoped: true)
 
                        .AddSingleton<IClientSecurityRuleNameExtractor, ClientSecurityRuleNameExtractor>()
@@ -133,9 +135,9 @@ public static class ServiceCollectionExtensions
                            })
 
                        .AddKeyedScoped(
-                           nameof(SecurityRuleCredential.CurrentUserWithoutRunAs),
+                           nameof(SecurityRuleCredential.CurrentUserWithoutRunAsCredential),
                            (sp, _) => sp.GetRequiredService<ISecuritySystemFactory>()
-                                        .Create(SecurityRuleCredential.CurrentUserWithoutRunAs))
+                                        .Create(new SecurityRuleCredential.CurrentUserWithoutRunAsCredential()))
 
                        .AddScoped(
                            sp =>

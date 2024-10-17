@@ -76,7 +76,7 @@ public class AuthorizationPrincipalSourceService(
                      .GetAvailablePermissionsQueryable(
                          DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles) with
                          {
-                             CustomCredential = SecurityRuleCredential.AnyUser
+                             CustomCredential = new SecurityRuleCredential.AnyUserCredential()
                          })
                      .Select(permission => permission.Principal.Name)
                      .Distinct()

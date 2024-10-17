@@ -36,6 +36,6 @@ public abstract class RunAsManager(IUserAuthenticationService userAuthentication
     protected abstract Task PersistRunAs(string? principalName, CancellationToken cancellationToken);
 
     private void CheckAccess() =>
-        securitySystemFactory.Create(SecurityRuleCredential.CurrentUserWithoutRunAs)
+        securitySystemFactory.Create(new SecurityRuleCredential.CurrentUserWithoutRunAsCredential())
                              .CheckAccess(SecurityRole.Administrator);
 }

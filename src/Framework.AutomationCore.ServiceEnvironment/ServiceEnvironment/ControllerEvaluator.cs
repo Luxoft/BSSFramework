@@ -5,6 +5,7 @@ using Automation.ServiceEnvironment.Services;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
+using Framework.SecuritySystem.Credential;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
 
-public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvider, string? customPrincipalName = null)
+public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvider, UserCredential? customPrincipalName = null)
     where TController : ControllerBase
 {
     public void Evaluate(Expression<Action<TController>> actionExpr)
@@ -72,14 +73,14 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
         context.Items["Result"] = res;
     }
 
-    public ControllerEvaluator<TController> WithImpersonate(string newCustomPrincipalName)
+    public ControllerEvaluator<TController> WithImpersonate(UserCredential newCustomPrincipalName)
     {
         return new ControllerEvaluator<TController>(rootServiceProvider, newCustomPrincipalName);
     }
 
     private class ImpersonateMiddleware(RequestDelegate next)
     {
-        public async Task Invoke(HttpContext context, string? customPrincipalName)
+        public async Task Invoke(HttpContext context, UserCredential? customPrincipalName)
         {
             if (customPrincipalName == null)
             {

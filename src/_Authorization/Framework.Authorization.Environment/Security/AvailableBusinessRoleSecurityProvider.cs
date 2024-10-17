@@ -28,7 +28,7 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
 
         return SecurityAccessorData.Return(
             availablePermissionSource
-                .GetAvailablePermissionsQueryable(DomainSecurityRule.AnyRole with { CustomCredential = SecurityRuleCredential.AnyUser })
+                .GetAvailablePermissionsQueryable(DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() })
                 .Where(permission => permission.Role == role)
                 .Select(permission => permission.Principal)
                 .Distinct()

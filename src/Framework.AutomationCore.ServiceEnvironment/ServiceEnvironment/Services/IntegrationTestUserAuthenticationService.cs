@@ -1,26 +1,45 @@
 ﻿using Automation.Settings;
+
+using Framework.Core;
+using Framework.DomainDriven;
+using Framework.SecuritySystem.Credential;
+
 using Microsoft.Extensions.Options;
 
 namespace Automation.ServiceEnvironment.Services;
 
-public class IntegrationTestUserAuthenticationService(IOptions<AutomationFrameworkSettings> settings)
+public class IntegrationTestUserAuthenticationService(
+    IOptions<AutomationFrameworkSettings> settings,
+    IServiceEvaluator<IUserCredentialNameResolver> credentialNameResolverEvaluator)
     : IIntegrationTestUserAuthenticationService
 {
+    private readonly IDictionaryCache<UserCredential, string> credCache = new DictionaryCache<UserCredential, string>(
+        userCredential =>
+        {
+            return userCredential switch
+            {
+                UserCredential.NamedUserCredential v => v.Name,
+                _ => credentialNameResolverEvaluator.Evaluate(DBSessionMode.Read, resolver => resolver.GetUserName(userCredential))
+            };
+        });
+
     private string IntegrationTestUserName => settings.Value.IntegrationTestUserName;
 
-    public string? CustomUserName { get; internal set; }
+    public UserCredential? CustomUserCredential { get; internal set; }
 
-    public void SetUserName(string? customUserName) => this.CustomUserName = customUserName ?? this.IntegrationTestUserName;
+    public void SetUserName(UserCredential? customUserCredential) =>
+        this.CustomUserCredential = customUserCredential ?? this.IntegrationTestUserName;
 
-    public void Reset() => this.CustomUserName = this.IntegrationTestUserName;
+    public void Reset() => this.CustomUserCredential = this.IntegrationTestUserName;
 
-    public string GetUserName() => this.CustomUserName ?? this.IntegrationTestUserName;
+    public string GetUserName() =>
+        this.CustomUserCredential == null ? this.IntegrationTestUserName : this.credCache[this.CustomUserCredential];
 
-    public async Task<T> WithImpersonateAsync<T>(string customUserName, Func<Task<T>> func)
+    public async Task<T> WithImpersonateAsync<T>(UserCredential customUserCredential, Func<Task<T>> func)
     {
-        var prev = this.CustomUserName;
+        var prev = this.CustomUserCredential;
 
-        this.CustomUserName = customUserName;
+        this.CustomUserCredential = customUserCredential;
 
         try
         {
@@ -28,7 +47,7 @@ public class IntegrationTestUserAuthenticationService(IOptions<AutomationFramewo
         }
         finally
         {
-            this.CustomUserName = prev;
+            this.CustomUserCredential = prev;
         }
     }
 }

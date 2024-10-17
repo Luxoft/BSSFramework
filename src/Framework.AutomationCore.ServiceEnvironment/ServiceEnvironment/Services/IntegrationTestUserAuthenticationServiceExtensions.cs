@@ -1,14 +1,16 @@
-﻿namespace Automation.ServiceEnvironment.Services;
+﻿using Framework.SecuritySystem.Credential;
+
+namespace Automation.ServiceEnvironment.Services;
 
 public static class IntegrationTestUserAuthenticationServiceExtensions
 {
     public static async Task WithImpersonateAsync(
         this IIntegrationTestUserAuthenticationService service,
-        string customUserName,
+        UserCredential customUserCredential,
         Func<Task> action)
     {
         await service.WithImpersonateAsync(
-            customUserName,
+            customUserCredential,
             async () =>
             {
                 await action();

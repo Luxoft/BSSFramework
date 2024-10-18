@@ -1,9 +1,10 @@
-﻿using Framework.SecuritySystem.ExternalSystem;
+﻿using Framework.SecuritySystem.Expanders;
+using Framework.SecuritySystem.ExternalSystem;
 
 namespace Framework.SecuritySystem.DiTests;
 
-public class ExamplePermissionSystemFactory(ExamplePermissionSystemData data) : IPermissionSystemFactory
+public class ExamplePermissionSystemFactory(ISecurityRuleExpander securityRuleExpander, TestPermissionData data) : IPermissionSystemFactory
 {
     public IPermissionSystem Create(SecurityRuleCredential securityRuleCredential) =>
-        new ExamplePermissionSystem(data);
+        new ExamplePermissionSystem(securityRuleExpander, data);
 }

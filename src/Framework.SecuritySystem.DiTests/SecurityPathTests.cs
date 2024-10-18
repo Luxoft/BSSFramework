@@ -1,15 +1,33 @@
 ﻿using FluentAssertions;
 
 using Framework.Core;
+using Framework.QueryableSource;
+using Framework.SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using NSubstitute;
 
 using Xunit;
 
 namespace Framework.SecuritySystem.DiTests;
 
-public partial class MainTests
+public class SecurityPathTests : TestBase
 {
+    private readonly BusinessUnit bu1;
+
+    public SecurityPathTests()
+    {
+        this.bu1 = new BusinessUnit() { Id = Guid.NewGuid() };
+
+        this.permissions.Override(
+        [
+            new TestPermission(
+                ExampleSecurityRole.TestKeyedRole,
+                new Dictionary<Type, IReadOnlyList<Guid>> { { typeof(BusinessUnit), [this.bu1.Id] } })
+        ]);
+    }
+
     [Fact]
     public void TryApplyRestriction_RestrictionApplied()
     {
@@ -91,5 +109,69 @@ public partial class MainTests
 
         //Assert
         result.Should().Be(testSecurityPath);
+    }
+
+    [Fact]
+    public async Task KeyedSecurityPath_WithStrictly_EmployeeExcepted()
+    {
+        // Arrange
+        await using var scope = this.rootServiceProvider.CreateAsyncScope();
+
+        var testSecurityPath = SecurityPath<Employee>
+                               .Create(employee => employee.Location)
+                               .And(employee => employee.BusinessUnit, SingleSecurityMode.Strictly, key: "testKey");
+
+        var securityProvider = scope.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>()
+                                    .Create(ExampleSecurityRole.TestKeyedRole, testSecurityPath);
+
+        var testEmployee1 = new Employee { BusinessUnit = this.bu1 };
+        var testEmployee2 = new Employee();
+
+        //Act
+        var result1 = securityProvider.HasAccess(testEmployee1);
+        var result2 = securityProvider.HasAccess(testEmployee2);
+
+        //Assert
+        result1.Should().BeTrue();
+        result2.Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task KeyedSecurityPath_WithoutStrictly_EmployeeIncluded()
+    {
+        // Arrange
+        await using var scope = this.rootServiceProvider.CreateAsyncScope();
+
+        var testSecurityPath = SecurityPath<Employee>
+                               .Create(employee => employee.Location)
+                               .And(employee => employee.BusinessUnit, SingleSecurityMode.AllowNull, key: "testKey");
+
+        var securityProvider = scope.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>()
+                                    .Create(ExampleSecurityRole.TestKeyedRole, testSecurityPath);
+
+        var testEmployee1 = new Employee { BusinessUnit = this.bu1 };
+        var testEmployee2 = new Employee();
+
+        //Act
+        var result1 = securityProvider.HasAccess(testEmployee1);
+        var result2 = securityProvider.HasAccess(testEmployee2);
+
+        //Assert
+        result1.Should().BeTrue();
+        result2.Should().BeTrue();
+    }
+
+    protected override IQueryableSource BuildQueryableSource(IServiceProvider serviceProvider)
+    {
+        var queryableSource = Substitute.For<IQueryableSource>();
+
+        queryableSource.GetQueryable<BusinessUnitAncestorLink>()
+                       .Returns(this.GetBusinessUnitAncestorLinkSource().AsQueryable());
+
+        return queryableSource;
+    }
+    private IEnumerable<BusinessUnitAncestorLink> GetBusinessUnitAncestorLinkSource()
+    {
+        yield return new BusinessUnitAncestorLink { Ancestor = this.bu1, Child = this.bu1 };
     }
 }

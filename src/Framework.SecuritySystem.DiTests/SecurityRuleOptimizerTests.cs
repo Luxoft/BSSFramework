@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Framework.SecuritySystem.DiTests;
 
-public partial class MainTests
+public class SecurityRuleOptimizerTests : TestBase
 {
     [Theory]
     [MemberData(nameof(OptimizeSecurityRule_RuleOptimized_Data))]

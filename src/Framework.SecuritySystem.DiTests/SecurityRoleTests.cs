@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Framework.SecuritySystem.DiTests;
 
-public partial class MainTests
+public class SecurityRoleTests : TestBase
 {
     [Fact]
     public void AdministratorRole_ShouldNotContains_SystemIntegrationRole()

@@ -14,7 +14,11 @@ export interface IPermissionDto {
   EndDate?: string | null;
 }
 
-export interface IPermission extends IPermissionDto {
+export interface IPermissionUiDto extends IPermissionDto {
+  uiPermissionId: string;
+}
+
+export interface IPermission extends IPermissionUiDto {
   Contexts: IContextWithRoleRestrictions[];
 }
 

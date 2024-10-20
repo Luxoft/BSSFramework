@@ -34,9 +34,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
 
     public override void Register(IServiceCollection services)
     {
-        foreach (var domainObjectSecurityPair in this.domainObjectSecurityDict)
+        foreach (var (modeSecurityRule, implementedSecurityRule) in this.domainObjectSecurityDict)
         {
-            services.AddSingleton(new DomainModeSecurityRuleInfo(domainObjectSecurityPair.Key.ToDomain(this.DomainType), domainObjectSecurityPair.Value));
+            services.AddSingleton(new DomainModeSecurityRuleInfo(modeSecurityRule.ToDomain(this.DomainType), implementedSecurityRule));
         }
 
         if (this.securityPath != null)
@@ -95,16 +95,9 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
         }
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject> SetView(DomainSecurityRule securityRule)
+    public IDomainSecurityServiceBuilder<TDomainObject> SetMode(SecurityRule.ModeSecurityRule modeSecurityRule, DomainSecurityRule implementedSecurityRule)
     {
-        this.domainObjectSecurityDict[SecurityRule.View] = securityRule;
-
-        return this;
-    }
-
-    public IDomainSecurityServiceBuilder<TDomainObject> SetEdit(DomainSecurityRule securityRule)
-    {
-        this.domainObjectSecurityDict[SecurityRule.Edit] = securityRule;
+        this.domainObjectSecurityDict[modeSecurityRule] = implementedSecurityRule;
 
         return this;
     }

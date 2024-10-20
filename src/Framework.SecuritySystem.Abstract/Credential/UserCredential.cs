@@ -8,9 +8,15 @@ public abstract record UserCredential
 
     public record NamedUserCredential(string Name) : UserCredential
     {
-        public override bool IsMatch(User user) => user.Name == this.Name;
+        public override bool IsMatch(User user) => this.IsMatch(user.Name);
+
+        public override int GetHashCode() => this.Name.ToLower().GetHashCode();
+
+        public virtual bool Equals(NamedUserCredential? other) => other is not null && this.IsMatch(other.Name);
 
         public override string ToString() => this.Name;
+
+        private bool IsMatch(string name) => string.Equals(name, this.Name, StringComparison.OrdinalIgnoreCase);
     }
 
     public record IdentUserCredential(Guid Id) : UserCredential

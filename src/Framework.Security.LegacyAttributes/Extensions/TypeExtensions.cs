@@ -24,25 +24,6 @@ public static class TypeExtensions
         }
     }
 
-    public static Type GetDependencySecuritySourceType(this Type type, bool recurse)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        var attr = type.GetCustomAttribute<DependencySecurityAttribute>();
-
-        if (attr != null)
-        {
-            if (recurse)
-            {
-                return attr.SourceType.GetDependencySecuritySourceType(true) ?? attr.SourceType;
-            }
-
-            return attr.SourceType;
-        }
-
-        return null;
-    }
-
     public static bool HasSecurityNodeInterfaces(this Type sourceType)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));

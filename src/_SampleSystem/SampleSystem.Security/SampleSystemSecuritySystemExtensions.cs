@@ -105,12 +105,17 @@ public static class SampleSystemSecuritySystemExtensions
 
     public static ISecuritySystemSettings AddSecurityRules(this ISecuritySystemSettings settings)
     {
+        DomainSecurityRule.RoleBaseSecurityRule g = new SecurityRole[] { SecurityRole.Administrator, };
+
         return settings.AddSecurityRule(
                            SampleSystemSecurityRule.TestRestriction,
                            SecurityRule.Disabled.And((TestRestrictionObject v) => v.RestrictionHandler))
                        .AddSecurityRule(
                            SampleSystemSecurityGroup.TestGroup,
-                           SecurityRule.View.ToDomain<Employee>());
+                           SecurityRule.View.ToDomain<Employee>())
+                       .AddSecurityRule(
+                           SampleSystemSecurityRule.TestRoleGroup,
+                           new[] { g });
     }
 
     public static ISecuritySystemSettings AddCustomSecurityOperations(this ISecuritySystemSettings settings)

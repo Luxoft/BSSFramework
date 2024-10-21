@@ -46,7 +46,14 @@ public class RootSecurityRuleExpander(
         switch (securityRule)
         {
             case AnyRoleSecurityRule:
-                return ExpandedRolesSecurityRule.Create(securityRoleSource.SecurityRoles);
+
+                return ExpandedRolesSecurityRule.Create(securityRoleSource.SecurityRoles).WithCopyCustoms(securityRule);
+
+            case RoleGroupSecurityRule roleGroupSecurityRule:
+
+                return ExpandedRolesSecurityRule
+                       .Create(roleGroupSecurityRule.Children.SelectMany(c => this.FullRoleExpand(c).SecurityRoles))
+                       .WithCopyCustoms(securityRule);
 
             case OperationSecurityRule operationSecurityRule:
                 return this.Expand(this.Expand(operationSecurityRule));

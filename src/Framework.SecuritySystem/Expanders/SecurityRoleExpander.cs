@@ -4,35 +4,35 @@ namespace Framework.SecuritySystem.Expanders;
 
 public class SecurityRoleExpander : ISecurityRoleExpander
 {
-    private readonly IDictionaryCache<DomainSecurityRule.NonExpandedRolesSecurityRule, DomainSecurityRule.ExpandedRolesSecurityRule> expandCache;
+    private readonly IDictionaryCache<DomainSecurityRule.NonExpandedRolesSecurityRule, DomainSecurityRule.ExpandedRolesSecurityRule>
+        expandCache;
 
     public SecurityRoleExpander(ISecurityRoleSource securityRoleSource)
     {
-        this.expandCache = new DictionaryCache<DomainSecurityRule.NonExpandedRolesSecurityRule, DomainSecurityRule.ExpandedRolesSecurityRule>(
-            securityRule =>
-            {
-                if (securityRule.SecurityRoles.Count == 0)
+        this.expandCache =
+            new DictionaryCache<DomainSecurityRule.NonExpandedRolesSecurityRule, DomainSecurityRule.ExpandedRolesSecurityRule>(
+                securityRule =>
                 {
-                    throw new Exception("The list of security roles cannot be empty.");
-                }
+                    if (securityRule.SecurityRoles.Count == 0)
+                    {
+                        throw new Exception("The list of security roles cannot be empty.");
+                    }
 
-                var securityRoles = securityRoleSource.SecurityRoles
-                                                      .Where(
-                                                          sr => sr.GetAllElements(
-                                                                      c => c.Information.Children.Select(securityRoleSource.GetSecurityRole))
-                                                                  .IsIntersected(securityRule.SecurityRoles))
-                                                      .Concat(securityRule.SecurityRoles)
-                                                      .Distinct()
-                                                      .OrderBy(sr => sr.Name)
-                                                      .ToArray();
+                    var securityRoles = securityRoleSource.SecurityRoles
+                                                          .Where(
+                                                              sr => sr.GetAllElements(
+                                                                          c => c.Information.Children.Select(
+                                                                              securityRoleSource.GetSecurityRole))
+                                                                      .IsIntersected(securityRule.SecurityRoles))
+                                                          .Concat(securityRule.SecurityRoles)
+                                                          .Distinct()
+                                                          .OrderBy(sr => sr.Name)
+                                                          .ToArray();
 
-                return new DomainSecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles))
-                       {
-                           CustomExpandType = securityRule.CustomExpandType,
-                           CustomCredential = securityRule.CustomCredential,
-                           CustomRestriction = securityRule.CustomRestriction
-                };
-            }).WithLock();
+                    return new DomainSecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles))
+                        .WithCopyCustoms(securityRule);
+
+                }).WithLock();
     }
 
     public DomainSecurityRule.ExpandedRolesSecurityRule Expand(DomainSecurityRule.NonExpandedRolesSecurityRule securityRule)

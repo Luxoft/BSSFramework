@@ -27,6 +27,8 @@ public abstract record DomainSecurityRule : SecurityRule
 
     public static implicit operator DomainSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
+    public static implicit operator DomainSecurityRule(RoleBaseSecurityRule[] securityRules) => securityRules.ToSecurityRule();
+
     public record SecurityRuleHeader(string Name) : DomainSecurityRule
     {
         public override string ToString() => this.Name;
@@ -90,7 +92,11 @@ public abstract record DomainSecurityRule : SecurityRule
         public static implicit operator RoleBaseSecurityRule(SecurityRole securityRole) => securityRole.ToSecurityRule();
 
         public static implicit operator RoleBaseSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
+
+        public static implicit operator RoleBaseSecurityRule(RoleBaseSecurityRule[] securityRules) => securityRules.ToSecurityRule();
     }
+
+    public record RoleGroupSecurityRule(DeepEqualsCollection<RoleBaseSecurityRule> Children) : RoleBaseSecurityRule;
 
     public record AnyRoleSecurityRule : RoleBaseSecurityRule;
 
@@ -126,11 +132,7 @@ public abstract record DomainSecurityRule : SecurityRule
             else
             {
                 return new NonExpandedRolesSecurityRule(DeepEqualsCollection.Create(rule1.SecurityRoles.Union(rule2.SecurityRoles)))
-                       {
-                           CustomExpandType = rule1.CustomExpandType,
-                           CustomCredential = rule1.CustomCredential,
-                           CustomRestriction = rule1.CustomRestriction
-                       };
+                    .WithCopyCustoms(rule1);
             }
         }
     }
@@ -159,11 +161,7 @@ public abstract record DomainSecurityRule : SecurityRule
             else
             {
                 return new ExpandedRolesSecurityRule(DeepEqualsCollection.Create(rule1.SecurityRoles.Union(rule2.SecurityRoles)))
-                       {
-                           CustomExpandType = rule1.CustomExpandType,
-                           CustomCredential = rule1.CustomCredential,
-                           CustomRestriction = rule1.CustomRestriction
-                       };
+                    .WithCopyCustoms(rule1);
             }
         }
     }

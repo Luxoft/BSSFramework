@@ -45,6 +45,17 @@ public static class SecurityRuleExtensions
         SecurityPathRestriction? customRestriction = null) =>
         new[] { securityRole }.ToSecurityRule(customExpandType, customCredential, customRestriction);
 
+    public static RoleGroupSecurityRule ToSecurityRule(
+        this IEnumerable<RoleBaseSecurityRule> securityRules,
+        HierarchicalExpandType? customExpandType = null,
+        SecurityRuleCredential? customCredential = null,
+        SecurityPathRestriction? customRestriction = null) =>
+        new(
+        DeepEqualsCollection.Create(securityRules))
+        {
+            CustomExpandType = customExpandType, CustomCredential = customCredential, CustomRestriction = customRestriction
+        };
+
     public static DomainSecurityRule Or(
         this DomainSecurityRule securityRule,
         DomainSecurityRule otherSecurityRule) =>
@@ -180,4 +191,13 @@ public static class SecurityRuleExtensions
         this DomainSecurityRule securityRule,
         string customMessage) =>
         new OverrideAccessDeniedMessageSecurityRule(securityRule, customMessage);
+
+    public static T WithCopyCustoms<T>(this T securityRule, RoleBaseSecurityRule customSource)
+        where T : RoleBaseSecurityRule =>
+        securityRule with
+        {
+            CustomExpandType = securityRule.CustomExpandType ?? customSource.CustomExpandType,
+            CustomCredential = securityRule.CustomCredential ?? customSource.CustomCredential,
+            CustomRestriction = securityRule.CustomRestriction ?? customSource.CustomRestriction,
+        };
 }

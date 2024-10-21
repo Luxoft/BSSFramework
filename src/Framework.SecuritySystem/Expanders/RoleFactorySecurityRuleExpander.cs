@@ -10,15 +10,6 @@ public class RoleFactorySecurityRuleExpander(IServiceProvider serviceProvider) :
     {
         var factory = (IFactory<DomainSecurityRule.RoleBaseSecurityRule>)serviceProvider.GetRequiredService(securityRule.RoleFactoryType);
 
-        var resultRule = factory.Create();
-
-        return securityRule.CustomExpandType == null
-                   ? resultRule
-                   : resultRule with
-                     {
-                         CustomExpandType = securityRule.CustomExpandType,
-                         CustomCredential = securityRule.CustomCredential,
-                         CustomRestriction = securityRule.CustomRestriction
-                     };
+        return factory.Create().WithCopyCustoms(securityRule);
     }
 }

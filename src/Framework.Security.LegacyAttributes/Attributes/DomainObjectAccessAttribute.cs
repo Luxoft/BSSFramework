@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 namespace Framework.Security;
 
@@ -7,7 +6,7 @@ namespace Framework.Security;
 public class DomainObjectAccessAttribute : Attribute
 {
     public DomainObjectAccessAttribute(Type securityRuleType, string name)
-        : this(securityRuleType.Maybe(v => v.GetSecurityRule(name)))
+        : this(securityRuleType.GetSecurityRule(name))
     {
     }
 

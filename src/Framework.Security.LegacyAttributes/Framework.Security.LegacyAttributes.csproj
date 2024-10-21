@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Security.LegacyAttributes</PackageId>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

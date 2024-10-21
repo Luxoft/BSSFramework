@@ -13,10 +13,8 @@ public static class CustomAttributeProviderExtensions
     /// <param name="source">Источник</param>
     /// <param name="throwIfNull">Ошибка, если операция отсутствует</param>
     /// <returns></returns>
-    public static SecurityRule GetViewSecurityRule(this ICustomAttributeProvider source, bool throwIfNull = false)
+    public static SecurityRule? GetViewSecurityRule(this ICustomAttributeProvider source, bool throwIfNull = false)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
         var res = source.GetViewDomainObjectAttribute().Maybe(attr => attr.SecurityRule);
 
         if (res == null && throwIfNull)
@@ -33,10 +31,8 @@ public static class CustomAttributeProviderExtensions
     /// <param name="source">Источник</param>
     /// <param name="throwIfNull">Ошибка, если операция отсутствует</param>
     /// <returns></returns>
-    public static SecurityRule GetEditSecurityRule(this ICustomAttributeProvider source, bool throwIfNull = false)
+    public static SecurityRule? GetEditSecurityRule(this ICustomAttributeProvider source, bool throwIfNull = false)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
         var res = source.GetEditDomainObjectAttribute().Maybe(attr => attr.SecurityRule);
 
         if (res == null && throwIfNull)
@@ -47,37 +43,35 @@ public static class CustomAttributeProviderExtensions
         return res;
     }
 
-    public static ViewDomainObjectAttribute GetViewDomainObjectAttribute(this ICustomAttributeProvider source)
+    public static ViewDomainObjectAttribute? GetViewDomainObjectAttribute(this ICustomAttributeProvider source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
         return source.GetCustomAttribute<ViewDomainObjectAttribute>();
     }
 
-    public static EditDomainObjectAttribute GetEditDomainObjectAttribute(this ICustomAttributeProvider source)
+    public static EditDomainObjectAttribute? GetEditDomainObjectAttribute(this ICustomAttributeProvider source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
         return source.GetCustomAttribute<EditDomainObjectAttribute>();
     }
 
-    public static DomainObjectAccessAttribute GetDomainObjectAccessAttribute(this ICustomAttributeProvider source)
+    public static DomainObjectAccessAttribute? GetDomainObjectAccessAttribute(this ICustomAttributeProvider source)
     {
         return source.GetCustomAttribute<DomainObjectAccessAttribute>();
     }
 
-    public static DomainObjectAccessAttribute GetDomainObjectAccessAttribute(this ICustomAttributeProvider source, bool isEdit)
+    public static DomainObjectAccessAttribute? GetDomainObjectAccessAttribute(this ICustomAttributeProvider source, bool isEdit)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
         return isEdit ? source.GetEditDomainObjectAttribute() : source.GetViewDomainObjectAttribute();
     }
 
     public static IEnumerable<DomainObjectAccessAttribute> GetDomainObjectAccessAttributes(this ICustomAttributeProvider source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        return from flag in new[] { true, false }
 
-        return new[] {true, false}.Select(source.GetDomainObjectAccessAttribute).Where(attr => attr != null);
+               let attr = source.GetDomainObjectAccessAttribute(flag)
+
+               where attr != null
+
+               select attr;
     }
 
 

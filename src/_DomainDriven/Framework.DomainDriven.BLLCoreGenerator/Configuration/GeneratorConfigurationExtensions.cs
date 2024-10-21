@@ -20,6 +20,10 @@ public static class GeneratorConfigurationExtensions
         {
             return typeof(SecurityRule).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
         }
+        else if (securityRule is DomainSecurityRule.DomainModeSecurityRule domainModeSecurityRule)
+        {
+            return configuration.GetSecurityCodeExpression(domainModeSecurityRule.Mode).ToMethodReferenceExpression("ToDomain", [domainModeSecurityRule.DomainType]).ToMethodInvokeExpression();
+        }
         else if (securityRule is DomainSecurityRule.NonExpandedRolesSecurityRule)
         {
             return typeof(SecurityRole).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());

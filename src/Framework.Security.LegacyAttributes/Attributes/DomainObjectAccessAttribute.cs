@@ -11,6 +11,11 @@ public class DomainObjectAccessAttribute : Attribute
     {
     }
 
+    public DomainObjectAccessAttribute(Type domainType, bool isEdit)
+        : this((isEdit ? SecurityRule.Edit : SecurityRule.View).ToDomain(domainType))
+    {
+    }
+
     protected DomainObjectAccessAttribute(SecurityRule securityRule)
     {
         this.SecurityRule = securityRule;

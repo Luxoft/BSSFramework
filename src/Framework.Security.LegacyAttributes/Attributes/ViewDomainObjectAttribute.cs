@@ -13,8 +13,8 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     {
     }
 
-    public ViewDomainObjectAttribute(Type domainType)
-        : base(SecurityRule.View.ToDomain(domainType))
+    public ViewDomainObjectAttribute(Type domainType, bool isEdit = false)
+        : base(domainType, isEdit)
     {
     }
 

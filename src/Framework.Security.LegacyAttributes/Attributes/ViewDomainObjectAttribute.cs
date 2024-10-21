@@ -13,6 +13,11 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     {
     }
 
+    public ViewDomainObjectAttribute(Type domainType)
+        : base(SecurityRule.View.ToDomain(domainType))
+    {
+    }
+
     public ViewDomainObjectAttribute(SecurityRule securityRule)
         : base(securityRule)
     {

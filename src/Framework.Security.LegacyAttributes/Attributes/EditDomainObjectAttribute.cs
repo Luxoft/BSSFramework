@@ -13,6 +13,11 @@ public class EditDomainObjectAttribute : DomainObjectAccessAttribute
     {
     }
 
+    public EditDomainObjectAttribute(Type domainType)
+        : base(SecurityRule.Edit.ToDomain(domainType))
+    {
+    }
+
     /// <summary>
     /// Констуктор с доступом по операции
     /// </summary>

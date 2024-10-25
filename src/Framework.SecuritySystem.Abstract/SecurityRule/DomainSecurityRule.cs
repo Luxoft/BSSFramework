@@ -154,6 +154,8 @@ public abstract record DomainSecurityRule : SecurityRule
     /// <param name="SecurityRoles">Список развёрнутых ролей</param>
     public record ExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : RoleBaseSecurityRule
     {
+        public static ExpandedRolesSecurityRule Empty { get; } = Create([]);
+
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
                                                  : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";

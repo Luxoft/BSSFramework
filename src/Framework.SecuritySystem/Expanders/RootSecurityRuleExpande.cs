@@ -50,10 +50,9 @@ public class RootSecurityRuleExpander(
                 return ExpandedRolesSecurityRule.Create(securityRoleSource.SecurityRoles).TryApplyCustoms(securityRule);
 
             case RoleGroupSecurityRule roleGroupSecurityRule:
-
-                return ExpandedRolesSecurityRule
-                       .Create(roleGroupSecurityRule.Children.SelectMany(c => this.FullRoleExpand(c).SecurityRoles))
-                       .TryApplyCustoms(securityRule);
+                return roleGroupSecurityRule.Children.Select(this.FullRoleExpand)
+                                            .Aggregate(ExpandedRolesSecurityRule.Empty, (r1, r2) => r1 + r2)
+                                            .TryApplyCustoms(securityRule);
 
             case OperationSecurityRule operationSecurityRule:
                 return this.Expand(this.Expand(operationSecurityRule));

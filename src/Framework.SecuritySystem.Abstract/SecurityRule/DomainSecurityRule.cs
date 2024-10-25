@@ -81,7 +81,6 @@ public abstract record DomainSecurityRule : SecurityRule
         public HierarchicalExpandType GetSafeExpandType () => this.CustomExpandType ?? HierarchicalExpandType.Children;
 
 
-        public RoleBaseSecurityRuleCustomData GetCustomData() => new(this);
 
         public bool EqualsCustoms(RoleBaseSecurityRule other)
         {
@@ -97,14 +96,6 @@ public abstract record DomainSecurityRule : SecurityRule
         public static implicit operator RoleBaseSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
         public static implicit operator RoleBaseSecurityRule(RoleBaseSecurityRule[] securityRules) => securityRules.ToSecurityRule();
-    }
-
-    public record RoleBaseSecurityRuleCustomData(HierarchicalExpandType? CustomExpandType, SecurityRuleCredential? CustomCredential, SecurityPathRestriction? CustomRestriction) : IRoleBaseSecurityRuleCustomData
-    {
-        public RoleBaseSecurityRuleCustomData(IRoleBaseSecurityRuleCustomData roleBaseSecurityRule)
-            :this(roleBaseSecurityRule.CustomExpandType, roleBaseSecurityRule.CustomCredential, roleBaseSecurityRule.CustomRestriction)
-        {
-        }
     }
 
     public interface IRoleBaseSecurityRuleCustomData

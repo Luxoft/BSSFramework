@@ -12,7 +12,7 @@ public class DomainModeSecurityRuleResolver(
             {
                 var request = from domainModeSecurityRuleInfo in domainModeSecurityRuleInfoList
 
-                              let roles = domainSecurityRoleExtractor.Extract(domainModeSecurityRuleInfo.Implementation)
+                              let roles = domainSecurityRoleExtractor.ExtractSecurityRoles(domainModeSecurityRuleInfo.Implementation)
 
                               where roles.Contains(securityRole)
 

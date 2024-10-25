@@ -30,7 +30,7 @@ public class SecurityRoleExpander : ISecurityRoleExpander
                                                           .ToArray();
 
                     return new DomainSecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles))
-                        .WithCopyCustoms(securityRule);
+                        .TryApplyCustoms(securityRule);
 
                 }).WithLock();
     }

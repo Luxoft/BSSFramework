@@ -45,16 +45,29 @@ public static class SecurityRuleExtensions
         SecurityPathRestriction? customRestriction = null) =>
         new[] { securityRole }.ToSecurityRule(customExpandType, customCredential, customRestriction);
 
-    public static RoleGroupSecurityRule ToSecurityRule(
+    public static RoleBaseSecurityRule ToSecurityRule(
         this IEnumerable<RoleBaseSecurityRule> securityRules,
         HierarchicalExpandType? customExpandType = null,
         SecurityRuleCredential? customCredential = null,
-        SecurityPathRestriction? customRestriction = null) =>
-        new(
-        DeepEqualsCollection.Create(securityRules))
+        SecurityPathRestriction? customRestriction = null)
+    {
+        var cache = securityRules.ToList();
+
+        if (cache.Count == 1)
         {
-            CustomExpandType = customExpandType, CustomCredential = customCredential, CustomRestriction = customRestriction
-        };
+            return cache.Single().TryApplyCustoms(customExpandType, customCredential, customRestriction);
+        }
+        else
+        {
+            return new RoleGroupSecurityRule(
+                   DeepEqualsCollection.Create(cache))
+                   {
+                       CustomExpandType = customExpandType,
+                       CustomCredential = customCredential,
+                       CustomRestriction = customRestriction
+                   };
+        }
+    }
 
     public static DomainSecurityRule Or(
         this DomainSecurityRule securityRule,
@@ -192,12 +205,23 @@ public static class SecurityRuleExtensions
         string customMessage) =>
         new OverrideAccessDeniedMessageSecurityRule(securityRule, customMessage);
 
-    public static T WithCopyCustoms<T>(this T securityRule, RoleBaseSecurityRule customSource)
+    public static T TryApplyCustoms<T>(
+        this T securityRule,
+        HierarchicalExpandType? customExpandType = null,
+        SecurityRuleCredential? customCredential = null,
+        SecurityPathRestriction? customRestriction = null)
         where T : RoleBaseSecurityRule =>
-        securityRule with
-        {
-            CustomExpandType = securityRule.CustomExpandType ?? customSource.CustomExpandType,
-            CustomCredential = securityRule.CustomCredential ?? customSource.CustomCredential,
-            CustomRestriction = securityRule.CustomRestriction ?? customSource.CustomRestriction,
-        };
+
+        customExpandType is null && customCredential is null && customRestriction is null
+            ? securityRule
+            : securityRule with
+              {
+                  CustomExpandType = securityRule.CustomExpandType ?? customExpandType,
+                  CustomCredential = securityRule.CustomCredential ?? customCredential,
+                  CustomRestriction = securityRule.CustomRestriction ?? customRestriction,
+              };
+
+    public static T TryApplyCustoms<T>(this T securityRule, IRoleBaseSecurityRuleCustomData customSource)
+        where T : RoleBaseSecurityRule =>
+        securityRule.TryApplyCustoms(customSource.CustomExpandType, customSource.CustomCredential, customSource.CustomRestriction);
 }

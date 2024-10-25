@@ -2,9 +2,9 @@
 
 public interface ISecuritySystem
 {
-    bool HasAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule);
+    bool HasAccess(DomainSecurityRule securityRule);
 
     bool IsAdministrator() => this.HasAccess(SecurityRole.Administrator);
 
-    void CheckAccess(DomainSecurityRule.RoleBaseSecurityRule securityRule);
+    void CheckAccess(DomainSecurityRule securityRule);
 }

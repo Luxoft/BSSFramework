@@ -4,26 +4,39 @@ using Framework.SecuritySystem.Services;
 
 namespace Framework.SecuritySystem.SecurityRuleInfo;
 
-public class DomainSecurityRoleExtractor(ISecurityRuleExpander expander) : IDomainSecurityRoleExtractor
+public class DomainSecurityRoleExtractor : IDomainSecurityRoleExtractor
 {
-    private readonly IDictionaryCache<DomainSecurityRule, IReadOnlySet<SecurityRole>> cache =
-        new DictionaryCache<DomainSecurityRule, IReadOnlySet<SecurityRole>>(
-            securityRule =>
-            {
-                var usedRoles = new HashSet<SecurityRole>();
+    private readonly IDictionaryCache<DomainSecurityRule, DomainSecurityRule.RoleBaseSecurityRule> rulesCache;
 
-                new ScanVisitor(usedRoles).Visit(expander.FullDomainExpand(securityRule));
+    private readonly IDictionaryCache<DomainSecurityRule, IReadOnlySet<SecurityRole>> rolesCache;
 
-                return usedRoles;
-            }).WithLock();
+    public DomainSecurityRoleExtractor(ISecurityRuleExpander expander)
+    {
+        this.rulesCache =
+            new DictionaryCache<DomainSecurityRule, DomainSecurityRule.RoleBaseSecurityRule>(
+                securityRule =>
+                {
+                    var usedRules = new HashSet<DomainSecurityRule.ExpandedRolesSecurityRule>();
 
-    public IEnumerable<SecurityRole> Extract(DomainSecurityRule securityRule) => this.cache[securityRule];
+                    new ScanVisitor(usedRules).Visit(expander.FullDomainExpand(securityRule));
 
-    private class ScanVisitor(ISet<SecurityRole> usedRoles) : SecurityRuleVisitor
+                    return usedRules.ToArray();
+                }).WithLock();
+
+        this.rolesCache =
+            new DictionaryCache<DomainSecurityRule, IReadOnlySet<SecurityRole>>(
+                securityRule => expander.FullRoleExpand(this.rulesCache[securityRule]).SecurityRoles.ToHashSet()).WithLock();
+    }
+
+    public IEnumerable<SecurityRole> ExtractSecurityRoles(DomainSecurityRule securityRule) => this.rolesCache[securityRule];
+
+    public DomainSecurityRule.RoleBaseSecurityRule ExtractSecurityRule(DomainSecurityRule securityRule) => this.rulesCache[securityRule];
+
+    private class ScanVisitor(ISet<DomainSecurityRule.ExpandedRolesSecurityRule> usedRules) : SecurityRuleVisitor
     {
         protected override DomainSecurityRule Visit(DomainSecurityRule.ExpandedRolesSecurityRule securityRule)
         {
-            usedRoles.UnionWith(securityRule.SecurityRoles);
+            usedRules.Add(securityRule);
 
             return securityRule;
         }

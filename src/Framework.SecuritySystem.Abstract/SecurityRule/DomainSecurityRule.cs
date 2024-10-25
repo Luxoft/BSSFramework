@@ -67,7 +67,7 @@ public abstract record DomainSecurityRule : SecurityRule
 
     public record OverrideAccessDeniedMessageSecurityRule(DomainSecurityRule BaseSecurityRule, string CustomMessage) : DomainSecurityRule;
 
-    public abstract record RoleBaseSecurityRule : DomainSecurityRule
+    public abstract record RoleBaseSecurityRule : DomainSecurityRule, IRoleBaseSecurityRuleCustomData
     {
         /// <summary>
         /// Тип разворачивания деревьев (как правило для просмотра самого дерева выбирается HierarchicalExpandType.All)
@@ -78,7 +78,9 @@ public abstract record DomainSecurityRule : SecurityRule
 
         public SecurityPathRestriction? CustomRestriction { get; init; } = null;
 
-        public HierarchicalExpandType SafeExpandType => this.CustomExpandType ?? HierarchicalExpandType.Children;
+        public HierarchicalExpandType GetSafeExpandType () => this.CustomExpandType ?? HierarchicalExpandType.Children;
+
+
 
         public bool EqualsCustoms(RoleBaseSecurityRule other)
         {
@@ -94,6 +96,15 @@ public abstract record DomainSecurityRule : SecurityRule
         public static implicit operator RoleBaseSecurityRule(SecurityRole[] securityRoles) => securityRoles.ToSecurityRule();
 
         public static implicit operator RoleBaseSecurityRule(RoleBaseSecurityRule[] securityRules) => securityRules.ToSecurityRule();
+    }
+
+    public interface IRoleBaseSecurityRuleCustomData
+    {
+        public HierarchicalExpandType? CustomExpandType { get; }
+
+        public SecurityRuleCredential? CustomCredential { get; }
+
+        public SecurityPathRestriction? CustomRestriction { get; }
     }
 
     public record RoleGroupSecurityRule(DeepEqualsCollection<RoleBaseSecurityRule> Children) : RoleBaseSecurityRule;
@@ -132,7 +143,7 @@ public abstract record DomainSecurityRule : SecurityRule
             else
             {
                 return new NonExpandedRolesSecurityRule(DeepEqualsCollection.Create(rule1.SecurityRoles.Union(rule2.SecurityRoles)))
-                    .WithCopyCustoms(rule1);
+                    .TryApplyCustoms(rule1);
             }
         }
     }
@@ -143,6 +154,8 @@ public abstract record DomainSecurityRule : SecurityRule
     /// <param name="SecurityRoles">Список развёрнутых ролей</param>
     public record ExpandedRolesSecurityRule(DeepEqualsCollection<SecurityRole> SecurityRoles) : RoleBaseSecurityRule
     {
+        public static ExpandedRolesSecurityRule Empty { get; } = Create([]);
+
         public override string ToString() => this.SecurityRoles.Count == 1
                                                  ? this.SecurityRoles.Single().Name
                                                  : $"[{this.SecurityRoles.Join(", ", sr => sr.Name)}]";
@@ -161,7 +174,7 @@ public abstract record DomainSecurityRule : SecurityRule
             else
             {
                 return new ExpandedRolesSecurityRule(DeepEqualsCollection.Create(rule1.SecurityRoles.Union(rule2.SecurityRoles)))
-                    .WithCopyCustoms(rule1);
+                    .TryApplyCustoms(rule1);
             }
         }
     }

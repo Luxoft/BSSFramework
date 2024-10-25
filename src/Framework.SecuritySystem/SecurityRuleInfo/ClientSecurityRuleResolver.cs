@@ -12,7 +12,7 @@ public class ClientSecurityRuleResolver(
             {
                 var request = from clientSecurityRuleInfo in clientSecurityRuleInfoSource.GetInfos()
 
-                              let roles = domainSecurityRoleExtractor.Extract(clientSecurityRuleInfo.Implementation)
+                              let roles = domainSecurityRoleExtractor.ExtractSecurityRoles(clientSecurityRuleInfo.Implementation)
 
                               where roles.Contains(securityRole)
 

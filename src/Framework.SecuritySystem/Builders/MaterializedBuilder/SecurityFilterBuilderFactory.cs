@@ -22,7 +22,7 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
 
         var optimizedPermissions = permissionOptimizationService.Optimize(rawPermissions);
 
-        var expandedPermissions = optimizedPermissions.Select(permission => this.TryExpandPermission(permission, securityRule.SafeExpandType));
+        var expandedPermissions = optimizedPermissions.Select(permission => this.TryExpandPermission(permission, securityRule.GetSafeExpandType()));
 
         var builder = this.CreateBuilder(securityPath);
 

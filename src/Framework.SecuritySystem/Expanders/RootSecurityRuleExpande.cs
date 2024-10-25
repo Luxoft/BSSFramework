@@ -47,13 +47,13 @@ public class RootSecurityRuleExpander(
         {
             case AnyRoleSecurityRule:
 
-                return ExpandedRolesSecurityRule.Create(securityRoleSource.SecurityRoles).WithCopyCustoms(securityRule);
+                return ExpandedRolesSecurityRule.Create(securityRoleSource.SecurityRoles).TryApplyCustoms(securityRule);
 
             case RoleGroupSecurityRule roleGroupSecurityRule:
 
                 return ExpandedRolesSecurityRule
                        .Create(roleGroupSecurityRule.Children.SelectMany(c => this.FullRoleExpand(c).SecurityRoles))
-                       .WithCopyCustoms(securityRule);
+                       .TryApplyCustoms(securityRule);
 
             case OperationSecurityRule operationSecurityRule:
                 return this.Expand(this.Expand(operationSecurityRule));

@@ -2,5 +2,7 @@
 
 public interface IDomainSecurityRoleExtractor
 {
-    IEnumerable<SecurityRole> Extract(DomainSecurityRule securityRule);
+    IEnumerable<SecurityRole> ExtractSecurityRoles(DomainSecurityRule securityRule);
+
+    DomainSecurityRule.RoleBaseSecurityRule ExtractSecurityRule(DomainSecurityRule securityRule);
 }

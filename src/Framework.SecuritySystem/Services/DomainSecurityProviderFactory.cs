@@ -18,6 +18,8 @@ public class DomainSecurityProviderFactory<TDomainObject>(
     {
         var injectorType = typeof(ISecurityProviderInjector<,>).MakeGenericType(typeof(TDomainObject), securityRule.GetType());
 
+        var defaultFactory = serviceProvider.GetRequiredService(typeof(IEnumerable<>).MakeGenericType(injectorType));
+
         var injectors = serviceProvider.GetRequiredService(typeof(IEnumerable<>).MakeGenericType(injectorType));
 
 
@@ -31,6 +33,28 @@ public class DomainSecurityProviderFactory<TDomainObject>(
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(baseSecurityRule));
+        }
+    }
+
+    private class InternalDomainSecurityProviderFactory<TSecurityRule>(
+        DomainSecurityProviderFactory<TDomainObject> rootFactory,
+        ISecurityProviderFactory<TDomainObject, TSecurityRule> defaultFactory,
+        IEnumerable<ISecurityProviderInjector<TDomainObject, TSecurityRule>> injectors,
+        ISecurityRuleDeepOptimizer deepOptimizer,
+        TSecurityRule securityRule,
+        SecurityPath<TDomainObject> securityPath) : IFactory<ISecurityProvider<TDomainObject>>
+        where TSecurityRule : SecurityRule
+    {
+        public ISecurityProvider<TDomainObject> Create()
+        {
+            if (!injectors.Any())
+            {
+
+            }
+            else
+            {
+                injectors.Aggregate(defaultFactory, (state, injector) => injector.Inject(state)).Create(securityRule, securityPath);
+            }
         }
     }
 

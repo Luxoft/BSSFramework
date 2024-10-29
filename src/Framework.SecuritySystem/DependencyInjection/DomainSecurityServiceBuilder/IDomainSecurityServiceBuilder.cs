@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using Framework.SecuritySystem.ProviderFactories;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
@@ -40,7 +42,7 @@ public interface IDomainSecurityServiceBuilder<TDomainObject>
         where TDomainSecurityService : IDomainSecurityService<TDomainObject>;
 
     IDomainSecurityServiceBuilder<TDomainObject> Override<TSecurityFunctor>()
-        where TSecurityFunctor : IOverrideSecurityProviderFunctor<TDomainObject>;
+        where TSecurityFunctor : ISecurityProviderInjector<TDomainObject>;
 }
 
 public interface IDomainSecurityServiceBuilder

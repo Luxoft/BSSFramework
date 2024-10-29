@@ -1,11 +1,12 @@
 ﻿using Framework.SecuritySystem.Expanders;
+using Framework.SecuritySystem.ProviderFactories;
 
 namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TDomainObject>(
     ISecurityRuleExpander securityRuleExpander,
     TOriginalDomainSecurityService originalDomainSecurityService,
-    IEnumerable<IOverrideSecurityProviderFunctor<TDomainObject>> functorList)
+    IEnumerable<ISecurityProviderInjector<TDomainObject>> injectors)
     : DomainSecurityService<TDomainObject>(securityRuleExpander)
     where TOriginalDomainSecurityService : IDomainSecurityService<TDomainObject>
 {

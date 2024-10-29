@@ -7,11 +7,11 @@ public abstract class DomainSecurityServiceBase<TDomainObject> : IDomainSecurity
     private readonly IDictionaryCache<SecurityRule, ISecurityProvider<TDomainObject>> providersCache;
 
     protected DomainSecurityServiceBase() =>
-        this.providersCache = new DictionaryCache<SecurityRule, ISecurityProvider<TDomainObject>>(securityRule =>
-        {
-            return this.CreateSecurityProvider(securityRule)
-                       .OverrideAccessDeniedResult(accessDeniedResult => accessDeniedResult with { SecurityRule = securityRule });
-        }).WithLock();
+        this.providersCache = new DictionaryCache<SecurityRule, ISecurityProvider<TDomainObject>>(
+                securityRule =>
+                    this.CreateSecurityProvider(securityRule)
+                        .OverrideAccessDeniedResult(accessDeniedResult => accessDeniedResult with { SecurityRule = securityRule }))
+            .WithLock();
 
     protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityRule securityRule);
 

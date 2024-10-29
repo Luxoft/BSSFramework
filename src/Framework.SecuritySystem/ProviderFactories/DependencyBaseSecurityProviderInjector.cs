@@ -1,12 +1,12 @@
 ﻿using Framework.SecuritySystem.Expanders;
 
-namespace Framework.SecuritySystem.Services.DefaultInjectors;
+namespace Framework.SecuritySystem.ProviderFactories;
 
 public abstract class
-    DependencyBaseSecurityProviderInjector<TDomainObject, TBaseDomainObject>(
+    DependencyBaseSecurityProviderFactory<TDomainObject, TBaseDomainObject>(
     ISecurityModeExpander securityRuleExpander,
     IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
-    : ISecurityProviderInjector<TDomainObject, SecurityRule>
+    : ISecurityProviderFactory<TDomainObject, SecurityRule>
 {
     public ISecurityProvider<TDomainObject> Create(SecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
     {

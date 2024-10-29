@@ -1,4 +1,4 @@
-﻿namespace Framework.SecuritySystem.Services;
+﻿namespace Framework.SecuritySystem.ProviderFactories;
 
 public interface ISecurityProviderFactory<TDomainObject, in TSecurityRule>
     where TSecurityRule : SecurityRule

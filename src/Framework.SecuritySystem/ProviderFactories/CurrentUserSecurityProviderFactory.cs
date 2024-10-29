@@ -3,11 +3,11 @@ using Framework.SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.SecuritySystem.Services.DefaultInjectors;
+namespace Framework.SecuritySystem.ProviderFactories;
 
-public class CurrentUserSecurityProviderInjector<TDomainObject>(
+public class CurrentUserSecurityProviderFactory<TDomainObject>(
     IServiceProvider serviceProvider)
-    : ISecurityProviderInjector<TDomainObject, DomainSecurityRule.CurrentUserSecurityRule>
+    : ISecurityProviderFactory<TDomainObject, DomainSecurityRule.CurrentUserSecurityRule>
 {
     public ISecurityProvider<TDomainObject> Create(DomainSecurityRule.CurrentUserSecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
     {

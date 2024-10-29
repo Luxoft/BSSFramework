@@ -6,18 +6,19 @@ using Framework.Core;
 using Framework.SecuritySystem.UserSource;
 
 using static Framework.SecuritySystem.DomainSecurityRule;
+using Framework.SecuritySystem.ProviderFactories;
 
 namespace Framework.SecuritySystem.Services;
 
 public class DomainSecurityProviderFactory<TDomainObject>(
     IServiceProvider serviceProvider,
-    ISecurityRuleDeepOptimizer deepOptimizer,
-    IRoleBaseSecurityProviderFactory<TDomainObject> roleBaseSecurityProviderFactory) : IDomainSecurityProviderFactory<TDomainObject>
+    ISecurityRuleDeepOptimizer deepOptimizer) : IDomainSecurityProviderFactory<TDomainObject>
 {
     public ISecurityProvider<TDomainObject> Create(SecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
     {
-        var injectors = serviceProvider.GetRequiredService(typeof(IEnumerable<>).MakeGenericType(securityRule.GetType()));
+        var injectorType = typeof(ISecurityProviderInjector<,>).MakeGenericType(typeof(TDomainObject), securityRule.GetType());
 
+        var injectors = serviceProvider.GetRequiredService(typeof(IEnumerable<>).MakeGenericType(injectorType));
 
 
         switch (baseSecurityRule)
@@ -36,18 +37,10 @@ public class DomainSecurityProviderFactory<TDomainObject>(
     private ISecurityProvider<TDomainObject> Create<TSecurityRule>(
         TSecurityRule securityRule,
         SecurityPath<TDomainObject> securityPath,
-        ISecurityProviderInjector<TDomainObject, TSecurityRule> defaultInjector,
-        IEnumerable<SecurityProviderInjector<TDomainObject, TSecurityRule>> injectors)
+        ISecurityProviderFactory<TDomainObject, TSecurityRule> defaultFactory,
+        IEnumerable<ISecurityProviderInjector<TDomainObject, TSecurityRule>> injectors)
         where TSecurityRule : SecurityRule =>
-        injectors.Aggregate(
-                     defaultInjector,
-                     (state, injector) =>
-                     {
-                         injector.DefaultCreateFunc = state.Create;
-
-                         return injector;
-                     })
-                 .Create(securityRule, securityPath);
+        injectors.Aggregate(defaultFactory, (state, injector) => injector.Inject(state)).Create(securityRule, securityPath);
 }
 
 internal class InternalDomainSecurityProviderFactory<TDomainObject, TSecurityRule>(

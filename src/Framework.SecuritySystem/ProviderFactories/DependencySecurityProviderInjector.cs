@@ -1,14 +1,14 @@
 ﻿using Framework.QueryableSource;
 using Framework.SecuritySystem.Expanders;
 
-namespace Framework.SecuritySystem.Services.DefaultInjectors;
+namespace Framework.SecuritySystem.ProviderFactories;
 
-public class DependencySecurityProviderInjector<TDomainObject, TBaseDomainObject>(
+public class DependencySecurityProviderFactory<TDomainObject, TBaseDomainObject>(
     ISecurityModeExpander securityRuleExpander,
     IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
     IQueryableSource queryableSource,
     IRelativeDomainPathInfo<TDomainObject, TBaseDomainObject> pathInfo)
-    : DependencyBaseSecurityProviderInjector<TDomainObject,
+    : DependencyBaseSecurityProviderFactory<TDomainObject,
         TBaseDomainObject>(securityRuleExpander, baseDomainSecurityService)
 {
     protected override ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider)

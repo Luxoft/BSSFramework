@@ -7,18 +7,41 @@ using Framework.SecuritySystem.UserSource;
 
 using static Framework.SecuritySystem.DomainSecurityRule;
 using Framework.SecuritySystem.ProviderFactories;
+using Framework.SecuritySystem.Expanders;
 
 namespace Framework.SecuritySystem.Services;
 
+public class DomainSecurityProviderFactory<TDomainObject, TSecurityRule>(
+    ISecurityRuleDeepOptimizer deepOptimizer,
+    IDefaultSecurityProviderFactory<TDomainObject, TSecurityRule> defaultSecurityProviderFactory,
+    IEnumerable<ISecurityProviderInjector<TDomainObject, TSecurityRule>> injectors) : ISecurityProviderFactory<TDomainObject, TSecurityRule>
+    where TSecurityRule : DomainSecurityRule
+{
+    public ISecurityProvider<TDomainObject> Create(TSecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
+    {
+        var optimizeSettings = defaultSecurityProviderFactory.AllowOptimize
+                                   ? new SecurityRuleExpandSettings(injectors.Select(injector => injector.SecurityRuleType))
+                                   : SecurityRuleExpandSettings.Disabled;
+
+        var actualSecurityRule = deepOptimizer.Optimize(securityRule, optimizeSettings);
+
+        injectors.Aggregate(defaultFactory, (state, injector) => injector.Inject(state)).Create(securityRule, securityPath);
+    }
+}
+
 public class DomainSecurityProviderFactory<TDomainObject>(
     IServiceProvider serviceProvider,
+    ISecurityRuleTypeResolver securityRuleTypeResolver,
     ISecurityRuleDeepOptimizer deepOptimizer) : IDomainSecurityProviderFactory<TDomainObject>
 {
     public ISecurityProvider<TDomainObject> Create(SecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
     {
-        var injectorType = typeof(ISecurityProviderInjector<,>).MakeGenericType(typeof(TDomainObject), securityRule.GetType());
+        var securityRuleType = securityRuleTypeResolver.Resolve(securityRule);
 
-        var defaultFactory = serviceProvider.GetRequiredService(typeof(IEnumerable<>).MakeGenericType(injectorType));
+        var injectorType = typeof(ISecurityProviderInjector<,>).MakeGenericType(typeof(TDomainObject), securityRuleType);
+
+        var defaultFactory = serviceProvider.GetRequiredService(
+            typeof(IDefaultSecurityProviderFactory<,>).MakeGenericType(injectorType, securityRuleType));
 
         var injectors = serviceProvider.GetRequiredService(typeof(IEnumerable<>).MakeGenericType(injectorType));
 

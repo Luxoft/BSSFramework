@@ -7,7 +7,7 @@ namespace Framework.SecuritySystem.ProviderFactories;
 
 public class CurrentUserSecurityProviderFactory<TDomainObject>(
     IServiceProvider serviceProvider)
-    : ISecurityProviderFactory<TDomainObject, DomainSecurityRule.CurrentUserSecurityRule>
+    : IDefaultSecurityProviderFactory<TDomainObject, DomainSecurityRule.CurrentUserSecurityRule>
 {
     public ISecurityProvider<TDomainObject> Create(DomainSecurityRule.CurrentUserSecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
     {

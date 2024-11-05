@@ -6,8 +6,10 @@ public abstract class
     DependencyBaseSecurityProviderFactory<TDomainObject, TBaseDomainObject>(
     ISecurityModeExpander securityRuleExpander,
     IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
-    : ISecurityProviderFactory<TDomainObject, SecurityRule>
+    : IDefaultSecurityProviderFactory<TDomainObject, SecurityRule>
 {
+    public bool AllowOptimize { get; } = false;
+
     public ISecurityProvider<TDomainObject> Create(SecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
     {
         return this.CreateDependencySecurityProvider(baseDomainSecurityService.GetSecurityProvider(this.GetActualSecurityRule(securityRule)));
@@ -16,7 +18,7 @@ public abstract class
     public SecurityRule GetActualSecurityRule(SecurityRule securityRule)
     {
         if (securityRule is SecurityRule.ModeSecurityRule modeSecurityRule
-            && securityRuleExpander.TryExpand(modeSecurityRule.ToDomain<TDomainObject>()) is { } customSecurityRule)
+            && securityRuleExpander.TryExpand<TDomainObject>(modeSecurityRule) is { } customSecurityRule)
         {
             return customSecurityRule;
         }

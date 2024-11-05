@@ -15,7 +15,7 @@ public class UntypedDependencySecurityProviderFactory<TDomainObject, TBaseDomain
     protected override ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider)
     {
         return new UntypedDependencySecurityProvider<TDomainObject, TBaseDomainObject>(
-        baseProvider,
-        queryableSource);
+            baseProvider,
+            queryableSource);
     }
 }

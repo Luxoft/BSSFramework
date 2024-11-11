@@ -41,11 +41,6 @@ public interface IDomainSecurityServiceBuilder<TDomainObject>
     IDomainSecurityServiceBuilder<TDomainObject> SetCustomService<TDomainSecurityService>()
         where TDomainSecurityService : IDomainSecurityService<TDomainObject>;
 
-    IDomainSecurityServiceBuilder<TDomainObject> Override<TSecurityFunctor>()
+    IDomainSecurityServiceBuilder<TDomainObject> AddInjector<TSecurityFunctor>()
         where TSecurityFunctor : ISecurityProviderInjector<TDomainObject>;
-}
-
-public interface IDomainSecurityServiceBuilder
-{
-    void Register(IServiceCollection services);
 }

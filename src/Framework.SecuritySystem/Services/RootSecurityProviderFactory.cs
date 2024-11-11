@@ -11,13 +11,13 @@ using Framework.SecuritySystem.Expanders;
 
 namespace Framework.SecuritySystem.Services;
 
-public class DomainSecurityProviderFactory<TDomainObject, TSecurityRule>(
+public class RootSecurityProviderFactory<TDomainObject, TSecurityRule>(
     ISecurityRuleDeepOptimizer deepOptimizer,
     IDefaultSecurityProviderFactory<TDomainObject, TSecurityRule> defaultSecurityProviderFactory,
     IEnumerable<ISecurityProviderInjector<TDomainObject, TSecurityRule>> injectors) : ISecurityProviderFactory<TDomainObject, TSecurityRule>
     where TSecurityRule : DomainSecurityRule
 {
-    public ISecurityProvider<TDomainObject> Create(TSecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
+    public ISecurityProvider<TDomainObject> Create(TSecurityRule securityRule, SecurityPath<TDomainObject>? securityPath)
     {
         var optimizeSettings = defaultSecurityProviderFactory.AllowOptimize
                                    ? new SecurityRuleExpandSettings(injectors.Select(injector => injector.SecurityRuleType))
@@ -29,12 +29,12 @@ public class DomainSecurityProviderFactory<TDomainObject, TSecurityRule>(
     }
 }
 
-public class DomainSecurityProviderFactory<TDomainObject>(
+public class RootSecurityProviderFactory<TDomainObject>(
     IServiceProvider serviceProvider,
     ISecurityRuleTypeResolver securityRuleTypeResolver,
-    ISecurityRuleDeepOptimizer deepOptimizer) : IDomainSecurityProviderFactory<TDomainObject>
+    ISecurityRuleDeepOptimizer deepOptimizer) : IRootSecurityProviderFactory<TDomainObject>
 {
-    public ISecurityProvider<TDomainObject> Create(SecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
+    public ISecurityProvider<TDomainObject> Create(SecurityRule securityRule, SecurityPath<TDomainObject>? securityPath)
     {
         var securityRuleType = securityRuleTypeResolver.Resolve(securityRule);
 

@@ -9,7 +9,7 @@ public class CurrentUserSecurityProviderFactory<TDomainObject>(
     IServiceProvider serviceProvider)
     : IDefaultSecurityProviderFactory<TDomainObject, DomainSecurityRule.CurrentUserSecurityRule>
 {
-    public ISecurityProvider<TDomainObject> Create(DomainSecurityRule.CurrentUserSecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
+    public ISecurityProvider<TDomainObject> Create(DomainSecurityRule.CurrentUserSecurityRule securityRule, SecurityPath<TDomainObject>? securityPath)
     {
         var args = new object?[]
             {

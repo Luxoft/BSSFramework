@@ -9,4 +9,9 @@ public static class SecurityModeExpanderExtensions
                    nameof(securityRule),
                    $"{nameof(SecurityRule)} with mode '{securityRule}' not found for type '{securityRule.DomainType.Name}'");
     }
+
+    public static DomainSecurityRule? TryExpand<TDomainObject>(this ISecurityModeExpander expander, SecurityRule.ModeSecurityRule securityRule)
+    {
+        return expander.TryExpand(securityRule.ToDomain<TDomainObject>());
+    }
 }

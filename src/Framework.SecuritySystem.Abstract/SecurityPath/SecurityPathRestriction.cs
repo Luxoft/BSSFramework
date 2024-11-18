@@ -22,7 +22,9 @@ public record SecurityPathRestriction(
 
     public IEnumerable<Type>? SecurityContextTypes => this.SecurityContextRestrictions?.Select(v => v.Type);
 
-    public static SecurityPathRestriction Empty { get; } = new(null, Array.Empty<Type>(), []);
+    public static SecurityPathRestriction Disabled { get; } = new(null, Array.Empty<Type>(), []);
+
+    public static SecurityPathRestriction Empty { get; } = new([], Array.Empty<Type>(), []);
 
     public SecurityPathRestriction Add<TSecurityContext>(bool required = false, string? key = null)
         where TSecurityContext : ISecurityContext =>
@@ -43,8 +45,8 @@ public record SecurityPathRestriction(
         new(this.SecurityContextRestrictions, this.ConditionFactoryTypes.Concat([conditionFactoryType]), this.RelativeConditions);
 
     public static SecurityPathRestriction Create<TSecurityContext>(bool required = false, string? key = null)
-        where TSecurityContext : ISecurityContext => Empty.Add<TSecurityContext>(required, key);
+        where TSecurityContext : ISecurityContext => Disabled.Add<TSecurityContext>(required, key);
 
     public static SecurityPathRestriction Create<TDomainObject>(Expression<Func<TDomainObject, bool>> condition) =>
-        Empty.AddRelativeCondition(condition);
+        Disabled.AddRelativeCondition(condition);
 }

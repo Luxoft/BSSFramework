@@ -12,6 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -76,7 +77,7 @@ public class AuthPerformanceTest : TestBase
 
                       from employee in this.employeeSource
 
-                      select (TestPermission)new SampleSystemTestPermission(SecurityRole.Administrator, fbu, mbu, location, employee);
+                      select (TestPermission)new SampleSystemTestPermission(SampleSystemSecurityRole.TestPerformance, fbu, mbu, location, employee);
 
         this.AuthHelper.SetUserRole(PrincipalName, request.ToArray());
     }

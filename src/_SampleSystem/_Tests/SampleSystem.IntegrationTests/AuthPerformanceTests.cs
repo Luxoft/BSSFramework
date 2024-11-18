@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBase;
@@ -59,7 +60,7 @@ public class AuthPerformanceTests : TestBase
 
                                                 var testPrincipal = new Principal { Name = TestUser };
 
-                                                var adminRole = ctx.Authorization.Logics.BusinessRole.GetByName(SecurityRole.Administrator.Name);
+                                                var adminRole = ctx.Authorization.Logics.BusinessRole.GetByName(SampleSystemSecurityRole.TestPerformance.Name);
 
                                                 foreach (var genObjectSubEnumerable in genObjects.Split(SplitBy))
                                                 {

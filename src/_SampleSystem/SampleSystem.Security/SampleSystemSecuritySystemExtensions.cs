@@ -88,6 +88,10 @@ public static class SampleSystemSecuritySystemExtensions
                    new SecurityRoleInfo(new Guid("{649DE6F3-A943-46A3-9E81-AA056D24B52D}")) { IsVirtual = true, })
 
                .AddSecurityRole(
+                   SampleSystemSecurityRole.TestPerformance,
+                   new SecurityRoleInfo(new Guid("{B1A5B1B6-F92D-4367-B7EC-200179E80308}")))
+
+               .AddSecurityRole(
                    SampleSystemSecurityRole.PermissionAdministrator,
                    new SecurityRoleInfo(new Guid("{1E101597-E722-4650-BED1-5A1025540897}")))
 

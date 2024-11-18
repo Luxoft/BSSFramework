@@ -108,7 +108,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
                             .SetPath(SecurityPath<TestRootSecurityObj>.Create(v => v.BusinessUnit).And(v => v.Location)))
 
                   .Add<TestPerformanceObject>(
-                      b => b.SetView(SampleSystemSecurityOperation.EmployeeView)
+                      b => b.SetView(SampleSystemSecurityRole.TestPerformance)
                             .SetPath(
                                 SecurityPath<TestPerformanceObject>.Create(v => v.Location, SingleSecurityMode.Strictly)
                                                                    .And(v => v.Employee, SingleSecurityMode.Strictly)
@@ -123,7 +123,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
                                                                       SecurityPath<TestItemAuthObject>.Create(i => i.BusinessUnit).And(i => i.ManagementUnit)))))
 
                   .Add<AuthPerformanceObject>(
-                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView)
+                      b => b.SetView(SampleSystemSecurityRole.TestPerformance)
                             .SetPath(
                                 SecurityPath<AuthPerformanceObject>.Create(v => v.BusinessUnit)
                                                                    .And(v => v.ManagementUnit)

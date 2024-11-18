@@ -17,7 +17,11 @@ public class InitializedSecurityRoleSource(IEnumerable<PreInitializerFullSecurit
 
             var otherRoles = securityRoles.Select(sr => sr.FullSecurityRole).Except(this.ExceptChildren);
 
-            var newInfo = securityRole.Information with { Children = info.Children.Concat(otherRoles).Distinct().ToList() };
+            var newInfo = securityRole.Information with
+                          {
+                              Children = info.Children.Concat(otherRoles).Distinct().ToList(),
+                              Restriction = SecurityPathRestriction.Empty
+                          };
 
             return new FullSecurityRole(securityRole.Name, newInfo);
         }

@@ -25,4 +25,6 @@ public static class SampleSystemSecurityRole
     public static SecurityRole TestVirtualRole2 { get; } = new(nameof(TestVirtualRole2));
 
     public static SecurityRole PermissionAdministrator { get; } = new(nameof(PermissionAdministrator));
+
+    public static SecurityRole TestPerformance { get; } = new(nameof(TestPerformance));
 }

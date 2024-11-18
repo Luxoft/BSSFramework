@@ -122,7 +122,7 @@ public class BusinessUnitTests : TestBase
 
         var userId = this.AuthHelper.SetUserRole(
             TextRandomizer.RandomString(10),
-            new SampleSystemTestPermission(SecurityRole.Administrator, childBu));
+            new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, childBu));
 
         // Act
         var result = this.Evaluate(

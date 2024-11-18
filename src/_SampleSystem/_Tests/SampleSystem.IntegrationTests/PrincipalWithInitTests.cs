@@ -6,12 +6,12 @@ using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -49,7 +49,7 @@ public class PrincipalWithInitTests : TestBase
         this.AuthHelper.SetUserRole(
             TestPrincipalName,
             new SampleSystemTestPermission(
-                SecurityRole.Administrator,
+                SampleSystemSecurityRole.TestPerformance,
                 new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = this.testPeriod });
     }
 
@@ -57,7 +57,7 @@ public class PrincipalWithInitTests : TestBase
     public void CreateDuplicatePermission_ValidationError()
     {
         // Arrange
-        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions: (Role: {SecurityRole.Administrator} | Period: {this.testPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
+        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions: (Role: {SampleSystemSecurityRole.TestPerformance} | Period: {this.testPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
 
         // Act
         var call = () =>

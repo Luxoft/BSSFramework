@@ -102,7 +102,7 @@ public class SecurityPathTests : TestBase
 
         var testSecurityPath = baseSecurityPath.And(altSecurityPath);
 
-        var restriction = SecurityPathRestriction.Empty;
+        var restriction = SecurityPathRestriction.Disabled;
 
         //Act
         var result = service.ApplyRestriction(testSecurityPath, restriction);

@@ -31,7 +31,8 @@ public static class SampleSystemSecuritySystemExtensions
                    SampleSystemSecurityRole.SeManager,
                    new SecurityRoleInfo(new Guid("dbf3556d-7106-4175-b5e4-a32d00bd857a"))
                    {
-                       Children = [SampleSystemSecurityRole.TestVirtualRole]
+                       Children = [SampleSystemSecurityRole.TestVirtualRole],
+                       Operations = [SampleSystemSecurityOperation.BusinessUnitEdit]
                    })
 
                .AddSecurityRole(

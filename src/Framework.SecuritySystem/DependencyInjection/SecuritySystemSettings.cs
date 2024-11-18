@@ -29,7 +29,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     private Type? securityAccessorInfinityStorageType;
 
-    public bool InitializeAdministratorRole { get; set; } = true;
+    public bool InitializeDefaultRoles { get; set; } = true;
 
     public ISecuritySystemSettings AddSecurityContext<TSecurityContext>(
         Guid ident,
@@ -192,7 +192,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         this.registerUserSourceAction(services);
         this.registerRunAsManagerAction(services);
 
-        if (this.InitializeAdministratorRole)
+        if (this.InitializeDefaultRoles)
         {
             services.AddSingleton<IInitializedSecurityRoleSource, InitializedSecurityRoleSource>();
             services.AddSingletonFrom((IInitializedSecurityRoleSource source) => source.GetSecurityRoles());
@@ -217,7 +217,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     private void AddSecurityRole(IServiceCollection serviceCollection, FullSecurityRole fullSecurityRole)
     {
-        if (this.InitializeAdministratorRole)
+        if (this.InitializeDefaultRoles)
         {
             serviceCollection.AddSingleton(new PreInitializerFullSecurityRole(fullSecurityRole));
         }

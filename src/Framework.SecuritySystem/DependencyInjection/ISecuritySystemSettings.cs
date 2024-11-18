@@ -11,7 +11,7 @@ namespace Framework.SecuritySystem.DependencyInjection;
 
 public interface ISecuritySystemSettings
 {
-    bool InitializeAdministratorRole { get; set; }
+    bool InitializeDefaultRoles { get; set; }
 
     ISecuritySystemSettings AddSecurityContext<TSecurityContext>(
         Guid ident,

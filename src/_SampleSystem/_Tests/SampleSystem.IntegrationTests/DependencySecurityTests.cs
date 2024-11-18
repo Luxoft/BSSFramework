@@ -3,8 +3,6 @@ using Automation.ServiceEnvironment;
 
 using FluentAssertions;
 
-using Framework.SecuritySystem;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;

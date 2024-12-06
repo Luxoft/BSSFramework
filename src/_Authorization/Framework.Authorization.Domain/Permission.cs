@@ -14,6 +14,7 @@ namespace Framework.Authorization.Domain;
 /// Пермиссии могут выдаваться в рамках контекстов
 /// </remarks>
 /// <seealso cref="SecurityContextType"/>
+[IgnoreHbmMapping]
 [System.Diagnostics.DebuggerDisplay("Principal={Principal.Name}, Role={Role.Name}")]
 public class Permission : AuditPersistentDomainObjectBase,
 

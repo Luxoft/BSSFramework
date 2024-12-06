@@ -7,6 +7,7 @@ namespace Framework.Configuration.Domain;
 /// Сообщение, отправленное пользователю
 /// </summary>
 [NotAuditedClass]
+[IgnoreHbmMapping]
 public class SentMessage : AuditPersistentDomainObjectBase
 {
     private readonly string from;

@@ -10,6 +10,7 @@ namespace Framework.Configuration.Domain;
 /// Описание доменного типа целевой системы
 /// </summary>
 [NotAuditedClass]
+[IgnoreHbmMapping]
 public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDetail<TargetSystem>, IMaster<DomainTypeEventOperation>, IDomainType
 {
     private readonly ICollection<DomainTypeEventOperation> eventOperations = new List<DomainTypeEventOperation>();

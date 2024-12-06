@@ -13,6 +13,7 @@ namespace Framework.Configuration.Domain;
 /// Механизм Framework-а сохраняет все ошибки по всем системам, записывает их в базу и высылает на почту
 /// </remarks>
 [NotAuditedClass]
+[IgnoreHbmMapping]
 public class ExceptionMessage : AuditPersistentDomainObjectBase
 {
     private ExceptionMessage innerException;

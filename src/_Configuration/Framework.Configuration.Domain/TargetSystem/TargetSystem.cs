@@ -13,6 +13,7 @@ namespace Framework.Configuration.Domain;
 /// </remarks>
 [UniqueGroup]
 [NotAuditedClass]
+[IgnoreHbmMapping]
 public class TargetSystem : BaseDirectory, IMaster<DomainType>
 {
     private readonly ICollection<DomainType> domainTypes = new List<DomainType>();

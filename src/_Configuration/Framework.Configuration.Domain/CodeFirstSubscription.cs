@@ -13,6 +13,7 @@ namespace Framework.Configuration.Domain;
 /// <seealso cref="DomainObjectBase" />
 [UniqueGroup]
 [NotAuditedClass]
+[IgnoreHbmMapping]
 public class CodeFirstSubscription : AuditPersistentDomainObjectBase, ICodeObject<string>
 {
     private readonly string code;

@@ -8,6 +8,7 @@ namespace Framework.Configuration.Domain;
 ///  Операция доменного типа
 /// </summary>
 [NotAuditedClass]
+[IgnoreHbmMapping]
 public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
 {
     private readonly DomainType domainType;

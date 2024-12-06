@@ -1,6 +1,7 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Authorization.Domain;
@@ -9,6 +10,7 @@ namespace Framework.Authorization.Domain;
 /// Набор секьюрных операций, который выдается принципалу вместе с контекcтом их применения
 /// </summary>
 [UniqueGroup]
+[IgnoreHbmMapping]
 public class BusinessRole : BaseDirectory
 {
     private readonly ICollection<Permission> permissions = new List<Permission>();

@@ -2,14 +2,12 @@
 using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.AvailableSecurity;
 
 using Microsoft.AspNetCore.Mvc;
 
 namespace SampleSystem.WebApiCore.Controllers;
 
-public class AuthSLJsonController(IAvailableSecurityOperationSource availableSecurityOperationSource)
-    : Framework.Authorization.WebApi.AuthSLJsonController(availableSecurityOperationSource)
+public class AuthSLJsonController : Framework.Authorization.WebApi.AuthSLJsonController
 {
     [HttpPost]
     public PermissionIdentityDTO SavePermission(SavePermissionAutoRequest savePermissionAutoRequest)

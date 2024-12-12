@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 using Framework.Core;
@@ -43,7 +44,13 @@ public class LambdaExpression : Expression
 
     public Type ExtractTargetType<TDomainObject>()
     {
-        return this.ExtractPropertyPath(this.Body).Reverse().Aggregate(typeof(TDomainObject), (currentType, property) => currentType.GetMemberType(property.PropertyName, true));
+        return this.ExtractPropertyPath(this.Body)
+                   .Reverse()
+                   .Aggregate(
+                       (SExpressions.Expression)SExpressions.Expression.Parameter(typeof(TDomainObject)),
+                       (currentExpr, property) =>
+                           SExpressions.Expression.PropertyOrField(currentExpr, property.PropertyName))
+                   .Type;
     }
 
     private IEnumerable<PropertyExpression> ExtractPropertyPath(Expression currentNode)

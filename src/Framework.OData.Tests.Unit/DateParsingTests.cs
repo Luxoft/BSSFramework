@@ -47,7 +47,7 @@ public class DateParsingTests
     public void NotNullableDate__Month_Equal_Value_ElementFounded()
     {
         // Arrange
-        var query = "$top=70&$filter=month(StartDateNotNull) eq 9";
+        var query = "$top=70&$filter=month(startDateNotNull) eq 9&$orderby=startDateNotNull";
 
         // Act
         var res = this.ParseAndProcess(query);

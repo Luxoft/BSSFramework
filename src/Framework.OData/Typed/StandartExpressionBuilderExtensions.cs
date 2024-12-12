@@ -28,13 +28,13 @@ public static class StandartExpressionBuilderExtensions
         if (expressionBuilder == null) throw new ArgumentNullException(nameof(expressionBuilder));
         if (selectOperation == null) throw new ArgumentNullException(nameof(selectOperation));
 
-        var projectionSelectOperaton = expressionBuilder.ToTyped<TProjection>(selectOperation);
+        var projectionSelectOperation = expressionBuilder.ToTyped<TProjection>(selectOperation);
 
-        var baseSelectOperaton = projectionSelectOperaton.Covariance<TDomainObject>();
+        var baseSelectOperation = projectionSelectOperation.Covariance<TDomainObject>();
 
-        var standartSelectOperaton = baseSelectOperaton.Visit(new ExpandProjectionVisitor(typeof(TProjection)));
+        var standartSelectOperation = baseSelectOperation.Visit(new ExpandProjectionVisitor(typeof(TProjection)));
 
-        return standartSelectOperaton;
+        return standartSelectOperation;
     }
 
 
@@ -60,20 +60,20 @@ public static class StandartExpressionBuilderExtensions
 
 public sealed class ExpandProjectionVisitor : ExpressionVisitor
 {
-    private readonly Type _projectionType;
+    private readonly Type projectionType;
 
 
     public ExpandProjectionVisitor(Type projectionType)
     {
         if (projectionType == null) throw new ArgumentNullException(nameof(projectionType));
 
-        this._projectionType = projectionType;
+        this.projectionType = projectionType;
     }
 
 
     public override Expression Visit(Expression node)
     {
-        var accumVisitor = this._projectionType.GetReferencedTypes(property => property.PropertyType.IsInterface)
+        var accumVisitor = this.projectionType.GetReferencedTypes(property => property.PropertyType.IsInterface)
                                .Select(refType => new OverrideCallInterfacePropertiesVisitor(refType))
                                .Concat(new ExpressionVisitor[] { ExpandPathVisitor.Value, ExpandExplicitPropertyVisitor.Value, OverrideCallInterfaceGenericMethodVisitor.Value })
                                .ToCyclic();

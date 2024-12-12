@@ -8,20 +8,20 @@ namespace Framework.OData;
 
 internal class SelectOperationInternalParser : CharParsers
 {
-    private readonly NumberFormatInfo _numberFormatInfo;
+    private readonly NumberFormatInfo numberFormatInfo;
 
-    private readonly ParameterExpression _rootParameter = ParameterExpression.Default;
+    private readonly ParameterExpression rootParameter = ParameterExpression.Default;
 
-    private readonly LambdaExpressionInternalParser _rootLambdaExpressionParser;
+    private readonly LambdaExpressionInternalParser rootLambdaExpressionParser;
 
 
     public SelectOperationInternalParser(NumberFormatInfo numberFormatInfo)
     {
         if (numberFormatInfo == null) throw new ArgumentNullException(nameof(numberFormatInfo));
 
-        this._numberFormatInfo = numberFormatInfo;
+        this.numberFormatInfo = numberFormatInfo;
 
-        this._rootLambdaExpressionParser = new LambdaExpressionInternalParser(this._numberFormatInfo, this._rootParameter, this._rootParameter, new [] { this._rootParameter }.ToReadOnlyCollection());
+        this.rootLambdaExpressionParser = new LambdaExpressionInternalParser(this.numberFormatInfo, this.rootParameter, this.rootParameter, new [] { this.rootParameter }.ToReadOnlyCollection());
     }
 
 
@@ -29,7 +29,7 @@ internal class SelectOperationInternalParser : CharParsers
     {
         if (body == null) throw new ArgumentNullException(nameof(body));
 
-        return new LambdaExpression(body, new[] { this._rootParameter });
+        return new LambdaExpression(body, new[] { this.rootParameter });
     }
 
 
@@ -88,7 +88,7 @@ internal class SelectOperationInternalParser : CharParsers
 
     private Parser<string, Expression> RootBodyParser
     {
-        get { return this._rootLambdaExpressionParser.RootBodyParser; }
+        get { return this.rootLambdaExpressionParser.RootBodyParser; }
     }
 
     private Parser<string, LambdaExpression> FilterParser
@@ -120,7 +120,7 @@ internal class SelectOperationInternalParser : CharParsers
 
     private Parser<string, IEnumerable<LambdaExpression>> SelectsParser
     {
-        get { return this.SepBy1(this._rootLambdaExpressionParser.PropertyPathParser.Select(this.CreateRootLambda), ','); }
+        get { return this.SepBy1(this.rootLambdaExpressionParser.PropertyPathParser.Select(this.CreateRootLambda), ','); }
     }
 
     private Parser<string, LambdaExpression> RootLambdaExpressionParser

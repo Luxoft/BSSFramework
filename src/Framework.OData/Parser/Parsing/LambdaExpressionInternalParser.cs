@@ -16,10 +16,10 @@ internal class LambdaExpressionInternalParser : CharParsers
     private const char EscapeChar = (char)27;
     private const string PostEscapeChars = "'";
 
-    private readonly NumberFormatInfo _numberFormatInfo;
-    private readonly ParameterExpression _rootParameter;
-    private readonly ParameterExpression _currentParameter;
-    private readonly ReadOnlyCollection<ParameterExpression> _usedParameters;
+    private readonly NumberFormatInfo numberFormatInfo;
+    private readonly ParameterExpression rootParameter;
+    private readonly ParameterExpression currentParameter;
+    private readonly ReadOnlyCollection<ParameterExpression> usedParameters;
 
 
     public LambdaExpressionInternalParser(NumberFormatInfo numberFormatInfo, ParameterExpression rootParameter, ParameterExpression currentParameter, ReadOnlyCollection<ParameterExpression> usedParameters)
@@ -29,10 +29,10 @@ internal class LambdaExpressionInternalParser : CharParsers
         if (currentParameter == null) throw new ArgumentNullException(nameof(currentParameter));
         if (usedParameters == null) throw new ArgumentNullException(nameof(usedParameters));
 
-        this._numberFormatInfo = numberFormatInfo;
-        this._rootParameter = rootParameter;
-        this._currentParameter = currentParameter;
-        this._usedParameters = usedParameters;
+        this.numberFormatInfo = numberFormatInfo;
+        this.rootParameter = rootParameter;
+        this.currentParameter = currentParameter;
+        this.usedParameters = usedParameters;
     }
 
 
@@ -63,7 +63,7 @@ internal class LambdaExpressionInternalParser : CharParsers
 
     private LambdaExpressionInternalParser GetSubParser(ParameterExpression subParameter)
     {
-        return new LambdaExpressionInternalParser(this._numberFormatInfo, this._rootParameter, subParameter, this._usedParameters.Concat(new[] { subParameter }).ToReadOnlyCollection());
+        return new LambdaExpressionInternalParser(this.numberFormatInfo, this.rootParameter, subParameter, this.usedParameters.Concat(new[] { subParameter }).ToReadOnlyCollection());
     }
 
 
@@ -339,7 +339,7 @@ internal class LambdaExpressionInternalParser : CharParsers
 
             return from properties in this.SepBy(propWithAlias.Or(propWithoutAlias), '/')
 
-                   select properties.Aggregate((Expression)this._currentParameter, (source, propertyPair) =>
+                   select properties.Aggregate((Expression)this.currentParameter, (source, propertyPair) =>
 
                                                                                            propertyPair.Alias == null ? new PropertyExpression(source, propertyPair.PropertyName)
                                                                                                    : new SelectExpression(source, propertyPair.PropertyName, propertyPair.Alias));
@@ -368,17 +368,17 @@ internal class LambdaExpressionInternalParser : CharParsers
     {
         get
         {
-            return this.StringIgnoreCase("it").Or(() => this.StringIgnoreCase("this")).Select(_ => Tuple.Create(this._currentParameter, true))
+            return this.StringIgnoreCase("it").Or(() => this.StringIgnoreCase("this")).Select(_ => Tuple.Create(this.currentParameter, true))
 
                        .Or(() => from startElementName in this.PreSpaces(this.Variable)
 
                                  let startElementParameter = new ParameterExpression(startElementName)
 
-                                 where this._usedParameters.Contains(startElementParameter)
+                                 where this.usedParameters.Contains(startElementParameter)
 
                                  select Tuple.Create(startElementParameter, true))
 
-                       .Or(() => this.Return(Tuple.Create(this._currentParameter, false)));
+                       .Or(() => this.Return(Tuple.Create(this.currentParameter, false)));
         }
     }
 
@@ -521,7 +521,7 @@ internal class LambdaExpressionInternalParser : CharParsers
 
                     let parameter = new ParameterExpression(name)
 
-                    where !this._usedParameters.Contains(parameter)
+                    where !this.usedParameters.Contains(parameter)
 
                     select parameter;
 

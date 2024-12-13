@@ -14,13 +14,13 @@ public class WebApiExceptionExpander(IExceptionExpander exceptionExpander) : IWe
 
         return this.IsHandledException(exception)
                        ? exception
-                       : this.GetInternalServerException();
+                       : this.GetInternalServerException(exception);
     }
 
     /// <summary>
     ///     Get Internal Server Exception
     /// </summary>
-    protected virtual Exception GetInternalServerException() => new(InternalServerException.DefaultMessage);
+    protected virtual Exception GetInternalServerException(Exception exception) => new InternalServerException(InternalServerException.DefaultMessage, exception);
 
     /// <summary>
     ///     Is Handled Exception

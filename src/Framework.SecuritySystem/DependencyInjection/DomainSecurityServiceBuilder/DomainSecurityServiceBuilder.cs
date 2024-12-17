@@ -2,23 +2,24 @@
 
 using Framework.Core;
 using Framework.Persistent;
+using Framework.SecuritySystem.ProviderFactories;
 using Framework.SecuritySystem.SecurityRuleInfo;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
-public abstract class DomainSecurityServiceBuilder : IDomainSecurityServiceBuilder
+public abstract class DomainSecurityServiceBuilder
 {
     public abstract Type DomainType { get; }
 
-    public abstract void Register(IServiceCollection services);
+    public abstract void Register(IServiceCollection services, bool addSelfRelativePath);
 }
 
 internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServiceBuilder, IDomainSecurityServiceBuilder<TDomainObject>
     where TDomainObject : IIdentityObject<Guid>
 {
-    private readonly List<Type> functorTypes = [];
+    private readonly List<Type> injectorTypes = [];
 
     private readonly Dictionary<SecurityRule.ModeSecurityRule, DomainSecurityRule> domainObjectSecurityDict = [];
 
@@ -28,11 +29,11 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
 
     private Type? customServiceType;
 
-    private Type? dependencyServiceType;
+    private Type? dependencyInjectorType;
 
     public override Type DomainType { get; } = typeof(TDomainObject);
 
-    public override void Register(IServiceCollection services)
+    public override void Register(IServiceCollection services, bool addSelfRelativePath)
     {
         foreach (var (modeSecurityRule, implementedSecurityRule) in this.domainObjectSecurityDict)
         {
@@ -49,50 +50,12 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
             services.AddSingleton(pair.Type, pair.Instance);
         }
 
-        foreach (var (decl, impl) in this.GetRegisterDomainSecurityService())
+        if (addSelfRelativePath)
         {
-            if (decl == null)
-            {
-                services.AddScoped(impl);
-            }
-            else
-            {
-                services.AddScoped(decl, impl);
-            }
+            services.AddSingleton<IRelativeDomainPathInfo<TDomainObject, TDomainObject>, SelfRelativeDomainPathInfo<TDomainObject>>();
         }
-    }
 
-    private IEnumerable<(Type? Decl, Type Impl)> GetRegisterDomainSecurityService()
-    {
-        var baseServiceType = typeof(IDomainSecurityService<TDomainObject>);
-
-        var actualCustomServiceType = this.customServiceType ?? this.dependencyServiceType;
-
-        var functorTypeDecl = typeof(IOverrideSecurityProviderFunctor<TDomainObject>);
-
-        var realFunctorTypes = this.functorTypes.Where(f => f.HasInterfaceMethodOverride(functorTypeDecl)).ToList();
-
-        if (realFunctorTypes.Any())
-        {
-            foreach (var functorType in realFunctorTypes)
-            {
-                yield return (functorTypeDecl, functorType);
-            }
-
-            var withFunctorActualCustomServiceType = actualCustomServiceType ?? typeof(ContextDomainSecurityService<TDomainObject>);
-
-            yield return (null, withFunctorActualCustomServiceType);
-
-            var withWrappedFunctorServiceType = typeof(DomainSecurityServiceWithFunctor<,>).MakeGenericType(
-                withFunctorActualCustomServiceType,
-                typeof(TDomainObject));
-
-            yield return (baseServiceType, withWrappedFunctorServiceType);
-        }
-        else if (actualCustomServiceType != null)
-        {
-            yield return (baseServiceType, actualCustomServiceType);
-        }
+        services.AddScoped(typeof(IDomainSecurityService<TDomainObject>), this.customServiceType ?? typeof(DomainSecurityService<TDomainObject>));
     }
 
     public IDomainSecurityServiceBuilder<TDomainObject> SetMode(SecurityRule.ModeSecurityRule modeSecurityRule, DomainSecurityRule implementedSecurityRule)
@@ -111,6 +74,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
 
     public IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>()
     {
+        this.dependencyInjectorType =
         this.dependencyServiceType = typeof(DependencyDomainSecurityService<TDomainObject, TSource>);
 
         return this;
@@ -142,8 +106,8 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
         return this;
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject> Override<TSecurityFunctor>()
-        where TSecurityFunctor : IOverrideSecurityProviderFunctor<TDomainObject>
+    public IDomainSecurityServiceBuilder<TDomainObject> AddInjector<TSecurityFunctor>()
+        where TSecurityFunctor : ISecurityProviderInjector<TDomainObject>
     {
         this.functorTypes.Add(typeof(TSecurityFunctor));
 

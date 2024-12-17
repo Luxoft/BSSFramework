@@ -9,7 +9,7 @@ public class SecurityRuleDeepOptimizer : ISecurityRuleDeepOptimizer
 
     private readonly ISecurityRuleBasicOptimizer basicOptimizer;
 
-    private readonly IDictionaryCache<DomainSecurityRule, DomainSecurityRule> cache;
+    private readonly IDictionaryCache<(DomainSecurityRule, SecurityRuleExpandSettings?), DomainSecurityRule> cache;
 
     public SecurityRuleDeepOptimizer(
         ISecurityRuleExpander expander,
@@ -17,16 +17,16 @@ public class SecurityRuleDeepOptimizer : ISecurityRuleDeepOptimizer
     {
         this.expander = expander;
         this.basicOptimizer = basicOptimizer;
-        this.cache = new DictionaryCache<DomainSecurityRule, DomainSecurityRule>(this.Visit).WithLock();
+        this.cache = new DictionaryCache<(DomainSecurityRule, SecurityRuleExpandSettings?), DomainSecurityRule>(pair => this.Visit(pair.Item1, pair.Item2)).WithLock();
     }
 
-    protected virtual DomainSecurityRule Visit(DomainSecurityRule baseSecurityRule)
+    protected virtual DomainSecurityRule Visit(DomainSecurityRule baseSecurityRule, SecurityRuleExpandSettings? settings)
     {
-        var visitedRule = this.basicOptimizer.Optimize(this.expander.FullDomainExpand(baseSecurityRule));
+        var visitedRule = this.basicOptimizer.Optimize(this.expander.FullDomainExpand(baseSecurityRule, settings));
 
-        return visitedRule == baseSecurityRule ? visitedRule : this.Visit(visitedRule);
+        return visitedRule == baseSecurityRule ? visitedRule : this.Visit(visitedRule, settings);
     }
 
-    DomainSecurityRule ISecurityRuleDeepOptimizer.Optimize(DomainSecurityRule securityRule) =>
-        this.cache[securityRule];
+    DomainSecurityRule ISecurityRuleDeepOptimizer.Optimize(DomainSecurityRule securityRule, SecurityRuleExpandSettings? settings) =>
+        this.cache[(securityRule, settings)];
 }

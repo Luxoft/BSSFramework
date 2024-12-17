@@ -1,6 +1,13 @@
-﻿namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+﻿using Framework.SecuritySystem.ProviderFactories;
 
-public interface IDomainSecurityServiceMetadata<TDomainObject> : IDomainSecurityServiceMetadata, IOverrideSecurityProviderFunctor<TDomainObject>
+namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+
+public interface IDomainSecurityServiceMetadata<TDomainObject> :
+    IDomainSecurityServiceMetadata,
+    ISecurityProviderInjector<TDomainObject, SecurityRule.ModeSecurityRule>,
+    ISecurityProviderInjector<TDomainObject, DomainSecurityRule.OperationSecurityRule>,
+    ISecurityProviderInjector<TDomainObject, DomainSecurityRule.NonExpandedRolesSecurityRule>,
+    ISecurityProviderInjector<TDomainObject, DomainSecurityRule.ExpandedRolesSecurityRule>
 {
     static Type IDomainSecurityServiceMetadata.DomainType { get; } = typeof(TDomainObject);
 

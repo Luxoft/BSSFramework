@@ -9,5 +9,5 @@ public interface ISecurityRuleExpander : ISecurityModeExpander,
 {
     DomainSecurityRule.ExpandedRolesSecurityRule FullRoleExpand(DomainSecurityRule.RoleBaseSecurityRule securityRule);
 
-    DomainSecurityRule FullDomainExpand(DomainSecurityRule securityRule);
+    DomainSecurityRule FullDomainExpand(DomainSecurityRule securityRule, SecurityRuleExpandSettings? settings = null);
 }

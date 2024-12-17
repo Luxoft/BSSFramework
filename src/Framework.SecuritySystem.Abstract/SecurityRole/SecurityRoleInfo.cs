@@ -6,7 +6,7 @@ public record SecurityRoleInfo(Guid Id)
 {
     public HierarchicalExpandType? CustomExpandType { get; init; } = null;
 
-    public SecurityPathRestriction Restriction { get; init; } = SecurityPathRestriction.Empty;
+    public SecurityPathRestriction Restriction { get; init; } = SecurityPathRestriction.Disabled;
 
     public IReadOnlyList<SecurityOperation> Operations { get; init; } = [];
 

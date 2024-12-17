@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 
 using Framework.Core;
-using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -50,7 +49,7 @@ public class EmployeeProjectionTests : TestBase
         this.AuthHelper.SetUserRole(
             ProjectionPrincipalName,
             new SampleSystemTestPermission(
-                SecurityRole.Administrator,
+                SampleSystemSecurityRole.SeManager,
                 new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
 
         this.AuthHelper.SetUserRole(TestEmployee1Login, SampleSystemSecurityRole.TestRole1);

@@ -28,18 +28,11 @@ public class SelectOperationResult<T> : ISelectOperationResult<T>
     [DataMember]
     public int TotalCount { get; private set; }
 
-    [IgnoreDataMember]
-    public Type ElementType
-    {
-        get { return typeof(T); }
-    }
-
     #region ISelectOperationResult Members
 
-    IEnumerable<T> ISelectOperationResult<T>.Items
-    {
-        get { return this.Items; }
-    }
+    Type ISelectOperationResult.ElementType { get; } = typeof(T);
+
+    IEnumerable<T> ISelectOperationResult<T>.Items => this.Items;
 
     #endregion
 }

@@ -7,7 +7,7 @@ public class InitializedSecurityRoleSource(IEnumerable<PreInitializerFullSecurit
         return securityRoles.Select(sr => this.GetInitializedRole(sr.FullSecurityRole));
     }
 
-    protected virtual IReadOnlyList<SecurityRole> ExceptChildren { get; } = [SecurityRole.Administrator, SecurityRole.SystemIntegration];
+    protected virtual IReadOnlyList<SecurityRole> ExceptAdministratorRoles { get; } = [SecurityRole.Administrator, SecurityRole.SystemIntegration];
 
     private FullSecurityRole GetInitializedRole(FullSecurityRole securityRole)
     {
@@ -15,9 +15,19 @@ public class InitializedSecurityRoleSource(IEnumerable<PreInitializerFullSecurit
         {
             var info = securityRole.Information;
 
-            var otherRoles = securityRoles.Select(sr => sr.FullSecurityRole).Except(this.ExceptChildren);
+            var otherRoles = securityRoles.Select(sr => sr.FullSecurityRole).Except(this.ExceptAdministratorRoles);
 
-            var newInfo = securityRole.Information with { Children = info.Children.Concat(otherRoles).Distinct().ToList() };
+            var newInfo = securityRole.Information with
+                          {
+                              Children = info.Children.Concat(otherRoles).Distinct().ToList(),
+                              Restriction = SecurityPathRestriction.Empty
+                          };
+
+            return new FullSecurityRole(securityRole.Name, newInfo);
+        }
+        else if (securityRole == SecurityRole.SystemIntegration)
+        {
+            var newInfo = securityRole.Information with { Restriction = SecurityPathRestriction.Empty };
 
             return new FullSecurityRole(securityRole.Name, newInfo);
         }

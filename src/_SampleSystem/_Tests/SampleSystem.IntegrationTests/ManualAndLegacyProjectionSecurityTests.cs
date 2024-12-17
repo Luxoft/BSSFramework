@@ -12,6 +12,7 @@ using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Domain.ManualProjections;
+using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
@@ -39,7 +40,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
 
         this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SecurityRole.Administrator, this.bu2Ident, null, null));
+        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, null));
 
         this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident);
 

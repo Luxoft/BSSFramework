@@ -50,8 +50,8 @@ public class ExtraQueryableSecurityPathTests : TestBase
 
         this.AuthHelper.SetUserRole(
             this.TestEmployee.Id,
-            new SampleSystemTestPermission(SecurityRole.Administrator, this.bu2Ident, null, this.loc1Ident),
-            new SampleSystemTestPermission(SecurityRole.Administrator, this.bu2Ident, null, this.loc2Ident));
+            new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc1Ident),
+            new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc2Ident));
 
         this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident, location: this.loc1Ident);
 

@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Mapping\Generated.Framework.Authorization.Domain.hbm.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
   </ItemGroup>

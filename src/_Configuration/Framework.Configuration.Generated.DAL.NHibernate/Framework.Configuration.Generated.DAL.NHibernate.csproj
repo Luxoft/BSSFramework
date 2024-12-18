@@ -9,7 +9,4 @@
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mapping\Generated.Framework.Configuration.Domain.hbm.xml" />
-  </ItemGroup>
 </Project>

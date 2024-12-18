@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Authorization.Domain;
@@ -10,6 +11,7 @@ namespace Framework.Authorization.Domain;
 /// </summary>
 [DebuggerDisplay("{Name}, RunAs={RunAs}")]
 [UniqueGroup]
+[IgnoreHbmMapping]
 public class Principal : BaseDirectory, IMaster<Permission>
 {
     private readonly ICollection<Permission> permissions = new List<Permission>();

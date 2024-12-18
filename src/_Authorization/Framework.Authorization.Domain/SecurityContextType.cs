@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven.Serialization;
+using Framework.Persistent.Mapping;
 
 namespace Framework.Authorization.Domain;
 
@@ -11,6 +12,7 @@ namespace Framework.Authorization.Domain;
 /// <seealso cref="PermissionRestriction"/>
 /// Типы, в контексте которых выдаются права пользователю, записываются вручную на уровне SQL в базу конкретной системы
 /// </remarks>
+[IgnoreHbmMapping]
 public class SecurityContextType : BaseDirectory
 {
     /// <summary>

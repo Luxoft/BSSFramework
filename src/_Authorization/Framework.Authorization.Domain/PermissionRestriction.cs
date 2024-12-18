@@ -1,6 +1,7 @@
 ﻿using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Authorization.Domain;
@@ -8,6 +9,7 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 /// Связь между пермиссией и контекстом
 /// </summary>
+[IgnoreHbmMapping]
 public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Permission>
 {
     private readonly Permission permission;

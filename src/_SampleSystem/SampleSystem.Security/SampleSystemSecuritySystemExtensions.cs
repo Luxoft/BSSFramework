@@ -98,7 +98,7 @@ public static class SampleSystemSecuritySystemExtensions
 
                .AddSecurityRole(
                    SecurityRole.SystemIntegration,
-                   new SecurityRoleInfo(new Guid("df74d544-5945-4380-944e-a3a9001252be")) { Restriction = SecurityPathRestriction.Empty })
+                   new SecurityRoleInfo(new Guid("df74d544-5945-4380-944e-a3a9001252be")))
 
                .AddSecurityRole(
                    SecurityRole.Administrator,

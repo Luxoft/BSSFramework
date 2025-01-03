@@ -34,24 +34,27 @@ public static class HangfireExtensions
     public static IApplicationBuilder UseHangfireBss(
         this IApplicationBuilder app,
         string dashboardUrl = "/admin/jobs",
-        IDashboardAuthorizationFilter? authorizationFilter = null,
-        DomainSecurityRule.RoleBaseSecurityRule? dashboardAuthorizationSecurityRule = null)
+        Action<DashboardOptions>? setupOptions = null)
     {
         var settings = app.ApplicationServices.GetRequiredService<BssHangfireSettings>();
 
         if (settings.Enabled)
         {
+            var options = new DashboardOptions
+                          {
+                              DashboardTitle = "Regular jobs",
+                              Authorization =
+                              [
+                                  new AdminHangfireAuthorization(SecurityRole.Administrator)
+                              ],
+                              DisplayNameFunc = (_, job) => settings.GetDisplayName(job)
+                          };
+
+            setupOptions?.Invoke(options);
+
             app.UseHangfireDashboard(
                 dashboardUrl,
-                new DashboardOptions
-                {
-                    DashboardTitle = "Regular jobs",
-                    Authorization =
-                    [
-                        authorizationFilter ?? new AdminHangfireAuthorization(dashboardAuthorizationSecurityRule ?? SecurityRole.Administrator)
-                    ],
-                    DisplayNameFunc = (_, job) => settings.GetDisplayName(job)
-                });
+                options);
 
             settings.RunJobs(app.ApplicationServices);
         }

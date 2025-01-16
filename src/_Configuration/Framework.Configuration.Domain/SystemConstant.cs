@@ -11,7 +11,6 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
-[IgnoreHbmMapping]
 public class SystemConstant :
         AuditPersistentDomainObjectBase,
         ICodeObject,

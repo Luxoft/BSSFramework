@@ -23,8 +23,7 @@ public partial class ServerGenerators
     {
         return this.GenerateBLLCore()
                    .Concat(this.GenerateBLL())
-                   .Concat(this.GenerateServerDTO())
-                   .Concat(this.GenerateDAL());
+                   .Concat(this.GenerateServerDTO());
     }
 
     [TestMethod]
@@ -44,12 +43,6 @@ public partial class ServerGenerators
                                                : decl.Name.Contains("Validator") ? "Configuration.Validator.Generated"
                                                : "Configuration.Generated",
                                        this.CheckOutService);
-    }
-
-    [TestMethod]
-    public void GenerateBLLTest()
-    {
-        this.GenerateBLL().ToList();
     }
 
     private IEnumerable<FileInfo> GenerateBLL()
@@ -76,18 +69,5 @@ public partial class ServerGenerators
                                               this.GeneratePath + @"/Framework.Configuration.Generated.DTO",
                                               "Configuration.Generated",
                                               this.CheckOutService);
-    }
-
-    [TestMethod]
-    public void GenerateDALTest()
-    {
-        this.GenerateDAL().ToList();
-    }
-
-    private IEnumerable<FileInfo> GenerateDAL()
-    {
-        var generator = new DALFileGenerator(this.Environment.DAL);
-
-        return generator.Generate(this.GeneratePath + @"/Framework.Configuration.Generated.DAL.NHibernate/Mapping", this.CheckOutService);
     }
 }

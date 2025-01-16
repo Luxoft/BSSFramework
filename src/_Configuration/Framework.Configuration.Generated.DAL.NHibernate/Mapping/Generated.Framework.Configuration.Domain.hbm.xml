@@ -1,2 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<hibernate-mapping assembly="Framework.Configuration.Domain" auto-import="false" schema="configuration" xmlns="urn:nhibernate-mapping-2.2" />

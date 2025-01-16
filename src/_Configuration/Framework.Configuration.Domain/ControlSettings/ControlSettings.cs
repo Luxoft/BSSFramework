@@ -8,7 +8,6 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 [NotAuditedClass]
-[IgnoreHbmMapping]
 public class ControlSettings : BaseDirectory,
                                IMaster<ControlSettings>,
                                IMaster<ControlSettingsParam>,

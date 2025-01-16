@@ -10,7 +10,6 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
-[IgnoreHbmMapping]
 public class DomainObjectModification : AuditPersistentDomainObjectBase, ITypeObject<ModificationType>, IVersionObject<long>
 {
     private Guid domainObjectId;

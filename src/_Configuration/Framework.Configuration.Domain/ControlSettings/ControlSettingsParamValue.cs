@@ -6,7 +6,6 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 [NotAuditedClass]
-[IgnoreHbmMapping]
 public class ControlSettingsParamValue : AuditPersistentDomainObjectBase, IDetail<ControlSettingsParam>
 {
     private readonly ControlSettingsParam controlSettingsParam;

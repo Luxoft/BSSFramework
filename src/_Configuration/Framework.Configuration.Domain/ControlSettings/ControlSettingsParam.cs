@@ -4,7 +4,6 @@ using Framework.Persistent.Mapping;
 namespace Framework.Configuration.Domain;
 
 [NotAuditedClass]
-[IgnoreHbmMapping]
 public class ControlSettingsParam : AuditPersistentDomainObjectBase, IMaster<ControlSettingsParamValue>, IDetail<ControlSettings>, ITypeObject<ControlSettingParamType>
 {
     private readonly ICollection<ControlSettingsParamValue> controlSettingsParamValues = new List<ControlSettingsParamValue>();

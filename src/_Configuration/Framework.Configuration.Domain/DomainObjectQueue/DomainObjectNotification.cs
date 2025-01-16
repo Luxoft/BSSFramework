@@ -7,7 +7,6 @@ namespace Framework.Configuration.Domain;
 /// Нотификация хранимая в бд
 /// </summary>
 [NotAuditedClass]
-[IgnoreHbmMapping]
 public class DomainObjectNotification : AuditPersistentDomainObjectBase
 {
     private readonly QueueProgressStatus status;

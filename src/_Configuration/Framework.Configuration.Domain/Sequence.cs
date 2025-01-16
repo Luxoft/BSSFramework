@@ -10,7 +10,6 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
-[IgnoreHbmMapping]
 public class Sequence : BaseDirectory, INumberObject<long>
 {
     private long number;

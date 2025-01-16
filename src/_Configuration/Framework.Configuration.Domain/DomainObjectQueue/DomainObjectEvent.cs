@@ -7,7 +7,6 @@ namespace Framework.Configuration.Domain;
 /// Событие над объектом (Save, Remove etc), сохраняемое в базу.
 /// </summary>
 [NotAuditedClass]
-[IgnoreHbmMapping]
 public class DomainObjectEvent : AuditPersistentDomainObjectBase
 {
     private readonly QueueProgressStatus status;

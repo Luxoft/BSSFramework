@@ -140,8 +140,9 @@ public class DbGeneratorTest
     {
         string[] migrationScriptFolderPaths = null;
         var result = new Framework.Authorization.TestGenerate.ServerGenerators().GenerateDB(
-            GetAuthMappingSettings(serverName, mainDatabaseName, auditDatabaseName),
             serverName,
+            mainDatabaseName,
+            auditDatabaseName,
             migrationScriptFolderPaths: migrationScriptFolderPaths,
             mode: mode,
             preserveSchemaDatabase: preserveSchemaDatabase,
@@ -149,19 +150,6 @@ public class DbGeneratorTest
 
         Console.WriteLine(result);
     }
-
-    private static MappingSettings GetAuthMappingSettings(string serverName, DatabaseName dbName, AuditDatabaseName dbAuditName) =>
-        Framework.Authorization.TestGenerate.ServerGenerationEnvironment.Default.GetMappingSettings(dbName, dbAuditName).AddInitializer(
-            new DefaultConfigurationInitializer(
-                new ManualDefaultConnectionStringSource(
-                    $"Data Source={serverName};Initial Catalog={dbName.Name};Application Name=SampleSystem"),
-                new DefaultConfigurationInitializerSettings
-                {
-                    FluentAssemblyList =
-                    [
-                        typeof(AuthorizationMappingSettings).Assembly
-                    ]
-                }));
 
     private MappingSettings GetMappingSettings(string serverName, DatabaseName dbName, AuditDatabaseName dbAuditName)
     {

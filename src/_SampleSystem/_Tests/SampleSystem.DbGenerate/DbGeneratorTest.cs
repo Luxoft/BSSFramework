@@ -1,5 +1,4 @@
-﻿using Framework.Authorization.Generated.DAL.NHibernate;
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.DBGenerator;
 using Framework.DomainDriven.NHibernate;
 

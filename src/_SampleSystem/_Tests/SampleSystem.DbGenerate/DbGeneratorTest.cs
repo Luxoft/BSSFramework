@@ -35,118 +35,117 @@ public class DbGeneratorTest
     }
 
     public string GenerateAllDB(
-            string serverName,
-            string mainDatabaseName = nameof(SampleSystem),
-            DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
-            DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
-            ICollection<string> ignoredIndexes = null,
-            bool skipFrameworkDatabases = false,
-            DbUserCredential credential = null,
-            params string[] migrationScriptFolderPaths)
+        string serverName,
+        string mainDatabaseName = nameof(SampleSystem),
+        DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
+        DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
+        ICollection<string> ignoredIndexes = null,
+        bool skipFrameworkDatabases = false,
+        DbUserCredential credential = null,
+        params string[] migrationScriptFolderPaths)
     {
         if (!skipFrameworkDatabases)
         {
             this.GenerateAuthorizationDatabase(
-                                               serverName,
-                                               new DatabaseName(mainDatabaseName, "auth"),
-                                               new DatabaseName(mainDatabaseName, "auth").ToDefaultAudit(),
-                                               mode,
-                                               true,
-                                               credential);
+                serverName,
+                new DatabaseName(mainDatabaseName, "auth"),
+                new DatabaseName(mainDatabaseName, "auth").ToDefaultAudit(),
+                mode,
+                true,
+                credential);
 
             this.GenerateConfigurationDatabase(
-                                               serverName,
-                                               new DatabaseName(mainDatabaseName, "configuration"),
-                                               mode,
-                                               true,
-                                               credential);
+                serverName,
+                new DatabaseName(mainDatabaseName, "configuration"),
+                mode,
+                true,
+                credential);
         }
 
         var result = this.GenerateSampleSystemDB(
-                                                 serverName,
-                                                 new DatabaseName(mainDatabaseName, "app"),
-                                                 new DatabaseName(mainDatabaseName, "app").ToDefaultAudit(),
-                                                 mode: mode,
-                                                 generatorMode: generatorMode,
-                                                 migrationScriptFolderPaths: migrationScriptFolderPaths,
-                                                 preserveSchemaDatabase: true,
-                                                 ignoredIndexes: ignoredIndexes,
-                                                 credential: credential);
+            serverName,
+            new DatabaseName(mainDatabaseName, "app"),
+            new DatabaseName(mainDatabaseName, "app").ToDefaultAudit(),
+            mode: mode,
+            generatorMode: generatorMode,
+            migrationScriptFolderPaths: migrationScriptFolderPaths,
+            preserveSchemaDatabase: true,
+            ignoredIndexes: ignoredIndexes,
+            credential: credential);
 
         return result;
     }
 
     private string GenerateSampleSystemDB(
-            string serverName,
-            DatabaseName databaseName,
-            AuditDatabaseName auditDatabaseName,
-            DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
-            DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
-            IEnumerable<string> migrationScriptFolderPaths = null,
-            IEnumerable<string> auditMigrationScriptFolderPaths = null,
-            bool preserveSchemaDatabase = false,
-            ICollection<string> ignoredIndexes = null,
-            DbUserCredential credential = null)
+        string serverName,
+        DatabaseName databaseName,
+        AuditDatabaseName auditDatabaseName,
+        DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
+        DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
+        IEnumerable<string> migrationScriptFolderPaths = null,
+        IEnumerable<string> auditMigrationScriptFolderPaths = null,
+        bool preserveSchemaDatabase = false,
+        ICollection<string> ignoredIndexes = null,
+        DbUserCredential credential = null)
     {
         var generator = new SampleSystemDBGenerator(this.GetMappingSettings(serverName, databaseName, auditDatabaseName));
 
         var result = generator.Generate(
-                                        serverName,
-                                        mode: mode,
-                                        generatorMode: generatorMode,
-                                        migrationScriptFolderPaths: migrationScriptFolderPaths,
-                                        auditMigrationScriptFolderPaths: auditMigrationScriptFolderPaths,
-                                        preserveSchemaDatabase: preserveSchemaDatabase,
-                                        ignoredIndexes: ignoredIndexes,
-                                        credentials: credential);
+            serverName,
+            mode: mode,
+            generatorMode: generatorMode,
+            migrationScriptFolderPaths: migrationScriptFolderPaths,
+            auditMigrationScriptFolderPaths: auditMigrationScriptFolderPaths,
+            preserveSchemaDatabase: preserveSchemaDatabase,
+            ignoredIndexes: ignoredIndexes,
+            credentials: credential);
 
         var lines = result.ToNewLinesCombined();
         return lines;
     }
 
     private void GenerateConfigurationDatabase(
-            string serverName,
-            DatabaseName mainDatabaseName,
-            DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
-            bool preserveSchemaDatabase = false,
-            DbUserCredential credential = null)
+        string serverName,
+        DatabaseName mainDatabaseName,
+        DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
+        bool preserveSchemaDatabase = false,
+        DbUserCredential credential = null)
     {
         string[] migrationScriptFolderPaths = null;
 
         Console.WriteLine("------ start Utilities");
         var resultScript = new Framework.Configuration.TestGenerate.ServerGenerators(
-                                                                                     new Framework.Configuration.TestGenerate.ServerGenerationEnvironment(new DatabaseName("Configuration")))
-                .GenerateDB(
-                            serverName,
-                            mainDatabaseName,
-                            migrationScriptFolderPaths: migrationScriptFolderPaths,
-                            mode: mode,
-                            preserveSchemaDatabase: preserveSchemaDatabase,
-                            credentials: credential);
+                new Framework.Configuration.TestGenerate.ServerGenerationEnvironment(new DatabaseName("Configuration")))
+            .GenerateDB(
+                serverName,
+                mainDatabaseName,
+                migrationScriptFolderPaths: migrationScriptFolderPaths,
+                mode: mode,
+                preserveSchemaDatabase: preserveSchemaDatabase,
+                credentials: credential);
 
         var lines = resultScript;
         Console.WriteLine("------ end Utilities");
         Console.WriteLine(lines);
     }
 
-
     private void GenerateAuthorizationDatabase(
-            string serverName,
-            DatabaseName mainDatabaseName,
-            AuditDatabaseName auditDatabaseName,
-            DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
-            bool preserveSchemaDatabase = false,
-            DbUserCredential credential = null)
+        string serverName,
+        DatabaseName mainDatabaseName,
+        AuditDatabaseName auditDatabaseName,
+        DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
+        bool preserveSchemaDatabase = false,
+        DbUserCredential credential = null)
     {
         string[] migrationScriptFolderPaths = null;
         var result = new Framework.Authorization.TestGenerate.ServerGenerators().GenerateDB(
-         serverName,
-         mainDatabaseName,
-         auditDatabaseName,
-         migrationScriptFolderPaths: migrationScriptFolderPaths,
-         mode: mode,
-         preserveSchemaDatabase: preserveSchemaDatabase,
-         credentials: credential);
+            serverName,
+            mainDatabaseName,
+            auditDatabaseName,
+            migrationScriptFolderPaths: migrationScriptFolderPaths,
+            mode: mode,
+            preserveSchemaDatabase: preserveSchemaDatabase,
+            credentials: credential);
 
         Console.WriteLine(result);
     }
@@ -162,10 +161,15 @@ public class DbGeneratorTest
                 initMappingAction,
                 dbName,
                 dbAuditName)
-
             .AddInitializer(
                 new DefaultConfigurationInitializer(
                     new ManualDefaultConnectionStringSource(connectionString),
-                    new DefaultConfigurationInitializerSettings { FluentAssemblyList = [typeof(SampleSystemMappingSettings).Assembly] }));
+                    new DefaultConfigurationInitializerSettings
+                    {
+                        FluentAssemblyList =
+                        [
+                            typeof(SampleSystemMappingSettings).Assembly
+                        ]
+                    }));
     }
 }

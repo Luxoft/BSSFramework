@@ -57,7 +57,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
     public MappingSettings GetMappingSettings(DatabaseName dbName)
     {
-        return new MappingSettings<PersistentDomainObjectBase>(this.DAL.GetMappingGenerators().Select(mg => mg.Generate()), dbName);
+        return new MappingSettings<PersistentDomainObjectBase>(dbName);
     }
 
     public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =

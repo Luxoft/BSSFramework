@@ -32,7 +32,7 @@ internal class DomainSecurityServiceRootBuilder : IDomainSecurityServiceRootBuil
         where TMetadata : IDomainSecurityServiceMetadata<TDomainObject>
         where TDomainObject : IIdentityObject<Guid>
     {
-        return this.AddInternal<TDomainObject>(b => b.Override<TMetadata>().Pipe(TMetadata.Setup));
+        return this.AddInternal<TDomainObject>(b => b.AddInjector<TMetadata>().Pipe(TMetadata.Setup));
     }
 
     private IDomainSecurityServiceRootBuilder AddInternal<TDomainObject>(Action<IDomainSecurityServiceBuilder<TDomainObject>> setup)
@@ -51,14 +51,7 @@ internal class DomainSecurityServiceRootBuilder : IDomainSecurityServiceRootBuil
     {
         foreach (var domainBuilder in this.domainBuilders)
         {
-            domainBuilder.Register(services);
-
-            if (this.AutoAddSelfRelativePath)
-            {
-                services.AddSingleton(
-                    typeof(IRelativeDomainPathInfo<,>).MakeGenericType(domainBuilder.DomainType, domainBuilder.DomainType),
-                    typeof(SelfRelativeDomainPathInfo<>).MakeGenericType(domainBuilder.DomainType));
-            }
+            domainBuilder.Register(services, this.AutoAddSelfRelativePath);
         }
     }
 }

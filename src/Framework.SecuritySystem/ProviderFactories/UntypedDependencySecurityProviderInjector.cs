@@ -2,17 +2,15 @@
 using Framework.QueryableSource;
 using Framework.SecuritySystem.Expanders;
 
-namespace Framework.SecuritySystem;
+namespace Framework.SecuritySystem.ProviderFactories;
 
-public class UntypedDependencyDomainSecurityService<TDomainObject, TBaseDomainObject>(
-    ISecurityRuleExpander securityRuleExpander,
+public class UntypedDependencySecurityProviderFactory<TDomainObject, TBaseDomainObject>(
+    ISecurityModeExpander securityRuleExpander,
     IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
     IQueryableSource queryableSource)
-    : DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject>(
-        securityRuleExpander,
-        baseDomainSecurityService)
-    where TDomainObject : IIdentityObject<Guid>
-    where TBaseDomainObject : class, IIdentityObject<Guid>
+    : DependencyBaseSecurityProviderFactory<TDomainObject,
+        TBaseDomainObject>(securityRuleExpander, baseDomainSecurityService)
+    where TDomainObject : IIdentityObject<Guid> where TBaseDomainObject : class, IIdentityObject<Guid>
 {
     protected override ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider)
     {

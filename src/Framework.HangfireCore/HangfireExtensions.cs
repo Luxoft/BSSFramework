@@ -1,7 +1,6 @@
 ﻿using Framework.SecuritySystem;
 
 using Hangfire;
-using Hangfire.Dashboard;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;

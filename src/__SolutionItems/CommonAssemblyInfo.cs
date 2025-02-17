@@ -2,11 +2,11 @@
 
 [assembly: AssemblyProduct("BSS Framework")]
 [assembly: AssemblyCompany("Luxoft")]
-[assembly: AssemblyCopyright("Copyright © Luxoft 2009-2024")]
+[assembly: AssemblyCopyright("Copyright © Luxoft 2009-2025")]
 
-[assembly: AssemblyVersion("22.5.12.0")]
-[assembly: AssemblyFileVersion("22.5.12.0")]
-[assembly: AssemblyInformationalVersion("22.5.12.0")]
+[assembly: AssemblyVersion("23.0.0.0")]
+[assembly: AssemblyFileVersion("23.0.0.0")]
+[assembly: AssemblyInformationalVersion("23.0.0.0")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]

@@ -2,7 +2,6 @@
 using Framework.DomainDriven.BLLGenerator;
 using Framework.DomainDriven.DTOGenerator.Server;
 using Framework.DomainDriven.Generation;
-using Framework.DomainDriven.NHibernate.DALGenerator;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

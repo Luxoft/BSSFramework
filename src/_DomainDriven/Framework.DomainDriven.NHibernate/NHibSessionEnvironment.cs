@@ -29,11 +29,6 @@ public class NHibSessionEnvironment : IDisposable
 
         this.TransactionTimeout = settings.TransactionTimeout;
 
-        if (cachedMappingSettings.SelectMany(z => new[] { z.Database, z.AuditDatabase }).Where(z => null != z).Distinct().Count() == 1)
-        {
-            throw new ArgumentException("All mapping settings has equal database with schema. Utilities has domain object with same names");
-        }
-
         try
         {
             this.cfg = new Configuration();

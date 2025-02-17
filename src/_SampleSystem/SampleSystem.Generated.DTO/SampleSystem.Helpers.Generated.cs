@@ -711,6 +711,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.Example2IdentityDTO(domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO ToIdentityDTO(this SampleSystem.Domain.GenericNamedLock domainObject)
+        {
+            return new SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO(domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.HRDepartmentIdentityDTO ToIdentityDTO(this SampleSystem.Domain.HRDepartment domainObject)
         {
             return new SampleSystem.Generated.DTO.HRDepartmentIdentityDTO(domainObject);
@@ -1107,6 +1112,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.Example2IdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Example2> domainObjects)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.GenericNamedLock> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -2266,6 +2276,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.Example2EventRichDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO ToRichEventDTO(this SampleSystem.Domain.GenericNamedLock domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.HRDepartmentEventRichDTO ToRichEventDTO(this SampleSystem.Domain.HRDepartment domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.HRDepartmentEventRichDTO(mappingService, domainObject);
@@ -2757,6 +2772,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.Example2EventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Example2> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.GenericNamedLock> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }

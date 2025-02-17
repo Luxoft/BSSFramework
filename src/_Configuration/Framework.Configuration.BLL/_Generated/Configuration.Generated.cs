@@ -157,24 +157,6 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class GenericNamedLockBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.GenericNamedLock>, Framework.Configuration.BLL.IGenericNamedLockBLL
-    {
-        
-        public GenericNamedLockBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.GenericNamedLock> securityProvider) : 
-                base(context, securityProvider)
-        {
-        }
-    }
-    
-    public partial class GenericNamedLockBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IGenericNamedLockBLL, Framework.Configuration.BLL.GenericNamedLockBLL, Framework.Configuration.Domain.GenericNamedLock>, Framework.Configuration.BLL.IGenericNamedLockBLLFactory
-    {
-        
-        public GenericNamedLockBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class SentMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SentMessage>, Framework.Configuration.BLL.ISentMessageBLL
     {
         
@@ -265,8 +247,6 @@ namespace Framework.Configuration.BLL
         private Framework.Configuration.BLL.IDomainTypeBLL domainTypeBLL;
         
         private Framework.Configuration.BLL.IExceptionMessageBLL exceptionMessageBLL;
-        
-        private Framework.Configuration.BLL.IGenericNamedLockBLL genericNamedLockBLL;
         
         private Framework.Configuration.BLL.ConfigurationImplementedBLLFactory implementedBLLFactory;
         
@@ -435,26 +415,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.IGenericNamedLockBLL GenericNamedLock
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.genericNamedLockBLL, null))
-                {
-                    this.genericNamedLockBLL = this.GenericNamedLockFactory.Create();
-                }
-                return this.genericNamedLockBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IGenericNamedLockBLLFactory GenericNamedLockFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IGenericNamedLockBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
         public Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid> Implemented
         {
             get
@@ -563,8 +523,6 @@ namespace Framework.Configuration.BLL
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.IDomainTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IExceptionMessageBLLFactory, Framework.Configuration.BLL.ExceptionMessageBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.ExceptionMessage, System.Guid>, Framework.Configuration.Domain.ExceptionMessage>, Framework.Configuration.BLL.IExceptionMessageBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IGenericNamedLockBLLFactory, Framework.Configuration.BLL.GenericNamedLockBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.GenericNamedLock, System.Guid>, Framework.Configuration.Domain.GenericNamedLock>, Framework.Configuration.BLL.IGenericNamedLockBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISentMessageBLLFactory, Framework.Configuration.BLL.SentMessageBLLFactory>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>, Framework.Configuration.Domain.SentMessage>, Framework.Configuration.BLL.ISentMessageBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISequenceBLLFactory, Framework.Configuration.BLL.SequenceBLLFactory>(serviceCollection);

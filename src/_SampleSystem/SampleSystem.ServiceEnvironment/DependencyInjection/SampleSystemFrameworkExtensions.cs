@@ -12,6 +12,16 @@ namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemFrameworkExtensions
 {
+    public static IBssFrameworkSettings AddNamedLocks(this IBssFrameworkSettings settings)
+    {
+        return settings.AddNamedLocks(
+            s => s
+                 .SetNameLockType<GenericNamedLock>(nl => nl.Name)
+                 .AddManual(typeof(BusinessUnitAncestorLink))
+                 .AddManual(typeof(ManagementUnitAncestorLink))
+                 .AddManual(typeof(LocationAncestorLink)));
+    }
+
     public static IBssFrameworkSettings AddListeners(this IBssFrameworkSettings settings)
     {
         return settings.AddListener<SubscriptionDALListener>()

@@ -3,10 +3,10 @@
 /// <summary>
 /// Операция для объекта, на котором можно сделать пессимистическую блокировку
 /// </summary>
-public record NamedLock(string Name, Type DomainType)
+public record NamedLock(string Name, Type? DomainType = null)
 {
-    public NamedLock(string Name)
-        : this(Name, typeof(object))
+    public NamedLock(Type domainType)
+        : this(domainType.Name, domainType)
     {
     }
 }

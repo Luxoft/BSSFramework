@@ -19,12 +19,16 @@ using Framework.Events;
 using Framework.DomainDriven.ServiceModel.Service;
 
 using Microsoft.Extensions.DependencyInjection;
+
 using Framework.Authorization.Generated.DTO;
 using Framework.Configuration.Generated.DTO;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.Setup;
 using Framework.SecuritySystem.SecurityRuleInfo;
+using Framework.DomainDriven._Visitors;
+using Framework.DomainDriven.Lock;
+using Framework.SecuritySystem.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -32,7 +36,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyGenericServices(this IServiceCollection services)
     {
-        services.AddScopedFrom<ILegacyForceEventSystem, IDomainTypeBLLFactory>(domainTypeBllFactory => domainTypeBllFactory.Create());
+        services.AddScopedFrom<Framework.Configuration.Domain.ILegacyForceEventSystem, IDomainTypeBLLFactory>(
+            domainTypeBllFactory => domainTypeBllFactory.Create());
 
         services.AddSingleton<SubscriptionMetadataStore>();
         services.AddSingleton<ISubscriptionMetadataFinder, SubscriptionMetadataFinder>();
@@ -62,27 +67,36 @@ public static class ServiceCollectionExtensions
 
         services.RegisterAuthorizationBLL();
         services.RegisterConfigurationBLL();
+        services.RegisterConfigurationSecurity();
+        services.RegisterConfigurationNamedLocks();
 
         services.ReplaceSingleton<IRealTypeResolver, ProjectionRealTypeResolver>();
         services.ReplaceSingleton<ISecurityContextSource, ProjectionSecurityContextSource>();
 
-        services.AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationRuntimeDomainEventDTOMapper>();
+        services
+            .AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>,
+                AuthorizationRuntimeDomainEventDTOMapper>();
 
-        services.AddSingleton(new LocalDBEventMessageSenderSettings<Framework.Authorization.Domain.PersistentDomainObjectBase> { QueueTag = "authDALQuery" });
+        services.AddSingleton(
+            new LocalDBEventMessageSenderSettings<Framework.Authorization.Domain.PersistentDomainObjectBase> { QueueTag = "authDALQuery" });
 
         services.AddScoped(typeof(IEventDTOMessageSender<>), typeof(LocalDBEventMessageSender<>));
 
         services.AddSingleton(typeof(RuntimeDomainEventDTOConverter<,,>));
 
+        services
+            .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
+                Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
+
         return services;
     }
 
-    public static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)
+    private static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)
     {
         return services.RegisterBLLSystem<IAuthorizationBLLContext, AuthorizationBLLContext>();
     }
 
-    public static IServiceCollection RegisterConfigurationBLL(this IServiceCollection services)
+    private static IServiceCollection RegisterConfigurationBLL(this IServiceCollection services)
     {
         return services
                .RegisterBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
@@ -114,10 +128,45 @@ public static class ServiceCollectionExtensions
 
             if (pair.CustomViewSecurityRule != null)
             {
-                services.AddSingleton(new DomainModeSecurityRuleInfo(SecurityRule.View.ToDomain(pair.DomainType), pair.CustomViewSecurityRule));
+                services.AddSingleton(
+                    new DomainModeSecurityRuleInfo(SecurityRule.View.ToDomain(pair.DomainType), pair.CustomViewSecurityRule));
             }
         }
 
         return services;
+    }
+
+    private static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
+    {
+        return services.RegisterDomainSecurityServices(
+
+            rb => rb.Add<ExceptionMessage>(
+                        b => b.SetView(SecurityRole.Administrator))
+
+                    .Add<Sequence>(
+                        b => b.SetView(SecurityRole.Administrator)
+                              .SetEdit(SecurityRole.Administrator))
+
+                    .Add<SystemConstant>(
+                        b => b.SetView(SecurityRole.Administrator)
+                              .SetEdit(SecurityRole.Administrator))
+
+                    .Add<CodeFirstSubscription>(
+                        b => b.SetView(SecurityRole.Administrator)
+                              .SetEdit(SecurityRole.Administrator))
+
+                    .Add<TargetSystem>(
+                        b => b.SetView(SecurityRole.Administrator)
+                              .SetEdit(SecurityRole.Administrator))
+
+                    .Add<DomainType>(
+                        b => b.SetView(SecurityRule.Disabled)));
+    }
+
+    private static IServiceCollection RegisterConfigurationNamedLocks(this IServiceCollection services)
+    {
+        return services.AddKeyedSingleton<INamedLockSource>(
+            RootNamedLockSource.ElementsKey,
+            new NamedLockTypeContainerSource(typeof(ConfigurationNamedLock)));
     }
 }

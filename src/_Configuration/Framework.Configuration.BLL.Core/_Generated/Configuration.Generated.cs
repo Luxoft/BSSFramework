@@ -103,16 +103,6 @@ namespace Framework.Configuration.BLL
             get;
         }
         
-        Framework.Configuration.BLL.IGenericNamedLockBLL GenericNamedLock
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IGenericNamedLockBLLFactory GenericNamedLockFactory
-        {
-            get;
-        }
-        
         Framework.Configuration.BLL.ISentMessageBLL SentMessage
         {
             get;
@@ -207,14 +197,6 @@ namespace Framework.Configuration.BLL
     }
     
     public partial interface IExceptionMessageBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IExceptionMessageBLL, Framework.Configuration.Domain.ExceptionMessage>
-    {
-    }
-    
-    public partial interface IGenericNamedLockBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.GenericNamedLock, System.Guid>
-    {
-    }
-    
-    public partial interface IGenericNamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IGenericNamedLockBLL, Framework.Configuration.Domain.GenericNamedLock>
     {
     }
     

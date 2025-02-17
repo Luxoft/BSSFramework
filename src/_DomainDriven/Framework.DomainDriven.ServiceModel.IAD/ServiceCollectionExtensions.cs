@@ -1,5 +1,5 @@
-﻿using Framework.Configuration.Domain;
-using Framework.Configuration.NamedLocks;
+﻿using System.Linq.Expressions;
+
 using Framework.Core.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
@@ -7,7 +7,6 @@ using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
-using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.Events;
@@ -16,7 +15,6 @@ using Framework.FinancialYear;
 using Framework.HierarchicalExpand.DependencyInjection;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.PersistStorage;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -36,8 +34,6 @@ public static class ServiceCollectionExtensions
         services.RegisterRepository();
         services.RegisterAuthenticationServices();
         services.RegisterEvaluators();
-        services.RegisterConfigurationSecurity();
-        services.RegisterNamedLocks();
         services.RegisterHierarchicalObjectExpander();
         services.RegistryGenericDatabaseVisitors();
 
@@ -116,10 +112,6 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegistryGenericDatabaseVisitors(this IServiceCollection services)
     {
-        services
-            .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
-                PersistentDomainObjectBase, Guid>>();
-
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
@@ -130,40 +122,5 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
 
         return services;
-    }
-
-    private static IServiceCollection RegisterNamedLocks(this IServiceCollection services)
-    {
-        return services
-               .AddScoped<INamedLockService, NamedLockService>()
-               .AddScoped<INamedLockInitializer, NamedLockInitializer>()
-               .AddSingleton<INamedLockSource, NamedLockSource>();
-    }
-
-    public static IServiceCollection RegisterConfigurationSecurity(this IServiceCollection services)
-    {
-        return services.RegisterDomainSecurityServices(
-
-                           rb => rb.Add<ExceptionMessage>(
-                                       b => b.SetView(SecurityRole.Administrator))
-
-                                   .Add<Sequence>(
-                                       b => b.SetView(SecurityRole.Administrator)
-                                             .SetEdit(SecurityRole.Administrator))
-
-                                   .Add<SystemConstant>(
-                                       b => b.SetView(SecurityRole.Administrator)
-                                             .SetEdit(SecurityRole.Administrator))
-
-                                   .Add<CodeFirstSubscription>(
-                                       b => b.SetView(SecurityRole.Administrator)
-                                             .SetEdit(SecurityRole.Administrator))
-
-                                   .Add<TargetSystem>(
-                                       b => b.SetView(SecurityRole.Administrator)
-                                             .SetEdit(SecurityRole.Administrator))
-
-                                   .Add<DomainType>(
-                                       b => b.SetView(SecurityRule.Disabled)));
     }
 }

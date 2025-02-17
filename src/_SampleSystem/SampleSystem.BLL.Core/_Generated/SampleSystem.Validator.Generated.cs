@@ -66,6 +66,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(this.GetWorkingCalendar1676ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Example1>(this.GetExample1ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Example2>(this.GetExample2ValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.GenericNamedLock>(this.GetGenericNamedLockValidationResult);
             base.RegisterHandler<SampleSystem.Domain.HRDepartment>(this.GetHRDepartmentValidationResult);
             base.RegisterHandler<SampleSystem.Domain.HRDepartmentEmployeePosition>(this.GetHRDepartmentEmployeePositionValidationResult);
             base.RegisterHandler<SampleSystem.Domain.HRDepartmentRoleEmployee>(this.GetHRDepartmentRoleEmployeeValidationResult);
@@ -360,6 +361,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetFioValidationResult(SampleSystem.Domain.Inline.Fio source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetGenericNamedLockValidationResult(SampleSystem.Domain.GenericNamedLock source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

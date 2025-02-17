@@ -294,7 +294,7 @@ public class EmployeeTests : TestBase
         preProcessedNotificationState.UnprocessedCount.Should().Be(0);
 
         postProcessedModificationState.UnprocessedCount.Should().Be(0);
-        postProcessedNotificationState.UnprocessedCount.Should().BeGreaterOrEqualTo(1);
+        postProcessedNotificationState.UnprocessedCount.Should().BeGreaterThanOrEqualTo(1);
     }
 
     [TestMethod]

@@ -1,10 +1,10 @@
 ﻿<Project>
   <!-- Package settings -->
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Copyright>Luxoft 2009-2024</Copyright>
+    <Copyright>Luxoft 2009-2025</Copyright>
     <Authors>Luxoft BSS</Authors>
     <RepositoryUrl>https://github.com/Luxoft/BSSFramework</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

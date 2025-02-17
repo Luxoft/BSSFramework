@@ -39,7 +39,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
-                           .AddNamedLockType(typeof(SampleSystemNamedLock))
+                           .AddNamedLocks()
 
                            .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 

@@ -1,4 +1,4 @@
-﻿namespace Framework.Configuration.NamedLocks;
+﻿namespace Framework.DomainDriven.Lock;
 
 public interface INamedLockInitializer
 {

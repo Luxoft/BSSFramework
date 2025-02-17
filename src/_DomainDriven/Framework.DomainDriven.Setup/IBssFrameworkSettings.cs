@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven._Visitors;
+using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
 using Framework.Events;
 using Framework.SecuritySystem;
@@ -10,13 +11,11 @@ namespace Framework.DomainDriven.Setup;
 
 public interface IBssFrameworkSettings : IBssFrameworkSettingsBase<IBssFrameworkSettings>
 {
-    bool RegisterBaseNamedLockTypes { get; set; }
-
     bool RegisterDenormalizeHierarchicalDALListener { get; set; }
 
     IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> setupAction);
 
-    IBssFrameworkSettings AddNamedLockType(Type namedLockType);
+    IBssFrameworkSettings AddNamedLocks(Action<IGenericNamedLockSetup> setupAction);
 
     IBssFrameworkSettings AddListener<TListener>()
         where TListener : class, IDALListener;

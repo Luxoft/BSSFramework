@@ -44,7 +44,7 @@ public class SyncDenormalizedValuesService<TDomainObject,
     {
         this.LockChanges();
 
-        var ancestorDiffLinks = this.GetAncestorDiffirence(domainObject);
+        var ancestorDiffLinks = this.GetAncestorDifference(domainObject);
 
         Func<DiffAncestorLinks, MergeResult<TDomainObjectAncestorLink, AncestorLink>> getMergeFunc = diff =>
             diff.PersistentLinks.GetMergeResult(
@@ -136,7 +136,7 @@ public class SyncDenormalizedValuesService<TDomainObject,
     {
         this.LockChanges();
 
-        var ancestorDiffs = domainObject.GetAllChildren().Select(this.GetAncestorDiffirence).ToList();
+        var ancestorDiffs = domainObject.GetAllChildren().Select(this.GetAncestorDifference).ToList();
 
         Func<DiffAncestorLinks, MergeResult<TDomainObjectAncestorLink, AncestorLink>> getMergeFunc = diff =>
             diff.PersistentLinks.GetMergeResult(
@@ -186,7 +186,7 @@ public class SyncDenormalizedValuesService<TDomainObject,
     /// <returns>
     /// The <see cref="SyncDenormalizedValuesService"/>.
     /// </returns>
-    private DiffAncestorLinks GetAncestorDiffirence(TDomainObject domainObject)
+    private DiffAncestorLinks GetAncestorDifference(TDomainObject domainObject)
     {
         if (domainObject == null)
         {
@@ -195,7 +195,7 @@ public class SyncDenormalizedValuesService<TDomainObject,
 
         var ancestorLogic = this.domainObjectAncestorLinkDal.GetQueryable();
 
-        var actualAncestors = domainObject.GetAllParents().Select(z => new AncestorLink(child: domainObject, ancestor: z)).ToList();
+        var actualAncestors = domainObject.GetAllParents().Select(z => new AncestorLink(Child: domainObject, Ancestor: z)).ToList();
 
         var domainObjectIdents = new[] { domainObject.Id };
 
@@ -214,110 +214,14 @@ public class SyncDenormalizedValuesService<TDomainObject,
         this.domainObjectAncestorLinkDal.SaveAsync(domainObjectAncestorLink).GetAwaiter().GetResult();
     }
 
-    private Expression<Func<TDomainObject, bool>> GetEqualsIdentityExpression(TDomainObject domainObject)
+    private readonly record struct AncestorLink(TDomainObject Child, TDomainObject Ancestor);
+
+    private readonly record struct DiffAncestorLinks(
+        IEnumerable<AncestorLink> ActualLinks,
+        IEnumerable<TDomainObjectAncestorLink> PersistentLinks);
+
+    private readonly record struct SyncResult(IEnumerable<AncestorLink> Adding, IEnumerable<TDomainObjectAncestorLink> Removing)
     {
-        var parameter = Expression.Parameter(typeof(TDomainObject), "z");
-        var variable = Expression.Constant(domainObject);
-
-
-        var domainObjectIdPropertyExpression = Expression.Property(variable, this.identityPropertyExpression.Member.Name);
-
-        var currentParameterIdPropertyExpression = Expression.Property(parameter, this.identityPropertyExpression.Member.Name);
-
-        var equalExpression = Expression.Equal(domainObjectIdPropertyExpression, currentParameterIdPropertyExpression);
-
-        var result = Expression.Lambda<Func<TDomainObject, bool>>(equalExpression, parameter);
-
-        return result;
-    }
-
-    enum UpdateAncestorLinksMode
-    {
-        None,
-
-        CreateNew,
-
-        UpdateExists
-    }
-
-    struct AncestorLink
-    {
-        public readonly TDomainObject Child;
-
-        public readonly TDomainObject Ancestor;
-
-        public AncestorLink(TDomainObject child, TDomainObject ancestor)
-            : this()
-        {
-            this.Child = child;
-            this.Ancestor = ancestor;
-        }
-    }
-
-    struct DiffAncestorLinks
-    {
-        public readonly IEnumerable<AncestorLink> ActualLinks;
-
-        public readonly IEnumerable<TDomainObjectAncestorLink> PersistentLinks;
-
-        public DiffAncestorLinks(IEnumerable<AncestorLink> actualLinks, IEnumerable<TDomainObjectAncestorLink> persistentLinks)
-            : this()
-        {
-            this.PersistentLinks = persistentLinks;
-            this.ActualLinks = actualLinks;
-        }
-    }
-
-    /// <summary>
-    /// The sync result.
-    /// </summary>
-    struct SyncResult
-    {
-        /// <summary>
-        /// The removing.
-        /// </summary>
-        public readonly IEnumerable<TDomainObjectAncestorLink> Removing;
-
-        /// <summary>
-        /// The adding.
-        /// </summary>
-        public readonly IEnumerable<AncestorLink> Adding;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SyncResult"/> struct.
-        /// </summary>
-        /// <param name="adding">
-        /// The adding.
-        /// </param>
-        /// <param name="removing">
-        /// The removing.
-        /// </param>
-        public SyncResult(IEnumerable<AncestorLink> adding, IEnumerable<TDomainObjectAncestorLink> removing)
-            : this()
-        {
-            if (adding == null)
-            {
-                throw new ArgumentNullException(nameof(adding));
-            }
-
-            if (removing == null)
-            {
-                throw new ArgumentNullException(nameof(removing));
-            }
-
-            this.Adding = adding.ToList();
-            this.Removing = removing.ToList();
-        }
-
-        /// <summary>
-        /// The union.
-        /// </summary>
-        /// <param name="other">
-        /// The other.
-        /// </param>
-        /// <returns>
-        /// The <see cref="SyncDenormalizedValuesService"/>.
-        /// </returns>
         public SyncResult Union(SyncResult other)
         {
             return new SyncResult(this.Adding.Union(other.Adding), this.Removing.Union(other.Removing));

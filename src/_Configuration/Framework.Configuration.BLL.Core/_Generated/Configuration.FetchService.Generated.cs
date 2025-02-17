@@ -80,10 +80,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetExceptionMessageContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.GenericNamedLock)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetGenericNamedLockContainer(rule)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSentMessageContainer(rule)));
@@ -322,30 +318,6 @@ namespace Framework.Configuration.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
                 return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.ExceptionMessage>(fetchRootRule => fetchRootRule.SelectNested(exceptionMessage => exceptionMessage.InnerException));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.GenericNamedLock> GetGenericNamedLockContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.GenericNamedLock>.Empty;
             }
             else
             {

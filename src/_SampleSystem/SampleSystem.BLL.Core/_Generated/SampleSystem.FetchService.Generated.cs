@@ -734,6 +734,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetExample2Container(rule)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.GenericNamedLock)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetGenericNamedLockContainer(rule)));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.HRDepartment)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetHRDepartmentContainer(rule)));
@@ -1507,6 +1511,30 @@ namespace SampleSystem.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
                 return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Example2>(fetchRootRule => fetchRootRule.SelectNested(example2 => example2.Parent));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.GenericNamedLock> GetGenericNamedLockContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.GenericNamedLock>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.GenericNamedLock>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.GenericNamedLock>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.GenericNamedLock>.Empty;
             }
             else
             {

@@ -581,46 +581,6 @@ namespace Framework.Configuration.BLL
             return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.ExceptionMessage>(this.GetExceptionMessageProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.GenericNamedLock, System.DateTime?>> GetGenericNamedLock_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.GenericNamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.GenericNamedLock, string>> GetGenericNamedLock_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.GenericNamedLock>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.GenericNamedLock, string>> GetGenericNamedLock_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.GenericNamedLock>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.GenericNamedLock, System.DateTime?>> GetGenericNamedLock_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.GenericNamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.GenericNamedLock, string>> GetGenericNamedLock_NameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.GenericNamedLock>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.GenericNamedLock, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock>> GetGenericNamedLockProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.GenericNamedLock> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock, System.DateTime?>(source => source.CreateDate, currentClass, this.GetGenericNamedLock_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock, string>(source => source.CreatedBy, currentClass, this.GetGenericNamedLock_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock, string>(source => source.ModifiedBy, currentClass, this.GetGenericNamedLock_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetGenericNamedLock_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.GenericNamedLock, string>(source => source.Name, currentClass, this.GetGenericNamedLock_NameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.GenericNamedLock> GetGenericNamedLockValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.GenericNamedLock>(this.GetGenericNamedLockProperties);
-        }
-        
         protected override Framework.Validation.IClassValidationMap<TSource> GetInternalClassMap<TSource>()
         {
             if ((typeof(TSource) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
@@ -678,10 +638,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.ExceptionMessageRootFilterModel)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetExceptionMessageRootFilterModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.GenericNamedLock)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetGenericNamedLockValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.QueueProcessingState)))
             {

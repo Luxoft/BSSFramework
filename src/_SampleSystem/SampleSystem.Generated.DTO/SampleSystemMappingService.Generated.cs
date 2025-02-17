@@ -438,6 +438,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapExample2(SampleSystem.Domain.Example2 domainObject, SampleSystem.Generated.DTO.Example2EventRichDTO mappingObject);
         
+        void MapGenericNamedLock(SampleSystem.Domain.GenericNamedLock domainObject, SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO mappingObject);
+        
         void MapGuidBasedFilterModel(SampleSystem.Domain.Models.Filters.GuidBasedFilterModel domainObject, SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO mappingObject);
         
         void MapHerBusinessUnit(SampleSystem.Domain.Projections.HerBusinessUnit domainObject, SampleSystem.Generated.DTO.HerBusinessUnitProjectionDTO mappingObject);
@@ -1091,6 +1093,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.Example2 ToExample2(SampleSystem.Generated.DTO.Example2UpdateDTO example2UpdateDTO);
         
         SampleSystem.Domain.Example2 ToExample2(SampleSystem.Generated.DTO.Example2UpdateDTO example2UpdateDTO, SampleSystem.Domain.Example1 master);
+        
+        SampleSystem.Domain.GenericNamedLock ToGenericNamedLock(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO genericNamedLockIdentityDTO);
         
         SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel ToHierarchicalBusinessUnitFilterModel(SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelStrictDTO hierarchicalBusinessUnitFilterModelStrictDTO);
         
@@ -4924,6 +4928,18 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapGenericNamedLock(SampleSystem.Domain.GenericNamedLock domainObject, SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapGuidBasedFilterModel(SampleSystem.Domain.Models.Filters.GuidBasedFilterModel domainObject, SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO mappingObject)
         {
             mappingObject.BusinessUnits = domainObject.BusinessUnits;
@@ -8413,6 +8429,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.Example2 ToExample2(SampleSystem.Generated.DTO.Example2UpdateDTO example2UpdateDTO, SampleSystem.Domain.Example1 example1)
         {
             return this.ToDomainObject(example2UpdateDTO, () => new SampleSystem.Domain.Example2(example1));
+        }
+        
+        public virtual SampleSystem.Domain.GenericNamedLock ToGenericNamedLock(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO genericNamedLockIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.GenericNamedLock>(genericNamedLockIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel ToHierarchicalBusinessUnitFilterModel(SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelStrictDTO hierarchicalBusinessUnitFilterModelStrictDTO)

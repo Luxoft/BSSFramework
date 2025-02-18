@@ -1,8 +1,12 @@
-﻿namespace Framework.Configurator.Models;
+﻿using Framework.Events;
 
-public class DomainTypeDto : EntityDto
+namespace Framework.Configurator.Models;
+
+public class DomainTypeDto
 {
-    public string Namespace { get; set; }
+    public string Name { get; set; } = null!;
 
-    public List<EntityDto> Operations { get; set; }
+    public string FullName { get; set; } = null!;
+
+    public List<EventOperation> Operations { get; set; } = null!;
 }

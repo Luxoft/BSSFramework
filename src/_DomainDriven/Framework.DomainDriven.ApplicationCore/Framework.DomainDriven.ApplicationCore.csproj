@@ -9,7 +9,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
+
     <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Jobs\Framework.DomainDriven.Jobs.csproj" />
+    <ProjectReference Include="..\Framework.Events\Framework.Events.csproj" />
+    <ProjectReference Include="..\Framework.FinancialYear\Framework.FinancialYear.csproj" />
   </ItemGroup>
 
 </Project>

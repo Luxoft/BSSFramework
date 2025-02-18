@@ -1,6 +1,4 @@
-﻿
-using Framework.DomainDriven.Lock;
-using Framework.Persistent.Mapping;
+﻿using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;

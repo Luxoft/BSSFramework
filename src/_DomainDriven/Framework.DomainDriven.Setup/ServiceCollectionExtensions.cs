@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.ServiceModel.IAD;
+﻿using Framework.DomainDriven.ApplicationCore;
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.Extensions.DependencyInjection;

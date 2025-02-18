@@ -5,31 +5,43 @@
   <div class="mat-subtitle-1 tw-text-black">{{ data.Name }}</div>
 
   <div class="mat-caption tw-mt-5">Operation</div>
-  <mat-form-field appearance="fill" class="tw-w-full">
-    <mat-select [(value)]="result.operationId">
-      <mat-option *ngFor="let operation of data.Operations" [value]="operation.Id">{{ operation.Name }}</mat-option>
+  <mat-form-field appearance="fill"
+                  class="tw-w-full">
+    <mat-select [(value)]="result.operationName">
+      <mat-option *ngFor="let operation of data.Operations"
+                  [value]="operation.Name">{{ operation.Name }}</mat-option>
     </mat-select>
   </mat-form-field>
 
   <div class="mat-caption tw-mt-5">Id(s)</div>
   <mat-form-field class="tw-w-full">
-    <textarea matInput [(ngModel)]="result.domainTypesIds"></textarea>
+    <textarea matInput
+              [(ngModel)]="result.domainTypesIds"></textarea>
     <mat-hint> You can add multiple Ids using comma</mat-hint>
   </mat-form-field>
 
   <div class="mat-caption tw-mt-5">Revision</div>
-  <mat-form-field appearance="fill" class="tw-w-full">
-    <input matInput type="number" [(ngModel)]="result.revision" />
+  <mat-form-field appearance="fill"
+                  class="tw-w-full">
+    <input matInput
+           type="number"
+           [(ngModel)]="result.revision" />
   </mat-form-field>
 </div>
 
-<div mat-dialog-actions class="tw-flex tw-justify-between">
-  <button mat-raised-button (click)="close(result, false)">
+<div mat-dialog-actions
+     class="tw-flex tw-justify-between">
+  <button mat-raised-button
+          (click)="close(result, false)">
     <mat-icon> add </mat-icon>
     Push, and push another
   </button>
   <div>
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button color="primary" cdkFocusInitial (click)="close(result, true)">Push</button>
+    <button mat-button
+            mat-dialog-close>Cancel</button>
+    <button mat-raised-button
+            color="primary"
+            cdkFocusInitial
+            (click)="close(result, true)">Push</button>
   </div>
 </div>

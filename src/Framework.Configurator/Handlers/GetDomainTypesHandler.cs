@@ -1,37 +1,36 @@
-﻿using Framework.Configuration.Domain;
-using Framework.Configurator.Interfaces;
+﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
-using Framework.DomainDriven.Repository;
+using Framework.Events;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-using NHibernate.Linq;
-
 namespace Framework.Configurator.Handlers;
 
-public class GetDomainTypesHandler(IRepositoryFactory<DomainType> repoFactory, [CurrentUserWithoutRunAs]ISecuritySystem securitySystem)
+public class GetDomainTypesHandler([CurrentUserWithoutRunAs] ISecuritySystem securitySystem, IEventSystem? eventSystem = null)
     : BaseReadHandler, IGetDomainTypesHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
         if (!securitySystem.IsAdministrator()) return new List<DomainTypeDto>();
 
-        return await repoFactory.Create()
-                                .GetQueryable()
-                                .Where(x => x.TargetSystem.IsRevision)
-                                .OrderBy(x => x.Name)
-                                .Select(
-                                    x => new DomainTypeDto
-                                         {
-                                             Id = x.Id,
-                                             Name = x.Name,
-                                             Namespace = x.NameSpace,
-                                             Operations = x.EventOperations
-                                                           .OrderBy(o => o.Name)
-                                                           .Select(o => new EntityDto { Id = o.Id, Name = o.Name })
-                                                           .ToList()
-                                         })
-                                .ToListAsync(cancellationToken);
+        if (eventSystem == null)
+        {
+            throw new Exception($"{nameof(eventSystem)} not implemented");
+        }
+
+        return eventSystem.TypeResolver.GetTypes()
+                          .OrderBy(t => t.AssemblyQualifiedName)
+                          .ThenBy(t => t.Name)
+                          .Select(
+                              t => new DomainTypeDto
+                                   {
+                                       Name = t.Name,
+                                       FullName = t.FullName!,
+                                       Operations = eventSystem.DomainObjectEventMetadata.GetEventOperations(t)
+                                                               .OrderBy(o => o.Name)
+                                                               .ToList()
+                                   })
+                          .ToList();
     }
 }

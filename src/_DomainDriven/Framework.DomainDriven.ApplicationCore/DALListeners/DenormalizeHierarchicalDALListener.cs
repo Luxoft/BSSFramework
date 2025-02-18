@@ -5,7 +5,7 @@ using Framework.Persistent;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.DomainDriven.ApplicationCore.DALListeners;
 
 public class DenormalizeHierarchicalDALListener(IServiceProvider serviceProvider) : IBeforeTransactionCompletedDALListener
 {

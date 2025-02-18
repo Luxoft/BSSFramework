@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.ServiceModel.IAD;
+﻿namespace Framework.DomainDriven.ApplicationCore.DALListeners;
 
 public interface IDALListenerSetupObject
 {

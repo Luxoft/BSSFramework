@@ -4,8 +4,6 @@ using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 using Framework.Exceptions;
 
-
-
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Dialect;

@@ -12,11 +12,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.AutomationCore\Framework.AutomationCore.csproj" />
+    <ProjectReference Include="..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Jobs\Framework.DomainDriven.Jobs.csproj" />
 
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
-    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD\Framework.DomainDriven.ServiceModel.IAD.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.FinancialYear\Framework.FinancialYear.csproj" />
   </ItemGroup>
 
 </Project>

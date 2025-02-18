@@ -1,16 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 using Framework.DomainDriven.ApplicationCore.Security;
-using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
 using Framework.SecuritySystem;
 using Framework.DependencyInjection;
+using Framework.DomainDriven.ApplicationCore;
+using Framework.DomainDriven.ApplicationCore.DALListeners;
+using Framework.DomainDriven.Lock;
 
 using nuSpec.Abstraction;
-using Framework.DomainDriven.Lock;
 
 namespace Framework.DomainDriven.Setup;
 

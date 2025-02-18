@@ -5,7 +5,7 @@ using Framework.DomainDriven.Lock;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.DomainDriven.ApplicationCore.DALListeners;
 
 public class SyncDenormalizedValuesService<TDomainObject,
                                            TDomainObjectAncestorLink,

@@ -13,14 +13,12 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, Observable, takeUn
 import { EventPushDialogComponent, IPushedOperation } from './components/event-push-dialog/event-push-dialog.component';
 
 export interface IDomainType {
-  Id: string;
   Name: string;
-  Namespace: string;
+  FullName: string;
   Operations: IDomainTypeOperation[];
 }
 
 interface IDomainTypeOperation {
-  Id: string;
   Name: string;
 }
 
@@ -64,8 +62,13 @@ export class EventsComponent implements OnInit, OnDestroy {
         return;
       }
 
-      const dto = { Revision: result.revision, Ids: result.domainTypesIds };
-      this.http.post(`api/domainType/${selectedItem.Id}/operation/${result.operationId}`, dto).subscribe(() => {
+      const dto = {
+        DomainTypeFullName: selectedItem.FullName,
+        OperationName: result.operationName,
+        Revision: result.revision,
+        Ids: result.domainTypesIds,
+      };
+      this.http.post(`api/domainType/${selectedItem.Name}`, dto).subscribe(() => {
         this.snackBar.open(`Event '${selectedItem.Name}' has been pushed`);
       });
     });
@@ -76,11 +79,7 @@ export class EventsComponent implements OnInit, OnDestroy {
   }
 
   private filter(searchToken: string | null): IDomainType[] {
-    return searchToken
-      ? this.allItems.filter(
-          (x) => x.Name.toLowerCase().includes(searchToken.toLowerCase()) || x.Namespace.toLowerCase().includes(searchToken.toLowerCase())
-        )
-      : this.allItems;
+    return searchToken ? this.allItems.filter((x) => x.FullName.toLowerCase().includes(searchToken.toLowerCase())) : this.allItems;
   }
 
   private refresh(): void {

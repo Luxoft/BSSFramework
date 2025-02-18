@@ -4,7 +4,7 @@ using Framework.Events;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.DomainDriven.ApplicationCore.DALListeners;
 
 public class DALListenerSetupObject : IDALListenerSetupObject
 {

@@ -36,8 +36,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyGenericServices(this IServiceCollection services)
     {
-        services.AddScopedFrom<Framework.Configuration.Domain.ILegacyForceEventSystem, IDomainTypeBLLFactory>(
-            domainTypeBllFactory => domainTypeBllFactory.Create());
+        services.AddScoped<IEventSystem, ConfigurationEventSystem>();
 
         services.AddSingleton<SubscriptionMetadataStore>();
         services.AddSingleton<ISubscriptionMetadataFinder, SubscriptionMetadataFinder>();

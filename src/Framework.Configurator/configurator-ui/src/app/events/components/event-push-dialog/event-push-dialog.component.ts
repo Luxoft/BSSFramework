@@ -12,7 +12,7 @@ import { IDomainType } from '../../events.component';
 import { MatIconModule } from '@angular/material/icon';
 
 export interface IPushedOperation {
-  operationId: string | undefined;
+  operationName: string | undefined;
   domainTypesIds: string | undefined;
   revision: number | undefined;
 }
@@ -36,14 +36,14 @@ const SAVE_OPERATION = 'Save';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventPushDialogComponent implements OnInit {
-  public result: IPushedOperation = { operationId: undefined, domainTypesIds: undefined, revision: undefined };
+  public result: IPushedOperation = { operationName: undefined, domainTypesIds: undefined, revision: undefined };
   @Output() pushEvent = new EventEmitter<IPushedOperation>();
   constructor(@Inject(MAT_DIALOG_DATA) public data: IDomainType, private dialogRef: DialogRef) {}
 
   ngOnInit(): void {
     const saveOperation = this.data.Operations.find((operations) => operations.Name === SAVE_OPERATION);
     if (saveOperation) {
-      this.result.operationId = saveOperation.Id;
+      this.result.operationName = saveOperation.Name;
     }
   }
 

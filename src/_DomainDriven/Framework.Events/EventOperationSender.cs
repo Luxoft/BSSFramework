@@ -1,17 +1,10 @@
 ﻿namespace Framework.Events;
 
-public class EventOperationSender : IEventOperationSender
+public class EventOperationSender(IEnumerable<IEventOperationReceiver> receivers) : IEventOperationSender
 {
-    private readonly IEnumerable<IEventOperationReceiver> receivers;
-
-    public EventOperationSender(IEnumerable<IEventOperationReceiver> receivers)
-    {
-        this.receivers = receivers;
-    }
-
     public void Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
     {
-        foreach (var receiver in this.receivers)
+        foreach (var receiver in receivers)
         {
             receiver.Receive(domainObject, domainObjectEvent);
         }

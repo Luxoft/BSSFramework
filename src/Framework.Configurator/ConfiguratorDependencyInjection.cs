@@ -69,7 +69,7 @@ public static class ConfiguratorDependencyInjection
             .Post<IUpdateSystemConstantHandler>(route + "/api/constant/{id}")
             .Post<IUpdatePrincipalHandler>(route + "/api/principal/{id}")
             .Post<IUpdatePermissionsHandler>(route + "/api/principal/{id}/permissions")
-            .Post<IForcePushEventHandler>(route + "/api/domainType/{id}/operation/{operationId}")
+            .Post<IForcePushEventHandler>(route + "/api/domainType/{domainTypeName}")
             .Post<IRunAsHandler>($"{route}/api/principal/current/runAs")
             .Delete<IStopRunAsHandler>($"{route}/api/principal/current/runAs")
             .Delete<IDeletePrincipalHandler>(route + "/api/principal/{id}");

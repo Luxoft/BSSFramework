@@ -16,6 +16,8 @@ public static class DependencyInjectionExtensions
     {
         var setupObject = new NHibernateSetupObject();
 
+        services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
+
         services.AddScoped<INHibSessionSetup, NHibSessionSettings>();
 
         //For close db session by middleware

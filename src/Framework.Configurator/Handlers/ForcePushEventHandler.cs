@@ -1,6 +1,5 @@
-﻿using Framework.Configuration.Domain;
-using Framework.Configurator.Interfaces;
-using Framework.DomainDriven.Repository;
+﻿using Framework.Configurator.Interfaces;
+using Framework.Events;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
@@ -11,43 +10,48 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class ForcePushEventHandler(
-    IRepositoryFactory<DomainTypeEventOperation> eventOperationRepoFactory,
-    [CurrentUserWithoutRunAs]ISecuritySystem securitySystem,
-    ILegacyForceEventSystem? legacyForceEventSystem = null) : BaseWriteHandler, IForcePushEventHandler
+    [CurrentUserWithoutRunAs] ISecuritySystem securitySystem,
+    IEventSystem? eventSystem = null) : BaseWriteHandler, IForcePushEventHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
         securitySystem.CheckAccess(SecurityRole.Administrator);
 
-        var operationId = (string)context.Request.RouteValues["operationId"]!;
+        var domainTypeName = (string)context.Request.RouteValues["domainTypeName"]!;
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
 
-        await this.ForcePushAsync(new Guid(operationId), body, cancellationToken);
+        await this.ForceEventAsync(domainTypeName, body, cancellationToken);
     }
 
-    private async Task ForcePushAsync(Guid operationId, RequestBodyDto body, CancellationToken cancellationToken)
+    private async Task ForceEventAsync(
+        string domainTypeName,
+        RequestBodyDto body,
+        CancellationToken cancellationToken)
     {
-        var domainTypeEventOperation = await eventOperationRepoFactory.Create().LoadAsync(operationId, cancellationToken);
-
-        if (legacyForceEventSystem == null)
+        if (eventSystem == null)
         {
-            throw new Exception($"{nameof(legacyForceEventSystem)} not implemented");
+            throw new Exception($"{nameof(eventSystem)} not implemented");
         }
         else
         {
-            legacyForceEventSystem.ForceEvent(new DomainTypeEventModel
-                                              {
-                                                  Operation = domainTypeEventOperation,
-                                                  Revision = body.Revision,
-                                                  DomainObjectIdents = body.Ids.Split(',').Select(i => new Guid(i)).ToList()
-                                              });
+            await eventSystem.ForceEventAsync(
+                new EventModel(
+                    eventSystem.TypeResolver.Resolve(body.DomainTypeFullName),
+                    body.Ids.Split(',').Select(i => new Guid(i)).ToList(),
+                    new EventOperation(body.OperationName),
+                    body.Revision),
+                cancellationToken);
         }
     }
 
     private class RequestBodyDto
     {
+        public string DomainTypeFullName { get; set; } = null!;
+
+        public string OperationName { get; set; } = null!;
+
         public long? Revision { get; set; }
 
-        public string Ids { get; set; } = default!;
+        public string Ids { get; set; } = null!;
     }
 }

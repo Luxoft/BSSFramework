@@ -1,13 +1,11 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Core.Services;
+﻿using Framework.Core.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
+using Framework.DomainDriven.ApplicationCore.DALListeners;
 using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
-using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.Events;
 using Framework.Exceptions;
@@ -20,7 +18,7 @@ using Framework.SecuritySystem.PersistStorage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.DomainDriven.ApplicationCore;
 
 public static class ServiceCollectionExtensions
 {
@@ -70,8 +68,6 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterRepository(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
-
         services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Disabled), typeof(Repository<>));
         services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.View), typeof(ViewRepository<>));
         services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Edit), typeof(EditRepository<>));

@@ -7,12 +7,17 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetDomainTypesHandler([CurrentUserWithoutRunAs] ISecuritySystem securitySystem, IEventSystem eventSystem)
+public class GetDomainTypesHandler([CurrentUserWithoutRunAs] ISecuritySystem securitySystem, IEventSystem? eventSystem = null)
     : BaseReadHandler, IGetDomainTypesHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
         if (!securitySystem.IsAdministrator()) return new List<DomainTypeDto>();
+
+        if (eventSystem == null)
+        {
+            throw new Exception($"{nameof(eventSystem)} not implemented");
+        }
 
         return eventSystem.TypeResolver.GetTypes()
                           .OrderBy(t => t.AssemblyQualifiedName)

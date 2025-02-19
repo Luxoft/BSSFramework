@@ -4,7 +4,6 @@ using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 using Framework.SecuritySystem.ExternalSystem.Management;
 using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
-using Framework.SecuritySystem.UserSource;
 
 using Microsoft.AspNetCore.Http;
 
@@ -33,7 +32,7 @@ public class GetPrincipalHandler(
     private async Task<List<PermissionDetails>> GetPermissionsAsync(Guid principalId, CancellationToken cancellationToken)
     {
         var principal = await principalSourceService.TryGetPrincipalAsync(principalId, cancellationToken)
-                        ?? throw new UserSourceException($"Principal with id {principalId} not found");
+                        ?? throw new SecuritySystemException($"Principal with id {principalId} not found");
 
         return principal
                .Permissions

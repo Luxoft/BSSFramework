@@ -26,6 +26,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Core.AnonymousTypeBuilder\Framework.Core.AnonymousTypeBuilder.csproj" />
+    <ProjectReference Include="..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
+    <ProjectReference Include="..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
   </ItemGroup>
 
 </Project>

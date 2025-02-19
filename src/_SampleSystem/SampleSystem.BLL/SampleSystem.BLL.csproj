@@ -9,7 +9,6 @@
     <PackageReference Include="NHibernate" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.App.BLL\Framework.App.BLL.csproj" />
     <ProjectReference Include="..\SampleSystem.BLL.Core\SampleSystem.BLL.Core.csproj" />
   </ItemGroup>
 </Project>

@@ -12,7 +12,6 @@
     <Compile Include="..\..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework.App.Sdk\Framework.App.Sdk.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Security.Abstract\SampleSystem.Security.Abstract.csproj" />

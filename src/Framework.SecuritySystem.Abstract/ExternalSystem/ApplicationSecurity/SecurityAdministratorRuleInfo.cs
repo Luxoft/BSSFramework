@@ -1,5 +1,3 @@
-﻿using Framework.SecuritySystem;
-
-namespace Framework.DomainDriven.ApplicationSecurity;
+﻿namespace Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 
 public record SecurityAdministratorRuleInfo(DomainSecurityRule.RoleBaseSecurityRule SecurityRole);

@@ -10,6 +10,7 @@ using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.ExternalSystem;
+using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 using Framework.SecuritySystem.ExternalSystem.Management;
 using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 using Framework.SecuritySystem.PermissionOptimization;
@@ -82,7 +83,9 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterGeneralSecuritySystem(this IServiceCollection services)
     {
-        return services.AddScoped<ISecurityContextStorage, SecurityContextStorage>()
+        return services.AddSingleton<SecurityAdministratorRuleFactory>()
+
+                       .AddScoped<ISecurityContextStorage, SecurityContextStorage>()
                        .AddScoped(typeof(LocalStorage<>))
 
                        .AddScoped<IUserCredentialNameResolver, RootUserCredentialNameResolver>()

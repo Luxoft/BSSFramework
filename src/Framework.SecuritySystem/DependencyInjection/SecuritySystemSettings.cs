@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.DependencyInjection;
-using Framework.DomainDriven.ApplicationSecurity;
 using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
+using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 using Framework.SecuritySystem.SecurityAccessor;
 using Framework.SecuritySystem.SecurityRuleInfo;
 using Framework.SecuritySystem.Services;

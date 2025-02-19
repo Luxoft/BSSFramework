@@ -1,7 +1,6 @@
 ﻿using Framework.Core;
-using Framework.SecuritySystem;
 
-namespace Framework.DomainDriven.ApplicationSecurity;
+namespace Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 
 public class SecurityAdministratorRuleFactory(SecurityAdministratorRuleInfo securityAdministratorRuleInfo)
     : IFactory<DomainSecurityRule.RoleBaseSecurityRule>

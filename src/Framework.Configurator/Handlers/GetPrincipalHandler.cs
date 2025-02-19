@@ -1,7 +1,7 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
-using Framework.DomainDriven.ApplicationSecurity;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 using Framework.SecuritySystem.ExternalSystem.Management;
 using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 using Framework.SecuritySystem.UserSource;

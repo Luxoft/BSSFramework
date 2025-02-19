@@ -2,8 +2,8 @@
 
 using Framework.Configurator.Interfaces;
 using Framework.Core;
-using Framework.DomainDriven.ApplicationSecurity;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 
 using Microsoft.AspNetCore.Http;
 

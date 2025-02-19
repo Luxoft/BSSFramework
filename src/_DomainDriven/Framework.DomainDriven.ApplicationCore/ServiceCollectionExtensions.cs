@@ -2,7 +2,6 @@
 using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
-using Framework.DomainDriven.ApplicationSecurity;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.Repository;
@@ -39,8 +38,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IQueryableSource, RepositoryQueryableSource>();
         services.AddScoped(typeof(IPersistStorage<>), typeof(PersistStorage<>));
-
-        services.AddSingleton<SecurityAdministratorRuleFactory>();
 
         services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();
         services.AddSingleton(typeof(IJobServiceEvaluator<>), typeof(JobServiceEvaluator<>));

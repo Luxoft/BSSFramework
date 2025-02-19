@@ -1,27 +1,29 @@
-﻿using Framework.Configuration.Domain;
+﻿using Framework.ApplicationVariable;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
-using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-using NHibernate.Linq;
-
 namespace Framework.Configurator.Handlers;
 
-public class GetSystemConstantsHandler(IRepositoryFactory<SystemConstant> repoFactory, [CurrentUserWithoutRunAs]ISecuritySystem securitySystem)
+public class GetSystemConstantsHandler(
+    [CurrentUserWithoutRunAs] ISecuritySystem securitySystem,
+    IApplicationVariableStorage? variableStorage = null)
     : BaseReadHandler, IGetSystemConstantsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
         if (!securitySystem.IsAdministrator()) return new List<SystemConstantDto>();
 
-        return await repoFactory
-                     .Create()
-                     .GetQueryable()
-                     .Select(x => new SystemConstantDto { Id = x.Id, Name = x.Code, Description = x.Description, Value = x.Value })
-                     .OrderBy(x => x.Name)
-                     .ToListAsync(cancellationToken);
+        if (variableStorage == null)
+        {
+            throw new Exception($"{nameof(variableStorage)} not implemented");
+        }
+
+        var variables = await variableStorage.GetVariablesAsync(cancellationToken);
+
+        return variables.Select(x => new SystemConstantDto { Name = x.Key.Name, Description = x.Key.Description, Value = x.Value })
+                        .OrderBy(x => x.Name);
     }
 }

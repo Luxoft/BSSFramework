@@ -8,7 +8,7 @@ using Framework.Authorization.SecuritySystem.Initialize;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
-using Framework.DomainDriven.ApplicationCore.Security;
+using Framework.DomainDriven.ApplicationSecurity;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.DependencyInjection;

@@ -2,7 +2,6 @@
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.NHibernate;
 using Framework.Events;
-using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 
 using nuSpec.Abstraction;
@@ -22,8 +21,6 @@ public interface IBssFrameworkSettings : IBssFrameworkSettingsBase<IBssFramework
 
     IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
-
-    IBssFrameworkSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule);
 
     IBssFrameworkSettings SetSpecificationEvaluator<TSpecificationEvaluator>()
         where TSpecificationEvaluator : class, ISpecificationEvaluator;

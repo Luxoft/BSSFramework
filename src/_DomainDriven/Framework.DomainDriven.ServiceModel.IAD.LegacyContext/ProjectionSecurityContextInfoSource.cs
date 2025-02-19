@@ -3,10 +3,10 @@ using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class ProjectionSecurityContextSource(
+public class ProjectionSecurityContextInfoSource(
     IEnumerable<SecurityContextInfo> securityContextInfoList,
     IRealTypeResolver realTypeResolver)
-    : SecurityContextSource(securityContextInfoList)
+    : SecurityContextInfoSource(securityContextInfoList)
 {
     public override SecurityContextInfo GetSecurityContextInfo(Type type)
     {

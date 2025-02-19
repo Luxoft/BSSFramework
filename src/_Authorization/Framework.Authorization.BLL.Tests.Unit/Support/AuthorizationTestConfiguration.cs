@@ -1,6 +1,5 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
@@ -8,6 +7,7 @@ using Framework.DomainDriven.UnitTest.Mock;
 using Framework.DomainDriven.UnitTest.Mock.StubProxy;
 using Framework.Events;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -38,18 +38,18 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
         return this.WithExternalSourceMock(new TypedSecurityEntitySourceStub(result));
     }
 
-    public AuthorizationTestConfiguration WithExternalSourceMock(SecurityEntity[] result)
+    public AuthorizationTestConfiguration WithExternalSourceMock(SecurityContextData[] result)
     {
         return this.WithExternalSourceMock(new TypedSecurityEntitySourceStub(result));
     }
 
     private AuthorizationTestConfiguration WithExternalSourceMock(TypedSecurityEntitySourceStub stub)
     {
-        var securityEntitySourceMock = Substitute.For<ISecurityEntitySource>();
+        var securityEntitySourceMock = Substitute.For<ISecurityContextStorage>();
         securityEntitySourceMock.GetTyped(Arg.Any<Type>()).Returns(stub);
         securityEntitySourceMock.GetTyped(Arg.Any<Guid>()).Returns(stub);
 
-        this.Context.SecurityEntitySource.Returns(securityEntitySourceMock);
+        this.Context.SecurityContextStorage.Returns(securityEntitySourceMock);
         return this;
     }
 
@@ -62,36 +62,36 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
         return this;
     }
 
-    private class TypedSecurityEntitySourceStub : ITypedSecurityEntitySource
+    private class TypedSecurityEntitySourceStub : ITypedSecurityContextStorage
     {
         private readonly Guid[] result;
-        private readonly SecurityEntity[] result2;
+        private readonly SecurityContextData[] result2;
 
         public TypedSecurityEntitySourceStub(Guid[] result)
         {
             this.result = result;
         }
 
-        public TypedSecurityEntitySourceStub(SecurityEntity[] result2)
+        public TypedSecurityEntitySourceStub(SecurityContextData[] result2)
         {
             this.result2 = result2;
         }
 
-        public IEnumerable<SecurityEntity> GetSecurityEntities()
+        public IEnumerable<SecurityContextData> GetSecurityContexts()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<SecurityEntity> GetSecurityEntitiesByIdents(IEnumerable<Guid> securityEntityIdents)
+        public IEnumerable<SecurityContextData> GetSecurityContextsByIdents(IEnumerable<Guid> securityEntityIdents)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId)
+        public IEnumerable<SecurityContextData> GetSecurityContextsWithMasterExpand(Guid startSecurityEntityId)
         {
             if (this.result != null)
             {
-                return this.result.Select(x => new SecurityEntity(x, "", default));
+                return this.result.Select(x => new SecurityContextData(x, "", default));
             }
 
             if (this.result2 != null)
@@ -104,7 +104,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
 
         public bool IsExists(Guid securityEntityId) => throw new NotImplementedException();
 
-        private IEnumerable<SecurityEntity> GetChildren(SecurityEntity[] all, Guid parentId)
+        private IEnumerable<SecurityContextData> GetChildren(SecurityContextData[] all, Guid parentId)
         {
             yield return all.First(x => x.Id == parentId);
 

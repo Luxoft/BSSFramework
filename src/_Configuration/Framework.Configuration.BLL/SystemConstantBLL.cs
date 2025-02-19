@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 
+using Framework.ApplicationVariable;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -20,11 +21,11 @@ public partial class SystemConstantBLL
         base.Save(systemConstant);
     }
 
-    public T GetValue<T>(SystemConstant<T> typedSystemConstant)
+    public T GetValue<T>(ApplicationVariable<T> applicationVariable)
     {
-        if (typedSystemConstant == null) throw new ArgumentNullException(nameof(typedSystemConstant));
+        if (applicationVariable == null) throw new ArgumentNullException(nameof(applicationVariable));
 
-        var systemConstant = this.GetByCode(typedSystemConstant.Code, true);
+        var systemConstant = this.GetByCode(applicationVariable.Name, true);
 
         var serializer = this.Context.SystemConstantSerializerFactory.Create<T>();
 
@@ -37,7 +38,7 @@ public partial class SystemConstantBLL
 
         var currentConstants = this.GetFullList();
 
-        var initMethod = new Func<SystemConstant<object>, IList<SystemConstant>, SystemConstant>(this.Initialize).Method.GetGenericMethodDefinition();
+        var initMethod = new Func<ApplicationVariable<object>, IList<SystemConstant>, SystemConstant>(this.Initialize).Method.GetGenericMethodDefinition();
 
         var request = from field in systemConstantContainerType.GetFields(BindingFlags.Static | BindingFlags.Public)
 
@@ -45,7 +46,7 @@ public partial class SystemConstantBLL
 
                       where systemConstant != null
 
-                      let constType = systemConstant.GetType().GetGenericTypeImplementationArgument(typeof(SystemConstant<>))
+                      let constType = systemConstant.GetType().GetGenericTypeImplementationArgument(typeof(ApplicationVariable<>))
 
                       where constType != null
 
@@ -55,13 +56,13 @@ public partial class SystemConstantBLL
         return request.ToList();
     }
 
-    private SystemConstant Initialize<T>(SystemConstant<T> typedSystemConstant, IList<SystemConstant> systemConstants)
+    private SystemConstant Initialize<T>(ApplicationVariable<T> typedSystemConstant, IList<SystemConstant> systemConstants)
     {
         if (typedSystemConstant == null) throw new ArgumentNullException(nameof(typedSystemConstant));
         if (systemConstants == null) throw new ArgumentNullException(nameof(systemConstants));
 
-        var systemConstant = systemConstants.SingleOrDefault(sc => string.Equals(sc.Code, typedSystemConstant.Code, StringComparison.CurrentCultureIgnoreCase))
-                             ?? new SystemConstant { Code = typedSystemConstant.Code, Type = this.Context.Logics.DomainType.GetByType(typeof(T)) };
+        var systemConstant = systemConstants.SingleOrDefault(sc => string.Equals(sc.Code, typedSystemConstant.Name, StringComparison.CurrentCultureIgnoreCase))
+                             ?? new SystemConstant { Code = typedSystemConstant.Name, Type = this.Context.Logics.DomainType.GetByType(typeof(T)) };
 
         if (!systemConstant.IsManual)
         {

@@ -1,15 +1,15 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
-using Framework.DomainDriven.ApplicationCore.ExternalSource;
-using Framework.DomainDriven.ApplicationCore.Security;
+using Framework.DomainDriven.ApplicationSecurity;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
 public class GetBusinessRoleContextEntitiesHandler(
-    ISecurityEntitySource externalSource,
+    ISecurityContextStorage securityContextStorage,
     [CurrentUserWithoutRunAs]ISecuritySystem securitySystem)
     : BaseReadHandler, IGetBusinessRoleContextEntitiesHandler
 {
@@ -20,7 +20,7 @@ public class GetBusinessRoleContextEntitiesHandler(
         var securityContextTypeId = new Guid((string)context.Request.RouteValues["id"]!);
         var searchToken = context.Request.Query["searchToken"];
 
-        var entities = externalSource.GetTyped(securityContextTypeId).GetSecurityEntities();
+        var entities = securityContextStorage.GetTyped(securityContextTypeId).GetSecurityContexts();
 
         if (!string.IsNullOrWhiteSpace(searchToken))
             entities = entities.Where(p => p.Name.Contains(searchToken!, StringComparison.OrdinalIgnoreCase));

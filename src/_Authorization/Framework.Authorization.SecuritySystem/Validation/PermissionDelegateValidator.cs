@@ -2,9 +2,9 @@
 
 using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
 
@@ -15,21 +15,21 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     private readonly TimeProvider timeProvider;
 
-    private readonly ISecurityEntitySource securityEntitySource;
+    private readonly ISecurityContextStorage securityEntitySource;
 
-    private readonly ISecurityContextSource securityContextSource;
+    private readonly ISecurityContextInfoSource securityContextInfoSource;
 
     private readonly ISecurityRoleSource securityRoleSource;
 
     public PermissionDelegateValidator(
         TimeProvider timeProvider,
-        ISecurityEntitySource securityEntitySource,
-        ISecurityContextSource securityContextSource,
+        ISecurityContextStorage securityEntitySource,
+        ISecurityContextInfoSource securityContextInfoSource,
         ISecurityRoleSource securityRoleSource)
     {
         this.timeProvider = timeProvider;
         this.securityEntitySource = securityEntitySource;
-        this.securityContextSource = securityContextSource;
+        this.securityContextInfoSource = securityContextInfoSource;
         this.securityRoleSource = securityRoleSource;
 
         this.RuleFor(permission => permission.DelegatedFrom)
@@ -136,7 +136,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
         return subPermission.Period.IsEmpty || delegatedFrom.Period.Contains(subPermission.Period);
     }
 
-    private Dictionary<SecurityContextType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(
+    private Dictionary<SecurityContextType, IEnumerable<SecurityContextData>> GetInvalidDelegatedPermissionSecurities(
         Permission subPermission,
         Permission delegatedFrom)
     {
@@ -155,7 +155,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
         var invalidRequest1 = from requiredGroup in requiredEntitiesRequest
 
-                              let allSecurityEntities = this.securityEntitySource.GetTyped(requiredGroup.Key.Id).GetSecurityEntities()
+                              let allSecurityContexts = this.securityEntitySource.GetTyped(requiredGroup.Key.Id).GetSecurityContexts()
 
                               let securityContextType = requiredGroup.Key
 
@@ -167,7 +167,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
                                                         ? preAllowedEntities.Distinct()
                                                                             .GetAllElements(
                                                                                 allowedEntityId =>
-                                                                                    allSecurityEntities.Where(
+                                                                                    allSecurityContexts.Where(
                                                                                             v => v.ParentId == allowedEntityId)
                                                                                         .Select(v => v.Id))
                                                                             .Distinct()
@@ -177,7 +177,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
                               from securityContextId in requiredGroup
 
-                              let securityObject = allSecurityEntities.SingleOrDefault(v => v.Id == securityContextId)
+                              let securityObject = allSecurityContexts.SingleOrDefault(v => v.Id == securityContextId)
 
                               where securityObject != null // Протухшая безопасность
 
@@ -191,7 +191,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
                               let key = g.Key
 
-                              let value = (IEnumerable<SecurityEntity>)g
+                              let value = (IEnumerable<SecurityContextData>)g
 
                               select (key, value);
 
@@ -203,7 +203,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
                               let key = securityContextType
 
-                              let value = (IEnumerable<SecurityEntity>)new[] { new SecurityEntity(Guid.Empty, "[Not Selected Element]", Guid.Empty) }
+                              let value = (IEnumerable<SecurityContextData>)new[] { new SecurityContextData(Guid.Empty, "[Not Selected Element]", Guid.Empty) }
 
                               select (key, value);
 
@@ -212,7 +212,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     private SecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)
     {
-        return this.securityContextSource.GetSecurityContextInfo(securityContextType.Id);
+        return this.securityContextInfoSource.GetSecurityContextInfo(securityContextType.Id);
     }
 
     private bool IsExpandable(SecurityContextType securityContextType)

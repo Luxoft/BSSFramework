@@ -17,31 +17,20 @@ public class ForcePushEventHandler(
     {
         securitySystem.CheckAccess(SecurityRole.Administrator);
 
-        var domainTypeName = (string)context.Request.RouteValues["domainTypeName"]!;
-        var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
-
-        await this.ForceEventAsync(domainTypeName, body, cancellationToken);
-    }
-
-    private async Task ForceEventAsync(
-        string domainTypeName,
-        RequestBodyDto body,
-        CancellationToken cancellationToken)
-    {
         if (eventSystem == null)
         {
             throw new Exception($"{nameof(eventSystem)} not implemented");
         }
-        else
-        {
-            await eventSystem.ForceEventAsync(
-                new EventModel(
-                    eventSystem.TypeResolver.Resolve(body.DomainTypeFullName),
-                    body.Ids.Split(',').Select(i => new Guid(i)).ToList(),
-                    new EventOperation(body.OperationName),
-                    body.Revision),
-                cancellationToken);
-        }
+
+        var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
+
+        await eventSystem.ForceEventAsync(
+            new EventModel(
+                eventSystem.TypeResolver.Resolve(body.DomainTypeFullName),
+                body.Ids.Split(',').Select(i => new Guid(i)).ToList(),
+                new EventOperation(body.OperationName),
+                body.Revision),
+            cancellationToken);
     }
 
     private class RequestBodyDto

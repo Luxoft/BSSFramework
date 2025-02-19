@@ -6,7 +6,7 @@ namespace Framework.Authorization.Generated.DTO;
 
 [DataContract(Namespace = "Auth")]
 [AutoRequest]
-public class GetFullSecurityEntitiesByIdentsRequest
+public class GetFullSecurityContextsByIdentsRequest
 {
     [DataMember]
     [AutoRequestProperty(OrderIndex = 0)]
@@ -14,5 +14,5 @@ public class GetFullSecurityEntitiesByIdentsRequest
 
     [DataMember]
     [AutoRequestProperty(OrderIndex = 1)]
-    public List<SecurityEntityIdentityDTO> SecurityEntities { get; set; }
+    public List<SecurityEntityIdentityDTO> SecurityContexts { get; set; }
 }

@@ -14,7 +14,7 @@ public class AuthorizationPermissionSource(
     IAvailablePermissionSource availablePermissionSource,
     IRealTypeResolver realTypeResolver,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
-    ISecurityContextSource securityContextSource,
+    ISecurityContextInfoSource securityContextInfoSource,
     DomainSecurityRule.RoleBaseSecurityRule securityRule) : IPermissionSource<Permission>
 {
     public bool HasAccess()
@@ -30,7 +30,7 @@ public class AuthorizationPermissionSource(
                                                    .ToList();
 
         return permissions
-               .Select(permission => permission.ToDictionary(realTypeResolver, securityContextSource, securityTypes))
+               .Select(permission => permission.ToDictionary(realTypeResolver, securityContextInfoSource, securityTypes))
                .ToList();
     }
 

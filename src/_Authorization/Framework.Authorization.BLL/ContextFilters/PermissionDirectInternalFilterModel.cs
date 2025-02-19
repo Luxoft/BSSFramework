@@ -31,7 +31,7 @@ internal class PermissionDirectInternalFilterModel : IDomainObjectFilterModel<Pe
         }
         else
         {
-            var securityEntities = this.context.SecurityEntitySource.GetTyped(securityContextType.Id).GetSecurityEntitiesWithMasterExpand(securityContextId);
+            var securityEntities = this.context.SecurityContextStorage.GetTyped(securityContextType.Id).GetSecurityContextsWithMasterExpand(securityContextId);
 
             var entityIdents = securityEntities.ToList(se => se.Id);
 

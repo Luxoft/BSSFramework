@@ -15,8 +15,6 @@
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.Events\Framework.Events.csproj" />
-
-    <ProjectReference Include="..\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
     <ProjectReference Include="..\Framework.Configuration.LegacyAttributes\Framework.Configuration.LegacyAttributes.csproj" />
   </ItemGroup>
 

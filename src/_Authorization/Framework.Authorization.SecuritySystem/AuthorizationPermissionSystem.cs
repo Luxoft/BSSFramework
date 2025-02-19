@@ -10,7 +10,7 @@ namespace Framework.Authorization.SecuritySystem;
 
 public class AuthorizationPermissionSystem(
     IServiceProvider serviceProvider,
-    ISecurityContextSource securityContextSource,
+    ISecurityContextInfoSource securityContextInfoSource,
     SecurityRuleCredential securityRuleCredential)
     : IPermissionSystem<Permission>
 {
@@ -19,7 +19,7 @@ public class AuthorizationPermissionSystem(
     public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext
     {
-        var securityContextTypeId = securityContextSource.GetSecurityContextInfo<TSecurityContext>().Id;
+        var securityContextTypeId = securityContextInfoSource.GetSecurityContextInfo<TSecurityContext>().Id;
 
         return permission => permission.Restrictions
                                        .Where(restriction => restriction.SecurityContextType.Id == securityContextTypeId)

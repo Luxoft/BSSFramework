@@ -2,7 +2,7 @@
 
 using Framework.Configurator.Interfaces;
 using Framework.Core;
-using Framework.DomainDriven.ApplicationCore.Security;
+using Framework.DomainDriven.ApplicationSecurity;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public class DownloadPermissionTemplateHandler(
-    ISecurityContextSource securityContextSource,
+    ISecurityContextInfoSource securityContextInfoSource,
     [CurrentUserWithoutRunAs]ISecuritySystem securitySystem)
     : IDownloadPermissionTemplateHandler
 {
@@ -25,7 +25,7 @@ public class DownloadPermissionTemplateHandler(
         using var workbook = new XLWorkbook(resourceStream);
         var worksheet = workbook.Worksheet(1);
 
-        securityContextSource.GetSecurityContextTypes().Foreach(
+        securityContextInfoSource.GetSecurityContextTypes().Foreach(
             (securityContextType, index) =>
                 worksheet.Cell(1, FirstContentColumnIndex + index).Value = securityContextType.Name);
 

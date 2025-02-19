@@ -32,6 +32,8 @@ public partial interface IConfigurationBLLContext :
 
     ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
+    ITypeResolver<string> SystemConstantTypeResolver { get; }
+
     ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
 
     DomainType GetDomainType(Type type, bool throwOnNotFound);

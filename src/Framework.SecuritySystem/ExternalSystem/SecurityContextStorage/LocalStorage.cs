@@ -1,6 +1,4 @@
-﻿using Framework.SecuritySystem;
-
-namespace Framework.DomainDriven.ApplicationCore.ExternalSource;
+﻿namespace Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 public class LocalStorage<TSecurityContext>
     where TSecurityContext : ISecurityContext

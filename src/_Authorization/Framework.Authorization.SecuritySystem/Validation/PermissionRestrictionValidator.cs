@@ -1,21 +1,21 @@
 ﻿using FluentValidation;
 
 using Framework.Authorization.Domain;
-using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
 
 public class PermissionRestrictionValidator : AbstractValidator<PermissionRestriction>
 {
-    private readonly ISecurityContextSource securityContextSource;
+    private readonly ISecurityContextInfoSource securityContextInfoSource;
 
     public PermissionRestrictionValidator(
-        ISecurityContextSource securityContextSource,
+        ISecurityContextInfoSource securityContextInfoSource,
         ISecurityRoleSource securityRoleSource,
-        ISecurityEntitySource securityEntitySource)
+        ISecurityContextStorage securityEntitySource)
     {
-        this.securityContextSource = securityContextSource;
+        this.securityContextInfoSource = securityContextInfoSource;
 
         this.RuleFor(permissionRestriction => permissionRestriction.SecurityContextType)
             .Must(
@@ -44,6 +44,6 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
 
     private SecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)
     {
-        return this.securityContextSource.GetSecurityContextInfo(securityContextType.Id);
+        return this.securityContextInfoSource.GetSecurityContextInfo(securityContextType.Id);
     }
 }

@@ -12,7 +12,7 @@ namespace Framework.Authorization.BLL;
 public class LegacyNotificationPrincipalExtractor(
     IAuthorizationBLLContext context,
     INotificationBasePermissionFilterSource notificationBasePermissionFilterSource,
-    ISecurityContextSource securityContextSource)
+    ISecurityContextInfoSource securityContextInfoSource)
     : BLLContextContainer<IAuthorizationBLLContext>(context), INotificationPrincipalExtractor
 {
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(
@@ -40,11 +40,11 @@ public class LegacyNotificationPrincipalExtractor(
             {
                 var tailGroups = notificationFilterGroups.Skip(1).ToArray();
 
-                var firstGroupExternalSource = this.Context.SecurityEntitySource.GetTyped(firstGroup.SecurityContextType);
+                var firstGroupExternalSource = this.Context.SecurityContextStorage.GetTyped(firstGroup.SecurityContextType);
 
                 foreach (var preExpandedIdent in firstGroup.Idents)
                 {
-                    var withExpandPrincipalsRequest = from expandedIdent in firstGroupExternalSource.GetSecurityEntitiesWithMasterExpand(preExpandedIdent)
+                    var withExpandPrincipalsRequest = from expandedIdent in firstGroupExternalSource.GetSecurityContextsWithMasterExpand(preExpandedIdent)
 
                                                       let newFirstGroup = new NotificationFilterGroup(firstGroup.SecurityContextType, [expandedIdent.Id], firstGroup.ExpandType.WithoutHierarchical())
 
@@ -100,7 +100,7 @@ public class LegacyNotificationPrincipalExtractor(
         if (securityContextType == null) throw new ArgumentNullException(nameof(securityContextType));
         if (idetns == null) throw new ArgumentNullException(nameof(idetns));
 
-        var securityContextTypeId = securityContextSource.GetSecurityContextInfo(securityContextType).Id;
+        var securityContextTypeId = securityContextInfoSource.GetSecurityContextInfo(securityContextType).Id;
 
         return permission => permission.Restrictions.Any(fi => fi.SecurityContextType.Id == securityContextTypeId && idetns.Contains(fi.SecurityContextId))
                              || (allowEmpty && permission.Restrictions.All(fi => fi.SecurityContextType.Id != securityContextTypeId));

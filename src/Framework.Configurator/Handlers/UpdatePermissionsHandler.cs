@@ -1,6 +1,6 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Core;
-using Framework.DomainDriven.ApplicationCore.Security;
+using Framework.DomainDriven.ApplicationSecurity;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
@@ -11,7 +11,7 @@ namespace Framework.Configurator.Handlers;
 public class UpdatePermissionsHandler(
     [CurrentUserWithoutRunAs] ISecuritySystem securitySystem,
     ISecurityRoleSource securityRoleSource,
-    ISecurityContextSource securityContextSource,
+    ISecurityContextInfoSource securityContextInfoSource,
     IPrincipalManagementService principalManagementService,
     IConfiguratorIntegrationEvents? configuratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
@@ -54,7 +54,7 @@ public class UpdatePermissionsHandler(
             new Period(permission.StartDate, permission.EndDate),
             permission.Comment,
             permission.Contexts.ToDictionary(
-                pair => securityContextSource.GetSecurityContextInfo(new Guid(pair.Id)).Type,
+                pair => securityContextInfoSource.GetSecurityContextInfo(new Guid(pair.Id)).Type,
                 pair => pair.Entities.ToReadOnlyListI(e => new Guid(e))));
     }
 

@@ -13,6 +13,8 @@ public interface ISecuritySystemSettings
 {
     bool InitializeDefaultRoles { get; set; }
 
+    ISecuritySystemSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule);
+
     ISecuritySystemSettings AddSecurityContext<TSecurityContext>(
         Guid ident,
         string? name = null,

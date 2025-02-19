@@ -3,11 +3,11 @@ using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Core;
-using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.AvailableSecurity;
+using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 using Framework.SecuritySystem.Services;
 
 namespace Framework.Authorization.BLL;
@@ -38,7 +38,7 @@ public partial interface IAuthorizationBLLContext :
 
     TimeProvider TimeProvider { get; }
 
-    ISecurityEntitySource SecurityEntitySource { get; }
+    ISecurityContextStorage SecurityContextStorage { get; }
 
     INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 

@@ -1,12 +1,12 @@
 ﻿namespace Framework.SecuritySystem;
 
-public class SecurityContextSource : ISecurityContextSource
+public class SecurityContextInfoSource : ISecurityContextInfoSource
 {
     private readonly IReadOnlyDictionary<Type, SecurityContextInfo> byTypeSecurityContextInfoDict;
 
     private readonly IReadOnlyDictionary<Guid, SecurityContextInfo> byIdentSecurityContextInfoDict;
 
-    public SecurityContextSource(IEnumerable<SecurityContextInfo> securityContextInfoList)
+    public SecurityContextInfoSource(IEnumerable<SecurityContextInfo> securityContextInfoList)
     {
         this.SecurityContextInfoList = securityContextInfoList.ToList();
         this.byTypeSecurityContextInfoDict = this.SecurityContextInfoList.ToDictionary(v => v.Type);

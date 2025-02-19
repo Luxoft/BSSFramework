@@ -66,7 +66,7 @@ public static class ConfiguratorDependencyInjection
             .Get<IGetRunAsHandler>($"{route}/api/principal/current/runAs")
             .Get<IDownloadPermissionTemplateHandler>($"{route}/api/permissions/template")
             .Post<ICreatePrincipalHandler>($"{route}/api/principals")
-            .Post<IUpdateSystemConstantHandler>(route + "/api/constant/{id}")
+            .Post<IUpdateSystemConstantHandler>(route + "/api/constant/{name}")
             .Post<IUpdatePrincipalHandler>(route + "/api/principal/{id}")
             .Post<IUpdatePermissionsHandler>(route + "/api/principal/{id}/permissions")
             .Post<IForcePushEventHandler>(route + "/api/domainType/{domainTypeName}")

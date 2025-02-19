@@ -9,7 +9,7 @@ namespace Framework.Authorization.WebApi;
 public partial class AuthSLJsonController
 {
     [HttpPost]
-    public IEnumerable<SecurityContextData> GetFullSecurityContexts([FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity)
+    public IEnumerable<SecurityContextData> GetFullSecurityEntities([FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity)
     {
         return this.Evaluate(
             DBSessionMode.Read,
@@ -24,14 +24,14 @@ public partial class AuthSLJsonController
     }
 
     [HttpPost]
-    public IEnumerable<SecurityContextData> GetFullSecurityContextsByIdents([FromForm] GetFullSecurityContextsByIdentsRequest request)
+    public IEnumerable<SecurityContextData> GetFullSecurityEntitiesByIdents([FromForm] GetFullSecurityEntitiesByIdentsRequest request)
     {
         return this.Evaluate(
             DBSessionMode.Read,
             evaluateData =>
             {
                 return evaluateData.Context.SecurityContextStorage.GetTyped(request.SecurityContextType.Id)
-                                   .GetSecurityContextsByIdents(request.SecurityContexts.Select(v => v.Id))
+                                   .GetSecurityContextsByIdents(request.SecurityEntities.Select(v => v.Id))
                                    .ToList();
             });
     }

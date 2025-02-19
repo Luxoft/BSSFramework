@@ -46,7 +46,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.App.Subscriptions\Framework.App.Subscriptions.csproj" />
     <ProjectReference Include="..\SampleSystem.BLL.Core\SampleSystem.BLL.Core.csproj" />
   </ItemGroup>
   <ItemGroup>

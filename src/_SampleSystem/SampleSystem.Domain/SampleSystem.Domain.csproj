@@ -9,9 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.App.Domain\Framework.App.Domain.csproj" />
     <ProjectReference Include="..\..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
+    <ProjectReference Include="..\..\Framework.Security.LegacyAttributes\Framework.Security.LegacyAttributes.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.Notification.Abstract\Framework.Notification.Abstract.csproj" />
   </ItemGroup>

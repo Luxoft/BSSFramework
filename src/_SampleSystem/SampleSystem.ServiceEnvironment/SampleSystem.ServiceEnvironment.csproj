@@ -13,10 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.App.ServiceEnvironment\Framework.App.ServiceEnvironment.csproj" />
     <ProjectReference Include="..\..\Framework.HangfireCore\Framework.HangfireCore.csproj" />
     <ProjectReference Include="..\..\Framework.WebApi.Utils\Framework.WebApi.Utils.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Generated.DAL.NHibernate\Framework.Authorization.Generated.DAL.NHibernate.csproj" />
+    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Generated.DAL.NHibernate\Framework.Configuration.Generated.DAL.NHibernate.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup.Legacy\Framework.DomainDriven.Setup.Legacy.csproj" />
 
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />

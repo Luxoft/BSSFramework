@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.App.Dal\Framework.App.Dal.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.LegacyProjections\SampleSystem.Domain.LegacyProjections.csproj" />
   </ItemGroup>

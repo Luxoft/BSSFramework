@@ -6,7 +6,7 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.App.Dto\Framework.App.Dto.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
     <ProjectReference Include="..\SampleSystem.BLL.Core\SampleSystem.BLL.Core.csproj" />
   </ItemGroup>
 </Project>

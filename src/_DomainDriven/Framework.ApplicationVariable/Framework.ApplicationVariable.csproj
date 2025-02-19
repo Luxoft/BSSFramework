@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Configuration.Core</PackageId>
+    <PackageId>Luxoft.Framework.ApplicationVariable</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,7 +10,9 @@ using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.ExternalSystem;
+using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 using Framework.SecuritySystem.ExternalSystem.Management;
+using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 using Framework.SecuritySystem.PermissionOptimization;
 using Framework.SecuritySystem.SecurityAccessor;
 using Framework.SecuritySystem.SecurityRuleInfo;
@@ -36,7 +38,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection RegisterSecurityContextSource(
+    public static IServiceCollection RegisterSecurityContextInfoSource(
         this IServiceCollection services,
         Action<ISecurityContextInfoBuilder> setup)
     {
@@ -81,14 +83,22 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterGeneralSecuritySystem(this IServiceCollection services)
     {
-        return services.AddScoped<IUserCredentialNameResolver, RootUserCredentialNameResolver>()
+        return services.AddSingleton<SecurityAdministratorRuleFactory>()
+
+                       .AddScoped<ISecurityContextStorage, SecurityContextStorage>()
+                       .AddScoped(typeof(LocalStorage<>))
+
+                       .AddScoped<IUserCredentialNameResolver, RootUserCredentialNameResolver>()
 
                        .AddScoped<IRootPrincipalSourceService, RootPrincipalSourceService>()
-                       .AddNotImplemented<IPrincipalManagementService>($"{nameof(IPrincipalManagementService)} not supported", isScoped: true)
+                       .AddNotImplemented<IPrincipalManagementService>(
+                           $"{nameof(IPrincipalManagementService)} not supported",
+                           isScoped: true)
 
                        .AddSingleton<IClientSecurityRuleNameExtractor, ClientSecurityRuleNameExtractor>()
                        .AddSingleton<IClientSecurityRuleInfoSource, RootClientSecurityRuleInfoSource>()
-                       .AddKeyedSingleton<IClientSecurityRuleInfoSource, DomainModeClientSecurityRuleInfoSource>(RootClientSecurityRuleInfoSource.ElementKey)
+                       .AddKeyedSingleton<IClientSecurityRuleInfoSource, DomainModeClientSecurityRuleInfoSource>(
+                           RootClientSecurityRuleInfoSource.ElementKey)
                        .AddSingleton<IClientSecurityRuleResolver, ClientSecurityRuleResolver>()
                        .AddSingleton<IDomainModeSecurityRuleResolver, DomainModeSecurityRuleResolver>()
                        .AddSingleton<IDomainSecurityRoleExtractor, DomainSecurityRoleExtractor>()
@@ -102,7 +112,7 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityRuleExpander, RootSecurityRuleExpander>()
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
                        .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
-                       .AddSingleton<ISecurityContextSource, SecurityContextSource>()
+                       .AddSingleton<ISecurityContextInfoSource, SecurityContextInfoSource>()
                        .AddSingleton<ISecurityRuleBasicOptimizer, SecurityRuleBasicOptimizer>()
                        .AddSingleton<ISecurityRuleDeepOptimizer, SecurityRuleDeepOptimizer>()
 

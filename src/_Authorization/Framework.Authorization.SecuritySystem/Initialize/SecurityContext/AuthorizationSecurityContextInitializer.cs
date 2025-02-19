@@ -11,7 +11,7 @@ namespace Framework.Authorization.SecuritySystem.Initialize;
 
 public class AuthorizationSecurityContextInitializer(
     [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,
-    ISecurityContextSource securityContextSource,
+    ISecurityContextInfoSource securityContextInfoSource,
     ILogger<AuthorizationSecurityContextInitializer> logger,
     InitializerSettings settings)
     : IAuthorizationSecurityContextInitializer
@@ -20,7 +20,7 @@ public class AuthorizationSecurityContextInitializer(
     {
         var dbSecurityContextTypes = await securityContextTypeRepository.GetQueryable().ToListAsync(cancellationToken);
 
-        var mergeResult = dbSecurityContextTypes.GetMergeResult(securityContextSource.SecurityContextInfoList, et => et.Id, sc => sc.Id);
+        var mergeResult = dbSecurityContextTypes.GetMergeResult(securityContextInfoSource.SecurityContextInfoList, et => et.Id, sc => sc.Id);
 
         if (mergeResult.RemovingItems.Any())
         {

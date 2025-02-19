@@ -1,6 +1,6 @@
 ﻿namespace Framework.SecuritySystem;
 
-public interface ISecurityContextSource
+public interface ISecurityContextInfoSource
 {
     IReadOnlyList<SecurityContextInfo> SecurityContextInfoList { get; }
 

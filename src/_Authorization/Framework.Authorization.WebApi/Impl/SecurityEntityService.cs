@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
-using Framework.DomainDriven.ApplicationCore.ExternalSource;
+using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,29 +9,29 @@ namespace Framework.Authorization.WebApi;
 public partial class AuthSLJsonController
 {
     [HttpPost]
-    public IEnumerable<SecurityEntity> GetFullSecurityEntities([FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity)
+    public IEnumerable<SecurityContextData> GetFullSecurityEntities([FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity)
     {
         return this.Evaluate(
             DBSessionMode.Read,
             evaluateData =>
             {
                 return evaluateData.Context
-                                   .SecurityEntitySource
+                                   .SecurityContextStorage
                                    .GetTyped(securityContextTypeIdentity.Id)
-                                   .GetSecurityEntities()
+                                   .GetSecurityContexts()
                                    .ToList();
             });
     }
 
     [HttpPost]
-    public IEnumerable<SecurityEntity> GetFullSecurityEntitiesByIdents([FromForm] GetFullSecurityEntitiesByIdentsRequest request)
+    public IEnumerable<SecurityContextData> GetFullSecurityEntitiesByIdents([FromForm] GetFullSecurityEntitiesByIdentsRequest request)
     {
         return this.Evaluate(
             DBSessionMode.Read,
             evaluateData =>
             {
-                return evaluateData.Context.SecurityEntitySource.GetTyped(request.SecurityContextType.Id)
-                                   .GetSecurityEntitiesByIdents(request.SecurityEntities.Select(v => v.Id))
+                return evaluateData.Context.SecurityContextStorage.GetTyped(request.SecurityContextType.Id)
+                                   .GetSecurityContextsByIdents(request.SecurityEntities.Select(v => v.Id))
                                    .ToList();
             });
     }

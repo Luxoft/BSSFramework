@@ -10,7 +10,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ConstantEditDialogComponent } from './components/constant-edit-dialog/constant-edit-dialog.component';
 
 export interface ISystemConstant {
-  Id: string;
   Name: string;
   Description: string;
   Value: string;
@@ -43,7 +42,7 @@ export class ConstantsComponent implements OnInit {
           return;
         }
 
-        this.http.post(`api/constant/${selectedItem.Id}`, JSON.stringify(newValue)).subscribe(() => {
+        this.http.post(`api/constant/${selectedItem.Name}`, JSON.stringify(newValue)).subscribe(() => {
           this.snackBar.open('System constant has been changed');
           this.refresh();
         });

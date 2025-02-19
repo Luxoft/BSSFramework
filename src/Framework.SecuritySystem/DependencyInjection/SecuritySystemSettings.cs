@@ -4,6 +4,7 @@ using Framework.DependencyInjection;
 using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 using Framework.SecuritySystem.ExternalSystem;
+using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 using Framework.SecuritySystem.SecurityAccessor;
 using Framework.SecuritySystem.SecurityRuleInfo;
 using Framework.SecuritySystem.Services;
@@ -15,6 +16,8 @@ namespace Framework.SecuritySystem.DependencyInjection;
 
 public class SecuritySystemSettings : ISecuritySystemSettings
 {
+    private DomainSecurityRule.RoleBaseSecurityRule securityAdministratorRule = SecurityRole.Administrator;
+
     private readonly List<Action<IServiceCollection>> registerActions = [];
 
     private Action<IServiceCollection> registerUserSourceAction = _ => { };
@@ -31,6 +34,13 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public bool InitializeDefaultRoles { get; set; } = true;
 
+    public ISecuritySystemSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule)
+    {
+        this.securityAdministratorRule = rule;
+
+        return this;
+    }
+
     public ISecuritySystemSettings AddSecurityContext<TSecurityContext>(
         Guid ident,
         string? name,
@@ -42,7 +52,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public ISecuritySystemSettings AddSecurityContext(Action<ISecurityContextInfoBuilder> setup)
     {
-        this.registerActions.Add(sc => sc.RegisterSecurityContextSource(setup));
+        this.registerActions.Add(sc => sc.RegisterSecurityContextInfoSource(setup));
 
         return this;
     }
@@ -187,6 +197,8 @@ public class SecuritySystemSettings : ISecuritySystemSettings
 
     public void Initialize(IServiceCollection services)
     {
+        services.AddSingleton(new SecurityAdministratorRuleInfo(this.securityAdministratorRule));
+
         this.registerActions.ForEach(v => v(services));
 
         this.registerUserSourceAction(services);

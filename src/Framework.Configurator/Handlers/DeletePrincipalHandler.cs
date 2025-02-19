@@ -1,6 +1,6 @@
 ﻿using Framework.Configurator.Interfaces;
-using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.AspNetCore.Http;

@@ -1,6 +1,4 @@
-﻿using Framework.SecuritySystem;
-
-namespace Framework.DomainDriven.ApplicationCore.Security;
+﻿namespace Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 
 public static class SecuritySystemExtensions
 {

@@ -29,6 +29,7 @@ using Framework.SecuritySystem.SecurityRuleInfo;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.Lock;
 using Framework.SecuritySystem.DependencyInjection;
+using Framework.ApplicationVariable;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -36,6 +37,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyGenericServices(this IServiceCollection services)
     {
+        services.AddScoped<IApplicationVariableStorage, ConfigurationApplicationVariableStorage>();
         services.AddScoped<IEventSystem, ConfigurationEventSystem>();
 
         services.AddSingleton<SubscriptionMetadataStore>();
@@ -70,7 +72,7 @@ public static class ServiceCollectionExtensions
         services.RegisterConfigurationNamedLocks();
 
         services.ReplaceSingleton<IRealTypeResolver, ProjectionRealTypeResolver>();
-        services.ReplaceSingleton<ISecurityContextSource, ProjectionSecurityContextSource>();
+        services.ReplaceSingleton<ISecurityContextInfoSource, ProjectionSecurityContextInfoSource>();
 
         services
             .AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>,

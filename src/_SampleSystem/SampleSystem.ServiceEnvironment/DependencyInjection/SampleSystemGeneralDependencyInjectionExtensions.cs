@@ -33,11 +33,9 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                        .AddClientSecurityRuleInfoSource(typeof(SampleSystemSecurityGroup))
                                        .SetUserSource<Employee>(employee => employee.Id, employee => employee.Login, employee => employee.Active)
                                        .AddVirtualPermissions()
-                                   )
+                                       .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator))
 
                            .AddAuthorizationSystem()
-
-                           .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
                            .AddNamedLocks()
 

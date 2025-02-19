@@ -11,12 +11,12 @@ using Framework.SecuritySystem;
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.Validation;
-using Framework.DomainDriven.ApplicationCore.ExternalSource;
 using Framework.Events;
 using Framework.SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 using Framework.SecuritySystem.AvailableSecurity;
+using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.BLL;
 
@@ -32,7 +32,7 @@ public partial class AuthorizationBLLContext(
     TimeProvider timeProvider,
     IRootSecurityService<PersistentDomainObjectBase> securityService,
     IAuthorizationBLLFactoryContainer logics,
-    ISecurityEntitySource securityEntitySource,
+    ISecurityContextStorage securityContextStorage,
     INotificationPrincipalExtractor notificationPrincipalExtractor,
     ISecuritySystem securitySystem,
     IRunAsManager runAsManager,
@@ -41,7 +41,7 @@ public partial class AuthorizationBLLContext(
     ICurrentPrincipalSource currentPrincipalSource,
     IPrincipalGeneralValidator principalValidator,
     ICurrentUser currentUser,
-    ISecurityContextSource securityContextSource,
+    ISecurityContextInfoSource securityContextInfoSource,
     BLLContextSettings<PersistentDomainObjectBase> settings,
     IAvailableSecurityOperationSource availableSecurityOperationSource)
     : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, IAuthorizationBLLFactoryContainer>(
@@ -56,7 +56,7 @@ public partial class AuthorizationBLLContext(
 {
     private readonly IDictionaryCache<Type, SecurityContextType> securityContextTypeCache = new DictionaryCache<Type, SecurityContextType>(
         securityContextType => logics.SecurityContextType.GetById(
-            securityContextSource.GetSecurityContextInfo(securityContextType).Id,
+            securityContextInfoSource.GetSecurityContextInfo(securityContextType).Id,
             true)).WithLock();
 
     public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
@@ -83,7 +83,7 @@ public partial class AuthorizationBLLContext(
 
     public override IAuthorizationBLLFactoryContainer Logics { get; } = logics;
 
-    public ISecurityEntitySource SecurityEntitySource { get; } = securityEntitySource;
+    public ISecurityContextStorage SecurityContextStorage { get; } = securityContextStorage;
 
     public TimeProvider TimeProvider { get; } = timeProvider;
 

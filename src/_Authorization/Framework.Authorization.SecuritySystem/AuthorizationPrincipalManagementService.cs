@@ -12,7 +12,7 @@ namespace Framework.Authorization.SecuritySystem;
 public class AuthorizationPrincipalManagementService(
     [DisabledSecurity] IRepository<Principal> principalRepository,
     ISecurityRoleSource securityRoleSource,
-    ISecurityContextSource securityContextSource,
+    ISecurityContextInfoSource securityContextInfoSource,
     IAvailablePermissionSource availablePermissionSource,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     [DisabledSecurity] IRepository<BusinessRole> businessRoleRepository,
@@ -22,7 +22,7 @@ public class AuthorizationPrincipalManagementService(
     : AuthorizationPrincipalSourceService(
       principalRepository,
       securityRoleSource,
-      securityContextSource,
+      securityContextInfoSource,
       availablePermissionSource),
       IPrincipalManagementService
 {
@@ -112,7 +112,7 @@ public class AuthorizationPrincipalManagementService(
 
         foreach (var restrictionGroup in typedPermission.Restrictions)
         {
-            var securityContextTypeId = securityContextSource.GetSecurityContextInfo(restrictionGroup.Key).Id;
+            var securityContextTypeId = securityContextInfoSource.GetSecurityContextInfo(restrictionGroup.Key).Id;
 
             foreach (var securityContextId in restrictionGroup.Value)
             {
@@ -159,7 +159,7 @@ public class AuthorizationPrincipalManagementService(
         }
 
         var restrictionMergeResult = dbPermission.Restrictions.GetMergeResult(
-            typedPermission.Restrictions.ChangeKey(t => securityContextSource.GetSecurityContextInfo(t).Id)
+            typedPermission.Restrictions.ChangeKey(t => securityContextInfoSource.GetSecurityContextInfo(t).Id)
                            .SelectMany(pair => pair.Value.Select(securityContextId => (pair.Key, securityContextId))),
             r => (r.SecurityContextType.Id, r.SecurityContextId),
             pair => pair);

@@ -14,7 +14,7 @@ namespace Framework.Authorization.SecuritySystem;
 public class AuthorizationPrincipalSourceService(
     [DisabledSecurity] IRepository<Principal> principalRepository,
     ISecurityRoleSource securityRoleSource,
-    ISecurityContextSource securityContextSource,
+    ISecurityContextInfoSource securityContextInfoSource,
     IAvailablePermissionSource availablePermissionSource) : IPrincipalSourceService
 {
     public async Task<IEnumerable<TypedPrincipalHeader>> GetPrincipalsAsync(
@@ -70,7 +70,7 @@ public class AuthorizationPrincipalSourceService(
                                  permission.Restrictions
                                            .GroupBy(r => r.SecurityContextType.Id, r => r.SecurityContextId)
                                            .ToDictionary(
-                                               g => securityContextSource.GetSecurityContextInfo(g.Key).Type,
+                                               g => securityContextInfoSource.GetSecurityContextInfo(g.Key).Type,
                                                g => g.ToReadOnlyListI())))
                          .ToList());
         }

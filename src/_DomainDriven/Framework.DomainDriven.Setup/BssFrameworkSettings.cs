@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.NHibernate;
-using Framework.SecuritySystem;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.ApplicationCore;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
@@ -24,8 +22,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     private Type domainObjectEventMetadataType = typeof(DomainObjectEventMetadata);
 
     private Type? specificationEvaluatorType;
-
-    private DomainSecurityRule.RoleBaseSecurityRule securityAdministratorRule = SecurityRole.Administrator;
 
     public bool RegisterDenormalizeHierarchicalDALListener { get; set; } = true;
 
@@ -62,13 +58,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         where T : IDomainObjectEventMetadata
     {
         this.domainObjectEventMetadataType = typeof(T);
-
-        return this;
-    }
-
-    public IBssFrameworkSettings SetSecurityAdministratorRule(DomainSecurityRule.RoleBaseSecurityRule rule)
-    {
-        this.securityAdministratorRule = rule;
 
         return this;
     }
@@ -110,8 +99,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public void Initialize(IServiceCollection services)
     {
         this.InitializeDefault();
-
-        services.AddSingleton(new SecurityAdministratorRuleInfo(this.securityAdministratorRule));
 
         services.AddScoped(typeof(IDomainObjectEventMetadata), this.domainObjectEventMetadataType);
 

@@ -1,14 +1,14 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
-using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
 public class GetBusinessRoleContextsHandler(
-    ISecurityContextSource securityContextSource,
+    ISecurityContextInfoSource securityContextInfoSource,
     [CurrentUserWithoutRunAs]ISecuritySystem securitySystem)
     : BaseReadHandler, IGetBusinessRoleContextsHandler
 {
@@ -16,7 +16,7 @@ public class GetBusinessRoleContextsHandler(
     {
         if (!securitySystem.IsSecurityAdministrator()) return new List<EntityDto>();
 
-        return securityContextSource
+        return securityContextInfoSource
                .SecurityContextInfoList
                .Select(x => new EntityDto { Id = x.Id, Name = x.Name })
                .OrderBy(x => x.Name)

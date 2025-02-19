@@ -8,8 +8,4 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\_Configuration\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
-  </ItemGroup>
-
 </Project>

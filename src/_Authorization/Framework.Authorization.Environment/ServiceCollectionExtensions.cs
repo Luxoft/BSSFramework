@@ -8,11 +8,11 @@ using Framework.Authorization.SecuritySystem.Initialize;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
-using Framework.DomainDriven.ApplicationCore.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.ExternalSystem;
+using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 using Framework.SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.Extensions.DependencyInjection;

@@ -79,6 +79,7 @@ public partial class ConfigurationBLLContext
                                                                                 new EqualityComparerImpl<IDomainType>((dt1, dt2) => dt1.Name == dt2.Name && dt1.NameSpace == dt2.NameSpace, dt => dt.Name.GetHashCode() ^ dt.NameSpace.GetHashCode())).WithLock();
 
         this.SystemConstantSerializerFactory = settings.SystemConstantSerializerFactory;
+        this.SystemConstantTypeResolver = settings.SystemConstantTypeResolver;
 
         this.ComplexDomainTypeResolver = TypeResolverHelper.Create(
                                                                    (DomainType domainType) =>
@@ -127,6 +128,8 @@ public partial class ConfigurationBLLContext
     public IAuthorizationBLLContext Authorization { get; }
 
     public ISerializerFactory<string> SystemConstantSerializerFactory { get; }
+
+    public ITypeResolver<string> SystemConstantTypeResolver { get; }
 
     public bool SubscriptionEnabled => this.lazyTargetSystemServiceCache.Value.Values.Any(tss => tss.TargetSystem.SubscriptionEnabled);
 

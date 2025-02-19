@@ -1,10 +1,9 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
-using Framework.DomainDriven.ApplicationCore.ExternalSource;
-using Framework.DomainDriven.ApplicationCore.Security;
-using Framework.Exceptions;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
 using Framework.SecuritySystem.ExternalSystem.Management;
+using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 using Microsoft.AspNetCore.Http;
 
@@ -12,8 +11,8 @@ namespace Framework.Configurator.Handlers;
 
 public class GetPrincipalHandler(
     IRootPrincipalSourceService principalSourceService,
-    ISecurityEntitySource externalSource,
-    ISecurityContextSource securityContextSource,
+    ISecurityContextStorage securityContextStorage,
+    ISecurityContextInfoSource securityContextInfoSource,
     ISecurityRoleSource securityRoleSource,
     [CurrentUserWithoutRunAs]ISecuritySystem securitySystem) : BaseReadHandler, IGetPrincipalHandler
 {
@@ -33,7 +32,7 @@ public class GetPrincipalHandler(
     private async Task<List<PermissionDetails>> GetPermissionsAsync(Guid principalId, CancellationToken cancellationToken)
     {
         var principal = await principalSourceService.TryGetPrincipalAsync(principalId, cancellationToken)
-                        ?? throw new BusinessLogicException($"Principal with id {principalId} not found");
+                        ?? throw new SecuritySystemException($"Principal with id {principalId} not found");
 
         return principal
                .Permissions
@@ -55,7 +54,7 @@ public class GetPrincipalHandler(
                                               pair.Value.Select(
                                                   securityContextId =>
                                                       new KeyValuePair<Guid, Guid>(
-                                                          securityContextSource.GetSecurityContextInfo(pair.Key).Id,
+                                                          securityContextInfoSource.GetSecurityContextInfo(pair.Key).Id,
                                                           securityContextId)))
                                       .ToList()
                        })
@@ -73,10 +72,10 @@ public class GetPrincipalHandler(
 
                       into g
 
-                      let securityContextTypeInfo = securityContextSource.GetSecurityContextInfo(g.Key)
+                      let securityContextTypeInfo = securityContextInfoSource.GetSecurityContextInfo(g.Key)
 
-                      let entities = externalSource.GetTyped(g.Key)
-                                                   .GetSecurityEntitiesByIdents(g.Distinct().ToList())
+                      let entities = securityContextStorage.GetTyped(g.Key)
+                                                   .GetSecurityContextsByIdents(g.Distinct().ToList())
                                                    .ToDictionary(e => e.Id, e => e.Name)
 
                       select (securityContextTypeInfo.Id, new ContextItem { Context = securityContextTypeInfo.Name, Entities = entities });

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
-using Framework.Configurator.Handlers;
 using Framework.Configurator.Interfaces;
+using Framework.Core;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
@@ -14,28 +14,17 @@ public static class ConfiguratorDependencyInjection
 {
     private const string EmbeddedFileNamespace = "Framework.Configurator.configurator_ui.dist";
 
-    public static IServiceCollection AddConfigurator(this IServiceCollection services)
-        => services
-           .AddScoped<IGetSystemConstantsHandler, GetSystemConstantsHandler>()
-           .AddScoped<IGetDomainTypesHandler, GetDomainTypesHandler>()
-           .AddScoped<IGetOperationHandler, GetOperationHandler>()
-           .AddScoped<IGetOperationsHandler, GetOperationsHandler>()
-           .AddScoped<IGetBusinessRolesHandler, GetBusinessRolesHandler>()
-           .AddScoped<IGetPrincipalsHandler, GetPrincipalsHandler>()
-           .AddScoped<IGetRunAsHandler, GetRunAsHandler>()
-           .AddScoped<IGetBusinessRoleContextsHandler, GetBusinessRoleContextsHandler>()
-           .AddScoped<IGetBusinessRoleContextEntitiesHandler, GetBusinessRoleContextEntitiesHandler>()
-           .AddScoped<IGetPrincipalHandler, GetPrincipalHandler>()
-           .AddScoped<IGetBusinessRoleHandler, GetBusinessRoleHandler>()
-           .AddScoped<ICreatePrincipalHandler, CreatePrincipalHandler>()
-           .AddScoped<IUpdateSystemConstantHandler, UpdateSystemConstantHandler>()
-           .AddScoped<IUpdatePrincipalHandler, UpdatePrincipalHandler>()
-           .AddScoped<IUpdatePermissionsHandler, UpdatePermissionsHandler>()
-           .AddScoped<IForcePushEventHandler, ForcePushEventHandler>()
-           .AddScoped<IDeletePrincipalHandler, DeletePrincipalHandler>()
-           .AddScoped<IRunAsHandler, RunAsHandler>()
-           .AddScoped<IStopRunAsHandler, StopRunAsHandler>()
-           .AddScoped<IDownloadPermissionTemplateHandler, DownloadPermissionTemplateHandler>();
+    public static IServiceCollection AddConfigurator(this IServiceCollection services, Action<IConfiguratorSetup>? setupAction = null)
+    {
+        var configurationSetup = new ConfiguratorSetup();
+
+        configurationSetup.AddModule(new ConfiguratorMainModule());
+        setupAction?.Invoke(configurationSetup);
+
+        configurationSetup.Initialize(services);
+
+        return services;
+    }
 
     public static IApplicationBuilder UseConfigurator(this IApplicationBuilder app, string route = "/admin/configurator") =>
         app
@@ -52,43 +41,24 @@ public static class ConfiguratorDependencyInjection
             .UseEndpoints(x => x.MapApi(route));
 
     private static void MapApi(this IEndpointRouteBuilder endpointsBuilder, string route) =>
-        endpointsBuilder
-            .Get<IGetSystemConstantsHandler>($"{route}/api/constants")
-            .Get<IGetDomainTypesHandler>($"{route}/api/domainTypes")
-            .Get<IGetOperationsHandler>($"{route}/api/operations")
-            .Get<IGetOperationHandler>(route + "/api/operation/{name}")
-            .Get<IGetBusinessRolesHandler>($"{route}/api/roles")
-            .Get<IGetBusinessRoleContextsHandler>($"{route}/api/contexts")
-            .Get<IGetPrincipalsHandler>($"{route}/api/principals")
-            .Get<IGetBusinessRoleHandler>(route + "/api/role/{id}")
-            .Get<IGetPrincipalHandler>(route + "/api/principal/{id}")
-            .Get<IGetBusinessRoleContextEntitiesHandler>(route + "/api/context/{id}/entities")
-            .Get<IGetRunAsHandler>($"{route}/api/principal/current/runAs")
-            .Get<IDownloadPermissionTemplateHandler>($"{route}/api/permissions/template")
-            .Post<ICreatePrincipalHandler>($"{route}/api/principals")
-            .Post<IUpdateSystemConstantHandler>(route + "/api/constant/{name}")
-            .Post<IUpdatePrincipalHandler>(route + "/api/principal/{id}")
-            .Post<IUpdatePermissionsHandler>(route + "/api/principal/{id}/permissions")
-            .Post<IForcePushEventHandler>(route + "/api/domainType/{domainTypeName}")
-            .Post<IRunAsHandler>($"{route}/api/principal/current/runAs")
-            .Delete<IStopRunAsHandler>($"{route}/api/principal/current/runAs")
-            .Delete<IDeletePrincipalHandler>(route + "/api/principal/{id}");
+        endpointsBuilder.ServiceProvider.GetRequiredService<IEnumerable<IConfiguratorModule>>()
+                        .Foreach(module => module.MapApi(endpointsBuilder, route));
 
-    private static IEndpointRouteBuilder Get<THandler>(this IEndpointRouteBuilder builder, string pattern)
+    public static IEndpointRouteBuilder Get<THandler>(this IEndpointRouteBuilder builder, string pattern)
         where THandler : IHandler
     {
         builder.MapGet(pattern, async x => await x.RequestServices.GetRequiredService<THandler>().Execute(x, x.RequestAborted));
         return builder;
     }
 
-    private static IEndpointRouteBuilder Post<THandler>(this IEndpointRouteBuilder builder, string pattern)
+    public static IEndpointRouteBuilder Post<THandler>(this IEndpointRouteBuilder builder, string pattern)
         where THandler : IHandler
     {
         builder.MapPost(pattern, async x => await x.RequestServices.GetRequiredService<THandler>().Execute(x, x.RequestAborted));
         return builder;
     }
 
-    private static IEndpointRouteBuilder Delete<THandler>(this IEndpointRouteBuilder builder, string pattern)
+    public static IEndpointRouteBuilder Delete<THandler>(this IEndpointRouteBuilder builder, string pattern)
         where THandler : IHandler
     {
         builder.MapDelete(pattern, async x => await x.RequestServices.GetRequiredService<THandler>().Execute(x, x.RequestAborted));

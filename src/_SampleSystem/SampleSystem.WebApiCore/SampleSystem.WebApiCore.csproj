@@ -14,8 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.Configurator.ApplicationVariable\Framework.Configurator.ApplicationVariable.csproj" />
+    <ProjectReference Include="..\..\Framework.Configurator.Events\Framework.Configurator.Events.csproj" />
+
     <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />
-    <ProjectReference Include="..\..\Framework.Configurator\Framework.Configurator.csproj" />
     <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
 
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.WebApi\Framework.Authorization.WebApi.csproj" />

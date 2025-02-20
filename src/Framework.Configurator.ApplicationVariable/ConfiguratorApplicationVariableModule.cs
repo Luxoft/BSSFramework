@@ -8,7 +8,7 @@ namespace Framework.Configurator;
 
 public class ConfiguratorApplicationVariableModule : IConfiguratorModule
 {
-    public string Name { get; } = "ApplicationVariable";
+    public string Name { get; } = "ApplicationVariables";
 
     public void AddServices(IServiceCollection services)
     {

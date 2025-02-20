@@ -8,17 +8,12 @@ namespace Framework.Configurator.Handlers;
 
 public class UpdateSystemConstantHandler(
     [CurrentUserWithoutRunAs] ISecuritySystem securitySystem,
-    IApplicationVariableStorage? variableStorage = null)
+    IApplicationVariableStorage variableStorage)
     : BaseWriteHandler, IUpdateSystemConstantHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
         securitySystem.CheckAccess(SecurityRole.Administrator);
-
-        if (variableStorage == null)
-        {
-            throw new Exception($"{nameof(variableStorage)} not implemented");
-        }
 
         var variableName = (string?)context.Request.RouteValues["name"]!;
         var newValue = await this.ParseRequestBodyAsync<string>(context);

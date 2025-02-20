@@ -53,7 +53,7 @@ builder.Services
                x.SqlServer.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
                x.MessageQueue.Enable = false;
            })
-       .AddConfigurator()
+       .AddConfigurator(setup => setup.AddEvents().AddApplicationVariables())
        .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
        .AddNegotiate();
 

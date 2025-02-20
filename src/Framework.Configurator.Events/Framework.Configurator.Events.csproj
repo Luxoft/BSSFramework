@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Configurator.Events</PackageId>
+    <RootNamespace>Framework.Configurator</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Configurator\Framework.Configurator.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.Events\Framework.Events.csproj" />
+  </ItemGroup>
+
+</Project>

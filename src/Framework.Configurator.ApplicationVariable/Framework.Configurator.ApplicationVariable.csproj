@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Configurator.ApplicationVariable</PackageId>
+    <RootNamespace>Framework.Configurator</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Configurator\Framework.Configurator.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.ApplicationVariable\Framework.ApplicationVariable.csproj" />
+  </ItemGroup>
+
+</Project>

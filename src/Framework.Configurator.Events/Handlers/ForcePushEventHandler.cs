@@ -9,18 +9,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class ForcePushEventHandler(
-    [CurrentUserWithoutRunAs] ISecuritySystem securitySystem,
-    IEventSystem? eventSystem = null) : BaseWriteHandler, IForcePushEventHandler
+public class ForcePushEventHandler([CurrentUserWithoutRunAs] ISecuritySystem securitySystem, IEventSystem eventSystem)
+    : BaseWriteHandler, IForcePushEventHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
         securitySystem.CheckAccess(SecurityRole.Administrator);
-
-        if (eventSystem == null)
-        {
-            throw new Exception($"{nameof(eventSystem)} not implemented");
-        }
 
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
 

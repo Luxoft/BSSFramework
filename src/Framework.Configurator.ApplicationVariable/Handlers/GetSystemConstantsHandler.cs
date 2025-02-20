@@ -9,17 +9,12 @@ namespace Framework.Configurator.Handlers;
 
 public class GetSystemConstantsHandler(
     [CurrentUserWithoutRunAs] ISecuritySystem securitySystem,
-    IApplicationVariableStorage? variableStorage = null)
+    IApplicationVariableStorage variableStorage)
     : BaseReadHandler, IGetSystemConstantsHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
         if (!securitySystem.IsAdministrator()) return new List<SystemConstantDto>();
-
-        if (variableStorage == null)
-        {
-            throw new Exception($"{nameof(variableStorage)} not implemented");
-        }
 
         var variables = await variableStorage.GetVariablesAsync(cancellationToken);
 

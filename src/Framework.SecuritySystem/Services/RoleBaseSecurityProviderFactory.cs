@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.SecuritySystem.Builders._Factory;
+﻿using Framework.SecuritySystem.Builders._Factory;
 using Framework.SecuritySystem.Expanders;
 
 namespace Framework.SecuritySystem.Services;
@@ -40,20 +39,24 @@ public class RoleBaseSecurityProviderFactory<TDomainObject>(
 
                let securityRoleInfo = securityRoleSource.GetSecurityRole(securityRole).Information
 
-               let actualCustomExpandType = expandedSecurityRule.CustomExpandType ?? securityRule.CustomExpandType ?? securityRoleInfo.CustomExpandType
+               let actualCustomExpandType = expandedSecurityRule.CustomExpandType
+                                            ?? securityRule.CustomExpandType ?? securityRoleInfo.CustomExpandType
 
                let actualCredential = expandedSecurityRule.CustomCredential ?? securityRule.CustomCredential
 
-               let actualRestriction = expandedSecurityRule.CustomRestriction ?? securityRule.CustomRestriction ?? securityRoleInfo.Restriction
+               let actualRestriction = expandedSecurityRule.CustomRestriction
+                                       ?? securityRule.CustomRestriction ?? securityRoleInfo.Restriction
 
-               group securityRole by new { actualCustomExpandType, actualCredential, actualRestriction } into g
+               group securityRole by new { actualCustomExpandType, actualCredential, actualRestriction }
 
-               let rule = new DomainSecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(g))
-               {
-                   CustomExpandType = g.Key.actualCustomExpandType,
-                   CustomCredential = g.Key.actualCredential,
-                   CustomRestriction = g.Key.actualRestriction
-               }
+               into g
+
+               let rule = new DomainSecurityRule.ExpandedRolesSecurityRule(g.ToArray())
+                          {
+                              CustomExpandType = g.Key.actualCustomExpandType,
+                              CustomCredential = g.Key.actualCredential,
+                              CustomRestriction = g.Key.actualRestriction
+                          }
 
                select (rule, g.Key.actualRestriction);
     }

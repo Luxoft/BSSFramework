@@ -29,7 +29,7 @@ public class SecurityRoleExpander : ISecurityRoleExpander
                                                           .OrderBy(sr => sr.Name)
                                                           .ToArray();
 
-                    return new DomainSecurityRule.ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles))
+                    return new DomainSecurityRule.ExpandedRolesSecurityRule(securityRoles.ToArray())
                         .TryApplyCustoms(securityRule);
 
                 }).WithLock();

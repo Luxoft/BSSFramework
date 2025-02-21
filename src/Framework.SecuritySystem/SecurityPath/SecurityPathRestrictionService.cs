@@ -26,13 +26,15 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
         SecurityPath<TDomainObject> securityPath,
         SecurityPathRestriction restriction)
     {
+        var realSecurityPath = restriction.ApplyBasePath ? securityPath : SecurityPath<TDomainObject>.Empty;
+
         if (restriction.SecurityContextRestrictions == null)
         {
-            return securityPath;
+            return realSecurityPath;
         }
         else
         {
-            return this.Visit(securityPath, restriction.SecurityContextRestrictions);
+            return this.Visit(realSecurityPath, restriction.SecurityContextRestrictions);
         }
     }
 

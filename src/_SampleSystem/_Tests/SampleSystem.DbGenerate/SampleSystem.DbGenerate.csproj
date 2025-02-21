@@ -1,9 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <IsPackable>false</IsPackable>
     <StartupObject>SampleSystem.DbGenerate.Program</StartupObject>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="MSTest.TestAdapter" />
@@ -12,9 +14,11 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="FluentMigrator.Runner" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
@@ -22,6 +26,7 @@
     <ProjectReference Include="..\..\SampleSystem.Generated.DAL.NHibernate\SampleSystem.Generated.DAL.NHibernate.csproj" />
     <ProjectReference Include="..\SampleSystem.CodeGenerate\SampleSystem.CodeGenerate.csproj" />
   </ItemGroup>
+
   <ItemGroup>
     <None Update="hibernate.cfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

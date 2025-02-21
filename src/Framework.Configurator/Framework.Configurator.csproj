@@ -10,17 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="configurator-ui/dist/**/*" Exclude="**/*/*.txt;" />
-    <EmbeddedResource Include="Templates\Permissions.xlsx" />
-  </ItemGroup>
+    <EmbeddedResource Include="configurator-ui/dist/**/*" Exclude="**/*/*.txt;" />  </ItemGroup>
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- TODO Upgrade after fix https://github.com/ClosedXML/ClosedXML.Report/issues/303-->
-    <PackageReference Include="ClosedXML" />
   </ItemGroup>
 
   <ItemGroup>

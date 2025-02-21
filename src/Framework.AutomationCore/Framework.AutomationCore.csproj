@@ -1,14 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.AutomationCore</PackageId>
     <RootNamespace>Automation</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="ClosedXML.Report" />
     <PackageReference Include="Dapper" />
     <PackageReference Include="Dapper.Contrib" />
     <PackageReference Include="MartinCostello.SqlLocalDb" />
@@ -20,7 +22,9 @@
     <PackageReference Include="Microsoft.Extensions.Options" />
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
   </ItemGroup>
+
 </Project>

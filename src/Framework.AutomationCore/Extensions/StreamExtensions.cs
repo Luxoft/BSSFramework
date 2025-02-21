@@ -1,20 +1,7 @@
-﻿using ClosedXML.Excel;
-
-namespace Automation.Extensions;
+﻿namespace Automation.Extensions;
 
 public static class StreamExtensions
 {
-    public static IXLWorksheet GetSheet(this Stream stream, string sheetName = "Data")
-    {
-        var excel = new XLWorkbook(stream);
-        if (excel.Worksheets.TryGetWorksheet(sheetName, out var sheet))
-        {
-            return sheet;
-        }
-
-        throw new Exception($"Worksheet with name '{sheetName}' not found. Check worksheet name.");
-    }
-
     public static void Save(this Stream stream, string folder, string fileName = null, string extension = "xlsx")
     {
         fileName = fileName != null ? $"{fileName}.{extension}" : $"report_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.{extension}";

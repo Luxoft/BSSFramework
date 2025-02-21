@@ -2,10 +2,12 @@
 using System.Data;
 using System.Text.RegularExpressions;
 using Automation.Utils.DatabaseUtils.Interfaces;
+
+using Framework.Core;
+
 using MartinCostello.SqlLocalDb;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Smo;
-using MoreLinq;
 
 namespace Automation.Utils.DatabaseUtils;
 
@@ -131,7 +133,7 @@ public static partial class CoreDatabaseUtil
     public static void Drop(this IDatabaseContext databaseContext)
     {
         Drop(databaseContext.Server, databaseContext.Main.DatabaseName);
-        databaseContext.Secondary?.ForEach(x => Drop(databaseContext.Server, x.Value.DatabaseName));
+        databaseContext.Secondary?.Foreach(x => Drop(databaseContext.Server, x.Value.DatabaseName));
     }
 
     private static void Drop(Server server, string databaseName)
@@ -181,7 +183,7 @@ public static partial class CoreDatabaseUtil
     public static void Create(this IDatabaseContext databaseContext)
     {
         Create(databaseContext.Server, databaseContext.Main);
-        databaseContext.Secondary?.ForEach(x => Create(databaseContext.Server, x.Value));
+        databaseContext.Secondary?.Foreach(x => Create(databaseContext.Server, x.Value));
     }
 
     private static void Create(Server server, IDatabaseItem database)
@@ -226,7 +228,7 @@ public static partial class CoreDatabaseUtil
     public static void CopyDetachedFiles(this IDatabaseContext databaseContext)
     {
         CopyDetachedFiles(databaseContext.Server, databaseContext.Main);
-        databaseContext.Secondary?.ForEach(x => CopyDetachedFiles(databaseContext.Server, x.Value));
+        databaseContext.Secondary?.Foreach(x => CopyDetachedFiles(databaseContext.Server, x.Value));
     }
 
     private static void CopyDetachedFiles(Server server, DatabaseItem database)
@@ -241,7 +243,7 @@ public static partial class CoreDatabaseUtil
     public static void AttachDatabase(this IDatabaseContext databaseContext)
     {
         AttachDatabase(databaseContext.Server, databaseContext.Main);
-        databaseContext.Secondary?.ForEach(x => AttachDatabase(databaseContext.Server, x.Value));
+        databaseContext.Secondary?.Foreach(x => AttachDatabase(databaseContext.Server, x.Value));
     }
 
     private static void AttachDatabase(Server server, IDatabaseItem database)

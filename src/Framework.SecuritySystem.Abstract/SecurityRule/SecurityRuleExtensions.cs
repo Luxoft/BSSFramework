@@ -59,8 +59,7 @@ public static class SecurityRuleExtensions
         }
         else
         {
-            return new RoleGroupSecurityRule(
-                   cache.ToArray())
+            return new RoleGroupSecurityRule(cache.ToArray())
                    {
                        CustomExpandType = customExpandType, CustomCredential = customCredential, CustomRestriction = customRestriction
                    };

@@ -4,6 +4,13 @@ using Framework.Core;
 
 namespace Framework.SecuritySystem;
 
+/// <summary>
+/// Структура для описания дополнительных ограничений на SecurityPath, связывается с ролью.
+/// </summary>
+/// <param name="SecurityContextRestrictions"></param>
+/// <param name="ConditionFactoryTypes"></param>
+/// <param name="RelativeConditions"></param>
+/// <param name="ApplyBasePath">Применение базового SecurityPath от доменного объекта</param>
 public record SecurityPathRestriction(
     DeepEqualsCollection<SecurityContextRestriction>? SecurityContextRestrictions,
     DeepEqualsCollection<Type> ConditionFactoryTypes,
@@ -12,8 +19,14 @@ public record SecurityPathRestriction(
 {
     public IEnumerable<Type>? SecurityContextTypes => this.SecurityContextRestrictions?.Select(v => v.Type);
 
+    /// <summary>
+    /// Ограничения по умолчанию для ролей (доступны все типы контекстов, базовый SecurityPath применяется)
+    /// </summary>
     public static SecurityPathRestriction Default { get; } = new(null, Array.Empty<Type>(), Array.Empty<RelativeConditionInfo>(), true);
 
+    /// <summary>
+    /// Ограничения для базовых ролей 'Administrator' и 'SystemIntegration' (запрещены все контексты и базоый SecurityPath не применяются)
+    /// </summary>
     public static SecurityPathRestriction Empty { get; } = new(
         Array.Empty<SecurityContextRestriction>(),
         Array.Empty<Type>(),

@@ -31,12 +31,13 @@ public class DeepEqualsCollection<T>(IReadOnlyList<T> baseSource, IEqualityCompa
     }
 
     public override int GetHashCode() => baseSource.Count;
+
+    public static implicit operator DeepEqualsCollection<T>(T[] source) => DeepEqualsCollection.Create(source);
 }
 
 public static class DeepEqualsCollection
 {
-    public static DeepEqualsCollection<T> Create<T>(IEnumerable<T> source, IEqualityComparer<T>? comparer = null)
-    {
-        return new DeepEqualsCollection<T>(source, comparer);
-    }
+    public static DeepEqualsCollection<T> Create<T>(IEnumerable<T> source) => Create(source, null);
+
+    public static DeepEqualsCollection<T> Create<T>(IEnumerable<T> source, IEqualityComparer<T>? comparer) => new(source, comparer);
 }

@@ -33,7 +33,7 @@ public static class SecurityRuleExtensions
         SecurityRuleCredential? customCredential = null,
         SecurityPathRestriction? customRestriction = null) =>
         new(
-        DeepEqualsCollection.Create(securityRoles.OrderBy(sr => sr.Name)))
+        securityRoles.OrderBy(sr => sr.Name).ToArray())
         {
             CustomExpandType = customExpandType, CustomCredential = customCredential, CustomRestriction = customRestriction
         };
@@ -59,12 +59,9 @@ public static class SecurityRuleExtensions
         }
         else
         {
-            return new RoleGroupSecurityRule(
-                   DeepEqualsCollection.Create(cache))
+            return new RoleGroupSecurityRule(cache.ToArray())
                    {
-                       CustomExpandType = customExpandType,
-                       CustomCredential = customCredential,
-                       CustomRestriction = customRestriction
+                       CustomExpandType = customExpandType, CustomCredential = customCredential, CustomRestriction = customRestriction
                    };
         }
     }

@@ -142,8 +142,7 @@ public abstract record DomainSecurityRule : SecurityRule
             }
             else
             {
-                return new NonExpandedRolesSecurityRule(DeepEqualsCollection.Create(rule1.SecurityRoles.Union(rule2.SecurityRoles)))
-                    .TryApplyCustoms(rule1);
+                return rule1 with { SecurityRoles = rule1.SecurityRoles.Union(rule2.SecurityRoles).ToArray() };
             }
         }
     }
@@ -162,7 +161,7 @@ public abstract record DomainSecurityRule : SecurityRule
 
         public static ExpandedRolesSecurityRule Create(IEnumerable<SecurityRole> securityRoles)
         {
-            return new ExpandedRolesSecurityRule(DeepEqualsCollection.Create(securityRoles));
+            return new ExpandedRolesSecurityRule(securityRoles.ToArray());
         }
 
         public static ExpandedRolesSecurityRule operator +(ExpandedRolesSecurityRule rule1, ExpandedRolesSecurityRule rule2)
@@ -173,8 +172,7 @@ public abstract record DomainSecurityRule : SecurityRule
             }
             else
             {
-                return new ExpandedRolesSecurityRule(DeepEqualsCollection.Create(rule1.SecurityRoles.Union(rule2.SecurityRoles)))
-                    .TryApplyCustoms(rule1);
+                return rule1 with { SecurityRoles = rule1.SecurityRoles.Union(rule2.SecurityRoles).ToArray() };
             }
         }
     }

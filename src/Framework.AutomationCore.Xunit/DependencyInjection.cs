@@ -5,7 +5,6 @@ using Automation.Settings;
 
 using Framework.DependencyInjection;
 using Framework.DomainDriven.Auth;
-using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +19,6 @@ public static class DependencyInjection
         services.Configure(options)
                 .AddSingleton<ITestInitializeAndCleanup, TestInitializeAndCleanup>()
                 .AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
-                .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
                 .AddSingleton<IntegrationTestTimeProvider>()

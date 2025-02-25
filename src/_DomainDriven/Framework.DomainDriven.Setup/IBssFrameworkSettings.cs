@@ -1,6 +1,5 @@
 ﻿using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.Lock;
-using Framework.DomainDriven.NHibernate;
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
 
@@ -27,6 +26,4 @@ public interface IBssFrameworkSettings : IBssFrameworkSettingsBase<IBssFramework
 
     IBssFrameworkSettings AddDatabaseVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
         where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem;
-
-    IBssFrameworkSettings AddDatabaseSettings(Action<INHibernateSetupObject> setupAction);
 }

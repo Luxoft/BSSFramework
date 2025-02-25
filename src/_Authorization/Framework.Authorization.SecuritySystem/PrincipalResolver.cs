@@ -1,9 +1,8 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Credential;
-
-using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem;
 
@@ -17,7 +16,7 @@ public class PrincipalResolver([DisabledSecurity] IRepository<Principal> princip
                 return await principalRepository.LoadAsync(id, cancellationToken);
 
             case UserCredential.NamedUserCredential { Name: var name }:
-                return await principalRepository.GetQueryable().SingleAsync(principal => principal.Name == name, cancellationToken);
+                return await principalRepository.GetQueryable().GenericSingleAsync(principal => principal.Name == name, cancellationToken);
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(userCredential));

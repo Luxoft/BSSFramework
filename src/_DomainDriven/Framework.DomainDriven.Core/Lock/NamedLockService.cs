@@ -1,8 +1,7 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
-
-using NHibernate.Linq;
 
 namespace Framework.DomainDriven.Lock;
 
@@ -14,7 +13,7 @@ public class NamedLockService<TGenericNamedLock>(
     {
         var genericNamedLock = await namedLockRepository.GetQueryable()
                                                         .Where(genericNamedLockTypeInfo.NamePath.Select(nlName => nlName == namedLock.Name))
-                                                        .SingleAsync(cancellationToken);
+                                                        .GenericSingleAsync(cancellationToken);
 
         await namedLockRepository.LockAsync(genericNamedLock, lockRole, cancellationToken);
     }

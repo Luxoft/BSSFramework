@@ -1,11 +1,10 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.Logging;
-
-using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
@@ -18,7 +17,7 @@ public class AuthorizationSecurityContextInitializer(
 {
     public async Task<MergeResult<SecurityContextType, SecurityContextInfo>> Init(CancellationToken cancellationToken)
     {
-        var dbSecurityContextTypes = await securityContextTypeRepository.GetQueryable().ToListAsync(cancellationToken);
+        var dbSecurityContextTypes = await securityContextTypeRepository.GetQueryable().ToGenericListAsync(cancellationToken);
 
         var mergeResult = dbSecurityContextTypes.GetMergeResult(securityContextInfoSource.SecurityContextInfoList, et => et.Id, sc => sc.Id);
 

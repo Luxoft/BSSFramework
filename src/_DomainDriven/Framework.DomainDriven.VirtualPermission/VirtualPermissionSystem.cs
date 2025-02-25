@@ -1,13 +1,12 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
+using Framework.GenericQueryable;
 using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Expanders;
 using Framework.SecuritySystem.ExternalSystem;
-
-using NHibernate.Linq;
 
 namespace Framework.DomainDriven.VirtualPermission;
 
@@ -57,7 +56,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
     }
 
     public async Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default) =>
-        await this.GetPermissionSource(bindingInfo.SecurityRole).GetPermissionQuery().AnyAsync(cancellationToken)
+        await this.GetPermissionSource(bindingInfo.SecurityRole).GetPermissionQuery().GenericAnyAsync(cancellationToken)
             ? [bindingInfo.SecurityRole]
             : [];
 

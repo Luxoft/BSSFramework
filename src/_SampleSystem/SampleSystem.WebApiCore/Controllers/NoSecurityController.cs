@@ -1,10 +1,9 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
-
-using NHibernate.Linq;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
@@ -55,7 +54,7 @@ public class NoSecurityController : ControllerBase
     {
         var repository = this.repositoryFactory.Create();
 
-        var result = await repository.GetQueryable().ToListAsync(cancellationToken);
+        var result = await repository.GetQueryable().ToGenericListAsync(cancellationToken);
 
         return result.ToIdentityDTOList();
     }

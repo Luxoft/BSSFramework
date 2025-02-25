@@ -2,9 +2,8 @@
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
-
-using NHibernate.Linq;
 
 namespace Framework.Configuration.BLL;
 
@@ -14,7 +13,7 @@ public class ConfigurationApplicationVariableStorage(
 {
     public async Task<T> GetValueAsync<T>(ApplicationVariable<T> variable, CancellationToken cancellationToken = default)
     {
-        var systemConstant = await systemConstantRepository.GetQueryable().SingleAsync(sc => sc.Code == variable.Name, cancellationToken);
+        var systemConstant = await systemConstantRepository.GetQueryable().GenericSingleAsync(sc => sc.Code == variable.Name, cancellationToken);
 
         return context.SystemConstantSerializerFactory.Create<T>().Parse(systemConstant.Value);
     }
@@ -22,14 +21,14 @@ public class ConfigurationApplicationVariableStorage(
     public async Task<Dictionary<ApplicationVariable.ApplicationVariable, string>> GetVariablesAsync(
         CancellationToken cancellationToken = default)
     {
-        var dbList = await systemConstantRepository.GetQueryable().ToListAsync(cancellationToken);
+        var dbList = await systemConstantRepository.GetQueryable().ToGenericListAsync(cancellationToken);
 
         return dbList.ToDictionary(sc => new ApplicationVariable.ApplicationVariable(sc.Code, sc.Description), sc => sc.Value);
     }
 
     public async Task UpdateVariableAsync(string variableName, string newRawValue, CancellationToken cancellationToken = default)
     {
-        var systemConstant = await systemConstantRepository.GetQueryable().SingleAsync(sc => sc.Code == variableName, cancellationToken);
+        var systemConstant = await systemConstantRepository.GetQueryable().GenericSingleAsync(sc => sc.Code == variableName, cancellationToken);
 
         if (systemConstant.Value != newRawValue)
         {

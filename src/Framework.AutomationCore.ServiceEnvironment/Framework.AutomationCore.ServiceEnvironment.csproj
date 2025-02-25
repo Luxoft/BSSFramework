@@ -17,7 +17,6 @@
 
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
-    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.FinancialYear\Framework.FinancialYear.csproj" />
   </ItemGroup>
 

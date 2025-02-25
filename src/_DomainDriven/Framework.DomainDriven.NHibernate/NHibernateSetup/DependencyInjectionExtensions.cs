@@ -3,6 +3,8 @@
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.DALExceptions;
+using Framework.DomainDriven.NHibernate.Audit;
+using Framework.GenericQueryable;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,13 +14,17 @@ namespace Framework.DomainDriven.NHibernate;
 
 public static class DependencyInjectionExtensions
 {
-    public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, Action<INHibernateSetupObject> setup)
+    public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, Action<INHibernateSetupObject> setupAction)
     {
         var setupObject = new NHibernateSetupObject();
+
+        services.AddSingleton<IAuditRevisionUserAuthenticationService, AuditRevisionUserAuthenticationService>();
 
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
         services.AddScoped<INHibSessionSetup, NHibSessionSettings>();
+
+        services.AddSingleton<IGenericQueryableExecutor, NHibGenericQueryableExecutor>();
 
         //For close db session by middleware
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();
@@ -37,7 +43,7 @@ public static class DependencyInjectionExtensions
 
         services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
 
-        setup(setupObject);
+        setupAction(setupObject);
 
         setupObject.Initialize(services);
 

@@ -1,11 +1,10 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.Logging;
-
-using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem.Initialize;
 
@@ -25,7 +24,7 @@ public class AuthorizationBusinessRoleInitializer(
         IEnumerable<FullSecurityRole> securityRoles,
         CancellationToken cancellationToken)
     {
-        var dbRoles = await businessRoleRepository.GetQueryable().ToListAsync(cancellationToken);
+        var dbRoles = await businessRoleRepository.GetQueryable().ToGenericListAsync(cancellationToken);
 
         var mergeResult = dbRoles.GetMergeResult(securityRoles, br => br.Id, sr => sr.Id);
 

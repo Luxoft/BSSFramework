@@ -1,9 +1,8 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 
 using Microsoft.AspNetCore.Mvc;
-
-using NHibernate.Linq;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
@@ -52,7 +51,7 @@ public class ImpersonateController : ControllerBase
                        var repositoryFactory = serviceProvider.GetRequiredService<IRepositoryFactory<NoSecurityObject>>();
 
                        var mappingService = serviceProvider.GetRequiredService<ISampleSystemDTOMappingService>();
-                       var result = await repositoryFactory.Create().GetQueryable().ToListAsync(cancellationToken);
+                       var result = await repositoryFactory.Create().GetQueryable().ToGenericListAsync(cancellationToken);
 
                        return result.ToSimpleDTOList(mappingService);
                    });

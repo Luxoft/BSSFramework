@@ -2,13 +2,12 @@
 using System.Reflection;
 
 using Framework.Core;
+using Framework.GenericQueryable;
 using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.ExternalSystem.Management;
-
-using NHibernate.Linq;
 
 namespace Framework.DomainDriven.VirtualPermission;
 
@@ -45,7 +44,7 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
                                 .Take(limit)
                                 .Select(toPrincipalAnonHeaderExpr)
                                 .Distinct()
-                                .ToListAsync(cancellationToken);
+                                .ToGenericListAsync(cancellationToken);
 
         return anonHeaders.Select(anonHeader => new TypedPrincipalHeader(anonHeader.Id, anonHeader.Name, true));
     }
@@ -68,7 +67,7 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
     {
         var principal = await queryableSource.GetQueryable<TPrincipal>()
                                              .Where(filter)
-                                             .SingleOrDefaultAsync(cancellationToken);
+                                             .GenericSingleOrDefaultAsync(cancellationToken);
 
         if (principal == null)
         {
@@ -81,7 +80,7 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
             var permissions = await queryableSource.GetQueryable<TPermission>()
                                                    .Where(bindingInfo.GetFilter(serviceProvider))
                                                    .Where(bindingInfo.PrincipalPath.Select(filter))
-                                                   .ToListAsync(cancellationToken);
+                                                   .ToGenericListAsync(cancellationToken);
 
             return new TypedPrincipal(header, permissions.Select(this.ToTypedPermission).ToList());
         }
@@ -119,7 +118,7 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
                                         .Where(bindingInfo.GetFilter(serviceProvider))
                                         .Select(bindingInfo.PrincipalPath)
                                         .Select(bindingInfo.PrincipalNamePath)
-                                        .ToListAsync(cancellationToken);
+                                        .ToGenericListAsync(cancellationToken);
         }
         else
         {

@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
@@ -78,7 +77,7 @@ public class SmtpNotificationMessageSender : IMessageSender<NotificationEventDTO
     {
         if (!this.settings.Value.SmtpEnabled && string.IsNullOrWhiteSpace(this.settings.Value.OutputFolder))
         {
-            throw new ConfigurationErrorsException("Please enable smtp or specify local output folder for sent notifications");
+            throw new Exception("Please enable smtp or specify local output folder for sent notifications");
         }
 
         return this.settings.Value.SmtpEnabled

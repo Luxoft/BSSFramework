@@ -1,6 +1,5 @@
-﻿using Framework.SecuritySystem;
-
-using NHibernate.Linq;
+﻿using Framework.GenericQueryable;
+using Framework.SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem;
 
@@ -17,7 +16,7 @@ public class AuthorizationAvailableSecurityRoleSource(
 
             select permission.Role.Id;
 
-        var dbRolesIdents = await dbRequest.Distinct().ToListAsync(cancellationToken);
+        var dbRolesIdents = await dbRequest.Distinct().ToGenericListAsync(cancellationToken);
 
         return dbRolesIdents.Select(securityRoleSource.GetSecurityRole);
     }

@@ -1,14 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Configuration.BLL</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
     <Compile Update="Subscriptions\SubscriptionBLL.Processing.cs">
       <DependentUpon>SubscriptionBLL.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
   </ItemGroup>
+
 </Project>

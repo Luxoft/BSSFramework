@@ -6,8 +6,6 @@ using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
 
-using NHibernate.Linq;
-
 namespace Framework.Authorization.SecuritySystem;
 
 public class AuthorizationPermissionSource(
@@ -25,8 +23,8 @@ public class AuthorizationPermissionSource(
     public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
     {
         var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(securityRule)
-                                                   .FetchMany(q => q.Restrictions)
-                                                   .ThenFetch(q => q.SecurityContextType)
+                                                   //.FetchMany(q => q.Restrictions)
+                                                   //.ThenFetch(q => q.SecurityContextType)
                                                    .ToList();
 
         return permissions

@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Generated.DAL.NHibernate\Framework.Authorization.Generated.DAL.NHibernate.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Generated.DAL.NHibernate\Framework.Configuration.Generated.DAL.NHibernate.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate.LegacyContext\Framework.DomainDriven.NHibernate.LegacyContext.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup.Legacy\Framework.DomainDriven.Setup.Legacy.csproj" />
 
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />

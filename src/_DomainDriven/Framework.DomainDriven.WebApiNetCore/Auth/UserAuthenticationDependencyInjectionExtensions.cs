@@ -1,6 +1,4 @@
-﻿using Framework.DependencyInjection;
-using Framework.DomainDriven.Auth;
-using Framework.DomainDriven.NHibernate.Audit;
+﻿using Framework.DomainDriven.Auth;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,9 +9,7 @@ public static class UserAuthenticationDependencyInjectionExtensions
     public static IServiceCollection RegisterDefaultUserAuthenticationServices(this IServiceCollection services)
     {
         services.AddSingleton<IApplicationDefaultUserAuthenticationServiceSettings, ApplicationDefaultUserAuthenticationServiceSettings>();
-        services.AddSingleton<ApplicationDefaultUserAuthenticationService>();
-        services.AddSingletonFrom<IDefaultUserAuthenticationService, ApplicationDefaultUserAuthenticationService>();
-        services.AddSingletonFrom<IAuditRevisionUserAuthenticationService, ApplicationDefaultUserAuthenticationService>();
+        services.AddSingleton<IDefaultUserAuthenticationService, ApplicationDefaultUserAuthenticationService>();
 
         return services;
     }

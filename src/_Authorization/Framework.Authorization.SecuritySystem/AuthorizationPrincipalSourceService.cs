@@ -3,11 +3,10 @@
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.ExternalSystem.Management;
-
-using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem;
 
@@ -27,7 +26,7 @@ public class AuthorizationPrincipalSourceService(
                                             !string.IsNullOrWhiteSpace(nameFilter),
                                             q => q.Where(principal => principal.Name.Contains(nameFilter)))
                                         .Select(principal => new TypedPrincipalHeader(principal.Id, principal.Name, false))
-                                        .ToListAsync(cancellationToken);
+                                        .ToGenericListAsync(cancellationToken);
     }
 
 
@@ -47,9 +46,9 @@ public class AuthorizationPrincipalSourceService(
     {
         var principal = await principalRepository.GetQueryable()
                                                  .Where(filter)
-                                                 .FetchMany(principal => principal.Permissions)
-                                                 .ThenFetch(permission => permission.Restrictions)
-                                                 .SingleOrDefaultAsync(cancellationToken);
+                                                 //.FetchMany(principal => principal.Permissions)
+                                                 //.ThenFetch(permission => permission.Restrictions)
+                                                 .GenericSingleOrDefaultAsync(cancellationToken);
 
         if (principal == null)
         {
@@ -88,6 +87,6 @@ public class AuthorizationPrincipalSourceService(
                          })
                      .Select(permission => permission.Principal.Name)
                      .Distinct()
-                     .ToListAsync(cancellationToken);
+                     .ToGenericListAsync(cancellationToken);
     }
 }

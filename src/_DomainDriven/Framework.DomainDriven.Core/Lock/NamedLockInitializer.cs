@@ -1,8 +1,7 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
-
-using NHibernate.Linq;
 
 namespace Framework.DomainDriven.Lock;
 
@@ -18,7 +17,7 @@ public class NamedLockInitializer<TGenericNamedLock>(
         var getNameFunc = genericNamedLockTypeInfo.NamePath.Compile(LambdaCompileCache.Default);
         var setNameFunc = genericNamedLockTypeInfo.NamePath.ToSetLambdaExpression().Compile(LambdaCompileCache.Default);
 
-        var dbValues = await namedLockRepository.GetQueryable().ToListAsync(cancellationToken);
+        var dbValues = await namedLockRepository.GetQueryable().ToGenericListAsync(cancellationToken);
 
         var mergeResult = dbValues.GetMergeResult(namedLockSource.NamedLocks, getNameFunc, v => v.Name);
 

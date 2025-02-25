@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using Framework.GenericQueryable;
+
 using NHibernate;
 using NHibernate.Engine;
 using NHibernate.Linq;
@@ -23,9 +25,14 @@ public class VisitedQueryProvider : DefaultQueryProvider
 
     public ExpressionVisitor Visitor { get; set; }
 
+    public IGenericQueryableExecutor GenericQueryableExecutor { get; set; }
+
     protected override IQueryProvider CreateWithOptions(NhQueryableOptions options)
     {
-        return new VisitedQueryProvider(this.Session, this.Collection, options) { Visitor = this.Visitor };
+        return new VisitedQueryProvider(this.Session, this.Collection, options)
+               {
+                   Visitor = this.Visitor, GenericQueryableExecutor = this.GenericQueryableExecutor
+               };
     }
 
     private Expression TryApplyVisitor(Expression expression)
@@ -46,5 +53,17 @@ public class VisitedQueryProvider : DefaultQueryProvider
     public override IQueryable<T> CreateQuery<T>(Expression expression)
     {
         return base.CreateQuery<T>(this.TryApplyVisitor(expression));
+    }
+
+    public override object Execute(Expression expression)
+    {
+        if (expression is GenericQueryableMethodExpression genericQueryableMethodExpression)
+        {
+            return this.GenericQueryableExecutor.Execute(genericQueryableMethodExpression);
+        }
+        else
+        {
+            return base.Execute(expression);
+        }
     }
 }

@@ -17,8 +17,6 @@
 
     <ProjectReference Include="..\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
 
-    <ProjectReference Include="..\Framework.DomainDriven.NHibernate.LegacyContext\Framework.DomainDriven.NHibernate.LegacyContext.csproj" />
-
     <ProjectReference Include="..\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
 
     <ProjectReference Include="..\Framework.Events\Framework.Events.csproj" />

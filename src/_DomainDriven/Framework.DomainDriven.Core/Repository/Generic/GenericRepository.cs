@@ -1,8 +1,7 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Lock;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
-
-using NHibernate.Linq;
 
 using nuSpec.Abstraction;
 
@@ -58,35 +57,35 @@ public class GenericRepository<TDomainObject, TIdent>(
     public IQueryable<TProjection> GetQueryable<TProjection>(Specification<TDomainObject, TProjection> specification)
         => specificationEvaluator.GetQuery(this.GetQueryable(), specification);
 
-    public async Task<TProjection?> SingleOrDefaultAsync<TProjection>(
+    public async Task<TProjection?> GenericSingleOrDefaultAsync<TProjection>(
             Specification<TDomainObject, TProjection> specification,
             CancellationToken cancellationToken) =>
             await specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .SingleOrDefaultAsync(cancellationToken);
+                      .GenericSingleOrDefaultAsync(cancellationToken);
 
-    public async Task<TProjection> SingleAsync<TProjection>(
+    public async Task<TProjection> GenericSingleAsync<TProjection>(
             Specification<TDomainObject, TProjection> specification,
             CancellationToken cancellationToken) =>
             await specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .SingleAsync(cancellationToken);
+                      .GenericSingleAsync(cancellationToken);
 
-    public async Task<TProjection?> FirstOrDefaultAsync<TProjection>(
+    public async Task<TProjection?> GenericFirstOrDefaultAsync<TProjection>(
             Specification<TDomainObject, TProjection> specification,
             CancellationToken cancellationToken) =>
             await specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .FirstOrDefaultAsync(cancellationToken);
+                      .GenericFirstOrDefaultAsync(cancellationToken);
 
-    public async Task<TProjection> FirstAsync<TProjection>(
+    public async Task<TProjection> GenericFirstAsync<TProjection>(
             Specification<TDomainObject, TProjection> specification,
             CancellationToken cancellationToken) =>
             await specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .FirstAsync(cancellationToken);
+                      .GenericFirstAsync(cancellationToken);
 
-    public async Task<int> CountAsync<TProjection>(
+    public async Task<int> GenericCountAsync<TProjection>(
             Specification<TDomainObject, TProjection> specification,
             CancellationToken cancellationToken) =>
             await specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .CountAsync(cancellationToken);
+                      .GenericCountAsync(cancellationToken);
 
     public INuFutureEnumerable<TProjection> GetFuture<TProjection>(
             Specification<TDomainObject, TProjection> specification) =>
@@ -102,7 +101,7 @@ public class GenericRepository<TDomainObject, TIdent>(
     public async Task<List<TProjection>> GetListAsync<TProjection>(
             Specification<TDomainObject, TProjection> specification,
             CancellationToken cancellationToken) =>
-            await specificationEvaluator.GetQuery(this.GetQueryable(), specification).ToListAsync(cancellationToken);
+            await specificationEvaluator.GetQuery(this.GetQueryable(), specification).ToGenericListAsync(cancellationToken);
 
     public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)
     {

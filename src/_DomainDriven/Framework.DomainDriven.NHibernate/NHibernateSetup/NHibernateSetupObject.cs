@@ -10,6 +10,8 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class NHibernateSetupObject : INHibernateSetupObject
 {
+    private readonly List<INHibernateSetupObjectExtension> extensions = new();
+
     private readonly List<Assembly> autoMappingAssemblies = new();
 
     private DefaultConfigurationInitializerSettings settings = new();
@@ -140,6 +142,12 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
+    public INHibernateSetupObject AddExtension(INHibernateSetupObjectExtension extension)
+    {
+        this.extensions.Add(extension);
+
+        return this;
+    }
 
     public void Initialize(IServiceCollection services)
     {
@@ -168,5 +176,7 @@ public class NHibernateSetupObject : INHibernateSetupObject
         {
             action(services);
         }
+
+        this.extensions.ForEach(ex => ex.AddServices(services));
     }
 }

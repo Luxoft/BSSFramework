@@ -10,6 +10,7 @@ public static class DependencyInjectionExtensions
 {
     public static IServiceCollection AddLegacyDatabaseSettings(this IServiceCollection services)
     {
+        services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
         services.AddScoped<IObjectStateService, NHibObjectStatesService>();
 
         return services.ReplaceSingleton<IDalValidationIdentitySource, LegacyDalValidationIdentitySource>();

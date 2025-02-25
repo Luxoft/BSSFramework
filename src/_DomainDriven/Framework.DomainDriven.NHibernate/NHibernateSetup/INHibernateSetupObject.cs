@@ -42,4 +42,6 @@ public interface INHibernateSetupObject
     INHibernateSetupObject SetCommandTimeout(int timeout);
 
     INHibernateSetupObject SetDefaultConnectionStringName(string connectionStringName);
+
+    INHibernateSetupObject AddExtension(INHibernateSetupObjectExtension extension);
 }

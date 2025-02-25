@@ -16,5 +16,4 @@ public static class BssFrameworkSettingsExtensions
         Action<IAuthorizationSystemSettings>? setup = null) =>
 
         settings.AddExtensions(new BssFrameworkExtension(services => services.AddAuthorizationSystem(setup)));
-
 }

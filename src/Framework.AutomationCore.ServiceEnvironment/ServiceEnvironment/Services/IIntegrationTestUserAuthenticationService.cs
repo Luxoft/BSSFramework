@@ -1,10 +1,9 @@
 ﻿using Framework.DomainDriven.Auth;
-using Framework.DomainDriven.NHibernate.Audit;
 using Framework.SecuritySystem.Credential;
 
 namespace Automation.ServiceEnvironment.Services;
 
-public interface IIntegrationTestUserAuthenticationService : IDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService
+public interface IIntegrationTestUserAuthenticationService : IDefaultUserAuthenticationService
 {
     void SetUser(UserCredential? customUserCredential);
 

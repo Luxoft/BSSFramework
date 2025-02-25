@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Serialization;
@@ -241,7 +239,7 @@ public partial class ConfigurationBLLContext
         if (domainTypes.Count > 1)
         {
             var message = $"Configuration database contains more than one record for domain type '{domainTypes.First().Name}' and target system '{targetService.TargetSystem.Name}'. Remove excess records and restart application.";
-            throw new ConfigurationErrorsException(message);
+            throw new Exception(message);
         }
 
         return domainTypes.SingleOrDefault();

@@ -4,7 +4,6 @@ using Framework.Authorization.BLL;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
@@ -37,11 +36,6 @@ public static class BssFrameworkSettingsExtensions
         where TBLLContextImpl : TBLLContextDecl
     {
         return settings.AddServices(sc => sc.RegisterBLLSystem<TBLLContextDecl, TBLLContextImpl>(setupAction));
-    }
-
-    public static IBssFrameworkSettings AddLegacyDatabaseSettings(this IBssFrameworkSettings settings)
-    {
-        return settings.AddServices(sc => sc.AddLegacyDatabaseSettings());
     }
 
     public static IBssFrameworkSettings AddConfigurationTargetSystems(this IBssFrameworkSettings settings, Action<ITargetSystemRootSettings> setupAction)

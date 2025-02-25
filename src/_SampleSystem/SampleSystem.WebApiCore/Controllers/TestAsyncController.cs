@@ -1,10 +1,9 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
-
-using NHibernate.Linq;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
@@ -23,7 +22,7 @@ public class TestAsyncController(
     [HttpPost]
     public async Task<List<LocationSimpleDTO>> AsyncGetLocations(CancellationToken cancellationToken = default)
     {
-        var list = await locationViewRepository.GetQueryable().ToListAsync(cancellationToken);
+        var list = await locationViewRepository.GetQueryable().ToGenericListAsync(cancellationToken);
 
         return list.ToSimpleDTOList(mappingService);
     }

@@ -8,7 +8,6 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
-using Framework.DomainDriven.NHibernate;
 using Framework.HierarchicalExpand;
 using Framework.Projection;
 using Framework.QueryLanguage;
@@ -52,8 +51,6 @@ public static class ServiceCollectionExtensions
         services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>("BLL");
 
         services.AddScoped(typeof(EvaluatedData<,>));
-
-        services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
 
         services.AddSingleton<IStandartExpressionBuilder, StandartExpressionBuilder>();
 

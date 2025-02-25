@@ -39,35 +39,35 @@ public interface IRepository<TDomainObject>
     /// <summary>
     /// Get Single or default by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
-    Task<TProjection?> SingleOrDefaultAsync<TProjection>(
+    Task<TProjection?> GenericSingleOrDefaultAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get Single by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
-    Task<TProjection> SingleAsync<TProjection>(
+    Task<TProjection> GenericSingleAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get First or default by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
-    Task<TProjection?> FirstOrDefaultAsync<TProjection>(
+    Task<TProjection?> GenericFirstOrDefaultAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get First by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
-    Task<TProjection> FirstAsync<TProjection>(
+    Task<TProjection> GenericFirstAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get Count by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
-    Task<int> CountAsync<TProjection>(
+    Task<int> GenericCountAsync<TProjection>(
         Specification<TDomainObject, TProjection> specification,
         CancellationToken cancellationToken = default);
 

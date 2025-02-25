@@ -3,7 +3,6 @@
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.DomainDriven._Visitors;
-using Framework.DomainDriven.NHibernate;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.ApplicationCore;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
@@ -85,13 +84,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
                     sc.AddSingleton<IExpressionVisitorContainerItem, TExpressionVisitorContainerItem>();
                 }
             });
-
-        return this;
-    }
-
-    public IBssFrameworkSettings AddDatabaseSettings(Action<INHibernateSetupObject> setup)
-    {
-        this.registerActions.Add(sc => sc.AddDatabaseSettings(setup));
 
         return this;
     }

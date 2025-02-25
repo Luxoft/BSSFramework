@@ -5,7 +5,6 @@ using Automation.ServiceEnvironment.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
-using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.SecuritySystem.Credential;
 
@@ -64,7 +63,6 @@ public static class ServiceProviderExtensions
     public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services) =>
 
         services.AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
-                .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
                 .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
                 .AddSingleton<IntegrationTestTimeProvider>()

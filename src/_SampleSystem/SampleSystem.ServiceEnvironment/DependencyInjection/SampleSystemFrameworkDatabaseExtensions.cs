@@ -1,4 +1,5 @@
-﻿using Framework.Authorization.Generated.DAL.NHibernate;
+﻿using Framework.Authorization.Environment;
+using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Core;
 using Framework.DomainDriven;
@@ -20,10 +21,10 @@ public static class SampleSystemFrameworkDatabaseExtensions
         var appDatabase = new DatabaseName(string.Empty, "app");
         var appAuditDatabase = new DatabaseName(string.Empty, "appAudit");
 
-        return settings.AddDatabaseSettings(
-            setupObj => setupObj.AddMapping(new AuthorizationMappingSettings())
+        return settings.AddNHibernate(
+            setupObj => setupObj.AddLegacyDatabaseSettings()
+                                .AddMapping(new AuthorizationMappingSettings())
                                 .AddMapping(new ConfigurationMappingSettings())
-
                                 .Pipe(
                                     includeTypedAudit,
                                     s => s

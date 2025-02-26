@@ -71,14 +71,26 @@ public class RootSecurityRuleExpander(
         }
     }
 
-    public DomainSecurityRule FullDomainExpand(DomainSecurityRule securityRule)
+    public DomainSecurityRule FullDomainExpand(DomainSecurityRule securityRule, SecurityRuleExpandSettings? settings = null)
     {
-        return new FullDomainExpandVisitor(this).Visit(securityRule);
+        return new FullDomainExpandVisitor(this, settings).Visit(securityRule);
     }
 
-    private class FullDomainExpandVisitor(ISecurityRuleExpander expander)
+    private class FullDomainExpandVisitor(ISecurityRuleExpander expander, SecurityRuleExpandSettings? settings)
         : SecurityRuleVisitor
     {
+        public override DomainSecurityRule Visit(DomainSecurityRule baseSecurityRule)
+        {
+            if (settings != null && settings.IgnoredTypes.Any(ignoredType => ignoredType.IsInstanceOfType(baseSecurityRule)))
+            {
+                return baseSecurityRule;
+            }
+            else
+            {
+                return base.Visit(baseSecurityRule);
+            }
+        }
+
         protected override DomainSecurityRule Visit(RoleBaseSecurityRule baseSecurityRule) => expander.FullRoleExpand(baseSecurityRule);
 
         protected override DomainSecurityRule Visit(DomainModeSecurityRule securityRule) => this.Visit(expander.Expand(securityRule));

@@ -49,7 +49,8 @@ public interface ISecuritySystemSettings
         Expression<Func<TUser, Guid>> idPath,
         Expression<Func<TUser, string>> namePath,
         Expression<Func<TUser, bool>> filter,
-        Expression<Func<TUser, TUser?>>? runAsPath = null);
+        Expression<Func<TUser, TUser?>>? runAsPath = null)
+        where TUser : class;
 
     ISecuritySystemSettings SetSecurityAccessorInfinityStorage<TStorage>()
         where TStorage : class, ISecurityAccessorInfinityStorage;

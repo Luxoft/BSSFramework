@@ -8,7 +8,7 @@ namespace Framework.DomainDriven.VirtualPermission;
 
 public class VirtualPermissionSystemFactory<TPrincipal, TPermission> : IPermissionSystemFactory
     where TPrincipal : IIdentityObject<Guid>
-    where TPermission : IIdentityObject<Guid>
+    where TPermission : class, IIdentityObject<Guid>
 {
     private readonly IServiceProvider serviceProvider;
 

@@ -27,7 +27,7 @@ public abstract record SecurityPath<TDomainObject>
     public SecurityPath<TDomainObject> And(Expression<Func<TDomainObject, bool>> securityFilter) => this.And(Condition(securityFilter));
 
     public SecurityPath<TDomainObject> And<TSecurityContext>(
-        Expression<Func<TDomainObject, TSecurityContext>> securityPath,
+        Expression<Func<TDomainObject, TSecurityContext?>> securityPath,
         SingleSecurityMode mode = SingleSecurityMode.AllowNull,
         string? key = null)
         where TSecurityContext : ISecurityContext =>
@@ -45,7 +45,7 @@ public abstract record SecurityPath<TDomainObject>
     public SecurityPath<TDomainObject> Or(Expression<Func<TDomainObject, bool>> securityFilter) => this.Or(Condition(securityFilter));
 
     public SecurityPath<TDomainObject> Or<TSecurityContext>(
-        Expression<Func<TDomainObject, TSecurityContext>> securityPath,
+        Expression<Func<TDomainObject, TSecurityContext?>> securityPath,
         SingleSecurityMode mode = SingleSecurityMode.AllowNull,
         string? key = null)
         where TSecurityContext : ISecurityContext =>
@@ -62,7 +62,7 @@ public abstract record SecurityPath<TDomainObject>
         new ConditionPath(securityFilter);
 
     public static SecurityPath<TDomainObject> Create<TSecurityContext>(
-        Expression<Func<TDomainObject, TSecurityContext>> securityPath,
+        Expression<Func<TDomainObject, TSecurityContext?>> securityPath,
         SingleSecurityMode mode = SingleSecurityMode.AllowNull,
         string? key = null)
         where TSecurityContext : ISecurityContext =>
@@ -122,7 +122,7 @@ public abstract record SecurityPath<TDomainObject>
     }
 
     public record SingleSecurityPath<TSecurityContext>(
-        Expression<Func<TDomainObject, TSecurityContext>> SecurityPath,
+        Expression<Func<TDomainObject, TSecurityContext?>> SecurityPath,
         SingleSecurityMode Mode,
         string? Key) : SecurityPath<TDomainObject>, IContextSecurityPath
         where TSecurityContext : ISecurityContext

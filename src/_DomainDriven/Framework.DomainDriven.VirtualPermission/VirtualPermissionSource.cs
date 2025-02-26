@@ -14,6 +14,7 @@ public class VirtualPermissionSource<TPrincipal, TPermission>(
     TimeProvider timeProvider,
     VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo,
     SecurityRuleCredential defaultSecurityRuleCredential) : IPermissionSource<TPermission>
+    where TPermission : class
 {
     private readonly Expression<Func<TPermission, string>> fullNamePath = bindingInfo.PrincipalPath.Select(bindingInfo.PrincipalNamePath);
 

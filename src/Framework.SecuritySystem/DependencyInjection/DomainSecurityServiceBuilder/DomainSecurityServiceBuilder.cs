@@ -110,6 +110,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
     }
 
     public IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>()
+        where TSource : class
     {
         this.dependencyServiceType = typeof(DependencyDomainSecurityService<TDomainObject, TSource>);
 
@@ -117,6 +118,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
     }
 
     public IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> relativeDomainPath)
+        where TSource : class
     {
         this.SetDependency<TSource>();
 

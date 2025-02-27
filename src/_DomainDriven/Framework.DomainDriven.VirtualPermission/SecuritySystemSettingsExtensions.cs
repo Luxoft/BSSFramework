@@ -15,8 +15,8 @@ public static class SecuritySystemSettingsExtensions
     public static ISecuritySystemSettings AddVirtualPermission<TPrincipal, TPermission>(
         this ISecuritySystemSettings securitySystemSettings,
         VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo)
-        where TPrincipal : IIdentityObject<Guid>
-        where TPermission : IIdentityObject<Guid> =>
+        where TPrincipal : class, IIdentityObject<Guid>
+        where TPermission : class, IIdentityObject<Guid> =>
         securitySystemSettings
 
             .AddPermissionSystem(
@@ -36,8 +36,8 @@ public static class SecuritySystemSettingsExtensions
         Expression<Func<TPermission, TPrincipal>> principalPath,
         Expression<Func<TPrincipal, string>> principalNamePath,
         Func<VirtualPermissionBindingInfo<TPrincipal, TPermission>, VirtualPermissionBindingInfo<TPrincipal, TPermission>>? initFunc = null)
-        where TPrincipal : IIdentityObject<Guid>
-        where TPermission : IIdentityObject<Guid>
+        where TPrincipal : class, IIdentityObject<Guid>
+        where TPermission : class, IIdentityObject<Guid>
     {
         var bindingInfo =
             (initFunc ?? (v => v)).Invoke(

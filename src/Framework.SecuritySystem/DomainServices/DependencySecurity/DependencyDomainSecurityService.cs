@@ -11,6 +11,7 @@ public class DependencyDomainSecurityService<TDomainObject, TBaseDomainObject>(
     : DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject>(
         securityRuleExpander,
         baseDomainSecurityService)
+    where TBaseDomainObject : class
 {
     protected override ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider)
     {

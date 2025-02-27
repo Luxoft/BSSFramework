@@ -1,7 +1,6 @@
-﻿using Framework.DomainDriven.NHibernate;
-using Framework.DomainDriven.Setup;
+﻿using Framework.DomainDriven.Setup;
 
-namespace Framework.Authorization.Environment;
+namespace Framework.DomainDriven.NHibernate;
 
 public static class BssFrameworkSettingsExtensions
 {
@@ -9,5 +8,5 @@ public static class BssFrameworkSettingsExtensions
         this IBssFrameworkSettingsBase<TSelf> settings,
         Action<INHibernateSetupObject>? setupAction = null) =>
 
-        settings.AddExtensions(new BssFrameworkExtension(services => services.AddDatabaseSettings(setupAction)));
+        settings.AddExtensions(new BssFrameworkExtension(services => services.AddNHibernate(setupAction)));
 }

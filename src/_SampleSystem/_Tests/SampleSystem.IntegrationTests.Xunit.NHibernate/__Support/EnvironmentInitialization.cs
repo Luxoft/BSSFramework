@@ -20,6 +20,7 @@ using SampleSystem.IntegrationTests.Support.Utils;
 using SampleSystem.IntegrationTests.Xunit.__Support.Database;
 using SampleSystem.IntegrationTests.Xunit.__Support.TestData;
 using SampleSystem.ServiceEnvironment;
+using SampleSystem.ServiceEnvironment.NHibernate;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 using Xunit;
@@ -44,7 +45,7 @@ public class EnvironmentInitialization : IAutomationCoreInitialization
 
     public IServiceProvider ConfigureTestEnvironment(IServiceCollection services, IConfiguration configuration) =>
         services
-            .RegisterGeneralDependencyInjection(configuration)
+            .RegisterGeneralDependencyInjection(configuration, s => s.AddExtensions(new SampleSystemNHibernateExtension()))
             .AddSingleton<SampleSystemInitializer>()
             .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
             .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()

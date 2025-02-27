@@ -14,7 +14,7 @@ namespace Framework.DomainDriven.NHibernate;
 
 public static class DependencyInjectionExtensions
 {
-    public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, Action<INHibernateSetupObject> setupAction)
+    public static IServiceCollection AddNHibernate(this IServiceCollection services, Action<INHibernateSetupObject> setupAction)
     {
         var setupObject = new NHibernateSetupObject();
 

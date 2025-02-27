@@ -1,7 +1,6 @@
 ﻿using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.SecuritySystem;
-
-using NHibernate.Linq;
 
 using SampleSystem.Domain;
 
@@ -18,13 +17,17 @@ public class ExampleServiceForRepository(
 
     public async Task<(List<Employee> Employees, List<BusinessUnit> BusinessUnits)> LoadPair(CancellationToken cancellationToken = default)
     {
-        var employeesFuture = this.employeeRepository.GetQueryable().ToFuture();
+        //var employeesFuture = this.employeeRepository.GetQueryable().ToFuture();
 
-        var businessUnitsFuture = this.businessUnitRepository.GetQueryable().ToFuture();
+        //var businessUnitsFuture = this.businessUnitRepository.GetQueryable().ToFuture();
 
-        var employees = await employeesFuture.GetEnumerableAsync(cancellationToken);
+        //var employees = await employeesFuture.GetEnumerableAsync(cancellationToken);
 
-        var businessUnits = await businessUnitsFuture.GetEnumerableAsync(cancellationToken);
+        //var businessUnits = await businessUnitsFuture.GetEnumerableAsync(cancellationToken);
+
+        var employees = await this.employeeRepository.GetQueryable().ToGenericListAsync(cancellationToken);
+
+        var businessUnits = await this.businessUnitRepository.GetQueryable().ToGenericListAsync(cancellationToken);
 
         return (employees.ToList(), businessUnits.ToList());
     }

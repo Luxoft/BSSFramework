@@ -1,12 +1,12 @@
 ﻿using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
-using NHibernate.Linq;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
@@ -41,8 +41,7 @@ public class EmployeeAsyncController : ControllerBase
         var employees = await repository
                               .GetQueryable()
                               .Where(employee => employee.Login == userName)
-                              .ToFuture()
-                              .GetEnumerableAsync(cancellationToken);
+                              .ToGenericListAsync(cancellationToken);
 
         return employees.Single().ToSimpleDTO(this.mappingService);
     }

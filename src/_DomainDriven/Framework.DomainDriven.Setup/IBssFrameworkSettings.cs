@@ -24,6 +24,6 @@ public interface IBssFrameworkSettings : IBssFrameworkSettingsBase<IBssFramework
     IBssFrameworkSettings SetSpecificationEvaluator<TSpecificationEvaluator>()
         where TSpecificationEvaluator : class, ISpecificationEvaluator;
 
-    IBssFrameworkSettings AddDatabaseVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
+    IBssFrameworkSettings AddQueryVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
         where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem;
 }

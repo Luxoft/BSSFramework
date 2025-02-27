@@ -2,6 +2,8 @@
 using Framework.DomainDriven;
 using Framework.Persistent;
 
+using Microsoft.Extensions.Logging;
+
 namespace SampleSystem.WebApiCore.Services;
 
 public class SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger, ICurrentRevisionService currentRevisionService) : IConfiguratorIntegrationEvents

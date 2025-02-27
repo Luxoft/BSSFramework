@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.ServiceModel.IAD;
+﻿using Framework.DomainDriven._Visitors;
+using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.Setup;
 using Framework.Events.Legacy;
 
@@ -60,5 +61,10 @@ public static class SampleSystemFrameworkExtensions
                        .SetNotificationDefaultMailSenderContainer<SampleSystemDefaultMailSenderContainer>()
                        .SetNotificationEmployee<Employee>()
                        .SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();
+    }
+
+    public static IBssFrameworkSettings AddQueryVisitors(this IBssFrameworkSettings settings)
+    {
+        return settings.AddQueryVisitors<ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
     }
 }

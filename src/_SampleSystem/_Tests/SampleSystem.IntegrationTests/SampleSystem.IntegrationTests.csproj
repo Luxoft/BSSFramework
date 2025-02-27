@@ -26,8 +26,7 @@
     <ProjectReference Include="..\..\..\Framework.AutomationCore.ServiceEnvironment.LegacyContext\Framework.AutomationCore.ServiceEnvironment.LegacyContext.csproj" />
     <ProjectReference Include="..\..\..\Framework.AutomationCore\Framework.AutomationCore.csproj" />
     <ProjectReference Include="..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
-
-    <ProjectReference Include="..\SampleSystem.DbGenerate\SampleSystem.DbGenerate.csproj" />
+    <ProjectReference Include="..\SampleSystem.DbGenerate.NHibernate\SampleSystem.DbGenerate.NHibernate.csproj" />
   </ItemGroup>
 
   <ItemGroup>

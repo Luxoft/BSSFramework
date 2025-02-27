@@ -1,10 +1,9 @@
 ﻿using Framework.Authorization.Environment;
+using Framework.Core;
 using Framework.DomainDriven.Setup;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using nuSpec.NHibernate;
 
 using SampleSystem.Domain;
 using SampleSystem.Security;
@@ -13,7 +12,7 @@ namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemGeneralDependencyInjectionExtensions
 {
-    public static IServiceCollection RegisterGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection RegisterGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration, Action<IBssFrameworkSettings> setupAction)
     {
         return services
 
@@ -43,9 +42,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .AddListeners()
 
-                           .SetSpecificationEvaluator<NhSpecificationEvaluator>()
-                           .AddDatabaseSettings()
-                           .AddDatabaseVisitors()
+                           .AddQueryVisitors()
 
                            // Legacy
 
@@ -56,7 +53,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                            .AddContextEvaluators()
                            .AddBLLSystem()
 
-                           .RegisterSupportLegacyServices();
+                           .RegisterSupportLegacyServices()
+                           .Pipe(setupAction);
                    })
 
                .RegisterGeneralApplicationServices(configuration);

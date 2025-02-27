@@ -1,6 +1,9 @@
-﻿using Framework.DependencyInjection;
+﻿using Framework.Core;
+using Framework.DependencyInjection;
 using Framework.DomainDriven;
+using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.Setup;
 
 using Microsoft.Data.SqlClient;
@@ -44,10 +47,11 @@ public class UseSchemeUpdateTest
         CheckDataBaseAndSchemeExists(connectionString);
 
         var provider = new ServiceCollection()
-                       .AddHttpContextAccessor()
-                       .AddBssFramework(rootSetup => rootSetup.AddDatabaseSettings(false))
+                       .Self(new SampleSystemNHibernateExtension(false).AddServices)
                        .ReplaceSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(connectionString))
-                       .BuildServiceProvider(false);
+                       .AddNotImplemented<IDefaultUserAuthenticationService>()
+                       .Self(sc => sc.RemoveBy(sd => sd.Lifetime == ServiceLifetime.Scoped))
+                       .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
 
         var dbSessionFactory = provider.GetService<NHibSessionEnvironment>();
         var cfg = dbSessionFactory.Configuration;

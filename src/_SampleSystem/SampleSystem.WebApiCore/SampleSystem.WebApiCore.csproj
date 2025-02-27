@@ -10,19 +10,20 @@
     <PackageReference Include="Luxoft.Bss.Platform.Events" />
     <PackageReference Include="Luxoft.Bss.Platform.Logging" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" />
-    <PackageReference Include="nuSpec.NHibernate" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Configurator.ApplicationVariable\Framework.Configurator.ApplicationVariable.csproj" />
     <ProjectReference Include="..\..\Framework.Configurator.Events\Framework.Configurator.Events.csproj" />
 
+    <ProjectReference Include="..\SampleSystem.ServiceEnvironment.NHibernate\SampleSystem.ServiceEnvironment.NHibernate.csproj" />
+
     <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />
-    <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
 
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.WebApi\Framework.Authorization.WebApi.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.WebApi\Framework.Configuration.WebApi.csproj" />
 
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.DTO\Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
   </ItemGroup>
+
 </Project>

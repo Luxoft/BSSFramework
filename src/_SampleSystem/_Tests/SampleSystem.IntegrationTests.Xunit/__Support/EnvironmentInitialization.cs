@@ -44,7 +44,7 @@ public class EnvironmentInitialization : IAutomationCoreInitialization
 
     public IServiceProvider ConfigureTestEnvironment(IServiceCollection services, IConfiguration configuration) =>
         services
-            .RegisterGeneralDependencyInjection(configuration)
+            .RegisterGeneralDependencyInjection(configuration, s => s.AddExtensions(new SampleSystemNHibernateExtension()))
             .AddSingleton<SampleSystemInitializer>()
             .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
             .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()

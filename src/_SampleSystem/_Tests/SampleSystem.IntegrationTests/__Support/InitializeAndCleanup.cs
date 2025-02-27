@@ -41,7 +41,7 @@ public class InitializeAndCleanup
     private static IServiceCollection GetServices(IConfiguration configuration, IServiceCollection services)
     {
         return services
-               .RegisterGeneralDependencyInjection(configuration)
+               .RegisterGeneralDependencyInjection(configuration, s => s.AddExtensions(new SampleSystemNHibernateExtension()))
 
                .AddSingleton<SampleSystemInitializer>()
 

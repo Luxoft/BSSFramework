@@ -22,7 +22,6 @@
       <ProjectReference Include="..\..\..\Framework.AutomationCore.Xunit\Framework.AutomationCore.Xunit.csproj" />
       <ProjectReference Include="..\..\..\_DomainDriven\Framework.DomainDriven.DBGenerator\Framework.DomainDriven.DBGenerator.csproj" />
       <ProjectReference Include="..\SampleSystem.IntegrationTests\SampleSystem.IntegrationTests.csproj" />
-      <ProjectReference Include="..\SampleSystem.DbGenerate\SampleSystem.DbGenerate.csproj" />
     </ItemGroup>
 
 </Project>

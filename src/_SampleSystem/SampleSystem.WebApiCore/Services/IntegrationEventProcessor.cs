@@ -5,6 +5,8 @@ using Framework.DomainDriven;
 
 using MediatR;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace SampleSystem.WebApiCore.Services;
 
 public class IntegrationEventProcessor(IDBSessionEvaluator sessionEvaluator) : IIntegrationEventProcessor

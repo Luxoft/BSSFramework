@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Automation;
 using Automation.ServiceEnvironment;
 
@@ -18,6 +19,7 @@ using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.ServiceEnvironment.Jobs;
+using SampleSystem.ServiceEnvironment.NHibernate;
 
 namespace SampleSystem.IntegrationTests.__Support;
 

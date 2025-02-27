@@ -3,6 +3,7 @@ using Framework.DomainDriven.Repository;
 using Framework.GenericQueryable;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

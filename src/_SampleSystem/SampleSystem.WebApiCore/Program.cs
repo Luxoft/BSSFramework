@@ -18,18 +18,22 @@ using Hangfire;
 
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 using SampleSystem.BLL._Command.CreateClassA.Integration;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.ServiceEnvironment.Jobs;
-using SampleSystem.ServiceEnvironment.NHibernate;
 using SampleSystem.WebApiCore.Services;
 
 namespace SampleSystem.WebApiCore;
 
-public static class Program
+public static class GenericProgram
 {
-    private static async Task Main(string[] args)
+    public static async Task Main(string[] args, IBssFrameworkExtension extension)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -48,7 +52,7 @@ public static class Program
                .AddPlatformLogging();
 
         builder.Services
-               .RegisterGeneralDependencyInjection(builder.Configuration, s => s.AddExtensions(GetOrmExtension(args)))
+               .RegisterGeneralDependencyInjection(builder.Configuration, s => s.AddExtensions(extension))
                .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
                .AddPlatformApiDocumentation(
                    builder.Environment,
@@ -110,16 +114,5 @@ public static class Program
         app.UseHangfireBss();
 
         await app.RunAsync();
-    }
-
-    public static IBssFrameworkExtension GetOrmExtension(string[] args)
-    {
-        var allowedOrm = new Dictionary<string, IBssFrameworkExtension>
-                         {
-                             { "nh", new SampleSystemNHibernateExtension() },
-                             { "ef", LazyInterfaceImplementHelper.CreateNotImplemented<IBssFrameworkExtension>() }
-                         };
-
-        return args.Any() ? allowedOrm[args.Single()] : allowedOrm.First().Value;
     }
 }

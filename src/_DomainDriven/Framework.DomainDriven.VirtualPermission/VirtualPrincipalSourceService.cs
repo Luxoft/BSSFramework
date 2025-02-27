@@ -16,8 +16,8 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
     IQueryableSource queryableSource,
     VirtualPermissionBindingInfo<TPrincipal, TPermission> bindingInfo) : IPrincipalSourceService
 
-    where TPrincipal : IIdentityObject<Guid>
-    where TPermission : IIdentityObject<Guid>
+    where TPrincipal : class, IIdentityObject<Guid>
+    where TPermission : class, IIdentityObject<Guid>
 {
     public async Task<IEnumerable<TypedPrincipalHeader>> GetPrincipalsAsync(
         string nameFilter,

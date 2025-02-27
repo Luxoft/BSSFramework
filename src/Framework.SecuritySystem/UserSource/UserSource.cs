@@ -7,6 +7,7 @@ using Framework.SecuritySystem.Credential;
 namespace Framework.SecuritySystem.UserSource;
 
 public class UserSource<TUser>(IQueryableSource queryableSource, UserPathInfo<TUser> userPathInfo) : IUserSource<TUser>
+    where TUser : class
 {
     public TUser? TryGetUser(UserCredential userCredential) => this.GetQueryable(userCredential).SingleOrDefault();
 

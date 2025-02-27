@@ -120,6 +120,7 @@ public class SecuritySystemSettings : ISecuritySystemSettings
         Expression<Func<TUser, string>> namePath,
         Expression<Func<TUser, bool>> filter,
         Expression<Func<TUser, TUser?>>? runAsPath = null)
+        where TUser : class
     {
         this.registerUserSourceAction = sc =>
                                         {

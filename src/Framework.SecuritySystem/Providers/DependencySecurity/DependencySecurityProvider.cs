@@ -10,6 +10,7 @@ public class DependencySecurityProvider<TDomainObject, TBaseDomainObject>(
     Expression<Func<TDomainObject, TBaseDomainObject>> selector,
     IQueryableSource queryableSource)
     : ISecurityProvider<TDomainObject>
+    where TBaseDomainObject : class
 {
     public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
     {

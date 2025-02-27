@@ -9,6 +9,7 @@ namespace Framework.DomainDriven;
 public class RepositoryQueryableSource(IServiceProvider serviceProvider) : IQueryableSource
 {
     public IQueryable<TDomainObject> GetQueryable<TDomainObject>()
+        where TDomainObject : class
     {
         return serviceProvider.GetRequiredKeyedService<IRepository<TDomainObject>>(nameof(SecurityRule.Disabled)).GetQueryable();
     }

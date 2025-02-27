@@ -6,6 +6,7 @@ namespace Framework.SecuritySystem.UserSource;
 
 public class UserSourceCredentialNameByIdResolver<TUser>(IQueryableSource queryableSource, UserPathInfo<TUser> userPathInfo)
     : IUserCredentialNameByIdResolver
+    where TUser : class
 {
     public string? TryGetUserName(Guid id)
     {

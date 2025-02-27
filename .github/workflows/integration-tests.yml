@@ -39,11 +39,11 @@ jobs:
         run: |
           dotnet build ./IAD.Framework.sln --no-restore
 
-      - name: Integration Tests
+      - name: NHibernate Integration Tests
         run: |
-          dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests --no-build --verbosity normal;
-      
-      - name: Integration Tests Xunit
+          dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate --no-build --verbosity normal;
+                
+      - name: NHibernate Integration Tests Xunit
         run: |
-          dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.Xunit --no-build --verbosity normal;
+          dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate.Xunit --no-build --verbosity normal;
       

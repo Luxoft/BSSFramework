@@ -45,5 +45,5 @@ jobs:
                 
       - name: NHibernate Integration Tests Xunit
         run: |
-          dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate.Xunit --no-build --verbosity normal;
+          dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.Xunit.NHibernate --no-build --verbosity normal;
       

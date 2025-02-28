@@ -1,10 +1,6 @@
-﻿using FluentAssertions;
-
-using Framework.SecuritySystem.Services;
+﻿using Framework.SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Xunit;
 
 namespace Framework.SecuritySystem.DiTests;
 

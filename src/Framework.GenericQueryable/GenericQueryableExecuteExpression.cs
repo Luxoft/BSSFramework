@@ -2,7 +2,7 @@
 
 namespace Framework.GenericQueryable;
 
-public class GenericQueryableMethodExpression(LambdaExpression callExpression) : Expression
+public class GenericQueryableExecuteExpression(LambdaExpression callExpression) : Expression
 {
     public LambdaExpression CallExpression { get; } = callExpression;
 }

@@ -8,8 +8,6 @@ using Framework.SecuritySystem.DependencyInjection;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using NSubstitute;
-
 namespace Framework.SecuritySystem.DiTests;
 
 public abstract class TestBase

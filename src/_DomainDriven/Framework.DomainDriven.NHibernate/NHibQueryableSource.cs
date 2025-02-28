@@ -57,9 +57,9 @@ public class VisitedQueryProvider : DefaultQueryProvider
 
     public override object Execute(Expression expression)
     {
-        if (expression is GenericQueryableMethodExpression genericQueryableMethodExpression)
+        if (expression is GenericQueryableExecuteExpression genericQueryableExecuteExpression)
         {
-            return this.GenericQueryableExecutor.Execute(genericQueryableMethodExpression);
+            return this.GenericQueryableExecutor.Execute(genericQueryableExecuteExpression);
         }
         else
         {

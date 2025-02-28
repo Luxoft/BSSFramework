@@ -3,8 +3,6 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.NHibernate;
-using Framework.DomainDriven.NHibernate.Audit;
-using Framework.DomainDriven.Setup;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +11,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate.Tool.hbm2ddl;
 
 using SampleSystem.DbMigrator;
-using SampleSystem.ServiceEnvironment;
 using SampleSystem.ServiceEnvironment.NHibernate;
 
 namespace SampleSystem.DbGenerate;

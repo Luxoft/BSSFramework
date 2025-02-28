@@ -11,22 +11,38 @@ public abstract class GenericQueryableExecutor : IGenericQueryableExecutor
 
     protected virtual string GetMethodName(MethodInfo methodInfo) => methodInfo.Name.Replace("Generic", "");
 
-    public object Execute(GenericQueryableMethodExpression genericQueryableMethodExpression)
+    protected virtual IReadOnlyCollection<Expression> GetArguments(MethodCallExpression methodCallExpression)
     {
-        var methodCallExpression = (MethodCallExpression)genericQueryableMethodExpression.CallExpression.Body;
+        return methodCallExpression.Arguments;
+    }
 
-        var targetMethodName = this.GetMethodName(methodCallExpression.Method);
-
+    protected virtual MethodInfo GetTargetMethod(MethodCallExpression methodCallExpression, string targetMethodName, IReadOnlyList<Type> argTypes)
+    {
         var genericTargetMethod =
 
             this.ExtensionsType
                 .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Single(m => m.Name == targetMethodName && m.GetParameters().Length == methodCallExpression.Arguments.Count);
+                .Single(m => m.Name == targetMethodName && m.GetParameters().Length == argTypes.Count);
 
-        var targetMethod = genericTargetMethod.MakeGenericMethod(methodCallExpression.Method.GetGenericArguments());
+        return genericTargetMethod.MakeGenericMethod(methodCallExpression.Method.GetGenericArguments());
+    }
 
-        var args = methodCallExpression.Arguments.Select(arg => arg.GetMemberConstValue().GetValue()).ToArray();
+    protected virtual object InvokeMethod(MethodInfo targetMethod, IReadOnlyList<object> args) =>
+        targetMethod.Invoke(null, args.ToArray())!;
 
-        return targetMethod.Invoke(null, args)!;
+    public object Execute(GenericQueryableExecuteExpression genericQueryableExecuteExpression)
+    {
+        var methodCallExpression = (MethodCallExpression)genericQueryableExecuteExpression.CallExpression.Body;
+
+        var argExpressions = this.GetArguments(methodCallExpression);
+
+        var args = argExpressions.Select(arg => arg.GetMemberConstValue().GetValue()).ToArray();
+
+        var targetMethod = this.GetTargetMethod(
+            methodCallExpression,
+            this.GetMethodName(methodCallExpression.Method),
+            argExpressions.Select(argExpr => argExpr.Type).ToArray());
+
+        return this.InvokeMethod(targetMethod, args);
     }
 }

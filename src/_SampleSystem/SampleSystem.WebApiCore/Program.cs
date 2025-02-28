@@ -5,7 +5,6 @@ using Bss.Platform.Logging;
 
 using Framework.Configurator;
 using Framework.Configurator.Interfaces;
-using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.Setup;
 using Framework.DomainDriven.WebApiNetCore;

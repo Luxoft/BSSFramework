@@ -2,5 +2,5 @@
 
 public interface IGenericQueryableExecutor
 {
-    object Execute(GenericQueryableMethodExpression genericQueryableMethodExpression);
+    object Execute(GenericQueryableExecuteExpression genericQueryableExecuteExpression);
 }

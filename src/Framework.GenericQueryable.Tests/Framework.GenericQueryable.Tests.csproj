@@ -1,18 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-  </ItemGroup>
-
   <PropertyGroup>
     <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="NSubstitute" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -25,14 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Core.AnonymousTypeBuilder\Framework.Core.AnonymousTypeBuilder.csproj" />
-    <ProjectReference Include="..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
-    <ProjectReference Include="..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
+    <ProjectReference Include="..\Framework.GenericQueryable\Framework.GenericQueryable.csproj" />
   </ItemGroup>
+
 
   <ItemGroup>
     <Using Include="Xunit" />
-    <Using Include="NSubstitute" />
     <Using Include="FluentAssertions" />
   </ItemGroup>
 

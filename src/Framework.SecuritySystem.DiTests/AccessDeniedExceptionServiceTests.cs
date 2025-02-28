@@ -1,8 +1,4 @@
-﻿using FluentAssertions;
-
-using Xunit;
-
-namespace Framework.SecuritySystem.DiTests;
+﻿namespace Framework.SecuritySystem.DiTests;
 
 public class AccessDeniedExceptionServiceTests
 {

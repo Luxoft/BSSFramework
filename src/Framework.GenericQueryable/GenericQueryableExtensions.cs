@@ -25,6 +25,12 @@ public static class GenericQueryableExtensions
         CancellationToken cancellationToken = default(CancellationToken)) =>
         source.ToGenericAsync(() => source.GenericSingleOrDefaultAsync(cancellationToken));
 
+    public static Task<TSource?> GenericSingleOrDefaultAsync<TSource>(
+        this IQueryable<TSource> source,
+        Expression<Func<TSource, bool>> filter,
+        CancellationToken cancellationToken = default(CancellationToken)) =>
+        source.ToGenericAsync(() => source.GenericSingleOrDefaultAsync(filter, cancellationToken));
+
     public static Task<TSource> GenericFirstAsync<TSource>(
         this IQueryable<TSource> source,
         CancellationToken cancellationToken = default(CancellationToken)) =>
@@ -48,5 +54,5 @@ public static class GenericQueryableExtensions
     private static Task<TResult> ToGenericAsync<TSource, TResult>(
         this IQueryable<TSource> source,
         Expression<Func<Task<TResult>>> callExpression) =>
-        source.Provider.Execute<Task<TResult>>(new GenericQueryableMethodExpression(callExpression));
+        source.Provider.Execute<Task<TResult>>(new GenericQueryableExecuteExpression(callExpression));
 }

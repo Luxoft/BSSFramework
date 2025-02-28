@@ -52,7 +52,7 @@ public class ImpersonateController : ControllerBase
                        var repositoryFactory = serviceProvider.GetRequiredService<IRepositoryFactory<NoSecurityObject>>();
 
                        var mappingService = serviceProvider.GetRequiredService<ISampleSystemDTOMappingService>();
-                       var result = await repositoryFactory.Create().GetQueryable().ToGenericListAsync(cancellationToken);
+                       var result = await repositoryFactory.Create().GetQueryable().GenericToListAsync(cancellationToken);
 
                        return result.ToSimpleDTOList(mappingService);
                    });

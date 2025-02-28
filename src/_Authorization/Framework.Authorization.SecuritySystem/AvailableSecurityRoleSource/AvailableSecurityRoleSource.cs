@@ -16,7 +16,7 @@ public class AuthorizationAvailableSecurityRoleSource(
 
             select permission.Role.Id;
 
-        var dbRolesIdents = await dbRequest.Distinct().ToGenericListAsync(cancellationToken);
+        var dbRolesIdents = await dbRequest.Distinct().GenericToListAsync(cancellationToken);
 
         return dbRolesIdents.Select(securityRoleSource.GetSecurityRole);
     }

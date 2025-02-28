@@ -54,7 +54,7 @@ public class NoSecurityController : ControllerBase
     {
         var repository = this.repositoryFactory.Create();
 
-        var result = await repository.GetQueryable().ToGenericListAsync(cancellationToken);
+        var result = await repository.GetQueryable().GenericToListAsync(cancellationToken);
 
         return result.ToIdentityDTOList();
     }

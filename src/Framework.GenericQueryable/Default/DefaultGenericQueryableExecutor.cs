@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
 
@@ -9,31 +8,31 @@ public class DefaultGenericQueryableExecutor : GenericQueryableExecutor
 {
     protected override Type ExtensionsType { get; } = typeof(Queryable);
 
-    protected override string GetMethodName(MethodInfo methodInfo) => base.GetMethodName(methodInfo).SkipLast("Async", true);
+    protected override string GetTargetMethodName(MethodInfo baseMethod) => base.GetTargetMethodName(baseMethod).SkipLast("Async", true);
 
-    protected override IReadOnlyCollection<Expression> GetArguments(MethodCallExpression methodCallExpression)
+    protected override int GetParameterCount(MethodInfo baseMethod)
     {
-        var baseArguments = base.GetArguments(methodCallExpression);
-
-        if (baseArguments.Last().Type == typeof(CancellationToken))
+        if (baseMethod.GetParameters().Last().ParameterType != typeof(CancellationToken))
         {
-            return baseArguments.Take(baseArguments.Count - 1).ToArray();
+            throw new InvalidOperationException(
+                $"The last parameter of the method '{baseMethod.Name}' must be of type {nameof(CancellationToken)}.");
         }
         else
         {
-            return baseArguments;
+            return baseMethod.GetParameters().Length - 1;
         }
     }
-    protected override MethodInfo GetTargetMethod(MethodCallExpression methodCallExpression, string targetMethodName, IReadOnlyList<Type> argTypes)
+
+    protected override MethodInfo GetTargetMethod(MethodInfo baseMethod)
     {
-        if (targetMethodName == "ToList")
+        if (baseMethod.Name == nameof(GenericQueryableExtensions.GenericToListAsync))
         {
             return typeof(Enumerable).GetMethod(nameof(Enumerable.ToList))!.MakeGenericMethod(
-                methodCallExpression.Method.GetGenericArguments());
+                baseMethod.GetGenericArguments());
         }
         else
         {
-            return base.GetTargetMethod(methodCallExpression, targetMethodName, argTypes);
+            return base.GetTargetMethod(baseMethod);
         }
     }
 }

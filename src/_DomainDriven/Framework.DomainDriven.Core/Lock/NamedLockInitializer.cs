@@ -17,7 +17,7 @@ public class NamedLockInitializer<TGenericNamedLock>(
         var getNameFunc = genericNamedLockTypeInfo.NamePath.Compile(LambdaCompileCache.Default);
         var setNameFunc = genericNamedLockTypeInfo.NamePath.ToSetLambdaExpression().Compile(LambdaCompileCache.Default);
 
-        var dbValues = await namedLockRepository.GetQueryable().ToGenericListAsync(cancellationToken);
+        var dbValues = await namedLockRepository.GetQueryable().GenericToListAsync(cancellationToken);
 
         var mergeResult = dbValues.GetMergeResult(namedLockSource.NamedLocks, getNameFunc, v => v.Name);
 

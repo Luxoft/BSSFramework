@@ -41,7 +41,7 @@ public class EmployeeAsyncController : ControllerBase
         var employees = await repository
                               .GetQueryable()
                               .Where(employee => employee.Login == userName)
-                              .ToGenericListAsync(cancellationToken);
+                              .GenericToListAsync(cancellationToken);
 
         return employees.Single().ToSimpleDTO(this.mappingService);
     }

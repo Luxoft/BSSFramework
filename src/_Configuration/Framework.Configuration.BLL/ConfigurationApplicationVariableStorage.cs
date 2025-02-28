@@ -21,7 +21,7 @@ public class ConfigurationApplicationVariableStorage(
     public async Task<Dictionary<ApplicationVariable.ApplicationVariable, string>> GetVariablesAsync(
         CancellationToken cancellationToken = default)
     {
-        var dbList = await systemConstantRepository.GetQueryable().ToGenericListAsync(cancellationToken);
+        var dbList = await systemConstantRepository.GetQueryable().GenericToListAsync(cancellationToken);
 
         return dbList.ToDictionary(sc => new ApplicationVariable.ApplicationVariable(sc.Code, sc.Description), sc => sc.Value);
     }

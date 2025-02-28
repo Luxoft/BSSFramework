@@ -6,6 +6,8 @@ namespace Framework.GenericQueryable.Default;
 
 public class DefaultGenericQueryProvider<T>(IQueryable<T> baseSource) : IQueryProvider
 {
+    private static readonly IGenericQueryableExecutor GenericQueryableExecutor = new DefaultGenericQueryableExecutor();
+
     public IQueryable CreateQuery(Expression expression) => throw new NotImplementedException();
 
     public IQueryable<TElement> CreateQuery<TElement>(Expression expression) =>
@@ -19,7 +21,7 @@ public class DefaultGenericQueryProvider<T>(IQueryable<T> baseSource) : IQueryPr
 
         if (visitedExpression is GenericQueryableExecuteExpression genericQueryableExecuteExpression)
         {
-            var pureResult = this.CreateGenericQueryableExecutor().Execute(genericQueryableExecuteExpression);
+            var pureResult = GenericQueryableExecutor.Execute(genericQueryableExecuteExpression);
 
             var taskType = genericQueryableExecuteExpression.CallExpression.ReturnType;
 
@@ -36,6 +38,4 @@ public class DefaultGenericQueryProvider<T>(IQueryable<T> baseSource) : IQueryPr
     }
 
     protected virtual ExpressionVisitor CreateVisitor() => new DefaultGenericQueryableVisitor();
-
-    protected virtual IGenericQueryableExecutor CreateGenericQueryableExecutor() => new DefaultGenericQueryableExecutor();
 }

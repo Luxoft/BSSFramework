@@ -26,7 +26,7 @@ public class AuthorizationPrincipalSourceService(
                                             !string.IsNullOrWhiteSpace(nameFilter),
                                             q => q.Where(principal => principal.Name.Contains(nameFilter)))
                                         .Select(principal => new TypedPrincipalHeader(principal.Id, principal.Name, false))
-                                        .ToGenericListAsync(cancellationToken);
+                                        .GenericToListAsync(cancellationToken);
     }
 
 
@@ -87,6 +87,6 @@ public class AuthorizationPrincipalSourceService(
                          })
                      .Select(permission => permission.Principal.Name)
                      .Distinct()
-                     .ToGenericListAsync(cancellationToken);
+                     .GenericToListAsync(cancellationToken);
     }
 }

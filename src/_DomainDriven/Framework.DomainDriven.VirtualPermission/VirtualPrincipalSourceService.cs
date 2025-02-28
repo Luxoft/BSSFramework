@@ -44,7 +44,7 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
                                 .Take(limit)
                                 .Select(toPrincipalAnonHeaderExpr)
                                 .Distinct()
-                                .ToGenericListAsync(cancellationToken);
+                                .GenericToListAsync(cancellationToken);
 
         return anonHeaders.Select(anonHeader => new TypedPrincipalHeader(anonHeader.Id, anonHeader.Name, true));
     }
@@ -80,7 +80,7 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
             var permissions = await queryableSource.GetQueryable<TPermission>()
                                                    .Where(bindingInfo.GetFilter(serviceProvider))
                                                    .Where(bindingInfo.PrincipalPath.Select(filter))
-                                                   .ToGenericListAsync(cancellationToken);
+                                                   .GenericToListAsync(cancellationToken);
 
             return new TypedPrincipal(header, permissions.Select(this.ToTypedPermission).ToList());
         }
@@ -118,7 +118,7 @@ public class VirtualPrincipalSourceService<TPrincipal, TPermission>(
                                         .Where(bindingInfo.GetFilter(serviceProvider))
                                         .Select(bindingInfo.PrincipalPath)
                                         .Select(bindingInfo.PrincipalNamePath)
-                                        .ToGenericListAsync(cancellationToken);
+                                        .GenericToListAsync(cancellationToken);
         }
         else
         {

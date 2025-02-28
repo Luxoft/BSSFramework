@@ -101,7 +101,7 @@ public class GenericRepository<TDomainObject, TIdent>(
     public async Task<List<TProjection>> GetListAsync<TProjection>(
             Specification<TDomainObject, TProjection> specification,
             CancellationToken cancellationToken) =>
-            await specificationEvaluator.GetQuery(this.GetQueryable(), specification).ToGenericListAsync(cancellationToken);
+            await specificationEvaluator.GetQuery(this.GetQueryable(), specification).GenericToListAsync(cancellationToken);
 
     public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)
     {

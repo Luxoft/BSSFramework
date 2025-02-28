@@ -24,7 +24,7 @@ public class AuthorizationBusinessRoleInitializer(
         IEnumerable<FullSecurityRole> securityRoles,
         CancellationToken cancellationToken)
     {
-        var dbRoles = await businessRoleRepository.GetQueryable().ToGenericListAsync(cancellationToken);
+        var dbRoles = await businessRoleRepository.GetQueryable().GenericToListAsync(cancellationToken);
 
         var mergeResult = dbRoles.GetMergeResult(securityRoles, br => br.Id, sr => sr.Id);
 

@@ -25,9 +25,9 @@ public class ExampleServiceForRepository(
 
         //var businessUnits = await businessUnitsFuture.GetEnumerableAsync(cancellationToken);
 
-        var employees = await this.employeeRepository.GetQueryable().ToGenericListAsync(cancellationToken);
+        var employees = await this.employeeRepository.GetQueryable().GenericToListAsync(cancellationToken);
 
-        var businessUnits = await this.businessUnitRepository.GetQueryable().ToGenericListAsync(cancellationToken);
+        var businessUnits = await this.businessUnitRepository.GetQueryable().GenericToListAsync(cancellationToken);
 
         return (employees.ToList(), businessUnits.ToList());
     }

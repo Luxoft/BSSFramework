@@ -7,42 +7,50 @@ namespace Framework.GenericQueryable;
 
 public abstract class GenericQueryableExecutor : IGenericQueryableExecutor
 {
+    private readonly IDictionaryCache<MethodInfo, MethodInfo> mappingMethodCache;
+
+    protected GenericQueryableExecutor() =>
+        this.mappingMethodCache = new DictionaryCache<MethodInfo, MethodInfo>(this.GetTargetMethod).WithLock();
+
     protected abstract Type ExtensionsType { get; }
 
-    protected virtual string GetMethodName(MethodInfo methodInfo) => methodInfo.Name.Replace("Generic", "");
+    protected virtual string GetTargetMethodName(MethodInfo baseMethod) => baseMethod.Name.Skip("Generic", true);
 
-    protected virtual IReadOnlyCollection<Expression> GetArguments(MethodCallExpression methodCallExpression)
+    protected virtual int GetParameterCount(MethodInfo baseMethod)
     {
-        return methodCallExpression.Arguments;
+        return baseMethod.GetParameters().Length;
     }
 
-    protected virtual MethodInfo GetTargetMethod(MethodCallExpression methodCallExpression, string targetMethodName, IReadOnlyList<Type> argTypes)
+    protected virtual MethodInfo GetTargetMethod(MethodInfo baseMethod)
     {
-        var genericTargetMethod =
+        var targetMethodName = this.GetTargetMethodName(baseMethod);
 
-            this.ExtensionsType
-                .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Single(m => m.Name == targetMethodName && m.GetParameters().Length == argTypes.Count);
+        var genericArgs = baseMethod.GetGenericArguments();
 
-        return genericTargetMethod.MakeGenericMethod(methodCallExpression.Method.GetGenericArguments());
+        var parameterTypes = baseMethod.GetParameters().Take(this.GetParameterCount(baseMethod)).Select(p => p.ParameterType).ToArray();
+
+        var request = from method in this.ExtensionsType.GetMethods(BindingFlags.Public | BindingFlags.Static)
+
+                      where method.Name == targetMethodName && method.GetGenericArguments().Length == genericArgs.Length
+
+                      let genMethod = method.MakeGenericMethod(genericArgs)
+
+                      where genMethod.GetParameters().Select(p => p.ParameterType).SequenceEqual(parameterTypes)
+
+                      select genMethod;
+
+        return request.Single();
     }
 
-    protected virtual object InvokeMethod(MethodInfo targetMethod, IReadOnlyList<object> args) =>
-        targetMethod.Invoke(null, args.ToArray())!;
-
-    public object Execute(GenericQueryableExecuteExpression genericQueryableExecuteExpression)
+    public virtual object Execute(GenericQueryableExecuteExpression genericQueryableExecuteExpression)
     {
         var methodCallExpression = (MethodCallExpression)genericQueryableExecuteExpression.CallExpression.Body;
 
-        var argExpressions = this.GetArguments(methodCallExpression);
+        var args = methodCallExpression
+                   .Arguments
+                   .Take(this.GetParameterCount(methodCallExpression.Method))
+                   .Select(arg => arg.GetMemberConstValue().GetValue()).ToArray();
 
-        var args = argExpressions.Select(arg => arg.GetMemberConstValue().GetValue()).ToArray();
-
-        var targetMethod = this.GetTargetMethod(
-            methodCallExpression,
-            this.GetMethodName(methodCallExpression.Method),
-            argExpressions.Select(argExpr => argExpr.Type).ToArray());
-
-        return this.InvokeMethod(targetMethod, args);
+        return this.mappingMethodCache[methodCallExpression.Method].Invoke(null, args)!;
     }
 }

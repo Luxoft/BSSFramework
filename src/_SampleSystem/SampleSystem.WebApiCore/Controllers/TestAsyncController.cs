@@ -22,7 +22,7 @@ public class TestAsyncController(
     [HttpPost]
     public async Task<List<LocationSimpleDTO>> AsyncGetLocations(CancellationToken cancellationToken = default)
     {
-        var list = await locationViewRepository.GetQueryable().ToGenericListAsync(cancellationToken);
+        var list = await locationViewRepository.GetQueryable().GenericToListAsync(cancellationToken);
 
         return list.ToSimpleDTOList(mappingService);
     }

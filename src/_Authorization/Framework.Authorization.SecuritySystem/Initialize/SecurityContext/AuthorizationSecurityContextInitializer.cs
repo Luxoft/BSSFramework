@@ -17,7 +17,7 @@ public class AuthorizationSecurityContextInitializer(
 {
     public async Task<MergeResult<SecurityContextType, SecurityContextInfo>> Init(CancellationToken cancellationToken)
     {
-        var dbSecurityContextTypes = await securityContextTypeRepository.GetQueryable().ToGenericListAsync(cancellationToken);
+        var dbSecurityContextTypes = await securityContextTypeRepository.GetQueryable().GenericToListAsync(cancellationToken);
 
         var mergeResult = dbSecurityContextTypes.GetMergeResult(securityContextInfoSource.SecurityContextInfoList, et => et.Id, sc => sc.Id);
 

@@ -29,7 +29,7 @@ public class AuditReaderPatched : AuditReader, IAuditReaderPatched
         return primaryKeys.Select(z => this.Find<T>(z, revision)).Where(z => null != z).ToList();
     }
 
-    public IEnumerable<TIdentity> GetIdentiesBy<TDomainObject, TIdentity>(IAuditCriterion criterion)
+    public IEnumerable<TIdentity> GetIdentsBy<TDomainObject, TIdentity>(IAuditCriterion criterion)
     {
         var mapper = this.verCfg.EntCfg[typeof(TDomainObject).FullName].IdMapper;
 

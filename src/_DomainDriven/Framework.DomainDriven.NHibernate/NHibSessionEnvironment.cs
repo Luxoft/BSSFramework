@@ -38,7 +38,7 @@ public class NHibSessionEnvironment : IDisposable
                 initializer.Initialize(this.cfg);
             }
 
-            this.Configuration.SessionFactory().ParsingLinqThrough<VisitedQueryProvider>();
+            this.Configuration.SessionFactory().ParsingLinqThrough<VisitedNHibQueryProvider>();
 
             this.cfg.InitializeAudit(cachedMappingSettings, auditRevisionUserAuthenticationService);
 

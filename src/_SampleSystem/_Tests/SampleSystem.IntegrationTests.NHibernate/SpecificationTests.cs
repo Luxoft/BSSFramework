@@ -1,73 +1,60 @@
-﻿using Automation.ServiceEnvironment;
+﻿namespace SampleSystem.IntegrationTests;
 
-using FluentAssertions;
+//[TestClass]
+//public class SpecificationTests : TestBase
+//{
+//    [TestMethod]
+//    public void SpecificationWithProjection()
+//    {
+//        // Arrange
+//        this.DataHelper.SaveCountry(name: "test1");
+//        this.DataHelper.SaveCountry(name: "test2");
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//        // Act
 
-using NHibernate;
+//        var c = this.EvaluateWrite(context => context.Logics.Country.Single(new Test1NameSpecification()));
 
-using nuSpec.Abstraction;
+//        // Assert
+//        c.Name.Should().Be("test1");
+//    }
 
-using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.TestData;
+//    [TestMethod]
+//    public void GetQueryWithFetch()
+//    {
+//        // Arrange
+//        var dep1 = this.DataHelper.SaveHRDepartment(name: "dep1");
+//        this.DataHelper.SaveEmployee(login: "emp1", hrDepartment: dep1);
 
-namespace SampleSystem.IntegrationTests;
+//        // Act
+//        var employee =
+//                this.EvaluateWrite(context => context.Logics.Employee.Single(new EmployeeWithFetchSpecification()));
 
-[TestClass]
-public class SpecificationTests : TestBase
-{
-    [TestMethod]
-    public void SpecificationWithProjection()
-    {
-        // Arrange
-        this.DataHelper.SaveCountry(name: "test1");
-        this.DataHelper.SaveCountry(name: "test2");
+//        // Assert
+//        employee.Login.Should().Be("emp1");
+//        NHibernateUtil.IsInitialized(employee.HRDepartment).Should().BeTrue();
+//    }
 
-        // Act
+//    private class EmployeeWithFetchSpecification : Specification<Employee>
+//    {
+//        public EmployeeWithFetchSpecification()
+//        {
+//            this.Query = q => q.Where(x => x.Login == "emp1");
+//            this.AddFetch(q => q.Fetch(f => f.HRDepartment));
+//        }
+//    }
 
-        var c = this.EvaluateWrite(context => context.Logics.Country.Single(new Test1NameSpecification()));
+//    private class Test1NameSpecification : Specification<Country, CountryProjection>
+//    {
+//        public Test1NameSpecification() =>
+//                this.Query = q => q.Where(x => x.Name == "test1").Select(x => new CountryProjection { Name = x.Name });
+//    }
 
-        // Assert
-        c.Name.Should().Be("test1");
-    }
-
-    [TestMethod]
-    public void GetQueryWithFetch()
-    {
-        // Arrange
-        var dep1 = this.DataHelper.SaveHRDepartment(name: "dep1");
-        this.DataHelper.SaveEmployee(login: "emp1", hrDepartment: dep1);
-
-        // Act
-        var employee =
-                this.EvaluateWrite(context => context.Logics.Employee.Single(new EmployeeWithFetchSpecification()));
-
-        // Assert
-        employee.Login.Should().Be("emp1");
-        NHibernateUtil.IsInitialized(employee.HRDepartment).Should().BeTrue();
-    }
-
-    private class EmployeeWithFetchSpecification : Specification<Employee>
-    {
-        public EmployeeWithFetchSpecification()
-        {
-            this.Query = q => q.Where(x => x.Login == "emp1");
-            this.AddFetch(q => q.Fetch(f => f.HRDepartment));
-        }
-    }
-
-    private class Test1NameSpecification : Specification<Country, CountryProjection>
-    {
-        public Test1NameSpecification() =>
-                this.Query = q => q.Where(x => x.Name == "test1").Select(x => new CountryProjection { Name = x.Name });
-    }
-
-    private class CountryProjection
-    {
-        public string Name
-        {
-            get;
-            set;
-        }
-    }
-}
+//    private class CountryProjection
+//    {
+//        public string Name
+//        {
+//            get;
+//            set;
+//        }
+//    }
+//}

@@ -3,12 +3,9 @@
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
 using Framework.DomainDriven._Visitors;
-using Framework.DependencyInjection;
 using Framework.DomainDriven.ApplicationCore;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
 using Framework.DomainDriven.Lock;
-
-using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Setup;
 
@@ -19,8 +16,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     private readonly List<IBssFrameworkExtension> extensions = new();
 
     private Type domainObjectEventMetadataType = typeof(DomainObjectEventMetadata);
-
-    private Type? specificationEvaluatorType;
 
     public bool RegisterDenormalizeHierarchicalDALListener { get; set; } = true;
 
@@ -61,14 +56,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         return this;
     }
 
-    public IBssFrameworkSettings SetSpecificationEvaluator<TSpecificationEvaluator>()
-        where TSpecificationEvaluator : class, ISpecificationEvaluator
-    {
-        this.specificationEvaluatorType = typeof(TSpecificationEvaluator);
-
-        return this;
-    }
-
     public IBssFrameworkSettings AddQueryVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
         where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem
     {
@@ -101,19 +88,6 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     private void InitializeDefault()
     {
-        this.registerActions.Add(
-            sc =>
-            {
-                if (this.specificationEvaluatorType == null)
-                {
-                    sc.AddNotImplemented<ISpecificationEvaluator>("Use 'SetSpecificationEvaluator'");
-                }
-                else
-                {
-                    sc.AddScoped(typeof(ISpecificationEvaluator), this.specificationEvaluatorType);
-                }
-            });
-
         if (this.RegisterDenormalizeHierarchicalDALListener)
         {
             this.AddListener<DenormalizeHierarchicalDALListener>();

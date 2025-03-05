@@ -82,7 +82,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
 
     public IUserAuthenticationService UserAuthenticationService => Framework.Core.Services.UserAuthenticationService.CreateFor("testUser");
 
-    public IQueryableSource GetQueryableSource() => new RepositoryQueryableSource(this.ServiceProvider);
+    public IQueryableSource GetQueryableSource() => throw new NotImplementedException();
 
     public IValidator Validator => ValidatorBase.Success;
 

@@ -2,7 +2,6 @@
 
 using Framework.Core;
 using Framework.DomainDriven.Audit;
-using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 
 using NHibernate;
@@ -22,8 +21,6 @@ public class WriteNHibSession : NHibSessionBase
 
     private readonly AuditPropertyPair createAuditProperties;
 
-    private readonly ISet<ObjectModification> modifiedObjectsFromLogic = new HashSet<ObjectModification>();
-
     private readonly CollectChangesEventListener collectChangedEventListener;
 
     private readonly ITransaction nhibTransaction;
@@ -33,7 +30,7 @@ public class WriteNHibSession : NHibSessionBase
     private bool closed;
 
     public WriteNHibSession(NHibSessionEnvironment environment,
-                            INHibSessionSetup settings,
+                            IDBSessionSettings settings,
                             IEnumerable<IDBSessionEventListener> eventListeners)
             : base(environment, DBSessionMode.Write)
     {
@@ -74,17 +71,6 @@ public class WriteNHibSession : NHibSessionBase
         eventListeners.PostDeleteEventListeners = eventListeners.PostDeleteEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
         eventListeners.PostUpdateEventListeners = eventListeners.PostUpdateEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
         eventListeners.PostInsertEventListeners = eventListeners.PostInsertEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
-    }
-
-    public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
-    {
-        return this.modifiedObjectsFromLogic;
-    }
-
-    public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>()
-    {
-        return this.GetModifiedObjectsFromLogic()
-                   .Where(obj => typeof(TPersistentDomainObjectBase).IsAssignableFrom(obj.ObjectType));
     }
 
     public override void AsFault()
@@ -223,10 +209,5 @@ public class WriteNHibSession : NHibSessionBase
                 throw result;
             }
         }
-    }
-
-    public override void RegisterModified<T>(T @object, ModificationType modificationType)
-    {
-        this.modifiedObjectsFromLogic.Add(new ObjectModification(@object, typeof(T), modificationType));
     }
 }

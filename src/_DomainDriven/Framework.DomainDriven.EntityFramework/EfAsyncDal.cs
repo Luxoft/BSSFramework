@@ -4,24 +4,24 @@ using Framework.DomainDriven.Lock;
 using Framework.GenericQueryable;
 using Framework.Persistent;
 
-using NHibernate;
+using Microsoft.EntityFrameworkCore;
 
-namespace Framework.DomainDriven.NHibernate;
+namespace Framework.DomainDriven.EntityFramework;
 
-public class NHibAsyncDal<TDomainObject, TIdent>(
-    INHibSession session,
+public class EfAsyncDal<TDomainObject, TIdent>(
+    IEfSession session,
     IExpressionVisitorContainer expressionVisitorContainer,
     IGenericQueryableExecutor genericQueryableExecutor)
     : IAsyncDal<TDomainObject, TIdent>
     where TDomainObject : class, IIdentityObject<TIdent>
 {
-    private ISession NativeSession => session.NativeSession;
+    private DbContext NativeSession => session.NativeSession;
 
     public IQueryable<TDomainObject> GetQueryable()
     {
-        var queryable = this.NativeSession.Query<TDomainObject>();
+        var queryable = (IQueryable<TDomainObject>)this.NativeSession.Set<TDomainObject>();
 
-        var queryProvider = (queryable.Provider as VisitedNHibQueryProvider)
+        var queryProvider = (queryable.Provider as VisitedEfQueryProvider)
                             .FromMaybe("Register VisitedQueryProvider in Nhib configuration");
 
         queryProvider.Visitor = expressionVisitorContainer.Visitor;
@@ -30,19 +30,21 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
         return queryable;
     }
 
-    public virtual TDomainObject Load(TIdent id) => this.NativeSession.Load<TDomainObject>(id);
+    public virtual TDomainObject Load(TIdent id) => this.LoadAsync(id).GetAwaiter().GetResult();
 
     public virtual async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default) =>
-        await this.NativeSession.LoadAsync<TDomainObject>(id, cancellationToken);
+        await this.NativeSession.FindAsync<TDomainObject>([id], cancellationToken); // Hack
 
     public virtual async Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken = default) =>
-        await this.NativeSession.RefreshAsync(domainObject, cancellationToken);
+        await this.NativeSession.Entry(domainObject).ReloadAsync(cancellationToken);
 
     public virtual async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default)
     {
         this.CheckWrite();
 
-        await this.NativeSession.SaveOrUpdateAsync(domainObject, cancellationToken);
+        this.NativeSession.Attach(domainObject);
+
+        await this.NativeSession.SaveChangesAsync(cancellationToken);
     }
 
     public virtual async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken = default)
@@ -54,21 +56,29 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
 
         this.CheckWrite();
 
-        await this.NativeSession.SaveAsync(domainObject, id, cancellationToken);
+        this.NativeSession.Attach(domainObject);
+
+        await this.NativeSession.SaveChangesAsync(cancellationToken); // Hack
     }
 
     public virtual async Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default)
     {
         this.CheckWrite();
 
-        await this.NativeSession.DeleteAsync(domainObject, cancellationToken);
+        this.NativeSession.Remove(domainObject);
+        await this.NativeSession.SaveChangesAsync(cancellationToken);
     }
 
     public virtual async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)
     {
         this.CheckWrite();
 
-        await this.NativeSession.LockAsync(domainObject, lockRole.ToLockMode(), cancellationToken);
+        await this.NativeSession.Set<TDomainObject>()
+                  .FromSqlRaw($"SELECT * FROM {nameof(TDomainObject)} WITH (UPDLOCK) WHERE Id = {0}", domainObject.Id)
+                  .ToListAsync(cancellationToken);
+        //throw new NotImplementedException();
+
+        //await this.NativeSession.LockAsync(domainObject, lockRole.ToLockMode(), cancellationToken);
     }
 
     private void CheckWrite()

@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.DomainDriven.NHibernate</PackageId>
+    <PackageId>Luxoft.Framework.DomainDriven.EntityFramework</PackageId>
+    <nullable>enable</nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,10 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentNHibernate" />
-    <PackageReference Include="Microsoft.Data.SqlClient" />
-    <PackageReference Include="NHibernate" />
-    <PackageReference Include="NHibernate.Envers" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
   </ItemGroup>
 
   <ItemGroup>

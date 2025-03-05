@@ -18,10 +18,6 @@ public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDispos
 
     Task FlushAsync(CancellationToken cancellationToken = default);
 
-    IEnumerable<ObjectModification> GetModifiedObjectsFromLogic();
-
-    IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
-
     /// <summary>
     /// Закрывает текущую транзакцию без применения изменений.
     /// </summary>

@@ -4,7 +4,7 @@ namespace NHibernate.Envers.Patch;
 
 public interface IAuditReaderPatched : IAuditReader
 {
-    IEnumerable<TIdentity> GetIdentiesBy<TDomainObject, TIdentity>(IAuditCriterion criterion);
+    IEnumerable<TIdentity> GetIdentsBy<TDomainObject, TIdentity>(IAuditCriterion criterion);
 
     IReadOnlyList<T> FindObjects<T>(IEnumerable<object> primaryKeys, long revision);
 

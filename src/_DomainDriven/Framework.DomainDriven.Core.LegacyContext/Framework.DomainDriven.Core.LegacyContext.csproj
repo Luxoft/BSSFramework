@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="nuSpec.Abstraction" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\Framework.OData\Framework.OData.csproj" />
     <ProjectReference Include="..\..\Framework.Projection\Framework.Projection.csproj" />

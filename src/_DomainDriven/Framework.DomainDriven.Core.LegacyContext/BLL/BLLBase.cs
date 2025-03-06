@@ -10,8 +10,6 @@ using Framework.Persistent;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using nuSpec.Abstraction;
-
 namespace Framework.DomainDriven.BLL;
 
 public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent> :
@@ -27,10 +25,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         : base(context)
     {
         this.dal = this.Context.ServiceProvider.GetRequiredService<IDAL<TDomainObject, TIdent>>();
-        this.SpecificationEvaluator = this.Context.ServiceProvider.GetService<ISpecificationEvaluator>();
     }
-
-    protected ISpecificationEvaluator SpecificationEvaluator { get; }
 
     #region Private.Method
 
@@ -607,32 +602,4 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     }
 
     public IQueryable<TDomainObject> GetUnsecureQueryable() => this.GetUnsecureQueryable(null, LockRole.None);
-
-#nullable enable
-
-    public IQueryable<TProjection> GetQueryable<TProjection>(Specification<TDomainObject, TProjection> specification) =>
-        this.SpecificationEvaluator.GetQuery(this.GetSecureQueryable(), specification);
-
-    public TProjection? SingleOrDefault<TProjection>(Specification<TDomainObject, TProjection> specification) =>
-        this.SpecificationEvaluator.GetQuery(this.GetSecureQueryable(), specification).SingleOrDefault();
-
-    public TProjection Single<TProjection>(Specification<TDomainObject, TProjection> specification) =>
-        this.SpecificationEvaluator.GetQuery(this.GetSecureQueryable(), specification).Single();
-
-    public int Count<TProjection>(Specification<TDomainObject, TProjection> specification) =>
-        this.SpecificationEvaluator.GetQuery(this.GetSecureQueryable(), specification).Count();
-
-    public INuFutureEnumerable<TProjection> GetFuture<TProjection>(Specification<TDomainObject, TProjection> specification) =>
-        this.SpecificationEvaluator.GetFuture(this.GetSecureQueryable(), specification);
-
-    public INuFutureValue<TProjection> GetFutureValue<TProjection>(Specification<TDomainObject, TProjection> specification) =>
-        this.SpecificationEvaluator.GetFutureValue(this.GetSecureQueryable(), specification);
-
-    public INuFutureValue<int> GetFutureCount<TProjection>(Specification<TDomainObject, TProjection> specification) =>
-        this.SpecificationEvaluator.GetFutureValue(this.GetSecureQueryable(), specification, x => x.Count());
-
-    public IList<TProjection> GetList<TProjection>(Specification<TDomainObject, TProjection> specification) =>
-        this.SpecificationEvaluator.GetQuery(this.GetSecureQueryable(), specification).ToList();
-
-#nullable disable
 }

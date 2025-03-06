@@ -5,8 +5,6 @@ using Framework.DomainDriven.Lock;
 using Framework.Exceptions;
 using Framework.OData;
 
-using nuSpec.Abstraction;
-
 namespace Framework.DomainDriven.BLL;
 
 public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObject>
@@ -115,54 +113,6 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     TDomainObject GetObjectBy(Expression<Func<TDomainObject, bool>> filter, bool throwOnNotFound, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
 
     TDomainObject GetObjectBy(Expression<Func<TDomainObject, bool>> filter, bool throwOnNotFound, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
-
-
-#nullable enable
-
-    /// <summary>
-    /// Get Queryable by Specification https://github.com/NikitaEgorov/nuSpec
-    /// </summary>
-    IQueryable<TProjection> GetQueryable<TProjection>(Specification<TDomainObject, TProjection> specification);
-
-    /// <summary>
-    /// Get Single or default by Specification https://github.com/NikitaEgorov/nuSpec
-    /// </summary>
-    TProjection? SingleOrDefault<TProjection>(Specification<TDomainObject, TProjection> specification);
-
-    /// <summary>
-    /// Get Single by Specification https://github.com/NikitaEgorov/nuSpec
-    /// </summary>
-    TProjection Single<TProjection>(Specification<TDomainObject, TProjection> specification);
-
-    /// <summary>
-    /// Get Count by Specification https://github.com/NikitaEgorov/nuSpec
-    /// </summary>
-    int Count<TProjection>(Specification<TDomainObject, TProjection> specification);
-
-    /// <summary>
-    /// Get Future query by Specification https://github.com/NikitaEgorov/nuSpec
-    /// NOT SUPPORTED NOW!
-    /// </summary>
-    INuFutureEnumerable<TProjection> GetFuture<TProjection>(Specification<TDomainObject, TProjection> specification);
-
-    /// <summary>
-    /// Get Future value by Specification https://github.com/NikitaEgorov/nuSpec
-    /// NOT SUPPORTED NOW!
-    /// </summary>
-    INuFutureValue<TProjection> GetFutureValue<TProjection>(Specification<TDomainObject, TProjection> specification);
-
-    /// <summary>
-    /// Get Future count by Specification https://github.com/NikitaEgorov/nuSpec
-    /// NOT SUPPORTED NOW!
-    /// </summary>
-    INuFutureValue<int> GetFutureCount<TProjection>(Specification<TDomainObject, TProjection> specification);
-
-    /// <summary>
-    /// Get list by Specification https://github.com/NikitaEgorov/nuSpec
-    /// </summary>
-    IList<TProjection> GetList<TProjection>(Specification<TDomainObject, TProjection> specification);
-
-#nullable disable
 }
 
 public interface IBLLBase<out TBLLContext, TDomainObject> : IBLLQueryBase<TDomainObject>, IBLLContextContainer<TBLLContext>

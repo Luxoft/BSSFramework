@@ -3,8 +3,6 @@ using Framework.DomainDriven.Lock;
 using Framework.Events;
 using Framework.SecuritySystem.DependencyInjection;
 
-using nuSpec.Abstraction;
-
 namespace Framework.DomainDriven.Setup;
 
 public interface IBssFrameworkSettings : IBssFrameworkSettingsBase<IBssFrameworkSettings>
@@ -20,9 +18,6 @@ public interface IBssFrameworkSettings : IBssFrameworkSettingsBase<IBssFramework
 
     IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
-
-    IBssFrameworkSettings SetSpecificationEvaluator<TSpecificationEvaluator>()
-        where TSpecificationEvaluator : class, ISpecificationEvaluator;
 
     IBssFrameworkSettings AddQueryVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
         where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem;

@@ -11,14 +11,14 @@ namespace Framework.DomainDriven.NHibernate;
 /// <summary>
 /// NHibnate-провайдер доступа, который применяет Visitor-ы для Expression-ов
 /// </summary>
-public class VisitedQueryProvider : DefaultQueryProvider
+public class VisitedNHibQueryProvider : DefaultQueryProvider
 {
-    public VisitedQueryProvider(ISessionImplementor session)
+    public VisitedNHibQueryProvider(ISessionImplementor session)
             : base(session)
     {
     }
 
-    protected VisitedQueryProvider(ISessionImplementor session, object collection, NhQueryableOptions options)
+    protected VisitedNHibQueryProvider(ISessionImplementor session, object collection, NhQueryableOptions options)
             : base(session, collection, options)
     {
     }
@@ -29,7 +29,7 @@ public class VisitedQueryProvider : DefaultQueryProvider
 
     protected override IQueryProvider CreateWithOptions(NhQueryableOptions options)
     {
-        return new VisitedQueryProvider(this.Session, this.Collection, options)
+        return new VisitedNHibQueryProvider(this.Session, this.Collection, options)
                {
                    Visitor = this.Visitor, GenericQueryableExecutor = this.GenericQueryableExecutor
                };

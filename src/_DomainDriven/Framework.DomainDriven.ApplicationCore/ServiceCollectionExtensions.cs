@@ -36,7 +36,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IInitializeManager, InitializeManager>();
         services.AddScoped<IEventOperationSender, EventOperationSender>();
 
-        services.AddScoped<IQueryableSource, RepositoryQueryableSource>();
+        services.AddScoped<IQueryableSource, AsyncDalQueryableSource>();
         services.AddScoped(typeof(IPersistStorage<>), typeof(PersistStorage<>));
 
         services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();

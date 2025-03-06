@@ -1,15 +1,11 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Lock;
-using Framework.GenericQueryable;
 using Framework.SecuritySystem;
-
-using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Repository;
 
 public class GenericRepository<TDomainObject, TIdent>(
     IAsyncDal<TDomainObject, TIdent> dal,
-    ISpecificationEvaluator specificationEvaluator,
     IAccessDeniedExceptionService accessDeniedExceptionService,
     ISecurityProvider<TDomainObject> securityProvider)
     : IGenericRepository<TDomainObject, TIdent>
@@ -53,55 +49,6 @@ public class GenericRepository<TDomainObject, TIdent>(
     /// </summary>
     public async Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken) =>
         await dal.RefreshAsync(domainObject, cancellationToken);
-
-    public IQueryable<TProjection> GetQueryable<TProjection>(Specification<TDomainObject, TProjection> specification)
-        => specificationEvaluator.GetQuery(this.GetQueryable(), specification);
-
-    public async Task<TProjection?> GenericSingleOrDefaultAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken) =>
-            await specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .GenericSingleOrDefaultAsync(cancellationToken);
-
-    public async Task<TProjection> GenericSingleAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken) =>
-            await specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .GenericSingleAsync(cancellationToken);
-
-    public async Task<TProjection?> GenericFirstOrDefaultAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken) =>
-            await specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .GenericFirstOrDefaultAsync(cancellationToken);
-
-    public async Task<TProjection> GenericFirstAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken) =>
-            await specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .GenericFirstAsync(cancellationToken);
-
-    public async Task<int> GenericCountAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken) =>
-            await specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .GenericCountAsync(cancellationToken);
-
-    public INuFutureEnumerable<TProjection> GetFuture<TProjection>(
-            Specification<TDomainObject, TProjection> specification) =>
-            specificationEvaluator.GetFuture(this.GetQueryable(), specification);
-
-    public INuFutureValue<TProjection> GetFutureValue<TProjection>(
-            Specification<TDomainObject, TProjection> specification) =>
-            specificationEvaluator.GetFutureValue(this.GetQueryable(), specification);
-
-    public INuFutureValue<int> GetFutureCount<TProjection>(Specification<TDomainObject, TProjection> specification) =>
-            specificationEvaluator.GetFutureValue(this.GetQueryable(), specification, x => x.Count());
-
-    public async Task<List<TProjection>> GetListAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken) =>
-            await specificationEvaluator.GetQuery(this.GetQueryable(), specification).GenericToListAsync(cancellationToken);
 
     public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)
     {

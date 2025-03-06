@@ -22,7 +22,7 @@ public static class DependencyInjectionExtensions
 
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        services.AddScoped<INHibSessionSetup, NHibSessionSettings>();
+        services.AddScoped<IDBSessionSettings, DBSessionSettings>();
 
         services.AddSingleton<IGenericQueryableExecutor, NHibGenericQueryableExecutor>();
 

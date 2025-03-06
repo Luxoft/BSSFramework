@@ -219,7 +219,7 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
     }
 
     public IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomainObject, bool>> query) =>
-        this.GetAuditReader().GetIdentiesBy<TDomainObject, TIdent>(query.ToCriterion());
+        this.GetAuditReader().GetIdentsBy<TDomainObject, TIdent>(query.ToCriterion());
 
     public TDomainObject GetById(TIdent id) => this.NativeSession.Get<TDomainObject>(id);
 

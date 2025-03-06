@@ -1,7 +1,5 @@
 ﻿using System.Data;
 
-using Framework.DomainDriven.DAL.Revisions;
-
 using NHibernate;
 using NHibernate.Envers.Patch;
 
@@ -13,7 +11,7 @@ public class NHibSession : INHibSession
 
     private readonly Lazy<INHibSession> lazyInnerSession;
 
-    public NHibSession(NHibSessionEnvironment environment, INHibSessionSetup settings, IEnumerable<IDBSessionEventListener> eventListeners)
+    public NHibSession(NHibSessionEnvironment environment, IDBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners)
     {
         if (environment == null) throw new ArgumentNullException(nameof(environment));
 
@@ -43,21 +41,12 @@ public class NHibSession : INHibSession
 
     public IDbTransaction Transaction => this.InnerSession.Transaction;
 
-    public void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType)
-    {
-        this.lazyInnerSession.Value.RegisterModified(domainObject, modificationType);
-    }
-
     public async Task FlushAsync(CancellationToken cancellationToken = default)
     {
         await this.InnerSession.FlushAsync(cancellationToken);
     }
 
     public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
-
-    public IEnumerable<ObjectModification> GetModifiedObjectsFromLogic() => this.InnerSession.GetModifiedObjectsFromLogic();
-
-    public IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>() => this.InnerSession.GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
 
     public void AsFault() => this.InnerSession.AsFault();
 

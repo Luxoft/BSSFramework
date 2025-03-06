@@ -1,8 +1,8 @@
 ﻿using Framework.DomainDriven.Audit;
 
-namespace Framework.DomainDriven.NHibernate;
+namespace Framework.DomainDriven;
 
-public interface INHibSessionSetup
+public interface IDBSessionSettings
 {
     DBSessionMode DefaultSessionMode { get; }
 

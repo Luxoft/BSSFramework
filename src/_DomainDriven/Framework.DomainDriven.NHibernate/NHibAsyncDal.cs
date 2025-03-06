@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven._Visitors;
-using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.Lock;
 using Framework.GenericQueryable;
 using Framework.Persistent;
@@ -22,7 +21,7 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
     {
         var queryable = this.NativeSession.Query<TDomainObject>();
 
-        var queryProvider = (queryable.Provider as VisitedQueryProvider)
+        var queryProvider = (queryable.Provider as VisitedNHibQueryProvider)
                             .FromMaybe("Register VisitedQueryProvider in Nhib configuration");
 
         queryProvider.Visitor = expressionVisitorContainer.Visitor;
@@ -44,8 +43,6 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
         this.CheckWrite();
 
         await this.NativeSession.SaveOrUpdateAsync(domainObject, cancellationToken);
-
-        session.RegisterModified(domainObject, ModificationType.Save);
     }
 
     public virtual async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken = default)
@@ -58,15 +55,11 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
         this.CheckWrite();
 
         await this.NativeSession.SaveAsync(domainObject, id, cancellationToken);
-
-        session.RegisterModified(domainObject, ModificationType.Save);
     }
 
     public virtual async Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default)
     {
         this.CheckWrite();
-
-        session.RegisterModified(domainObject, ModificationType.Remove);
 
         await this.NativeSession.DeleteAsync(domainObject, cancellationToken);
     }

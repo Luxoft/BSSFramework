@@ -1,12 +1,12 @@
 ﻿using Framework.Core.Services;
 using Framework.DomainDriven.Audit;
 
-namespace Framework.DomainDriven.NHibernate;
+namespace Framework.DomainDriven;
 
-public class NHibSessionSettings(
+public class DBSessionSettings(
     IUserAuthenticationService userAuthenticationService,
     TimeProvider timeProvider)
-    : INHibSessionSetup
+    : IDBSessionSettings
 {
     public DBSessionMode DefaultSessionMode { get; } = DBSessionMode.Write;
 

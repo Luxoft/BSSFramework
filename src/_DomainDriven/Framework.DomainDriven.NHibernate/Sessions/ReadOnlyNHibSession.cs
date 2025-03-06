@@ -1,7 +1,5 @@
 ﻿using System.Data;
 
-using Framework.DomainDriven.DAL.Revisions;
-
 using NHibernate;
 
 namespace Framework.DomainDriven.NHibernate;
@@ -25,17 +23,6 @@ public class ReadOnlyNHibSession : NHibSessionBase
     public override bool Closed => this.closed;
 
     public sealed override ISession NativeSession { get; }
-
-
-    public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
-    {
-        yield break;
-    }
-
-    public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>()
-    {
-        yield break;
-    }
 
     public override void AsFault()
     {
@@ -73,10 +60,5 @@ public class ReadOnlyNHibSession : NHibSessionBase
     public override async Task FlushAsync(CancellationToken cancellationToken = default)
     {
         throw new InvalidOperationException();
-    }
-
-    public override void RegisterModified<T>(T @object, ModificationType modificationType)
-    {
-        throw new ArgumentException($"Not supported: '{nameof(this.RegisterModified)}' for {this.GetType()}");
     }
 }

@@ -5,14 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="appsettings.json" />
-  </ItemGroup>
-  
-  <ItemGroup>
     <ProjectReference Include="..\..\Framework.Configurator.ApplicationVariable\Framework.Configurator.ApplicationVariable.csproj" />
     <ProjectReference Include="..\..\Framework.Configurator.Events\Framework.Configurator.Events.csproj" />
 
@@ -25,7 +17,7 @@
 
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.DTO\Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
   </ItemGroup>

@@ -14,7 +14,7 @@ public abstract class NHibSessionBase : INHibSession
 
     internal NHibSessionBase(NHibSessionEnvironment environment, DBSessionMode sessionMode)
     {
-        this.Environment = environment ?? throw new ArgumentNullException(nameof(environment));
+        this.Environment = environment;
         this.SessionMode = sessionMode;
 
         this.lazyAuditReader = LazyHelper.Create(() => this.NativeSession.GetAuditReader());
@@ -32,8 +32,6 @@ public abstract class NHibSessionBase : INHibSession
 
     protected internal NHibSessionEnvironment Environment { get; }
 
-    public abstract void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType);
-
     public abstract Task FlushAsync(CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
@@ -47,10 +45,6 @@ public abstract class NHibSessionBase : INHibSession
     {
         return this.AuditReader.GetMaxRevision();
     }
-
-    public abstract IEnumerable<ObjectModification> GetModifiedObjectsFromLogic();
-
-    public abstract IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
 
     public abstract void AsFault();
 

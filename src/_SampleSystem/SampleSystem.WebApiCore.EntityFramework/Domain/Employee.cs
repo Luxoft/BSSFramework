@@ -2,7 +2,7 @@
 
 using Framework.Persistent;
 
-namespace SampleSystem.EfTests;
+namespace SampleSystem.Domain;
 
 [Table(nameof(Employee), Schema = "app")]
 public class Employee : IIdentityObject<Guid>

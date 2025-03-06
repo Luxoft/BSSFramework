@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 
-namespace SampleSystem.EfTests;
+using SampleSystem.Domain;
+
+namespace SampleSystem.ServiceEnvironment;
 
 public class AppDbContext(DbContextOptions<AppDbContext> rootOptions, IGenericQueryableExecutor genericQueryableExecutor) : DbContext(rootOptions)
 {

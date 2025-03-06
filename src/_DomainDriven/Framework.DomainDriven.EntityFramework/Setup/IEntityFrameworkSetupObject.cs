@@ -8,8 +8,3 @@ public interface IEntityFrameworkSetupObject
 
     //bool AutoAddFluentMapping { get; set; }
 }
-
-public class EntityFrameworkSetupObject : IEntityFrameworkSetupObject
-{
-
-}

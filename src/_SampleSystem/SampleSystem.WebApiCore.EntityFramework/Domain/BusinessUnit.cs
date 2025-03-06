@@ -2,7 +2,7 @@
 
 using Framework.SecuritySystem;
 
-namespace SampleSystem.EfTests;
+namespace SampleSystem.Domain;
 
 [Table(nameof(BusinessUnit), Schema = "app")]
 public class BusinessUnit : ISecurityContext

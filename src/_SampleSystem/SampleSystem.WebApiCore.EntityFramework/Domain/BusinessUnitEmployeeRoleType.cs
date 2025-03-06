@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.EfTests;
+﻿namespace SampleSystem.Domain;
 
 public enum BusinessUnitEmployeeRoleType
 {

@@ -1,6 +1,6 @@
 ﻿using Framework.SecuritySystem;
 
-namespace SampleSystem.EfTests;
+namespace SampleSystem.Security;
 
 public static class SampleSystemSecurityRole
 {

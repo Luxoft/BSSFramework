@@ -10,4 +10,6 @@ public class BusinessUnit : ISecurityContext
     public Guid Id { get; set; }
 
     public string Name { get; set; } = null!;
+
+    public virtual BusinessUnit? Parent { get; set; }
 }

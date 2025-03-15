@@ -25,9 +25,10 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
 {
     public Type PermissionType { get; } = typeof(TPermission);
 
-    public Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
+    public Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>(
+        SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
         where TSecurityContext : ISecurityContext =>
-        bindingInfo.GetRestrictionsExpr<TSecurityContext>();
+        bindingInfo.GetRestrictionsExpr(restrictionFilterInfo?.GetPureFilter(serviceProvider));
 
     public Expression<Func<TPermission, bool>> GetGrandAccessExpr<TSecurityContext>()
         where TSecurityContext : ISecurityContext =>
@@ -47,6 +48,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
                 queryableSource,
                 timeProvider,
                 bindingInfo,
+                securityRule,
                 securityRuleCredential);
         }
         else

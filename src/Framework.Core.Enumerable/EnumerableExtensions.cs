@@ -320,8 +320,8 @@ public static class EnumerableExtensions
         return source.Select(selector).ToReadOnlyCollection();
     }
 
-    public static IEnumerable<TResult> EmptyIfNull<TResult>(this IEnumerable<TResult> source)
+    public static IEnumerable<TResult> EmptyIfNull<TResult>(this IEnumerable<TResult>? source)
     {
-        return source ?? Enumerable.Empty<TResult>();
+        return source ?? [];
     }
 }

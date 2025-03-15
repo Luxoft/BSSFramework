@@ -6,8 +6,12 @@ namespace Framework.SecuritySystem.Builders.MaterializedBuilder;
 
 public class OrFilterBuilder<TDomainObject>(
     SecurityFilterBuilderFactory<TDomainObject> builderFactory,
-    SecurityPath<TDomainObject>.OrSecurityPath securityPath)
-    : BinaryFilterBuilder<TDomainObject, SecurityPath<TDomainObject>.OrSecurityPath>(builderFactory, securityPath)
+    SecurityPath<TDomainObject>.OrSecurityPath securityPath,
+    IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+    : BinaryFilterBuilder<TDomainObject, SecurityPath<TDomainObject>.OrSecurityPath>(
+        builderFactory,
+        securityPath,
+        restrictionFilterInfoList)
 {
     protected override Expression<Func<TArg, bool>> BuildOperation<TArg>(
         Expression<Func<TArg, bool>> arg1,

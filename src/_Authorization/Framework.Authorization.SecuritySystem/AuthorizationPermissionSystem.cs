@@ -16,10 +16,12 @@ public class AuthorizationPermissionSystem(
 {
     public Type PermissionType { get; } = typeof(Permission);
 
-    public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
+    public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>(SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
         where TSecurityContext : ISecurityContext
     {
         var securityContextTypeId = securityContextInfoSource.GetSecurityContextInfo<TSecurityContext>().Id;
+
+        throw new NotImplementedException();
 
         return permission => permission.Restrictions
                                        .Where(restriction => restriction.SecurityContextType.Id == securityContextTypeId)

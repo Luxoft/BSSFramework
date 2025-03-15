@@ -7,8 +7,9 @@ namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
     IPermissionSystem<TPermission> permissionSystem,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-    SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath)
-    : ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(permissionSystem, hierarchicalObjectExpanderFactory)
+    SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath,
+    SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
+    : ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(permissionSystem, hierarchicalObjectExpanderFactory, restrictionFilterInfo)
     where TSecurityContext : class, ISecurityContext
 {
     protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject)

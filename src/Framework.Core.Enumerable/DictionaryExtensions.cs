@@ -46,6 +46,7 @@ public static class DictionaryExtensions
     }
 
     public static async Task<Dictionary<TKey, TValue>> ToDictionaryAsync<TSource, TKey, TValue>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, Task<TValue>> valueSelector)
+        where TKey : notnull
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));

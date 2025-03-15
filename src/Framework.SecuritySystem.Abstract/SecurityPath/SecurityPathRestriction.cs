@@ -27,32 +27,68 @@ public record SecurityPathRestriction(
     /// <summary>
     /// Ограничения для базовых ролей 'Administrator' и 'SystemIntegration' (запрещены все контексты и базоый SecurityPath не применяются)
     /// </summary>
-    public static SecurityPathRestriction Empty { get; } = new(
+    public static SecurityPathRestriction Ignored { get; } = new(
         Array.Empty<SecurityContextRestriction>(),
         Array.Empty<Type>(),
         Array.Empty<RelativeConditionInfo>(),
         false);
 
-    public SecurityPathRestriction Add<TSecurityContext>(bool required = false, string? key = null)
+    public SecurityPathRestriction Add<TSecurityContext>(
+        bool required = false,
+        string? key = null,
+        Expression<Func<TSecurityContext, bool>>? filter = null)
         where TSecurityContext : ISecurityContext =>
+        this.Add(
+            required,
+            key,
+            filter == null
+                ? null
+                : ExpressionHelper.Create((IServiceProvider _) => filter).ExpandConst().InlineEval());
+
+    public SecurityPathRestriction Add<TSecurityContext, TFilterService>(
+        bool required = false,
+        string? key = null,
+        Expression<Func<TFilterService, Expression<Func<TSecurityContext, bool>>>>? filter = null)
+        where TSecurityContext : ISecurityContext
+        where TFilterService : notnull =>
         this with
         {
-            SecurityContextRestrictions = this.SecurityContextRestrictions
-                                              .EmptyIfNull()
-                                              .Concat(
-                                                  new[]
-                                                  {
-                                                      new SecurityContextRestriction(typeof(TSecurityContext), required, key)
-                                                  }.Distinct())
-                                              .ToArray()
+            SecurityContextRestrictions =
+
+            this.SecurityContextRestrictions
+                .EmptyIfNull()
+                .Concat(
+                    new[]
+                        {
+                            new SecurityContextRestriction(
+                                typeof(TSecurityContext),
+                                required,
+                                key,
+                                filter == null ? null : new SecurityContextRestrictionFilterInfo<TSecurityContext, TFilterService>(filter))
+                        }
+                        .Distinct())
+                .ToArray()
         };
+
+    public IEnumerable<SecurityContextRestrictionFilterInfo> GetSecurityContextRestrictionFilters()
+    {
+        if (this.SecurityContextRestrictions == null)
+        {
+            return Array.Empty<SecurityContextRestrictionFilterInfo>();
+        }
+        else
+        {
+            return from securityContextRestriction in this.SecurityContextRestrictions
+
+                   where securityContextRestriction.Filter != null
+
+                   select securityContextRestriction.Filter;
+        }
+    }
 
     public SecurityPathRestriction AddRelativeCondition<TDomainObject>(Expression<Func<TDomainObject, bool>> condition) =>
 
-        this with
-        {
-            RelativeConditions = this.RelativeConditions.Concat([new RelativeConditionInfo<TDomainObject>(condition)]).ToArray()
-        };
+        this with { RelativeConditions = this.RelativeConditions.Concat([new RelativeConditionInfo<TDomainObject>(condition)]).ToArray() };
 
     public SecurityPathRestriction AddConditionFactory(Type conditionFactoryType) =>
 

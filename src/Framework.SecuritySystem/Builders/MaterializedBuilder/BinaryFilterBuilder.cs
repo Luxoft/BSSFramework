@@ -4,13 +4,13 @@ namespace Framework.SecuritySystem.Builders.MaterializedBuilder;
 
 public abstract class BinaryFilterBuilder<TDomainObject, TSecurityPath>(
     SecurityFilterBuilderFactory<TDomainObject> builderFactory,
-    TSecurityPath securityPath)
+    TSecurityPath securityPath,IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
     : SecurityFilterBuilder<TDomainObject>
     where TSecurityPath : SecurityPath<TDomainObject>.BinarySecurityPath
 {
-    private SecurityFilterBuilder<TDomainObject> LeftBuilder { get; } = builderFactory.CreateBuilder(securityPath.Left);
+    private SecurityFilterBuilder<TDomainObject> LeftBuilder { get; } = builderFactory.CreateBuilder(securityPath.Left, restrictionFilterInfoList);
 
-    private SecurityFilterBuilder<TDomainObject> RightBuilder { get; } = builderFactory.CreateBuilder(securityPath.Right);
+    private SecurityFilterBuilder<TDomainObject> RightBuilder { get; } = builderFactory.CreateBuilder(securityPath.Right, restrictionFilterInfoList);
 
     protected abstract Expression<Func<TArg, bool>> BuildOperation<TArg>(
         Expression<Func<TArg, bool>> arg1,

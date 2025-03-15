@@ -8,7 +8,8 @@ namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 
 public abstract class ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
     IPermissionSystem<TPermission> permissionSystem,
-    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory) : AccessorsFilterBuilder<TPermission, TDomainObject>
+    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+    SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo) : AccessorsFilterBuilder<TPermission, TDomainObject>
     where TSecurityContext : class, ISecurityContext
 {
     public override Expression<Func<TPermission, bool>> GetAccessorsFilter(
@@ -25,7 +26,7 @@ public abstract class ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurit
                                  .Create(typeof(TSecurityContext))
                                  .Expand(securityObjects.Select(securityObject => securityObject.Id), expandType.Reverse());
 
-            return grandAccessExpr.BuildOr(permissionSystem.GetContainsIdentsExpr<TSecurityContext>(securityIdents));
+            return grandAccessExpr.BuildOr(permissionSystem.GetContainsIdentsExpr(securityIdents, restrictionFilterInfo));
         }
         else
         {

@@ -4,6 +4,7 @@ using Framework.SecuritySystem;
 using Framework.SecuritySystem.UserSource;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 using SampleSystem.Domain;
 

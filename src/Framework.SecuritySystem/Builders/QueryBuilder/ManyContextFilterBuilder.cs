@@ -9,7 +9,8 @@ namespace Framework.SecuritySystem.Builders.QueryBuilder;
 public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
     IPermissionSystem<TPermission> permissionSystem,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-    SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath)
+    SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath,
+    SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
     : SecurityFilterBuilder<TPermission, TDomainObject>
     where TSecurityContext : class, ISecurityContext
 {
@@ -18,7 +19,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
     {
         var grandAccessExpr = permissionSystem.GetGrandAccessExpr<TSecurityContext>();
 
-        var getIdents = permissionSystem.GetPermissionRestrictionsExpr<TSecurityContext>();
+        var getIdents = permissionSystem.GetPermissionRestrictionsExpr(restrictionFilterInfo);
 
         var expander =
             (IHierarchicalObjectQueryableExpander<Guid>)hierarchicalObjectExpanderFactory.Create(

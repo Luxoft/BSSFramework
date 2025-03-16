@@ -14,7 +14,7 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
 {
     protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject)
     {
-        var securityObject = securityPath.SecurityPath.Eval(domainObject, LambdaCompileCache);
+        var securityObject = securityPath.Expression.Eval(domainObject, LambdaCompileCache);
 
         if (securityObject != null)
         {

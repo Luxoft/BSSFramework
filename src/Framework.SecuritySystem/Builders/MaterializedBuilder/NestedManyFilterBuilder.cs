@@ -17,13 +17,13 @@ public class NestedManyFilterBuilder<TDomainObject, TNestedObject>(
 
         var nestedCollectionFilterExpression = nestedFilterExpression.ToCollectionFilter();
 
-        var mainCondition = securityPath.NestedObjectsPath.Select(v => nestedCollectionFilterExpression.Eval(v).Any()).InlineEval();
+        var mainCondition = securityPath.NestedExpression.Select(v => nestedCollectionFilterExpression.Eval(v).Any()).InlineEval();
 
         switch (securityPath.Mode)
         {
             case ManySecurityPathMode.Any:
             {
-                var emptyCondition = securityPath.NestedObjectsPath.Select(v => !v.Any());
+                var emptyCondition = securityPath.NestedExpression.Select(v => !v.Any());
 
                 return emptyCondition.BuildOr(mainCondition);
             }

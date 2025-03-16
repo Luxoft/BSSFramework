@@ -37,9 +37,9 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
 
                            grandAccessExpr.Eval(permission)
 
-                           || securityPath.SecurityPath.Eval(domainObject) == null
+                           || securityPath.Expression.Eval(domainObject) == null
 
-                           || expandExpressionQ.Eval(permission).Contains(securityPath.SecurityPath.Eval(domainObject).Id);
+                           || expandExpressionQ.Eval(permission).Contains(securityPath.Expression.Eval(domainObject).Id);
 
             case SingleSecurityMode.Strictly:
 
@@ -47,7 +47,7 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
 
                            grandAccessExpr.Eval(permission)
 
-                           || expandExpressionQ.Eval(permission).Contains(securityPath.SecurityPath.Eval(domainObject).Id);
+                           || expandExpressionQ.Eval(permission).Contains(securityPath.Expression.Eval(domainObject).Id);
 
             default:
 

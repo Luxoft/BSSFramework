@@ -15,13 +15,13 @@ public class SingleContextFilterBuilder<TDomainObject, TSecurityContext>(
         {
             case SingleSecurityMode.AllowNull:
 
-                return from securityObject in securityPath.SecurityPath
+                return from securityObject in securityPath.Expression
 
                        select securityObject == null || securityIdents.Contains(securityObject.Id);
 
             case SingleSecurityMode.Strictly:
 
-                return from securityObject in securityPath.SecurityPath
+                return from securityObject in securityPath.Expression
 
                        select securityIdents.Contains(securityObject.Id);
 

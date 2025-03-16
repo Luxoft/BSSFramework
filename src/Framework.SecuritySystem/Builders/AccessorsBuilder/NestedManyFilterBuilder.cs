@@ -16,7 +16,7 @@ public class NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(
     public override Expression<Func<TPermission, bool>> GetAccessorsFilter(
         TDomainObject domainObject,
         HierarchicalExpandType expandType) =>
-        securityPath.NestedObjectsPath.Eval(domainObject, LambdaCompileCache)
+        securityPath.NestedExpression.Eval(domainObject, LambdaCompileCache)
                     .BuildOr(item => this.NestedBuilder.GetAccessorsFilter(item, expandType));
 
     private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);

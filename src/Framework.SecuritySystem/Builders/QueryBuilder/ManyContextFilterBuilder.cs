@@ -50,7 +50,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
 
                                    grandAccessExpr.Eval(permission)
 
-                                   || securityPath.SecurityPath.Eval(domainObject)
+                                   || securityPath.Expression.Eval(domainObject)
                                           .Any(item => expandExpressionQ.Eval(permission).Contains(item.Id));
                     }
                 }
@@ -73,9 +73,9 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
 
                                    grandAccessExpr.Eval(permission)
 
-                                   || !securityPath.SecurityPath.Eval(domainObject).Any()
+                                   || !securityPath.Expression.Eval(domainObject).Any()
 
-                                   || securityPath.SecurityPath.Eval(domainObject).Any(item => getIdents.Eval(permission).Contains(item.Id));
+                                   || securityPath.Expression.Eval(domainObject).Any(item => getIdents.Eval(permission).Contains(item.Id));
                     }
                 }
 

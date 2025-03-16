@@ -13,7 +13,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
     where TSecurityContext : class, ISecurityContext
 {
     protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject) =>
-        securityPath.SecurityPath.Eval(domainObject, LambdaCompileCache).EmptyIfNull();
+        securityPath.Expression.Eval(domainObject, LambdaCompileCache).EmptyIfNull();
 
     private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
 }

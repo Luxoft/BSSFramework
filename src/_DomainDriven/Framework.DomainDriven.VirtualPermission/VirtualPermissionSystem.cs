@@ -27,15 +27,15 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
 
     public Expression<Func<TPermission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>(
         SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
-        where TSecurityContext : ISecurityContext =>
+        where TSecurityContext : class, ISecurityContext =>
         bindingInfo.GetRestrictionsExpr(restrictionFilterInfo?.GetPureFilter(serviceProvider));
 
     public Expression<Func<TPermission, bool>> GetGrandAccessExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext =>
+        where TSecurityContext : class, ISecurityContext =>
         this.GetManyGrandAccessExpr<TSecurityContext>().BuildOr();
 
     public Expression<Func<TPermission, bool>> GetContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
-        where TSecurityContext : ISecurityContext =>
+        where TSecurityContext : class, ISecurityContext =>
         this.GetManyContainsIdentsExpr<TSecurityContext>(idents).BuildOr();
 
     public IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)

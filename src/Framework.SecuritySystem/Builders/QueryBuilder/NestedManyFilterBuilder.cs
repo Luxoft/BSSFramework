@@ -22,14 +22,14 @@ public class NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(
         {
             case ManySecurityPathMode.Any:
 
-                return (domainObject, permission) => !securityPath.NestedObjectsPath.Eval(domainObject).Any()
+                return (domainObject, permission) => !securityPath.NestedExpression.Eval(domainObject).Any()
 
-                                                     || securityPath.NestedObjectsPath.Eval(domainObject).Any(
+                                                     || securityPath.NestedExpression.Eval(domainObject).Any(
                                                          nestedObject => baseFilter.Eval(nestedObject, permission));
 
             case ManySecurityPathMode.AnyStrictly:
 
-                return (domainObject, permission) => securityPath.NestedObjectsPath.Eval(domainObject)
+                return (domainObject, permission) => securityPath.NestedExpression.Eval(domainObject)
                                                                  .Any(nestedObject => baseFilter.Eval(nestedObject, permission));
 
             default:

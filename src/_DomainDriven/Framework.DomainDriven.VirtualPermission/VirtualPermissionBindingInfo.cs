@@ -57,11 +57,10 @@ public record VirtualPermissionBindingInfo<TPrincipal, TPermission>(
 
     public Expression<Func<TPermission, IEnumerable<Guid>>> GetRestrictionsExpr(Type securityContextType, LambdaExpression? pureFilter)
     {
-        var lambdaType = typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(securityContextType, typeof(bool)));
-
-        return this.GetType().GetMethod(nameof(this.GetRestrictionsExpr), BindingFlags.Instance | BindingFlags.Public, [lambdaType])!
-                   .MakeGenericMethod(securityContextType)
-                   .Invoke<Expression<Func<TPermission, IEnumerable<Guid>>>>(this);
+        return new Func<Expression<Func<ISecurityContext, bool>>?, Expression<Func<TPermission, IEnumerable<Guid>>>>(
+                   this.GetRestrictionsExpr)
+               .CreateGenericMethod(securityContextType)
+               .Invoke<Expression<Func<TPermission, IEnumerable<Guid>>>>(this, pureFilter);
     }
 
     public Expression<Func<TPermission, IEnumerable<Guid>>> GetRestrictionsExpr<TSecurityContext>(Expression<Func<TSecurityContext, bool>>? pureFilter)

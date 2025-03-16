@@ -32,7 +32,7 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
 
     public Expression<Func<TPermission, bool>> GetGrandAccessExpr<TSecurityContext>()
         where TSecurityContext : class, ISecurityContext =>
-        this.GetManyGrandAccessExpr<TSecurityContext>().BuildOr();
+        this.GetManyGrandAccessExpr<TSecurityContext>().BuildAnd();
 
     public Expression<Func<TPermission, bool>> GetContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
         where TSecurityContext : class, ISecurityContext =>

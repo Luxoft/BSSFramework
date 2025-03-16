@@ -25,7 +25,7 @@ public class VirtualPermissionSource<TPrincipal, TPermission>(
     {
         var permissions = this.GetPermissionQuery(null).ToList();
 
-        var restrictionFilterInfoList = (securityRule.CustomRestriction?.GetSecurityContextRestrictionFilters()).EmptyIfNull().ToList();
+        var restrictionFilterInfoList = securityRule.GetSafeSecurityContextRestrictionFilters().ToList();
 
         return permissions.Select(permission => this.ConvertPermission(permission, securityTypes, restrictionFilterInfoList)).ToList();
     }

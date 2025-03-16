@@ -19,7 +19,7 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
     {
         var securityTypes = securityPath.GetUsedTypes();
 
-        var restrictionFilterInfoList = (securityRule.CustomRestriction?.GetSecurityContextRestrictionFilters()).EmptyIfNull().ToList();
+        var restrictionFilterInfoList = securityRule.GetSafeSecurityContextRestrictionFilters().ToList();
 
         var rawPermissions = permissionSystems
                              .SelectMany(ps => ps.GetPermissionSource(securityRule).GetPermissions(securityTypes))

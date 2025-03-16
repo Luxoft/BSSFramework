@@ -9,25 +9,23 @@ using Framework.SecuritySystem;
 namespace Framework.Authorization.SecuritySystem;
 
 public class AvailablePermissionSource(
-    IServiceProvider serviceProvider,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     TimeProvider timeProvider,
     IUserNameResolver userNameResolver,
     ISecurityRolesIdentsResolver securityRolesIdentsResolver,
     ISecurityContextInfoSource securityContextInfoSource,
-    IQueryableSource queryableSource,
+    ISecurityContextSource securityContextSource,
     SecurityRuleCredential defaultSecurityRuleCredential)
     : IAvailablePermissionSource
 {
     public AvailablePermissionFilter CreateFilter(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        var restrictionFilters = (securityRule.CustomRestriction?.GetSecurityContextRestrictionFilters()).EmptyIfNull();
-
         return new AvailablePermissionFilter(timeProvider.GetToday())
                {
                    PrincipalName = userNameResolver.Resolve(securityRule.CustomCredential ?? defaultSecurityRuleCredential),
                    SecurityRoleIdents = securityRolesIdentsResolver.Resolve(securityRule).ToList(),
-                   RestrictionFilters = restrictionFilters.Select(this.GetRestrictionFilter).ToDictionary()
+                   RestrictionFilters = securityRule.GetSafeSecurityContextRestrictionFilters().Select(this.GetRestrictionFilter)
+                                                    .ToDictionary()
                };
     }
 
@@ -42,12 +40,12 @@ public class AvailablePermissionSource(
         return new (securityContextTypeId, filterExpr);
     }
 
-    private Expression<Func<Guid, bool>> GetRestrictionFilterExpression<TSecurityContext>(SecurityContextRestrictionFilterInfo<TSecurityContext> restrictionFilterInfo)
+    private Expression<Func<Guid, bool>> GetRestrictionFilterExpression<TSecurityContext>(
+        SecurityContextRestrictionFilterInfo<TSecurityContext> restrictionFilterInfo)
         where TSecurityContext : class, ISecurityContext
     {
-        var filteredSecurityContextQueryable = queryableSource.GetQueryable<TSecurityContext>()
-                                                              .Where(restrictionFilterInfo.GetPureFilter(serviceProvider))
-                                                              .Select(securityContext => securityContext.Id);
+        var filteredSecurityContextQueryable = securityContextSource.GetQueryable(restrictionFilterInfo)
+                                                                    .Select(securityContext => securityContext.Id);
 
         return securityContextId => filteredSecurityContextQueryable.Contains(securityContextId);
     }

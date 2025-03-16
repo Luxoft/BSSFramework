@@ -12,9 +12,12 @@ public class SecurityContextInfoSource : ISecurityContextInfoSource
         this.byTypeSecurityContextInfoDict = this.SecurityContextInfoList.ToDictionary(v => v.Type);
         this.byIdentSecurityContextInfoDict = this.byTypeSecurityContextInfoDict.Values.ToDictionary(v => v.Id);
     }
+
     public IReadOnlyList<SecurityContextInfo> SecurityContextInfoList { get; }
 
-    public virtual SecurityContextInfo GetSecurityContextInfo(Type securityContextType) => this.byTypeSecurityContextInfoDict[securityContextType];
+    public virtual SecurityContextInfo GetSecurityContextInfo(Type securityContextType) =>
+        this.byTypeSecurityContextInfoDict[securityContextType];
 
-    public SecurityContextInfo GetSecurityContextInfo(Guid securityContextTypeId) => this.byIdentSecurityContextInfoDict[securityContextTypeId];
+    public SecurityContextInfo GetSecurityContextInfo(Guid securityContextTypeId) =>
+        this.byIdentSecurityContextInfoDict[securityContextTypeId];
 }

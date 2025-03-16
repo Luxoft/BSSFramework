@@ -50,7 +50,7 @@ public class SecurityFilterBuilderFactory<TPermission, TDomainObject>(
         DomainSecurityRule.RoleBaseSecurityRule securityRule,
         SecurityPath<TDomainObject> securityPath)
     {
-        var restrictionFilterInfoList = (securityRule.CustomRestriction?.GetSecurityContextRestrictionFilters()).EmptyIfNull().ToList();
+        var restrictionFilterInfoList = securityRule.GetSafeSecurityContextRestrictionFilters().ToList();
 
         var builder = this.CreateBuilder(securityPath, restrictionFilterInfoList);
 

@@ -7,9 +7,9 @@ namespace Framework.SecuritySystem.Builders.MaterializedBuilder;
 public class NestedManyFilterBuilder<TDomainObject, TNestedObject>(
     SecurityFilterBuilderFactory<TNestedObject> nestedBuilderFactory,
     SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath,
-    IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList) : SecurityFilterBuilder<TDomainObject>
+    IReadOnlyList<SecurityContextRestriction> securityContextRestrictions) : SecurityFilterBuilder<TDomainObject>
 {
-    private SecurityFilterBuilder<TNestedObject> NestedBuilder { get; } = nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath, restrictionFilterInfoList);
+    private SecurityFilterBuilder<TNestedObject> NestedBuilder { get; } = nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath, securityContextRestrictions);
 
     public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<Guid>> permission)
     {

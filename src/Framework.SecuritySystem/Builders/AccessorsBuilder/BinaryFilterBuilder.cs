@@ -7,13 +7,13 @@ namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 public abstract class BinaryFilterBuilder<TPermission, TDomainObject, TSecurityPath>(
     AccessorsFilterBuilderFactory<TPermission, TDomainObject> builderFactory,
     TSecurityPath securityPath,
-    IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+    IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     : AccessorsFilterBuilder<TPermission, TDomainObject>
     where TSecurityPath : SecurityPath<TDomainObject>.BinarySecurityPath
 {
-    private AccessorsFilterBuilder<TPermission, TDomainObject> LeftBuilder { get; } = builderFactory.CreateBuilder(securityPath.Left, restrictionFilterInfoList);
+    private AccessorsFilterBuilder<TPermission, TDomainObject> LeftBuilder { get; } = builderFactory.CreateBuilder(securityPath.Left, securityContextRestrictions);
 
-    private AccessorsFilterBuilder<TPermission, TDomainObject> RightBuilder { get; } = builderFactory.CreateBuilder(securityPath.Right, restrictionFilterInfoList);
+    private AccessorsFilterBuilder<TPermission, TDomainObject> RightBuilder { get; } = builderFactory.CreateBuilder(securityPath.Right, securityContextRestrictions);
 
     protected abstract Expression<Func<TArg, bool>> BuildOperation<TArg>(
         Expression<Func<TArg, bool>> arg1,

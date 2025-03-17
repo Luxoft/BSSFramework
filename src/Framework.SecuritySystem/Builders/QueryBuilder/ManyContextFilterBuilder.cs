@@ -10,16 +10,20 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
     IPermissionSystem<TPermission> permissionSystem,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath,
-    SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
+    SecurityContextRestriction<TSecurityContext>? securityContextRestriction)
     : SecurityFilterBuilder<TPermission, TDomainObject>
     where TSecurityContext : class, ISecurityContext
 {
     public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
             HierarchicalExpandType expandType)
     {
-        var grandAccessExpr = permissionSystem.GetGrandAccessExpr<TSecurityContext>();
+        var allowGrandAccess = securityContextRestriction?.Required != true;
 
-        var getIdents = permissionSystem.GetPermissionRestrictionsExpr(restrictionFilterInfo);
+        var grandAccessExpr = allowGrandAccess
+                                  ? permissionSystem.GetGrandAccessExpr<TSecurityContext>()
+                                  : _ => false;
+
+        var getIdents = permissionSystem.GetPermissionRestrictionsExpr(securityContextRestriction?.Filter);
 
         var expander =
             (IHierarchicalObjectQueryableExpander<Guid>)hierarchicalObjectExpanderFactory.Create(

@@ -17,7 +17,7 @@ public record SecurityPathRestriction(
     DeepEqualsCollection<RelativeConditionInfo> RelativeConditions,
     bool ApplyBasePath)
 {
-    public IEnumerable<Type>? SecurityContextTypes => this.SecurityContextRestrictions?.Select(v => v.Type);
+    public IEnumerable<Type>? SecurityContextTypes => this.SecurityContextRestrictions?.Select(v => v.SecurityContextType);
 
     /// <summary>
     /// Ограничения по умолчанию для ролей (доступны все типы контекстов, базовый SecurityPath применяется)
@@ -60,8 +60,7 @@ public record SecurityPathRestriction(
                 .Concat(
                     new[]
                         {
-                            new SecurityContextRestriction(
-                                typeof(TSecurityContext),
+                            new SecurityContextRestriction<TSecurityContext>(
                                 required,
                                 key,
                                 filter == null ? null : new SecurityContextRestrictionFilterInfo<TSecurityContext, TFilterService>(filter))
@@ -69,22 +68,6 @@ public record SecurityPathRestriction(
                         .Distinct())
                 .ToArray()
         };
-
-    public IEnumerable<SecurityContextRestrictionFilterInfo> GetSecurityContextRestrictionFilters()
-    {
-        if (this.SecurityContextRestrictions == null)
-        {
-            return Array.Empty<SecurityContextRestrictionFilterInfo>();
-        }
-        else
-        {
-            return from securityContextRestriction in this.SecurityContextRestrictions
-
-                   where securityContextRestriction.Filter != null
-
-                   select securityContextRestriction.Filter;
-        }
-    }
 
     public SecurityPathRestriction AddRelativeCondition<TDomainObject>(Expression<Func<TDomainObject, bool>> condition) =>
 

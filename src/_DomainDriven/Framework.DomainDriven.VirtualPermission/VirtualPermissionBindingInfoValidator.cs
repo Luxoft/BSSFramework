@@ -31,7 +31,7 @@ public class VirtualPermissionBindingInfoValidator(ISecurityRoleSource securityR
         {
             var bindingContextTypes = bindingInfo.GetSecurityContextTypes().ToList();
 
-            var invalidTypes = bindingContextTypes.Except(securityContextRestrictions.Select(r => r.Type)).ToList();
+            var invalidTypes = bindingContextTypes.Except(securityContextRestrictions.Select(r => r.SecurityContextType)).ToList();
 
             if (invalidTypes.Any())
             {
@@ -40,7 +40,7 @@ public class VirtualPermissionBindingInfoValidator(ISecurityRoleSource securityR
 
             var missedTypes = securityContextRestrictions
                               .Where(r => r.Required)
-                              .Select(r => r.Type)
+                              .Select(r => r.SecurityContextType)
                               .Except(bindingContextTypes)
                               .ToList();
 

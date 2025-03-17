@@ -95,7 +95,7 @@ public class SecurityPathRestrictionService(IServiceProvider serviceProvider)
         else if (securityPath is IContextSecurityPath contextSecurityPath)
         {
             var containsKey = securityContextRestrictions.Any(
-                                  restriction => restriction.Type == contextSecurityPath.SecurityContextType
+                                  restriction => restriction.SecurityContextType == contextSecurityPath.SecurityContextType
                                                  && restriction.Key == contextSecurityPath.Key);
 
             return containsKey ? securityPath : SecurityPath<TDomainObject>.Empty;

@@ -22,7 +22,7 @@ public class PermissionRequiredContextValidator : AbstractValidator<Permission>
                     {
                         var requiredSecurityContextTypes = role.Information.Restriction.SecurityContextRestrictions
                                                                .Where(pair => pair.Required)
-                                                               .Select(pair => pair.Type);
+                                                               .Select(pair => pair.SecurityContextType);
 
                         var usedTypes = permission.Restrictions.Select(r => r.SecurityContextType).Distinct()
                                                   .Select(sct => securityContextInfoSource.GetSecurityContextInfo(sct.Id).Type);

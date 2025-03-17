@@ -56,11 +56,11 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
 
                     var securityContextInfo = this.GetSecurityContextInfo(securityContextType);
 
-                    var restrictionFilterInfo = securityRole.Information.Restriction.GetSecurityContextRestrictionFilters()
-                                                            .SingleOrDefault(
-                                                                restrictionFilterInfo =>
-                                                                    restrictionFilterInfo.SecurityContextType
-                                                                    == securityContextInfo.Type);
+                    var securityContextRestriction =
+                        securityRole.Information.Restriction.SecurityContextRestrictions?.SingleOrDefault(
+                            r => r.SecurityContextType == securityContextInfo.Type);
+
+                    var restrictionFilterInfo = securityContextRestriction?.RawFilter;
 
                     return restrictionFilterInfo == null || this.IsAllowed(permissionRestriction.SecurityContextId, restrictionFilterInfo);
                 })

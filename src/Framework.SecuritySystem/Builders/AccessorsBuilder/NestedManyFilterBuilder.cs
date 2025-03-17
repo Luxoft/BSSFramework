@@ -8,10 +8,10 @@ namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 public class NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(
     AccessorsFilterBuilderFactory<TPermission, TNestedObject> nestedBuilderFactory,
     SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath,
-    IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList) : AccessorsFilterBuilder<TPermission, TDomainObject>
+    IReadOnlyList<SecurityContextRestriction> securityContextRestrictions) : AccessorsFilterBuilder<TPermission, TDomainObject>
 {
     private AccessorsFilterBuilder<TPermission, TNestedObject> NestedBuilder { get; } =
-        nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath, restrictionFilterInfoList);
+        nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath, securityContextRestrictions);
 
     public override Expression<Func<TPermission, bool>> GetAccessorsFilter(
         TDomainObject domainObject,

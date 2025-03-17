@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-
 using Framework.Core;
 
 namespace Framework.Authorization.Domain;
@@ -10,7 +9,7 @@ public class AvailablePermissionFilter(DateTime today)
 
     public List<Guid>? SecurityRoleIdents { get; set; }
 
-    public Dictionary<Guid, Expression<Func<Guid, bool>>> RestrictionFilters { get; set; } = new();
+    public Dictionary<Guid, (bool, Expression<Func<Guid, bool>>)> RestrictionFilters { get; set; } = new();
 
     public Expression<Func<Permission, bool>> ToFilterExpression()
     {
@@ -31,14 +30,27 @@ public class AvailablePermissionFilter(DateTime today)
             yield return permission => this.SecurityRoleIdents.Contains(permission.Role.Id);
         }
 
-        foreach (var (securityContextTypeId, restrictionFilterExpr) in this.RestrictionFilters)
+        foreach (var (securityContextTypeId, (allowGrandAccess, restrictionFilterExpr)) in this.RestrictionFilters)
         {
-            var permissionFilterExpr = ExpressionHelper.Create(
-                (Permission permission) => permission.Restrictions.All(r => r.SecurityContextType.Id != securityContextTypeId)
-                                           || permission.Restrictions.Any(
-                                               r => r.SecurityContextType.Id == securityContextTypeId && restrictionFilterExpr.Eval(r.SecurityContextId)));
+            var baseFilter =
+                ExpressionHelper
+                    .Create(
+                        (Permission permission) => permission.Restrictions.Any(
+                            r => r.SecurityContextType.Id == securityContextTypeId && restrictionFilterExpr.Eval(r.SecurityContextId)))
+                    .ExpandConst().InlineEval();
 
-            yield return permissionFilterExpr.ExpandConst().InlineEval();
+            if (allowGrandAccess)
+            {
+                var grandAccessExpr = ExpressionHelper.Create(
+                    (Permission permission) =>
+                        permission.Restrictions.All(r => r.SecurityContextType.Id != securityContextTypeId));
+
+                yield return baseFilter.BuildOr(grandAccessExpr);
+            }
+            else
+            {
+                yield return baseFilter;
+            }
         }
     }
 }

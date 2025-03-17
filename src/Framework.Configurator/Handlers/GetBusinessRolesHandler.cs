@@ -31,7 +31,7 @@ public class GetBusinessRolesHandler(
                             IsVirtual = x.Information.IsVirtual,
                             Contexts =
                                 x.Information.Restriction.SecurityContextRestrictions?.Select(
-                                    v => new RoleContextDto(securityContextInfoSource.GetSecurityContextInfo(v.Type).Name, v.Required)).ToList()
+                                    v => new RoleContextDto(securityContextInfoSource.GetSecurityContextInfo(v.SecurityContextType).Name, v.Required)).ToList()
                                 ?? defaultContexts
                         })
                .OrderBy(x => x.Name)

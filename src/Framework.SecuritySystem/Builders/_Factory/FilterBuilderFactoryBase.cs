@@ -6,7 +6,7 @@ public abstract class FilterBuilderFactoryBase<TDomainObject, TBuilder>
 {
     public virtual TBuilder CreateBuilder(
         SecurityPath<TDomainObject> baseSecurityPath,
-        IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     {
         var securityPathType = baseSecurityPath.GetType();
 
@@ -16,24 +16,24 @@ public abstract class FilterBuilderFactoryBase<TDomainObject, TBuilder>
         }
         else if (baseSecurityPath is SecurityPath<TDomainObject>.AndSecurityPath andSecurityPath)
         {
-            return this.CreateBuilder(andSecurityPath, restrictionFilterInfoList);
+            return this.CreateBuilder(andSecurityPath, securityContextRestrictions);
         }
         else if (baseSecurityPath is SecurityPath<TDomainObject>.OrSecurityPath orSecurityPath)
         {
-            return this.CreateBuilder(orSecurityPath, restrictionFilterInfoList);
+            return this.CreateBuilder(orSecurityPath, securityContextRestrictions);
         }
         else if (securityPathType.IsGenericTypeImplementation(typeof(SecurityPath<>.NestedManySecurityPath<>)))
         {
-            return new Func<SecurityPath<TDomainObject>.NestedManySecurityPath<TDomainObject>, IReadOnlyList<SecurityContextRestrictionFilterInfo>, TBuilder>(this.CreateBuilder)
+            return new Func<SecurityPath<TDomainObject>.NestedManySecurityPath<TDomainObject>, IReadOnlyList<SecurityContextRestriction>, TBuilder>(this.CreateBuilder)
                    .CreateGenericMethod(securityPathType.GetGenericArguments().Skip(1).ToArray())
-                   .Invoke<TBuilder>(this, baseSecurityPath, restrictionFilterInfoList);
+                   .Invoke<TBuilder>(this, baseSecurityPath, securityContextRestrictions);
         }
         else if (securityPathType.BaseType.Maybe(baseType => baseType.IsGenericTypeImplementation(typeof(SecurityPath<>))))
         {
-            return new Func<SecurityPath<TDomainObject>, IReadOnlyList<SecurityContextRestrictionFilterInfo>, TBuilder>(
+            return new Func<SecurityPath<TDomainObject>, IReadOnlyList<SecurityContextRestriction>, TBuilder>(
                        this.CreateSecurityContextBuilder<ISecurityContext>)
                    .CreateGenericMethod(securityPathType.GetGenericArguments().Skip(1).ToArray())
-                   .Invoke<TBuilder>(this, baseSecurityPath, restrictionFilterInfoList);
+                   .Invoke<TBuilder>(this, baseSecurityPath, securityContextRestrictions);
         }
         else
         {
@@ -45,33 +45,33 @@ public abstract class FilterBuilderFactoryBase<TDomainObject, TBuilder>
 
     protected abstract TBuilder CreateBuilder<TSecurityContext>(
         SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath,
-        SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
+        SecurityContextRestriction<TSecurityContext>? securityContextRestriction)
         where TSecurityContext : class, ISecurityContext;
 
     protected abstract TBuilder CreateBuilder<TSecurityContext>(
         SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath,
-        SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
+        SecurityContextRestriction<TSecurityContext>? securityContextRestriction)
         where TSecurityContext : class, ISecurityContext;
 
     protected abstract TBuilder CreateBuilder(
         SecurityPath<TDomainObject>.OrSecurityPath securityPath,
-        IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList);
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions);
 
     protected abstract TBuilder CreateBuilder(
         SecurityPath<TDomainObject>.AndSecurityPath securityPath,
-        IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList);
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions);
 
     protected abstract TBuilder CreateBuilder<TNestedObject>(
         SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath,
-        IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList);
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions);
 
     private TBuilder CreateSecurityContextBuilder<TSecurityContext>(
         SecurityPath<TDomainObject> securityPath,
-        IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
         where TSecurityContext : class, ISecurityContext
     {
         var restrictionFilterInfo =
-            (SecurityContextRestrictionFilterInfo<TSecurityContext>?)restrictionFilterInfoList.SingleOrDefault(
+            (SecurityContextRestriction<TSecurityContext>?)securityContextRestrictions.SingleOrDefault(
                 v => v.SecurityContextType == typeof(TSecurityContext));
 
         return securityPath switch
@@ -79,9 +79,11 @@ public abstract class FilterBuilderFactoryBase<TDomainObject, TBuilder>
             SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> singleSecurityPath => this.CreateBuilder(
                 singleSecurityPath,
                 restrictionFilterInfo),
+
             SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> manySecurityPath => this.CreateBuilder(
                 manySecurityPath,
                 restrictionFilterInfo),
+
             _ => throw new ArgumentOutOfRangeException(nameof(securityPath))
         };
     }

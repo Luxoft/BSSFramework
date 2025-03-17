@@ -8,10 +8,10 @@ namespace Framework.SecuritySystem.Builders.QueryBuilder;
 public class NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(
     SecurityFilterBuilderFactory<TPermission, TNestedObject> nestedBuilderFactory,
     SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath,
-    IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList) : SecurityFilterBuilder<TPermission, TDomainObject>
+    IReadOnlyList<SecurityContextRestriction> securityContextRestrictions) : SecurityFilterBuilder<TPermission, TDomainObject>
 {
     private SecurityFilterBuilder<TPermission, TNestedObject> NestedBuilder { get; } =
-        nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath, restrictionFilterInfoList);
+        nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath, securityContextRestrictions);
 
     public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
         HierarchicalExpandType expandType)

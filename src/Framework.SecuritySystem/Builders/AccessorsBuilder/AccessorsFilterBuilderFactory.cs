@@ -37,9 +37,9 @@ public class AccessorsFilterBuilderFactory<TPermission, TDomainObject>(
         DomainSecurityRule.RoleBaseSecurityRule securityRule,
         SecurityPath<TDomainObject> securityPath)
     {
-        var restrictionFilterInfoList = securityRule.GetSafeSecurityContextRestrictionFilters().ToList();
+        var securityContextRestrictions = securityRule.GetSafeSecurityContextRestrictions().ToList();
 
-        var builder = this.CreateBuilder(securityPath, restrictionFilterInfoList);
+        var builder = this.CreateBuilder(securityPath, securityContextRestrictions);
 
         var getAccessorsFunc = LazyHelper.Create(
             () => FuncHelper.Create(
@@ -61,43 +61,43 @@ public class AccessorsFilterBuilderFactory<TPermission, TDomainObject>(
 
     protected override AccessorsFilterBuilder<TPermission, TDomainObject> CreateBuilder<TSecurityContext>(
         SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath,
-        SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
+        SecurityContextRestriction<TSecurityContext>? securityContextRestriction)
     {
         return new SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
             permissionSystem,
             hierarchicalObjectExpanderFactory,
             securityPath,
-            restrictionFilterInfo);
+            securityContextRestriction);
     }
 
     protected override AccessorsFilterBuilder<TPermission, TDomainObject> CreateBuilder<TSecurityContext>(
         SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath,
-        SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
+        SecurityContextRestriction<TSecurityContext>? securityContextRestriction)
     {
         return new ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
             permissionSystem,
             hierarchicalObjectExpanderFactory,
             securityPath,
-            restrictionFilterInfo);
+            securityContextRestriction);
     }
 
     protected override AccessorsFilterBuilder<TPermission, TDomainObject> CreateBuilder(
         SecurityPath<TDomainObject>.OrSecurityPath securityPath,
-        IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     {
-        return new OrFilterBuilder<TPermission, TDomainObject>(this, securityPath, restrictionFilterInfoList);
+        return new OrFilterBuilder<TPermission, TDomainObject>(this, securityPath, securityContextRestrictions);
     }
 
     protected override AccessorsFilterBuilder<TPermission, TDomainObject> CreateBuilder(
         SecurityPath<TDomainObject>.AndSecurityPath securityPath,
-        IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     {
-        return new AndFilterBuilder<TPermission, TDomainObject>(this, securityPath, restrictionFilterInfoList);
+        return new AndFilterBuilder<TPermission, TDomainObject>(this, securityPath, securityContextRestrictions);
     }
 
     protected override AccessorsFilterBuilder<TPermission, TDomainObject> CreateBuilder<TNestedObject>(
         SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath,
-        IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     {
         var nestedBuilderFactory = new AccessorsFilterBuilderFactory<TPermission, TNestedObject>(
             permissionSystem,
@@ -106,6 +106,6 @@ public class AccessorsFilterBuilderFactory<TPermission, TDomainObject>(
         return new NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(
             nestedBuilderFactory,
             securityPath,
-            restrictionFilterInfoList);
+            securityContextRestrictions);
     }
 }

@@ -6,7 +6,7 @@ public interface IPermissionSource
 {
     bool HasAccess();
 
-    List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes);
+    List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityContextTypes);
 }
 
 public interface IPermissionSource<TPermission> : IPermissionSource

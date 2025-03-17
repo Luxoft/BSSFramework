@@ -7,7 +7,7 @@ public class ExamplePermissionSource(TestPermissionData data, DomainSecurityRule
 {
     public bool HasAccess() => throw new NotImplementedException();
 
-    public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
+    public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> _)
     {
         var roles = securityRule.SecurityRoles.ToHashSet();
 

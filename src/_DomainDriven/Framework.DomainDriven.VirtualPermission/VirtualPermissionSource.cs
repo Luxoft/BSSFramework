@@ -21,13 +21,13 @@ public class VirtualPermissionSource<TPrincipal, TPermission>(
 
     public bool HasAccess() => this.GetPermissionQuery().Any();
 
-    public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
+    public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityContextTypes)
     {
         var permissions = this.GetPermissionQuery(null).ToList();
 
         var restrictionFilterInfoList = securityRule.GetSafeSecurityContextRestrictionFilters().ToList();
 
-        return permissions.Select(permission => this.ConvertPermission(permission, securityTypes, restrictionFilterInfoList)).ToList();
+        return permissions.Select(permission => this.ConvertPermission(permission, securityContextTypes, restrictionFilterInfoList)).ToList();
     }
 
     public IQueryable<TPermission> GetPermissionQuery() => this.GetPermissionQuery(null);
@@ -56,10 +56,10 @@ public class VirtualPermissionSource<TPrincipal, TPermission>(
 
     private Dictionary<Type, List<Guid>> ConvertPermission(
         TPermission permission,
-        IEnumerable<Type> securityTypes,
+        IEnumerable<Type> securityContextTypes,
         IReadOnlyCollection<SecurityContextRestrictionFilterInfo> filterInfoList)
     {
-        return securityTypes.ToDictionary(
+        return securityContextTypes.ToDictionary(
             securityContextType => securityContextType,
             securityContextType =>
             {

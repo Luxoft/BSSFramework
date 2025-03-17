@@ -22,7 +22,7 @@ public class AuthorizationPermissionSource(
         return this.GetPermissionQuery().Any();
     }
 
-    public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityTypes)
+    public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityContextTypes)
     {
         var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(securityRule)
                                                    //.FetchMany(q => q.Restrictions)
@@ -30,7 +30,7 @@ public class AuthorizationPermissionSource(
                                                    .ToList();
 
         return permissions
-               .Select(permission => this.ConvertPermission(permission, securityTypes))
+               .Select(permission => this.ConvertPermission(permission, securityContextTypes))
                .ToList();
     }
 
@@ -57,49 +57,56 @@ public class AuthorizationPermissionSource(
         Permission permission,
         IEnumerable<Type> securityContextTypes)
     {
-        var request = from restriction in permission.Restrictions
+        var purePermission = permission.Restrictions.GroupBy(
+                                           permissionRestriction => permissionRestriction.SecurityContextType.Id,
+                                           permissionRestriction => permissionRestriction.SecurityContextId)
+                                       .ToDictionary(g => g.Key, g => g.ToList());
 
-                      join securityContextType in securityContextTypes on restriction.SecurityContextType.Id equals
+        var filterInfoDict = securityRule.GetSafeSecurityContextRestrictionFilters().ToDictionary(filterInfo => filterInfo.SecurityContextType);
 
-                          securityContextInfoSource.GetSecurityContextInfo(realTypeResolver.Resolve(securityContextType)).Id
+        return securityContextTypes.ToDictionary(
+            securityContextType => securityContextType,
+            securityContextType =>
+            {
+                var securityContextRestrictionFilterInfo = filterInfoDict.GetValueOrDefault(securityContextType);
 
-                      group restriction.SecurityContextId by securityContextType
+                var securityContextTypeId =
+                    securityContextInfoSource.GetSecurityContextInfo(realTypeResolver.Resolve(securityContextType)).Id;
 
-                      into restrictionGroup
+                var baseIdents = purePermission.GetValueOrDefault(securityContextTypeId, []);
 
-                      join securityContextRestrictionFilter in securityRule.GetSafeSecurityContextRestrictionFilters() on
+                if (securityContextRestrictionFilterInfo == null)
+                {
+                    return baseIdents;
+                }
+                else
+                {
+                    return this.ApplySecurityContextFilter(baseIdents, securityContextRestrictionFilterInfo);
+                }
 
-                          restrictionGroup.Key equals securityContextRestrictionFilter.SecurityContextType into filterGroup
-
-                      let securityContextRestrictionFilterInfo = filterGroup.SingleOrDefault()
-
-                      let filteredSecurityContextIdents =
-
-                          securityContextRestrictionFilterInfo == null
-                              ? restrictionGroup.ToList()
-                              : this.ApplySecurityContextFilter(restrictionGroup, securityContextRestrictionFilterInfo)
-
-                      where filteredSecurityContextIdents.Any()
-
-                      select (restrictionGroup.Key, filteredSecurityContextIdents);
-
-        return request.ToDictionary();
+            });
     }
 
-    private List<Guid> ApplySecurityContextFilter(IEnumerable<Guid> securityContextIdents, SecurityContextRestrictionFilterInfo restrictionFilterInfo)
+    private List<Guid> ApplySecurityContextFilter(List<Guid> securityContextIdents, SecurityContextRestrictionFilterInfo restrictionFilterInfo)
     {
-        return new Func<IEnumerable<Guid>, SecurityContextRestrictionFilterInfo<ISecurityContext>, IEnumerable<Guid>>(
-                   this.ApplySecurityContextFilter)
+        return new Func<List<Guid>, SecurityContextRestrictionFilterInfo<ISecurityContext>, List<Guid>>(this.ApplySecurityContextFilter)
                .CreateGenericMethod(restrictionFilterInfo.SecurityContextType)
                .Invoke<List<Guid>>(this, securityContextIdents, restrictionFilterInfo);
     }
 
-    private List<Guid> ApplySecurityContextFilter<TSecurityContext>(IEnumerable<Guid> securityContextIdents, SecurityContextRestrictionFilterInfo<TSecurityContext> restrictionFilterInfo)
+    private List<Guid> ApplySecurityContextFilter<TSecurityContext>(List<Guid> baseSecurityContextIdents, SecurityContextRestrictionFilterInfo<TSecurityContext> restrictionFilterInfo)
         where TSecurityContext : class, ISecurityContext
     {
-        return securityContextSource.GetQueryable(restrictionFilterInfo)
-                                    .Where(securityContext => securityContextIdents.Contains(securityContext.Id))
-                                    .Select(securityContext => securityContext.Id)
-                                    .ToList();
+        var filteredSecurityContextQueryable = securityContextSource.GetQueryable(restrictionFilterInfo).Select(securityContext => securityContext.Id);
+
+        if (baseSecurityContextIdents.Any())
+        {
+            return filteredSecurityContextQueryable.Where(securityContextId => baseSecurityContextIdents.Contains(securityContextId))
+                                                   .ToList();
+        }
+        else
+        {
+            return filteredSecurityContextQueryable.ToList();
+        }
     }
 }

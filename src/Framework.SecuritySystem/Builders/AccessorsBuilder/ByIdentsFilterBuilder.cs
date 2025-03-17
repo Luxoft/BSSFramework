@@ -9,16 +9,22 @@ namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 public abstract class ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
     IPermissionSystem<TPermission> permissionSystem,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-    SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo) : AccessorsFilterBuilder<TPermission, TDomainObject>
+    SecurityContextRestriction<TSecurityContext>? securityContextRestriction) : AccessorsFilterBuilder<TPermission, TDomainObject>
     where TSecurityContext : class, ISecurityContext
 {
+    protected abstract bool AllowEmpty { get; }
+
     public override Expression<Func<TPermission, bool>> GetAccessorsFilter(
         TDomainObject domainObject,
         HierarchicalExpandType expandType)
     {
         var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-        var grandAccessExpr = permissionSystem.GetGrandAccessExpr<TSecurityContext>();
+        var allowGrandAccess = securityContextRestriction?.Required != true;
+
+        var grandAccessExpr = allowGrandAccess
+                                  ? permissionSystem.GetGrandAccessExpr<TSecurityContext>()
+                                  : _ => false;
 
         if (securityObjects.Any())
         {
@@ -26,11 +32,18 @@ public abstract class ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurit
                                  .Create(typeof(TSecurityContext))
                                  .Expand(securityObjects.Select(securityObject => securityObject.Id), expandType.Reverse());
 
-            return grandAccessExpr.BuildOr(permissionSystem.GetContainsIdentsExpr(securityIdents, restrictionFilterInfo));
+            return grandAccessExpr.BuildOr(permissionSystem.GetContainsIdentsExpr(securityIdents, securityContextRestriction?.Filter));
         }
         else
         {
-            return grandAccessExpr;
+            if (this.AllowEmpty)
+            {
+                return _ => true;
+            }
+            else
+            {
+                return grandAccessExpr;
+            }
         }
     }
 

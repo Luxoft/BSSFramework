@@ -7,11 +7,11 @@ namespace Framework.SecuritySystem.Builders.MaterializedBuilder;
 public class AndFilterBuilder<TDomainObject>(
     SecurityFilterBuilderFactory<TDomainObject> builderFactory,
     SecurityPath<TDomainObject>.AndSecurityPath securityPath,
-    IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+    IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     : BinaryFilterBuilder<TDomainObject, SecurityPath<TDomainObject>.AndSecurityPath>(
         builderFactory,
         securityPath,
-        restrictionFilterInfoList)
+        securityContextRestrictions)
 {
     protected override Expression<Func<TArg, bool>> BuildOperation<TArg>(
         Expression<Func<TArg, bool>> arg1,

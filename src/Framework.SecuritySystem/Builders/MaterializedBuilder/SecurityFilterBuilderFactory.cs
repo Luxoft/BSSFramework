@@ -19,7 +19,7 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
     {
         var securityTypes = securityPath.GetUsedTypes();
 
-        var restrictionFilterInfoList = securityRule.GetSafeSecurityContextRestrictionFilters().ToList();
+        var securityContextRestrictions = securityRule.GetSafeSecurityContextRestrictions().ToList();
 
         var rawPermissions = permissionSystems
                              .SelectMany(ps => ps.GetPermissionSource(securityRule).GetPermissions(securityTypes))
@@ -30,7 +30,7 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
         var expandedPermissions =
             optimizedPermissions.Select(permission => this.TryExpandPermission(permission, securityRule.GetSafeExpandType()));
 
-        var builder = this.CreateBuilder(securityPath, restrictionFilterInfoList);
+        var builder = this.CreateBuilder(securityPath, securityContextRestrictions);
 
         var filterExpression = expandedPermissions.BuildOr(builder.GetSecurityFilterExpression);
 
@@ -49,38 +49,38 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
 
     protected override SecurityFilterBuilder<TDomainObject> CreateBuilder<TSecurityContext>(
         SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath,
-        SecurityContextRestrictionFilterInfo<TSecurityContext>? _)
+        SecurityContextRestriction<TSecurityContext>? securityContextRestriction)
     {
-        return new SingleContextFilterBuilder<TDomainObject, TSecurityContext>(securityPath);
+        return new SingleContextFilterBuilder<TDomainObject, TSecurityContext>(securityPath, securityContextRestriction);
     }
 
     protected override SecurityFilterBuilder<TDomainObject> CreateBuilder<TSecurityContext>(
         SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath,
-        SecurityContextRestrictionFilterInfo<TSecurityContext>? _)
+        SecurityContextRestriction<TSecurityContext>? securityContextRestriction)
     {
-        return new ManyContextFilterBuilder<TDomainObject, TSecurityContext>(securityPath);
+        return new ManyContextFilterBuilder<TDomainObject, TSecurityContext>(securityPath, securityContextRestriction);
     }
 
-    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder(SecurityPath<TDomainObject>.OrSecurityPath securityPath, IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder(SecurityPath<TDomainObject>.OrSecurityPath securityPath, IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     {
-        return new OrFilterBuilder<TDomainObject>(this, securityPath, restrictionFilterInfoList);
+        return new OrFilterBuilder<TDomainObject>(this, securityPath, securityContextRestrictions);
     }
 
-    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder(SecurityPath<TDomainObject>.AndSecurityPath securityPath, IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder(SecurityPath<TDomainObject>.AndSecurityPath securityPath, IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     {
-        return new AndFilterBuilder<TDomainObject>(this, securityPath, restrictionFilterInfoList);
+        return new AndFilterBuilder<TDomainObject>(this, securityPath, securityContextRestrictions);
     }
 
     protected override SecurityFilterBuilder<TDomainObject> CreateBuilder<TNestedObject>(
         SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath,
-        IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+        IReadOnlyList<SecurityContextRestriction> securityContextRestrictions)
     {
         var nestedBuilderFactory = new SecurityFilterBuilderFactory<TNestedObject>(
             permissionSystems,
             hierarchicalObjectExpanderFactory,
             permissionOptimizationService);
 
-        return new NestedManyFilterBuilder<TDomainObject, TNestedObject>(nestedBuilderFactory, securityPath, restrictionFilterInfoList);
+        return new NestedManyFilterBuilder<TDomainObject, TNestedObject>(nestedBuilderFactory, securityPath, securityContextRestrictions);
     }
 
     private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(

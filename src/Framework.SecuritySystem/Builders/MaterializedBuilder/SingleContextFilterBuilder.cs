@@ -5,8 +5,9 @@ using Framework.Core;
 namespace Framework.SecuritySystem.Builders.MaterializedBuilder;
 
 public class SingleContextFilterBuilder<TDomainObject, TSecurityContext>(
-    SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath)
-    : ByIdentsFilterBuilder<TDomainObject, TSecurityContext>
+    SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath,
+    SecurityContextRestriction<TSecurityContext>? securityContextRestriction)
+    : ByIdentsFilterBuilder<TDomainObject, TSecurityContext>(securityContextRestriction)
     where TSecurityContext : class, ISecurityContext
 {
     protected override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(IEnumerable<Guid> securityIdents)

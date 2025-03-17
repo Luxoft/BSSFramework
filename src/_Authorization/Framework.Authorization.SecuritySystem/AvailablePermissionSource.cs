@@ -19,12 +19,22 @@ public class AvailablePermissionSource(
 {
     public AvailablePermissionFilter CreateFilter(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
+        var restrictionFiltersRequest =
+
+            from securityContextRestriction in (securityRule.CustomRestriction?.SecurityContextRestrictions).EmptyIfNull()
+
+            where securityContextRestriction.RawFilter != null
+
+            let filterData = this.GetRestrictionFilter(securityContextRestriction.RawFilter)
+
+            select (filterData.Key, (!securityContextRestriction.Required, filterData.Value));
+
+
         return new AvailablePermissionFilter(timeProvider.GetToday())
                {
                    PrincipalName = userNameResolver.Resolve(securityRule.CustomCredential ?? defaultSecurityRuleCredential),
                    SecurityRoleIdents = securityRolesIdentsResolver.Resolve(securityRule).ToList(),
-                   RestrictionFilters = securityRule.GetSafeSecurityContextRestrictionFilters().Select(this.GetRestrictionFilter)
-                                                    .ToDictionary()
+                   RestrictionFilters = restrictionFiltersRequest.ToDictionary()
                };
     }
 
@@ -36,7 +46,7 @@ public class AvailablePermissionSource(
                          .CreateGenericMethod(restrictionFilterInfo.SecurityContextType)
                          .Invoke<Expression<Func<Guid, bool>>>(this, restrictionFilterInfo);
 
-        return new (securityContextTypeId, filterExpr);
+        return new(securityContextTypeId, filterExpr);
     }
 
     private Expression<Func<Guid, bool>> GetRestrictionFilterExpression<TSecurityContext>(

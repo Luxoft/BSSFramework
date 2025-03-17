@@ -1,14 +1,10 @@
 ﻿using Automation.ServiceEnvironment;
 using Automation.Utils;
 
-using FluentAssertions;
-
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.Persistent;
 using Framework.SecuritySystem;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

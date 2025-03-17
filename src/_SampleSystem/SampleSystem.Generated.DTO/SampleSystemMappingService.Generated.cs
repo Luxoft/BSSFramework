@@ -1439,6 +1439,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual void MapBusinessUnit(SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.BusinessUnitSimpleDTO mappingObject)
         {
+            mappingObject.AllowedForFilterRole = domainObject.AllowedForFilterRole;
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.BusinessUnitTypeName = domainObject.BusinessUnitTypeName;
             mappingObject.Commission = domainObject.Commission;
@@ -1500,6 +1501,7 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitStrictDTO mappingObject, SampleSystem.Domain.BusinessUnit domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
+            domainObject.AllowedForFilterRole = mappingObject.AllowedForFilterRole;
             if (!object.ReferenceEquals(mappingObject.BusinessUnitEmployeeRoles, null))
             {
                 this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleStrictDTO, SampleSystem.Domain.BusinessUnitEmployeeRole>(detailDTO => this.ToBusinessUnitEmployeeRole(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.BusinessUnitEmployeeRole>(domainObject, detail)).Map(mappingObject.BusinessUnitEmployeeRoles, domainObject.BusinessUnitEmployeeRoles);
@@ -1538,6 +1540,7 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapBusinessUnit(SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.BusinessUnitIntegrationSimpleDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
+            mappingObject.AllowedForFilterRole = domainObject.AllowedForFilterRole;
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.BusinessUnitTypeName = domainObject.BusinessUnitTypeName;
             mappingObject.Commission = domainObject.Commission;
@@ -1566,6 +1569,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual void MapBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIntegrationSimpleDTO mappingObject, SampleSystem.Domain.BusinessUnit domainObject)
         {
+            domainObject.AllowedForFilterRole = mappingObject.AllowedForFilterRole;
             domainObject.BusinessUnitStatus = mappingObject.BusinessUnitStatus;
             domainObject.Commission = mappingObject.Commission;
             domainObject.FirstNewBusinessStatusMonth = mappingObject.FirstNewBusinessStatusMonth;
@@ -1604,6 +1608,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.AccountOrDivisionId = domainObject.AccountOrDivisionId;
             mappingObject.AccountOrDivisionName = domainObject.AccountOrDivisionName;
             mappingObject.Active = domainObject.Active;
+            mappingObject.AllowedForFilterRole = domainObject.AllowedForFilterRole;
             mappingObject.BusinessUnitEmployeeRoles = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.BusinessUnitEmployeeRoles, this);
             if (!object.ReferenceEquals(domainObject.BusinessUnitForRent, null))
             {
@@ -1694,6 +1699,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.AccountOrDivisionId = domainObject.AccountOrDivisionId;
             mappingObject.AccountOrDivisionName = domainObject.AccountOrDivisionName;
             mappingObject.Active = domainObject.Active;
+            mappingObject.AllowedForFilterRole = domainObject.AllowedForFilterRole;
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.BusinessUnitTypeName = domainObject.BusinessUnitTypeName;
             mappingObject.Commission = domainObject.Commission;

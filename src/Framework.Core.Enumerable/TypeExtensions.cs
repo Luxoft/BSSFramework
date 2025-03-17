@@ -23,14 +23,14 @@ public static class TypeExtensions
         return type.GetCollectionElementType() ?? type;
     }
 
-    public static Type GetCollectionElementType(this Type type)
+    public static Type? GetCollectionElementType(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
         return type.GetCollectionType() != null ? type.GetGenericArguments().Single() : null;
     }
 
-    public static Type GetCollectionType(this Type type)
+    public static Type? GetCollectionType(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -47,14 +47,14 @@ public static class TypeExtensions
         return null;
     }
 
-    public static Type GetArrayGenericType(this Type type)
+    public static Type? GetArrayGenericType(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
         return type.IsArray ? type.GetElementType() : null;
     }
 
-    public static Type GetCollectionOrArrayElementType(this Type type)
+    public static Type? GetCollectionOrArrayElementType(this Type type)
     {
         return type.GetCollectionElementType() ?? type.GetArrayGenericType();
     }
@@ -78,7 +78,7 @@ public static class TypeExtensions
         return type.GetCollectionOrArrayElementType() != null;
     }
 
-    public static bool IsCollection(this Type type, Func<Type, bool> elementTypeFilter)
+    public static bool IsCollection(this Type type, Func<Type?, bool> elementTypeFilter)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (elementTypeFilter == null) throw new ArgumentNullException(nameof(elementTypeFilter));

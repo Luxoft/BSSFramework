@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Core.Enumerable</PackageId>
+    <nullable>enable</nullable>
   </PropertyGroup>
 
   <ItemGroup>

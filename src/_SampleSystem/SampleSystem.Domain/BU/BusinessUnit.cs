@@ -50,6 +50,8 @@ public partial class BusinessUnit :
 
     private int deepLevel;
 
+    private bool allowedForFilterRole;
+
     //private int order;
 
     public BusinessUnit()
@@ -67,6 +69,12 @@ public partial class BusinessUnit :
 
     [UniqueGroup]
     public virtual IEnumerable<ManagementUnitAndBusinessUnitLink> ManagementUnits { get; } = new List<ManagementUnitAndBusinessUnitLink>();
+
+    public virtual bool AllowedForFilterRole
+    {
+        get { return this.allowedForFilterRole; }
+        set { this.allowedForFilterRole = value; }
+    }
 
     public virtual int DeepLevel
     {

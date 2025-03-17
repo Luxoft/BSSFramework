@@ -1,8 +1,5 @@
 ﻿using Automation.ServiceEnvironment;
 
-using FluentAssertions;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.NH;

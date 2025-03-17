@@ -83,17 +83,17 @@ public abstract record SecurityPath<TDomainObject>
 
     #endregion
 
-    public record ConditionPath(Expression<Func<TDomainObject, bool>> SecurityFilter) : SecurityPath<TDomainObject>
+    public record ConditionPath(Expression<Func<TDomainObject, bool>> FilterExpression) : SecurityPath<TDomainObject>
     {
         protected override IEnumerable<Type> GetInternalUsedTypes() => [];
 
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
             Expression<Func<TNewDomainObject, TDomainObject>> selector) =>
-            new SecurityPath<TNewDomainObject>.ConditionPath(this.SecurityFilter.OverrideInput(selector));
+            new SecurityPath<TNewDomainObject>.ConditionPath(this.FilterExpression.OverrideInput(selector));
 
         public virtual bool Equals(ConditionPath? other) =>
             ReferenceEquals(this, other)
-            || (other is not null && ExpressionComparer.Value.Equals(this.SecurityFilter, other.SecurityFilter));
+            || (other is not null && ExpressionComparer.Value.Equals(this.FilterExpression, other.FilterExpression));
 
         public override int GetHashCode() => 0;
     }
@@ -122,7 +122,7 @@ public abstract record SecurityPath<TDomainObject>
     }
 
     public record SingleSecurityPath<TSecurityContext>(
-        Expression<Func<TDomainObject, TSecurityContext?>> SecurityPath,
+        Expression<Func<TDomainObject, TSecurityContext?>> Expression,
         SingleSecurityMode Mode,
         string? Key) : SecurityPath<TDomainObject>, IContextSecurityPath
         where TSecurityContext : ISecurityContext
@@ -134,7 +134,7 @@ public abstract record SecurityPath<TDomainObject>
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
             Expression<Func<TNewDomainObject, TDomainObject>> selector) =>
             new SecurityPath<TNewDomainObject>.SingleSecurityPath<TSecurityContext>(
-                this.SecurityPath.OverrideInput(selector),
+                this.Expression.OverrideInput(selector),
                 this.Mode,
                 this.Key);
 
@@ -143,13 +143,13 @@ public abstract record SecurityPath<TDomainObject>
             || (other is not null
                 && this.Mode == other.Mode
                 && this.Key == other.Key
-                && ExpressionComparer.Value.Equals(this.SecurityPath, other.SecurityPath));
+                && ExpressionComparer.Value.Equals(this.Expression, other.Expression));
 
         public override int GetHashCode() => this.Mode.GetHashCode();
     }
 
     public record ManySecurityPath<TSecurityContext>(
-        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> SecurityPath,
+        Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> Expression,
         ManySecurityPathMode Mode,
         string? Key) : SecurityPath<TDomainObject>, IContextSecurityPath
         where TSecurityContext : ISecurityContext
@@ -157,7 +157,7 @@ public abstract record SecurityPath<TDomainObject>
         Type IContextSecurityPath.SecurityContextType => typeof(TSecurityContext);
 
         public Expression<Func<TDomainObject, IQueryable<TSecurityContext>>>? SecurityPathQ { get; } =
-            TryExtractSecurityPathQ(SecurityPath);
+            TryExtractSecurityPathQ(Expression);
 
         protected override IEnumerable<Type> GetInternalUsedTypes() => [typeof(TSecurityContext)];
 
@@ -166,7 +166,7 @@ public abstract record SecurityPath<TDomainObject>
         {
             if (securityPath.Body.Type == typeof(IQueryable<TSecurityContext>))
             {
-                return Expression.Lambda<Func<TDomainObject, IQueryable<TSecurityContext>>>(securityPath.Body, securityPath.Parameters);
+                return System.Linq.Expressions.Expression.Lambda<Func<TDomainObject, IQueryable<TSecurityContext>>>(securityPath.Body, securityPath.Parameters);
             }
 
             return null;
@@ -175,7 +175,7 @@ public abstract record SecurityPath<TDomainObject>
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
             Expression<Func<TNewDomainObject, TDomainObject>> selector) =>
             new SecurityPath<TNewDomainObject>.ManySecurityPath<TSecurityContext>(
-                this.SecurityPath.OverrideInput(selector),
+                this.Expression.OverrideInput(selector),
                 this.Mode,
                 this.Key);
 
@@ -184,13 +184,13 @@ public abstract record SecurityPath<TDomainObject>
             || (other is not null
                 && this.Mode == other.Mode
                 && this.Key == other.Key
-                && ExpressionComparer.Value.Equals(this.SecurityPath, other.SecurityPath));
+                && ExpressionComparer.Value.Equals(this.Expression, other.Expression));
 
         public override int GetHashCode() => this.Mode.GetHashCode();
     }
 
     public record NestedManySecurityPath<TNestedObject>(
-        Expression<Func<TDomainObject, IEnumerable<TNestedObject>>> NestedObjectsPath,
+        Expression<Func<TDomainObject, IEnumerable<TNestedObject>>> NestedExpression,
         SecurityPath<TNestedObject> NestedSecurityPath,
         ManySecurityPathMode Mode) : SecurityPath<TDomainObject>
     {
@@ -199,7 +199,7 @@ public abstract record SecurityPath<TDomainObject>
         public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(
             Expression<Func<TNewDomainObject, TDomainObject>> selector) =>
             new SecurityPath<TNewDomainObject>.NestedManySecurityPath<TNestedObject>(
-                this.NestedObjectsPath.OverrideInput(selector),
+                this.NestedExpression.OverrideInput(selector),
                 this.NestedSecurityPath,
                 this.Mode);
 
@@ -208,7 +208,7 @@ public abstract record SecurityPath<TDomainObject>
             || (other is not null
                 && this.Mode == other.Mode
                 && this.NestedSecurityPath == other.NestedSecurityPath
-                && ExpressionComparer.Value.Equals(this.NestedObjectsPath, other.NestedObjectsPath));
+                && ExpressionComparer.Value.Equals(this.NestedExpression, other.NestedExpression));
 
         public override int GetHashCode() => this.Mode.GetHashCode();
     }

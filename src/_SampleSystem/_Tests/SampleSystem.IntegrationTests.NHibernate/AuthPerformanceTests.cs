@@ -1,12 +1,9 @@
 ﻿using Automation.ServiceEnvironment;
-using FluentAssertions;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.SecuritySystem;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

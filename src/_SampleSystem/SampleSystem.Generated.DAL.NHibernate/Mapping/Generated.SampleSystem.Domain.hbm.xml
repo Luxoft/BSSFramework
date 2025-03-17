@@ -60,6 +60,7 @@
       <column name="Version" not-null="false" sql-type="bigint" />
     </version>
     <property name="Active" column="active" access="field.camelcase" />
+    <property name="AllowedForFilterRole" column="allowedForFilterRole" access="field.camelcase" />
     <property name="BusinessUnitStatus" column="businessUnitStatus" access="field.camelcase" />
     <property name="Commission" column="commission" precision="19" scale="4" access="field.camelcase" />
     <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />

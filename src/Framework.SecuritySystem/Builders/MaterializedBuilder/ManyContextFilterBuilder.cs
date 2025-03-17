@@ -23,7 +23,7 @@ public class ManyContextFilterBuilder<TDomainObject, TSecurityContext>(
                 }
                 else
                 {
-                    return from securityObjects in securityPath.SecurityPath
+                    return from securityObjects in securityPath.Expression
 
                            select securityObjects.Any(item => securityIdents.Contains(item.Id));
                 }
@@ -40,7 +40,7 @@ public class ManyContextFilterBuilder<TDomainObject, TSecurityContext>(
                 }
                 else
                 {
-                    return from securityObjects in securityPath.SecurityPath
+                    return from securityObjects in securityPath.Expression
 
                            select !securityObjects.Any()
                                   || securityObjects.Any(item => securityIdents.Contains(item.Id));

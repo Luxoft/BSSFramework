@@ -7,9 +7,11 @@ namespace Framework.SecuritySystem.Builders.QueryBuilder;
 
 public class NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(
     SecurityFilterBuilderFactory<TPermission, TNestedObject> nestedBuilderFactory,
-    SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath) : SecurityFilterBuilder<TPermission, TDomainObject>
+    SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath,
+    IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList) : SecurityFilterBuilder<TPermission, TDomainObject>
 {
-    private SecurityFilterBuilder<TPermission, TNestedObject> NestedBuilder { get; } = nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath);
+    private SecurityFilterBuilder<TPermission, TNestedObject> NestedBuilder { get; } =
+        nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath, restrictionFilterInfoList);
 
     public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
         HierarchicalExpandType expandType)
@@ -20,15 +22,15 @@ public class NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(
         {
             case ManySecurityPathMode.Any:
 
-                return (domainObject, permission) => !securityPath.NestedObjectsPath.Eval(domainObject).Any()
+                return (domainObject, permission) => !securityPath.NestedExpression.Eval(domainObject).Any()
 
-                                                     || securityPath.NestedObjectsPath.Eval(domainObject).Any(
+                                                     || securityPath.NestedExpression.Eval(domainObject).Any(
                                                          nestedObject => baseFilter.Eval(nestedObject, permission));
 
             case ManySecurityPathMode.AnyStrictly:
 
-                return (domainObject, permission) => securityPath.NestedObjectsPath.Eval(domainObject)
-                                                         .Any(nestedObject => baseFilter.Eval(nestedObject, permission));
+                return (domainObject, permission) => securityPath.NestedExpression.Eval(domainObject)
+                                                                 .Any(nestedObject => baseFilter.Eval(nestedObject, permission));
 
             default:
 

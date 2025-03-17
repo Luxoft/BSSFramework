@@ -10,11 +10,16 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
     IEnumerable<IPermissionSystem> permissionSystems,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     IRuntimePermissionOptimizationService permissionOptimizationService) :
-    FilterBuilderFactoryBase<TDomainObject, SecurityFilterBuilder<TDomainObject>>, ISecurityFilterFactory<TDomainObject>
+    FilterBuilderFactoryBase<TDomainObject, SecurityFilterBuilder<TDomainObject>>,
+    ISecurityFilterFactory<TDomainObject>
 {
-    public SecurityFilterInfo<TDomainObject> CreateFilter(DomainSecurityRule.RoleBaseSecurityRule securityRule, SecurityPath<TDomainObject> securityPath)
+    public SecurityFilterInfo<TDomainObject> CreateFilter(
+        DomainSecurityRule.RoleBaseSecurityRule securityRule,
+        SecurityPath<TDomainObject> securityPath)
     {
         var securityTypes = securityPath.GetUsedTypes();
+
+        var restrictionFilterInfoList = securityRule.GetSafeSecurityContextRestrictionFilters().ToList();
 
         var rawPermissions = permissionSystems
                              .SelectMany(ps => ps.GetPermissionSource(securityRule).GetPermissions(securityTypes))
@@ -22,9 +27,10 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
 
         var optimizedPermissions = permissionOptimizationService.Optimize(rawPermissions);
 
-        var expandedPermissions = optimizedPermissions.Select(permission => this.TryExpandPermission(permission, securityRule.GetSafeExpandType()));
+        var expandedPermissions =
+            optimizedPermissions.Select(permission => this.TryExpandPermission(permission, securityRule.GetSafeExpandType()));
 
-        var builder = this.CreateBuilder(securityPath);
+        var builder = this.CreateBuilder(securityPath, restrictionFilterInfoList);
 
         var filterExpression = expandedPermissions.BuildOr(builder.GetSecurityFilterExpression);
 
@@ -41,37 +47,45 @@ public class SecurityFilterBuilderFactory<TDomainObject>(
         return new ConditionFilterBuilder<TDomainObject>(securityPath);
     }
 
-    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder<TSecurityContext>(SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath)
+    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder<TSecurityContext>(
+        SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath,
+        SecurityContextRestrictionFilterInfo<TSecurityContext>? _)
     {
         return new SingleContextFilterBuilder<TDomainObject, TSecurityContext>(securityPath);
     }
 
-    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder<TSecurityContext>(SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath)
+    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder<TSecurityContext>(
+        SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath,
+        SecurityContextRestrictionFilterInfo<TSecurityContext>? _)
     {
         return new ManyContextFilterBuilder<TDomainObject, TSecurityContext>(securityPath);
     }
 
-    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder(SecurityPath<TDomainObject>.OrSecurityPath securityPath)
+    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder(SecurityPath<TDomainObject>.OrSecurityPath securityPath, IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
     {
-        return new OrFilterBuilder<TDomainObject>(this, securityPath);
+        return new OrFilterBuilder<TDomainObject>(this, securityPath, restrictionFilterInfoList);
     }
 
-    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder(SecurityPath<TDomainObject>.AndSecurityPath securityPath)
+    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder(SecurityPath<TDomainObject>.AndSecurityPath securityPath, IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
     {
-        return new AndFilterBuilder<TDomainObject>(this, securityPath);
+        return new AndFilterBuilder<TDomainObject>(this, securityPath, restrictionFilterInfoList);
     }
 
-    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder<TNestedObject>(SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath)
+    protected override SecurityFilterBuilder<TDomainObject> CreateBuilder<TNestedObject>(
+        SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath,
+        IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
     {
         var nestedBuilderFactory = new SecurityFilterBuilderFactory<TNestedObject>(
             permissionSystems,
             hierarchicalObjectExpanderFactory,
             permissionOptimizationService);
 
-        return new NestedManyFilterBuilder<TDomainObject, TNestedObject>(nestedBuilderFactory, securityPath);
+        return new NestedManyFilterBuilder<TDomainObject, TNestedObject>(nestedBuilderFactory, securityPath, restrictionFilterInfoList);
     }
 
-    private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(Dictionary<Type, List<Guid>> permission, HierarchicalExpandType expandType)
+    private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(
+        Dictionary<Type, List<Guid>> permission,
+        HierarchicalExpandType expandType)
     {
         return permission.ToDictionary(
             pair => pair.Key,

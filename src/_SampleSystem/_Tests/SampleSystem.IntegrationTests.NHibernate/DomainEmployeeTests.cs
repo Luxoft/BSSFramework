@@ -1,8 +1,4 @@
-﻿using FluentAssertions;
-
-using Framework.OData;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Framework.OData;
 
 using SampleSystem.Domain;
 

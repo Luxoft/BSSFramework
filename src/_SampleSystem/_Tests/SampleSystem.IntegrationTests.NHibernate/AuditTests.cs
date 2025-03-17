@@ -1,9 +1,5 @@
-﻿using FluentAssertions;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;

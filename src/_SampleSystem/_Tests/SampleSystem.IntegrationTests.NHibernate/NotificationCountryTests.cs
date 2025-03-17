@@ -1,10 +1,6 @@
-﻿using FluentAssertions;
-
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.DomainDriven;
 using Framework.DomainDriven.DAL.Revisions;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

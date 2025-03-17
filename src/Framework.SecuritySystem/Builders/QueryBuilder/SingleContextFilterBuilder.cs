@@ -9,7 +9,8 @@ namespace Framework.SecuritySystem.Builders.QueryBuilder;
 public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
     IPermissionSystem<TPermission> permissionSystem,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-    SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath)
+    SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath,
+    SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
     : SecurityFilterBuilder<TPermission, TDomainObject>
     where TSecurityContext : class, ISecurityContext
 {
@@ -18,7 +19,7 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
     {
         var grandAccessExpr = permissionSystem.GetGrandAccessExpr<TSecurityContext>();
 
-        var getIdents = permissionSystem.GetPermissionRestrictionsExpr<TSecurityContext>();
+        var getIdents = permissionSystem.GetPermissionRestrictionsExpr(restrictionFilterInfo);
 
         var expander = hierarchicalObjectExpanderFactory.CreateQuery(typeof(TSecurityContext));
 
@@ -36,9 +37,9 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
 
                            grandAccessExpr.Eval(permission)
 
-                           || securityPath.SecurityPath.Eval(domainObject) == null
+                           || securityPath.Expression.Eval(domainObject) == null
 
-                           || expandExpressionQ.Eval(permission).Contains(securityPath.SecurityPath.Eval(domainObject).Id);
+                           || expandExpressionQ.Eval(permission).Contains(securityPath.Expression.Eval(domainObject).Id);
 
             case SingleSecurityMode.Strictly:
 
@@ -46,7 +47,7 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
 
                            grandAccessExpr.Eval(permission)
 
-                           || expandExpressionQ.Eval(permission).Contains(securityPath.SecurityPath.Eval(domainObject).Id);
+                           || expandExpressionQ.Eval(permission).Contains(securityPath.Expression.Eval(domainObject).Id);
 
             default:
 

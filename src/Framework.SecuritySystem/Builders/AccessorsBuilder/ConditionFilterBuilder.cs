@@ -11,7 +11,7 @@ public class ConditionFilterBuilder<TPermission, TDomainObject>(
 {
     public override Expression<Func<TPermission, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType)
     {
-        var hasAccess = securityPath.SecurityFilter.Eval(domainObject, LambdaCompileCache);
+        var hasAccess = securityPath.FilterExpression.Eval(domainObject, LambdaCompileCache);
 
         return _ => hasAccess;
     }

@@ -1,12 +1,6 @@
-﻿using FluentAssertions;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.SecurityAccessor;
-
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
@@ -89,11 +83,9 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
             {
                 var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(SecurityRule.View);
 
-                var securityAccessorResolver = ctx.ServiceProvider.GetRequiredService<ISecurityAccessorResolver>();
-
                 return bll.GetListBy(v => v.BusinessUnit_Security != null)
                           .ToDictionary(v => v.Id, bll.SecurityProvider.GetAccessorData)
-                          .ChangeValue(securityAccessorResolver.Resolve);
+                          .ChangeValue(ctx.SecurityAccessorResolver.Resolve);
             });
 
         // Assert

@@ -35,4 +35,11 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="FluentValidation" />
+    <Using Include="FluentAssertions" />
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+
+
 </Project>

@@ -2757,6 +2757,7 @@ namespace SampleSystem.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
+            target.AllowedForFilterRole = source.AllowedForFilterRole;
             target.BusinessUnitStatus = source.BusinessUnitStatus;
             target.Commission = source.Commission;
             target.FirstNewBusinessStatusMonth = source.FirstNewBusinessStatusMonth;

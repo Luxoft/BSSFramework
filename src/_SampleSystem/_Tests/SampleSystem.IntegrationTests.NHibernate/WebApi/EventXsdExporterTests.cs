@@ -1,8 +1,4 @@
-﻿using FluentAssertions;
-
-using Framework.DomainDriven.WebApiNetCore.Integration;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Framework.DomainDriven.WebApiNetCore.Integration;
 
 namespace SampleSystem.IntegrationTests.WebApi;
 

@@ -1,10 +1,7 @@
 ﻿using Automation.ServiceEnvironment;
 
-using FluentAssertions;
-
 using Framework.Notification.DTO;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;

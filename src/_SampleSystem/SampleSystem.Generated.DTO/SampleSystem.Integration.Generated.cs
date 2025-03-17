@@ -18,6 +18,8 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
+        private bool _allowedForFilterRole;
+        
         private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
         
         private string _businessUnitTypeName;
@@ -85,6 +87,19 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool AllowedForFilterRole
+        {
+            get
+            {
+                return this._allowedForFilterRole;
+            }
+            set
+            {
+                this._allowedForFilterRole = value;
             }
         }
         

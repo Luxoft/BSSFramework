@@ -55,18 +55,21 @@ public record VirtualPermissionBindingInfo<TPrincipal, TPermission>(
                    .Distinct();
     }
 
-    public Expression<Func<TPermission, IEnumerable<Guid>>> GetRestrictionsExpr(Type securityContextType) =>
-        this.GetType().GetMethod(nameof(this.GetRestrictionsExpr), BindingFlags.Instance | BindingFlags.Public, Type.EmptyTypes)!
-            .MakeGenericMethod(securityContextType)
-            .Invoke<Expression<Func<TPermission, IEnumerable<Guid>>>>(this);
+    public Expression<Func<TPermission, IEnumerable<Guid>>> GetRestrictionsExpr(Type securityContextType, LambdaExpression? pureFilter)
+    {
+        return new Func<Expression<Func<ISecurityContext, bool>>?, Expression<Func<TPermission, IEnumerable<Guid>>>>(
+                   this.GetRestrictionsExpr)
+               .CreateGenericMethod(securityContextType)
+               .Invoke<Expression<Func<TPermission, IEnumerable<Guid>>>>(this, pureFilter);
+    }
 
-    public Expression<Func<TPermission, IEnumerable<Guid>>> GetRestrictionsExpr<TSecurityContext>()
+    public Expression<Func<TPermission, IEnumerable<Guid>>> GetRestrictionsExpr<TSecurityContext>(Expression<Func<TSecurityContext, bool>>? pureFilter)
         where TSecurityContext : ISecurityContext
     {
-        var expressions = this.GetManyRestrictionsExpr<TSecurityContext>();
+        var expressions = this.GetManyRestrictionsExpr(pureFilter);
 
         return expressions.Match(
-            () => _ => new Guid[0],
+            () => _ => Array.Empty<Guid>(),
             single => single,
             many => many.Aggregate(
                 (state, expr) => from ids1 in state
@@ -74,19 +77,40 @@ public record VirtualPermissionBindingInfo<TPrincipal, TPermission>(
                                  select ids1.Concat(ide2)));
     }
 
-    private IEnumerable<Expression<Func<TPermission, IEnumerable<Guid>>>> GetManyRestrictionsExpr<TSecurityContext>()
+    private IEnumerable<Expression<Func<TPermission, IEnumerable<Guid>>>> GetManyRestrictionsExpr<TSecurityContext>(Expression<Func<TSecurityContext, bool>>? pureFilter)
         where TSecurityContext : ISecurityContext
     {
         foreach (var restrictionPath in this.RestrictionPaths)
         {
             if (restrictionPath is Expression<Func<TPermission, TSecurityContext>> singlePath)
             {
-                yield return singlePath.Select(
-                    securityContext => securityContext != null ? (IEnumerable<Guid>)new[] { securityContext.Id } : new Guid[0]);
+                if (pureFilter == null)
+                {
+                    yield return singlePath.Select(
+                        securityContext => securityContext != null ? (IEnumerable<Guid>)new[] { securityContext.Id } : new Guid[0]);
+                }
+                else
+                {
+                    Expression<Func<TPermission, IEnumerable<Guid>>> preResult =singlePath.Select(
+                        securityContext => securityContext != null && pureFilter.Eval(securityContext) ? (IEnumerable<Guid>)new[] { securityContext.Id } : new Guid[0]);
+
+                    yield return preResult.ExpandConst().InlineEval();
+                }
             }
             else if (restrictionPath is Expression<Func<TPermission, IEnumerable<TSecurityContext>>> manyPath)
             {
-                yield return manyPath.Select(securityContexts => securityContexts.Select(securityContext => securityContext.Id));
+                if (pureFilter == null)
+                {
+                    yield return manyPath.Select(securityContexts => securityContexts.Select(securityContext => securityContext.Id));
+                }
+                else
+                {
+                    Expression<Func<TPermission, IEnumerable<Guid>>> preResult = manyPath.Select(
+                        securityContexts => securityContexts.Where(securityContext => pureFilter.Eval(securityContext))
+                                                            .Select(securityContext => securityContext.Id));
+
+                    yield return preResult.ExpandConst().InlineEval();
+                }
             }
         }
     }

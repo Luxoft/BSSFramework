@@ -1,9 +1,4 @@
-﻿
-using Automation.ServiceEnvironment;
-
-using FluentAssertions;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Automation.ServiceEnvironment;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

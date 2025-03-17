@@ -112,6 +112,7 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityRuleExpander, RootSecurityRuleExpander>()
                        .AddSingleton<ISecurityRoleSource, SecurityRoleSource>()
                        .AddSingleton<ISecurityOperationInfoSource, SecurityOperationInfoSource>()
+                       .AddScoped<ISecurityContextSource, SecurityContextSource>()
                        .AddSingleton<ISecurityContextInfoSource, SecurityContextInfoSource>()
                        .AddSingleton<ISecurityRuleBasicOptimizer, SecurityRuleBasicOptimizer>()
                        .AddSingleton<ISecurityRuleDeepOptimizer, SecurityRuleDeepOptimizer>()

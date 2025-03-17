@@ -1,8 +1,4 @@
-﻿using FluentAssertions;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using SampleSystem.IntegrationTests.__Support.TestData;
+﻿using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

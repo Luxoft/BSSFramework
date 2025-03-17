@@ -6,8 +6,12 @@ namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 
 public class OrFilterBuilder<TPermission, TDomainObject>(
     AccessorsFilterBuilderFactory<TPermission, TDomainObject> builderFactory,
-    SecurityPath<TDomainObject>.OrSecurityPath securityPath)
-    : BinaryFilterBuilder<TPermission, TDomainObject, SecurityPath<TDomainObject>.OrSecurityPath>(builderFactory, securityPath)
+    SecurityPath<TDomainObject>.OrSecurityPath securityPath,
+    IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList)
+    : BinaryFilterBuilder<TPermission, TDomainObject, SecurityPath<TDomainObject>.OrSecurityPath>(
+        builderFactory,
+        securityPath,
+        restrictionFilterInfoList)
 {
     protected override Expression<Func<TArg, bool>> BuildOperation<TArg>(
         Expression<Func<TArg, bool>> arg1,

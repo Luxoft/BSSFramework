@@ -1,11 +1,7 @@
-﻿using FluentAssertions;
-
-using Framework.Authorization.Generated.DTO;
+﻿using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.Events;
 using Framework.SecuritySystem;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers;

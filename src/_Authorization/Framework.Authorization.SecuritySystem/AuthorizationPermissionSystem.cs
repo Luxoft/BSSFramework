@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
+using Framework.Core;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
 
@@ -11,19 +12,34 @@ namespace Framework.Authorization.SecuritySystem;
 public class AuthorizationPermissionSystem(
     IServiceProvider serviceProvider,
     ISecurityContextInfoSource securityContextInfoSource,
+    ISecurityContextSource securityContextSource,
     SecurityRuleCredential securityRuleCredential)
     : IPermissionSystem<Permission>
 {
     public Type PermissionType { get; } = typeof(Permission);
 
-    public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>()
-        where TSecurityContext : ISecurityContext
+    public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>(SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
+        where TSecurityContext : class, ISecurityContext
     {
         var securityContextTypeId = securityContextInfoSource.GetSecurityContextInfo<TSecurityContext>().Id;
 
-        return permission => permission.Restrictions
-                                       .Where(restriction => restriction.SecurityContextType.Id == securityContextTypeId)
-                                       .Select(restriction => restriction.SecurityContextId);
+        if (restrictionFilterInfo == null)
+        {
+            return permission => permission.Restrictions
+                                           .Where(restriction => restriction.SecurityContextType.Id == securityContextTypeId)
+                                           .Select(restriction => restriction.SecurityContextId);
+        }
+        else
+        {
+            var securityContextQueryable = securityContextSource.GetQueryable(restrictionFilterInfo)
+                                                                .Where(restrictionFilterInfo.GetPureFilter(serviceProvider))
+                                                                .Select(securityContext => securityContext.Id);
+
+            return permission => permission.Restrictions
+                                           .Where(restriction => restriction.SecurityContextType.Id == securityContextTypeId)
+                                           .Where(restriction => securityContextQueryable.Contains(restriction.SecurityContextId))
+                                           .Select(restriction => restriction.SecurityContextId);
+        }
     }
 
     public IPermissionSource<Permission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)

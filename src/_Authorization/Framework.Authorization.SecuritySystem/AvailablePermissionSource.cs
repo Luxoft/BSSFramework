@@ -1,4 +1,6 @@
-﻿using Framework.Authorization.Domain;
+﻿using System.Linq.Expressions;
+
+using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
@@ -10,6 +12,8 @@ public class AvailablePermissionSource(
     TimeProvider timeProvider,
     IUserNameResolver userNameResolver,
     ISecurityRolesIdentsResolver securityRolesIdentsResolver,
+    ISecurityContextInfoSource securityContextInfoSource,
+    ISecurityContextSource securityContextSource,
     SecurityRuleCredential defaultSecurityRuleCredential)
     : IAvailablePermissionSource
 {
@@ -18,8 +22,31 @@ public class AvailablePermissionSource(
         return new AvailablePermissionFilter(timeProvider.GetToday())
                {
                    PrincipalName = userNameResolver.Resolve(securityRule.CustomCredential ?? defaultSecurityRuleCredential),
-                   SecurityRoleIdents = securityRolesIdentsResolver.Resolve(securityRule).ToList()
+                   SecurityRoleIdents = securityRolesIdentsResolver.Resolve(securityRule).ToList(),
+                   RestrictionFilters = securityRule.GetSafeSecurityContextRestrictionFilters().Select(this.GetRestrictionFilter)
+                                                    .ToDictionary()
                };
+    }
+
+    private KeyValuePair<Guid, Expression<Func<Guid, bool>>> GetRestrictionFilter(SecurityContextRestrictionFilterInfo restrictionFilterInfo)
+    {
+        var securityContextTypeId = securityContextInfoSource.GetSecurityContextInfo(restrictionFilterInfo.SecurityContextType).Id;
+
+        var filterExpr = new Func<SecurityContextRestrictionFilterInfo<ISecurityContext>, Expression<Func<Guid, bool>>>(this.GetRestrictionFilterExpression)
+                         .CreateGenericMethod(restrictionFilterInfo.SecurityContextType)
+                         .Invoke<Expression<Func<Guid, bool>>>(this, restrictionFilterInfo);
+
+        return new (securityContextTypeId, filterExpr);
+    }
+
+    private Expression<Func<Guid, bool>> GetRestrictionFilterExpression<TSecurityContext>(
+        SecurityContextRestrictionFilterInfo<TSecurityContext> restrictionFilterInfo)
+        where TSecurityContext : class, ISecurityContext
+    {
+        var filteredSecurityContextQueryable = securityContextSource.GetQueryable(restrictionFilterInfo)
+                                                                    .Select(securityContext => securityContext.Id);
+
+        return securityContextId => filteredSecurityContextQueryable.Contains(securityContextId);
     }
 
     public IQueryable<Permission> GetAvailablePermissionsQueryable(DomainSecurityRule.RoleBaseSecurityRule securityRule)

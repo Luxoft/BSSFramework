@@ -20,14 +20,14 @@ public class InitializedSecurityRoleSource(IEnumerable<PreInitializerFullSecurit
             var newInfo = securityRole.Information with
                           {
                               Children = info.Children.Concat(otherRoles).Distinct().ToList(),
-                              Restriction = SecurityPathRestriction.Empty
+                              Restriction = SecurityPathRestriction.Ignored
                           };
 
             return new FullSecurityRole(securityRole.Name, newInfo);
         }
         else if (securityRole == SecurityRole.SystemIntegration)
         {
-            var newInfo = securityRole.Information with { Restriction = SecurityPathRestriction.Empty };
+            var newInfo = securityRole.Information with { Restriction = SecurityPathRestriction.Ignored };
 
             return new FullSecurityRole(securityRole.Name, newInfo);
         }

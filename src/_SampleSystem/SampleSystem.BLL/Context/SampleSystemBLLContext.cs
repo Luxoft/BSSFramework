@@ -7,6 +7,7 @@ using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.SecurityAccessor;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,7 +29,8 @@ public partial class SampleSystemBLLContext(
     ISampleSystemBLLFactoryContainer logics,
     IAuthorizationBLLContext authorization,
     Framework.Configuration.BLL.IConfigurationBLLContext configuration,
-    BLLContextSettings<PersistentDomainObjectBase> settings)
+    BLLContextSettings<PersistentDomainObjectBase> settings,
+    ISecurityAccessorResolver securityAccessorResolver)
     : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid,
         ISampleSystemBLLFactoryContainer>(
         serviceProvider,
@@ -41,6 +43,8 @@ public partial class SampleSystemBLLContext(
         fetchService)
 {
     public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; } = securityService;
+
+    public ISecurityAccessorResolver SecurityAccessorResolver { get; } = securityAccessorResolver;
 
     public override ISampleSystemBLLFactoryContainer Logics { get; } = logics;
 

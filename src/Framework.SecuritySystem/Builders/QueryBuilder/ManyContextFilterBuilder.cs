@@ -9,7 +9,8 @@ namespace Framework.SecuritySystem.Builders.QueryBuilder;
 public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
     IPermissionSystem<TPermission> permissionSystem,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-    SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath)
+    SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath,
+    SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
     : SecurityFilterBuilder<TPermission, TDomainObject>
     where TSecurityContext : class, ISecurityContext
 {
@@ -18,7 +19,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
     {
         var grandAccessExpr = permissionSystem.GetGrandAccessExpr<TSecurityContext>();
 
-        var getIdents = permissionSystem.GetPermissionRestrictionsExpr<TSecurityContext>();
+        var getIdents = permissionSystem.GetPermissionRestrictionsExpr(restrictionFilterInfo);
 
         var expander =
             (IHierarchicalObjectQueryableExpander<Guid>)hierarchicalObjectExpanderFactory.Create(
@@ -49,7 +50,7 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
 
                                    grandAccessExpr.Eval(permission)
 
-                                   || securityPath.SecurityPath.Eval(domainObject)
+                                   || securityPath.Expression.Eval(domainObject)
                                           .Any(item => expandExpressionQ.Eval(permission).Contains(item.Id));
                     }
                 }
@@ -72,9 +73,9 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
 
                                    grandAccessExpr.Eval(permission)
 
-                                   || !securityPath.SecurityPath.Eval(domainObject).Any()
+                                   || !securityPath.Expression.Eval(domainObject).Any()
 
-                                   || securityPath.SecurityPath.Eval(domainObject).Any(item => getIdents.Eval(permission).Contains(item.Id));
+                                   || securityPath.Expression.Eval(domainObject).Any(item => getIdents.Eval(permission).Contains(item.Id));
                     }
                 }
 

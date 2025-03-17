@@ -1,8 +1,7 @@
 ﻿using ASP;
-using FluentAssertions;
 
 using Framework.DomainDriven;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 

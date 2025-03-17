@@ -12,7 +12,7 @@ public class ConditionFilterBuilder<TPermission, TDomainObject>(
     public override Expression<Func<TDomainObject, TPermission, bool>> GetSecurityFilterExpression(
         HierarchicalExpandType expandType)
     {
-        var securityFilter = securityPath.SecurityFilter;
+        var securityFilter = securityPath.FilterExpression;
 
         return (domainObject, _) => securityFilter.Eval(domainObject);
     }

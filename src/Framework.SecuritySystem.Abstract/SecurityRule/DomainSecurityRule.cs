@@ -80,7 +80,8 @@ public abstract record DomainSecurityRule : SecurityRule
 
         public HierarchicalExpandType GetSafeExpandType () => this.CustomExpandType ?? HierarchicalExpandType.Children;
 
-
+        public IEnumerable<SecurityContextRestrictionFilterInfo> GetSafeSecurityContextRestrictionFilters() =>
+            (this.CustomRestriction?.GetSecurityContextRestrictionFilters()).EmptyIfNull();
 
         public bool EqualsCustoms(RoleBaseSecurityRule other)
         {

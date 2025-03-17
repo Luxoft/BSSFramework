@@ -1030,6 +1030,8 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
+        private bool _allowedForFilterRole;
+        
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO> _businessUnitEmployeeRoles;
         
         private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnitForRent;
@@ -1205,6 +1207,19 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool AllowedForFilterRole
+        {
+            get
+            {
+                return this._allowedForFilterRole;
+            }
+            set
+            {
+                this._allowedForFilterRole = value;
             }
         }
         
@@ -1731,6 +1746,8 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
+        private bool _allowedForFilterRole;
+        
         private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
         
         private string _businessUnitTypeName;
@@ -1862,6 +1879,19 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool AllowedForFilterRole
+        {
+            get
+            {
+                return this._allowedForFilterRole;
+            }
+            set
+            {
+                this._allowedForFilterRole = value;
             }
         }
         

@@ -41,7 +41,7 @@ public partial class Employee :
 
     private readonly ICollection<EmployeeAndEmployeeSpecializationLink> specializations = new List<EmployeeAndEmployeeSpecializationLink>();
 
-    private BusinessUnit coreBusinessUnit;
+    private BusinessUnit? coreBusinessUnit;
     private HRDepartment hRDepartment;
     private EmployeePosition position;
     private Employee ppm;
@@ -303,7 +303,7 @@ public partial class Employee :
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual BusinessUnit CoreBusinessUnit
+    public virtual BusinessUnit? CoreBusinessUnit
     {
         get { return this.coreBusinessUnit; }
         set { this.coreBusinessUnit = value; }

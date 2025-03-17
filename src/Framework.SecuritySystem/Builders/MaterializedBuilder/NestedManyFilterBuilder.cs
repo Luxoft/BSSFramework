@@ -6,9 +6,10 @@ namespace Framework.SecuritySystem.Builders.MaterializedBuilder;
 
 public class NestedManyFilterBuilder<TDomainObject, TNestedObject>(
     SecurityFilterBuilderFactory<TNestedObject> nestedBuilderFactory,
-    SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath) : SecurityFilterBuilder<TDomainObject>
+    SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath,
+    IReadOnlyList<SecurityContextRestrictionFilterInfo> restrictionFilterInfoList) : SecurityFilterBuilder<TDomainObject>
 {
-    private SecurityFilterBuilder<TNestedObject> NestedBuilder { get; } = nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath);
+    private SecurityFilterBuilder<TNestedObject> NestedBuilder { get; } = nestedBuilderFactory.CreateBuilder(securityPath.NestedSecurityPath, restrictionFilterInfoList);
 
     public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<Guid>> permission)
     {
@@ -16,13 +17,13 @@ public class NestedManyFilterBuilder<TDomainObject, TNestedObject>(
 
         var nestedCollectionFilterExpression = nestedFilterExpression.ToCollectionFilter();
 
-        var mainCondition = securityPath.NestedObjectsPath.Select(v => nestedCollectionFilterExpression.Eval(v).Any()).InlineEval();
+        var mainCondition = securityPath.NestedExpression.Select(v => nestedCollectionFilterExpression.Eval(v).Any()).InlineEval();
 
         switch (securityPath.Mode)
         {
             case ManySecurityPathMode.Any:
             {
-                var emptyCondition = securityPath.NestedObjectsPath.Select(v => !v.Any());
+                var emptyCondition = securityPath.NestedExpression.Select(v => !v.Any());
 
                 return emptyCondition.BuildOr(mainCondition);
             }

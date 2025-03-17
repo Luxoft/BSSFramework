@@ -70,14 +70,6 @@ public static class DictionaryExtensions
         return source.GetValueOrDefault(key, () => { throw getKeyNotFoundError(); });
     }
 
-    public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> source, TKey key, TValue defaultValue)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (defaultValue == null) throw new ArgumentNullException(nameof(defaultValue));
-
-        return source.GetValueOrDefault(key, () => defaultValue);
-    }
-
     public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> source, TKey key, Func<TValue> getDefaultValueFunc)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

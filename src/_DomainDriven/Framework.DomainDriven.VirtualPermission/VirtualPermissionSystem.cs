@@ -34,9 +34,9 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
         where TSecurityContext : class, ISecurityContext =>
         this.GetManyGrandAccessExpr<TSecurityContext>().BuildAnd();
 
-    public Expression<Func<TPermission, bool>> GetContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
+    public Expression<Func<TPermission, bool>> GetContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents, SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
         where TSecurityContext : class, ISecurityContext =>
-        this.GetManyContainsIdentsExpr<TSecurityContext>(idents).BuildOr();
+        this.GetManyContainsIdentsExpr(idents, restrictionFilterInfo).BuildOr();
 
     public IPermissionSource<TPermission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
@@ -79,19 +79,38 @@ public class VirtualPermissionSystem<TPrincipal, TPermission>(
         }
     }
 
-    private IEnumerable<Expression<Func<TPermission, bool>>> GetManyContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents)
+    private IEnumerable<Expression<Func<TPermission, bool>>> GetManyContainsIdentsExpr<TSecurityContext>(IEnumerable<Guid> idents, SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
         where TSecurityContext : ISecurityContext
     {
         foreach (var restrictionPath in bindingInfo.RestrictionPaths)
         {
             if (restrictionPath is Expression<Func<TPermission, TSecurityContext>> singlePath)
             {
-                yield return singlePath.Select(
-                    securityContext => idents.Contains(securityContext.Id));
+                if (restrictionFilterInfo == null)
+                {
+                    yield return singlePath.Select(securityContext => idents.Contains(securityContext.Id));
+                }
+                else
+                {
+                    var securityContextFilter = restrictionFilterInfo.GetPureFilter(serviceProvider)
+                                                                     .BuildAnd(securityContext => idents.Contains(securityContext.Id));
+
+                    yield return singlePath.Select(securityContextFilter);
+                }
             }
             else if (restrictionPath is Expression<Func<TPermission, IEnumerable<TSecurityContext>>> manyPath)
             {
-                yield return manyPath.Select(securityContexts => securityContexts.Any(securityContext => idents.Contains(securityContext.Id)));
+                if (restrictionFilterInfo == null)
+                {
+                    yield return manyPath.Select(securityContexts => securityContexts.Any(securityContext => idents.Contains(securityContext.Id)));
+                }
+                else
+                {
+                    var securityContextFilter = restrictionFilterInfo.GetPureFilter(serviceProvider).ToEnumerableAny()
+                                                                     .BuildAnd(securityContexts => securityContexts.Any(securityContext => idents.Contains(securityContext.Id)));
+
+                    yield return manyPath.Select(securityContextFilter);
+                }
             }
         }
     }

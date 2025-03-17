@@ -35,6 +35,12 @@ public class SampleSystemTestPermission : TestPermissionBuilder
         set => this.SetSingleIdentity(typeof(BusinessUnit), v => v.Id, value);
     }
 
+    public IEnumerable<BusinessUnitIdentityDTO> BusinessUnits
+    {
+        get => this.Restrictions[typeof(BusinessUnit)].Select(v => new BusinessUnitIdentityDTO(v));
+        set => this.Restrictions[typeof(BusinessUnit)] = value.Select(v => v.Id).ToList();
+    }
+
     public LocationIdentityDTO? Location
     {
         get => this.GetSingleIdentity(typeof(Location), v => new LocationIdentityDTO(v));

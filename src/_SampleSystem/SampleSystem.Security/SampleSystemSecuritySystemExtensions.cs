@@ -57,6 +57,10 @@ public static class SampleSystemSecuritySystemExtensions
                    })
 
                .AddSecurityRole(
+                   SampleSystemSecurityRole.DefaultRole,
+                   new SecurityRoleInfo(new Guid("{5D93F3E7-6750-47D2-A791-D285305D5E94}")))
+
+               .AddSecurityRole(
                    SampleSystemSecurityRole.SearchTestBusinessRole,
                    new SecurityRoleInfo(new Guid("{05271C71-7E6B-430A-9EC7-F838845D0F33}")))
 

@@ -1,7 +1,4 @@
 ﻿using Framework.DomainDriven;
-using Framework.SecuritySystem.SecurityAccessor;
-
-using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
@@ -48,8 +45,6 @@ public class VirtualPermissionTests : TestBase
                              return (userLogin, buId, employeeId);
                          })
                      .ToArray();
-
-
     }
 
     [TestMethod]
@@ -90,9 +85,7 @@ public class VirtualPermissionTests : TestBase
                     var accessorData = ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
                                           .GetAccessorData(bu);
 
-                    return ctx.ServiceProvider
-                              .GetRequiredService<ISecurityAccessorResolver>()
-                              .Resolve(accessorData);
+                    return ctx.SecurityAccessorResolver.Resolve(accessorData);
                 });
 
         // Assert

@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-
-using Microsoft.SqlServer.Management.Smo;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.SqlServer.Management.Smo;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.DbGenerate;

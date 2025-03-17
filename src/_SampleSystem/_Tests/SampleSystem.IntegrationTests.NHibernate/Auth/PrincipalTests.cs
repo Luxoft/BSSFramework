@@ -1,8 +1,4 @@
-﻿using FluentAssertions;
-
-using Framework.Authorization.Generated.DTO;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Framework.Authorization.Generated.DTO;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;

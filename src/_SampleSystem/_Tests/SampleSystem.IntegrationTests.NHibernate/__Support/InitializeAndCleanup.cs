@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Automation;
+﻿using Automation;
 using Automation.ServiceEnvironment;
 
 using Bss.Platform.Events.Abstractions;

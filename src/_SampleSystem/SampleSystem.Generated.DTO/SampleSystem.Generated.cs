@@ -8679,6 +8679,8 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
+        private bool _allowedForFilterRole;
+        
         private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
         
         private string _businessUnitTypeName;
@@ -8732,6 +8734,19 @@ namespace SampleSystem.Generated.DTO
         public BusinessUnitSimpleDTO(string id)
         {
             this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool AllowedForFilterRole
+        {
+            get
+            {
+                return this._allowedForFilterRole;
+            }
+            set
+            {
+                this._allowedForFilterRole = value;
+            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -9162,6 +9177,8 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitStrictDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnit, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnit>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>, Framework.Persistent.IVersionObject<long>
     {
         
+        private bool _allowedForFilterRole;
+        
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleStrictDTO> _businessUnitEmployeeRoles = new System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleStrictDTO>();
         
         private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnitForRent;
@@ -9276,6 +9293,19 @@ namespace SampleSystem.Generated.DTO
         private BusinessUnitStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
                 this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
         {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool AllowedForFilterRole
+        {
+            get
+            {
+                return this._allowedForFilterRole;
+            }
+            set
+            {
+                this._allowedForFilterRole = value;
+            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]

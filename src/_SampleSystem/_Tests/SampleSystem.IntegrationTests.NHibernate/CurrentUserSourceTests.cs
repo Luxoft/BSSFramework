@@ -1,9 +1,7 @@
 ﻿using Automation.Utils;
-using FluentAssertions;
 
 using Framework.DomainDriven;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Framework.SecuritySystem.UserSource;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
@@ -43,6 +41,6 @@ public class CurrentUserSourceTests : TestBase
                          ctx => ctx.Authorization.CurrentUser.Id);
 
         // Assert
-        action.Should().Throw<Exception>().And.Message.Should().Be($"{nameof(Employee)} \"{randomName}\" not found");
+        action.Should().Throw<UserSourceException>().And.Message.Should().Be($"{nameof(Employee)} \"{randomName}\" not found");
     }
 }

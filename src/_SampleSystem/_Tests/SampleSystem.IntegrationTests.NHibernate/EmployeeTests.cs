@@ -1,9 +1,6 @@
 ﻿using System.Data.SqlTypes;
 
 using Automation.Utils.DatabaseUtils;
-using FluentAssertions;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

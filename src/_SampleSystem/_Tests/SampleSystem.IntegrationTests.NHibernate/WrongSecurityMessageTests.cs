@@ -1,11 +1,7 @@
 ﻿using Automation.Utils;
 
-using FluentAssertions;
-
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

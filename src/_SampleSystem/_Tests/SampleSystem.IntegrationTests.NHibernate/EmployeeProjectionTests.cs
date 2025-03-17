@@ -1,8 +1,4 @@
-﻿using FluentAssertions;
-
-using Framework.Core;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Framework.Core;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;

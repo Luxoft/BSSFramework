@@ -277,6 +277,7 @@ public partial class DataHelper
             bool isProduction = true,
             int newBusinessStatusLeft = 0,
             int rank = 1,
+            bool allowedForFilterRole = false,
             bool active = true)
     {
         name = name ?? TextRandomizer.UniqueString("BusinessUnit");
@@ -315,7 +316,8 @@ public partial class DataHelper
                                                           Rank = rank,
                                                           IsProduction = isProduction,
                                                           BusinessUnitType = context.Logics.BusinessUnitType.GetById(typeId),
-                                                          Period = period.Value
+                                                          Period = period.Value,
+                                                          AllowedForFilterRole = allowedForFilterRole
                                                   };
 
                                           context.Logics.BusinessUnit.Insert(businessUnit, this.GetGuid(id));

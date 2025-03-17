@@ -1,6 +1,5 @@
 ﻿using Automation.ServiceEnvironment;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;

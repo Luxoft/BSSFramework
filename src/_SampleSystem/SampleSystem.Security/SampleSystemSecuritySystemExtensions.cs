@@ -69,6 +69,13 @@ public static class SampleSystemSecuritySystemExtensions
                    })
 
                .AddSecurityRole(
+                   SampleSystemSecurityRole.WithRestrictionFilterRole,
+                   new SecurityRoleInfo(new Guid("{00645BD7-2D47-40E4-B542-E9A33EC06CB4}"))
+                   {
+                       Restriction = SecurityPathRestriction.Create<BusinessUnit>(required: true, filter: bu => bu.AllowedForFilterRole)
+                   })
+
+               .AddSecurityRole(
                    SampleSystemSecurityRole.RequiredRestrictionRole,
                    new SecurityRoleInfo(new Guid("{D2E95D39-D6E7-41E1-81B0-2EB0E50110FD}"))
                    {

@@ -18,6 +18,8 @@ public static class SampleSystemSecurityRole
 
     public static SecurityRole RestrictionRole { get; } = new(nameof(RestrictionRole));
 
+    public static SecurityRole WithRestrictionFilterRole { get; } = new(nameof(WithRestrictionFilterRole));
+
     public static SecurityRole RequiredRestrictionRole { get; } = new(nameof(RequiredRestrictionRole));
 
     public static SecurityRole TestVirtualRole { get; } = new(nameof(TestVirtualRole));

@@ -1,10 +1,6 @@
-﻿using FluentAssertions;
-
-using Framework.Authorization.Notification;
+﻿using Framework.Authorization.Notification;
 using Framework.Core;
 using Framework.DomainDriven;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

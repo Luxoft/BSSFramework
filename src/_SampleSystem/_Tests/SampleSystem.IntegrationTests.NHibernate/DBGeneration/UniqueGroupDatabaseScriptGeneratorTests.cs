@@ -1,9 +1,6 @@
-﻿using FluentAssertions;
-
-using Framework.DomainDriven.DBGenerator;
+﻿using Framework.DomainDriven.DBGenerator;
 
 using Microsoft.SqlServer.Management.Smo;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.DbGenerate;
 using SampleSystem.IntegrationTests.__Support.TestData;

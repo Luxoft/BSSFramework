@@ -1,10 +1,5 @@
-﻿using FluentAssertions;
-
-using Framework.Validation;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using SampleSystem.IntegrationTests.__Support.TestData;
+﻿using SampleSystem.IntegrationTests.__Support.TestData;
+using ValidationException = Framework.Validation.ValidationException;
 
 namespace SampleSystem.IntegrationTests;
 

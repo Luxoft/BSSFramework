@@ -1,11 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization;
 
-using FluentAssertions;
-
 using Framework.Core;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SampleSystem.IntegrationTests;
 

@@ -64,7 +64,7 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
 
                     return restrictionFilterInfo == null || this.IsAllowed(permissionRestriction.SecurityContextId, restrictionFilterInfo);
                 })
-            .WithMessage(permissionRestriction => $"SecurityContext: {permissionRestriction.SecurityContextId} denied by filter.");
+            .WithMessage(permissionRestriction => $"SecurityContext: '{permissionRestriction.SecurityContextId}' denied by filter.");
     }
 
     private SecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)

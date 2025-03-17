@@ -1,8 +1,4 @@
-﻿using FluentAssertions;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using SampleSystem.Domain;
+﻿using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.DomainDriven;

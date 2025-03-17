@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SampleSystem.Generated.DTO;
+﻿using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.WebApiCore.Controllers.MainQuery;

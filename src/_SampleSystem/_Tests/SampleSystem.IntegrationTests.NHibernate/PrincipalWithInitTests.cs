@@ -1,13 +1,7 @@
-﻿using FluentAssertions;
-
-using FluentValidation;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;

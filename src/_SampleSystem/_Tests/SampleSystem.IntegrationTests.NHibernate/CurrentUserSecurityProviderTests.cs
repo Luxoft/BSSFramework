@@ -1,12 +1,9 @@
-﻿using FluentAssertions;
-
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

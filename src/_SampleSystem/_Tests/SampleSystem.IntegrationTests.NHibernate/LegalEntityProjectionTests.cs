@@ -1,11 +1,7 @@
 ﻿using Automation.ServiceEnvironment;
 
-using FluentAssertions;
-
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;

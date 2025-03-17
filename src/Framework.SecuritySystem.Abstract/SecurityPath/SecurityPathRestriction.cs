@@ -94,8 +94,18 @@ public record SecurityPathRestriction(
 
         this with { ConditionFactoryTypes = this.ConditionFactoryTypes.Concat([conditionFactoryType]).ToArray() };
 
-    public static SecurityPathRestriction Create<TSecurityContext>(bool required = false, string? key = null)
-        where TSecurityContext : ISecurityContext => Default.Add<TSecurityContext>(required, key);
+    public static SecurityPathRestriction Create<TSecurityContext>(
+        bool required = false,
+        string? key = null,
+        Expression<Func<TSecurityContext, bool>>? filter = null)
+        where TSecurityContext : ISecurityContext => Default.Add(required, key, filter);
+
+    public static SecurityPathRestriction Create<TSecurityContext, TFilterService>(
+        bool required = false,
+        string? key = null,
+        Expression<Func<TFilterService, Expression<Func<TSecurityContext, bool>>>>? filter = null)
+        where TSecurityContext : ISecurityContext
+        where TFilterService : notnull => Default.Add(required, key, filter);
 
     public static SecurityPathRestriction Create<TDomainObject>(Expression<Func<TDomainObject, bool>> condition) =>
         Default.AddRelativeCondition(condition);

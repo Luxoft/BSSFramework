@@ -1,11 +1,7 @@
 ﻿using System.Text.Json;
 
-using FluentAssertions;
-
 using Framework.Core;
 using Framework.DomainDriven.WebApiNetCore.JsonConverter;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 

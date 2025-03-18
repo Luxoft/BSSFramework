@@ -12,45 +12,37 @@ public class ManyContextFilterBuilder<TDomainObject, TSecurityContext>(
 {
     protected override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(IEnumerable<Guid> securityIdents)
     {
-        switch (securityPath.Mode)
+        if (securityPath.Required)
         {
-            case ManySecurityPathMode.AnyStrictly:
+            if (securityPath.SecurityPathQ != null)
             {
-                if (securityPath.SecurityPathQ != null)
-                {
-                    return from securityObjects in securityPath.SecurityPathQ
+                return from securityObjects in securityPath.SecurityPathQ
 
-                           select securityObjects.Any(item => securityIdents.Contains(item.Id));
-                }
-                else
-                {
-                    return from securityObjects in securityPath.Expression
-
-                           select securityObjects.Any(item => securityIdents.Contains(item.Id));
-                }
+                       select securityObjects.Any(item => securityIdents.Contains(item.Id));
             }
-
-            case ManySecurityPathMode.Any:
+            else
             {
-                if (securityPath.SecurityPathQ != null)
-                {
-                    return from securityObjects in securityPath.SecurityPathQ
+                return from securityObjects in securityPath.Expression
 
-                           select !securityObjects.Any()
-                                  || securityObjects.Any(item => securityIdents.Contains(item.Id));
-                }
-                else
-                {
-                    return from securityObjects in securityPath.Expression
-
-                           select !securityObjects.Any()
-                                  || securityObjects.Any(item => securityIdents.Contains(item.Id));
-                }
+                       select securityObjects.Any(item => securityIdents.Contains(item.Id));
             }
+        }
+        else
+        {
+            if (securityPath.SecurityPathQ != null)
+            {
+                return from securityObjects in securityPath.SecurityPathQ
 
-            default:
+                       select !securityObjects.Any()
+                              || securityObjects.Any(item => securityIdents.Contains(item.Id));
+            }
+            else
+            {
+                return from securityObjects in securityPath.Expression
 
-                throw new ArgumentOutOfRangeException(nameof(securityPath));
+                       select !securityObjects.Any()
+                              || securityObjects.Any(item => securityIdents.Contains(item.Id));
+            }
         }
     }
 }

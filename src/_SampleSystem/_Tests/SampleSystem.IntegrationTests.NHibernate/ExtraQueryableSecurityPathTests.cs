@@ -66,12 +66,11 @@ public class ExtraQueryableSecurityPathTests : TestBase
             {
                 var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable();
 
-                var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, SingleSecurityMode.Strictly)
-                                                              .And(e => e.Location, SingleSecurityMode.Strictly)
+                var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, true)
+                                                              .And(e => e.Location, true)
                                                               .And(
                                                                   e => extraQueryableSecurity.Where(
-                                                                      l => l == e.Location && e.Location.Id == this.loc1Ident.Id),
-                                                                  ManySecurityPathMode.AnyStrictly);
+                                                                      l => l == e.Location && e.Location.Id == this.loc1Ident.Id), true);
 
                 return context.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>().Create(
                     SampleSystemSecurityOperation.EmployeeView,

@@ -9,11 +9,9 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath,
     SecurityContextRestriction<TSecurityContext>? securityContextRestriction)
-    : ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(permissionSystem, hierarchicalObjectExpanderFactory, securityContextRestriction)
+    : ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(permissionSystem, hierarchicalObjectExpanderFactory, securityPath, securityContextRestriction)
     where TSecurityContext : class, ISecurityContext
 {
-    protected override bool AllowEmpty { get; } = securityPath.Mode == SingleSecurityMode.AllowNull;
-
     protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject)
     {
         var securityObject = securityPath.Expression.Eval(domainObject, LambdaCompileCache);

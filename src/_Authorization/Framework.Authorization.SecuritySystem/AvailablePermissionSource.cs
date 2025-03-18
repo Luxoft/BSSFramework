@@ -21,13 +21,15 @@ public class AvailablePermissionSource(
     {
         var restrictionFiltersRequest =
 
-            from securityContextRestriction in (securityRule.CustomRestriction?.SecurityContextRestrictions).EmptyIfNull()
+            from securityContextRestriction in securityRule.GetSafeSecurityContextRestrictions()
 
             where securityContextRestriction.RawFilter != null
 
-            let filterData = this.GetRestrictionFilter(securityContextRestriction.RawFilter)
+            let securityContextType = securityContextInfoSource.GetSecurityContextInfo(securityContextRestriction.SecurityContextType)
 
-            select (filterData.Key, (!securityContextRestriction.Required, filterData.Value));
+            let filter = this.GetRestrictionFilter(securityContextRestriction.RawFilter)
+
+            select (securityContextType.Id, (!securityContextRestriction.Required, filter));
 
 
         return new AvailablePermissionFilter(timeProvider.GetToday())
@@ -38,15 +40,11 @@ public class AvailablePermissionSource(
                };
     }
 
-    private KeyValuePair<Guid, Expression<Func<Guid, bool>>> GetRestrictionFilter(SecurityContextRestrictionFilterInfo restrictionFilterInfo)
+    private Expression<Func<Guid, bool>> GetRestrictionFilter(SecurityContextRestrictionFilterInfo restrictionFilterInfo)
     {
-        var securityContextTypeId = securityContextInfoSource.GetSecurityContextInfo(restrictionFilterInfo.SecurityContextType).Id;
-
-        var filterExpr = new Func<SecurityContextRestrictionFilterInfo<ISecurityContext>, Expression<Func<Guid, bool>>>(this.GetRestrictionFilterExpression)
-                         .CreateGenericMethod(restrictionFilterInfo.SecurityContextType)
-                         .Invoke<Expression<Func<Guid, bool>>>(this, restrictionFilterInfo);
-
-        return new(securityContextTypeId, filterExpr);
+        return new Func<SecurityContextRestrictionFilterInfo<ISecurityContext>, Expression<Func<Guid, bool>>>(this.GetRestrictionFilterExpression)
+               .CreateGenericMethod(restrictionFilterInfo.SecurityContextType)
+               .Invoke<Expression<Func<Guid, bool>>>(this, restrictionFilterInfo);
     }
 
     private Expression<Func<Guid, bool>> GetRestrictionFilterExpression<TSecurityContext>(

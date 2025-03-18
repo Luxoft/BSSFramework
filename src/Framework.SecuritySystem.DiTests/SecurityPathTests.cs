@@ -113,7 +113,7 @@ public class SecurityPathTests : TestBase
 
         var testSecurityPath = SecurityPath<Employee>
                                .Create(employee => employee.Location)
-                               .And(employee => employee.BusinessUnit, SingleSecurityMode.Strictly, key: "testKey");
+                               .And(employee => employee.BusinessUnit, true, key: "testKey");
 
         var securityProvider = scope.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>()
                                     .Create(ExampleSecurityRole.TestKeyedRole, testSecurityPath);
@@ -138,7 +138,7 @@ public class SecurityPathTests : TestBase
 
         var testSecurityPath = SecurityPath<Employee>
                                .Create(employee => employee.Location)
-                               .And(employee => employee.BusinessUnit, SingleSecurityMode.AllowNull, key: "testKey");
+                               .And(employee => employee.BusinessUnit, false, key: "testKey");
 
         var securityProvider = scope.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>()
                                     .Create(ExampleSecurityRole.TestKeyedRole, testSecurityPath);

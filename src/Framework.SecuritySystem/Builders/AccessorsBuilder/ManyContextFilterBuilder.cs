@@ -9,11 +9,9 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
     SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath,
     SecurityContextRestriction<TSecurityContext>? securityContextRestriction)
-    : ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(permissionSystem, hierarchicalObjectExpanderFactory, securityContextRestriction)
+    : ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(permissionSystem, hierarchicalObjectExpanderFactory, securityPath, securityContextRestriction)
     where TSecurityContext : class, ISecurityContext
 {
-    protected override bool AllowEmpty { get; } = securityPath.Mode == ManySecurityPathMode.Any;
-
     protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject) =>
         securityPath.Expression.Eval(domainObject, LambdaCompileCache).EmptyIfNull();
 

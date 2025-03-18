@@ -35,57 +35,49 @@ public class ManyContextFilterBuilder<TPermission, TDomainObject, TSecurityConte
 
                                 select expandExpression.Eval(idents);
 
-        switch (securityPath.Mode)
+        if (securityPath.Required)
         {
-            case ManySecurityPathMode.AnyStrictly:
-                {
-                    if (securityPath.SecurityPathQ != null)
-                    {
-                        return (domainObject, permission) =>
+            if (securityPath.SecurityPathQ != null)
+            {
+                return (domainObject, permission) =>
 
-                                   grandAccessExpr.Eval(permission)
+                           grandAccessExpr.Eval(permission)
 
-                                   || securityPath.SecurityPathQ.Eval(domainObject)
+                           || securityPath.SecurityPathQ.Eval(domainObject)
                                           .Any(item => expandExpressionQ.Eval(permission).Contains(item.Id));
-                    }
-                    else
-                    {
-                        return (domainObject, permission) =>
+            }
+            else
+            {
+                return (domainObject, permission) =>
 
-                                   grandAccessExpr.Eval(permission)
+                           grandAccessExpr.Eval(permission)
 
-                                   || securityPath.Expression.Eval(domainObject)
+                           || securityPath.Expression.Eval(domainObject)
                                           .Any(item => expandExpressionQ.Eval(permission).Contains(item.Id));
-                    }
-                }
+            }
+        }
+        else
+        {
+            if (securityPath.SecurityPathQ != null)
+            {
+                return (domainObject, permission) =>
 
-            case ManySecurityPathMode.Any:
-                {
-                    if (securityPath.SecurityPathQ != null)
-                    {
-                        return (domainObject, permission) =>
+                           grandAccessExpr.Eval(permission)
 
-                                   grandAccessExpr.Eval(permission)
+                           || !securityPath.SecurityPathQ.Eval(domainObject).Any()
 
-                                   || !securityPath.SecurityPathQ.Eval(domainObject).Any()
+                           || securityPath.SecurityPathQ.Eval(domainObject).Any(item => getIdents.Eval(permission).Contains(item.Id));
+            }
+            else
+            {
+                return (domainObject, permission) =>
 
-                                   || securityPath.SecurityPathQ.Eval(domainObject).Any(item => getIdents.Eval(permission).Contains(item.Id));
-                    }
-                    else
-                    {
-                        return (domainObject, permission) =>
+                           grandAccessExpr.Eval(permission)
 
-                                   grandAccessExpr.Eval(permission)
+                           || !securityPath.Expression.Eval(domainObject).Any()
 
-                                   || !securityPath.Expression.Eval(domainObject).Any()
-
-                                   || securityPath.Expression.Eval(domainObject).Any(item => getIdents.Eval(permission).Contains(item.Id));
-                    }
-                }
-
-            default:
-
-                throw new ArgumentOutOfRangeException("securityPath.Mode");
+                           || securityPath.Expression.Eval(domainObject).Any(item => getIdents.Eval(permission).Contains(item.Id));
+            }
         }
     }
 }

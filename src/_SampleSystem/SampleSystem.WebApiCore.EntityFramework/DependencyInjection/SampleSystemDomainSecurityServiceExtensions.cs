@@ -21,6 +21,6 @@ public static class SampleSystemDomainSecurityServiceExtensions
                       SampleSystemSecurityRole.SeManager.Or(DomainSecurityRule.CurrentUser),
                       SecurityPath<Employee>.Create(
                           employee => employee.CoreBusinessUnit,
-                          SingleSecurityMode.Strictly)));
+                          true)));
     }
 }

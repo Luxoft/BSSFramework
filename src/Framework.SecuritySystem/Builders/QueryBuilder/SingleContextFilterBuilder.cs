@@ -33,29 +33,23 @@ public class SingleContextFilterBuilder<TPermission, TDomainObject, TSecurityCon
 
                                 select expandExpression.Eval(idents);
 
-        switch (securityPath.Mode)
+        if (securityPath.Required)
         {
-            case SingleSecurityMode.AllowNull:
+            return (domainObject, permission) =>
 
-                return (domainObject, permission) =>
+                       grandAccessExpr.Eval(permission)
 
-                           grandAccessExpr.Eval(permission)
+                       || securityPath.Expression.Eval(domainObject) == null
 
-                           || securityPath.Expression.Eval(domainObject) == null
+                       || expandExpressionQ.Eval(permission).Contains(securityPath.Expression.Eval(domainObject).Id);
+        }
+        else
+        {
+            return (domainObject, permission) =>
 
-                           || expandExpressionQ.Eval(permission).Contains(securityPath.Expression.Eval(domainObject).Id);
+                       grandAccessExpr.Eval(permission)
 
-            case SingleSecurityMode.Strictly:
-
-                return (domainObject, permission) =>
-
-                           grandAccessExpr.Eval(permission)
-
-                           || expandExpressionQ.Eval(permission).Contains(securityPath.Expression.Eval(domainObject).Id);
-
-            default:
-
-                throw new ArgumentOutOfRangeException(securityPath.Mode.ToString());
+                       || expandExpressionQ.Eval(permission).Contains(securityPath.Expression.Eval(domainObject).Id);
         }
     }
 }

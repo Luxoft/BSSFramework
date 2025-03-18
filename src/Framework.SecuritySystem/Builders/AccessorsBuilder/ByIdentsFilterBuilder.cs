@@ -9,11 +9,10 @@ namespace Framework.SecuritySystem.Builders.AccessorsBuilder;
 public abstract class ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurityContext>(
     IPermissionSystem<TPermission> permissionSystem,
     IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+    IContextSecurityPath contextSecurityPath,
     SecurityContextRestriction<TSecurityContext>? securityContextRestriction) : AccessorsFilterBuilder<TPermission, TDomainObject>
     where TSecurityContext : class, ISecurityContext
 {
-    protected abstract bool AllowEmpty { get; }
-
     public override Expression<Func<TPermission, bool>> GetAccessorsFilter(
         TDomainObject domainObject,
         HierarchicalExpandType expandType)
@@ -36,13 +35,13 @@ public abstract class ByIdentsFilterBuilder<TPermission, TDomainObject, TSecurit
         }
         else
         {
-            if (this.AllowEmpty)
+            if (contextSecurityPath.Required)
             {
-                return _ => true;
+                return grandAccessExpr;
             }
             else
             {
-                return grandAccessExpr;
+                return _ => true;
             }
         }
     }

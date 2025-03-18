@@ -12,23 +12,17 @@ public class SingleContextFilterBuilder<TDomainObject, TSecurityContext>(
 {
     protected override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(IEnumerable<Guid> securityIdents)
     {
-        switch (securityPath.Mode)
+        if (securityPath.Required)
         {
-            case SingleSecurityMode.AllowNull:
+            return from securityObject in securityPath.Expression
 
-                return from securityObject in securityPath.Expression
+                   select securityIdents.Contains(securityObject.Id);
+        }
+        else
+        {
+            return from securityObject in securityPath.Expression
 
-                       select securityObject == null || securityIdents.Contains(securityObject.Id);
-
-            case SingleSecurityMode.Strictly:
-
-                return from securityObject in securityPath.Expression
-
-                       select securityIdents.Contains(securityObject.Id);
-
-            default:
-
-                throw new ArgumentOutOfRangeException(securityPath.Mode.ToString());
+                   select securityObject == null || securityIdents.Contains(securityObject.Id);
         }
     }
 }

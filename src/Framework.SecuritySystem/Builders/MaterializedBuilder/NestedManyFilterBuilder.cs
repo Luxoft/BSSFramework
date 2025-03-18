@@ -19,22 +19,15 @@ public class NestedManyFilterBuilder<TDomainObject, TNestedObject>(
 
         var mainCondition = securityPath.NestedExpression.Select(v => nestedCollectionFilterExpression.Eval(v).Any()).InlineEval();
 
-        switch (securityPath.Mode)
+        if (securityPath.Required)
         {
-            case ManySecurityPathMode.Any:
-            {
-                var emptyCondition = securityPath.NestedExpression.Select(v => !v.Any());
+            return mainCondition;
+        }
+        else
+        {
+            var emptyCondition = securityPath.NestedExpression.Select(v => !v.Any());
 
-                return emptyCondition.BuildOr(mainCondition);
-            }
-
-            case ManySecurityPathMode.AnyStrictly:
-
-                return mainCondition;
-
-            default:
-
-                throw new ArgumentOutOfRangeException(nameof(securityPath));
+            return emptyCondition.BuildOr(mainCondition);
         }
     }
 }

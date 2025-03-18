@@ -18,23 +18,17 @@ public class NestedManyFilterBuilder<TPermission, TDomainObject, TNestedObject>(
     {
         var baseFilter = this.NestedBuilder.GetSecurityFilterExpression(expandType).ExpandConst().InlineEval();
 
-        switch (securityPath.Mode)
+        if (securityPath.Required)
         {
-            case ManySecurityPathMode.Any:
+            return (domainObject, permission) => securityPath.NestedExpression.Eval(domainObject)
+                                                             .Any(nestedObject => baseFilter.Eval(nestedObject, permission));
+        }
+        else
+        {
+            return (domainObject, permission) => !securityPath.NestedExpression.Eval(domainObject).Any()
 
-                return (domainObject, permission) => !securityPath.NestedExpression.Eval(domainObject).Any()
-
-                                                     || securityPath.NestedExpression.Eval(domainObject).Any(
-                                                         nestedObject => baseFilter.Eval(nestedObject, permission));
-
-            case ManySecurityPathMode.AnyStrictly:
-
-                return (domainObject, permission) => securityPath.NestedExpression.Eval(domainObject)
-                                                                 .Any(nestedObject => baseFilter.Eval(nestedObject, permission));
-
-            default:
-
-                throw new ArgumentOutOfRangeException("securityPath.Mode");
+                                                 || securityPath.NestedExpression.Eval(domainObject).Any(
+                                                     nestedObject => baseFilter.Eval(nestedObject, permission));
         }
     }
 }

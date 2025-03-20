@@ -23,8 +23,6 @@ using SampleSystem.ServiceEnvironment;
 using SampleSystem.ServiceEnvironment.NHibernate;
 using SampleSystem.WebApiCore.Controllers.Main;
 
-using Xunit;
-
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerClass)]
 [assembly: TestFramework("Automation.Xunit.AutomationCoreTestFramework", "Framework.AutomationCore.Xunit")]
 
@@ -51,7 +49,6 @@ public class EnvironmentInitialization : IAutomationCoreInitialization
             .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
             .RegisterControllers([typeof(EmployeeController).Assembly])
             .AddSingleton<DataHelper>()
-            .AddSingleton<AuthHelper>()
             .AddSingleton<TestDataInitializer>()
             .AddIntegrationTestServices(options => { })
             .BuildServiceProvider();

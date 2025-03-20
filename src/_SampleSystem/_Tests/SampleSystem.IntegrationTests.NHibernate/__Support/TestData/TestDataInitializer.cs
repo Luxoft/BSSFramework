@@ -1,4 +1,5 @@
-﻿using Automation.ServiceEnvironment.Services;
+﻿using Automation.ServiceEnvironment;
+using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 
 using Framework.SecuritySystem;
@@ -14,7 +15,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData;
 
 public class TestDataInitializer(
     SampleSystemInitializer mainInitializer,
-    AuthHelper authHelper,
+    RootAuthManager authManager,
     DataHelper dataHelper,
     IOptions<AutomationFrameworkSettings> settings,
     IIntegrationTestUserAuthenticationService integrationTestUserAuthenticationServices)
@@ -27,9 +28,9 @@ public class TestDataInitializer(
     {
         await mainInitializer.InitializeAsync(cancellationToken);
 
-        authHelper.AddUserToAdmin(nameof(TestDataInitializer));
-        authHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, SecurityRole.SystemIntegration);
-        authHelper.SetUserRole(DefaultConstants.INTEGRATION_BUS, SecurityRole.SystemIntegration);
+        await authManager.For(nameof(TestDataInitializer)).SetAdminRoleAsync(cancellationToken);
+        await authManager.For(DefaultConstants.NOTIFICATION_ADMIN).SetRoleAsync([SecurityRole.SystemIntegration], cancellationToken);
+        await authManager.For(DefaultConstants.INTEGRATION_BUS).SetRoleAsync([SecurityRole.SystemIntegration], cancellationToken);
 
         this.FillMainData();
 
@@ -40,13 +41,13 @@ public class TestDataInitializer(
             nameEng: new Fio { FirstName = DefaultConstants.EMPLOYEE_MY_NAME, LastName = DefaultConstants.EMPLOYEE_MY_NAME },
             login: integrationTestUserName);
 
-        authHelper.AddUserToAdmin(integrationTestUserName);
+        await authManager.For(integrationTestUserName).SetAdminRoleAsync(cancellationToken);
 
         foreach (var localAdmin in settings.Value.LocalAdmins)
         {
             dataHelper.SaveEmployee(login: localAdmin);
 
-            authHelper.AddUserToAdmin(localAdmin);
+            await authManager.For(localAdmin).SetRoleAsync([SecurityRole.Administrator], cancellationToken);
         }
     }
 

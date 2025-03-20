@@ -30,5 +30,7 @@ public static class DependencyInjection
 
                 .AddSingleton(typeof(ControllerEvaluator<>))
 
+                .AddSingleton<RootAuthManager>()
+                .AddSingleton(AdministratorsRoleList.Default)
                 .AddScoped<AuthManager>();
 }

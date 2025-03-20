@@ -40,9 +40,11 @@ public class SecurityContextRestrictionFilterTests : TestBase
         // Arrange
 
         // Act
-        var action = () => this.AuthHelper.SetUserRole(
-                         this.employee.Id,
-                         new SampleSystemTestPermission(SampleSystemSecurityRole.WithRestrictionFilterRole) { BusinessUnit = this.defaultBu });
+        var action = () => this.AuthManager.For(this.employee.Id).SetRole(
+                         new SampleSystemTestPermission(SampleSystemSecurityRole.WithRestrictionFilterRole)
+                         {
+                             BusinessUnit = this.defaultBu
+                         });
 
         // Assert
         action.Should().Throw<ValidationException>().And.Message.Should().Contain($"SecurityContext: '{this.defaultBu.Id}' denied by filter.");
@@ -54,9 +56,11 @@ public class SecurityContextRestrictionFilterTests : TestBase
         // Arrange
 
         // Act
-        var action = () => this.AuthHelper.SetUserRole(
-                         this.employee.Id,
-                         new SampleSystemTestPermission(SampleSystemSecurityRole.WithRestrictionFilterRole) { BusinessUnit = this.buWithAllowedFilter });
+        var action = () => this.AuthManager.For(this.employee.Id).SetRole(
+                         new SampleSystemTestPermission(SampleSystemSecurityRole.WithRestrictionFilterRole)
+                         {
+                             BusinessUnit = this.buWithAllowedFilter
+                         });
 
         // Assert
         action.Should().NotThrow();
@@ -67,7 +71,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
     public void CreateCustomRestrictionRule_ApplyGrandPermission_OnlyCorrectBuFounded()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(this.employee.Id, DefaultSecurityRole);
+        this.AuthManager.For(this.employee.Id).SetRole(DefaultSecurityRole);
 
         // Act
         var allowedBuList = this.Evaluate(DBSessionMode.Read, this.employee.Id,
@@ -81,7 +85,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
     public void CreateCustomRestrictionRule_ApplySingleCorrectBU_OnlyCorrectBuFounded()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(this.employee.Id, new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
+        this.AuthManager.For(this.employee.Id).SetRole(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
 
         // Act
         var allowedBuList = this.Evaluate(DBSessionMode.Read, this.employee.Id,
@@ -95,7 +99,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
     public void CreateCustomRestrictionRule_SearchAccessorsForGrandPermission_EmployeeFounded()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(this.employee.Id, DefaultSecurityRole);
+        this.AuthManager.For(this.employee.Id).SetRole(DefaultSecurityRole);
 
         // Act
         var accesors = this.Evaluate(DBSessionMode.Read, this.employee.Id,
@@ -118,7 +122,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
     public void CreateCustomRestrictionRule_SearchAccessorsForCorrectBU_EmployeeFounded()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(this.employee.Id, new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
+        this.AuthManager.For(this.employee.Id).SetRole(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
 
         // Act
         var accesors = this.Evaluate(DBSessionMode.Read, this.employee.Id,
@@ -141,7 +145,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
     public void CreateCustomRestrictionRule_SearchAccessorsForIncorrectBU_EmployeeNotFounded()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(this.employee.Id, new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
+        this.AuthManager.For(this.employee.Id).SetRole(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
 
         // Act
         var accesors = this.Evaluate(DBSessionMode.Read, this.employee.Id,

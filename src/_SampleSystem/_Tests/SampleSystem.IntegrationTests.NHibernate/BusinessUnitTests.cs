@@ -46,8 +46,7 @@ public class BusinessUnitTests : TestBase
             type: buTypeId,
             parent: luxoftBuId);
 
-        this.AuthHelper.SetUserRole(
-            EmployeeName,
+        this.AuthManager.For(EmployeeName).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.TestRole3,
                 new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
@@ -116,9 +115,8 @@ public class BusinessUnitTests : TestBase
         var parentBu = this.DataHelper.SaveBusinessUnit(parentIsNeeded: false);
         var childBu = this.DataHelper.SaveBusinessUnit(parent: parentBu);
 
-        var userId = this.AuthHelper.SetUserRole(
-            TextRandomizer.RandomString(10),
-            new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, childBu));
+        var userId = this.AuthManager.For(TextRandomizer.RandomString(10))
+                         .SetRole(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, childBu));
 
         // Act
         var result = this.Evaluate(

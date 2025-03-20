@@ -18,7 +18,7 @@ public class RestrictionRoleTests : TestBase
     public void GetRestrictionObjectsWithRestrictionRole_RestrictionApplied()
     {
         // Arrange
-        var userId = this.AuthHelper.SetUserRole(Guid.NewGuid().ToString(), SampleSystemSecurityRole.RestrictionRole);
+        var userId = this.AuthManager.For(Guid.NewGuid().ToString()).SetRole(SampleSystemSecurityRole.RestrictionRole);
 
         var testObjects = this.Evaluate(
             DBSessionMode.Write,
@@ -51,7 +51,7 @@ public class RestrictionRoleTests : TestBase
         // Arrange
 
         // Act
-        var action = () => this.AuthHelper.SetCurrentUserRole(SampleSystemSecurityRole.RestrictionRole);
+        var action = () => this.AuthManager.For().SetRole(SampleSystemSecurityRole.RestrictionRole);
 
         // Assert
         action.Should().NotThrow();
@@ -65,7 +65,7 @@ public class RestrictionRoleTests : TestBase
 
         // Act
         var action = () =>
-                         this.AuthHelper.SetCurrentUserRole(
+                         this.AuthManager.For().SetRole(
                              new SampleSystemTestPermission(
                                  SampleSystemSecurityRole.RestrictionRole,
                                  businessUnit: businessUnit));
@@ -82,7 +82,7 @@ public class RestrictionRoleTests : TestBase
 
         // Act
         var action = () =>
-                         this.AuthHelper.SetCurrentUserRole(
+                         this.AuthManager.For().SetRole(
                              new SampleSystemTestPermission(
                                  SampleSystemSecurityRole.RestrictionRole,
                                  location: location));
@@ -167,7 +167,7 @@ public class RestrictionRoleTests : TestBase
         var location = this.DataHelper.SaveLocation();
 
         // Act
-        var action = () => this.AuthHelper.SetCurrentUserRole(
+        var action = () => this.AuthManager.For().SetRole(
                          new SampleSystemTestPermission(SampleSystemSecurityRole.RequiredRestrictionRole, location: location));
 
         // Assert

@@ -42,14 +42,13 @@ public class EmployeeProjectionTests : TestBase
         this.DataHelper.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
         this.DataHelper.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
 
-        this.AuthHelper.SetUserRole(
-            ProjectionPrincipalName,
+        this.AuthManager.For(ProjectionPrincipalName).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SeManager,
                 new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
 
-        this.AuthHelper.SetUserRole(TestEmployee1Login, SampleSystemSecurityRole.TestRole1);
-        this.AuthHelper.SetUserRole(TestEmployee3Login, SampleSystemSecurityRole.TestRole2);
+        this.AuthManager.For(TestEmployee1Login).SetRole(SampleSystemSecurityRole.TestRole1);
+        this.AuthManager.For(TestEmployee3Login).SetRole(SampleSystemSecurityRole.TestRole2);
     }
 
     [TestMethod]

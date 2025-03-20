@@ -56,7 +56,6 @@ public class InitializeAndCleanup
                .RegisterControllers([typeof(EmployeeController).Assembly])
 
                .AddSingleton<DataHelper>()
-               .AddSingleton<AuthHelper>()
 
                .AddSingleton<TestDataInitializer>();
     }

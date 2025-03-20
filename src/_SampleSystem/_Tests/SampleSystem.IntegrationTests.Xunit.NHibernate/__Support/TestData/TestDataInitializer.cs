@@ -1,4 +1,5 @@
 ﻿using Automation.Extensions;
+using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
@@ -49,10 +50,11 @@ public class TestDataInitializer
     public async Task InitializeAsyncInternal(CancellationToken cancellationToken)
     {
         await this.serviceProvider.GetRequiredService<SampleSystemInitializer>().InitializeAsync(cancellationToken);
-        var authHelper = this.serviceProvider.GetRequiredService<AuthHelper>();
-        authHelper.AddUserToAdmin(nameof(TestDataInitializer));
-        authHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, SecurityRole.SystemIntegration);
-        authHelper.SetUserRole(DefaultConstants.INTEGRATION_BUS, SecurityRole.SystemIntegration);
+        var authManager = this.serviceProvider.GetRequiredService<RootAuthManager>();
+
+        await authManager.For(nameof(TestDataInitializer)).SetAdminRoleAsync(cancellationToken);
+        await authManager.For(DefaultConstants.NOTIFICATION_ADMIN).SetRoleAsync([SecurityRole.SystemIntegration], cancellationToken);
+        await authManager.For(DefaultConstants.INTEGRATION_BUS).SetRoleAsync([SecurityRole.SystemIntegration], cancellationToken);
 
         this.FillMainData();
 
@@ -64,7 +66,7 @@ public class TestDataInitializer
             nameEng: new Fio { FirstName = DefaultConstants.EMPLOYEE_MY_NAME, LastName = DefaultConstants.EMPLOYEE_MY_NAME },
             login: integrationTestUserName);
 
-        authHelper.AddUserToAdmin(integrationTestUserName);
+        await authManager.For(integrationTestUserName).SetAdminRoleAsync(cancellationToken);
     }
 
     private void FillMainData()

@@ -1,7 +1,5 @@
 ﻿using Automation.ServiceEnvironment;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using SampleSystem.BLL;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
@@ -12,8 +10,6 @@ public partial class DataHelper : RootServiceProviderContainer<ISampleSystemBLLC
             : base(rootServiceProvider)
     {
     }
-
-    public AuthHelper AuthHelper => this.RootServiceProvider.GetRequiredService<AuthHelper>();
 
     private Guid GetGuid(Guid? id)
     {

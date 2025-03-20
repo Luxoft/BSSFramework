@@ -45,8 +45,7 @@ public class ExtraQueryableSecurityPathTests : TestBase
 
         this.TestEmployee = this.DataHelper.SaveEmployee(login: "EQSP SecurityTester");
 
-        this.AuthHelper.SetUserRole(
-            this.TestEmployee.Id,
+        this.AuthManager.For(this.TestEmployee.Id).SetRole(
             new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc1Ident),
             new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc2Ident));
 

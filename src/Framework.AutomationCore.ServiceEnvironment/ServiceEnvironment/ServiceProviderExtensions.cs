@@ -75,5 +75,7 @@ public static class ServiceProviderExtensions
 
                 .AddSingleton(typeof(ControllerEvaluator<>))
 
+                .AddSingleton<RootAuthManager>()
+                .AddSingleton(AdministratorsRoleList.Default)
                 .AddScoped<AuthManager>();
 }

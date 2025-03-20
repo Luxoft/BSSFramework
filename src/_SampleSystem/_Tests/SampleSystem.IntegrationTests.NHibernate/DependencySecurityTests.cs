@@ -40,7 +40,7 @@ public class DependencySecurityTests : TestBase
 
         this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident));
+        this.AuthManager.For(TestEmployeeLogin).SetRole(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident));
 
         this.EvaluateWrite(
                            context =>

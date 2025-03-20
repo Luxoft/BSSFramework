@@ -40,11 +40,10 @@ public class PrincipalWithInitTests : TestBase
                                                           type: buTypeId,
                                                           parent: luxoftBuId);
 
-        this.AuthHelper.SetUserRole(
-            TestPrincipalName,
+        this.AuthManager.For(TestPrincipalName).SetRole(
             new SampleSystemTestPermission(
-                SampleSystemSecurityRole.TestPerformance,
-                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = this.testPeriod });
+            SampleSystemSecurityRole.TestPerformance,
+            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = this.testPeriod });
     }
 
     [TestMethod]

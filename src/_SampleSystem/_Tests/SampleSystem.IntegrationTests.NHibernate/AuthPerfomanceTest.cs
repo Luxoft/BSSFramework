@@ -39,7 +39,7 @@ public class AuthPerformanceTest : TestBase
 
         this.employeeSource = [null, this.DataHelper.SaveEmployee()];
 
-        this.AuthHelper.CreatePrincipal(PrincipalName);
+        this.AuthManager.CreatePrincipal(PrincipalName);
 
         this.GeneratePermission();
     }
@@ -76,7 +76,7 @@ public class AuthPerformanceTest : TestBase
 
                       select (TestPermission)new SampleSystemTestPermission(SampleSystemSecurityRole.TestPerformance, fbu, mbu, location, employee);
 
-        this.AuthHelper.SetUserRole(PrincipalName, request.ToArray());
+        this.AuthManager.For(PrincipalName).SetRole(request.ToArray());
     }
 
     private async Task<int> GenerateAuthPerformanceObject()

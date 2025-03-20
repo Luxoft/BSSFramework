@@ -34,7 +34,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
 
         this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-        this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, null));
+        this.AuthManager.For(TestEmployeeLogin).SetRole(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident));
 
         this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident);
 

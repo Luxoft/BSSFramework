@@ -20,7 +20,7 @@ public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>
 
     protected DataHelper DataHelper => this.RootServiceProvider.GetService<DataHelper>();
 
-    protected AuthHelper AuthHelper => this.RootServiceProvider.GetService<AuthHelper>();
+    protected RootAuthManager AuthManager => this.RootServiceProvider.GetService<RootAuthManager>();
 
     [TestInitialize]
     public void TestBaseInitialize()

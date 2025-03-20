@@ -54,24 +54,31 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     public void GetPrincipals_Direct_Test1_Searched()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin1,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.child_1_1_BusinessUnit,
                 this.child_1_1_ManagementUnit,
                 employee: this.rootEmployee));
 
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin2,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
                 this.child_1_1_ManagementUnit));
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.Direct);
-        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.Direct);
-        var employeeFilter = new NotificationFilterGroup(typeof(Employee), new[] { this.rootEmployee.Id }, NotificationExpandType.DirectOrFirstParent);
+        var fbuChildFilter = new NotificationFilterGroup(
+            typeof(BusinessUnit),
+            new[] { this.child_1_1_BusinessUnit.Id },
+            NotificationExpandType.Direct);
+        var mbuChildFilter = new NotificationFilterGroup(
+            typeof(ManagementUnit),
+            new[] { this.child_1_1_ManagementUnit.Id },
+            NotificationExpandType.Direct);
+        var employeeFilter = new NotificationFilterGroup(
+            typeof(Employee),
+            new[] { this.rootEmployee.Id },
+            NotificationExpandType.DirectOrFirstParent);
 
         // Act
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, employeeFilter);
@@ -85,8 +92,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     public void GetPrincipals_Direct_Test2_Missed()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin1,
+        this.AuthManager.For(
+            this.searchNotificationEmployeeLogin1).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -106,8 +113,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     public void GetPrincipals_Direct_Test3_Missed()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin1,
+        this.AuthManager.For(
+            this.searchNotificationEmployeeLogin1).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -128,8 +135,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     public void GetPrincipals_Direct_Test4_Searched()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin1,
+        this.AuthManager.For(
+            this.searchNotificationEmployeeLogin1).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -151,15 +158,13 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     public void GetPrincipals_DirectOrEmpty_Test1_Searched()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin1,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 null,
                 this.child_1_1_ManagementUnit));
 
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin2,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -181,15 +186,13 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     public void GetPrincipals_DirectOrFirstParentOrEmpty_Test1_Searched()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin1,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.child_1_0_BusinessUnit,
                 this.child_1_1_ManagementUnit));
 
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin2,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -210,15 +213,13 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     public void GetPrincipals_DirectOrFirstParentOrEmpty_Test2_Searched()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin1,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
                 this.child_1_0_ManagementUnit));
 
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin2,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -241,15 +242,13 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     public void GetPrincipals_DirectOrFirstParentOrEmpty_Test3_Searched(bool swapPriority)
     {
         // Arrange
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin1,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.child_1_0_BusinessUnit,
                 this.rootManagementUnit));
 
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin2,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -272,15 +271,13 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     public void GetPrincipals_All_Test1_Searched()
     {
         // Arrange
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin1,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.child_1_0_BusinessUnit,
                 this.child_1_1_ManagementUnit));
 
-        this.AuthHelper.SetUserRole(
-            this.searchNotificationEmployeeLogin2,
+        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRole(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,

@@ -1,6 +1,8 @@
-﻿namespace Framework.GenericQueryable;
+﻿using System.Linq.Expressions;
+
+namespace Framework.GenericQueryable;
 
 public interface IGenericQueryableExecutor
 {
-    object Execute(GenericQueryableExecuteExpression genericQueryableExecuteExpression);
+    object Execute(LambdaExpression callExpression);
 }

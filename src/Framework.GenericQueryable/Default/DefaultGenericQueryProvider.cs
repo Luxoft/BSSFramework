@@ -6,7 +6,7 @@ namespace Framework.GenericQueryable.Default;
 
 public class DefaultGenericQueryProvider<T>(IQueryable<T> baseSource) : IQueryProvider
 {
-    private static readonly IGenericQueryableExecutor GenericQueryableExecutor = new DefaultGenericQueryableExecutor();
+    private readonly IGenericQueryableExecutor genericQueryableExecutor = new DefaultGenericQueryableExecutor();
 
     public IQueryable CreateQuery(Expression expression) => throw new NotImplementedException();
 
@@ -17,25 +17,28 @@ public class DefaultGenericQueryProvider<T>(IQueryable<T> baseSource) : IQueryPr
 
     public object Execute(Expression expression)
     {
-        var visitedExpression = this.CreateVisitor().Visit(expression);
-
-        if (visitedExpression is GenericQueryableExecuteExpression genericQueryableExecuteExpression)
+        if (expression is GenericQueryableExecuteExpression genericQueryableExecuteExpression)
         {
-            var pureResult = GenericQueryableExecutor.Execute(genericQueryableExecuteExpression);
+            var pureResult = this.genericQueryableExecutor.Execute(genericQueryableExecuteExpression.CallExpression);
 
-            var taskType = genericQueryableExecuteExpression.CallExpression.ReturnType;
+            var returnType = genericQueryableExecuteExpression.CallExpression.ReturnType;
 
-            var taskArgType = taskType.GetGenericTypeImplementationArgument(typeof(Task<>));
+            if (returnType.IsGenericTypeImplementation(typeof(Task<>)))
+            {
+                var taskArgType = returnType.GetGenericTypeImplementationArgument(typeof(Task<>));
 
-            return new Func<object, Task<object>>(Task.FromResult)
-                   .CreateGenericMethod(taskArgType)
-                   .Invoke(null, [pureResult])!;
+                return new Func<object, Task<object>>(Task.FromResult)
+                       .CreateGenericMethod(taskArgType)
+                       .Invoke(null, [pureResult])!;
+            }
+            else
+            {
+                return pureResult;
+            }
         }
         else
         {
-            return baseSource.Provider.Execute(this.CreateVisitor().Visit(expression))!;
+            return baseSource.Provider.Execute(expression)!;
         }
     }
-
-    protected virtual ExpressionVisitor CreateVisitor() => new DefaultGenericQueryableVisitor();
 }

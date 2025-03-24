@@ -42,15 +42,35 @@ public abstract class GenericQueryableExecutor : IGenericQueryableExecutor
         return request.Single();
     }
 
-    public virtual object Execute(GenericQueryableExecuteExpression genericQueryableExecuteExpression)
+    protected abstract IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, string path)
+        where TSource : class;
+
+    public virtual object Execute(LambdaExpression callExpression)
     {
-        var methodCallExpression = (MethodCallExpression)genericQueryableExecuteExpression.CallExpression.Body;
+        if (callExpression.Body is MethodCallExpression methodCallExpression && methodCallExpression.Method.IsGenericMethod)
+        {
+            var genMethod = methodCallExpression.Method.GetGenericMethodDefinition();
 
-        var args = methodCallExpression
-                   .Arguments
-                   .Take(this.GetParameterCount(methodCallExpression.Method))
-                   .Select(arg => arg.GetMemberConstValue().GetValue()).ToArray();
+            if (genMethod == GenericQueryableMethodHelper.WithFetchMethod)
+            {
+                var sourceType = methodCallExpression.Method.GetParameters().First().ParameterType
+                                                     .GetInterfaceImplementationArgument(typeof(IQueryable<>));
 
-        return this.mappingMethodCache[methodCallExpression.Method].Invoke(null, args)!;
+                return new Func<IQueryable<object>, string, IQueryable<object>>(this.ApplyFetch)
+                       .CreateGenericMethod(sourceType)
+                       .Invoke(this, methodCallExpression.Arguments.Select(arg => arg.GetMemberConstValue().GetValue()).ToArray())!;
+            }
+            else if (methodCallExpression.Type.IsGenericTypeImplementation(typeof(Task<>)))
+            {
+                var args = methodCallExpression
+                           .Arguments
+                           .Take(this.GetParameterCount(methodCallExpression.Method))
+                           .Select(arg => arg.GetMemberConstValue().GetValue()).ToArray();
+
+                return this.mappingMethodCache[methodCallExpression.Method].Invoke(null, args)!;
+            }
+        }
+
+        throw new NotSupportedException();
     }
 }

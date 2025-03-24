@@ -46,6 +46,7 @@ public class AuthorizationPrincipalSourceService(
     {
         var principal = await principalRepository.GetQueryable()
                                                  .Where(filter)
+                                                 .WithFetch($"{nameof(Principal.Permissions)}.{nameof(Permission.Restrictions)}")
                                                  //.FetchMany(principal => principal.Permissions)
                                                  //.ThenFetch(permission => permission.Restrictions)
                                                  .GenericSingleOrDefaultAsync(cancellationToken);

@@ -24,6 +24,7 @@ public static class DependencyInjectionExtensions
 
         services.AddScoped<IDBSessionSettings, DBSessionSettings>();
 
+        services.AddSingleton(typeof(INHibFetchService<>), typeof(NHibFetchService<>));
         services.AddSingleton<IGenericQueryableExecutor, NHibGenericQueryableExecutor>();
 
         //For close db session by middleware

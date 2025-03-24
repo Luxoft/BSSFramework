@@ -16,7 +16,7 @@ public class VisitedEfQueryProvider(IQueryCompiler queryCompiler) : EntityQueryP
     {
         if (expression is GenericQueryableExecuteExpression genericQueryableExecuteExpression)
         {
-            return (TResult)this.GenericQueryableExecutor.Execute(genericQueryableExecuteExpression);
+            return (TResult)this.GenericQueryableExecutor.Execute(genericQueryableExecuteExpression.CallExpression);
         }
         else
         {
@@ -28,7 +28,7 @@ public class VisitedEfQueryProvider(IQueryCompiler queryCompiler) : EntityQueryP
     {
         if (expression is GenericQueryableExecuteExpression genericQueryableExecuteExpression)
         {
-            return (TResult)this.GenericQueryableExecutor.Execute(genericQueryableExecuteExpression);
+            return (TResult)this.GenericQueryableExecutor.Execute(genericQueryableExecuteExpression.CallExpression);
         }
         else
         {
@@ -40,7 +40,7 @@ public class VisitedEfQueryProvider(IQueryCompiler queryCompiler) : EntityQueryP
     {
         if (expression is GenericQueryableExecuteExpression genericQueryableExecuteExpression)
         {
-            return this.GenericQueryableExecutor.Execute(genericQueryableExecuteExpression);
+            return this.GenericQueryableExecutor.Execute(genericQueryableExecuteExpression.CallExpression);
         }
         else
         {

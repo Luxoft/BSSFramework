@@ -35,4 +35,9 @@ public class DefaultGenericQueryableExecutor : GenericQueryableExecutor
             return base.GetTargetMethod(baseMethod);
         }
     }
+
+    protected override IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, string path)
+    {
+        return source;
+    }
 }

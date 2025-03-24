@@ -59,7 +59,7 @@ public class VisitedNHibQueryProvider : DefaultQueryProvider
     {
         if (expression is GenericQueryableExecuteExpression genericQueryableExecuteExpression)
         {
-            return this.GenericQueryableExecutor.Execute(genericQueryableExecuteExpression);
+            return this.GenericQueryableExecutor.Execute(genericQueryableExecuteExpression.CallExpression);
         }
         else
         {

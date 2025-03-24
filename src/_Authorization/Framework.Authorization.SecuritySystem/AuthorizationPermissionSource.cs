@@ -3,6 +3,7 @@
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
+using Framework.GenericQueryable;
 using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.ExternalSystem;
@@ -25,6 +26,7 @@ public class AuthorizationPermissionSource(
     public List<Dictionary<Type, List<Guid>>> GetPermissions(IEnumerable<Type> securityContextTypes)
     {
         var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(securityRule)
+                                                   .WithFetch($"{nameof(Permission.Restrictions)}.{nameof(PermissionRestriction.SecurityContextType)}")
                                                    //.FetchMany(q => q.Restrictions)
                                                    //.ThenFetch(q => q.SecurityContextType)
                                                    .ToList();

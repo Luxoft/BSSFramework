@@ -45,5 +45,20 @@ namespace Framework.GenericQueryable.Tests
             //Assert
             result.Should().Be(baseSource);
         }
+
+        [Fact]
+        public async Task DefaultGenericQueryable_InvokeFetch_FetchIgnored()
+        {
+            // Arrange
+            var baseSource = "abc";
+            var qSource = new[] { baseSource }.AsDefaultGenericQueryable();
+
+            // Act
+            var result = await qSource.WithFetch(nameof(string.Length))
+                                      .GenericSingleOrDefaultAsync(_ => true);
+
+            //Assert
+            result.Should().Be(baseSource);
+        }
     }
 }

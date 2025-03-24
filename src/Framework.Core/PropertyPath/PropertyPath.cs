@@ -116,4 +116,19 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
     }
 
     public static readonly PropertyPath Empty = new PropertyPath(new PropertyInfo[0]);
+
+    public static PropertyPath Create(Type sourceType, string[] properties)
+    {
+        var typedProperties = properties.Scan(
+            default(PropertyInfo),
+            (prevProperty, propertyName) =>
+            {
+                var currentType = prevProperty == null ? sourceType : prevProperty.PropertyType.GetCollectionElementTypeOrSelf();
+
+
+                return currentType.GetProperty(propertyName, true);
+            }).Skip(1);
+
+        return new PropertyPath(typedProperties);
+    }
 }

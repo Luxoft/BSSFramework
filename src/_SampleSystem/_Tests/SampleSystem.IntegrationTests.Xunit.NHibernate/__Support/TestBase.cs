@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.IntegrationTests.Xunit.__Support;
+﻿namespace SampleSystem.IntegrationTests.Xunit.NHibernate.__Support;
 
 public class TestBase(IServiceProvider serviceProvider)
 {

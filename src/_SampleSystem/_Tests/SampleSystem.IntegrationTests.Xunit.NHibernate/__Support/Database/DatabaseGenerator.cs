@@ -9,9 +9,9 @@ using Microsoft.Extensions.Options;
 
 using SampleSystem.DbGenerate;
 using SampleSystem.IntegrationTests.__Support;
-using SampleSystem.IntegrationTests.Xunit.__Support.TestData;
+using SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests.Xunit.__Support.Database;
+namespace SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.Database;
 
 public class DatabaseGenerator(
     IDatabaseContext databaseContext,

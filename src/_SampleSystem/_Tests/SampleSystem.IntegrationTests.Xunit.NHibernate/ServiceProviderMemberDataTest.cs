@@ -1,23 +1,19 @@
-﻿using Automation.Xunit.Sdk;
+﻿using Bss.Testing.Xunit.Sdk;
 
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.IntegrationTests.Xunit.__Support;
+using SampleSystem.IntegrationTests.Xunit.NHibernate.__Support;
 
-namespace SampleSystem.IntegrationTests.Xunit;
+namespace SampleSystem.IntegrationTests.Xunit.NHibernate;
 
 public class ServiceProviderMemberDataTest(IServiceProvider serviceProvider) : TestBase(serviceProvider)
 {
-    [AutomationCoreTheory]
+    [BssTheory]
     [ServiceProviderMemberData(nameof(GetMemberData))]
-    public void GetDataFromServiceProvider(FullSecurityRole role)
-    {
-
-        Assert.NotEmpty(role.Name);
-    }
+    public void GetDataFromServiceProvider(FullSecurityRole role) => role.Name.Should().NotBeNull();
 
     protected IEnumerable<object> GetMemberData() =>
-        serviceProvider.GetRequiredService<ISecurityRoleSource>().SecurityRoles.Select(x => new [] { x });
+        this.ServiceProvider.GetRequiredService<ISecurityRoleSource>().SecurityRoles.Select(x => new [] { x });
 }

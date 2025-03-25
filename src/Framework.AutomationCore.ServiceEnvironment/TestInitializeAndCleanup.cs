@@ -1,5 +1,4 @@
 ﻿using Automation.Enums;
-using Automation.Interfaces;
 using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
@@ -9,27 +8,13 @@ using Microsoft.Extensions.Options;
 
 namespace Automation.ServiceEnvironment;
 
-public class TestInitializeAndCleanup : ITestInitializeAndCleanup
+public class TestInitializeAndCleanup(
+    IOptions<AutomationFrameworkSettings> settings,
+    IDatabaseContext databaseContext,
+    IntegrationTestTimeProvider timeProvider,
+    IIntegrationTestUserAuthenticationService userAuthenticationService)
 {
-    private readonly AutomationFrameworkSettings settings;
-
-    private readonly IDatabaseContext databaseContext;
-
-    private readonly IntegrationTestTimeProvider timeProvider;
-
-    private readonly IIntegrationTestUserAuthenticationService userAuthenticationService;
-
-    public TestInitializeAndCleanup(
-        IOptions<AutomationFrameworkSettings> settings,
-        IDatabaseContext databaseContext,
-        IntegrationTestTimeProvider timeProvider,
-        IIntegrationTestUserAuthenticationService userAuthenticationService)
-    {
-        this.settings = settings.Value;
-        this.databaseContext = databaseContext;
-        this.timeProvider = timeProvider;
-        this.userAuthenticationService = userAuthenticationService;
-    }
+    private readonly AutomationFrameworkSettings settings = settings.Value;
 
     public virtual async Task InitializeAsync()
     {
@@ -45,15 +30,15 @@ public class TestInitializeAndCleanup : ITestInitializeAndCleanup
 
     protected virtual void ResetServices()
     {
-        this.timeProvider.Reset();
-        this.userAuthenticationService.Reset();
+        timeProvider.Reset();
+        userAuthenticationService.Reset();
     }
 
     protected virtual void DropDatabaseAfterTest()
     {
         if (this.settings.UseLocalDb || this.settings.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase || this.settings.TestsParallelize)
         {
-            AssemblyInitializeAndCleanupBase.RunAction("Drop Database", this.databaseContext.Drop);
+            AssemblyInitializeAndCleanupBase.RunAction("Drop Database", databaseContext.Drop);
         }
     }
 
@@ -63,8 +48,8 @@ public class TestInitializeAndCleanup : ITestInitializeAndCleanup
         {
             case TestRunMode.DefaultRunModeOnEmptyDatabase:
             case TestRunMode.RestoreDatabaseUsingAttach:
-                AssemblyInitializeAndCleanupBase.RunAction("Drop Database", this.databaseContext.Drop);
-                AssemblyInitializeAndCleanupBase.RunAction("Restore Databases", this.databaseContext.AttachDatabase);
+                AssemblyInitializeAndCleanupBase.RunAction("Drop Database", databaseContext.Drop);
+                AssemblyInitializeAndCleanupBase.RunAction("Restore Databases", databaseContext.AttachDatabase);
                 break;
         }
     }

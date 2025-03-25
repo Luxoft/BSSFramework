@@ -1,7 +1,9 @@
-﻿using Automation.Interfaces;
-using Automation.ServiceEnvironment;
+﻿using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
+using Automation.Xunit.ServiceEnvironment;
+
+using Bss.Testing.Xunit.Interfaces;
 
 using Framework.DependencyInjection;
 using Framework.DomainDriven.Auth;
@@ -15,22 +17,29 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddIntegrationTestServices(
         this IServiceCollection services,
-        Action<AutomationFrameworkSettings> options) =>
-        services.Configure(options)
-                .AddSingleton<ITestInitializeAndCleanup, TestInitializeAndCleanup>()
-                .AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
-                .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
+        Action<AutomationFrameworkSettings>? options = null)
+    {
+        if (options != null)
+        {
+            services.Configure(options);
+        }
 
-                .AddSingleton<IntegrationTestTimeProvider>()
-                .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
+        return services
+            .AddSingleton<ITestInitializeAndCleanup, DiTestInitializeAndCleanup>()
+            .AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+            .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
-                .AddScoped<TestWebApiCurrentMethodResolver>()
-                .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
-                .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
+            .AddSingleton<IntegrationTestTimeProvider>()
+            .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
-                .AddSingleton(typeof(ControllerEvaluator<>))
+            .AddScoped<TestWebApiCurrentMethodResolver>()
+            .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+            .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
 
-                .AddSingleton<RootAuthManager>()
-                .AddSingleton(AdministratorsRoleList.Default)
-                .AddScoped<AuthManager>();
+            .AddSingleton(typeof(ControllerEvaluator<>))
+
+            .AddSingleton<RootAuthManager>()
+            .AddSingleton(AdministratorsRoleList.Default)
+            .AddScoped<AuthManager>();
+    }
 }

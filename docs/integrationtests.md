@@ -18,27 +18,27 @@
 
 # Integration Tests Xunit
  - Implement IAutomationCoreInitialization somewhere in your project.
- - Add [assembly: TestFramework("Automation.Xunit.AutomationCoreTestFramework", "Framework.AutomationCore.Xunit")]
- - xUnit [Theory] should be replaced by [AutomationCoreTheory] in order to use ability to initialize tests via injected ITestInitializeAndCleanup/ITestInitializeAndCleanupAsync instead of Fixture/TestBase implementation
+ - Add [assembly: TestFramework("Bss.Testing.Xunit.TestFramework", "Bss.Testing.Xunit")]
+ - xUnit [Theory] should be replaced by [BssTheory] in order to use ability to initialize tests via injected ITestInitializeAndCleanup instead of Fixture/TestBase implementation
 Example:
 ```
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerClass)]
-[assembly: TestFramework("Automation.Xunit.AutomationCoreTestFramework", "Framework.AutomationCore.Xunit")]
+[assembly: TestFramework("Bss.Testing.Xunit.TestFramework", "Bss.Testing.Xunit")]
 
-public class EnvironmentInitialization : IAutomationCoreInitialization
+public class EnvironmentInitializer : AutomationCoreFrameworkInitializer
 {
-    public IServiceCollection ConfigureFramework(IServiceCollection services) =>
+    public override IServiceCollection ConfigureFramework(IServiceCollection services) =>
         services
-            .AddSingleton<IAssemblyInitializeAndCleanupAsync, DiAssemblyInitializeAndCleanupAsync>()
-            .AddSingleton<ITestDatabaseGeneratorAsync, DatabaseGenerator>()
+            .AddSingleton<IAssemblyInitializeAndCleanup, DiAssemblyInitializeAndCleanup>()
+            .AddSingleton<ITestDatabaseGenerator, DatabaseGenerator>()
             .AddSingleton<IConfiguration>(
                 new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", false)
-                    .AddEnvironmentVariables("LS_")
+                    .AddEnvironmentVariables($"{nameof(SampleSystem)}_")
                     .Build());
 
-    public IServiceProvider ConfigureTestEnvironment(IServiceCollection services, IConfiguration configuration) =>
+    public override IServiceProvider ConfigureTestEnvironment(IServiceCollection services, IConfiguration configuration) =>
         services
             .AddApplication(configuration, new HostingEnvironment { EnvironmentName = Environments.Development })
             .AddIntegrationTestServices(

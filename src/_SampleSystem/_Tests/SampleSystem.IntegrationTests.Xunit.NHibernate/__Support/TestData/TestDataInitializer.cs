@@ -16,7 +16,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 
-namespace SampleSystem.IntegrationTests.Xunit.__Support.TestData;
+namespace SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.TestData;
 
 public class TestDataInitializer
 {
@@ -30,7 +30,7 @@ public class TestDataInitializer
     {
         var generatorConfig = configuration.BuildFromRootWithConnectionStrings(databaseContext);
 
-        this.serviceProvider = new EnvironmentInitialization()
+        this.serviceProvider = new EnvironmentInitializer()
             .ConfigureTestEnvironment(
                 new ServiceCollection()
                     .AddSingleton(databaseContext)

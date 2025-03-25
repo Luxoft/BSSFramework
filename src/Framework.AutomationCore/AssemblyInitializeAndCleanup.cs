@@ -1,5 +1,4 @@
-﻿using Automation.Interfaces;
-using Automation.Settings;
+﻿using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -7,23 +6,14 @@ using Microsoft.Extensions.Options;
 
 namespace Automation;
 
-public class AssemblyInitializeAndCleanup : AssemblyInitializeAndCleanupBase, IAssemblyInitializeAndCleanup
+public class AssemblyInitializeAndCleanup(
+    Func<IServiceProvider> getServiceProviderAction,
+    Action<IServiceProvider> releaseServiceProviderAction)
+    : AssemblyInitializeAndCleanupBase
 {
-    private readonly Action<IServiceProvider> releaseServiceProviderAction;
-
-    private readonly Func<IServiceProvider> getServiceProviderAction;
-
-    public AssemblyInitializeAndCleanup(
-            Func<IServiceProvider> getServiceProviderAction,
-            Action<IServiceProvider> releaseServiceProviderAction)
-    {
-        this.getServiceProviderAction = getServiceProviderAction;
-        this.releaseServiceProviderAction = releaseServiceProviderAction;
-    }
-
     public async Task EnvironmentInitializeAsync()
     {
-        var serviceProvider = this.getServiceProviderAction.Invoke();
+        var serviceProvider = getServiceProviderAction.Invoke();
 
         try
         {
@@ -31,20 +21,20 @@ public class AssemblyInitializeAndCleanup : AssemblyInitializeAndCleanupBase, IA
         }
         finally
         {
-            this.releaseServiceProviderAction(serviceProvider);
+            releaseServiceProviderAction(serviceProvider);
         }
     }
 
     public async Task EnvironmentCleanupAsync()
     {
-        var serviceProvider = this.getServiceProviderAction.Invoke();
+        var serviceProvider = getServiceProviderAction.Invoke();
         try
         {
             await this.CleanupAsync(serviceProvider);
         }
         finally
         {
-            this.releaseServiceProviderAction(serviceProvider);
+            releaseServiceProviderAction(serviceProvider);
         }
     }
 

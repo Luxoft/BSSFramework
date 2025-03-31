@@ -8,7 +8,7 @@ public class SampleSystemDomainObjectEventMetadata : DomainObjectEventMetadata
     {
         if (domainType == typeof(Employee))
         {
-            return [EventOperation.Save, SampleSystemEventOperation.CustomEmployeeAction];
+            return [EventOperation.Save, SampleSystemEventOperation.CustomAction];
         }
         else
         {

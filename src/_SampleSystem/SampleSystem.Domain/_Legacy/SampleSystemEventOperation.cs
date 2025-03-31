@@ -4,5 +4,5 @@ namespace SampleSystem.Domain;
 
 public static class SampleSystemEventOperation
 {
-    public static EventOperation CustomEmployeeAction { get; } = new (nameof(CustomEmployeeAction));
+    public static EventOperation CustomAction { get; } = new (nameof(CustomAction));
 }

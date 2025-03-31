@@ -18,7 +18,7 @@ public class EventDALListenerTests : TestBase
                          DBSessionMode.Write,
                          ctx => ctx.OperationSender.Send(
                              ctx.Logics.Employee.GetCurrent(),
-                             SampleSystemEventOperation.CustomEmployeeAction));
+                             SampleSystemEventOperation.CustomAction));
 
         // Assert
         action.Should().NotThrow();

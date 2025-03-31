@@ -71,19 +71,22 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
 
             var message = new DomainOperationSerializeData<TPersistentDomainObjectBase>
                           {
-                              DomainObject = domainObject,
-                              Operation = eventType,
-                              CustomDomainObjectType = domainObjectType
+                              DomainObject = domainObject, Operation = eventType, CustomDomainObjectType = domainObjectType
                           };
 
             this.messageSender.Send(message);
         }
     }
+
     protected virtual IEnumerable<ValueTuple<IDALObject, EventOperation>> ProcessFinalAllFilteredOrderedValues(
-            DALChangesEventArgs eventArgs,
-            IEnumerable<ValueTuple<IDALObject, EventOperation>> allFilteredOrderedValues)
+        DALChangesEventArgs eventArgs,
+        IEnumerable<ValueTuple<IDALObject, EventOperation>> allFilteredOrderedValues)
     {
-        var joinItems = eventArgs.Changes.GroupDALObjectByType().Join(this.settings.Dependencies, z => z.Key, z => z.SourceTypeEvent.Type, ValueTuple.Create).ToList();
+        var joinItems = eventArgs.Changes.GroupDALObjectByType().Join(
+            this.settings.Dependencies,
+            z => z.Key,
+            z => z.SourceTypeEvent.Type,
+            ValueTuple.Create).ToList();
 
         if (!joinItems.Any())
         {
@@ -92,65 +95,72 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
 
         // потенциальные target-объекты для добавления
         var targetObjectCanditates = joinItems.SelectMany(
-                                                          z =>
-                                                                  z.Item1.Value.CreatedItems.Concat(z.Item1.Value.UpdatedItems).Where(q => z.Item2.SourceTypeEvent.IsSaveProcessingFunc(q.Object))
-                                                                   .Concat(z.Item1.Value.RemovedItems.Where(q => z.Item2.SourceTypeEvent.IsRemoveProcessingFunc(q.Object)))
-                                                                   .Where(q => z.Item2.TargetTypeEvent.IsSaveProcessingFunc(z.Item2.GetTargetValue(q.Object)))
-                                                                   .Select(q => new
-                                                                   {
-                                                                       TargetObject = z.Item2.GetTargetValue(q.Object),
-                                                                       TargetObjectType = z.Item2.TargetTypeEvent.Type,
-                                                                   }))
+                                                  z =>
+                                                      z.Item1.Value.CreatedItems.Concat(z.Item1.Value.UpdatedItems).Where(
+                                                           q => z.Item2.SourceTypeEvent.IsSaveProcessingFunc(q.Object))
+                                                       .Concat(
+                                                           z.Item1.Value.RemovedItems.Where(
+                                                               q => z.Item2.SourceTypeEvent.IsRemoveProcessingFunc(q.Object)))
+                                                       .Where(
+                                                           q => z.Item2.TargetTypeEvent.IsSaveProcessingFunc(
+                                                               z.Item2.GetTargetValue(q.Object)))
+                                                       .Select(
+                                                           q => new
+                                                                {
+                                                                    TargetObject = z.Item2.GetTargetValue(q.Object),
+                                                                    TargetObjectType = z.Item2.TargetTypeEvent.Type,
+                                                                }))
                                               .Distinct(z => z.TargetObject)
                                               .ToList();
 
         // находим те target, которых еще нет в наборе
         var allTargetObjects =
-                this.settings.Dependencies.Select(z => z.TargetTypeEvent.Type)
-                    .Select(z =>
+            this.settings.Dependencies.Select(z => z.TargetTypeEvent.Type)
+                .Select(
+                    z =>
                     {
                         DALChanges<IDALObject> dalChanges;
                         eventArgs.Changes.GroupDALObjectByType().TryGetValue(z, out dalChanges);
                         return ValueTuple.Create(z, dalChanges);
                     })
-                    .Where(z => z.Item2 != null)
-                    .Select(z => z.Item2)
-                    .SelectMany(z => z.CreatedItems.Concat(z.UpdatedItems).Concat(z.RemovedItems).Select(q => q.Object))
-                    .ToHashSet();
+                .Where(z => z.Item2 != null)
+                .Select(z => z.Item2)
+                .SelectMany(z => z.CreatedItems.Concat(z.UpdatedItems).Concat(z.RemovedItems).Select(q => q.Object))
+                .ToHashSet();
 
         var allAbsentsTargetObjects = targetObjectCanditates.Except(
-                                                                    allTargetObjects,
-                                                                    (anon, alwaysObject) => anon.TargetObject.Equals(alwaysObject)).ToList();
+            allTargetObjects,
+            (anon, alwaysObject) => anon.TargetObject.Equals(alwaysObject)).ToList();
 
         // фильруем которые нужно обработать
-        return allFilteredOrderedValues.Concat(allAbsentsTargetObjects.Select(z => ValueTuple.Create((IDALObject)(new DALObject(z.TargetObject, z.TargetObjectType, 1)), EventOperation.Save)));
+        return allFilteredOrderedValues.Concat(
+            allAbsentsTargetObjects.Select(
+                z => ValueTuple.Create((IDALObject)(new DALObject(z.TargetObject, z.TargetObjectType, 1)), EventOperation.Save)));
     }
 
     void IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
     {
-        this.Process(new DALChangesEventArgs(GetDALChanges(domainObject, domainObjectEvent)));
+        var dalChanges = GetDALChanges(domainObject, domainObjectEvent);
+
+        if (dalChanges != null)
+        {
+            this.Process(new DALChangesEventArgs(dalChanges));
+        }
     }
 
-    private static DALChanges GetDALChanges<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
+    private static DALChanges? GetDALChanges<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
     {
-        switch (domainObjectEvent.Name)
+        if (domainObjectEvent == EventOperation.Save)
         {
-            case nameof(EventOperation.Save):
-
-                return new DALChanges(
-                    new IDALObject[0],
-                    new IDALObject[] { new DALObject(domainObject, typeof(TDomainObject), 0) },
-                    new IDALObject[0]);
-
-            case nameof(EventOperation.Remove):
-
-                return new DALChanges(
-                    new IDALObject[0],
-                    new IDALObject[0],
-                    new IDALObject[] { new DALObject(domainObject, typeof(TDomainObject), 0) });
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(domainObjectEvent));
+            return new DALChanges([], [new DALObject(domainObject, typeof(TDomainObject), 0)], []);
+        }
+        else if (domainObjectEvent == EventOperation.Remove)
+        {
+            return new DALChanges([], [], [new DALObject(domainObject, typeof(TDomainObject), 0)]);
+        }
+        else
+        {
+            return null;
         }
     }
 }

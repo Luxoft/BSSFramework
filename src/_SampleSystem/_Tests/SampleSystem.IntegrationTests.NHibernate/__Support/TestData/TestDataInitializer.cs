@@ -29,8 +29,8 @@ public class TestDataInitializer(
         await mainInitializer.InitializeAsync(cancellationToken);
 
         await authManager.For(nameof(TestDataInitializer)).SetAdminRoleAsync(cancellationToken);
-        await authManager.For(DefaultConstants.NOTIFICATION_ADMIN).SetRoleAsync([SecurityRole.SystemIntegration], cancellationToken);
-        await authManager.For(DefaultConstants.INTEGRATION_BUS).SetRoleAsync([SecurityRole.SystemIntegration], cancellationToken);
+        await authManager.For(DefaultConstants.NOTIFICATION_ADMIN).SetRoleAsync(SecurityRole.SystemIntegration, cancellationToken);
+        await authManager.For(DefaultConstants.INTEGRATION_BUS).SetRoleAsync(SecurityRole.SystemIntegration, cancellationToken);
 
         this.FillMainData();
 
@@ -47,7 +47,7 @@ public class TestDataInitializer(
         {
             dataHelper.SaveEmployee(login: localAdmin);
 
-            await authManager.For(localAdmin).SetRoleAsync([SecurityRole.Administrator], cancellationToken);
+            await authManager.For(localAdmin).SetRoleAsync(SecurityRole.Administrator, cancellationToken);
         }
     }
 

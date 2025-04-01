@@ -13,8 +13,8 @@ public class RootUserCredentialManager(IServiceProvider rootServiceProvider, Use
 {
     private IServiceEvaluator<AuthManager> ManagerEvaluator => rootServiceProvider.GetRequiredService<IServiceEvaluator<AuthManager>>();
 
-    private IIntegrationTestUserAuthenticationService UserAuthenticationService => rootServiceProvider.GetRequiredService<IIntegrationTestUserAuthenticationService>();
-
+    private IIntegrationTestUserAuthenticationService UserAuthenticationService =>
+        rootServiceProvider.GetRequiredService<IIntegrationTestUserAuthenticationService>();
 
     private IEnumerable<SecurityRole> AdminRoles => rootServiceProvider.GetRequiredService<AdministratorsRoleList>().Roles;
 
@@ -45,15 +45,21 @@ public class RootUserCredentialManager(IServiceProvider rootServiceProvider, Use
         return await this.AddRoleAsync(permissions, cancellationToken);
     }
 
+    public async Task<Guid> SetRoleAsync(TestPermission permission, CancellationToken cancellationToken = default)
+    {
+        return await this.AddRoleAsync([permission], cancellationToken);
+    }
+
     public Guid AddRole(params TestPermission[] permissions) =>
         this.AddRoleAsync(permissions).GetAwaiter().GetResult();
 
-    public async Task<Guid> AddRoleAsync(
-        TestPermission[] permissions,
-        CancellationToken cancellationToken = default) =>
+    public async Task<Guid> AddRoleAsync(TestPermission[] permissions, CancellationToken cancellationToken = default) =>
         await this.ManagerEvaluator.EvaluateAsync(
             DBSessionMode.Write,
             async manger => await manger.AddUserRoleAsync(userCredential, permissions, cancellationToken));
+
+    public async Task<Guid> AddRoleAsync(TestPermission permission, CancellationToken cancellationToken = default) =>
+        await this.AddRoleAsync([permission], cancellationToken);
 
     public void ClearRoles()
     {
@@ -62,6 +68,8 @@ public class RootUserCredentialManager(IServiceProvider rootServiceProvider, Use
 
     public async Task ClearRolesAsync(CancellationToken cancellationToken = default)
     {
-        await this.ManagerEvaluator.EvaluateAsync(DBSessionMode.Write, async manager => await manager.RemovePermissionsAsync(userCredential, cancellationToken));
+        await this.ManagerEvaluator.EvaluateAsync(
+            DBSessionMode.Write,
+            async manager => await manager.RemovePermissionsAsync(userCredential, cancellationToken));
     }
 }

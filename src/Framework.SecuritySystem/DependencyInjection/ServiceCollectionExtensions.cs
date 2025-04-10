@@ -69,7 +69,24 @@ public static class ServiceCollectionExtensions
         Expression<Func<TFrom, TTo>> path,
         string? key = null)
     {
-        var info = new RelativeDomainPathInfo<TFrom, TTo>(path);
+        var info = new SingleRelativeDomainPathInfo<TFrom, TTo>(path);
+
+        if (key == null)
+        {
+            return services.AddSingleton<IRelativeDomainPathInfo<TFrom, TTo>>(info);
+        }
+        else
+        {
+            return services.AddKeyedSingleton<IRelativeDomainPathInfo<TFrom, TTo>>(key, info);
+        }
+    }
+
+    public static IServiceCollection AddRelativeDomainPath<TFrom, TTo>(
+        this IServiceCollection services,
+        Expression<Func<TFrom, IEnumerable<TTo>>> path,
+        string? key = null)
+    {
+        var info = new ManyRelativeDomainPathInfo<TFrom, TTo>(path);
 
         if (key == null)
         {

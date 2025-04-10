@@ -20,7 +20,7 @@ public class AdGroupMember : AuditPersistentDomainObjectBase, IDetail<AdGroup>
 
     public virtual AdGroup Group => this.group;
 
-    public virtual Employee Employee { get { return this.employee; } set { this.employee = value; } }
+    public virtual Employee Employee { get => this.employee; set => this.employee = value; }
 
     AdGroup IDetail<AdGroup>.Master => this.Group;
 }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
+using SampleSystem.Domain.Ad;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
 
@@ -29,7 +30,13 @@ public static class SampleSystemApplicationExtensions
         services.AddRelativeDomainPath((TestExceptObject v) => v.Employee)
                 .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef1, nameof(TestRelativeEmployeeObject.EmployeeRef1))
                 .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef2, nameof(TestRelativeEmployeeObject.EmployeeRef2))
-                .AddRelativeDomainPath((TestRelativeEmployeeParentObject v) => v.Children.Select(c => c.Employee));
+                .AddRelativeDomainPath((TestRelativeEmployeeParentObject v) => v.Children.Select(c => c.Employee))
+                .AddRelativeDomainPath(
+                    (Banner b) => b.Accesses.Where(ba => ba.AccessFlag).SelectMany(ba => ba.Group.Members.Select(gm => gm.Employee)),
+                    BannerAccess.AccessGrantedKey)
+                .AddRelativeDomainPath(
+                    (Banner b) => b.Accesses.Where(ba => !ba.AccessFlag).SelectMany(ba => ba.Group.Members.Select(gm => gm.Employee)),
+                    BannerAccess.AccessDeniedKey);
 
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services) =>
         services.AddScoped<ExampleFaultDALListenerSettings>()

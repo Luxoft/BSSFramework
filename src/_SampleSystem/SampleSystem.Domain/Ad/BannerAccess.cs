@@ -22,9 +22,13 @@ public class BannerAccess : AuditPersistentDomainObjectBase, IDetail<Banner>
 
     public virtual Banner Banner => this.banner;
 
-    public virtual AdGroup Group { get { return this.group; } set { this.group = value; } }
+    public virtual AdGroup Group { get => this.group; set => this.group = value; }
 
-    public virtual bool AccessFlag { get { return this.accessFlag; } set { this.accessFlag = value; } }
+    public virtual bool AccessFlag { get => this.accessFlag; set => this.accessFlag = value; }
 
     Banner IDetail<Banner>.Master => this.Banner;
+
+    public const string AccessGrantedKey = nameof(AccessGrantedKey);
+
+    public const string AccessDeniedKey = nameof(AccessDeniedKey);
 }

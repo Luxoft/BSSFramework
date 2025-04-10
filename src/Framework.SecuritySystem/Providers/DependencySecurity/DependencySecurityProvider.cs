@@ -1,13 +1,11 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem;
 
 public class DependencySecurityProvider<TDomainObject, TBaseDomainObject>(
     ISecurityProvider<TBaseDomainObject> baseSecurityProvider,
-    Expression<Func<TDomainObject, TBaseDomainObject>> selector,
+    IRelativeDomainPathInfo<TDomainObject, TBaseDomainObject> relativePath,
     IQueryableSource queryableSource)
     : ISecurityProvider<TDomainObject>
     where TBaseDomainObject : class
@@ -16,21 +14,25 @@ public class DependencySecurityProvider<TDomainObject, TBaseDomainObject>(
     {
         var baseDomainObjSecurityQ = queryableSource.GetQueryable<TBaseDomainObject>().Pipe(baseSecurityProvider.InjectFilter);
 
-        return queryable.Where(selector.Select(domainObj => baseDomainObjSecurityQ.Contains(domainObj)));
+        return queryable.Where(relativePath.CreateCondition(domainObj => baseDomainObjSecurityQ.Contains(domainObj)));
     }
 
     public AccessResult GetAccessResult(TDomainObject domainObject)
     {
-        return baseSecurityProvider.GetAccessResult(selector.Eval(domainObject)).TryOverrideDomainObject(domainObject);
+        return relativePath
+               .GetRelativeObjects(domainObject)
+               .Select(baseSecurityProvider.GetAccessResult)
+               .Or()
+               .TryOverrideDomainObject(domainObject);
     }
 
     public bool HasAccess(TDomainObject domainObject)
     {
-        return baseSecurityProvider.HasAccess(selector.Eval(domainObject));
+        return relativePath.GetRelativeObjects(domainObject).Any(baseSecurityProvider.HasAccess);
     }
 
     public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {
-        return baseSecurityProvider.GetAccessorData(selector.Eval(domainObject));
+        return relativePath.GetRelativeObjects(domainObject).Select(baseSecurityProvider.GetAccessorData).Or();
     }
 }

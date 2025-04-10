@@ -2867,9 +2867,17 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestPlainAuthObjectValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestRelativeEmployeeChildObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestRelativeEmployeeChildObjectValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestRelativeEmployeeObject)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestRelativeEmployeeObjectValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestRelativeEmployeeParentObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestRelativeEmployeeParentObjectValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestRestrictionObject)))
             {
@@ -4119,6 +4127,39 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestPlainAuthObject>(this.GetTestPlainAuthObjectProperties);
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRelativeEmployeeChildObject, System.DateTime?>> GetTestRelativeEmployeeChildObject_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestRelativeEmployeeChildObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRelativeEmployeeChildObject, string>> GetTestRelativeEmployeeChildObject_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestRelativeEmployeeChildObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRelativeEmployeeChildObject, string>> GetTestRelativeEmployeeChildObject_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestRelativeEmployeeChildObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRelativeEmployeeChildObject, System.DateTime?>> GetTestRelativeEmployeeChildObject_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestRelativeEmployeeChildObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeChildObject>> GetTestRelativeEmployeeChildObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestRelativeEmployeeChildObject> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeChildObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetTestRelativeEmployeeChildObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeChildObject, string>(source => source.CreatedBy, currentClass, this.GetTestRelativeEmployeeChildObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeChildObject, string>(source => source.ModifiedBy, currentClass, this.GetTestRelativeEmployeeChildObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeChildObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestRelativeEmployeeChildObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestRelativeEmployeeChildObject> GetTestRelativeEmployeeChildObjectValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestRelativeEmployeeChildObject>(this.GetTestRelativeEmployeeChildObjectProperties);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRelativeEmployeeObject, System.DateTime?>> GetTestRelativeEmployeeObject_CreateDateValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestRelativeEmployeeObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
@@ -4150,6 +4191,45 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestRelativeEmployeeObject> GetTestRelativeEmployeeObjectValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestRelativeEmployeeObject>(this.GetTestRelativeEmployeeObjectProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRelativeEmployeeParentObject, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRelativeEmployeeChildObject>>> GetTestRelativeEmployeeParentObject_ChildrenValidators()
+        {
+            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.TestRelativeEmployeeParentObject, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRelativeEmployeeChildObject>, SampleSystem.Domain.TestRelativeEmployeeChildObject>();
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRelativeEmployeeParentObject, System.DateTime?>> GetTestRelativeEmployeeParentObject_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestRelativeEmployeeParentObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRelativeEmployeeParentObject, string>> GetTestRelativeEmployeeParentObject_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestRelativeEmployeeParentObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRelativeEmployeeParentObject, string>> GetTestRelativeEmployeeParentObject_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestRelativeEmployeeParentObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRelativeEmployeeParentObject, System.DateTime?>> GetTestRelativeEmployeeParentObject_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestRelativeEmployeeParentObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeParentObject>> GetTestRelativeEmployeeParentObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestRelativeEmployeeParentObject> currentClass)
+        {
+            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeParentObject, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestRelativeEmployeeChildObject>, SampleSystem.Domain.TestRelativeEmployeeChildObject>(source => source.Children, currentClass, this.GetTestRelativeEmployeeParentObject_ChildrenValidators(), this.GetClassMap<SampleSystem.Domain.TestRelativeEmployeeChildObject>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeParentObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetTestRelativeEmployeeParentObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeParentObject, string>(source => source.CreatedBy, currentClass, this.GetTestRelativeEmployeeParentObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeParentObject, string>(source => source.ModifiedBy, currentClass, this.GetTestRelativeEmployeeParentObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestRelativeEmployeeParentObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestRelativeEmployeeParentObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestRelativeEmployeeParentObject> GetTestRelativeEmployeeParentObjectValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestRelativeEmployeeParentObject>(this.GetTestRelativeEmployeeParentObjectProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestRestrictionObject, System.DateTime?>> GetTestRestrictionObject_CreateDateValidators()

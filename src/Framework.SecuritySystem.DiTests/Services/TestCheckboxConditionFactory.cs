@@ -9,6 +9,6 @@ public class TestCheckboxConditionFactory<TDomainObject>(IRelativeDomainPathInfo
 {
     public Expression<Func<TDomainObject, bool>> Create()
     {
-        return pathToEmployeeInfo.Path.Select(employee => employee.TestCheckbox);
+        return pathToEmployeeInfo.CreateCondition(employee => employee.TestCheckbox);
     }
 }

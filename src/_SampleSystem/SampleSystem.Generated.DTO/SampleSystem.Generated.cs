@@ -7148,6 +7148,99 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRelativeEmployeeChildObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestRelativeEmployeeChildObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestRelativeEmployeeChildObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestRelativeEmployeeChildObjectIdentityDTO(SampleSystem.Domain.TestRelativeEmployeeChildObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestRelativeEmployeeChildObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestRelativeEmployeeChildObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestRelativeEmployeeChildObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRelativeEmployeeObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct TestRelativeEmployeeObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -7233,6 +7326,99 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.TestRelativeEmployeeObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToTestRelativeEmployeeObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRelativeEmployeeParentObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestRelativeEmployeeParentObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestRelativeEmployeeParentObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestRelativeEmployeeParentObjectIdentityDTO(SampleSystem.Domain.TestRelativeEmployeeParentObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestRelativeEmployeeParentObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestRelativeEmployeeParentObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestRelativeEmployeeParentObject(this);
         }
         
         public override string ToString()

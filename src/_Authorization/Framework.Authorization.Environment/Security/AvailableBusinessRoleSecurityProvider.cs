@@ -13,23 +13,25 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
     : SecurityProvider<TDomainObject>
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
+
         availablePermissionSource
             .GetAvailablePermissionsQueryable(DomainSecurityRule.AnyRole)
             .Pipe(
                 permissionQ =>
                     ExpressionHelper.Create((BusinessRole businessRole) => permissionQ.Select(p => p.Role).Contains(businessRole)))
-            .OverrideInput(toBusinessRolePathInfo.Path);
+            .Pipe(toBusinessRolePathInfo.CreateCondition);
 
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        return toBusinessRolePathInfo.GetRelativeObjects(domainObject).Select(this.GetAccessorData).Or();
+    }
 
-        var role = toBusinessRolePathInfo.Path.Eval(domainObject);
-
+    private SecurityAccessorData GetAccessorData(BusinessRole businessRole)
+    {
         return SecurityAccessorData.Return(
             availablePermissionSource
                 .GetAvailablePermissionsQueryable(DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() })
-                .Where(permission => permission.Role == role)
+                .Where(permission => permission.Role == businessRole)
                 .Select(permission => permission.Principal)
                 .Distinct()
                 .Select(principal => principal.Name));

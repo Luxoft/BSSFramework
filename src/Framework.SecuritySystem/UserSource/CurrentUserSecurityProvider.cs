@@ -49,12 +49,13 @@ public class CurrentUserSecurityProvider<TDomainObject, TUser>(
     where TUser : class
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
-        relativeDomainPathInfo.Path.Select(userPathInfo.IdPath).Select(userId => userId == currentUser.Id);
+
+        relativeDomainPathInfo.CreateCondition(userPathInfo.IdPath.Select(userId => userId == currentUser.Id));
 
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {
-        var user = relativeDomainPathInfo.Path.Eval(domainObject);
+        var users = relativeDomainPathInfo.GetRelativeObjects(domainObject);
 
-        return SecurityAccessorData.TryReturn(user == null ? null : userPathInfo.NamePath.Eval(user));
+        return SecurityAccessorData.Return(users.Select(user => userPathInfo.NamePath.Eval(user)));
     }
 }

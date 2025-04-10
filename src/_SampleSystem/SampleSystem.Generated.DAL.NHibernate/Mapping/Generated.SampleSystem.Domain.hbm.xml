@@ -1214,6 +1214,21 @@
       <one-to-many class="SampleSystem.Domain.TestItemAuthObject" />
     </set>
   </class>
+  <class name="SampleSystem.Domain.TestRelativeEmployeeChildObject" table="TestRelativeEmployeeChildObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+    <many-to-one name="Master" column="masterId" class="SampleSystem.Domain.TestRelativeEmployeeParentObject" access="field.camelcase" />
+  </class>
   <class name="SampleSystem.Domain.TestRelativeEmployeeObject" table="TestRelativeEmployeeObject">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
@@ -1228,6 +1243,23 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <many-to-one name="EmployeeRef1" column="employeeRef1Id" class="SampleSystem.Domain.Employee" access="field.camelcase" />
     <many-to-one name="EmployeeRef2" column="employeeRef2Id" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TestRelativeEmployeeParentObject" table="TestRelativeEmployeeParentObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <set name="Children" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="masterId" />
+      <one-to-many class="SampleSystem.Domain.TestRelativeEmployeeChildObject" />
+    </set>
   </class>
   <class name="SampleSystem.Domain.TestRestrictionObject" table="TestRestrictionObject">
     <id name="Id" column="id" type="Guid" access="field.camelcase">

@@ -9,7 +9,7 @@ public class RelativeConditionFactory<TDomainObject, TRelativeDomainObject>(
     IRelativeDomainPathInfo<TDomainObject, TRelativeDomainObject>? relativeDomainPathInfo = null)
     : IFactory<Expression<Func<TDomainObject, bool>>?>
 {
-    public Expression<Func<TDomainObject, bool>>? Create() => relativeDomainPathInfo?.Path.Select(conditionInfo.Condition);
+    public Expression<Func<TDomainObject, bool>>? Create() => relativeDomainPathInfo?.CreateCondition(conditionInfo.Condition);
 }
 
 public class RequiredRelativeConditionFactory<TDomainObject, TRelativeDomainObject>(
@@ -17,5 +17,5 @@ public class RequiredRelativeConditionFactory<TDomainObject, TRelativeDomainObje
     IRelativeDomainPathInfo<TDomainObject, TRelativeDomainObject> relativeDomainPathInfo)
     : IFactory<Expression<Func<TDomainObject, bool>>>
 {
-    public Expression<Func<TDomainObject, bool>> Create() => relativeDomainPathInfo.Path.Select(conditionInfo.Condition);
+    public Expression<Func<TDomainObject, bool>> Create() => relativeDomainPathInfo.CreateCondition(conditionInfo.Condition);
 }

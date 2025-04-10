@@ -124,7 +124,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
 
         this.relativePathData =
             (typeof(IRelativeDomainPathInfo<TDomainObject, TSource>),
-                new RelativeDomainPathInfo<TDomainObject, TSource>(relativeDomainPath));
+                new SingleRelativeDomainPathInfo<TDomainObject, TSource>(relativeDomainPath));
 
         return this;
     }

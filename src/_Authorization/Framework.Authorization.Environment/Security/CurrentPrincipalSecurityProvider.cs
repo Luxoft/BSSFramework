@@ -14,8 +14,7 @@ public class CurrentPrincipalSecurityProvider<TDomainObject>(
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
 
-        ExpressionHelper.Create((Principal principal) => principal == currentPrincipalSource.CurrentPrincipal)
-                        .OverrideInput(toPrincipalPathInfo.Path);
+        toPrincipalPathInfo.CreateCondition(principal => principal == currentPrincipalSource.CurrentPrincipal);
 
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject) =>
         SecurityAccessorData.Return(currentPrincipalSource.CurrentPrincipal.Name);

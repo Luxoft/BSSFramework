@@ -28,7 +28,8 @@ public static class SampleSystemApplicationExtensions
     private static IServiceCollection AddRelativePaths(this IServiceCollection services) =>
         services.AddRelativeDomainPath((TestExceptObject v) => v.Employee)
                 .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef1, nameof(TestRelativeEmployeeObject.EmployeeRef1))
-                .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef2, nameof(TestRelativeEmployeeObject.EmployeeRef2));
+                .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef2, nameof(TestRelativeEmployeeObject.EmployeeRef2))
+                .AddRelativeDomainPath((TestRelativeEmployeeParentObject v) => v.Children.Select(c => c.Employee));
 
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services) =>
         services.AddScoped<ExampleFaultDALListenerSettings>()

@@ -1,4 +1,7 @@
-﻿namespace Framework.SecuritySystem;
+﻿using System.Linq;
+using Framework.Core;
+
+namespace Framework.SecuritySystem;
 
 public static class AccessResultExtensions
 {
@@ -14,4 +17,10 @@ public static class AccessResultExtensions
             AccessResult.AccessDeniedResult accessDeniedResult => selector(accessDeniedResult),
             _ => accessResult
         };
+
+    public static AccessResult Or(this IEnumerable<AccessResult> source) =>
+        source.Match(
+            () => AccessResult.AccessDeniedResult.Default,
+            result => result,
+            results => results.Aggregate((AccessResult)AccessResult.AccessDeniedResult.Default, (v1, v2) => v1.Or(v2)));
 }

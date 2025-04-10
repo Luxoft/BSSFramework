@@ -1,3 +1,3 @@
 ﻿namespace Framework.SecuritySystem;
 
-public record SelfRelativeDomainPathInfo<T>() : RelativeDomainPathInfo<T, T>(v => v);
+public record SelfRelativeDomainPathInfo<T>() : SingleRelativeDomainPathInfo<T, T>(v => v);

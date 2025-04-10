@@ -8,13 +8,17 @@ public class TestRelativeEmployeeChildObject : AuditPersistentDomainObjectBase, 
 
     private Employee employee;
 
+    protected TestRelativeEmployeeChildObject()
+    {
+    }
+
     public TestRelativeEmployeeChildObject(TestRelativeEmployeeParentObject master)
     {
         this.master = master;
         this.master.AddDetail(this);
     }
 
-    public TestRelativeEmployeeParentObject Master => this.master;
+    public virtual TestRelativeEmployeeParentObject Master => this.master;
 
     public virtual Employee Employee
     {

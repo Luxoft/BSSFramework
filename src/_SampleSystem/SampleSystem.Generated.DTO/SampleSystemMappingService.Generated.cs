@@ -786,7 +786,13 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestPlainAuthObject(SampleSystem.Domain.TestPlainAuthObject domainObject, SampleSystem.Generated.DTO.TestPlainAuthObjectEventSimpleDTO mappingObject);
         
+        void MapTestRelativeEmployeeChildObject(SampleSystem.Domain.TestRelativeEmployeeChildObject domainObject, SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectEventRichDTO mappingObject);
+        
         void MapTestRelativeEmployeeObject(SampleSystem.Domain.TestRelativeEmployeeObject domainObject, SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO mappingObject);
+        
+        void MapTestRelativeEmployeeParentObject(SampleSystem.Domain.TestRelativeEmployeeParentObject domainObject, SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventRichDTO mappingObject);
+        
+        void MapTestRelativeEmployeeParentObject(SampleSystem.Domain.TestRelativeEmployeeParentObject domainObject, SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventSimpleDTO mappingObject);
         
         void MapTestRestrictionObject(SampleSystem.Domain.TestRestrictionObject domainObject, SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO mappingObject);
         
@@ -1258,7 +1264,11 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.TestPlainAuthObject ToTestPlainAuthObject(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentityDTO);
         
+        SampleSystem.Domain.TestRelativeEmployeeChildObject ToTestRelativeEmployeeChildObject(SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO testRelativeEmployeeChildObjectIdentityDTO);
+        
         SampleSystem.Domain.TestRelativeEmployeeObject ToTestRelativeEmployeeObject(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO testRelativeEmployeeObjectIdentityDTO);
+        
+        SampleSystem.Domain.TestRelativeEmployeeParentObject ToTestRelativeEmployeeParentObject(SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO testRelativeEmployeeParentObjectIdentityDTO);
         
         SampleSystem.Domain.TestRestrictionObject ToTestRestrictionObject(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentityDTO);
         
@@ -7262,6 +7272,33 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapTestRelativeEmployeeChildObject(SampleSystem.Domain.TestRelativeEmployeeChildObject domainObject, SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.Employee, null))
+            {
+                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Employee, this);
+            }
+            else
+            {
+                mappingObject.Employee = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            if (!object.ReferenceEquals(domainObject.Master, null))
+            {
+                mappingObject.Master = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Master, this);
+            }
+            else
+            {
+                mappingObject.Master = null;
+            }
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapTestRelativeEmployeeObject(SampleSystem.Domain.TestRelativeEmployeeObject domainObject, SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
@@ -7283,6 +7320,29 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.EmployeeRef2 = null;
             }
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapTestRelativeEmployeeParentObject(SampleSystem.Domain.TestRelativeEmployeeParentObject domainObject, SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.Children = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Children, this);
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapTestRelativeEmployeeParentObject(SampleSystem.Domain.TestRelativeEmployeeParentObject domainObject, SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -8945,9 +9005,19 @@ namespace SampleSystem.Generated.DTO
             return this.GetById<SampleSystem.Domain.TestPlainAuthObject>(testPlainAuthObjectIdentityDTO.Id);
         }
         
+        public virtual SampleSystem.Domain.TestRelativeEmployeeChildObject ToTestRelativeEmployeeChildObject(SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO testRelativeEmployeeChildObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestRelativeEmployeeChildObject>(testRelativeEmployeeChildObjectIdentityDTO.Id);
+        }
+        
         public virtual SampleSystem.Domain.TestRelativeEmployeeObject ToTestRelativeEmployeeObject(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO testRelativeEmployeeObjectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestRelativeEmployeeObject>(testRelativeEmployeeObjectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TestRelativeEmployeeParentObject ToTestRelativeEmployeeParentObject(SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO testRelativeEmployeeParentObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestRelativeEmployeeParentObject>(testRelativeEmployeeParentObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.TestRestrictionObject ToTestRestrictionObject(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentityDTO)

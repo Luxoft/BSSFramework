@@ -11,7 +11,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 namespace SampleSystem.IntegrationTests;
 
 [TestClass]
-public class CurrentUserSecurityProviderTests : TestBase
+public class CurrentUserSingleRelativePathTests : TestBase
 {
     private Guid[] testObjectIdents;
 

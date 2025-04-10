@@ -2,7 +2,6 @@
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem;
-using Framework.Core;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.Environment.Security;

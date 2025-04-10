@@ -546,6 +546,26 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
+        public static SampleSystem.Generated.DTO.AdGroupIdentityDTO ToIdentityDTO(this SampleSystem.Domain.Ad.AdGroup domainObject)
+        {
+            return new SampleSystem.Generated.DTO.AdGroupIdentityDTO(domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO ToIdentityDTO(this SampleSystem.Domain.Ad.AdGroupMember domainObject)
+        {
+            return new SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO(domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.BannerIdentityDTO ToIdentityDTO(this SampleSystem.Domain.Ad.Banner domainObject)
+        {
+            return new SampleSystem.Generated.DTO.BannerIdentityDTO(domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.BannerAccessIdentityDTO ToIdentityDTO(this SampleSystem.Domain.Ad.BannerAccess domainObject)
+        {
+            return new SampleSystem.Generated.DTO.BannerAccessIdentityDTO(domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.AddressIdentityDTO ToIdentityDTO(this SampleSystem.Domain.Address domainObject)
         {
             return new SampleSystem.Generated.DTO.AddressIdentityDTO(domainObject);
@@ -949,6 +969,26 @@ namespace SampleSystem.Generated.DTO
         public static SampleSystem.Generated.DTO.ChildEntityIdentityDTO ToIdentityDTO(this SampleSystem.Domain.UniqueByParent.ChildEntity domainObject)
         {
             return new SampleSystem.Generated.DTO.ChildEntityIdentityDTO(domainObject);
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AdGroupIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.AdGroup> domainObjects)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.AdGroupMember> domainObjects)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.BannerIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.Banner> domainObjects)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.BannerAccessIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.BannerAccess> domainObjects)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Address> domainObjects)
@@ -2076,6 +2116,26 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
+        public static SampleSystem.Generated.DTO.AdGroupEventRichDTO ToRichEventDTO(this SampleSystem.Domain.Ad.AdGroup domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.AdGroupEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.AdGroupMemberEventRichDTO ToRichEventDTO(this SampleSystem.Domain.Ad.AdGroupMember domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.AdGroupMemberEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.BannerEventRichDTO ToRichEventDTO(this SampleSystem.Domain.Ad.Banner domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.BannerEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.BannerAccessEventRichDTO ToRichEventDTO(this SampleSystem.Domain.Ad.BannerAccess domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.BannerAccessEventRichDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.AddressEventRichDTO ToRichEventDTO(this SampleSystem.Domain.Address domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.AddressEventRichDTO(mappingService, domainObject);
@@ -2574,6 +2634,26 @@ namespace SampleSystem.Generated.DTO
         public static SampleSystem.Generated.DTO.ChildEntityEventRichDTO ToRichEventDTO(this SampleSystem.Domain.UniqueByParent.ChildEntity domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.ChildEntityEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AdGroupEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.AdGroup> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AdGroupMemberEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.AdGroupMember> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.BannerEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.Banner> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.BannerAccessEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.BannerAccess> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Address> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
@@ -3746,6 +3826,16 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
+        public static SampleSystem.Generated.DTO.AdGroupEventSimpleDTO ToSimpleEventDTO(this SampleSystem.Domain.Ad.AdGroup domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.AdGroupEventSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.BannerEventSimpleDTO ToSimpleEventDTO(this SampleSystem.Domain.Ad.Banner domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.BannerEventSimpleDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO ToSimpleEventDTO(this SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO(mappingService, domainObject);
@@ -3879,6 +3969,16 @@ namespace SampleSystem.Generated.DTO
         public static SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO ToSimpleEventDTO(this SampleSystem.Domain.UniqueByMaster.ParentEntity domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AdGroupEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.AdGroup> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.BannerEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.Banner> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.BusinessUnit> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)

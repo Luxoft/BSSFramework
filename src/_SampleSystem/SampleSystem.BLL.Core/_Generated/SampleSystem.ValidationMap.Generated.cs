@@ -85,6 +85,78 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.Address>(this.GetAddressProperties);
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.AdGroup, System.DateTime?>> GetAdGroup_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Ad.AdGroup>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.AdGroup, string>> GetAdGroup_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Ad.AdGroup>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.AdGroup, System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.AdGroupMember>>> GetAdGroup_MembersValidators()
+        {
+            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.Ad.AdGroup, System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.AdGroupMember>, SampleSystem.Domain.Ad.AdGroupMember>();
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.AdGroup, string>> GetAdGroup_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Ad.AdGroup>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.AdGroup, System.DateTime?>> GetAdGroup_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Ad.AdGroup>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.AdGroupMember, System.DateTime?>> GetAdGroupMember_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Ad.AdGroupMember>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.AdGroupMember, string>> GetAdGroupMember_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Ad.AdGroupMember>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.AdGroupMember, string>> GetAdGroupMember_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Ad.AdGroupMember>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.AdGroupMember, System.DateTime?>> GetAdGroupMember_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Ad.AdGroupMember>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.Ad.AdGroupMember>> GetAdGroupMemberProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.Ad.AdGroupMember> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.AdGroupMember, System.DateTime?>(source => source.CreateDate, currentClass, this.GetAdGroupMember_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.AdGroupMember, string>(source => source.CreatedBy, currentClass, this.GetAdGroupMember_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.AdGroupMember, string>(source => source.ModifiedBy, currentClass, this.GetAdGroupMember_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.AdGroupMember, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetAdGroupMember_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.Ad.AdGroupMember> GetAdGroupMemberValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.Ad.AdGroupMember>(this.GetAdGroupMemberProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.Ad.AdGroup>> GetAdGroupProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.Ad.AdGroup> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.AdGroup, System.DateTime?>(source => source.CreateDate, currentClass, this.GetAdGroup_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.AdGroup, string>(source => source.CreatedBy, currentClass, this.GetAdGroup_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Ad.AdGroup, System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.AdGroupMember>, SampleSystem.Domain.Ad.AdGroupMember>(source => source.Members, currentClass, this.GetAdGroup_MembersValidators(), this.GetClassMap<SampleSystem.Domain.Ad.AdGroupMember>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.AdGroup, string>(source => source.ModifiedBy, currentClass, this.GetAdGroup_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.AdGroup, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetAdGroup_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.Ad.AdGroup> GetAdGroupValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.Ad.AdGroup>(this.GetAdGroupProperties);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.AnotherSqlParserTestObj, System.DateTime?>> GetAnotherSqlParserTestObj_CreateDateValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.AnotherSqlParserTestObj>(this.AvailableValues.GetAvailableRange<System.DateTime>());
@@ -161,6 +233,78 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.AuthPerformanceObject>(this.GetAuthPerformanceObjectProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.Banner, System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.BannerAccess>>> GetBanner_AccessesValidators()
+        {
+            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.Ad.Banner, System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.BannerAccess>, SampleSystem.Domain.Ad.BannerAccess>();
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.Banner, System.DateTime?>> GetBanner_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Ad.Banner>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.Banner, string>> GetBanner_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Ad.Banner>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.Banner, string>> GetBanner_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Ad.Banner>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.Banner, System.DateTime?>> GetBanner_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Ad.Banner>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.BannerAccess, System.DateTime?>> GetBannerAccess_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Ad.BannerAccess>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.BannerAccess, string>> GetBannerAccess_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Ad.BannerAccess>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.BannerAccess, string>> GetBannerAccess_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Ad.BannerAccess>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Ad.BannerAccess, System.DateTime?>> GetBannerAccess_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Ad.BannerAccess>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.Ad.BannerAccess>> GetBannerAccessProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.Ad.BannerAccess> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.BannerAccess, System.DateTime?>(source => source.CreateDate, currentClass, this.GetBannerAccess_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.BannerAccess, string>(source => source.CreatedBy, currentClass, this.GetBannerAccess_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.BannerAccess, string>(source => source.ModifiedBy, currentClass, this.GetBannerAccess_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.BannerAccess, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetBannerAccess_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.Ad.BannerAccess> GetBannerAccessValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.Ad.BannerAccess>(this.GetBannerAccessProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.Ad.Banner>> GetBannerProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.Ad.Banner> currentClass)
+        {
+            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Ad.Banner, System.Collections.Generic.IEnumerable<SampleSystem.Domain.Ad.BannerAccess>, SampleSystem.Domain.Ad.BannerAccess>(source => source.Accesses, currentClass, this.GetBanner_AccessesValidators(), this.GetClassMap<SampleSystem.Domain.Ad.BannerAccess>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.Banner, System.DateTime?>(source => source.CreateDate, currentClass, this.GetBanner_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.Banner, string>(source => source.CreatedBy, currentClass, this.GetBanner_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.Banner, string>(source => source.ModifiedBy, currentClass, this.GetBanner_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Ad.Banner, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetBanner_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.Ad.Banner> GetBannerValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.Ad.Banner>(this.GetBannerProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.BusinessUnit, System.Collections.Generic.IEnumerable<SampleSystem.Domain.BusinessUnitEmployeeRole>>> GetBusinessUnit_BusinessUnitEmployeeRolesValidators()
@@ -2507,7 +2651,23 @@ namespace SampleSystem.BLL
         
         protected override Framework.Validation.IClassValidationMap<TSource> GetInternalClassMap<TSource>()
         {
-            if ((typeof(TSource) == typeof(SampleSystem.Domain.Address)))
+            if ((typeof(TSource) == typeof(SampleSystem.Domain.Ad.AdGroup)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAdGroupValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Ad.AdGroupMember)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAdGroupMemberValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Ad.Banner)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetBannerValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Ad.BannerAccess)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetBannerAccessValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Address)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAddressValidationMap()));
             }

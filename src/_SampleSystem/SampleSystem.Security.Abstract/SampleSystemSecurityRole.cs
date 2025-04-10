@@ -6,6 +6,8 @@ public static class SampleSystemSecurityRole
 {
     public static SecurityRole SecretariatNotification { get; } = new(nameof(SecretariatNotification));
 
+    public static SecurityRole AdRole { get; } = new(nameof(AdRole));
+
     public static SecurityRole SeManager { get; } = new("SE Manager");
 
     public static SecurityRole TestRole1 { get; } = new(nameof(TestRole1));

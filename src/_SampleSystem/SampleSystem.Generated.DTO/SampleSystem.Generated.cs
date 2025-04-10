@@ -11,6 +11,378 @@ namespace SampleSystem.Generated.DTO
 {
     
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Ad.AdGroup), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct AdGroupIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.AdGroupIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.AdGroupIdentityDTO EmptyField = new SampleSystem.Generated.DTO.AdGroupIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public AdGroupIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public AdGroupIdentityDTO(SampleSystem.Domain.Ad.AdGroup domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public AdGroupIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.AdGroupIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.AdGroupIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.AdGroupIdentityDTO identity1, SampleSystem.Generated.DTO.AdGroupIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.AdGroupIdentityDTO identity1, SampleSystem.Generated.DTO.AdGroupIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.AdGroupIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.AdGroupIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.AdGroupIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Ad.AdGroup ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToAdGroup(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Ad.AdGroupMember), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct AdGroupMemberIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO EmptyField = new SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public AdGroupMemberIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public AdGroupMemberIdentityDTO(SampleSystem.Domain.Ad.AdGroupMember domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public AdGroupMemberIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO identity1, SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO identity1, SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Ad.AdGroupMember ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToAdGroupMember(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Ad.Banner), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct BannerIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BannerIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.BannerIdentityDTO EmptyField = new SampleSystem.Generated.DTO.BannerIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public BannerIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public BannerIdentityDTO(SampleSystem.Domain.Ad.Banner domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public BannerIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.BannerIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.BannerIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.BannerIdentityDTO identity1, SampleSystem.Generated.DTO.BannerIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.BannerIdentityDTO identity1, SampleSystem.Generated.DTO.BannerIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BannerIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BannerIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.BannerIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Ad.Banner ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToBanner(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Ad.BannerAccess), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct BannerAccessIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BannerAccessIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.BannerAccessIdentityDTO EmptyField = new SampleSystem.Generated.DTO.BannerAccessIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public BannerAccessIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public BannerAccessIdentityDTO(SampleSystem.Domain.Ad.BannerAccess domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public BannerAccessIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.BannerAccessIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.BannerAccessIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.BannerAccessIdentityDTO identity1, SampleSystem.Generated.DTO.BannerAccessIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.BannerAccessIdentityDTO identity1, SampleSystem.Generated.DTO.BannerAccessIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BannerAccessIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BannerAccessIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.BannerAccessIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Ad.BannerAccess ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToBannerAccess(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct AddressIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.AddressIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>

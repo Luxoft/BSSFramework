@@ -1,5 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping assembly="SampleSystem.Domain" auto-import="false" schema="SampleSystem.dbo" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="SampleSystem.Domain.Ad.AdGroup" table="AdGroup">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <set name="Members" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="groupId" />
+      <one-to-many class="SampleSystem.Domain.Ad.AdGroupMember" />
+    </set>
+  </class>
+  <class name="SampleSystem.Domain.Ad.AdGroupMember" table="AdGroupMember">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+    <many-to-one name="Group" column="groupId" class="SampleSystem.Domain.Ad.AdGroup" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.Ad.Banner" table="Banner">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <set name="Accesses" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="bannerId" />
+      <one-to-many class="SampleSystem.Domain.Ad.BannerAccess" />
+    </set>
+  </class>
+  <class name="SampleSystem.Domain.Ad.BannerAccess" table="BannerAccess">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="AccessFlag" column="accessFlag" access="field.camelcase" />
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Banner" column="bannerId" class="SampleSystem.Domain.Ad.Banner" access="field.camelcase" />
+    <many-to-one name="Group" column="groupId" class="SampleSystem.Domain.Ad.AdGroup" access="field.camelcase" />
+  </class>
   <class name="SampleSystem.Domain.Address" table="Address">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

@@ -42,6 +42,62 @@ namespace SampleSystem.BLL
             }
         }
         
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Ad.AdGroup> GetAdGroupContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Ad.AdGroup>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Ad.AdGroup>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Ad.AdGroup>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Ad.AdGroup>(
+                    fetchRootRule => fetchRootRule.SelectMany(adGroup => adGroup.Members).SelectNested(adGroupMember => adGroupMember.Employee).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectMany(adGroup => adGroup.Members).SelectNested(adGroupMember => adGroupMember.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Ad.AdGroupMember> GetAdGroupMemberContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Ad.AdGroupMember>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Ad.AdGroupMember>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Ad.AdGroupMember>(
+                    fetchRootRule => fetchRootRule.SelectNested(adGroupMember => adGroupMember.Employee).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(adGroupMember => adGroupMember.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
+                    fetchRootRule => fetchRootRule.SelectNested(adGroupMember => adGroupMember.Group));
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Ad.AdGroupMember>(
+                    fetchRootRule => fetchRootRule.SelectNested(adGroupMember => adGroupMember.Employee).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(adGroupMember => adGroupMember.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
+                    fetchRootRule => fetchRootRule.SelectNested(adGroupMember => adGroupMember.Group));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
         protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.AnotherSqlParserTestObj> GetAnotherSqlParserTestObjContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
@@ -93,6 +149,58 @@ namespace SampleSystem.BLL
                     fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
                     fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Location).SelectMany(location => location.Children),
                     fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.ManagementUnit));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Ad.BannerAccess> GetBannerAccessContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Ad.BannerAccess>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Ad.BannerAccess>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Ad.BannerAccess>(
+                    fetchRootRule => fetchRootRule.SelectNested(bannerAccess => bannerAccess.Banner),
+                    fetchRootRule => fetchRootRule.SelectNested(bannerAccess => bannerAccess.Group));
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Ad.BannerAccess>(
+                    fetchRootRule => fetchRootRule.SelectNested(bannerAccess => bannerAccess.Banner),
+                    fetchRootRule => fetchRootRule.SelectNested(bannerAccess => bannerAccess.Group));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Ad.Banner> GetBannerContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Ad.Banner>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Ad.Banner>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Ad.Banner>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Ad.Banner>(fetchRootRule => fetchRootRule.SelectMany(banner => banner.Accesses).SelectNested(bannerAccess => bannerAccess.Group));
             }
             else
             {
@@ -602,7 +710,23 @@ namespace SampleSystem.BLL
         
         protected override Framework.DomainDriven.IFetchContainer<TDomainObject> GetContainer<TDomainObject>(Framework.Transfering.ViewDTOType rule)
         {
-            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Address)))
+            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Ad.AdGroup)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAdGroupContainer(rule)));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Ad.AdGroupMember)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAdGroupMemberContainer(rule)));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Ad.Banner)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBannerContainer(rule)));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Ad.BannerAccess)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBannerAccessContainer(rule)));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Address)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAddressContainer(rule)));
             }

@@ -5,6 +5,7 @@ using Framework.SecuritySystem;
 using Framework.SecuritySystem.DependencyInjection;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Ad;
 
 namespace SampleSystem.Security;
 
@@ -71,6 +72,10 @@ public static class SampleSystemSecuritySystemExtensions
                        Restriction = SecurityPathRestriction.Create<BusinessUnit>()
                                                             .AddRelativeCondition<TestRestrictionObject>(obj => obj.RestrictionHandler)
                    })
+
+               .AddSecurityRole(
+                   SampleSystemSecurityRole.AdRole,
+                   new SecurityRoleInfo(new Guid("{FC6C3984-AC22-417B-8E8D-FA0F31035281}")))
 
                .AddSecurityRole(
                    SampleSystemSecurityRole.WithRestrictionFilterRole,
@@ -148,10 +153,10 @@ public static class SampleSystemSecuritySystemExtensions
     public static ISecuritySystemSettings AddVirtualPermissions(this ISecuritySystemSettings settings)
     {
         return settings.AddVirtualPermission<Employee, BusinessUnitEmployeeRole>(
-            SampleSystemSecurityRole.SeManager,
+            SampleSystemSecurityRole.AdRole,
             link => link.Employee,
             employee => employee.Login,
             v => v.AddRestriction(link => link.BusinessUnit)
-                  .AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager));
+                  .AddFilter(link => link.Employee.Active && link.Role == BusinessUnitEmployeeRoleType.Manager));
     }
 }

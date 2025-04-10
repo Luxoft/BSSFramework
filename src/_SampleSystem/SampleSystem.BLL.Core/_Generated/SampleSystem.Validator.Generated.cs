@@ -26,6 +26,10 @@ namespace SampleSystem.BLL
         public SampleSystemValidatorBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
                 base(context, cache)
         {
+            base.RegisterHandler<SampleSystem.Domain.Ad.AdGroup>(this.GetAdGroupValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Ad.AdGroupMember>(this.GetAdGroupMemberValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Ad.Banner>(this.GetBannerValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Ad.BannerAccess>(this.GetBannerAccessValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Address>(this.GetAddressValidationResult);
             base.RegisterHandler<SampleSystem.Domain.AnotherSqlParserTestObj>(this.GetAnotherSqlParserTestObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.AuthPerformanceObject>(this.GetAuthPerformanceObjectValidationResult);
@@ -135,12 +139,32 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
+        protected virtual Framework.Validation.ValidationResult GetAdGroupMemberValidationResult(SampleSystem.Domain.Ad.AdGroupMember source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetAdGroupValidationResult(SampleSystem.Domain.Ad.AdGroup source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
         protected virtual Framework.Validation.ValidationResult GetAnotherSqlParserTestObjValidationResult(SampleSystem.Domain.AnotherSqlParserTestObj source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
         protected virtual Framework.Validation.ValidationResult GetAuthPerformanceObjectValidationResult(SampleSystem.Domain.AuthPerformanceObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetBannerAccessValidationResult(SampleSystem.Domain.Ad.BannerAccess source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetBannerValidationResult(SampleSystem.Domain.Ad.Banner source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

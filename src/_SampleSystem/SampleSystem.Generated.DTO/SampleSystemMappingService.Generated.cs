@@ -24,11 +24,23 @@ namespace SampleSystem.Generated.DTO
         
         void MapAddress(SampleSystem.Domain.Address domainObject, SampleSystem.Generated.DTO.AddressEventRichDTO mappingObject);
         
+        void MapAdGroup(SampleSystem.Domain.Ad.AdGroup domainObject, SampleSystem.Generated.DTO.AdGroupEventRichDTO mappingObject);
+        
+        void MapAdGroup(SampleSystem.Domain.Ad.AdGroup domainObject, SampleSystem.Generated.DTO.AdGroupEventSimpleDTO mappingObject);
+        
+        void MapAdGroupMember(SampleSystem.Domain.Ad.AdGroupMember domainObject, SampleSystem.Generated.DTO.AdGroupMemberEventRichDTO mappingObject);
+        
         void MapAnotherSqlParserTestObj(SampleSystem.Domain.AnotherSqlParserTestObj domainObject, SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO mappingObject);
         
         void MapAuditPersistentDomainObjectBase(SampleSystem.Domain.AuditPersistentDomainObjectBase domainObject, SampleSystem.Generated.DTO.BaseAuditPersistentDTO mappingObject);
         
         void MapAuthPerformanceObject(SampleSystem.Domain.AuthPerformanceObject domainObject, SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO mappingObject);
+        
+        void MapBanner(SampleSystem.Domain.Ad.Banner domainObject, SampleSystem.Generated.DTO.BannerEventRichDTO mappingObject);
+        
+        void MapBanner(SampleSystem.Domain.Ad.Banner domainObject, SampleSystem.Generated.DTO.BannerEventSimpleDTO mappingObject);
+        
+        void MapBannerAccess(SampleSystem.Domain.Ad.BannerAccess domainObject, SampleSystem.Generated.DTO.BannerAccessEventRichDTO mappingObject);
         
         void MapBusinessUnit(SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.BusinessUnitVisualDTO mappingObject);
         
@@ -878,9 +890,17 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.Address ToAddress(SampleSystem.Generated.DTO.AddressStrictDTO addressStrictDTO, SampleSystem.Domain.LegalEntityBase master);
         
+        SampleSystem.Domain.Ad.AdGroup ToAdGroup(SampleSystem.Generated.DTO.AdGroupIdentityDTO adGroupIdentityDTO);
+        
+        SampleSystem.Domain.Ad.AdGroupMember ToAdGroupMember(SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO adGroupMemberIdentityDTO);
+        
         SampleSystem.Domain.AnotherSqlParserTestObj ToAnotherSqlParserTestObj(SampleSystem.Generated.DTO.AnotherSqlParserTestObjIdentityDTO anotherSqlParserTestObjIdentityDTO);
         
         SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO);
+        
+        SampleSystem.Domain.Ad.Banner ToBanner(SampleSystem.Generated.DTO.BannerIdentityDTO bannerIdentityDTO);
+        
+        SampleSystem.Domain.Ad.BannerAccess ToBannerAccess(SampleSystem.Generated.DTO.BannerAccessIdentityDTO bannerAccessIdentityDTO);
         
         SampleSystem.Domain.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdentityDTO);
         
@@ -1366,6 +1386,56 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Zip = domainObject.Zip;
         }
         
+        public virtual void MapAdGroup(SampleSystem.Domain.Ad.AdGroup domainObject, SampleSystem.Generated.DTO.AdGroupEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.Members = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Members, this);
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapAdGroup(SampleSystem.Domain.Ad.AdGroup domainObject, SampleSystem.Generated.DTO.AdGroupEventSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapAdGroupMember(SampleSystem.Domain.Ad.AdGroupMember domainObject, SampleSystem.Generated.DTO.AdGroupMemberEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.Employee, null))
+            {
+                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Employee, this);
+            }
+            else
+            {
+                mappingObject.Employee = null;
+            }
+            if (!object.ReferenceEquals(domainObject.Group, null))
+            {
+                mappingObject.Group = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Group, this);
+            }
+            else
+            {
+                mappingObject.Group = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapAnotherSqlParserTestObj(SampleSystem.Domain.AnotherSqlParserTestObj domainObject, SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
@@ -1427,6 +1497,57 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.ManagementUnit = null;
             }
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapBanner(SampleSystem.Domain.Ad.Banner domainObject, SampleSystem.Generated.DTO.BannerEventRichDTO mappingObject)
+        {
+            mappingObject.Accesses = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Accesses, this);
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapBanner(SampleSystem.Domain.Ad.Banner domainObject, SampleSystem.Generated.DTO.BannerEventSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapBannerAccess(SampleSystem.Domain.Ad.BannerAccess domainObject, SampleSystem.Generated.DTO.BannerAccessEventRichDTO mappingObject)
+        {
+            mappingObject.AccessFlag = domainObject.AccessFlag;
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.Banner, null))
+            {
+                mappingObject.Banner = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Banner, this);
+            }
+            else
+            {
+                mappingObject.Banner = null;
+            }
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.Group, null))
+            {
+                mappingObject.Group = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Group, this);
+            }
+            else
+            {
+                mappingObject.Group = null;
+            }
+            mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
             mappingObject.Version = domainObject.Version;
@@ -7757,6 +7878,16 @@ namespace SampleSystem.Generated.DTO
             return this.ToDomainObject(addressStrictDTO, () => new SampleSystem.Domain.Address(legalEntityBase));
         }
         
+        public virtual SampleSystem.Domain.Ad.AdGroup ToAdGroup(SampleSystem.Generated.DTO.AdGroupIdentityDTO adGroupIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.Ad.AdGroup>(adGroupIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.Ad.AdGroupMember ToAdGroupMember(SampleSystem.Generated.DTO.AdGroupMemberIdentityDTO adGroupMemberIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.Ad.AdGroupMember>(adGroupMemberIdentityDTO.Id);
+        }
+        
         public virtual SampleSystem.Domain.AnotherSqlParserTestObj ToAnotherSqlParserTestObj(SampleSystem.Generated.DTO.AnotherSqlParserTestObjIdentityDTO anotherSqlParserTestObjIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.AnotherSqlParserTestObj>(anotherSqlParserTestObjIdentityDTO.Id);
@@ -7765,6 +7896,16 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.AuthPerformanceObject>(authPerformanceObjectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.Ad.Banner ToBanner(SampleSystem.Generated.DTO.BannerIdentityDTO bannerIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.Ad.Banner>(bannerIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.Ad.BannerAccess ToBannerAccess(SampleSystem.Generated.DTO.BannerAccessIdentityDTO bannerAccessIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.Ad.BannerAccess>(bannerAccessIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdentityDTO)

@@ -120,11 +120,21 @@ internal class DomainSecurityServiceBuilder<TDomainObject> : DomainSecurityServi
     public IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> relativeDomainPath)
         where TSource : class
     {
+        return this.SetDependency(new SingleRelativeDomainPathInfo<TDomainObject, TSource>(relativeDomainPath));
+    }
+
+    public IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, IEnumerable<TSource>>> relativeDomainPath)
+        where TSource : class
+    {
+        return this.SetDependency(new ManyRelativeDomainPathInfo<TDomainObject, TSource>(relativeDomainPath));
+    }
+
+    private IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(IRelativeDomainPathInfo<TDomainObject, TSource> relativeDomainPathInfo)
+        where TSource : class
+    {
         this.SetDependency<TSource>();
 
-        this.relativePathData =
-            (typeof(IRelativeDomainPathInfo<TDomainObject, TSource>),
-                new SingleRelativeDomainPathInfo<TDomainObject, TSource>(relativeDomainPath));
+        this.relativePathData = (typeof(IRelativeDomainPathInfo<TDomainObject, TSource>), relativeDomainPathInfo);
 
         return this;
     }

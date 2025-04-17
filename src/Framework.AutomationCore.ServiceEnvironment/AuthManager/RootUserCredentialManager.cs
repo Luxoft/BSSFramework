@@ -4,7 +4,7 @@ using Automation.Utils;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Credential;
-
+using Framework.SecuritySystem.ExternalSystem.Management;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
@@ -71,5 +71,17 @@ public class RootUserCredentialManager(IServiceProvider rootServiceProvider, Use
         await this.ManagerEvaluator.EvaluateAsync(
             DBSessionMode.Write,
             async manager => await manager.RemovePermissionsAsync(userCredential, cancellationToken));
+    }
+
+    public TypedPrincipal GetPrincipal()
+    {
+        return this.GetPrincipalAsync().GetAwaiter().GetResult();
+    }
+
+    public async Task<TypedPrincipal> GetPrincipalAsync(CancellationToken cancellationToken = default)
+    {
+        return await this.ManagerEvaluator.EvaluateAsync(
+                   DBSessionMode.Write,
+                   async manager => await manager.GetPrincipalAsync(userCredential, cancellationToken));
     }
 }

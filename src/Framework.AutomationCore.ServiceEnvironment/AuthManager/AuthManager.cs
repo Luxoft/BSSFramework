@@ -3,6 +3,7 @@
 using Framework.Core.Services;
 using Framework.SecuritySystem.Credential;
 using Framework.SecuritySystem.ExternalSystem.Management;
+using Framework.SecuritySystem.UserSource;
 
 namespace Automation.ServiceEnvironment;
 
@@ -76,5 +77,14 @@ public class AuthManager(
         {
             await principalManagementService.RemovePrincipalAsync(principal.Header.Id, true, cancellationToken);
         }
+    }
+
+    public async Task<TypedPrincipal> GetPrincipalAsync(UserCredential? userCredential, CancellationToken cancellationToken = default)
+    {
+        var principal = await principalManagementService.TryGetPrincipalAsync(
+                            userCredential ?? this.GetCurrentUserLogin(),
+                            cancellationToken);
+
+        return principal ?? throw new UserSourceException($"Principal \"{userCredential}\" not found");
     }
 }

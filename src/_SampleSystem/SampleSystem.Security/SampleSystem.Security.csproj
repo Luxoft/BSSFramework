@@ -11,7 +11,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.LegacyContext\Framework.DomainDriven.ServiceModel.IAD.LegacyContext.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup\Framework.DomainDriven.Setup.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.VirtualPermission\Framework.DomainDriven.VirtualPermission.csproj" />
 
     <ProjectReference Include="..\SampleSystem.Domain.LegacyProjections\SampleSystem.Domain.LegacyProjections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />

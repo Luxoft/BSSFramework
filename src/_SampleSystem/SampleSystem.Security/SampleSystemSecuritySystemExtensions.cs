@@ -1,8 +1,8 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.VirtualPermission;
 using Framework.HierarchicalExpand;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.DependencyInjection;
+using SecuritySystem;
+using SecuritySystem.DependencyInjection;
 
 using SampleSystem.Domain;
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace SampleSystem.Domain;
 

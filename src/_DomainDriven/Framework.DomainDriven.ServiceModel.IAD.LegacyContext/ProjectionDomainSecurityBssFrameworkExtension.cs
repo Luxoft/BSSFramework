@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

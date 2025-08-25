@@ -16,13 +16,13 @@ public class EmployeeAsyncController : ControllerBase
 {
     private readonly IRepositoryFactory<Employee> employeeRepositoryFactory;
 
-    private readonly IUserAuthenticationService userAuthenticationService;
+    private readonly IRawUserAuthenticationService userAuthenticationService;
 
     private readonly ISampleSystemDTOMappingService mappingService;
 
     public EmployeeAsyncController(
             IRepositoryFactory<Employee> employeeRepositoryFactory,
-            IUserAuthenticationService userAuthenticationService,
+            IRawUserAuthenticationService userAuthenticationService,
             ISampleSystemDTOMappingService mappingService)
     {
         this.employeeRepositoryFactory = employeeRepositoryFactory;

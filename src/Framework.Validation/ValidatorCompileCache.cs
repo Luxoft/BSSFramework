@@ -1,4 +1,7 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+using CommonFramework.DictionaryCache;
+
+using Framework.Core;
 
 namespace Framework.Validation;
 
@@ -6,7 +9,6 @@ public class ValidatorCompileCache
 {
     private readonly IValidationMap validationMap;
 
-    private readonly LambdaCompileCache lambdaCompileCache = new LambdaCompileCache();
 
     private readonly IDictionaryCache<Type, Delegate> validateFuncCache;
 
@@ -115,7 +117,7 @@ public class ValidatorCompileCache
     {
         if (propertyMap == null) throw new ArgumentNullException(nameof(propertyMap));
 
-        var getPropertyValueFunc = propertyMap.Property.ToLambdaExpression<TSource, TProperty>().Compile(this.lambdaCompileCache);
+        var getPropertyValueFunc = propertyMap.Property.ToLambdaExpression<TSource, TProperty>().Compile();
 
         return propertyMap.Validators.Any()
 

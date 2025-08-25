@@ -1,7 +1,7 @@
 ﻿using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.DependencyInjection;
-using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+using SecuritySystem;
+using SecuritySystem.DependencyInjection;
+using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.EnversBug1676;

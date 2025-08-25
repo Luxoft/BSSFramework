@@ -34,7 +34,7 @@ namespace Framework.Authorization.BLL
     public partial class BusinessRoleBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.BusinessRole>, Framework.Authorization.BLL.IBusinessRoleBLL
     {
         
-        public BusinessRoleBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.BusinessRole> securityProvider) : 
+        public BusinessRoleBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.BusinessRole> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -52,7 +52,7 @@ namespace Framework.Authorization.BLL
     public partial class PermissionBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Permission>, Framework.Authorization.BLL.IPermissionBLL
     {
         
-        public PermissionBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.Permission> securityProvider) : 
+        public PermissionBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.Permission> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -70,7 +70,7 @@ namespace Framework.Authorization.BLL
     public partial class PermissionRestrictionBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.PermissionRestriction>, Framework.Authorization.BLL.IPermissionRestrictionBLL
     {
         
-        public PermissionRestrictionBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.PermissionRestriction> securityProvider) : 
+        public PermissionRestrictionBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.PermissionRestriction> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -88,7 +88,7 @@ namespace Framework.Authorization.BLL
     public partial class PrincipalBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Principal>, Framework.Authorization.BLL.IPrincipalBLL
     {
         
-        public PrincipalBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.Principal> securityProvider) : 
+        public PrincipalBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.Principal> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -106,7 +106,7 @@ namespace Framework.Authorization.BLL
     public partial class SecurityContextTypeBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.SecurityContextType>, Framework.Authorization.BLL.ISecurityContextTypeBLL
     {
         
-        public SecurityContextTypeBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.SecurityContextType> securityProvider) : 
+        public SecurityContextTypeBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.SecurityContextType> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -290,7 +290,7 @@ namespace Framework.Authorization.BLL
         {
         }
         
-        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
+        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
         {
             return new Framework.Authorization.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
@@ -304,7 +304,7 @@ namespace Framework.Authorization.BLL
         {
         }
         
-        protected override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
+        protected override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
         {
             return new Framework.Authorization.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }

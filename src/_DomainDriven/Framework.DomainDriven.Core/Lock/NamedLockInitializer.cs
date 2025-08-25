@@ -1,7 +1,9 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Repository;
-using Framework.GenericQueryable;
-using Framework.SecuritySystem;
+
+using GenericQueryable;
+
+using SecuritySystem.Attributes;
 
 namespace Framework.DomainDriven.Lock;
 
@@ -14,8 +16,8 @@ public class NamedLockInitializer<TGenericNamedLock>(
 {
     public async Task Initialize(CancellationToken cancellationToken)
     {
-        var getNameFunc = genericNamedLockTypeInfo.NamePath.Compile(LambdaCompileCache.Default);
-        var setNameFunc = genericNamedLockTypeInfo.NamePath.ToSetLambdaExpression().Compile(LambdaCompileCache.Default);
+        var getNameFunc = genericNamedLockTypeInfo.NamePath.Compile();
+        var setNameFunc = genericNamedLockTypeInfo.NamePath.ToSetLambdaExpression().Compile();
 
         var dbValues = await namedLockRepository.GetQueryable().GenericToListAsync(cancellationToken);
 

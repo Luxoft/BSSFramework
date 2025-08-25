@@ -6,7 +6,6 @@
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Core.Reflection\Framework.Core.Reflection.csproj" />
     <ProjectReference Include="..\Framework.Projection\Framework.Projection.csproj" />
     <ProjectReference Include="..\Framework.Security.LegacyAttributes\Framework.Security.LegacyAttributes.csproj" />
 

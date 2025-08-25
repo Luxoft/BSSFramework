@@ -1,10 +1,12 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
-using Framework.GenericQueryable;
-using Framework.SecuritySystem;
+
+using SecuritySystem;
 
 using Microsoft.Extensions.Logging;
+
+using SecuritySystem.Attributes;
 
 namespace Framework.Authorization.SecuritySystem.Initialize;
 

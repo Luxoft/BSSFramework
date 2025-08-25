@@ -1,5 +1,5 @@
-﻿using Framework.SecuritySystem;
-using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+﻿using SecuritySystem;
+using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using SampleSystem.Domain;
 

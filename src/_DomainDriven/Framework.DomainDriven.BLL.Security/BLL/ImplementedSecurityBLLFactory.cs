@@ -1,5 +1,5 @@
 ﻿using Framework.Persistent;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

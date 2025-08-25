@@ -1,5 +1,5 @@
 ﻿using Framework.Core;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Security;
 

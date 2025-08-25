@@ -1,4 +1,4 @@
-﻿using Framework.SecuritySystem;
+﻿using SecuritySystem;
 
 namespace Framework.DomainDriven.BLL.Security;
 public interface ISecurityBLLFactory<out TBLL>

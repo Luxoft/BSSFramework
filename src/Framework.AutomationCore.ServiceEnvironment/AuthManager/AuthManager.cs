@@ -1,14 +1,14 @@
 ﻿using Automation.Utils;
 
 using Framework.Core.Services;
-using Framework.SecuritySystem.Credential;
-using Framework.SecuritySystem.ExternalSystem.Management;
-using Framework.SecuritySystem.UserSource;
+using SecuritySystem.Credential;
+using SecuritySystem.ExternalSystem.Management;
+using SecuritySystem.UserSource;
 
 namespace Automation.ServiceEnvironment;
 
 public class AuthManager(
-    IUserAuthenticationService userAuthenticationService,
+    IRawUserAuthenticationService userAuthenticationService,
     IPrincipalManagementService principalManagementService,
     IUserCredentialNameResolver credentialNameResolver)
 {

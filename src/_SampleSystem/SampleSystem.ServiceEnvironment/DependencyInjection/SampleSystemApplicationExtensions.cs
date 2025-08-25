@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DependencyInjection;
-using Framework.SecuritySystem.DependencyInjection;
+using SecuritySystem.DependencyInjection;
 using Framework.WebApi.Utils.SL;
 
 using Microsoft.Extensions.Configuration;

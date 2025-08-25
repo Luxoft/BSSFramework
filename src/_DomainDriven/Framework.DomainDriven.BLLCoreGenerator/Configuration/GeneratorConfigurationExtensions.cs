@@ -4,7 +4,7 @@ using System.Reflection;
 using Framework.Core;
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

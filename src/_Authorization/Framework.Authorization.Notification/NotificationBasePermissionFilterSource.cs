@@ -2,7 +2,7 @@
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Authorization.Notification;
 

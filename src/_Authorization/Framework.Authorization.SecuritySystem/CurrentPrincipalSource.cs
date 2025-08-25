@@ -2,13 +2,14 @@
 using Framework.Core;
 using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
+
+using SecuritySystem.Attributes;
 
 namespace Framework.Authorization.SecuritySystem;
 
 public class CurrentPrincipalSource(
     [DisabledSecurity] IRepository<Principal> principalRepository,
-    IUserAuthenticationService userAuthenticationService) : ICurrentPrincipalSource
+    IRawUserAuthenticationService userAuthenticationService) : ICurrentPrincipalSource
 {
     private readonly Lazy<Principal> currentPrincipalLazy = LazyHelper.Create(
         () =>

@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 namespace Framework.Core.Serialization;
 
 public interface ISerializerFactory<TSerializedValue>

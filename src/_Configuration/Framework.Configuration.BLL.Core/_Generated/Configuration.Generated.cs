@@ -24,7 +24,7 @@ namespace Framework.Configuration.BLL
         where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
     {
         
-        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
+        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
                 base(context, securityProvider)
         {
         }

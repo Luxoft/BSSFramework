@@ -9,9 +9,4 @@
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.Core.Maybe\Framework.Core.Maybe.csproj" />
-    <ProjectReference Include="..\Framework.Core.Enumerable\Framework.Core.Enumerable.csproj" />
-  </ItemGroup>
-
 </Project>

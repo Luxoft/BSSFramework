@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;

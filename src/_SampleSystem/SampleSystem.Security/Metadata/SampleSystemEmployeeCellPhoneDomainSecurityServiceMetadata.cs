@@ -1,4 +1,4 @@
-﻿using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+﻿using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using SampleSystem.Domain;
 

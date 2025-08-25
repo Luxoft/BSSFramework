@@ -2,7 +2,7 @@
 using System.Net.Mime;
 
 using Framework.Core;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 

@@ -5,7 +5,7 @@ using Framework.DomainDriven.Serialization;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.SecuritySystem;
+using SecuritySystem;
 using Framework.Validation;
 
 namespace SampleSystem.Domain;
@@ -544,7 +544,7 @@ public partial class BusinessUnit :
         return this.GetAllParents().Any(x => x.Options.HasFlag(BusinessUnitOptions.DoNotPrintNameOnLabel));
     }
 
-    public virtual IEnumerable<BusinessUnitEmployeeRoleType> GetCurrentUserRoles(IUserAuthenticationService userAuthenticationService)
+    public virtual IEnumerable<BusinessUnitEmployeeRoleType> GetCurrentUserRoles(IRawUserAuthenticationService userAuthenticationService)
     {
         var currentUserName = userAuthenticationService.GetUserName();
 

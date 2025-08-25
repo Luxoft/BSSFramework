@@ -1,6 +1,6 @@
 ﻿using Automation.ServiceEnvironment;
 
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using SampleSystem.Domain.IntegrationVersions;
 using SampleSystem.Generated.DTO;

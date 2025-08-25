@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 using Framework.Authorization.Notification;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Authorization.BLL;
 

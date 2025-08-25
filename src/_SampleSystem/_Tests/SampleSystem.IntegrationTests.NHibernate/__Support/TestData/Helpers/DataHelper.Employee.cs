@@ -2,7 +2,7 @@
 using Automation.Utils;
 
 using Framework.Core;
-using Framework.SecuritySystem.UserSource;
+using SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
 

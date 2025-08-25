@@ -2,7 +2,7 @@
 using Automation.Utils.DatabaseUtils.Interfaces;
 
 using Framework.FinancialYear;
-using Framework.SecuritySystem.Credential;
+using SecuritySystem.Credential;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;

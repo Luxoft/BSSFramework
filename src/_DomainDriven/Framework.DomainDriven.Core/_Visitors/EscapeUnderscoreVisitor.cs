@@ -1,7 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-using Framework.Core;
+using CommonFramework;
+using CommonFramework.Maybe;
 
 namespace Framework.DomainDriven._Visitors;
 

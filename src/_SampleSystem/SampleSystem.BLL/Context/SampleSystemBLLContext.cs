@@ -6,8 +6,8 @@ using Framework.DomainDriven.Tracking;
 using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.SecurityAccessor;
+using SecuritySystem;
+using SecuritySystem.SecurityAccessor;
 
 using Microsoft.Extensions.DependencyInjection;
 

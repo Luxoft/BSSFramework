@@ -1,6 +1,6 @@
 ﻿using Framework.Persistent;
 using Framework.Security;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace SampleSystem.Domain;
 

@@ -4,7 +4,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
-using Framework.SecuritySystem;
+using SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;

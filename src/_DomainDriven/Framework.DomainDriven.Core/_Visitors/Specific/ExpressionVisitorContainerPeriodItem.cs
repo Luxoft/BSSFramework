@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.DomainDriven._Visitors;
@@ -58,7 +60,7 @@ public class ExpressionVisitorContainerPeriodItem : IExpressionVisitorContainerI
                                                                                     || (otherPeriod.Value.EndDate != null && period.Value.StartDate > otherPeriod.Value.EndDate))));
 
         yield return new OverrideMethodInfoVisitor(
-            typeof(Period).GetEqualityMethod(),
+            TypeMembersExtensions.GetEqualityMethod(typeof(Period)),
             ExpressionHelper.Create((Period period, Period otherPeriod) =>
                 period.StartDate == otherPeriod.StartDate && period.EndDate == otherPeriod.EndDate));
 

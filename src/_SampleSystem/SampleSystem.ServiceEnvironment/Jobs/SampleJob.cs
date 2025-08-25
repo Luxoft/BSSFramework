@@ -1,6 +1,6 @@
 ﻿using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Hangfire;
 

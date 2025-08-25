@@ -1,8 +1,11 @@
 ﻿using Framework.ApplicationVariable;
 using Framework.Configurator.Interfaces;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
+
+using SecuritySystem.Attributes;
+using SecuritySystem.Configurator.Handlers;
 
 namespace Framework.Configurator.Handlers;
 

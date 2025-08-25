@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.QueryLanguage;
@@ -21,7 +23,7 @@ public class MethodExpression : Expression
 
         this.Source = source;
         this.Type = type;
-        this.Arguments = arguments.CheckNotNull().ToReadOnlyCollection();
+        this.Arguments = arguments.ToReadOnlyCollection();
     }
 
 

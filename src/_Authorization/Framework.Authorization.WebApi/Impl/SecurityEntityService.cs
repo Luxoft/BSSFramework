@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
-using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
+using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 using Microsoft.AspNetCore.Mvc;
 

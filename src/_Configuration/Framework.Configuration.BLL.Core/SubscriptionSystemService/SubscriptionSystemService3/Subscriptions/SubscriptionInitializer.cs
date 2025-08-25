@@ -2,7 +2,7 @@
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Tracking;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 

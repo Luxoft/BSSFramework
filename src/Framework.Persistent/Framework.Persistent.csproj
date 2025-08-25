@@ -9,7 +9,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework.Exceptions\Framework.Exceptions.csproj" />
-    <ProjectReference Include="..\Framework.HierarchicalExpand.Abstract\Framework.HierarchicalExpand.Abstract.csproj" />
     <ProjectReference Include="..\Framework.Persistent.Idents\Framework.Persistent.Idents.csproj" />
   </ItemGroup>
 </Project>

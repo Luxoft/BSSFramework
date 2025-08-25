@@ -2,9 +2,9 @@
 
 using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.Persistent;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
+
+using SecuritySystem;
+using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
 
@@ -133,7 +133,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
         if (subPermission == null) throw new ArgumentNullException(nameof(subPermission));
         if (delegatedFrom == null) throw new ArgumentNullException(nameof(delegatedFrom));
 
-        return subPermission.Period.IsEmpty || delegatedFrom.Period.Contains(subPermission.Period);
+        return subPermission.Period.IsEmpty() || delegatedFrom.Period.Contains(subPermission.Period);
     }
 
     private Dictionary<SecurityContextType, IEnumerable<SecurityContextData>> GetInvalidDelegatedPermissionSecurities(

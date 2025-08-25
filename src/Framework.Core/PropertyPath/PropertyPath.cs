@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Reflection;
 
+using CommonFramework;
+
 namespace Framework.Core;
 
 [DebuggerDisplay("{DebuggerDisplay}")]

@@ -1,6 +1,6 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel;
-using Framework.SecuritySystem.Credential;
+using SecuritySystem.Credential;
 
 namespace Automation.ServiceEnvironment;
 

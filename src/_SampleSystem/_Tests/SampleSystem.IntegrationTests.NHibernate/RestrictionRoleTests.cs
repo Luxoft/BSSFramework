@@ -7,7 +7,7 @@ using Framework.DomainDriven.BLL;
 using SampleSystem.Generated.DTO;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace SampleSystem.IntegrationTests;
 

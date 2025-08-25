@@ -1,8 +1,8 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven;
 
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Services;
+using SecuritySystem;
+using SecuritySystem.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;

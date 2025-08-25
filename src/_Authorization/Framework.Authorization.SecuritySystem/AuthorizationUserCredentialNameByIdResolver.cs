@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.QueryableSource;
-using Framework.SecuritySystem.Credential;
+
+using SecuritySystem.Services;
 
 namespace Framework.Authorization.SecuritySystem;
 

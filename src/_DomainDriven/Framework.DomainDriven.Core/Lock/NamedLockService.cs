@@ -1,7 +1,10 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
 using Framework.DomainDriven.Repository;
-using Framework.GenericQueryable;
-using Framework.SecuritySystem;
+
+using GenericQueryable;
+
+using SecuritySystem.Attributes;
 
 namespace Framework.DomainDriven.Lock;
 

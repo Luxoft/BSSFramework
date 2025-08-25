@@ -1,6 +1,6 @@
 ﻿using Framework.DomainDriven.VirtualPermission;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.DependencyInjection;
+using SecuritySystem;
+using SecuritySystem.DependencyInjection;
 
 using SampleSystem.Domain;
 

@@ -1,6 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.DictionaryCache;
+using CommonFramework.Maybe;
+
 using Framework.Core;
 
 namespace Framework.Persistent;

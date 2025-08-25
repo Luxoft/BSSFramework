@@ -1,8 +1,11 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Events;
-using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
+
+using SecuritySystem;
+using SecuritySystem.Attributes;
+using SecuritySystem.Configurator.Handlers;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local

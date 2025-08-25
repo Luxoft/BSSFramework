@@ -1,7 +1,7 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.DALExceptions;
 using Framework.Exceptions;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 

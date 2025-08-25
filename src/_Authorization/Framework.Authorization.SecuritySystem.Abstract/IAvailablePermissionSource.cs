@@ -1,5 +1,5 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem;
 

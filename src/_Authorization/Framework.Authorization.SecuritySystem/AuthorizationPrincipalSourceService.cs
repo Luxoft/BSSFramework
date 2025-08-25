@@ -3,10 +3,11 @@
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
-using Framework.GenericQueryable;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Credential;
-using Framework.SecuritySystem.ExternalSystem.Management;
+
+using SecuritySystem;
+using SecuritySystem.Attributes;
+using SecuritySystem.Credential;
+using SecuritySystem.ExternalSystem.Management;
 
 namespace Framework.Authorization.SecuritySystem;
 

@@ -9,7 +9,7 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Projection;
 using Framework.Security;
-using Framework.SecuritySystem;
+using SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ProjectionGenerator;

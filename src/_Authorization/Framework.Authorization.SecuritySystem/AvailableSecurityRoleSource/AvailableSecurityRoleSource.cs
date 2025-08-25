@@ -1,5 +1,4 @@
-﻿using Framework.GenericQueryable;
-using Framework.SecuritySystem;
+﻿using SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystem;
 

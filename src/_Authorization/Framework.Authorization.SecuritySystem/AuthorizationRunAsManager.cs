@@ -2,15 +2,15 @@
 using Framework.Core;
 using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Credential;
-using Framework.SecuritySystem.Services;
-using Framework.SecuritySystem.UserSource;
+using SecuritySystem;
+using SecuritySystem.Attributes;
+using SecuritySystem.Credential;
+using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.SecuritySystem;
 
 public class AuthorizationRunAsManager(
-    IUserAuthenticationService userAuthenticationService,
+    IRawUserAuthenticationService userAuthenticationService,
     ISecuritySystemFactory securitySystemFactory,
     ICurrentPrincipalSource currentPrincipalSource,
     [DisabledSecurity] IRepository<Principal> principalRepository,

@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Exceptions;
 

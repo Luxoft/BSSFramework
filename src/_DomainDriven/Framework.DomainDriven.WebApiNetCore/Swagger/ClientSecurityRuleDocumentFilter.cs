@@ -1,4 +1,4 @@
-﻿using Framework.SecuritySystem.SecurityRuleInfo;
+﻿using SecuritySystem.SecurityRuleInfo;
 
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;

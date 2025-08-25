@@ -1,6 +1,6 @@
 ﻿using Framework.DomainDriven.Repository;
 using Framework.GenericQueryable;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using SampleSystem.Domain;
 

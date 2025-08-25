@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.OData;
@@ -21,9 +23,9 @@ public class SelectOperation<TDomainObject> : IDynamicSelectOperation, IQueryabl
         if (selects == null) throw new ArgumentNullException(nameof(selects));
 
         this.Filter = filter;
-        this.Orders = orders.CheckNotNull().ToReadOnlyCollection();
-        this.Expands = expands.CheckNotNull().ToReadOnlyCollection();
-        this.Selects = selects.CheckNotNull().ToReadOnlyCollection();
+        this.Orders = orders.ToReadOnlyCollection();
+        this.Expands = expands.ToReadOnlyCollection();
+        this.Selects = selects.ToReadOnlyCollection();
         this.SkipCount = skipCount;
         this.TakeCount = takeCount;
 

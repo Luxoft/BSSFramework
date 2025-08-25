@@ -2,6 +2,8 @@
 
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.Persistent;

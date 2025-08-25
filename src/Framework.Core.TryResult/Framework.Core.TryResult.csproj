@@ -7,8 +7,4 @@
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.Core.Maybe\Framework.Core.Maybe.csproj" />
-  </ItemGroup>
-
 </Project>

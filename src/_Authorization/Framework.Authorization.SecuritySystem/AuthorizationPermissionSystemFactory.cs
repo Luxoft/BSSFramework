@@ -1,5 +1,4 @@
-﻿using Framework.SecuritySystem;
-using Framework.SecuritySystem.ExternalSystem;
+﻿using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization;
-using Framework.Core;
+
+using CommonFramework;
 
 namespace Framework.QueryLanguage;
 

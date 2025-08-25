@@ -2,8 +2,8 @@
 
 using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
+using SecuritySystem;
+using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
 

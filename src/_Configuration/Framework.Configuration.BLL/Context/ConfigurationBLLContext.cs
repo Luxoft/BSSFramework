@@ -13,7 +13,7 @@ using Framework.HierarchicalExpand;
 using Framework.Notification;
 using Framework.Persistent;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

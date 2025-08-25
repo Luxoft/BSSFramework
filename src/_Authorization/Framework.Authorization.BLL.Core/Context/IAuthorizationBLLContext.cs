@@ -5,10 +5,10 @@ using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.AvailableSecurity;
-using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
-using Framework.SecuritySystem.Services;
+using SecuritySystem;
+using SecuritySystem.AvailableSecurity;
+using SecuritySystem.ExternalSystem.SecurityContextStorage;
+using SecuritySystem.Services;
 
 namespace Framework.Authorization.BLL;
 

@@ -1,4 +1,4 @@
-﻿using Framework.SecuritySystem;
+﻿using SecuritySystem;
 
 namespace SampleSystem.Security;
 

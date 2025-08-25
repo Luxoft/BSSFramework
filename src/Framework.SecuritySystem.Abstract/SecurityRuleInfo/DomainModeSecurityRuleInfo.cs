@@ -1,3 +1,0 @@
-﻿namespace Framework.SecuritySystem.SecurityRuleInfo;
-
-public record DomainModeSecurityRuleInfo(DomainSecurityRule.DomainModeSecurityRule SecurityRule, DomainSecurityRule Implementation);

@@ -3,7 +3,7 @@ using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
+using SecuritySystem;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;

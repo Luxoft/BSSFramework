@@ -1,8 +1,8 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.DomainDriven.Repository;
-using Framework.GenericQueryable;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Credential;
+
+using SecuritySystem.Attributes;
+using SecuritySystem.Credential;
 
 namespace Framework.Authorization.SecuritySystem;
 

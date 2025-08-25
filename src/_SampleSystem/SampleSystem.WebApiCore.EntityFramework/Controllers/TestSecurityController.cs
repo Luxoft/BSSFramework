@@ -1,7 +1,7 @@
 ﻿using Framework.DomainDriven.Repository;
 using Framework.GenericQueryable;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.UserSource;
+using SecuritySystem;
+using SecuritySystem.UserSource;
 
 using Microsoft.AspNetCore.Mvc;
 

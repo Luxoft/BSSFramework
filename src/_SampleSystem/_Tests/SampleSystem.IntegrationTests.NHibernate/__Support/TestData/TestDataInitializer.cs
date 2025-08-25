@@ -2,7 +2,7 @@
 using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.Options;
 

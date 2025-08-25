@@ -6,17 +6,17 @@ using Framework.DomainDriven.Tracking;
 
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystem;
 using Framework.Authorization.SecuritySystem.Validation;
 using Framework.Events;
-using Framework.SecuritySystem.Services;
+using SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
-using Framework.SecuritySystem.AvailableSecurity;
-using Framework.SecuritySystem.ExternalSystem.SecurityContextStorage;
+using SecuritySystem.AvailableSecurity;
+using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.BLL;
 

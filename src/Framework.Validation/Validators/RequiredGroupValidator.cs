@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Restriction;
 
@@ -52,11 +54,8 @@ public class RequiredGroupValidator : DynamicClassValidator
 
                           select RequiredHelper.IsValid(propertyValue, RequiredMode.Default);
 
-        return isValidExpr.Compile(LambdaCompileCacheContainer.Get<TSource, TProperty>());
+        return isValidExpr.Compile();
     }
-
-
-    private static readonly LambdaCompileCacheContainer LambdaCompileCacheContainer = new LambdaCompileCacheContainer();
 }
 
 public class RequiredGroupValidator<TSource> : IClassValidator<TSource>

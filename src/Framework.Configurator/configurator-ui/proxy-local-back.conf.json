@@ -1,6 +1,0 @@
-{
-    "/api": {
-        "target":"https://localhost:5001/admin/configurator",
-        "secure": false
-    }
-}

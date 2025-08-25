@@ -5,7 +5,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Projection;
 using Framework.Security;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

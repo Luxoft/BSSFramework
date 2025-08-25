@@ -4,7 +4,7 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
 using Framework.Projection.Environment;
 using Framework.Security;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.Security;

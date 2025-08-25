@@ -2,7 +2,7 @@
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent.Mapping;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace SampleSystem.Domain;
 

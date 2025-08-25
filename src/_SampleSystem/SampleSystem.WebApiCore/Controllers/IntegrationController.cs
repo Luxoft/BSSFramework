@@ -1,7 +1,7 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven.WebApiNetCore.Integration;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 

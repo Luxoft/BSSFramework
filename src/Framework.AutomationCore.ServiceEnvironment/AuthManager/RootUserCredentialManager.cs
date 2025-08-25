@@ -2,9 +2,9 @@
 using Automation.Utils;
 
 using Framework.DomainDriven;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Credential;
-using Framework.SecuritySystem.ExternalSystem.Management;
+using SecuritySystem;
+using SecuritySystem.Credential;
+using SecuritySystem.ExternalSystem.Management;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;

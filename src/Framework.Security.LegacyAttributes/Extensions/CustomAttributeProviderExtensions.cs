@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 using Framework.Core;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Security;
 

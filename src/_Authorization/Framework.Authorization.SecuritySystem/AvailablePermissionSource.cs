@@ -3,7 +3,9 @@
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
+using SecuritySystem;
+using SecuritySystem.Attributes;
+using SecuritySystem.Services;
 
 namespace Framework.Authorization.SecuritySystem;
 

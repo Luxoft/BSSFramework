@@ -1,6 +1,9 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.Maybe;
+
 namespace Framework.Core.Serialization;
 
 public static class ParserHelper
@@ -93,7 +96,6 @@ public static class ParserHelper
         return func;
     }
 
-
     private static class InternalHelper<T>
     {
         public static readonly Expression<Func<string, T>> ParseExpression = GetParseExpression();
@@ -155,7 +157,9 @@ public static class ParserHelper
             }
             else
             {
-                return typeof(T).GetMethod("TryParse", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(string), typeof(T).MakeByRefType() }, null).Maybe(tryParseMethod =>
+                return ObjectExtensions.Maybe(
+                    typeof(T).GetMethod("TryParse", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(string), typeof(T).MakeByRefType() }, null),
+                    tryParseMethod =>
                 {
                     var tryParseDelType = typeof(TryMethod<,>).MakeGenericType(typeof(string), typeof(T));
 

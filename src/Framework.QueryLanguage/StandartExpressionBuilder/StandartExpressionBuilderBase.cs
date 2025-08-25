@@ -43,10 +43,6 @@ public abstract class StandartExpressionBuilderBase : IStandartExpressionBuilder
         {
             return this.ToStandartExpression(expression as MethodExpression, parameters);
         }
-        else if (expression is ExpandContainsExpression)
-        {
-            return this.ToStandartExpression(expression as ExpandContainsExpression, parameters);
-        }
         else
         {
             throw new ArgumentOutOfRangeException(nameof(expression));
@@ -67,9 +63,6 @@ public abstract class StandartExpressionBuilderBase : IStandartExpressionBuilder
     protected abstract SExpressions.MemberExpression ToStandartExpression(PropertyExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters);
 
     protected abstract SExpressions.UnaryExpression ToStandartExpression(UnaryExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters);
-
-    protected abstract SExpressions.Expression ToStandartExpression(ExpandContainsExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters);
-
 
     public SExpressions.Expression<TDelegate> ToStandartExpression<TDelegate>(LambdaExpression expression)
     {

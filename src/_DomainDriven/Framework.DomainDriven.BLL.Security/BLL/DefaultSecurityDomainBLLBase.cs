@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.DomainDriven.BLL.Security
 {

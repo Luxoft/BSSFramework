@@ -183,7 +183,7 @@ public partial class HRDepartment :
         get { return this.Parent; }
     }
 
-    public virtual IEnumerable<HRDepartmentEmployeeRoleType> GetCurrentUserRoles(IUserAuthenticationService userAuthenticationService)
+    public virtual IEnumerable<HRDepartmentEmployeeRoleType> GetCurrentUserRoles(IRawUserAuthenticationService userAuthenticationService)
     {
         var currentUserName = userAuthenticationService.GetUserName().ToLower();
         return this.hrDepartmentRoleEmployees
@@ -202,7 +202,7 @@ public partial class HRDepartment :
                     .Select(z => z.Employee);
     }
 
-    public virtual bool CurrentUserHasInspectorRoles(IUserAuthenticationService userAuthenticationService)
+    public virtual bool CurrentUserHasInspectorRoles(IRawUserAuthenticationService userAuthenticationService)
     {
         var inspectorRoleType = this.GetCurrentUserRoles(userAuthenticationService).FirstOrDefault(z => z == HRDepartmentEmployeeRoleType.Inspector);
         return HRDepartmentEmployeeRoleType.None != inspectorRoleType;

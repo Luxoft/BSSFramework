@@ -1,10 +1,11 @@
-﻿using Framework.Core.Services;
-using Framework.DomainDriven.Audit;
+﻿using Framework.DomainDriven.Audit;
+
+using SecuritySystem.Services;
 
 namespace Framework.DomainDriven;
 
 public class DBSessionSettings(
-    IUserAuthenticationService userAuthenticationService,
+    IRawUserAuthenticationService userAuthenticationService,
     TimeProvider timeProvider)
     : IDBSessionSettings
 {

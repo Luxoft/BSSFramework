@@ -1,7 +1,7 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.Events;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers;

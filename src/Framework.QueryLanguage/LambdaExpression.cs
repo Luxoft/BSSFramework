@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
+using CommonFramework;
+
 using Framework.Core;
 
 using SExpressions = System.Linq.Expressions;
@@ -30,7 +32,7 @@ public class LambdaExpression : Expression
         if (parameters == null) throw new ArgumentNullException(nameof(parameters));
 
         this.Body = body;
-        this.Parameters = parameters.CheckNotNull().ToReadOnlyCollection();
+        this.Parameters = parameters.ToReadOnlyCollection();
     }
 
 
@@ -86,7 +88,7 @@ public class LambdaExpression : Expression
 
     public override string ToString()
     {
-        return $"({this.Parameters.Join(", ")}) => {this.Body}";
+        return $"({string.Join(", ", this.Parameters)}) => {this.Body}";
     }
 
     public override int GetHashCode()

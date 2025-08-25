@@ -33,7 +33,7 @@ public class Message
         if (attachments == null) throw new ArgumentNullException(nameof(attachments));
 
         this.Sender = sender;
-        this.Receivers = receivers.CheckNotNull().ToReadOnlyCollection();
+        this.Receivers = receivers.ToReadOnlyCollection();
 
         if (!this.Receivers.Any())
         {
@@ -43,7 +43,7 @@ public class Message
         this.Subject = this.CutSubjectOnRight(this.ReplaceUnsupportedCharactersForSubject(subject));
         this.Body = body;
         this.IsBodyHtml = isBodyHtml;
-        this.Attachments = attachments.CheckNotNull().ToReadOnlyCollection();
+        this.Attachments = attachments.ToReadOnlyCollection();
     }
 
 

@@ -1,5 +1,5 @@
 ﻿using Framework.HierarchicalExpand;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 

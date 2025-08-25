@@ -12,7 +12,7 @@ public class FetchContainer<TDomainObject> : IEquatable<FetchContainer<TDomainOb
     {
         if (loadPaths == null) throw new ArgumentNullException(nameof(loadPaths));
 
-        this.LoadPaths = loadPaths.CheckNotNull().ToReadOnlyCollection(path => new PropertyPath(path.CheckNotNull().ToList()));
+        this.LoadPaths = loadPaths.ToReadOnlyCollection(path => new PropertyPath(path.ToList()));
 
         this.Fetchs = this.LoadPaths.Select(loadPath => loadPath.ToNode<TDomainObject>()).ToTree();
     }

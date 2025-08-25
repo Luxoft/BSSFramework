@@ -3,10 +3,10 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Persistent;
-using Framework.QueryableSource;
+using QueryableSource;
 using Framework.Security;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Expanders;
+using SecuritySystem;
+using SecuritySystem.Expanders;
 
 namespace Framework.DomainDriven.BLLCoreGenerator
 {

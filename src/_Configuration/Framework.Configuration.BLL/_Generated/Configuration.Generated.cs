@@ -34,7 +34,7 @@ namespace Framework.Configuration.BLL
     public partial class CodeFirstSubscriptionBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLL
     {
         
-        public CodeFirstSubscriptionBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription> securityProvider) : 
+        public CodeFirstSubscriptionBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -52,7 +52,7 @@ namespace Framework.Configuration.BLL
     public partial class ControlSettingsBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.ControlSettings>, Framework.Configuration.BLL.IControlSettingsBLL
     {
         
-        public ControlSettingsBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.ControlSettings> securityProvider) : 
+        public ControlSettingsBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.ControlSettings> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -70,7 +70,7 @@ namespace Framework.Configuration.BLL
     public partial class DomainObjectEventBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectEvent>, Framework.Configuration.BLL.IDomainObjectEventBLL
     {
         
-        public DomainObjectEventBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectEvent> securityProvider) : 
+        public DomainObjectEventBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectEvent> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -88,7 +88,7 @@ namespace Framework.Configuration.BLL
     public partial class DomainObjectModificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectModification>, Framework.Configuration.BLL.IDomainObjectModificationBLL
     {
         
-        public DomainObjectModificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectModification> securityProvider) : 
+        public DomainObjectModificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectModification> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -106,7 +106,7 @@ namespace Framework.Configuration.BLL
     public partial class DomainObjectNotificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectNotification>, Framework.Configuration.BLL.IDomainObjectNotificationBLL
     {
         
-        public DomainObjectNotificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectNotification> securityProvider) : 
+        public DomainObjectNotificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectNotification> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -124,7 +124,7 @@ namespace Framework.Configuration.BLL
     public partial class DomainTypeBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.IDomainTypeBLL
     {
         
-        public DomainTypeBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainType> securityProvider) : 
+        public DomainTypeBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainType> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -142,7 +142,7 @@ namespace Framework.Configuration.BLL
     public partial class ExceptionMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.ExceptionMessage>, Framework.Configuration.BLL.IExceptionMessageBLL
     {
         
-        public ExceptionMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.ExceptionMessage> securityProvider) : 
+        public ExceptionMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.ExceptionMessage> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -160,7 +160,7 @@ namespace Framework.Configuration.BLL
     public partial class SentMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SentMessage>, Framework.Configuration.BLL.ISentMessageBLL
     {
         
-        public SentMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SentMessage> securityProvider) : 
+        public SentMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SentMessage> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -178,7 +178,7 @@ namespace Framework.Configuration.BLL
     public partial class SequenceBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ISequenceBLL
     {
         
-        public SequenceBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Sequence> securityProvider) : 
+        public SequenceBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Sequence> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -196,7 +196,7 @@ namespace Framework.Configuration.BLL
     public partial class SystemConstantBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ISystemConstantBLL
     {
         
-        public SystemConstantBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SystemConstant> securityProvider) : 
+        public SystemConstantBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SystemConstant> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -214,7 +214,7 @@ namespace Framework.Configuration.BLL
     public partial class TargetSystemBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ITargetSystemBLL
     {
         
-        public TargetSystemBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.TargetSystem> securityProvider) : 
+        public TargetSystemBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.TargetSystem> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -542,7 +542,7 @@ namespace Framework.Configuration.BLL
         {
         }
         
-        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
+        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
         {
             return new Framework.Configuration.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
@@ -556,7 +556,7 @@ namespace Framework.Configuration.BLL
         {
         }
         
-        protected override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
+        protected override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
         {
             return new Framework.Configuration.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }

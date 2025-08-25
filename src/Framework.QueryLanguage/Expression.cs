@@ -1,5 +1,9 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization;
+
+using CommonFramework;
+using CommonFramework.Maybe;
+
 using Framework.Core;
 using SExpressions = System.Linq.Expressions;
 
@@ -136,11 +140,6 @@ public abstract class Expression : IEquatable<Expression>
         if (constType == typeof(DateTime))
         {
             return new DateTimeConstantExpression((DateTime)constValue);
-        }
-
-        if (constType == typeof(Period))
-        {
-            return new PeriodConstantExpression((Period)constValue);
         }
 
         if (constType == typeof(Guid))

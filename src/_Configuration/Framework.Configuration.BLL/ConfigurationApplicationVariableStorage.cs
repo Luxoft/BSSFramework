@@ -3,7 +3,7 @@ using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.GenericQueryable;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Configuration.BLL;
 

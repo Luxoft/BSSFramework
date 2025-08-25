@@ -5,7 +5,7 @@ using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

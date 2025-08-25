@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 using Framework.Events;
-using Framework.SecuritySystem.DependencyInjection;
+using SecuritySystem.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore;
 using Framework.DomainDriven.ApplicationCore.DALListeners;

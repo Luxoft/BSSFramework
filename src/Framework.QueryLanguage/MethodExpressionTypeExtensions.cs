@@ -12,12 +12,6 @@ public static class MethodExpressionTypeExtensions
             case MethodExpressionType.StringContains:
                 return "Contains";
 
-            case MethodExpressionType.PeriodContains:
-                return "Contains";
-
-            case MethodExpressionType.PeriodIsIntersected:
-                return "IsIntersected";
-
             case MethodExpressionType.StringEndsWith:
                 return "EndsWith";
 

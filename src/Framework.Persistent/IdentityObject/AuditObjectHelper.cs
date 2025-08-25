@@ -1,4 +1,8 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Core;
+
+using ExpressionHelper = CommonFramework.ExpressionHelper;
 
 namespace Framework.Persistent;
 

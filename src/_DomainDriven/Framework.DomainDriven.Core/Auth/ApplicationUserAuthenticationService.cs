@@ -1,10 +1,10 @@
-﻿using Framework.Core.Services;
-using Framework.SecuritySystem.Credential;
+﻿using SecuritySystem.Credential;
+using SecuritySystem.Services;
 
 namespace Framework.DomainDriven.Auth;
 
 public class ApplicationUserAuthenticationService(IDefaultUserAuthenticationService defaultAuthenticationService, IUserCredentialNameResolver userCredentialNameResolver)
-    : IUserAuthenticationService, IImpersonateService
+    : IRawUserAuthenticationService, IImpersonateService
 {
     public string GetUserName() => this.CustomUserCredential == null
                                        ? defaultAuthenticationService.GetUserName()

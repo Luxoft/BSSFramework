@@ -1,5 +1,7 @@
 ﻿using System.Runtime.Serialization;
 
+using CommonFramework;
+
 using SExpressions = System.Linq.Expressions;
 
 using Framework.Core;

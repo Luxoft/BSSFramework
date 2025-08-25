@@ -19,10 +19,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.GenericQueryable\Framework.GenericQueryable.csproj" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <Using Include="Xunit" />

@@ -1,7 +1,7 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.UserSource;
+using SecuritySystem;
+using SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
 

@@ -4,9 +4,9 @@ using Framework.DomainDriven.UnitTest.Mock;
 using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.OData;
-using Framework.QueryableSource;
+using QueryableSource;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
+using SecuritySystem;
 using Framework.Validation;
 using Framework.Core.Serialization;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
@@ -80,7 +80,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
             where TDomainObject : PersistentDomainObjectBase =>
             throw new NotImplementedException();
 
-    public IUserAuthenticationService UserAuthenticationService => Framework.Core.Services.UserAuthenticationService.CreateFor("testUser");
+    public IRawUserAuthenticationService UserAuthenticationService => Framework.Core.Services.UserAuthenticationService.CreateFor("testUser");
 
     public IQueryableSource GetQueryableSource() => throw new NotImplementedException();
 

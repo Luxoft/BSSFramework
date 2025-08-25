@@ -1,6 +1,6 @@
 ﻿using Bss.Testing.Xunit.Sdk;
 
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

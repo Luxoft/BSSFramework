@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.AutomationCore\Framework.AutomationCore.csproj" />
-    <ProjectReference Include="..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Jobs\Framework.DomainDriven.Jobs.csproj" />
 
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />

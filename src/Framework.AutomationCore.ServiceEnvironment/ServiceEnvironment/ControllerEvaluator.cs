@@ -5,7 +5,7 @@ using Automation.ServiceEnvironment.Services;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.SecuritySystem.Credential;
+using SecuritySystem.Credential;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

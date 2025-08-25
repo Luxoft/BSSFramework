@@ -1,4 +1,6 @@
-﻿namespace Framework.Core.Serialization;
+﻿using CommonFramework;
+
+namespace Framework.Core.Serialization;
 
 public static class FormatterExtensions
 {

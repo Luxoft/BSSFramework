@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+using Framework.Core;
 using Framework.Persistent;
 using Framework.Security;
 
@@ -62,7 +63,7 @@ internal class CreateSecurityNodesProjectionSource : IProjectionSource
 
                 var name = $"{interfaceProp.Name}_Security";
 
-                projection.Properties.Add(new ProjectionPropertyBuilder(implProp.ToLambdaExpression(sourceType))
+                projection.Properties.Add(new ProjectionPropertyBuilder(implProp.ToGetLambdaExpression(sourceType))
                                           {
                                                   Role = ProjectionPropertyRole.Security,
                                                   Name = name,

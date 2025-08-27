@@ -117,7 +117,7 @@ public class ValidatorCompileCache
     {
         if (propertyMap == null) throw new ArgumentNullException(nameof(propertyMap));
 
-        var getPropertyValueFunc = propertyMap.Property.ToLambdaExpression<TSource, TProperty>().Compile();
+        var getPropertyValueFunc = propertyMap.Property.ToGetLambdaExpression<TSource, TProperty>().Compile();
 
         return propertyMap.Validators.Any()
 

@@ -7,14 +7,6 @@ namespace Framework.Core;
 
 public static class PropertyInfoExtensions
 {
-    public static Expression<Func<TSource, TProperty>> ToLambdaExpression<TSource, TProperty>(this PropertyInfo property)
-    {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-
-        throw new NotImplementedException("Use CommonFramework");
-    }
-
-
     public static bool HasPrivateField(this PropertyInfo propertyInfo, string preFieldName = null)
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));

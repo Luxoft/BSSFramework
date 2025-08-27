@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Persistent;
 
@@ -41,13 +43,13 @@ public static class TrackingServiceExtensions
 
             var directFunc = new Func<PropertyPath, Expression<Func<TDomainObject, IEnumerable<TDomainObject>>>, Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>>>(GetSourceFuncDirect)
                              .CreateGenericMethod(prop.PropertyType.GetCollectionElementType())
-                             .Invoke<Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>>>(null, propertyPath, prop.ToLambdaExpression());
+                             .Invoke<Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>>>(null, propertyPath, prop.ToGetLambdaExpression());
 
             if (propertyPath.Count > 1)
             {
                 var subMergeFunc = new Func<PropertyPath, Expression<Func<TDomainObject, IEnumerable<TDomainObject>>>, Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>>>(GetSourceFuncSubMerge)
                                    .CreateGenericMethod(prop.PropertyType.GetCollectionElementType())
-                                   .Invoke<Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>>>(null, propertyPath, prop.ToLambdaExpression());
+                                   .Invoke<Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>>>(null, propertyPath, prop.ToGetLambdaExpression());
 
                 return new[] { directFunc, subMergeFunc }.Sum();
             }

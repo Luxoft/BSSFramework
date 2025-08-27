@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Persistent;
 using Framework.Validation;
@@ -23,7 +25,7 @@ public class FixedPropertyValidator : IDynamicPropertyValidator
         var persistentDomainObjectBaseType = persistentDomainObjectBaseTypeResolver.Resolve(property.ReflectedType);
 
         return (IPropertyValidator)Activator.CreateInstance(typeof(FixedPropertyValidator<,,,>)
-                                                                    .MakeGenericType(property.ReflectedType, property.PropertyType, identType, persistentDomainObjectBaseType), property.ToLambdaExpression());
+                                                                    .MakeGenericType(property.ReflectedType, property.PropertyType, identType, persistentDomainObjectBaseType), property.ToGetLambdaExpression());
     }
 }
 

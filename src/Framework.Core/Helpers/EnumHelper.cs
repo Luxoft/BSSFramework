@@ -26,12 +26,6 @@ public static class EnumHelper
         return Enum.GetValues(enumType).Cast<object>().ToArray();
     }
 
-    public static Maybe<TEnum> MaybeParse<TEnum>(string str)
-            where TEnum : struct, Enum
-    {
-        return Maybe.OfTryMethod(new TryMethod<string, TEnum>(Enum.TryParse)) (str);
-    }
-
     public static TEnum Parse<TEnum>(string str)
             where TEnum : struct, Enum
     {

@@ -1,4 +1,6 @@
-﻿using SecuritySystem.Credential;
+﻿using Framework.Core;
+
+using SecuritySystem.Credential;
 
 namespace Framework.DomainDriven;
 

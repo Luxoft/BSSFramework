@@ -1,15 +1,127 @@
-﻿using System.Collections.ObjectModel;
-using System.Reflection;
+﻿using System.Reflection;
 
 using CommonFramework;
-using CommonFramework.DictionaryCache;
 using CommonFramework.Maybe;
 
 namespace Framework.Core;
 
-public static class TypeExtensions
+public static class CoreTypeExtensions
 {
-    public static PropertyInfo GetProperty(this Type type, string propertyName, bool raiseIfNotFound)
+    public static MethodInfo? GetEqualityMethod(this Type type, bool withBaseTypes = false)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        if (withBaseTypes)
+        {
+            return type.GetAllElements(t => t.BaseType).Select(t => t.GetEqualityMethod()).FirstOrDefault(t => t != null);
+        }
+        else
+        {
+            return type.GetMethods(BindingFlags.Static | BindingFlags.Public).FirstOrDefault(m =>
+
+                m.ReturnType == typeof(bool) && m.Name == "op_Equality"
+                                             && m.GetParameters().Pipe(parameters =>
+
+                                                                           parameters.Length == 2 && parameters.All(parameter => parameter.ParameterType == type)));
+        }
+    }
+
+    public static MethodInfo? GetInequalityMethod(this Type type, bool withBaseTypes = false)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        if (withBaseTypes)
+        {
+            return type.GetAllElements(t => t.BaseType).Select(t => t.GetInequalityMethod()).FirstOrDefault(t => t != null);
+        }
+        else
+        {
+            return type.GetMethods(BindingFlags.Static | BindingFlags.Public).FirstOrDefault(m =>
+
+                m.ReturnType == typeof(bool) && m.Name == "op_Inequality"
+                                             && m.GetParameters().Pipe(parameters =>
+
+                                                                           parameters.Length == 2 && parameters.All(parameter => parameter.ParameterType == type)));
+        }
+    }
+
+    public static Type GetMemberType(this Type type, string memberName, bool raiseIfNotFound)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (memberName == null) throw new ArgumentNullException(nameof(memberName));
+
+        return type.GetMemberType(memberName, raiseIfNotFound ? () => new Exception($"Member \"{memberName}\" not found in type \"{type.Name}\"") : default(Func<Exception>));
+    }
+
+    public static Type? GetMemberType(this Type type, string memberName, Func<Exception> raiseIfNotFoundException)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (memberName == null) throw new ArgumentNullException(nameof(memberName));
+
+        var memberType = type.GetMemberType(memberName);
+
+        if (memberType == null && raiseIfNotFoundException != null)
+        {
+            throw raiseIfNotFoundException();
+        }
+
+        return memberType;
+    }
+
+    public static Type? GetMemberType(this Type type, string memberName)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (memberName == null) throw new ArgumentNullException(nameof(memberName));
+
+        if (type.IsInterface)
+        {
+            var property = type.GetAllInterfaceProperties().FirstOrDefault(prop => prop.Name == memberName);
+
+            if (property != null)
+            {
+                return property.PropertyType;
+            }
+        }
+
+        return type.GetProperty(memberName).Maybe(p => p.PropertyType) ?? type.GetField(memberName).Maybe(f => f.FieldType);
+    }
+
+    public static PropertyInfo? GetProperty(this Type type, string propertyName, StringComparison stringComparison, bool raiseIfNotFound)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+
+        return type.GetProperty(propertyName, stringComparison, raiseIfNotFound ? () => new Exception(
+                                                                                   $"Property \"{propertyName}\" not found in type \"{type.Name}\"") : default(Func<Exception>));
+    }
+
+    public static PropertyInfo? GetProperty(this Type type, string propertyName, StringComparison stringComparison, Func<Exception> raiseIfNotFoundException)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+
+        var property = type.GetProperties().SingleOrDefault(p => p.Name.Equals(propertyName, stringComparison));
+
+        if (property == null && raiseIfNotFoundException != null)
+        {
+            throw raiseIfNotFoundException();
+        }
+
+        return property;
+    }
+
+    public static IEnumerable<T> GetStaticPropertyValueList<T>(this Type type, Func<string, bool>? filter = null)
+    {
+        return from prop in type.GetProperties(BindingFlags.Static | BindingFlags.Public)
+
+               where filter == null || filter(prop.Name)
+
+               where typeof(T).IsAssignableFrom(prop.PropertyType)
+
+               select (T)prop.GetValue(null);
+    }
+
+    public static PropertyInfo? GetProperty(this Type type, string propertyName, bool raiseIfNotFound)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
@@ -17,7 +129,7 @@ public static class TypeExtensions
         return type.GetProperty(propertyName, raiseIfNotFound ? () => new Exception($"Property \"{propertyName}\" not found in type \"{type.Name}\"") : default(Func<Exception>));
     }
 
-    public static PropertyInfo GetProperty(this Type type, string propertyName, Func<Exception> raiseIfNotFoundException)
+    public static PropertyInfo? GetProperty(this Type type, string propertyName, Func<Exception> raiseIfNotFoundException)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));

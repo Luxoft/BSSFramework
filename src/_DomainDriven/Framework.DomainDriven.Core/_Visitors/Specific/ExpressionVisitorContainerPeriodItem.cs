@@ -60,13 +60,13 @@ public class ExpressionVisitorContainerPeriodItem : IExpressionVisitorContainerI
                                                                                     || (otherPeriod.Value.EndDate != null && period.Value.StartDate > otherPeriod.Value.EndDate))));
 
         yield return new OverrideMethodInfoVisitor(
-            TypeMembersExtensions.GetEqualityMethod(typeof(Period)),
-            ExpressionHelper.Create((Period period, Period otherPeriod) =>
+            CoreTypeExtensions.GetEqualityMethod(typeof(Period))!,
+            CoreExpressionHelper.Create((Period period, Period otherPeriod) =>
                 period.StartDate == otherPeriod.StartDate && period.EndDate == otherPeriod.EndDate));
 
         yield return new OverrideMethodInfoVisitor(
-            typeof(Period).GetInequalityMethod(),
-            ExpressionHelper.Create((Period period, Period otherPeriod) =>
-                period.StartDate != otherPeriod.StartDate || period.EndDate != otherPeriod.EndDate));
+            typeof(Period).GetInequalityMethod()!,
+            CoreExpressionHelper.Create((Period period, Period otherPeriod) =>
+                                            period.StartDate != otherPeriod.StartDate || period.EndDate != otherPeriod.EndDate));
     }
 }

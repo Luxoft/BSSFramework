@@ -1,10 +1,33 @@
 ﻿using System.Linq.Expressions;
+using System.Reflection;
+
+using CommonFramework;
 using CommonFramework.Maybe;
 
 namespace Framework.Core;
 
-public static class ExpressionExtensions
+public static class CoreExpressionExtensions
 {
+    public static string GetMemberName<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
+    {
+        if (expr == null) throw new ArgumentNullException(nameof(expr));
+
+        return expr.Body.GetMember().Select(member => member.Name)
+                   .GetValue(() => new ArgumentException("not member expression", nameof(expr)));
+    }
+
+    public static Expression<Action<TSource, TProperty>> ToSetLambdaExpression<TSource, TProperty>(this Expression<Func<TSource, TProperty>> expr)
+    {
+        throw new Exception("Use CommonFramework");
+    }
+
+    public static LambdaExpression ToSetLambdaExpression(this PropertyInfo property, Type? sourceType = null)
+    {
+        if (property == null) throw new ArgumentNullException(nameof(property));
+
+        throw new Exception("Use CommonFramework");
+    }
+
     public static Expression ExtractBoxingValue(this Expression expression)
     {
         if (expression == null) throw new ArgumentNullException(nameof(expression));

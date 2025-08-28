@@ -7,6 +7,34 @@ namespace Framework.Core;
 
 public static class EnumerableExtensions
 {
+    public static TResult Partial<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, bool> firstResultPredicate, Func<TSource, bool> secondResultPredicate, Func<List<TSource>, List<TSource>, IList<TSource>, TResult> selector)
+    {
+        var l1 = new List<TSource>();
+        var l2 = new List<TSource>();
+        var l3 = new List<TSource>();
+
+        foreach (var item in source)
+        {
+            if (firstResultPredicate(item))
+            {
+                l1.Add(item);
+            }
+            else
+            {
+                if (secondResultPredicate(item))
+                {
+                    l2.Add(item);
+                }
+                else
+                {
+                    l3.Add(item);
+                }
+            }
+        }
+
+        return selector(l1, l2, l3);
+    }
+
     public static void Match<TSource>(this IEnumerable<TSource> source, Action emptyAction, Action<TSource> singleAction, Action<TSource[]> manyAction)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

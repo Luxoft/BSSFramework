@@ -1,4 +1,6 @@
-﻿namespace Framework.DomainDriven.Lock;
+﻿using Framework.Core;
+
+namespace Framework.DomainDriven.Lock;
 
 public class NamedLockTypeContainerSource(Type typeInfo) : INamedLockSource
 {

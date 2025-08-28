@@ -100,12 +100,12 @@ public static class ParserHelper
     {
         public static readonly Expression<Func<string, T>> ParseExpression = GetParseExpression();
 
-        public static readonly Func<string, T> ParseFunc = ParseExpression.Maybe(l => l.Compile());
+        public static readonly Func<string, T> ParseFunc = ParseExpression.Compile();
 
 
         public static readonly Expression<Func<string, Maybe<T>>> TryParseExpression = GetTryParseExpression();
 
-        public static readonly Func<string, Maybe<T>> TryParseFunc = TryParseExpression.Maybe(l => l.Compile());
+        public static readonly Func<string, Maybe<T>> TryParseFunc = TryParseExpression.Compile();
 
 
 
@@ -145,31 +145,33 @@ public static class ParserHelper
 
         private static Expression GetTryParseExpressionBody(Expression parameter)
         {
-            if (typeof(T) == typeof(string))
-            {
-                return parameter.SafeWrapToMaybe();
-            }
-            else if (typeof(T).IsEnum)
-            {
-                var parseMethod = new Func<string, Maybe<TypeCode>>(EnumHelper.TryParse<TypeCode>).Method.GetGenericMethodDefinition();
+            throw new Exception("Use CommonFramework");
 
-                return Expression.Call(parseMethod, parameter);
-            }
-            else
-            {
-                return ObjectExtensions.Maybe(
-                    typeof(T).GetMethod("TryParse", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(string), typeof(T).MakeByRefType() }, null),
-                    tryParseMethod =>
-                {
-                    var tryParseDelType = typeof(TryMethod<,>).MakeGenericType(typeof(string), typeof(T));
+            //if (typeof(T) == typeof(string))
+            //{
+            //    return parameter.SafeWrapToMaybe();
+            //}
+            //else if (typeof(T).IsEnum)
+            //{
+            //    var parseMethod = new Func<string, Maybe<TypeCode>>(EnumHelper.TryParse<TypeCode>).Method.GetGenericMethodDefinition();
 
-                    var tryParseDel = (TryMethod<string, T>) Delegate.CreateDelegate(tryParseDelType, tryParseMethod);
+            //    return Expression.Call(parseMethod, parameter);
+            //}
+            //else
+            //{
+            //    return ObjectExtensions.Maybe(
+            //        typeof(T).GetMethod("TryParse", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(string), typeof(T).MakeByRefType() }, null),
+            //        tryParseMethod =>
+            //    {
+            //        var tryParseDelType = typeof(TryMethod<,>).MakeGenericType(typeof(string), typeof(T));
 
-                    var maybeDel = Maybe.OfTryMethod(tryParseDel);
+            //        var tryParseDel = (TryMethod<string, T>) Delegate.CreateDelegate(tryParseDelType, tryParseMethod);
 
-                    return ExpressionHelper.Create((string arg) => maybeDel(arg)).GetBodyWithOverrideParameters(parameter);
-                });
-            }
+            //        var maybeDel = Maybe.OfTryMethod(tryParseDel);
+
+            //        return ExpressionHelper.Create((string arg) => maybeDel(arg)).GetBodyWithOverrideParameters(parameter);
+            //    });
+            //}
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Framework.Core;
 
-public static class ExpressionHelper
+public static class CoreExpressionHelper
 {
     public static MemberExpression PropertyOrFieldAuto(Expression expr, string memberName)
     {
@@ -20,5 +20,12 @@ public static class ExpressionHelper
         }
 
         return Expression.PropertyOrField(expr, memberName);
+    }
+
+    public static Expression<Func<T1, T2, TResult>> Create<T1, T2, TResult>(Expression<Func<T1, T2, TResult>> func)
+    {
+        if (func == null) throw new ArgumentNullException(nameof(func));
+
+        return func;
     }
 }

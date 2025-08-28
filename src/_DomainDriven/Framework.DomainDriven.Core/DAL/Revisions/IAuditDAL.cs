@@ -2,6 +2,8 @@
 
 using CommonFramework;
 
+using Framework.Core;
+
 namespace Framework.DomainDriven.DAL.Revisions;
 
 public interface IAuditDAL<TDomainObject, TIdent>

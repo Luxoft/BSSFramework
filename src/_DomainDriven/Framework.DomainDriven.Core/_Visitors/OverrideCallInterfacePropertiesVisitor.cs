@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using Framework.Core;
+
 namespace Framework.DomainDriven._Visitors;
 
 public class OverrideCallInterfacePropertiesVisitor : ExpressionVisitor

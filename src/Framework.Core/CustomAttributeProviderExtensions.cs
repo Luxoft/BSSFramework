@@ -8,6 +8,14 @@ namespace Framework.Core;
 
 public static class CustomAttributeProviderExtensions
 {
+    public static bool HasAttribute(this ICustomAttributeProvider source, Func<Attribute, bool> predicate)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+
+        return source.GetCustomAttributes<Attribute>().Any(predicate);
+    }
+
     private static class AttributeCacheContainer<T>
         where T : Attribute
     {

@@ -1,12 +1,15 @@
 ﻿using Framework.DomainDriven.Tracking;
 using Framework.Events;
-using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryLanguage;
-using SecuritySystem;
 using Framework.Validation;
 
+using SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.HierarchicalExpand;
+using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security;
 

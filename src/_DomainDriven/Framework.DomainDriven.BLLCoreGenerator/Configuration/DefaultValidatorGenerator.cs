@@ -10,6 +10,9 @@ using Framework.Persistent;
 using Framework.Restriction;
 using Framework.Validation;
 
+using CommonFramework;
+using CommonFramework.Maybe;
+
 using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 
@@ -175,7 +178,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         if (instanceType.IsInterfaceImplementation(typeof(IPropertyValidator<,>)))
         {
             var attrProperties = attribute.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                                          .Where(prop => !prop.GetIndexParameters().AnyA() && !prop.DeclaringType.IsAssignableFrom(typeof(ValidatorAttribute)))
+                                          .Where(prop => !prop.GetIndexParameters().Any() && !prop.DeclaringType.IsAssignableFrom(typeof(ValidatorAttribute)))
                                           .ToDictionary(p => p, p => p.GetValue(attribute));
 
             var ctor = instanceType.GetConstructors().SingleMaybe().GetValueOrDefault();
@@ -219,7 +222,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         if (instanceType.IsInterfaceImplementation(typeof(IClassValidator<>)))
         {
             var attrProperties = attribute.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                                          .Where(prop => !prop.GetIndexParameters().AnyA() && !prop.DeclaringType.IsAssignableFrom(typeof(ValidatorAttribute)))
+                                          .Where(prop => !prop.GetIndexParameters().Any() && !prop.DeclaringType.IsAssignableFrom(typeof(ValidatorAttribute)))
                                           .ToDictionary(p => p, p => p.GetValue(attribute));
 
             var ctor = instanceType.GetConstructors().SingleMaybe().GetValueOrDefault();

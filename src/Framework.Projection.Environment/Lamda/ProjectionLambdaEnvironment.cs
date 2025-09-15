@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Projection.Environment;
 

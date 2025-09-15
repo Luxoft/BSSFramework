@@ -25,11 +25,6 @@ public static class CoreStringExtensions
         return input.Skip(pattern, stringComparison, false);
     }
 
-    public static string Skip(this string input, string pattern, bool raiseIfNotEquals)
-    {
-        return input.Skip(pattern, StringComparison.CurrentCulture, raiseIfNotEquals);
-    }
-
     public static Maybe<string> SkipMaybe(this string input, string pattern)
     {
         return input.SkipMaybe(pattern, StringComparison.CurrentCulture);

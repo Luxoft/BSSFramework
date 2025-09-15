@@ -3,6 +3,8 @@ using System.CodeDom.Compiler;
 
 using Framework.Core;
 
+using CommonFramework;
+
 namespace Framework.CodeDom;
 
 public class CSharpCodeDomRenderer : CodeDomProviderRenderer

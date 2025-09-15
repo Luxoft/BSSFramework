@@ -8,7 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+
+    <PackageReference Include="IvAt.SecuritySystem" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Generation.Domain\Framework.DomainDriven.Generation.Domain.csproj" />

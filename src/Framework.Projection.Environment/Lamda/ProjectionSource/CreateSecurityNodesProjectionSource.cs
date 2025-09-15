@@ -26,7 +26,7 @@ internal class CreateSecurityNodesProjectionSource : IProjectionSource
                                .Distinct()
                                .ToArray();
 
-        var securityProjections = this.GetLinkedSecurityTypes(allTypes).SelectMany(sourceType => new[] { sourceType }.Concat(sourceType.GetHierarchicalSecurityTypes()))
+        var securityProjections = this.GetLinkedSecurityTypes(allTypes)
                                       .ToDictionary(sourceType => sourceType, sourceType => new ProjectionBuilder(sourceType) { Name = $"Security{sourceType.Name}", Role = ProjectionRole.SecurityNode });
 
         foreach (var sourceType in securityProjections.Keys)
@@ -47,7 +47,7 @@ internal class CreateSecurityNodesProjectionSource : IProjectionSource
 
         var projection = securityProjections[sourceType];
 
-        var allSecurityInterfaces = sourceType.GetSecurityNodeInterfaces().Concat(sourceType.GetExtraSecurityNodeInterface().MaybeYield())
+        var allSecurityInterfaces = sourceType.GetSecurityNodeInterfaces()
                                               .SelectMany(i => i.GetAllInterfaces())
                                               .Distinct()
                                               .Except(this.environment.PersistentDomainObjectBaseType.GetAllInterfaces())

@@ -2,6 +2,9 @@
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 
+using CommonFramework;
+using CommonFramework.Maybe;
+
 namespace Framework.Projection.Lambda;
 
 internal class InjectMissedParentsProjectionSource : IProjectionSource

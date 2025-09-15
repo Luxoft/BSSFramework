@@ -1,5 +1,7 @@
 ﻿using Framework.Core;
 
+using CommonFramework;
+
 namespace Framework.DomainDriven;
 
 public static class TypeExtensions

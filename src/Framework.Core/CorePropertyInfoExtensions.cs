@@ -6,6 +6,36 @@ namespace Framework.Core;
 
 public static class CorePropertyInfoExtensions
 {
+    public static bool HasGetMethod(this PropertyInfo propertyInfo, bool nonPublic = false)
+    {
+        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+
+        return propertyInfo.GetGetMethod(nonPublic) != null;
+    }
+
+    public static bool HasFamilyGetMethod(this PropertyInfo propertyInfo)
+    {
+        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+
+        return propertyInfo.HasGetMethod()
+               || propertyInfo.GetGetMethod(true).Maybe(method => method.Attributes.HasFlag(MethodAttributes.Family));
+    }
+
+    public static bool HasFamilySetMethod(this PropertyInfo propertyInfo)
+    {
+        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+
+        return propertyInfo.HasSetMethod()
+               || propertyInfo.GetSetMethod(true).Maybe(method => method.Attributes.HasFlag(MethodAttributes.Family));
+    }
+
+    public static bool IsAssignableFrom(this PropertyInfo property, PropertyInfo nestedProp, bool byGet = true)
+    {
+        if (property == null) throw new ArgumentNullException(nameof(property));
+
+        return nestedProp.GetBaseProperties(byGet).Contains(property);
+    }
+
     public static bool HasSetMethod(this PropertyInfo propertyInfo, bool nonPublic = false)
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));

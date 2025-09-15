@@ -1,4 +1,7 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+using CommonFramework.Maybe;
+
+using Framework.Core;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;

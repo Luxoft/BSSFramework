@@ -1,3 +1,5 @@
+﻿using CommonFramework.DictionaryCache;
+
 using Framework.Core;
 
 namespace Framework.DomainDriven.Generation.Domain;

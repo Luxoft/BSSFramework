@@ -3,6 +3,9 @@ using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using SecuritySystem.DomainServices;
+using SecuritySystem.Providers;
+
 namespace Framework.DomainDriven.BLL.Security;
 
 public class RootSecurityService<TPersistentDomainObjectBase> : IRootSecurityService<TPersistentDomainObjectBase>, IServiceProviderContainer

@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Persistent;
 using Framework.Security;
@@ -48,7 +50,7 @@ internal class GeneratedType : BaseTypeImpl
 
         this.isPersistent = this.environment.PersistentDomainObjectBaseType.IsAssignableFrom(this.SourceType);
 
-        this.securityNodeInterfaces = this.GetSecurityNodeImplementInterfaces().Concat(this.GetExtraSecurityRoleInterface().MaybeYield()).ToArray();
+        this.securityNodeInterfaces = this.GetSecurityNodeImplementInterfaces().ToArray();
 
         this.generatedProperties = this.GetGeneratedProperties().ToArray();
         this.generatedFields = this.GetGeneratedFields().ToArray();
@@ -121,29 +123,6 @@ internal class GeneratedType : BaseTypeImpl
                 yield return new[] { securityNodeInterface };
             }
         };
-    }
-
-    private Type GetExtraSecurityRoleInterface()
-    {
-        if (!this.environment.UseDependencySecurity && this.Projection.Role == ProjectionRole.SecurityNode)
-        {
-            var extraSecurityNodeInterfaceType = this.SourceType.GetExtraSecurityNodeInterface();
-
-            if (extraSecurityNodeInterfaceType != null)
-            {
-                var baseDefinition = extraSecurityNodeInterfaceType.GetGenericTypeDefinition();
-
-                var args = this.SourceType.GetInterfaceImplementationArguments(baseDefinition);
-
-                var projectionArgs = args.ToArray(arg => this.environment.IsPersistent(arg) ? this.environment.GetProjectionTypeByRole(arg, ProjectionRole.SecurityNode) : arg);
-
-                var projectionDefinition = baseDefinition.CachedMakeGenericType(projectionArgs);
-
-                return projectionDefinition;
-            }
-        }
-
-        return null;
     }
 
     private IEnumerable<Type> GetSecurityNodeImplementInterfaces()

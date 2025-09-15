@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Core;
 
 namespace Framework.Projection.Contract;
 
@@ -38,6 +40,6 @@ internal class GeneratedField : BaseFieldInfoImpl
 
     public override bool IsDefined(Type attributeType, bool inherit)
     {
-        return this.GetCustomAttributes(attributeType, inherit).AnyA();
+        return this.GetCustomAttributes(attributeType, inherit).Any();
     }
 }

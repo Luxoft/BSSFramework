@@ -2,7 +2,8 @@
 
 using Framework.CodeDom;
 using Framework.Core;
-using SecuritySystem;
+
+using SecuritySystem.DomainServices;
 using SecuritySystem.Expanders;
 using SecuritySystem.Services;
 

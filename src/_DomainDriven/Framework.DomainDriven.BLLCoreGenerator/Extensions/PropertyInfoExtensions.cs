@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using Framework.Core;
+
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
 internal static class PropertyInfoExtensions
@@ -9,6 +11,6 @@ internal static class PropertyInfoExtensions
         if (type == null) throw new ArgumentNullException(nameof(type));
 
         return type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                   .Where(Core.PropertyInfoExtensions.HasFamilyGetMethod);
+                   .Where(CorePropertyInfoExtensions.HasFamilyGetMethod);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using System.Reflection.Emit;
 
+using CommonFramework;
+
 namespace Framework.Core;
 
 public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuilder> : IAnonymousTypeBuilder<TMap>

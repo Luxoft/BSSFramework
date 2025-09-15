@@ -1,6 +1,9 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+using CommonFramework.Maybe;
+
 using Framework.Persistent;
-using SecuritySystem;
+
+using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security
 {

@@ -7,6 +7,67 @@ namespace Framework.Core;
 
 public static class CoreEnumerableExtensions
 {
+    public static T FirstOr<T>(this IEnumerable<T> source, Func<T> func)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (func == null) throw new ArgumentNullException(nameof(func));
+
+        using (var enumerator = source.GetEnumerator())
+        {
+            return enumerator.MoveNext() ? enumerator.Current : func();
+        }
+    }
+
+    public static IReadOnlyCollection<T> ToReadOnlyCollectionI<T>(this IEnumerable<T> source)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+
+        return source.ToList();
+    }
+
+    public static ReadOnlyDictionary<TKey, TValue> ToReadOnlyDictionary<TSource, TKey, TValue>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector)
+        where TKey : notnull
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+
+        return new ReadOnlyDictionary<TKey, TValue>(source.ToDictionary(keySelector, elementSelector));
+    }
+
+    public static ReadOnlyDictionary<TKey, TSource> ToReadOnlyDictionary<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        where TKey : notnull
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+
+        return source.ToReadOnlyDictionary(keySelector, v => v);
+    }
+
+    public static IReadOnlyDictionary<TKey, TValue> ToReadOnlyDictionaryI<TValue, TKey>(this IEnumerable<TValue> source, Func<TValue, TKey> keySelector)
+        where TKey : notnull
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+
+        return source.ToReadOnlyDictionary(keySelector);
+    }
+
+    public static IReadOnlyDictionary<TKey, TValue> ToReadOnlyDictionaryI<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source)
+        where TKey : notnull
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+
+        return source.ToDictionary(pair => pair.Key, pair => pair.Value);
+    }
+
+    public static void Override<T>(this ICollection<T> source, IEnumerable<T> newItems)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (newItems == null) throw new ArgumentNullException(nameof(newItems));
+
+        source.Clear();
+
+        newItems.Foreach(source.Add);
+    }
+
     public static TSource First<TSource>(this IEnumerable<TSource> source, Func<Exception> emptyExceptionHandler)
     {
         if (source == null)

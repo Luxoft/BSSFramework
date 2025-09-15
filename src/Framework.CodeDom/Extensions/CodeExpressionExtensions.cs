@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.CodeDom;
@@ -17,7 +19,7 @@ public static class CodeExpressionExtensions
         if (expression == null) throw new ArgumentNullException(nameof(expression));
         if (targetType == null) throw new ArgumentNullException(nameof(targetType));
 
-        var genericAsCastMethod = new Func<object, object>(PipeObjectExtensions.AsCast<object>).Method.GetGenericMethodDefinition();
+        var genericAsCastMethod = new Func<object, object>(CorePipeObjectExtensions.AsCast<object>).Method.GetGenericMethodDefinition();
 
         var refMethod = new CodeMethodReferenceExpression(
                                                           new CodeTypeReferenceExpression(genericAsCastMethod.DeclaringType),

@@ -1,7 +1,8 @@
 ﻿using Framework.Persistent;
-using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security;
 

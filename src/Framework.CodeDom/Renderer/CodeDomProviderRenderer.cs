@@ -2,6 +2,8 @@
 using System.CodeDom.Compiler;
 using System.Text;
 
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.CodeDom;

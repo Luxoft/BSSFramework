@@ -7,6 +7,70 @@ namespace Framework.Core;
 
 public static class CoreTypeExtensions
 {
+    public static IEnumerable<Type> GetReferencedTypes(this IEnumerable<Type> types)
+    {
+        return types.GetReferencedTypes(_ => true);
+    }
+
+    public static Type GetTopDeclaringType(this PropertyInfo property)
+    {
+        if (property == null) throw new ArgumentNullException(nameof(property));
+
+        return property.GetTopProperty().DeclaringType!;
+    }
+
+    public static bool IsPrimitiveType(this Type value)
+    {
+        var nullableType = value.GetNullableElementType();
+
+        if (nullableType != null)
+        {
+            return nullableType.IsPrimitiveType();
+        }
+
+        return typeof(Guid) == value
+               || typeof(DateTime) == value
+               || typeof(TimeSpan) == value
+               || value.IsEnum
+               || value.IsPrimitive
+               || value == typeof(string)
+               || value == typeof(decimal);
+    }
+
+
+    public static IEnumerable<FieldInfo> ExpandFields(this Type source)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+
+        if (source.IsCollection())
+        {
+            return new FieldInfo[0];
+        }
+
+        var currentType = source;
+
+        var result = new List<FieldInfo>();
+        while ((currentType != null) && (currentType != typeof(object)))
+        {
+            result.AddRange(currentType.GetFields(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic));
+            currentType = currentType.BaseType;
+        }
+        return result;
+
+    }
+
+    public static List<FieldInfo> GetInstanseFieldsDeep(this Type type)
+    {
+        Type currentType = type;
+        List<FieldInfo> result = new List<FieldInfo>();
+        while ((currentType != null) && (currentType != typeof(object)))
+        {
+            result.AddRange(currentType.GetFields(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic));
+            currentType = currentType.BaseType;
+        }
+        return result;
+    }
+
     public static IEnumerable<Type> GetReferencedTypes(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));

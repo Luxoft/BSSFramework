@@ -53,7 +53,7 @@ public static class NotificationFilterGroupExtensions
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        var cachedSource = source.ToArray(true);
+        var cachedSource = source.ToArray();
 
         if (cachedSource.Any())
         {

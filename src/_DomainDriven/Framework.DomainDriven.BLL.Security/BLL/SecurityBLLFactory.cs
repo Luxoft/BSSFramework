@@ -3,6 +3,8 @@ using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using SecuritySystem.Providers;
+
 namespace Framework.DomainDriven.BLL.Security;
 
 public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject>(TBLLContext context) :

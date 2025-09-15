@@ -1,4 +1,7 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+using CommonFramework.Maybe;
+
+using Framework.Core;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

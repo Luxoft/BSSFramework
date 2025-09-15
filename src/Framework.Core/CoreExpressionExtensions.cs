@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+
 using CommonFramework;
 using CommonFramework.Maybe;
 
@@ -7,6 +8,50 @@ namespace Framework.Core;
 
 public static class CoreExpressionExtensions
 {
+    /// <summary>
+    /// Получение имени мембера (поле или свойство)
+    /// </summary>
+    /// <typeparam name="TFunc"></typeparam>
+    /// <param name="expr">Выражение</param>
+    /// <returns></returns>
+    public static string GetInstanceMemberName<TFunc>(this Expression<TFunc> expr)
+    {
+        if (expr == null) throw new ArgumentNullException(nameof(expr));
+
+        var request = from memberExpr in (expr.Body as MemberExpression).ToMaybe()
+
+                      let member = memberExpr.Member
+
+                      where (member is PropertyInfo || member is FieldInfo)
+
+                            && memberExpr.Expression != null
+
+                      select member.Name;
+
+        return request.GetValue(() => new Exception($"invalid expression: {expr}"));
+    }
+
+    public static IEnumerable<PropertyInfo> GetReverseProperties(this LambdaExpression source)
+    {
+        var parameter = source.Parameters.Single();
+
+        for (var state = source.Body; state != parameter;)
+        {
+            var memberExpr = (MemberExpression)state;
+
+            yield return (PropertyInfo)memberExpr.Member;
+
+            state = memberExpr.Expression;
+        }
+    }
+
+    public static PropertyPath ToPropertyPath(this LambdaExpression source)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+
+        return source.GetReverseProperties().Reverse().ToPropertyPath();
+    }
+
     /// <summary>
     /// Получение имени мембера (поле или свойство)
     /// </summary>

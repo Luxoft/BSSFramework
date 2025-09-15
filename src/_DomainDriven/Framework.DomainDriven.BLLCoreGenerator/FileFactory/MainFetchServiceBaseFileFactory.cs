@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Projection;
@@ -127,7 +129,7 @@ public class MainFetchServiceBaseFileFactory<TConfiguration> : FileFactory<TConf
 
         var paths = this.Configuration.FetchPathFactory.Create(domainType, fetchBuildRule).ToArray();
 
-        if (paths.AnyA())
+        if (paths.Any())
         {
             var ruleParam = new CodeParameterDeclarationExpression { Name = "fetchRootRule" };
             var ruleExpr = ruleParam.ToVariableReferenceExpression();

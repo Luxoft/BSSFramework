@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Core;
 
 namespace Framework.DomainDriven.Metadata;
 

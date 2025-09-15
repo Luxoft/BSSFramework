@@ -1,4 +1,7 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+using CommonFramework.DictionaryCache;
+
+using Framework.Core;
 
 namespace Framework.Projection;
 

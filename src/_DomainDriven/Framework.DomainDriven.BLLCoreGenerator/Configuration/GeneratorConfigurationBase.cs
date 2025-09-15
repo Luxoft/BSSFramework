@@ -2,6 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.DictionaryCache;
+using CommonFramework.Maybe;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -13,6 +17,7 @@ using Framework.Restriction;
 using Framework.Security;
 using Framework.Transfering;
 using Framework.Validation;
+
 using Microsoft.Extensions.DependencyInjection;
 
 #pragma warning disable S100 // Methods and properties should be named in camel case

@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 

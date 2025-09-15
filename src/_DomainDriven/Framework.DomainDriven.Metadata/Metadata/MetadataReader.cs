@@ -1,5 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Reflection;
+
+using CommonFramework;
+
 using Framework.Persistent.Mapping;
 using Framework.Core;
 

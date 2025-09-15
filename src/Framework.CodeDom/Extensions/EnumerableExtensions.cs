@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Specialized;
 
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.CodeDom;

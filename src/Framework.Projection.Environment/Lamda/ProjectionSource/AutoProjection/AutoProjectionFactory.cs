@@ -1,6 +1,8 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
 
+using CommonFramework;
+
 namespace Framework.Projection.Lambda;
 
 internal class AutoProjectionFactory : IFactory<ProjectionBuilder>

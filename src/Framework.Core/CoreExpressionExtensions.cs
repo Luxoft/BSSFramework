@@ -1,6 +1,4 @@
 ﻿using System.Linq.Expressions;
-using System.Reflection;
-
 using CommonFramework;
 using CommonFramework.Maybe;
 
@@ -8,6 +6,24 @@ namespace Framework.Core;
 
 public static class CoreExpressionExtensions
 {
+    public static Node<Expression> ToNode(this Expression expression)
+    {
+        if (expression == null) throw new ArgumentNullException(nameof(expression));
+
+        var visitor = new NodeExpressionVisitor(expression);
+
+        visitor.Visit(expression);
+
+        return visitor.ToNode();
+    }
+
+
+    public static Expression<Func<TTo, TRetType>> Covariance<TTo, TFrom, TRetType>(this Expression<Func<TFrom, TRetType>> source)
+        where TTo : TFrom
+    {
+        return source.OverrideInput((TTo to) => (TFrom)to);
+    }
+
     public static string GetMemberName<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
     {
         if (expr == null) throw new ArgumentNullException(nameof(expr));
@@ -18,14 +34,7 @@ public static class CoreExpressionExtensions
 
     public static Expression<Action<TSource, TProperty>> ToSetLambdaExpression<TSource, TProperty>(this Expression<Func<TSource, TProperty>> expr)
     {
-        throw new Exception("Use CommonFramework");
-    }
-
-    public static LambdaExpression ToSetLambdaExpression(this PropertyInfo property, Type? sourceType = null)
-    {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-
-        throw new Exception("Use CommonFramework");
+        return expr.GetProperty().ToSetLambdaExpression<TSource, TProperty>();
     }
 
     public static Expression ExtractBoxingValue(this Expression expression)
@@ -138,6 +147,40 @@ public static class CoreExpressionExtensions
         else
         {
             return Expression.Convert(expression, typeof(Nullable<>).MakeGenericType(expression.Type));
+        }
+    }
+
+
+    private class NodeExpressionVisitor : ExpressionVisitor
+    {
+        private readonly Expression _startNode;
+
+        private readonly List<NodeExpressionVisitor> ChildVisitors = new List<NodeExpressionVisitor>();
+
+        public NodeExpressionVisitor(Expression startNode)
+        {
+            if (startNode == null) throw new ArgumentNullException(nameof(startNode));
+
+            this._startNode = startNode;
+        }
+
+        public override Expression? Visit(Expression? node)
+        {
+            if (node == null || node == this._startNode)
+            {
+                return base.Visit(node);
+            }
+            else
+            {
+                var childVisitor = new NodeExpressionVisitor(node);
+                this.ChildVisitors.Add(childVisitor);
+                return childVisitor.Visit(node);
+            }
+        }
+
+        public Node<Expression> ToNode()
+        {
+            return new Node<Expression>(this._startNode, this.ChildVisitors.Select(child => child.ToNode()));
         }
     }
 }

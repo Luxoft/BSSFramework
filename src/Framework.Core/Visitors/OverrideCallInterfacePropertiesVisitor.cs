@@ -1,8 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Core;
-
-namespace Framework.DomainDriven._Visitors;
+namespace Framework.Core.Visitors;
 
 public class OverrideCallInterfacePropertiesVisitor : ExpressionVisitor
 {
@@ -19,7 +17,7 @@ public class OverrideCallInterfacePropertiesVisitor : ExpressionVisitor
     }
 
 
-    public override Expression Visit(Expression node)
+    public override Expression? Visit(Expression? node)
     {
         return this._internalVisitor.Visit(node);
     }

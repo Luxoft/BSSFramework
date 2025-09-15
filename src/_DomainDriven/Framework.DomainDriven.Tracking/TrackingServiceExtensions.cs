@@ -153,11 +153,11 @@ public static class TrackingServiceExtensions
         return (Func<IEnumerable<TSource>, IEnumerable<TElement>>)baseSource;
     }
 
-    internal static Delegate GetAllElements(this PropertyPath propertyPath)
+    internal static Delegate? GetAllElements(this PropertyPath propertyPath)
     {
         if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
 
-        var cachedProperties = propertyPath.ToArray(true);
+        var cachedProperties = propertyPath.ToArray();
 
         if (cachedProperties.Any())
         {

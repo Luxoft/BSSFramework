@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 
 using CommonFramework;
+using CommonFramework.ExpressionEvaluate;
 
 using Framework.Core;
 
@@ -126,7 +127,8 @@ public class SelectOperation<TDomainObject> : IDynamicSelectOperation, IQueryabl
         {
             yield return q => q.Where(this.Filter.ToRealFilter())
                                .AsEnumerable()
-                               .Where(this.Filter.Compile(LambdaCompileCache))
+                               .AsQueryable()
+                               .Where(LambdaCompileCache.GetFunc(this.Filter))
                                .AsQueryable();
         }
         else

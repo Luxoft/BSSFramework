@@ -35,56 +35,6 @@ public static class NullableExtensions
         return source.ToMaybe().Where(filter).ToNullable();
     }
 
-    public static TResult? Join<TOuter, TInner, TKey, TResult>(this TOuter? outer, TInner? inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector)
-            where TOuter : struct
-            where TInner : struct
-            where TResult : struct
-    {
-        if (outerKeySelector == null) throw new ArgumentNullException(nameof(outerKeySelector));
-        if (innerKeySelector == null) throw new ArgumentNullException(nameof(innerKeySelector));
-        if (resultSelector == null) throw new ArgumentNullException(nameof(resultSelector));
-
-        return outer.Join(inner, outerKeySelector, innerKeySelector, resultSelector, null);
-    }
-
-
-    public static TResult? Join<TOuter, TInner, TKey, TResult>(this TOuter? outer, TInner? inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector, IEqualityComparer<TKey> preComparer)
-            where TOuter : struct
-            where TInner : struct
-            where TResult : struct
-    {
-        throw new Exception("Use CommonFramework");
-    }
-
-
-    public static void Match<TSource>(this TSource? maybeValue, Action<TSource> fromJustAction, Action fromNothingAction = null)
-            where TSource : struct
-    {
-        throw new Exception("Use CommonFramework");
-    }
-
-    public static TResult Match<TSource, TResult>(this TSource? maybeValue, Func<TSource, TResult> fromJustResult, Func<TResult> fromNothingResult)
-            where TSource : struct
-    {
-        if (fromJustResult == null) throw new ArgumentNullException(nameof(fromJustResult));
-        if (fromNothingResult == null) throw new ArgumentNullException(nameof(fromNothingResult));
-
-        return maybeValue.ToMaybe().Match(fromJustResult, fromNothingResult);
-    }
-
-
-    public static T? Or<T>(this T? v1, T? v2)
-            where T : struct
-    {
-        throw new Exception("Use CommonFramework");
-    }
-
-    public static T? Or<T>(this T? v1, Func<T> getV2)
-            where T : struct
-    {
-        throw new Exception("Use CommonFramework");
-    }
-
     public static T? Or<T>(this T? v1, T v2)
             where T : struct
     {

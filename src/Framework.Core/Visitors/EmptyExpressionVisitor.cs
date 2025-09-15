@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.Core;
+namespace Framework.Core.Visitors;
 
 public class EmptyExpressionVisitor : ExpressionVisitor
 {

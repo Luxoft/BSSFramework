@@ -52,7 +52,15 @@ public static class CustomAttributeProviderExtensions
         return source.GetCustomAttributes<T>().Any();
     }
 
-    public static T GetCustomAttribute<T>(this ICustomAttributeProvider source, Func<T, bool> predicate, bool throwIfMany = true)
+    public static T? GetCustomAttribute<T>(this ICustomAttributeProvider source, bool throwIfMany = true)
+        where T : Attribute
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+
+        return source.GetCustomAttribute<T>(_ => true, throwIfMany);
+    }
+
+    public static T? GetCustomAttribute<T>(this ICustomAttributeProvider source, Func<T, bool> predicate, bool throwIfMany = true)
         where T : Attribute
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

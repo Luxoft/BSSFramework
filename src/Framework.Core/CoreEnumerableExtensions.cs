@@ -5,8 +5,80 @@ using CommonFramework.Maybe;
 
 namespace Framework.Core;
 
-public static class EnumerableExtensions
+public static class CoreEnumerableExtensions
 {
+    public static Stack<T> ToStack<T>(this IEnumerable<T> source)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+
+        return new Stack<T>(source);
+    }
+
+    public static IEnumerable<T> Distinct<T, TProperty>(this IEnumerable<T> source, Func<T, TProperty> getPropertyFunc)
+    {
+        return source.Distinct(new PropertyEqualityComparer<T, TProperty>(getPropertyFunc));
+    }
+
+    public static TSource Single<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<Exception> emptyExceptionHandler, Func<Exception> manyExceptionHandler)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+        if (emptyExceptionHandler == null) throw new ArgumentNullException(nameof(emptyExceptionHandler));
+        if (manyExceptionHandler == null) throw new ArgumentNullException(nameof(manyExceptionHandler));
+
+        return source.Where(predicate).Single(emptyExceptionHandler, manyExceptionHandler);
+    }
+
+    public static TSource Single<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<Exception> emptyExceptionHandler)
+    {
+        return source.Single(predicate, emptyExceptionHandler, () => new InvalidOperationException("More Than One Element"));
+    }
+
+    public static TSource Single<TSource>(this IEnumerable<TSource> source, Func<Exception> emptyExceptionHandler)
+    {
+        return source.Single(emptyExceptionHandler, () => new InvalidOperationException("More Than One Element"));
+    }
+
+    public static TSource Single<TSource>(this IEnumerable<TSource> source, Func<Exception> emptyExceptionHandler, Func<Exception> manyExceptionHandler)
+    {
+        if (source == null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+
+        if (emptyExceptionHandler == null)
+        {
+            throw new ArgumentNullException(nameof(emptyExceptionHandler));
+        }
+
+        if (manyExceptionHandler == null)
+        {
+            throw new ArgumentNullException(nameof(manyExceptionHandler));
+        }
+
+        using (var enumerator = source.GetEnumerator())
+        {
+            if (!enumerator.MoveNext())
+            {
+                throw emptyExceptionHandler();
+            }
+
+            var current = enumerator.Current;
+
+            if (enumerator.MoveNext())
+            {
+                throw manyExceptionHandler();
+            }
+
+            return current;
+        }
+    }
+
+    public static T Aggregate<T>(this IEnumerable<Func<T, T>> source, T startElement)
+    {
+        return source.Aggregate(startElement, (v, f) => f(v));
+    }
+
     public static TResult Partial<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, bool> firstResultPredicate, Func<TSource, bool> secondResultPredicate, Func<List<TSource>, List<TSource>, IList<TSource>, TResult> selector)
     {
         var l1 = new List<TSource>();
@@ -171,6 +243,7 @@ public static class EnumerableExtensions
     }
 
     public static MergeResult<T, T> GetMergeResult<T>(this IEnumerable<T> source, IEnumerable<T> target, IEqualityComparer<T>? comparer = null)
+        where T : notnull
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (target == null) throw new ArgumentNullException(nameof(target));
@@ -184,6 +257,7 @@ public static class EnumerableExtensions
         Func<TSource, TKey> sourceKeySelector,
         Func<TTarget, TKey> targetKeySelector,
         IEqualityComparer<TKey>? comparer = null)
+        where TKey : notnull
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (target == null) throw new ArgumentNullException(nameof(target));
@@ -267,7 +341,7 @@ public static class EnumerableExtensions
                select just.Value;
     }
 
-    public static TSource SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<Exception> manyExceptionHandler)
+    public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<Exception> manyExceptionHandler)
     {
         if (source == null)
         {
@@ -287,7 +361,7 @@ public static class EnumerableExtensions
         return source.Where(predicate).SingleOrDefault(manyExceptionHandler);
     }
 
-    public static IEnumerable<T> MaybeYield<T>(this T source)
+    public static IEnumerable<T> MaybeYield<T>(this T? source)
         where T : class
     {
         if (source != null)

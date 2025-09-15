@@ -1,5 +1,8 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.Maybe;
+
 using Framework.Core;
 using Framework.Persistent;
 
@@ -68,37 +71,5 @@ public static class PropertyInfoExtensions
                && (propertyInfo.HasSetMethod() ||
 
                    propertyInfo.PropertyType.IsCollection(elementType => allowHierarchical || elementType != propertyInfo.DeclaringType || propertyInfo.IsDetail()));
-    }
-
-
-    //public static bool IsFakeIdProperty(this PropertyInfo propertyInfo, PropertyInfo originalPropertyInfo)
-    //{
-    //    if (propertyInfo == null) throw new ArgumentNullException("propertyInfo");
-    //    if (originalPropertyInfo == null) throw new ArgumentNullException("originalPropertyInfo");
-
-
-    //    return propertyInfo.Name == originalPropertyInfo.Name && propertyInfo.PropertyType == originalPropertyInfo.PropertyType
-
-    //        && propertyInfo.DeclaringType.GetProperties().Any(otherProperty =>
-
-    //            otherProperty.PropertyType.GetProperties()
-    //                                      .Any(parentOtherProperty =>
-
-    //                                          !parentOtherProperty.HasSetMethod()
-    //                                        && parentOtherProperty.PropertyType.IsCollection(elementType => elementType == propertyInfo.DeclaringType)));
-    //}
-
-    public static bool IsFakeVirtualSetProperty(this PropertyInfo propertyInfo)
-    {
-        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
-
-        return propertyInfo.HasSetMethod()
-               && propertyInfo.IsTopProperty()
-               && propertyInfo.DeclaringType
-                              .BaseType
-                              .GetAllElements(t => t.BaseType)
-                              .Any(t => t.GetProperties().Any(otherProperty => otherProperty != propertyInfo
-                                                                               && otherProperty.Name == propertyInfo.Name
-                                                                               && otherProperty.PropertyType == propertyInfo.PropertyType));
     }
 }

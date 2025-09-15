@@ -3,7 +3,7 @@ using CommonFramework.Maybe;
 
 namespace Framework.Core;
 
-public static class StringExtensions
+public static class CoreStringExtensions
 {
     public static string ReplaceAny(this string source, IEnumerable<char> oldChars, char newChar)
     {

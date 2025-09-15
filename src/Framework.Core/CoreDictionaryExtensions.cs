@@ -1,6 +1,6 @@
 ﻿namespace Framework.Core;
 
-public static class DictionaryExtensions
+public static class CoreDictionaryExtensions
 {
     public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> source, TKey key, Func<TValue> getDefaultValueFunc)
     {

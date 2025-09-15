@@ -2,7 +2,6 @@
 
 using Framework.Core;
 
-using ExpressionHelper = Framework.Core.ExpressionHelper;
 using SExpressions = System.Linq.Expressions;
 
 namespace Framework.QueryLanguage;
@@ -96,7 +95,7 @@ public class StandartExpressionBuilder : StandartExpressionBuilderBase
 
         var sourceExpr = preSourceExpr.Type.IsNullable() ? SExpressions.Expression.Property(preSourceExpr, "Value") : preSourceExpr;
 
-        return ExpressionHelper.PropertyOrFieldAuto(sourceExpr, expression.PropertyName);
+        return CoreExpressionHelper.PropertyOrFieldAuto(sourceExpr, expression.PropertyName);
     }
 
     protected override SExpressions.UnaryExpression ToStandartExpression(UnaryExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters)

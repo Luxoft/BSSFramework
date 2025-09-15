@@ -2,15 +2,14 @@
 
 namespace Framework.Core;
 
-public static class ObjectExtensions
+public static class CoreObjectExtensions
 {
-    [DebuggerStepThrough]
-    public static TResult Maybe<TObject, TResult>(this TObject? source, Func<TObject, TResult> selector, TResult ifNullResult)
-        where TObject : class
+    public static IEnumerable<int> RangeInfinity(this int startIndex)
     {
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-        return null == source ? ifNullResult : selector(source);
+        while (true)
+        {
+            yield return startIndex++;
+        }
     }
 
     public static bool IsDefault<T>(this T value)

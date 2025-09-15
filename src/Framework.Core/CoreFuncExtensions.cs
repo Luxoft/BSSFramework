@@ -2,8 +2,15 @@
 
 namespace Framework.Core;
 
-public static class FuncExtensions
+public static class CoreFuncExtensions
 {
+    public static Func<TArg1, TArg2, IEnumerable<TResult>> Sum<TArg1, TArg2, TResult>(this IEnumerable<Func<TArg1, TArg2, IEnumerable<TResult>>> funcs)
+    {
+        if (funcs == null) throw new ArgumentNullException(nameof(funcs));
+
+        return funcs.Aggregate(FuncHelper.Create((TArg1 _, TArg2 __) => Enumerable.Empty<TResult>()), (f1, f2) => (arg1, arg2) => f1(arg1, arg2).Concat(f2(arg1, arg2)));
+    }
+
     public static TInterface ToLazyInterfaceImplement<TInterface>(this Func<TInterface> getValueFunc)
     {
         if (getValueFunc == null) throw new ArgumentNullException(nameof(getValueFunc));

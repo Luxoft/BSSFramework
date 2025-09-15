@@ -41,10 +41,10 @@ public static class RequiredHelper
         switch (mode)
         {
             case RequiredMode.Default:
-                return !value.IsEmpty();
+                return !value.IsEmpty;
 
             case RequiredMode.ClosedPeriodEndDate:
-                return !value.IsEmpty() && value.EndDate != null;
+                return !value.IsEmpty && value.EndDate != null;
 
             default:
                 throw mode.GetUnappliedException<Period>();

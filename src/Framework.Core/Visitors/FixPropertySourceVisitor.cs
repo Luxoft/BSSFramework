@@ -3,7 +3,7 @@ using System.Reflection;
 
 using CommonFramework.Maybe;
 
-namespace Framework.Core;
+namespace Framework.Core.Visitors;
 
 /// <summary>
 /// Выправление MemberExpression со свойствами, которых ReflectedType не текущий, а базовый

@@ -3,6 +3,8 @@ using System.Data;
 using System.Text.RegularExpressions;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
+using CommonFramework;
+
 using Framework.Core;
 
 using MartinCostello.SqlLocalDb;

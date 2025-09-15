@@ -7,6 +7,113 @@ namespace Framework.Core;
 
 public static class CoreTypeExtensions
 {
+    public static IEnumerable<Type> GetReferencedTypes(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.GetReferencedTypes(_ => true);
+    }
+
+    public static IEnumerable<Type> GetReferencedTypes(this Type type, Func<PropertyInfo, bool> filter)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (filter == null) throw new ArgumentNullException(nameof(filter));
+
+        return new[] { type }.GetReferencedTypes(filter);
+    }
+
+    public static IEnumerable<Type> GetReferencedTypes(this IEnumerable<Type> types, Func<PropertyInfo, bool> filter)
+    {
+        if (types == null) throw new ArgumentNullException(nameof(types));
+        if (filter == null) throw new ArgumentNullException(nameof(filter));
+
+        var graph = new HashSet<Type>();
+
+        types.FillReferencedTypes(filter, graph);
+
+        return graph;
+    }
+
+    private static void FillReferencedTypes(this IEnumerable<Type> types, Func<PropertyInfo, bool> filter, HashSet<Type> graph)
+    {
+        if (types == null) throw new ArgumentNullException(nameof(types));
+        if (filter == null) throw new ArgumentNullException(nameof(filter));
+
+        types.Foreach(type => type.FillReferencedTypes(filter, graph));
+    }
+
+    private static void FillReferencedTypes(this Type type, Func<PropertyInfo, bool> filter, HashSet<Type> graph)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (graph == null) throw new ArgumentNullException(nameof(graph));
+
+        var genericElementType = type.GetCollectionOrArrayElementType() ?? type.GetNullableElementType();
+
+        if (genericElementType != null)
+        {
+            genericElementType.FillReferencedTypes(filter, graph);
+        }
+        else if (graph.Add(type))
+        {
+            if (type.IsInterface)
+            {
+                type.GetAllInterfaces().FillReferencedTypes(filter, graph);
+            }
+            else if (type.IsEnum)
+            {
+                Enum.GetUnderlyingType(type).FillReferencedTypes(filter, graph);
+            }
+            else
+            {
+                type.GetProperties()
+                    .Where(filter)
+                    .Select(property => property.PropertyType)
+                    .FillReferencedTypes(filter, graph);
+            }
+        }
+    }
+
+    public static Type? GetCollectionOrArrayElementType(this Type type)
+    {
+        return type.GetCollectionElementType() ?? type.GetArrayGenericType();
+    }
+    public static Type? GetArrayGenericType(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.IsArray ? type.GetElementType() : null;
+    }
+
+    public static Type GetCollectionOrArrayElementTypeOrSelf(this Type type)
+    {
+        return type.GetCollectionOrArrayElementType() ?? type;
+    }
+
+
+    public static bool IsCollection(this Type type, Func<Type?, bool> elementTypeFilter)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (elementTypeFilter == null) throw new ArgumentNullException(nameof(elementTypeFilter));
+
+        return type.IsCollection() && elementTypeFilter(type.GetCollectionElementType());
+    }
+
+    public static Func<TResult> WithLock<TResult>(this Func<TResult> func, object? baseLocker = null)
+    {
+        if (func == null) throw new ArgumentNullException(nameof(func));
+
+        var locker = baseLocker ?? new object();
+
+        return () =>
+               {
+                   lock (locker)
+                   {
+                       return func();
+                   }
+               };
+    }
+
     public static MethodInfo? GetEqualityMethod(this Type type, bool withBaseTypes = false)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
@@ -45,7 +152,7 @@ public static class CoreTypeExtensions
         }
     }
 
-    public static Type GetMemberType(this Type type, string memberName, bool raiseIfNotFound)
+    public static Type? GetMemberType(this Type type, string memberName, bool raiseIfNotFound)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (memberName == null) throw new ArgumentNullException(nameof(memberName));
@@ -53,7 +160,7 @@ public static class CoreTypeExtensions
         return type.GetMemberType(memberName, raiseIfNotFound ? () => new Exception($"Member \"{memberName}\" not found in type \"{type.Name}\"") : default(Func<Exception>));
     }
 
-    public static Type? GetMemberType(this Type type, string memberName, Func<Exception> raiseIfNotFoundException)
+    public static Type? GetMemberType(this Type type, string memberName, Func<Exception>? raiseIfNotFoundException)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (memberName == null) throw new ArgumentNullException(nameof(memberName));
@@ -95,7 +202,7 @@ public static class CoreTypeExtensions
                                                                                    $"Property \"{propertyName}\" not found in type \"{type.Name}\"") : default(Func<Exception>));
     }
 
-    public static PropertyInfo? GetProperty(this Type type, string propertyName, StringComparison stringComparison, Func<Exception> raiseIfNotFoundException)
+    public static PropertyInfo? GetProperty(this Type type, string propertyName, StringComparison stringComparison, Func<Exception>? raiseIfNotFoundException)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
@@ -129,7 +236,7 @@ public static class CoreTypeExtensions
         return type.GetProperty(propertyName, raiseIfNotFound ? () => new Exception($"Property \"{propertyName}\" not found in type \"{type.Name}\"") : default(Func<Exception>));
     }
 
-    public static PropertyInfo? GetProperty(this Type type, string propertyName, Func<Exception> raiseIfNotFoundException)
+    public static PropertyInfo? GetProperty(this Type type, string propertyName, Func<Exception>? raiseIfNotFoundException)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
@@ -144,7 +251,7 @@ public static class CoreTypeExtensions
         return property;
     }
 
-    public static PropertyInfo GetProperty(this Type type, string propertyName, BindingFlags bindingAttr, bool raise = false)
+    public static PropertyInfo? GetProperty(this Type type, string propertyName, BindingFlags bindingAttr, bool raise = false)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
@@ -155,7 +262,7 @@ public static class CoreTypeExtensions
                    : property;
     }
 
-    public static MethodInfo GetMethod(this Type type, string methodName, BindingFlags bindingFlags, bool raiseIfNotFound)
+    public static MethodInfo? GetMethod(this Type type, string methodName, BindingFlags bindingFlags, bool raiseIfNotFound)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (methodName == null) throw new ArgumentNullException(nameof(methodName));
@@ -163,7 +270,7 @@ public static class CoreTypeExtensions
         return type.GetMethod(methodName, bindingFlags, raiseIfNotFound ? () => new Exception($"Method \"{methodName}\" not found") : default(Func<Exception>));
     }
 
-    public static MethodInfo GetMethod(this Type type, string methodName, BindingFlags bindingFlags, Func<Exception> raiseIfNotFoundException)
+    public static MethodInfo GetMethod(this Type type, string methodName, BindingFlags bindingFlags, Func<Exception>? raiseIfNotFoundException)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (methodName == null) throw new ArgumentNullException(nameof(methodName));

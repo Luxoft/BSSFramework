@@ -4,8 +4,35 @@ using CommonFramework;
 
 namespace Framework.Core;
 
-public static class PropertyInfoExtensions
+public static class CorePropertyInfoExtensions
 {
+    public static bool HasSetMethod(this PropertyInfo propertyInfo, bool nonPublic = false)
+    {
+        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+
+        return propertyInfo.GetSetMethod(nonPublic) != null;
+    }
+
+    public static bool IsHierarchical(this PropertyInfo propertyInfo)
+    {
+        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+
+        return propertyInfo.PropertyType.GetCollectionElementType() == propertyInfo.DeclaringType;
+    }
+
+    /// <summary>
+    /// Получение приватного филда по свойству
+    /// </summary>
+    /// <param name="propertyInfo">Свойство</param>
+    /// <param name="preFieldName">Кастомное имя филда</param>
+    /// <returns></returns>
+    public static FieldInfo? GetPrivateField(this PropertyInfo propertyInfo, string? preFieldName = null)
+    {
+        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+
+        return propertyInfo.GetPrivateFieldInternal(propertyInfo.DeclaringType!, preFieldName);
+    }
+
     public static PropertyInfo? GetBaseProperty(this PropertyInfo property, bool byGet = true)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
@@ -54,7 +81,7 @@ public static class PropertyInfoExtensions
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
 
-        return propertyInfo.HasPrivateField(propertyInfo.DeclaringType, preFieldName);
+        return propertyInfo.HasPrivateField(propertyInfo.DeclaringType!, preFieldName);
     }
 
     public static bool HasPrivateField(this PropertyInfo propertyInfo, Type declaringType, string? preFieldName = null)

@@ -3,6 +3,7 @@
 using CommonFramework;
 
 using Framework.Core;
+using Framework.Core.Visitors;
 using Framework.Persistent;
 using Framework.QueryLanguage;
 
@@ -73,38 +74,13 @@ public sealed class ExpandProjectionVisitor : ExpressionVisitor
     }
 
 
-    public override Expression Visit(Expression node)
+    public override Expression? Visit(Expression? node)
     {
         var accumVisitor = this.projectionType.GetReferencedTypes(property => property.PropertyType.IsInterface)
                                .Select(refType => new OverrideCallInterfacePropertiesVisitor(refType))
-                               .Concat(new ExpressionVisitor[] { ExpandPathVisitor.Value, ExpandExplicitPropertyVisitor.Value, OverrideCallInterfaceGenericMethodVisitor.Value })
+                               .Concat(new ExpressionVisitor[] { ExpandPathVisitor.Value, ExpandExplicitPropertyVisitor.Value })
                                .ToCyclic();
 
         return accumVisitor.Visit(node);
-    }
-
-
-    private class OverrideCallInterfaceGenericMethodVisitor : ExpressionVisitor
-    {
-        protected override Expression VisitMethodCall(MethodCallExpression node)
-        {
-            if (node.Method.IsGenericMethodImplementation(MethodInfoHelper.ExpandContainsMethod))
-            {
-                var argumentTypes = node.Arguments.Take(2).ToArray(arg => arg.Type);
-
-                var methodGenericTypes = node.Method.GetGenericArguments();
-
-                if (methodGenericTypes[0].IsInterface && methodGenericTypes[0] != argumentTypes[0])
-                {
-                    var newMethod = MethodInfoHelper.ExpandContainsMethod.MakeGenericMethod(argumentTypes);
-
-                    return Expression.Call(newMethod, node.Arguments.Select(this.Visit));
-                }
-            }
-
-            return base.VisitMethodCall(node);
-        }
-
-        public static readonly OverrideCallInterfaceGenericMethodVisitor Value = new OverrideCallInterfaceGenericMethodVisitor();
     }
 }

@@ -60,7 +60,7 @@ public class ExpressionVisitorContainerPeriodItem : IExpressionVisitorContainerI
                                                                                     || (otherPeriod.Value.EndDate != null && period.Value.StartDate > otherPeriod.Value.EndDate))));
 
         yield return new OverrideMethodInfoVisitor(
-            CoreTypeExtensions.GetEqualityMethod(typeof(Period))!,
+            typeof(Period).GetEqualityMethod()!,
             CoreExpressionHelper.Create((Period period, Period otherPeriod) =>
                 period.StartDate == otherPeriod.StartDate && period.EndDate == otherPeriod.EndDate));
 

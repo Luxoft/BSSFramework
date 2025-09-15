@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;

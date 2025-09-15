@@ -114,25 +114,6 @@ public static class CoreTypeExtensions
                };
     }
 
-    public static MethodInfo? GetEqualityMethod(this Type type, bool withBaseTypes = false)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        if (withBaseTypes)
-        {
-            return type.GetAllElements(t => t.BaseType).Select(t => t.GetEqualityMethod()).FirstOrDefault(t => t != null);
-        }
-        else
-        {
-            return type.GetMethods(BindingFlags.Static | BindingFlags.Public).FirstOrDefault(m =>
-
-                m.ReturnType == typeof(bool) && m.Name == "op_Equality"
-                                             && m.GetParameters().Pipe(parameters =>
-
-                                                                           parameters.Length == 2 && parameters.All(parameter => parameter.ParameterType == type)));
-        }
-    }
-
     public static MethodInfo? GetInequalityMethod(this Type type, bool withBaseTypes = false)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));

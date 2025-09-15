@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.Lock;
@@ -18,6 +20,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     where TBLLContext : class, IBLLBaseContext
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
+    where TIdent: notnull
 {
     private readonly IDAL<TDomainObject, TIdent> dal;
 
@@ -40,21 +43,16 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        var savingEventArgs = new EventArgsWithCancel<TDomainObject>(domainObject);
-
-        if (!savingEventArgs.Cancel)
+        if (id.IsDefault())
         {
-            if (id.IsDefault())
-            {
-                this.dal.Save(domainObject);
-            }
-            else
-            {
-                this.dal.Insert(domainObject, id);
-            }
-
-            base.Save(domainObject);
+            this.dal.Save(domainObject);
         }
+        else
+        {
+            this.dal.Insert(domainObject, id);
+        }
+
+        base.Save(domainObject);
     }
 
     public override void Save(TDomainObject domainObject)
@@ -81,13 +79,8 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        var removingEventArgs = new EventArgsWithCancel<TDomainObject>(domainObject);
-
-        if (!removingEventArgs.Cancel)
-        {
-            this.dal.Remove(domainObject);
-            base.Remove(domainObject);
-        }
+        this.dal.Remove(domainObject);
+        base.Remove(domainObject);
     }
 
     public abstract SelectOperationResult<TProjection> GetObjectsByOData<TProjection>(
@@ -169,14 +162,10 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
 
     public List<TDomainObject> GetListBy(
         Expression<Func<TDomainObject, bool>> filter,
-        IFetchContainer<TDomainObject> fetchContainer = null,
+        IFetchContainer<TDomainObject>? fetchContainer = null,
         LockRole lockRole = LockRole.None)
     {
-        var result = ((IEnumerable<TDomainObject>)this.GetSecureQueryable(fetchContainer, lockRole).Where(filter)).Distinct().ToList();
-
-        var queriedEventArgs = new ObjectsQueriedEventArgs<TDomainObject>(result, filter);
-
-        return queriedEventArgs.Result;
+        return ((IEnumerable<TDomainObject>)this.GetSecureQueryable(fetchContainer, lockRole).Where(filter)).Distinct().ToList();
     }
 
     public List<TDomainObject> GetListBy(
@@ -194,7 +183,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
 
     public List<TDomainObject> GetListBy(
         IDomainObjectFilterModel<TDomainObject> filterModel,
-        IFetchContainer<TDomainObject> fetchContainer = null,
+        IFetchContainer<TDomainObject>? fetchContainer = null,
         LockRole lockRole = LockRole.None)
     {
         if (filterModel == null) throw new ArgumentNullException(nameof(filterModel));
@@ -226,16 +215,16 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
 
     public abstract SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation selectOperation,
-        IFetchContainer<TDomainObject> fetchContainer = null);
+        IFetchContainer<TDomainObject>? fetchContainer = null);
 
     public abstract SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation<TDomainObject> selectOperation,
-        IFetchContainer<TDomainObject> fetchContainer = null);
+        IFetchContainer<TDomainObject>? fetchContainer = null);
 
     public SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation<TDomainObject> selectOperation,
         Expression<Func<TDomainObject, bool>> filter,
-        IFetchContainer<TDomainObject> fetchContainer = null)
+        IFetchContainer<TDomainObject>? fetchContainer = null)
     {
         var selectOperationWithFilter = selectOperation.AddFilter(filter);
 
@@ -245,7 +234,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     public SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation<TDomainObject> selectOperation,
         IDomainObjectFilterModel<TDomainObject> filter,
-        IFetchContainer<TDomainObject> fetchContainer = null)
+        IFetchContainer<TDomainObject>? fetchContainer = null)
     {
         return this.GetObjectsByOData(selectOperation, filter.ToFilterExpression(), fetchContainer);
     }
@@ -256,14 +245,14 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     /// <param name="lockRole">Тип блокировки</param>
     /// <param name="fetchContainer">Подгружаемые свойства</param>
     /// <returns></returns>
-    public IQueryable<TDomainObject> GetUnsecureQueryable(IFetchContainer<TDomainObject> fetchContainer, LockRole lockRole = LockRole.None)
+    public IQueryable<TDomainObject> GetUnsecureQueryable(IFetchContainer<TDomainObject>? fetchContainer, LockRole lockRole = LockRole.None)
     {
         return this.dal.GetQueryable(lockRole, fetchContainer);
     }
 
     public IQueryable<TDomainObject> GetUnsecureQueryable(
         LockRole lockRole,
-        IFetchContainer<TDomainObject> fetchContainer = null) => this.GetUnsecureQueryable(null, lockRole);
+        IFetchContainer<TDomainObject>? fetchContainer = null) => this.GetUnsecureQueryable(null, lockRole);
 
     /// <summary>
     /// Получение IQueryable без учёта безопасности
@@ -300,7 +289,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     /// <param name="fetchContainer">Подгружаемые свойства</param>
     /// <returns></returns>
     public IQueryable<TDomainObject> GetSecureQueryable(
-        IFetchContainer<TDomainObject> fetchContainer = null,
+        IFetchContainer<TDomainObject>? fetchContainer = null,
         LockRole lockRole = LockRole.None)
     {
         return this.ProcessSecurity(this.GetUnsecureQueryable(fetchContainer, lockRole));
@@ -336,7 +325,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
 
     protected IQueryable<TDomainObject> GetSecureQueryable(
         IQueryableProcessor<TDomainObject> baseProcessor,
-        IFetchContainer<TDomainObject> fetchContainer = null)
+        IFetchContainer<TDomainObject>? fetchContainer = null)
     {
         if (baseProcessor == null) throw new ArgumentNullException(nameof(baseProcessor));
 
@@ -359,7 +348,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     public TDomainObject GetObjectBy(
         Expression<Func<TDomainObject, bool>> filter,
         Func<Exception> getNotFoundException,
-        IFetchContainer<TDomainObject> fetchContainer = null)
+        IFetchContainer<TDomainObject>? fetchContainer = null)
     {
         if (filter == null) throw new ArgumentNullException(nameof(filter));
         if (getNotFoundException == null) throw new ArgumentNullException(nameof(getNotFoundException));
@@ -384,7 +373,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     public TDomainObject GetObjectBy(
         LockRole lockRole,
         Expression<Func<TDomainObject, bool>> filter,
-        IFetchContainer<TDomainObject> fetchContainer = null,
+        IFetchContainer<TDomainObject>? fetchContainer = null,
         bool throwOnNotFound = false)
     {
         return this.GetObjectBy(lockRole, filter, throwOnNotFound, fetchContainer);
@@ -394,7 +383,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     public TDomainObject GetObjectBy(
         Expression<Func<TDomainObject, bool>> filter,
         bool throwOnNotFound = false,
-        IFetchContainer<TDomainObject> fetchContainer = null)
+        IFetchContainer<TDomainObject>? fetchContainer = null)
     {
         return this.GetObjectBy(LockRole.None, filter, throwOnNotFound, fetchContainer);
     }
@@ -416,7 +405,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         LockRole lockRole,
         Expression<Func<TDomainObject, bool>> filter,
         bool throwOnNotFound = false,
-        IFetchContainer<TDomainObject> fetchContainer = null)
+        IFetchContainer<TDomainObject>? fetchContainer = null)
     {
         var result = this.GetListBy(filter, fetchContainer, lockRole).SingleOrDefault();
 
@@ -452,7 +441,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         return this.GetObjectBy(filter, throwOnNotFound, fetchs.ToFetchContainer());
     }
 
-    public List<TDomainObject> GetFullList(IFetchContainer<TDomainObject> fetchContainer = null)
+    public List<TDomainObject> GetFullList(IFetchContainer<TDomainObject>? fetchContainer = null)
     {
         return this.GetSecureQueryable(fetchContainer).ToList();
     }

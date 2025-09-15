@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Reflection;
 using CommonFramework;
 using CommonFramework.Maybe;
 
@@ -6,6 +7,29 @@ namespace Framework.Core;
 
 public static class CoreExpressionExtensions
 {
+    /// <summary>
+    /// Получение имени мембера (поле или свойство)
+    /// </summary>
+    /// /// <typeparam name="T"></typeparam>
+    /// <param name="expr">Выражение</param>
+    /// <returns></returns>
+    public static string GetStaticMemberName<T>(this Expression<Func<T>> expr)
+    {
+        if (expr == null) throw new ArgumentNullException(nameof(expr));
+
+        var request = from memberExpr in (expr.Body as MemberExpression).ToMaybe()
+
+                      let member = memberExpr.Member
+
+                      where (member is PropertyInfo || member is FieldInfo)
+
+                            && memberExpr.Expression == null
+
+                      select member.Name;
+
+        return request.GetValue(() => new Exception($"invalid expression: {expr}"));
+    }
+
     public static Node<Expression> ToNode(this Expression expression)
     {
         if (expression == null) throw new ArgumentNullException(nameof(expression));

@@ -23,7 +23,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IValidator validator,
-            IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
+            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
             IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
             : base(serviceProvider, operationSender, trackingService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService) =>
 

@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Exceptions;
 using Framework.Persistent;
@@ -67,7 +69,7 @@ public static class DefaultDomainBLLBaseExtensions
             where TDomainObject : class, TPersistentDomainObjectBase, ICodeObject<TCode>
     {
         if (bll == null) throw new ArgumentNullException(nameof(bll));
-
+        
         var filter = EqualsHelper<TCode>.GetEqualsExpression(code).OverrideInput((TDomainObject domainObject) => domainObject.Code);
 
         var result = bll.GetListBy(filter, fetchs).FirstOrDefault();

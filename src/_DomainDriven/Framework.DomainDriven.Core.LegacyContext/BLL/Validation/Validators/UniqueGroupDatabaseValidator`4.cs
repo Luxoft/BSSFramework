@@ -1,9 +1,11 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Core;
 using Framework.Persistent;
 using Framework.Validation;
+
 using Microsoft.Extensions.DependencyInjection;
+
+using CommonFramework;
 
 namespace Framework.DomainDriven.BLL;
 

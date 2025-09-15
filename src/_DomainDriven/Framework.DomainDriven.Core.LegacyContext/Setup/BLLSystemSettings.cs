@@ -24,8 +24,8 @@ public class BLLSystemSettings
 
     public Type SettingsType { get; set; }
 
-    public T GetSafe<T>(Expression<Func<BLLSystemSettings, T>> expr, T defaultValue = default)
+    public T GetSafe<T>(Expression<Func<BLLSystemSettings, T>> expr, T? defaultValue = default)
     {
-        return expr.Eval(this) ?? defaultValue ?? throw new Exception($"{expr.GetMemberName()} not initialized");
+        return expr.Compile().Invoke(this) ?? defaultValue ?? throw new Exception($"{expr.GetMemberName()} not initialized");
     }
 }

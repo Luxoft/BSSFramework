@@ -4,6 +4,8 @@ using System.Reflection;
 
 using Framework.Core;
 
+using CommonFramework;
+
 namespace Framework.DomainDriven;
 
 public class FetchContainer<TDomainObject> : IEquatable<FetchContainer<TDomainObject>>, IFetchContainer<TDomainObject>
@@ -23,12 +25,12 @@ public class FetchContainer<TDomainObject> : IEquatable<FetchContainer<TDomainOb
     public ReadOnlyCollection<PropertyPath> LoadPaths { get; }
 
 
-    public bool Equals(FetchContainer<TDomainObject> other)
+    public bool Equals(FetchContainer<TDomainObject>? other)
     {
         return other != null && this.LoadPaths.SequenceEqual(other.LoadPaths);
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return this.Equals(obj as FetchContainer<TDomainObject>);
     }

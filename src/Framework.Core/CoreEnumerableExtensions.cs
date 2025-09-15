@@ -7,6 +7,94 @@ namespace Framework.Core;
 
 public static class CoreEnumerableExtensions
 {
+    public static TSource First<TSource>(this IEnumerable<TSource> source, Func<Exception> emptyExceptionHandler)
+    {
+        if (source == null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+
+        if (emptyExceptionHandler == null)
+        {
+            throw new ArgumentNullException(nameof(emptyExceptionHandler));
+        }
+
+        using (var enumerator = source.GetEnumerator())
+        {
+            if (!enumerator.MoveNext())
+            {
+                throw emptyExceptionHandler();
+            }
+
+            return enumerator.Current;
+        }
+    }
+
+
+    public static IEnumerable<T> Distinct<T>(this IEnumerable<T> source, Func<T, T, bool> equalsFunc, Func<T, int>? getHashFunc = null)
+    {
+        return source.Distinct(new EqualityComparerImpl<T>(equalsFunc, getHashFunc));
+    }
+
+    public static void Merge<T, S, TKey>(
+        this IEnumerable<T> source,
+        IEnumerable<S> target,
+        Func<S, TKey> getSKey,
+        Func<T, TKey> getTKey,
+        Func<S, T> createAndMapFunc,
+        Action<IEnumerable<T>> removeAction,
+        Func<TKey, bool>? isDefaultKey = null)
+    {
+        var isDefaultKeyF = isDefaultKey ?? (v => v.IsDefault());
+
+        var targetMap = target.ToDictionary(s => isDefaultKeyF(getSKey(s)) ? new object() : getSKey(s));
+
+        var removed = new List<T>();
+
+        foreach (var sourceItem in source.ToList())
+        {
+            var key = getTKey(sourceItem);
+            if (targetMap.TryGetValue(key, out var targetItem))
+            {
+                createAndMapFunc(targetItem);
+                targetMap.Remove(key);
+            }
+            else
+            {
+                removed.Add(sourceItem);
+            }
+        }
+
+        removeAction(removed);
+
+        foreach (var sourceItem in targetMap.Values)
+        {
+            createAndMapFunc(sourceItem);
+        }
+    }
+
+    public static IEnumerable<IEnumerable<TSource>> Split<TSource>(this IEnumerable<TSource> source, int size)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (size < 1) throw new ArgumentException("count");
+
+        using (var enumerator = source.GetEnumerator())
+        {
+            while (enumerator.MoveNext())
+            {
+                yield return enumerator.InnerSplit(size).ToList();
+            }
+        }
+    }
+
+    private static IEnumerable<TSource> InnerSplit<TSource>(this IEnumerator<TSource> source, int size)
+    {
+        do
+        {
+            yield return source.Current;
+        } while ((--size) != 0 && source.MoveNext());
+    }
+
     public static Stack<T> ToStack<T>(this IEnumerable<T> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

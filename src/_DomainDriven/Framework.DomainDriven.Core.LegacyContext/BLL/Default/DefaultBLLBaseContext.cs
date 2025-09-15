@@ -1,11 +1,12 @@
 ﻿using Framework.Core.Serialization;
 using Framework.DomainDriven.Tracking;
 using Framework.Events;
-using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.Persistent;
 using Framework.QueryLanguage;
 using Framework.Validation;
+
+using SecuritySystem.HierarchicalExpand;
 
 namespace Framework.DomainDriven.BLL;
 
@@ -51,7 +52,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
             ITrackingService<TPersistentDomainObjectBase> trackingService,
             IStandartExpressionBuilder standardExpressionBuilder,
             IValidator validator,
-            IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
+            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
             IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
     {
         this.ServiceProvider = serviceProvider;
@@ -81,7 +82,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
 
     public IParser<string, SelectOperation> SelectOperationParser { get; }
 
-    public IHierarchicalObjectExpanderFactory<TIdent> HierarchicalObjectExpanderFactory { get; }
+    public IHierarchicalObjectExpanderFactory HierarchicalObjectExpanderFactory { get; }
 
     protected abstract IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>> BaseLogics { get; }
 
@@ -108,7 +109,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent,
             ITrackingService<TPersistentDomainObjectBase> trackingService,
             IStandartExpressionBuilder standardExpressionBuilder,
             IValidator validator,
-            IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
+            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
             IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
             : base(serviceProvider, operationSender, trackingService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {

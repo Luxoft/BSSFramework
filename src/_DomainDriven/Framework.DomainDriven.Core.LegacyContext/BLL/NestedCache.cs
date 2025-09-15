@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using CommonFramework.DictionaryCache;
+
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL;

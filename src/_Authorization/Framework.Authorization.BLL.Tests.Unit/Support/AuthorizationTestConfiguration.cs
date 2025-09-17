@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 using NSubstitute;
 
+using SecuritySystem.Services;
+
 namespace Framework.Authorization.BLL.Tests.Unit.Support;
 
 public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthorizationBLLContext, PersistentDomainObjectBase>

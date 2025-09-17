@@ -2,6 +2,21 @@
 
 public static class CorePipeObjectExtensions
 {
+    public static TResult Pipe<T1, T2, T3, TResult>(this Tuple<T1, T2, T3> source, Func<T1, T2, T3, TResult> evaluate)
+    {
+        return evaluate(source.Item1, source.Item2, source.Item3);
+    }
+
+    public static TSource Self<TSource>(this TSource source, bool condition, Action<TSource> evaluate)
+    {
+        if (condition)
+        {
+            evaluate(source);
+        }
+
+        return source;
+    }
+
     public static TResult Pipe<T1, T2, TResult>(this Tuple<T1, T2> source, Func<T1, T2, TResult> evaluate)
     {
         return evaluate(source.Item1, source.Item2);

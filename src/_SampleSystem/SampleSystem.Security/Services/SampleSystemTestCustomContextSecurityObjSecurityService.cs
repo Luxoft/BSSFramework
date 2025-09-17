@@ -2,6 +2,8 @@
 
 using SampleSystem.Domain;
 
+using SecuritySystem.Providers;
+
 namespace SampleSystem.Security.Services;
 
 public class SampleSystemTestCustomContextSecurityObjSecurityService : DomainSecurityServiceBase<TestCustomContextSecurityObj>

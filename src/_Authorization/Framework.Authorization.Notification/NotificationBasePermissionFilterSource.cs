@@ -3,6 +3,7 @@
 using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystem;
 using SecuritySystem;
+using SecuritySystem.Services;
 
 namespace Framework.Authorization.Notification;
 

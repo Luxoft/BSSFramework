@@ -1,4 +1,7 @@
 ﻿using System.Net.Mail;
+
+using CommonFramework;
+
 using Framework.Core;
 using Attachment = Framework.Notification.New.Attachment;
 

@@ -2,6 +2,8 @@
 using Framework.DomainDriven.Repository;
 using Framework.GenericQueryable;
 
+using GenericQueryable;
+
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;

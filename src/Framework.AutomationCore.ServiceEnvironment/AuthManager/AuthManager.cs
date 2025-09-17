@@ -3,6 +3,7 @@
 using Framework.Core.Services;
 using SecuritySystem.Credential;
 using SecuritySystem.ExternalSystem.Management;
+using SecuritySystem.Services;
 using SecuritySystem.UserSource;
 
 namespace Automation.ServiceEnvironment;

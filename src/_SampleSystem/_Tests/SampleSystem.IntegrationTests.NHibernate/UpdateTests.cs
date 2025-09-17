@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using CommonFramework.Maybe;
+
+using Framework.Core;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;

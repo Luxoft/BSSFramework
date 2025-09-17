@@ -1,4 +1,7 @@
-﻿using Framework.Authorization.BLL;
+﻿using CommonFramework;
+using CommonFramework.DictionaryCache;
+
+using Framework.Authorization.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Serialization;

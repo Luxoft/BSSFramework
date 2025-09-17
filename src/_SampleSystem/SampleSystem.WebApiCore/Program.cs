@@ -28,6 +28,9 @@ using SampleSystem.ServiceEnvironment;
 using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.WebApiCore.Services;
 
+using SecuritySystem.Configurator;
+using SecuritySystem.Configurator.Interfaces;
+
 namespace SampleSystem.WebApiCore;
 
 public static class GenericProgram

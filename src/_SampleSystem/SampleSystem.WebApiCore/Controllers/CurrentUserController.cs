@@ -2,6 +2,8 @@
 
 using Microsoft.AspNetCore.Mvc;
 
+using SecuritySystem.Services;
+
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]

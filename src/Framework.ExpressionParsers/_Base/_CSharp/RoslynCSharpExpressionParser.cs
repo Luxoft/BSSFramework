@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Runtime.Loader;
 
+using CommonFramework;
+
 using Framework.Core;
 
 using Microsoft.CodeAnalysis;

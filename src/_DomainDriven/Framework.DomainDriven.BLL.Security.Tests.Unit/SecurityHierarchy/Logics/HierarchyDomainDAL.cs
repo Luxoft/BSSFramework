@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Core;
 using Framework.DomainDriven.UnitTest.Mock;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;

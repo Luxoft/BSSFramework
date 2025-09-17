@@ -1,6 +1,9 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.GenericQueryable;
+
+using GenericQueryable;
+
 using SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;

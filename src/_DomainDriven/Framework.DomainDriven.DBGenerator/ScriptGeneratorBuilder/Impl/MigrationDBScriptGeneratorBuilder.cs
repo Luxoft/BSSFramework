@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Core;
 using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.Team;
 

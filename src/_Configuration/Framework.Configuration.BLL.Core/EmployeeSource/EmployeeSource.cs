@@ -1,6 +1,7 @@
 ﻿using Framework.DomainDriven.Repository;
 using Framework.Notification;
 using SecuritySystem;
+using SecuritySystem.Attributes;
 
 namespace Framework.Configuration.BLL;
 

@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
+using Framework.Core;
+
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;

@@ -1,4 +1,7 @@
 ﻿using System.Linq.Expressions;
+
+using CommonFramework.ExpressionEvaluate;
+
 using Framework.Core;
 
 using Framework.Exceptions;
@@ -56,7 +59,7 @@ public abstract class DomainObjectExpressionParser<TDomainObject, TLambdaObject,
         if (compileFunc == null) throw new ArgumentNullException(nameof(compileFunc));
 
 
-        this._getLambdaFunc = lambdaPath.Compile(this.CompileCache);
+        this._getLambdaFunc = this.CompileCache.GetFunc(lambdaPath);
 
         this._membeName = lambdaPath.GetMemberName();
     }
@@ -115,5 +118,5 @@ public abstract class DomainObjectExpressionParser<TDomainObject, TLambdaObject,
 
 
 
-    private readonly ILambdaCompileCache CompileCache = new LambdaCompileCache();
+    private readonly ILambdaCompileCache CompileCache = new LambdaCompileCache(LambdaCompileMode.None);
 }

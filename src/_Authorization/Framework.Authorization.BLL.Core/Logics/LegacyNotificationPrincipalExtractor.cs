@@ -3,6 +3,8 @@ using Framework.Core;
 
 using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Authorization.Notification;
 using Framework.DomainDriven.BLL;
 using SecuritySystem;

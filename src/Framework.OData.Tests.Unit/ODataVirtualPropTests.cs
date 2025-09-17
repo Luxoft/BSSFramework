@@ -1,4 +1,7 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+using CommonFramework.ExpressionComparers;
+
+using Framework.Core;
 
 using NUnit.Framework;
 using FluentAssertions;

@@ -1,8 +1,9 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.Lock;
-using Framework.GenericQueryable;
 using Framework.Persistent;
+
+using GenericQueryable;
 
 using NHibernate;
 

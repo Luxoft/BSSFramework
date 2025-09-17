@@ -1,5 +1,7 @@
 ﻿#nullable enable
 
+using CommonFramework;
+
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;

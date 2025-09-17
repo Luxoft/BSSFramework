@@ -91,7 +91,7 @@
         {
             SampleSystem.BLL.IIntegrationVersionContainer1BLL bll = evaluateData.Context.Logics.IntegrationVersionContainer1;
             evaluateData.Context.Authorization.SecuritySystem.CheckAccess(SecuritySystem.SecurityRole.SystemIntegration);
-            return Framework.Core.EnumerableExtensions.ToList(integrationVersionContainer1s, integrationVersionContainer1 => this.SaveIntegrationVersionContainer1Internal(integrationVersionContainer1, evaluateData, bll));
+            return CommonFramework.EnumerableExtensions.ToList(integrationVersionContainer1s, integrationVersionContainer1 => this.SaveIntegrationVersionContainer1Internal(integrationVersionContainer1, evaluateData, bll));
         }
     }
 }

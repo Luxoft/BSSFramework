@@ -5,6 +5,8 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven.DALExceptions;
 using Framework.GenericQueryable;
 
+using GenericQueryable;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.EntityFramework;

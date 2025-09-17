@@ -1,10 +1,14 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Core;
 using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
+
+using SecuritySystem.Services;
 
 namespace SampleSystem.Domain;
 

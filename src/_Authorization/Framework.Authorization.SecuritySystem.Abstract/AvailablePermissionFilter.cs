@@ -1,4 +1,7 @@
 ﻿using System.Linq.Expressions;
+
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.Authorization.Domain;

@@ -1,10 +1,13 @@
-﻿using Framework.Authorization.Domain;
+﻿using CommonFramework;
+
+using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Core.Services;
 using Framework.DomainDriven.Repository;
 using SecuritySystem;
 using SecuritySystem.Attributes;
 using SecuritySystem.Credential;
+using SecuritySystem.Services;
 using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.SecuritySystem;

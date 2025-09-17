@@ -16,6 +16,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 using NSubstitute;
 
+using SecuritySystem.Providers;
+using SecuritySystem.Services;
+
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer

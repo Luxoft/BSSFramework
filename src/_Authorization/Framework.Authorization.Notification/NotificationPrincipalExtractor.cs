@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
@@ -8,6 +10,9 @@ using Framework.Persistent;
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.Attributes;
+using SecuritySystem.HierarchicalExpand;
 
 namespace Framework.Authorization.Notification;
 

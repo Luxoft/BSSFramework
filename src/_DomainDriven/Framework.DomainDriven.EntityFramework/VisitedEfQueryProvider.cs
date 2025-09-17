@@ -2,6 +2,8 @@
 
 using Framework.GenericQueryable;
 
+using GenericQueryable;
+
 using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Framework.DomainDriven.EntityFramework;

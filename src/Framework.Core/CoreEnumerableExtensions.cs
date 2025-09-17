@@ -7,6 +7,122 @@ namespace Framework.Core;
 
 public static class CoreEnumerableExtensions
 {
+
+    public static void Foreach<T>(this IEnumerable<T> source, Action<T, int> action)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (action == null) throw new ArgumentNullException(nameof(action));
+
+        foreach (var pair in source.Select((value, index) => new { Value = value, Index = index }))
+        {
+            action(pair.Value, pair.Index);
+        }
+    }
+
+    public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<IReadOnlyCollection<TSource>, Exception> manyExceptionHandler)
+    {
+        if (source == null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+
+        if (predicate == null)
+        {
+            throw new ArgumentNullException(nameof(predicate));
+        }
+
+        if (manyExceptionHandler == null)
+        {
+            throw new ArgumentNullException(nameof(manyExceptionHandler));
+        }
+
+        return source.Where(predicate).SingleOrDefault(manyExceptionHandler);
+    }
+
+    public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<IReadOnlyCollection<TSource>, Exception> manyExceptionHandler)
+    {
+        if (source == null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+
+        if (manyExceptionHandler == null)
+        {
+            throw new ArgumentNullException(nameof(manyExceptionHandler));
+        }
+
+        var items = source.ToList();
+
+        if (items.Count > 1)
+        {
+            throw manyExceptionHandler(items.ToReadOnlyCollection());
+        }
+
+        return items.SingleOrDefault();
+    }
+
+    public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this TKey key, IEnumerable<TElement> values)
+    {
+        if (values == null) throw new ArgumentNullException(nameof(values));
+
+        return key.ToKeyValuePair(values).ToGroup();
+    }
+
+    public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this KeyValuePair<TKey, IEnumerable<TElement>> pair)
+    {
+        return new PairGrouping<TKey, TElement>(pair.Value.ToList(), pair.Key);
+    }
+
+    public static bool HasAttribute<T>(this IEnumerable<Attribute> source)
+        where T : Attribute
+    {
+        return source.OfType<T>().Any();
+    }
+
+    public static IEnumerable<T> IfEmpty<T>(this IEnumerable<T> source, Func<IEnumerable<T>> func)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (func == null) throw new ArgumentNullException(nameof(func));
+
+        using (var sourceEnumerator = source.GetEnumerator())
+        {
+            if (sourceEnumerator.MoveNext())
+            {
+                do
+                {
+                    yield return sourceEnumerator.Current;
+                } while (sourceEnumerator.MoveNext());
+            }
+            else
+            {
+                using (var otherEnumerator = func().GetEnumerator())
+                {
+                    while (otherEnumerator.MoveNext())
+                    {
+                        yield return otherEnumerator.Current;
+                    }
+                }
+            }
+        }
+    }
+
+    public static int GetIndex<T>(this IEnumerable<T> source, T value)
+    {
+        var currentIndex = 0;
+
+        foreach (var item in source)
+        {
+            if (EqualityComparer<T>.Default.Equals(item, value))
+            {
+                return currentIndex;
+            }
+
+            ++currentIndex;
+        }
+
+        return -1;
+    }
+
     public static T FirstOr<T>(this IEnumerable<T> source, Func<T> func)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
@@ -518,4 +634,11 @@ public static class CoreEnumerableExtensions
             yield return source;
         }
     }
+
+    private class PairGrouping<TKey, TElement>(IList<TElement> list, TKey key)
+        : ReadOnlyCollection<TElement>(list), IGrouping<TKey, TElement>
+    {
+        public TKey Key { get; private set; } = key;
+    }
+
 }

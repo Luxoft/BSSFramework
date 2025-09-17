@@ -1,4 +1,6 @@
-﻿using FluentNHibernate.Cfg;
+﻿using CommonFramework;
+
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 using Framework.Core;

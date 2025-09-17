@@ -1,5 +1,8 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework.DictionaryCache;
+using CommonFramework.ExpressionEvaluate;
+
 using Framework.Core;
 
 using Framework.Exceptions;

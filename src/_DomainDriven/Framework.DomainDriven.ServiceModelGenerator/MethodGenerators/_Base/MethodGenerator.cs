@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;

@@ -1,7 +1,10 @@
-﻿using FluentValidation;
+﻿using CommonFramework;
+
+using FluentValidation;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
+using Framework.Persistent;
 
 using SecuritySystem;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;

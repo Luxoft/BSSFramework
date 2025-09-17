@@ -30,6 +30,8 @@ using Framework.DomainDriven.Lock;
 using SecuritySystem.DependencyInjection;
 using Framework.ApplicationVariable;
 
+using SecuritySystem.DomainServices;
+
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public static class ServiceCollectionExtensions

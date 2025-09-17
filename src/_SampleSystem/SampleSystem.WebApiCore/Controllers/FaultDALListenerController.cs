@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using SampleSystem.Domain;
 using SampleSystem.ServiceEnvironment;
 
+using SecuritySystem.Attributes;
+
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]

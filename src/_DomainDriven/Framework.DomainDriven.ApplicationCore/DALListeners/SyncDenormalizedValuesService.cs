@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.DomainDriven.Lock;
 using Framework.HierarchicalExpand;

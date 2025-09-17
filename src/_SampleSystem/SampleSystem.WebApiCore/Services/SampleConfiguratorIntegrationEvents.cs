@@ -4,6 +4,8 @@ using Framework.Persistent;
 
 using Microsoft.Extensions.Logging;
 
+using SecuritySystem.Configurator.Interfaces;
+
 namespace SampleSystem.WebApiCore.Services;
 
 public class SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger, ICurrentRevisionService currentRevisionService) : IConfiguratorIntegrationEvents

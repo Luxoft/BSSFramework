@@ -1,5 +1,7 @@
 ﻿using System.Collections.Specialized;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.DomainDriven.DAL.Sql;
 using Framework.DomainDriven.DBGenerator.Team;

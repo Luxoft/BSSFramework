@@ -915,11 +915,11 @@ namespace Framework.Configuration.Generated.DTO
             }
             if (!object.ReferenceEquals(source.Children, null))
             {
-                target.Children = Framework.Core.EnumerableExtensions.ToList(source.Children, controlSettings => new Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO(controlSettings));
+                target.Children = CommonFramework.EnumerableExtensions.ToList(source.Children, controlSettings => new Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO(controlSettings));
             }
             if (!object.ReferenceEquals(source.ControlSettingsParams, null))
             {
-                target.ControlSettingsParams = Framework.Core.EnumerableExtensions.ToList(source.ControlSettingsParams, controlSettingsParam => new Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO(controlSettingsParam));
+                target.ControlSettingsParams = CommonFramework.EnumerableExtensions.ToList(source.ControlSettingsParams, controlSettingsParam => new Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO(controlSettingsParam));
             }
         }
         
@@ -935,7 +935,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             if (!object.ReferenceEquals(source.ControlSettingsParamValues, null))
             {
-                target.ControlSettingsParamValues = Framework.Core.EnumerableExtensions.ToList(source.ControlSettingsParamValues, controlSettingsParamValue => new Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO(controlSettingsParamValue));
+                target.ControlSettingsParamValues = CommonFramework.EnumerableExtensions.ToList(source.ControlSettingsParamValues, controlSettingsParamValue => new Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO(controlSettingsParamValue));
             }
         }
         
@@ -10189,117 +10189,117 @@ namespace Framework.Configuration.Generated.DTO
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscription> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectModificationFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectModification> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectNotificationFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectNotification> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainType> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventOperationFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventOperation> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessageRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.QueueProcessingState> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SentMessageFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SentMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Sequence> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceCreateModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SequenceCreateModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceRootFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SequenceRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SystemConstant> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SystemConstantRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.TargetSystemFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.TargetSystem> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.TargetSystemRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.CodeFirstSubscription domainObject)
@@ -10374,72 +10374,72 @@ namespace Framework.Configuration.Generated.DTO
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscription> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectModification> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectNotification> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainType> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventOperation> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessage> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SentMessageIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SentMessage> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Sequence> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SystemConstant> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.TargetSystem> domainObjects)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
         public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO ToRichDTO(this Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -10559,117 +10559,117 @@ namespace Framework.Configuration.Generated.DTO
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscription> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectModificationRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectModification> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectNotificationRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectNotification> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainType> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventOperationRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventOperation> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessageRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.QueueProcessingState> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SentMessageRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SentMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Sequence> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceCreateModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SequenceCreateModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceRootFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SequenceRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SystemConstantRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SystemConstant> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SystemConstantRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.TargetSystemRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.TargetSystem> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.TargetSystemRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
         public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -10789,117 +10789,117 @@ namespace Framework.Configuration.Generated.DTO
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscription> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectModificationSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectModification> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectNotificationSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectNotification> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainType> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventOperation> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessageRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.QueueProcessingState> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SentMessageSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SentMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Sequence> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceCreateModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SequenceCreateModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceRootFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SequenceRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SystemConstant> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SystemConstantRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.TargetSystem> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.TargetSystemRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static Framework.Configuration.Generated.DTO.ControlSettingsVisualDTO ToVisualDTO(this Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -10934,32 +10934,32 @@ namespace Framework.Configuration.Generated.DTO
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainType> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventOperationVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventOperation> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SequenceVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Sequence> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.SystemConstant> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.TargetSystemVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.TargetSystem> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
+            return CommonFramework.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
     }
     #endregion

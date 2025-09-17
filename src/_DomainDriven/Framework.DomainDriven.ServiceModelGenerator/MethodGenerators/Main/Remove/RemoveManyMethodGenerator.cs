@@ -1,5 +1,7 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Transfering;
@@ -72,7 +74,7 @@ public class RemoveManyMethodGenerator<TConfiguration> : BaseRemoveMethodGenerat
                          .ToVariableReferenceExpression()
                          .ToStaticMethodInvokeExpression(
 
-                                                         typeof(Core.EnumerableExtensions)
+                                                         typeof(CommonFramework.EnumerableExtensions)
                                                                  .ToTypeReferenceExpression()
                                                                  .ToMethodReferenceExpression("Foreach"), convertLambda)
 

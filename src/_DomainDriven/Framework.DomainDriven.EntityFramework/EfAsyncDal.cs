@@ -4,6 +4,8 @@ using Framework.DomainDriven.Lock;
 using Framework.GenericQueryable;
 using Framework.Persistent;
 
+using GenericQueryable;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Framework.DomainDriven.EntityFramework;

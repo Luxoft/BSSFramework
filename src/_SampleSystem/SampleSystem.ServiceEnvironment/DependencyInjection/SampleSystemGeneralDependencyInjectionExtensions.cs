@@ -1,4 +1,6 @@
-﻿using Framework.Authorization.Environment;
+﻿using CommonFramework;
+
+using Framework.Authorization.Environment;
 using Framework.Core;
 using Framework.DomainDriven.Setup;
 

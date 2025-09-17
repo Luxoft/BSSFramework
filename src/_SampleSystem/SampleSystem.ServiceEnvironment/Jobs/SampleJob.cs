@@ -8,6 +8,9 @@ using Microsoft.Extensions.Logging;
 
 using SampleSystem.Domain;
 
+using SecuritySystem.Attributes;
+using SecuritySystem.Services;
+
 namespace SampleSystem.ServiceEnvironment.Jobs;
 
 [DisableConcurrentExecution(timeoutInSeconds: 1000)]

@@ -4,6 +4,8 @@ using Framework.Core;
 using Framework.DomainDriven.Serialization;
 using Framework.Transfering;
 
+using CommonFramework;
+
 namespace Framework.DomainDriven.DTOGenerator;
 
 public class FileType : IEquatable<FileType>

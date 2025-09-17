@@ -5,6 +5,8 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 
+using CommonFramework;
+
 namespace Framework.DomainDriven.DTOGenerator;
 
 public abstract class PropertyAssigner<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IPropertyAssigner<TConfiguration>

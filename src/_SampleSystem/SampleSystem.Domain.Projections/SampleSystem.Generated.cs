@@ -743,7 +743,7 @@ namespace SampleSystem.Domain.Projections
         {
             get
             {
-                return Framework.Core.EnumerableExtensions.EmptyIfNull(this.CoreBusinessUnit_Auto?.Projects_Last_CoreBusinessUnitProjects);
+                return CommonFramework.EnumerableExtensions.EmptyIfNull(this.CoreBusinessUnit_Auto?.Projects_Last_CoreBusinessUnitProjects);
             }
         }
         

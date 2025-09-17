@@ -1,7 +1,10 @@
 ﻿using System.Xml.Linq;
+
 using Framework.Core;
 using Framework.DomainDriven.Metadata;
 using Framework.Persistent.Mapping;
+
+using CommonFramework;
 
 namespace Framework.DomainDriven.NHibernate.DALGenerator;
 

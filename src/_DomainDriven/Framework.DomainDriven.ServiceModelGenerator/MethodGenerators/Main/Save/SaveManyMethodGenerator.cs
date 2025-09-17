@@ -1,5 +1,7 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Transfering;
@@ -73,7 +75,7 @@ public class SaveManyMethodGenerator<TConfiguration> : BaseSaveMethodGenerator<T
                          .ToVariableReferenceExpression()
                          .ToStaticMethodInvokeExpression(
 
-                                                         typeof(Core.EnumerableExtensions)
+                                                         typeof(CommonFramework.EnumerableExtensions)
                                                                  .ToTypeReferenceExpression()
                                                                  .ToMethodReferenceExpression("ToList"), convertLambda)
 

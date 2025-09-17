@@ -7,6 +7,13 @@ namespace Framework.Core;
 
 public static class CoreTypeExtensions
 {
+    public static bool HasDefaultConstructor(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.GetConstructor(Type.EmptyTypes) != null;
+    }
+
     public static IEnumerable<Type> GetReferencedTypes(this IEnumerable<Type> types)
     {
         return types.GetReferencedTypes(_ => true);

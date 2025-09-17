@@ -1,4 +1,6 @@
-﻿using Framework.Authorization.Domain;
+﻿using CommonFramework;
+
+using Framework.Authorization.Domain;
 using Framework.Core;
 using SecuritySystem;
 

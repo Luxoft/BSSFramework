@@ -16,6 +16,8 @@ using SecuritySystem.PersistStorage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+using SecuritySystem.Services;
+
 namespace Framework.DomainDriven.ApplicationCore;
 
 public static class ServiceCollectionExtensions

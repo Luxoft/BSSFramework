@@ -1,5 +1,8 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+using CommonFramework.DictionaryCache;
+
 using Framework.Core;
 
 namespace Framework.ExpressionParsers;

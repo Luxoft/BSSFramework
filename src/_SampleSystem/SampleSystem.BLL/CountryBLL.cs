@@ -2,6 +2,8 @@
 
 using SampleSystem.Domain;
 
+using SecuritySystem.Providers;
+
 namespace SampleSystem.BLL;
 
 public partial class CountryBLL

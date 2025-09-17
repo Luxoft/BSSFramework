@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Collections;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation;

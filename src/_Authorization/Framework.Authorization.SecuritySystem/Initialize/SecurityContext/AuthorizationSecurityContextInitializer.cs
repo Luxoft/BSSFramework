@@ -1,6 +1,10 @@
-﻿using Framework.Authorization.Domain;
+﻿using CommonFramework;
+
+using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
+
+using GenericQueryable;
 
 using SecuritySystem;
 

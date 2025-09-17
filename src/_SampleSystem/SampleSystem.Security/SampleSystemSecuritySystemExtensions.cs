@@ -6,6 +6,8 @@ using SecuritySystem.DependencyInjection;
 
 using SampleSystem.Domain;
 
+using SecuritySystem.HierarchicalExpand;
+
 namespace SampleSystem.Security;
 
 public static class SampleSystemSecuritySystemExtensions

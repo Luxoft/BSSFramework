@@ -10,6 +10,13 @@ namespace Framework.Persistent;
 
 public static class TypeExtensions
 {
+    public static bool IsHierarchical(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.IsInterfaceImplementation(typeof(IHierarchicalPersistentDomainObjectBase<,>));
+    }
+
     internal static bool SafeEquals(this Type t1, Type t2)
     {
         if (t1 == null) throw new ArgumentNullException(nameof(t1));

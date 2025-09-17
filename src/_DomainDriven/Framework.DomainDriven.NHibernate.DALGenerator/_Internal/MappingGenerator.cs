@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using System.Xml.Linq;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.Common;

@@ -4009,7 +4009,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(mappingObject.SecondaryChangingObjects, null))
             {
-                domainObject.SecondaryChangingObjects = Framework.Core.EnumerableExtensions.ToList(mappingObject.SecondaryChangingObjects, v => this.ToEmployee(v));
+                domainObject.SecondaryChangingObjects = CommonFramework.EnumerableExtensions.ToList(mappingObject.SecondaryChangingObjects, v => this.ToEmployee(v));
             }
         }
         
@@ -4134,7 +4134,7 @@ namespace SampleSystem.Generated.DTO
         {
             if (!object.ReferenceEquals(mappingObject.ChangingObjects, null))
             {
-                domainObject.ChangingObjects = Framework.Core.EnumerableExtensions.ToList(mappingObject.ChangingObjects, v => this.ToEmployee(v));
+                domainObject.ChangingObjects = CommonFramework.EnumerableExtensions.ToList(mappingObject.ChangingObjects, v => this.ToEmployee(v));
             }
             domainObject.Email = mappingObject.Email;
         }

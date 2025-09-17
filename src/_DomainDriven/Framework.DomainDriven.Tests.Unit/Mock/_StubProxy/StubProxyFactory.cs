@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Core;
 
 using Unity.Interception;
 using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;

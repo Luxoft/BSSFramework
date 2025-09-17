@@ -4,6 +4,8 @@ using System.Reflection;
 using Framework.Core;
 using Framework.Security;
 
+using CommonFramework;
+
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public class PropertyAssignerConfigurator<TConfiguration> : PropertyAssignerConfiguratorBase<TConfiguration>

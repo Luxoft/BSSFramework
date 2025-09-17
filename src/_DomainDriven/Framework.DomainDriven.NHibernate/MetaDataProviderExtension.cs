@@ -1,4 +1,4 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
 
 using NHibernate.Cfg;
 using NHibernate.Envers.Configuration.Store;

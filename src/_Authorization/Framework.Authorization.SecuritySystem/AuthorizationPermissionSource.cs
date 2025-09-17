@@ -1,8 +1,12 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
+
+using GenericQueryable;
 
 using SecuritySystem;
 using SecuritySystem.Attributes;

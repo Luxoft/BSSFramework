@@ -1,6 +1,8 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.DomainDriven.Repository;
 
+using GenericQueryable;
+
 using SecuritySystem.Attributes;
 using SecuritySystem.Credential;
 

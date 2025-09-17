@@ -2,6 +2,8 @@
 
 using Automation.Utils.DatabaseUtils;
 
+using CommonFramework.Maybe;
+
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 

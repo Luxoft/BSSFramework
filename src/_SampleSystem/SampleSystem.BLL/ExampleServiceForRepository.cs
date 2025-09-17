@@ -1,5 +1,8 @@
 ﻿using Framework.DomainDriven.Repository;
 using Framework.GenericQueryable;
+
+using GenericQueryable;
+
 using SecuritySystem;
 
 using SampleSystem.Domain;

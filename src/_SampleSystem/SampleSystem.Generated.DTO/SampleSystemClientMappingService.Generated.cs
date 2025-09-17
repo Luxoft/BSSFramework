@@ -2312,15 +2312,15 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.BusinessUnitEmployeeRoles, null))
             {
-                target.BusinessUnitEmployeeRoles = Framework.Core.EnumerableExtensions.ToList(source.BusinessUnitEmployeeRoles, businessUnitEmployeeRole => new SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleStrictDTO(businessUnitEmployeeRole));
+                target.BusinessUnitEmployeeRoles = CommonFramework.EnumerableExtensions.ToList(source.BusinessUnitEmployeeRoles, businessUnitEmployeeRole => new SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleStrictDTO(businessUnitEmployeeRole));
             }
             if (!object.ReferenceEquals(source.ManagementUnits, null))
             {
-                target.ManagementUnits = Framework.Core.EnumerableExtensions.ToList(source.ManagementUnits, managementUnitAndBusinessUnitLink => new SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO(managementUnitAndBusinessUnitLink));
+                target.ManagementUnits = CommonFramework.EnumerableExtensions.ToList(source.ManagementUnits, managementUnitAndBusinessUnitLink => new SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO(managementUnitAndBusinessUnitLink));
             }
             if (!object.ReferenceEquals(source.ManagerCommissions, null))
             {
-                target.ManagerCommissions = Framework.Core.EnumerableExtensions.ToList(source.ManagerCommissions, businessUnitManagerCommissionLink => new SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkStrictDTO(businessUnitManagerCommissionLink));
+                target.ManagerCommissions = CommonFramework.EnumerableExtensions.ToList(source.ManagerCommissions, businessUnitManagerCommissionLink => new SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkStrictDTO(businessUnitManagerCommissionLink));
             }
         }
         
@@ -2372,15 +2372,15 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.PossibleFinancialProjectTypes, null))
             {
-                target.PossibleFinancialProjectTypes = Framework.Core.EnumerableExtensions.ToList(source.PossibleFinancialProjectTypes, businessUnitTypeLinkWithPossibleFinancialProjectType => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO(businessUnitTypeLinkWithPossibleFinancialProjectType));
+                target.PossibleFinancialProjectTypes = CommonFramework.EnumerableExtensions.ToList(source.PossibleFinancialProjectTypes, businessUnitTypeLinkWithPossibleFinancialProjectType => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO(businessUnitTypeLinkWithPossibleFinancialProjectType));
             }
             if (!object.ReferenceEquals(source.PossibleParents, null))
             {
-                target.PossibleParents = Framework.Core.EnumerableExtensions.ToList(source.PossibleParents, businessUnitTypeLinkWithPossibleParent => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentStrictDTO(businessUnitTypeLinkWithPossibleParent));
+                target.PossibleParents = CommonFramework.EnumerableExtensions.ToList(source.PossibleParents, businessUnitTypeLinkWithPossibleParent => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentStrictDTO(businessUnitTypeLinkWithPossibleParent));
             }
             if (!object.ReferenceEquals(source.TransferTo, null))
             {
-                target.TransferTo = Framework.Core.EnumerableExtensions.ToList(source.TransferTo, businessUnitTypeLinkWithTransferTo => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToStrictDTO(businessUnitTypeLinkWithTransferTo));
+                target.TransferTo = CommonFramework.EnumerableExtensions.ToList(source.TransferTo, businessUnitTypeLinkWithTransferTo => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToStrictDTO(businessUnitTypeLinkWithTransferTo));
             }
         }
         
@@ -2432,7 +2432,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.Addresses, null))
             {
-                target.Addresses = Framework.Core.EnumerableExtensions.ToList(source.Addresses, address => new SampleSystem.Generated.DTO.AddressStrictDTO(address));
+                target.Addresses = CommonFramework.EnumerableExtensions.ToList(source.Addresses, address => new SampleSystem.Generated.DTO.AddressStrictDTO(address));
             }
         }
         
@@ -2460,11 +2460,11 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.CellPhones, null))
             {
-                target.CellPhones = Framework.Core.EnumerableExtensions.ToList(source.CellPhones, employeeCellPhone => new SampleSystem.Generated.DTO.EmployeeCellPhoneStrictDTO(employeeCellPhone));
+                target.CellPhones = CommonFramework.EnumerableExtensions.ToList(source.CellPhones, employeeCellPhone => new SampleSystem.Generated.DTO.EmployeeCellPhoneStrictDTO(employeeCellPhone));
             }
             if (!object.ReferenceEquals(source.EmployeeToEmployeeLinks, null))
             {
-                target.EmployeeToEmployeeLinks = Framework.Core.EnumerableExtensions.ToList(source.EmployeeToEmployeeLinks, employeeToEmployeeLink => new SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO(employeeToEmployeeLink));
+                target.EmployeeToEmployeeLinks = CommonFramework.EnumerableExtensions.ToList(source.EmployeeToEmployeeLinks, employeeToEmployeeLink => new SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO(employeeToEmployeeLink));
             }
             Framework.Core.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>> justPersonalCellPhones = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>>>(source.PersonalCellPhones);
             if (!object.ReferenceEquals(justPersonalCellPhones, null))
@@ -2472,7 +2472,7 @@ namespace SampleSystem.Generated.DTO
                 System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO> resultPersonalCellPhones = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>();
                 if (!object.ReferenceEquals(justPersonalCellPhones.Value, null))
                 {
-                    resultPersonalCellPhones = Framework.Core.EnumerableExtensions.ToList(justPersonalCellPhones.Value, employeePersonalCellPhone => new SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO(employeePersonalCellPhone));
+                    resultPersonalCellPhones = CommonFramework.EnumerableExtensions.ToList(justPersonalCellPhones.Value, employeePersonalCellPhone => new SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO(employeePersonalCellPhone));
                 }
                 target.PersonalCellPhones = new Framework.Core.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>(resultPersonalCellPhones);
             }
@@ -2482,7 +2482,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.Specializations, null))
             {
-                target.Specializations = Framework.Core.EnumerableExtensions.ToList(source.Specializations, employeeAndEmployeeSpecializationLink => new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO(employeeAndEmployeeSpecializationLink));
+                target.Specializations = CommonFramework.EnumerableExtensions.ToList(source.Specializations, employeeAndEmployeeSpecializationLink => new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO(employeeAndEmployeeSpecializationLink));
             }
         }
         
@@ -2534,7 +2534,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.ChangingObjects, null))
             {
-                target.ChangingObjects = Framework.Core.EnumerableExtensions.ToList(source.ChangingObjects, employee => employee.Identity);
+                target.ChangingObjects = CommonFramework.EnumerableExtensions.ToList(source.ChangingObjects, employee => employee.Identity);
             }
         }
         
@@ -2574,7 +2574,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.Items2, null))
             {
-                target.Items2 = Framework.Core.EnumerableExtensions.ToList(source.Items2, example2 => new SampleSystem.Generated.DTO.Example2StrictDTO(example2));
+                target.Items2 = CommonFramework.EnumerableExtensions.ToList(source.Items2, example2 => new SampleSystem.Generated.DTO.Example2StrictDTO(example2));
             }
         }
         
@@ -2602,19 +2602,19 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.BusinessUnitHrDepartments, null))
             {
-                target.BusinessUnitHrDepartments = Framework.Core.EnumerableExtensions.ToList(source.BusinessUnitHrDepartments, businessUnitHrDepartment => new SampleSystem.Generated.DTO.BusinessUnitHrDepartmentStrictDTO(businessUnitHrDepartment));
+                target.BusinessUnitHrDepartments = CommonFramework.EnumerableExtensions.ToList(source.BusinessUnitHrDepartments, businessUnitHrDepartment => new SampleSystem.Generated.DTO.BusinessUnitHrDepartmentStrictDTO(businessUnitHrDepartment));
             }
             if (!object.ReferenceEquals(source.EmployeePositions, null))
             {
-                target.EmployeePositions = Framework.Core.EnumerableExtensions.ToList(source.EmployeePositions, hRDepartmentEmployeePosition => new SampleSystem.Generated.DTO.HRDepartmentEmployeePositionStrictDTO(hRDepartmentEmployeePosition));
+                target.EmployeePositions = CommonFramework.EnumerableExtensions.ToList(source.EmployeePositions, hRDepartmentEmployeePosition => new SampleSystem.Generated.DTO.HRDepartmentEmployeePositionStrictDTO(hRDepartmentEmployeePosition));
             }
             if (!object.ReferenceEquals(source.HrDepartmentRoleEmployees, null))
             {
-                target.HrDepartmentRoleEmployees = Framework.Core.EnumerableExtensions.ToList(source.HrDepartmentRoleEmployees, hRDepartmentRoleEmployee => new SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeStrictDTO(hRDepartmentRoleEmployee));
+                target.HrDepartmentRoleEmployees = CommonFramework.EnumerableExtensions.ToList(source.HrDepartmentRoleEmployees, hRDepartmentRoleEmployee => new SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeStrictDTO(hRDepartmentRoleEmployee));
             }
             if (!object.ReferenceEquals(source.ManagementUnits, null))
             {
-                target.ManagementUnits = Framework.Core.EnumerableExtensions.ToList(source.ManagementUnits, managementUnitAndHRDepartmentLink => new SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO(managementUnitAndHRDepartmentLink));
+                target.ManagementUnits = CommonFramework.EnumerableExtensions.ToList(source.ManagementUnits, managementUnitAndHRDepartmentLink => new SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO(managementUnitAndHRDepartmentLink));
             }
         }
         
@@ -2674,11 +2674,11 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.BusinessUnits, null))
             {
-                target.BusinessUnits = Framework.Core.EnumerableExtensions.ToList(source.BusinessUnits, managementUnitAndBusinessUnitLink => new SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO(managementUnitAndBusinessUnitLink));
+                target.BusinessUnits = CommonFramework.EnumerableExtensions.ToList(source.BusinessUnits, managementUnitAndBusinessUnitLink => new SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO(managementUnitAndBusinessUnitLink));
             }
             if (!object.ReferenceEquals(source.HRDepartments, null))
             {
-                target.HRDepartments = Framework.Core.EnumerableExtensions.ToList(source.HRDepartments, managementUnitAndHRDepartmentLink => new SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO(managementUnitAndHRDepartmentLink));
+                target.HRDepartments = CommonFramework.EnumerableExtensions.ToList(source.HRDepartments, managementUnitAndHRDepartmentLink => new SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO(managementUnitAndHRDepartmentLink));
             }
         }
         

@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using CommonFramework;
+
+using FluentValidation;
 
 using Framework.Authorization.Domain;
 using Framework.Core;

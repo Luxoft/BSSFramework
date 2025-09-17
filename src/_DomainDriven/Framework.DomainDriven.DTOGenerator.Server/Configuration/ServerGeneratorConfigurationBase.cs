@@ -2,6 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.DictionaryCache;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -33,32 +36,32 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
 
 
         this._domainTypeDetailsCache = new DictionaryCache<Tuple<Type, DTOFileType, bool>, ReadOnlyCollection<Type>>(t => t.Pipe((domainType, fileType, isWritable) =>
-        {
-            var request = from property in this.GetDomainTypeProperties(domainType, fileType, isWritable)
+                                                                                                                                     {
+                                                                                                                                         var request = from property in this.GetDomainTypeProperties(domainType, fileType, isWritable)
 
-                          where this.IsCollectionProperty(property) || (property.IsDetail() && this.IsReferenceProperty(property))
+                                                                                                                                                       where this.IsCollectionProperty(property) || (property.IsDetail() && this.IsReferenceProperty(property))
 
-                          let elementType = property.PropertyType.GetCollectionElementType() ?? property.PropertyType
+                                                                                                                                                       let elementType = property.PropertyType.GetCollectionElementType() ?? property.PropertyType
 
-                          where this.IsPersistentObject(elementType)
+                                                                                                                                                       where this.IsPersistentObject(elementType)
 
-                          select elementType;
+                                                                                                                                                       select elementType;
 
-            return request.ToReadOnlyCollection();
-        })).WithLock();
+                                                                                                                                         return request.ToReadOnlyCollection();
+                                                                                                                                     })).WithLock();
 
         this._domainTypeMastersCache = new DictionaryCache<Tuple<Type, DTOFileType, bool>, ReadOnlyCollection<Type>>(t => t.Pipe((domainType, fileType, isWritable) =>
-        {
-            var request = from masterDomainType in this.DomainTypes
+                                                                                                                                     {
+                                                                                                                                         var request = from masterDomainType in this.DomainTypes
 
-                          where !masterDomainType.IsProjection()
+                                                                                                                                                       where !masterDomainType.IsProjection()
 
-                          where this.GetDomainTypeDetails(masterDomainType, fileType, isWritable).Contains(domainType)
+                                                                                                                                                       where this.GetDomainTypeDetails(masterDomainType, fileType, isWritable).Contains(domainType)
 
-                          select masterDomainType;
+                                                                                                                                                       select masterDomainType;
 
-            return request.ToReadOnlyCollection<Type>();
-        })).WithLock();
+                                                                                                                                         return request.ToReadOnlyCollection<Type>();
+                                                                                                                                     })).WithLock();
 
 
         this.ServerDTOMappingServiceInterfaceFileFactoryHeader = ServerFileType.ServerDTOMappingServiceInterface.ToHeader("", _ => "I" + this.Environment.TargetSystemName + "DTOMappingService");

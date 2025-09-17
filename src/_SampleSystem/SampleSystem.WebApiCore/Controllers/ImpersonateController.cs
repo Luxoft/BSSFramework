@@ -2,6 +2,8 @@
 using Framework.DomainDriven.Repository;
 using Framework.GenericQueryable;
 
+using GenericQueryable;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 

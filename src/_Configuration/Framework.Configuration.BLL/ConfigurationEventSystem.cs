@@ -1,4 +1,6 @@
-﻿using Framework.Configuration.Domain;
+﻿using CommonFramework;
+
+using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Events;
 

@@ -2,7 +2,7 @@
 using System.Data.Common;
 using System.Text.RegularExpressions;
 
-using Framework.Core;
+using CommonFramework;
 
 using Microsoft.Data.SqlClient;
 

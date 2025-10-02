@@ -37,7 +37,7 @@ jobs:
       - name: Build
         working-directory: ./src
         run: |
-          dotnet build ./IAD.Framework.sln --no-restore
+          dotnet build ./IAD.Framework.slnx --no-restore
 
       - name: NHibernate Integration Tests
         run: |

@@ -1,5 +1,3 @@
 ﻿namespace Framework.DomainDriven;
 
-public interface IBeforeTransactionCompletedDALListener : IDALListener
-{
-}
+public interface IBeforeTransactionCompletedDALListener : IDALListener;

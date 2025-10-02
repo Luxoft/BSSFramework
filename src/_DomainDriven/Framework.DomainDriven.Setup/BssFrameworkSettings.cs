@@ -1,12 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-using Framework.Events;
-using Framework.DomainDriven._Visitors;
+﻿using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
+using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Lock;
+using Framework.Events;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.DependencyInjection;
+
 
 namespace Framework.DomainDriven.Setup;
 
@@ -22,7 +24,14 @@ public class BssFrameworkSettings : IBssFrameworkSettings
 
     public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> setupAction)
     {
-        this.registerActions.Add(sc => sc.AddSecuritySystem(setupAction));
+        this.registerActions.Add(sc => sc.AddSecuritySystem(s =>
+        {
+            s.SetQueryableSource<AsyncDalQueryableSource>();
+            s.SetGenericRepository<DalGenericRepository>();
+            s.SetRawUserAuthenticationService(sp => sp.GetRequiredService<ApplicationUserAuthenticationService>());
+
+            setupAction(s);
+        }));
 
         return this;
     }
@@ -60,18 +69,17 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     public IBssFrameworkSettings AddQueryVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
         where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem
     {
-        this.registerActions.Add(
-            sc =>
+        this.registerActions.Add(sc =>
+        {
+            if (scoped)
             {
-                if (scoped)
-                {
-                    sc.AddScoped<IExpressionVisitorContainerItem, TExpressionVisitorContainerItem>();
-                }
-                else
-                {
-                    sc.AddSingleton<IExpressionVisitorContainerItem, TExpressionVisitorContainerItem>();
-                }
-            });
+                sc.AddScoped<IExpressionVisitorContainerItem, TExpressionVisitorContainerItem>();
+            }
+            else
+            {
+                sc.AddSingleton<IExpressionVisitorContainerItem, TExpressionVisitorContainerItem>();
+            }
+        });
 
         return this;
     }

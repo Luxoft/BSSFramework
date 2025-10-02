@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
+    <PackageReference Include="IvAt.SecuritySystem" />
   </ItemGroup>
 
   <ItemGroup>

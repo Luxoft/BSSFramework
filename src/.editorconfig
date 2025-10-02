@@ -10,7 +10,7 @@ indent_style = space
 charset = utf-8-bom
 trim_trailing_whitespace = true
 insert_final_newline = true
-max_line_length = 140
+max_line_length = 180
 
 # Microsoft .NET properties
 csharp_preserve_single_line_blocks = true
@@ -140,7 +140,7 @@ resharper_empty_block_style = multiline
 resharper_force_chop_compound_do_expression = false
 resharper_force_chop_compound_if_expression = false
 resharper_force_chop_compound_while_expression = false
-resharper_indent_anonymous_method_block = true
+resharper_indent_anonymous_method_block = false
 resharper_indent_invocation_pars = outside
 resharper_indent_method_decl_pars = outside
 resharper_indent_nested_fixed_stmt = true

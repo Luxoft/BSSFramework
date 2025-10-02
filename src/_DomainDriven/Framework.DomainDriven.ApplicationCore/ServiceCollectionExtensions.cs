@@ -35,9 +35,6 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IInitializeManager, InitializeManager>();
         services.AddScoped<IEventOperationSender, EventOperationSender>();
 
-        services.AddScoped<IQueryableSource, AsyncDalQueryableSource>();
-        services.AddScoped<IGenericRepository, DalGenericRepository>();
-
         services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();
         services.AddSingleton(typeof(IJobServiceEvaluator<>), typeof(JobServiceEvaluator<>));
         services.AddScoped<IJobMiddlewareFactory, JobMiddlewareFactory>();
@@ -93,7 +90,6 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection RegisterAuthenticationServices(this IServiceCollection services)
     {
         services.AddScoped<ApplicationUserAuthenticationService>();
-        services.AddScopedFrom<IRawUserAuthenticationService, ApplicationUserAuthenticationService>();
         services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
 
         return services;

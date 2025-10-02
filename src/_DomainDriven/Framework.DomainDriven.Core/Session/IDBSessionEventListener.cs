@@ -2,9 +2,9 @@
 
 public interface IDBSessionEventListener
 {
-    void OnFlushed(DALChangesEventArgs eventArgs);
+    Task OnFlushed(DALChangesEventArgs eventArgs, CancellationToken cancellationToken);
 
-    void OnBeforeTransactionCompleted(DALChangesEventArgs eventArgs);
+    Task OnBeforeTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken cancellationToken);
 
-    void OnAfterTransactionCompleted(DALChangesEventArgs eventArgs);
+    Task OnAfterTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken cancellationToken);
 }

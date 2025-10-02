@@ -14,10 +14,10 @@
     <PackageVersion Include="IvAt.CommonFramework" Version="1.2.4" />
     <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="1.2.4" />
     <PackageVersion Include="IvAt.GenericQueryable" Version="1.1.0" />
-    <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.4" />
-    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.4" />
-    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.4" />
-    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.4" />
+    <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.4.2" />
+    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.4.2" />
+    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.4.2" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.4.2" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.5.8.1" />
@@ -52,7 +52,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.9" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
     <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="172.76.0" />
     <PackageVersion Include="MSTest.TestAdapter" Version="3.11.0" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.11.0" />

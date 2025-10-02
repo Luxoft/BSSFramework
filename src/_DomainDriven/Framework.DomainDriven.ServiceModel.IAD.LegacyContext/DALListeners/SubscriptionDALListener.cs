@@ -3,29 +3,18 @@ using Framework.DomainDriven.ServiceModel.Subscriptions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class SubscriptionDALListener : IBeforeTransactionCompletedDALListener
+public class SubscriptionDALListener(IConfigurationBLLContext configurationBllContext, IStandardSubscriptionService subscriptionService)
+    : IBeforeTransactionCompletedDALListener
 {
-    private readonly IConfigurationBLLContext configurationBllContext;
-
-    private readonly IStandardSubscriptionService subscriptionService;
-
-    public SubscriptionDALListener(
-        IConfigurationBLLContext configurationBLLContext,
-        IStandardSubscriptionService subscriptionService)
+    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
-        this.configurationBllContext = configurationBLLContext;
-        this.subscriptionService = subscriptionService;
-    }
-
-    public void Process(DALChangesEventArgs eventArgs)
-    {
-        foreach (var targetSystemService in this.configurationBllContext.GetTargetSystemServices())
+        foreach (var targetSystemService in configurationBllContext.GetTargetSystemServices())
         {
             if (targetSystemService.TargetSystem.SubscriptionEnabled)
             {
                 foreach (var info in targetSystemService.SubscriptionService.GetObjectModifications(eventArgs.Changes))
                 {
-                    this.subscriptionService.ProcessChanged(new ObjectModificationInfoDTO<Guid>(info));
+                    subscriptionService.ProcessChanged(new ObjectModificationInfoDTO<Guid>(info));
                 }
             }
         }
